@@ -1,0 +1,10 @@
+parameters:
+    database_host:     146.185.157.141
+    database_name:     sf_jedisjeux_dev
+    database_user:     zf_jedisjeux_dev
+    database_password: Ljstp35
+
+    mailer_transport:  smtp
+    mailer_host:       127.0.0.1
+    mailer_user:       ~
+    mailer_password:   ~
