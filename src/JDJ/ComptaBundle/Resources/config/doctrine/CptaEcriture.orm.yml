@@ -1,0 +1,71 @@
+JDJ\ComptaBundle\Entity\CptaEcriture:
+    type: entity
+    table: cpta_ecriture
+    indexes:
+        fk_cpta_ecriture_cpta_facture1_idx:
+            columns:
+                - idFacture
+        fk_cpta_ecriture_cpta_modeReglement1_idx:
+            columns:
+                - idModeReglement
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: true
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        libelle:
+            type: string
+            nullable: false
+            length: 100
+            fixed: false
+            comment: ''
+        sens:
+            type: string
+            nullable: false
+            length: null
+            fixed: false
+            comment: ''
+        montant:
+            type: decimal
+            nullable: false
+            precision: 6
+            scale: 2
+            comment: ''
+        datecreation:
+            type: datetime
+            nullable: false
+            comment: ''
+            default: CURRENT_TIMESTAMP
+            column: dateCreation
+        facturefilename:
+            type: string
+            nullable: true
+            length: 50
+            fixed: false
+            comment: ''
+            column: factureFilename
+    manyToOne:
+        idfacture:
+            targetEntity: CptaFacture
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                idFacture:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idmodereglement:
+            targetEntity: CptaModereglement
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                idModeReglement:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

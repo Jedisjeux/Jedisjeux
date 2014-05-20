@@ -1,0 +1,45 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>CptaTarifproduit list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Datedebut</th>
+                <th>Datefin</th>
+                <th>Prix</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('cptatarifproduit_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{% if entity.datedebut %}{{ entity.datedebut|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.datefin %}{{ entity.datefin|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.prix }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('cptatarifproduit_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('cptatarifproduit_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('cptatarifproduit_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

@@ -1,0 +1,55 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>CptaClient list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Societe</th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Rue</th>
+                <th>Complement</th>
+                <th>Codepostal</th>
+                <th>Ville</th>
+                <th>Datecreation</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('cptaclient_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.societe }}</td>
+                <td>{{ entity.nom }}</td>
+                <td>{{ entity.email }}</td>
+                <td>{{ entity.rue }}</td>
+                <td>{{ entity.complement }}</td>
+                <td>{{ entity.codepostal }}</td>
+                <td>{{ entity.ville }}</td>
+                <td>{% if entity.datecreation %}{{ entity.datecreation|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('cptaclient_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('cptaclient_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('cptaclient_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}
