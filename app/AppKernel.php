@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new JDJ\FoundationBundle\JDJFoundationBundle(),
             new JDJ\WebBundle\JDJWebBundle(),
+            new JDJ\ComptaBundle\JDJComptaBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

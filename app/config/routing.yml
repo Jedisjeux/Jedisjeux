@@ -1,3 +1,7 @@
+jdj_compta:
+    resource: "@JDJComptaBundle/Resources/config/routing.yml"
+    prefix:   /
+
 jdj_web:
     resource: "@JDJWebBundle/Resources/config/routing.yml"
     prefix:   /

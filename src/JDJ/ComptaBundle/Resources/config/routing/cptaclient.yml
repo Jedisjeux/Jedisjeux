@@ -1,0 +1,30 @@
+cptaclient:
+    pattern:  /
+    defaults: { _controller: "JDJComptaBundle:CptaClient:index" }
+
+cptaclient_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "JDJComptaBundle:CptaClient:show" }
+
+cptaclient_new:
+    pattern:  /new
+    defaults: { _controller: "JDJComptaBundle:CptaClient:new" }
+
+cptaclient_create:
+    pattern:  /create
+    defaults: { _controller: "JDJComptaBundle:CptaClient:create" }
+    requirements: { _method: post }
+
+cptaclient_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "JDJComptaBundle:CptaClient:edit" }
+
+cptaclient_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "JDJComptaBundle:CptaClient:update" }
+    requirements: { _method: post|put }
+
+cptaclient_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "JDJComptaBundle:CptaClient:delete" }
+    requirements: { _method: post|delete }

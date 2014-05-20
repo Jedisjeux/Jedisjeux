@@ -1,0 +1,49 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>CptaEcriture list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Libelle</th>
+                <th>Sens</th>
+                <th>Montant</th>
+                <th>Datecreation</th>
+                <th>Facturefilename</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('cptaecriture_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.libelle }}</td>
+                <td>{{ entity.sens }}</td>
+                <td>{{ entity.montant }}</td>
+                <td>{% if entity.datecreation %}{{ entity.datecreation|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.facturefilename }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('cptaecriture_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('cptaecriture_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('cptaecriture_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

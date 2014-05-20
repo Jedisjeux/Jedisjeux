@@ -1,0 +1,30 @@
+cptaecriture:
+    pattern:  /
+    defaults: { _controller: "JDJComptaBundle:CptaEcriture:index" }
+
+cptaecriture_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "JDJComptaBundle:CptaEcriture:show" }
+
+cptaecriture_new:
+    pattern:  /new
+    defaults: { _controller: "JDJComptaBundle:CptaEcriture:new" }
+
+cptaecriture_create:
+    pattern:  /create
+    defaults: { _controller: "JDJComptaBundle:CptaEcriture:create" }
+    requirements: { _method: post }
+
+cptaecriture_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "JDJComptaBundle:CptaEcriture:edit" }
+
+cptaecriture_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "JDJComptaBundle:CptaEcriture:update" }
+    requirements: { _method: post|put }
+
+cptaecriture_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "JDJComptaBundle:CptaEcriture:delete" }
+    requirements: { _method: post|delete }

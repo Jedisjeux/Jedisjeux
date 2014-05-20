@@ -1,0 +1,30 @@
+cptatarifproduit:
+    pattern:  /
+    defaults: { _controller: "JDJComptaBundle:CptaTarifproduit:index" }
+
+cptatarifproduit_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "JDJComptaBundle:CptaTarifproduit:show" }
+
+cptatarifproduit_new:
+    pattern:  /new
+    defaults: { _controller: "JDJComptaBundle:CptaTarifproduit:new" }
+
+cptatarifproduit_create:
+    pattern:  /create
+    defaults: { _controller: "JDJComptaBundle:CptaTarifproduit:create" }
+    requirements: { _method: post }
+
+cptatarifproduit_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "JDJComptaBundle:CptaTarifproduit:edit" }
+
+cptatarifproduit_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "JDJComptaBundle:CptaTarifproduit:update" }
+    requirements: { _method: post|put }
+
+cptatarifproduit_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "JDJComptaBundle:CptaTarifproduit:delete" }
+    requirements: { _method: post|delete }
