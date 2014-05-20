@@ -3,6 +3,13 @@ JeDisJeux Project
 
 Welcome to JeDisJeux Project base on Symfony 2
 
+Convention de commit
+========================
+I: Improve
+F: Fix something
+D: Delete file
+BRANCH : create branch
+TAGS : Vx.x.x
 
 Symfony Standard Edition
 ========================
