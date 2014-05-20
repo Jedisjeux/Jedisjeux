@@ -248,4 +248,12 @@ class CptaFacture
     {
         return $this->idproduit;
     }
+
+
+    /**
+     * @return string
+     */
+    public function __toString(){
+        return $this->getId().' - '.$this->getDatepaiement()->format('d/m/Y');
+    }
 }
