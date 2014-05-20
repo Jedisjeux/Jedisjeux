@@ -1,8 +1,0 @@
-<component name="libraryTable">
-  <library name="compass-library">
-    <CLASSES>
-      <root url="file://$PROJECT_DIR$/src/Synergie/WebBundle/Resources/public/foundation/test/bower_components/foundation/scss" />
-    </CLASSES>
-    <SOURCES />
-  </library>
-</component>
