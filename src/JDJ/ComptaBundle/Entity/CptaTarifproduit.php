@@ -136,4 +136,11 @@ class CptaTarifproduit
     {
         return $this->idproduit;
     }
+
+    /**
+     * @return string
+     */
+    public function __toString(){
+        return $this->getId().' - '.$this->getPrix();
+    }
 }

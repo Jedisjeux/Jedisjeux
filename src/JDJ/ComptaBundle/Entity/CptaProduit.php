@@ -97,4 +97,11 @@ class CptaProduit
     {
         return $this->idfacture;
     }
+
+    /**
+     * @return string
+     */
+    public function __toString(){
+        return $this->getId().' - '.$this->getLibelle();
+    }
 }

@@ -18,7 +18,7 @@ class CptaEcritureType extends AbstractType
             ->add('libelle')
             ->add('sens')
             ->add('montant')
-            ->add('datecreation')
+            ->add('datecreation', 'datetime', array( 'date_widget' => 'single_text', 'time_widget' => 'text'))
             ->add('facturefilename')
             ->add('idfacture')
             ->add('idmodereglement')

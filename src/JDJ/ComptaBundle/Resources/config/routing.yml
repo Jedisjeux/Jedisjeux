@@ -1,3 +1,35 @@
 jdj_compta_homepage:
     pattern:  /hello/{name}
     defaults: { _controller: JDJComptaBundle:Default:index }
+
+jdj_compta_client:
+    resource: "@JDJComptaBundle/Resources/config/routing/cptaclient.yml"
+    prefix:   /client
+
+jdj_compta_ecriture:
+    resource: "@JDJComptaBundle/Resources/config/routing/cptaecriture.yml"
+    prefix:   /ecriture
+
+jdj_compta_facture:
+    resource: "@JDJComptaBundle/Resources/config/routing/cptafacture.yml"
+    prefix:   /facture
+
+jdj_compta_mode:
+    resource: "@JDJComptaBundle/Resources/config/routing/cptamodereglement.yml"
+    prefix:   /mode
+
+jdj_compta_produit:
+    resource: "@JDJComptaBundle/Resources/config/routing/cptaproduit.yml"
+    prefix:   /produit
+
+jdj_compta_tarif:
+    resource: "@JDJComptaBundle/Resources/config/routing/cptatarifproduit.yml"
+    prefix:   /tarif
+
+jdj_compta_adresse:
+    resource: "@JDJComptaBundle/Resources/config/routing/cptatypeadresse.yml"
+    prefix:   /adresse
+
+
+
+

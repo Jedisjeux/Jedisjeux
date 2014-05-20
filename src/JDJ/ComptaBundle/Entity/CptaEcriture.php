@@ -220,4 +220,11 @@ class CptaEcriture
     {
         return $this->idmodereglement;
     }
+
+    /**
+     * @return string
+     */
+    public function __toString(){
+        return $this->getId().' - '.$this->getLibelle();
+    }
 }

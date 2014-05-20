@@ -248,4 +248,11 @@ class CptaClient
     {
         return $this->datecreation;
     }
+
+    /**
+     * @return string
+     */
+    public function __toString(){
+        return $this->getId().' - '.$this->getNom();
+    }
 }
