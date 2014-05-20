@@ -1,0 +1,4 @@
+jdj_web:
+    resource: "@JDJWebBundle/Resources/config/routing.yml"
+    prefix:   /
+

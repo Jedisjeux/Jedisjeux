@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+
+    <!--[if lt IE 9]>
+        <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    {% stylesheets
+        '@JDJFoundationBundle/Resources/public/stylesheets/app.css'
+        '@JDJWebBundle/Resources/public/css/base.css'
+    filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+</head>
+<body>
+
+    {% block body %}
+    {% endblock %}
+
+    {% javascripts
+        '@JDJFoundationBundle/Resources/public/bower_components/jquery/dist/jquery.min.js'
+        '@JDJFoundationBundle/Resources/public/bower_components/foundation/js/foundation.min.js'
+        '@JDJFoundationBundle/Resources/public/js/*'
+        '@JDJFoundationBundle/Resources/public/bower_components/modernizr/modernizr.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+</body>
+</html>
+

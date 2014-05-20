@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="CompassSettings">
+    <option name="compassExecutableFilePath" value="C:/Ruby200-x64/bin/compass" />
+    <option name="compassSupportEnabled" value="true" />
+    <option name="importPaths">
+      <list>
+        <option value="$MODULE_DIR$/src/Synergie/WebBundle/Resources/public/foundation/test/bower_components/foundation/scss" />
+      </list>
+    </option>
+  </component>
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/vendor/cboden/ratchet" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/annotations" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/collections" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/common" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/dbal" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/doctrine-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/inflector" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/lexer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/orm" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/evenement/evenement" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/guzzle/common" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/guzzle/http" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/guzzle/parser" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/guzzle/stream" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/incenteev/composer-parameter-handler" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/jdorn/sql-formatter" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/kriswallsmith/assetic" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/monolog/monolog" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/p2/ratchet-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/log" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/react/event-loop" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/react/socket" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/react/stream" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sensio/distribution-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sensio/framework-extra-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sensio/generator-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/swiftmailer/swiftmailer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/assetic-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/icu" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/monolog-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/swiftmailer-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/symfony" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/twig/extensions" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/twig/twig" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="PHARS">
+        <CLASSES>
+          <root url="phar://$MODULE_DIR$/composer.phar" />
+          <root url="phar://$MODULE_DIR$/vendor/symfony/symfony/src/Symfony/Component/DependencyInjection/Tests/Fixtures/includes/ProjectWithXsdExtensionInPhar.phar" />
+        </CLASSES>
+        <SOURCES>
+          <root url="phar://$MODULE_DIR$/composer.phar" />
+          <root url="phar://$MODULE_DIR$/vendor/symfony/symfony/src/Symfony/Component/DependencyInjection/Tests/Fixtures/includes/ProjectWithXsdExtensionInPhar.phar" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="PHP">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/vendor/composer" />
+          <root url="file://$MODULE_DIR$/vendor/guzzle/http" />
+          <root url="file://$MODULE_DIR$/vendor/symfony/icu" />
+          <root url="file://$MODULE_DIR$/vendor/symfony/symfony" />
+          <root url="file://$MODULE_DIR$/vendor/sensio/generator-bundle" />
+          <root url="file://$MODULE_DIR$/vendor/psr/log" />
+          <root url="file://$MODULE_DIR$/vendor/doctrine/dbal" />
+          <root url="file://$MODULE_DIR$/vendor/symfony/assetic-bundle" />
+          <root url="file://$MODULE_DIR$/vendor/symfony/monolog-bundle" />
+          <root url="file://$MODULE_DIR$/vendor/doctrine/collections" />
+          <root url="file://$MODULE_DIR$/vendor/doctrine/cache" />
+          <root url="file://$MODULE_DIR$/vendor/incenteev/composer-parameter-handler" />
+          <root url="file://$MODULE_DIR$/vendor/sensio/distribution-bundle" />
+          <root url="file://$MODULE_DIR$/vendor/doctrine/lexer" />
+          <root url="file://$MODULE_DIR$/vendor/doctrine/doctrine-bundle" />
+          <root url="file://$MODULE_DIR$/vendor/twig/extensions" />
+          <root url="file://$MODULE_DIR$/vendor/sensio/framework-extra-bundle" />
+          <root url="file://$MODULE_DIR$/vendor/doctrine/inflector" />
+          <root url="file://$MODULE_DIR$/vendor/jdorn/sql-formatter" />
+          <root url="file://$MODULE_DIR$/vendor/cboden/ratchet" />
+          <root url="file://$MODULE_DIR$/vendor/swiftmailer/swiftmailer" />
+          <root url="file://$MODULE_DIR$/vendor/symfony/swiftmailer-bundle" />
+          <root url="file://$MODULE_DIR$/vendor/guzzle/stream" />
+          <root url="file://$MODULE_DIR$/vendor/twig/twig" />
+          <root url="file://$MODULE_DIR$/vendor/guzzle/parser" />
+          <root url="file://$MODULE_DIR$/vendor/doctrine/orm" />
+          <root url="file://$MODULE_DIR$/vendor/monolog/monolog" />
+          <root url="file://$MODULE_DIR$/vendor/react/event-loop" />
+          <root url="file://$MODULE_DIR$/vendor/doctrine/annotations" />
+          <root url="file://$MODULE_DIR$/vendor/evenement/evenement" />
+          <root url="file://$MODULE_DIR$/vendor/doctrine/common" />
+          <root url="file://$MODULE_DIR$/vendor/p2/ratchet-bundle" />
+          <root url="file://$MODULE_DIR$/vendor/guzzle/common" />
+          <root url="file://$MODULE_DIR$/vendor/kriswallsmith/assetic" />
+          <root url="file://$MODULE_DIR$/vendor/react/stream" />
+          <root url="file://$MODULE_DIR$/vendor/react/socket" />
+        </CLASSES>
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/vendor/composer" />
+          <root url="file://$MODULE_DIR$/vendor/guzzle/http" />
+          <root url="file://$MODULE_DIR$/vendor/symfony/icu" />
+          <root url="file://$MODULE_DIR$/vendor/symfony/symfony" />
+          <root url="file://$MODULE_DIR$/vendor/sensio/generator-bundle" />
+          <root url="file://$MODULE_DIR$/vendor/psr/log" />
+          <root url="file://$MODULE_DIR$/vendor/doctrine/dbal" />
+          <root url="file://$MODULE_DIR$/vendor/symfony/assetic-bundle" />
+          <root url="file://$MODULE_DIR$/vendor/symfony/monolog-bundle" />
+          <root url="file://$MODULE_DIR$/vendor/doctrine/collections" />
+          <root url="file://$MODULE_DIR$/vendor/doctrine/cache" />
+          <root url="file://$MODULE_DIR$/vendor/incenteev/composer-parameter-handler" />
+          <root url="file://$MODULE_DIR$/vendor/sensio/distribution-bundle" />
+          <root url="file://$MODULE_DIR$/vendor/doctrine/lexer" />
+          <root url="file://$MODULE_DIR$/vendor/doctrine/doctrine-bundle" />
+          <root url="file://$MODULE_DIR$/vendor/twig/extensions" />
+          <root url="file://$MODULE_DIR$/vendor/sensio/framework-extra-bundle" />
+          <root url="file://$MODULE_DIR$/vendor/doctrine/inflector" />
+          <root url="file://$MODULE_DIR$/vendor/jdorn/sql-formatter" />
+          <root url="file://$MODULE_DIR$/vendor/cboden/ratchet" />
+          <root url="file://$MODULE_DIR$/vendor/swiftmailer/swiftmailer" />
+          <root url="file://$MODULE_DIR$/vendor/symfony/swiftmailer-bundle" />
+          <root url="file://$MODULE_DIR$/vendor/guzzle/stream" />
+          <root url="file://$MODULE_DIR$/vendor/twig/twig" />
+          <root url="file://$MODULE_DIR$/vendor/guzzle/parser" />
+          <root url="file://$MODULE_DIR$/vendor/doctrine/orm" />
+          <root url="file://$MODULE_DIR$/vendor/monolog/monolog" />
+          <root url="file://$MODULE_DIR$/vendor/react/event-loop" />
+          <root url="file://$MODULE_DIR$/vendor/doctrine/annotations" />
+          <root url="file://$MODULE_DIR$/vendor/evenement/evenement" />
+          <root url="file://$MODULE_DIR$/vendor/doctrine/common" />
+          <root url="file://$MODULE_DIR$/vendor/p2/ratchet-bundle" />
+          <root url="file://$MODULE_DIR$/vendor/guzzle/common" />
+          <root url="file://$MODULE_DIR$/vendor/kriswallsmith/assetic" />
+          <root url="file://$MODULE_DIR$/vendor/react/stream" />
+          <root url="file://$MODULE_DIR$/vendor/react/socket" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="sass-stdlib" level="application" />
+    <orderEntry type="library" name="compass-library" level="project" />
+  </component>
+</module>
+
