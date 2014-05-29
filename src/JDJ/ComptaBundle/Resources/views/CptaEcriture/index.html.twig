@@ -14,33 +14,37 @@
     <table class="records_list">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>Date</th>
                 <th>Libelle</th>
-                <th>Sens</th>
-                <th>Montant</th>
-                <th>Datecreation</th>
-                <th>Facturefilename</th>
+                <th>Débit</th>
+                <th>Crédit</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('cptaecriture_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{% if entity.datecreation %}{{ entity.datecreation|date('d/m/Y') }}{% endif %}</td>
                 <td>{{ entity.libelle }}</td>
-                <td>{{ entity.sens }}</td>
-                <td>{{ entity.montant }}</td>
-                <td>{% if entity.datecreation %}{{ entity.datecreation|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.facturefilename }}</td>
+                <td>{% if 'debit' == entity.sens %}{{ entity.montant }}{% endif %}</td>
+                <td>{% if 'credit' == entity.sens %}{{ entity.montant }}{% endif %}</td>
                 <td>
-                <ul>
+                <ul class="inline-list">
                     <li>
-                        <a href="{{ path('cptaecriture_show', { 'id': entity.id }) }}">show</a>
+                        <a class="small button" href="{{ path('cptaecriture_show', { 'id': entity.id }) }}">show</a>
                     </li>
                     <li>
-                        <a href="{{ path('cptaecriture_edit', { 'id': entity.id }) }}">edit</a>
+                        <a class="small button" href="{{ path('cptaecriture_edit', { 'id': entity.id }) }}">edit</a>
                     </li>
                 </ul>
+                    <ul class="inline-list">
+                        <li>
+                            <a class="small button" href="{{ path('cptaecriture_show', { 'id': entity.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a class="small button" href="{{ path('cptaecriture_edit', { 'id': entity.id }) }}">edit</a>
+                        </li>
+                    </ul>
                 </td>
             </tr>
         {% endfor %}

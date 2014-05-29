@@ -28,13 +28,13 @@
                 <td>{{ entity.montant }}</td>
                 <td>{% if entity.datecreation %}{{ entity.datecreation|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if entity.datepaiement %}{{ entity.datepaiement|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>
-                <ul>
+                <td class="small-3">
+                <ul class="inline-list">
                     <li>
-                        <a href="{{ path('cptafacture_show', { 'id': entity.id }) }}">show</a>
+                        <a class="small button" href="{{ path('cptafacture_show', { 'id': entity.id }) }}">show</a>
                     </li>
                     <li>
-                        <a href="{{ path('cptafacture_edit', { 'id': entity.id }) }}">edit</a>
+                        <a class="small button" href="{{ path('cptafacture_edit', { 'id': entity.id }) }}">edit</a>
                     </li>
                 </ul>
                 </td>

@@ -24,13 +24,13 @@
             <tr>
                 <td><a href="{{ path('cptamodereglement_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.libelle }}</td>
-                <td>
-                <ul>
+                <td class="small-3">
+                <ul class="inline-list">
                     <li>
-                        <a href="{{ path('cptamodereglement_show', { 'id': entity.id }) }}">show</a>
+                        <a class="small button" href="{{ path('cptamodereglement_show', { 'id': entity.id }) }}">show</a>
                     </li>
                     <li>
-                        <a href="{{ path('cptamodereglement_edit', { 'id': entity.id }) }}">edit</a>
+                        <a class="small button" href="{{ path('cptamodereglement_edit', { 'id': entity.id }) }}">edit</a>
                     </li>
                 </ul>
                 </td>

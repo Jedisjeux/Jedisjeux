@@ -53,6 +53,13 @@ h6 {
 
 }
 
+.top-bar {
+  .name {
+    h1{
+      font-size: 3rem;
+    }
+  }
+}
 
 /**************************************************************/
 /*  	    		       Liens					          */
@@ -77,7 +84,6 @@ ul {
 /*  	    		       TABLE					          */
 /**************************************************************/
 
-
 table {
   width: 100%;
   thead {
@@ -90,6 +96,15 @@ table {
       }
     }
   }
+  td {
+    vertical-align: middle;
+    .inline-list {
+      margin: 0;
+      position: relative;
+      top: 10px;
+    }
+
+  }
 
 }
 
@@ -101,7 +116,7 @@ a.button {
   background-color: $lightgreen;
 }
 
-a:hover.button{
+a:hover.button {
   background-color: $darkblack;
   color: $lightgreen;
 }
@@ -111,7 +126,19 @@ a:hover {
 }
 
 .top-bar-section ul li > a.button {
-  background-color: $lightgreen;
+
 }
 
+.top-bar-section {
+  ul {
+    li {
+      > a.button {
+        background-color: $lightgreen;
+      }
+      a:not(.button):hover {
+        color:$lightgreen !important;
+      }
+    }
+  }
+}
 
