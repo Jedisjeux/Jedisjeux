@@ -1,7 +1,15 @@
 {% extends "JDJWebBundle::layout.html.twig" %}
 
 {% block body -%}
-    <h1>CptaClient list</h1>
+    <h1>Liste des clients</h1>
+
+    <ul>
+        <li>
+            <a class="button add" href="{{ path('cptaclient_new') }}">
+                Créer un nouveau client
+            </a>
+        </li>
+    </ul>
 
     <table class="records_list">
         <thead>
@@ -10,11 +18,6 @@
                 <th>Societe</th>
                 <th>Nom</th>
                 <th>Email</th>
-                <th>Rue</th>
-                <th>Complement</th>
-                <th>Codepostal</th>
-                <th>Ville</th>
-                <th>Datecreation</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -25,11 +28,6 @@
                 <td>{{ entity.societe }}</td>
                 <td>{{ entity.nom }}</td>
                 <td>{{ entity.email }}</td>
-                <td>{{ entity.rue }}</td>
-                <td>{{ entity.complement }}</td>
-                <td>{{ entity.codepostal }}</td>
-                <td>{{ entity.ville }}</td>
-                <td>{% if entity.datecreation %}{{ entity.datecreation|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
                 <ul>
                     <li>
@@ -45,11 +43,5 @@
         </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('cptaclient_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
+
     {% endblock %}

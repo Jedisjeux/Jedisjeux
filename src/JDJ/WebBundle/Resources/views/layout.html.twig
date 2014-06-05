@@ -18,8 +18,17 @@
 </head>
 <body>
 
-    {% block body %}
-    {% endblock %}
+{% include "JDJWebBundle::header.html.twig" %}
+
+<div class="row">
+    <div class="large-12 columns" role="content">
+        {% block body %}
+        {% endblock %}
+    </div>
+</div>
+
+{% include "JDJWebBundle::footer.html.twig" %}
+
 
     {% javascripts
         '@JDJFoundationBundle/Resources/public/bower_components/jquery/dist/jquery.min.js'

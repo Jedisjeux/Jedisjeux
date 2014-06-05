@@ -1,7 +1,15 @@
 {% extends "JDJWebBundle::layout.html.twig" %}
 
 {% block body -%}
-    <h1>CptaTarifproduit list</h1>
+    <h1>Liste des tarifs</h1>
+
+    <ul>
+        <li>
+            <a class="button" href="{{ path('cptatarifproduit_new') }}">
+                Créer un tarif
+            </a>
+        </li>
+    </ul>
 
     <table class="records_list">
         <thead>
@@ -35,11 +43,4 @@
         </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('cptatarifproduit_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
     {% endblock %}

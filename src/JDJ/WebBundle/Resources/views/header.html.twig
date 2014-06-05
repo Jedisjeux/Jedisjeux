@@ -1,0 +1,61 @@
+<nav data-topbar="" class="top-bar">
+    <ul class="title-area">
+
+        <li class="name">
+            <h1>
+                <a href="#">
+                    Jedisjeux
+                </a>
+            </h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    </ul>
+
+    <section class="top-bar-section">
+
+        <ul class="left">
+            <li class="divider"></li>
+            <li class="has-dropdown not-click">
+                <a href="#" class="active">Compta</a>
+                <ul class="dropdown"><li class="title back js-generated"><h5><a href="javascript:void(0)">Back</a></h5></li>
+                    <li><label>Trésorerie</label></li>
+                    <li><a class="" href="#">Bilans</a></li>
+                    <li><a class="" href="{{ path('cptaecriture') }}">Ecritures</a></li>
+                    <li><a href="{{ path('cptafacture') }}">Factures</a></li>
+                    <li class="divider"></li>
+                    <li><label>Configurations</label></li>
+                    <li><a href="{{ path('cptaclient') }}">Clients</a></li>
+                    <li><a href="{{ path('cptaproduit') }}">Produits</a></li>
+                    <li><a href="{{ path('cptatarifproduit') }}">Tarifs</a></li>
+                    <li><a href="{{ path('cptamodereglement') }}">Modes de règlement</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">See all →</a></li>
+                </ul>
+            </li>
+            <li class="divider"></li>
+            <li><a href="#">Main Item 2</a></li>
+            <li class="divider"></li>
+            <li class="has-dropdown not-click">
+                <a href="#">Main Item 3</a>
+                <ul class="dropdown"><li class="title back js-generated"><h5><a href="javascript:void(0)">Back</a></h5></li>
+                    <li><a href="#">Dropdown Option</a></li>
+                    <li><a href="#">Dropdown Option</a></li>
+                    <li><a href="#">Dropdown Option</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">See all →</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <ul class="right">
+            <li class="search">
+                <form>
+                    <input type="search">
+                </form>
+            </li>
+            <li class="has-button">
+                <a href="#" class="small button">Rechercher</a>
+            </li>
+        </ul>
+    </section>
+</nav>

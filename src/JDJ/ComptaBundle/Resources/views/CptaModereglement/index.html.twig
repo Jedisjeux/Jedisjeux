@@ -1,7 +1,15 @@
 {% extends "JDJWebBundle::layout.html.twig" %}
 
 {% block body -%}
-    <h1>CptaModereglement list</h1>
+    <h1>Liste des modes de règlement</h1>
+
+    <ul>
+        <li>
+            <a class="button" href="{{ path('cptamodereglement_new') }}">
+                Créer un mode de règlement
+            </a>
+        </li>
+    </ul>
 
     <table class="records_list">
         <thead>
@@ -31,11 +39,4 @@
         </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('cptamodereglement_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
     {% endblock %}
