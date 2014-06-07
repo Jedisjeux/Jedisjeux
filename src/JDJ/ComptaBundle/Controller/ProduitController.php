@@ -25,10 +25,16 @@ class ProduitController extends Controller
 
         $entities = $em->getRepository('JDJComptaBundle:Produit')->findAll();
 
+        foreach ($entities as $entity) {
+            $deleteForms[$entity->getId()] = $this->createDeleteForm($entity->getId())->createView();
+        }
+
         return $this->render('JDJComptaBundle:Produit:index.html.twig', array(
             'entities' => $entities,
+            'deleteForms' => $deleteForms,
         ));
     }
+
     /**
      * Creates a new Produit entity.
      *
@@ -44,7 +50,7 @@ class ProduitController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('produit_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('produit'));
         }
 
         return $this->render('JDJComptaBundle:Produit:new.html.twig', array(
@@ -67,7 +73,7 @@ class ProduitController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Créer'));
 
         return $form;
     }
@@ -144,7 +150,7 @@ class ProduitController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => 'Modifier'));
 
         return $form;
     }
