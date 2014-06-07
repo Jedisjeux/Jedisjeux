@@ -19,7 +19,7 @@ jdj_compta_mode:
     prefix:   /mode
 
 jdj_compta_produit:
-    resource: "@JDJComptaBundle/Resources/config/routing/cptaproduit.yml"
+    resource: "@JDJComptaBundle/Resources/config/routing/produit.yml"
     prefix:   /produit
 
 jdj_compta_tarif:

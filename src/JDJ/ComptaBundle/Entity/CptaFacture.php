@@ -219,10 +219,10 @@ class CptaFacture
     /**
      * Add idproduit
      *
-     * @param \JDJ\ComptaBundle\Entity\CptaProduit $idproduit
+     * @param \JDJ\ComptaBundle\Entity\Produit $idproduit
      * @return CptaFacture
      */
-    public function addIdproduit(\JDJ\ComptaBundle\Entity\CptaProduit $idproduit)
+    public function addIdproduit(\JDJ\ComptaBundle\Entity\Produit $idproduit)
     {
         $this->idproduit[] = $idproduit;
 
@@ -232,9 +232,9 @@ class CptaFacture
     /**
      * Remove idproduit
      *
-     * @param \JDJ\ComptaBundle\Entity\CptaProduit $idproduit
+     * @param \JDJ\ComptaBundle\Entity\Produit $idproduit
      */
-    public function removeIdproduit(\JDJ\ComptaBundle\Entity\CptaProduit $idproduit)
+    public function removeIdproduit(\JDJ\ComptaBundle\Entity\Produit $idproduit)
     {
         $this->idproduit->removeElement($idproduit);
     }

@@ -30,7 +30,7 @@ class CptaTarifproduit
     private $prix;
 
     /**
-     * @var \JDJ\ComptaBundle\Entity\CptaProduit
+     * @var \JDJ\ComptaBundle\Entity\Produit
      */
     private $idproduit;
 
@@ -117,10 +117,10 @@ class CptaTarifproduit
     /**
      * Set idproduit
      *
-     * @param \JDJ\ComptaBundle\Entity\CptaProduit $idproduit
+     * @param \JDJ\ComptaBundle\Entity\Produit $idproduit
      * @return CptaTarifproduit
      */
-    public function setIdproduit(\JDJ\ComptaBundle\Entity\CptaProduit $idproduit = null)
+    public function setIdproduit(\JDJ\ComptaBundle\Entity\Produit $idproduit = null)
     {
         $this->idproduit = $idproduit;
 
@@ -130,7 +130,7 @@ class CptaTarifproduit
     /**
      * Get idproduit
      *
-     * @return \JDJ\ComptaBundle\Entity\CptaProduit 
+     * @return \JDJ\ComptaBundle\Entity\Produit
      */
     public function getIdproduit()
     {

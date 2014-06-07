@@ -112,13 +112,12 @@ table {
 /*  	    		       BUTTON					          */
 /**************************************************************/
 
-a.button {
+button, a.button {
   background-color: $lightgreen;
-}
-
-a:hover.button {
-  background-color: $darkblack;
-  color: $lightgreen;
+  &:hover {
+    background-color: $darkblack;
+    color: $lightgreen;
+  }
 }
 
 a:hover {

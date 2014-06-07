@@ -100,26 +100,25 @@ table td .inline-list {
 /*  	    		       BUTTON					          */
 /**************************************************************/
 /* line 115, ../sass/base.scss */
-a.button {
+button, a.button {
   background-color: #88bd32;
 }
-
-/* line 119, ../sass/base.scss */
-a:hover.button {
+/* line 117, ../sass/base.scss */
+button:hover, a.button:hover {
   background-color: #303736;
   color: #88bd32;
 }
 
-/* line 124, ../sass/base.scss */
+/* line 123, ../sass/base.scss */
 a:hover {
   color: #303736;
 }
 
-/* line 135, ../sass/base.scss */
+/* line 134, ../sass/base.scss */
 .top-bar-section ul li > a.button {
   background-color: #88bd32;
 }
-/* line 138, ../sass/base.scss */
+/* line 137, ../sass/base.scss */
 .top-bar-section ul li a:not(.button):hover {
   color: #88bd32 !important;
 }

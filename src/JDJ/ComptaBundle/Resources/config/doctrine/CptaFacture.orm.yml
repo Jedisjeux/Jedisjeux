@@ -72,7 +72,7 @@ JDJ\ComptaBundle\Entity\CptaFacture:
                         referencedColumnName: id
             orderBy: null
         idproduit:
-            targetEntity: CptaProduit
+            targetEntity: Produit
             cascade: {  }
             mappedBy: idfacture
             inversedBy: null

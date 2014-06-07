@@ -4,7 +4,7 @@ namespace JDJ\ComptaBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class CptaProduitControllerTest extends WebTestCase
+class ProduitControllerTest extends WebTestCase
 {
     /*
     public function testCompleteScenario()
@@ -13,13 +13,13 @@ class CptaProduitControllerTest extends WebTestCase
         $client = static::createClient();
 
         // Create a new entry in the database
-        $crawler = $client->request('GET', '/cptaproduit/');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /cptaproduit/");
+        $crawler = $client->request('GET', '/produit/');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /produit/");
         $crawler = $client->click($crawler->selectLink('Create a new entry')->link());
 
         // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
-            'jdj_comptabundle_cptaproduittype[field_name]'  => 'Test',
+            'jdj_comptabundle_produittype[field_name]'  => 'Test',
             // ... other fields to fill
         ));
 
@@ -33,7 +33,7 @@ class CptaProduitControllerTest extends WebTestCase
         $crawler = $client->click($crawler->selectLink('Edit')->link());
 
         $form = $crawler->selectButton('Edit')->form(array(
-            'jdj_comptabundle_cptaproduittype[field_name]'  => 'Foo',
+            'jdj_comptabundle_produittype[field_name]'  => 'Foo',
             // ... other fields to fill
         ));
 

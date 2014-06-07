@@ -33,7 +33,7 @@ JDJ\ComptaBundle\Entity\CptaTarifproduit:
             comment: ''
     manyToOne:
         idproduit:
-            targetEntity: CptaProduit
+            targetEntity: Produit
             cascade: {  }
             mappedBy: null
             inversedBy: null
