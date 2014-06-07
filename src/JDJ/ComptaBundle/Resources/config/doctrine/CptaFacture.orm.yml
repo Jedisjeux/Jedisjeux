@@ -46,7 +46,7 @@ JDJ\ComptaBundle\Entity\CptaFacture:
                     referencedColumnName: id
             orphanRemoval: false
         idmodereglement:
-            targetEntity: CptaModereglement
+            targetEntity: ModeReglement
             cascade: {  }
             mappedBy: null
             inversedBy: null

@@ -45,7 +45,7 @@ class CptaEcriture
     private $idfacture;
 
     /**
-     * @var \JDJ\ComptaBundle\Entity\CptaModereglement
+     * @var \JDJ\ComptaBundle\Entity\ModeReglement
      */
     private $idmodereglement;
 
@@ -201,10 +201,10 @@ class CptaEcriture
     /**
      * Set idmodereglement
      *
-     * @param \JDJ\ComptaBundle\Entity\CptaModereglement $idmodereglement
+     * @param \JDJ\ComptaBundle\Entity\ModeReglement $idmodereglement
      * @return CptaEcriture
      */
-    public function setIdmodereglement(\JDJ\ComptaBundle\Entity\CptaModereglement $idmodereglement = null)
+    public function setIdmodereglement(\JDJ\ComptaBundle\Entity\ModeReglement $idmodereglement = null)
     {
         $this->idmodereglement = $idmodereglement;
 
@@ -214,7 +214,7 @@ class CptaEcriture
     /**
      * Get idmodereglement
      *
-     * @return \JDJ\ComptaBundle\Entity\CptaModereglement 
+     * @return \JDJ\ComptaBundle\Entity\ModeReglement
      */
     public function getIdmodereglement()
     {

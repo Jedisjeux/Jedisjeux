@@ -15,7 +15,7 @@ jdj_compta_facture:
     prefix:   /facture
 
 jdj_compta_mode:
-    resource: "@JDJComptaBundle/Resources/config/routing/cptamodereglement.yml"
+    resource: "@JDJComptaBundle/Resources/config/routing/modereglement.yml"
     prefix:   /mode
 
 jdj_compta_produit:

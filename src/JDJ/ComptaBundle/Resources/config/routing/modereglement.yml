@@ -1,0 +1,30 @@
+modereglement:
+    pattern:  /
+    defaults: { _controller: "JDJComptaBundle:ModeReglement:index" }
+
+modereglement_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "JDJComptaBundle:ModeReglement:show" }
+
+modereglement_new:
+    pattern:  /new
+    defaults: { _controller: "JDJComptaBundle:ModeReglement:new" }
+
+modereglement_create:
+    pattern:  /create
+    defaults: { _controller: "JDJComptaBundle:ModeReglement:create" }
+    requirements: { _method: post }
+
+modereglement_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "JDJComptaBundle:ModeReglement:edit" }
+
+modereglement_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "JDJComptaBundle:ModeReglement:update" }
+    requirements: { _method: post|put }
+
+modereglement_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "JDJComptaBundle:ModeReglement:delete" }
+    requirements: { _method: post|delete }
