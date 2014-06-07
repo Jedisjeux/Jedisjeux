@@ -21,13 +21,29 @@
                     <li><label>Trésorerie</label></li>
                     <li><a class="" href="#">Bilans</a></li>
                     <li><a class="" href="{{ path('cptaecriture') }}">Ecritures</a></li>
-                    <li><a href="{{ path('cptafacture') }}">Factures</a></li>
+                    <li><a href="{{ path('facture') }}">Factures</a></li>
                     <li class="divider"></li>
                     <li><label>Configurations</label></li>
                     <li><a href="{{ path('cptaclient') }}">Clients</a></li>
                     <li><a href="{{ path('produit') }}">Produits</a></li>
                     <li><a href="{{ path('tarifproduit') }}">Tarifs</a></li>
                     <li><a href="{{ path('modereglement') }}">Modes de règlement</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">See all →</a></li>
+                </ul>
+            </li>
+            <li class="divider"></li>
+            <li class="has-dropdown not-click">
+                <a href="#">Admin</a>
+                <ul class="dropdown"><li class="title back js-generated"><h5><a href="javascript:void(0)">Back</a></h5></li>
+                    <li><label>Jeux</label></li>
+                    <li><a href="{{ path('mecanisme') }}">Mécanismes</a></li>
+                    <li><a href="{{ path('theme') }}">Thèmes</a></li>
+                    <li><a href="#">Eléments de matériel</a></li>
+                    <li class="divider"></li>
+                    <li><label>Ludographie</label></li>
+                    <li><a href="#">Personnes</a></li>
+                    <li><a href="#">Métiers</a></li>
                     <li class="divider"></li>
                     <li><a href="#">See all →</a></li>
                 </ul>

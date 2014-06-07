@@ -1,11 +1,11 @@
-JDJ\ComptaBundle\Entity\CptaEcriture:
+JDJ\ComptaBundle\Entity\Facture:
     type: entity
-    table: cpta_ecriture
+    table: cpta_facture
     indexes:
-        fk_cpta_ecriture_cpta_facture1_idx:
+        fk_cpta_facture_cpta_client1_idx:
             columns:
-                - idFacture
-        fk_cpta_ecriture_cpta_modeReglement1_idx:
+                - idClient
+        fk_cpta_facture_cpta_modeReglement1_idx:
             columns:
                 - idModeReglement
     id:
@@ -18,18 +18,6 @@ JDJ\ComptaBundle\Entity\CptaEcriture:
             generator:
                 strategy: IDENTITY
     fields:
-        libelle:
-            type: string
-            nullable: false
-            length: 100
-            fixed: false
-            comment: ''
-        sens:
-            type: string
-            nullable: false
-            length: null
-            fixed: false
-            comment: ''
         montant:
             type: decimal
             nullable: false
@@ -42,21 +30,19 @@ JDJ\ComptaBundle\Entity\CptaEcriture:
             comment: ''
             default: CURRENT_TIMESTAMP
             column: dateCreation
-        facturefilename:
-            type: string
-            nullable: true
-            length: 50
-            fixed: false
+        datepaiement:
+            type: date
+            nullable: false
             comment: ''
-            column: factureFilename
+            column: datePaiement
     manyToOne:
-        idfacture:
-            targetEntity: Facture
+        idclient:
+            targetEntity: CptaClient
             cascade: {  }
             mappedBy: null
             inversedBy: null
             joinColumns:
-                idFacture:
+                idClient:
                     referencedColumnName: id
             orphanRemoval: false
         idmodereglement:
@@ -68,4 +54,28 @@ JDJ\ComptaBundle\Entity\CptaEcriture:
                 idModeReglement:
                     referencedColumnName: id
             orphanRemoval: false
+    manyToMany:
+        idtypeadresse:
+            targetEntity: CptaTypeadresse
+            cascade: {  }
+            mappedBy: null
+            inversedBy: idfacture
+            joinTable:
+                name: cpta_adressefacture
+                joinColumns:
+                    -
+                        name: idFacture
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: idTypeAdresse
+                        referencedColumnName: id
+            orderBy: null
+        produit:
+            targetEntity: Produit
+            cascade: {  }
+            mappedBy: idfacture
+            inversedBy: null
+            joinTable: null
+            orderBy: null
     lifecycleCallbacks: {  }

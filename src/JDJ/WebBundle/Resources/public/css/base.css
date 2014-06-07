@@ -107,19 +107,23 @@ button:hover, a.button:hover {
   background-color: #303736;
   color: #88bd32;
 }
+/* line 116, ../sass/base.scss */
+button:focus, button:active, a.button:focus, a.button:active {
+  background-color: #88bd32;
+}
 
 /**************************************************************/
 /*  	    		       TOP BAR					          */
 /**************************************************************/
-/* line 124, ../sass/base.scss */
+/* line 127, ../sass/base.scss */
 .top-bar .name h1 {
   font-size: 3rem;
 }
-/* line 130, ../sass/base.scss */
+/* line 133, ../sass/base.scss */
 .top-bar ul li > a.button {
   background-color: #88bd32;
 }
-/* line 133, ../sass/base.scss */
+/* line 136, ../sass/base.scss */
 .top-bar ul li a:not(.button):hover {
   color: #88bd32 !important;
 }

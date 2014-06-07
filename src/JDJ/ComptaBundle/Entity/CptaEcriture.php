@@ -40,7 +40,7 @@ class CptaEcriture
     private $facturefilename;
 
     /**
-     * @var \JDJ\ComptaBundle\Entity\CptaFacture
+     * @var \JDJ\ComptaBundle\Entity\Facture
      */
     private $idfacture;
 
@@ -178,10 +178,10 @@ class CptaEcriture
     /**
      * Set idfacture
      *
-     * @param \JDJ\ComptaBundle\Entity\CptaFacture $idfacture
+     * @param \JDJ\ComptaBundle\Entity\Facture $idfacture
      * @return CptaEcriture
      */
-    public function setIdfacture(\JDJ\ComptaBundle\Entity\CptaFacture $idfacture = null)
+    public function setIdfacture(\JDJ\ComptaBundle\Entity\Facture $idfacture = null)
     {
         $this->idfacture = $idfacture;
 
@@ -191,7 +191,7 @@ class CptaEcriture
     /**
      * Get idfacture
      *
-     * @return \JDJ\ComptaBundle\Entity\CptaFacture 
+     * @return \JDJ\ComptaBundle\Entity\Facture
      */
     public function getIdfacture()
     {

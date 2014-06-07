@@ -113,6 +113,9 @@ button, a.button {
     background-color: $darkblack;
     color: $lightgreen;
   }
+  &:focus, &:active {
+    background-color: $lightgreen;
+  }
 }
 
 /**************************************************************/

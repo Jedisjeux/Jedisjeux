@@ -1,0 +1,14 @@
+JDJ\JeuBundle\Entity\Mecanisme:
+  type: entity
+  table: jdj_mecanisme
+  id:
+    id:
+      type: integer
+      unsigned: true
+      generator:
+        strategy: IDENTITY
+  fields:
+    libelle:
+      type: string
+      nullable: false
+      length: 50

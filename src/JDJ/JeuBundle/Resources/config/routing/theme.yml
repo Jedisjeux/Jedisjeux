@@ -1,0 +1,30 @@
+theme:
+    pattern:  /
+    defaults: { _controller: "JDJJeuBundle:Theme:index" }
+
+theme_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "JDJJeuBundle:Theme:show" }
+
+theme_new:
+    pattern:  /new
+    defaults: { _controller: "JDJJeuBundle:Theme:new" }
+
+theme_create:
+    pattern:  /create
+    defaults: { _controller: "JDJJeuBundle:Theme:create" }
+    requirements: { _method: post }
+
+theme_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "JDJJeuBundle:Theme:edit" }
+
+theme_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "JDJJeuBundle:Theme:update" }
+    requirements: { _method: post|put }
+
+theme_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "JDJJeuBundle:Theme:delete" }
+    requirements: { _method: post|delete }

@@ -5,37 +5,37 @@ namespace JDJ\ComptaBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use JDJ\ComptaBundle\Entity\Tarifproduit;
-use JDJ\ComptaBundle\Form\TarifproduitType;
+use JDJ\ComptaBundle\Entity\Facture;
+use JDJ\ComptaBundle\Form\FactureType;
 
 /**
- * Tarifproduit controller.
+ * Facture controller.
  *
  */
-class TarifproduitController extends Controller
+class FactureController extends Controller
 {
 
     /**
-     * Lists all Tarifproduit entities.
+     * Lists all Facture entities.
      *
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('JDJComptaBundle:Tarifproduit')->findAll();
+        $entities = $em->getRepository('JDJComptaBundle:Facture')->findAll();
 
-        return $this->render('JDJComptaBundle:Tarifproduit:index.html.twig', array(
+        return $this->render('JDJComptaBundle:Facture:index.html.twig', array(
             'entities' => $entities,
         ));
     }
     /**
-     * Creates a new Tarifproduit entity.
+     * Creates a new Facture entity.
      *
      */
     public function createAction(Request $request)
     {
-        $entity = new Tarifproduit();
+        $entity = new Facture();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -44,26 +44,26 @@ class TarifproduitController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('tarifproduit'));
+            return $this->redirect($this->generateUrl('facture_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('JDJComptaBundle:Tarifproduit:new.html.twig', array(
+        return $this->render('JDJComptaBundle:Facture:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-    * Creates a form to create a Tarifproduit entity.
+    * Creates a form to create a Facture entity.
     *
-    * @param Tarifproduit $entity The entity
+    * @param Facture $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createCreateForm(Tarifproduit $entity)
+    private function createCreateForm(Facture $entity)
     {
-        $form = $this->createForm(new TarifproduitType(), $entity, array(
-            'action' => $this->generateUrl('tarifproduit_create'),
+        $form = $this->createForm(new FactureType(), $entity, array(
+            'action' => $this->generateUrl('facture_create'),
             'method' => 'POST',
         ));
 
@@ -73,75 +73,76 @@ class TarifproduitController extends Controller
     }
 
     /**
-     * Displays a form to create a new Tarifproduit entity.
+     * Displays a form to create a new Facture entity.
      *
      */
     public function newAction()
     {
-        $entity = new Tarifproduit();
+        $entity = new Facture();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('JDJComptaBundle:Tarifproduit:new.html.twig', array(
+        return $this->render('JDJComptaBundle:Facture:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Finds and displays a Tarifproduit entity.
+     * Finds and displays a Facture entity.
      *
      */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JDJComptaBundle:Tarifproduit')->find($id);
+        $entity = $em->getRepository('JDJComptaBundle:Facture')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Tarifproduit entity.');
+            throw $this->createNotFoundException('Unable to find Facture entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('JDJComptaBundle:Tarifproduit:show.html.twig', array(
+        return $this->render('JDJComptaBundle:Facture:show.html.twig', array(
             'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-        ));
+            'delete_form' => $deleteForm->createView(),        ));
     }
 
     /**
-     * Displays a form to edit an existing Tarifproduit entity.
+     * Displays a form to edit an existing Facture entity.
      *
      */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JDJComptaBundle:Tarifproduit')->find($id);
+        $entity = $em->getRepository('JDJComptaBundle:Facture')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Tarifproduit entity.');
+            throw $this->createNotFoundException('Unable to find Facture entity.');
         }
 
-        $form = $this->createEditForm($entity);
+        $editForm = $this->createEditForm($entity);
+        $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('JDJComptaBundle:Tarifproduit:edit.html.twig', array(
-            'entity'    => $entity,
-            'form'      => $form->createView(),
+        return $this->render('JDJComptaBundle:Facture:edit.html.twig', array(
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-    * Creates a form to edit a Tarifproduit entity.
+    * Creates a form to edit a Facture entity.
     *
-    * @param Tarifproduit $entity The entity
+    * @param Facture $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Tarifproduit $entity)
+    private function createEditForm(Facture $entity)
     {
-        $form = $this->createForm(new TarifproduitType(), $entity, array(
-            'action' => $this->generateUrl('tarifproduit_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new FactureType(), $entity, array(
+            'action' => $this->generateUrl('facture_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -150,17 +151,17 @@ class TarifproduitController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Tarifproduit entity.
+     * Edits an existing Facture entity.
      *
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JDJComptaBundle:Tarifproduit')->find($id);
+        $entity = $em->getRepository('JDJComptaBundle:Facture')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Tarifproduit entity.');
+            throw $this->createNotFoundException('Unable to find Facture entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -170,17 +171,17 @@ class TarifproduitController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('tarifproduit'));
+            return $this->redirect($this->generateUrl('facture_edit', array('id' => $id)));
         }
 
-        return $this->render('JDJComptaBundle:Tarifproduit:edit.html.twig', array(
+        return $this->render('JDJComptaBundle:Facture:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
     /**
-     * Deletes a Tarifproduit entity.
+     * Deletes a Facture entity.
      *
      */
     public function deleteAction(Request $request, $id)
@@ -190,21 +191,21 @@ class TarifproduitController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('JDJComptaBundle:Tarifproduit')->find($id);
+            $entity = $em->getRepository('JDJComptaBundle:Facture')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Tarifproduit entity.');
+                throw $this->createNotFoundException('Unable to find Facture entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('tarifproduit'));
+        return $this->redirect($this->generateUrl('facture'));
     }
 
     /**
-     * Creates a form to delete a Tarifproduit entity by id.
+     * Creates a form to delete a Facture entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -213,7 +214,7 @@ class TarifproduitController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('tarifproduit_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('facture_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

@@ -11,7 +11,7 @@ jdj_compta_ecriture:
     prefix:   /ecriture
 
 jdj_compta_facture:
-    resource: "@JDJComptaBundle/Resources/config/routing/cptafacture.yml"
+    resource: "@JDJComptaBundle/Resources/config/routing/facture.yml"
     prefix:   /facture
 
 jdj_compta_mode:

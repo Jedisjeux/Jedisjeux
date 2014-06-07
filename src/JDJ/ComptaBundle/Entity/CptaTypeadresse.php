@@ -68,10 +68,10 @@ class CptaTypeadresse
     /**
      * Add idfacture
      *
-     * @param \JDJ\ComptaBundle\Entity\CptaFacture $idfacture
+     * @param \JDJ\ComptaBundle\Entity\Facture $idfacture
      * @return CptaTypeadresse
      */
-    public function addIdfacture(\JDJ\ComptaBundle\Entity\CptaFacture $idfacture)
+    public function addIdfacture(\JDJ\ComptaBundle\Entity\Facture $idfacture)
     {
         $this->idfacture[] = $idfacture;
 
@@ -81,9 +81,9 @@ class CptaTypeadresse
     /**
      * Remove idfacture
      *
-     * @param \JDJ\ComptaBundle\Entity\CptaFacture $idfacture
+     * @param \JDJ\ComptaBundle\Entity\Facture $idfacture
      */
-    public function removeIdfacture(\JDJ\ComptaBundle\Entity\CptaFacture $idfacture)
+    public function removeIdfacture(\JDJ\ComptaBundle\Entity\Facture $idfacture)
     {
         $this->idfacture->removeElement($idfacture);
     }

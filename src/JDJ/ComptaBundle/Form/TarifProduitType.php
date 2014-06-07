@@ -8,20 +8,28 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class TarifproduitType extends AbstractType
 {
-        /**
+    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('datedebut')
-            ->add('datefin')
+            ->add('datedebut', 'date',
+                array(
+                    'widget' => 'single_text',
+                    'format' => 'dd-MM-yyyy',
+                )
+            )
+            ->add('datefin', 'date', array(
+                    'widget' => 'single_text',
+                    'format' => 'dd-MM-yyyy',
+                )
+            )
             ->add('prix')
-            ->add('produit')
-        ;
+            ->add('produit');
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

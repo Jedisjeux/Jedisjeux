@@ -1,0 +1,30 @@
+facture:
+    pattern:  /
+    defaults: { _controller: "JDJComptaBundle:Facture:index" }
+
+facture_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "JDJComptaBundle:Facture:show" }
+
+facture_new:
+    pattern:  /new
+    defaults: { _controller: "JDJComptaBundle:Facture:new" }
+
+facture_create:
+    pattern:  /create
+    defaults: { _controller: "JDJComptaBundle:Facture:create" }
+    requirements: { _method: post }
+
+facture_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "JDJComptaBundle:Facture:edit" }
+
+facture_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "JDJComptaBundle:Facture:update" }
+    requirements: { _method: post|put }
+
+facture_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "JDJComptaBundle:Facture:delete" }
+    requirements: { _method: post|delete }

@@ -19,7 +19,7 @@ JDJ\ComptaBundle\Entity\Produit:
             comment: ''
     manyToMany:
         idfacture:
-            targetEntity: CptaFacture
+            targetEntity: Facture
             cascade: {  }
             mappedBy: null
             inversedBy: produit

@@ -1,0 +1,46 @@
+{% extends "JDJWebBundle::layout.html.twig" %}
+
+{% block body -%}
+    <h1>Liste des factures</h1>
+
+    <ul>
+        <li>
+            <a class="button" href="{{ path('facture_new') }}">
+                Créer une facture
+            </a>
+        </li>
+    </ul>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Client</th>
+                <th>Montant</th>
+                <th>Date de paiement</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('facture_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.idclient.societe }}</td>
+                <td>{{ entity.montant }}</td>
+                <td>{% if entity.datepaiement %}{{ entity.datepaiement|date('d/m/Y') }}{% endif %}</td>
+                <td class="small-4">
+                <ul class="inline-list">
+                    <li>
+                        <a class="small button" href="{{ path('facture_edit', { 'id': entity.id }) }}">Modifier</a>
+                    </li>
+                    <li>
+                        <a class="small button" href="{{ path('facture_delete', { 'id': entity.id }) }}">Supprimer</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% endblock %}

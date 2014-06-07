@@ -1,12 +1,18 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: loic_425
+ * Date: 07/06/2014
+ * Time: 21:27
+ */
 
-namespace JDJ\ComptaBundle\Form;
+namespace JDJ\JeuBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ProduitType extends AbstractType
+class ThemeType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -18,14 +24,14 @@ class ProduitType extends AbstractType
             ->add('libelle')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'JDJ\ComptaBundle\Entity\Produit'
+            'data_class' => 'JDJ\JeuBundle\Entity\Theme'
         ));
     }
 
@@ -34,6 +40,6 @@ class ProduitType extends AbstractType
      */
     public function getName()
     {
-        return 'jdj_comptabundle_produit';
+        return 'jdj_jeubundle_theme';
     }
-}
+} 

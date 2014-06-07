@@ -19,7 +19,7 @@ JDJ\ComptaBundle\Entity\CptaTypeadresse:
             comment: ''
     manyToMany:
         idfacture:
-            targetEntity: CptaFacture
+            targetEntity: Facture
             cascade: {  }
             mappedBy: idtypeadresse
             inversedBy: null
