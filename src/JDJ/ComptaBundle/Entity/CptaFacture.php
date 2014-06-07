@@ -47,7 +47,7 @@ class CptaFacture
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $idproduit;
+    private $produit;
 
     /**
      * Constructor
@@ -55,7 +55,7 @@ class CptaFacture
     public function __construct()
     {
         $this->idtypeadresse = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->idproduit = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->produit = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -217,36 +217,36 @@ class CptaFacture
     }
 
     /**
-     * Add idproduit
+     * Add produit
      *
-     * @param \JDJ\ComptaBundle\Entity\Produit $idproduit
+     * @param \JDJ\ComptaBundle\Entity\Produit $produit
      * @return CptaFacture
      */
-    public function addIdproduit(\JDJ\ComptaBundle\Entity\Produit $idproduit)
+    public function addIdproduit(\JDJ\ComptaBundle\Entity\Produit $produit)
     {
-        $this->idproduit[] = $idproduit;
+        $this->produit[] = $produit;
 
         return $this;
     }
 
     /**
-     * Remove idproduit
+     * Remove produit
      *
-     * @param \JDJ\ComptaBundle\Entity\Produit $idproduit
+     * @param \JDJ\ComptaBundle\Entity\Produit $produit
      */
-    public function removeIdproduit(\JDJ\ComptaBundle\Entity\Produit $idproduit)
+    public function removeIdproduit(\JDJ\ComptaBundle\Entity\Produit $produit)
     {
-        $this->idproduit->removeElement($idproduit);
+        $this->produit->removeElement($produit);
     }
 
     /**
-     * Get idproduit
+     * Get produit
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
     public function getIdproduit()
     {
-        return $this->idproduit;
+        return $this->produit;
     }
 
 

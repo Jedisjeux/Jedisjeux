@@ -23,7 +23,7 @@ jdj_compta_produit:
     prefix:   /produit
 
 jdj_compta_tarif:
-    resource: "@JDJComptaBundle/Resources/config/routing/cptatarifproduit.yml"
+    resource: "@JDJComptaBundle/Resources/config/routing/tarifproduit.yml"
     prefix:   /tarif
 
 jdj_compta_adresse:

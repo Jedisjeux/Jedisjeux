@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class CptaFactureType extends AbstractType
+class TarifproduitType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -15,12 +15,9 @@ class CptaFactureType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('montant')
-            ->add('datecreation')
-            ->add('datepaiement')
-            ->add('idclient')
-            ->add('idmodereglement')
-            ->add('idtypeadresse')
+            ->add('datedebut')
+            ->add('datefin')
+            ->add('prix')
             ->add('produit')
         ;
     }
@@ -31,7 +28,7 @@ class CptaFactureType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'JDJ\ComptaBundle\Entity\CptaFacture'
+            'data_class' => 'JDJ\ComptaBundle\Entity\Tarifproduit'
         ));
     }
 
@@ -40,6 +37,6 @@ class CptaFactureType extends AbstractType
      */
     public function getName()
     {
-        return 'jdj_comptabundle_cptafacture';
+        return 'jdj_comptabundle_tarifproduit';
     }
 }

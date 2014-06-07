@@ -71,7 +71,7 @@ JDJ\ComptaBundle\Entity\CptaFacture:
                         name: idTypeAdresse
                         referencedColumnName: id
             orderBy: null
-        idproduit:
+        produit:
             targetEntity: Produit
             cascade: {  }
             mappedBy: idfacture

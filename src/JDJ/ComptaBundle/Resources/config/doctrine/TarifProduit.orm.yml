@@ -1,0 +1,44 @@
+JDJ\ComptaBundle\Entity\Tarifproduit:
+    type: entity
+    table: cpta_tarifProduit
+    indexes:
+        fk_jdj_tarifProduit_cpta_produit1_idx:
+            columns:
+                - idProduit
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: true
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        datedebut:
+            type: date
+            nullable: false
+            comment: ''
+            column: dateDebut
+        datefin:
+            type: date
+            nullable: true
+            comment: ''
+            column: dateFin
+        prix:
+            type: decimal
+            nullable: false
+            precision: 6
+            scale: 2
+            comment: ''
+    manyToOne:
+        produit:
+            targetEntity: Produit
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                idProduit:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

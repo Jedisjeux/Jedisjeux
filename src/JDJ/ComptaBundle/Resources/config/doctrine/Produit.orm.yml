@@ -22,7 +22,7 @@ JDJ\ComptaBundle\Entity\Produit:
             targetEntity: CptaFacture
             cascade: {  }
             mappedBy: null
-            inversedBy: idproduit
+            inversedBy: produit
             joinTable:
                 name: cpta_produit_facture
                 joinColumns:

@@ -1,0 +1,46 @@
+{% extends "JDJWebBundle::layout.html.twig" %}
+
+{% block body -%}
+    <h1>Liste des tarifs</h1>
+
+    <ul>
+        <li>
+            <a class="button" href="{{ path('tarifproduit_new') }}">
+                Créer un tarif
+            </a>
+        </li>
+    </ul>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Date de début</th>
+                <th>Date de fin</th>
+                <th>Prix</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.produit.libelle }}</td>
+                <td>{% if entity.datedebut %}{{ entity.datedebut|date('d/m/Y') }}{% endif %}</td>
+                <td>{% if entity.datefin %}{{ entity.datefin|date('d/m/Y') }}{% endif %}</td>
+                <td>{{ entity.prix }}</td>
+                <td class="small-4">
+                <ul class="inline-list">
+                    <li>
+                        <a class="small button" href="{{ path('tarifproduit_edit', { 'id': entity.id }) }}">Modifier</a>
+                    </li>
+                    <li>
+                        <a class="small button" href="{{ path('tarifproduit_delete', { 'id': entity.id }) }}">Supprimer</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% endblock %}
