@@ -9,3 +9,7 @@ jdj_jeu_mecanisme:
 jdj_jeu_theme:
     resource: "@JDJJeuBundle/Resources/config/routing/theme.yml"
     prefix:   /theme
+
+jdj_jeu_materiel:
+    resource: "@JDJJeuBundle/Resources/config/routing/materiel.yml"
+    prefix:   /materiel

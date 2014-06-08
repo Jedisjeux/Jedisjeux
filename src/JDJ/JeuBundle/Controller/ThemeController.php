@@ -27,6 +27,7 @@ class ThemeController extends Controller
 
         $entities = $em->getRepository('JDJJeuBundle:Theme')->findAll();
 
+        $deleteForms = array();
         foreach ($entities as $entity) {
             $deleteForms[$entity->getId()] = $this->createDeleteForm($entity->getId())->createView();
         }

@@ -25,6 +25,7 @@ class ProduitController extends Controller
 
         $entities = $em->getRepository('JDJComptaBundle:Produit')->findAll();
 
+        $deleteForms = array();
         foreach ($entities as $entity) {
             $deleteForms[$entity->getId()] = $this->createDeleteForm($entity->getId())->createView();
         }

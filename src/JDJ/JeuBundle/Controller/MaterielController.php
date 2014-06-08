@@ -2,47 +2,47 @@
 /**
  * Created by PhpStorm.
  * User: loic_425
- * Date: 07/06/2014
- * Time: 21:29
+ * Date: 08/06/2014
+ * Time: 14:28
  */
 
 namespace JDJ\JeuBundle\Controller;
 
-use JDJ\JeuBundle\Entity\Mecanisme;
-use JDJ\JeuBundle\Form\MecanismeType;
+
+use JDJ\JeuBundle\Entity\Materiel;
+use JDJ\JeuBundle\Form\MaterielType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class MecanismeController extends Controller
+class MaterielController extends Controller
 {
-
     /**
-     * Lists all Mecanisme entities.
+     * Lists all Materiel entities.
      *
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('JDJJeuBundle:Mecanisme')->findAll();
+        $entities = $em->getRepository('JDJJeuBundle:Materiel')->findAll();
 
         $deleteForms = array();
         foreach ($entities as $entity) {
             $deleteForms[$entity->getId()] = $this->createDeleteForm($entity->getId())->createView();
         }
 
-        return $this->render('JDJJeuBundle:Mecanisme:index.html.twig', array(
+        return $this->render('JDJJeuBundle:Materiel:index.html.twig', array(
             'entities' => $entities,
             'deleteForms' => $deleteForms,
         ));
     }
     /**
-     * Creates a new Mecanisme entity.
+     * Creates a new Materiel entity.
      *
      */
     public function createAction(Request $request)
     {
-        $entity = new Mecanisme();
+        $entity = new Materiel();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -51,26 +51,26 @@ class MecanismeController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('mecanisme'));
+            return $this->redirect($this->generateUrl('materiel'));
         }
 
-        return $this->render('JDJJeuBundle:Mecanisme:new.html.twig', array(
+        return $this->render('JDJJeuBundle:Materiel:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Creates a form to create a Mecanisme entity.
+     * Creates a form to create a Materiel entity.
      *
-     * @param Mecanisme $entity The entity
+     * @param Materiel $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Mecanisme $entity)
+    private function createCreateForm(Materiel $entity)
     {
-        $form = $this->createForm(new MecanismeType(), $entity, array(
-            'action' => $this->generateUrl('mecanisme_create'),
+        $form = $this->createForm(new MaterielType(), $entity, array(
+            'action' => $this->generateUrl('materiel_create'),
             'method' => 'POST',
         ));
 
@@ -80,74 +80,74 @@ class MecanismeController extends Controller
     }
 
     /**
-     * Displays a form to create a new Mecanisme entity.
+     * Displays a form to create a new Materiel entity.
      *
      */
     public function newAction()
     {
-        $entity = new Mecanisme();
+        $entity = new Materiel();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('JDJJeuBundle:Mecanisme:new.html.twig', array(
+        return $this->render('JDJJeuBundle:Materiel:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Finds and displays a Mecanisme entity.
+     * Finds and displays a Materiel entity.
      *
      */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JDJJeuBundle:Mecanisme')->find($id);
+        $entity = $em->getRepository('JDJJeuBundle:Materiel')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Mecanisme entity.');
+            throw $this->createNotFoundException('Unable to find Materiel entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('JDJJeuBundle:Mecanisme:show.html.twig', array(
+        return $this->render('JDJJeuBundle:Materiel:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),        ));
     }
 
     /**
-     * Displays a form to edit an existing Mecanisme entity.
+     * Displays a form to edit an existing Materiel entity.
      *
      */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JDJJeuBundle:Mecanisme')->find($id);
+        $entity = $em->getRepository('JDJJeuBundle:Materiel')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Mecanisme entity.');
+            throw $this->createNotFoundException('Unable to find Materiel entity.');
         }
 
         $form = $this->createEditForm($entity);
 
-        return $this->render('JDJJeuBundle:Mecanisme:edit.html.twig', array(
+        return $this->render('JDJJeuBundle:Materiel:edit.html.twig', array(
             'entity'      => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Creates a form to edit a Mecanisme entity.
+     * Creates a form to edit a Materiel entity.
      *
-     * @param Mecanisme $entity The entity
+     * @param Materiel $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createEditForm(Mecanisme $entity)
+    private function createEditForm(Materiel $entity)
     {
-        $form = $this->createForm(new MecanismeType(), $entity, array(
-            'action' => $this->generateUrl('mecanisme_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new MaterielType(), $entity, array(
+            'action' => $this->generateUrl('materiel_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -156,17 +156,17 @@ class MecanismeController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Mecanisme entity.
+     * Edits an existing Materiel entity.
      *
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JDJJeuBundle:Mecanisme')->find($id);
+        $entity = $em->getRepository('JDJJeuBundle:Materiel')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Mecanisme entity.');
+            throw $this->createNotFoundException('Unable to find Materiel entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -176,17 +176,17 @@ class MecanismeController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('mecanisme'));
+            return $this->redirect($this->generateUrl('materiel'));
         }
 
-        return $this->render('JDJJeuBundle:Mecanisme:edit.html.twig', array(
+        return $this->render('JDJJeuBundle:Materiel:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
     /**
-     * Deletes a Mecanisme entity.
+     * Deletes a Materiel entity.
      *
      */
     public function deleteAction(Request $request, $id)
@@ -196,21 +196,21 @@ class MecanismeController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('JDJJeuBundle:Mecanisme')->find($id);
+            $entity = $em->getRepository('JDJJeuBundle:Materiel')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Mecanisme entity.');
+                throw $this->createNotFoundException('Unable to find Materiel entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('mecanisme'));
+        return $this->redirect($this->generateUrl('materiel'));
     }
 
     /**
-     * Creates a form to delete a Mecanisme entity by id.
+     * Creates a form to delete a Materiel entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -219,7 +219,7 @@ class MecanismeController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('mecanisme_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('materiel_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
