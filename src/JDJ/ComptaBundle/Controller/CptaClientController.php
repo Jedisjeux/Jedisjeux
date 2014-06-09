@@ -146,7 +146,7 @@ class CptaClientController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => 'Enregistrer'));
 
         return $form;
     }
@@ -170,7 +170,7 @@ class CptaClientController extends Controller
 
         if ($editForm->isValid()) {
             $em->flush();
-
+            $request->getSession()->getFlashBag()->add('success', 'Vos modifications ont bien été enregistrées!');
             return $this->redirect($this->generateUrl('cptaclient_edit', array('id' => $id)));
         }
 
@@ -216,7 +216,7 @@ class CptaClientController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('cptaclient_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'Supprimer'))
             ->getForm()
         ;
     }

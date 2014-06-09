@@ -1,16 +1,75 @@
 {% extends "JDJWebBundle::layout.html.twig" %}
 
 {% block body -%}
-    <h1>CptaClient edit</h1>
+    <h1>Edition du client</h1>
 
-    {{ form(edit_form) }}
+    {{ form_start(edit_form) }}
+    {{ form_errors(edit_form) }}
+        <!-- Bloc form informations principales -->
+        <fieldset>
+            <legend>Informations principales</legend>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('cptaclient') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+            <div>
+                {{ form_label(edit_form.societe) }}
+                {{ form_errors(edit_form.societe) }}
+                {{ form_widget(edit_form.societe) }}
+            </div>
+            <div>
+                {{ form_label(edit_form.nom) }}
+                {{ form_errors(edit_form.nom) }}
+                {{ form_widget(edit_form.nom) }}
+            </div>
+            <div>
+                {{ form_label(edit_form.email) }}
+                {{ form_errors(edit_form.email) }}
+                {{ form_widget(edit_form.email) }}
+            </div>
+        </fieldset>
+
+        <!-- Bloc form Adresse -->
+        <fieldset>
+            <legend>Adresse</legend>
+
+            <div>
+                {{ form_label(edit_form.rue) }}
+                {{ form_errors(edit_form.rue) }}
+                {{ form_widget(edit_form.rue) }}
+            </div>
+            <div>
+                {{ form_label(edit_form.complement) }}
+                {{ form_errors(edit_form.complement) }}
+                {{ form_widget(edit_form.complement) }}
+            </div>
+            <div>
+                {{ form_label(edit_form.codepostal) }}
+                {{ form_errors(edit_form.codepostal) }}
+                {{ form_widget(edit_form.codepostal) }}
+            </div>
+            <div>
+                {{ form_label(edit_form.ville) }}
+                {{ form_errors(edit_form.ville) }}
+                {{ form_widget(edit_form.ville) }}
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Date de création</legend>
+
+            <div>
+                {{ entity.datecreation|date('Y-m-d') }}
+            </div>
+
+        </fieldset>
+    {{ form_widget(edit_form._token) }}
+    {{ form_widget(edit_form.submit) }}
+    </form>
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('cptaclient') }}">
+                Retour à la liste des clients
+            </a>
+        </li>
+        <li>{{ form(delete_form) }}</li>
+    </ul>
 {% endblock %}
