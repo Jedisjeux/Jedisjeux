@@ -1,3 +1,7 @@
+jdj_jeu:
+    resource: "@JDJJeuBundle/Resources/config/routing.yml"
+    prefix:   /jeu
+
 jdj_compta:
     resource: "@JDJComptaBundle/Resources/config/routing.yml"
     prefix:   /compta
