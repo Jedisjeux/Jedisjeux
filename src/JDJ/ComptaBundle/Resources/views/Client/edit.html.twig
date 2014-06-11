@@ -1,7 +1,145 @@
 {% extends "JDJWebBundle::layout.html.twig" %}
 
 {% block body -%}
-    <h1>CptaClient edit</h1>
+    <h1>Edition du client</h1>
+    <div class="right inline">
+        <a href="{{ path('client') }}">
+            Retour à la liste des clients
+        </a>
+    </div>
+    <div class="row">
+        {{ form_start(edit_form) }}
+        {{ form_errors(edit_form) }}
 
-    {{ form(edit_form) }}
+        <!-- Bloc date de création du client -->
+        <fieldset>
+            <legend>Date de création</legend>
+
+            <div>
+                {{ entity.datecreation|date('d/m/Y') }}
+            </div>
+
+        </fieldset>
+
+        <!-- Bloc form informations principales -->
+        <fieldset>
+            <legend>Informations principales</legend>
+
+            <div class="small-8">
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="right-label" class="left inline">{{ form_label(edit_form.societe) }}</label>
+                    </div>
+                    <div class="error">
+                        {{ form_errors(edit_form.societe) }}
+                    </div>
+                    <div class="small-9 columns">
+                        {{ form_widget(edit_form.societe) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="small-8">
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="right-label" class="left inline">{{ form_label(edit_form.nom) }}</label>
+                    </div>
+                    <div class="error">
+                        {{ form_errors(edit_form.nom) }}
+                    </div>
+                    <div class="small-9 columns">
+                        {{ form_widget(edit_form.nom) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="small-8">
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="right-label" class="left inline">{{ form_label(edit_form.email) }}</label>
+                    </div>
+                    <div class="error">
+                        {{ form_errors(edit_form.email) }}
+                    </div>
+                    <div class="small-9 columns">
+                        {{ form_widget(edit_form.email) }}
+                    </div>
+                </div>
+            </div>
+
+        </fieldset>
+
+        <!-- Bloc form Adresse -->
+        <fieldset>
+            <legend>Adresse</legend>
+
+            <div class="small-8">
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="right-label" class="left inline">{{ form_label(edit_form.rue) }}</label>
+                    </div>
+                    <div class="error">
+                        {{ form_errors(edit_form.rue) }}
+                    </div>
+                    <div class="small-9 columns">
+                        {{ form_widget(edit_form.rue) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="small-8">
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="right-label" class="left inline">{{ form_label(edit_form.complement) }}</label>
+                    </div>
+                    <div class="error">
+                        {{ form_errors(edit_form.complement) }}
+                    </div>
+                    <div class="small-9 columns">
+                        {{ form_widget(edit_form.complement) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="small-8">
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="right-label" class="left inline">{{ form_label(edit_form.codepostal) }}</label>
+                    </div>
+                    <div class="error">
+                        {{ form_errors(edit_form.codepostal) }}
+                    </div>
+                    <div class="small-9 columns">
+                        {{ form_widget(edit_form.codepostal) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="small-8">
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="right-label" class="left inline">{{ form_label(edit_form.ville) }}</label>
+                    </div>
+                    <div class="error">
+                        {{ form_errors(edit_form.ville) }}
+                    </div>
+                    <div class="small-9 columns">
+                        {{ form_widget(edit_form.ville) }}
+                    </div>
+                </div>
+            </div>
+
+        </fieldset>
+
+        {{ form_widget(edit_form._token) }}
+        {{ form_widget(edit_form.submit) }}
+    </div>
+    </form>
+
+    <div class="row">
+        <div class="right inline">
+            {{ form(delete_form) }}
+        </div>
+    </div>
+
 {% endblock %}

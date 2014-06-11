@@ -54,12 +54,12 @@ class ClientController extends Controller
     }
 
     /**
-    * Creates a form to create a Client entity.
-    *
-    * @param Client $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to create a Client entity.
+     *
+     * @param Client $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createCreateForm(Client $entity)
     {
         $form = $this->createForm(new ClientType(), $entity, array(
@@ -133,12 +133,12 @@ class ClientController extends Controller
     }
 
     /**
-    * Creates a form to edit a Client entity.
-    *
-    * @param Client $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Client entity.
+     *
+     * @param Client $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Client $entity)
     {
         $form = $this->createForm(new ClientType(), $entity, array(
@@ -146,7 +146,7 @@ class ClientController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => 'Enregistrer'));
 
         return $form;
     }
@@ -170,7 +170,7 @@ class ClientController extends Controller
 
         if ($editForm->isValid()) {
             $em->flush();
-
+            $request->getSession()->getFlashBag()->add('success', 'Vos modifications ont bien été enregistrées!');
             return $this->redirect($this->generateUrl('client_edit', array('id' => $id)));
         }
 
@@ -216,8 +216,8 @@ class ClientController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('client_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'Supprimer'))
             ->getForm()
-        ;
+            ;
     }
 }
