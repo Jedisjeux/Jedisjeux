@@ -1,37 +1,23 @@
 JDJ\ComptaBundle\Entity\Produit:
-    type: entity
-    table: cpta_produit
+  type: entity
+  table: cpta_produit
+  id:
     id:
-        id:
-            type: integer
-            nullable: false
-            unsigned: true
-            comment: ''
-            id: true
-            generator:
-                strategy: IDENTITY
-    fields:
-        libelle:
-            type: string
-            nullable: false
-            length: 50
-            fixed: false
-            comment: ''
-    manyToMany:
-        idfacture:
-            targetEntity: Facture
-            cascade: {  }
-            mappedBy: null
-            inversedBy: produit
-            joinTable:
-                name: cpta_produit_facture
-                joinColumns:
-                    -
-                        name: idProduit
-                        referencedColumnName: id
-                inverseJoinColumns:
-                    -
-                        name: idFacture
-                        referencedColumnName: id
-            orderBy: null
-    lifecycleCallbacks: {  }
+      type: integer
+      unsigned: true
+      generator:
+        strategy: IDENTITY
+  fields:
+    libelle:
+      type: string
+      nullable: false
+      length: 50
+  oneToMany:
+    tarifs:
+      targetEntity: TarifProduit
+      mappedBy: produit
+      cascade: ["persist", "merge"]
+    factures:
+      targetEntity: Facture
+      mappedBy: produit
+      cascade: ["persist", "merge"]

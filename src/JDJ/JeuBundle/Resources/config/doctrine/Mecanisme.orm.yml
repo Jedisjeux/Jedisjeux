@@ -12,3 +12,15 @@ JDJ\JeuBundle\Entity\Mecanisme:
       type: string
       nullable: false
       length: 50
+  manyToMany:
+    jeux:
+      targetEntity: Jeu
+      cascade: ["persist"]
+      joinTable:
+        name: jdj_mecanisme_jeu
+        joinColumns:
+          mecanisme_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          jeu_id:
+            referencedColumnName: id

@@ -1,0 +1,30 @@
+client:
+    pattern:  /
+    defaults: { _controller: "JDJComptaBundle:Client:index" }
+
+client_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "JDJComptaBundle:Client:show" }
+
+client_new:
+    pattern:  /new
+    defaults: { _controller: "JDJComptaBundle:Client:new" }
+
+client_create:
+    pattern:  /create
+    defaults: { _controller: "JDJComptaBundle:Client:create" }
+    requirements: { _method: post }
+
+client_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "JDJComptaBundle:Client:edit" }
+
+client_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "JDJComptaBundle:Client:update" }
+    requirements: { _method: post|put }
+
+client_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "JDJComptaBundle:Client:delete" }
+    requirements: { _method: post|delete }

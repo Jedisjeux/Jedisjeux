@@ -35,7 +35,6 @@ class ProduitController extends Controller
             'deleteForms' => $deleteForms,
         ));
     }
-
     /**
      * Creates a new Produit entity.
      *
@@ -61,12 +60,12 @@ class ProduitController extends Controller
     }
 
     /**
-    * Creates a form to create a Produit entity.
-    *
-    * @param Produit $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to create a Produit entity.
+     *
+     * @param Produit $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createCreateForm(Produit $entity)
     {
         $form = $this->createForm(new ProduitType(), $entity, array(
@@ -138,16 +137,16 @@ class ProduitController extends Controller
     }
 
     /**
-    * Creates a form to edit a Produit entity.
-    *
-    * @param Produit $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Produit entity.
+     *
+     * @param Produit $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Produit $entity)
     {
         $form = $this->createForm(new ProduitType(), $entity, array(
-            'action' => $this->generateUrl('produit'),
+            'action' => $this->generateUrl('produit_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -223,6 +222,6 @@ class ProduitController extends Controller
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
-        ;
+            ;
     }
 }

@@ -1,0 +1,13 @@
+<?php
+
+namespace JDJ\JeuBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Jeu
+ */
+class Jeu
+{
+
+}
