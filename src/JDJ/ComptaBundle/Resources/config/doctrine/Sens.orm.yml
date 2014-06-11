@@ -1,0 +1,17 @@
+JDJ\ComptaBundle\Entity\Sens:
+  type: entity
+  table: cpta_sens
+  id:
+    id:
+      type: string
+      length: 10
+  fields:
+    libelle:
+      type: string
+      nullable: false
+      length: 10
+  oneToMany:
+    ecriture:
+      targetEntity: Ecriture
+      mappedBy: sens
+      cascade: ["persist", "merge"]

@@ -256,4 +256,37 @@ class CptaFacture
     public function __toString(){
         return $this->getId().' - '.$this->getDatepaiement()->format('d/m/Y');
     }
+
+    /**
+     * Add produit
+     *
+     * @param \JDJ\ComptaBundle\Entity\Produit $produit
+     * @return CptaFacture
+     */
+    public function addProduit(\JDJ\ComptaBundle\Entity\Produit $produit)
+    {
+        $this->produit[] = $produit;
+
+        return $this;
+    }
+
+    /**
+     * Remove produit
+     *
+     * @param \JDJ\ComptaBundle\Entity\Produit $produit
+     */
+    public function removeProduit(\JDJ\ComptaBundle\Entity\Produit $produit)
+    {
+        $this->produit->removeElement($produit);
+    }
+
+    /**
+     * Get produit
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProduit()
+    {
+        return $this->produit;
+    }
 }

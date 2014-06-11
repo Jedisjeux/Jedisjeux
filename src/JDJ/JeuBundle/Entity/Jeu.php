@@ -25,9 +25,24 @@ class Jeu
     private $ageMin;
 
     /**
-     * @var integer
+     * @var string
      */
-    private $ageMax;
+    private $intro;
+
+    /**
+     * @var string
+     */
+    private $materiel;
+
+    /**
+     * @var string
+     */
+    private $but;
+
+    /**
+     * @var string
+     */
+    private $description;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -105,26 +120,95 @@ class Jeu
     }
 
     /**
-     * Set ageMax
+     * Set intro
      *
-     * @param integer $ageMax
+     * @param string $intro
      * @return Jeu
      */
-    public function setAgeMax($ageMax)
+    public function setIntro($intro)
     {
-        $this->ageMax = $ageMax;
+        $this->intro = $intro;
 
         return $this;
     }
 
     /**
-     * Get ageMax
+     * Get intro
      *
-     * @return integer 
+     * @return string 
      */
-    public function getAgeMax()
+    public function getIntro()
     {
-        return $this->ageMax;
+        return $this->intro;
+    }
+
+    /**
+     * Set materiel
+     *
+     * @param string $materiel
+     * @return Jeu
+     */
+    public function setMateriel($materiel)
+    {
+        $this->materiel = $materiel;
+
+        return $this;
+    }
+
+    /**
+     * Get materiel
+     *
+     * @return string 
+     */
+    public function getMateriel()
+    {
+        return $this->materiel;
+    }
+
+    /**
+     * Set but
+     *
+     * @param string $but
+     * @return Jeu
+     */
+    public function setBut($but)
+    {
+        $this->but = $but;
+
+        return $this;
+    }
+
+    /**
+     * Get but
+     *
+     * @return string 
+     */
+    public function getBut()
+    {
+        return $this->but;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Jeu
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 
     /**

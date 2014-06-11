@@ -16,10 +16,18 @@ JDJ\JeuBundle\Entity\Jeu:
       type: integer
       nullable: true
       unsigned: true
-    ageMax:
-      type: integer
+    intro:
+      type: text
       nullable: true
-      unsigned: true
+    materiel:
+      type: text
+      ullable: true
+    but:
+      type: text
+      nullable: true
+    description:
+      type: text
+      nullable: true
   manyToMany:
     mecanismes:
       targetEntity: Mecanisme

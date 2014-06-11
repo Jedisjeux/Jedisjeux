@@ -1,0 +1,27 @@
+{% if jeu.intro %}
+    <div class="intro">
+        {{ jeu.intro|raw }}
+    </div>
+{% endif %}
+
+<div class="panel materiel">
+    <h3>Matériel</h3>
+    <ul>
+        {% for row in jeu.materiel|split("\n") %}
+            <li>{{ row }}</li>
+        {%  endfor %}
+    </ul>
+</div>
+
+{% if jeu.but %}
+    <div class="panel but">
+        <h3>But du jeu</h3>
+        {{ jeu.but|raw }}
+    </div>
+{% endif %}
+
+<div class="description">
+    <h3>Description du jeu</h3>
+
+    {{ jeu.description|raw }}
+</div>
