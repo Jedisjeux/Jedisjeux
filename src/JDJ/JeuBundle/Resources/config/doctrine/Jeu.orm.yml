@@ -1,0 +1,37 @@
+JDJ\JeuBundle\Entity\Jeu:
+  type: entity
+  table: jdj_jeu
+  id:
+    id:
+      type: integer
+      unsigned: true
+      generator:
+        strategy: IDENTITY
+  fields:
+    libelle:
+      type: string
+      nullable: false
+      length: 50
+    ageMin:
+      type: integer
+      nullable: true
+      unsigned: true
+    intro:
+      type: text
+      nullable: true
+    materiel:
+      type: text
+      ullable: true
+    but:
+      type: text
+      nullable: true
+    description:
+      type: text
+      nullable: true
+  manyToMany:
+    mecanismes:
+      targetEntity: Mecanisme
+      mappedBy: jeu
+    themes:
+      targetEntity: Theme
+      mappedBy: jeu

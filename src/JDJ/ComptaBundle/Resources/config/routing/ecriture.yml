@@ -1,0 +1,30 @@
+ecriture:
+    pattern:  /
+    defaults: { _controller: "JDJComptaBundle:Ecriture:index" }
+
+ecriture_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "JDJComptaBundle:Ecriture:show" }
+
+ecriture_new:
+    pattern:  /new
+    defaults: { _controller: "JDJComptaBundle:Ecriture:new" }
+
+ecriture_create:
+    pattern:  /create
+    defaults: { _controller: "JDJComptaBundle:Ecriture:create" }
+    requirements: { _method: post }
+
+ecriture_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "JDJComptaBundle:Ecriture:edit" }
+
+ecriture_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "JDJComptaBundle:Ecriture:update" }
+    requirements: { _method: post|put }
+
+ecriture_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "JDJComptaBundle:Ecriture:delete" }
+    requirements: { _method: post|delete }

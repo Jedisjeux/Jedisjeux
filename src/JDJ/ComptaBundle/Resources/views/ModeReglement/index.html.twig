@@ -30,7 +30,9 @@
                         <a class="tiny button" href="{{ path('modereglement_edit', { 'id': entity.id }) }}">Modifier</a>
                     </li>
                     <li>
-                        <a class="tiny button" href="{{ path('modereglement_delete', { 'id': entity.id }) }}">Supprimer</a>
+                        {{ form_start(deleteForms[entity.id]) }}
+                        {{ form_widget(deleteForms[entity.id].submit, {'attr': {'class': 'tiny'}, 'label': 'Supprimer'}) }}
+                        {{ form_end(deleteForms[entity.id]) }}
                     </li>
                 </ul>
                 </td>

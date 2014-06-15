@@ -22,14 +22,20 @@ class Produit
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $idfacture;
+    private $tarifs;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $factures;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->idfacture = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tarifs = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->factures = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -66,42 +72,68 @@ class Produit
     }
 
     /**
-     * Add idfacture
+     * Add tarifs
      *
-     * @param \JDJ\ComptaBundle\Entity\Facture $idfacture
+     * @param \JDJ\ComptaBundle\Entity\TarifProduit $tarifs
      * @return Produit
      */
-    public function addIdfacture(\JDJ\ComptaBundle\Entity\Facture $idfacture)
+    public function addTarif(\JDJ\ComptaBundle\Entity\TarifProduit $tarifs)
     {
-        $this->idfacture[] = $idfacture;
+        $this->tarifs[] = $tarifs;
 
         return $this;
     }
 
     /**
-     * Remove idfacture
+     * Remove tarifs
      *
-     * @param \JDJ\ComptaBundle\Entity\Facture $idfacture
+     * @param \JDJ\ComptaBundle\Entity\TarifProduit $tarifs
      */
-    public function removeIdfacture(\JDJ\ComptaBundle\Entity\Facture $idfacture)
+    public function removeTarif(\JDJ\ComptaBundle\Entity\TarifProduit $tarifs)
     {
-        $this->idfacture->removeElement($idfacture);
+        $this->tarifs->removeElement($tarifs);
     }
 
     /**
-     * Get idfacture
+     * Get tarifs
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getIdfacture()
+    public function getTarifs()
     {
-        return $this->idfacture;
+        return $this->tarifs;
     }
 
     /**
-     * @return string
+     * Add factures
+     *
+     * @param \JDJ\ComptaBundle\Entity\Facture $factures
+     * @return Produit
      */
-    public function __toString(){
-        return $this->getLibelle();
+    public function addFacture(\JDJ\ComptaBundle\Entity\Facture $factures)
+    {
+        $this->factures[] = $factures;
+
+        return $this;
+    }
+
+    /**
+     * Remove factures
+     *
+     * @param \JDJ\ComptaBundle\Entity\Facture $factures
+     */
+    public function removeFacture(\JDJ\ComptaBundle\Entity\Facture $factures)
+    {
+        $this->factures->removeElement($factures);
+    }
+
+    /**
+     * Get factures
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFactures()
+    {
+        return $this->factures;
     }
 }

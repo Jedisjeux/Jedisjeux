@@ -1,0 +1,47 @@
+{% extends "JDJWebBundle::layout.html.twig" %}
+
+{% block body -%}
+    <h1>Liste des clients</h1>
+
+    <ul>
+        <li>
+            <a class="button add" href="{{ path('client_new') }}">
+                Créer un nouveau client
+            </a>
+        </li>
+    </ul>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Societe</th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('client_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.societe }}</td>
+                <td>{{ entity.nom }}</td>
+                <td>{{ entity.email }}</td>
+                <td class="small-3">
+                <ul class="inline-list">
+                    <li>
+                        <a class="small button" href="{{ path('client_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a class="small button" href="{{ path('client_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+    {% endblock %}

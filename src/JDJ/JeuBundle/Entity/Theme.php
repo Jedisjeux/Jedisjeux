@@ -19,6 +19,18 @@ class Theme
      */
     private $libelle;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $jeux;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->jeux = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -51,5 +63,38 @@ class Theme
     public function getLibelle()
     {
         return $this->libelle;
+    }
+
+    /**
+     * Add jeux
+     *
+     * @param \JDJ\JeuBundle\Entity\Jeu $jeux
+     * @return Theme
+     */
+    public function addJeux(\JDJ\JeuBundle\Entity\Jeu $jeux)
+    {
+        $this->jeux[] = $jeux;
+
+        return $this;
+    }
+
+    /**
+     * Remove jeux
+     *
+     * @param \JDJ\JeuBundle\Entity\Jeu $jeux
+     */
+    public function removeJeux(\JDJ\JeuBundle\Entity\Jeu $jeux)
+    {
+        $this->jeux->removeElement($jeux);
+    }
+
+    /**
+     * Get jeux
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getJeux()
+    {
+        return $this->jeux;
     }
 }

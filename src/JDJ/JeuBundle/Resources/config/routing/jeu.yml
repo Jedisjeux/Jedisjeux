@@ -1,0 +1,30 @@
+jeu:
+    pattern:  /
+    defaults: { _controller: "JDJJeuBundle:Jeu:index" }
+
+jeu_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "JDJJeuBundle:Jeu:show" }
+
+jeu_new:
+    pattern:  /new
+    defaults: { _controller: "JDJJeuBundle:Jeu:new" }
+
+jeu_create:
+    pattern:  /create
+    defaults: { _controller: "JDJJeuBundle:Jeu:create" }
+    requirements: { _method: post }
+
+jeu_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "JDJJeuBundle:Jeu:edit" }
+
+jeu_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "JDJJeuBundle:Jeu:update" }
+    requirements: { _method: post|put }
+
+jeu_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "JDJJeuBundle:Jeu:delete" }
+    requirements: { _method: post|delete }

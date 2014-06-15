@@ -1,81 +1,39 @@
 JDJ\ComptaBundle\Entity\Facture:
-    type: entity
-    table: cpta_facture
-    indexes:
-        fk_cpta_facture_cpta_client1_idx:
-            columns:
-                - idClient
-        fk_cpta_facture_cpta_modeReglement1_idx:
-            columns:
-                - idModeReglement
+  type: entity
+  table: cpta_facture
+  id:
     id:
-        id:
-            type: integer
-            nullable: false
-            unsigned: true
-            comment: ''
-            id: true
-            generator:
-                strategy: IDENTITY
-    fields:
-        montant:
-            type: decimal
-            nullable: false
-            precision: 6
-            scale: 2
-            comment: ''
-        datecreation:
-            type: datetime
-            nullable: false
-            comment: ''
-            default: CURRENT_TIMESTAMP
-            column: dateCreation
-        datepaiement:
-            type: date
-            nullable: false
-            comment: ''
-            column: datePaiement
-    manyToOne:
-        idclient:
-            targetEntity: CptaClient
-            cascade: {  }
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                idClient:
-                    referencedColumnName: id
-            orphanRemoval: false
-        idmodereglement:
-            targetEntity: ModeReglement
-            cascade: {  }
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                idModeReglement:
-                    referencedColumnName: id
-            orphanRemoval: false
-    manyToMany:
-        idtypeadresse:
-            targetEntity: CptaTypeadresse
-            cascade: {  }
-            mappedBy: null
-            inversedBy: idfacture
-            joinTable:
-                name: cpta_adressefacture
-                joinColumns:
-                    -
-                        name: idFacture
-                        referencedColumnName: id
-                inverseJoinColumns:
-                    -
-                        name: idTypeAdresse
-                        referencedColumnName: id
-            orderBy: null
-        produit:
-            targetEntity: Produit
-            cascade: {  }
-            mappedBy: idfacture
-            inversedBy: null
-            joinTable: null
-            orderBy: null
-    lifecycleCallbacks: {  }
+      type: integer
+      unsigned: true
+      generator:
+        strategy: IDENTITY
+  fields:
+    datePaiement:
+      type: datetime
+      nullable: false
+    montant:
+      type: decimal
+      precision: 6
+      scale: 2
+      nullable: false
+    dateCreation:
+      type: datetime
+      nullable: false
+      default: CURRENT_TIMESTAMP
+    datePaiement:
+      type: datetime
+      nullable: false
+  manyToOne:
+    client:
+      targetEntity: Client
+      mappedBy: facture
+      cascade: ["persist", "merge"]
+    modeReglement:
+      targetEntity: ModeReglement
+      mappedBy: facture
+      cascade: ["persist", "merge"]
+  oneToMany:
+    produits:
+      targetEntity: Produit
+      mappedBy: facture
+      cascade: ["persist", "merge"]

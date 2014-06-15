@@ -5,7 +5,7 @@ namespace JDJ\ComptaBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use JDJ\ComptaBundle\Entity\CptaModereglement;
+use JDJ\ComptaBundle\Entity\CptaModeReglement;
 use JDJ\ComptaBundle\Form\CptaModereglementType;
 
 /**
@@ -35,7 +35,7 @@ class CptaModereglementController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new CptaModereglement();
+        $entity = new CptaModeReglement();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -56,11 +56,11 @@ class CptaModereglementController extends Controller
     /**
     * Creates a form to create a CptaModereglement entity.
     *
-    * @param CptaModereglement $entity The entity
+    * @param CptaModeReglement $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createCreateForm(CptaModereglement $entity)
+    private function createCreateForm(CptaModeReglement $entity)
     {
         $form = $this->createForm(new CptaModereglementType(), $entity, array(
             'action' => $this->generateUrl('cptamodereglement_create'),
@@ -78,7 +78,7 @@ class CptaModereglementController extends Controller
      */
     public function newAction()
     {
-        $entity = new CptaModereglement();
+        $entity = new CptaModeReglement();
         $form   = $this->createCreateForm($entity);
 
         return $this->render('JDJComptaBundle:CptaModereglement:new.html.twig', array(
@@ -135,11 +135,11 @@ class CptaModereglementController extends Controller
     /**
     * Creates a form to edit a CptaModereglement entity.
     *
-    * @param CptaModereglement $entity The entity
+    * @param CptaModeReglement $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(CptaModereglement $entity)
+    private function createEditForm(CptaModeReglement $entity)
     {
         $form = $this->createForm(new CptaModereglementType(), $entity, array(
             'action' => $this->generateUrl('cptamodereglement_update', array('id' => $entity->getId())),

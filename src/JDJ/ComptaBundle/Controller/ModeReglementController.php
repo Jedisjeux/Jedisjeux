@@ -25,8 +25,14 @@ class ModeReglementController extends Controller
 
         $entities = $em->getRepository('JDJComptaBundle:ModeReglement')->findAll();
 
+        $deleteForms = array();
+        foreach ($entities as $entity) {
+            $deleteForms[$entity->getId()] = $this->createDeleteForm($entity->getId())->createView();
+        }
+
         return $this->render('JDJComptaBundle:ModeReglement:index.html.twig', array(
             'entities' => $entities,
+            'deleteForms' => $deleteForms,
         ));
     }
     /**
@@ -67,7 +73,7 @@ class ModeReglementController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Créer'));
 
         return $form;
     }
@@ -144,7 +150,7 @@ class ModeReglementController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => 'Modifier'));
 
         return $form;
     }

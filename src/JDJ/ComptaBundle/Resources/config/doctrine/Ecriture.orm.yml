@@ -1,0 +1,45 @@
+JDJ\ComptaBundle\Entity\Ecriture:
+  type: entity
+  table: cpta_ecriture
+  id:
+    id:
+      type: integer
+      unsigned: true
+      generator:
+        strategy: IDENTITY
+  fields:
+    libelle:
+      type: string
+      nullable: false
+      length: 100
+    montant:
+      type: decimal
+      nullable: false
+      precision: 6
+      scale: 2
+    dateEcriture:
+      type: datetime
+      nullable: false
+    dateCreation:
+      type: datetime
+      nullable: false
+      default: CURRENT_TIMESTAMP
+    factureFilename:
+      type: string
+      nullable: true
+      length: 50
+  manyToOne:
+    modeReglement:
+      targetEntity: ModeReglement
+      mappedBy: ecriture
+      cascade: ["persist", "merge"]
+    sens:
+      targetEntity: Sens
+      mappedBy: ecriture
+      cascade: ["persist", "merge"]
+  oneToOne:
+    facture:
+      targetEntity: Facture
+      joinColumn:
+        name: facture_id
+        referenceColumnName: id

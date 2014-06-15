@@ -1,6 +1,10 @@
 jdj_jeu_homepage:
-    pattern:  /hello/{name}
+    pattern:  /home
     defaults: { _controller: JDJJeuBundle:Default:index }
+
+jdj_jeu:
+    resource: "@JDJJeuBundle/Resources/config/routing/jeu.yml"
+    prefix:   /
 
 jdj_jeu_mecanisme:
     resource: "@JDJJeuBundle/Resources/config/routing/mecanisme.yml"

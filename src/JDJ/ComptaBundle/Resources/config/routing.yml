@@ -3,11 +3,11 @@ jdj_compta_homepage:
     defaults: { _controller: JDJComptaBundle:Default:index }
 
 jdj_compta_client:
-    resource: "@JDJComptaBundle/Resources/config/routing/cptaclient.yml"
+    resource: "@JDJComptaBundle/Resources/config/routing/client.yml"
     prefix:   /client
 
 jdj_compta_ecriture:
-    resource: "@JDJComptaBundle/Resources/config/routing/cptaecriture.yml"
+    resource: "@JDJComptaBundle/Resources/config/routing/ecriture.yml"
     prefix:   /ecriture
 
 jdj_compta_facture:
