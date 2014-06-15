@@ -21,21 +21,20 @@ class CptaClientController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
 
-       /* $deleteForms = array();
+        $em = $this->getDoctrine()->getManager();
+        $entities = $em->getRepository('JDJComptaBundle:CptaClient')->findAll();
+
+        $deleteForms = array();
         foreach ($entities as $entity) {
             $deleteForms[$entity->getId()] = $this->createDeleteForm($entity->getId())->createView();
+            var_dump($deleteForms);
+            exit;
         }
-
-
-       'deleteForms' => $deleteForms,
-       */
-
-        $entities = $em->getRepository('JDJComptaBundle:CptaClient')->findAll();
 
         return $this->render('JDJComptaBundle:CptaClient:index.html.twig', array(
             'entities' => $entities,
+            'deleteForms' => $deleteForms,
         ));
     }
     /**
@@ -44,6 +43,7 @@ class CptaClientController extends Controller
      */
     public function createAction(Request $request)
     {
+
         $entity = new CptaClient();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -56,7 +56,7 @@ class CptaClientController extends Controller
             return $this->redirect($this->generateUrl('cptaclient_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('JDJComptaBundle:CptaClient:new.html.twig', array(
+        return $this->render('JDJComptaBundle:CptaClient:edit.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -136,7 +136,7 @@ class CptaClientController extends Controller
 
         return $this->render('JDJComptaBundle:CptaClient:edit.html.twig', array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -187,7 +187,7 @@ class CptaClientController extends Controller
 
         return $this->render('JDJComptaBundle:CptaClient:edit.html.twig', array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }

@@ -25,8 +25,14 @@ class ClientController extends Controller
 
         $entities = $em->getRepository('JDJComptaBundle:Client')->findAll();
 
+        $deleteForms = array();
+        foreach ($entities as $entity) {
+            $deleteForms[$entity->getId()] = $this->createDeleteForm($entity->getId())->createView();
+        }
+
         return $this->render('JDJComptaBundle:Client:index.html.twig', array(
             'entities' => $entities,
+            'deleteForms' => $deleteForms,
         ));
     }
     /**
@@ -41,13 +47,14 @@ class ClientController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $entity->setDateCreation(new \DateTime('NOW'));
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('client_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('client'));
         }
 
-        return $this->render('JDJComptaBundle:Client:new.html.twig', array(
+        return $this->render('JDJComptaBundle:Client:edit.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -67,7 +74,7 @@ class ClientController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Créer'));
 
         return $form;
     }
@@ -81,7 +88,7 @@ class ClientController extends Controller
         $entity = new Client();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('JDJComptaBundle:Client:new.html.twig', array(
+        return $this->render('JDJComptaBundle:Client:edit.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -127,7 +134,7 @@ class ClientController extends Controller
 
         return $this->render('JDJComptaBundle:Client:edit.html.twig', array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -176,7 +183,7 @@ class ClientController extends Controller
 
         return $this->render('JDJComptaBundle:Client:edit.html.twig', array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
