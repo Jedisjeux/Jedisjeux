@@ -28,8 +28,6 @@ class CptaClientController extends Controller
         $deleteForms = array();
         foreach ($entities as $entity) {
             $deleteForms[$entity->getId()] = $this->createDeleteForm($entity->getId())->createView();
-            var_dump($deleteForms);
-            exit;
         }
 
         return $this->render('JDJComptaBundle:CptaClient:index.html.twig', array(
