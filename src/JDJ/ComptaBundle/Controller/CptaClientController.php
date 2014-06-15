@@ -23,6 +23,15 @@ class CptaClientController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+       /* $deleteForms = array();
+        foreach ($entities as $entity) {
+            $deleteForms[$entity->getId()] = $this->createDeleteForm($entity->getId())->createView();
+        }
+
+
+       'deleteForms' => $deleteForms,
+       */
+
         $entities = $em->getRepository('JDJComptaBundle:CptaClient')->findAll();
 
         return $this->render('JDJComptaBundle:CptaClient:index.html.twig', array(
@@ -168,10 +177,12 @@ class CptaClientController extends Controller
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
+
+
         if ($editForm->isValid()) {
             $em->flush();
             $request->getSession()->getFlashBag()->add('success', 'Vos modifications ont bien été enregistrées!');
-            return $this->redirect($this->generateUrl('cptaclient_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('cptaclient'));
         }
 
         return $this->render('JDJComptaBundle:CptaClient:edit.html.twig', array(
