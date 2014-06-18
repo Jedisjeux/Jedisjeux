@@ -333,4 +333,9 @@ class Jeu
     {
         return $this->themes;
     }
+
+    public function __toString()
+    {
+        return $this->getLibelle();
+    }
 }
