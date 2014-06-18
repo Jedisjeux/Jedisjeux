@@ -36,6 +36,11 @@
                     <li>
                         <a class="small button" href="{{ path('client_edit', { 'id': entity.id }) }}">edit</a>
                     </li>
+                    <li>
+                        {{ form_start(deleteForms[entity.id]) }}
+                        {{ form_widget(deleteForms[entity.id].submit, {'attr': {'class': 'small button'}, 'label': 'Supprimer'}) }}
+                        {{ form_end(deleteForms[entity.id]) }}
+                    </li>
                 </ul>
                 </td>
             </tr>

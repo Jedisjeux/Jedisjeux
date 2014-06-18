@@ -36,12 +36,20 @@
                     <li>
                         <a class="small button" href="{{ path('cptaclient_edit', { 'id': entity.id }) }}">edit</a>
                     </li>
+                    <li>
+                        {{ form_start(deleteForms[entity.id]) }}
+                        {{ form_widget(deleteForms[entity.id].submit, {'attr': {'class': 'tiny'}, 'label': 'Supprimer'}) }}
+                        {{ form_end(deleteForms[entity.id]) }}
+                    </li>
                 </ul>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+
+
+
 
 
     {% endblock %}

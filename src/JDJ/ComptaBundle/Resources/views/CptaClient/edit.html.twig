@@ -8,10 +8,11 @@
         </a>
     </div>
     <div class="row">
-        {{ form_start(edit_form) }}
-        {{ form_errors(edit_form) }}
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
 
-            <!-- Bloc date de création du client -->
+
+        <!-- Bloc date de création du client -->
             <fieldset>
                 <legend>Date de création</legend>
 
@@ -28,13 +29,13 @@
                 <div class="small-8">
                     <div class="row">
                         <div class="small-3 columns">
-                            <label for="right-label" class="left inline">{{ form_label(edit_form.societe) }}</label>
+                            <label for="right-label" class="left inline">{{ form_label(form.societe) }}</label>
                         </div>
                         <div class="error">
-                            {{ form_errors(edit_form.societe) }}
+                            {{ form_errors(form.societe) }}
                         </div>
                         <div class="small-9 columns">
-                            {{ form_widget(edit_form.societe) }}
+                            {{ form_widget(form.societe) }}
                         </div>
                     </div>
                 </div>
@@ -42,13 +43,13 @@
                 <div class="small-8">
                     <div class="row">
                         <div class="small-3 columns">
-                            <label for="right-label" class="left inline">{{ form_label(edit_form.nom) }}</label>
+                            <label for="right-label" class="left inline">{{ form_label(form.nom) }}</label>
                         </div>
                         <div class="error">
-                            {{ form_errors(edit_form.nom) }}
+                            {{ form_errors(form.nom) }}
                         </div>
                         <div class="small-9 columns">
-                            {{ form_widget(edit_form.nom) }}
+                            {{ form_widget(form.nom) }}
                         </div>
                     </div>
                 </div>
@@ -56,13 +57,13 @@
                 <div class="small-8">
                     <div class="row">
                         <div class="small-3 columns">
-                            <label for="right-label" class="left inline">{{ form_label(edit_form.email) }}</label>
+                            <label for="right-label" class="left inline">{{ form_label(form.email) }}</label>
                         </div>
                         <div class="error">
-                            {{ form_errors(edit_form.email) }}
+                            {{ form_errors(form.email) }}
                         </div>
                         <div class="small-9 columns">
-                            {{ form_widget(edit_form.email) }}
+                            {{ form_widget(form.email) }}
                         </div>
                     </div>
                 </div>
@@ -76,13 +77,13 @@
                 <div class="small-8">
                     <div class="row">
                         <div class="small-3 columns">
-                            <label for="right-label" class="left inline">{{ form_label(edit_form.rue) }}</label>
+                            <label for="right-label" class="left inline">{{ form_label(form.rue) }}</label>
                         </div>
                         <div class="error">
-                            {{ form_errors(edit_form.rue) }}
+                            {{ form_errors(form.rue) }}
                         </div>
                         <div class="small-9 columns">
-                            {{ form_widget(edit_form.rue) }}
+                            {{ form_widget(form.rue) }}
                         </div>
                     </div>
                 </div>
@@ -90,13 +91,13 @@
                 <div class="small-8">
                     <div class="row">
                         <div class="small-3 columns">
-                            <label for="right-label" class="left inline">{{ form_label(edit_form.complement) }}</label>
+                            <label for="right-label" class="left inline">{{ form_label(form.complement) }}</label>
                         </div>
                         <div class="error">
-                            {{ form_errors(edit_form.complement) }}
+                            {{ form_errors(form.complement) }}
                         </div>
                         <div class="small-9 columns">
-                            {{ form_widget(edit_form.complement) }}
+                            {{ form_widget(form.complement) }}
                         </div>
                     </div>
                 </div>
@@ -104,13 +105,13 @@
                 <div class="small-8">
                     <div class="row">
                         <div class="small-3 columns">
-                            <label for="right-label" class="left inline">{{ form_label(edit_form.codepostal) }}</label>
+                            <label for="right-label" class="left inline">{{ form_label(form.codepostal) }}</label>
                         </div>
                         <div class="error">
-                            {{ form_errors(edit_form.codepostal) }}
+                            {{ form_errors(form.codepostal) }}
                         </div>
                         <div class="small-9 columns">
-                            {{ form_widget(edit_form.codepostal) }}
+                            {{ form_widget(form.codepostal) }}
                         </div>
                     </div>
                 </div>
@@ -118,28 +119,23 @@
                 <div class="small-8">
                     <div class="row">
                         <div class="small-3 columns">
-                            <label for="right-label" class="left inline">{{ form_label(edit_form.ville) }}</label>
+                            <label for="right-label" class="left inline">{{ form_label(form.ville) }}</label>
                         </div>
                         <div class="error">
-                            {{ form_errors(edit_form.ville) }}
+                            {{ form_errors(form.ville) }}
                         </div>
                         <div class="small-9 columns">
-                            {{ form_widget(edit_form.ville) }}
+                            {{ form_widget(form.ville) }}
                         </div>
                     </div>
                 </div>
 
             </fieldset>
 
-        {{ form_widget(edit_form._token) }}
-        {{ form_widget(edit_form.submit) }}
+        {{ form_widget(form._token) }}
+        {{ form_widget(form.submit) }}
     </div>
     </form>
 
-    <div class="row">
-        <div class="right inline">
-            {{ form(delete_form) }}
-        </div>
-    </div>
 
 {% endblock %}
