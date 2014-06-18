@@ -18,7 +18,7 @@
 </head>
 <body>
 
-{% include "JDJWebBundle::header.html.twig" %}
+{% include "JDJWebBundle:layout:header.html.twig" %}
 
 <div class="row">
     <div class="large-12 columns" role="content">
@@ -27,17 +27,20 @@
     </div>
 </div>
 
-{% include "JDJWebBundle::footer.html.twig" %}
+{% include "JDJWebBundle:layout:footer.html.twig" %}
 
-
+{% block javascript %}
     {% javascripts
         '@JDJFoundationBundle/Resources/public/bower_components/jquery/dist/jquery.min.js'
         '@JDJFoundationBundle/Resources/public/bower_components/foundation/js/foundation.min.js'
+        '@JDJFoundationBundle/Resources/public/bower_components/foundation/js/foundation/foundation.tab.js'
         '@JDJFoundationBundle/Resources/public/js/*'
         '@JDJFoundationBundle/Resources/public/bower_components/modernizr/modernizr.js'
     %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
+{% endblock %}
+
 </body>
 </html>
 

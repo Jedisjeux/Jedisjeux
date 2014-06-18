@@ -1,36 +1,62 @@
 {% extends "JDJWebBundle::layout.html.twig" %}
+{# synthaxe pour importer toutes les macros #}
+{#{% import "JDJJeuBundle:Jeu:macros.html.twig" as macros %}#}
+{# synthaxe pour importer une macro spécifique #}
+{% from "JDJJeuBundle:Jeu:macros.html.twig" import joueurCount %}
 
 {% block body -%}
 
 
     <div class="row">
         <div class="medium-4 columns">
-            <img src="http://www.jedisjeux.net/img/800/rokoko-49-1375739818.jpg" />
+            <img src="http://www.jedisjeux.net/img/800/rokoko-49-1375739818.jpg"/>
         </div>
         <div class="medium-8 columns">
             <h1>{{ jeu.libelle }}</h1>
 
-            {% if jeu.ageMin %}
-                A partir de {{ jeu.ageMin }} ans
-            {% endif %}
+            <ul>
+                {% if jeu.ageMin %}
+                    <li>A partir de {{ jeu.ageMin }} ans</li>
+                {% endif %}
+
+                {% if jeu.joueurMin or jeu.joueurMax %}
+                    <li>
+                        {{ joueurCount(jeu) }}
+                    </li>
+                {% endif %}
+
+                {{ jeu.mecanismes|join(", ") }}
+                {#{% for mecanisme in jeu.mecanismes %}
+                    {{ mecanisme.libelle }}
+                {% endfor %}#}
+
+                {{ jeu.themes|join(", ") }}
+
+            </ul>
         </div>
     </div>
 
 
-    <div class="section-container auto" data-section>
-        <section class="active">
-            <p class="title" data-section-title><a href="#panel1">Présentation</a></p>
-            <div class="content" data-section-content>
-                {% include "JDJJeuBundle:Jeu:onglet-presentation.html.twig" with {'jeu': jeu} %}
-            </div>
-        </section>
-        <section>
-            <p class="title" data-section-title><a href="#panel2">Prix</a></p>
-            <div class="content" data-section-content>
-                <p>Content of section 2.</p>
-            </div>
-        </section>
+    <ul class="tabs" data-tab>
+        <li class="tab-title active"><a href="#panel2-1">Présentation</a></li>
+        <li class="tab-title"><a href="#panel2-2">Prix</a></li>
+        <li class="tab-title"><a href="#panel2-3">Tab 3</a></li>
+        <li class="tab-title"><a href="#panel2-4">Tab 4</a></li>
+    </ul>
+    <div class="tabs-content">
+        <div class="content active"
+             id="panel2-1">{% include "JDJJeuBundle:Jeu:onglet/presentation.html.twig" with {'jeu': jeu} %}</div>
+        <div class="content" id="panel2-2"><p>Second panel content goes here...</p></div>
+        <div class="content" id="panel2-3"><p>Third panel content goes here...</p></div>
+        <div class="content" id="panel2-4"><p>Fourth panel content goes here...</p></div>
     </div>
 
+{% endblock %}
 
+{% block javascript %}
+    {{ parent() }}
+    <script>
+        console.log("test");
+        $(document).foundation({ tab: { callback : function (tab) { console.log(tab); } } });
+    </script>
 {% endblock %}

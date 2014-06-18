@@ -16,6 +16,14 @@ JDJ\JeuBundle\Entity\Jeu:
       type: integer
       nullable: true
       unsigned: true
+    joueurMin:
+      type: integer
+      nullable: true
+      unsigned: true
+    joueurMax:
+      type: integer
+      nullable: true
+      unsigned: true
     intro:
       type: text
       nullable: true
@@ -31,7 +39,7 @@ JDJ\JeuBundle\Entity\Jeu:
   manyToMany:
     mecanismes:
       targetEntity: Mecanisme
-      mappedBy: jeu
+      mappedBy: jeux
     themes:
       targetEntity: Theme
-      mappedBy: jeu
+      mappedBy: jeux

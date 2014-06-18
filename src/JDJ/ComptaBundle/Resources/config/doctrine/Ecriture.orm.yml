@@ -31,11 +31,11 @@ JDJ\ComptaBundle\Entity\Ecriture:
   manyToOne:
     modeReglement:
       targetEntity: ModeReglement
-      mappedBy: ecriture
+      inversedBy: ecritures
       cascade: ["persist", "merge"]
     sens:
       targetEntity: Sens
-      mappedBy: ecriture
+      inversedBy: ecriture
       cascade: ["persist", "merge"]
   oneToOne:
     facture:

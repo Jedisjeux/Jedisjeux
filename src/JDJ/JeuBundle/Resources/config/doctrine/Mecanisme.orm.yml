@@ -15,6 +15,7 @@ JDJ\JeuBundle\Entity\Mecanisme:
   manyToMany:
     jeux:
       targetEntity: Jeu
+      inversedBy: mecanismes
       cascade: ["persist"]
       joinTable:
         name: jdj_mecanisme_jeu

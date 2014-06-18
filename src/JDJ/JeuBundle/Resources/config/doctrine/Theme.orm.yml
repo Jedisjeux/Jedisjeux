@@ -15,6 +15,7 @@ JDJ\JeuBundle\Entity\Theme:
   manyToMany:
     jeux:
       targetEntity: Jeu
+      inversedBy: themes
       cascade: ["persist"]
       joinTable:
         name: jdj_theme_jeu

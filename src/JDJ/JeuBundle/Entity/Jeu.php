@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Jeu
 {
+
     /**
      * @var integer
      */
@@ -23,6 +24,16 @@ class Jeu
      * @var integer
      */
     private $ageMin;
+
+    /**
+     * @var integer
+     */
+    private $joueurMin;
+
+    /**
+     * @var integer
+     */
+    private $joueurMax;
 
     /**
      * @var string
@@ -117,6 +128,52 @@ class Jeu
     public function getAgeMin()
     {
         return $this->ageMin;
+    }
+
+    /**
+     * Set joueurMin
+     *
+     * @param integer $joueurMin
+     * @return Jeu
+     */
+    public function setJoueurMin($joueurMin)
+    {
+        $this->joueurMin = $joueurMin;
+
+        return $this;
+    }
+
+    /**
+     * Get joueurMin
+     *
+     * @return integer 
+     */
+    public function getJoueurMin()
+    {
+        return $this->joueurMin;
+    }
+
+    /**
+     * Set joueurMax
+     *
+     * @param integer $joueurMax
+     * @return Jeu
+     */
+    public function setJoueurMax($joueurMax)
+    {
+        $this->joueurMax = $joueurMax;
+
+        return $this;
+    }
+
+    /**
+     * Get joueurMax
+     *
+     * @return integer 
+     */
+    public function getJoueurMax()
+    {
+        return $this->joueurMax;
     }
 
     /**

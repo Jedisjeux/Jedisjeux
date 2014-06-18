@@ -26,14 +26,14 @@ JDJ\ComptaBundle\Entity\Facture:
   manyToOne:
     client:
       targetEntity: Client
-      mappedBy: facture
+      inversedBy: factures
       cascade: ["persist", "merge"]
     modeReglement:
       targetEntity: ModeReglement
       mappedBy: facture
       cascade: ["persist", "merge"]
   oneToMany:
-    produits:
-      targetEntity: Produit
+    factureProduits:
+      targetEntity: FactureProduit
       mappedBy: facture
       cascade: ["persist", "merge"]
