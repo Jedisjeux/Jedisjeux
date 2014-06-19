@@ -4,6 +4,6 @@
   "private": "true",
   "dependencies": {
     "foundation": "zurb/bower-foundation",
-    "foundation": "5.2.3"
+    "foundation": "5.3"
   }
 }
