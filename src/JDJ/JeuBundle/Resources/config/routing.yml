@@ -17,3 +17,7 @@ jdj_jeu_theme:
 jdj_jeu_materiel:
     resource: "@JDJJeuBundle/Resources/config/routing/materiel.yml"
     prefix:   /materiel
+
+jdj_jeu_caracteristique:
+    resource: "@JDJJeuBundle/Resources/config/routing/caracteristique.yml"
+    prefix:   /caracteristique
