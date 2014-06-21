@@ -43,3 +43,7 @@ JDJ\JeuBundle\Entity\Jeu:
     themes:
       targetEntity: Theme
       mappedBy: jeux
+  oneToMany:
+    jeuCaracteristiques:
+      targetEntity: JeuCaracteristique
+      mappedBy: jeu

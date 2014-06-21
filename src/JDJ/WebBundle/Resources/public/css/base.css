@@ -127,3 +127,13 @@ button:focus, button:active, a.button:focus, a.button:active {
 .top-bar ul li a:not(.button):hover {
   color: #88bd32 !important;
 }
+
+/**************************************************************/
+/*  	    		       ROW					              */
+/**************************************************************/
+/* line 149, ../sass/base.scss */
+.listing .image.crop {
+  height: 200px;
+  width: 100%;
+  overflow: hidden;
+}

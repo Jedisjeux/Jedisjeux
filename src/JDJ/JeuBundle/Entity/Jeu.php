@@ -338,4 +338,42 @@ class Jeu
     {
         return $this->getLibelle();
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $jeuCaracteristiques;
+
+
+    /**
+     * Add jeuCaracteristiques
+     *
+     * @param \JDJ\JeuBundle\Entity\JeuCaracteristique $jeuCaracteristiques
+     * @return Jeu
+     */
+    public function addJeuCaracteristique(\JDJ\JeuBundle\Entity\JeuCaracteristique $jeuCaracteristiques)
+    {
+        $this->jeuCaracteristiques[] = $jeuCaracteristiques;
+
+        return $this;
+    }
+
+    /**
+     * Remove jeuCaracteristiques
+     *
+     * @param \JDJ\JeuBundle\Entity\JeuCaracteristique $jeuCaracteristiques
+     */
+    public function removeJeuCaracteristique(\JDJ\JeuBundle\Entity\JeuCaracteristique $jeuCaracteristiques)
+    {
+        $this->jeuCaracteristiques->removeElement($jeuCaracteristiques);
+    }
+
+    /**
+     * Get jeuCaracteristiques
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getJeuCaracteristiques()
+    {
+        return $this->jeuCaracteristiques;
+    }
 }
