@@ -17,7 +17,11 @@
     {% endstylesheets %}
 </head>
 <body>
-
+{% for flashMessage in app.session.flashbag.get('notice') %}
+    <div class="flash-message">
+        <em>Notice</em>: {{ flashMessage }}
+    </div>
+{% endfor %}
 {% include "JDJWebBundle::header.html.twig" %}
 
 <div class="row">

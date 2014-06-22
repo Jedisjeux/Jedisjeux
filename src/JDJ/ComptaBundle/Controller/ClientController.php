@@ -19,7 +19,7 @@ class ClientController extends Controller
      * Lists all Client entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -29,7 +29,7 @@ class ClientController extends Controller
         foreach ($entities as $entity) {
             $deleteForms[$entity->getId()] = $this->createDeleteForm($entity->getId())->createView();
         }
-
+        $request->getSession()->getFlashBag()->add('success', 'Vos modifications ont bien été enregistrées!');
         return $this->render('JDJComptaBundle:Client:index.html.twig', array(
             'entities' => $entities,
             'deleteForms' => $deleteForms,
