@@ -47,3 +47,7 @@ JDJ\JeuBundle\Entity\Jeu:
     jeuCaracteristiques:
       targetEntity: JeuCaracteristique
       mappedBy: jeu
+  manyToOne:
+    statut:
+      targetEntity: JDJ\WebBundle\Entity\Statut
+      inversedBy: jeux

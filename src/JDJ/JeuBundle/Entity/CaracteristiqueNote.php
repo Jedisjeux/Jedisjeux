@@ -153,4 +153,9 @@ class CaracteristiqueNote
     {
         return $this->caracteristique;
     }
+
+    public function __toString()
+    {
+        return $this->getValeur()."/5 - ".$this->getLibelle();
+    }
 }

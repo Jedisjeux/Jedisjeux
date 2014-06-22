@@ -21,3 +21,7 @@ jdj_jeu_materiel:
 jdj_jeu_caracteristique:
     resource: "@JDJJeuBundle/Resources/config/routing/caracteristique.yml"
     prefix:   /caracteristique
+
+jdj_jeu_caracteristiqueNote:
+    resource: "@JDJJeuBundle/Resources/config/routing/caracteristiqueNote.yml"
+    prefix:   /caracteristiqueNote

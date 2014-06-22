@@ -1,11 +1,11 @@
 {% extends "JDJWebBundle::layout.html.twig" %}
 
 {% block body -%}
-    <h1>Liste des Caractéristiques</h1>
+    <h1>Liste des valeurs de Caractéristiques</h1>
 
     <ul>
         <li>
-            <a class="button" href="{{ path('caracteristique_new') }}">
+            <a class="button" href="{{ path('caracteristiqueNote_new') }}">
                 Créer une caractéristique
             </a>
         </li>
@@ -23,13 +23,13 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('caracteristique_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td><a href="{{ path('caracteristiqueNote_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.libelle }}</td>
                 <td>
                     <ul>
-                        {% for caracteristiqueNote in entity.caracteristiqueNotes %}
+                        {% for caracteristiqueNoteNote in entity.caracteristiqueNoteNotes %}
                             <li>
-                                <a href="{{ path('caracteristiqueNote_edit', { 'id': caracteristiqueNote.id }) }}">{{ caracteristiqueNote }}</a>
+                                <a href="{{ path('caracteristiqueNote_edit', { 'id': entity.id }) }}">{{ caracteristiqueNoteNote }}</a>
                             </li>
                         {% endfor %}
                     </ul>
@@ -37,7 +37,7 @@
                 <td class="small-4">
                 <ul class="inline-list">
                     <li>
-                        <a class="tiny button" href="{{ path('caracteristique_edit', { 'id': entity.id }) }}">Modifier</a>
+                        <a class="tiny button" href="{{ path('caracteristiqueNote_edit', { 'id': entity.id }) }}">Modifier</a>
                     </li>
                     <li>
                         {{ form_start(deleteForms[entity.id]) }}

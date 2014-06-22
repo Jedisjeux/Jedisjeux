@@ -376,4 +376,32 @@ class Jeu
     {
         return $this->jeuCaracteristiques;
     }
+    /**
+     * @var \JDJ\JeuBundle\Entity\Statut
+     */
+    private $statut;
+
+
+    /**
+     * Set statut
+     *
+     * @param \JDJ\JeuBundle\Entity\Statut $statut
+     * @return Jeu
+     */
+    public function setStatut(\JDJ\JeuBundle\Entity\Statut $statut = null)
+    {
+        $this->statut = $statut;
+
+        return $this;
+    }
+
+    /**
+     * Get statut
+     *
+     * @return \JDJ\JeuBundle\Entity\Statut 
+     */
+    public function getStatut()
+    {
+        return $this->statut;
+    }
 }
