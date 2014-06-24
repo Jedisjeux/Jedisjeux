@@ -1,13 +1,13 @@
 <?php
 
-namespace JDJ\JeuBundle\Entity;
+namespace JDJ\WebBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Theme
+ * Statut
  */
-class Theme
+class Statut
 {
     /**
      * @var integer
@@ -19,18 +19,6 @@ class Theme
      */
     private $libelle;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $jeux;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->jeux = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Get id
@@ -46,7 +34,7 @@ class Theme
      * Set libelle
      *
      * @param string $libelle
-     * @return Theme
+     * @return Statut
      */
     public function setLibelle($libelle)
     {
@@ -64,12 +52,52 @@ class Theme
     {
         return $this->libelle;
     }
+    /**
+     * @var \JDJ\JeuBundle\Entity\Statut
+     */
+    private $statutJeu;
+
+
+    /**
+     * Set statutJeu
+     *
+     * @param \JDJ\JeuBundle\Entity\Statut $statutJeu
+     * @return Statut
+     */
+    public function setStatutJeu(\JDJ\JeuBundle\Entity\Statut $statutJeu = null)
+    {
+        $this->statutJeu = $statutJeu;
+
+        return $this;
+    }
+
+    /**
+     * Get statutJeu
+     *
+     * @return \JDJ\JeuBundle\Entity\Statut 
+     */
+    public function getStatutJeu()
+    {
+        return $this->statutJeu;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $jeux;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->jeux = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Add jeux
      *
      * @param \JDJ\JeuBundle\Entity\Jeu $jeux
-     * @return Theme
+     * @return Statut
      */
     public function addJeux(\JDJ\JeuBundle\Entity\Jeu $jeux)
     {
@@ -96,10 +124,5 @@ class Theme
     public function getJeux()
     {
         return $this->jeux;
-    }
-
-    public function __toString()
-    {
-        return $this->getLibelle();
     }
 }

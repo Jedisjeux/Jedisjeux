@@ -18,9 +18,9 @@ JDJ\ComptaBundle\Entity\FactureProduit:
   manyToOne:
     facture:
       targetEntity: Facture
-      mappedBy: factureProduit
+      inversedBy: factureProduits
       cascade: ["persist", "merge"]
     produit:
       targetEntity: Produit
-      mappedBy: factureProduit
+      inversedBy: factureProduits
       cascade: ["persist", "merge"]

@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Jeu
 {
+
     /**
      * @var integer
      */
@@ -23,6 +24,16 @@ class Jeu
      * @var integer
      */
     private $ageMin;
+
+    /**
+     * @var integer
+     */
+    private $joueurMin;
+
+    /**
+     * @var integer
+     */
+    private $joueurMax;
 
     /**
      * @var string
@@ -117,6 +128,52 @@ class Jeu
     public function getAgeMin()
     {
         return $this->ageMin;
+    }
+
+    /**
+     * Set joueurMin
+     *
+     * @param integer $joueurMin
+     * @return Jeu
+     */
+    public function setJoueurMin($joueurMin)
+    {
+        $this->joueurMin = $joueurMin;
+
+        return $this;
+    }
+
+    /**
+     * Get joueurMin
+     *
+     * @return integer 
+     */
+    public function getJoueurMin()
+    {
+        return $this->joueurMin;
+    }
+
+    /**
+     * Set joueurMax
+     *
+     * @param integer $joueurMax
+     * @return Jeu
+     */
+    public function setJoueurMax($joueurMax)
+    {
+        $this->joueurMax = $joueurMax;
+
+        return $this;
+    }
+
+    /**
+     * Get joueurMax
+     *
+     * @return integer 
+     */
+    public function getJoueurMax()
+    {
+        return $this->joueurMax;
     }
 
     /**
@@ -275,5 +332,76 @@ class Jeu
     public function getThemes()
     {
         return $this->themes;
+    }
+
+    public function __toString()
+    {
+        return $this->getLibelle();
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $jeuCaracteristiques;
+
+
+    /**
+     * Add jeuCaracteristiques
+     *
+     * @param \JDJ\JeuBundle\Entity\JeuCaracteristique $jeuCaracteristiques
+     * @return Jeu
+     */
+    public function addJeuCaracteristique(\JDJ\JeuBundle\Entity\JeuCaracteristique $jeuCaracteristiques)
+    {
+        $this->jeuCaracteristiques[] = $jeuCaracteristiques;
+
+        return $this;
+    }
+
+    /**
+     * Remove jeuCaracteristiques
+     *
+     * @param \JDJ\JeuBundle\Entity\JeuCaracteristique $jeuCaracteristiques
+     */
+    public function removeJeuCaracteristique(\JDJ\JeuBundle\Entity\JeuCaracteristique $jeuCaracteristiques)
+    {
+        $this->jeuCaracteristiques->removeElement($jeuCaracteristiques);
+    }
+
+    /**
+     * Get jeuCaracteristiques
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getJeuCaracteristiques()
+    {
+        return $this->jeuCaracteristiques;
+    }
+    /**
+     * @var \JDJ\JeuBundle\Entity\Statut
+     */
+    private $statut;
+
+
+    /**
+     * Set statut
+     *
+     * @param \JDJ\JeuBundle\Entity\Statut $statut
+     * @return Jeu
+     */
+    public function setStatut(\JDJ\JeuBundle\Entity\Statut $statut = null)
+    {
+        $this->statut = $statut;
+
+        return $this;
+    }
+
+    /**
+     * Get statut
+     *
+     * @return \JDJ\JeuBundle\Entity\Statut 
+     */
+    public function getStatut()
+    {
+        return $this->statut;
     }
 }

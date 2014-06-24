@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Jeu
 {
+
     /**
      * @var integer
      */
@@ -27,7 +28,32 @@ class Jeu
     /**
      * @var integer
      */
-    private $ageMax;
+    private $joueurMin;
+
+    /**
+     * @var integer
+     */
+    private $joueurMax;
+
+    /**
+     * @var string
+     */
+    private $intro;
+
+    /**
+     * @var string
+     */
+    private $materiel;
+
+    /**
+     * @var string
+     */
+    private $but;
+
+    /**
+     * @var string
+     */
+    private $description;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -105,26 +131,141 @@ class Jeu
     }
 
     /**
-     * Set ageMax
+     * Set joueurMin
      *
-     * @param integer $ageMax
+     * @param integer $joueurMin
      * @return Jeu
      */
-    public function setAgeMax($ageMax)
+    public function setJoueurMin($joueurMin)
     {
-        $this->ageMax = $ageMax;
+        $this->joueurMin = $joueurMin;
 
         return $this;
     }
 
     /**
-     * Get ageMax
+     * Get joueurMin
      *
      * @return integer 
      */
-    public function getAgeMax()
+    public function getJoueurMin()
     {
-        return $this->ageMax;
+        return $this->joueurMin;
+    }
+
+    /**
+     * Set joueurMax
+     *
+     * @param integer $joueurMax
+     * @return Jeu
+     */
+    public function setJoueurMax($joueurMax)
+    {
+        $this->joueurMax = $joueurMax;
+
+        return $this;
+    }
+
+    /**
+     * Get joueurMax
+     *
+     * @return integer 
+     */
+    public function getJoueurMax()
+    {
+        return $this->joueurMax;
+    }
+
+    /**
+     * Set intro
+     *
+     * @param string $intro
+     * @return Jeu
+     */
+    public function setIntro($intro)
+    {
+        $this->intro = $intro;
+
+        return $this;
+    }
+
+    /**
+     * Get intro
+     *
+     * @return string 
+     */
+    public function getIntro()
+    {
+        return $this->intro;
+    }
+
+    /**
+     * Set materiel
+     *
+     * @param string $materiel
+     * @return Jeu
+     */
+    public function setMateriel($materiel)
+    {
+        $this->materiel = $materiel;
+
+        return $this;
+    }
+
+    /**
+     * Get materiel
+     *
+     * @return string 
+     */
+    public function getMateriel()
+    {
+        return $this->materiel;
+    }
+
+    /**
+     * Set but
+     *
+     * @param string $but
+     * @return Jeu
+     */
+    public function setBut($but)
+    {
+        $this->but = $but;
+
+        return $this;
+    }
+
+    /**
+     * Get but
+     *
+     * @return string 
+     */
+    public function getBut()
+    {
+        return $this->but;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Jeu
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 
     /**
@@ -191,5 +332,48 @@ class Jeu
     public function getThemes()
     {
         return $this->themes;
+    }
+
+    public function __toString()
+    {
+        return $this->getLibelle();
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $jeuCaracteristiques;
+
+
+    /**
+     * Add jeuCaracteristiques
+     *
+     * @param \JDJ\JeuBundle\Entity\JeuCaracteristique $jeuCaracteristiques
+     * @return Jeu
+     */
+    public function addJeuCaracteristique(\JDJ\JeuBundle\Entity\JeuCaracteristique $jeuCaracteristiques)
+    {
+        $this->jeuCaracteristiques[] = $jeuCaracteristiques;
+
+        return $this;
+    }
+
+    /**
+     * Remove jeuCaracteristiques
+     *
+     * @param \JDJ\JeuBundle\Entity\JeuCaracteristique $jeuCaracteristiques
+     */
+    public function removeJeuCaracteristique(\JDJ\JeuBundle\Entity\JeuCaracteristique $jeuCaracteristiques)
+    {
+        $this->jeuCaracteristiques->removeElement($jeuCaracteristiques);
+    }
+
+    /**
+     * Get jeuCaracteristiques
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getJeuCaracteristiques()
+    {
+        return $this->jeuCaracteristiques;
     }
 }

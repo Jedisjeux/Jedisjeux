@@ -97,4 +97,10 @@ class Mecanisme
     {
         return $this->jeux;
     }
+
+    public function __toString()
+    {
+        return $this->getLibelle();
+    }
+
 }

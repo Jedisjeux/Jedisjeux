@@ -3,34 +3,35 @@
 {% block body -%}
 
 
-    <div class="row">
-        <div class="medium-4 columns">
-            <img src="http://www.jedisjeux.net/img/800/rokoko-49-1375739818.jpg" />
-        </div>
-        <div class="medium-8 columns">
-            <h1>{{ jeu.libelle }}</h1>
+    {% include "JDJJeuBundle:Jeu:header.html.twig" with {'jeu': jeu} %}
 
-            {% if jeu.ageMin %}
-                A partir de {{ jeu.ageMin }} ans
-            {% endif %}
-        </div>
+
+    <ul class="tabs" data-tab>
+        <li class="tab-title active"><a href="#panel2-1">Présentation</a></li>
+        <li class="tab-title"><a href="#panel2-2">Prix</a></li>
+        <li class="tab-title"><a href="#articles">Articles</a></li>
+        <li class="tab-title"><a href="#photos">Photos</a></li>
+        <li class="tab-title"><a href="#parties">Parties</a></li>
+        <li class="tab-title"><a href="#avis">Avis</a></li>
+        <li class="tab-title"><a href="#stats">Stats</a></li>
+    </ul>
+    <div class="tabs-content">
+        <div class="content active"
+             id="panel2-1">{% include "JDJJeuBundle:Jeu:onglet/presentation.html.twig" with {'jeu': jeu} %}</div>
+        <div class="content" id="panel2-2"><p>Second panel content goes here...</p></div>
+        <div class="content" id="articles"><p>Third panel content goes here...</p></div>
+        <div class="content" id="photos"><p>Photos go here...</p></div>
+        <div class="content" id="parties"><p>Fifth panel content go here...</p></div>
+        <div class="content" id="avis"><p>Avis goe here...</p></div>
+        <div class="content" id="stats"><p>Stats goe here...</p></div>
     </div>
 
+{% endblock %}
 
-    <div class="section-container auto" data-section>
-        <section class="active">
-            <p class="title" data-section-title><a href="#panel1">Présentation</a></p>
-            <div class="content" data-section-content>
-                {% include "JDJJeuBundle:Jeu:onglet-presentation.html.twig" with {'jeu': jeu} %}
-            </div>
-        </section>
-        <section>
-            <p class="title" data-section-title><a href="#panel2">Prix</a></p>
-            <div class="content" data-section-content>
-                <p>Content of section 2.</p>
-            </div>
-        </section>
-    </div>
-
-
+{% block javascript %}
+    {{ parent() }}
+    <script>
+        console.log("test");
+        $(document).foundation({ tab: { callback : function (tab) { console.log(tab); } } });
+    </script>
 {% endblock %}

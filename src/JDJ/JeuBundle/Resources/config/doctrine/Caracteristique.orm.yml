@@ -1,0 +1,21 @@
+JDJ\JeuBundle\Entity\Caracteristique:
+  type: entity
+  table: jdj_caracteristique
+  id:
+    id:
+      type: integer
+      unsigned: true
+      generator:
+        strategy: IDENTITY
+  fields:
+    libelle:
+      type: string
+      nullable: false
+      length: 50
+  oneToMany:
+    jeuCaracteristiques:
+      targetEntity: JeuCaracteristique
+      mappedBy: caracteristique
+    caracteristiqueNotes:
+      targetEntity: CaracteristiqueNote
+      mappedBy: caracteristique

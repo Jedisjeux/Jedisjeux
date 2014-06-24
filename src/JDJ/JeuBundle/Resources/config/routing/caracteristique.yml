@@ -1,0 +1,30 @@
+caracteristique:
+    pattern:  /
+    defaults: { _controller: "JDJJeuBundle:Caracteristique:index" }
+
+caracteristique_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "JDJJeuBundle:Caracteristique:show" }
+
+caracteristique_new:
+    pattern:  /new
+    defaults: { _controller: "JDJJeuBundle:Caracteristique:new" }
+
+caracteristique_create:
+    pattern:  /create
+    defaults: { _controller: "JDJJeuBundle:Caracteristique:create" }
+    requirements: { _method: post }
+
+caracteristique_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "JDJJeuBundle:Caracteristique:edit" }
+
+caracteristique_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "JDJJeuBundle:Caracteristique:update" }
+    requirements: { _method: post|put }
+
+caracteristique_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "JDJJeuBundle:Caracteristique:delete" }
+    requirements: { _method: post|delete }

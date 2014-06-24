@@ -1,0 +1,17 @@
+JDJ\JeuBundle\Entity\Statut:
+  type: entity
+  table: jdj_statut_jeu
+  id:
+    statut_id:
+      type: integer
+      unsigned: true
+  fields:
+    ordre:
+      type: integer
+      nullable: false
+      unsigned: true
+  oneToOne:
+    statut:
+      targetEntity: JDJ\WebBundle\Entity\Statut
+      inversedBy: statutJeu
+      cascade: ["persist"]
