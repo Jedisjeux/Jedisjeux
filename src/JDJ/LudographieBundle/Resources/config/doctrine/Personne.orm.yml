@@ -1,0 +1,46 @@
+JDJ\LudographieBundle\Entity\Personne:
+  type: entity
+  table: jdj_personne
+  id:
+    id:
+      type: integer
+      unsigned: true
+      generator:
+        strategy: IDENTITY
+  fields:
+    nom:
+      type: string
+      nullable: false
+      length: 50
+    prenom:
+      type: string
+      nullable: true
+      length: 50
+    siteWeb:
+      type: string
+      nullable: true
+      length: 200
+    description:
+      type: text
+      nullable: true
+    image:
+      type: string
+      nullable: true
+    slug:
+      type: string
+      length: 128
+      gedmo:
+        slug:
+          separator: -
+          style: default
+          fields:
+            - prenom
+            - nom
+  indexes:
+    search_idx:
+      columns: slug
+
+  manyToOne:
+    pays:
+      targetEntity: JDJ\WebBundle\Entity\Pays
+      inversedBy: personnes

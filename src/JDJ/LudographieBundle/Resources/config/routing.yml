@@ -1,0 +1,7 @@
+jdj_ludographie_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: JDJLudographieBundle:Default:index }
+
+jdj_personne:
+    resource: "@JDJLudographieBundle/Resources/config/routing/personne.yml"
+    prefix:   /

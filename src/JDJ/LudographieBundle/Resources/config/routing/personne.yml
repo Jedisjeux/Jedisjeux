@@ -1,0 +1,31 @@
+personne:
+    pattern:  /
+    defaults: { _controller: "JDJLudographieBundle:Personne:index" }
+
+personne_new:
+    pattern:  /new
+    defaults: { _controller: "JDJLudographieBundle:Personne:new" }
+
+personne_create:
+    pattern:  /create
+    defaults: { _controller: "JDJLudographieBundle:Personne:create" }
+    requirements: { _method: post }
+
+personne_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "JDJLudographieBundle:Personne:edit" }
+
+personne_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "JDJLudographieBundle:Personne:update" }
+    requirements: { _method: post|put }
+
+personne_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "JDJLudographieBundle:Personne:delete" }
+    requirements: { _method: post|delete }
+
+personne_show:
+    pattern:  /{id}/{slug}
+    defaults: { _controller: "JDJLudographieBundle:Personne:show" }
+
