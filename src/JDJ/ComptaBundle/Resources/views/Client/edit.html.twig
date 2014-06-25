@@ -9,7 +9,11 @@
     </div>
     <div class="row">
         {{ form_start(form) }}
-        {{ form_errors(form) }}
+        {% if form_errors(form) %}
+            <div data-alert class="alert-box alert round">
+                {{ form_errors(form) }}
+            </div>
+        {% endif %}
 
 
         {# Bloc date de création du client #}
@@ -17,7 +21,7 @@
             <legend>Date de création</legend>
 
             <div>
-                {{ entity.datecreation|date('d/m/Y') }}
+                {{ entity.dateCreation|date('d/m/Y') }}
             </div>
 
         </fieldset>
@@ -130,12 +134,26 @@
                 </div>
             </div>
 
+            <div class="small-8" style="display:none;">
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="right-label" class="left inline">{{ form_label(form.dateCreation) }}</label>
+                    </div>
+                    <div class="error">
+                        {{ form_errors(form.dateCreation) }}
+                    </div>
+                    <div class="small-9 columns">
+                        {{ form_widget(form.dateCreation) }}
+                    </div>
+                </div>
+            </div>
+
         </fieldset>
 
         {{ form_widget(form._token) }}
         {{ form_widget(form.submit) }}
     </div>
-    </form>
+    {{ form_end(form) }}
 
 
 {% endblock %}

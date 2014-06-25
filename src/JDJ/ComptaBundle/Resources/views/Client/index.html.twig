@@ -25,16 +25,14 @@
         {% for entity in entities %}
             <tr>
                 <td><a href="{{ path('client_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.societe }}</td>
+                <td> <a href="{{ path('client_show', { 'id': entity.id }) }}">{{ entity.societe }}</a>
+                    </td>
                 <td>{{ entity.nom }}</td>
                 <td>{{ entity.email }}</td>
                 <td class="small-3">
                 <ul class="inline-list">
                     <li>
-                        <a class="small button" href="{{ path('client_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a class="small button" href="{{ path('client_edit', { 'id': entity.id }) }}">edit</a>
+                        <a class="small button" href="{{ path('client_edit', { 'id': entity.id }) }}">édition</a>
                     </li>
                     <li>
                         {{ form_start(deleteForms[entity.id]) }}

@@ -1,0 +1,24 @@
+# src/JDJ/ComptaBundle/Resources/config/validation.yml
+JDJ\ComptaBundle\Entity\Client:
+    properties:
+            email:
+                - Email:
+                    message: "'{{ value }}' n'est pas un email valide."
+                    checkMX: true
+            societe:
+                - NotBlank: ~
+            nom:
+                - NotBlank: ~
+            rue:
+                - NotBlank: ~
+            codePostal:
+                - NotBlank: ~
+                - Type:
+                      type: numeric
+                      message: Le code postal doit être composé de chiffres.
+                - Length:
+                      min: 5
+                      max: 5
+                      exactMessage: "Le code postal doit faire exactement {{ limit }} chiffres"
+            ville:
+                - NotBlank: ~

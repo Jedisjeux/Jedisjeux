@@ -19,7 +19,7 @@ class ClientController extends Controller
      * Lists all Client entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -29,6 +29,7 @@ class ClientController extends Controller
         foreach ($entities as $entity) {
             $deleteForms[$entity->getId()] = $this->createDeleteForm($entity->getId())->createView();
         }
+
 
         return $this->render('JDJComptaBundle:Client:index.html.twig', array(
             'entities' => $entities,
@@ -50,6 +51,8 @@ class ClientController extends Controller
             $entity->setDateCreation(new \DateTime('NOW'));
             $em->persist($entity);
             $em->flush();
+
+            $request->getSession()->getFlashBag()->add('success', 'Le client a bien été enregistré');
 
             return $this->redirect($this->generateUrl('client'));
         }
@@ -122,7 +125,6 @@ class ClientController extends Controller
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('JDJComptaBundle:Client')->find($id);
 
         if (!$entity) {
@@ -157,28 +159,29 @@ class ClientController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Client entity.
      *
      */
     public function updateAction(Request $request, $id)
     {
-        $em = $this->getDoctrine()->getManager();
 
+        $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('JDJComptaBundle:Client')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Client entity.');
         }
-
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
+
         if ($editForm->isValid()) {
             $em->flush();
             $request->getSession()->getFlashBag()->add('success', 'Vos modifications ont bien été enregistrées!');
-            return $this->redirect($this->generateUrl('client_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('client'));
         }
 
         return $this->render('JDJComptaBundle:Client:edit.html.twig', array(
@@ -203,6 +206,7 @@ class ClientController extends Controller
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Client entity.');
             }
+            $request->getSession()->getFlashBag()->add('success', 'Le client a été supprimé');
 
             $em->remove($entity);
             $em->flush();

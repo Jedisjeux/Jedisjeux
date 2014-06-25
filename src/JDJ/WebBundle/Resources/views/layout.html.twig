@@ -24,7 +24,7 @@
     <div class="large-12 columns" role="content">
         {% for label, flashes in app.session.flashbag.all %}
             {% for flash in flashes %}
-                <div class="alert alert-{{ label }}">
+                <div data-alert class="alert-box {{ label }} radius">
                     {{ flash }}
                 </div>
             {% endfor %}
