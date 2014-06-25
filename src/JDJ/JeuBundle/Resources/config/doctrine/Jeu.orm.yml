@@ -36,13 +36,28 @@ JDJ\JeuBundle\Entity\Jeu:
     description:
       type: text
       nullable: true
+    slug:
+      type: string
+      length: 128
+      gedmo:
+        slug:
+          separator: -
+          style: default
+          fields:
+            - libelle
+  indexes:
+    search_idx:
+      columns: slug
+
   manyToMany:
     mecanismes:
       targetEntity: Mecanisme
       mappedBy: jeux
+      cascade: ["persist"]
     themes:
       targetEntity: Theme
       mappedBy: jeux
+      cascade: ["persist"]
   oneToMany:
     jeuCaracteristiques:
       targetEntity: JeuCaracteristique
