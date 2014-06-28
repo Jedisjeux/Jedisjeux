@@ -5,3 +5,4 @@ jdj_ludographie_homepage:
 jdj_personne:
     resource: "@JDJLudographieBundle/Resources/config/routing/personne.yml"
     prefix:   /
+

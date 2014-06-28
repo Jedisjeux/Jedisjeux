@@ -58,6 +58,18 @@ JDJ\JeuBundle\Entity\Jeu:
       targetEntity: Theme
       mappedBy: jeux
       cascade: ["persist"]
+    auteurs:
+      targetEntity: JDJ\LudographieBundle\Entity\Personne
+      mappedBy: auteurJeux
+      cascade: ["persist"]
+    illustrateurs:
+      targetEntity: JDJ\LudographieBundle\Entity\Personne
+      mappedBy: illustrateurJeux
+      cascade: ["persist"]
+    editeurs:
+          targetEntity: JDJ\LudographieBundle\Entity\Personne
+          mappedBy: editeurJeux
+          cascade: ["persist"]
   oneToMany:
     jeuCaracteristiques:
       targetEntity: JeuCaracteristique

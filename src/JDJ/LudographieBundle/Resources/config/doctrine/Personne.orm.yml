@@ -44,3 +44,40 @@ JDJ\LudographieBundle\Entity\Personne:
     pays:
       targetEntity: JDJ\WebBundle\Entity\Pays
       inversedBy: personnes
+  manyToMany:
+    auteurJeux:
+      targetEntity: JDJ\JeuBundle\Entity\Jeu
+      inversedBy: auteurs
+      cascade: ["persist"]
+      joinTable:
+        name: jdj_auteur_jeu
+        joinColumns:
+          personne_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          jeu_id:
+            referencedColumnName: id
+    illustrateurJeux:
+      targetEntity: JDJ\JeuBundle\Entity\Jeu
+      inversedBy: illustrateurs
+      cascade: ["persist"]
+      joinTable:
+        name: jdj_illustrateur_jeu
+        joinColumns:
+          personne_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          jeu_id:
+            referencedColumnName: id
+    editeurJeux:
+       targetEntity: JDJ\JeuBundle\Entity\Jeu
+       inversedBy: editeurs
+       cascade: ["persist"]
+       joinTable:
+         name: jdj_editeur_jeu
+         joinColumns:
+           personne_id:
+             referencedColumnName: id
+         inverseJoinColumns:
+           jeu_id:
+             referencedColumnName: id

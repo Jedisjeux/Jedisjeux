@@ -233,4 +233,125 @@ class Personne
     {
         return $this->slug;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $auteurJeux;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->auteurJeux = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add auteurJeux
+     *
+     * @param \JDJ\JeuBundle\Entity\Jeu $auteurJeux
+     * @return Personne
+     */
+    public function addAuteurJeux(\JDJ\JeuBundle\Entity\Jeu $auteurJeux)
+    {
+        $this->auteurJeux[] = $auteurJeux;
+
+        return $this;
+    }
+
+    /**
+     * Remove auteurJeux
+     *
+     * @param \JDJ\JeuBundle\Entity\Jeu $auteurJeux
+     */
+    public function removeAuteurJeux(\JDJ\JeuBundle\Entity\Jeu $auteurJeux)
+    {
+        $this->auteurJeux->removeElement($auteurJeux);
+    }
+
+    /**
+     * Get auteurJeux
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAuteurJeux()
+    {
+        return $this->auteurJeux;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $illustrateurJeux;
+
+
+    /**
+     * Add illustrateurJeux
+     *
+     * @param \JDJ\JeuBundle\Entity\Jeu $illustrateurJeux
+     * @return Personne
+     */
+    public function addIllustrateurJeux(\JDJ\JeuBundle\Entity\Jeu $illustrateurJeux)
+    {
+        $this->illustrateurJeux[] = $illustrateurJeux;
+
+        return $this;
+    }
+
+    /**
+     * Remove illustrateurJeux
+     *
+     * @param \JDJ\JeuBundle\Entity\Jeu $illustrateurJeux
+     */
+    public function removeIllustrateurJeux(\JDJ\JeuBundle\Entity\Jeu $illustrateurJeux)
+    {
+        $this->illustrateurJeux->removeElement($illustrateurJeux);
+    }
+
+    /**
+     * Get illustrateurJeux
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getIllustrateurJeux()
+    {
+        return $this->illustrateurJeux;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $editeurJeux;
+
+
+    /**
+     * Add editeurJeux
+     *
+     * @param \JDJ\JeuBundle\Entity\Jeu $editeurJeux
+     * @return Personne
+     */
+    public function addEditeurJeux(\JDJ\JeuBundle\Entity\Jeu $editeurJeux)
+    {
+        $this->editeurJeux[] = $editeurJeux;
+
+        return $this;
+    }
+
+    /**
+     * Remove editeurJeux
+     *
+     * @param \JDJ\JeuBundle\Entity\Jeu $editeurJeux
+     */
+    public function removeEditeurJeux(\JDJ\JeuBundle\Entity\Jeu $editeurJeux)
+    {
+        $this->editeurJeux->removeElement($editeurJeux);
+    }
+
+    /**
+     * Get editeurJeux
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEditeurJeux()
+    {
+        return $this->editeurJeux;
+    }
 }

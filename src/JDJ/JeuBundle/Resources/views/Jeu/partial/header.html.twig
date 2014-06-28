@@ -16,27 +16,46 @@
     <div class="medium-8 columns">
         <h1>{{ jeu.libelle }}</h1>
 
-        <div class="medium-6 columns">
-            <ul>
+        <div class="medium-7 columns">
+            <p>
+                {% if jeu.auteurs|length > 0 %}
+                Un jeu de
+                    {{ jeu.auteurs|join(", ") }}<br />
+                {% endif %}
+
+                {% if jeu.illustrateurs|length > 0 %}
+                illustré{% if jeu.illustrateurs|length > 1 %}s{% endif %} par
+                    {{ jeu.illustrateurs|join(", ") }}<br />
+                {% endif %}
+
+                {% if jeu.editeurs|length > 0 %}
+                    édité{% if jeu.editeurs|length > 1 %}s{% endif %} par
+                        {{ jeu.editeurs|join(", ") }}<br />
+                {% endif %}
+            </p>
+            <p>
+
                 {% if jeu.ageMin %}
-                    <li>A partir de {{ jeu.ageMin }} ans</li>
+                    à partir de {{ jeu.ageMin }} ans<br />
                 {% endif %}
 
                 {% if jeu.joueurMin or jeu.joueurMax %}
-                    <li>
-                        {{ joueurCount(jeu) }}
-                    </li>
+                    {{ joueurCount(jeu) }}<br />
                 {% endif %}
 
-                <li>{{ jeu.mecanismes|join(", ") }}</li>
+                {% if jeu.mecanismes|length > 0 %}
+                    Mécanismes : {{ jeu.mecanismes|join(", ") }}<br />
+                {% endif %}
                 {#{% for mecanisme in jeu.mecanismes %}
                     {{ mecanisme.libelle }}
                 {% endfor %}#}
 
-                <li>{{ jeu.themes|join(", ") }}</li>
-            </ul>
+                {% if jeu.themes|length > 0 %}
+                    Thèmes : {{ jeu.themes|join(", ") }}<br />
+                {% endif %}
+            </p>
         </div>
-        <div class="medium-6 columns">
+        <div class="medium-5 columns">
             <ul>
                 {% for jeuCaracteristique in jeu.jeuCaracteristiques %}
                     <li>
