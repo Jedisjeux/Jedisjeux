@@ -3,7 +3,7 @@
 {% block body -%}
 
 
-    {% include "JDJJeuBundle:Jeu:header.html.twig" with {'jeu': jeu} %}
+    {% include "JDJJeuBundle:Jeu:partial/header.html.twig" with {'jeu': jeu} %}
 
 
     <ul class="tabs" data-tab>
@@ -17,7 +17,7 @@
     </ul>
     <div class="tabs-content">
         <div class="content active"
-             id="panel2-1">{% include "JDJJeuBundle:Jeu:onglet/presentation.html.twig" with {'jeu': jeu} %}</div>
+             id="panel2-1">{% include "JDJJeuBundle:Jeu:partial/onglet/presentation.html.twig" with {'jeu': jeu} %}</div>
         <div class="content" id="panel2-2"><p>Second panel content goes here...</p></div>
         <div class="content" id="articles"><p>Third panel content goes here...</p></div>
         <div class="content" id="photos"><p>Photos go here...</p></div>

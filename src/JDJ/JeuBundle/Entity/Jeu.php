@@ -70,8 +70,12 @@ class Jeu
      */
     public function __construct()
     {
+        $this->jeuCaracteristiques = new \Doctrine\Common\Collections\ArrayCollection();
         $this->mecanismes = new \Doctrine\Common\Collections\ArrayCollection();
         $this->themes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->auteurs = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->illustrateurs = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->editeurs = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -403,5 +407,149 @@ class Jeu
     public function getStatut()
     {
         return $this->statut;
+    }
+    /**
+     * @var string
+     */
+    private $slug;
+
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Jeu
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $auteurs;
+
+
+    /**
+     * Add auteurs
+     *
+     * @param \JDJ\JeuBundle\Entity\Personne $auteurs
+     * @return Jeu
+     */
+    public function addAuteur(\JDJ\JeuBundle\Entity\Personne $auteurs)
+    {
+        $this->auteurs[] = $auteurs;
+
+        return $this;
+    }
+
+    /**
+     * Remove auteurs
+     *
+     * @param \JDJ\JeuBundle\Entity\Personne $auteurs
+     */
+    public function removeAuteur(\JDJ\JeuBundle\Entity\Personne $auteurs)
+    {
+        $this->auteurs->removeElement($auteurs);
+    }
+
+    /**
+     * Get auteurs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAuteurs()
+    {
+        return $this->auteurs;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $illustrateurs;
+
+
+    /**
+     * Add illustrateurs
+     *
+     * @param \JDJ\LudographieBundle\Entity\Personne $illustrateurs
+     * @return Jeu
+     */
+    public function addIllustrateur(\JDJ\LudographieBundle\Entity\Personne $illustrateurs)
+    {
+        $this->illustrateurs[] = $illustrateurs;
+
+        return $this;
+    }
+
+    /**
+     * Remove illustrateurs
+     *
+     * @param \JDJ\LudographieBundle\Entity\Personne $illustrateurs
+     */
+    public function removeIllustrateur(\JDJ\LudographieBundle\Entity\Personne $illustrateurs)
+    {
+        $this->illustrateurs->removeElement($illustrateurs);
+    }
+
+    /**
+     * Get illustrateurs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getIllustrateurs()
+    {
+        return $this->illustrateurs;
+    }
+
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $editeurs;
+
+
+    /**
+     * Add editeurs
+     *
+     * @param \JDJ\LudographieBundle\Entity\Personne $editeurs
+     * @return Jeu
+     */
+    public function addEditeur(\JDJ\LudographieBundle\Entity\Personne $editeurs)
+    {
+        $this->editeurs[] = $editeurs;
+
+        return $this;
+    }
+
+    /**
+     * Remove editeurs
+     *
+     * @param \JDJ\LudographieBundle\Entity\Personne $editeurs
+     */
+    public function removeEditeur(\JDJ\LudographieBundle\Entity\Personne $editeurs)
+    {
+        $this->editeurs->removeElement($editeurs);
+    }
+
+    /**
+     * Get editeurs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEditeurs()
+    {
+        return $this->editeurs;
     }
 }

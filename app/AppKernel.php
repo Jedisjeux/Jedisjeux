@@ -20,6 +20,8 @@ class AppKernel extends Kernel
             new JDJ\WebBundle\JDJWebBundle(),
             new JDJ\ComptaBundle\JDJComptaBundle(),
             new JDJ\JeuBundle\JDJJeuBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new JDJ\LudographieBundle\JDJLudographieBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -33,7 +33,7 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ 'JDJWebBundle', 'JDJFoundationBundle' ]
+    bundles:        [ 'JDJWebBundle', 'JDJFoundationBundle', 'JDJJeuBundle']
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -60,7 +60,40 @@ doctrine:
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        auto_mapping: true
+        entity_managers:
+          default:
+            auto_mapping: true
+            mappings:
+              gedmo_translatable:
+                type: annotation
+                prefix: Gedmo\Translatable\Entity
+                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity"
+                alias: GedmoTranslatable # this one is optional and will default to the name set for the mapping
+                is_bundle: false
+              gedmo_translator:
+                type: annotation
+                prefix: Gedmo\Translator\Entity
+                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translator/Entity"
+                alias: GedmoTranslator # this one is optional and will default to the name set for the mapping
+                is_bundle: false
+              gedmo_loggable:
+                type: annotation
+                prefix: Gedmo\Loggable\Entity
+                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
+                alias: GedmoLoggable # this one is optional and will default to the name set for the mapping
+                is_bundle: false
+              gedmo_tree:
+                type: annotation
+                prefix: Gedmo\Tree\Entity
+                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
+                alias: GedmoTree # this one is optional and will default to the name set for the mapping
+                is_bundle: false
+            filters:
+              softdeleteable:
+                  class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
+                  enabled: true
+
+
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -69,3 +102,47 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+stof_doctrine_extensions:
+  default_locale: fr_FR
+  orm:
+    default:
+      tree: true
+      timestampable: false # not needed: listeners are not enabled by default
+
+
+services:
+  gedmo.listener.softdeleteable:
+      class: Gedmo\SoftDeleteable\SoftDeleteableListener
+      tags:
+        - { name: doctrine.event_subscriber, connection: default }
+      calls:
+        - [ setAnnotationReader, [ @annotation_reader ] ]
+
+  gedmo.listener.timestampable:
+      class: Gedmo\Timestampable\TimestampableListener
+      tags:
+        - { name: doctrine.event_subscriber, connection: default }
+      calls:
+        - [ setAnnotationReader, [ @annotation_reader ] ]
+
+  gedmo.listener.sluggable:
+      class: Gedmo\Sluggable\SluggableListener
+      tags:
+        - { name: doctrine.event_subscriber, connection: default }
+      calls:
+        - [ setAnnotationReader, [ @annotation_reader ] ]
+
+  gedmo.listener.sortable:
+      class: Gedmo\Sortable\SortableListener
+      tags:
+        - { name: doctrine.event_subscriber, connection: default }
+      calls:
+        - [ setAnnotationReader, [ @annotation_reader ] ]
+
+  gedmo.listener.loggable:
+      class: Gedmo\Loggable\LoggableListener
+      tags:
+        - { name: doctrine.event_subscriber, connection: default }
+      calls:
+        - [ setAnnotationReader, [ @annotation_reader ] ]
