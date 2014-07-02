@@ -1,0 +1,18 @@
+JDJ\JeuBundle\Entity\LangueAddon:
+  type: entity
+  table: jdj_langue_addon
+  id:
+    langue_id:
+      type: integer
+      unsigned: true
+      generator:
+        strategy: IDENTITY
+    addon_id:
+          type: integer
+          unsigned: true
+          generator:
+            strategy: IDENTITY
+  manyToOne:
+      langue:
+        targetEntity: JDJ\WebBundle\Entity\Langue
+        inversedBy: LangueAddon

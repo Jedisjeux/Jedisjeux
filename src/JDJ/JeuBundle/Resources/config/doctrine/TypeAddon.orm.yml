@@ -1,0 +1,14 @@
+JDJ\JeuBundle\Entity\TypeAddon:
+  type: entity
+  table: jdj_type_addon
+  id:
+    id:
+      type: integer
+      unsigned: true
+      generator:
+        strategy: IDENTITY
+  fields:
+    libelle:
+      type: string
+      nullable: false
+      length: 50

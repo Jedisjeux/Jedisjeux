@@ -1,0 +1,27 @@
+JDJ\JeuBundle\Entity\Addon:
+  type: entity
+  table: jdj_addon
+  id:
+    id:
+      type: integer
+      unsigned: true
+      generator:
+        strategy: IDENTITY
+    jeu_id:
+          type: integer
+    type_addon_id:
+          type: integer
+  fields:
+      url:
+        type: string
+        nullable: false
+        length: 100
+  fields:
+      libelle:
+        type: string
+        nullable: false
+        length: 50
+  manyToOne:
+      typeAddon:
+        targetEntity: Addon
+        inversedBy: TypeAddon
