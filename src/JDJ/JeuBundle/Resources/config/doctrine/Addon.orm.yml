@@ -7,21 +7,23 @@ JDJ\JeuBundle\Entity\Addon:
       unsigned: true
       generator:
         strategy: IDENTITY
-    jeu_id:
-          type: integer
-    type_addon_id:
-          type: integer
   fields:
       url:
         type: string
         nullable: false
         length: 100
-  fields:
       libelle:
         type: string
         nullable: false
         length: 50
   manyToOne:
+      jeu:
+        targetEntity: Jeu
+        inversedBy: addons
       typeAddon:
-        targetEntity: Addon
-        inversedBy: TypeAddon
+        targetEntity: TypeAddon
+        inversedBy: addons
+  oneToMany:
+      langueAddons:
+        targetEntity: LangueAddon
+        mappedBy: addon

@@ -12,3 +12,7 @@ JDJ\JeuBundle\Entity\TypeAddon:
       type: string
       nullable: false
       length: 50
+  oneToMany:
+    addons:
+      targetEntity: Addon
+      mappedBy: typeAddon

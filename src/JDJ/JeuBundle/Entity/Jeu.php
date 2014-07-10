@@ -552,4 +552,42 @@ class Jeu
     {
         return $this->editeurs;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $addons;
+
+
+    /**
+     * Add addons
+     *
+     * @param \JDJ\JeuBundle\Entity\Addon $addons
+     * @return Jeu
+     */
+    public function addAddon(\JDJ\JeuBundle\Entity\Addon $addons)
+    {
+        $this->addons[] = $addons;
+
+        return $this;
+    }
+
+    /**
+     * Remove addons
+     *
+     * @param \JDJ\JeuBundle\Entity\Addon $addons
+     */
+    public function removeAddon(\JDJ\JeuBundle\Entity\Addon $addons)
+    {
+        $this->addons->removeElement($addons);
+    }
+
+    /**
+     * Get addons
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAddons()
+    {
+        return $this->addons;
+    }
 }

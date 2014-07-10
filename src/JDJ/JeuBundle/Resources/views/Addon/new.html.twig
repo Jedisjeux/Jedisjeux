@@ -1,0 +1,15 @@
+{% extends "JDJWebBundle::layout.html.twig" %}
+
+{% block body -%}
+    <h1>Addon creation</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('jeu_addon') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}
