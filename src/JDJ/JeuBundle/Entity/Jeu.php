@@ -119,6 +119,16 @@ class Jeu
     }
 
     /**
+     * Convert Entity To String
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getLibelle();
+    }
+
+    /**
      * Get id
      *
      * @return integer 
