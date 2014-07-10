@@ -13,6 +13,7 @@ use JDJ\LudographieBundle\Entity\Personne;
 use JDJ\LudographieBundle\Form\PersonneType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use JDJ\JeuBundle\Entity\JeuRepository;
 
 class PersonneController extends Controller
 {
@@ -43,8 +44,13 @@ class PersonneController extends Controller
             );
         }
 
+        /** @var JeuRepository $jeuReposititory */
+        $jeuReposititory = $em->getRepository('JDJJeuBundle:Jeu');
+        $jeux = $jeuReposititory->findAllByPersonne($id);
+
         return $this->render('JDJLudographieBundle:Personne:show.html.twig', array(
                 'personne' => $entity,
+                'jeux' => $jeux,
             )
         );
     }

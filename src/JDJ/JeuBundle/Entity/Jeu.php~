@@ -75,6 +75,7 @@ class Jeu
         $this->themes = new \Doctrine\Common\Collections\ArrayCollection();
         $this->auteurs = new \Doctrine\Common\Collections\ArrayCollection();
         $this->illustrateurs = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->editeurs = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -513,4 +514,42 @@ class Jeu
     }
 
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $editeurs;
+
+
+    /**
+     * Add editeurs
+     *
+     * @param \JDJ\LudographieBundle\Entity\Personne $editeurs
+     * @return Jeu
+     */
+    public function addEditeur(\JDJ\LudographieBundle\Entity\Personne $editeurs)
+    {
+        $this->editeurs[] = $editeurs;
+
+        return $this;
+    }
+
+    /**
+     * Remove editeurs
+     *
+     * @param \JDJ\LudographieBundle\Entity\Personne $editeurs
+     */
+    public function removeEditeur(\JDJ\LudographieBundle\Entity\Personne $editeurs)
+    {
+        $this->editeurs->removeElement($editeurs);
+    }
+
+    /**
+     * Get editeurs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEditeurs()
+    {
+        return $this->editeurs;
+    }
 }

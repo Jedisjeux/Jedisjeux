@@ -1,5 +1,6 @@
 JDJ\JeuBundle\Entity\Jeu:
   type: entity
+  repositoryClass: JDJ\JeuBundle\Entity\JeuRepository
   table: jdj_jeu
   id:
     id:
@@ -45,6 +46,10 @@ JDJ\JeuBundle\Entity\Jeu:
           style: default
           fields:
             - libelle
+    imageCouverture:
+      type: string
+      length: 50
+      nullable: true
   indexes:
     search_idx:
       columns: slug

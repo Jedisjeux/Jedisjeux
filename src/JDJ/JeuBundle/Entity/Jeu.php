@@ -552,4 +552,32 @@ class Jeu
     {
         return $this->editeurs;
     }
+    /**
+     * @var string
+     */
+    private $imageCouverture;
+
+
+    /**
+     * Set imageCouverture
+     *
+     * @param string $imageCouverture
+     * @return Jeu
+     */
+    public function setImageCouverture($imageCouverture)
+    {
+        $this->imageCouverture = $imageCouverture;
+
+        return $this;
+    }
+
+    /**
+     * Get imageCouverture
+     *
+     * @return string 
+     */
+    public function getImageCouverture()
+    {
+        return $this->imageCouverture;
+    }
 }

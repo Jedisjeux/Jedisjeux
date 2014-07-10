@@ -29,3 +29,7 @@ jeu_create:
     defaults: { _controller: "JDJJeuBundle:Jeu:create" }
     requirements: { _method: post }
 
+jeu_init:
+    pattern:  /init
+    defaults: { _controller: "JDJJeuBundle:Jeu:initialisation" }
+
