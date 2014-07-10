@@ -1,0 +1,16 @@
+JDJ\JeuBundle\Entity\LangueAddon:
+  type: entity
+  table: jdj_langue_addon
+  id:
+    langue_id:
+      type: integer
+    addon_id:
+          type: integer
+  manyToOne:
+  #En attendant l'entity langue
+      #langue:
+        #targetEntity: JDJ\WebBundle\Entity\Langue
+        #inversedBy: LangueAddon
+      addon:
+        targetEntity: Addon
+        inversedBy: langueAddons

@@ -9,7 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Jeu
 {
-
     /**
      * @var integer
      */
@@ -56,6 +55,31 @@ class Jeu
     private $description;
 
     /**
+     * @var string
+     */
+    private $slug;
+
+    /**
+     * @var string
+     */
+    private $imageCouverture;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $jeuCaracteristiques;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $addons;
+
+    /**
+     * @var \JDJ\WebBundle\Entity\Statut
+     */
+    private $statut;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $mecanismes;
@@ -66,11 +90,27 @@ class Jeu
     private $themes;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $auteurs;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $illustrateurs;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $editeurs;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->jeuCaracteristiques = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->addons = new \Doctrine\Common\Collections\ArrayCollection();
         $this->mecanismes = new \Doctrine\Common\Collections\ArrayCollection();
         $this->themes = new \Doctrine\Common\Collections\ArrayCollection();
         $this->auteurs = new \Doctrine\Common\Collections\ArrayCollection();
@@ -273,6 +313,141 @@ class Jeu
     }
 
     /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Jeu
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set imageCouverture
+     *
+     * @param string $imageCouverture
+     * @return Jeu
+     */
+    public function setImageCouverture($imageCouverture)
+    {
+        $this->imageCouverture = $imageCouverture;
+
+        return $this;
+    }
+
+    /**
+     * Get imageCouverture
+     *
+     * @return string 
+     */
+    public function getImageCouverture()
+    {
+        return $this->imageCouverture;
+    }
+
+    /**
+     * Add jeuCaracteristiques
+     *
+     * @param \JDJ\JeuBundle\Entity\JeuCaracteristique $jeuCaracteristiques
+     * @return Jeu
+     */
+    public function addJeuCaracteristique(\JDJ\JeuBundle\Entity\JeuCaracteristique $jeuCaracteristiques)
+    {
+        $this->jeuCaracteristiques[] = $jeuCaracteristiques;
+
+        return $this;
+    }
+
+    /**
+     * Remove jeuCaracteristiques
+     *
+     * @param \JDJ\JeuBundle\Entity\JeuCaracteristique $jeuCaracteristiques
+     */
+    public function removeJeuCaracteristique(\JDJ\JeuBundle\Entity\JeuCaracteristique $jeuCaracteristiques)
+    {
+        $this->jeuCaracteristiques->removeElement($jeuCaracteristiques);
+    }
+
+    /**
+     * Get jeuCaracteristiques
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getJeuCaracteristiques()
+    {
+        return $this->jeuCaracteristiques;
+    }
+
+    /**
+     * Add addons
+     *
+     * @param \JDJ\JeuBundle\Entity\Addon $addons
+     * @return Jeu
+     */
+    public function addAddon(\JDJ\JeuBundle\Entity\Addon $addons)
+    {
+        $this->addons[] = $addons;
+
+        return $this;
+    }
+
+    /**
+     * Remove addons
+     *
+     * @param \JDJ\JeuBundle\Entity\Addon $addons
+     */
+    public function removeAddon(\JDJ\JeuBundle\Entity\Addon $addons)
+    {
+        $this->addons->removeElement($addons);
+    }
+
+    /**
+     * Get addons
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAddons()
+    {
+        return $this->addons;
+    }
+
+    /**
+     * Set statut
+     *
+     * @param \JDJ\WebBundle\Entity\Statut $statut
+     * @return Jeu
+     */
+    public function setStatut(\JDJ\WebBundle\Entity\Statut $statut = null)
+    {
+        $this->statut = $statut;
+
+        return $this;
+    }
+
+    /**
+     * Get statut
+     *
+     * @return \JDJ\WebBundle\Entity\Statut 
+     */
+    public function getStatut()
+    {
+        return $this->statut;
+    }
+
+    /**
      * Add mecanismes
      *
      * @param \JDJ\JeuBundle\Entity\Mecanisme $mecanismes
@@ -338,117 +513,13 @@ class Jeu
         return $this->themes;
     }
 
-    public function __toString()
-    {
-        return $this->getLibelle();
-    }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $jeuCaracteristiques;
-
-
-    /**
-     * Add jeuCaracteristiques
-     *
-     * @param \JDJ\JeuBundle\Entity\JeuCaracteristique $jeuCaracteristiques
-     * @return Jeu
-     */
-    public function addJeuCaracteristique(\JDJ\JeuBundle\Entity\JeuCaracteristique $jeuCaracteristiques)
-    {
-        $this->jeuCaracteristiques[] = $jeuCaracteristiques;
-
-        return $this;
-    }
-
-    /**
-     * Remove jeuCaracteristiques
-     *
-     * @param \JDJ\JeuBundle\Entity\JeuCaracteristique $jeuCaracteristiques
-     */
-    public function removeJeuCaracteristique(\JDJ\JeuBundle\Entity\JeuCaracteristique $jeuCaracteristiques)
-    {
-        $this->jeuCaracteristiques->removeElement($jeuCaracteristiques);
-    }
-
-    /**
-     * Get jeuCaracteristiques
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getJeuCaracteristiques()
-    {
-        return $this->jeuCaracteristiques;
-    }
-    /**
-     * @var \JDJ\JeuBundle\Entity\Statut
-     */
-    private $statut;
-
-
-    /**
-     * Set statut
-     *
-     * @param \JDJ\JeuBundle\Entity\Statut $statut
-     * @return Jeu
-     */
-    public function setStatut(\JDJ\JeuBundle\Entity\Statut $statut = null)
-    {
-        $this->statut = $statut;
-
-        return $this;
-    }
-
-    /**
-     * Get statut
-     *
-     * @return \JDJ\JeuBundle\Entity\Statut 
-     */
-    public function getStatut()
-    {
-        return $this->statut;
-    }
-    /**
-     * @var string
-     */
-    private $slug;
-
-
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     * @return Jeu
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string 
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $auteurs;
-
-
     /**
      * Add auteurs
      *
-     * @param \JDJ\JeuBundle\Entity\Personne $auteurs
+     * @param \JDJ\LudographieBundle\Entity\Personne $auteurs
      * @return Jeu
      */
-    public function addAuteur(\JDJ\JeuBundle\Entity\Personne $auteurs)
+    public function addAuteur(\JDJ\LudographieBundle\Entity\Personne $auteurs)
     {
         $this->auteurs[] = $auteurs;
 
@@ -458,9 +529,9 @@ class Jeu
     /**
      * Remove auteurs
      *
-     * @param \JDJ\JeuBundle\Entity\Personne $auteurs
+     * @param \JDJ\LudographieBundle\Entity\Personne $auteurs
      */
-    public function removeAuteur(\JDJ\JeuBundle\Entity\Personne $auteurs)
+    public function removeAuteur(\JDJ\LudographieBundle\Entity\Personne $auteurs)
     {
         $this->auteurs->removeElement($auteurs);
     }
@@ -474,11 +545,6 @@ class Jeu
     {
         return $this->auteurs;
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $illustrateurs;
-
 
     /**
      * Add illustrateurs
@@ -513,13 +579,6 @@ class Jeu
         return $this->illustrateurs;
     }
 
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $editeurs;
-
-
     /**
      * Add editeurs
      *
@@ -551,33 +610,5 @@ class Jeu
     public function getEditeurs()
     {
         return $this->editeurs;
-    }
-    /**
-     * @var string
-     */
-    private $imageCouverture;
-
-
-    /**
-     * Set imageCouverture
-     *
-     * @param string $imageCouverture
-     * @return Jeu
-     */
-    public function setImageCouverture($imageCouverture)
-    {
-        $this->imageCouverture = $imageCouverture;
-
-        return $this;
-    }
-
-    /**
-     * Get imageCouverture
-     *
-     * @return string 
-     */
-    public function getImageCouverture()
-    {
-        return $this->imageCouverture;
     }
 }

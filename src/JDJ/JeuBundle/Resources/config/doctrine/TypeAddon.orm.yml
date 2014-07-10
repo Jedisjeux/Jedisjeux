@@ -1,6 +1,6 @@
-JDJ\LudographieBundle\Entity\Metier:
+JDJ\JeuBundle\Entity\TypeAddon:
   type: entity
-  table: jdj_metier
+  table: jdj_type_addon
   id:
     id:
       type: integer
@@ -12,3 +12,7 @@ JDJ\LudographieBundle\Entity\Metier:
       type: string
       nullable: false
       length: 50
+  oneToMany:
+    addons:
+      targetEntity: Addon
+      mappedBy: typeAddon
