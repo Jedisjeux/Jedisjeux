@@ -139,10 +139,10 @@ class Addon
     /**
      * Set jeu
      *
-     * @param \JDJ\JeuBundle\Entity\Addon $jeu
+     * @param \JDJ\JeuBundle\Entity\Jeu $jeu
      * @return Addon
      */
-    public function setJeu(\JDJ\JeuBundle\Entity\Addon $jeu = null)
+    public function setJeu(\JDJ\JeuBundle\Entity\Jeu $jeu = null)
     {
         $this->jeu = $jeu;
 
@@ -162,10 +162,10 @@ class Addon
     /**
      * Set typeAddon
      *
-     * @param \JDJ\JeuBundle\Entity\Addon $typeAddon
+     * @param \JDJ\JeuBundle\Entity\TypeAddon $typeAddon
      * @return Addon
      */
-    public function setTypeAddon(\JDJ\JeuBundle\Entity\Addon $typeAddon = null)
+    public function setTypeAddon(\JDJ\JeuBundle\Entity\TypeAddon $typeAddon = null)
     {
         $this->typeAddon = $typeAddon;
 

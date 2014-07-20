@@ -1,15 +1,85 @@
 {% extends "JDJWebBundle::layout.html.twig" %}
 
 {% block body -%}
-    <h1>Addon creation</h1>
-
-    {{ form(form) }}
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('jeu_addon') }}">
-            Back to the list
+    <h1>Edition Addon</h1>
+    <div class="right inline">
+        <a href="{{ path('jeu_addon', { 'jeu_id': jeu.id }) }}">
+            Retour à la liste des addons
         </a>
-    </li>
-</ul>
+    </div>
+    <div class="row">
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        <!-- Bloc form informations principales -->
+        <fieldset>
+            <legend>Informations sur l'addon</legend>
+
+            <div class="small-8">
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="right-label" class="left inline">{{ form_label(form.libelle) }}</label>
+                    </div>
+                    <div class="error">
+                        {{ form_errors(form.libelle) }}
+                    </div>
+                    <div class="small-9 columns">
+                        {{ form_widget(form.libelle) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="small-8">
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="right-label" class="left inline">{{ form_label(form.url) }}</label>
+                    </div>
+                    <div class="error">
+                        {{ form_errors(form.url) }}
+                    </div>
+                    <div class="small-9 columns">
+                        {{ form_widget(form.url) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="small-8">
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="right-label" class="left inline">{{ form_label(form.typeAddon) }}</label>
+                    </div>
+                    <div class="error">
+                        {{ form_errors(form.typeAddon) }}
+                    </div>
+                    <div class="small-9 columns">
+                        {{ form_widget(form.typeAddon) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="small-8" style="display: none;">
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="right-label" class="left inline">{{ form_label(form.jeu) }}</label>
+                    </div>
+                    <div class="error">
+                        {{ form_errors(form.jeu) }}
+                    </div>
+                    <div class="small-9 columns">
+                        {{ form_widget(form.jeu) }}
+                    </div>
+                </div>
+            </div>
+
+        </fieldset>
+
+
+
+        {{ form_widget(form._token) }}
+        {{ form_widget(form.submit) }}
+    </div>
+    </form>
+
+
 {% endblock %}
+

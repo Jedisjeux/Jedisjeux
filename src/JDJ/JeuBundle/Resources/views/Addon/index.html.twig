@@ -1,7 +1,7 @@
 {% extends "JDJWebBundle::layout.html.twig" %}
 
 {% block body -%}
-    <h1>Addon list</h1>
+    <h1>Liste des Addons du jeu {{ jeu.libelle }}</h1>
 
     <table class="records_list">
         <thead>
@@ -35,8 +35,8 @@
 
         <ul>
         <li>
-            <a href="{{ path('jeu_addon_new') }}">
-                Create a new entry
+            <a href="{{ path('jeu_addon_new', { 'jeu_id': jeu.id }) }}">
+                Ajouter un nouvel Addon pour le jeu {{ jeu.libelle }}
             </a>
         </li>
     </ul>

@@ -1,5 +1,5 @@
 jeu_addon:
-    path:     /
+    path:     /{jeu_id}/
     defaults: { _controller: "JDJJeuBundle:Addon:index" }
 
 jeu_addon_show:
@@ -11,7 +11,7 @@ jeu_addon_new:
     defaults: { _controller: "JDJJeuBundle:Addon:new" }
 
 jeu_addon_create:
-    path:     /create
+    path:     /{jeu_id}/create/
     defaults: { _controller: "JDJJeuBundle:Addon:create" }
     requirements: { _method: post }
 

@@ -19,24 +19,41 @@ class AddonController extends Controller
      * Lists all Addon entities.
      *
      */
-    public function indexAction()
+    public function indexAction($jeu_id)
     {
-        $em = $this->getDoctrine()->getManager();
+        //On récupère le jeu
+        $jeu = $this->getDoctrine()->getManager()->getRepository('JDJJeuBundle:Jeu')->find($jeu_id);
 
-        $entities = $em->getRepository('JDJJeuBundle:Addon')->findAll();
+        //On récupère ensuite les addons liés au jeu
+        $repository = $this->getDoctrine()
+            ->getRepository('JDJJeuBundle:Addon');
+
+        $query = $repository->createQueryBuilder('a')
+            ->where('a.jeu = :jeu')
+            ->setParameter('jeu', $jeu)
+            ->orderBy('a.libelle', 'ASC')
+            ->getQuery();
+
+        $addons = $query->getResult();
 
         return $this->render('JDJJeuBundle:Addon:index.html.twig', array(
-            'entities' => $entities,
+            'entities' => $addons,
+            'jeu' => $jeu,
         ));
     }
+
     /**
      * Creates a new Addon entity.
      *
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request, $jeu_id)
     {
         $entity = new Addon();
-        $form = $this->createCreateForm($entity);
+
+        //On récupère le jeu
+        $jeu = $this->getDoctrine()->getManager()->getRepository('JDJJeuBundle:Jeu')->find($jeu_id);
+
+        $form = $this->createCreateForm($entity, $jeu);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -57,17 +74,20 @@ class AddonController extends Controller
      * Creates a form to create a Addon entity.
      *
      * @param Addon $entity The entity
-     *
+     * @param $jeu
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Addon $entity)
+    private function createCreateForm(Addon $entity, $jeu)
     {
+        //On set le jeu de l'Addon
+        $entity->setJeu($jeu);
+
         $form = $this->createForm(new AddonType(), $entity, array(
-            'action' => $this->generateUrl('jeu_addon_create'),
+            'action' => $this->generateUrl('jeu_addon_create', array("jeu_id"=>$jeu->getId())),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Ajouter un Addon'));
 
         return $form;
     }
@@ -78,11 +98,15 @@ class AddonController extends Controller
      */
     public function newAction($jeu_id)
     {
+        //On récupère le jeu
+        $jeu = $this->getDoctrine()->getManager()->getRepository('JDJJeuBundle:Jeu')->find($jeu_id);
+
         $entity = new Addon();
-        $form   = $this->createCreateForm($entity);
+        $form   = $this->createCreateForm($entity, $jeu);
 
         return $this->render('JDJJeuBundle:Addon:new.html.twig', array(
             'entity' => $entity,
+            'jeu' => $jeu,
             'form'   => $form->createView(),
         ));
     }

@@ -102,5 +102,10 @@ class TypeAddon
      */
     private $addons;
 
+    public function __toString()
+    {
+        return $this->libelle;
+    }
+
 
 }
