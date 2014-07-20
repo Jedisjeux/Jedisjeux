@@ -21,8 +21,11 @@ class AddonController extends Controller
      */
     public function indexAction($jeu_id)
     {
+
+        $em = $this->getDoctrine()->getManager();
+
         //On récupère le jeu
-        $jeu = $this->getDoctrine()->getManager()->getRepository('JDJJeuBundle:Jeu')->find($jeu_id);
+        $jeu = $em->getRepository('JDJJeuBundle:Jeu')->find($jeu_id);
 
         //On récupère ensuite les addons liés au jeu
         $repository = $this->getDoctrine()
@@ -36,9 +39,19 @@ class AddonController extends Controller
 
         $addons = $query->getResult();
 
+
+        //Préparation du formulaire de delete
+        $deleteForms = array();
+        foreach ($addons as $addon) {
+            $deleteForms[$addon->getId()] = $this->createDeleteForm($jeu_id, $addon->getId())->createView();
+        }
+
+
+
         return $this->render('JDJJeuBundle:Addon:index.html.twig', array(
             'entities' => $addons,
             'jeu' => $jeu,
+            'deleteForms' => $deleteForms,
         ));
     }
 
@@ -61,7 +74,7 @@ class AddonController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('jeu_addon_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('jeu_addon', array('jeu_id' => $jeu_id)));
         }
 
         return $this->render('JDJJeuBundle:Addon:new.html.twig', array(
@@ -115,7 +128,7 @@ class AddonController extends Controller
      * Finds and displays a Addon entity.
      *
      */
-    public function showAction($id)
+    public function showAction($jeu_id, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -125,7 +138,7 @@ class AddonController extends Controller
             throw $this->createNotFoundException('Unable to find Addon entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
+        $deleteForm = $this->createDeleteForm($jeu_id, $id);
 
         return $this->render('JDJJeuBundle:Addon:show.html.twig', array(
             'entity'      => $entity,
@@ -183,7 +196,7 @@ class AddonController extends Controller
      * Edits an existing Addon entity.
      *
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction(Request $request, $jeu_id, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -193,7 +206,7 @@ class AddonController extends Controller
             throw $this->createNotFoundException('Unable to find Addon entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
+        $deleteForm = $this->createDeleteForm($jeu_id, $id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
@@ -213,9 +226,9 @@ class AddonController extends Controller
      * Deletes a Addon entity.
      *
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction(Request $request, $jeu_id, $id)
     {
-        $form = $this->createDeleteForm($id);
+        $form = $this->createDeleteForm($jeu_id, $id);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -230,20 +243,24 @@ class AddonController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('jeu_addon'));
+        return $this->redirect($this->generateUrl('jeu_addon', array('jeu_id' => $jeu_id)));
     }
 
     /**
      * Creates a form to delete a Addon entity by id.
      *
+     * @param $jeu_id
      * @param mixed $id The entity id
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id)
+    private function createDeleteForm($jeu_id, $id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('jeu_addon_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('jeu_addon_delete', array(
+                                                                    'jeu_id' => $jeu_id,
+                                                                    'id' => $id,
+                                                                    )))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

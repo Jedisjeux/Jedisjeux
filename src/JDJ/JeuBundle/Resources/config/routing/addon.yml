@@ -20,11 +20,11 @@ jeu_addon_edit:
     defaults: { _controller: "JDJJeuBundle:Addon:edit" }
 
 jeu_addon_update:
-    path:     /{id}/update
+    path:     /{jeu_id}/{id}/update
     defaults: { _controller: "JDJJeuBundle:Addon:update" }
     requirements: { _method: post|put }
 
 jeu_addon_delete:
-    path:     /{id}/delete
+    path:     /{jeu_id}/{id}/delete
     defaults: { _controller: "JDJJeuBundle:Addon:delete" }
     requirements: { _method: post|delete }
