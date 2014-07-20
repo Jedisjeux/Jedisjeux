@@ -11,7 +11,7 @@
         </div>
     {% endif %}
     <div class="medium-4 columns">
-        <img src="http://www.jedisjeux.net/img/800/rokoko-49-1375739818.jpg"/>
+        <img src="http://www.jedisjeux.net/img/800/{{ jeu.imageCouverture }}">
     </div>
     <div class="medium-8 columns">
         <h1>{{ jeu.libelle }}</h1>
@@ -20,17 +20,20 @@
             <p>
                 {% if jeu.auteurs|length > 0 %}
                 Un jeu de
-                    {{ jeu.auteurs|join(", ") }}<br />
+                    {% for key, personne in jeu.auteurs %}{% if (key > 0) %},{% endif %} <a href="{{ path('personne_show', { 'id': personne.id, 'slug': personne.slug })  }}">{{ personne }}</a>{% endfor %}
+                    <br />
                 {% endif %}
 
                 {% if jeu.illustrateurs|length > 0 %}
-                illustré{% if jeu.illustrateurs|length > 1 %}s{% endif %} par
-                    {{ jeu.illustrateurs|join(", ") }}<br />
+                    illustré{% if jeu.illustrateurs|length > 1 %}s{% endif %} par
+                    {% for key, personne in jeu.illustrateurs %}{% if (key > 0) %},{% endif %} <a href="{{ path('personne_show', { 'id': personne.id, 'slug': personne.slug })  }}">{{ personne }}</a>{% endfor %}
+                    <br />
                 {% endif %}
 
                 {% if jeu.editeurs|length > 0 %}
                     édité{% if jeu.editeurs|length > 1 %}s{% endif %} par
-                        {{ jeu.editeurs|join(", ") }}<br />
+                    {% for key, personne in jeu.editeurs %}{% if (key > 0) %},{% endif %} <a href="{{ path('personne_show', { 'id': personne.id, 'slug': personne.slug })  }}">{{ personne }}</a>{% endfor %}
+                    <br />
                 {% endif %}
             </p>
             <p>

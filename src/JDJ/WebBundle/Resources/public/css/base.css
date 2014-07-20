@@ -133,7 +133,7 @@ button:focus, button:active, a.button:focus, a.button:active {
 /**************************************************************/
 /* line 149, ../sass/base.scss */
 .listing .image.crop {
-  height: 200px;
+  height: 150px;
   width: 100%;
   overflow: hidden;
 }
