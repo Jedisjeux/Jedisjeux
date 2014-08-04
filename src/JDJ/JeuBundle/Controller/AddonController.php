@@ -21,7 +21,6 @@ class AddonController extends Controller
      */
     public function indexAction($jeu_id)
     {
-
         $em = $this->getDoctrine()->getManager();
 
         //On récupère le jeu
@@ -73,7 +72,7 @@ class AddonController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-
+            $request->getSession()->getFlashBag()->add('success', 'L\'Addon a bien été enregistré');
             return $this->redirect($this->generateUrl('jeu_addon', array('jeu_id' => $jeu_id)));
         }
 
@@ -153,24 +152,21 @@ class AddonController extends Controller
     public function editAction($jeu_id, $id)
     {
 
-        var_dump($jeu_id);
-        var_dump($id);
-        exit;
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('JDJJeuBundle:Addon')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Addon entity.');
         }
 
+        //On récupère le jeu
+        $jeu = $this->getDoctrine()->getManager()->getRepository('JDJJeuBundle:Jeu')->find($jeu_id);
         $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('JDJJeuBundle:Addon:edit.html.twig', array(
+        return $this->render('JDJJeuBundle:Addon:new.html.twig', array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'jeu' => $jeu,
+            'form'   => $editForm->createView(),
         ));
     }
 
@@ -184,11 +180,11 @@ class AddonController extends Controller
     private function createEditForm(Addon $entity)
     {
         $form = $this->createForm(new AddonType(), $entity, array(
-            'action' => $this->generateUrl('jeu_addon_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('jeu_addon_update', array('jeu_id' => $entity->getJeu()->getId(), 'id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => 'Mettre à jour'));
 
         return $form;
     }
@@ -213,10 +209,11 @@ class AddonController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('jeu_addon_edit', array('id' => $id)));
+            $request->getSession()->getFlashBag()->add('success', 'L\'Addon a bien été enregistré');
+            return $this->redirect($this->generateUrl('jeu_addon', array('jeu_id' => $jeu_id)));
         }
 
-        return $this->render('JDJJeuBundle:Addon:edit.html.twig', array(
+        return $this->render('JDJJeuBundle:Addon:new.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -239,6 +236,7 @@ class AddonController extends Controller
                 throw $this->createNotFoundException('Unable to find Addon entity.');
             }
 
+            $request->getSession()->getFlashBag()->add('success', 'L\'Addon a bien été supprimé');
             $em->remove($entity);
             $em->flush();
         }

@@ -53,7 +53,6 @@ class ClientController extends Controller
             $em->flush();
 
             $request->getSession()->getFlashBag()->add('success', 'Le client a bien été enregistré');
-
             return $this->redirect($this->generateUrl('client'));
         }
 
