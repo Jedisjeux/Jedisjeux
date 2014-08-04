@@ -1,0 +1,13 @@
+<div class="intro">
+    Liste des Addons du jeu
+</div>
+
+<div class="row">
+    <div class="panel materiel medium-4 columns">
+        <ul>
+            {% for row in jeu.getAddons() %}
+                <li>{{ row.libelle }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

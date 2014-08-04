@@ -14,6 +14,7 @@
         <li class="tab-title"><a href="#parties">Parties</a></li>
         <li class="tab-title"><a href="#avis">Avis</a></li>
         <li class="tab-title"><a href="#stats">Stats</a></li>
+        <li class="tab-title"><a href="#addons">Addons</a></li>
     </ul>
     <div class="tabs-content">
         <div class="content active"
@@ -24,6 +25,8 @@
         <div class="content" id="parties"><p>Fifth panel content go here...</p></div>
         <div class="content" id="avis"><p>Avis goe here...</p></div>
         <div class="content" id="stats"><p>Stats goe here...</p></div>
+        <div class="content"
+             id="addons">{% include "JDJJeuBundle:Jeu:partial/onglet/addon.html.twig" with {'jeu': jeu} %}</div>
     </div>
 
 {% endblock %}
