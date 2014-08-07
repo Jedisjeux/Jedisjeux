@@ -26,6 +26,10 @@ jdj_jeu_addon:
     resource: "@JDJJeuBundle/Resources/config/routing/addon.yml"
     prefix:   /addon
 
+jdj_jeu_typeAddon:
+    resource: "@JDJJeuBundle/Resources/config/routing/typeAddon.yml"
+    prefix:   /typeAddon
+
 jdj_jeu:
     resource: "@JDJJeuBundle/Resources/config/routing/jeu.yml"
     prefix:   /
