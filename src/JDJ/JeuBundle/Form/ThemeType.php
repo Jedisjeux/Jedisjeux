@@ -22,6 +22,7 @@ class ThemeType extends AbstractType
     {
         $builder
             ->add('libelle')
+            ->add('description')
         ;
     }
 

@@ -47,14 +47,13 @@
                 {% endif %}
 
                 {% if jeu.mecanismes|length > 0 %}
-                    Mécanismes : {{ jeu.mecanismes|join(", ") }}<br />
+                    Mécanismes : {% for key, mecanisme in jeu.mecanismes %}{% if (key > 0) %},{% endif %} <a href="{{ path('mecanisme_show', { 'id': mecanisme.id, 'slug': mecanisme.slug })  }}">{{ mecanisme }}</a>{% endfor %}
+                    <br />
                 {% endif %}
-                {#{% for mecanisme in jeu.mecanismes %}
-                    {{ mecanisme.libelle }}
-                {% endfor %}#}
 
                 {% if jeu.themes|length > 0 %}
-                    Thèmes : {{ jeu.themes|join(", ") }}<br />
+                    Thèmes : {% for key, theme in jeu.themes %}{% if (key > 0) %},{% endif %} <a href="{{ path('theme_show', { 'id': theme.id, 'slug': theme.slug })  }}">{{ theme }}</a>{% endfor %}
+                    <br />
                 {% endif %}
             </p>
         </div>
