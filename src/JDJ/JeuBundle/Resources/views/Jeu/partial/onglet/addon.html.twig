@@ -1,13 +1,37 @@
-<div class="intro">
-    Liste des Addons du jeu
-</div>
+<h2>Liste des Addons</h2>
+
+<ul>
+    <li>
+        <a class="small button" href="{{ path('jeu_addon_new', { 'jeu_id': jeu.id }) }}">Créer un addon</a>
+    </li>
+</ul>
 
 <div class="row">
-    <div class="panel materiel medium-4 columns">
-        <ul>
-            {% for row in jeu.getAddons() %}
-                <li>{{ row.libelle }}</li>
-            {% endfor %}
-        </ul>
-    </div>
+    <table class="records_list">
+        <thead>
+        <tr>
+            <th>Nom de l'Addon</th>
+            <th>Type</th>
+            <th>url</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for entity in jeu.addons %}
+            <tr>
+                <td>{{ entity.libelle }}</td>
+                <td>{{ entity.typeAddon.libelle }}</td>
+                <td>{{ entity.url }}</td>
+                <td>
+                    <ul class="inline-list">
+                        <li>
+                            <a class="small button" href="{{ path('jeu_addon_edit', { 'jeu_id': jeu.id , 'id': entity.id }) }}">édition</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
 </div>
