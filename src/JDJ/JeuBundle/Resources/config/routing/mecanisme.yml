@@ -2,10 +2,6 @@ mecanisme:
     pattern:  /
     defaults: { _controller: "JDJJeuBundle:Mecanisme:index" }
 
-mecanisme_show:
-    pattern:  /{id}/show
-    defaults: { _controller: "JDJJeuBundle:Mecanisme:show" }
-
 mecanisme_new:
     pattern:  /new
     defaults: { _controller: "JDJJeuBundle:Mecanisme:new" }
@@ -28,3 +24,7 @@ mecanisme_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "JDJJeuBundle:Mecanisme:delete" }
     requirements: { _method: post|delete }
+
+mecanisme_show:
+    pattern:  /{id}/{slug}
+    defaults: { _controller: "JDJJeuBundle:Mecanisme:show" }
