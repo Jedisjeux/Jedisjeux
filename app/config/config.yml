@@ -110,6 +110,10 @@ stof_doctrine_extensions:
       tree: true
       timestampable: false # not needed: listeners are not enabled by default
 
+white_october_pagerfanta:
+    exceptions_strategy:
+        out_of_range_page:        to_http_not_found
+        not_valid_current_page:   to_http_not_found
 
 services:
   gedmo.listener.softdeleteable:

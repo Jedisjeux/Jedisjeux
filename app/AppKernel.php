@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new JDJ\JeuBundle\JDJJeuBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new JDJ\LudographieBundle\JDJLudographieBundle(),
+            new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
