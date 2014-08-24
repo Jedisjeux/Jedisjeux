@@ -2,35 +2,15 @@
 
 {% block body -%}
 
+    {% include "JDJJeuBundle:Jeu:partial/header.html.twig" with {'jeu': jeu} %}
+    {% include "JDJJeuBundle:Jeu:partial/onglet.html.twig" with {'jeu': jeu} %}
 
-    <div class="row">
-        <div class="medium-4 columns">
-            <img src="http://www.jedisjeux.net/img/800/rokoko-49-1375739818.jpg" />
-        </div>
-        <div class="medium-8 columns">
-            <h1>{{ jeu.libelle }}</h1>
+{% endblock %}
 
-            {% if jeu.ageMin %}
-                A partir de {{ jeu.ageMin }} ans
-            {% endif %}
-        </div>
-    </div>
-
-
-    <div class="section-container auto" data-section>
-        <section class="active">
-            <p class="title" data-section-title><a href="#panel1">Présentation</a></p>
-            <div class="content" data-section-content>
-                {% include "JDJJeuBundle:Jeu:onglet-presentation.html.twig" with {'jeu': jeu} %}
-            </div>
-        </section>
-        <section>
-            <p class="title" data-section-title><a href="#panel2">Prix</a></p>
-            <div class="content" data-section-content>
-                <p>Content of section 2.</p>
-            </div>
-        </section>
-    </div>
-
-
+{% block javascript %}
+    {{ parent() }}
+    <script>
+        console.log("test");
+        $(document).foundation({ tab: { callback : function (tab) { console.log(tab); } } });
+    </script>
 {% endblock %}

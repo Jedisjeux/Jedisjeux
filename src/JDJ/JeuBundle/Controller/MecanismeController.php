@@ -98,7 +98,7 @@ class MecanismeController extends Controller
      * Finds and displays a Mecanisme entity.
      *
      */
-    public function showAction($id)
+    public function showAction($id, $slug)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -106,6 +106,18 @@ class MecanismeController extends Controller
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Mecanisme entity.');
+        }
+
+        /**
+         * Redirect the slug is incorrect
+         */
+        if ($slug !== $entity->getSlug()) {
+            return $this->redirect($this->generateUrl('mecanisme_show', array(
+                'id' => $id,
+                'slug' => $entity->getSlug(),
+                    )
+                )
+            );
         }
 
         $deleteForm = $this->createDeleteForm($id);

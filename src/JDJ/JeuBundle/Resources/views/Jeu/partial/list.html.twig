@@ -1,0 +1,22 @@
+<div class="listing">
+    <div class="row">
+        {% for key, jeu in jeux %}
+        {% if (key%4 == 0) and key > 0 %}
+    </div>
+    <div class="row">
+        {% endif %}
+        <div class="medium-3 columns">
+            <div class="image crop">
+                <a href="{{ path('jeu_show', { 'id': jeu.id, 'slug': jeu.slug }) }}">
+                    <img src="http://www.jedisjeux.net/img/800/{{ jeu.imageCouverture }}" alt="Imperial"/>
+                </a>
+            </div>
+            <div class="panel">
+                <a href="{{ path('jeu_show', { 'id': jeu.id, 'slug': jeu.slug }) }}">
+                    <h3>{{ jeu.libelle }}</h3>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

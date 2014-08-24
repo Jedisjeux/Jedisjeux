@@ -2,10 +2,6 @@ jdj_jeu_homepage:
     pattern:  /home
     defaults: { _controller: JDJJeuBundle:Default:index }
 
-jdj_jeu:
-    resource: "@JDJJeuBundle/Resources/config/routing/jeu.yml"
-    prefix:   /
-
 jdj_jeu_mecanisme:
     resource: "@JDJJeuBundle/Resources/config/routing/mecanisme.yml"
     prefix:   /mecanisme
@@ -17,3 +13,23 @@ jdj_jeu_theme:
 jdj_jeu_materiel:
     resource: "@JDJJeuBundle/Resources/config/routing/materiel.yml"
     prefix:   /materiel
+
+jdj_jeu_caracteristique:
+    resource: "@JDJJeuBundle/Resources/config/routing/caracteristique.yml"
+    prefix:   /caracteristique
+
+jdj_jeu_caracteristiqueNote:
+    resource: "@JDJJeuBundle/Resources/config/routing/caracteristiqueNote.yml"
+    prefix:   /caracteristiqueNote
+
+jdj_jeu_addon:
+    resource: "@JDJJeuBundle/Resources/config/routing/addon.yml"
+    prefix:   /addon
+
+jdj_jeu_typeAddon:
+    resource: "@JDJJeuBundle/Resources/config/routing/typeAddon.yml"
+    prefix:   /typeAddon
+
+jdj_jeu:
+    resource: "@JDJJeuBundle/Resources/config/routing/jeu.yml"
+    prefix:   /

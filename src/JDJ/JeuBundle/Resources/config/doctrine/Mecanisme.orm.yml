@@ -12,9 +12,22 @@ JDJ\JeuBundle\Entity\Mecanisme:
       type: string
       nullable: false
       length: 50
+    description:
+      type: text
+      nullable: true
+    slug:
+      type: string
+      length: 128
+      gedmo:
+        slug:
+          separator: -
+          style: default
+          fields:
+            - libelle
   manyToMany:
     jeux:
       targetEntity: Jeu
+      inversedBy: mecanismes
       cascade: ["persist"]
       joinTable:
         name: jdj_mecanisme_jeu

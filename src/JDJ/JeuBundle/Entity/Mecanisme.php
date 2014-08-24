@@ -20,6 +20,16 @@ class Mecanisme
     private $libelle;
 
     /**
+     * @var string
+     */
+    private $description;
+
+    /**
+     * @var string
+     */
+    private $slug;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $jeux;
@@ -97,4 +107,61 @@ class Mecanisme
     {
         return $this->jeux;
     }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Mecanisme
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Mecanisme
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Entity To String
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getLibelle();
+    }
+
 }

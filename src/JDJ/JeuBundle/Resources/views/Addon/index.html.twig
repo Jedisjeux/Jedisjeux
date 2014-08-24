@@ -1,0 +1,47 @@
+{% extends "JDJWebBundle::layout.html.twig" %}
+
+{% block body -%}
+    <h1>Liste des Addons du jeu {{ jeu.libelle }}</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Nom de l'Addon</th>
+                <th>url</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.libelle }}</td>
+                <td>{{ entity.url }}</td>
+                <td>
+                    <ul class="inline-list">
+                        <li>
+                            <a class="small button" href="{{ path('jeu_addon_edit', { 'jeu_id': jeu.id , 'id': entity.id }) }}">édition</a>
+                        </li>
+                        <li>
+                            {{ form_start(deleteForms[entity.id]) }}
+                            {{ form_widget(deleteForms[entity.id].submit, {'attr': {'class': 'small button'}, 'label': 'Supprimer'}) }}
+                            {{ form_end(deleteForms[entity.id]) }}
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('jeu_addon_new', { 'jeu_id': jeu.id }) }}">
+                Ajouter un nouvel Addon pour le jeu {{ jeu.libelle }}
+            </a>
+        </li>
+    </ul>
+
+    <a href="{{ path('typeAddon') }}">
+        Gestion des types d'addon
+    </a>
+    {% endblock %}

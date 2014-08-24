@@ -22,5 +22,5 @@ JDJ\ComptaBundle\Entity\TarifProduit:
   manyToOne:
     produit:
       targetEntity: Produit
-      mappedBy: tarifProduit
+      inversedBy: tarifs
       cascade: ["persist", "merge"]

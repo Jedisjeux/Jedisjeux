@@ -22,6 +22,7 @@ class MecanismeType extends AbstractType
     {
         $builder
             ->add('libelle')
+            ->add('description')
         ;
     }
 

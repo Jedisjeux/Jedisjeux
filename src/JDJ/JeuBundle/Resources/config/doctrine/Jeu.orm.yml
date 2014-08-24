@@ -1,5 +1,6 @@
 JDJ\JeuBundle\Entity\Jeu:
   type: entity
+  repositoryClass: JDJ\JeuBundle\Entity\JeuRepository
   table: jdj_jeu
   id:
     id:
@@ -16,6 +17,14 @@ JDJ\JeuBundle\Entity\Jeu:
       type: integer
       nullable: true
       unsigned: true
+    joueurMin:
+      type: integer
+      nullable: true
+      unsigned: true
+    joueurMax:
+      type: integer
+      nullable: true
+      unsigned: true
     intro:
       type: text
       nullable: true
@@ -28,10 +37,52 @@ JDJ\JeuBundle\Entity\Jeu:
     description:
       type: text
       nullable: true
+    slug:
+      type: string
+      length: 128
+      gedmo:
+        slug:
+          separator: -
+          style: default
+          fields:
+            - libelle
+    imageCouverture:
+      type: string
+      length: 50
+      nullable: true
+  indexes:
+    search_idx:
+      columns: slug
+
   manyToMany:
     mecanismes:
       targetEntity: Mecanisme
-      mappedBy: jeu
+      mappedBy: jeux
+      cascade: ["persist"]
     themes:
       targetEntity: Theme
+      mappedBy: jeux
+      cascade: ["persist"]
+    auteurs:
+      targetEntity: JDJ\LudographieBundle\Entity\Personne
+      mappedBy: auteurJeux
+      cascade: ["persist"]
+    illustrateurs:
+      targetEntity: JDJ\LudographieBundle\Entity\Personne
+      mappedBy: illustrateurJeux
+      cascade: ["persist"]
+    editeurs:
+          targetEntity: JDJ\LudographieBundle\Entity\Personne
+          mappedBy: editeurJeux
+          cascade: ["persist"]
+  oneToMany:
+    jeuCaracteristiques:
+      targetEntity: JeuCaracteristique
       mappedBy: jeu
+    addons:
+      targetEntity: Addon
+      mappedBy: jeu
+  manyToOne:
+    statut:
+      targetEntity: JDJ\WebBundle\Entity\Statut
+      inversedBy: jeux

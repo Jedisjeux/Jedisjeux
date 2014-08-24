@@ -1,0 +1,30 @@
+caracteristiqueNote:
+    pattern:  /
+    defaults: { _controller: "JDJJeuBundle:CaracteristiqueNote:index" }
+
+caracteristiqueNote_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "JDJJeuBundle:CaracteristiqueNote:show" }
+
+caracteristiqueNote_new:
+    pattern:  /new
+    defaults: { _controller: "JDJJeuBundle:CaracteristiqueNote:new" }
+
+caracteristiqueNote_create:
+    pattern:  /create
+    defaults: { _controller: "JDJJeuBundle:CaracteristiqueNote:create" }
+    requirements: { _method: post }
+
+caracteristiqueNote_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "JDJJeuBundle:CaracteristiqueNote:edit" }
+
+caracteristiqueNote_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "JDJJeuBundle:CaracteristiqueNote:update" }
+    requirements: { _method: post|put }
+
+caracteristiqueNote_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "JDJJeuBundle:CaracteristiqueNote:delete" }
+    requirements: { _method: post|delete }

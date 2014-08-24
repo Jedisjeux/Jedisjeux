@@ -22,11 +22,6 @@ class Ecriture
     /**
      * @var string
      */
-    private $sens;
-
-    /**
-     * @var string
-     */
     private $montant;
 
     /**
@@ -53,6 +48,11 @@ class Ecriture
      * @var \JDJ\ComptaBundle\Entity\ModeReglement
      */
     private $modeReglement;
+
+    /**
+     * @var \JDJ\ComptaBundle\Entity\Sens
+     */
+    private $sens;
 
 
     /**
@@ -86,29 +86,6 @@ class Ecriture
     public function getLibelle()
     {
         return $this->libelle;
-    }
-
-    /**
-     * Set sens
-     *
-     * @param string $sens
-     * @return Ecriture
-     */
-    public function setSens($sens)
-    {
-        $this->sens = $sens;
-
-        return $this;
-    }
-
-    /**
-     * Get sens
-     *
-     * @return string 
-     */
-    public function getSens()
-    {
-        return $this->sens;
     }
 
     /**
@@ -247,5 +224,28 @@ class Ecriture
     public function getModeReglement()
     {
         return $this->modeReglement;
+    }
+
+    /**
+     * Set sens
+     *
+     * @param \JDJ\ComptaBundle\Entity\Sens $sens
+     * @return Ecriture
+     */
+    public function setSens(\JDJ\ComptaBundle\Entity\Sens $sens = null)
+    {
+        $this->sens = $sens;
+
+        return $this;
+    }
+
+    /**
+     * Get sens
+     *
+     * @return \JDJ\ComptaBundle\Entity\Sens 
+     */
+    public function getSens()
+    {
+        return $this->sens;
     }
 }

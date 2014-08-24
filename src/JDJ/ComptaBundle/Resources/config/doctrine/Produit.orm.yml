@@ -17,7 +17,7 @@ JDJ\ComptaBundle\Entity\Produit:
       targetEntity: TarifProduit
       mappedBy: produit
       cascade: ["persist", "merge"]
-    factures:
-      targetEntity: Facture
+    factureProduits:
+      targetEntity: FactureProduit
       mappedBy: produit
       cascade: ["persist", "merge"]
