@@ -13,6 +13,7 @@ use JDJ\JeuBundle\Entity\Jeu;
 use JDJ\JeuBundle\Form\JeuType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManager;
 
 class JeuController extends Controller
 {
@@ -71,37 +72,16 @@ class JeuController extends Controller
         ));
     }
 
-    /**
-     * Méthode utilisée lors de l'initialisation du site
-     */
-    public function initialisationAction()
+    public function indexAction(Request $request)
     {
+        /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
 
-        $entities = array();
-        for ($i=1 ; $i<20 ; $i++) {
-            $entities[] = $em->getRepository('JDJJeuBundle:Jeu')->find($i);
-        }
+        $entities = $em->getRepository('JDJJeuBundle:Jeu')->findAll();
 
-
-        /** @var Jeu $entity */
-        foreach($entities as $entity) {
-            $entity->setIntro($this->nl2p($entity->getIntro()));
-            $entity->setBut($this->nl2p($entity->getBut()));
-            $entity->setDescription($this->nl2p($entity->getDescription()));
-            $em->flush($entity);
-        }
-        exit;
-    }
-
-    private function nl2p($text) {
-        $text = trim($text);
-        // on remplace les retour à la ligne par des <br />
-        $text = preg_replace("/\n\r?/", "<br />", $text);
-        // on crée les paragraphes autour des sauts de ligne
-        $text = preg_replace("/(<br \/>){2,}/", "</p>\n<p>", $text);
-        return "<p>".$text."</p>";
-
+        return $this->render('JDJJeuBundle:Jeu:index.html.twig', array(
+            'entities' => $entities,
+        ));
     }
 
     /**
