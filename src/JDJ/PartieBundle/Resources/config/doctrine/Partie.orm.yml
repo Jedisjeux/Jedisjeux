@@ -17,6 +17,11 @@ JDJ\PartieBundle\Entity\Partie:
         inversedBy: asAuthorParties
         joinColumn:
           nullable: false
+      jeu:
+        targetEntity: JDJ\JeuBundle\Entity\Jeu
+        inversedBy: parties
+        joinColumn:
+          nullable: false
   manyToMany:
     users:
       targetEntity: JDJ\UserBundle\Entity\User

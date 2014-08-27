@@ -2,6 +2,7 @@
 
 namespace JDJ\PartieBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,11 +31,18 @@ class Partie
     private $users;
 
     /**
+     * @var \JDJ\JeuBundle\Entity\Jeu
+     */
+    private $jeu;
+
+
+    /**
      * Constructor
      */
     public function __construct()
     {
-        $this->joueurs = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->joueurs = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     /**
@@ -135,5 +143,28 @@ class Partie
     public function getUsers()
     {
         return $this->users;
+    }
+
+    /**
+     * Set jeu
+     *
+     * @param \JDJ\JeuBundle\Entity\Jeu $jeu
+     * @return Partie
+     */
+    public function setJeu(\JDJ\JeuBundle\Entity\Jeu $jeu)
+    {
+        $this->jeu = $jeu;
+
+        return $this;
+    }
+
+    /**
+     * Get jeu
+     *
+     * @return \JDJ\JeuBundle\Entity\Jeu 
+     */
+    public function getJeu()
+    {
+        return $this->jeu;
     }
 }
