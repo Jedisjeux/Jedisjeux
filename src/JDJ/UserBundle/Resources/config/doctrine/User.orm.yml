@@ -7,3 +7,12 @@ JDJ\UserBundle\Entity\User:
             type: integer
             generator:
                 strategy: AUTO
+    oneToMany:
+        asAuthorParties:
+          targetEntity: JDJ\PartieBundle\Entity\Partie
+          mappedBy: author
+    manyToMany:
+        parties:
+          targetEntity: JDJ\PartieBundle\Entity\Partie
+          mappedBy: users
+          cascade: ["persist"]

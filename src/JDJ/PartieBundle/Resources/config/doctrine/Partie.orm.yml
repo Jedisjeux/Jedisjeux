@@ -1,0 +1,32 @@
+JDJ\PartieBundle\Entity\Partie:
+  type: entity
+  table: jdj_partie
+  id:
+    id:
+      type: integer
+      unsigned: true
+      generator:
+        strategy: IDENTITY
+  oneToMany:
+    joueurs:
+      targetEntity: Joueur
+      mappedBy: partie
+  manyToOne:
+      author:
+        targetEntity: JDJ\UserBundle\Entity\User
+        inversedBy: asAuthorParties
+        joinColumn:
+          nullable: false
+  manyToMany:
+    users:
+      targetEntity: JDJ\UserBundle\Entity\User
+      inversedBy: parties
+      cascade: ["persist"]
+      joinTable:
+        name: jdj_user_partie
+        joinColumns:
+          partie_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          user_id:
+            referencedColumnName: id

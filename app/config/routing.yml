@@ -1,3 +1,7 @@
+jdj_partie:
+    resource: "@JDJPartieBundle/Resources/config/routing.yml"
+    prefix:   /
+
 jdj_user:
     resource: "@JDJUserBundle/Resources/config/routing.yml"
     prefix:   /
