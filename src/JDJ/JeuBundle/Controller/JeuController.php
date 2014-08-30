@@ -43,8 +43,14 @@ class JeuController extends Controller
             );
         }
 
+        $userReviews = $em->getRepository('JDJUserReviewBundle:UserReview')->findBy(array(
+            'commented' => true,
+            'jeu' => $entity,
+        ));
+
         return $this->render('JDJJeuBundle:Jeu:show.html.twig', array(
                 'jeu' => $entity,
+                'userReviews' => $userReviews,
             )
         );
     }
