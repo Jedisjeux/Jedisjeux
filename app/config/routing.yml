@@ -1,6 +1,6 @@
 jdj_partie:
     resource: "@JDJPartieBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /partie
 
 jdj_user:
     resource: "@JDJUserBundle/Resources/config/routing.yml"

@@ -1,0 +1,16 @@
+{% extends "JDJWebBundle::layout.html.twig" %}
+
+{% block body -%}
+
+    {% include "JDJJeuBundle:Jeu:partial/header.html.twig" with {
+        'jeu': entity.jeu
+    } %}
+
+    <h3>Scores de la partie</h3>
+
+    {% include "JDJPartieBundle:Partie:partial/_scores.html.twig" with {
+        'partie': entity
+    } %}
+
+
+{% endblock %}

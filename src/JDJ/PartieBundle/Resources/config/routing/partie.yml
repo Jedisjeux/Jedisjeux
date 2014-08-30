@@ -1,0 +1,8 @@
+partie_show:
+    pattern:  /{id}/jeu/{slug}
+    defaults: { _controller: "JDJPartieBundle:Partie:show" }
+
+partie_delete:
+    pattern:  /partie/{id}/delete
+    defaults: { _controller: "JDJPartieBundle:Partie:delete" }
+    requirements: { _method: post|delete }

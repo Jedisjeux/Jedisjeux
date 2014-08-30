@@ -1,0 +1,8 @@
+{% extends "JDJWebBundle::layout.html.twig" %}
+
+{% block body -%}
+
+    <h2>Ajouter un joueur</h2>
+    {% include "JDJPartieBundle:Joueur:partial/_form.html.twig" with {'entity': entity} %}
+
+{% endblock %}

@@ -7,6 +7,21 @@ JDJ\PartieBundle\Entity\Partie:
       unsigned: true
       generator:
         strategy: IDENTITY
+  fields:
+    playedAt:
+      type: date
+      nullable: false
+    createdAt:
+      type: date
+      gedmo:
+        timestampable:
+          on: create
+    updatedAt:
+      type: datetime
+      nullable: true
+      gedmo:
+        timestampable:
+          on: update
   oneToMany:
     joueurs:
       targetEntity: Joueur
