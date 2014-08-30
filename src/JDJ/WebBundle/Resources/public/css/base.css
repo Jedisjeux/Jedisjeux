@@ -242,3 +242,8 @@ div [role=content] {
   min-height: 800px;
   background: white;
 }
+
+/* line 231, ../sass/base.scss */
+.publication-info {
+  font-style: italic;
+}
