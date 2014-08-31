@@ -28,3 +28,72 @@
     }
   }
 }
+
+/*****************************************************/
+/* Notation avec étoiles */
+/*****************************************************/
+
+.starRating {
+  float: left;
+  margin: 0px 10px;
+}
+
+.starRating ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.starRating p, .starRating span {
+  display: none;
+}
+
+.starRating .starLeft,
+.starRating .starRight{
+  float: left;
+  width: 11px;
+  height: 20px;
+}
+
+.starRating .starLeft a,
+.starRating .starRight a{
+  width: 11px;
+  height: 20px;
+  display: block;
+  text-decoration: none;
+}
+
+.starRating .starLeft{
+  background: url(http://www.jedisjeux.net/img/design/icons/stars.png) left bottom;
+}
+
+.starRating .starRight{
+  background: url(http://www.jedisjeux.net/img/design/icons/stars.png) right bottom;
+}
+
+.starRating .starLeft.selected{
+  background: url(http://www.jedisjeux.net/img/design/icons/stars.png) left top;
+}
+
+.starRating .starRight.selected{
+  background: url(http://www.jedisjeux.net/img/design/icons/stars.png) right top;
+}
+
+
+ul.NoteLien{
+  margin: 3px 0px 0px 0px;
+
+}
+
+
+ul.NoteLien li{
+  display: inline;
+  color: #CCC;
+  font: 12px Arial, Sans-serif;
+
+}
+
+ul.NoteLien li a{
+  color: #DEA20C;
+
+}

@@ -1,0 +1,10 @@
+<div class="row">
+    <div class="starRating">
+        <p>{{ userNote.note.valeur }}</p>
+        <ul>
+            {% for note in notes %}
+                <li><a href="#" title="{{ note.libelle }}"><span>{{ note.valeur }}</span></a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
