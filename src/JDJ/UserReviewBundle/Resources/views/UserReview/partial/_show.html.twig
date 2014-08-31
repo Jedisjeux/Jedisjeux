@@ -1,0 +1,11 @@
+<div class="row">
+    <div class="medium-2 columns">
+        <a href="{{ path("jeu_show", {'id': entity.jeuNote.jeu.id, 'slug': entity.jeuNote.jeu.slug}) }}"><img src="http://www.jedisjeux.net/img/800/{{ entity.jeuNote.jeu.imageCouverture }}"/></a>
+    </div>
+    <div class="medium-10 columns">
+        <h3>{{ entity.libelle }}</h3>
+
+        <p class="publication-info">publié le {{ entity.createdAt | date("d/m/Y") }}</p>
+        {{ entity.body | raw }}
+    </div>
+</div>

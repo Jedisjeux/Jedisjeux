@@ -31,6 +31,8 @@ class AppKernel extends Kernel
             new JDJ\LudographieBundle\JDJLudographieBundle(),
             new JDJ\UserBundle\JDJUserBundle(),
             new JDJ\CommentBundle\JDJCommentBundle(),
+            new JDJ\PartieBundle\JDJPartieBundle(),
+            new JDJ\UserReviewBundle\JDJUserReviewBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

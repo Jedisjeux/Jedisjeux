@@ -1,0 +1,30 @@
+user_review:
+    pattern:  /avis
+    defaults: { _controller: "JDJUserReviewBundle:UserReview:index" }
+
+user_review_edit:
+    pattern:  /avis/{id}/edit
+    defaults: { _controller: "JDJUserReviewBundle:UserReview:edit" }
+
+user_review_update:
+    pattern:  /avis/{id}/update
+    defaults: { _controller: "JDJUserReviewBundle:UserReview:update" }
+    requirements: { _method: post|put }
+
+user_review_delete:
+    pattern:  /avis/{id}/delete
+    defaults: { _controller: "JDJUserReviewBundle:UserReview:delete" }
+    requirements: { _method: post|delete }
+
+user_review_new:
+    pattern:  /jeu/{idJeu}/avis/new
+    defaults: { _controller: "JDJUserReviewBundle:UserReview:new" }
+
+user_review_create:
+    pattern:  /avis/create
+    defaults: { _controller: "JDJUserReviewBundle:UserReview:create" }
+    requirements: { _method: post }
+
+user_review_show:
+    pattern:  /avis/{id}
+    defaults: { _controller: "JDJUserReviewBundle:UserReview:show" }

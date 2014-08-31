@@ -1,0 +1,7 @@
+jdj_user_review_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: JDJUserReviewBundle:Default:index }
+
+jdj_user_review:
+    resource: "@JDJUserReviewBundle/Resources/config/routing/userReview.yml"
+    prefix:   /

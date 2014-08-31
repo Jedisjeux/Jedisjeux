@@ -1,0 +1,3 @@
+jdj_partie_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: JDJPartieBundle:Default:index }
