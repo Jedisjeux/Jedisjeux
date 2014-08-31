@@ -9,8 +9,10 @@
 namespace JDJ\JeuBundle\Controller;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
 use JDJ\JeuBundle\Entity\Jeu;
 use JDJ\JeuBundle\Form\JeuType;
+use JDJ\UserReviewBundle\Entity\JeuNote;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -43,8 +45,23 @@ class JeuController extends Controller
             );
         }
 
+        $jeuNotes = $em->getRepository('JDJUserReviewBundle:JeuNote')->findBy(array(
+            'jeu' => $entity,
+        ));
+
+        $userReviews = new ArrayCollection();
+
+        /** @var JeuNote $jeuNote */
+        foreach($jeuNotes as $jeuNote)
+        {
+            if ($jeuNote->hasUserReview()) {
+                $userReviews[] = $jeuNote->getUserReview();
+            }
+        }
+
         return $this->render('JDJJeuBundle:Jeu:show.html.twig', array(
                 'jeu' => $entity,
+                'userReviews' => $userReviews,
             )
         );
     }

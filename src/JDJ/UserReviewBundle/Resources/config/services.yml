@@ -1,0 +1,8 @@
+parameters:
+#    jdj_user_review.example.class: JDJ\UserReviewBundle\Example
+
+services:
+  jdj.form.type.jeu_note:
+    class: JDJ\UserReviewBundle\Form\JeuNoteType
+    tags:
+      - { name: form.type, alias: jdj_userreviewbundle_jeunote }

@@ -1,0 +1,9 @@
+{% extends "JDJWebBundle::layout.html.twig" %}
+
+{% block body -%}
+
+    {% for entity in entities %}
+        {% include "JDJUserReviewBundle:UserReview:partial/_show.html.twig" with {'entity': entity} %}
+    {% endfor %}
+
+{% endblock %}
