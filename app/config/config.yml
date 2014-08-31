@@ -5,6 +5,7 @@ imports:
 framework:
     #esi:             ~
     #translator:      { fallback: "%locale%" }
+    translator: ~
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -33,7 +34,7 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ 'JDJWebBundle', 'JDJFoundationBundle', 'JDJJeuBundle']
+    bundles:        [ 'JDJWebBundle', 'JDJFoundationBundle', 'JDJJeuBundle', "FOSCommentBundle" ]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -119,6 +120,14 @@ fos_user:
   db_driver: orm
   firewall_name: main
   user_class: JDJ\UserBundle\Entity\User
+
+fos_comment:
+    db_driver: orm
+    class:
+        model:
+            comment: JDJ\CommentBundle\Entity\Comment
+            thread: JDJ\CommentBundle\Entity\Thread
+
 
 services:
   gedmo.listener.softdeleteable:

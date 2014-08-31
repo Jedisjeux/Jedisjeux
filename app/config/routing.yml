@@ -1,3 +1,6 @@
+jdj_comment:
+    resource: "@JDJCommentBundle/Resources/config/routing.yml"
+
 jdj_user_review:
     resource: "@JDJUserReviewBundle/Resources/config/routing.yml"
     prefix:   /

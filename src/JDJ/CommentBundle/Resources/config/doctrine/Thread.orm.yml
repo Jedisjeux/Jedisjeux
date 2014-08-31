@@ -1,0 +1,7 @@
+JDJ\CommentBundle\Entity\Thread:
+  type: entity
+  table: fos_thread
+  changeTrackingPolicy: DEFERRED_EXPLICIT
+  id:
+      id:
+        type: string
