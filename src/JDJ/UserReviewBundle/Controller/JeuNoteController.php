@@ -13,6 +13,7 @@ use JDJ\JeuBundle\Entity\Jeu;
 use JDJ\UserReviewBundle\Entity\JeuNote;
 use JDJ\UserReviewBundle\Entity\Note;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class JeuNoteController extends Controller
@@ -60,7 +61,7 @@ class JeuNoteController extends Controller
         $em = $this->getDoctrine()->getManager();
         /** @var Note $note */
 
-        $note = $em->getRepository('JDJJeuBundle:Jeu')->find($idNote);
+        $note = $em->getRepository('JDJUserReviewBundle:Note')->find($idNote);
 
         if (!$note) {
             throw $this->createNotFoundException('Unable to find Note entity.');
@@ -75,10 +76,18 @@ class JeuNoteController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new JeuNote();
-
         $jeu = $this->findJeu($request->request->get("idJeu"));
         $note = $this->findNote($request->request->get("idNote"));
+
+        /**
+         * Find if a note already exists
+         * for logged user
+         */
+        $entity = $this->findJeuNote($jeu);
+
+        if (!$entity) {
+            $entity = new JeuNote();
+        }
 
         $entity
             ->setJeu($jeu)
@@ -90,6 +99,10 @@ class JeuNoteController extends Controller
 
         $em->persist($entity);
         $em->flush();
+
+        return new JsonResponse(array(
+            'valeur' => $entity->getNote()->getValeur(),
+        ));
     }
 
     /**
@@ -109,6 +122,7 @@ class JeuNoteController extends Controller
         return $this->render('JDJUserReviewBundle:JeuNote:new.html.twig', array(
             'userNote' => $userNote,
             'notes' => $notes,
+            'jeu' => $jeu,
         ));
     }
 } 

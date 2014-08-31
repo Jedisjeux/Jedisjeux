@@ -74,71 +74,44 @@
   float: left;
   margin: 0px 10px;
 }
-
-/* line 41, ../sass/module/_jeu.scss */
+/* line 40, ../sass/module/_jeu.scss */
 .starRating ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
-
-/* line 47, ../sass/module/_jeu.scss */
+/* line 46, ../sass/module/_jeu.scss */
 .starRating p, .starRating span {
   display: none;
 }
-
-/* line 52, ../sass/module/_jeu.scss */
-.starRating .starLeft,
-.starRating .starRight {
+/* line 50, ../sass/module/_jeu.scss */
+.starRating .starLeft, .starRating .starRight {
   float: left;
   width: 11px;
   height: 20px;
 }
-
-/* line 59, ../sass/module/_jeu.scss */
-.starRating .starLeft a,
-.starRating .starRight a {
+/* line 55, ../sass/module/_jeu.scss */
+.starRating .starLeft a, .starRating .starRight a {
   width: 11px;
   height: 20px;
   display: block;
   text-decoration: none;
 }
-
-/* line 66, ../sass/module/_jeu.scss */
+/* line 63, ../sass/module/_jeu.scss */
 .starRating .starLeft {
   background: url(http://www.jedisjeux.net/img/design/icons/stars.png) left bottom;
 }
-
+/* line 65, ../sass/module/_jeu.scss */
+.starRating .starLeft.selected {
+  background: url(http://www.jedisjeux.net/img/design/icons/stars.png) left top;
+}
 /* line 70, ../sass/module/_jeu.scss */
 .starRating .starRight {
   background: url(http://www.jedisjeux.net/img/design/icons/stars.png) right bottom;
 }
-
-/* line 74, ../sass/module/_jeu.scss */
-.starRating .starLeft.selected {
-  background: url(http://www.jedisjeux.net/img/design/icons/stars.png) left top;
-}
-
-/* line 78, ../sass/module/_jeu.scss */
+/* line 72, ../sass/module/_jeu.scss */
 .starRating .starRight.selected {
   background: url(http://www.jedisjeux.net/img/design/icons/stars.png) right top;
-}
-
-/* line 83, ../sass/module/_jeu.scss */
-ul.NoteLien {
-  margin: 3px 0px 0px 0px;
-}
-
-/* line 89, ../sass/module/_jeu.scss */
-ul.NoteLien li {
-  display: inline;
-  color: #CCC;
-  font: 12px Arial, Sans-serif;
-}
-
-/* line 96, ../sass/module/_jeu.scss */
-ul.NoteLien li a {
-  color: #DEA20C;
 }
 
 /* line 24, ../sass/base.scss */

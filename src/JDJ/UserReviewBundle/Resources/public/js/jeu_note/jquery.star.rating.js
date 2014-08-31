@@ -37,6 +37,11 @@
         });
 
         _this.mouseleave(function() {
+
+            // la note actuelle (si l'utilisateur a déjà noté l'élément)
+            // se trouve dans la balise p
+            oldNote = parseInt(_this.find('p').text());
+
             var li = $(this);
             setTimeout(function(){
                 changeNote(li, oldNote);
