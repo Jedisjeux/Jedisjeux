@@ -4,10 +4,10 @@
 
     {% for entity in entities %}
     <div class="row">
-        <div class="medium-3 columns">
+        <div class="medium-2 columns">
             <img src="http://www.jedisjeux.net/img/800/{{ entity.jeu.imageCouverture }}" />
         </div>
-        <div class="medium-9 columns">
+        <div class="medium-10 columns">
             <h3>{{ entity.libelle }}</h3>
             <p class="publication-info">publié le {{ entity.createdAt | date("d/m/Y") }} par {{ entity.author.username }}</p>
             {{ entity.body | raw }}
