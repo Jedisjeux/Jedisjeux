@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: loic_425
- * Date: 30/08/2014
- * Time: 17:38
+ * Date: 31/08/2014
+ * Time: 12:34
  */
 
 namespace JDJ\UserReviewBundle\Form;
@@ -12,7 +12,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class UserReviewType extends AbstractType
+class JeuNoteType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -21,9 +21,8 @@ class UserReviewType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add("jeuNote", "jdj_userreviewbundle_jeunote")
-            ->add('libelle')
-            ->add('body')
+            ->add('note')
+            ->add('jeu')
         ;
     }
 
@@ -33,7 +32,7 @@ class UserReviewType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'JDJ\UserReviewBundle\Entity\UserReview',
+            'data_class' => 'JDJ\UserReviewBundle\Entity\JeuNote',
         ));
     }
 
@@ -42,6 +41,6 @@ class UserReviewType extends AbstractType
      */
     public function getName()
     {
-        return 'jdj_userreviewbundle_userreview';
+        return 'jdj_userreviewbundle_jeunote';
     }
 } 

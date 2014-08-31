@@ -1,12 +1,6 @@
 JDJ\UserReviewBundle\Entity\UserReview:
   type: entity
   table: jdj_user_review
-  uniqueConstraints:
-    search_idx:
-      columns: [jeu_id, author_id]
-  indexes:
-    search_commented:
-      columns: [commented]
   id:
     id:
       type: integer
@@ -17,16 +11,11 @@ JDJ\UserReviewBundle\Entity\UserReview:
   fields:
     libelle:
       type: string
-      nullable: true
+      nullable: false
       length: 100
     body:
       type: text
-      nullable: true
-    commented:
-      type: boolean
       nullable: false
-      options:
-        default: false
     createdAt:
       type: datetime
       gedmo:
@@ -38,16 +27,10 @@ JDJ\UserReviewBundle\Entity\UserReview:
         timestampable:
           on: update
 
-  manyToOne:
-      author:
-        targetEntity: JDJ\UserBundle\Entity\User
-        joinColumn:
-          nullable: false
-      jeu:
-        targetEntity: JDJ\JeuBundle\Entity\Jeu
-        joinColumn:
-          nullable: false
-      note:
-        targetEntity: Note
-        joinColumn:
-          nullable: false
+  oneToOne:
+    jeuNote:
+      targetEntity: JeuNote
+      inversedBy: userReview
+      cascade: ["persist", "merge"]
+      joinColumn:
+        nullable: false

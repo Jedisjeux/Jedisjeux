@@ -1,12 +1,3 @@
-{% for userReview in userReviews %}
-    <div class="row">
-        <div class="medium-2 columns">
-            <img src="http://www.jedisjeux.net/phpbb3/download/file.php?avatar=2_1211522796.png" />
-        </div>
-        <div class="medium-10 columns">
-            <h3>{{ userReview.libelle }}</h3>
-            <p class="publication-info">publié le {{ userReview.createdAt | date("d/m/Y") }} par {{ userReview.author.username }}</p>
-            {{ userReview.body | raw }}
-        </div>
-    </div>
+{% for entity in userReviews %}
+    {% include "JDJUserReviewBundle:UserReview:partial/_show.html.twig" with {'entity': entity} %}
 {% endfor %}

@@ -24,9 +24,7 @@ class UserReviewController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('JDJUserReviewBundle:UserReview')->findBy(array(
-            'commented' => true,
-        ));
+        $entities = $em->getRepository('JDJUserReviewBundle:UserReview')->findAll();
 
         $deleteForms = array();
         foreach ($entities as $entity) {
@@ -51,8 +49,13 @@ class UserReviewController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $jeu = $form->get('jeuNote')->get('jeu')->getData();
+            $jeuNote = $this->findJeuNote($jeu);
+            if (null !== $jeuNote) {
+                $entity->setJeuNote($jeuNote);
+            }
             $entity
-                ->setCommented(true)
+                ->getJeuNote()
                 ->setAuthor($this->getUser())
             ;
             $em->persist($entity);
@@ -111,18 +114,15 @@ class UserReviewController extends Controller
 
     /**
      * @param Jeu $jeu
-     * @return UserReview
+     * @return mixed
      */
-    private function findUserReview(Jeu $jeu)
+    public function findJeuNote(Jeu $jeu)
     {
         $em = $this->getDoctrine()->getManager();
-        /** @var UserReview $userReview */
-        $userReview = $em->getRepository('JDJUserReviewBundle:UserReview')->findOneBy(array(
+        return $em->getRepository('JDJUserReviewBundle:JeuNote')->findOneBy(array(
             'jeu' => $jeu,
-            'author' => $this->getUser(),
+            'author'=> $this->getUser(),
         ));
-
-        return $userReview;
     }
 
     /**
@@ -133,9 +133,18 @@ class UserReviewController extends Controller
     {
         $jeu = $this->findJeu($idJeu);
 
-        $userReview = $this->findUserReview($jeu);
+        $jeuNote = $this->findJeuNote($jeu);
+        $userReview = null;
 
-        if ($userReview) {
+        if (null !== $jeuNote) {
+            $userReview = $jeuNote->getUserReview();
+        }
+
+        /**
+         * The User Review already exists
+         * Redirect to the edit route
+         */
+        if (null !== $userReview) {
             return $this->redirect($this->generateUrl('user_review_edit', array(
                 'id' => $userReview->getId(),
             )));
@@ -143,7 +152,15 @@ class UserReviewController extends Controller
 
         $entity = new UserReview();
         $form   = $this->createCreateForm($entity);
-        $form->get('jeu')->setData($jeu);
+
+        /**
+         * Pre populate data
+         */
+        if (null !== $jeuNote) {
+            $form->get('jeuNote')->setData($jeuNote);
+        } else {
+            $form->get('jeuNote')->get('jeu')->setData($jeu);
+        }
 
         return $this->render('JDJUserReviewBundle:UserReview:new.html.twig', array(
             'entity' => $entity,

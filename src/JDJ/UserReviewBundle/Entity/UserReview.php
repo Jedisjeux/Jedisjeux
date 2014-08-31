@@ -25,11 +25,6 @@ class UserReview
     private $body;
 
     /**
-     * @var boolean
-     */
-    private $commented;
-
-    /**
      * @var \DateTime
      */
     private $createdAt;
@@ -40,19 +35,9 @@ class UserReview
     private $updatedAt;
 
     /**
-     * @var \JDJ\UserBundle\Entity\User
+     * @var \JDJ\UserReviewBundle\Entity\JeuNote
      */
-    private $author;
-
-    /**
-     * @var \JDJ\JeuBundle\Entity\Jeu
-     */
-    private $jeu;
-
-    /**
-     * @var \JDJ\UserReviewBundle\Entity\Note
-     */
-    private $note;
+    private $jeuNote;
 
 
     /**
@@ -112,39 +97,6 @@ class UserReview
     }
 
     /**
-     * Set commented
-     *
-     * @param boolean $commented
-     * @return UserReview
-     */
-    public function setCommented($commented)
-    {
-        $this->commented = $commented;
-
-        return $this;
-    }
-
-    /**
-     * Get commented
-     *
-     * @return boolean 
-     */
-    public function getCommented()
-    {
-        return $this->commented;
-    }
-
-    /**
-     * Get commented
-     *
-     * @return boolean
-     */
-    public function isCommented()
-    {
-        return $this->getCommented();
-    }
-
-    /**
      * Set createdAt
      *
      * @param \DateTime $createdAt
@@ -191,71 +143,25 @@ class UserReview
     }
 
     /**
-     * Set author
+     * Set jeuNote
      *
-     * @param \JDJ\UserBundle\Entity\User $author
+     * @param \JDJ\UserReviewBundle\Entity\JeuNote $jeuNote
      * @return UserReview
      */
-    public function setAuthor(\JDJ\UserBundle\Entity\User $author)
+    public function setJeuNote(\JDJ\UserReviewBundle\Entity\JeuNote $jeuNote)
     {
-        $this->author = $author;
+        $this->jeuNote = $jeuNote;
 
         return $this;
     }
 
     /**
-     * Get author
+     * Get jeuNote
      *
-     * @return \JDJ\UserBundle\Entity\User 
+     * @return \JDJ\UserReviewBundle\Entity\JeuNote 
      */
-    public function getAuthor()
+    public function getJeuNote()
     {
-        return $this->author;
-    }
-
-    /**
-     * Set jeu
-     *
-     * @param \JDJ\JeuBundle\Entity\Jeu $jeu
-     * @return UserReview
-     */
-    public function setJeu(\JDJ\JeuBundle\Entity\Jeu $jeu)
-    {
-        $this->jeu = $jeu;
-
-        return $this;
-    }
-
-    /**
-     * Get jeu
-     *
-     * @return \JDJ\JeuBundle\Entity\Jeu 
-     */
-    public function getJeu()
-    {
-        return $this->jeu;
-    }
-
-    /**
-     * Set note
-     *
-     * @param \JDJ\UserReviewBundle\Entity\Note $note
-     * @return UserReview
-     */
-    public function setNote(\JDJ\UserReviewBundle\Entity\Note $note)
-    {
-        $this->note = $note;
-
-        return $this;
-    }
-
-    /**
-     * Get note
-     *
-     * @return \JDJ\UserReviewBundle\Entity\Note 
-     */
-    public function getNote()
-    {
-        return $this->note;
+        return $this->jeuNote;
     }
 }
