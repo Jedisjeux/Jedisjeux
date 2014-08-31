@@ -19,6 +19,9 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new FOS\CommentBundle\FOSCommentBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle($this),
 
             //JDJ
             new JDJ\FoundationBundle\JDJFoundationBundle(),
@@ -27,6 +30,7 @@ class AppKernel extends Kernel
             new JDJ\JeuBundle\JDJJeuBundle(),
             new JDJ\LudographieBundle\JDJLudographieBundle(),
             new JDJ\UserBundle\JDJUserBundle(),
+            new JDJ\CommentBundle\JDJCommentBundle(),
             new JDJ\PartieBundle\JDJPartieBundle(),
             new JDJ\UserReviewBundle\JDJUserReviewBundle(),
         );
