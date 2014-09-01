@@ -10,9 +10,12 @@ namespace JDJ\JeuBundle\Controller;
 
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\QueryBuilder;
 use JDJ\JeuBundle\Entity\Jeu;
 use JDJ\JeuBundle\Form\JeuType;
 use JDJ\UserReviewBundle\Entity\JeuNote;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManager;
@@ -91,13 +94,19 @@ class JeuController extends Controller
 
     public function indexAction(Request $request)
     {
+        $itemCountPerPage = 15;
+
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('JDJJeuBundle:Jeu')->findAll();
+        $queryBuilder = $em->getRepository('JDJJeuBundle:Jeu')->createQueryBuilder('o');
+
+        $paginator = $this->getPaginator($queryBuilder);
+        $paginator->setMaxPerPage($itemCountPerPage);
+        $paginator->setCurrentPage($request->get('page', 1));
 
         return $this->render('JDJJeuBundle:Jeu:index.html.twig', array(
-            'entities' => $entities,
+            'entities' => $paginator,
         ));
     }
 
@@ -152,5 +161,15 @@ class JeuController extends Controller
             'entity' => $entity,
             'edit_form' => $editForm->createView(),
         ));
+    }
+
+    /**
+     * @param QueryBuilder $queryBuilder
+     *
+     * @return Pagerfanta
+     */
+    public function getPaginator(QueryBuilder $queryBuilder)
+    {
+        return new Pagerfanta(new DoctrineORMAdapter($queryBuilder));
     }
 } 
