@@ -94,7 +94,7 @@ class JeuController extends Controller
 
     public function indexAction(Request $request)
     {
-        $itemCountPerPage = 15;
+        $itemCountPerPage = 16;
 
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();

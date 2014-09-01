@@ -1,0 +1,26 @@
+<div class="listing">
+    <div class="row">
+        {% for key, personne in personnes %}
+        {% if (key%4 == 0) and key > 0 %}
+    </div>
+    <div class="row">
+        {% endif %}
+        <div class="medium-3 columns">
+            <div class="image crop">
+                <a href="{{ path('personne_show', { 'id': personne.id, 'slug': personne.slug }) }}">
+                    <img src="http://www.jedisjeux.net/img/800/{{ personne.image }}" alt="Imperial"/>
+                </a>
+            </div>
+            <div class="panel">
+                <a href="{{ path('personne_show', { 'id': personne.id, 'slug': personne.slug }) }}">
+                    <h3>{{ personne }}</h3>
+                    <ul>
+                        <li></li>
+                    </ul>
+
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

@@ -9,14 +9,43 @@
 namespace JDJ\LudographieBundle\Controller;
 
 
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\QueryBuilder;
 use JDJ\LudographieBundle\Entity\Personne;
 use JDJ\LudographieBundle\Form\PersonneType;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use JDJ\JeuBundle\Entity\JeuRepository;
 
+
 class PersonneController extends Controller
 {
+
+    /**
+     * Find and display all the Personne entities
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function indexAction(Request $request)
+    {
+        $itemCountPerPage = 16;
+
+        /** @var EntityManager $em */
+        $em = $this->getDoctrine()->getManager();
+
+        $queryBuilder = $em->getRepository('JDJLudographieBundle:Personne')->createQueryBuilder('o');
+        $paginator = $this->getPaginator($queryBuilder);
+        $paginator->setMaxPerPage($itemCountPerPage);
+        $paginator->setCurrentPage($request->get('page', 1));
+
+        return $this->render('JDJLudographieBundle:Personne:index.html.twig', array(
+            'entities' => $paginator,
+        ));
+    }
+
     /**
      * Finds and displays a Jeu entity.
      *
@@ -129,5 +158,15 @@ class PersonneController extends Controller
         $form->add('submit', 'submit', array('label' => 'Modifier'));
 
         return $form;
+    }
+
+    /**
+     * @param QueryBuilder $queryBuilder
+     *
+     * @return Pagerfanta
+     */
+    public function getPaginator(QueryBuilder $queryBuilder)
+    {
+        return new Pagerfanta(new DoctrineORMAdapter($queryBuilder));
     }
 } 
