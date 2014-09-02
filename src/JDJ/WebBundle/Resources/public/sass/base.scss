@@ -165,7 +165,22 @@ button, a.button {
     }
 
   }
+
+  .panel {
+    background: #fafafa;
+    h3, h3 a {
+      font-size: 1.2em;
+      color: #555;
+    }
+    ul {
+      li {
+        font-size: 0.85em;
+        color: #aaa;
+      }
+    }
+  }
 }
+
 
 /**************************************************************/
 /*  	    		       ITEM LIST					      */

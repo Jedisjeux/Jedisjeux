@@ -179,15 +179,29 @@ button:focus, button:active, a.button:focus, a.button:active {
   width: 100%;
   overflow: hidden;
 }
+/* line 169, ../sass/base.scss */
+.listing .panel {
+  background: #fafafa;
+}
+/* line 171, ../sass/base.scss */
+.listing .panel h3, .listing .panel h3 a {
+  font-size: 1.2em;
+  color: #555;
+}
+/* line 176, ../sass/base.scss */
+.listing .panel ul li {
+  font-size: 0.85em;
+  color: #aaa;
+}
 
 /**************************************************************/
 /*  	    		       ITEM LIST					      */
 /**************************************************************/
-/* line 174, ../sass/base.scss */
+/* line 190, ../sass/base.scss */
 ul {
   margin: 0;
 }
-/* line 176, ../sass/base.scss */
+/* line 192, ../sass/base.scss */
 ul li {
   list-style-type: none;
 }
@@ -195,46 +209,46 @@ ul li {
 /**************************************************************/
 /*  	    		       TABLE					          */
 /**************************************************************/
-/* line 185, ../sass/base.scss */
+/* line 201, ../sass/base.scss */
 table {
   width: 100%;
 }
-/* line 189, ../sass/base.scss */
+/* line 205, ../sass/base.scss */
 table thead tr th {
   padding: 10px;
   background: #333333;
   color: #fff;
   border: 1px solid #e2e2e2;
 }
-/* line 197, ../sass/base.scss */
+/* line 213, ../sass/base.scss */
 table td {
   vertical-align: middle;
 }
-/* line 199, ../sass/base.scss */
+/* line 215, ../sass/base.scss */
 table td .inline-list {
   margin: 0;
   position: relative;
   top: 10px;
 }
 
-/* line 209, ../sass/base.scss */
+/* line 225, ../sass/base.scss */
 .tabs {
   margin-top: 1rem;
   background: #efefef;
 }
-/* line 212, ../sass/base.scss */
+/* line 228, ../sass/base.scss */
 .tabs li.active.tab-title a {
   background: url("http://januarycreative.com/wp-content/themes/januarycreative/img/greybg.png");
   color: white;
 }
-/* line 216, ../sass/base.scss */
+/* line 232, ../sass/base.scss */
 .tabs dd > a, .tabs .tab-title > a {
   background: transparent;
   color: black;
   padding: 0.5rem 1.5rem;
 }
 
-/* line 223, ../sass/base.scss */
+/* line 239, ../sass/base.scss */
 div [role=content] {
   padding-top: 1rem;
   border-top: none;
@@ -243,7 +257,7 @@ div [role=content] {
   background: white;
 }
 
-/* line 231, ../sass/base.scss */
+/* line 247, ../sass/base.scss */
 .publication-info {
   font-style: italic;
 }
