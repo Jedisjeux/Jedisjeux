@@ -1,9 +1,9 @@
 <div class="listing">
-    <div class="row">
+    <div class="row" data-equalizer>
         {% for key, personne in personnes %}
         {% if (key%4 == 0) and key > 0 %}
     </div>
-    <div class="row">
+    <div class="row" data-equalizer>
         {% endif %}
         <div class="medium-3 columns">
             <div class="image crop">
@@ -11,11 +11,13 @@
                     <img src="http://www.jedisjeux.net/img/800/{{ personne.image }}" alt="Imperial"/>
                 </a>
             </div>
-            <div class="panel">
+            <div class="panel" data-equalizer-watch>
                 <a href="{{ path('personne_show', { 'id': personne.id, 'slug': personne.slug }) }}">
                     <h3>{{ personne }}</h3>
                     <ul>
-                        <li></li>
+                        {% if (personne.pays) %}
+                            <li>{{ personne.pays.libelle }}</li>
+                        {% endif %}
                     </ul>
 
                 </a>
