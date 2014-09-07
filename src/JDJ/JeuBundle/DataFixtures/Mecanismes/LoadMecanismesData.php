@@ -31,4 +31,9 @@ class LoadMecanismesData extends LoadEntityYMLData
     {
         return 1;
     }
+
+    public function getTableName()
+    {
+        return "jdj_mecanisme";
+    }
 } 

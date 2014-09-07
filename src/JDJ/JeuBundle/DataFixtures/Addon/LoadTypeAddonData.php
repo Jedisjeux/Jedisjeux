@@ -31,4 +31,9 @@ class LoadTypeAddonData extends LoadEntityYMLData
     {
         return 1;
     }
+
+    public function getTableName()
+    {
+        return "jdj_type_addon";
+    }
 } 

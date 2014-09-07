@@ -1,0 +1,24 @@
+JDJ\PartieBundle\Entity\Joueur:
+  type: entity
+  table: jdj_joueur
+  id:
+    id:
+      type: integer
+      unsigned: true
+      generator:
+        strategy: IDENTITY
+  fields:
+    nom:
+      type: string
+      nullable: true
+    score:
+      type: integer
+      nullable: true
+  manyToOne:
+    partie:
+      targetEntity: Partie
+      inversedBy: joueurs
+      joinColumn:
+        nullable: false
+    user:
+      targetEntity: JDJ\UserBundle\Entity\User

@@ -1,0 +1,43 @@
+JDJ\UserReviewBundle\Entity\JeuNote:
+  type: entity
+  table: jdj_jeu_note
+  uniqueConstraints:
+    search_idx:
+      columns: [jeu_id, author_id]
+  id:
+    id:
+      type: integer
+      unsigned: true
+      generator:
+        strategy: IDENTITY
+
+  fields:
+    createdAt:
+      type: datetime
+      gedmo:
+        timestampable:
+          on: create
+    updatedAt:
+      type: datetime
+      gedmo:
+        timestampable:
+          on: update
+
+  oneToOne:
+    userReview:
+      targetEntity: UserReview
+      mappedBy: jeuNote
+
+  manyToOne:
+      author:
+        targetEntity: JDJ\UserBundle\Entity\User
+        joinColumn:
+          nullable: false
+      jeu:
+        targetEntity: JDJ\JeuBundle\Entity\Jeu
+        joinColumn:
+          nullable: false
+      note:
+        targetEntity: Note
+        joinColumn:
+          nullable: false

@@ -24,7 +24,19 @@
         "knplabs/knp-menu-bundle": "2.0.*@dev",
         "stof/doctrine-extensions-bundle": "~1.1@dev",
         "white-october/pagerfanta-bundle": "dev-master",
-        "doctrine/doctrine-fixtures-bundle":    "2.2.*"
+        "doctrine/doctrine-fixtures-bundle":    "2.2.*",
+        "friendsofsymfony/user-bundle": "~2.0@dev",
+        "friendsofsymfony/comment-bundle": "dev-master",
+        "liip/imagine-bundle":               "dev-master",
+        "behat/behat":                       "~3.0",
+        "behat/symfony2-extension":          "~2.0@dev",
+        "behat/mink-extension":              "~2.0@dev",
+        "behat/mink-browserkit-driver":      "~1.2@dev",
+        "behat/mink-selenium2-driver":       "@dev",
+        "behat/mink":                        "~1.6@dev",
+        "fzaninotto/faker":                  "~1.2",
+        "phpspec/phpspec":                   "~2.0",
+        "phpunit/phpunit":                   "~3.7"
     },
     "scripts": {
         "post-install-cmd": [
@@ -48,9 +60,14 @@
     "extra": {
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",
-        "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
-        },
+        "incenteev-parameters": [
+            {
+                "file": "app/config/parameters.yml"
+            },
+            {
+                "file": "app/config/parameters_dev.yml"
+            }
+        ],
         "branch-alias": {
             "dev-master": "2.4-dev"
         }

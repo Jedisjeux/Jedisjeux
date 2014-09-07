@@ -4,17 +4,18 @@
 {% from "JDJJeuBundle:Jeu:macros.html.twig" import joueurCount %}
 
 <div class="row">
-    {% if 1 != jeu.statut.id %}
+    <!-- TODO delete the first condition when the state will be required -->
+    {% if jeu.statut and 1 != jeu.statut.id %}
         <div class="alert-box alert">
             Attention, ce jeu est en statut : {{ jeu.statut.libelle }}
             <a href="#" class="close">&times;</a>
         </div>
     {% endif %}
-    <div class="medium-4 columns">
+    <div class="medium-3 columns">
         <img src="http://www.jedisjeux.net/img/800/{{ jeu.imageCouverture }}">
     </div>
-    <div class="medium-8 columns">
-        <h1>{{ jeu.libelle }}</h1>
+    <div class="medium-9 columns">
+        <h1 class="columns">{{ jeu.libelle }}</h1>
 
         <div class="medium-7 columns">
             <p>

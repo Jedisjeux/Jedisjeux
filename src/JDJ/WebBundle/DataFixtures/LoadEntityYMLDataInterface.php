@@ -13,4 +13,5 @@ interface LoadEntityYMLDataInterface
 {
     public function getYAMLFileName();
     public function getEntityNewInstance();
+    public function getTableName();
 }

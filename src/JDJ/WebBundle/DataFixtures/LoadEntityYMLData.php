@@ -32,6 +32,14 @@ abstract class LoadEntityYMLData extends ContainerAware implements FixtureInterf
     }
 
     /**
+     * @return \Doctrine\DBAL\Connection
+     */
+    public function getDatabaseConnection()
+    {
+        return $this->container->get('database_connection');
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function load(ObjectManager $manager)
@@ -40,9 +48,15 @@ abstract class LoadEntityYMLData extends ContainerAware implements FixtureInterf
         $rows = $this->parse();
         foreach($rows as $data)
         {
-            $this->populateData($data, $this->getEntityNewInstance());
+            $entity = $this->populateData($data, $this->getEntityNewInstance());
+            $this->getManager()->persist($entity);
+            $this->getManager()->flush();
+
+            $this->getDatabaseConnection()->update($this->getTableName(), array(
+                "id" => $data['id'],
+            ), array('id' => $entity->getId()));
         }
-        $this->getManager()->flush();
+
     }
 
     /**
@@ -50,7 +64,7 @@ abstract class LoadEntityYMLData extends ContainerAware implements FixtureInterf
      *
      * @return mixed
      */
-    private function parse()
+    public function parse()
     {
         $yaml = new Parser();
         return $yaml->parse(file_get_contents($this->getYAMLFileName()));
@@ -73,7 +87,7 @@ abstract class LoadEntityYMLData extends ContainerAware implements FixtureInterf
                 $property->setValue($entity, $value);
             }
         }
-        $this->getManager()->persist($entity);
+        return $entity;
     }
 
 } 

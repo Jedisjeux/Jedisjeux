@@ -9,10 +9,16 @@
 namespace JDJ\JeuBundle\Controller;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\QueryBuilder;
 use JDJ\JeuBundle\Entity\Jeu;
 use JDJ\JeuBundle\Form\JeuType;
+use JDJ\UserReviewBundle\Entity\JeuNote;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManager;
 
 class JeuController extends Controller
 {
@@ -43,8 +49,23 @@ class JeuController extends Controller
             );
         }
 
+        $jeuNotes = $em->getRepository('JDJUserReviewBundle:JeuNote')->findBy(array(
+            'jeu' => $entity,
+        ));
+
+        $userReviews = new ArrayCollection();
+
+        /** @var JeuNote $jeuNote */
+        foreach($jeuNotes as $jeuNote)
+        {
+            if ($jeuNote->hasUserReview()) {
+                $userReviews[] = $jeuNote->getUserReview();
+            }
+        }
+
         return $this->render('JDJJeuBundle:Jeu:show.html.twig', array(
                 'jeu' => $entity,
+                'userReviews' => $userReviews,
             )
         );
     }
@@ -71,37 +92,22 @@ class JeuController extends Controller
         ));
     }
 
-    /**
-     * Méthode utilisée lors de l'initialisation du site
-     */
-    public function initialisationAction()
+    public function indexAction(Request $request)
     {
+        $itemCountPerPage = 16;
+
+        /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
 
-        $entities = array();
-        for ($i=1 ; $i<20 ; $i++) {
-            $entities[] = $em->getRepository('JDJJeuBundle:Jeu')->find($i);
-        }
+        $queryBuilder = $em->getRepository('JDJJeuBundle:Jeu')->createQueryBuilder('o');
 
+        $paginator = $this->getPaginator($queryBuilder);
+        $paginator->setMaxPerPage($itemCountPerPage);
+        $paginator->setCurrentPage($request->get('page', 1));
 
-        /** @var Jeu $entity */
-        foreach($entities as $entity) {
-            $entity->setIntro($this->nl2p($entity->getIntro()));
-            $entity->setBut($this->nl2p($entity->getBut()));
-            $entity->setDescription($this->nl2p($entity->getDescription()));
-            $em->flush($entity);
-        }
-        exit;
-    }
-
-    private function nl2p($text) {
-        $text = trim($text);
-        // on remplace les retour à la ligne par des <br />
-        $text = preg_replace("/\n\r?/", "<br />", $text);
-        // on crée les paragraphes autour des sauts de ligne
-        $text = preg_replace("/(<br \/>){2,}/", "</p>\n<p>", $text);
-        return "<p>".$text."</p>";
-
+        return $this->render('JDJJeuBundle:Jeu:index.html.twig', array(
+            'entities' => $paginator,
+        ));
     }
 
     /**
@@ -155,5 +161,15 @@ class JeuController extends Controller
             'entity' => $entity,
             'edit_form' => $editForm->createView(),
         ));
+    }
+
+    /**
+     * @param QueryBuilder $queryBuilder
+     *
+     * @return Pagerfanta
+     */
+    public function getPaginator(QueryBuilder $queryBuilder)
+    {
+        return new Pagerfanta(new DoctrineORMAdapter($queryBuilder));
     }
 } 
