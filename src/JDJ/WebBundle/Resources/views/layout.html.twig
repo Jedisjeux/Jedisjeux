@@ -20,6 +20,7 @@
 
 {% include "JDJWebBundle:layout:header.html.twig" %}
 
+
 <div class="row">
     <div class="large-12 columns" role="content">
         {% for label, flashes in app.session.flashbag.all %}
@@ -42,6 +43,7 @@
         '@JDJFoundationBundle/Resources/public/bower_components/jquery/dist/jquery.min.js'
         '@JDJFoundationBundle/Resources/public/bower_components/foundation/js/foundation.min.js'
         '@JDJFoundationBundle/Resources/public/bower_components/foundation/js/foundation/foundation.tab.js'
+        '@JDJFoundationBundle/Resources/public/bower_components/foundation/js/foundation/foundation.equalizer.js'
         '@JDJFoundationBundle/Resources/public/js/*'
         '@JDJJeuBundle/Resources/public/js/jeu/*'
         '@JDJFoundationBundle/Resources/public/bower_components/modernizr/modernizr.js'

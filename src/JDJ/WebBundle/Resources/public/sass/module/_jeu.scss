@@ -1,0 +1,30 @@
+/**************************************************************/
+/*  	    		       FICHE DE JEU					      */
+/**************************************************************/
+
+.intro {
+  p {
+    font-size: 1.2rem;
+    font-style: italic;
+  }
+}
+
+.panel {
+  &.materiel {
+    background: #fafafa;
+    border: none;
+    ul li, h3 {
+      color: #888;
+    }
+  }
+}
+
+.panel {
+  &.but {
+    background-color: $lightgreen;
+    border: none;
+    ul li, h3, p {
+      color: white;
+    }
+  }
+}

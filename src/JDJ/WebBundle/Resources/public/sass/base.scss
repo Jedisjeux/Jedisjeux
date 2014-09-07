@@ -1,27 +1,96 @@
 @import "compass";
 @import "layout";
 @import "top-bar";
-@import "module/compta";
+
+/**************************************************************/
+/*  	    		  Defines Colors                          */
+/**************************************************************/
+
+$lightgrey: #efefef;
+$lightgreen: #98CA46;
+$darkblack: #333333;
+$lightblue: #00B6DE;
+
+/**************************************************************/
+/*  	    		  IMPORT Modules					      */
+/**************************************************************/
+
+@import "module/_compta";
+@import "module/_jeu";
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700);
 
-/**************************************************************/
-/*  	    		       COLORS					          */
-/**************************************************************/
 
-$lightgreen: #88BD32;
-$darkblack: #303736;
 
 body {
   font-size: 1em;
   color: #737373;
   font-family: "Open Sans", sans-serif;
+  background: #F6F8FB url("http://www.jedisjeux.net/img/design/icons/fd_Body.png");
 }
+
+/**************************************************************/
+/*  	    		       HEADER					          */
+/**************************************************************/
+
+header {
+  .menu {
+    background: url("http://januarycreative.com/wp-content/themes/januarycreative/img/greybg.png");
+  }
+}
+
+.banner {
+  background: $lightblue;
+}
+
+
+/**************************************************************/
+/*  	    		       TOP BAR					          */
+/**************************************************************/
+
+.top-bar {
+  background: transparent;
+  .name {
+    h1{
+      font-size: 2rem;
+
+    }
+  }
+  ul {
+    li {
+      > a.button {
+        background-color: $lightgreen;
+      }
+      a:not(.button):hover {
+        color:$lightgreen !important;
+      }
+    }
+  }
+}
+
+.top-bar-section {
+  background: transparent;
+  ul {
+    li {
+      background: transparent;
+      :not(.has-form) a:not(.button) {
+        background: transparent;
+        color: white;
+      }
+    }
+  }
+}
+
+
+
 
 /**************************************************************/
 /*  	    		       FOOTER					          */
 /**************************************************************/
 
 footer {
+  div {
+    background-color: $darkblack;
+  }
 
 }
 
@@ -30,7 +99,7 @@ footer {
 /**************************************************************/
 
 h1 {
-
+   font-size: 2em;
 }
 
 h2 {
@@ -38,7 +107,7 @@ h2 {
 }
 
 h3 {
-
+  font-size: 1.4em;
 }
 
 h4 {
@@ -58,11 +127,60 @@ h6 {
 /**************************************************************/
 
 a {
-  color: $lightgreen;
+  color: $lightblue;
   &:hover {
     color: $darkblack;
   }
 }
+
+
+
+
+
+/**************************************************************/
+/*  	    		       BUTTON					          */
+/**************************************************************/
+
+button, a.button {
+  background-color: $lightgreen;
+  &:hover {
+    background-color: $darkblack;
+    color: $lightgreen;
+  }
+  &:focus, &:active {
+    background-color: $lightgreen;
+  }
+}
+
+/**************************************************************/
+/*  	    		       ROW					              */
+/**************************************************************/
+
+.listing {
+  .image{
+    &.crop {
+      height: 150px;
+      width: 100%;
+      overflow: hidden;
+    }
+
+  }
+
+  .panel {
+    background: #fafafa;
+    h3, h3 a {
+      font-size: 1.2em;
+      color: #555;
+    }
+    ul {
+      li {
+        font-size: 0.85em;
+        color: #aaa;
+      }
+    }
+  }
+}
+
 
 /**************************************************************/
 /*  	    		       ITEM LIST					      */
@@ -103,54 +221,28 @@ table {
 
 }
 
-/**************************************************************/
-/*  	    		       BUTTON					          */
-/**************************************************************/
-
-button, a.button {
-  background-color: $lightgreen;
-  &:hover {
-    background-color: $darkblack;
-    color: $lightgreen;
+.tabs {
+  margin-top: 1rem;
+  background: $lightgrey;
+  li.active.tab-title a {
+    background: url("http://januarycreative.com/wp-content/themes/januarycreative/img/greybg.png");
+    color: white;
   }
-  &:focus, &:active {
-    background-color: $lightgreen;
-  }
-}
-
-/**************************************************************/
-/*  	    		       TOP BAR					          */
-/**************************************************************/
-
-.top-bar {
-  .name {
-    h1{
-      font-size: 3rem;
-    }
-  }
-  ul {
-    li {
-      > a.button {
-        background-color: $lightgreen;
-      }
-      a:not(.button):hover {
-        color:$lightgreen !important;
-      }
-    }
+  dd > a, .tab-title > a {
+    background: transparent;
+    color: black;
+    padding: 0.5rem 1.5rem;
   }
 }
 
-/**************************************************************/
-/*  	    		       ROW					              */
-/**************************************************************/
+div [role=content] {
+  padding-top: 1rem;
+  border-top: none;
+  border-bottom: none;
+  min-height: 800px;
+  background: white;
+}
 
-.listing {
-  .image{
-    &.crop {
-      height: 150px;
-      width: 100%;
-      overflow: hidden;
-    }
-
-  }
+.publication-info {
+  font-style: italic;
 }

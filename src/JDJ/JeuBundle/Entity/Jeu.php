@@ -2,6 +2,7 @@
 
 namespace JDJ\JeuBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -105,17 +106,23 @@ class Jeu
     private $editeurs;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $parties;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
-        $this->jeuCaracteristiques = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->addons = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->mecanismes = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->themes = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->auteurs = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->illustrateurs = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->editeurs = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->jeuCaracteristiques = new ArrayCollection();
+        $this->addons = new ArrayCollection();
+        $this->mecanismes = new ArrayCollection();
+        $this->themes = new ArrayCollection();
+        $this->auteurs = new ArrayCollection();
+        $this->illustrateurs = new ArrayCollection();
+        $this->editeurs = new ArrayCollection();
+        $this->parties = new ArrayCollection();
     }
 
     /**
@@ -620,5 +627,38 @@ class Jeu
     public function getEditeurs()
     {
         return $this->editeurs;
+    }
+
+    /**
+     * Add parties
+     *
+     * @param \JDJ\PartieBundle\Entity\Partie $parties
+     * @return Jeu
+     */
+    public function addParty(\JDJ\PartieBundle\Entity\Partie $parties)
+    {
+        $this->parties[] = $parties;
+
+        return $this;
+    }
+
+    /**
+     * Remove parties
+     *
+     * @param \JDJ\PartieBundle\Entity\Partie $parties
+     */
+    public function removeParty(\JDJ\PartieBundle\Entity\Partie $parties)
+    {
+        $this->parties->removeElement($parties);
+    }
+
+    /**
+     * Get parties
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getParties()
+    {
+        return $this->parties;
     }
 }

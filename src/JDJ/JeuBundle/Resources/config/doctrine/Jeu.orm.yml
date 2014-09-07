@@ -82,6 +82,9 @@ JDJ\JeuBundle\Entity\Jeu:
     addons:
       targetEntity: Addon
       mappedBy: jeu
+    parties:
+      targetEntity: JDJ\PartieBundle\Entity\Partie
+      mappedBy: jeu
   manyToOne:
     statut:
       targetEntity: JDJ\WebBundle\Entity\Statut

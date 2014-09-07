@@ -1,0 +1,36 @@
+JDJ\UserReviewBundle\Entity\UserReview:
+  type: entity
+  table: jdj_user_review
+  id:
+    id:
+      type: integer
+      unsigned: true
+      generator:
+        strategy: IDENTITY
+
+  fields:
+    libelle:
+      type: string
+      nullable: false
+      length: 100
+    body:
+      type: text
+      nullable: false
+    createdAt:
+      type: datetime
+      gedmo:
+        timestampable:
+          on: create
+    updatedAt:
+      type: datetime
+      gedmo:
+        timestampable:
+          on: update
+
+  oneToOne:
+    jeuNote:
+      targetEntity: JeuNote
+      inversedBy: userReview
+      cascade: ["persist", "merge"]
+      joinColumn:
+        nullable: false

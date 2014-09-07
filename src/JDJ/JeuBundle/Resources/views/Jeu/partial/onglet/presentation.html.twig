@@ -7,7 +7,7 @@
 <div class="row">
     <div class="panel materiel medium-4 columns">
         <h3>Matériel</h3>
-        <img src="http://www.jedisjeux.net/img/800/rokoko-49-1376030875.jpg" />
+        <img src="http://www.jedisjeux.net/img/800/p-3305.jpg" />
         <ul>
             {% for row in jeu.materiel|split("\n") %}
                 <li>{{ row }}</li>
@@ -23,7 +23,7 @@
             </div>
         {% endif %}
 
-        <div class="description">
+        <div class="description columns">
             <h3>Description du jeu</h3>
 
             {{ jeu.description|raw }}
