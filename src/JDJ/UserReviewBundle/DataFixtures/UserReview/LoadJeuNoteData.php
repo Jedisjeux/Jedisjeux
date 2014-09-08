@@ -16,6 +16,14 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 class LoadJeuNoteData extends ContainerAware implements FixtureInterface, OrderedFixtureInterface
 {
     /**
+     * @return \Doctrine\DBAL\Connection
+     */
+    public function getDatabaseConnection()
+    {
+        return $this->container->get('database_connection');
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function load(ObjectManager $manager)
@@ -42,6 +50,7 @@ inner join  fos_user user
                 on user.id = old.user_id
 EOM;
 
+        $this->getDatabaseConnection()->executeQuery($query);
     }
 
     /**

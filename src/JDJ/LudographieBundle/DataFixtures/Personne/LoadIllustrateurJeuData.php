@@ -13,8 +13,16 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAware;
 
-class LoadEditeurJeuData extends ContainerAware implements FixtureInterface, OrderedFixtureInterface
+class LoadIllustrateurJeuData extends ContainerAware implements FixtureInterface, OrderedFixtureInterface
 {
+    /**
+     * @return \Doctrine\DBAL\Connection
+     */
+    public function getDatabaseConnection()
+    {
+        return $this->container->get('database_connection');
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -34,6 +42,7 @@ inner join  jdj_personne personne
                 on personne.id = old.id_personne
 where       old.type_relation = 'illustrateur'
 EOM;
+        $this->getDatabaseConnection()->executeQuery($query);
 
     }
 

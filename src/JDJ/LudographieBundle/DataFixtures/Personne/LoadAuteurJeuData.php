@@ -16,6 +16,14 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 class LoadAuteurJeuData extends ContainerAware implements FixtureInterface, OrderedFixtureInterface
 {
     /**
+     * @return \Doctrine\DBAL\Connection
+     */
+    public function getDatabaseConnection()
+    {
+        return $this->container->get('database_connection');
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function load(ObjectManager $manager)
@@ -34,6 +42,7 @@ inner join  jdj_personne personne
                 on personne.id = old.id_personne
 where       old.type_relation = 'auteur'
 EOM;
+        $this->getDatabaseConnection()->executeQuery($query);
 
     }
 

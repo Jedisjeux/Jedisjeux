@@ -31,21 +31,26 @@ class LoadJeuxData extends ContainerAware implements FixtureInterface, OrderedFi
      */
     public function load(ObjectManager $manager)
     {
-        $dbalConnection = $this->getDatabaseConnection();
-        $oldJeux = $dbalConnection->fetchAll("select * from old_jedisjeux.jdj_game LIMIT 500");
+        $oldJeux = $this->getDatabaseConnection()->fetchAll("select * from old_jedisjeux.jdj_game LIMIT 500");
 
         foreach($oldJeux as $data)
         {
-            $jeu = $this->getEntityFromData($data);
-            $manager->persist($jeu);
-            $manager->flush();
-
-            $dbalConnection->update("jdj_jeu", array(
-                "id" => $data['id'],
-            ), array('id' => $jeu->getId()));
+            $this->getDatabaseConnection()->insert("jdj_jeu", array(
+                'id' => $data['id'],
+                'libelle' => $data['nom'],
+                'imageCouverture' => (!empty($data['couverture']) ? $data['couverture'] : null),
+                'joueurMin' => (!empty($data['min']) ? $data['min'] : null),
+                'joueurMax' => (!empty($data['max']) ? $data['max'] : null),
+                // TODO Durée -setDuree(empty($data['max']) ? $data['max'] : null)
+                'description' => (!empty($data['presentation']) ? $this->getHTMLFromText($data['presentation']) : null),
+                'intro' => (!empty($data['intro']) ? $this->getHTMLFromText($data['intro']) : null),
+                'materiel' => (!empty($data['materiel']) ? $data['materiel'] : null),
+                'but' => (!empty($data['but']) ? $this->getHTMLFromText($data['but']) : null),
+                // TODO date de création
+                'ageMin' => (!empty($data['age_min']) ? $data['age_min'] : null),
+                'slug' => str_replace(' ', '-', $data['mot_cle']),
+            ));
         }
-
-
     }
 
     public function getEntityFromData(array $data)

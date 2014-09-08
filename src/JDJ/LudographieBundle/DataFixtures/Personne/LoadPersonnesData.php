@@ -16,6 +16,15 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 class LoadPersonnesData extends ContainerAware implements FixtureInterface, OrderedFixtureInterface
 {
     /**
+     * @return \Doctrine\DBAL\Connection
+     */
+    public function getDatabaseConnection()
+    {
+        return $this->container->get('database_connection');
+    }
+
+
+    /**
      * {@inheritdoc}
      */
     public function load(ObjectManager $manager)
@@ -31,18 +40,21 @@ insert into jdj_personne (
             image,
             slug
 )
-select      id,
-            nom,
-            prenom,
-            siteweb,
-            description,
+select      old.id,
+            old.nom_famille,
+            old.prenom,
+            old.siteweb,
+            old.description,
             pays.id,
-            photo,
-            nom_clean
+            old.photo,
+            old.nom_clean
 from        old_jedisjeux.jdj_personnes old
-inner join  jdj_pays pays
-                on pays.libelle = old.nationnalite
+left join   jdj_pays pays
+                on CONVERT(pays.libelle USING utf8) = CONVERT(old.nationnalite USING utf8)
+where       old.id <> 14
 EOM;
+
+        $this->getDatabaseConnection()->executeQuery($query);
 
     }
 
