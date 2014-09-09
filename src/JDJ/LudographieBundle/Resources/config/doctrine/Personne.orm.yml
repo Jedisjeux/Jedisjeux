@@ -47,37 +47,13 @@ JDJ\LudographieBundle\Entity\Personne:
   manyToMany:
     auteurJeux:
       targetEntity: JDJ\JeuBundle\Entity\Jeu
-      inversedBy: auteurs
-      cascade: ["persist"]
-      joinTable:
-        name: jdj_auteur_jeu
-        joinColumns:
-          personne_id:
-            referencedColumnName: id
-        inverseJoinColumns:
-          jeu_id:
-            referencedColumnName: id
+      mappedBy: auteurs
+      cascade: ["persist", "merge"]
     illustrateurJeux:
       targetEntity: JDJ\JeuBundle\Entity\Jeu
-      inversedBy: illustrateurs
-      cascade: ["persist"]
-      joinTable:
-        name: jdj_illustrateur_jeu
-        joinColumns:
-          personne_id:
-            referencedColumnName: id
-        inverseJoinColumns:
-          jeu_id:
-            referencedColumnName: id
+      mappedBy: illustrateurs
+      cascade: ["persist", "merge"]
     editeurJeux:
        targetEntity: JDJ\JeuBundle\Entity\Jeu
-       inversedBy: editeurs
-       cascade: ["persist"]
-       joinTable:
-         name: jdj_editeur_jeu
-         joinColumns:
-           personne_id:
-             referencedColumnName: id
-         inverseJoinColumns:
-           jeu_id:
-             referencedColumnName: id
+       mappedBy: editeurs
+       cascade: ["persist", "merge"]

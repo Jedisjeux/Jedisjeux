@@ -1,0 +1,40 @@
+-
+  id: 1
+  valeur: 1
+  libelle: "1/10 - Nul"
+-
+  id: 2
+  valeur: 2
+  libelle: "2/10 - Très mauvais"
+-
+  id: 3
+  valeur: 3
+  libelle: "3/10 - Mauvais"
+-
+  id: 4
+  valeur: 4
+  libelle: "4/10 - Bof"
+-
+  id: 5
+  valeur: 5
+  libelle: "5/10 - Moyen"
+-
+  id: 6
+  valeur: 6
+  libelle: "6/10 - Pas mal"
+-
+  id: 7
+  valeur: 7
+  libelle: "7/10 - Bon"
+-
+  id: 8
+  valeur: 8
+  libelle: "8/10 - Très bon"
+-
+  id: 9
+  valeur: 9
+  libelle: "9/10 - Excellent"
+-
+  id: 10
+  valeur: 10
+  libelle: "10/10 - Mythique"
