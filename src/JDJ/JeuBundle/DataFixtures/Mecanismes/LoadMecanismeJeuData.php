@@ -33,7 +33,7 @@ class LoadMecanismeJeuData extends ContainerAware implements FixtureInterface, O
         insert into jdj_mecanisme_jeu (
                     jeu_id, mecanisme_id
         )
-        select      mecanisme_id, jeux_id
+        select      jeux_id, mecanisme_id
         from        old_jedisjeux.jdj_mecanismelieur ml
         inner join  jdj_jeu jeu
                         on jeu.id = ml.jeux_id
