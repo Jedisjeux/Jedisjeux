@@ -158,19 +158,48 @@ class EntityRepository extends BaseEntityRepository
         $entityClass = new \ReflectionClass($this->getClassName());
 
         foreach ($criteria as $property => $value) {
-            if ($entityClass->hasProperty($property)) {
-                $this->applyEntityCriteria($queryBuilder, $property, $value);
-            } elseif ($entityClass->hasProperty($property."s")) {
-                $this->applyOtherEntitiesCriteria($queryBuilder, $property, $value);
-            } elseif ($entityClass->hasProperty(preg_replace("/^(.+)_moreThanOrEqual$/", $property, "$1"))) {
-                $queryBuilder->andWhere($queryBuilder->expr()->gte($this->getPropertyName($property)), $value);
-            } elseif ($entityClass->hasProperty(preg_replace("/^(.+)_lessThanOrEqual$/", $property, "$1"))) {
-                $queryBuilder->andWhere($queryBuilder->expr()->lte($this->getPropertyName($property)), $value);
-            } elseif ($entityClass->hasProperty(preg_replace("/^(.+)_moreThan$/", $property, "$1"))) {
-                $queryBuilder->andWhere($queryBuilder->expr()->gt($this->getPropertyName($property)), $value);
-            } elseif ($entityClass->hasProperty(preg_replace("/^(.+)_lessThan$/", $property, "$1"))) {
-                $queryBuilder->andWhere($queryBuilder->expr()->lt($this->getPropertyName($property)), $value);
+
+            /**
+             * Search comparison expression
+             */
+            $expr = null;
+            if (false !== strpos($property, ":")) {
+                list($property, $expr) = explode(":", $property);
             }
+
+            /**
+             * If Entity has the property
+             */
+            if ($entityClass->hasProperty($property)) {
+
+                /**
+                 * Switch case with comparison expression
+                 */
+                switch($expr) {
+                    case 'moreThanOrEqual':
+                        $queryBuilder->andWhere($queryBuilder->expr()->gte($this->getPropertyName($property), $value));
+                        break;
+                    case 'moreThan':
+                        $queryBuilder->andWhere($queryBuilder->expr()->gt($this->getPropertyName($property), $value));
+                        break;
+                    case 'lessThanOrEqual':
+                        $queryBuilder->andWhere($queryBuilder->expr()->lte($this->getPropertyName($property), $value));
+                        break;
+                    case 'lessThan':
+                        $queryBuilder->andWhere($queryBuilder->expr()->lt($this->getPropertyName($property), $value));
+                        break;
+                    default:
+                        $this->applyEntityCriteria($queryBuilder, $property, $value);
+                        break;
+                }
+
+            } elseif ($entityClass->hasProperty($property."s")) {
+                /**
+                 * If Entity has an array collection of other entities
+                 */
+                $this->applyOtherEntitiesCriteria($queryBuilder, $property, $value);
+            }
+
         }
     }
 
