@@ -40,7 +40,7 @@ insert into jdj_jeu_note (
 select      old.id,
             user.id,
             jeu.id,
-            old.note,
+            note.id,
             old.date,
             null
 from        old_jedisjeux.jdj_avis old
@@ -48,6 +48,8 @@ inner join  jdj_jeu jeu
                 on jeu.id = old.game_id
 inner join  fos_user user
                 on user.id = old.user_id
+inner join  jdj_note note
+                on note.id = old.note
 EOM;
 
         $this->getDatabaseConnection()->executeQuery($query);

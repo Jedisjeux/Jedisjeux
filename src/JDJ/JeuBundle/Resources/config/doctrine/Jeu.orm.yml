@@ -131,3 +131,5 @@ JDJ\JeuBundle\Entity\Jeu:
     statut:
       targetEntity: JDJ\WebBundle\Entity\Statut
       inversedBy: jeux
+      joinColumn:
+        nullable: false

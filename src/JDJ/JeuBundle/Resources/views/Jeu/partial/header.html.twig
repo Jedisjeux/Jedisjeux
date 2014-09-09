@@ -4,8 +4,7 @@
 {% from "JDJJeuBundle:Jeu:macros.html.twig" import joueurCount %}
 
 <div class="row">
-    <!-- TODO delete the first condition when the state will be required -->
-    {% if jeu.statut and 1 != jeu.statut.id %}
+    {% if 1 != jeu.statut.id %}
         <div class="alert-box alert">
             Attention, ce jeu est en statut : {{ jeu.statut.libelle }}
             <a href="#" class="close">&times;</a>

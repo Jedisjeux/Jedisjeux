@@ -2,30 +2,25 @@
 /**
  * Created by PhpStorm.
  * User: loic_425
- * Date: 21/08/2014
- * Time: 22:26
+ * Date: 09/09/2014
+ * Time: 19:47
  */
 
-namespace JDJ\WebBundle\DataFixtures\Pays;
+namespace JDJ\UserReviewBundle\DataFixtures\Note;
 
-
+use JDJ\UserReviewBundle\Entity\Note;
 use JDJ\WebBundle\DataFixtures\LoadEntityYMLData;
-use JDJ\WebBundle\Entity\Pays;
 
-/**
- * Class LoadPaysData
- * @package JDJ\WebBundle\DataFixtures\Pays
- */
-class LoadPaysData extends LoadEntityYMLData
+class LoadNotesData extends LoadEntityYMLData
 {
     public function getYAMLFileName()
     {
-        return __DIR__."/jdj_pays.yml";
+        return __DIR__."/jdj_notes.yml";
     }
 
     public function getEntityNewInstance()
     {
-        return new Pays();
+        return new Note();
     }
 
     /**
@@ -38,6 +33,6 @@ class LoadPaysData extends LoadEntityYMLData
 
     public function getTableName()
     {
-        return "jdj_pays";
+        return "jdj_note";
     }
 } 

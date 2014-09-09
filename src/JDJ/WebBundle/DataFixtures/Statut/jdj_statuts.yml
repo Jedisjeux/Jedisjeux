@@ -1,0 +1,15 @@
+-
+  id: 1
+  libelle: "validé"
+-
+  id: 2
+  libelle: "à traduire"
+-
+  id: 3
+  libelle: "prêt à valider"
+-
+  id: 4
+  libelle: "à compléter"
+-
+  id: 5
+  libelle: "à relire"

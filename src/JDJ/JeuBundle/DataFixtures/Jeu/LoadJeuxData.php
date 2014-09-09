@@ -31,7 +31,16 @@ class LoadJeuxData extends ContainerAware implements FixtureInterface, OrderedFi
      */
     public function load(ObjectManager $manager)
     {
-        $oldJeux = $this->getDatabaseConnection()->fetchAll("select * from old_jedisjeux.jdj_game LIMIT 500");
+        $query = <<<EOM
+select      old.*
+from        old_jedisjeux.jdj_game old
+inner join  jdj_statut statut
+                on statut.id = old.valid
+limit       500
+EOM;
+
+
+        $oldJeux = $this->getDatabaseConnection()->fetchAll($query);
 
         foreach($oldJeux as $data)
         {
@@ -49,6 +58,7 @@ class LoadJeuxData extends ContainerAware implements FixtureInterface, OrderedFi
                 // TODO date de création
                 'ageMin' => (!empty($data['age_min']) ? $data['age_min'] : null),
                 'slug' => str_replace(' ', '-', $data['mot_cle']),
+                'statut_id' => $data['valid']
             ));
         }
     }
