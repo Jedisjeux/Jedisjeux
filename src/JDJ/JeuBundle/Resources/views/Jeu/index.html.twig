@@ -1,14 +1,8 @@
 {% extends "JDJWebBundle::layout.html.twig" %}
-{% from 'JDJWebBundle:Macros:misc.html.twig' import pagination %}
 
 {% block body -%}
     <h1>Fiches de jeu</h1>
 
     {% include "JDJJeuBundle:Jeu:partial/list.html.twig" with {'jeux': entities} %}
-    <div class="pagination-wrapper">
-        <div class="pagination-bottom">
-            {{ pagination(entities) }}
-        </div>
-    </div>
 
 {% endblock %}

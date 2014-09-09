@@ -50,7 +50,7 @@ class PersonneController extends Controller
      * Finds and displays a Jeu entity.
      *
      */
-    public function showAction($id, $slug)
+    public function showAction(Request $request, $id, $slug)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -75,7 +75,10 @@ class PersonneController extends Controller
 
         /** @var JeuRepository $jeuReposititory */
         $jeuReposititory = $em->getRepository('JDJJeuBundle:Jeu');
-        $jeux = $jeuReposititory->findAllByPersonne($id);
+        /** @var PagerFanta $jeux */
+        $jeux = $jeuReposititory->createPaginator(array("personne" => $entity));
+        $jeux->setMaxPerPage(16);
+        $jeux->setCurrentPage($request->get('page', 1));
 
         return $this->render('JDJLudographieBundle:Personne:show.html.twig', array(
                 'personne' => $entity,

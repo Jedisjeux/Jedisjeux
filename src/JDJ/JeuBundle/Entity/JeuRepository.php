@@ -9,32 +9,28 @@
 namespace JDJ\JeuBundle\Entity;
 
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
+use JDJ\WebBundle\Entity\EntityRepository;
 
 class JeuRepository extends EntityRepository
 {
     /**
-     * @param $personne_id
-     * @return array
+     * @param QueryBuilder $queryBuilder
+     *
+     * @param array $criteria
      */
-    public function findAllByPersonne($personne_id)
+    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)
     {
-        $query = $this->_em
-            ->createQuery('
-                SELECT jeu
-                FROM JDJJeuBundle:Jeu jeu
-                LEFT JOIN jeu.auteurs auteur
-                LEFT JOIN jeu.illustrateurs illustrateur
-                LEFT JOIN jeu.editeurs editeur
-                where auteur.id = :personne_id
-                or illustrateur.id = :personne_id
-                or editeur.id = :personne_id
-            ')
-            ->setParameter("personne_id", $personne_id)
-        ;
+        parent::applyCriteria($queryBuilder, $criteria);
 
-        //echo $query->getSQL();
-
-        return $query->getResult();
+        if (array_key_exists("personne", $criteria)) {
+            $queryBuilder
+                ->andWhere(":personneId MEMBER OF ".$this->getAlias().".auteurs
+                    or :personneId MEMBER OF ".$this->getAlias().".illustrateurs
+                    or :personneId MEMBER OF ".$this->getAlias().".editeurs
+                ")
+                ->setParameter("personneId", $criteria['personne']->getId());
+            ;
+        }
     }
 } 
