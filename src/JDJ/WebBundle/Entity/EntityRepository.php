@@ -162,6 +162,14 @@ class EntityRepository extends BaseEntityRepository
                 $this->applyEntityCriteria($queryBuilder, $property, $value);
             } elseif ($entityClass->hasProperty($property."s")) {
                 $this->applyOtherEntitiesCriteria($queryBuilder, $property, $value);
+            } elseif ($entityClass->hasProperty(preg_replace("/^(.+)_moreThanOrEqual$/", $property, "$1"))) {
+                $queryBuilder->andWhere($queryBuilder->expr()->gte($this->getPropertyName($property)), $value);
+            } elseif ($entityClass->hasProperty(preg_replace("/^(.+)_lessThanOrEqual$/", $property, "$1"))) {
+                $queryBuilder->andWhere($queryBuilder->expr()->lte($this->getPropertyName($property)), $value);
+            } elseif ($entityClass->hasProperty(preg_replace("/^(.+)_moreThan$/", $property, "$1"))) {
+                $queryBuilder->andWhere($queryBuilder->expr()->gt($this->getPropertyName($property)), $value);
+            } elseif ($entityClass->hasProperty(preg_replace("/^(.+)_lessThan$/", $property, "$1"))) {
+                $queryBuilder->andWhere($queryBuilder->expr()->lt($this->getPropertyName($property)), $value);
             }
         }
     }
