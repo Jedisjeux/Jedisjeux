@@ -20,7 +20,7 @@ $(function(){
             var jeu_id = $(".starRating").data("jeu-id");
 
             /**
-             * Ajax Calling of the Delivery action
+             * Ajax Calling of the JeuNote:createAction
              */
             $.post( href, {
                 idNote: note_id,
