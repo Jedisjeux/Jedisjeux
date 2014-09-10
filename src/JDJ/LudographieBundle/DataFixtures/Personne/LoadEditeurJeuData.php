@@ -51,6 +51,6 @@ EOM;
      */
     public function getOrder()
     {
-        return 3;
+        return 4;
     }
 } 
