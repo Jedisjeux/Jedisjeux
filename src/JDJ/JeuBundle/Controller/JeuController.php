@@ -9,16 +9,15 @@
 namespace JDJ\JeuBundle\Controller;
 
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\QueryBuilder;
 use JDJ\JeuBundle\Entity\Jeu;
 use JDJ\JeuBundle\Form\JeuType;
-use JDJ\UserReviewBundle\Entity\JeuNote;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManager;
+use JDJ\UserReviewBundle\Entity\UserReviewRepository;
 
 class JeuController extends Controller
 {
@@ -26,7 +25,7 @@ class JeuController extends Controller
      * Finds and displays a Jeu entity.
      *
      */
-    public function showAction($id, $slug)
+    public function showAction(Request $request, $id, $slug)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -52,19 +51,12 @@ class JeuController extends Controller
         /**
          * Find All User Review entities from this game
          */
-        $jeuNotes = $em->getRepository('JDJUserReviewBundle:JeuNote')->findBy(array(
-            'jeu' => $entity,
-        ));
-
-        $userReviews = new ArrayCollection();
-
-        /** @var JeuNote $jeuNote */
-        foreach($jeuNotes as $jeuNote)
-        {
-            if ($jeuNote->hasUserReview()) {
-                $userReviews[] = $jeuNote->getUserReview();
-            }
-        }
+        /** @var UserReviewRepository $userReviewReposititory */
+        $userReviewReposititory = $em->getRepository('JDJUserReviewBundle:UserReview');
+        /** @var PagerFanta $userReviews */
+        $userReviews = $userReviewReposititory->createPaginator(array("jeu" => $entity));
+        $userReviews->setMaxPerPage(10);
+        $userReviews->setCurrentPage($request->get('page', 1));
 
         return $this->render('JDJJeuBundle:Jeu:show.html.twig', array(
                 'jeu' => $entity,

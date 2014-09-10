@@ -1,5 +1,6 @@
 JDJ\LudographieBundle\Entity\Personne:
   type: entity
+  repositoryClass: JDJ\WebBundle\Entity\EntityRepository
   table: jdj_personne
   id:
     id:

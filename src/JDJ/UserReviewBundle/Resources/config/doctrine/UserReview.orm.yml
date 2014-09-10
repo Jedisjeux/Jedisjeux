@@ -1,5 +1,6 @@
 JDJ\UserReviewBundle\Entity\UserReview:
   type: entity
+  repositoryClass: JDJ\UserReviewBundle\Entity\UserReviewRepository
   table: jdj_user_review
   id:
     id:

@@ -11,30 +11,65 @@ namespace JDJ\UserBundle\DataFixtures\User;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use JDJ\JeuBundle\Entity\Jeu;
 use JDJ\UserBundle\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerAware;
 
 class LoadUsersData extends ContainerAware implements FixtureInterface, OrderedFixtureInterface
 {
     /**
+     * @return \Doctrine\DBAL\Connection
+     */
+    public function getDatabaseConnection()
+    {
+        return $this->container->get('database_connection');
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function load(ObjectManager $manager)
     {
+        $query = <<<EOM
+select      old.user_id,
+            old.username,
+            old.user_email,
+            old.group_id
+from        old_jedisjeux.phpbb3_users old
+group by    old.user_email
+order by    old.user_id
+limit       100
+EOM;
+
+        $oldUsers = $this->getDatabaseConnection()->fetchAll($query);
+
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
         $userManager = $this->container->get('fos_user.user_manager');
 
-        /** @var User $loic */
-        $loic = $userManager->createUser();
-        $loic
-            ->setEnabled(true)
-            ->setUsername("loic_425")
-            ->setPlainPassword("loic_425")
-            ->setEmail("lc.fremont@gmail.com")
-            ->setRoles(array('ROLE_ADMIN'));
+        foreach($oldUsers as $data) {
 
-        $userManager->updateUser($loic);
+            $roles = array('ROLE_USER');
+            if (819 === $data['group_id']) {
+                $roles[] = 'ROLE_ADMIN';
+            }
+
+            /** @var User $user */
+            $user = $userManager->createUser();
+            $user
+                ->setEnabled(true)
+                ->setUsername($data['username'])
+                ->setPlainPassword($data['username'])
+                ->setEmail($data['user_email'])
+                ->setRoles($roles);
+
+            $userManager->updateUser($user);
+
+            $this->getDatabaseConnection()->update("fos_user", array(
+                'id' => $data['user_id'],
+            ), array(
+                'id' => $user->getId(),
+            ));
+        }
+
     }
 
     /**

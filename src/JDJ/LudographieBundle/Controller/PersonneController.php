@@ -17,8 +17,8 @@ use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use JDJ\WebBundle\Entity\EntityRepository;
 use JDJ\JeuBundle\Entity\JeuRepository;
-
 
 class PersonneController extends Controller
 {
@@ -80,9 +80,19 @@ class PersonneController extends Controller
         $jeux->setMaxPerPage(16);
         $jeux->setCurrentPage($request->get('page', 1));
 
+
+        /** @var EntityRepository $userReviewReposititory */
+        $userReviewReposititory = $em->getRepository('JDJUserReviewBundle:UserReview');
+        /** @var PagerFanta $userReviews */
+        $userReviews = $userReviewReposititory->createPaginator(array("personne" => $entity));
+        $userReviews->setMaxPerPage(10);
+        $userReviews->setCurrentPage($request->get('page', 1));
+
+
         return $this->render('JDJLudographieBundle:Personne:show.html.twig', array(
                 'personne' => $entity,
                 'jeux' => $jeux,
+                'userReviews' => $userReviews,
             )
         );
     }
