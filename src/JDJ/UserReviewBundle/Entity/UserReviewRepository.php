@@ -26,7 +26,7 @@ class UserReviewRepository extends EntityRepository
         /**
          * Filter on personne
          */
-        if (array_key_exists("personne", $criteria)) {
+        if (array_key_exists("personne", (array)$criteria)) {
             $queryBuilder
                 ->join($this->getAlias().".jeuNote", "jeuNote")
                 ->join("jeuNote.jeu", "jeu")
@@ -40,7 +40,7 @@ class UserReviewRepository extends EntityRepository
         /**
          * filter on jeu
          */
-        if (array_key_exists("jeu", $criteria)) {
+        if (array_key_exists("jeu", (array)$criteria)) {
             $queryBuilder
                 ->join($this->getAlias().".jeuNote", "jeuNote")
                 ->andWhere($queryBuilder->expr()->eq("jeuNote.jeu", ':jeuId'))

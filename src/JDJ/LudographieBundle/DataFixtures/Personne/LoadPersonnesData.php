@@ -47,7 +47,7 @@ select      old.id,
             old.description,
             pays.id,
             old.photo,
-            old.nom_clean
+            replace(old.nom_clean, ' ', '-') as slug
 from        old_jedisjeux.jdj_personnes old
 left join   jdj_pays pays
                 on CONVERT(pays.libelle USING utf8) = CONVERT(old.nationnalite USING utf8)

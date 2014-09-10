@@ -13,6 +13,8 @@ use JDJ\UserReviewBundle\Entity\UserReview;
 use JDJ\UserReviewBundle\Form\UserReviewType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use JDJ\UserReviewBundle\Entity\UserReviewRepository;
+use Pagerfanta\Pagerfanta;
 
 class UserReviewController extends Controller
 {
@@ -24,7 +26,15 @@ class UserReviewController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('JDJUserReviewBundle:UserReview')->findAll();
+        /**
+         * Find All User Review entities from this game
+         */
+        /** @var UserReviewRepository $userReviewReposititory */
+        $userReviewReposititory = $em->getRepository('JDJUserReviewBundle:UserReview');
+        /** @var PagerFanta $entities */
+        $entities = $userReviewReposititory->createPaginator();
+        $entities->setMaxPerPage(10);
+        $entities->setCurrentPage($request->get('page', 1));
 
         $deleteForms = array();
         foreach ($entities as $entity) {
