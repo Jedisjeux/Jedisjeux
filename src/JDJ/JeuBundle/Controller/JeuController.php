@@ -49,6 +49,9 @@ class JeuController extends Controller
             );
         }
 
+        /**
+         * Find All User Review entities from this game
+         */
         $jeuNotes = $em->getRepository('JDJUserReviewBundle:JeuNote')->findBy(array(
             'jeu' => $entity,
         ));

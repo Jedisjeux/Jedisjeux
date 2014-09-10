@@ -99,7 +99,7 @@ class UserReviewController extends Controller
      * @return Jeu
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
-    private function findJeu($idJeu)
+    protected function findJeu($idJeu)
     {
         $em = $this->getDoctrine()->getManager();
         /** @var Jeu $jeu */
@@ -116,7 +116,7 @@ class UserReviewController extends Controller
      * @param Jeu $jeu
      * @return mixed
      */
-    public function findJeuNote(Jeu $jeu)
+    protected function findJeuNote(Jeu $jeu)
     {
         $em = $this->getDoctrine()->getManager();
         return $em->getRepository('JDJUserReviewBundle:JeuNote')->findOneBy(array(

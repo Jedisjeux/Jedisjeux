@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700);
 /* line 4, ../sass/_layout.scss */
 .fullWidth {
@@ -63,6 +64,54 @@
 /* line 26, ../sass/module/_jeu.scss */
 .panel.but ul li, .panel.but h3, .panel.but p {
   color: white;
+}
+
+/*****************************************************/
+/* Notation avec étoiles */
+/*****************************************************/
+/* line 36, ../sass/module/_jeu.scss */
+.starRating {
+  float: left;
+  margin: 0px 10px;
+}
+/* line 40, ../sass/module/_jeu.scss */
+.starRating ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+/* line 46, ../sass/module/_jeu.scss */
+.starRating p, .starRating span {
+  display: none;
+}
+/* line 50, ../sass/module/_jeu.scss */
+.starRating .starLeft, .starRating .starRight {
+  float: left;
+  width: 11px;
+  height: 20px;
+}
+/* line 55, ../sass/module/_jeu.scss */
+.starRating .starLeft a, .starRating .starRight a {
+  width: 11px;
+  height: 20px;
+  display: block;
+  text-decoration: none;
+}
+/* line 63, ../sass/module/_jeu.scss */
+.starRating .starLeft {
+  background: url(http://www.jedisjeux.net/img/design/icons/stars.png) left bottom;
+}
+/* line 65, ../sass/module/_jeu.scss */
+.starRating .starLeft.selected {
+  background: url(http://www.jedisjeux.net/img/design/icons/stars.png) left top;
+}
+/* line 70, ../sass/module/_jeu.scss */
+.starRating .starRight {
+  background: url(http://www.jedisjeux.net/img/design/icons/stars.png) right bottom;
+}
+/* line 72, ../sass/module/_jeu.scss */
+.starRating .starRight.selected {
+  background: url(http://www.jedisjeux.net/img/design/icons/stars.png) right top;
 }
 
 /* line 24, ../sass/base.scss */

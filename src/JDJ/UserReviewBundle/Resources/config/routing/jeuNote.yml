@@ -1,0 +1,4 @@
+user_jeu_note_create:
+    pattern:  /jeu-note/create
+    defaults: { _controller: "JDJUserReviewBundle:JeuNote:create" }
+    requirements: { _method: post }

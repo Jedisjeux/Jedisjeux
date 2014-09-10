@@ -31,6 +31,8 @@
             {% endfor %}
         {% endfor %}
 
+        <div style="display: none" id="alert-box-success" data-alert class="alert-box success radius"></div>
+
         {% block body %}
         {% endblock %}
     </div>
@@ -46,6 +48,7 @@
         '@JDJFoundationBundle/Resources/public/bower_components/foundation/js/foundation/foundation.equalizer.js'
         '@JDJFoundationBundle/Resources/public/js/*'
         '@JDJJeuBundle/Resources/public/js/jeu/*'
+        '@JDJUserReviewBundle/Resources/public/js/jeu_note/*'
         '@JDJFoundationBundle/Resources/public/bower_components/modernizr/modernizr.js'
     %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
