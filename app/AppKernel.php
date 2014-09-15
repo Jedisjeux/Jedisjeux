@@ -24,6 +24,8 @@ class AppKernel extends Kernel
             new FOS\CommentBundle\FOSCommentBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             new \Liip\ImagineBundle\LiipImagineBundle(),
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new Gregwar\FormBundle\GregwarFormBundle(),
 
             //JDJ
             new JDJ\FoundationBundle\JDJFoundationBundle(),

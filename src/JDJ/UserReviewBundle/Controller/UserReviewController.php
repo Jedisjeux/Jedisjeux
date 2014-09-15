@@ -168,6 +168,7 @@ class UserReviewController extends Controller
          */
         if (null !== $jeuNote) {
             $form->get('jeuNote')->setData($jeuNote);
+
         } else {
             $form->get('jeuNote')->get('jeu')->setData($jeu);
         }

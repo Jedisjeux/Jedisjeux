@@ -164,3 +164,11 @@ services:
         - { name: doctrine.event_subscriber, connection: default }
       calls:
         - [ setAnnotationReader, [ @annotation_reader ] ]
+
+ivory_ck_editor:
+    default_config: minimal
+    configs:
+        minimal:
+            toolbar: basic
+
+gregwar_form: ~

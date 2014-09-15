@@ -23,7 +23,7 @@ class UserReviewType extends AbstractType
         $builder
             ->add("jeuNote", "jdj_userreviewbundle_jeunote")
             ->add('libelle')
-            ->add('body')
+            ->add('body', 'ckeditor')
         ;
     }
 
