@@ -22,23 +22,46 @@ class JeuType extends AbstractType
     {
         $builder
             ->add('libelle')
-            ->add('ageMin')
-            ->add('intro')
-            ->add('materiel')
-            ->add('but')
-            ->add('description')
-            ->add('joueurMin')
-            ->add('joueurMax')
+            ->add('ageMin', null, array(
+                'required' => false,
+            ))
+            ->add('intro', null, array(
+                'required' => false,
+            ))
+            ->add('materiel', null, array(
+                'required' => false,
+            ))
+            ->add('but', null, array(
+                'required' => false,
+            ))
+            ->add('description', null, array(
+                'required' => false,
+            ))
+            ->add('joueurMin', null, array(
+                'required' => false,
+            ))
+            ->add('joueurMax', null, array(
+                'required' => false,
+            ))
             ->add('mecanismes', 'entity', array(
                     'class' => 'JDJJeuBundle:Mecanisme',
                     'multiple' => true,
-                    'expanded' => false
+                    'expanded' => false,
+                    'required' => false,
                 )
             )
             ->add('themes', 'entity', array(
                     'class' => 'JDJJeuBundle:Theme',
                     'multiple' => true,
-                    'expanded' => false
+                    'expanded' => false,
+                    'required' => false,
+                )
+            )
+            ->add('cibles', 'entity', array(
+                    'class' => 'JDJCoreBundle:Cible',
+                    'multiple' => true,
+                    'expanded' => false,
+                    'required' => false,
                 )
             );
     }

@@ -35,6 +35,7 @@ class AppKernel extends Kernel
             new JDJ\CommentBundle\JDJCommentBundle(),
             new JDJ\PartieBundle\JDJPartieBundle(),
             new JDJ\UserReviewBundle\JDJUserReviewBundle(),
+            new JDJ\CoreBundle\JDJCoreBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

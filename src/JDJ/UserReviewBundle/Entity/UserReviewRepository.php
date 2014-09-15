@@ -9,8 +9,8 @@
 namespace JDJ\UserReviewBundle\Entity;
 
 
-use JDJ\WebBundle\Entity\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use JDJ\CoreBundle\Entity\EntityRepository;
 
 class UserReviewRepository extends EntityRepository
 {

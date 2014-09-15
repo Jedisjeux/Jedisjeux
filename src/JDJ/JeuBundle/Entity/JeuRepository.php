@@ -10,7 +10,7 @@ namespace JDJ\JeuBundle\Entity;
 
 
 use Doctrine\ORM\QueryBuilder;
-use JDJ\WebBundle\Entity\EntityRepository;
+use JDJ\CoreBundle\Entity\EntityRepository;
 
 class JeuRepository extends EntityRepository
 {

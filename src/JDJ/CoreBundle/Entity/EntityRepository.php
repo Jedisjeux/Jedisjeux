@@ -6,7 +6,7 @@
  * Time: 00:43
  */
 
-namespace JDJ\WebBundle\Entity;
+namespace JDJ\CoreBundle\Entity;
 
 
 use Doctrine\ORM\EntityRepository as BaseEntityRepository;
