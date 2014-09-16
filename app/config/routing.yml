@@ -1,3 +1,7 @@
+jdj_core:
+    resource: "@JDJCoreBundle/Resources/config/routing.yml"
+    prefix:   /
+
 jdj_comment:
     resource: "@JDJCommentBundle/Resources/config/routing.yml"
 

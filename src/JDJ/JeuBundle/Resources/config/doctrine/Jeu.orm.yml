@@ -117,6 +117,18 @@ JDJ\JeuBundle\Entity\Jeu:
         inverseJoinColumns:
           personne_id:
             referencedColumnName: id
+    cibles:
+      targetEntity: JDJ\CoreBundle\Entity\Cible
+      inversedBy: jeux
+      cascade: ["persist", "merge"]
+      joinTable:
+        name: jdj_cible_jeu
+        joinColumns:
+          jeu_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          cible_id:
+            referencedColumnName: id
   oneToMany:
     jeuCaracteristiques:
       targetEntity: JeuCaracteristique
