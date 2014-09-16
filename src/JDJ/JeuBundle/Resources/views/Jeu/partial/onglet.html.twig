@@ -16,7 +16,7 @@
     <div class="content" id="articles"><p>Third panel content goes here...</p></div>
     <div class="content" id="photos"><p>Photos go here...</p></div>
     <div class="content" id="parties"><p>Fifth panel content go here...</p></div>
-    <div class="content" id="avis">{% include "JDJJeuBundle:Jeu:partial/onglet/userReview.html.twig" with {'userReviews': userReviews} %}</div>
+    <div class="content" id="avis">{% include "JDJJeuBundle:Jeu:partial/onglet/userReview.html.twig" with {'userReviews': userReviews, 'jeu': jeu} %}</div>
     <div class="content" id="stats"><p>Stats goe here...</p></div>
     <div class="content"
          id="addons">{% include "JDJJeuBundle:Jeu:partial/onglet/addon.html.twig" with {'jeu': jeu} %}</div>

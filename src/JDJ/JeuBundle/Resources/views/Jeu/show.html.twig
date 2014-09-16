@@ -7,11 +7,3 @@
     {% include "JDJJeuBundle:Jeu:partial/onglet.html.twig" with {'jeu': jeu, 'userReviews': userReviews} %}
 
 {% endblock %}
-
-{% block javascript %}
-    {{ parent() }}
-    <script>
-        console.log("test");
-        $(document).foundation({ tab: { callback : function (tab) { console.log(tab); } } });
-    </script>
-{% endblock %}

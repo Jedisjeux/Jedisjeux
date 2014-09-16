@@ -67,3 +67,6 @@ security:
         - { path: ^/admin/, role: ROLE_ADMIN }
         #seul les admins ont accès à la partie compta
         - { path: ^/compta/, role: ROLE_ADMIN }
+        #edition d'un avis
+        - { path: ^/avis/\d+/edit, role: ROLE_USER }
+        - { path: ^/jeu/\d+/avis/new, role: ROLE_USER }
