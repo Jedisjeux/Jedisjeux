@@ -33,8 +33,10 @@
 
         <div style="display: none" id="alert-box-success" data-alert class="alert-box success radius"></div>
 
+        {% block fos_user_content %}
         {% block body %}
         {% endblock %}
+        {% endblock fos_user_content %}
     </div>
 </div>
 
