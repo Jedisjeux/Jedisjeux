@@ -25,16 +25,16 @@ class JeuType extends AbstractType
             ->add('ageMin', null, array(
                 'required' => false,
             ))
-            ->add('intro', null, array(
+            ->add('intro', 'ckeditor', array(
                 'required' => false,
             ))
             ->add('materiel', null, array(
                 'required' => false,
             ))
-            ->add('but', null, array(
+            ->add('but', 'ckeditor', array(
                 'required' => false,
             ))
-            ->add('description', null, array(
+            ->add('description', 'ckeditor', array(
                 'required' => false,
             ))
             ->add('joueurMin', null, array(
