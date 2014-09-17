@@ -8,6 +8,20 @@ default:
         homepage:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
+            filters:
+                tags: "@homepage && ~@javascript"
+
+        jeu:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+            filters:
+                tags: "@jeu && ~@javascript"
+
+        ludographie:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+            filters:
+                tags: "@ludographie && ~@javascript"
 
     extensions:
         Behat\MinkExtension:
