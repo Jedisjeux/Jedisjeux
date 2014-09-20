@@ -17,7 +17,7 @@ use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use JDJ\WebBundle\Entity\EntityRepository;
+use JDJ\CoreBundle\Entity\EntityRepository;
 use JDJ\JeuBundle\Entity\JeuRepository;
 
 class PersonneController extends Controller

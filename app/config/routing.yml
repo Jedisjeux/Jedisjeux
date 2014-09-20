@@ -1,3 +1,7 @@
+jdj_search:
+    resource: "@JDJSearchBundle/Resources/config/routing.yml"
+    prefix:   /recherche
+
 jdj_core:
     resource: "@JDJCoreBundle/Resources/config/routing.yml"
     prefix:   /

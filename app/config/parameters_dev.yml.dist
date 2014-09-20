@@ -10,4 +10,4 @@ parameters:
     mailer_password:   ~
 
     fos_elastica.host: localhost
-    fos_elastica.port: 8080
+    fos_elastica.port: 9200

@@ -1,0 +1,9 @@
+{% extends "JDJWebBundle::layout.html.twig" %}
+
+{% block body -%}
+
+    {% for user in users %}
+        {{ user.username }}
+        {% endfor %}
+
+{% endblock %}
