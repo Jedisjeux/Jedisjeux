@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new \Liip\ImagineBundle\LiipImagineBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new Gregwar\FormBundle\GregwarFormBundle(),
+            new FOS\ElasticaBundle\FOSElasticaBundle(),
 
             //JDJ
             new JDJ\FoundationBundle\JDJFoundationBundle(),

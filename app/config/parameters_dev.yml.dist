@@ -8,3 +8,6 @@ parameters:
     mailer_host:       127.0.0.1
     mailer_user:       ~
     mailer_password:   ~
+
+    fos_elastica.host: localhost
+    fos_elastica.port: 8080
