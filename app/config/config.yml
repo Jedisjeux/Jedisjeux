@@ -179,6 +179,7 @@ fos_elastica:
         default: { host: %fos_elastica.host%, port: %fos_elastica.port% }
     indexes:
         search:
+          finder: ~
           types:
               user:
                   mappings:
@@ -194,6 +195,7 @@ fos_elastica:
               jeu:
                   mappings:
                       libelle: ~
+                      slug: ~
                   persistence:
                       driver: orm
                       model: JDJ\JeuBundle\Entity\Jeu
@@ -205,6 +207,7 @@ fos_elastica:
                   mappings:
                       prenom: ~
                       nom: ~
+                      slug: ~
                   persistence:
                       driver: orm
                       model: JDJ\LudographieBundle\Entity\Personne
