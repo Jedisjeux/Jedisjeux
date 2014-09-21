@@ -1,0 +1,8 @@
+jeu:
+    pattern:  /
+    defaults: { _controller: "JDJJeuBundle:Jeu:index" }
+
+
+search_query:
+    pattern:  /
+    defaults: { _controller: "JDJSearchBundle:Search:searchQuery" }

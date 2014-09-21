@@ -38,7 +38,8 @@
         "phpspec/phpspec":                   "~2.0",
         "phpunit/phpunit":                   "~3.7",
         "egeloen/ckeditor-bundle":           "~2.0",
-        "gregwar/form-bundle":              "dev-master"
+        "gregwar/form-bundle":              "dev-master",
+        "friendsofsymfony/elastica-bundle": "~3.0"
     },
     "scripts": {
         "post-install-cmd": [
