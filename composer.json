@@ -68,6 +68,9 @@
             },
             {
                 "file": "app/config/parameters_dev.yml"
+            },
+            {
+                "file": "app/config/parameters_test.yml"
             }
         ],
         "branch-alias": {
