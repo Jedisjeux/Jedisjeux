@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new \Liip\ImagineBundle\LiipImagineBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new Gregwar\FormBundle\GregwarFormBundle(),
+            new FOS\ElasticaBundle\FOSElasticaBundle(),
 
             //JDJ
             new JDJ\FoundationBundle\JDJFoundationBundle(),
@@ -38,6 +39,7 @@ class AppKernel extends Kernel
             new JDJ\PartieBundle\JDJPartieBundle(),
             new JDJ\UserReviewBundle\JDJUserReviewBundle(),
             new JDJ\CoreBundle\JDJCoreBundle(),
+            new JDJ\SearchBundle\JDJSearchBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

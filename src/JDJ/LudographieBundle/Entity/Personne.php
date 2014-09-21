@@ -24,6 +24,55 @@ class Personne
      */
     private $prenom;
 
+    /**
+     * @var string
+     */
+    private $siteWeb;
+
+    /**
+     * @var string
+     */
+    private $description;
+
+    /**
+     * @var string
+     */
+    private $image;
+
+    /**
+     * @var string
+     */
+    private $slug;
+
+    /**
+     * @var \JDJ\WebBundle\Entity\Pays
+     */
+    private $pays;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $auteurJeux;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $illustrateurJeux;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $editeurJeux;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->auteurJeux = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->illustrateurJeux = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->editeurJeux = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -82,29 +131,6 @@ class Personne
     }
 
     /**
-     * Convert Entity To String
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        /**
-         * Le prénom n'étant pas obligatoire, on enlève les espaces autour
-         */
-        return trim($this->getPrenom(). ' '.$this->getNom());
-    }
-    /**
-     * @var string
-     */
-    private $siteWeb;
-
-    /**
-     * @var string
-     */
-    private $description;
-
-
-    /**
      * Set siteWeb
      *
      * @param string $siteWeb
@@ -149,39 +175,6 @@ class Personne
     {
         return $this->description;
     }
-    /**
-     * @var \JDJ\WebBundle\Entity\Pays
-     */
-    private $pays;
-
-
-    /**
-     * Set pays
-     *
-     * @param \JDJ\WebBundle\Entity\Pays $pays
-     * @return Personne
-     */
-    public function setPays(\JDJ\WebBundle\Entity\Pays $pays = null)
-    {
-        $this->pays = $pays;
-
-        return $this;
-    }
-
-    /**
-     * Get pays
-     *
-     * @return \JDJ\WebBundle\Entity\Pays 
-     */
-    public function getPays()
-    {
-        return $this->pays;
-    }
-    /**
-     * @var string
-     */
-    private $image;
-
 
     /**
      * Set image
@@ -205,11 +198,6 @@ class Personne
     {
         return $this->image;
     }
-    /**
-     * @var string
-     */
-    private $slug;
-
 
     /**
      * Set slug
@@ -233,17 +221,28 @@ class Personne
     {
         return $this->slug;
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $auteurJeux;
 
     /**
-     * Constructor
+     * Set pays
+     *
+     * @param \JDJ\WebBundle\Entity\Pays $pays
+     * @return Personne
      */
-    public function __construct()
+    public function setPays(\JDJ\WebBundle\Entity\Pays $pays = null)
     {
-        $this->auteurJeux = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->pays = $pays;
+
+        return $this;
+    }
+
+    /**
+     * Get pays
+     *
+     * @return \JDJ\WebBundle\Entity\Pays 
+     */
+    public function getPays()
+    {
+        return $this->pays;
     }
 
     /**
@@ -278,11 +277,6 @@ class Personne
     {
         return $this->auteurJeux;
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $illustrateurJeux;
-
 
     /**
      * Add illustrateurJeux
@@ -316,11 +310,6 @@ class Personne
     {
         return $this->illustrateurJeux;
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $editeurJeux;
-
 
     /**
      * Add editeurJeux
@@ -353,5 +342,18 @@ class Personne
     public function getEditeurJeux()
     {
         return $this->editeurJeux;
+    }
+
+    /**
+     * Convert Entity To String
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        /**
+         * Le prénom n'étant pas obligatoire, on enlève les espaces autour
+         */
+        return trim($this->getPrenom(). ' '.$this->getNom());
     }
 }
