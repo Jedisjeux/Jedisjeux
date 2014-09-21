@@ -196,6 +196,7 @@ class AddonController extends Controller
      */
     public function updateAction(Request $request, $jeu_id, $id)
     {
+
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('JDJJeuBundle:Addon')->find($id);

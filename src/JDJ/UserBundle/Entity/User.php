@@ -110,11 +110,6 @@ class User extends BaseUser
     private $prenom;
 
     /**
-     * @var file
-     */
-    private $avatar;
-
-    /**
      * @var string
      */
     private $presentation;
@@ -194,29 +189,6 @@ class User extends BaseUser
     public function getPrenom()
     {
         return $this->prenom;
-    }
-
-    /**
-     * Set avatar
-     *
-     * @param \file $avatar
-     * @return User
-     */
-    public function setAvatar(\file $avatar)
-    {
-        $this->avatar = $avatar;
-
-        return $this;
-    }
-
-    /**
-     * Get avatar
-     *
-     * @return \file 
-     */
-    public function getAvatar()
-    {
-        return $this->avatar;
     }
 
     /**
@@ -332,5 +304,33 @@ class User extends BaseUser
     public function getUpdated()
     {
         return $this->updated;
+    }
+    /**
+     * @var string
+     */
+    private $avatar;
+
+
+    /**
+     * Set avatar
+     *
+     * @param string $avatar
+     * @return User
+     */
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+     * Get avatar
+     *
+     * @return string 
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
     }
 }

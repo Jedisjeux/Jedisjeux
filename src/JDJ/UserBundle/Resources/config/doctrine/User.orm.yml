@@ -17,8 +17,9 @@ JDJ\UserBundle\Entity\User:
         nullable: false
         length: 50
       avatar:
-        type: file
+        type: string
         nullable: true
+        length: 100
       presentation:
         type: string
         nullable: true

@@ -22,7 +22,7 @@ class AddonType extends AbstractType
             ->add('langues', 'entity', array(
                     'class' => 'JDJWebBundle:Langue',
                     'multiple' => true,
-                    'expanded' => true,
+                    'expanded' => false,
                     'required' => true,
                 )
             )
