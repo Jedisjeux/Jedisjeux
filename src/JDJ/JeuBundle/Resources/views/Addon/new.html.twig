@@ -57,6 +57,20 @@
                 </div>
             </div>
 
+            <div class="small-8">
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="right-label" class="left inline">{{ form_label(form.langues) }}</label>
+                    </div>
+                    <div class="error">
+                        {{ form_errors(form.langues) }}
+                    </div>
+                    <div class="small-9 columns">
+                        {{ form_widget(form.langues) }}
+                    </div>
+                </div>
+            </div>
+
             <div class="small-8" style="display: none;">
                 <div class="row">
                     <div class="small-3 columns">
@@ -70,6 +84,8 @@
                     </div>
                 </div>
             </div>
+
+
 
         </fieldset>
 

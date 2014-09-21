@@ -2,6 +2,7 @@
 
 namespace JDJ\JeuBundle\Controller;
 
+use Symfony\Component\Debug\Debug;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -188,6 +189,7 @@ class AddonController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Addon entity.
      *
