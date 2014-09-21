@@ -27,13 +27,5 @@ JDJ\JeuBundle\Entity\Theme:
   manyToMany:
     jeux:
       targetEntity: Jeu
-      inversedBy: themes
-      cascade: ["persist"]
-      joinTable:
-        name: jdj_theme_jeu
-        joinColumns:
-          theme_id:
-            referencedColumnName: id
-        inverseJoinColumns:
-          jeu_id:
-            referencedColumnName: id
+      mappedBy: themes
+      cascade: ["persist", "merge"]

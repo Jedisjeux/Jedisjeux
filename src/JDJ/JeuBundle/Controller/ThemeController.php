@@ -9,8 +9,10 @@
 namespace JDJ\JeuBundle\Controller;
 
 
+use JDJ\JeuBundle\Entity\JeuRepository;
 use JDJ\JeuBundle\Entity\Theme;
 use JDJ\JeuBundle\Form\ThemeType;
+use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -99,7 +101,7 @@ class ThemeController extends Controller
      * Finds and displays a Theme entity.
      *
      */
-    public function showAction($id)
+    public function showAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -111,9 +113,18 @@ class ThemeController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
+        /** @var JeuRepository $jeuReposititory */
+        $jeuReposititory = $em->getRepository('JDJJeuBundle:Jeu');
+        /** @var Pagerfanta $jeux */
+        $jeux = $jeuReposititory->createPaginator(array("theme" => $entity));
+        $jeux->setMaxPerPage(16);
+        $jeux->setCurrentPage($request->get('page', 1));
+
         return $this->render('JDJJeuBundle:Theme:show.html.twig', array(
             'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        ));
+            'jeux'        => $jeux,
+            'delete_form' => $deleteForm->createView(),
+        ));
     }
 
     /**

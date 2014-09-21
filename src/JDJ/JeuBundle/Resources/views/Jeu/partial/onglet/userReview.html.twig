@@ -1,0 +1,11 @@
+<ul>
+    <li>
+        <a class="button add" href="{{ path('user_review_new', {'idJeu': jeu.id}) }}">
+            Ma critique
+        </a>
+    </li>
+</ul>
+
+{% for entity in userReviews %}
+    {% include "JDJUserReviewBundle:UserReview:partial/_show.html.twig" with {'entity': entity} %}
+{% endfor %}

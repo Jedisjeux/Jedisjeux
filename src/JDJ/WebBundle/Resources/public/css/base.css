@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700);
 /* line 4, ../sass/_layout.scss */
 .fullWidth {
@@ -63,6 +64,54 @@
 /* line 26, ../sass/module/_jeu.scss */
 .panel.but ul li, .panel.but h3, .panel.but p {
   color: white;
+}
+
+/*****************************************************/
+/* Notation avec étoiles */
+/*****************************************************/
+/* line 36, ../sass/module/_jeu.scss */
+.starRating {
+  float: left;
+  margin: 0px 10px;
+}
+/* line 40, ../sass/module/_jeu.scss */
+.starRating ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+/* line 46, ../sass/module/_jeu.scss */
+.starRating p, .starRating span {
+  display: none;
+}
+/* line 50, ../sass/module/_jeu.scss */
+.starRating .starLeft, .starRating .starRight {
+  float: left;
+  width: 11px;
+  height: 20px;
+}
+/* line 55, ../sass/module/_jeu.scss */
+.starRating .starLeft a, .starRating .starRight a {
+  width: 11px;
+  height: 20px;
+  display: block;
+  text-decoration: none;
+}
+/* line 63, ../sass/module/_jeu.scss */
+.starRating .starLeft {
+  background: url(http://www.jedisjeux.net/img/design/icons/stars.png) left bottom;
+}
+/* line 65, ../sass/module/_jeu.scss */
+.starRating .starLeft.selected {
+  background: url(http://www.jedisjeux.net/img/design/icons/stars.png) left top;
+}
+/* line 70, ../sass/module/_jeu.scss */
+.starRating .starRight {
+  background: url(http://www.jedisjeux.net/img/design/icons/stars.png) right bottom;
+}
+/* line 72, ../sass/module/_jeu.scss */
+.starRating .starRight.selected {
+  background: url(http://www.jedisjeux.net/img/design/icons/stars.png) right top;
 }
 
 /* line 24, ../sass/base.scss */
@@ -179,15 +228,29 @@ button:focus, button:active, a.button:focus, a.button:active {
   width: 100%;
   overflow: hidden;
 }
+/* line 169, ../sass/base.scss */
+.listing .panel {
+  background: #fafafa;
+}
+/* line 171, ../sass/base.scss */
+.listing .panel h3, .listing .panel h3 a {
+  font-size: 1.2em;
+  color: #555;
+}
+/* line 176, ../sass/base.scss */
+.listing .panel ul li {
+  font-size: 0.85em;
+  color: #aaa;
+}
 
 /**************************************************************/
 /*  	    		       ITEM LIST					      */
 /**************************************************************/
-/* line 174, ../sass/base.scss */
+/* line 190, ../sass/base.scss */
 ul {
   margin: 0;
 }
-/* line 176, ../sass/base.scss */
+/* line 192, ../sass/base.scss */
 ul li {
   list-style-type: none;
 }
@@ -195,50 +258,55 @@ ul li {
 /**************************************************************/
 /*  	    		       TABLE					          */
 /**************************************************************/
-/* line 185, ../sass/base.scss */
+/* line 201, ../sass/base.scss */
 table {
   width: 100%;
 }
-/* line 189, ../sass/base.scss */
+/* line 205, ../sass/base.scss */
 table thead tr th {
   padding: 10px;
   background: #333333;
   color: #fff;
   border: 1px solid #e2e2e2;
 }
-/* line 197, ../sass/base.scss */
+/* line 213, ../sass/base.scss */
 table td {
   vertical-align: middle;
 }
-/* line 199, ../sass/base.scss */
+/* line 215, ../sass/base.scss */
 table td .inline-list {
   margin: 0;
   position: relative;
   top: 10px;
 }
 
-/* line 209, ../sass/base.scss */
+/* line 225, ../sass/base.scss */
 .tabs {
   margin-top: 1rem;
   background: #efefef;
 }
-/* line 212, ../sass/base.scss */
+/* line 228, ../sass/base.scss */
 .tabs li.active.tab-title a {
   background: url("http://januarycreative.com/wp-content/themes/januarycreative/img/greybg.png");
   color: white;
 }
-/* line 216, ../sass/base.scss */
+/* line 232, ../sass/base.scss */
 .tabs dd > a, .tabs .tab-title > a {
   background: transparent;
   color: black;
   padding: 0.5rem 1.5rem;
 }
 
-/* line 223, ../sass/base.scss */
+/* line 239, ../sass/base.scss */
 div [role=content] {
   padding-top: 1rem;
   border-top: none;
   border-bottom: none;
   min-height: 800px;
   background: white;
+}
+
+/* line 247, ../sass/base.scss */
+.publication-info {
+  font-style: italic;
 }

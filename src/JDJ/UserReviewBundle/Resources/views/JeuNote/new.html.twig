@@ -1,0 +1,17 @@
+<div class="row">
+    <div class="columns">
+        <p style="float: left">Ma note</p>
+        <div class="starRating" data-href="{{ path("user_jeu_note_create") }}" data-jeu-id="{{ jeu.id }}" >
+            <p>
+                {% if (userNote) %}
+                    {{ userNote.note.valeur }}
+                {% endif %}
+            </p>
+            <ul>
+                {% for note in notes %}
+                    <li><a data-note-id="{{ note.id }}" href="#" title="{{ note.libelle }}"><span>{{ note.valeur }}</span></a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

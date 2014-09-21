@@ -30,7 +30,7 @@ JDJ\JeuBundle\Entity\Jeu:
       nullable: true
     materiel:
       type: text
-      ullable: true
+      nullable: true
     but:
       type: text
       nullable: true
@@ -57,24 +57,78 @@ JDJ\JeuBundle\Entity\Jeu:
   manyToMany:
     mecanismes:
       targetEntity: Mecanisme
-      mappedBy: jeux
-      cascade: ["persist"]
+      inversedBy: jeux
+      cascade: ["persist", "merge"]
+      joinTable:
+        name: jdj_mecanisme_jeu
+        joinColumns:
+          jeu_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          mecanisme_id:
+            referencedColumnName: id
     themes:
       targetEntity: Theme
-      mappedBy: jeux
-      cascade: ["persist"]
+      inversedBy: jeux
+      cascade: ["persist", "merge"]
+      inversedBy: jeux
+      cascade: ["persist", "merge"]
+      joinTable:
+        name: jdj_theme_jeu
+        joinColumns:
+          jeu_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          theme_id:
+            referencedColumnName: id
     auteurs:
       targetEntity: JDJ\LudographieBundle\Entity\Personne
-      mappedBy: auteurJeux
-      cascade: ["persist"]
+      inversedBy: auteurJeux
+      cascade: ["persist", "merge"]
+      joinTable:
+        name: jdj_auteur_jeu
+        joinColumns:
+          jeu_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          personne_id:
+            referencedColumnName: id
     illustrateurs:
       targetEntity: JDJ\LudographieBundle\Entity\Personne
-      mappedBy: illustrateurJeux
-      cascade: ["persist"]
+      inversedBy: illustrateurJeux
+      cascade: ["persist", "merge"]
+      joinTable:
+        name: jdj_illustrateur_jeu
+        joinColumns:
+          jeu_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          personne_id:
+            referencedColumnName: id
     editeurs:
-          targetEntity: JDJ\LudographieBundle\Entity\Personne
-          mappedBy: editeurJeux
-          cascade: ["persist"]
+      targetEntity: JDJ\LudographieBundle\Entity\Personne
+      inversedBy: editeurJeux
+      cascade: ["persist", "merge"]
+      joinTable:
+        name: jdj_editeur_jeu
+        joinColumns:
+          jeu_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          personne_id:
+            referencedColumnName: id
+    cibles:
+      targetEntity: JDJ\CoreBundle\Entity\Cible
+      inversedBy: jeux
+      cascade: ["persist", "merge"]
+      joinTable:
+        name: jdj_cible_jeu
+        joinColumns:
+          jeu_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          cible_id:
+            referencedColumnName: id
   oneToMany:
     jeuCaracteristiques:
       targetEntity: JeuCaracteristique
@@ -89,3 +143,5 @@ JDJ\JeuBundle\Entity\Jeu:
     statut:
       targetEntity: JDJ\WebBundle\Entity\Statut
       inversedBy: jeux
+      joinColumn:
+        nullable: false

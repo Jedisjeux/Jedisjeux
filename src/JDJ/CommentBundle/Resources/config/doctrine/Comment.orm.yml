@@ -1,0 +1,15 @@
+JDJ\CommentBundle\Entity\Comment:
+  type: entity
+  table: fos_comment
+  changeTrackingPolicy: DEFERRED_EXPLICIT
+  id:
+      id:
+        type: integer
+        unsigned: true
+        generator:
+          strategy: IDENTITY
+  manyToOne:
+    thread:
+      targetEntity: JDJ\CommentBundle\Entity\Thread
+    author:
+      targetEntity: JDJ\UserBundle\Entity\User
