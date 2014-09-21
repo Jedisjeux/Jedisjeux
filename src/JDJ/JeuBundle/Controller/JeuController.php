@@ -11,6 +11,7 @@ namespace JDJ\JeuBundle\Controller;
 
 use Doctrine\ORM\QueryBuilder;
 use JDJ\JeuBundle\Entity\Jeu;
+use JDJ\JeuBundle\Entity\JeuRepository;
 use JDJ\JeuBundle\Form\JeuType;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
@@ -155,6 +156,43 @@ class JeuController extends Controller
         return $this->render('JDJJeuBundle:Jeu:edit.html.twig', array(
             'entity' => $entity,
             'edit_form' => $editForm->createView(),
+        ));
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function IfYouLikeThisGameAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        /** @var Jeu $jeu */
+        $jeu = $em->getRepository('JDJJeuBundle:Jeu')->find($id);
+
+        if (!$jeu) {
+            throw $this->createNotFoundException('Unable to find Jeu entity.');
+        }
+
+        /** @var JeuRepository $jeuReposititory */
+        $jeuReposititory = $em->getRepository('JDJJeuBundle:Jeu');
+        /** @var Pagerfanta $jeux */
+        $jeux = $jeuReposititory->getIfYouLikeThisGame($jeu);
+
+
+        /*$jeux = $jeuReposititory->createPaginator(array(
+            'noteAvg:moreThanOrEqual' => 7,
+            'ageMin:moreThanOrEqual' => $jeu->getAgeMin()-2,
+            "ageMin:lessThanOrEqual" => $jeu->getAgeMin()+2,
+            "noteCount:moreThanOrEqual" => 3,
+        ));*/
+
+        $jeux->setMaxPerPage(8);
+        $jeux->setCurrentPage($request->get('page', 1));
+
+        return $this->render('JDJJeuBundle:Jeu:ifYouLikeThisGame.html.twig', array(
+            'jeux' => $jeux,
         ));
     }
 

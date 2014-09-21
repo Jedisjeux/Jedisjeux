@@ -32,5 +32,83 @@ class JeuRepository extends EntityRepository
                 ->setParameter("personneId", $criteria['personne']->getId());
             ;
         }
+        if (array_key_exists('noteCount:moreThanOrEqual', $criteria)) {
+            $queryBuilder
+                ->andWhere("SIZE(".$this->getAlias().".notes) >= :noteCountMoreThanOrEqual")
+                ->setParameter("noteCountMoreThanOrEqual", $criteria['noteCount:moreThanOrEqual'])
+            ;
+        }
+
+        if (array_key_exists('noteAvg:moreThanOrEqual', $criteria)) {
+            $queryBuilder
+                ->join("o.notes", "jeuNote")
+                ->join("jeuNote.note", "n")
+                ->groupBy($this->getAlias().'.id')
+                ->andHaving($queryBuilder->expr()->gte($queryBuilder->expr()->avg('n.valeur'), $criteria['noteAvg:moreThanOrEqual']))
+            ;
+        }
+    }
+
+    /**
+     * Find jeu entities that match criteria "if you like this game"
+     *
+     * @param Jeu $jeu
+     * @return \Pagerfanta\Pagerfanta
+     */
+    public function getIfYouLikeThisGame(Jeu $jeu)
+    {
+        $queryBuilder = $this->getCollectionQueryBuilder();
+
+        /**
+         * Preparing criteria handle with applyCriteria
+         */
+
+        $criteria = array(
+            'noteAvg:moreThanOrEqual' => 7,
+            'noteCount:moreThanOrEqual' => 3,
+        );
+
+        if (null !== $jeu->getAgeMin()) {
+            $criteria = array_merge($criteria, array(
+                'ageMin:moreThanOrEqual' => $jeu->getAgeMin()-2,
+                "ageMin:lessThanOrEqual" => $jeu->getAgeMin()+2,
+            ));
+        }
+
+        $this->applyCriteria($queryBuilder, $criteria);
+
+        /**
+         * Adding additionnal Criteria not handle with applyCriteria
+         */
+
+        /**
+         * Filter on mechanisms
+         */
+        $mecanismesID = array();
+        foreach($jeu->getMecanismes()->toArray() as $mecanisme) {
+            $mecanismesID[] = $mecanisme->getId();
+        }
+
+        $queryBuilder
+            ->join("o.mecanismes", "m")
+            ->groupBy($this->getAlias().'.id')
+            ->andWhere($queryBuilder->expr()->in("m.id", $mecanismesID))
+            /**
+             * having 2 (or more) identical mechanisms
+             */
+            ->andHaving($queryBuilder->expr()->gte($queryBuilder->expr()->count('m'), '2'))
+        ;
+
+        /**
+         * Filter this game
+         */
+        $queryBuilder
+            ->andWhere($this->getAlias().'.id <> :jeuId')
+            ->setParameter("jeuId", $jeu->getId());
+
+
+        $this->applySorting($queryBuilder, array());
+
+        return $this->getPaginator($queryBuilder);
     }
 } 

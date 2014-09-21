@@ -35,6 +35,7 @@ JDJ\UserReviewBundle\Entity\JeuNote:
           nullable: false
       jeu:
         targetEntity: JDJ\JeuBundle\Entity\Jeu
+        inversedBy: notes
         joinColumn:
           nullable: false
       note:
