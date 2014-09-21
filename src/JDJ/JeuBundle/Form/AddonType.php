@@ -19,6 +19,13 @@ class AddonType extends AbstractType
             ->add('libelle')
             ->add('jeu')
             ->add('typeAddon')
+            ->add('langues', 'entity', array(
+                    'class' => 'JDJWebBundle:Langue',
+                    'multiple' => true,
+                    'expanded' => false,
+                    'required' => true,
+                )
+            )
         ;
     }
     
