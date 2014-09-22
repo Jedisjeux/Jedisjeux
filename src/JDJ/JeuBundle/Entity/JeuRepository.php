@@ -45,6 +45,7 @@ class JeuRepository extends EntityRepository
                 ->join("jeuNote.note", "n")
                 ->groupBy($this->getAlias().'.id')
                 ->andHaving($queryBuilder->expr()->gte($queryBuilder->expr()->avg('n.valeur'), $criteria['noteAvg:moreThanOrEqual']))
+                ->addSelect($queryBuilder->expr()->count('n.valeur'). "AS HIDDEN noteAvg")
             ;
         }
     }
@@ -97,6 +98,7 @@ class JeuRepository extends EntityRepository
              * having 2 (or more) identical mechanisms
              */
             ->andHaving($queryBuilder->expr()->gte($queryBuilder->expr()->count('m'), '2'))
+            ->addSelect($queryBuilder->expr()->count('m'). "AS HIDDEN mecanismeCount")
         ;
 
         /**
@@ -107,7 +109,11 @@ class JeuRepository extends EntityRepository
             ->setParameter("jeuId", $jeu->getId());
 
 
-        $this->applySorting($queryBuilder, array());
+        $queryBuilder
+            ->orderBy("mecanismeCount", 'desc')
+            ->addOrderBy("noteAvg", 'desc');
+
+        //$this->applySorting($queryBuilder, $orderBy);
 
         return $this->getPaginator($queryBuilder);
     }
