@@ -172,3 +172,46 @@ ivory_ck_editor:
             toolbar: basic
 
 gregwar_form: ~
+
+
+fos_elastica:
+    clients:
+        default: { host: %fos_elastica.host%, port: %fos_elastica.port% }
+    indexes:
+        search:
+          finder: ~
+          types:
+              user:
+                  mappings:
+                      username: ~
+                      email: ~
+                  persistence:
+                      driver: orm
+                      model: JDJ\UserBundle\Entity\User
+                      provider: ~
+                      listener:
+                          immediate: ~
+                      finder: ~
+              jeu:
+                  mappings:
+                      libelle: ~
+                      slug: ~
+                  persistence:
+                      driver: orm
+                      model: JDJ\JeuBundle\Entity\Jeu
+                      provider: ~
+                      listener:
+                          immediate: ~
+                      finder: ~
+              personne:
+                  mappings:
+                      prenom: ~
+                      nom: ~
+                      slug: ~
+                  persistence:
+                      driver: orm
+                      model: JDJ\LudographieBundle\Entity\Personne
+                      provider: ~
+                      listener:
+                          immediate: ~
+                      finder: ~

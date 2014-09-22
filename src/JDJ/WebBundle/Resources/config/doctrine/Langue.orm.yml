@@ -12,3 +12,19 @@ JDJ\WebBundle\Entity\Langue:
       type: string
       nullable: false
       length: 50
+    icon:
+      type: string
+      nullable: false
+      length: 50
+  manyToMany:
+      addons:
+        targetEntity: JDJ\JeuBundle\Entity\Addon
+        inversedBy: langues
+        joinTable:
+          name: jdj_langue_addon
+          joinColumns:
+            langue_id:
+              referencedColumnName: id
+          inverseJoinColumns:
+            addon_id:
+              referencedColumnName: id

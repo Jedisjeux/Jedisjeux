@@ -71,8 +71,6 @@ JDJ\JeuBundle\Entity\Jeu:
       targetEntity: Theme
       inversedBy: jeux
       cascade: ["persist", "merge"]
-      inversedBy: jeux
-      cascade: ["persist", "merge"]
       joinTable:
         name: jdj_theme_jeu
         joinColumns:
