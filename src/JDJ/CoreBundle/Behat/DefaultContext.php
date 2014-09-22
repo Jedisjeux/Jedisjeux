@@ -223,9 +223,18 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
          * TODO repository named jdj.repository.entity_name
          */
         $repositoryName = null;
-        switch(strtolower($className)) {
+        switch($className) {
             case 'jeu':
                 $repositoryName = "JDJJeuBundle:Jeu";
+                break;
+            case 'user':
+                $repositoryName = "JDJUserBundle:User";
+                break;
+            case 'note':
+                $repositoryName = "JDJUserReviewBundle:Note";
+                break;
+            case 'jeuNote':
+                $repositoryName = "JDJUserReviewBundle:JeuNote";
                 break;
             case 'theme':
                 $repositoryName = "JDJJeuBundle:Theme";
@@ -242,6 +251,10 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
             case 'pays':
                 $repositoryName = "JDJWebBundle:Pays";
                 break;
+            default:
+                throw new \InvalidArgumentException(
+                    sprintf('repository was not found with className "%s".', $className)
+                );
         }
         return $this->getEntityManager()->getRepository($repositoryName);
     }

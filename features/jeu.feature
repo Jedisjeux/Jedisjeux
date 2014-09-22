@@ -2,7 +2,7 @@
 Feature: Affichage de la fiche de jeu
 
   Background:
-    Given there are default status:
+    Given there are default status
     And there are games:
       | libelle     | age_min | joueur_min | joueur_max |
       | Puerto Rico | 12      | 2          | 5          |
