@@ -22,3 +22,24 @@ Feature: Affichage des avis
     When I am on game "Puerto Rico"
     Then I should see "un super jeu"
     And I should see "un jeu de merde"
+
+  Scenario: Suppression de ma note
+    Given I am on "/login"
+    And I fill in the following:
+      | Nom d'utilisateur | loic_425 |
+      | Mot de passe      | loic_425 |
+    And I press "Connexion"
+    When I am on game "Puerto Rico"
+    And I press "Supprimer ma note"
+    Then I should see "L'avis a été supprimé"
+
+  Scenario: Suppression de mon avis
+    When I am on game "Puerto Rico"
+    And I follow "Ma critique"
+    And I should be on "/login"
+    And I fill in the following:
+      | Nom d'utilisateur | loic_425 |
+      | Mot de passe      | loic_425 |
+    And I press "Connexion"
+    And I press "Supprimer"
+    Then I should see "L'avis a été supprimé"

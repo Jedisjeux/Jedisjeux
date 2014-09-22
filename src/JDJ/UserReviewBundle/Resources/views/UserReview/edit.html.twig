@@ -11,5 +11,10 @@
                 Back to the list
             </a>
         </li>
+        <li>
+            {{ form_start(delete_form) }}
+            {{ form_widget(delete_form.submit, {'attr': {'class': 'small button'}, 'label': 'Supprimer'}) }}
+            {{ form_end(delete_form) }}
+        </li>
     </ul>
 {% endblock %}

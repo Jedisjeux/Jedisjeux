@@ -2,3 +2,8 @@ user_jeu_note_create:
     pattern:  /jeu-note/create
     defaults: { _controller: "JDJUserReviewBundle:JeuNote:create" }
     requirements: { _method: post }
+
+user_jeu_note_delete:
+    pattern:  /jeu-note/{id}/delete
+    defaults: { _controller: "JDJUserReviewBundle:JeuNote:delete" }
+    requirements: { _method: post|delete }
