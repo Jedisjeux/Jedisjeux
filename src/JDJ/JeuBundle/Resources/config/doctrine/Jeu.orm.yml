@@ -137,6 +137,9 @@ JDJ\JeuBundle\Entity\Jeu:
     parties:
       targetEntity: JDJ\PartieBundle\Entity\Partie
       mappedBy: jeu
+    notes:
+      targetEntity: JDJ\UserReviewBundle\Entity\JeuNote
+      mappedBy: jeu
   manyToOne:
     statut:
       targetEntity: JDJ\WebBundle\Entity\Statut

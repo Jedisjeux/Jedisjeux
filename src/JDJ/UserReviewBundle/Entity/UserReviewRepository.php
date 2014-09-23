@@ -38,6 +38,17 @@ class UserReviewRepository extends EntityRepository
         }
 
         /**
+         * Filter on author
+         */
+        if (array_key_exists("author", (array)$criteria)) {
+            $queryBuilder
+                ->join($this->getAlias().".jeuNote", "jeuNote")
+                ->where(":authorId MEMBER OF jeuNote.author")
+                ->setParameter("personneId", $criteria['author']->getId())
+            ;
+        }
+
+        /**
          * filter on jeu
          */
         if (array_key_exists("jeu", (array)$criteria)) {

@@ -37,7 +37,7 @@ select      old.user_id,
 from        old_jedisjeux.phpbb3_users old
 group by    old.user_email
 order by    old.user_id
-limit       100
+limit       500
 EOM;
 
         $oldUsers = $this->getDatabaseConnection()->fetchAll($query);
