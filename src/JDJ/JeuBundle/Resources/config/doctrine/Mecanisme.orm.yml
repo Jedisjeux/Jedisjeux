@@ -27,13 +27,5 @@ JDJ\JeuBundle\Entity\Mecanisme:
   manyToMany:
     jeux:
       targetEntity: Jeu
-      inversedBy: mecanismes
-      cascade: ["persist"]
-      joinTable:
-        name: jdj_mecanisme_jeu
-        joinColumns:
-          mecanisme_id:
-            referencedColumnName: id
-        inverseJoinColumns:
-          jeu_id:
-            referencedColumnName: id
+      mappedBy: mecanismes
+      cascade: ["persist", "merge"]

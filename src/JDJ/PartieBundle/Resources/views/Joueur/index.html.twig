@@ -37,7 +37,7 @@
                     </li>
                     <li>
                         {{ form_start(deleteForms[joueur.id]) }}
-                        {{ form_widget(deleteForms[joueur.id].submit, {'attr': {'class': 'small button'}, 'label': 'Supprimer'}) }}
+                        {{ form_widget(deleteForms[joueur.id].submit, {'attr': {'class': 'small button', 'title': 'Supprimer le joueur'}, 'label': 'Supprimer'}) }}
                         {{ form_end(deleteForms[joueur.id]) }}
                     </li>
                 </ul></td>

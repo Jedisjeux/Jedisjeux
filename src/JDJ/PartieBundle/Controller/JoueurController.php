@@ -10,6 +10,7 @@ namespace JDJ\PartieBundle\Controller;
 
 
 use JDJ\PartieBundle\Entity\Joueur;
+use JDJ\PartieBundle\Entity\Partie;
 use JDJ\PartieBundle\Form\JoueurType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -54,12 +55,21 @@ class JoueurController extends Controller
         $entity = new Joueur();
         $form   = $this->createCreateForm($entity);
 
+        /**
+         * Pre populate data
+         */
+        $form->get('partie')->setData($partie);
+
         return $this->render('JDJPartieBundle:Joueur:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
+    /**
+     * @param $idPartie
+     * @return Partie
+     */
     private function findPartie($idPartie)
     {
         $em = $this->getDoctrine()->getManager();
@@ -87,8 +97,9 @@ class JoueurController extends Controller
             $em->flush();
 
             $request->getSession()->getFlashBag()->add('success', 'Le joueur a bien été enregistré');
-            return $this->redirect($this->generateUrl('joueur', array(
-                'idPartie' => $entity->getPartie()->getId(),
+            return $this->redirect($this->generateUrl('partie_show', array(
+                'id' => $entity->getPartie()->getId(),
+                'slug' => $entity->getPartie()->getJeu()->getSlug(),
             )));
         }
 

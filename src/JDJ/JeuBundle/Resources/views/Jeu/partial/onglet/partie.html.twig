@@ -1,5 +1,13 @@
 <h3>Liste des Parties</h3>
 
+<ul>
+    <li>
+        <a class="button add" href="{{ path('partie_new', {'idJeu': jeu.id}) }}">
+            Créer une partie
+        </a>
+    </li>
+</ul>
+
 <div class="listing">
     <div class="row">
         {% for key, partie in jeu.parties %}

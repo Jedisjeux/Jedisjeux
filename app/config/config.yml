@@ -5,6 +5,7 @@ imports:
 framework:
     #esi:             ~
     #translator:      { fallback: "%locale%" }
+    translator: ~
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -33,7 +34,7 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ 'JDJWebBundle', 'JDJFoundationBundle', 'JDJJeuBundle']
+    bundles:        [ 'JDJWebBundle', 'JDJFoundationBundle', 'JDJJeuBundle', "FOSCommentBundle" ]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -120,6 +121,14 @@ fos_user:
   firewall_name: main
   user_class: JDJ\UserBundle\Entity\User
 
+fos_comment:
+    db_driver: orm
+    class:
+        model:
+            comment: JDJ\CommentBundle\Entity\Comment
+            thread: JDJ\CommentBundle\Entity\Thread
+
+
 services:
   gedmo.listener.softdeleteable:
       class: Gedmo\SoftDeleteable\SoftDeleteableListener
@@ -155,3 +164,54 @@ services:
         - { name: doctrine.event_subscriber, connection: default }
       calls:
         - [ setAnnotationReader, [ @annotation_reader ] ]
+
+ivory_ck_editor:
+    default_config: minimal
+    configs:
+        minimal:
+            toolbar: basic
+
+gregwar_form: ~
+
+
+fos_elastica:
+    clients:
+        default: { host: %fos_elastica.host%, port: %fos_elastica.port% }
+    indexes:
+        search:
+          finder: ~
+          types:
+              user:
+                  mappings:
+                      username: ~
+                      email: ~
+                  persistence:
+                      driver: orm
+                      model: JDJ\UserBundle\Entity\User
+                      provider: ~
+                      listener:
+                          immediate: ~
+                      finder: ~
+              jeu:
+                  mappings:
+                      libelle: ~
+                      slug: ~
+                  persistence:
+                      driver: orm
+                      model: JDJ\JeuBundle\Entity\Jeu
+                      provider: ~
+                      listener:
+                          immediate: ~
+                      finder: ~
+              personne:
+                  mappings:
+                      prenom: ~
+                      nom: ~
+                      slug: ~
+                  persistence:
+                      driver: orm
+                      model: JDJ\LudographieBundle\Entity\Personne
+                      provider: ~
+                      listener:
+                          immediate: ~
+                      finder: ~

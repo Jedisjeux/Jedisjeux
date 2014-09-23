@@ -1,0 +1,8 @@
+{% extends "JDJWebBundle::layout.html.twig" %}
+
+{% block body -%}
+    <h1>Fiches de jeu</h1>
+
+    {% include "JDJJeuBundle:Jeu:partial/list.html.twig" with {'jeux': entities} %}
+
+{% endblock %}

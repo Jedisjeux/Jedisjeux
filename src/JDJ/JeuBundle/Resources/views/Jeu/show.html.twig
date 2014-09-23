@@ -3,14 +3,7 @@
 {% block body -%}
 
     {% include "JDJJeuBundle:Jeu:partial/header.html.twig" with {'jeu': jeu} %}
-    {% include "JDJJeuBundle:Jeu:partial/onglet.html.twig" with {'jeu': jeu} %}
+    {% render controller('JDJUserReviewBundle:JeuNote:new', { 'idJeu': jeu.id }) %}
+    {% include "JDJJeuBundle:Jeu:partial/onglet.html.twig" with {'jeu': jeu, 'userReviews': userReviews} %}
 
-{% endblock %}
-
-{% block javascript %}
-    {{ parent() }}
-    <script>
-        console.log("test");
-        $(document).foundation({ tab: { callback : function (tab) { console.log(tab); } } });
-    </script>
 {% endblock %}

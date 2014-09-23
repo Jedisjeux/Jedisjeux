@@ -1,0 +1,60 @@
+default:
+    formatters:
+        pretty:
+            verbose:  true
+            paths:    false
+            snippets: false
+    suites:
+        homepage:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+            filters:
+                tags: "@homepage && ~@javascript"
+
+        jeu:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\CoreBundle\Behat\StatutContext
+                - JDJ\JeuBundle\Behat\JeuContext
+                - JDJ\JeuBundle\Behat\MecanismeContext
+                - JDJ\JeuBundle\Behat\ThemeContext
+                - JDJ\LudographieBundle\Behat\PersonneContext
+            filters:
+                tags: "@jeu && ~@javascript"
+
+        ludographie:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\CoreBundle\Behat\StatutContext
+                - JDJ\JeuBundle\Behat\JeuContext
+                - JDJ\LudographieBundle\Behat\PersonneContext
+            filters:
+                tags: "@ludographie && ~@javascript"
+
+        user:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\UserBundle\Behat\UserContext
+            filters:
+                tags: "@user && ~@javascript"
+
+        partie:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\UserBundle\Behat\UserContext
+                - JDJ\CoreBundle\Behat\StatutContext
+                - JDJ\JeuBundle\Behat\JeuContext
+                - JDJ\PartieBundle\Behat\PartieContext
+            filters:
+                tags: "@partie && ~@javascript"
+
+    extensions:
+        Behat\MinkExtension:
+            sessions:
+                default:
+                    symfony2: ~
+                javascript:
+                    selenium2: ~
+            browser_name: firefox
+            show_auto:    false
+        Behat\Symfony2Extension: ~

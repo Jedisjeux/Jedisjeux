@@ -1,8 +1,30 @@
+partie:
+    pattern:  /partie
+    defaults: { _controller: "JDJPartieBundle:Partie:index" }
+
+partie_edit:
+    pattern:  /partie/{id}/edit
+    defaults: { _controller: "JDJPartieBundle:Partie:edit" }
+
+partie_update:
+    pattern:  /partie/{id}/update
+    defaults: { _controller: "JDJPartieBundle:Partie:update" }
+    requirements: { _method: post|put }
+
 partie_show:
-    pattern:  /{id}/jeu/{slug}
+    pattern:  /partie/{id}/jeu/{slug}
     defaults: { _controller: "JDJPartieBundle:Partie:show" }
 
 partie_delete:
     pattern:  /partie/{id}/delete
     defaults: { _controller: "JDJPartieBundle:Partie:delete" }
     requirements: { _method: post|delete }
+
+partie_new:
+    pattern:  /jeu/{idJeu}/partie/new
+    defaults: { _controller: "JDJPartieBundle:Partie:new" }
+
+partie_create:
+    pattern:  /partie/create
+    defaults: { _controller: "JDJPartieBundle:Partie:create" }
+    requirements: { _method: post }

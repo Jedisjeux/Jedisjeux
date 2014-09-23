@@ -23,7 +23,7 @@ JDJ\JeuBundle\Entity\Addon:
       typeAddon:
         targetEntity: TypeAddon
         inversedBy: addons
-  oneToMany:
-      langueAddons:
-        targetEntity: LangueAddon
-        mappedBy: addon
+  manyToMany:
+      langues:
+        targetEntity: JDJ\WebBundle\Entity\Langue
+        mappedBy: addons

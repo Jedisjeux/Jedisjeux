@@ -46,6 +46,11 @@
                     {{ joueurCount(jeu) }}<br />
                 {% endif %}
 
+                {% if jeu.cibles|length > 0 %}
+                    Public : {% for key, cible in jeu.cibles %}{% if (key > 0) %},{% endif %} <a href="{{ path('cible_show', { 'id': cible.id, 'slug': cible.slug })  }}">{{ cible }}</a>{% endfor %}
+                    <br />
+                {% endif %}
+
                 {% if jeu.mecanismes|length > 0 %}
                     Mécanismes : {% for key, mecanisme in jeu.mecanismes %}{% if (key > 0) %},{% endif %} <a href="{{ path('mecanisme_show', { 'id': mecanisme.id, 'slug': mecanisme.slug })  }}">{{ mecanisme }}</a>{% endfor %}
                     <br />

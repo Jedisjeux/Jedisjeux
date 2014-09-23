@@ -1,0 +1,3 @@
+jdj_core_cible:
+    resource: "@JDJCoreBundle/Resources/config/routing/cible.yml"
+    prefix:   /cible

@@ -8,8 +8,10 @@
 
 namespace JDJ\JeuBundle\Controller;
 
+use JDJ\JeuBundle\Entity\JeuRepository;
 use JDJ\JeuBundle\Entity\Mecanisme;
 use JDJ\JeuBundle\Form\MecanismeType;
+use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -98,7 +100,7 @@ class MecanismeController extends Controller
      * Finds and displays a Mecanisme entity.
      *
      */
-    public function showAction($id, $slug)
+    public function showAction(Request $request, $id, $slug)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -120,11 +122,21 @@ class MecanismeController extends Controller
             );
         }
 
+        /** @var JeuRepository $jeuReposititory */
+        $jeuReposititory = $em->getRepository('JDJJeuBundle:Jeu');
+        /** @var Pagerfanta $jeux */
+        $jeux = $jeuReposititory->createPaginator(array("mecanisme" => $entity));
+        $jeux->setMaxPerPage(16);
+        $jeux->setCurrentPage($request->get('page', 1));
+
+
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('JDJJeuBundle:Mecanisme:show.html.twig', array(
             'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        ));
+            'jeux'        => $jeux,
+            'delete_form' => $deleteForm->createView(),
+        ));
     }
 
     /**

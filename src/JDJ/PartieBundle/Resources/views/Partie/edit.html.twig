@@ -1,0 +1,20 @@
+{% extends "JDJWebBundle::layout.html.twig" %}
+
+{% block body -%}
+    <h1>Modifier ma partie</h1>
+
+    {{ form(form) }}
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('partie') }}">
+                Back to the list
+            </a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+            {{ form_widget(delete_form.submit, {'attr': {'class': 'small button'}, 'label': 'Supprimer'}) }}
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

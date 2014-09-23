@@ -1,0 +1,10 @@
+jdj_comment_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: JDJCommentBundle:Default:index }
+
+
+fos_comment_api:
+    type: rest
+    resource: "@FOSCommentBundle/Resources/config/routing.yml"
+    prefix: /api
+    defaults: { _format: html }

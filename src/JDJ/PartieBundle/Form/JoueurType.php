@@ -8,6 +8,7 @@
 
 namespace JDJ\PartieBundle\Form;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -23,7 +24,14 @@ class JoueurType extends AbstractType
         $builder
             ->add('nom')
             ->add('score')
-            ->add('partie')
+            ->add('partie', 'entity_id', array(
+                'class' => 'JDJ\PartieBundle\Entity\Partie',
+                'query_builder' => function(EntityRepository $repo, $id) {
+                    return $repo->createQueryBuilder('c')
+                        ->where('c.id = :id')
+                        ->setParameter('id', $id);
+                }
+            ))
         ;
     }
 

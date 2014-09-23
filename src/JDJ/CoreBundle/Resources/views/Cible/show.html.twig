@@ -1,0 +1,23 @@
+{% extends "JDJWebBundle::layout.html.twig" %}
+
+{% block body -%}
+    <h1>{{ entity.libelle }}</h1>
+
+    {{ entity.description|raw }}
+
+    {% include "JDJJeuBundle:Jeu:partial/list.html.twig" with {'jeux': jeux} %}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('cible') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('cible_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

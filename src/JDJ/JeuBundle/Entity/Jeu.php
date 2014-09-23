@@ -111,6 +111,12 @@ class Jeu
     private $parties;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $cibles;
+
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -123,6 +129,7 @@ class Jeu
         $this->illustrateurs = new ArrayCollection();
         $this->editeurs = new ArrayCollection();
         $this->parties = new ArrayCollection();
+        $this->cibles = new ArrayCollection();
     }
 
     /**
@@ -660,5 +667,38 @@ class Jeu
     public function getParties()
     {
         return $this->parties;
+    }
+
+    /**
+     * Add cibles
+     *
+     * @param \JDJ\CoreBundle\Entity\Cible $cibles
+     * @return Jeu
+     */
+    public function addCible(\JDJ\CoreBundle\Entity\Cible $cibles)
+    {
+        $this->cibles[] = $cibles;
+
+        return $this;
+    }
+
+    /**
+     * Remove cibles
+     *
+     * @param \JDJ\CoreBundle\Entity\Cible $cibles
+     */
+    public function removeCible(\JDJ\CoreBundle\Entity\Cible $cibles)
+    {
+        $this->cibles->removeElement($cibles);
+    }
+
+    /**
+     * Get cibles
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCibles()
+    {
+        return $this->cibles;
     }
 }

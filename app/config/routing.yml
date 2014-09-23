@@ -1,6 +1,21 @@
+jdj_search:
+    resource: "@JDJSearchBundle/Resources/config/routing.yml"
+    prefix:   /recherche
+
+jdj_core:
+    resource: "@JDJCoreBundle/Resources/config/routing.yml"
+    prefix:   /
+
+jdj_comment:
+    resource: "@JDJCommentBundle/Resources/config/routing.yml"
+
+jdj_user_review:
+    resource: "@JDJUserReviewBundle/Resources/config/routing.yml"
+    prefix:   /
+
 jdj_partie:
     resource: "@JDJPartieBundle/Resources/config/routing.yml"
-    prefix:   /partie
+    prefix:   /
 
 jdj_user:
     resource: "@JDJUserBundle/Resources/config/routing.yml"
@@ -40,3 +55,6 @@ fos_user_resetting:
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
+
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"

@@ -15,11 +15,19 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Sonata\IntlBundle\SonataIntlBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new FOS\CommentBundle\FOSCommentBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle($this),
+            new \Liip\ImagineBundle\LiipImagineBundle(),
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new Gregwar\FormBundle\GregwarFormBundle(),
+            new FOS\ElasticaBundle\FOSElasticaBundle(),
 
             //JDJ
             new JDJ\FoundationBundle\JDJFoundationBundle(),
@@ -28,7 +36,11 @@ class AppKernel extends Kernel
             new JDJ\JeuBundle\JDJJeuBundle(),
             new JDJ\LudographieBundle\JDJLudographieBundle(),
             new JDJ\UserBundle\JDJUserBundle(),
+            new JDJ\CommentBundle\JDJCommentBundle(),
             new JDJ\PartieBundle\JDJPartieBundle(),
+            new JDJ\UserReviewBundle\JDJUserReviewBundle(),
+            new JDJ\CoreBundle\JDJCoreBundle(),
+            new JDJ\SearchBundle\JDJSearchBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
@@ -43,5 +55,10 @@ class AppKernel extends Kernel
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
         $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
+    }
+
+    public function init() {
+        date_default_timezone_set( 'Europe/Lisbon' );
+        parent::init();
     }
 }

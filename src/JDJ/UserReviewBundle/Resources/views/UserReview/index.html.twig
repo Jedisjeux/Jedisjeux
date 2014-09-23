@@ -1,0 +1,17 @@
+{% extends "JDJWebBundle::layout.html.twig" %}
+{% from 'JDJWebBundle:Macros:misc.html.twig' import pagination %}
+
+{% block body -%}
+
+    {% for entity in entities %}
+        {% include "JDJUserReviewBundle:UserReview:partial/_show.html.twig" with {'entity': entity} %}
+    {% endfor %}
+    {% block Pagination %}
+        <div class="pagination-wrapper">
+            <div class="pagination-bottom">
+                {{ pagination(entities) }}
+            </div>
+        </div>
+    {% endblock %}
+
+{% endblock %}

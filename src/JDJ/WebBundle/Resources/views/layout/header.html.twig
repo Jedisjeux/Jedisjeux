@@ -1,127 +1,4 @@
 <header>
-    <div class="menu">
-        <div class="row">
-            <div class="large-12">
-                <nav data-topbar="" class="top-bar columns">
-                    <div class="row">
-                        <section class="top-bar-section">
-                            <ul class="left">
-                                <li class="divider"></li>
-                                <li class="has-dropdown not-click">
-                                    <a href="#" class="active">Compta</a>
-                                    <ul class="dropdown">
-                                        <li class="title back js-generated"><h5><a href="javascript:void(0)">Back</a>
-                                            </h5>
-                                        </li>
-                                        <li><label>Trésorerie</label></li>
-                                        <li><a class="" href="#">Bilans</a></li>
-                                        <li><a class="" href="{{ path('ecriture') }}">Ecritures</a></li>
-                                        <li><a href="{{ path('facture') }}">Factures</a></li>
-                                        <li class="divider"></li>
-                                        <li><label>Configurations</label></li>
-                                        <li><a href="{{ path('client') }}">Clients</a></li>
-                                        <li><a href="{{ path('produit') }}">Produits</a></li>
-                                        <li><a href="{{ path('tarifproduit') }}">Tarifs</a></li>
-                                        <li><a href="{{ path('modereglement') }}">Modes de règlement</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">See all →</a></li>
-                                    </ul>
-                                </li>
-                                <li class="divider"></li>
-                                <li class="has-dropdown not-click">
-                                    <a href="#">Admin</a>
-                                    <ul class="dropdown">
-                                        <li class="title back js-generated"><h5><a href="javascript:void(0)">Back</a>
-                                            </h5>
-                                        </li>
-                                        <li><label>Jeux</label></li>
-                                        <li><a href="{{ path('mecanisme') }}">Mécanismes</a></li>
-                                        <li><a href="{{ path('theme') }}">Thèmes</a></li>
-                                        <li><a href="{{ path('materiel') }}">Eléments de matériel</a></li>
-                                        <li><a href="{{ path('caracteristique') }}">Caractéristiques</a></li>
-                                        <li class="divider"></li>
-                                        <li><label>Ludographie</label></li>
-                                        <li><a href="#">Personnes</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">See all →</a></li>
-                                    </ul>
-                                </li>
-                                <li class="divider"></li>
-                                <li class="has-dropdown not-click">
-                                    <a href="#">Articles</a>
-                                    <ul class="dropdown">
-                                        <li class="title back js-generated"><h5><a href="javascript:void(0)">Back</a>
-                                            </h5>
-                                        </li>
-                                        <li><a href="#">Actualité</a></li>
-                                        <li><a href="#">Tests de jeux</a></li>
-                                        <li><a href="#">Reportages</a></li>
-                                        <li><a href="#">Interviews</a></li>
-                                        <li><a href="#">Parties de jeu</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">See all →</a></li>
-                                    </ul>
-                                </li>
-                                <li class="divider"></li>
-                                <li class="has-dropdown not-click">
-                                    <a href="#">Jeux</a>
-                                    <ul class="dropdown">
-                                        <li class="title back js-generated"><h5><a href="javascript:void(0)">Back</a>
-                                            </h5>
-                                        </li>
-                                        <li><a href="#">Sorties</a></li>
-                                        <li><a href="#">Avis/critiques</a></li>
-                                        <li><a href="#">Goodies</a></li>
-                                        <li class="divider"></li>
-                                        <li><label>Tops</label></li>
-                                        <li><a href="#">Les jeux primés</a></li>
-                                        <li><a href="#">Top jeux du moment</a></li>
-                                        <li><a href="#">Top jeux de tous les temps</a></li>
-                                        <li><a href="#">Top jeux familiaux</a></li>
-                                        <li><a href="#">Top jeux pour enfant</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">See all →</a></li>
-                                    </ul>
-                                </li>
-                                <li class="divider"></li>
-                                <li class="has-dropdown not-click">
-                                    <a href="#">Photos</a>
-                                    <ul class="dropdown">
-                                        <li class="title back js-generated"><h5><a href="javascript:void(0)">Back</a>
-                                            </h5>
-                                        </li>
-                                        <li><a href="#">Photos de jeux</a></li>
-                                        <li><a href="#">Photos de parties</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">See all →</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">Ludovirtuelle</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="#">Ludographie</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="#">Forum</a>
-                                </li>
-                                <li class="divider"></li>
-
-                            </ul>
-                            <ul class="right">
-                                <li class="toggle-topbar"><a href="#"><span>Menu</span></a></li>
-                            </ul>
-
-                        </section>
-                    </div>
-
-
-                </nav>
-            </div>
-        </div>
-    </div>
     <div class="banner">
         <div class="row">
             <nav data-topbar="" class="top-bar columns">
@@ -131,7 +8,7 @@
 
                         <li class="name">
                             <h1>
-                                <a href="#">
+                                <a href="{{ path("jdj_web_homepage") }}">
                                     Jedisjeux
                                 </a>
                             </h1>
@@ -140,8 +17,8 @@
                     </ul>
                     <ul class="right">
                         <li class="search">
-                            <form>
-                                <input type="search">
+                            <form action="{{ path("search_query") }}">
+                                <input type="search" name="query">
                             </form>
                         </li>
                         <li class="has-button">
@@ -153,4 +30,5 @@
             </nav>
         </div>
     </div>
+    {% include "JDJWebBundle:layout:menu.html.twig" %}
 </header>

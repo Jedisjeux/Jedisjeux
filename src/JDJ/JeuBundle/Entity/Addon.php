@@ -25,11 +25,6 @@ class Addon
     private $libelle;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $langueAddons;
-
-    /**
      * @var \JDJ\JeuBundle\Entity\Addon
      */
     private $jeu;
@@ -44,7 +39,7 @@ class Addon
      */
     public function __construct()
     {
-        $this->langueAddons = new \Doctrine\Common\Collections\ArrayCollection();
+
     }
 
     /**
@@ -104,39 +99,6 @@ class Addon
     }
 
     /**
-     * Add langueAddons
-     *
-     * @param \JDJ\JeuBundle\Entity\Addon $langueAddons
-     * @return Addon
-     */
-    public function addLangueAddon(\JDJ\JeuBundle\Entity\Addon $langueAddons)
-    {
-        $this->langueAddons[] = $langueAddons;
-
-        return $this;
-    }
-
-    /**
-     * Remove langueAddons
-     *
-     * @param \JDJ\JeuBundle\Entity\Addon $langueAddons
-     */
-    public function removeLangueAddon(\JDJ\JeuBundle\Entity\Addon $langueAddons)
-    {
-        $this->langueAddons->removeElement($langueAddons);
-    }
-
-    /**
-     * Get langueAddons
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getLangueAddons()
-    {
-        return $this->langueAddons;
-    }
-
-    /**
      * Set jeu
      *
      * @param \JDJ\JeuBundle\Entity\Jeu $jeu
@@ -180,5 +142,44 @@ class Addon
     public function getTypeAddon()
     {
         return $this->typeAddon;
+    }
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $langues;
+
+
+    /**
+     * Add langues
+     *
+     * @param \JDJ\WebBundle\Entity\Langue $langues
+     * @return Addon
+     */
+    public function addLangue(\JDJ\WebBundle\Entity\Langue $langues)
+    {
+        $this->langues[] = $langues;
+
+        return $this;
+    }
+
+    /**
+     * Remove langues
+     *
+     * @param \JDJ\WebBundle\Entity\Langue $langues
+     */
+    public function removeLangue(\JDJ\WebBundle\Entity\Langue $langues)
+    {
+        $this->langues->removeElement($langues);
+    }
+
+    /**
+     * Get langues
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLangues()
+    {
+        return $this->langues;
     }
 }
