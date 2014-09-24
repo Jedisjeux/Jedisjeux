@@ -2,7 +2,7 @@
 Feature: Affichage de la ludographie
 
   Background:
-    Given there are default status:
+    Given there are default status
     And there are personnes:
       | prenom | nom    | pays      | site_web             |
       | Reiner | Knizia | Allemagne | http://www.knizia.de |

@@ -10,11 +10,11 @@ JDJ\UserBundle\Entity\User:
     fields:
       nom:
         type: string
-        nullable: false
+        nullable: true
         length: 50
       prenom:
         type: string
-        nullable: false
+        nullable: true
         length: 50
       avatar:
         type: string
@@ -34,6 +34,7 @@ JDJ\UserBundle\Entity\User:
               - username
       dateNaissance:
         type: datetime
+        nullable: true
       created:
         type: datetime
         gedmo:

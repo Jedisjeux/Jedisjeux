@@ -13,5 +13,12 @@
                 {% endfor %}
             </ul>
         </div>
+        <div>
+            {% if null != delete_form %}
+                {{ form_start(delete_form) }}
+                {{ form_widget(delete_form.submit, {'attr': {'class': 'tiny button delete', 'title': "Supprimer ma note"}, 'label': 'x'}) }}
+                {{ form_end(delete_form) }}
+            {% endif %}
+        </div>
     </div>
 </div>

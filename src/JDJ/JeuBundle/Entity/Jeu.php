@@ -115,6 +115,12 @@ class Jeu
      */
     private $cibles;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $notes;
+
+
 
     /**
      * Constructor
@@ -130,6 +136,7 @@ class Jeu
         $this->editeurs = new ArrayCollection();
         $this->parties = new ArrayCollection();
         $this->cibles = new ArrayCollection();
+        $this->notes = new ArrayCollection();
     }
 
     /**
@@ -700,5 +707,38 @@ class Jeu
     public function getCibles()
     {
         return $this->cibles;
+    }
+
+    /**
+     * Add notes
+     *
+     * @param \JDJ\UserReviewBundle\Entity\JeuNote $notes
+     * @return Jeu
+     */
+    public function addNote(\JDJ\UserReviewBundle\Entity\JeuNote $notes)
+    {
+        $this->notes[] = $notes;
+
+        return $this;
+    }
+
+    /**
+     * Remove notes
+     *
+     * @param \JDJ\UserReviewBundle\Entity\JeuNote $notes
+     */
+    public function removeNote(\JDJ\UserReviewBundle\Entity\JeuNote $notes)
+    {
+        $this->notes->removeElement($notes);
+    }
+
+    /**
+     * Get notes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNotes()
+    {
+        return $this->notes;
     }
 }
