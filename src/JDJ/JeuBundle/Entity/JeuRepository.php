@@ -93,13 +93,20 @@ class JeuRepository extends EntityRepository
         $queryBuilder
             ->join("o.mecanismes", "m")
             ->groupBy($this->getAlias().'.id')
-            ->andWhere($queryBuilder->expr()->in("m.id", $mecanismesID))
             /**
              * having 2 (or more) identical mechanisms
              */
             ->andHaving($queryBuilder->expr()->gte($queryBuilder->expr()->count('m'), '2'))
             ->addSelect($queryBuilder->expr()->count('m'). "AS HIDDEN mecanismeCount")
         ;
+        if (count($mecanismesID) > 0) {
+            $queryBuilder->andWhere($queryBuilder->expr()->in("m.id", $mecanismesID));
+        } else {
+            /**
+             * Therefore, we can't have good game advices...
+             */
+            $queryBuilder->andWhere($queryBuilder->expr()->in("m.id", array(0)));
+        }
 
         /**
          * Filter this game

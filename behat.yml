@@ -38,6 +38,17 @@ default:
             filters:
                 tags: "@user && ~@javascript"
 
+
+        partie:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\UserBundle\Behat\UserContext
+                - JDJ\CoreBundle\Behat\StatutContext
+                - JDJ\JeuBundle\Behat\JeuContext
+                - JDJ\PartieBundle\Behat\PartieContext
+            filters:
+                tags: "@partie && ~@javascript"
+
         userReview:
              contexts:
                  - Behat\MinkExtension\Context\MinkContext

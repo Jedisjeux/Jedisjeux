@@ -1,0 +1,34 @@
+{% extends "JDJWebBundle::layout.html.twig" %}
+
+{% block body -%}
+
+    {% include "JDJJeuBundle:Jeu:partial/header.html.twig" with {
+        'jeu': entity.jeu
+    } %}
+
+    <h3>Scores de la partie</h3>
+
+    {% include "JDJPartieBundle:Partie:partial/_scores.html.twig" with {
+        'partie': entity
+    } %}
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('partie') }}">
+                Back to the list
+            </a>
+        </li>
+        <li>
+            <a class="small button edit" href="{{ path('partie_edit', { 'id': entity.id }) }}">
+                Modifier
+            </a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+            {{ form_widget(delete_form.submit, {'attr': {'class': 'small button'}, 'label': 'Supprimer'}) }}
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "JDJWebBundle::layout.html.twig" %}
+
+{% block body -%}
+    <h1>Nouvelle partie</h1>
+
+    {{ form(form) }}
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('partie') }}">
+                Back to the list
+            </a>
+        </li>
+    </ul>
+{% endblock %}

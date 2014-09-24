@@ -59,5 +59,6 @@ class JeuContext extends DefaultContext
         /** @var Jeu $jeu */
         $jeu = $this->findOneBy("jeu", array("libelle" => $jeuLibelle));
         $this->getSession()->visit("/jeu/".$jeu->getId()."/".$jeu->getSlug());
+        file_put_contents(__DIR__.'/../../../../web/behat/'.$jeu->getSlug().'.html', $this->getSession()->getPage()->getContent());
     }
 } 

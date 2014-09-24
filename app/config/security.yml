@@ -35,3 +35,6 @@ security:
         - { path: ^/jeu/\d+/edit, role: ROLE_REDACTEUR }
         #edition d'une ludographie
         - { path: ^/ludographie/\d+/edit, role: ROLE_REDACTEUR }
+        #edition d'une partie
+        - { path: ^/partie/\d+/edit, role: ROLE_USER }
+        - { path: ^/jeu/\d+/partie/new, role: ROLE_USER }
