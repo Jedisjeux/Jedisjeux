@@ -12,6 +12,7 @@ namespace JDJ\UserBundle\Behat;
 use Behat\Gherkin\Node\TableNode;
 use FOS\UserBundle\Doctrine\UserManager;
 use JDJ\CoreBundle\Behat\DefaultContext;
+use JDJ\UserBundle\Entity\User;
 
 class UserContext extends DefaultContext
 {
@@ -29,10 +30,13 @@ class UserContext extends DefaultContext
             /** @var UserManager $userManager */
             $userManager = $this->getService("fos_user.user_manager");
 
+            /** @var User $user */
             $user = $userManager->createUser();
 
             $user
                 ->setUsername($data['username'])
+                ->setNom(isset($data['nom']) ? $data['nom'] : null)
+                ->setPrenom(isset($data['prenom']) ? $data['prenom'] : null)
                 ->setEmail($data['email'])
                 ->setPlainPassword($data['password'])
                 ->setEnabled(("yes" === $data['enabled']) ? 1 : 0)

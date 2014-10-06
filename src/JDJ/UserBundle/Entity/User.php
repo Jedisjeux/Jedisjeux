@@ -109,10 +109,6 @@ class User extends BaseUser
      */
     private $prenom;
 
-    /**
-     * @var string
-     */
-    private $presentation;
 
     /**
      * @var string
@@ -191,28 +187,6 @@ class User extends BaseUser
         return $this->prenom;
     }
 
-    /**
-     * Set presentation
-     *
-     * @param string $presentation
-     * @return User
-     */
-    public function setPresentation($presentation)
-    {
-        $this->presentation = $presentation;
-
-        return $this;
-    }
-
-    /**
-     * Get presentation
-     *
-     * @return string 
-     */
-    public function getPresentation()
-    {
-        return $this->presentation;
-    }
 
     /**
      * Set slug
@@ -332,5 +306,33 @@ class User extends BaseUser
     public function getAvatar()
     {
         return $this->avatar;
+    }
+    /**
+     * @var string
+     */
+    private $presentation;
+
+
+    /**
+     * Set presentation
+     *
+     * @param string $presentation
+     * @return User
+     */
+    public function setPresentation($presentation)
+    {
+        $this->presentation = $presentation;
+
+        return $this;
+    }
+
+    /**
+     * Get presentation
+     *
+     * @return string 
+     */
+    public function getPresentation()
+    {
+        return $this->presentation;
     }
 }

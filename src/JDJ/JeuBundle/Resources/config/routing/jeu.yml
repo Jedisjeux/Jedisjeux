@@ -16,6 +16,10 @@ jeu_delete:
     defaults: { _controller: "JDJJeuBundle:Jeu:delete" }
     requirements: { _method: post|delete }
 
+jeu_if_you_like_this_game:
+    pattern: /{id}/si-vous-avez-aime-ce-jeu
+    defaults: { _controller: "JDJJeuBundle:Jeu:ifYouLikeThisGame" }
+
 jeu_show:
     pattern:  /{id}/{slug}
     defaults: { _controller: "JDJJeuBundle:Jeu:show" }

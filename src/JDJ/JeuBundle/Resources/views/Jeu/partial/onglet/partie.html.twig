@@ -1,0 +1,39 @@
+<h3>Liste des Parties</h3>
+
+<ul>
+    <li>
+        <a class="button add" href="{{ path('partie_new', {'idJeu': jeu.id}) }}">
+            Créer une partie
+        </a>
+    </li>
+</ul>
+
+<div class="listing">
+    <div class="row">
+        {% for key, partie in jeu.parties %}
+        {% if (key%4 == 0) and key > 0 %}
+    </div>
+    <div class="row">
+        {% endif %}
+        <div class="medium-3 columns">
+            <div class="image crop">
+                <a href="{{ path('partie_show', {'id': partie.id, 'slug': jeu.slug}) }}">
+                    <img src="http://www.jedisjeux.net/phpbb3/download/file.php?avatar=2_1211522796.png" alt="Imperial"/>
+                </a>
+            </div>
+            <div class="panel">
+                <a href="#">
+                    <ul>
+                        {% if partie.joueurs|length > 0 %}
+                        <li>partie à {{ partie.joueurs|length }} joueur{% if partie.joueurs|length > 1 %}s{% endif %}<li>
+                        {% endif %}
+                        <li>jouée le {{ partie.playedAt|date("d F Y") }}</li>
+                        <li>publiée par {{ partie.author.username }}</li>
+                    </ul>
+
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

@@ -6,8 +6,8 @@ Feature: Sign in to the store
 
     Background:
         Given there are following users:
-            | username | email                | password | enabled |
-            | loic_425 | loic_425@hotmail.com | loic_425 | yes     |
+        | username | email                | password | enabled |
+        | loic_425 | loic_425@hotmail.com | loic_425 | yes     |
 
     Scenario: Se connecter avec un utilisateur et un mot de passe
         Given I am on "/"

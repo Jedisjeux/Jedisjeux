@@ -15,7 +15,7 @@ use JDJ\WebBundle\Entity\Statut;
 class StatutContext extends DefaultContext
 {
     /**
-     * @Given /^there are default status:$/
+     * @Given /^there are default status$/
      */
     public function thereAreDefaultStatus(){
         $manager = $this->getEntityManager();

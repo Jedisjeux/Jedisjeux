@@ -119,10 +119,70 @@ class JeuNoteController extends Controller
         ));
         $notes = $em->getRepository('JDJUserReviewBundle:Note')->findAll();
 
+        $deleteForm = null;
+        if (null !== $userNote) {
+            $deleteForm = $this->createDeleteForm($userNote->getId())->createView();
+        }
+
+
         return $this->render('JDJUserReviewBundle:JeuNote:new.html.twig', array(
             'userNote' => $userNote,
             'notes' => $notes,
             'jeu' => $jeu,
+            'delete_form' => $deleteForm,
         ));
+    }
+
+    /**
+     * Deletes a JeuNote entity.
+     *
+     */
+    public function deleteAction(Request $request, $id)
+    {
+        $form = $this->createDeleteForm($id);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+            /** @var JeuNote $entity */
+            $entity = $em->getRepository('JDJUserReviewBundle:JeuNote')->find($id);
+
+
+            if (!$entity) {
+                throw $this->createNotFoundException('Unable to find JeuNote entity.');
+            }
+
+            /**
+             * Remove linked UserReview entity
+             */
+            $em->remove($entity->getUserReview());
+            /**
+             * Remove JeuNote entity
+             */
+            $em->remove($entity);
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('success', 'L\'avis a été supprimé');
+        }
+
+        return $this->redirect($this->generateUrl('user_review'));
+    }
+
+    /**
+     * Creates a form to delete a UserReview entity by id.
+     *
+     * @param mixed $id The entity id
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm($id)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('user_jeu_note_delete', array('id' => $id)))
+            ->setMethod('DELETE')
+            ->add('submit', 'submit', array('label' => 'Supprimer'))
+            ->getForm()
+            ;
     }
 } 

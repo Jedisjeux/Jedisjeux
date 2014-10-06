@@ -35,6 +35,21 @@ class Partie
      */
     private $jeu;
 
+    /**
+     * @var \DateTime
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     */
+    private $updatedAt;
+
+    /**
+     * @var \DateTime
+     */
+    private $playedAt;
+
 
     /**
      * Constructor
@@ -166,5 +181,79 @@ class Partie
     public function getJeu()
     {
         return $this->jeu;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Partie
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return Partie
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Set playedAt
+     *
+     * @param \DateTime $playedAt
+     * @return Partie
+     */
+    public function setPlayedAt($playedAt)
+    {
+        $this->playedAt = $playedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get playedAt
+     *
+     * @return \DateTime 
+     */
+    public function getPlayedAt()
+    {
+        return $this->playedAt;
+    }
+
+    public function __toString()
+    {
+        return $this->getId().' - '.$this->getJeu()->getLibelle();
     }
 }

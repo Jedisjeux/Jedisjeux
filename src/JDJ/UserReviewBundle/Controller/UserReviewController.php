@@ -285,15 +285,19 @@ class UserReviewController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            /** @var UserReview $entity */
             $entity = $em->getRepository('JDJUserReviewBundle:UserReview')->find($id);
+
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find UserReview entity.');
             }
-            $request->getSession()->getFlashBag()->add('success', 'Le client a été supprimé');
 
             $em->remove($entity);
             $em->flush();
+
+            $request->getSession()->getFlashBag()->add('success', 'L\'avis a été supprimé');
         }
 
         return $this->redirect($this->generateUrl('user_review'));

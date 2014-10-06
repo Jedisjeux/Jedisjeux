@@ -235,9 +235,12 @@ class EntityRepository extends BaseEntityRepository
                 ->setParameter($property.'Id', $value->getId());
             ;
         } elseif(is_array($value)) {
-            /**
-             * TODO: find how to apply that criteria
-             */
+            $where = array();
+            foreach ($value as $key => $row) {
+                $where[] =  ":" . $property . "Id".$key." MEMBER OF " . $this->getAlias() . "." . $property . "s";
+                $queryBuilder->setParameter($property.'Id'.$key, $row->getId());
+            }
+            $queryBuilder->where(implode(" or ", $where));
         } elseif ('' !== $value) {
             $queryBuilder
                 ->where(":".$property."Id MEMBER OF ".$this->getAlias().".".$property."s")
