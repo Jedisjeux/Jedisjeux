@@ -2,7 +2,7 @@
 <div class="medium-3 columns">
     <div class="image crop">
         <a href="{{ path('jeu_show', { 'id': jeu.id, 'slug': jeu.slug }) }}">
-            <img src="http://www.jedisjeux.net/img/800/{{ jeu.imageCouverture }}" alt="Imperial"/>
+            <img src="http://www.jedisjeux.net/img/800/{{ jeu.imageCouverture }}" alt="{{ jeu.libelle }}"/>
         </a>
     </div>
     <div class="panel" data-equalizer-watch>
