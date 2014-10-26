@@ -120,6 +120,9 @@ fos_user:
   db_driver: orm
   firewall_name: main
   user_class: JDJ\UserBundle\Entity\User
+  registration:
+    form:
+        type: jdj_user_registration
 
 fos_comment:
     db_driver: orm

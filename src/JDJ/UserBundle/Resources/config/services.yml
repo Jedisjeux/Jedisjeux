@@ -2,6 +2,7 @@ parameters:
 #    jdj_user.example.class: JDJ\UserBundle\Example
 
 services:
-#    jdj_user.example:
-#        class: %jdj_user.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+  jdj_user.registration.form.type:
+    class: JDJ\UserBundle\Form\Type\RegistrationFormType
+    tags:
+        - { name: form.type, alias: jdj_user_registration }

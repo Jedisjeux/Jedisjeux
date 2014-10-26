@@ -25,8 +25,9 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
-        #seul les admins ont accès à la partie compta
+        #seul les admins ont accès à la partie compta et admin
         - { path: ^/compta/, role: ROLE_ADMIN }
+        - { path: ^/admin/, role: ROLE_ADMIN }
         #edition d'un avis
         - { path: ^/avis/\d+/edit, role: ROLE_USER }
         - { path: ^/jeu/\d+/avis/new, role: ROLE_USER }
