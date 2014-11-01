@@ -3,9 +3,34 @@ security:
         FOS\UserBundle\Model\UserInterface: sha512
 
     role_hierarchy:
-        ROLE_REDACTEUR:   ROLE_USER
-        ROLE_ADMIN:       ROLE_REDACTEUR
-        ROLE_SUPER_ADMIN: ROLE_ADMIN
+        # Jedisjeux Team
+        ROLE_STAFF:              ROLE_USER
+        
+        # Workflow rédaction
+        ROLE_WORKFLOW:           ROLE_STAFF
+        ROLE_EDITOR:             ROLE_WORKFLOW
+        ROLE_TRANSLATOR:         ROLE_WORKFLOW
+        ROLE_QUALITY:            ROLE_WORKFLOW
+        ROLE_REVIEWER:           ROLE_WORKFLOW
+        ROLE_PUBLISHER:          ROLE_WORKFLOW
+        
+        # Communication
+        ROLE_PRESS_MANAGER:      ROLE_STAFF
+        
+        #Forum
+        ROLE_MODERATOR:          ROLE_STAFF
+        
+        # Association
+        ROLE_ASSOCIATION:        ROLE_STAFF
+        ROLE_OFFICE:             ROLE_ASSOCIATION
+        ROLE_SECRETARY:          ROLE_OFFICE
+        ROLE_TREASURER:          ROLE_OFFICE
+        ROLE_PRESIDENT:          ROLE_OFFICE
+        
+        # Admin
+        ROLE_ADMIN:              ROLE_STAFF
+        ROLE_SUPER_ADMIN:        ROLE_ADMIN
+        
 
     providers:
         fos_userbundle:
@@ -25,16 +50,16 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
-        #seul les admins ont accès à la partie compta
-        - { path: ^/compta/, role: ROLE_ADMIN }
+        #seul les membres du bureau ont accès à la partie compta
+        - { path: ^/compta/, role: ROLE_OFFICE }
         #edition d'un avis
         - { path: ^/avis/\d+/edit, role: ROLE_USER }
         - { path: ^/jeu/\d+/avis/new, role: ROLE_USER }
         #edition d'une fiche
-        - { path: ^/jeu/new, role: ROLE_REDACTEUR }
-        - { path: ^/jeu/\d+/edit, role: ROLE_REDACTEUR }
+        - { path: ^/jeu/new, role: ROLE_REDACTOR }
+        - { path: ^/jeu/\d+/edit, role: ROLE_REDACTOR }
         #edition d'une ludographie
-        - { path: ^/ludographie/\d+/edit, role: ROLE_REDACTEUR }
+        - { path: ^/ludographie/\d+/edit, role: ROLE_REDACTOR }
         #edition d'une partie
         - { path: ^/partie/\d+/edit, role: ROLE_USER }
         - { path: ^/jeu/\d+/partie/new, role: ROLE_USER }
