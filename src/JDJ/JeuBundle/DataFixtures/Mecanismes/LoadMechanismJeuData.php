@@ -6,14 +6,14 @@
  * Time: 00:39
  */
 
-namespace JDJ\JeuBundle\DataFixtures\Mecanismes;
+namespace JDJ\JeuBundle\DataFixtures\Mechanisms;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAware;
 
-class LoadMecanismeJeuData extends ContainerAware implements FixtureInterface, OrderedFixtureInterface
+class LoadMechanismJeuData extends ContainerAware implements FixtureInterface, OrderedFixtureInterface
 {
     /**
      * @return \Doctrine\DBAL\Connection
@@ -28,9 +28,8 @@ class LoadMecanismeJeuData extends ContainerAware implements FixtureInterface, O
      */
     public function load(ObjectManager $manager)
     {
-        $dbalConnection = $this->getDatabaseConnection();
         $query = <<<EOM
-        insert into jdj_mecanisme_jeu (
+        insert into jdj_mechanism_jeu (
                     jeu_id, mecanisme_id
         )
         select      jeux_id, mecanisme_id

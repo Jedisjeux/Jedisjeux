@@ -2,8 +2,8 @@ jdj_jeu_homepage:
     pattern:  /home
     defaults: { _controller: JDJJeuBundle:Default:index }
 
-jdj_jeu_mecanisme:
-    resource: "@JDJJeuBundle/Resources/config/routing/mecanisme.yml"
+jdj_jeu_mechanism:
+    resource: "@JDJJeuBundle/Resources/config/routing/mechanism.yml"
     prefix:   /mecanisme
     
 jdj_jeu_theme:

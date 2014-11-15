@@ -51,8 +51,8 @@
                     <br />
                 {% endif %}
 
-                {% if jeu.mecanismes|length > 0 %}
-                    Mécanismes : {% for key, mecanisme in jeu.mecanismes %}{% if (key > 0) %},{% endif %} <a href="{{ path('mecanisme_show', { 'id': mecanisme.id, 'slug': mecanisme.slug })  }}">{{ mecanisme }}</a>{% endfor %}
+                {% if jeu.mechanisms|length > 0 %}
+                    Mécanismes : {% for key, mechanism in jeu.mechanisms %}{% if (key > 0) %},{% endif %} <a href="{{ path('mechanism_show', { 'id': mechanism.id, 'slug': mechanism.slug })  }}">{{ mechanism }}</a>{% endfor %}
                     <br />
                 {% endif %}
 

@@ -11,9 +11,9 @@ namespace JDJ\JeuBundle\Behat;
 use Behat\Gherkin\Node\TableNode;
 use JDJ\CoreBundle\Behat\DefaultContext;
 use JDJ\JeuBundle\Entity\Jeu;
-use JDJ\JeuBundle\Entity\Mecanisme;
+use JDJ\JeuBundle\Entity\Mechanism;
 
-class MecanismeContext extends DefaultContext
+class MechanismContext extends DefaultContext
 {
     /**
      * @Given /^game "([^""]*)" has following mechanisms:$/
@@ -35,12 +35,12 @@ class MecanismeContext extends DefaultContext
             ;
 
             if (null === $mecanisme) {
-                $mecanisme = new Mecanisme();
+                $mecanisme = new Mechanism();
                 $mecanisme
                     ->setLibelle(trim($mecanismeLibelle))
                 ;
             }
-            $jeu->addMecanisme($mecanisme);
+            $jeu->addMechanism($mecanisme);
 
         }
 
@@ -53,7 +53,7 @@ class MecanismeContext extends DefaultContext
      */
     public function iAmOnMechanism($mecanismeLibelle)
     {
-        /** @var Mecanisme $mecanisme */
+        /** @var Mechanism $mecanisme */
         $mecanisme = $this->findOneBy("mecanisme", array("libelle" => $mecanismeLibelle));
         $this->getSession()->visit("/jeu/mecanisme/".$mecanisme->getId()."/".$mecanisme->getSlug());
     }
@@ -63,7 +63,7 @@ class MecanismeContext extends DefaultContext
      */
     public function iShouldBeOnMechanism($mecanismeLibelle)
     {
-        /** @var Mecanisme $mecanisme */
+        /** @var Mechanism $mecanisme */
         $mecanisme = $this->findOneBy("mecanisme", array("libelle" => $mecanismeLibelle));
         $this->assertSession()->addressEquals("/jeu/mecanisme/".$mecanisme->getId()."/".$mecanisme->getSlug());
         //file_put_contents("/var/www/cezembre/bidon/".str_replace(" ", "-", $page).".html", $this->getSession()->getPage()->getContent());

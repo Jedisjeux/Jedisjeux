@@ -43,8 +43,8 @@ class JeuType extends AbstractType
             ->add('joueurMax', null, array(
                 'required' => false,
             ))
-            ->add('mecanismes', 'entity', array(
-                    'class' => 'JDJJeuBundle:Mecanisme',
+            ->add('mechanisms', 'entity', array(
+                    'class' => 'JDJJeuBundle:Mechanism',
                     'multiple' => true,
                     'expanded' => false,
                     'required' => false,

@@ -83,7 +83,7 @@ class Jeu
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $mecanismes;
+    private $mechanisms;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -129,7 +129,7 @@ class Jeu
     {
         $this->jeuCaracteristiques = new ArrayCollection();
         $this->addons = new ArrayCollection();
-        $this->mecanismes = new ArrayCollection();
+        $this->mechanisms = new ArrayCollection();
         $this->themes = new ArrayCollection();
         $this->auteurs = new ArrayCollection();
         $this->illustrateurs = new ArrayCollection();
@@ -479,36 +479,36 @@ class Jeu
     }
 
     /**
-     * Add mecanismes
+     * Add mechanisms
      *
-     * @param \JDJ\JeuBundle\Entity\Mecanisme $mecanismes
+     * @param \JDJ\JeuBundle\Entity\Mechanism $mecanismes
      * @return Jeu
      */
-    public function addMecanisme(\JDJ\JeuBundle\Entity\Mecanisme $mecanismes)
+    public function addMechanism(\JDJ\JeuBundle\Entity\Mechanism $mecanismes)
     {
-        $this->mecanismes[] = $mecanismes;
+        $this->mechanisms[] = $mecanismes;
 
         return $this;
     }
 
     /**
-     * Remove mecanismes
+     * Remove mechanisms
      *
-     * @param \JDJ\JeuBundle\Entity\Mecanisme $mecanismes
+     * @param \JDJ\JeuBundle\Entity\Mechanism $mecanismes
      */
-    public function removeMecanisme(\JDJ\JeuBundle\Entity\Mecanisme $mecanismes)
+    public function removeMechanism(\JDJ\JeuBundle\Entity\Mechanism $mecanismes)
     {
-        $this->mecanismes->removeElement($mecanismes);
+        $this->mechanisms->removeElement($mecanismes);
     }
 
     /**
-     * Get mecanismes
+     * Get mechanisms
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getMecanismes()
+    public function getMechanisms()
     {
-        return $this->mecanismes;
+        return $this->mechanisms;
     }
 
     /**

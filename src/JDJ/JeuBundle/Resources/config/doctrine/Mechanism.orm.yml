@@ -1,6 +1,6 @@
-JDJ\JeuBundle\Entity\Mecanisme:
+JDJ\JeuBundle\Entity\Mechanism:
   type: entity
-  table: jdj_mecanisme
+  table: jdj_mechanism
   id:
     id:
       type: integer
@@ -27,5 +27,5 @@ JDJ\JeuBundle\Entity\Mecanisme:
   manyToMany:
     jeux:
       targetEntity: Jeu
-      mappedBy: mecanismes
+      mappedBy: mechanisms
       cascade: ["persist", "merge"]

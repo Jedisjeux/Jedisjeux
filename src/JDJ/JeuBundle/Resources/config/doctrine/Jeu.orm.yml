@@ -55,12 +55,12 @@ JDJ\JeuBundle\Entity\Jeu:
       columns: slug
 
   manyToMany:
-    mecanismes:
-      targetEntity: Mecanisme
+    mechanisms:
+      targetEntity: Mechanism
       inversedBy: jeux
       cascade: ["persist", "merge"]
       joinTable:
-        name: jdj_mecanisme_jeu
+        name: jdj_mechanism_jeu
         joinColumns:
           jeu_id:
             referencedColumnName: id

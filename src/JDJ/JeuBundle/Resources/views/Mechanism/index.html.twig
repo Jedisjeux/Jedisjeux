@@ -5,7 +5,7 @@
 
     <ul>
         <li>
-            <a class="button" href="{{ path('mecanisme_new') }}">
+            <a class="button" href="{{ path('mechanism_new') }}">
                 Créer un mécanisme
             </a>
         </li>
@@ -22,12 +22,12 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('mecanisme_show', { 'id': entity.id, 'slug': entity.slug }) }}">{{ entity.id }}</a></td>
+                <td><a href="{{ path('mechanism_show', { 'id': entity.id, 'slug': entity.slug }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.libelle }}</td>
                 <td class="small-4">
                 <ul class="inline-list">
                     <li>
-                        <a class="tiny button" href="{{ path('mecanisme_edit', { 'id': entity.id }) }}">Modifier</a>
+                        <a class="tiny button" href="{{ path('mechanism_edit', { 'id': entity.id }) }}">Modifier</a>
                     </li>
                     <li>
                         {{ form_start(deleteForms[entity.id]) }}

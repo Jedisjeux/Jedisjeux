@@ -6,22 +6,22 @@
  * Time: 20:02
  */
 
-namespace JDJ\JeuBundle\DataFixtures\Mecanismes;
+namespace JDJ\JeuBundle\DataFixtures\Mechanisms;
 
 
-use JDJ\JeuBundle\Entity\Mecanisme;
+use JDJ\JeuBundle\Entity\Mechanism;
 use JDJ\WebBundle\DataFixtures\LoadEntityYMLData;
 
-class LoadMecanismesData extends LoadEntityYMLData
+class LoadMechanismsData extends LoadEntityYMLData
 {
     public function getYAMLFileName()
     {
-        return __DIR__."/jdj_mecanisme.yml";
+        return __DIR__."/jdj_mechanism.yml";
     }
 
     public function getEntityNewInstance()
     {
-        return new Mecanisme();
+        return new Mechanism();
     }
 
     /**
@@ -34,6 +34,6 @@ class LoadMecanismesData extends LoadEntityYMLData
 
     public function getTableName()
     {
-        return "jdj_mecanisme";
+        return "jdj_mechanism";
     }
 } 
