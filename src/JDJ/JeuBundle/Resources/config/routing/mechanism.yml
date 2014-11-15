@@ -1,0 +1,30 @@
+mechanism:
+    pattern:  /
+    defaults: { _controller: "JDJJeuBundle:Mechanism:index" }
+
+mechanism_new:
+    pattern:  /new
+    defaults: { _controller: "JDJJeuBundle:Mechanism:new" }
+
+mechanism_create:
+    pattern:  /create
+    defaults: { _controller: "JDJJeuBundle:Mechanism:create" }
+    requirements: { _method: post }
+
+mechanism_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "JDJJeuBundle:Mechanism:edit" }
+
+mechanism_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "JDJJeuBundle:Mechanism:update" }
+    requirements: { _method: post|put }
+
+mechanism_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "JDJJeuBundle:Mechanism:delete" }
+    requirements: { _method: post|delete }
+
+mechanism_show:
+    pattern:  /{id}/{slug}
+    defaults: { _controller: "JDJJeuBundle:Mechanism:show" }

@@ -5,9 +5,9 @@ namespace JDJ\JeuBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Mecanisme
+ * Mechanism
  */
-class Mecanisme
+class Mechanism
 {
     /**
      * @var integer
@@ -56,7 +56,7 @@ class Mecanisme
      * Set libelle
      *
      * @param string $libelle
-     * @return Mecanisme
+     * @return Mechanism
      */
     public function setLibelle($libelle)
     {
@@ -79,7 +79,7 @@ class Mecanisme
      * Add jeux
      *
      * @param \JDJ\JeuBundle\Entity\Jeu $jeux
-     * @return Mecanisme
+     * @return Mechanism
      */
     public function addJeux(\JDJ\JeuBundle\Entity\Jeu $jeux)
     {
@@ -112,7 +112,7 @@ class Mecanisme
      * Set description
      *
      * @param string $description
-     * @return Mecanisme
+     * @return Mechanism
      */
     public function setDescription($description)
     {
@@ -135,7 +135,7 @@ class Mecanisme
      * Set slug
      *
      * @param string $slug
-     * @return Mecanisme
+     * @return Mechanism
      */
     public function setSlug($slug)
     {

@@ -12,7 +12,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class MecanismeType extends AbstractType
+class MechanismType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -22,7 +22,7 @@ class MecanismeType extends AbstractType
     {
         $builder
             ->add('libelle')
-            ->add('description')
+            ->add('description', 'ckeditor')
         ;
     }
 
@@ -32,7 +32,7 @@ class MecanismeType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'JDJ\JeuBundle\Entity\Mecanisme'
+            'data_class' => 'JDJ\JeuBundle\Entity\Mechanism'
         ));
     }
 

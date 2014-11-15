@@ -6,7 +6,7 @@
  * Time: 00:39
  */
 
-namespace JDJ\JeuBundle\DataFixtures\Mecanismes;
+namespace JDJ\JeuBundle\DataFixtures\Mechanisms;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;

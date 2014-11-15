@@ -76,7 +76,7 @@ class CibleController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('JDJJeuBundle:Mecanisme:show.html.twig', array(
+        return $this->render('JDJJeuBundle:Mechanism:show.html.twig', array(
             'entity'      => $entity,
             'jeux'        => $jeux,
             'delete_form' => $deleteForm->createView(),
@@ -137,7 +137,7 @@ class CibleController extends Controller
     }
 
     /**
-     * Creates a form to edit a Mecanisme entity.
+     * Creates a form to edit a Mechanism entity.
      *
      * @param Cible $entity The entity
      *

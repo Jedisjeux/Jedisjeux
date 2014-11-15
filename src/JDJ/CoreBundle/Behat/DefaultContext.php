@@ -240,7 +240,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
                 $repositoryName = "JDJJeuBundle:Theme";
                 break;
             case 'mecanisme':
-                $repositoryName = "JDJJeuBundle:Mecanisme";
+                $repositoryName = "JDJJeuBundle:Mechanism";
                 break;
             case 'statut':
                 $repositoryName = "JDJWebBundle:Statut";
