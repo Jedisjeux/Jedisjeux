@@ -124,4 +124,64 @@ class JeuRepository extends EntityRepository
 
         return $this->getPaginator($queryBuilder);
     }
+
+    public function advancedSearch(array $criteria = null)
+    {
+
+        $queryBuilder = $this->getCollectionQueryBuilder();
+
+        /**
+         * Handle criteria with another method than generic
+         */
+        $mechanisms = null;
+
+        if (isset($criteria['mechanism'])) {
+            $mechanisms = $criteria['mechanism'];
+            unset($criteria['mechanism']);
+        }
+
+        if (array_key_exists('ageMin', $criteria) and null !== $criteria['ageMin']) {
+            $ageMin = $criteria['ageMin'];
+            $criteria['ageMin:lessThanOrEqual'] = $ageMin;
+        }
+        unset($criteria['ageMin']);
+
+        if (isset($criteria['theme'])) {
+            $criteria['theme'] = array($criteria['theme']);
+        } else {
+            unset($criteria['theme']);
+        }
+
+
+
+        $this->applyCriteria($queryBuilder, $criteria);
+
+        if (null !== ($mechanisms)) {
+
+            $mecanismesID = array();
+            foreach($mechanisms as $key => $mechanism) {
+                $queryBuilder
+                    ->join("o.mechanisms", "mechanism".$key);
+
+                $mecanismesID[] = $mechanism->getId();
+                $queryBuilder
+                    ->andWhere("mechanism".$key.".id = :mecanismeId".$key)
+                    ->setParameter("mecanismeId".$key, $mechanism->getId());
+            }
+
+        }
+
+        if (isset($criteria['joueurCount'])) {
+            $queryBuilder->andWhere(
+                $queryBuilder->expr()->lte($this->getPropertyName("joueurMin"), $criteria['joueurCount'])
+            );
+            $queryBuilder->andWhere(
+                $queryBuilder->expr()->gte($this->getPropertyName("joueurMax"), $criteria['joueurCount'])
+                .' or '.$this->getPropertyName("joueurMax"). ' is null'
+            );
+        }
+
+
+        return $this->getPaginator($queryBuilder);
+    }
 } 

@@ -57,9 +57,9 @@ class JeuType extends AbstractType
                     'required' => false,
                 )
             )
-            ->add('cibles', 'entity', array(
+            ->add('cible', 'entity', array(
                     'class' => 'JDJCoreBundle:Cible',
-                    'multiple' => true,
+                    'multiple' => false,
                     'expanded' => false,
                     'required' => false,
                 )

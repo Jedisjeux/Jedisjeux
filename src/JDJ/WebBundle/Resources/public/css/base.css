@@ -172,7 +172,7 @@ header .menu {
 /**************************************************************/
 /*  	    		       FOOTER					          */
 /**************************************************************/
-/* line 91, ../sass/base.scss */
+/* line 89, ../sass/base.scss */
 footer div {
   background-color: #333333;
 }
@@ -180,24 +180,29 @@ footer div {
 /**************************************************************/
 /*  	    		       Titres					          */
 /**************************************************************/
-/* line 101, ../sass/base.scss */
+/* line 99, ../sass/base.scss */
 h1 {
   font-size: 2em;
 }
 
-/* line 109, ../sass/base.scss */
+/* line 107, ../sass/base.scss */
 h3 {
-  font-size: 1.4em;
+  font-size: 1.2em;
+}
+
+/* line 111, ../sass/base.scss */
+h4 {
+  font-size: 1em;
 }
 
 /**************************************************************/
 /*  	    		       Liens					          */
 /**************************************************************/
-/* line 129, ../sass/base.scss */
+/* line 127, ../sass/base.scss */
 a {
   color: #00b6de;
 }
-/* line 131, ../sass/base.scss */
+/* line 129, ../sass/base.scss */
 a:hover {
   color: #333333;
 }
@@ -205,16 +210,16 @@ a:hover {
 /**************************************************************/
 /*  	    		       BUTTON					          */
 /**************************************************************/
-/* line 144, ../sass/base.scss */
+/* line 142, ../sass/base.scss */
 button, a.button {
   background-color: #98ca46;
 }
-/* line 146, ../sass/base.scss */
+/* line 144, ../sass/base.scss */
 button:hover, a.button:hover {
   background-color: #333333;
   color: #98ca46;
 }
-/* line 150, ../sass/base.scss */
+/* line 148, ../sass/base.scss */
 button:focus, button:active, a.button:focus, a.button:active {
   background-color: #98ca46;
 }
@@ -222,22 +227,19 @@ button:focus, button:active, a.button:focus, a.button:active {
 /**************************************************************/
 /*  	    		       ROW					              */
 /**************************************************************/
-/* line 161, ../sass/base.scss */
+/* line 159, ../sass/base.scss */
 .listing .image.crop {
-  height: 150px;
+  height: 100px;
   width: 100%;
   overflow: hidden;
 }
-/* line 169, ../sass/base.scss */
-.listing .panel {
-  background: #fafafa;
-}
-/* line 171, ../sass/base.scss */
+/* line 168, ../sass/base.scss */
 .listing .panel h3, .listing .panel h3 a {
-  font-size: 1.2em;
+  font-size: 0.9em;
   color: #555;
+  text-align: center;
 }
-/* line 176, ../sass/base.scss */
+/* line 174, ../sass/base.scss */
 .listing .panel ul li {
   font-size: 0.85em;
   color: #aaa;
@@ -246,11 +248,11 @@ button:focus, button:active, a.button:focus, a.button:active {
 /**************************************************************/
 /*  	    		       ITEM LIST					      */
 /**************************************************************/
-/* line 190, ../sass/base.scss */
+/* line 187, ../sass/base.scss */
 ul {
   margin: 0;
 }
-/* line 192, ../sass/base.scss */
+/* line 189, ../sass/base.scss */
 ul li {
   list-style-type: none;
 }
@@ -258,46 +260,46 @@ ul li {
 /**************************************************************/
 /*  	    		       TABLE					          */
 /**************************************************************/
-/* line 201, ../sass/base.scss */
+/* line 198, ../sass/base.scss */
 table {
   width: 100%;
 }
-/* line 205, ../sass/base.scss */
+/* line 202, ../sass/base.scss */
 table thead tr th {
   padding: 10px;
   background: #333333;
   color: #fff;
   border: 1px solid #e2e2e2;
 }
-/* line 213, ../sass/base.scss */
+/* line 210, ../sass/base.scss */
 table td {
   vertical-align: middle;
 }
-/* line 215, ../sass/base.scss */
+/* line 212, ../sass/base.scss */
 table td .inline-list {
   margin: 0;
   position: relative;
   top: 10px;
 }
 
-/* line 225, ../sass/base.scss */
+/* line 222, ../sass/base.scss */
 .tabs {
   margin-top: 1rem;
   background: #efefef;
 }
-/* line 228, ../sass/base.scss */
+/* line 225, ../sass/base.scss */
 .tabs li.active.tab-title a {
   background: url("http://januarycreative.com/wp-content/themes/januarycreative/img/greybg.png");
   color: white;
 }
-/* line 232, ../sass/base.scss */
+/* line 229, ../sass/base.scss */
 .tabs dd > a, .tabs .tab-title > a {
   background: transparent;
   color: black;
   padding: 0.5rem 1.5rem;
 }
 
-/* line 239, ../sass/base.scss */
+/* line 236, ../sass/base.scss */
 div [role=content] {
   padding-top: 1rem;
   border-top: none;
@@ -306,7 +308,7 @@ div [role=content] {
   background: white;
 }
 
-/* line 247, ../sass/base.scss */
+/* line 244, ../sass/base.scss */
 .publication-info {
   font-style: italic;
 }

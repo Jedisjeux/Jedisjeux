@@ -1,6 +1,6 @@
 {% from 'JDJWebBundle:Macros:misc.html.twig' import pagination %}
 {% from "JDJJeuBundle:Jeu:macros.html.twig" import joueurCount %}
-
+<div class="medium-12">
 <div class="listing">
     <div class="row" data-equalizer>
         {% for key, jeu in jeux %}
@@ -19,3 +19,4 @@
         </div>
     </div>
 {% endblock %}
+</div>

@@ -46,8 +46,8 @@
                     {{ joueurCount(jeu) }}<br />
                 {% endif %}
 
-                {% if jeu.cibles|length > 0 %}
-                    Public : {% for key, cible in jeu.cibles %}{% if (key > 0) %},{% endif %} <a href="{{ path('cible_show', { 'id': cible.id, 'slug': cible.slug })  }}">{{ cible }}</a>{% endfor %}
+                {% if jeu.cible %}
+                    Public : <a href="{{ path('cible_show', { 'id': jeu.cible.id, 'slug': jeu.cible.slug })  }}">{{ jeu.cible }}</a>
                     <br />
                 {% endif %}
 

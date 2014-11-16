@@ -13,6 +13,16 @@ $(function(){
             selectJoueurMaxChangeEvent(this);
         });
 
+        $("#jdj_jeubundle_jeu_mechanisms").chosen({
+            no_results_text: "Aucun mécanisme ne correspond",
+            placeholder_text_multiple: "choisir des mécanismes"
+        });
+
+        $("#jdj_jeubundle_jeu_themes").chosen({
+            no_results_text: "Aucun thème ne correspond",
+            allow_single_deselect: true,
+            placeholder_text_multiple: "choisir des thèmes"
+        });
 
     }
 

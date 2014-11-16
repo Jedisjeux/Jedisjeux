@@ -81,8 +81,6 @@ header {
 }
 
 
-
-
 /**************************************************************/
 /*  	    		       FOOTER					          */
 /**************************************************************/
@@ -107,11 +105,11 @@ h2 {
 }
 
 h3 {
-  font-size: 1.4em;
+  font-size: 1.2em;
 }
 
 h4 {
-
+  font-size: 1em;
 }
 
 h5 {
@@ -159,7 +157,7 @@ button, a.button {
 .listing {
   .image{
     &.crop {
-      height: 150px;
+      height: 100px;
       width: 100%;
       overflow: hidden;
     }
@@ -167,10 +165,10 @@ button, a.button {
   }
 
   .panel {
-    background: #fafafa;
     h3, h3 a {
-      font-size: 1.2em;
+      font-size: 0.9em;
       color: #555;
+      text-align: center;
     }
     ul {
       li {

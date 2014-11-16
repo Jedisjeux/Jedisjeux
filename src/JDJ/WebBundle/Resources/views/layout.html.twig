@@ -11,6 +11,7 @@
 
     {% stylesheets
         '@JDJFoundationBundle/Resources/public/stylesheets/app.css'
+        '@JDJFoundationBundle/Resources/public/bower_components/chosen/chosen.min.css'
         '@JDJWebBundle/Resources/public/css/base.css'
     filter='cssrewrite' %}
         <link rel="stylesheet" href="{{ asset_url }}" />
@@ -22,22 +23,27 @@
 
 
 <div class="row">
-    <div class="large-12 columns" role="content">
-        {% for label, flashes in app.session.flashbag.all %}
-            {% for flash in flashes %}
-                <div data-alert class="alert-box {{ label }} radius">
-                    {{ flash }}
-                </div>
-            {% endfor %}
+
+    {% for label, flashes in app.session.flashbag.all %}
+        {% for flash in flashes %}
+            <div data-alert class="alert-box {{ label }} radius">
+                {{ flash }}
+            </div>
         {% endfor %}
+    {% endfor %}
 
-        <div style="display: none" id="alert-box-success" data-alert class="alert-box success radius"></div>
+    <div style="display: none" id="alert-box-success" data-alert class="alert-box success radius"></div>
 
-        {% block fos_user_content %}
-        {% block body %}
+    {% block content_with_sidebar %}
+    <div class="large-12 columns" role="content">
+        {% block content_without_sidebar %}
+            {% block fos_user_content %}
+            {% block body %}
+            {% endblock %}
+            {% endblock fos_user_content %}
         {% endblock %}
-        {% endblock fos_user_content %}
     </div>
+    {% endblock %}
 </div>
 
 {% include "JDJWebBundle:layout:footer.html.twig" %}
@@ -48,6 +54,7 @@
         '@JDJFoundationBundle/Resources/public/bower_components/foundation/js/foundation.min.js'
         '@JDJFoundationBundle/Resources/public/bower_components/foundation/js/foundation/foundation.tab.js'
         '@JDJFoundationBundle/Resources/public/bower_components/foundation/js/foundation/foundation.equalizer.js'
+        '@JDJFoundationBundle/Resources/public/bower_components/chosen/chosen.jquery.min.js'
         '@JDJFoundationBundle/Resources/public/js/*'
         '@JDJJeuBundle/Resources/public/js/jeu/*'
         '@JDJUserReviewBundle/Resources/public/js/jeu_note/*'
