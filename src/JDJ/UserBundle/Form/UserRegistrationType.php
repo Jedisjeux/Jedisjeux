@@ -18,7 +18,9 @@ class UserRegistrationType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('avatar')
-            ->add('presentation')
+            ->add('presentation', 'ckeditor', array(
+                'required' => false,
+            ))
             ->add('username')
             ->add('email')
             ->add('plainPassword', 'repeated', array(
