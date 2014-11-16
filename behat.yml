@@ -16,7 +16,7 @@ default:
                 - Behat\MinkExtension\Context\MinkContext
                 - JDJ\CoreBundle\Behat\StatutContext
                 - JDJ\JeuBundle\Behat\JeuContext
-                - JDJ\JeuBundle\Behat\MecanismeContext
+                - JDJ\JeuBundle\Behat\MechanismContext
                 - JDJ\JeuBundle\Behat\ThemeContext
                 - JDJ\LudographieBundle\Behat\PersonneContext
             filters:

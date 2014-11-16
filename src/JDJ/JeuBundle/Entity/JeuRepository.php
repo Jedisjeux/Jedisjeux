@@ -86,12 +86,12 @@ class JeuRepository extends EntityRepository
          * Filter on mechanisms
          */
         $mecanismesID = array();
-        foreach($jeu->getMecanismes()->toArray() as $mecanisme) {
+        foreach($jeu->getMechanisms()->toArray() as $mecanisme) {
             $mecanismesID[] = $mecanisme->getId();
         }
 
         $queryBuilder
-            ->join("o.mecanismes", "m")
+            ->join("o.mechanisms", "m")
             ->groupBy($this->getAlias().'.id')
             /**
              * having 2 (or more) identical mechanisms
