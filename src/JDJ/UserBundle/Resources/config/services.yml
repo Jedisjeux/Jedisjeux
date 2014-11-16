@@ -3,6 +3,11 @@ parameters:
 
 services:
   jdj_user.registration.form.type:
-    class: JDJ\UserBundle\Form\Type\RegistrationFormType
+    class: JDJ\UserBundle\Form\UserRegistrationType
     tags:
         - { name: form.type, alias: jdj_user_registration }
+  jdj_user.profile.form.type:
+      class: JDJ\UserBundle\Form\ProfileFormType
+      arguments: [%fos_user.model.user.class%]
+      tags:
+          - { name: form.type, alias: jdj_user_profile }

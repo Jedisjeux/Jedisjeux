@@ -123,6 +123,9 @@ fos_user:
   registration:
     form:
         type: jdj_user_registration
+  profile:
+    form:
+        type: jdj_user_profile
 
 fos_comment:
     db_driver: orm

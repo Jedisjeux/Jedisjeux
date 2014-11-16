@@ -31,12 +31,33 @@ default:
             filters:
                 tags: "@ludographie && ~@javascript"
 
-        user:
+        userLogin:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - JDJ\UserBundle\Behat\UserContext
             filters:
-                tags: "@user && ~@javascript"
+                tags: "@userLogin && ~@javascript"
+
+        userRegister:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\UserBundle\Behat\UserContext
+            filters:
+                tags: "@userRegister && ~@javascript"
+
+        userReview:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\UserBundle\Behat\UserContext
+            filters:
+                tags: "@userReview && ~@javascript"
+
+        userAdmin:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\UserBundle\Behat\UserContext
+            filters:
+              tags: "@userAdmin && ~@javascript"
 
 
         partie:
