@@ -3,11 +3,11 @@
 
     {{ form_start(form, {'method': 'GET'}) }}
 
-    {{ form_widget(form.cible) }}
+    {{ form_widget(form.cible, { 'attr': {'style': 'display: none'}}) }}
 
-    <button class="small button">Débutant</button><br />
-    <button class="small button">Intermédiaire</button><br />
-    <button class="small button">Expert</button>
+    <button class="small button begginer">Débutant</button><br />
+    <button class="small button intermediate">Intermédiaire</button><br />
+    <button class="small button master">Expert</button>
 
     <h4>Nombre de joueurs</h4>
 
