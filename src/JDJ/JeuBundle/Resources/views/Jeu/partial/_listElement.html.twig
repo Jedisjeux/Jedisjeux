@@ -8,15 +8,6 @@
     <div class="panel" data-equalizer-watch>
         <a href="{{ path('jeu_show', { 'id': jeu.id, 'slug': jeu.slug }) }}">
             <h3>{{ jeu.libelle }}</h3>
-            <ul>
-                {% if jeu.joueurMin or jeu.joueurMax %}
-                    <li>{{ joueurCount(jeu) }}</li>
-                {% endif %}
-                {% if jeu.ageMin %}
-                <li>à partir de {{ jeu.ageMin }} ans
-                <li>
-                    {% endif %}
-            </ul>
         </a>
     </div>
 </div>

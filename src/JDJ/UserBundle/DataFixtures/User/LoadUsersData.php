@@ -48,8 +48,10 @@ EOM;
         foreach($oldUsers as $data) {
 
             $roles = array('ROLE_USER');
-            if (819 === $data['group_id']) {
-                $roles[] = 'ROLE_ADMIN';
+            switch($data['username']) {
+                case 'loic_425':
+                    $roles[] = 'ROLE_ADMIN';
+                    break;
             }
 
             /** @var User $user */
@@ -69,6 +71,18 @@ EOM;
                 'id' => $user->getId(),
             ));
         }
+
+        $roles = array("ROLE_USER", "ROLE_ADMIN");
+
+        $userSeb = new User();
+        $userSeb
+            ->setEnabled(true)
+            ->setUsername("sbienvenu")
+            ->setPlainPassword("sbienvenu")
+            ->setEmail("sbienvenu@gmail.com")
+            ->setRoles($roles);
+
+        $userManager->updateUser($userSeb);
 
     }
 

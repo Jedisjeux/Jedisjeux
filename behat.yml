@@ -22,6 +22,17 @@ default:
             filters:
                 tags: "@jeu && ~@javascript"
 
+        gameList:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\CoreBundle\Behat\StatutContext
+                - JDJ\JeuBundle\Behat\JeuContext
+                - JDJ\JeuBundle\Behat\MechanismContext
+                - JDJ\JeuBundle\Behat\ThemeContext
+                - JDJ\LudographieBundle\Behat\PersonneContext
+            filters:
+                tags: "@gameList && ~@javascript"
+
         ludographie:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext

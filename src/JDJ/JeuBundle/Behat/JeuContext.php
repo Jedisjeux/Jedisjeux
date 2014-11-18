@@ -61,4 +61,13 @@ class JeuContext extends DefaultContext
         $this->getSession()->visit("/jeu/".$jeu->getId()."/".$jeu->getSlug());
         file_put_contents(__DIR__.'/../../../../web/behat/'.$jeu->getSlug().'.html', $this->getSession()->getPage()->getContent());
     }
+
+    /**
+     * @Then /I am on game list page$/
+     */
+    public function iAmOnGameList()
+    {
+        $this->getSession()->visit("/jeu");
+        file_put_contents(__DIR__.'/../../../../web/behat/game-list.html', $this->getSession()->getPage()->getContent());
+    }
 } 
