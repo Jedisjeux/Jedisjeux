@@ -4,7 +4,7 @@
 
     <ul>
         <li>
-            <a class="button add" href="{{ path('espace-personnel_new') }}">
+            <a class="button add" href="{{ path('espace_personnel_new') }}">
                 Ajouter un nouvel utilisateur
             </a>
         </li>
@@ -37,7 +37,7 @@
                 <td class="small-4">
                     <ul class="inline-list">
                         <li>
-                            <a class="small button" href="{{ path('espace-personnel_edit', { 'id': entity.id }) }}">édition</a>
+                            <a class="small button" href="{{ path('espace_personnel_edit', { 'id': entity.id }) }}">édition</a>
                         </li>
                         <li>
                             {{ form_start(deleteForms[entity.id]) }}

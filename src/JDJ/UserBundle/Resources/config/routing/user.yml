@@ -1,26 +1,26 @@
-espace-personnel_show:
+espace_personnel_show:
     path:     /{id}/show
     defaults: { _controller: "JDJUserBundle:User:show" }
 
-espace-personnel_new:
+espace_personnel_new:
     path:     /new
     defaults: { _controller: "JDJUserBundle:User:new" }
 
-espace-personnel_create:
+espace_personnel_create:
     path:     /create
     defaults: { _controller: "JDJUserBundle:User:create" }
     requirements: { _method: post }
 
-espace-personnel_edit:
+espace_personnel_edit:
     path:     /{id}/edit
     defaults: { _controller: "JDJUserBundle:User:edit" }
 
-espace-personnel_update:
+espace_personnel_update:
     path:     /{id}/update
     defaults: { _controller: "JDJUserBundle:User:update" }
     requirements: { _method: post|put }
 
-espace-personnel_delete:
+espace_personnel_delete:
     path:     /{id}/delete
     defaults: { _controller: "JDJUserBundle:User:delete" }
     requirements: { _method: post|delete }

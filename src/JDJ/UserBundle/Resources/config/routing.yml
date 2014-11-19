@@ -1,4 +1,4 @@
-jdj_user_espace-personnel:
+jdj_user_espace_personnel:
     resource: "@JDJUserBundle/Resources/config/routing/user.yml"
     prefix:   /espace-personnel
 

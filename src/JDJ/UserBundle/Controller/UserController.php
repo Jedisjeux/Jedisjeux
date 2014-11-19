@@ -50,7 +50,7 @@ class UserController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('espace-personnel_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('espace_personnel_show', array('id' => $entity->getId())));
         }
 
         return $this->render('JDJUserBundle:User:new.html.twig', array(
@@ -69,7 +69,7 @@ class UserController extends Controller
     private function createCreateForm(User $entity)
     {
         $form = $this->createForm(new UserType(), $entity, array(
-            'action' => $this->generateUrl('espace-personnel_create'),
+            'action' => $this->generateUrl('espace_personnel_create'),
             'method' => 'POST',
         ));
 
@@ -149,7 +149,7 @@ class UserController extends Controller
     private function createEditForm(User $entity)
     {
         $form = $this->createForm(new UserType(), $entity, array(
-            'action' => $this->generateUrl('espace-personnel_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('espace_personnel_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -178,7 +178,7 @@ class UserController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('espace-personnel_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('espace_personnel_edit', array('id' => $id)));
         }
 
         return $this->render('JDJUserBundle:User:edit.html.twig', array(
@@ -208,7 +208,7 @@ class UserController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('espace-personnel'));
+        return $this->redirect($this->generateUrl('espace_personnel'));
     }
 
     /**
@@ -221,7 +221,7 @@ class UserController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('espace-personnel_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('espace_personnel_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
