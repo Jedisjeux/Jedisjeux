@@ -113,11 +113,6 @@ class Jeu
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $cibles;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
     private $notes;
 
 
@@ -135,7 +130,6 @@ class Jeu
         $this->illustrateurs = new ArrayCollection();
         $this->editeurs = new ArrayCollection();
         $this->parties = new ArrayCollection();
-        $this->cibles = new ArrayCollection();
         $this->notes = new ArrayCollection();
     }
 
@@ -677,39 +671,6 @@ class Jeu
     }
 
     /**
-     * Add cibles
-     *
-     * @param \JDJ\CoreBundle\Entity\Cible $cibles
-     * @return Jeu
-     */
-    public function addCible(\JDJ\CoreBundle\Entity\Cible $cibles)
-    {
-        $this->cibles[] = $cibles;
-
-        return $this;
-    }
-
-    /**
-     * Remove cibles
-     *
-     * @param \JDJ\CoreBundle\Entity\Cible $cibles
-     */
-    public function removeCible(\JDJ\CoreBundle\Entity\Cible $cibles)
-    {
-        $this->cibles->removeElement($cibles);
-    }
-
-    /**
-     * Get cibles
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getCibles()
-    {
-        return $this->cibles;
-    }
-
-    /**
      * Add notes
      *
      * @param \JDJ\UserReviewBundle\Entity\JeuNote $notes
@@ -740,5 +701,33 @@ class Jeu
     public function getNotes()
     {
         return $this->notes;
+    }
+    /**
+     * @var \JDJ\CoreBundle\Entity\Cible
+     */
+    private $cible;
+
+
+    /**
+     * Set cible
+     *
+     * @param \JDJ\CoreBundle\Entity\Cible $cible
+     * @return Jeu
+     */
+    public function setCible(\JDJ\CoreBundle\Entity\Cible $cible = null)
+    {
+        $this->cible = $cible;
+
+        return $this;
+    }
+
+    /**
+     * Get cible
+     *
+     * @return \JDJ\CoreBundle\Entity\Cible 
+     */
+    public function getCible()
+    {
+        return $this->cible;
     }
 }

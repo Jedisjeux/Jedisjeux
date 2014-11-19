@@ -5,31 +5,31 @@ security:
     role_hierarchy:
         # Jedisjeux Team
         ROLE_STAFF:              ROLE_USER
-        
+
         # Workflow rédaction
         ROLE_WORKFLOW:           ROLE_STAFF
-        ROLE_EDITOR:             ROLE_WORKFLOW
+        ROLE_REDACTOR:           ROLE_WORKFLOW
         ROLE_TRANSLATOR:         ROLE_WORKFLOW
         ROLE_QUALITY:            ROLE_WORKFLOW
         ROLE_REVIEWER:           ROLE_WORKFLOW
         ROLE_PUBLISHER:          ROLE_WORKFLOW
-        
+        ROLE_ADMIN_WORKFLOW:     ROLE_REDACTOR, ROLE_TRANSLATOR, ROLE_TRANSLATOR, ROLE_QUALITY, ROLE_REVIEWER, ROLE_PUBLISHER
+
         # Communication
         ROLE_PRESS_MANAGER:      ROLE_STAFF
-        
+
         #Forum
         ROLE_MODERATOR:          ROLE_STAFF
-        
+
         # Association
         ROLE_ASSOCIATION:        ROLE_STAFF
         ROLE_OFFICE:             ROLE_ASSOCIATION
         ROLE_SECRETARY:          ROLE_OFFICE
         ROLE_TREASURER:          ROLE_OFFICE
         ROLE_PRESIDENT:          ROLE_OFFICE
-        
+
         # Admin
-        ROLE_ADMIN:              ROLE_STAFF
-        ROLE_SUPER_ADMIN:        ROLE_ADMIN
+        ROLE_ADMIN:              ROLE_ADMIN_WORKFLOW, ROLE_MODERATOR
         
 
     providers:

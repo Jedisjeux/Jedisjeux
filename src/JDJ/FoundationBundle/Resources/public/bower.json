@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": "true",
   "dependencies": {
-    "foundation": "zurb/bower-foundation",
-    "foundation": "5.3"
+      "foundation": "zurb/bower-foundation",
+      "foundation": "5.3",
+      "chosen": "https://github.com/harvesthq/chosen/releases/download/v1.2.0/chosen_v1.2.0.zip"
   }
 }

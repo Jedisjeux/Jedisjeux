@@ -30,8 +30,8 @@ JDJ\CoreBundle\Entity\Cible:
       columns: slug
 
 
-  manyToMany:
+  oneToMany:
     jeux:
       targetEntity: JDJ\JeuBundle\Entity\Jeu
-      mappedBy: cibles
+      mappedBy: cible
       cascade: ["persist", "merge"]
