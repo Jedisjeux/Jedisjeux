@@ -257,7 +257,7 @@ fos_elastica:
                       slug: { search_analyzer: custom_search_analyzer, index_analyzer: custom_index_analyzer, type: string }
                   persistence:
                       driver: orm
-                      model: JDJ\JeuBundle\Entity\Mecanisme
+                      model: JDJ\JeuBundle\Entity\Mechanism
                       provider: ~
                       listener:
                           immediate: ~

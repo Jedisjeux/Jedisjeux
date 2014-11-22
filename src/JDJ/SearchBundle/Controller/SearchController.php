@@ -11,7 +11,7 @@ namespace JDJ\SearchBundle\Controller;
 use Elastica\Query\QueryString;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use JDJ\JeuBundle\Entity\Jeu;
-use JDJ\JeuBundle\Entity\Mecanisme;
+use JDJ\JeuBundle\Entity\Mechanism;
 use JDJ\JeuBundle\Entity\Theme;
 use JDJ\LudographieBundle\Entity\Personne;
 use Pagerfanta\Pagerfanta;
@@ -85,18 +85,18 @@ class SearchController extends Controller
                 );
             }
 
-            if ($entity instanceof Mecanisme) {
-                /** @var Mecanisme $mecanisme */
-                $mecanisme = $entity;
+            if ($entity instanceof Mechanism) {
+                /** @var Mechanism $mechanism */
+                $mechanism = $entity;
                 $result = array(
-                    'value' => $mecanisme->getLibelle(),
-                    'label' => $mecanisme->getLibelle(),
+                    'value' => $mechanism->getLibelle(),
+                    'label' => $mechanism->getLibelle(),
                     'image' => "",
                     'category' => 'Mecanismes',
                     'description' => 'Mecanismes',
-                    'href' => $this->generateUrl('mecanisme_show', array(
-                            'id' => $mecanisme->getId(),
-                            'slug' => $mecanisme->getSlug(),
+                    'href' => $this->generateUrl('mechanism_show', array(
+                            'id' => $mechanism->getId(),
+                            'slug' => $mechanism->getSlug(),
                         )
                     ),
                 );
@@ -176,7 +176,7 @@ class SearchController extends Controller
                 $types[] = "jeu";
             } elseif ($result instanceof Personne) {
                 $types[] = "personne";
-            } elseif ($result instanceof Mecanisme) {
+            } elseif ($result instanceof Mechanism) {
                 $types[] = "mecanisme";
             } elseif ($result instanceof Theme) {
                 $types[] = "theme";
@@ -229,12 +229,12 @@ class SearchController extends Controller
             ));
         }
 
-        if ($current instanceof Mecanisme) {
-            /** @var Mecanisme $mecanisme */
-            $mecanisme = $current;
-            return $this->redirect($this->generateUrl('mecanisme_show', array(
-                    'id' => $mecanisme->getId(),
-                    'slug' => $mecanisme->getSlug(),
+        if ($current instanceof Mechanism) {
+            /** @var Mechanism $mechanism */
+            $mechanism = $current;
+            return $this->redirect($this->generateUrl('mechanism_show', array(
+                    'id' => $mechanism->getId(),
+                    'slug' => $mechanism->getSlug(),
                 )
             ));
         }
