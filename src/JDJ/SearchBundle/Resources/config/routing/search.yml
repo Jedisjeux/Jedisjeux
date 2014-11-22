@@ -1,8 +1,10 @@
-jeu:
-    pattern:  /
-    defaults: { _controller: "JDJJeuBundle:Jeu:index" }
-
+search_autocomplete:
+    pattern:  /autocomplete
+    defaults: { _controller: "JDJSearchBundle:Search:autoComplete" }
+    options:
+      expose: true
 
 search_query:
     pattern:  /
     defaults: { _controller: "JDJSearchBundle:Search:searchQuery" }
+

@@ -197,6 +197,25 @@ fos_elastica:
     indexes:
         search:
           finder: ~
+          settings:
+              index:
+                  analysis:
+                      analyzer:
+                          custom_search_analyzer:
+                              type: custom
+                              tokenizer: standard
+                              filter   : [standard, lowercase, asciifolding]
+                          custom_index_analyzer:
+                              type: custom
+                              tokenizer: standard
+                              filter   : [standard, lowercase, asciifolding, custom_filter]
+                      filter:
+                          custom_filter:
+                              type: edgeNGram
+                              side: front
+                              min_gram: 1
+                              max_gram: 20
+
           types:
               user:
                   mappings:
@@ -212,7 +231,7 @@ fos_elastica:
               jeu:
                   mappings:
                       libelle: ~
-                      slug: ~
+                      slug: { search_analyzer: custom_search_analyzer, index_analyzer: custom_index_analyzer, type: string }
                   persistence:
                       driver: orm
                       model: JDJ\JeuBundle\Entity\Jeu
@@ -224,10 +243,32 @@ fos_elastica:
                   mappings:
                       prenom: ~
                       nom: ~
-                      slug: ~
+                      slug: { search_analyzer: custom_search_analyzer, index_analyzer: custom_index_analyzer, type: string }
                   persistence:
                       driver: orm
                       model: JDJ\LudographieBundle\Entity\Personne
+                      provider: ~
+                      listener:
+                          immediate: ~
+                      finder: ~
+              mecanisme:
+                  mappings:
+                      libelle: ~
+                      slug: { search_analyzer: custom_search_analyzer, index_analyzer: custom_index_analyzer, type: string }
+                  persistence:
+                      driver: orm
+                      model: JDJ\JeuBundle\Entity\Mecanisme
+                      provider: ~
+                      listener:
+                          immediate: ~
+                      finder: ~
+              theme:
+                  mappings:
+                      libelle: ~
+                      slug: { search_analyzer: custom_search_analyzer, index_analyzer: custom_index_analyzer, type: string }
+                  persistence:
+                      driver: orm
+                      model: JDJ\JeuBundle\Entity\Theme
                       provider: ~
                       listener:
                           immediate: ~

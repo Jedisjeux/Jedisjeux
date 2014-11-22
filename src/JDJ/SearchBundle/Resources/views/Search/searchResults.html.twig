@@ -17,6 +17,14 @@
                 {% if types[key] == 'personne' %}
                     {% include 'JDJLudographieBundle:Personne/partial:_listElement.html.twig' with {'personne': result} %}
                 {% endif %}
+
+                {% if types[key] == 'mecanisme' %}
+                    {% include 'JDJJeuBundle:Mecanisme/partial:_listElement.html.twig' with {'mecanisme': result} %}
+                {% endif %}
+
+                {% if types[key] == 'theme' %}
+                    {% include 'JDJJeuBundle:Theme/partial:_listElement.html.twig' with {'theme': result} %}
+                {% endif %}
             {% endfor %}
         </div>
     </div>
