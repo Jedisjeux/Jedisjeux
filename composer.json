@@ -40,7 +40,8 @@
         "phpunit/phpunit":                   "~3.7",
         "egeloen/ckeditor-bundle":           "~2.0",
         "gregwar/form-bundle":              "dev-master",
-        "friendsofsymfony/elastica-bundle": "~3.0"
+        "friendsofsymfony/elastica-bundle": "~3.0",
+        "sonata-project/block-bundle": "~2.2"
     },
     "scripts": {
         "post-install-cmd": [

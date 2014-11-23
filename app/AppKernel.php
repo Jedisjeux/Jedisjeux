@@ -28,6 +28,9 @@ class AppKernel extends Kernel
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new Gregwar\FormBundle\GregwarFormBundle(),
             new FOS\ElasticaBundle\FOSElasticaBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new Sonata\CoreBundle\SonataCoreBundle(),
+            new Sonata\BlockBundle\SonataBlockBundle(),
 
             //JDJ
             new JDJ\FoundationBundle\JDJFoundationBundle(),

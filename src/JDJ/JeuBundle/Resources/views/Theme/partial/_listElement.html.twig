@@ -1,0 +1,15 @@
+<div class="medium-3 columns">
+    <div class="image crop">
+        <a href="{{ path('theme_show', { 'id': theme.id, 'slug': theme.slug }) }}">
+            <img src="" alt="{{ theme.libelle }}"/>
+        </a>
+    </div>
+    <div class="panel" data-equalizer-watch>
+        <a href="{{ path('theme_show', { 'id': theme.id, 'slug': theme.slug }) }}">
+            <h3>{{ theme.libelle }}</h3>
+            <ul>
+                <li>{{ theme.description | striptags }}</li>
+            </ul>
+        </a>
+    </div>
+</div>
