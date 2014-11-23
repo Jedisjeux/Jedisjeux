@@ -2,6 +2,7 @@
 
 namespace JDJ\UserBundle\Controller;
 
+use JDJ\UserBundle\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -19,11 +20,16 @@ class UserController extends Controller
      * Lists all User entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('JDJUserBundle:User')->findAll();
+        /** @var UserRepository $userRepository */
+        $userRepository = $em->getRepository('JDJUserBundle:User');
+
+        $entities = $userRepository->createPaginator();
+        $entities->setMaxPerPage(5);
+        $entities->setCurrentPage($request->get('page', 1));
 
         $deleteForms = array();
         foreach ($entities as $entity) {
@@ -49,8 +55,8 @@ class UserController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-
-            return $this->redirect($this->generateUrl('espace_personnel_show', array('id' => $entity->getId())));
+            $request->getSession()->getFlashBag()->add('success', 'Le compte a bien été créé.');
+            return $this->redirect($this->generateUrl('jdj_user_list', array('id' => $entity->getId())));
         }
 
         return $this->render('JDJUserBundle:User:new.html.twig', array(
@@ -73,7 +79,7 @@ class UserController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Créer'));
 
         return $form;
     }
@@ -134,7 +140,7 @@ class UserController extends Controller
 
         return $this->render('JDJUserBundle:User:edit.html.twig', array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -153,7 +159,7 @@ class UserController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => 'Enregistrer'));
 
         return $form;
     }
@@ -177,13 +183,13 @@ class UserController extends Controller
 
         if ($editForm->isValid()) {
             $em->flush();
-
-            return $this->redirect($this->generateUrl('espace_personnel_edit', array('id' => $id)));
+            $request->getSession()->getFlashBag()->add('success', 'Le compte a bien été mis à jour.');
+            return $this->redirect($this->generateUrl('jdj_user_list', array('id' => $id)));
         }
 
         return $this->render('JDJUserBundle:User:edit.html.twig', array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -208,7 +214,8 @@ class UserController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('espace_personnel'));
+        $request->getSession()->getFlashBag()->add('success', 'Le compte a bien été supprimée.');
+        return $this->redirect($this->generateUrl('jdj_user_list', array('id' => $id)));
     }
 
     /**
@@ -223,7 +230,7 @@ class UserController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('espace_personnel_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'Supprimer'))
             ->getForm()
         ;
     }

@@ -1,7 +1,12 @@
 # src/JDJ/UserBundle/Resources/config/doctrine/User.orm.yml
 JDJ\UserBundle\Entity\User:
     type:  entity
+    repositoryClass: JDJ\UserBundle\Repository\UserRepository
     table: fos_user
+    gedmo:
+        soft_deleteable:
+          field_name: deletedAt
+          time_aware: false
     id:
       id:
         type: integer
@@ -45,6 +50,9 @@ JDJ\UserBundle\Entity\User:
         gedmo:
           timestampable:
             on: update
+      deletedAt:
+            type: date
+            nullable: true
     oneToMany:
         asAuthorParties:
           targetEntity: JDJ\PartieBundle\Entity\Partie

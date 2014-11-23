@@ -1,10 +1,11 @@
 {% extends "JDJWebBundle::layout.html.twig" %}
-{% block body -%}
+{% from 'JDJWebBundle:Macros:misc.html.twig' import pagination %}
+{% block body %}
     <h1>Liste des utilisateurs</h1>
 
     <ul>
         <li>
-            <a class="button add" href="{{ path('espace_personnel_new') }}">
+            <a class="button add" alt="Ajouter un nouvel utilisateur" href="{{ path('espace_personnel_new') }}">
                 Ajouter un nouvel utilisateur
             </a>
         </li>
@@ -26,30 +27,15 @@
         </thead>
         <tbody>
         {% for entity in entities %}
-            <tr>
-                <td>{{ entity.nom }}</td>
-                <td>{{ entity.prenom }}</td>
-                <td>{{ entity.avatar }}</td>
-                <td>{{ entity.presentation }}</td>
-                <td>{{ entity.slug }}</td>
-                <td>{% if entity.created %}{{ entity.created|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.updated %}{{ entity.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td class="small-4">
-                    <ul class="inline-list">
-                        <li>
-                            <a class="small button" href="{{ path('espace_personnel_edit', { 'id': entity.id }) }}">édition</a>
-                        </li>
-                        <li>
-                            {{ form_start(deleteForms[entity.id]) }}
-                            {{ form_widget(deleteForms[entity.id].submit, {'attr': {'class': 'small button'}, 'label': 'Supprimer'}) }}
-                            {{ form_end(deleteForms[entity.id]) }}
-                        </li>
-                    </ul>
-                </td>
-            </tr>
+            {% include 'JDJUserBundle:User/partial:_listElement.html.twig' with {'entity': entity} %}
         {% endfor %}
         </tbody>
     </table>
 
+    <div class="pagination-wrapper">
+        <div class="pagination-bottom">
+            {{ pagination(entities) }}
+        </div>
+    </div>
+{% endblock %}
 
-    {% endblock %}

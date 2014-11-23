@@ -1,12 +1,156 @@
-{% extends "JDJWebBundle::layout.html.twig" %}
+{% extends "FOSUserBundle::layout.html.twig" %}
+{% block fos_user_content %}
+{{ form_start(form) }}
+    <h1>Edition du compte de {{ entity.username }}</h1>
+    <div class="right inline">
+        <a href="{{ path('jdj_user_list') }}">
+            Retour à la liste des Utilisateurs
+        </a>
+    </div>
+    <div class="row">
+        {{ form_start(form) }}
+        {% if form_errors(form) %}
+            <div data-alert class="alert-box alert round">
+                {{ form_errors(form) }}
+            </div>
+        {% endif %}
 
-{% block body -%}
-    <h1>User edit</h1>
 
-    {{ form(edit_form) }}
+        {# Bloc form account credentials #}
+        <fieldset>
+            <legend>Mes informations de connexion</legend>
 
-        <ul class="record_actions">
+            <div class="small-8">
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="right-label" class="left inline">{{ form_label(form.username ) }}</label>
+                    </div>
+                    <div class="error">
+                        {{ form_errors(form.username) }}
+                    </div>
+                    <div class="small-9 columns">
+                        {{ form_widget(form.username) }}
+                    </div>
+                </div>
+            </div>
 
-    <li>{{ form(delete_form) }}</li>
-</ul>
-{% endblock %}
+            <div class="small-8">
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="right-label" class="left inline">{{ form_label(form.email) }}</label>
+                    </div>
+                    <div class="error">
+                        {{ form_errors(form.email) }}
+                    </div>
+                    <div class="small-9 columns">
+                        {{ form_widget(form.email) }}
+                    </div>
+                </div>
+            </div>
+
+        </fieldset>
+
+
+        {# Bloc form account password #}
+        <fieldset>
+
+            <div class="small-8">
+
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="right-label" class="left inline">{{ form_label(form.plainPassword) }}</label>
+                    </div>
+                    <div class="error">
+                        {{ form_errors(form.plainPassword) }}
+                    </div>
+                    <div class="small-9 columns">
+                        {{ form_widget(form.plainPassword) }}
+                    </div>
+                </div>
+            </div>
+
+        </fieldset>
+        {# Bloc form More user description #}
+        <fieldset>
+            <legend>Qui suis-je ?</legend>
+
+            <div class="small-8">
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="right-label" class="left inline">{{ form_label(form.nom) }}</label>
+                    </div>
+                    <div class="error">
+                        {{ form_errors(form.nom) }}
+                    </div>
+                    <div class="small-9 columns">
+                        {{ form_widget(form.nom) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="small-8">
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="right-label" class="left inline">{{ form_label(form.prenom) }}</label>
+                    </div>
+                    <div class="error">
+                        {{ form_errors(form.prenom) }}
+                    </div>
+                    <div class="small-9 columns">
+                        {{ form_widget(form.prenom) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="small-8">
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="right-label" class="left inline">{{ form_label(form.avatar) }}</label>
+                    </div>
+                    <div class="error">
+                        {{ form_errors(form.avatar) }}
+                    </div>
+                    <div class="small-9 columns">
+                        {{ form_widget(form.avatar) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="small-8">
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="right-label" class="left inline">{{ form_label(form.presentation) }}</label>
+                    </div>
+                    <div class="error">
+                        {{ form_errors(form.presentation) }}
+                    </div>
+                    <div class="small-9 columns">
+                        {{ form_widget(form.presentation) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="small-8">
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="right-label" class="left inline">{{ form_label(form.dateNaissance) }}</label>
+                    </div>
+                    <div class="error">
+                        {{ form_errors(form.dateNaissance) }}
+                    </div>
+                    <div class="small-9 columns">
+                        {{ form_widget(form.dateNaissance) }}
+                    </div>
+                </div>
+            </div>
+
+        </fieldset>
+
+
+        {{ form_widget(form._token) }}
+        {{ form_widget(form.submit) }}
+        {{ form_rest(form) }}
+    </div>
+    {{ form_end(form) }}
+</form>
+{% endblock fos_user_content %}

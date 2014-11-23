@@ -32,7 +32,7 @@ class UserContext extends DefaultContext
 
             /** @var User $user */
             $user = $userManager->createUser();
-
+            file_put_contents(__DIR__.'/../../../../web/behat/user-list.html', "1");
             $user
                 ->setUsername($data['username'])
                 ->setNom(isset($data['nom']) ? $data['nom'] : null)
@@ -40,11 +40,13 @@ class UserContext extends DefaultContext
                 ->setEmail($data['email'])
                 ->setPlainPassword($data['password'])
                 ->setEnabled(("yes" === $data['enabled']) ? 1 : 0)
+                ->setDeletedAt($data['deletedAt'])
             ;
+            file_put_contents(__DIR__.'/../../../../web/behat/user-list.html', "2");
 
             $userManager->updateUser($user);
         }
-
+        file_put_contents(__DIR__.'/../../../../web/behat/user-list.html', "3");
     }
 
 
@@ -69,5 +71,15 @@ class UserContext extends DefaultContext
         $manager->persist($user);
         $manager->flush();
     }
+
+
+    /**
+     * @Then /i test test$/
+     */
+    public function testest()
+    {
+        file_put_contents(__DIR__.'/../../../../web/behat/user-list.html', $this->getSession()->getPage()->getContent());
+    }
+
 
 } 

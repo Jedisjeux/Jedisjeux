@@ -18,12 +18,22 @@ class UserType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('avatar')
-            ->add('presentation')
-            ->add('slug')
-            ->add('dateNaissance')
-            ->add('created')
-            ->add('updated')
-            ->add('parties')
+            ->add('presentation', 'ckeditor', array(
+                'required' => false,
+            ))
+            ->add('username')
+            ->add('email')
+            ->add('plainPassword', 'repeated', array(
+                'type' => 'password',
+                'options' => array('translation_domain' => 'FOSUserBundle'),
+                'first_options' => array('label' => 'Mot de passe'),
+                'second_options' => array('label' => 'Vérification'),
+                'invalid_message' => 'fos_user.password.mismatch',
+            ))
+            ->add('dateNaissance', 'date', array(
+                'input'  => 'datetime',
+                'widget' => 'single_text',
+            ))
         ;
     }
     
