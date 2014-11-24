@@ -40,7 +40,7 @@ class UserContext extends DefaultContext
                 ->setEmail($data['email'])
                 ->setPlainPassword($data['password'])
                 ->setEnabled(("yes" === $data['enabled']) ? 1 : 0)
-                ->setDeletedAt($data['deletedAt'])
+
             ;
             file_put_contents(__DIR__.'/../../../../web/behat/user-list.html', "2");
 
