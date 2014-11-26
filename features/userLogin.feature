@@ -33,7 +33,6 @@ Feature: Sign in to the store
           And I am on "/login"
          When I press "Connexion"
          Then I should be on "/login"
-          And i test test
           And I should see "Droits invalides."
 
     Scenario: Trying to login as non existing user

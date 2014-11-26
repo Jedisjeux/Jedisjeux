@@ -73,13 +73,6 @@ class UserContext extends DefaultContext
     }
 
 
-    /**
-     * @Then /i test test$/
-     */
-    public function testest()
-    {
-        file_put_contents(__DIR__.'/../../../../web/behat/user-list.html', $this->getSession()->getPage()->getContent());
-    }
 
 
 } 

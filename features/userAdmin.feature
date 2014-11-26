@@ -56,7 +56,6 @@ Feature: Admin User account system (account administration)
       | Nom d'utilisateur | sbienvenu |
       | Mot de passe      | sbienvenu |
     And I press "Connexion"
-    And i test test
     Then I should be on "/admin/user-list"
     And I should see "Liste des utilisateurs"
     And I should see "édition"
@@ -71,7 +70,6 @@ Feature: Admin User account system (account administration)
       | Nom d'utilisateur | sbienvenu |
       | Mot de passe      | sbienvenu |
     And I press "Connexion"
-    And i test test
     Then I should be on "/admin/user-list"
     And I should see "Liste des utilisateurs"
     And I should see "édition"
