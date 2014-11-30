@@ -17,7 +17,7 @@ class UserRegistrationType extends AbstractType
         $builder
             ->add('nom')
             ->add('prenom')
-            ->add('avatarfile', 'file')
+            ->add('avatarFile', 'file')
             ->add('presentation', 'ckeditor', array(
                 'required' => false,
             ))

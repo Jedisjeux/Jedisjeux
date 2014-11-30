@@ -63,7 +63,7 @@ class User extends BaseUser
     /**
      * @var \Symfony\Component\HttpFoundation\File\UploadedFile
      */
-    public $avatarfile;
+    public $avatarFile;
 
     /**
      * @var string
@@ -379,45 +379,52 @@ class User extends BaseUser
         return null === $this->avatar ? null : $this->getUploadRootDir().'/'.$this->avatar;
     }
 
+    /**
+     * return the public url to the avatar
+     *
+     * @return null|string
+     */
     public function getWebPath()
     {
         return null === $this->avatar ? null : $this->getUploadDir().'/'.$this->avatar;
     }
 
+    /**
+     * get the absolute path to the upload directory
+     *
+     * @return string
+     */
     protected function getUploadRootDir()
     {
-        // le chemin absolu du répertoire où les documents uploadés doivent être sauvegardés
         return __DIR__.'/../../../../web/'.$this->getUploadDir();
     }
 
+    /**
+     * The path to the  avatar files
+     *
+     * @return string
+     */
     protected function getUploadDir()
     {
-        // on se débarrasse de « __DIR__ » afin de ne pas avoir de problème lorsqu'on affiche
-        // le document/image dans la vue.
         return 'uploads/avatar';
     }
 
+    /**
+     * This function uploads the file to the server
+     *
+     */
     public function upload()
     {
-        // la propriété « file » peut être vide si le champ n'est pas requis
-        if (null === $this->avatarfile) {
+        //Checks if the avatar is null
+        if (null === $this->avatarFile) {
             return;
         }
 
-        // utilisez le nom de fichier original ici mais
-        // vous devriez « l'assainir » pour au moins éviter
-        // quelconques problèmes de sécurité
+        $this->avatarFile->move($this->getUploadRootDir(), $this->avatarFile->getClientOriginalName());
+        $this->avatar = $this->avatarFile->getClientOriginalName();
 
-        // la méthode « move » prend comme arguments le répertoire cible et
-        // le nom de fichier cible où le fichier doit être déplacé
-        $this->avatarfile->move($this->getUploadRootDir(), $this->avatarfile->getClientOriginalName());
-
-        // définit la propriété « path » comme étant le nom de fichier où vous
-        // avez stocké le fichier
-        $this->avatar = $this->avatarfile->getClientOriginalName();
-
-        // « nettoie » la propriété « file » comme vous n'en aurez plus besoin
-        $this->avatarfile = null;
+        // Clean the avatar file
+        $this->avatarFile = null;
     }
 
 }
