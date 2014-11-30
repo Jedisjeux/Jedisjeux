@@ -9,6 +9,41 @@ use FOS\UserBundle\Model\User as BaseUser;
  */
 class User extends BaseUser
 {
+    /**
+     * @var integer
+     */
+    protected $id;
+
+    /**
+     * @var string
+     */
+    private $nom;
+
+    /**
+     * @var string
+     */
+    private $prenom;
+
+
+    /**
+     * @var string
+     */
+    private $slug;
+
+    /**
+     * @var \DateTime
+     */
+    private $dateNaissance;
+
+    /**
+     * @var \DateTime
+     */
+    private $created;
+
+    /**
+     * @var \DateTime
+     */
+    private $updated;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -19,6 +54,21 @@ class User extends BaseUser
      * @var \Doctrine\Common\Collections\Collection
      */
     private $parties;
+
+    /**
+     * @var string
+     */
+    private $avatar;
+
+    /**
+     * @var \Symfony\Component\HttpFoundation\File\UploadedFile
+     */
+    public $avatarfile;
+
+    /**
+     * @var string
+     */
+    private $presentation;
 
 
     public function __construct()
@@ -94,41 +144,7 @@ class User extends BaseUser
     {
         return $this->parties;
     }
-    /**
-     * @var integer
-     */
-    protected $id;
 
-    /**
-     * @var string
-     */
-    private $nom;
-
-    /**
-     * @var string
-     */
-    private $prenom;
-
-
-    /**
-     * @var string
-     */
-    private $slug;
-
-    /**
-     * @var \DateTime
-     */
-    private $dateNaissance;
-
-    /**
-     * @var \DateTime
-     */
-    private $created;
-
-    /**
-     * @var \DateTime
-     */
-    private $updated;
 
 
     /**
@@ -279,10 +295,7 @@ class User extends BaseUser
     {
         return $this->updated;
     }
-    /**
-     * @var string
-     */
-    private $avatar;
+
 
 
     /**
@@ -307,10 +320,7 @@ class User extends BaseUser
     {
         return $this->avatar;
     }
-    /**
-     * @var string
-     */
-    private $presentation;
+
 
 
     /**
@@ -363,4 +373,51 @@ class User extends BaseUser
     {
         return $this->deletedAt;
     }
+
+    public function getAbsolutePath()
+    {
+        return null === $this->avatar ? null : $this->getUploadRootDir().'/'.$this->avatar;
+    }
+
+    public function getWebPath()
+    {
+        return null === $this->avatar ? null : $this->getUploadDir().'/'.$this->avatar;
+    }
+
+    protected function getUploadRootDir()
+    {
+        // le chemin absolu du répertoire où les documents uploadés doivent être sauvegardés
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        // on se débarrasse de « __DIR__ » afin de ne pas avoir de problème lorsqu'on affiche
+        // le document/image dans la vue.
+        return 'uploads/avatar';
+    }
+
+    public function upload()
+    {
+        // la propriété « file » peut être vide si le champ n'est pas requis
+        if (null === $this->avatarfile) {
+            return;
+        }
+
+        // utilisez le nom de fichier original ici mais
+        // vous devriez « l'assainir » pour au moins éviter
+        // quelconques problèmes de sécurité
+
+        // la méthode « move » prend comme arguments le répertoire cible et
+        // le nom de fichier cible où le fichier doit être déplacé
+        $this->avatarfile->move($this->getUploadRootDir(), $this->avatarfile->getClientOriginalName());
+
+        // définit la propriété « path » comme étant le nom de fichier où vous
+        // avez stocké le fichier
+        $this->avatar = $this->avatarfile->getClientOriginalName();
+
+        // « nettoie » la propriété « file » comme vous n'en aurez plus besoin
+        $this->avatarfile = null;
+    }
+
 }

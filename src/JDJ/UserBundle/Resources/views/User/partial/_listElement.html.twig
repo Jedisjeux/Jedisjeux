@@ -1,7 +1,7 @@
 <tr>
     <td>{{ entity.nom }}</td>
     <td>{{ entity.prenom }}</td>
-    <td>{{ entity.avatar }}</td>
+    <td><img width="100"  src="{{ asset(entity.getWebPath) }}"/></td>
     <td>{{ entity.presentation }}</td>
     <td>{{ entity.slug }}</td>
     <td>{% if entity.created %}{{ entity.created|date('Y-m-d H:i:s') }}{% endif %}</td>

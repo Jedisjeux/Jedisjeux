@@ -16,9 +16,6 @@ class RegistrationController extends BaseController
     /**
      * This function overrides the Fosuserbundle registerAction function to add custom behaviour
      *
-     * TODO DONOT KNOW for now after register -> redirect to the profile page
-     * TODO Email to send? redirect to another page?
-     *
      * @param Request $request
      * @return null|RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -57,11 +54,6 @@ class RegistrationController extends BaseController
                 // authenticate the user right now
                 $this->authenticateUser($user);
 
-                // if you're using Symfony 2.0
-                $key = '_security.target_path';
-
-                // if you're using Symfony 2.1 or greater
-                // where "main" is the name of your firewall in security.yml
                 $key = '_security.main.target_path';
 
                 if (null === $response = $event->getResponse()) {
@@ -70,14 +62,13 @@ class RegistrationController extends BaseController
                     $response = new RedirectResponse($url);
                 }
 
-                //$dispatcher->dispatch(FOSUserEvents::REGISTRATION_CONFIRMED, new FilterUserResponseEvent($user, $request, $response));
-
                 return $response;
             }
         }
 
         return $this->container->get('templating')->renderResponse('JDJUserBundle:Registration:register.html.twig', array(
             'form' => $form->createView(),
+            'entity' => $user,
         ));
 
     }

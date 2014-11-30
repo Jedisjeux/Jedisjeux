@@ -1,60 +1,24 @@
-{% extends '::base.html.twig' %}
+{% extends "JDJWebBundle::layout.html.twig" %}
 
 {% block body -%}
-    <h1>User</h1>
 
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ entity.nom }}</td>
-            </tr>
-            <tr>
-                <th>Prenom</th>
-                <td>{{ entity.prenom }}</td>
-            </tr>
-            <tr>
-                <th>Avatar</th>
-                <td>{{ entity.avatar }}</td>
-            </tr>
-            <tr>
-                <th>Presentation</th>
-                <td>{{ entity.presentation }}</td>
-            </tr>
-            <tr>
-                <th>Slug</th>
-                <td>{{ entity.slug }}</td>
-            </tr>
-            <tr>
-                <th>Datenaissance</th>
-                <td>{{ entity.dateNaissance|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Created</th>
-                <td>{{ entity.created|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Updated</th>
-                <td>{{ entity.updated|date('Y-m-d H:i:s') }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="large-12 columns">
+            <div class="medium-4 columns">
+                <img src="{{ asset(entity.getWebPath) }}"/>
+            </div>
+            <div class="medium-8 columns">
+                <h2>{{ entity.username }} </h2>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('espace_personnel') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('espace_personnel_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+
+                <div class="row">
+                    <label class="medium-3 column">Total</label>
+                    <div class="medium-9 column">{{ jeux|length }} jeux</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'JDJUserBundle:User/partial:onglet.html.twig' %}
+
 {% endblock %}

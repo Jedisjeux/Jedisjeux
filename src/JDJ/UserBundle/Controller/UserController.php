@@ -3,6 +3,7 @@
 namespace JDJ\UserBundle\Controller;
 
 use JDJ\UserBundle\Repository\UserRepository;
+use Symfony\Bundle\AsseticBundle\Tests\Command\DumpCommandTest;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -53,6 +54,7 @@ class UserController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $entity->upload();
             $em->persist($entity);
             $em->flush();
             $request->getSession()->getFlashBag()->add('success', 'Le compte a bien été créé.');
@@ -103,7 +105,7 @@ class UserController extends Controller
      * Finds and displays a User entity.
      *
      */
-    public function showAction($id)
+    public function showAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -113,11 +115,25 @@ class UserController extends Controller
             throw $this->createNotFoundException('Unable to find User entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
+        /** @var JeuRepository $jeuReposititory */
+        $jeuReposititory = $em->getRepository('JDJJeuBundle:Jeu');
+        /** @var PagerFanta $jeux */
+        $jeux = $jeuReposititory->createPaginator(array("personne" => $entity));
+        $jeux->setMaxPerPage(16);
+        $jeux->setCurrentPage($request->get('page', 1));
+
+
+        /** @var EntityRepository $userReviewReposititory */
+        $userReviewReposititory = $em->getRepository('JDJUserReviewBundle:UserReview');
+        /** @var PagerFanta $userReviews */
+        $userReviews = $userReviewReposititory->createPaginator(array("personne" => $entity));
+        $userReviews->setMaxPerPage(10);
+        $userReviews->setCurrentPage($request->get('page', 1));
 
         return $this->render('JDJUserBundle:User:show.html.twig', array(
             'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
+            'jeux' => $jeux,
+            'userReviews' => $userReviews,
         ));
     }
 
@@ -182,6 +198,8 @@ class UserController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            $entity->upload();
+            $em->persist($entity);
             $em->flush();
             $request->getSession()->getFlashBag()->add('success', 'Le compte a bien été mis à jour.');
             return $this->redirect($this->generateUrl('jdj_user_list', array('id' => $id)));
@@ -234,4 +252,5 @@ class UserController extends Controller
             ->getForm()
         ;
     }
+
 }
