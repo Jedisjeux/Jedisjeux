@@ -31,3 +31,6 @@ file-type: scss
 scope: project files
 program: compass
 compile /src/JDJ/WebBundle/Resources/public
+
+
+test
