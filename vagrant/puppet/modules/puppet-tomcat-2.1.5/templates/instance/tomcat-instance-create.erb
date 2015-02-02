@@ -1,0 +1,187 @@
+#!/bin/sh
+# Script to create a CATALINA_BASE directory for your own tomcat
+# File Managed by Puppet
+# This script is taken from Debian's tomcat-user package and adapted
+# to take more variable based system
+
+PROG=`basename $0`
+TARGET=""
+HPORT=8080
+CPORT=8005
+APORT=8009
+CWORD="SHUTDOWN"
+OWNER=root
+GROUP=root
+warned=0
+warnlowport=0
+
+usage() {
+  echo "Usage: $PROG [options] <directoryname>"
+  echo "  directoryname: name of the tomcat instance directory to create"
+  echo "Options:"
+  echo "  -h, --help       Display this help message"
+  echo "  -p httpport      HTTP port to be used by Tomcat (default is $HPORT)"
+  echo "  -a ajpport       AJP port to be used by Tomcat (default is $APORT)"
+  echo "  -c controlport   Server shutdown control port (default is $CPORT)"
+  echo "  -w magicword     Word to send to trigger shutdown (default is $CWORD)"
+  echo "  -o owner         User that owns the created runtime dirs (default is $OWNER)"
+  echo "  -g group         Group that owns the created runtime dirs (default is $GROUP)"
+  echo "  -r runtimedir    Optional Path of a directory where to move webapps, work and tmp dirs"
+}
+
+checkport() {
+  type=$1
+  port=$2
+  # Fail if port is non-numeric
+  num=`expr ${port} + 1 2> /dev/null`
+  if [ $? != 0 ] || [ $num -lt 2 ]; then
+    echo "Error: ${type} port '${port}' is not a valid TCP port number."
+    exit 1
+  fi
+
+  # Fail if port is above 65535
+  if [ ${port} -gt 65535 ]; then
+    echo "Error: ${type} port ${port} is above TCP port numbers (> 65535)."
+    exit 1
+  fi
+
+  # Warn if port is below 1024 (once)
+  if [ ${warnlowport} -eq 0 ]; then 
+    if [ ${port} -lt 1024 ]; then
+      echo "Warning: ports below 1024 are reserved to the super-user."
+      warnlowport=1
+      warned=1
+    fi
+  fi
+
+  # Warn if port appears to be in use
+  if nc localhost "${port}" -z > /dev/null; then
+	echo "Warning: ${type} port ${port} appears to be in use."
+	warned=1
+  fi
+}
+
+if [ "$#" -lt 1 ]; then
+  usage
+  exit 1
+fi
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+  usage
+  exit 0
+fi
+
+
+while getopts ":p:c:a:w:o:g:r:h" options; do
+  case $options in
+    p ) HPORT=$OPTARG ;;
+    a ) APORT=$OPTARG ;;
+    c ) CPORT=$OPTARG ;;
+    w ) CWORD=$OPTARG ;;
+    o ) OWNER=$OPTARG ;;
+    g ) GROUP=$OPTARG ;;
+    r ) RUNTIMEDIR=$OPTARG ;;
+    h ) usage;;
+    * ) echo "Error: Unknown parameter '$OPTARG'."
+        exit 1;;
+  esac
+done
+
+shift $(($OPTIND - 1))
+TARGET=$1
+shift
+echo "You are about to create a Tomcat instance in directory '$TARGET'"
+
+# Fail if no target specified
+if [ -z "${TARGET}" ]; then
+  echo "Error: No target directory specified (use -d)."
+  exit 1
+fi
+
+# Fail if ports are the same
+if [ "${HPORT}" = "${CPORT}" ]; then
+  echo "Error: HTTP port and control port must be different."
+  exit 1
+fi
+
+# Fail if target directory already exists
+if [ -d "${TARGET}" ]; then
+  echo "Error: Target directory already exists."
+  exit 1
+fi
+
+# Check ports
+checkport HTTP "${HPORT}"
+checkport Control "${CPORT}"
+[ -z "${APORT}" ] || checkport AJP "${APORT}"
+
+# Ask for confirmation if warnings were printed out
+if [ ${warned} -eq 1 ]; then 
+  echo "Type <ENTER> to continue, <CTRL-C> to abort."
+  read answer
+fi
+
+LONGNAME=`basename ${TARGET}`
+INSTANCE_NAME=`echo ${LONGNAME} | awk -F - {'print $2'}`
+
+mkdir -p ${TARGET}
+
+FULLTARGET=`cd ${TARGET} > /dev/null && pwd`
+
+if [ -z "${RUNTIMEDIR}" ]; then
+  REALRUNTIMEDIR=${TARGET}
+else
+  REALRUNTIMEDIR=${RUNTIMEDIR}
+  mkdir -p ${REALRUNTIMEDIR}
+  ln -s ${REALRUNTIMEDIR}/webapps ${TARGET}/webapps
+  ln -s ${REALRUNTIMEDIR}/work ${TARGET}/work
+  ln -s ${REALRUNTIMEDIR}/temp ${TARGET}/temp
+fi
+
+mkdir -p ${REALRUNTIMEDIR}/webapps
+cp -a <%= scope.lookupvar('tomcat::params::data_dir') %>/ROOT ${REALRUNTIMEDIR}/webapps/
+chown -R ${OWNER}:${GROUP} ${REALRUNTIMEDIR}/webapps
+
+mkdir -p ${REALRUNTIMEDIR}/work
+chown ${OWNER}:${GROUP} ${REALRUNTIMEDIR}/work
+
+mkdir -p ${REALRUNTIMEDIR}/temp
+chown ${OWNER}:${GROUP} ${REALRUNTIMEDIR}/temp
+
+mkdir -p <%= scope.lookupvar('tomcat::params::config_dir') %>-${INSTANCE_NAME}
+ln -s <%= scope.lookupvar('tomcat::params::config_dir') %>-${INSTANCE_NAME} ${TARGET}/conf
+
+mkdir -p <%= scope.lookupvar('tomcat::params::log_dir') %>-${INSTANCE_NAME}
+chown ${OWNER}:${GROUP} <%= scope.lookupvar('tomcat::params::log_dir') %>-${INSTANCE_NAME}
+ln -s <%= scope.lookupvar('tomcat::params::log_dir') %>-${INSTANCE_NAME} ${TARGET}/logs
+
+mkdir -p ${TARGET}/bin
+
+cp -a <%= scope.lookupvar('tomcat::params::config_dir') %>/* ${TARGET}/conf/
+
+sed -i -e "s/Connector port=\"8080\"/Connector port=\"${HPORT}\"/;s/Server port=\"8005\" shutdown=\"SHUTDOWN\"/Server port=\"${CPORT}\" shutdown=\"${CWORD}\"/" ${TARGET}/conf/server.xml
+
+<% if scope.lookupvar('::operatingsystem') == 'Debian' || scope.lookupvar('::operatingsystem') == 'Ubuntu' -%>
+[ -z "${APORT}" ] || sed -i -e '/<!-- Define an AJP 1.3/{:a;n;/^$/!ba;i\    <Connector port=\"8009\" protocol=\"AJP\/1.3\" redirectPort=\"8443\" />' -e '}' ${TARGET}/conf/server.xml 
+<% end -%>
+
+sed -i -e "s/Connector port=\"8009\"/Connector port=\"${APORT}\"/g" ${TARGET}/conf/server.xml
+
+cat > ${TARGET}/bin/startup.sh << EOT
+#!/bin/sh
+export CATALINA_BASE=${FULLTARGET}
+/usr/share/<%= scope.lookupvar('tomcat::params::pkgver') %>/bin/startup.sh
+echo "Tomcat started"
+EOT
+
+cat > ${TARGET}/bin/shutdown.sh << EOT
+#!/bin/sh
+export CATALINA_BASE=${FULLTARGET}
+/usr/share/<%= scope.lookupvar('tomcat::params::pkgver') %>/bin/shutdown.sh
+echo "Tomcat stopped"
+EOT
+
+chmod a+x ${TARGET}/bin/startup.sh ${TARGET}/bin/shutdown.sh
+echo "* New Tomcat instance created in ${TARGET}"
+echo "* You might want to edit default configuration in ${TARGET}/conf"
+echo "* Run ${TARGET}/bin/startup.sh to start your Tomcat instance"
+

@@ -6,10 +6,13 @@
 /*  	    		  Defines Colors                          */
 /**************************************************************/
 
-$lightgrey: #efefef;
-$lightgreen: #98CA46;
+$lightgrey: #eaedf1;
+$lightgreen: #1fbba6;
 $darkblack: #333333;
-$lightblue: #00B6DE;
+$lightblue: #00b6de;
+$lightorange: #f27935;
+$darkblue: #323a45;
+$mediumgrey: #9ea7b3;
 
 /**************************************************************/
 /*  	    		  IMPORT Modules					      */
@@ -23,9 +26,42 @@ $lightblue: #00B6DE;
 
 body {
   font-size: 1em;
-  color: #737373;
+  color: black;
   font-family: "Open Sans", sans-serif;
-  background: #F6F8FB url("http://www.jedisjeux.net/img/design/icons/fd_Body.png");
+  background: $mediumgrey;
+}
+
+body div.row div.large-12.columns {
+  background: $lightgrey;
+}
+
+/**************************************************************/
+/*  	    		       Titres					          */
+/**************************************************************/
+
+h1 {
+  font-size: 2em;
+  color: #5e6d81;
+}
+
+h2 {
+
+}
+
+h3 {
+  font-size: 1.2em;
+}
+
+h4 {
+  font-size: 1em;
+}
+
+h5 {
+
+}
+
+h6 {
+
 }
 
 /**************************************************************/
@@ -34,12 +70,16 @@ body {
 
 header {
   .menu {
-    background: url("http://januarycreative.com/wp-content/themes/januarycreative/img/greybg.png");
+    background: $darkblue;
   }
 }
 
 .banner {
   background: $lightblue;
+}
+
+.top-bar-section li:not(.has-form) a:not(.button) {
+  background: $darkblue;
 }
 
 
@@ -52,7 +92,6 @@ header {
   .name {
     h1{
       font-size: 2rem;
-
     }
   }
   ul {
@@ -92,33 +131,6 @@ footer {
 
 }
 
-/**************************************************************/
-/*  	    		       Titres					          */
-/**************************************************************/
-
-h1 {
-   font-size: 2em;
-}
-
-h2 {
-
-}
-
-h3 {
-  font-size: 1.2em;
-}
-
-h4 {
-  font-size: 1em;
-}
-
-h5 {
-
-}
-
-h6 {
-
-}
 
 /**************************************************************/
 /*  	    		       Liens					          */
@@ -165,6 +177,7 @@ button, a.button {
   }
 
   .panel {
+
     h3, h3 a {
       font-size: 0.9em;
       color: #555;
@@ -221,14 +234,15 @@ table {
 
 .tabs {
   margin-top: 1rem;
-  background: $lightgrey;
+  background: $darkblue;
+  border-radius: 5px;
   li.active.tab-title a {
     background: url("http://januarycreative.com/wp-content/themes/januarycreative/img/greybg.png");
     color: white;
   }
   dd > a, .tab-title > a {
     background: transparent;
-    color: black;
+    color: $mediumgrey;
     padding: 0.5rem 1.5rem;
   }
 }
@@ -243,4 +257,15 @@ div [role=content] {
 
 .publication-info {
   font-style: italic;
+}
+
+.spacer {
+  height: 1em;
+}
+
+.ui-autocomplete-category {
+  font-weight: bold;
+  padding: .2em .4em;
+  margin: .8em 0 .2em;
+  line-height: 1.5;
 }

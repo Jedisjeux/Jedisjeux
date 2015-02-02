@@ -4,14 +4,19 @@
     </div>
 {% endif %}
 
-<div class="row">
+<div class="row columns">
     <div class="panel materiel medium-4 columns">
         <h3>Matériel</h3>
         <img src="http://www.jedisjeux.net/img/800/p-3305.jpg" />
         <ul>
+            {% set item = 0 %}
             {% for row in jeu.materiel|split("\n") %}
-                <li>{{ row }}</li>
+                {% set item = item+1 %}
+                <li {% if (item > 5 ) %} style="display: none;"{% endif %}>{{ row }}</li>
             {% endfor %}
+            {% if (item > 5 ) %}
+                <li>Plus</li>
+            {% endif %}
         </ul>
     </div>
 
@@ -23,9 +28,7 @@
             </div>
         {% endif %}
 
-        <div class="description columns">
-            <h3>Description du jeu</h3>
-
+        <div class="description columns panel">
             {{ jeu.description|raw }}
         </div>
     </div>
