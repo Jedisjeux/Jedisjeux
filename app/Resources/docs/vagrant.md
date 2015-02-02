@@ -1,35 +1,48 @@
 
-1/ create a file 
+1/ go to your vagrant directory in the jdj project
 
 ``` bash
-/etc/apache2/sites-available/jedisjeux.symfony.conf
+cd vagrant/
+vagrant up
 ```
 
-2/ copy this lines :
+2/ connecting onto your vagrant
 
-<VirtualHost *:80>
-	ServerName jedisjeux.symfony
-	ServerAlias jedisjeux.symfony
-	DocumentRoot /home/vagrant/www/jdj/web
- 	<Directory /home/vagrant/www/jdj/web/>
-		DirectoryIndex index.php
-		AllowOverride All
-		Order allow,deny
-		Allow from all
-	</Directory>
-
-	ErrorLog ${APACHE_LOG_DIR}/jedisjeux-error.log
-
-	# Possible values include: debug, info, notice, warn, error, crit,
-	# alert, emerg.
-	LogLevel warn
-
-	CustomLog ${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>
-
-
-3/ run this lines :
 ``` bash
-    sudo a2ensite jedisjeux.symfony
-    sudo service apache2 restart
+vagrant ssh
+```
+
+3/ change your local hosts file
+
+on linux
+
+``` bash
+sudo vim etc/hosts
+```
+
+and adding following line :
+127.0.0.1       jdj.dev
+
+
+4/ download an archive of the jedisjeux database :
+
+``` bash
+cd /var/www/jdj
+scp admin@jedisjeux.net:/srv/d_jedisjeux/www/sav/dmp_jdj_1.sql.gz ./
+```
+
+enter the admin password of admin account
+
+5/ unzip your archive and restore the database
+
+``` bash
+gzip -d dmp_jdj_1.sql.gz
+mysql -u root jedisjeux < dmp_jdj_1.sql
+```
+
+6/ create your empty database
+
+``` bash
+php app/console do:sc:up --force
+php app/console doctrine:fixtures:load --fixtures=src/JDJ/
 ```

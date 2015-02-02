@@ -35,7 +35,7 @@ insert into jdj_illustrateur_jeu (
 )
 select      personne.id,
             jeu.id
-from        old_jedisjeux.jdj_personne_game old
+from        jedisjeux.jdj_personne_game old
 inner join  jdj_jeu jeu
                 on jeu.id = old.id_game
 inner join  jdj_personne personne

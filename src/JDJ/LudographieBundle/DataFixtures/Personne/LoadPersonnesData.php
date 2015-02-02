@@ -48,7 +48,7 @@ select      old.id,
             pays.id,
             old.photo,
             replace(old.nom_clean, ' ', '-') as slug
-from        old_jedisjeux.jdj_personnes old
+from        jedisjeux.jdj_personnes old
 left join   jdj_pays pays
                 on CONVERT(pays.libelle USING utf8) = CONVERT(old.nationnalite USING utf8)
 where       old.id <> 14

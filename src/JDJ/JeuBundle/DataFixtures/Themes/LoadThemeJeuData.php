@@ -34,7 +34,7 @@ class LoadThemeJeuData extends ContainerAware implements FixtureInterface, Order
                     jeu_id, theme_id
         )
         select      jeux_id, theme_id
-        from        old_jedisjeux.jdj_themelieur ml
+        from        jedisjeux.jdj_themelieur ml
         inner join  jdj_jeu jeu
                         on jeu.id = ml.jeux_id
 EOM;
