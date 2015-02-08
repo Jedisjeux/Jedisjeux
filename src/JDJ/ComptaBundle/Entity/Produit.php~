@@ -136,4 +136,42 @@ class Produit
     {
         return $this->factures;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $factureProduits;
+
+
+    /**
+     * Add factureProduits
+     *
+     * @param \JDJ\ComptaBundle\Entity\FactureProduit $factureProduits
+     * @return Produit
+     */
+    public function addFactureProduit(\JDJ\ComptaBundle\Entity\FactureProduit $factureProduits)
+    {
+        $this->factureProduits[] = $factureProduits;
+
+        return $this;
+    }
+
+    /**
+     * Remove factureProduits
+     *
+     * @param \JDJ\ComptaBundle\Entity\FactureProduit $factureProduits
+     */
+    public function removeFactureProduit(\JDJ\ComptaBundle\Entity\FactureProduit $factureProduits)
+    {
+        $this->factureProduits->removeElement($factureProduits);
+    }
+
+    /**
+     * Get factureProduits
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFactureProduits()
+    {
+        return $this->factureProduits;
+    }
 }

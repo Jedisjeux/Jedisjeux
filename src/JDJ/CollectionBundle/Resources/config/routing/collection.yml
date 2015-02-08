@@ -1,0 +1,30 @@
+collection:
+    path:     /
+    defaults: { _controller: "JDJCollectionBundle:Collection:index" }
+
+collection_show:
+    path:     /{id}/show
+    defaults: { _controller: "JDJCollectionBundle:Collection:show" }
+
+collection_new:
+    path:     /new
+    defaults: { _controller: "JDJCollectionBundle:Collection:new" }
+
+collection_create:
+    path:     /create
+    defaults: { _controller: "JDJCollectionBundle:Collection:create" }
+    requirements: { _method: post }
+
+collection_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "JDJCollectionBundle:Collection:edit" }
+
+collection_update:
+    path:     /{id}/update
+    defaults: { _controller: "JDJCollectionBundle:Collection:update" }
+    requirements: { _method: post|put }
+
+collection_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "JDJCollectionBundle:Collection:delete" }
+    requirements: { _method: post|delete }

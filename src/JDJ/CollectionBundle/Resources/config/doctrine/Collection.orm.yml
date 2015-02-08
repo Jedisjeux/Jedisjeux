@@ -1,0 +1,34 @@
+JDJ\CollectionBundle\Entity\Collection:
+  type: entity
+  table: jdj_collection
+  id:
+    id:
+      type: integer
+      unsigned: true
+      generator:
+        strategy: IDENTITY
+  fields:
+      name:
+        type: string
+        nullable: false
+        length: 100
+      description:
+        type: text
+        nullable: true
+      slug:
+        type: string
+        length: 128
+        gedmo:
+          slug:
+            separator: -
+            style: default
+            fields:
+              - name
+  manyToOne:
+      user:
+        targetEntity: JDJ\UserBundle\Entity\User
+        inversedBy: Collections
+  manyToMany:
+      collectionElements:
+        targetEntity: JDJ\JeuBundle\Entity\Jeu
+        mappedBy: collections

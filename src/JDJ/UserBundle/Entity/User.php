@@ -335,4 +335,80 @@ class User extends BaseUser
     {
         return $this->presentation;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $UserGameAttributes;
+
+
+    /**
+     * Add UserGameAttributes
+     *
+     * @param \JDJ\CollectionBundle\Entity\UserGameAttributes $userGameAttributes
+     * @return User
+     */
+    public function addUserGameAttribute(\JDJ\CollectionBundle\Entity\UserGameAttributes $userGameAttributes)
+    {
+        $this->UserGameAttributes[] = $userGameAttributes;
+
+        return $this;
+    }
+
+    /**
+     * Remove UserGameAttributes
+     *
+     * @param \JDJ\CollectionBundle\Entity\UserGameAttributes $userGameAttributes
+     */
+    public function removeUserGameAttribute(\JDJ\CollectionBundle\Entity\UserGameAttributes $userGameAttributes)
+    {
+        $this->UserGameAttributes->removeElement($userGameAttributes);
+    }
+
+    /**
+     * Get UserGameAttributes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUserGameAttributes()
+    {
+        return $this->UserGameAttributes;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $Collections;
+
+
+    /**
+     * Add Collections
+     *
+     * @param \JDJ\CollectionBundle\Entity\Collection $collections
+     * @return User
+     */
+    public function addCollection(\JDJ\CollectionBundle\Entity\Collection $collections)
+    {
+        $this->Collections[] = $collections;
+
+        return $this;
+    }
+
+    /**
+     * Remove Collections
+     *
+     * @param \JDJ\CollectionBundle\Entity\Collection $collections
+     */
+    public function removeCollection(\JDJ\CollectionBundle\Entity\Collection $collections)
+    {
+        $this->Collections->removeElement($collections);
+    }
+
+    /**
+     * Get Collections
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCollections()
+    {
+        return $this->Collections;
+    }
 }

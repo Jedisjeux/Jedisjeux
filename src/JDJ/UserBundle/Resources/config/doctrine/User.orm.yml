@@ -49,6 +49,12 @@ JDJ\UserBundle\Entity\User:
         asAuthorParties:
           targetEntity: JDJ\PartieBundle\Entity\Partie
           mappedBy: author
+        UserGameAttributes:
+          targetEntity: JDJ\CollectionBundle\Entity\UserGameAttribute
+          mappedBy: user
+        Collections:
+          targetEntity: JDJ\CollectionBundle\Entity\Collection
+          mappedBy: user
     manyToMany:
         parties:
           targetEntity: JDJ\PartieBundle\Entity\Partie

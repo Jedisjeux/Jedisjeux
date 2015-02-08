@@ -730,4 +730,80 @@ class Jeu
     {
         return $this->cible;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $UserGameAttributes;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $collections;
+
+
+    /**
+     * Add UserGameAttributes
+     *
+     * @param \JDJ\CollectionBundle\Entity\UserGameAttribute $userGameAttributes
+     * @return Jeu
+     */
+    public function addUserGameAttribute(\JDJ\CollectionBundle\Entity\UserGameAttribute $userGameAttributes)
+    {
+        $this->UserGameAttributes[] = $userGameAttributes;
+
+        return $this;
+    }
+
+    /**
+     * Remove UserGameAttributes
+     *
+     * @param \JDJ\CollectionBundle\Entity\UserGameAttribute $userGameAttributes
+     */
+    public function removeUserGameAttribute(\JDJ\CollectionBundle\Entity\UserGameAttribute $userGameAttributes)
+    {
+        $this->UserGameAttributes->removeElement($userGameAttributes);
+    }
+
+    /**
+     * Get UserGameAttributes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUserGameAttributes()
+    {
+        return $this->UserGameAttributes;
+    }
+
+    /**
+     * Add collections
+     *
+     * @param \JDJ\CollectionBundle\Entity\Collection $collections
+     * @return Jeu
+     */
+    public function addCollection(\JDJ\CollectionBundle\Entity\Collection $collections)
+    {
+        $this->collections[] = $collections;
+
+        return $this;
+    }
+
+    /**
+     * Remove collections
+     *
+     * @param \JDJ\CollectionBundle\Entity\Collection $collections
+     */
+    public function removeCollection(\JDJ\CollectionBundle\Entity\Collection $collections)
+    {
+        $this->collections->removeElement($collections);
+    }
+
+    /**
+     * Get collections
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCollections()
+    {
+        return $this->collections;
+    }
 }

@@ -1,0 +1,34 @@
+JDJ\CollectionBundle\Entity\UserGameAttribute:
+  type: entity
+  table: jdj_user_game_attribute
+  id:
+    user_id:
+      type: integer
+    jeu_id:
+      type: integer
+  fields:
+      is_favorite:
+        type: boolean
+        nullable: false
+      is_owned:
+        type: boolean
+        nullable: false
+      is_wanted:
+        type: boolean
+        nullable: false
+      has_played:
+        type: boolean
+        nullable: false
+  manyToOne:
+      user:
+        targetEntity: JDJ\UserBundle\Entity\User
+        inversedBy: UserGameAttributes
+        joinColumn:
+          user_id:
+            referencedColumnName: id
+      jeu:
+        targetEntity: JDJ\JeuBundle\Entity\Jeu
+        inversedBy: UserGameAttributes
+        joinColumn:
+          jeu_id:
+            referencedColumnName: id
