@@ -7,17 +7,21 @@ JDJ\CollectionBundle\Entity\UserGameAttribute:
     jeu_id:
       type: integer
   fields:
-      is_favorite:
+      favorite:
         type: boolean
+        column: is_favorite
         nullable: false
-      is_owned:
+      owned:
         type: boolean
+        column: is_owned
         nullable: false
-      is_wanted:
+      wanted:
         type: boolean
+        column: is_wanted
         nullable: false
-      has_played:
+      played:
         type: boolean
+        column: has_played
         nullable: false
   manyToOne:
       user:

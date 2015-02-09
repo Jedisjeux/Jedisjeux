@@ -10,24 +10,24 @@ use Doctrine\ORM\Mapping as ORM;
 class UserGameAttribute
 {
     /**
-     * @var tinyint
+     * @var boolean
      */
-    private $is_favorite;
+    private $favorite;
 
     /**
-     * @var tinyint
+     * @var boolean
      */
-    private $is_owned;
+    private $owned;
 
     /**
-     * @var tinyint
+     * @var boolean
      */
-    private $is_wanted;
+    private $wanted;
 
     /**
-     * @var tinyint
+     * @var boolean
      */
-    private $has_played;
+    private $played;
 
     /**
      * @var \JDJ\UserBundle\Entity\User
@@ -39,98 +39,16 @@ class UserGameAttribute
      */
     private $jeu;
 
+    /**
+     * @var integer
+     */
+    private $user_id;
 
     /**
-     * Set is_favorite
-     *
-     * @param \tinyint $isFavorite
-     * @return UserGameAttribute
+     * @var integer
      */
-    public function setIsFavorite(\tinyint $isFavorite)
-    {
-        $this->is_favorite = $isFavorite;
+    private $jeu_id;
 
-        return $this;
-    }
-
-    /**
-     * Get is_favorite
-     *
-     * @return \tinyint 
-     */
-    public function getIsFavorite()
-    {
-        return $this->is_favorite;
-    }
-
-    /**
-     * Set is_owned
-     *
-     * @param \tinyint $isOwned
-     * @return UserGameAttribute
-     */
-    public function setIsOwned(\tinyint $isOwned)
-    {
-        $this->is_owned = $isOwned;
-
-        return $this;
-    }
-
-    /**
-     * Get is_owned
-     *
-     * @return \tinyint 
-     */
-    public function getIsOwned()
-    {
-        return $this->is_owned;
-    }
-
-    /**
-     * Set is_wanted
-     *
-     * @param \tinyint $isWanted
-     * @return UserGameAttribute
-     */
-    public function setIsWanted(\tinyint $isWanted)
-    {
-        $this->is_wanted = $isWanted;
-
-        return $this;
-    }
-
-    /**
-     * Get is_wanted
-     *
-     * @return \tinyint 
-     */
-    public function getIsWanted()
-    {
-        return $this->is_wanted;
-    }
-
-    /**
-     * Set has_played
-     *
-     * @param \tinyint $hasPlayed
-     * @return UserGameAttribute
-     */
-    public function setHasPlayed(\tinyint $hasPlayed)
-    {
-        $this->has_played = $hasPlayed;
-
-        return $this;
-    }
-
-    /**
-     * Get has_played
-     *
-     * @return \tinyint 
-     */
-    public function getHasPlayed()
-    {
-        return $this->has_played;
-    }
 
     /**
      * Set user
@@ -177,15 +95,98 @@ class UserGameAttribute
     {
         return $this->jeu;
     }
-    /**
-     * @var integer
-     */
-    private $user_id;
 
     /**
-     * @var integer
+     * Set favorite
+     *
+     * @param boolean $favorite
+     * @return UserGameAttribute
      */
-    private $jeu_id;
+    public function setFavorite($favorite)
+    {
+        $this->favorite = $favorite;
+
+        return $this;
+    }
+
+    /**
+     * Get favorite
+     *
+     * @return boolean 
+     */
+    public function isFavorite()
+    {
+        return $this->favorite;
+    }
+
+    /**
+     * Set owned
+     *
+     * @param boolean $owned
+     * @return UserGameAttribute
+     */
+    public function setOwned($owned)
+    {
+        $this->owned = $owned;
+
+        return $this;
+    }
+
+    /**
+     * Get owned
+     *
+     * @return boolean 
+     */
+    public function isOwned()
+    {
+        return $this->owned;
+    }
+
+    /**
+     * Set wanted
+     *
+     * @param boolean $wanted
+     * @return UserGameAttribute
+     */
+    public function setWanted($wanted)
+    {
+        $this->wanted = $wanted;
+
+        return $this;
+    }
+
+    /**
+     * Get wanted
+     *
+     * @return boolean 
+     */
+    public function isWanted()
+    {
+        return $this->wanted;
+    }
+
+    /**
+     * Set played
+     *
+     * @param boolean $played
+     * @return UserGameAttribute
+     */
+    public function setPlayed($played)
+    {
+        $this->played = $played;
+
+        return $this;
+    }
+
+    /**
+     * Get played
+     *
+     * @return boolean 
+     */
+    public function hasPlayed()
+    {
+        return $this->played;
+    }
 
 
     /**
@@ -233,4 +234,5 @@ class UserGameAttribute
     {
         return $this->jeu_id;
     }
+
 }
