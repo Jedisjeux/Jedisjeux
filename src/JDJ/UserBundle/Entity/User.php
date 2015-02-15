@@ -3,6 +3,7 @@
 namespace JDJ\UserBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
+use JDJ\CollectionBundle\Entity\UserGameAttribute;
 
 /**
  * User
@@ -344,10 +345,10 @@ class User extends BaseUser
     /**
      * Add UserGameAttributes
      *
-     * @param \JDJ\CollectionBundle\Entity\UserGameAttributes $userGameAttributes
-     * @return User
+     * @param UserGameAttribute $userGameAttributes
+     * @return $this
      */
-    public function addUserGameAttribute(\JDJ\CollectionBundle\Entity\UserGameAttributes $userGameAttributes)
+    public function addUserGameAttribute(UserGameAttribute $userGameAttributes)
     {
         $this->UserGameAttributes[] = $userGameAttributes;
 
@@ -357,9 +358,9 @@ class User extends BaseUser
     /**
      * Remove UserGameAttributes
      *
-     * @param \JDJ\CollectionBundle\Entity\UserGameAttributes $userGameAttributes
+     * @param UserGameAttribute $userGameAttributes
      */
-    public function removeUserGameAttribute(\JDJ\CollectionBundle\Entity\UserGameAttributes $userGameAttributes)
+    public function removeUserGameAttribute(UserGameAttribute $userGameAttributes)
     {
         $this->UserGameAttributes->removeElement($userGameAttributes);
     }

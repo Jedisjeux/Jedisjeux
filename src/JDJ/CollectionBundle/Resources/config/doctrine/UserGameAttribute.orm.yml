@@ -1,5 +1,6 @@
 JDJ\CollectionBundle\Entity\UserGameAttribute:
   type: entity
+  repositoryClass: JDJ\CollectionBundle\Repository\UserGameAttributeRepository
   table: jdj_user_game_attribute
   id:
     user_id:

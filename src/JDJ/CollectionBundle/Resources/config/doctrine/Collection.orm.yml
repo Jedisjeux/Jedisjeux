@@ -1,5 +1,6 @@
 JDJ\CollectionBundle\Entity\Collection:
   type: entity
+  repositoryClass: JDJ\CollectionBundle\Repository\CollectionRepository
   table: jdj_collection
   id:
     id:

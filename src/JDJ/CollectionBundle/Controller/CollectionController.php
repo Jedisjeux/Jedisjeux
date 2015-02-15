@@ -15,6 +15,7 @@ use JDJ\CollectionBundle\Form\CollectionType;
 class CollectionController extends Controller
 {
 
+
     /**
      * Lists all Collection entities.
      *
@@ -23,12 +24,13 @@ class CollectionController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('JDJCollectionBundle:Collection')->findAll();
+        $collections = $em->getRepository('JDJCollectionBundle:Collection')->findAll();
 
         return $this->render('JDJCollectionBundle:Collection:index.html.twig', array(
-            'entities' => $entities,
+            'entities' => $collections,
         ));
     }
+
     /**
      * Creates a new Collection entity.
      *
@@ -49,7 +51,7 @@ class CollectionController extends Controller
 
         return $this->render('JDJCollectionBundle:Collection:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -79,11 +81,11 @@ class CollectionController extends Controller
     public function newAction()
     {
         $entity = new Collection();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return $this->render('JDJCollectionBundle:Collection:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -94,7 +96,6 @@ class CollectionController extends Controller
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('JDJCollectionBundle:Collection')->find($id);
 
         if (!$entity) {
@@ -104,7 +105,7 @@ class CollectionController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('JDJCollectionBundle:Collection:show.html.twig', array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -127,19 +128,19 @@ class CollectionController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('JDJCollectionBundle:Collection:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-    * Creates a form to edit a Collection entity.
-    *
-    * @param Collection $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Collection entity.
+     *
+     * @param Collection $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Collection $entity)
     {
         $form = $this->createForm(new CollectionType(), $entity, array(
@@ -151,6 +152,7 @@ class CollectionController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Collection entity.
      *
@@ -176,11 +178,12 @@ class CollectionController extends Controller
         }
 
         return $this->render('JDJCollectionBundle:Collection:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
+
     /**
      * Deletes a Collection entity.
      *
@@ -218,7 +221,6 @@ class CollectionController extends Controller
             ->setAction($this->generateUrl('collection_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

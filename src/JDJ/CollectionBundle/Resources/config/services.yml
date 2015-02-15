@@ -1,4 +1,8 @@
+parameters:
+#    app.user.game.attribute.repository: Doctrine\ORM\EntityManager
+
 services:
-#    jdj_collection.example:
-#        class: JDJ\CollectionBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+  app.service.user.game.attribute:
+      class:     JDJ\CollectionBundle\Service\UserGameAttributeService
+      arguments:
+          - "@doctrine.orm.entity_manager"

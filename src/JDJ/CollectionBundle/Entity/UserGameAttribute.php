@@ -51,6 +51,31 @@ class UserGameAttribute
 
 
     /**
+     * Constructor
+     *
+     * @param $favorite
+     * @param $owned
+     * @param $wanted
+     * @param $played
+     * @param $user_id
+     * @param $jeu_id
+     * @param $user
+     * @param $jeu
+     */
+    function __construct($favorite, $owned, $wanted, $played, $user_id, $jeu_id, $user, $jeu)
+    {
+        $this->favorite = $favorite;
+        $this->owned = $owned;
+        $this->wanted = $wanted;
+        $this->played = $played;
+        $this->user_id = $user_id;
+        $this->jeu_id = $jeu_id;
+        $this->user = $user;
+        $this->jeu = $jeu;
+    }
+
+
+    /**
      * Set user
      *
      * @param \JDJ\UserBundle\Entity\User $user
