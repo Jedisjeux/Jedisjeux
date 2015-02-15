@@ -41,8 +41,5 @@ class CollectionType extends AbstractType
         return 'jdj_collectionbundle_collection';
     }
 
-    public function __construct($argument1, $argument2)
-    {
 
-    }
 }

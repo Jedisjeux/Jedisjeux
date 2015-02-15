@@ -9,10 +9,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class CollectionTypeSpec extends ObjectBehavior
 {
-    function let()
-    {
-        $this->beConstructedWith('Collection', array('jdj'));
-    }
 
     function it_is_initializable()
     {

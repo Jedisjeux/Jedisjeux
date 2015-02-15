@@ -19,9 +19,9 @@ class UserGameAttributeRepository extends EntityRepository
      *
      * @param Jeu $game
      * @param User $user
-     * @return \Doctrine\ORM\QueryBuilder
+     * @return null
      */
-    public function findUserGameAttribute(Jeu $game, User $user)
+    public function findOneUserGameAttribute(Jeu $game, User $user)
     {
         $queryBuilder = $this->createQueryBuilder('u')
             ->andWhere('u.jeu = :game')
@@ -29,7 +29,15 @@ class UserGameAttributeRepository extends EntityRepository
             ->setParameter('game', $game)
             ->setParameter('user', $user);
 
-        return $queryBuilder->getQuery()->getResult();
+        $result = $queryBuilder->getQuery()->getResult();
+
+        if(!empty($result)) {
+            $response = $result[0];
+        } else {
+            $response = null;
+        }
+
+        return $response;
 
     }
 

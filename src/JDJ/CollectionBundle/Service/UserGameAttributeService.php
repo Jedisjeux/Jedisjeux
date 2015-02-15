@@ -55,7 +55,7 @@ class UserGameAttributeService
     {
         //Checks if the user has the game in his favorites
         $userGameAttribute = $this->getUserGameAttribute($jeu_id, $user_id);
-        $this->handleFavorite($userGameAttribute);
+        $userGameAttribute = $this->handleFavorite($userGameAttribute);
 
         return $userGameAttribute->isFavorite();
     }
@@ -71,7 +71,7 @@ class UserGameAttributeService
     {
         //Checks if the user has the game in his favorites
         $userGameAttribute = $this->getUserGameAttribute($jeu_id, $user_id);
-        $this->handleOwned($userGameAttribute);
+        $userGameAttribute = $this->handleOwned($userGameAttribute);
 
         return $userGameAttribute->isOwned();
     }
@@ -87,7 +87,7 @@ class UserGameAttributeService
     {
         //Checks if the user has the game in his favorites
         $userGameAttribute = $this->getUserGameAttribute($jeu_id, $user_id);
-        $this->handleWanted($userGameAttribute);
+        $userGameAttribute = $this->handleWanted($userGameAttribute);
 
         return $userGameAttribute->isOwned();
     }
@@ -103,7 +103,7 @@ class UserGameAttributeService
     {
         //Checks if the user has the game in his favorites
         $userGameAttribute = $this->getUserGameAttribute($jeu_id, $user_id);
-        $this->handlePlayed($userGameAttribute);
+        $userGameAttribute = $this->handlePlayed($userGameAttribute);
 
         return $userGameAttribute->isOwned();
     }
@@ -115,10 +115,10 @@ class UserGameAttributeService
      * @param $userGameAttribute
      * @return UserGameAttribute
      */
-    public function handleFavorite($userGameAttribute)
+    public function handleFavorite(UserGameAttribute $userGameAttribute = null)
     {
         //Set the game to favorite or not
-        if ($userGameAttribute && (get_class($userGameAttribute) === 'JDJ\CollectionBundle\Entity\UserGameAttribute')) {
+        if ($userGameAttribute) {
             if ($userGameAttribute->isFavorite()) {
                 $userGameAttribute->setFavorite(false);
             } else {
@@ -151,11 +151,11 @@ class UserGameAttributeService
      * @param $userGameAttribute
      * @return UserGameAttribute
      */
-    public function handleOwned($userGameAttribute)
+    public function handleOwned(UserGameAttribute $userGameAttribute = null)
     {
 
         //Set the game to favorite or not
-        if ($userGameAttribute && (get_class($userGameAttribute) === 'JDJ\CollectionBundle\Entity\UserGameAttribute')) {
+        if ($userGameAttribute) {
             if ($userGameAttribute->isOwned()) {
                 $userGameAttribute->setOwned(false);
             } else {
@@ -188,11 +188,11 @@ class UserGameAttributeService
      * @param $userGameAttribute
      * @return UserGameAttribute
      */
-    public function handleWanted($userGameAttribute)
+    public function handleWanted(UserGameAttribute $userGameAttribute = null)
     {
 
         //Set the game to favorite or not
-        if ($userGameAttribute && (get_class($userGameAttribute) === 'JDJ\CollectionBundle\Entity\UserGameAttribute')) {
+        if ($userGameAttribute) {
             if ($userGameAttribute->isWanted()) {
                 $userGameAttribute->setWanted(false);
             } else {
@@ -225,11 +225,11 @@ class UserGameAttributeService
      * @param $userGameAttribute
      * @return UserGameAttribute
      */
-    public function handlePlayed($userGameAttribute)
+    public function handlePlayed(UserGameAttribute $userGameAttribute = null)
     {
 
         //Set the game to favorite or not
-        if ($userGameAttribute && (get_class($userGameAttribute) === 'JDJ\CollectionBundle\Entity\UserGameAttribute')) {
+        if ($userGameAttribute) {
             if ($userGameAttribute->hasPlayed()) {
                 $userGameAttribute->setPlayed(false);
             } else {
@@ -274,9 +274,9 @@ class UserGameAttributeService
             throw $this->createNotFoundException('Unable to find Game or User entity.');
         }
 
-        $userGameAttribute = $this->em->getRepository('JDJCollectionBundle:UserGameAttribute')->findUserGameAttribute($this->jeu, $this->user);
+        $userGameAttribute = $this->em->getRepository('JDJCollectionBundle:UserGameAttribute')->findOneUserGameAttribute($this->jeu, $this->user);
 
-        return $userGameAttribute[0];
+        return $userGameAttribute;
     }
 
     /**
