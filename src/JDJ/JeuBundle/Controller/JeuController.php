@@ -63,7 +63,7 @@ class JeuController extends Controller
         $userReviews->setMaxPerPage(10);
         $userReviews->setCurrentPage($request->get('page', 1));
 
-        return $this->render('JDJJeuBundle:Jeu:show.html.twig', array(
+        return $this->render('jeu/show.html.twig', array(
                 'jeu' => $entity,
                 'userReviews' => $userReviews,
             )
@@ -120,8 +120,8 @@ class JeuController extends Controller
         $paginator->setCurrentPage($request->get('page', 1));
 
 
-        return $this->render('JDJJeuBundle:Jeu:index.html.twig', array(
-            'entities' => $paginator,
+        return $this->render('jeu/index.html.twig', array(
+            'jeux' => $paginator,
             'form' => $form->createView(),
         ));
     }

@@ -25,7 +25,7 @@ class EcritureController extends Controller
 
         $entities = $em->getRepository('JDJComptaBundle:Ecriture')->findAll();
 
-        return $this->render('JDJComptaBundle:Ecriture:index.html.twig', array(
+        return $this->render('compta/ecriture/index.html.twig', array(
             'entities' => $entities,
         ));
     }
@@ -47,7 +47,7 @@ class EcritureController extends Controller
             return $this->redirect($this->generateUrl('ecriture_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('JDJComptaBundle:Ecriture:new.html.twig', array(
+        return $this->render('compta/ecriture/new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -81,7 +81,7 @@ class EcritureController extends Controller
         $entity = new Ecriture();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('JDJComptaBundle:Ecriture:new.html.twig', array(
+        return $this->render('compta/ecriture/new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -103,7 +103,7 @@ class EcritureController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('JDJComptaBundle:Ecriture:show.html.twig', array(
+        return $this->render('compta/ecriture/show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),        ));
     }
@@ -125,7 +125,7 @@ class EcritureController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('JDJComptaBundle:Ecriture:edit.html.twig', array(
+        return $this->render('compta/ecriture/edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -174,7 +174,7 @@ class EcritureController extends Controller
             return $this->redirect($this->generateUrl('ecriture_edit', array('id' => $id)));
         }
 
-        return $this->render('JDJComptaBundle:Ecriture:edit.html.twig', array(
+        return $this->render('compta/ecriture/edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

@@ -31,6 +31,8 @@ class AppKernel extends Kernel
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Sonata\CoreBundle\SonataCoreBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),
+            new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
+            new Craue\FormFlowBundle\CraueFormFlowBundle(),
 
             //JDJ
             new JDJ\FoundationBundle\JDJFoundationBundle(),

@@ -1,0 +1,42 @@
+<div class="dropdown-menu list-inline" style="width: 400px" aria-labelledby="toolbar-jeu-{{ jeu.id }}">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Image Box #5 Image -->
+            <div class="img-box-5-img">
+                <!-- Image -->
+                <a href="http://www.jedisjeux.net/img/800/{{ jeu.imageCouverture }}" class="lightbox"><img
+                            src="http://www.jedisjeux.net/img/800/{{ jeu.imageCouverture }}" alt=""
+                            class="img-responsive img-thumbnail"/></a>
+            </div>
+        </div>
+        <div class="col-md-9">
+
+            <h4>{{ jeu.libelle }}</h4>
+
+            <input class="game-rating rating" type="number" min=0 max=5 step=0.5 data-size="xs">
+
+            <br />
+
+            <div class="btn-group" role="group">
+                <button type="button"  data-toggle="tooltip" data-placement="top" title="Ajouter à ma ludothèque"
+                        class="btn btn-default btn-sm owned" data-jeu-id="{{ jeu.id }}"><span class="fa fa-user"></span>
+                </button>
+                <button type="button"  data-toggle="tooltip" data-placement="top" title="Ajouter à mes envies"
+                        class="btn btn-default btn-sm wish-list" data-jeu-id="{{ jeu.id }}"><span
+                            class="fa fa-bookmark"></span></button>
+                <button type="button"  data-toggle="tooltip" data-placement="top" title="j'y ai joué"
+                        class="btn btn-default btn-sm played" data-jeu-id="{{ jeu.id }}"><span
+                            class="fa fa-play"></span></button>
+                <button type="button"  data-toggle="tooltip" data-placement="top" title="Coup de coeur"
+                        class="btn btn-default btn-sm favorite" data-jeu-id="{{ jeu.id }}"><span
+                            class="fa fa-heart"></span></button>
+                <button type="button"  data-toggle="tooltip" data-placement="top" title="Rédiger une critique"
+                        class="btn btn-default btn-sm user-review" data-jeu-id="{{ jeu.id }}"><span
+                            class="fa fa-pencil"></span></button>
+                <button type="button"  data-toggle="tooltip" data-placement="top" title="Ajouter à une liste"
+                        class="btn btn-default btn-sm collection" data-jeu-id="{{ jeu.id }}"><span
+                            class="fa fa-list"></span></button>
+            </div>
+        </div>
+    </div>
+</div>

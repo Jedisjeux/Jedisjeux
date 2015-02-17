@@ -1,0 +1,146 @@
+{% extends 'base.html.twig' %}
+
+{% from "JDJJeuBundle:Jeu:macros.html.twig" import joueurCount %}
+{% from 'JDJWebBundle:Macros:misc.html.twig' import pagination %}
+
+{% block container %}
+
+    <div class="col-md-12">
+
+        <div class="block-heading-two">
+            <h3><span>Jeux</span></h3>
+        </div>
+
+        <div class="img-box-4 text-center jeu-list">
+
+            <div class="row">
+                {% for key, jeu in jeux %}
+                    {% if key != 0 and key%4 == 0 %}
+            </div>
+
+            <div class="row">
+
+                    {% endif %}
+
+                    {% set faImg = 'fa-picture-o' %}
+
+                    {% if key%4 == 0 %}
+                        {% set bg = 'bg-red' %}
+                        {% set faImg = 'fa-star' %}
+                    {% elseif (key+1)%4 == 0 %}
+                        {% set bg = 'bg-lblue' %}
+                        {% set faImg = 'fa-child' %}
+                    {% elseif (key+2)%4 == 0 %}
+                        {% set bg = 'bg-green' %}
+                        {% set faImg = 'fa-user' %}
+                    {% elseif (key+3)%4 == 0 %}
+                        {% set bg = 'bg-purple' %}
+                        {% set faImg = 'fa-user-plus' %}
+                    {% endif %}
+
+
+                <div class="col-md-3 col-sm-6">
+                    <!-- Image Box #4 Item -->
+                    <div class="img-box-4-item">
+                        <!-- Image -->
+                        <div class="img-container">
+                            <a href="http://www.jedisjeux.net/img/800/{{ jeu.imageCouverture }}" class="lightbox"><img
+                                        src="http://www.jedisjeux.net/img/800/{{ jeu.imageCouverture }}" alt="" class="img-responsive"></a>
+                        </div>
+                        <!-- Image Box #4 Content -->
+                        <div class="img-box-4-content">
+                            <!-- Icon -->
+                            <a href="#"><i class="fa {{ faImg }} {{ bg }}"></i></a>
+                            <!-- Heading -->
+                            <h4><a href="#">{{ jeu.libelle }}</a></h4>
+                            <!-- Border -->
+                            <div class="bor {{ bg }}"></div>
+                            <!-- Paragraph -->
+                            <p>
+                                {{ joueurCount(jeu) }}<br/>
+                                à partir de {{ jeu.ageMin }} ans<br/>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <!-- Image Box #4 Item -->
+                    <div class="img-box-4-item">
+                        <!-- Image -->
+                        <a href="../../img/gallery/small/1.jpg" class="lightbox"><img
+                                    src="../../img/gallery/small/1.jpg" alt="" class="img-responsive"></a>
+                        <!-- Image Box #4 Content -->
+                        <div class="img-box-4-content">
+                            <!-- Icon -->
+                            <a href="#"><i class="fa fa-picture-o bg-red"></i></a>
+                            <!-- Heading -->
+                            <h4><a href="#">Blinded Desire</a></h4>
+                            <!-- Border -->
+                            <div class="bor bg-red"></div>
+                            <!-- Paragraph -->
+                            <p>Certain circumstances and owing libero tempore minus to the owing claims of duty.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="img-box-4-item">
+                        <a href="../../img/gallery/small/2.jpg" class="lightbox"><img
+                                    src="../../img/gallery/small/2.jpg" alt="" class="img-responsive"></a>
+
+                        <div class="img-box-4-content">
+                            <a href="#"><i class="fa fa-video-camera bg-lblue"></i></a>
+                            <h4><a href="#">Itaque Earum</a></h4>
+
+                            <div class="bor bg-lblue"></div>
+                            <p>Certain circumstances and owing libero tempore minus to the owing claims of duty.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="img-box-4-item">
+                        <a href="../../img/gallery/small/3.jpg" class="lightbox"><img
+                                    src="../../img/gallery/small/3.jpg" alt="" class="img-responsive"></a>
+
+                        <div class="img-box-4-content">
+                            <a href="#"><i class="fa fa-music bg-green"></i></a>
+                            <h4><a href="#">Rerum Tenetur</a></h4>
+
+                            <div class="bor bg-green"></div>
+                            <p>Certain circumstances and owing libero tempore minus to the owing claims of duty.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="img-box-4-item">
+                        <a href="../../img/gallery/small/4.jpg" class="lightbox"><img
+                                    src="../../img/gallery/small/4.jpg" alt="" class="img-responsive"></a>
+
+                        <div class="img-box-4-content">
+                            <a href="#"><i class="fa fa-picture-o bg-purple"></i></a>
+                            <h4><a href="#">Maiores Alias</a></h4>
+
+                            <div class="bor bg-purple"></div>
+                            <p>Certain circumstances and owing libero tempore minus to the owing claims of duty.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% block Pagination %}
+            <div class="pagination-wrapper">
+                <div class="pagination-bottom">
+                    {{ pagination(jeux) }}
+                </div>
+            </div>
+        {% endblock %}
+
+
+    </div>
+
+{% endblock container %}

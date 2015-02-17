@@ -30,7 +30,7 @@ class ModeReglementController extends Controller
             $deleteForms[$entity->getId()] = $this->createDeleteForm($entity->getId())->createView();
         }
 
-        return $this->render('JDJComptaBundle:ModeReglement:index.html.twig', array(
+        return $this->render('compta/mode-reglement/index.html.twig', array(
             'entities' => $entities,
             'deleteForms' => $deleteForms,
         ));
@@ -53,7 +53,7 @@ class ModeReglementController extends Controller
             return $this->redirect($this->generateUrl('modereglement'));
         }
 
-        return $this->render('JDJComptaBundle:ModeReglement:new.html.twig', array(
+        return $this->render('compta/mode-reglement/new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -87,7 +87,7 @@ class ModeReglementController extends Controller
         $entity = new ModeReglement();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('JDJComptaBundle:ModeReglement:new.html.twig', array(
+        return $this->render('compta/mode-reglement/new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -109,7 +109,7 @@ class ModeReglementController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('JDJComptaBundle:ModeReglement:show.html.twig', array(
+        return $this->render('compta/mode-reglement/show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),        ));
     }
@@ -130,7 +130,7 @@ class ModeReglementController extends Controller
 
         $form = $this->createEditForm($entity);
 
-        return $this->render('JDJComptaBundle:ModeReglement:edit.html.twig', array(
+        return $this->render('compta/mode-reglement/edit.html.twig', array(
             'entity'      => $entity,
             'form'   => $form->createView(),
         ));
@@ -178,7 +178,7 @@ class ModeReglementController extends Controller
             return $this->redirect($this->generateUrl('modereglement'));
         }
 
-        return $this->render('JDJComptaBundle:ModeReglement:edit.html.twig', array(
+        return $this->render('compta/mode-reglement/edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -220,7 +220,6 @@ class ModeReglementController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('modereglement_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
     }
