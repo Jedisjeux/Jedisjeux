@@ -1,0 +1,60 @@
+{% extends "::base.html.twig" %}
+
+{% block container -%}
+    <h1>CptaClient</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Societe</th>
+                <td>{{ entity.societe }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ entity.nom }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ entity.email }}</td>
+            </tr>
+            <tr>
+                <th>Rue</th>
+                <td>{{ entity.rue }}</td>
+            </tr>
+            <tr>
+                <th>Complement</th>
+                <td>{{ entity.complement }}</td>
+            </tr>
+            <tr>
+                <th>Codepostal</th>
+                <td>{{ entity.codepostal }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ entity.ville }}</td>
+            </tr>
+            <tr>
+                <th>Datecreation</th>
+                <td>{{ entity.datecreation|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('client') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('client_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock container %}

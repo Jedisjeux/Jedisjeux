@@ -8,6 +8,6 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('JDJWebBundle:Default:index.html.twig', array());
+        return $this->render('default/index.html.twig', array());
     }
 }

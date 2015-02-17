@@ -1,0 +1,115 @@
+{# synthaxe pour importer toutes les macros #}
+{#{% import "JDJJeuBundle:Jeu:macros.html.twig" as macros %}#}
+{# synthaxe pour importer une macro spécifique #}
+{% from "JDJJeuBundle:Jeu:macros.html.twig" import joueurCount %}
+
+{% if 1 != jeu.statut.id %}
+    <div class="alert-box alert">
+        Attention, ce jeu est en statut : {{ jeu.statut.libelle }}
+        <a href="#" class="close">&times;</a>
+    </div>
+{% endif %}
+
+<div class="block-heading-two">
+    <h3><span>{{ jeu.libelle }}</span></h3>
+</div>
+
+<div class="img-box-5">
+    <!-- Container -->
+    <div class="container">
+        <!-- Image Box #5 Item -->
+        <div class="img-box-5-item">
+            <div class="row">
+                <div class="col-md-4">
+                    <!-- Image Box #5 Image -->
+                    <div class="img-box-5-img">
+                        <!-- Image -->
+                        <a href="http://www.jedisjeux.net/img/800/{{ jeu.imageCouverture }}" class="lightbox"><img
+                                    src="http://www.jedisjeux.net/img/800/{{ jeu.imageCouverture }}" alt=""
+                                    class="img-responsive img-thumbnail"/></a>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <!-- Image Box #5 Content -->
+                    <div class="img-box-5-content">
+
+                        <div class="row">
+                            <ul class="list-6">
+                                {% if jeu.auteurs|length > 0 %}
+                                    <li>
+                                        Un jeu de
+                                        {% for key, personne in jeu.auteurs %}{% if (key > 0) %},{% endif %} <a
+                                            href="{{ path('personne_show', { 'id': personne.id, 'slug': personne.slug }) }}">{{ personne }}</a>{% endfor %}
+                                    </li>
+                                {% endif %}
+                                {% if jeu.illustrateurs|length > 0 %}
+                                    <li>
+                                        illustré{% if jeu.illustrateurs|length > 1 %}s{% endif %} par
+                                        {% for key, personne in jeu.illustrateurs %}{% if (key > 0) %},{% endif %} <a
+                                            href="{{ path('personne_show', { 'id': personne.id, 'slug': personne.slug }) }}">{{ personne }}</a>{% endfor %}
+                                    </li>
+                                {% endif %}
+                                {% if jeu.editeurs|length > 0 %}
+                                    <li>
+                                        édité{% if jeu.editeurs|length > 1 %}s{% endif %} par
+                                        {% for key, personne in jeu.editeurs %}{% if (key > 0) %},{% endif %} <a
+                                            href="{{ path('personne_show', { 'id': personne.id, 'slug': personne.slug }) }}">{{ personne }}</a>{% endfor %}
+                                    </li>
+                                {% endif %}
+                            </ul>
+
+                        </div>
+
+                        <div class="row">
+                            <ul class="list-6">
+                                {% if jeu.ageMin %}
+                                    <li>à partir de {{ jeu.ageMin }} ans</li>
+                                {% endif %}
+
+                                {% if jeu.joueurMin or jeu.joueurMax %}
+                                    <li>{{ joueurCount(jeu) }}</li>
+                                {% endif %}
+
+                                {% if jeu.cible %}
+                                    <li>Public : <a
+                                                href="{{ path('cible_show', { 'id': jeu.cible.id, 'slug': jeu.cible.slug }) }}">{{ jeu.cible }}</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+
+                        <div class="row">
+                            <ul class="list-6">
+
+                                {% if jeu.mechanisms|length > 0 %}
+                                    <li>Mécanismes
+                                        : {% for key, mechanism in jeu.mechanisms %}{% if (key > 0) %},{% endif %}
+                                            <a
+                                            href="{{ path('mechanism_show', { 'id': mechanism.id, 'slug': mechanism.slug }) }}">{{ mechanism }}</a>{% endfor %}
+                                    </li>
+                                {% endif %}
+
+                                {% if jeu.themes|length > 0 %}
+                                    <li>Thèmes : {% for key, theme in jeu.themes %}{% if (key > 0) %},{% endif %} <a
+                                            href="{{ path('theme_show', { 'id': theme.id, 'slug': theme.slug }) }}">{{ theme }}</a>{% endfor %}
+                                    </li>
+                                {% endif %}
+
+                            </ul>
+                        </div>
+
+                        <div class="row">
+                            <ul class="list-inline">
+                                <li><button class="btn btn-yellow"><span class="fa fa-user"></span> Je le possède</button></li>
+                                <li><button class="btn btn-yellow"><span class="fa fa-bookmark"></span> Envie d'y jouer</button></li>
+                                <li><button class="btn btn-default"><span class="fa fa-play"></span> J'y ai joué</button></li>
+                                <li><button class="btn btn-black"><span class="fa fa-ellipsis-h"></span></button></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

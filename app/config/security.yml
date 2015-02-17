@@ -29,7 +29,7 @@ security:
         ROLE_PRESIDENT:          ROLE_OFFICE
 
         # Admin
-        ROLE_ADMIN:              ROLE_ADMIN_WORKFLOW, ROLE_MODERATOR
+        ROLE_ADMIN:              ROLE_ADMIN_WORKFLOW, ROLE_MODERATOR, ROLE_OFFICE
         
 
     providers:
@@ -51,7 +51,7 @@ security:
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
         #seul les membres du bureau ont accès à la partie compta
-        - { path: ^/compta/, role: ROLE_OFFICE }
+        #- { path: ^/compta/, role: ROLE_OFFICE }
         #edition d'un avis
         - { path: ^/avis/\d+/edit, role: ROLE_USER }
         - { path: ^/jeu/\d+/avis/new, role: ROLE_USER }

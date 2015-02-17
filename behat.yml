@@ -71,6 +71,36 @@ default:
              filters:
                  tags: "@userReview && ~@javascript"
 
+        produit:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\UserBundle\Behat\UserContext
+            filters:
+                tags: "@produit && ~@javascript"
+
+        modeReglement:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\UserBundle\Behat\UserContext
+            filters:
+                tags: "@modeReglement && ~@javascript"
+
+        client:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\UserBundle\Behat\UserContext
+            filters:
+                tags: "@client && ~@javascript"
+
+        ecriture:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\UserBundle\Behat\UserContext
+                - JDJ\ComptaBundle\Behat\ModeReglementContext
+                - JDJ\ComptaBundle\Behat\SensContext
+            filters:
+                tags: "@ecriture && ~@javascript"
+
     extensions:
         Behat\MinkExtension:
             sessions:

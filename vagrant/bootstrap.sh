@@ -22,3 +22,9 @@ sudo add-apt-repository "deb http://packages.elasticsearch.org/elasticsearch/1.4
 sudo apt-get update && sudo apt-get install elasticsearch
 sudo update-rc.d elasticsearch defaults 95 10
 sudo /etc/init.d/elasticsearch start
+
+# install sass
+sudo gem install sass
+
+# install compass
+sudo gem install compass

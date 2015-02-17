@@ -1,13 +1,147 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Jedisjeux - et les autres jours aussi{% endblock title %}</title>
+    <!-- Description, Keywords and Author -->
+    <meta name="description" content="Your description">
+    <meta name="keywords" content="Your,Keywords">
+    <meta name="author" content="ResponsiveWebInc">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    {% block head_style %}
+        {% stylesheets
+        '@MopaBootstrapBundle/Resources/public/sass/mopabootstrapbundle-3.2.scss'
+        'css/font-awesome.min.css'
+        'css/magnific-popup.css'
+        'css/owl.carousel.css'
+        'css/styles/style.css'
+        'css/styles/skin-lblue.css'
+        'bower_components/bootstrap-star-rating/css/star-rating.min.css'
+        '../app/Resources/sass/base.scss'
+        filter='cssrewrite' output='css/compiled/all.css' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+
+    {% endblock head_style %}
+
+    <!-- Styles -->
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="#">
+</head>
+
+<!-- Add class "boxed" along with body for boxed layout. -->
+<!-- Add "pattern-x" (1 to 5) for background patterns. -->
+<!-- Add "img-x" (1 to 5) for background images. -->
+<body>
+
+<!-- Outer Starts -->
+<div class="outer">
+
+    <!-- Top bar starts -->
+    {% include "layout/top-bar.html.twig" %}
+
+    <!-- Top bar ends -->
+
+    <!-- Header One Starts -->
+    {% include "layout/header-1.html.twig" %}
+
+    <!-- Header one ends -->
+
+    <br/>
+
+    <!-- Main content starts -->
+
+    <div class="main-block">
+
+        <div class="magazine">
+
+            <div class="container">
+
+                <div class="row">
+
+                    {% block fos_user_content %}
+                    {% block container %}
+                    <!--
+                    Inherit this block to write
+                    Content without sidebar
+                    -->
+                    <div class="col-md-8">
+
+                        {% block container_content %}
+                            <!--
+                            Inherit this block to write
+                            Content with a sidebar
+                            -->
+                        {% endblock container_content %}
+
+                    </div>
+
+                    <!-- Sidebar column -->
+                    <div class="col-md-4">
+
+                        <!-- Sidebar -->
+                        <div class="sidebar">
+
+                            {% block sidebar_content %}
+                                <!--
+                                Inherit this block to write
+                                Content in the sidebar
+                                -->
+                            {% endblock sidebar_content %}
+
+                        </div>
+
+                    </div>
+
+                    {% endblock container %}
+                    {% endblock fos_user_content %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Main content ends -->
+
+        <!-- Foot Starts -->
+
+        {% include "layout/foot.html.twig" %}
+
+        <!-- Foot Ends -->
+
+        <!-- Footer Starts -->
+
+        {% include "layout/footer.html.twig" %}
+
+        <!-- Footer Ends -->
+
+    </div>
+
+    <!-- Outer Ends -->
+
+    <!-- Scroll to top -->
+    <span class="totop"><a href="#"><i class="fa fa-angle-up bg-color"></i></a></span>
+
+    <!-- Javascript files -->
+
+    {% block foot_script_assetic %}
+        {% javascripts
+        'bower_components/jquery/dist/jquery.min.js'
+        '@MopaBootstrapBundle/Resources/public/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js'
+        '@MopaBootstrapBundle/Resources/public/bootstrap-sass/assets/javascripts/bootstrap/*.js'
+        '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-collection.js'
+        '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-subnav.js'
+        'js/*'
+        'bower_components/bootstrap-star-rating/js/star-rating.min.js'
+        '@JDJJeuBundle/Resources/public/js/jeu/*' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endblock foot_script_assetic %}
+
+</body>
 </html>
