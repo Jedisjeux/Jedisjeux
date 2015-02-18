@@ -9,6 +9,41 @@ use FOS\UserBundle\Model\User as BaseUser;
  */
 class User extends BaseUser
 {
+    /**
+     * @var integer
+     */
+    protected $id;
+
+    /**
+     * @var string
+     */
+    private $nom;
+
+    /**
+     * @var string
+     */
+    private $prenom;
+
+
+    /**
+     * @var string
+     */
+    private $slug;
+
+    /**
+     * @var \DateTime
+     */
+    private $dateNaissance;
+
+    /**
+     * @var \DateTime
+     */
+    private $created;
+
+    /**
+     * @var \DateTime
+     */
+    private $updated;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -19,6 +54,21 @@ class User extends BaseUser
      * @var \Doctrine\Common\Collections\Collection
      */
     private $parties;
+
+    /**
+     * @var string
+     */
+    private $avatar;
+
+    /**
+     * @var \Symfony\Component\HttpFoundation\File\UploadedFile
+     */
+    public $avatarFile;
+
+    /**
+     * @var string
+     */
+    private $presentation;
 
 
     public function __construct()
@@ -94,41 +144,7 @@ class User extends BaseUser
     {
         return $this->parties;
     }
-    /**
-     * @var integer
-     */
-    protected $id;
 
-    /**
-     * @var string
-     */
-    private $nom;
-
-    /**
-     * @var string
-     */
-    private $prenom;
-
-
-    /**
-     * @var string
-     */
-    private $slug;
-
-    /**
-     * @var \DateTime
-     */
-    private $dateNaissance;
-
-    /**
-     * @var \DateTime
-     */
-    private $created;
-
-    /**
-     * @var \DateTime
-     */
-    private $updated;
 
 
     /**
@@ -279,10 +295,7 @@ class User extends BaseUser
     {
         return $this->updated;
     }
-    /**
-     * @var string
-     */
-    private $avatar;
+
 
 
     /**
@@ -307,10 +320,7 @@ class User extends BaseUser
     {
         return $this->avatar;
     }
-    /**
-     * @var string
-     */
-    private $presentation;
+
 
 
     /**
@@ -335,4 +345,86 @@ class User extends BaseUser
     {
         return $this->presentation;
     }
+    /**
+     * @var \DateTime
+     */
+    private $deletedAt;
+
+
+    /**
+     * Set deletedAt
+     *
+     * @param \DateTime $deletedAt
+     * @return User
+     */
+    public function setDeletedAt($deletedAt)
+    {
+        $this->deletedAt = $deletedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get deletedAt
+     *
+     * @return \DateTime 
+     */
+    public function getDeletedAt()
+    {
+        return $this->deletedAt;
+    }
+
+    public function getAbsolutePath()
+    {
+        return null === $this->avatar ? null : $this->getUploadRootDir().'/'.$this->avatar;
+    }
+
+    /**
+     * return the public url to the avatar
+     *
+     * @return null|string
+     */
+    public function getWebPath()
+    {
+        return null === $this->avatar ? null : $this->getUploadDir().'/'.$this->avatar;
+    }
+
+    /**
+     * get the absolute path to the upload directory
+     *
+     * @return string
+     */
+    protected function getUploadRootDir()
+    {
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+
+    /**
+     * The path to the  avatar files
+     *
+     * @return string
+     */
+    protected function getUploadDir()
+    {
+        return 'uploads/avatar';
+    }
+
+    /**
+     * This function uploads the file to the server
+     *
+     */
+    public function upload()
+    {
+        //Checks if the avatar is null
+        if (null === $this->avatarFile) {
+            return;
+        }
+
+        $this->avatarFile->move($this->getUploadRootDir(), $this->avatarFile->getClientOriginalName());
+        $this->avatar = $this->avatarFile->getClientOriginalName();
+
+        // Clean the avatar file
+        $this->avatarFile = null;
+    }
+
 }

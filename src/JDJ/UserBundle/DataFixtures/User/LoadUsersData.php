@@ -11,6 +11,7 @@ namespace JDJ\UserBundle\DataFixtures\User;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Elastica\Transport\Null;
 use JDJ\UserBundle\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerAware;
 
