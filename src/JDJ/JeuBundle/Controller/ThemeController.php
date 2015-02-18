@@ -34,7 +34,7 @@ class ThemeController extends Controller
             $deleteForms[$entity->getId()] = $this->createDeleteForm($entity->getId())->createView();
         }
 
-        return $this->render('JDJJeuBundle:Theme:index.html.twig', array(
+        return $this->render('jeu/theme/index.html.twig', array(
             'entities' => $entities,
             'deleteForms' => $deleteForms,
         ));
@@ -57,7 +57,7 @@ class ThemeController extends Controller
             return $this->redirect($this->generateUrl('theme'));
         }
 
-        return $this->render('JDJJeuBundle:Theme:new.html.twig', array(
+        return $this->render('jeu/theme/new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -91,7 +91,7 @@ class ThemeController extends Controller
         $entity = new Theme();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('JDJJeuBundle:Theme:new.html.twig', array(
+        return $this->render('jeu/theme/new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -120,7 +120,7 @@ class ThemeController extends Controller
         $jeux->setMaxPerPage(16);
         $jeux->setCurrentPage($request->get('page', 1));
 
-        return $this->render('JDJJeuBundle:Theme:show.html.twig', array(
+        return $this->render('jeu/theme/show.html.twig', array(
             'entity'      => $entity,
             'jeux'        => $jeux,
             'delete_form' => $deleteForm->createView(),
@@ -143,7 +143,7 @@ class ThemeController extends Controller
 
         $form = $this->createEditForm($entity);
 
-        return $this->render('JDJJeuBundle:Theme:edit.html.twig', array(
+        return $this->render('jeu/theme/edit.html.twig', array(
             'entity'      => $entity,
             'form'   => $form->createView(),
         ));
@@ -191,7 +191,7 @@ class ThemeController extends Controller
             return $this->redirect($this->generateUrl('theme'));
         }
 
-        return $this->render('JDJJeuBundle:Theme:edit.html.twig', array(
+        return $this->render('jeu/theme/edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
