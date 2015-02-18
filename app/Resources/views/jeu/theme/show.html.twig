@@ -1,11 +1,24 @@
 {% extends "base.html.twig" %}
+{% from 'JDJWebBundle:Macros:misc.html.twig' import pagination %}
 
 {% block body -%}
-    <h1>{{ entity.libelle }}</h1>
+
+    <div class="block-heading-two">
+        <h3><span>{{ entity.libelle }}</span></h3>
+    </div>
 
     {{ entity.description|raw }}
 
-    {% include "JDJJeuBundle:Jeu:partial/list.html.twig" with {'jeux': jeux} %}
+    {% include "jeu/index/list-4.html.twig" with {'jeux': jeux} only %}
+
+
+    {% block Pagination %}
+        <div class="pagination-wrapper">
+            <div class="pagination-bottom">
+                {{ pagination(jeux) }}
+            </div>
+        </div>
+    {% endblock %}
 
     <ul class="record_actions">
         <li>
