@@ -41,7 +41,7 @@ class PersonneController extends Controller
         $paginator->setMaxPerPage($itemCountPerPage);
         $paginator->setCurrentPage($request->get('page', 1));
 
-        return $this->render('JDJLudographieBundle:Personne:index.html.twig', array(
+        return $this->render('ludographie/personne/index.html.twig', array(
             'entities' => $paginator,
         ));
     }
@@ -89,7 +89,7 @@ class PersonneController extends Controller
         $userReviews->setCurrentPage($request->get('page', 1));
 
 
-        return $this->render('JDJLudographieBundle:Personne:show.html.twig', array(
+        return $this->render('ludographie/personne/show.html.twig', array(
                 'personne' => $entity,
                 'jeux' => $jeux,
                 'userReviews' => $userReviews,
@@ -113,7 +113,7 @@ class PersonneController extends Controller
 
         $form = $this->createEditForm($entity);
 
-        return $this->render('JDJLudographieBundle:Personne:edit.html.twig', array(
+        return $this->render('ludographie/personne/edit.html.twig', array(
             'entity' => $entity,
             'form' => $form->createView(),
         ));
@@ -148,7 +148,7 @@ class PersonneController extends Controller
             );
         }
 
-        return $this->render('JDJLudographieBundle:Personne:edit.html.twig', array(
+        return $this->render('ludographie/personne/edit.html.twig', array(
             'entity' => $entity,
             'edit_form' => $editForm->createView(),
         ));

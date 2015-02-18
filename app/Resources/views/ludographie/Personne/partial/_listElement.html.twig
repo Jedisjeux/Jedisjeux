@@ -1,0 +1,18 @@
+<div class="medium-3 columns">
+    <div class="image crop">
+        <a href="{{ path('personne_show', { 'id': personne.id, 'slug': personne.slug }) }}">
+            <img src="http://www.jedisjeux.net/img/800/{{ personne.image }}" alt="{{ personne }}"/>
+        </a>
+    </div>
+    <div class="panel" data-equalizer-watch>
+        <a href="{{ path('personne_show', { 'id': personne.id, 'slug': personne.slug }) }}">
+            <h3>{{ personne }}</h3>
+            <ul>
+                {% if (personne.pays) %}
+                    <li>{{ personne.pays.libelle }}</li>
+                {% endif %}
+            </ul>
+
+        </a>
+    </div>
+</div>
