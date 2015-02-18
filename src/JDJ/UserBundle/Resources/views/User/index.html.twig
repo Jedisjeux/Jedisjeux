@@ -1,0 +1,41 @@
+{% extends "JDJWebBundle::layout.html.twig" %}
+{% from 'JDJWebBundle:Macros:misc.html.twig' import pagination %}
+{% block body %}
+    <h1>Liste des utilisateurs</h1>
+
+    <ul>
+        <li>
+            <a class="button add" alt="Ajouter un nouvel utilisateur" href="{{ path('espace_personnel_new') }}">
+                Ajouter un nouvel utilisateur
+            </a>
+        </li>
+    </ul>
+
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Avatar</th>
+                <th>Presentation</th>
+                <th>Slug</th>
+                <th>Créé le</th>
+                <th>Mis à jour le</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            {% include 'JDJUserBundle:User/partial:_listElement.html.twig' with {'entity': entity} %}
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="pagination-wrapper">
+        <div class="pagination-bottom">
+            {{ pagination(entities) }}
+        </div>
+    </div>
+{% endblock %}
+

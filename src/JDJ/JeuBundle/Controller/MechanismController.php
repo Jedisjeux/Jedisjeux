@@ -33,7 +33,7 @@ class MechanismController extends Controller
             $deleteForms[$entity->getId()] = $this->createDeleteForm($entity->getId())->createView();
         }
 
-        return $this->render('JDJJeuBundle:Mechanism:index.html.twig', array(
+        return $this->render('jeu/mechanism/index.html.twig', array(
             'entities' => $entities,
             'deleteForms' => $deleteForms,
         ));
@@ -56,7 +56,7 @@ class MechanismController extends Controller
             return $this->redirect($this->generateUrl('mechanism'));
         }
 
-        return $this->render('JDJJeuBundle:Mechanism:new.html.twig', array(
+        return $this->render('jeu/mechanism/new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -90,7 +90,7 @@ class MechanismController extends Controller
         $entity = new Mechanism();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('JDJJeuBundle:Mechanism:new.html.twig', array(
+        return $this->render('jeu/mechanism/new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -132,7 +132,7 @@ class MechanismController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('JDJJeuBundle:Mechanism:show.html.twig', array(
+        return $this->render('jeu/mechanism/show.html.twig', array(
             'entity'      => $entity,
             'jeux'        => $jeux,
             'delete_form' => $deleteForm->createView(),
@@ -155,7 +155,7 @@ class MechanismController extends Controller
 
         $form = $this->createEditForm($entity);
 
-        return $this->render('JDJJeuBundle:Mechanism:edit.html.twig', array(
+        return $this->render('jeu/mechanism/edit.html.twig', array(
             'entity'      => $entity,
             'form'   => $form->createView(),
         ));
@@ -203,7 +203,7 @@ class MechanismController extends Controller
             return $this->redirect($this->generateUrl('mechanism'));
         }
 
-        return $this->render('JDJJeuBundle:Mechanism:edit.html.twig', array(
+        return $this->render('jeu/mechanism/edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

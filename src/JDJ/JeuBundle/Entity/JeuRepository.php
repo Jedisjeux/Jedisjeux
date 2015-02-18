@@ -48,6 +48,12 @@ class JeuRepository extends EntityRepository
                 ->addSelect($queryBuilder->expr()->count('n.valeur'). "AS HIDDEN noteAvg")
             ;
         }
+
+        /**
+         * TODO, faire avec updateAt desc quand il y aura cela dans l'entité
+         */
+        $queryBuilder
+            ->orderBy('o.id', 'desc');
     }
 
     /**

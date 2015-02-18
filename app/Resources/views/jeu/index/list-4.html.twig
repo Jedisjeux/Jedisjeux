@@ -1,0 +1,58 @@
+{% from "JDJJeuBundle:Jeu:macros.html.twig" import joueurCount %}
+
+<div class="img-box-4 text-center jeu-list">
+
+    <div class="row">
+        {% for key, jeu in jeux %}
+        {% if key != 0 and key%4 == 0 %}
+    </div>
+
+    <div class="row">
+
+        {% endif %}
+
+        {% set faImg = 'fa-picture-o' %}
+        {% set jeuHref = path('jeu_show', {'id': jeu.id, 'slug': jeu.slug}) %}
+
+        {% if key%4 == 0 %}
+            {% set bg = 'bg-red' %}
+            {% set faImg = 'fa-star' %}
+        {% elseif (key+1)%4 == 0 %}
+            {% set bg = 'bg-lblue' %}
+            {% set faImg = 'fa-child' %}
+        {% elseif (key+2)%4 == 0 %}
+            {% set bg = 'bg-green' %}
+            {% set faImg = 'fa-user' %}
+        {% elseif (key+3)%4 == 0 %}
+            {% set bg = 'bg-purple' %}
+            {% set faImg = 'fa-user-plus' %}
+        {% endif %}
+
+
+        <div class="col-md-3 col-sm-6">
+            <!-- Image Box #4 Item -->
+            <div class="img-box-4-item">
+                <!-- Image -->
+                <div class="img-container">
+                    <a href="{{ jeuHref }}"><img
+                                src="http://www.jedisjeux.net/img/800/{{ jeu.imageCouverture }}" alt="" class="img-responsive"></a>
+                </div>
+                <!-- Image Box #4 Content -->
+                <div class="img-box-4-content">
+                    <!-- Icon -->
+                    <a href="#"><i class="fa {{ faImg }} {{ bg }}"></i></a>
+                    <!-- Heading -->
+                    <h4><a href="{{ jeuHref }}">{{ jeu.libelle }}</a></h4>
+                    <!-- Border -->
+                    <div class="bor {{ bg }}"></div>
+                    <!-- Paragraph -->
+                    <p>
+                        {{ joueurCount(jeu) }}<br/>
+                        à partir de {{ jeu.ageMin }} ans<br/>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>

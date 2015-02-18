@@ -36,7 +36,7 @@ select      old.*
 from        jedisjeux.jdj_game old
 inner join  jdj_statut statut
                 on statut.id = old.valid
-limit       1000
+-- limit       1000
 EOM;
 
 

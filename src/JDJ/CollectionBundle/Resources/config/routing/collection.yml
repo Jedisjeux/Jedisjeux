@@ -11,9 +11,14 @@ collection_new:
     defaults: { _controller: "JDJCollectionBundle:Collection:new" }
 
 collection_create:
-    path:     /create
+    path:     /{jeu_id}/{user_id}/create
     defaults: { _controller: "JDJCollectionBundle:Collection:create" }
     requirements: { _method: post }
+
+collection_add_game:
+    path:     /{jeu_id}/{collection_id}/add-game
+    defaults: { _controller: "JDJCollectionBundle:Collection:addGame" }
+    requirements: { _method: get }
 
 collection_edit:
     path:     /{id}/edit

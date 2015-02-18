@@ -22,7 +22,6 @@ class ClientType extends AbstractType
             ->add('complement')
             ->add('codepostal')
             ->add('ville')
-            ->add('dateCreation')
         ;
     }
     

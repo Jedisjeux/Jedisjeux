@@ -1,3 +1,8 @@
+check if brew is installed
+``` bash
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
 1 - a/ Mac installation
 
 launch these commands :
@@ -42,5 +47,7 @@ sudo /etc/init.d/elasticsearch start
 Now you can lanch these commands in order to indexing existing data :
 go to your symfony project directory
 ``` bash
+elasticsearch start
 php app/console fos:elastica:populate
+
 ```

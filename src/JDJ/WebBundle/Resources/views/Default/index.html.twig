@@ -1,104 +1,686 @@
-{% extends "JDJWebBundle::layout.html.twig" %}
+{% extends 'base.html.twig' %}
 
-{% block body %}
+{% block container %}
+
+    <div class="col-md-8">
+
+    <!-- Carousel starts -->
+
+    <!-- Bootstrap carousel usage
+        Bootstrap carousel should have id. Below i am using "bs-carousel-X". Where "X" denotes number". If a page has more than 1 carousel, then add the new carousel with the id "bs-carousel-1", "bs-carousel-2". You also need to update the id in, "carousel indicators" section and "carousel control" section.
+
+        Carousel comes with 3 main data attributes which you can customize. They are...
+        data-interval - Time delay between item cycle. Default value "5000".
+        data-pause - Pause on hover. Default value "pause".
+        data-wrap - Continues cycle or stop at the end. Default value "true".
+    -->
+
+    <!-- Outer layer -->
+    <div id="bs-carousel-1" class="carousel slide" data-ride="carousel" data-interval="5000" data-pause="hover"
+         data-wrap="true">
+        <!-- Bootstrap indicators. If you don't need indicators, remove the below section -->
+        <ol class="carousel-indicators">
+            <li data-target="#bs-carousel-1" data-slide-to="0" class="active"></li>
+            <li data-target="#bs-carousel-1" data-slide-to="1"></li>
+            <li data-target="#bs-carousel-1" data-slide-to="2"></li>
+            <li data-target="#bs-carousel-1" data-slide-to="3"></li>
+        </ol>
+        <!-- Slides. You can also add captions -->
+        <div class="carousel-inner">
+            <!-- Item, First item should have extra class "active" -->
+            <div class="item active">
+                <!-- Image -->
+                <img src="../img/magazine/1.jpg" alt="">
+
+                <div class="carousel-caption c-right-big">
+                    <!-- Heading -->
+                    <h4><a href="#">Some heading here</a></h4>
+                    <!-- Para -->
+                    <p>Nemo enim ipsam voluptatem quia voluptas sit it aut fugit, sed quia neque porro quisquam est qui
+                        dolorem ipsum quia dolor sit amet consectetur. Nemo enim ipsam voluptatem quia voluptas sit it
+                        aut
+                        fugit, sed quia neque porro quisquam est qui dolorem ipsum quia dolor sit amet consectetur.</p>
+                </div>
+            </div>
+            <div class="item">
+                <img src="../img/magazine/2.jpg" alt="">
+
+                <div class="carousel-caption c-right-big">
+                    <!-- Heading -->
+                    <h4><a href="#">Some heading here</a></h4>
+                    <!-- Para -->
+                    <p>Nemo enim ipsam voluptatem quia voluptas sit it aut fugit, sed quia neque porro quisquam est qui
+                        dolorem ipsum quia dolor sit amet consectetur. Nemo enim ipsam voluptatem quia voluptas sit it
+                        aut
+                        fugit, sed quia neque porro quisquam est qui dolorem ipsum quia dolor sit amet consectetur.</p>
+                </div>
+            </div>
+            <div class="item">
+                <img src="../img/magazine/3.jpg" alt="">
+
+                <div class="carousel-caption c-right-big">
+                    <!-- Heading -->
+                    <h4><a href="#">Some heading here</a></h4>
+                    <!-- Para -->
+                    <p>Nemo enim ipsam voluptatem quia voluptas sit it aut fugit, sed quia neque porro quisquam est qui
+                        dolorem ipsum quia dolor sit amet consectetur. Nemo enim ipsam voluptatem quia voluptas sit it
+                        aut
+                        fugit, sed quia neque porro quisquam est qui dolorem ipsum quia dolor sit amet consectetur.</p>
+                </div>
+            </div>
+            <div class="item">
+                <img src="../img/magazine/4.jpg" alt="">
+
+                <div class="carousel-caption c-right-big">
+                    <!-- Heading -->
+                    <h4><a href="#">Some heading here</a></h4>
+                    <!-- Para -->
+                    <p>Nemo enim ipsam voluptatem quia voluptas sit it aut fugit, sed quia neque porro quisquam est qui
+                        dolorem ipsum quia dolor sit amet consectetur. Nemo enim ipsam voluptatem quia voluptas sit it
+                        aut
+                        fugit, sed quia neque porro quisquam est qui dolorem ipsum quia dolor sit amet consectetur.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Carousel controls (arrows). If you don't need controls, remove the below section -->
+        <a class="left carousel-control" href="#bs-carousel-1" role="button" data-slide="prev">
+            <span class="fa fa-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#bs-carousel-1" role="button" data-slide="next">
+            <span class="fa fa-chevron-right"></span>
+        </a>
+    </div>
+
+    <!-- Carousel ends -->
+
+
+    <br/>
+
     <div class="row">
-        <div class="large-12 columns">
-            <div class="panel">
-                <h3>We&rsquo;re stoked you want to try Foundation! </h3>
 
-                <p>To get going, this file (index.html) includes some basic styles you can modify, play around with, or
-                    totally destroy to get going.</p>
+        <div class="col-md-6 col-sm-6">
 
-                <p>Once you've exhausted the fun in this document, you should check out:</p>
+            <!-- Heading -->
+            <h4 class="mag-head"><i class="fa fa-cloud color"></i> News Récentes</h4>
 
-                <div class="row">
-                    <div class="large-4 medium-4 columns">
-                        <p><a href="http://foundation.zurb.com/docs">Foundation Documentation</a><br/>Everything you
-                            need to know about using the framework.</p>
+            <!-- Magazine item one starts -->
+            <div class="magazine-item mag-1">
+                <!-- Image -->
+                <a href="../img/magazine/small/4.jpg" class="lightbox"><img src="../img/magazine/small/4.jpg" alt=""
+                                                                            class="img-responsive"/></a>
+                <!-- Heading -->
+                <h4><a href="#">Nemo Enim Ipsam Voluptatem Quuia</a></h4>
+                <!-- Meta -->
+                <div class="magazine-meta"><i class="fa fa-calendar"></i> 25 Jan 2014 - <i class="fa fa-comments"></i> 5
+                    Comments
+                </div>
+                <!-- Para -->
+                <p>Nemo enim ipsam voluptatem quia quia neque porro qui dolorem ipsum quia dolor sit amet
+                    consectetur. </p>
+            </div>
+            <!-- Magazine item one ends -->
+
+            <hr/>
+
+            <!-- Magazine list -->
+            <div class="magazine-list">
+                <ul class="list-unstyled">
+                    <!-- List item starts -->
+                    <li>
+                        <a href="../img/gallery/small/5.jpg" class="lightbox"><img src="../img/gallery/small/5.jpg"
+                                                                                   class="img-responsive"/></a>
+
+                        <div class="m-list-content">
+                            <!-- Heading -->
+                            <h5><a href="#">Nemo enim ipsam voluptatem quia quia neque porro</a></h5>
+                            <!-- Meta -->
+                            <div class="magazine-meta"><i class="fa fa-calendar"></i> 25 Jan 2014 - <i
+                                        class="fa fa-comments"></i> 5 Comments
+                            </div>
+                        </div>
+                    </li>
+                    <!-- List item ends -->
+                    <li>
+                        <a href="../img/gallery/small/6.jpg" class="lightbox"><img src="../img/gallery/small/6.jpg"
+                                                                                   class="img-responsive"/></a>
+
+                        <div class="m-list-content">
+                            <!-- Heading -->
+                            <h5><a href="#">Temporibus autem quibusdam et aut officiis aut rerum</a></h5>
+                            <!-- Meta -->
+                            <div class="magazine-meta"><i class="fa fa-calendar"></i> 25 Jan 2014 - <i
+                                        class="fa fa-comments"></i> 5 Comments
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="../img/gallery/small/7.jpg" class="lightbox"><img src="../img/gallery/small/7.jpg"
+                                                                                   class="img-responsive"/></a>
+
+                        <div class="m-list-content">
+                            <!-- Heading -->
+                            <h5><a href="#">Voluptates repudiandae sint et molestiae non recusand</a></h5>
+                            <!-- Meta -->
+                            <div class="magazine-meta"><i class="fa fa-calendar"></i> 25 Jan 2014 - <i
+                                        class="fa fa-comments"></i> 5 Comments
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="../img/gallery/small/8.jpg" class="lightbox"><img src="../img/gallery/small/8.jpg"
+                                                                                   class="img-responsive"/></a>
+
+                        <div class="m-list-content">
+                            <!-- Heading -->
+                            <h5><a href="#">Neque porro quisquam estui ipsum quia dolor sit</a></h5>
+                            <!-- Meta -->
+                            <div class="magazine-meta"><i class="fa fa-calendar"></i> 25 Jan 2014 - <i
+                                        class="fa fa-comments"></i> 5 Comments
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <hr/>
+
+        </div>
+
+        <div class="col-md-6 col-sm-6">
+
+            <!-- Heading -->
+            <h4 class="mag-head"><i class="fa fa-desktop color"></i> Top News</h4>
+
+            <!-- Magazine item one starts -->
+            <div class="magazine-item mag-1">
+                <!-- Image -->
+                <a href="../img/magazine/small/2.jpg" class="lightbox"><img src="../img/magazine/small/2.jpg" alt=""
+                                                                            class="img-responsive"/></a>
+                <!-- Heading -->
+                <h4><a href="#">Amazing Theme Ever In The Internet</a></h4>
+                <!-- Meta -->
+                <div class="magazine-meta"><i class="fa fa-calendar"></i> 25 Jan 2014 - <i class="fa fa-comments"></i> 5
+                    Comments
+                </div>
+                <!-- Para -->
+                <p>Nemo enim ipsam voluptatem quia quia neque porro qui dolorem ipsum quia dolor sit amet
+                    consectetur. </p>
+            </div>
+            <!-- Magazine item one ends -->
+
+            <hr/>
+
+            <!-- Magazine list -->
+            <div class="magazine-list">
+                <ul class="list-unstyled">
+                    <!-- List item starts -->
+                    <li>
+                        <!-- Heading -->
+                        <h5><a href="#">Nemo enim ipsam voluptatem quia quia neque repudiandae sint et molestiae non
+                                recusand</a></h5>
+                        <!-- Meta -->
+                        <div class="magazine-meta"><i class="fa fa-calendar"></i> 25 Jan 2014 - <i
+                                    class="fa fa-comments"></i> 5 Comments
+                        </div>
+                    </li>
+                    <!-- List item ends -->
+                    <li>
+                        <!-- Heading -->
+                        <h5><a href="#">Temporibus autem quibusdam et aut officiis aut rerum Voluptates et molestiae non
+                                recusand</a></h5>
+                        <!-- Meta -->
+                        <div class="magazine-meta"><i class="fa fa-calendar"></i> 25 Jan 2014 - <i
+                                    class="fa fa-comments"></i> 5 Comments
+                        </div>
+                    </li>
+                    <li>
+                        <!-- Heading -->
+                        <h5><a href="#">Voluptates repudiandae sint et molestiae non recusand Voluptates et molestiae
+                                non
+                                recusand</a></h5>
+                        <!-- Meta -->
+                        <div class="magazine-meta"><i class="fa fa-calendar"></i> 25 Jan 2014 - <i
+                                    class="fa fa-comments"></i> 5 Comments
+                        </div>
+                    </li>
+                    <li>
+                        <!-- Heading -->
+                        <h5><a href="#">Neque porro quisquam estui ipsum quia dolor sit Voluptates repudiandae non
+                                recusand</a></h5>
+                        <!-- Meta -->
+                        <div class="magazine-meta"><i class="fa fa-calendar"></i> 25 Jan 2014 - <i
+                                    class="fa fa-comments"></i> 5 Comments
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <hr/>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <h4 class="mag-head"><i class="fa fa-comments color"></i> Top Commented</h4>
+
+            <!-- Magazine item two starts -->
+            <div class="magazine-item mag-2">
+                <!-- Image -->
+                <a href="../img/gallery/small/6.jpg" class="lightbox"><img src="../img/gallery/small/6.jpg" alt=""
+                                                                           class="img-responsive"/></a>
+
+                <div class="mag-2-content">
+                    <!-- Heading -->
+                    <h4><a href="#">Nemo Enim Ipsam Voluptatem Quuia</a></h4>
+                    <!-- Meta -->
+                    <div class="magazine-meta"><i class="fa fa-calendar"></i> 25 Jan 2014 - <i
+                                class="fa fa-comments"></i> 5
+                        Comments
                     </div>
-                    <div class="large-4 medium-4 columns">
-                        <p><a href="http://github.com/zurb/foundation">Foundation on Github</a><br/>Latest code, issue
-                            reports, feature requests and more.</p>
+                    <!-- Para -->
+                    <p>Nemo enim ipsam voluptatem quia quia neque porro qui dolorem voluptatem quia quia neque porro qui
+                        voluptatem quia quia neque porro qui voluptatem quia quia neque porro qui ipsum quia dolor sit
+                        amet
+                        consectetur. </p>
+                </div>
+            </div>
+            <!-- Magazine item two ends -->
+
+            <!-- Magazine item two starts -->
+            <div class="magazine-item mag-2">
+                <!-- Image -->
+                <a href="../img/gallery/small/3.jpg" class="lightbox"><img src="../img/gallery/small/3.jpg" alt=""
+                                                                           class="img-responsive"/></a>
+
+                <div class="mag-2-content">
+                    <!-- Heading -->
+                    <h4><a href="#">Quia neque porro qui dolorem voluptatem </a></h4>
+                    <!-- Meta -->
+                    <div class="magazine-meta"><i class="fa fa-calendar"></i> 25 Jan 2014 - <i
+                                class="fa fa-comments"></i> 5
+                        Comments
                     </div>
-                    <div class="large-4 medium-4 columns">
-                        <p><a href="http://twitter.com/foundationzurb">@foundationzurb</a><br/>Ping us on Twitter if you
-                            have questions. If you build something with this we'd love to see it (and send you a totally
-                            boss sticker).</p>
+                    <!-- Para -->
+                    <p>Nemo enim ipsam voluptatem quia quia neque porro qui dolorem voluptatem quia quia neque porro qui
+                        voluptatem quia quia neque porro qui voluptatem quia quia neque porro qui ipsum quia dolor sit
+                        amet
+                        consectetur. </p>
+                </div>
+            </div>
+            <!-- Magazine item two ends -->
+
+            <!-- Magazine item two starts -->
+            <div class="magazine-item mag-2">
+                <!-- Image -->
+                <a href="../img/gallery/small/4.jpg" class="lightbox"><img src="../img/gallery/small/4.jpg" alt=""
+                                                                           class="img-responsive"/></a>
+
+                <div class="mag-2-content">
+                    <!-- Heading -->
+                    <h4><a href="#">Quia dolor sit singa amet consectetur</a></h4>
+                    <!-- Meta -->
+                    <div class="magazine-meta"><i class="fa fa-calendar"></i> 25 Jan 2014 - <i
+                                class="fa fa-comments"></i> 5
+                        Comments
+                    </div>
+                    <!-- Para -->
+                    <p>Nemo enim ipsam voluptatem quia quia neque porro qui dolorem voluptatem quia quia neque porro qui
+                        voluptatem quia quia neque porro qui voluptatem quia quia neque porro qui ipsum quia dolor sit
+                        amet
+                        consectetur. </p>
+                </div>
+            </div>
+            <!-- Magazine item two ends -->
+
+            <hr/>
+
+        </div>
+
+    </div>
+
+    <h4 class="mag-head"><i class="fa fa-user color"></i> Top Rated</h4>
+
+    <div class="row">
+
+        <div class="col-md-4 col-sm-6">
+            <!-- Magazine item one starts -->
+            <div class="magazine-item mag-1">
+                <!-- Image -->
+                <a href="../img/gallery/small/6.jpg" class="lightbox"><img src="../img/gallery/small/6.jpg" alt=""
+                                                                           class="img-responsive"/></a>
+                <!-- Heading -->
+                <h4><a href="#">Coolest Product</a></h4>
+                <!-- Meta -->
+                <div class="magazine-meta"><i class="fa fa-calendar"></i> 25 Jan 2014 - <i class="fa fa-comments"></i> 5
+                    Comments
+                </div>
+                <!-- Para -->
+                <p>Nemo enim ipsam voluptatem ipsum quia dolor sit amet consectetur. </p>
+            </div>
+            <!-- Magazine item one ends -->
+        </div>
+
+        <div class="col-md-4 col-sm-6">
+            <!-- Magazine item one starts -->
+            <div class="magazine-item mag-1">
+                <!-- Image -->
+                <a href="../img/gallery/small/8.jpg" class="lightbox"><img src="../img/gallery/small/8.jpg" alt=""
+                                                                           class="img-responsive"/></a>
+                <!-- Heading -->
+                <h4><a href="#">Lot Of Features</a></h4>
+                <!-- Meta -->
+                <div class="magazine-meta"><i class="fa fa-calendar"></i> 25 Jan 2014 - <i class="fa fa-comments"></i> 5
+                    Comments
+                </div>
+                <!-- Para -->
+                <p>Nemo enim ipsam voluptatem ipsum quia dolor sit amet consectetur. </p>
+            </div>
+            <!-- Magazine item one ends -->
+        </div>
+
+        <div class="col-md-4 col-sm-6">
+            <!-- Magazine item one starts -->
+            <div class="magazine-item mag-1">
+                <!-- Image -->
+                <a href="../img/gallery/small/5.jpg" class="lightbox"><img src="../img/gallery/small/5.jpg" alt=""
+                                                                           class="img-responsive"/></a>
+                <!-- Heading -->
+                <h4><a href="#">Amazing Theme Ever</a></h4>
+                <!-- Meta -->
+                <div class="magazine-meta"><i class="fa fa-calendar"></i> 25 Jan 2014 - <i class="fa fa-comments"></i> 5
+                    Comments
+                </div>
+                <!-- Para -->
+                <p>Nemo enim ipsam voluptatem ipsum quia dolor sit amet consectetur. </p>
+            </div>
+            <!-- Magazine item one ends -->
+        </div>
+
+    </div>
+
+    <hr/>
+
+    </div>
+
+    <!-- Sidebar column -->
+    <div class="col-md-4">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+    <!-- Magazine item one starts -->
+    <div class="magazine-item mag-1">
+        <!-- Image -->
+        <a href="../img/magazine/small/1.jpg" class="lightbox"><img src="../img/magazine/small/1.jpg" alt=""
+                                                                    class="img-responsive"/></a>
+        <!-- Heading -->
+        <h4><a href="#">Amazing Theme Ever In The Internet</a></h4>
+        <!-- Meta -->
+        <div class="magazine-meta"><i class="fa fa-calendar"></i> 25 Jan 2014 - <i class="fa fa-comments"></i> 5
+            Comments
+        </div>
+        <!-- Para -->
+        <p>Nemo enim ipsam voluptatem quia quia neque porro qui dolorem ipsum quia dolor sit amet consectetur. </p>
+    </div>
+    <!-- Magazine item one ends -->
+
+    <div class="magazine-item mag-1">
+        <a href="../img/magazine/small/3.jpg" class="lightbox"><img src="../img/magazine/small/3.jpg" alt=""
+                                                                    class="img-responsive"/></a>
+        <h4><a href="#">Nemo Enim Ipsam Voluptatem Quuia</a></h4>
+
+        <div class="magazine-meta"><i class="fa fa-calendar"></i> 25 Jan 2014 - <i class="fa fa-comments"></i> 5
+            Comments
+        </div>
+        <p>Nemo enim ipsam voluptatem quia quia neque porro qui dolorem ipsum quia dolor sit amet consectetur. </p>
+    </div>
+
+    <hr/>
+
+    <!-- Search Widget -->
+    <div class="s-widget">
+        <h5><i class="fa fa-search color"></i> Search</h5>
+        <!-- Widgets Content -->
+        <div class="widget-content search">
+            <form role="form">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Type Something">
+													<span class="input-group-btn">
+														<button class="btn btn-color" type="button">Search</button>
+													</span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <hr/>
+
+    <!-- Social media widget -->
+    <div class="s-widget">
+        <!-- Widgets Content -->
+        <div class="widget-content brand-bg">
+            <!-- Social Media Icons -->
+            <a href="#" class="facebook"><i class="fa fa-facebook square-5"></i></a>
+            <a href="#" class="twitter"><i class="fa fa-twitter square-5"></i></a>
+            <a href="#" class="google-plus"><i class="fa fa-google-plus square-5"></i></a>
+            <a href="#" class="linkedin"><i class="fa fa-linkedin square-5"></i></a>
+            <a href="#" class="pinterest"><i class="fa fa-pinterest square-5"></i></a>
+            <a href="#" class="bitcoin"><i class="fa fa-bitcoin square-5"></i></a>
+            <a href="#" class="foursquare"><i class="fa fa-foursquare square-5"></i></a>
+            <a href="#" class="flickr"><i class="fa fa-flickr square-5"></i></a>
+        </div>
+    </div>
+
+    <hr/>
+
+    <!-- Nav tab widget - popular, recent and comments -->
+    <div class="s-widget">
+        <h5><i class="fa fa-table color"></i> Nav Tabs</h5>
+
+        <div class="widget-content tabs">
+            <div class="nav-tabs-two">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#popular" data-toggle="tab">Popular</a></li>
+                    <li><a href="#recent" data-toggle="tab">Recent</a></li>
+                    <li><a href="#comments" data-toggle="tab">Comments</a></li>
+                </ul>
+                <!-- Tab content -->
+                <div class="tab-content">
+                    <!-- Popular posts -->
+                    <div class="tab-pane fade in active" id="popular">
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <!-- Item image -->
+                                    <img src="../img/user/1.jpg" alt="" class="img-responsive img-thumbnail"/>
+                                    <!-- Item title -->
+                                    <span>Neque porro quisquam estui dolorem ipsum quia dolor sit</span>
+
+                                    <div class="clearfix"></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Item image -->
+                                    <img src="../img/user/2.jpg" alt="" class="img-responsive img-thumbnail"/>
+                                    <!-- Item title -->
+                                    <span>Temporibus autem quibusdam et aut officiis  aut rerum</span>
+
+                                    <div class="clearfix"></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Item image -->
+                                    <img src="../img/user/3.jpg" alt="" class="img-responsive img-thumbnail"/>
+                                    <!-- Item title -->
+                                    <span>Voluptates repudiandae sint et molestiae non recusand</span>
+
+                                    <div class="clearfix"></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Item image -->
+                                    <img src="../img/user/4.jpg" alt="" class="img-responsive img-thumbnail"/>
+                                    <!-- Item title -->
+                                    <span>Neque porro quisquam estui dolorem ipsum quia dolor sit</span>
+
+                                    <div class="clearfix"></div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Recent posts -->
+                    <div class="tab-pane fade" id="recent">
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <!-- Item image -->
+                                    <img src="../img/user/1.jpg" alt="" class="img-responsive img-thumbnail"/>
+                                    <!-- Item title -->
+                                    <span>Neque porro quisquam estui dolorem ipsum quia dolor sit</span>
+
+                                    <div class="clearfix"></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Item image -->
+                                    <img src="../img/user/2.jpg" alt="" class="img-responsive img-thumbnail"/>
+                                    <!-- Item title -->
+                                    <span>Temporibus autem quibusdam et aut officiis  aut rerum</span>
+
+                                    <div class="clearfix"></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Item image -->
+                                    <img src="../img/user/3.jpg" alt="" class="img-responsive img-thumbnail"/>
+                                    <!-- Item title -->
+                                    <span>Voluptates repudiandae sint et molestiae non recusand</span>
+
+                                    <div class="clearfix"></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Item image -->
+                                    <img src="../img/user/4.jpg" alt="" class="img-responsive img-thumbnail"/>
+                                    <!-- Item title -->
+                                    <span>Neque porro quisquam estui dolorem ipsum quia dolor sit</span>
+
+                                    <div class="clearfix"></div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Recent comments -->
+                    <div class="tab-pane fade" id="comments">
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <!-- Item image -->
+                                    <img src="../img/user/1.jpg" alt="" class="img-responsive img-thumbnail"/>
+                                    <!-- Item title -->
+                                    <span>Neque porro quisquam estui dolorem ipsum quia dolor sit</span>
+
+                                    <div class="clearfix"></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Item image -->
+                                    <img src="../img/user/2.jpg" alt="" class="img-responsive img-thumbnail"/>
+                                    <!-- Item title -->
+                                    <span>Temporibus autem quibusdam et aut officiis  aut rerum</span>
+
+                                    <div class="clearfix"></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Item image -->
+                                    <img src="../img/user/3.jpg" alt="" class="img-responsive img-thumbnail"/>
+                                    <!-- Item title -->
+                                    <span>Voluptates repudiandae sint et molestiae non recusand</span>
+
+                                    <div class="clearfix"></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Item image -->
+                                    <img src="../img/user/4.jpg" alt="" class="img-responsive img-thumbnail"/>
+                                    <!-- Item title -->
+                                    <span>Neque porro quisquam estui dolorem ipsum quia dolor sit</span>
+
+                                    <div class="clearfix"></div>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <h1>Titre 1</h1>
-    <h2>Titre 2</h2>
-    <h3>Titre 3</h3>
-    <h4>Titre 4</h4>
-    <h5>Titre 5</h5>
-    <h6>Titre 6</h6>
-
-    <table>
-        <thead>
-        <tr>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Email</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Johnny</td>
-            <td>Hamster</td>
-            <td>johnny.hamster@gmail.com</td>
-        </tr>
-        <tr>
-            <td>Rémi</td>
-            <td>Buffle</td>
-            <td>remi.buffle@gmail.com</td>
-        </tr>
-        <tr>
-            <td>Claude</td>
-            <td>Fouine</td>
-            <td>claude.fouine@gmail.com</td>
-        </tr>
-        </tbody>
-    </table>
-
-    <ul class="tabs" data-tab>
-        <li class="tab-title active"><a href="#panel2-1">Tab 1</a></li>
-        <li class="tab-title"><a href="#panel2-2">Tab 2</a></li>
-        <li class="tab-title"><a href="#panel2-3">Tab 3</a></li>
-        <li class="tab-title"><a href="#panel2-4">Tab 4</a></li>
-    </ul>
-    <div class="tabs-content">
-        <div class="content active" id="panel2-1"><p>First panel content goes here...</p></div>
-        <div class="content" id="panel2-2"><p>Second panel content goes here...</p></div>
-        <div class="content" id="panel2-3"><p>Third panel content goes here...</p></div>
-        <div class="content" id="panel2-4"><p>Fourth panel content goes here...</p></div>
+    <!-- Tag Widget -->
+    <div class="s-widget">
+        <h5><i class="fa fa-tags color"></i> Tags</h5>
+        <!-- Widgets Content -->
+        <div class="widget-content tags">
+            <a href="#" class="label">web</a>
+            <a href="#" class="label">wordpress</a>
+            <a href="#" class="label">php</a>
+            <a href="#" class="label">jquery</a>
+            <a href="#" class="label">java</a>
+            <a href="#" class="label">photoshop</a>
+            <a href="#" class="label">windows</a>
+            <a href="#" class="label">android</a>
+            <a href="#" class="label">ios</a>
+            <a href="#" class="label">chrome</a>
+            <a href="#" class="label">development</a>
+            <a href="#" class="label">plugin</a>
+            <a href="#" class="label">personal</a>
+            <a href="#" class="label">general</a>
+        </div>
     </div>
 
-    <div class="large-12 columns">
-        <ul class="tabs vertical" data-tab>
-            <li class="tab-title active"><a href="#panel1a">Tab 1</a></li>
-            <li class="tab-title"><a href="#panel2a">Tab 2</a></li>
-            <li class="tab-title"><a href="#panel3a">Tab 3</a></li>
-            <li class="tab-title"><a href="#panel4a">Tab 4</a></li>
-        </ul>
-        <div class="tabs-content vertical">
-            <div class="content active" id="panel1a">
-                <p>Panel 1 content goes here.</p>
-            </div>
-            <div class="content" id="panel2a">
-                <p>Panel 2 content goes here.</p>
-            </div>
-            <div class="content" id="panel3a">
-                <p>Panel 3 content goes here.</p>
-            </div>
-            <div class="content" id="panel4a">
-                <p>Panel 4 content goes here.</p>
-            </div>
+    <!-- Gallery Widget -->
+    <div class="s-widget">
+        <!-- Heading -->
+        <h5><i class="fa fa-camera color"></i> Gallery</h5>
+        <!-- Widgets Content -->
+        <div class="widget-content gallery">
+            <a href="../img/gallery/small/1.jpg" class="lightbox"><img src="../img/gallery/small/1.jpg" alt=""
+                                                                       class="img-responsive img-thumbnail"/></a>
+            <a href="../img/gallery/small/2.jpg" class="lightbox"><img src="../img/gallery/small/2.jpg" alt=""
+                                                                       class="img-responsive img-thumbnail"/></a>
+            <a href="../img/gallery/small/3.jpg" class="lightbox"><img src="../img/gallery/small/3.jpg" alt=""
+                                                                       class="img-responsive img-thumbnail"/></a>
+            <a href="../img/gallery/small/1.jpg" class="lightbox"><img src="../img/gallery/small/1.jpg" alt=""
+                                                                       class="img-responsive img-thumbnail"/></a>
+            <a href="../img/gallery/small/2.jpg" class="lightbox"><img src="../img/gallery/small/2.jpg" alt=""
+                                                                       class="img-responsive img-thumbnail"/></a>
+            <a href="../img/gallery/small/3.jpg" class="lightbox"><img src="../img/gallery/small/3.jpg" alt=""
+                                                                       class="img-responsive img-thumbnail"/></a>
+            <a href="../img/gallery/small/1.jpg" class="lightbox"><img src="../img/gallery/small/1.jpg" alt=""
+                                                                       class="img-responsive img-thumbnail"/></a>
+            <a href="../img/gallery/small/2.jpg" class="lightbox"><img src="../img/gallery/small/2.jpg" alt=""
+                                                                       class="img-responsive img-thumbnail"/></a>
         </div>
     </div>
 
 
-{% endblock %}
+    </div>
+    </div>
+
+
+{% endblock container %}

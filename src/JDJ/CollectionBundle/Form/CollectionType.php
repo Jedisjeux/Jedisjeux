@@ -17,9 +17,8 @@ class CollectionType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('slug')
-            ->add('user')
-            ->add('collectionElements')
+            ->add('user','hidden')
+            ->add('collectionElements','hidden')
         ;
     }
     

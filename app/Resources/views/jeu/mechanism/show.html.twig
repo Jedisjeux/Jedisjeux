@@ -1,0 +1,37 @@
+{% extends "base.html.twig" %}
+{% from 'JDJWebBundle:Macros:misc.html.twig' import pagination %}
+
+{% block body -%}
+
+    <div class="block-heading-two">
+        <h3><span>{{ entity.libelle }}</span></h3>
+    </div>
+git status
+    {{ entity.description|raw }}
+
+    {% include "jeu/index/list-4.html.twig" with {'jeux': jeux} only %}
+
+
+    {% block Pagination %}
+        <div class="pagination-wrapper">
+            <div class="pagination-bottom">
+                {{ pagination(jeux) }}
+            </div>
+        </div>
+    {% endblock %}
+
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('mechanism') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('mechanism_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

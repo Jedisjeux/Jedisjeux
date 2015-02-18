@@ -27,7 +27,7 @@ and adding following line :
 4/ download an archive of the jedisjeux database :
 
 ``` bash
-cd /var/www/jdj
+cd /var/www/
 scp admin@jedisjeux.net:/srv/d_jedisjeux/www/sav/dmp_jdj_1.sql.gz ./
 ```
 
@@ -43,6 +43,7 @@ mysql -u root jedisjeux < dmp_jdj_1.sql
 6/ create your empty database
 
 ``` bash
+cd /var/www/jdj
 php app/console do:sc:up --force
 php app/console doctrine:fixtures:load --fixtures=src/JDJ/
 ```

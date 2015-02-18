@@ -2,11 +2,17 @@
 
 namespace JDJ\CollectionBundle\Controller;
 
+use Doctrine\Common\Util\Debug;
+use JDJ\CollectionBundle\Service\CollectionService;
+use JDJ\JeuBundle\Entity\Jeu;
+use JDJ\UserBundle\Entity\User;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use JDJ\CollectionBundle\Entity\Collection;
 use JDJ\CollectionBundle\Form\CollectionType;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Collection controller.
@@ -35,80 +41,76 @@ class CollectionController extends Controller
      * Creates a new Collection entity.
      *
      */
-    public function createAction(Request $request)
+    public function createAction($jeu_id, $user_id)
     {
-        $entity = new Collection();
-        $form = $this->createCreateForm($entity);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('collection_show', array('id' => $entity->getId())));
-        }
-
-        return $this->render('JDJCollectionBundle:Collection:new.html.twig', array(
-            'entity' => $entity,
-            'form' => $form->createView(),
-        ));
-    }
-
-    /**
-     * Creates a form to create a Collection entity.
-     *
-     * @param Collection $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createCreateForm(Collection $entity)
-    {
-        $form = $this->createForm(new CollectionType(), $entity, array(
-            'action' => $this->generateUrl('collection_create'),
-            'method' => 'POST',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
-
-        return $form;
-    }
-
-    /**
-     * Displays a form to create a new Collection entity.
-     *
-     */
-    public function newAction()
-    {
-        $entity = new Collection();
-        $form = $this->createCreateForm($entity);
-
-        return $this->render('JDJCollectionBundle:Collection:new.html.twig', array(
-            'entity' => $entity,
-            'form' => $form->createView(),
-        ));
-    }
-
-    /**
-     * Finds and displays a Collection entity.
-     *
-     */
-    public function showAction($id)
-    {
+        /**
+         * Gets the game and user concerned by the list
+         */
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('JDJCollectionBundle:Collection')->find($id);
+        $jeu = $em->getRepository('JDJJeuBundle:Jeu')->find($jeu_id);
+        $user = $em->getRepository('JDJUserBundle:User')->find($user_id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Collection entity.');
+        //Surement dans services
+        if($jeu && $user && ($_POST['name'] !== "")) {
+            $collection = $this
+                ->getCollectionService()
+                ->createCollection($jeu, $user, $_POST['name'], $_POST['description']);
         }
 
-        $deleteForm = $this->createDeleteForm($id);
+        if (isset($collection)) {
+            $this
+                ->getCollectionService()
+                ->saveCollection($collection);
 
-        return $this->render('JDJCollectionBundle:Collection:show.html.twig', array(
-            'entity' => $entity,
-            'delete_form' => $deleteForm->createView(),
-        ));
+            return new JsonResponse(array(
+                "status" => Response::HTTP_CREATED,
+            ));
+        } else {
+            return new JsonResponse(array(
+                "status" => Response::HTTP_BAD_REQUEST,
+            ));
+        }
+
     }
+
+
+    /**
+     * Updates a collection to add a game to it
+     *
+     */
+    public function addGameAction($jeu_id, $collection_id)
+    {
+        /**
+         * Gets the game and user concerned by the list
+         */
+        $em = $this->getDoctrine()->getManager();
+        $jeu = $em->getRepository('JDJJeuBundle:Jeu')->find($jeu_id);
+        $collection = $em->getRepository('JDJCollectionBundle:Collection')->find($collection_id);
+
+        //add the game to the collection
+        if($jeu && $collection) {
+            $collection = $this
+                ->getCollectionService()
+                ->addGameCollection($jeu, $collection);
+        } else {
+            return new JsonResponse(array(
+                "status" => Response::HTTP_BAD_REQUEST,
+            ));
+        }
+
+        //Save the collection
+        $this
+            ->getCollectionService()
+            ->saveCollection($collection);
+        Debug::dump($collection->getJeu());
+        Debug::dump($em->getRepository('JDJCollectionBundle:Collection')->find($collection_id)->getJeu());
+        exit;
+        return new JsonResponse(array(
+            "status" => Response::HTTP_OK,
+        ));
+
+    }
+
 
     /**
      * Displays a form to edit an existing Collection entity.
@@ -184,6 +186,32 @@ class CollectionController extends Controller
         ));
     }
 
+
+
+    /**
+     * Finds and displays a Collection entity.
+     *
+     */
+    public function showAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('JDJCollectionBundle:Collection')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Collection entity.');
+        }
+
+        $deleteForm = $this->createDeleteForm($id);
+
+        return $this->render('JDJCollectionBundle:Collection:show.html.twig', array(
+            'entity' => $entity,
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+
+
+
     /**
      * Deletes a Collection entity.
      *
@@ -222,5 +250,13 @@ class CollectionController extends Controller
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm();
+    }
+
+    /**
+     * @return CollectionService
+     */
+    private function getCollectionService()
+    {
+        return $this->container->get('app.service.collection');
     }
 }

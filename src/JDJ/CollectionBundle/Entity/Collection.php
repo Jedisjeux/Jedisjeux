@@ -2,6 +2,7 @@
 
 namespace JDJ\CollectionBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -50,7 +51,7 @@ class Collection
      */
     public function __construct()
     {
-
+        $this->collectionElements = new ArrayCollection();
     }
 
     /**

@@ -1,0 +1,23 @@
+{% extends "::base.html.twig" %}
+
+{% block container %}
+
+    <div class="col-md-8">
+        {% include "jeu/show/header.html.twig" with {'jeu': jeu} only %}
+
+        {% include "jeu/show/rating.html.twig" with {'jeu': jeu} only %}
+
+        {% include "jeu/show/nav-tab.html.twig" with {'jeu': jeu} only %}
+
+    </div>
+
+    <div class="col-md-4">
+        {% include "jeu/show/sidebar.html.twig" with {'jeu': jeu} only %}
+    </div>
+
+
+    {#    {% render controller('JDJUserReviewBundle:JeuNote:new', { 'idJeu': jeu.id }) %}
+        {% include "JDJJeuBundle:Jeu:partial/onglet.html.twig" with {'jeu': jeu, 'userReviews': userReviews} %}
+        {% render url('jeu_if_you_like_this_game', { 'id': jeu.id }) %}#}
+
+{% endblock container %}
