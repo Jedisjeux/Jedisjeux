@@ -3,18 +3,14 @@
 <div class="nav-tabs-two">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs">
-        <li class="active"><a href="#summary" data-toggle="tab">Résumé</a></li>
-        <li><a href="#jeux" data-toggle="tab">Jeux</a></li>
+        <li class="active"><a href="#jeux" data-toggle="tab">Jeux</a></li>
         <li><a href="#profile-2" data-toggle="tab">Article</a></li>
         <li><a href="#profile-2" data-toggle="tab">Critiques</a></li>
         <li><a href="#settings-2" data-toggle="tab">Forum</a></li>
     </ul>
     <!-- Tab content -->
     <div class="tab-content">
-        <div class="tab-pane fade in active" id="summary">
-            {{ personne.description|raw }}
-        </div>
-        <div class="tab-pane fade" id="jeux">
+        <div class="tab-pane fade in active" id="jeux">
             {% include "jeu/index/list-3.html.twig" with {'jeux': jeux} %}
             {% block Pagination %}
                 <div class="pagination-wrapper">
