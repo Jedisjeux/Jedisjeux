@@ -4,7 +4,8 @@
         <!-- Contact starts -->
         <div class="tb-contact pull-left">
             <!-- Email -->
-            <i class="fa fa-envelope color"></i> &nbsp; <a href="mailto:jedisjeux@jedisjeux.net">jedisjeux@jedisjeux.net</a>
+            <i class="fa fa-envelope color"></i> &nbsp; <a
+                    href="mailto:jedisjeux@jedisjeux.net">jedisjeux@jedisjeux.net</a>
             &nbsp;&nbsp;
             <!-- Phone -->
             <i class="fa fa-phone color"></i> &nbsp; +1 (342)-(323)-4923
@@ -14,7 +15,7 @@
         <!-- Shopping kart starts -->
         <div class="tb-shopping-cart pull-right">
             <!-- Link with badge -->
-            <a href="#" class="btn btn-white btn-xs b-dropdown"><i class="fa fa-shopping-cart"></i> <i
+            <a href="#" class="btn btn-white btn-xs b-dropdown"><i class="fa fa-bell"></i> <i
                         class="fa fa-angle-down color"></i> <span class="badge badge-color">5</span></a>
             <!-- Dropdown content with item details -->
             <div class="b-dropdown-block">
@@ -52,18 +53,22 @@
         </div>
         <!-- Shopping kart ends -->
 
-        <!-- Langauge starts -->
+
+        <!-- user starts -->
         <div class="tb-language dropdown pull-right">
-            <a href="#" data-target="#" data-toggle="dropdown"><i class="fa fa-globe"></i> English <i
-                        class="fa fa-angle-down color"></i></a>
-            <!-- Dropdown menu with languages -->
-            <ul class="dropdown-menu dropdown-mini" role="menu">
-                <li><a href="#">Hindi</a></li>
-                <li><a href="#">Tamil</a></li>
-                <li><a href="#">Kanada</a></li>
-            </ul>
+            {% if app.user %}
+                {% set user = app.security.getToken().getUser() %}
+
+                <a href="#" data-target="#" data-toggle="dropdown"><i class="fa fa-user"></i> {{ user.username }} <i
+                            class="fa fa-angle-down color"></i></a>
+                <!-- Dropdown menu with languages -->
+                <ul class="dropdown-menu dropdown-mini" role="menu">
+                    <li><a href="{{ path('fos_user_profile_show') }}">Mon compte</a></li>
+                    <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+                </ul>
+            {% endif %}
         </div>
-        <!-- Language ends -->
+        <!-- user ends -->
 
         <!-- Search section for responsive design -->
         <div class="tb-search pull-left">
@@ -87,7 +92,8 @@
         <div class="tb-social pull-right">
             <div class="brand-bg text-right">
                 <!-- Brand Icons -->
-                <a href="https://www.facebook.com/jedisjeux" target="_blank" class="facebook"><i class="fa fa-facebook square-2 rounded-1"></i></a>
+                <a href="https://www.facebook.com/jedisjeux" target="_blank" class="facebook"><i
+                            class="fa fa-facebook square-2 rounded-1"></i></a>
                 <a href="#" class="twitter"><i class="fa fa-twitter square-2 rounded-1"></i></a>
                 <a href="#" class="google-plus"><i class="fa fa-google-plus square-2 rounded-1"></i></a>
                 <a href="#" class="linkedin"><i class="fa fa-linkedin square-2 rounded-1"></i></a>
