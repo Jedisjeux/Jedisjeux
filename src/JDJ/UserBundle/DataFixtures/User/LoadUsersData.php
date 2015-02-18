@@ -35,7 +35,7 @@ select      old.user_id,
             old.username,
             old.user_email,
             old.group_id
-from        old_jedisjeux.phpbb3_users old
+from        jedisjeux.phpbb3_users old
 group by    old.user_email
 order by    old.user_id
 limit       100

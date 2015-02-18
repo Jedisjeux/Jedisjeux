@@ -42,7 +42,7 @@ select      old.id,
             concat ('<p>', old.avis, '</p>'),
             date,
             jeuNote.id
-from        old_jedisjeux.jdj_avis old
+from        jedisjeux.jdj_avis old
 inner join  jdj_jeu_note jeuNote
                 on jeuNote.id = old.id
 where       old.avis <> ''

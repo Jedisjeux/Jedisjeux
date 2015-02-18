@@ -1,0 +1,99 @@
+/**************************************************************/
+/*  	    		       FICHE DE JEU					      */
+/**************************************************************/
+
+.intro {
+  p {
+    font-size: 1.2rem;
+    font-style: italic;
+  }
+}
+
+.panel {
+  border-radius: 5px;
+  &.materiel {
+    padding: 0;
+    border-radius: 5px;
+    border: none;
+    background: white;
+    text-align: center;
+    ul {
+      li {
+        border-bottom: 1px solid $lightgrey;
+        color: $mediumgrey;
+        display: block;
+        padding: 10px 10px 10px 20px;
+        text-align: left;
+      }
+    }
+    h3 {
+      font-size: 1em;
+      display: block;
+      border-radius: 5px 5px 0px 0px;
+      background: $darkblue;
+      padding: 10px;
+      color: white;
+    }
+
+  }
+}
+
+.panel {
+  &.but {
+    background-color: $lightorange;
+    border: none;
+    border-radius: 5px;
+    ul li, h3, p {
+      color: white;
+    }
+    h3 {
+      font-size: 1.5em;
+    }
+  }
+}
+
+/*****************************************************/
+/* Notation avec étoiles */
+/*****************************************************/
+
+.starRating {
+  float: left;
+  margin: 0px 10px;
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  p, span {
+    display: none;
+  }
+
+  .starLeft, .starRight {
+    float: left;
+    width: 11px;
+    height: 20px;
+
+    a{
+      width: 11px;
+      height: 20px;
+      display: block;
+      text-decoration: none;
+    }
+  }
+
+  .starLeft {
+    background: url(http://www.jedisjeux.net/img/design/icons/stars.png) left bottom;
+    &.selected {
+      background: url(http://www.jedisjeux.net/img/design/icons/stars.png) left top;
+    }
+  }
+
+  .starRight{
+    background: url(http://www.jedisjeux.net/img/design/icons/stars.png) right bottom;
+    &.selected {
+      background: url(http://www.jedisjeux.net/img/design/icons/stars.png) right top;
+    }
+  }
+}

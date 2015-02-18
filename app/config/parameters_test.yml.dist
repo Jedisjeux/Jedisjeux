@@ -1,9 +1,8 @@
-# This file is auto-generated during the composer install
 parameters:
-    database_host: jedisjeux.pbrun.fr
-    database_name: jedisjeux_test
-    database_user:
-    database_password:
+    database_host: jdj.dev
+    database_name: jdj_test
+    database_user: root
+    database_password: null
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: null

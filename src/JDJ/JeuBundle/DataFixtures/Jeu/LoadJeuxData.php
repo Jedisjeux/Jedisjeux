@@ -33,10 +33,10 @@ class LoadJeuxData extends ContainerAware implements FixtureInterface, OrderedFi
     {
         $query = <<<EOM
 select      old.*
-from        old_jedisjeux.jdj_game old
+from        jedisjeux.jdj_game old
 inner join  jdj_statut statut
                 on statut.id = old.valid
-limit       1000
+-- limit       1000
 EOM;
 
 

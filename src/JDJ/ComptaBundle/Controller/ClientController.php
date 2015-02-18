@@ -31,7 +31,7 @@ class ClientController extends Controller
         }
 
 
-        return $this->render('JDJComptaBundle:Client:index.html.twig', array(
+        return $this->render('compta/client/index.html.twig', array(
             'entities' => $entities,
             'deleteForms' => $deleteForms,
         ));
@@ -56,7 +56,7 @@ class ClientController extends Controller
             return $this->redirect($this->generateUrl('client'));
         }
 
-        return $this->render('JDJComptaBundle:Client:edit.html.twig', array(
+        return $this->render('compta/client/edit.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -90,7 +90,7 @@ class ClientController extends Controller
         $entity = new Client();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('JDJComptaBundle:Client:edit.html.twig', array(
+        return $this->render('compta/client/new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -112,7 +112,7 @@ class ClientController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('JDJComptaBundle:Client:show.html.twig', array(
+        return $this->render('compta/client/show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),        ));
     }
@@ -133,7 +133,7 @@ class ClientController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('JDJComptaBundle:Client:edit.html.twig', array(
+        return $this->render('compta/client/edit.html.twig', array(
             'entity'      => $entity,
             'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -183,7 +183,7 @@ class ClientController extends Controller
             return $this->redirect($this->generateUrl('client'));
         }
 
-        return $this->render('JDJComptaBundle:Client:edit.html.twig', array(
+        return $this->render('compta/client/edit.html.twig', array(
             'entity'      => $entity,
             'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -226,7 +226,6 @@ class ClientController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('client_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Supprimer'))
             ->getForm()
             ;
     }

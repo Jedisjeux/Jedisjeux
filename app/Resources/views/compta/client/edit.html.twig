@@ -1,0 +1,15 @@
+{% extends "::base.html.twig" %}
+
+{% block container -%}
+    <h1>CptaClient edit</h1>
+
+    {{ form(form) }}
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('client') }}">
+                Back to the list
+            </a>
+        </li>
+    </ul>
+{% endblock container %}

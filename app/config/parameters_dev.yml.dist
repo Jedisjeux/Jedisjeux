@@ -1,8 +1,9 @@
 parameters:
-    database_host:     146.185.157.141
-    database_name:     sf_jedisjeux_dev
-    database_user:     sf_jedisjeux_dev
-    database_password: Ljstp35
+    database_host:     jdj.dev
+    database_port:     ~
+    database_name:     jdj_dev
+    database_user:     root
+    database_password: ~
 
     mailer_transport:  smtp
     mailer_host:       127.0.0.1

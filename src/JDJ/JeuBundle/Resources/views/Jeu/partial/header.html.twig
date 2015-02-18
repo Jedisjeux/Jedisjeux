@@ -10,69 +10,79 @@
             <a href="#" class="close">&times;</a>
         </div>
     {% endif %}
-    <div class="medium-3 columns">
-        <img src="http://www.jedisjeux.net/img/800/{{ jeu.imageCouverture }}">
-    </div>
-    <div class="medium-9 columns">
-        <h1 class="columns">{{ jeu.libelle }}</h1>
+    <div class="medium-12">
 
-        <div class="medium-7 columns">
-            <p>
-                {% if jeu.auteurs|length > 0 %}
-                Un jeu de
-                    {% for key, personne in jeu.auteurs %}{% if (key > 0) %},{% endif %} <a href="{{ path('personne_show', { 'id': personne.id, 'slug': personne.slug })  }}">{{ personne }}</a>{% endfor %}
-                    <br />
-                {% endif %}
-
-                {% if jeu.illustrateurs|length > 0 %}
-                    illustré{% if jeu.illustrateurs|length > 1 %}s{% endif %} par
-                    {% for key, personne in jeu.illustrateurs %}{% if (key > 0) %},{% endif %} <a href="{{ path('personne_show', { 'id': personne.id, 'slug': personne.slug })  }}">{{ personne }}</a>{% endfor %}
-                    <br />
-                {% endif %}
-
-                {% if jeu.editeurs|length > 0 %}
-                    édité{% if jeu.editeurs|length > 1 %}s{% endif %} par
-                    {% for key, personne in jeu.editeurs %}{% if (key > 0) %},{% endif %} <a href="{{ path('personne_show', { 'id': personne.id, 'slug': personne.slug })  }}">{{ personne }}</a>{% endfor %}
-                    <br />
-                {% endif %}
-            </p>
-            <p>
-
-                {% if jeu.ageMin %}
-                    à partir de {{ jeu.ageMin }} ans<br />
-                {% endif %}
-
-                {% if jeu.joueurMin or jeu.joueurMax %}
-                    {{ joueurCount(jeu) }}<br />
-                {% endif %}
-
-                {% if jeu.cible %}
-                    Public : <a href="{{ path('cible_show', { 'id': jeu.cible.id, 'slug': jeu.cible.slug })  }}">{{ jeu.cible }}</a>
-                    <br />
-                {% endif %}
-
-                {% if jeu.mechanisms|length > 0 %}
-                    Mécanismes : {% for key, mechanism in jeu.mechanisms %}{% if (key > 0) %},{% endif %} <a href="{{ path('mechanism_show', { 'id': mechanism.id, 'slug': mechanism.slug })  }}">{{ mechanism }}</a>{% endfor %}
-                    <br />
-                {% endif %}
-
-                {% if jeu.themes|length > 0 %}
-                    Thèmes : {% for key, theme in jeu.themes %}{% if (key > 0) %},{% endif %} <a href="{{ path('theme_show', { 'id': theme.id, 'slug': theme.slug })  }}">{{ theme }}</a>{% endfor %}
-                    <br />
-                {% endif %}
-            </p>
+        <div class="medium-3 columns">
+            <img src="http://www.jedisjeux.net/img/800/{{ jeu.imageCouverture }}">
         </div>
-        <div class="medium-5 columns">
-            <ul>
-                {% for jeuCaracteristique in jeu.jeuCaracteristiques %}
-                    <li>
-                        {{ jeuCaracteristique.caracteristique.libelle }}
-                        <img src="http://www.jedisjeux.net/img/notes/etoiles{{ jeuCaracteristique.caracteristiqueNote.valeur*2 }}.png"
-                             alt="{{ jeuCaracteristique.caracteristiqueNote.libelle }}"
-                             title="{{ jeuCaracteristique.caracteristiqueNote.valeur }}/5 : {{ jeuCaracteristique.caracteristiqueNote.libelle }}"/>
-                    </li>
-                {% endfor %}
-            </ul>
+        <div class="medium-9 columns">
+            <h1 class="columns">{{ jeu.libelle }}</h1>
+
+            <div class="medium-7 columns">
+                <p>
+                    {% if jeu.auteurs|length > 0 %}
+                        Un jeu de
+                        {% for key, personne in jeu.auteurs %}{% if (key > 0) %},{% endif %} <a
+                            href="{{ path('personne_show', { 'id': personne.id, 'slug': personne.slug }) }}">{{ personne }}</a>{% endfor %}
+                        <br/>
+                    {% endif %}
+
+                    {% if jeu.illustrateurs|length > 0 %}
+                        illustré{% if jeu.illustrateurs|length > 1 %}s{% endif %} par
+                        {% for key, personne in jeu.illustrateurs %}{% if (key > 0) %},{% endif %} <a
+                            href="{{ path('personne_show', { 'id': personne.id, 'slug': personne.slug }) }}">{{ personne }}</a>{% endfor %}
+                        <br/>
+                    {% endif %}
+
+                    {% if jeu.editeurs|length > 0 %}
+                        édité{% if jeu.editeurs|length > 1 %}s{% endif %} par
+                        {% for key, personne in jeu.editeurs %}{% if (key > 0) %},{% endif %} <a
+                            href="{{ path('personne_show', { 'id': personne.id, 'slug': personne.slug }) }}">{{ personne }}</a>{% endfor %}
+                        <br/>
+                    {% endif %}
+                </p>
+
+                <p>
+
+                    {% if jeu.ageMin %}
+                        à partir de {{ jeu.ageMin }} ans<br/>
+                    {% endif %}
+
+                    {% if jeu.joueurMin or jeu.joueurMax %}
+                        {{ joueurCount(jeu) }}<br/>
+                    {% endif %}
+
+                    {% if jeu.cible %}
+                        Public : <a
+                            href="{{ path('cible_show', { 'id': jeu.cible.id, 'slug': jeu.cible.slug }) }}">{{ jeu.cible }}</a>
+                        <br/>
+                    {% endif %}
+
+                    {% if jeu.mechanisms|length > 0 %}
+                        Mécanismes : {% for key, mechanism in jeu.mechanisms %}{% if (key > 0) %},{% endif %} <a
+                        href="{{ path('mechanism_show', { 'id': mechanism.id, 'slug': mechanism.slug }) }}">{{ mechanism }}</a>{% endfor %}
+                        <br/>
+                    {% endif %}
+
+                    {% if jeu.themes|length > 0 %}
+                        Thèmes : {% for key, theme in jeu.themes %}{% if (key > 0) %},{% endif %} <a
+                        href="{{ path('theme_show', { 'id': theme.id, 'slug': theme.slug }) }}">{{ theme }}</a>{% endfor %}
+                        <br/>
+                    {% endif %}
+                </p>
+            </div>
+            <div class="medium-5 columns">
+                <ul>
+                    {% for jeuCaracteristique in jeu.jeuCaracteristiques %}
+                        <li>
+                            {{ jeuCaracteristique.caracteristique.libelle }}
+                            <img src="http://www.jedisjeux.net/img/notes/etoiles{{ jeuCaracteristique.caracteristiqueNote.valeur*2 }}.png"
+                                 alt="{{ jeuCaracteristique.caracteristiqueNote.libelle }}"
+                                 title="{{ jeuCaracteristique.caracteristiqueNote.valeur }}/5 : {{ jeuCaracteristique.caracteristiqueNote.libelle }}"/>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </div>
 </div>

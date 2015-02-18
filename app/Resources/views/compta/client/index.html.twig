@@ -1,0 +1,57 @@
+{% extends "::base.html.twig" %}
+
+{% block container -%}
+
+    <div class="block-heading-two">
+        <h3><span>Liste des clients</span></h3>
+    </div>
+
+    <ul class="list-inline">
+        <li>
+            <a class="btn btn-green" href="{{ path('client_new') }}">
+                <span class="glyphicon glyphicon-plus"></span> Créer un nouveau client
+            </a>
+        </li>
+    </ul>
+
+    <table class="table table-stripped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Societe</th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('client_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td> <a href="{{ path('client_show', { 'id': entity.id }) }}">{{ entity.societe }}</a>
+                    </td>
+                <td>{{ entity.nom }}</td>
+                <td>{{ entity.email }}</td>
+                <td>
+                <ul class="list-inline">
+                    <li>
+                        <a class="btn btn-green" href="{{ path('client_edit', { 'id': entity.id }) }}">
+                            <span class="glyphicon glyphicon-pencil"></span> Modifier
+                        </a>
+                    </li>
+                    <li>
+                        {{ form_start(deleteForms[entity.id]) }}
+                        <button type="submit" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-remove"></span> Supprimer
+                        </button>
+                        {{ form_end(deleteForms[entity.id]) }}
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock container %}
