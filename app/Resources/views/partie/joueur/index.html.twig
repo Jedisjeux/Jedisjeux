@@ -1,17 +1,19 @@
-<ul>
+<ul class="list-inline">
     <li>
-        <a class="button add" href="{{ path('joueur_new', {'idPartie': partie.id}) }}">
-            Ajouter un nouveau joueur
+        <a class="btn btn-lblue" href="{{ path('joueur_new', {'idPartie': partie.id}) }}">
+            <span class="fa fa-user-plus"></span>
+            Ajouter un joueur
         </a>
     </li>
 </ul>
 
-<table>
+{% if entities | length > 0 %}
+<table class="table table-stripped">
     <thead>
     <tr>
         <th>Joueur</th>
         <th>Score</th>
-        <th>Actions</th>
+        <th class="text-right">Actions</th>
     </tr>
     </thead>
     {% for joueur in entities %}
@@ -30,17 +32,20 @@
                     -
                 {% endif %}
             </td>
-            <td>
-                <ul class="inline-list">
+            <td class="text-right">
+                <ul class="list-inline">
                     <li>
-                        <a class="small button" href="{{ path('joueur_edit', { 'id': joueur.id }) }}">édition</a>
+                        <a class="btn btn-lblue" href="{{ path('joueur_edit', { 'id': joueur.id }) }}"><span class="fa fa-pencil"></span> édition</a>
                     </li>
                     <li>
                         {{ form_start(deleteForms[joueur.id]) }}
-                        {{ form_widget(deleteForms[joueur.id].submit, {'attr': {'class': 'small button', 'title': 'Supprimer le joueur'}, 'label': 'Supprimer'}) }}
+                        <button type="submit" class="btn btn-danger">
+                            <span class="fa fa-trash-o"></span> Supprimer
+                        </button>
                         {{ form_end(deleteForms[joueur.id]) }}
                     </li>
                 </ul></td>
         </tr>
     {% endfor %}
 </table>
+{% endif %}

@@ -30,7 +30,10 @@ class PartieType extends AbstractType
                         ->where('c.id = :id')
                         ->setParameter('id', $id);
                 }))
-            ->add('playedAt')
+            ->add('playedAt', 'date', array(
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+            ))
         ;
     }
 

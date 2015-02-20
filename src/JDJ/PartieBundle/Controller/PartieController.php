@@ -34,7 +34,7 @@ class PartieController extends Controller
             $deleteForms[$entity->getId()] = $this->createDeleteForm($entity->getId())->createView();
         }
 
-        return $this->render('JDJPartieBundle:Partie:index.html.twig', array(
+        return $this->render('partie/index.html.twig', array(
             'entities' => $entities,
             'deleteForms' => $deleteForms,
         ));
@@ -57,7 +57,7 @@ class PartieController extends Controller
         $form->get('jeu')->setData($jeu);
         $form->get('playedAt')->setData(new \DateTime());
 
-        return $this->render('JDJPartieBundle:Partie:new.html.twig', array(
+        return $this->render('partie/new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -87,7 +87,7 @@ class PartieController extends Controller
             )));
         }
 
-        return $this->render('JDJPartieBundle:Partie:edit.html.twig', array(
+        return $this->render('partie/edit.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -128,7 +128,7 @@ class PartieController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('JDJPartieBundle:Partie:show.html.twig', array(
+        return $this->render('partie/show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),        ));
     }
@@ -149,7 +149,7 @@ class PartieController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('JDJPartieBundle:Partie:edit.html.twig', array(
+        return $this->render('partie/edit.html.twig', array(
             'entity'      => $entity,
             'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -183,7 +183,7 @@ class PartieController extends Controller
             )));
         }
 
-        return $this->render('JDJPartieBundle:Partie:edit.html.twig', array(
+        return $this->render('partie/edit.html.twig', array(
             'entity'      => $entity,
             'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
