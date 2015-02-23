@@ -115,6 +115,20 @@ class Jeu
      */
     private $notes;
 
+    /**
+     * @var \JDJ\CoreBundle\Entity\Cible
+     */
+    private $cible;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $UserGameAttributes;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $listElements;
 
 
     /**
@@ -702,10 +716,7 @@ class Jeu
     {
         return $this->notes;
     }
-    /**
-     * @var \JDJ\CoreBundle\Entity\Cible
-     */
-    private $cible;
+
 
 
     /**
@@ -730,15 +741,7 @@ class Jeu
     {
         return $this->cible;
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $UserGameAttributes;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $collections;
 
 
     /**
@@ -775,35 +778,35 @@ class Jeu
     }
 
     /**
-     * Add collections
+     * Add listElements
      *
-     * @param \JDJ\CollectionBundle\Entity\Collection $collections
+     * @param \JDJ\CollectionBundle\Entity\listElement $listElements
      * @return Jeu
      */
-    public function addCollection(\JDJ\CollectionBundle\Entity\Collection $collections)
+    public function addListElement(\JDJ\CollectionBundle\Entity\listElement $listElements)
     {
-        $this->collections[] = $collections;
+        $this->listElements[] = $listElements;
 
         return $this;
     }
 
     /**
-     * Remove collections
+     * Remove listElements
      *
-     * @param \JDJ\CollectionBundle\Entity\Collection $collections
+     * @param \JDJ\CollectionBundle\Entity\listElement $listElements
      */
-    public function removeCollection(\JDJ\CollectionBundle\Entity\Collection $collections)
+    public function removeListElement(\JDJ\CollectionBundle\Entity\listElement $listElements)
     {
-        $this->collections->removeElement($collections);
+        $this->listElements->removeElement($listElements);
     }
 
     /**
-     * Get collections
+     * Get listElements
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getCollections()
+    public function getListElements()
     {
-        return $this->collections;
+        return $this->listElements;
     }
 }

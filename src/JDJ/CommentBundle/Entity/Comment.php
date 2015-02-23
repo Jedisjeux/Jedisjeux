@@ -98,4 +98,5 @@ class Comment extends BaseComment implements SignedCommentInterface
         return $this->thread;
     }
 
+
 }

@@ -260,4 +260,44 @@ class UserGameAttribute
         return $this->jeu_id;
     }
 
+
+    /**
+     * Get favorite
+     *
+     * @return boolean 
+     */
+    public function getFavorite()
+    {
+        return $this->favorite;
+    }
+
+    /**
+     * Get owned
+     *
+     * @return boolean 
+     */
+    public function getOwned()
+    {
+        return $this->owned;
+    }
+
+    /**
+     * Get wanted
+     *
+     * @return boolean 
+     */
+    public function getWanted()
+    {
+        return $this->wanted;
+    }
+
+    /**
+     * Get played
+     *
+     * @return boolean 
+     */
+    public function getPlayed()
+    {
+        return $this->played;
+    }
 }

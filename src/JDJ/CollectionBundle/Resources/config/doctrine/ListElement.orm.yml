@@ -1,0 +1,17 @@
+JDJ\CollectionBundle\Entity\ListElement:
+  type: entity
+  repositoryClass: JDJ\CollectionBundle\Repository\listElementRepository
+  table: jdj_list_element
+  id:
+    id:
+      type: integer
+      unsigned: true
+      generator:
+        strategy: IDENTITY
+  manyToOne:
+      collection:
+        targetEntity: JDJ\CollectionBundle\Entity\Collection
+        inversedBy: listElements
+      jeu:
+        targetEntity: JDJ\JeuBundle\Entity\Jeu
+        inversedBy: listElements

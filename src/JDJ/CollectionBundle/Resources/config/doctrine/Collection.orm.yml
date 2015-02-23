@@ -29,7 +29,8 @@ JDJ\CollectionBundle\Entity\Collection:
       user:
         targetEntity: JDJ\UserBundle\Entity\User
         inversedBy: Collections
-  manyToMany:
-      collectionElements:
-        targetEntity: JDJ\JeuBundle\Entity\Jeu
-        mappedBy: collections
+  oneToMany:
+      listElements:
+        targetEntity: ListElement
+        mappedBy: collection
+        cascade: ["persist"]

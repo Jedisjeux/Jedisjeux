@@ -6,7 +6,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Collection
+ * Class Collection
+ * @package JDJ\CollectionBundle\Entity
  */
 class Collection
 {
@@ -38,20 +39,14 @@ class Collection
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $jeu;
-
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $collectionElements;
+    private $listElements;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->collectionElements = new ArrayCollection();
+        $this->listElements = new ArrayCollection();
     }
 
     /**
@@ -157,109 +152,37 @@ class Collection
         return $this->user;
     }
 
+
     /**
-     * Add jeu
+     * Add listElements
      *
-     * @param \JDJ\JeuBundle\Entity\Jeu $jeu
-     * @return Collection
+     * @param ListElement $listElement
+     * @return $this
      */
-    public function addJeu(\JDJ\JeuBundle\Entity\Jeu $jeu)
+    public function addListElement(ListElement $listElement)
     {
-        $this->jeu[] = $jeu;
+        $this->listElements[] = $listElement;
 
         return $this;
     }
 
     /**
-     * Remove jeu
+     * Remove listElements
      *
-     * @param \JDJ\JeuBundle\Entity\Jeu $jeu
+     * @param ListElement $listElement
      */
-    public function removeJeu(\JDJ\JeuBundle\Entity\Jeu $jeu)
+    public function removeListElement(ListElement $listElement)
     {
-        $this->jeu->removeElement($jeu);
+        $this->listElements->removeElement($listElement);
     }
 
     /**
-     * Get jeu
+     * Get listElements
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getJeu()
+    public function getListElements()
     {
-        return $this->jeu;
-    }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $jeux;
-
-
-    /**
-     * Add jeux
-     *
-     * @param \JDJ\JeuBundle\Entity\Jeu $jeux
-     * @return Collection
-     */
-    public function addJeux(\JDJ\JeuBundle\Entity\Jeu $jeux)
-    {
-        $this->jeux[] = $jeux;
-
-        return $this;
-    }
-
-    /**
-     * Remove jeux
-     *
-     * @param \JDJ\JeuBundle\Entity\Jeu $jeux
-     */
-    public function removeJeux(\JDJ\JeuBundle\Entity\Jeu $jeux)
-    {
-        $this->jeux->removeElement($jeux);
-    }
-
-    /**
-     * Get jeux
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getJeux()
-    {
-        return $this->jeux;
-    }
-
-
-
-    /**
-     * Add collectionElements
-     *
-     * @param \JDJ\JeuBundle\Entity\Jeu $collectionElements
-     * @return Collection
-     */
-    public function addCollectionElement(\JDJ\JeuBundle\Entity\Jeu $collectionElements)
-    {
-        $this->collectionElements[] = $collectionElements;
-
-        return $this;
-    }
-
-    /**
-     * Remove collectionElements
-     *
-     * @param \JDJ\JeuBundle\Entity\Jeu $collectionElements
-     */
-    public function removeCollectionElement(\JDJ\JeuBundle\Entity\Jeu $collectionElements)
-    {
-        $this->collectionElements->removeElement($collectionElements);
-    }
-
-    /**
-     * Get collectionElements
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getCollectionElements()
-    {
-        return $this->collectionElements;
+        return $this->listElements;
     }
 }

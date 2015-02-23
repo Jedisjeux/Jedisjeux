@@ -3,6 +3,7 @@
 namespace JDJ\UserBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
+use JDJ\CollectionBundle\Entity\UserGameAttribute;
 
 /**
  * User

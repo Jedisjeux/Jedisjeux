@@ -33,18 +33,14 @@ class CollectionTypeSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
+
         $builder
-            ->add('slug')
+            ->add('user','hidden')
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
         $builder
-            ->add('user')
-            ->shouldBeCalled()
-            ->willReturn($builder)
-        ;
-        $builder
-            ->add('collectionElements')
+            ->add('listElements','hidden')
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

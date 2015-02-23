@@ -18,7 +18,7 @@ class CollectionType extends AbstractType
             ->add('name')
             ->add('description')
             ->add('user','hidden')
-            ->add('collectionElements','hidden')
+            ->add('listElements','hidden')
         ;
     }
     

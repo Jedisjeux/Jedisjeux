@@ -115,17 +115,6 @@ JDJ\JeuBundle\Entity\Jeu:
         inverseJoinColumns:
           personne_id:
             referencedColumnName: id
-    collections:
-      targetEntity: JDJ\CollectionBundle\Entity\Collection
-      inversedBy: collectionElements
-      joinTable:
-        name: jdj_collection_element
-        joinColumns:
-          jeu_id:
-            referencedColumnName: id
-        inverseJoinColumns:
-          collection_id:
-            referencedColumnName: id
 
   oneToMany:
     jeuCaracteristiques:
@@ -142,6 +131,9 @@ JDJ\JeuBundle\Entity\Jeu:
       mappedBy: jeu
     UserGameAttributes:
       targetEntity: JDJ\CollectionBundle\Entity\UserGameAttribute
+      mappedBy: jeu
+    listElements:
+      targetEntity: JDJ\CollectionBundle\Entity\ListElement
       mappedBy: jeu
   manyToOne:
     statut:

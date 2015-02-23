@@ -50,17 +50,22 @@ class CollectionController extends Controller
         $jeu = $em->getRepository('JDJJeuBundle:Jeu')->find($jeu_id);
         $user = $em->getRepository('JDJUserBundle:User')->find($user_id);
 
-        //Surement dans services
         if($jeu && $user && ($_POST['name'] !== "")) {
+            //create the collection
             $collection = $this
                 ->getCollectionService()
-                ->createCollection($jeu, $user, $_POST['name'], $_POST['description']);
-        }
+                ->createCollection($user, $_POST['name'], $_POST['description']);
 
-        if (isset($collection)) {
+            //add the game to the collection
+            $this
+                ->getCollectionService()
+                ->addGameCollection($jeu, $collection);
+
+            //save the collection
             $this
                 ->getCollectionService()
                 ->saveCollection($collection);
+
 
             return new JsonResponse(array(
                 "status" => Response::HTTP_CREATED,
@@ -102,9 +107,7 @@ class CollectionController extends Controller
         $this
             ->getCollectionService()
             ->saveCollection($collection);
-        Debug::dump($collection->getJeu());
-        Debug::dump($em->getRepository('JDJCollectionBundle:Collection')->find($collection_id)->getJeu());
-        exit;
+
         return new JsonResponse(array(
             "status" => Response::HTTP_OK,
         ));
