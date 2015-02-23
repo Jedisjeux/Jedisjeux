@@ -29,15 +29,9 @@ class UserGameAttributeRepository extends EntityRepository
             ->setParameter('game', $game)
             ->setParameter('user', $user);
 
-        $result = $queryBuilder->getQuery()->getResult();
+        $result = $queryBuilder->getQuery()->getOneOrNullResult();
 
-        if(!empty($result)) {
-            $response = $result[0];
-        } else {
-            $response = null;
-        }
-
-        return $response;
+        return $result;
 
     }
 
