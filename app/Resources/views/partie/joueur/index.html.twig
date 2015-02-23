@@ -1,51 +1,35 @@
-<ul class="list-inline">
-    <li>
-        <a class="btn btn-lblue" href="{{ path('joueur_new', {'idPartie': partie.id}) }}">
-            <span class="fa fa-user-plus"></span>
-            Ajouter un joueur
-        </a>
-    </li>
-</ul>
+<ul>
+    {% for key, joueur in entities %}
 
-{% if entities | length > 0 %}
-<table class="table table-stripped">
-    <thead>
-    <tr>
-        <th>Joueur</th>
-        <th>Score</th>
-        <th class="text-right">Actions</th>
-    </tr>
-    </thead>
-    {% for joueur in entities %}
-        <tr>
-            <td>
-                {% if joueur.nom %}
-                    {{ joueur.nom }}
-                {% else %}
-                    Inconnu
-                {% endif %}
-            </td>
-            <td>
-                {% if joueur.score %}
-                    {{ joueur.score }}
-                {% else %}
-                    -
-                {% endif %}
-            </td>
-            <td class="text-right">
-                <ul class="list-inline">
-                    <li>
-                        <a class="btn btn-lblue" href="{{ path('joueur_edit', { 'id': joueur.id }) }}"><span class="fa fa-pencil"></span> édition</a>
-                    </li>
-                    <li>
-                        {{ form_start(deleteForms[joueur.id]) }}
-                        <button type="submit" class="btn btn-danger">
-                            <span class="fa fa-trash-o"></span> Supprimer
-                        </button>
-                        {{ form_end(deleteForms[joueur.id]) }}
-                    </li>
-                </ul></td>
-        </tr>
+        {% set joueurId = key+1 %}
+
+        <li>
+            <a href="#">
+                <!-- Item image -->
+                <img src="../../../../img/user/{{ joueurId }}.jpg" alt=""
+                     class="img-responsive img-thumbnail"/>
+                <!-- Item title -->
+                <span class="pull-right">{% if joueur.score %}
+                        {{ joueur.score }}
+                    {% else %}
+                        -
+                    {% endif %} point{% if joueur.score > 1 %}s{% endif %}</span>
+                <span>{{ joueur }}</span>
+
+                <br />
+                {{ form_start(deleteForms[joueur.id]) }}
+                <div class="btn-group btn-group-xs pull-right">
+                    <a class="btn btn-default" href="{{ path('joueur_new', {'idPartie': partie.id}) }}">
+                        <span class="fa fa-pencil"></span>
+                    </a>
+                    <button type="submit" class="btn btn-danger">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+
+                </div>
+                {{ form_end(deleteForms[joueur.id]) }}
+                <div class="clearfix"></div>
+            </a>
+        </li>
     {% endfor %}
-</table>
-{% endif %}
+</ul>

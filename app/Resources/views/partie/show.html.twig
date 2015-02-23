@@ -6,13 +6,10 @@
 
     <div class="col-md-8">
         {% include "jeu/show/header.html.twig" with {'jeu': jeu} only %}
-
-        {% include "partie/show/scores.html.twig" with {'partie': entity} only %}
-
     </div>
 
     <div class="col-md-4">
-        {% include "partie/show/sidebar.html.twig" %}
+        {% include "partie/show/sidebar.html.twig" with {'partie': entity} only %}
     </div>
 
 

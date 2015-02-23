@@ -77,6 +77,7 @@ class PartieController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $entity->setAuthor($user);
+            $entity->addUser($user);
             $em->persist($entity);
             $em->flush();
 

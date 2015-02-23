@@ -139,4 +139,13 @@ class Joueur
     {
         return $this->score;
     }
+
+    public function __toString()
+    {
+        if (null !== $this->getUser()) {
+            return $this->getUser()->getUsername();
+        }
+
+        return $this->getNom();
+    }
 }
