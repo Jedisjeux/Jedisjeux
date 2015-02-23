@@ -10,6 +10,7 @@ namespace JDJ\PartieBundle\Controller;
 
 
 use JDJ\JeuBundle\Entity\Jeu;
+use JDJ\PartieBundle\Entity\Joueur;
 use JDJ\PartieBundle\Entity\Partie;
 use JDJ\PartieBundle\Form\PartieType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -77,7 +78,21 @@ class PartieController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $entity->setAuthor($user);
+
+            /*
+             * Adding User on party
+             */
             $entity->addUser($user);
+
+            /**
+             * adding User as a player on party
+             */
+            $joueur = new Joueur();
+            $joueur
+                ->setUser($user)
+                ->setPartie($entity);
+            $entity->addJoueur($joueur);
+
             $em->persist($entity);
             $em->flush();
 
