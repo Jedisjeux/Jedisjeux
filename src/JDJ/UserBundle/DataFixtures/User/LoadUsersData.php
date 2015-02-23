@@ -34,6 +34,7 @@ class LoadUsersData extends ContainerAware implements FixtureInterface, OrderedF
 select      old.user_id,
             old.username,
             old.user_email,
+            old.user_avatar,
             old.group_id
 from        jedisjeux.phpbb3_users old
 group by    old.user_email
@@ -62,6 +63,7 @@ EOM;
                 ->setUsername($data['username'])
                 ->setPlainPassword($data['username'])
                 ->setEmail($data['user_email'])
+                ->setAvatar("" === $data['user_avatar'] ? null : $data['user_avatar'])
                 ->setRoles($roles);
 
             $userManager->updateUser($user);

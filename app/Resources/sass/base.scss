@@ -14,3 +14,28 @@
   padding-left: 0;
   padding-top: 8px;
 }
+
+.title-button {
+  padding-top: 7px;
+}
+
+.sidebar {
+
+  .score-list-content {
+    display: block;
+
+    ul {
+      padding: 0px;
+      margin: 0px;
+      list-style-type: none;
+
+      img {
+        max-width: 60px;
+        float: left;
+        margin-right: 10px;
+        margin-top: 3px;
+      }
+    }
+
+  }
+}

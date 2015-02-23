@@ -36,7 +36,7 @@ class JoueurController extends Controller
             $deleteForms[$entity->getId()] = $this->createDeleteForm($entity->getId())->createView();
         }
 
-        return $this->render('JDJPartieBundle:Joueur:index.html.twig', array(
+        return $this->render('partie/joueur/index.html.twig', array(
             'entities' => $entities,
             'partie' => $partie,
             'deleteForms' => $deleteForms,
@@ -60,7 +60,7 @@ class JoueurController extends Controller
          */
         $form->get('partie')->setData($partie);
 
-        return $this->render('JDJPartieBundle:Joueur:new.html.twig', array(
+        return $this->render('partie/joueur/new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -103,7 +103,7 @@ class JoueurController extends Controller
             )));
         }
 
-        return $this->render('JDJPartieBundle:Joueur:new.html.twig', array(
+        return $this->render('partie/joueur/new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -143,7 +143,7 @@ class JoueurController extends Controller
 
         $editForm = $this->createEditForm($entity);
 
-        return $this->render('JDJPartieBundle:Joueur:edit.html.twig', array(
+        return $this->render('partie/joueur/edit.html.twig', array(
             'entity'      => $entity,
             'form'   => $editForm->createView(),
         ));
@@ -195,7 +195,7 @@ class JoueurController extends Controller
             )));
         }
 
-        return $this->render('JDJPartieBundle:Joueur:edit.html.twig', array(
+        return $this->render('partie/joueur/edit.html.twig', array(
             'entity'      => $entity,
             'form'   => $editForm->createView(),
         ));
@@ -213,7 +213,6 @@ class JoueurController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('joueur_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Supprimer'))
             ->getForm()
             ;
     }

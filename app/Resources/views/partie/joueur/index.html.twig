@@ -1,0 +1,42 @@
+<ul>
+    {% for key, joueur in entities %}
+
+        {% set joueurId = key+1 %}
+
+        <li>
+            <a href="#">
+                <!-- Item image -->
+                {% if (joueur.user) %}
+                    <img src="http://www.jedisjeux.net/phpbb3/download/file.php?avatar={{ joueur.user.avatar }}" alt=""
+                         class="img-responsive img-thumbnail"/>
+                {% else %}
+                    <img src="../../../../img/user/{{ joueurId }}.jpg" alt=""
+                         class="img-responsive img-thumbnail"/>
+                {% endif %}
+            </a>
+
+                <!-- Item title -->
+                <span class="pull-right">{% if joueur.score %}
+                        {{ joueur.score }}
+                    {% else %}
+                        -
+                    {% endif %} point{% if joueur.score > 1 %}s{% endif %}</span>
+                <span>{{ joueur }}</span>
+
+                <br/>
+                {{ form_start(deleteForms[joueur.id]) }}
+                <div class="btn-group btn-group-xs pull-right">
+                    <a class="btn btn-default" href="{{ path('joueur_edit', {'id': joueur.id}) }}">
+                        <span class="fa fa-pencil"></span>
+                    </a>
+                    <button type="submit" class="btn btn-danger">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+
+                </div>
+                {{ form_end(deleteForms[joueur.id]) }}
+                <div class="clearfix"></div>
+            </a>
+        </li>
+    {% endfor %}
+</ul>

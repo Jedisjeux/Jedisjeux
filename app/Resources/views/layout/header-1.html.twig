@@ -6,7 +6,7 @@
             <div class="col-md-4 col-sm-4">
                 <!-- Logo section -->
                 <div class="logo">
-                    <h1><a href="#"><i class="fa fa-laptop"></i> {% block headline %}Jedisjeux{% endblock %}</a></h1>
+                    <h1><a href="{{ path('jdj_web_homepage') }}"><i class="fa fa-laptop"></i> {% block headline %}Jedisjeux{% endblock %}</a></h1>
                 </div>
             </div>
             <div class="col-md-3 col-md-offset-5 col-sm-5 col-sm-offset-3 hidden-xs">
@@ -15,9 +15,9 @@
                     <form role="form">
                         <!-- Input Group -->
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Type Something">
+                            <input type="text" class="form-control" placeholder="Jeu, auteur, éditeur">
 										<span class="input-group-btn">
-											<button class="btn btn-color" type="button">Search</button>
+											<button class="btn btn-color" type="button">Rechercher</button>
 										</span>
                         </div>
                     </form>

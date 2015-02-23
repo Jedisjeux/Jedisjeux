@@ -26,6 +26,7 @@ JDJ\PartieBundle\Entity\Partie:
     joueurs:
       targetEntity: Joueur
       mappedBy: partie
+      cascade: ["persist"]
   manyToOne:
       author:
         targetEntity: JDJ\UserBundle\Entity\User

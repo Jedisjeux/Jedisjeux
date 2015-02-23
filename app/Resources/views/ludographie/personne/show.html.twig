@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block body -%}
+
+    <div class="col-md-8">
+        {% include "ludographie/personne/show/header.html.twig" with {'personne': personne} only %}
+
+        {% include "ludographie/personne/show/nav-tab.html.twig" with {'personne': personne, 'jeux': jeux} only %}
+
+    </div>
+
+    <div class="col-md-4">
+        {% include "ludographie/personne/show/sidebar.html.twig" with {'personne': personne} only %}
+    </div>
+
+{% endblock %}
