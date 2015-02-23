@@ -1,6 +1,6 @@
 JDJ\CollectionBundle\Entity\ListElement:
   type: entity
-  repositoryClass: JDJ\CollectionBundle\Repository\listElementRepository
+  repositoryClass: JDJ\CollectionBundle\Repository\ListElementRepository
   table: jdj_list_element
   id:
     id:
