@@ -10,12 +10,14 @@ use Doctrine\ORM\Mapping as ORM;
 class Statut
 {
     /**
-     * @var integer
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @var string
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $libelle;
 

@@ -3,34 +3,40 @@
 namespace JDJ\JeuBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Theme
+ * @ORM\Entity
+ * @ORM\Table(name="jdj_theme")
  */
 class Theme
 {
     /**
-     * @var integer
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @var string
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $libelle;
 
     /**
-     * @var string
+     * @ORM\Column(type="string", length=50)
      */
     private $description;
 
     /**
-     * @var string
+     * @Gedmo\Slug(field="libelle")
+     * @ORM\Column(type="string", length=128)
      */
     private $slug;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @ORM\ManyToMany(targetEntity="Jeu", inversedBy="themes")
+     *
      */
     private $jeux;
 
