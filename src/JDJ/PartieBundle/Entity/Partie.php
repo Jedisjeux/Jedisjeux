@@ -4,49 +4,78 @@ namespace JDJ\PartieBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Partie
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="jdj_partie")
  */
 class Partie
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="Joueur", mappedBy="partie", cascade={"persist"})
      */
     private $joueurs;
 
     /**
      * @var \JDJ\UserBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="JDJ\UserBundle\Entity\User", inversedBy="asAuthorParties")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $author;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $users;
-
-    /**
      * @var \JDJ\JeuBundle\Entity\Jeu
+     *
+     * @ORM\ManyToOne(targetEntity="JDJ\JeuBundle\Entity\Jeu", inversedBy="parties")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $jeu;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="JDJ\UserBundle\Entity\User", inversedBy="parties", cascade={"persist"})
+     * @ORM\JoinTable(name="jdj_user_partie")
+     */
+    private $users;
+
+
+    /**
      * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+
      */
     private $createdAt;
 
     /**
      * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
      */
     private $updatedAt;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(type="date", nullable=false)
      */
     private $playedAt;
 
