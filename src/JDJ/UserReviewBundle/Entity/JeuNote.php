@@ -2,43 +2,78 @@
 
 namespace JDJ\UserReviewBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Index;
+use Gedmo\Mapping\Annotation as Gedmo;
+
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * JeuNote
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="jdj_jeu_note", indexes={@ORM\Index(name="search_idx", columns={"jeu_id", "author_id"})})
+ * @UniqueEntity({"jeu", "author"})
+ *
  */
 class JeuNote
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @var \DateTime
+     * @var \DateTime $createdAt
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
     /**
-     * @var \DateTime
+     * @var \DateTime $updatedAt
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
      */
     private $updatedAt;
 
     /**
+     * @var \JDJ\UserReviewBundle\Entity\UserReview
+     *
+     * @ORM\OneToOne(targetEntity="UserReview", mappedBy="jeuNote")
+     */
+    private $userReview;
+
+    /**
      * @var \JDJ\UserBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="JDJ\UserBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $author;
 
     /**
      * @var \JDJ\JeuBundle\Entity\Jeu
+     *
+     * @ORM\ManyToOne(targetEntity="JDJ\JeuBundle\Entity\Jeu", inversedBy="notes")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $jeu;
 
     /**
      * @var \JDJ\UserReviewBundle\Entity\Note
+     *
+     * @ORM\ManyToOne(targetEntity="Note")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $note;
-
 
     /**
      * Get id
@@ -164,10 +199,7 @@ class JeuNote
     {
         return $this->note;
     }
-    /**
-     * @var \JDJ\UserReviewBundle\Entity\UserReview
-     */
-    private $userReview;
+
 
 
     /**

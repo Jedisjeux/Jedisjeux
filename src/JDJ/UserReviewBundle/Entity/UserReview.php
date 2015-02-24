@@ -3,39 +3,61 @@
 namespace JDJ\UserReviewBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * UserReview
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="jdj_user_review")
  */
 class UserReview
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $libelle;
 
     /**
-     * @var string
+     * @var text
+     *
+     * @ORM\Column(type="text", nullable=false)
      */
     private $body;
 
     /**
-     * @var \DateTime
+     * @var \DateTime $createdAt
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
     /**
-     * @var \DateTime
+     * @var \DateTime $updatedAt
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
      */
     private $updatedAt;
 
     /**
      * @var \JDJ\UserReviewBundle\Entity\JeuNote
+     *
+     * @ORM\OneToOne(targetEntity="JeuNote", inversedBy="userReview" , cascade={"persist", "merge"})
+     * @ORM\JoinColumn(nullable=false)
+     *
      */
     private $jeuNote;
 
