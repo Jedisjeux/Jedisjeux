@@ -6,26 +6,41 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Langue
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="jdj_langue")
  */
 class Langue
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $libelle;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $icon;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="JDJ\JeuBundle\Entity\Addon", inversedBy="langues")
+     * @ORM\JoinTable(name="jdj_langue_addon")
+
      */
     private $addons;
 

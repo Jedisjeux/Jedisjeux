@@ -6,6 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Statut
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="jdj_statut")
  */
 class Statut
 {
@@ -20,6 +23,20 @@ class Statut
      * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $libelle;
+
+    /**
+     * @var \JDJ\JeuBundle\Entity\Statut
+     *
+     * @ORM\OneToOne(targetEntity="JDJ\JeuBundle\Entity\Statut", mappedBy="statut")
+     */
+    private $statutJeu;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="JDJ\JeuBundle\Entity\Jeu", mappedBy="statut")
+     */
+    private $jeux;
 
 
     /**
@@ -54,10 +71,7 @@ class Statut
     {
         return $this->libelle;
     }
-    /**
-     * @var \JDJ\JeuBundle\Entity\Statut
-     */
-    private $statutJeu;
+
 
 
     /**
@@ -82,10 +96,7 @@ class Statut
     {
         return $this->statutJeu;
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $jeux;
+
 
     /**
      * Constructor
