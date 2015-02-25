@@ -132,7 +132,7 @@
     <!-- Javascript files -->
 
     {% block foot_script_assetic %}
-        {% javascripts
+        {% javascripts output='js/compiled/all.js'
         'bower_components/jquery/dist/jquery.min.js'
         '@MopaBootstrapBundle/Resources/public/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js'
         '@MopaBootstrapBundle/Resources/public/bootstrap-sass/assets/javascripts/bootstrap/*.js'
@@ -141,7 +141,7 @@
         'js/*'
         'js/*/*'
         'bower_components/bootstrap-star-rating/js/star-rating.min.js'
-        '@JDJJeuBundle/Resources/public/js/jeu/*' %}
+        '@JDJJeuBundle/Resources/public/js/jeu/*' %}git
         <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
     {% endblock foot_script_assetic %}
