@@ -8,7 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * UserReview
  *
- * @ORM\Entity(repositoryClass="JDJ\UserReviewBundle|Entity\UserReviewRepository")
+ * @ORM\Entity(repositoryClass="JDJ\UserReviewBundle\Entity\UserReviewRepository")
  * @ORM\Table(name="jdj_user_review")
  */
 class UserReview

@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * Jeu
  *
- * @ORM\Entity(repositoryClass="JDJ\JeuBundle|Repository\JeuRepository")
+ * @ORM\Entity(repositoryClass="JDJ\JeuBundle\Repository\JeuRepository")
  * @ORM\Table(name="jdj_jeu", indexes={@ORM\Index(name="search_idx", columns={"slug"})})
  */
 class Jeu
