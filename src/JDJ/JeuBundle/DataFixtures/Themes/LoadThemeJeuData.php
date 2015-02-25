@@ -30,7 +30,7 @@ class LoadThemeJeuData extends ContainerAware implements FixtureInterface, Order
     {
         $dbalConnection = $this->getDatabaseConnection();
         $query = <<<EOM
-        insert into jdj_theme_jeu (
+        insert into jeu_theme (
                     jeu_id, theme_id
         )
         select      jeux_id, theme_id

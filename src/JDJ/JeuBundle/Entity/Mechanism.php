@@ -3,34 +3,51 @@
 namespace JDJ\JeuBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Mechanism
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="jdj_mechanism")
  */
 class Mechanism
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", nullable=true, length=50)
      */
     private $libelle;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
     /**
      * @var string
+     *
+     * @Gedmo\Slug(fields={"libelle"}, separator="-")
+     * @ORM\Column(type="string", length=128)
      */
     private $slug;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Jeu", mappedBy="mechanisms", cascade={"persist", "merge"})
      */
     private $jeux;
 

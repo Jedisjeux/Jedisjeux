@@ -2,22 +2,56 @@
 
 namespace JDJ\JeuBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Caracteristique
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="jdj_caracteristique")
  */
 class Caracteristique
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", nullable=false, length=50)
      */
     private $libelle;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="JeuCaracteristique", mappedBy="caracteristique")
+     */
+    private $jeuCaracteristiques;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="CaracteristiqueNote", mappedBy="caracteristique")
+     */
+    private $caracteristiqueNotes;
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->jeuCaracteristiques = new ArrayCollection();
+        $this->caracteristiqueNotes = new ArrayCollection();
+    }
 
 
     /**
@@ -52,18 +86,7 @@ class Caracteristique
     {
         return $this->libelle;
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $jeuCaracteristiques;
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->jeuCaracteristiques = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add jeuCaracteristiques
@@ -102,11 +125,6 @@ class Caracteristique
     {
         return $this->getLibelle();
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $caracteristiqueNotes;
-
 
     /**
      * Add caracteristiqueNotes

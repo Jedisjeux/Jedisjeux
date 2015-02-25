@@ -44,6 +44,7 @@ class Joueur
     private $partie;
 
     /**
+     *
      * @var \JDJ\UserBundle\Entity\User
      *
      * @ORM\ManyToOne(targetEntity="JDJ\UserBundle\Entity\User")

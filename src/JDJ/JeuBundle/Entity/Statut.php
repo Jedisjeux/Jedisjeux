@@ -6,47 +6,26 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Statut
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="jdj_statut_jeu")
  */
 class Statut
 {
     /**
-     * @var integer
-     */
-    private $statut_id;
-
-    /**
-     * @var integer
-     */
-    private $ordre;
-
-    /**
      * @var \JDJ\WebBundle\Entity\Statut
+     *
+     * @ORM\Id
+     * @ORM\OneToOne(targetEntity="JDJ\WebBundle\Entity\Statut", inversedBy="statutJeu", cascade={"persist"})
      */
     private $statut;
 
-
     /**
-     * Set statut_id
+     * @var integer
      *
-     * @param integer $statutId
-     * @return Statut
+     * @ORM\Column(type="integer", nullable=false, options={"unsigned"=true})
      */
-    public function setStatutId($statutId)
-    {
-        $this->statut_id = $statutId;
-
-        return $this;
-    }
-
-    /**
-     * Get statut_id
-     *
-     * @return integer 
-     */
-    public function getStatutId()
-    {
-        return $this->statut_id;
-    }
+    private $ordre;
 
     /**
      * Set ordre
