@@ -40,7 +40,6 @@ class Langue
      *
      * @ORM\ManyToMany(targetEntity="JDJ\JeuBundle\Entity\Addon", inversedBy="langues")
      * @ORM\JoinTable(name="jdj_langue_addon")
-
      */
     private $addons;
 

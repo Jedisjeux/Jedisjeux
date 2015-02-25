@@ -6,28 +6,41 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Produit
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="cpta_produit")
  */
 class Produit
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $libelle;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="TarifProduit", mappedBy="produit", cascade={"persist", "merge"})
      */
     private $tarifs;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="FactureProduit", mappedBy="produit", cascade={"persist", "merge"})
      */
-    private $factures;
+    private $factureProduits;
 
     /**
      * Constructor
@@ -103,43 +116,6 @@ class Produit
     {
         return $this->tarifs;
     }
-
-    /**
-     * Add factures
-     *
-     * @param \JDJ\ComptaBundle\Entity\Facture $factures
-     * @return Produit
-     */
-    public function addFacture(\JDJ\ComptaBundle\Entity\Facture $factures)
-    {
-        $this->factures[] = $factures;
-
-        return $this;
-    }
-
-    /**
-     * Remove factures
-     *
-     * @param \JDJ\ComptaBundle\Entity\Facture $factures
-     */
-    public function removeFacture(\JDJ\ComptaBundle\Entity\Facture $factures)
-    {
-        $this->factures->removeElement($factures);
-    }
-
-    /**
-     * Get factures
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getFactures()
-    {
-        return $this->factures;
-    }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $factureProduits;
 
 
     /**
