@@ -6,7 +6,7 @@
  * Time: 20:46
  */
 
-namespace JDJ\JeuBundle\Entity;
+namespace JDJ\JeuBundle\Repository;
 
 
 use Doctrine\ORM\QueryBuilder;

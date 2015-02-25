@@ -24,18 +24,18 @@ class Theme
     private $libelle;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $description;
 
     /**
-     * @Gedmo\Slug(field="libelle")
+     * @Gedmo\Slug(fields={"libelle"}, separator="-")
      * @ORM\Column(type="string", length=128)
      */
     private $slug;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Jeu", inversedBy="themes")
+     * @ORM\ManyToMany(targetEntity="Jeu", mappedBy="themes")
      *
      */
     private $jeux;
