@@ -6,16 +6,25 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * TypeAdresse
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="cpta_type_adresse")
  */
 class TypeAdresse
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $libelle;
 

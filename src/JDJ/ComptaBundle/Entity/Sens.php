@@ -6,22 +6,33 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Sens
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="cpta_sens")
  */
 class Sens
 {
 
     /**
-     * @var string
+     * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", length=10, nullable=false)
      */
     private $libelle;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="Ecriture", mappedBy="sens", cascade={"persist", "merge"})
      */
     private $ecriture;
 
