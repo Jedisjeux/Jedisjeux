@@ -5,22 +5,34 @@ namespace JDJ\CollectionBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ListElement
+ * Class ListElement
+ *
+ * @ORM\Entity(repositoryClass="JDJ\CollectionBundle\Repository\ListElementRepository")
+ * @ORM\Table(name="jdj_list_element")
+ *
  */
 class ListElement
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var \JDJ\CollectionBundle\Entity\Collection
+     *
+     * @ORM\ManyToOne(targetEntity="JDJ\CollectionBundle\Entity\Collection", inversedBy="listElements")
      */
     private $collection;
 
     /**
      * @var \JDJ\JeuBundle\Entity\Jeu
+     *
+     * @ORM\ManyToOne(targetEntity="JDJ\JeuBundle\Entity\Jeu", inversedBy="listElements")
      */
     private $jeu;
 

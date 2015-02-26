@@ -5,47 +5,71 @@ namespace JDJ\CollectionBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * UserGameAttribute
+ * Class UserGameAttribute
+ *
+ * @ORM\Entity(repositoryClass="JDJ\CollectionBundle\Repository\UserGameAttributeRepository")
+ * @ORM\Table(name="jdj_user_game_attribute")
+ *
  */
 class UserGameAttribute
 {
     /**
      * @var boolean
+     *
+     * @ORM\Column(type="boolean", name="is_favorite", nullable=false)
      */
     private $favorite;
 
     /**
      * @var boolean
+     *
+     * @ORM\Column(type="boolean", name="is_owned", nullable=false)
      */
     private $owned;
 
     /**
      * @var boolean
+     *
+     * @ORM\Column(type="boolean", name="is_wanted", nullable=false)
      */
     private $wanted;
 
     /**
      * @var boolean
+     *
+     * @ORM\Column(type="boolean", name="has_played", nullable=false)
      */
     private $played;
 
     /**
      * @var \JDJ\UserBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="JDJ\UserBundle\Entity\User", inversedBy="userGameAttributes")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
 
     /**
      * @var \JDJ\JeuBundle\Entity\Jeu
+     *
+     * @ORM\ManyToOne(targetEntity="JDJ\JeuBundle\Entity\Jeu", inversedBy="userGameAttributes")
+     * @ORM\JoinColumn(name="jeu_id", referencedColumnName="id")
      */
     private $jeu;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
      */
     private $user_id;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
      */
     private $jeu_id;
 

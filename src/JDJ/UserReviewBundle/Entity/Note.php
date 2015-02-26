@@ -6,24 +6,35 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Note
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="jdj_note")
  */
 class Note
 {
+
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $libelle;
 
     /**
-     * @var integer
+     * @var string
+     *
+     * @ORM\Column(type="integer", nullable=false)
      */
     private $valeur;
-
 
     /**
      * Get id

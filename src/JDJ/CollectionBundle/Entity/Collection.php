@@ -4,40 +4,59 @@ namespace JDJ\CollectionBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Class Collection
- * @package JDJ\CollectionBundle\Entity
+ *
+ * @ORM\Entity(repositoryClass="JDJ\CollectionBundle\Repository\CollectionRepository")
+ * @ORM\Table(name="jdj_collection")
+ *
  */
 class Collection
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $name;
 
     /**
-     * @var string
+     * @var text
+     *
+     * @ORM\Column(type="text", length=50, nullable=false)
      */
     private $description;
 
     /**
      * @var string
+     *
+     * @Gedmo\Slug(fields={"name"}, separator="-")
+     * @ORM\Column(type="string", length=128)
      */
     private $slug;
 
     /**
      * @var \JDJ\UserBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="JDJ\UserBundle\Entity\User", inversedBy="collections")
      */
     private $user;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="ListElement", mappedBy="collection" , cascade={"persist"})
      */
     private $listElements;
 

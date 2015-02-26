@@ -6,28 +6,48 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * CaracteristiqueNote
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="jdj_note_caracteristique")
  */
 class CaracteristiqueNote
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer", nullable=false, options={"unsigned"=true})
      */
     private $valeur;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", nullable=false, length=50)
      */
     private $libelle;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="JeuCaracteristique", mappedBy="caracteristiqueNote")
      */
     private $jeuCaracteristiques;
+
+    /**
+     * @var \JDJ\JeuBundle\Entity\Caracteristique
+     *
+     * @ORM\ManyToOne(targetEntity="Caracteristique", inversedBy="caracteristiqueNotes")
+     */
+    private $caracteristique;
 
     /**
      * Constructor
@@ -125,10 +145,6 @@ class CaracteristiqueNote
     {
         return $this->jeuCaracteristiques;
     }
-    /**
-     * @var \JDJ\JeuBundle\Entity\Caracteristique
-     */
-    private $caracteristique;
 
 
     /**

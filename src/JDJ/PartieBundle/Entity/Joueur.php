@@ -6,30 +6,50 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Joueur
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="jdj_joueur")
  */
 class Joueur
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @var \JDJ\PartieBundle\Entity\Partie
-     */
-    private $partie;
-
-    /**
      * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
      */
     private $nom;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $score;
 
+    /**
+     * @var \JDJ\PartieBundle\Entity\Partie
+     *
+     * @ORM\ManyToOne(targetEntity="Partie", inversedBy="joueurs")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $partie;
 
+    /**
+     *
+     * @var \JDJ\UserBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="JDJ\UserBundle\Entity\User")
+     */
+    private $user;
 
 
     /**
@@ -64,10 +84,6 @@ class Joueur
     {
         return $this->partie;
     }
-    /**
-     * @var \JDJ\UserBundle\Entity\User
-     */
-    private $user;
 
 
     /**

@@ -6,30 +6,41 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * TypeAddon
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="jdj_type_addon")
  */
 class TypeAddon
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", nullable=false, length=50)
      */
     private $libelle;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="Addon", mappedBy="typeAddon")
      */
-    private $Addons;
+    private $addons;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->Addons = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->addons = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -73,7 +84,7 @@ class TypeAddon
      */
     public function addAddon(\JDJ\JeuBundle\Entity\Addon $addons)
     {
-        $this->Addons[] = $addons;
+        $this->addons[] = $addons;
 
         return $this;
     }
@@ -85,7 +96,7 @@ class TypeAddon
      */
     public function removeAddon(\JDJ\JeuBundle\Entity\Addon $addons)
     {
-        $this->Addons->removeElement($addons);
+        $this->addons->removeElement($addons);
     }
 
     /**
@@ -95,12 +106,8 @@ class TypeAddon
      */
     public function getAddons()
     {
-        return $this->Addons;
+        return $this->addons;
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $addons;
 
     public function __toString()
     {

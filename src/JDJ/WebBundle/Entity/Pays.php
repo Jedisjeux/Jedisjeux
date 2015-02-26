@@ -6,18 +6,34 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Pays
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="jdj_pays")
  */
 class Pays
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $libelle;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="JDJ\LudographieBundle\Entity\Personne", mappedBy="pays")
+     */
+    private $personnes;
 
 
     /**
@@ -52,10 +68,6 @@ class Pays
     {
         return $this->libelle;
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $personnes;
 
     /**
      * Constructor

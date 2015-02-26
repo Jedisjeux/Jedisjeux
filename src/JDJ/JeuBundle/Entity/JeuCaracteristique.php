@@ -6,71 +6,35 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * JeuCaracteristique
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="jdj_caracteristique_jeu")
  */
 class JeuCaracteristique
 {
     /**
-     * @var integer
-     */
-    private $caracteristique_id;
-
-    /**
-     * @var integer
-     */
-    private $jeu_id;
-
-
-    /**
-     * Set caracteristique_id
-     *
-     * @param integer $caracteristiqueId
-     * @return JeuCaracteristique
-     */
-    public function setCaracteristiqueId($caracteristiqueId)
-    {
-        $this->caracteristique_id = $caracteristiqueId;
-
-        return $this;
-    }
-
-    /**
-     * Get caracteristique_id
-     *
-     * @return integer 
-     */
-    public function getCaracteristiqueId()
-    {
-        return $this->caracteristique_id;
-    }
-
-    /**
-     * Set jeu_id
-     *
-     * @param integer $jeuId
-     * @return JeuCaracteristique
-     */
-    public function setJeuId($jeuId)
-    {
-        $this->jeu_id = $jeuId;
-
-        return $this;
-    }
-
-    /**
-     * Get jeu_id
-     *
-     * @return integer 
-     */
-    public function getJeuId()
-    {
-        return $this->jeu_id;
-    }
-
-
-    /**
      * @var \JDJ\JeuBundle\Entity\Caracteristique
+     *
+     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="Caracteristique", inversedBy="jeuCaracteristiques")
      */
     private $caracteristique;
+
+
+    /**
+     * @var \JDJ\JeuBundle\Entity\Jeu
+     *
+     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="Jeu", inversedBy="jeuCaracteristiques")
+     */
+    private $jeu;
+
+    /**
+     * @var \JDJ\JeuBundle\Entity\CaracteristiqueNote
+     *
+     * @ORM\ManyToOne(targetEntity="CaracteristiqueNote", inversedBy="jeuCaracteristiques")
+     */
+    private $caracteristiqueNote;
 
 
     /**
@@ -95,10 +59,6 @@ class JeuCaracteristique
     {
         return $this->caracteristique;
     }
-    /**
-     * @var \JDJ\JeuBundle\Entity\Jeu
-     */
-    private $jeu;
 
 
     /**
@@ -123,10 +83,6 @@ class JeuCaracteristique
     {
         return $this->jeu;
     }
-    /**
-     * @var \JDJ\JeuBundle\Entity\CaracteristiqueNote
-     */
-    private $caracteristiqueNote;
 
 
     /**

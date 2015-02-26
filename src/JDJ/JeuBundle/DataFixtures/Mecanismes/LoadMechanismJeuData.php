@@ -29,8 +29,8 @@ class LoadMechanismJeuData extends ContainerAware implements FixtureInterface, O
     public function load(ObjectManager $manager)
     {
         $query = <<<EOM
-        insert into jdj_mechanism_jeu (
-                    jeu_id, mecanisme_id
+        insert into jeu_mechanism (
+                    jeu_id, mechanism_id
         )
         select      jeux_id, mecanisme_id
         from        jedisjeux.jdj_mecanismelieur ml

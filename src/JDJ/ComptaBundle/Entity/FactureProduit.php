@@ -6,26 +6,39 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * FactureProduit
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="cpta_produit_facture")
  */
 class FactureProduit
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer", nullable=false)
      */
     private $quantite;
 
     /**
-     * @var string
+     * @var decimal
+     *
+     * @ORM\Column(type="decimal", precision=6, scale=2, nullable=false)
      */
     private $prixUnitaire;
 
     /**
      * @var \JDJ\ComptaBundle\Entity\Facture
+     *
+     * @ORM\ManyToOne(targetEntity="Facture", inversedBy="factureProduits", cascade={"persist", "merge"})
+     * @ORM\Id
      */
     private $facture;
 
     /**
      * @var \JDJ\ComptaBundle\Entity\Produit
+     *
+     * @ORM\ManyToOne(targetEntity="Produit", inversedBy="factureProduits", cascade={"persist", "merge"})
+     * @ORM\Id
      */
     private $produit;
 
