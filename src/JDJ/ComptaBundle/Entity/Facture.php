@@ -3,44 +3,64 @@
 namespace JDJ\ComptaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Facture
+ * @ORM\Entity
+ * @ORM\Table(name="cpta_facture")
  */
 class Facture
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(type="datetime")
      */
     private $datePaiement;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="decimal", precision=6, scale=2, nullable=false)
      */
     private $montant;
 
     /**
-     * @var \DateTime
+     * @var \DateTime $createdAt
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
      */
-    private $dateCreation;
+    private $createdAt;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="FactureProduit", mappedBy="facture", cascade={"persist", "merge"})
      */
-    private $produits;
+    private $factureProduits;
 
     /**
      * @var \JDJ\ComptaBundle\Entity\Client
+     *
+     * @ORM\ManyToOne(targetEntity="Client", inversedBy="factures", cascade={"persist", "merge"})
      */
     private $client;
 
     /**
      * @var \JDJ\ComptaBundle\Entity\ModeReglement
+     *
+     * @ORM\ManyToOne(targetEntity="ModeReglement", cascade={"persist", "merge"})
      */
     private $modeReglement;
 
@@ -209,10 +229,7 @@ class Facture
     {
         return $this->modeReglement;
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $factureProduits;
+
 
 
     /**

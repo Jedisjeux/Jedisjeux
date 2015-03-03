@@ -6,26 +6,38 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * ModeReglement
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="cpta_mode_reglement")
  */
 class ModeReglement
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $libelle;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="Ecriture", mappedBy="modeReglement", cascade={"persist", "merge"})
      */
     private $ecritures;
 
     /**
      * Constructor
+     *
      */
     public function __construct()
     {

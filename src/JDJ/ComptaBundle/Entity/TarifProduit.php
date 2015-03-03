@@ -6,31 +6,46 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * TarifProduit
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="cpta_tarif_produit")
  */
 class TarifProduit
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(type="datetime")
      */
     private $dateDebut;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(type="datetime")
      */
     private $dateFin;
 
     /**
-     * @var string
+     * @var decimal
+     *
+     * @ORM\Column(type="decimal", precision=6, scale=2, nullable=false)
      */
     private $prix;
 
     /**
      * @var \JDJ\ComptaBundle\Entity\Produit
+     *
+     * @ORM\ManyToOne(targetEntity="Produit", inversedBy="tarifs", cascade={"persist", "merge"})
      */
     private $produit;
 

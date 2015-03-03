@@ -3,60 +3,97 @@
 namespace JDJ\UserBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * User
+ *
+ * @ORM\Entity(repositoryClass="JDJ\UserBundle\Repository\UserRepository")
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt")
+ * @ORM\Table(name="fos_user")
  */
 class User extends BaseUser
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $nom;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $prenom;
 
-
     /**
      * @var string
+     *
+     * @Gedmo\Slug(fields={"username"}, separator="-")
+     * @ORM\Column(type="string", length=128)
      */
     private $slug;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateNaissance;
 
     /**
-     * @var \DateTime
+     * @var \DateTime $createdAt
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
      */
     private $created;
 
     /**
-     * @var \DateTime
+     * @var \DateTime $updated
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
      */
     private $updated;
 
     /**
+     * @var \DateTime $deletedAt
+     *
+     * @ORM\Column(name="deleted_at", type="datetime", nullable=true)
+     */
+    private $deletedAt;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="JDJ\PartieBundle\Entity\Partie", mappedBy="author")
      */
     private $asAuthorParties;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="JDJ\PartieBundle\Entity\Partie", mappedBy="users", cascade={"persist"})
      */
     private $parties;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $avatar;
 
@@ -66,7 +103,9 @@ class User extends BaseUser
     public $avatarFile;
 
     /**
-     * @var string
+     * @var text
+     *
+     * @ORM\Column(type="text", nullable=true)
      */
     private $presentation;
 
@@ -345,10 +384,7 @@ class User extends BaseUser
     {
         return $this->presentation;
     }
-    /**
-     * @var \DateTime
-     */
-    private $deletedAt;
+
 
 
     /**

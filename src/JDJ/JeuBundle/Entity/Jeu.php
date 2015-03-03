@@ -4,118 +4,177 @@ namespace JDJ\JeuBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Jeu
+ *
+ * @ORM\Entity(repositoryClass="JDJ\JeuBundle\Repository\JeuRepository")
+ * @ORM\Table(name="jdj_jeu", indexes={@ORM\Index(name="search_idx", columns={"slug"})})
  */
 class Jeu
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", nullable=false, length=50)
      */
     private $libelle;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
      */
     private $ageMin;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
      */
     private $joueurMin;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
      */
     private $joueurMax;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="text", nullable=true)
      */
     private $intro;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="text", nullable=true)
      */
     private $materiel;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="text", nullable=true)
      */
     private $but;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
     /**
      * @var string
+     *
+     * @Gedmo\Slug(fields={"libelle"}, separator="-")
+     * @ORM\Column(type="string", length=128)
      */
     private $slug;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", nullable=true, length=50)
      */
     private $imageCouverture;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
-     */
-    private $jeuCaracteristiques;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $addons;
-
-    /**
-     * @var \JDJ\WebBundle\Entity\Statut
-     */
-    private $statut;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Mechanism", inversedBy="jeux", cascade={"persist", "merge"})
      */
     private $mechanisms;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Theme", inversedBy="jeux", cascade={"persist", "merge"})
      */
     private $themes;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="JDJ\LudographieBundle\Entity\Personne", inversedBy="auteurJeux", cascade={"persist", "merge"})
+     * @ORM\JoinTable(name="jdj_auteur_jeu")
      */
     private $auteurs;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="JDJ\LudographieBundle\Entity\Personne", inversedBy="illustrateurJeux", cascade={"persist", "merge"})
+     * @ORM\JoinTable(name="jdj_illustrateur_jeu")
      */
     private $illustrateurs;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="JDJ\LudographieBundle\Entity\Personne", inversedBy="editeurJeux", cascade={"persist", "merge"})
+     * @ORM\JoinTable(name="jdj_editeur_jeu")
      */
     private $editeurs;
 
+
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="JeuCaracteristique", mappedBy="jeu")
+     */
+    private $jeuCaracteristiques;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="Addon", mappedBy="jeu")
+     */
+    private $addons;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="JDJ\PartieBundle\Entity\Partie", mappedBy="jeu")
      */
     private $parties;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="JDJ\UserReviewBundle\Entity\JeuNote", mappedBy="jeu")
      */
     private $notes;
 
+    /**
+     * @var \JDJ\WebBundle\Entity\Statut
+     *
+     * @ORM\ManyToOne(targetEntity="JDJ\WebBundle\Entity\Statut", inversedBy="jeux")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $statut;
 
+    /**
+     * @var \JDJ\CoreBundle\Entity\Cible
+     *
+     * @ORM\ManyToOne(targetEntity="JDJ\CoreBundle\Entity\Cible", inversedBy="jeux", cascade={"persist", "merge"})
+     */
+    private $cible;
 
     /**
      * Constructor
@@ -702,10 +761,6 @@ class Jeu
     {
         return $this->notes;
     }
-    /**
-     * @var \JDJ\CoreBundle\Entity\Cible
-     */
-    private $cible;
 
 
     /**

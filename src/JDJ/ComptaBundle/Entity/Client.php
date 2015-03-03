@@ -3,59 +3,87 @@
 namespace JDJ\ComptaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Client
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="cpta_client")
  */
 class Client
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $societe;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $nom;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $email;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $rue;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $complement;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", length=5, nullable=false)
      */
     private $codePostal;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $ville;
 
     /**
-     * @var \DateTime
+     * @var \DateTime $createdAt
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
      */
-    private $dateCreation;
+    private $createdAt;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var factures
+     *
+     * @ORM\OneToMany(targetEntity="Facture", mappedBy="client", cascade={"persist", "merge"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $factures;
 

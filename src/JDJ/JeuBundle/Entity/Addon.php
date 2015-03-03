@@ -2,44 +2,67 @@
 
 namespace JDJ\JeuBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Addon
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="jdj_addon")
  */
 class Addon
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $url;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $libelle;
 
     /**
      * @var \JDJ\JeuBundle\Entity\Addon
+     *
+     * @ORM\ManyToOne(targetEntity="Jeu", inversedBy="addons")
      */
     private $jeu;
 
     /**
      * @var \JDJ\JeuBundle\Entity\Addon
+     *
+     * @ORM\ManyToOne(targetEntity="TypeAddon", inversedBy="addons")
      */
     private $typeAddon;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="JDJ\WebBundle\Entity\Langue", mappedBy="addons")
+     */
+    private $langues;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-
+        $this->langues = new ArrayCollection();
     }
 
     /**
@@ -143,12 +166,6 @@ class Addon
     {
         return $this->typeAddon;
     }
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $langues;
-
 
     /**
      * Add langues

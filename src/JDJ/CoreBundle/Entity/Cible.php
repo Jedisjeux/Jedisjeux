@@ -4,34 +4,52 @@ namespace JDJ\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\ORM\Mapping\Index;
 
 /**
  * Cible
+ *
+ * @ORM\Entity(repositoryClass="JDJ\CoreBundle\Entity\CibleRepository")
+ * @ORM\Table(name="jdj_cible", indexes={@ORM\Index(name="search_idx", columns={"slug"})})
  */
 class Cible
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $libelle;
 
     /**
-     * @var string
+     * @var text
+     *
+     * @ORM\Column(type="text", nullable=false)
      */
     private $description;
 
     /**
      * @var string
+     *
+     * @Gedmo\Slug(fields={"libelle"}, separator="-")
+     * @ORM\Column(type="string", length=128)
      */
     private $slug;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="JDJ\JeuBundle\Entity\Jeu", mappedBy="cible", cascade={"persist", "merge"})
      */
     private $jeux;
 

@@ -3,54 +3,82 @@
 namespace JDJ\ComptaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Ecriture
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="cpta_ecriture")
  */
 class Ecriture
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $libelle;
 
     /**
-     * @var string
+     * @var decimal
+     *
+     * @ORM\Column(type="decimal", precision=6, scale=2, nullable=false)
      */
     private $montant;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(type="datetime")
      */
     private $dateEcriture;
 
     /**
-     * @var \DateTime
+     * @var \DateTime $createdAt
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
      */
-    private $dateCreation;
+    private $createdAt;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $factureFilename;
 
     /**
-     * @var \JDJ\ComptaBundle\Entity\Facture
+     * @var $facture
+     *
+     * @ORM\OneToOne(targetEntity="Facture", cascade={"persist", "merge"})
+     * @ORM\JoinColumn(name="facture_id", referencedColumnName="id")
      */
     private $facture;
 
     /**
      * @var \JDJ\ComptaBundle\Entity\ModeReglement
+     *
+     * @ORM\ManyToOne(targetEntity="ModeReglement", inversedBy="ecritures", cascade={"persist", "merge"})
      */
     private $modeReglement;
 
     /**
      * @var \JDJ\ComptaBundle\Entity\Sens
+     *
+     * @ORM\ManyToOne(targetEntity="Sens", inversedBy="ecriture", cascade={"persist", "merge"})
      */
     private $sens;
 

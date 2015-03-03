@@ -3,64 +3,93 @@
 namespace JDJ\LudographieBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Personne
+ *
+ * @ORM\Entity(repositoryClass="JDJ\CoreBundle\Entity\EntityRepository")
+ * @ORM\Table(name="jdj_personne", indexes={@ORM\Index(name="search_idx", columns={"slug"})})
  */
 class Personne
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $nom;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $prenom;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", length=200, nullable=true)
      */
     private $siteWeb;
 
     /**
-     * @var string
+     * @var text
+     *
+     * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
      */
     private $image;
 
     /**
      * @var string
+     *
+     * @Gedmo\Slug(fields={"prenom","nom"}, separator="-")
+     * @ORM\Column(type="string", length=128)
      */
     private $slug;
 
     /**
      * @var \JDJ\WebBundle\Entity\Pays
+     *
+     * @ORM\ManyToOne(targetEntity="JDJ\WebBundle\Entity\Pays", inversedBy="personnes")
      */
     private $pays;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="JDJ\JeuBundle\Entity\Jeu", mappedBy="auteurs", cascade={"persist", "merge"})
      */
     private $auteurJeux;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="JDJ\JeuBundle\Entity\Jeu", mappedBy="illustrateurs", cascade={"persist", "merge"})
      */
     private $illustrateurJeux;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="JDJ\JeuBundle\Entity\Jeu", mappedBy="editeurs", cascade={"persist", "merge"})
      */
     private $editeurJeux;
 
