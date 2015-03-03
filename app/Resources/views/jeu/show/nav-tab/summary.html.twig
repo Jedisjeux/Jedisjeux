@@ -2,10 +2,11 @@
     {{ jeu.intro | raw }}
 </div>
 
-<div class="col-sm-6 col-md-6 pull-left thumbmail-jeu">
+{% if jeu.materialImage %}
+<div class="col-sm-5 col-md-5 pull-left thumbnail-jeu">
     <div class="image-style-six">
         <!-- Image -->
-        <img class="img-responsive" src="http://www.jedisjeux.net/img/800/lewis-clark-49-1376296905.jpg" alt="">
+        <img class="img-responsive" src="{{ jeu.materialImage.webPath | imagine_filter('default') }}" alt="">
         <div class="image-caption">
             <h4><a href="#">Heading</a>
                 &nbsp;
@@ -18,6 +19,7 @@
         </div>
     </div>
 </div>
+{% endif %}
 
 <div class="description">
     {{ jeu.description | raw }}

@@ -37,8 +37,9 @@ select      old.user_id,
             old.user_avatar,
             old.group_id
 from        jedisjeux.phpbb3_users old
-group by    old.user_email
-order by    old.user_id
+where       old.user_email != ''
+group by    old.username_clean
+order by    old.user_id asc
 limit       100
 EOM;
 
@@ -63,7 +64,7 @@ EOM;
                 ->setUsername($data['username'])
                 ->setPlainPassword($data['username'])
                 ->setEmail($data['user_email'])
-                ->setAvatar("" === $data['user_avatar'] ? null : $data['user_avatar'])
+                ->setAvatar("" == $data['user_avatar'] ? null : $data['user_avatar'])
                 ->setRoles($roles);
 
             $userManager->updateUser($user);
@@ -73,6 +74,19 @@ EOM;
             ), array(
                 'id' => $user->getId(),
             ));
+
+
+            if (null !== $user->getAvatar()
+                and false === file_exists($user->getAbsolutePath())
+            ) {
+
+                @file_put_contents($user->getAbsolutePath(), file_get_contents("http://www.jedisjeux.net/phpbb3/download/file.php?avatar=".$user->getAvatar()));
+
+            }
+
+            $manager->detach($user);
+            $manager->clear();
+
         }
 
         $roles = array("ROLE_USER", "ROLE_ADMIN");

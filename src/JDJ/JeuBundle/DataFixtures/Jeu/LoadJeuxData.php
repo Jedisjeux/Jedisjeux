@@ -36,7 +36,7 @@ select      old.*
 from        jedisjeux.jdj_game old
 inner join  jdj_statut statut
                 on statut.id = old.valid
--- limit       1000
+-- limit       100
 EOM;
 
 
@@ -47,7 +47,6 @@ EOM;
             $this->getDatabaseConnection()->insert("jdj_jeu", array(
                 'id' => $data['id'],
                 'libelle' => $data['nom'],
-                'imageCouverture' => (!empty($data['couverture']) ? $data['couverture'] : null),
                 'joueurMin' => (!empty($data['min']) ? $data['min'] : null),
                 'joueurMax' => (!empty($data['max']) ? $data['max'] : null),
                 // TODO Durée -setDuree(empty($data['max']) ? $data['max'] : null)
@@ -68,7 +67,6 @@ EOM;
         $jeu = new Jeu();
         $jeu
             ->setLibelle($data['nom'])
-            ->setImageCouverture(!empty($data['couverture']) ? $data['couverture'] : null)
             ->setJoueurMin(!empty($data['min']) ? $data['min'] : null)
             ->setJoueurMax(!empty($data['max']) ? $data['max'] : null)
             // TODO Durée -setDuree(empty($data['max']) ? $data['max'] : null)

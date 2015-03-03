@@ -54,6 +54,13 @@ class Partie
      */
     private $users;
 
+    /**
+     * @var string
+     *
+     * @ORM\ManyToMany(targetEntity="JDJ\CoreBundle\Entity\Image", cascade={"persist"})
+     * @ORM\JoinTable(name="jdj_partie_image")
+     */
+    private $images;
 
     /**
      * @var \DateTime
@@ -211,6 +218,27 @@ class Partie
     {
         return $this->jeu;
     }
+
+    /**
+     * @return string
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    /**
+     * @param string $images
+     * @return $this
+     */
+    public function setImages($images)
+    {
+        $this->images = $images;
+
+        return $this;
+    }
+
+
 
     /**
      * Set createdAt

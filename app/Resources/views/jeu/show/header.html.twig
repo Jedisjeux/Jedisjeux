@@ -24,9 +24,10 @@
                     <!-- Image Box #5 Image -->
                     <div class="img-box-5-img">
                         <!-- Image -->
-                        <a href="http://www.jedisjeux.net/img/800/{{ jeu.imageCouverture }}" class="lightbox"><img
-                                    src="http://www.jedisjeux.net/img/800/{{ jeu.imageCouverture }}" alt=""
-                                    class="img-responsive img-thumbnail"/></a>
+                        {% if jeu.imageCouverture %}
+                            <a href="{{ jeu.imageCouverture.webPath | imagine_filter('default') }}" class="lightbox"><img src="{{ jeu.imageCouverture.webPath | imagine_filter('default') }}" alt="" class="img-responsive img-thumbnail" /></a>
+                        {% endif %}
+
                     </div>
                 </div>
                 <div class="col-md-8">
