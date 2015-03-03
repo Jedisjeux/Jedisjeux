@@ -5,6 +5,7 @@ namespace JDJ\JeuBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JDJ\CoreBundle\Entity\Image;
 
 /**
  * Jeu
@@ -90,9 +91,24 @@ class Jeu
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true, length=50)
+     * @ORM\ManyToOne(targetEntity="JDJ\CoreBundle\Entity\Image")
      */
     private $imageCouverture;
+
+    /**
+     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="JDJ\CoreBundle\Entity\Image")
+     */
+    private $materialImage;
+
+    /**
+     * @var string
+     *
+     * @ORM\ManyToMany(targetEntity="JDJ\CoreBundle\Entity\Image", cascade={"persist"})
+     * @ORM\JoinTable(name="jdj_jeu_image")
+     */
+    private $images;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -190,6 +206,7 @@ class Jeu
         $this->editeurs = new ArrayCollection();
         $this->parties = new ArrayCollection();
         $this->notes = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     /**
@@ -440,6 +457,57 @@ class Jeu
     public function getImageCouverture()
     {
         return $this->imageCouverture;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMaterialImage()
+    {
+        return $this->materialImage;
+    }
+
+    /**
+     * @param string $materialImage
+     * @return $this
+     */
+    public function setMaterialImage($materialImage)
+    {
+        $this->materialImage = $materialImage;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    /**
+     * Add Image
+     *
+     * @param Image $image
+     * @return Jeu
+     */
+    public function addImage(Image $image)
+    {
+        $this->images[] = $image;
+
+        return $this;
+    }
+
+    /**
+     * @param string $images
+     * @return $this
+     */
+    public function setImages($images)
+    {
+        $this->images = $images;
+
+        return $this;
     }
 
     /**

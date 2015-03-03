@@ -1,6 +1,6 @@
 <!-- Nav tab widget - popular, recent and comments -->
 <div class="s-widget">
-    <h5><i class="fa fa-table color"></i> Nav Tabs</h5>
+    <h5><i class="fa fa-comments color"></i> Critiques</h5>
 
     <div class="widget-content tabs">
         <div class="nav-tabs-two">
@@ -23,7 +23,8 @@
                                 <li>
                                     <a href="#">
                                         <!-- Item image -->
-                                        <img src="{{ imgSrc }}" alt="" class="img-responsive img-thumbnail"/>
+                                        {#<img src="{{ imgSrc }}" alt="" class="img-responsive img-thumbnail"/>#}
+                                        <img src="{{ userReview.jeuNote.author.webPath | imagine_filter('thumbnail') }}" alt="" class="img-responsive img-thumbnail" />
                                         <!-- Item title -->
                                         <span>{{ userReview.jeuNote.author.username }}</span><br />
 
