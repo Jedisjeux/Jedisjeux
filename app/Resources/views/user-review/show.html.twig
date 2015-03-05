@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block body -%}
+
+    <div class="col-md-8">
+        {% include "jeu/show/header.html.twig" with {'jeu': entity.jeuNote.jeu} only %}
+        {% include "user-review/partial/_show.html.twig" with {'userReview': entity} %}
+
+        <ul class="record_actions">
+            <li>
+                <a href="{{ path('user_review') }}">
+                    Back to the list
+                </a>
+            </li>
+            <li>
+                <a class="small button edit" href="{{ path('user_review_edit', { 'id': entity.id }) }}">
+                    Modifier
+                </a>
+            </li>
+            <li>
+                {{ form_start(delete_form) }}
+                {{ form_widget(delete_form.submit, {'attr': {'class': 'small button'}, 'label': 'Supprimer'}) }}
+                {{ form_end(delete_form) }}
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="col-md-4">
+        {% include "jeu/show/sidebar.html.twig" with {'jeu': entity.jeuNote.jeu, 'userReviews': []} only %}
+    </div>
+
+{% endblock %}

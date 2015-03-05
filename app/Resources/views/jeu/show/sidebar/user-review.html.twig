@@ -21,7 +21,7 @@
                                 {% set imgId = key + 1 %}
                                 {% set imgSrc = '../../../img/user/' ~ imgId ~ '.jpg' %}
                                 <li>
-                                    <a href="#">
+                                    <a href="{{ path('user_review_show', {'id': userReview.id, 'slug': userReview.jeuNote.jeu.slug}) }}">
                                         <!-- Item image -->
                                         {% if (userReview.jeuNote.author.avatar) %}
                                             <img src="{{ userReview.jeuNote.author.avatar.webPath | imagine_filter('thumbnail') }}" alt="" class="img-responsive img-thumbnail" />

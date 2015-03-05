@@ -195,9 +195,10 @@ class UserReviewController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('JDJUserReviewBundle:UserReview:show.html.twig', array(
+        return $this->render('user-review/show.html.twig', array(
             'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        ));
+            'delete_form' => $deleteForm->createView(),
+        ));
     }
 
     /**

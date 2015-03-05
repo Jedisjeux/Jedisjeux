@@ -25,7 +25,7 @@ class UserReview
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=50, nullable=false)
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $libelle;
 
