@@ -52,7 +52,7 @@ EOM;
 
         $query = <<<EOM
 insert into jdj_user_partie (partie_id, user_id)
-select      old.partie_id, old.user_id
+select      distinct old.partie_id, old.user_id
 from        jedisjeux.jdj_parties_liees old
 inner join  jdj_partie partie
                 on partie.id = old.partie_id
