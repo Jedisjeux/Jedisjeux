@@ -7,9 +7,7 @@
     <!-- Image -->
     <div class="img-container">
         <a href="{{ jeuHref }}">
-            {#<img
-                    src="http://www.jedisjeux.net/img/800/{{ jeu.imageCouverture }}" alt="" class="img-responsive">#}
-            <img src="{{ jeu.imageCouverture.webPath }}" alt="" class="img-responsive" />
+            <img src="{{ jeu.imageCouverture.webPath | imagine_filter('default') }}" alt="" class="img-responsive" />
         </a>
     </div>
     <!-- Image Box #4 Content -->

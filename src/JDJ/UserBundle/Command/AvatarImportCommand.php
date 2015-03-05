@@ -8,6 +8,7 @@
 
 namespace JDJ\UserBundle\Command;
 
+use JDJ\UserBundle\Entity\Avatar;
 use JDJ\UserBundle\Entity\User;
 use JDJ\UserBundle\Service\AvatarImportService;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -38,17 +39,16 @@ class AvatarImportCommand extends ContainerAwareCommand
         $avatars = $avatarImportService
             ->getAvatars();
 
-        /** @var User $user */
-        foreach ($avatars as $user) {
+        /** @var Avatar $avatar */
+        foreach ($avatars as $avatar) {
 
-            if (null !== $user->getAvatar()) {
-                if (!file_exists($user->getAbsolutePath())) {
-                    $output->writeln("Downloading avatar ".$avatarImportService->getAvatarOriginalPath($user));
+            if (!file_exists($avatar->getAbsolutePath())) {
+                $output->writeln("Downloading avatar ".$avatarImportService->getAvatarOriginalPath($avatar));
 
-                    $avatarImportService
-                        ->downloadAvatar($user);
-                }
+                $avatarImportService
+                    ->downloadAvatar($avatar);
             }
+
 
         }
     }

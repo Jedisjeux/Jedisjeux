@@ -64,7 +64,6 @@ EOM;
                 ->setUsername($data['username'])
                 ->setPlainPassword($data['username'])
                 ->setEmail($data['user_email'])
-                ->setAvatar("" == $data['user_avatar'] ? null : $data['user_avatar'])
                 ->setRoles($roles);
 
             $userManager->updateUser($user);
@@ -75,14 +74,6 @@ EOM;
                 'id' => $user->getId(),
             ));
 
-
-            if (null !== $user->getAvatar()
-                and false === file_exists($user->getAbsolutePath())
-            ) {
-
-                @file_put_contents($user->getAbsolutePath(), file_get_contents("http://www.jedisjeux.net/phpbb3/download/file.php?avatar=".$user->getAvatar()));
-
-            }
 
             $manager->detach($user);
             $manager->clear();

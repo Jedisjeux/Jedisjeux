@@ -23,8 +23,13 @@
                                 <li>
                                     <a href="#">
                                         <!-- Item image -->
-                                        {#<img src="{{ imgSrc }}" alt="" class="img-responsive img-thumbnail"/>#}
-                                        <img src="{{ userReview.jeuNote.author.webPath | imagine_filter('thumbnail') }}" alt="" class="img-responsive img-thumbnail" />
+                                        {% if (userReview.jeuNote.author.avatar) %}
+                                            <img src="{{ userReview.jeuNote.author.avatar.webPath | imagine_filter('thumbnail') }}" alt="" class="img-responsive img-thumbnail" />
+                                        {% else %}
+                                            <div class="img-thumbnail anonymous-user">
+                                                <span class="fa fa-user"></span>
+                                            </div>
+                                        {% endif %}
                                         <!-- Item title -->
                                         <span>{{ userReview.jeuNote.author.username }}</span><br />
 

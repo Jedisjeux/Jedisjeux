@@ -91,19 +91,14 @@ class User extends BaseUser
     private $parties;
 
     /**
-     * @var string
+     * @var Avatar
      *
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\ManyToOne(targetEntity="JDJ\UserBundle\Entity\Avatar")
      */
     private $avatar;
 
     /**
-     * @var \Symfony\Component\HttpFoundation\File\UploadedFile
-     */
-    public $avatarFile;
-
-    /**
-     * @var text
+     * @var string
      *
      * @ORM\Column(type="text", nullable=true)
      */
@@ -336,32 +331,6 @@ class User extends BaseUser
     }
 
 
-
-    /**
-     * Set avatar
-     *
-     * @param string $avatar
-     * @return User
-     */
-    public function setAvatar($avatar)
-    {
-        $this->avatar = $avatar;
-
-        return $this;
-    }
-
-    /**
-     * Get avatar
-     *
-     * @return string 
-     */
-    public function getAvatar()
-    {
-        return $this->avatar;
-    }
-
-
-
     /**
      * Set presentation
      *
@@ -385,7 +354,24 @@ class User extends BaseUser
         return $this->presentation;
     }
 
+    /**
+     * @return Avatar
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
 
+    /**
+     * @param Avatar $avatar
+     * @return $this
+     */
+    public function setAvatar(Avatar $avatar = null)
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
 
     /**
      * Set deletedAt
@@ -408,59 +394,6 @@ class User extends BaseUser
     public function getDeletedAt()
     {
         return $this->deletedAt;
-    }
-
-    public function getAbsolutePath()
-    {
-        return null === $this->avatar ? null : $this->getUploadRootDir().'/'.$this->avatar;
-    }
-
-    /**
-     * return the public url to the avatar
-     *
-     * @return null|string
-     */
-    public function getWebPath()
-    {
-        return null === $this->avatar ? null : $this->getUploadDir().'/'.$this->avatar;
-    }
-
-    /**
-     * get the absolute path to the upload directory
-     *
-     * @return string
-     */
-    protected function getUploadRootDir()
-    {
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
-    }
-
-    /**
-     * The path to the  avatar files
-     *
-     * @return string
-     */
-    protected function getUploadDir()
-    {
-        return 'uploads/avatar';
-    }
-
-    /**
-     * This function uploads the file to the server
-     *
-     */
-    public function upload()
-    {
-        //Checks if the avatar is null
-        if (null === $this->avatarFile) {
-            return;
-        }
-
-        $this->avatarFile->move($this->getUploadRootDir(), $this->avatarFile->getClientOriginalName());
-        $this->avatar = $this->avatarFile->getClientOriginalName();
-
-        // Clean the avatar file
-        $this->avatarFile = null;
     }
 
 }

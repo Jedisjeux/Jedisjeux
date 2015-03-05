@@ -11,6 +11,7 @@ namespace JDJ\UserBundle\Service;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use JDJ\CoreBundle\Entity\Image;
+use JDJ\UserBundle\Entity\Avatar;
 use JDJ\UserBundle\Entity\User;
 
 /**
@@ -39,24 +40,24 @@ class AvatarImportService
     {
         return $this
             ->entityManager
-            ->getRepository('JDJUserBundle:User')
+            ->getRepository('JDJUserBundle:Avatar')
             ->findAll();
     }
 
     /**
-     * @param User $user
+     * @param Avatar $avatar
      */
-    public function downloadAvatar(User $user)
+    public function downloadAvatar(Avatar $avatar)
     {
-        file_put_contents($user->getAbsolutePath(), file_get_contents($this->getAvatarOriginalPath($user)));
+        file_put_contents($avatar->getAbsolutePath(), file_get_contents($this->getAvatarOriginalPath($avatar)));
     }
 
     /**
-     * @param User $user
+     * @param Avatar $avatar
      * @return string
      */
-    public function getAvatarOriginalPath(User $user)
+    public function getAvatarOriginalPath(Avatar $avatar)
     {
-        return "http://www.jedisjeux.net/phpbb3/download/file.php?avatar=".$user->getAvatar();
+        return "http://www.jedisjeux.net/phpbb3/download/file.php?avatar=".$avatar->getPath();
     }
 } 
