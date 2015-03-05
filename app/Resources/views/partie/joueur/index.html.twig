@@ -6,7 +6,7 @@
         <li>
             <a href="#">
                 <!-- Item image -->
-                {% if (joueur.user.avatar) %}
+                {% if (null != joueur.user and joueur.user.avatar) %}
                     <img src="{{ joueur.user.avatar.webPath | imagine_filter('thumbnail') }}" alt="" class="img-responsive img-thumbnail" />
                 {% else %}
                     <div class="img-thumbnail anonymous-user">
