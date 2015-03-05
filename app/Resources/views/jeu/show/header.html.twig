@@ -25,7 +25,7 @@
                     <div class="img-box-5-img">
                         <!-- Image -->
                         {% if jeu.imageCouverture %}
-                            <a href="{{ jeu.imageCouverture.webPath | imagine_filter('default') }}" class="lightbox"><img src="{{ jeu.imageCouverture.webPath | imagine_filter('default') }}" alt="" class="img-responsive img-thumbnail" /></a>
+                            <a href="{{ jeu.imageCouverture.webPath | imagine_filter('default') }}" rel="jeu" class="fancybox"><img src="{{ jeu.imageCouverture.webPath | imagine_filter('default') }}" alt="" class="img-responsive img-thumbnail" /></a>
                         {% endif %}
 
                     </div>

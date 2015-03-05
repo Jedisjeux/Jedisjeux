@@ -27,7 +27,7 @@
         <!-- Widgets Content -->
         <div class="widget-content gallery">
             {% for image in partie.images %}
-                <a href="{{ image.webPath | imagine_filter('default') }}" rel="group" class="fancybox">
+                <a href="{{ image.webPath | imagine_filter('default') }}" rel="partie" class="fancybox">
                     <img src="{{ image.webPath | imagine_filter('thumbnail_S') }}" alt="" class="img-responsive img-thumbnail"/>
                 </a>
             {% endfor %}

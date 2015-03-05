@@ -6,17 +6,7 @@
 <div class="col-sm-5 col-md-5 pull-left thumbnail-jeu">
     <div class="image-style-six">
         <!-- Image -->
-        <img class="img-responsive" src="{{ jeu.materialImage.webPath | imagine_filter('default') }}" alt="">
-        <div class="image-caption">
-            <h4><a href="#">Heading</a>
-                &nbsp;
-                <span>
-                    <a href="#" class="b-tooltip" title="" data-original-title="Star"><i class="fa fa-star"></i></a>&nbsp;
-                    <a href="#" class="b-tooltip" title="" data-original-title="Play"><i class="fa fa-cloud"></i></a>&nbsp;
-                    <a href="http://www.jedisjeux.net/img/800/lewis-clark-49-1376296905.jpg" class="b-tooltip lightbox" title="" data-original-title="Search"><i class="fa fa-search"></i></a>
-                </span>
-            </h4>
-        </div>
+        <a href="{{ jeu.materialImage.webPath | imagine_filter('default') }}" rel="jeu" class="fancybox"><img class="img-responsive" src="{{ jeu.materialImage.webPath | imagine_filter('default') }}" alt=""></a>
     </div>
 </div>
 {% endif %}
