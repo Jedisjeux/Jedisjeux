@@ -455,7 +455,7 @@ class Jeu
     /**
      * Set imageCouverture
      *
-     * @param string $imageCouverture
+     * @param Image $imageCouverture
      * @return Jeu
      */
     public function setImageCouverture($imageCouverture)
@@ -468,7 +468,7 @@ class Jeu
     /**
      * Get imageCouverture
      *
-     * @return string 
+     * @return Image
      */
     public function getImageCouverture()
     {
@@ -476,7 +476,7 @@ class Jeu
     }
 
     /**
-     * @return string
+     * @return Image
      */
     public function getMaterialImage()
     {
@@ -484,7 +484,7 @@ class Jeu
     }
 
     /**
-     * @param string $materialImage
+     * @param Image $materialImage
      * @return $this
      */
     public function setMaterialImage($materialImage)
