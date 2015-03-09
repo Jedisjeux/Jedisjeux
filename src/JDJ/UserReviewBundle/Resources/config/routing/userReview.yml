@@ -26,5 +26,5 @@ user_review_create:
     requirements: { _method: post }
 
 user_review_show:
-    pattern:  /avis/{id}
+    pattern:  /avis/{id}/jeu/{slug}
     defaults: { _controller: "JDJUserReviewBundle:UserReview:show" }

@@ -1,0 +1,19 @@
+<!-- Heading -->
+<h3>
+    <a href="#">{{ userReview.libelle }}</a>
+</h3>
+<!-- Blog meta -->
+<div class="blog-meta">
+    <!-- Author -->
+    <a href="#">
+        <img src="../../../../img/user/4.jpg" alt="" class="img-responsive img-circle">&nbsp;
+        {{ userReview.jeuNote.author.username }}</a> &nbsp;
+    <!-- Date -->
+    <a href="#"><i class="fa fa-calendar"></i> &nbsp; {{ userReview.createdAt | date('d/m/Y')  }}</a> &nbsp;
+
+    <!-- Comments -->
+    <a href="#"><i class="fa fa-comments"></i> &nbsp; 6 Comments</a>
+</div>
+
+<!-- Paragraph -->
+{{ userReview.body | raw }}

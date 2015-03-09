@@ -37,9 +37,10 @@ select      old.user_id,
             old.user_avatar,
             old.group_id
 from        jedisjeux.phpbb3_users old
-group by    old.user_email
-order by    old.user_id
-limit       10
+where       old.user_email != ''
+group by    old.username_clean
+order by    old.user_id asc
+limit       1000
 EOM;
 
         $oldUsers = $this->getDatabaseConnection()->fetchAll($query);
@@ -63,7 +64,6 @@ EOM;
                 ->setUsername($data['username'])
                 ->setPlainPassword($data['username'])
                 ->setEmail($data['user_email'])
-                ->setAvatar("" === $data['user_avatar'] ? null : $data['user_avatar'])
                 ->setRoles($roles);
 
             $userManager->updateUser($user);
@@ -73,6 +73,11 @@ EOM;
             ), array(
                 'id' => $user->getId(),
             ));
+
+
+            $manager->detach($user);
+            $manager->clear();
+
         }
 
         $roles = array("ROLE_USER", "ROLE_ADMIN");

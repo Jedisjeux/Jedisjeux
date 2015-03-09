@@ -183,13 +183,31 @@ services:
       calls:
         - [ setAnnotationReader, [ @annotation_reader ] ]
 
+gregwar_form: ~
+
 ivory_ck_editor:
     default_config: minimal
     configs:
         minimal:
             toolbar: basic
 
-gregwar_form: ~
+liip_imagine:
+    resolvers:
+       default:
+          web_path: ~
+
+    filter_sets:
+        cache: ~
+        default:
+        thumbnail:
+            quality: 100
+            filters:
+                thumbnail: { size: [60, 60], mode: outbound }
+        thumbnail_S:
+            quality: 100
+            filters:
+                thumbnail: { size: [80, 55], mode: outbound }
+
 
 sonata_block:
     default_contexts: [sonata_page_bundle]

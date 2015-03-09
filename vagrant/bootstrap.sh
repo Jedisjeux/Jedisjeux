@@ -28,3 +28,7 @@ sudo gem install sass
 
 # install compass
 sudo gem install compass
+
+# install locate
+sudo apt-get install mlocate
+sudo updatedb

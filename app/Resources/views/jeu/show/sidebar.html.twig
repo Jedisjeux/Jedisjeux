@@ -5,25 +5,28 @@
     <!-- Gallery Widget -->
     <div class="s-widget">
         <!-- Heading -->
-        <h5><i class="fa fa-camera color"></i> Gallery</h5>
+        <h5><i class="fa fa-camera color"></i> Photos</h5>
         <!-- Widgets Content -->
         <div class="widget-content gallery">
-            <a href="../../../img/gallery/small/1.jpg" class="lightbox"><img src="../../../img/gallery/small/1.jpg" alt=""
-                                                                             class="img-responsive img-thumbnail"/></a>
-            <a href="../../../img/gallery/small/2.jpg" class="lightbox"><img src="../../../img/gallery/small/2.jpg" alt=""
-                                                                             class="img-responsive img-thumbnail"/></a>
-            <a href="../../../img/gallery/small/3.jpg" class="lightbox"><img src="../../../img/gallery/small/3.jpg" alt=""
-                                                                             class="img-responsive img-thumbnail"/></a>
-            <a href="../../../img/gallery/small/1.jpg" class="lightbox"><img src="../../../img/gallery/small/1.jpg" alt=""
-                                                                             class="img-responsive img-thumbnail"/></a>
-            <a href="../../../img/gallery/small/2.jpg" class="lightbox"><img src="../../../img/gallery/small/2.jpg" alt=""
-                                                                             class="img-responsive img-thumbnail"/></a>
-            <a href="../../../img/gallery/small/3.jpg" class="lightbox"><img src="../../../img/gallery/small/3.jpg" alt=""
-                                                                             class="img-responsive img-thumbnail"/></a>
-            <a href="../../../img/gallery/small/1.jpg" class="lightbox"><img src="../../../img/gallery/small/1.jpg" alt=""
-                                                                             class="img-responsive img-thumbnail"/></a>
-            <a href="../../../img/gallery/small/2.jpg" class="lightbox"><img src="../../../img/gallery/small/2.jpg" alt=""
-                                                                             class="img-responsive img-thumbnail"/></a>
+            {% for image in jeu.images %}
+                <a href="{{ image.webPath | imagine_filter('default') }}" rel="jeu" class="fancybox">
+                    <img src="{{ image.webPath | imagine_filter('thumbnail_S') }}" alt="" class="img-responsive img-thumbnail"/>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Material list -->
+    <div class="s-widget">
+        <!-- Heading -->
+        <h5><i class="fa fa-list color"></i> Matériel</h5>
+        <!-- Widgets Content -->
+        <div class="widget-content gallery">
+            <ul>
+                {% for row in jeu.materiel|split("\n") %}
+                    <li>{{ row }}</li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
 </div>

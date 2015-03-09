@@ -11,3 +11,8 @@ services:
       arguments: [%fos_user.model.user.class%]
       tags:
           - { name: form.type, alias: jdj_user_profile }
+
+  app.service.avatar.import:
+      class: JDJ\UserBundle\Service\AvatarImportService
+      arguments:
+          - @doctrine.orm.entity_manager

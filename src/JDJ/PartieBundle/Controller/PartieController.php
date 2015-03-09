@@ -136,10 +136,23 @@ class PartieController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+        /** @var Partie $entity */
         $entity = $em->getRepository('JDJPartieBundle:Partie')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Partie entity.');
+        }
+
+        /**
+         * Redirect the slug is incorrect
+         */
+        if ($slug !== $entity->getJeu()->getSlug()) {
+            return $this->redirect($this->generateUrl('partie_show', array(
+                        'id' => $id,
+                        'slug' => $entity->getJeu()->getSlug(),
+                    )
+                )
+            );
         }
 
         $deleteForm = $this->createDeleteForm($id);

@@ -12,6 +12,10 @@
 /vendor/
 /bin/
 /composer.phar
+/web/uploads/*
+!/web/uploads/avatar/.gitkeep
+!/web/uploads/img/.gitkeep
+/web/media/*
 
 .idea
 *.DS_Store
