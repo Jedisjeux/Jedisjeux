@@ -6,6 +6,7 @@ services:
       class:     JDJ\CollectionBundle\Service\UserGameAttributeService
       arguments:
           - "@doctrine.orm.entity_manager"
+          - JDJCollectionBundle:UserGameAttribute
   app.service.collection:
       class:     JDJ\CollectionBundle\Service\CollectionService
       arguments:

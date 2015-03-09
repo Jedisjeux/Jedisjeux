@@ -13,10 +13,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use JDJ\CollectionBundle\Entity\Collection;
 use JDJ\CollectionBundle\Form\CollectionType;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 /**
- * Collection controller.
+ * Class CollectionController
  *
+ * @package JDJ\CollectionBundle\Controller
+ * @Route("/collection")
  */
 class CollectionController extends Controller
 {
@@ -25,6 +30,7 @@ class CollectionController extends Controller
     /**
      * Lists all Collection entities.
      *
+     * @Route("/")
      */
     public function indexAction()
     {
@@ -40,15 +46,13 @@ class CollectionController extends Controller
     /**
      * Creates a new Collection entity.
      *
+     * @Route("/{jeu}/{user}/create")
+     * @ParamConverter("jeu", class="JDJJeuBundle:Jeu")
+     * @ParamConverter("user", class="JDJUserBundle:User")
+     * @Method({"POST"})
      */
-    public function createAction($jeu_id, $user_id)
+    public function createAction(Jeu $jeu,User $user)
     {
-        /**
-         * Gets the game and user concerned by the list
-         */
-        $em = $this->getDoctrine()->getManager();
-        $jeu = $em->getRepository('JDJJeuBundle:Jeu')->find($jeu_id);
-        $user = $em->getRepository('JDJUserBundle:User')->find($user_id);
 
         if($jeu && $user && ($_POST['name'] !== "")) {
             //create the collection
@@ -82,15 +86,13 @@ class CollectionController extends Controller
     /**
      * Updates a collection to add a game to it
      *
+     * @Route("/{jeu}/{collection}/add-game")
+     * @ParamConverter("jeu", class="JDJJeuBundle:Jeu")
+     * @ParamConverter("collection", class="JDJCollectionBundle:Collection")
+     * @Method({"GET"})
      */
-    public function addGameAction($jeu_id, $collection_id)
+    public function addGameAction(Jeu $jeu, Collection $collection)
     {
-        /**
-         * Gets the game and user concerned by the list
-         */
-        $em = $this->getDoctrine()->getManager();
-        $jeu = $em->getRepository('JDJJeuBundle:Jeu')->find($jeu_id);
-        $collection = $em->getRepository('JDJCollectionBundle:Collection')->find($collection_id);
 
         //add the game to the collection
         if($jeu && $collection) {
@@ -118,6 +120,7 @@ class CollectionController extends Controller
     /**
      * Displays a form to edit an existing Collection entity.
      *
+     * @Route("/{id}/edit")
      */
     public function editAction($id)
     {
@@ -161,6 +164,7 @@ class CollectionController extends Controller
     /**
      * Edits an existing Collection entity.
      *
+     * @Route("/{id}/update")
      */
     public function updateAction(Request $request, $id)
     {
@@ -194,6 +198,7 @@ class CollectionController extends Controller
     /**
      * Finds and displays a Collection entity.
      *
+     * @Route("/{id}/show")
      */
     public function showAction($id)
     {
@@ -218,6 +223,7 @@ class CollectionController extends Controller
     /**
      * Deletes a Collection entity.
      *
+     * @Route("/{id}/delete")
      */
     public function deleteAction(Request $request, $id)
     {

@@ -8,7 +8,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use JDJ\CollectionBundle\Entity\UserGameAttribute;
 
 /**
- * User
+ * Class User
+ * @package JDJ\UserBundle\Entity
  *
  * @ORM\Entity(repositoryClass="JDJ\UserBundle\Repository\UserRepository")
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")

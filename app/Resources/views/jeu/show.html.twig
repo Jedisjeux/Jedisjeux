@@ -3,7 +3,7 @@
 {% block container %}
 
     <div class="col-md-8">
-        {% include "jeu/show/header.html.twig" with {'jeu': jeu} only %}
+        {% include "jeu/show/header.html.twig" with {'jeu': jeu, 'userGameAttribute': userGameAttribute} only %}
 
         {% include "jeu/show/rating.html.twig" with {'jeu': jeu} only %}
 

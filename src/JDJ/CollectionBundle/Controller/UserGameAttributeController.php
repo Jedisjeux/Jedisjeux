@@ -3,20 +3,19 @@
 namespace JDJ\CollectionBundle\Controller;
 
 use Doctrine\Common\Util\Debug;
-use JDJ\CollectionBundle\Entity\UserGameAttribute;
-use JDJ\CollectionBundle\Form\UserGameAttributeType;
 use JDJ\CollectionBundle\Service\UserGameAttributeService;
-use Symfony\Component\Config\Definition\Exception\Exception;
-use Symfony\Component\HttpFoundation\Request;
+use JDJ\JeuBundle\Entity\Jeu;
+use JDJ\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
-use JDJ\CollectionBundle\Entity\Collection;
-use JDJ\CollectionBundle\Form\CollectionType;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
- * Collection controller.
+ * Class UserGameAttributeController
  *
+ * @package JDJ\CollectionBundle\Controller
+ * @Route("/usergameattribute")
  */
 class UserGameAttributeController extends Controller
 {
@@ -24,12 +23,16 @@ class UserGameAttributeController extends Controller
     /**
      * handle the click on favorite for a game
      *
+     * @Route("/favorite/{jeu}/{user}", name="usergameattribute_favorite", options={"expose"=true})
+     * @ParamConverter("jeu", class="JDJJeuBundle:Jeu")
+     * @ParamConverter("user", class="JDJUserBundle:User")
      */
-    public function favoriteAction($jeu_id, $user_id)
+    public function favoriteAction(Jeu $jeu, User $user)
     {
+
         $this
             ->getUserGameAttributeService()
-            ->favorite($jeu_id, $user_id);
+            ->favorite($jeu, $user);
 
         return new Response(Response::HTTP_OK);
     }
@@ -38,12 +41,15 @@ class UserGameAttributeController extends Controller
     /**
      * handle the click on owned for a game
      *
+     * @Route("/owned/{jeu}/{user}", name="usergameattribute_owned", options={"expose"=true})
+     * @ParamConverter("jeu", class="JDJJeuBundle:Jeu")
+     * @ParamConverter("user", class="JDJUserBundle:User")
      */
-    public function ownedAction($jeu_id, $user_id)
+    public function ownedAction(Jeu $jeu, User $user)
     {
         $this
             ->getUserGameAttributeService()
-            ->owned($jeu_id, $user_id);
+            ->owned($jeu, $user);
 
         return new Response(Response::HTTP_OK);
     }
@@ -51,12 +57,15 @@ class UserGameAttributeController extends Controller
     /**
      * handle the click on wanted for a game
      *
+     * @Route("/wanted/{jeu}/{user}", name="usergameattribute_wanted", options={"expose"=true})
+     * @ParamConverter("jeu", class="JDJJeuBundle:Jeu")
+     * @ParamConverter("user", class="JDJUserBundle:User")
      */
-    public function wantedAction($jeu_id, $user_id)
+    public function wantedAction(Jeu $jeu, User $user)
     {
         $this
             ->getUserGameAttributeService()
-            ->wanted($jeu_id, $user_id);
+            ->wanted($jeu, $user);
 
         return new Response(Response::HTTP_OK);
     }
@@ -64,12 +73,15 @@ class UserGameAttributeController extends Controller
     /**
      * handle the click on played for a game
      *
+     * @Route("/played/{jeu}/{user}", name="usergameattribute_played", options={"expose"=true})
+     * @ParamConverter("jeu", class="JDJJeuBundle:Jeu")
+     * @ParamConverter("user", class="JDJUserBundle:User")
      */
-    public function playedAction($jeu_id, $user_id)
+    public function playedAction(Jeu $jeu, User $user)
     {
         $this
             ->getUserGameAttributeService()
-            ->played($jeu_id, $user_id);
+            ->played($jeu, $user);
 
         return new Response(Response::HTTP_OK);
     }

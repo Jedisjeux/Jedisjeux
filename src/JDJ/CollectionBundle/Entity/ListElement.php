@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class ListElement
+ * @package JDJ\CollectionBundle\Entity
  *
  * @ORM\Entity(repositoryClass="JDJ\CollectionBundle\Repository\ListElementRepository")
  * @ORM\Table(name="jdj_list_element")
@@ -26,6 +27,7 @@ class ListElement
      * @var \JDJ\CollectionBundle\Entity\Collection
      *
      * @ORM\ManyToOne(targetEntity="JDJ\CollectionBundle\Entity\Collection", inversedBy="listElements")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $collection;
 

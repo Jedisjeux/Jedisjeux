@@ -33,6 +33,7 @@ class AppKernel extends Kernel
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new Craue\FormFlowBundle\CraueFormFlowBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
 
             //JDJ
             new JDJ\FoundationBundle\JDJFoundationBundle(),

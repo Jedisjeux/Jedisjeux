@@ -18,44 +18,55 @@ class UserGameAttributeService
 {
 
     /**
+     * Holds the Doctrine entity manager for database interaction
      * @var EntityManager
      */
     protected $em;
+
+    /**
+     * Entity-specific repo, useful for finding entities, for example
+     * @var EntityRepository
+     */
+    protected $repo;
+
+    /**
+     * The Fully-Qualified Class Name for our entity
+     * @var string
+     */
+    protected $class;
 
     /**
      * @var UserGameAttributeManager
      */
     private $manager;
 
-    /**
-     * @var Jeu
-     */
-    private $jeu;
 
     /**
-     * @var User
+     * Constructor
+     *
+     * @param EntityManager $em
+     * @param $class
      */
-    private $user;
-
-
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManager $em, $class)
     {
         $this->em = $em;
+        $this->class = $class;
+        $this->repo = $em->getRepository($class);
         $this->manager = new UserGameAttributeManager($this->em);
     }
 
     /**
      * This function handles the click on favorite
      *
-     * @param $jeu_id
-     * @param $user_id
+     * @param Jeu $jeu
+     * @param User $user
      * @return bool
      */
-    public function favorite($jeu_id, $user_id)
+    public function favorite(Jeu $jeu, User $user)
     {
         //Checks if the user has the game in his favorites
-        $userGameAttribute = $this->getUserGameAttribute($jeu_id, $user_id);
-        $userGameAttribute = $this->handleFavorite($userGameAttribute);
+        $userGameAttribute = $this->getUserGameAttribute($jeu, $user);
+        $userGameAttribute = $this->handleFavorite($userGameAttribute, $jeu, $user);
 
         return $userGameAttribute->isFavorite();
     }
@@ -63,15 +74,15 @@ class UserGameAttributeService
     /**
      * This function handles the click on owned
      *
-     * @param $jeu_id
-     * @param $user_id
+     * @param Jeu $jeu
+     * @param User $user
      * @return bool
      */
-    public function owned($jeu_id, $user_id)
+    public function owned(Jeu $jeu, User $user)
     {
         //Checks if the user has the game in his favorites
-        $userGameAttribute = $this->getUserGameAttribute($jeu_id, $user_id);
-        $userGameAttribute = $this->handleOwned($userGameAttribute);
+        $userGameAttribute = $this->getUserGameAttribute($jeu, $user);
+        $userGameAttribute = $this->handleOwned($userGameAttribute, $jeu, $user);
 
         return $userGameAttribute->isOwned();
     }
@@ -79,15 +90,15 @@ class UserGameAttributeService
     /**
      * This function handles the click on wanted
      *
-     * @param $jeu_id
-     * @param $user_id
+     * @param Jeu $jeu
+     * @param User $user
      * @return bool
      */
-    public function wanted($jeu_id, $user_id)
+    public function wanted(Jeu $jeu, User $user)
     {
         //Checks if the user has the game in his favorites
-        $userGameAttribute = $this->getUserGameAttribute($jeu_id, $user_id);
-        $userGameAttribute = $this->handleWanted($userGameAttribute);
+        $userGameAttribute = $this->getUserGameAttribute($jeu, $user);
+        $userGameAttribute = $this->handleWanted($userGameAttribute, $jeu, $user);
 
         return $userGameAttribute->isOwned();
     }
@@ -95,15 +106,15 @@ class UserGameAttributeService
     /**
      * This function handles the click on played
      *
-     * @param $jeu_id
-     * @param $user_id
+     * @param Jeu $jeu
+     * @param User $user
      * @return bool
      */
-    public function played($jeu_id, $user_id)
+    public function played(Jeu $jeu, User $user)
     {
         //Checks if the user has the game in his favorites
-        $userGameAttribute = $this->getUserGameAttribute($jeu_id, $user_id);
-        $userGameAttribute = $this->handlePlayed($userGameAttribute);
+        $userGameAttribute = $this->getUserGameAttribute($jeu, $user);
+        $userGameAttribute = $this->handlePlayed($userGameAttribute, $jeu, $user);
 
         return $userGameAttribute->isOwned();
     }
@@ -112,10 +123,12 @@ class UserGameAttributeService
     /**
      * This function handles the different cases for putting a game to favorite
      *
-     * @param $userGameAttribute
+     * @param UserGameAttribute $userGameAttribute
+     * @param Jeu $jeu
+     * @param User $user
      * @return UserGameAttribute
      */
-    public function handleFavorite(UserGameAttribute $userGameAttribute = null)
+    public function handleFavorite(UserGameAttribute $userGameAttribute = null, Jeu $jeu, User $user)
     {
         //Set the game to favorite or not
         if ($userGameAttribute) {
@@ -130,16 +143,11 @@ class UserGameAttributeService
             /**
              * Create
              */
-            $userGameAttribute = new UserGameAttribute(
-                true,
-                false,
-                false,
-                false,
-                $this->getUser()->getId(),
-                $this->getJeu()->getId(),
-                $this->getUser(),
-                $this->getJeu()
-            );
+            $userGameAttribute = new UserGameAttribute();
+            $userGameAttribute->setFavorite(true);
+            $userGameAttribute->setJeu($jeu);
+            $userGameAttribute->setUser($user);
+
             $this->manager->record($userGameAttribute);
         }
         return $userGameAttribute;
@@ -148,10 +156,12 @@ class UserGameAttributeService
     /**
      * This function handles the different cases for putting a game he owned
      *
-     * @param $userGameAttribute
+     * @param UserGameAttribute $userGameAttribute
+     * @param Jeu $jeu
+     * @param User $user
      * @return UserGameAttribute
      */
-    public function handleOwned(UserGameAttribute $userGameAttribute = null)
+    public function handleOwned(UserGameAttribute $userGameAttribute = null, Jeu $jeu, User $user)
     {
 
         //Set the game to favorite or not
@@ -166,16 +176,10 @@ class UserGameAttributeService
             /**
              * Create
              */
-            $userGameAttribute = new UserGameAttribute(
-                false,
-                true,
-                false,
-                false,
-                $this->getUser()->getId(),
-                $this->getJeu()->getId(),
-                $this->getUser(),
-                $this->getJeu()
-            );
+            $userGameAttribute = new UserGameAttribute();
+            $userGameAttribute->setOwned(true);
+            $userGameAttribute->setJeu($jeu);
+            $userGameAttribute->setUser($user);
 
             $this->manager->record($userGameAttribute);
         }
@@ -185,10 +189,12 @@ class UserGameAttributeService
     /**
      * This function handles the different cases for putting a game he wants
      *
-     * @param $userGameAttribute
+     * @param UserGameAttribute $userGameAttribute
+     * @param Jeu $jeu
+     * @param User $user
      * @return UserGameAttribute
      */
-    public function handleWanted(UserGameAttribute $userGameAttribute = null)
+    public function handleWanted(UserGameAttribute $userGameAttribute = null, Jeu $jeu, User $user)
     {
 
         //Set the game to favorite or not
@@ -203,16 +209,10 @@ class UserGameAttributeService
             /**
              * Create
              */
-            $userGameAttribute = new UserGameAttribute(
-                false,
-                false,
-                true,
-                false,
-                $this->getUser()->getId(),
-                $this->getJeu()->getId(),
-                $this->getUser(),
-                $this->getJeu()
-            );
+            $userGameAttribute = new UserGameAttribute();
+            $userGameAttribute->setWanted(true);
+            $userGameAttribute->setJeu($jeu);
+            $userGameAttribute->setUser($user);
 
             $this->manager->record($userGameAttribute);
         }
@@ -222,10 +222,12 @@ class UserGameAttributeService
     /**
      * This function handles the different cases for putting a game he has played
      *
-     * @param $userGameAttribute
+     * @param UserGameAttribute $userGameAttribute
+     * @param Jeu $jeu
+     * @param User $user
      * @return UserGameAttribute
      */
-    public function handlePlayed(UserGameAttribute $userGameAttribute = null)
+    public function handlePlayed(UserGameAttribute $userGameAttribute = null, Jeu $jeu, User $user)
     {
 
         //Set the game to favorite or not
@@ -240,16 +242,10 @@ class UserGameAttributeService
             /**
              * Create
              */
-            $userGameAttribute = new UserGameAttribute(
-                false,
-                false,
-                false,
-                true,
-                $this->getUser()->getId(),
-                $this->getJeu()->getId(),
-                $this->getUser(),
-                $this->getJeu()
-            );
+            $userGameAttribute = new UserGameAttribute();
+            $userGameAttribute->setPlayed(true);
+            $userGameAttribute->setJeu($jeu);
+            $userGameAttribute->setUser($user);
 
             $this->manager->record($userGameAttribute);
         }
@@ -259,57 +255,20 @@ class UserGameAttributeService
     /**
      * This function get the userGameAttribute
      *
-     * @param $jeu_id
-     * @param $user_id
+     * @param Jeu $jeu
+     * @param User $user
      * @return mixed
      */
-    public function getUserGameAttribute($jeu_id, $user_id)
+    public function getUserGameAttribute(Jeu $jeu, User $user)
     {
 
-        //Gets user and game
-        $this->jeu = $this->em->getRepository('JDJJeuBundle:Jeu')->find($jeu_id);
-        $this->user = $this->em->getRepository('JDJUserBundle:User')->find($user_id);
-
-        if (!$this->jeu || !$this->user) {
+        if (!$jeu || !$user) {
             throw $this->createNotFoundException('Unable to find Game or User entity.');
         }
 
-        $userGameAttribute = $this->em->getRepository('JDJCollectionBundle:UserGameAttribute')->findOneUserGameAttribute($this->jeu, $this->user);
+        $userGameAttribute = $this->repo->findOneUserGameAttribute($jeu, $user);
 
         return $userGameAttribute;
     }
-
-    /**
-     * @return Jeu
-     */
-    public function getJeu()
-    {
-        return $this->jeu;
-    }
-
-    /**
-     * @param Jeu $jeu
-     */
-    public function setJeu($jeu)
-    {
-        $this->jeu = $jeu;
-    }
-
-    /**
-     * @return User
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * @param User $user
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-    }
-
 
 }

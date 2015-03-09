@@ -46,7 +46,8 @@
         "mopa/bootstrap-bundle": "dev-master",
         "twbs/bootstrap-sass": "dev-master",
         "knplabs/knp-paginator-bundle": "dev-master",
-        "craue/formflow-bundle": "~2.0"
+        "craue/formflow-bundle": "~2.0",
+        "friendsofsymfony/jsrouting-bundle": "~1.5"
     },
     "scripts": {
         "post-install-cmd": [

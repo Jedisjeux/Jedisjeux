@@ -1,10 +1,10 @@
-jdj_collection_collection:
-    resource: "@JDJCollectionBundle/Resources/config/routing/collection.yml"
-    prefix:   /collection
-
 jdj_collection_user_game_attribute:
-    resource: "@JDJCollectionBundle/Resources/config/routing/userGameAttribute.yml"
-    prefix:   /usergameattribute
+    resource: "@JDJCollectionBundle/Controller/UserGameAttributeController.php"
+    type:     annotation
+
+jdj_collection_collection:
+    resource: "@JDJCollectionBundle/Controller/CollectionController.php"
+    type:     annotation
 
 jdj_collection_homepage:
     path:     /hello/{name}

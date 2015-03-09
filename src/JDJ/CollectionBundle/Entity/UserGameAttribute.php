@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class UserGameAttribute
+ * @package JDJ\CollectionBundle\Entity
  *
  * @ORM\Entity(repositoryClass="JDJ\CollectionBundle\Repository\UserGameAttributeRepository")
  * @ORM\Table(name="jdj_user_game_attribute")
@@ -16,28 +17,28 @@ class UserGameAttribute
     /**
      * @var boolean
      *
-     * @ORM\Column(type="boolean", name="is_favorite", nullable=false)
+     * @ORM\Column(type="boolean", name="is_favorite", nullable=true)
      */
     private $favorite;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(type="boolean", name="is_owned", nullable=false)
+     * @ORM\Column(type="boolean", name="is_owned", nullable=true)
      */
     private $owned;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(type="boolean", name="is_wanted", nullable=false)
+     * @ORM\Column(type="boolean", name="is_wanted", nullable=true)
      */
     private $wanted;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(type="boolean", name="has_played", nullable=false)
+     * @ORM\Column(type="boolean", name="has_played", nullable=true)
      */
     private $played;
 
@@ -46,6 +47,7 @@ class UserGameAttribute
      *
      * @ORM\ManyToOne(targetEntity="JDJ\UserBundle\Entity\User", inversedBy="userGameAttributes")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\Id
      */
     private $user;
 
@@ -54,49 +56,9 @@ class UserGameAttribute
      *
      * @ORM\ManyToOne(targetEntity="JDJ\JeuBundle\Entity\Jeu", inversedBy="userGameAttributes")
      * @ORM\JoinColumn(name="jeu_id", referencedColumnName="id")
+     * @ORM\Id
      */
     private $jeu;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     */
-    private $user_id;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     */
-    private $jeu_id;
-
-
-    /**
-     * Constructor
-     *
-     * @param $favorite
-     * @param $owned
-     * @param $wanted
-     * @param $played
-     * @param $user_id
-     * @param $jeu_id
-     * @param $user
-     * @param $jeu
-     */
-    function __construct($favorite, $owned, $wanted, $played, $user_id, $jeu_id, $user, $jeu)
-    {
-        $this->favorite = $favorite;
-        $this->owned = $owned;
-        $this->wanted = $wanted;
-        $this->played = $played;
-        $this->user_id = $user_id;
-        $this->jeu_id = $jeu_id;
-        $this->user = $user;
-        $this->jeu = $jeu;
-    }
 
 
     /**
@@ -235,53 +197,6 @@ class UserGameAttribute
     public function hasPlayed()
     {
         return $this->played;
-    }
-
-
-    /**
-     * Set user_id
-     *
-     * @param integer $userId
-     * @return UserGameAttribute
-     */
-    public function setUserId($userId)
-    {
-        $this->user_id = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Get user_id
-     *
-     * @return integer 
-     */
-    public function getUserId()
-    {
-        return $this->user_id;
-    }
-
-    /**
-     * Set jeu_id
-     *
-     * @param integer $jeuId
-     * @return UserGameAttribute
-     */
-    public function setJeuId($jeuId)
-    {
-        $this->jeu_id = $jeuId;
-
-        return $this;
-    }
-
-    /**
-     * Get jeu_id
-     *
-     * @return integer 
-     */
-    public function getJeuId()
-    {
-        return $this->jeu_id;
     }
 
 
