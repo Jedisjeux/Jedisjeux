@@ -69,4 +69,34 @@ class Comment extends BaseComment implements SignedCommentInterface
 
         return $this->getAuthor()->getUsername();
     }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set thread
+     *
+     * @param \JDJ\CommentBundle\Entity\Thread $thread
+     * @return Comment
+     */
+
+
+    /**
+     * Get thread
+     *
+     * @return \JDJ\CommentBundle\Entity\Thread 
+     */
+    public function getThread()
+    {
+        return $this->thread;
+    }
+
+
 }

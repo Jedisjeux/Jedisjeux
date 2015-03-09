@@ -33,6 +33,7 @@ class AppKernel extends Kernel
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new Craue\FormFlowBundle\CraueFormFlowBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
 
             //JDJ
             new JDJ\FoundationBundle\JDJFoundationBundle(),
@@ -46,6 +47,7 @@ class AppKernel extends Kernel
             new JDJ\UserReviewBundle\JDJUserReviewBundle(),
             new JDJ\CoreBundle\JDJCoreBundle(),
             new JDJ\SearchBundle\JDJSearchBundle(),
+            new JDJ\CollectionBundle\JDJCollectionBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -5,9 +5,11 @@ namespace JDJ\UserBundle\Entity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JDJ\CollectionBundle\Entity\UserGameAttribute;
 
 /**
- * User
+ * Class User
+ * @package JDJ\UserBundle\Entity
  *
  * @ORM\Entity(repositoryClass="JDJ\UserBundle\Repository\UserRepository")
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
@@ -37,6 +39,7 @@ class User extends BaseUser
      * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $prenom;
+
 
     /**
      * @var string
@@ -104,11 +107,26 @@ class User extends BaseUser
      */
     private $presentation;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="JDJ\CollectionBundle\Entity\UserGameAttribute", mappedBy="user")
+     */
+    private $userGameAttributes;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="JDJ\CollectionBundle\Entity\Collection", mappedBy="user")
+     */
+    private $collections;
+
+
 
     public function __construct()
     {
         parent::__construct();
-        // your own logic
+
         $this->asAuthorParties = new \Doctrine\Common\Collections\ArrayCollection();
         $this->parties = new \Doctrine\Common\Collections\ArrayCollection();
     }
@@ -372,6 +390,75 @@ class User extends BaseUser
 
         return $this;
     }
+
+    /**
+     * Add UserGameAttributes
+     *
+     * @param UserGameAttribute $userGameAttributes
+     * @return $this
+     */
+    public function addUserGameAttribute(UserGameAttribute $userGameAttributes)
+    {
+        $this->userGameAttributes[] = $userGameAttributes;
+
+        return $this;
+    }
+
+    /**
+     * Remove UserGameAttributes
+     *
+     * @param UserGameAttribute $userGameAttributes
+     */
+    public function removeUserGameAttribute(UserGameAttribute $userGameAttributes)
+    {
+        $this->userGameAttributes->removeElement($userGameAttributes);
+    }
+
+    /**
+     * Get UserGameAttributes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUserGameAttributes()
+    {
+        return $this->userGameAttributes;
+    }
+
+
+    /**
+     * Add Collections
+     *
+     * @param \JDJ\CollectionBundle\Entity\Collection $collections
+     * @return User
+     */
+    public function addCollection(\JDJ\CollectionBundle\Entity\Collection $collections)
+    {
+        $this->collections[] = $collections;
+
+        return $this;
+    }
+
+    /**
+     * Remove Collections
+     *
+     * @param \JDJ\CollectionBundle\Entity\Collection $collections
+     */
+    public function removeCollection(\JDJ\CollectionBundle\Entity\Collection $collections)
+    {
+        $this->collections->removeElement($collections);
+    }
+
+    /**
+     * Get Collections
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCollections()
+    {
+        return $this->collections;
+    }
+
+
 
     /**
      * Set deletedAt

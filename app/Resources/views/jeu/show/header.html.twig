@@ -100,20 +100,63 @@
                         </div>
 
                         <div class="row">
-                            <ul class="list-inline">
-                                <li><button class="btn btn-yellow"><span class="fa fa-user"></span> Je le possède</button></li>
-                                <li><button class="btn btn-yellow"><span class="fa fa-bookmark"></span> Envie d'y jouer</button></li>
-                                <li><button class="btn btn-default"><span class="fa fa-play"></span> J'y ai joué</button></li>
-                                <li>
-                                    <div class="dropdown">
-                                        <button class="btn btn-black" id="toolbar-jeu-{{ jeu.id }}" data-toggle="dropdown" aria-expanded="true">
-                                            <span class="fa fa-ellipsis-h"></span>
+                            {% if app.user %}
+                                <ul class="list-inline">
+                                    <li>
+                                        <button class="btn {% if userGameAttribute %}
+                                                                {% if userGameAttribute.isOwned %}
+                                                                    btn-yellow
+                                                                {% else %}
+                                                                    btn-default
+                                                                {% endif %}
+                                                            {% else %}
+                                                                btn-default
+                                                            {% endif %}
+                                                            owned"
+                                                data-jeu-id="{{ jeu.id }}" data-uid="{{ app.user.id }}"><span
+                                                    class="fa fa-user"></span> Je le possède
                                         </button>
-                                        {% include "jeu/toolbar.html.twig" with {'jeu': jeu} only %}
-                                    </div>
+                                    </li>
+                                    <li>
+                                        <button class="btn {% if userGameAttribute %}
+                                                                {% if userGameAttribute.isWanted %}
+                                                                    btn-yellow
+                                                                {% else %}
+                                                                    btn-default
+                                                                {% endif %}
+                                                            {% else %}
+                                                                btn-default
+                                                            {% endif %} wanted" data-jeu-id="{{ jeu.id }}"
+                                                data-uid="{{ app.user.id }}"><span class="fa fa-bookmark"></span> Envie
+                                            d'y jouer
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button class="btn {% if userGameAttribute %}
+                                                                {% if userGameAttribute.hasPlayed %}
+                                                                    btn-yellow
+                                                                {% else %}
+                                                                    btn-default
+                                                                {% endif %}
+                                                            {% else %}
+                                                                btn-default
+                                                            {% endif %} played" data-jeu-id="{{ jeu.id }}"
+                                                data-uid="{{ app.user.id }}"><span class="fa fa-play"></span> J'y ai
+                                            joué
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown">
+                                            <button class="btn btn-black" id="toolbar-jeu-{{ jeu.id }}"
+                                                    data-toggle="dropdown" aria-expanded="true">
+                                                <span class="fa fa-ellipsis-h"></span>
+                                            </button>
+                                            {% include "jeu/toolbar.html.twig" with {'jeu': jeu, 'userGameAttribute': userGameAttribute} only %}
+                                        </div>
 
-                                </li>
-                            </ul>
+                                    </li>
+                                </ul>
+                            {% endif %}
 
                         </div>
 

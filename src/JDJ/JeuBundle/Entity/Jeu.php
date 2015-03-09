@@ -123,6 +123,7 @@ class Jeu
      * @ORM\ManyToMany(targetEntity="Theme", inversedBy="jeux", cascade={"persist", "merge"})
      */
     private $themes;
+    
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -191,6 +192,21 @@ class Jeu
      * @ORM\ManyToOne(targetEntity="JDJ\CoreBundle\Entity\Cible", inversedBy="jeux", cascade={"persist", "merge"})
      */
     private $cible;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="JDJ\CollectionBundle\Entity\ListElement", mappedBy="jeu")
+     */
+    private $listElements;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="JDJ\CollectionBundle\Entity\UserGameAttribute", mappedBy="jeu")
+     */
+    private $userGameAttributes;
+
 
     /**
      * Constructor
@@ -829,7 +845,7 @@ class Jeu
     {
         return $this->notes;
     }
-
+    
 
     /**
      * Set cible
@@ -852,5 +868,73 @@ class Jeu
     public function getCible()
     {
         return $this->cible;
+    }
+
+
+
+    /**
+     * Add UserGameAttributes
+     *
+     * @param \JDJ\CollectionBundle\Entity\UserGameAttribute $userGameAttributes
+     * @return Jeu
+     */
+    public function addUserGameAttribute(\JDJ\CollectionBundle\Entity\UserGameAttribute $userGameAttributes)
+    {
+        $this->UserGameAttributes[] = $userGameAttributes;
+
+        return $this;
+    }
+
+    /**
+     * Remove UserGameAttributes
+     *
+     * @param \JDJ\CollectionBundle\Entity\UserGameAttribute $userGameAttributes
+     */
+    public function removeUserGameAttribute(\JDJ\CollectionBundle\Entity\UserGameAttribute $userGameAttributes)
+    {
+        $this->UserGameAttributes->removeElement($userGameAttributes);
+    }
+
+    /**
+     * Get UserGameAttributes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUserGameAttributes()
+    {
+        return $this->UserGameAttributes;
+    }
+
+    /**
+     * Add listElements
+     *
+     * @param \JDJ\CollectionBundle\Entity\listElement $listElements
+     * @return Jeu
+     */
+    public function addListElement(\JDJ\CollectionBundle\Entity\listElement $listElements)
+    {
+        $this->listElements[] = $listElements;
+
+        return $this;
+    }
+
+    /**
+     * Remove listElements
+     *
+     * @param \JDJ\CollectionBundle\Entity\listElement $listElements
+     */
+    public function removeListElement(\JDJ\CollectionBundle\Entity\listElement $listElements)
+    {
+        $this->listElements->removeElement($listElements);
+    }
+
+    /**
+     * Get listElements
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getListElements()
+    {
+        return $this->listElements;
     }
 }

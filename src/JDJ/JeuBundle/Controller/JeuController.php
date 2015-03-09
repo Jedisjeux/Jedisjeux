@@ -9,6 +9,7 @@
 namespace JDJ\JeuBundle\Controller;
 
 
+use Doctrine\Common\Util\Debug;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use JDJ\JeuBundle\Entity\Jeu;
@@ -63,9 +64,24 @@ class JeuController extends Controller
         $userReviews->setMaxPerPage(10);
         $userReviews->setCurrentPage($request->get('page', 1));
 
+
+        /**
+         * Usergameattribute to load if user is connected
+         */
+        $userGameAttribute = null;
+        if($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY'))
+        {
+            $user= $this->get('security.context')->getToken()->getUser();
+
+            $em = $em->getRepository("JDJCollectionBundle:UserGameAttribute");
+            $userGameAttribute = $em->findOneUserGameAttribute($entity, $user);
+        }
+
+
         return $this->render('jeu/show.html.twig', array(
                 'jeu' => $entity,
                 'userReviews' => $userReviews,
+                'userGameAttribute' => $userGameAttribute,
             )
         );
     }

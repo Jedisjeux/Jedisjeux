@@ -1,0 +1,11 @@
+jdj_collection_user_game_attribute:
+    resource: "@JDJCollectionBundle/Controller/UserGameAttributeController.php"
+    type:     annotation
+
+jdj_collection_collection:
+    resource: "@JDJCollectionBundle/Controller/CollectionController.php"
+    type:     annotation
+
+jdj_collection_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: JDJCollectionBundle:Default:index }

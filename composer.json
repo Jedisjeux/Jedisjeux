@@ -42,11 +42,13 @@
         "gregwar/form-bundle":              "dev-master",
         "friendsofsymfony/elastica-bundle": "~3.0",
         "sonata-project/block-bundle": "~2.2",
+        "phpspec/phpspec": "~2.0",
         "mopa/bootstrap-bundle": "dev-master",
         "twbs/bootstrap-sass": "dev-master",
         "knplabs/knp-paginator-bundle": "dev-master",
         "craue/formflow-bundle": "~2.0",
-        "symfony-cmf/content-bundle": "~1.2"
+        "symfony-cmf/content-bundle": "~1.2",
+        "friendsofsymfony/jsrouting-bundle": "~1.5"
     },
     "scripts": {
         "post-install-cmd": [
