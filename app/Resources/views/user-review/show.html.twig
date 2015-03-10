@@ -4,7 +4,10 @@
 
     <div class="col-md-8">
         {% include "jeu/show/header.html.twig" with {'jeu': entity.jeuNote.jeu} only %}
-        {% include "user-review/partial/_show.html.twig" with {'userReview': entity} %}
+
+        <div id="user-review">
+            {% include "user-review/partial/_show.html.twig" with {'userReview': entity} %}
+        </div>
 
         <ul class="record_actions">
             <li>

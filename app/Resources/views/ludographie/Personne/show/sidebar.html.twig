@@ -161,7 +161,7 @@
         <!-- Widgets Content -->
         <div class="widget-content gallery">
             {% for image in personne.images %}
-                <a href="{{ image.webPath | imagine_filter('default') }}" class="fancybox">
+                <a href="{{ image.webPath | imagine_filter('default') }}" rel="personne" class="fancybox">
                     <img src="{{ image.webPath | imagine_filter('thumbnail') }}" alt=""
                          class="img-responsive img-thumbnail"/>
                 </a>

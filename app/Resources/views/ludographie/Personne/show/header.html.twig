@@ -13,7 +13,7 @@
                     <div class="img-box-5-img">
                         <!-- Image -->
                         {% if (personne.image) %}
-                            <a href="{{ personne.image.webPath | imagine_filter('default') }}" class="fancybox"><img
+                            <a href="{{ personne.image.webPath | imagine_filter('default') }}" rel="personne" class="fancybox"><img
                                         src="{{ personne.image.webPath | imagine_filter('default') }}" alt=""
                                         class="img-responsive img-thumbnail"/></a>
                         {% else %}
