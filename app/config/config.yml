@@ -255,7 +255,7 @@ fos_elastica:
           types:
               user:
                   mappings:
-                      username: ~
+                      username: { search_analyzer: custom_search_analyzer, index_analyzer: custom_index_analyzer, type: string }
                       email: ~
                   persistence:
                       driver: orm

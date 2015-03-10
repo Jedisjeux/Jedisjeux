@@ -62,7 +62,7 @@ class SearchController extends Controller
         $term = $request->get("term", "");
 
         $paginator = $this->findByQuery($this->getQueryStringByTerm($term));
-        $paginator->setMaxPerPage(10);
+        $paginator->setMaxPerPage(5);
         $paginator->setCurrentPage($request->get('page', 1));
 
         $results = array();
@@ -75,7 +75,7 @@ class SearchController extends Controller
                 $result = array(
                     'value' => $jeu->getLibelle(),
                     'label' => $jeu->getLibelle(),
-                    'image' => $this->get('liip_imagine.cache.manager')->getBrowserPath($jeu->getImageCouverture()->getWebPath(), 'thumbnail'),
+                    'image' => (null === $jeu->getImageCouverture()) ? null : $this->get('liip_imagine.cache.manager')->getBrowserPath($jeu->getImageCouverture()->getWebPath(), 'thumbnail'),
                     'href' => $this->generateUrl('jeu_show', array(
                             'id' => $jeu->getId(),
                             'slug' => $jeu->getSlug(),
@@ -90,7 +90,7 @@ class SearchController extends Controller
                 $result = array(
                     'value' => $user->getUsername(),
                     'label' => $user->getUsername(),
-                    'image' => $this->get('liip_imagine.cache.manager')->getBrowserPath($user->getAvatar()->getWebPath(), 'thumbnail'),
+                    'image' => (null === $user->getAvatar()) ? null : $this->get('liip_imagine.cache.manager')->getBrowserPath($user->getAvatar()->getWebPath(), 'thumbnail'),
                     'href' => "#",
                 );
             }
@@ -131,7 +131,7 @@ class SearchController extends Controller
                 $result = array(
                     'value' => (string)$personne,
                     'label' => (string)$personne,
-                    'image' => "",
+                    'image' => (null === $personne->getImage()) ? null : $this->get('liip_imagine.cache.manager')->getBrowserPath($personne->getImage()->getWebPath(), 'thumbnail'),
                     'href' => $this->generateUrl('personne_show', array(
                             'id' => $personne->getId(),
                             'slug' => $personne->getSlug(),
@@ -184,6 +184,10 @@ class SearchController extends Controller
                 $types[] = "mecanisme";
             } elseif ($result instanceof Theme) {
                 $types[] = "theme";
+            } elseif ($result instanceof Theme) {
+                $types[] = "theme";
+            } elseif ($result instanceof User) {
+                $types[] = "user";
             }
 
         }

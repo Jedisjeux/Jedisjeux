@@ -12,9 +12,14 @@
                     <!-- Image Box #5 Image -->
                     <div class="img-box-5-img">
                         <!-- Image -->
-                        <a href="http://www.jedisjeux.net/img/800/{{ personne.image }}" class="lightbox"><img
-                                    src="http://www.jedisjeux.net/img/800/{{ personne.image }}" alt=""
-                                    class="img-responsive img-thumbnail"/></a>
+                        {% if (personne.image) %}
+                            <a href="{{ personne.image.webPath | imagine_filter('default') }}" class="fancybox"><img
+                                        src="{{ personne.image.webPath | imagine_filter('default') }}" alt=""
+                                        class="img-responsive img-thumbnail"/></a>
+                        {% else %}
+                            <span class="fa fa-user"></span>
+                        {% endif %}
+
                     </div>
                 </div>
                 <div class="col-md-8">

@@ -2,8 +2,10 @@
 
 namespace JDJ\LudographieBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JDJ\CoreBundle\Entity\Image;
 
 /**
  * Personne
@@ -44,18 +46,26 @@ class Personne
     private $siteWeb;
 
     /**
-     * @var text
+     * @var string
      *
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
     /**
-     * @var string
+     * @var Image
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\ManyToOne(targetEntity="JDJ\CoreBundle\Entity\Image")
      */
     private $image;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="JDJ\CoreBundle\Entity\Image", cascade={"persist"})
+     * @ORM\JoinTable(name="jdj_personne_image")
+     */
+    private $images;
 
     /**
      * @var string
@@ -98,9 +108,10 @@ class Personne
      */
     public function __construct()
     {
-        $this->auteurJeux = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->illustrateurJeux = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->editeurJeux = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->auteurJeux = new ArrayCollection();
+        $this->illustrateurJeux = new ArrayCollection();
+        $this->editeurJeux = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     /**
@@ -208,7 +219,7 @@ class Personne
     /**
      * Set image
      *
-     * @param string $image
+     * @param Image $image
      * @return Personne
      */
     public function setImage($image)
@@ -221,7 +232,7 @@ class Personne
     /**
      * Get image
      *
-     * @return string 
+     * @return Image
      */
     public function getImage()
     {
@@ -372,6 +383,26 @@ class Personne
     {
         return $this->editeurJeux;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    /**
+     * @param ArrayCollection $images
+     * @return $this
+     */
+    public function setImages($images)
+    {
+
+        return $this;
+    }
+
+
 
     /**
      * Convert Entity To String

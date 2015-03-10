@@ -2,11 +2,11 @@
 /**
  * Created by PhpStorm.
  * User: loic_425
- * Date: 28/02/15
- * Time: 17:09
+ * Date: 03/03/15
+ * Time: 19:18
  */
 
-namespace JDJ\CoreBundle\DataFixtures\Image;
+namespace JDJ\PartieBundle\DataFixtures;
 
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
@@ -16,7 +16,7 @@ use JDJ\CoreBundle\Entity\Image;
 use JDJ\JeuBundle\Entity\Jeu;
 use Symfony\Component\DependencyInjection\ContainerAware;
 
-class LoadImageJeuData extends ContainerAware implements FixtureInterface, OrderedFixtureInterface
+class LoadImagePersonneData extends ContainerAware implements FixtureInterface, OrderedFixtureInterface
 {
     /**
      * @var ObjectManager
@@ -45,9 +45,9 @@ select      distinct old.img_id, img_nom
 from        jedisjeux.jdj_images old
 inner join  jedisjeux.jdj_images_elements ie
                 on ie.img_id = old.img_id
-                and ie.elem_type = 'jeu'
-inner join  jdj_jeu j
-                on j.id = ie.elem_id
+                and ie.elem_type = 'personne'
+inner join  jdj_personne personne
+                on personne.id = ie.elem_id
 where not exists (
     select 0
     from   jdj_image i
@@ -58,50 +58,33 @@ EOM;
         $this->getDatabaseConnection()->executeQuery($query);
 
         $this->addImages();
-        $this->addCoverImages();
-        $this->addMaterialImages();
 
-    }
-
-    private function addCoverImages()
-    {
-        $query = <<<EOM
-update      jdj_jeu jeu
-inner join  jedisjeux.jdj_images_elements ie
-                on ie.elem_id = jeu.id
-                and ie.elem_type = 'jeu'
-set         jeu.imageCouverture_id = ie.img_id
-where ie.main = 1
-EOM;
-
-        $this->getDatabaseConnection()->executeQuery($query);
-    }
-
-    private function addMaterialImages()
-    {
-        $query = <<<EOM
-update      jdj_jeu jeu
-inner join  jedisjeux.jdj_images_elements ie
-                on ie.elem_id = jeu.id
-                and ie.elem_type = 'jeu'
-set         jeu.materialImage_id = ie.img_id
-where ie.ordre = 1
-EOM;
-
-        $this->getDatabaseConnection()->executeQuery($query);
     }
 
     private function addImages()
     {
         $query = <<<EOM
-insert into jdj_jeu_image (jeu_id, image_id)
+insert into jdj_personne_image (personne_id, image_id)
 select      distinct ie.elem_id, old.img_id
 from        jedisjeux.jdj_images old
 inner join  jedisjeux.jdj_images_elements ie
                 on ie.img_id = old.img_id
-                and ie.elem_type = 'jeu'
-inner join  jdj_jeu j
-                on j.id = ie.elem_id
+                and ie.elem_type = 'personne'
+inner join  jdj_personne personne
+                on personne.id = ie.elem_id
+EOM;
+
+        $this->getDatabaseConnection()->executeQuery($query);
+
+        $query = <<<EOM
+update      jdj_personne personne
+inner join  jedisjeux.jdj_images_elements ie
+                on ie.elem_id = personne.id
+                and ie.elem_type = 'personne'
+inner join  jdj_image i
+                on i.id = ie.img_id
+set         personne.image_id = ie.img_id
+where ie.main = 1
 EOM;
 
         $this->getDatabaseConnection()->executeQuery($query);
@@ -112,6 +95,6 @@ EOM;
      */
     public function getOrder()
     {
-        return 4;
+        return 5;
     }
 } 
