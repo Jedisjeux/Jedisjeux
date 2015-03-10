@@ -2,15 +2,15 @@
 <div class="nav-tabs-two">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs">
-        <li class="active"><a href="#tab-summary" data-toggle="tab">Résumé</a></li>
+        <li class="active"><a href="#resume" data-toggle="tab">Résumé</a></li>
         <li><a href="#profile-2" data-toggle="tab">Article</a></li>
-        <li><a href="#tab-user-review" data-toggle="tab">Critiques</a></li>
+        <li><a href="#critiques" data-toggle="tab">Critiques</a></li>
         <li><a href="#messages-2" data-toggle="tab">Add-ons</a></li>
         <li><a href="#settings-2" data-toggle="tab">Forum</a></li>
     </ul>
     <!-- Tab content -->
     <div class="tab-content">
-        <div class="tab-pane fade in active" id="tab-summary">
+        <div class="tab-pane fade in active" id="resume">
             {% include "jeu/show/nav-tab/summary.html.twig" with {'jeu': jeu} only %}
         </div>
         <div class="tab-pane fade" id="profile-2">
@@ -18,7 +18,7 @@
                 non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad
                 minima veniam, quis nostrum exercitationem ullam corporis.</p>
         </div>
-        <div class="tab-pane fade" id="tab-user-review">
+        <div class="tab-pane fade" id="critiques">
             {% for key, userReview in userReviews %}
                 {% if (key > 0) %}
                     <div class="divider-1"></div>
