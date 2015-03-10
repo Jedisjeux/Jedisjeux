@@ -6,14 +6,35 @@
 <div class="blog-meta">
     <!-- Author -->
     <a href="#">
-        <img src="../../../../img/user/4.jpg" alt="" class="img-responsive img-circle">&nbsp;
+        {% if (userReview.jeuNote.author.avatar) %}
+            <img src="{{ userReview.jeuNote.author.avatar.webPath | imagine_filter('default') }}" alt="" class="img-responsive">&nbsp;
+        {% endif %}
         {{ userReview.jeuNote.author.username }}</a> &nbsp;
+
+    <div class="rating-container rating-gly-star" data-content="">
+        <div class="rating-stars" data-content="" style="width: {{ userReview.jeuNote.note.valeur }}0%;"></div>
+    </div>
+
+    <span>
+        <label>{{ userReview.jeuNote.note.libelle }}</label>
+    </span>&nbsp;
+
     <!-- Date -->
     <a href="#"><i class="fa fa-calendar"></i> &nbsp; {{ userReview.createdAt | date('d/m/Y')  }}</a> &nbsp;
 
     <!-- Comments -->
     <a href="#"><i class="fa fa-comments"></i> &nbsp; 6 Comments</a>
+
+
 </div>
 
 <!-- Paragraph -->
 {{ userReview.body | raw }}
+
+<div>
+<h4>Avez-vous trouvé cet avis utile ?</h4>
+    <div class="btn-group" role="group" aria-label="...">
+        <button type="button" class="btn btn-default"><span class="fa fa-thumbs-o-up"></span></button>
+        <button type="button" class="btn btn-default"><span class="fa fa-thumbs-o-down"></span></button>
+    </div>
+</div>
