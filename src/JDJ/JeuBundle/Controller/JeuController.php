@@ -13,7 +13,7 @@ use Doctrine\Common\Util\Debug;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use JDJ\JeuBundle\Entity\Jeu;
-use JDJ\JeuBundle\Entity\JeuRepository;
+use JDJ\JeuBundle\Repository\JeuRepository;
 use JDJ\JeuBundle\Entity\Mechanism;
 use JDJ\JeuBundle\Entity\Theme;
 use JDJ\JeuBundle\Form\GameSearchType;
@@ -102,7 +102,7 @@ class JeuController extends Controller
 
         $form = $this->createEditForm($entity);
 
-        return $this->render('JDJJeuBundle:Jeu:edit.html.twig', array(
+        return $this->render('jeu/edit.html.twig', array(
             'entity' => $entity,
             'form' => $form->createView(),
         ));
@@ -215,14 +215,6 @@ class JeuController extends Controller
         $jeuReposititory = $em->getRepository('JDJJeuBundle:Jeu');
         /** @var Pagerfanta $jeux */
         $jeux = $jeuReposititory->getIfYouLikeThisGame($jeu);
-
-
-        /*$jeux = $jeuReposititory->createPaginator(array(
-            'noteAvg:moreThanOrEqual' => 7,
-            'ageMin:moreThanOrEqual' => $jeu->getAgeMin()-2,
-            "ageMin:lessThanOrEqual" => $jeu->getAgeMin()+2,
-            "noteCount:moreThanOrEqual" => 3,
-        ));*/
 
         $jeux->setMaxPerPage(8);
         $jeux->setCurrentPage($request->get('page', 1));

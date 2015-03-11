@@ -25,18 +25,6 @@ class JeuType extends AbstractType
             ->add('ageMin', null, array(
                 'required' => false,
             ))
-            ->add('intro', 'ckeditor', array(
-                'required' => false,
-            ))
-            ->add('materiel', null, array(
-                'required' => false,
-            ))
-            ->add('but', 'ckeditor', array(
-                'required' => false,
-            ))
-            ->add('description', 'ckeditor', array(
-                'required' => false,
-            ))
             ->add('joueurMin', null, array(
                 'required' => false,
             ))
@@ -63,7 +51,19 @@ class JeuType extends AbstractType
                     'expanded' => false,
                     'required' => false,
                 )
-            );
+            )
+            ->add('intro', 'ckeditor', array(
+                'required' => false,
+            ))
+            ->add('but', 'ckeditor', array(
+                'required' => false,
+            ))
+            ->add('description', 'ckeditor', array(
+                'required' => false,
+            ))
+            ->add('materiel', null, array(
+                'required' => false,
+            ));
     }
 
     /**
