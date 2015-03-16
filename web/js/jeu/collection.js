@@ -153,7 +153,9 @@ $(document).ready(function () {
         /** initialize */
         $("#radio-existing-list").prop("checked", true)
         $("#add-in-list").show();
-        $("#create-list").hide();
+        if ($('#add-in-list').length > 0) {
+            $("#create-list").hide();
+        }
         $('#input-list-name').val("");
         $('#input-list-description').val("");
         $('#form-group-name-list').removeClass('has-error');
