@@ -126,9 +126,41 @@ default:
         Behat\MinkExtension:
             sessions:
                 default:
-                    symfony2: ~
-                javascript:
                     selenium2: ~
             browser_name: firefox
             show_auto:    false
+            base_url: http://jdj.dev:8090/app_test.php/
         Behat\Symfony2Extension: ~
+
+firefox:
+     extensions:
+         Behat\MinkExtension:
+             sessions:
+                 default:
+                     selenium2: ~
+             browser_name: firefox
+             show_auto:    false
+             base_url: http://jdj.dev:8090/app_test.php/
+         Behat\Symfony2Extension: ~
+
+chrome:
+     extensions:
+         Behat\MinkExtension:
+             sessions:
+                 default:
+                     selenium2: ~
+             browser_name: googlechrome
+             show_auto:    false
+             base_url: http://jdj.dev:8090/app_test.php/
+         Behat\Symfony2Extension: ~
+
+ie:
+     extensions:
+         Behat\MinkExtension:
+             sessions:
+                 default:
+                     selenium2: ~
+             browser_name: ie
+             show_auto:    false
+             base_url: http://jdj.dev:8090/app_test.php/
+         Behat\Symfony2Extension: ~
