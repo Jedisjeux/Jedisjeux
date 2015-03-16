@@ -6,7 +6,7 @@
  * Time: 17:09
  */
 
-namespace JDJ\CoreBundle\DataFixtures\Image;
+namespace JDJ\JeuBundle\DataFixtures\JeuImage;
 
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
@@ -94,8 +94,8 @@ EOM;
     private function addImages()
     {
         $query = <<<EOM
-insert into jdj_jeu_image (jeu_id, image_id)
-select      distinct ie.elem_id, old.img_id
+insert into jdj_jeu_image (jeu_id, image_id, description)
+select      distinct ie.elem_id, old.img_id, ie.legende
 from        jedisjeux.jdj_images old
 inner join  jedisjeux.jdj_images_elements ie
                 on ie.img_id = old.img_id
