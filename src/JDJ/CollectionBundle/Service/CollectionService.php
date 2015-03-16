@@ -75,6 +75,7 @@ class CollectionService
      */
     public function addGameCollection(Jeu $jeu, Collection $collection)
     {
+
         if (!$this->checkJeuCollection($jeu, $collection)) {
             $listElement = new ListElement();
             $listElement->setJeu($jeu);
@@ -117,6 +118,27 @@ class CollectionService
         );
 
         return $tabCollection;
+    }
+
+    /**
+     * this function prepare the collection list to be sent to the front in json
+     *
+     * @param $tabCollection
+     * @return array
+     */
+    public function prepareCollectionJsonData($tabCollection)
+    {
+
+        $jsonCollection = array();
+        foreach($tabCollection as $collection)
+        {
+            $jsonCollection[] = array(
+                "id" => $collection->getId(),
+                "name" => $collection->getName(),
+            );
+        }
+
+        return $jsonCollection;
     }
 
     /**
