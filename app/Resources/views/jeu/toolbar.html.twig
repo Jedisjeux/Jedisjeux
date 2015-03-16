@@ -4,9 +4,11 @@
             <!-- Image Box #5 Image -->
             <div class="img-box-5-img">
                 <!-- Image -->
+                {% if jeu.imageCouverture %}
                 <a href="#">
                     <img src="{{ jeu.imageCouverture.webPath | imagine_filter('default') }}" alt="" class="img-responsive img-thumbnail" />
                 </a>
+                {% endif %}
             </div>
         </div>
         <div class="col-md-9">

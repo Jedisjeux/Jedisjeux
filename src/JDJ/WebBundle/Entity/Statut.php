@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Statut
 {
+    const INCOMPLETE = 4;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
