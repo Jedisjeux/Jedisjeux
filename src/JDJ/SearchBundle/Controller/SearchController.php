@@ -14,6 +14,7 @@ use JDJ\JeuBundle\Entity\Jeu;
 use JDJ\JeuBundle\Entity\Mechanism;
 use JDJ\JeuBundle\Entity\Theme;
 use JDJ\LudographieBundle\Entity\Personne;
+use JDJ\UserBundle\Entity\User;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -61,7 +62,7 @@ class SearchController extends Controller
         $term = $request->get("term", "");
 
         $paginator = $this->findByQuery($this->getQueryStringByTerm($term));
-        $paginator->setMaxPerPage(10);
+        $paginator->setMaxPerPage(5);
         $paginator->setCurrentPage($request->get('page', 1));
 
         $results = array();
@@ -74,14 +75,23 @@ class SearchController extends Controller
                 $result = array(
                     'value' => $jeu->getLibelle(),
                     'label' => $jeu->getLibelle(),
-                    'image' => "",
-                    'category' => 'Jeux',
-                    'description' => 'Jeux',
+                    'image' => (null === $jeu->getImageCouverture()) ? null : $this->get('liip_imagine.cache.manager')->getBrowserPath($jeu->getImageCouverture()->getWebPath(), 'thumbnail'),
                     'href' => $this->generateUrl('jeu_show', array(
                             'id' => $jeu->getId(),
                             'slug' => $jeu->getSlug(),
                         )
                     ),
+                );
+            }
+
+            if ($entity instanceof User) {
+                /** @var User $user */
+                $user = $entity;
+                $result = array(
+                    'value' => $user->getUsername(),
+                    'label' => $user->getUsername(),
+                    'image' => (null === $user->getAvatar()) ? null : $this->get('liip_imagine.cache.manager')->getBrowserPath($user->getAvatar()->getWebPath(), 'thumbnail'),
+                    'href' => "#",
                 );
             }
 
@@ -92,8 +102,6 @@ class SearchController extends Controller
                     'value' => $mechanism->getLibelle(),
                     'label' => $mechanism->getLibelle(),
                     'image' => "",
-                    'category' => 'Mecanismes',
-                    'description' => 'Mecanismes',
                     'href' => $this->generateUrl('mechanism_show', array(
                             'id' => $mechanism->getId(),
                             'slug' => $mechanism->getSlug(),
@@ -109,8 +117,6 @@ class SearchController extends Controller
                     'value' => $theme->getLibelle(),
                     'label' => $theme->getLibelle(),
                     'image' => "",
-                    'category' => 'Thèmes',
-                    'description' => 'Thèmes',
                     'href' => $this->generateUrl('theme_show', array(
                             'id' => $theme->getId(),
                             'slug' => $theme->getSlug(),
@@ -125,9 +131,7 @@ class SearchController extends Controller
                 $result = array(
                     'value' => (string)$personne,
                     'label' => (string)$personne,
-                    'image' => "",
-                    'category' => 'Thèmes',
-                    'description' => 'Thèmes',
+                    'image' => (null === $personne->getImage()) ? null : $this->get('liip_imagine.cache.manager')->getBrowserPath($personne->getImage()->getWebPath(), 'thumbnail'),
                     'href' => $this->generateUrl('personne_show', array(
                             'id' => $personne->getId(),
                             'slug' => $personne->getSlug(),
@@ -180,6 +184,10 @@ class SearchController extends Controller
                 $types[] = "mecanisme";
             } elseif ($result instanceof Theme) {
                 $types[] = "theme";
+            } elseif ($result instanceof Theme) {
+                $types[] = "theme";
+            } elseif ($result instanceof User) {
+                $types[] = "user";
             }
 
         }

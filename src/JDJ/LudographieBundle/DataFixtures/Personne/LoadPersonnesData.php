@@ -37,7 +37,6 @@ insert into jdj_personne (
             siteWeb,
             description,
             pays_id,
-            image,
             slug
 )
 select      old.id,
@@ -46,7 +45,6 @@ select      old.id,
             old.siteweb,
             old.description,
             pays.id,
-            old.photo,
             replace(old.nom_clean, ' ', '-') as slug
 from        jedisjeux.jdj_personnes old
 left join   jdj_pays pays

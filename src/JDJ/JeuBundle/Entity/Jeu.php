@@ -105,10 +105,10 @@ class Jeu
     /**
      * @var string
      *
-     * @ORM\ManyToMany(targetEntity="JDJ\CoreBundle\Entity\Image", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="JDJ\JeuBundle\Entity\JeuImage", cascade={"persist"}, mappedBy="jeu")
      * @ORM\JoinTable(name="jdj_jeu_image")
      */
-    private $images;
+    private $jeuImages;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -455,7 +455,7 @@ class Jeu
     /**
      * Set imageCouverture
      *
-     * @param string $imageCouverture
+     * @param Image $imageCouverture
      * @return Jeu
      */
     public function setImageCouverture($imageCouverture)
@@ -468,7 +468,7 @@ class Jeu
     /**
      * Get imageCouverture
      *
-     * @return string 
+     * @return Image
      */
     public function getImageCouverture()
     {
@@ -476,7 +476,7 @@ class Jeu
     }
 
     /**
-     * @return string
+     * @return Image
      */
     public function getMaterialImage()
     {
@@ -484,7 +484,7 @@ class Jeu
     }
 
     /**
-     * @param string $materialImage
+     * @param Image $materialImage
      * @return $this
      */
     public function setMaterialImage($materialImage)
@@ -495,33 +495,33 @@ class Jeu
     }
 
     /**
-     * @return string
+     * @return JeuImage
      */
-    public function getImages()
+    public function getJeuImages()
     {
-        return $this->images;
+        return $this->jeuImages;
     }
 
     /**
      * Add Image
      *
-     * @param Image $image
+     * @param JeuImage $jeuImage
      * @return Jeu
      */
-    public function addImage(Image $image)
+    public function addJeuImage(JeuImage $jeuImage)
     {
-        $this->images[] = $image;
+        $this->jeuImages[] = $jeuImage;
 
         return $this;
     }
 
     /**
-     * @param string $images
+     * @param ArrayCollection $jeuImages
      * @return $this
      */
-    public function setImages($images)
+    public function setJeuImages($jeuImages)
     {
-        $this->images = $images;
+        $this->jeuImages = $jeuImages;
 
         return $this;
     }

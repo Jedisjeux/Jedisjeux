@@ -2,15 +2,15 @@
 <div class="nav-tabs-two">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs">
-        <li class="active"><a href="#summary" data-toggle="tab">Résumé</a></li>
+        <li class="active"><a href="#resume" data-toggle="tab">Résumé</a></li>
         <li><a href="#profile-2" data-toggle="tab">Article</a></li>
-        <li><a href="#profile-2" data-toggle="tab">Critiques</a></li>
+        <li><a href="#critiques" data-toggle="tab">Critiques</a></li>
         <li><a href="#messages-2" data-toggle="tab">Add-ons</a></li>
         <li><a href="#settings-2" data-toggle="tab">Forum</a></li>
     </ul>
     <!-- Tab content -->
     <div class="tab-content">
-        <div class="tab-pane fade in active" id="summary">
+        <div class="tab-pane fade in active" id="resume">
             {% include "jeu/show/nav-tab/summary.html.twig" with {'jeu': jeu} only %}
         </div>
         <div class="tab-pane fade" id="profile-2">
@@ -18,10 +18,16 @@
                 non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad
                 minima veniam, quis nostrum exercitationem ullam corporis.</p>
         </div>
-        <div class="tab-pane fade" id="messages-2">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.</p>
+        <div class="tab-pane fade" id="critiques">
+            {% for key, userReview in userReviews %}
+                {% if (key > 0) %}
+                    <div class="divider-1"></div>
+                {% endif %}
+
+                {% include "user-review/partial/_show.html.twig" with {'userReview': userReview} only %}
+
+            {% endfor %}
+
         </div>
         <div class="tab-pane fade" id="settings-2">
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et

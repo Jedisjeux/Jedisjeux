@@ -1,12 +1,9 @@
-{# synthaxe pour importer toutes les macros #}
-{#{% import "JDJJeuBundle:Jeu:macros.html.twig" as macros %}#}
-{# synthaxe pour importer une macro spécifique #}
 {% from "JDJJeuBundle:Jeu:macros.html.twig" import joueurCount %}
 
 {% if 1 != jeu.statut.id %}
-    <div class="alert-box alert">
-        Attention, ce jeu est en statut : {{ jeu.statut.libelle }}
-        <a href="#" class="close">&times;</a>
+    <div class="alert alert-warning" role="alert">
+        <span class="fa fa-exclamation-triangle"></span>
+        Ce jeu est encore au statut <strong>{{ jeu.statut.libelle }}</strong>.
     </div>
 {% endif %}
 

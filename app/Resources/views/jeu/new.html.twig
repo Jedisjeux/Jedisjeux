@@ -1,0 +1,11 @@
+{% extends "base.html.twig" %}
+
+{% block body -%}
+
+    <div class="block-heading-two">
+        <h3><span>Création d'une fiche de jeu</span></h3>
+    </div>
+
+    {% include "jeu/partial/form.html.twig" with {'form': form, 'entity': entity} %}
+
+{% endblock %}

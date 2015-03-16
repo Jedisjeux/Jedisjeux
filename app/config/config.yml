@@ -52,7 +52,10 @@ assetic:
 #            jar: %kernel.root_dir%/Resources/java/yuicompressor-2.4.6.jar
 
 mopa_bootstrap:
-    form: ~  # Adds twig form theme  support
+    form:
+        show_legend: false # default is true
+        render_required_asterisk: true # default is false
+        render_optional_text: false # default is true
     menu: ~  # enables twig helpers for menu
 
 # Doctrine Configuration
@@ -255,7 +258,7 @@ fos_elastica:
           types:
               user:
                   mappings:
-                      username: ~
+                      username: { search_analyzer: custom_search_analyzer, index_analyzer: custom_index_analyzer, type: string }
                       email: ~
                   persistence:
                       driver: orm

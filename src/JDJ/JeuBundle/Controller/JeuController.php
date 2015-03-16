@@ -13,11 +13,12 @@ use Doctrine\Common\Util\Debug;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use JDJ\JeuBundle\Entity\Jeu;
-use JDJ\JeuBundle\Entity\JeuRepository;
+use JDJ\JeuBundle\Repository\JeuRepository;
 use JDJ\JeuBundle\Entity\Mechanism;
 use JDJ\JeuBundle\Entity\Theme;
 use JDJ\JeuBundle\Form\GameSearchType;
 use JDJ\JeuBundle\Form\JeuType;
+use JDJ\WebBundle\Entity\Statut;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -87,6 +88,23 @@ class JeuController extends Controller
     }
 
     /**
+     * Displays a form to create a new Jeu entity.
+     *
+     */
+    public function newAction()
+    {
+        $entity = new Jeu();
+        $form   = $this->createCreateForm($entity);
+
+        return $this->render('jeu/new.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        ));
+    }
+
+
+
+    /**
      * Displays a form to edit an existing Game entity.
      *
      */
@@ -102,7 +120,7 @@ class JeuController extends Controller
 
         $form = $this->createEditForm($entity);
 
-        return $this->render('JDJJeuBundle:Jeu:edit.html.twig', array(
+        return $this->render('jeu/edit.html.twig', array(
             'entity' => $entity,
             'form' => $form->createView(),
         ));
@@ -143,6 +161,25 @@ class JeuController extends Controller
     }
 
     /**
+     * Creates a form to create a Jeu entity.
+     *
+     * @param Jeu $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createCreateForm(Jeu $entity)
+    {
+        $form = $this->createForm(new JeuType(), $entity, array(
+            'action' => $this->generateUrl('jeu_create'),
+            'method' => 'POST',
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Créer'));
+
+        return $form;
+    }
+
+    /**
      * Creates a form to edit a Jeu entity.
      *
      * @param Jeu $entity The entity
@@ -159,6 +196,37 @@ class JeuController extends Controller
         $form->add('submit', 'submit', array('label' => 'Modifier'));
 
         return $form;
+    }
+
+    /**
+     * Creates a new Jeu entity.
+     *
+     */
+    public function createAction(Request $request)
+    {
+        $entity = new Jeu();
+
+        $statut = $this->getDoctrine()->getRepository('JDJWebBundle:Statut')->find(Statut::INCOMPLETE);
+
+        $entity->setStatut($statut);
+        $form = $this->createCreateForm($entity);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entity);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('jeu_show', array(
+                'id' => $entity->getId(),
+                'slug' => $entity->getSlug(),
+            )));
+        }
+
+        return $this->render('jeu/new.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        ));
     }
 
     /**
@@ -216,30 +284,12 @@ class JeuController extends Controller
         /** @var Pagerfanta $jeux */
         $jeux = $jeuReposititory->getIfYouLikeThisGame($jeu);
 
-
-        /*$jeux = $jeuReposititory->createPaginator(array(
-            'noteAvg:moreThanOrEqual' => 7,
-            'ageMin:moreThanOrEqual' => $jeu->getAgeMin()-2,
-            "ageMin:lessThanOrEqual" => $jeu->getAgeMin()+2,
-            "noteCount:moreThanOrEqual" => 3,
-        ));*/
-
         $jeux->setMaxPerPage(8);
         $jeux->setCurrentPage($request->get('page', 1));
 
         return $this->render('JDJJeuBundle:Jeu:ifYouLikeThisGame.html.twig', array(
             'jeux' => $jeux,
         ));
-    }
-
-    /**
-     * @param QueryBuilder $queryBuilder
-     *
-     * @return Pagerfanta
-     */
-    public function getPaginator(QueryBuilder $queryBuilder)
-    {
-        return new Pagerfanta(new DoctrineORMAdapter($queryBuilder));
     }
 
     /**
