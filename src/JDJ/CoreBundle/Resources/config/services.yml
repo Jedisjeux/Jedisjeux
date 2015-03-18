@@ -15,3 +15,12 @@ services:
       class: JDJ\CoreBundle\Service\ImageImportService
       arguments:
           - @doctrine.orm.entity_manager
+
+  #------------------------------------------------------
+  # CONTROLLERS
+  #------------------------------------------------------
+
+  jdj.form.type.image:
+      class: JDJ\CoreBundle\Form\ImageType
+      tags:
+        - { name: form.type, alias: jdj_corebundle_image }

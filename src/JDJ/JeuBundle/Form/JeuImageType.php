@@ -17,7 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * Class JeuImageType
  * @package JDJ\JeuBundle\Form
  */
-class JeuImageType
+class JeuImageType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -34,7 +34,17 @@ class JeuImageType
                         ->setParameter('id', $id);
                 }
             ))
+            ->add('image', 'jdj_corebundle_image')
             ->add('description')
+            ->add('imageProperties', 'choice', array(
+                'choices'   => array(
+                    'image_couverture'   => 'Utiliser cette photo pour la couverture',
+                    'material_image' => 'Utiliser cette photo pour illustrer le matériel du jeu',
+                ),
+                'expanded' => true,
+                'multiple'  => true,
+                'mapped' => false,
+            ))
         ;
     }
 

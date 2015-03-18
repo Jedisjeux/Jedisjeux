@@ -1,28 +1,12 @@
-<div class="dropdown-menu dropdown-menu-right" style="width: 400px" aria-labelledby="toolbar-jeu-{{ jeu.id }}">
-    <div class="row">
-        <div class="col-md-3">
-            <!-- Image Box #5 Image -->
-            <div class="img-box-5-img">
-                <!-- Image -->
-                {% if jeu.imageCouverture %}
-                <a href="#">
-                    <img src="{{ jeu.imageCouverture.webPath | imagine_filter('default') }}" alt=""
-                         class="img-responsive img-thumbnail"/>
-                </a>
-                {% endif %}
-            </div>
-        </div>
-        <div class="col-md-9">
+<div class="row">
 
-            <h4>{{ jeu.libelle }}</h4>
+    <input class="game-rating rating" type="number" min=0 max=5 step=0.5 data-size="xs">
 
-            <input class="game-rating rating" type="number" min=0 max=5 step=0.5 data-size="xs">
+    <br/>
 
-            <br/>
-
-            <div class="btn-group" role="group">
-                <button type="button" data-toggle="tooltip" data-placement="top" title="Ajouter à ma ludothèque"
-                        class="b-tooltip btn {% if userGameAttribute %}
+    <div class="btn-group" role="group">
+        <button type="button" data-toggle="tooltip" data-placement="top" title="Ajouter à ma ludothèque"
+                class="b-tooltip btn {% if userGameAttribute %}
                                                 {% if userGameAttribute.isOwned %}
                                                     btn-yellow
                                                 {% else %}
@@ -31,13 +15,13 @@
                                             {% else %}
                                                 btn-default
                                             {% endif %} btn-sm owned" data-jeu-id="{{ jeu.id }}"
-                        data-uid="{% if app.user %}
+                data-uid="{% if app.user %}
                                                                 {{ app.user.id }}
                                                             {% endif %}"><span
-                            class="fa fa-user"></span>
-                </button>
-                <button type="button" data-toggle="tooltip" data-placement="top" title="Ajouter à mes envies"
-                        class="b-tooltip btn {% if userGameAttribute %}
+                    class="fa fa-user"></span>
+        </button>
+        <button type="button" data-toggle="tooltip" data-placement="top" title="Ajouter à mes envies"
+                class="b-tooltip btn {% if userGameAttribute %}
                                                 {% if userGameAttribute.isWanted %}
                                                     btn-yellow
                                                 {% else %}
@@ -46,12 +30,12 @@
                                             {% else %}
                                                 btn-default
                                             {% endif %} btn-sm wanted" data-jeu-id="{{ jeu.id }}"
-                        data-uid="{% if app.user %}
+                data-uid="{% if app.user %}
                                                                 {{ app.user.id }}
                                                             {% endif %}"><span
-                            class="fa fa-bookmark"></span></button>
-                <button type="button" data-toggle="tooltip" data-placement="top" title="j'y ai joué"
-                        class="b-tooltip btn {% if userGameAttribute %}
+                    class="fa fa-bookmark"></span></button>
+        <button type="button" data-toggle="tooltip" data-placement="top" title="j'y ai joué"
+                class="b-tooltip btn {% if userGameAttribute %}
                                                 {% if userGameAttribute.hasPlayed %}
                                                     btn-yellow
                                                 {% else %}
@@ -60,12 +44,12 @@
                                             {% else %}
                                                 btn-default
                                             {% endif %} btn-sm played" data-jeu-id="{{ jeu.id }}"
-                        data-uid="{% if app.user %}
+                data-uid="{% if app.user %}
                                                                 {{ app.user.id }}
                                                             {% endif %}"><span
-                            class="fa fa-play"></span></button>
-                <button type="button" data-toggle="tooltip" data-placement="top" title="Coup de coeur"
-                        class="b-tooltip btn {% if userGameAttribute %}
+                    class="fa fa-play"></span></button>
+        <button type="button" data-toggle="tooltip" data-placement="top" title="Coup de coeur"
+                class="b-tooltip btn {% if userGameAttribute %}
                                                 {% if userGameAttribute.isFavorite %}
                                                     btn-yellow
                                                 {% else %}
@@ -74,20 +58,18 @@
                                             {% else %}
                                                 btn-default
                                             {% endif %} btn-sm favorite" data-jeu-id="{{ jeu.id }}"
-                        data-uid="{% if app.user %}
+                data-uid="{% if app.user %}
                                                                 {{ app.user.id }}
                                                             {% endif %}"><span
-                            class="fa fa-heart"></span></button>
-                <button type="button" data-toggle="tooltip" data-placement="top" title="Rédiger une critique"
-                        class="b-tooltip btn btn-default btn-sm user-review" data-jeu-id="{{ jeu.id }}"><span
-                            class="fa fa-pencil"></span></button>
-                <a href="#collection-modal" class="b-tooltip btn btn-default btn-sm collection btn-lg"
-                   data-toggle="modal" type="button" data-toggle="tooltip" data-placement="top"
-                   title="Ajouter à une liste"
-                   class="b-tooltip btn btn-default btn-sm collection" data-jeu-id="{{ jeu.id }}"
-                   data-toggle="modal"><span
-                            class="fa fa-list"></span></a>
-            </div>
-        </div>
+                    class="fa fa-heart"></span></button>
+        <button type="button" data-toggle="tooltip" data-placement="top" title="Rédiger une critique"
+                class="b-tooltip btn btn-default btn-sm user-review" data-jeu-id="{{ jeu.id }}"><span
+                    class="fa fa-pencil"></span></button>
+        <a href="#collection-modal" class="b-tooltip btn btn-default btn-sm collection btn-lg"
+           data-toggle="modal" type="button" data-toggle="tooltip" data-placement="top"
+           title="Ajouter à une liste"
+           class="b-tooltip btn btn-default btn-sm collection" data-jeu-id="{{ jeu.id }}"
+           data-toggle="modal"><span
+                    class="fa fa-list"></span></a>
     </div>
 </div>

@@ -16,6 +16,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 /**
  * Class CollectionController
@@ -30,7 +34,7 @@ class CollectionController extends Controller
     /**
      * Lists all Collection entities.
      *
-     * @Route("/")
+     * @Route("/", name="collection")
      */
     public function indexAction()
     {
@@ -44,9 +48,40 @@ class CollectionController extends Controller
     }
 
     /**
+     * Displays the collection modal to create or update list with a game
+     *
+     * @Route("/{jeu}/collection-modal", name="collection_modal")
+     * @ParamConverter("jeu", class="JDJJeuBundle:Jeu")
+     */
+    public function modalDisplayAction(Jeu $jeu)
+    {
+
+        /**
+         * Checks if the user is connected
+         */
+        $collectionList = null;
+        if($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY'))
+        {
+            $user= $this->get('security.context')->getToken()->getUser();
+
+            /**
+             * Get the Collection list from the connected user
+             */
+            $collectionList = $this
+                ->getCollectionService()
+                ->getUserCollection($user);
+        }
+
+        return $this->render('jeu/show/modal/collection.html.twig', array(
+            'collectionList' => $collectionList,
+            'jeu' => $jeu,
+        ));
+    }
+
+    /**
      * Creates a new Collection entity.
      *
-     * @Route("/{jeu}/{user}/create")
+     * @Route("/{jeu}/{user}/create", name="create_collection", options={"expose"=true})
      * @ParamConverter("jeu", class="JDJJeuBundle:Jeu")
      * @ParamConverter("user", class="JDJUserBundle:User")
      * @Method({"POST"})
@@ -75,9 +110,12 @@ class CollectionController extends Controller
                 "status" => Response::HTTP_CREATED,
             ));
         } else {
-            return new JsonResponse(array(
+            $response = new JsonResponse(array(
                 "status" => Response::HTTP_BAD_REQUEST,
             ));
+
+            $response->setStatusCode(Response::HTTP_BAD_REQUEST);
+            return $response;
         }
 
     }
@@ -86,7 +124,7 @@ class CollectionController extends Controller
     /**
      * Updates a collection to add a game to it
      *
-     * @Route("/{jeu}/{collection}/add-game")
+     * @Route("/{jeu}/{collection}/add-game", name="add_game_collection", options={"expose"=true})
      * @ParamConverter("jeu", class="JDJJeuBundle:Jeu")
      * @ParamConverter("collection", class="JDJCollectionBundle:Collection")
      * @Method({"GET"})
@@ -100,9 +138,12 @@ class CollectionController extends Controller
                 ->getCollectionService()
                 ->addGameCollection($jeu, $collection);
         } else {
-            return new JsonResponse(array(
+            $response = new JsonResponse(array(
                 "status" => Response::HTTP_BAD_REQUEST,
             ));
+
+            $response->setStatusCode(Response::HTTP_BAD_REQUEST);
+            return $response;
         }
 
         //Save the collection
@@ -116,11 +157,46 @@ class CollectionController extends Controller
 
     }
 
+    /**
+     * returns the user lists
+     *
+     * @Route("/{user}/user-list", name="user_list", options={"expose"=true})
+     * @ParamConverter("user", class="JDJUserBundle:User")
+     * @Method({"GET"})
+     */
+    public function userListAction(User $user)
+    {
+
+        //add the game to the collection
+        if($user ) {
+            $tabCollection = $this
+                ->getCollectionService()
+                ->getUserCollection($user);
+
+            $jsonCollection = $this
+                ->getCollectionService()
+                ->prepareCollectionJsonData($tabCollection);
+        } else {
+            $response = new JsonResponse(array(
+                "status" => Response::HTTP_BAD_REQUEST,
+            ));
+
+            $response->setStatusCode(Response::HTTP_BAD_REQUEST);
+            return $response;
+        }
+
+        return new JsonResponse(array(
+            "status" => Response::HTTP_OK,
+            "tabCollection" => $jsonCollection,
+        ));
+
+    }
+
 
     /**
      * Displays a form to edit an existing Collection entity.
      *
-     * @Route("/{id}/edit")
+     * @Route("/{id}/edit", name="collection_edit")
      */
     public function editAction($id)
     {
@@ -198,7 +274,7 @@ class CollectionController extends Controller
     /**
      * Finds and displays a Collection entity.
      *
-     * @Route("/{id}/show")
+     * @Route("/{id}/show", name="collection_show")
      */
     public function showAction($id)
     {
@@ -223,7 +299,7 @@ class CollectionController extends Controller
     /**
      * Deletes a Collection entity.
      *
-     * @Route("/{id}/delete")
+     * @Route("/{id}/delete", name="collection_delete")
      */
     public function deleteAction(Request $request, $id)
     {

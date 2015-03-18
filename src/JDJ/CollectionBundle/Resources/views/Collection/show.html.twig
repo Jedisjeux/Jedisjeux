@@ -19,8 +19,20 @@
             </tr>
             <tr>
                 <th>Slug</th>
-                <td>{{ entity.slug }}</td>
+                <td>{{ entity.slug }}
             </tr>
+            <tr>
+                <th>Jeux</th>
+                <td>
+                <ul>
+                    {% for listElement in entity.listElements %}
+                        <li>{{ listElement.jeu.libelle }}</li>
+                    {% endfor %}
+                </ul>
+                </td>
+            </tr>
+
+
         </tbody>
     </table>
 
