@@ -5,6 +5,7 @@ default:
             paths:    false
             snippets: false
     suites:
+
         homepage:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext

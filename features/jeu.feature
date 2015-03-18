@@ -46,7 +46,7 @@ Feature: Affichage de la fiche de jeu
 
   Scenario: Affichage de la liste de jeux
     When I am on "jeu/"
-    Then I should see "Fiches de jeu"
+    Then I should see "Jeux"
     And I should see "Puerto Rico"
     And I should see "Modern Art"
     And I should see "El Grande"

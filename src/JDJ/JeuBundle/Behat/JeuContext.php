@@ -58,8 +58,8 @@ class JeuContext extends DefaultContext
     {
         /** @var Jeu $jeu */
         $jeu = $this->findOneBy("jeu", array("libelle" => $jeuLibelle));
-        $this->getSession()->visit("/jeu/".$jeu->getId()."/".$jeu->getSlug());
-        file_put_contents(__DIR__.'/../../../../web/behat/'.$jeu->getSlug().'.html', $this->getSession()->getPage()->getContent());
+        $this->getSession()->visit($this->baseUrl.'/jeu/'.$jeu->getId().'/'.$jeu->getSlug());
+        //file_put_contents(__DIR__.'/../../../../web/behat/'.$jeu->getSlug().'.html', $this->getSession()->getPage()->getContent());
     }
 
     /**
@@ -68,6 +68,6 @@ class JeuContext extends DefaultContext
     public function iAmOnGameList()
     {
         $this->getSession()->visit("/jeu");
-        file_put_contents(__DIR__.'/../../../../web/behat/game-list.html', $this->getSession()->getPage()->getContent());
+        //file_put_contents(__DIR__.'/../../../../web/behat/game-list.html', $this->getSession()->getPage()->getContent());
     }
 } 

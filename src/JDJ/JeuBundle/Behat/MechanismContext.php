@@ -55,7 +55,7 @@ class MechanismContext extends DefaultContext
     {
         /** @var Mechanism $mecanisme */
         $mecanisme = $this->findOneBy("mecanisme", array("libelle" => $mecanismeLibelle));
-        $this->getSession()->visit("/jeu/mecanisme/".$mecanisme->getId()."/".$mecanisme->getSlug());
+        $this->getSession()->visit($this->baseUrl."/jeu/mecanisme/".$mecanisme->getId()."/".$mecanisme->getSlug());
     }
 
     /**
@@ -65,8 +65,7 @@ class MechanismContext extends DefaultContext
     {
         /** @var Mechanism $mecanisme */
         $mecanisme = $this->findOneBy("mecanisme", array("libelle" => $mecanismeLibelle));
-        $this->assertSession()->addressEquals("/jeu/mecanisme/".$mecanisme->getId()."/".$mecanisme->getSlug());
+        $this->assertSession()->addressEquals($this->baseUrl."/jeu/mecanisme/".$mecanisme->getId()."/".$mecanisme->getSlug());
         //file_put_contents("/var/www/cezembre/bidon/".str_replace(" ", "-", $page).".html", $this->getSession()->getPage()->getContent());
-        $this->assertStatusCodeEquals(200);
     }
 } 

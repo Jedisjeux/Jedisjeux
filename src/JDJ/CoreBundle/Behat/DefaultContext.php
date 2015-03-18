@@ -49,8 +49,11 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      */
     protected $kernel;
 
-    public function __construct()
+    protected $baseUrl;
+
+    public function __construct($baseUrl = 'http://jdj.dev:8090/app_test.php')
     {
+        $this->baseUrl = $baseUrl;
         $this->faker = FakerFactory::create();
     }
 

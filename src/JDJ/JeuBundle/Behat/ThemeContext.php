@@ -68,7 +68,6 @@ class ThemeContext extends DefaultContext
     {
         /** @var Theme $theme */
         $theme = $this->findOneBy("theme", array("libelle" => $mecanismeLibelle));
-        $this->assertSession()->addressEquals("/jeu/theme/".$theme->getId()."/".$theme->getSlug());
-        $this->assertStatusCodeEquals(200);
+        $this->assertSession()->addressEquals($this->baseUrl."/jeu/theme/".$theme->getId()."/".$theme->getSlug());
     }
 } 
