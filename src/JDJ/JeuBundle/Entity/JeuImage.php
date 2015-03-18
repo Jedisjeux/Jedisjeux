@@ -9,6 +9,7 @@
 namespace JDJ\JeuBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JDJ\CoreBundle\Entity\Image;
 
 /**
  * Class JeuImage
@@ -21,18 +22,25 @@ use Doctrine\ORM\Mapping as ORM;
 class JeuImage
 {
     /**
-     * @var string
+     * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var Jeu
      *
      * @ORM\ManyToOne(targetEntity="JDJ\JeuBundle\Entity\Jeu", inversedBy="jeuImages")
-     * @ORM\Id
      */
     private $jeu;
 
     /**
-     * @var string
+     * @var Image
      *
-     * @ORM\ManyToOne(targetEntity="JDJ\CoreBundle\Entity\Image")
-     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="JDJ\CoreBundle\Entity\Image", cascade={"persist"})
      */
     private $image;
 
@@ -42,6 +50,25 @@ class JeuImage
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     /**
      * @return string
@@ -63,7 +90,7 @@ class JeuImage
     }
 
     /**
-     * @return string
+     * @return Image
      */
     public function getImage()
     {
@@ -71,7 +98,7 @@ class JeuImage
     }
 
     /**
-     * @param string $image
+     * @param Image $image
      * @return $this
      */
     public function setImage($image)
@@ -82,7 +109,7 @@ class JeuImage
     }
 
     /**
-     * @return string
+     * @return Jeu
      */
     public function getJeu()
     {
@@ -90,7 +117,7 @@ class JeuImage
     }
 
     /**
-     * @param string $jeu
+     * @param Jeu $jeu
      * @return $this
      */
     public function setJeu($jeu)
@@ -100,5 +127,18 @@ class JeuImage
         return $this;
     }
 
+    public function upload()
+    {
+        $this->getImage()->setNewFilename($this->getNewFilename());
+        $this->getImage()->upload();
+    }
 
+    public function getNewFilename()
+    {
+        if (null === $this->getImage()->getFile()) {
+            return null;
+        }
+
+        return $this->getJeu()->getSlug().'-'.uniqid().'.'.$this->getImage()->getFile()->getClientOriginalExtension();
+    }
 } 

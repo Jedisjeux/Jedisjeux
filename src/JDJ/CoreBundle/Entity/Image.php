@@ -44,6 +44,11 @@ class Image
     private $file;
 
     /**
+     * @var string
+     */
+    private $newFilename;
+
+    /**
      * @return int
      */
     public function getId()
@@ -81,7 +86,43 @@ class Image
         return $this;
     }
 
+    /**
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
 
+    /**
+     * @param UploadedFile $file
+     * @return $this
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNewFilename()
+    {
+        return $this->newFilename;
+    }
+
+    /**
+     * @param string $newFilename
+     * @return $this
+     */
+    public function setNewFilename($newFilename)
+    {
+        $this->newFilename = $newFilename;
+
+        return $this;
+    }
 
     public function getAbsolutePath()
     {
@@ -129,8 +170,10 @@ class Image
             return;
         }
 
-        $this->file->move($this->getUploadRootDir(), $this->file->getClientOriginalName());
-        $this->path = $this->file->getClientOriginalName();
+        $newFilename = (null !== $this->getNewFilename()) ? $this->getNewFilename() : $this->file->getClientOriginalName();
+
+        $this->file->move($this->getUploadRootDir(), $newFilename);
+        $this->path = $newFilename;
 
         // Clean the path file
         $this->file = null;

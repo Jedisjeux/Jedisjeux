@@ -1,0 +1,22 @@
+jeu_image_new:
+    pattern:  /{id}/image/new
+    defaults: { _controller: "JDJJeuBundle:JeuImage:new" }
+
+jeu_image_create:
+    pattern:  /image/create
+    defaults: { _controller: "JDJJeuBundle:JeuImage:create" }
+    requirements: { _method: post }
+
+jeu_image_edit:
+    pattern:  /image/{id}/edit
+    defaults: { _controller: "JDJJeuBundle:JeuImage:edit" }
+
+jeu_image_update:
+    pattern:  /image/{id}/update
+    defaults: { _controller: "JDJJeuBundle:JeuImage:update" }
+    requirements: { _method: post|put }
+
+jeu_image_delete:
+    pattern:  /image/{id}/delete
+    defaults: { _controller: "JDJJeuBundle:JeuImage:delete" }
+    requirements: { _method: post|delete }
