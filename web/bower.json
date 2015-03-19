@@ -7,6 +7,7 @@
     "chosen": "https://github.com/harvesthq/chosen/releases/download/v1.2.0/chosen_v1.2.0.zip",
     "bootstrap-star-rating": "~3.5.1",
     "fancybox": "2.1.5",
-    "multiple-select": "1.1.0"
+    "multiple-select": "1.1.0",
+    "jquery-ui": "~1.11.4"
   }
 }
