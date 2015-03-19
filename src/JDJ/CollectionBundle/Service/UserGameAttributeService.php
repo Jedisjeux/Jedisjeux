@@ -150,6 +150,7 @@ class UserGameAttributeService
 
             $this->manager->record($userGameAttribute);
         }
+
         return $userGameAttribute;
     }
 

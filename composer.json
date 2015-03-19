@@ -43,6 +43,7 @@
         "friendsofsymfony/elastica-bundle": "~3.0",
         "sonata-project/block-bundle": "~2.2",
         "phpspec/phpspec": "~2.0",
+        "phpspec/prophecy": "~1.0",
         "mopa/bootstrap-bundle": "dev-master",
         "twbs/bootstrap-sass": "dev-master",
         "knplabs/knp-paginator-bundle": "dev-master",

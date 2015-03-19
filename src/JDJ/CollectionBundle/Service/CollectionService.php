@@ -31,6 +31,8 @@ class CollectionService
     protected $class;
 
 
+
+
     /**
      * Constructor
      *
@@ -164,6 +166,5 @@ class CollectionService
 
         return $isJeuInCollection;
     }
-
 
 }
