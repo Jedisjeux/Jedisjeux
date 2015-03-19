@@ -16,6 +16,8 @@
 !/web/uploads/avatar/.gitkeep
 !/web/uploads/img/.gitkeep
 /web/media/*
+/web/bower_components/*
+!/web/bower_components/.gitkeep
 
 .idea
 *.DS_Store
