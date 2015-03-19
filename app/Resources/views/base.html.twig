@@ -25,6 +25,7 @@
         'bower_components/fancybox/source/helpers/jquery.fancybox-buttons.css'
         'bower_components/fancybox/source/helpers/jquery.fancybox-thumbs.css'
         '../app/Resources/sass/base.scss'
+        '../app/Resources/sass/module/core/*.scss'
         filter='cssrewrite' output='css/compiled/all.css' %}
         <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
@@ -41,6 +42,8 @@
 <!-- Add "pattern-x" (1 to 5) for background patterns. -->
 <!-- Add "img-x" (1 to 5) for background images. -->
 <body>
+
+{% include 'layout/loading.html.twig' %}
 
 <!-- Outer Starts -->
 <div class="outer">
