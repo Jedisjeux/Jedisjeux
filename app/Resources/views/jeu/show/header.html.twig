@@ -1,6 +1,6 @@
 {% from "JDJJeuBundle:Jeu:macros.html.twig" import joueurCount %}
 
-{% if 1 != jeu.statut.id %}
+{% if "published" != jeu.statut.code %}
     <div class="alert alert-warning" role="alert">
         <span class="fa fa-exclamation-triangle"></span>
         Ce jeu est encore au statut <strong>{{ jeu.statut.libelle }}</strong>.

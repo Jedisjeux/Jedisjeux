@@ -133,8 +133,7 @@ class PersonneContext extends DefaultContext
 
         /** @var Personne $personne */
         $personne = $this->findOneBy("personne", array("prenom" => $prenom, "nom" => $nom));
-        $this->assertSession()->addressEquals("/ludographie/".$personne->getId()."/".$personne->getSlug());
-        $this->assertStatusCodeEquals(200);
+        $this->assertSession()->addressEquals($this->baseUrl."/ludographie/".$personne->getId()."/".$personne->getSlug());
     }
 
     /**

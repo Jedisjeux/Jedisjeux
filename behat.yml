@@ -20,6 +20,7 @@ default:
                 - JDJ\JeuBundle\Behat\MechanismContext
                 - JDJ\JeuBundle\Behat\ThemeContext
                 - JDJ\LudographieBundle\Behat\PersonneContext
+                - JDJ\UserBundle\Behat\UserContext
             filters:
                 tags: "@jeu && ~@javascript"
 

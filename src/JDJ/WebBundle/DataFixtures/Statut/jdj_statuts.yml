@@ -1,15 +1,20 @@
 -
   id: 1
-  libelle: "validé"
+  code: "published"
+  libelle: "publié"
 -
   id: 2
+  code: "need_a_traduction"
   libelle: "à traduire"
 -
   id: 3
+  code: "ready"
   libelle: "prêt à valider"
 -
   id: 4
+  code: "uncomplete"
   libelle: "à compléter"
 -
   id: 5
+  code: "need_a_read"
   libelle: "à relire"

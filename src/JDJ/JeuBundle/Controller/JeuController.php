@@ -206,7 +206,7 @@ class JeuController extends Controller
     {
         $entity = new Jeu();
 
-        $statut = $this->getDoctrine()->getRepository('JDJWebBundle:Statut')->find(Statut::INCOMPLETE);
+        $statut = $this->getDoctrine()->getRepository('JDJWebBundle:Statut')->findOneBy(array('code' => Statut::INCOMPLETE));
 
         $entity->setStatut($statut);
         $form = $this->createCreateForm($entity);

@@ -12,7 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Statut
 {
-    const INCOMPLETE = 4;
+    const PUBLISHED = 'published';
+
+    const INCOMPLETE = 'incomplete';
+
+    const NEED_A_READ = 'need_a_read';
 
     /**
      * @ORM\Id
@@ -20,6 +24,11 @@ class Statut
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=false)
+     */
+    private $code;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=false)
@@ -49,6 +58,25 @@ class Statut
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param mixed $code
+     * @return $this
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
     }
 
     /**

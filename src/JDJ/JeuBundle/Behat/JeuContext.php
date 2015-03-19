@@ -25,7 +25,7 @@ class JeuContext extends DefaultContext
     public function thereAreGames(TableNode $table){
         $manager = $this->getEntityManager();
 
-        $statutValide = $this->findOneBy("statut", array("libelle" => 'validé'));
+        $published = $this->findOneBy("statut", array("code" => Statut::PUBLISHED));
 
         foreach ($table->getHash() as $data) {
 
@@ -33,7 +33,7 @@ class JeuContext extends DefaultContext
             if (isset($data['statut'])) {
                 $statut = $this->findOneBy("statut", array("libelle" => $data['statut']));
             } else {
-                $statut = $statutValide;
+                $statut = $published;
             }
 
             $jeu = new Jeu();
@@ -59,7 +59,36 @@ class JeuContext extends DefaultContext
         /** @var Jeu $jeu */
         $jeu = $this->findOneBy("jeu", array("libelle" => $jeuLibelle));
         $this->getSession()->visit($this->baseUrl.'/jeu/'.$jeu->getId().'/'.$jeu->getSlug());
-        //file_put_contents(__DIR__.'/../../../../web/behat/'.$jeu->getSlug().'.html', $this->getSession()->getPage()->getContent());
+    }
+
+    /**
+     * @Then /I am on edition page of the game "([^"]*)"$/
+     */
+    public function iAmOnEditionPageOfTheGame($jeuLibelle)
+    {
+        /** @var Jeu $jeu */
+        $jeu = $this->findOneBy("jeu", array("libelle" => $jeuLibelle));
+        $this->getSession()->visit($this->baseUrl.'/jeu/'.$jeu->getId().'/edit');
+    }
+
+    /**
+     * @Then /I should be on game "([^"]*)"$/
+     */
+    public function iShouldBeOnGame($jeuLibelle)
+    {
+        /** @var Jeu $jeu */
+        $jeu = $this->findOneBy("jeu", array("libelle" => $jeuLibelle));
+        $this->assertSession()->addressEquals($this->baseUrl.'/jeu/'.$jeu->getId().'/'.$jeu->getSlug());
+    }
+
+    /**
+     * @Then /I should be on edition page of the game "([^"]*)"$/
+     */
+    public function iShouldBeOnEditionPageOfTheGame($jeuLibelle)
+    {
+        /** @var Jeu $jeu */
+        $jeu = $this->findOneBy("jeu", array("libelle" => $jeuLibelle));
+        $this->assertSession()->addressEquals($this->baseUrl.'/jeu/'.$jeu->getId().'/edit');
     }
 
     /**
@@ -68,6 +97,5 @@ class JeuContext extends DefaultContext
     public function iAmOnGameList()
     {
         $this->getSession()->visit("/jeu");
-        //file_put_contents(__DIR__.'/../../../../web/behat/game-list.html', $this->getSession()->getPage()->getContent());
     }
 } 

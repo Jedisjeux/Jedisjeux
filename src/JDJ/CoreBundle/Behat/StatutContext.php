@@ -21,15 +21,17 @@ class StatutContext extends DefaultContext
         $manager = $this->getEntityManager();
 
         $statuts = array(
-            'validé',
-            'à relire',
+            Statut::PUBLISHED => 'publié',
+            Statut::INCOMPLETE => 'à compléter',
+            Statut::NEED_A_READ => 'à relire',
         );
 
-        foreach($statuts as $statutLibelle) {
+        foreach($statuts as $code => $libelle) {
             /** @var Statut $statut */
             $statut = new Statut();
             $statut
-                ->setLibelle(trim($statutLibelle))
+                ->setCode($code)
+                ->setLibelle(trim($libelle))
             ;
 
             $manager->persist($statut);
