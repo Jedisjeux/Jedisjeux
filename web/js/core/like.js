@@ -15,6 +15,11 @@ $(function() {
             .done(function (response) {
 
                 $(that)
+                    .siblings()
+                    .removeClass('btn-yellow')
+                    .addClass('btn-default');
+
+                $(that)
                     .removeClass('btn-default')
                     .addClass('btn-yellow');
 
