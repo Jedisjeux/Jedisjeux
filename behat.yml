@@ -35,6 +35,21 @@ default:
             filters:
                 tags: "@gameList && ~@javascript"
 
+        like:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\CoreBundle\Behat\StatutContext
+                - JDJ\CoreBundle\Behat\UtilsContext
+                - JDJ\JeuBundle\Behat\JeuContext
+                - JDJ\JeuBundle\Behat\MechanismContext
+                - JDJ\JeuBundle\Behat\ThemeContext
+                - JDJ\LudographieBundle\Behat\PersonneContext
+                - JDJ\UserBundle\Behat\UserContext
+                - JDJ\UserReviewBundle\Behat\NoteContext
+                - JDJ\UserReviewBundle\Behat\UserReviewContext
+            filters:
+                tags: "@like"
+
         ludographie:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
