@@ -37,12 +37,6 @@
 
 <div>
     {% if app.security.getToken().getUser() != userReview.jeuNote.author %}
-        <h4>Avez-vous trouvé cet avis utile ?</h4>
-        <div class="btn-group" role="group" aria-label="...">
-            <button type="button" class="btn btn-default likeUserReviewButton likeIt"
-                    data-user-review="{{ userReview.id }}"><span class="fa fa-thumbs-o-up"></span></button>
-            <button type="button" class="btn btn-default likeUserReviewButton unlikeIt"
-                    data-user-review="{{ userReview.id }}"><span class="fa fa-thumbs-o-down"></span></button>
-        </div>
+        {% render url('user_review_like', { 'id': userReview.id }) %}
     {% endif %}
 </div>

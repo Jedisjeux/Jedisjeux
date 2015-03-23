@@ -1,0 +1,13 @@
+{{ form_start(form) }}
+
+{{ form_widget(form.userReview, { 'id': '',  'attr': { 'class' : 'userReview' }} )}}
+{{ form_widget(form.like, { 'id': '',  'attr': { 'class' : 'like' }} )}}
+{{ form_widget(form._token, { 'id': ''} )}}
+
+<div class="btn-group" role="group" aria-label="...">
+    <button type="button"
+            class="btn {% if like.id and true == like.isLike %}btn-yellow{% else %}btn-default{% endif %} likeButton likeIt"><span class="fa fa-thumbs-o-up"></span></button>
+    <button type="button" class="btn {% if like.id and false == like.isLike %}btn-yellow{% else %}btn-default{% endif %} likeButton unlikeIt"><span class="fa fa-thumbs-o-down"></span></button>
+</div>
+
+{{ form_end(form) }}

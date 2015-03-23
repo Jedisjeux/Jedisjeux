@@ -10,6 +10,7 @@ namespace JDJ\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JDJ\UserReviewBundle\Entity\UserReview;
 
 
 /**
@@ -17,7 +18,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @package JDJ\CoreBundle\Entity
  *
  * @ORM\Entity
- * @ORM\Table(name="jdj_like")
+ * @ORM\Table(name="jdj_like",uniqueConstraints={@ORM\UniqueConstraint(name="unique_like", columns={"createdBy_id", "userReview_id"})})
  */
 class Like
 {
@@ -54,7 +55,7 @@ class Like
     private $createdAt;
 
     /**
-     * @var
+     * @var UserReview
      *
      * @ORM\ManyToOne(targetEntity="JDJ\UserReviewBundle\Entity\UserReview", inversedBy="likes")
      */
@@ -84,7 +85,7 @@ class Like
      */
     public function isLike()
     {
-        return $this->like;
+        return (bool) $this->like;
     }
 
     /**
@@ -137,7 +138,7 @@ class Like
     }
 
     /**
-     * @return mixed
+     * @return UserReview
      */
     public function getUserReview()
     {
@@ -145,7 +146,7 @@ class Like
     }
 
     /**
-     * @param mixed $userReview
+     * @param UserReview $userReview
      * @return $this
      */
     public function setUserReview($userReview)

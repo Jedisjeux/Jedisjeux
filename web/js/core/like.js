@@ -1,17 +1,18 @@
 $(function() {
 
-    $('.likeUserReviewButton').click(function() {
+    $('.likeButton').click(function() {
         var that = this;
-        var userReview = $(that).attr('data-user-review');
+        var $form = $(this).closest('form');
+        var userReview = $('.userReview', $form).val();
 
         var like = 0;
         if ($(this).hasClass('likeIt')) {
             like = 1;
         }
 
-        $.post(Routing.generate('user_review_like', {'id': userReview}), {
-            'like': like
-        })
+        $('.like', $form).val(like);
+
+        $.post($form.attr('action'), $form.serialize())
             .done(function (response) {
 
                 $(that)
@@ -29,7 +30,7 @@ $(function() {
                     }
                 });
 
-                $('.nbUnLikes').each(function() {
+                $('.nbUnlikes').each(function() {
                     if (userReview === $(this).attr('data-user-review')) {
                         $(this).html(response.nbUnlikes);
                     }

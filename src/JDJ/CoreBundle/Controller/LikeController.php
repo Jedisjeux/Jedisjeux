@@ -30,31 +30,71 @@ class LikeController extends Controller
      * @Route("/user-review/{id}/like", name="user_review_like", options={"expose"=true})
      * @ParamConverter("userReview", class="JDJUserReviewBundle:UserReview")
      *
+     * @param UserReview $userReview
      * @param Request $request
-     * @param $userReview
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function likeUserReviewAction(Request $request, UserReview $userReview)
+    public function likeUserReviewAction(UserReview $userReview, Request $request)
     {
         if ($this->getUser() === $userReview->getJeuNote()->getAuthor()) {
             throw new Exception("utilisateur identique à la critique");
         }
 
-        $em = $this->getDoctrine()->getManager();
-        $like = $this->getLike('userReview', $userReview, $request);
+        $like = $this->findLike('userReview', $userReview);
 
-        $like
-            ->setUserReview($userReview);
+        $isNew = false;
+        if (null === $like) {
+            $like = new Like();
+            $like
+                ->setUserReview($userReview)
+                ->setCreatedBy($this->getUser());
+            $isNew = true;
+        }
 
-        $em->flush();
+        $form = $this->createLikeForm($like, $this->generateUrl('user_review_like', array(
+            'id' => $userReview->getId()
+        )));
 
-        return new JsonResponse(array(
-            'nbLikes' => $userReview->getNbLikes(),
-            'nbUnLikes' => $userReview->getNbUnlikes(),
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            if ($isNew) {
+                $em->persist($like);
+            }
+            $em->flush();
+
+            return new JsonResponse(array(
+                'nbLikes' => $userReview->getNbLikes(),
+                'nbUnlikes' => $userReview->getNbUnlikes(),
+            ));
+        }
+
+        return $this->render('like/user-review.html.twig', array(
+            'form' => $form->createView(),
+            'like' => $like,
         ));
     }
 
-    private function getLike($entityName, $entity, Request $request)
+    /**
+     * Creates a form to create or update a Like entity.
+     *
+     * @param Like $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createLikeForm(Like $entity, $action)
+    {
+        $form = $this->createForm(new LikeType(), $entity, array(
+            'action' => $action,
+            'method' => 'POST',
+        ));
+
+        return $form;
+    }
+
+
+    private function findLike($entityName, $entity)
     {
         $like = $this
             ->getDoctrine()
@@ -64,17 +104,7 @@ class LikeController extends Controller
                 $entityName => $entity,
             ));
 
-        if (null === $like) {
-            $like = new Like();
-            $like
-                ->setCreatedBy($this->getUser());
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($like);
-        }
-
-        $like->setLike((bool) $request->request->get('like'));
-
         return $like;
     }
+
 }
