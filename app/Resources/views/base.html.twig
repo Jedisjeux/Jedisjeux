@@ -156,10 +156,9 @@
         'js/*/*'
         '@JDJJeuBundle/Resources/public/js/jeu/*' %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
         <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-
-        {% endjavascripts %}
     {% endblock foot_script_assetic %}
 
 </body>
