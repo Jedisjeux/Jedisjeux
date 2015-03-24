@@ -126,6 +126,19 @@ class PartieImage
         return $this;
     }
 
+    public function upload()
+    {
+        $this->getImage()->setNewFilename($this->getNewFilename());
+        $this->getImage()->upload();
+    }
 
+    public function getNewFilename()
+    {
+        if (null === $this->getImage()->getFile()) {
+            return null;
+        }
+
+        return $this->getPartie()->getJeu()->getSlug().'-'.uniqid().'.'.$this->getImage()->getFile()->getClientOriginalExtension();
+    }
 
 } 
