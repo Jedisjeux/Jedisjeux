@@ -21,6 +21,7 @@ default:
                 - JDJ\JeuBundle\Behat\ThemeContext
                 - JDJ\LudographieBundle\Behat\PersonneContext
                 - JDJ\UserBundle\Behat\UserContext
+                - JDJ\CoreBundle\Behat\UtilsContext
             filters:
                 tags: "@jeu && ~@javascript"
 
@@ -72,6 +73,13 @@ default:
             filters:
               tags: "@userAdmin && ~@javascript"
 
+        collection:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\CollectionBundle\Behat\CollectionContext
+                - JDJ\UserBundle\Behat\UserContext
+            filters:
+              tags: "@collection && ~@javascript"
 
         partie:
             contexts:

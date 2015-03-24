@@ -6,20 +6,20 @@ Feature: Admin User account system (account administration)
 
   Background:
     Given there are following users:
-      | username  | email                            | password  | enabled | deletedAt |
-      | sbienvenu | sebbath.bloody.sebbath@gmail.com | sbienvenu | yes     | NULL |
-      | lfremont | lfremont@gmail.com | lfremont | yes | NULL |
-    And user "sbienvenu" has following roles:
+      | username | email | password | enabled | deletedAt |
+      | user1 | user1@gmail.com | user1 | yes | NULL |
+      | user2 | user2@gmail.com | user2 | yes | NULL |
+    And user "user1" has following roles:
       | ROLE_ADMIN |
-    And user "lfremont" has following roles:
+    And user "user2" has following roles:
       | ROLE_USER |
 
   Scenario: To connect to the user list with good infos
     Given I am on "/"
     And I am on "/admin/user-list"
     When I fill in the following:
-      | Nom d'utilisateur | sbienvenu |
-      | Mot de passe      | sbienvenu |
+      | Nom d'utilisateur | user1 |
+      | Mot de passe | user1 |
     And I press "Connexion"
     Then I should be on "/admin/user-list"
     And I should see "Liste des utilisateurs"
@@ -28,11 +28,11 @@ Feature: Admin User account system (account administration)
     Given I am on "/"
     And I am on "/admin/user-list"
     When I fill in the following:
-      | Nom d'utilisateur | lfremont |
-      | Mot de passe      | lfremont |
+      | Nom d'utilisateur | user2 |
+      | Mot de passe | user2 |
     And I press "Connexion"
     Then I should be on "/admin/user-list"
-    And I should see "Access Denied"
+    And I should see "403 forbidden"
 
 
   Scenario: To go to the user Creation

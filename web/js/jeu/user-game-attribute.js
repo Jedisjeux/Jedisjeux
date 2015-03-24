@@ -66,6 +66,7 @@ $(document).ready(function () {
      */
     function modifyDisplay(classElement)
     {
+        notifySucces(classElement);
         if ($(classElement).hasClass("btn-default")) {
             $(classElement).addClass("btn-yellow");
             $(classElement).removeClass("btn-default");
@@ -73,6 +74,7 @@ $(document).ready(function () {
             $(classElement).addClass("btn-default");
             $(classElement).removeClass("btn-yellow");
         }
+
     }
 
 
@@ -93,11 +95,63 @@ $(document).ready(function () {
         })
             .done(function () {
                 response = true;
+
             })
             .fail(function () {
                 alert("An error occured. Please try again later.");
             });
         return response;
+    }
+
+    /**
+     * This function displays a success notification
+     *
+     * @param attribute
+     */
+    function notifySucces(attribute)
+    {
+        var message = "";
+
+        switch(attribute) {
+            case ".owned":
+                if ($(attribute).hasClass("btn-default")) {
+                    message = "Le Jeu a été ajouté à votre ludothèque.";
+                } else {
+                    message = "Le Jeu a été supprimé de votre ludothèque.";
+                }
+                break;
+            case ".wanted":
+                if ($(attribute).hasClass("btn-default")) {
+                    message = "Le Jeu a été ajouté à votre liste d'envie.";
+                } else {
+                    message = "Le Jeu a été supprimé de votre liste d'envie.";
+                }
+                break;
+            case ".played":
+                if ($(attribute).hasClass("btn-default")) {
+                    message = "Le Jeu a été ajouté à la liste de jeu auxquels vous avez joué.";
+                } else {
+                    message = "Le Jeu a été supprimé de la liste de jeu auxquels vous avez joué.";
+                }
+                break;
+            case ".favorite":
+                if ($(attribute).hasClass("btn-default")) {
+                    message = "Le Jeu a été ajouté à vos coup de coeur.";
+                } else {
+                    message = "Le Jeu a été supprimé de vos coup de coeur.";
+                }
+                break;
+        }
+        $('#notify-jeu')
+            .removeClass('alert-error')
+            .addClass('alert-success')
+            .show()
+            .delay(5000)
+            .fadeOut();
+
+        $('#message-jeu').html(message);
+        $('html, body').animate({ scrollTop: 0 }, 'fast');
+
     }
 
 

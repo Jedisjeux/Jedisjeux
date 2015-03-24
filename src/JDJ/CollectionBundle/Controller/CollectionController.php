@@ -4,6 +4,7 @@ namespace JDJ\CollectionBundle\Controller;
 
 use Doctrine\Common\Util\Debug;
 use JDJ\CollectionBundle\Service\CollectionService;
+use JDJ\CollectionBundle\Service\UserGameAttributeService;
 use JDJ\JeuBundle\Entity\Jeu;
 use JDJ\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -194,6 +195,51 @@ class CollectionController extends Controller
 
 
     /**
+     * returns the user lists
+     *
+     * @Route("/mes-listes", name="my_collections", options={"expose"=true})
+     */
+    public function userListPageAction(Request $request)
+    {
+
+        if($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY') ) {
+
+            $user= $this->get('security.context')->getToken()->getUser();
+            $tabCollection = $this
+                ->getCollectionService()
+                ->getUserCollection($user);
+
+            /** gets the user usergameattribute */
+            $tabFavorite = $this
+                ->getUserGameAttributeService()
+                ->getFavorites($user);
+            $tabOwned = $this
+                ->getUserGameAttributeService()
+                ->getOwned($user);
+            $tabPlayed = $this
+                ->getUserGameAttributeService()
+                ->getPlayed($user);
+            $tabWanted = $this
+                ->getUserGameAttributeService()
+                ->getWanted($user);
+
+        } else {
+            $request->getSession()->getFlashBag()->add('error', 'Vous devez être connecté.');
+            return $this->redirect($this->generateUrl('jdj_web_homepage'));
+        }
+
+        return $this->render('collection/index.html.twig', array(
+            'entities' => $tabCollection,
+            'tabFavorite' => $tabFavorite,
+            'tabOwned' => $tabOwned,
+            'tabPlayed' => $tabPlayed,
+            'tabWanted' => $tabWanted,
+        ));
+
+    }
+
+
+    /**
      * Displays a form to edit an existing Collection entity.
      *
      * @Route("/{id}/edit", name="collection_edit")
@@ -343,5 +389,13 @@ class CollectionController extends Controller
     private function getCollectionService()
     {
         return $this->container->get('app.service.collection');
+    }
+
+    /**
+     * @return UserGameAttributeService
+     */
+    private function getUserGameAttributeService()
+    {
+        return $this->container->get('app.service.user.game.attribute');
     }
 }
