@@ -340,6 +340,29 @@ class CollectionController extends Controller
     }
 
 
+    /**
+     * Finds and displays a Collection page
+     *
+     * @Route("/{id}/list", name="my-list")
+     */
+    public function collectionPageAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('JDJCollectionBundle:Collection')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Collection entity.');
+        }
+
+        $deleteForm = $this->createDeleteForm($id);
+
+        return $this->render('JDJCollectionBundle:Collection:show.html.twig', array(
+            'entity' => $entity,
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+
 
 
     /**

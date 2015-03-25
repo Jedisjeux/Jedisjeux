@@ -280,11 +280,6 @@ class UserGameAttributeService
      */
     public function getFavorites(User $user)
     {
-
-        if (!$user) {
-            throw $this->createNotFoundException('Unable to find Game or User entity.');
-        }
-
         $tabUserGameAttribute = $this->repo->findFavorites($user);
 
         return $tabUserGameAttribute;
@@ -298,11 +293,6 @@ class UserGameAttributeService
      */
     public function getOwned(User $user)
     {
-
-        if (!$user) {
-            throw $this->createNotFoundException('Unable to find Game or User entity.');
-        }
-
         $tabUserGameAttribute = $this->repo->findOwned($user);
 
         return $tabUserGameAttribute;
@@ -316,11 +306,6 @@ class UserGameAttributeService
      */
     public function getWanted(User $user)
     {
-
-        if (!$user) {
-            throw $this->createNotFoundException('Unable to find Game or User entity.');
-        }
-
         $tabUserGameAttribute = $this->repo->findWanted($user);
 
         return $tabUserGameAttribute;
@@ -334,11 +319,6 @@ class UserGameAttributeService
      */
     public function getPlayed(User $user)
     {
-
-        if (!$user) {
-            throw $this->createNotFoundException('Unable to find Game or User entity.');
-        }
-
         $tabUserGameAttribute = $this->repo->findPlayed($user);
 
         return $tabUserGameAttribute;
