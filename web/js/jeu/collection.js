@@ -38,7 +38,17 @@ $(document).ready(function () {
     $("#add-game-collection").click(function (e) {
         e.preventDefault();
 
-        addGameCollection($(this).data('jeu-id'), $("#input-existing-collection").val());
+        if(Array.isArray($("#input-existing-collection").val()))
+        {
+            var jeuId = $(this).data('jeu-id');
+            $.each($("#input-existing-collection").val(), function( index, value ) {
+                addGameCollection(jeuId, value);
+            });
+        }
+        $('#collection-modal').modal('hide');
+        initializeForms();
+        notifySucces("Le jeu a été rajoutée à mes listes.");
+
 
     });
 
@@ -64,10 +74,20 @@ $(document).ready(function () {
             .done(function () {
                 response = true;
 
-                notifySucces("La liste a été créé.");
                 $('#collection-modal').modal('hide');
+                notifySucces("La liste a été créé.");
+                /** if no list yet reload page */
+                if ($('#add-in-list').length == 0) {
+
+                    window.location
+                        .reload()
+                        .delay(3000)
+                        .fadeOut();
+                }
+
                 reloadUserLists(userId);
                 initializeForms();
+
 
             })
             .fail(function () {
@@ -95,10 +115,6 @@ $(document).ready(function () {
         })
             .done(function () {
                 response = true;
-
-                notifySucces("Le jeu a été rajoutée à la liste.");
-                $('#collection-modal').modal('hide');
-                initializeForms();
             })
             .fail(function () {
                 notifyError("Une erreur s'est produite. Merci de réessayer plus tard.");
@@ -151,6 +167,13 @@ $(document).ready(function () {
      */
     function initializeForms(){
         /** initialize */
+
+        $('#input-existing-collection').multipleSelect({
+            filter: true,
+            isOpen: true,
+            keepOpen: true
+        });
+
         $("#radio-existing-list").prop("checked", true)
         $("#add-in-list").show();
         if ($('#add-in-list').length > 0) {

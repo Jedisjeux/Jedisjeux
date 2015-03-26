@@ -21,17 +21,18 @@
 
 
                         <div id="add-in-list">
-                            <h2>Ajouter dans une de mes listes :</h2>
                             <form class="form-horizontal">
                                 <div class="form-group">
                                     <label for="input-list-name" class="col-sm-2 control-label">Nom de ma liste</label>
 
-                                    <div class="col-sm-10">
-                                        <select id="input-existing-collection">
+                                    <div class="col-sm-10" >
+
+                                        <select style="width:300px" id="input-existing-collection" multiple="multiple" >
                                             {% for collection in collectionList %}
                                                 <option value="{{ collection.id }}">{{ collection.name }}</option>
                                             {% endfor %}
                                         </select>
+
                                     </div>
                                 </div>
 
@@ -58,7 +59,6 @@
                     {% endif %}
 
                     <div id="create-list">
-                        <h2>Ajouter dans une nouvelle liste :</h2>
 
                         <form class="form-horizontal">
                             <div id="form-group-name-list" class="form-group">
