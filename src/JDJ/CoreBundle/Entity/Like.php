@@ -17,7 +17,7 @@ use JDJ\UserReviewBundle\Entity\UserReview;
  * Class Like
  * @package JDJ\CoreBundle\Entity
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="JDJ\CoreBundle\Repository\LikeRepository")
  * @ORM\Table(name="jdj_like",uniqueConstraints={@ORM\UniqueConstraint(name="unique_like", columns={"createdBy_id", "userReview_id"})})
  */
 class Like

@@ -11,6 +11,7 @@ namespace JDJ\CoreBundle\Controller;
 
 use JDJ\CoreBundle\Entity\Like;
 use JDJ\CoreBundle\Form\LikeType;
+use JDJ\CoreBundle\Repository\LikeRepository;
 use JDJ\UserReviewBundle\Entity\UserReview;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -27,6 +28,16 @@ use Symfony\Component\HttpFoundation\Request;
 class LikeController extends Controller
 {
     /**
+     * @return LikeRepository
+     */
+    private function getLikeRepository()
+    {
+        return $this->getDoctrine()->getRepository('JDJCoreBundle:Like');
+    }
+
+    /**
+     * Like or Dislike a User Review
+     *
      * @Route("/user-review/{id}/like", name="user_review_like", options={"expose"=true})
      * @ParamConverter("userReview", class="JDJUserReviewBundle:UserReview")
      *
@@ -34,13 +45,19 @@ class LikeController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function likeUserReviewAction(UserReview $userReview, Request $request)
+    public function likeOrDislikeUserReviewAction(UserReview $userReview, Request $request)
     {
         if ($this->getUser() === $userReview->getJeuNote()->getAuthor()) {
             throw new Exception("utilisateur identique à la critique");
         }
 
-        $like = $this->findLike('userReview', $userReview);
+        $like = null;
+
+        if ($this->getUser()) {
+            $like = $this
+                ->getLikeRepository()
+                ->findUserLikeOnEntity($this->getUser(), 'userReview', $userReview);
+        }
 
         $isNew = false;
         if (null === $like) {
@@ -66,7 +83,7 @@ class LikeController extends Controller
 
             return new JsonResponse(array(
                 'nbLikes' => $userReview->getNbLikes(),
-                'nbUnlikes' => $userReview->getNbUnlikes(),
+                'nbDislikes' => $userReview->getNbDislikes(),
             ));
         }
 
@@ -91,20 +108,6 @@ class LikeController extends Controller
         ));
 
         return $form;
-    }
-
-
-    private function findLike($entityName, $entity)
-    {
-        $like = $this
-            ->getDoctrine()
-            ->getRepository('JDJCoreBundle:Like')
-            ->findOneBy(array(
-                'createdBy' => $this->getUser(),
-                $entityName => $entity,
-            ));
-
-        return $like;
     }
 
 }

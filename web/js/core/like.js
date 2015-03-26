@@ -1,12 +1,12 @@
 $(function() {
 
     $('.likeButton').click(function() {
-        var that = this;
-        var $form = $(this).closest('form');
+        var $likeButton = $(this);
+        var $form = $likeButton.closest('form');
         var userReview = $('.userReview', $form).val();
 
         var like = 0;
-        if ($(this).hasClass('likeIt')) {
+        if ($likeButton.hasClass('likeIt')) {
             like = 1;
         }
 
@@ -15,26 +15,17 @@ $(function() {
         $.post($form.attr('action'), $form.serialize())
             .done(function (response) {
 
-                $(that)
+                $likeButton
                     .siblings()
                     .removeClass('btn-yellow')
                     .addClass('btn-default');
 
-                $(that)
+                $likeButton
                     .removeClass('btn-default')
                     .addClass('btn-yellow');
 
-                $('.nbLikes').each(function() {
-                    if (userReview === $(this).attr('data-user-review')) {
-                        $(this).html(response.nbLikes);
-                    }
-                });
-
-                $('.nbUnlikes').each(function() {
-                    if (userReview === $(this).attr('data-user-review')) {
-                        $(this).html(response.nbUnlikes);
-                    }
-                });
+                $('.nbLikes[data-user-review=' + userReview + ']').html(response.nbLikes);
+                $('.nbDislikes[data-user-review=' + userReview + ']').html(response.nbDislikes);
             });
     });
 });

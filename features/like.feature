@@ -30,7 +30,7 @@ Feature: Gestion des likes
     And I press "J'aime"
     And I wait until loading has finished
     Then I should see "1" in the ".nbLikes" element
-    And I should see "0" in the ".nbUnlikes" element
+    And I should see "0" in the ".nbDislikes" element
 
   Scenario: Noter une critique comme étant inutile
     Given game "Puerto Rico" has following user reviews:
@@ -45,5 +45,23 @@ Feature: Gestion des likes
     When I follow "Critiques"
     And I press "Je n'aime pas"
     And I wait until loading has finished
-    Then I should see "1" in the ".nbUnlikes" element
+    Then I should see "1" in the ".nbDislikes" element
     And I should see "0" in the ".nbLikes" element
+
+  Scenario: Passer de inutile à utile une critique
+    Given game "Puerto Rico" has following user reviews:
+      | username | note | libelle         | body                           |
+      | blue     | 10   | un jeu de merde | c'est vraiment un jeu de merde |
+    And I am on "/login"
+    And I fill in the following:
+      | Nom d'utilisateur | toto |
+      | Mot de passe      | toto |
+    And I press "Connexion"
+    And I am on game "Puerto Rico"
+    And I follow "Critiques"
+    And I press "Je n'aime pas"
+    And I wait until loading has finished
+    When I press "J'aime"
+    And I wait until loading has finished
+    Then I should see "0" in the ".nbDislikes" element
+    And I should see "1" in the ".nbLikes" element

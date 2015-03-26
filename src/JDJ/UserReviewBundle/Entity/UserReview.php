@@ -233,7 +233,7 @@ class UserReview
         return $nb;
     }
 
-    public function getNbUnlikes()
+    public function getNbDislikes()
     {
         $nb = 0;
         /** @var Like $like */
