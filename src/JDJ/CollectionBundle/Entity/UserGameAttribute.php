@@ -15,6 +15,12 @@ use Doctrine\ORM\Mapping as ORM;
 class UserGameAttribute
 {
 
+    const FAVORITE = "favorite";
+    const OWNED = "owned";
+    const PLAYED = "played";
+    const WANTED = "wanted";
+
+
     /**
      * @var integer
      *

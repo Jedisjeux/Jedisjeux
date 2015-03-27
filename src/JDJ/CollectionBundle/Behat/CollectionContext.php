@@ -7,7 +7,9 @@ namespace JDJ\CollectionBundle\Behat;
 use Behat\Gherkin\Node\TableNode;
 use Doctrine\Common\Util\Debug;
 use JDJ\CollectionBundle\Entity\Collection;
+use JDJ\CollectionBundle\Entity\ListElement;
 use JDJ\CoreBundle\Behat\DefaultContext;
+use JDJ\WebBundle\Entity\Statut;
 
 class CollectionContext extends DefaultContext
 {
@@ -34,6 +36,35 @@ class CollectionContext extends DefaultContext
         }
 
         $manager->flush();
+    }
+
+    /**
+     * @Given /^collection "([^""]*)" has following games:$/
+     */
+    public function collectionHasFollowingGames($collectionLibelle, TableNode $gameTable)
+    {
+        $manager = $this->getEntityManager();
+
+        /** @var Collection $collection */
+        $collection = $this->findOneBy("collection", array("name" => $collectionLibelle));
+
+        foreach ($gameTable->getRows() as $node) {
+
+            $gameLibelle = $node[0];
+
+            $jeu = $this->findOneBy("jeu", array("libelle" => $gameLibelle));
+
+            $listElement = new ListElement();
+            $listElement->setCollection($collection);
+            $listElement->setJeu($jeu);
+
+            /** persist */
+            $manager->persist($listElement);
+            $manager->flush();
+
+        }
+
+
     }
 
 }

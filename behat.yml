@@ -78,6 +78,9 @@ default:
                 - Behat\MinkExtension\Context\MinkContext
                 - JDJ\CollectionBundle\Behat\CollectionContext
                 - JDJ\UserBundle\Behat\UserContext
+                - JDJ\CoreBundle\Behat\UtilsContext
+                - JDJ\CoreBundle\Behat\StatutContext
+                - JDJ\JeuBundle\Behat\JeuContext
             filters:
               tags: "@collection && ~@javascript"
 

@@ -254,6 +254,9 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
             case 'modeReglement':
                 $repositoryName = "JDJComptaBundle:ModeReglement";
                 break;
+            case 'collection':
+                $repositoryName = "JDJCollectionBundle:Collection";
+                break;
             case 'pays':
                 $repositoryName = "JDJWebBundle:Pays";
                 break;

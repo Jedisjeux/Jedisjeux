@@ -3,6 +3,7 @@
 namespace JDJ\CollectionBundle\Controller;
 
 use Doctrine\Common\Util\Debug;
+use JDJ\CollectionBundle\Entity\UserGameAttribute;
 use JDJ\CollectionBundle\Service\CollectionService;
 use JDJ\CollectionBundle\Service\UserGameAttributeService;
 use JDJ\JeuBundle\Entity\Jeu;
@@ -385,25 +386,25 @@ class CollectionController extends Controller
 
             switch ($type)
             {
-                case "favorite":
+                case UserGameAttribute::FAVORITE:
                     $userGameAttributes = $this
                         ->getUserGameAttributeService()
                         ->getFavorites($user);
-                    $title = "Mes coup de coeur";
+                    $title = "Mes coups de coeur";
                     break;
-                case "owned":
+                case UserGameAttribute::OWNED:
                     $userGameAttributes = $this
                         ->getUserGameAttributeService()
                         ->getOwned($user);
                     $title = "Ma ludothèque";
                     break;
-                case "played":
+                case UserGameAttribute::PLAYED:
                     $userGameAttributes = $this
                         ->getUserGameAttributeService()
                         ->getPlayed($user);
                     $title = "J'y ai joué";
                     break;
-                case "wanted":
+                case UserGameAttribute::WANTED:
                     $userGameAttributes = $this
                         ->getUserGameAttributeService()
                         ->getWanted($user);
