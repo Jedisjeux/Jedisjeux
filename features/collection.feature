@@ -34,4 +34,4 @@ Feature: Affichage de la fiche de jeu
     And I am on "/collection/mes-listes"
     Then I should see "Mes listes"
     And I should see "une top liste"
-    And I should not see "ma super liste"
+    But I should not see "ma super liste"

@@ -13,28 +13,28 @@
             {% set key = 0 %}
             {# bloc favorite #}
             {% if tabFavorite %}
-                {% include "collection/partial/userGameAttribute.html.twig" with {'tabUserGameAttribute': tabFavorite, 'title': "Mes coups de coeur", 'color': "red"} only %}
+                {% include "collection/partial/userGameAttribute.html.twig" with {'tabUserGameAttribute': tabFavorite, 'title': "Mes coups de coeur", 'color': "red", 'type': "favorite"} only %}
                 {% set key = key +1 %}
             {% endif %}
             {# end bloc favorite#}
 
             {# bloc owned #}
             {% if tabOwned %}
-                {% include "collection/partial/userGameAttribute.html.twig" with {'tabUserGameAttribute': tabOwned, 'title': "Ma ludothèque", 'color': "blue"} only %}
+                {% include "collection/partial/userGameAttribute.html.twig" with {'tabUserGameAttribute': tabOwned, 'title': "Ma ludothèque", 'color': "blue", 'type': "owned"} only %}
                 {% set key = key +1 %}
             {% endif %}
             {# end bloc owned#}
 
             {# bloc wanted #}
             {% if tabWanted %}
-                {% include "collection/partial/userGameAttribute.html.twig" with {'tabUserGameAttribute': tabWanted, 'title': "Mes souhaits", 'color': "green"} only %}
+                {% include "collection/partial/userGameAttribute.html.twig" with {'tabUserGameAttribute': tabWanted, 'title': "Mes souhaits", 'color': "green", 'type': "wanted"} only %}
                 {% set key = key +1 %}
             {% endif %}
             {# end bloc wanted#}
 
             {# bloc played #}
             {% if tabPlayed %}
-                {% include "collection/partial/userGameAttribute.html.twig" with {'tabUserGameAttribute': tabPlayed, 'title': "J'y ai joué", 'color': "yellow"} only %}
+                {% include "collection/partial/userGameAttribute.html.twig" with {'tabUserGameAttribute': tabPlayed, 'title': "J'y ai joué", 'color': "yellow", 'type': "played"} only %}
                 {% set key = key +1 %}
             {% endif %}
             {# end bloc played#}

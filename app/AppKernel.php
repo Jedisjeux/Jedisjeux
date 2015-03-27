@@ -48,6 +48,7 @@ class AppKernel extends Kernel
             new JDJ\CoreBundle\JDJCoreBundle(),
             new JDJ\SearchBundle\JDJSearchBundle(),
             new JDJ\CollectionBundle\JDJCollectionBundle(),
+            new Acme\TestBundle\AcmeTestBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

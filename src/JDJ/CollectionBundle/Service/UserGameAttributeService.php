@@ -258,7 +258,7 @@ class UserGameAttributeService
      *
      * @param Jeu $jeu
      * @param User $user
-     * @return mixed
+     * @return array
      */
     public function getUserGameAttribute(Jeu $jeu, User $user)
     {
@@ -276,7 +276,7 @@ class UserGameAttributeService
      * This function get the user favorites
      *
      * @param User $user
-     * @return mixed
+     * @return array
      */
     public function getFavorites(User $user)
     {
@@ -289,7 +289,7 @@ class UserGameAttributeService
      * This function get the user owned
      *
      * @param User $user
-     * @return mixed
+     * @return array
      */
     public function getOwned(User $user)
     {
@@ -302,7 +302,7 @@ class UserGameAttributeService
      * This function get the user wanted
      *
      * @param User $user
-     * @return mixed
+     * @return array
      */
     public function getWanted(User $user)
     {
@@ -315,7 +315,7 @@ class UserGameAttributeService
      * This function get the user played
      *
      * @param User $user
-     * @return mixed
+     * @return array
      */
     public function getPlayed(User $user)
     {
