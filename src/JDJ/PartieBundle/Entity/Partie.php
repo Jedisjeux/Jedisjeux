@@ -55,12 +55,11 @@ class Partie
     private $users;
 
     /**
-     * @var string
+     * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="JDJ\CoreBundle\Entity\Image", cascade={"persist"})
-     * @ORM\JoinTable(name="jdj_partie_image")
+     * @ORM\OneToMany(targetEntity="PartieImage", cascade={"persist"}, mappedBy="partie")
      */
-    private $images;
+    private $partieImages;
 
     /**
      * @var \DateTime
@@ -94,6 +93,7 @@ class Partie
     {
         $this->joueurs = new ArrayCollection();
         $this->users = new ArrayCollection();
+        $this->partieImages = new ArrayCollection();
     }
 
     /**
@@ -220,25 +220,23 @@ class Partie
     }
 
     /**
-     * @return string
+     * @return ArrayCollection
      */
-    public function getImages()
+    public function getPartieImages()
     {
-        return $this->images;
+        return $this->partieImages;
     }
 
     /**
-     * @param string $images
+     * @param ArrayCollection $partieImages
      * @return $this
      */
-    public function setImages($images)
+    public function setPartieImages($partieImages)
     {
-        $this->images = $images;
+        $this->partieImages = $partieImages;
 
         return $this;
     }
-
-
 
     /**
      * Set createdAt

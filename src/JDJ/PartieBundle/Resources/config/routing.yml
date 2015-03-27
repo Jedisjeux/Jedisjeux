@@ -9,3 +9,7 @@ jdj_partie:
 jdj_partie_joueur:
     resource: "@JDJPartieBundle/Resources/config/routing/joueur.yml"
     prefix:   /
+
+jdj_partie_image:
+    resource: "@JDJPartieBundle/Controller/PartieImageController.php"
+    type:     annotation

@@ -64,8 +64,8 @@ EOM;
     private function addImages()
     {
         $query = <<<EOM
-insert into jdj_partie_image (partie_id, image_id)
-select      distinct ie.elem_id, old.img_id
+insert into jdj_partie_image (partie_id, image_id, description)
+select      distinct ie.elem_id, old.img_id, ie.legende
 from        jedisjeux.jdj_images old
 inner join  jedisjeux.jdj_images_elements ie
                 on ie.img_id = old.img_id
