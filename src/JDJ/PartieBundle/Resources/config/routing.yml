@@ -3,8 +3,8 @@ jdj_partie_homepage:
     defaults: { _controller: JDJPartieBundle:Default:index }
 
 jdj_partie:
-    resource: "@JDJPartieBundle/Resources/config/routing/partie.yml"
-    prefix:   /
+    resource: "@JDJPartieBundle/Controller/PartieController.php"
+    type:   annotation
 
 jdj_partie_joueur:
     resource: "@JDJPartieBundle/Resources/config/routing/joueur.yml"

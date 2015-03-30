@@ -63,6 +63,7 @@
                     <li><a href="{{ path('fos_user_profile_show') }}">Mon compte</a></li>
                     <li><a href="{{ path('my_collections') }}">Mes listes</a></li>
                     <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+                    <li><a href="{{ path('user_partie', {'user': user.id, 'slug': user.slug}) }}">Mes parties</a></li>
                 </ul>
             {% endif %}
         </div>

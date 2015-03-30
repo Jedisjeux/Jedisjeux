@@ -1,5 +1,62 @@
 {% extends "base.html.twig" %}
+{% from 'JDJWebBundle:Macros:misc.html.twig' import pagination %}
 
 {% block body -%}
+
+    <div class="block-heading-two">
+        <h3><span>Les parties</span></h3>
+    </div>
+
+    <div class="jeu-list">
+        <div class="row">
+
+            {% for key, partie in entities %}
+            {% set url = path('partie_show', {'id': partie.id, 'slug': partie.jeu.slug}) %}
+            {% if key != 0 and key%4 == 0 %}
+        </div>
+
+        <div class="row">
+
+            {% endif %}
+
+            <div class="col-md-3 col-sm-6">
+                <!-- Magazine item one starts -->
+                <div class="magazine-item mag-1">
+                    <!-- Image -->
+                    <div class="img-container">
+                        {% if partie.partieImages | length > 0 %}
+                            {% set imagePath = partie.partieImages[0].image.webPath %}
+                        {% else %}
+                            {% set imagePath = partie.jeu.imageCouverture.webPath %}
+                        {% endif %}
+                        <a href="{{ url }}"><img src="{{ imagePath | imagine_filter('default') }}" alt=""
+                                                 class="img-responsive"></a>
+                    </div>
+                    <!-- Heading -->
+                    <h4><a href="{{ url }}">{{ partie.jeu.libelle }}</a></h4>
+                    <!-- Meta -->
+                    <div class="magazine-meta"><i class="fa fa-calendar"></i> {{ partie.playedAt | date('d/m/Y') }} - <i
+                                class="fa fa-comments"></i> 5 Comments
+                    </div>
+                    <!-- Para -->
+                    <p>Nemo enim ipsam voluptatem ipsum quia dolor sit amet consectetur. </p>
+                </div>
+                <!-- Magazine item one ends -->
+            </div>
+
+            {% endfor %}
+
+        </div>
+    </div>
+
+
+
+    {% block Pagination %}
+        <div class="pagination-wrapper">
+            <div class="pagination-bottom">
+                {{ pagination(entities) }}
+            </div>
+        </div>
+    {% endblock %}
 
 {% endblock %}
