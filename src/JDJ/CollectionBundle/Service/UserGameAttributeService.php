@@ -258,7 +258,7 @@ class UserGameAttributeService
      *
      * @param Jeu $jeu
      * @param User $user
-     * @return mixed
+     * @return array
      */
     public function getUserGameAttribute(Jeu $jeu, User $user)
     {
@@ -271,5 +271,59 @@ class UserGameAttributeService
 
         return $userGameAttribute;
     }
+
+    /**
+     * This function get the user favorites
+     *
+     * @param User $user
+     * @return array
+     */
+    public function getFavorites(User $user)
+    {
+        $tabUserGameAttribute = $this->repo->findFavorites($user);
+
+        return $tabUserGameAttribute;
+    }
+
+    /**
+     * This function get the user owned
+     *
+     * @param User $user
+     * @return array
+     */
+    public function getOwned(User $user)
+    {
+        $tabUserGameAttribute = $this->repo->findOwned($user);
+
+        return $tabUserGameAttribute;
+    }
+
+    /**
+     * This function get the user wanted
+     *
+     * @param User $user
+     * @return array
+     */
+    public function getWanted(User $user)
+    {
+        $tabUserGameAttribute = $this->repo->findWanted($user);
+
+        return $tabUserGameAttribute;
+    }
+
+    /**
+     * This function get the user played
+     *
+     * @param User $user
+     * @return array
+     */
+    public function getPlayed(User $user)
+    {
+        $tabUserGameAttribute = $this->repo->findPlayed($user);
+
+        return $tabUserGameAttribute;
+    }
+
+
 
 }

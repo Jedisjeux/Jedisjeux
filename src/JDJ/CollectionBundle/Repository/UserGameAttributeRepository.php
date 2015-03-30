@@ -1,7 +1,7 @@
 <?php
 namespace JDJ\CollectionBundle\Repository;
 use Doctrine\Common\Util\Debug;
-use Doctrine\ORM\EntityRepository;
+use JDJ\CoreBundle\Entity\EntityRepository;
 use JDJ\JeuBundle\Entity\Jeu;
 use JDJ\UserBundle\Entity\User;
 
@@ -19,7 +19,8 @@ class UserGameAttributeRepository extends EntityRepository
      *
      * @param Jeu $game
      * @param User $user
-     * @return null
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function findOneUserGameAttribute(Jeu $game, User $user)
     {
@@ -34,5 +35,82 @@ class UserGameAttributeRepository extends EntityRepository
         return $result;
 
     }
+
+    /**
+     * This function returns the favorites
+     *
+     * @param User $user
+     * @return array
+     */
+    public function findFavorites(User $user)
+    {
+        $queryBuilder = $this->createQueryBuilder('u')
+            ->andWhere('u.user = :user')
+            ->andWhere('u.favorite = 1')
+            ->setParameter('user', $user);
+
+        $result = $queryBuilder->getQuery()->getResult();
+
+        return $result;
+
+    }
+
+    /**
+     * This function returns the wanted
+     *
+     * @param User $user
+     * @return array
+     */
+    public function findWanted(User $user)
+    {
+        $queryBuilder = $this->createQueryBuilder('u')
+            ->andWhere('u.user = :user')
+            ->andWhere('u.wanted = 1')
+            ->setParameter('user', $user);
+
+        $result = $queryBuilder->getQuery()->getResult();
+
+        return $result;
+
+    }
+
+    /**
+     * This function returns the owned
+     *
+     * @param User $user
+     * @return array
+     */
+    public function findOwned(User $user)
+    {
+        $queryBuilder = $this->createQueryBuilder('u')
+            ->andWhere('u.user = :user')
+            ->andWhere('u.owned = 1')
+            ->setParameter('user', $user);
+
+        $result = $queryBuilder->getQuery()->getResult();
+
+        return $result;
+
+    }
+
+    /**
+     * This function returns the played
+     *
+     * @param User $user
+     * @return array
+     */
+    public function findPlayed(User $user)
+    {
+        $queryBuilder = $this->createQueryBuilder('u')
+            ->andWhere('u.user = :user')
+            ->andWhere('u.played = 1')
+            ->setParameter('user', $user);
+
+        $result = $queryBuilder->getQuery()->getResult();
+
+        return $result;
+
+    }
+
 
 }

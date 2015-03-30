@@ -104,4 +104,3 @@ Feature: Affichage de la fiche de jeu
     And I press "Modifier"
     Then I should see "Jojo Lapin"
 
-

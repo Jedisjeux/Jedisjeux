@@ -3,7 +3,9 @@
 namespace JDJ\CollectionBundle\Controller;
 
 use Doctrine\Common\Util\Debug;
+use JDJ\CollectionBundle\Entity\UserGameAttribute;
 use JDJ\CollectionBundle\Service\CollectionService;
+use JDJ\CollectionBundle\Service\UserGameAttributeService;
 use JDJ\JeuBundle\Entity\Jeu;
 use JDJ\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -60,9 +62,8 @@ class CollectionController extends Controller
          * Checks if the user is connected
          */
         $collectionList = null;
-        if($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY'))
-        {
-            $user= $this->get('security.context')->getToken()->getUser();
+        if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $user = $this->get('security.context')->getToken()->getUser();
 
             /**
              * Get the Collection list from the connected user
@@ -86,10 +87,10 @@ class CollectionController extends Controller
      * @ParamConverter("user", class="JDJUserBundle:User")
      * @Method({"POST"})
      */
-    public function createAction(Jeu $jeu,User $user)
+    public function createAction(Jeu $jeu, User $user)
     {
 
-        if($jeu && $user && ($_POST['name'] !== "")) {
+        if ($jeu && $user && ($_POST['name'] !== "")) {
             //create the collection
             $collection = $this
                 ->getCollectionService()
@@ -133,7 +134,7 @@ class CollectionController extends Controller
     {
 
         //add the game to the collection
-        if($jeu && $collection) {
+        if ($jeu && $collection) {
             $collection = $this
                 ->getCollectionService()
                 ->addGameCollection($jeu, $collection);
@@ -168,7 +169,7 @@ class CollectionController extends Controller
     {
 
         //add the game to the collection
-        if($user ) {
+        if ($user) {
             $tabCollection = $this
                 ->getCollectionService()
                 ->getUserCollection($user);
@@ -188,6 +189,51 @@ class CollectionController extends Controller
         return new JsonResponse(array(
             "status" => Response::HTTP_OK,
             "tabCollection" => $jsonCollection,
+        ));
+
+    }
+
+
+    /**
+     * returns the user lists
+     *
+     * @Route("/mes-listes", name="my_collections", options={"expose"=true})
+     */
+    public function userListPageAction(Request $request)
+    {
+
+        if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+
+            $user = $this->get('security.context')->getToken()->getUser();
+            $tabCollection = $this
+                ->getCollectionService()
+                ->getUserCollection($user);
+
+            /** gets the user usergameattribute */
+            $tabFavorite = $this
+                ->getUserGameAttributeService()
+                ->getFavorites($user);
+            $tabOwned = $this
+                ->getUserGameAttributeService()
+                ->getOwned($user);
+            $tabPlayed = $this
+                ->getUserGameAttributeService()
+                ->getPlayed($user);
+            $tabWanted = $this
+                ->getUserGameAttributeService()
+                ->getWanted($user);
+
+        } else {
+            $request->getSession()->getFlashBag()->add('error', 'Vous devez être connecté.');
+            return $this->redirect($this->generateUrl('jdj_web_homepage'));
+        }
+
+        return $this->render('collection/index.html.twig', array(
+            'entities' => $tabCollection,
+            'tabFavorite' => $tabFavorite,
+            'tabOwned' => $tabOwned,
+            'tabPlayed' => $tabPlayed,
+            'tabWanted' => $tabWanted,
         ));
 
     }
@@ -270,9 +316,8 @@ class CollectionController extends Controller
     }
 
 
-
     /**
-     * Finds and displays a Collection entity.
+     * Finds and displays a Collection entity for administration.
      *
      * @Route("/{id}/show", name="collection_show")
      */
@@ -293,6 +338,103 @@ class CollectionController extends Controller
         ));
     }
 
+
+    /**
+     * Finds and displays a Collection page
+     *
+     * @Route("/{id}/list", name="my-list")
+     */
+    public function collectionPageAction($id, Request $request)
+    {
+        if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $em = $this->getDoctrine()->getManager();
+            $collection = $em->getRepository('JDJCollectionBundle:Collection')->find($id);
+
+            if (!$collection) {
+                throw $this->createNotFoundException('La liste n\'existe pas.');
+                return $this->redirect($this->generateUrl('jdj_web_homepage'));
+            }
+        } else {
+            $request->getSession()->getFlashBag()->add('error', 'Vous devez être connecté.');
+            return $this->redirect($this->generateUrl('jdj_web_homepage'));
+        }
+
+
+        /** @var JeuRepository $jeuReposititory */
+        $listeElementRepository = $em->getRepository('JDJCollectionBundle:ListElement');
+        /** @var Pagerfanta $jeux */
+        $listElements = $listeElementRepository->createPaginator(array('collection' => $collection));
+        $listElements->setMaxPerPage(10);
+        $listElements->setCurrentPage($request->get('page', 1));
+
+        return $this->render('collection/show.html.twig', array(
+            'collection' => $collection,
+            'listElements' => $listElements,
+        ));
+    }
+
+    /**
+     * Finds and displays a Collection page
+     *
+     * @Route("/{type}/game-list", name="my-list-usergameattribute")
+     */
+    public function userGameAttributeCollectionPageAction($type, Request $request)
+    {
+        if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+
+            $user = $this->get('security.context')->getToken()->getUser();
+
+            switch ($type)
+            {
+                case UserGameAttribute::FAVORITE:
+                    $userGameAttributes = $this
+                        ->getUserGameAttributeService()
+                        ->getFavorites($user);
+                    $title = "Mes coups de coeur";
+                    break;
+                case UserGameAttribute::OWNED:
+                    $userGameAttributes = $this
+                        ->getUserGameAttributeService()
+                        ->getOwned($user);
+                    $title = "Ma ludothèque";
+                    break;
+                case UserGameAttribute::PLAYED:
+                    $userGameAttributes = $this
+                        ->getUserGameAttributeService()
+                        ->getPlayed($user);
+                    $title = "J'y ai joué";
+                    break;
+                case UserGameAttribute::WANTED:
+                    $userGameAttributes = $this
+                        ->getUserGameAttributeService()
+                        ->getWanted($user);
+                    $title = "Mes souhaits";
+                    break;
+            }
+
+            if (!$userGameAttributes) {
+                throw $this->createNotFoundException('La liste n\'existe pas.');
+                return $this->redirect($this->generateUrl('jdj_web_homepage'));
+            }
+        } else {
+            $request->getSession()->getFlashBag()->add('error', 'Vous devez être connecté.');
+            return $this->redirect($this->generateUrl('jdj_web_homepage'));
+        }
+
+
+        /** @var UserGameAttributeRepository $UserGameAttributeReposititory */
+        $em = $this->getDoctrine()->getManager();
+        $userGameAttributeRepository = $em->getRepository('JDJCollectionBundle:UserGameAttribute');
+        /** @var Pagerfanta $jeux */
+        $userGameAttributes = $userGameAttributeRepository->createPaginator(array('userGameAttribute' => $userGameAttributes));
+        $userGameAttributes->setMaxPerPage(10);
+        $userGameAttributes->setCurrentPage($request->get('page', 1));
+
+        return $this->render('collection/show-usergameattribute.html.twig', array(
+            'title' => $title,
+            'userGameAttributes' => $userGameAttributes,
+        ));
+    }
 
 
 
@@ -343,5 +485,13 @@ class CollectionController extends Controller
     private function getCollectionService()
     {
         return $this->container->get('app.service.collection');
+    }
+
+    /**
+     * @return UserGameAttributeService
+     */
+    private function getUserGameAttributeService()
+    {
+        return $this->container->get('app.service.user.game.attribute');
     }
 }

@@ -5,7 +5,7 @@
     <br/>
 
     <div class="btn-group" role="group">
-        <button type="button" data-toggle="tooltip" data-placement="top" title="Ajouter à ma ludothèque"
+        <button type="button" data-toggle="tooltip" data-placement="top" title="Ajouter à ma ludothèque" name="Ajouter à ma ludothèque"
                 class="b-tooltip btn {% if userGameAttribute %}
                                                 {% if userGameAttribute.isOwned %}
                                                     btn-yellow
@@ -20,7 +20,7 @@
                                                             {% endif %}"><span
                     class="fa fa-user"></span>
         </button>
-        <button type="button" data-toggle="tooltip" data-placement="top" title="Ajouter à mes envies"
+        <button type="button" data-toggle="tooltip" data-placement="top" title="Ajouter à mes envies" name="Ajouter à mes envies"
                 class="b-tooltip btn {% if userGameAttribute %}
                                                 {% if userGameAttribute.isWanted %}
                                                     btn-yellow
@@ -34,7 +34,7 @@
                                                                 {{ app.user.id }}
                                                             {% endif %}"><span
                     class="fa fa-bookmark"></span></button>
-        <button type="button" data-toggle="tooltip" data-placement="top" title="j'y ai joué"
+        <button type="button" data-toggle="tooltip" data-placement="top" title="j'y ai joué" name="j'y ai joué"
                 class="b-tooltip btn {% if userGameAttribute %}
                                                 {% if userGameAttribute.hasPlayed %}
                                                     btn-yellow
@@ -48,7 +48,7 @@
                                                                 {{ app.user.id }}
                                                             {% endif %}"><span
                     class="fa fa-play"></span></button>
-        <button type="button" data-toggle="tooltip" data-placement="top" title="Coup de coeur"
+        <button type="button" data-toggle="tooltip" data-placement="top" title="Coup de coeur" name="Coup de coeur"
                 class="b-tooltip btn {% if userGameAttribute %}
                                                 {% if userGameAttribute.isFavorite %}
                                                     btn-yellow
@@ -67,7 +67,7 @@
                     class="fa fa-pencil"></span></button>
         <a href="#collection-modal" class="b-tooltip btn btn-default btn-sm collection btn-lg"
            data-toggle="modal" type="button" data-toggle="tooltip" data-placement="top"
-           title="Ajouter à une liste"
+           title="Ajouter à une liste" name="Ajouter à une liste"
            class="b-tooltip btn btn-default btn-sm collection" data-jeu-id="{{ jeu.id }}"
            data-toggle="modal"><span
                     class="fa fa-list"></span></a>

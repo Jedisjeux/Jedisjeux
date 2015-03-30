@@ -1,0 +1,23 @@
+{% set size = tabUserGameAttribute | length %}
+{% set listJeu = "" %}
+
+{% for index, userGameAttribute in tabUserGameAttribute %}
+    {% if index == 0 %}
+        {% set listJeu = userGameAttribute.jeu.libelle %}
+    {% else %}
+        {% set listJeu = listJeu  ~ ", " ~ userGameAttribute.jeu.libelle %}
+    {% endif %}
+{% endfor %}
+<div class="col-md-3 col-sm-6">
+    <!-- Image Box #3 Item -->
+    <div class="img-box-3-item">
+        <div class="bg-{{ color }} img-collection-container" >
+            <a href="{{ path('my-list-usergameattribute' , {'type': type} )  }}">
+                <img class="img-collection" src="{{ tabUserGameAttribute[size-1].jeu.imageCouverture.webPath | imagine_filter('default') }}" alt="" class="'fa-picture-o'">
+            </a>
+        </div>
+        <h4><a href="{{ path('my-list-usergameattribute' , {'type': type} )  }}">{{ title }}</a></h4>
+        <div class="bor bg-{{ color }}"></div>
+        <p>{{ listJeu|length > 50 ? listJeu|slice(0, 50) ~ '...' : listJeu  }}</p>
+    </div>
+</div>

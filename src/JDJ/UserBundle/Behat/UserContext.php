@@ -23,7 +23,6 @@ class UserContext extends DefaultContext
      * @Given /^il y a les utilisateurs suivants:$/
      */
     public function thereAreUsers(TableNode $table){
-        $manager = $this->getEntityManager();
 
         foreach ($table->getHash() as $data) {
 
@@ -32,7 +31,6 @@ class UserContext extends DefaultContext
 
             /** @var User $user */
             $user = $userManager->createUser();
-            file_put_contents(__DIR__.'/../../../../web/behat/user-list.html', "1");
             $user
                 ->setUsername($data['username'])
                 ->setNom(isset($data['nom']) ? $data['nom'] : null)
@@ -42,11 +40,9 @@ class UserContext extends DefaultContext
                 ->setEnabled(("yes" === $data['enabled']) ? 1 : 0)
 
             ;
-            file_put_contents(__DIR__.'/../../../../web/behat/user-list.html', "2");
 
             $userManager->updateUser($user);
         }
-        file_put_contents(__DIR__.'/../../../../web/behat/user-list.html', "3");
     }
 
 
@@ -71,8 +67,6 @@ class UserContext extends DefaultContext
         $manager->persist($user);
         $manager->flush();
     }
-
-
 
 
 } 

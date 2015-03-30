@@ -1,0 +1,20 @@
+
+.img-collection-container{
+  width: 110px;
+  height: 110px;
+  line-height: 106px;
+  border-radius: 100px;
+  text-align: center;
+  margin: 10px auto;
+}
+
+.img-collection{
+  border-radius: 100px; position: relative;
+  width: 92px;
+  height: 92px;
+  overflow: hidden;
+}
+
+#input-existing-collection{
+  width: 300px;
+}
