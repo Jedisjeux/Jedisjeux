@@ -16,6 +16,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use JDJ\UserReviewBundle\Entity\UserReviewRepository;
 use Pagerfanta\Pagerfanta;
 
+/**
+ * Class UserReviewController
+ * @package JDJ\UserReviewBundle\Controller
+ */
 class UserReviewController extends Controller
 {
     /**

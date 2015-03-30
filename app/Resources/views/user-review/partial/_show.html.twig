@@ -7,7 +7,8 @@
     <!-- Author -->
     <a href="#">
         {% if (userReview.jeuNote.author.avatar) %}
-            <img src="{{ userReview.jeuNote.author.avatar.webPath | imagine_filter('default') }}" alt="" class="img-responsive">&nbsp;
+            <img src="{{ userReview.jeuNote.author.avatar.webPath | imagine_filter('default') }}" alt=""
+                 class="img-responsive">&nbsp;
         {% endif %}
         {{ userReview.jeuNote.author.username }}</a> &nbsp;
 
@@ -20,11 +21,13 @@
     </span>&nbsp;
 
     <!-- Date -->
-    <a href="#"><i class="fa fa-calendar"></i> &nbsp; {{ userReview.createdAt | date('d/m/Y')  }}</a> &nbsp;
+    <a href="#"><i class="fa fa-calendar"></i> &nbsp; {{ userReview.createdAt | date('d/m/Y') }}</a> &nbsp;
 
     <!-- useless ? -->
-    <a href="#"><i class="fa fa-thumbs-up"></i> 6</a> &nbsp;
-    <a href="#"><i class="fa fa-thumbs-down"></i> 1</a> &nbsp;
+    <a href="#"><i class="fa fa-thumbs-up"></i> <span data-user-review="{{ userReview.id }}"
+                                                      class="nbLikes">{{ userReview.nbLikes }}</span></a> &nbsp;
+    <a href="#"><i class="fa fa-thumbs-down"></i> <span data-user-review="{{ userReview.id }}"
+                                                        class="nbDislikes">{{ userReview.nbDislikes }}</span></a> &nbsp;
 
 
 </div>
@@ -33,9 +36,7 @@
 {{ userReview.body | raw }}
 
 <div>
-<h4>Avez-vous trouvé cet avis utile ?</h4>
-    <div class="btn-group" role="group" aria-label="...">
-        <button type="button" class="btn btn-default"><span class="fa fa-thumbs-o-up"></span></button>
-        <button type="button" class="btn btn-default"><span class="fa fa-thumbs-o-down"></span></button>
-    </div>
+    {% if app.security.getToken().getUser() != userReview.jeuNote.author %}
+        {% render url('user_review_like', { 'id': userReview.id }) %}
+    {% endif %}
 </div>

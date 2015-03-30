@@ -1,3 +1,7 @@
 jdj_core_cible:
     resource: "@JDJCoreBundle/Resources/config/routing/cible.yml"
     prefix:   /cible
+
+jdj_core_like:
+    resource: "@JDJCoreBundle/Controller/LikeController.php"
+    type:     annotation
