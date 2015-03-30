@@ -1,6 +1,6 @@
 <?php
 namespace JDJ\CollectionBundle\Repository;
-use Doctrine\ORM\EntityRepository;
+use JDJ\CoreBundle\Entity\EntityRepository;
 
 /**
  * BlogRepository

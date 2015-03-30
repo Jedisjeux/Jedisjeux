@@ -12,11 +12,11 @@
                 <div class="modal-body">
                     {% if collectionList %}
                         <div class="add-collection-choice">
-                            <label><input id="radio-existing-list" type="radio" name="choose-list" checked="checked"> dans une de mes
+                            <label><input id="radio-existing-list" type="radio" name="choose-list" title="dans une de mes listes" checked="checked"> dans une de mes
                                 listes</label>
                         </div>
                         <div class="add-collection-choice">
-                            <label><input id="radio-new-list" type="radio" name="choose-list"> dans une nouvelle liste</label>
+                            <label><input id="radio-new-list" type="radio" name="choose-list" title="dans une nouvelle liste"> dans une nouvelle liste</label>
                         </div>
 
 
@@ -27,7 +27,7 @@
 
                                     <div class="col-sm-10" >
 
-                                        <select style="width:300px" id="input-existing-collection" multiple="multiple" >
+                                        <select id="input-existing-collection" multiple="multiple" >
                                             {% for collection in collectionList %}
                                                 <option value="{{ collection.id }}">{{ collection.name }}</option>
                                             {% endfor %}

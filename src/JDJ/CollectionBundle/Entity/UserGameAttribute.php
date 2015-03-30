@@ -14,6 +14,22 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class UserGameAttribute
 {
+
+    const FAVORITE = "favorite";
+    const OWNED = "owned";
+    const PLAYED = "played";
+    const WANTED = "wanted";
+
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
     /**
      * @var boolean
      *
@@ -47,7 +63,6 @@ class UserGameAttribute
      *
      * @ORM\ManyToOne(targetEntity="JDJ\UserBundle\Entity\User", inversedBy="userGameAttributes")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     * @ORM\Id
      */
     private $user;
 
@@ -56,10 +71,24 @@ class UserGameAttribute
      *
      * @ORM\ManyToOne(targetEntity="JDJ\JeuBundle\Entity\Jeu", inversedBy="userGameAttributes")
      * @ORM\JoinColumn(name="jeu_id", referencedColumnName="id")
-     * @ORM\Id
      */
     private $jeu;
 
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
     /**
      * Set user
