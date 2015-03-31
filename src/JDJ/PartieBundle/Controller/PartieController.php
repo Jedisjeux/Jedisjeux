@@ -13,22 +13,39 @@ use JDJ\JeuBundle\Entity\Jeu;
 use JDJ\PartieBundle\Entity\Joueur;
 use JDJ\PartieBundle\Entity\Partie;
 use JDJ\PartieBundle\Form\PartieType;
+use JDJ\PartieBundle\Repository\PartieRepository;
+use JDJ\UserBundle\Entity\User;
+use Pagerfanta\Pagerfanta;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class PartieController
+ * @package JDJ\PartieBundle\Controller
+ */
 class PartieController extends Controller
 {
-
     /**
      * Lists all Partie entities.
      *
+     * @Route("/partie", name="partie")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
+        /** @var PartieRepository $partieReposititory */
         $partieReposititory = $em->getRepository('JDJPartieBundle:Partie');
-        $entities = $partieReposititory->findAll();
+
+        /** @var Pagerfanta $entities */
+        $entities = $partieReposititory->createPaginator(null, array('createdAt' => 'desc'));
+        $entities
+            ->setCurrentPage($request->get('page', 1))
+            ->setMaxPerPage(16);
 
         $deleteForms = array();
         foreach ($entities as $entity) {
@@ -42,15 +59,52 @@ class PartieController extends Controller
     }
 
     /**
+     * Lists all Partie entities.
+     *
+     * @Route("/partie/user/{user}/{slug}", name="user_partie")
+     *
+     * @ParamConverter("entity", class="JDJUserBundle:User", name="user")
+     *
+     * @param Request $request
+     * @param User $user
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function userIndexAction(Request $request, User $user)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        /** @var PartieRepository $partieReposititory */
+        $partieReposititory = $em->getRepository('JDJPartieBundle:Partie');
+
+        /** @var Pagerfanta $entities */
+        $entities = $partieReposititory->findByUser($user);
+        $entities
+            ->setCurrentPage($request->get('page', 1))
+            ->setMaxPerPage(16);
+
+        $deleteForms = array();
+        /** @var Partie $entity */
+        foreach ($entities as $entity) {
+            $deleteForms[$entity->getId()] = $this->createDeleteForm($entity->getId())->createView();
+        }
+
+        return $this->render('partie/index.html.twig', array(
+            'entities' => $entities,
+            'deleteForms' => $deleteForms,
+        ));
+    }
+
+    /**
      * Displays a form to create a new Partie entity.
      *
+     * @Route("/jeu/{idJeu}/partie/new", name="partie_new")
      */
     public function newAction($idJeu)
     {
         $jeu = $this->findJeu($idJeu);
 
         $entity = new Partie();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         /**
          * Pre populate data
@@ -60,12 +114,17 @@ class PartieController extends Controller
 
         return $this->render('partie/new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
     /**
      * Creates a new Partie entity.
+     *
+     * @Route("/partie/create", name="partie_create")
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function createAction(Request $request)
     {
@@ -105,7 +164,7 @@ class PartieController extends Controller
 
         return $this->render('partie/edit.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -131,56 +190,54 @@ class PartieController extends Controller
     /**
      * Finds and displays a Partie entity.
      *
+     * @Route("/partie/{id}/jeu/{slug}", name="partie_show")
+     *
+     * @ParamConverter("entity", class="JDJPartieBundle:Partie")
+     *
+     * @param Partie $entity
+     * @param $slug
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function showAction($id, $slug)
+    public function showAction(Partie $entity, $slug)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        /** @var Partie $entity */
-        $entity = $em->getRepository('JDJPartieBundle:Partie')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Partie entity.');
-        }
-
         /**
          * Redirect the slug is incorrect
          */
         if ($slug !== $entity->getJeu()->getSlug()) {
             return $this->redirect($this->generateUrl('partie_show', array(
-                        'id' => $id,
+                        'id' => $entity->getId(),
                         'slug' => $entity->getJeu()->getSlug(),
                     )
                 )
             );
         }
 
-        $deleteForm = $this->createDeleteForm($id);
+        $deleteForm = $this->createDeleteForm($entity->getId());
 
         return $this->render('partie/show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        ));
+            'entity' => $entity,
+            'delete_form' => $deleteForm->createView(),
+        ));
     }
 
     /**
      * Displays a form to edit an existing Partie entity.
      *
+     * @Route("/partie/{id}/edit", name="partie_edit")
+     *
+     * @ParamConverter("entity", class="JDJPartieBundle:Partie")
+     *
+     * @param Partie $entity
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function editAction($id)
+    public function editAction(Partie $entity)
     {
-        $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('JDJPartieBundle:Partie')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Partie entity.');
-        }
-
         $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
+        $deleteForm = $this->createDeleteForm($entity->getId());
 
         return $this->render('partie/edit.html.twig', array(
-            'entity'      => $entity,
-            'form'   => $editForm->createView(),
+            'entity' => $entity,
+            'form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -188,17 +245,18 @@ class PartieController extends Controller
     /**
      * Edits an existing Partie entity.
      *
+     * @Route("/partie/{id}/update", name="partie_update")
+     *
+     * @ParamConverter("entity", class="JDJPartieBundle:Partie")
+     *
+     * @param Request $request
+     * @param Partie $entity
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction(Request $request, Partie $entity)
     {
-
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('JDJPartieBundle:Partie')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Partie entity.');
-        }
-        $deleteForm = $this->createDeleteForm($id);
+        $deleteForm = $this->createDeleteForm($entity->getId());
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
@@ -213,8 +271,8 @@ class PartieController extends Controller
         }
 
         return $this->render('partie/edit.html.twig', array(
-            'entity'      => $entity,
-            'form'   => $editForm->createView(),
+            'entity' => $entity,
+            'form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -222,19 +280,18 @@ class PartieController extends Controller
     /**
      * Deletes a Partie entity.
      *
+     * @Route("/partie/{id}/delete", name="partie_delete")
+     *
+     * @ParamConverter("entity", class="JDJPartieBundle:Partie")
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction(Request $request, Partie $entity)
     {
-        $form = $this->createDeleteForm($id);
+        $form = $this->createDeleteForm($entity->getId());
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('JDJPartieBundle:Partie')->find($id);
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find partie entity.');
-            }
             $request->getSession()->getFlashBag()->add('success', 'La partie a été supprimée');
 
             $em->remove($entity);
@@ -257,8 +314,7 @@ class PartieController extends Controller
             ->setAction($this->generateUrl('partie_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Supprimer'))
-            ->getForm()
-            ;
+            ->getForm();
     }
 
     /**

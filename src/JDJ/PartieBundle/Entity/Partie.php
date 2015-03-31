@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * Partie
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="JDJ\PartieBundle\Repository\PartieRepository")
  * @ORM\Table(name="jdj_partie")
  */
 class Partie
@@ -35,6 +35,8 @@ class Partie
      *
      * @ORM\ManyToOne(targetEntity="JDJ\UserBundle\Entity\User", inversedBy="asAuthorParties")
      * @ORM\JoinColumn(nullable=false)
+     *
+     * TODO rename by createdBy
      */
     private $author;
 
