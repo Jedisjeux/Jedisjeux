@@ -13,7 +13,7 @@ $(document).ready(function () {
             .delay(5000)
             .fadeOut();
 
-        $('#message-jeu').html(message);
+        $('.message-notify', '#notify').html(message);
         $('html, body').animate({ scrollTop: 0 }, 'fast');
 
 
@@ -26,14 +26,14 @@ $(document).ready(function () {
      * @param message
      */
     window.notifyError = function(message) {
-        $('#notify')
+        $('.message-notify')
             .removeClass('alert-success')
             .addClass('alert-danger')
             .show()
             .delay(5000)
             .fadeOut();
 
-        $('#message-jeu').html(message);
+        $('.message-notify', '#notify').html(message);
         $('html, body').animate({ scrollTop: 0 }, 'fast');
     }
 });
