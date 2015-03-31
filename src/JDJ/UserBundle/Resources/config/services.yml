@@ -19,3 +19,5 @@ services:
 
   authentication_handler:
         class: JDJ\UserBundle\Service\AuthenticationHandler
+        arguments:
+          - @router

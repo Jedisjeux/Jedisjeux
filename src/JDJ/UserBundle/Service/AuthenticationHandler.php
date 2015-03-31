@@ -1,5 +1,6 @@
 <?php
 namespace JDJ\UserBundle\Service;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -11,6 +12,18 @@ use Symfony\Component\Routing\RouterInterface;
 
 class AuthenticationHandler  implements AuthenticationFailureHandlerInterface, AuthenticationSuccessHandlerInterface
 {
+    /**
+     * @var
+     */
+    private $router;
+
+    /**
+     * Constructeur
+     */
+    public function __construct(RouterInterface $router)
+    {
+        $this->router = $router;
+    }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
@@ -23,7 +36,8 @@ class AuthenticationHandler  implements AuthenticationFailureHandlerInterface, A
             $response->headers->set('Content-Type', 'application/json');
             return $response;
         }
-        return parent::onAuthenticationSuccess($request, $token);
+        return new RedirectResponse($this->router->generate('jdj_web_homepage'));
+
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
