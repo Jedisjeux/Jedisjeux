@@ -2,16 +2,29 @@
 
 namespace JDJ\UserBundle\Controller;
 
+use FOS\UserBundle\Form\Type\RegistrationFormType;
 use JDJ\UserBundle\Repository\UserRepository;
 use Symfony\Bundle\AsseticBundle\Tests\Command\DumpCommandTest;
+use Symfony\Component\Debug\Debug;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use JDJ\UserBundle\Entity\User;
 use JDJ\UserBundle\Form\UserType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 /**
- * User controller.
+ * Class UserController
+ *
+ * @package JDJ\UserBundle\Controller
  *
  */
 class UserController extends Controller
@@ -20,6 +33,7 @@ class UserController extends Controller
     /**
      * Lists all User entities.
      *
+     * @Route("/admin/user-list", name="jdj_user_list")
      */
     public function indexAction(Request $request)
     {
@@ -45,6 +59,8 @@ class UserController extends Controller
     /**
      * Creates a new User entity.
      *
+     * @Route("/create", name="espace_personnel_create")
+     * @Method({"POST"})
      */
     public function createAction(Request $request)
     {
@@ -89,6 +105,7 @@ class UserController extends Controller
     /**
      * Displays a form to create a new User entity.
      *
+     * @Route("/new", name="espace_personnel_new")
      */
     public function newAction()
     {
@@ -104,6 +121,7 @@ class UserController extends Controller
     /**
      * Finds and displays a User entity.
      *
+     * @Route("/{id}/show", name="espace_personnel_show")
      */
     public function showAction(Request $request, $id)
     {
@@ -140,6 +158,7 @@ class UserController extends Controller
     /**
      * Displays a form to edit an existing User entity.
      *
+     * @Route("/{id}/edit", name="espace_personnel_edit")
      */
     public function editAction($id)
     {
@@ -179,9 +198,12 @@ class UserController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing User entity.
      *
+     * @Route("/{id}/update", name="espace_personnel_update")
+     * @Method({"POST", "PUT"})
      */
     public function updateAction(Request $request, $id)
     {
@@ -211,9 +233,12 @@ class UserController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
+
     /**
      * Deletes a User entity.
      *
+     * @Route("/{id}/delete", name="espace_personnel_delete")
+     * @Method({"POST", "DELETE"})
      */
     public function deleteAction(Request $request, $id)
     {
@@ -251,6 +276,85 @@ class UserController extends Controller
             ->add('submit', 'submit', array('label' => 'Supprimer'))
             ->getForm()
         ;
+    }
+
+    /**
+     * Displays the user login form
+     *
+     * @Route("/user-login-form", name="user_login_form")
+     */
+    public function userFormDisplayAction(Request $request)
+    {
+
+        /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
+        $session = $request->getSession();
+
+        // get the error if any (works with forward and redirect -- see below)
+        if ($request->attributes->has(SecurityContextInterface::AUTHENTICATION_ERROR)) {
+            $error = $request->attributes->get(SecurityContextInterface::AUTHENTICATION_ERROR);
+        } elseif (null !== $session && $session->has(SecurityContextInterface::AUTHENTICATION_ERROR)) {
+            $error = $session->get(SecurityContextInterface::AUTHENTICATION_ERROR);
+            $session->remove(SecurityContextInterface::AUTHENTICATION_ERROR);
+        } else {
+            $error = null;
+        }
+
+        if (!$error instanceof AuthenticationException) {
+            $error = null; // The value does not come from the security component.
+        }
+
+        // last username entered by the user
+        $lastUsername = (null === $session) ? '' : $session->get(SecurityContextInterface::LAST_USERNAME);
+
+        $csrfToken = $this->has('form.csrf_provider')
+            ? $this->get('form.csrf_provider')->generateCsrfToken('authenticate')
+            : null;
+
+        return $this->render('layout/user-form.html.twig', array(
+            'last_username' => $lastUsername,
+            'error'         => $error,
+            'csrf_token' => $csrfToken,
+        ));
+    }
+
+
+    /**
+     * Displays the user login form
+     *
+     * @Route("/user_login_form_modal", name="user_login_form_modal")
+     */
+    public function userFormModalDisplayAction(Request $request)
+    {
+
+        /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
+        $session = $request->getSession();
+
+        // get the error if any (works with forward and redirect -- see below)
+        if ($request->attributes->has(SecurityContextInterface::AUTHENTICATION_ERROR)) {
+            $error = $request->attributes->get(SecurityContextInterface::AUTHENTICATION_ERROR);
+        } elseif (null !== $session && $session->has(SecurityContextInterface::AUTHENTICATION_ERROR)) {
+            $error = $session->get(SecurityContextInterface::AUTHENTICATION_ERROR);
+            $session->remove(SecurityContextInterface::AUTHENTICATION_ERROR);
+        } else {
+            $error = null;
+        }
+
+        if (!$error instanceof AuthenticationException) {
+            $error = null; // The value does not come from the security component.
+        }
+
+        // last username entered by the user
+        $lastUsername = (null === $session) ? '' : $session->get(SecurityContextInterface::LAST_USERNAME);
+
+        $csrfToken = $this->has('form.csrf_provider')
+            ? $this->get('form.csrf_provider')->generateCsrfToken('authenticate')
+            : null;
+
+        return $this->render('layout/user-form-modal.html.twig', array(
+            'last_username' => $lastUsername,
+            'error'         => $error,
+            'csrf_token' => $csrfToken,
+        ));
     }
 
 }
