@@ -40,7 +40,11 @@ security:
         main:
             pattern: ^/
             form_login:
+                success_handler: authentication_handler
+                failure_handler: authentication_handler
                 provider: fos_userbundle
+                remember_me: true
+                use_referer: true
                 csrf_provider: form.csrf_provider
             logout:       true
             anonymous:    true
@@ -63,3 +67,5 @@ security:
         #edition d'une partie
         - { path: ^/partie/\d+/edit, role: ROLE_USER }
         - { path: ^/jeu/\d+/partie/new, role: ROLE_USER }
+        #like it
+        - { path: ^/user-review/\d+/like, role: ROLE_USER }

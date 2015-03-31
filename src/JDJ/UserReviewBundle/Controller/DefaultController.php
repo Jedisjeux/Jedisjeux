@@ -4,6 +4,10 @@ namespace JDJ\UserReviewBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+/**
+ * Class DefaultController
+ * @package JDJ\UserReviewBundle\Controller
+ */
 class DefaultController extends Controller
 {
     public function indexAction($name)

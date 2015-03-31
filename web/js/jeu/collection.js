@@ -19,6 +19,18 @@ $(document).ready(function () {
 
 
     /**
+     * Handles click to display the modal
+     */
+    $("#add-game-collection-modal").click(function (e) {
+        e.preventDefault();
+        if ($(this).data('uid') > 0) {
+            $('#collection-modal').modal('show');
+        } else {
+            $('#login-form-modal').modal('show');
+        }
+    });
+
+    /**
      * Handles click to add a new collection
      */
     $("#add-list-collection").click(function (e) {
@@ -47,7 +59,7 @@ $(document).ready(function () {
         }
         $('#collection-modal').modal('hide');
         initializeForms();
-        notifySucces("Le jeu a été rajoutée à mes listes.");
+        notifySuccess("Le jeu a été rajoutée à mes listes.");
 
 
     });
@@ -75,7 +87,7 @@ $(document).ready(function () {
                 response = true;
 
                 $('#collection-modal').modal('hide');
-                notifySucces("La liste a été créé.");
+                notifySuccess("La liste a été créé.");
                 /** if no list yet reload page */
                 if ($('#add-in-list').length == 0) {
 
@@ -92,7 +104,7 @@ $(document).ready(function () {
             })
             .fail(function () {
                 notifyError("Une erreur s'est produite. Merci de réessayer plus tard.");
-                $('#collection-modal').modal('hide')
+                $('#collection-modal').modal('hide');
             });
         return response;
     }
@@ -184,42 +196,5 @@ $(document).ready(function () {
         $('#form-group-name-list').removeClass('has-error');
     }
 
-    /**
-     * This function displays a success notification
-     *
-     * @param message
-     */
-    function notifySucces(message)
-    {
-        $('#notify-jeu')
-            .removeClass('alert-error')
-            .addClass('alert-success')
-            .show()
-            .delay(5000)
-            .fadeOut();
-
-        $('#message-jeu').html(message);
-        $('html, body').animate({ scrollTop: 0 }, 'fast');
-
-    }
-
-    /**
-     * This function displays an error notification
-     *
-     * @param message
-     */
-    function notifyError(message)
-    {
-        $('#notify-jeu')
-            .removeClass('alert-success')
-            .addClass('alert-error')
-            .show()
-            .delay(5000)
-            .fadeOut();
-
-        $('#message-jeu').html(message);
-        $('html, body').animate({ scrollTop: 0 }, 'fast');
-
-    }
 
 });

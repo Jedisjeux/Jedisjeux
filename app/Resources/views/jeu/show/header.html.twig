@@ -98,7 +98,8 @@
                             </ul>
                         </div>
 
-                        {% if app.user and userGameAttribute is defined %}
+                        {#TODO voir pour un render url#}
+                        {% if userGameAttribute is defined %}
                             {% include "jeu/show/toolbar.html.twig" with {'jeu': jeu, 'userGameAttribute': userGameAttribute} only %}
                         {% endif %}
 

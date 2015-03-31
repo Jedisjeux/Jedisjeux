@@ -2,8 +2,10 @@
 
 namespace JDJ\UserReviewBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JDJ\CoreBundle\Entity\Like;
 
 /**
  * UserReview
@@ -30,7 +32,7 @@ class UserReview
     private $libelle;
 
     /**
-     * @var text
+     * @var string
      *
      * @ORM\Column(type="text", nullable=false)
      */
@@ -60,6 +62,19 @@ class UserReview
      *
      */
     private $jeuNote;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="JDJ\CoreBundle\Entity\Like", mappedBy="userReview")
+     */
+    private $likes;
+
+
+    public function __construct()
+    {
+        $this->likes = new ArrayCollection();
+    }
 
 
     /**
@@ -186,4 +201,48 @@ class UserReview
     {
         return $this->jeuNote;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getLikes()
+    {
+        return $this->likes;
+    }
+
+    /**
+     * @param ArrayCollection $likes
+     * @return $this
+     */
+    public function setLikes($likes)
+    {
+        $this->likes = $likes;
+
+        return $this;
+    }
+
+    public function getNbLikes()
+    {
+        $nb = 0;
+        /** @var Like $like */
+        foreach ($this->getLikes() as $like) {
+            if ($like->isLike()) {
+                $nb ++;
+            }
+        }
+        return $nb;
+    }
+
+    public function getNbDislikes()
+    {
+        $nb = 0;
+        /** @var Like $like */
+        foreach ($this->getLikes() as $like) {
+            if (false === $like->isLike()) {
+                $nb ++;
+            }
+        }
+        return $nb;
+    }
+
 }
