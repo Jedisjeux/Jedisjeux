@@ -6,7 +6,11 @@ $(document).ready(function () {
     $(".owned").click(function (e) {
         e.preventDefault();
 
-        handleUsergameAttribute($(this), 'owned');
+        if($(this).data("uid") <= 0) {
+            $('#login-form-modal').modal('show');
+        } else {
+            handleUsergameAttribute($(this), 'owned');
+        }
     });
 
     /**
@@ -15,7 +19,11 @@ $(document).ready(function () {
     $(".wanted").click(function (e) {
         e.preventDefault();
 
-        handleUsergameAttribute($(this), 'wanted');
+        if($(this).data("uid") <= 0) {
+            $('#login-form-modal').modal('show');
+        } else {
+            handleUsergameAttribute($(this), 'wanted');
+        }
     });
 
     /**
@@ -24,7 +32,11 @@ $(document).ready(function () {
     $(".played").click(function (e) {
         e.preventDefault();
 
-        handleUsergameAttribute($(this), 'played');
+        if($(this).data("uid") <= 0) {
+            $('#login-form-modal').modal('show');
+        } else {
+            handleUsergameAttribute($(this), 'played');
+        }
     });
 
     /**
@@ -33,7 +45,11 @@ $(document).ready(function () {
     $(".favorite").click(function (e) {
         e.preventDefault();
 
-        handleUsergameAttribute($(this), 'favorite');
+        if($(this).data("uid") <= 0) {
+            $('#login-form-modal').modal('show');
+        } else {
+            handleUsergameAttribute($(this), 'favorite');
+        }
     });
 
 
@@ -66,7 +82,7 @@ $(document).ready(function () {
      */
     function modifyDisplay(classElement)
     {
-        notifySucces(classElement);
+        notifySuccesUserGameAttribute(classElement);
         if ($(classElement).hasClass("btn-default")) {
             $(classElement).addClass("btn-yellow");
             $(classElement).removeClass("btn-default");
@@ -108,7 +124,7 @@ $(document).ready(function () {
      *
      * @param attribute
      */
-    function notifySucces(attribute)
+    function notifySuccesUserGameAttribute(attribute)
     {
         var message = "";
 
@@ -142,15 +158,17 @@ $(document).ready(function () {
                 }
                 break;
         }
-        $('#notify-jeu')
-            .removeClass('alert-error')
+        /*$('#notify')
+            .removeClass('alert-danger')
             .addClass('alert-success')
             .show()
             .delay(5000)
             .fadeOut();
 
         $('#message-jeu').html(message);
-        $('html, body').animate({ scrollTop: 0 }, 'fast');
+        $('html, body').animate({ scrollTop: 0 }, 'fast');*/
+
+        notifySuccess(message);
 
     }
 

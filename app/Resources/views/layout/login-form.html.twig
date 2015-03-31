@@ -1,0 +1,19 @@
+{% if not app.user %}
+    <div class="bs-example">
+
+        <!-- Modal HTML -->
+        <div id="login-form-modal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h1 class="modal-title">Je me connecte</strong>"</h1>
+                    </div>
+                    <div class="modal-body">
+                        {{ render(url('user_login_form'))}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

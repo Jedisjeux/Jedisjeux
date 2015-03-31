@@ -2,10 +2,7 @@
 
 {% block container %}
 
-    <div id="notify-jeu" class="alert" style="display: none;">
-        <a href="#" class="close" data-dismiss="alert">&times;</a>
-        <span id="message-jeu"></span>
-    </div>
+
 
     <div class="col-md-8">
         {% include "jeu/show/header.html.twig" with {'jeu': jeu, 'userGameAttribute': userGameAttribute} only %}

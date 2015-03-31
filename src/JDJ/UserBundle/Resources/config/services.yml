@@ -16,3 +16,6 @@ services:
       class: JDJ\UserBundle\Service\AvatarImportService
       arguments:
           - @doctrine.orm.entity_manager
+
+  authentication_handler:
+        class: JDJ\UserBundle\Service\AuthenticationHandler
