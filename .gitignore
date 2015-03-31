@@ -19,6 +19,7 @@
 /web/bower_components/*
 !/web/bower_components/.gitkeep
 /web/css
+/web/js/
 
 .idea
 *.DS_Store

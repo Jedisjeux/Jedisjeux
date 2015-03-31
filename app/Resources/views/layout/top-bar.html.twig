@@ -11,7 +11,7 @@
 
         <!-- Shopping kart starts -->
         {% if not app.user %}
-            {% if not app.request.attributes.get('_route') == 'fos_user_security_login' %}
+            {% if app.request.attributes.get('_route') != 'fos_user_security_login' %}
                 <div class="tb-shopping-cart pull-right ">
                     <!-- Link with badge -->
                     <a href="#" class="btn btn-white btn-xs b-dropdown"><i
