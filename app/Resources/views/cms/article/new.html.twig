@@ -1,0 +1,32 @@
+{% extends "::base.html.twig" %}
+
+{% block container %}
+    <div class="col-md-12">
+
+        <div id="articleEditing">
+
+            <!-- Heading -->
+            <h3><a href="blog-single.html">Ducimus Qui Blanditiis Prey Ntium Deleniti</a></h3>
+
+            <!-- Blog meta -->
+            <div class="blog-meta">
+                <!-- Date -->
+                <a href="#"><i class="fa fa-calendar"></i> &nbsp; {{ "now"|date('d/m/Y') }}</a> &nbsp;
+                <!-- Author -->
+                <a href="#"><i class="fa fa-user"></i> &nbsp; {{ app.user.username }}</a> &nbsp;
+                <!-- Comments -->
+                <a href="#"><i class="fa fa-comments"></i> &nbsp; 6 Comments</a>
+            </div>
+
+            {% include 'cms/partial/modal.html.twig' %}
+
+            <div id="articleContainer">
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+{% endblock container %}
