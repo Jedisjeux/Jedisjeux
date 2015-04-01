@@ -42,7 +42,7 @@ select      old.user_id,
 from        jedisjeux.jdj_ludotheque old
 inner join  jdj_jeu jeu on jeu.id = old.game_id
 inner join  fos_user user on user.id = old.user_id
-limit 1
+limit 3000
 EOM;
 
         $oldUserGameAttribute = $this->getDatabaseConnection()->fetchAll($query);
