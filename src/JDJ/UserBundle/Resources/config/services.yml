@@ -17,6 +17,9 @@ services:
       arguments:
           - @doctrine.orm.entity_manager
 
+  app.service.user:
+          class: JDJ\UserBundle\Service\UserService
+
   authentication_handler:
         class: JDJ\UserBundle\Service\AuthenticationHandler
         arguments:
