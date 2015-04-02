@@ -69,3 +69,6 @@ security:
         - { path: ^/jeu/\d+/partie/new, role: ROLE_USER }
         #like it
         - { path: ^/user-review/\d+/like, role: ROLE_USER }
+        #edition d'un article
+        - { path: ^/article/new, role: ROLE_USER }
+        - { path: ^/article/\d+/edit, role: ROLE_USER }

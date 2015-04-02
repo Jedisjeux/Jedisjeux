@@ -11,17 +11,19 @@
 
         <!-- Shopping kart starts -->
         {% if not app.user %}
-        <div class="tb-shopping-cart pull-right ">
-            <!-- Link with badge -->
-            <a href="#" class="btn btn-white btn-xs b-dropdown"><i
-                        class="fa fa-user color"></i> Connexion</a>
-            <!-- Dropdown content with item details -->
-            <div class="b-dropdown-block bloc-login">
-                <!-- Heading -->
-                <h4><i class="fa fa-user color"></i> Je me connecte</h4>
-                {{ render(url('user_login_form'))}}
-            </div>
-        </div>
+            {% if app.request.attributes.get('_route') != 'fos_user_security_login' %}
+                <div class="tb-shopping-cart pull-right ">
+                    <!-- Link with badge -->
+                    <a href="#" class="btn btn-white btn-xs b-dropdown"><i
+                                class="fa fa-user color"></i> Connexion</a>
+                    <!-- Dropdown content with item details -->
+                    <div class="b-dropdown-block bloc-login">
+                        <!-- Heading -->
+                        <h4><i class="fa fa-user color"></i> Je me connecte</h4>
+                        {{ render(url('user_login_form'))}}
+                    </div>
+                </div>
+            {% endif %}
         {% endif %}
         <!-- Shopping kart ends -->
 
@@ -37,6 +39,7 @@
                 <ul class="dropdown-menu dropdown-mini" role="menu">
                     <li><a href="{{ path('fos_user_profile_show') }}">Mon compte</a></li>
                     <li><a href="{{ path('my_collections') }}">Mes listes</a></li>
+                    <li><a href="{{ path('user_partie', {'user': user.id, 'slug': user.slug}) }}">Mes parties</a></li>
                     <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
                 </ul>
             {% endif %}

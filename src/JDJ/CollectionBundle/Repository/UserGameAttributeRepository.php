@@ -49,7 +49,7 @@ class UserGameAttributeRepository extends EntityRepository
             ->andWhere('u.favorite = 1')
             ->setParameter('user', $user);
 
-        $result = $queryBuilder->getQuery()->getResult();
+        $result = $this->getPaginator($queryBuilder);
 
         return $result;
 
@@ -68,7 +68,7 @@ class UserGameAttributeRepository extends EntityRepository
             ->andWhere('u.wanted = 1')
             ->setParameter('user', $user);
 
-        $result = $queryBuilder->getQuery()->getResult();
+        $result = $this->getPaginator($queryBuilder);
 
         return $result;
 
@@ -87,7 +87,7 @@ class UserGameAttributeRepository extends EntityRepository
             ->andWhere('u.owned = 1')
             ->setParameter('user', $user);
 
-        $result = $queryBuilder->getQuery()->getResult();
+        $result = $this->getPaginator($queryBuilder);
 
         return $result;
 
@@ -106,7 +106,7 @@ class UserGameAttributeRepository extends EntityRepository
             ->andWhere('u.played = 1')
             ->setParameter('user', $user);
 
-        $result = $queryBuilder->getQuery()->getResult();
+        $result = $this->getPaginator($queryBuilder);
 
         return $result;
 

@@ -39,8 +39,8 @@ class LoadPartiesData extends ContainerAware implements FixtureInterface, Ordere
         $this->manager = $manager;
 
         $query = <<<EOM
-insert into jdj_partie (id, jeu_id, author_id, playedAt)
-select      old.partie_id, old.game_id, old.user_id, old.date
+insert into jdj_partie (id, jeu_id, author_id, playedAt, createdAt)
+select      old.partie_id, old.game_id, old.user_id, old.date, old.date
 from        jedisjeux.jdj_parties old
 inner join  jdj_jeu j
                 on j.id = old.game_id

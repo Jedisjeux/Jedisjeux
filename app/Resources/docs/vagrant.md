@@ -28,7 +28,7 @@ and adding following line :
 
 ``` bash
 cd /var/www/
-scp admin@jedisjeux.net:/srv/d_jedisjeux/www/sav/dmp_jdj_1.sql.gz ./
+sudo scp admin@jedisjeux.net:/srv/d_jedisjeux/www/sav/dmp_jdj_1.sql.gz ./
 ```
 
 enter the admin password of admin account
@@ -36,7 +36,7 @@ enter the admin password of admin account
 5/ unzip your archive and restore the database
 
 ``` bash
-gzip -d dmp_jdj_1.sql.gz
+sudo gzip -d dmp_jdj_1.sql.gz
 mysql -u root jedisjeux < dmp_jdj_1.sql
 ```
 

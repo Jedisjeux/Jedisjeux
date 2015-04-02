@@ -1,3 +1,8 @@
+jdj_cms:
+    resource: "@JDJCMSBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 jdj_collection:
     resource: "@JDJCollectionBundle/Resources/config/routing.yml"
     prefix:   /

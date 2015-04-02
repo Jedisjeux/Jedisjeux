@@ -8,6 +8,7 @@ use JDJ\CollectionBundle\Service\CollectionService;
 use JDJ\CollectionBundle\Service\UserGameAttributeService;
 use JDJ\JeuBundle\Entity\Jeu;
 use JDJ\UserBundle\Entity\User;
+use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -380,9 +381,12 @@ class CollectionController extends Controller
      */
     public function userGameAttributeCollectionPageAction($type, Request $request)
     {
+        /** TODO, virer ça car le security.yml suffit */
         if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
 
-            $user = $this->get('security.context')->getToken()->getUser();
+            $user = $this->getUser();
+            $title = null;
+            $userGameAttributes = null;
 
             switch ($type)
             {
@@ -412,9 +416,8 @@ class CollectionController extends Controller
                     break;
             }
 
-            if (!$userGameAttributes) {
+            if (null === $userGameAttributes) {
                 throw $this->createNotFoundException('La liste n\'existe pas.');
-                return $this->redirect($this->generateUrl('jdj_web_homepage'));
             }
         } else {
             $request->getSession()->getFlashBag()->add('error', 'Vous devez être connecté.');
@@ -422,11 +425,7 @@ class CollectionController extends Controller
         }
 
 
-        /** @var UserGameAttributeRepository $UserGameAttributeReposititory */
-        $em = $this->getDoctrine()->getManager();
-        $userGameAttributeRepository = $em->getRepository('JDJCollectionBundle:UserGameAttribute');
-        /** @var Pagerfanta $jeux */
-        $userGameAttributes = $userGameAttributeRepository->createPaginator(array('userGameAttribute' => $userGameAttributes));
+        /** @var Pagerfanta $userGameAttributes */
         $userGameAttributes->setMaxPerPage(10);
         $userGameAttributes->setCurrentPage($request->get('page', 1));
 

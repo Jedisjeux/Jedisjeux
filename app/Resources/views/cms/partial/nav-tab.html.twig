@@ -1,0 +1,23 @@
+<!-- Nav tab style 2 starts -->
+<div class="nav-tabs-two">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#tabIntro" data-toggle="tab">Intro</a></li>
+        <li><a href="#tabImageLeft" data-toggle="tab">Image à gauche</a></li>
+        <li><a href="#tabImageRight" data-toggle="tab">Image à droite</a></li>
+    </ul>
+
+    <!-- Tab content -->
+    <div class="tab-content">
+        <div class="tab-pane fade in active" id="tabIntro">
+            {% include "cms/block/intro.html.twig" %}
+        </div>
+        <div class="tab-pane fade" id="tabImageLeft">
+            {% include "cms/block/image-left.html.twig" %}
+        </div>
+        <div class="tab-pane fade" id="tabImageRight">
+            {% include "cms/block/image-right.html.twig" %}
+        </div>
+    </div>
+</div>
+<!-- Nav tab style 2 ends -->

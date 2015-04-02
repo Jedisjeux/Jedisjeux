@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping as ORM;
 use JDJ\CollectionBundle\Entity\UserGameAttribute;
 use JDJ\CollectionBundle\Manager\UserGameAttributeManager;
+use JDJ\CollectionBundle\Repository\UserGameAttributeRepository;
 use JDJ\JeuBundle\Entity\Jeu;
 use JDJ\UserBundle\Entity\User;
 
@@ -25,7 +26,7 @@ class UserGameAttributeService
 
     /**
      * Entity-specific repo, useful for finding entities, for example
-     * @var EntityRepository
+     * @var UserGameAttributeRepository
      */
     protected $repo;
 

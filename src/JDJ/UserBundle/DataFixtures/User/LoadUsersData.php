@@ -40,7 +40,7 @@ from        jedisjeux.phpbb3_users old
 where       old.user_email != ''
 group by    old.username_clean
 order by    old.user_id asc
-limit       1000
+limit       1500
 EOM;
 
         $oldUsers = $this->getDatabaseConnection()->fetchAll($query);

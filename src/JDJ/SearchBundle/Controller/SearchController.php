@@ -181,7 +181,7 @@ class SearchController extends Controller
             } elseif ($result instanceof Personne) {
                 $types[] = "personne";
             } elseif ($result instanceof Mechanism) {
-                $types[] = "mecanisme";
+                $types[] = "mechanism";
             } elseif ($result instanceof Theme) {
                 $types[] = "theme";
             } elseif ($result instanceof Theme) {

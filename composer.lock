@@ -781,7 +781,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -857,7 +857,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -874,16 +874,16 @@
         },
         {
             "name": "doctrine/data-fixtures",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/data-fixtures.git",
-                "reference": "70020ae434da2e87fb62b40aba1211ef4fb04182"
+                "reference": "bd44f6b6e40247b6530bc8abe802e4e4d914976a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/70020ae434da2e87fb62b40aba1211ef4fb04182",
-                "reference": "70020ae434da2e87fb62b40aba1211ef4fb04182",
+                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/bd44f6b6e40247b6530bc8abe802e4e4d914976a",
+                "reference": "bd44f6b6e40247b6530bc8abe802e4e4d914976a",
                 "shasum": ""
             },
             "require": {
@@ -927,7 +927,7 @@
             "keywords": [
                 "database"
             ],
-            "time": "2015-03-28 22:24:17"
+            "time": "2015-03-30 12:14:13"
         },
         {
             "name": "doctrine/dbal",
@@ -2666,7 +2666,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "Knplabs",
+                    "name": "KnpLabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -3027,12 +3027,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phiamo/MopaBootstrapBundle.git",
-                "reference": "92f2ce74f80e5483d1c728c5557badd82b2a649f"
+                "reference": "d7c05217720c42b4070e43ad34a2d8a497bf0176"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phiamo/MopaBootstrapBundle/zipball/92f2ce74f80e5483d1c728c5557badd82b2a649f",
-                "reference": "92f2ce74f80e5483d1c728c5557badd82b2a649f",
+                "url": "https://api.github.com/repos/phiamo/MopaBootstrapBundle/zipball/d7c05217720c42b4070e43ad34a2d8a497bf0176",
+                "reference": "d7c05217720c42b4070e43ad34a2d8a497bf0176",
                 "shasum": ""
             },
             "require": {
@@ -3083,7 +3083,7 @@
                 "form",
                 "template"
             ],
-            "time": "2015-03-25 15:26:12"
+            "time": "2015-03-31 13:29:42"
         },
         {
             "name": "mopa/composer-bridge",
@@ -4433,16 +4433,16 @@
         },
         {
             "name": "sonata-project/cache",
-            "version": "1.0.4",
+            "version": "1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/cache.git",
-                "reference": "548b14c49474ed006543336d8f0be093089a3797"
+                "reference": "0d2956070d31a1e6d3504b0671ffeb76818b0676"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/cache/zipball/548b14c49474ed006543336d8f0be093089a3797",
-                "reference": "548b14c49474ed006543336d8f0be093089a3797",
+                "url": "https://api.github.com/repos/sonata-project/cache/zipball/0d2956070d31a1e6d3504b0671ffeb76818b0676",
+                "reference": "0d2956070d31a1e6d3504b0671ffeb76818b0676",
                 "shasum": ""
             },
             "require-dev": {
@@ -4479,7 +4479,7 @@
                 {
                     "name": "Thomas Rabaix",
                     "email": "thomas.rabaix@gmail.com",
-                    "homepage": "http://sonata-project.org/"
+                    "homepage": "https://sonata-project.org/"
                 }
             ],
             "description": "Cache library",
@@ -4490,7 +4490,7 @@
                 "mongodb",
                 "redis"
             ],
-            "time": "2014-07-02 20:57:41"
+            "time": "2015-03-21 08:32:46"
         },
         {
             "name": "sonata-project/core-bundle",

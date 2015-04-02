@@ -290,7 +290,7 @@ fos_elastica:
                       listener:
                           immediate: ~
                       finder: ~
-              mecanisme:
+              mechanism:
                   mappings:
                       libelle: ~
                       slug: { search_analyzer: custom_search_analyzer, index_analyzer: custom_index_analyzer, type: string }
