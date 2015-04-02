@@ -5,7 +5,7 @@
     {% set lastJeu = tabUserGameAttribute.getIterator().offsetGet(size-1).jeu %}
 {% else %}
     {% set lastIndexOfPage = tabUserGameAttribute.getMaxPerPage - 1 %}
-        {% set lastJeu = tabUserGameAttribute.getIterator().offsetGet(lastIndexOfPage).jeu %}
+    {% set lastJeu = tabUserGameAttribute.getIterator().offsetGet(lastIndexOfPage).jeu %}
 {% endif %}
 
 {% for index, userGameAttribute in tabUserGameAttribute %}
