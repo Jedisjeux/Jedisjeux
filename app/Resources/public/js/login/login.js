@@ -51,6 +51,8 @@ $(document).ready(function () {
             }
         });
 
+        console.log(isLoggedIn);
+
         notifyLogin(isLoggedIn);
 
     }
