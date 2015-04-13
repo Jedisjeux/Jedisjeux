@@ -17,11 +17,16 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * Class Comment
  * @package JDJ\CommentBundle\Entity
+ *
+ * @ORM\Entity
+ * @ORM\ChangeTrackingPolicy("DEFERRED_EXPLICIT")
  */
 class Comment extends BaseComment implements SignedCommentInterface
 {
     /**
-     * @var int
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
@@ -29,13 +34,14 @@ class Comment extends BaseComment implements SignedCommentInterface
      * Thread of this comment
      *
      * @var Thread
+     * @ORM\ManyToOne(targetEntity="JDJ\CommentBundle\Entity\Thread")
      */
     protected $thread;
 
     /**
-     * Author of the comment
+     * @var \JDJ\UserBundle\Entity\User
      *
-     * @var User
+     * @ORM\ManyToOne(targetEntity="JDJ\UserBundle\Entity\User")
      */
     protected $author;
 

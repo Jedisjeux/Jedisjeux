@@ -15,11 +15,17 @@ use FOS\CommentBundle\Entity\Thread as BaseThread;
 /**
  * Class Thread
  * @package JDJ\CommentBundle\Entity
+ *
+ * @ORM\Entity
+ * @ORM\ChangeTrackingPolicy("DEFERRED_EXPLICIT")
  */
 class Thread extends BaseThread
 {
     /**
-     * @var int
+     * @var string $id
+     *
+     * @ORM\Id
+     * @ORM\Column(type="string")
      */
     protected $id;
 

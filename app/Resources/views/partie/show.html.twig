@@ -6,7 +6,8 @@
 
     <div class="col-md-8">
         {% include "jeu/show/header.html.twig" with {'jeu': jeu} only %}
-        {% include "partie/show/comment.html.twig" with {'jeu': jeu} only %}
+
+        {% include 'FOSCommentBundle:Thread:async.html.twig' with {'id': entity.id} %}
 
 
     </div>
@@ -14,6 +15,7 @@
     <div class="col-md-4">
         {% include "partie/show/sidebar.html.twig" with {'partie': entity} only %}
     </div>
+
 
 
 {% endblock %}
