@@ -8,9 +8,11 @@
 
 namespace JDJ\CommentBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\CommentBundle\Entity\Comment as BaseComment;
 use FOS\CommentBundle\Model\SignedCommentInterface;
+use JDJ\CoreBundle\Entity\Like;
 use JDJ\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -44,6 +46,13 @@ class Comment extends BaseComment implements SignedCommentInterface
      * @ORM\ManyToOne(targetEntity="JDJ\UserBundle\Entity\User")
      */
     protected $author;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="JDJ\CoreBundle\Entity\Like", mappedBy="comment")
+     */
+    private $likes;
 
     /**
      * @param UserInterface $author
@@ -103,6 +112,56 @@ class Comment extends BaseComment implements SignedCommentInterface
     {
         return $this->thread;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getLikes()
+    {
+        return $this->likes;
+    }
+
+    /**
+     * @param ArrayCollection $likes
+     * @return $this
+     */
+    public function setLikes($likes)
+    {
+        $this->likes = $likes;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNbLikes()
+    {
+        $nb = 0;
+        /** @var Like $like */
+        foreach ($this->getLikes() as $like) {
+            if ($like->isLike()) {
+                $nb ++;
+            }
+        }
+        return $nb;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNbDislikes()
+    {
+        $nb = 0;
+        /** @var Like $like */
+        foreach ($this->getLikes() as $like) {
+            if (false === $like->isLike()) {
+                $nb ++;
+            }
+        }
+        return $nb;
+    }
+
 
 
 }
