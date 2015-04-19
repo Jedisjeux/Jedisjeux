@@ -6,10 +6,7 @@
 
     <div class="col-md-8">
         {% include "jeu/show/header.html.twig" with {'jeu': jeu} only %}
-
         {% include 'FOSCommentBundle:Thread:async.html.twig' with {'id': entity.id} %}
-
-
     </div>
 
     <div class="col-md-4">
