@@ -10,6 +10,7 @@ namespace JDJ\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JDJ\CommentBundle\Entity\Comment;
 use JDJ\UserReviewBundle\Entity\UserReview;
 
 
@@ -60,6 +61,13 @@ class Like
      * @ORM\ManyToOne(targetEntity="JDJ\UserReviewBundle\Entity\UserReview", inversedBy="likes")
      */
     private $userReview;
+
+    /**
+     * @var Comment
+     *
+     * @ORM\ManyToOne(targetEntity="JDJ\CommentBundle\Entity\Comment", inversedBy="likes")
+     */
+    private $comment;
 
     /**
      * @return int
@@ -156,6 +164,24 @@ class Like
         return $this;
     }
 
+    /**
+     * @return Comment
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * @param Comment $comment
+     * @return $this
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
 
 
 } 

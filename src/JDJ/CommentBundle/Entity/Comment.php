@@ -11,7 +11,6 @@ namespace JDJ\CommentBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\CommentBundle\Entity\Comment as BaseComment;
 use FOS\CommentBundle\Model\SignedCommentInterface;
-use FOS\CommentBundle\Model\VotableCommentInterface;
 use JDJ\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -22,7 +21,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Entity
  * @ORM\ChangeTrackingPolicy("DEFERRED_EXPLICIT")
  */
-class Comment extends BaseComment implements SignedCommentInterface,VotableCommentInterface
+class Comment extends BaseComment implements SignedCommentInterface
 {
     /**
      * @ORM\Id
@@ -46,46 +45,12 @@ class Comment extends BaseComment implements SignedCommentInterface,VotableComme
      */
     protected $author;
 
-
     /**
-     * @var int
+     * @var ArrayCollection
      *
-     * @ORM\Column(type="integer")
+     * @ORM\OneToMany(targetEntity="JDJ\CoreBundle\Entity\Like", mappedBy="comment")
      */
-    protected $score = 0;
-
-    /**
-     * Sets the score of the comment.
-     *
-     * @param integer $score
-     */
-    public function setScore($score)
-    {
-        $this->score = $score;
-    }
-
-    /**
-     * Returns the current score of the comment.
-     *
-     * @return integer
-     */
-    public function getScore()
-    {
-        return $this->score;
-    }
-
-    /**
-     * Increments the comment score by the provided
-     * value.
-     *
-     * @param integer value
-     *
-     * @return integer The new comment score
-     */
-    public function incrementScore($by = 1)
-    {
-        $this->score += $by;
-    }
+    private $likes;
 
     /**
      * @param UserInterface $author
@@ -115,7 +80,7 @@ class Comment extends BaseComment implements SignedCommentInterface,VotableComme
             return 'Anonymous';
         }
 
-        return $this->getAuthor()->getUsername();
+        return $this->getAuthor();
     }
 
     /**
@@ -145,6 +110,56 @@ class Comment extends BaseComment implements SignedCommentInterface,VotableComme
     {
         return $this->thread;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getLikes()
+    {
+        return $this->likes;
+    }
+
+    /**
+     * @param ArrayCollection $likes
+     * @return $this
+     */
+    public function setLikes($likes)
+    {
+        $this->likes = $likes;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNbLikes()
+    {
+        $nb = 0;
+        /** @var Like $like */
+        foreach ($this->getLikes() as $like) {
+            if ($like->isLike()) {
+                $nb ++;
+            }
+        }
+        return $nb;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNbDislikes()
+    {
+        $nb = 0;
+        /** @var Like $like */
+        foreach ($this->getLikes() as $like) {
+            if (false === $like->isLike()) {
+                $nb ++;
+            }
+        }
+        return $nb;
+    }
+
 
 
 }

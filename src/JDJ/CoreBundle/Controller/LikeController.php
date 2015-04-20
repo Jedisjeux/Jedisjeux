@@ -9,6 +9,7 @@
 namespace JDJ\CoreBundle\Controller;
 
 
+use JDJ\CommentBundle\Entity\Comment;
 use JDJ\CoreBundle\Entity\Like;
 use JDJ\CoreBundle\Form\LikeType;
 use JDJ\CoreBundle\Repository\LikeRepository;
@@ -88,6 +89,65 @@ class LikeController extends Controller
         }
 
         return $this->render('like/user-review.html.twig', array(
+            'form' => $form->createView(),
+            'like' => $like,
+        ));
+    }
+
+
+    /**
+     * Like or Dislike a Comment
+     *
+     * @Route("/comment/{id}/like", name="comment_like", options={"expose"=true})
+     * @ParamConverter("comment", class="JDJCommentBundle:Comment")
+     *
+     * @param Comment $comment
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function likeOrDislikeCommentAction(Comment $comment, Request $request)
+    {
+        if ($this->getUser() === $comment->getAuthor()) {
+            throw new Exception("utilisateur identique à la critique");
+        }
+
+        $like = null;
+
+        if ($this->getUser()) {
+            $like = $this
+                ->getLikeRepository()
+                ->findUserLikeOnEntity($this->getUser(), 'comment', $comment);
+        }
+
+        $isNew = false;
+        if (null === $like) {
+            $like = new Like();
+            $like
+                ->setComment($comment)
+                ->setCreatedBy($this->getUser());
+            $isNew = true;
+        }
+
+        $form = $this->createLikeForm($like, $this->generateUrl('comment_like', array(
+            'id' => $comment->getId()
+        )));
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            if ($isNew) {
+                $em->persist($like);
+            }
+            $em->flush();
+
+            return new JsonResponse(array(
+                'nbLikes' => $comment->getNbLikes(),
+                'nbDislikes' => $comment->getNbDislikes(),
+            ));
+        }
+
+        return $this->render('like/comment.html.twig', array(
             'form' => $form->createView(),
             'like' => $like,
         ));
