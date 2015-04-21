@@ -239,7 +239,7 @@ mysql_database{ "jedisjeux":
 
 # Install Oracle Java and Tomcat
 
-include java7
+include java
 
 class { "tomcat": 
   config_file_group => 'tomcat7',
