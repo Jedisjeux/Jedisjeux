@@ -1,6 +1,5 @@
-$(document).ready(function () {
+$(function() {
     $( document ).on( 'click','.likeButton',function() {
-        console.log('local el loco');
         var $likeButton = $(this);
         var $form = $likeButton.closest('form');
         var userReview = $('.userReview', $form).val();
@@ -34,7 +33,6 @@ $(document).ready(function () {
                 /**
                  * update nbLikes and nbDislikes on userReview
                  */
-                console.log(userReview);
                 if(userReview)
                 {
                     $('.nbLikes[data-user-review=' + userReview + ']').html(response.nbLikes);
