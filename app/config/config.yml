@@ -148,6 +148,7 @@ fos_comment:
         model:
             comment: JDJ\CommentBundle\Entity\Comment
             thread: JDJ\CommentBundle\Entity\Thread
+            vote: JDJ\CommentBundle\Entity\Vote
 
 
 services:
@@ -185,6 +186,11 @@ services:
         - { name: doctrine.event_subscriber, connection: default }
       calls:
         - [ setAnnotationReader, [ @annotation_reader ] ]
+
+  twig.extension.intl:
+          class: Twig_Extensions_Extension_Intl
+          tags:
+              - { name: twig.extension }
 
 gregwar_form: ~
 

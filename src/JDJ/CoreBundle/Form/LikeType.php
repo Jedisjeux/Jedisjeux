@@ -36,6 +36,14 @@ class LikeType extends AbstractType
                         ->setParameter('id', $id);
                 },
             ))
+            ->add('comment', 'entity_id', array(
+                'class' => 'JDJ\CommentBundle\Entity\Comment',
+                'query_builder' => function(EntityRepository $repo, $id) {
+                    return $repo->createQueryBuilder('c')
+                        ->where('c.id = :id')
+                        ->setParameter('id', $id);
+                },
+            ))
         ;
     }
 

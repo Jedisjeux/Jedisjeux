@@ -21,10 +21,10 @@ $(document).ready(function () {
     /**
      * Handles click to display the modal
      */
-    $("#add-game-collection-modal").click(function (e) {
+    $("#addGameCollectionModal").click(function (e) {
         e.preventDefault();
         if ($(this).data('uid') > 0) {
-            $('#collection-modal').modal('show');
+            $('#collectionModal').modal('show');
         } else {
             $('#login-form-modal').modal('show');
         }
@@ -57,7 +57,7 @@ $(document).ready(function () {
                 addGameCollection(jeuId, value);
             });
         }
-        $('#collection-modal').modal('hide');
+        $('#collectionModal').modal('hide');
         initializeForms();
         notifySuccess("Le jeu a été rajoutée à mes listes.");
 
@@ -86,7 +86,7 @@ $(document).ready(function () {
             .done(function () {
                 response = true;
 
-                $('#collection-modal').modal('hide');
+                $('#collectionModal').modal('hide');
                 notifySuccess("La liste a été créé.");
                 /** if no list yet reload page */
                 if ($('#add-in-list').length == 0) {
@@ -104,7 +104,7 @@ $(document).ready(function () {
             })
             .fail(function () {
                 notifyError("Une erreur s'est produite. Merci de réessayer plus tard.");
-                $('#collection-modal').modal('hide');
+                $('#collectionModal').modal('hide');
             });
         return response;
     }
@@ -130,7 +130,7 @@ $(document).ready(function () {
             })
             .fail(function () {
                 notifyError("Une erreur s'est produite. Merci de réessayer plus tard.");
-                $('#collection-modal').modal('hide');
+                $('#collectionModal').modal('hide');
             });
         return response;
     }
