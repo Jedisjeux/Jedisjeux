@@ -17,11 +17,16 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * Class Comment
  * @package JDJ\CommentBundle\Entity
+ *
+ * @ORM\Entity
+ * @ORM\ChangeTrackingPolicy("DEFERRED_EXPLICIT")
  */
 class Comment extends BaseComment implements SignedCommentInterface
 {
     /**
-     * @var int
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
@@ -29,15 +34,23 @@ class Comment extends BaseComment implements SignedCommentInterface
      * Thread of this comment
      *
      * @var Thread
+     * @ORM\ManyToOne(targetEntity="JDJ\CommentBundle\Entity\Thread")
      */
     protected $thread;
 
     /**
-     * Author of the comment
+     * @var \JDJ\UserBundle\Entity\User
      *
-     * @var User
+     * @ORM\ManyToOne(targetEntity="JDJ\UserBundle\Entity\User")
      */
     protected $author;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="JDJ\CoreBundle\Entity\Like", mappedBy="comment")
+     */
+    private $likes;
 
     /**
      * @param UserInterface $author
@@ -67,7 +80,7 @@ class Comment extends BaseComment implements SignedCommentInterface
             return 'Anonymous';
         }
 
-        return $this->getAuthor()->getUsername();
+        return $this->getAuthor();
     }
 
     /**
@@ -97,6 +110,56 @@ class Comment extends BaseComment implements SignedCommentInterface
     {
         return $this->thread;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getLikes()
+    {
+        return $this->likes;
+    }
+
+    /**
+     * @param ArrayCollection $likes
+     * @return $this
+     */
+    public function setLikes($likes)
+    {
+        $this->likes = $likes;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNbLikes()
+    {
+        $nb = 0;
+        /** @var Like $like */
+        foreach ($this->getLikes() as $like) {
+            if ($like->isLike()) {
+                $nb ++;
+            }
+        }
+        return $nb;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNbDislikes()
+    {
+        $nb = 0;
+        /** @var Like $like */
+        foreach ($this->getLikes() as $like) {
+            if (false === $like->isLike()) {
+                $nb ++;
+            }
+        }
+        return $nb;
+    }
+
 
 
 }

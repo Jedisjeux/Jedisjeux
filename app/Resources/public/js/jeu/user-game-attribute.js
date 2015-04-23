@@ -82,7 +82,7 @@ $(document).ready(function () {
      */
     function modifyDisplay(classElement)
     {
-        notifySuccesUserGameAttribute(classElement);
+        notifySuccesUserGameAttributes(classElement);
         if ($(classElement).hasClass("btn-default")) {
             $(classElement).addClass("btn-yellow");
             $(classElement).removeClass("btn-default");
@@ -124,7 +124,7 @@ $(document).ready(function () {
      *
      * @param attribute
      */
-    function notifySuccesUserGameAttribute(attribute)
+    function notifySuccesUserGameAttributes(attribute)
     {
         var message = "";
 

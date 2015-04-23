@@ -162,3 +162,20 @@ Feature: Affichage de la fiche de jeu
     And I follow "Mes coups de coeur"
     Then I should see "Mes coups de coeur"
     And I should see "Puerto Rico"
+
+
+  Scenario: Aller sur la page d'un jeu non connecté et ajouter un jeu à ses favoris
+    Given  I am on game "Puerto Rico"
+    When I press "Coup de coeur"
+    And I wait "1" seconds
+    Then I should see "Vous devez être connecté."
+    When I fill in the following:
+      | usernameModal | loic_425     |
+      | passwordModal | loic_425     |
+    And I press "submit-form-login-modal"
+    Then I should not see "Problème de connexion."
+    And I should see "loic_425"
+    And I am on game "Puerto Rico"
+    When I press "Coup de coeur"
+    And I wait "1" seconds
+    Then I should see "Le Jeu a été ajouté à vos coup de coeur."

@@ -64,6 +64,7 @@ default:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - JDJ\UserBundle\Behat\UserContext
+                - JDJ\CoreBundle\Behat\UtilsContext
             filters:
                 tags: "@userLogin && ~@javascript"
 
