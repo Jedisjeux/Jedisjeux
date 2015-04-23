@@ -1,7 +1,5 @@
 $host_name = "jdj.dev"
 $db_name = "jdj"
-$db_name_dev = "${db_name}_dev"
-$db_name_tst = "${db_name}_test"
 
 group { 'puppet': ensure => present }
 Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
@@ -213,19 +211,19 @@ class { 'mysql::server':
   override_options => { 'root_password' => 'jedisjeux', },
 }
 
-mysql_database{ "jdj":
+mysql_database{ "${db_name}":
   ensure  => present,
   charset => 'utf8',
   require => Class['mysql::server'],
 }
 
-mysql_database{ "jdj_dev":
+mysql_database{ "${db_name}_dev":
   ensure  => present,
   charset => 'utf8',
   require => Class['mysql::server'],
 }
 
-mysql_database{ "jdj_test":
+mysql_database{ "${db_name}_test":
   ensure  => present,
   charset => 'utf8',
   require => Class['mysql::server'],
@@ -237,27 +235,16 @@ mysql_database{ "jedisjeux":
   require => Class['mysql::server'],
 }
 
+class { 'elasticsearch':
+  ensure => 'present',
+  package_url => 'https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.3.4.deb'
+} ->
+service { "elasticsearch-service":
+  name => 'elasticsearch',
+  ensure => running
+}
+
 # Install Oracle Java and Tomcat
 
 include java
-
-class { "tomcat": 
-  config_file_group => 'tomcat7',
-}
-
-class { "tomcat::manager": }
-
-tomcat::users  { 'users':
-  source => '/vagrant/puppet/conf/tomcat-users.xml',
-}
-
-import 'solr.pp'
-
-class { "solr":
-  install_source => 'http://mir2.ovh.net/ftp.apache.org/dist/lucene/solr/4.7.1/solr-4.7.1.tgz',
-  solr_version => '4.7.1', 
-}
-
-include solr
-
 include '::rabbitmq'
