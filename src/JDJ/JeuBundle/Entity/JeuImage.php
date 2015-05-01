@@ -141,4 +141,4 @@ class JeuImage
 
         return $this->getJeu()->getSlug().'-'.uniqid().'.'.$this->getImage()->getFile()->getClientOriginalExtension();
     }
-} 
+}

@@ -5,9 +5,7 @@
 /app/config/parameters.yml
 /app/config/parameters_dev.yml
 /app/config/parameters_test.yml
-/app/logs/*
-!app/cache/.gitkeep
-!app/logs/.gitkeep
+
 /build/
 /vendor/
 /bin/

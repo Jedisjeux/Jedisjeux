@@ -15,6 +15,17 @@ use JDJ\CoreBundle\Entity\Image;
  */
 class Jeu
 {
+
+    /**
+     * status constants
+     */
+    const WRITING = "WRITING";
+    const NEAD_A_TRANSLATION = "NEAD_A_TRANSLATION";
+    const NEAD_A_REVIEW = "NEAD_A_REVIEW";
+    const READY_TO_PUBLISH = "READY_TO_PUBLISH";
+    const PUBLISHED = "PUBLISHED";
+
+
     /**
      * @var integer
      *
@@ -179,12 +190,12 @@ class Jeu
     private $notes;
 
     /**
-     * @var \JDJ\WebBundle\Entity\Statut
+     * @var $status
      *
-     * @ORM\ManyToOne(targetEntity="JDJ\WebBundle\Entity\Statut", inversedBy="jeux")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(name="status", type="string", columnDefinition="enum('WRITING', 'NEAD_A_TRANSLATION', 'NEAD_A_REVIEW', 'READY_TO_PUBLISH', 'PUBLISHED')")
      */
-    private $statut;
+    private $status;
+
 
     /**
      * @var \JDJ\CoreBundle\Entity\Cible
@@ -936,5 +947,38 @@ class Jeu
     public function getListElements()
     {
         return $this->listElements;
+    }
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     * @return Jeu
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string 
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Remove jeuImages
+     *
+     * @param \JDJ\JeuBundle\Entity\JeuImage $jeuImages
+     */
+    public function removeJeuImage(\JDJ\JeuBundle\Entity\JeuImage $jeuImages)
+    {
+        $this->jeuImages->removeElement($jeuImages);
     }
 }
