@@ -1,0 +1,21 @@
+{% if jeu.status %}
+
+    {% if is_granted('ROLE_WORKFLOW') %}
+
+        <div class="alert alert-warning" role="alert">
+            <span class="fa fa-exclamation-triangle"></span>
+            Ce jeu est encore au statut <strong>{{ jeu.status }}</strong>.
+            {% if (is_granted('ROLE_REDACTOR') and jeu.status == constant('JDJ\\JeuBundle\\Entity\\Jeu::WRITING')) %}
+                <a href="#" class="btn btn-success">Passer en Traduction</a>
+            {% elseif (is_granted('ROLE_TRANSLATOR') and jeu.status == constant('JDJ\\JeuBundle\\Entity\\Jeu::NEED_A_TRANSLATION')) %}
+                <a href="#" class="btn btn-success">Passer en relecture</a>
+            {% elseif (is_granted('ROLE_REVIEWER') and jeu.status == constant('JDJ\\JeuBundle\\Entity\\Jeu::NEED_A_REVIEW')) %}
+                <a href="#" class="btn btn-success">Passer en publication</a>
+            {% elseif (is_granted('ROLE_PUBLISHER') and jeu.status == constant('JDJ\\JeuBundle\\Entity\\Jeu::READY_TO_PUBLISH')) %}
+                <a href="#" class="btn btn-success">Publier</a>
+            {% endif %}
+        </div>
+
+    {% endif %}
+
+{% endif %}

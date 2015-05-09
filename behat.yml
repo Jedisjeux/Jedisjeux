@@ -151,6 +151,16 @@ default:
             filters:
                 tags: "@ecriture && ~@javascript"
 
+        jedizone:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\JeuBundle\Behat\JeuContext
+                - JDJ\LudographieBundle\Behat\PersonneContext
+                - JDJ\UserBundle\Behat\UserContext
+                - JDJ\CoreBundle\Behat\UtilsContext
+            filters:
+                tags: "@jedizone && ~@javascript"
+
     extensions:
         Behat\MinkExtension:
             sessions:

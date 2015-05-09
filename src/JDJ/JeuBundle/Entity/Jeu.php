@@ -20,8 +20,8 @@ class Jeu
      * status constants
      */
     const WRITING = "WRITING";
-    const NEAD_A_TRANSLATION = "NEAD_A_TRANSLATION";
-    const NEAD_A_REVIEW = "NEAD_A_REVIEW";
+    const NEED_A_TRANSLATION = "NEED_A_TRANSLATION";
+    const NEED_A_REVIEW = "NEED_A_REVIEW";
     const READY_TO_PUBLISH = "READY_TO_PUBLISH";
     const PUBLISHED = "PUBLISHED";
 
@@ -192,7 +192,7 @@ class Jeu
     /**
      * @var $status
      *
-     * @ORM\Column(name="status", type="string", columnDefinition="enum('WRITING', 'NEAD_A_TRANSLATION', 'NEAD_A_REVIEW', 'READY_TO_PUBLISH', 'PUBLISHED')")
+     * @ORM\Column(name="status", type="string", columnDefinition="enum('WRITING', 'NEED_A_TRANSLATION', 'NEED_A_REVIEW', 'READY_TO_PUBLISH', 'PUBLISHED')")
      */
     private $status;
 
@@ -980,5 +980,21 @@ class Jeu
     public function removeJeuImage(\JDJ\JeuBundle\Entity\JeuImage $jeuImages)
     {
         $this->jeuImages->removeElement($jeuImages);
+    }
+
+    /**
+     * This function returns the status list
+     *
+     * @return array
+     */
+    public static function getStatusList()
+    {
+        return array(
+            self::WRITING => self::WRITING,
+            self::NEAD_A_REVIEW => self::NEAD_A_REVIEW,
+            self::NEAD_A_TRANSLATION => self::NEAD_A_TRANSLATION,
+            self::READY_TO_PUBLISH => self::READY_TO_PUBLISH,
+            self::PUBLISHED => self::PUBLISHED,
+        );
     }
 }

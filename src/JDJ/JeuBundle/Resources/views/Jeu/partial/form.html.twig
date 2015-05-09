@@ -113,6 +113,18 @@
                 {{ form_widget(form.description) }}
             </div>
         </div>
+
+        <div class="row">
+            <div class="small-3 columns">
+                {{ form_label(form.status, 'Status') }}
+            </div>
+            <div class="error">
+                {{ form_errors(form.status) }}
+            </div>
+            <div class="small-9 columns">
+                {{ form_widget(form.status) }}
+            </div>
+        </div>
     </fieldset>
 
     {{ form_end(form) }}
