@@ -1,0 +1,5 @@
+jdj_jedizone_status:
+    resource: "@JDJJediZoneBundle/Controller/StatusController.php"
+    type:     annotation
+
+

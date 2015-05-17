@@ -991,8 +991,8 @@ class Jeu
     {
         return array(
             self::WRITING => self::WRITING,
-            self::NEAD_A_REVIEW => self::NEAD_A_REVIEW,
-            self::NEAD_A_TRANSLATION => self::NEAD_A_TRANSLATION,
+            self::NEED_A_REVIEW => self::NEED_A_REVIEW,
+            self::NEED_A_TRANSLATION => self::NEED_A_TRANSLATION,
             self::READY_TO_PUBLISH => self::READY_TO_PUBLISH,
             self::PUBLISHED => self::PUBLISHED,
         );

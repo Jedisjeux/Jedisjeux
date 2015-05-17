@@ -1,6 +1,5 @@
 $(document).ready(function () {
 
-
     initializeForms();
 
 
@@ -23,9 +22,7 @@ $(document).ready(function () {
      */
     $("#addGameCollectionModal").click(function (e) {
         e.preventDefault();
-        if ($(this).data('uid') > 0) {
-            $('#collectionModal').modal('show');
-        } else {
+        if ($(this).data('uid') <= 0) {
             $('#login-form-modal').modal('show');
         }
     });

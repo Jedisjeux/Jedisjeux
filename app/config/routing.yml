@@ -1,6 +1,5 @@
 jdj_jedi_zone:
-    resource: "@JDJJediZoneBundle/Controller/"
-    type:     annotation
+    resource: "@JDJJediZoneBundle/Resources/config/routing.yml"
     prefix:   /
 
 jdj_cms:

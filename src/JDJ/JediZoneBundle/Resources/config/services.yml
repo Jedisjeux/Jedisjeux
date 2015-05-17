@@ -1,0 +1,6 @@
+services:
+  app.service.status:
+      class:     JDJ\JediZoneBundle\Service\StatusService
+      arguments:
+          - "@doctrine.orm.entity_manager"
+          - JDJJeuBundle:Jeu
