@@ -5,37 +5,37 @@ namespace JDJ\ComptaBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use JDJ\ComptaBundle\Entity\Facture;
+use JDJ\ComptaBundle\Entity\Bill;
 use JDJ\ComptaBundle\Form\FactureType;
 
 /**
- * Facture controller.
+ * Bill controller.
  *
  */
 class FactureController extends Controller
 {
 
     /**
-     * Lists all Facture entities.
+     * Lists all Bill entities.
      *
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('JDJComptaBundle:Facture')->findAll();
+        $entities = $em->getRepository('JDJComptaBundle:Bill')->findAll();
 
-        return $this->render('JDJComptaBundle:Facture:index.html.twig', array(
+        return $this->render('JDJComptaBundle:Bill:index.html.twig', array(
             'entities' => $entities,
         ));
     }
     /**
-     * Creates a new Facture entity.
+     * Creates a new Bill entity.
      *
      */
     public function createAction(Request $request)
     {
-        $entity = new Facture();
+        $entity = new Bill();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -47,20 +47,20 @@ class FactureController extends Controller
             return $this->redirect($this->generateUrl('facture_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('JDJComptaBundle:Facture:new.html.twig', array(
+        return $this->render('JDJComptaBundle:Bill:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-    * Creates a form to create a Facture entity.
+    * Creates a form to create a Bill entity.
     *
-    * @param Facture $entity The entity
+    * @param Bill $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createCreateForm(Facture $entity)
+    private function createCreateForm(Bill $entity)
     {
         $form = $this->createForm(new FactureType(), $entity, array(
             'action' => $this->generateUrl('facture_create'),
@@ -73,59 +73,59 @@ class FactureController extends Controller
     }
 
     /**
-     * Displays a form to create a new Facture entity.
+     * Displays a form to create a new Bill entity.
      *
      */
     public function newAction()
     {
-        $entity = new Facture();
+        $entity = new Bill();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('JDJComptaBundle:Facture:new.html.twig', array(
+        return $this->render('JDJComptaBundle:Bill:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Finds and displays a Facture entity.
+     * Finds and displays a Bill entity.
      *
      */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JDJComptaBundle:Facture')->find($id);
+        $entity = $em->getRepository('JDJComptaBundle:Bill')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Facture entity.');
+            throw $this->createNotFoundException('Unable to find Bill entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('JDJComptaBundle:Facture:show.html.twig', array(
+        return $this->render('JDJComptaBundle:Bill:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),        ));
     }
 
     /**
-     * Displays a form to edit an existing Facture entity.
+     * Displays a form to edit an existing Bill entity.
      *
      */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JDJComptaBundle:Facture')->find($id);
+        $entity = $em->getRepository('JDJComptaBundle:Bill')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Facture entity.');
+            throw $this->createNotFoundException('Unable to find Bill entity.');
         }
 
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('JDJComptaBundle:Facture:edit.html.twig', array(
+        return $this->render('JDJComptaBundle:Bill:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -133,13 +133,13 @@ class FactureController extends Controller
     }
 
     /**
-    * Creates a form to edit a Facture entity.
+    * Creates a form to edit a Bill entity.
     *
-    * @param Facture $entity The entity
+    * @param Bill $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Facture $entity)
+    private function createEditForm(Bill $entity)
     {
         $form = $this->createForm(new FactureType(), $entity, array(
             'action' => $this->generateUrl('facture_update', array('id' => $entity->getId())),
@@ -151,17 +151,17 @@ class FactureController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Facture entity.
+     * Edits an existing Bill entity.
      *
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JDJComptaBundle:Facture')->find($id);
+        $entity = $em->getRepository('JDJComptaBundle:Bill')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Facture entity.');
+            throw $this->createNotFoundException('Unable to find Bill entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -174,14 +174,14 @@ class FactureController extends Controller
             return $this->redirect($this->generateUrl('facture_edit', array('id' => $id)));
         }
 
-        return $this->render('JDJComptaBundle:Facture:edit.html.twig', array(
+        return $this->render('JDJComptaBundle:Bill:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
     /**
-     * Deletes a Facture entity.
+     * Deletes a Bill entity.
      *
      */
     public function deleteAction(Request $request, $id)
@@ -191,10 +191,10 @@ class FactureController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('JDJComptaBundle:Facture')->find($id);
+            $entity = $em->getRepository('JDJComptaBundle:Bill')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Facture entity.');
+                throw $this->createNotFoundException('Unable to find Bill entity.');
             }
 
             $em->remove($entity);
@@ -205,7 +205,7 @@ class FactureController extends Controller
     }
 
     /**
-     * Creates a form to delete a Facture entity by id.
+     * Creates a form to delete a Bill entity by id.
      *
      * @param mixed $id The entity id
      *

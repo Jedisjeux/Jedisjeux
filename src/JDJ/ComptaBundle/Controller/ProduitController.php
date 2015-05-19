@@ -5,29 +5,29 @@ namespace JDJ\ComptaBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use JDJ\ComptaBundle\Entity\Produit;
+use JDJ\ComptaBundle\Entity\Product;
 use JDJ\ComptaBundle\Form\ProduitType;
 
 /**
- * Produit controller.
+ * Product controller.
  *
  */
 class ProduitController extends Controller
 {
 
     /**
-     * Lists all Produit entities.
+     * Lists all Product entities.
      *
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('JDJComptaBundle:Produit')->findAll();
+        $entities = $em->getRepository('JDJComptaBundle:Product')->findAll();
 
         $deleteForms = array();
 
-        /** @var Produit $entity */
+        /** @var Product $entity */
         foreach ($entities as $entity) {
             $deleteForms[$entity->getId()] = $this->createDeleteForm($entity->getId())->createView();
         }
@@ -38,12 +38,12 @@ class ProduitController extends Controller
         ));
     }
     /**
-     * Creates a new Produit entity.
+     * Creates a new Product entity.
      *
      */
     public function createAction(Request $request)
     {
-        $entity = new Produit();
+        $entity = new Product();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -62,13 +62,13 @@ class ProduitController extends Controller
     }
 
     /**
-     * Creates a form to create a Produit entity.
+     * Creates a form to create a Product entity.
      *
-     * @param Produit $entity The entity
+     * @param Product $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Produit $entity)
+    private function createCreateForm(Product $entity)
     {
         $form = $this->createForm(new ProduitType(), $entity, array(
             'action' => $this->generateUrl('produit_create'),
@@ -81,12 +81,12 @@ class ProduitController extends Controller
     }
 
     /**
-     * Displays a form to create a new Produit entity.
+     * Displays a form to create a new Product entity.
      *
      */
     public function newAction()
     {
-        $entity = new Produit();
+        $entity = new Product();
         $form   = $this->createCreateForm($entity);
 
         return $this->render('compta/produit/new.html.twig', array(
@@ -96,17 +96,17 @@ class ProduitController extends Controller
     }
 
     /**
-     * Finds and displays a Produit entity.
+     * Finds and displays a Product entity.
      *
      */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JDJComptaBundle:Produit')->find($id);
+        $entity = $em->getRepository('JDJComptaBundle:Product')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Produit entity.');
+            throw $this->createNotFoundException('Unable to find Product entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -117,17 +117,17 @@ class ProduitController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Produit entity.
+     * Displays a form to edit an existing Product entity.
      *
      */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JDJComptaBundle:Produit')->find($id);
+        $entity = $em->getRepository('JDJComptaBundle:Product')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Produit entity.');
+            throw $this->createNotFoundException('Unable to find Product entity.');
         }
 
         $form = $this->createEditForm($entity);
@@ -139,13 +139,13 @@ class ProduitController extends Controller
     }
 
     /**
-     * Creates a form to edit a Produit entity.
+     * Creates a form to edit a Product entity.
      *
-     * @param Produit $entity The entity
+     * @param Product $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createEditForm(Produit $entity)
+    private function createEditForm(Product $entity)
     {
         $form = $this->createForm(new ProduitType(), $entity, array(
             'action' => $this->generateUrl('produit_update', array('id' => $entity->getId())),
@@ -158,7 +158,7 @@ class ProduitController extends Controller
     }
 
     /**
-     * Edits an existing Produit entity.
+     * Edits an existing Product entity.
      *
      * @param Request $request
      * @param $id
@@ -168,10 +168,10 @@ class ProduitController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JDJComptaBundle:Produit')->find($id);
+        $entity = $em->getRepository('JDJComptaBundle:Product')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Produit entity.');
+            throw $this->createNotFoundException('Unable to find Product entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -192,7 +192,7 @@ class ProduitController extends Controller
     }
 
     /**
-     * Deletes a Produit entity.
+     * Deletes a Product entity.
      *
      * @param Request $request
      * @param $id
@@ -205,10 +205,10 @@ class ProduitController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('JDJComptaBundle:Produit')->find($id);
+            $entity = $em->getRepository('JDJComptaBundle:Product')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Produit entity.');
+                throw $this->createNotFoundException('Unable to find Product entity.');
             }
 
             $em->remove($entity);
@@ -219,7 +219,7 @@ class ProduitController extends Controller
     }
 
     /**
-     * Creates a form to delete a Produit entity by id.
+     * Creates a form to delete a Product entity by id.
      *
      * @param int $id The entity id
      *
