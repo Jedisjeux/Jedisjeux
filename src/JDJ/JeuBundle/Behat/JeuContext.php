@@ -28,6 +28,12 @@ class JeuContext extends DefaultContext
 
         foreach ($table->getHash() as $data) {
 
+            if(!$data['status']) {
+                $status = Jeu::PUBLISHED;
+            } else {
+                $status = $data['status'];
+            }
+
 
             $jeu = new Jeu();
             $jeu
@@ -35,7 +41,7 @@ class JeuContext extends DefaultContext
                 ->setAgeMin(isset($data['age_min']) ? $data['age_min'] : null)
                 ->setJoueurMin(isset($data['joueur_min']) ? $data['joueur_min'] : null)
                 ->setJoueurMax(isset($data['joueur_max']) ? $data['joueur_max'] : null)
-                ->setStatus($data['status'])
+                ->setStatus($status)
             ;
 
             $manager->persist($jeu);

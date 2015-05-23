@@ -190,7 +190,7 @@ class Jeu
     private $notes;
 
     /**
-     * @var $status
+     * @var string
      *
      * @ORM\Column(name="status", type="string", columnDefinition="enum('WRITING', 'NEED_A_TRANSLATION', 'NEED_A_REVIEW', 'READY_TO_PUBLISH', 'PUBLISHED')")
      */

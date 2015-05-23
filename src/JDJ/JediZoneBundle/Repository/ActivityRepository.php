@@ -1,8 +1,8 @@
 <?php
 
 namespace JDJ\JediZoneBundle\Repository;
+use JDJ\CoreBundle\Entity\EntityRepository;
 
-use Doctrine\ORM\EntityRepository;
 
 /**
  * ActivityRepository

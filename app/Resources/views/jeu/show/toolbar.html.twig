@@ -68,7 +68,7 @@
         <a href="#collectionModal" class="b-tooltip btn btn-default btn-sm collection btn-lg"
            data-toggle="modal" type="button" data-toggle="tooltip" data-placement="top"
            title="Ajouter à une liste" name="Ajouter à une liste" id="addGameCollectionModal"
-            data-jeu-id="{{ jeu.id }}" data-uid="{% if app.user %}
+            data-jeu-id="{{ jeu.id }}" data-user-id="{% if app.user %}
                                                                 {{ app.user.id }}
                                                             {% endif %}"
            ><span

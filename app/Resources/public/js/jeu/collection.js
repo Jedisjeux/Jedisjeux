@@ -22,7 +22,7 @@ $(document).ready(function () {
      */
     $("#addGameCollectionModal").click(function (e) {
         e.preventDefault();
-        if ($(this).data('uid') <= 0) {
+        if ($(this).data('user-id') <= 0) {
             $('#login-form-modal').modal('show');
         }
     });
@@ -34,7 +34,7 @@ $(document).ready(function () {
         e.preventDefault();
 
         if ($('#input-list-name').val() !== "") {
-            createCollection($(this).data('jeu-id'), $(this).data('uid'), $('#input-list-name').val(), $('#input-list-description').val());
+            createCollection($(this).data('jeu-id'), $(this).data('user-id'), $('#input-list-name').val(), $('#input-list-description').val());
         } else {
             $('#form-group-name-list').addClass('has-error');
         }

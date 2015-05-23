@@ -17,7 +17,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class Activity
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -65,7 +65,7 @@ class Activity
     /**
      * Get id
      *
-     * @return integer 
+     * @return int
      */
     public function getId()
     {
