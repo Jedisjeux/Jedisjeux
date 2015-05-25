@@ -9,7 +9,7 @@ use JDJ\UserBundle\Entity\User;
 
 
 /**
- * Collection
+ * status service
  */
 class StatusService
 {

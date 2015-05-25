@@ -2,6 +2,7 @@
 
 namespace JDJ\JediZoneBundle\Repository;
 use JDJ\CoreBundle\Entity\EntityRepository;
+use JDJ\JediZoneBundle\Entity\Notification;
 
 
 /**
@@ -12,4 +13,16 @@ use JDJ\CoreBundle\Entity\EntityRepository;
  */
 class NotificationRepository extends EntityRepository
 {
+
+    /**
+     * This function persist the notification
+     *
+     * @param Notification $notification
+     */
+    public function saveNotification(Notification $notification)
+    {
+        //persist the notification
+        $this->_em->persist($notification);
+        $this->_em->flush();
+    }
 }

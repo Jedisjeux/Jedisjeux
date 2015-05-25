@@ -43,6 +43,14 @@ class Activity
     private $users;
 
     /**
+     * @var JDJ\JeuBundle\Entity\Jeu
+     *
+     * @ORM\OneToOne(targetEntity="JDJ\JeuBundle\Entity\Jeu", inversedBy="activity", cascade={"persist", "merge"})
+     * @ORM\JoinColumn(name="jeu_id", referencedColumnName="id")
+     */
+    private $jeu;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\OneToMany(targetEntity="Notification", mappedBy="activity" , cascade={"persist"})
@@ -159,5 +167,29 @@ class Activity
     public function getNotifications()
     {
         return $this->notifications;
+    }
+
+    /**
+     * Set jeu
+     *
+     * @param \JDJ\JeuBundle\Entity\Jeu $jeu
+     *
+     * @return Activity
+     */
+    public function setJeu(\JDJ\JeuBundle\Entity\Jeu $jeu = null)
+    {
+        $this->jeu = $jeu;
+
+        return $this;
+    }
+
+    /**
+     * Get jeu
+     *
+     * @return \JDJ\JeuBundle\Entity\Jeu
+     */
+    public function getJeu()
+    {
+        return $this->jeu;
     }
 }

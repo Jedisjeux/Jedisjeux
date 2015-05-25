@@ -4,3 +4,14 @@ services:
       arguments:
           - "@doctrine.orm.entity_manager"
           - JDJJeuBundle:Jeu
+  app.service.notification:
+      class:     JDJ\JediZoneBundle\Service\NotificationService
+      arguments:
+          - "@doctrine.orm.entity_manager"
+          - JDJJediZoneBundle:Notification
+  app.service.activity:
+        class:     JDJ\JediZoneBundle\Service\ActivityService
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - JDJJediZoneBundle:Activity
+

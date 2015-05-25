@@ -218,6 +218,13 @@ class Jeu
      */
     private $userGameAttributes;
 
+    /**
+     * @var JDJ\JediZoneBundle\Entity\Activity
+     *
+     * @ORM\OneToOne(targetEntity="JDJ\JediZoneBundle\Entity\Activity", mappedBy="jeu", cascade={"persist", "merge"})
+     */
+    private $activity;
+
 
     /**
      * Constructor
@@ -996,5 +1003,29 @@ class Jeu
             self::READY_TO_PUBLISH => self::READY_TO_PUBLISH,
             self::PUBLISHED => self::PUBLISHED,
         );
+    }
+
+    /**
+     * Set activity
+     *
+     * @param \JDJ\JediZoneBundle\Entity\Activity $activity
+     *
+     * @return Jeu
+     */
+    public function setActivity(\JDJ\JediZoneBundle\Entity\Activity $activity = null)
+    {
+        $this->activity = $activity;
+
+        return $this;
+    }
+
+    /**
+     * Get activity
+     *
+     * @return \JDJ\JediZoneBundle\Entity\Activity
+     */
+    public function getActivity()
+    {
+        return $this->activity;
     }
 }

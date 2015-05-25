@@ -16,6 +16,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Notification
 {
+    const ACTION_ACCEPT = 'accept';
+    const ACTION_DECLINE = 'decline';
+
     /**
      * @var integer
      *
@@ -53,7 +56,7 @@ class Notification
      *
      * @ORM\Column(type="boolean")
      */
-    private $read;
+    private $isRead;
 
 
     /**
@@ -167,12 +170,12 @@ class Notification
     /**
      * Set read
      *
-     * @param boolean $read
+     * @param boolean $isRead
      * @return Notification
      */
-    public function setRead($read)
+    public function setIsRead($isRead)
     {
-        $this->read = $read;
+        $this->isRead = $isRead;
 
         return $this;
     }
@@ -182,9 +185,9 @@ class Notification
      *
      * @return boolean 
      */
-    public function getRead()
+    public function isRead()
     {
-        return $this->read;
+        return $this->isRead;
     }
 
     /**

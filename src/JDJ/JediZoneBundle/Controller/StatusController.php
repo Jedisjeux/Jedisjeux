@@ -2,7 +2,8 @@
 
 namespace JDJ\JediZoneBundle\Controller;
 
-use Proxies\__CG__\JDJ\JeuBundle\Entity\Jeu;
+use JDJ\JediZoneBundle\Listener\NotificationListener;
+use JDJ\JeuBundle\Entity\Jeu;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JDJ\JediZoneBundle\Service\StatusService;
@@ -16,6 +17,7 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\VarDumper\VarDumper;
 
 class StatusController extends Controller
 {
@@ -29,7 +31,7 @@ class StatusController extends Controller
      * @ParamConverter("jeu", class="JDJJeuBundle:Jeu")
      * @Method({"POST"})
      */
-    public function changeStatusAction(\JDJ\JeuBundle\Entity\Jeu $jeu, $status)
+    public function changeStatusAction(Jeu $jeu, $status)
     {
 
         //Check user is granted
@@ -38,10 +40,23 @@ class StatusController extends Controller
             if (in_array($status, array_keys(\JDJ\JeuBundle\Entity\Jeu::getStatusList()))) {
 
                 //Change status
-                $this
-                    ->getStatusService()
-                    ->changeGameStatus($jeu, $status);
+                /* $this
+                     ->getStatusService()
+                     ->changeGameStatus($jeu, $status);*/
 
+                //Notification creation
+                $notificationListener = new NotificationListener(
+                    $this->get('app.service.notification'),
+                    $jeu
+                );
+                $dispatcher = $this->get('event_dispatcher');
+
+                $dispatcher->addListener(
+                    'kernel.response',
+                    array($notificationListener, 'updateActivity')
+                );
+
+                //Prepare answer
                 $response = new JsonResponse();
                 $response->setStatusCode(JsonResponse::HTTP_OK);
 
@@ -72,6 +87,55 @@ class StatusController extends Controller
             );
         }
 
+        return $response;
+
+    }
+
+
+    /**
+     * TODO a virer
+     *
+     * @Route("/jeu/{jeu}/test", name="notif_test")
+     * @ParamConverter("jeu", class="JDJJeuBundle:Jeu")
+     */
+    public function testAction(Jeu $jeu)
+    {
+
+        //Check user is granted
+        if ($this->container->get('security.context')->isGranted('ROLE_WORKFLOW')) {
+
+
+            //Gets the user that changes the game status
+            $user = $this->get('security.context')->getToken()->getUser();
+
+
+                //Notification creation
+                $notificationListener = new NotificationListener(
+                    $this->get('app.service.notification'),
+                    $this->get('app.service.activity'),
+                    $jeu,
+                    $user
+                );
+                $dispatcher = $this->get('event_dispatcher');
+
+                $dispatcher->addListener(
+                    'kernel.response',
+                    array($notificationListener, 'updateActivity')
+                );
+
+
+            } else {
+                $response = new JsonResponse();
+                $response->setStatusCode(JsonResponse::HTTP_BAD_REQUEST);
+
+                $response->setData(
+                    array(
+                        "message" => self::STATUS_ERROR_MESSAGE,
+                    )
+                );
+            }
+
+        $response = new JsonResponse();
         return $response;
 
     }

@@ -2,6 +2,7 @@
 
 namespace JDJ\JediZoneBundle\Repository;
 use JDJ\CoreBundle\Entity\EntityRepository;
+use JDJ\JediZoneBundle\Entity\Activity;
 
 
 /**
@@ -12,4 +13,16 @@ use JDJ\CoreBundle\Entity\EntityRepository;
  */
 class ActivityRepository extends EntityRepository
 {
+
+    /**
+     * This function persist the activity
+     *
+     * @param Activity $activity
+     */
+    public function saveActivity(Activity $activity)
+    {
+        //persist the activity
+        $this->_em->persist($activity);
+        $this->_em->flush();
+    }
 }
