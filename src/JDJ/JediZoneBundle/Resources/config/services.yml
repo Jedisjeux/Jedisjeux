@@ -8,6 +8,7 @@ services:
       class:     JDJ\JediZoneBundle\Service\NotificationService
       arguments:
           - "@doctrine.orm.entity_manager"
+          - "@app.service.activity"
           - JDJJediZoneBundle:Notification
   app.service.activity:
         class:     JDJ\JediZoneBundle\Service\ActivityService

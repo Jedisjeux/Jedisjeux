@@ -75,7 +75,7 @@ class ActivityService
         }
 
         //Save the activity to the database
-        $this->repo->saveActivity($activity);
+        $this->saveActivity($activity);
 
         return $activity;
     }
@@ -120,5 +120,15 @@ class ActivityService
         }
 
         return $activity;
+    }
+
+    /**
+     * Save the activity to the database
+     *
+     * @param $activity
+     */
+    public function saveActivity($activity)
+    {
+        $this->repo->saveActivity($activity);
     }
 }

@@ -45,9 +45,14 @@ class StatusController extends Controller
                      ->changeGameStatus($jeu, $status);*/
 
                 //Notification creation
+                //Gets the user that changes the game status
+                $user = $this->get('security.context')->getToken()->getUser();
+
                 $notificationListener = new NotificationListener(
                     $this->get('app.service.notification'),
-                    $jeu
+                    $this->get('app.service.activity'),
+                    $jeu,
+                    $user
                 );
                 $dispatcher = $this->get('event_dispatcher');
 

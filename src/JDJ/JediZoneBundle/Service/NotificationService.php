@@ -6,7 +6,9 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping as ORM;
 use JDJ\JediZoneBundle\Entity\Activity;
 use JDJ\JediZoneBundle\Entity\Notification;
+use JDJ\JeuBundle\Entity\Jeu;
 use JDJ\UserBundle\Entity\User;
+use Symfony\Component\VarDumper\VarDumper;
 
 
 /**
@@ -29,6 +31,11 @@ class NotificationService
     protected $repo;
 
     /**
+     * @var ActivityService
+     */
+    protected $activityService;
+
+    /**
      * The Fully-Qualified Class Name for our entity
      * @var string
      */
@@ -41,10 +48,11 @@ class NotificationService
      * @param EntityManager $em
      * @param $class
      */
-    public function __construct(EntityManager $em, $class)
+    public function __construct(EntityManager $em, ActivityService $activityService, $class)
     {
         $this->em = $em;
         $this->class = $class;
+        $this->activityService = $activityService;
         $this->repo = $em->getRepository($class);
     }
 
@@ -57,14 +65,24 @@ class NotificationService
      */
     public function createNotifications(Activity $activity)
     {
+        //Notifications for the users of the activity
         $tabUser = $activity->getUsers();
+        //Notifications for the workflow users that have the necessary role
+        $tabRoleUser = $this->getUserJoiningActivity($activity);
+        if (!empty($tabRoleUser)) {
+            foreach ($tabRoleUser as $user) {
+                if (!$tabUser->contains($user)) {
+                    $tabUser->add($user);
+                }
+            }
+        }
+
 
         /**
-         * for the user of the activity
-         * Create a notification
+         * Create the notifications
          */
-        if(!empty($tabUser)){
-            foreach($tabUser as $user) {
+        if (!empty($tabUser)) {
+            foreach ($tabUser as $user) {
 
                 //Create the notification
                 $notification = $this->createNotification($user, $activity);
@@ -78,15 +96,10 @@ class NotificationService
             }
         }
 
-        /**
-         * Create notification for the workflow dudes that work at the new status of the game
-         */
-
-        //TODO
-
         //persist the activity
-        $this->em->persist($activity);
-        $this->em->flush();
+        $this
+            ->activityService
+            ->saveActivity($activity);
 
         return $activity;
     }
@@ -112,6 +125,55 @@ class NotificationService
             ->setComment("");
 
         return $notification;
+    }
+
+
+    /**
+     * This function gets all the user that are concerned by the new status of the game
+     *
+     * @param $activity
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserJoiningActivity($activity)
+    {
+        $role = $this->getConcernedRoleFromGameStatus($activity->getJeu());
+
+        $tabUser = null;
+        if ($role) {
+            $tabUser = $this
+                ->em
+                ->getRepository('JDJUserBundle:User')
+                ->findByRole($role);
+        }
+
+        return $tabUser;
+    }
+
+    /**
+     * This function returns the concerned role for the new status of a game
+     *
+     * @param Jeu $jeu
+     * @return string
+     */
+    public function getConcernedRoleFromGameStatus(Jeu $jeu)
+    {
+        $role = null;
+        switch ($jeu->getStatus()) {
+            case Jeu::NEED_A_REVIEW :
+                $role = 'ROLE_REVIEWER';
+                break;
+            case Jeu::WRITING :
+                $role = 'ROLE_REDACTOR';
+                break;
+            case Jeu::NEED_A_TRANSLATION :
+                $role = 'ROLE_TRANSLATOR';
+                break;
+            case Jeu::READY_TO_PUBLISH :
+                $role = 'ROLE_PUBLISHER';
+                break;
+        }
+
+        return $role;
     }
 
 
