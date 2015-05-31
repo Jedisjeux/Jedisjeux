@@ -1,0 +1,49 @@
+{% extends "::base.html.twig" %}
+
+{% block container %}
+
+    <div class="block-heading-two">
+        <h3><span>Liste des factures</span></h3>
+    </div>
+
+    <ul class="list-inline">
+        <li>
+            <a class="btn btn-green" href="{{ path('compta_bill_new') }}">
+                <span class="glyphicon glyphicon-plus"></span>
+                Créer une facture
+            </a>
+        </li>
+    </ul>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>{{ 'label.customer.companyName'|trans }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for bill in bills %}
+            <tr>
+                <td>{{ bill.customer.companyName }}</td>
+                <td>
+                    <ul class="list-inline">
+                        <li>
+                            <a class="btn btn-green" href="{{ path('compta_bill_edit', { 'bill': bill.id }) }}">
+                                <span class="glyphicon glyphicon-pencil"></span> Modifier
+                            </a>
+                        </li>
+                        <li>
+                            {{ form_start(deleteForms[bill.id]) }}
+                            <button type="submit" class="btn btn-danger">
+                                <span class="glyphicon glyphicon-remove"></span> Supprimer
+                            </button>
+                            {{ form_end(deleteForms[bill.id]) }}
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock container %}

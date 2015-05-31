@@ -39,7 +39,8 @@ jdj_jeu:
     prefix:   /jeu
 
 jdj_compta:
-    resource: "@JDJComptaBundle/Resources/config/routing.yml"
+    resource: "@JDJComptaBundle/Controller/"
+    type:     annotation
     prefix:   /compta
 
 jdj_web:

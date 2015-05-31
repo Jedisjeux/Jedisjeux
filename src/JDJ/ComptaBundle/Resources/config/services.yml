@@ -1,7 +1,21 @@
 parameters:
-#    jdj_compta.example.class: JDJ\ComptaBundle\Example
+    app.form.type.address.class: JDJ\ComptaBundle\Form\AddressType
+    app.manager.product.class: JDJ\ComptaBundle\Entity\Manager\ProductManager
+    app.manager.bill.class: JDJ\ComptaBundle\Entity\Manager\BillManager
 
 services:
-#    jdj_compta.example:
-#        class: %jdj_compta.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    app.form.type.address:
+        class: %app.form.type.address.class%
+        tags:
+              - { name: form.type, alias: jdj_comptabundle_address }
+
+    app.manager.product:
+        class: %app.manager.product.class%
+        arguments:
+            - "@doctrine.orm.entity_manager"
+
+    app.manager.bill:
+        class: %app.manager.bill.class%
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@app.manager.product"

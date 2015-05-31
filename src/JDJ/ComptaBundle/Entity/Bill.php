@@ -2,6 +2,7 @@
 
 namespace JDJ\ComptaBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -23,16 +24,9 @@ class Bill
     private $id;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(type="decimal", precision=6, scale=2, nullable=false)
-     */
-    private $totalPrice;
-
-    /**
      * @var \DateTime
      *
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $paidAt;
 
@@ -48,6 +42,129 @@ class Bill
      * @var Customer
      *
      * @ORM\ManyToOne(targetEntity="Customer", inversedBy="bills", cascade={"persist", "merge"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $customer;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\Id
+     * @ORM\OneToMany(targetEntity="BillProduct", mappedBy="bill", cascade={"persist", "merge"})
+     */
+    private $billProducts;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->billProducts = new ArrayCollection();
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getPaidAt()
+    {
+        return $this->paidAt;
+    }
+
+    /**
+     * @param \DateTime $paidAt
+     * @return $this
+     */
+    public function setPaidAt($paidAt)
+    {
+        $this->paidAt = $paidAt;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param \DateTime $createdAt
+     * @return $this
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Customer
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
+
+    /**
+     * @param Customer $customer
+     * @return $this
+     */
+    public function setCustomer($customer)
+    {
+        $this->customer = $customer;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getBillProducts()
+    {
+        return $this->billProducts;
+    }
+
+    /**
+     * @param ArrayCollection $billProducts
+     * @return $this
+     */
+    public function setBillProducts($billProducts)
+    {
+        $this->billProducts = $billProducts;
+
+        return $this;
+    }
+
+    /**
+     * @param BillProduct $billProduct
+     * @return $this
+     */
+    public function addBillProduct(BillProduct $billProduct)
+    {
+        $this->billProducts[] = $billProduct;
+
+        return $this;
+    }
 }

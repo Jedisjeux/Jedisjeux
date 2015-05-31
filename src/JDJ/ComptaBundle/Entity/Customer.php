@@ -29,6 +29,20 @@ class Customer
     private $id;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    private $companyName;
+
+    /**
+     * @var Address
+     *
+     * @ORM\OneToOne(targetEntity="Address", cascade={"persist", "merge"})
+     */
+    private $address;
+
+    /**
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Bill", mappedBy="customer", cascade={"persist", "merge"})
@@ -41,5 +55,89 @@ class Customer
     public function __construct()
     {
         $this->bills = new ArrayCollection();
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCompanyName()
+    {
+        return $this->companyName;
+    }
+
+    /**
+     * @param string $companyName
+     * @return $this
+     */
+    public function setCompanyName($companyName)
+    {
+        $this->companyName = $companyName;
+
+        return $this;
+    }
+
+    /**
+     * @return Address
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param Address $address
+     * @return $this
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getBills()
+    {
+        return $this->bills;
+    }
+
+    /**
+     * @param ArrayCollection $bills
+     * @return $this
+     */
+    public function setBills($bills)
+    {
+        $this->bills = $bills;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getCompanyName();
     }
 }

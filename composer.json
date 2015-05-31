@@ -49,7 +49,8 @@
         "knplabs/knp-paginator-bundle": "dev-master",
         "craue/formflow-bundle": "~2.0",
         "symfony-cmf/content-bundle": "~1.2",
-        "friendsofsymfony/jsrouting-bundle": "~1.5"
+        "friendsofsymfony/jsrouting-bundle": "~1.5",
+        "jms/translation-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

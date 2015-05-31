@@ -1,12 +1,19 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: loic_fremont
+ * Date: 20/05/2015
+ * Time: 15:12
+ */
 
-namespace JDJ\JeuBundle\Form;
+namespace JDJ\ComptaBundle\Form;
+
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class AddonType extends AbstractType
+class ProductType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,27 +22,19 @@ class AddonType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('url')
-            ->add('libelle')
-            ->add('jeu')
-            ->add('typeAddon')
-            ->add('langues', 'entity', array(
-                    'class' => 'JDJWebBundle:Langue',
-                    'multiple' => true,
-                    'expanded' => false,
-                    'required' => true,
-                )
-            )
+            ->add('name')
+            ->add('price')
+            ->add('subscriptionDuration')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'JDJ\JeuBundle\Entity\Addon'
+            'data_class' => 'JDJ\ComptaBundle\Entity\Product'
         ));
     }
 
@@ -44,6 +43,6 @@ class AddonType extends AbstractType
      */
     public function getName()
     {
-        return 'jdj_jeubundle_addon';
+        return 'jdj_comptabundle_product';
     }
 }
