@@ -1,4 +1,4 @@
-/<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -38,130 +38,130 @@
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="#">
-    </head>
+</head>
 
-    <!-- Add class "boxed" along with body for boxed layout. -->
-    <!-- Add "pattern-x" (1 to 5) for background patterns. -->
-    <!-- Add "img-x" (1 to 5) for background images. -->
-    <body>
+<!-- Add class "boxed" along with body for boxed layout. -->
+<!-- Add "pattern-x" (1 to 5) for background patterns. -->
+<!-- Add "img-x" (1 to 5) for background images. -->
+<body>
 
-    {% include 'layout/loading.html.twig' %}
+{% include 'layout/loading.html.twig' %}
 
-    <!-- Outer Starts -->
-    <div class="outer">
+<!-- Outer Starts -->
+<div class="outer">
 
-        <!-- Top bar starts -->
-        {% include "layout/top-bar.html.twig" %}
+    <!-- Top bar starts -->
+    {% include "layout/top-bar.html.twig" %}
 
-        <!-- Top bar ends -->
+    <!-- Top bar ends -->
 
-        <!-- Header One Starts -->
-        {% include "layout/header-1.html.twig" %}
+    <!-- Header One Starts -->
+    {% include "layout/header-1.html.twig" %}
 
-        <!-- Header one ends -->
+    <!-- Header one ends -->
 
-        <br/>
+    <br/>
 
-        <!-- Main content starts -->
+    <!-- Main content starts -->
 
-        <div class="main-block">
+    <div class="main-block">
 
-            <div class="magazine">
+        <div class="magazine">
 
-                <div class="container">
+            <div class="container">
 
-                    {% include "layout/notify.html.twig" %}
+                {% include "layout/notify.html.twig" %}
 
-                    {% include "layout/login-form-modal.html.twig" %}
+                {% include "layout/login-form-modal.html.twig" %}
 
-                    <div class="row">
+                <div class="row">
 
-                        {% block fos_user_content %}
-                            {% block body %}
-                                {% block container %}
-                                    <!--
-                                    Inherit this block to write
-                                    Content without sidebar
-                                    -->
-                                    <div class="col-md-8">
+                    {% block fos_user_content %}
+                    {% block body %}
+                    {% block container %}
+                    <!--
+                    Inherit this block to write
+                    Content without sidebar
+                    -->
+                    <div class="col-md-8">
 
-                                        {% block container_content %}
-                                            <!--
-                                            Inherit this block to write
-                                            Content with a sidebar
-                                            -->
-                                        {% endblock container_content %}
-
-                                    </div>
-
-                                    <!-- Sidebar column -->
-                                    <div class="col-md-4">
-
-                                        <!-- Sidebar -->
-                                        <div class="sidebar">
-
-                                            {% block sidebar_content %}
-                                                <!--
-                                                Inherit this block to write
-                                                Content in the sidebar
-                                                -->
-                                            {% endblock sidebar_content %}
-
-                                        </div>
-
-                                    </div>
-
-                                {% endblock container %}
-                            {% endblock body %}
-                        {% endblock fos_user_content %}
+                        {% block container_content %}
+                            <!--
+                            Inherit this block to write
+                            Content with a sidebar
+                            -->
+                        {% endblock container_content %}
 
                     </div>
+
+                    <!-- Sidebar column -->
+                    <div class="col-md-4">
+
+                        <!-- Sidebar -->
+                        <div class="sidebar">
+
+                            {% block sidebar_content %}
+                                <!--
+                                Inherit this block to write
+                                Content in the sidebar
+                                -->
+                            {% endblock sidebar_content %}
+
+                        </div>
+
+                    </div>
+
+                    {% endblock container %}
+                    {% endblock body %}
+                    {% endblock fos_user_content %}
 
                 </div>
 
             </div>
 
-            <!-- Main content ends -->
-
-            <!-- Foot Starts -->
-
-            {% include "layout/foot.html.twig" %}
-
-            <!-- Foot Ends -->
-
-            <!-- Footer Starts -->
-
-            {% include "layout/footer.html.twig" %}
-
-            <!-- Footer Ends -->
-
         </div>
 
-        <!-- Outer Ends -->
+        <!-- Main content ends -->
 
-        <!-- Scroll to top -->
-        <span class="totop"><a href="#"><i class="fa fa-angle-up bg-color"></i></a></span>
+        <!-- Foot Starts -->
 
-        <!-- Javascript files -->
+        {% include "layout/foot.html.twig" %}
 
-        {% block foot_script_assetic %}
-            {% javascripts output='js/compiled/all.js'
-            'bower_components/jquery/dist/jquery.min.js'
-            '@MopaBootstrapBundle/Resources/public/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js'
-            '@MopaBootstrapBundle/Resources/public/bootstrap-sass/assets/javascripts/bootstrap/*.js'
-            '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-collection.js'
-            '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-subnav.js'
-            'bower_components/jquery-ui/jquery-ui.min.js'
-            'bower_components/bootstrap-star-rating/js/star-rating.min.js'
-            'bower_components/fancybox/lib/jquery.mousewheel-3.0.6.pack.js'
-            'bower_components/fancybox/source/jquery.fancybox.pack.js'
-            'bower_components/fancybox/source/helpers/jquery.fancybox-buttons.js'
-            'bower_components/fancybox/source/helpers/jquery.fancybox-media.js'
-            'bower_components/fancybox/source/helpers/jquery.fancybox-thumbs.js'
-            'bower_components/multiple-select/jquery.multiple.select.js'
-            '../app/Resources/public/js/*'
-            '../app/Resources/public/js/*/*'
-            '@JDJJeuBundle/Resources/publicjs/jeu/*' %}
+        <!-- Foot Ends -->
+
+        <!-- Footer Starts -->
+
+        {% include "layout/footer.html.twig" %}
+
+        <!-- Footer Ends -->
+
+    </div>
+
+    <!-- Outer Ends -->
+
+    <!-- Scroll to top -->
+    <span class="totop"><a href="#"><i class="fa fa-angle-up bg-color"></i></a></span>
+
+    <!-- Javascript files -->
+
+    {% block foot_script_assetic %}
+        {% javascripts output='js/compiled/all.js'
+        'bower_components/jquery/dist/jquery.min.js'
+        '@MopaBootstrapBundle/Resources/public/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js'
+        '@MopaBootstrapBundle/Resources/public/bootstrap-sass/assets/javascripts/bootstrap/*.js'
+        '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-collection.js'
+        '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-subnav.js'
+        'bower_components/jquery-ui/jquery-ui.min.js'
+        'bower_components/bootstrap-star-rating/js/star-rating.min.js'
+        'bower_components/fancybox/lib/jquery.mousewheel-3.0.6.pack.js'
+        'bower_components/fancybox/source/jquery.fancybox.pack.js'
+        'bower_components/fancybox/source/helpers/jquery.fancybox-buttons.js'
+        'bower_components/fancybox/source/helpers/jquery.fancybox-media.js'
+        'bower_components/fancybox/source/helpers/jquery.fancybox-thumbs.js'
+        'bower_components/multiple-select/jquery.multiple.select.js'
+        '../app/Resources/public/js/*'
+        '../app/Resources/public/js/*/*'
+        '@JDJJeuBundle/Resources/public/js/jeu/*' %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
