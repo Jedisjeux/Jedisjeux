@@ -29,7 +29,7 @@
         '../app/Resources/public/sass/module/core/*.scss'
         '../app/Resources/public/sass/module/collection/*.scss'
         filter='cssrewrite' output='css/compiled/all.css' %}
-        <link rel="stylesheet" href="{{ asset_url }}" />
+        <link rel="stylesheet" href="{{ asset_url }}"/>
         {% endstylesheets %}
 
     {% endblock head_style %}
@@ -77,42 +77,42 @@
                 <div class="row">
 
                     {% block fos_user_content %}
-                    {% block body %}
-                    {% block container %}
-                    <!--
-                    Inherit this block to write
-                    Content without sidebar
-                    -->
-                    <div class="col-md-8">
-
-                        {% block container_content %}
-                            <!--
-                            Inherit this block to write
-                            Content with a sidebar
-                            -->
-                        {% endblock container_content %}
-
-                    </div>
-
-                    <!-- Sidebar column -->
-                    <div class="col-md-4">
-
-                        <!-- Sidebar -->
-                        <div class="sidebar">
-
-                            {% block sidebar_content %}
+                        {% block body %}
+                            {% block container %}
                                 <!--
                                 Inherit this block to write
-                                Content in the sidebar
+                                Content without sidebar
                                 -->
-                            {% endblock sidebar_content %}
+                                <div class="col-md-8">
 
-                        </div>
+                                    {% block container_content %}
+                                        <!--
+                                        Inherit this block to write
+                                        Content with a sidebar
+                                        -->
+                                    {% endblock container_content %}
 
-                    </div>
+                                </div>
 
-                    {% endblock container %}
-                    {% endblock body %}
+                                <!-- Sidebar column -->
+                                <div class="col-md-4">
+
+                                    <!-- Sidebar -->
+                                    <div class="sidebar">
+
+                                        {% block sidebar_content %}
+                                            <!--
+                                            Inherit this block to write
+                                            Content in the sidebar
+                                            -->
+                                        {% endblock sidebar_content %}
+
+                                    </div>
+
+                                </div>
+
+                            {% endblock container %}
+                        {% endblock body %}
                     {% endblock fos_user_content %}
 
                 </div>
