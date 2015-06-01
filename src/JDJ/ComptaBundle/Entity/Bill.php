@@ -55,6 +55,14 @@ class Bill
     private $billProducts;
 
     /**
+     * @var PaymentMethod
+     *
+     * @ORM\ManyToOne(targetEntity="PaymentMethod")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $paymentMethod;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -164,6 +172,25 @@ class Bill
     public function addBillProduct(BillProduct $billProduct)
     {
         $this->billProducts[] = $billProduct;
+
+        return $this;
+    }
+
+    /**
+     * @return PaymentMethod
+     */
+    public function getPaymentMethod()
+    {
+        return $this->paymentMethod;
+    }
+
+    /**
+     * @param PaymentMethod $paymentMethod
+     * @return $this
+     */
+    public function setPaymentMethod($paymentMethod)
+    {
+        $this->paymentMethod = $paymentMethod;
 
         return $this;
     }

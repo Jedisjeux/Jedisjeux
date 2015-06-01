@@ -13,23 +13,31 @@
 
     <p>Email : <a href="#">jedisjeux@jedisjeux.net</a></p>
 
-    <div class
-    <table class="table table-stripped">
-        <thead>
-        <tr>
-            <th>N° Client</th>
-            <th>N° Facture</th>
-            <th>Date</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>{{ bill.customer.id }}</td>
-            <td>{{ bill.id }}</td>
-            <td>{{ bill.createdAt|date('d/m/Y') }}</td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="col-md-6 col-sm-6">
+        <table class="table table-stripped">
+            <thead>
+            <tr>
+                <th>N° Client</th>
+                <th>N° Facture</th>
+                <th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ bill.customer.id }}</td>
+                <td>{{ bill.id }}</td>
+                <td>{{ bill.createdAt|date('d/m/Y') }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6 col-sm-6">
+
+    </div>
+
+
+    <p>Mode de règlement : {{ bill.paymentMethod.name }}</p>
+
 
     <table class="table table-stripped">
         <thead>
@@ -42,14 +50,23 @@
         </thead>
         <tbody>
         {% for billProduct in bill.billProducts %}
+            {% set productPrice = billProduct.product.price * billProduct.quantity %}
             <tr>
-                <td>{{ billProduct.product.id }}</td>
+                <td>{{ billProduct.product.name }} - {{ billProduct.product.subscriptionDuration }} mois</td>
                 <td>{{ billProduct.quantity }}</td>
-                <td>{{ billProduct.product.price }}</td>
-                <td>{{ billProduct.product.price * billProduct.quantity }}</td>
+                <td>{{ billProduct.product.price|localizedcurrency('EUR') }}</td>
+                <td>{{ productPrice|localizedcurrency('EUR') }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+
+    <div class="pull-right">{{ totalPrice|localizedcurrency('EUR') }}</div>
+    <div>Montant total HT : </div>
+
+    <p>Exonéré T.V.A - article 261-7-1° du CGI</p>
+
+    <div class="pull-right">{{ totalPrice|localizedcurrency('EUR') }}</div>
+    <div>Montant total à payer : </div>
 
 {% endblock container %}

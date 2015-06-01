@@ -20,9 +20,9 @@
         <tr>
             <th>{{ 'label.id'|trans }}</th>
             <th>{{ 'label.created_at'|trans }}</th>
-            <th>{{ 'label.company_name'|trans }}</th>th>{{ 'label.company_name'|trans }}</th>
+            <th>{{ 'label.company'|trans }}</th>
             <th>{{ 'label.total_price'|trans }}</th>
-            <th>{{ 'label.payed_at'|trans }}</th>
+            <th>{{ 'label.paid_at'|trans }}</th>
         </tr>
         </thead>
         <tbody>
@@ -34,8 +34,13 @@
                 </td>
                 <td>{{ bill.createdAt|date('d/m/Y') }}</td>
                 <td>{{ bill.customer.companyName }}</td>
-                <td>{{ totalPrices[bill.id] }} €</td>
-                <td>{{ bill.paidAt|date('d/m/Y') }}</td>
+                <td>{{ totalPrices[bill.id]|localizedcurrency('EUR') }}</td>
+                <td>{% if bill.paidAt %}
+                        {{ bill.paidAt|date('d/m/Y') }}
+                    {% else %}
+                        {{ 'label.not_paid'|trans }}
+                    {% endif %}
+                </td>
                 <td>
                     <ul class="list-inline">
                         <li>

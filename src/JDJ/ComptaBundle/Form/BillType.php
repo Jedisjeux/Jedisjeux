@@ -32,6 +32,7 @@ class BillType extends AbstractType
                 'mapped' => false,
                 'class' => 'JDJComptaBundle:Product',
             ))
+            ->add('paymentMethod')
         ;
 
         $productsValidator = function(FormEvent $event){
