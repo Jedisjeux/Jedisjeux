@@ -1,0 +1,55 @@
+{% extends "::base.html.twig" %}
+
+{% block container %}
+
+    <h3>Association Loi 1901</h3>
+    <p>SIREN : 537 646 036 / SIRET : 537 646 036 00013 / Code APE : 9499Z</p>
+
+    <h3>Siège Social :</h3>
+    <p>Jedisjeux<br/>
+        Fremont Loïc<br/>
+        2 allée de la châtaigneraie<br/>
+        35740 PACE</p>
+
+    <p>Email : <a href="#">jedisjeux@jedisjeux.net</a></p>
+
+    <div class
+    <table class="table table-stripped">
+        <thead>
+        <tr>
+            <th>N° Client</th>
+            <th>N° Facture</th>
+            <th>Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ bill.customer.id }}</td>
+            <td>{{ bill.id }}</td>
+            <td>{{ bill.createdAt|date('d/m/Y') }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table class="table table-stripped">
+        <thead>
+        <tr>
+            <th>Référence - Désignation</th>
+            <th>Quantité</th>
+            <th>Prix unitaire Net</th>
+            <th>Montant</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for billProduct in bill.billProducts %}
+            <tr>
+                <td>{{ billProduct.product.id }}</td>
+                <td>{{ billProduct.quantity }}</td>
+                <td>{{ billProduct.product.price }}</td>
+                <td>{{ billProduct.product.price * billProduct.quantity }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock container %}

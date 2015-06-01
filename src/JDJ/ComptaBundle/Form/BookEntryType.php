@@ -32,7 +32,7 @@ class BookEntryType extends AbstractType
             ))
             ->add('creditedAt')
             ->add('debitedAt')
-            ->add('description')
+            ->add('label')
         ;
     }
 

@@ -42,7 +42,7 @@ class BillManager
         /** @var BillProduct $billProduct */
         foreach ($bill->getBillProducts() as $billProduct) {
             $this->productManager->revertToVersion($billProduct->getProduct(), $billProduct->getProductVersion());
-            $totalPrice += $billProduct->getProduct()->getPrice();
+            $totalPrice += $billProduct->getProduct()->getPrice() * $billProduct->getQuantity();
             $this->entityManager->detach($billProduct->getProduct());
         }
 

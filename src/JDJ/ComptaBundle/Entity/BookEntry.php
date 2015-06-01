@@ -40,7 +40,7 @@ class BookEntry
      *
      * @ORM\Column(type="string")
      */
-    private $description;
+    private $label;
 
     /**
      * @var \DateTime
@@ -116,18 +116,18 @@ class BookEntry
     /**
      * @return string
      */
-    public function getDescription()
+    public function getLabel()
     {
-        return $this->description;
+        return $this->label;
     }
 
     /**
-     * @param string $description
+     * @param string $label
      * @return $this
      */
-    public function setDescription($description)
+    public function setLabel($label)
     {
-        $this->description = $description;
+        $this->label = $label;
 
         return $this;
     }

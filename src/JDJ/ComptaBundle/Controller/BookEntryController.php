@@ -13,6 +13,7 @@ use JDJ\ComptaBundle\Form\BookEntryType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,6 +25,30 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class BookEntryController extends Controller
 {
+    /**
+     * Lists all BookEntry entities.
+     *
+     * @Route("/", name="compta_book_entry")
+     */
+    public function indexAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $bookEntries = $em->getRepository('JDJComptaBundle:BookEntry')->findAll();
+
+        $deleteForms = array();
+
+        /** @var BookEntry $bookEntry */
+        foreach ($bookEntries as $bookEntry) {
+            $deleteForms[$bookEntry->getId()] = $this->createDeleteForm($bookEntry->getId())->createView();
+        }
+
+        return $this->render('compta/book-entry/index.html.twig', array(
+            'bookEntries' => $bookEntries,
+            'deleteForms' => $deleteForms,
+        ));
+    }
+
     /**
      * Displays a form to create a new Customer entity.
      *
@@ -155,5 +180,44 @@ class BookEntryController extends Controller
         $form->add('submit', 'submit', array('label' => 'Modifier'));
 
         return $form;
+    }
+
+    /**
+     * Deletes a BookEntry entity.
+     *
+     * @Route("/{bookEntry}/delete", name="compta_book_entry_delete")
+     * @ParamConverter("bookEntry", class="JDJComptaBundle:BookEntry")
+     *
+     * @param Request $request
+     * @param BookEntry $bookEntry
+     * @return RedirectResponse
+     */
+    public function deleteAction(Request $request, BookEntry $bookEntry)
+    {
+        $form = $this->createDeleteForm($bookEntry->getId());
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($bookEntry);
+            $em->flush();
+        }
+
+        return $this->redirect($this->generateUrl('compta_book_entry'));
+    }
+
+    /**
+     * Creates a form to delete a BookEntry entity by id.
+     *
+     * @param int $id The entity id
+     * @return Form The form
+     */
+    private function createDeleteForm($id)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('compta_book_entry_delete', array('bookEntry' => $id)))
+            ->setMethod('DELETE')
+            ->getForm()
+            ;
     }
 }

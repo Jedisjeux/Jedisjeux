@@ -3,14 +3,14 @@
 {% block container %}
 
     <div class="block-heading-two">
-        <h3><span>Liste des factures</span></h3>
+        <h3><span>Liste des écritures comptables</span></h3>
     </div>
 
     <ul class="list-inline">
         <li>
-            <a class="btn btn-green" href="{{ path('compta_bill_new') }}">
+            <a class="btn btn-green" href="{{ path('compta_book_entry_new') }}">
                 <span class="glyphicon glyphicon-plus"></span>
-                Créer un client
+                Créer une écriture comptable
             </a>
         </li>
     </ul>
@@ -18,26 +18,48 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>{{ 'label.bill.name'|trans }}</th>
+            <th>{{ 'label.book-entry.date'|trans }}</th>
+            <th>{{ 'label.book-entry.label'|trans }}</th>
+            <th>{{ 'label.book-entry.credit'|trans }}</th>
+            <th>{{ 'label.book-entry.debit'|trans }}</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
-        {% for bill in bills %}
+        {% for bookEntry in bookEntrys %}
             <tr>
-                <td>{{ bill.name }}</td>
+                <td>
+                    {% if bookEntry.debitedAt %}
+                        {{ bookEntry.debitedAt|date('d/m/Y') }}
+                    {% else %}
+                        {{ bookEntry.creditedAt|date('d/m/Y') }}
+                    {% endif %}
+                </td>
+                <td>{{ bookEntry.label }}</td>
+                <td>
+                    {% if bookEntry.creditedAt %}
+                        {{ bookEntry.price }} €
+                    {% endif %}
+                </td>
+                <td>
+                    {% if bookEntry.debitedAt %}
+                        {{ bookEntry.price }} €
+                    {% endif %}
+                </td>
                 <td>
                     <ul class="list-inline">
                         <li>
-                            <a class="btn btn-green" href="{{ path('compta_bill_edit', { 'bill': bill.id }) }}">
+                            <a class="btn btn-green"
+                               href="{{ path('compta_book_entry_edit', { 'bookEntry': bookEntry.id }) }}">
                                 <span class="glyphicon glyphicon-pencil"></span> Modifier
                             </a>
                         </li>
                         <li>
-                            {{ form_start(deleteForms[bill.id]) }}
+                            {{ form_start(deleteForms[bookEntry.id]) }}
                             <button type="submit" class="btn btn-danger">
                                 <span class="glyphicon glyphicon-remove"></span> Supprimer
                             </button>
-                            {{ form_end(deleteForms[bill.id]) }}
+                            {{ form_end(deleteForms[bookEntry.id]) }}
                         </li>
                     </ul>
                 </td>

@@ -11,6 +11,7 @@ namespace JDJ\ComptaBundle\Controller;
 
 use JDJ\ComptaBundle\Entity\Bill;
 use JDJ\ComptaBundle\Entity\BillProduct;
+use JDJ\ComptaBundle\Entity\Manager\BillManager;
 use JDJ\ComptaBundle\Entity\Manager\ProductManager;
 use JDJ\ComptaBundle\Entity\Product;
 use JDJ\ComptaBundle\Form\BillType;
@@ -38,6 +39,14 @@ class BillController extends Controller
     }
 
     /**
+     * @return BillManager
+     */
+    private function getBillManager()
+    {
+        return $this->get('app.manager.bill');
+    }
+
+    /**
      * Lists all Bill entities.
      *
      * @Route("/", name="compta_bill")
@@ -49,15 +58,39 @@ class BillController extends Controller
         $bills = $em->getRepository('JDJComptaBundle:Bill')->findAll();
 
         $deleteForms = array();
+        $totalPrices = array();
 
         /** @var Bill $bill */
         foreach ($bills as $bill) {
             $deleteForms[$bill->getId()] = $this->createDeleteForm($bill->getId())->createView();
+            $totalPrices[$bill->getId()] = $this->getBillManager()->getTotalPrice($bill);
         }
 
         return $this->render('compta/bill/index.html.twig', array(
             'bills' => $bills,
             'deleteForms' => $deleteForms,
+            'totalPrices' => $totalPrices,
+        ));
+    }
+
+    /**
+     * Finds and displays a Bill entity.
+     *
+     * @Route("/{bill}/show", name="compta_bill_show")
+     * @ParamConverter("bill", class="JDJComptaBundle:Bill")
+     *
+     * @param Bill $bill
+     * @return Response
+     */
+    public function showAction(Bill $bill)
+    {
+        /** @var BillProduct $billProduct */
+        foreach ($bill->getBillProducts() as $billProduct) {
+            $this->getProductManager()->revertToVersion($billProduct->getProduct(), $billProduct->getProductVersion());
+        }
+
+        return $this->render('compta/bill/show.html.twig', array(
+            'bill' => $bill,
         ));
     }
 
