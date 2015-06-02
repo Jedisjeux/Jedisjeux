@@ -43,6 +43,14 @@ class BookEntry
     private $label;
 
     /**
+     * @var PaymentMethod
+     *
+     * @ORM\ManyToOne(targetEntity="PaymentMethod")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $paymentMethod;
+
+    /**
      * @var \DateTime
      *
      * @Gedmo\Timestampable(on="create")
@@ -128,6 +136,25 @@ class BookEntry
     public function setLabel($label)
     {
         $this->label = $label;
+
+        return $this;
+    }
+
+    /**
+     * @return PaymentMethod
+     */
+    public function getPaymentMethod()
+    {
+        return $this->paymentMethod;
+    }
+
+    /**
+     * @param PaymentMethod $paymentMethod
+     * @return $this
+     */
+    public function setPaymentMethod($paymentMethod)
+    {
+        $this->paymentMethod = $paymentMethod;
 
         return $this;
     }

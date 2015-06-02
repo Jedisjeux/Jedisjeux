@@ -3,14 +3,14 @@
 {% block container %}
 
     <div class="block-heading-two">
-        <h3><span>Liste des produits</span></h3>
+        <h3><span>Liste des méthodes de paiement</span></h3>
     </div>
 
     <ul class="list-inline">
         <li>
-            <a class="btn btn-green" href="{{ path('compta_product_new') }}">
+            <a class="btn btn-green" href="{{ path('compta_payment_method_new') }}">
                 <span class="glyphicon glyphicon-plus"></span>
-                Créer un produit
+                Créer un méthode de paiement
             </a>
         </li>
     </ul>
@@ -19,29 +19,25 @@
         <thead>
         <tr>
             <th>{{ 'label.name'|trans }}</th>
-            <th>{{ 'label.price'|trans }}</th>
-            <th>{{ 'label.subscription_duration'|trans }}</th>
         </tr>
         </thead>
         <tbody>
-        {% for product in products %}
+        {% for paymentMethod in paymentMethods %}
             <tr>
-                <th>{{ product.name }}</th>
-                <th>{{ product.price }} €</th>
-                <th>{{ product.subscriptionDuration }} {{ 'label.months'|trans }}</th>
+                <td>{{ payment_method.companyName }}</td>
                 <td>
                     <ul class="list-inline">
                         <li>
-                            <a class="btn btn-green" href="{{ path('compta_product_edit', { 'product': product.id }) }}">
+                            <a class="btn btn-green" href="{{ path('compta_payment_method_edit', { 'paymentMethod': paymentMethod.id }) }}">
                                 <span class="glyphicon glyphicon-pencil"></span> Modifier
                             </a>
                         </li>
                         <li>
-                            {{ form_start(deleteForms[product.id]) }}
+                            {{ form_start(deleteForms[paymentMethod.id]) }}
                             <button type="submit" class="btn btn-danger">
                                 <span class="glyphicon glyphicon-remove"></span> Supprimer
                             </button>
-                            {{ form_end(deleteForms[product.id]) }}
+                            {{ form_end(deleteForms[payment_method.id]) }}
                         </li>
                     </ul>
                 </td>

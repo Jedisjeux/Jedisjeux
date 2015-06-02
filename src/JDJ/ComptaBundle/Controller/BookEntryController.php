@@ -50,7 +50,7 @@ class BookEntryController extends Controller
     }
 
     /**
-     * Displays a form to create a new Customer entity.
+     * Displays a form to create a new BookEntry entity.
      *
      * @Route("/new", name="compta_book_entry_new")
      *
@@ -58,17 +58,17 @@ class BookEntryController extends Controller
      */
     public function newAction()
     {
-        $entity = new BookEntry();
-        $form   = $this->createCreateForm($entity);
+        $bookEntry = new BookEntry();
+        $form = $this->createCreateForm($bookEntry);
 
         return $this->render('compta/book-entry/new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
+            'bookEntry' => $bookEntry,
+            'form' => $form->createView(),
         ));
     }
 
     /**
-     * Creates a new Bill entity.
+     * Creates a new BookEntry entity.
      *
      * @Route("/create", name="compta_book_entry_create")
      *
@@ -91,12 +91,12 @@ class BookEntryController extends Controller
 
         return $this->render('compta/book-entry/new.html.twig', array(
             'bookEntry' => $bookEntry,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
     /**
-     * Creates a form to create a Bill entity.
+     * Creates a form to create a BookEntry entity.
      *
      * @param BookEntry $bookEntry
      * @return \Symfony\Component\Form\Form The form
@@ -116,7 +116,7 @@ class BookEntryController extends Controller
     /**
      * Displays a form to edit an existing BookEntry entity.
      *
-     * @Route("/{bookEntry}/edit", name="compta_bookEntry_edit")
+     * @Route("/{bookEntry}/edit", name="compta_book_entry_edit")
      * @ParamConverter("bookEntry", class="JDJComptaBundle:BookEntry")
      *
      * @param BookEntry $bookEntry
@@ -127,15 +127,15 @@ class BookEntryController extends Controller
         $form = $this->createEditForm($bookEntry);
 
         return $this->render('compta/book-entry/edit.html.twig', array(
-            'entity'      => $bookEntry,
-            'form'   => $form->createView(),
+            'bookEntry' => $bookEntry,
+            'form' => $form->createView(),
         ));
     }
 
     /**
      * Edits an existing BookEntry entity.
      *
-     * @Route("/{bookEntry}/update", name="compta_bookEntry_update")
+     * @Route("/{bookEntry}/update", name="compta_book_entry_update")
      * @ParamConverter("bookEntry", class="JDJComptaBundle:BookEntry")
      *
      * @param Request $request
@@ -154,12 +154,12 @@ class BookEntryController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('compta_bookEntry'));
+            return $this->redirect($this->generateUrl('compta_book_entry'));
         }
 
         return $this->render('compta/book-entry/edit.html.twig', array(
-            'bookEntry'      => $bookEntry,
-            'edit_form'   => $editForm->createView(),
+            'bookEntry' => $bookEntry,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -173,7 +173,7 @@ class BookEntryController extends Controller
     private function createEditForm(BookEntry $bookEntry)
     {
         $form = $this->createForm(new BookEntryType(), $bookEntry, array(
-            'action' => $this->generateUrl('compta_bookEntry_update', array('bookEntry' => $bookEntry->getId())),
+            'action' => $this->generateUrl('compta_book_entry_update', array('bookEntry' => $bookEntry->getId())),
             'method' => 'PUT',
         ));
 
@@ -217,7 +217,6 @@ class BookEntryController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('compta_book_entry_delete', array('bookEntry' => $id)))
             ->setMethod('DELETE')
-            ->getForm()
-            ;
+            ->getForm();
     }
 }

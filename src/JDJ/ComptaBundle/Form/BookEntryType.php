@@ -22,17 +22,29 @@ class BookEntryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('price')
+            ->add('price', 'money', array(
+                'label' => 'label.price',
+            ))
+            ->add('paymentMethod', null, array(
+                'label' => 'label.payment_method'
+            ))
             ->add('creditedOrDebited', 'choice', array(
+                'label' => 'label.credited_or_debited',
                 'choices' => array(
                     'debited' => 'Débit',
                     'credited' => 'Crédit',
                 ),
                 'mapped' => false,
             ))
-            ->add('creditedAt')
-            ->add('debitedAt')
-            ->add('label')
+            ->add('creditedAt', null, array(
+                'label' => 'label.creditedAt',
+            ))
+            ->add('debitedAt', null, array(
+                'label' => 'label.debitedAt',
+            ))
+            ->add('label', null, array(
+                'label' => 'label',
+            ))
         ;
     }
 

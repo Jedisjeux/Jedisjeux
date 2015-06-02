@@ -25,14 +25,19 @@ class BillType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('customer')
+            ->add('customer', null, array(
+                'label' => 'label.customer',
+            ))
             ->add('products', 'entity', array(
+                'label' => 'label.products',
                 'multiple' => true,
                 'expanded' => true,
                 'mapped' => false,
                 'class' => 'JDJComptaBundle:Product',
             ))
-            ->add('paymentMethod')
+            ->add('paymentMethod', null, array(
+                'label' => 'label.payment_method',
+            ))
         ;
 
         $productsValidator = function(FormEvent $event){

@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: loic_fremont
- * Date: 26/05/2015
- * Time: 13:30
+ * Date: 02/06/2015
+ * Time: 10:40
  */
 
 namespace JDJ\ComptaBundle\Form;
@@ -13,7 +13,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class AddressType extends AbstractType
+class PaymentMethodType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -22,14 +22,8 @@ class AddressType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('street', null, array(
-                'label' => 'label.street',
-            ))
-            ->add('postalCode', null, array(
-                'label' => 'label.postal_code',
-            ))
-            ->add('city', null, array(
-                'label' => 'label.city',
+            ->add('name', null, array(
+                'label' => 'label.name',
             ))
         ;
     }
@@ -40,7 +34,7 @@ class AddressType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'JDJ\ComptaBundle\Entity\Address'
+            'data_class' => 'JDJ\ComptaBundle\Entity\PaymentMethod'
         ));
     }
 
@@ -49,6 +43,6 @@ class AddressType extends AbstractType
      */
     public function getName()
     {
-        return 'jdj_comptabundle_address';
+        return 'jdj_comptabundle_payement_method';
     }
 }
