@@ -1,4 +1,4 @@
-@client
+@comptaCustomer
 Feature: Les clients
 
   Background:
@@ -8,16 +8,14 @@ Feature: Les clients
 
 
   Scenario: Affichage de la liste des clients
-    When I am on "/compta/client"
-    And the response status code should be 200
-
+    When I am on "/compta/customer"
+    Then I should see "Liste des clients"
 
   Scenario: Créer un client
-    When I am on "/compta/client"
-    And I follow "Créer un nouveau client"
-    Then I should be on "/compta/client/new"
-    And the response status code should be 200
-    And I fill in the following:
+    Given I am on "/compta/customer"
+    And I follow "Créer un client"
+    And I should be on "/compta/customer/new"
+    When I fill in the following:
       | Societe    | Philibert                   |
       | Nom        | Loïc Fremont                |
       | Email      | jedisjeux@jedisjeux.net     |
@@ -26,13 +24,13 @@ Feature: Les clients
       | Codepostal | 35740                       |
       | Ville      | Pacé                        |
     And I press "Créer"
-    And I should be on "/compta/client/"
+    Then I should be on "/compta/customer"
     And I should see "Philibert"
     And I should see "Modifier"
     And I should see "Supprimer"
 
   Scenario: Modifier un client
-    When I am on "/compta/client"
+    Given I am on "/compta/customer"
     And I follow "Créer un nouveau client"
     And I fill in the following:
       | Societe    | Philibert                   |
@@ -44,16 +42,15 @@ Feature: Les clients
       | Ville      | Pacé                        |
     And I press "Créer"
     And I follow "Modifier"
-    And the response status code should be 200
-    And I fill in the following:
+    When I fill in the following:
       | Societe | Ludibay |
     And I press "Enregistrer"
-    And I should be on "/compta/client/"
+    Then I should be on "/compta/customer"
     And I should see "Ludibay"
     And I should not see "Philibert"
 
-  Scenario: Supprimer un produit
-    When I am on "/compta/client"
+  Scenario: Supprimer un client
+    Given I am on "/compta/customer"
     And I follow "Créer un nouveau client"
     And I fill in the following:
       | Societe    | Philibert                   |
@@ -64,7 +61,6 @@ Feature: Les clients
       | Codepostal | 35740                       |
       | Ville      | Pacé
     And I press "Créer"
-    And I press "Supprimer"
-    And I should be on "/compta/client/"
-    And the response status code should be 200
+    When I press "Supprimer"
+    Then I should be on "/compta/customer"
     And I should not see "Philibert"

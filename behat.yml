@@ -121,35 +121,35 @@ default:
              filters:
                  tags: "@userReview && ~@javascript"
 
-        produit:
+        comptaProduct:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - JDJ\UserBundle\Behat\UserContext
             filters:
-                tags: "@produit && ~@javascript"
+                tags: "@comptaProduct && ~@javascript"
 
-        modeReglement:
+        comptaPaymentMethod:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - JDJ\UserBundle\Behat\UserContext
             filters:
-                tags: "@modeReglement && ~@javascript"
+                tags: "@comptaPaymentMethod && ~@javascript"
 
-        client:
+        comptaCustomer:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - JDJ\UserBundle\Behat\UserContext
             filters:
-                tags: "@client && ~@javascript"
+                tags: "@comptaCustomer && ~@javascript"
 
-        ecriture:
+        comptaBookEntry:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - JDJ\UserBundle\Behat\UserContext
                 - JDJ\ComptaBundle\Behat\ModeReglementContext
                 - JDJ\ComptaBundle\Behat\SensContext
             filters:
-                tags: "@ecriture && ~@javascript"
+                tags: "@comptaBookEntry && ~@javascript"
 
     extensions:
         Behat\MinkExtension:

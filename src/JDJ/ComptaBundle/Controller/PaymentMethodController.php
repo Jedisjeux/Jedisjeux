@@ -10,6 +10,8 @@ namespace JDJ\ComptaBundle\Controller;
 
 use JDJ\ComptaBundle\Entity\PaymentMethod;
 use JDJ\ComptaBundle\Form\PaymentMethodType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\RedirectResponse;
