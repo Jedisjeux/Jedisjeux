@@ -15,17 +15,17 @@ Feature: Les produits
   Scenario: Créer un produit
     Given I am on "/compta/product"
     And I follow "Créer un produit"
-    And I should be on "/compta/product/new"
+    And I should be on "/compta/product/new/"
     When I fill in the following:
       | Libelle | produit 1 |
     And I press "Créer"
-    Then I should be on "/compta/product"
+    Then I should be on "/compta/product/"
     And I should see "produit 1"
     And I should see "Modifier"
     And I should see "Supprimer"
 
   Scenario: Modifier un produit
-    Given I am on "/compta/produit"
+    Given I am on "/compta/produit/"
     And I follow "Créer un produit"
     And I fill in the following:
       | Libelle | produit 1 |
@@ -34,16 +34,16 @@ Feature: Les produits
     When I fill in the following:
       | Libelle | produit 2 |
     And I press "Modifier"
-    Then I should be on "/compta/product"
+    Then I should be on "/compta/product/"
     And I should see "produit 2"
     And I should not see "produit 1"
 
   Scenario: Supprimer un produit
-    Given I am on "/compta/produit"
+    Given I am on "/compta/produit/"
     And I follow "Créer un produit"
     And I fill in the following:
       | Libelle | produit 1 |
     And I press "Créer"
     When I press "Supprimer"
-    Then I should be on "/compta/product"
+    Then I should be on "/compta/product/"
     And I should not see "produit 1"

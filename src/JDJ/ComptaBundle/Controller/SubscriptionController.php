@@ -15,6 +15,8 @@ use JDJ\ComptaBundle\Entity\Product;
 use JDJ\ComptaBundle\Entity\Repository\SubscriptionRepository;
 use JDJ\ComptaBundle\Entity\Subscription;
 use JDJ\ComptaBundle\Form\SubscriptionType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;

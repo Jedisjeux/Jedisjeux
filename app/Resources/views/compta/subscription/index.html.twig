@@ -21,8 +21,8 @@
             <tr>
                 <td>{{ subscription.bill.customer.societyName }}</td>
                 <td>{{ subscription.product.name }}</td>
-                <td>{{ subscription.startAt|date('d/m/Y') }}</td>
-                <td>{{ subscription.endAt|date('d/m/Y') }}</td>
+                <td>{{ subscription.startAt|localizeddate('long', 'none') }}</td>
+                <td>{{ subscription.endAt|localizeddate('long', 'none') }}</td>
             </tr>
         {% endfor %}
         </tbody>

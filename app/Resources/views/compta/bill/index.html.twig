@@ -32,11 +32,11 @@
                         {{ bill.id }}
                     </a>
                 </td>
-                <td>{{ bill.createdAt|date('d/m/Y') }}</td>
+                <td>{{ bill.createdAt|localizeddate('long', 'none') }}</td>
                 <td>{{ bill.customer.companyName }}</td>
                 <td>{{ totalPrices[bill.id]|localizedcurrency('EUR') }}</td>
                 <td>{% if bill.paidAt %}
-                        {{ bill.paidAt|date('d/m/Y') }}
+                        {{ bill.paidAt|localizeddate('long', 'none') }}
                     {% else %}
                         {{ 'label.not_paid'|trans }}
                     {% endif %}

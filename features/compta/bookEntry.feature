@@ -20,9 +20,9 @@ Feature: Les écritures comptables
 
 
   Scenario: Créer une écriture
-    Given I am on "/compta/book-entry"
+    Given I am on "/compta/book-entry/"
     And I follow "Créer une écriture comptable"
-    And I should be on "/compta/ecriture/new"
+    And I should be on "/compta/ecriture/new/"
     When I fill in the following:
       | Libelle       | remboursement blue |
       | Montant       | 20.34              |
@@ -30,13 +30,13 @@ Feature: Les écritures comptables
     And I select "chèque" from "Mode reglement"
     And I select "débit" from "Sens"
     And I press "Créer"
-    Then I should be on "/compta/book-entry"
+    Then I should be on "/compta/book-entry/"
     And I should see "ecriture 1"
     And I should see "Modifier"
     And I should see "Supprimer"
 
   Scenario: Modifier une écriture
-    Given I am on "/compta/book-entry"
+    Given I am on "/compta/book-entry/"
     And I follow "Créer une écriture comptable"
     And I fill in the following:
       | Libelle       | remboursement blue |
@@ -49,12 +49,12 @@ Feature: Les écritures comptables
     When I fill in the following:
       | Libelle | remboursement cyril |
     And I press "Modifier"
-    Then I should be on "/compta/book-entry"
+    Then I should be on "/compta/book-entry/"
     And I should see "remboursement cyril"
     And I should not see "remboursement blue"
 
   Scenario: Supprimer une écriture
-    Given I am on "/compta/book-entry"
+    Given I am on "/compta/book-entry/"
     And I follow "Créer une écriture comptable"
     When I fill in the following:
       | Libelle       | remboursement blue |
@@ -64,5 +64,5 @@ Feature: Les écritures comptables
     And I select "débit" from "Sens"
     And I press "Créer"
     And I press "Supprimer"
-    Then I should be on "/compta/book-entry"
+    Then I should be on "/compta/book-entry/"
     And I should not see "remboursement blue"

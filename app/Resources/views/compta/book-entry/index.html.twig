@@ -30,9 +30,9 @@
             <tr>
                 <td>
                     {% if bookEntry.debitedAt %}
-                        {{ bookEntry.debitedAt|date('d/m/Y') }}
+                        {{ bookEntry.debitedAt|localizeddate('long', 'none') }}
                     {% else %}
-                        {{ bookEntry.creditedAt|date('d/m/Y') }}
+                        {{ bookEntry.creditedAt|localizeddate('long', 'none') }}
                     {% endif %}
                 </td>
                 <td>{{ bookEntry.label }}</td>
