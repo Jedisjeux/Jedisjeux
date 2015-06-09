@@ -11,10 +11,11 @@ namespace JDJ\ComptaBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
+
 /**
- * BookEntry
+ * @author Loïc Frémont <lc.fremont@gmail.com>
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="JDJ\ComptaBundle\Entity\Repository\BookEntryRepository")
  * @ORM\Table(name="cpta_book_entry")
  */
 class BookEntry 

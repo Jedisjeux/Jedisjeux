@@ -223,7 +223,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     public function getRepository($className)
     {
         /**
-         * TODO repository named jdj.repository.entity_name
+         * TODO repository named app.repository.entity_name
          */
         $repositoryName = null;
         switch($className) {
@@ -251,8 +251,14 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
             case 'personne':
                 $repositoryName = "JDJLudographieBundle:Personne";
                 break;
-            case 'modeReglement':
-                $repositoryName = "JDJComptaBundle:ModeReglement";
+            case 'comptaCustomer':
+                $repositoryName = "JDJComptaBundle:Customer";
+                break;
+            case 'comptaProduct':
+                $repositoryName = "JDJComptaBundle:Product";
+                break;
+            case 'comptaPaymentMethod':
+                $repositoryName = "JDJComptaBundle:PayementMethod";
                 break;
             case 'collection':
                 $repositoryName = "JDJCollectionBundle:Collection";

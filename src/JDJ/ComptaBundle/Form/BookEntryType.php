@@ -13,6 +13,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+/**
+ * @author Loïc Frémont <lc.fremont@gmail.com>
+ */
 class BookEntryType extends AbstractType
 {
     /**

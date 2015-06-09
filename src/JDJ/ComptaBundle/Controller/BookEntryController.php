@@ -9,6 +9,7 @@
 namespace JDJ\ComptaBundle\Controller;
 
 use JDJ\ComptaBundle\Entity\BookEntry;
+use JDJ\ComptaBundle\Entity\Repository\BookEntryRepository;
 use JDJ\ComptaBundle\Form\BookEntryType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -26,15 +27,31 @@ use Symfony\Component\HttpFoundation\Response;
 class BookEntryController extends Controller
 {
     /**
+     * @return BookEntryRepository
+     */
+    private function getBookEntryRepository()
+    {
+        return $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('JDJComptaBundle:BookEntry');
+    }
+
+    /**
      * Lists all BookEntry entities.
      *
      * @Route("/", name="compta_book_entry")
+     *
+     * @param Request $request
+     *
+     * @return Response
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $bookEntries = $em->getRepository('JDJComptaBundle:BookEntry')->findAll();
+        $bookEntries = $this
+            ->getBookEntryRepository()
+            ->createPaginator()
+            ->setCurrentPage($request->get('page', 1));
 
         $deleteForms = array();
 

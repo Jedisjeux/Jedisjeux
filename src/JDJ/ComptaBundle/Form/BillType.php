@@ -16,6 +16,9 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+/**
+ * @author Loïc Frémont <lc.fremont@gmail.com>
+ */
 class BillType extends AbstractType
 {
     /**

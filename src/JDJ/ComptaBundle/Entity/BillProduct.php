@@ -11,7 +11,7 @@ namespace JDJ\ComptaBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * BillProduct
+ * @author Loïc Frémont <lc.fremont@gmail.com>
  *
  * @ORM\Entity
  * @ORM\Table(name="cpta_bill_product")

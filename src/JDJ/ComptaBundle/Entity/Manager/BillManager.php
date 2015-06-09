@@ -13,6 +13,9 @@ use Doctrine\ORM\EntityManager;
 use JDJ\ComptaBundle\Entity\Bill;
 use JDJ\ComptaBundle\Entity\BillProduct;
 
+/**
+ * @author Loïc Frémont <lc.fremont@gmail.com>
+ */
 class BillManager
 {
     /**

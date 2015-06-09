@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: loic_fremont
- * Date: 26/05/2015
- * Time: 12:01
+ * Date: 04/06/2015
+ * Time: 16:24
  */
 
 namespace JDJ\ComptaBundle\Entity\Manager;
@@ -11,22 +11,19 @@ namespace JDJ\ComptaBundle\Entity\Manager;
 
 use Doctrine\ORM\EntityManager;
 use Gedmo\Loggable\Entity\Repository\LogEntryRepository;
-use JDJ\ComptaBundle\Entity\Product;
-use JDJ\ComptaBundle\Entity\Repository\ProductRepository;
+use JDJ\ComptaBundle\Entity\Address;
+use JDJ\ComptaBundle\Entity\Repository\AddressRepository;
 
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
  */
-class ProductManager
+class AddressManager
 {
     /**
      * @var EntityManager
      */
     private $entityManager;
 
-    /**
-     * @param EntityManager $entityManager
-     */
     public function __construct(EntityManager $entityManager)
     {
         $this->entityManager = $entityManager;
@@ -41,32 +38,32 @@ class ProductManager
     }
 
     /**
-     * @return ProductRepository
+     * @return AddressRepository
      */
-    public function getProductRepository()
+    public function getAddressRepository()
     {
-        return $this->entityManager->getRepository('JDJComptaBundle:Product');
+        return $this->entityManager->getRepository('JDJComptaBundle:Address');
     }
 
     /**
-     * @param Product $product
+     * @param Address $address
      * @param int $version
      */
-    public function revertToVersion(Product $product, $version)
+    public function revertToVersion(Address $address, $version)
     {
         $this
             ->getLogEntryRepository()
-            ->revert($product, $version);
+            ->revert($address, $version);
     }
 
     /**
-     * @param $product
+     * @param Address $address
      * @return int
      */
-    public function getCurrentVersion(Product $product)
+    public function getCurrentVersion(Address $address)
     {
         return $this
-            ->getProductRepository()
-            ->getCurrentVersion($product);
+            ->getAddressRepository()
+            ->getCurrentVersion($address);
     }
 }

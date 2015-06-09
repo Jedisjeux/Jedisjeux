@@ -12,9 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Subscription
+ * @author Loïc Frémont <lc.fremont@gmail.com>
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="JDJ\ComptaBundle\Entity\Repository\SubscriptionRepository")
  * @ORM\Table(name="cpta_subscription")
  */
 class Subscription 
@@ -58,16 +58,16 @@ class Subscription
     private $toBeRenewed;
 
     /**
-     * @var Customer
+     * @var Bill
      *
-     * @ORM\ManyToOne(targetEntity="Customer", inversedBy="bills", cascade={"persist", "merge"})
+     * @ORM\ManyToOne(targetEntity="Bill", inversedBy="subscriptions")
      */
-    private $customer;
+    private $bill;
 
     /**
      * @var Product
      *
-     * @ORM\ManyToOne(targetEntity="Product", cascade={"persist", "merge"})
+     * @ORM\ManyToOne(targetEntity="Product")
      */
     private $product;
 
@@ -167,20 +167,20 @@ class Subscription
     }
 
     /**
-     * @return Customer
+     * @return Bill
      */
-    public function getCustomer()
+    public function getBill()
     {
-        return $this->customer;
+        return $this->bill;
     }
 
     /**
-     * @param Customer $customer
+     * @param Bill $bill
      * @return $this
      */
-    public function setCustomer($customer)
+    public function setBill($bill)
     {
-        $this->customer = $customer;
+        $this->bill = $bill;
 
         return $this;
     }

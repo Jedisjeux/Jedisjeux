@@ -1,0 +1,10 @@
+parameters:
+    app.event_listener.bill.class: JDJ\ComptaBundle\EventListener\BillEventListener
+
+services:
+    app.event_listener.bill:
+        class: %app.event_listener.bill.class%
+        arguments:
+            - '@app.manager.book_entry'
+        tags:
+            - { name: kernel.event_listener, event: app.bill.paid, method: createBookEntry }

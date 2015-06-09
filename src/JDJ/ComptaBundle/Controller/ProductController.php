@@ -58,11 +58,11 @@ class ProductController extends Controller
      */
     public function newAction()
     {
-        $entity = new Product();
-        $form   = $this->createCreateForm($entity);
+        $product = new Product();
+        $form   = $this->createCreateForm($product);
 
         return $this->render('compta/product/new.html.twig', array(
-            'entity' => $entity,
+            'product' => $product,
             'form'   => $form->createView(),
         ));
     }

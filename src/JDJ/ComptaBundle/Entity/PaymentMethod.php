@@ -11,7 +11,7 @@ namespace JDJ\ComptaBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * PaymentMethod
+ * @author Loïc Frémont <lc.fremont@gmail.com>
  *
  * @ORM\Entity
  * @ORM\Table(name="cpta_payment_method")

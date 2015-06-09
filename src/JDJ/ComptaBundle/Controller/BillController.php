@@ -11,13 +11,17 @@ namespace JDJ\ComptaBundle\Controller;
 
 use JDJ\ComptaBundle\Entity\Bill;
 use JDJ\ComptaBundle\Entity\BillProduct;
+use JDJ\ComptaBundle\Entity\Manager\AddressManager;
 use JDJ\ComptaBundle\Entity\Manager\BillManager;
 use JDJ\ComptaBundle\Entity\Manager\ProductManager;
 use JDJ\ComptaBundle\Entity\Product;
+use JDJ\ComptaBundle\Event\BillEvents;
 use JDJ\ComptaBundle\Form\BillType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,6 +48,14 @@ class BillController extends Controller
     private function getBillManager()
     {
         return $this->get('app.manager.bill');
+    }
+
+    /**
+     * @return AddressManager
+     */
+    private function getAddressManager()
+    {
+        return $this->get('app.manager.address');
     }
 
     /**
@@ -129,6 +141,16 @@ class BillController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            /**
+             * Save the version of the customer's address
+             */
+            $customerAddressVersion = $this
+                ->getAddressManager()
+                ->getCurrentVersion($bill->getCustomer()->getAddress());
+
+            $bill->setCustomerAddressVersion($customerAddressVersion);
+
             $em->persist($bill);
 
             $products = $form->get('products')->getData();
@@ -240,6 +262,83 @@ class BillController extends Controller
     {
         $form = $this->createForm(new BillType(), $bill, array(
             'action' => $this->generateUrl('compta_bill_update', array('bill' => $bill->getId())),
+            'method' => 'PUT',
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Modifier'));
+
+        return $form;
+    }
+
+    /**
+     * Displays a form to enrich the payment date of an existing Bill entity.
+     *
+     * @Route("/{bill}/payment/edit", name="compta_bill_payment_edit")
+     * @ParamConverter("bill", class="JDJComptaBundle:Bill")
+     *
+     * @param Bill $bill
+     * @return Response
+     */
+    public function paymentEditAction(Bill $bill)
+    {
+        $form = $this->createPaymentEditForm($bill);
+
+        return $this->render('compta/bill/payment/edit.html.twig', array(
+            'bill'      => $bill,
+            'form'   => $form->createView(),
+        ));
+    }
+
+    /**
+     * Edits an existing Bill entity to enrich the payment date.
+     *
+     * @Route("/{bill}/payment/update", name="compta_bill_payement_update")
+     * @ParamConverter("bill", class="JDJComptaBundle:Bill")
+     *
+     * @param Request $request
+     * @param Bill $bill
+     * @return RedirectResponse|Response
+     * @internal param $id
+     */
+    public function paymentUpdateAction(Request $request, Bill $bill)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $editForm = $this->createPaymentEditForm($bill);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isValid()) {
+            $em->flush();
+            $this->getEventDispatcher()->dispatch(BillEvents::BILL_PAID, new GenericEvent($bill));
+            return $this->redirect($this->generateUrl('compta_bill'));
+        }
+
+        return $this->render('compta/bill/payment/edit.html.twig', array(
+            'bill'      => $bill,
+            'edit_form'   => $editForm->createView(),
+        ));
+    }
+
+    /**
+     * Get event dispatcher.
+     *
+     * @return EventDispatcherInterface
+     */
+    private function getEventDispatcher()
+    {
+        return $this->get('event_dispatcher');
+    }
+
+    /**
+     * Creates a form to edit a Bill entity.
+     *
+     * @param Bill $bill The entity
+     * @return Form The form
+     */
+    private function createPaymentEditForm(Bill $bill)
+    {
+        $form = $this->createForm(new BillType(), $bill, array(
+            'action' => $this->generateUrl('compta_bill_payment_update', array('bill' => $bill->getId())),
             'method' => 'PUT',
         ));
 

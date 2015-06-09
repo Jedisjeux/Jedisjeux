@@ -2,19 +2,19 @@
 /**
  * Created by PhpStorm.
  * User: loic_fremont
- * Date: 27/05/2015
- * Time: 00:13
+ * Date: 05/06/2015
+ * Time: 10:22
  */
 
 namespace JDJ\ComptaBundle\Entity\Repository;
 
 
-use JDJ\CoreBundle\Entity\Repository\LoggableEntityRepository;
+use JDJ\CoreBundle\Entity\EntityRepository;
 
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
  */
-class ProductRepository extends LoggableEntityRepository
+class BookEntryRepository extends EntityRepository
 {
 
 }

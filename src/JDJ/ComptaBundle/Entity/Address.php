@@ -12,9 +12,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Address
+ * @author Loïc Frémont <lc.fremont@gmail.com>
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="JDJ\ComptaBundle\Entity\Repository\AddressRepository")
  * @ORM\Table(name="cpta_address")
  * @Gedmo\Loggable
  */

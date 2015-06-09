@@ -1,0 +1,31 @@
+{% extends "::base.html.twig" %}
+
+{% block container %}
+
+    <div class="block-heading-two">
+        <h3><span>Liste des abonnements</span></h3>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>{{ 'label.society'|trans }}</th>
+            <th>{{ 'label.product'|trans }}</th>
+            <th>{{ 'label.start_at'|trans }}</th>
+            <th>{{ 'label.end_at'|trans }}</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for subscription in subscriptions %}
+            <tr>
+                <td>{{ subscription.bill.customer.societyName }}</td>
+                <td>{{ subscription.product.name }}</td>
+                <td>{{ subscription.startAt|date('d/m/Y') }}</td>
+                <td>{{ subscription.endAt|date('d/m/Y') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock container %}

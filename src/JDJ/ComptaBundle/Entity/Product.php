@@ -6,7 +6,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Product
+ * @author Loïc Frémont <lc.fremont@gmail.com>
  *
  * @ORM\Entity(repositoryClass="JDJ\ComptaBundle\Entity\Repository\ProductRepository")
  * @ORM\Table(name="cpta_product")

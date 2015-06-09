@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Bill
+ * @author Loïc Frémont <lc.fremont@gmail.com>
  *
  * @ORM\Entity
  * @ORM\Table(name="cpta_bill")
@@ -61,6 +61,20 @@ class Bill
      * @ORM\JoinColumn(nullable=false)
      */
     private $paymentMethod;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     */
+    private $customerAddressVersion;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Subscription", mappedBy="bill")
+     */
+    private $subscriptions;
 
     /**
      * Constructor
@@ -191,6 +205,25 @@ class Bill
     public function setPaymentMethod($paymentMethod)
     {
         $this->paymentMethod = $paymentMethod;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCustomerAddressVersion()
+    {
+        return $this->customerAddressVersion;
+    }
+
+    /**
+     * @param int $customerAddressVersion
+     * @return $this
+     */
+    public function setCustomerAddressVersion($customerAddressVersion)
+    {
+        $this->customerAddressVersion = $customerAddressVersion;
 
         return $this;
     }

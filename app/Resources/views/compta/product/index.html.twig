@@ -26,9 +26,9 @@
         <tbody>
         {% for product in products %}
             <tr>
-                <th>{{ product.name }}</th>
-                <th>{{ product.price }} €</th>
-                <th>{{ product.subscriptionDuration }} {{ 'label.months'|trans }}</th>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price|localizedcurrency('EUR') }}</td>
+                <td>{{ product.subscriptionDuration }} {{ 'label.months'|trans }}</td>
                 <td>
                     <ul class="list-inline">
                         <li>

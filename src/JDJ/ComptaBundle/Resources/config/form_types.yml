@@ -1,0 +1,8 @@
+parameters:
+    app.form.type.address.class: JDJ\ComptaBundle\Form\AddressType
+
+services:
+    app.form.type.address:
+        class: %app.form.type.address.class%
+        tags:
+              - { name: form.type, alias: jdj_comptabundle_address }

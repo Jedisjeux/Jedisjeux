@@ -2,21 +2,18 @@
 /**
  * Created by PhpStorm.
  * User: loic_fremont
- * Date: 20/05/2015
- * Time: 15:12
+ * Date: 03/06/2015
+ * Time: 13:27
  */
 
-namespace JDJ\ComptaBundle\Form;
+namespace JDJ\ComptaBundle\Form\Bill;
 
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-/**
- * @author Loïc Frémont <lc.fremont@gmail.com>
- */
-class ProductType extends AbstractType
+class PaymentType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -25,14 +22,8 @@ class ProductType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, array(
-                'label' => 'label.name',
-            ))
-            ->add('price', 'money', array(
-                'label' => 'label.price',
-            ))
-            ->add('subscriptionDuration', null, array(
-                'label' => 'label.subscription_duration',
+            ->add('paidAt', null, array(
+                'label' => 'label.payed_at',
             ))
         ;
     }
@@ -43,7 +34,7 @@ class ProductType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'JDJ\ComptaBundle\Entity\Product'
+            'data_class' => 'JDJ\ComptaBundle\Entity\Bill'
         ));
     }
 
@@ -52,6 +43,6 @@ class ProductType extends AbstractType
      */
     public function getName()
     {
-        return 'jdj_comptabundle_product';
+        return 'jdj_comptabundle_bill_payment';
     }
 }
