@@ -33,11 +33,20 @@ class NotificationServiceSpec extends ObjectBehavior
         $hasher = $prophet->prophesize('UserBundle\Entity\User');
         $user = new User($hasher->reveal());
 
+        //The game concerned
+        $hasher = $prophet->prophesize('JeuBundle\Entity\Jeu');
+        $jeu = new Jeu($hasher->reveal());
+
+        $jeu->setStatus(Jeu::NEED_A_REVIEW);
+
         //The user that changed the game status
         $hasher = $prophet->prophesize('JedizoneBundle\Entity\Activity');
         $activity = new Activity($hasher->reveal());
 
-        $activity->addUser($user);
+        $activity
+            ->addUser($user)
+            ->setJeu($jeu)
+        ;
 
         //the function returns a notification
         $this

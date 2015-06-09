@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping as ORM;
 use JDJ\JediZoneBundle\Entity\Activity;
 use JDJ\JediZoneBundle\Entity\Notification;
+use JDJ\JediZoneBundle\Repository\NotificationRepository;
 use JDJ\JeuBundle\Entity\Jeu;
 use JDJ\UserBundle\Entity\User;
 use Symfony\Component\VarDumper\VarDumper;
@@ -26,7 +27,7 @@ class NotificationService
 
     /**
      * Entity-specific repo, useful for finding entities, for example
-     * @var JeuRepository
+     * @var NotificationRepository
      */
     protected $repo;
 
@@ -77,7 +78,6 @@ class NotificationService
             }
         }
 
-
         /**
          * Create the notifications
          */
@@ -121,6 +121,7 @@ class NotificationService
             ->setActivity($activity)
             ->setIsRead(false)
             ->setUser($user)
+            ->setChangeStatus($activity->getJeu()->getStatus())
             ->setAction(Notification::ACTION_ACCEPT)
             ->setComment("");
 
@@ -147,6 +148,44 @@ class NotificationService
         }
 
         return $tabUser;
+    }
+
+
+    /**
+     * This function gets the notifications of the user
+     *
+     * @param User $user
+     * @return array
+     */
+    public function getNotificationFromUser(User $user)
+    {
+        $notifications = $this
+            ->repo
+            ->findBy(array(
+                "user" => $user
+            ), array(
+                'id' => 'desc'
+            ));
+
+        //Sets the notifications to read
+        /*foreach ($notifications as $notification) {
+            if (0 === $notification->isRead()) {
+
+            }
+        }*/
+
+        return $notifications;
+    }
+
+    //TODO finir
+    public function setReadNotification(Notification $notification) {
+        $notification->setRead(1);
+
+        $this
+            ->repo
+            ->saveNotification($notification);
+
+        return $notification;
     }
 
     /**

@@ -33,6 +33,13 @@ class Activity
      */
     private $published;
 
+    /**
+     * @var \JDJ\UserBundle\Entity\User
+     *
+     * @ORM\OneToOne(targetEntity="JDJ\UserBundle\Entity\User", cascade={"persist"})
+     */
+    private $actionUser;
+
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -191,5 +198,29 @@ class Activity
     public function getJeu()
     {
         return $this->jeu;
+    }
+
+    /**
+     * Set actionUser
+     *
+     * @param \JDJ\UserBundle\Entity\User $actionUser
+     *
+     * @return Activity
+     */
+    public function setActionUser(\JDJ\UserBundle\Entity\User $actionUser = null)
+    {
+        $this->actionUser = $actionUser;
+
+        return $this;
+    }
+
+    /**
+     * Get actionUser
+     *
+     * @return \JDJ\UserBundle\Entity\User
+     */
+    public function getActionUser()
+    {
+        return $this->actionUser;
     }
 }

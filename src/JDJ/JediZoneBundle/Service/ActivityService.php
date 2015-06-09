@@ -5,9 +5,9 @@ namespace JDJ\JediZoneBundle\Service;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping as ORM;
 use JDJ\JediZoneBundle\Entity\Activity;
+use JDJ\JediZoneBundle\Repository\ActivityRepository;
 use JDJ\JeuBundle\Entity\Jeu;
 use JDJ\UserBundle\Entity\User;
-use Symfony\Component\VarDumper\VarDumper;
 
 
 /**
@@ -25,7 +25,7 @@ class ActivityService
 
     /**
      * Entity-specific repo, useful for finding entities, for example
-     * @var JeuRepository
+     * @var ActivityRepository
      */
     protected $repo;
 
@@ -65,8 +65,7 @@ class ActivityService
         $activity = $jeu->getActivity();
 
         //Checks if the activity exists
-        if(!$activity)
-        {
+        if (!$activity) {
             //Create a new activity
             $activity = $this->createActivity($jeu, $user);
         } else {
@@ -97,6 +96,7 @@ class ActivityService
         $activity
             ->setJeu($jeu)
             ->setPublished(new \DateTime())
+            ->setActionUser($user)
             ->addUser($user);
 
         return $activity;
@@ -114,12 +114,30 @@ class ActivityService
     public function addUserActivity(Activity $activity, User $user)
     {
 
+        //Sets the action user
+        $activity->setActionUser($user);
+
         //Checks if user not in activity
-        if(!$activity->getUsers()->contains($user)) {
+        if (!$activity->getUsers()->contains($user)) {
             $activity->addUser($user);
         }
 
         return $activity;
+    }
+
+    /**
+     * This function gets the activities of the user
+     *
+     * @param User $user
+     * @return array
+     */
+    public function getActivitiesFromUser(User $user)
+    {
+        return $this
+            ->repo
+            ->findBy(array(
+                "user" => $user
+            ));
     }
 
     /**

@@ -58,6 +58,13 @@ class Notification
      */
     private $isRead;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $changeStatus;
+
 
     /**
      * @var \JDJ\UserBundle\Entity\User
@@ -234,5 +241,39 @@ class Notification
     public function getActivity()
     {
         return $this->activity;
+    }
+
+    /**
+     * Get isRead
+     *
+     * @return boolean
+     */
+    public function getIsRead()
+    {
+        return $this->isRead;
+    }
+
+    /**
+     * Set changeStatus
+     *
+     * @param string $changeStatus
+     *
+     * @return Notification
+     */
+    public function setChangeStatus($changeStatus)
+    {
+        $this->changeStatus = $changeStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get changeStatus
+     *
+     * @return string
+     */
+    public function getChangeStatus()
+    {
+        return $this->changeStatus;
     }
 }
