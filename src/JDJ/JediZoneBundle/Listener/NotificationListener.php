@@ -38,6 +38,15 @@ class NotificationListener
      */
     protected $user;
 
+    /**
+     * @var string
+     */
+    protected $action;
+
+    /**
+     * @var string
+     */
+    protected $comment;
 
     /**
      * Constructor
@@ -47,12 +56,14 @@ class NotificationListener
      * @param Jeu $jeu
      * @param User $user
      */
-    public function __construct(NotificationService $notificationService,ActivityService $activityService, Jeu $jeu, User $user)
+    public function __construct(NotificationService $notificationService,ActivityService $activityService, Jeu $jeu, User $user, $action, $comment)
     {
         $this->notificationService = $notificationService;
         $this->activityService = $activityService;
         $this->jeu  = $jeu;
         $this->user = $user;
+        $this->action = $action;
+        $this->comment = $comment;
     }
 
     /**
@@ -69,7 +80,7 @@ class NotificationListener
         $activity = $this->activityService->getActivity($this->jeu, $this->user);
 
         //Create the notifications
-        $this->notificationService->createNotifications($activity);
+        $this->notificationService->createNotifications($activity, $this->action, $this->comment);
 
     }
 }

@@ -14,7 +14,7 @@ use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use JDJ\CollectionBundle\Entity\Collection;
 use JDJ\CollectionBundle\Form\CollectionType;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,25 +39,31 @@ class NotificationController extends Controller
      * The jedizone page where users can see their activity and notifications
      *
      * @Route("/", name="jedizone_index")
+     * @Route("/{status}/", name="jedizone_status_filter_index")
+     * @Route("/{notificationType}", name="jedizone_type_filter_index")
+     * @Security("has_role('ROLE_WORKFLOW')")
+     *
+     * @param null $status
+     * @param null $notificationType
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function indexAction(Request $request)
+    public function indexAction($status = null, $notificationType = null)
     {
 
-        //Check user is granted
-        if ($this->container->get('security.context')->isGranted('ROLE_WORKFLOW')) {
-            $user = $this->get('security.context')->getToken()->getUser();
+        $user = $this->get('security.context')->getToken()->getUser();
 
-            $notifications = $this
-                ->getNotificationService()
-                ->getNotificationFromUser($user);
+        $notifications = $this
+            ->getNotificationService()
+            ->getNotificationFromUser($user, $status, $notificationType);
 
-        } else {
-            $request->getSession()->getFlashBag()->add('error', 'Vous devez être connecté.');
-            return $this->redirect($this->generateUrl('jdj_web_homepage'));
-        }
+        $notificationFilterCount = $this
+            ->getNotificationService()
+            ->getNotificationFromUserCount($user);
 
         return $this->render('jedizone/index.html.twig', array(
             'notifications' => $notifications,
+            'notificationFilterCount' => $notificationFilterCount,
         ));
 
     }
@@ -78,7 +84,6 @@ class NotificationController extends Controller
         ));
 
     }
-
 
 
     /**

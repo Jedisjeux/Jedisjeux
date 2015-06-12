@@ -61,10 +61,12 @@ class NotificationService
      * This function create all the notifications when there is a game status change
      *
      * @param Activity $activity
+     * @param $action
+     * @param $comment
      *
      * @return Activity
      */
-    public function createNotifications(Activity $activity)
+    public function createNotifications(Activity $activity, $action, $comment)
     {
         //Notifications for the users of the activity
         $tabUser = $activity->getUsers();
@@ -85,7 +87,7 @@ class NotificationService
             foreach ($tabUser as $user) {
 
                 //Create the notification
-                $notification = $this->createNotification($user, $activity);
+                $notification = $this->createNotification($user, $activity, $action, $comment);
 
                 //persist the notification
                 $this->repo->saveNotification($notification);
@@ -109,10 +111,12 @@ class NotificationService
      *
      * @param User $user
      * @param Activity $activity
+     * @param $action
+     * @param $comment
      *
      * @return Notification
      */
-    public function createNotification(User $user, Activity $activity)
+    public function createNotification(User $user, Activity $activity, $action, $comment)
     {
         $notification = new Notification();
 
@@ -122,8 +126,8 @@ class NotificationService
             ->setIsRead(false)
             ->setUser($user)
             ->setChangeStatus($activity->getJeu()->getStatus())
-            ->setAction(Notification::ACTION_ACCEPT)
-            ->setComment("");
+            ->setAction($action)
+            ->setComment($comment);
 
         return $notification;
     }
@@ -155,37 +159,68 @@ class NotificationService
      * This function gets the notifications of the user
      *
      * @param User $user
+     * @param null $status
+     * @param null $noticationType
      * @return array
      */
-    public function getNotificationFromUser(User $user)
+    public function getNotificationFromUser(User $user, $status = null, $noticationType = null)
     {
         $notifications = $this
             ->repo
-            ->findBy(array(
-                "user" => $user
-            ), array(
-                'id' => 'desc'
-            ));
+            ->getNotificationFromCriteras(
+                $user,
+                $status,
+                $noticationType
+            );
 
         //Sets the notifications to read
-        /*foreach ($notifications as $notification) {
-            if (0 === $notification->isRead()) {
-
+        foreach ($notifications as $notification) {
+            if (false === $notification->isRead()) {
+                $this->setReadNotification($notification);
+                $notification->setIsRead(false);
             }
-        }*/
+        }
 
         return $notifications;
     }
 
-    //TODO finir
-    public function setReadNotification(Notification $notification) {
-        $notification->setRead(1);
+    /**
+     * This function gets the notification counts for the filters display
+     *
+     * @param $user
+     * @return array
+     */
+    public function getNotificationFromUserCount($user)
+    {
+        $tabCountNotication = array();
+        foreach(Jeu::getStatusList() as $status) {
+            $notifications = $this
+                ->repo
+                ->getNotificationFromCriteras($user, $status);
 
+            if(count($notifications) > 0) {
+                $tabCountNotication[$status] = count($notifications);
+            }
+        }
+
+        return $tabCountNotication;
+    }
+
+    /**
+     * This function sets the notification to read
+     *
+     * @param Notification $notification
+     */
+    public function setReadNotification(Notification $notification)
+    {
+        /**
+         * Sets the notification to read and record it
+         */
+        $notification->setIsRead(true);
         $this
             ->repo
             ->saveNotification($notification);
 
-        return $notification;
     }
 
     /**

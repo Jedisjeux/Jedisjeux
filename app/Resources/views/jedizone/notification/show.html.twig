@@ -45,8 +45,19 @@
                         <div class="plan-details">
                             <ul class="list-unstyled">
                                 <!-- List items -->
-                                <li>{{ jeu.libelle }} est passé en status {{ notification.changeStatus }}
-                                    par {{ notification.activity.actionUser.username }}</li>
+                                {% if notification.action ==  constant('JDJ\\JediZoneBundle\\Entity\\Notification::ACTION_ACCEPT') %}
+                                    <li>
+                                        {{ notification.activity.actionUser.username }} a passé le jeu {{ jeu.libelle }} en {{ notification.changeStatus }}
+                                    </li>
+                                {% elseif notification.action ==  constant('JDJ\\JediZoneBundle\\Entity\\Notification::ACTION_DECLINE') %}
+                                    <li>
+                                        {{ notification.activity.actionUser.username }} a refusé de passer le jeu {{ jeu.libelle }} en {{ notification.changeStatus }}
+                                    </li>
+                                    <li>
+                                        Raison du refus : {{ notification.comment }}
+                                    </li>
+                                {% endif %}
+
                                 <li>le {{ notification.createdAt|date('d/m/Y') }} <span class="pull-right"><a
                                                 href="qsdfqsd">voir la fiche</a></span></li>
                             </ul>

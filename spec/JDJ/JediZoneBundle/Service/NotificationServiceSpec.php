@@ -4,6 +4,7 @@ namespace spec\JDJ\JediZoneBundle\Service;
 
 use Doctrine\ORM\EntityManager;
 use JDJ\JediZoneBundle\Entity\Activity;
+use JDJ\JediZoneBundle\Entity\Notification;
 use JDJ\JediZoneBundle\Service\ActivityService;
 use JDJ\JeuBundle\Entity\Jeu;
 use JDJ\UserBundle\Entity\User;
@@ -50,12 +51,12 @@ class NotificationServiceSpec extends ObjectBehavior
 
         //the function returns a notification
         $this
-            ->createNotification($user, $activity)
+            ->createNotification($user, $activity, Notification::ACTION_ACCEPT, "")
             ->shouldReturnAnInstanceOf('JDJ\JedizoneBundle\Entity\Notification');
 
         //The user passed is the user of the notification
         $this
-            ->createNotification($user, $activity)
+            ->createNotification($user, $activity, Notification::ACTION_ACCEPT, "")
             ->getUser()
             ->shouldReturn($user);
 
@@ -105,6 +106,6 @@ class NotificationServiceSpec extends ObjectBehavior
 
         $activity->setJeu($jeu);
 
-        $this->createNotifications($activity)->shouldReturn($activity);
+        $this->createNotifications($activity,  Notification::ACTION_ACCEPT, "")->shouldReturn($activity);
     }
 }

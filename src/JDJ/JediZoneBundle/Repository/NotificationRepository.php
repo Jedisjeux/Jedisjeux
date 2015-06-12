@@ -1,8 +1,10 @@
 <?php
 
 namespace JDJ\JediZoneBundle\Repository;
+
 use JDJ\CoreBundle\Entity\EntityRepository;
 use JDJ\JediZoneBundle\Entity\Notification;
+use JDJ\UserBundle\Entity\User;
 
 
 /**
@@ -24,5 +26,39 @@ class NotificationRepository extends EntityRepository
         //persist the notification
         $this->_em->persist($notification);
         $this->_em->flush();
+    }
+
+
+    /**
+     * This function return a the list of notification from the critera list
+     *
+     * @param User $user
+     * @param $status
+     * @return array
+     */
+    public function getNotificationFromCriteras(User $user, $status = null, $notificationType = null)
+    {
+        $qb = $this->_em->createQueryBuilder();
+
+        $qb
+            ->select('n')
+            ->from($this->_entityName, 'n')
+            ->join('n.activity', "a")
+            ->join('a.jeu', 'j')
+            ->where('n.user = :user')
+            ->setParameter('user', $user)
+            ->orderBy('n.id', "DESC");
+
+        if ($status) {
+            $qb
+                ->andWhere('j.status = :status')
+                ->setParameter('status', $status);
+        }
+        if ($notificationType) {
+            $qb
+                ->andWhere('a.' . $notificationType . ' NOT NULL');
+        }
+
+        return $qb->getQuery()->getResult();
     }
 }

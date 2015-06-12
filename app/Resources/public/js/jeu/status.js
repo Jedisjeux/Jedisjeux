@@ -4,28 +4,37 @@ $(document).ready(function () {
     /**
      * Handles click to display to change the game status
      */
-    $(".changeStatus").click(function (e) {
+    $(".acceptStatus").click(function (e) {
         e.preventDefault();
-        changeGameStatus($(this).data('jeu-id'), $(this).data('status'));
+        changeGameStatus($(this).data('jeu-id'), $(this).data('status'), $(this).data('action'), "");
     });
 
+    /**
+     * Handles click to display to change the game status
+     */
+    $(".refuseStatus").click(function (e) {
+        e.preventDefault();
+        changeGameStatus($(this).data('jeu-id'), $(this).data('status'), $(this).data('action'), $("#inputCommentRefuse").val());
+    });
 
     /**
-     * call the change status service
+     * Call the change status service
      *
      * @param jeuId
      * @param status
+     * @param action
+     * @param comment
      */
-    function changeGameStatus(jeuId, status) {
+    function changeGameStatus(jeuId, status, action, comment) {
 
         $.ajax({
-            url: Routing.generate('change_status', {jeu: jeuId, status: status}),
+            url: Routing.generate('change_status', {jeu: jeuId, status: status, action: action}),
             type: 'POST',
-            data: {},
+            data: {comment: comment},
             async: false
         })
             .done(function (data) {
-
+                $('#refuseStatusModal').modal('hide');
                 $('.changeStatus').hide();
                 $('.changeStatusContainer').hide();
 

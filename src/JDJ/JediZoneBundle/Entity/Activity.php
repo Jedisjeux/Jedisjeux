@@ -36,7 +36,7 @@ class Activity
     /**
      * @var \JDJ\UserBundle\Entity\User
      *
-     * @ORM\OneToOne(targetEntity="JDJ\UserBundle\Entity\User", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="JDJ\UserBundle\Entity\User", cascade={"persist"})
      */
     private $actionUser;
 
