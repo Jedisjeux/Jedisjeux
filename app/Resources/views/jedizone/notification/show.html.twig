@@ -64,7 +64,7 @@
                         </div>
                         <div class="clearfix"></div>
                         <!-- Tag -->
-                        {% if not notification.isRead %}
+                        {% if notification.displayNew %}
                             <span class="tag bg-{{ tagColor }}"><i class="fa fa-envelope"></i></span>
                         {% endif %}
                     </div>

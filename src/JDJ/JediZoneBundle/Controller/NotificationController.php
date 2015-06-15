@@ -53,13 +53,15 @@ class NotificationController extends Controller
 
         $user = $this->get('security.context')->getToken()->getUser();
 
+        //the notification list
         $notifications = $this
             ->getNotificationService()
-            ->getNotificationFromUser($user, $status, $notificationType);
+            ->getNotificationsFromUser($user, $status, $notificationType);
 
+        //The filter informations
         $notificationFilterCount = $this
             ->getNotificationService()
-            ->getNotificationFromUserCount($user);
+            ->getNotificationsFromUserCount($user);
 
         return $this->render('jedizone/index.html.twig', array(
             'notifications' => $notifications,

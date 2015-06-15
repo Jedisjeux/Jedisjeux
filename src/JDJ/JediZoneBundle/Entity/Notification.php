@@ -65,6 +65,10 @@ class Notification
      */
     private $changeStatus;
 
+    /**
+     * @var boolean
+     */
+    private $displayNew;
 
     /**
      * @var \JDJ\UserBundle\Entity\User
@@ -180,7 +184,7 @@ class Notification
      * @param boolean $isRead
      * @return Notification
      */
-    public function setIsRead($isRead)
+    public function setRead($isRead)
     {
         $this->isRead = $isRead;
 
@@ -243,15 +247,6 @@ class Notification
         return $this->activity;
     }
 
-    /**
-     * Get isRead
-     *
-     * @return boolean
-     */
-    public function getIsRead()
-    {
-        return $this->isRead;
-    }
 
     /**
      * Set changeStatus
@@ -275,5 +270,21 @@ class Notification
     public function getChangeStatus()
     {
         return $this->changeStatus;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isDisplayNew()
+    {
+        return $this->displayNew;
+    }
+
+    /**
+     * @param boolean $displayNew
+     */
+    public function setDisplayNew($displayNew)
+    {
+        $this->displayNew = $displayNew;
     }
 }

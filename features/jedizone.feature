@@ -177,3 +177,35 @@ Feature: Workflow jedizone
     And I should not see "Ce jeu est encore au statut NEED_A_REVIEW."
     And I should not see "Ce jeu est encore au statut NEED_A_TRANSLATION."
     And I should not see "Ce jeu est encore au statut WRITING."
+    Then I am on "/jedizone"
+    And I should see "JediZone"
+    And I should see "publisher a passé le jeu Modern Art en PUBLISHED"
+
+  ######################
+  # Decline status game
+  ######################
+  Scenario: Refus du passage au status PUBLISHED
+    Given I am on "/login"
+    And I fill in the following:
+      | Nom d'utilisateur | publisher |
+      | Mot de passe      | toto      |
+    And I press "Connexion"
+    And I am on game "Modern Art"
+    Then I should see "Ce jeu est encore au statut READY_TO_PUBLISH."
+    And I should see "Refuser"
+    And I follow "Refuser"
+    And I wait "1" seconds
+    Then I should see "Je refuse de passer le jeu Modern Art au statut PUBLISHED"
+    And I fill in the following:
+      | Commentaire | Local es realmente un pervertido  |
+    When I follow "refuseStatus"
+    Then I am on game "Modern Art"
+    And I should see "Publier"
+    And I should see "Ce jeu est encore au statut READY_TO_PUBLISH."
+    And I should not see "Ce jeu est encore au statut NEED_A_REVIEW."
+    And I should not see "Ce jeu est encore au statut NEED_A_TRANSLATION."
+    And I should not see "Ce jeu est encore au statut WRITING."
+    Then I am on "/jedizone"
+    And I should see "JediZone"
+    And I should see "publisher a refusé de passer le jeu Modern Art en READY_TO_PUBLISH"
+    And I should see "Raison du refus : Local es realmente un pervertido"

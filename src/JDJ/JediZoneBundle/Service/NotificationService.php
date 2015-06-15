@@ -123,7 +123,7 @@ class NotificationService
         //Sets the params of the notification
         $notification
             ->setActivity($activity)
-            ->setIsRead(false)
+            ->setRead(false)
             ->setUser($user)
             ->setChangeStatus($activity->getJeu()->getStatus())
             ->setAction($action)
@@ -163,21 +163,19 @@ class NotificationService
      * @param null $noticationType
      * @return array
      */
-    public function getNotificationFromUser(User $user, $status = null, $noticationType = null)
+    public function getNotificationsFromUser(User $user, $status = null, $noticationType = null)
     {
         $notifications = $this
             ->repo
-            ->getNotificationFromCriteras(
-                $user,
-                $status,
-                $noticationType
-            );
+            ->getNotificationsFromCriteria($user, $status, $noticationType);
 
         //Sets the notifications to read
         foreach ($notifications as $notification) {
             if (false === $notification->isRead()) {
                 $this->setReadNotification($notification);
-                $notification->setIsRead(false);
+                $notification->setDisplayNew(true);
+            } else {
+                $notification->setDisplayNew(false);
             }
         }
 
@@ -190,15 +188,15 @@ class NotificationService
      * @param $user
      * @return array
      */
-    public function getNotificationFromUserCount($user)
+    public function getNotificationsFromUserCount($user)
     {
         $tabCountNotication = array();
-        foreach(Jeu::getStatusList() as $status) {
+        foreach (Jeu::getStatusList() as $status) {
             $notifications = $this
                 ->repo
-                ->getNotificationFromCriteras($user, $status);
+                ->getNotificationsFromCriteria($user, $status);
 
-            if(count($notifications) > 0) {
+            if (count($notifications) > 0) {
                 $tabCountNotication[$status] = count($notifications);
             }
         }
@@ -216,7 +214,7 @@ class NotificationService
         /**
          * Sets the notification to read and record it
          */
-        $notification->setIsRead(true);
+        $notification->setRead(true);
         $this
             ->repo
             ->saveNotification($notification);
