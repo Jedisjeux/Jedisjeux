@@ -28,6 +28,9 @@ class CustomerType extends AbstractType
             ->add('companyName', null, array(
                 'label' => 'label.company',
             ))
+            ->add('email', 'email', array(
+                'label' => 'label.email',
+            ))
             ->add('address', 'jdj_comptabundle_address', array(
                 'label' => 'label.address'
             ))

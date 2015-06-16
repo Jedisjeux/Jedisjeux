@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Class BookEntryController
  *
- * @Route("/book-entry")
+ * @Route("/ecriture")
  */
 class BookEntryController extends Controller
 {
@@ -50,7 +50,7 @@ class BookEntryController extends Controller
     {
         $bookEntries = $this
             ->getBookEntryRepository()
-            ->createPaginator()
+            ->createPaginator(null, array('createdAt' => 'desc'))
             ->setCurrentPage($request->get('page', 1));
 
         $deleteForms = array();

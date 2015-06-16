@@ -23,9 +23,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class SubscriptionController
+ * @author Loïc Frémont <lc.fremont@gmail.com>
  *
- * @Route("/subscription")
+ * @Route("/abonnement")
  */
 class SubscriptionController extends Controller
 {

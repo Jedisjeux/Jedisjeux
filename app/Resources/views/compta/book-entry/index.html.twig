@@ -1,19 +1,19 @@
 {% extends "::base.html.twig" %}
+{% from 'JDJWebBundle:Macros:misc.html.twig' import pagination %}
 
 {% block container %}
 
     <div class="block-heading-two">
+        <ul class="list-inline pull-right">
+            <li>
+                <a class="btn btn-green" href="{{ path('compta_book_entry_new') }}">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Créer une écriture comptable
+                </a>
+            </li>
+        </ul>
         <h3><span>Liste des écritures comptables</span></h3>
     </div>
-
-    <ul class="list-inline">
-        <li>
-            <a class="btn btn-green" href="{{ path('compta_book_entry_new') }}">
-                <span class="glyphicon glyphicon-plus"></span>
-                Créer une écriture comptable
-            </a>
-        </li>
-    </ul>
 
     <table class="table table-striped">
         <thead>
@@ -26,7 +26,7 @@
         </tr>
         </thead>
         <tbody>
-        {% for bookEntry in bookEntrys %}
+        {% for bookEntry in bookEntries %}
             <tr>
                 <td>
                     {% if bookEntry.debitedAt %}
@@ -46,7 +46,7 @@
                         {{ bookEntry.price }} €
                     {% endif %}
                 </td>
-                <td>
+                <td class="text-right">
                     <ul class="list-inline">
                         <li>
                             <a class="btn btn-green"
@@ -67,5 +67,13 @@
         {% endfor %}
         </tbody>
     </table>
+
+    {% block Pagination %}
+        <div class="pagination-wrapper">
+            <div class="pagination-bottom">
+                {{ pagination(bookEntries) }}
+            </div>
+        </div>
+    {% endblock %}
 
 {% endblock container %}

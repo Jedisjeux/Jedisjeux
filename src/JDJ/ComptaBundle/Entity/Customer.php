@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="JDJ\ComptaBundle\Entity\Repository\BookEntryRepository")
  * @ORM\Table(name="cpta_customer")
  */
 class Customer 

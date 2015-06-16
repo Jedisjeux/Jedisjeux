@@ -19,9 +19,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class ProductController
+ * @author Loïc Frémont <lc.fremont@gmail.com>
  *
- * @Route("/product")
+ * @Route("/produit")
  */
 class ProductController extends Controller
 {

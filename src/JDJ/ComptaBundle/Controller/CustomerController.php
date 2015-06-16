@@ -9,6 +9,7 @@
 namespace JDJ\ComptaBundle\Controller;
 
 use JDJ\ComptaBundle\Entity\Customer;
+use JDJ\ComptaBundle\Entity\Repository\CustomerRepository;
 use JDJ\ComptaBundle\Form\CustomerType;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -19,22 +20,36 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class CustomerController
+ * @author Loïc Frémont <lc.fremont@gmail.com>
  *
- * @Route("/customer")
+ * @Route("/client")
  */
 class CustomerController extends Controller
 {
     /**
+     * @return CustomerRepository
+     */
+    private function getCustomerRepository()
+    {
+        return $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('JDJComptaBundle:Customer');
+    }
+
+    /**
      * Lists all Customer entities.
      *
      * @Route("/", name="compta_customer")
+     * @param Request $request
+     * @return Response
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $customers = $em->getRepository('JDJComptaBundle:Customer')->findAll();
+        $customers = $this
+            ->getCustomerRepository()
+            ->createPaginator()
+            ->setCurrentPage($request->get('page', 1));
 
         $deleteForms = array();
 

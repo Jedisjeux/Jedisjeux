@@ -2,8 +2,8 @@ parameters:
     app.manager.product.class: JDJ\ComptaBundle\Entity\Manager\ProductManager
     app.manager.address.class: JDJ\ComptaBundle\Entity\Manager\AddressManager
     app.manager.bill.class: JDJ\ComptaBundle\Entity\Manager\BillManager
-    app.manager.subscription.class: JDJ\ComptaBundle\Manager\SubscriptionManager
-    app.manager.book_entry.class: JDJ\ComptaBundle\Manager\BookEntryManager
+    app.manager.subscription.class: JDJ\ComptaBundle\Entity\Manager\SubscriptionManager
+    app.manager.book_entry.class: JDJ\ComptaBundle\Entity\Manager\BookEntryManager
 
 services:
     app.manager.product:

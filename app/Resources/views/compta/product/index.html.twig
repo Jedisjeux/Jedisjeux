@@ -3,17 +3,16 @@
 {% block container %}
 
     <div class="block-heading-two">
+        <ul class="list-inline pull-right">
+            <li>
+                <a class="btn btn-green" href="{{ path('compta_product_new') }}">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Créer un produit
+                </a>
+            </li>
+        </ul>
         <h3><span>Liste des produits</span></h3>
     </div>
-
-    <ul class="list-inline">
-        <li>
-            <a class="btn btn-green" href="{{ path('compta_product_new') }}">
-                <span class="glyphicon glyphicon-plus"></span>
-                Créer un produit
-            </a>
-        </li>
-    </ul>
 
     <table class="table table-striped">
         <thead>
@@ -29,7 +28,7 @@
                 <td>{{ product.name }}</td>
                 <td>{{ product.price|localizedcurrency('EUR') }}</td>
                 <td>{{ product.subscriptionDuration }} {{ 'label.months'|trans }}</td>
-                <td>
+                <td class="text-right">
                     <ul class="list-inline">
                         <li>
                             <a class="btn btn-green" href="{{ path('compta_product_edit', { 'product': product.id }) }}">

@@ -3,17 +3,16 @@
 {% block container %}
 
     <div class="block-heading-two">
+        <ul class="list-inline pull-right">
+            <li>
+                <a class="btn btn-green" href="{{ path('compta_bill_new') }}">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Créer une facture
+                </a>
+            </li>
+        </ul>
         <h3><span>Liste des factures</span></h3>
     </div>
-
-    <ul class="list-inline">
-        <li>
-            <a class="btn btn-green" href="{{ path('compta_bill_new') }}">
-                <span class="glyphicon glyphicon-plus"></span>
-                Créer une facture
-            </a>
-        </li>
-    </ul>
 
     <table class="table table-striped">
         <thead>
@@ -41,7 +40,7 @@
                         {{ 'label.not_paid'|trans }}
                     {% endif %}
                 </td>
-                <td>
+                <td class="text-right">
                     <ul class="list-inline">
                         <li>
                             <a class="btn btn-green" href="{{ path('compta_bill_edit', { 'bill': bill.id }) }}">

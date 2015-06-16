@@ -3,17 +3,16 @@
 {% block container %}
 
     <div class="block-heading-two">
+        <ul class="list-inline pull-right">
+            <li>
+                <a class="btn btn-green" href="{{ path('compta_payment_method_new') }}">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Créer un méthode de paiement
+                </a>
+            </li>
+        </ul>
         <h3><span>Liste des méthodes de paiement</span></h3>
     </div>
-
-    <ul class="list-inline">
-        <li>
-            <a class="btn btn-green" href="{{ path('compta_payment_method_new') }}">
-                <span class="glyphicon glyphicon-plus"></span>
-                Créer un méthode de paiement
-            </a>
-        </li>
-    </ul>
 
     <table class="table table-striped">
         <thead>
@@ -25,7 +24,7 @@
         {% for paymentMethod in paymentMethods %}
             <tr>
                 <td>{{ payment_method.companyName }}</td>
-                <td>
+                <td class="text-right">
                     <ul class="list-inline">
                         <li>
                             <a class="btn btn-green" href="{{ path('compta_payment_method_edit', { 'paymentMethod': paymentMethod.id }) }}">
