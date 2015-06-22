@@ -49,6 +49,7 @@ class AppKernel extends Kernel
             new JDJ\SearchBundle\JDJSearchBundle(),
             new JDJ\CollectionBundle\JDJCollectionBundle(),
             new JDJ\CMSBundle\JDJCMSBundle(),
+            new JDJ\JediZoneBundle\JDJJediZoneBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

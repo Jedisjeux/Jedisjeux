@@ -2,6 +2,7 @@
 
 namespace JDJ\UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -121,14 +122,32 @@ class User extends BaseUser
      */
     private $collections;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="JDJ\JediZoneBundle\Entity\Notification", mappedBy="user" , cascade={"persist"})
+     */
+    private $notifications;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="JDJ\JediZoneBundle\Entity\Activity", mappedBy="users", cascade={"persist", "merge"})
+     * @ORM\JoinTable(name="jdj_user_activity")
+     */
+    private $activities;
 
 
     public function __construct()
     {
         parent::__construct();
 
-        $this->asAuthorParties = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->parties = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->asAuthorParties = new ArrayCollection();
+        $this->parties = new ArrayCollection();
+        $this->userGameAttributes = new ArrayCollection();
+        $this->collections = new ArrayCollection();
+        $this->notifications = new ArrayCollection();
+        $this->activities = new ArrayCollection();
     }
 
     /**
@@ -483,4 +502,70 @@ class User extends BaseUser
         return $this->deletedAt;
     }
 
+
+    /**
+     * Add notifications
+     *
+     * @param \JDJ\JediZoneBundle\Entity\Notification $notifications
+     * @return User
+     */
+    public function addNotification(\JDJ\JediZoneBundle\Entity\Notification $notifications)
+    {
+        $this->notifications[] = $notifications;
+
+        return $this;
+    }
+
+    /**
+     * Remove notifications
+     *
+     * @param \JDJ\JediZoneBundle\Entity\Notification $notifications
+     */
+    public function removeNotification(\JDJ\JediZoneBundle\Entity\Notification $notifications)
+    {
+        $this->notifications->removeElement($notifications);
+    }
+
+    /**
+     * Get notifications
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNotifications()
+    {
+        return $this->notifications;
+    }
+
+    /**
+     * Add activities
+     *
+     * @param \JDJ\JediZoneBundle\Entity\Activity $activities
+     * @return User
+     */
+    public function addActivity(\JDJ\JediZoneBundle\Entity\Activity $activities)
+    {
+        $this->activities[] = $activities;
+
+        return $this;
+    }
+
+    /**
+     * Remove activities
+     *
+     * @param \JDJ\JediZoneBundle\Entity\Activity $activities
+     */
+    public function removeActivity(\JDJ\JediZoneBundle\Entity\Activity $activities)
+    {
+        $this->activities->removeElement($activities);
+    }
+
+    /**
+     * Get activities
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getActivities()
+    {
+        return $this->activities;
+    }
 }

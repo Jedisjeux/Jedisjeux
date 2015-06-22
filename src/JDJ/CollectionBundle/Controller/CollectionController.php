@@ -2,7 +2,6 @@
 
 namespace JDJ\CollectionBundle\Controller;
 
-use Doctrine\Common\Util\Debug;
 use JDJ\CollectionBundle\Entity\UserGameAttribute;
 use JDJ\CollectionBundle\Service\CollectionService;
 use JDJ\CollectionBundle\Service\UserGameAttributeService;

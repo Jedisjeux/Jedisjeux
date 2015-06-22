@@ -25,16 +25,15 @@ class JeuContext extends DefaultContext
     public function thereAreGames(TableNode $table){
         $manager = $this->getEntityManager();
 
-        $published = $this->findOneBy("statut", array("code" => Statut::PUBLISHED));
 
         foreach ($table->getHash() as $data) {
 
-            /** @var Statut $statut */
-            if (isset($data['statut'])) {
-                $statut = $this->findOneBy("statut", array("libelle" => $data['statut']));
+            if(!$data['status']) {
+                $status = Jeu::PUBLISHED;
             } else {
-                $statut = $published;
+                $status = $data['status'];
             }
+
 
             $jeu = new Jeu();
             $jeu
@@ -42,7 +41,7 @@ class JeuContext extends DefaultContext
                 ->setAgeMin(isset($data['age_min']) ? $data['age_min'] : null)
                 ->setJoueurMin(isset($data['joueur_min']) ? $data['joueur_min'] : null)
                 ->setJoueurMax(isset($data['joueur_max']) ? $data['joueur_max'] : null)
-                ->setStatut($statut)
+                ->setStatus($status)
             ;
 
             $manager->persist($jeu);
