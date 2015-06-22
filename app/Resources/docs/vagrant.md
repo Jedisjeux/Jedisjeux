@@ -29,6 +29,7 @@ and adding following line :
 ``` bash
 cd /var/www/
 sudo scp admin@jedisjeux.net:/srv/d_jedisjeux/www/sav/dmp_jdj_1.sql.gz ./
+sudo scp admin@jedisjeux.net:/srv/d_jedisjeux/www/sav/dmp_cpta.sql ./
 ```
 
 enter the admin password of admin account
@@ -38,6 +39,7 @@ enter the admin password of admin account
 ``` bash
 sudo gzip -d dmp_jdj_1.sql.gz
 mysql -u root jedisjeux < dmp_jdj_1.sql
+mysql -u root zf_jedisjeux_test < dmp_cpta.sql
 ```
 
 6/ create your empty database

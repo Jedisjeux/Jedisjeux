@@ -1,4 +1,5 @@
 {% extends "::base.html.twig" %}
+{% from 'JDJWebBundle:Macros:misc.html.twig' import pagination %}
 
 {% block container %}
 
@@ -17,7 +18,7 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>{{ 'label.id'|trans }}</th>
+            <th>#</th>
             <th>{{ 'label.created_at'|trans }}</th>
             <th>{{ 'label.company'|trans }}</th>
             <th>{{ 'label.total_price'|trans }}</th>
@@ -60,5 +61,13 @@
         {% endfor %}
         </tbody>
     </table>
+
+    {% block Pagination %}
+        <div class="pagination-wrapper">
+            <div class="pagination-bottom">
+                {{ pagination(bills) }}
+            </div>
+        </div>
+    {% endblock %}
 
 {% endblock container %}

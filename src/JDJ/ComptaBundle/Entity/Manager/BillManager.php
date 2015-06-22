@@ -12,6 +12,7 @@ namespace JDJ\ComptaBundle\Entity\Manager;
 use Doctrine\ORM\EntityManager;
 use JDJ\ComptaBundle\Entity\Bill;
 use JDJ\ComptaBundle\Entity\BillProduct;
+use JDJ\ComptaBundle\Entity\Repository\BillRepository;
 
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
@@ -28,10 +29,26 @@ class BillManager
      */
     private $productManager;
 
+    /**
+     * Constructor
+     *
+     * @param EntityManager $entityManager
+     * @param ProductManager $productManager
+     */
     public function __construct(EntityManager $entityManager, ProductManager $productManager)
     {
         $this->entityManager = $entityManager;
         $this->productManager = $productManager;
+    }
+
+    /**
+     * @return BillRepository
+     */
+    public function getBillRepository()
+    {
+        return $this
+            ->entityManager
+            ->getRepository('JDJComptaBundle:Bill');
     }
 
     /**

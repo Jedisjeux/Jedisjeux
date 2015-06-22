@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
  *
- * @ORM\Entity(repositoryClass="JDJ\ComptaBundle\Entity\Repository\BookEntryRepository")
+ * @ORM\Entity(repositoryClass="JDJ\ComptaBundle\Entity\Repository\CustomerRepository")
  * @ORM\Table(name="cpta_customer")
  */
 class Customer 
@@ -34,6 +34,13 @@ class Customer
      * @ORM\Column(type="string")
      */
     private $companyName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    private $email;
 
     /**
      * @var Address
@@ -92,6 +99,24 @@ class Customer
     {
         $this->companyName = $companyName;
 
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     * @return $this
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
         return $this;
     }
 

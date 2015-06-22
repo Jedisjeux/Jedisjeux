@@ -18,7 +18,7 @@ use Doctrine\ORM\EntityManager;
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
  */
-class BookEntryCommand extends ContainerAwareCommand
+class BookEntryImportCommand extends ContainerAwareCommand
 {
     protected function configure()
     {

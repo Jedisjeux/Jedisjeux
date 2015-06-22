@@ -9,7 +9,7 @@
 namespace JDJ\ComptaBundle\Controller;
 
 use JDJ\ComptaBundle\Entity\BookEntry;
-use JDJ\ComptaBundle\Entity\Repository\BookEntryRepository;
+use JDJ\ComptaBundle\Entity\Manager\BookEntryManager;
 use JDJ\ComptaBundle\Form\BookEntryType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -27,14 +27,12 @@ use Symfony\Component\HttpFoundation\Response;
 class BookEntryController extends Controller
 {
     /**
-     * @return BookEntryRepository
+     * @return BookEntryManager
      */
-    private function getBookEntryRepository()
+    private function getBookEntryManager()
     {
         return $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('JDJComptaBundle:BookEntry');
+            ->get('app.manager.book_entry');
     }
 
     /**
@@ -49,6 +47,7 @@ class BookEntryController extends Controller
     public function indexAction(Request $request)
     {
         $bookEntries = $this
+            ->getBookEntryManager()
             ->getBookEntryRepository()
             ->createPaginator(null, array('createdAt' => 'desc'))
             ->setCurrentPage($request->get('page', 1));

@@ -62,12 +62,17 @@ class BillController extends Controller
      * Lists all Bill entities.
      *
      * @Route("/", name="compta_bill")
+     *
+     * @param Request $request
+     * @return Response
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $bills = $em->getRepository('JDJComptaBundle:Bill')->findAll();
+        $bills = $this
+            ->getBillManager()
+            ->getBillRepository()
+            ->createPaginator(null, array('createdAt' => 'desc'))
+            ->setCurrentPage($request->get('page', 1));
 
         $deleteForms = array();
         $totalPrices = array();

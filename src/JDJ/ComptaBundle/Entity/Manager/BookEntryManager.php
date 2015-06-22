@@ -12,6 +12,7 @@ namespace JDJ\ComptaBundle\Entity\Manager;
 use Doctrine\ORM\EntityManager;
 use JDJ\ComptaBundle\Entity\Bill;
 use JDJ\ComptaBundle\Entity\BookEntry;
+use JDJ\ComptaBundle\Entity\Repository\BookEntryRepository;
 
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
@@ -38,6 +39,16 @@ class BookEntryManager
     {
         $this->entityManager = $entityManager;
         $this->billManager = $billManager;
+    }
+
+    /**
+     * @return BookEntryRepository
+     */
+    public function getBookEntryRepository()
+    {
+        return $this
+            ->entityManager
+            ->getRepository('JDJComptaBundle:BookEntry');
     }
 
     /**

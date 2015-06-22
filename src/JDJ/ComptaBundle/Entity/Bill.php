@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="JDJ\ComptaBundle\Entity\Repository\BillRepository")
  * @ORM\Table(name="cpta_bill")
  */
 class Bill
@@ -225,6 +225,24 @@ class Bill
     {
         $this->customerAddressVersion = $customerAddressVersion;
 
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getSubscriptions()
+    {
+        return $this->subscriptions;
+    }
+
+    /**
+     * @param ArrayCollection $subscriptions
+     * @return $this
+     */
+    public function setSubscriptions($subscriptions)
+    {
+        $this->subscriptions = $subscriptions;
         return $this;
     }
 }
