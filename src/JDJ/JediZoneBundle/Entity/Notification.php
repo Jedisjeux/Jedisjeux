@@ -84,9 +84,6 @@ class Notification
      */
     private $activity;
 
-
-
-
     /**
      * Constructor
      */
@@ -94,10 +91,6 @@ class Notification
     {
         $this->listElements = new ArrayCollection();
     }
-
-
-
-
 
     /**
      * Get id
@@ -246,7 +239,6 @@ class Notification
     {
         return $this->activity;
     }
-
 
     /**
      * Set changeStatus

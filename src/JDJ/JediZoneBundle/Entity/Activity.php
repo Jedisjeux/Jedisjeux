@@ -73,10 +73,6 @@ class Activity
         $this->notifications = new ArrayCollection();
     }
 
-
-
-
-
     /**
      * Get id
      *
