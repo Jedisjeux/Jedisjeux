@@ -34,6 +34,9 @@ class AppKernel extends Kernel
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new Craue\FormFlowBundle\CraueFormFlowBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new JMS\TranslationBundle\JMSTranslationBundle(),
+            new JMS\DiExtraBundle\JMSDiExtraBundle($this),
+            new JMS\AopBundle\JMSAopBundle(),
 
             //JDJ
             new JDJ\FoundationBundle\JDJFoundationBundle(),
