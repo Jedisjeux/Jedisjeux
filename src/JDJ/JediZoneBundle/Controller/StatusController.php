@@ -22,9 +22,6 @@ use Symfony\Component\VarDumper\VarDumper;
 
 class StatusController extends Controller
 {
-    const STATUS_CHANGE_MESSAGE = "Le statut du Jeu %%jeu%% est passé au Status %%status%%";
-    const STATUS_DECLINE_MESSAGE = "Le statut du Jeu %%jeu%% n'est pas passé au Status %%status%% et un commentaire a été posté.";
-    const STATUS_ERROR_MESSAGE = "Une erreur s'est produite. Veuillez essayer plus tard.";
 
     /**
      * This function change the status of a game
@@ -79,13 +76,27 @@ class StatusController extends Controller
             $response->setStatusCode(JsonResponse::HTTP_OK);
 
             if(Notification::ACTION_ACCEPT === $action) {
-                $message = self::STATUS_CHANGE_MESSAGE;
+                $message = $this
+                    ->get('translator')
+                    ->trans('STATUS_CHANGE_MESSAGE', array(
+                        "%status%" => $this
+                            ->get('translator')
+                            ->trans(/** @Ignore */$status),
+                        "%jeu%" => $jeu->getLibelle(),
+                    ));
             } else {
-                $message = self::STATUS_DECLINE_MESSAGE;
+                $message = $this
+                    ->get('translator')
+                    ->trans('STATUS_DECLINE_MESSAGE', array(
+                        "%status%" => $this
+                            ->get('translator')
+                            ->trans(/** @Ignore */$status),
+                        "%jeu%" => $jeu->getLibelle(),
+                    ));
             }
             $response->setData(
                 array(
-                    "message" => str_replace('%%status%%', $status, str_replace('%%jeu%%', $jeu->getLibelle(), $message)),
+                    "message" => $message,
                 )
             );
 
@@ -95,7 +106,9 @@ class StatusController extends Controller
 
             $response->setData(
                 array(
-                    "message" => self::STATUS_ERROR_MESSAGE,
+                    "message" =>  $this
+                        ->get('translator')
+                        ->trans('STATUS_ERROR_MESSAGE'),
                 )
             );
         }

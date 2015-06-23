@@ -64,7 +64,7 @@
                     {% include "jeu/partial/_refuse-modal.html.twig" with {'jeu': jeu, 'status':  constant('JDJ\\JeuBundle\\Entity\\Jeu::PUBLISHED') } only %}
 
                 {% endif %}
-                Ce jeu est encore au statut <strong>{{ jeu.status }}</strong>.
+                Ce jeu est encore au statut <strong>{{ jeu.status |trans }}</strong>.
             </div>
 
 

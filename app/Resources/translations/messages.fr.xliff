@@ -1,14 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2015-06-22T20:31:09Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+  <file date="2015-06-23T20:38:41Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
-      <trans-unit id="9a6ae8ec8374095817b169e3513c6160cd391086" resname="LOCAL_EL_LOCO">
-        <source>LOCAL_EL_LOCO</source>
-        <target>Local es mucho loco</target>
+      <trans-unit id="69b7579bfac3b6f4ab5b10363a7e6af4f8117727" resname="1 à 2 heures">
+        <source>1 à 2 heures</source>
+        <target state="new">1 à 2 heures</target>
+        <jms:reference-file line="325">JeuBundle/Controller/JeuController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d79381923ebe1aa4f9b01260cecaf615f0dad314" resname="2 à 3 heures">
+        <source>2 à 3 heures</source>
+        <target state="new">2 à 3 heures</target>
+        <jms:reference-file line="326">JeuBundle/Controller/JeuController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="7b1c75cc9ea7379b10deb9af611b108b3cfca30c" resname="30 à 60 minutes">
+        <source>30 à 60 minutes</source>
+        <target state="new">30 à 60 minutes</target>
+        <jms:reference-file line="324">JeuBundle/Controller/JeuController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="87c57ed173ea17c02ec96ec099ee6a81d79dabc2" resname="Ajouter">
+        <source>Ajouter</source>
+        <target state="new">Ajouter</target>
+        <jms:reference-file line="77">JeuBundle/Controller/TypeAddonController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="74c6863d24b7179412f70158f01416f6042cc300" resname="Ajouter un Addon">
+        <source>Ajouter un Addon</source>
+        <target state="new">Ajouter un Addon</target>
+        <jms:reference-file line="103">JeuBundle/Controller/AddonController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6e157c5da4410b7e9de85f5c93026b9176e69064" resname="Create">
+        <source>Create</source>
+        <target state="new">Create</target>
+        <jms:reference-file line="70">ComptaBundle/Controller/CptaTypeadresseController.php</jms:reference-file>
+        <jms:reference-file line="70">ComptaBundle/Controller/FactureController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="1a6861723c6988e95ccc2010a3eca9a44fae0458" resname="Créer">
+        <source>Créer</source>
+        <target state="new">Créer</target>
+        <jms:reference-file line="79">ComptaBundle/Controller/ClientController.php</jms:reference-file>
+        <jms:reference-file line="70">ComptaBundle/Controller/EcritureController.php</jms:reference-file>
+        <jms:reference-file line="76">ComptaBundle/Controller/ModeReglementController.php</jms:reference-file>
+        <jms:reference-file line="78">ComptaBundle/Controller/ProduitController.php</jms:reference-file>
+        <jms:reference-file line="78">JeuBundle/Controller/CaracteristiqueController.php</jms:reference-file>
+        <jms:reference-file line="177">JeuBundle/Controller/JeuController.php</jms:reference-file>
+        <jms:reference-file line="99">JeuBundle/Controller/JeuImageController.php</jms:reference-file>
+        <jms:reference-file line="77">JeuBundle/Controller/MaterielController.php</jms:reference-file>
+        <jms:reference-file line="79">JeuBundle/Controller/MechanismController.php</jms:reference-file>
+        <jms:reference-file line="80">JeuBundle/Controller/ThemeController.php</jms:reference-file>
+        <jms:reference-file line="126">PartieBundle/Controller/JoueurController.php</jms:reference-file>
+        <jms:reference-file line="185">PartieBundle/Controller/PartieController.php</jms:reference-file>
+        <jms:reference-file line="90">PartieBundle/Controller/PartieImageController.php</jms:reference-file>
+        <jms:reference-file line="99">UserBundle/Controller/UserController.php</jms:reference-file>
+        <jms:reference-file line="104">UserReviewBundle/Controller/UserReviewController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="f6fdbe48dc54dd86f63097a03bd24094dedd713a" resname="Delete">
+        <source>Delete</source>
+        <target state="new">Delete</target>
+        <jms:reference-file line="476">CollectionBundle/Controller/CollectionController.php</jms:reference-file>
+        <jms:reference-file line="219">ComptaBundle/Controller/CptaTypeadresseController.php</jms:reference-file>
+        <jms:reference-file line="219">ComptaBundle/Controller/EcritureController.php</jms:reference-file>
+        <jms:reference-file line="219">ComptaBundle/Controller/FactureController.php</jms:reference-file>
+        <jms:reference-file line="171">CoreBundle/Controller/CibleController.php</jms:reference-file>
+        <jms:reference-file line="266">JeuBundle/Controller/AddonController.php</jms:reference-file>
+        <jms:reference-file line="225">JeuBundle/Controller/CaracteristiqueController.php</jms:reference-file>
+        <jms:reference-file line="228">JeuBundle/Controller/JeuImageController.php</jms:reference-file>
+        <jms:reference-file line="224">JeuBundle/Controller/MaterielController.php</jms:reference-file>
+        <jms:reference-file line="248">JeuBundle/Controller/MechanismController.php</jms:reference-file>
+        <jms:reference-file line="236">JeuBundle/Controller/ThemeController.php</jms:reference-file>
+        <jms:reference-file line="224">JeuBundle/Controller/TypeAddonController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="f7c8bcd8b213a6cc4a0cfd3462bd1379e4ef9689" resname="Enregistrer">
+        <source>Enregistrer</source>
+        <target state="new">Enregistrer</target>
+        <jms:reference-file line="157">ComptaBundle/Controller/ClientController.php</jms:reference-file>
+        <jms:reference-file line="166">PartieBundle/Controller/JoueurController.php</jms:reference-file>
+        <jms:reference-file line="354">PartieBundle/Controller/PartieController.php</jms:reference-file>
+        <jms:reference-file line="196">UserBundle/Controller/UserController.php</jms:reference-file>
+        <jms:reference-file line="245">UserReviewBundle/Controller/UserReviewController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="e97e6c66c31a24689b87346ced46036ca72e3e60" resname="Mettre à jour">
+        <source>Mettre à jour</source>
+        <target state="new">Mettre à jour</target>
+        <jms:reference-file line="188">JeuBundle/Controller/AddonController.php</jms:reference-file>
+        <jms:reference-file line="155">JeuBundle/Controller/TypeAddonController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="f260e757cec75096bc3eefbfb1c4a14720832017" resname="Modifier">
+        <source>Modifier</source>
+        <target state="new">Modifier</target>
+        <jms:reference-file line="149">ComptaBundle/Controller/EcritureController.php</jms:reference-file>
+        <jms:reference-file line="153">ComptaBundle/Controller/ModeReglementController.php</jms:reference-file>
+        <jms:reference-file line="155">ComptaBundle/Controller/ProduitController.php</jms:reference-file>
+        <jms:reference-file line="153">CoreBundle/Controller/CibleController.php</jms:reference-file>
+        <jms:reference-file line="155">JeuBundle/Controller/CaracteristiqueController.php</jms:reference-file>
+        <jms:reference-file line="55">JeuBundle/Controller/CaracteristiqueNoteController.php</jms:reference-file>
+        <jms:reference-file line="196">JeuBundle/Controller/JeuController.php</jms:reference-file>
+        <jms:reference-file line="211">JeuBundle/Controller/JeuImageController.php</jms:reference-file>
+        <jms:reference-file line="154">JeuBundle/Controller/MaterielController.php</jms:reference-file>
+        <jms:reference-file line="178">JeuBundle/Controller/MechanismController.php</jms:reference-file>
+        <jms:reference-file line="166">JeuBundle/Controller/ThemeController.php</jms:reference-file>
+        <jms:reference-file line="171">LudographieBundle/Controller/PersonneController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="94e2f3ee14b92e2e675a8f6118d28738dbf5c6ba" resname="Mot de passe">
+        <source>Mot de passe</source>
+        <target state="new">Mot de passe</target>
+        <jms:reference-file line="29">UserBundle/Form/UserRegistrationType.php</jms:reference-file>
+        <jms:reference-file line="29">UserBundle/Form/UserType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="feb9bfc15a6316f616944a6fa30d2bc7bacbe4b0" resname="STATUS_CHANGE_MESSAGE">
+        <source>STATUS_CHANGE_MESSAGE</source>
+        <target>Le statut du Jeu %jeu% est passé au Status %status%</target>
+        <jms:reference-file line="79">JediZoneBundle/Controller/StatusController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="c3215b9f28422072754f83bc1a686d7f923c658a" resname="STATUS_DECLINE_MESSAGE">
+        <source>STATUS_DECLINE_MESSAGE</source>
+        <target>Le statut du Jeu %jeu% n'est pas passé au Status %status% et un commentaire a été posté.</target>
+        <jms:reference-file line="88">JediZoneBundle/Controller/StatusController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ddccf275c7c2c7f2212fc8a4ccbd67816281816a" resname="STATUS_ERROR_MESSAGE">
+        <source>STATUS_ERROR_MESSAGE</source>
+        <target>Une erreur s'est produite. Veuillez essayer plus tard.</target>
+        <jms:reference-file line="109">JediZoneBundle/Controller/StatusController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="1acfc1c7d761310db2e5e876c0cade4d522cfed2" resname="Supprimer">
+        <source>Supprimer</source>
+        <target state="new">Supprimer</target>
+        <jms:reference-file line="316">PartieBundle/Controller/PartieController.php</jms:reference-file>
+        <jms:reference-file line="275">UserBundle/Controller/UserController.php</jms:reference-file>
+        <jms:reference-file line="184">UserReviewBundle/Controller/JeuNoteController.php</jms:reference-file>
+        <jms:reference-file line="323">UserReviewBundle/Controller/UserReviewController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="fb91e24fa52d8d2b32937bf04d843f730319a902" resname="Update">
+        <source>Update</source>
+        <target state="new">Update</target>
+        <jms:reference-file line="281">CollectionBundle/Controller/CollectionController.php</jms:reference-file>
+        <jms:reference-file line="149">ComptaBundle/Controller/CptaTypeadresseController.php</jms:reference-file>
+        <jms:reference-file line="149">ComptaBundle/Controller/FactureController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="696fa17dd6706b3454c8bfc3236713f005d48bbb" resname="Utiliser cette photo pour illustrer le matériel du jeu">
+        <source>Utiliser cette photo pour illustrer le matériel du jeu</source>
+        <target state="new">Utiliser cette photo pour illustrer le matériel du jeu</target>
+        <jms:reference-file line="42">JeuBundle/Form/JeuImageType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="85991eb69d2dafe19ae9ea0359fe509c99408592" resname="Utiliser cette photo pour la couverture">
+        <source>Utiliser cette photo pour la couverture</source>
+        <target state="new">Utiliser cette photo pour la couverture</target>
+        <jms:reference-file line="41">JeuBundle/Form/JeuImageType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="bb27abfb1c8948d9723c07a754ae6d843eb0209e" resname="Vérification">
+        <source>Vérification</source>
+        <target state="new">Vérification</target>
+        <jms:reference-file line="30">UserBundle/Form/UserRegistrationType.php</jms:reference-file>
+        <jms:reference-file line="30">UserBundle/Form/UserType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="5f1f415bd4d0ae72657804116138f5b8b5454724" resname="moins de 30 minutes">
+        <source>moins de 30 minutes</source>
+        <target state="new">moins de 30 minutes</target>
+        <jms:reference-file line="323">JeuBundle/Controller/JeuController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="3eede38825dae6f1a16a5cecfb221c580ae2b1ff" resname="plus de 3 heures">
+        <source>plus de 3 heures</source>
+        <target state="new">plus de 3 heures</target>
+        <jms:reference-file line="327">JeuBundle/Controller/JeuController.php</jms:reference-file>
       </trans-unit>
     </body>
   </file>

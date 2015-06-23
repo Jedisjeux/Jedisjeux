@@ -36,7 +36,6 @@ class JeuController extends Controller
     public function showAction(Request $request, $id, $slug)
     {
         $em = $this->getDoctrine()->getManager();
-        VarDumper::dump($this->get('translator')->trans('LOCAL_EL_LOCO'));
         /** @var Jeu $entity */
         $entity = $em->getRepository('JDJJeuBundle:Jeu')->find($id);
 
