@@ -20,12 +20,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
  */
-class CustomerImportCommand extends ContainerAwareCommand
+class CustomersImportCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
-            ->setName('compta:customer:import')
+            ->setName('compta:customers:import')
             ->setDescription('Import customers from old jedisjeux')
         ;
     }

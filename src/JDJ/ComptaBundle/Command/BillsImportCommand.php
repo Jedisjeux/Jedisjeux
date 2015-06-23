@@ -23,12 +23,12 @@ use JDJ\ComptaBundle\Entity\Bill;
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
  */
-class BillImportCommand extends ContainerAwareCommand
+class BillsImportCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
-            ->setName('compta:bill:import')
+            ->setName('compta:bills:import')
             ->setDescription('Import bills from old jedisjeux')
         ;
     }

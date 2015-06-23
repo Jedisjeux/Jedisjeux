@@ -18,12 +18,12 @@ use Doctrine\ORM\EntityManager;
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
  */
-class BookEntryImportCommand extends ContainerAwareCommand
+class BookEntriesImportCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
-            ->setName('compta:book-entry:import')
+            ->setName('compta:book-entries:import')
             ->setDescription('Import book entries from old jedisjeux')
         ;
     }

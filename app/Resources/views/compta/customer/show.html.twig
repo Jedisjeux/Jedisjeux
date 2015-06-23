@@ -1,0 +1,48 @@
+{% extends "::base.html.twig" %}
+
+{% block container %}
+
+    <div class="block-heading-two">
+        <ul class="list-inline pull-right">
+            <li>
+                <a class="btn btn-primary" href="{{ path('compta_customer_edit', { 'customer': customer.id }) }}">
+                    <span class="glyphicon glyphicon-pencil"></span> Modifier
+                </a>
+            </li>
+            <li>
+                {{ form_start(deleteForm) }}
+                <button type="submit" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-trash"></span> Supprimer
+                </button>
+                {{ form_end(deleteForm) }}
+            </li>
+        </ul>
+        <h3><span>{{ customer.companyName }}</span></h3>
+    </div>
+
+    <address>
+        <strong>{{ customer.companyName }}</strong><br>
+        {{ customer.address.street }}<br>
+        {{ customer.address.postalCode }} {{ customer.address.city }}<br>
+    </address>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>{{ 'label.product'|trans }}</th>
+            <th>{{ 'label.start_at'|trans }}</th>
+            <th>{{ 'label.end_at'|trans }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for subscription in customer.subscriptions %}
+            <tr>
+                <td>{{ subscription.product.name }}</td>
+                <td>{{ subscription.startAt|localizeddate('long', 'none') }}</td>
+                <td>{{ subscription.endAt|localizeddate('long', 'none') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock container %}

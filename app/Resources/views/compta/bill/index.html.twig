@@ -6,8 +6,8 @@
     <div class="block-heading-two">
         <ul class="list-inline pull-right">
             <li>
-                <a class="btn btn-green" href="{{ path('compta_bill_new') }}">
-                    <span class="glyphicon glyphicon-plus"></span>
+                <a class="btn btn-primary" href="{{ path('compta_bill_new') }}">
+                    <span class="glyphicon glyphicon-plus-sign"></span>
                     Créer une facture
                 </a>
             </li>
@@ -44,14 +44,14 @@
                 <td class="text-right">
                     <ul class="list-inline">
                         <li>
-                            <a class="btn btn-green" href="{{ path('compta_bill_edit', { 'bill': bill.id }) }}">
+                            <a class="btn btn-primary" href="{{ path('compta_bill_edit', { 'bill': bill.id }) }}">
                                 <span class="glyphicon glyphicon-pencil"></span> Modifier
                             </a>
                         </li>
                         <li>
                             {{ form_start(deleteForms[bill.id]) }}
                             <button type="submit" class="btn btn-danger">
-                                <span class="glyphicon glyphicon-remove"></span> Supprimer
+                                <span class="glyphicon glyphicon-trash"></span> Supprimer
                             </button>
                             {{ form_end(deleteForms[bill.id]) }}
                         </li>

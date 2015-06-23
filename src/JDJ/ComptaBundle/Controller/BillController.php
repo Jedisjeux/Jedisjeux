@@ -30,7 +30,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Class BillController
  *
- * @Route("/bill")
+ * @Route("/facture")
  */
 class BillController extends Controller
 {

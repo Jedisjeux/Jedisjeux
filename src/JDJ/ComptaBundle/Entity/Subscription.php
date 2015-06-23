@@ -61,6 +61,7 @@ class Subscription
      * @var Bill
      *
      * @ORM\ManyToOne(targetEntity="Bill", inversedBy="subscriptions")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $bill;
 
@@ -68,8 +69,17 @@ class Subscription
      * @var Product
      *
      * @ORM\ManyToOne(targetEntity="Product")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $product;
+
+    /**
+     * @var Customer
+     *
+     * @ORM\ManyToOne(targetEntity="Customer", inversedBy="subscriptions")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $customer;
 
     /**
      * @return int
@@ -102,7 +112,7 @@ class Subscription
      * @param \DateTime $createdAt
      * @return $this
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(\DateTime $createdAt = null)
     {
         $this->createdAt = $createdAt;
 
@@ -121,11 +131,11 @@ class Subscription
      * @param \DateTime $startAt
      * @return $this
      */
-    public function setStartAt($startAt)
+    public function setStartAt(\DateTime $startAt = null)
     {
-        $this->startAt = $startAt;
+    $this->startAt = $startAt;
 
-        return $this;
+    return $this;
     }
 
     /**
@@ -140,7 +150,7 @@ class Subscription
      * @param \DateTime $endAt
      * @return $this
      */
-    public function setEndAt($endAt)
+    public function setEndAt(\DateTime $endAt = null)
     {
         $this->endAt = $endAt;
 
@@ -178,7 +188,7 @@ class Subscription
      * @param Bill $bill
      * @return $this
      */
-    public function setBill($bill)
+    public function setBill(Bill $bill = null)
     {
         $this->bill = $bill;
 
@@ -197,9 +207,28 @@ class Subscription
      * @param Product $product
      * @return $this
      */
-    public function setProduct($product)
+    public function setProduct(Product $product = null)
     {
         $this->product = $product;
+
+        return $this;
+    }
+
+    /**
+     * @return Customer
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
+
+    /**
+     * @param Customer $customer
+     * @return $this
+     */
+    public function setCustomer(Customer $customer = null)
+    {
+        $this->customer = $customer;
 
         return $this;
     }

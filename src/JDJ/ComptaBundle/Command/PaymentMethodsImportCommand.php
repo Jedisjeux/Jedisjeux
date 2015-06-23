@@ -17,12 +17,12 @@ use JDJ\ComptaBundle\Entity\PaymentMethod;
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
  */
-class PaymentMethodImportCommand extends ContainerAwareCommand
+class PaymentMethodsImportCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
-            ->setName('compta:payment-method:import')
+            ->setName('compta:payment-methods:import')
             ->setDescription('Import payment methods from old jedisjeux')
         ;
     }

@@ -235,4 +235,23 @@ class CustomerController extends Controller
             ->getForm()
             ;
     }
+
+    /**
+     * Finds and displays a Customer entity.
+     *
+     * @Route("/{customer}/show", name="compta_customer_show")
+     * @ParamConverter("customer", class="JDJComptaBundle:Customer")
+     *
+     * @param Customer $customer
+     * @return Response
+     */
+    public function showAction(Customer $customer)
+    {
+        $deleteForm = $this->createDeleteForm($customer->getId())->createView();
+
+        return $this->render('compta/customer/show.html.twig', array(
+            'customer' => $customer,
+            'deleteForm' => $deleteForm,
+        ));
+    }
 }

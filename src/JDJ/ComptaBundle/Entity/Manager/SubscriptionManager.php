@@ -14,6 +14,7 @@ use JDJ\ComptaBundle\Entity\Bill;
 use JDJ\ComptaBundle\Entity\BillProduct;
 use JDJ\ComptaBundle\Entity\Customer;
 use JDJ\ComptaBundle\Entity\Product;
+use JDJ\ComptaBundle\Entity\Repository\SubscriptionRepository;
 use JDJ\ComptaBundle\Entity\Subscription;
 
 /**
@@ -34,6 +35,14 @@ class SubscriptionManager
     public function __construct(EntityManager $entityManager)
     {
         $this->entityManager = $entityManager;
+    }
+
+    /**
+     * @return SubscriptionRepository
+     */
+    public function getSubscriptionRepository()
+    {
+        return $this->entityManager->getRepository('JDJComptaBundle:Subscription');
     }
 
     /**

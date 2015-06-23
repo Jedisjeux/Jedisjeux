@@ -57,11 +57,19 @@ class Customer
     private $bills;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Subscription", mappedBy="customer")
+     */
+    private $subscriptions;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->bills = new ArrayCollection();
+        $this->subscriptions = new ArrayCollection();
     }
 
     /**
@@ -132,7 +140,7 @@ class Customer
      * @param Address $address
      * @return $this
      */
-    public function setAddress($address)
+    public function setAddress(Address $address = null)
     {
         $this->address = $address;
 
@@ -151,10 +159,28 @@ class Customer
      * @param ArrayCollection $bills
      * @return $this
      */
-    public function setBills($bills)
+    public function setBills(ArrayCollection $bills)
     {
         $this->bills = $bills;
 
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getSubscriptions()
+    {
+        return $this->subscriptions;
+    }
+
+    /**
+     * @param ArrayCollection $subscriptions
+     * @return $this
+     */
+    public function setSubscriptions(ArrayCollection $subscriptions)
+    {
+        $this->subscriptions = $subscriptions;
         return $this;
     }
 
