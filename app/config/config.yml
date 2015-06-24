@@ -4,7 +4,7 @@ imports:
 
 framework:
     #esi:             ~
-    #translator:      { fallback: "%locale%" }
+    translator:      { fallback: "%locale%" }
     translator: ~
     secret:          "%secret%"
     router:
@@ -192,11 +192,6 @@ services:
           tags:
               - { name: twig.extension }
 
-#  twig.text_extension:
-#        class: Twig_Extensions_Extension_Text
-#        tags:
-#            - name: twig.extension
-
 gregwar_form: ~
 
 ivory_ck_editor:
@@ -240,6 +235,14 @@ sonata_block:
         #sonata.media.block.gallery:
         #sonata.media.block.feature_media:
 
+jms_translation:
+    configs:
+        app:
+            dirs: [%kernel.root_dir%, %kernel.root_dir%/../src]
+            output_dir: %kernel.root_dir%/Resources/translations
+            ignored_domains: [routes]
+            excluded_names: ["*Context.php", "*TestCase.php", "*Test.php", "*.feature"]
+            excluded_dirs: [Behat, cache, data, logs]
 
 fos_elastica:
     clients:

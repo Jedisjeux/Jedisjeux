@@ -8,6 +8,7 @@
 
 namespace JDJ\JeuBundle\Form;
 
+use JDJ\JeuBundle\Entity\Jeu;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -60,6 +61,10 @@ class JeuType extends AbstractType
             ))
             ->add('description', 'ckeditor', array(
                 'required' => false,
+            ))
+            ->add('status', 'choice', array(
+                'choices'   => Jeu::getStatusList(),
+                'required'  => true,
             ))
             ->add('materiel', null, array(
                 'required' => false,

@@ -15,6 +15,17 @@ use JDJ\CoreBundle\Entity\Image;
  */
 class Jeu
 {
+
+    /**
+     * status constants
+     */
+    const WRITING = "WRITING";
+    const NEED_A_TRANSLATION = "NEED_A_TRANSLATION";
+    const NEED_A_REVIEW = "NEED_A_REVIEW";
+    const READY_TO_PUBLISH = "READY_TO_PUBLISH";
+    const PUBLISHED = "PUBLISHED";
+
+
     /**
      * @var integer
      *
@@ -179,12 +190,12 @@ class Jeu
     private $notes;
 
     /**
-     * @var \JDJ\WebBundle\Entity\Statut
+     * @var string
      *
-     * @ORM\ManyToOne(targetEntity="JDJ\WebBundle\Entity\Statut", inversedBy="jeux")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(name="status", type="string", columnDefinition="enum('WRITING', 'NEED_A_TRANSLATION', 'NEED_A_REVIEW', 'READY_TO_PUBLISH', 'PUBLISHED')")
      */
-    private $statut;
+    private $status;
+
 
     /**
      * @var \JDJ\CoreBundle\Entity\Cible
@@ -206,6 +217,13 @@ class Jeu
      * @ORM\OneToMany(targetEntity="JDJ\CollectionBundle\Entity\UserGameAttribute", mappedBy="jeu")
      */
     private $userGameAttributes;
+
+    /**
+     * @var JDJ\JediZoneBundle\Entity\Activity
+     *
+     * @ORM\OneToOne(targetEntity="JDJ\JediZoneBundle\Entity\Activity", mappedBy="jeu", cascade={"persist", "merge"})
+     */
+    private $activity;
 
 
     /**
@@ -936,5 +954,78 @@ class Jeu
     public function getListElements()
     {
         return $this->listElements;
+    }
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     * @return Jeu
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string 
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Remove jeuImages
+     *
+     * @param \JDJ\JeuBundle\Entity\JeuImage $jeuImages
+     */
+    public function removeJeuImage(\JDJ\JeuBundle\Entity\JeuImage $jeuImages)
+    {
+        $this->jeuImages->removeElement($jeuImages);
+    }
+
+    /**
+     * This function returns the status list
+     *
+     * @return array
+     */
+    public static function getStatusList()
+    {
+        return array(
+            self::WRITING => self::WRITING,
+            self::NEED_A_REVIEW => self::NEED_A_REVIEW,
+            self::NEED_A_TRANSLATION => self::NEED_A_TRANSLATION,
+            self::READY_TO_PUBLISH => self::READY_TO_PUBLISH,
+            self::PUBLISHED => self::PUBLISHED,
+        );
+    }
+
+    /**
+     * Set activity
+     *
+     * @param \JDJ\JediZoneBundle\Entity\Activity $activity
+     *
+     * @return Jeu
+     */
+    public function setActivity(\JDJ\JediZoneBundle\Entity\Activity $activity = null)
+    {
+        $this->activity = $activity;
+
+        return $this;
+    }
+
+    /**
+     * Get activity
+     *
+     * @return \JDJ\JediZoneBundle\Entity\Activity
+     */
+    public function getActivity()
+    {
+        return $this->activity;
     }
 }

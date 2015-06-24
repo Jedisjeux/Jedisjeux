@@ -6,12 +6,17 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
+ * Class Theme
+ * @package JDJ\JeuBundle\Entity
+ *
  * @ORM\Entity
  * @ORM\Table(name="jdj_theme")
  */
 class Theme
 {
     /**
+     * @var integer
+     *
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -19,11 +24,15 @@ class Theme
     private $id;
 
     /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $libelle;
 
     /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $description;
@@ -35,8 +44,9 @@ class Theme
     private $slug;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Jeu", mappedBy="themes")
+     * @var \Doctrine\Common\Collections\Collection
      *
+     * @ORM\ManyToMany(targetEntity="Jeu", mappedBy="themes")
      */
     private $jeux;
 

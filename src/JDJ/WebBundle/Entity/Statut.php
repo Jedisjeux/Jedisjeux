@@ -42,12 +42,6 @@ class Statut
      */
     private $statutJeu;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\OneToMany(targetEntity="JDJ\JeuBundle\Entity\Jeu", mappedBy="statut")
-     */
-    private $jeux;
 
 
     /**

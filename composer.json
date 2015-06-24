@@ -50,7 +50,9 @@
         "craue/formflow-bundle": "~2.0",
         "symfony-cmf/content-bundle": "~1.2",
         "friendsofsymfony/jsrouting-bundle": "~1.5",
-        "jms/translation-bundle": "dev-master"
+        "symfony/var-dumper": "~2.6",
+        "jms/translation-bundle": "dev-master",
+        "jms/di-extra-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

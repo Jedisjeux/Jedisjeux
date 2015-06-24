@@ -1,3 +1,7 @@
+jdj_jedi_zone:
+    resource: "@JDJJediZoneBundle/Resources/config/routing.yml"
+    prefix:   /
+
 jdj_cms:
     resource: "@JDJCMSBundle/Controller/"
     type:     annotation

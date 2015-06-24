@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2015-06-23T20:38:41Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="b48e9229c86ea3c699beb75a96089cd7445be9b4" resname="                        fos_comment_comment_show_reply">
+        <source>                        fos_comment_comment_show_reply</source>
+        <target state="new">                        fos_comment_comment_show_reply</target>
+        <jms:reference-file line="126">views/Thread/comment_content.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="498d12fc767c8601ef91c02ca7860c7dac6c2775" resname="                    fos_comment_comment_delete">
+        <source>                    fos_comment_comment_delete</source>
+        <target state="new">                    fos_comment_comment_delete</target>
+        <jms:reference-file line="102">views/Thread/comment_content.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="720a3dae97316e6d71fdeed864d1a789c7b93dcb" resname="                    fos_comment_comment_undelete">
+        <source>                    fos_comment_comment_undelete</source>
+        <target state="new">                    fos_comment_comment_undelete</target>
+        <jms:reference-file line="96">views/Thread/comment_content.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="82a4a3b909dc894aa1b42e2ef681cda92ee7fe1f" resname="                fos_comment_comment_edit">
+        <source>                fos_comment_comment_edit</source>
+        <target state="new">                fos_comment_comment_edit</target>
+        <jms:reference-file line="85">views/Thread/comment_content.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="1e4a4b250b1faece58238f2b032272d404cca2a6" resname=" fos_comment_thread_comment_count">
+        <source> fos_comment_thread_comment_count</source>
+        <target state="new"> fos_comment_thread_comment_count</target>
+        <jms:reference-file line="30">views/Thread/comments.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="16a0363b72ae1ad7c9f01a8c054dac4707846866" resname="fos_comment_comment_delete">
+        <source>fos_comment_comment_delete</source>
+        <target state="new">fos_comment_comment_delete</target>
+        <jms:reference-file line="25">views/Thread/comment_remove.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d89719e2727c0a236034310f351fd3c0f8093ba4" resname="fos_comment_comment_deleted">
+        <source>fos_comment_comment_deleted</source>
+        <target state="new">fos_comment_comment_deleted</target>
+        <jms:reference-file line="37">views/Thread/comment_content.html.twig</jms:reference-file>
+        <jms:reference-file line="64">views/Thread/comment_content.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="22b1cd34a41b8edd8d90482d4ca37d6cda21a94e" resname="fos_comment_comment_edit_cancel">
+        <source>fos_comment_comment_edit_cancel</source>
+        <target state="new">fos_comment_comment_edit_cancel</target>
+        <jms:reference-file line="23">views/Thread/comment_edit.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d4cb507dd8b6aa71b7e17170136c68df503c62e6" resname="fos_comment_comment_edit_submit">
+        <source>fos_comment_comment_edit_submit</source>
+        <target state="new">fos_comment_comment_edit_submit</target>
+        <jms:reference-file line="25">views/Thread/comment_edit.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="3038326f718094393f1658f4427640624076e71a" resname="fos_comment_comment_new_headline">
+        <source>fos_comment_comment_new_headline</source>
+        <target state="new">fos_comment_comment_new_headline</target>
+        <jms:reference-file line="27">views/Thread/comment_new_content.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="04cadb9c51fb28689900f53ae7f73cba81578339" resname="fos_comment_comment_new_headline_first">
+        <source>fos_comment_comment_new_headline_first</source>
+        <target state="new">fos_comment_comment_new_headline_first</target>
+        <jms:reference-file line="23">views/Thread/comment_new_content.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="2dabf6cb9170453335393f8c8d1aadf4d50a44a1" resname="fos_comment_comment_new_submit">
+        <source>fos_comment_comment_new_submit</source>
+        <target state="new">fos_comment_comment_new_submit</target>
+        <jms:reference-file line="49">views/Thread/comment_new_content.html.twig</jms:reference-file>
+        <jms:reference-file line="26">views/Thread/new.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="b22d10c53425dfeb602826776ececc6c62f6db11" resname="fos_comment_comment_reply_cancel">
+        <source>fos_comment_comment_reply_cancel</source>
+        <target state="new">fos_comment_comment_reply_cancel</target>
+        <jms:reference-file line="47">views/Thread/comment_new_content.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="8b2e5ea9367347779c0a348b3977ef4a21298183" resname="fos_comment_comment_reply_reply_to">
+        <source>fos_comment_comment_reply_reply_to</source>
+        <target state="new">fos_comment_comment_reply_reply_to</target>
+        <jms:reference-file line="25">views/Thread/comment_new_content.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="b2f88ae683b5e4411221a1f6773f16f69c3fc879" resname="fos_comment_comment_show_by">
+        <source>fos_comment_comment_show_by</source>
+        <target state="new">fos_comment_comment_show_by</target>
+        <jms:reference-file line="35">views/Thread/comment_content.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="e1a4ff92afb95a06b3e7cc09f2492718ee47d811" resname="fos_comment_comment_vote_score">
+        <source>fos_comment_comment_vote_score</source>
+        <target state="new">fos_comment_comment_vote_score</target>
+        <jms:reference-file line="12">views/Thread/comment_votes.html.twig</jms:reference-file>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

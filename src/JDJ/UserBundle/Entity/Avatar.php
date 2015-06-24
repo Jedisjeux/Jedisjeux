@@ -135,4 +135,4 @@ class Avatar
         // Clean the path file
         $this->file = null;
     }
-} 
+}

@@ -25,6 +25,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManager;
 use JDJ\UserReviewBundle\Entity\UserReviewRepository;
+use Symfony\Component\VarDumper\VarDumper;
 
 class JeuController extends Controller
 {
@@ -35,7 +36,6 @@ class JeuController extends Controller
     public function showAction(Request $request, $id, $slug)
     {
         $em = $this->getDoctrine()->getManager();
-
         /** @var Jeu $entity */
         $entity = $em->getRepository('JDJJeuBundle:Jeu')->find($id);
 

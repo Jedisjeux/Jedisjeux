@@ -72,3 +72,5 @@ security:
         #edition d'un article
         - { path: ^/article/new, role: ROLE_USER }
         - { path: ^/article/\d+/edit, role: ROLE_USER }
+        #JediZone
+        - { path: ^/jedizone/, role: ROLE_WORKFLOW }
