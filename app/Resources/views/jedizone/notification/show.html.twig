@@ -47,11 +47,11 @@
                                 <!-- List items -->
                                 {% if notification.action ==  constant('JDJ\\JediZoneBundle\\Entity\\Notification::ACTION_ACCEPT') %}
                                     <li>
-                                        {{ notification.activity.actionUser.username }} a passé le jeu {{ jeu.libelle }} en {{ notification.changeStatus }}
+                                        {{ notification.activity.actionUser.username }} a passé le jeu {{ jeu.libelle }} en statut {{ notification.changeStatus | trans }}
                                     </li>
                                 {% elseif notification.action ==  constant('JDJ\\JediZoneBundle\\Entity\\Notification::ACTION_DECLINE') %}
                                     <li>
-                                        {{ notification.activity.actionUser.username }} a refusé de passer le jeu {{ jeu.libelle }} en {{ notification.changeStatus }}
+                                        {{ notification.activity.actionUser.username }} a refusé de passer le jeu {{ jeu.libelle }}, il reste en statut {{ notification.changeStatus | trans }}
                                     </li>
                                     <li>
                                         Raison du refus : {{ notification.comment }}

@@ -6,6 +6,42 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+    <trans-unit id="9a6ae8ec8374095817b169e3513c6160cd391086" resname="LOCAL_EL_LOCO">
+            <source>LOCAL_EL_LOCO</source>
+            <target>Local es mucho loco</target>
+          </trans-unit>
+          <trans-unit id="9a6ae8ec8374095817b169e3513c6160cd391086" resname="WRITING">
+            <source>WRITING</source>
+            <target>En cours d'écriture</target>
+          </trans-unit>
+          <trans-unit id="9a6ae8ec8374095817b169e3513c6160cd391086" resname="NEED_A_TRANSLATION">
+             <source>NEED_A_TRANSLATION</source>
+             <target>traduction attendu</target>
+          </trans-unit>
+          <trans-unit id="9a6ae8ec8374095817b169e3513c6160cd391086" resname="NEED_A_REVIEW">
+             <source>NEED_A_REVIEW</source>
+             <target>Relecture attendu</target>
+          </trans-unit>
+          <trans-unit id="9a6ae8ec8374095817b169e3513c6160cd391086" resname="READY_TO_PUBLISH">
+             <source>READY_TO_PUBLISH</source>
+             <target>Prêt à être publié</target>
+          </trans-unit>
+          <trans-unit id="9a6ae8ec8374095817b169e3513c6160cd391086" resname="PUBLISHED">
+             <source>PUBLISHED</source>
+            <target>Publié</target>
+          </trans-unit>
+          <trans-unit id="9a6ae8ec8374095817b169e3513c6160cd391086" resname="STATUS_CHANGE_MESSAGE">
+             <source>STATUS_CHANGE_MESSAGE</source>
+            <target>Le statut du Jeu %jeu% est passé au Status %status%</target>
+          </trans-unit>
+          <trans-unit id="9a6ae8ec8374095817b169e3513c6160cd391086" resname="STATUS_DECLINE_MESSAGE">
+           <source>STATUS_DECLINE_MESSAGE</source>
+          <target>Le statut du Jeu %jeu% n'est pas passé au Status %status% et un commentaire a été posté.</target>
+          </trans-unit>
+          <trans-unit id="9a6ae8ec8374095817b169e3513c6160cd391086" resname="STATUS_ERROR_MESSAGE">
+             <source>STATUS_ERROR_MESSAGE</source>
+            <target>Une erreur s'est produite. Veuillez essayer plus tard.</target>
+          </trans-unit>
       <trans-unit id="69b7579bfac3b6f4ab5b10363a7e6af4f8117727" resname="1 à 2 heures">
         <source>1 à 2 heures</source>
         <target state="new">1 à 2 heures</target>
