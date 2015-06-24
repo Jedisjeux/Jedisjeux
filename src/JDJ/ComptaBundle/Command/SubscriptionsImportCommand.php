@@ -42,10 +42,6 @@ class SubscriptionsImportCommand extends ContainerAwareCommand
         /** @var Bill $bill */
         foreach($bills as $bill) {
 
-            if (null === $bill->getPaidAt()) {
-                continue;
-            }
-
             /** @var BillProduct $billProduct */
             foreach ($bill->getBillProducts() as $billProduct) {
                 $subscription = $this
@@ -67,15 +63,15 @@ class SubscriptionsImportCommand extends ContainerAwareCommand
                     ->setBill($bill)
                     ->setProduct($billProduct->getProduct())
                     ->setCreatedAt($bill->getPaidAt())
-                    ->setStartAt($bill->getPaidAt())
-                    ->setEndAt($this->getSubscriptionManager()->calculateEndingDate($subscription))
+                    ->setStartAt(null !== $bill->getPaidAt() ? $bill->getPaidAt() : null)
+                    ->setEndAt(null !== $bill->getPaidAt() ? $this
+                        ->getSubscriptionManager()
+                        ->calculateEndingDate($subscription) : null)
                     ->setCustomer($bill->getCustomer())
                     ->setToBeRenewed($subscription->getEndAt() < new \DateTime() ? false : true);
 
                 $this->getEntityManager()->flush();
             }
-
-
         }
 
         $output->writeln("<comment>" . $createdItemCount . " items created</comment>");

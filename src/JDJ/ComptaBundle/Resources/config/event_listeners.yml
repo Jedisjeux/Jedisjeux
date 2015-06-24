@@ -6,5 +6,7 @@ services:
         class: %app.event_listener.bill.class%
         arguments:
             - '@app.manager.book_entry'
+            - '@app.manager.subscription'
         tags:
             - { name: kernel.event_listener, event: app.bill.paid, method: createBookEntry }
+            - { name: kernel.event_listener, event: app.bill.created, method: createSubscriptions }

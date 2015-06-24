@@ -1,0 +1,11 @@
+{% macro subscriptionStatus(subscription) %}
+    {% set statusClass = 'success' %}
+    {% set statusLabel = subscription.status %}
+
+    {% if 'waiting_for_payment' == subscription.status %}
+        {% set statusClass = 'warning' %}
+    {% elseif 'finished' == subscription.status %}
+        {% set statusClass = 'info' %}
+    {% endif %}
+    <span class="label label-{{ statusClass }}">{{ statusLabel|trans }}</span>
+{% endmacro %}

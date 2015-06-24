@@ -56,6 +56,25 @@ class SubscriptionManager
         return $endAt;
     }
 
+    /**
+     * @param Bill $bill
+     */
+    public function createFromBill(Bill $bill)
+    {
+        /** @var BillProduct $billProduct */
+        foreach ($bill->getBillProducts() as $billProduct) {
+            $subscription = new Subscription();
+            $subscription
+                ->setBill($bill)
+                ->setProduct($billProduct->getProduct())
+                ->setCustomer($bill->getCustomer())
+                ->setStatus(Subscription::WAITING_FOR_PAYMENT);
+
+            $this->entityManager->persist($subscription);
+        }
+        $this->entityManager->flush();
+    }
+
     public function endRenewalByProductAndCustomer(Product $product, Customer $customer)
     {
         $subcriptions = $this->entityManager->getRepository('JDJComptaBundle:Subscription')->findBy(array(

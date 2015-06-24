@@ -11,6 +11,7 @@ namespace JDJ\ComptaBundle\EventListener;
 
 use JDJ\ComptaBundle\Entity\Bill;
 use JDJ\ComptaBundle\Entity\Manager\BookEntryManager;
+use JDJ\ComptaBundle\Entity\Manager\SubscriptionManager;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
@@ -25,13 +26,20 @@ class BillEventListener
     private $bookEntryManager;
 
     /**
+     * @var SubscriptionManager
+     */
+    private $subscriptionManager;
+
+    /**
      * Constructor
      *
      * @param BookEntryManager $bookEntryManager
+     * @param SubscriptionManager $subscriptionManager
      */
-    public function __construct(BookEntryManager $bookEntryManager)
+    public function __construct(BookEntryManager $bookEntryManager, SubscriptionManager $subscriptionManager)
     {
         $this->bookEntryManager = $bookEntryManager;
+        $this->subscriptionManager = $subscriptionManager;
     }
 
     /**
@@ -49,5 +57,19 @@ class BillEventListener
         }
 
         $this->bookEntryManager->createFromBill($bill);
+    }
+
+    public function createSubscriptions(GenericEvent $event)
+    {
+        $bill = $event->getSubject();
+
+        if (!$bill instanceof Bill) {
+            throw new UnexpectedTypeException(
+                $bill,
+                'JDJ\ComptaBundle\Entity\Bill'
+            );
+        }
+
+        $this->subscriptionManager->createFromBill($bill);
     }
 }

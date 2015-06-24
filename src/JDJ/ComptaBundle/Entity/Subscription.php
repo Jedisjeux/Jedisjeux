@@ -19,6 +19,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Subscription 
 {
+    const WAITING_FOR_PAYMENT = "waiting_for_payment";
+
     /**
      * @var integer
      *
@@ -27,6 +29,13 @@ class Subscription
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    private $status;
 
     /**
      * @var \DateTime
@@ -39,14 +48,14 @@ class Subscription
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $startAt;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $endAt;
 
@@ -96,6 +105,25 @@ class Subscription
     public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     * @return $this
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
 
         return $this;
     }

@@ -14,4 +14,6 @@ namespace JDJ\ComptaBundle\Event;
 class BillEvents
 {
     const BILL_PAID = 'app.bill.paid';
+
+    const BILL_CREATED = 'app.bill.created';
 }

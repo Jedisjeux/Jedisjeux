@@ -1,4 +1,5 @@
 {% extends "::base.html.twig" %}
+{% from '::macros/status.html.twig' import subscriptionStatus as status %}
 
 {% block container %}
 
@@ -32,6 +33,7 @@
             <th>{{ 'label.product'|trans }}</th>
             <th>{{ 'label.start_at'|trans }}</th>
             <th>{{ 'label.end_at'|trans }}</th>
+            <th>{{ 'label.status'|trans }}</th>
         </tr>
         </thead>
         <tbody>
@@ -40,6 +42,7 @@
                 <td>{{ subscription.product.name }}</td>
                 <td>{{ subscription.startAt|localizeddate('long', 'none') }}</td>
                 <td>{{ subscription.endAt|localizeddate('long', 'none') }}</td>
+                <td>{{ status(subscription) }}</span></td>
             </tr>
         {% endfor %}
         </tbody>

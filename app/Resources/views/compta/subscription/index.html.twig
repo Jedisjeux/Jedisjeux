@@ -1,4 +1,6 @@
 {% extends "::base.html.twig" %}
+{% from '::macros:misc.html.twig' import pagination %}
+{% from '::macros/status.html.twig' import subscriptionStatus as status %}
 
 {% block container %}
 
@@ -13,7 +15,7 @@
             <th>{{ 'label.product'|trans }}</th>
             <th>{{ 'label.start_at'|trans }}</th>
             <th>{{ 'label.end_at'|trans }}</th>
-            <th></th>
+            <th>{{ 'label.status'|trans }}</th>
         </tr>
         </thead>
         <tbody>
@@ -21,8 +23,17 @@
             <tr>
                 <td>{{ subscription.bill.customer.societyName }}</td>
                 <td>{{ subscription.product.name }}</td>
-                <td>{{ subscription.startAt|localizeddate('long', 'none') }}</td>
-                <td>{{ subscription.endAt|localizeddate('long', 'none') }}</td>
+                <td>
+                    {% if subscription.startAt %}
+                        {{ subscription.startAt|localizeddate('long', 'none') }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if subscription.endAt %}
+                        {{ subscription.endAt|localizeddate('long', 'none') }}
+                    {% endif %}
+                </td>
+                <td>{{ status(subscription) }}</td>
             </tr>
         {% endfor %}
         </tbody>

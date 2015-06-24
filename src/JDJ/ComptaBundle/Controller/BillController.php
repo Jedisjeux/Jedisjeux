@@ -178,6 +178,7 @@ class BillController extends Controller
             }
 
             $em->flush();
+            $this->getEventDispatcher()->dispatch(BillEvents::BILL_CREATED, new GenericEvent($bill));
 
             return $this->redirect($this->generateUrl('compta_bill'));
         }
