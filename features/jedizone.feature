@@ -47,13 +47,13 @@ Feature: Workflow jedizone
       | Mot de passe      | blue     |
     And I press "Connexion"
     And I am on game "Citadelles"
-    Then I should see "Ce jeu est encore au statut WRITING."
+    Then I should see "Ce jeu est encore au statut En cours d'écriture."
     And I should not see "Passer en Traduction"
 
 
   Scenario: Affichage de la fiche de jeu en status WRITING non connecté
     Given I am on game "Citadelles"
-    Then I should not see "Ce jeu est encore au statut WRITING."
+    Then I should not see "Ce jeu est encore au statut En cours d'écriture."
     And I should not see "Passer en Traduction"
 
 
@@ -64,11 +64,11 @@ Feature: Workflow jedizone
       | Mot de passe      | titi     |
     And I press "Connexion"
     And I am on game "Citadelles"
-    Then I should see "Ce jeu est encore au statut WRITING."
+    Then I should see "Ce jeu est encore au statut En cours d'écriture."
     And I should see "Passer en Traduction"
     And I follow "Passer en Traduction"
     And I wait "5" seconds
-    Then I should see "Ce jeu est encore au statut NEED_A_TRANSLATION."
+    Then I should see "Ce jeu est encore au statut traduction attendu."
     And I should not see "Passer en relecture"
 
   ###################
@@ -82,13 +82,13 @@ Feature: Workflow jedizone
       | Mot de passe      | blue     |
     And I press "Connexion"
     And I am on game "Puerto Rico"
-    Then I should see "Ce jeu est encore au statut NEED_A_TRANSLATION."
+    Then I should see "Ce jeu est encore au statut traduction attendu."
     And I should not see "Passer en relecture"
 
 
   Scenario: Affichage de la fiche de jeu en status NEED_A_TRANSLATION non connecté
     Given I am on game "Puerto Rico"
-    Then I should not see "Ce jeu est encore au statut WRITING."
+    Then I should not see "Ce jeu est encore au statut En cours d'écriture."
     And I should not see "Passer en relecture"
 
 
@@ -99,16 +99,16 @@ Feature: Workflow jedizone
       | Mot de passe      | loic_425   |
     And I press "Connexion"
     And I am on game "Puerto Rico"
-    Then I should see "Ce jeu est encore au statut NEED_A_TRANSLATION."
+    Then I should see "Ce jeu est encore au statut traduction attendu."
     And I should see "Passer en relecture"
     And I follow "Passer en relecture"
     And I wait "5" seconds
-    Then I should see "Ce jeu est encore au statut NEED_A_REVIEW."
+    Then I should see "Ce jeu est encore au statut Relecture attendu."
     And I should not see "Passer en publication"
 
-  ##################
+  #################
   # Status NEED_A_REVIEW
-  ##################
+  #################
 
   Scenario: Affichage de la fiche de jeu en status NEED_A_REVIEW avec un role ROLE_WORKFLOW
     Given I am on "/login"
@@ -117,13 +117,13 @@ Feature: Workflow jedizone
       | Mot de passe      | loic_425   |
     And I press "Connexion"
     And I am on game "Monopoly"
-    Then I should see "Ce jeu est encore au statut NEED_A_REVIEW."
+    Then I should see "Ce jeu est encore au statut Relecture attendu."
     And I should not see "Passer en publication"
 
 
   Scenario: Affichage de la fiche de jeu en status NEED_A_REVIEW non connecté
     Given I am on game "Monopoly"
-    Then I should not see "Ce jeu est encore au statut NEED_A_REVIEW."
+    Then I should not see "Ce jeu est encore au statut Relecture attendu."
     And I should not see "Passer en publication"
 
   Scenario: Affichage de la fiche de jeu en status NEED_A_REVIEW en tant que ROLE_REVIEWER et passage au status READY_TO_PUBLISH
@@ -133,11 +133,11 @@ Feature: Workflow jedizone
       | Mot de passe      | blue     |
     And I press "Connexion"
     And I am on game "Monopoly"
-    Then I should see "Ce jeu est encore au statut NEED_A_REVIEW."
+    Then I should see "Ce jeu est encore au statut Relecture attendu."
     And I should see "Passer en publication"
     And I follow "Passer en publication"
     And I wait "5" seconds
-    Then I should see "Ce jeu est encore au statut READY_TO_PUBLISH."
+    Then I should see "Ce jeu est encore au statut Prêt à être publié."
     And I should not see "Publier"
 
   ##################
@@ -151,13 +151,13 @@ Feature: Workflow jedizone
       | Mot de passe      | loic_425   |
     And I press "Connexion"
     And I am on game "Modern Art"
-    Then I should see "Ce jeu est encore au statut READY_TO_PUBLISH."
+    Then I should see "Ce jeu est encore au statut Prêt à être publié."
     And I should not see "Publier"
 
 
   Scenario: Affichage de la fiche de jeu en status READY_TO_PUBLISH non connecté
     Given I am on game "Modern Art"
-    Then I should not see "Ce jeu est encore au statut READY_TO_PUBLISH."
+    Then I should not see "Ce jeu est encore au statut Prêt à être publié."
     And I should not see "Publier"
 
   Scenario: Affichage de la fiche de jeu en status READY_TO_PUBLISH en tant que ROLE_PUBLISHER et passage au status PUBLISHED
@@ -167,19 +167,19 @@ Feature: Workflow jedizone
       | Mot de passe      | toto      |
     And I press "Connexion"
     And I am on game "Modern Art"
-    Then I should see "Ce jeu est encore au statut READY_TO_PUBLISH."
+    Then I should see "Ce jeu est encore au statut Prêt à être publié."
     And I should see "Publier"
     And I follow "Publier"
     And I wait "5" seconds
     Then I am on game "Modern Art"
     And I should not see "Publier"
-    And I should not see "Ce jeu est encore au statut READY_TO_PUBLISH."
-    And I should not see "Ce jeu est encore au statut NEED_A_REVIEW."
-    And I should not see "Ce jeu est encore au statut NEED_A_TRANSLATION."
-    And I should not see "Ce jeu est encore au statut WRITING."
+    And I should not see "Ce jeu est encore au statut Prêt à être publié."
+    And I should not see "Ce jeu est encore au statut Relecture attendu."
+    And I should not see "Ce jeu est encore au statut traduction attendu."
+    And I should not see "Ce jeu est encore au statut En cours d'écriture."
     Then I am on "/jedizone"
     And I should see "JediZone"
-    And I should see "publisher a passé le jeu Modern Art en PUBLISHED"
+    And I should see "publisher a passé le jeu Modern Art en statut Publié"
 
   ######################
   # Decline status game
@@ -191,21 +191,21 @@ Feature: Workflow jedizone
       | Mot de passe      | toto      |
     And I press "Connexion"
     And I am on game "Modern Art"
-    Then I should see "Ce jeu est encore au statut READY_TO_PUBLISH."
+    Then I should see "Ce jeu est encore au statut Prêt à être publié."
     And I should see "Refuser"
     And I follow "Refuser"
     And I wait "1" seconds
-    Then I should see "Je refuse de passer le jeu Modern Art au statut PUBLISHED"
+    Then I should see "Je refuse de passer le jeu Modern Art au statut Publié"
     And I fill in the following:
       | Commentaire | Local es realmente un pervertido  |
     When I follow "refuseStatus"
     Then I am on game "Modern Art"
     And I should see "Publier"
-    And I should see "Ce jeu est encore au statut READY_TO_PUBLISH."
-    And I should not see "Ce jeu est encore au statut NEED_A_REVIEW."
-    And I should not see "Ce jeu est encore au statut NEED_A_TRANSLATION."
-    And I should not see "Ce jeu est encore au statut WRITING."
+    And I should see "Ce jeu est encore au statut Prêt à être publié."
+    And I should not see "Ce jeu est encore au statut Relecture attendu."
+    And I should not see "Ce jeu est encore au statut traduction attendu."
+    And I should not see "Ce jeu est encore au statut En cours d'écriture."
     Then I am on "/jedizone"
     And I should see "JediZone"
-    And I should see "publisher a refusé de passer le jeu Modern Art en READY_TO_PUBLISH"
+    And I should see "publisher a refusé de passer le jeu Modern Art, il reste en statut Prêt à être publié"
     And I should see "Raison du refus : Local es realmente un pervertido"
