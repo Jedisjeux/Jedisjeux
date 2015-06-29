@@ -9,6 +9,6 @@
     "fancybox": "2.1.5",
     "multiple-select": "1.1.0",
     "jquery-ui": "~1.11.4",
-    "eonasdan-bootstrap-datetimepicker": "~4.7.14"
+    "eonasdan-bootstrap-datetimepicker": "~4.14.30"
   }
 }

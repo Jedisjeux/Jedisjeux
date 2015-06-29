@@ -27,4 +27,11 @@ $(function() {
             $debitedFormGroup.show('slow');
         }
     }
+
+    /**
+     * datePickers from the form
+     */
+    $('#datetimepicker11').datetimepicker({
+        daysOfWeekDisabled: [0, 6]
+    });
 });

@@ -25,6 +25,7 @@
         'bower_components/fancybox/source/helpers/jquery.fancybox-buttons.css'
         'bower_components/fancybox/source/helpers/jquery.fancybox-thumbs.css'
         'bower_components/multiple-select/multiple-select.css'
+        'bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'
         '../app/Resources/public/sass/base.scss'
         '../app/Resources/public/sass/module/core/*.scss'
         '../app/Resources/public/sass/module/collection/*.scss'
@@ -160,6 +161,8 @@
         'bower_components/fancybox/source/helpers/jquery.fancybox-media.js'
         'bower_components/fancybox/source/helpers/jquery.fancybox-thumbs.js'
         'bower_components/multiple-select/jquery.multiple.select.js'
+        'bower_components/moment/min/moment.min.js'
+        'bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
         '../app/Resources/public/js/*'
         '../app/Resources/public/js/*/*'
         '@JDJJeuBundle/Resources/public/js/jeu/*' %}
@@ -168,6 +171,5 @@
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
         <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
     {% endblock foot_script_assetic %}
-
 </body>
 </html>

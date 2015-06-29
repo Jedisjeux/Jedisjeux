@@ -2980,12 +2980,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpPaginatorBundle.git",
-                "reference": "800eb12f225573869b6f04d77a6e329a6da9110f"
+                "reference": "84accca9c921dcbdc9c4be3ba0366a25f8d779b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/800eb12f225573869b6f04d77a6e329a6da9110f",
-                "reference": "800eb12f225573869b6f04d77a6e329a6da9110f",
+                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/84accca9c921dcbdc9c4be3ba0366a25f8d779b3",
+                "reference": "84accca9c921dcbdc9c4be3ba0366a25f8d779b3",
                 "shasum": ""
             },
             "require": {
@@ -3033,7 +3033,7 @@
                 "pagination",
                 "paginator"
             ],
-            "time": "2015-05-20 15:09:02"
+            "time": "2015-06-26 10:10:25"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -3267,12 +3267,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phiamo/MopaBootstrapBundle.git",
-                "reference": "4d4b6291b47fc70491a4f92105be39d6bcccbb95"
+                "reference": "5bf0bf7577dc21e92a6ef399dc69017799a5dedb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phiamo/MopaBootstrapBundle/zipball/4d4b6291b47fc70491a4f92105be39d6bcccbb95",
-                "reference": "4d4b6291b47fc70491a4f92105be39d6bcccbb95",
+                "url": "https://api.github.com/repos/phiamo/MopaBootstrapBundle/zipball/5bf0bf7577dc21e92a6ef399dc69017799a5dedb",
+                "reference": "5bf0bf7577dc21e92a6ef399dc69017799a5dedb",
                 "shasum": ""
             },
             "require": {
@@ -3330,7 +3330,7 @@
                 "form",
                 "template"
             ],
-            "time": "2015-06-11 12:44:01"
+            "time": "2015-06-24 15:36:04"
         },
         {
             "name": "mopa/composer-bridge",
@@ -4858,12 +4858,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataIntlBundle.git",
-                "reference": "36ff392feb067563d8b93a38b4f8788bec51f502"
+                "reference": "b02f2983f6056366db47939ef615a23091c9b05a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataIntlBundle/zipball/36ff392feb067563d8b93a38b4f8788bec51f502",
-                "reference": "36ff392feb067563d8b93a38b4f8788bec51f502",
+                "url": "https://api.github.com/repos/sonata-project/SonataIntlBundle/zipball/b02f2983f6056366db47939ef615a23091c9b05a",
+                "reference": "b02f2983f6056366db47939ef615a23091c9b05a",
                 "shasum": ""
             },
             "require": {
@@ -4913,7 +4913,7 @@
                 "sonata",
                 "time"
             ],
-            "time": "2015-06-17 13:43:40"
+            "time": "2015-06-26 10:21:05"
         },
         {
             "name": "stof/doctrine-extensions-bundle",

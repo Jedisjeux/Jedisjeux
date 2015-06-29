@@ -23,7 +23,7 @@
         <tbody>
         {% for paymentMethod in paymentMethods %}
             <tr>
-                <td>{{ payment_method.companyName }}</td>
+                <td>{{ paymentMethod.name }}</td>
                 <td class="text-right">
                     <ul class="list-inline">
                         <li>
@@ -36,7 +36,7 @@
                             <button type="submit" class="btn btn-danger">
                                 <span class="glyphicon glyphicon-trash"></span> Supprimer
                             </button>
-                            {{ form_end(deleteForms[payment_method.id]) }}
+                            {{ form_end(deleteForms[paymentMethod.id]) }}
                         </li>
                     </ul>
                 </td>
