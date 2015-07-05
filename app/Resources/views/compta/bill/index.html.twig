@@ -20,7 +20,7 @@
         <tr>
             <th>#</th>
             <th>{{ 'label.created_at'|trans }}</th>
-            <th>{{ 'label.company'|trans }}</th>
+            <th>{{ 'label.society'|trans }}</th>
             <th>{{ 'label.total_price'|trans }}</th>
             <th>{{ 'label.paid_at'|trans }}</th>
         </tr>
@@ -33,12 +33,12 @@
                     </a>
                 </td>
                 <td>{{ bill.createdAt|localizeddate('long', 'none') }}</td>
-                <td>{{ bill.customer.companyName }}</td>
+                <td>{{ bill.customer.society }}</td>
                 <td>{{ totalPrices[bill.id]|localizedcurrency('EUR') }}</td>
                 <td>{% if bill.paidAt %}
                         {{ bill.paidAt|localizeddate('long', 'none') }}
                     {% else %}
-                        {{ 'label.not_paid'|trans }}
+                        <span class="label label-warning">{{ 'label.waiting_for_payment'|trans }}</span>
                     {% endif %}
                 </td>
                 <td class="text-right">

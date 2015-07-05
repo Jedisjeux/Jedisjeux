@@ -60,7 +60,7 @@ class SubscriptionController extends Controller
     public function indexAction(Request $request)
     {
         $subscriptions = $this->getSubscriptionRepository()->createPaginator(null, array(
-            'endAt' => 'asc'
+            'endAt' => 'desc'
         ))
         ->setCurrentPage($request->get('page', 1));
 

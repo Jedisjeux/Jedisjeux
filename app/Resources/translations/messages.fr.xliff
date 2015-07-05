@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2015-07-05T23:05:27Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+  <file date="2015-07-05T23:47:35Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -44,7 +44,7 @@
         <jms:reference-file line="126">ComptaBundle/Controller/CustomerController.php</jms:reference-file>
         <jms:reference-file line="111">ComptaBundle/Controller/PaymentMethodController.php</jms:reference-file>
         <jms:reference-file line="111">ComptaBundle/Controller/ProductController.php</jms:reference-file>
-        <jms:reference-file line="157">ComptaBundle/Controller/SubscriptionController.php</jms:reference-file>
+        <jms:reference-file line="155">ComptaBundle/Controller/SubscriptionController.php</jms:reference-file>
         <jms:reference-file line="78">JeuBundle/Controller/CaracteristiqueController.php</jms:reference-file>
         <jms:reference-file line="177">JeuBundle/Controller/JeuController.php</jms:reference-file>
         <jms:reference-file line="99">JeuBundle/Controller/JeuImageController.php</jms:reference-file>
@@ -182,7 +182,6 @@
       <trans-unit id="37506e48a34086520d4e6a4b71e4032e8a162c89" resname="label.company">
         <source>label.company</source>
         <target state="new">label.company</target>
-        <jms:reference-file line="23">compta/bill/index.html.twig</jms:reference-file>
         <jms:reference-file line="22">compta/customer/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="dee380b06b03fdb98a963ac735c0ddfc2f59f2f1" resname="label.created_at">
@@ -250,11 +249,6 @@
         <jms:reference-file line="29">ComptaBundle/Form/PaymentMethodType.php</jms:reference-file>
         <jms:reference-file line="29">ComptaBundle/Form/ProductType.php</jms:reference-file>
       </trans-unit>
-      <trans-unit id="20c90c5ae689eaf62720cb4f455ce25ec8231b27" resname="label.not_paid">
-        <source>label.not_paid</source>
-        <target>non payé</target>
-        <jms:reference-file line="41">compta/bill/index.html.twig</jms:reference-file>
-      </trans-unit>
       <trans-unit id="2a6acd4b0a8965480bb21199c8f56a9fa118d70a" resname="label.paid_at">
         <source>label.paid_at</source>
         <target>Payé le</target>
@@ -297,6 +291,7 @@
       <trans-unit id="3736a56466cf04431ff864fa708af795a8fd3668" resname="label.society">
         <source>label.society</source>
         <target>Société</target>
+        <jms:reference-file line="23">compta/bill/index.html.twig</jms:reference-file>
         <jms:reference-file line="14">compta/subscription/index.html.twig</jms:reference-file>
         <jms:reference-file line="29">ComptaBundle/Form/CustomerType.php</jms:reference-file>
       </trans-unit>
@@ -328,6 +323,11 @@
         <source>label.total_price</source>
         <target>Prix total</target>
         <jms:reference-file line="24">compta/bill/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="fe1d91e830d7ff406bc7dd20e9cbf61a836a9bb6" resname="label.waiting_for_payment">
+        <source>label.waiting_for_payment</source>
+        <target>En attente de paiement</target>
+        <jms:reference-file line="41">compta/bill/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5f1f415bd4d0ae72657804116138f5b8b5454724" resname="moins de 30 minutes">
         <source>moins de 30 minutes</source>

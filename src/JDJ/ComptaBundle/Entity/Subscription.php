@@ -65,13 +65,6 @@ class Subscription
     private $endAt;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(type="boolean")
-     */
-    private $toBeRenewed;
-
-    /**
      * @var Bill
      *
      * @ORM\ManyToOne(targetEntity="Bill", inversedBy="subscriptions")
@@ -186,25 +179,6 @@ class Subscription
     public function setEndAt(\DateTime $endAt = null)
     {
         $this->endAt = $endAt;
-
-        return $this;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isToBeRenewed()
-    {
-        return $this->toBeRenewed;
-    }
-
-    /**
-     * @param boolean $toBeRenewed
-     * @return $this
-     */
-    public function setToBeRenewed($toBeRenewed)
-    {
-        $this->toBeRenewed = $toBeRenewed;
 
         return $this;
     }
