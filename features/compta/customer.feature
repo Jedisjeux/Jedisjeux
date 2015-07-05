@@ -16,12 +16,12 @@ Feature: Les clients
     And I follow "Créer un client"
     And I should be on "/compta/client/new"
     When I fill in the following:
-      | Société    | Philibert                   |
-      | Email      | jedisjeux@jedisjeux.net     |
-      | Rue        | 2 allée de la châtaigneraie |
+      | Société              | Philibert                   |
+      | Email                | jedisjeux@jedisjeux.net     |
+      | Rue                  | 2 allée de la châtaigneraie |
       | Complément d'adresse | bât C002                    |
-      | Code postal | 35740                       |
-      | Ville      | Pacé                        |
+      | Code postal          | 35740                       |
+      | Ville                | Pacé                        |
     And I press "Créer"
     Then I should be on "/compta/client/"
     And I should see "Philibert"
@@ -32,12 +32,12 @@ Feature: Les clients
     Given I am on "/compta/client/"
     And I follow "Créer un client"
     And I fill in the following:
-      | Société    | Philibert                   |
-      | Email      | jedisjeux@jedisjeux.net     |
-      | Rue        | 2 allée de la châtaigneraie |
+      | Société              | Philibert                   |
+      | Email                | jedisjeux@jedisjeux.net     |
+      | Rue                  | 2 allée de la châtaigneraie |
       | Complément d'adresse | bât C002                    |
-      | Code postal | 35740                       |
-      | Ville      | Pacé                        |
+      | Code postal          | 35740                       |
+      | Ville                | Pacé                        |
     And I press "Créer"
     And I follow "Modifier"
     When I fill in the following:
@@ -51,12 +51,12 @@ Feature: Les clients
     Given I am on "/compta/client"
     And I follow "Créer un client"
     And I fill in the following:
-      | Société    | Philibert                   |
-      | Email      | jedisjeux@jedisjeux.net     |
-      | Rue        | 2 allée de la châtaigneraie |
+      | Société              | Philibert                   |
+      | Email                | jedisjeux@jedisjeux.net     |
+      | Rue                  | 2 allée de la châtaigneraie |
       | Complément d'adresse | bât C002                    |
-      | Code postal | 35740                       |
-      | Ville      | Pacé
+      | Code postal          | 35740                       |
+      | Ville                | Pacé
     And I press "Créer"
     When I press "Supprimer"
     Then I should be on "/compta/client/"

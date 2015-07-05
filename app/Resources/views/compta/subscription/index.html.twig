@@ -1,5 +1,5 @@
 {% extends "::base.html.twig" %}
-{% from '::macros:misc.html.twig' import pagination %}
+{% from '::macros/misc.html.twig' import pagination %}
 {% from '::macros/status.html.twig' import subscriptionStatus as status %}
 
 {% block container %}
@@ -21,7 +21,7 @@
         <tbody>
         {% for subscription in subscriptions %}
             <tr>
-                <td>{{ subscription.bill.customer.societyName }}</td>
+                <td>{{ subscription.bill.customer.society }}</td>
                 <td>{{ subscription.product.name }}</td>
                 <td>
                     {% if subscription.startAt %}

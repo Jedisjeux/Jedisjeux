@@ -69,7 +69,7 @@ class SubscriptionsCreateCommand extends ContainerAwareCommand
                         ->calculateEndingDate($subscription) : null)
                     ->setCustomer($bill->getCustomer())
                     ->setToBeRenewed($subscription->getEndAt() < new \DateTime() ? false : true)
-                    ->setStatus($subscription->getEndAt() < new \DateTime() ? Subscription::TERMINATED : Subscription::IN_PROGRESS);
+                    ->setStatus($subscription->getEndAt() < new \DateTime() ? Subscription::FINISHED : Subscription::IN_PROGRESS);
 
                 $this->getEntityManager()->flush();
             }

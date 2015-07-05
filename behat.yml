@@ -151,6 +151,13 @@ default:
             filters:
                 tags: "@comptaBookEntry && ~@javascript"
 
+        comptaSubscription:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\UserBundle\Behat\UserContext
+            filters:
+                tags: "@comptaSubscription && ~@javascript"
+
         jedizone:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext

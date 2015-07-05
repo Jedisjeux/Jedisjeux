@@ -23,7 +23,7 @@ class Subscription
 
     const WAITING_FOR_PAYMENT = "waiting_for_payment";
 
-    const TERMINATED = 'terminated';
+    const FINISHED = 'finished';
 
 
     /**

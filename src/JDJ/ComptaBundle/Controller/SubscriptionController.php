@@ -59,10 +59,8 @@ class SubscriptionController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $subscriptions = $this->getSubscriptionRepository()->createPaginator(array(
-            'toBeRenewed' => true,
-        ), array(
-            array('endAt' => 'asc')
+        $subscriptions = $this->getSubscriptionRepository()->createPaginator(null, array(
+            'endAt' => 'asc'
         ))
         ->setCurrentPage($request->get('page', 1));
 

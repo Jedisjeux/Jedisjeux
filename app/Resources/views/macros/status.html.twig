@@ -5,7 +5,7 @@
     {% if 'waiting_for_payment' == subscription.status %}
         {% set statusClass = 'warning' %}
     {% elseif 'finished' == subscription.status %}
-        {% set statusClass = 'info' %}
+        {% set statusClass = 'primary' %}
     {% endif %}
     <span class="label label-{{ statusClass }}">{{ statusLabel|trans }}</span>
 {% endmacro %}
