@@ -13,7 +13,7 @@ Feature: Les produits
 
 
   Scenario: Créer un produit
-    Given I am on "/compta/produit"
+    Given I am on "/compta/produit/"
     And I follow "Créer un produit"
     And I should be on "/compta/produit/new"
     When I fill in the following:
@@ -21,13 +21,13 @@ Feature: Les produits
       | Prix | 12.23 |
       | Durée de l'abonnement | 12 |
     And I press "Créer"
-    Then I should be on "/compta/produit"
+    Then I should be on "/compta/produit/"
     And I should see "produit 1"
     And I should see "Modifier"
     And I should see "Supprimer"
 
   Scenario: Modifier un produit
-    Given I am on "/compta/produit"
+    Given I am on "/compta/produit/"
     And I follow "Créer un produit"
     And I fill in the following:
       | Nom | produit 1 |
@@ -38,7 +38,7 @@ Feature: Les produits
     When I fill in the following:
       | Nom | produit 2 |
     And I press "Modifier"
-    Then I should be on "/compta/produit"
+    Then I should be on "/compta/produit/"
     And I should see "produit 2"
     And I should not see "produit 1"
 
@@ -51,5 +51,5 @@ Feature: Les produits
       | Durée de l'abonnement | 12 |
     And I press "Créer"
     When I press "Supprimer"
-    Then I should be on "/compta/produit"
+    Then I should be on "/compta/produit/"
     And I should not see "produit 1"

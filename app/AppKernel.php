@@ -103,7 +103,6 @@ class AppKernel extends Kernel
      */
     protected function isVagrantEnvironment()
     {
-        return false;
         return (getenv('HOME') === '/home/vagrant' || getenv('VAGRANT') === 'VAGRANT') && is_dir('/dev/shm');
     }
 }
