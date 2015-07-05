@@ -58,7 +58,7 @@ EOM;
 
             $customer
                 ->setId($data['id'])
-                ->setCompanyName($data['societe'])
+                ->setSociety($data['societe'])
                 ->setEmail($data['email']);
 
             $address = $customer->getAddress();

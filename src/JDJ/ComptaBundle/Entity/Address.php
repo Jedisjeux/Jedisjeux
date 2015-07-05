@@ -41,6 +41,14 @@ class Address
      * @var string
      *
      * @Gedmo\Versioned
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $additionalAddressInfo;
+
+    /**
+     * @var string
+     *
+     * @Gedmo\Versioned
      * @ORM\Column(type="string")
      */
     private $postalCode;
@@ -87,6 +95,25 @@ class Address
     public function setStreet($street)
     {
         $this->street = $street;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAdditionalAddressInfo()
+    {
+        return $this->additionalAddressInfo;
+    }
+
+    /**
+     * @param string $additionalAdressInfo
+     * @return $this
+     */
+    public function setAdditionalAddressInfo($additionalAdressInfo)
+    {
+        $this->additionalAddressInfo = $additionalAdressInfo;
 
         return $this;
     }

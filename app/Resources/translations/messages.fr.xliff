@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2015-07-03T14:44:37Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+  <file date="2015-07-05T23:05:27Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -96,7 +96,7 @@
         <jms:reference-file line="351">ComptaBundle/Controller/BillController.php</jms:reference-file>
         <jms:reference-file line="196">ComptaBundle/Controller/BookEntryController.php</jms:reference-file>
         <jms:reference-file line="195">ComptaBundle/Controller/CustomerController.php</jms:reference-file>
-        <jms:reference-file line="148">ComptaBundle/Controller/PaymentMethodController.php</jms:reference-file>
+        <jms:reference-file line="180">ComptaBundle/Controller/PaymentMethodController.php</jms:reference-file>
         <jms:reference-file line="180">ComptaBundle/Controller/ProductController.php</jms:reference-file>
         <jms:reference-file line="153">CoreBundle/Controller/CibleController.php</jms:reference-file>
         <jms:reference-file line="155">JeuBundle/Controller/CaracteristiqueController.php</jms:reference-file>
@@ -164,6 +164,11 @@
         <jms:reference-file line="22">compta/book-entry/index.html.twig</jms:reference-file>
         <jms:reference-file line="49">ComptaBundle/Form/BookEntryType.php</jms:reference-file>
       </trans-unit>
+      <trans-unit id="9cca220e2b6dca3801fe3f4423b70dd16f6ed89b" resname="label.additional_address_info">
+        <source>label.additional_address_info</source>
+        <target>Complément d'adresse</target>
+        <jms:reference-file line="35">ComptaBundle/Form/AddressType.php</jms:reference-file>
+      </trans-unit>
       <trans-unit id="c5c0e827d9a57c3e52118c740c43661c8c954acc" resname="label.address">
         <source>label.address</source>
         <target>Adresse</target>
@@ -172,14 +177,13 @@
       <trans-unit id="27849b72fd3cdce303918d5504d7c08168eafd8e" resname="label.city">
         <source>label.city</source>
         <target>Ville</target>
-        <jms:reference-file line="35">ComptaBundle/Form/AddressType.php</jms:reference-file>
+        <jms:reference-file line="38">ComptaBundle/Form/AddressType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="37506e48a34086520d4e6a4b71e4032e8a162c89" resname="label.company">
         <source>label.company</source>
         <target state="new">label.company</target>
         <jms:reference-file line="23">compta/bill/index.html.twig</jms:reference-file>
         <jms:reference-file line="22">compta/customer/index.html.twig</jms:reference-file>
-        <jms:reference-file line="29">ComptaBundle/Form/CustomerType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="dee380b06b03fdb98a963ac735c0ddfc2f59f2f1" resname="label.created_at">
         <source>label.created_at</source>
@@ -294,6 +298,7 @@
         <source>label.society</source>
         <target>Société</target>
         <jms:reference-file line="14">compta/subscription/index.html.twig</jms:reference-file>
+        <jms:reference-file line="29">ComptaBundle/Form/CustomerType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="32d2077e3d1acee0028516779cc2bd12d058c107" resname="label.start_at">
         <source>label.start_at</source>

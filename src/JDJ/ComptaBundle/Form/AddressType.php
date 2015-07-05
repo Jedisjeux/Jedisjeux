@@ -31,6 +31,9 @@ class AddressType extends AbstractType
             ->add('postalCode', null, array(
                 'label' => 'label.postal_code',
             ))
+            ->add('additionalAddressInfo', null, array(
+                'label' => 'label.additional_address_info',
+            ))
             ->add('city', null, array(
                 'label' => 'label.city',
             ))

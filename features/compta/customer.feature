@@ -8,20 +8,19 @@ Feature: Les clients
 
 
   Scenario: Affichage de la liste des clients
-    When I am on "/compta/customer"
+    When I am on "/compta/client"
     Then I should see "Liste des clients"
 
   Scenario: Créer un client
     Given I am on "/compta/client/"
     And I follow "Créer un client"
-    And I should be on "/compta/client/new/"
+    And I should be on "/compta/client/new"
     When I fill in the following:
-      | Societe    | Philibert                   |
-      | Nom        | Loïc Fremont                |
+      | Société    | Philibert                   |
       | Email      | jedisjeux@jedisjeux.net     |
       | Rue        | 2 allée de la châtaigneraie |
-      | Complement | bât C002                    |
-      | Codepostal | 35740                       |
+      | Complément d'adresse | bât C002                    |
+      | Code postal | 35740                       |
       | Ville      | Pacé                        |
     And I press "Créer"
     Then I should be on "/compta/client/"
@@ -31,34 +30,32 @@ Feature: Les clients
 
   Scenario: Modifier un client
     Given I am on "/compta/client/"
-    And I follow "Créer un nouveau client"
+    And I follow "Créer un client"
     And I fill in the following:
-      | Societe    | Philibert                   |
-      | Nom        | Loïc Fremont                |
+      | Société    | Philibert                   |
       | Email      | jedisjeux@jedisjeux.net     |
       | Rue        | 2 allée de la châtaigneraie |
-      | Complement | bât C002                    |
-      | Codepostal | 35740                       |
+      | Complément d'adresse | bât C002                    |
+      | Code postal | 35740                       |
       | Ville      | Pacé                        |
     And I press "Créer"
     And I follow "Modifier"
     When I fill in the following:
-      | Societe | Ludibay |
-    And I press "Enregistrer"
+      | Société | Ludibay |
+    And I press "Modifier"
     Then I should be on "/compta/client/"
     And I should see "Ludibay"
     And I should not see "Philibert"
 
   Scenario: Supprimer un client
     Given I am on "/compta/client"
-    And I follow "Créer un nouveau client"
+    And I follow "Créer un client"
     And I fill in the following:
-      | Societe    | Philibert                   |
-      | Nom        | Loïc Fremont                |
+      | Société    | Philibert                   |
       | Email      | jedisjeux@jedisjeux.net     |
       | Rue        | 2 allée de la châtaigneraie |
-      | Complement | bât C002                    |
-      | Codepostal | 35740                       |
+      | Complément d'adresse | bât C002                    |
+      | Code postal | 35740                       |
       | Ville      | Pacé
     And I press "Créer"
     When I press "Supprimer"

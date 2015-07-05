@@ -33,7 +33,7 @@ class Customer
      *
      * @ORM\Column(type="string")
      */
-    private $companyName;
+    private $society;
 
     /**
      * @var string
@@ -95,18 +95,18 @@ class Customer
     /**
      * @return string
      */
-    public function getCompanyName()
+    public function getSociety()
     {
-        return $this->companyName;
+        return $this->society;
     }
 
     /**
      * @param string $companyName
      * @return $this
      */
-    public function setCompanyName($companyName)
+    public function setSociety($companyName)
     {
-        $this->companyName = $companyName;
+        $this->society = $companyName;
 
         return $this;
     }
@@ -190,6 +190,6 @@ class Customer
      */
     public function __toString()
     {
-        return $this->getCompanyName();
+        return $this->getSociety();
     }
 }
