@@ -8,42 +8,48 @@ Feature: Les produits
 
 
   Scenario: Affichage de la liste des produits
-    When I am on "/compta/product"
+    When I am on "/compta/produit"
     Then I should see "Liste des produits"
 
 
   Scenario: Créer un produit
-    Given I am on "/compta/product"
+    Given I am on "/compta/produit"
     And I follow "Créer un produit"
-    And I should be on "/compta/product/new/"
+    And I should be on "/compta/produit/new"
     When I fill in the following:
-      | Libelle | produit 1 |
+      | Nom | produit 1 |
+      | Prix | 12.23 |
+      | Durée de l'abonnement | 12 |
     And I press "Créer"
-    Then I should be on "/compta/product/"
+    Then I should be on "/compta/produit"
     And I should see "produit 1"
     And I should see "Modifier"
     And I should see "Supprimer"
 
   Scenario: Modifier un produit
-    Given I am on "/compta/produit/"
+    Given I am on "/compta/produit"
     And I follow "Créer un produit"
     And I fill in the following:
-      | Libelle | produit 1 |
+      | Nom | produit 1 |
+      | Prix | 12.23 |
+      | Durée de l'abonnement | 12 |
     And I press "Créer"
     And I follow "Modifier"
     When I fill in the following:
-      | Libelle | produit 2 |
+      | Nom | produit 2 |
     And I press "Modifier"
-    Then I should be on "/compta/product/"
+    Then I should be on "/compta/produit"
     And I should see "produit 2"
     And I should not see "produit 1"
 
   Scenario: Supprimer un produit
-    Given I am on "/compta/produit/"
+    Given I am on "/compta/produit"
     And I follow "Créer un produit"
     And I fill in the following:
-      | Libelle | produit 1 |
+      | Nom | produit 1 |
+      | Prix | 12.23 |
+      | Durée de l'abonnement | 12 |
     And I press "Créer"
     When I press "Supprimer"
-    Then I should be on "/compta/product/"
+    Then I should be on "/compta/produit"
     And I should not see "produit 1"

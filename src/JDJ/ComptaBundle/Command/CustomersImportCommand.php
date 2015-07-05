@@ -61,15 +61,6 @@ EOM;
                 ->setCompanyName($data['societe'])
                 ->setEmail($data['email']);
 
-            $this->getEntityManager()->flush();
-
-            $this->getDatabaseConnection()->update('cpta_customer', array(
-                "id" => $data['id'],
-            ), array('id' => $customer->getId()));
-
-            $autoIncrement = $data['id'] + 1;
-            $this->getDatabaseConnection()->exec("ALTER TABLE cpta_customer AUTO_INCREMENT = " . $autoIncrement );
-
             $address = $customer->getAddress();
             if (null === $address) {
                 $address = new Address();
@@ -81,6 +72,19 @@ EOM;
                 ->setStreet($data['rue'])
                 ->setPostalCode($data['codePostal'])
                 ->setCity($data['ville']);
+
+            $this->getEntityManager()->flush();
+
+            $this->getDatabaseConnection()->update('cpta_customer', array(
+                "id" => $data['id'],
+            ), array('id' => $customer->getId()));
+
+            $autoIncrement = $data['id'] + 1;
+            $this->getDatabaseConnection()->exec("ALTER TABLE cpta_customer AUTO_INCREMENT = " . $autoIncrement );
+
+            $customer
+                ->setId($data['id']);
+
 
             $this->getEntityManager()->flush();
 

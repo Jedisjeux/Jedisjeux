@@ -19,7 +19,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Subscription 
 {
+    const IN_PROGRESS = 'in_progress';
+
     const WAITING_FOR_PAYMENT = "waiting_for_payment";
+
+    const TERMINATED = 'terminated';
+
 
     /**
      * @var integer

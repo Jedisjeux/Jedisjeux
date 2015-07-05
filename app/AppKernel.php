@@ -74,21 +74,36 @@ class AppKernel extends Kernel
         parent::init();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getCacheDir()
     {
-        if (in_array($this->environment, array('dev', 'test'))) {
-            return '/run/shm/jdj/cache/' .  $this->environment;
+        if ($this->isVagrantEnvironment()) {
+            return '/dev/shm/jdj/cache/'.$this->environment;
         }
 
         return parent::getCacheDir();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getLogDir()
     {
-        if (in_array($this->environment, array('dev', 'test'))) {
-            return '/run/shm/jdj/logs';
+        if ($this->isVagrantEnvironment()) {
+            return '/dev/shm/jdj/logs';
         }
 
         return parent::getLogDir();
+    }
+
+    /**
+     * @return boolean
+     */
+    protected function isVagrantEnvironment()
+    {
+        return false;
+        return (getenv('HOME') === '/home/vagrant' || getenv('VAGRANT') === 'VAGRANT') && is_dir('/dev/shm');
     }
 }

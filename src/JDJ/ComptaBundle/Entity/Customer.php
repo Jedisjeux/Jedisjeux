@@ -46,6 +46,7 @@ class Customer
      * @var Address
      *
      * @ORM\OneToOne(targetEntity="Address", cascade={"persist", "merge"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $address;
 

@@ -1,17 +1,13 @@
 @comptaBookEntry
-Feature: Les écritures comptables
+Feature: The book entries
 
   Background:
     Given there are following users:
       | username | email                | password | enabled |
       | loic_425 | loic_425@hotmail.com | loic_425 | yes     |
-    And there are modes reglement:
-      | libelle |
+    And there are payment methods:
+      | name |
       | chèque  |
-    And there are sens:
-      | id     | libelle |
-      | debit  | débit   |
-      | credit | crédit  |
 
 
   Scenario: Affichage de la liste des écritures
@@ -19,7 +15,7 @@ Feature: Les écritures comptables
     And the response status code should be 200
 
 
-  Scenario: Créer une écriture
+  Scenario: Create a new book entry
     Given I am on "/compta/book-entry/"
     And I follow "Créer une écriture comptable"
     And I should be on "/compta/ecriture/new/"
@@ -35,7 +31,7 @@ Feature: Les écritures comptables
     And I should see "Modifier"
     And I should see "Supprimer"
 
-  Scenario: Modifier une écriture
+  Scenario: Edit an existing book entry
     Given I am on "/compta/book-entry/"
     And I follow "Créer une écriture comptable"
     And I fill in the following:
@@ -53,7 +49,7 @@ Feature: Les écritures comptables
     And I should see "remboursement cyril"
     And I should not see "remboursement blue"
 
-  Scenario: Supprimer une écriture
+  Scenario: Delete a book entry
     Given I am on "/compta/book-entry/"
     And I follow "Créer une écriture comptable"
     When I fill in the following:

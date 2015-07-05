@@ -20,7 +20,7 @@ use JDJ\ComptaBundle\Entity\Bill;
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
  */
-class SubscriptionsImportCommand extends ContainerAwareCommand
+class SubscriptionsCreateCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
@@ -68,7 +68,8 @@ class SubscriptionsImportCommand extends ContainerAwareCommand
                         ->getSubscriptionManager()
                         ->calculateEndingDate($subscription) : null)
                     ->setCustomer($bill->getCustomer())
-                    ->setToBeRenewed($subscription->getEndAt() < new \DateTime() ? false : true);
+                    ->setToBeRenewed($subscription->getEndAt() < new \DateTime() ? false : true)
+                    ->setStatus($subscription->getEndAt() < new \DateTime() ? Subscription::TERMINATED : Subscription::IN_PROGRESS);
 
                 $this->getEntityManager()->flush();
             }

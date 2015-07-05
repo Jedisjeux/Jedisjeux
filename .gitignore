@@ -22,7 +22,7 @@
 /web/media/*
 /web/bower_components/*
 !/web/bower_components/.gitkeep
-/web/css/compiled/igni
+/web/css/compiled/
 /web/js/
 
 .idea

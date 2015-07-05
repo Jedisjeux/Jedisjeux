@@ -99,7 +99,7 @@ class SubscriptionController extends Controller
     /**
      * Creates a new Subscription entity.
      *
-     * @Route("/create", name="compta_product_create")
+     * @Route("/create", name="compta_subscription_create")
      * @ParamConverter("bill", class="JDJComptaBundle:Bill")
      * @ParamConverter("product", class="JDJComptaBundle:Product")
      *

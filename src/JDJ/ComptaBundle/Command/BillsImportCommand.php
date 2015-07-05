@@ -7,8 +7,10 @@
  */
 
 namespace JDJ\ComptaBundle\Command;
+
 use JDJ\ComptaBundle\Entity\BillProduct;
 use JDJ\ComptaBundle\Entity\Customer;
+use JDJ\ComptaBundle\Entity\Manager\BillManager;
 use JDJ\ComptaBundle\Entity\PaymentMethod;
 use JDJ\ComptaBundle\Entity\Repository\AddressRepository;
 use JDJ\ComptaBundle\Entity\Repository\ProductRepository;
@@ -25,6 +27,7 @@ use JDJ\ComptaBundle\Entity\Bill;
  */
 class BillsImportCommand extends ContainerAwareCommand
 {
+
     protected function configure()
     {
         $this
@@ -53,7 +56,10 @@ EOM;
         foreach($oldItems as $data) {
 
             /** @var Bill $bill */
-            $bill = $this->getBillRepository()->find($data['id']);
+            $bill = $this
+                ->getBillManager()
+                ->getBillRepository()
+                ->find($data['id']);
             if (null === $bill) {
                 $bill = new Bill();
                 $this->getEntityManager()->persist($bill);
@@ -154,11 +160,11 @@ EOM;
     }
 
     /**
-     * @return \Doctrine\ORM\EntityRepository
+     * @return BillManager
      */
-    protected function getBillRepository()
+    protected function getBillManager()
     {
-        return $this->getEntityManager()->getRepository('JDJComptaBundle:Bill');
+        return $this->getContainer()->get('app.manager.bill');
     }
 
     /**
