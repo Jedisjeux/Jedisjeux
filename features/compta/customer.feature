@@ -12,9 +12,9 @@ Feature: Les clients
     Then I should see "Liste des clients"
 
   Scenario: Créer un client
-    Given I am on "/compta/customer/"
+    Given I am on "/compta/client/"
     And I follow "Créer un client"
-    And I should be on "/compta/customer/new/"
+    And I should be on "/compta/client/new/"
     When I fill in the following:
       | Societe    | Philibert                   |
       | Nom        | Loïc Fremont                |
@@ -24,13 +24,13 @@ Feature: Les clients
       | Codepostal | 35740                       |
       | Ville      | Pacé                        |
     And I press "Créer"
-    Then I should be on "/compta/customer/"
+    Then I should be on "/compta/client/"
     And I should see "Philibert"
     And I should see "Modifier"
     And I should see "Supprimer"
 
   Scenario: Modifier un client
-    Given I am on "/compta/customer/"
+    Given I am on "/compta/client/"
     And I follow "Créer un nouveau client"
     And I fill in the following:
       | Societe    | Philibert                   |
@@ -45,12 +45,12 @@ Feature: Les clients
     When I fill in the following:
       | Societe | Ludibay |
     And I press "Enregistrer"
-    Then I should be on "/compta/customer/"
+    Then I should be on "/compta/client/"
     And I should see "Ludibay"
     And I should not see "Philibert"
 
   Scenario: Supprimer un client
-    Given I am on "/compta/customer"
+    Given I am on "/compta/client"
     And I follow "Créer un nouveau client"
     And I fill in the following:
       | Societe    | Philibert                   |
@@ -62,5 +62,5 @@ Feature: Les clients
       | Ville      | Pacé
     And I press "Créer"
     When I press "Supprimer"
-    Then I should be on "/compta/customer/"
+    Then I should be on "/compta/client/"
     And I should not see "Philibert"

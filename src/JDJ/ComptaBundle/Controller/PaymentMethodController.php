@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Class BookEntryController
  *
- * @Route("/payement-method")
+ * @Route("/mode-paiement")
  */
 class PaymentMethodController extends Controller
 {
@@ -133,6 +133,38 @@ class PaymentMethodController extends Controller
     }
 
     /**
+     * Edits an existing PaymentMethod entity.
+     *
+     * @Route("/{paymentMethod}/update", name="compta_payment_method_update")
+     * @ParamConverter("paymentMethod", class="JDJComptaBundle:PaymentMethod")
+     *
+     * @param Request $request
+     * @param PaymentMethod $paymentMethod
+     * @return RedirectResponse|Response
+     * @internal param $id
+     */
+    public function updateAction(Request $request, PaymentMethod $paymentMethod)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $deleteForm = $this->createDeleteForm($paymentMethod->getId());
+        $editForm = $this->createEditForm($paymentMethod);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isValid()) {
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('compta_payment_method'));
+        }
+
+        return $this->render('compta/payment-method/edit.html.twig', array(
+            'paymentMethod'      => $paymentMethod,
+            'edit_form'   => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
      * Creates a form to edit a PaymentMethod entity.
      *
      * @param PaymentMethod $paymentMethod The entity
@@ -140,7 +172,7 @@ class PaymentMethodController extends Controller
      */
     private function createEditForm(PaymentMethod $paymentMethod)
     {
-        $form = $this->createForm(new PayementMethodType(), $paymentMethod, array(
+        $form = $this->createForm(new PaymentMethodType(), $paymentMethod, array(
             'action' => $this->generateUrl('compta_payment_method_update', array('paymentMethod' => $paymentMethod->getId())),
             'method' => 'PUT',
         ));
@@ -171,7 +203,7 @@ class PaymentMethodController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('compta_book_entry'));
+        return $this->redirect($this->generateUrl('compta_payment_method'));
     }
 
     /**
