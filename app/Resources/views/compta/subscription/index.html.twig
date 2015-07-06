@@ -13,19 +13,22 @@
         <tr>
             <th>{{ 'label.society'|trans }}</th>
             <th>{{ 'label.product'|trans }}</th>
-            <th>{{ 'label.start_at'|trans }}</th>
+            <th>{{ 'label.created_at'|trans }}</th>
+            <th>{{ 'label.paid_at'|trans }}</th>
             <th>{{ 'label.end_at'|trans }}</th>
             <th>{{ 'label.status'|trans }}</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
         {% for subscription in subscriptions %}
             <tr>
-                <td>{{ subscription.bill.customer.society }}</td>
+                <td>{{ subscription.customer.society }}</td>
                 <td>{{ subscription.product.name }}</td>
+                <td>{{ subscription.createdAt|localizeddate('long', 'none') }}</td>
                 <td>
-                    {% if subscription.startAt %}
-                        {{ subscription.startAt|localizeddate('long', 'none') }}
+                    {% if subscription.bill.paidAt %}
+                        {{ subscription.bill.paidAt|localizeddate('long', 'none') }}
                     {% endif %}
                 </td>
                 <td>
@@ -34,9 +37,26 @@
                     {% endif %}
                 </td>
                 <td>{{ status(subscription) }}</td>
+                <td class="text-right">
+                    <ul class="list-inline">
+                        <li>
+                            <a class="btn btn-default" href="{{ path('compta_bill_show', { 'bill': subscription.bill.id }) }}">
+                                <span class="glyphicon glyphicon-book"></span> Facture
+                            </a>
+                        </li>
+                    </ul>
+                </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+
+    {% block Pagination %}
+        <div class="pagination-wrapper">
+            <div class="pagination-bottom">
+                {{ pagination(subscriptions) }}
+            </div>
+        </div>
+    {% endblock %}
 
 {% endblock container %}

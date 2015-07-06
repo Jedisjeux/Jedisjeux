@@ -39,13 +39,14 @@ class BillType extends AbstractType
                 'class' => 'JDJComptaBundle:Product',
             ))
             ->add('paymentMethod', null, array(
-                'widget' => 'single_text',
-                'format' => 'yyyy-MM-dd',
-                'html5' => false,
                 'label' => 'label.payment_method',
             ))
             ->add('paidAt', 'date', array(
-                'label' => 'label.payment_at',
+                'label' => 'label.paid_at',
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+                'html5' => false,
+                'required' => false,
             ))
         ;
 

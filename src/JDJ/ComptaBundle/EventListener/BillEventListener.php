@@ -64,6 +64,9 @@ class BillEventListener
         $this->bookEntryManager->createFromBill($bill);
     }
 
+    /**
+     * @param GenericEvent $event
+     */
     public function removeBookEntry(GenericEvent $event)
     {
         $this->billEventHandler($event);
@@ -79,5 +82,12 @@ class BillEventListener
         $this->billEventHandler($event);
         $bill = $event->getSubject();
         $this->subscriptionManager->createFromBill($bill);
+    }
+
+    public function updateSubscriptionStatus(GenericEvent $event)
+    {
+        $this->billEventHandler($event);
+        $bill = $event->getSubject();
+        $this->subscriptionManager->updateStatusFromBill($bill);
     }
 }

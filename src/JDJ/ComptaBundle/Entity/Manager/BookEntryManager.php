@@ -87,6 +87,10 @@ class BookEntryManager
      */
     public function removeFromBill(Bill $bill)
     {
+        if (null !== $bill->getPaidAt()) {
+            return;
+        }
+
         $bookEntry = $bill->getBookEntry();
 
         if (null !== $bookEntry) {

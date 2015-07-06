@@ -23,6 +23,8 @@ class Subscription
 
     const WAITING_FOR_PAYMENT = "waiting_for_payment";
 
+    const WAITING_FOR_INSTALLATION = "waiting_for_installation";
+
     const FINISHED = 'finished';
 
 

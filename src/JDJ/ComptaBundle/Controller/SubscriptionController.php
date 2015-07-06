@@ -60,7 +60,7 @@ class SubscriptionController extends Controller
     public function indexAction(Request $request)
     {
         $subscriptions = $this->getSubscriptionRepository()->createPaginator(null, array(
-            'endAt' => 'desc'
+            'createdAt' => 'desc'
         ))
         ->setCurrentPage($request->get('page', 1));
 
@@ -116,9 +116,6 @@ class SubscriptionController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $this
-                ->getSubscriptionManager()
-                ->endRenewalByProductAndCustomer($subscription->getProduct(), $subscription->getBill()->getCustomer());
             $endAt = $this
                 ->getSubscriptionManager()
                 ->calculateEndingDate($subscription);

@@ -35,14 +35,20 @@
                 <td>{{ bill.createdAt|localizeddate('long', 'none') }}</td>
                 <td>{{ bill.customer.society }}</td>
                 <td>{{ totalPrices[bill.id]|localizedcurrency('EUR') }}</td>
-                <td>{% if bill.paidAt %}
+                <td>
+                    {% if bill.paidAt %}
                         {{ bill.paidAt|localizeddate('long', 'none') }}
                     {% else %}
-                        <span class="label label-warning">{{ 'label.waiting_for_payment'|trans }}</span>
+                        <span class="label label-danger">{{ 'label.waiting_for_payment'|trans }}</span>
                     {% endif %}
                 </td>
                 <td class="text-right">
                     <ul class="list-inline">
+                        <li>
+                            <a class="btn btn-default" href="{{ path('compta_bill_show', { 'bill': bill.id }) }}">
+                                <span class="glyphicon glyphicon-book"></span> Facture
+                            </a>
+                        </li>
                         <li>
                             <a class="btn btn-primary" href="{{ path('compta_bill_edit', { 'bill': bill.id }) }}">
                                 <span class="glyphicon glyphicon-pencil"></span> Modifier

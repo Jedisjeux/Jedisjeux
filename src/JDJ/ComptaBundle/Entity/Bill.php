@@ -47,7 +47,7 @@ class Bill
     private $customer;
 
     /**
-     * @var ArrayCollection
+     * @var BillProduct[]
      *
      * @ORM\Id
      * @ORM\OneToMany(targetEntity="BillProduct", mappedBy="bill", cascade={"persist", "merge"})
@@ -70,7 +70,7 @@ class Bill
     private $customerAddressVersion;
 
     /**
-     * @var ArrayCollection
+     * @var Subscription[]
      *
      * @ORM\OneToMany(targetEntity="Subscription", mappedBy="bill")
      */
@@ -169,7 +169,7 @@ class Bill
     }
 
     /**
-     * @return ArrayCollection
+     * @return BillProduct[]
      */
     public function getBillProducts()
     {
@@ -237,7 +237,7 @@ class Bill
     }
 
     /**
-     * @return ArrayCollection
+     * @return Subscription[]
      */
     public function getSubscriptions()
     {

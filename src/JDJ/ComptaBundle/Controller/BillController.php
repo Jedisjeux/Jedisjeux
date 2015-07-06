@@ -9,6 +9,7 @@
 namespace JDJ\ComptaBundle\Controller;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
 use JDJ\ComptaBundle\Entity\Bill;
 use JDJ\ComptaBundle\Entity\BillProduct;
 use JDJ\ComptaBundle\Entity\Manager\AddressManager;
@@ -246,7 +247,35 @@ class BillController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+
+
+            foreach ($bill->getBillProducts() as $billProduct) {
+                $em->remove($billProduct);
+            }
+            $bill->setBillProducts(new ArrayCollection());
             $em->flush();
+
+            $products = $editForm->get('products')->getData();
+
+            /** @var Product $product */
+            foreach ($products as $product) {
+
+                $currentVersion = $this
+                    ->getProductManager()
+                    ->getCurrentVersion($product);
+
+                $billProduct = new BillProduct();
+                $billProduct
+                    ->setProduct($product)
+                    ->setProductVersion($currentVersion)
+                    ->setBill($bill)
+                    ->setQuantity(1);
+
+                $bill->addBillProduct($billProduct);
+            }
+
+            $em->flush();
+
             if (null !== $bill->getPaidAt()) {
                 $this->getEventDispatcher()->dispatch(BillEvents::BILL_PAID, new GenericEvent($bill));
             } else {

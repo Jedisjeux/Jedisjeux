@@ -46,6 +46,8 @@ class SubscriptionManager
     }
 
     /**
+     * Calculate the ending date of a subscription
+     *
      * @param Subscription $subscription
      * @return \DateTime
      */
@@ -57,37 +59,58 @@ class SubscriptionManager
     }
 
     /**
+     * Create subscriptions from bill informations
+     * Also remove useless subscriptions if bill is updated
+     *
      * @param Bill $bill
      */
     public function createFromBill(Bill $bill)
     {
-        /** @var BillProduct $billProduct */
+        $subscriptionsToRemove = array();
+        foreach ($bill->getSubscriptions() as $subscription) {
+            $subscriptionsToRemove[$subscription->getId()] = $subscription;
+        }
+
         foreach ($bill->getBillProducts() as $billProduct) {
-            $subscription = new Subscription();
+
+            $subscription = $this->getProductSubscriptionFromBill($bill, $billProduct->getProduct());
+
+            if (null === $subscription) {
+                $subscription = new Subscription();
+                $this->entityManager->persist($subscription);
+            } else {
+                unset($subscriptionsToRemove[$subscription->getId()]);
+            }
+
             $subscription
                 ->setBill($bill)
                 ->setProduct($billProduct->getProduct())
                 ->setCustomer($bill->getCustomer())
-                ->setStatus(Subscription::WAITING_FOR_PAYMENT);
+                ->setStatus(null === $bill->getPaidAt() ? Subscription::WAITING_FOR_PAYMENT : Subscription::WAITING_FOR_INSTALLATION);
 
-            $this->entityManager->persist($subscription);
         }
+
+        foreach($subscriptionsToRemove as $subscription) {
+            $this->entityManager->remove($subscription);
+        }
+
         $this->entityManager->flush();
     }
 
-    public function endRenewalByProductAndCustomer(Product $product, Customer $customer)
+    /**
+     * Get a subscription to a product from a bill
+     *
+     * @param Bill $bill
+     * @param Product $product
+     * @return Subscription|null
+     */
+    public function getProductSubscriptionFromBill(Bill $bill, Product $product)
     {
-        $subcriptions = $this->entityManager->getRepository('JDJComptaBundle:Subscription')->findBy(array(
-            'product' => $product,
-            'customer' => $customer,
-            'toBeRenewed' => true,
-        ));
-
-        /** @var Subscription $subcription */
-        foreach ($subcriptions as $subcription) {
-            $subcription->setToBeRenewed(false);
+        foreach ($bill->getSubscriptions() as $subscription) {
+            if ($subscription->getProduct()->getId() === $product->getId()) {
+                return $subscription;
+            }
         }
-
-        $this->entityManager->flush();
+        return null;
     }
 }

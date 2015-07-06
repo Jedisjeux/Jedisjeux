@@ -1,11 +1,19 @@
 {% macro subscriptionStatus(subscription) %}
-    {% set statusClass = 'success' %}
     {% set statusLabel = subscription.status %}
+    {% set statusClass = '' %}
 
-    {% if 'waiting_for_payment' == subscription.status %}
+    {% if 'in_progress' == subscription.status %}
+        {% set statusClass = 'success' %}
+        {% set statusLabel = 'label.in_progress'|trans %}
+    {% elseif 'waiting_for_payment' == subscription.status %}
+        {% set statusClass = 'danger' %}
+        {% set statusLabel = 'label.waiting_for_payment'|trans %}
+    {% elseif 'waiting_for_installation' == subscription.status %}
         {% set statusClass = 'warning' %}
+        {% set statusLabel = 'label.waiting_for_installation'|trans %}
     {% elseif 'finished' == subscription.status %}
         {% set statusClass = 'primary' %}
+        {% set statusLabel = 'label.finished'|trans %}
     {% endif %}
-    <span class="label label-{{ statusClass }}">{{ statusLabel|trans }}</span>
+    <span class="label label-{{ statusClass }}">{{ statusLabel }}</span>
 {% endmacro %}

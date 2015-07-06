@@ -8,6 +8,8 @@ services:
             - '@app.manager.book_entry'
             - '@app.manager.subscription'
         tags:
-            - { name: kernel.event_listener, event: app.bill.paid, method: createBookEntry }
+            - { name: kernel.event_listener, event: app.bill.created, method: createBookEntry }
             - { name: kernel.event_listener, event: app.bill.created, method: createSubscriptions }
-            - { name: kernel.event_listener, event: app.bill.not_paid, method: removeBookEntry }
+            - { name: kernel.event_listener, event: app.bill.updated, method: createBookEntry }
+            - { name: kernel.event_listener, event: app.bill.updated, method: createSubscriptions }
+            - { name: kernel.event_listener, event: app.bill.updated, method: removeBookEntry }
