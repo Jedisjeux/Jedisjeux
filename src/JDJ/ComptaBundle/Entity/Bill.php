@@ -77,6 +77,14 @@ class Bill
     private $subscriptions;
 
     /**
+     * @var BookEntry
+     *
+     * @ORM\OneToOne(targetEntity="BookEntry")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $bookEntry;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -243,6 +251,27 @@ class Bill
     public function setSubscriptions($subscriptions)
     {
         $this->subscriptions = $subscriptions;
+
         return $this;
     }
+
+    /**
+     * @return BookEntry
+     */
+    public function getBookEntry()
+    {
+        return $this->bookEntry;
+    }
+
+    /**
+     * @param BookEntry $bookEntry
+     * @return $this
+     */
+    public function setBookEntry(BookEntry $bookEntry = null)
+    {
+        $this->bookEntry = $bookEntry;
+
+        return $this;
+    }
+
 }

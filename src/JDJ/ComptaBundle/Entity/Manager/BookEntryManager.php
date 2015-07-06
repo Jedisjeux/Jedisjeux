@@ -62,14 +62,37 @@ class BookEntryManager
             return;
         }
 
-        $bookEntry = new BookEntry();
+        $bookEntry = $bill->getBookEntry();
+
+        if (null === $bookEntry) {
+            $bookEntry = new BookEntry();
+            $this->entityManager->persist($bookEntry);
+        }
+
         $bookEntry
             ->setPrice($this->billManager->getTotalPrice($bill))
             ->setCreditedAt($bill->getPaidAt())
             ->setLabel('Paiement facture ' . $bill->getCustomer())
             ->setPaymentMethod($bill->getPaymentMethod());
 
-        $this->entityManager->persist($bookEntry);
+        $bill->setBookEntry($bookEntry);
+
         $this->entityManager->flush();
+    }
+
+    /**
+     * Remove a BookEntry created by a bill
+     *
+     * @param Bill $bill
+     */
+    public function removeFromBill(Bill $bill)
+    {
+        $bookEntry = $bill->getBookEntry();
+
+        if (null !== $bookEntry) {
+            $bill->setBookEntry(null);
+            $this->entityManager->remove($bookEntry);
+            $this->entityManager->flush();
+        }
     }
 }

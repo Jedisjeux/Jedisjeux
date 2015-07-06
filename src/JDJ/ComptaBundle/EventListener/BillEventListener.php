@@ -42,34 +42,42 @@ class BillEventListener
         $this->subscriptionManager = $subscriptionManager;
     }
 
+    private function billEventHandler(GenericEvent $event)
+    {
+        $bill = $event->getSubject();
+
+        if (!$bill instanceof Bill) {
+            throw new UnexpectedTypeException(
+                $bill,
+                'JDJ\ComptaBundle\Entity\Bill'
+            );
+        }
+    }
+
     /**
      * @param GenericEvent $event
      */
     public function createBookEntry(GenericEvent $event)
     {
+        $this->billEventHandler($event);
         $bill = $event->getSubject();
-
-        if (!$bill instanceof Bill) {
-            throw new UnexpectedTypeException(
-                $bill,
-                'JDJ\ComptaBundle\Entity\Bill'
-            );
-        }
-
         $this->bookEntryManager->createFromBill($bill);
     }
 
+    public function removeBookEntry(GenericEvent $event)
+    {
+        $this->billEventHandler($event);
+        $bill = $event->getSubject();
+        $this->bookEntryManager->removeFromBill($bill);
+    }
+
+    /**
+     * @param GenericEvent $event
+     */
     public function createSubscriptions(GenericEvent $event)
     {
+        $this->billEventHandler($event);
         $bill = $event->getSubject();
-
-        if (!$bill instanceof Bill) {
-            throw new UnexpectedTypeException(
-                $bill,
-                'JDJ\ComptaBundle\Entity\Bill'
-            );
-        }
-
         $this->subscriptionManager->createFromBill($bill);
     }
 }

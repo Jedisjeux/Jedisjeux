@@ -247,7 +247,11 @@ class BillController extends Controller
 
         if ($editForm->isValid()) {
             $em->flush();
-
+            if (null !== $bill->getPaidAt()) {
+                $this->getEventDispatcher()->dispatch(BillEvents::BILL_PAID, new GenericEvent($bill));
+            } else {
+                $this->getEventDispatcher()->dispatch(BillEvents::BILL_NOT_PAID, new GenericEvent($bill));
+            }
             return $this->redirect($this->generateUrl('compta_bill'));
         }
 

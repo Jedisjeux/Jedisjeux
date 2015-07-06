@@ -10,3 +10,4 @@ services:
         tags:
             - { name: kernel.event_listener, event: app.bill.paid, method: createBookEntry }
             - { name: kernel.event_listener, event: app.bill.created, method: createSubscriptions }
+            - { name: kernel.event_listener, event: app.bill.not_paid, method: removeBookEntry }
