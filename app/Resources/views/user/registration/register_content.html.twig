@@ -1,12 +1,9 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
-{% block fos_user_content %}
-{{ form_start(form) }}
-    <h1>Edition du compte de {{ entity.username }}</h1>
-    <div class="right inline">
-        <a href="{{ path('jdj_user_list') }}">
-            Retour à la liste des Utilisateurs
-        </a>
-    </div>
+{% trans_default_domain 'FOSUserBundle' %}
+
+<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+
+    <h1>Je crée mon compte sur Jedisjeux ! Trop de la balle !!!!</h1>
+
     <div class="row">
         {{ form_start(form) }}
         {% if form_errors(form) %}
@@ -14,6 +11,7 @@
                 {{ form_errors(form) }}
             </div>
         {% endif %}
+
 
 
         {# Bloc form account credentials #}
@@ -50,7 +48,6 @@
 
         </fieldset>
 
-
         {# Bloc form account password #}
         <fieldset>
 
@@ -70,6 +67,7 @@
             </div>
 
         </fieldset>
+
         {# Bloc form More user description #}
         <fieldset>
             <legend>Qui suis-je ?</legend>
@@ -102,20 +100,6 @@
                 </div>
             </div>
 
-            <div class="small-8">
-                <div class="row">
-                    <div class="small-3 columns">
-                        <label for="right-label" class="left inline">{{ form_label(form.avatarFile) }}</label>
-                    </div>
-                    <div class="error">
-                        {{ form_errors(form.avatarFile) }}
-                    </div>
-                    <div class="small-9 columns">
-                        {{ form_widget(form.avatarFile) }}
-                        <img src="{{ asset(entity.getWebPath) }}"/>
-                    </div>
-                </div>
-            </div>
 
             <div class="small-8">
                 <div class="row">
@@ -147,11 +131,12 @@
 
         </fieldset>
 
-
         {{ form_widget(form._token) }}
-        {{ form_widget(form.submit) }}
+        <div>
+            <input class="button add" type="submit" value="{{ 'registration.submit'|trans }}" />
+        </div>
         {{ form_rest(form) }}
     </div>
     {{ form_end(form) }}
+
 </form>
-{% endblock fos_user_content %}

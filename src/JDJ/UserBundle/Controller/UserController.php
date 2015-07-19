@@ -19,12 +19,11 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\VarDumper\VarDumper;
 
 /**
  * Class UserController
- *
  * @package JDJ\UserBundle\Controller
- *
  */
 class UserController extends Controller
 {
@@ -42,15 +41,17 @@ class UserController extends Controller
         $userRepository = $em->getRepository('JDJUserBundle:User');
 
         $entities = $userRepository->createPaginator();
-        $entities->setMaxPerPage(5);
+        $entities->setMaxPerPage(20);
         $entities->setCurrentPage($request->get('page', 1));
+
 
         $deleteForms = array();
         foreach ($entities as $entity) {
+
             $deleteForms[$entity->getId()] = $this->createDeleteForm($entity->getId())->createView();
         }
 
-        return $this->render('JDJUserBundle:User:index.html.twig', array(
+        return $this->render('/user/user/index.html.twig', array(
             'entities' => $entities,
             'deleteForms' => $deleteForms,
         ));
@@ -58,7 +59,7 @@ class UserController extends Controller
     /**
      * Creates a new User entity.
      *
-     * @Route("/create", name="espace_personnel_create")
+     * @Route("/espace-perso/create", name="espace_personnel_create")
      * @Method({"POST"})
      */
     public function createAction(Request $request)
@@ -104,7 +105,7 @@ class UserController extends Controller
     /**
      * Displays a form to create a new User entity.
      *
-     * @Route("/new", name="espace_personnel_new")
+     * @Route("/espace-perso//new", name="espace_personnel_new")
      */
     public function newAction()
     {
@@ -120,7 +121,7 @@ class UserController extends Controller
     /**
      * Finds and displays a User entity.
      *
-     * @Route("/{id}/show", name="espace_personnel_show")
+     * @Route("/espace-perso/{id}/show", name="espace_personnel_show")
      */
     public function showAction(Request $request, $id)
     {
@@ -157,7 +158,7 @@ class UserController extends Controller
     /**
      * Displays a form to edit an existing User entity.
      *
-     * @Route("/{id}/edit", name="espace_personnel_edit")
+     * @Route("/espace-perso/{id}/edit", name="espace_personnel_edit")
      */
     public function editAction($id)
     {
@@ -172,7 +173,7 @@ class UserController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('JDJUserBundle:User:edit.html.twig', array(
+        return $this->render('/user/user/edit.html.twig', array(
             'entity'      => $entity,
             'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -201,7 +202,7 @@ class UserController extends Controller
     /**
      * Edits an existing User entity.
      *
-     * @Route("/{id}/update", name="espace_personnel_update")
+     * @Route("/espace-perso/{id}/update", name="espace_personnel_update")
      * @Method({"POST", "PUT"})
      */
     public function updateAction(Request $request, $id)
@@ -236,7 +237,7 @@ class UserController extends Controller
     /**
      * Deletes a User entity.
      *
-     * @Route("/{id}/delete", name="espace_personnel_delete")
+     * @Route("/espace-perso/{id}/delete", name="espace_personnel_delete")
      * @Method({"POST", "DELETE"})
      */
     public function deleteAction(Request $request, $id)

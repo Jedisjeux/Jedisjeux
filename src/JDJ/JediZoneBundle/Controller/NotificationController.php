@@ -87,7 +87,6 @@ class NotificationController extends Controller
 
     }
 
-
     /**
      * @return NotificationService
      */

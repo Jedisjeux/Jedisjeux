@@ -3,17 +3,25 @@
 {% set jeuHref = path('jeu_show', {'id': jeu.id, 'slug': jeu.slug}) %}
 
 <!-- Image Box #4 Item -->
-<div class="img-box-4-item">
+<div class="img-box-4-item portfolio">
     <!-- Image -->
     <div class="img-container">
         <a href="{{ jeuHref }}">
-            <img src="{{ jeu.imageCouverture.webPath | imagine_filter('default') }}" alt="" class="img-responsive" />
+            <div class="element">
+                <div class="image-style-one">
+                    <img src="{{ jeu.imageCouverture.webPath | imagine_filter('default') }}" alt=""
+                         class="img-responsive"/>
+                    <div class="image-hover">
+                    </div>
+                </div>
+            </div>
         </a>
     </div>
+
     <!-- Image Box #4 Content -->
     <div class="img-box-4-content">
         <!-- Icon -->
-        <a href="#"><i class="fa {{ faImg }} {{ bg }}"></i></a>
+        <a href="#"><i style="z-index: 10;" class="fa {{ faImg }} {{ bg }}"></i></a>
         <!-- Heading -->
         <h4><a href="{{ jeuHref }}">{{ jeu.libelle }}</a></h4>
         <!-- Border -->

@@ -1,8 +1,7 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
-
-    <h1>Je crée mon compte sur Jedisjeux ! Trop de la balle !!!!</h1>
+<form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+    <h1>Je modifie mon compte sur Jedisjeux ! Sensas !!!!</h1>
 
     <div class="row">
         {{ form_start(form) }}
@@ -48,26 +47,6 @@
 
         </fieldset>
 
-        {# Bloc form account password #}
-        <fieldset>
-
-            <div class="small-8">
-
-                <div class="row">
-                    <div class="small-3 columns">
-                        <label for="right-label" class="left inline">{{ form_label(form.plainPassword) }}</label>
-                    </div>
-                    <div class="error">
-                        {{ form_errors(form.plainPassword) }}
-                    </div>
-                    <div class="small-9 columns">
-                        {{ form_widget(form.plainPassword) }}
-                    </div>
-                </div>
-            </div>
-
-        </fieldset>
-
         {# Bloc form More user description #}
         <fieldset>
             <legend>Qui suis-je ?</legend>
@@ -103,14 +82,14 @@
             <div class="small-8">
                 <div class="row">
                     <div class="small-3 columns">
-                        <label for="right-label" class="left inline">{{ form_label(form.avatarFile) }}</label>
+                        <label for="right-label" class="left inline">{{ form_label(form.avatar.path) }}</label>
                     </div>
                     <div class="error">
-                        {{ form_errors(form.avatarFile) }}
+                        {{ form_errors(form.avatar.path) }}
                     </div>
                     <div class="small-9 columns">
-                        {{ form_widget(form.avatarFile) }}
-                        <img src="{{ asset(entity.getWebPath) }}"/>
+                        {{ form_widget(form.avatar.path) }}
+                        <img src="{{ asset(entity.avatar.webPath) }}"/>
                     </div>
                 </div>
             </div>
@@ -145,6 +124,25 @@
 
         </fieldset>
 
+        <fieldset>
+            <legend>Je confirme mon mot de passe</legend>
+
+            <div class="small-8">
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="right-label" class="left inline">{{ form_label(form.current_password) }}</label>
+                    </div>
+                    <div class="error">
+                        {{ form_errors(form.current_password) }}
+                    </div>
+                    <div class="small-9 columns">
+                        {{ form_widget(form.current_password) }}
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+
         {{ form_widget(form._token) }}
         <div>
             <input class="button add" type="submit" value="{{ 'registration.submit'|trans }}" />
@@ -152,5 +150,4 @@
         {{ form_rest(form) }}
     </div>
     {{ form_end(form) }}
-
 </form>

@@ -106,13 +106,14 @@
             <div class="small-8">
                 <div class="row">
                     <div class="small-3 columns">
-                        <label for="right-label" class="left inline">{{ form_label(form.avatarFile) }}</label>
+                        <label for="right-label" class="left inline">{{ form_label(form.avatar.path) }}</label>
                     </div>
                     <div class="error">
-                        {{ form_errors(form.avatarFile) }}
+                        {{ form_errors(form.avatar.path) }}
                     </div>
                     <div class="small-9 columns">
-                        {{ form_widget(form.avatarFile) }}
+                        {{ form_widget(form.avatar.path) }}
+                        <img src="{{ asset(entity.avatar.webPath) }}"/>
                     </div>
                 </div>
             </div>

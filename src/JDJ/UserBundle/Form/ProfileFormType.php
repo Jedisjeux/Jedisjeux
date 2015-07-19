@@ -30,7 +30,9 @@ class ProfileFormType extends AbstractType
         $builder
             ->add('nom')
             ->add('prenom')
-            ->add('avatarFile', 'file')
+            ->add('avatarFile', 'file', array(
+                'mapped' => false,
+            ))
             ->add('presentation')
             ->add('username')
             ->add('email')

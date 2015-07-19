@@ -66,7 +66,7 @@ class RegistrationController extends BaseController
             }
         }
 
-        return $this->container->get('templating')->renderResponse('JDJUserBundle:Registration:register.html.twig', array(
+        return $this->container->get('templating')->renderResponse('/user/registration/register.html.twig', array(
             'form' => $form->createView(),
             'entity' => $user,
         ));
