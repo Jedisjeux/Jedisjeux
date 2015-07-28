@@ -4,7 +4,6 @@ namespace JDJ\UserBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class UserRegistrationType extends AbstractType
 {
@@ -15,15 +14,17 @@ class UserRegistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom')
-            ->add('prenom')
             ->add('avatarFile', 'file', array(
                 'mapped' => false,
+                'label' => "Avatar",
             ))
-            ->add('presentation', 'ckeditor', array(
+            ->add('presentation', 'textarea', array(
                 'required' => false,
+                'label' => "Présentation",
             ))
-            ->add('username')
+            ->add('username', 'text', array(
+                'label' => "Nom d'utilisateur",
+            ))
             ->add('email')
             ->add('plainPassword', 'repeated', array(
                 'type' => 'password',
@@ -35,6 +36,7 @@ class UserRegistrationType extends AbstractType
             ->add('dateNaissance', 'date', array(
                 'input'  => 'datetime',
                 'widget' => 'single_text',
+                'label' => "Date de naissance",
             ))
         ;
     }

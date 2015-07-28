@@ -5,7 +5,6 @@ namespace JDJ\UserBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 
 class ProfileFormType extends AbstractType
 {
@@ -22,29 +21,24 @@ class ProfileFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
-        // Symfony 2.1 support with the old constraint class
-        $constraint = new UserPassword();
-
-        $this->buildUserForm($builder, $options);
-
         $builder
-            ->add('nom')
-            ->add('prenom')
             ->add('avatarFile', 'file', array(
                 'mapped' => false,
+                'required' => false,
+                'label' => "Avatar",
             ))
-            ->add('presentation')
-            ->add('username')
+            ->add('presentation', 'textarea', array(
+                'required' => false,
+                'label' => "Présentation",
+            ))
+            ->add('username', 'text', array(
+                'label' => "Nom d'utilisateur",
+            ))
             ->add('email')
-            ->add('current_password', 'password', array(
-            'label' => 'form.current_password',
-            'translation_domain' => 'FOSUserBundle',
-            'mapped' => false,
-            'constraints' => $constraint,
-        ))
             ->add('dateNaissance', 'date', array(
                 'input'  => 'datetime',
                 'widget' => 'single_text',
+                'label' => "Date de naissance",
             ))
         ;
     }

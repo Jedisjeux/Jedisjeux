@@ -32,6 +32,6 @@ $(function() {
      * datePickers from the form
      */
     $('#datetimepicker11').datetimepicker({
-        daysOfWeekDisabled: [0, 6]
+        format: 'YYYY-MM-DD'
     });
 });

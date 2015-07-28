@@ -15,26 +15,23 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom')
-            ->add('prenom')
             ->add('avatarFile', 'file', array(
                 'mapped' => false,
-            ))
-            ->add('presentation', 'ckeditor', array(
                 'required' => false,
+                'label' => "Avatar",
             ))
-            ->add('username')
+            ->add('presentation', 'textarea', array(
+                'required' => false,
+                'label' => "Présentation",
+            ))
+            ->add('username', 'text', array(
+                'label' => "Nom d'utilisateur",
+            ))
             ->add('email')
-            ->add('plainPassword', 'repeated', array(
-                'type' => 'password',
-                'options' => array('translation_domain' => 'FOSUserBundle'),
-                'first_options' => array('label' => 'Mot de passe'),
-                'second_options' => array('label' => 'Vérification'),
-                'invalid_message' => 'fos_user.password.mismatch',
-            ))
             ->add('dateNaissance', 'date', array(
                 'input'  => 'datetime',
                 'widget' => 'single_text',
+                'label' => "Date de naissance",
             ))
         ;
     }

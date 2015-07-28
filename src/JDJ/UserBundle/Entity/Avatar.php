@@ -81,6 +81,25 @@ class Avatar
         return $this;
     }
 
+    /**
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param $file
+     * @return $this
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
 
 
     public function getAbsolutePath()

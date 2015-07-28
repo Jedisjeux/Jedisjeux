@@ -33,9 +33,9 @@ class UserContext extends DefaultContext
             $user = $userManager->createUser();
             $user
                 ->setUsername($data['username'])
-                ->setNom(isset($data['nom']) ? $data['nom'] : null)
-                ->setPrenom(isset($data['prenom']) ? $data['prenom'] : null)
                 ->setEmail($data['email'])
+                ->setPresentation($data['presentation'])
+                ->setDateNaissance(new \DateTime($data['dateNaissance']))
                 ->setPlainPassword($data['password'])
                 ->setEnabled(("yes" === $data['enabled']) ? 1 : 0)
 

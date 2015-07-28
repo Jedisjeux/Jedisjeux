@@ -30,21 +30,6 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $nom;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $prenom;
-
-
-    /**
-     * @var string
-     *
      * @Gedmo\Slug(fields={"username"}, separator="-")
      * @ORM\Column(type="string", length=128)
      */
@@ -97,7 +82,7 @@ class User extends BaseUser
     /**
      * @var Avatar
      *
-     * @ORM\ManyToOne(targetEntity="JDJ\UserBundle\Entity\Avatar")
+     * @ORM\ManyToOne(targetEntity="JDJ\UserBundle\Entity\Avatar" , cascade={"persist"})
      */
     private $avatar;
 
@@ -226,52 +211,6 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set nom
-     *
-     * @param string $nom
-     * @return User
-     */
-    public function setNom($nom)
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    /**
-     * Get nom
-     *
-     * @return string 
-     */
-    public function getNom()
-    {
-        return $this->nom;
-    }
-
-    /**
-     * Set prenom
-     *
-     * @param string $prenom
-     * @return User
-     */
-    public function setPrenom($prenom)
-    {
-        $this->prenom = $prenom;
-
-        return $this;
-    }
-
-    /**
-     * Get prenom
-     *
-     * @return string 
-     */
-    public function getPrenom()
-    {
-        return $this->prenom;
     }
 
 

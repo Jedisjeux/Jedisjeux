@@ -1,142 +1,103 @@
 {% trans_default_domain 'FOSUserBundle' %}
+<div class="row">
+    <div class="col-sm-3"></div>
 
-<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+    <div class="col-sm-6">
+        <h1>{{ 'registration.accountCreation'|trans }}</h1>
+    </div>
+</div>
 
-    <h1>Je crée mon compte sur Jedisjeux ! Trop de la balle !!!!</h1>
+<br>
+<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} class="form-horizontal" method="POST" class="fos_user_registration_register">
+    {% if form_errors(form) %}
+        <div data-alert class="alert-box alert round">
+            {{ form_errors(form) }}
+        </div>
+    {% endif %}
+    {{ form_widget(form._token) }}
+
+    <div class="form-group {% if form_errors(form.email) %}has-error {% endif %}">
+        {{ form_label(form.email, null,{ 'label_attr': {'class': 'control-label '}}) }}
+        <div class="col-sm-6">
+            {{ form_widget(form.email, { 'attr': {'class': 'form-control'}}) }}
+            {% if form_errors(form.email) %}
+                <span class="help-inline">{{ form_errors(form.email) }}</span>
+            {% endif %}
+        </div>
+    </div>
+    <div class="form-group {% if form_errors(form.username) %}has-error {% endif %}">
+        {{ form_label(form.username, null,{ 'label_attr': {'class': 'control-label '}}) }}
+        <div class="col-sm-6 warning">
+            {{ form_widget(form.username, { 'attr': {'class': 'form-control'}}) }}
+            {% if form_errors(form.username) %}
+                <span class="help-inline">{{ form_errors(form.username) }}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group {% if form_errors(form.plainPassword.first) %}has-error {% endif %}">
+        {{ form_label(form.plainPassword.first,null, { 'label_attr': {'class': 'control-label '}}) }}
+        <div class="col-sm-6">
+            {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control'}}) }}
+
+
+        </div>
+    </div>
+
+    <div class="form-group {% if form_errors(form.plainPassword.first) %}has-error {% endif %}">
+        {{ form_label(form.plainPassword.second, null,{ 'label_attr': {'class': 'control-label '}}) }}
+        <div class="col-sm-6">
+            {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control'}}) }}
+            {% if form_errors(form.plainPassword.first) %}
+                <span class="help-inline">{{ form_errors(form.plainPassword.first) }}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.presentation, null,{ 'label_attr': {'class': 'control-label '}}) }}
+        <div class="col-sm-6">
+            {{ form_widget(form.presentation, { 'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    <div class="form-group {% if form_errors(form.avatarFile) %}has-error {% endif %}">
+        {{ form_label(form.avatarFile, null,{ 'label_attr': {'class': 'control-label '}}) }}
+        <div class="col-sm-6">
+            {{ form_widget(form.avatarFile, { 'attr': {'class': 'btn btn-default'}}) }}
+            {% if form_errors(form.avatarFile) %}
+                <span class="help-inline">{{ form_errors(form.avatarFile) }}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.dateNaissance, null,{ 'label_attr': {'class': 'control-label '}}) }}
+        <div class="col-sm-6">
+            <div class='input-group date {% if form_errors(form.dateNaissance) %}has-error {% endif %}' id='datetimepicker11'>
+                {{ form_widget(form.dateNaissance, { 'attr': {'class': 'form-control'}}) }}
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+
+            </div>
+            {% if form_errors(form.dateNaissance) %}
+                <span class="help-inline has-error">{{ form_errors(form.dateNaissance) }}</span>
+            {% endif %}
+        </div>
+    </div>
 
     <div class="row">
-        {{ form_start(form) }}
-        {% if form_errors(form) %}
-            <div data-alert class="alert-box alert round">
-                {{ form_errors(form) }}
+        <div class="col-sm-3"></div>
+
+        <div class="col-sm-6">
+            <div class="text-right">
+                <input class="btn btn-success " type="submit" value="{{ 'registration.submit'|trans }}" />
             </div>
-        {% endif %}
-
-
-
-        {# Bloc form account credentials #}
-        <fieldset>
-            <legend>Mes informations de connexion</legend>
-
-            <div class="small-8">
-                <div class="row">
-                    <div class="small-3 columns">
-                        <label for="right-label" class="left inline">{{ form_label(form.username ) }}</label>
-                    </div>
-                    <div class="error">
-                        {{ form_errors(form.username) }}
-                    </div>
-                    <div class="small-9 columns">
-                        {{ form_widget(form.username) }}
-                    </div>
-                </div>
-            </div>
-
-            <div class="small-8">
-                <div class="row">
-                    <div class="small-3 columns">
-                        <label for="right-label" class="left inline">{{ form_label(form.email) }}</label>
-                    </div>
-                    <div class="error">
-                        {{ form_errors(form.email) }}
-                    </div>
-                    <div class="small-9 columns">
-                        {{ form_widget(form.email) }}
-                    </div>
-                </div>
-            </div>
-
-        </fieldset>
-
-        {# Bloc form account password #}
-        <fieldset>
-
-            <div class="small-8">
-
-                <div class="row">
-                    <div class="small-3 columns">
-                        <label for="right-label" class="left inline">{{ form_label(form.plainPassword) }}</label>
-                    </div>
-                    <div class="error">
-                        {{ form_errors(form.plainPassword) }}
-                    </div>
-                    <div class="small-9 columns">
-                        {{ form_widget(form.plainPassword) }}
-                    </div>
-                </div>
-            </div>
-
-        </fieldset>
-
-        {# Bloc form More user description #}
-        <fieldset>
-            <legend>Qui suis-je ?</legend>
-
-            <div class="small-8">
-                <div class="row">
-                    <div class="small-3 columns">
-                        <label for="right-label" class="left inline">{{ form_label(form.nom) }}</label>
-                    </div>
-                    <div class="error">
-                        {{ form_errors(form.nom) }}
-                    </div>
-                    <div class="small-9 columns">
-                        {{ form_widget(form.nom) }}
-                    </div>
-                </div>
-            </div>
-
-            <div class="small-8">
-                <div class="row">
-                    <div class="small-3 columns">
-                        <label for="right-label" class="left inline">{{ form_label(form.prenom) }}</label>
-                    </div>
-                    <div class="error">
-                        {{ form_errors(form.prenom) }}
-                    </div>
-                    <div class="small-9 columns">
-                        {{ form_widget(form.prenom) }}
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="small-8">
-                <div class="row">
-                    <div class="small-3 columns">
-                        <label for="right-label" class="left inline">{{ form_label(form.presentation) }}</label>
-                    </div>
-                    <div class="error">
-                        {{ form_errors(form.presentation) }}
-                    </div>
-                    <div class="small-9 columns">
-                        {{ form_widget(form.presentation) }}
-                    </div>
-                </div>
-            </div>
-
-            <div class="small-8">
-                <div class="row">
-                    <div class="small-3 columns">
-                        <label for="right-label" class="left inline">{{ form_label(form.dateNaissance) }}</label>
-                    </div>
-                    <div class="error">
-                        {{ form_errors(form.dateNaissance) }}
-                    </div>
-                    <div class="small-9 columns">
-                        {{ form_widget(form.dateNaissance) }}
-                    </div>
-                </div>
-            </div>
-
-        </fieldset>
-
-        {{ form_widget(form._token) }}
-        <div>
-            <input class="button add" type="submit" value="{{ 'registration.submit'|trans }}" />
         </div>
+    </div>
+
+    <div style="display: none">
         {{ form_rest(form) }}
     </div>
-    {{ form_end(form) }}
-
-</form>
+{{ form_end(form) }}

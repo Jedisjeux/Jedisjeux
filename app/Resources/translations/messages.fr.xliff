@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2015-07-06T22:45:45Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+  <file date="2015-07-27T17:08:58Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -31,6 +31,12 @@
         <target state="new">Ajouter un Addon</target>
         <jms:reference-file line="103">JeuBundle/Controller/AddonController.php</jms:reference-file>
       </trans-unit>
+      <trans-unit id="7631b26ea80b1b601c313b15cc4e2ab03faedf30" resname="Avatar">
+        <source>Avatar</source>
+        <target state="new">Avatar</target>
+        <jms:reference-file line="29">UserBundle/Form/ProfileFormType.php</jms:reference-file>
+        <jms:reference-file line="20">UserBundle/Form/UserRegistrationType.php</jms:reference-file>
+      </trans-unit>
       <trans-unit id="19194bdf5e490fa161abfd18389c48bb967f34de" resname="Crédit">
         <source>Crédit</source>
         <target state="new">Crédit</target>
@@ -54,8 +60,14 @@
         <jms:reference-file line="126">PartieBundle/Controller/JoueurController.php</jms:reference-file>
         <jms:reference-file line="185">PartieBundle/Controller/PartieController.php</jms:reference-file>
         <jms:reference-file line="90">PartieBundle/Controller/PartieImageController.php</jms:reference-file>
-        <jms:reference-file line="99">UserBundle/Controller/UserController.php</jms:reference-file>
+        <jms:reference-file line="100">UserBundle/Controller/UserController.php</jms:reference-file>
         <jms:reference-file line="104">UserReviewBundle/Controller/UserReviewController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="8851f385b271ba2791c79f1db54ac797860b13a7" resname="Date de naissance">
+        <source>Date de naissance</source>
+        <target state="new">Date de naissance</target>
+        <jms:reference-file line="42">UserBundle/Form/ProfileFormType.php</jms:reference-file>
+        <jms:reference-file line="40">UserBundle/Form/UserRegistrationType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f6fdbe48dc54dd86f63097a03bd24094dedd713a" resname="Delete">
         <source>Delete</source>
@@ -80,7 +92,7 @@
         <target state="new">Enregistrer</target>
         <jms:reference-file line="166">PartieBundle/Controller/JoueurController.php</jms:reference-file>
         <jms:reference-file line="354">PartieBundle/Controller/PartieController.php</jms:reference-file>
-        <jms:reference-file line="196">UserBundle/Controller/UserController.php</jms:reference-file>
+        <jms:reference-file line="197">UserBundle/Controller/UserController.php</jms:reference-file>
         <jms:reference-file line="245">UserReviewBundle/Controller/UserReviewController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="e97e6c66c31a24689b87346ced46036ca72e3e60" resname="Mettre à jour">
@@ -111,8 +123,20 @@
       <trans-unit id="94e2f3ee14b92e2e675a8f6118d28738dbf5c6ba" resname="Mot de passe">
         <source>Mot de passe</source>
         <target state="new">Mot de passe</target>
-        <jms:reference-file line="29">UserBundle/Form/UserRegistrationType.php</jms:reference-file>
+        <jms:reference-file line="33">UserBundle/Form/UserRegistrationType.php</jms:reference-file>
         <jms:reference-file line="29">UserBundle/Form/UserType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="09875e47cbd0b2a6b8f4cb8bdfd77794657e043d" resname="Nom d'utilisateur">
+        <source>Nom d'utilisateur</source>
+        <target state="new">Nom d'utilisateur</target>
+        <jms:reference-file line="36">UserBundle/Form/ProfileFormType.php</jms:reference-file>
+        <jms:reference-file line="27">UserBundle/Form/UserRegistrationType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="aa245f5ffeac9f225e5e35e3e5b6586543d7643d" resname="Présentation">
+        <source>Présentation</source>
+        <target state="new">Présentation</target>
+        <jms:reference-file line="33">UserBundle/Form/ProfileFormType.php</jms:reference-file>
+        <jms:reference-file line="24">UserBundle/Form/UserRegistrationType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="feb9bfc15a6316f616944a6fa30d2bc7bacbe4b0" resname="STATUS_CHANGE_MESSAGE">
         <source>STATUS_CHANGE_MESSAGE</source>
@@ -133,7 +157,7 @@
         <source>Supprimer</source>
         <target state="new">Supprimer</target>
         <jms:reference-file line="316">PartieBundle/Controller/PartieController.php</jms:reference-file>
-        <jms:reference-file line="275">UserBundle/Controller/UserController.php</jms:reference-file>
+        <jms:reference-file line="276">UserBundle/Controller/UserController.php</jms:reference-file>
         <jms:reference-file line="184">UserReviewBundle/Controller/JeuNoteController.php</jms:reference-file>
         <jms:reference-file line="323">UserReviewBundle/Controller/UserReviewController.php</jms:reference-file>
       </trans-unit>
@@ -155,7 +179,7 @@
       <trans-unit id="bb27abfb1c8948d9723c07a754ae6d843eb0209e" resname="Vérification">
         <source>Vérification</source>
         <target state="new">Vérification</target>
-        <jms:reference-file line="30">UserBundle/Form/UserRegistrationType.php</jms:reference-file>
+        <jms:reference-file line="34">UserBundle/Form/UserRegistrationType.php</jms:reference-file>
         <jms:reference-file line="30">UserBundle/Form/UserType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="64c65374dbab6fe3762748196d9d3a9610e2e5a9" resname="label">
@@ -269,6 +293,7 @@
         <source>label.paid_at</source>
         <target>Payé le</target>
         <jms:reference-file line="25">compta/bill/index.html.twig</jms:reference-file>
+        <jms:reference-file line="17">compta/subscription/index.html.twig</jms:reference-file>
         <jms:reference-file line="45">ComptaBundle/Form/BillType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="a21d4a6956aaabc740f8e7d080df3b8944c584ac" resname="label.payed_at">
@@ -321,7 +346,6 @@
         <source>label.start_at</source>
         <target>Commence le</target>
         <jms:reference-file line="34">compta/customer/show.html.twig</jms:reference-file>
-        <jms:reference-file line="17">compta/subscription/index.html.twig</jms:reference-file>
         <jms:reference-file line="29">ComptaBundle/Form/SubscriptionType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="895a33857b12be70974c29157b5a2bf9769411da" resname="label.status">
@@ -354,7 +378,7 @@
       <trans-unit id="fe1d91e830d7ff406bc7dd20e9cbf61a836a9bb6" resname="label.waiting_for_payment">
         <source>label.waiting_for_payment</source>
         <target>En attente de paiement</target>
-        <jms:reference-file line="41">compta/bill/index.html.twig</jms:reference-file>
+        <jms:reference-file line="42">compta/bill/index.html.twig</jms:reference-file>
         <jms:reference-file line="10">views/macros/status.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5f1f415bd4d0ae72657804116138f5b8b5454724" resname="moins de 30 minutes">

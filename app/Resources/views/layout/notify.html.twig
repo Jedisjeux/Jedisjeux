@@ -3,3 +3,11 @@
     <a href="#" class="close" data-dismiss="alert">&times;</a>
     <span class="message-notify"></span>
 </div>
+
+{% for label, flashes in app.session.flashbag.all %}
+    {% for flash in flashes %}
+        <div class="alert alert-{{ label }}">
+            {{ flash }}
+        </div>
+    {% endfor %}
+{% endfor %}

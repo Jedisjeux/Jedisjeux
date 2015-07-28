@@ -68,12 +68,13 @@ default:
             filters:
                 tags: "@userLogin && ~@javascript"
 
-        userRegister:
+        userAccount:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
+                - JDJ\CoreBundle\Behat\UtilsContext
                 - JDJ\UserBundle\Behat\UserContext
             filters:
-                tags: "@userRegister && ~@javascript"
+                tags: "@userAccount && ~@javascript"
 
         userReview:
             contexts:
