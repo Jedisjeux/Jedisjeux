@@ -23,6 +23,7 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "knplabs/knp-menu": "2.0.*@dev",
         "knplabs/knp-menu-bundle": "2.0.*@dev",
+        "knplabs/knp-snappy-bundle": "dev-master",
         "stof/doctrine-extensions-bundle": "~1.1@dev",
         "white-october/pagerfanta-bundle": "dev-master",
         "friendsofsymfony/user-bundle": "~2.0@dev",
@@ -82,9 +83,6 @@
         "incenteev-parameters": [
             {
                 "file": "app/config/parameters.yml"
-            },
-            {
-                "file": "app/config/parameters_test.yml"
             }
         ],
         "branch-alias": {

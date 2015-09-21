@@ -40,8 +40,6 @@ security:
         main:
             pattern: ^/
             form_login:
-                success_handler: authentication_handler
-                failure_handler: authentication_handler
                 provider: fos_userbundle
                 remember_me: true
                 use_referer: true
@@ -55,7 +53,7 @@ security:
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
         #seul les membres du bureau ont accès à la partie compta
-        #- { path: ^/compta/, role: ROLE_OFFICE }
+        - { path: ^/compta/, role: ROLE_OFFICE }
         #edition d'un avis
         - { path: ^/avis/\d+/edit, role: ROLE_USER }
         - { path: ^/jeu/\d+/avis/new, role: ROLE_USER }

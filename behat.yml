@@ -136,12 +136,13 @@ default:
             filters:
                 tags: "@comptaPaymentMethod && ~@javascript"
 
-        comptaCustomer:
+        customers:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
+                - JDJ\ComptaBundle\Behat\CustomerContext
                 - JDJ\UserBundle\Behat\UserContext
             filters:
-                tags: "@comptaCustomer && ~@javascript"
+                tags: "@customers"
 
         comptaBookEntry:
             contexts:

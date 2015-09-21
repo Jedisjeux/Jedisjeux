@@ -10,6 +10,7 @@ namespace JDJ\UserBundle\Behat;
 
 
 use Behat\Gherkin\Node\TableNode;
+use Faker\Factory;
 use FOS\UserBundle\Doctrine\UserManager;
 use JDJ\CoreBundle\Behat\DefaultContext;
 use JDJ\UserBundle\Entity\User;
@@ -17,12 +18,26 @@ use JDJ\UserBundle\Entity\User;
 class UserContext extends DefaultContext
 {
     /**
+     * @Given /^I am logged in as user "([^""]*)" with password "([^""]*)"$/
+     */
+    public function iAmLoggedInUserWithPassword($username, $password)
+    {
+        $this->visitPath("/login");
+        $this->fillField("Nom d'utilisateur", $username);
+        $this->fillField('Mot de passe', $password);
+        $this->pressButton('Je me connecte');
+    }
+
+    /**
      * @Given /^there are users:$/
      * @Given /^there are following users:$/
      * @Given /^the following users exist:$/
      * @Given /^il y a les utilisateurs suivants:$/
      */
-    public function thereAreUsers(TableNode $table){
+    public function thereAreUsers(TableNode $table)
+    {
+        // use the factory to create a Faker\Generator instance
+        $faker = Factory::create();
 
         foreach ($table->getHash() as $data) {
 
@@ -32,20 +47,17 @@ class UserContext extends DefaultContext
             /** @var User $user */
             $user = $userManager->createUser();
             $user
-                ->setUsername($data['username'])
-                ->setEmail($data['email'])
-                ->setPresentation($data['presentation'])
-                ->setDateNaissance(new \DateTime($data['dateNaissance']))
-                ->setPlainPassword($data['password'])
-                ->setEnabled(("yes" === $data['enabled']) ? 1 : 0)
-
+                ->setUsername(isset($data['username']) ? $data['username'] : $faker->userName)
+                ->setEmail(isset($data['email']) ? $data['email'] : $faker->email)
+                ->setPresentation(isset($data['presentation']) ? $data['presentation'] : $faker->text())
+                ->setDateNaissance(isset($data['dateNaissance']) ? \DateTime::createFromFormat('Y-m-d', $data['dateNaissance']) : \DateTime::createFromFormat('Y-m-d', $faker->date()))
+                ->setPlainPassword(isset($data['password']) ? $data['password'] : $faker->password)
+                ->setEnabled(isset($data['enabled']) ? $data['enabled'] : true)
             ;
 
             $userManager->updateUser($user);
         }
     }
-
-
 
     /**
      * @Given /^user "([^""]*)" has following roles:$/

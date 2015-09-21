@@ -20,7 +20,19 @@ services:
   app.service.user:
           class: JDJ\UserBundle\Service\UserService
 
-  authentication_handler:
-        class: JDJ\UserBundle\Service\AuthenticationHandler
-        arguments:
-          - @router
+#  authentication_handler:
+#        class: JDJ\UserBundle\Service\AuthenticationHandler
+#        arguments:
+#          - @router
+
+  security.authentication.success_handler:
+    class:  JDJ\UserBundle\Handler\AuthenticationSuccessHandler
+    arguments: ["@security.http_utils", {}]
+    tags:
+      - { name: 'monolog.logger', channel: 'security' }
+
+  security.authentication.failure_handler:
+    class:  JDJ\UserBundle\Handler\AuthenticationFailureHandler
+    arguments:  ["@http_kernel", "@security.http_utils", {}, "@logger"]
+    tags:
+        - { name: 'monolog.logger', channel: 'security' }
