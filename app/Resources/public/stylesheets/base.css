@@ -1,0 +1,96 @@
+/* line 2, ../sass/base.scss */
+.jeu-list .img-container {
+  height: 148px;
+  overflow: hidden;
+}
+
+/* line 8, ../sass/base.scss */
+.intro {
+  font-style: italic;
+  font-size: 1.3em;
+}
+
+/* line 13, ../sass/base.scss */
+.thumbnail-jeu {
+  padding-left: 0;
+  padding-top: 8px;
+}
+
+/* line 18, ../sass/base.scss */
+.title-button {
+  padding-top: 7px;
+}
+
+/* line 24, ../sass/base.scss */
+.sidebar .score-list-content {
+  display: block;
+}
+/* line 27, ../sass/base.scss */
+.sidebar .score-list-content ul {
+  padding: 0px;
+  margin: 0px;
+  list-style-type: none;
+}
+/* line 32, ../sass/base.scss */
+.sidebar .score-list-content ul img, .sidebar .score-list-content ul .anonymous-user {
+  max-width: 60px;
+  float: left;
+  margin-right: 10px;
+  margin-top: 3px;
+}
+/* line 42, ../sass/base.scss */
+.sidebar .anonymous-user {
+  margin-right: 10px;
+  margin-top: 3px;
+  float: left;
+  width: 60px;
+  height: 60px;
+  display: block;
+  vertical-align: middle;
+  text-align: center;
+}
+/* line 52, ../sass/base.scss */
+.sidebar .anonymous-user .fa {
+  font-size: 50px;
+}
+
+/* line 60, ../sass/base.scss */
+.comment-author-image .anonymous-user {
+  margin-right: 10px;
+  margin-top: 3px;
+  float: left;
+  width: 60px;
+  height: 60px;
+  display: block;
+  vertical-align: middle;
+  text-align: center;
+}
+/* line 70, ../sass/base.scss */
+.comment-author-image .anonymous-user .fa {
+  font-size: 50px;
+}
+
+/* line 77, ../sass/base.scss */
+.blog-meta img {
+  float: left;
+  width: 32px;
+}
+
+/* line 83, ../sass/base.scss */
+.bloc-login {
+  width: 430px !important;
+}
+
+/* line 87, ../sass/base.scss */
+ul.ui-autocomplete {
+  padding: 0px;
+  margin: 0px;
+  list-style-type: none;
+}
+/* line 92, ../sass/base.scss */
+ul.ui-autocomplete img, ul.ui-autocomplete .anonymous-user {
+  max-width: 60px;
+  float: left;
+  margin-right: 10px;
+  margin-top: 3px;
+}
