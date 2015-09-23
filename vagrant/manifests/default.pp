@@ -35,7 +35,7 @@ Class['::apt::update'] -> Package <|
 
 apt::key { '4F4EA0AAE5267A6C': }
 
-apt::ppa { 'ppa:ondrej/php5-oldstable':
+apt::ppa { 'ppa:ondrej/php5-5.6':
   require => Apt::Key['4F4EA0AAE5267A6C']
 }
 
@@ -103,6 +103,10 @@ php::pecl::module { 'mongo':
   use_package => "no",
 }
 
+php::pecl::module { 'xdebug':
+  use_package => "no",
+}
+
 class { 'composer':
   command_name => 'composer',
   target_dir   => '/usr/local/bin',
@@ -145,11 +149,22 @@ database{ "${db_name}_test":
   require => Class['mysql::server'],
 }
 
+
+file { '/etc/php5/mods-available/xdebug.ini':
+  ensure  => file,
+  content  => template('xdebug/conf.ini'),
+  owner   => 'vagrant',
+  group   => 'vagrant',
+}
+
+file_line { 'bind_address':
+  path  => '/etc/mysql/my.cnf',
+  line  => 'bind_address = 0.0.0.0',
+  match => '^bind_address \= .*',
+}
+
+php::module { 'php5-xdebug': }
+
 class { 'elasticsearch':
-  ensure => 'present',
-  package_url => 'https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.3.4.deb'
-} ->
-service { "elasticsearch-service":
-  name => 'elasticsearch',
-  ensure => running
+  ensure => 'present'
 }
