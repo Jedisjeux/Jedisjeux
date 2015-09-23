@@ -29,73 +29,30 @@ class {'apt':
 }
 
 Class['::apt::update'] -> Package <|
-    title != 'python-software-properties'
-and title != 'software-properties-common'
+  title != 'python-software-properties'
+  and title != 'software-properties-common'
 |>
 
+apt::key { '4F4EA0AAE5267A6C': }
+
+apt::ppa { 'ppa:ondrej/php5-oldstable':
+  require => Apt::Key['4F4EA0AAE5267A6C']
+}
+
 package { [
-    'build-essential',
-    'vim',
-    'curl',
-    'git-core',
-    'mc'
-  ]:
+  'build-essential',
+  'vim',
+  'curl',
+  'git-core',
+  'mc',
+  'openjdk-7-jre-headless'
+]:
   ensure  => 'installed',
 }
 
 class { 'apache': }
 
-#overload apache::dotconf to use right conf directory and add symlink
-
-define apache::dotconf (
-  $source  = '' ,
-  $content = '' ,
-  $ensure  = present ) {
-
-  $manage_file_source = $source ? {
-    ''        => undef,
-    default   => $source,
-  }
-
-  $manage_file_content = $content ? {
-    ''        => undef,
-    default   => $content,
-  }
-
-  $conf_path = $::operatingsystemrelease ? {
-    /(?i:14.04)/ => "${apache::config_dir}/conf-available/${name}.conf",
-    default      => "${apache::config_dir}/conf.d/${name}.conf",
-  }
-
-  file { "Apache_${name}.conf":
-    ensure  => $ensure,
-    path    => "${apache::config_dir}/conf-available/${name}.conf",
-    mode    => $apache::config_file_mode,
-    owner   => $apache::config_file_owner,
-    group   => $apache::config_file_group,
-    require => Package['apache'],
-    notify  => $apache::manage_service_autorestart,
-    source  => $manage_file_source,
-    content => $manage_file_content,
-    audit   => $apache::manage_audit,
-  }
-
-  if $::operatingsystemrelease == 14.04 {
-    $exec_a2enmod_subscribe = $install_package ? {
-      false   => undef,
-      default => Package["ApacheModule_${name}"]
-    }
-    exec { "/usr/sbin/a2enconf ${name}":
-      unless    => "/bin/sh -c '[ -L ${apache::config_dir}/conf-enabled/${name}.conf ] && [ ${apache::config_dir}/conf-enabled/${name}.conf -ef ${apache::config_dir}/conf-available/${name}.conf ]'",
-      notify    => $manage_service_autorestart,
-      require   => Package['apache'],
-      subscribe => $exec_a2enconf_subscribe,
-    }
-  }
-
-}
-
-apache::dotconf { 'jdj':
+apache::dotconf { 'custom':
   content => 'EnableSendfile Off',
 }
 
@@ -146,10 +103,6 @@ php::pecl::module { 'mongo':
   use_package => "no",
 }
 
-#php::pecl::module { 'amqp':
-#  use_package => 'false'
-#}
-
 class { 'composer':
   command_name => 'composer',
   target_dir   => '/usr/local/bin',
@@ -161,7 +114,7 @@ class { 'composer':
 php::ini { 'php_ini_configuration':
   value   => [
     'extension=mongo.so',
-    'date.timezone = "Europe/Paris"',
+    'date.timezone = "UTC"',
     'display_errors = On',
     'error_reporting = -1',
     'short_open_tag = 0',
@@ -170,66 +123,23 @@ php::ini { 'php_ini_configuration':
   require => Class['php']
 }
 
-class ruby_compass {
-    package { 'ruby-dev':
-        ensure => 'installed',
-    }
-    # Ensure we can install gems
-    package { ["ruby"]:
-        ensure => 'installed'
-    }
-    # Install gems
-    package { ['sass']:
-        ensure => '3.2.13',
-        provider => 'gem',
-        require => Package['ruby']
-    }~>
-    package { ['compass']:
-        ensure => '0.12.2',
-        provider => 'gem',
-        require => Package['ruby']
-    }
-}
-
-include ruby_compass
-
-# Start compass watch at each boot
-file { '/etc/init/compass.conf':
-  ensure => 'file',
-  source => '/vagrant/puppet/init/compass.conf',
-  owner => 'root',
-  group => 'root',
-}
-
-service { 'compass':
-  ensure => 'running',
-  enable => true,
-  require => File['/etc/init/compass.conf'],
-}
-
 class { 'mysql::server':
-  override_options => { 'root_password' => 'jedisjeux', },
+  override_options => { 'root_password' => '', },
 }
 
-mysql_database{ "${db_name}":
+database{ "${db_name}":
   ensure  => present,
   charset => 'utf8',
   require => Class['mysql::server'],
 }
 
-mysql_database{ "${db_name}_dev":
+database{ "${db_name}_dev":
   ensure  => present,
   charset => 'utf8',
   require => Class['mysql::server'],
 }
 
-mysql_database{ "${db_name}_test":
-  ensure  => present,
-  charset => 'utf8',
-  require => Class['mysql::server'],
-}
-
-mysql_database{ "jedisjeux":
+database{ "${db_name}_test":
   ensure  => present,
   charset => 'utf8',
   require => Class['mysql::server'],
@@ -243,8 +153,3 @@ service { "elasticsearch-service":
   name => 'elasticsearch',
   ensure => running
 }
-
-# Install Oracle Java and Tomcat
-
-include java
-include '::rabbitmq'

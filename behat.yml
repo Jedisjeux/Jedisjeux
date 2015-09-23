@@ -129,12 +129,12 @@ default:
             filters:
                 tags: "@comptaProduct && ~@javascript"
 
-        comptaPaymentMethod:
+        paymentMethods:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - JDJ\UserBundle\Behat\UserContext
             filters:
-                tags: "@comptaPaymentMethod && ~@javascript"
+                tags: "@paymentMethods"
 
         customers:
             contexts:
