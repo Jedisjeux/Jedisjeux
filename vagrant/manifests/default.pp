@@ -154,4 +154,11 @@ database{ "${db_name}_test":
   require => Class['mysql::server'],
 }
 
+# mysql conf
+file_line { 'bind_address':
+  path  => '/etc/mysql/my.cnf',
+  line  => 'bind_address = 0.0.0.0',
+  match => '^bind_address \= .*',
+}
+
 php::module { 'php5-xdebug': }
