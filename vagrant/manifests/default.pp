@@ -50,6 +50,11 @@ package { [
   ensure  => 'installed',
 }
 
+package { ['sass', 'compass']:
+  ensure => 'installed',
+  provider => 'gem',
+}
+
 class { 'apache': }
 
 apache::dotconf { 'custom':
@@ -149,22 +154,4 @@ database{ "${db_name}_test":
   require => Class['mysql::server'],
 }
 
-
-file { '/etc/php5/mods-available/xdebug.ini':
-  ensure  => file,
-  content  => template('xdebug/conf.ini'),
-  owner   => 'vagrant',
-  group   => 'vagrant',
-}
-
-file_line { 'bind_address':
-  path  => '/etc/mysql/my.cnf',
-  line  => 'bind_address = 0.0.0.0',
-  match => '^bind_address \= .*',
-}
-
 php::module { 'php5-xdebug': }
-
-class { 'elasticsearch':
-  ensure => 'present'
-}
