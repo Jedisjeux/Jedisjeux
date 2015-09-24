@@ -45,7 +45,8 @@ package { [
   'curl',
   'git-core',
   'mc',
-  'openjdk-7-jre-headless'
+  'openjdk-7-jre-headless',
+  'dpkg'
 ]:
   ensure  => 'installed',
 }
@@ -133,32 +134,39 @@ php::ini { 'php_ini_configuration':
 }
 
 class { 'mysql::server':
-  override_options => { 'root_password' => '', },
-}
-
-database{ "${db_name}":
-  ensure  => present,
-  charset => 'utf8',
-  require => Class['mysql::server'],
-}
-
-database{ "${db_name}_dev":
-  ensure  => present,
-  charset => 'utf8',
-  require => Class['mysql::server'],
-}
-
-database{ "${db_name}_test":
-  ensure  => present,
-  charset => 'utf8',
-  require => Class['mysql::server'],
-}
-
-# mysql conf
-file_line { 'bind_address':
-  path  => '/etc/mysql/my.cnf',
-  line  => 'bind_address = 0.0.0.0',
-  match => '^bind_address \= .*',
+  override_options => {
+    'root_password' => '',
+    'mysqld' => {
+      'bind_address' => '0.0.0.0'} #Allow remote connections
+  },
+  grants => {
+    'root@%/*.*' => {
+      ensure     => 'present',
+      options    => ['GRANT'],
+      privileges => ['all'],
+      table      => '*.*',
+      user       => 'root@%',
+    },
+  },
+  databases   => {
+    "${db_name}"  => {
+      ensure  => 'present',
+      charset => 'utf8',
+    },
+    "${db_name}_dev"  => {
+      ensure  => 'present',
+      charset => 'utf8',
+    },
+    "${db_name}_test"  => {
+      ensure  => 'present',
+      charset => 'utf8',
+    },
+  }
 }
 
 php::module { 'php5-xdebug': }
+
+exec { "InstallElacticSearch" :
+  command => "wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.3.4.deb; dpkg -i elasticsearch-1.3.4.deb; service elasticsearch start",
+  require => [ Package["dpkg"] ],
+}

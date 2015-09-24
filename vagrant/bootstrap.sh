@@ -13,6 +13,6 @@ puppet module install puppetlabs/mysql --version 2.1.0 --force
 puppet module install willdurand/composer --version 1.1.0 --force
 puppet module install maestrodev/wget --version 1.2.3 --force
 puppet module install ceritsc/yum --version 0.9.6 --force
-puppet module install elasticsearch/elasticsearch  --force
 puppet module install willdurand/nodejs --version 1.8.5 --force
-puppet module install puppetlabs/ruby --version 0.4.0 --force
+#puppet module install puppetlabs/ruby --version 0.4.0 --force
+puppet module install elasticsearch/elasticsearch --version 0.9.9 --force
