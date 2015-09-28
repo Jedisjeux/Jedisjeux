@@ -122,16 +122,18 @@ default:
              filters:
                  tags: "@userReview && ~@javascript"
 
-        comptaProduct:
+        products:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
+                - JDJ\ComptaBundle\Behat\ProductContext
                 - JDJ\UserBundle\Behat\UserContext
             filters:
-                tags: "@comptaProduct && ~@javascript"
+                tags: "@products"
 
         paymentMethods:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
+                - JDJ\ComptaBundle\Behat\PaymentMethodContext
                 - JDJ\UserBundle\Behat\UserContext
             filters:
                 tags: "@paymentMethods"
@@ -140,6 +142,7 @@ default:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - JDJ\ComptaBundle\Behat\CustomerContext
+                - JDJ\CoreBundle\Behat\UtilsContext
                 - JDJ\UserBundle\Behat\UserContext
             filters:
                 tags: "@customers"

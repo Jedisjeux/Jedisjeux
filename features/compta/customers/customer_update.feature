@@ -1,5 +1,5 @@
 @customers
-Feature: Customer modification
+Feature: Customer edition
   In order to manage customers
   As a user from office
   I need to be able to update a customer
@@ -20,7 +20,7 @@ Feature: Customer modification
     And I follow "Modifier"
     When I fill in the following:
       | Société | Ludibay |
-    And I press "Modifier"
+    And I press "Mettre à jour"
     Then I should be on "/compta/client/"
     And I should see "Ludibay"
     But I should not see "Philibert"

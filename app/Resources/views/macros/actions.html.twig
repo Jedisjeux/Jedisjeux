@@ -1,4 +1,4 @@
-{% macro create() %}
+{% macro create(cancel_url) %}
 
     {% import _self as action %}
 
@@ -8,7 +8,7 @@
     </div>
 {% endmacro %}
 
-{% macro update() %}
+{% macro update(cancel_url) %}
 
     {% import _self as action %}
 
@@ -29,7 +29,7 @@
 {% macro updateButton() %}
     <button type="submit"
             class="btn btn-primary">
-        <span class="icon-save"></span>
+        <span class="glyphicon glyphicon-save"></span>
         {{ 'label.save_changes'|trans }}
     </button>
 {% endmacro %}

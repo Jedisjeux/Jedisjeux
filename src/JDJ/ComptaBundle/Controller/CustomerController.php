@@ -123,8 +123,6 @@ class CustomerController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Créer'));
-
         return $form;
     }
 
@@ -191,8 +189,6 @@ class CustomerController extends Controller
             'action' => $this->generateUrl('compta_customer_update', array('customer' => $customer->getId())),
             'method' => 'PUT',
         ));
-
-        $form->add('submit', 'submit', array('label' => 'Modifier'));
 
         return $form;
     }

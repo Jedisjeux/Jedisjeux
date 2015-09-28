@@ -39,9 +39,9 @@ class AppKernel extends Kernel
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new Bmatzner\FontAwesomeBundle\BmatznerFontAwesomeBundle(),
             new JMS\AopBundle\JMSAopBundle(),
+            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
 
             //JDJ
-            new JDJ\FoundationBundle\JDJFoundationBundle(),
             new JDJ\WebBundle\JDJWebBundle(),
             new JDJ\ComptaBundle\JDJComptaBundle(),
             new JDJ\JeuBundle\JDJJeuBundle(),

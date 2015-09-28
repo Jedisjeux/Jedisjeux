@@ -6,7 +6,7 @@
         <h3><span>Modifier une méthode de paiement</span></h3>
     </div>
     {{ form_start(form) }}
-    {% include 'payment-method/_form.html.twig' %}
+    {% include 'compta/payment-method/_form.html.twig' %}
     {{ action.update() }}
     {{ form_end(form) }}
 {% endblock container %}

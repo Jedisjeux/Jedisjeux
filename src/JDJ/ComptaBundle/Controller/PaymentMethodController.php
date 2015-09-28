@@ -108,8 +108,6 @@ class PaymentMethodController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Créer'));
-
         return $form;
     }
 
@@ -176,8 +174,6 @@ class PaymentMethodController extends Controller
             'action' => $this->generateUrl('compta_payment_method_update', array('paymentMethod' => $paymentMethod->getId())),
             'method' => 'PUT',
         ));
-
-        $form->add('submit', 'submit', array('label' => 'Modifier'));
 
         return $form;
     }

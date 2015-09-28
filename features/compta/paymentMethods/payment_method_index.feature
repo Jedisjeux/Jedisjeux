@@ -1,8 +1,8 @@
 @paymentMethods
-Feature: Payment creation
+Feature: Payment list
   In order to manage payment methods
   As a user from office
-  I need to be able to create a payment method
+  I need to be able to view list of payment methods
 
   Background:
     Given there are following users:
@@ -12,14 +12,13 @@ Feature: Payment creation
       | ROLE_OFFICE |
     And I am logged in as user "loic_425" with password "password"
 
-  Scenario: Create a payment method
-    When I am on "/compta/mode-paiement/"
-    And I follow "Créer un mode de paiement"
-    And I should be on "/compta/mode-paiement/new"
-    When I fill in the following:
-      | Nom | chèque |
-    And I press "Créer"
+  Scenario: List payment methods
+    Given there are payment methods:
+      | name   |
+      | chèque |
+      | carte bancaire |
+    And I am on "/compta/mode-paiement/"
+    When I press "Supprimer"
     Then I should be on "/compta/mode-paiement/"
     And I should see "chèque"
-    And I should see "Modifier"
-    And I should see "Supprimer"
+    And I should see "carte bancaire"

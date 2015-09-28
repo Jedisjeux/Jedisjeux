@@ -20,7 +20,7 @@
 !/web/uploads/avatar/.gitkeep
 !/web/uploads/img/.gitkeep
 /web/media/*
-/app/Resources/public/bower_components/*
+/web/assets/bower_components/*
 /web/css/compiled/
 /web/js/
 

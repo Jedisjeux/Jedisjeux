@@ -6,7 +6,7 @@
         <h3><span>Modifier un client</span></h3>
     </div>
     {{ form_start(form) }}
-    {% include 'customer/_form.html.twig' %}
-    {{ action.update() }}
+    {% include 'compta/customer/_form.html.twig' %}
+    {{ action.update(path('compta_customer')) }}
     {{ form_end(form) }}
 {% endblock container %}

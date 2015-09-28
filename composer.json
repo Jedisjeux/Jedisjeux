@@ -1,8 +1,15 @@
 {
-    "name": "symfony/framework-standard-edition",
-    "license": "MIT",
+    "name": "Jedisjeux",
     "type": "project",
-    "description": "The \"Symfony Standard Edition\" distribution",
+    "description": "Jedisjeux - Game Reviews",
+    "authors": [
+        {
+            "name":     "Loïc Frémont"
+        },
+        {
+            "name":     "Sebastien Bienvenu"
+        }
+    ],
     "autoload": {
         "psr-0": { "": "src/" }
     },
@@ -54,7 +61,8 @@
         "symfony/var-dumper": "~2.6",
         "jms/translation-bundle": "dev-master",
         "jms/di-extra-bundle": "dev-master",
-        "bmatzner/fontawesome-bundle": "^4.4"
+        "bmatzner/fontawesome-bundle": "^4.4",
+        "sylius/resource-bundle": "^0.15.0"
     },
     "scripts": {
         "post-install-cmd": [
