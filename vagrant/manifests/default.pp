@@ -51,9 +51,23 @@ package { [
   ensure  => 'installed',
 }
 
+class { 'ruby':
+  gems_version  => 'latest'
+}
+
+class { 'nodejs':
+  version => 'v0.10.25',
+}
+
 package { ['sass', 'compass']:
   ensure => 'installed',
   provider => 'gem',
+}
+
+package { ['bower']:
+  ensure => 'installed',
+  provider => 'npm',
+  require  => Class['nodejs'],
 }
 
 class { 'apache': }
@@ -158,6 +172,14 @@ class { 'mysql::server':
       charset => 'utf8',
     },
     "${db_name}_test"  => {
+      ensure  => 'present',
+      charset => 'utf8',
+    },
+    "jedisjeux"  => {
+      ensure  => 'present',
+      charset => 'utf8',
+    },
+    "zf_jedisjeux_test"  => {
       ensure  => 'present',
       charset => 'utf8',
     },

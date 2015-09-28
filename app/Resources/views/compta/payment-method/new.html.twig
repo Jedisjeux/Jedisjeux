@@ -1,8 +1,12 @@
-{% extends "::base.html.twig" %}
+{% extends 'base.html.twig' %}
+{% import 'macros/actions.html.twig' as action %}
 
 {% block container %}
     <div class="block-heading-two">
         <h3><span>Créer une méthode de paiement</span></h3>
     </div>
-    {{ form(form) }}
+    {{ form_start(form) }}
+    {% include 'payment-method/_form.html.twig' %}
+    {{ action.create() }}
+    {{ form_end(form) }}
 {% endblock container %}

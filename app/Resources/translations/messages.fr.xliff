@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2015-07-30T17:28:17Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+  <file date="2015-09-28T00:16:41Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -203,6 +203,7 @@
       <trans-unit id="4dc1c435d4fd7d5d81029e66e75d7f9bf920be3e" resname="label.cancel">
         <source>label.cancel</source>
         <target>Annuler</target>
+        <jms:reference-file line="41">views/macros/actions.html.twig</jms:reference-file>
         <jms:reference-file line="14">views/macros/modal.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="27849b72fd3cdce303918d5504d7c08168eafd8e" resname="label.city">
@@ -212,8 +213,14 @@
       </trans-unit>
       <trans-unit id="37506e48a34086520d4e6a4b71e4032e8a162c89" resname="label.company">
         <source>label.company</source>
-        <target state="new">label.company</target>
+        <target>Société</target>
         <jms:reference-file line="22">compta/customer/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="17ac1e4a2a3435442a0841898d9a519162ac2533" resname="label.create">
+        <source>label.create</source>
+        <target>Créer</target>
+        <jms:reference-file line="25">views/macros/actions.html.twig</jms:reference-file>
+        <jms:reference-file line="26">views/macros/buttons.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="dee380b06b03fdb98a963ac735c0ddfc2f59f2f1" resname="label.created_at">
         <source>label.created_at</source>
@@ -255,6 +262,17 @@
         <source>label.debitedAt</source>
         <target>Débité le</target>
         <jms:reference-file line="46">ComptaBundle/Form/BookEntryType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="c500bdec2fd007fbd60019bbe93b39f0c063f1a3" resname="label.delete">
+        <source>label.delete</source>
+        <target>Supprimer</target>
+        <jms:reference-file line="45">views/macros/buttons.html.twig</jms:reference-file>
+        <jms:reference-file line="51">views/macros/buttons.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6ecd9b247905c9872f163d3e800b7106ebd97055" resname="label.edit">
+        <source>label.edit</source>
+        <target>Modifier</target>
+        <jms:reference-file line="36">views/macros/buttons.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="fc8413fdfd53e23e0f6ad278406aa827b4548642" resname="label.email">
         <source>label.email</source>
@@ -336,6 +354,16 @@
         <source>label.save</source>
         <target>Sauvegarder</target>
         <jms:reference-file line="15">views/macros/modal.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="a68e78b5b1b1864fc7a567608094903ba37cb296" resname="label.save_changes">
+        <source>label.save_changes</source>
+        <target state="new">label.save_changes</target>
+        <jms:reference-file line="33">views/macros/actions.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="2376735bcd735a64cb1fe17de70c6696da69d6e6" resname="label.show">
+        <source>label.show</source>
+        <target>Détails</target>
+        <jms:reference-file line="16">views/macros/buttons.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="3736a56466cf04431ff864fa708af795a8fd3668" resname="label.society">
         <source>label.society</source>

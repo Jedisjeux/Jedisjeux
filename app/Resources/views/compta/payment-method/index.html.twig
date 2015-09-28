@@ -1,14 +1,12 @@
-{% extends "::base.html.twig" %}
+{% extends 'base.html.twig' %}
+{% import 'macros/buttons.html.twig' as button %}
 
 {% block container %}
 
     <div class="block-heading-two">
         <ul class="list-inline pull-right">
             <li>
-                <a class="btn btn-primary" href="{{ path('compta_payment_method_new') }}">
-                    <span class="glyphicon glyphicon-plus-sign"></span>
-                    Créer un mode de paiement
-                </a>
+                {{ button.create(path('compta_payment_method_new'), 'Créer un mode de paiement') }}
             </li>
         </ul>
         <h3><span>Liste des modes de paiement</span></h3>
@@ -27,16 +25,10 @@
                 <td class="text-right">
                     <ul class="list-inline">
                         <li>
-                            <a class="btn btn-primary" href="{{ path('compta_payment_method_edit', { 'paymentMethod': paymentMethod.id }) }}">
-                                <span class="glyphicon glyphicon-pencil"></span> Modifier
-                            </a>
+                            {{ button.edit(path('compta_payment_method_edit', { 'paymentMethod': paymentMethod.id })) }}
                         </li>
                         <li>
-                            {{ form_start(deleteForms[paymentMethod.id]) }}
-                            <button type="submit" class="btn btn-danger">
-                                <span class="glyphicon glyphicon-trash"></span> Supprimer
-                            </button>
-                            {{ form_end(deleteForms[paymentMethod.id]) }}
+                            {{ button.delete(path('compta_payment_method_delete', { 'paymentMethod': paymentMethod.id })) }}
                         </li>
                     </ul>
                 </td>

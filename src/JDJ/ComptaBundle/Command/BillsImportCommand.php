@@ -99,9 +99,11 @@ EOM;
                 ), array('id' => $product->getId()));
 
                 $this->getDatabaseConnection()->update('ext_log_entries', array(
-                    "object_class" => 'JDJ\ComptaBundle\Entity\Address',
-                    "object_id" => $data['idProduit'],
-                ), array('id' => $product->getId()));
+                    'object_id' => $data['idProduit'],
+                ), array(
+                    'object_id' => $product->getId(),
+                    'object_class' => 'JDJ\ComptaBundle\Entity\Product',
+                ));
 
                 $product->setId($data['idProduit']);
 
@@ -114,6 +116,8 @@ EOM;
                     ->setPrice($data['prixUnitaire']);
                 $this->getEntityManager()->flush();
             }
+
+            var_dump($product->getId());
 
             $billProduct = new BillProduct();
             $billProduct

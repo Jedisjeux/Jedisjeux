@@ -37,6 +37,7 @@ class AppKernel extends Kernel
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new JMS\TranslationBundle\JMSTranslationBundle(),
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
+            new Bmatzner\FontAwesomeBundle\BmatznerFontAwesomeBundle(),
             new JMS\AopBundle\JMSAopBundle(),
 
             //JDJ

@@ -177,7 +177,7 @@ default:
                     selenium2: ~
             browser_name: firefox
             show_auto:    false
-            base_url: http://jdj.dev:8090/app_test.php/
+            base_url: http://jdj.dev/app_test.php/
         Behat\Symfony2Extension: ~
 
 firefox:
@@ -188,7 +188,7 @@ firefox:
                      selenium2: ~
              browser_name: firefox
              show_auto:    false
-             base_url: http://jdj.dev:8090/app_test.php/
+             base_url: http://jdj.dev/app_test.php/
          Behat\Symfony2Extension: ~
 
 chrome:
@@ -199,7 +199,7 @@ chrome:
                      selenium2: ~
              browser_name: googlechrome
              show_auto:    false
-             base_url: http://jdj.dev:8090/app_test.php/
+             base_url: http://jdj.dev/app_test.php/
          Behat\Symfony2Extension: ~
 
 ie:
@@ -210,5 +210,5 @@ ie:
                      selenium2: ~
              browser_name: ie
              show_auto:    false
-             base_url: http://jdj.dev:8090/app_test.php/
+             base_url: http://jdj.dev/app_test.php/
          Behat\Symfony2Extension: ~
