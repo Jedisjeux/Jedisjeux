@@ -147,14 +147,14 @@ default:
             filters:
                 tags: "@customers"
 
-        comptaBookEntry:
+        bookEntries:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - JDJ\UserBundle\Behat\UserContext
-                - JDJ\ComptaBundle\Behat\ModeReglementContext
-                - JDJ\ComptaBundle\Behat\SensContext
+                - JDJ\ComptaBundle\Behat\PaymentMethodContext
+                - JDJ\ComptaBundle\Behat\BookEntryContext
             filters:
-                tags: "@comptaBookEntry && ~@javascript"
+                tags: "@bookEntries"
 
         comptaSubscription:
             contexts:
