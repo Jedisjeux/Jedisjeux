@@ -1,6 +1,8 @@
 $(function() {
     // Document is ready
 
+    "use strict";
+
     if ($("#articleEditing").length > 0) {
 
         var blocks = [];

@@ -62,6 +62,7 @@ class { 'nodejs':
 package { ['sass', 'compass']:
   ensure => 'installed',
   provider => 'gem',
+  require  => Class['ruby'],
 }
 
 package { ['bower']:
@@ -119,10 +120,6 @@ php::pear::module { 'PHPUnit':
   require => Class['php::pear']
 }
 
-php::pecl::module { 'mongo':
-  use_package => "no",
-}
-
 php::pecl::module { 'xdebug':
   use_package => "no",
 }
@@ -137,7 +134,6 @@ class { 'composer':
 
 php::ini { 'php_ini_configuration':
   value   => [
-    'extension=mongo.so',
     'date.timezone = "UTC"',
     'display_errors = On',
     'error_reporting = -1',

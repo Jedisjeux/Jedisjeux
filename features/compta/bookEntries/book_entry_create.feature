@@ -19,11 +19,11 @@ Feature: Book entry creation
     Given I am on "/compta/ecriture/"
     And I follow "Créer une écriture comptable"
     When I fill in the following:
-      | Libellé       | remboursement blue |
-      | Prix          | 20.34              |
-#      | Date ecriture | 2015-03-21         |
+      | Libellé | remboursement blue |
+      | Montant    | 20.34              |
+      | Date    | 2015-03-21         |
     And I select "chèque" from "Moyen de paiement"
-    And I select "débit" from "Sens"
+    And I select "débité" from "Etat"
     And I press "Créer"
     Then I should be on "/compta/ecriture/"
     And I should see "remboursement blue"

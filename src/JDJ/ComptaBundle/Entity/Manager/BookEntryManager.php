@@ -71,7 +71,7 @@ class BookEntryManager
 
         $bookEntry
             ->setPrice($this->billManager->getTotalPrice($bill))
-            ->setCreditedAt($bill->getPaidAt())
+            ->setActiveAt($bill->getPaidAt())
             ->setLabel('Paiement facture ' . $bill->getCustomer())
             ->setPaymentMethod($bill->getPaymentMethod());
 

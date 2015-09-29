@@ -63,9 +63,8 @@ EOM;
                 ->setLabel($data['libelle'])
                 ->setPrice($data['montant'])
                 ->setPaymentMethod($paymentMethod)
-                ->setCredit($data['sens'] === 'credit' ? true : false)
-                ->setCreditedAt($data['sens'] === 'credit' ? \DateTime::createFromFormat('Y-m-d H:i:s', $data['dateCreation']) : null)
-                ->setDebitedAt($data['sens'] === 'debit' ? \DateTime::createFromFormat('Y-m-d H:i:s', $data['dateCreation']) : null);
+                ->setState($data['sens'] === 'credit' ? BookEntry::STATE_CREDITED : BookEntry::STATE_DEBITED)
+                ->setActiveAt(\DateTime::createFromFormat('Y-m-d H:i:s', $data['dateCreation']));
 
             $this->getEntityManager()->flush();
 

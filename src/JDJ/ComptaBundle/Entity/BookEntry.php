@@ -20,6 +20,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class BookEntry 
 {
+    const STATE_DEBITED = 'debited';
+
+    const STATE_CREDITED = 'credited';
+
     /**
      * @var integer
      *
@@ -61,17 +65,15 @@ class BookEntry
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime")
      */
-    private $creditedAt;
+    private $activeAt;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(type="datetime", nullable=true)
+     * @var string
+     * @ORM\Column(type="string")
      */
-    private $debitedAt;
+    private $state;
 
     /**
      * @return int
@@ -107,17 +109,6 @@ class BookEntry
     public function setPrice($price)
     {
         $this->price = $price;
-
-        return $this;
-    }
-
-    /**
-     * @param boolean $credit
-     * @return $this
-     */
-    public function setCredit($credit)
-    {
-        $this->credit = $credit;
 
         return $this;
     }
@@ -163,37 +154,18 @@ class BookEntry
     /**
      * @return \DateTime
      */
-    public function getCreditedAt()
+    public function getActiveAt()
     {
-        return $this->creditedAt;
+        return $this->activeAt;
     }
 
     /**
-     * @param \DateTime $creditedAt
+     * @param \DateTime $activeAt
      * @return $this
      */
-    public function setCreditedAt($creditedAt)
+    public function setActiveAt(\DateTime $activeAt)
     {
-        $this->creditedAt = $creditedAt;
-
-        return $this;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getDebitedAt()
-    {
-        return $this->debitedAt;
-    }
-
-    /**
-     * @param \DateTime $debitedAt
-     * @return $this
-     */
-    public function setDebitedAt($debitedAt)
-    {
-        $this->debitedAt = $debitedAt;
+        $this->activeAt = $activeAt;
 
         return $this;
     }
@@ -217,5 +189,22 @@ class BookEntry
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
 
+    /**
+     * @param string $state
+     * @return $this
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+
+        return $this;
+    }
 }

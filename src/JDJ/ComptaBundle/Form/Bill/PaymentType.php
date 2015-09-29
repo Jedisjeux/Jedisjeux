@@ -23,7 +23,7 @@ class PaymentType extends AbstractType
     {
         $builder
             ->add('paidAt', null, array(
-                'label' => 'label.payed_at',
+                'label' => 'label.paid_at',
             ))
         ;
     }

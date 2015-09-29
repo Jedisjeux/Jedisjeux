@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2015-09-29T21:57:04Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+  <file date="2015-09-30T00:15:22Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -38,18 +38,11 @@
         <jms:reference-file line="19">UserBundle/Form/UserRegistrationType.php</jms:reference-file>
         <jms:reference-file line="21">UserBundle/Form/UserType.php</jms:reference-file>
       </trans-unit>
-      <trans-unit id="19194bdf5e490fa161abfd18389c48bb967f34de" resname="Crédit">
-        <source>Crédit</source>
-        <target state="new">Crédit</target>
-        <jms:reference-file line="38">ComptaBundle/Form/BookEntryType.php</jms:reference-file>
-      </trans-unit>
       <trans-unit id="1a6861723c6988e95ccc2010a3eca9a44fae0458" resname="Créer">
         <source>Créer</source>
         <target state="new">Créer</target>
         <jms:reference-file line="206">ComptaBundle/Controller/BillController.php</jms:reference-file>
         <jms:reference-file line="127">ComptaBundle/Controller/BookEntryController.php</jms:reference-file>
-        <jms:reference-file line="126">ComptaBundle/Controller/CustomerController.php</jms:reference-file>
-        <jms:reference-file line="111">ComptaBundle/Controller/PaymentMethodController.php</jms:reference-file>
         <jms:reference-file line="111">ComptaBundle/Controller/ProductController.php</jms:reference-file>
         <jms:reference-file line="152">ComptaBundle/Controller/SubscriptionController.php</jms:reference-file>
         <jms:reference-file line="78">JeuBundle/Controller/CaracteristiqueController.php</jms:reference-file>
@@ -84,11 +77,6 @@
         <jms:reference-file line="236">JeuBundle/Controller/ThemeController.php</jms:reference-file>
         <jms:reference-file line="224">JeuBundle/Controller/TypeAddonController.php</jms:reference-file>
       </trans-unit>
-      <trans-unit id="f528224f5bebb60746dd53807617046301cc3555" resname="Débit">
-        <source>Débit</source>
-        <target state="new">Débit</target>
-        <jms:reference-file line="37">ComptaBundle/Form/BookEntryType.php</jms:reference-file>
-      </trans-unit>
       <trans-unit id="f7c8bcd8b213a6cc4a0cfd3462bd1379e4ef9689" resname="Enregistrer">
         <source>Enregistrer</source>
         <target state="new">Enregistrer</target>
@@ -109,8 +97,6 @@
         <jms:reference-file line="307">ComptaBundle/Controller/BillController.php</jms:reference-file>
         <jms:reference-file line="384">ComptaBundle/Controller/BillController.php</jms:reference-file>
         <jms:reference-file line="196">ComptaBundle/Controller/BookEntryController.php</jms:reference-file>
-        <jms:reference-file line="195">ComptaBundle/Controller/CustomerController.php</jms:reference-file>
-        <jms:reference-file line="180">ComptaBundle/Controller/PaymentMethodController.php</jms:reference-file>
         <jms:reference-file line="180">ComptaBundle/Controller/ProductController.php</jms:reference-file>
         <jms:reference-file line="153">CoreBundle/Controller/CibleController.php</jms:reference-file>
         <jms:reference-file line="155">JeuBundle/Controller/CaracteristiqueController.php</jms:reference-file>
@@ -166,7 +152,7 @@
       </trans-unit>
       <trans-unit id="fb91e24fa52d8d2b32937bf04d843f730319a902" resname="Update">
         <source>Update</source>
-        <target state="new">Update</target>
+        <target>Update</target>
         <jms:reference-file line="281">CollectionBundle/Controller/CollectionController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="696fa17dd6706b3454c8bfc3236713f005d48bbb" resname="Utiliser cette photo pour illustrer le matériel du jeu">
@@ -184,11 +170,21 @@
         <target state="new">Vérification</target>
         <jms:reference-file line="33">UserBundle/Form/UserRegistrationType.php</jms:reference-file>
       </trans-unit>
+      <trans-unit id="ec8e70d90131d7ad3e9dc4eb3df36dd3e54db112" resname="crédité">
+        <source>crédité</source>
+        <target state="new">crédité</target>
+        <jms:reference-file line="42">ComptaBundle/Form/BookEntryType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="1853084d43806e5fa606eee14735a04050224e06" resname="débité">
+        <source>débité</source>
+        <target state="new">débité</target>
+        <jms:reference-file line="41">ComptaBundle/Form/BookEntryType.php</jms:reference-file>
+      </trans-unit>
       <trans-unit id="64c65374dbab6fe3762748196d9d3a9610e2e5a9" resname="label">
         <source>label</source>
         <target>Libellé</target>
         <jms:reference-file line="22">compta/book-entry/index.html.twig</jms:reference-file>
-        <jms:reference-file line="49">ComptaBundle/Form/BookEntryType.php</jms:reference-file>
+        <jms:reference-file line="30">ComptaBundle/Form/BookEntryType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="9cca220e2b6dca3801fe3f4423b70dd16f6ed89b" resname="label.additional_address_info">
         <source>label.additional_address_info</source>
@@ -199,6 +195,11 @@
         <source>label.address</source>
         <target>Adresse</target>
         <jms:reference-file line="35">ComptaBundle/Form/CustomerType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="afb56453c1daef3ac0db291e57fa1c927358acb1" resname="label.amount">
+        <source>label.amount</source>
+        <target>Montant</target>
+        <jms:reference-file line="33">ComptaBundle/Form/BookEntryType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="4dc1c435d4fd7d5d81029e66e75d7f9bf920be3e" resname="label.cancel">
         <source>label.cancel</source>
@@ -214,7 +215,7 @@
       <trans-unit id="37506e48a34086520d4e6a4b71e4032e8a162c89" resname="label.company">
         <source>label.company</source>
         <target>Société</target>
-        <jms:reference-file line="22">compta/customer/index.html.twig</jms:reference-file>
+        <jms:reference-file line="20">compta/customer/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="17ac1e4a2a3435442a0841898d9a519162ac2533" resname="label.create">
         <source>label.create</source>
@@ -233,16 +234,6 @@
         <target>Crédit</target>
         <jms:reference-file line="23">compta/book-entry/index.html.twig</jms:reference-file>
       </trans-unit>
-      <trans-unit id="1b468805a2ba2438d0d8e2a21f19232369abbcea" resname="label.creditedAt">
-        <source>label.creditedAt</source>
-        <target>Crédité le</target>
-        <jms:reference-file line="43">ComptaBundle/Form/BookEntryType.php</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="55cce93a2d7318d52b61f047db66281f2efc4332" resname="label.credited_or_debited">
-        <source>label.credited_or_debited</source>
-        <target state="new">label.credited_or_debited</target>
-        <jms:reference-file line="35">ComptaBundle/Form/BookEntryType.php</jms:reference-file>
-      </trans-unit>
       <trans-unit id="2ed1913ff9f649493418d25a731af6632b0ddf92" resname="label.customer">
         <source>label.customer</source>
         <target>Client</target>
@@ -252,16 +243,12 @@
         <source>label.date</source>
         <target>Date</target>
         <jms:reference-file line="21">compta/book-entry/index.html.twig</jms:reference-file>
+        <jms:reference-file line="47">ComptaBundle/Form/BookEntryType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="da64552c58eb6e468239205a7c03227580385a93" resname="label.debit">
         <source>label.debit</source>
         <target>Débit</target>
         <jms:reference-file line="24">compta/book-entry/index.html.twig</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="8f857407aebcb509e63c74845f6b28da42bf841a" resname="label.debitedAt">
-        <source>label.debitedAt</source>
-        <target>Débité le</target>
-        <jms:reference-file line="46">ComptaBundle/Form/BookEntryType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="c500bdec2fd007fbd60019bbe93b39f0c063f1a3" resname="label.delete">
         <source>label.delete</source>
@@ -277,7 +264,7 @@
       <trans-unit id="fc8413fdfd53e23e0f6ad278406aa827b4548642" resname="label.email">
         <source>label.email</source>
         <target>Email</target>
-        <jms:reference-file line="23">compta/customer/index.html.twig</jms:reference-file>
+        <jms:reference-file line="21">compta/customer/index.html.twig</jms:reference-file>
         <jms:reference-file line="32">ComptaBundle/Form/CustomerType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="b861cf1ecae0952208213c27729414bdaaf11399" resname="label.end_at">
@@ -298,13 +285,13 @@
       </trans-unit>
       <trans-unit id="a8a02ff1cf4bc749ae5f6b46393b416153cd1a57" resname="label.months">
         <source>label.months</source>
-        <target state="new">label.months</target>
+        <target>mois</target>
         <jms:reference-file line="30">compta/product/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="f34120955ae39f4fb49e72f45f3ce583a085075d" resname="label.name">
         <source>label.name</source>
         <target>Nom</target>
-        <jms:reference-file line="20">compta/payment-method/index.html.twig</jms:reference-file>
+        <jms:reference-file line="18">compta/payment-method/index.html.twig</jms:reference-file>
         <jms:reference-file line="20">compta/product/index.html.twig</jms:reference-file>
         <jms:reference-file line="29">ComptaBundle/Form/PaymentMethodType.php</jms:reference-file>
         <jms:reference-file line="29">ComptaBundle/Form/ProductType.php</jms:reference-file>
@@ -314,18 +301,14 @@
         <target>Payé le</target>
         <jms:reference-file line="25">compta/bill/index.html.twig</jms:reference-file>
         <jms:reference-file line="17">compta/subscription/index.html.twig</jms:reference-file>
-        <jms:reference-file line="45">ComptaBundle/Form/BillType.php</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="a21d4a6956aaabc740f8e7d080df3b8944c584ac" resname="label.payed_at">
-        <source>label.payed_at</source>
-        <target state="new">label.payed_at</target>
         <jms:reference-file line="26">Form/Bill/PaymentType.php</jms:reference-file>
+        <jms:reference-file line="45">ComptaBundle/Form/BillType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="da2b74c8b9d773d878d763475cffb2dd863a12d4" resname="label.payment_method">
         <source>label.payment_method</source>
         <target>Moyen de paiement</target>
         <jms:reference-file line="42">ComptaBundle/Form/BillType.php</jms:reference-file>
-        <jms:reference-file line="32">ComptaBundle/Form/BookEntryType.php</jms:reference-file>
+        <jms:reference-file line="36">ComptaBundle/Form/BookEntryType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="00c19f5acf34c42465632515787feb1bf941a390" resname="label.postal_code">
         <source>label.postal_code</source>
@@ -336,7 +319,6 @@
         <source>label.price</source>
         <target>Prix</target>
         <jms:reference-file line="21">compta/product/index.html.twig</jms:reference-file>
-        <jms:reference-file line="29">ComptaBundle/Form/BookEntryType.php</jms:reference-file>
         <jms:reference-file line="32">ComptaBundle/Form/ProductType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="df34336561c728d8f89dfe765b259ff2e9a186d7" resname="label.product">
@@ -377,6 +359,11 @@
         <target>Commence le</target>
         <jms:reference-file line="34">compta/customer/show.html.twig</jms:reference-file>
         <jms:reference-file line="29">ComptaBundle/Form/SubscriptionType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="b1a2ce9ef42c343860afb7075f0e94d7672940da" resname="label.state">
+        <source>label.state</source>
+        <target>Etat</target>
+        <jms:reference-file line="39">ComptaBundle/Form/BookEntryType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="895a33857b12be70974c29157b5a2bf9769411da" resname="label.status">
         <source>label.status</source>

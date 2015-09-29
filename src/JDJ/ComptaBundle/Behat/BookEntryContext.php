@@ -36,8 +36,8 @@ class BookEntryContext extends DefaultContext
             $bookEntry
                 ->setLabel(trim($data['label']))
                 ->setPrice(isset($data['price']) ? $data['price'] : $this->faker->randomFloat(2))
-                ->setCreditedAt(!empty($data['credited_at']) ? \DateTime::createFromFormat('Y-m-d', $data['credited_at']) : null)
-                ->setDebitedAt(!empty($data['debited_at']) ? \DateTime::createFromFormat('Y-m-d', $data['debited_at']) : null)
+                ->setActiveAt(isset($data['active_at']) ? \DateTime::createFromFormat('Y-m-d', $data['active_at']) : \DateTime::createFromFormat('Y-m-d', $this->faker->date()))
+                ->setState(isset($data['state']) ? $data['state'] : BookEntry::STATE_DEBITED)
                 ->setPaymentMethod($paymentMethod);
             ;
 

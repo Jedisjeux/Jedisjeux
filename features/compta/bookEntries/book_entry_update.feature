@@ -21,7 +21,6 @@ Feature: Book entry edition
       | remboursement blue | chèque         |
     And I am on "/compta/ecriture/"
     And I follow "Modifier"
-    And I wait "5" seconds
     When I fill in the following:
       | Libellé | remboursement cyril |
     And I press "Modifier"

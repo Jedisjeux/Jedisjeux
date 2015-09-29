@@ -9,6 +9,7 @@
 namespace JDJ\ComptaBundle\Form;
 
 
+use JDJ\ComptaBundle\Entity\BookEntry;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -25,28 +26,26 @@ class BookEntryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('price', 'money', array(
-                'label' => 'label.price',
-            ))
-            ->add('paymentMethod', null, array(
-                'label' => 'label.payment_method'
-            ))
-            ->add('creditedOrDebited', 'choice', array(
-                'label' => 'label.credited_or_debited',
-                'choices' => array(
-                    'debited' => 'Débit',
-                    'credited' => 'Crédit',
-                ),
-                'mapped' => false,
-            ))
-            ->add('creditedAt', null, array(
-                'label' => 'label.creditedAt',
-            ))
-            ->add('debitedAt', null, array(
-                'label' => 'label.debitedAt',
-            ))
             ->add('label', null, array(
                 'label' => 'label',
+            ))
+            ->add('price', 'money', array(
+                'label' => 'label.amount',
+            ))
+            ->add('paymentMethod', null, array(
+                'label' => 'label.payment_method',
+            ))
+            ->add('state', 'choice', array(
+                'label' => 'label.state',
+                'choices' => array(
+                    BookEntry::STATE_DEBITED => 'débité',
+                    BookEntry::STATE_CREDITED => 'crédité',
+                ),
+            ))
+            ->add('activeAt', null, array(
+                'label' => 'label.date',
+                'widget' => 'single_text',
+                'html5' => false,
             ))
         ;
     }

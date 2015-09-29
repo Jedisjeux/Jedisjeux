@@ -29,20 +29,16 @@
         {% for bookEntry in bookEntries %}
             <tr>
                 <td>
-                    {% if bookEntry.debitedAt %}
-                        {{ bookEntry.debitedAt|localizeddate('long', 'none') }}
-                    {% else %}
-                        {{ bookEntry.creditedAt|localizeddate('long', 'none') }}
-                    {% endif %}
+                   {{ bookEntry.activeAt|localizeddate('long', 'none') }}
                 </td>
                 <td>{{ bookEntry.label }}</td>
                 <td>
-                    {% if bookEntry.creditedAt %}
+                    {% if 'credited' == bookEntry.state %}
                         {{ bookEntry.price }} €
                     {% endif %}
                 </td>
                 <td>
-                    {% if bookEntry.debitedAt %}
+                    {% if 'debited' == bookEntry.state %}
                         {{ bookEntry.price }} €
                     {% endif %}
                 </td>
