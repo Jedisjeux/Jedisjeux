@@ -19,7 +19,7 @@ Feature: Book entry edition
     Given there are book entries:
       | label              | payment_method |
       | remboursement blue | chèque         |
-    And I am on "/compta/book-entry/"
+    And I am on "/compta/ecriture/"
     When I press "Supprimer"
-    Then I should be on "/compta/book-entry/"
+    Then I should be on "/compta/ecriture/"
     And I should not see "remboursement blue"

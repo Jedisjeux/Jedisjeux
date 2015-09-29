@@ -19,11 +19,12 @@ Feature: Book entry edition
     Given there are book entries:
       | label              | payment_method |
       | remboursement blue | chèque         |
-    And I am on "/compta/book-entry/"
+    And I am on "/compta/ecriture/"
     And I follow "Modifier"
+    And I wait "5" seconds
     When I fill in the following:
-      | Libelle | remboursement cyril |
+      | Libellé | remboursement cyril |
     And I press "Modifier"
-    Then I should be on "/compta/book-entry/"
+    Then I should be on "/compta/ecriture/"
     And I should see "remboursement cyril"
     But I should not see "remboursement blue"

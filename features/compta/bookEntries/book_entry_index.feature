@@ -20,6 +20,6 @@ Feature: Book entry list
       | label               | payment_method |
       | remboursement blue  | chèque         |
       | remboursement cyril | chèque         |
-    When I am on "/compta/book-entry/"
+    When I am on "/compta/ecriture/"
     Then I should see "remboursement blue"
     And I should see "remboursement cyril"

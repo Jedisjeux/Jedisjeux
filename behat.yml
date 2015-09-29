@@ -153,6 +153,7 @@ default:
                 - JDJ\UserBundle\Behat\UserContext
                 - JDJ\ComptaBundle\Behat\PaymentMethodContext
                 - JDJ\ComptaBundle\Behat\BookEntryContext
+                - JDJ\CoreBundle\Behat\UtilsContext
             filters:
                 tags: "@bookEntries"
 

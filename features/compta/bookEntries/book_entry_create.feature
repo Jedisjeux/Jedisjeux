@@ -16,15 +16,14 @@ Feature: Book entry creation
     And I am logged in as user "loic_425" with password "password"
 
   Scenario: Create a book entry
-    Given I am on "/compta/book-entry/"
+    Given I am on "/compta/ecriture/"
     And I follow "Créer une écriture comptable"
-    And I should be on "/compta/ecriture/new/"
     When I fill in the following:
-      | Libelle       | remboursement blue |
-      | Montant       | 20.34              |
-      | Date ecriture | 2015-03-21         |
-    And I select "chèque" from "Mode reglement"
+      | Libellé       | remboursement blue |
+      | Prix          | 20.34              |
+#      | Date ecriture | 2015-03-21         |
+    And I select "chèque" from "Moyen de paiement"
     And I select "débit" from "Sens"
     And I press "Créer"
-    Then I should be on "/compta/book-entry/"
+    Then I should be on "/compta/ecriture/"
     And I should see "remboursement blue"
