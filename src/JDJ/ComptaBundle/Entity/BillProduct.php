@@ -14,30 +14,44 @@ use Doctrine\ORM\Mapping as ORM;
  * @author Loïc Frémont <lc.fremont@gmail.com>
  *
  * @ORM\Entity
- * @ORM\Table(name="cpta_bill_product")
+ * @ORM\Table(name="cpta_bill_product",uniqueConstraints={
+ *     @ORM\UniqueConstraint(
+ *          name="uniq_bill_product_idx",
+ *          columns={"bill_id", "product_id"}
+ *      )
+ * })
  */
 class BillProduct 
 {
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
     /**
      * @var Bill
      *
-     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Bill", inversedBy="billProducts")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $bill;
 
     /**
      * @var Product
      *
-     * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Product")
+     * @ORM\ManyToOne(targetEntity="Product", cascade={"persist"})
      */
     private $product;
 
     /**
      * @var int
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $productVersion;
 
@@ -47,6 +61,22 @@ class BillProduct
      * @ORM\Column(type="integer")
      */
     private $quantity;
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
     /**
      * @return Bill

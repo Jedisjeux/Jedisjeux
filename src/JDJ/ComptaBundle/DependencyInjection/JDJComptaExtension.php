@@ -26,5 +26,6 @@ class JDJComptaExtension extends Extension
         $loader->load('managers.yml');
         $loader->load('form_types.yml');
         $loader->load('event_listeners.yml');
+        $loader->load('services.yml');
     }
 }

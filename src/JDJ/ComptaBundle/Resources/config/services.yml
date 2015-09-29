@@ -1,0 +1,11 @@
+services:
+  app.service.bill.product:
+      class:     JDJ\ComptaBundle\Service\BillProductService
+      arguments:
+          - "@doctrine.orm.entity_manager"
+          - "@app.service.product.manager"
+          - JDJComptaBundle:BillProduct
+  app.service.product.manager:
+        class:     JDJ\ComptaBundle\Entity\Manager\ProductManager
+        arguments:
+            - "@doctrine.orm.entity_manager"

@@ -18,8 +18,10 @@ use JDJ\ComptaBundle\Entity\Manager\ProductManager;
 use JDJ\ComptaBundle\Entity\Product;
 use JDJ\ComptaBundle\Event\BillEvents;
 use JDJ\ComptaBundle\Form\BillType;
+use JDJ\ComptaBundle\Service\BillProductService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -27,11 +29,13 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\VarDumper\VarDumper;
 
 /**
  * Class BillController
  *
  * @Route("/facture")
+ *
  */
 class BillController extends Controller
 {
@@ -141,6 +145,7 @@ class BillController extends Controller
      */
     public function createAction(Request $request)
     {
+
         $bill = new Bill();
         $form = $this->createCreateForm($bill);
         $form->handleRequest($request);
@@ -155,31 +160,17 @@ class BillController extends Controller
                 ->getAddressManager()
                 ->getCurrentVersion($bill->getCustomer()->getAddress());
 
-            $bill->setCustomerAddressVersion($customerAddressVersion);
+            $bill
+                ->setCustomerAddressVersion($customerAddressVersion);
 
+            //Set the data of the bill product
+            $bill = $this
+                ->getBillProductService()
+                ->fillBillProduct($bill);
+
+            //Persist data
             $em->persist($bill);
-
-            $products = $form->get('products')->getData();
-
-            /** @var Product $product */
-            foreach ($products as $product) {
-
-                $currentVersion = $this
-                    ->getProductManager()
-                    ->getCurrentVersion($product);
-
-                $billProduct = new BillProduct();
-                $billProduct
-                    ->setProduct($product)
-                    ->setProductVersion($currentVersion)
-                    ->setBill($bill)
-                    ->setQuantity(1);
-
-                $bill->addBillProduct($billProduct);
-            }
-
             $em->flush();
-            $this->getEventDispatcher()->dispatch(BillEvents::BILL_CREATED, new GenericEvent($bill));
 
             return $this->redirect($this->generateUrl('compta_bill'));
         }
@@ -248,39 +239,14 @@ class BillController extends Controller
 
         if ($editForm->isValid()) {
 
+            //Set the data of the bill product
+            $bill = $this
+                ->getBillProductService()
+                ->setProductsBill($bill, $editForm);
 
-            foreach ($bill->getBillProducts() as $billProduct) {
-                $em->remove($billProduct);
-            }
-            $bill->setBillProducts(new ArrayCollection());
+            $em->persist($bill);
             $em->flush();
 
-            $products = $editForm->get('products')->getData();
-
-            /** @var Product $product */
-            foreach ($products as $product) {
-
-                $currentVersion = $this
-                    ->getProductManager()
-                    ->getCurrentVersion($product);
-
-                $billProduct = new BillProduct();
-                $billProduct
-                    ->setProduct($product)
-                    ->setProductVersion($currentVersion)
-                    ->setBill($bill)
-                    ->setQuantity(1);
-
-                $bill->addBillProduct($billProduct);
-            }
-
-            $em->flush();
-
-            if (null !== $bill->getPaidAt()) {
-                $this->getEventDispatcher()->dispatch(BillEvents::BILL_PAID, new GenericEvent($bill));
-            } else {
-                $this->getEventDispatcher()->dispatch(BillEvents::BILL_NOT_PAID, new GenericEvent($bill));
-            }
             return $this->redirect($this->generateUrl('compta_bill'));
         }
 
@@ -423,5 +389,13 @@ class BillController extends Controller
             ->setMethod('DELETE')
             ->getForm()
             ;
+    }
+
+    /**
+     * @return BillProductService
+     */
+    private function getBillProductService()
+    {
+        return $this->get("app.service.bill.product");
     }
 }

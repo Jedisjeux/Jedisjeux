@@ -9,16 +9,19 @@
 namespace JDJ\ComptaBundle\EventListener;
 
 
+use Doctrine\Common\EventSubscriber;
 use JDJ\ComptaBundle\Entity\Bill;
 use JDJ\ComptaBundle\Entity\Manager\BookEntryManager;
 use JDJ\ComptaBundle\Entity\Manager\SubscriptionManager;
+use JDJ\ComptaBundle\Event\BillEvents;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
  */
-class BillEventListener
+class BillEventListener implements EventSubscriberInterface
 {
     /**
      * @var BookEntryManager
@@ -29,6 +32,18 @@ class BillEventListener
      * @var SubscriptionManager
      */
     private $subscriptionManager;
+
+
+    /**
+     * {@inheritDoc}
+     */
+    public static function getSubscribedEvents()
+    {
+        return array(
+            BillEvents::BILL_CREATED => 'createBookEntry',
+            BillEvents::BILL_CREATED => 'createSubscriptions',
+        );
+    }
 
     /**
      * Constructor
@@ -42,7 +57,7 @@ class BillEventListener
         $this->subscriptionManager = $subscriptionManager;
     }
 
-    private function billEventHandler(GenericEvent $event)
+    private function isEventBillObject(GenericEvent $event)
     {
         $bill = $event->getSubject();
 
@@ -59,7 +74,7 @@ class BillEventListener
      */
     public function createBookEntry(GenericEvent $event)
     {
-        $this->billEventHandler($event);
+        $this->isEventBillObject($event);
         $bill = $event->getSubject();
         $this->bookEntryManager->createFromBill($bill);
     }
@@ -69,7 +84,7 @@ class BillEventListener
      */
     public function removeBookEntry(GenericEvent $event)
     {
-        $this->billEventHandler($event);
+        $this->isEventBillObject($event);
         $bill = $event->getSubject();
         $this->bookEntryManager->removeFromBill($bill);
     }
@@ -79,14 +94,14 @@ class BillEventListener
      */
     public function createSubscriptions(GenericEvent $event)
     {
-        $this->billEventHandler($event);
+        $this->isEventBillObject($event);
         $bill = $event->getSubject();
         $this->subscriptionManager->createFromBill($bill);
     }
 
     public function updateSubscriptionStatus(GenericEvent $event)
     {
-        $this->billEventHandler($event);
+        $this->isEventBillObject($event);
         $bill = $event->getSubject();
         $this->subscriptionManager->updateStatusFromBill($bill);
     }

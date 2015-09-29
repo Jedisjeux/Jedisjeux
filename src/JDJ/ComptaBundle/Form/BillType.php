@@ -15,6 +15,7 @@ use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\VarDumper\VarDumper;
 
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
@@ -31,12 +32,19 @@ class BillType extends AbstractType
             ->add('customer', null, array(
                 'label' => 'label.customer',
             ))
-            ->add('products', 'entity', array(
-                'label' => 'label.products',
-                'multiple' => true,
-                'expanded' => true,
-                'mapped' => false,
-                'class' => 'JDJComptaBundle:Product',
+            ->add('billProducts', 'collection', array(
+                'type' => new BillProductType(),
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'prototype' => true,
+                'widget_add_btn' => array('label' => "label.add_product"),
+                'show_legend' => false, // dont show another legend of subform
+                'options' => array( // options for collection fields
+                    'label_render' => false,
+                    'horizontal_input_wrapper_class' => "col-lg-8",
+                    'widget_remove_btn' => array('label' => "label.remove_this_product"),
+                )
             ))
             ->add('paymentMethod', null, array(
                 'label' => 'label.payment_method',
@@ -52,9 +60,10 @@ class BillType extends AbstractType
 
         $productsValidator = function(FormEvent $event){
             $form = $event->getForm();
-            $products = $form->get('products')->getData();
+
+            $products = $form->get('billProducts')->getData();
             if (empty($products)) {
-                $form['products']->addError(new FormError("at least one product must be selected"));
+                $form['billProducts']->addError(new FormError("at least one product must be selected"));
             }
         };
 

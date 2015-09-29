@@ -13,6 +13,7 @@ use Doctrine\ORM\EntityManager;
 use JDJ\ComptaBundle\Entity\Bill;
 use JDJ\ComptaBundle\Entity\BillProduct;
 use JDJ\ComptaBundle\Entity\Repository\BillRepository;
+use Symfony\Component\VarDumper\VarDumper;
 
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
@@ -61,6 +62,7 @@ class BillManager
 
         /** @var BillProduct $billProduct */
         foreach ($bill->getBillProducts() as $billProduct) {
+
             $this->productManager->revertToVersion($billProduct->getProduct(), $billProduct->getProductVersion());
             $totalPrice += $billProduct->getProduct()->getPrice() * $billProduct->getQuantity();
             $this->entityManager->detach($billProduct->getProduct());
