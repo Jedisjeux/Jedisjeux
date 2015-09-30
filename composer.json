@@ -62,7 +62,8 @@
         "jms/translation-bundle": "dev-master",
         "jms/di-extra-bundle": "dev-master",
         "bmatzner/fontawesome-bundle": "^4.4",
-        "sylius/resource-bundle": "^0.15.0"
+        "sylius/resource-bundle": "^0.15.0",
+        "ob/highcharts-bundle": "^1.2"
     },
     "scripts": {
         "post-install-cmd": [

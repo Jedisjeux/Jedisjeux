@@ -40,6 +40,7 @@ class AppKernel extends Kernel
             new Bmatzner\FontAwesomeBundle\BmatznerFontAwesomeBundle(),
             new JMS\AopBundle\JMSAopBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
+            new Ob\HighchartsBundle\ObHighchartsBundle(),
 
             //JDJ
             new JDJ\WebBundle\JDJWebBundle(),
