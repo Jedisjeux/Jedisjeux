@@ -1,8 +1,12 @@
 {% extends "::base.html.twig" %}
+{% import 'macros/actions.html.twig' as action %}
 
 {% block container -%}
     <div class="block-heading-two">
         <h3><span>Modifier un produit</span></h3>
     </div>
-    {{ form(form) }}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ action.update(path('compta_product')) }}
+    {{ form_end(form) }}
 {% endblock container %}

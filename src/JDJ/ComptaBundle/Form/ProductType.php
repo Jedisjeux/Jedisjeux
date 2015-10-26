@@ -33,6 +33,9 @@ class ProductType extends AbstractType
             ))
             ->add('subscriptionDuration', null, array(
                 'label' => 'label.subscription_duration',
+                'widget_addon_append' => array(
+                    'text' => 'mois',
+                ),
             ))
         ;
     }

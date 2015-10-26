@@ -123,53 +123,55 @@
 
         </div>
 
-        <!-- Main content ends -->
-
-        <!-- Foot Starts -->
-
-        {% include "layout/foot.html.twig" %}
-
-        <!-- Foot Ends -->
-
-        <!-- Footer Starts -->
-
-        {% include "layout/footer.html.twig" %}
-
-        <!-- Footer Ends -->
+    <!-- Main content ends -->
 
     </div>
 
-    <!-- Outer Ends -->
+    <!-- Foot Starts -->
 
-    <!-- Scroll to top -->
-    <span class="totop"><a href="#"><i class="fa fa-angle-up bg-color"></i></a></span>
+    {% include "layout/foot.html.twig" %}
 
-    <!-- Javascript files -->
+    <!-- Foot Ends -->
 
-    {% block foot_script_assetic %}
-        {% javascripts output='js/compiled/all.js'
-        'assets/bower_components/jquery/dist/jquery.min.js'
-        '@MopaBootstrapBundle/Resources/public/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js'
-        '@MopaBootstrapBundle/Resources/public/bootstrap-sass/assets/javascripts/bootstrap/*.js'
-        '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-collection.js'
-        '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-subnav.js'
-        'assets/bower_components/jquery-ui/jquery-ui.min.js'
-        'assets/bower_components/bootstrap-star-rating/js/star-rating.min.js'
-        'assets/bower_components/fancybox/lib/jquery.mousewheel-3.0.6.pack.js'
-        'assets/bower_components/fancybox/source/jquery.fancybox.pack.js'
-        'assets/bower_components/fancybox/source/helpers/jquery.fancybox-buttons.js'
-        'assets/bower_components/fancybox/source/helpers/jquery.fancybox-media.js'
-        'assets/bower_components/fancybox/source/helpers/jquery.fancybox-thumbs.js'
-        'assets/bower_components/multiple-select/jquery.multiple.select.js'
-        'assets/bower_components/moment/min/moment.min.js'
-        'assets/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
-        'assets/js/*'
-        'assets/js/modules/*/*'
-        '@JDJJeuBundle/Resources/public/js/jeu/*' %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-        {% endjavascripts %}
-        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-        <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-    {% endblock foot_script_assetic %}
+    <!-- Footer Starts -->
+
+    {% include "layout/footer.html.twig" %}
+
+    <!-- Footer Ends -->
+
+</div>
+
+<!-- Outer Ends -->
+
+<!-- Scroll to top -->
+<span class="totop"><a href="#"><i class="fa fa-angle-up bg-color"></i></a></span>
+
+<!-- Javascript files -->
+
+{% block foot_script_assetic %}
+    {% javascripts output='js/compiled/all.js'
+    'assets/bower_components/jquery/dist/jquery.min.js'
+    '@MopaBootstrapBundle/Resources/public/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js'
+    '@MopaBootstrapBundle/Resources/public/bootstrap-sass/assets/javascripts/bootstrap/*.js'
+    '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-collection.js'
+    '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-subnav.js'
+    'assets/bower_components/jquery-ui/jquery-ui.min.js'
+    'assets/bower_components/bootstrap-star-rating/js/star-rating.min.js'
+    'assets/bower_components/fancybox/lib/jquery.mousewheel-3.0.6.pack.js'
+    'assets/bower_components/fancybox/source/jquery.fancybox.pack.js'
+    'assets/bower_components/fancybox/source/helpers/jquery.fancybox-buttons.js'
+    'assets/bower_components/fancybox/source/helpers/jquery.fancybox-media.js'
+    'assets/bower_components/fancybox/source/helpers/jquery.fancybox-thumbs.js'
+    'assets/bower_components/multiple-select/jquery.multiple.select.js'
+    'assets/bower_components/moment/min/moment.min.js'
+    'assets/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
+    'assets/js/*'
+    'assets/js/modules/*/*'
+    '@JDJJeuBundle/Resources/public/js/jeu/*' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+{% endblock foot_script_assetic %}
 </body>
 </html>

@@ -39,7 +39,7 @@
                     {% if bill.paidAt %}
                         {{ bill.paidAt|localizeddate('long', 'none') }}
                     {% else %}
-                        <span class="label label-danger">{{ 'label.waiting_for_payment'|trans }}</span>
+                        <span class="label label-danger"><span class="glyphicon glyphicon-euro" ></span> {{ 'label.waiting_for_payment'|trans }}</span>
                     {% endif %}
                 </td>
                 <td class="text-right">

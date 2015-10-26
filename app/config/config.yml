@@ -56,6 +56,15 @@ mopa_bootstrap:
         show_legend: false # default is true
         render_required_asterisk: true # default is false
         render_optional_text: false # default is true
+        collection:
+          widget_remove_btn:
+            icon: remove
+            attr:
+              class: btn btn-danger
+          widget_add_btn:
+            icon: plus
+            attr:
+              class: btn btn-primary
     menu: ~  # enables twig helpers for menu
 
 # Doctrine Configuration

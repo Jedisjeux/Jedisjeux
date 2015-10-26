@@ -303,12 +303,20 @@
         <jms:reference-file line="17">compta/subscription/index.html.twig</jms:reference-file>
         <jms:reference-file line="26">Form/Bill/PaymentType.php</jms:reference-file>
         <jms:reference-file line="45">ComptaBundle/Form/BillType.php</jms:reference-file>
+        <jms:reference-file line="52">ComptaBundle/Form/BillType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="a21d4a6956aaabc740f8e7d080df3b8944c584ac" resname="label.payed_at">
+        <source>label.payed_at</source>
+        <target>label.payed_at</target>
+        <jms:reference-file line="26">Form/Bill/PaymentType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="da2b74c8b9d773d878d763475cffb2dd863a12d4" resname="label.payment_method">
         <source>label.payment_method</source>
         <target>Moyen de paiement</target>
         <jms:reference-file line="42">ComptaBundle/Form/BillType.php</jms:reference-file>
         <jms:reference-file line="36">ComptaBundle/Form/BookEntryType.php</jms:reference-file>
+        <jms:reference-file line="49">ComptaBundle/Form/BillType.php</jms:reference-file>
+        <jms:reference-file line="32">ComptaBundle/Form/BookEntryType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="00c19f5acf34c42465632515787feb1bf941a390" resname="label.postal_code">
         <source>label.postal_code</source>
@@ -319,6 +327,7 @@
         <source>label.price</source>
         <target>Prix</target>
         <jms:reference-file line="21">compta/product/index.html.twig</jms:reference-file>
+        <jms:reference-file line="29">ComptaBundle/Form/BookEntryType.php</jms:reference-file>
         <jms:reference-file line="32">ComptaBundle/Form/ProductType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="df34336561c728d8f89dfe765b259ff2e9a186d7" resname="label.product">
@@ -330,7 +339,17 @@
       <trans-unit id="93d661c995b5e97f7dd0ffb9087aed78600cefee" resname="label.products">
         <source>label.products</source>
         <target>Produits</target>
-        <jms:reference-file line="35">ComptaBundle/Form/BillType.php</jms:reference-file>
+        <jms:reference-file line="24">ComptaBundle/Form/BillProductType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="60544f839a73b34b97e7181c5c2e8ab1bb9d59fc" resname="label.quantity">
+        <source>label.quantity</source>
+        <target>Quantité</target>
+        <jms:reference-file line="27">ComptaBundle/Form/BillProductType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="05c3ef9d6487311d127e4d7008d2771ca01419fb" resname="label.remove_this_product">
+        <source>label.remove_this_product</source>
+        <target>Supprimer ce produit</target>
+        <jms:reference-file line="45">ComptaBundle/Form/BillType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="55cffc19f3a44f22339fbd0f3c607a75d5e2cbd0" resname="label.save">
         <source>label.save</source>

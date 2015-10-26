@@ -108,8 +108,6 @@ class ProductController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Créer'));
-
         return $form;
     }
 
@@ -176,8 +174,6 @@ class ProductController extends Controller
             'action' => $this->generateUrl('compta_product_update', array('product' => $product->getId())),
             'method' => 'PUT',
         ));
-
-        $form->add('submit', 'submit', array('label' => 'Modifier'));
 
         return $form;
     }
