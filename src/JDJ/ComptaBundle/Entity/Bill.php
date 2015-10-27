@@ -72,7 +72,7 @@ class Bill
     /**
      * @var Subscription[]
      *
-     * @ORM\OneToMany(targetEntity="Subscription", mappedBy="bill")
+     * @ORM\OneToMany(targetEntity="Subscription", mappedBy="bill", cascade={"persist", "merge"})
      */
     private $subscriptions;
 

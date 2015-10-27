@@ -16,6 +16,7 @@ use JDJ\ComptaBundle\Entity\Manager\AddressManager;
 use JDJ\ComptaBundle\Entity\Manager\BillManager;
 use JDJ\ComptaBundle\Entity\Manager\ProductManager;
 use JDJ\ComptaBundle\Entity\Product;
+use JDJ\ComptaBundle\Event\BillEvent;
 use JDJ\ComptaBundle\Event\BillEvents;
 use JDJ\ComptaBundle\Form\BillType;
 use JDJ\ComptaBundle\Service\BillProductService;
@@ -171,6 +172,8 @@ class BillController extends Controller
             //Persist data
             $em->persist($bill);
             $em->flush();
+
+            $this->getEventDispatcher()->dispatch(BillEvents::BILL_POST_CREATE, new BillEvent($bill));
 
             return $this->redirect($this->generateUrl('compta_bill'));
         }

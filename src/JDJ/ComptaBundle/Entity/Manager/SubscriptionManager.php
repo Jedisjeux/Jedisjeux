@@ -80,7 +80,7 @@ class SubscriptionManager
         if ($billProducts) {
             foreach ($billProducts as $billProduct) {
 
-                $subscription = $this->getProductSubscriptionFromBill($bill, $billProduct->getProduct());
+                $subscription = $this->getSubscriptionFromBillProduct($billProduct);
 
                 if (null === $subscription) {
                     $subscription = new Subscription();
@@ -109,12 +109,13 @@ class SubscriptionManager
     /**
      * Get a subscription to a product from a bill
      *
-     * @param Bill $bill
-     * @param Product $product
+     * @param BillProduct $billProduct
      * @return Subscription|null
      */
-    public function getProductSubscriptionFromBill(Bill $bill, Product $product)
+    public function getSubscriptionFromBillProduct(BillProduct $billProduct)
     {
+        $bill = $billProduct->getBill();
+        $product = $billProduct->getProduct();
         $subscriptions = $bill->getSubscriptions();
         if ($subscriptions) {
             foreach ($bill->getSubscriptions() as $subscription) {

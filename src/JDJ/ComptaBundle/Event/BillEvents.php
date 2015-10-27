@@ -13,7 +13,7 @@ namespace JDJ\ComptaBundle\Event;
  */
 class BillEvents
 {
-    const BILL_CREATED = 'app.bill.created';
+    const BILL_POST_CREATE = 'bill.post_create';
 
     const BILL_UPDATED = 'app.bill.updated';
 }
