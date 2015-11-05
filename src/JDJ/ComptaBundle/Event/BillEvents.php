@@ -15,5 +15,5 @@ class BillEvents
 {
     const BILL_POST_CREATE = 'bill.post_create';
 
-    const BILL_UPDATED = 'app.bill.updated';
+    const BILL_POST_UPDATE = 'bill.post_update';
 }

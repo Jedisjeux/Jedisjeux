@@ -250,6 +250,8 @@ class BillController extends Controller
             $em->persist($bill);
             $em->flush();
 
+            $this->getEventDispatcher()->dispatch(BillEvents::BILL_POST_UPDATE, new BillEvent($bill));
+
             return $this->redirect($this->generateUrl('compta_bill'));
         }
 

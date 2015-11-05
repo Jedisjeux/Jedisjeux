@@ -52,14 +52,22 @@ class BillSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            BillEvents::BILL_POST_CREATE => 'onBillPreCreate',
+            BillEvents::BILL_POST_CREATE => 'onBillPostCreate',
+            BillEvents::BILL_POST_UPDATE => 'onBillPostUpdate',
         );
     }
 
-    public function onBillPreCreate(BillEvent $event)
+    public function onBillPostCreate(BillEvent $event)
     {
         $bill = $event->getBill();
         $this->bookEntryManager->createFromBill($bill);
+        $this->subscriptionManager->createFromBill($bill);
+    }
+
+    public function onBillPostUpdate(BillEvent $event)
+    {
+        $bill = $event->getBill();
+        //$this->bookEntryManager->createFromBill($bill);
         $this->subscriptionManager->createFromBill($bill);
     }
 }

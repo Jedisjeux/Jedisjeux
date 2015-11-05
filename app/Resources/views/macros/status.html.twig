@@ -1,6 +1,7 @@
 {% macro subscriptionStatus(subscription) %}
     {% set statusLabel = subscription.status %}
     {% set statusClass = '' %}
+    {% set iconClass = '' %}
 
     {% if 'in_progress' == subscription.status %}
         {% set statusClass = 'success' %}
@@ -11,9 +12,13 @@
     {% elseif 'waiting_for_installation' == subscription.status %}
         {% set statusClass = 'warning' %}
         {% set statusLabel = 'label.waiting_for_installation'|trans %}
+        {% set iconClass = 'fa fa-laptop' %}
     {% elseif 'finished' == subscription.status %}
         {% set statusClass = 'primary' %}
         {% set statusLabel = 'label.finished'|trans %}
     {% endif %}
-    <span class="label label-{{ statusClass }}">{{ statusLabel }}</span>
+    <span class="label label-{{ statusClass }}">
+        <span class="{{ iconClass }}"></span>
+        {{ statusLabel }}
+    </span>
 {% endmacro %}
