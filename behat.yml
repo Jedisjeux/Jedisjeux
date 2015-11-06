@@ -147,6 +147,19 @@ default:
             filters:
                 tags: "@customers"
 
+        bills:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\CoreBundle\Behat\UtilsContext
+                - JDJ\UserBundle\Behat\UserContext
+                - JDJ\ComptaBundle\Behat\CustomerContext
+                - JDJ\ComptaBundle\Behat\ProductContext
+                - JDJ\ComptaBundle\Behat\BillProductContext
+                - JDJ\ComptaBundle\Behat\PaymentMethodContext
+                - JDJ\ComptaBundle\Behat\BillContext
+            filters:
+                tags: "@bills"
+
         bookEntries:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext

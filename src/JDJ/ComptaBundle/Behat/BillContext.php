@@ -31,7 +31,7 @@ class BillContext extends DefaultContext
         foreach ($table->getHash() as $data) {
 
             /** @var Customer $customer */
-            $customer = $this->findOneBy('comptaCustomer', array('societyName' => $data['society']));
+            $customer = $this->findOneBy('comptaCustomer', array('societyName' => $data['company']));
 
             /** @var PaymentMethod $paymentMethod */
             $paymentMethod = $this->findOneBy('comptaPaymentMethod', array('name' => $data['payment_method']));

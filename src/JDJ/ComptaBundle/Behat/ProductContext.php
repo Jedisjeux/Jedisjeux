@@ -31,7 +31,7 @@ class ProductContext extends DefaultContext
             $product = new Product();
             $product
                 ->setName(isset($data['name']) ? trim($data['name']) : $this->faker->name)
-                ->setPrice(isset($data['price']) ? $data['price'] : $this->faker->randomFloat(2))
+                ->setPrice(isset($data['price']) ? (float) $data['price'] : $this->faker->randomFloat(2))
                 ->setSubscriptionDuration(isset($data['subscription_duration']) ? $data['subscription_duration'] : $this->faker->numberBetween(1, 24))
             ;
 

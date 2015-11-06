@@ -20,7 +20,7 @@ Feature: Product edition
     And I follow "Modifier"
     When I fill in the following:
       | Nom | Playstation |
-    And I press "Modifier"
+    And I press "Mettre à jour"
     Then I should be on "/compta/produit/"
     And I should see "Playstation"
     But I should not see "Sex Toy"
