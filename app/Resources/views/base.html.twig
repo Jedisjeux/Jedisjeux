@@ -27,9 +27,9 @@
         'assets/bower_components/multiple-select/multiple-select.css'
         'assets/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'
         'assets/sass/base.scss'
-        'assets/sass/module/core/*.scss'
-        'assets/sass/module/collection/*.scss'
-        'assets/sass/module/jedizone/*.scss'
+        'assets/sass/modules/core/*.scss'
+        'assets/sass/modules/collection/*.scss'
+        'assets/sass/modules/jedizone/*.scss'
         filter='cssrewrite' output='css/compiled/all.css' %}
         <link rel="stylesheet" href="{{ asset_url }}"/>
         {% endstylesheets %}
@@ -45,12 +45,14 @@
 <!-- Add class "boxed" along with body for boxed layout. -->
 <!-- Add "pattern-x" (1 to 5) for background patterns. -->
 <!-- Add "img-x" (1 to 5) for background images. -->
-<body>
+<body class="{% block body_class %}{% endblock %}">
 
 {% include 'layout/loading.html.twig' %}
 
 <!-- Outer Starts -->
 <div class="outer">
+
+    {% block outer %}
 
     <!-- Top bar starts -->
     {% include "layout/top-bar.html.twig" %}
@@ -138,6 +140,8 @@
     {% include "layout/footer.html.twig" %}
 
     <!-- Footer Ends -->
+
+    {% endblock outer %}
 
 </div>
 

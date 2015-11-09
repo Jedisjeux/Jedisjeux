@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block totop %}
+{% endblock totop %}
+
+{% block body_class %}login{% endblock %}
+
+{% block outer %}
+    <!--
+        you can substitute the span of reauth email for a input with the email and
+        include the remember me checkbox
+        -->
+    <div class="container">
+        <div class="card card-container">
+
+            {% block card_container_content %}
+            {% endblock card_container_content %}
+
+        </div>
+        <!-- /card-container -->
+    </div>
+    <!-- /container -->
+{% endblock outer %}

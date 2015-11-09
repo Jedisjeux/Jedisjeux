@@ -1,40 +1,63 @@
-{% extends "base.html.twig" %}
-
+{% extends 'layout/minimal.html.twig' %}
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% block fos_user_content %}
-{% if error %}
-    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-{% endif %}
-    <div class="row">
-        <div class="col-sm-2"></div>
+{% block card_container_content %}
 
-        <div class="col-sm-6">
-            <h1>{{ 'security.login.title'|trans }}</h1>
-        </div>
-    </div>
-    <br>
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
 
-<form action="{{ path("fos_user_security_check") }}" method="post" class="form-horizontal">
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+    <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+    <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"/>
 
-    <div class="form-group">
-        <label class="col-sm-2 control-label" for="username">{{ 'security.login.username'|trans }}</label>
-        <div class="col-sm-4">
-            <input type="text" id="username" class="form-control" placeholder="Email" name="_username" value="{{ last_username }}" required="required" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label" for="password">{{ 'security.login.password'|trans }}</label>
-        <div class="col-sm-4">
-            <input type="password" class="form-control" placeholder="Password" id="password" name="_password" required="required" />
-        </div>
-    </div>
+    <p id="profile-name" class="profile-name-card"></p>
 
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <input type="submit" class="btn btn-success" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+    <form action="{{ path("fos_user_security_check") }}"
+          novalidate
+          class="form-signin"
+          method="post">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+
+        <input type="text"
+               id="username"
+               name="_username"
+               value="{{ last_username }}"
+               class="form-control"
+               placeholder="{{ 'security.login.username'|trans }}" autofocus
+               required="required"/>
+
+        <input type="password"
+               id="password"
+               name="_password"
+               class="form-control"
+               placeholder="{{ 'security.login.password'|trans }}"
+               required="required"/>
+
+        <a href="{{ path('fos_user_resetting_request') }}" class="forgot-password">
+            Mot de passe oublié ?
+        </a>
+
+
+        <div id="remember" class="checkbox">
+            <label>
+                <input type="checkbox" id="remember_me" name="_remember_me"
+                       value="on"> {{ 'security.login.remember_me'|trans }}
+            </label>
         </div>
-    </div>
-</form>
-{% endblock fos_user_content %}
+
+        <button class="btn btn-lg btn-primary btn-block btn-signin"
+                type="submit"
+                id="_submit"
+                name="_submit">
+            {{ 'security.login.submit'|trans }}
+        </button>
+
+    </form>
+
+    <p class="text-center">ou</p>
+
+    <!-- /form -->
+    <a class="btn btn-lg btn-block btn-primary" href="{{ path('fos_user_registration_register') }}">
+        Créer un compte
+    </a>
+{% endblock card_container_content %}
