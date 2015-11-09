@@ -1,0 +1,9 @@
+{% macro avatar(user) %}
+    {% set imageSrc = '//ssl.gstatic.com/accounts/ui/avatar_2x.png' %}
+
+    {% if (user.avatar) %}
+        {% set imageSrc = user.avatar.webPath | imagine_filter('thumbnail') %}
+    {% endif %}
+
+    {{ imageSrc }}
+{% endmacro %}

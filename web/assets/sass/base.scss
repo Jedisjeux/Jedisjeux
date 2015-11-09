@@ -1,5 +1,16 @@
 @import "modules/login";
 
+.top-bar {
+  .avatar {
+    width: 30px;
+    height: 30px
+  }
+}
+
+.img-round {
+  border-radius: 50%;
+}
+
 .jeu-list {
   .img-container {
     height: 148px;
