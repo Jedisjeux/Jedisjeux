@@ -1,4 +1,4 @@
-@paymentMethods
+@paymentMethods @compta @delete
 Feature: Payment removal
   In order to manage payment methods
   As a user from office

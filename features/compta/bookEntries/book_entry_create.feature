@@ -1,4 +1,4 @@
-@bookEntries
+@bookEntries @compta @create
 Feature: Book entry creation
   In order to manage book entries
   As a user from office

@@ -1,4 +1,4 @@
-@paymentMethods
+@paymentMethods @compta @index
 Feature: Payment list
   In order to manage payment methods
   As a user from office

@@ -1,4 +1,4 @@
-@products
+@products @compta @update
 Feature: Product edition
   In order to manage products
   As a user from office

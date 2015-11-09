@@ -1,4 +1,4 @@
-@bookEntries
+@bookEntries @compta @index
 Feature: Book entry list
   In order to manage book entries
   As a user from office

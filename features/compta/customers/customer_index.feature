@@ -1,4 +1,4 @@
-@customers
+@customers @compta @index
 Feature: Customer list
   In order to manage customers
   As a user from office

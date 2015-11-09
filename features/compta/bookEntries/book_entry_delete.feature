@@ -1,4 +1,4 @@
-@bookEntries
+@bookEntries @compta @delete
 Feature: Book entry edition
   In order to manage book entries
   As a user from office

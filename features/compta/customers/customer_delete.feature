@@ -1,4 +1,4 @@
-@customers
+@customers @compta @delete
 Feature: Customer removal
   In order to manage customers
   As a user from office

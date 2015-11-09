@@ -1,4 +1,4 @@
-@paymentMethods
+@paymentMethods @compta @create
 Feature: Payment creation
   In order to manage payment methods
   As a user from office

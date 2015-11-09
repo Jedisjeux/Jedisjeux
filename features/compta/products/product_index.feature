@@ -1,4 +1,4 @@
-@products
+@products @compta @index
 Feature: Product list
   In order to manage products
   As a user from office

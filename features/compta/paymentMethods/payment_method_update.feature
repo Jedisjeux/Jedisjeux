@@ -1,4 +1,4 @@
-@paymentMethods
+@paymentMethods @compta @update
 Feature: Payment edition
   In order to manage payment methods
   As a user from office

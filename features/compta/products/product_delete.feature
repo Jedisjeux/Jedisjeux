@@ -1,4 +1,4 @@
-@products
+@products @compta @delete
 Feature: Product removal
   In order to manage products
   As a user from office

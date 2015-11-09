@@ -1,4 +1,4 @@
-@products
+@products @compta @create
 Feature: Product creation
   In order to manage products
   As a user from office

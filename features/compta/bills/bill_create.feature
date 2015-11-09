@@ -1,4 +1,4 @@
-@bills
+@bills @compta @create
 Feature: Bill creation
   In order to manage bills
   As a user from office
