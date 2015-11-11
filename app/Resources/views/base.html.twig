@@ -54,92 +54,95 @@
 
     {% block outer %}
 
-    <!-- Top bar starts -->
-    {% include "layout/top-bar.html.twig" %}
+        <!-- Top bar starts -->
+        {% include "layout/top-bar.html.twig" %}
 
-    <!-- Top bar ends -->
+        <!-- Top bar ends -->
 
-    <!-- Header One Starts -->
-    {% include "layout/header-1.html.twig" %}
+        <!-- Header One Starts -->
+        {% include "layout/header-1.html.twig" %}
 
-    <!-- Header one ends -->
+        <!-- Header one ends -->
 
-    <br/>
+        <br/>
 
-    <!-- Main content starts -->
+        <!-- Main content starts -->
 
-    <div class="main-block">
+        <div class="main-block">
 
-        <div class="magazine">
+            <div class="magazine">
 
-            <div class="container">
+                <div class="container">
 
-                {% include "layout/notify.html.twig" %}
+                    {% include "layout/notify.html.twig" %}
 
-                {% include "layout/login-form-modal.html.twig" %}
+                    {% include "layout/login-form-modal.html.twig" %}
 
-                <div class="row">
+                    <div class="row">
 
-                    {% block fos_user_content %}
-                        {% block body %}
-                            {% block container %}
-                                <!--
-                                Inherit this block to write
-                                Content without sidebar
-                                -->
-                                <div class="col-md-8">
+                        {% block fos_user_content %}
+                            {% block body %}
+                                {% block container %}
+                                    <!--
+                                    Inherit this block to write
+                                    Content without sidebar
+                                    -->
+                                    <div class="col-md-8">
 
-                                    {% block container_content %}
-                                        <!--
-                                        Inherit this block to write
-                                        Content with a sidebar
-                                        -->
-                                    {% endblock container_content %}
-
-                                </div>
-
-                                <!-- Sidebar column -->
-                                <div class="col-md-4">
-
-                                    <!-- Sidebar -->
-                                    <div class="sidebar">
-
-                                        {% block sidebar_content %}
+                                        {% block container_content %}
                                             <!--
                                             Inherit this block to write
-                                            Content in the sidebar
+                                            Content with a sidebar
                                             -->
-                                        {% endblock sidebar_content %}
+                                        {% endblock container_content %}
 
                                     </div>
 
-                                </div>
+                                    <!-- Sidebar column -->
+                                    <div class="col-md-4">
 
-                            {% endblock container %}
-                        {% endblock body %}
-                    {% endblock fos_user_content %}
+                                        <!-- Sidebar -->
+                                        <div class="sidebar">
+
+                                            {% block sidebar_content %}
+                                                <!--
+                                                Inherit this block to write
+                                                Content in the sidebar
+                                                -->
+                                            {% endblock sidebar_content %}
+
+                                        </div>
+
+                                    </div>
+
+                                {% endblock container %}
+                            {% endblock body %}
+                        {% endblock fos_user_content %}
+
+                    </div>
 
                 </div>
 
             </div>
 
+            <!-- Main content ends -->
+
         </div>
 
-    <!-- Main content ends -->
+        {# Confirmation modal #}
+        {% include '_confirm_modal.html.twig' %}
 
-    </div>
+        <!-- Foot Starts -->
 
-    <!-- Foot Starts -->
+        {% include "layout/foot.html.twig" %}
 
-    {% include "layout/foot.html.twig" %}
+        <!-- Foot Ends -->
 
-    <!-- Foot Ends -->
+        <!-- Footer Starts -->
 
-    <!-- Footer Starts -->
+        {% include "layout/footer.html.twig" %}
 
-    {% include "layout/footer.html.twig" %}
-
-    <!-- Footer Ends -->
+        <!-- Footer Ends -->
 
     {% endblock outer %}
 
@@ -169,7 +172,7 @@
     'assets/bower_components/multiple-select/jquery.multiple.select.js'
     'assets/bower_components/moment/min/moment.min.js'
     'assets/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
-    'assets/js/*'
+    'assets/js/*.js'
     'assets/js/modules/*/*'
     '@JDJJeuBundle/Resources/public/js/jeu/*' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>

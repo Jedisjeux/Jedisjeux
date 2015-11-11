@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2015-09-30T00:15:22Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+  <file date="2015-11-09T12:41:28Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -41,9 +41,8 @@
       <trans-unit id="1a6861723c6988e95ccc2010a3eca9a44fae0458" resname="Créer">
         <source>Créer</source>
         <target state="new">Créer</target>
-        <jms:reference-file line="206">ComptaBundle/Controller/BillController.php</jms:reference-file>
+        <jms:reference-file line="200">ComptaBundle/Controller/BillController.php</jms:reference-file>
         <jms:reference-file line="127">ComptaBundle/Controller/BookEntryController.php</jms:reference-file>
-        <jms:reference-file line="111">ComptaBundle/Controller/ProductController.php</jms:reference-file>
         <jms:reference-file line="152">ComptaBundle/Controller/SubscriptionController.php</jms:reference-file>
         <jms:reference-file line="78">JeuBundle/Controller/CaracteristiqueController.php</jms:reference-file>
         <jms:reference-file line="177">JeuBundle/Controller/JeuController.php</jms:reference-file>
@@ -94,10 +93,9 @@
       <trans-unit id="f260e757cec75096bc3eefbfb1c4a14720832017" resname="Modifier">
         <source>Modifier</source>
         <target state="new">Modifier</target>
-        <jms:reference-file line="307">ComptaBundle/Controller/BillController.php</jms:reference-file>
-        <jms:reference-file line="384">ComptaBundle/Controller/BillController.php</jms:reference-file>
+        <jms:reference-file line="278">ComptaBundle/Controller/BillController.php</jms:reference-file>
+        <jms:reference-file line="355">ComptaBundle/Controller/BillController.php</jms:reference-file>
         <jms:reference-file line="196">ComptaBundle/Controller/BookEntryController.php</jms:reference-file>
-        <jms:reference-file line="180">ComptaBundle/Controller/ProductController.php</jms:reference-file>
         <jms:reference-file line="153">CoreBundle/Controller/CibleController.php</jms:reference-file>
         <jms:reference-file line="155">JeuBundle/Controller/CaracteristiqueController.php</jms:reference-file>
         <jms:reference-file line="55">JeuBundle/Controller/CaracteristiqueNoteController.php</jms:reference-file>
@@ -186,6 +184,11 @@
         <jms:reference-file line="22">compta/book-entry/index.html.twig</jms:reference-file>
         <jms:reference-file line="30">ComptaBundle/Form/BookEntryType.php</jms:reference-file>
       </trans-unit>
+      <trans-unit id="0d5ba5d9878cab54a410c2fa4246c493e1b0768f" resname="label.add_product">
+        <source>label.add_product</source>
+        <target>Ajouter un produit</target>
+        <jms:reference-file line="41">ComptaBundle/Form/BillType.php</jms:reference-file>
+      </trans-unit>
       <trans-unit id="9cca220e2b6dca3801fe3f4423b70dd16f6ed89b" resname="label.additional_address_info">
         <source>label.additional_address_info</source>
         <target>Complément d'adresse</target>
@@ -204,6 +207,7 @@
       <trans-unit id="4dc1c435d4fd7d5d81029e66e75d7f9bf920be3e" resname="label.cancel">
         <source>label.cancel</source>
         <target>Annuler</target>
+        <jms:reference-file line="14">Resources/views/_confirm_modal.html.twig</jms:reference-file>
         <jms:reference-file line="41">views/macros/actions.html.twig</jms:reference-file>
         <jms:reference-file line="14">views/macros/modal.html.twig</jms:reference-file>
       </trans-unit>
@@ -237,13 +241,13 @@
       <trans-unit id="2ed1913ff9f649493418d25a731af6632b0ddf92" resname="label.customer">
         <source>label.customer</source>
         <target>Client</target>
-        <jms:reference-file line="32">ComptaBundle/Form/BillType.php</jms:reference-file>
+        <jms:reference-file line="33">ComptaBundle/Form/BillType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="ed8a99878c98873d88d27130f2ff1ea95f2ce5e1" resname="label.date">
         <source>label.date</source>
         <target>Date</target>
         <jms:reference-file line="21">compta/book-entry/index.html.twig</jms:reference-file>
-        <jms:reference-file line="47">ComptaBundle/Form/BookEntryType.php</jms:reference-file>
+        <jms:reference-file line="46">ComptaBundle/Form/BookEntryType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="da64552c58eb6e468239205a7c03227580385a93" resname="label.debit">
         <source>label.debit</source>
@@ -253,6 +257,7 @@
       <trans-unit id="c500bdec2fd007fbd60019bbe93b39f0c063f1a3" resname="label.delete">
         <source>label.delete</source>
         <target>Supprimer</target>
+        <jms:reference-file line="16">Resources/views/_confirm_modal.html.twig</jms:reference-file>
         <jms:reference-file line="45">views/macros/buttons.html.twig</jms:reference-file>
         <jms:reference-file line="51">views/macros/buttons.html.twig</jms:reference-file>
       </trans-unit>
@@ -276,12 +281,12 @@
       <trans-unit id="1c93b300a2ad4027f2059dd9c35a7527f4b54482" resname="label.finished">
         <source>label.finished</source>
         <target>Terminé</target>
-        <jms:reference-file line="16">views/macros/status.html.twig</jms:reference-file>
+        <jms:reference-file line="18">views/macros/status.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c582b2458247fdaee3348370daceee09e0d27539" resname="label.in_progress">
         <source>label.in_progress</source>
         <target>En cours</target>
-        <jms:reference-file line="7">views/macros/status.html.twig</jms:reference-file>
+        <jms:reference-file line="8">views/macros/status.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="a8a02ff1cf4bc749ae5f6b46393b416153cd1a57" resname="label.months">
         <source>label.months</source>
@@ -302,21 +307,13 @@
         <jms:reference-file line="25">compta/bill/index.html.twig</jms:reference-file>
         <jms:reference-file line="17">compta/subscription/index.html.twig</jms:reference-file>
         <jms:reference-file line="26">Form/Bill/PaymentType.php</jms:reference-file>
-        <jms:reference-file line="45">ComptaBundle/Form/BillType.php</jms:reference-file>
-        <jms:reference-file line="52">ComptaBundle/Form/BillType.php</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="a21d4a6956aaabc740f8e7d080df3b8944c584ac" resname="label.payed_at">
-        <source>label.payed_at</source>
-        <target>label.payed_at</target>
-        <jms:reference-file line="26">Form/Bill/PaymentType.php</jms:reference-file>
+        <jms:reference-file line="53">ComptaBundle/Form/BillType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="da2b74c8b9d773d878d763475cffb2dd863a12d4" resname="label.payment_method">
         <source>label.payment_method</source>
         <target>Moyen de paiement</target>
-        <jms:reference-file line="42">ComptaBundle/Form/BillType.php</jms:reference-file>
+        <jms:reference-file line="50">ComptaBundle/Form/BillType.php</jms:reference-file>
         <jms:reference-file line="36">ComptaBundle/Form/BookEntryType.php</jms:reference-file>
-        <jms:reference-file line="49">ComptaBundle/Form/BillType.php</jms:reference-file>
-        <jms:reference-file line="32">ComptaBundle/Form/BookEntryType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="00c19f5acf34c42465632515787feb1bf941a390" resname="label.postal_code">
         <source>label.postal_code</source>
@@ -327,7 +324,6 @@
         <source>label.price</source>
         <target>Prix</target>
         <jms:reference-file line="21">compta/product/index.html.twig</jms:reference-file>
-        <jms:reference-file line="29">ComptaBundle/Form/BookEntryType.php</jms:reference-file>
         <jms:reference-file line="32">ComptaBundle/Form/ProductType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="df34336561c728d8f89dfe765b259ff2e9a186d7" resname="label.product">
@@ -349,7 +345,7 @@
       <trans-unit id="05c3ef9d6487311d127e4d7008d2771ca01419fb" resname="label.remove_this_product">
         <source>label.remove_this_product</source>
         <target>Supprimer ce produit</target>
-        <jms:reference-file line="45">ComptaBundle/Form/BillType.php</jms:reference-file>
+        <jms:reference-file line="46">ComptaBundle/Form/BillType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="55cffc19f3a44f22339fbd0f3c607a75d5e2cbd0" resname="label.save">
         <source>label.save</source>
@@ -409,13 +405,18 @@
       <trans-unit id="f70e9472e1ccdb7080ac3ad657efbc59e5cf36d8" resname="label.waiting_for_installation">
         <source>label.waiting_for_installation</source>
         <target>En attente de l'installation</target>
-        <jms:reference-file line="13">views/macros/status.html.twig</jms:reference-file>
+        <jms:reference-file line="14">views/macros/status.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="fe1d91e830d7ff406bc7dd20e9cbf61a836a9bb6" resname="label.waiting_for_payment">
         <source>label.waiting_for_payment</source>
         <target>En attente de paiement</target>
         <jms:reference-file line="42">compta/bill/index.html.twig</jms:reference-file>
-        <jms:reference-file line="10">views/macros/status.html.twig</jms:reference-file>
+        <jms:reference-file line="11">views/macros/status.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="1d173ed85a432769ff3e24433b577d2ae4bcac8e" resname="message.confirmation">
+        <source>message.confirmation</source>
+        <target>Souhaitez-vous supprimer cet élément ?</target>
+        <jms:reference-file line="10">Resources/views/_confirm_modal.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5f1f415bd4d0ae72657804116138f5b8b5454724" resname="moins de 30 minutes">
         <source>moins de 30 minutes</source>
@@ -426,6 +427,11 @@
         <source>plus de 3 heures</source>
         <target state="new">plus de 3 heures</target>
         <jms:reference-file line="327">JeuBundle/Controller/JeuController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6e4c04024b09d2e43d79eaefe95ec12723b10c7a" resname="title.confirmation">
+        <source>title.confirmation</source>
+        <target>Confirmation</target>
+        <jms:reference-file line="6">Resources/views/_confirm_modal.html.twig</jms:reference-file>
       </trans-unit>
     </body>
   </file>

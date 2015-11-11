@@ -27,8 +27,10 @@ Feature: Bill creation
     Given I am on "/compta/facture/"
     And I follow "Créer une facture"
     And I select "Ludibay" from "Client"
-    And I follow "label.add_product"
+    And I follow "Ajouter un produit"
     And I select "Playstation" from "Produit"
+    And I fill in the following:
+    | jdj_comptabundle_bill_billProducts_0_quantity | 1 |
     When I press "Créer"
     Then I should be on "/compta/facture/"
     And I should see "Ludibay"
