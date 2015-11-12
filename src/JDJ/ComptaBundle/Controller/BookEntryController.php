@@ -52,16 +52,8 @@ class BookEntryController extends Controller
             ->createPaginator(null, array('createdAt' => 'desc'))
             ->setCurrentPage($request->get('page', 1));
 
-        $deleteForms = array();
-
-        /** @var BookEntry $bookEntry */
-        foreach ($bookEntries as $bookEntry) {
-            $deleteForms[$bookEntry->getId()] = $this->createDeleteForm($bookEntry->getId())->createView();
-        }
-
         return $this->render('compta/book-entry/index.html.twig', array(
             'bookEntries' => $bookEntries,
-            'deleteForms' => $deleteForms,
         ));
     }
 
@@ -132,7 +124,7 @@ class BookEntryController extends Controller
     /**
      * Displays a form to edit an existing BookEntry entity.
      *
-     * @Route("/{bookEntry}/edit", name="compta_book_entry_edit")
+     * @Route("/{id}/edit", name="compta_book_entry_edit")
      * @ParamConverter("bookEntry", class="JDJComptaBundle:BookEntry")
      *
      * @param BookEntry $bookEntry
@@ -151,7 +143,7 @@ class BookEntryController extends Controller
     /**
      * Edits an existing BookEntry entity.
      *
-     * @Route("/{bookEntry}/update", name="compta_book_entry_update")
+     * @Route("/{id}/update", name="compta_book_entry_update")
      * @ParamConverter("bookEntry", class="JDJComptaBundle:BookEntry")
      *
      * @param Request $request
@@ -163,7 +155,6 @@ class BookEntryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $deleteForm = $this->createDeleteForm($bookEntry->getId());
         $editForm = $this->createEditForm($bookEntry);
         $editForm->handleRequest($request);
 
@@ -176,7 +167,6 @@ class BookEntryController extends Controller
         return $this->render('compta/book-entry/edit.html.twig', array(
             'bookEntry' => $bookEntry,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -189,7 +179,7 @@ class BookEntryController extends Controller
     private function createEditForm(BookEntry $bookEntry)
     {
         $form = $this->createForm(new BookEntryType(), $bookEntry, array(
-            'action' => $this->generateUrl('compta_book_entry_update', array('bookEntry' => $bookEntry->getId())),
+            'action' => $this->generateUrl('compta_book_entry_update', array('id' => $bookEntry->getId())),
             'method' => 'PUT',
         ));
 
@@ -201,38 +191,18 @@ class BookEntryController extends Controller
     /**
      * Deletes a BookEntry entity.
      *
-     * @Route("/{bookEntry}/delete", name="compta_book_entry_delete")
+     * @Route("/{id}/delete", name="compta_book_entry_delete")
      * @ParamConverter("bookEntry", class="JDJComptaBundle:BookEntry")
      *
-     * @param Request $request
      * @param BookEntry $bookEntry
      * @return RedirectResponse
      */
-    public function deleteAction(Request $request, BookEntry $bookEntry)
+    public function deleteAction(BookEntry $bookEntry)
     {
-        $form = $this->createDeleteForm($bookEntry->getId());
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($bookEntry);
-            $em->flush();
-        }
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($bookEntry);
+        $em->flush();
 
         return $this->redirect($this->generateUrl('compta_book_entry'));
-    }
-
-    /**
-     * Creates a form to delete a BookEntry entity by id.
-     *
-     * @param int $id The entity id
-     * @return Form The form
-     */
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('compta_book_entry_delete', array('bookEntry' => $id)))
-            ->setMethod('DELETE')
-            ->getForm();
     }
 }

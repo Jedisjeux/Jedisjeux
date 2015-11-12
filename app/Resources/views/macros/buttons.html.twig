@@ -45,7 +45,7 @@
             <i class="glyphicon glyphicon-trash"></i><span>{{ message is empty ? 'label.delete'|trans : message }}</span>
         </span>
     {% else %}
-        <form action="{{ url }}" method="post" style="display: inline;">
+        <form action="{{ url }}" name="form" method="post" style="display: inline;">
             <input type="hidden" name="_method" value="DELETE">
             <button class="btn btn-danger btn-confirm" type="submit">
                 <i class="glyphicon glyphicon-trash"></i> <span>{{ message is empty ? 'label.delete'|trans : message }}</span>

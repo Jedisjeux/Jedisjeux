@@ -10,6 +10,7 @@ namespace JDJ\ComptaBundle\Controller;
 
 use JDJ\ComptaBundle\Entity\PaymentMethod;
 use JDJ\ComptaBundle\Form\PaymentMethodType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -36,16 +37,8 @@ class PaymentMethodController extends Controller
 
         $paymentMethods = $em->getRepository('JDJComptaBundle:PaymentMethod')->findAll();
 
-        $deleteForms = array();
-
-        /** @var PaymentMethod $paymentMethod */
-        foreach ($paymentMethods as $paymentMethod) {
-            $deleteForms[$paymentMethod->getId()] = $this->createDeleteForm($paymentMethod->getId())->createView();
-        }
-
         return $this->render('compta/payment-method/index.html.twig', array(
             'paymentMethods' => $paymentMethods,
-            'deleteForms' => $deleteForms,
         ));
     }
 
@@ -145,7 +138,6 @@ class PaymentMethodController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $deleteForm = $this->createDeleteForm($paymentMethod->getId());
         $editForm = $this->createEditForm($paymentMethod);
         $editForm->handleRequest($request);
 
@@ -158,7 +150,6 @@ class PaymentMethodController extends Controller
         return $this->render('compta/payment-method/edit.html.twig', array(
             'paymentMethod'      => $paymentMethod,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -182,37 +173,18 @@ class PaymentMethodController extends Controller
      * Deletes a PaymentMethod entity.
      *
      * @Route("/{paymentMethod}/delete", name="compta_payment_method_delete")
+     * @Method({"DELETE"})
      * @ParamConverter("paymentMethod", class="JDJComptaBundle:PaymentMethod")
      *
-     * @param Request $request
      * @param PaymentMethod $paymentMethod
      * @return RedirectResponse
      */
-    public function deleteAction(Request $request, PaymentMethod $paymentMethod)
+    public function deleteAction(PaymentMethod $paymentMethod)
     {
-        $form = $this->createDeleteForm($paymentMethod->getId());
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($paymentMethod);
-            $em->flush();
-        }
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($paymentMethod);
+        $em->flush();
 
         return $this->redirect($this->generateUrl('compta_payment_method'));
-    }
-
-    /**
-     * Creates a form to delete a PaymentMethod entity by id.
-     *
-     * @param int $id The entity id
-     * @return Form The form
-     */
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('compta_payment_method_delete', array('paymentMethod' => $id)))
-            ->setMethod('DELETE')
-            ->getForm();
     }
 }

@@ -133,6 +133,7 @@ default:
         paymentMethods:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
+                - JDJ\CoreBundle\Behat\UtilsContext
                 - JDJ\ComptaBundle\Behat\PaymentMethodContext
                 - JDJ\UserBundle\Behat\UserContext
             filters:

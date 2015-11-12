@@ -15,6 +15,7 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,6 +39,22 @@ class CustomerController extends Controller
     }
 
     /**
+     * Finds and displays a Customer entity.
+     *
+     * @Route("/{customer}/show", name="compta_customer_show")
+     * @ParamConverter("customer", class="JDJComptaBundle:Customer")
+     *
+     * @param Customer $customer
+     * @return Response
+     */
+    public function showAction(Customer $customer)
+    {
+        return $this->render('compta/customer/show.html.twig', array(
+            'customer' => $customer,
+        ));
+    }
+
+    /**
      * Lists all Customer entities.
      *
      * @Route("/", name="compta_customer")
@@ -51,16 +68,8 @@ class CustomerController extends Controller
             ->createPaginator()
             ->setCurrentPage($request->get('page', 1));
 
-        $deleteForms = array();
-
-        /** @var Customer $customer */
-        foreach ($customers as $customer) {
-            $deleteForms[$customer->getId()] = $this->createDeleteForm($customer->getId())->createView();
-        }
-
         return $this->render('compta/customer/index.html.twig', array(
             'customers' => $customers,
-            'deleteForms' => $deleteForms,
         ));
     }
 
@@ -160,7 +169,6 @@ class CustomerController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $deleteForm = $this->createDeleteForm($customer->getId());
         $editForm = $this->createEditForm($customer);
         $editForm->handleRequest($request);
 
@@ -173,7 +181,6 @@ class CustomerController extends Controller
         return $this->render('compta/customer/edit.html.twig', array(
             'customer'      => $customer,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -197,57 +204,18 @@ class CustomerController extends Controller
      * Deletes a Customer entity.
      *
      * @Route("/{customer}/delete", name="compta_customer_delete")
+     * @Method({"DELETE"})
      * @ParamConverter("customer", class="JDJComptaBundle:Customer")
      *
-     * @param Request $request
      * @param Customer $customer
      * @return RedirectResponse
      */
-    public function deleteAction(Request $request, Customer $customer)
+    public function deleteAction(Customer $customer)
     {
-        $form = $this->createDeleteForm($customer->getId());
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($customer);
-            $em->flush();
-        }
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($customer);
+        $em->flush();
 
         return $this->redirect($this->generateUrl('compta_customer'));
-    }
-
-    /**
-     * Creates a form to delete a Customer entity by id.
-     *
-     * @param int $id The entity id
-     * @return Form The form
-     */
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('compta_customer_delete', array('customer' => $id)))
-            ->setMethod('DELETE')
-            ->getForm()
-            ;
-    }
-
-    /**
-     * Finds and displays a Customer entity.
-     *
-     * @Route("/{customer}/show", name="compta_customer_show")
-     * @ParamConverter("customer", class="JDJComptaBundle:Customer")
-     *
-     * @param Customer $customer
-     * @return Response
-     */
-    public function showAction(Customer $customer)
-    {
-        $deleteForm = $this->createDeleteForm($customer->getId())->createView();
-
-        return $this->render('compta/customer/show.html.twig', array(
-            'customer' => $customer,
-            'deleteForm' => $deleteForm,
-        ));
     }
 }

@@ -18,5 +18,7 @@ Feature: Payment removal
       | chèque |
     And I am on "/compta/mode-paiement/"
     When I press "Supprimer"
+    And I wait until modal is visible
+    And I follow "Supprimer"
     Then I should be on "/compta/mode-paiement/"
     And I should not see "chèque"

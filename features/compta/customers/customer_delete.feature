@@ -18,5 +18,7 @@ Feature: Customer removal
       | Philibert |
     And I am on "/compta/client"
     When I press "Supprimer"
+    And I wait until modal is visible
+    And I follow "Supprimer"
     Then I should be on "/compta/client/"
     And I should not see "Philibert"

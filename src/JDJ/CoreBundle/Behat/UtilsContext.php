@@ -25,6 +25,14 @@ class UtilsContext extends DefaultContext
     }
 
     /**
+     * @When /^I wait until modal is visible$/
+     */
+    public function waitUntilModalIsVisible()
+    {
+        $this->getSession()->wait(2000, "$('.modal').is('visible')");
+    }
+
+    /**
      * @When /^I wait "([^""]*)" seconds$/
      *
      * @param integer $time

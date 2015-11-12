@@ -21,5 +21,7 @@ Feature: Book entry edition
       | remboursement blue | chèque         |
     And I am on "/compta/ecriture/"
     When I press "Supprimer"
+    And I wait until modal is visible
+    And I follow "Supprimer"
     Then I should be on "/compta/ecriture/"
     And I should not see "remboursement blue"
