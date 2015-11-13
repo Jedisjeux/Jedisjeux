@@ -228,7 +228,6 @@ class BillController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $deleteForm = $this->createDeleteForm($bill->getId());
         $editForm = $this->createEditForm($bill);
         $editForm->handleRequest($request);
 
@@ -250,7 +249,6 @@ class BillController extends Controller
         return $this->render('compta/bill/edit.html.twig', array(
             'bill' => $bill,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -263,7 +261,7 @@ class BillController extends Controller
     private function createEditForm(Bill $bill)
     {
         $form = $this->createForm(new BillType(), $bill, array(
-            'action' => $this->generateUrl('compta_bill_update', array('bill' => $bill->getId())),
+            'action' => $this->generateUrl('compta_bill_update', array('id' => $bill->getId())),
             'method' => 'PUT',
         ));
 
