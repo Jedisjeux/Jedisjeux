@@ -12,6 +12,8 @@ namespace JDJ\ComptaBundle\Behat;
 use Behat\Gherkin\Node\TableNode;
 use JDJ\ComptaBundle\Entity\Bill;
 use JDJ\ComptaBundle\Entity\Customer;
+use JDJ\ComptaBundle\Entity\Manager\AddressManager;
+use JDJ\ComptaBundle\Entity\Manager\BillManager;
 use JDJ\ComptaBundle\Entity\PaymentMethod;
 use JDJ\CoreBundle\Behat\DefaultContext;
 
@@ -31,7 +33,7 @@ class BillContext extends DefaultContext
         foreach ($table->getHash() as $data) {
 
             /** @var Customer $customer */
-            $customer = $this->findOneBy('comptaCustomer', array('societyName' => $data['company']));
+            $customer = $this->findOneBy('comptaCustomer', array('society' => $data['company']));
 
             /** @var PaymentMethod $paymentMethod */
             $paymentMethod = $this->findOneBy('comptaPaymentMethod', array('name' => $data['payment_method']));
@@ -40,6 +42,12 @@ class BillContext extends DefaultContext
             $bill
                 ->setCustomer($customer)
                 ->setPaymentMethod($paymentMethod)
+                ->setCustomerAddressVersion($this
+                    ->getAddressManager()
+                    ->getCurrentVersion($bill
+                        ->getCustomer()
+                        ->getAddress()
+                    ))
                 ->setPaidAt(isset($data['paid_at']) ? \DateTime::createFromFormat('Y-m-d', $data['paid_at']) : null)
             ;
 
@@ -47,5 +55,13 @@ class BillContext extends DefaultContext
         }
 
         $manager->flush();
+    }
+
+    /**
+     * @return AddressManager
+     */
+    protected function getAddressManager()
+    {
+        return $this->getContainer()->get('app.manager.address');
     }
 }

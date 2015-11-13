@@ -1,8 +1,8 @@
 @bookEntries @compta @delete
-Feature: Book entry edition
+Feature: Book entry removal
   In order to manage book entries
   As a user from office
-  I need to be able to update a book entry
+  I need to be able to remove a book entry
 
   Background:
     Given there are following users:

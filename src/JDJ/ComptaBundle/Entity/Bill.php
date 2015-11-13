@@ -50,7 +50,7 @@ class Bill
      * @var BillProduct[]
      *
      * @ORM\Id
-     * @ORM\OneToMany(targetEntity="BillProduct", mappedBy="bill", cascade={"persist", "merge"})
+     * @ORM\OneToMany(targetEntity="BillProduct", mappedBy="bill", cascade={"persist", "merge", "remove"})
      */
     private $billProducts;
 

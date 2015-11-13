@@ -1,5 +1,6 @@
 {% extends "::base.html.twig" %}
 {% from 'JDJWebBundle:Macros:misc.html.twig' import pagination %}
+{% import 'macros/buttons.html.twig' as button %}
 
 {% block container %}
 
@@ -28,7 +29,7 @@
         <tbody>
         {% for bill in bills %}
             <tr>
-                <td><a href="{{ path('compta_bill_show', { 'bill': bill.id }) }}">
+                <td><a href="{{ path('compta_bill_show', { 'id': bill.id }) }}">
                         {{ bill.id }}
                     </a>
                 </td>
@@ -45,21 +46,17 @@
                 <td class="text-right">
                     <ul class="list-inline">
                         <li>
-                            <a class="btn btn-default" href="{{ path('compta_bill_show', { 'bill': bill.id }) }}">
+                            <a class="btn btn-default" href="{{ path('compta_bill_show', { 'id': bill.id }) }}">
                                 <span class="glyphicon glyphicon-book"></span> Facture
                             </a>
                         </li>
                         <li>
-                            <a class="btn btn-primary" href="{{ path('compta_bill_edit', { 'bill': bill.id }) }}">
+                            <a class="btn btn-primary" href="{{ path('compta_bill_edit', { 'id': bill.id }) }}">
                                 <span class="glyphicon glyphicon-pencil"></span> Modifier
                             </a>
                         </li>
                         <li>
-                            {{ form_start(deleteForms[bill.id]) }}
-                            <button type="submit" class="btn btn-danger">
-                                <span class="glyphicon glyphicon-trash"></span> Supprimer
-                            </button>
-                            {{ form_end(deleteForms[bill.id]) }}
+                            {{ button.delete(path('compta_bill_delete', { 'id': bill.id })) }}
                         </li>
                     </ul>
                 </td>

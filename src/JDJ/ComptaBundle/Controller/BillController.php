@@ -80,18 +80,10 @@ class BillController extends Controller
             ->createPaginator(null, array('createdAt' => 'desc'))
             ->setCurrentPage($request->get('page', 1));
 
-        $deleteForms = array();
         $totalPrices = array();
-
-        /** @var Bill $bill */
-        foreach ($bills as $bill) {
-            $deleteForms[$bill->getId()] = $this->createDeleteForm($bill->getId())->createView();
-            $totalPrices[$bill->getId()] = $this->getBillManager()->getTotalPrice($bill);
-        }
 
         return $this->render('compta/bill/index.html.twig', array(
             'bills' => $bills,
-            'deleteForms' => $deleteForms,
             'totalPrices' => $totalPrices,
         ));
     }
@@ -99,7 +91,7 @@ class BillController extends Controller
     /**
      * Finds and displays a Bill entity.
      *
-     * @Route("/{bill}/show", name="compta_bill_show")
+     * @Route("/{id}/show", name="compta_bill_show")
      * @ParamConverter("bill", class="JDJComptaBundle:Bill")
      *
      * @param Bill $bill
@@ -128,11 +120,11 @@ class BillController extends Controller
     public function newAction()
     {
         $entity = new Bill();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return $this->render('compta/bill/new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -180,7 +172,7 @@ class BillController extends Controller
 
         return $this->render('compta/bill/new.html.twig', array(
             'bill' => $bill,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -205,7 +197,7 @@ class BillController extends Controller
     /**
      * Displays a form to edit an existing Bill entity.
      *
-     * @Route("/{bill}/edit", name="compta_bill_edit")
+     * @Route("/{id}/edit", name="compta_bill_edit")
      * @ParamConverter("bill", class="JDJComptaBundle:Bill")
      *
      * @param Bill $bill
@@ -216,15 +208,15 @@ class BillController extends Controller
         $form = $this->createEditForm($bill);
 
         return $this->render('compta/bill/edit.html.twig', array(
-            'entity'      => $bill,
-            'form'   => $form->createView(),
+            'entity' => $bill,
+            'form' => $form->createView(),
         ));
     }
 
     /**
      * Edits an existing Bill entity.
      *
-     * @Route("/{bill}/update", name="compta_bill_update")
+     * @Route("/{id}/update", name="compta_bill_update")
      * @ParamConverter("bill", class="JDJComptaBundle:Bill")
      *
      * @param Request $request
@@ -256,8 +248,8 @@ class BillController extends Controller
         }
 
         return $this->render('compta/bill/edit.html.twig', array(
-            'bill'      => $bill,
-            'edit_form'   => $editForm->createView(),
+            'bill' => $bill,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -283,7 +275,7 @@ class BillController extends Controller
     /**
      * Displays a form to enrich the payment date of an existing Bill entity.
      *
-     * @Route("/{bill}/payment/edit", name="compta_bill_payment_edit")
+     * @Route("/{id}/payment/edit", name="compta_bill_payment_edit")
      * @ParamConverter("bill", class="JDJComptaBundle:Bill")
      *
      * @param Bill $bill
@@ -294,15 +286,15 @@ class BillController extends Controller
         $form = $this->createPaymentEditForm($bill);
 
         return $this->render('compta/bill/payment/edit.html.twig', array(
-            'bill'      => $bill,
-            'form'   => $form->createView(),
+            'bill' => $bill,
+            'form' => $form->createView(),
         ));
     }
 
     /**
      * Edits an existing Bill entity to enrich the payment date.
      *
-     * @Route("/{bill}/payment/update", name="compta_bill_payement_update")
+     * @Route("/{id}/payment/update", name="compta_bill_payement_update")
      * @ParamConverter("bill", class="JDJComptaBundle:Bill")
      *
      * @param Request $request
@@ -324,8 +316,8 @@ class BillController extends Controller
         }
 
         return $this->render('compta/bill/payment/edit.html.twig', array(
-            'bill'      => $bill,
-            'edit_form'   => $editForm->createView(),
+            'bill' => $bill,
+            'edit_form' => $editForm->createView(),
         ));
     }
 
@@ -348,7 +340,7 @@ class BillController extends Controller
     private function createPaymentEditForm(Bill $bill)
     {
         $form = $this->createForm(new BillType(), $bill, array(
-            'action' => $this->generateUrl('compta_bill_payment_update', array('bill' => $bill->getId())),
+            'action' => $this->generateUrl('compta_bill_payment_update', array('id' => $bill->getId())),
             'method' => 'PUT',
         ));
 
@@ -360,40 +352,19 @@ class BillController extends Controller
     /**
      * Deletes a Bill entity.
      *
-     * @Route("/{bill}/delete", name="compta_bill_delete")
+     * @Route("/{id}/delete", name="compta_bill_delete")
      * @ParamConverter("bill", class="JDJComptaBundle:Bill")
      *
-     * @param Request $request
      * @param Bill $bill
      * @return RedirectResponse
      */
-    public function deleteAction(Request $request, Bill $bill)
+    public function deleteAction(Bill $bill)
     {
-        $form = $this->createDeleteForm($bill->getId());
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($bill);
-            $em->flush();
-        }
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($bill);
+        $em->flush();
 
         return $this->redirect($this->generateUrl('compta_bill'));
-    }
-
-    /**
-     * Creates a form to delete a Bill entity by id.
-     *
-     * @param int $id The entity id
-     * @return Form The form
-     */
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('compta_bill_delete', array('bill' => $id)))
-            ->setMethod('DELETE')
-            ->getForm()
-            ;
     }
 
     /**

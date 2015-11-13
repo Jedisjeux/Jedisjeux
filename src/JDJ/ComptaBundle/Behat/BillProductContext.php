@@ -33,7 +33,7 @@ class BillProductContext extends DefaultContext
         $manager = $this->getEntityManager();
 
         /** @var Customer $customer */
-        $customer = $this->findOneBy('comptaCustomer', array('companyName' => $companyName));
+        $customer = $this->findOneBy('comptaCustomer', array('society' => $companyName));
 
         /** @var Bill $bill */
         $bill = $this->findOneBy('comptaBill', array('customer' => $customer));
@@ -45,11 +45,10 @@ class BillProductContext extends DefaultContext
 
             $billProduct = new BillProduct();
             $billProduct
+                ->setBill($bill)
                 ->setProduct($product)
                 ->setProductVersion($this->getProductManager()->getCurrentVersion($product))
                 ->setQuantity(isset($data['quantity']) ? $data['quantity'] : $this->faker->numberBetween());
-
-            $bill->addBillProduct($billProduct);
 
             $manager->persist($billProduct);
         }
