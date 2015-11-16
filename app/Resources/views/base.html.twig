@@ -14,6 +14,7 @@
     {% block head_style %}
         {% stylesheets
         '@MopaBootstrapBundle/Resources/public/sass/mopabootstrapbundle-3.2.scss'
+        'assets/stylesheets/base.css'
         'bundles/bmatznerfontawesome/css/font-awesome.min.css'
         'assets/css/magnific-popup.css'
         'assets/css/owl.carousel.css'
@@ -26,10 +27,6 @@
         'assets/bower_components/fancybox/source/helpers/jquery.fancybox-thumbs.css'
         'assets/bower_components/multiple-select/multiple-select.css'
         'assets/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'
-        'assets/sass/base.scss'
-        'assets/sass/modules/core/*.scss'
-        'assets/sass/modules/collection/*.scss'
-        'assets/sass/modules/jedizone/*.scss'
         filter='cssrewrite' output='css/compiled/all.css' %}
         <link rel="stylesheet" href="{{ asset_url }}"/>
         {% endstylesheets %}
