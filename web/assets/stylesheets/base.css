@@ -1,0 +1,453 @@
+/*
+ * Specific styles of signin component
+ */
+/*
+ * General styles
+ */
+/* line 10, ../sass/modules/login.scss */
+html body.login {
+  height: 100%;
+  /*
+   * Card component
+   */
+  /*
+   * Form styles
+   */
+}
+/* line 14, ../sass/modules/login.scss */
+html body.login .card-container.card {
+  max-width: 350px;
+  padding: 40px 40px;
+}
+/* line 19, ../sass/modules/login.scss */
+html body.login button.btn {
+  font-weight: 700;
+  height: 36px;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+/* line 26, ../sass/modules/login.scss */
+html body.login button.btn.btn-signin {
+  /*background-color: #4d90fe; */
+  background-color: #f8a841;
+  /* background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
+  padding: 0px;
+  font-weight: 700;
+  font-size: 14px;
+  height: 36px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  border: none;
+  -o-transition: all 0.218s;
+  -moz-transition: all 0.218s;
+  -webkit-transition: all 0.218s;
+  transition: all 0.218s;
+}
+/* line 48, ../sass/modules/login.scss */
+html body.login .card {
+  background-color: #F7F7F7;
+  /* just in case there no content*/
+  padding: 20px 25px 30px;
+  margin: 0 auto 25px;
+  margin-top: 50px;
+  /* shadows and rounded borders */
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+}
+/* line 63, ../sass/modules/login.scss */
+html body.login .profile-img-card {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 10px;
+  display: block;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+/* line 76, ../sass/modules/login.scss */
+html body.login .profile-name-card {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  margin: 10px 0 0;
+  min-height: 1em;
+}
+/* line 84, ../sass/modules/login.scss */
+html body.login .reauth-email {
+  display: block;
+  color: #404040;
+  line-height: 2;
+  margin-bottom: 10px;
+  font-size: 14px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/* line 99, ../sass/modules/login.scss */
+html body.login .form-signin #username,
+html body.login .form-signin #password {
+  direction: ltr;
+  height: 44px;
+  font-size: 16px;
+}
+/* line 106, ../sass/modules/login.scss */
+html body.login .form-signin input[type=email],
+html body.login .form-signin input[type=password],
+html body.login .form-signin input[type=text],
+html body.login .form-signin button {
+  width: 100%;
+  display: block;
+  margin-bottom: 10px;
+  z-index: 1;
+  position: relative;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/* line 120, ../sass/modules/login.scss */
+html body.login .form-signin .form-control:focus {
+  border-color: #6891a2;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #6891a2;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #6891a2;
+}
+/* line 127, ../sass/modules/login.scss */
+html body.login .btn.btn-signin:hover,
+html body.login .btn.btn-signin:active,
+html body.login .btn.btn-signin:focus {
+  background-color: #f8a841;
+  color: white;
+}
+/* line 134, ../sass/modules/login.scss */
+html body.login .forgot-password {
+  color: #f8a841;
+}
+/* line 138, ../sass/modules/login.scss */
+html body.login .forgot-password:hover,
+html body.login .forgot-password:active,
+html body.login .forgot-password:focus {
+  color: #f8a841;
+}
+
+/* line 2, ../sass/modules/collection/_collection.scss */
+.img-collection-container {
+  width: 110px;
+  height: 110px;
+  line-height: 106px;
+  border-radius: 100px;
+  text-align: center;
+  margin: 10px auto;
+}
+
+/* line 11, ../sass/modules/collection/_collection.scss */
+.img-collection {
+  border-radius: 100px;
+  position: relative;
+  width: 92px;
+  height: 92px;
+  overflow: hidden;
+}
+
+/* line 18, ../sass/modules/collection/_collection.scss */
+#input-existing-collection {
+  width: 300px;
+}
+
+/** SPINNER **/
+/* line 2, ../sass/modules/core/_loading.scss */
+.loading {
+  display: none;
+  background: rgba(0, 0, 0, 0.1);
+  position: absolute;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+/* line 13, ../sass/modules/core/_loading.scss */
+.spinner {
+  margin: 400px auto;
+  width: 100px;
+  height: 100px;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+/* line 23, ../sass/modules/core/_loading.scss */
+.container1 > div, .container2 > div, .container3 > div {
+  width: 20px;
+  height: 20px;
+  background-color: #338CC7;
+  border-radius: 100%;
+  position: absolute;
+  -webkit-animation: bouncedelay 1.2s infinite ease-in-out;
+  animation: bouncedelay 1.2s infinite ease-in-out;
+  /* Prevent first frame from flickering when animation starts */
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+/* line 36, ../sass/modules/core/_loading.scss */
+.spinner .spinner-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+/* line 42, ../sass/modules/core/_loading.scss */
+.container2 {
+  -webkit-transform: rotateZ(45deg);
+  transform: rotateZ(45deg);
+}
+
+/* line 47, ../sass/modules/core/_loading.scss */
+.container3 {
+  -webkit-transform: rotateZ(90deg);
+  transform: rotateZ(90deg);
+}
+
+/* line 52, ../sass/modules/core/_loading.scss */
+.circle1 {
+  top: 0;
+  left: 0;
+}
+
+/* line 53, ../sass/modules/core/_loading.scss */
+.circle2 {
+  top: 0;
+  right: 0;
+}
+
+/* line 54, ../sass/modules/core/_loading.scss */
+.circle3 {
+  right: 0;
+  bottom: 0;
+}
+
+/* line 55, ../sass/modules/core/_loading.scss */
+.circle4 {
+  left: 0;
+  bottom: 0;
+}
+
+/* line 57, ../sass/modules/core/_loading.scss */
+.container2 .circle1 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+
+/* line 62, ../sass/modules/core/_loading.scss */
+.container3 .circle1 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+/* line 67, ../sass/modules/core/_loading.scss */
+.container1 .circle2 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+
+/* line 72, ../sass/modules/core/_loading.scss */
+.container2 .circle2 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+
+/* line 77, ../sass/modules/core/_loading.scss */
+.container3 .circle2 {
+  -webkit-animation-delay: -0.7s;
+  animation-delay: -0.7s;
+}
+
+/* line 82, ../sass/modules/core/_loading.scss */
+.container1 .circle3 {
+  -webkit-animation-delay: -0.6s;
+  animation-delay: -0.6s;
+}
+
+/* line 87, ../sass/modules/core/_loading.scss */
+.container2 .circle3 {
+  -webkit-animation-delay: -0.5s;
+  animation-delay: -0.5s;
+}
+
+/* line 92, ../sass/modules/core/_loading.scss */
+.container3 .circle3 {
+  -webkit-animation-delay: -0.4s;
+  animation-delay: -0.4s;
+}
+
+/* line 97, ../sass/modules/core/_loading.scss */
+.container1 .circle4 {
+  -webkit-animation-delay: -0.3s;
+  animation-delay: -0.3s;
+}
+
+/* line 102, ../sass/modules/core/_loading.scss */
+.container2 .circle4 {
+  -webkit-animation-delay: -0.2s;
+  animation-delay: -0.2s;
+}
+
+/* line 107, ../sass/modules/core/_loading.scss */
+.container3 .circle4 {
+  -webkit-animation-delay: -0.1s;
+  animation-delay: -0.1s;
+}
+
+@-webkit-keyframes bouncedelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0);
+  }
+  40% {
+    -webkit-transform: scale(1);
+  }
+}
+@keyframes bouncedelay {
+  0%, 80%, 100% {
+    transform: scale(0);
+    -webkit-transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+    -webkit-transform: scale(1);
+  }
+}
+/* line 1, ../sass/modules/jedizone/_jedizone.scss */
+.pricing-item-12 {
+  position: relative;
+  max-width: 700px !important;
+  margin: 15px auto;
+  padding: 20px;
+  border: 1px solid #EEE;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+}
+
+/* line 11, ../sass/modules/jedizone/_jedizone.scss */
+.notification-box {
+  margin: 0 !important;
+}
+
+/* line 7, ../sass/base.scss */
+.top-bar .avatar {
+  width: 30px;
+  height: 30px;
+}
+
+/* line 13, ../sass/base.scss */
+.img-round {
+  border-radius: 50%;
+}
+
+/* line 18, ../sass/base.scss */
+.jeu-list .img-container {
+  height: 148px;
+  overflow: hidden;
+}
+
+/* line 24, ../sass/base.scss */
+.intro {
+  font-style: italic;
+  font-size: 1.3em;
+}
+
+/* line 29, ../sass/base.scss */
+.thumbnail-jeu {
+  padding-left: 0;
+  padding-top: 8px;
+}
+
+/* line 34, ../sass/base.scss */
+.title-button {
+  padding-top: 7px;
+}
+
+/* line 40, ../sass/base.scss */
+.sidebar .score-list-content {
+  display: block;
+}
+/* line 43, ../sass/base.scss */
+.sidebar .score-list-content ul {
+  padding: 0px;
+  margin: 0px;
+  list-style-type: none;
+}
+/* line 48, ../sass/base.scss */
+.sidebar .score-list-content ul img, .sidebar .score-list-content ul .anonymous-user {
+  max-width: 60px;
+  float: left;
+  margin-right: 10px;
+  margin-top: 3px;
+}
+/* line 58, ../sass/base.scss */
+.sidebar .anonymous-user {
+  margin-right: 10px;
+  margin-top: 3px;
+  float: left;
+  width: 60px;
+  height: 60px;
+  display: block;
+  vertical-align: middle;
+  text-align: center;
+}
+/* line 68, ../sass/base.scss */
+.sidebar .anonymous-user .fa {
+  font-size: 50px;
+}
+
+/* line 76, ../sass/base.scss */
+.comment-author-image .anonymous-user {
+  margin-right: 10px;
+  margin-top: 3px;
+  float: left;
+  width: 60px;
+  height: 60px;
+  display: block;
+  vertical-align: middle;
+  text-align: center;
+}
+/* line 86, ../sass/base.scss */
+.comment-author-image .anonymous-user .fa {
+  font-size: 50px;
+}
+
+/* line 93, ../sass/base.scss */
+.blog-meta img {
+  float: left;
+  width: 32px;
+}
+
+/* line 99, ../sass/base.scss */
+.bloc-login {
+  width: 430px !important;
+}
+
+/* line 103, ../sass/base.scss */
+ul.ui-autocomplete {
+  padding: 0px;
+  margin: 0px;
+  list-style-type: none;
+}
+/* line 108, ../sass/base.scss */
+ul.ui-autocomplete img, ul.ui-autocomplete .anonymous-user {
+  max-width: 60px;
+  float: left;
+  margin-right: 10px;
+  margin-top: 3px;
+}
