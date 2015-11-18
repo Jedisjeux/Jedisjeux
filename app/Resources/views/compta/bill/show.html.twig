@@ -61,12 +61,12 @@
         </tbody>
     </table>
 
-    <div class="pull-right">{{ totalPrice|localizedcurrency('EUR') }}</div>
+    <div class="pull-right">{{ bill.totalPrice|localizedcurrency('EUR') }}</div>
     <div>Montant total HT : </div>
 
     <p>Exonéré T.V.A - article 261-7-1° du CGI</p>
 
-    <div class="pull-right">{{ totalPrice|localizedcurrency('EUR') }}</div>
+    <div class="pull-right">{{ bill.totalPrice|localizedcurrency('EUR') }}</div>
     <div>Montant total à payer : </div>
 
 {% endblock container %}

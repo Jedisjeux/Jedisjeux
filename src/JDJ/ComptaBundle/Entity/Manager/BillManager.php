@@ -70,4 +70,17 @@ class BillManager
 
         return $totalPrice;
     }
+
+    /**
+     * @param Bill $bill
+     */
+    public function calculateTotalPrice(Bill $bill)
+    {
+        /** @var BillProduct $billProduct */
+        foreach ($bill->getBillProducts() as $billProduct) {
+            $this->productManager->revertToVersion($billProduct->getProduct(), $billProduct->getProductVersion());
+        }
+
+        $bill->setTotalPrice($this->getTotalPrice($bill));
+    }
 }

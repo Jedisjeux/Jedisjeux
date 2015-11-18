@@ -35,7 +35,7 @@
                 </td>
                 <td>{{ bill.createdAt|localizeddate('long', 'none') }}</td>
                 <td>{{ bill.customer.society }}</td>
-                <td>{{ totalPrices[bill.id]|localizedcurrency('EUR') }}</td>
+                <td>{{ bill.totalPrice|localizedcurrency('EUR') }}</td>
                 <td>
                     {% if bill.paidAt %}
                         {{ bill.paidAt|localizeddate('long', 'none') }}

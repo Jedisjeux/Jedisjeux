@@ -41,14 +41,6 @@ use Symfony\Component\VarDumper\VarDumper;
 class BillController extends Controller
 {
     /**
-     * @return ProductManager
-     */
-    private function getProductManager()
-    {
-        return $this->get('app.manager.product');
-    }
-
-    /**
      * @return BillManager
      */
     private function getBillManager()
@@ -74,17 +66,19 @@ class BillController extends Controller
      */
     public function indexAction(Request $request)
     {
+        /** @var Bill[] $bills */
         $bills = $this
             ->getBillManager()
             ->getBillRepository()
             ->createPaginator(null, array('createdAt' => 'desc'))
             ->setCurrentPage($request->get('page', 1));
 
-        $totalPrices = array();
+        foreach($bills as $bill) {
+            $this->getBillManager()->calculateTotalPrice($bill);
+        }
 
         return $this->render('compta/bill/index.html.twig', array(
             'bills' => $bills,
-            'totalPrices' => $totalPrices,
         ));
     }
 
@@ -99,14 +93,10 @@ class BillController extends Controller
      */
     public function showAction(Bill $bill)
     {
-        /** @var BillProduct $billProduct */
-        foreach ($bill->getBillProducts() as $billProduct) {
-            $this->getProductManager()->revertToVersion($billProduct->getProduct(), $billProduct->getProductVersion());
-        }
+        $this->getBillManager()->calculateTotalPrice($bill);
 
         return $this->render('compta/bill/show.html.twig', array(
             'bill' => $bill,
-            'totalPrice' => $this->getBillManager()->getTotalPrice($bill),
         ));
     }
 
@@ -189,8 +179,6 @@ class BillController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Créer'));
-
         return $form;
     }
 
@@ -264,8 +252,6 @@ class BillController extends Controller
             'action' => $this->generateUrl('compta_bill_update', array('id' => $bill->getId())),
             'method' => 'PUT',
         ));
-
-        $form->add('submit', 'submit', array('label' => 'Modifier'));
 
         return $form;
     }
@@ -341,8 +327,6 @@ class BillController extends Controller
             'action' => $this->generateUrl('compta_bill_payment_update', array('id' => $bill->getId())),
             'method' => 'PUT',
         ));
-
-        $form->add('submit', 'submit', array('label' => 'Modifier'));
 
         return $form;
     }

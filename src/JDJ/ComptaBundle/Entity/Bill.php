@@ -85,6 +85,11 @@ class Bill
     private $bookEntry;
 
     /**
+     * @var float
+     */
+    private $totalPrice;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -274,4 +279,22 @@ class Bill
         return $this;
     }
 
+    /**
+     * @return float
+     */
+    public function getTotalPrice()
+    {
+        return $this->totalPrice;
+    }
+
+    /**
+     * @param float $totalPrice
+     *
+     * @return $this
+     */
+    public function setTotalPrice($totalPrice)
+    {
+        $this->totalPrice = $totalPrice;
+        return $this;
+    }
 }
