@@ -14,6 +14,7 @@ use JDJ\ComptaBundle\Entity\Manager\BillManager;
 use JDJ\ComptaBundle\Entity\PaymentMethod;
 use JDJ\ComptaBundle\Entity\Repository\AddressRepository;
 use JDJ\ComptaBundle\Entity\Repository\ProductRepository;
+use JDJ\CoreBundle\Entity\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Console\Input\InputInterface;
@@ -117,9 +118,15 @@ EOM;
                 $this->getEntityManager()->flush();
             }
 
-            var_dump($product->getId());
+            $billProduct = $this->getBillProductRepository()->findOneBy(array(
+                'product' => $data['idProduit'],
+                'bill' => $data['id'],
+            ));
 
-            $billProduct = new BillProduct();
+            if (null === $billProduct) {
+                $billProduct = new BillProduct();
+            }
+
             $billProduct
                 ->setBill($bill)
                 ->setProduct($product)
@@ -129,6 +136,11 @@ EOM;
             $bill->addBillProduct($billProduct);
             $this->getEntityManager()->flush();
 
+            $stmt = $this->getEntityManager()->getConnection()
+                ->prepare('SET foreign_key_checks = 0;');
+
+            $stmt->execute();
+
             $this->getDatabaseConnection()->update('cpta_bill', array(
                 "id" => $data['id'],
             ), array('id' => $product->getId()));
@@ -136,6 +148,11 @@ EOM;
             $this->getDatabaseConnection()->update('cpta_bill_product', array(
                 "bill_id" => $data['id'],
             ), array('bill_id' => $product->getId()));
+
+            $stmt = $this->getEntityManager()->getConnection()
+                ->prepare('SET foreign_key_checks = 0;');
+
+            $stmt->execute();
 
             $autoIncrement = $data['id'] + 1;
             $this->getDatabaseConnection()->exec("ALTER TABLE cpta_bill AUTO_INCREMENT = " . $autoIncrement );
@@ -185,6 +202,14 @@ EOM;
     protected function getProductRepository()
     {
         return $this->getEntityManager()->getRepository('JDJComptaBundle:Product');
+    }
+
+    /**
+     * @return EntityRepository
+     */
+    protected function getBillProductRepository()
+    {
+        return $this->getEntityManager()->getRepository('JDJComptaBundle:BillProduct');
     }
 
     /**
