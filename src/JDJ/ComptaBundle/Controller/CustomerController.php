@@ -65,7 +65,7 @@ class CustomerController extends Controller
     {
         $customers = $this
             ->getCustomerRepository()
-            ->createPaginator()
+            ->createPaginator($request->get('criteria', array()), $request->get('sorting', array()))
             ->setCurrentPage($request->get('page', 1));
 
         return $this->render('compta/customer/index.html.twig', array(

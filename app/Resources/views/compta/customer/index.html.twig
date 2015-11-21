@@ -1,6 +1,17 @@
 {% extends 'base.html.twig' %}
 {% from 'macros/misc.html.twig' import pagination %}
 {% import 'macros/buttons.html.twig' as button %}
+{% from '::macros/sorting.html.twig' import sorting %}
+
+{% set sorting = app.request.get('sorting') %}
+
+{% set icon = false %}
+{% set currentOrder = null %}
+
+{% if null == sorting %}
+    {% set icon = true %}
+    {% set currentOrder = 'asc' %}
+{% endif %}
 
 {% block container %}
 
@@ -17,8 +28,8 @@
         <thead>
         <tr>
             <th>#</th>
-            <th>{{ 'label.company'|trans }}</th>
-            <th>{{ 'label.email'|trans }}</th>
+            <th>{{ sorting('compta_customer', 'label.company'|trans, 'society', 'desc') }}</th>
+            <th>{{ sorting('compta_customer', 'label.email'|trans, 'email', 'desc') }}</th>
         </tr>
         </thead>
         <tbody>
