@@ -1,6 +1,17 @@
 {% extends "::base.html.twig" %}
 {% from 'JDJWebBundle:Macros:misc.html.twig' import pagination %}
 {% import 'macros/buttons.html.twig' as button %}
+{% from '::macros/sorting.html.twig' import sorting %}
+
+{% set sorting = app.request.get('sorting') %}
+
+{% set icon = false %}
+{% set currentOrder = null %}
+
+{% if null == sorting %}
+    {% set icon = true %}
+    {% set currentOrder = 'desc' %}
+{% endif %}
 
 {% block container %}
 
@@ -20,10 +31,10 @@
         <thead>
         <tr>
             <th>#</th>
-            <th>{{ 'label.created_at'|trans }}</th>
-            <th>{{ 'label.society'|trans }}</th>
+            <th>{{ sorting('compta_bill', 'label.created_at'|trans, 'createdAt', 'desc', icon, currentOrder) }}</th>
+            <th>{{ sorting('compta_bill', 'label.society'|trans, 'society', 'asc') }}</th>
             <th>{{ 'label.total_price'|trans }}</th>
-            <th>{{ 'label.paid_at'|trans }}</th>
+            <th>{{ sorting('compta_bill', 'label.paid_at'|trans, 'paidAt', 'asc') }}</th>
         </tr>
         </thead>
         <tbody>

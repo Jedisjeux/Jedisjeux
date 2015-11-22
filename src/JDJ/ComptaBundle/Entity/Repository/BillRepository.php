@@ -7,6 +7,7 @@
  */
 
 namespace JDJ\ComptaBundle\Entity\Repository;
+use Doctrine\ORM\QueryBuilder;
 use JDJ\CoreBundle\Entity\EntityRepository;
 
 
@@ -15,5 +16,19 @@ use JDJ\CoreBundle\Entity\EntityRepository;
  */
 class BillRepository extends EntityRepository
 {
+    /**
+     * @inheritdoc
+     */
+    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = null)
+    {
+        if (isset($sorting['society'])) {
+            $queryBuilder
+                ->join($this->getAlias().'.customer', 'customer')
+                ->addOrderBy('customer.society', $sorting['society']);
+            unset($sorting['society']);
+        }
+
+        parent::applySorting($queryBuilder, $sorting);
+    }
 
 }

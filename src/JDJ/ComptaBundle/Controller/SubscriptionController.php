@@ -59,10 +59,12 @@ class SubscriptionController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $subscriptions = $this->getSubscriptionRepository()->createPaginator(null, array(
-            'createdAt' => 'desc'
-        ))
-        ->setCurrentPage($request->get('page', 1));
+        $subscriptions = $this
+            ->getSubscriptionRepository()
+            ->createPaginator($request->get('criteria', array()), $request->get('sorting', array(
+                'createdAt' => 'desc'
+            )))
+            ->setCurrentPage($request->get('page', 1));
 
         return $this->render('compta/subscription/index.html.twig', array(
             'subscriptions' => $subscriptions,

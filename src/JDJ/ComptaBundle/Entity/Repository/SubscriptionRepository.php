@@ -9,6 +9,7 @@
 namespace JDJ\ComptaBundle\Entity\Repository;
 
 
+use Doctrine\ORM\QueryBuilder;
 use JDJ\ComptaBundle\Entity\Subscription;
 use JDJ\CoreBundle\Entity\EntityRepository;
 
@@ -17,6 +18,35 @@ use JDJ\CoreBundle\Entity\EntityRepository;
  */
 class SubscriptionRepository extends EntityRepository
 {
+    /**
+     * @inheritdoc
+     */
+    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = null)
+    {
+        if (isset($sorting['product'])) {
+            $queryBuilder
+                ->join($this->getAlias().'.product', 'product')
+                ->addOrderBy('product.name', $sorting['product']);
+            unset($sorting['product']);
+        }
+
+        if (isset($sorting['society'])) {
+            $queryBuilder
+                ->join($this->getAlias().'.customer', 'customer')
+                ->addOrderBy('customer.society', $sorting['society']);
+            unset($sorting['society']);
+        }
+
+        if (isset($sorting['paidAt'])) {
+            $queryBuilder
+                ->join($this->getAlias().'.bill', 'bill')
+                ->addOrderBy('bill.paidAt', $sorting['paidAt']);
+            unset($sorting['paidAt']);
+        }
+
+        parent::applySorting($queryBuilder, $sorting);
+    }
+
     /**
      * @return \Pagerfanta\Pagerfanta
      */

@@ -70,7 +70,7 @@ class BillController extends Controller
         $bills = $this
             ->getBillManager()
             ->getBillRepository()
-            ->createPaginator(null, array('createdAt' => 'desc'))
+            ->createPaginator($request->get('criteria', array()), $request->get('sorting', array('createdAt' => 'desc')))
             ->setCurrentPage($request->get('page', 1));
 
         foreach($bills as $bill) {

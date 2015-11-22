@@ -1,6 +1,17 @@
 {% extends "::base.html.twig" %}
 {% from '::macros/misc.html.twig' import pagination %}
 {% from '::macros/status.html.twig' import subscriptionStatus as status %}
+{% from '::macros/sorting.html.twig' import sorting %}
+
+{% set sorting = app.request.get('sorting') %}
+
+{% set icon = false %}
+{% set currentOrder = null %}
+
+{% if null == sorting %}
+    {% set icon = true %}
+    {% set currentOrder = 'desc' %}
+{% endif %}
 
 {% block container %}
 
@@ -11,12 +22,12 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>{{ 'label.society'|trans }}</th>
-            <th>{{ 'label.product'|trans }}</th>
-            <th>{{ 'label.created_at'|trans }}</th>
-            <th>{{ 'label.paid_at'|trans }}</th>
-            <th>{{ 'label.end_at'|trans }}</th>
-            <th>{{ 'label.status'|trans }}</th>
+            <th>{{ sorting('compta_subscription', 'label.society'|trans, 'society', 'asc') }}</th>
+            <th>{{ sorting('compta_subscription', 'label.product'|trans, 'product', 'asc') }}</th>
+            <th>{{ sorting('compta_subscription', 'label.created_at'|trans, 'createdAt', 'desc', icon, currentOrder) }}</th>
+            <th>{{ sorting('compta_subscription', 'label.paid_at'|trans, 'paidAt', 'asc') }}</th>
+            <th>{{ sorting('compta_subscription', 'label.end_at'|trans, 'endAt', 'asc') }}</th>
+            <th>{{ sorting('compta_subscription', 'label.status'|trans, 'status', 'asc') }}</th>
             <th></th>
         </tr>
         </thead>
