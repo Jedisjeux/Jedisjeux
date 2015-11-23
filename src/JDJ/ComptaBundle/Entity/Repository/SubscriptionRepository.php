@@ -21,6 +21,22 @@ class SubscriptionRepository extends EntityRepository
     /**
      * @inheritdoc
      */
+    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)
+    {
+        if (isset($criteria['query'])) {
+            $queryBuilder
+                ->join($this->getAlias().'.customer', 'customer')
+                ->andWhere('customer.society like :query')
+                ->setParameter('query', '%'.$criteria['query'].'%');
+            unset($criteria['query']);
+        }
+
+        parent::applyCriteria($queryBuilder, $criteria);
+    }
+
+    /**
+     * @inheritdoc
+     */
     protected function applySorting(QueryBuilder $queryBuilder, array $sorting = null)
     {
         if (isset($sorting['product'])) {

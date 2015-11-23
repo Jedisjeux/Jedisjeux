@@ -49,7 +49,7 @@ class BookEntryController extends Controller
         $bookEntries = $this
             ->getBookEntryManager()
             ->getBookEntryRepository()
-            ->createPaginator(null, array('createdAt' => 'desc'))
+            ->createPaginator($request->get('criteria', array()), array('createdAt' => 'desc'))
             ->setCurrentPage($request->get('page', 1));
 
         return $this->render('compta/book-entry/index.html.twig', array(

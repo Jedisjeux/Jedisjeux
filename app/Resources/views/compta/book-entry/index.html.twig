@@ -1,4 +1,4 @@
-{% extends "::base.html.twig" %}
+{% extends "layout/backend_index.html.twig" %}
 {% from 'JDJWebBundle:Macros:misc.html.twig' import pagination %}
 {% import 'macros/buttons.html.twig' as button %}
 {% from '::macros/sorting.html.twig' import sorting %}
@@ -14,26 +14,18 @@
     {% set currentOrder = 'desc' %}
 {% endif %}
 
-{% block container %}
+{% block new_entity_button %}
+    <a class="btn btn-primary" href="{{ path('compta_book_entry_new') }}">
+        <span class="glyphicon glyphicon-plus-sign"></span>
+        Créer une écriture comptable
+    </a>
+{% endblock new_entity_button %}
 
-    <div class="block-heading-two">
-        <ul class="list-inline pull-right">
-            <li>
-                <a class="btn btn-primary" href="{{ path('compta_book_entry_new') }}">
-                    <span class="glyphicon glyphicon-plus-sign"></span>
-                    Créer une écriture comptable
-                </a>
-            </li>
-        </ul>
-        <h3><span>Liste des écritures comptables</span></h3>
-    </div>
+{% block page_title %}
+    Liste des écritures comptables
+{% endblock page_title %}
 
-    <div class="well">
-        {% block form_filter %}
-            {{ form.filter('Recherche...') }}
-        {% endblock form_filter %}
-    </div>
-
+{% block list %}
     <table class="table table-striped">
         <thead>
         <tr>
@@ -48,7 +40,7 @@
         {% for bookEntry in bookEntries %}
             <tr>
                 <td>
-                   {{ bookEntry.activeAt|localizeddate('long', 'none') }}
+                    {{ bookEntry.activeAt|localizeddate('long', 'none') }}
                 </td>
                 <td>{{ bookEntry.label }}</td>
                 <td>
@@ -75,13 +67,12 @@
         {% endfor %}
         </tbody>
     </table>
+{% endblock list %}
 
-    {% block Pagination %}
-        <div class="pagination-wrapper">
-            <div class="pagination-bottom">
-                {{ pagination(bookEntries) }}
-            </div>
+{% block Pagination %}
+    <div class="pagination-wrapper">
+        <div class="pagination-bottom">
+            {{ pagination(bookEntries) }}
         </div>
-    {% endblock %}
-
-{% endblock container %}
+    </div>
+{% endblock %}

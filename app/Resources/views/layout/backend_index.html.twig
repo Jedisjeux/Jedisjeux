@@ -1,0 +1,28 @@
+{% extends "::base.html.twig" %}
+
+{% block container %}
+
+    <div class="block-heading-two">
+        <ul class="list-inline pull-right">
+            <li>
+                {% block new_entity_button %}
+                {% endblock new_entity_button %}
+            </li>
+        </ul>
+        <h3><span>{% block page_title %}{% endblock page_title %}</span></h3>
+    </div>
+
+    {% block form_filter %}
+        <div class="well">
+            {{ form.filter('Recherche...') }}
+        </div>
+    {% endblock form_filter %}
+
+
+    {% block list %}
+    {% endblock list %}
+
+    {% block Pagination %}
+    {% endblock %}
+
+{% endblock container %}

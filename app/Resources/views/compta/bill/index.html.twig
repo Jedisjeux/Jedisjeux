@@ -1,4 +1,4 @@
-{% extends "::base.html.twig" %}
+{% extends "layout/backend_index.html.twig" %}
 {% from 'JDJWebBundle:Macros:misc.html.twig' import pagination %}
 {% import 'macros/buttons.html.twig' as button %}
 {% from '::macros/sorting.html.twig' import sorting %}
@@ -13,20 +13,18 @@
     {% set currentOrder = 'desc' %}
 {% endif %}
 
-{% block container %}
+{% block new_entity_button %}
+    <a class="btn btn-primary" href="{{ path('compta_bill_new') }}">
+        <span class="glyphicon glyphicon-plus-sign"></span>
+        Créer une facture
+    </a>
+{% endblock new_entity_button %}
 
-    <div class="block-heading-two">
-        <ul class="list-inline pull-right">
-            <li>
-                <a class="btn btn-primary" href="{{ path('compta_bill_new') }}">
-                    <span class="glyphicon glyphicon-plus-sign"></span>
-                    Créer une facture
-                </a>
-            </li>
-        </ul>
-        <h3><span>Liste des factures</span></h3>
-    </div>
+{% block page_title %}
+    Liste des factures
+{% endblock page_title %}
 
+{% block list %}
     <table class="table table-striped">
         <thead>
         <tr>
@@ -75,13 +73,12 @@
         {% endfor %}
         </tbody>
     </table>
+{% endblock list %}
 
-    {% block Pagination %}
-        <div class="pagination-wrapper">
-            <div class="pagination-bottom">
-                {{ pagination(bills) }}
-            </div>
+{% block Pagination %}
+    <div class="pagination-wrapper">
+        <div class="pagination-bottom">
+            {{ pagination(bills) }}
         </div>
-    {% endblock %}
-
-{% endblock container %}
+    </div>
+{% endblock %}
