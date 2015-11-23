@@ -2,6 +2,7 @@
 {% from 'JDJWebBundle:Macros:misc.html.twig' import pagination %}
 {% import 'macros/buttons.html.twig' as button %}
 {% from '::macros/sorting.html.twig' import sorting %}
+{% import 'macros/forms.html.twig' as form %}
 
 {% set sorting = app.request.get('sorting') %}
 
@@ -25,6 +26,12 @@
             </li>
         </ul>
         <h3><span>Liste des écritures comptables</span></h3>
+    </div>
+
+    <div class="well">
+        {% block form_filter %}
+            {{ form.filter('Recherche...') }}
+        {% endblock form_filter %}
     </div>
 
     <table class="table table-striped">

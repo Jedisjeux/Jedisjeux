@@ -1,0 +1,9 @@
+{% import 'macros/buttons.html.twig' as button %}
+
+<div class="row">
+    <div class="search-bar">
+        <form method="get" action="" class="form-inline form-filter">
+            {{ form_widget(form.query, {attr: {'placeholder': placeholder}}) }}
+        </form>
+    </div>
+</div>

@@ -1,0 +1,3 @@
+{% macro filter(placeholder) %}
+    {% render(controller('JDJCoreBundle:Form:filter', {'type': 'app_filter_query','placeholder': placeholder|default("Rechercher"), 'template': 'form/_filterForm.html.twig', 'criteria':app.request.get('criteria') })) %}
+{% endmacro %}

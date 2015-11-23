@@ -14,3 +14,8 @@ services:
             [ "@app.manager.book_entry", "@app.manager.subscription" ]
         tags:
             - { name: kernel.event_subscriber }
+
+    app.form.filter.query:
+        class: JDJ\CoreBundle\Form\Filter\QueryFilterType
+        tags:
+          - { name: form.type, alias: app_filter_query }
