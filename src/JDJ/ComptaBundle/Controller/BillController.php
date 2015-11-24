@@ -9,13 +9,9 @@
 namespace JDJ\ComptaBundle\Controller;
 
 
-use Doctrine\Common\Collections\ArrayCollection;
 use JDJ\ComptaBundle\Entity\Bill;
-use JDJ\ComptaBundle\Entity\BillProduct;
 use JDJ\ComptaBundle\Entity\Manager\AddressManager;
 use JDJ\ComptaBundle\Entity\Manager\BillManager;
-use JDJ\ComptaBundle\Entity\Manager\ProductManager;
-use JDJ\ComptaBundle\Entity\Product;
 use JDJ\ComptaBundle\Event\BillEvent;
 use JDJ\ComptaBundle\Event\BillEvents;
 use JDJ\ComptaBundle\Form\BillType;
@@ -30,7 +26,6 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\VarDumper\VarDumper;
 
 /**
  * Class BillController
@@ -101,36 +96,22 @@ class BillController extends Controller
     }
 
     /**
-     * Displays a form to create a new Bill entity.
-     *
-     * @Route("/new", name="compta_bill_new")
-     *
-     * @return Response
-     */
-    public function newAction()
-    {
-        $entity = new Bill();
-        $form = $this->createCreateForm($entity);
-
-        return $this->render('compta/bill/new.html.twig', array(
-            'entity' => $entity,
-            'form' => $form->createView(),
-        ));
-    }
-
-    /**
      * Creates a new Bill entity.
      *
-     * @Route("/create", name="compta_bill_create")
+     * @Route("/new", name="compta_bill_create")
      *
      * @param Request $request
      * @return RedirectResponse|Response
      */
     public function createAction(Request $request)
     {
-
         $bill = new Bill();
-        $form = $this->createCreateForm($bill);
+
+        $form = $this->createForm(new BillType(), $bill, array(
+            'action' => $this->generateUrl('compta_bill_create'),
+            'method' => 'POST',
+        ));
+
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -155,48 +136,13 @@ class BillController extends Controller
             $em->persist($bill);
             $em->flush();
 
-            $this->getEventDispatcher()->dispatch(BillEvents::BILL_POST_CREATE, new BillEvent($bill));
+            $this->getEventDispatcher()->dispatch(BillEvents::POST_CREATE, new BillEvent($bill));
 
             return $this->redirect($this->generateUrl('compta_bill'));
         }
 
         return $this->render('compta/bill/new.html.twig', array(
             'bill' => $bill,
-            'form' => $form->createView(),
-        ));
-    }
-
-    /**
-     * Creates a form to create a Bill entity.
-     *
-     * @param Bill $bill
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createCreateForm(Bill $bill)
-    {
-        $form = $this->createForm(new BillType(), $bill, array(
-            'action' => $this->generateUrl('compta_bill_create'),
-            'method' => 'POST',
-        ));
-
-        return $form;
-    }
-
-    /**
-     * Displays a form to edit an existing Bill entity.
-     *
-     * @Route("/{id}/edit", name="compta_bill_edit")
-     * @ParamConverter("bill", class="JDJComptaBundle:Bill")
-     *
-     * @param Bill $bill
-     * @return Response
-     */
-    public function editAction(Bill $bill)
-    {
-        $form = $this->createEditForm($bill);
-
-        return $this->render('compta/bill/edit.html.twig', array(
-            'entity' => $bill,
             'form' => $form->createView(),
         ));
     }
@@ -216,60 +162,29 @@ class BillController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $editForm = $this->createEditForm($bill);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isValid()) {
-
-            //Set the data of the bill product
-            $bill = $this
-                ->getBillProductService()
-                ->setProductsBill($bill, $editForm);
-
-            $em->persist($bill);
-            $em->flush();
-
-            $this->getEventDispatcher()->dispatch(BillEvents::BILL_POST_UPDATE, new BillEvent($bill));
-
-            return $this->redirect($this->generateUrl('compta_bill'));
-        }
-
-        return $this->render('compta/bill/edit.html.twig', array(
-            'bill' => $bill,
-            'edit_form' => $editForm->createView(),
-        ));
-    }
-
-    /**
-     * Creates a form to edit a Bill entity.
-     *
-     * @param Bill $bill The entity
-     * @return Form The form
-     */
-    private function createEditForm(Bill $bill)
-    {
         $form = $this->createForm(new BillType(), $bill, array(
             'action' => $this->generateUrl('compta_bill_update', array('id' => $bill->getId())),
             'method' => 'PUT',
         ));
 
-        return $form;
-    }
+        $form->handleRequest($request);
 
-    /**
-     * Displays a form to enrich the payment date of an existing Bill entity.
-     *
-     * @Route("/{id}/payment/edit", name="compta_bill_payment_edit")
-     * @ParamConverter("bill", class="JDJComptaBundle:Bill")
-     *
-     * @param Bill $bill
-     * @return Response
-     */
-    public function paymentEditAction(Bill $bill)
-    {
-        $form = $this->createPaymentEditForm($bill);
+        if ($form->isValid()) {
 
-        return $this->render('compta/bill/payment/edit.html.twig', array(
+            //Set the data of the bill product
+            $bill = $this
+                ->getBillProductService()
+                ->setProductsBill($bill, $form);
+
+            $em->persist($bill);
+            $em->flush();
+
+            $this->getEventDispatcher()->dispatch(BillEvents::POST_UPDATE, new BillEvent($bill));
+
+            return $this->redirect($this->generateUrl('compta_bill'));
+        }
+
+        return $this->render('compta/bill/edit.html.twig', array(
             'bill' => $bill,
             'form' => $form->createView(),
         ));
@@ -290,10 +205,12 @@ class BillController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $editForm = $this->createPaymentEditForm($bill);
-        $editForm->handleRequest($request);
+        $form = $this->createForm(new BillType(), $bill, array(
+            'action' => $this->generateUrl('compta_bill_payment_update', array('id' => $bill->getId())),
+            'method' => 'PUT',
+        ));
 
-        if ($editForm->isValid()) {
+        if ($form->isValid()) {
             $em->flush();
             $this->getEventDispatcher()->dispatch(BillEvents::BILL_PAID, new GenericEvent($bill));
             return $this->redirect($this->generateUrl('compta_bill'));
@@ -301,7 +218,7 @@ class BillController extends Controller
 
         return $this->render('compta/bill/payment/edit.html.twig', array(
             'bill' => $bill,
-            'edit_form' => $editForm->createView(),
+            'edit_form' => $form->createView(),
         ));
     }
 
@@ -313,22 +230,6 @@ class BillController extends Controller
     private function getEventDispatcher()
     {
         return $this->get('event_dispatcher');
-    }
-
-    /**
-     * Creates a form to edit a Bill entity.
-     *
-     * @param Bill $bill The entity
-     * @return Form The form
-     */
-    private function createPaymentEditForm(Bill $bill)
-    {
-        $form = $this->createForm(new BillType(), $bill, array(
-            'action' => $this->generateUrl('compta_bill_payment_update', array('id' => $bill->getId())),
-            'method' => 'PUT',
-        ));
-
-        return $form;
     }
 
     /**

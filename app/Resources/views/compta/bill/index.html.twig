@@ -14,7 +14,7 @@
 {% endif %}
 
 {% block new_entity_button %}
-    <a class="btn btn-primary" href="{{ path('compta_bill_new') }}">
+    <a class="btn btn-primary" href="{{ path('compta_bill_create') }}">
         <span class="glyphicon glyphicon-plus-sign"></span>
         Créer une facture
     </a>
@@ -60,7 +60,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="btn btn-primary" href="{{ path('compta_bill_edit', { 'id': bill.id }) }}">
+                            <a class="btn btn-primary" href="{{ path('compta_bill_update', { 'id': bill.id }) }}">
                                 <span class="glyphicon glyphicon-pencil"></span> Modifier
                             </a>
                         </li>

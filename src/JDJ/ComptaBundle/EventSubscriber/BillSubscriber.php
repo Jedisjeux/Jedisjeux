@@ -52,8 +52,8 @@ class BillSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            BillEvents::BILL_POST_CREATE => 'onBillPostCreate',
-            BillEvents::BILL_POST_UPDATE => 'onBillPostUpdate',
+            BillEvents::POST_CREATE => 'onBillPostCreate',
+            BillEvents::POST_UPDATE => 'onBillPostUpdate',
         );
     }
 

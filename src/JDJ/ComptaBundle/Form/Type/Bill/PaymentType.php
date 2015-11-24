@@ -6,11 +6,11 @@
  * Time: 13:27
  */
 
-namespace JDJ\ComptaBundle\Form\Bill;
-
+namespace JDJ\ComptaBundle\Form\Type\Bill;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class PaymentType extends AbstractType
@@ -29,9 +29,9 @@ class PaymentType extends AbstractType
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'JDJ\ComptaBundle\Entity\Bill'
