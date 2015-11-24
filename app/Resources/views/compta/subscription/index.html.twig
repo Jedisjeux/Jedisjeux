@@ -1,4 +1,4 @@
-{% extends "::base.html.twig" %}
+{% extends "layout/backend_index.html.twig" %}
 {% from '::macros/misc.html.twig' import pagination %}
 {% from '::macros/status.html.twig' import subscriptionStatus as status %}
 {% from '::macros/sorting.html.twig' import sorting %}
@@ -13,12 +13,14 @@
     {% set currentOrder = 'desc' %}
 {% endif %}
 
-{% block container %}
+{% block new_entity_button %}
+{% endblock new_entity_button %}
 
-    <div class="block-heading-two">
-        <h3><span>Liste des abonnements</span></h3>
-    </div>
+{% block page_title %}
+    Liste des abonnements
+{% endblock page_title %}
 
+{% block list %}
     <table class="table table-striped">
         <thead>
         <tr>
@@ -62,12 +64,12 @@
         </tbody>
     </table>
 
-    {% block Pagination %}
-        <div class="pagination-wrapper">
-            <div class="pagination-bottom">
-                {{ pagination(subscriptions) }}
-            </div>
-        </div>
-    {% endblock %}
+{% endblock list %}
 
-{% endblock container %}
+{% block Pagination %}
+    <div class="pagination-wrapper">
+        <div class="pagination-bottom">
+            {{ pagination(subscriptions) }}
+        </div>
+    </div>
+{% endblock %}

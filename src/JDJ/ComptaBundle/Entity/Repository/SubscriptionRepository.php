@@ -26,7 +26,8 @@ class SubscriptionRepository extends EntityRepository
         if (isset($criteria['query'])) {
             $queryBuilder
                 ->join($this->getAlias().'.customer', 'customer')
-                ->andWhere('customer.society like :query')
+                ->join($this->getAlias().'.product', 'product')
+                ->andWhere('customer.society like :query or product.name like :query')
                 ->setParameter('query', '%'.$criteria['query'].'%');
             unset($criteria['query']);
         }
