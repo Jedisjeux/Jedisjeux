@@ -1,3 +1,12 @@
+Adding ssh authorized keys for server on your local computer
+
+``` bash
+cat ~/.ssh/id_rsa.pub | ssh jedisjeux@51.254.219.31 "cat - >> ~/.ssh/authorized_keys"
+```
+
+and enter the correct password for username "jedisjeux" on server
+
+
 To deploy the application on a server
 
 ``` bash
