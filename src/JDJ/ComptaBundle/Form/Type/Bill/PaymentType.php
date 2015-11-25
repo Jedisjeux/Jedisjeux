@@ -22,8 +22,10 @@ class PaymentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('paidAt', null, array(
+            ->add('paidAt', 'date', array(
                 'label' => 'label.paid_at',
+                'widget' => 'single_text',
+                'html5' => false,
             ))
         ;
     }

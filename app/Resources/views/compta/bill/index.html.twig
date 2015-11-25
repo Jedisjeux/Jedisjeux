@@ -1,7 +1,8 @@
 {% extends "layout/backend_index.html.twig" %}
 {% from 'JDJWebBundle:Macros:misc.html.twig' import pagination %}
 {% import 'macros/buttons.html.twig' as button %}
-{% from '::macros/sorting.html.twig' import sorting %}
+{% from 'macros/sorting.html.twig' import sorting %}
+{% import 'macros/modal.html.twig' as modal %}
 
 {% set sorting = app.request.get('sorting') %}
 
@@ -49,7 +50,22 @@
                     {% if bill.paidAt %}
                         {{ bill.paidAt|localizeddate('long', 'none') }}
                     {% else %}
-                        <span class="label label-danger"><span class="glyphicon glyphicon-euro" ></span> {{ 'label.waiting_for_payment'|trans }}</span>
+                        {% set modalId = 'payment' ~ bill.id %}
+                        {% set modalBody %}
+                            {{ render(url('compta_bill_payment_update', {'id': bill.id})) }}
+                        {% endset %}
+                        {{ modal.formModal(modalId, 'label.paid_at'|trans, modalBody) }}
+
+                        <!-- Button trigger modal -->
+                        <a href="#" data-toggle="modal" data-target="#{{ modalId }}">
+                             <span class="label label-danger">
+                                 <span
+                                         class="glyphicon glyphicon-euro">
+
+                                 </span>
+                                 {{ 'label.waiting_for_payment'|trans }}</span>
+                        </a>
+
                     {% endif %}
                 </td>
                 <td class="text-right">

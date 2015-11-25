@@ -16,4 +16,6 @@ class BillEvents
     const POST_CREATE = 'bill.post_create';
 
     const POST_UPDATE = 'bill.post_update';
+
+    const POST_PAID = 'bill.post_paid';
 }

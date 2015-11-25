@@ -15,6 +15,7 @@ use JDJ\ComptaBundle\Entity\Manager\BillManager;
 use JDJ\ComptaBundle\Event\BillEvent;
 use JDJ\ComptaBundle\Event\BillEvents;
 use JDJ\ComptaBundle\Form\BillType;
+use JDJ\ComptaBundle\Form\Type\Bill\PaymentType;
 use JDJ\ComptaBundle\Service\BillProductService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -193,7 +194,7 @@ class BillController extends Controller
     /**
      * Edits an existing Bill entity to enrich the payment date.
      *
-     * @Route("/{id}/payment/update", name="compta_bill_payement_update")
+     * @Route("/{id}/payment/update", name="compta_bill_payment_update")
      * @ParamConverter("bill", class="JDJComptaBundle:Bill")
      *
      * @param Request $request
@@ -205,20 +206,22 @@ class BillController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $form = $this->createForm(new BillType(), $bill, array(
+        $form = $this->createForm(new PaymentType(), $bill, array(
             'action' => $this->generateUrl('compta_bill_payment_update', array('id' => $bill->getId())),
             'method' => 'PUT',
         ));
 
+        $form->handleRequest($request);
+
         if ($form->isValid()) {
             $em->flush();
-            $this->getEventDispatcher()->dispatch(BillEvents::BILL_PAID, new GenericEvent($bill));
+            $this->getEventDispatcher()->dispatch(BillEvents::POST_PAID, new GenericEvent($bill));
             return $this->redirect($this->generateUrl('compta_bill'));
         }
 
         return $this->render('compta/bill/payment/edit.html.twig', array(
             'bill' => $bill,
-            'edit_form' => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
