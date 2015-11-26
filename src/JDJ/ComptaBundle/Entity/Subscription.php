@@ -75,6 +75,14 @@ class Subscription
     private $bill;
 
     /**
+     * @var BillProduct
+     *
+     * @ORM\ManyToOne(targetEntity="BillProduct", inversedBy="subscriptions")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $billProduct;
+
+    /**
      * @var Product
      *
      * @ORM\ManyToOne(targetEntity="Product")
@@ -238,6 +246,25 @@ class Subscription
     public function setCustomer(Customer $customer = null)
     {
         $this->customer = $customer;
+
+        return $this;
+    }
+
+    /**
+     * @return BillProduct
+     */
+    public function getBillProduct()
+    {
+        return $this->billProduct;
+    }
+
+    /**
+     * @param BillProduct $billProduct
+     * @return $this
+     */
+    public function setBillProduct($billProduct)
+    {
+        $this->billProduct = $billProduct;
 
         return $this;
     }

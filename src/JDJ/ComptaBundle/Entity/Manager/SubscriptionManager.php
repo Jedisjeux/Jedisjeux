@@ -91,6 +91,7 @@ class SubscriptionManager
 
                 $subscription
                     ->setBill($bill)
+                    ->setBillProduct($billProduct)
                     ->setProduct($billProduct->getProduct())
                     ->setCustomer($bill->getCustomer())
                     ->setStatus(null === $bill->getPaidAt() ? Subscription::WAITING_FOR_PAYMENT : Subscription::WAITING_FOR_INSTALLATION);

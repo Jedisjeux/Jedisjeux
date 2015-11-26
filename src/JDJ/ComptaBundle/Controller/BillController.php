@@ -214,8 +214,8 @@ class BillController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $this->getEventDispatcher()->dispatch(BillEvents::PRE_PAID, new BillEvent($bill));
             $em->flush();
-            $this->getEventDispatcher()->dispatch(BillEvents::POST_PAID, new GenericEvent($bill));
             return $this->redirect($this->generateUrl('compta_bill'));
         }
 

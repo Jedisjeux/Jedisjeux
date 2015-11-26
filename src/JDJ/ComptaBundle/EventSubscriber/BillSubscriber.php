@@ -10,9 +10,11 @@ namespace JDJ\ComptaBundle\EventSubscriber;
 
 
 use Doctrine\Common\EventSubscriber;
+use Doctrine\ORM\EntityManager;
 use JDJ\ComptaBundle\Entity\Bill;
 use JDJ\ComptaBundle\Entity\Manager\BookEntryManager;
 use JDJ\ComptaBundle\Entity\Manager\SubscriptionManager;
+use JDJ\ComptaBundle\Entity\Subscription;
 use JDJ\ComptaBundle\Event\BillEvent;
 use JDJ\ComptaBundle\Event\BillEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -54,6 +56,7 @@ class BillSubscriber implements EventSubscriberInterface
         return array(
             BillEvents::POST_CREATE => 'onBillPostCreate',
             BillEvents::POST_UPDATE => 'onBillPostUpdate',
+            BillEvents::PRE_PAID => 'onBillPrePaid',
         );
     }
 
@@ -69,5 +72,18 @@ class BillSubscriber implements EventSubscriberInterface
         $bill = $event->getBill();
         //$this->bookEntryManager->createFromBill($bill);
         $this->subscriptionManager->createFromBill($bill);
+    }
+
+    /**
+     * @param BillEvent $event
+     */
+    public function onBillPrePaid(BillEvent $event)
+    {
+        $bill = $event->getBill();
+        foreach ($bill->getBillProducts() as $billProduct) {
+            foreach ($billProduct->getSubscriptions() as $subscription) {
+                $subscription->setStatus(Subscription::WAITING_FOR_INSTALLATION);
+            }
+        }
     }
 }

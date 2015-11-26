@@ -8,6 +8,7 @@
 
 namespace JDJ\ComptaBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -61,6 +62,22 @@ class BillProduct
      * @ORM\Column(type="integer")
      */
     private $quantity;
+
+    /**
+     * @var Subscription[]
+     *
+     * @ORM\OneToMany(targetEntity="Subscription", mappedBy="billProduct")
+     */
+    private $subscriptions;
+
+    /**
+     * BillProduct constructor.
+     */
+    public function __construct()
+    {
+        $this->subscriptions = new ArrayCollection();
+    }
+
 
     /**
      * @return int
@@ -150,6 +167,25 @@ class BillProduct
     public function setQuantity($quantity)
     {
         $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    /**
+     * @return Subscription[]
+     */
+    public function getSubscriptions()
+    {
+        return $this->subscriptions;
+    }
+
+    /**
+     * @param Subscription[] $subscriptions
+     * @return $this
+     */
+    public function setSubscriptions($subscriptions)
+    {
+        $this->subscriptions = $subscriptions;
 
         return $this;
     }

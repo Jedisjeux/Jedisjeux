@@ -61,6 +61,7 @@ class SubscriptionsCreateCommand extends ContainerAwareCommand
 
                 $subscription
                     ->setBill($bill)
+                    ->setBillProduct($billProduct)
                     ->setProduct($billProduct->getProduct())
                     ->setCreatedAt($bill->getPaidAt())
                     ->setStartAt(null !== $bill->getPaidAt() ? $bill->getPaidAt() : null)

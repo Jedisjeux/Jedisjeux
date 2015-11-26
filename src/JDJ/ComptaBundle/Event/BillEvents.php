@@ -17,5 +17,5 @@ class BillEvents
 
     const POST_UPDATE = 'bill.post_update';
 
-    const POST_PAID = 'bill.post_paid';
+    const PRE_PAID = 'bill.post_paid';
 }

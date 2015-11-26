@@ -52,8 +52,17 @@
                 <td>{{ status(subscription) }}</td>
                 <td class="text-right">
                     <ul class="list-inline">
+                        {% if ('waiting_for_installation' == subscription.status) %}
+                            <li>
+                                <a class="btn btn-color"
+                                   href="{{ path('compta_subscription_start', { 'id': subscription.id }) }}">
+                                    <span class="glyphicon glyphicon-play"></span> Démarrer
+                                </a>
+                            </li>
+                        {% endif %}
                         <li>
-                            <a class="btn btn-default" href="{{ path('compta_bill_show', { 'id': subscription.bill.id }) }}">
+                            <a class="btn btn-default"
+                               href="{{ path('compta_bill_show', { 'id': subscription.billProduct.bill.id }) }}">
                                 <span class="glyphicon glyphicon-book"></span> Facture
                             </a>
                         </li>

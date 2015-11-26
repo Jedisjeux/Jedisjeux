@@ -72,87 +72,23 @@ class SubscriptionController extends Controller
     }
 
     /**
-     * Displays a form to create a new Subscription entity.
-     *
-     * @Route("/bill/{bill}/product/{product}/new", name="compta_subscription_new")
-     * @ParamConverter("bill", class="JDJComptaBundle:Bill")
-     * @ParamConverter("product", class="JDJComptaBundle:Product")
-     *
-     * @param Bill $bill
-     * @param Product $product
-     * @return Response
-     */
-    public function newAction(Bill $bill, Product $product)
-    {
-        $subscription = new Subscription();
-        $subscription
-            ->setBill($bill)
-            ->setProduct($product);
-        $form   = $this->createCreateForm($subscription);
-
-        return $this->render('compta/subscription/new.html.twig', array(
-            'subscription' => $subscription,
-            'form'   => $form->createView(),
-        ));
-    }
-
-    /**
-     * Creates a new Subscription entity.
-     *
-     * @Route("/create", name="compta_subscription_create")
-     * @ParamConverter("bill", class="JDJComptaBundle:Bill")
-     * @ParamConverter("product", class="JDJComptaBundle:Product")
-     *
-     * @param Request $request
-     * @param Bill $bill
-     * @param Product $product
-     * @return RedirectResponse|Response
-     */
-    public function createAction(Request $request, Bill $bill, Product $product)
-    {
-        $subscription = new Subscription();
-        $subscription
-            ->setBill($bill)
-            ->setProduct($product);
-        $form = $this->createCreateForm($subscription);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $endAt = $this
-                ->getSubscriptionManager()
-                ->calculateEndingDate($subscription);
-            $subscription->setEndAt($endAt);
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($subscription);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('compta_subscription'));
-        }
-
-        return $this->render('compta/subscription/new.html.twig', array(
-            'subscription' => $subscription,
-            'form'   => $form->createView(),
-        ));
-    }
-
-    /**
-     * Creates a form to create a Subscription entity.
+     * @Route("/{id}/start", name="compta_subscription_start")
+     * @ParamConverter("subscription", class="JDJComptaBundle:Subscription")
      *
      * @param Subscription $subscription
-     * @return \Symfony\Component\Form\Form The form
+     * @return RedirectResponse
      */
-    private function createCreateForm(Subscription $subscription)
+    public function startAction(Subscription $subscription)
     {
-        $form = $this->createForm(new SubscriptionType(), $subscription, array(
-            'action' => $this->generateUrl('compta_subscription_create', array(
-                'bill' => $subscription->getBill()->getId(),
-                'product' => $subscription->getProduct()->getId(),
-            )),
-            'method' => 'POST',
-        ));
+        $em = $this->getDoctrine()->getManager();
 
-        $form->add('submit', 'submit', array('label' => 'Créer'));
+        $subscription
+            ->setStartAt(new \DateTime())
+            ->setEndAt($this->getSubscriptionManager()->calculateEndingDate($subscription))
+            ->setStatus(Subscription::IN_PROGRESS);
 
-        return $form;
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('compta_subscription'));
     }
 }
