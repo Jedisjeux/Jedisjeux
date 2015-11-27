@@ -7,6 +7,9 @@
  */
 
 namespace JDJ\ComptaBundle\Entity\Repository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Mapping;
 use Doctrine\ORM\QueryBuilder;
 use JDJ\CoreBundle\Entity\EntityRepository;
 
@@ -22,8 +25,8 @@ class BillRepository extends EntityRepository
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)
     {
         if (isset($criteria['query'])) {
+            $this->joinTo($queryBuilder, 'customer', 'customer');
             $queryBuilder
-                ->join($this->getAlias().'.customer', 'customer')
                 ->andWhere('customer.society like :query')
                 ->setParameter('query', '%'.$criteria['query'].'%');
             unset($criteria['query']);
@@ -39,8 +42,8 @@ class BillRepository extends EntityRepository
     protected function applySorting(QueryBuilder $queryBuilder, array $sorting = null)
     {
         if (isset($sorting['society'])) {
+            $this->joinTo($queryBuilder, 'customer', 'customer');
             $queryBuilder
-                ->join($this->getAlias().'.customer', 'customer')
                 ->addOrderBy('customer.society', $sorting['society']);
             unset($sorting['society']);
         }

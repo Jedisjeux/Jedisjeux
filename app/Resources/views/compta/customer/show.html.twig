@@ -1,5 +1,7 @@
 {% extends "base.html.twig" %}
 {% from 'macros/status.html.twig' import subscriptionStatus as status %}
+{% import 'macros/buttons.html.twig' as button %}
+{% from 'macros/sorting.html.twig' import sorting %}
 
 {% block container %}
 
@@ -11,11 +13,7 @@
                 </a>
             </li>
             <li>
-                {{ form_start(deleteForm) }}
-                <button type="submit" class="btn btn-danger">
-                    <span class="glyphicon glyphicon-trash"></span> Supprimer
-                </button>
-                {{ form_end(deleteForm) }}
+                {{ button.delete(path('compta_customer_delete', {'id': customer.id})) }}
             </li>
         </ul>
         <h3><span>{{ customer.society }}</span></h3>
@@ -31,15 +29,17 @@
         <thead>
         <tr>
             <th>{{ 'label.product'|trans }}</th>
-            <th>{{ 'label.start_at'|trans }}</th>
-            <th>{{ 'label.end_at'|trans }}</th>
-            <th>{{ 'label.status'|trans }}</th>
+            <th>{{ sorting('compta_customer_show', 'label.created_at'|trans, 'createdAt', 'desc', false, null, {'customer': customer.id}) }}</th>
+            <th>{{ sorting('compta_customer_show', 'label.start_at'|trans, 'startAt', 'desc', false, null, {'customer': customer.id}) }}</th>
+            <th>{{ sorting('compta_customer_show', 'label.end_at'|trans, 'endAt', 'desc', false, null, {'customer': customer.id}) }}</th>
+            <th>{{ sorting('compta_customer_show', 'label.status'|trans, 'status', 'asc', false, null, {'customer': customer.id}) }}</th>
         </tr>
         </thead>
         <tbody>
         {% for subscription in customer.subscriptions %}
             <tr>
                 <td>{{ subscription.product.name }}</td>
+                <td>{{ subscription.createdAt|localizeddate('long', 'none') }}</td>
                 <td>{{ subscription.startAt|localizeddate('long', 'none') }}</td>
                 <td>{{ subscription.endAt|localizeddate('long', 'none') }}</td>
                 <td>{{ status(subscription) }}</span></td>

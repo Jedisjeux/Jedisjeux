@@ -9,7 +9,10 @@
 namespace JDJ\CoreBundle\Entity;
 
 
-use Doctrine\ORM\EntityRepository as BaseEntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\EntityManager;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository as BaseEntityRepository;
+use Doctrine\ORM\Mapping;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
@@ -23,266 +26,34 @@ use Pagerfanta\Pagerfanta;
 class EntityRepository extends BaseEntityRepository
 {
     /**
-     * {@inheritdoc}
+     * @var ArrayCollection
      */
-    public function createNew()
-    {
-        $className = $this->getClassName();
-
-        return new $className;
-    }
+    protected $joins;
 
     /**
-     * @param mixed $id
+     * EntityRepository constructor.
      *
-     * @return null|object
+     * @inheritdoc
      */
-    public function find($id)
+    public function __construct(EntityManager $em, Mapping\ClassMetadata $class)
     {
-        return $this
-            ->getQueryBuilder()
-            ->andWhere($this->getAlias().'.id = '.intval($id))
-            ->getQuery()
-            ->getOneOrNullResult()
-            ;
-    }
+        parent::__construct($em, $class);
 
-    /**
-     * @return array
-     */
-    public function findAll()
-    {
-        return $this
-            ->getCollectionQueryBuilder()
-            ->getQuery()
-            ->getResult()
-            ;
-    }
-
-    /**
-     * @param array $criteria
-     *
-     * @return null|object
-     */
-    public function findOneBy(array $criteria)
-    {
-        $queryBuilder = $this->getQueryBuilder();
-
-        $this->applyCriteria($queryBuilder, $criteria);
-
-        return $queryBuilder
-            ->getQuery()
-            ->getOneOrNullResult()
-            ;
-    }
-
-    /**
-     * @param array   $criteria
-     * @param array   $orderBy
-     * @param integer $limit
-     * @param integer $offset
-     *
-     * @return array
-     */
-    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
-    {
-        $queryBuilder = $this->getCollectionQueryBuilder();
-
-        $this->applyCriteria($queryBuilder, $criteria);
-        $this->applySorting($queryBuilder, $orderBy);
-
-        if (null !== $limit) {
-            $queryBuilder->setMaxResults($limit);
-        }
-
-        if (null !== $offset) {
-            $queryBuilder->setFirstResult($offset);
-        }
-
-        return $queryBuilder
-            ->getQuery()
-            ->getResult()
-            ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createPaginator(array $criteria = null, array $orderBy = null)
-    {
-        $queryBuilder = $this->getCollectionQueryBuilder();
-
-        $this->applyCriteria($queryBuilder, $criteria);
-        $this->applySorting($queryBuilder, $orderBy);
-
-        return $this->getPaginator($queryBuilder);
+        $this->joins = new ArrayCollection();
     }
 
     /**
      * @param QueryBuilder $queryBuilder
-     *
-     * @return Pagerfanta
+     * @param string $propertyName
+     * @param string $alias
      */
-    public function getPaginator(QueryBuilder $queryBuilder)
+    public function joinTo(QueryBuilder $queryBuilder, $propertyName, $alias)
     {
-        return new Pagerfanta(new DoctrineORMAdapter($queryBuilder));
-    }
-
-    /**
-     * @return QueryBuilder
-     */
-    protected function getQueryBuilder()
-    {
-        return $this->createQueryBuilder($this->getAlias());
-    }
-
-    /**
-     * @return QueryBuilder
-     */
-    protected function getCollectionQueryBuilder()
-    {
-        return $this->createQueryBuilder($this->getAlias());
-    }
-
-    /**
-     * @param QueryBuilder $queryBuilder
-     *
-     * @param array $criteria
-     */
-    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)
-    {
-        if (null === $criteria) {
-            return;
-        }
-
-        $entityClass = new \ReflectionClass($this->getClassName());
-
-        foreach ($criteria as $property => $value) {
-
-            /**
-             * Search comparison expression
-             */
-            $expr = null;
-            if (false !== strpos($property, ":")) {
-                list($property, $expr) = explode(":", $property);
-            }
-
-            /**
-             * If Entity has the property
-             */
-            if ($entityClass->hasProperty($property)) {
-
-                /**
-                 * Switch case with comparison expression
-                 */
-                switch($expr) {
-                    case 'moreThanOrEqual':
-                        $queryBuilder->andWhere($queryBuilder->expr()->gte($this->getPropertyName($property), $value));
-                        break;
-                    case 'moreThan':
-                        $queryBuilder->andWhere($queryBuilder->expr()->gt($this->getPropertyName($property), $value));
-                        break;
-                    case 'lessThanOrEqual':
-                        $queryBuilder->andWhere($queryBuilder->expr()->lte($this->getPropertyName($property), $value));
-                        break;
-                    case 'lessThan':
-                        $queryBuilder->andWhere($queryBuilder->expr()->lt($this->getPropertyName($property), $value));
-                        break;
-                    default:
-                        $this->applyEntityCriteria($queryBuilder, $property, $value);
-                        break;
-                }
-
-            } elseif ($entityClass->hasProperty($property."s")) {
-                /**
-                 * If Entity has an array collection of other entities
-                 */
-                $this->applyOtherEntitiesCriteria($queryBuilder, $property, $value);
-            }
-
-        }
-    }
-
-    /**
-     * @param QueryBuilder $queryBuilder
-     * @param $property
-     * @param $value
-     */
-    protected function applyEntityCriteria(QueryBuilder $queryBuilder, $property, $value)
-    {
-        if (null === $value) {
+        if (!$this->joins->contains($alias))
+        {
+            $this->joins->add($alias);
             $queryBuilder
-                ->andWhere($queryBuilder->expr()->isNull($this->getPropertyName($property)));
-        } elseif (is_array($value)) {
-            $queryBuilder->andWhere($queryBuilder->expr()->in($this->getPropertyName($property), $value));
-        } elseif ('' !== $value) {
-            $queryBuilder
-                ->andWhere($queryBuilder->expr()->eq($this->getPropertyName($property), ':' . $property))
-                ->setParameter($property, $value);
+                ->join($this->getAlias().'.'.$propertyName, $alias);
         }
-    }
-
-    /**
-     * @param QueryBuilder $queryBuilder
-     * @param $property
-     * @param $value
-     */
-    protected function applyOtherEntitiesCriteria(QueryBuilder $queryBuilder, $property, $value)
-    {
-        if (null === $value) {
-            $queryBuilder
-                ->where($this->getAlias().".".$property."s IS EMPTY")
-                ->setParameter($property.'Id', $value->getId());
-            ;
-        } elseif(is_array($value)) {
-            $where = array();
-            foreach ($value as $key => $row) {
-                $where[] =  ":" . $property . "Id".$key." MEMBER OF " . $this->getAlias() . "." . $property . "s";
-                $queryBuilder->setParameter($property.'Id'.$key, $row->getId());
-            }
-            $queryBuilder->where(implode(" or ", $where));
-        } elseif ('' !== $value) {
-            $queryBuilder
-                ->where(":".$property."Id MEMBER OF ".$this->getAlias().".".$property."s")
-                ->setParameter($property.'Id', $value->getId());
-            ;
-        }
-    }
-
-    /**
-     * @param QueryBuilder $queryBuilder
-     *
-     * @param array $sorting
-     */
-    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = null)
-    {
-        if (null === $sorting) {
-            return;
-        }
-
-        foreach ($sorting as $property => $order) {
-            if (!empty($order)) {
-                $queryBuilder->orderBy($this->getPropertyName($property), $order);
-            }
-        }
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return string
-     */
-    protected function getPropertyName($name)
-    {
-        if (false === strpos($name, '.')) {
-            return $this->getAlias().'.'.$name;
-        }
-
-        return $name;
-    }
-
-    protected function getAlias()
-    {
-        return 'o';
     }
 }

@@ -1,4 +1,4 @@
-{% macro sorting(routeName, label, property, defaultOrder = 'asc', icon = false, currentOrder = null) %}
+{% macro sorting(routeName, label, property, defaultOrder = 'asc', icon = false, currentOrder = null, routeParams = {}) %}
 
     {% set sorting = app.request.get('sorting') %}
     {% set criteria = app.request.get('criteria') %}
@@ -10,11 +10,15 @@
         {% endif %}
     {% endif %}
 
+    {% set routeParams = routeParams | merge({'criteria': criteria }) %}
+
     {% if currentOrder == 'desc' or (currentOrder is null and defaultOrder == 'asc') %}
-        {% set url = path(routeName, {'criteria': criteria, 'sorting': {(property): 'asc'}}) %}
+        {% set routeParams = routeParams | merge({'sorting': {(property): 'asc'} }) %}
     {% else %}
-        {% set url = path(routeName, {'criteria': criteria, 'sorting': {(property): 'desc'}}) %}
+        {% set routeParams = routeParams | merge({'sorting': {(property): 'desc'} }) %}
     {% endif %}
+
+    {% set url = path(routeName, routeParams) %}
 
     <a href="{{ url }}" class="{% if icon %}color{% endif %}">
         {{ label }}

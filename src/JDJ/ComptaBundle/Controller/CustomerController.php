@@ -203,7 +203,7 @@ class CustomerController extends Controller
     /**
      * Deletes a Customer entity.
      *
-     * @Route("/{customer}/delete", name="compta_customer_delete")
+     * @Route("/{id}/delete", name="compta_customer_delete")
      * @Method({"DELETE"})
      * @ParamConverter("customer", class="JDJComptaBundle:Customer")
      *
