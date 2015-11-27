@@ -7,6 +7,7 @@
  */
 
 namespace JDJ\ComptaBundle\Entity\Repository;
+use Doctrine\ORM\QueryBuilder;
 use JDJ\CoreBundle\Entity\EntityRepository;
 
 
@@ -15,5 +16,19 @@ use JDJ\CoreBundle\Entity\EntityRepository;
  */
 class CustomerRepository extends EntityRepository
 {
+    /**
+     * @inheritdoc
+     */
+    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = array())
+    {
+        if (isset($criteria['query'])) {
+            $queryBuilder
+                ->andWhere($this->getAlias().'.society like :query or '.$this->getAlias().'.email like :query or '.$this->getAlias().'.id like :query')
+                ->setParameter('query', '%'.$criteria['query'].'%');
+            unset($criteria['query']);
+        }
+
+        parent::applyCriteria($queryBuilder, $criteria);
+    }
 
 }

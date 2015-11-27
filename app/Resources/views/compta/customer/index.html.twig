@@ -1,19 +1,17 @@
-{% extends 'base.html.twig' %}
+{% extends "layout/backend_index.html.twig" %}
 {% from 'macros/misc.html.twig' import pagination %}
 {% import 'macros/buttons.html.twig' as button %}
 {% from '::macros/sorting.html.twig' import sorting %}
 
-{% block container %}
+{% block new_entity_button %}
+    {{ button.create(path('compta_customer_new'), 'Créer un client') }}
+{% endblock new_entity_button %}
 
-    <div class="block-heading-two">
-        <ul class="list-inline pull-right">
-            <li>
-                {{ button.create(path('compta_customer_new'), 'Créer un client') }}
-            </li>
-        </ul>
-        <h3><span>Liste des clients</span></h3>
-    </div>
+{% block page_title %}
+    Liste des clients
+{% endblock page_title %}
 
+{% block list %}
     <table class="table table-striped">
         <thead>
         <tr>
@@ -49,13 +47,13 @@
         {% endfor %}
         </tbody>
     </table>
+{% endblock list %}
 
-    {% block Pagination %}
-        <div class="pagination-wrapper">
-            <div class="pagination-bottom">
-                {{ pagination(customers) }}
-            </div>
+{% block Pagination %}
+    <div class="pagination-wrapper">
+        <div class="pagination-bottom">
+            {{ pagination(customers) }}
         </div>
-    {% endblock %}
+    </div>
+{% endblock %}
 
-{% endblock container %}
