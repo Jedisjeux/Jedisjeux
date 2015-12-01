@@ -58,7 +58,7 @@ class Bill
      * @var PaymentMethod
      *
      * @ORM\ManyToOne(targetEntity="PaymentMethod")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $paymentMethod;
 

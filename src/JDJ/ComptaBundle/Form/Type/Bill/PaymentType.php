@@ -27,6 +27,9 @@ class PaymentType extends AbstractType
                 'widget' => 'single_text',
                 'html5' => false,
             ))
+            ->add('paymentMethod', null, array(
+                'label' => 'label.payment_method',
+            ))
         ;
     }
 

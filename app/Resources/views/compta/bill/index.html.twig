@@ -54,7 +54,7 @@
                         {% set modalBody %}
                             {{ render(url('compta_bill_payment_update', {'id': bill.id})) }}
                         {% endset %}
-                        {{ modal.formModal(modalId, 'label.paid_at'|trans, modalBody) }}
+                        {{ modal.formModal(modalId, 'label.payment'|trans, modalBody) }}
 
                         <!-- Button trigger modal -->
                         <a href="#" data-toggle="modal" data-target="#{{ modalId }}">

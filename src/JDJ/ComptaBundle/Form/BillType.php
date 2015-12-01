@@ -46,20 +46,9 @@ class BillType extends AbstractType
                     'horizontal_input_wrapper_class' => "col-lg-8",
                     'widget_remove_btn' => array('label' => "label.remove_this_product"),
                 )
-            ))
-            ->add('paymentMethod', null, array(
-                'label' => 'label.payment_method',
-            ))
-            ->add('paidAt', 'date', array(
-                'label' => 'label.paid_at',
-                'widget' => 'single_text',
-                'format' => 'yyyy-MM-dd',
-                'html5' => false,
-                'required' => false,
-            ))
-        ;
+            ));
 
-        $productsValidator = function(FormEvent $event){
+        $productsValidator = function (FormEvent $event) {
             $form = $event->getForm();
 
             $products = $form->get('billProducts')->getData();
