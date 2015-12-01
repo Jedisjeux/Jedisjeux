@@ -41,6 +41,7 @@ class AppKernel extends Kernel
             new JMS\AopBundle\JMSAopBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new Ob\HighchartsBundle\ObHighchartsBundle(),
+            new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
 
             //JDJ
             new JDJ\WebBundle\JDJWebBundle(),
