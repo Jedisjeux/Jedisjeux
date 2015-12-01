@@ -10,8 +10,11 @@ namespace JDJ\ComptaBundle\Controller;
 
 
 use JDJ\ComptaBundle\Entity\Bill;
+use JDJ\ComptaBundle\Entity\BillProduct;
 use JDJ\ComptaBundle\Entity\Manager\AddressManager;
 use JDJ\ComptaBundle\Entity\Manager\BillManager;
+use JDJ\ComptaBundle\Entity\Manager\ProductManager;
+use JDJ\ComptaBundle\Entity\Product;
 use JDJ\ComptaBundle\Event\BillEvent;
 use JDJ\ComptaBundle\Event\BillEvents;
 use JDJ\ComptaBundle\Form\BillType;
@@ -45,6 +48,14 @@ class BillController extends Controller
     }
 
     /**
+     * @return ProductManager
+     */
+    private function getProductManager()
+    {
+        return $this->get('app.manager.product');
+    }
+
+    /**
      * @return AddressManager
      */
     private function getAddressManager()
@@ -69,7 +80,7 @@ class BillController extends Controller
             ->createPaginator($request->get('criteria', array()), $request->get('sorting', array('createdAt' => 'desc')))
             ->setCurrentPage($request->get('page', 1));
 
-        foreach($bills as $bill) {
+        foreach ($bills as $bill) {
             $this->getBillManager()->calculateTotalPrice($bill);
         }
 
@@ -107,6 +118,16 @@ class BillController extends Controller
     public function createAction(Request $request)
     {
         $bill = new Bill();
+
+        /** @var Product[] $products */
+        $products = $this->getProductManager()->getProductRepository()->findAll();
+        foreach ($products as $product) {
+            $billProduct = new BillProduct();
+            $billProduct
+                ->setProduct($product)
+                ->setQuantity(1);
+            $bill->addBillProduct($billProduct);
+        }
 
         $form = $this->createForm(new BillType(), $bill, array(
             'action' => $this->generateUrl('compta_bill_create'),

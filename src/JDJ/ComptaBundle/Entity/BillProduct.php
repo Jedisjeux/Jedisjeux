@@ -126,7 +126,7 @@ class BillProduct
      * @param Product $product
      * @return $this
      */
-    public function setProduct($product)
+    public function setProduct(Product $product)
     {
         $this->product = $product;
 

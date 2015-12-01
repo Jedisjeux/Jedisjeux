@@ -198,6 +198,7 @@ class Bill
      */
     public function addBillProduct(BillProduct $billProduct)
     {
+        $billProduct->setBill($this);
         $this->billProducts[] = $billProduct;
 
         return $this;

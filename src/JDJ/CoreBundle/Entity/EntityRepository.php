@@ -8,20 +8,15 @@
 
 namespace JDJ\CoreBundle\Entity;
 
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository as BaseEntityRepository;
 use Doctrine\ORM\Mapping;
 use Doctrine\ORM\QueryBuilder;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
-use Pagerfanta\Pagerfanta;
 
 /**
  * Class EntityRepository
  * @package JDJ\WebBundle\Entity
- *
- * TODO: Move on a CoreBundle
  */
 class EntityRepository extends BaseEntityRepository
 {
@@ -44,16 +39,18 @@ class EntityRepository extends BaseEntityRepository
 
     /**
      * @param QueryBuilder $queryBuilder
-     * @param string $propertyName
+     * @param string $join
      * @param string $alias
      */
-    public function joinTo(QueryBuilder $queryBuilder, $propertyName, $alias)
+    public function joinTo(QueryBuilder $queryBuilder, $join, $alias)
     {
         if (!$this->joins->contains($alias))
         {
+            $join = (false === strpos($join, '.')) ? $this->getAlias().'.'.$join : $join;
+
             $this->joins->add($alias);
             $queryBuilder
-                ->join($this->getAlias().'.'.$propertyName, $alias);
+                ->join($join, $alias);
         }
     }
 }
