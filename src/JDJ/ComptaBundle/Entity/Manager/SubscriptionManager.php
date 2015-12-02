@@ -67,64 +67,42 @@ class SubscriptionManager
      */
     public function createFromBill(Bill $bill)
     {
-        $subscriptionsToRemove = array();
-        $subscriptions = $bill->getSubscriptions();
+        foreach ($bill->getBillProducts() as $billProduct) {
+            $this->createFromBillProduct($billProduct);
+        }
+    }
 
-        if ($subscriptions) {
-            foreach ($subscriptions as $subscription) {
-                $subscriptionsToRemove[$subscription->getId()] = $subscription;
-            }
+    /**
+     * @param BillProduct $billProduct
+     */
+    public function createFromBillProduct(BillProduct $billProduct)
+    {
+        if ($billProduct->getQuantity() === count($billProduct->getSubscriptions())) {
+            return;
         }
 
-        $billProducts = $bill->getBillProducts();
-        if ($billProducts) {
-            foreach ($billProducts as $billProduct) {
-
-                $subscription = $this->getSubscriptionFromBillProduct($billProduct);
-
-                if (null === $subscription) {
-                    $subscription = new Subscription();
-                    $this->entityManager->persist($subscription);
-                } else {
-                    unset($subscriptionsToRemove[$subscription->getId()]);
-                }
-
-                $subscription
-                    ->setBill($bill)
-                    ->setBillProduct($billProduct)
-                    ->setProduct($billProduct->getProduct())
-                    ->setCustomer($bill->getCustomer())
-                    ->setStatus(null === $bill->getPaidAt() ? Subscription::WAITING_FOR_PAYMENT : Subscription::WAITING_FOR_INSTALLATION);
-
-            }
-        }
-
-
-        foreach ($subscriptionsToRemove as $subscription) {
+        // remove all current subscriptions
+        foreach ($billProduct->getSubscriptions() as $subscription) {
             $this->entityManager->remove($subscription);
         }
 
         $this->entityManager->flush();
-    }
 
-    /**
-     * Get a subscription to a product from a bill
-     *
-     * @param BillProduct $billProduct
-     * @return Subscription|null
-     */
-    public function getSubscriptionFromBillProduct(BillProduct $billProduct)
-    {
         $bill = $billProduct->getBill();
-        $product = $billProduct->getProduct();
-        $subscriptions = $bill->getSubscriptions();
-        if ($subscriptions) {
-            foreach ($bill->getSubscriptions() as $subscription) {
-                if ($subscription->getProduct()->getId() === $product->getId()) {
-                    return $subscription;
-                }
-            }
+
+        for ($i = 0; $i < $billProduct->getQuantity(); $i++) {
+            $subscription = new Subscription();
+
+            $subscription
+                ->setBill($bill)
+                ->setBillProduct($billProduct)
+                ->setProduct($billProduct->getProduct())
+                ->setCustomer($bill->getCustomer())
+                ->setStatus(Subscription::WAITING_FOR_PAYMENT);
+
+            $this->entityManager->persist($subscription);
         }
-        return null;
+
+        $this->entityManager->flush();
     }
 }

@@ -23,7 +23,7 @@ Feature: Bill creation
       | Playstation |
     And I am logged in as user "loic_425" with password "password"
 
-  Scenario: Create a bill not paid yet
+  Scenario: Create a bill
     Given I am on "/compta/facture/"
     And I follow "Créer une facture"
     And I select "Ludibay" from "Client"
@@ -31,3 +31,8 @@ Feature: Bill creation
     Then I should be on "/compta/facture/"
     And I should see "Ludibay"
     And I should see "en attente de paiement"
+    And I am on "/compta/abonnement"
+    And I should see "Ludibay"
+    And I should see "en attente de paiement"
+    And I should see "Sex Toy"
+    And I should see "Playstation"
