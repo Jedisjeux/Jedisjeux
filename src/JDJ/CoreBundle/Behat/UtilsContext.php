@@ -54,6 +54,50 @@ class UtilsContext extends DefaultContext
     }
 
     /**
+     * @When /^(?:|I )press "(?P<button>(?:[^"]|\\")*)" on "([^"]*)"$/
+     *
+     * @param $button
+     * @param $element
+     * @throws ElementNotFoundException
+     */
+    public function IPressButtonOnElement($button, $element)
+    {
+        $button = $this->fixStepArgument($button);
+        $element = $this->fixStepArgument($element);
+        $page = $this->getSession()->getPage();
+
+        $nodeElement = $page->find('css', $element);
+
+        if (null === $nodeElement) {
+            throw new \LogicException('Could not find the element with css "' . $element . '"');
+        }
+
+        $nodeElement->pressButton($button);
+    }
+
+    /**
+     * @When /^(?:|I )follow "(?P<link>(?:[^"]|\\")*)" on "([^"]*)"$/
+     *
+     * @param $link
+     * @param $element
+     * @throws ElementNotFoundException
+     */
+    public function IFollowLinkOnElement($link, $element)
+    {
+        $link = $this->fixStepArgument($link);
+        $element = $this->fixStepArgument($element);
+        $page = $this->getSession()->getPage();
+
+        $nodeElement = $page->find('css', $element);
+
+        if (null === $nodeElement) {
+            throw new \LogicException('Could not find the element with css "' . $element . '"');
+        }
+
+        $nodeElement->clickLink($link);
+    }
+
+    /**
      * @When /^I attach file "([^""]*)" to "([^""]*)"$/
      *
      * @param string $path path to file

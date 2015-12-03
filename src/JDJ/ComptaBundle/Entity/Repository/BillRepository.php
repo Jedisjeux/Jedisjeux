@@ -27,7 +27,7 @@ class BillRepository extends EntityRepository
         if (isset($criteria['query'])) {
             $this->joinTo($queryBuilder, 'customer', 'customer');
             $queryBuilder
-                ->andWhere('customer.society like :query')
+                ->andWhere('customer.society like :query or '.$this->getAlias().'.id like :query')
                 ->setParameter('query', '%'.$criteria['query'].'%');
             unset($criteria['query']);
         }
