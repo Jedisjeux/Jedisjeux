@@ -96,7 +96,6 @@ class SubscriptionManager
             $subscription
                 ->setBill($bill)
                 ->setBillProduct($billProduct)
-                ->setProduct($billProduct->getProduct())
                 ->setCustomer($bill->getCustomer())
                 ->setStatus(Subscription::WAITING_FOR_PAYMENT);
 

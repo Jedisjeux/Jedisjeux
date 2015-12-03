@@ -48,8 +48,7 @@ class SubscriptionsCreateCommand extends ContainerAwareCommand
                     ->getSubscriptionManager()
                     ->getSubscriptionRepository()
                     ->findOneBy(array(
-                        'customer' => $billProduct->getBill()->getCustomer(),
-                        'product' => $billProduct->getProduct(),
+                        'billProduct' => $billProduct,
                     ));
                 if (null === $subscription) {
                     $subscription = new Subscription();
@@ -62,7 +61,6 @@ class SubscriptionsCreateCommand extends ContainerAwareCommand
                 $subscription
                     ->setBill($bill)
                     ->setBillProduct($billProduct)
-                    ->setProduct($billProduct->getProduct())
                     ->setCreatedAt($bill->getPaidAt())
                     ->setStartAt(null !== $bill->getPaidAt() ? $bill->getPaidAt() : null)
                     ->setEndAt(null !== $bill->getPaidAt() ? $this

@@ -24,9 +24,11 @@ class SubscriptionRepository extends EntityRepository
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)
     {
         if (isset($criteria['query'])) {
+            $this
+                ->joinTo($queryBuilder, 'customer', 'customer')
+                ->joinTo($queryBuilder, 'billProduct', 'billProduct')
+                ->joinTo($queryBuilder, 'billProduct.product', 'product');
             $queryBuilder
-                ->join($this->getAlias().'.customer', 'customer')
-                ->join($this->getAlias().'.product', 'product')
                 ->andWhere('customer.society like :query or product.name like :query')
                 ->setParameter('query', '%'.$criteria['query'].'%');
             unset($criteria['query']);
@@ -41,22 +43,26 @@ class SubscriptionRepository extends EntityRepository
     protected function applySorting(QueryBuilder $queryBuilder, array $sorting = null)
     {
         if (isset($sorting['product'])) {
+            $this
+                ->joinTo($queryBuilder, 'billProduct', 'billProduct')
+                ->joinTo($queryBuilder, 'billProduct.product', 'product');
             $queryBuilder
-                ->join($this->getAlias().'.product', 'product')
                 ->addOrderBy('product.name', $sorting['product']);
             unset($sorting['product']);
         }
 
         if (isset($sorting['society'])) {
+            $this
+                ->joinTo($queryBuilder, 'customer', 'customer');
             $queryBuilder
-                ->join($this->getAlias().'.customer', 'customer')
                 ->addOrderBy('customer.society', $sorting['society']);
             unset($sorting['society']);
         }
 
         if (isset($sorting['paidAt'])) {
+            $this
+                ->joinTo($queryBuilder, 'bill', 'bill');
             $queryBuilder
-                ->join($this->getAlias().'.bill', 'bill')
                 ->addOrderBy('bill.paidAt', $sorting['paidAt']);
             unset($sorting['paidAt']);
         }

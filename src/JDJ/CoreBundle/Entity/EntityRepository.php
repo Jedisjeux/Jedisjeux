@@ -41,6 +41,7 @@ class EntityRepository extends BaseEntityRepository
      * @param QueryBuilder $queryBuilder
      * @param string $join
      * @param string $alias
+     * @return $this
      */
     public function joinTo(QueryBuilder $queryBuilder, $join, $alias)
     {
@@ -52,5 +53,7 @@ class EntityRepository extends BaseEntityRepository
             $queryBuilder
                 ->join($join, $alias);
         }
+
+        return $this;
     }
 }
