@@ -70,13 +70,6 @@ class Bill
     private $customerAddressVersion;
 
     /**
-     * @var Subscription[]
-     *
-     * @ORM\OneToMany(targetEntity="Subscription", mappedBy="bill", cascade={"persist", "merge"})
-     */
-    private $subscriptions;
-
-    /**
      * @var BookEntry
      *
      * @ORM\OneToOne(targetEntity="BookEntry")
@@ -243,25 +236,6 @@ class Bill
     }
 
     /**
-     * @return Subscription[]
-     */
-    public function getSubscriptions()
-    {
-        return $this->subscriptions;
-    }
-
-    /**
-     * @param ArrayCollection $subscriptions
-     * @return $this
-     */
-    public function setSubscriptions($subscriptions)
-    {
-        $this->subscriptions = $subscriptions;
-
-        return $this;
-    }
-
-    /**
      * @return BookEntry
      */
     public function getBookEntry()
@@ -296,6 +270,7 @@ class Bill
     public function setTotalPrice($totalPrice)
     {
         $this->totalPrice = $totalPrice;
+
         return $this;
     }
 }

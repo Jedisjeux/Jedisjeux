@@ -61,7 +61,8 @@ class SubscriptionRepository extends EntityRepository
 
         if (isset($sorting['paidAt'])) {
             $this
-                ->joinTo($queryBuilder, 'bill', 'bill');
+                ->joinTo($queryBuilder, 'billProduct', 'billProduct')
+                ->joinTo($queryBuilder, 'billProduct.bill', 'bill');
             $queryBuilder
                 ->addOrderBy('bill.paidAt', $sorting['paidAt']);
             unset($sorting['paidAt']);

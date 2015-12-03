@@ -67,14 +67,6 @@ class Subscription
     private $endAt;
 
     /**
-     * @var Bill
-     *
-     * @ORM\ManyToOne(targetEntity="Bill", inversedBy="subscriptions")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $bill;
-
-    /**
      * @var BillProduct
      *
      * @ORM\ManyToOne(targetEntity="BillProduct", inversedBy="subscriptions")
@@ -190,18 +182,7 @@ class Subscription
      */
     public function getBill()
     {
-        return $this->bill;
-    }
-
-    /**
-     * @param Bill $bill
-     * @return $this
-     */
-    public function setBill(Bill $bill = null)
-    {
-        $this->bill = $bill;
-
-        return $this;
+        return $this->billProduct->getBill();
     }
 
     /**
