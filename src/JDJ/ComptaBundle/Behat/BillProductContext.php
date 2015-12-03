@@ -14,6 +14,7 @@ use JDJ\ComptaBundle\Entity\Bill;
 use JDJ\ComptaBundle\Entity\BillProduct;
 use JDJ\ComptaBundle\Entity\Customer;
 use JDJ\ComptaBundle\Entity\Manager\ProductManager;
+use JDJ\ComptaBundle\Entity\Manager\SubscriptionManager;
 use JDJ\ComptaBundle\Entity\Product;
 use JDJ\CoreBundle\Behat\DefaultContext;
 
@@ -45,15 +46,27 @@ class BillProductContext extends DefaultContext
 
             $billProduct = new BillProduct();
             $billProduct
-                ->setBill($bill)
                 ->setProduct($product)
                 ->setProductVersion($this->getProductManager()->getCurrentVersion($product))
                 ->setQuantity(isset($data['quantity']) ? $data['quantity'] : $this->faker->numberBetween());
+
+            $bill->addBillProduct($billProduct);
 
             $manager->persist($billProduct);
         }
 
         $manager->flush();
+        $this
+            ->getSubscriptionManager()
+            ->createFromBill($bill);
+    }
+
+    /**
+     * @return SubscriptionManager
+     */
+    protected function getSubscriptionManager()
+    {
+        return $this->getContainer()->get('app.manager.subscription');
     }
 
     /**

@@ -1,8 +1,8 @@
-@bills @compta @search
-Feature: Bill searching
-  In order to manage book entries
+@subscriptions @compta @search
+Feature: Subscription searching
+  In order to manage subscriptions
   As a user from office
-  I need to be able to search a bill
+  I need to be able to search subscriptions
 
   Background:
     Given there are following users:
@@ -34,11 +34,11 @@ Feature: Bill searching
       | Sex Toy     | 1        |
       | Playstation | 1        |
     And I am logged in as user "loic_425" with password "password"
-    And I am on "/compta/facture"
+    And I am on "/compta/abonnement"
 
-  Scenario: Search a bill by customer
+  Scenario: Search a subscription by customer
     Given I fill in the following:
-     | criteria_query | Philibert
+      | criteria_query | Philibert
     When I press "Rechercher" on ".form-filter"
     Then I should see "Philibert"
     But I should not see "Ludibay"
