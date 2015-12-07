@@ -1,4 +1,7 @@
 {% macro subscriptionStatus(subscription) %}
+
+    {% import 'macros/modal.html.twig' as modal %}
+
     {% set statusLabel = subscription.status %}
     {% set statusClass = '' %}
     {% set iconClass = '' %}
@@ -17,8 +20,30 @@
         {% set statusClass = 'primary' %}
         {% set statusLabel = 'label.finished'|trans %}
     {% endif %}
-    <span class="label label-{{ statusClass }}">
-        <span class="{{ iconClass }}"></span>
-        {{ statusLabel }}
-    </span>
+
+
+    {% if ('waiting_for_payment' == subscription.status) %}
+        {% set modalId = 'payment' ~ subscription.id %}
+        {% set bill = subscription.billProduct.bill %}
+        {% set modalBody %}
+            {{ render(url('compta_bill_payment_update', {'id': bill.id})) }}
+        {% endset %}
+        {{ modal.formModal(modalId, 'label.payment'|trans, modalBody) }}
+
+        <!-- Button trigger modal -->
+        <a href="#" data-toggle="modal" data-target="#{{ modalId }}">
+                             <span class="label label-{{ statusClass }}">
+                                 <span
+                                         class="glyphicon glyphicon-euro">
+
+                                 </span>
+                                 {{ statusLabel|trans }}</span>
+        </a>
+    {% else %}
+        <span class="label label-{{ statusClass }}">
+            <span class="{{ iconClass }}"></span>
+            {{ statusLabel }}
+        </span>
+    {% endif %}
+
 {% endmacro %}
