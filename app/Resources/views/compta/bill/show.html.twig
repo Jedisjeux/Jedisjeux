@@ -1,5 +1,8 @@
 {% extends "::base.html.twig" %}
 
+{% set customer = bill.customer %}
+{% set address = bill.customer.address %}
+
 {% block container %}
 
     <h3>Association Loi 1901</h3>
@@ -12,6 +15,20 @@
         35740 PACE</p>
 
     <p>Email : <a href="#">jedisjeux@jedisjeux.net</a></p>
+
+    <div class="col-md-6 col-sm-6">
+
+    </div>
+    <div class="col-md-6 col-sm-6">
+        <p>
+            {{ customer.society }}<br/>
+            {{ address.street }}<br/>
+            {% if (address.additionalAddressInfo) %}
+                {{ address.additionalAddressInfo }}<br/>
+            {% endif %}
+            {{ address.postalCode }} {{ address.city }}
+        </p>
+    </div>
 
     <div class="col-md-6 col-sm-6">
         <table class="table table-stripped">
@@ -36,7 +53,10 @@
     </div>
 
 
-    <p>Mode de règlement : {{ bill.paymentMethod.name }}</p>
+    <div class="col-md-12">
+        <p>Mode de règlement : {{ bill.paymentMethod.name }}</p>
+    </div>
+
 
 
     <table class="table table-stripped">
@@ -62,11 +82,11 @@
     </table>
 
     <div class="pull-right">{{ bill.totalPrice|localizedcurrency('EUR') }}</div>
-    <div>Montant total HT : </div>
+    <div>Montant total HT :</div>
 
     <p>Exonéré T.V.A - article 261-7-1° du CGI</p>
 
     <div class="pull-right">{{ bill.totalPrice|localizedcurrency('EUR') }}</div>
-    <div>Montant total à payer : </div>
+    <div>Montant total à payer :</div>
 
 {% endblock container %}
