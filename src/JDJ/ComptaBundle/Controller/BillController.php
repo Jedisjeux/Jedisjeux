@@ -102,6 +102,19 @@ class BillController extends Controller
     {
         $this->getBillManager()->calculateTotalPrice($bill);
 
+        $html = $this->renderView('compta/bill/show.html.twig', array(
+            'bill'  => $bill
+        ));
+
+//        return new Response(
+//            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+//            200,
+//            array(
+//                'Content-Type'          => 'application/pdf',
+//                'Content-Disposition'   => 'attachment; filename="file.pdf"'
+//            )
+//        );
+
         return $this->render('compta/bill/show.html.twig', array(
             'bill' => $bill,
         ));
