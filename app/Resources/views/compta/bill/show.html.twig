@@ -5,101 +5,120 @@
 
 {% block body %}
 
-    <div class="row">
-        <h3>Association Loi 1901</h3>
+    <div class="bill-content">
 
-        <p>SIREN : 537 646 036 / SIRET : 537 646 036 00013 / Code APE : 9499Z</p>
-    </div>
+        <div class="row">
+            <!-- Logo section -->
+            <div class="logo">
+                <h1><a href="#">{% block headline %}Jedisjeux{% endblock %}</a></h1>
+            </div>
 
-    <div class="row">
-        <h3>Siège Social :</h3>
+        </div>
 
-        <p>Jedisjeux<br/>
-            Fremont Loïc<br/>
-            2 allée de la châtaigneraie<br/>
-            35740 PACE</p>
-    </div>
+        <div class="row">
+            <h3><span>Association Loi 1901</span></h3>
+        </div>
 
-    <div class="row">
-        <p>Email : <a href="#">jedisjeux@jedisjeux.net</a></p>
-    </div>
+        <div class="row">
+            <p>SIREN : 537 646 036 / SIRET : 537 646 036 00013 / Code APE : 9499Z</p>
+        </div>
 
-    <div class="row">
-        <div class="col-xs-6 col-xs-offset-6">
-            <div class="row">
-                <address class="lead">
-                    <strong>
+        <div class="row">
+            <h3><span>Siège Social :</span></h3>
+        </div>
+
+        <div class="row">
+            <address>
+                Jedisjeux<br/>
+                Fremont Loïc<br/>
+                2 allée de la châtaigneraie<br/>
+                35740 PACE
+            </address>
+        </div>
+
+        <div class="row">
+            <p>Email : <a href="#">jedisjeux@jedisjeux.net</a></p>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6 col-xs-offset-6">
+                <div class="row">
+                    <address class="lead customer">
                         {{ customer.society }}<br/>
                         {{ address.street }}<br/>
                         {% if (address.additionalAddressInfo) %}
                             {{ address.additionalAddressInfo }}<br/>
                         {% endif %}
                         {{ address.postalCode }} {{ address.city }}
-                    </strong>
-                </address>
+                    </address>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-xs-6">
-            <div class="row">
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>N° Client</th>
-                        <th>N° Facture</th>
-                        <th>Date</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>{{ bill.customer.id }}</td>
-                        <td>{{ bill.id }}</td>
-                        <td>{{ bill.createdAt|date('d/m/Y') }}</td>
-                    </tr>
-                    </tbody>
-                </table>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="row">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>N° Client</th>
+                            <th>N° Facture</th>
+                            <th>Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{ bill.customer.id }}</td>
+                            <td>{{ bill.id }}</td>
+                            <td>{{ bill.createdAt|date('d/m/Y') }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="row">
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>Référence - Désignation</th>
-                <th>Quantité</th>
-                <th>Prix unitaire Net</th>
-                <th>Montant</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for billProduct in bill.billProducts %}
-                {% set productPrice = billProduct.product.price * billProduct.quantity %}
+        <div class="row">
+            <table class="table table-bordered">
+                <thead>
                 <tr>
-                    <td>{{ billProduct.product.name }} - {{ billProduct.product.subscriptionDuration }} mois</td>
-                    <td>{{ billProduct.quantity }}</td>
-                    <td>{{ billProduct.product.price|localizedcurrency('EUR') }}</td>
-                    <td>{{ productPrice|localizedcurrency('EUR') }}</td>
+                    <th>Référence - Désignation</th>
+                    <th>Quantité</th>
+                    <th>Prix unitaire Net</th>
+                    <th>Montant</th>
                 </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                {% for billProduct in bill.billProducts %}
+                    {% set productPrice = billProduct.product.price * billProduct.quantity %}
+                    <tr>
+                        <td>{{ billProduct.product.name }} - {{ billProduct.product.subscriptionDuration }} mois</td>
+                        <td>{{ billProduct.quantity }}</td>
+                        <td>{{ billProduct.product.price|localizedcurrency('EUR') }}</td>
+                        <td>{{ productPrice|localizedcurrency('EUR') }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <div class="row">
-        <div class="pull-right">{{ bill.totalPrice|localizedcurrency('EUR') }}</div>
-        <div>Montant total HT :</div>
+    <div class="bill-footer">
+        <div class="row">
+            <div class="pull-right">{{ bill.totalPrice|localizedcurrency('EUR') }}</div>
+            <div>Montant total HT :</div>
+        </div>
+
+        <div class="row">
+            <p>Exonéré T.V.A - article 261-7-1° du CGI</p>
+        </div>
+
+        <div class="row">
+            <div class="pull-right">{{ bill.totalPrice|localizedcurrency('EUR') }}</div>
+            <div>Montant total à payer :</div>
+        </div>
     </div>
 
-    <div class="row">
-        <p>Exonéré T.V.A - article 261-7-1° du CGI</p>
-    </div>
 
-    <div class="row">
-        <div class="pull-right">{{ bill.totalPrice|localizedcurrency('EUR') }}</div>
-        <div>Montant total à payer :</div>
-    </div>
 
 {% endblock body %}
