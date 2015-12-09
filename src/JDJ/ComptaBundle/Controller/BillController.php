@@ -102,9 +102,9 @@ class BillController extends Controller
     {
         $this->getBillManager()->calculateTotalPrice($bill);
 
-        return $this->render('compta/bill/show.html.twig', array(
-            'bill' => $bill,
-        ));
+//        return $this->render('compta/bill/show.html.twig', array(
+//            'bill' => $bill,
+//        ));
 
         $html = $this->renderView('compta/bill/show.html.twig', array(
             'bill'  => $bill
