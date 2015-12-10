@@ -92,7 +92,7 @@
                 {% for billProduct in bill.billProducts %}
                     {% set productPrice = billProduct.product.price * billProduct.quantity %}
                     <tr>
-                        <td>{{ billProduct.product.name }} - {{ billProduct.product.subscriptionDuration }} mois</td>
+                        <td>{{ billProduct.product.name }}</td>
                         <td>{{ billProduct.quantity }}</td>
                         <td>{{ billProduct.product.price|localizedcurrency('EUR') }}</td>
                         <td>{{ productPrice|localizedcurrency('EUR') }}</td>

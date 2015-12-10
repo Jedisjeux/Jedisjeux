@@ -192,7 +192,7 @@ class Jeu
     /**
      * @var string
      *
-     * @ORM\Column(name="status", type="string", columnDefinition="enum('WRITING', 'NEED_A_TRANSLATION', 'NEED_A_REVIEW', 'READY_TO_PUBLISH', 'PUBLISHED')")
+     * @ORM\Column(name="status", type="string")
      */
     private $status;
 

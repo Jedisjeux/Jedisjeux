@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -36,16 +37,8 @@ class ProductController extends Controller
 
         $products = $em->getRepository('JDJComptaBundle:Product')->findAll();
 
-        $deleteForms = array();
-
-        /** @var Product $product */
-        foreach ($products as $product) {
-            $deleteForms[$product->getId()] = $this->createDeleteForm($product->getId())->createView();
-        }
-
         return $this->render('compta/product/index.html.twig', array(
             'products' => $products,
-            'deleteForms' => $deleteForms,
         ));
     }
 
@@ -181,39 +174,20 @@ class ProductController extends Controller
     /**
      * Deletes a Product entity.
      *
-     * @Route("/{product}/delete", name="compta_product_delete")
+     * @Route("/{id}/delete", name="compta_product_delete")
+     * @Method({"DELETE"})
      * @ParamConverter("product", class="JDJComptaBundle:Product")
      *
-     * @param Request $request
      * @param Product $product
+     *
      * @return RedirectResponse
      */
-    public function deleteAction(Request $request, Product $product)
+    public function deleteAction(Product $product)
     {
-        $form = $this->createDeleteForm($product->getId());
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($product);
-            $em->flush();
-        }
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($product);
+        $em->flush();
 
         return $this->redirect($this->generateUrl('compta_product'));
-    }
-
-    /**
-     * Creates a form to delete a Product entity by id.
-     *
-     * @param int $id The entity id
-     * @return Form The form
-     */
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('compta_product_delete', array('product' => $id)))
-            ->setMethod('DELETE')
-            ->getForm()
-            ;
     }
 }

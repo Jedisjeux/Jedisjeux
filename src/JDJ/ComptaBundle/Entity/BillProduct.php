@@ -45,7 +45,7 @@ class BillProduct
     /**
      * @var Product
      *
-     * @ORM\ManyToOne(targetEntity="Product", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Product", cascade={"persist"}, inversedBy="billProducts")
      */
     private $product;
 

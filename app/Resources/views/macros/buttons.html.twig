@@ -29,14 +29,20 @@
     {{ buttons.btn(url, message, id, 'plus-sign', 'btn-primary') }}
 {% endmacro %}
 
-{% macro edit(url, message, id) %}
+{% macro edit(url, message, id, disabled) %}
     {% import _self as buttons %}
 
     {% if message is empty %}
         {% set message = 'label.edit'|trans %}
     {% endif %}
 
+    {% if disabled %}
+        <span class="btn btn-primary disabled">
+            <i class="glyphicon glyphicon-pencil"></i><span>{{ message }}</span>
+        </span>
+    {% else %}
     {{ buttons.btn(url, message, id, 'pencil', 'btn-primary') }}
+    {% endif %}
 {% endmacro %}
 
 {% macro delete(url, message, disabled) %}

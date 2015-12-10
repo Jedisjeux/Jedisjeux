@@ -88,12 +88,18 @@ EOM;
             if (null === $product) {
                 $product = new Product();
                 $product
-                    ->setName($data['libelle'])
+                    ->setName($data['libelle'] . ' - 12 mois')
                     ->setPrice($data['prixUnitaire'])
                     ->setSubscriptionDuration(12);
 
                 $this->getEntityManager()->persist($product);
                 $this->getEntityManager()->flush();
+
+                $this
+                    ->getEntityManager()
+                    ->getConnection()
+                    ->prepare('SET foreign_key_checks = 0;')
+                    ->execute();
 
                 $this->getDatabaseConnection()->update('cpta_product', array(
                     "id" => $data['idProduit'],
@@ -105,6 +111,12 @@ EOM;
                     'object_id' => $product->getId(),
                     'object_class' => 'JDJ\ComptaBundle\Entity\Product',
                 ));
+
+                $this
+                    ->getEntityManager()
+                    ->getConnection()
+                    ->prepare('SET foreign_key_checks = 1;')
+                    ->execute();
 
                 $product->setId($data['idProduit']);
 
@@ -136,10 +148,11 @@ EOM;
             $bill->addBillProduct($billProduct);
             $this->getEntityManager()->flush();
 
-            $stmt = $this->getEntityManager()->getConnection()
-                ->prepare('SET foreign_key_checks = 0;');
-
-            $stmt->execute();
+            $this
+                ->getEntityManager()
+                ->getConnection()
+                ->prepare('SET foreign_key_checks = 0;')
+                ->execute();
 
             $this->getDatabaseConnection()->update('cpta_bill', array(
                 "id" => $data['id'],
@@ -147,12 +160,14 @@ EOM;
 
             $this->getDatabaseConnection()->update('cpta_bill_product', array(
                 "bill_id" => $data['id'],
+                "product_id" => $data['idProduit'],
             ), array('bill_id' => $product->getId()));
 
-            $stmt = $this->getEntityManager()->getConnection()
-                ->prepare('SET foreign_key_checks = 0;');
-
-            $stmt->execute();
+            $this
+                ->getEntityManager()
+                ->getConnection()
+                ->prepare('SET foreign_key_checks = 1;')
+                ->execute();
 
             $autoIncrement = $data['id'] + 1;
             $this->getDatabaseConnection()->exec("ALTER TABLE cpta_bill AUTO_INCREMENT = " . $autoIncrement );

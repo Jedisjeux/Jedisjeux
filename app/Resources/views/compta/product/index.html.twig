@@ -1,4 +1,5 @@
 {% extends "::base.html.twig" %}
+{% import 'macros/buttons.html.twig' as button %}
 
 {% block container %}
 
@@ -31,16 +32,14 @@
                 <td class="text-right">
                     <ul class="list-inline">
                         <li>
-                            <a class="btn btn-primary" href="{{ path('compta_product_edit', { 'product': product.id }) }}">
+                            <a class="btn btn-primary"
+                               href="{{ path('compta_product_edit', { 'product': product.id }) }}">
                                 <span class="glyphicon glyphicon-pencil"></span> Modifier
                             </a>
                         </li>
                         <li>
-                            {{ form_start(deleteForms[product.id]) }}
-                            <button type="submit" class="btn btn-danger">
-                                <span class="glyphicon glyphicon-trash"></span> Supprimer
-                            </button>
-                            {{ form_end(deleteForms[product.id]) }}
+                            {% set disabled = product.billProducts|length > 0 ? true : false %}
+                            {{ button.delete(path('compta_product_delete', {'id': product.id}), null, disabled) }}
                         </li>
                     </ul>
                 </td>

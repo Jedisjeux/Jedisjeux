@@ -46,10 +46,9 @@ class Notification
     /**
      * @var $action
      *
-     * @ORM\Column(name="status", type="string", columnDefinition="enum('accept', 'decline')")
+     * @ORM\Column(name="status", type="string")
      */
     private $action;
-
 
     /**
      * @var string

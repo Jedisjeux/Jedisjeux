@@ -2,6 +2,7 @@
 
 namespace JDJ\ComptaBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -49,9 +50,24 @@ class Product
     private $subscriptionDuration;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="BillProduct", mappedBy="product")
+     */
+    protected $billProducts;
+
+    /**
      * @ORM\Column(name="deletedAt", type="datetime", nullable=true)
      */
     private $deletedAt;
+
+    /**
+     * Product constructor.
+     */
+    public function __construct()
+    {
+        $this->billProducts = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -127,6 +143,26 @@ class Product
         $this->subscriptionDuration = $subscriptionDuration;
 
         return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getBillProducts()
+    {
+        return $this->billProducts;
+    }
+
+    /**
+     * @param ArrayCollection $billProducts
+     *
+     * @return $this
+     */
+    public function setBillProducts($billProducts)
+    {
+        $this->billProducts = $billProducts;
+        return $this;
+
     }
 
     /**
