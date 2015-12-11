@@ -41,11 +41,12 @@ class BillsImportCommand extends ContainerAwareCommand
     {
         $output->writeln("Importing bills from old jedisjeux");
         $query = <<<EOM
-select      facture.id, facture.idModeReglement, facture.idClient, facture.dateCreation, facture.datePaiement,
-            produitFacture.idProduit, produitFacture.prixUnitaire, produitFacture.quantite, produit.libelle
-from        zf_jedisjeux_test.cpta_produit produit
-inner join  zf_jedisjeux_test.cpta_produit_facture produitFacture on produitFacture.idProduit = produit.id
-inner join  zf_jedisjeux_test.cpta_facture facture on facture.id = produitFacture.idFacture
+select      facture.id,
+            facture.idModeReglement,
+            facture.idClient,
+            facture.dateCreation,
+            facture.datePaiement
+from        zf_jedisjeux_test.cpta_facture facture
 order by    facture.id
 EOM;
 
@@ -75,9 +76,6 @@ EOM;
             /** @var PaymentMethod $paymentMethod */
             $paymentMethod = $this->getPaymentMethodRepository()->find($data['idModeReglement']);
 
-            /** @var Product $product */
-            $product = $this->getProductRepository()->find($data['idProduit']);
-
             $bill
                 ->setCreatedAt(\DateTime::createFromFormat('Y-m-d H:i:s', $data['dateCreation']))
                 ->setPaidAt(\DateTime::createFromFormat('Y-m-d', $data['datePaiement']))
@@ -85,94 +83,18 @@ EOM;
                 ->setPaymentMethod($paymentMethod)
                 ->setCustomerAddressVersion($this->getAddressRepository()->getCurrentVersion($customer->getAddress()));
 
-            if (null === $product) {
-                $product = new Product();
-                $product
-                    ->setName($data['libelle'] . ' - 12 mois')
-                    ->setPrice($data['prixUnitaire'])
-                    ->setSubscriptionDuration(12);
-
-                $this->getEntityManager()->persist($product);
-                $this->getEntityManager()->flush();
-
-                $this
-                    ->getEntityManager()
-                    ->getConnection()
-                    ->prepare('SET foreign_key_checks = 0;')
-                    ->execute();
-
-                $this->getDatabaseConnection()->update('cpta_product', array(
-                    "id" => $data['idProduit'],
-                ), array('id' => $product->getId()));
-
-                $this->getDatabaseConnection()->update('ext_log_entries', array(
-                    'object_id' => $data['idProduit'],
-                ), array(
-                    'object_id' => $product->getId(),
-                    'object_class' => 'JDJ\ComptaBundle\Entity\Product',
-                ));
-
-                $this
-                    ->getEntityManager()
-                    ->getConnection()
-                    ->prepare('SET foreign_key_checks = 1;')
-                    ->execute();
-
-                $product->setId($data['idProduit']);
-
-                $autoIncrement = $data['idProduit'] + 1;
-                $this->getDatabaseConnection()->exec("ALTER TABLE cpta_product AUTO_INCREMENT = " . $autoIncrement );
-            }
-
-            if ($data['prixUnitaire'] !== $product->getPrice()) {
-                $product
-                    ->setPrice($data['prixUnitaire']);
-                $this->getEntityManager()->flush();
-            }
-
-            $billProduct = $this->getBillProductRepository()->findOneBy(array(
-                'product' => $data['idProduit'],
-                'bill' => $data['id'],
-            ));
-
-            if (null === $billProduct) {
-                $billProduct = new BillProduct();
-            }
-
-            $billProduct
-                ->setBill($bill)
-                ->setProduct($product)
-                ->setProductVersion($this->getProductRepository()->getCurrentVersion($product))
-                ->setQuantity($data['quantite']);
-
-            $bill->addBillProduct($billProduct);
             $this->getEntityManager()->flush();
-
-            $this
-                ->getEntityManager()
-                ->getConnection()
-                ->prepare('SET foreign_key_checks = 0;')
-                ->execute();
 
             $this->getDatabaseConnection()->update('cpta_bill', array(
                 "id" => $data['id'],
-            ), array('id' => $product->getId()));
-
-            $this->getDatabaseConnection()->update('cpta_bill_product', array(
-                "bill_id" => $data['id'],
-                "product_id" => $data['idProduit'],
-            ), array('bill_id' => $product->getId()));
-
-            $this
-                ->getEntityManager()
-                ->getConnection()
-                ->prepare('SET foreign_key_checks = 1;')
-                ->execute();
+            ), array('id' => $bill->getId()));
 
             $autoIncrement = $data['id'] + 1;
             $this->getDatabaseConnection()->exec("ALTER TABLE cpta_bill AUTO_INCREMENT = " . $autoIncrement );
 
         }
+
+
 
         $output->writeln("<comment>" . $createdItemCount . " items created</comment>");
         $output->writeln("<comment>" . $updatedItemCount . " items updated</comment>");
@@ -209,22 +131,6 @@ EOM;
     protected function getPaymentMethodRepository()
     {
         return $this->getEntityManager()->getRepository('JDJComptaBundle:PaymentMethod');
-    }
-
-    /**
-     * @return ProductRepository
-     */
-    protected function getProductRepository()
-    {
-        return $this->getEntityManager()->getRepository('JDJComptaBundle:Product');
-    }
-
-    /**
-     * @return EntityRepository
-     */
-    protected function getBillProductRepository()
-    {
-        return $this->getEntityManager()->getRepository('JDJComptaBundle:BillProduct');
     }
 
     /**
