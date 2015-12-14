@@ -9,6 +9,7 @@
 namespace JDJ\ComptaBundle\Form;
 
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormError;
@@ -35,6 +36,10 @@ class BillType extends AbstractType
             ))
             ->add('customer', null, array(
                 'label' => 'label.customer',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('o')
+                        ->orderBy('o.society', 'ASC');
+                },
             ))
             ->add('billProducts', 'collection', array(
                 'type' => new BillProductType(),
