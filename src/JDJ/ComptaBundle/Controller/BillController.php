@@ -102,6 +102,7 @@ class BillController extends Controller
     public function showAction(Bill $bill)
     {
         $this->getBillManager()->calculateTotalPrice($bill);
+        $this->getAddressManager()->revertToVersion($bill->getDealer()->getAddress(), $bill->getDealerAddressVersion());
 
 //        return $this->render('compta/bill/show.html.twig', array(
 //            'bill' => $bill,

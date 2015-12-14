@@ -1,7 +1,7 @@
 {% extends "layout/pdf.html.twig" %}
 
+{% set dealer = bill.dealer %}
 {% set customer = bill.customer %}
-{% set address = bill.customer.address %}
 
 {% block body %}
 
@@ -10,7 +10,7 @@
         <div class="row">
             <!-- Logo section -->
             <div class="logo">
-                <h1><a href="#">{% block headline %}Jedisjeux{% endblock %}</a></h1>
+                <h1><a href="#">{% block headline %}{{ dealer.name }}{% endblock %}</a></h1>
             </div>
 
         </div>
@@ -29,10 +29,12 @@
 
         <div class="row">
             <address>
-                Jedisjeux<br/>
-                Fremont Loïc<br/>
-                2 allée de la châtaigneraie<br/>
-                35740 PACE
+                {{ dealer.name }}<br/>
+                {{ dealer.address.street }}<br/>
+                {% if (dealer.address.additionalAddressInfo) %}
+                    {{ dealer.address.additionalAddressInfo }}<br/>
+                {% endif %}
+                {{ dealer.address.postalCode }} {{ dealer.address.city }}
             </address>
         </div>
 
@@ -45,11 +47,11 @@
                 <div class="row">
                     <address class="lead customer">
                         {{ customer.society }}<br/>
-                        {{ address.street }}<br/>
-                        {% if (address.additionalAddressInfo) %}
-                            {{ address.additionalAddressInfo }}<br/>
+                        {{ customer.address.street }}<br/>
+                        {% if (customer.address.additionalAddressInfo) %}
+                            {{ customer.address.additionalAddressInfo }}<br/>
                         {% endif %}
-                        {{ address.postalCode }} {{ address.city }}
+                        {{ customer.address.postalCode }} {{ customer.address.city }}
                     </address>
                 </div>
             </div>

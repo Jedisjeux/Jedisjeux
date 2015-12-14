@@ -47,6 +47,14 @@ class Bill
     private $customer;
 
     /**
+     * @var Dealer
+     *
+     * @ORM\ManyToOne(targetEntity="Dealer", cascade={"persist", "merge"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $dealer;
+
+    /**
      * @var BillProduct[]
      *
      * @ORM\Id
@@ -61,6 +69,13 @@ class Bill
      * @ORM\JoinColumn(nullable=true)
      */
     private $paymentMethod;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     */
+    private $dealerAddressVersion;
 
     /**
      * @var int
@@ -236,6 +251,25 @@ class Bill
     }
 
     /**
+     * @return int
+     */
+    public function getDealerAddressVersion()
+    {
+        return $this->dealerAddressVersion;
+    }
+
+    /**
+     * @param int $dealerAddressVersion
+     * @return $this
+     */
+    public function setDealerAddressVersion($dealerAddressVersion)
+    {
+        $this->dealerAddressVersion = $dealerAddressVersion;
+
+        return $this;
+    }
+
+    /**
      * @return BookEntry
      */
     public function getBookEntry()
@@ -270,6 +304,26 @@ class Bill
     public function setTotalPrice($totalPrice)
     {
         $this->totalPrice = $totalPrice;
+
+        return $this;
+    }
+
+    /**
+     * @return Dealer
+     */
+    public function getDealer()
+    {
+        return $this->dealer;
+    }
+
+    /**
+     * @param Dealer $dealer
+     *
+     * @return $this
+     */
+    public function setDealer($dealer)
+    {
+        $this->dealer = $dealer;
 
         return $this;
     }

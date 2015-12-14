@@ -10,9 +10,11 @@ namespace JDJ\ComptaBundle\Command;
 
 use JDJ\ComptaBundle\Entity\BillProduct;
 use JDJ\ComptaBundle\Entity\Customer;
+use JDJ\ComptaBundle\Entity\Dealer;
 use JDJ\ComptaBundle\Entity\Manager\BillManager;
 use JDJ\ComptaBundle\Entity\PaymentMethod;
 use JDJ\ComptaBundle\Entity\Repository\AddressRepository;
+use JDJ\ComptaBundle\Entity\Repository\DealerRepository;
 use JDJ\ComptaBundle\Entity\Repository\ProductRepository;
 use JDJ\CoreBundle\Entity\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -55,6 +57,9 @@ EOM;
         $createdItemCount = 0;
         $updatedItemCount = 0;
 
+        /** @var Dealer $dealer */
+        $dealer = $this->getDealerRepository()->findOneBy(array('name' => 'Jedisjeux'));
+
         foreach($oldItems as $data) {
 
             /** @var Bill $bill */
@@ -79,9 +84,11 @@ EOM;
             $bill
                 ->setCreatedAt(\DateTime::createFromFormat('Y-m-d H:i:s', $data['dateCreation']))
                 ->setPaidAt(\DateTime::createFromFormat('Y-m-d', $data['datePaiement']))
+                ->setDealer($dealer)
                 ->setCustomer($customer)
                 ->setPaymentMethod($paymentMethod)
-                ->setCustomerAddressVersion($this->getAddressRepository()->getCurrentVersion($customer->getAddress()));
+                ->setCustomerAddressVersion($this->getAddressRepository()->getCurrentVersion($customer->getAddress()))
+                ->setDealerAddressVersion($this->getAddressRepository()->getCurrentVersion($dealer->getAddress()));
 
             $this->getEntityManager()->flush();
 
@@ -91,7 +98,6 @@ EOM;
 
             $autoIncrement = $data['id'] + 1;
             $this->getDatabaseConnection()->exec("ALTER TABLE cpta_bill AUTO_INCREMENT = " . $autoIncrement );
-
         }
 
 
@@ -147,5 +153,13 @@ EOM;
     protected function getAddressRepository()
     {
         return $this->getEntityManager()->getRepository('JDJComptaBundle:Address');
+    }
+
+    /**
+     * @return DealerRepository
+     */
+    protected function getDealerRepository()
+    {
+        return $this->getEntityManager()->getRepository('JDJComptaBundle:Dealer');
     }
 }
