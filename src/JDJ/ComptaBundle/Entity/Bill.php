@@ -50,7 +50,7 @@ class Bill
      * @var Dealer
      *
      * @ORM\ManyToOne(targetEntity="Dealer", cascade={"persist", "merge"})
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=false)
      */
     protected $dealer;
 

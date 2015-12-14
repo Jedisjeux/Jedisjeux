@@ -30,6 +30,9 @@ class BillType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('dealer', null, array(
+                'label' => 'label.dealer',
+            ))
             ->add('customer', null, array(
                 'label' => 'label.customer',
             ))
