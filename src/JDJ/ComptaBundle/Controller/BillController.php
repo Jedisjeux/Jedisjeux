@@ -164,6 +164,13 @@ class BillController extends Controller
             $bill
                 ->setCustomerAddressVersion($customerAddressVersion);
 
+            $dealerAddressVersion = $this
+                ->getAddressManager()
+                ->getCurrentVersion($bill->getDealer()->getAddress());
+
+            $bill
+                ->setDealerAddressVersion($dealerAddressVersion);
+
             //Set the data of the bill product
             $bill = $this
                 ->getBillProductService()

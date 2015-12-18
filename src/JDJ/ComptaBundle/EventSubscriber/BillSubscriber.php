@@ -64,14 +64,12 @@ class BillSubscriber implements EventSubscriberInterface
     {
         $bill = $event->getBill();
         $this->bookEntryManager->createFromBill($bill);
-        $this->subscriptionManager->createFromBill($bill);
     }
 
     public function onBillPostUpdate(BillEvent $event)
     {
         $bill = $event->getBill();
-        //$this->bookEntryManager->createFromBill($bill);
-        $this->subscriptionManager->createFromBill($bill);
+        $this->bookEntryManager->createFromBill($bill);
     }
 
     /**
@@ -80,6 +78,7 @@ class BillSubscriber implements EventSubscriberInterface
     public function onBillPrePaid(BillEvent $event)
     {
         $bill = $event->getBill();
+        $this->subscriptionManager->createFromBill($bill);
         foreach ($bill->getBillProducts() as $billProduct) {
             foreach ($billProduct->getSubscriptions() as $subscription) {
                 $subscription->setStatus(Subscription::WAITING_FOR_INSTALLATION);

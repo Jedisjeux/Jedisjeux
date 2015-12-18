@@ -17,14 +17,17 @@ Feature: Bill searching
       | company   |
       | Philibert |
       | Ludibay   |
+    And there are dealers:
+      | name      |
+      | Jedisjeux |
     And there are products:
       | name        | price |
       | Sex Toy     | 10.00 |
       | Playstation | 15.99 |
     And there are bills:
-      | company   | payment_method |
-      | Ludibay   | chèque         |
-      | Philibert | chèque         |
+      | dealer    | company   | payment_method |
+      | Jedisjeux | Ludibay   | chèque         |
+      | Jedisjeux | Philibert | chèque         |
     And bill from customer "Ludibay" has following products:
       | name        | quantity |
       | Sex Toy     | 1        |
@@ -38,7 +41,7 @@ Feature: Bill searching
 
   Scenario: Search a bill by customer
     Given I fill in the following:
-     | criteria_query | Philibert
+      | criteria_query | Philibert
     When I press "Rechercher" on ".form-filter"
     Then I should see "Philibert"
     But I should not see "Ludibay"

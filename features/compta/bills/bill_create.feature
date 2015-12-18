@@ -17,6 +17,9 @@ Feature: Bill creation
       | company   |
       | Philibert |
       | Ludibay   |
+    And there are dealers:
+      | name      |
+      | Jedisjeux |
     And there are products:
       | name        |
       | Sex Toy     |
@@ -31,8 +34,8 @@ Feature: Bill creation
     Then I should be on "/compta/facture/"
     And I should see "Ludibay"
     And I should see "en attente de paiement"
-    And I am on "/compta/abonnement"
-    And I should see "Ludibay"
+    When I am on "/compta/abonnement"
+    Then I should see "Ludibay"
     And I should see "en attente de paiement"
     And I should see "Sex Toy"
     And I should see "Playstation"

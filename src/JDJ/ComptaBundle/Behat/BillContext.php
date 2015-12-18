@@ -35,17 +35,26 @@ class BillContext extends DefaultContext
             /** @var Customer $customer */
             $customer = $this->findOneBy('comptaCustomer', array('society' => $data['company']));
 
+            $dealer = $this->findOneBy('comptaDealer', array('name' => $data['dealer']));
+
             /** @var PaymentMethod $paymentMethod */
             $paymentMethod = $this->findOneBy('comptaPaymentMethod', array('name' => $data['payment_method']));
 
             $bill = new Bill();
             $bill
                 ->setCustomer($customer)
+                ->setDealer($dealer)
                 ->setPaymentMethod($paymentMethod)
                 ->setCustomerAddressVersion($this
                     ->getAddressManager()
                     ->getCurrentVersion($bill
                         ->getCustomer()
+                        ->getAddress()
+                    ))
+                ->setDealerAddressVersion($this
+                    ->getAddressManager()
+                    ->getCurrentVersion($bill
+                        ->getDealer()
                         ->getAddress()
                     ))
                 ->setPaidAt(isset($data['paid_at']) ? \DateTime::createFromFormat('Y-m-d', $data['paid_at']) : null)

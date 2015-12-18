@@ -254,6 +254,9 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
             case 'comptaBill':
                 $repositoryName = "JDJComptaBundle:Bill";
                 break;
+            case 'comptaDealer':
+                $repositoryName = "JDJComptaBundle:Dealer";
+                break;
             case 'comptaCustomer':
                 $repositoryName = "JDJComptaBundle:Customer";
                 break;

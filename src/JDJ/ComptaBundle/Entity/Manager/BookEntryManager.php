@@ -58,10 +58,6 @@ class BookEntryManager
      */
     public function createFromBill(Bill $bill)
     {
-        if (null === $bill->getPaidAt()) {
-            return;
-        }
-
         $bookEntry = $bill->getBookEntry();
 
         if (null === $bookEntry) {

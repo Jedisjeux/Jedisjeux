@@ -158,6 +158,7 @@ default:
                 - JDJ\ComptaBundle\Behat\BillProductContext
                 - JDJ\ComptaBundle\Behat\PaymentMethodContext
                 - JDJ\ComptaBundle\Behat\BillContext
+                - JDJ\ComptaBundle\Behat\DealerContext
             filters:
                 tags: "@bills"
 
