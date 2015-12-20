@@ -66,7 +66,7 @@ class BillProduct
     /**
      * @var Subscription[]
      *
-     * @ORM\OneToMany(targetEntity="Subscription", mappedBy="billProduct")
+     * @ORM\OneToMany(targetEntity="Subscription", mappedBy="billProduct", cascade={"persist", "merge", "remove"})
      */
     private $subscriptions;
 

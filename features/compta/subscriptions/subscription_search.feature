@@ -21,10 +21,13 @@ Feature: Subscription searching
       | name        | price |
       | Sex Toy     | 10.00 |
       | Playstation | 15.99 |
+    And there are dealers:
+      | name      |
+      | Jedisjeux |
     And there are bills:
-      | company   | payment_method |
-      | Ludibay   | chèque         |
-      | Philibert | chèque         |
+      | dealer    | company   | payment_method |
+      | Jedisjeux | Ludibay   | chèque         |
+      | Jedisjeux | Philibert | chèque         |
     And bill from customer "Ludibay" has following products:
       | name        | quantity |
       | Sex Toy     | 1        |

@@ -138,11 +138,10 @@ class ProductController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $deleteForm = $this->createDeleteForm($product->getId());
-        $editForm = $this->createEditForm($product);
-        $editForm->handleRequest($request);
+        $form = $this->createEditForm($product);
+        $form->handleRequest($request);
 
-        if ($editForm->isValid()) {
+        if ($form->isValid()) {
             $em->flush();
 
             return $this->redirect($this->generateUrl('compta_product'));
@@ -150,8 +149,7 @@ class ProductController extends Controller
 
         return $this->render('compta/product/edit.html.twig', array(
             'product'      => $product,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'edit_form'   => $form->createView(),
         ));
     }
 

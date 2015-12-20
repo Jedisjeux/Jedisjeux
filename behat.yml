@@ -125,6 +125,7 @@ default:
         products:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
+                - JDJ\CoreBundle\Behat\UtilsContext
                 - JDJ\ComptaBundle\Behat\ProductContext
                 - JDJ\UserBundle\Behat\UserContext
             filters:
@@ -172,6 +173,7 @@ default:
                 - JDJ\ComptaBundle\Behat\BillProductContext
                 - JDJ\ComptaBundle\Behat\PaymentMethodContext
                 - JDJ\ComptaBundle\Behat\BillContext
+                - JDJ\ComptaBundle\Behat\DealerContext
             filters:
                 tags: "@subscriptions"
 

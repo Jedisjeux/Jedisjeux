@@ -18,5 +18,7 @@ Feature: Product removal
       | Sex Toy |
     When I am on "/compta/produit/"
     And I press "Supprimer"
+    And I wait until modal is visible
+    And I follow "Supprimer"
     Then I should be on "/compta/produit/"
     And I should not see "Sex Toy"

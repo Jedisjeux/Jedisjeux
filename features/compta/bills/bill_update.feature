@@ -45,8 +45,8 @@ Feature: Bill creation
 
   Scenario: Update price of a bill product
     Given there are bills:
-      | company | payment_method |
-      | Ludibay | chèque         |
+      | dealer    | company | payment_method |
+      | Jedisjeux | Ludibay | chèque         |
     And bill from customer "Ludibay" has following products:
       | name        | quantity |
       | Sex Toy     | 1        |
@@ -58,7 +58,6 @@ Feature: Bill creation
     And I press "Mettre à jour"
     And I am on "/compta/facture"
     And I follow "Modifier"
-    And I wait "5" seconds
     When I press "Mettre à jour"
     And I am on "/compta/facture"
     Then I should see "45,99"
