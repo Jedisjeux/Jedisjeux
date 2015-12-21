@@ -8,7 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * Mechanism
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="JDJ\JeuBundle\Repository\MechanismRepository")
  * @ORM\Table(name="jdj_mechanism")
  */
 class Mechanism

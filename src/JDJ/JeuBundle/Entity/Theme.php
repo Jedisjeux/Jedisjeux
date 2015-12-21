@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Class Theme
  * @package JDJ\JeuBundle\Entity
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="JDJ\JeuBundle\Repository\ThemeRepository")
  * @ORM\Table(name="jdj_theme")
  */
 class Theme

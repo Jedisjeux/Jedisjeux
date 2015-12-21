@@ -3,6 +3,11 @@ app:
     type:     annotation
     prefix:   /
 
+backend:
+    resource: "@AppBundle/Controller/Backend/"
+    type:     annotation
+    prefix:   /admin
+
 jdj_jedi_zone:
     resource: "@JDJJediZoneBundle/Resources/config/routing.yml"
     prefix:   /
