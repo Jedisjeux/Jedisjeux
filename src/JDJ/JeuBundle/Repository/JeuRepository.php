@@ -28,6 +28,14 @@ class JeuRepository extends EntityRepository
             unset($criteria['query']);
         }
 
+        if (isset($criteria['mechanism'])) {
+            $this->joinTo($queryBuilder, 'mechanisms', 'mechanism');
+            $queryBuilder
+                ->andWhere('mechanism = :mechanism')
+                ->setParameter('mechanism', $criteria['mechanism']);
+            unset($criteria['mechanism']);
+        }
+
         if (array_key_exists("personne", $criteria)) {
             $queryBuilder
                 ->andWhere(":personneId MEMBER OF ".$this->getAlias().".auteurs
