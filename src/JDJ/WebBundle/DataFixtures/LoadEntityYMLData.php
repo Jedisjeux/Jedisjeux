@@ -55,6 +55,9 @@ abstract class LoadEntityYMLData extends ContainerAware implements FixtureInterf
             $this->getDatabaseConnection()->update($this->getTableName(), array(
                 "id" => $data['id'],
             ), array('id' => $entity->getId()));
+
+            $autoIncrement = $data['id'] + 1;
+            $this->getDatabaseConnection()->exec("ALTER TABLE ".$this->getTableName()." AUTO_INCREMENT = " . $autoIncrement );
         }
 
     }
