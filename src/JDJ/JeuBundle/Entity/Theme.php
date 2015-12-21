@@ -28,7 +28,7 @@ class Theme
      *
      * @ORM\Column(type="string", length=100, nullable=false)
      */
-    private $libelle;
+    private $name;
 
     /**
      * @var string
@@ -38,7 +38,7 @@ class Theme
     private $description;
 
     /**
-     * @Gedmo\Slug(fields={"libelle"}, separator="-")
+     * @Gedmo\Slug(fields={"name"}, separator="-")
      * @ORM\Column(type="string", length=128)
      */
     private $slug;
@@ -71,12 +71,12 @@ class Theme
     /**
      * Set libelle
      *
-     * @param string $libelle
+     * @param string $name
      * @return Theme
      */
-    public function setLibelle($libelle)
+    public function setName($name)
     {
-        $this->libelle = $libelle;
+        $this->name = $name;
 
         return $this;
     }
@@ -86,9 +86,9 @@ class Theme
      *
      * @return string 
      */
-    public function getLibelle()
+    public function getName()
     {
-        return $this->libelle;
+        return $this->name;
     }
 
     /**
@@ -177,7 +177,7 @@ class Theme
      */
     public function __toString()
     {
-        return $this->getLibelle();
+        return $this->getName();
     }
 
 }

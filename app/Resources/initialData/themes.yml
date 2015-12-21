@@ -1,215 +1,215 @@
 -
   id: 1
-  libelle: Abstrait
+  name: Abstrait
   description: |
     <p>Un jeu abstrait est un jeu qui n'a pas de thème particulier. C'est un jeu où l'on fait totalement d'abstraction du thème.</p>
     <p>Exemple : Non merci, les échecs, le go</p>
   slug: abstrait
 -
   id: 2
-  libelle: Science-fiction
+  name: Science-fiction
   slug: science-fiction
 -
   id: 3
-  libelle: Ville
+  name: Ville
   slug: ville
 -
   id: 4
-  libelle: Historique
+  name: Historique
   slug: historique
 -
   id: 5
-  libelle: Erotique
+  name: Erotique
   slug: erotique
 -
   id: 6
-  libelle: TV & Cinéma
+  name: TV & Cinéma
   slug: tv-cinema
 -
   id: 7
-  libelle: Fantastique
+  name: Fantastique
   slug: fantastique
 -
   id: 8
-  libelle: Halloween
+  name: Halloween
   slug: halloween
 -
   id: 9
-  libelle: Monstre
+  name: Monstre
   slug: monstre
 -
   id: 10
-  libelle: Médiéval
+  name: Médiéval
   slug: medieval
 -
   id: 11
-  libelle: Médiéval-fantastique
+  name: Médiéval-fantastique
   slug: medieval-fantastique
 -
   id: 12
-  libelle: Labyrinthe
+  name: Labyrinthe
   slug: labyrinthe
 -
   id: 13
-  libelle: Egypte
+  name: Egypte
   slug: egypte
 -
   id: 14
-  libelle: Lettres & chiffres
+  name: Lettres & chiffres
   slug: lettres-chiffres
 -
   id: 15
-  libelle: Maritime
+  name: Maritime
   slug: maritime
 -
   id: 16
-  libelle: Cochon
+  name: Cochon
   slug: cochon
 -
   id: 17
-  libelle: Immobilier
+  name: Immobilier
   slug: immobilier
 -
   id: 18
-  libelle: Commerce
+  name: Commerce
   slug: commerce
 -
   id: 19
-  libelle: Renaissance
+  name: Renaissance
   slug: renaissance
 -
   id: 20
-  libelle: Antiquité
+  name: Antiquité
   slug: antiquite
 -
   id: 21
-  libelle: Colonisation
+  name: Colonisation
   slug: colonisation
 -
   id: 22
-  libelle: Locomotion & voyage
+  name: Locomotion & voyage
   slug: locomotion-voyage
 -
   id: 23
-  libelle: Course
+  name: Course
   slug: course
 -
   id: 24
-  libelle: Animaux
+  name: Animaux
   slug: animaux
 -
   id: 25
-  libelle: Guerre
+  name: Guerre
   slug: guerre
 -
   id: 26
-  libelle: Fruits & légumes
+  name: Fruits & légumes
   slug: fruits-legumes
 -
   id: 27
-  libelle: Art
+  name: Art
   slug: art
 -
   id: 28
-  libelle: Sport
+  name: Sport
   slug: sport
 -
   id: 29
-  libelle: Pirate
+  name: Pirate
   slug: pirate
 -
   id: 30
-  libelle: Far-west
+  name: Far-west
   slug: far-west
 -
   id: 31
-  libelle: Bourse & finances
+  name: Bourse & finances
   slug: bourse-finances
 -
   id: 32
-  libelle: Asie
+  name: Asie
   slug: asie
 -
   id: 33
-  libelle: Préhistorique
+  name: Préhistorique
   slug: prehistorique
 -
   id: 34
-  libelle: Politique
+  name: Politique
   slug: politique
 -
   id: 35
-  libelle: Prospection minière
+  name: Prospection minière
   slug: prospection-miniere
 -
   id: 36
-  libelle: Hospitalier
+  name: Hospitalier
   slug: hospitalier
 -
   id: 37
-  libelle: Divers
+  name: Divers
   slug: divers
 -
   id: 38
-  libelle: Exploration
+  name: Exploration
   slug: exploration
 -
   id: 39
-  libelle: Pub
+  name: Pub
   slug: pub
 -
   id: 40
-  libelle: Bande dessinée
+  name: Bande dessinée
   slug: bande-dessinee
 -
   id: 41
-  libelle: Musique & Chanson
+  name: Musique & Chanson
   slug: musique-chanson
 -
   id: 42
-  libelle: Enquêtes et Policiers
+  name: Enquêtes et Policiers
   slug: enquetes-et-policiers
 -
   id: 43
-  libelle: Cirque
+  name: Cirque
   slug: cirque
 -
   id: 44
-  libelle: Polaire
+  name: Polaire
   slug: polaire
 -
   id: 45
-  libelle: Religion
+  name: Religion
   slug: religion
 -
   id: 46
-  libelle: Desert
+  name: Desert
   slug: desert
 -
   id: 47
-  libelle: Rails
+  name: Rails
   slug: rails
 -
   id: 48
-  libelle: SteamPunk
+  name: SteamPunk
   slug: steampunk
 -
   id: 49
-  libelle: Horreur
+  name: Horreur
   slug: horreur
 -
   id: 50
-  libelle: Spiritualité
+  name: Spiritualité
   slug: spiritualite
 -
   id: 51
-  libelle: Ecologie
+  name: Ecologie
   slug: ecologie
 -
   id: 52
-  libelle: Ambiance
+  name: Ambiance
   slug: ambiance
 -
   id: 53
-  libelle: Cuisine
+  name: Cuisine
   slug: cuisine

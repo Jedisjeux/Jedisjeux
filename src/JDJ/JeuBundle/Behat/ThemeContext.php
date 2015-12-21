@@ -39,7 +39,7 @@ class ThemeContext extends DefaultContext
             if (null === $theme) {
                 $theme = new Theme();
                 $theme
-                    ->setLibelle(trim($themeLibelle))
+                    ->setName(trim($themeLibelle))
                 ;
             }
             $jeu->addTheme($theme);

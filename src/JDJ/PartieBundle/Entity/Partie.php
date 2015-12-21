@@ -311,6 +311,6 @@ class Partie
 
     public function __toString()
     {
-        return $this->getId().' - '.$this->getJeu()->getLibelle();
+        return $this->getId().' - '.$this->getJeu()->getName();
     }
 }

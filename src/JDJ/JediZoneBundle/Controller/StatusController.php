@@ -82,7 +82,7 @@ class StatusController extends Controller
                         "%status%" => $this
                             ->get('translator')
                             ->trans(/** @Ignore */$status),
-                        "%jeu%" => $jeu->getLibelle(),
+                        "%jeu%" => $jeu->getName(),
                     ));
             } else {
                 $message = $this
@@ -91,7 +91,7 @@ class StatusController extends Controller
                         "%status%" => $this
                             ->get('translator')
                             ->trans(/** @Ignore */$status),
-                        "%jeu%" => $jeu->getLibelle(),
+                        "%jeu%" => $jeu->getName(),
                     ));
             }
             $response->setData(

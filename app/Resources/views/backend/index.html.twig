@@ -1,0 +1,51 @@
+{% extends "::base.html.twig" %}
+
+{% block container %}
+
+    <div class="block-heading-two">
+        <h3><span>Administration</span></h3>
+    </div>
+
+    <!-- Icon Box #1 Starts-->
+    <div class="icon-box-1 text-center">
+        <!-- Container -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <!-- Icon Box One Item -->
+                    <div class="icon-box-1-item">
+                        <!-- Icon Box One Icon -->
+                        <a href="#"><i class="fa fa-puzzle-piece purple"></i></a>
+                        <!-- Icon Box One Headeing -->
+                        <h4><a href="#">Jeux</a></h4>
+                        <!-- Icon Box One Paragraph -->
+                        <p>Les fiches de jeu.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <!-- Icon Box One Item -->
+                    <div class="icon-box-1-item">
+                        <!-- Icon Box One Icon -->
+                        <a href="{{ path('admin_mechanism_index') }}"><i class="fa fa-cog red"></i></a>
+                        <!-- Icon Box One Headeing -->
+                        <h4><a href="{{ path('admin_mechanism_index') }}">Mécanismes</a></h4>
+                        <!-- Icon Box One Paragraph -->
+                        <p>Les mécanismes de jeu.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <!-- Icon Box One Item -->
+                    <div class="icon-box-1-item">
+                        <!-- Icon Box One Icon -->
+                        <a href="{{ path('admin_theme_index') }}"><i class="fa fa-cloud"></i></a>
+                        <!-- Icon Box One Headeing -->
+                        <h4><a href="{{ path('admin_theme_index') }}">Thèmes</a></h4>
+                        <!-- Icon Box One Paragraph -->
+                        <p>Les thématiques de jeu.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock container %}

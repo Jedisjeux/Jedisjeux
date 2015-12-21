@@ -73,8 +73,8 @@ class SearchController extends Controller
                 /** @var Jeu $jeu */
                 $jeu = $entity;
                 $result = array(
-                    'value' => $jeu->getLibelle(),
-                    'label' => $jeu->getLibelle(),
+                    'value' => $jeu->getName(),
+                    'label' => $jeu->getName(),
                     'image' => (null === $jeu->getImageCouverture()) ? null : $this->get('liip_imagine.cache.manager')->getBrowserPath($jeu->getImageCouverture()->getWebPath(), 'thumbnail'),
                     'href' => $this->generateUrl('jeu_show', array(
                             'id' => $jeu->getId(),
@@ -99,8 +99,8 @@ class SearchController extends Controller
                 /** @var Mechanism $mechanism */
                 $mechanism = $entity;
                 $result = array(
-                    'value' => $mechanism->getLibelle(),
-                    'label' => $mechanism->getLibelle(),
+                    'value' => $mechanism->getName(),
+                    'label' => $mechanism->getName(),
                     'image' => "",
                     'href' => $this->generateUrl('mechanism_show', array(
                             'id' => $mechanism->getId(),
@@ -114,8 +114,8 @@ class SearchController extends Controller
                 /** @var Theme $theme */
                 $theme = $entity;
                 $result = array(
-                    'value' => $theme->getLibelle(),
-                    'label' => $theme->getLibelle(),
+                    'value' => $theme->getName(),
+                    'label' => $theme->getName(),
                     'image' => "",
                     'href' => $this->generateUrl('theme_show', array(
                             'id' => $theme->getId(),

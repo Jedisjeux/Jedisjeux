@@ -66,7 +66,7 @@ EOM;
     {
         $jeu = new Jeu();
         $jeu
-            ->setLibelle($data['nom'])
+            ->setName($data['nom'])
             ->setJoueurMin(!empty($data['min']) ? $data['min'] : null)
             ->setJoueurMax(!empty($data['max']) ? $data['max'] : null)
             // TODO Durée -setDuree(empty($data['max']) ? $data['max'] : null)

@@ -1,58 +1,58 @@
 -
   id: 1
-  libelle: Enchères
+  name: Enchères
   description: |
     <p>Mécanisme où les joueurs misent et renchérissent (avec des Meeples, des jetons, de l'argent ou autre selon le jeu) afin d'obtenir un avantage. Il existe plusieurs systèmes d'enchères.</p>
     <p>Exemples : Goa, Megawatts, Keyflower...</p>
   slug: encheres
 -
   id: 2
-  libelle: Conquêtes
+  name: Conquêtes
   description: |
     <p>Dans ce type de jeux, les joueurs devront tenter de conquérir du terrain neutre et/ou du terrain adverse sur le plateau. Celui qui aura le plus étendu son territoire remportera la partie.</p>
     <p>Exemple : Risk, Catane, Civilization, Le Trône de Fer...</p>
   slug: conquetes
 -
   id: 3
-  libelle: Capture
+  name: Capture
   description: |
     <p>Dans ce type de jeux, les joueurs doivent capturer un élément neutre ou appartenant à un adversaire.
     Exemples : Jeu de Dames, Wiz-War, Jungle Speed, Reef Encounter...</p>
   slug: capture
 -
   id: 4
-  libelle: Combinaisons
+  name: Combinaisons
   description: |
     <p>Parfois surnommé "combo". Faire des combo c’est optimiser ses actions pour qu’elles soient les plus avantageuses possibles. Certains jeux de cartes notamment sont entièrement pensés pour fonctionner par combo.</p>
     <p>Ex: Magic, Seasons, Smash Up...</p>
   slug: combinaisons
 -
   id: 5
-  libelle: Plis
+  name: Plis
   description: |
     <p>Un jeu de plis ou de "levées" est un type de jeux de cartes dans lequel les joueurs exposent tour à tour une carte sur la table et celui qui a joué la plus forte, selon les règles du jeu, s'empare de l'ensemble en le levant et le pliant devant lui : il regroupe les cartes en tas et les retourne, faces cachées, devant lui (alors on dit que le joueur fait une levée ou un pli).
     Exemple : le Bridge, Le Diable dans la Bouteille, Stupide Vautour, Mito...</p>
   slug: pli
 -
   id: 6
-  libelle: Parcours
+  name: Parcours
   description: <p>Type de jeu où les joueurs ont un chemin défini à parcourir pour gagner, il peut s'agir d'un jeu de course ou d'un jeu de l'oie repensé et amélioré. Ex: Talisman, Formule 1, Jack Bananas, Jamaica...</p>
   slug: parcours
 -
   id: 7
-  libelle: Habileté
+  name: Habileté
   description: |
     <p>Un jeu d'habileté ou "d'adresse" est un type de jeu qui se base en grande partie sur la dextérité (et/ou la rapidité physique) des joueurs.
     Exemple : Mölkky, PitchCar, Carrom, Hop la bille, Perplexus, Jungle Speed...</p>
   slug: habilete
 -
   id: 8
-  libelle: Rangement
+  name: Rangement
   description: <p>Le jeu de rangement propose aux joueurs d'imbriquer des pièces dans un ordre précis (il peut y avoir qu'une seule solution comme dans les puzzles ou plusieurs possibles comme dans Katamino par exemple).</p>
   slug: rangement
 -
   id: 9
-  libelle: Hasard
+  name: Hasard
   description: |
     <p>"Un jeu de hasard est un jeu dont le déroulement est partiellement ou totalement soumis à la chance. Celle-ci peut provenir d'un tirage ou d'une distribution de cartes, d'un jet de dé, etc.
     Lorsque le jeu est totalement soumis au hasard, on parle de jeu de hasard pur. Lorsque le joueur doit déterminer son action en fonction d'événements aléatoires passés ou futurs et de probabilités, on parle plus volontiers de jeu de hasard raisonné." (Wikipédia)
@@ -60,12 +60,12 @@
   slug: hasard
 -
   id: 10
-  libelle: Mémoire
+  name: Mémoire
   description: <p>Comme son nom l'indique, un jeu de mémoire utilise la capacité de mémorisation des joueurs. Le célèbre mémory en est un exemple parlant, mais d'autres jeux utilisent la mémoire sans tout axer la-dessus. Exemples : Crôa!, Ovo, Shadows over Camelot, Divinare, Time's up...</p>
   slug: memoire
 -
   id: 11
-  libelle: Simulation
+  name: Simulation
   description: |
     <p>Vous trouverez dans cette catégorie des jeux qui simulent une situation. Cela peut être une situation politique (exemple : Junta, War of terror...), économique (1830...), historique (Antiquity, Liberté...), militaire (Combat Commander...) ou une situation plus théâtrale (exemples : Petits meurtres et faits divers, les jeux de rôles...).
     Note :
@@ -73,7 +73,7 @@
   slug: simulation
 -
   id: 12
-  libelle: Coopératif
+  name: Coopératif
   description: |
     <p>Jeux de société sans (ou presque sans) compétition entre joueurs puisqu'ils partagent les mêmes intérêts, le même objectif et doivent trouver ensemble une solution de battre le jeu qui leur propose un défi.
     Exemples : Les Chevaliers de la Table Ronde, Pandémie, Dungeon Fighter, Sherlock Holmes detective conseil, Defender of the realm...
@@ -82,19 +82,19 @@
   slug: cooperatif
 -
   id: 13
-  libelle: Bluff
+  name: Bluff
   description: |
     <p>Dans les jeux de bluff vous allez devoir tirer partie de la situation en abusant vos adversaire avec vos actions et vos paroles.
     Ex: Poker, Non Merci, Ca$h'n Gun$, Perudo, Coyote, Diplomatie, Junta, Petits Meurtres et Faits Divers...</p>
   slug: bluff
 -
   id: 14
-  libelle: Déduction
+  name: Déduction
   description: <p>Un jeu de déduction est un jeu de société dans lequel un joueur doit découvrir, selon des règles établies, un ou plusieurs éléments cachés (par un adversaire ou par le jeu lui-même). Ex: Dixit, Sherlock Holmes - Détective Conseil, Time's up, MasterMind, Intrigues à Venise, Cluedo, Compatibility...</p>
   slug: deduction
 -
   id: 16
-  libelle: Construction
+  name: Construction
   description: |
     <p>Dans cette catégorie vous trouverez des jeux où les joueurs ont la sensation de construire quelque chose pendant la partie : un empire, une cité, un bâtiment, un réseau commercial ou ferroviaire etc...
     Ce genre de jeu nécessite souvent une certaine planification des étapes.
@@ -102,41 +102,41 @@
   slug: construction
 -
   id: 17
-  libelle: Placement
+  name: Placement
   slug: placement
 -
   id: 18
-  libelle: Courses
+  name: Courses
   description: <p>Le but est généralement de progresser le plus rapidement possible d'un point à un point autre pour gagner sur les autres ou sur un élément du jeu. Très souvent dans les jeux de courses, le premier arrivé remporte la partie.</p>
   slug: courses
 -
   id: 19
-  libelle: Affrontement
+  name: Affrontement
   description: <p>Un jeu d'affrontement propose aux joueurs une interaction directe, cela peut se traduire par de la prise de pièces adverses (cartes, jetons, figurines etc), de la prise de position sur le terrain ou d'une manière plus générale, une possibilité d'interférer directement dans la stratégie adverse.</p>
   slug: affrontement
 -
   id: 20
-  libelle: Simultané
+  name: Simultané
   description: <p>Ce terme signifie simplement qu' une plusieurs phases importante(s) du jeu se déroulent simultanément, autrement dit, que tous les joueurs agissent en même temps et non à tour de rôle comme il est d'usage traditionnellement. Ex : Galaxy Trucker, Jungle speed, Contrario, 7 wonders...</p>
   slug: simultane
 -
   id: 21
-  libelle: Blocage
+  name: Blocage
   description: <p>A l'origine, dans ces jeux, les adversaires déplacent un de leurs pions, chacun leur tour, sur un plateau. Lorsqu'un joueur bloqué et ne peut plus déplacer le moindre dee ses pions, il a perdu. Par extensions, l'expression "jeu de blocage" désigne un jeu où les joueurs vont jouer des éléments (cartes, pion, tuiles, meeples...) de façon à bloquer l'adversaire. C'est une composante importante de l'interaction souvent qualifiée d'"indirecte".</p>
   slug: blocage
 -
   id: 22
-  libelle: Question
+  name: Question
   description: <p>Dans cette catégorie sont regroupés les jeux où l'on doit répondre à des questions. Le trivial pursuit est un exemple très célèbre : il s'agit de question de culture générale, mais il peut également s'agir de jeux avec des questions absurdes (burger quizz), personnelles (privacy) ou des énigmes à résoudre (mystères à l'abbaye, Black Stories...).</p>
   slug: question
 -
   id: 23
-  libelle: Défausse
+  name: Défausse
   description: <p>Un jeu de défausse est généralement un jeu de carte où vous devez vous débarrasser de vos cartes pour gagner. Ex: Uno, Cardline, Gang of four...</p>
   slug: defausse
 -
   id: 24
-  libelle: Linguistique
+  name: Linguistique
   description: |
     <p>Sous ce terme nous regroupons tous les jeux qui jouent sur les mots ou les capacités d'argumentation/narration des joueurs.
 
@@ -144,19 +144,19 @@
   slug: linguistique
 -
   id: 25
-  libelle: Négociation
+  name: Négociation
   description: |
     <p>Dans ces jeux, les joueurs doivent s'attendre à parlementer avec les autres.
     Des capacités de marchandage seront parfois requises pour des jeux de commerce par exemple, mais il peut également s'agir de jeux coopératifs qui nécessitent une bonne collaboration.</p>
   slug: negociation
 -
   id: 26
-  libelle: Créativité
+  name: Créativité
   description: <p>Ce type de jeu fait appel aux capacités inventives des joueurs pour raconter ou dessiner quelque chose par exemple...</p>
   slug: creativite
 -
   id: 27
-  libelle: Objectif secret
+  name: Objectif secret
   description: |
     <p>Dans ce type de jeu, chaque joueur possède un objectif tenu secret des autres. Parfois tout le monde a le même objectif sauf un joueur (/ou par équipe) mais les joueurs ne savent pas "qui est qui" ou "qui cherche à faire quoi", et ce suspens tient en haleine jusqu'à un certain stade voir jusqu'à la résolution de la partie.
 
@@ -164,64 +164,64 @@
   slug: objectif secret
 -
   id: 28
-  libelle: Tuiles
+  name: Tuiles
   slug: tuiles
 -
   id: 29
-  libelle: Programmation
+  name: Programmation
   slug: programmation
 -
   id: 30
-  libelle: Observation
+  name: Observation
   slug: observation
 -
   id: 31
-  libelle: Pari
+  name: Pari
   slug: pari
 -
   id: 32
-  libelle: Réflexe
+  name: Réflexe
   slug: reflexe
 -
   id: 33
-  libelle: Points d'action
+  name: Points d'action
   slug: points-action
 -
   id: 34
-  libelle: Majorité
+  name: Majorité
   slug: majorite
 -
   id: 35
-  libelle: Draft
+  name: Draft
   description: <p>C’est le fait de constituer son jeu à partir d’une base tirée aléatoirement. Par exemple : chaque joueur a une main de cartes, chaque joueur en sélectionne une qu’il va souhaiter garder et fait passer le reste des cartes. On recommence jusqu’à constitution de la main de départ.</p>
   slug: draft
 -
   id: 36
-  libelle: Gages
+  name: Gages
   slug: gages
 -
   id: 37
-  libelle: Gestion de main
+  name: Gestion de main
   slug: gestion-de-main
 -
   id: 38
-  libelle: Roue
+  name: Roue
   slug: roue
 -
   id: 40
-  libelle: Rapidité
+  name: Rapidité
   slug: rapidite
 -
   id: 41
-  libelle: Dés
+  name: Dés
   slug: des
 -
   id: 42
-  libelle: Pose d'ouvriers
+  name: Pose d'ouvriers
   slug: pose-ouvriers
 -
   id: 43
-  libelle: Deckbuilding
+  name: Deckbuilding
   description: |
     <p>Mécanique de jeu où l'on constitue son deck en jouant (sachant que le "deck" est la traduction de "paquet de cartes", en réalité c'est votre pioche personnelle, parfois commune).
 
@@ -235,25 +235,25 @@
   slug: deckbuilding
 -
   id: 44
-  libelle: Semi-coopératif
+  name: Semi-coopératif
   slug: semi-cooperatif
 -
   id: 45
-  libelle: Connaissances
+  name: Connaissances
   slug: connaissances
 -
   id: 46
-  libelle: Elimination
+  name: Elimination
   slug: elimination
 -
   id: 47
-  libelle: Cartes personnages
+  name: Cartes personnages
   slug: cartes-personnages
 -
   id: 48
-  libelle: Stop ou encore
+  name: Stop ou encore
   slug: stop-ou-encore
 -
   id: 49
-  libelle: Pioche
+  name: Pioche
   slug: pioche

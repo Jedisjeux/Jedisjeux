@@ -37,7 +37,7 @@ class MechanismContext extends DefaultContext
             if (null === $mecanisme) {
                 $mecanisme = new Mechanism();
                 $mecanisme
-                    ->setLibelle(trim($mecanismeLibelle))
+                    ->setName(trim($mecanismeLibelle))
                 ;
             }
             $jeu->addMechanism($mecanisme);

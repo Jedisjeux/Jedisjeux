@@ -303,7 +303,7 @@ fos_elastica:
                       finder: ~
               jeu:
                   mappings:
-                      libelle: ~
+                      name: ~
                       slug: { search_analyzer: custom_search_analyzer, index_analyzer: custom_index_analyzer, type: string }
                   persistence:
                       driver: orm
@@ -326,7 +326,7 @@ fos_elastica:
                       finder: ~
               mechanism:
                   mappings:
-                      libelle: ~
+                      name: ~
                       slug: { search_analyzer: custom_search_analyzer, index_analyzer: custom_index_analyzer, type: string }
                   persistence:
                       driver: orm
@@ -337,7 +337,7 @@ fos_elastica:
                       finder: ~
               theme:
                   mappings:
-                      libelle: ~
+                      name: ~
                       slug: { search_analyzer: custom_search_analyzer, index_analyzer: custom_index_analyzer, type: string }
                   persistence:
                       driver: orm

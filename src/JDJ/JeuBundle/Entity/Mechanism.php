@@ -27,7 +27,7 @@ class Mechanism
      *
      * @ORM\Column(type="string", nullable=true, length=50)
      */
-    private $libelle;
+    private $name;
 
     /**
      * @var string
@@ -39,7 +39,7 @@ class Mechanism
     /**
      * @var string
      *
-     * @Gedmo\Slug(fields={"libelle"}, separator="-")
+     * @Gedmo\Slug(fields={"name"}, separator="-")
      * @ORM\Column(type="string", length=128)
      */
     private $slug;
@@ -72,12 +72,12 @@ class Mechanism
     /**
      * Set libelle
      *
-     * @param string $libelle
+     * @param string $name
      * @return Mechanism
      */
-    public function setLibelle($libelle)
+    public function setName($name)
     {
-        $this->libelle = $libelle;
+        $this->name = $name;
 
         return $this;
     }
@@ -87,9 +87,9 @@ class Mechanism
      *
      * @return string 
      */
-    public function getLibelle()
+    public function getName()
     {
-        return $this->libelle;
+        return $this->name;
     }
 
     /**
@@ -178,7 +178,7 @@ class Mechanism
      */
     public function __toString()
     {
-        return $this->getLibelle();
+        return $this->getName();
     }
 
 }

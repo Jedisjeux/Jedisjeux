@@ -37,7 +37,7 @@ class JeuContext extends DefaultContext
 
             $jeu = new Jeu();
             $jeu
-                ->setLibelle(trim($data['libelle']))
+                ->setName(trim($data['libelle']))
                 ->setAgeMin(isset($data['age_min']) ? $data['age_min'] : null)
                 ->setJoueurMin(isset($data['joueur_min']) ? $data['joueur_min'] : null)
                 ->setJoueurMax(isset($data['joueur_max']) ? $data['joueur_max'] : null)

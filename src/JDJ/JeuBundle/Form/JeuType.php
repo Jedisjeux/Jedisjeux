@@ -22,7 +22,9 @@ class JeuType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('libelle')
+            ->add('name', null, array(
+                'label' => 'label.name',
+            ))
             ->add('ageMin', null, array(
                 'required' => false,
             ))

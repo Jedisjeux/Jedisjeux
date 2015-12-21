@@ -21,7 +21,12 @@ class JeuRepository extends EntityRepository
      */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)
     {
-        parent::applyCriteria($queryBuilder, $criteria);
+        if (isset($criteria['query'])) {
+            $queryBuilder
+                ->andWhere($this->getAlias().'.name like :query')
+                ->setParameter('query', '%'.$criteria['query'].'%');
+            unset($criteria['query']);
+        }
 
         if (array_key_exists("personne", $criteria)) {
             $queryBuilder
@@ -49,11 +54,7 @@ class JeuRepository extends EntityRepository
             ;
         }
 
-        /**
-         * TODO, faire avec updateAt desc quand il y aura cela dans l'entité
-         */
-        $queryBuilder
-            ->orderBy('o.id', 'desc');
+        parent::applyCriteria($queryBuilder, $criteria);
     }
 
     /**
