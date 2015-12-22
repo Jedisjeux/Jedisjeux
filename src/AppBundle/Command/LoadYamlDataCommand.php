@@ -17,7 +17,7 @@ use Symfony\Component\Yaml\Parser;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-abstract class LoadYamlDataCommand extends ContainerAwareCommand implements LoadYamlDataInterface
+abstract class LoadYamlDataCommand extends LoadCommand implements LoadYamlDataInterface, LoadCommandInterface
 {
     /**
      * @var OutputInterface
@@ -44,6 +44,7 @@ abstract class LoadYamlDataCommand extends ContainerAwareCommand implements Load
             }
 
             $this->getEntityManager()->flush();
+            $this->getEntityManager()->clear();
 
             $this->getDatabaseConnection()->update($this->getTableName(), array(
                 "id" => $data['id'],
@@ -57,31 +58,6 @@ abstract class LoadYamlDataCommand extends ContainerAwareCommand implements Load
 
     }
 
-    protected function createOrReplaceEntity(array $data)
-    {
-        $entity = $this->getRepository()->find($data['id']);
-
-        if (null === $entity) {
-            $entity = $this->createEntityNewInstance();
-        }
-
-        $this->populateData($entity, $data);
-        $this->getEntityManager()->persist($entity);
-
-        return $entity;
-
-    }
-
-    /**
-     * @param int $createdCount
-     * @param int $updatedCount
-     */
-    protected function writeChangesLog($createdCount, $updatedCount)
-    {
-        $this->output->writeln(sprintf("<comment>%s</comment> element(s) created", $createdCount));
-        $this->output->writeln(sprintf("<comment>%s</comment> element(s) updated", $updatedCount));
-    }
-
     /**
      * Parse YAML File
      *
@@ -91,43 +67,5 @@ abstract class LoadYamlDataCommand extends ContainerAwareCommand implements Load
     {
         $yaml = new Parser();
         return $yaml->parse(file_get_contents($this->getYAMLFileName()));
-    }
-
-    /**
-     * @return EntityManager
-     */
-    protected function getEntityManager()
-    {
-        return $this->getContainer()->get('doctrine.orm.entity_manager');
-    }
-
-    /**
-     * @return \Doctrine\DBAL\Connection
-     */
-    protected function getDatabaseConnection()
-    {
-        return $this->getContainer()->get('database_connection');
-    }
-
-    /**
-     * Populate Data to Entity
-     *
-     * @param $data
-     * @param $entity
-     */
-    private function populateData($entity, $data)
-    {
-        $entityReflection = new \ReflectionClass($entity);
-        foreach($data as $key=>$value)
-        {
-            if ($entityReflection->hasProperty($key)) {
-                $property = $entityReflection->getProperty($key);
-                $property->setAccessible(true);
-                if ($property->getName() !== "id") {
-                    $property->setValue($entity, $value);
-                }
-            }
-        }
-        return $entity;
     }
 }

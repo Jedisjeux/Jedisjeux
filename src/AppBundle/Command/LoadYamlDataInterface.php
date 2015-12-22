@@ -14,11 +14,5 @@ use Doctrine\ORM\EntityRepository;
 interface LoadYamlDataInterface
 {
     public function getYAMLFileName();
-    public function createEntityNewInstance();
     public function getTableName();
-
-    /**
-     * @return EntityRepository
-     */
-    public function getRepository();
 }

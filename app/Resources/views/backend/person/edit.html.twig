@@ -1,0 +1,12 @@
+{% extends "::base.html.twig" %}
+{% import 'macros/actions.html.twig' as action %}
+
+{% block container %}
+    <div class="block-heading-two">
+        <h3><span>Modifier un thème</span></h3>
+    </div>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ action.update() }}
+    {{ form_end(form) }}
+{% endblock container %}

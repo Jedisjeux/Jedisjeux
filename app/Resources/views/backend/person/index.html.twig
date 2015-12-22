@@ -1,0 +1,63 @@
+{% extends "layout/backend_index.html.twig" %}
+{% from '::macros/misc.html.twig' import pagination %}
+{% import 'macros/buttons.html.twig' as button %}
+{% from 'macros/sorting.html.twig' import sorting %}
+{% import 'macros/modal.html.twig' as modal %}
+
+{% set sorting = app.request.get('sorting') %}
+
+{% set icon = false %}
+{% set currentOrder = null %}
+
+{% if null == sorting %}
+    {% set icon = true %}
+    {% set currentOrder = 'asc' %}
+{% endif %}
+
+{% block new_entity_button %}
+    <a class="btn btn-primary" href="{{ path('admin_person_new') }}">
+        <span class="glyphicon glyphicon-plus-sign"></span>
+        Nouvelle personne
+    </a>
+{% endblock new_entity_button %}
+
+{% block page_title %}
+    Liste des Personnes
+{% endblock page_title %}
+
+{% block list %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>{{ sorting('admin_person_index', 'label.name'|trans, 'slug', 'asc', icon, currentOrder) }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for person in persons %}
+            <tr>
+                <td>{{ person.id }}</td>
+                <td>{{ person }}</td>
+                <td class="text-right">
+                    <ul class="list-inline text-nowrap">
+                        <li>
+                            {{ button.edit(path('admin_person_edit', { 'id': person.id })) }}
+                        </li>
+                        <li>
+                            {{ button.delete(path('admin_person_delete', { 'id': person.id })) }}
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock list %}
+
+{% block Pagination %}
+    <div class="pagination-wrapper">
+        <div class="pagination-bottom">
+            {{ pagination(persons) }}
+        </div>
+    </div>
+{% endblock %}

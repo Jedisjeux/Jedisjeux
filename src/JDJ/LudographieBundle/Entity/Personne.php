@@ -10,7 +10,7 @@ use JDJ\CoreBundle\Entity\Image;
 /**
  * Personne
  *
- * @ORM\Entity(repositoryClass="JDJ\CoreBundle\Entity\EntityRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\PersonRepository")
  * @ORM\Table(name="jdj_personne", indexes={@ORM\Index(name="search_idx", columns={"slug"})})
  */
 class Personne
