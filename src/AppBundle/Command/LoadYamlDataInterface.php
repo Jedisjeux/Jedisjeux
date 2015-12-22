@@ -13,6 +13,8 @@ use Doctrine\ORM\EntityRepository;
 
 interface LoadYamlDataInterface
 {
+    /**
+     * @return string
+     */
     public function getYAMLFileName();
-    public function getTableName();
 }

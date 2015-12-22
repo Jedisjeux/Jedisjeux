@@ -15,7 +15,20 @@ use Doctrine\ORM\EntityRepository;
  */
 interface LoadCommandInterface
 {
+    /**
+     * @return array
+     */
+    public function getRows();
+
+    /**
+     * @return object
+     */
     public function createEntityNewInstance();
+
+    /**
+     * @return string
+     */
+    public function getTableName();
 
     /**
      * @return EntityRepository

@@ -19,6 +19,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class LoadPersonsCommand extends LoadCommand
 {
+    protected $writeEntityInOutput = false;
+
     /**
      * @inheritdoc
      */
@@ -29,7 +31,7 @@ class LoadPersonsCommand extends LoadCommand
             ->setDescription('Load persons');
     }
 
-    protected function getPersons()
+    public function getRows()
     {
         $query = <<<EOM
 select      old.id,
@@ -59,30 +61,7 @@ EOM;
         $this->output = $output;
         $output->writeln("<comment>Load persons</comment>");
 
-        $createdItemCount = 0;
-        $updatedItemCount = 0;
-
-        $rows = $this->getPersons();
-        foreach ($rows as $data) {
-            $entity = $this->createOrReplaceEntity($data, false);
-
-            if (null === $entity->getId()) {
-                $createdItemCount++;
-            } else {
-                $updatedItemCount++;
-            }
-
-            $this->getEntityManager()->flush();
-            $this->getEntityManager()->clear();
-
-            $this->getDatabaseConnection()->update($this->getTableName(), array(
-                "id" => $data['id'],
-            ), array('id' => $entity->getId()));
-
-            $autoIncrement = $data['id'] + 1;
-            $this->getDatabaseConnection()->exec("ALTER TABLE " . $this->getTableName() . " AUTO_INCREMENT = " . $autoIncrement);
-        }
-        $this->writeChangesLog($createdItemCount, $updatedItemCount);
+        parent::execute($input, $output);
     }
 
     public function createEntityNewInstance()

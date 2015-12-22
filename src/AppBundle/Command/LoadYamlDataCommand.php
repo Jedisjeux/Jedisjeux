@@ -24,38 +24,10 @@ abstract class LoadYamlDataCommand extends LoadCommand implements LoadYamlDataIn
      */
     protected $output;
 
-    /**
-     * @inheritdoc
-     */
-    protected function execute(InputInterface $input, OutputInterface $output)
+
+    public function getRows()
     {
-        $this->output = $output;
-
-        $createdItemCount = 0;
-        $updatedItemCount = 0;
-
-        $rows = $this->parse();
-        foreach ($rows as $data) {
-            $entity = $this->createOrReplaceEntity($data);
-            if (null === $entity->getId()) {
-                $createdItemCount ++;
-            } else {
-                $updatedItemCount ++;
-            }
-
-            $this->getEntityManager()->flush();
-            $this->getEntityManager()->clear();
-
-            $this->getDatabaseConnection()->update($this->getTableName(), array(
-                "id" => $data['id'],
-            ), array('id' => $entity->getId()));
-
-            $autoIncrement = $data['id'] + 1;
-            $this->getDatabaseConnection()->exec("ALTER TABLE ".$this->getTableName()." AUTO_INCREMENT = " . $autoIncrement );
-        }
-
-        $this->writeChangesLog($createdItemCount, $updatedItemCount);
-
+        return $this->parse();
     }
 
     /**

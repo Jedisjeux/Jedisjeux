@@ -10,6 +10,7 @@ namespace AppBundle\Command;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 
@@ -23,7 +24,9 @@ abstract class LoadCommand extends ContainerAwareCommand implements LoadCommandI
      */
     protected $output;
 
-    protected function createOrReplaceEntity(array $data, $writeOutput = true)
+    protected $writeEntityInOutput = true;
+
+    protected function createOrReplaceEntity(array $data)
     {
         $entity = $this->getRepository()->find($data['id']);
 
@@ -32,12 +35,46 @@ abstract class LoadCommand extends ContainerAwareCommand implements LoadCommandI
         }
 
         $this->populateData($entity, $data);
-        if ($writeOutput) {
+        if ($this->writeEntityInOutput) {
             $this->output->writeln(sprintf('Loading <comment>%s</comment>', (string)$entity));
         }
         $this->getEntityManager()->persist($entity);
 
         return $entity;
+
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        $this->output = $output;
+
+        $createdItemCount = 0;
+        $updatedItemCount = 0;
+
+        foreach ($this->getRows() as $data) {
+            $data = $this->filterData($data);
+            $entity = $this->createOrReplaceEntity($data);
+            if (null === $entity->getId()) {
+                $createdItemCount ++;
+            } else {
+                $updatedItemCount ++;
+            }
+
+            $this->getEntityManager()->flush();
+            $this->getEntityManager()->clear();
+
+            $this->getDatabaseConnection()->update($this->getTableName(), array(
+                "id" => $data['id'],
+            ), array('id' => $entity->getId()));
+
+            $autoIncrement = $data['id'] + 1;
+            $this->getDatabaseConnection()->exec("ALTER TABLE ".$this->getTableName()." AUTO_INCREMENT = " . $autoIncrement );
+        }
+
+        $this->writeChangesLog($createdItemCount, $updatedItemCount);
 
     }
 
@@ -70,6 +107,19 @@ abstract class LoadCommand extends ContainerAwareCommand implements LoadCommandI
             }
         }
         return $entity;
+    }
+
+    /**
+     *
+     * @param array $data
+     * @return array
+     */
+    public function filterData(array $data)
+    {
+        /**
+         * Extend if you want to apply changes on data
+         */
+        return $data;
     }
 
     /**
