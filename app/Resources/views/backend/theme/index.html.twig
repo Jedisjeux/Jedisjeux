@@ -31,6 +31,7 @@
         <tr>
             <th>#</th>
             <th>{{ sorting('admin_theme_index', 'label.name'|trans, 'name', 'asc', icon, currentOrder) }}</th>
+            <th>{{ sorting('admin_theme_index', 'label.description'|trans, 'description', 'asc') }}</th>
         </tr>
         </thead>
         <tbody>
@@ -38,6 +39,7 @@
             <tr>
                 <td>{{ theme.id }}</td>
                 <td>{{ theme }}</td>
+                <td>{{ theme.description|escape }}</td>
                 <td class="text-right">
                     <ul class="list-inline">
                         <li>

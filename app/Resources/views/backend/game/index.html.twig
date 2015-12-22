@@ -41,6 +41,9 @@
                 <td class="text-right">
                     <ul class="list-inline">
                         <li>
+                            {{ button.show(path('jeu_show', { 'id': game.id, 'slug': game.slug })) }}
+                        </li>
+                        <li>
                             {{ button.edit(path('admin_game_edit', { 'id': game.id })) }}
                         </li>
                         <li>
