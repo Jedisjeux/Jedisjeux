@@ -39,9 +39,9 @@
             <tr>
                 <td>{{ mechanism.id }}</td>
                 <td>{{ mechanism }}</td>
-                <td>{{ mechanism.description|escape }}</td>
+                <td>{{ mechanism.description|striptags }}</td>
                 <td class="text-right">
-                    <ul class="list-inline">
+                    <ul class="list-inline text-nowrap">
                         <li>
                             {{ button.edit(path('admin_mechanism_edit', { 'id': mechanism.id })) }}
                         </li>
