@@ -3,10 +3,10 @@
 
 {% block container %}
     <div class="block-heading-two">
-        <h3><span>Nouveau mécanisme</span></h3>
+        <h3><span>Modifier un pays</span></h3>
     </div>
     {{ form_start(form) }}
     {{ form_widget(form) }}
-    {{ action.create() }}
+    {{ action.update() }}
     {{ form_end(form) }}
 {% endblock container %}
