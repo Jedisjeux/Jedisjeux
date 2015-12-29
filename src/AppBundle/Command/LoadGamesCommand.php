@@ -52,6 +52,7 @@ select      old.id,
             old.min as joueurMin,
             old.max as joueurMax,
             old.age_min as ageMin,
+            old.presentation as description,
             old.valid as status
 from        jedisjeux.jdj_game old
 where       old.valid in (0, 1)
