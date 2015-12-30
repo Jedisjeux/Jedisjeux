@@ -21,15 +21,26 @@ class PersonneType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom')
-            ->add('prenom')
-            ->add('siteWeb')
-            ->add('description')
-            ->add('image')
-            ->add('pays', 'entity', array(
-                    'class' => 'JDJWebBundle:Pays',
+            ->add('nom', null, array(
+                'label' => 'label.last_name',
+            ))
+            ->add('prenom', null, array(
+                'label' => 'label.first_name',
+            ))
+            ->add('siteWeb', null, array(
+                'label' => 'label.website',
+            ))
+            ->add('description', 'ckeditor', array(
+                'label' => 'label.description',
+            ))
+            ->add('image', 'file', array(
+                'label' => 'label.image',
+            ))
+            ->add('country', 'entity', array(
+                    'class' => 'AppBundle:Country',
                     'multiple' => false,
-                    'expanded' => false
+                    'expanded' => false,
+                    'label' => 'label.country',
                 )
             );
     }

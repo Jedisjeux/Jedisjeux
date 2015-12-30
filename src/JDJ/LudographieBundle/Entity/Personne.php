@@ -78,9 +78,9 @@ class Personne
     /**
      * @var \JDJ\WebBundle\Entity\Pays
      *
-     * @ORM\ManyToOne(targetEntity="JDJ\WebBundle\Entity\Pays", inversedBy="personnes")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Country")
      */
-    private $pays;
+    private $country;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -263,26 +263,26 @@ class Personne
     }
 
     /**
-     * Set pays
+     * Set country
      *
-     * @param \JDJ\WebBundle\Entity\Pays $pays
+     * @param \JDJ\WebBundle\Entity\Pays $country
      * @return Personne
      */
-    public function setPays(\JDJ\WebBundle\Entity\Pays $pays = null)
+    public function setCountry(\JDJ\WebBundle\Entity\Pays $country = null)
     {
-        $this->pays = $pays;
+        $this->country = $country;
 
         return $this;
     }
 
     /**
-     * Get pays
+     * Get country
      *
      * @return \JDJ\WebBundle\Entity\Pays 
      */
-    public function getPays()
+    public function getCountry()
     {
-        return $this->pays;
+        return $this->country;
     }
 
     /**

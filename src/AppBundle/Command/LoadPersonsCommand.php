@@ -42,10 +42,10 @@ select      old.id,
             old.prenom as prenom,
             old.siteweb as siteWeb,
             old.description as description,
-            pays.id as pays_id
+            country.id as pays_id
 from        jedisjeux.jdj_personnes old
-left join   jdj_pays pays
-                on CONVERT(pays.libelle USING utf8) = CONVERT(old.nationnalite USING utf8)
+left join   jdj_pays country
+                on CONVERT(country.libelle USING utf8) = CONVERT(old.nationnalite USING utf8)
 where       old.id <>14
 and         (old.nom_famille <> '' or old.nom <> '')
 EOM;

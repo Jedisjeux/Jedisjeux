@@ -81,7 +81,7 @@ class PersonController extends Controller
     /**
      * @Route("/{id}/edit", name="admin_person_edit")
      *
-     * @ParamConverter("person", class="JDJJeuBundle:Person")
+     * @ParamConverter("person", class="JDJLudographieBundle:Personne")
      *
      * @param Request $request
      * @param Personne $person
@@ -114,7 +114,7 @@ class PersonController extends Controller
     /**
      * @Route("/{id}/delete", name="admin_person_delete")
      *
-     * @ParamConverter("person", class="JDJJeuBundle:Person")
+     * @ParamConverter("person", class="JDJLudographieBundle:Personne")
      *
      * @param Personne $person
      *

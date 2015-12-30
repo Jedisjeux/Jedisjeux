@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  *
- * @Route("/pays")
+ * @Route("/country")
  */
 class CountryController extends Controller
 {

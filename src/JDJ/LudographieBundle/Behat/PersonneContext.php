@@ -28,11 +28,11 @@ class PersonneContext extends DefaultContext
 
         foreach ($table->getHash() as $data) {
 
-            $pays = $this->getRepository("pays")->findOneBy(array("libelle" => $data['pays']));
+            $pays = $this->getRepository("country")->findOneBy(array("libelle" => $data['country']));
 
             if (null === $pays) {
                 $pays = new Pays();
-                $pays->setLibelle($data['pays']);
+                $pays->setLibelle($data['country']);
 
                 $manager->persist($pays);
             }
@@ -41,7 +41,7 @@ class PersonneContext extends DefaultContext
             $personne
                 ->setPrenom(trim($data['prenom']))
                 ->setNom(trim($data['nom']))
-                ->setPays($pays)
+                ->setCountry($pays)
                 ->setSiteWeb(isset($data['site_web']) ? $data['site_web'] : null)
             ;
 

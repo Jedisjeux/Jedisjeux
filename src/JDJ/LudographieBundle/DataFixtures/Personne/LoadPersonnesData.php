@@ -44,11 +44,11 @@ select      old.id,
             old.prenom,
             old.siteweb,
             old.description,
-            pays.id,
+            country.id,
             replace(old.nom_clean, ' ', '-') as slug
 from        jedisjeux.jdj_personnes old
-left join   jdj_pays pays
-                on CONVERT(pays.libelle USING utf8) = CONVERT(old.nationnalite USING utf8)
+left join   jdj_pays country
+                on CONVERT(country.libelle USING utf8) = CONVERT(old.nationnalite USING utf8)
 where       old.id <> 14
 EOM;
 

@@ -31,7 +31,7 @@ class Pays
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\OneToMany(targetEntity="JDJ\LudographieBundle\Entity\Personne", mappedBy="pays")
+     * @ORM\OneToMany(targetEntity="JDJ\LudographieBundle\Entity\Personne", mappedBy="country")
      */
     private $personnes;
 
