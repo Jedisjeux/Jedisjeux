@@ -57,6 +57,7 @@ abstract class LoadCommand extends ContainerAwareCommand implements LoadCommandI
         foreach ($this->getRows() as $data) {
             $data = $this->filterData($data);
             $entity = $this->createOrReplaceEntity($data);
+            $this->postSetData($entity);
             if (null === $entity->getId()) {
                 $createdItemCount ++;
             } else {
@@ -120,6 +121,13 @@ abstract class LoadCommand extends ContainerAwareCommand implements LoadCommandI
          * Extend if you want to apply changes on data
          */
         return $data;
+    }
+
+    public function postSetData ($entity)
+    {
+        /**
+         * Extend if you want to apply changes on entity
+         */
     }
 
     /**
