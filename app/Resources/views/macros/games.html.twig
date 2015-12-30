@@ -1,0 +1,9 @@
+{% macro duration(game) %}{% spaceless %}
+    {% if game.durationMin %}
+        {{ game.durationMin }}
+        {% if game.durationMin != game.durationMax %}
+            - {{ game.durationMax }}
+        {% endif %}
+        minute{% if game.durationMin > 1 %}s{% endif %}
+    {% endif %}
+{% endspaceless %}{% endmacro %}
