@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2015-12-22T13:11:44Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+  <file date="2015-12-30T15:27:51Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -218,6 +218,11 @@
         <target>Société</target>
         <jms:reference-file line="19">compta/customer/index.html.twig</jms:reference-file>
       </trans-unit>
+      <trans-unit id="e190847dfb0225b0a5fe943ddb0ebd55667a574c" resname="label.country">
+        <source>label.country</source>
+        <target>Pays</target>
+        <jms:reference-file line="43">LudographieBundle/Form/PersonneType.php</jms:reference-file>
+      </trans-unit>
       <trans-unit id="17ac1e4a2a3435442a0841898d9a519162ac2533" resname="label.create">
         <source>label.create</source>
         <target>Créer</target>
@@ -269,6 +274,7 @@
         <target>Description</target>
         <jms:reference-file line="34">backend/mechanism/index.html.twig</jms:reference-file>
         <jms:reference-file line="34">backend/theme/index.html.twig</jms:reference-file>
+        <jms:reference-file line="34">LudographieBundle/Form/PersonneType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="6ecd9b247905c9872f163d3e800b7106ebd97055" resname="label.edit">
         <source>label.edit</source>
@@ -292,10 +298,25 @@
         <target>Terminé</target>
         <jms:reference-file line="21">views/macros/status.html.twig</jms:reference-file>
       </trans-unit>
+      <trans-unit id="36ae2d1c92f6e4c41eecb01bf6b9f4fe27039c65" resname="label.first_name">
+        <source>label.first_name</source>
+        <target>Prénom</target>
+        <jms:reference-file line="28">LudographieBundle/Form/PersonneType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="8ef6bd415e15e8f593fc184a31fd50ad7cb03af6" resname="label.image">
+        <source>label.image</source>
+        <target>Image</target>
+        <jms:reference-file line="37">LudographieBundle/Form/PersonneType.php</jms:reference-file>
+      </trans-unit>
       <trans-unit id="c582b2458247fdaee3348370daceee09e0d27539" resname="label.in_progress">
         <source>label.in_progress</source>
         <target>En cours</target>
         <jms:reference-file line="11">views/macros/status.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="7e8ef4d7796f0d0e20b576f2d6ba576e14b37ac8" resname="label.last_name">
+        <source>label.last_name</source>
+        <target>Nom</target>
+        <jms:reference-file line="25">LudographieBundle/Form/PersonneType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="a8a02ff1cf4bc749ae5f6b46393b416153cd1a57" resname="label.months">
         <source>label.months</source>
@@ -305,12 +326,15 @@
       <trans-unit id="f34120955ae39f4fb49e72f45f3ce583a085075d" resname="label.name">
         <source>label.name</source>
         <target>Nom</target>
+        <jms:reference-file line="33">backend/country/index.html.twig</jms:reference-file>
         <jms:reference-file line="33">backend/game/index.html.twig</jms:reference-file>
         <jms:reference-file line="33">backend/mechanism/index.html.twig</jms:reference-file>
+        <jms:reference-file line="33">backend/person/index.html.twig</jms:reference-file>
         <jms:reference-file line="33">backend/theme/index.html.twig</jms:reference-file>
         <jms:reference-file line="33">compta/dealer/index.html.twig</jms:reference-file>
         <jms:reference-file line="18">compta/payment-method/index.html.twig</jms:reference-file>
         <jms:reference-file line="21">compta/product/index.html.twig</jms:reference-file>
+        <jms:reference-file line="26">Form/Type/CountryType.php</jms:reference-file>
         <jms:reference-file line="28">ComptaBundle/Form/PaymentMethodType.php</jms:reference-file>
         <jms:reference-file line="28">ComptaBundle/Form/ProductType.php</jms:reference-file>
         <jms:reference-file line="28">Form/Type/DealerType.php</jms:reference-file>
@@ -437,6 +461,11 @@
         <target>En attente de paiement</target>
         <jms:reference-file line="66">compta/bill/index.html.twig</jms:reference-file>
         <jms:reference-file line="14">views/macros/status.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="94c51dd28fbd7820fb5e2f772a29cf8283b5c68e" resname="label.website">
+        <source>label.website</source>
+        <target>Site web</target>
+        <jms:reference-file line="31">LudographieBundle/Form/PersonneType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="1d173ed85a432769ff3e24433b577d2ae4bcac8e" resname="message.confirmation">
         <source>message.confirmation</source>
