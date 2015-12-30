@@ -44,6 +44,7 @@ class JeuRepository extends EntityRepository
                 ")
                 ->setParameter("personneId", $criteria['personne']->getId());
             ;
+            unset($criteria['personne']);
         }
         if (array_key_exists('noteCount:moreThanOrEqual', $criteria)) {
             $queryBuilder
