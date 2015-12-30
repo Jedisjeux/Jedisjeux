@@ -64,6 +64,20 @@ class Jeu
     private $joueurMax;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
+     */
+    private $durationMin;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
+     */
+    private $durationMax;
+
+    /**
      * @var string
      *
      * @ORM\Column(type="text", nullable=true)
@@ -353,6 +367,46 @@ class Jeu
     public function getJoueurMax()
     {
         return $this->joueurMax;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDurationMin()
+    {
+        return $this->durationMin;
+    }
+
+    /**
+     * @param int $durationMin
+     *
+     * @return $this
+     */
+    public function setDurationMin($durationMin)
+    {
+        $this->durationMin = $durationMin;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDurationMax()
+    {
+        return $this->durationMax;
+    }
+
+    /**
+     * @param int $durationMax
+     *
+     * @return $this
+     */
+    public function setDurationMax($durationMax)
+    {
+        $this->durationMax = $durationMax;
+
+        return $this;
     }
 
     /**
