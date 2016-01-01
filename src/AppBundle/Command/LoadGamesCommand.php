@@ -55,7 +55,9 @@ select      old.id,
             old.presentation as description,
             old.duree as durationMin,
             old.duree as durationMax,
-            old.valid as status
+            old.valid as status,
+            old.date as createdAt,
+            old.date as updatedAt
 from        jedisjeux.jdj_game old
 where       old.valid in (0, 1)
 EOM;
@@ -73,6 +75,8 @@ EOM;
         $data['joueurMax'] = !empty($data['joueurMax']) ? $data['joueurMax'] : null;
         $data['ageMin'] = !empty($data['ageMin']) ? $data['ageMin'] : null;
         $data['description'] = !empty($data['description']) ? $this->getHTMLFromText($data['description']) : null;
+        $data['createdAt'] = \DateTime::createFromFormat('Y-m-d H:i:s', $data['createdAt']);
+        $data['updatedAt'] = \DateTime::createFromFormat('Y-m-d H:i:s', $data['updatedAt']);
         switch ($data['status']) {
             case 0 :
                 $data['status'] = Jeu::WRITING;

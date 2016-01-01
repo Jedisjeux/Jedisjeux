@@ -35,7 +35,7 @@ class GameController extends Controller
     public function indexAction(Request $request)
     {
         $criteria = $request->get('criteria', array());
-        $sorting = $request->get('sorting', array('name' => 'asc'));
+        $sorting = $request->get('sorting', array('createdAt' => 'desc'));
 
         $games = $this
             ->getRepository()

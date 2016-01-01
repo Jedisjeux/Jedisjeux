@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2015-12-30T15:27:51Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+  <file date="2016-01-02T00:10:02Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -232,6 +232,7 @@
       <trans-unit id="dee380b06b03fdb98a963ac735c0ddfc2f59f2f1" resname="label.created_at">
         <source>label.created_at</source>
         <target>Créé le</target>
+        <jms:reference-file line="34">backend/game/index.html.twig</jms:reference-file>
         <jms:reference-file line="33">compta/bill/index.html.twig</jms:reference-file>
         <jms:reference-file line="32">compta/customer/show.html.twig</jms:reference-file>
         <jms:reference-file line="29">compta/subscription/index.html.twig</jms:reference-file>
@@ -275,6 +276,21 @@
         <jms:reference-file line="34">backend/mechanism/index.html.twig</jms:reference-file>
         <jms:reference-file line="34">backend/theme/index.html.twig</jms:reference-file>
         <jms:reference-file line="34">LudographieBundle/Form/PersonneType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="1dfe22ec48b36ae241081c402b7cf6093a13bd62" resname="label.duration_by_player">
+        <source>label.duration_by_player</source>
+        <target>Durée par joueur</target>
+        <jms:reference-file line="46">JeuBundle/Form/JeuType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="97e05a208ca1185dcf57645cc156c0df2b023a3c" resname="label.duration_max">
+        <source>label.duration_max</source>
+        <target>Durée max</target>
+        <jms:reference-file line="43">JeuBundle/Form/JeuType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="235ae1efaa5da9de898327a79e3720c2472de612" resname="label.duration_min">
+        <source>label.duration_min</source>
+        <target>Durée min</target>
+        <jms:reference-file line="39">JeuBundle/Form/JeuType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="6ecd9b247905c9872f163d3e800b7106ebd97055" resname="label.edit">
         <source>label.edit</source>

@@ -34,6 +34,17 @@ class JeuType extends AbstractType
             ->add('joueurMax', null, array(
                 'required' => false,
             ))
+            ->add('durationMin', null, array(
+                'required' => false,
+                'label' => 'label.duration_min',
+            ))
+            ->add('durationMax', null, array(
+                'required' => false,
+                'label' => 'label.duration_max',
+            ))
+            ->add('durationByPlayer', null, array(
+                'label' => 'label.duration_by_player',
+            ))
             ->add('mechanisms', 'entity', array(
                     'class' => 'JDJJeuBundle:Mechanism',
                     'multiple' => true,
@@ -58,6 +69,9 @@ class JeuType extends AbstractType
             ->add('intro', 'ckeditor', array(
                 'required' => false,
             ))
+            ->add('materiel', null, array(
+                'required' => false,
+            ))
             ->add('but', 'ckeditor', array(
                 'required' => false,
             ))
@@ -65,11 +79,8 @@ class JeuType extends AbstractType
                 'required' => false,
             ))
             ->add('status', 'choice', array(
-                'choices'   => Jeu::getStatusList(),
-                'required'  => true,
-            ))
-            ->add('materiel', null, array(
-                'required' => false,
+                'choices' => Jeu::getStatusList(),
+                'required' => true,
             ));
     }
 

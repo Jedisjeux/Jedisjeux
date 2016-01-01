@@ -5,6 +5,7 @@ namespace JDJ\JeuBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use JDJ\CoreBundle\Entity\Image;
 
 /**
@@ -15,6 +16,7 @@ use JDJ\CoreBundle\Entity\Image;
  */
 class Jeu
 {
+    use TimestampableEntity;
 
     /**
      * status constants
@@ -76,6 +78,13 @@ class Jeu
      * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
      */
     private $durationMax;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $durationByPlayer;
 
     /**
      * @var string
@@ -255,6 +264,7 @@ class Jeu
         $this->parties = new ArrayCollection();
         $this->notes = new ArrayCollection();
         $this->images = new ArrayCollection();
+        $this->durationByPlayer = false;
     }
 
     /**
@@ -385,6 +395,26 @@ class Jeu
     public function setDurationMin($durationMin)
     {
         $this->durationMin = $durationMin;
+
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isDurationByPlayer()
+    {
+        return $this->durationByPlayer;
+    }
+
+    /**
+     * @param boolean $durationByPlayer
+     *
+     * @return $this
+     */
+    public function setDurationByPlayer($durationByPlayer)
+    {
+        $this->durationByPlayer = $durationByPlayer;
 
         return $this;
     }
