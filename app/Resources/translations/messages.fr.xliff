@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2016-01-02T00:10:02Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+  <file date="2016-01-02T00:33:56Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -171,7 +171,7 @@
       </trans-unit>
       <trans-unit id="1853084d43806e5fa606eee14735a04050224e06" resname="débité">
         <source>débité</source>
-        <target state="new">débité</target>
+        <target>débité</target>
         <jms:reference-file line="41">ComptaBundle/Form/BookEntryType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="64c65374dbab6fe3762748196d9d3a9610e2e5a9" resname="label">
@@ -374,6 +374,11 @@
         <target>Moyen de paiement</target>
         <jms:reference-file line="36">ComptaBundle/Form/BookEntryType.php</jms:reference-file>
         <jms:reference-file line="31">Type/Bill/PaymentType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6e64a33e07b8f076dca77fe40c292de4eea464db" resname="label.per_player">
+        <source>label.per_player</source>
+        <target>Par joueur</target>
+        <jms:reference-file line="7">views/macros/games.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="00c19f5acf34c42465632515787feb1bf941a390" resname="label.postal_code">
         <source>label.postal_code</source>

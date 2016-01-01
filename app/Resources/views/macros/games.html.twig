@@ -4,6 +4,6 @@
         {% if game.durationMin != game.durationMax %}
             - {{ game.durationMax }}
         {% endif %}
-        minute{% if game.durationMin > 1 %}s{% endif %}
+        minute{% if game.durationMin > 1 %}s{% endif %}{% if game.durationByPlayer %} {{ 'label.per_player'|trans|lower }}{% endif %}
     {% endif %}
 {% endspaceless %}{% endmacro %}

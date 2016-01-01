@@ -58,15 +58,16 @@
 
                         <div class="row">
                             <ul class="list-6">
-                                {% if jeu.durationMin %}
-                                    <li>{{ duration(jeu) }}</li>
+                                {% if jeu.joueurMin or jeu.joueurMax %}
+                                    <li>{{ joueurCount(jeu) }}</li>
                                 {% endif %}
+
                                 {% if jeu.ageMin %}
                                     <li>à partir de {{ jeu.ageMin }} ans</li>
                                 {% endif %}
 
-                                {% if jeu.joueurMin or jeu.joueurMax %}
-                                    <li>{{ joueurCount(jeu) }}</li>
+                                {% if jeu.durationMin %}
+                                    <li>{{ duration(jeu) }}</li>
                                 {% endif %}
 
                                 {% if jeu.cible %}
