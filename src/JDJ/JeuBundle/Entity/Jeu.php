@@ -751,6 +751,18 @@ class Jeu
     }
 
     /**
+     * @param \Doctrine\Common\Collections\Collection $mechanisms
+     *
+     * @return $this
+     */
+    public function setMechanisms($mechanisms)
+    {
+        $this->mechanisms = $mechanisms;
+
+        return $this;
+    }
+
+    /**
      * Add themes
      *
      * @param \JDJ\JeuBundle\Entity\Theme $themes
