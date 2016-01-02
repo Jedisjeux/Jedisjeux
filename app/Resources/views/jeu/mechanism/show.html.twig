@@ -19,19 +19,4 @@
             </div>
         </div>
     {% endblock %}
-
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('mechanism') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('mechanism_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
 {% endblock %}

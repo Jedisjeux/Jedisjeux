@@ -3,6 +3,7 @@
 {% import 'macros/buttons.html.twig' as button %}
 {% from 'macros/sorting.html.twig' import sorting %}
 {% import 'macros/modal.html.twig' as modal %}
+{% from 'macros/status.html.twig' import gameStatus as status %}
 
 {% set sorting = app.request.get('sorting') %}
 
@@ -32,6 +33,7 @@
             <th>#</th>
             <th>{{ sorting('admin_game_index', 'label.name'|trans, 'name', 'asc') }}</th>
             <th>{{ sorting('admin_game_index', 'label.created_at'|trans, 'createdAt', icon, currentOrder) }}</th>
+            <th>{{ sorting('admin_game_index', 'label.status'|trans, 'status') }}</th>
         </tr>
         </thead>
         <tbody>
@@ -40,6 +42,7 @@
                 <td>{{ game.id }}</td>
                 <td>{{ game }}</td>
                 <td>{{ game.createdAt|localizeddate('long', 'none') }}</td>
+                <td>{{ status(game) }}</td>
                 <td class="text-right">
                     <ul class="list-inline">
                         <li>

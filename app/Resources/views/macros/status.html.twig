@@ -1,3 +1,34 @@
+{% macro gameStatus(game) %}
+
+    {% set statusLabel = game.status %}
+    {% set statusClass = '' %}
+    {% set iconClass = '' %}
+
+    {% if constant('JDJ\\JeuBundle\\Entity\\Jeu::PUBLISHED') == game.status %}
+        {% set statusClass = 'success' %}
+        {% set statusLabel = 'label.published'|trans %}
+    {% elseif constant('JDJ\\JeuBundle\\Entity\\Jeu::WRITING') == game.status %}
+        {% set statusClass = 'danger' %}
+        {% set statusLabel = 'label.writing'|trans %}
+    {% elseif constant('JDJ\\JeuBundle\\Entity\\Jeu::NEED_A_TRANSLATION') == game.status %}
+        {% set statusClass = 'danger' %}
+        {% set statusLabel = 'label.need_a_translation'|trans %}
+    {% elseif constant('JDJ\\JeuBundle\\Entity\\NEED_A_REVIEW') == game.status %}
+        {% set statusClass = 'warning' %}
+        {% set statusLabel = 'label.need_a_review'|trans %}
+        {% set iconClass = 'fa fa-laptop' %}
+    {% elseif constant('JDJ\\JeuBundle\\Entity\\Jeu::READY_TO_PUBLISH') == game.status %}
+        {% set statusClass = 'primary' %}
+        {% set statusLabel = 'label.ready_to_published'|trans %}
+    {% endif %}
+
+    <span class="label label-{{ statusClass }}">
+        <span class="{{ iconClass }}"></span>
+        {{ statusLabel }}
+    </span>
+
+{% endmacro %}
+
 {% macro subscriptionStatus(subscription) %}
 
     {% import 'macros/modal.html.twig' as modal %}
