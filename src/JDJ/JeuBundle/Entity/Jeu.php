@@ -720,12 +720,12 @@ class Jeu
     /**
      * Add mechanisms
      *
-     * @param \JDJ\JeuBundle\Entity\Mechanism $mecanismes
-     * @return Jeu
+     * @param Mechanism $mecanisme
+     * @return $this
      */
-    public function addMechanism(\JDJ\JeuBundle\Entity\Mechanism $mecanismes)
+    public function addMechanism(\JDJ\JeuBundle\Entity\Mechanism $mecanisme)
     {
-        $this->mechanisms[] = $mecanismes;
+        $this->mechanisms[] = $mecanisme;
 
         return $this;
     }
@@ -733,11 +733,11 @@ class Jeu
     /**
      * Remove mechanisms
      *
-     * @param \JDJ\JeuBundle\Entity\Mechanism $mecanismes
+     * @param Mechanism $mecanisme
      */
-    public function removeMechanism(\JDJ\JeuBundle\Entity\Mechanism $mecanismes)
+    public function removeMechanism(Mechanism $mecanisme)
     {
-        $this->mechanisms->removeElement($mecanismes);
+        $this->mechanisms->removeElement($mecanisme);
     }
 
     /**
@@ -765,10 +765,10 @@ class Jeu
     /**
      * Add themes
      *
-     * @param \JDJ\JeuBundle\Entity\Theme $themes
+     * @param Theme $themes
      * @return Jeu
      */
-    public function addTheme(\JDJ\JeuBundle\Entity\Theme $themes)
+    public function addTheme(Theme $themes)
     {
         $this->themes[] = $themes;
 
@@ -778,9 +778,9 @@ class Jeu
     /**
      * Remove themes
      *
-     * @param \JDJ\JeuBundle\Entity\Theme $themes
+     * @param Theme $themes
      */
-    public function removeTheme(\JDJ\JeuBundle\Entity\Theme $themes)
+    public function removeTheme(Theme $themes)
     {
         $this->themes->removeElement($themes);
     }
@@ -793,6 +793,18 @@ class Jeu
     public function getThemes()
     {
         return $this->themes;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $themes
+     *
+     * @return $this
+     */
+    public function setThemes($themes)
+    {
+        $this->themes = $themes;
+
+        return $this;
     }
 
     /**

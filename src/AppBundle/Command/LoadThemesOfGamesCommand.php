@@ -13,6 +13,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use JDJ\JeuBundle\Entity\Jeu;
 use JDJ\JeuBundle\Entity\Mechanism;
+use JDJ\JeuBundle\Entity\Theme;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -20,7 +21,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class LoadMechanismsOfGamesCommand extends ContainerAwareCommand
+class LoadThemesOfGamesCommand extends ContainerAwareCommand
 {
     protected $writeEntityInOutput = false;
 
@@ -30,8 +31,8 @@ class LoadMechanismsOfGamesCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('app:mechanisms-of-games:load')
-            ->setDescription('Load mechanisms of games');
+            ->setName('app:themes-of-games:load')
+            ->setDescription('Load themes of games');
     }
 
     /**
@@ -40,20 +41,21 @@ class LoadMechanismsOfGamesCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->output = $output;
-        $output->writeln("<comment>Load mechanisms of games</comment>");
+        $output->writeln("<comment>Load themes of games</comment>");
         /** @var Jeu $game */
         $game = null;
         foreach ($this->getRows() as $data) {
+
             if (null === $game or $data['gameId'] !== $game->getId()) {
                 $game = $this->getEntityManager()->getRepository('JDJJeuBundle:Jeu')->find($data['gameId']);
-                $game->setMechanisms(new ArrayCollection());
+                $game->setThemes(new ArrayCollection());
                 $this->getEntityManager()->flush();
             }
 
-            /** @var Mechanism $mechanism */
-            $mechanism = $this->getEntityManager()->getRepository('JDJJeuBundle:Mechanism')->find($data['mechanismId']);
+            /** @var Theme $theme */
+            $theme = $this->getEntityManager()->getRepository('JDJJeuBundle:Theme')->find($data['themeId']);
 
-            $game->addMechanism($mechanism);
+            $game->addTheme($theme);
             $this->getEntityManager()->persist($game);
             $this->getEntityManager()->flush();
             $this->getEntityManager()->clear();
@@ -67,10 +69,10 @@ class LoadMechanismsOfGamesCommand extends ContainerAwareCommand
     {
         $query = <<<EOM
 select      old.jeux_id as gameId,
-            old.mecanisme_id as mechanismId
-from        jedisjeux.jdj_mecanismelieur old
+            old.theme_id as themeId
+from        jedisjeux.jdj_themelieur old
 inner join  jdj_jeu jeu on jeu.id = old.jeux_id
-inner JOIN  jdj_mechanism mechanism on mechanism.id = old.mecanisme_id
+inner JOIN  jdj_theme theme on theme.id = old.theme_id
 EOM;
     $rows = $this->getDatabaseConnection()->fetchAll($query);
 
