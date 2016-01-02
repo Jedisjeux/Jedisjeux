@@ -59,7 +59,7 @@ select      old.id,
             old.date as createdAt,
             old.date as updatedAt
 from        jedisjeux.jdj_game old
-where       old.valid in (0, 1)
+where       old.valid in (0, 1, 2, 5, 3)
 EOM;
     $rows = $this->getDatabaseConnection()->fetchAll($query);
 
@@ -84,6 +84,16 @@ EOM;
             case 1 :
                 $data['status'] = Jeu::PUBLISHED;
                 break;
+            case 2 :
+                $data['status'] = Jeu::NEED_A_TRANSLATION;
+                break;
+            case 5 :
+                $data['status'] = Jeu::NEED_A_REVIEW;
+                break;
+            case 3 :
+                $data['status'] = Jeu::READY_TO_PUBLISH;
+                break;
+
         }
 
         return parent::filterData($data);
