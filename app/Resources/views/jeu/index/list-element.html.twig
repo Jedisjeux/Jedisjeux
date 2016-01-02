@@ -9,8 +9,10 @@
         <a href="{{ jeuHref }}">
             <div class="element">
                 <div class="image-style-one">
+                    {% if jeu.imageCouverture %}
                     <img src="{{ jeu.imageCouverture.webPath | imagine_filter('default') }}" alt=""
                          class="img-responsive"/>
+                    {% endif %}
                     <div class="image-hover">
                     </div>
                 </div>
