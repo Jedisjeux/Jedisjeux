@@ -47,12 +47,14 @@ class LoadUsersCommand extends LoadCommand
      */
     public function getRows()
     {
+        // TODO find field for enabled property
         $query = <<<EOM
 select      old.user_id as id,
             old.username as username,
             old.user_email as email,
             old.user_avatar,
-            old.group_id
+            old.group_id,
+            1 as enabled
 from        jedisjeux.phpbb3_users old
 where       old.user_email != ''
 group by    old.username_clean
