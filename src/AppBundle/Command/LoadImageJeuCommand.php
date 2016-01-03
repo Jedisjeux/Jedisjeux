@@ -6,31 +6,51 @@
  * Time: 17:09
  */
 
-namespace JDJ\JeuBundle\DataFixtures\JeuImage;
+namespace AppBundle\Command;
 
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManager;
 use JDJ\CoreBundle\Entity\Image;
 use JDJ\JeuBundle\Entity\Jeu;
-use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
-class LoadImageJeuData extends ContainerAware implements FixtureInterface, OrderedFixtureInterface
+class LoadImageJeuCommand extends ContainerAwareCommand
 {
     /**
      * @var ObjectManager
      */
     private $manager;
 
+    protected $output;
+
+    protected function configure()
+    {
+        $this
+            ->setName('app:images:load')
+            ->setDescription('Loading images')
+        ;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        /** @var EntityManager $manager */
+        $manager = $this->getContainer()->get('doctrine.orm.entity_manager');
+        $this->load($manager);
+    }
+
     /**
      * @return \Doctrine\DBAL\Connection
      */
     public function getDatabaseConnection()
     {
-        return $this->container->get('database_connection');
+        return $this->getContainer()->get('database_connection');
     }
-
 
     /**
      * {@inheritdoc}
@@ -105,13 +125,5 @@ inner join  jdj_jeu j
 EOM;
 
         $this->getDatabaseConnection()->executeQuery($query);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOrder()
-    {
-        return 4;
     }
 } 

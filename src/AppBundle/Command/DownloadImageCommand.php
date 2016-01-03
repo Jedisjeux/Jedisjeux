@@ -6,9 +6,8 @@
  * Time: 19:34
  */
 
-namespace JDJ\CoreBundle\Command;
+namespace AppBundle\Command;
 
-use Doctrine\ORM\EntityManager;
 use JDJ\CoreBundle\Entity\Image;
 use JDJ\CoreBundle\Service\ImageImportService;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -17,13 +16,13 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ImageImportCommand extends ContainerAwareCommand
+class DownloadImageCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
-            ->setName('app:image:import')
-            ->setDescription('Greet someone')
+            ->setName('app:images:download')
+            ->setDescription('Download images')
         ;
     }
 
@@ -39,11 +38,11 @@ class ImageImportCommand extends ContainerAwareCommand
         foreach ($images as $image) {
 
             if (!file_exists($image->getAbsolutePath())) {
-                $output->writeln("Downloading image ".$imageImportService->getImageOriginalPath($image));
+                $output->writeln('Downloading image <comment>'.$imageImportService->getImageOriginalPath($image).'</comment>');
 
                 $imageImportService
                     ->downloadImage($image);
             }
         }
     }
-} 
+}
