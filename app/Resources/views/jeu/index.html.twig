@@ -1,9 +1,25 @@
 {% extends 'base.html.twig' %}
 {% from 'JDJWebBundle:Macros:misc.html.twig' import pagination %}
+{% from 'macros/sorting.html.twig' import sorting %}
 
 {% block container %}
 
     <div class="col-md-12">
+
+        <div class="pull-right sorting">
+            {% set sorting = app.request.get('sorting') %}
+
+            {% set icon = false %}
+            {% set currentOrder = null %}
+
+            {% if null == sorting %}
+                {% set icon = true %}
+                {% set currentOrder = 'desc' %}
+            {% endif %}
+
+            Trier par {{ sorting('jeu', 'label.created_at'|trans, 'createdAt', 'desc', icon, currentOrder) }},
+            {{ sorting('jeu', 'label.name'|trans, 'name', 'asc') }}
+        </div>
 
         <div class="block-heading-two">
             <h3><span>Jeux</span></h3>
