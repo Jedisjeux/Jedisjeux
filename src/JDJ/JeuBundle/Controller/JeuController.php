@@ -135,7 +135,7 @@ class JeuController extends Controller
         $itemCountPerPage = 16;
 
         $criteria = $request->get('criteria', array());
-        $sorting = $request->get('sorting', array());
+        $sorting = $request->get('sorting', array('createdAt' => 'desc'));
 
         /** @var JeuRepository $repository */
         $repository = $this->getDoctrine()->getRepository('JDJJeuBundle:Jeu');
