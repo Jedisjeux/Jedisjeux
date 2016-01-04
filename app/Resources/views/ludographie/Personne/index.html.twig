@@ -5,7 +5,7 @@
 
     <h2>Les ludographies</h2>
 
-    {% include 'JDJLudographieBundle:Personne/partial:_list.html.twig' with {'personnes': entities} %}
+    {% include 'ludographie/personne/partial/_list.html.twig' with {'personnes': entities} %}
     <div class="pagination-wrapper">
         <div class="pagination-bottom">
             {{ pagination(entities) }}

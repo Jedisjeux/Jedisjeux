@@ -8,11 +8,10 @@
         <a href="{{ path('personne_show', { 'id': personne.id, 'slug': personne.slug }) }}">
             <h3>{{ personne }}</h3>
             <ul>
-                {% if (personne.pays) %}
-                    <li>{{ personne.pays.libelle }}</li>
+                {% if personne.country %}
+                    <li>{{ personne.country }}</li>
                 {% endif %}
             </ul>
-
         </a>
     </div>
 </div>
