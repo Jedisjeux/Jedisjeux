@@ -55,6 +55,7 @@ select      old.id,
             old.presentation as description,
             old.duree as durationMin,
             old.duree as durationMax,
+            old.materiel as materiel,
             old.valid as status,
             old.date as createdAt,
             old.date as updatedAt
@@ -75,6 +76,7 @@ EOM;
         $data['joueurMax'] = !empty($data['joueurMax']) ? $data['joueurMax'] : null;
         $data['ageMin'] = !empty($data['ageMin']) ? $data['ageMin'] : null;
         $data['description'] = !empty($data['description']) ? $this->getHTMLFromText($data['description']) : null;
+        $data['materiel'] = !empty($data['materiel']) ? trim($data['materiel']) : null;
         $data['createdAt'] = \DateTime::createFromFormat('Y-m-d H:i:s', $data['createdAt']);
         $data['updatedAt'] = \DateTime::createFromFormat('Y-m-d H:i:s', $data['updatedAt']);
         switch ($data['status']) {
