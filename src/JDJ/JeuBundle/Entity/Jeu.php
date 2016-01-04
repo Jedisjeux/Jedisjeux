@@ -841,6 +841,14 @@ class Jeu
     }
 
     /**
+     * @param \Doctrine\Common\Collections\Collection $auteurs
+     */
+    public function setAuteurs($auteurs)
+    {
+        $this->auteurs = $auteurs;
+    }
+
+    /**
      * Add illustrateurs
      *
      * @param \JDJ\LudographieBundle\Entity\Personne $illustrateurs
@@ -874,6 +882,14 @@ class Jeu
     }
 
     /**
+     * @param \Doctrine\Common\Collections\Collection $illustrateurs
+     */
+    public function setIllustrateurs($illustrateurs)
+    {
+        $this->illustrateurs = $illustrateurs;
+    }
+
+    /**
      * Add editeurs
      *
      * @param \JDJ\LudographieBundle\Entity\Personne $editeurs
@@ -904,6 +920,14 @@ class Jeu
     public function getEditeurs()
     {
         return $this->editeurs;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $editeurs
+     */
+    public function setEditeurs($editeurs)
+    {
+        $this->editeurs = $editeurs;
     }
 
     /**
