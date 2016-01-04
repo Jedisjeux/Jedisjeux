@@ -134,29 +134,18 @@ class JeuController extends Controller
     {
         $itemCountPerPage = 16;
 
-        /** @var EntityManager $em */
-        $em = $this->getDoctrine()->getManager();
+        $criteria = $request->get('criteria', array());
+        $sorting = $request->get('sorting', array());
 
-        $form = $this->createSearchingForm($request);
+        /** @var JeuRepository $repository */
+        $repository = $this->getDoctrine()->getRepository('JDJJeuBundle:Jeu');
 
-        $criteria = array();
-        if ($request->isMethod('GET')) {
-            $form->submit($request);
-
-            $criteria = $form->getData();
-        }
-
-        /** @var JeuRepository $jeuReopository */
-        $jeuReopository = $em->getRepository('JDJJeuBundle:Jeu');
-
-        $paginator = $jeuReopository->advancedSearch($criteria);
-        $paginator->setMaxPerPage($itemCountPerPage);
-        $paginator->setCurrentPage($request->get('page', 1));
-
+        $jeux = $repository->createPaginator($criteria, $sorting);
+        $jeux->setMaxPerPage($itemCountPerPage);
+        $jeux->setCurrentPage($request->get('page', 1));
 
         return $this->render('jeu/index.html.twig', array(
-            'jeux' => $paginator,
-            'form' => $form->createView(),
+            'jeux' => $jeux,
         ));
     }
 
@@ -290,71 +279,5 @@ class JeuController extends Controller
         return $this->render('JDJJeuBundle:Jeu:ifYouLikeThisGame.html.twig', array(
             'jeux' => $jeux,
         ));
-    }
-
-    /**
-     * Creates a form to search a Game list with criteria.
-     *
-     * @param Jeu $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createSearchingForm(Request $request)
-    {
-        $data = array();
-        $form = $this->createFormBuilder($data)
-            ->add('cible', 'entity', array(
-                    'class' => 'JDJCoreBundle:Cible',
-                    'multiple' => false,
-                    'expanded' => false,
-                    'required' => false,
-                )
-            )
-            ->add('ageMin', 'integer', array(
-                    'required' => false,
-                )
-            )
-            ->add('joueurCount', 'integer', array(
-                    'required' => false,
-                )
-            )
-            ->add('duree', 'choice', array(
-                    'choices' => array(
-                        '-30' => 'moins de 30 minutes',
-                        '30-60' => '30 à 60 minutes',
-                        '60-120' => '1 à 2 heures',
-                        '120-180' => '2 à 3 heures',
-                        '180-' => 'plus de 3 heures',
-                    ),
-                    'required' => false,
-                )
-            )
-            ->add('mechanism', 'entity', array(
-                    'class' => 'JDJJeuBundle:Mechanism',
-                    'multiple' => true,
-                    'expanded' => false,
-                    'required' => false,
-                    'query_builder' => function(EntityRepository $repo) {
-                        return $repo->createQueryBuilder('o')
-                            ->orderBy('o.libelle');
-                    }
-                )
-            )
-            ->add('theme', 'entity', array(
-                    'class' => 'JDJJeuBundle:Theme',
-                    'multiple' => false,
-                    'expanded' => false,
-                    'required' => false,
-                    'query_builder' => function(EntityRepository $repo) {
-                        return $repo->createQueryBuilder('o')
-                            ->orderBy('o.libelle');
-                    }
-                )
-            )
-            ->add('submit', 'submit', array()
-            )
-            ->getForm();
-
-        return $form;
     }
 } 
