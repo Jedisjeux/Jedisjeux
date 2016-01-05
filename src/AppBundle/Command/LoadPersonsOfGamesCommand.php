@@ -66,6 +66,7 @@ class LoadPersonsOfGamesCommand extends ContainerAwareCommand
             $this->getEntityManager()->flush();
             $this->getEntityManager()->clear();
         }
+
     }
 
     /**
@@ -80,6 +81,7 @@ select      old.id_game as gameId,
 from        jedisjeux.jdj_personne_game old
 inner join  jdj_jeu jeu on jeu.id = old.id_game
 inner JOIN  jdj_personne person on person.id = old.id_personne
+order by    old.id_game
 EOM;
         $rows = $this->getDatabaseConnection()->fetchAll($query);
 
