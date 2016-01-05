@@ -40,60 +40,82 @@ class LoadPersonsOfGamesCommand extends ContainerAwareCommand
     {
         $this->output = $output;
         $output->writeln("<comment>Load persons of games</comment>");
-        /** @var Jeu $game */
-        $game = null;
-        foreach ($this->getRows() as $data) {
-            if (null === $game or $data['gameId'] !== $game->getId()) {
-                $game = $this->getEntityManager()->getRepository('JDJJeuBundle:Jeu')->find($data['gameId']);
-                $game->setAuteurs(new ArrayCollection());
-                $game->setEditeurs(new ArrayCollection());
-                $game->setIllustrateurs(new ArrayCollection());
-                $this->getEntityManager()->flush();
-            }
 
-            /** @var Personne $person */
-            $person = $this->getEntityManager()->getRepository('JDJLudographieBundle:Personne')->find($data['personId']);
-
-            if ('auteur' === $data['job']) {
-                $game->addAuteur($person);
-            } elseif ('illustrateur' === $data['job']) {
-                $game->addIllustrateur($person);
-            } elseif ('editeur' === $data['job']) {
-                $game->addEditeur($person);
-            }
-
-            $this->getEntityManager()->persist($game);
-            $this->getEntityManager()->flush();
-            $this->getEntityManager()->clear();
-        }
-
+        $this->loadAuthorsOfGames();
+        $this->loadEditorsOfGames();
+        $this->loadIllustratorsOfGames();
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getRows()
+    protected function loadAuthorsOfGames()
     {
         $query = <<<EOM
-select      old.id_game as gameId,
-            old.id_personne as personId,
-            old.type_relation as job
-from        jedisjeux.jdj_personne_game old
-inner join  jdj_jeu jeu on jeu.id = old.id_game
-inner JOIN  jdj_personne person on person.id = old.id_personne
-order by    old.id_game
+        delete from jdj_auteur_jeu
 EOM;
-        $rows = $this->getDatabaseConnection()->fetchAll($query);
+        $this->getDatabaseConnection()->executeQuery($query);
 
-        return $rows;
+        $query = <<<EOM
+insert into jdj_auteur_jeu (
+            personne_id,
+            jeu_id
+)
+select      personne.id,
+            jeu.id
+from        jedisjeux.jdj_personne_game old
+inner join  jdj_jeu jeu
+                on jeu.id = old.id_game
+inner join  jdj_personne personne
+                on personne.id = old.id_personne
+where       old.type_relation = 'auteur'
+EOM;
+        $this->getDatabaseConnection()->executeQuery($query);
     }
 
-    /**
-     * @return EntityManager
-     */
-    protected function getEntityManager()
+    protected function loadEditorsOfGames()
     {
-        return $this->getContainer()->get('doctrine.orm.entity_manager');
+        $query = <<<EOM
+        delete from jdj_editeur_jeu
+EOM;
+        $this->getDatabaseConnection()->executeQuery($query);
+
+        $query = <<<EOM
+insert into jdj_editeur_jeu (
+            personne_id,
+            jeu_id
+)
+select      personne.id,
+            jeu.id
+from        jedisjeux.jdj_personne_game old
+inner join  jdj_jeu jeu
+                on jeu.id = old.id_game
+inner join  jdj_personne personne
+                on personne.id = old.id_personne
+where       old.type_relation = 'editeur'
+EOM;
+        $this->getDatabaseConnection()->executeQuery($query);
+    }
+
+    protected function loadIllustratorsOfGames()
+    {
+        $query = <<<EOM
+        delete from jdj_illustrateur_jeu
+EOM;
+        $this->getDatabaseConnection()->executeQuery($query);
+
+        $query = <<<EOM
+insert into jdj_illustrateur_jeu (
+            personne_id,
+            jeu_id
+)
+select      personne.id,
+            jeu.id
+from        jedisjeux.jdj_personne_game old
+inner join  jdj_jeu jeu
+                on jeu.id = old.id_game
+inner join  jdj_personne personne
+                on personne.id = old.id_personne
+where       old.type_relation = 'illustrateur'
+EOM;
+        $this->getDatabaseConnection()->executeQuery($query);
     }
 
     /**
