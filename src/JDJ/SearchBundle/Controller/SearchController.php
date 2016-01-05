@@ -90,7 +90,7 @@ class SearchController extends Controller
                 $result = array(
                     'value' => $user->getUsername(),
                     'label' => $user->getUsername(),
-                    'image' => (null === $user->getAvatar()) ? null : $this->get('liip_imagine.cache.manager')->getBrowserPath($user->getAvatar()->getWebPath(), 'thumbnail'),
+                    'image' => (null === $user->getAvatar()) ? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : $this->get('liip_imagine.cache.manager')->getBrowserPath($user->getAvatar()->getWebPath(), 'thumbnail'),
                     'href' => "#",
                 );
             }
@@ -131,7 +131,7 @@ class SearchController extends Controller
                 $result = array(
                     'value' => (string)$personne,
                     'label' => (string)$personne,
-                    'image' => (null === $personne->getImage()) ? null : $this->get('liip_imagine.cache.manager')->getBrowserPath($personne->getImage()->getWebPath(), 'thumbnail'),
+                    'image' => (null === $personne->getImage()) ? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : $this->get('liip_imagine.cache.manager')->getBrowserPath($personne->getImage()->getWebPath(), 'thumbnail'),
                     'href' => $this->generateUrl('personne_show', array(
                             'id' => $personne->getId(),
                             'slug' => $personne->getSlug(),
