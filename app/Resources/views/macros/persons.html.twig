@@ -1,0 +1,11 @@
+{% macro image(person, filter) %}
+    {% set filter = filter|default('thumbnail') %}
+
+    {% set imageSrc = '//ssl.gstatic.com/accounts/ui/avatar_2x.png' %}
+
+    {% if (person.image) %}
+        {% set imageSrc = person.image.webPath | imagine_filter(filter) %}
+    {% endif %}
+
+    {{ imageSrc }}
+{% endmacro %}

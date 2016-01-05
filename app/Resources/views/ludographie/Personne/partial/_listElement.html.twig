@@ -1,17 +1,36 @@
-<div class="medium-3 columns">
-    <div class="image crop">
-        <a href="{{ path('personne_show', { 'id': personne.id, 'slug': personne.slug }) }}">
-            <img src="http://www.jedisjeux.net/img/800/{{ personne.image }}" alt="{{ personne }}"/>
+{% from 'macros/persons.html.twig' import image %}
+
+{% set personHref = path('personne_show', { 'id': person.id, 'slug': person.slug }) %}
+
+<!-- Image Box #4 Item -->
+<div class="img-box-4-item portfolio">
+    <!-- Image -->
+    <div class="img-container">
+        <a href="{{ personHref }}">
+            <div class="element">
+                <div class="image-style-one">
+                    <img src="{{ image(person, 'full') }}" alt=""
+                         class="img-responsive"/>
+                    <div class="image-hover">
+                    </div>
+                </div>
+            </div>
         </a>
     </div>
-    <div class="panel" data-equalizer-watch>
-        <a href="{{ path('personne_show', { 'id': personne.id, 'slug': personne.slug }) }}">
-            <h3>{{ personne }}</h3>
-            <ul>
-                {% if personne.country %}
-                    <li>{{ personne.country }}</li>
-                {% endif %}
-            </ul>
-        </a>
+
+    <!-- Image Box #4 Content -->
+    <div class="img-box-4-content">
+        <!-- Icon -->
+        <a href="#"><i style="z-index: 10;" class="fa {{ faImg }} {{ bg }}"></i></a>
+        <!-- Heading -->
+        <h4><a href="{{ personHref }}">{{ person }}</a></h4>
+        <!-- Border -->
+        <div class="bor {{ bg }}"></div>
+        <!-- Paragraph -->
+        <p>
+            {% if person.country %}
+                {{ person.country }}
+            {% endif %}
+        </p>
     </div>
 </div>
