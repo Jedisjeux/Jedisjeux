@@ -42,15 +42,29 @@ select      old.id,
             old.prenom as prenom,
             old.siteweb as siteWeb,
             old.description as description,
-            country.id as pays_id
+            country.id as country_id
 from        jedisjeux.jdj_personnes old
-left join   jdj_pays country
-                on CONVERT(country.libelle USING utf8) = CONVERT(old.nationnalite USING utf8)
+left join   jdj_country country
+                on CONVERT(country.name USING utf8) = CONVERT(old.nationnalite USING utf8)
 where       old.id <>14
 and         (old.nom_famille <> '' or old.nom <> '')
+order by    old.id
 EOM;
 
         return $this->getDatabaseConnection()->fetchAll($query);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function filterData(array $data)
+    {
+        $data['country'] = !empty($data['country_id']) ? $this
+            ->getEntityManager()
+            ->getRepository('AppBundle:Country')
+            ->findOneBy(array('id' => $data['country_id'])) : null;
+
+        return parent::filterData($data);
     }
 
     /**
