@@ -5,10 +5,6 @@ jdj_jeu_homepage:
 jdj_jeu_image:
     resource: "@JDJJeuBundle/Resources/config/routing/image.yml"
     prefix:   /
-    
-jdj_jeu_theme:
-    resource: "@JDJJeuBundle/Resources/config/routing/theme.yml"
-    prefix:   /theme
 
 jdj_jeu_materiel:
     resource: "@JDJJeuBundle/Resources/config/routing/materiel.yml"
