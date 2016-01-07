@@ -2,6 +2,7 @@
 
 namespace JDJ\JeuBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -52,11 +53,19 @@ class Mechanism
     private $jeux;
 
     /**
+     * @var array
+     *
+     * @ORM\Column(type="array")
+     */
+    private $aliases;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
-        $this->jeux = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->jeux = new ArrayCollection();
+        $this->aliases = array();
     }
 
     /**
