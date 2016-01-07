@@ -11,7 +11,7 @@
 
 {% if null == sorting %}
     {% set icon = true %}
-    {% set currentOrder = 'asc' %}
+    {% set currentOrder = 'desc' %}
 {% endif %}
 
 {% block new_entity_button %}
@@ -30,7 +30,8 @@
         <thead>
         <tr>
             <th>#</th>
-            <th>{{ sorting('admin_user_index', 'label.name'|trans, 'name', 'asc', icon, currentOrder) }}</th>
+            <th>{{ 'label.name'|trans }}</th>
+            <th>{{ sorting('admin_user_index', 'label.created_at'|trans, 'created', 'desc', icon, currentOrder) }}</th>
         </tr>
         </thead>
         <tbody>
@@ -38,6 +39,7 @@
             <tr>
                 <td>{{ user.id }}</td>
                 <td>{{ user }}</td>
+                <td>{{ user.created|localizeddate('long', 'none') }}</td>
                 <td class="text-right">
                     <ul class="list-inline text-nowrap">
                         {#<li>#}

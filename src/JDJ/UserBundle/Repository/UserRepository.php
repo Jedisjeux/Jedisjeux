@@ -2,10 +2,27 @@
 
 namespace JDJ\UserBundle\Repository;
 
+use Doctrine\ORM\QueryBuilder;
 use JDJ\CoreBundle\Entity\EntityRepository;
 
 class UserRepository extends EntityRepository
 {
+    /**
+     * @inheritdoc
+     */
+    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = array())
+    {
+        if (isset($criteria['query'])) {
+            $queryBuilder
+                ->andWhere($this->getAlias().'.username like :query')
+                ->setParameter('query', '%'.$criteria['query'].'%');
+            unset($criteria['query']);
+        }
+
+        parent::applyCriteria($queryBuilder, $criteria);
+    }
+
+
     /**
      * This function gets all user with a certain role
      *

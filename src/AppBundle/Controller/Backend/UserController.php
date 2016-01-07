@@ -21,6 +21,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
+ *
+ * @Route("/utilisateur")
  */
 class UserController extends Controller
 {
@@ -34,7 +36,7 @@ class UserController extends Controller
     public function indexAction(Request $request)
     {
         $criteria = $request->get('criteria', array());
-        $sorting = $request->get('sorting', array('name' => 'asc'));
+        $sorting = $request->get('sorting', array('created' => 'desc'));
 
         $users = $this
             ->getRepository()
@@ -82,7 +84,7 @@ class UserController extends Controller
     /**
      * @Route("/{id}/edit", name="admin_user_edit")
      *
-     * @ParamConverter("user", class="JDJJeuBundle:User")
+     * @ParamConverter("user", class="JDJUserBundle:User")
      *
      * @param Request $request
      * @param User $user
@@ -116,7 +118,7 @@ class UserController extends Controller
     /**
      * @Route("/{id}/delete", name="admin_user_delete")
      *
-     * @ParamConverter("user", class="JDJJeuBundle:User")
+     * @ParamConverter("user", class="JDJUserBundle:User")
      *
      * @param User $user
      *
@@ -138,7 +140,7 @@ class UserController extends Controller
      */
     public function getRepository()
     {
-        return $this->getDoctrine()->getRepository('JDJJeuBundle:User');
+        return $this->getDoctrine()->getRepository('JDJUserBundle:User');
     }
 
     /**
