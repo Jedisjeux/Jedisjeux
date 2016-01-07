@@ -3,12 +3,14 @@
 
 {% block body -%}
 
-    <h2>Les ludographies</h2>
+    <div class="block-heading-two">
+        <h3><span>Les ludographies</span></h3>
+    </div>
 
-    {% include 'ludographie/personne/partial/_list.html.twig' with {'personnes': entities} %}
+    {% include 'ludographie/personne/partial/_list.html.twig' with {'persons': persons} %}
     <div class="pagination-wrapper">
         <div class="pagination-bottom">
-            {{ pagination(entities) }}
+            {{ pagination(persons) }}
         </div>
     </div>
 {% endblock %}

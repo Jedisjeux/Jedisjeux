@@ -9,6 +9,7 @@
 namespace JDJ\LudographieBundle\Controller;
 
 
+use AppBundle\Repository\PersonRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use JDJ\LudographieBundle\Entity\Personne;
@@ -32,17 +33,21 @@ class PersonneController extends Controller
     public function indexAction(Request $request)
     {
         $itemCountPerPage = 16;
+        $criteria = $request->get('criteria', array());
+        $sorting = $request->get('sorting', array('gameCount' => 'desc'));
 
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
 
-        $queryBuilder = $em->getRepository('JDJLudographieBundle:Personne')->createQueryBuilder('o');
-        $paginator = $this->getPaginator($queryBuilder);
-        $paginator->setMaxPerPage($itemCountPerPage);
-        $paginator->setCurrentPage($request->get('page', 1));
+        /** @var PersonRepository $repository */
+        $repository = $em->getRepository('JDJLudographieBundle:Personne');
+        $persons = $repository
+            ->createPaginator($criteria, $sorting)
+            ->setMaxPerPage($itemCountPerPage)
+            ->setCurrentPage($request->get('page', 1));
 
         return $this->render('ludographie/personne/index.html.twig', array(
-            'entities' => $paginator,
+            'persons' => $persons,
         ));
     }
 
