@@ -66,7 +66,6 @@ mopa_bootstrap:
             icon: plus
             attr:
               class: btn btn-primary
-    menu: ~  # enables twig helpers for menu
 
 # Doctrine Configuration
 doctrine:
@@ -119,7 +118,20 @@ doctrine:
                   class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
                   enabled: true
 
+doctrine_phpcr:
+    session:
+        backend: %phpcr.backend%
+        workspace: %phpcr.workspace%
+        username: %phpcr.user%
+        password: %phpcr.pass%
+    odm:
+        auto_mapping: true
+        auto_generate_proxy_classes: %kernel.debug%
 
+doctrine_cache:
+    providers:
+        phpcr_meta: %dos.cache%
+        phpcr_nodes: %dos.cache%
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -245,23 +257,36 @@ liip_imagine:
             filters:
                 thumbnail: { size: [80, 55], mode: outbound }
 
-
 sonata_block:
-    default_contexts: [sonata_page_bundle]
+    default_contexts: [cms]
     blocks:
-        sonata.admin.block.admin_list:
-            contexts:   [admin]
+        sonata.block.service.text: ~
 
-        #sonata.admin_doctrine_orm.block.audit:
-        #    contexts:   [admin]
+cmf_create:
+    persistence:
+        phpcr:
+            image: false
 
-        sonata.block.service.text:
-        sonata.block.service.rss:
-
-        # Some specific block from the SonataMediaBundle
-        #sonata.media.block.media:
-        #sonata.media.block.gallery:
-        #sonata.media.block.feature_media:
+cmf_routing:
+    chain:
+        routers_by_id:
+            router.default: 100
+            cmf_routing.dynamic_router: 20
+    dynamic:
+        generic_controller: cmf_content.controller:indexAction
+        persistence:
+            phpcr:
+                enabled: true
+                route_basepath: /cms/routes
+cmf_block:
+    persistence:
+        phpcr:
+            block_basepath: /cms/content
+cmf_content:
+    persistence:
+        phpcr:
+            content_basepath: /cms/pages
+    default_template: SyliusWebBundle:Frontend/StaticContent:show.html.twig
 
 jms_translation:
     configs:

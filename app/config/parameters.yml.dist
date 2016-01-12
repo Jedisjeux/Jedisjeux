@@ -16,3 +16,16 @@ parameters:
 
     fos_elastica.host: jdj.dev
     fos_elastica.port: 9200
+
+    phpcr.backend:
+        type: doctrinedbal
+        connection: default
+        caches:
+            meta: doctrine_cache.providers.phpcr_meta
+            nodes: doctrine_cache.providers.phpcr_nodes
+    phpcr.workspace: default
+    phpcr.user: root
+    phpcr.pass: ~
+
+    dos.cache:
+        type: file_system
