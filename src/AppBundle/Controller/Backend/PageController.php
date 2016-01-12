@@ -12,7 +12,9 @@ use Doctrine\ODM\PHPCR\DocumentManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sylius\Bundle\ContentBundle\Doctrine\ODM\PHPCR\StaticContentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -21,17 +23,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  */
 class PageController extends Controller
 {
-    public function indexAction()
+    /**
+     * @return StaticContentRepository
+     */
+    public function getRepository()
     {
-        $queryBuilder = $this->getDocumentManager()->createQueryBuilder();
-        $queryBuilder->where()->like()->field('');
+        return $this->get('sylius.repository.static_content');
     }
 
     /**
      * @return DocumentManager
      */
-    protected function getDocumentManager()
+    public function getManager()
     {
-        return $this->get('doctrine_phpcr.odm.default_document_manager');
+        return $this->get('sylius.manager.static_content');
     }
 }
