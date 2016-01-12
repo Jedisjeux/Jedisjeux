@@ -25,7 +25,7 @@ set :linked_files, fetch(:linked_files, []).push(fetch(:app_config_path) + '/par
 set :linked_dirs, fetch(:linked_dirs, [fetch(:log_path)]).push(fetch(:web_path) + '/uploads', fetch(:web_path) + '/media')
 
 set :file_permission_paths, fetch(:file_permission_paths, []).push(fetch(:web_path) + '/uploads', fetch(:web_path) + '/media')
-set :file_permissions_users, fetch(:file_permissions_users, []).push('www-data')
+set :file_permissions_users, fetch(:file_permissions_users, []).push('apache')
 set :permission_method,   :acl
 set :use_set_permissions, true
 
