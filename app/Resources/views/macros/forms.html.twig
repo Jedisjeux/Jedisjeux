@@ -1,3 +1,11 @@
 {% macro filter(placeholder) %}
     {% render(controller('JDJCoreBundle:Form:filter', {'type': 'app_filter_query','placeholder': placeholder|default("Rechercher"), 'template': 'form/_filterForm.html.twig', 'criteria':app.request.get('criteria') })) %}
 {% endmacro %}
+
+{% macro readonly(field, value, default_value) %}
+    {% if value == '' %}
+        {{ form_row(field, {'attr': {'class': 'input-lg', 'value': default_value|default(''), 'readonly': 'readonly'}}) }}
+    {% else %}
+        {{ form_row(field, {'label_attr': {'class': 'hidden'},'attr': {'class': 'hidden'}}) }}
+    {% endif %}
+{% endmacro %}
