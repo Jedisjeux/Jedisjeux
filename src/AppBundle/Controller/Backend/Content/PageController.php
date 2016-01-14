@@ -6,7 +6,7 @@
  * Time: 13:28
  */
 
-namespace AppBundle\Controller\Backend;
+namespace AppBundle\Controller\Backend\Content;
 
 use AppBundle\Form\Type\PageType;
 use Doctrine\ODM\PHPCR\Document\Generic;
