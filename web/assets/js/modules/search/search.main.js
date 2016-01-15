@@ -1,6 +1,6 @@
 $(function() {
 
-    $( "#main-search" ).imgcomplete({
+    $( ".mainSearch" ).imgcomplete({
         source: Routing.generate('search_autocomplete'),
         minLength: 2,
         delay: 100,

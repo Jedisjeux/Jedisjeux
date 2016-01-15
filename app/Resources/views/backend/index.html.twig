@@ -1,10 +1,14 @@
 {% extends "::base.html.twig" %}
 
-{% block container %}
+{% block headline %}
+    Administration
+{% endblock %}
 
-    <div class="block-heading-two">
-        <h3><span>Administration</span></h3>
-    </div>
+{% block breadcrumb_content %}
+    <a href="{{ path('admin_homepage') }}">Administration</a>
+{% endblock %}
+
+{% block container %}
 
     <!-- Icon Box #1 Starts-->
     <div class="icon-box-1 text-center">
