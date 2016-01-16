@@ -28,8 +28,6 @@
         "sensio/framework-extra-bundle": "~3.0",
         "sensio/generator-bundle": "~2.3",
         "incenteev/composer-parameter-handler": "~2.0",
-        "knplabs/knp-menu": "2.0.*@dev",
-        "knplabs/knp-menu-bundle": "2.0.*@dev",
         "knplabs/knp-snappy-bundle": "dev-master",
         "stof/doctrine-extensions-bundle": "~1.1@dev",
         "white-october/pagerfanta-bundle": "dev-master",
@@ -56,13 +54,12 @@
         "twbs/bootstrap-sass": "dev-master",
         "knplabs/knp-paginator-bundle": "dev-master",
         "craue/formflow-bundle": "~2.0",
-        "symfony-cmf/content-bundle": "~1.2",
         "friendsofsymfony/jsrouting-bundle": "~1.5",
         "symfony/var-dumper": "~2.6",
         "jms/translation-bundle": "dev-master",
         "jms/di-extra-bundle": "dev-master",
         "bmatzner/fontawesome-bundle": "^4.4",
-        "sylius/resource-bundle": "^0.15.0",
+        "sylius/content-bundle": "^0.15.0",
         "ob/highcharts-bundle": "^1.2"
     },
     "scripts": {

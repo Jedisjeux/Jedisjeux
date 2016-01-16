@@ -1,9 +1,19 @@
 {% extends "::base.html.twig" %}
 
+{% block headline %}
+    Administration
+{% endblock %}
+
+{% block breadcrumb_content %}
+    <a href="{{ path('admin_homepage') }}">Administration</a>
+{% endblock %}
+
 {% block container %}
 
-    <div class="block-heading-two">
-        <h3><span>Administration</span></h3>
+    <div class="container">
+        <div class="block-heading-two">
+            <h3><span>Jeux</span></h3>
+        </div>
     </div>
 
     <!-- Icon Box #1 Starts-->
@@ -77,6 +87,32 @@
                         <h4><a href="{{ path('admin_user_index') }}">Utilisateurs</a></h4>
                         <!-- Icon Box One Paragraph -->
                         <p>Les utilisateurs du site.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="block-heading-two">
+            <h3><span>Contenu</span></h3>
+        </div>
+    </div>
+
+    <!-- Icon Box #1 Starts-->
+    <div class="icon-box-1 text-center">
+        <!-- Container -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <!-- Icon Box One Item -->
+                    <div class="icon-box-1-item">
+                        <!-- Icon Box One Icon -->
+                        <a href="{{ path('admin_page_index') }}"><i class="glyphicon glyphicon-file"></i></a>
+                        <!-- Icon Box One Headeing -->
+                        <h4><a href="{{ path('admin_page_index') }}">Pages</a></h4>
+                        <!-- Icon Box One Paragraph -->
+                        <p>Les pages "statiques" du site.</p>
                     </div>
                 </div>
             </div>

@@ -19,7 +19,7 @@ $(document).ready(function () {
         $('html, body').animate({ scrollTop: 0 }, 'fast');
 
 
-    }
+    };
 
 
     /**
@@ -39,5 +39,9 @@ $(document).ready(function () {
             .fadeOut();
 
         $('html, body').animate({ scrollTop: 0 }, 'fast');
-    }
+    };
+
+    $('.datetime').datetimepicker({
+        format: 'YYYY-MM-DD'
+    });
 });

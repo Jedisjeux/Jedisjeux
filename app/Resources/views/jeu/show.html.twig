@@ -1,8 +1,15 @@
 {% extends "::base.html.twig" %}
 
+{% block headline %}
+    {{ jeu }}
+{% endblock %}
+
+{% block breadcrumb_content %}
+    <a href="{{ path('jeu') }}">Jeux</a>
+    / {{ jeu }}
+{% endblock %}
+
 {% block container %}
-
-
 
     <div class="col-md-8">
         {% include "jeu/show/header.html.twig" with {'jeu': jeu, 'userGameAttribute': userGameAttribute} only %}

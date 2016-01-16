@@ -1,0 +1,42 @@
+<div class="header-2">
+
+    <!-- Container -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <!-- Logo section -->
+                <div class="logo">
+                    <h1><a href="{{ path('jdj_web_homepage') }}"><i
+                                    class="fa fa-laptop"></i> {% block headline %}Jedisjeux{% endblock %}</a></h1>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <!-- Navigation starts -->
+
+                {% include "layout/navigation.html.twig" %}
+
+                <!-- Navigation ends -->
+            </div>
+            <div class="col-md-3 hidden-xs">
+                <!-- Search Form -->
+                <div class="head-search pull-right">
+
+                    <form role="form">
+                        <!-- Input Group -->
+                        <div class="input-group">
+                            <input type="text" class="form-control mainSearch"
+                                   placeholder="Jeu, auteur, éditeur">
+										<span class="input-group-btn">
+											<button class="btn btn-color" type="button">Rechercher</button>
+										</span>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

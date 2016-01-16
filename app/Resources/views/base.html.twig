@@ -14,12 +14,12 @@
     {% block head_style %}
         {% stylesheets
         '@MopaBootstrapBundle/Resources/public/sass/mopabootstrapbundle-3.2.scss'
-        'assets/stylesheets/base.css'
         'bundles/bmatznerfontawesome/css/font-awesome.min.css'
         'assets/css/magnific-popup.css'
         'assets/css/owl.carousel.css'
         'assets/css/styles/style.css'
         'assets/css/styles/skin-lblue.css'
+        'assets/stylesheets/base.css'
         'assets/bower_components/jquery-ui/themes/base/jquery-ui.min.css'
         'assets/bower_components/bootstrap-star-rating/css/star-rating.min.css'
         'assets/bower_components/fancybox/source/jquery.fancybox.css'
@@ -57,11 +57,31 @@
         <!-- Top bar ends -->
 
         <!-- Header One Starts -->
-        {% include "layout/header-1.html.twig" %}
+        {% include "layout/header.html.twig" %}
 
         <!-- Header one ends -->
 
-        <br/>
+        {% block page_heading %}
+            <div class="page-heading-two">
+                <div class="container">
+                    <h2>{% block headline %}Titre de la page{% endblock headline %}
+                        {% block subtitle_container %}
+                            <span>{% block subtitle %}{#Something can go here#}{% endblock subtitle %}</span>
+                        {% endblock subtitle_container %}
+                    </h2>
+                    {% block breadcrumb_container %}
+                        <div class="breads">
+                                <a href="{{ path('jdj_web_homepage') }}">Accueil</a> /
+                            {% block breadcrumb_content %}
+                                {#<a href="#">Page</a> / #}
+                                {#<a href="#">Sub Page</a>#}
+                            {% endblock breadcrumb_content %}
+                        </div>
+                    {% endblock breadcrumb_container %}
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        {% endblock page_heading %}
 
         <!-- Main content starts -->
 
@@ -75,6 +95,9 @@
                     {% include "layout/_notify.html.twig" %}
 
                     {% include "layout/login-form-modal.html.twig" %}
+
+
+
 
                     <div class="row">
 
