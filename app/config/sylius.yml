@@ -5,3 +5,5 @@ sylius_content:
             repository: Sylius\Bundle\ContentBundle\Doctrine\ODM\PHPCR\StaticContentRepository
             form:
                 choice: Sylius\Bundle\ContentBundle\Form\Type\StaticContentChoiceType
+        simple_block:
+            repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
