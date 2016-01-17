@@ -55,7 +55,7 @@ class LoadPagesCommand extends ContainerAwareCommand
      */
     protected function createOrReplacePage(array $data)
     {
-        $page = $this->findPageOr404($data['name']);
+        $page = $this->findPage($data['name']);
 
         if (null === $page) {
             $page = new StaticContent();
@@ -75,15 +75,11 @@ class LoadPagesCommand extends ContainerAwareCommand
      * @param string $id
      * @return StaticContent
      */
-    protected function findPageOr404($id)
+    protected function findPage($id)
     {
         $page = $this
             ->getRepository()
             ->findStaticContent($id);
-
-        if (null === $page) {
-            throw new NotFoundHttpException(sprintf("Page %s not found", $id));
-        }
 
         return $page;
     }
