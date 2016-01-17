@@ -1,11 +1,15 @@
 {% extends "base.html.twig" %}
 {% from 'JDJWebBundle:Macros:misc.html.twig' import pagination %}
 
-{% block body -%}
+{% block headline %}
+    Les ludographies
+{% endblock %}
 
-    <div class="block-heading-two">
-        <h3><span>Les ludographies</span></h3>
-    </div>
+{% block breadcrumb_content %}
+    <a href="{{ path('personne') }}">Ludographie</a>
+{% endblock %}
+
+{% block body -%}
 
     {% include 'ludographie/personne/partial/_list.html.twig' with {'persons': persons} %}
     <div class="pagination-wrapper">
