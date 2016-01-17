@@ -1,0 +1,7 @@
+{% if cmfMainContent is not defined %}
+    {% set cmfMainContent = block %}
+{% endif %}
+
+{% createphp cmfMainContent as='rdf' noautotag %}
+{{ createphp_content(rdf.body) }}
+{% endcreatephp %}

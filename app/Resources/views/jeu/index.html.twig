@@ -2,6 +2,15 @@
 {% from 'JDJWebBundle:Macros:misc.html.twig' import pagination %}
 {% from 'macros/sorting.html.twig' import sorting %}
 
+{% block headline %}
+    Jeux
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    Jeux
+{% endblock %}
+
 {% block container %}
 
     <div class="col-md-12">
@@ -19,10 +28,6 @@
 
             Trier par {{ sorting('jeu', 'label.created_at'|trans, 'createdAt', 'desc', icon, currentOrder) }},
             {{ sorting('jeu', 'label.name'|trans, 'name', 'asc') }}
-        </div>
-
-        <div class="block-heading-two">
-            <h3><span>Jeux</span></h3>
         </div>
 
         {% include "jeu/index/list-4.html.twig" with {'jeux': jeux} only %}
