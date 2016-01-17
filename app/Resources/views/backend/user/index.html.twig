@@ -14,16 +14,21 @@
     {% set currentOrder = 'desc' %}
 {% endif %}
 
+{% block headline %}
+    Liste des utilisateurs
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    Utilisateurs
+{% endblock %}
+
 {% block new_entity_button %}
     <a class="btn btn-primary" href="{{ path('admin_user_new') }}">
         <span class="glyphicon glyphicon-plus-sign"></span>
-        Nouveau utilisateur
+        Nouvel utilisateur
     </a>
 {% endblock new_entity_button %}
-
-{% block page_title %}
-    Liste des utilisateurs
-{% endblock page_title %}
 
 {% block list %}
     <table class="table table-striped">

@@ -14,16 +14,21 @@
     {% set currentOrder = 'asc' %}
 {% endif %}
 
+{% block headline %}
+    Liste des thèmes
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    Thèmes
+{% endblock %}
+
 {% block new_entity_button %}
     <a class="btn btn-primary" href="{{ path('admin_theme_new') }}">
         <span class="glyphicon glyphicon-plus-sign"></span>
         Nouveau thème
     </a>
 {% endblock new_entity_button %}
-
-{% block page_title %}
-    Liste des thèmes
-{% endblock page_title %}
 
 {% block list %}
     <table class="table table-striped">

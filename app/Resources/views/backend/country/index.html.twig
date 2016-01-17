@@ -14,16 +14,22 @@
     {% set currentOrder = 'asc' %}
 {% endif %}
 
+{% block headline %}
+    Liste des Pays
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    Pays
+{% endblock %}
+
+
 {% block new_entity_button %}
     <a class="btn btn-primary" href="{{ path('admin_country_new') }}">
         <span class="glyphicon glyphicon-plus-sign"></span>
         Nouveau pays
     </a>
 {% endblock new_entity_button %}
-
-{% block page_title %}
-    Liste des Pays
-{% endblock page_title %}
 
 {% block list %}
     <table class="table table-striped">

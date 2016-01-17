@@ -14,16 +14,21 @@
     {% set currentOrder = 'asc' %}
 {% endif %}
 
+{% block headline %}
+    Liste des mécanismes
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    Mécanismes
+{% endblock %}
+
 {% block new_entity_button %}
     <a class="btn btn-primary" href="{{ path('admin_mechanism_new') }}">
         <span class="glyphicon glyphicon-plus-sign"></span>
         Nouveau mécanisme
     </a>
 {% endblock new_entity_button %}
-
-{% block page_title %}
-    Liste des mécanismes
-{% endblock page_title %}
 
 {% block list %}
     <table class="table table-striped">

@@ -1,17 +1,11 @@
 {% extends "::base.html.twig" %}
 {% import 'macros/forms.html.twig' as form %}
 
-{% block container %}
+{% block breadcrumb_content %}
+    <a href="{{ path('admin_homepage') }}">Administration</a> /
+{% endblock %}
 
-    <div class="block-heading-two">
-        <ul class="list-inline pull-right">
-            <li>
-                {% block new_entity_button %}
-                {% endblock new_entity_button %}
-            </li>
-        </ul>
-        <h3><span>{% block page_title %}{% endblock page_title %}</span></h3>
-    </div>
+{% block container %}
 
     {% block form_filter %}
         <div class="well">
@@ -19,6 +13,12 @@
         </div>
     {% endblock form_filter %}
 
+    <ul class="list-inline pull-right">
+        <li>
+            {% block new_entity_button %}
+            {% endblock new_entity_button %}
+        </li>
+    </ul>
 
     {% block list %}
     {% endblock list %}
