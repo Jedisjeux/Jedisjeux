@@ -3,18 +3,16 @@
 {% if cmfMainContent is not defined %}
     {% set cmfMainContent = page %}
 {% endif %}
+
+{% block headline %}
+    {% createphp cmfMainContent as='rdf' noautotag %}
+    {{ createphp_content(rdf.title) }}
+    {% endcreatephp %}
+{% endblock %}
+
 {% block body -%}
     {% createphp cmfMainContent as='rdf' noautotag %}
     <div {{ createphp_attributes(rdf) }}>
-        <div class="page-heading-two">
-            <div class="container">
-                <h2 {{ createphp_attributes(rdf.title) }}>{{ createphp_content(rdf.title) }}</h2>
-                {#<div class="breads">#}
-                    {#Home / <a href="#">Page</a> / <a href="#">Sub Page</a>#}
-                {#</div>#}
-                <div class="clearfix"></div>
-            </div>
-        </div>
         <div {{ createphp_attributes(rdf.body) }}>{{ createphp_content(rdf.body) }}</div>
     </div>
     {% endcreatephp %}
