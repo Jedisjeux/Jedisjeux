@@ -1,26 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2016-01-02T18:17:24Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+  <file date="2016-01-18T14:20:57Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
-      <trans-unit id="69b7579bfac3b6f4ab5b10363a7e6af4f8117727" resname="1 à 2 heures">
-        <source>1 à 2 heures</source>
-        <target state="new">1 à 2 heures</target>
-        <jms:reference-file line="325">JeuBundle/Controller/JeuController.php</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="d79381923ebe1aa4f9b01260cecaf615f0dad314" resname="2 à 3 heures">
-        <source>2 à 3 heures</source>
-        <target state="new">2 à 3 heures</target>
-        <jms:reference-file line="326">JeuBundle/Controller/JeuController.php</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="7b1c75cc9ea7379b10deb9af611b108b3cfca30c" resname="30 à 60 minutes">
-        <source>30 à 60 minutes</source>
-        <target state="new">30 à 60 minutes</target>
-        <jms:reference-file line="324">JeuBundle/Controller/JeuController.php</jms:reference-file>
-      </trans-unit>
       <trans-unit id="87c57ed173ea17c02ec96ec099ee6a81d79dabc2" resname="Ajouter">
         <source>Ajouter</source>
         <target state="new">Ajouter</target>
@@ -43,11 +28,9 @@
         <target state="new">Créer</target>
         <jms:reference-file line="122">ComptaBundle/Controller/BookEntryController.php</jms:reference-file>
         <jms:reference-file line="78">JeuBundle/Controller/CaracteristiqueController.php</jms:reference-file>
-        <jms:reference-file line="177">JeuBundle/Controller/JeuController.php</jms:reference-file>
+        <jms:reference-file line="166">JeuBundle/Controller/JeuController.php</jms:reference-file>
         <jms:reference-file line="99">JeuBundle/Controller/JeuImageController.php</jms:reference-file>
         <jms:reference-file line="77">JeuBundle/Controller/MaterielController.php</jms:reference-file>
-        <jms:reference-file line="79">JeuBundle/Controller/MechanismController.php</jms:reference-file>
-        <jms:reference-file line="80">JeuBundle/Controller/ThemeController.php</jms:reference-file>
         <jms:reference-file line="126">PartieBundle/Controller/JoueurController.php</jms:reference-file>
         <jms:reference-file line="185">PartieBundle/Controller/PartieController.php</jms:reference-file>
         <jms:reference-file line="90">PartieBundle/Controller/PartieImageController.php</jms:reference-file>
@@ -70,8 +53,6 @@
         <jms:reference-file line="225">JeuBundle/Controller/CaracteristiqueController.php</jms:reference-file>
         <jms:reference-file line="228">JeuBundle/Controller/JeuImageController.php</jms:reference-file>
         <jms:reference-file line="224">JeuBundle/Controller/MaterielController.php</jms:reference-file>
-        <jms:reference-file line="248">JeuBundle/Controller/MechanismController.php</jms:reference-file>
-        <jms:reference-file line="236">JeuBundle/Controller/ThemeController.php</jms:reference-file>
         <jms:reference-file line="224">JeuBundle/Controller/TypeAddonController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f7c8bcd8b213a6cc4a0cfd3462bd1379e4ef9689" resname="Enregistrer">
@@ -95,12 +76,10 @@
         <jms:reference-file line="153">CoreBundle/Controller/CibleController.php</jms:reference-file>
         <jms:reference-file line="155">JeuBundle/Controller/CaracteristiqueController.php</jms:reference-file>
         <jms:reference-file line="55">JeuBundle/Controller/CaracteristiqueNoteController.php</jms:reference-file>
-        <jms:reference-file line="196">JeuBundle/Controller/JeuController.php</jms:reference-file>
+        <jms:reference-file line="185">JeuBundle/Controller/JeuController.php</jms:reference-file>
         <jms:reference-file line="211">JeuBundle/Controller/JeuImageController.php</jms:reference-file>
         <jms:reference-file line="154">JeuBundle/Controller/MaterielController.php</jms:reference-file>
-        <jms:reference-file line="178">JeuBundle/Controller/MechanismController.php</jms:reference-file>
-        <jms:reference-file line="166">JeuBundle/Controller/ThemeController.php</jms:reference-file>
-        <jms:reference-file line="171">LudographieBundle/Controller/PersonneController.php</jms:reference-file>
+        <jms:reference-file line="176">LudographieBundle/Controller/PersonneController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="94e2f3ee14b92e2e675a8f6118d28738dbf5c6ba" resname="Mot de passe">
         <source>Mot de passe</source>
@@ -201,6 +180,12 @@
         <target>Montant</target>
         <jms:reference-file line="33">ComptaBundle/Form/BookEntryType.php</jms:reference-file>
       </trans-unit>
+      <trans-unit id="c08df80a409f4a473ff4fa142d563ed6cc8211ed" resname="label.body">
+        <source>label.body</source>
+        <target>Corps</target>
+        <jms:reference-file line="33">Form/Type/PageType.php</jms:reference-file>
+        <jms:reference-file line="36">Form/Type/SimpleBlockType.php</jms:reference-file>
+      </trans-unit>
       <trans-unit id="4dc1c435d4fd7d5d81029e66e75d7f9bf920be3e" resname="label.cancel">
         <source>label.cancel</source>
         <target>Annuler</target>
@@ -232,10 +217,12 @@
       <trans-unit id="dee380b06b03fdb98a963ac735c0ddfc2f59f2f1" resname="label.created_at">
         <source>label.created_at</source>
         <target>Créé le</target>
-        <jms:reference-file line="35">backend/game/index.html.twig</jms:reference-file>
+        <jms:reference-file line="40">backend/game/index.html.twig</jms:reference-file>
+        <jms:reference-file line="39">backend/user/index.html.twig</jms:reference-file>
         <jms:reference-file line="33">compta/bill/index.html.twig</jms:reference-file>
         <jms:reference-file line="32">compta/customer/show.html.twig</jms:reference-file>
         <jms:reference-file line="29">compta/subscription/index.html.twig</jms:reference-file>
+        <jms:reference-file line="29">views/jeu/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d5005635ca52810e2d5a7c1d0190031988bf14b1" resname="label.credit">
         <source>label.credit</source>
@@ -273,8 +260,8 @@
       <trans-unit id="b1f4176a118f0d3ded00902ad6a8ec78b83ba416" resname="label.description">
         <source>label.description</source>
         <target>Description</target>
-        <jms:reference-file line="34">backend/mechanism/index.html.twig</jms:reference-file>
-        <jms:reference-file line="34">backend/theme/index.html.twig</jms:reference-file>
+        <jms:reference-file line="39">backend/mechanism/index.html.twig</jms:reference-file>
+        <jms:reference-file line="39">backend/theme/index.html.twig</jms:reference-file>
         <jms:reference-file line="34">LudographieBundle/Form/PersonneType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="1dfe22ec48b36ae241081c402b7cf6093a13bd62" resname="label.duration_by_player">
@@ -329,6 +316,12 @@
         <target>En cours</target>
         <jms:reference-file line="42">views/macros/status.html.twig</jms:reference-file>
       </trans-unit>
+      <trans-unit id="f0825044afc116b38023a63adba18b558c47c6b1" resname="label.internal_name">
+        <source>label.internal_name</source>
+        <target>Nom interne</target>
+        <jms:reference-file line="26">Form/Type/PageType.php</jms:reference-file>
+        <jms:reference-file line="29">Form/Type/SimpleBlockType.php</jms:reference-file>
+      </trans-unit>
       <trans-unit id="7e8ef4d7796f0d0e20b576f2d6ba576e14b37ac8" resname="label.last_name">
         <source>label.last_name</source>
         <target>Nom</target>
@@ -342,14 +335,16 @@
       <trans-unit id="f34120955ae39f4fb49e72f45f3ce583a085075d" resname="label.name">
         <source>label.name</source>
         <target>Nom</target>
-        <jms:reference-file line="33">backend/country/index.html.twig</jms:reference-file>
-        <jms:reference-file line="34">backend/game/index.html.twig</jms:reference-file>
-        <jms:reference-file line="33">backend/mechanism/index.html.twig</jms:reference-file>
-        <jms:reference-file line="33">backend/person/index.html.twig</jms:reference-file>
-        <jms:reference-file line="33">backend/theme/index.html.twig</jms:reference-file>
+        <jms:reference-file line="39">backend/country/index.html.twig</jms:reference-file>
+        <jms:reference-file line="39">backend/game/index.html.twig</jms:reference-file>
+        <jms:reference-file line="38">backend/mechanism/index.html.twig</jms:reference-file>
+        <jms:reference-file line="38">backend/person/index.html.twig</jms:reference-file>
+        <jms:reference-file line="38">backend/theme/index.html.twig</jms:reference-file>
+        <jms:reference-file line="38">backend/user/index.html.twig</jms:reference-file>
         <jms:reference-file line="33">compta/dealer/index.html.twig</jms:reference-file>
         <jms:reference-file line="18">compta/payment-method/index.html.twig</jms:reference-file>
         <jms:reference-file line="21">compta/product/index.html.twig</jms:reference-file>
+        <jms:reference-file line="30">views/jeu/index.html.twig</jms:reference-file>
         <jms:reference-file line="26">Form/Type/CountryType.php</jms:reference-file>
         <jms:reference-file line="28">ComptaBundle/Form/PaymentMethodType.php</jms:reference-file>
         <jms:reference-file line="28">ComptaBundle/Form/ProductType.php</jms:reference-file>
@@ -412,6 +407,24 @@
         <target>Produits</target>
         <jms:reference-file line="24">ComptaBundle/Form/BillProductType.php</jms:reference-file>
       </trans-unit>
+      <trans-unit id="eec0fa304a6aa438a4475bf4166d1a48e2e89810" resname="label.publish_end_date">
+        <source>label.publish_end_date</source>
+        <target>Date de fin de publication</target>
+        <jms:reference-file line="48">Form/Type/PageType.php</jms:reference-file>
+        <jms:reference-file line="51">Form/Type/SimpleBlockType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="fa97fd429e66d1c052e6aa25ce3096028628db60" resname="label.publish_start_date">
+        <source>label.publish_start_date</source>
+        <target>Date de début de publication</target>
+        <jms:reference-file line="39">Form/Type/PageType.php</jms:reference-file>
+        <jms:reference-file line="42">Form/Type/SimpleBlockType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6db018228f41056275b39ac427e5f2c4851c999d" resname="label.publishable">
+        <source>label.publishable</source>
+        <target>Publiable</target>
+        <jms:reference-file line="36">Form/Type/PageType.php</jms:reference-file>
+        <jms:reference-file line="39">Form/Type/SimpleBlockType.php</jms:reference-file>
+      </trans-unit>
       <trans-unit id="594c2b1b252fedd4e7a5034ae3b2454f10e64941" resname="label.published">
         <source>label.published</source>
         <target>Publié</target>
@@ -473,7 +486,7 @@
       <trans-unit id="895a33857b12be70974c29157b5a2bf9769411da" resname="label.status">
         <source>label.status</source>
         <target>Statut</target>
-        <jms:reference-file line="36">backend/game/index.html.twig</jms:reference-file>
+        <jms:reference-file line="41">backend/game/index.html.twig</jms:reference-file>
         <jms:reference-file line="35">compta/customer/show.html.twig</jms:reference-file>
         <jms:reference-file line="32">compta/subscription/index.html.twig</jms:reference-file>
       </trans-unit>
@@ -487,6 +500,14 @@
         <target>Durée de l'abonnement</target>
         <jms:reference-file line="23">compta/product/index.html.twig</jms:reference-file>
         <jms:reference-file line="34">ComptaBundle/Form/ProductType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="2950e98e4e3fa271eb4e201c9fdb670a770e927f" resname="label.title">
+        <source>label.title</source>
+        <target>Titre</target>
+        <jms:reference-file line="44">block/simple/index.html.twig</jms:reference-file>
+        <jms:reference-file line="38">backend/page/index.html.twig</jms:reference-file>
+        <jms:reference-file line="29">Form/Type/PageType.php</jms:reference-file>
+        <jms:reference-file line="32">Form/Type/SimpleBlockType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="2706e3151ea34799bac04bebd1df0c1e6fa5b92b" resname="label.total_price">
         <source>label.total_price</source>
@@ -518,16 +539,6 @@
         <source>message.confirmation</source>
         <target>Souhaitez-vous supprimer cet élément ?</target>
         <jms:reference-file line="10">Resources/views/_confirm_modal.html.twig</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="5f1f415bd4d0ae72657804116138f5b8b5454724" resname="moins de 30 minutes">
-        <source>moins de 30 minutes</source>
-        <target state="new">moins de 30 minutes</target>
-        <jms:reference-file line="323">JeuBundle/Controller/JeuController.php</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="3eede38825dae6f1a16a5cecfb221c580ae2b1ff" resname="plus de 3 heures">
-        <source>plus de 3 heures</source>
-        <target state="new">plus de 3 heures</target>
-        <jms:reference-file line="327">JeuBundle/Controller/JeuController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="6e4c04024b09d2e43d79eaefe95ec12723b10c7a" resname="title.confirmation">
         <source>title.confirmation</source>

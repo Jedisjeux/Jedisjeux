@@ -8,14 +8,15 @@
 
 namespace AppBundle\Controller\Backend\Content;
 
-use AppBundle\Form\Type\PageType;
 use AppBundle\Form\Type\SimpleBlockType;
 use Doctrine\ODM\PHPCR\Document\Generic;
 use Doctrine\ODM\PHPCR\DocumentManager;
+use PHPCR\Util\NodeHelper;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SimpleBlock;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -29,7 +30,47 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class SimpleBlockController extends Controller
 {
     /**
-     * @Route("/new", requirements={"id" = ".+"}, name="admin_content_block_simple_new")
+     * @Route("/", name="admin_block_simple_index")
+     *
+     * @param Request $request
+     *
+     * @return array
+     */
+    public function indexAction(Request $request)
+    {
+        $criteria = $request->get('criteria', array());
+        $sorting = $request->get('sorting', array('title' => 'asc'));
+
+        $blocks = $this
+            ->getRepository()
+            ->createPaginator($criteria, $sorting)
+            ->setCurrentPage($request->get('page', 1));
+
+        return $this->render('backend/content/block/simple/index.html.twig', array(
+            'blocks' => $blocks,
+        ));
+    }
+
+    /**
+     * @Route("/{name}/delete", name="admin_block_simple_delete")
+     *
+     * @param string $name
+     *
+     * @return RedirectResponse
+     */
+    public function deleteAction($name)
+    {
+        $page = $this->findOr404($name);
+        $this->getManager()->remove($page);
+        $this->getManager()->flush();
+
+        return $this->redirect($this->generateUrl(
+            'admin_block_simple_index'
+        ));
+    }
+
+    /**
+     * @Route("/new", name="admin_block_simple_new")
      *
      * @param Request $request
      * @return Response
@@ -48,10 +89,7 @@ class SimpleBlockController extends Controller
             $em->persist($block);
             $em->flush();
 
-            return $this->redirect($this->generateUrl(
-                'page_show',
-                array('id' => $block->getName())
-            ));
+            return $this->redirect($this->generateUrl('admin_block_simple_index'));
         }
 
         return $this->render("backend/content/block/simple/new.html.twig", array(
@@ -61,17 +99,17 @@ class SimpleBlockController extends Controller
     }
 
     /**
-     * @Route("/{id}/edit", requirements={"id" = ".+"}, name="admin_content_block_simple_edit")
+     * @Route("/{name}/edit", requirements={"name" = ".+"}, name="admin_block_simple_edit")
      *
      * @param Request $request
-     * @param string $id
+     * @param string $name
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction(Request $request, $name)
     {
-        $page = $this->findOr404($id);
+        $page = $this->findOr404($name);
 
-        $form = $this->createForm(new PageType(), $page);
+        $form = $this->createForm(new SimpleBlockType(), $page);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -79,10 +117,7 @@ class SimpleBlockController extends Controller
             $em->persist($page);
             $em->flush();
 
-            return $this->redirect($this->generateUrl(
-                'admin_homepage',
-                array('id' => $page->getName())
-            ));
+            return $this->redirect($this->generateUrl('admin_block_simple_index'));
         }
 
         return $this->render("backend/content/block/simple/edit.html.twig", array(
@@ -92,17 +127,19 @@ class SimpleBlockController extends Controller
     }
 
     /**
-     * @param string $id
+     * @param string $name
      * @return SimpleBlock
      */
-    protected function findOr404($id)
+    protected function findOr404($name)
     {
+        $contentBasepath = '/cms/blocks';
+
         $page = $this
             ->getRepository()
-            ->find($id);
+            ->find($contentBasepath . '/' . $name);
 
         if (null === $page) {
-            throw new NotFoundHttpException(sprintf("Block %s not found", $id));
+            throw new NotFoundHttpException(sprintf("Block %s not found", $name));
         }
 
         return $page;
@@ -113,7 +150,16 @@ class SimpleBlockController extends Controller
      */
     protected function getParent()
     {
-        return $this->getManager()->find(null, '/cms/blocks/simple');
+        $contentBasepath = '/cms/blocks';
+        $parent = $this->getManager()->find(null, $contentBasepath);
+
+        if (null === $parent) {
+            $session = $this->getManager()->getPhpcrSession();
+            NodeHelper::createPath($session, $contentBasepath);
+            $parent = $this->getManager()->find(null, $contentBasepath);
+        }
+
+        return $parent;
     }
 
     /**

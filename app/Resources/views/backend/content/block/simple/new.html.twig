@@ -1,10 +1,19 @@
 {% extends "base.html.twig" %}
 {% import 'macros/actions.html.twig' as action %}
 
+{% block headline %}
+    Nouveau bloc simple
+{% endblock headline %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    Contenu /
+    <a href="{{ path('admin_block_simple_index') }}">Blocs simples</a> /
+    Nouveau
+{% endblock %}
+
+
 {% block container %}
-    <div class="block-heading-two">
-        <h3><span>Nouveau block simple</span></h3>
-    </div>
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ action.create() }}

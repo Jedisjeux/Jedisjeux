@@ -19,3 +19,11 @@ services:
         class: JDJ\CoreBundle\Form\Filter\QueryFilterType
         tags:
           - { name: form.type, alias: app_filter_query }
+
+    sonata.block.service.rss:
+        class: Sonata\BlockBundle\Block\Service\RssBlockService
+        arguments:
+            - sonata.block.service.rss
+            - @templating
+        tags:
+            - { name: sonata.block }

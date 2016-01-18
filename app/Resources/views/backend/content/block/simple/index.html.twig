@@ -14,10 +14,21 @@
     {% set currentOrder = 'asc' %}
 {% endif %}
 
+{% block headline %}
+    Blocs simples
+{% endblock headline %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    Contenu /
+    Blocs simples
+{% endblock %}
+
+
 {% block new_entity_button %}
-    <a class="btn btn-primary" href="{{ path('admin_content_block_simple_new') }}">
+    <a class="btn btn-primary" href="{{ path('admin_block_simple_new') }}">
         <span class="glyphicon glyphicon-plus-sign"></span>
-        Nouveau page
+        Nouveau bloc
     </a>
 {% endblock new_entity_button %}
 
@@ -30,21 +41,21 @@
         <thead>
         <tr>
             <th>#</th>
-            <th>{{ sorting('admin_content_block_simple_index', 'label.title'|trans, 'title', 'asc', icon, currentOrder) }}</th>
+            <th>{{ sorting('admin_block_simple_index', 'label.title'|trans, 'title', 'asc', icon, currentOrder) }}</th>
         </tr>
         </thead>
         <tbody>
         {% for block in blocks %}
             <tr>
-                <td>{{ page.id }}</td>
-                <td>{{ page.title }}</td>
+                <td>{{ block.id }}</td>
+                <td>{{ block.title }}</td>
                 <td class="text-right">
                     <ul class="list-inline text-nowrap">
                         <li>
-                            {{ button.edit(path('admin_content_block_simple_edit', { 'id': block.id })) }}
+                            {{ button.edit(path('admin_block_simple_edit', { 'name': block.name })) }}
                         </li>
                         <li>
-                            {{ button.delete(path('admin_content_delete', { 'id': block.id })) }}
+                            {{ button.delete(path('admin_block_simple_delete', { 'name': block.name })) }}
                         </li>
                     </ul>
                 </td>
