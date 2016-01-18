@@ -1,6 +1,16 @@
 {% extends "::base.html.twig" %}
 {% import 'macros/actions.html.twig' as action %}
 
+{% block headline %}
+    Nouveau pays
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    <a href="{{ path('admin_country_index') }}">Pays</a> /
+    Nouveau
+{% endblock %}
+
 {% block container %}
     <div class="block-heading-two">
         <h3><span>Nouveau pays</span></h3>

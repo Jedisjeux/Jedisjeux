@@ -1,10 +1,17 @@
 {% extends "::base.html.twig" %}
 {% import 'macros/actions.html.twig' as action %}
 
+{% block headline %}
+    Modifier un thème
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    <a href="{{ path('admin_theme_index') }}">Thèmes</a> /
+    Modifier
+{% endblock %}
+
 {% block container %}
-    <div class="block-heading-two">
-        <h3><span>Modifier un thème</span></h3>
-    </div>
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ action.update() }}
