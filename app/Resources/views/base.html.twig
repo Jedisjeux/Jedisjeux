@@ -12,6 +12,7 @@
 
 
     {% block head_style %}
+
         {% stylesheets
         '@MopaBootstrapBundle/Resources/public/sass/mopabootstrapbundle-3.2.scss'
         'bundles/bmatznerfontawesome/css/font-awesome.min.css'
@@ -29,9 +30,8 @@
         'assets/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'
         filter='cssrewrite' output='css/compiled/all.css' %}
         <link rel="stylesheet" href="{{ asset_url }}"/>
-        {% endstylesheets %}
-
         {% include "CmfCreateBundle::includecssfiles.html.twig" %}
+        {% endstylesheets %}
 
     {% endblock head_style %}
 
@@ -202,7 +202,10 @@
     {% endjavascripts %}
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-    {% render(controller("cmf_create.jsloader.controller:includeJSFilesAction")) %}
 {% endblock foot_script_assetic %}
+{#{% render(controller(#}
+    {#"cmf_create.jsloader.controller:includeJSFilesAction",#}
+    {#{'_locale': app.request.locale, 'editor': 'hallo'}#}
+{#)) %}#}
 </body>
 </html>
