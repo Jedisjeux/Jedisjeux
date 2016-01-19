@@ -53,21 +53,6 @@ class PageController extends Controller
     }
 
     /**
-     * @Route("/{name}", requirements={"name" = ".+"}, name="admin_page_show")
-     *
-     * @param string $name
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function showAction($name)
-    {
-        $page = $this->findOr404($name);
-
-        return $this->render("backend/content/page/show.html.twig", array(
-            'page' => $page,
-        ));
-    }
-
-    /**
      * @Route("/new", name="admin_page_new")
      *
      * @param Request $request

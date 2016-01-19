@@ -66,14 +66,16 @@
         {% block page_heading %}
             <div class="page-heading-two">
                 <div class="container">
-                    <h2>{% block headline %}Titre de la page{% endblock headline %}
-                        {% block subtitle_container %}
-                            <span>{% block subtitle %}{#Something can go here#}{% endblock subtitle %}</span>
-                        {% endblock subtitle_container %}
-                    </h2>
+                    {% block headline_container %}
+                        <h2>{% block headline %}Titre de la page{% endblock headline %}
+                            {% block subtitle_container %}
+                                <span>{% block subtitle %}{#Something can go here#}{% endblock subtitle %}</span>
+                            {% endblock subtitle_container %}
+                        </h2>
+                    {% endblock headline_container %}
                     {% block breadcrumb_container %}
                         <div class="breads">
-                                <a href="{{ path('jdj_web_homepage') }}">Accueil</a> /
+                            <a href="{{ path('jdj_web_homepage') }}">Accueil</a> /
                             {% block breadcrumb_content %}
                                 {#<a href="#">Page</a> / #}
                                 {#<a href="#">Sub Page</a>#}
@@ -97,8 +99,6 @@
                     {% include "layout/_notify.html.twig" %}
 
                     {% include "layout/login-form-modal.html.twig" %}
-
-
 
 
                     <div class="row">
