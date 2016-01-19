@@ -46,13 +46,13 @@
                 <td class="text-right">
                     <ul class="list-inline text-nowrap">
                         <li>
-                            {{ button.show(path('page_show', { 'id': page.name })) }}
+                            {{ button.show(path('admin_page_show', { 'name': page.name })) }}
                         </li>
                         <li>
-                            {{ button.edit(path('admin_page_edit', { 'id': page.name })) }}
+                            {{ button.edit(path('admin_page_edit', { 'name': page.name })) }}
                         </li>
                         <li>
-                            {{ button.delete(path('admin_page_delete', { 'id': page.name })) }}
+                            {{ button.delete(path('admin_page_delete', { 'name': page.name })) }}
                         </li>
                     </ul>
                 </td>

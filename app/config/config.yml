@@ -36,7 +36,7 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ 'JDJWebBundle', 'JDJJeuBundle', "FOSCommentBundle", "MopaBootstrapBundle" ]
+    bundles:        [ 'JDJWebBundle', 'JDJJeuBundle', "FOSCommentBundle", "MopaBootstrapBundle", "CmfCreateBundle" ]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~

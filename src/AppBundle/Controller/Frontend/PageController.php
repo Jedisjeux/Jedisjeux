@@ -26,31 +26,31 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class PageController extends Controller
 {
     /**
-     * @Route("/{id}", requirements={"id" = ".+"}, name="page_show")
+     * @Route("/{name}", requirements={"name" = ".+"}, name="page_show")
      *
-     * @param string $id
+     * @param string $name
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showAction($id)
+    public function showAction($name)
     {
-        $page = $this->findOr404($id);
+        $page = $this->findOr404($name);
 
-        return $this->render("frontend/page/show.html.twig", array(
+        return $this->render("frontend/content/page/show.html.twig", array(
             'page' => $page,
         ));
     }
 
     /**
-     * @param string $id
+     * @param string $name
      * @return StaticContent
      */
-    protected function findOr404($id) {
+    protected function findOr404($name) {
         $page = $this
             ->getRepository()
-            ->findStaticContent($id);
+            ->findStaticContent($name);
 
         if (null === $page) {
-            throw new NotFoundHttpException(sprintf("Page %s not found", $id));
+            throw new NotFoundHttpException(sprintf("Page %s not found", $name));
         }
 
         return $page;

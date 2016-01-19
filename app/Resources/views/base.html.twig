@@ -31,6 +31,8 @@
         <link rel="stylesheet" href="{{ asset_url }}"/>
         {% endstylesheets %}
 
+        {% include "CmfCreateBundle::includecssfiles.html.twig" %}
+
     {% endblock head_style %}
 
     <!-- Styles -->
@@ -200,6 +202,7 @@
     {% endjavascripts %}
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+    {% render(controller("cmf_create.jsloader.controller:includeJSFilesAction")) %}
 {% endblock foot_script_assetic %}
 </body>
 </html>

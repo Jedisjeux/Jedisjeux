@@ -47,13 +47,28 @@ class PageController extends Controller
             ->createPaginator($criteria, $sorting)
             ->setCurrentPage($request->get('page', 1));
 
-        return $this->render('backend/page/index.html.twig', array(
+        return $this->render('backend/content/page/index.html.twig', array(
             'pages' => $pages,
         ));
     }
 
     /**
-     * @Route("/new", requirements={"id" = ".+"}, name="admin_page_new")
+     * @Route("/{name}", requirements={"name" = ".+"}, name="admin_page_show")
+     *
+     * @param string $name
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showAction($name)
+    {
+        $page = $this->findOr404($name);
+
+        return $this->render("backend/content/page/show.html.twig", array(
+            'page' => $page,
+        ));
+    }
+
+    /**
+     * @Route("/new", name="admin_page_new")
      *
      * @param Request $request
      * @return Response
@@ -74,26 +89,26 @@ class PageController extends Controller
 
             return $this->redirect($this->generateUrl(
                 'page_show',
-                array('id' => $page->getName())
+                array('name' => $page->getName())
             ));
         }
 
-        return $this->render("backend/page/new.html.twig", array(
+        return $this->render("backend/content/page/new.html.twig", array(
             'page' => $page,
             'form' => $form->createView(),
         ));
     }
 
     /**
-     * @Route("/{id}/edit", requirements={"id" = ".+"}, name="admin_page_edit")
+     * @Route("/{name}/edit", requirements={"name" = ".+"}, name="admin_page_edit")
      *
      * @param Request $request
-     * @param string $id
+     * @param string $name
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction(Request $request, $name)
     {
-        $page = $this->findOr404($id);
+        $page = $this->findOr404($name);
 
         $form = $this->createForm(new PageType(), $page);
         $form->handleRequest($request);
@@ -105,26 +120,26 @@ class PageController extends Controller
 
             return $this->redirect($this->generateUrl(
                 'page_show',
-                array('id' => $page->getName())
+                array('name' => $page->getName())
             ));
         }
 
-        return $this->render("backend/page/edit.html.twig", array(
+        return $this->render("backend/content/page/edit.html.twig", array(
             'page' => $page,
             'form' => $form->createView(),
         ));
     }
 
     /**
-     * @Route("/{id}/delete", name="admin_page_delete")
+     * @Route("/{name}/delete", name="admin_page_delete")
      *
-     * @param string $id
+     * @param string $name
      *
      * @return RedirectResponse
      */
-    public function deleteAction($id)
+    public function deleteAction($name)
     {
-        $page = $this->findOr404($id);
+        $page = $this->findOr404($name);
         $this->getManager()->remove($page);
         $this->getManager()->flush();
 
@@ -134,17 +149,17 @@ class PageController extends Controller
     }
 
     /**
-     * @param string $id
+     * @param string $name
      * @return StaticContent
      */
-    protected function findOr404($id)
+    protected function findOr404($name)
     {
         $page = $this
             ->getRepository()
-            ->findStaticContent($id);
+            ->findStaticContent($name);
 
         if (null === $page) {
-            throw new NotFoundHttpException(sprintf("Page %s not found", $id));
+            throw new NotFoundHttpException(sprintf("Page %s not found", $name));
         }
 
         return $page;
