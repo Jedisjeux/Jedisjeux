@@ -57,6 +57,8 @@ class AppKernel extends Kernel
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new Ob\HighchartsBundle\ObHighchartsBundle(),
             new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
+            new Bmatzner\JQueryUIBundle\BmatznerJQueryUIBundle(),
+            new Bmatzner\JQueryBundle\BmatznerJQueryBundle(),
 
             //JDJ
             new JDJ\WebBundle\JDJWebBundle(),
