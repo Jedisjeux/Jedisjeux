@@ -10,6 +10,7 @@ namespace AppBundle\Command;
 
 use Doctrine\ODM\PHPCR\Document\Generic;
 use Doctrine\ODM\PHPCR\DocumentManager;
+use PHPCR\Util\NodeHelper;
 use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SimpleBlock;
@@ -91,7 +92,16 @@ class LoadBlocksCommand extends ContainerAwareCommand
      */
     protected function getParent()
     {
-        return $this->getManager()->find(null, '/cms/blocks');
+        $contentBasepath = '/cms/blocks';
+        $parent = $this->getManager()->find(null, $contentBasepath);
+
+        if (null === $parent) {
+            $session = $this->getManager()->getPhpcrSession();
+            NodeHelper::createPath($session, $contentBasepath);
+            $parent = $this->getManager()->find(null, $contentBasepath);
+        }
+
+        return $parent;
     }
 
     /**
