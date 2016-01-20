@@ -183,6 +183,11 @@
 {#'bundles/bmatznerjquery/js/jquery.min.js'#}
 {#'bundles/bmatznerjqueryui/js/minified/jquery-ui.min.js'#}
 
+{% render(controller(
+"cmf_create.jsloader.controller:includeJSFilesAction",
+{'_locale': app.request.locale, 'editor': 'hallo'}
+)) %}
+
 {% block foot_script_assetic %}
     {% javascripts output='js/compiled/all.js'
     '@MopaBootstrapBundle/Resources/public/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js'
@@ -206,9 +211,5 @@
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 {% endblock foot_script_assetic %}
-{% render(controller(
-    "cmf_create.jsloader.controller:includeJSFilesAction",
-    {'_locale': app.request.locale, 'editor': 'hallo'}
-)) %}
 </body>
 </html>
