@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5500d13b61f0ff4edbc47d560defd4a6",
-    "content-hash": "3c87c4418e4aba0dfe8e19f37da17983",
+    "hash": "952ae2b0428bf80367647e7d5663c282",
+    "content-hash": "6f3a64d35c86bdc52e7982cf54a6b91f",
     "packages": [
         {
             "name": "behat/behat",
@@ -214,7 +214,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/minkphp/MinkBrowserKitDriver/zipball/05e3b3116eaf525ce1d4bbd0374ecb65df3e3d64",
+                "url": "https://api.github.com/repos/minkphp/MinkBrowserKitDriver/zipball/2650f5420e713e3807c7f09a07370a4f48367bf9",
                 "reference": "05e3b3116eaf525ce1d4bbd0374ecb65df3e3d64",
                 "shasum": ""
             },
@@ -390,7 +390,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Symfony2Extension/zipball/516d27dd9119a1d99a27244cd3dca1712e76d2c6",
+                "url": "https://api.github.com/repos/Behat/Symfony2Extension/zipball/7fb32ea4bc3d8264a89eba4275c0c868acf7cb1c",
                 "reference": "516d27dd9119a1d99a27244cd3dca1712e76d2c6",
                 "shasum": ""
             },
@@ -526,6 +526,98 @@
                 "webfonts"
             ],
             "time": "2015-08-11 17:29:13"
+        },
+        {
+            "name": "bmatzner/jquery-bundle",
+            "version": "2.1.1",
+            "target-dir": "Bmatzner/JQueryBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bmatzner/BmatznerJQueryBundle.git",
+                "reference": "c47ebfd993782560d425081d6866393274537953"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bmatzner/BmatznerJQueryBundle/zipball/c47ebfd993782560d425081d6866393274537953",
+                "reference": "c47ebfd993782560d425081d6866393274537953",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/framework-bundle": ">=2.1"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Bmatzner\\JQueryBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT",
+                "GPLv2"
+            ],
+            "authors": [
+                {
+                    "name": "Bernd Matzner",
+                    "email": "bernd@matznermatzner.de",
+                    "homepage": "http://berndmatzner.de"
+                }
+            ],
+            "description": "jQuery Bundle for Symfony2",
+            "homepage": "http://jquery.com/",
+            "keywords": [
+                "javascript",
+                "jquery",
+                "symfony"
+            ],
+            "time": "2014-05-05 16:19:00"
+        },
+        {
+            "name": "bmatzner/jquery-ui-bundle",
+            "version": "1.10.3",
+            "target-dir": "Bmatzner/JQueryUIBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bmatzner/BmatznerJQueryUIBundle.git",
+                "reference": "43d66b83d0b1a8e080134a6f73fab380ee20d978"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bmatzner/BmatznerJQueryUIBundle/zipball/43d66b83d0b1a8e080134a6f73fab380ee20d978",
+                "reference": "43d66b83d0b1a8e080134a6f73fab380ee20d978",
+                "shasum": ""
+            },
+            "require": {
+                "bmatzner/jquery-bundle": "*",
+                "symfony/framework-bundle": ">=2.1"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Bmatzner\\JQueryUIBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT",
+                "GPLv2"
+            ],
+            "authors": [
+                {
+                    "name": "Bernd Matzner",
+                    "email": "bernd@matznermatzner.de",
+                    "homepage": "http://berndmatzner.de"
+                }
+            ],
+            "description": "jQuery UI Bundle for Symfony2",
+            "homepage": "http://jqueryui.com/",
+            "keywords": [
+                "javascript",
+                "jquery",
+                "symfony",
+                "ui"
+            ],
+            "time": "2013-05-19 14:33:38"
         },
         {
             "name": "cocur/slugify",
@@ -1927,7 +2019,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSCommentBundle/zipball/c5eff3c452bc1b01f8afe82d555f335a00b08335",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSCommentBundle/zipball/634d94ae98e21c48c935912baac2176241812061",
                 "reference": "c5eff3c452bc1b01f8afe82d555f335a00b08335",
                 "shasum": ""
             },
@@ -3748,7 +3840,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/ae747e18207d5196bc9f6b5219a1d45953a375e3",
+                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/271088a255b995dd5cbee7608d29ad3c5e988846",
                 "reference": "ae747e18207d5196bc9f6b5219a1d45953a375e3",
                 "shasum": ""
             },
