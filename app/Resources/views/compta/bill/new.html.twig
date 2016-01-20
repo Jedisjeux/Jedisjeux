@@ -1,10 +1,17 @@
 {% extends "::base.html.twig" %}
 {% import 'macros/actions.html.twig' as action %}
 
+{% block headline %}
+    Nouvelle facture
+{% endblock headline %}
+
+{% block breadcrumb_container %}
+    <a href="{{ path('jdj_compta_homepage') }}">Comptabilité</a> /
+    <a href="{{ path('compta_bill') }}">Factures</a> /
+    Nouveau
+{% endblock breadcrumb_container %}
+
 {% block container %}
-    <div class="block-heading-two">
-        <h3><span>Créer une facture</span></h3>
-    </div>
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ action.create(path('compta_bill')) }}

@@ -13,12 +13,17 @@
     {% set currentOrder = 'desc' %}
 {% endif %}
 
+{% block headline %}
+    Liste des abonnements
+{% endblock headline %}
+
+{% block breadcrumb_container %}
+    <a href="{{ path('jdj_compta_homepage') }}">Comptabilité</a> /
+    Abonnements
+{% endblock breadcrumb_container %}
+
 {% block new_entity_button %}
 {% endblock new_entity_button %}
-
-{% block page_title %}
-    Liste des abonnements
-{% endblock page_title %}
 
 {% block list %}
     <table class="table table-striped">

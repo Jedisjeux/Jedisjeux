@@ -1,10 +1,17 @@
 {% extends 'base.html.twig' %}
 {% import 'macros/actions.html.twig' as action %}
 
+{% block headline %}
+    Nouveau mode de paiement
+{% endblock headline %}
+
+{% block breadcrumb_container %}
+    <a href="{{ path('jdj_compta_homepage') }}">Comptabilité</a> /
+    <a href="{{ path('compta_payment_method') }}">Modes de paiement</a> /
+    Nouveau
+{% endblock breadcrumb_container %}
+
 {% block container %}
-    <div class="block-heading-two">
-        <h3><span>Créer une méthode de paiement</span></h3>
-    </div>
     {{ form_start(form) }}
     {% include 'compta/payment-method/_form.html.twig' %}
     {{ action.create() }}

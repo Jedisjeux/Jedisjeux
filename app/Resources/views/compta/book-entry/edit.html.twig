@@ -1,8 +1,15 @@
 {% extends "::base.html.twig" %}
 
+{% block headline %}
+    Modifier une écriture comptable
+{% endblock headline %}
+
+{% block breadcrumb_container %}
+    <a href="{{ path('jdj_compta_homepage') }}">Comptabilité</a> /
+    <a href="{{ path('compta_book_entry') }}">Écritures comptables</a> /
+    Modifier
+{% endblock breadcrumb_container %}
+
 {% block container -%}
-    <div class="block-heading-two">
-        <h3><span>Modifier une écriture comptable</span></h3>
-    </div>
     {{ form(form) }}
 {% endblock container %}

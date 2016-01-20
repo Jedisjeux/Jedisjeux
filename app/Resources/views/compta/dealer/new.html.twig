@@ -1,10 +1,17 @@
 {% extends "::base.html.twig" %}
 {% import 'macros/actions.html.twig' as action %}
 
+{% block headline %}
+    Nouveau distributeur
+{% endblock headline %}
+
+{% block breadcrumb_container %}
+    <a href="{{ path('jdj_compta_homepage') }}">Comptabilité</a> /
+    <a href="{{ path('compta_dealer') }}">Distributeurs</a> /
+    Nouveau
+{% endblock breadcrumb_container %}
+
 {% block container %}
-    <div class="block-heading-two">
-        <h3><span>Créer un distributeur</span></h3>
-    </div>
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ action.create() }}

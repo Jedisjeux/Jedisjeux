@@ -14,16 +14,21 @@
     {% set currentOrder = 'desc' %}
 {% endif %}
 
+{% block headline %}
+    Liste des factures
+{% endblock headline %}
+
+{% block breadcrumb_container %}
+    <a href="{{ path('jdj_compta_homepage') }}">Comptabilité</a> /
+    Factures
+{% endblock breadcrumb_container %}
+
 {% block new_entity_button %}
     <a class="btn btn-primary" href="{{ path('compta_bill_create') }}">
         <span class="glyphicon glyphicon-plus-sign"></span>
         Créer une facture
     </a>
 {% endblock new_entity_button %}
-
-{% block page_title %}
-    Liste des factures
-{% endblock page_title %}
 
 {% block list %}
     <table class="table table-striped">

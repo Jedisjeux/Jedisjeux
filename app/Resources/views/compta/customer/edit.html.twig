@@ -1,10 +1,17 @@
 {% extends 'base.html.twig' %}
 {% import 'macros/actions.html.twig' as action %}
 
+{% block headline %}
+    Modifier un client
+{% endblock headline %}
+
+{% block breadcrumb_container %}
+    <a href="{{ path('jdj_compta_homepage') }}">Comptabilité</a> /
+    <a href="{{ path('compta_customer') }}">Clients</a> /
+    Modifier
+{% endblock breadcrumb_container %}
+
 {% block container -%}
-    <div class="block-heading-two">
-        <h3><span>Modifier un client</span></h3>
-    </div>
     {{ form_start(form) }}
     {% include 'compta/customer/_form.html.twig' %}
     {{ action.update(path('compta_customer')) }}
