@@ -21,7 +21,7 @@
         'assets/css/styles/style.css'
         'assets/css/styles/skin-lblue.css'
         'assets/stylesheets/base.css'
-        'assets/bower_components/jquery-ui/themes/base/jquery-ui.min.css'
+        'bundles/bmatznerjqueryui/css/smoothness/jquery-ui.css'
         'assets/bower_components/bootstrap-star-rating/css/star-rating.min.css'
         'assets/bower_components/fancybox/source/jquery.fancybox.css'
         'assets/bower_components/fancybox/source/helpers/jquery.fancybox-buttons.css'
@@ -178,14 +178,16 @@
 
 <!-- Javascript files -->
 
+
+{#'bundles/bmatznerjquery/js/jquery.min.js'#}
+{#'bundles/bmatznerjqueryui/js/minified/jquery-ui.min.js'#}
+
 {% block foot_script_assetic %}
     {% javascripts output='js/compiled/all.js'
-    'assets/bower_components/jquery/dist/jquery.min.js'
     '@MopaBootstrapBundle/Resources/public/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js'
     '@MopaBootstrapBundle/Resources/public/bootstrap-sass/assets/javascripts/bootstrap/*.js'
     '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-collection.js'
     '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-subnav.js'
-    'assets/bower_components/jquery-ui/jquery-ui.min.js'
     'assets/bower_components/bootstrap-star-rating/js/star-rating.min.js'
     'assets/bower_components/fancybox/lib/jquery.mousewheel-3.0.6.pack.js'
     'assets/bower_components/fancybox/source/jquery.fancybox.pack.js'
@@ -203,9 +205,9 @@
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 {% endblock foot_script_assetic %}
-{#{% render(controller(#}
-    {#"cmf_create.jsloader.controller:includeJSFilesAction",#}
-    {#{'_locale': app.request.locale, 'editor': 'hallo'}#}
-{#)) %}#}
+{% render(controller(
+    "cmf_create.jsloader.controller:includeJSFilesAction",
+    {'_locale': app.request.locale, 'editor': 'hallo'}
+)) %}
 </body>
 </html>
