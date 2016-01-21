@@ -5,11 +5,11 @@
     Nouveau mode de paiement
 {% endblock headline %}
 
-{% block breadcrumb_container %}
+{% block breadcrumb_content %}
     <a href="{{ path('jdj_compta_homepage') }}">Comptabilité</a> /
     <a href="{{ path('compta_payment_method') }}">Modes de paiement</a> /
     Nouveau
-{% endblock breadcrumb_container %}
+{% endblock breadcrumb_content %}
 
 {% block container %}
     {{ form_start(form) }}

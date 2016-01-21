@@ -4,11 +4,11 @@
     Modifier une écriture comptable
 {% endblock headline %}
 
-{% block breadcrumb_container %}
+{% block breadcrumb_content %}
     <a href="{{ path('jdj_compta_homepage') }}">Comptabilité</a> /
     <a href="{{ path('compta_book_entry') }}">Écritures comptables</a> /
     Modifier
-{% endblock breadcrumb_container %}
+{% endblock breadcrumb_content %}
 
 {% block container -%}
     {{ form(form) }}
