@@ -3,5 +3,7 @@
 {% endif %}
 
 {% createphp cmfMainContent as='rdf' noautotag %}
-{{ createphp_content(rdf.body) }}
+<div {{ createphp_attributes(rdf) }}>
+    <div {{ createphp_attributes(rdf.body) }}>{{ createphp_content(rdf.body) }}</div>
+</div>
 {% endcreatephp %}
