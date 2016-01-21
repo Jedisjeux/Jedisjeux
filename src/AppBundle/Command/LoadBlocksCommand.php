@@ -82,7 +82,7 @@ class LoadBlocksCommand extends ContainerAwareCommand
     {
         $page = $this
             ->getRepository()
-            ->find('/cms/blocks/'.$id);
+            ->find('/cms/blocks/' . $id);
 
         return $page;
     }
@@ -126,7 +126,18 @@ class LoadBlocksCommand extends ContainerAwareCommand
             array(
                 'name' => 'about',
                 'title' => 'A propos',
-                'body' => '<p>Jedisjeux est une association loi 1901.</p>',
+                'body' => '
+<p>Jedisjeux est une association loi 1901.</p>
+                ',
+            ),
+            array(
+                'name' => 'head-office',
+                'title' => 'Siège social',
+                'body' => '
+    <p class="add">
+        16 rue DOM François Plaine<br>
+        35137 Bédée</p>
+    ',
             ),
         );
     }

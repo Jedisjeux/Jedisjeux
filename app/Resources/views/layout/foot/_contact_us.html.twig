@@ -6,11 +6,7 @@
     <div class="foot-item-content address">
         <!-- Heading -->
         <h6 class="bold"><i class="fa fa-home"></i>&nbsp;&nbsp;Jedisjeux.net</h6>
-        <!-- Paragraph -->
-        <p class="add">
-            16 rue DOM François Plaine<br/>
-            35137 Bédée</p>
-
+        {{ sonata_block_render({'name': '/cms/blocks/head-office'}, {'template': 'frontend/content/block/block_content.html.twig'}) }}
         <p class="tel">
             <i class="fa fa-envelope"></i> Mail : <a href="#">jedisjeux@jedisjeux.net</a>
     </div>
