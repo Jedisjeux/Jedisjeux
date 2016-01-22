@@ -207,10 +207,10 @@
     <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 {% endblock foot_script_assetic %}
 
-{#{% render(controller(#}
-{#"cmf_create.jsloader.controller:includeJSFilesAction",#}
-{#{'_locale': app.request.locale}#}
-{#)) %}#}
+{% render(controller(
+"cmf_create.jsloader.controller:includeJSFilesAction",
+{'_locale': app.request.locale}
+)) %}
 
 </body>
 </html>
