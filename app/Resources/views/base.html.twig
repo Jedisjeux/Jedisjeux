@@ -197,6 +197,7 @@
     'assets/bower_components/magnific-popup/dist/jquery.magnific-popup.min.js'
     'assets/bower_components/moment/min/moment.min.js'
     'assets/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
+    'assets/js/includes/*.js'
     'assets/js/*.js'
     'assets/js/modules/*/*'
     '@JDJJeuBundle/Resources/public/js/jeu/*' %}
@@ -206,9 +207,10 @@
     <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 {% endblock foot_script_assetic %}
 
-{% render(controller(
-"cmf_create.jsloader.controller:includeJSFilesAction",
-{'_locale': app.request.locale}
-)) %}
+{#{% render(controller(#}
+{#"cmf_create.jsloader.controller:includeJSFilesAction",#}
+{#{'_locale': app.request.locale}#}
+{#)) %}#}
+
 </body>
 </html>
