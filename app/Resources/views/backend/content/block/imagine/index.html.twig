@@ -15,19 +15,19 @@
 {% endif %}
 
 {% block headline %}
-    Blocs simples
+    Blocs imagine
 {% endblock headline %}
 
 {% block breadcrumb_content %}
     {{ parent() }}
     Contenu /
     <a href="{{ path('admin_block_index') }}">Blocs</a> /
-    Blocs simples
+    Blocs imagine
 {% endblock %}
 
 
 {% block new_entity_button %}
-    <a class="btn btn-primary" href="{{ path('admin_block_simple_new') }}">
+    <a class="btn btn-primary" href="{{ path('admin_imagine_block_new') }}">
         <span class="glyphicon glyphicon-plus-sign"></span>
         Nouveau bloc
     </a>
@@ -42,7 +42,7 @@
         <thead>
         <tr>
             <th>#</th>
-            <th>{{ sorting('admin_block_simple_index', 'label.title'|trans, 'title', 'asc', icon, currentOrder) }}</th>
+            <th>{{ sorting('admin_imagine_block_index', 'label.name'|trans, 'label', 'asc', icon, currentOrder) }}</th>
         </tr>
         </thead>
         <tbody>
@@ -52,12 +52,12 @@
                 <td>{{ block.title }}</td>
                 <td class="text-right">
                     <ul class="list-inline text-nowrap">
-                        <li>
-                            {{ button.edit(path('admin_block_simple_edit', { 'name': block.name })) }}
-                        </li>
-                        <li>
-                            {{ button.delete(path('admin_block_simple_delete', { 'name': block.name })) }}
-                        </li>
+                        {#<li>#}
+                            {#{{ button.edit(path('admin_imagine_block_edit', { 'name': block.name })) }}#}
+                        {#</li>#}
+                        {#<li>#}
+                            {#{{ button.delete(path('admin_imagine_block_delete', { 'name': block.name })) }}#}
+                        {#</li>#}
                     </ul>
                 </td>
             </tr>
