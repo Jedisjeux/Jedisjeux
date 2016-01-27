@@ -2,7 +2,7 @@
 {% import 'macros/actions.html.twig' as action %}
 
 {% block headline %}
-    Modifier un block imagine
+    Nouveau bloc imagine
 {% endblock headline %}
 
 {% block breadcrumb_content %}
@@ -10,12 +10,13 @@
     Contenu /
     <a href="{{ path('admin_block_index') }}">Blocs</a> /
     <a href="{{ path('admin_imagine_block_index') }}">Blocs imagine</a> /
-    Modifier
+    Nouveau
 {% endblock %}
+
 
 {% block container %}
     {{ form_start(form) }}
     {{ form_widget(form) }}
-    {{ action.update() }}
+    {{ action.create() }}
     {{ form_end(form) }}
 {% endblock container %}

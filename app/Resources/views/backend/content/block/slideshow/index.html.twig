@@ -41,7 +41,6 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>{{ 'label.image'|trans }}</th>
             <th>#</th>
             <th>{{ sorting('admin_imagine_block_index', 'label.name'|trans, 'label', 'asc', icon, currentOrder) }}</th>
         </tr>
@@ -49,7 +48,6 @@
         <tbody>
         {% for block in blocks %}
             <tr>
-                <td><img class="img-round" src="{{ block.image.id | imagine_filter("image_upload_thumbnail") }}" alt="{{ block.label }}" /></td>
                 <td>{{ block.id }}</td>
                 <td>{{ block.label }}</td>
                 <td class="text-right">

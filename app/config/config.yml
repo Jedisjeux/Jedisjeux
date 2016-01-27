@@ -264,6 +264,11 @@ liip_imagine:
             quality: 100
             filters:
                 thumbnail: { size: [80, 55], mode: outbound }
+        # define the filter to be used with the image preview
+        image_upload_thumbnail:
+            data_loader: cmf_media_doctrine_phpcr
+            filters:
+                thumbnail: { size: [100, 100], mode: outbound }
 
 sonata_block:
     default_contexts: [cms]
