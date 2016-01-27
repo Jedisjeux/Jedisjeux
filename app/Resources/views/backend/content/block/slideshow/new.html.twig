@@ -2,14 +2,14 @@
 {% import 'macros/actions.html.twig' as action %}
 
 {% block headline %}
-    Nouveau bloc imagine
+    Nouveau bloc diaporama
 {% endblock headline %}
 
 {% block breadcrumb_content %}
     {{ parent() }}
     Contenu /
     <a href="{{ path('admin_block_index') }}">Blocs</a> /
-    <a href="{{ path('admin_imagine_block_index') }}">Blocs imagine</a> /
+    <a href="{{ path('admin_slideshow_block_index') }}">Blocs diaporama</a> /
     Nouveau
 {% endblock %}
 

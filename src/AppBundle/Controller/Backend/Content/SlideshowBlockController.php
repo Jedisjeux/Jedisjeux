@@ -38,7 +38,7 @@ class SlideshowBlockController extends Controller
     public function indexAction(Request $request)
     {
         $criteria = $request->get('criteria', array());
-        $sorting = $request->get('sorting', array('label' => 'asc'));
+        $sorting = $request->get('sorting', array('title' => 'asc'));
 
         $blocks = $this
             ->getRepository()
