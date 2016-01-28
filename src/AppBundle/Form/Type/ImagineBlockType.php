@@ -28,16 +28,17 @@ class ImagineBlockType extends AbstractType
             ->add('name', 'text', array(
                 'label' => 'label.internal_name'
             ))
+           ->add('image', 'cmf_media_image', array(
+                'label' => 'label.image',
+                'attr' => array('class' => 'imagine-thumbnail'),
+                'required' => false
+            ))
             ->add('label', 'text', array(
-                'label' => 'label.name'
+                'label' => 'label.description',
+                'required' => false,
             ))
             ->add('linkUrl', 'text', array(
                 'label' => 'label.link_url',
-                'required' => false
-            ))
-            ->add('image', 'cmf_media_image', array(
-                'label' => 'label.image',
-                'attr' => array('class' => 'imagine-thumbnail'),
                 'required' => false
             ))
             ->add('publishable', null, array(

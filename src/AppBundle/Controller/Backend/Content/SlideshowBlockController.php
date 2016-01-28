@@ -15,6 +15,7 @@ use PHPCR\Util\NodeHelper;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SlideshowBlock;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -61,6 +62,9 @@ class SlideshowBlockController extends Controller
         $block = new SlideshowBlock();
         $block
             ->setParentDocument($this->getParent());
+
+        $block
+            ->addChildren(new ImagineBlock());
 
         $form = $this->createForm(new SlideshowBlockType(), $block);
         $form->handleRequest($request);

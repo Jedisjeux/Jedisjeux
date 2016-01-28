@@ -38,14 +38,23 @@
         <thead>
         <tr>
             <th>#</th>
-            <th>{{ sorting('admin_slideshow_block_index', 'label.name'|trans, 'label', 'asc', icon, currentOrder) }}</th>
+            <th>{{ sorting('admin_slideshow_block_index', 'label.title'|trans, 'title', 'asc', icon, currentOrder) }}</th>
+            <th>{{ 'label.images'|trans }}</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
         {% for block in blocks %}
             <tr>
                 <td>{{ block.id }}</td>
-                <td>{{ block.label }}</td>
+                <td>{{ block.title }}</td>
+                <td>
+                    {% for imagineBlock in block.children %}
+                        <img class="img-round"
+                             src="{{ imagineBlock.image.id | imagine_filter("image_upload_thumbnail") }}"
+                             alt="{{ imagineBlock.label }}"/>
+                    {% endfor %}
+                </td>
                 <td class="text-right">
                     <ul class="list-inline text-nowrap">
                         <li>

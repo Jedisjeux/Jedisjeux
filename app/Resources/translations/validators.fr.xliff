@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2016-01-18T14:20:02Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+  <file date="2016-01-28T13:26:43Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -74,6 +74,26 @@
       <trans-unit id="920e8d37f8a7c923ece7d123d55668ac522d612d" resname="fos_user.username.short">
         <source>fos_user.username.short</source>
         <target state="new">Ce nom d'utilisateur est trop court.</target>
+      </trans-unit>
+      <trans-unit id="b3caf7e558d8a51b46816961a351049aa5eaabf7" resname="sylius.static_content.body.not_blank">
+        <source>sylius.static_content.body.not_blank</source>
+        <target state="new">sylius.static_content.body.not_blank</target>
+      </trans-unit>
+      <trans-unit id="cb89a8f8c3deff93a06ec7e1d1d5cc67482d8fac" resname="sylius.static_content.end_date.invalid_date">
+        <source>sylius.static_content.end_date.invalid_date</source>
+        <target state="new">sylius.static_content.end_date.invalid_date</target>
+      </trans-unit>
+      <trans-unit id="9d327b45477321e3337e90a3b5a7c00c2788faa5" resname="sylius.static_content.name.not_blank">
+        <source>sylius.static_content.name.not_blank</source>
+        <target state="new">sylius.static_content.name.not_blank</target>
+      </trans-unit>
+      <trans-unit id="57989723afa8066e9ee00051591cee48357c0ab2" resname="sylius.static_content.start_date.invalid_date">
+        <source>sylius.static_content.start_date.invalid_date</source>
+        <target state="new">sylius.static_content.start_date.invalid_date</target>
+      </trans-unit>
+      <trans-unit id="9fd749b7c6145ca52100243df37e2568342403c6" resname="sylius.static_content.title.not_blank">
+        <source>sylius.static_content.title.not_blank</source>
+        <target state="new">sylius.static_content.title.not_blank</target>
       </trans-unit>
     </body>
   </file>
