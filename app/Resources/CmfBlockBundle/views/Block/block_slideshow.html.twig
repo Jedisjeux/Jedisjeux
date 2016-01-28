@@ -1,0 +1,16 @@
+{% extends sonata_block.templates.block_base %}
+
+{% block block %}
+
+    {% if block.children %}
+        {% if block.title %}
+            <h3>{{ block.title }}</h3>
+        {% endif %}
+        <div class="owl-carousel">
+            {% for item in block.children %}
+                <div>{{ sonata_block_render( {'name': item.id} ) }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+{% endblock %}

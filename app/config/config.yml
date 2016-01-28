@@ -269,6 +269,10 @@ liip_imagine:
             data_loader: cmf_media_doctrine_phpcr
             filters:
                 thumbnail: { size: [100, 100], mode: outbound }
+        cmf_block:
+            data_loader: cmf_media_doctrine_phpcr
+            filters:
+                thumbnail: { size: [1024, 768], mode: outbound }
 
 sonata_block:
     default_contexts: [cms]
