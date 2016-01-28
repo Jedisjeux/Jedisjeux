@@ -58,6 +58,9 @@
                 <td class="text-right">
                     <ul class="list-inline text-nowrap">
                         <li>
+                            {{ button.show(path('admin_slideshow_block_show', { 'name': block.name })) }}
+                        </li>
+                        <li>
                             {{ button.edit(path('admin_slideshow_block_edit', { 'name': block.name })) }}
                         </li>
                         <li>

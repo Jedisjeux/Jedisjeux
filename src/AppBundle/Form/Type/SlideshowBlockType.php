@@ -134,7 +134,7 @@ class SlideshowBlockType extends AbstractType
         /** @var ImagineBlock $imagineBlock */
         foreach ($slideshowBlock->getChildren() as $imagineBlock) {
             $imagineBlock
-                ->setName(sprintf($slideshowBlock->getName() . '_%s', uniqid()))
+                ->setName($imagineBlock->getName() ? $imagineBlock->getName() : sprintf($slideshowBlock->getName() . '_%s', uniqid()))
                 ->setParentDocument($slideshowBlock);
         }
     }

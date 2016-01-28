@@ -130,6 +130,21 @@ class SlideshowBlockController extends Controller
     }
 
     /**
+     * @Route("/{name}/show", requirements={"name" = ".+"}, name="admin_slideshow_block_show")
+     *
+     * @param string $name
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showAction($name)
+    {
+        $block = $this->findOr404($name);
+
+        return $this->render("backend/content/block/slideshow/show.html.twig", array(
+            'block' => $block,
+        ));
+    }
+
+    /**
      * @param string $name
      * @return SlideshowBlock
      */
