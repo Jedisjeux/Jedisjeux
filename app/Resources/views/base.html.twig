@@ -94,58 +94,61 @@
 
             <div class="magazine">
 
-                <div class="container">
+                {% include "layout/_flashes.html.twig" %}
+                {% include "layout/_notify.html.twig" %}
 
-                    {% include "layout/_flashes.html.twig" %}
-                    {% include "layout/_notify.html.twig" %}
+                {% include "layout/login-form-modal.html.twig" %}
 
-                    {% include "layout/login-form-modal.html.twig" %}
+                {% block full_content %}
 
+                    <div class="container">
 
-                    <div class="row">
+                        <div class="row">
 
-                        {% block fos_user_content %}
-                            {% block body %}
-                                {% block container %}
-                                    <!--
-                                    Inherit this block to write
-                                    Content without sidebar
-                                    -->
-                                    <div class="col-md-8">
+                            {% block fos_user_content %}
+                                {% block body %}
+                                    {% block container %}
+                                        <!--
+                                        Inherit this block to write
+                                        Content without sidebar
+                                        -->
+                                        <div class="col-md-8">
 
-                                        {% block container_content %}
-                                            <!--
-                                            Inherit this block to write
-                                            Content with a sidebar
-                                            -->
-                                        {% endblock container_content %}
-
-                                    </div>
-
-                                    <!-- Sidebar column -->
-                                    <div class="col-md-4">
-
-                                        <!-- Sidebar -->
-                                        <div class="sidebar">
-
-                                            {% block sidebar_content %}
+                                            {% block container_content %}
                                                 <!--
                                                 Inherit this block to write
-                                                Content in the sidebar
+                                                Content with a sidebar
                                                 -->
-                                            {% endblock sidebar_content %}
+                                            {% endblock container_content %}
 
                                         </div>
 
-                                    </div>
+                                        <!-- Sidebar column -->
+                                        <div class="col-md-4">
 
-                                {% endblock container %}
-                            {% endblock body %}
-                        {% endblock fos_user_content %}
+                                            <!-- Sidebar -->
+                                            <div class="sidebar">
+
+                                                {% block sidebar_content %}
+                                                    <!--
+                                                    Inherit this block to write
+                                                    Content in the sidebar
+                                                    -->
+                                                {% endblock sidebar_content %}
+
+                                            </div>
+
+                                        </div>
+
+                                    {% endblock container %}
+                                {% endblock body %}
+                            {% endblock fos_user_content %}
+
+                        </div>
 
                     </div>
 
-                </div>
+                {% endblock full_content %}
 
             </div>
 
