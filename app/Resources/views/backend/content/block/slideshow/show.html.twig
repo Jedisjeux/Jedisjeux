@@ -13,8 +13,8 @@
     {{ block.title }}
 {% endblock %}
 
-{% block full_content %}
+{% block container %}
     {{ sonata_block_render({
         'name': block.id
     }) }}
-{% endblock full_content %}
+{% endblock container %}
