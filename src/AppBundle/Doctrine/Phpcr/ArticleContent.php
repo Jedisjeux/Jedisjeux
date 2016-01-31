@@ -14,15 +14,15 @@ use Symfony\Cmf\Bundle\ContentBundle\Doctrine\Phpcr\StaticContent;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class Article extends StaticContent
+class ArticleContent extends StaticContent
 {
     /**
      * state constants
      */
-    const WRITING = "WRITING";
-    const NEED_A_REVIEW = "NEED_A_REVIEW";
-    const READY_TO_PUBLISH = "READY_TO_PUBLISH";
-    const PUBLISHED = "PUBLISHED";
+    const WRITING = "writing";
+    const NEED_A_REVIEW = "need_a_review";
+    const READY_TO_PUBLISH = "ready_to_publish";
+    const PUBLISHED = "published";
 
     /**
      * @var string
