@@ -8,6 +8,7 @@
 
 namespace AppBundle\Command;
 
+use AppBundle\Document\ArticleBlock;
 use AppBundle\Document\ArticleContent;
 use Doctrine\ODM\PHPCR\Document\Generic;
 use Doctrine\ODM\PHPCR\DocumentManager;
@@ -44,8 +45,11 @@ class LoadArticlesCommand extends ContainerAwareCommand
 
         foreach ($this->getArticles() as $data) {
             $page = $this->createOrReplaceArticle($data);
+            $blocks = $this->getBlocks($data['blocks']);
+            $this->populateBlocks($page, $blocks);
             $this->getManager()->persist($page);
             $this->getManager()->flush();
+            $this->getManager()->clear();
         }
     }
 
@@ -61,15 +65,46 @@ class LoadArticlesCommand extends ContainerAwareCommand
             $article = new ArticleContent();
             $article
                 ->setParentDocument($this->getParent());
-            $article
-                ->setBody("");
-        }
 
+        }
+        $article->setBody("");
         $article->setName($data['name']);
         $article->setTitle($data['title']);
         $article->setPublishable(true);
 
         return $article;
+    }
+
+    protected function populateBlocks(ArticleContent $page, array $blocks)
+    {
+        foreach ($blocks as $data) {
+            $this->createOrReplaceBlock($page, $data);
+        }
+    }
+
+
+    protected function createOrReplaceBlock(ArticleContent $page, array $data)
+    {
+        $name = 'block'.$data['id'];
+
+        $block = $this
+            ->getArticleBlockRepository()
+            ->findOneBy(array('name' => $name));
+
+        if (null === $block) {
+            $block = new ArticleBlock();
+            $block
+                ->setParentDocument($page);
+        }
+
+        $block
+            ->setImagePosition($data['image_position'])
+            ->setTitle($data['title'])
+            ->setBody(sprintf('<p>%s</p>', $data['body']))
+            ->setName('block'.$data['id'])
+            ->setPublishable(true);
+
+        $this->getManager()->persist($block);
     }
 
     /**
@@ -111,6 +146,14 @@ class LoadArticlesCommand extends ContainerAwareCommand
     }
 
     /**
+     * @return DocumentRepository
+     */
+    public function getArticleBlockRepository()
+    {
+        return $this->getContainer()->get('app.repository.article_block');
+    }
+
+    /**
      * @return DocumentManager
      */
     public function getManager()
@@ -130,11 +173,37 @@ class LoadArticlesCommand extends ContainerAwareCommand
     {
         $query = <<<EOM
 select titre_clean as name,
-      titre as title
-from jedisjeux.jdj_article
+      titre as title,
+      group_concat(block.text_id) as blocks
+from jedisjeux.jdj_article article
+inner join jedisjeux.jdj_article_text as block
+      on block.article_id = article.article_id
 where titre_clean != ''
+group by article.article_id
 EOM;
 
         return $this->getDatabaseConnection()->fetchAll($query);
+    }
+
+    /**
+     * @param string $ids
+     * @return array
+     */
+    protected function getBlocks($ids)
+    {
+        $query = <<<EOM
+        select text_id as id,
+                text_titre as title,
+                text as body,
+                case style
+                    when 1 then 'left'
+                    when 2 then 'right'
+                    when 5 then 'top'
+                    when 6 then 'top'
+                end as image_position
+        from jedisjeux.jdj_article_text as block
+        where block.text_id in ($ids)
+EOM;
+     return $this->getDatabaseConnection()->fetchAll($query);
     }
 }

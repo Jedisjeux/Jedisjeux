@@ -6,10 +6,16 @@
  * Time: 19:33
  */
 
-namespace AppBundle\Doctrine\Phpcr;
+namespace AppBundle\Document;
 
+use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SimpleBlock;
 
+/**
+ * @author Loïc Frémont <loic@mobizel.com>
+ *
+ * @PHPCR\Document(referenceable=true)
+ */
 class ArticleBlock extends SimpleBlock
 {
     const POSITION_LEFT = 'left';
@@ -18,6 +24,8 @@ class ArticleBlock extends SimpleBlock
 
     /**
      * @var string
+     *
+     * @PHPCR\String(nullable=true)
      */
     protected $imagePosition;
 
