@@ -1,71 +1,46 @@
-{% extends "layout/backend_index.html.twig" %}
-{% from 'macros/misc.html.twig' import pagination %}
-{% import 'macros/buttons.html.twig' as button %}
-{% from 'macros/sorting.html.twig' import sorting %}
-{% import 'macros/modal.html.twig' as modal %}
-
-{% set sorting = app.request.get('sorting') %}
-
-{% set icon = false %}
-{% set currentOrder = null %}
-
-{% if null == sorting %}
-    {% set icon = true %}
-    {% set currentOrder = 'asc' %}
-{% endif %}
+{% extends 'backend/base.html.twig' %}
 
 {% block headline %}
-    Liste des pages
+    Blocs
 {% endblock %}
 
 {% block breadcrumb_content %}
-    {{ parent() }}
+    {{ parent() }} /
+    Contenu /
     Pages
 {% endblock %}
 
-{% block new_entity_button %}
-    <a class="btn btn-primary" href="{{ path('admin_page_new') }}">
-        <span class="glyphicon glyphicon-plus-sign"></span>
-        Nouvelle page
-    </a>
-{% endblock new_entity_button %}
-
-{% block list %}
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>{{ sorting('admin_page_index', 'label.title'|trans, 'title', 'asc', icon, currentOrder) }}</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for page in pages %}
-            <tr>
-                <td>{{ page.id }}</td>
-                <td>{{ page.title }}</td>
-                <td class="text-right">
-                    <ul class="list-inline text-nowrap">
-                        <li>
-                            {{ button.show(path('page_show', { 'name': page.name })) }}
-                        </li>
-                        <li>
-                            {{ button.edit(path('admin_page_edit', { 'name': page.name })) }}
-                        </li>
-                        <li>
-                            {{ button.delete(path('admin_page_delete', { 'name': page.name })) }}
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-{% endblock list %}
-
-{% block Pagination %}
-    <div class="pagination-wrapper">
-        <div class="pagination-bottom">
-            {{ pagination(pages) }}
+{% block container %}
+    <!-- Icon Box #1 Starts-->
+    <div class="icon-box-1 text-center">
+        <!-- Container -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <!-- Icon Box One Item -->
+                    <div class="icon-box-1-item">
+                        <!-- Icon Box One Icon -->
+                        <a href="{{ path('admin_static_content_index') }}"><i
+                                    class="glyphicon glyphicon-file black"></i></a>
+                        <!-- Icon Box One Headeing -->
+                        <h4><a href="{{ path('admin_static_content_index') }}">Contenus statiques</a></h4>
+                        <!-- Icon Box One Paragraph -->
+                        <p>Mentions légales, qui sommes-nous...</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <!-- Icon Box One Item -->
+                    <div class="icon-box-1-item">
+                        <!-- Icon Box One Icon -->
+                        <a href="{{ path('admin_article_content_index') }}"><i
+                                    class="glyphicon glyphicon-folder-open orange"></i></a>
+                        <!-- Icon Box One Headeing -->
+                        <h4><a href="{{ path('admin_article_content_index') }}">Articles</a></h4>
+                        <!-- Icon Box One Paragraph -->
+                        <p>Les news, reportages, tests de jeux.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-{% endblock %}
+{% endblock container %}

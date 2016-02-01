@@ -8,7 +8,7 @@
 
 namespace AppBundle\Command;
 
-use AppBundle\Doctrine\Phpcr\ArticleContent;
+use AppBundle\Document\ArticleContent;
 use Doctrine\ODM\PHPCR\Document\Generic;
 use Doctrine\ODM\PHPCR\DocumentManager;
 use Doctrine\ODM\PHPCR\DocumentRepository;
@@ -61,6 +61,8 @@ class LoadArticlesCommand extends ContainerAwareCommand
             $article = new ArticleContent();
             $article
                 ->setParentDocument($this->getParent());
+            $article
+                ->setBody("");
         }
 
         $article->setName($data['name']);
@@ -113,7 +115,7 @@ class LoadArticlesCommand extends ContainerAwareCommand
      */
     public function getManager()
     {
-        return $this->getContainer()->get('sylius.manager.static_content');
+        return $this->getContainer()->get('app.manager.article_content');
     }
 
     /**
@@ -130,6 +132,7 @@ class LoadArticlesCommand extends ContainerAwareCommand
 select titre_clean as name,
       titre as title
 from jedisjeux.jdj_article
+where titre_clean != ''
 EOM;
 
         return $this->getDatabaseConnection()->fetchAll($query);

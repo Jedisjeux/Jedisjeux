@@ -15,6 +15,7 @@ sylius_content:
 sylius_resource:
     resources:
         app.article_content:
+            driver: doctrine/phpcr-odm
             classes:
-                model: AppBundle\Doctrine\Phpcr\ArticleContent
+                model: AppBundle\Document\ArticleContent
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository

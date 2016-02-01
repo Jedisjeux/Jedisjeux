@@ -6,7 +6,7 @@
  * Time: 13:45
  */
 
-namespace AppBundle\Doctrine\Phpcr;
+namespace AppBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 use Symfony\Cmf\Bundle\ContentBundle\Doctrine\Phpcr\StaticContent;
