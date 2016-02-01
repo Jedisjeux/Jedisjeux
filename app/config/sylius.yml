@@ -16,5 +16,5 @@ sylius_resource:
     resources:
         app.article_content:
             classes:
-                model: AppBundle\Entity\ArticleContent
+                model: AppBundle\Doctrine\Phpcr\ArticleContent
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository

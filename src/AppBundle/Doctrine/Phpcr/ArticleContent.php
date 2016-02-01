@@ -8,11 +8,14 @@
 
 namespace AppBundle\Doctrine\Phpcr;
 
+use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 use Symfony\Cmf\Bundle\ContentBundle\Doctrine\Phpcr\StaticContent;
 
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
+ *
+ * @PHPCR\Document(referenceable=true)
  */
 class ArticleContent extends StaticContent
 {
@@ -26,6 +29,8 @@ class ArticleContent extends StaticContent
 
     /**
      * @var string
+     *
+     * @PHPCR\String(nullable=false)
      */
     protected $state = null;
 
@@ -57,5 +62,10 @@ class ArticleContent extends StaticContent
         $this->state = $state;
 
         return $this;
+    }
+
+    public function getType()
+    {
+        return 'app.content.article';
     }
 }
