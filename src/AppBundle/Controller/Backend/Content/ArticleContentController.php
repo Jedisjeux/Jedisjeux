@@ -39,7 +39,7 @@ class ArticleContentController extends Controller
             ->createPaginator($criteria, $sorting)
             ->setCurrentPage($request->get('page', 1));
 
-        return $this->render('backend/content/page/article/index.html.twig', array(
+        return $this->render('backend/content/page/article_content/index.html.twig', array(
             'articles' => $articles,
         ));
     }

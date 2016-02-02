@@ -172,7 +172,7 @@ class LoadArticlesCommand extends ContainerAwareCommand
     protected function getArticles()
     {
         $query = <<<EOM
-select titre_clean as name,
+select replace(titre_clean, ' ', '-') as name,
       titre as title,
       group_concat(block.text_id) as blocks
 from jedisjeux.jdj_article article
