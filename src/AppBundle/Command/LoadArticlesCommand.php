@@ -15,6 +15,7 @@ use Doctrine\ODM\PHPCR\DocumentManager;
 use Doctrine\ODM\PHPCR\DocumentRepository;
 use PHPCR\Util\NodeHelper;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -67,7 +68,6 @@ class LoadArticlesCommand extends ContainerAwareCommand
                 ->setParentDocument($this->getParent());
 
         }
-        $article->setBody("");
         $article->setName($data['name']);
         $article->setTitle($data['title']);
         $article->setPublishable(true);
@@ -78,11 +78,20 @@ class LoadArticlesCommand extends ContainerAwareCommand
     protected function populateBlocks(ArticleContent $page, array $blocks)
     {
         foreach ($blocks as $data) {
-            $this->createOrReplaceBlock($page, $data);
+            $block = $this->createOrReplaceBlock($page, $data);
+            $page->addChildren($block);
+            if (isset($data['image'])) {
+                //$imagineBlock = $this->createOrReplaceImagineBlock($block, $data);
+            }
+
         }
     }
 
-
+    /**
+     * @param ArticleContent $page
+     * @param array $data
+     * @return ArticleBlock
+     */
     protected function createOrReplaceBlock(ArticleContent $page, array $data)
     {
         $name = 'block'.$data['id'];
@@ -101,10 +110,22 @@ class LoadArticlesCommand extends ContainerAwareCommand
             ->setImagePosition($data['image_position'])
             ->setTitle($data['title'])
             ->setBody(sprintf('<p>%s</p>', $data['body']))
-            ->setName('block'.$data['id'])
+            ->setName($name)
             ->setPublishable(true);
 
-        $this->getManager()->persist($block);
+        return $block;
+    }
+
+    protected function createOrReplaceImagineBlock(ArticleBlock $block, array $data)
+    {
+        if (false === $block->hasChildren()) {
+            $imagineBlock = new ImagineBlock();
+            $block->addChildren($imagineBlock);
+        } else {
+            $imagineBlock = $block->getChildren()->first();
+        }
+
+        return $imagineBlock;
     }
 
     /**
@@ -180,6 +201,7 @@ inner join jedisjeux.jdj_article_text as block
       on block.article_id = article.article_id
 where titre_clean != ''
 group by article.article_id
+limit 1
 EOM;
 
         return $this->getDatabaseConnection()->fetchAll($query);
@@ -200,7 +222,8 @@ EOM;
                     when 2 then 'right'
                     when 5 then 'top'
                     when 6 then 'top'
-                end as image_position
+                end as image_position,
+                img_id as image
         from jedisjeux.jdj_article_text as block
         where block.text_id in ($ids)
 EOM;

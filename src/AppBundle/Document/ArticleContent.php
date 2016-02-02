@@ -9,7 +9,7 @@
 namespace AppBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
-use Symfony\Cmf\Bundle\ContentBundle\Doctrine\Phpcr\StaticContent;
+use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ContainerBlock;
 
 
 /**
@@ -17,7 +17,7 @@ use Symfony\Cmf\Bundle\ContentBundle\Doctrine\Phpcr\StaticContent;
  *
  * @PHPCR\Document(referenceable=true)
  */
-class ArticleContent extends StaticContent
+class ArticleContent extends ContainerBlock
 {
     /**
      * state constants
@@ -26,6 +26,14 @@ class ArticleContent extends StaticContent
     const NEED_A_REVIEW = "need_a_review";
     const READY_TO_PUBLISH = "ready_to_publish";
     const PUBLISHED = "published";
+
+
+    /**
+     * @var string
+     *
+     * @PHPCR\String(nullable=false)
+     */
+    protected $title;
 
     /**
      * @var string
@@ -40,8 +48,27 @@ class ArticleContent extends StaticContent
     public function __construct()
     {
         parent::__construct();
-
         $this->state = self::WRITING;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     *
+     * @return $this
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
     }
 
     /**
@@ -62,10 +89,5 @@ class ArticleContent extends StaticContent
         $this->state = $state;
 
         return $this;
-    }
-
-    public function getType()
-    {
-        return 'app.content.article';
     }
 }
