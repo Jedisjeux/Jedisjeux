@@ -1,4 +1,17 @@
+{% from 'macros/images.html.twig' import image %}
+
 <h3>
     {{ block.title }}
 </h3>
+
+{% if block.hasChildren %}
+    {% set imagineBlock = block.children.first %}
+    <div class="{% if 'left' == block.imagePosition %}pull-left{% elseif 'right' == block.imagePosition %}pull-right{% endif %}">
+        {{ image(imagineBlock.image.id, 'cmf_block', imagineBlock.label, null, imagineBlock.linkUrl) }}
+    </div>
+{% endif %}
+
+
 {{ block.body|raw }}
+
+<div class="clearfix"></div>

@@ -125,6 +125,8 @@ class LoadArticlesCommand extends ContainerAwareCommand
 
         if (false === $block->hasChildren()) {
             $imagineBlock = new ImagineBlock();
+            $block
+                ->addChildren($imagineBlock);
         } else {
             /** @var ImagineBlock $imagineBlock */
             $imagineBlock = $block->getChildren()->first();
