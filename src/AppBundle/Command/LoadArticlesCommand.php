@@ -11,11 +11,14 @@ namespace AppBundle\Command;
 use AppBundle\Document\ArticleBlock;
 use AppBundle\Document\ArticleContent;
 use Doctrine\ODM\PHPCR\Document\Generic;
+use Doctrine\ODM\PHPCR\Document\Resource;
 use Doctrine\ODM\PHPCR\DocumentManager;
 use Doctrine\ODM\PHPCR\DocumentRepository;
 use PHPCR\Util\NodeHelper;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
+use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\File;
+use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -81,7 +84,7 @@ class LoadArticlesCommand extends ContainerAwareCommand
             $block = $this->createOrReplaceBlock($page, $data);
             $page->addChildren($block);
             if (isset($data['image'])) {
-                //$imagineBlock = $this->createOrReplaceImagineBlock($block, $data);
+                $this->createOrReplaceImagineBlock($block, $data);
             }
 
         }
@@ -118,12 +121,25 @@ class LoadArticlesCommand extends ContainerAwareCommand
 
     protected function createOrReplaceImagineBlock(ArticleBlock $block, array $data)
     {
+        $name = 'image'.$data['id'];
+
         if (false === $block->hasChildren()) {
             $imagineBlock = new ImagineBlock();
-            $block->addChildren($imagineBlock);
         } else {
+            /** @var ImagineBlock $imagineBlock */
             $imagineBlock = $block->getChildren()->first();
         }
+
+        $image = new Image();
+        $image->setFileContent(file_get_contents($this->getImageOriginalPath($data['image'])));
+        $image->setName($data['image']);
+
+        $imagineBlock
+            ->setName($name)
+            ->setParentDocument($block)
+            ->setImage($image);
+
+        $this->getManager()->persist($imagineBlock);
 
         return $imagineBlock;
     }
@@ -214,19 +230,30 @@ EOM;
     protected function getBlocks($ids)
     {
         $query = <<<EOM
-        select text_id as id,
-                text_titre as title,
-                text as body,
-                case style
+        select block.text_id as id,
+                block.text_titre as title,
+                block.text as body,
+                case block.style
                     when 1 then 'left'
                     when 2 then 'right'
                     when 5 then 'top'
                     when 6 then 'top'
                 end as image_position,
-                img_id as image
+                image.img_nom as image
         from jedisjeux.jdj_article_text as block
+        left join jedisjeux.jdj_images image
+                    on image.img_id = block.img_id
         where block.text_id in ($ids)
 EOM;
      return $this->getDatabaseConnection()->fetchAll($query);
+    }
+
+    /**
+     * @param string $path
+     * @return string
+     */
+    protected function getImageOriginalPath($path)
+    {
+        return "http://www.jedisjeux.net/img/800/".$path;
     }
 }
