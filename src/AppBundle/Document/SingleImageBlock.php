@@ -17,7 +17,7 @@ use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SlideshowBlock;
  *
  * @PHPCR\Document(referenceable=true)
  */
-class ArticleBlock extends SlideshowBlock
+class SingleImageBlock extends SlideshowBlock
 {
     const POSITION_LEFT = 'left';
     const POSITION_RIGHT = 'right';
@@ -75,5 +75,10 @@ class ArticleBlock extends SlideshowBlock
         $this->body = $body;
 
         return $this;
+    }
+
+    public function getType()
+    {
+        return 'app.block.single_image';
     }
 }

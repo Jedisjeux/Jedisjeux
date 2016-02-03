@@ -8,16 +8,15 @@
 
 namespace AppBundle\Command;
 
-use AppBundle\Document\ArticleBlock;
+use AppBundle\Document\BlockquoteBlock;
+use AppBundle\Document\SingleImageBlock;
 use AppBundle\Document\ArticleContent;
 use Doctrine\ODM\PHPCR\Document\Generic;
-use Doctrine\ODM\PHPCR\Document\Resource;
 use Doctrine\ODM\PHPCR\DocumentManager;
 use Doctrine\ODM\PHPCR\DocumentRepository;
 use PHPCR\Util\NodeHelper;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
-use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\File;
 use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -49,6 +48,8 @@ class LoadArticlesCommand extends ContainerAwareCommand
 
         foreach ($this->getArticles() as $data) {
             $page = $this->createOrReplaceArticle($data);
+            $block = $this->createOrReplaceIntroductionBlock($page, $data);
+            $page->addChild($block);
             $blocks = $this->getBlocks($data['blocks']);
             $this->populateBlocks($page, $blocks);
             $this->getManager()->persist($page);
@@ -78,33 +79,54 @@ class LoadArticlesCommand extends ContainerAwareCommand
         return $article;
     }
 
+    protected function createOrReplaceIntroductionBlock(ArticleContent $page, array $data)
+    {
+        $name = 'block0';
+
+        $block = $this
+            ->getSingleImageBlockRepository()
+            ->findOneBy(array('name' => $name));
+
+        if (null === $block) {
+            $block = new BlockquoteBlock();
+            $block
+                ->setParentDocument($page);
+        }
+
+        $block
+            ->setBody(sprintf('<p>%s</p>', $data['introduction']))
+            ->setName($name)
+            ->setPublishable(true);
+
+        return $block;
+    }
+
     protected function populateBlocks(ArticleContent $page, array $blocks)
     {
         foreach ($blocks as $data) {
             $block = $this->createOrReplaceBlock($page, $data);
-            $page->addChildren($block);
+            $page->addChild($block);
             if (isset($data['image'])) {
                 $this->createOrReplaceImagineBlock($block, $data);
             }
-
         }
     }
 
     /**
      * @param ArticleContent $page
      * @param array $data
-     * @return ArticleBlock
+     * @return SingleImageBlock
      */
     protected function createOrReplaceBlock(ArticleContent $page, array $data)
     {
         $name = 'block'.$data['id'];
 
         $block = $this
-            ->getArticleBlockRepository()
+            ->getSingleImageBlockRepository()
             ->findOneBy(array('name' => $name));
 
         if (null === $block) {
-            $block = new ArticleBlock();
+            $block = new SingleImageBlock();
             $block
                 ->setParentDocument($page);
         }
@@ -119,14 +141,14 @@ class LoadArticlesCommand extends ContainerAwareCommand
         return $block;
     }
 
-    protected function createOrReplaceImagineBlock(ArticleBlock $block, array $data)
+    protected function createOrReplaceImagineBlock(SingleImageBlock $block, array $data)
     {
         $name = 'image'.$data['id'];
 
         if (false === $block->hasChildren()) {
             $imagineBlock = new ImagineBlock();
             $block
-                ->addChildren($imagineBlock);
+                ->addChild($imagineBlock);
         } else {
             /** @var ImagineBlock $imagineBlock */
             $imagineBlock = $block->getChildren()->first();
@@ -187,9 +209,9 @@ class LoadArticlesCommand extends ContainerAwareCommand
     /**
      * @return DocumentRepository
      */
-    public function getArticleBlockRepository()
+    public function getSingleImageBlockRepository()
     {
-        return $this->getContainer()->get('app.repository.article_block');
+        return $this->getContainer()->get('app.repository.single_image_block');
     }
 
     /**
@@ -213,6 +235,7 @@ class LoadArticlesCommand extends ContainerAwareCommand
         $query = <<<EOM
 select replace(titre_clean, ' ', '-') as name,
       titre as title,
+      intro as introduction,
       group_concat(block.text_id) as blocks
 from jedisjeux.jdj_article article
 inner join jedisjeux.jdj_article_text as block
@@ -246,6 +269,7 @@ EOM;
         left join jedisjeux.jdj_images image
                     on image.img_id = block.img_id
         where block.text_id in ($ids)
+        order by block.ordre
 EOM;
      return $this->getDatabaseConnection()->fetchAll($query);
     }

@@ -27,3 +27,19 @@ services:
             - @templating
         tags:
             - { name: sonata.block }
+
+    app.block.blockquote:
+        class: AppBundle\Block\BlockquoteBlockService
+        arguments:
+            - app.block.blockquote
+            - @templating
+        tags:
+            - {name: sonata.block}
+
+    app.block.single_image:
+            class: AppBundle\Block\SingleImageBlockService
+            arguments:
+                - app.block.single_image
+                - @templating
+            tags:
+                - {name: sonata.block}

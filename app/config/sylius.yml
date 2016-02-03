@@ -19,8 +19,13 @@ sylius_resource:
             classes:
                 model: AppBundle\Document\ArticleContent
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
-        app.article_block:
+        app.single_image_block:
             driver: doctrine/phpcr-odm
             classes:
-                model: AppBundle\Document\ArticleBlock
+                model: AppBundle\Document\SingleImageBlock
+                repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
+        app.blockquote_block:
+            driver: doctrine/phpcr-odm
+            classes:
+                model: AppBundle\Document\BlockquoteBlock
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository

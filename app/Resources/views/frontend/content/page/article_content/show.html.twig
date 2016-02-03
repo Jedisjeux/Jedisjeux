@@ -10,11 +10,16 @@
 {% endblock %}
 
 {% block body -%}
+
     {% for block in article.children %}
-        {{ sonata_block_render({
-            'name': block.id
-        }, {
-            'template': 'frontend/content/block/block_article.html.twig'
-        }) }}
+
+        <div class="block">
+
+            {{ sonata_block_render({
+                'name': block.id
+            }) }}
+
+        </div>
+
     {% endfor %}
 {% endblock %}
