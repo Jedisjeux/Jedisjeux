@@ -1,5 +1,7 @@
 {% extends "base.html.twig" %}
 
+{% block body_class %}article{% endblock %}
+
 {% block headline %}
     {{ article.title }}
 {% endblock %}
@@ -12,14 +14,16 @@
 {% block body -%}
 
     <div class="container">
+        <div class="col-md-12">
 
-    {% for block in article.children %}
+        {% for block in article.children %}
 
             {{ sonata_block_render({
                 'name': block.id
             }) }}
 
-    {% endfor %}
-
+        {% endfor %}
+        </div>
     </div>
+
 {% endblock %}

@@ -161,7 +161,8 @@ class LoadArticlesCommand extends ContainerAwareCommand
         $imagineBlock
             ->setName($name)
             ->setParentDocument($block)
-            ->setImage($image);
+            ->setImage($image)
+            ->setLabel($data['image_label']);
 
         $this->getManager()->persist($imagineBlock);
 
@@ -265,10 +266,15 @@ EOM;
                     when 6 then 'top'
                 end as image_position,
                 block.ordre as position,
-                image.img_nom as image
+                image.img_nom as image,
+                imageElements.legende as image_label
         from jedisjeux.jdj_article_text as block
         left join jedisjeux.jdj_images image
                     on image.img_id = block.img_id
+        left join jedisjeux.jdj_images_elements imageElements
+                on imageElements.img_id = image.img_id
+                and imageElements.elem_type = 'article'
+                and imageElements.elem_id = block.article_id
         where block.text_id in ($ids)
         order by block.ordre
 EOM;
