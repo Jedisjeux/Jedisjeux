@@ -1,17 +1,49 @@
 {% from 'macros/images.html.twig' import image %}
 
-<h3>
-    {{ block.title }}
-</h3>
-
-{% if block.hasChildren %}
-    {% set imagineBlock = block.children.first %}
-    <div class="{% if 'left' == block.imagePosition %}pull-left{% elseif 'right' == block.imagePosition %}pull-right{% endif %}">
-        {{ image(imagineBlock.image.id, 'cmf_block', imagineBlock.label, null, imagineBlock.linkUrl) }}
+{% set imageBlock %}
+    <!-- Image Box #5 Image -->
+    <div class="img-box-5-img">
+        {% if block.hasChildren %}
+            {% set imagineBlock = block.children.first %}
+            <!-- Image -->
+            {{ image(imagineBlock.image.id, 'cmf_block', imagineBlock.label, 'img-responsive img-thumbnail', imagineBlock.linkUrl) }}
+        {% endif %}
     </div>
-{% endif %}
+{% endset %}
+
+{% set bodyBlock %}
+    <!-- Image Box #5 Content -->
+    <div class="img-box-5-content">
+        <h4><a href="#">{{ block.title }}</a></h4>
+        <div class="bor bg-color"></div>
+        {{ block.body|raw }}
+    </div>
+{% endset %}
 
 
-{{ block.body|raw }}
-
-<div class="clearfix"></div>
+<div class="img-box-5-item">
+    <div class="row">
+        {% if 'left' == block.imagePosition %}
+            <div class="col-md-5">
+                {{ imageBlock }}
+            </div>
+            <div class="col-md-7">
+                {{ bodyBlock }}
+            </div>
+        {% elseif 'right' == block.imagePosition %}
+            <div class="col-md-7">
+                {{ bodyBlock }}
+            </div>
+            <div class="col-md-5">
+                {{ imageBlock }}
+            </div>
+        {% else %}
+            <div class="col-md-12">
+                <h4><a href="#">{{ block.title }}</a></h4>
+                <div class="bor bg-color"></div>
+                {{ imageBlock }}
+                {{ block.body|raw }}
+            </div>
+        {% endif %}
+    </div>
+</div>

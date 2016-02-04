@@ -2,7 +2,7 @@
     {% if linkUrl %}
         <a href="{{ linkUrl }}" title="{{ label|default('') }}">
     {% endif %}
-    <img src="{{ path | imagine_filter(filter|default('full')) }}" alt="{{ label }}"/>
+    <img class="{{ class }}" src="{{ path | imagine_filter(filter|default('full')) }}" alt="{{ label }}"/>
     {% if linkUrl %}
         </a>
     {% endif %}

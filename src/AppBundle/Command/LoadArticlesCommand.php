@@ -119,7 +119,7 @@ class LoadArticlesCommand extends ContainerAwareCommand
      */
     protected function createOrReplaceBlock(ArticleContent $page, array $data)
     {
-        $name = 'block'.$data['id'];
+        $name = 'block'.$data['position'];
 
         $block = $this
             ->getSingleImageBlockRepository()
@@ -264,6 +264,7 @@ EOM;
                     when 5 then 'top'
                     when 6 then 'top'
                 end as image_position,
+                block.ordre as position,
                 image.img_nom as image
         from jedisjeux.jdj_article_text as block
         left join jedisjeux.jdj_images image
