@@ -11,8 +11,7 @@
                 <div class="img-box-4-item">
                     <!-- Image -->
                     {{ image(imagineBlock.image.id, 'cmf_block', imagineBlock.label, 'img-responsive', imagineBlock.linkUrl) }}
-                    {#<a href="img/gallery/small/1.jpg" class="lightbox"><img src="img/gallery/small/1.jpg" alt="" class="img-responsive"></a>#}
-                    <!-- Image Box #4 Content -->
+                   <!-- Image Box #4 Content -->
                     <div class="img-box-4-content">
                         <!-- Paragraph -->
                         <p>{{ imagineBlock.label }}</p>
@@ -45,17 +44,14 @@
     <div class="pull-right">
         {{ imageBlock }}
     </div>
-
     <h4><a href="#">{{ block.title }}</a></h4>
     {{ block.body|raw }}
-
-
 {% else %}
 
     <h4><a href="#">{{ block.title }}</a></h4>
     <div class="bor bg-color"></div>
     {{ block.body|raw }}
-
+    {{ imageBlock }}
 {% endif %}
 
 <div class="clearfix"></div>
