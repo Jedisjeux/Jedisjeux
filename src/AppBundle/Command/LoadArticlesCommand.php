@@ -49,12 +49,13 @@ class LoadArticlesCommand extends ContainerAwareCommand
         foreach ($this->getArticles() as $data) {
             $page = $this->createOrReplaceArticle($data);
             $block = $this->createOrReplaceIntroductionBlock($page, $data);
-            $page->addChild($block);
+             $page->addChild($block);
             $blocks = $this->getBlocks($data['blocks']);
             $this->populateBlocks($page, $blocks);
             $this->getManager()->persist($page);
             $this->getManager()->flush();
             $this->getManager()->clear();
+
         }
     }
 
@@ -141,7 +142,7 @@ class LoadArticlesCommand extends ContainerAwareCommand
      */
     protected function createOrReplaceBlock(ArticleContent $page, array $data)
     {
-        $name = 'block'.$data['position'];
+        $name = 'block'.$data['id'];
 
         $block = $this
             ->getSingleImageBlockRepository()
@@ -267,7 +268,7 @@ inner join jedisjeux.jdj_article_text as block
       on block.article_id = article.article_id
 where titre_clean != ''
 group by article.article_id
-limit 1
+limit 5
 EOM;
 
         return $this->getDatabaseConnection()->fetchAll($query);

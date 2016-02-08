@@ -13,6 +13,7 @@ use Doctrine\ODM\PHPCR\DocumentManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -34,6 +35,29 @@ class ArticleContentController extends Controller
 
         return $this->render("frontend/content/page/article_content/show.html.twig", array(
             'article' => $article,
+        ));
+    }
+
+    /**
+     * @Route("/", name="article_content_index")
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @internal param string $name
+     */
+    public function indexAction(Request $request)
+    {
+        $criteria = $request->get('criteria', array());
+        $sorting = $request->get('sorting', array());
+
+        $articles = $this
+            ->getRepository()
+            ->createPaginator($criteria, $sorting)
+            ->setMaxPerPage($request->get('maxPerPage', 10))
+            ->setCurrentPage($request->get('page', 1));
+
+        return $this->render('frontend/content/page/article_content/_homeList.html.twig', array(
+            'articles' => $articles,
         ));
     }
 

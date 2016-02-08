@@ -273,6 +273,14 @@ liip_imagine:
             data_loader: cmf_media_doctrine_phpcr
             filters:
                 relative_resize: { scale: 1 }
+        cmf_thumbnail:
+            data_loader: cmf_media_doctrine_phpcr
+            filters:
+                thumbnail: { size: [100, 75] }
+        cmf_medium:
+            data_loader: cmf_media_doctrine_phpcr
+            filters:
+                thumbnail: { size: [353, 177] }
 
 sonata_block:
     default_contexts: [cms]

@@ -8,7 +8,6 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        //return $this->render('default/index.html.twig', array());
-        return $this->redirect($this->generateUrl('compta_home'));
+        return $this->render('default/index.html.twig', array());
     }
 }
