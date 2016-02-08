@@ -134,7 +134,7 @@ class LoadArticlesCommand extends ContainerAwareCommand
         $block
             ->setImagePosition($data['image_position'])
             ->setTitle($data['title'])
-            ->setBody(sprintf('<p>%s</p>', $data['body']))
+            ->setBody($this->nl2p($data['body']))
             ->setName($name)
             ->setPublishable(true);
 
@@ -288,5 +288,10 @@ EOM;
     protected function getImageOriginalPath($path)
     {
         return "http://www.jedisjeux.net/img/800/".$path;
+    }
+
+    protected function nl2p($string)
+    {
+        return "<p>".str_replace("\n", "</p><p>", trim($string))."</p>";
     }
 }
