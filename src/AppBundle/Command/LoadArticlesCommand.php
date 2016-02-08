@@ -72,6 +72,28 @@ class LoadArticlesCommand extends ContainerAwareCommand
                 ->setParentDocument($this->getParent());
 
         }
+
+        if (null !== $data['mainImage']) {
+            $mainImage = $article->getMainImage();
+
+            if (null === $mainImage) {
+                $mainImage = new ImagineBlock();
+            }
+
+
+            $image = new Image();
+            $image->setFileContent(file_get_contents($this->getImageOriginalPath($data['mainImage'])));
+
+            $mainImage
+                ->setParentDocument($article)
+                ->setImage($image);
+
+            // $this->getManager()->persist($mainImage);
+
+            $article
+                ->setMainImage($mainImage);
+        }
+
         $article->setName($data['name']);
         $article->setTitle($data['title']);
         $article->setPublishable(true);
@@ -234,9 +256,11 @@ class LoadArticlesCommand extends ContainerAwareCommand
     protected function getArticles()
     {
         $query = <<<EOM
-select replace(titre_clean, ' ', '-') as name,
-      titre as title,
-      intro as introduction,
+select article.article_id as id,
+      replace(article.titre_clean, ' ', '-') as name,
+      article.titre as title,
+      article.intro as introduction,
+      article.photo as mainImage,
       group_concat(block.text_id) as blocks
 from jedisjeux.jdj_article article
 inner join jedisjeux.jdj_article_text as block

@@ -10,6 +10,7 @@ namespace AppBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ContainerBlock;
+use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
 
 
 /**
@@ -41,6 +42,13 @@ class ArticleContent extends ContainerBlock
      * @PHPCR\String(nullable=false)
      */
     protected $state = null;
+
+    /**
+     * @var ImagineBlock
+     *
+     * @PHPCR\Child()
+     */
+    protected $mainImage;
 
     /**
      * Article constructor.
@@ -87,6 +95,26 @@ class ArticleContent extends ContainerBlock
     public function setState($state)
     {
         $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * @return ImagineBlock
+     */
+    public function getMainImage()
+    {
+        return $this->mainImage;
+    }
+
+    /**
+     * @param ImagineBlock $mainImage
+     *
+     * @return $this
+     */
+    public function setMainImage($mainImage)
+    {
+        $this->mainImage = $mainImage;
 
         return $this;
     }
