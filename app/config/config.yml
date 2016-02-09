@@ -267,7 +267,8 @@ liip_imagine:
         magazine_item:
             quality: 100
             filters:
-                thumbnail: { size: [218, 150] }
+                upscale: { min: [500, 344] }
+                thumbnail: { size: [500, 344], mode: outbound }
         # define the filter to be used with the image preview
         image_upload_thumbnail:
             data_loader: cmf_media_doctrine_phpcr
@@ -281,10 +282,11 @@ liip_imagine:
             data_loader: cmf_media_doctrine_phpcr
             filters:
                 thumbnail: { size: [100, 69] }
-        cmf_medium:
+        cmf_magazine_item_wide:
             data_loader: cmf_media_doctrine_phpcr
             filters:
-                thumbnail: { size: [353, 177] }
+                upscale: { min: [600, 300] }
+                thumbnail: { size: [600, 300], mode: outbound }
 
 sonata_block:
     default_contexts: [cms]

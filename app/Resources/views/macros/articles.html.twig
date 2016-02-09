@@ -1,4 +1,4 @@
-{% macro magazineItemOne(article) %}
+{% macro magazineItemOne(article, imageFilter) %}
     {% import 'macros/listElements.html.twig' as listElement %}
     {% set imagineBlock = article.mainImage %}
 
@@ -11,7 +11,9 @@
             consectetur. </p>
     {% endset %}
 
-    {{ listElement.magazineItemOne(imagineBlock.image.id, imagineBlock.label, 'cmf_medium', 'img-responsive', path('article_content_show', {'name': article.name}), article.title, body, meta) }}
+    {% set imageFilter = imageFilter|default('cmf_magazine_item_wide') %}
+
+    {{ listElement.magazineItemOne(imagineBlock.image.id, imagineBlock.label, imageFilter, 'img-responsive', path('article_content_show', {'name': article.name}), article.title, body, meta) }}
 
 {% endmacro %}
 
