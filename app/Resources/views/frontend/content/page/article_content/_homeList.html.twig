@@ -16,8 +16,9 @@
         {% for article in articles.currentPageResults.slice(1, 4) %}
             <li>
                 {{ magazineListItem(article) }}
+                <div class="clearfix"></div>
             </li>
-            <div class="clearfix"></div>
+
         {% endfor %}
         <!-- List item ends -->
     </ul>

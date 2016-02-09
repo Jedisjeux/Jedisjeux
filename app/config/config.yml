@@ -280,7 +280,7 @@ liip_imagine:
         cmf_thumbnail:
             data_loader: cmf_media_doctrine_phpcr
             filters:
-                thumbnail: { size: [100, 75] }
+                thumbnail: { size: [100, 69] }
         cmf_medium:
             data_loader: cmf_media_doctrine_phpcr
             filters:
