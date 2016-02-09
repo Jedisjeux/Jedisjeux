@@ -17,7 +17,7 @@
             {% if 0 == key %}
 <h4 class="mag-head"><i class="fa fa-cloud color"></i> News Récentes</h4>
 
-{{ listElement.magazineItemOne(imagineBlock.image.id, imagineBlock.label, 'cmf_medium', 'img-responsive', '#', article.title, body, meta) }}
+{{ listElement.magazineItemOne(imagineBlock.image.id, imagineBlock.label, 'cmf_medium', 'img-responsive', path('article_content_show', {'name': article.name}), article.title, body, meta) }}
 
 <hr>
 {% else %}
