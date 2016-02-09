@@ -1,0 +1,19 @@
+
+{% macro magazineItemOne(imagePath, imageLabel, imageFilter, imageClass, linkUrl, title, body, meta) %}
+    {% from 'macros/images.html.twig' import image %}
+
+    <!-- Magazine item one starts -->
+    <div class="magazine-item mag-1">
+        <!-- Image -->
+        {{ image(imagePath, imageFilter, imageLabel, imageClass, linkUrl) }}
+        <!-- Heading -->
+        <h4><a href="#">{{ title }}</a></h4>
+        <!-- Meta -->
+        <div class="magazine-meta">
+            {{ meta|raw }}
+        </div>
+        <!-- Para -->
+        {{ body|raw }}
+    </div>
+    <!-- Magazine item one ends -->
+{% endmacro %}
