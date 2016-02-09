@@ -17,3 +17,17 @@
     </div>
     <!-- Magazine item one ends -->
 {% endmacro %}
+
+{% macro magazineListItem(imagePath, imageLabel, imageFilter, imageClass, linkUrl, title, meta) %}
+    {% from 'macros/images.html.twig' import image %}
+    {{ image(imagePath, imageFilter, imageLabel, imageClass, linkUrl) }}
+
+    <div class="m-list-content">
+        <!-- Heading -->
+        <h5><a href="{{ linkUrl }}">{{ title }}</a></h5>
+        <!-- Meta -->
+        <div class="magazine-meta">
+            {{ meta|raw }}
+        </div>
+    </div>
+{% endmacro %}

@@ -1,53 +1,23 @@
 {% from 'macros/images.html.twig' import image %}
-{% import 'macros/listElements.html.twig' as listElement %}
+{% from 'macros/articles.html.twig' import magazineItemOne, magazineListItem %}
 
-{% set key = 0 %}
-    {% for article in articles %}
-            {% set imagineBlock = article.mainImage %}
-
-            {% set meta %}
-                <i class="fa fa-calendar"></i> <!-- TODO publishedAt -->{{ article.createdAt|localizeddate('long', 'none') }}
-                - <i class="fa fa-comments"></i> 5 Comments
-            {% endset %}
-            {% set body %}
-                <p>Nemo enim ipsam voluptatem quia quia neque porro qui dolorem ipsum quia dolor sit amet
-                    consectetur. </p>
-            {% endset %}
-
-            {% if 0 == key %}
 <h4 class="mag-head"><i class="fa fa-cloud color"></i> News Récentes</h4>
-
-{{ listElement.magazineItemOne(imagineBlock.image.id, imagineBlock.label, 'cmf_medium', 'img-responsive', path('article_content_show', {'name': article.name}), article.title, body, meta) }}
-
+{% set article = articles.currentPageResults.first %}
+{% if (article) %}
+    {% set imagineBlock = article.mainImage %}
+    {{ magazineItemOne(article) }}
+{% endif %}
 <hr>
-{% else %}
 
-{% if 1 == key %}
 <!-- Magazine list -->
 <div class="magazine-list">
     <ul class="list-unstyled">
         <!-- List item starts -->
-        {% endif %}
-
-        <li>
-            <a href="../img/gallery/small/5.jpg" class="lightbox">
-                {{ image(imagineBlock.image.id, 'cmf_thumbnail', imagineBlock.label, 'img-responsive', imagineBlock.linkUrl) }}
-            </a>
-
-            <div class="m-list-content">
-                <!-- Heading -->
-                <h5><a href="#">{{ article.title }}</a></h5>
-                <!-- Meta -->
-                <div class="magazine-meta">
-                    <i class="fa fa-calendar"></i>
-                    <!-- TODO publishedAt -->{{ article.createdAt|localizeddate('long', 'none') }}
-                    - <i class="fa fa-comments"></i> 5 Comments
-                </div>
-            </div>
-        </li>
-        <div class="clearfix"></div>
-        {% endif %}
-        {% set key = key + 1 %}
+        {% for article in articles.currentPageResults.slice(1, 4) %}
+            <li>
+                {{ magazineListItem(article) }}
+            </li>
+            <div class="clearfix"></div>
         {% endfor %}
         <!-- List item ends -->
     </ul>
