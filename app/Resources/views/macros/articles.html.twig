@@ -17,6 +17,25 @@
 
 {% endmacro %}
 
+{% macro magazineItemTwo(article, imageFilter) %}
+    {% import 'macros/listElements.html.twig' as listElement %}
+    {% set imagineBlock = article.mainImage %}
+
+    {% set meta %}
+        <i class="fa fa-calendar"></i> <!-- TODO publishedAt -->{{ article.createdAt|localizeddate('long', 'none') }}
+        - <i class="fa fa-comments"></i> 5 Comments
+    {% endset %}
+    {% set body %}
+        <p>Nemo enim ipsam voluptatem quia quia neque porro qui dolorem ipsum quia dolor sit amet
+            consectetur. </p>
+    {% endset %}
+
+    {% set imageFilter = imageFilter|default('cmf_magazine_item') %}
+
+    {{ listElement.magazineItemTwo(imagineBlock.image.id, imagineBlock.label, imageFilter, 'img-responsive', path('article_content_show', {'name': article.name}), article.title, body, meta) }}
+
+{% endmacro %}
+
 {% macro magazineListItem(article) %}
     {% import 'macros/listElements.html.twig' as listElement %}
     {% set imagineBlock = article.mainImage %}

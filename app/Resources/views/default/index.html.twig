@@ -29,26 +29,29 @@
     <div class="row">
 
         <div class="col-md-6 col-sm-6">
+
+            <h4 class="mag-head"><i class="fa fa-cloud color"></i> News Récentes</h4>
             <!-- TODO publishedAt -->
             {{ render(url('article_content_index', {
-                'template': '_recents.html.twig',
+                'template': '_magazine_item_one.html.twig',
                 'maxPerPage': 5,
                 'sorting': {
-                    'createdAt': 'asc'
+                    'title': 'desc'
                 }} )) }}
 
             <hr/>
         </div>
 
         <div class="col-md-6 col-sm-6">
+            <h4 class="mag-head"><i class="fa fa-desktop color"></i> Top News</h4>
 
-                <!-- TODO publishedAt -->
-                {{ render(url('article_content_index', {
-                    'template': '_tops.html.twig',
-                    'maxPerPage': 5,
-                    'sorting': {
-                        'title': 'desc'
-                    }} )) }}
+            <!-- TODO publishedAt -->
+            {{ render(url('article_content_index', {
+                'template': '_magazine_item_one.html.twig',
+                'maxPerPage': 5,
+                'sorting': {
+                    'createdAt': 'asc'
+                }} )) }}
 
             <hr/>
 
@@ -62,74 +65,13 @@
 
             <h4 class="mag-head"><i class="fa fa-comments color"></i> Top Commented</h4>
 
-            <!-- Magazine item two starts -->
-            <div class="magazine-item mag-2">
-                <!-- Image -->
-                <a href="../../img/gallery/small/6.jpg" class="lightbox"><img src="../../img/gallery/small/6.jpg" alt=""
-                                                                           class="img-responsive"/></a>
-
-                <div class="mag-2-content">
-                    <!-- Heading -->
-                    <h4><a href="#">Nemo Enim Ipsam Voluptatem Quuia</a></h4>
-                    <!-- Meta -->
-                    <div class="magazine-meta"><i class="fa fa-calendar"></i> 25 Jan 2014 - <i
-                                class="fa fa-comments"></i> 5
-                        Comments
-                    </div>
-                    <!-- Para -->
-                    <p>Nemo enim ipsam voluptatem quia quia neque porro qui dolorem voluptatem quia quia neque porro qui
-                        voluptatem quia quia neque porro qui voluptatem quia quia neque porro qui ipsum quia dolor sit
-                        amet
-                        consectetur. </p>
-                </div>
-            </div>
-            <!-- Magazine item two ends -->
-
-            <!-- Magazine item two starts -->
-            <div class="magazine-item mag-2">
-                <!-- Image -->
-                <a href="../../img/gallery/small/3.jpg" class="lightbox"><img src="../../img/gallery/small/3.jpg" alt=""
-                                                                           class="img-responsive"/></a>
-
-                <div class="mag-2-content">
-                    <!-- Heading -->
-                    <h4><a href="#">Quia neque porro qui dolorem voluptatem </a></h4>
-                    <!-- Meta -->
-                    <div class="magazine-meta"><i class="fa fa-calendar"></i> 25 Jan 2014 - <i
-                                class="fa fa-comments"></i> 5
-                        Comments
-                    </div>
-                    <!-- Para -->
-                    <p>Nemo enim ipsam voluptatem quia quia neque porro qui dolorem voluptatem quia quia neque porro qui
-                        voluptatem quia quia neque porro qui voluptatem quia quia neque porro qui ipsum quia dolor sit
-                        amet
-                        consectetur. </p>
-                </div>
-            </div>
-            <!-- Magazine item two ends -->
-
-            <!-- Magazine item two starts -->
-            <div class="magazine-item mag-2">
-                <!-- Image -->
-                <a href="../../img/gallery/small/4.jpg" class="lightbox"><img src="../../img/gallery/small/4.jpg" alt=""
-                                                                           class="img-responsive"/></a>
-
-                <div class="mag-2-content">
-                    <!-- Heading -->
-                    <h4><a href="#">Quia dolor sit singa amet consectetur</a></h4>
-                    <!-- Meta -->
-                    <div class="magazine-meta"><i class="fa fa-calendar"></i> 25 Jan 2014 - <i
-                                class="fa fa-comments"></i> 5
-                        Comments
-                    </div>
-                    <!-- Para -->
-                    <p>Nemo enim ipsam voluptatem quia quia neque porro qui dolorem voluptatem quia quia neque porro qui
-                        voluptatem quia quia neque porro qui voluptatem quia quia neque porro qui ipsum quia dolor sit
-                        amet
-                        consectetur. </p>
-                </div>
-            </div>
-            <!-- Magazine item two ends -->
+            <!-- TODO publishedAt -->
+            {{ render(url('article_content_index', {
+                'template': '_magazine_item_two.html.twig',
+                'maxPerPage': 5,
+                'sorting': {
+                    'title': 'desc'
+                }} )) }}
 
             <hr/>
 
