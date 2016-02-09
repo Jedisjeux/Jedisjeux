@@ -67,12 +67,29 @@ class JeuRepository extends EntityRepository
                 ->join("jeuNote.note", "n")
                 ->groupBy($this->getAlias().'.id')
                 ->andHaving($queryBuilder->expr()->gte($queryBuilder->expr()->avg('n.valeur'), $criteria['noteAvg:moreThanOrEqual']))
-                ->addSelect($queryBuilder->expr()->count('n.valeur'). "AS HIDDEN noteAvg")
+                ->addSelect($queryBuilder->expr()->avg('n.valeur'). "AS HIDDEN noteAvg")
             ;
         }
 
         parent::applyCriteria($queryBuilder, $criteria);
     }
+
+    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = array())
+    {
+        if (array_key_exists('average', $sorting)) {
+            $queryBuilder
+                ->join($this->getAlias().'.notes', "jeuNote")
+                ->join("jeuNote.note", "n")
+                ->groupBy($this->getAlias().'.id')
+                ->addSelect($queryBuilder->expr()->avg('n.valeur'). "AS HIDDEN noteAvg")
+                ->addOrderBy('noteAvg', $sorting['average']);
+
+            unset($sorting['average']);
+        }
+
+        parent::applySorting($queryBuilder, $sorting);
+    }
+
 
     /**
      * Find jeu entities that match criteria "if you like this game"

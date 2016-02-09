@@ -1,0 +1,15 @@
+{% from 'macros/games.html.twig' import magazineItemOne %}
+
+<h4 class="mag-head"><i class="fa fa-user color"></i> Top Rated</h4>
+
+<div class="row">
+
+    {% for game in games %}
+
+    <div class="col-md-4 col-sm-6">
+        {{ magazineItemOne(game) }}
+    </div>
+
+    {% endfor %}
+
+</div>

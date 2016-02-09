@@ -7,3 +7,19 @@
         minute{% if game.durationMin > 1 %}s{% endif %}{% if game.durationByPlayer %} {{ 'label.per_player'|trans|lower }}{% endif %}
     {% endif %}
 {% endspaceless %}{% endmacro %}
+
+{% macro magazineItemOne(game) %}
+    {% import 'macros/listElements.html.twig' as listElement %}
+
+    {% set meta %}
+        <i class="fa fa-calendar"></i> <!-- TODO publishedAt -->{{ game.createdAt|localizeddate('long', 'none') }}
+        - <i class="fa fa-comments"></i> 5 Comments
+    {% endset %}
+    {% set body %}
+        <p>Nemo enim ipsam voluptatem quia quia neque porro qui dolorem ipsum quia dolor sit amet
+            consectetur. </p>
+    {% endset %}
+
+    {{ listElement.magazineItemOne(game.imageCouverture.webPath, game.name, 'magazine_item', 'img-responsive', path('jeu_show', {'id': game.id, 'slug': game.slug}), game.name, body, meta) }}
+
+{% endmacro %}
