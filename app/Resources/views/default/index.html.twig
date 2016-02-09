@@ -31,6 +31,7 @@
         <div class="col-md-6 col-sm-6">
             <!-- TODO publishedAt -->
             {{ render(url('article_content_index', {
+                'template': '_recents.html.twig',
                 'maxPerPage': 5,
                 'sorting': {
                     'createdAt': 'asc'
@@ -41,72 +42,13 @@
 
         <div class="col-md-6 col-sm-6">
 
-            <!-- Heading -->
-            <h4 class="mag-head"><i class="fa fa-desktop color"></i> Top News</h4>
-
-            <!-- Magazine item one starts -->
-            <div class="magazine-item mag-1">
-                <!-- Image -->
-                <a href="../../img/magazine/small/2.jpg" class="lightbox"><img src="../../img/magazine/small/2.jpg" alt=""
-                                                                            class="img-responsive"/></a>
-                <!-- Heading -->
-                <h4><a href="#">Amazing Theme Ever In The Internet</a></h4>
-                <!-- Meta -->
-                <div class="magazine-meta"><i class="fa fa-calendar"></i> 25 Jan 2014 - <i class="fa fa-comments"></i> 5
-                    Comments
-                </div>
-                <!-- Para -->
-                <p>Nemo enim ipsam voluptatem quia quia neque porro qui dolorem ipsum quia dolor sit amet
-                    consectetur. </p>
-            </div>
-            <!-- Magazine item one ends -->
-
-            <hr/>
-
-            <!-- Magazine list -->
-            <div class="magazine-list">
-                <ul class="list-unstyled">
-                    <!-- List item starts -->
-                    <li>
-                        <!-- Heading -->
-                        <h5><a href="#">Nemo enim ipsam voluptatem quia quia neque repudiandae sint et molestiae non
-                                recusand</a></h5>
-                        <!-- Meta -->
-                        <div class="magazine-meta"><i class="fa fa-calendar"></i> 25 Jan 2014 - <i
-                                    class="fa fa-comments"></i> 5 Comments
-                        </div>
-                    </li>
-                    <!-- List item ends -->
-                    <li>
-                        <!-- Heading -->
-                        <h5><a href="#">Temporibus autem quibusdam et aut officiis aut rerum Voluptates et molestiae non
-                                recusand</a></h5>
-                        <!-- Meta -->
-                        <div class="magazine-meta"><i class="fa fa-calendar"></i> 25 Jan 2014 - <i
-                                    class="fa fa-comments"></i> 5 Comments
-                        </div>
-                    </li>
-                    <li>
-                        <!-- Heading -->
-                        <h5><a href="#">Voluptates repudiandae sint et molestiae non recusand Voluptates et molestiae
-                                non
-                                recusand</a></h5>
-                        <!-- Meta -->
-                        <div class="magazine-meta"><i class="fa fa-calendar"></i> 25 Jan 2014 - <i
-                                    class="fa fa-comments"></i> 5 Comments
-                        </div>
-                    </li>
-                    <li>
-                        <!-- Heading -->
-                        <h5><a href="#">Neque porro quisquam estui ipsum quia dolor sit Voluptates repudiandae non
-                                recusand</a></h5>
-                        <!-- Meta -->
-                        <div class="magazine-meta"><i class="fa fa-calendar"></i> 25 Jan 2014 - <i
-                                    class="fa fa-comments"></i> 5 Comments
-                        </div>
-                    </li>
-                </ul>
-            </div>
+                <!-- TODO publishedAt -->
+                {{ render(url('article_content_index', {
+                    'template': '_tops.html.twig',
+                    'maxPerPage': 5,
+                    'sorting': {
+                        'title': 'desc'
+                    }} )) }}
 
             <hr/>
 

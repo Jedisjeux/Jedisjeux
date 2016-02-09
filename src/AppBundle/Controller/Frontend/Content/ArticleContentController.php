@@ -49,6 +49,7 @@ class ArticleContentController extends Controller
     {
         $criteria = $request->get('criteria', array());
         $sorting = $request->get('sorting', array());
+        $template = $request->get('template', 'index.html.twig');
 
         $articles = $this
             ->getRepository()
@@ -56,7 +57,7 @@ class ArticleContentController extends Controller
             ->setMaxPerPage($request->get('maxPerPage', 10))
             ->setCurrentPage($request->get('page', 1));
 
-        return $this->render('frontend/content/page/article_content/_homeList.html.twig', array(
+        return $this->render('frontend/content/page/article_content/'.$template, array(
             'articles' => $articles,
         ));
     }

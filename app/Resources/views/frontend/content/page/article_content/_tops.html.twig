@@ -1,0 +1,25 @@
+{% from 'macros/images.html.twig' import image %}
+{% from 'macros/articles.html.twig' import magazineItemOne, magazineListItem %}
+
+<h4 class="mag-head"><i class="fa fa-desktop color"></i> Top News</h4>
+{% set article = articles.currentPageResults.first %}
+{% if (article) %}
+    {% set imagineBlock = article.mainImage %}
+    {{ magazineItemOne(article) }}
+{% endif %}
+<hr>
+
+<!-- Magazine list -->
+<div class="magazine-list">
+    <ul class="list-unstyled">
+        <!-- List item starts -->
+        {% for article in articles.currentPageResults.slice(1, 4) %}
+            <li>
+                {{ magazineListItem(article) }}
+                <div class="clearfix"></div>
+            </li>
+
+        {% endfor %}
+        <!-- List item ends -->
+    </ul>
+</div>
