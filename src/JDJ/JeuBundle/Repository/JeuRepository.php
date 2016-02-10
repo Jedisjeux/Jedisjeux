@@ -78,8 +78,8 @@ class JeuRepository extends EntityRepository
     {
         if (array_key_exists('average', $sorting)) {
             $queryBuilder
-                ->join($this->getAlias().'.notes', "jeuNote")
-                ->join("jeuNote.note", "n")
+                ->leftJoin($this->getAlias().'.notes', "jeuNote")
+                ->leftJoin("jeuNote.note", "n")
                 ->groupBy($this->getAlias().'.id')
                 ->addSelect($queryBuilder->expr()->avg('n.valeur'). "AS HIDDEN noteAvg")
                 ->addOrderBy('noteAvg', $sorting['average']);
