@@ -60,3 +60,20 @@
         {{ meta|raw }}
     </div>
 {% endmacro %}
+
+{% macro blogCommentItem(imagePath, imageLabel, imageFilter, imageClass, linkUrl, title, createdAt, body) %}
+    {% from 'macros/images.html.twig' import image %}
+
+    <div class="blog-comment-item">
+        <div class="comment-author-image">
+            {{ image(imagePath, imageFilter, imageLabel, imageClass, linkUrl) }}
+            {#<a href="#"><img src="img/user/1.jpg" alt="" class="img-responsive img-thumbnail"></a>#}
+        </div>
+        <div class="comment-details">
+            <!-- Name -->
+            <h5><a href="{{ linkUrl }}">{{ title }}</a> <small>{{ createdAt|date('d/m/Y') }}</small></h5>
+            <!-- Paragraph -->
+            {{ body|raw }}
+        </div>
+    </div>
+{% endmacro %}

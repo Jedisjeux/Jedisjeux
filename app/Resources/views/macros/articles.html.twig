@@ -1,5 +1,5 @@
 {% macro magazineItemOne(article, imageFilter) %}
-    {% import 'macros/listElements.html.twig' as listElement %}
+    {% import 'macros/items.html.twig' as item %}
     {% set imagineBlock = article.mainImage %}
 
     {% set meta %}
@@ -13,12 +13,12 @@
 
     {% set imageFilter = imageFilter|default('cmf_magazine_item_wide') %}
 
-    {{ listElement.magazineItemOne(imagineBlock.image.id, imagineBlock.label, imageFilter, 'img-responsive', path('article_content_show', {'name': article.name}), article.title, body, meta) }}
+    {{ item.magazineItemOne(imagineBlock.image.id, imagineBlock.label, imageFilter, 'img-responsive', path('article_content_show', {'name': article.name}), article.title, body, meta) }}
 
 {% endmacro %}
 
 {% macro magazineItemTwo(article, imageFilter) %}
-    {% import 'macros/listElements.html.twig' as listElement %}
+    {% import 'macros/items.html.twig' as item %}
     {% set imagineBlock = article.mainImage %}
 
     {% set meta %}
@@ -32,12 +32,12 @@
 
     {% set imageFilter = imageFilter|default('cmf_magazine_item') %}
 
-    {{ listElement.magazineItemTwo(imagineBlock.image.id, imagineBlock.label, imageFilter, 'img-responsive', path('article_content_show', {'name': article.name}), article.title, body, meta) }}
+    {{ item.magazineItemTwo(imagineBlock.image.id, imagineBlock.label, imageFilter, 'img-responsive', path('article_content_show', {'name': article.name}), article.title, body, meta) }}
 
 {% endmacro %}
 
 {% macro magazineListItem(article) %}
-    {% import 'macros/listElements.html.twig' as listElement %}
+    {% import 'macros/items.html.twig' as item %}
     {% set imagineBlock = article.mainImage %}
 
     {% set meta %}
@@ -45,12 +45,12 @@
         - <i class="fa fa-comments"></i> 5 Comments
     {% endset %}
 
-    {{ listElement.magazineListItem(imagineBlock.image.id, imagineBlock.label, 'cmf_thumbnail', 'img-responsive', path('article_content_show', {'name': article.name}), article.title, meta) }}
+    {{ item.magazineListItem(imagineBlock.image.id, imagineBlock.label, 'cmf_thumbnail', 'img-responsive', path('article_content_show', {'name': article.name}), article.title, meta) }}
 
 {% endmacro %}
 
 {% macro magazineListItemImageLess(article) %}
-    {% import 'macros/listElements.html.twig' as listElement %}
+    {% import 'macros/items.html.twig' as item %}
     {% set imagineBlock = article.mainImage %}
 
     {% set meta %}
@@ -58,6 +58,6 @@
         - <i class="fa fa-comments"></i> 5 Comments
     {% endset %}
 
-    {{ listElement.magazineListItemImageLess(path('article_content_show', {'name': article.name}), article.title, meta) }}
+    {{ item.magazineListItemImageLess(path('article_content_show', {'name': article.name}), article.title, meta) }}
 
 {% endmacro %}
