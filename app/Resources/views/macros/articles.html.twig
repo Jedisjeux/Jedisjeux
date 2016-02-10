@@ -48,3 +48,16 @@
     {{ listElement.magazineListItem(imagineBlock.image.id, imagineBlock.label, 'cmf_thumbnail', 'img-responsive', path('article_content_show', {'name': article.name}), article.title, meta) }}
 
 {% endmacro %}
+
+{% macro magazineListItemImageLess(article) %}
+    {% import 'macros/listElements.html.twig' as listElement %}
+    {% set imagineBlock = article.mainImage %}
+
+    {% set meta %}
+        <i class="fa fa-calendar"></i> <!-- TODO publishedAt -->{{ article.createdAt|localizeddate('long', 'none') }}
+        - <i class="fa fa-comments"></i> 5 Comments
+    {% endset %}
+
+    {{ listElement.magazineListItemImageLess(path('article_content_show', {'name': article.name}), article.title, meta) }}
+
+{% endmacro %}

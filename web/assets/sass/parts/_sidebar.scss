@@ -1,0 +1,33 @@
+.sidebar {
+  .score-list-content {
+    display: block;
+
+    ul {
+      padding: 0px;
+      margin: 0px;
+      list-style-type: none;
+
+      img, .anonymous-user {
+        max-width: 60px;
+        float: left;
+        margin-right: 10px;
+        margin-top: 3px;
+      }
+    }
+  }
+
+  .anonymous-user {
+    margin-right: 10px;
+    margin-top: 3px;
+    float: left;
+    width: 60px;
+    height: 60px;
+    display: block;
+    vertical-align: middle;
+    text-align: center;
+
+    .fa {
+      font-size: 50px;
+    }
+  }
+}
