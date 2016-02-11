@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+{% from 'macros/misc.html.twig' import pagination %}
+{% import 'macros/items.html.twig' as item %}
+
+{% block headline %}
+    Les avis de jeux
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body -%}
+    <div class="blog-comments">
+        {% for user_review in user_reviews %}
+            {% set game = user_review.jeuNote.jeu %}
+            {% set user = user_review.jeuNote.author %}
+            {{ item.blogCommentItem(game.imageCouverture.webPath, user.username, 'thumbnail', 'img-responsive img-thumbnail', '#', user_review.libelle, user_review.createdAt, user_review.body) }}
+        {% endfor %}
+    </div>
+
+    {% block Pagination %}
+        {{ pagination(user_reviews) }}
+    {% endblock %}
+{% endblock %}

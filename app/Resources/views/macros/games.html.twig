@@ -9,7 +9,7 @@
 {% endspaceless %}{% endmacro %}
 
 {% macro magazineItemOne(game) %}
-    {% import 'macros/listElements.html.twig' as listElement %}
+    {% import 'macros/items.html.twig' as item %}
 
     {% set meta %}
         <i class="fa fa-calendar"></i> <!-- TODO publishedAt -->{{ game.createdAt|localizeddate('long', 'none') }}
@@ -20,6 +20,6 @@
             consectetur. </p>
     {% endset %}
 
-    {{ listElement.magazineItemOne(game.imageCouverture.webPath, game.name, 'magazine_item', 'img-responsive', path('jeu_show', {'id': game.id, 'slug': game.slug}), game.name, body, meta) }}
+    {{ item.magazineItemOne(game.imageCouverture.webPath, game.name, 'magazine_item', 'img-responsive', path('jeu_show', {'id': game.id, 'slug': game.slug}), game.name, body, meta) }}
 
 {% endmacro %}
