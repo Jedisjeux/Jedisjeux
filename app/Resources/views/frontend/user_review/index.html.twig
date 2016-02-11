@@ -15,7 +15,8 @@
         {% for user_review in user_reviews %}
             {% set game = user_review.jeuNote.jeu %}
             {% set user = user_review.jeuNote.author %}
-            {{ item.blogCommentItem(game.imageCouverture.webPath, user.username, 'thumbnail', 'img-responsive img-thumbnail', '#', user_review.libelle, user_review.createdAt, user_review.body) }}
+            {% set imagePath = user.avatar ? user.avatar.webPath : '/assets/img/avatar_2x.png' %}
+            {{ item.blogCommentItem(imagePath, user.username, 'thumbnail', 'img-responsive img-round', '#', user_review.libelle, user_review.createdAt, user_review.body) }}
         {% endfor %}
     </div>
 
