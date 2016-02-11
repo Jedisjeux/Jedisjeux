@@ -159,6 +159,7 @@ class LoadArticlesCommand extends ContainerAwareCommand
             ->setTitle($data['title'])
             ->setBody($this->nl2p($data['body']))
             ->setName($name)
+            ->setClass($data['class'] ?: null)
             ->setPublishable(true);
 
         return $block;
@@ -284,6 +285,9 @@ EOM;
         select block.text_id as id,
                 block.text_titre as title,
                 block.text as body,
+                case block.style
+                    when 5 then 'well'
+                end as class,
                 case block.style
                     when 1 then 'left'
                     when 2 then 'right'

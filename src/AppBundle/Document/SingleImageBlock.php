@@ -9,7 +9,6 @@
 namespace AppBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
-use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SimpleBlock;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SlideshowBlock;
 
 /**
@@ -29,6 +28,13 @@ class SingleImageBlock extends SlideshowBlock
      * @PHPCR\String(nullable=false)
      */
     protected $body;
+
+    /**
+     * @var string
+     *
+     * @PHPCR\String(nullable=true)
+     */
+    protected $class;
 
     /**
      * @var string
@@ -80,5 +86,25 @@ class SingleImageBlock extends SlideshowBlock
     public function getType()
     {
         return 'app.block.single_image';
+    }
+
+    /**
+     * @return string
+     */
+    public function getClass()
+    {
+        return $this->class;
+    }
+
+    /**
+     * @param string $class
+     *
+     * @return $this
+     */
+    public function setClass($class)
+    {
+        $this->class = $class;
+
+        return $this;
     }
 }

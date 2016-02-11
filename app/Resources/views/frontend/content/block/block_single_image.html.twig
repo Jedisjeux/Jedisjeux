@@ -33,7 +33,7 @@
     </div>
 {% endset %}
 
-
+<div class="{{ block.class }}">
 {% if 'left' == block.imagePosition %}
     <div class="pull-left">
         {{ imageBlock }}
@@ -53,5 +53,5 @@
     {{ block.body|raw }}
     {{ imageBlock }}
 {% endif %}
-
+</div>
 <div class="clearfix"></div>
