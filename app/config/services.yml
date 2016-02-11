@@ -28,9 +28,6 @@ services:
         tags:
             - { name: sonata.block }
 
-    fos_user.doctrine_registry:
-        alias: doctrine
-
     app.block.blockquote:
         class: AppBundle\Block\BlockquoteBlockService
         arguments:
