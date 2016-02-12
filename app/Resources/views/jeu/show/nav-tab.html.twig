@@ -28,6 +28,12 @@
 
             {#{% endfor %}#}
 
+            {{ render(url('user_review_index', {
+                'criteria': {
+                    'jeu': jeu.id
+                },
+                'template': '_index_by_game.html.twig'
+            })) }}
         </div>
         <div class="tab-pane fade" id="settings-2">
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et

@@ -21,7 +21,6 @@ class UserReviewRepository extends EntityRepository
      */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)
     {
-        parent::applyCriteria($queryBuilder, $criteria);
 
         /**
          * Filter on personne
@@ -30,11 +29,12 @@ class UserReviewRepository extends EntityRepository
             $queryBuilder
                 ->join($this->getAlias().".jeuNote", "jeuNote")
                 ->join("jeuNote.jeu", "jeu")
-                ->where(":personneId MEMBER OF jeu.auteurs
-                    or :personneId MEMBER OF jeu.illustrateurs
-                    or :personneId MEMBER OF jeu.editeurs")
-                ->setParameter("personneId", $criteria['personne']->getId())
+                ->where(":personne MEMBER OF jeu.auteurs
+                    or :personne MEMBER OF jeu.illustrateurs
+                    or :personne MEMBER OF jeu.editeurs")
+                ->setParameter("personne", $criteria['personne'])
             ;
+            unset($criteria['personne']);
         }
 
         /**
@@ -46,6 +46,7 @@ class UserReviewRepository extends EntityRepository
                 ->where(":authorId MEMBER OF jeuNote.author")
                 ->setParameter("personneId", $criteria['author']->getId())
             ;
+            unset($criteria['author']);
         }
 
         /**
@@ -54,9 +55,12 @@ class UserReviewRepository extends EntityRepository
         if (array_key_exists("jeu", (array)$criteria)) {
             $queryBuilder
                 ->join($this->getAlias().".jeuNote", "jeuNote")
-                ->andWhere($queryBuilder->expr()->eq("jeuNote.jeu", ':jeuId'))
-                ->setParameter("jeuId", $criteria['jeu']->getId())
+                ->andWhere('jeuNote.jeu = :jeu')
+                ->setParameter("jeu", $criteria['jeu'])
             ;
+            unset($criteria['jeu']);
         }
+
+        parent::applyCriteria($queryBuilder, $criteria);
     }
 } 
