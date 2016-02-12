@@ -6,28 +6,24 @@
  * Time: 19:34
  */
 
-namespace JDJ\UserBundle\Command;
+namespace AppBundle\Command;
 
 use JDJ\UserBundle\Entity\Avatar;
-use JDJ\UserBundle\Entity\User;
 use JDJ\UserBundle\Service\AvatarImportService;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class AvatarImportCommand
- * @package JDJ\UserBundle\Command
+ * @author Loïc Frémont <loic@mobizel.com>
  */
-class AvatarImportCommand extends ContainerAwareCommand
+class DownloadAvatarCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
-            ->setName('app:avatar:import')
-            ->setDescription('Greet someone')
+            ->setName('app:avatars:download')
+            ->setDescription('Download avatars of all users')
         ;
     }
 
@@ -43,13 +39,15 @@ class AvatarImportCommand extends ContainerAwareCommand
         foreach ($avatars as $avatar) {
 
             if (!file_exists($avatar->getAbsolutePath())) {
-                $output->writeln("Downloading avatar ".$avatarImportService->getAvatarOriginalPath($avatar));
+                $output->writeln("Downloading avatar <info>".$avatarImportService->getAvatarOriginalPath($avatar)."</info>");
 
-                $avatarImportService
-                    ->downloadAvatar($avatar);
+                try {
+                    $avatarImportService
+                        ->downloadAvatar($avatar);
+                } catch(\Exception $e) {
+                    $output->writeln("<error>Downloading failed</error>");
+                }
             }
-
-
         }
     }
 } 
