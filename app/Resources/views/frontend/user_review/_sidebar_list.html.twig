@@ -1,0 +1,21 @@
+{% from 'macros/users.html.twig' import avatar %}
+
+{% for user_review in user_reviews %}
+    {% set user = user_review.jeuNote.author %}
+    <li>
+        <a href="{{ path('user_review_show', {'id': user_review.id, 'slug': user_review.jeuNote.jeu.slug}) }}">
+            <!-- Item image -->
+            <img src="{{ avatar(user) | imagine_filter('thumbnail') }}" alt="" class="img-responsive img-round"/>
+
+            <!-- Item title -->
+            <span>{{ user_review.libelle }}</span><br/>
+
+            <div class="rating-container rating-gly-star" data-content="">
+                <div class="rating-stars" data-content=""
+                     style="width: {{ user_review.jeuNote.note.valeur }}0%;"></div>
+            </div>
+
+            <div class="clearfix"></div>
+        </a>
+    </li>
+{% endfor %}

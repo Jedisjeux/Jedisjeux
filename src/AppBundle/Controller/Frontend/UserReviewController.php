@@ -38,6 +38,7 @@ class UserReviewController extends Controller
         $userReviews = $this
             ->getRepository()
             ->createPaginator($criteria, $sorting)
+            ->setMaxPerPage($request->get('maxPerPage', 10))
             ->setCurrentPage($request->get('page', 1));
 
         return $this->render('frontend/user_review/'.$template, array(
