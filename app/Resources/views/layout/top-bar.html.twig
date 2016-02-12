@@ -34,7 +34,7 @@
             {% if app.user %}
                 {% set user = app.security.getToken().getUser() %}
 
-                <a href="#" data-toggle="dropdown"><img src="{{ avatar(user) }}" class="avatar img-round" /> {{ user }} <i
+                <a href="#" data-toggle="dropdown"><img src="{{ avatar(user) | imagine_filter('thumbnail') }} " class="avatar img-round" /> {{ user }} <i
                             class="fa fa-angle-down color"></i></a>
                 <!-- Dropdown menu with languages -->
                 <ul class="dropdown-menu dropdown-mini" role="menu">

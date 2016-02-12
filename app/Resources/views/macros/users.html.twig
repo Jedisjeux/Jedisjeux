@@ -1,7 +1,4 @@
-{% macro avatar(user) %}
-    {% set imageSrc = '//ssl.gstatic.com/accounts/ui/avatar_2x.png' %}
-
-    {% set imageSrc = user.avatar ? user.avatar.webPath | imagine_filter('thumbnail') : '//ssl.gstatic.com/accounts/ui/avatar_2x.png' %}
-
+{% macro avatar(user) %}{% spaceless %}
+    {% set imageSrc = user.avatar ? user.avatar.webPath : '/assets/img/avatar_2x.png' %}
     {{ imageSrc }}
-{% endmacro %}
+{% endspaceless %}{% endmacro %}

@@ -1,6 +1,7 @@
 {% extends "base.html.twig" %}
 {% from 'macros/misc.html.twig' import pagination %}
 {% import 'macros/items.html.twig' as item %}
+{% from 'macros/users.html.twig' import avatar %}
 
 {% block headline %}
     Les avis de jeux
@@ -8,6 +9,7 @@
 
 {% block breadcrumb_content %}
     {{ parent() }}
+    <a href="{{ path('user_review_index') }}">Avis</a>
 {% endblock %}
 
 {% block body -%}
@@ -15,7 +17,7 @@
         {% for user_review in user_reviews %}
             {% set game = user_review.jeuNote.jeu %}
             {% set user = user_review.jeuNote.author %}
-            {% set imagePath = user.avatar ? user.avatar.webPath : '/assets/img/avatar_2x.png' %}
+            {% set imagePath = avatar(user) %}
             {{ item.blogCommentItem(imagePath, user.username, 'thumbnail', 'img-responsive img-round', '#', user_review.libelle, user_review.createdAt, user_review.body) }}
         {% endfor %}
     </div>
