@@ -1,42 +1,10 @@
-<!-- Heading -->
-<h3>
-    <a href="#">{{ userReview.libelle }}</a>
-</h3>
-<!-- Blog meta -->
-<div class="blog-meta">
-    <!-- Author -->
-    <a href="#">
-        {% if (userReview.jeuNote.author.avatar) %}
-            <img src="{{ userReview.jeuNote.author.avatar.webPath | imagine_filter('default') }}" alt=""
-                 class="img-responsive">&nbsp;
+{% from 'macros/user_reviews.html.twig' import blogCommentItem %}
+<div class="blog-comments">
+    {{ blogCommentItem(userReview) }}
+
+    <div class="text-right">
+        {% if app.security.getToken().getUser() != userReview.jeuNote.author %}
+            {% render url('user_review_like', { 'id': userReview.id }) %}
         {% endif %}
-        {{ userReview.jeuNote.author.username }}</a> &nbsp;
-
-    <div class="rating-container rating-gly-star" data-content="">
-        <div class="rating-stars" data-content="" style="width: {{ userReview.jeuNote.note.valeur }}0%;"></div>
     </div>
-
-    <span>
-        <label>{{ userReview.jeuNote.note.libelle }}</label>
-    </span>&nbsp;
-
-    <!-- Date -->
-    <a href="#"><i class="fa fa-calendar"></i> &nbsp; {{ userReview.createdAt | date('d/m/Y') }}</a> &nbsp;
-
-    <!-- useless ? -->
-    <a href="#"><i class="fa fa-thumbs-up"></i> <span data-user-review="{{ userReview.id }}"
-                                                      class="nbLikes">{{ userReview.nbLikes }}</span></a> &nbsp;
-    <a href="#"><i class="fa fa-thumbs-down"></i> <span data-user-review="{{ userReview.id }}"
-                                                        class="nbDislikes">{{ userReview.nbDislikes }}</span></a> &nbsp;
-
-
-</div>
-
-<!-- Paragraph -->
-{{ userReview.body | raw }}
-
-<div>
-    {% if app.security.getToken().getUser() != userReview.jeuNote.author %}
-        {% render url('user_review_like', { 'id': userReview.id }) %}
-    {% endif %}
 </div>
