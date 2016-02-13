@@ -83,7 +83,7 @@ insert into jdj_user_review (
 )
 select      old.id,
       old.accroche,
-      concat ('<p>', old.avis, '</p>'),
+      concat ('<p>', replace(old.avis, '\n', '</p><p>') , '</p>'),
       date,
       date,
       jeuNote.id

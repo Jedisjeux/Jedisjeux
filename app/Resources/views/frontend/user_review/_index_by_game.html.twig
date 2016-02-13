@@ -1,15 +1,9 @@
 {% import 'macros/items.html.twig' as item %}
-{% from 'macros/users.html.twig' import avatar %}
+{% from 'macros/user_reviews.html.twig' import blogCommentItem %}
 
 <div class="blog-comments">
     {% for user_review in user_reviews %}
-        {% set game = user_review.jeuNote.jeu %}
-        {% set user = user_review.jeuNote.author %}
-        {% set imagePath = avatar(user) %}
-        <div class="pull-right rating-container rating-gly-star" data-content="">
-            <div class="rating-stars" data-content="" style="width: {{ user_review.jeuNote.note.valeur }}0%;"></div>
-        </div>
-        {{ item.blogCommentItem(imagePath, user.username, 'thumbnail', 'img-responsive img-round', '#', user_review.libelle, user_review.createdAt, user_review.body) }}
+        {{ blogCommentItem(user_review) }}
     {% endfor %}
 </div>
 
