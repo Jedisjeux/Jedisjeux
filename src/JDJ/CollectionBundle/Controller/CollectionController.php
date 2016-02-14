@@ -73,7 +73,7 @@ class CollectionController extends Controller
                 ->getUserCollection($user);
         }
 
-        return $this->render('jeu/show/modal/collection.html.twig', array(
+        return $this->render('frontend/game/show/modal/collection.html.twig', array(
             'collectionList' => $collectionList,
             'jeu' => $jeu,
         ));

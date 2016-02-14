@@ -79,7 +79,7 @@ class JeuController extends Controller
         }
 
 
-        return $this->render('jeu/show.html.twig', array(
+        return $this->render('frontend/game/show.html.twig', array(
                 'jeu' => $entity,
                 'userReviews' => $userReviews,
                 'userGameAttribute' => $userGameAttribute,
