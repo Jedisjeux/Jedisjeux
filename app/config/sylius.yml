@@ -1,16 +1,20 @@
 sylius_content:
     driver: doctrine/phpcr-odm
-    classes:
+    resources:
         imagine_block:
-            repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
+            classes:
+                repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
         simple_block:
-            repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
+            classes:
+                repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
         slideshow_block:
-            repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
+            classes:
+                repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
         static_content:
-            repository: Sylius\Bundle\ContentBundle\Doctrine\ODM\PHPCR\StaticContentRepository
-            form:
-                choice: Sylius\Bundle\ContentBundle\Form\Type\StaticContentChoiceType
+            classes:
+                repository: Sylius\Bundle\ContentBundle\Doctrine\ODM\PHPCR\StaticContentRepository
+                form:
+                    choice: Sylius\Bundle\ContentBundle\Form\Type\StaticContentChoiceType
 
 sylius_resource:
     resources:

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "952ae2b0428bf80367647e7d5663c282",
-    "content-hash": "6f3a64d35c86bdc52e7982cf54a6b91f",
+    "hash": "ce5c4b2730afa389484245fe30a00fb4",
+    "content-hash": "79cd03bb64b053b484f685a1d8f85630",
     "packages": [
         {
             "name": "behat/behat",
@@ -625,30 +625,31 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cocur/slugify.git",
-                "reference": "5b9c427e09d5b14587b9c5d0643a8e61d05fe2e1"
+                "reference": "16cdd7e792657d524cde931ea666436623b23301"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cocur/slugify/zipball/5b9c427e09d5b14587b9c5d0643a8e61d05fe2e1",
-                "reference": "5b9c427e09d5b14587b9c5d0643a8e61d05fe2e1",
+                "url": "https://api.github.com/repos/cocur/slugify/zipball/16cdd7e792657d524cde931ea666436623b23301",
+                "reference": "16cdd7e792657d524cde931ea666436623b23301",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6"
+                "php": ">=5.3.3"
             },
             "require-dev": {
-                "laravel/framework": "~5.1",
+                "codeclimate/php-test-reporter": "dev-master",
+                "laravel/framework": "~4.1",
                 "latte/latte": "~2.2",
-                "mikey179/vfsstream": "~1.6",
                 "mockery/mockery": "~0.9",
                 "nette/di": "~2.2",
-                "phpunit/phpunit": "~5.1.3",
-                "pimple/pimple": "~1.1",
+                "phpunit/phpunit": "~4.6",
                 "plumphp/plum": "~0.1",
-                "silex/silex": "~1.3",
-                "symfony/dependency-injection": "~2.4|~3.0",
-                "symfony/http-kernel": "~2.4|~3.0",
-                "twig/twig": "~1.12",
+                "sami/sami": "~1.3",
+                "satooshi/php-coveralls": "0.6.*",
+                "silex/silex": "~1.2",
+                "symfony/dependency-injection": "~2.4",
+                "symfony/http-kernel": "~2.4",
+                "twig/twig": "~1",
                 "zendframework/zend-modulemanager": "~2.2",
                 "zendframework/zend-servicemanager": "~2.2",
                 "zendframework/zend-view": "~2.2"
@@ -679,7 +680,7 @@
                 "slug",
                 "slugify"
             ],
-            "time": "2016-02-11 09:44:12"
+            "time": "2016-02-11 09:53:46"
         },
         {
             "name": "craue/formflow-bundle",
@@ -3189,36 +3190,41 @@
         },
         {
             "name": "jms/serializer",
-            "version": "0.16.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/serializer.git",
-                "reference": "c8a171357ca92b6706e395c757f334902d430ea9"
+                "reference": "fe13a1f993ea3456e195b7820692f2eb2b6bbb48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/c8a171357ca92b6706e395c757f334902d430ea9",
-                "reference": "c8a171357ca92b6706e395c757f334902d430ea9",
+                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/fe13a1f993ea3456e195b7820692f2eb2b6bbb48",
+                "reference": "fe13a1f993ea3456e195b7820692f2eb2b6bbb48",
                 "shasum": ""
             },
             "require": {
                 "doctrine/annotations": "1.*",
+                "doctrine/instantiator": "~1.0.3",
                 "jms/metadata": "~1.1",
                 "jms/parser-lib": "1.*",
-                "php": ">=5.3.2",
+                "php": ">=5.4.0",
                 "phpcollection/phpcollection": "~0.1"
+            },
+            "conflict": {
+                "twig/twig": "<1.12"
             },
             "require-dev": {
                 "doctrine/orm": "~2.1",
                 "doctrine/phpcr-odm": "~1.0.1",
                 "jackalope/jackalope-doctrine-dbal": "1.0.*",
+                "phpunit/phpunit": "~4.0",
                 "propel/propel1": "~1.7",
                 "symfony/filesystem": "2.*",
                 "symfony/form": "~2.1",
                 "symfony/translation": "~2.0",
                 "symfony/validator": "~2.0",
                 "symfony/yaml": "2.*",
-                "twig/twig": ">=1.8,<2.0-dev"
+                "twig/twig": "~1.12|~2.0"
             },
             "suggest": {
                 "symfony/yaml": "Required if you'd like to serialize data to YAML format."
@@ -3226,7 +3232,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.15-dev"
+                    "dev-master": "1.1-dev"
                 }
             },
             "autoload": {
@@ -3240,10 +3246,8 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes Schmitt",
-                    "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
-                    "role": "Developer of wrapped JMSSerializerBundle"
+                    "name": "Johannes M. Schmitt",
+                    "email": "schmittjoh@gmail.com"
                 }
             ],
             "description": "Library for (de-)serializing data of any complexity; supports XML, JSON, and YAML.",
@@ -3255,27 +3259,28 @@
                 "serialization",
                 "xml"
             ],
-            "time": "2014-03-18 08:39:00"
+            "time": "2015-10-27 09:24:41"
         },
         {
             "name": "jms/serializer-bundle",
-            "version": "0.13.0",
+            "version": "1.1.0",
             "target-dir": "JMS/SerializerBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/JMSSerializerBundle.git",
-                "reference": "bb15db3e661168f4310fad48b86915ff1ca33795"
+                "reference": "3e396c980545350c2efb65a50041d2a9f9d6562e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/JMSSerializerBundle/zipball/bb15db3e661168f4310fad48b86915ff1ca33795",
-                "reference": "bb15db3e661168f4310fad48b86915ff1ca33795",
+                "url": "https://api.github.com/repos/schmittjoh/JMSSerializerBundle/zipball/3e396c980545350c2efb65a50041d2a9f9d6562e",
+                "reference": "3e396c980545350c2efb65a50041d2a9f9d6562e",
                 "shasum": ""
             },
             "require": {
-                "jms/serializer": "~0.11",
-                "php": ">=5.3.2",
-                "symfony/framework-bundle": "~2.1"
+                "jms/serializer": "^1.0.0",
+                "php": ">=5.4.0",
+                "phpoption/phpoption": "^1.1.0",
+                "symfony/framework-bundle": "~2.3|~3.0"
             },
             "require-dev": {
                 "doctrine/doctrine-bundle": "*",
@@ -3286,6 +3291,7 @@
                 "symfony/finder": "*",
                 "symfony/form": "*",
                 "symfony/process": "*",
+                "symfony/stopwatch": "*",
                 "symfony/twig-bundle": "*",
                 "symfony/validator": "*",
                 "symfony/yaml": "*"
@@ -3296,7 +3302,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.13-dev"
+                    "dev-master": "1.1-dev"
                 }
             },
             "autoload": {
@@ -3310,10 +3316,8 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes Schmitt",
-                    "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
-                    "role": "Developer of wrapped JMSSerializerBundle"
+                    "name": "Johannes M. Schmitt",
+                    "email": "schmittjoh@gmail.com"
                 }
             ],
             "description": "Allows you to easily serialize, and deserialize data of any complexity",
@@ -3325,7 +3329,7 @@
                 "serialization",
                 "xml"
             ],
-            "time": "2013-12-05 14:36:11"
+            "time": "2015-11-10 12:26:42"
         },
         {
             "name": "jms/translation-bundle",
@@ -3847,12 +3851,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/liip/LiipImagineBundle.git",
-                "reference": "417a2d594ea05f0cf963dfee94331a49a2c4e14e"
+                "reference": "73a6497c7126aa7c70581ef8344832db3e3be86e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/417a2d594ea05f0cf963dfee94331a49a2c4e14e",
-                "reference": "417a2d594ea05f0cf963dfee94331a49a2c4e14e",
+                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/73a6497c7126aa7c70581ef8344832db3e3be86e",
+                "reference": "73a6497c7126aa7c70581ef8344832db3e3be86e",
                 "shasum": ""
             },
             "require": {
@@ -3913,7 +3917,7 @@
                 "image",
                 "imagine"
             ],
-            "time": "2016-01-22 13:58:54"
+            "time": "2016-02-13 20:34:37"
         },
         {
             "name": "midgard/createphp",
@@ -4546,16 +4550,16 @@
         },
         {
             "name": "phpcr/phpcr-utils",
-            "version": "1.2.8",
+            "version": "1.2.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpcr/phpcr-utils.git",
-                "reference": "778fc1cdffacb0ee99f52790e656a2acb85b9dfa"
+                "reference": "9f51c3ebfcd1afd83d52f8735a4b14f8bee7e210"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpcr/phpcr-utils/zipball/778fc1cdffacb0ee99f52790e656a2acb85b9dfa",
-                "reference": "778fc1cdffacb0ee99f52790e656a2acb85b9dfa",
+                "url": "https://api.github.com/repos/phpcr/phpcr-utils/zipball/9f51c3ebfcd1afd83d52f8735a4b14f8bee7e210",
+                "reference": "9f51c3ebfcd1afd83d52f8735a4b14f8bee7e210",
                 "shasum": ""
             },
             "require": {
@@ -4613,7 +4617,7 @@
                 "contentrepository",
                 "phpcr"
             ],
-            "time": "2015-10-10 08:53:20"
+            "time": "2016-02-12 13:58:06"
         },
         {
             "name": "phpdocumentor/reflection-docblock",
@@ -5929,12 +5933,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataIntlBundle.git",
-                "reference": "97c2f5cd2a3f09ddd5c79725e91ab4ac46729950"
+                "reference": "1b3beaba81a72ad5391b4e4307197b1145e382a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataIntlBundle/zipball/97c2f5cd2a3f09ddd5c79725e91ab4ac46729950",
-                "reference": "97c2f5cd2a3f09ddd5c79725e91ab4ac46729950",
+                "url": "https://api.github.com/repos/sonata-project/SonataIntlBundle/zipball/1b3beaba81a72ad5391b4e4307197b1145e382a3",
+                "reference": "1b3beaba81a72ad5391b4e4307197b1145e382a3",
                 "shasum": ""
             },
             "require": {
@@ -5949,7 +5953,8 @@
                 "matthiasnoback/symfony-dependency-injection-test": "^0.7.6",
                 "sonata-project/user-bundle": "~2.2",
                 "symfony/phpunit-bridge": "~2.7|~3.0",
-                "symfony/security": "~2.2|~3.0"
+                "symfony/security": "~2.2|~3.0",
+                "symfony/security-acl": "~2.2|~3.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -5985,7 +5990,7 @@
                 "sonata",
                 "time"
             ],
-            "time": "2016-01-25 15:49:56"
+            "time": "2016-02-12 14:49:44"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -6103,38 +6108,38 @@
         },
         {
             "name": "sylius/content-bundle",
-            "version": "v0.15.0",
+            "version": "v0.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusContentBundle.git",
-                "reference": "a798b70b3071ff209f608a0caab88da73b99fee7"
+                "reference": "f647b4f432eb0847543dc8f0106dd4a30a04ea5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusContentBundle/zipball/a798b70b3071ff209f608a0caab88da73b99fee7",
-                "reference": "a798b70b3071ff209f608a0caab88da73b99fee7",
+                "url": "https://api.github.com/repos/Sylius/SyliusContentBundle/zipball/f647b4f432eb0847543dc8f0106dd4a30a04ea5e",
+                "reference": "f647b4f432eb0847543dc8f0106dd4a30a04ea5e",
                 "shasum": ""
             },
             "require": {
                 "jackalope/jackalope-doctrine-dbal": "^1.1.2",
-                "php": ">=5.3.3",
-                "sylius/resource-bundle": "0.15.*@dev",
+                "php": "^5.5.9|^7.0",
+                "sylius/resource-bundle": "0.16.*",
                 "symfony-cmf/block-bundle": "~1.2",
                 "symfony-cmf/content-bundle": "~1.2",
                 "symfony-cmf/create-bundle": "~1.2",
                 "symfony-cmf/media-bundle": "~1.2",
                 "symfony-cmf/menu-bundle": "~1.2",
                 "symfony-cmf/routing-bundle": "~1.2",
-                "symfony/framework-bundle": "~2.3"
+                "symfony/framework-bundle": "^2.7.5"
             },
             "require-dev": {
-                "phpspec/phpspec": "~2.1",
-                "symfony/form": "~2.3"
+                "phpspec/phpspec": "^2.4",
+                "symfony/form": "^2.7"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.15-dev"
+                    "dev-master": "0.16-dev"
                 }
             },
             "autoload": {
@@ -6169,36 +6174,38 @@
                 "sylius",
                 "webshop"
             ],
-            "time": "2015-09-01 08:27:59"
+            "time": "2016-01-11 19:11:42"
         },
         {
             "name": "sylius/resource",
-            "version": "v0.15.0",
+            "version": "v0.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/Resource.git",
-                "reference": "38542753aee7f28c4e4692198f2ffa3a15b587ca"
+                "reference": "d143e41bb4bb565dd0a16277d5e81b9418dace08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/Resource/zipball/38542753aee7f28c4e4692198f2ffa3a15b587ca",
-                "reference": "38542753aee7f28c4e4692198f2ffa3a15b587ca",
+                "url": "https://api.github.com/repos/Sylius/Resource/zipball/d143e41bb4bb565dd0a16277d5e81b9418dace08",
+                "reference": "d143e41bb4bb565dd0a16277d5e81b9418dace08",
                 "shasum": ""
             },
             "require": {
                 "doctrine/collections": "~1.0",
                 "doctrine/common": "~2.3",
-                "php": ">=5.3.3",
-                "symfony/event-dispatcher": "~2.3",
+                "php": "^5.5.9|^7.0",
+                "symfony/event-dispatcher": "^2.7",
+                "symfony/property-access": "^2.7",
+                "white-october/pagerfanta-bundle": "^1.0",
                 "winzou/state-machine": "~0.1"
             },
             "require-dev": {
-                "phpspec/phpspec": "~2.1"
+                "phpspec/phpspec": "^2.4"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.15-dev"
+                    "dev-master": "0.16-dev"
                 }
             },
             "autoload": {
@@ -6234,56 +6241,61 @@
                 "shop",
                 "sylius"
             ],
-            "time": "2015-08-13 11:52:46"
+            "time": "2016-01-11 19:11:42"
         },
         {
             "name": "sylius/resource-bundle",
-            "version": "v0.15.0",
+            "version": "v0.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusResourceBundle.git",
-                "reference": "7c8191c9c171a904b19293d081a47c5b90dfa4b7"
+                "reference": "bf2d811e1043c47cc31250cde45a81d41a3513b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusResourceBundle/zipball/7c8191c9c171a904b19293d081a47c5b90dfa4b7",
-                "reference": "7c8191c9c171a904b19293d081a47c5b90dfa4b7",
+                "url": "https://api.github.com/repos/Sylius/SyliusResourceBundle/zipball/bf2d811e1043c47cc31250cde45a81d41a3513b5",
+                "reference": "bf2d811e1043c47cc31250cde45a81d41a3513b5",
                 "shasum": ""
             },
             "require": {
                 "doctrine/doctrine-bundle": "~1.3",
                 "friendsofsymfony/rest-bundle": "~1.5",
-                "jms/serializer-bundle": "~0.13",
-                "php": ">=5.3.9",
-                "sylius/resource": "0.15.*@dev",
-                "sylius/storage": "0.15.*@dev",
-                "symfony/expression-language": "~2.4",
-                "symfony/form": "~2.3",
-                "symfony/framework-bundle": "~2.3",
-                "symfony/twig-bundle": "~2.3",
-                "white-october/pagerfanta-bundle": "~1.0",
-                "willdurand/hateoas-bundle": "~0.4"
+                "jms/serializer-bundle": "^0.13|^1.0",
+                "php": "^5.5.9|^7.0",
+                "stof/doctrine-extensions-bundle": "~1.1",
+                "sylius/resource": "0.16.*",
+                "sylius/storage": "0.16.*",
+                "symfony/expression-language": "^2.7",
+                "symfony/form": "^2.7",
+                "symfony/framework-bundle": "^2.7.5",
+                "symfony/twig-bundle": "^2.7",
+                "symfony/validator": "^2.7",
+                "white-october/pagerfanta-bundle": "^1.0",
+                "willdurand/hateoas-bundle": "^0.4|^1.0"
             },
             "require-dev": {
-                "doctrine/mongodb-odm": "1.0.*@dev",
-                "doctrine/orm": "~2.4",
-                "doctrine/phpcr-bundle": "~1.1",
-                "phpspec/phpspec": "~2.1",
-                "sylius/rbac-bundle": "0.15.*@dev",
-                "sylius/translation-bundle": "0.15.*@dev",
+                "akeneo/phpspec-skip-example-extension": "~1.2",
+                "doctrine/mongodb-odm": "^1.0",
+                "doctrine/orm": "^2.4.8,<2.5",
+                "doctrine/phpcr-odm": "^1.3",
+                "jackalope/jackalope": "^1.2",
+                "jackalope/jackalope-doctrine-dbal": "^1.2",
+                "phpspec/phpspec": "^2.4",
+                "sylius/rbac-bundle": "0.16.*",
+                "sylius/translation-bundle": "0.16.*",
                 "twig/twig": "~1.11"
             },
             "suggest": {
                 "doctrine/mongodb-odm": "1.0.*@dev",
-                "doctrine/orm": "~2.4",
+                "doctrine/orm": "^2.4.8,<2.5",
                 "doctrine/phpcr-bundle": "~1.1",
-                "sylius/rbac-bundle": "0.15.*@dev",
-                "sylius/translation-bundle": "0.15.*@dev"
+                "sylius/rbac-bundle": "0.16.*",
+                "sylius/translation-bundle": "0.16.*"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.15-dev"
+                    "dev-master": "0.16-dev"
                 }
             },
             "autoload": {
@@ -6317,34 +6329,34 @@
                 "storage",
                 "sylius"
             ],
-            "time": "2015-09-01 09:06:35"
+            "time": "2016-01-11 19:11:42"
         },
         {
             "name": "sylius/storage",
-            "version": "v0.15.0",
+            "version": "v0.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/Storage.git",
-                "reference": "79779ce0a7c63fe3ec87451fdbc4c1e5a760950c"
+                "reference": "179883fe0b9adc3b7acc6fe019470b4eb506db12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/Storage/zipball/79779ce0a7c63fe3ec87451fdbc4c1e5a760950c",
-                "reference": "79779ce0a7c63fe3ec87451fdbc4c1e5a760950c",
+                "url": "https://api.github.com/repos/Sylius/Storage/zipball/179883fe0b9adc3b7acc6fe019470b4eb506db12",
+                "reference": "179883fe0b9adc3b7acc6fe019470b4eb506db12",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": "^5.5.9|^7.0"
             },
             "require-dev": {
                 "doctrine/cache": "~1.3",
-                "phpspec/phpspec": "~2.1",
-                "symfony/http-foundation": "~2.3"
+                "phpspec/phpspec": "^2.4",
+                "symfony/http-foundation": "^2.7"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.15-dev"
+                    "dev-master": "0.16-dev"
                 }
             },
             "autoload": {
@@ -6375,7 +6387,7 @@
             "keywords": [
                 "storage"
             ],
-            "time": "2015-06-23 08:19:45"
+            "time": "2016-01-11 19:11:42"
         },
         {
             "name": "symfony-cmf/block-bundle",
@@ -7654,12 +7666,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twbs/bootstrap-sass.git",
-                "reference": "31acbea483821acb726f1b4880d1452aee90367e"
+                "reference": "f17b502b4d04bd72871042e87ff676398b5e2405"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap-sass/zipball/31acbea483821acb726f1b4880d1452aee90367e",
-                "reference": "31acbea483821acb726f1b4880d1452aee90367e",
+                "url": "https://api.github.com/repos/twbs/bootstrap-sass/zipball/f17b502b4d04bd72871042e87ff676398b5e2405",
+                "reference": "f17b502b4d04bd72871042e87ff676398b5e2405",
                 "shasum": ""
             },
             "type": "library",
@@ -7699,7 +7711,7 @@
                 "css",
                 "sass"
             ],
-            "time": "2016-01-18 04:34:33"
+            "time": "2016-02-06 16:13:07"
         },
         {
             "name": "twig/extensions",
@@ -7868,34 +7880,34 @@
         },
         {
             "name": "willdurand/hateoas",
-            "version": "v2.6.0",
+            "version": "v2.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/willdurand/Hateoas.git",
-                "reference": "fc0869381d6934e5d430084154584761297caa6c"
+                "reference": "6e6ee945100bef3534c9276f0cf1c70d0115670c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/willdurand/Hateoas/zipball/fc0869381d6934e5d430084154584761297caa6c",
-                "reference": "fc0869381d6934e5d430084154584761297caa6c",
+                "url": "https://api.github.com/repos/willdurand/Hateoas/zipball/6e6ee945100bef3534c9276f0cf1c70d0115670c",
+                "reference": "6e6ee945100bef3534c9276f0cf1c70d0115670c",
                 "shasum": ""
             },
             "require": {
                 "doctrine/annotations": "~1.0",
                 "doctrine/common": "~2.0",
                 "jms/metadata": "~1.1",
-                "jms/serializer": "~0.13",
-                "php": ">=5.3",
-                "symfony/expression-language": "~2.4"
+                "jms/serializer": "~1.0",
+                "php": ">=5.4",
+                "symfony/expression-language": "~2.4 || ~3.0"
             },
             "require-dev": {
                 "atoum/atoum": "*@dev",
                 "hautelook/frankenstein": "~0.1",
                 "pagerfanta/pagerfanta": "~1.0",
                 "phpunit/phpunit": "~3.7",
-                "symfony/dependency-injection": "~2.0",
-                "symfony/routing": "~2.0",
-                "symfony/yaml": "~2.0",
+                "symfony/dependency-injection": "~2.0 || ~3.0",
+                "symfony/routing": "~2.0 || ~3.0",
+                "symfony/yaml": "~2.0 || ~3.0",
                 "twig/twig": "~1.12"
             },
             "suggest": {
@@ -7906,7 +7918,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.6-dev"
+                    "dev-master": "2.9-dev"
                 }
             },
             "autoload": {
@@ -7929,36 +7941,36 @@
                 }
             ],
             "description": "A PHP library to support implementing representations for HATEOAS REST web services",
-            "time": "2015-05-21 21:57:34"
+            "time": "2015-12-04 15:31:02"
         },
         {
             "name": "willdurand/hateoas-bundle",
-            "version": "0.5.0",
+            "version": "1.1.0",
             "target-dir": "Bazinga/Bundle/HateoasBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/willdurand/BazingaHateoasBundle.git",
-                "reference": "3c86e8080e8a229365a0ce91818da6fe6562376b"
+                "reference": "205a5a16899716f33edfb7a5afc4d451d0d2d0b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/willdurand/BazingaHateoasBundle/zipball/3c86e8080e8a229365a0ce91818da6fe6562376b",
-                "reference": "3c86e8080e8a229365a0ce91818da6fe6562376b",
+                "url": "https://api.github.com/repos/willdurand/BazingaHateoasBundle/zipball/205a5a16899716f33edfb7a5afc4d451d0d2d0b2",
+                "reference": "205a5a16899716f33edfb7a5afc4d451d0d2d0b2",
                 "shasum": ""
             },
             "require": {
-                "jms/serializer-bundle": "~0.13",
-                "symfony/framework-bundle": "~2.2",
-                "willdurand/hateoas": "~2.0"
+                "jms/serializer-bundle": "~1.0",
+                "symfony/framework-bundle": "~2.2 || ~3.0",
+                "willdurand/hateoas": "~2.9"
             },
             "require-dev": {
-                "symfony/expression-language": "~2.4",
+                "symfony/expression-language": "~2.4 || ~3.0",
                 "twig/twig": "~1.12"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.2-dev"
                 }
             },
             "autoload": {
@@ -7981,7 +7993,7 @@
                 "HATEOAS",
                 "rest"
             ],
-            "time": "2015-02-19 16:27:51"
+            "time": "2015-12-07 08:25:05"
         },
         {
             "name": "willdurand/jsonp-callback-validator",
