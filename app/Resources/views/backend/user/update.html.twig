@@ -2,18 +2,19 @@
 {% import 'macros/actions.html.twig' as action %}
 
 {% block headline %}
-    Nouveau mécanisme
+    Modifier un utilisateur
 {% endblock %}
 
 {% block breadcrumb_content %}
     {{ parent() }}
-    <a href="{{ path('admin_mechanism_index') }}">Mécanismes</a> /
-    Nouveau
+    <a href="{{ path('app_admin_user_index') }}">Utilisateurs</a> /
+    Modifier
 {% endblock %}
 
 {% block container %}
     {{ form_start(form) }}
+    <input type="hidden" name="_method" value="PUT" />
     {{ form_widget(form) }}
-    {{ action.create() }}
+    {{ action.update() }}
     {{ form_end(form) }}
 {% endblock container %}

@@ -2,18 +2,18 @@
 {% import 'macros/actions.html.twig' as action %}
 
 {% block headline %}
-    Modifier un utilisateur
+    Nouvelle personne
 {% endblock %}
 
 {% block breadcrumb_content %}
     {{ parent() }}
-    <a href="{{ path('admin_user_index') }}">Utilisateurs</a> /
-    Modifier
+    <a href="{{ path('app_admin_person_index') }}">Personnes</a> /
+    Nouveau
 {% endblock %}
 
 {% block container %}
     {{ form_start(form) }}
     {{ form_widget(form) }}
-    {{ action.update() }}
+    {{ action.create() }}
     {{ form_end(form) }}
 {% endblock container %}

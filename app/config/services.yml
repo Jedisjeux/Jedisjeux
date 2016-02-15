@@ -40,9 +40,17 @@ services:
             - {name: sonata.block}
 
     app.block.single_image:
-            class: AppBundle\Block\SingleImageBlockService
-            arguments:
-                - app.block.single_image
-                - @templating
-            tags:
-                - {name: sonata.block}
+        class: AppBundle\Block\SingleImageBlockService
+        arguments:
+            - app.block.single_image
+            - @templating
+        tags:
+            - {name: sonata.block}
+
+    app.factory.user_review:
+        class: %app.factory.user_review.class%
+        arguments:
+            - %app.model.user_review.class%
+        calls:
+            - [setUserRepository, ['@app.repository.user']]
+            - [setGameRepository, ['@app.repository.game']]

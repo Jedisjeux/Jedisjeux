@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use JDJ\CoreBundle\Entity\Image;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * Jeu
@@ -14,7 +15,7 @@ use JDJ\CoreBundle\Entity\Image;
  * @ORM\Entity(repositoryClass="JDJ\JeuBundle\Repository\JeuRepository")
  * @ORM\Table(name="jdj_jeu", indexes={@ORM\Index(name="search_idx", columns={"slug"})})
  */
-class Jeu
+class Jeu implements ResourceInterface
 {
     use TimestampableEntity;
 

@@ -25,7 +25,7 @@
 {% endblock %}
 
 {% block new_entity_button %}
-    <a class="btn btn-primary" href="{{ path('admin_game_new') }}">
+    <a class="btn btn-primary" href="{{ path('app_admin_game_create') }}">
         <span class="glyphicon glyphicon-plus-sign"></span>
         Nouveau jeu
     </a>
@@ -36,9 +36,9 @@
         <thead>
         <tr>
             <th>#</th>
-            <th>{{ sorting('admin_game_index', 'label.name'|trans, 'name', 'asc') }}</th>
-            <th>{{ sorting('admin_game_index', 'label.created_at'|trans, 'createdAt', icon, currentOrder) }}</th>
-            <th>{{ sorting('admin_game_index', 'label.status'|trans, 'status') }}</th>
+            <th>{{ sorting('app_admin_game_index', 'label.name'|trans, 'name', 'asc') }}</th>
+            <th>{{ sorting('app_admin_game_index', 'label.created_at'|trans, 'createdAt', icon, currentOrder) }}</th>
+            <th>{{ sorting('app_admin_game_index', 'label.status'|trans, 'status') }}</th>
         </tr>
         </thead>
         <tbody>
@@ -54,10 +54,10 @@
                             {{ button.show(path('jeu_show', { 'id': game.id, 'slug': game.slug })) }}
                         </li>
                         <li>
-                            {{ button.edit(path('admin_game_edit', { 'id': game.id })) }}
+                            {{ button.edit(path('app_admin_game_update', { 'id': game.id })) }}
                         </li>
                         <li>
-                            {{ button.delete(path('admin_game_delete', { 'id': game.id })) }}
+                            {{ button.delete(path('app_admin_game_delete', { 'id': game.id })) }}
                         </li>
                     </ul>
                 </td>

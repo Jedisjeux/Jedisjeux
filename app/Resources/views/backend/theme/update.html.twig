@@ -2,18 +2,19 @@
 {% import 'macros/actions.html.twig' as action %}
 
 {% block headline %}
-    Nouvelle personne
+    Modifier un thème
 {% endblock %}
 
 {% block breadcrumb_content %}
     {{ parent() }}
-    <a href="{{ path('admin_person_index') }}">Personnes</a> /
-    Nouveau
+    <a href="{{ path('app_admin_theme_index') }}">Thèmes</a> /
+    Modifier
 {% endblock %}
 
 {% block container %}
     {{ form_start(form) }}
+    <input type="hidden" name="_method" value="PUT" />
     {{ form_widget(form) }}
-    {{ action.create() }}
+    {{ action.update() }}
     {{ form_end(form) }}
 {% endblock container %}

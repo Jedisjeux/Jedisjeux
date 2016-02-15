@@ -1,0 +1,23 @@
+app_user_review:
+    resource: |
+        alias: app.user_review
+        path: avis
+        form: JDJ\UserReviewBundle\Form\UserReviewType
+        templates: :frontend/user_review
+        redirect: index
+    type: sylius.resource
+
+app_user_review_create:
+    methods: [GET, POST]
+    path: /jeux/{slug}/avis/new
+    defaults:
+        _controller: app.controller.user_review:createAction
+        _sylius:
+            template: frontend/user_review/create.html.twig
+            form: JDJ\UserReviewBundle\Form\UserReviewType
+            factory:
+                method: createNewWithUserAndGame
+                arguments: [expr:container.get('security.token_storage').getToken().getUser().getId(), $slug]
+            redirect:
+                route: user_review_show
+                parameters: { id: resource.id, slug: $slug }

@@ -24,7 +24,7 @@
 {% endblock %}
 
 {% block new_entity_button %}
-    <a class="btn btn-primary" href="{{ path('admin_person_new') }}">
+    <a class="btn btn-primary" href="{{ path('app_admin_person_create') }}">
         <span class="glyphicon glyphicon-plus-sign"></span>
         Nouvelle personne
     </a>
@@ -35,7 +35,7 @@
         <thead>
         <tr>
             <th>#</th>
-            <th>{{ sorting('admin_person_index', 'label.name'|trans, 'slug', 'asc', icon, currentOrder) }}</th>
+            <th>{{ sorting('app_admin_person_index', 'label.name'|trans, 'slug', 'asc', icon, currentOrder) }}</th>
         </tr>
         </thead>
         <tbody>
@@ -49,10 +49,10 @@
                             {{ button.show(path('personne_show', { 'id': person.id, 'slug': person.slug })) }}
                         </li>
                         <li>
-                            {{ button.edit(path('admin_person_edit', { 'id': person.id })) }}
+                            {{ button.edit(path('app_admin_person_update', { 'id': person.id })) }}
                         </li>
                         <li>
-                            {{ button.delete(path('admin_person_delete', { 'id': person.id })) }}
+                            {{ button.delete(path('app_admin_person_delete', { 'id': person.id })) }}
                         </li>
                     </ul>
                 </td>

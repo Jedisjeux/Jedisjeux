@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JDJ\CoreBundle\Entity\Image;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * Personne
@@ -13,7 +14,7 @@ use JDJ\CoreBundle\Entity\Image;
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PersonRepository")
  * @ORM\Table(name="jdj_personne", indexes={@ORM\Index(name="search_idx", columns={"slug"})})
  */
-class Personne
+class Personne implements ResourceInterface
 {
     /**
      * @var integer

@@ -23,14 +23,6 @@ class JeuNoteType extends AbstractType
     {
         $builder
             ->add('note')
-            ->add('jeu', 'entity_id', array(
-                'class' => 'JDJ\JeuBundle\Entity\Jeu',
-                'query_builder' => function(EntityRepository $repo, $id) {
-                    return $repo->createQueryBuilder('c')
-                        ->where('c.id = :id')
-                        ->setParameter('id', $id);
-                }
-            ))
         ;
     }
 

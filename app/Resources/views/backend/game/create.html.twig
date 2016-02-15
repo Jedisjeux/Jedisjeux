@@ -2,18 +2,18 @@
 {% import 'macros/actions.html.twig' as action %}
 
 {% block headline %}
-    Modifier une personne
+    Nouveau jeu
 {% endblock %}
 
 {% block breadcrumb_content %}
     {{ parent() }}
-    <a href="{{ path('admin_person_index') }}">Personnes</a> /
-    Modifier
+    <a href="{{ path('app_admin_game_index') }}">Jeux</a> /
+    Nouveau
 {% endblock %}
 
 {% block container %}
     {{ form_start(form) }}
     {{ form_widget(form) }}
-    {{ action.update() }}
+    {{ action.create() }}
     {{ form_end(form) }}
 {% endblock container %}

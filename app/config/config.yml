@@ -2,7 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-    - { resource: sylius.yml }
+    - { resource: config/sylius.yml }
 
 framework:
     #esi:             ~
@@ -223,7 +223,7 @@ services:
 gregwar_form: ~
 
 ivory_ck_editor:
-    default_config: standard
+    default_config: minimal
     configs:
         minimal:
             toolbar: basic

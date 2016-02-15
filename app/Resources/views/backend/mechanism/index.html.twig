@@ -24,7 +24,7 @@
 {% endblock %}
 
 {% block new_entity_button %}
-    <a class="btn btn-primary" href="{{ path('admin_mechanism_new') }}">
+    <a class="btn btn-primary" href="{{ path('app_admin_mechanism_create') }}">
         <span class="glyphicon glyphicon-plus-sign"></span>
         Nouveau mécanisme
     </a>
@@ -35,8 +35,8 @@
         <thead>
         <tr>
             <th>#</th>
-            <th>{{ sorting('admin_mechanism_index', 'label.name'|trans, 'name', 'asc', icon, currentOrder) }}</th>
-            <th>{{ sorting('admin_mechanism_index', 'label.description'|trans, 'description', 'asc') }}</th>
+            <th>{{ sorting('app_admin_mechanism_index', 'label.name'|trans, 'name', 'asc', icon, currentOrder) }}</th>
+            <th>{{ sorting('app_admin_mechanism_index', 'label.description'|trans, 'description', 'asc') }}</th>
         </tr>
         </thead>
         <tbody>
@@ -51,10 +51,10 @@
                             {{ button.show(path('mechanism_show', { 'id': mechanism.id, 'slug': mechanism.slug })) }}
                         </li>
                         <li>
-                            {{ button.edit(path('admin_mechanism_edit', { 'id': mechanism.id })) }}
+                            {{ button.edit(path('app_admin_mechanism_update', { 'id': mechanism.id })) }}
                         </li>
                         <li>
-                            {{ button.delete(path('admin_mechanism_delete', { 'id': mechanism.id })) }}
+                            {{ button.delete(path('app_admin_mechanism_delete', { 'id': mechanism.id })) }}
                         </li>
                     </ul>
                 </td>
