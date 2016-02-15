@@ -25,7 +25,7 @@
 
 
 {% block new_entity_button %}
-    <a class="btn btn-primary" href="{{ path('admin_country_new') }}">
+    <a class="btn btn-primary" href="{{ path('app_admin_country_create') }}">
         <span class="glyphicon glyphicon-plus-sign"></span>
         Nouveau pays
     </a>
@@ -36,7 +36,7 @@
         <thead>
         <tr>
             <th>#</th>
-            <th>{{ sorting('admin_country_index', 'label.name'|trans, 'name', 'asc', icon, currentOrder) }}</th>
+            <th>{{ sorting('app_admin_country_index', 'label.name'|trans, 'name', 'asc', icon, currentOrder) }}</th>
         </tr>
         </thead>
         <tbody>
@@ -47,10 +47,10 @@
                 <td class="text-right">
                     <ul class="list-inline text-nowrap">
                         <li>
-                            {{ button.edit(path('admin_country_edit', { 'id': country.id })) }}
+                            {{ button.edit(path('app_admin_country_update', { 'id': country.id })) }}
                         </li>
                         <li>
-                            {{ button.delete(path('admin_country_delete', { 'id': country.id })) }}
+                            {{ button.delete(path('app_admin_country_delete', { 'id': country.id })) }}
                         </li>
                     </ul>
                 </td>

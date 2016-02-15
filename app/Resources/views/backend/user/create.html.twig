@@ -2,12 +2,12 @@
 {% import 'macros/actions.html.twig' as action %}
 
 {% block headline %}
-    Nouveau thème
+    Nouvel utilisateur
 {% endblock %}
 
 {% block breadcrumb_content %}
     {{ parent() }}
-    <a href="{{ path('admin_theme_index') }}">Thèmes</a> /
+    <a href="{{ path('app_admin_user_index') }}">Utilisateurs</a> /
     Nouveau
 {% endblock %}
 

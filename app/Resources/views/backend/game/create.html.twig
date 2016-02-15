@@ -2,19 +2,16 @@
 {% import 'macros/actions.html.twig' as action %}
 
 {% block headline %}
-    Nouveau pays
+    Nouveau jeu
 {% endblock %}
 
 {% block breadcrumb_content %}
     {{ parent() }}
-    <a href="{{ path('admin_country_index') }}">Pays</a> /
+    <a href="{{ path('app_admin_game_index') }}">Jeux</a> /
     Nouveau
 {% endblock %}
 
 {% block container %}
-    <div class="block-heading-two">
-        <h3><span>Nouveau pays</span></h3>
-    </div>
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ action.create() }}

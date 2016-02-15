@@ -33,6 +33,24 @@ sylius_resource:
             classes:
                 model: AppBundle\Document\BlockquoteBlock
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
+        app.user:
+            classes:
+                model: JDJ\UserBundle\Entity\User
+        app.game:
+            classes:
+                model: JDJ\JeuBundle\Entity\Jeu
         app.mechanism:
             classes:
                 model: JDJ\JeuBundle\Entity\Mechanism
+        app.theme:
+            classes:
+                model: JDJ\JeuBundle\Entity\Theme
+        app.country:
+            classes:
+                model: AppBundle\Entity\Country
+        app.person:
+            classes:
+                model: JDJ\LudographieBundle\Entity\Personne
+        app.user_review:
+            classes:
+                model: JDJ\UserReviewBundle\Entity\UserReview

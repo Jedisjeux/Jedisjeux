@@ -1,0 +1,8 @@
+app_user_review:
+    resource: |
+        alias: app.user_review
+        path: avis
+        form: JDJ\UserReviewBundle\Form\UserReviewType
+        templates: :frontend/user_review
+        redirect: index
+    type: sylius.resource

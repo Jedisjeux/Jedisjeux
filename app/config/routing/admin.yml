@@ -1,0 +1,62 @@
+# These routes use Generic Crud Routing with SyliusResourceBundle
+# @see http://docs.sylius.org/en/latest/bundles/SyliusResourceBundle/routing.html
+
+admin_user:
+    resource: |
+        alias: app.user
+        section: admin
+        path: utilisateurs
+        form: JDJ\UserBundle\Form\UserType
+        templates: :backend/person
+        redirect: index
+    type: sylius.resource
+
+admin_game:
+    resource: |
+        alias: app.game
+        section: admin
+        path: jeux
+        form: JDJ\JeuBundle\Form\JeuType
+        templates: :backend/game
+        redirect: index
+    type: sylius.resource
+
+admin_mechanism:
+    resource: |
+        alias: app.mechanism
+        section: admin
+        path: mecanismes
+        form: JDJ\JeuBundle\Form\MechanismType
+        templates: :backend/mechanism
+        redirect: index
+    type: sylius.resource
+
+admin_theme:
+    resource: |
+        alias: app.theme
+        section: admin
+        path: themes
+        form: JDJ\JeuBundle\Form\ThemeType
+        templates: :backend/theme
+        redirect: index
+    type: sylius.resource
+
+admin_country:
+    resource: |
+        alias: app.country
+        section: admin
+        path: pays
+        form: AppBundle\Form\Type\CountryType
+        templates: :backend/country
+        redirect: index
+    type: sylius.resource
+
+admin_person:
+    resource: |
+        alias: app.person
+        section: admin
+        path: personnes
+        form: JDJ\LudographieBundle\Form\PersonneType
+        templates: :backend/person
+        redirect: index
+    type: sylius.resource

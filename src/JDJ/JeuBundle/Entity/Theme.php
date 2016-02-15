@@ -4,6 +4,7 @@ namespace JDJ\JeuBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * Class Theme
@@ -12,7 +13,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="JDJ\JeuBundle\Repository\ThemeRepository")
  * @ORM\Table(name="jdj_theme")
  */
-class Theme
+class Theme implements ResourceInterface
 {
     /**
      * @var integer

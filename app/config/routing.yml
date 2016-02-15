@@ -3,19 +3,18 @@ app:
     type:     annotation
     prefix:   /
 
+# TODO remove this route when no route in backend controllers is used anymore
+# use admin route instead
 backend:
     resource: "@AppBundle/Controller/Backend/"
     type:     annotation
     prefix:   /admin
 
-admin_mechanism:
-    resource: |
-        alias: app.mechanism
-        section: admin
-        form: JDJ\JeuBundle\Form\MechanismType
-        templates: :backend/mechanism
-        redirect: index
-    type: sylius.resource
+frontend:
+    resource: "routing/frontend.yml"
+
+admin:
+    resource: "routing/admin.yml"
     prefix: /admin
 
 jdj_jedi_zone:

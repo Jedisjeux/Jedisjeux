@@ -7,12 +7,13 @@
 
 {% block breadcrumb_content %}
     {{ parent() }}
-    <a href="{{ path('admin_user_index') }}">Utilisateurs</a> /
+    <a href="{{ path('app_admin_user_index') }}">Utilisateurs</a> /
     Modifier
 {% endblock %}
 
 {% block container %}
     {{ form_start(form) }}
+    <input type="hidden" name="_method" value="PUT" />
     {{ form_widget(form) }}
     {{ action.update() }}
     {{ form_end(form) }}

@@ -24,7 +24,7 @@
 {% endblock %}
 
 {% block new_entity_button %}
-    <a class="btn btn-primary" href="{{ path('admin_theme_new') }}">
+    <a class="btn btn-primary" href="{{ path('app_admin_theme_create') }}">
         <span class="glyphicon glyphicon-plus-sign"></span>
         Nouveau thème
     </a>
@@ -35,8 +35,8 @@
         <thead>
         <tr>
             <th>#</th>
-            <th>{{ sorting('admin_theme_index', 'label.name'|trans, 'name', 'asc', icon, currentOrder) }}</th>
-            <th>{{ sorting('admin_theme_index', 'label.description'|trans, 'description', 'asc') }}</th>
+            <th>{{ sorting('app_admin_theme_index', 'label.name'|trans, 'name', 'asc', icon, currentOrder) }}</th>
+            <th>{{ sorting('app_admin_theme_index', 'label.description'|trans, 'description', 'asc') }}</th>
         </tr>
         </thead>
         <tbody>
@@ -51,10 +51,10 @@
                             {{ button.show(path('theme_show', { 'id': theme.id, 'slug': theme.slug })) }}
                         </li>
                         <li>
-                            {{ button.edit(path('admin_theme_edit', { 'id': theme.id })) }}
+                            {{ button.edit(path('app_admin_theme_update', { 'id': theme.id })) }}
                         </li>
                         <li>
-                            {{ button.delete(path('admin_theme_delete', { 'id': theme.id })) }}
+                            {{ button.delete(path('app_admin_theme_delete', { 'id': theme.id })) }}
                         </li>
                     </ul>
                 </td>

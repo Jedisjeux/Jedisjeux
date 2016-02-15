@@ -2,18 +2,19 @@
 {% import 'macros/actions.html.twig' as action %}
 
 {% block headline %}
-    Nouvel utilisateur
+    Modifier un pays
 {% endblock %}
 
 {% block breadcrumb_content %}
     {{ parent() }}
-    <a href="{{ path('admin_user_index') }}">Utilisateurs</a> /
-    Nouveau
+    <a href="{{ path('app_admin_country_index') }}">Pays</a> /
+    Modifier
 {% endblock %}
 
 {% block container %}
     {{ form_start(form) }}
+    <input type="hidden" name="_method" value="PUT" />
     {{ form_widget(form) }}
-    {{ action.create() }}
+    {{ action.update() }}
     {{ form_end(form) }}
 {% endblock container %}

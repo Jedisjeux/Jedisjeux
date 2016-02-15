@@ -1,0 +1,2 @@
+frontend_user_review:
+    resource: "frontend/user_review.yml"
