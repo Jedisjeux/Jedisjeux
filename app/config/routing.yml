@@ -8,6 +8,15 @@ backend:
     type:     annotation
     prefix:   /admin
 
+admin_mechanism:
+    resource: |
+        alias: app.mechanism
+        section: admin
+        form: JDJ\JeuBundle\Form\MechanismType
+        templates: :backend/mechanism
+    type: sylius.resource
+    prefix: /admin
+
 jdj_jedi_zone:
     resource: "@JDJJediZoneBundle/Resources/config/routing.yml"
     prefix:   /

@@ -33,3 +33,6 @@ sylius_resource:
             classes:
                 model: AppBundle\Document\BlockquoteBlock
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
+        app.mechanism:
+            classes:
+                model: JDJ\JeuBundle\Entity\Mechanism

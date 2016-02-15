@@ -79,7 +79,7 @@ class MechanismController extends Controller
     }
 
     /**
-     * @Route("/{id}/edit", name="admin_mechanism_edit")
+     * @Route("/{id}/edit", name="admin_mechanism_update")
      *
      * @ParamConverter("mechanism", class="JDJJeuBundle:Mechanism")
      *

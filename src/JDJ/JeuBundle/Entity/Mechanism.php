@@ -5,6 +5,7 @@ namespace JDJ\JeuBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * Mechanism
@@ -12,7 +13,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="JDJ\JeuBundle\Repository\MechanismRepository")
  * @ORM\Table(name="jdj_mechanism")
  */
-class Mechanism
+class Mechanism implements ResourceInterface
 {
     /**
      * @var integer
@@ -178,6 +179,26 @@ class Mechanism
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAliases()
+    {
+        return $this->aliases;
+    }
+
+    /**
+     * @param array $aliases
+     *
+     * @return $this
+     */
+    public function setAliases($aliases)
+    {
+        $this->aliases = $aliases;
+
+        return $this;
     }
 
     /**

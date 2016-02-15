@@ -2,18 +2,18 @@
 {% import 'macros/actions.html.twig' as action %}
 
 {% block headline %}
-    Modifier un mécanisme
+    Nouveau mécanisme
 {% endblock %}
 
 {% block breadcrumb_content %}
     {{ parent() }}
-    <a href="{{ path('admin_mechanism_index') }}">Mécanismes</a> /
-    Modifier
+    <a href="{{ path('app_admin_mechanism_index') }}">Mécanismes</a> /
+    Nouveau
 {% endblock %}
 
 {% block container %}
     {{ form_start(form) }}
     {{ form_widget(form) }}
-    {{ action.update() }}
+    {{ action.create() }}
     {{ form_end(form) }}
 {% endblock container %}
