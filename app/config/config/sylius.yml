@@ -54,3 +54,4 @@ sylius_resource:
         app.user_review:
             classes:
                 model: JDJ\UserReviewBundle\Entity\UserReview
+                factory: AppBundle\Factory\UserReviewFactory

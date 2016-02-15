@@ -74,6 +74,7 @@ class UserReview
     public function __construct()
     {
         $this->likes = new ArrayCollection();
+        $this->setJeuNote(new JeuNote());
     }
 
 
