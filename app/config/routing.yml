@@ -14,6 +14,7 @@ admin_mechanism:
         section: admin
         form: JDJ\JeuBundle\Form\MechanismType
         templates: :backend/mechanism
+        redirect: index
     type: sylius.resource
     prefix: /admin
 
