@@ -60,21 +60,11 @@ security:
         - { path: ^/admin/, role: ROLE_ADMIN }
         #seul les membres du bureau ont accès à la partie compta
         - { path: ^/compta/, role: ROLE_OFFICE }
-        #edition d'un avis
-        - { path: ^/avis/\d+/edit, role: ROLE_USER }
-        - { path: ^/jeu/\d+/avis/new, role: ROLE_USER }
-        #edition d'une fiche
-        - { path: ^/jeu/new, role: ROLE_REDACTOR }
-        - { path: ^/jeu/\d+/edit, role: ROLE_REDACTOR }
-        #edition d'une ludographie
-        - { path: ^/ludographie/\d+/edit, role: ROLE_REDACTOR }
-        #edition d'une partie
-        - { path: ^/partie/\d+/edit, role: ROLE_USER }
-        - { path: ^/jeu/\d+/partie/new, role: ROLE_USER }
+        # create new entity
+        - { path: /new$, role: ROLE_USER }
+        # update existing entity
+        - { path: /edit$, role: ROLE_USER }
         #like it
         - { path: ^/user-review/\d+/like, role: ROLE_USER }
-        #edition d'un article
-        - { path: ^/article/new, role: ROLE_USER }
-        - { path: ^/article/\d+/edit, role: ROLE_USER }
         #JediZone
         - { path: ^/jedizone/, role: ROLE_WORKFLOW }
