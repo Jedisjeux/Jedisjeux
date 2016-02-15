@@ -46,11 +46,3 @@ services:
             - @templating
         tags:
             - {name: sonata.block}
-
-    app.factory.user_review:
-        class: %app.factory.user_review.class%
-        arguments:
-            - %app.model.user_review.class%
-        calls:
-            - [setUserRepository, ['@app.repository.user']]
-            - [setGameRepository, ['@app.repository.game']]

@@ -16,8 +16,11 @@ app_user_review_create:
             template: frontend/user_review/create.html.twig
             form: JDJ\UserReviewBundle\Form\UserReviewType
             factory:
-                method: createNewWithUserAndGame
-                arguments: [expr:container.get('security.token_storage').getToken().getUser().getId(), $slug]
+                method: createNewWithCurrentUserAndGame
+                arguments:
+                    - expr:service('security.token_storage')
+                    - $slug
+                    - expr:service('app.repository.game')
             redirect:
                 route: user_review_show
                 parameters: { id: resource.id, slug: $slug }
