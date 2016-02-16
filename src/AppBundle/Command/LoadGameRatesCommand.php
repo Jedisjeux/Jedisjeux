@@ -90,7 +90,7 @@ from        jedisjeux.jdj_avis old
              on rate.id = old.id
 where       old.avis <> ''
 EOM;
-        //$queries[] = $query;
+        $queries[] = $query;
 
         foreach ($queries as $query) {
             $this->getDatabaseConnection()->executeQuery($query);

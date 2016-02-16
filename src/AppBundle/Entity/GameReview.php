@@ -10,6 +10,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\UserInterface;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use JDJ\JeuBundle\Entity\Jeu;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
@@ -21,6 +22,8 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  */
 class GameReview implements ResourceInterface
 {
+    use TimestampableEntity;
+
     /**
      * @var integer
      *
@@ -36,6 +39,20 @@ class GameReview implements ResourceInterface
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\GameRate")
      */
     protected $rate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="text")
+     */
+    protected $body;
 
     /**
      * GameReview constructor.
@@ -93,6 +110,7 @@ class GameReview implements ResourceInterface
 
     /**
      * @param GameRate $rate
+     *
      * @return $this
      */
     public function setRate($rate)
@@ -103,10 +121,42 @@ class GameReview implements ResourceInterface
     }
 
     /**
-     * @return UserInterface
+     * @return string
      */
-    public function getCreatedBy()
+    public function getTitle()
     {
-        return $this->getRate()->getCreatedBy();
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     *
+     * @return $this
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+    /**
+     * @param string $body
+     *
+     * @return $this
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
+
+        return $this;
     }
 }
