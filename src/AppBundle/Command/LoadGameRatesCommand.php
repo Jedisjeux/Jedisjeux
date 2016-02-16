@@ -58,7 +58,7 @@ insert into jdj_game_rate (
 select      old.id,
             user.id,
             jeu.id,
-            old.note,
+            old.note/2,
             old.date,
             old.date
 from        jedisjeux.jdj_avis old

@@ -382,51 +382,56 @@ html body.login .forgot-password:focus {
   min-height: 80px;
 }
 
-/* line 10, ../sass/base.scss */
+/* line 1, ../sass/modules/_rating.scss */
+.form-group .star-rating {
+  line-height: normal;
+}
+
+/* line 11, ../sass/base.scss */
 body.sf-toolbar {
   margin-top: 70px;
 }
 
-/* line 15, ../sass/base.scss */
+/* line 16, ../sass/base.scss */
 h1 {
   font-size: 26px;
 }
 
-/* line 20, ../sass/base.scss */
+/* line 21, ../sass/base.scss */
 .top-bar .avatar {
   width: 30px;
   height: 30px;
 }
 
-/* line 26, ../sass/base.scss */
+/* line 27, ../sass/base.scss */
 .img-round {
   border-radius: 50%;
 }
 
-/* line 31, ../sass/base.scss */
+/* line 32, ../sass/base.scss */
 .jeu-list .img-container {
   height: 148px;
   overflow: hidden;
 }
 
-/* line 37, ../sass/base.scss */
+/* line 38, ../sass/base.scss */
 .intro {
   font-style: italic;
   font-size: 1.3em;
 }
 
-/* line 42, ../sass/base.scss */
+/* line 43, ../sass/base.scss */
 .thumbnail-jeu {
   padding-left: 0;
   padding-top: 8px;
 }
 
-/* line 47, ../sass/base.scss */
+/* line 48, ../sass/base.scss */
 .title-button {
   padding-top: 7px;
 }
 
-/* line 53, ../sass/base.scss */
+/* line 54, ../sass/base.scss */
 .comment-author-image .anonymous-user {
   margin-right: 10px;
   margin-top: 3px;
@@ -437,29 +442,29 @@ h1 {
   vertical-align: middle;
   text-align: center;
 }
-/* line 63, ../sass/base.scss */
+/* line 64, ../sass/base.scss */
 .comment-author-image .anonymous-user .fa {
   font-size: 50px;
 }
 
-/* line 70, ../sass/base.scss */
+/* line 71, ../sass/base.scss */
 .blog-meta img {
   float: left;
   width: 32px;
 }
 
-/* line 76, ../sass/base.scss */
+/* line 77, ../sass/base.scss */
 .bloc-login {
   width: 430px !important;
 }
 
-/* line 80, ../sass/base.scss */
+/* line 81, ../sass/base.scss */
 ul.ui-autocomplete {
   padding: 0px;
   margin: 0px;
   list-style-type: none;
 }
-/* line 85, ../sass/base.scss */
+/* line 86, ../sass/base.scss */
 ul.ui-autocomplete img, ul.ui-autocomplete .anonymous-user {
   max-width: 60px;
   float: left;
@@ -467,22 +472,22 @@ ul.ui-autocomplete img, ul.ui-autocomplete .anonymous-user {
   margin-top: 3px;
 }
 
-/* line 95, ../sass/base.scss */
+/* line 96, ../sass/base.scss */
 .table th a, .table th a.color {
   color: #666666;
 }
 
-/* line 101, ../sass/base.scss */
+/* line 102, ../sass/base.scss */
 .no-padding-left {
   padding-left: 0 !important;
 }
 
-/* line 105, ../sass/base.scss */
+/* line 106, ../sass/base.scss */
 .no-padding-right {
   padding-right: 0 !important;
 }
 
-/* line 110, ../sass/base.scss */
+/* line 111, ../sass/base.scss */
 .article p {
   margin-bottom: 15px;
 }

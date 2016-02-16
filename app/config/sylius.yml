@@ -54,4 +54,5 @@ sylius_resource:
         app.game_review:
             classes:
                 model: AppBundle\Entity\GameReview
+                repository: AppBundle\Repository\GameReviewRepository
                 factory: AppBundle\Factory\GameReviewFactory

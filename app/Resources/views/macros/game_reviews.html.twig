@@ -1,0 +1,20 @@
+{% macro blogCommentItem(game_review) %}
+    {% import 'macros/items.html.twig' as item %}
+    {% from 'macros/users.html.twig' import avatar %}
+    {% set game = game_review.rate.game %}
+    {% set user = game_review.rate.createdBy %}
+    {% set imagePath = avatar(user) %}
+    {% set meta %}
+        <!-- Date -->
+        <a href="#"><i class="fa fa-calendar"></i> &nbsp; {{ game_review.createdAt|date('d/m/Y') }}</a> &nbsp;
+        <!-- Author -->
+        <a href="#"><i class="fa fa-user"></i> &nbsp; {{ user }}</a> &nbsp;
+        {#<a href="#"><i class="fa fa-thumbs-up"></i> <span data-user-review="2" class="nbLikes">{{ game_review.nbLikes }}</span></a>#}
+        {#&nbsp;#}
+        {#<a href="#"><i class="fa fa-thumbs-down"></i> <span data-user-review="2" class="nbDislikes">{{ game_review.nbDislikes }}</span></a>#}
+    {% endset %}
+    <div class="pull-right">
+        <div class="game-rating" data-readonly="true" data-size="xs" data-rate-value="{{ game_review.rate.value }}"></div>
+    </div>
+    {{ item.blogCommentItem(imagePath, user.username, 'thumbnail', 'img-responsive img-round', '#', game_review.title, meta, game_review.body) }}
+{% endmacro %}

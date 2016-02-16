@@ -1,7 +1,7 @@
 app_game_review:
     resource: |
         alias: app.game_review
-        path: avis
+        path: /avis
         form: JDJ\UserReviewBundle\Form\UserReviewType
         templates: :frontend/game_review
         redirect: index
@@ -10,17 +10,38 @@ app_game_review:
 
 app_game_review_create:
     methods: [GET, POST]
-    path: /jeux/{slug}/avis/new
+    path: /jeux/{gameSlug}/avis/new
     defaults:
         _controller: app.controller.game_review:createAction
         _sylius:
             template: frontend/game_review/create.html.twig
             form: AppBundle\Form\Type\GameReviewType
             factory:
-                method: createNewWithGame
+                method: createNewWithCurrentUserAndGame
                 arguments:
-                    - $slug
+                    - expr:service('security.token_storage')
+                    - $gameSlug
                     - expr:service('app.repository.game')
             redirect:
-                route: game_review_show
-                parameters: { id: resource.id, slug: $slug }
+                route: app_game_review_show
+                parameters: { id: resource.id, gameSlug: $gameSlug }
+
+app_game_review_update:
+    methods: [GET, PUT, PATCH]
+    path: /jeux/{gameSlug}/avis/{id}/edit
+    defaults:
+        _controller: app.controller.game_review:createAction
+        _sylius:
+            template: frontend/game_review/update.html.twig
+            form: AppBundle\Form\Type\GameReviewType
+            redirect:
+                route: app_game_review_show
+                parameters: { id: resource.id, gameSlug: $gameSlug }
+
+app_game_review_show:
+    methods: [GET]
+    path: /jeux/{gameSlug}/avis/{id}/show
+    defaults:
+        _controller: app.controller.game_review:showAction
+        _sylius:
+            template: frontend/game_review/show.html.twig

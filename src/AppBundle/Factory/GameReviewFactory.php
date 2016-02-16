@@ -11,7 +11,6 @@ namespace AppBundle\Factory;
 use AppBundle\Entity\GameReview;
 use Doctrine\ORM\EntityRepository;
 use JDJ\JeuBundle\Entity\Jeu;
-use JDJ\UserBundle\Entity\User;
 use JDJ\UserReviewBundle\Entity\UserReview;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -23,12 +22,13 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 class GameReviewFactory extends Factory
 {
     /**
+     * @param TokenStorage $tokenStorage
      * @param string $slug
      * @param EntityRepository $gameRepository
      *
      * @return UserReview
      */
-    public function createNewWithGame($slug, EntityRepository $gameRepository)
+    public function createNewWithCurrentUserAndGame(TokenStorage $tokenStorage, $slug, EntityRepository $gameRepository)
     {
         /** @var GameReview $gameReview */
         $gameReview =  parent::createNew();
@@ -42,7 +42,8 @@ class GameReviewFactory extends Factory
 
         $gameReview
             ->getRate()
-            ->setGame($game);
+            ->setGame($game)
+            ->setCreatedBy($tokenStorage->getToken()->getUser());
 
         return $gameReview;
     }

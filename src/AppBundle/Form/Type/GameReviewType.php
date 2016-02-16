@@ -21,9 +21,15 @@ class GameReviewType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add("rate", "app_game_rate")
-            ->add('title')
-            ->add('body', 'ckeditor');
+            ->add("rate", "app_game_rate", array(
+                'label' => 'label.rate',
+            ))
+            ->add('title', null, array(
+                'label' => 'label.title',
+            ))
+            ->add('body', 'ckeditor', array(
+                'label' => 'label.body',
+            ));
     }
 
     /**

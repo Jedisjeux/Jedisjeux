@@ -21,7 +21,13 @@ class GameRateType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('value');
+            ->add('value', null, array(
+                'label' => false,
+                'attr' => array(
+                    'class' => 'game-rating',
+                    'data-size' => 'xs',
+                )
+            ));
     }
 
     /**

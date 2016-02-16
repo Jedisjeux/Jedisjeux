@@ -1,20 +1,20 @@
 $(function() {
     // Document is ready
 
-    $(".game-rating").rating({
+    var defaultOptions = {
         'starCaptions': {
-            0.5: 'Half Star',
-            1: 'One Star',
-            1.5: 'One & Half Star',
-            2: 'Two Stars',
-            2.5: 'Two & Half Stars',
-            3: 'Three Stars',
-            3.5: 'Three & Half Stars',
-            4: 'Four Stars',
-            4.5: 'Four & Half Stars',
+            0.5: 'Nul',
+            1: 'Très mauvais',
+            1.5: 'Mauvais',
+            2: 'Bof',
+            2.5: 'Moyen',
+            3: 'Pas mal',
+            3.5: 'Bon',
+            4: 'Très bon',
+            4.5: 'Excellent',
             5: 'Mythique'
         }
-    });
+    };
+
+    $(".game-rating").rating(defaultOptions);
 });
-
-

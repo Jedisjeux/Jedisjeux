@@ -41,8 +41,8 @@ class UserReviewController extends Controller
             ->setMaxPerPage($request->get('maxPerPage', 10))
             ->setCurrentPage($request->get('page', 1));
 
-        return $this->render('frontend/user_review/'.$template, array(
-            'user_reviews' => $userReviews,
+        return $this->render('frontend/game_review/'.$template, array(
+            'game_reviews' => $userReviews,
         ));
     }
 
@@ -51,6 +51,6 @@ class UserReviewController extends Controller
      */
     public function getRepository()
     {
-        return $this->getDoctrine()->getRepository('JDJUserReviewBundle:UserReview');
+        return $this->get('app.repository.game_review');
     }
 }

@@ -36,7 +36,7 @@ class GameReview implements ResourceInterface
     /**
      * @var GameRate
      *
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\GameRate")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\GameRate", cascade={"persist"})
      */
     protected $rate;
 
