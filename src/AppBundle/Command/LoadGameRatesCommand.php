@@ -15,7 +15,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class LoadGameRatingsCommand extends ContainerAwareCommand
+class LoadGameRatesCommand extends ContainerAwareCommand
 {
     /**
      * @inheritdoc
@@ -23,8 +23,8 @@ class LoadGameRatingsCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('app:game-ratings:load')
-            ->setDescription('Load ratings of all games');
+            ->setName('app:game-rates:load')
+            ->setDescription('Load rates of all games');
     }
 
     /**
@@ -35,64 +35,62 @@ class LoadGameRatingsCommand extends ContainerAwareCommand
         $queries = array();
 
         $query = <<<EOM
-        delete from jdj_user_review
+        delete from jdj_game_rate
 EOM;
 
         $queries[] = $query;
 
         $query = <<<EOM
-        delete from jdj_jeu_note
+        delete from jdj_game_review
 EOM;
 
         $queries[] = $query;
 
         $query = <<<EOM
-insert into jdj_jeu_note (
+insert into jdj_game_rate (
             id,
-            author_id,
-            jeu_id,
-            note_id,
+            createdBy_id,
+            game_id,
+            value,
             createdAt,
             updatedAt
 )
 select      old.id,
             user.id,
             jeu.id,
-            note.id,
+            old.note,
             old.date,
-            null
+            old.date
 from        jedisjeux.jdj_avis old
 inner join  jdj_jeu jeu
                 on jeu.id = old.game_id
 inner join  fos_user user
                 on user.id = old.user_id
-inner join  jdj_note note
-                on note.id = old.note
 EOM;
 
         $queries[] = $query;
 
         $query = <<<EOM
-insert into jdj_user_review (
+insert into jdj_game_review (
        id,
-       libelle,
+       title,
        body,
        createdAt,
        updatedAt,
-       jeuNote_id
+       rate_id
 )
 select      old.id,
       old.accroche,
       concat ('<p>', replace(old.avis, '\n', '</p><p>') , '</p>'),
       date,
       date,
-      jeuNote.id
+      rate.id
 from        jedisjeux.jdj_avis old
-      inner join  jdj_jeu_note jeuNote
-             on jeuNote.id = old.id
+      inner join  jdj_game_rate rate
+             on rate.id = old.id
 where       old.avis <> ''
 EOM;
-        $queries[] = $query;
+        //$queries[] = $query;
 
         foreach ($queries as $query) {
             $this->getDatabaseConnection()->executeQuery($query);
