@@ -6,14 +6,13 @@
  * Time: 12:34
  */
 
-namespace JDJ\UserReviewBundle\Form;
+namespace AppBundle\Form\Type;
 
-use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class JeuNoteType extends AbstractType
+class GameRateType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -22,17 +21,16 @@ class JeuNoteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('note')
-        ;
+            ->add('value');
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'JDJ\UserReviewBundle\Entity\JeuNote',
+            'data_class' => 'AppBundle\Entity\GameRate',
         ));
     }
 
@@ -41,6 +39,6 @@ class JeuNoteType extends AbstractType
      */
     public function getName()
     {
-        return 'jdj_userreviewbundle_jeunote';
+        return 'app_game_rate';
     }
 } 

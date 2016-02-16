@@ -1,8 +1,0 @@
-{% from 'macros/user_reviews.html.twig' import blogCommentItem %}
-
-<div class="blog-comments">
-    {% for user_review in user_reviews %}
-        {{ blogCommentItem(user_review) }}
-    {% endfor %}
-</div>
-

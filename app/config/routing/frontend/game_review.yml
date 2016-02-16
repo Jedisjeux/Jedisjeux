@@ -1,0 +1,26 @@
+app_game_review:
+    resource: |
+        alias: app.game_review
+        path: avis
+        form: JDJ\UserReviewBundle\Form\UserReviewType
+        templates: :frontend/game_review
+        redirect: index
+    type: sylius.resource
+    prefix: /jeux
+
+app_game_review_create:
+    methods: [GET, POST]
+    path: /jeux/{slug}/avis/new
+    defaults:
+        _controller: app.controller.game_review:createAction
+        _sylius:
+            template: frontend/game_review/create.html.twig
+            form: AppBundle\Form\Type\GameReviewType
+            factory:
+                method: createNewWithGame
+                arguments:
+                    - $slug
+                    - expr:service('app.repository.game')
+            redirect:
+                route: game_review_show
+                parameters: { id: resource.id, slug: $slug }

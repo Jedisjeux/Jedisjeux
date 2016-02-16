@@ -8,6 +8,7 @@
 
 namespace AppBundle\Factory;
 
+use AppBundle\Entity\GameReview;
 use Doctrine\ORM\EntityRepository;
 use JDJ\JeuBundle\Entity\Jeu;
 use JDJ\UserBundle\Entity\User;
@@ -19,19 +20,18 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class UserReviewFactory extends Factory
+class GameReviewFactory extends Factory
 {
     /**
-     * @param TokenStorage $tokenStorage
      * @param string $slug
      * @param EntityRepository $gameRepository
      *
      * @return UserReview
      */
-    public function createNewWithCurrentUserAndGame(TokenStorage $tokenStorage, $slug, EntityRepository $gameRepository)
+    public function createNewWithGame($slug, EntityRepository $gameRepository)
     {
-        /** @var UserReview $userReview */
-        $userReview =  parent::createNew();
+        /** @var GameReview $gameReview */
+        $gameReview =  parent::createNew();
 
         /** @var Jeu $game */
         $game = $gameRepository->findOneBy(array('slug' => $slug));
@@ -40,11 +40,10 @@ class UserReviewFactory extends Factory
             throw new NotFoundHttpException(sprintf('Game with slug %s not found', $slug));
         }
 
-        $userReview
-            ->getJeuNote()
-            ->setJeu($game)
-            ->setAuthor($tokenStorage->getToken()->getUser());
+        $gameReview
+            ->getRate()
+            ->setGame($game);
 
-        return $userReview;
+        return $gameReview;
     }
 }

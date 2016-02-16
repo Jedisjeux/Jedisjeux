@@ -20,6 +20,11 @@ services:
         tags:
           - { name: form.type, alias: app_filter_query }
 
+    app.form.type.game_rate:
+        class: AppBundle\Form\Type\GameRateType
+        tags:
+          - { name: form.type, alias: app_game_rate }
+
     sonata.block.service.rss:
         class: Sonata\BlockBundle\Block\Service\RssBlockService
         arguments:
