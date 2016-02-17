@@ -1,2 +1,5 @@
 frontend_game_review:
     resource: "frontend/game_review.yml"
+
+frontend_game:
+    resource: "frontend/game.yml"

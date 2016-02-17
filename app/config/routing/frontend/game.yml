@@ -1,0 +1,16 @@
+app_game:
+    resource: |
+        alias: app.game
+        path: /jeux
+        form: JDJ\JeuBundle\Form\JeuType
+        templates: :frontend/game
+        redirect: index
+    type: sylius.resource
+
+app_game_show:
+    methods: [GET]
+    path: /jeux/{slug}
+    defaults:
+        _controller: app.controller.game:showAction
+        _sylius:
+            template: frontend/game/show.html.twig

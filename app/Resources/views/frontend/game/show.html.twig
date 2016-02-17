@@ -1,5 +1,9 @@
 {% extends "::base.html.twig" %}
 
+ {#TODO REMOVE #}
+{% set jeu = game is defined ? game : jeu %}
+
+
 {% block headline %}
     {{ jeu }}
 {% endblock %}
@@ -12,16 +16,16 @@
 {% block container %}
 
     <div class="col-md-8">
-        {% include "frontend/game/show/header.html.twig" with {'jeu': jeu, 'userGameAttribute': userGameAttribute} only %}
+        {% include "frontend/game/show/header.html.twig" with {'jeu': jeu} only %}
 
-        {% include "frontend/game/show/nav-tab.html.twig" with {'jeu': jeu, 'userReviews': userReviews} only %}
+        {% include "frontend/game/show/nav-tab.html.twig" with {'jeu': jeu} only %}
 
         {% include "frontend/game/show/collection-modal.html.twig" with {'jeu': jeu} only %}
 
     </div>
 
     <div class="col-md-4">
-        {% include "frontend/game/show/sidebar.html.twig" with {'jeu': jeu, 'userReviews': userReviews} only %}
+        {% include "frontend/game/show/sidebar.html.twig" with {'jeu': jeu} only %}
     </div>
 
 
