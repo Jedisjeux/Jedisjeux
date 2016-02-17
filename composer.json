@@ -62,7 +62,8 @@
         "sylius/content-bundle": "^0.16.0",
         "ob/highcharts-bundle": "^1.2",
         "bmatzner/jquery-ui-bundle": "^1.10",
-        "knplabs/doctrine-behaviors": "~1.1"
+        "knplabs/doctrine-behaviors": "~1.1",
+        "sylius/taxonomy-bundle": " ^0.16.0"
     },
     "scripts": {
         "post-install-cmd": [
