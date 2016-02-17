@@ -1,3 +1,17 @@
+{% macro blockquoteOne(body) %}
+    <div class="quote-one">
+        <div class="row">
+            <!-- Quote One Item -->
+            <div class="quote-one-item">
+                <span class="color">“</span>
+                <div class="quote-one-right">
+                    {{ body|raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
 {% macro magazineItemOne(imagePath, imageLabel, imageFilter, imageClass, linkUrl, title, body, meta) %}
     {% from 'macros/images.html.twig' import image %}
 

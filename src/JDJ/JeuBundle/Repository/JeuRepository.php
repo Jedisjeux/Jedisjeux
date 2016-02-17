@@ -11,6 +11,7 @@ namespace JDJ\JeuBundle\Repository;
 
 use Doctrine\ORM\QueryBuilder;
 use JDJ\CoreBundle\Entity\EntityRepository;
+use JDJ\JeuBundle\Entity\Mechanism;
 
 class JeuRepository extends EntityRepository
 {

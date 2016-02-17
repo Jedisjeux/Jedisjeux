@@ -7,6 +7,26 @@ app_game:
         redirect: index
     type: sylius.resource
 
+app_game_index:
+    methods: [GET]
+    path: /jeux/
+    defaults:
+        _controller: app.controller.game:indexAction
+        _sylius:
+            sorting:
+                createdAt: desc
+            template: frontend/game/index.html.twig
+
+app_game_index_by_mechanism:
+    methods: [GET]
+    path: /jeux/mecanismes/{permalink}
+    defaults:
+        _controller: app.controller.game:indexByMechanismAction
+        _sylius:
+            sorting:
+                createdAt: desc
+            template: frontend/game/index_by_mechanism.html.twig
+
 app_game_show:
     methods: [GET]
     path: /jeux/{slug}

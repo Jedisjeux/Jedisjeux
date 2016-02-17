@@ -81,7 +81,7 @@
                                     <li>Mécanismes
                                         : {% for key, mechanism in jeu.mechanisms %}{% if (key > 0) %},{% endif %}
                                             <a
-                                            href="{{ path('mechanism_show', { 'id': mechanism.id, 'slug': mechanism.slug }) }}">{{ mechanism }}</a>{% endfor %}
+                                            href="{{ path('app_game_index_by_mechanism', { 'permalink': mechanism.slug }) }}">{{ mechanism }}</a>{% endfor %}
                                     </li>
                                 {% endif %}
 

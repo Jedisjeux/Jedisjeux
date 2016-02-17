@@ -38,6 +38,8 @@ sylius_resource:
                 model: JDJ\UserBundle\Entity\User
         app.game:
             classes:
+                controller: AppBundle\Controller\GameController
+                repository: JDJ\JeuBundle\Repository\JeuRepository
                 model: JDJ\JeuBundle\Entity\Jeu
         app.mechanism:
             classes:
