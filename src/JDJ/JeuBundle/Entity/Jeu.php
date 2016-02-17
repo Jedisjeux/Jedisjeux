@@ -206,12 +206,12 @@ class Jeu implements ResourceInterface
      */
     private $parties;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\OneToMany(targetEntity="JDJ\UserReviewBundle\Entity\JeuNote", mappedBy="jeu")
-     */
-    private $notes;
+//    /**
+//     * @var \Doctrine\Common\Collections\Collection
+//     *
+//     * @ORM\OneToMany(targetEntity="JDJ\UserReviewBundle\Entity\JeuNote", mappedBy="jeu")
+//     */
+//    private $notes;
 
     /**
      * @var string

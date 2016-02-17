@@ -13,7 +13,7 @@ use JDJ\CommentBundle\Entity\Comment;
 use JDJ\CoreBundle\Entity\Like;
 use JDJ\CoreBundle\Form\LikeType;
 use JDJ\CoreBundle\Repository\LikeRepository;
-use JDJ\UserReviewBundle\Entity\UserReview;
+use AppBundle\Entity\GameReview;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -37,18 +37,18 @@ class LikeController extends Controller
     }
 
     /**
-     * Like or Dislike a User Review
+     * Like or Dislike a Game Review
      *
-     * @Route("/user-review/{id}/like", name="user_review_like", options={"expose"=true})
-     * @ParamConverter("userReview", class="JDJUserReviewBundle:UserReview")
+     * @Route("/game-review/{id}/like", name="user_review_like", options={"expose"=true})
+     * @ParamConverter("gameReview", class="AppBundle:GameReview")
      *
-     * @param UserReview $userReview
+     * @param GameReview $gameReview
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function likeOrDislikeUserReviewAction(UserReview $userReview, Request $request)
+    public function likeOrDislikeGameReviewAction(GameReview $gameReview, Request $request)
     {
-        if ($this->getUser() === $userReview->getJeuNote()->getAuthor()) {
+        if ($this->getUser() === $gameReview->getRate()->getCreatedBy()) {
             throw new Exception("utilisateur identique à la critique");
         }
 
@@ -57,20 +57,20 @@ class LikeController extends Controller
         if ($this->getUser()) {
             $like = $this
                 ->getLikeRepository()
-                ->findUserLikeOnEntity($this->getUser(), 'userReview', $userReview);
+                ->findUserLikeOnEntity($this->getUser(), 'gameReview', $gameReview);
         }
 
         $isNew = false;
         if (null === $like) {
             $like = new Like();
             $like
-                ->setUserReview($userReview)
+                ->setUserReview($gameReview)
                 ->setCreatedBy($this->getUser());
             $isNew = true;
         }
 
         $form = $this->createLikeForm($like, $this->generateUrl('user_review_like', array(
-            'id' => $userReview->getId()
+            'id' => $gameReview->getId()
         )));
 
         $form->handleRequest($request);
@@ -83,8 +83,8 @@ class LikeController extends Controller
             $em->flush();
 
             return new JsonResponse(array(
-                'nbLikes' => $userReview->getNbLikes(),
-                'nbDislikes' => $userReview->getNbDislikes(),
+                'nbLikes' => $gameReview->getNbLikes(),
+                'nbDislikes' => $gameReview->getNbDislikes(),
             ));
         }
 

@@ -9,12 +9,18 @@
         <a href="#"><i class="fa fa-calendar"></i> &nbsp; {{ game_review.createdAt|date('d/m/Y') }}</a> &nbsp;
         <!-- Author -->
         <a href="#"><i class="fa fa-user"></i> &nbsp; {{ user }}</a> &nbsp;
-        {#<a href="#"><i class="fa fa-thumbs-up"></i> <span data-user-review="2" class="nbLikes">{{ game_review.nbLikes }}</span></a>#}
-        {#&nbsp;#}
-        {#<a href="#"><i class="fa fa-thumbs-down"></i> <span data-user-review="2" class="nbDislikes">{{ game_review.nbDislikes }}</span></a>#}
+        <a href="#">
+            <i class="fa fa-thumbs-up"></i>
+            <span data-user-review="2" class="nbLikes">{{ game_review.nbLikes }}</span>
+        </a>
+        &nbsp;
+        <a href="#">
+            <i class="fa fa-thumbs-down"></i>
+            <span data-user-review="2" class="nbDislikes">{{ game_review.nbDislikes }}</span>
+        </a>
     {% endset %}
-    <div class="pull-right">
-        <div class="game-rating" data-readonly="true" data-size="xs" data-rate-value="{{ game_review.rate.value }}"></div>
+    <div class="pull-right rating-container rating-gly-star" data-content="">
+        <div class="rating-stars" data-content="" style="width: {{ game_review.rate.value*2 }}0%;"></div>
     </div>
     {{ item.blogCommentItem(imagePath, user.username, 'thumbnail', 'img-responsive img-round', '#', game_review.title, meta, game_review.body) }}
 {% endmacro %}

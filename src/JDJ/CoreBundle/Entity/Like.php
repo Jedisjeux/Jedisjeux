@@ -8,6 +8,7 @@
 
 namespace JDJ\CoreBundle\Entity;
 
+use AppBundle\Entity\GameReview;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JDJ\CommentBundle\Entity\Comment;
@@ -19,7 +20,7 @@ use JDJ\UserReviewBundle\Entity\UserReview;
  * @package JDJ\CoreBundle\Entity
  *
  * @ORM\Entity(repositoryClass="JDJ\CoreBundle\Repository\LikeRepository")
- * @ORM\Table(name="jdj_like",uniqueConstraints={@ORM\UniqueConstraint(name="unique_like", columns={"createdBy_id", "userReview_id"})})
+ * @ORM\Table(name="jdj_like",uniqueConstraints={@ORM\UniqueConstraint(name="unique_like", columns={"createdBy_id", "gameReview_id"})})
  */
 class Like
 {
@@ -56,11 +57,11 @@ class Like
     private $createdAt;
 
     /**
-     * @var UserReview
+     * @var GameReview
      *
-     * @ORM\ManyToOne(targetEntity="JDJ\UserReviewBundle\Entity\UserReview", inversedBy="likes")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\GameReview", inversedBy="likes")
      */
-    private $userReview;
+    private $gameReview;
 
     /**
      * @var Comment
@@ -146,20 +147,21 @@ class Like
     }
 
     /**
-     * @return UserReview
+     * @return GameReview
      */
-    public function getUserReview()
+    public function getGameReview()
     {
-        return $this->userReview;
+        return $this->gameReview;
     }
 
     /**
-     * @param UserReview $userReview
+     * @param GameReview $gameReview
+     *
      * @return $this
      */
-    public function setUserReview($userReview)
+    public function setGameReview($gameReview)
     {
-        $this->userReview = $userReview;
+        $this->gameReview = $gameReview;
 
         return $this;
     }

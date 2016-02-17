@@ -8,9 +8,9 @@
 
 namespace JDJ\UserReviewBundle\Controller;
 
+use AppBundle\Entity\GameReview;
+use AppBundle\Form\Type\GameReviewType;
 use JDJ\JeuBundle\Entity\Jeu;
-use JDJ\UserReviewBundle\Entity\UserReview;
-use JDJ\UserReviewBundle\Form\UserReviewType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use JDJ\UserReviewBundle\Entity\UserReviewRepository;
@@ -34,7 +34,7 @@ class UserReviewController extends Controller
          * Find All User Review entities from this game
          */
         /** @var UserReviewRepository $userReviewReposititory */
-        $userReviewReposititory = $em->getRepository('JDJUserReviewBundle:UserReview');
+        $userReviewReposititory = $em->getRepository('AppBundle:GameReview');
         /** @var PagerFanta $entities */
         $entities = $userReviewReposititory->createPaginator();
         $entities->setMaxPerPage(10);
@@ -57,7 +57,7 @@ class UserReviewController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new UserReview();
+        $entity = new GameReview();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -90,13 +90,13 @@ class UserReviewController extends Controller
     /**
      * Creates a form to create a UserReview entity.
      *
-     * @param UserReview $entity The entity
+     * @param GameReview $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(UserReview $entity)
+    private function createCreateForm(GameReview $entity)
     {
-       $form = $this->createForm(new UserReviewType(), $entity, array(
+       $form = $this->createForm(new GameReviewType(), $entity, array(
             'action' => $this->generateUrl('user_review_create'),
             'method' => 'POST',
         ));

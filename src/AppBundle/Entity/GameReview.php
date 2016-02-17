@@ -8,9 +8,11 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\UserInterface;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use JDJ\CoreBundle\Entity\Like;
 use JDJ\JeuBundle\Entity\Jeu;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
@@ -55,11 +57,19 @@ class GameReview implements ResourceInterface
     protected $body;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="JDJ\CoreBundle\Entity\Like", mappedBy="gameReview")
+     */
+    private $likes;
+
+    /**
      * GameReview constructor.
      */
     public function __construct()
     {
         $this->rate = new GameRate();
+        $this->likes = new ArrayCollection();
     }
 
     /**
@@ -158,5 +168,58 @@ class GameReview implements ResourceInterface
         $this->body = $body;
 
         return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getLikes()
+    {
+        return $this->likes;
+    }
+
+    /**
+     * @param ArrayCollection $likes
+     * @return $this
+     */
+    public function setLikes($likes)
+    {
+        $this->likes = $likes;
+
+        return $this;
+    }
+
+    /**
+     * TODO use array collection filter
+     *
+     * @return int
+     */
+    public function getNbLikes()
+    {
+        $nb = 0;
+        /** @var Like $like */
+        foreach ($this->getLikes() as $like) {
+            if ($like->isLike()) {
+                $nb ++;
+            }
+        }
+        return $nb;
+    }
+
+    /**
+     * TODO use array collection filter
+     *
+     * @return int
+     */
+    public function getNbDislikes()
+    {
+        $nb = 0;
+        /** @var Like $like */
+        foreach ($this->getLikes() as $like) {
+            if (false === $like->isLike()) {
+                $nb ++;
+            }
+        }
+        return $nb;
     }
 }

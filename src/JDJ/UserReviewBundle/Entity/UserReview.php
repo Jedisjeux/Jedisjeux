@@ -62,13 +62,7 @@ class UserReview
      *
      */
     private $jeuNote;
-
-    /**
-     * @var ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="JDJ\CoreBundle\Entity\Like", mappedBy="userReview")
-     */
-    private $likes;
+    
 
 
     public function __construct()
