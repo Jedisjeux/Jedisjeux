@@ -47,6 +47,34 @@ class GameController extends ResourceController
         return $this->handleView($view);
     }
 
+    /**
+     * @param Request $request
+     * @param $permalink
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function indexByThemeAction(Request $request, $permalink)
+    {
+        $theme = $this->get('app.repository.theme')->findOneBy(array('slug' => $permalink));
+        if (!isset($theme)) {
+            throw new NotFoundHttpException('Requested theme does not exist.');
+        }
+
+        $paginator = $this
+            ->getRepository()
+            ->createPaginator(array('theme' => $theme), $request->get('sorting', $this->config->getSorting()))
+            ->setCurrentPage($request->get('page', 1));
+
+        $view = $this
+            ->view()
+            ->setTemplate($this->config->getTemplate('index_by_mechanism.html'))
+            ->setData(array(
+                'theme'    => $theme,
+                'games' => $paginator,
+            ));
+
+        return $this->handleView($view);
+    }
+
 
     /**
      * @return JeuRepository

@@ -87,7 +87,7 @@
 
                                 {% if jeu.themes|length > 0 %}
                                     <li>Thèmes : {% for key, theme in jeu.themes %}{% if (key > 0) %},{% endif %} <a
-                                            href="{{ path('theme_show', { 'id': theme.id, 'slug': theme.slug }) }}">{{ theme }}</a>{% endfor %}
+                                            href="{{ path('app_game_index_by_theme', { 'permalink': theme.slug }) }}">{{ theme }}</a>{% endfor %}
                                     </li>
                                 {% endif %}
 
