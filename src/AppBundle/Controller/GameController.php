@@ -34,6 +34,7 @@ class GameController extends ResourceController
         $paginator = $this
             ->getRepository()
             ->createPaginator(array('mechanism' => $mechanism), $request->get('sorting', $this->config->getSorting()))
+            ->setMaxPerPage($this->config->getPaginationMaxPerPage())
             ->setCurrentPage($request->get('page', 1));
 
         $view = $this
@@ -62,6 +63,7 @@ class GameController extends ResourceController
         $paginator = $this
             ->getRepository()
             ->createPaginator(array('theme' => $theme), $request->get('sorting', $this->config->getSorting()))
+            ->setMaxPerPage($this->config->getPaginationMaxPerPage())
             ->setCurrentPage($request->get('page', 1));
 
         $view = $this

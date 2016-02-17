@@ -23,6 +23,7 @@ app_game_index_by_mechanism:
     defaults:
         _controller: app.controller.game:indexByMechanismAction
         _sylius:
+            paginate: 12
             sorting:
                 createdAt: desc
             template: frontend/game/index_by_mechanism.html.twig
@@ -33,6 +34,7 @@ app_game_index_by_theme:
     defaults:
         _controller: app.controller.game:indexByThemeAction
         _sylius:
+            paginate: 12
             sorting:
                 createdAt: desc
             template: frontend/game/index_by_theme.html.twig
