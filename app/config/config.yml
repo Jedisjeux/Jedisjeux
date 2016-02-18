@@ -4,6 +4,9 @@ imports:
     - { resource: services.yml }
     - { resource: sylius.yml }
 
+parameters:
+    knp.doctrine_behaviors.blameable_subscriber.user_entity: JDJ\UserBundle\Entity\User
+
 framework:
     #esi:             ~
     translator:      { fallback: "%locale%" }
@@ -133,6 +136,14 @@ doctrine_cache:
     providers:
         phpcr_meta: %dos.cache%
         phpcr_nodes: %dos.cache%
+
+knp_doctrine_behaviors:
+    blameable:      true
+    geocodable:     ~     # Here null is converted to false
+    loggable:       ~
+    sluggable:      true
+    soft_deletable: true
+    # All others behaviors are disabled
 
 # Swiftmailer Configuration
 swiftmailer:
