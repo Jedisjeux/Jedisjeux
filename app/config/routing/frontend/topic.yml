@@ -1,0 +1,6 @@
+app_topic:
+    resource: |
+        alias: app.topic
+        form: AppBundle\Form\Type\TopicType
+        templates: :backend/topic
+    type: sylius.resource

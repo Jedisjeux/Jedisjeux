@@ -8,21 +8,20 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Model\Identifiable;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
+ *
+ * @ORM\Entity
  */
 class Topic implements ResourceInterface
 {
-    /**
-     * @var integer
-     *
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
+    use Identifiable,
+        Blameable;
 
     /**
      * @var string
@@ -30,32 +29,6 @@ class Topic implements ResourceInterface
      * @ORM\Column(type="string", length=50, nullable=false)
      */
     protected $title;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="text", nullable=false)
-     */
-    protected $body;
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
 
     /**
      * @return string
@@ -72,25 +45,6 @@ class Topic implements ResourceInterface
     public function setTitle($title)
     {
         $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getBody()
-    {
-        return $this->body;
-    }
-
-    /**
-     * @param string $body
-     * @return $this
-     */
-    public function setBody($body)
-    {
-        $this->body = $body;
 
         return $this;
     }
