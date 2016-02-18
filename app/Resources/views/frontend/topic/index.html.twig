@@ -1,5 +1,8 @@
 {% extends "base.html.twig" %}
 {% from 'macros/misc.html.twig' import pagination %}
+{% from 'macros/users.html.twig' import avatar %}
+{% from 'macros/images.html.twig' import image %}
+
 
 {% block headline %}
     Forum
@@ -12,13 +15,44 @@
 
 {% block body -%}
     <div class="container">
-        <ul>
-            {% for topic in topics %}
-                <li>
-                    <a href="{{ path('app_post_index_by_topic', {'topicId': topic.id}) }}">{{ topic }}</a>
-                </li>
-            {% endfor %}
-        </ul>
+
+        {% for topic in topics %}
+
+            {% set user = topic.createdBy %}
+            {% set imagePath = avatar(user) %}
+            {% set linkUrl = path('app_post_index_by_topic', {'topicId': topic.id}) %}
+            {% set meta %}
+                <!-- Date -->
+                <a href="#"><i class="fa fa-calendar"></i> &nbsp; {{ topic.createdAt|localizeddate('long', 'none') }}</a>
+                &nbsp;
+                <!-- Author -->
+                <a href="#"><i class="fa fa-user"></i> &nbsp; {{ user }}</a>
+                &nbsp;
+                <!-- Comments -->
+                {% set commentCount = topic.posts|length - 1 %}
+                <a href="#"><i class="fa fa-comments"></i> &nbsp; {{ commentCount }} Commentaire{% if commentCount > 1 %}s{% endif %}</a> &nbsp;
+            {% endset %}
+
+            <div class="blog-author well">
+                <!-- Author image -->
+                <div class="blog-author-img">
+                    {{ image(imagePath, 'thumbnail', user.username, 'img-responsive img-round', linkUrl) }}
+                </div>
+                <!-- Author details -->
+                <div class="blog-author-content">
+                    <div class="pull-right">
+                        <a href="{{ linkUrl }}" class="btn btn-color">
+                            <span class="fa fa-arrow-circle-o-right"></span>
+                            Lire le sujet
+                        </a>
+                    </div>
+                    <h5><a href="{{ linkUrl }}">{{ topic.title }}</a></h5>
+                    {{ meta|raw }}
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        {% endfor %}
+
 
         {% block Pagination %}
             {{ pagination(topics) }}

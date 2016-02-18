@@ -36,7 +36,7 @@ class Post implements ResourceInterface
     /**
      * @var Topic
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Topic")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Topic", inversedBy="posts")
      */
     protected $topic;
 
