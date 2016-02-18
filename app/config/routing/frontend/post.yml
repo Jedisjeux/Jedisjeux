@@ -1,6 +1,0 @@
-app_post:
-    resource: |
-        alias: app.post
-        form: AppBundle\Form\Type\PostType
-        templates: :backend/post
-    type: sylius.resource

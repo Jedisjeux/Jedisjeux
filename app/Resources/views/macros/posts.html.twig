@@ -1,0 +1,25 @@
+{% macro blogCommentItem(post) %}
+    {% import 'macros/items.html.twig' as item %}
+    {% from 'macros/users.html.twig' import avatar %}
+    {% import 'macros/buttons.html.twig' as button %}
+
+    {% set user = post.createdBy %}
+    {% set imagePath = avatar(user) %}
+
+    {% set meta %}
+        <!-- Date -->
+        <a href="#"><i class="fa fa-calendar"></i> &nbsp; {{ post.createdAt|date('d/m/Y') }}</a>
+        &nbsp;
+        <!-- Author -->
+        <a href="#"><i class="fa fa-user"></i> &nbsp; {{ user }}</a> &nbsp;
+    {% endset %}
+
+    {{ item.blogCommentItem(imagePath, user.username, 'thumbnail', 'img-responsive img-round', null, null, meta, post.body) }}
+
+    <div class="pull-right">
+        {# TODO post reply #}
+        {{ button.btn(path('app_post_create'), 'Répondre', null, 'plus-sign', 'btn-color') }}
+    </div>
+    <div class="clearfix"></div>
+
+{% endmacro %}

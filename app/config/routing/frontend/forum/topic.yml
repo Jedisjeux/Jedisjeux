@@ -2,5 +2,5 @@ app_topic:
     resource: |
         alias: app.topic
         form: AppBundle\Form\Type\TopicType
-        templates: :backend/topic
+        templates: :frontend/topic
     type: sylius.resource

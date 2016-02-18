@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+{% from 'macros/misc.html.twig' import pagination %}
+
+{% block headline %}
+    Forum
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    <a href="{{ path('app_topic_index') }}">Forum</a>
+{% endblock %}
+
+{% block body -%}
+    <div class="container">
+        <ul>
+            {% for topic in topics %}
+                <li>
+                    <a href="{{ path('app_post_index_by_topic', {'topicId': topic.id}) }}">{{ topic }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        {% block Pagination %}
+            {{ pagination(topics) }}
+        {% endblock %}
+    </div>
+{% endblock %}

@@ -1,8 +1,6 @@
-app_topic:
-    resource: "frontend/topic.yml"
-
-app_post:
-    resource: "frontend/post.yml"
+app_forum:
+    resource: "frontend/forum.yml"
+    prefix: /forum
 
 app_game_review:
     resource: "frontend/game_review.yml"

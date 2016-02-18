@@ -1,0 +1,20 @@
+app_post:
+    resource: |
+        alias: app.post
+        form: AppBundle\Form\Type\PostType
+        templates: :frontend/post
+    type: sylius.resource
+
+
+app_post_index_by_topic:
+    methods: [GET]
+    path: /topics/{topicId}/posts/
+    defaults:
+        _controller: app.controller.post:indexAction
+        _sylius:
+            paginate: 10
+            criteria:
+                topic: $topicId
+            sorting:
+                createdAt: asc
+            template: frontend/post/index.html.twig
