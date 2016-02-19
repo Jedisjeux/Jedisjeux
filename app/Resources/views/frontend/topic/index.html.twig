@@ -31,7 +31,7 @@
                         &nbsp;
                         <!-- Comments -->
                     {% set commentCount = topic.posts|length - 1 %}
-                        <a href="#"><i class="fa fa-comments"></i> &nbsp; {{ commentCount }} Commentaire{% if commentCount > 1 %}s{% endif %}</a> &nbsp;
+                        <a href="#"><i class="fa fa-comments"></i> &nbsp; {{ commentCount }} <span class="hidden-xs">Commentaire{% if commentCount > 1 %}s{% endif %}</span></a> &nbsp;
                     {% endset %}
 
                     <div class="blog-author well">
@@ -41,7 +41,7 @@
                         </div>
                         <!-- Author details -->
                         <div class="blog-author-content">
-                            <div class="pull-right">
+                            <div class="pull-right hidden-xs">
                                 <a href="{{ linkUrl }}" class="btn btn-color">
                                     <span class="fa fa-arrow-circle-o-right"></span>
                                     Lire le sujet
