@@ -45,7 +45,7 @@
 <!-- Add class "boxed" along with body for boxed layout. -->
 <!-- Add "pattern-x" (1 to 5) for background patterns. -->
 <!-- Add "img-x" (1 to 5) for background images. -->
-<body class="{% block body_class %}{% endblock %} {% if is_granted('ROLE_ADMIN') %}sf-toolbar{% endif %}">
+<body class="{% block body_class %}magazine{% endblock %} {% if is_granted('ROLE_ADMIN') %}sf-toolbar{% endif %}">
 
 {% include 'layout/loading.html.twig' %}
 
@@ -60,32 +60,41 @@
         <!-- Top bar ends -->
 
         <!-- Header One Starts -->
-        {% include "layout/header.html.twig" %}
+        {% include "layout/header-1.html.twig" %}
 
         <!-- Header one ends -->
 
         {% block page_heading %}
-            <div class="page-heading-two">
-                <div class="container">
+            <div class="container">
+                <div class="col-md-12">
+                    <div class="pull-right">
+                        {% block breadcrumb_container %}
+                            <div class="breads">
+                                <a href="{{ path('jdj_web_homepage') }}">Accueil</a> /
+                                {% block breadcrumb_content %}
+                                    {#<a href="#">Page</a> / #}
+                                    {#<a href="#">Sub Page</a>#}
+                                {% endblock breadcrumb_content %}
+                            </div>
+                        {% endblock breadcrumb_container %}
+                    </div>
+
                     {% block headline_container %}
-                        <h2>{% block headline %}Titre de la page{% endblock headline %}
-                            {% block subtitle_container %}
-                                <span>{% block subtitle %}{#Something can go here#}{% endblock subtitle %}</span>
-                            {% endblock subtitle_container %}
-                        </h2>
-                    {% endblock headline_container %}
-                    {% block breadcrumb_container %}
-                        <div class="breads">
-                            <a href="{{ path('jdj_web_homepage') }}">Accueil</a> /
-                            {% block breadcrumb_content %}
-                                {#<a href="#">Page</a> / #}
-                                {#<a href="#">Sub Page</a>#}
-                            {% endblock breadcrumb_content %}
+                        <div class="block-heading-two">
+                            <h2><span>{% block headline %}Titre de la page{% endblock headline %}</span>
+                                {% block subtitle_container %}
+                                    {% block subtitle %}{#Something can go here#}{% endblock subtitle %}
+                                {% endblock subtitle_container %}
+                            </h2>
                         </div>
-                    {% endblock breadcrumb_container %}
-                    <div class="clearfix"></div>
+                    {% endblock headline_container %}
+
+
                 </div>
             </div>
+
+
+
         {% endblock page_heading %}
 
         <!-- Main content starts -->
