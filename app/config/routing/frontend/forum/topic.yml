@@ -4,3 +4,15 @@ app_topic:
         form: AppBundle\Form\Type\TopicType
         templates: :frontend/topic
     type: sylius.resource
+
+app_topic_index:
+    methods: [GET]
+    path: /topics/
+    defaults:
+        _controller: app.controller.topic:indexAction
+        _sylius:
+            paginate: 10
+            sortable: true
+            sorting:
+                createdAt: desc
+            template: frontend/topic/index.html.twig

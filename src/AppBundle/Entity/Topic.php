@@ -19,6 +19,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  * @author Loïc Frémont <lc.fremont@gmail.com>
  *
  * @ORM\Entity
+ * @ORM\Table("jdj_topic")
  */
 class Topic implements ResourceInterface
 {
