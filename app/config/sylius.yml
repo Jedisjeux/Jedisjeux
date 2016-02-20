@@ -1,3 +1,6 @@
+sylius_translation:
+    default_locale: "%locale%"
+
 sylius_content:
     driver: doctrine/phpcr-odm
     resources:

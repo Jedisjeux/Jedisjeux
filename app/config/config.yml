@@ -6,6 +6,7 @@ imports:
 
 parameters:
     knp.doctrine_behaviors.blameable_subscriber.user_entity: JDJ\UserBundle\Entity\User
+    sylius.locale: "%locale%"
 
 framework:
     #esi:             ~
@@ -159,6 +160,7 @@ stof_doctrine_extensions:
   orm:
     default:
       tree: true
+      sluggable: tree
       timestampable: false # not needed: listeners are not enabled by default
 
 white_october_pagerfanta:

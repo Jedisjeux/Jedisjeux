@@ -10,6 +10,7 @@ namespace AppBundle\Command;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
+use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -36,6 +37,7 @@ class LoadForumCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln("<comment>".$this->getDescription()."</comment>");
+        //$this->createOrReplaceTaxonomy();
         $this->deletePosts();
         $this->deleteTopics();
         $this->loadTopics();
@@ -48,6 +50,32 @@ class LoadForumCommand extends ContainerAwareCommand
     public function getDatabaseConnection()
     {
         return $this->getContainer()->get('database_connection');
+    }
+
+    public function createOrReplaceTaxonomy()
+    {
+        /** @var TaxonomyInterface $taxonomy */
+        $taxonomy = $this->getContainer()
+            ->get('sylius.repository.taxonomy')
+            ->findOneBy(array('name' => 'forumCategories'));
+
+        if (null === $taxonomy) {
+            $taxonomy = $this->getContainer()
+                ->get('sylius.factory.taxonomy')
+                ->createNew();
+        }
+
+        $taxonomy
+            ->setName('forumCategories');
+
+        /** @var EntityManager $manager */
+        $manager = $this->getContainer()
+            ->get('sylius.manager.taxonomy');
+
+        $manager->persist($taxonomy);
+        $manager->flush();
+
+        return $taxonomy;
     }
 
     public function deletePosts()
