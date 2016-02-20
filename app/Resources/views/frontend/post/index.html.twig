@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+{% from 'macros/misc.html.twig' import pagination %}
+{% from 'macros/posts.html.twig' import blogCommentItem %}
+
+{# assume that topic has one post at least #}
+{% set topic = posts.currentPageResults[0].topic %}
+
+{% block headline %}
+    {{ topic }}
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    <a href="{{ path('app_topic_index') }}">Forum</a> /
+    {{ topic }}
+{% endblock %}
+
+{% block body -%}
+    <div class="container">
+        <div class="blog-comments">
+            {% for post in posts %}
+                {{ blogCommentItem(post) }}
+                <hr/>
+            {% endfor %}
+        </div>
+
+        {% block Pagination %}
+            {{ pagination(posts) }}
+        {% endblock %}
+    </div>
+{% endblock %}

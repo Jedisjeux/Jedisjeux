@@ -1,0 +1,208 @@
+{% extends "base.html.twig" %}
+{% from 'macros/misc.html.twig' import pagination %}
+{% from 'macros/users.html.twig' import avatar %}
+{% from 'macros/images.html.twig' import image %}
+
+
+{% block headline %}
+    Forum
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    <a href="{{ path('app_topic_index') }}">Forum</a>
+{% endblock %}
+
+{% block body -%}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                {% for topic in topics %}
+
+                    {% set user = topic.createdBy %}
+                    {% set imagePath = avatar(user) %}
+                    {% set linkUrl = path('app_post_index_by_topic', {'topicId': topic.id}) %}
+                    {% set meta %}
+                        <!-- Date -->
+                        <a href="#"><i class="fa fa-calendar"></i> &nbsp; {{ topic.createdAt|localizeddate('long', 'none') }}</a>
+                        &nbsp;
+                        <!-- Author -->
+                        <a href="#"><i class="fa fa-user"></i> &nbsp; {{ user }}</a>
+                        &nbsp;
+                        <!-- Comments -->
+                    {% set commentCount = topic.posts|length - 1 %}
+                        <a href="#"><i class="fa fa-comments"></i> &nbsp; {{ commentCount }} <span class="hidden-xs">Commentaire{% if commentCount > 1 %}s{% endif %}</span></a> &nbsp;
+                    {% endset %}
+
+                    <div class="blog-author well">
+                        <!-- Author image -->
+                        <div class="blog-author-img">
+                            {{ image(imagePath, 'thumbnail', user.username, 'img-responsive img-round', linkUrl) }}
+                        </div>
+                        <!-- Author details -->
+                        <div class="blog-author-content">
+                            <div class="pull-right hidden-xs">
+                                <a href="{{ linkUrl }}" class="btn btn-color">
+                                    <span class="fa fa-arrow-circle-o-right"></span>
+                                    Lire le sujet
+                                </a>
+                            </div>
+                            <h5><a href="{{ linkUrl }}">{{ topic.title }}</a></h5>
+                            {{ meta|raw }}
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                {% endfor %}
+
+
+                {% block Pagination %}
+                    {{ pagination(topics) }}
+                {% endblock %}
+            </div>
+            <div class="col-md-4">
+                <!-- Sidebar -->
+                <div class="sidebar">
+
+                    <!-- Categories Widget -->
+                    <div class="s-widget">
+                        <!-- Heading -->
+                        <h5><i class="fa fa-folder color"></i>&nbsp; Categories</h5>
+                        <!-- Widgets Content -->
+                        <div class="widget-content categories">
+                            <ul class="list-6">
+                                <li><a href="#">Web Designing <span class="color">(5)</span></a></li>
+                                <li><a href="#">Graphic Design <span class="color">(5)</span></a></li>
+                                <li><a href="#">PHP Dev <span class="color">(5)</span></a></li>
+                                <li><a href="#">Android Dev <span class="color">(5)</span></a></li>
+                                <li><a href="#">Photoshop <span class="color">(5)</span></a></li>
+                                <li><a href="#">WordPress <span class="color">(5)</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Nav tab widget - popular, recent and comments -->
+                    <div class="s-widget">
+                        <h5><i class="fa fa-tags color"></i>&nbsp; Nav Tabs</h5>
+                        <div class="widget-content tabs">
+                            <div class="nav-tabs-two">
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a href="#popular" data-toggle="tab">Popular</a></li>
+                                    <li><a href="#recent" data-toggle="tab">Recent</a></li>
+                                </ul>
+                                <!-- Tab content -->
+                                <div class="tab-content">
+                                    <!-- Popular posts -->
+                                    <div class="tab-pane fade in active" id="popular">
+                                        <ul>
+                                            <li>
+                                                <a href="#">
+                                                    <!-- Item image -->
+                                                    <img src="img/user/1.jpg" alt="" class="img-responsive img-thumbnail">
+                                                    <!-- Item title -->
+                                                    <span>Neque porro quisquam estui dolorem ipsum quia dolor sit</span>
+                                                    <div class="clearfix"></div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <!-- Item image -->
+                                                    <img src="img/user/2.jpg" alt="" class="img-responsive img-thumbnail">
+                                                    <!-- Item title -->
+                                                    <span>Temporibus autem quibusdam et aut officiis  aut rerum</span>
+                                                    <div class="clearfix"></div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <!-- Item image -->
+                                                    <img src="img/user/3.jpg" alt="" class="img-responsive img-thumbnail">
+                                                    <!-- Item title -->
+                                                    <span>Voluptates repudiandae sint et molestiae non recusand</span>
+                                                    <div class="clearfix"></div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <!-- Item image -->
+                                                    <img src="img/user/4.jpg" alt="" class="img-responsive img-thumbnail">
+                                                    <!-- Item title -->
+                                                    <span>Neque porro quisquam estui dolorem ipsum quia dolor sit</span>
+                                                    <div class="clearfix"></div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- Recent posts -->
+                                    <div class="tab-pane fade" id="recent">
+                                        <ul>
+                                            <li>
+                                                <a href="#">
+                                                    <!-- Item image -->
+                                                    <img src="img/user/1.jpg" alt="" class="img-responsive img-thumbnail">
+                                                    <!-- Item title -->
+                                                    <span>Neque porro quisquam estui dolorem ipsum quia dolor sit</span>
+                                                    <div class="clearfix"></div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <!-- Item image -->
+                                                    <img src="img/user/2.jpg" alt="" class="img-responsive img-thumbnail">
+                                                    <!-- Item title -->
+                                                    <span>Temporibus autem quibusdam et aut officiis  aut rerum</span>
+                                                    <div class="clearfix"></div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <!-- Item image -->
+                                                    <img src="img/user/3.jpg" alt="" class="img-responsive img-thumbnail">
+                                                    <!-- Item title -->
+                                                    <span>Voluptates repudiandae sint et molestiae non recusand</span>
+                                                    <div class="clearfix"></div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <!-- Item image -->
+                                                    <img src="img/user/4.jpg" alt="" class="img-responsive img-thumbnail">
+                                                    <!-- Item title -->
+                                                    <span>Neque porro quisquam estui dolorem ipsum quia dolor sit</span>
+                                                    <div class="clearfix"></div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tag Widget -->
+                    <div class="s-widget">
+                        <h5><i class="fa fa-tags color"></i>&nbsp; Tags</h5>
+                        <!-- Widgets Content -->
+                        <div class="widget-content">
+                            <a href="#" class="label label-color">web</a>
+                            <a href="#" class="label label-color">wordpress</a>
+                            <a href="#" class="label label-color">php</a>
+                            <a href="#" class="label label-color">jquery</a>
+                            <a href="#" class="label label-color">java</a>
+                            <a href="#" class="label label-color">photoshop</a>
+                            <a href="#" class="label label-color">windows</a>
+                            <a href="#" class="label label-color">android</a>
+                            <a href="#" class="label label-color">ios</a>
+                            <a href="#" class="label label-color">chrome</a>
+                            <a href="#" class="label label-color">development</a>
+                            <a href="#" class="label label-color">plugin</a>
+                            <a href="#" class="label label-color">personal</a>
+                            <a href="#" class="label label-color">general</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

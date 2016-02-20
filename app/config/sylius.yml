@@ -58,3 +58,9 @@ sylius_resource:
                 model: AppBundle\Entity\GameReview
                 repository: AppBundle\Repository\GameReviewRepository
                 factory: AppBundle\Factory\GameReviewFactory
+        app.topic:
+            classes:
+                model: AppBundle\Entity\Topic
+        app.post:
+            classes:
+                model: AppBundle\Entity\Post

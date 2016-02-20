@@ -60,97 +60,104 @@
         <!-- Top bar ends -->
 
         <!-- Header One Starts -->
-        {% include "layout/header.html.twig" %}
+        {% include "layout/header-1.html.twig" %}
 
         <!-- Header one ends -->
 
         {% block page_heading %}
-            <div class="page-heading-two">
-                <div class="container">
+            <div class="container">
+                <div class="col-md-12">
+                    <div class="pull-right">
+                        {% block breadcrumb_container %}
+                            <div class="breads">
+                                <a href="{{ path('jdj_web_homepage') }}">Accueil</a> /
+                                {% block breadcrumb_content %}
+                                    {#<a href="#">Page</a> / #}
+                                    {#<a href="#">Sub Page</a>#}
+                                {% endblock breadcrumb_content %}
+                            </div>
+                        {% endblock breadcrumb_container %}
+                    </div>
+
                     {% block headline_container %}
-                        <h2>{% block headline %}Titre de la page{% endblock headline %}
-                            {% block subtitle_container %}
-                                <span>{% block subtitle %}{#Something can go here#}{% endblock subtitle %}</span>
-                            {% endblock subtitle_container %}
-                        </h2>
-                    {% endblock headline_container %}
-                    {% block breadcrumb_container %}
-                        <div class="breads">
-                            <a href="{{ path('jdj_web_homepage') }}">Accueil</a> /
-                            {% block breadcrumb_content %}
-                                {#<a href="#">Page</a> / #}
-                                {#<a href="#">Sub Page</a>#}
-                            {% endblock breadcrumb_content %}
+                        <div class="block-heading-two">
+                            <h2><span>{% block headline %}Titre de la page{% endblock headline %}</span>
+                                {% block subtitle_container %}
+                                    {% block subtitle %}{#Something can go here#}{% endblock subtitle %}
+                                {% endblock subtitle_container %}
+                            </h2>
                         </div>
-                    {% endblock breadcrumb_container %}
-                    <div class="clearfix"></div>
+                    {% endblock headline_container %}
+
+
                 </div>
             </div>
+
+
+
         {% endblock page_heading %}
 
         <!-- Main content starts -->
 
         <div class="main-block">
 
-            <div class="magazine">
 
-                {% include "layout/_flashes.html.twig" %}
-                {% include "layout/_notify.html.twig" %}
+            {% include "layout/_flashes.html.twig" %}
+            {% include "layout/_notify.html.twig" %}
 
-                {% include "layout/login-form-modal.html.twig" %}
+            {% include "layout/login-form-modal.html.twig" %}
 
-                {% block full_content %}
+            {% block full_content %}
 
-                    <div class="container">
+                <div class="container">
 
-                        <div class="row">
+                    <div class="row">
 
-                            {% block fos_user_content %}
-                                {% block body %}
-                                    {% block container %}
-                                        <!--
-                                        Inherit this block to write
-                                        Content without sidebar
-                                        -->
-                                        <div class="col-md-8">
+                        {% block fos_user_content %}
+                            {% block body %}
+                                {% block container %}
+                                    <!--
+                                    Inherit this block to write
+                                    Content without sidebar
+                                    -->
+                                    <div class="col-md-8">
 
-                                            {% block container_content %}
+                                        {% block container_content %}
+                                            <!--
+                                            Inherit this block to write
+                                            Content with a sidebar
+                                            -->
+                                        {% endblock container_content %}
+
+                                    </div>
+
+                                    <!-- Sidebar column -->
+                                    <div class="col-md-4">
+
+                                        <!-- Sidebar -->
+                                        <div class="sidebar">
+
+                                            {% block sidebar_content %}
                                                 <!--
                                                 Inherit this block to write
-                                                Content with a sidebar
+                                                Content in the sidebar
                                                 -->
-                                            {% endblock container_content %}
+                                            {% endblock sidebar_content %}
 
                                         </div>
 
-                                        <!-- Sidebar column -->
-                                        <div class="col-md-4">
+                                    </div>
 
-                                            <!-- Sidebar -->
-                                            <div class="sidebar">
-
-                                                {% block sidebar_content %}
-                                                    <!--
-                                                    Inherit this block to write
-                                                    Content in the sidebar
-                                                    -->
-                                                {% endblock sidebar_content %}
-
-                                            </div>
-
-                                        </div>
-
-                                    {% endblock container %}
-                                {% endblock body %}
-                            {% endblock fos_user_content %}
-
-                        </div>
+                                {% endblock container %}
+                            {% endblock body %}
+                        {% endblock fos_user_content %}
 
                     </div>
 
-                {% endblock full_content %}
+                </div>
 
-            </div>
+            {% endblock full_content %}
+
 
             <!-- Main content ends -->
 

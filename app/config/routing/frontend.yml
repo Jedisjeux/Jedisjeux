@@ -1,5 +1,9 @@
-frontend_game_review:
+app_forum:
+    resource: "frontend/forum.yml"
+    prefix: /forum
+
+app_game_review:
     resource: "frontend/game_review.yml"
 
-frontend_game:
+app_game:
     resource: "frontend/game.yml"

@@ -1,0 +1,5 @@
+app_topic:
+    resource: "forum/topic.yml"
+
+app_post:
+    resource: "forum/post.yml"

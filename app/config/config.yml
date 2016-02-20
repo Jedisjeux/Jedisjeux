@@ -139,6 +139,7 @@ doctrine_cache:
 
 knp_doctrine_behaviors:
     blameable:      true
+    timestampable:  true
     geocodable:     ~     # Here null is converted to false
     loggable:       ~
     sluggable:      true
