@@ -63,7 +63,8 @@
         "ob/highcharts-bundle": "^1.2",
         "bmatzner/jquery-ui-bundle": "^1.10",
         "knplabs/doctrine-behaviors": "~1.1",
-        "sylius/taxonomy-bundle": " ^0.16.0"
+        "sylius/taxonomy-bundle": " ^0.16.0",
+        "sylius/translation-bundle": " ^0.16.0"
     },
     "scripts": {
         "post-install-cmd": [
