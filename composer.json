@@ -24,9 +24,6 @@
         "symfony/assetic-bundle": "~2.3",
         "symfony/swiftmailer-bundle": "~2.3",
         "symfony/monolog-bundle": "~2.4",
-        "sensio/distribution-bundle": "~2.3",
-        "sensio/framework-extra-bundle": "~3.0",
-        "sensio/generator-bundle": "~2.3",
         "incenteev/composer-parameter-handler": "~2.0",
         "knplabs/knp-snappy-bundle": "dev-master",
         "stof/doctrine-extensions-bundle": "~1.1@dev",
@@ -59,12 +56,12 @@
         "jms/translation-bundle": "dev-master",
         "jms/di-extra-bundle": "dev-master",
         "bmatzner/fontawesome-bundle": "^4.4",
-        "sylius/content-bundle": "^0.16.0",
         "ob/highcharts-bundle": "^1.2",
         "bmatzner/jquery-ui-bundle": "^1.10",
         "knplabs/doctrine-behaviors": "~1.1",
-        "sylius/taxonomy-bundle": " ^0.16.0",
-        "sylius/translation-bundle": " ^0.16.0"
+        "sylius/sylius": " ^0.16.0",
+        "sensio/framework-extra-bundle": " ~3.0",
+        "sensio/generator-bundle": "^3.0"
     },
     "scripts": {
         "post-install-cmd": [
