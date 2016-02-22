@@ -8,8 +8,11 @@
 
 namespace AppBundle\Command;
 
+use AppBundle\Entity\Post;
+use AppBundle\TextFilter\Bbcode2Html;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -42,6 +45,7 @@ class LoadForumCommand extends ContainerAwareCommand
         $this->deleteTopics();
         $this->loadTopics();
         $this->loadPosts();
+        $this->bbcode2Html();
     }
 
     /**
@@ -136,5 +140,66 @@ from jedisjeux.phpbb3_posts old
 EOM;
 
         $this->getDatabaseConnection()->executeQuery($query);
+    }
+
+
+    protected function bbcode2Html()
+    {
+
+        /**
+         * TODO Paginator
+         */
+
+        $queryBuilder = $this->getPostRepository()->createQueryBuilder('o');
+        $queryBuilder
+            ->andWhere('o.body like :bbcode')
+            ->setParameter('bbcode', '%[quote%')
+            ->setMaxResults(10);
+
+        $posts = $queryBuilder->getQuery()->getResult();
+
+
+        while (count($posts) > 0)
+        {
+            /** @var Post $post */
+            foreach ($posts as $post) {
+                $bbcode2html = new Bbcode2Html();
+                $body = $bbcode2html
+                    ->setBody($post->getBody())
+                    ->getFilteredBody();
+
+                $post->setBody($body);
+            }
+
+            $this->getPostManager()->flush();
+            $this->getPostManager()->clear();
+
+            $queryBuilder = $this->getPostRepository()->createQueryBuilder('o');
+            $queryBuilder
+                ->andWhere('o.body like :bbcode')
+                ->setParameter('bbcode', '%[quote%')
+                ->setMaxResults(10);
+
+            $posts = $queryBuilder->getQuery()->getResult();
+
+        }
+
+
+    }
+
+    /**
+     * @return EntityManager
+     */
+    protected function getPostManager()
+    {
+        return $this->getContainer()->get('app.manager.post');
+    }
+
+    /**
+     * @return EntityRepository
+     */
+    protected function getPostRepository()
+    {
+        return $this->getContainer()->get('app.repository.post');
     }
 }
