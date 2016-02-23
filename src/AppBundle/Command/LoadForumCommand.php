@@ -158,10 +158,10 @@ EOM;
 
         $paginator = $this->getPostRepository()->getPaginator($queryBuilder);
 
-        while ($paginator->getNbPages() > $paginator->getCurrentPage())
-        {
-            $paginator->setCurrentPage($paginator->getCurrentPage() + 1);
+        $continue = true;
 
+        while ($continue)
+        {
             /** @var Post $post */
             foreach ($paginator->getCurrentPageResults() as $post) {
                 $bbcode2html = new Bbcode2Html();
@@ -174,9 +174,13 @@ EOM;
                 $this->getPostManager()->flush();
                 $this->getPostManager()->clear($post);
             }
+
+            if ($paginator->getNbPages() > $paginator->getCurrentPage()) {
+                $paginator->setCurrentPage($paginator->getCurrentPage() + 1);
+            } else {
+                $continue = false;
+            }
         }
-
-
     }
 
     /**

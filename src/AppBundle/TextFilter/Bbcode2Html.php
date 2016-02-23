@@ -19,6 +19,9 @@ class Bbcode2Html
      */
     protected $body;
 
+    /**
+     * @return string
+     */
     public function getFilteredBody()
     {
         $body = $this->body;
@@ -27,13 +30,20 @@ class Bbcode2Html
         return $body;
     }
 
+    /**
+     * @param string $body
+     * @return string
+     */
     protected function emoticonReplacement($body)
     {
-        $pattern = '/\<img src\=\"\{SMILIES_PATH\}\/icon_(.*?)\.gif\" alt\=\"(?P<alt>.*?)" title\=\"(.*?)\" \/\>/';
+        $pattern = '/\<img src\=\"\{SMILIES_PATH\}\/icon_(.*?)\.gif\" alt\=\"(?P<alt>.*?)\" title\=\"(.*?)\" \/\>/';
         if (preg_match($pattern, $body, $matches)) {
             switch ($matches['alt']) {
                 case ':wink:':
                     $replacement = ";)";
+                    break;
+                case ':lol:':
+                    $replacement = ":)";
                     break;
                 default:
                     $replacement = "$2";
@@ -45,6 +55,10 @@ class Bbcode2Html
         return $body;
     }
 
+    /**
+     * @param string $body
+     * @return string
+     */
     protected function quoteReplacement($body)
     {
         $pattern = '/\[quote\=&quot;(?P<title>.*?)&quot;\:(.*?)\](?P<body>.*?)\[\/quote(.*?)\]/';
