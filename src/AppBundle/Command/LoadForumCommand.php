@@ -152,36 +152,28 @@ EOM;
 
         $queryBuilder = $this->getPostRepository()->createQueryBuilder('o');
         $queryBuilder
-            ->andWhere('o.body like :bbcode')
-            ->setParameter('bbcode', '%[quote%')
-            ->setMaxResults(10);
+            ->andWhere('o.body like :bbcode or o.body like :smilies')
+            ->setParameter('bbcode', '%[quote=%')
+            ->setParameter('smilies', '%SMILIES_PATH%');
 
-        $posts = $queryBuilder->getQuery()->getResult();
+        $paginator = $this->getPostRepository()->getPaginator($queryBuilder);
 
-
-        while (count($posts) > 0)
+        while ($paginator->getNbPages() > $paginator->getCurrentPage())
         {
+            $paginator->setCurrentPage($paginator->getCurrentPage() + 1);
+
             /** @var Post $post */
-            foreach ($posts as $post) {
+            foreach ($paginator->getCurrentPageResults() as $post) {
                 $bbcode2html = new Bbcode2Html();
                 $body = $bbcode2html
                     ->setBody($post->getBody())
                     ->getFilteredBody();
 
                 $post->setBody($body);
+
+                $this->getPostManager()->flush();
+                $this->getPostManager()->clear($post);
             }
-
-            $this->getPostManager()->flush();
-            $this->getPostManager()->clear();
-
-            $queryBuilder = $this->getPostRepository()->createQueryBuilder('o');
-            $queryBuilder
-                ->andWhere('o.body like :bbcode')
-                ->setParameter('bbcode', '%[quote%')
-                ->setMaxResults(10);
-
-            $posts = $queryBuilder->getQuery()->getResult();
-
         }
 
 

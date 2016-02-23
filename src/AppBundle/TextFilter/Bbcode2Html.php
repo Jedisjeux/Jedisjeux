@@ -22,8 +22,31 @@ class Bbcode2Html
     public function getFilteredBody()
     {
         $body = $this->body;
+        $body = $this->emoticonReplacement($body);
+        $body = $this->quoteReplacement($body);
+        return $body;
+    }
 
-        // blockquote
+    protected function emoticonReplacement($body)
+    {
+        $pattern = '/\<img src\=\"\{SMILIES_PATH\}\/icon_(.*?)\.gif\" alt\=\"(?P<alt>.*?)" title\=\"(.*?)\" \/\>/';
+        if (preg_match($pattern, $body, $matches)) {
+            switch ($matches['alt']) {
+                case ':wink:':
+                    $replacement = ";)";
+                    break;
+                default:
+                    $replacement = "$2";
+                    break;
+            }
+
+            $body = preg_replace($pattern, $replacement, $body);
+        }
+        return $body;
+    }
+
+    protected function quoteReplacement($body)
+    {
         $pattern = '/\[quote\=&quot;(?P<title>.*?)&quot;\:(.*?)\](?P<body>.*?)\[\/quote(.*?)\]/';
         $replacement = <<<EOM
 </p>
@@ -41,12 +64,10 @@ class Bbcode2Html
 </div>
  <p>
 EOM;
-
-
         $body = preg_replace($pattern, trim($replacement), $body);
-
         return $body;
     }
+
 
     /**
      * @return string
