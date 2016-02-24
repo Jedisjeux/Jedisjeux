@@ -145,16 +145,20 @@ EOM;
 
     protected function bbcode2Html()
     {
-
         /**
          * TODO Paginator
          */
 
         $queryBuilder = $this->getPostRepository()->createQueryBuilder('o');
         $queryBuilder
-            ->andWhere('o.body like :bbcode or o.body like :smilies')
-            ->setParameter('bbcode', '%[quote=%')
-            ->setParameter('smilies', '%SMILIES_PATH%');
+            ->andWhere($queryBuilder->expr()->orX(
+                'o.body like :quote',
+                'o.body like :emoticon',
+                'o.body like :image'
+            ))
+            ->setParameter('quote', '%quote%')
+            ->setParameter('emoticon', '%SMILIES%')
+            ->setParameter('image', '%img%');
 
         $paginator = $this->getPostRepository()->getPaginator($queryBuilder);
 
@@ -170,10 +174,10 @@ EOM;
                     ->getFilteredBody();
 
                 $post->setBody($body);
-
-                $this->getPostManager()->flush();
-                $this->getPostManager()->clear($post);
             }
+
+            $this->getPostManager()->flush();
+            $this->getPostManager()->clear();
 
             if ($paginator->getNbPages() > $paginator->getCurrentPage()) {
                 $paginator->setCurrentPage($paginator->getCurrentPage() + 1);

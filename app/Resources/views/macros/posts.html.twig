@@ -11,7 +11,17 @@
         <a href="#"><i class="fa fa-calendar"></i> &nbsp; {{ post.createdAt|date('d/m/Y') }}</a>
         &nbsp;
         <!-- Author -->
-        <a href="#"><i class="fa fa-user"></i> &nbsp; {{ user }}</a> &nbsp;
+        <a href="#"><i class="fa fa-user"></i> &nbsp; {{ user }}</a>
+        &nbsp;
+        <a href="#">
+            <i class="fa fa-thumbs-up"></i>
+            <span data-post-id="{{ post.id }}" class="nbLikes">0</span>
+        </a>
+        &nbsp;
+        <a href="#">
+            <i class="fa fa-thumbs-down"></i>
+            <span data-post-id="{{ post.id }}" class="nbDislikes">0</span>
+        </a>
     {% endset %}
 
     {{ item.blogCommentItem(imagePath, user.username, 'thumbnail', 'img-responsive img-round', null, null, meta, post.body) }}
