@@ -26,10 +26,4 @@
 
     {{ item.blogCommentItem(imagePath, user.username, 'thumbnail', 'img-responsive img-round', null, null, meta, post.body) }}
 
-    <div class="pull-right">
-        {# TODO post reply #}
-        {{ button.btn(path('app_post_create'), 'Répondre', null, 'plus-sign', 'btn-color') }}
-    </div>
-    <div class="clearfix"></div>
-
 {% endmacro %}

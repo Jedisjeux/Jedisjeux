@@ -1,6 +1,7 @@
 {% extends "base.html.twig" %}
 {% from 'macros/misc.html.twig' import pagination %}
 {% from 'macros/posts.html.twig' import blogCommentItem %}
+{% import 'macros/buttons.html.twig' as button %}
 
 {# assume that topic has one post at least #}
 {% set topic = posts.currentPageResults[0].topic %}
@@ -17,10 +18,16 @@
 
 {% block body -%}
     <div class="container">
+
+        <div class="pull-right">
+            {# TODO post reply #}
+            {{ button.btn(path('app_post_create_by_topic', {'topicId' : topic.id}), 'Répondre au sujet', null, 'plus-sign', 'btn-color') }}
+        </div>
+        <div class="clearfix"></div>
+
         <div class="blog-comments">
             {% for post in posts %}
                 {{ blogCommentItem(post) }}
-                <hr/>
             {% endfor %}
         </div>
 
