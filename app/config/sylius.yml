@@ -67,3 +67,4 @@ sylius_resource:
         app.post:
             classes:
                 model: AppBundle\Entity\Post
+                factory: AppBundle\Factory\PostFactory

@@ -18,3 +18,21 @@ app_post_index_by_topic:
             sorting:
                 createdAt: asc
             template: frontend/post/index.html.twig
+
+app_post_create_by_topic:
+    methods: [GET, POST]
+    path: /topics/{topicId}/posts/new
+    defaults:
+        _controller: app.controller.post:createAction
+        _sylius:
+            form: AppBundle\Form\Type\PostType
+            factory:
+                method: createNewWithTopic
+                arguments:
+                    - $topicId
+                    - expr:service('app.repository.topic')
+            paginate: 10
+            template: frontend/post/create.html.twig
+            redirect:
+                route: app_post_index_by_topic
+                parameters: { topicId: $topicId }

@@ -47,6 +47,11 @@
   margin-top: 20px;
 }
 
+/* line 1, ../sass/parts/_text.scss */
+.text-small {
+  font-size: 0.5em !important;
+}
+
 /*
  * Specific styles of signin component
  */
@@ -403,51 +408,51 @@ html body.login .forgot-password:focus {
   line-height: normal;
 }
 
-/* line 13, ../sass/base.scss */
+/* line 14, ../sass/base.scss */
 body.sf-toolbar {
   margin-top: 70px;
 }
 
-/* line 18, ../sass/base.scss */
+/* line 19, ../sass/base.scss */
 h1 {
   font-size: 26px;
 }
 
-/* line 23, ../sass/base.scss */
+/* line 24, ../sass/base.scss */
 .top-bar .avatar {
   width: 30px;
   height: 30px;
 }
 
-/* line 29, ../sass/base.scss */
+/* line 30, ../sass/base.scss */
 .img-round {
   border-radius: 50%;
 }
 
-/* line 34, ../sass/base.scss */
+/* line 35, ../sass/base.scss */
 .jeu-list .img-container {
   height: 148px;
   overflow: hidden;
 }
 
-/* line 40, ../sass/base.scss */
+/* line 41, ../sass/base.scss */
 .intro {
   font-style: italic;
   font-size: 1.3em;
 }
 
-/* line 45, ../sass/base.scss */
+/* line 46, ../sass/base.scss */
 .thumbnail-jeu {
   padding-left: 0;
   padding-top: 8px;
 }
 
-/* line 50, ../sass/base.scss */
+/* line 51, ../sass/base.scss */
 .title-button {
   padding-top: 7px;
 }
 
-/* line 56, ../sass/base.scss */
+/* line 57, ../sass/base.scss */
 .comment-author-image .anonymous-user {
   margin-right: 10px;
   margin-top: 3px;
@@ -458,29 +463,29 @@ h1 {
   vertical-align: middle;
   text-align: center;
 }
-/* line 66, ../sass/base.scss */
+/* line 67, ../sass/base.scss */
 .comment-author-image .anonymous-user .fa {
   font-size: 50px;
 }
 
-/* line 73, ../sass/base.scss */
+/* line 74, ../sass/base.scss */
 .blog-meta img {
   float: left;
   width: 32px;
 }
 
-/* line 79, ../sass/base.scss */
+/* line 80, ../sass/base.scss */
 .bloc-login {
   width: 430px !important;
 }
 
-/* line 83, ../sass/base.scss */
+/* line 84, ../sass/base.scss */
 ul.ui-autocomplete {
   padding: 0px;
   margin: 0px;
   list-style-type: none;
 }
-/* line 88, ../sass/base.scss */
+/* line 89, ../sass/base.scss */
 ul.ui-autocomplete img, ul.ui-autocomplete .anonymous-user {
   max-width: 60px;
   float: left;
@@ -488,22 +493,22 @@ ul.ui-autocomplete img, ul.ui-autocomplete .anonymous-user {
   margin-top: 3px;
 }
 
-/* line 98, ../sass/base.scss */
+/* line 99, ../sass/base.scss */
 .table th a, .table th a.color {
   color: #666666;
 }
 
-/* line 104, ../sass/base.scss */
+/* line 105, ../sass/base.scss */
 .no-padding-left {
   padding-left: 0 !important;
 }
 
-/* line 108, ../sass/base.scss */
+/* line 109, ../sass/base.scss */
 .no-padding-right {
   padding-right: 0 !important;
 }
 
-/* line 113, ../sass/base.scss */
+/* line 114, ../sass/base.scss */
 .article p {
   margin-bottom: 15px;
 }
