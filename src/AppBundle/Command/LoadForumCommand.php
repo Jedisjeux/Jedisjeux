@@ -85,6 +85,12 @@ class LoadForumCommand extends ContainerAwareCommand
     public function deletePosts()
     {
         $query = <<<EOM
+update jdj_topic set mainPost_id = null;
+EOM;
+
+        $this->getDatabaseConnection()->executeQuery($query);
+
+        $query = <<<EOM
 delete from jdj_post;
 EOM;
 
@@ -106,11 +112,28 @@ EOM;
     public function loadTopics()
     {
         $query = <<<EOM
-insert into jdj_topic (id, title, createdBy_id, createdAt)
-select old.topic_id as id,
-       old.topic_title as title,
-       old.topic_poster as createdBy_id,
-      FROM_UNIXTIME(old.topic_time) as createdAt
+        insert into jdj_post(id, createdBy_id, body, createdAt)
+select old.post_id as id,
+       old.poster_id as createdBy_id,
+       concat ('<p>', replace(old.post_text, '\n\n', '</p><p>'), '</p>') as body,
+       FROM_UNIXTIME(old.post_time) as createdAt
+from jedisjeux.phpbb3_posts old
+    inner join jedisjeux.phpbb3_topics old_topic
+        on old_topic.topic_first_post_id = old.post_id
+  inner join fos_user user
+    on user.id = old.poster_id
+    where old_topic.forum_id = 51
+EOM;
+
+        $this->getDatabaseConnection()->executeQuery($query);
+
+        $query = <<<EOM
+insert into jdj_topic (id, title, createdBy_id, createdAt, mainPost_id)
+select  old.topic_id as id,
+        old.topic_title as title,
+        old.topic_poster as createdBy_id,
+        FROM_UNIXTIME(old.topic_time) as createdAt,
+        old.topic_first_post_id as mainPost_id
 from jedisjeux.phpbb3_topics old
   inner join fos_user user
     on user.id = old.topic_poster
@@ -136,7 +159,8 @@ from jedisjeux.phpbb3_posts old
   inner join fos_user user
     on user.id = old.poster_id
   inner join jdj_topic topic
-    on topic.id = old.topic_id;
+    on topic.id = old.topic_id
+where old.post_id <> topic.mainPost_id
 EOM;
 
         $this->getDatabaseConnection()->executeQuery($query);
@@ -145,10 +169,6 @@ EOM;
 
     protected function bbcode2Html()
     {
-        /**
-         * TODO Paginator
-         */
-
         $queryBuilder = $this->getPostRepository()->createQueryBuilder('o');
         $queryBuilder
             ->andWhere($queryBuilder->expr()->orX(
@@ -160,30 +180,20 @@ EOM;
             ->setParameter('emoticon', '%SMILIES%')
             ->setParameter('image', '%img%');
 
-        $paginator = $this->getPostRepository()->getPaginator($queryBuilder);
+        $posts = $queryBuilder->getQuery()->getArrayResult();
 
-        $continue = true;
+        foreach ($posts as $data) {
+            $bbcode2html = new Bbcode2Html();
+            $body = $data['body'];
+            $body = $bbcode2html
+                ->setBody($body)
+                ->getFilteredBody();
 
-        while ($continue)
-        {
             /** @var Post $post */
-            foreach ($paginator->getCurrentPageResults() as $post) {
-                $bbcode2html = new Bbcode2Html();
-                $body = $bbcode2html
-                    ->setBody($post->getBody())
-                    ->getFilteredBody();
-
-                $post->setBody($body);
-            }
-
-            $this->getPostManager()->flush();
-            $this->getPostManager()->clear();
-
-            if ($paginator->getNbPages() > $paginator->getCurrentPage()) {
-                $paginator->setCurrentPage($paginator->getCurrentPage() + 1);
-            } else {
-                $continue = false;
-            }
+            $post = $this->getPostRepository()->find($data['id']);
+            $post->setBody($body);
+            $this->getPostManager()->flush($post);
+            $this->getPostManager()->clear($post);
         }
     }
 

@@ -26,13 +26,21 @@
         <div class="clearfix"></div>
 
         <div class="blog-comments">
+            {{ blogCommentItem(topic.mainPost) }}
+        </div>
+
+        {% set topicRepliesCount = topic.posts|length %}
+        <div class="block-heading-two">
+            <h3><span>Réponses</span> <small>({{ topicRepliesCount }})</small></h3>
+        </div>
+
+        <div class="blog-comments">
             {% for post in posts %}
                 {{ blogCommentItem(post) }}
             {% endfor %}
         </div>
 
-        {% block Pagination %}
-            {{ pagination(posts) }}
-        {% endblock %}
+        {{ pagination(posts) }}
+
     </div>
 {% endblock %}

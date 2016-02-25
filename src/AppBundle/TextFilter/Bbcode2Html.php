@@ -54,7 +54,7 @@ class Bbcode2Html
      */
     protected function quoteReplacement($body)
     {
-        $pattern = '/\[quote\=&quot;(?P<title>.*?)&quot;:(.*?)\](?P<body>.*?)\[\/quote:(.*?)\]/ms';
+        $pattern = '/\[quote\=&quot;(?P<title>.*?)&quot;:(.*?)\](?P<body>.*)\[\/quote:(.*?)\]/ms';
         $replacement = <<<EOM
 </p>
 <div class="quote-one">
@@ -72,6 +72,9 @@ class Bbcode2Html
  <p>
 EOM;
         $body = preg_replace($pattern, trim($replacement), $body);
+
+        // remove extra quotes
+        $body = preg_replace($pattern, "", $body);
 
         $pattern = '/\[quote:(.*?)\](?P<body>.*?)\[\/quote:(.*?)\]/ms';
         $replacement = <<<EOM

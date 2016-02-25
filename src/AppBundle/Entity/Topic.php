@@ -35,6 +35,14 @@ class Topic implements ResourceInterface
     protected $title;
 
     /**
+     * @var Post
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Post")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $mainPost;
+
+    /**
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Post", mappedBy="topic")
@@ -64,6 +72,25 @@ class Topic implements ResourceInterface
     public function setTitle($title)
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * @return Post
+     */
+    public function getMainPost()
+    {
+        return $this->mainPost;
+    }
+
+    /**
+     * @param Post $mainPost
+     * @return $this
+     */
+    public function setMainPost($mainPost)
+    {
+        $this->mainPost = $mainPost;
 
         return $this;
     }
