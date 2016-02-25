@@ -62,8 +62,10 @@ class AppKernel extends Kernel
             new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
             new Bmatzner\JQueryUIBundle\BmatznerJQueryUIBundle(),
             new Bmatzner\JQueryBundle\BmatznerJQueryBundle(),
+            new FM\BbcodeBundle\FMBbcodeBundle(),
 
             //JDJ
+            // TODO there can be only one !
             new JDJ\WebBundle\JDJWebBundle(),
             new JDJ\ComptaBundle\JDJComptaBundle(),
             new JDJ\JeuBundle\JDJJeuBundle(),
