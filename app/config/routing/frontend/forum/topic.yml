@@ -1,8 +1,19 @@
+app_topic_create:
+    methods: [GET, POST]
+    path: /topics/new
+    defaults:
+        _controller: app.controller.topic:createAction
+        _sylius:
+            template: frontend/topic/create.html.twig
+            redirect:
+                route: app_post_index_by_topic
+                parameters: { topicId: resource.id }
+
 app_topic:
     resource: |
         alias: app.topic
-        form: AppBundle\Form\Type\TopicType
         templates: :frontend/topic
+        except: [create]
     type: sylius.resource
 
 app_topic_index:

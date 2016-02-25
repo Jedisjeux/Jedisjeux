@@ -3,9 +3,6 @@
 {% from 'macros/posts.html.twig' import blogCommentItem %}
 {% import 'macros/buttons.html.twig' as button %}
 
-{# assume that topic has one post at least #}
-{% set topic = posts.currentPageResults[0].topic %}
-
 {% block headline %}
     {{ topic }}
 {% endblock %}

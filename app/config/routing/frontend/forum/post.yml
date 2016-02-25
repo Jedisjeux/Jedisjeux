@@ -10,7 +10,7 @@ app_post_index_by_topic:
     methods: [GET]
     path: /topics/{topicId}/posts/
     defaults:
-        _controller: app.controller.post:indexAction
+        _controller: app.controller.post:indexByTopicAction
         _sylius:
             paginate: 10
             criteria:
