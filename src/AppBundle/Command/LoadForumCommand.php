@@ -174,11 +174,13 @@ EOM;
             ->andWhere($queryBuilder->expr()->orX(
                 'o.body like :quote',
                 'o.body like :emoticon',
+                'o.body like :url',
                 'o.body like :image'
             ))
-            ->setParameter('quote', '%quote%')
+            ->setParameter('quote', '%[quote%')
             ->setParameter('emoticon', '%SMILIES%')
-            ->setParameter('image', '%img%');
+            ->setParameter('url', '%[url%')
+            ->setParameter('image', '%[img%');
 
         $posts = $queryBuilder->getQuery()->getArrayResult();
 
