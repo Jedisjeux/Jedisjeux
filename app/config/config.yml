@@ -243,12 +243,25 @@ services:
 gregwar_form: ~
 
 ivory_ck_editor:
-    default_config: minimal
+    default_config: forum
     configs:
         minimal:
+            language: %locale%
             toolbar: basic
         standard:
             toolbar: standard
+        forum:
+            language: %locale%
+            stylesSet: custom_styles  # Chargement des styles personnalisables
+            contentsCss:  ['assets/stylesheets/app.css']
+            toolbar: [ [ 'Bold','Italic','Underline', 'Blockquote' ], [ 'NumberedList','BulletedList' ], [ 'Link','Unlink' ], [ 'Image' ], [ 'Styles', 'Format' ]; ]
+    styles:         # Configuration des styles personnalisables
+        custom_styles:
+            - { name: "Alerte Success", element: "div",  attributes: { class: "alert alert-success", role: "alert" }}
+            - { name: "Alerte Info", element: "div",  attributes: { class: "alert alert-info", role: "alert" }}
+            - { name: "Alerte Warning", element: "div",  attributes: { class: "alert alert-warning", role: "alert" }}
+            - { name: "Alerte Danger", element: "div",  attributes: { class: "alert alert-danger", role: "alert" }}
+            - { name: "Badge", element: "span",  attributes: { class: "badge" }}
 
 knp_snappy:
     pdf:
