@@ -13,6 +13,7 @@ use AppBundle\TextFilter\Bbcode2Html;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Taxonomy\Model\Taxon;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -30,8 +31,7 @@ class LoadForumCommand extends ContainerAwareCommand
     {
         $this
             ->setName('app:forum:load')
-            ->setDescription('Loading forum')
-        ;
+            ->setDescription('Loading forum');
     }
 
     /**
@@ -39,13 +39,15 @@ class LoadForumCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln("<comment>".$this->getDescription()."</comment>");
-        //$this->createOrReplaceTaxonomy();
-        $this->deletePosts();
-        $this->deleteTopics();
-        $this->loadTopics();
-        $this->loadPosts();
-        $this->bbcode2Html();
+        $output->writeln("<comment>" . $this->getDescription() . "</comment>");
+        //$this->deletePosts();
+        //$this->deleteTopics();
+        //$this->loadTopics();
+        //$this->loadPosts();
+        //$this->bbcode2Html();
+        $taxonomy = $this->createOrReplaceTaxonomy();
+        $this->loadTaxons($taxonomy);
+
     }
 
     /**
@@ -56,6 +58,51 @@ class LoadForumCommand extends ContainerAwareCommand
         return $this->getContainer()->get('database_connection');
     }
 
+    public function loadTaxons(TaxonomyInterface $taxonomy)
+    {
+
+        foreach ($this->getTaxons() as $data) {
+            $this->createOrReplaceTaxon($data, $taxonomy);
+        }
+
+        $this->getTaxonManager()->flush();
+    }
+
+    protected function createOrReplaceTaxon(array $data, TaxonomyInterface $taxonomy)
+    {
+        $locale = $this->getContainer()->getParameter('locale');
+
+        $taxon = $this->getContainer()
+            ->get('sylius.repository.taxon')
+            ->findOneBy(array('name' => $data['name']));
+
+        if (null === $taxon) {
+            $taxon = new Taxon();
+            $taxon->setCurrentLocale($locale);
+            $taxon->setFallbackLocale($locale);
+        }
+
+        $taxon->setCode($data['code']);
+        $taxon->setName($data['name']);
+
+        $this->getTaxonManager()->persist($taxon);
+        $taxon->setTaxonomy($taxonomy);
+    }
+
+    protected function getTaxons()
+    {
+        $query = <<<EOM
+select forum_id as code, forum_name as name
+from jedisjeux.phpbb3_forums old
+where parent_id = 10
+EOM;
+
+        return $this->getDatabaseConnection()->executeQuery($query);
+    }
+
+    /**
+     * @return TaxonomyInterface
+     */
     public function createOrReplaceTaxonomy()
     {
         /** @var TaxonomyInterface $taxonomy */
@@ -69,8 +116,8 @@ class LoadForumCommand extends ContainerAwareCommand
                 ->createNew();
         }
 
-        $taxonomy
-            ->setName('forumCategories');
+        $taxonomy->setCode('forum-categories');
+        $taxonomy->setName('forumCategories');
 
         /** @var EntityManager $manager */
         $manager = $this->getContainer()
@@ -205,6 +252,14 @@ EOM;
     protected function getPostManager()
     {
         return $this->getContainer()->get('app.manager.post');
+    }
+
+    /**
+     * @return EntityManager
+     */
+    protected function getTaxonManager()
+    {
+        return $this->getContainer()->get('sylius.manager.taxon');
     }
 
     /**

@@ -17,9 +17,9 @@ admin:
     resource: "routing/admin.yml"
     prefix: /admin
 
-#sylius_taxonomy:
-#    resource: @SyliusTaxonomyBundle/Resources/config/routing.yml
-#    prefix: /taxonomy
+sylius_taxonomy:
+    resource: @SyliusTaxonomyBundle/Resources/config/routing.yml
+    prefix: /taxonomy
 
 jdj_jedi_zone:
     resource: "@JDJJediZoneBundle/Resources/config/routing.yml"

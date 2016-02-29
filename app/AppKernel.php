@@ -15,6 +15,10 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
 
+            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
+            new Sylius\Bundle\TaxonomyBundle\SyliusTaxonomyBundle(),
+            new Sylius\Bundle\TranslationBundle\SyliusTranslationBundle(),
+
             new Sonata\BlockBundle\SonataBlockBundle(),
 
             new Symfony\Cmf\Bundle\CoreBundle\CmfCoreBundle(),
@@ -54,9 +58,7 @@ class AppKernel extends Kernel
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new Bmatzner\FontAwesomeBundle\BmatznerFontAwesomeBundle(),
             new JMS\AopBundle\JMSAopBundle(),
-            //new Sylius\Bundle\TaxonomyBundle\SyliusTaxonomyBundle(),
-            new Sylius\Bundle\TranslationBundle\SyliusTranslationBundle(),
-            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
+
             new Ob\HighchartsBundle\ObHighchartsBundle(),
             new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
             new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),

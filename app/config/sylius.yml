@@ -1,6 +1,9 @@
 sylius_translation:
     default_locale: "%locale%"
 
+sylius_taxonomy:
+    driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
+
 sylius_content:
     driver: doctrine/phpcr-odm
     resources:

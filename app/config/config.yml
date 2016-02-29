@@ -6,6 +6,7 @@ imports:
 
 parameters:
     knp.doctrine_behaviors.blameable_subscriber.user_entity: JDJ\UserBundle\Entity\User
+    locale: fr
     sylius.locale: "%locale%"
 
 framework:
