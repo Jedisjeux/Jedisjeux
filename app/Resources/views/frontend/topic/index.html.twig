@@ -2,7 +2,7 @@
 {% from 'macros/misc.html.twig' import pagination %}
 {% from 'macros/users.html.twig' import avatar %}
 {% from 'macros/images.html.twig' import image %}
-
+{% import 'macros/buttons.html.twig' as button %}
 
 {% block headline %}
     Forum
@@ -15,8 +15,19 @@
 
 {% block body -%}
     <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                {{ button.create(path('app_topic_create'), 'Nouveau sujet') }}
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-8">
+
+
+
+
                 {% for topic in topics %}
 
                     {% set user = topic.createdBy %}
