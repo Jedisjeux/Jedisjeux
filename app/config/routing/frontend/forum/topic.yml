@@ -9,21 +9,34 @@ app_topic_create:
                 route: app_post_index_by_topic
                 parameters: { topicId: resource.id }
 
-app_topic:
-    resource: |
-        alias: app.topic
-        templates: :frontend/topic
-        except: [create]
-    type: sylius.resource
-
-app_topic_index:
+app_topic_index_by_taxon:
     methods: [GET]
-    path: /topics/
+    path: /topics/{permalink}
     defaults:
-        _controller: app.controller.topic:indexAction
+        _controller: app.controller.topic:indexByTaxonAction
         _sylius:
             paginate: 10
             sortable: true
             sorting:
                 createdAt: desc
             template: frontend/topic/index.html.twig
+
+app_topic:
+    resource: |
+        alias: app.topic
+        templates: :frontend/topic
+        except: [create, index]
+    type: sylius.resource
+
+app_topic_index:
+    methods: [GET]
+    path: /topics/
+    defaults:
+        _controller: app.controller.topic:indexByTaxonAction
+        _sylius:
+            paginate: 10
+            sortable: true
+            sorting:
+                createdAt: desc
+            template: frontend/topic/index.html.twig
+

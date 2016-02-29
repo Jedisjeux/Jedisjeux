@@ -84,6 +84,7 @@ class LoadForumCommand extends ContainerAwareCommand
 
         $taxon->setCode($data['code']);
         $taxon->setName($data['name']);
+        $taxon->setParent($taxonomy->getRoot());
 
         $this->getTaxonManager()->persist($taxon);
         $taxon->setTaxonomy($taxonomy);
