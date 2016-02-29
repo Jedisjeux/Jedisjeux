@@ -8,6 +8,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Model\Identifiable;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
@@ -39,6 +40,28 @@ class Post implements ResourceInterface
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Topic", inversedBy="posts")
      */
     protected $topic;
+
+    /**
+     * @var Post
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Post", inversedBy="replies")
+     */
+    protected $replyTo;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Post", mappedBy="replyTo")
+     */
+    protected $replies;
+
+    /**
+     * Post constructor.
+     */
+    public function __construct()
+    {
+        $this->replies = new ArrayCollection();
+    }
 
     /**
      * @return string
