@@ -8,8 +8,14 @@
         <!-- Widgets Content -->
         <div class="widget-content categories">
             <ul class="list-6">
-                {% for taxon in taxons %}
-                    <li><a href="#">{{ taxon }} <span class="color">(5)</span></a></li>
+                {% for thisTaxon in taxons %}
+                    {% set currentTaxon = taxon is defined and thisTaxon == taxon ? true : false %}
+                    <li>
+                        <a href="{{ path('app_topic_index_by_taxon', { 'permalink': thisTaxon.slug }) }}">
+                            {% if currentTaxon %}<strong>{% endif %}{{ thisTaxon }}{% if currentTaxon %}</strong>{% endif %}
+                            <span class="color">(5)</span>
+                        </a>
+                    </li>
                 {% endfor %}
             </ul>
         </div>

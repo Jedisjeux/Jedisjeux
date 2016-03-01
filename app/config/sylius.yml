@@ -68,6 +68,7 @@ sylius_resource:
             classes:
                 model: AppBundle\Entity\Topic
                 controller: AppBundle\Controller\TopicController
+                repository: AppBundle\Repository\TopicRepository
                 form:
                     default: AppBundle\Form\Type\TopicType
         app.post:

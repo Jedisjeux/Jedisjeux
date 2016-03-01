@@ -8,9 +8,18 @@
     Forum
 {% endblock %}
 
+{% block subtitle %}
+    {% if taxon is defined %}
+        {{ taxon }}
+    {% endif %}
+{% endblock %}
+
 {% block breadcrumb_content %}
     {{ parent() }}
     <a href="{{ path('app_topic_index') }}">Forum</a>
+    {% if taxon is defined %}
+        / {{ taxon }}
+    {% endif %}
 {% endblock %}
 
 {% block body -%}
@@ -18,49 +27,55 @@
 
         <div class="row">
             <div class="col-md-12">
-                {{ button.create(path('app_topic_create'), 'Nouveau sujet') }}
+                <div class="container">
+                    {{ button.create(path('app_topic_create'), 'Nouveau sujet') }}
+                </div>
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-8">
 
-                {% for topic in topics %}
+                <div class="container">
+                    {% for topic in topics %}
 
-                    {% set user = topic.createdBy %}
-                    {% set imagePath = avatar(user) %}
-                    {% set linkUrl = path('app_post_index_by_topic', {'topicId': topic.id}) %}
-                    {% set meta %}
-                        <!-- Date -->
-                        <a href="#"><i class="fa fa-calendar"></i> &nbsp; {{ topic.createdAt|localizeddate('long', 'none') }}</a>
-                        &nbsp;
-                        <!-- Author -->
-                        <a href="#"><i class="fa fa-user"></i> &nbsp; {{ user }}</a>
-                        &nbsp;
-                        <!-- Comments -->
-                    {% set commentCount = topic.posts|length - 1 %}
-                        <a href="#"><i class="fa fa-comments"></i> &nbsp; {{ commentCount }} <span class="hidden-xs">Commentaire{% if commentCount > 1 %}s{% endif %}</span></a> &nbsp;
-                    {% endset %}
+                        {% set user = topic.createdBy %}
+                        {% set imagePath = avatar(user) %}
+                        {% set linkUrl = path('app_post_index_by_topic', {'topicId': topic.id}) %}
+                        {% set meta %}
+                            <!-- Date -->
+                            <a href="#"><i class="fa fa-calendar"></i>
+                                &nbsp; {{ topic.createdAt|localizeddate('long', 'none') }}</a>
+                            &nbsp;
+                            <!-- Author -->
+                            <a href="#"><i class="fa fa-user"></i> &nbsp; {{ user }}</a>
+                            &nbsp;
+                            <!-- Comments -->
+                        {% set commentCount = topic.posts|length %}
+                            <a href="#"><i class="fa fa-comments"></i> &nbsp; {{ commentCount }} <span
+                                        class="hidden-xs">Commentaire{% if commentCount > 1 %}s{% endif %}</span></a> &nbsp;
+                        {% endset %}
 
-                    <div class="blog-author well">
-                        <!-- Author image -->
-                        <div class="blog-author-img">
-                            {{ image(imagePath, 'thumbnail', user.username, 'img-responsive img-round', linkUrl) }}
-                        </div>
-                        <!-- Author details -->
-                        <div class="blog-author-content">
-                            <div class="pull-right hidden-xs">
-                                <a href="{{ linkUrl }}" class="btn btn-color">
-                                    <span class="fa fa-arrow-circle-o-right"></span>
-                                    Lire le sujet
-                                </a>
+                        <div class="blog-author well">
+                            <!-- Author image -->
+                            <div class="blog-author-img">
+                                {{ image(imagePath, 'thumbnail', user.username, 'img-responsive img-round', linkUrl) }}
                             </div>
-                            <h5><a href="{{ linkUrl }}">{{ topic.title }}</a></h5>
-                            {{ meta|raw }}
+                            <!-- Author details -->
+                            <div class="blog-author-content">
+                                <div class="pull-right hidden-xs">
+                                    <a href="{{ linkUrl }}" class="btn btn-color">
+                                        <span class="fa fa-arrow-circle-o-right"></span>
+                                        Lire le sujet
+                                    </a>
+                                </div>
+                                <h5><a href="{{ linkUrl }}">{{ topic.title }}</a></h5>
+                                {{ meta|raw }}
+                            </div>
+                            <div class="clearfix"></div>
                         </div>
-                        <div class="clearfix"></div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
 
 
                 {% block Pagination %}

@@ -13,7 +13,7 @@ app_topic_index_by_taxon:
     methods: [GET]
     path: /topics/{permalink}
     defaults:
-        _controller: app.controller.topic:indexByTaxonAction
+        _controller: app.controller.topic:indexByTaxonSlugAction
         _sylius:
             paginate: 10
             sortable: true
@@ -32,7 +32,7 @@ app_topic_index:
     methods: [GET]
     path: /topics/
     defaults:
-        _controller: app.controller.topic:indexByTaxonAction
+        _controller: app.controller.topic:indexWithTaxonsAction
         _sylius:
             paginate: 10
             sortable: true

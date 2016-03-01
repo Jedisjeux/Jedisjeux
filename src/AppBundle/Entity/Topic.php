@@ -14,6 +14,7 @@ use AppBundle\Model\Identifiable;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\Taxonomy\Model\Taxon;
 
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
@@ -48,6 +49,13 @@ class Topic implements ResourceInterface
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Post", mappedBy="topic")
      */
     protected $posts;
+
+    /**
+     * @var Taxon
+     *
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Taxonomy\Model\TaxonInterface")
+     */
+    protected $mainTaxon;
 
     /**
      * Topic constructor.
@@ -111,6 +119,25 @@ class Topic implements ResourceInterface
     public function setPosts($posts)
     {
         $this->posts = $posts;
+
+        return $this;
+    }
+
+    /**
+     * @return Taxon
+     */
+    public function getMainTaxon()
+    {
+        return $this->mainTaxon;
+    }
+
+    /**
+     * @param Taxon $mainTaxon
+     * @return $this
+     */
+    public function setMainTaxon($mainTaxon)
+    {
+        $this->mainTaxon = $mainTaxon;
 
         return $this;
     }

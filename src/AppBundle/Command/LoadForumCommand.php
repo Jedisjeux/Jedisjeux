@@ -40,14 +40,15 @@ class LoadForumCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln("<comment>" . $this->getDescription() . "</comment>");
-        //$this->deletePosts();
-        //$this->deleteTopics();
-        //$this->loadTopics();
-        //$this->loadPosts();
-        //$this->bbcode2Html();
+        $this->deletePosts();
+        $this->deleteTopics();
+        $this->deleteTaxons();
+        $this->loadTopics();
+        $this->loadPosts();
+        $this->bbcode2Html();
         $taxonomy = $this->createOrReplaceTaxonomy();
         $this->loadTaxons($taxonomy);
-
+        $this->setTopicsMainTaxon();
     }
 
     /**
@@ -60,7 +61,6 @@ class LoadForumCommand extends ContainerAwareCommand
 
     public function loadTaxons(TaxonomyInterface $taxonomy)
     {
-
         foreach ($this->getTaxons() as $data) {
             $this->createOrReplaceTaxon($data, $taxonomy);
         }
@@ -90,15 +90,37 @@ class LoadForumCommand extends ContainerAwareCommand
         $taxon->setTaxonomy($taxonomy);
     }
 
+    protected function deleteTaxons()
+    {
+        $query = <<<EOM
+delete from Taxon where parent_id is not null;
+EOM;
+
+        return $this->getDatabaseConnection()->executeQuery($query);
+    }
+
     protected function getTaxons()
     {
         $query = <<<EOM
 select forum_id as code, forum_name as name
 from jedisjeux.phpbb3_forums old
 where parent_id = 10
+order by old.left_id
 EOM;
 
         return $this->getDatabaseConnection()->executeQuery($query);
+    }
+
+    protected function setTopicsMainTaxon()
+    {
+        $query = <<<EOM
+update jdj_topic topic
+inner join jedisjeux.phpbb3_topics old on old.topic_id = topic.id
+inner join Taxon taxon on old.forum_id = taxon.code
+set topic.mainTaxon_id = taxon.id
+where taxon.parent_id is not null
+EOM;
+        $this->getDatabaseConnection()->executeQuery($query);
     }
 
     /**
@@ -170,7 +192,9 @@ from jedisjeux.phpbb3_posts old
         on old_topic.topic_first_post_id = old.post_id
   inner join fos_user user
     on user.id = old.poster_id
-    where old_topic.forum_id = 51
+   inner join jedisjeux.phpbb3_forums forum
+            on forum.forum_id = old.forum_id
+    where forum.parent_id = 10
 EOM;
 
         $this->getDatabaseConnection()->executeQuery($query);
@@ -183,9 +207,12 @@ select  old.topic_id as id,
         FROM_UNIXTIME(old.topic_time) as createdAt,
         old.topic_first_post_id as mainPost_id
 from jedisjeux.phpbb3_topics old
-  inner join fos_user user
-    on user.id = old.topic_poster
-where forum_id = 51
+    inner join fos_user user
+            on user.id = old.topic_poster
+    inner join jedisjeux.phpbb3_forums forum
+            on forum.forum_id = old.forum_id
+    inner join jdj_post post
+          on post.id = old.topic_first_post_id
 EOM;
 
         $this->getDatabaseConnection()->executeQuery($query);
