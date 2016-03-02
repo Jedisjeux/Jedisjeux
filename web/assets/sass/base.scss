@@ -15,11 +15,15 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 // FormFlow support for MopaBootstrapBundle
 @import "../../bundles/mopabootstrap/sass/form_flow.scss";
 
+@import "modules/style";
+@import "modules/skin-lblue";
+
 
 @import "parts/sidebar";
 @import "parts/heading";
 @import "parts/breadcrumb";
 @import "parts/text";
+@import "parts/buttons";
 
 @import "modules/login";
 @import "modules/collection";
