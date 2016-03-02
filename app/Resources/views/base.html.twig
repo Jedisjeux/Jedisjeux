@@ -15,7 +15,6 @@
     {% block head_style %}
         {% include "CmfCreateBundle::includecssfiles.html.twig" %}
         {% stylesheets
-        'assets/stylesheets/base.css'
         'bundles/bmatznerfontawesome/css/font-awesome.min.css'
         'assets/css/magnific-popup.css'
         'bundles/bmatznerjqueryui/css/smoothness/jquery-ui.css'
@@ -26,6 +25,7 @@
         'assets/bower_components/multiple-select/multiple-select.css'
         'assets/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'
         'assets/bower_components/owlcarousel/owl-carousel/owl.carousel.css'
+        'assets/stylesheets/base.css'
         filter='cssrewrite' output='css/compiled/all.css' %}
         <link rel="stylesheet" href="{{ asset_url }}"/>
 
