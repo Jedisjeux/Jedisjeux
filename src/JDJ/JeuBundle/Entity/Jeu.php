@@ -3,6 +3,7 @@
 namespace JDJ\JeuBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -122,6 +123,14 @@ class Jeu implements ResourceInterface
      * @ORM\Column(type="string", length=128)
      */
     private $slug;
+
+    /**
+     * @var Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Sylius\Component\Taxonomy\Model\TaxonInterface")
+     * @ORM\JoinTable("jdj_game_taxon")
+     */
+    protected $taxons;
 
     /**
      * @var string
@@ -266,6 +275,7 @@ class Jeu implements ResourceInterface
         $this->notes = new ArrayCollection();
         $this->images = new ArrayCollection();
         $this->durationByPlayer = false;
+        $this->taxons = new ArrayCollection();
     }
 
     /**
