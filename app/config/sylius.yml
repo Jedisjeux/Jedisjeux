@@ -3,6 +3,10 @@ sylius_translation:
 
 sylius_taxonomy:
     driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
+    resources:
+        taxon:
+            classes:
+                model: AppBundle\Entity\Taxon
 
 sylius_content:
     driver: doctrine/phpcr-odm

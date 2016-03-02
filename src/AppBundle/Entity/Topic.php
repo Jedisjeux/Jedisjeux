@@ -14,7 +14,6 @@ use AppBundle\Model\Identifiable;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Resource\Model\ResourceInterface;
-use Sylius\Component\Taxonomy\Model\Taxon;
 
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
