@@ -40,41 +40,38 @@ class LoadMechanismsOfGamesCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->output = $output;
-        $output->writeln("<comment>Load mechanisms of games</comment>");
-        /** @var Jeu $game */
-        $game = null;
-        foreach ($this->getRows() as $data) {
-            if (null === $game or $data['gameId'] !== $game->getId()) {
-                $game = $this->getEntityManager()->getRepository('JDJJeuBundle:Jeu')->find($data['gameId']);
-                $game->setMechanisms(new ArrayCollection());
-                $this->getEntityManager()->flush();
-            }
-
-            /** @var Mechanism $mechanism */
-            $mechanism = $this->getEntityManager()->getRepository('JDJJeuBundle:Mechanism')->find($data['mechanismId']);
-
-            $game->addMechanism($mechanism);
-            $this->getEntityManager()->persist($game);
-            $this->getEntityManager()->flush();
-            $this->getEntityManager()->clear();
-        }
+        $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
+        $this->deleteGameTaxons();
+        $this->insertGameTaxons();
     }
 
     /**
      * @inheritdoc
      */
-    public function getRows()
+    public function deleteGameTaxons()
     {
         $query = <<<EOM
-select      old.jeux_id as gameId,
-            old.mecanisme_id as mechanismId
-from        jedisjeux.jdj_mecanismelieur old
-inner join  jdj_jeu jeu on jeu.id = old.jeux_id
-inner JOIN  jdj_mechanism mechanism on mechanism.id = old.mecanisme_id
+delete gameTaxon
+from jdj_game_taxon gameTaxon
+inner join Taxon taxon on taxon.id = gameTaxon.taxoninterface_id
+where taxon.code like 'mechanism-%'
 EOM;
-    $rows = $this->getDatabaseConnection()->fetchAll($query);
+        $this->getDatabaseConnection()->executeQuery($query);
+    }
 
-        return $rows;
+    /**
+     * @inheritdoc
+     */
+    public function insertGameTaxons()
+    {
+        $query = <<<EOM
+insert into jdj_game_taxon(jeu_id, taxoninterface_id)
+select jeu.id, taxon.id
+from jedisjeux.jdj_mecanismelieur old
+inner join jdj_jeu jeu on jeu.id = old.jeux_id
+inner join Taxon taxon on taxon.code = concat('mechanism-', old.mecanisme_id)
+EOM;
+        $this->getDatabaseConnection()->executeQuery($query);
     }
 
     /**

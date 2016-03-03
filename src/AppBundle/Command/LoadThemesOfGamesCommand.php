@@ -41,42 +41,38 @@ class LoadThemesOfGamesCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->output = $output;
-        $output->writeln("<comment>Load themes of games</comment>");
-        /** @var Jeu $game */
-        $game = null;
-        foreach ($this->getRows() as $data) {
-
-            if (null === $game or $data['gameId'] !== $game->getId()) {
-                $game = $this->getEntityManager()->getRepository('JDJJeuBundle:Jeu')->find($data['gameId']);
-                $game->setThemes(new ArrayCollection());
-                $this->getEntityManager()->flush();
-            }
-
-            /** @var Theme $theme */
-            $theme = $this->getEntityManager()->getRepository('JDJJeuBundle:Theme')->find($data['themeId']);
-
-            $game->addTheme($theme);
-            $this->getEntityManager()->persist($game);
-            $this->getEntityManager()->flush();
-            $this->getEntityManager()->clear();
-        }
+        $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
+        $this->deleteGameTaxons();
+        $this->insertGameTaxons();
     }
 
     /**
      * @inheritdoc
      */
-    public function getRows()
+    public function deleteGameTaxons()
     {
         $query = <<<EOM
-select      old.jeux_id as gameId,
-            old.theme_id as themeId
-from        jedisjeux.jdj_themelieur old
-inner join  jdj_jeu jeu on jeu.id = old.jeux_id
-inner JOIN  jdj_theme theme on theme.id = old.theme_id
+delete gameTaxon
+from jdj_game_taxon gameTaxon
+inner join Taxon taxon on taxon.id = gameTaxon.taxoninterface_id
+where taxon.code like 'theme-%'
 EOM;
-    $rows = $this->getDatabaseConnection()->fetchAll($query);
+        $this->getDatabaseConnection()->executeQuery($query);
+    }
 
-        return $rows;
+    /**
+     * @inheritdoc
+     */
+    public function insertGameTaxons()
+    {
+        $query = <<<EOM
+insert into jdj_game_taxon(jeu_id, taxoninterface_id)
+select jeu.id, taxon.id
+from jedisjeux.jdj_themelieur old
+inner join jdj_jeu jeu on jeu.id = old.jeux_id
+inner join Taxon taxon on taxon.code = concat('theme-', old.theme_id)
+EOM;
+        $this->getDatabaseConnection()->executeQuery($query);
     }
 
     /**

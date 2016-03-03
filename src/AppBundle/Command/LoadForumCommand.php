@@ -64,8 +64,6 @@ class LoadForumCommand extends ContainerAwareCommand
         foreach ($this->getTaxons() as $data) {
             $this->createOrReplaceTaxon($data, $taxonomy);
         }
-
-        $this->getTaxonManager()->flush();
     }
 
     protected function createOrReplaceTaxon(array $data, TaxonomyInterface $taxonomy)
@@ -87,9 +85,10 @@ class LoadForumCommand extends ContainerAwareCommand
         $taxon->setName($data['name']);
         $taxon->setDescription($data['description'] ?: null);
         $taxon->setParent($taxonomy->getRoot());
-        $taxon->setTaxonomy($taxonomy);
+        $taxonomy->addTaxon($taxon);
 
         $this->getTaxonManager()->persist($taxon);
+        $this->getTaxonManager()->flush();
 
     }
 
@@ -281,6 +280,14 @@ EOM;
     protected function getPostManager()
     {
         return $this->getContainer()->get('app.manager.post');
+    }
+
+    /**
+     * @return EntityManager
+     */
+    protected function getTaxonomyManager()
+    {
+        return $this->getContainer()->get('sylius.manager.taxonomy');
     }
 
     /**

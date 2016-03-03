@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use JDJ\CoreBundle\Entity\Image;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
@@ -1170,5 +1171,26 @@ class Jeu implements ResourceInterface
     public function getActivity()
     {
         return $this->activity;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getTaxons()
+    {
+        return $this->taxons;
+    }
+
+    /**
+     * @param TaxonInterface $taxon
+     * @return $this
+     */
+    public function addTaxon($taxon)
+    {
+        if (!$this->taxons->contains($taxon)) {
+            $this->taxons->add($taxon);
+        }
+
+        return $this;
     }
 }
