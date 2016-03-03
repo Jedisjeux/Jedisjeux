@@ -10,10 +10,10 @@ namespace AppBundle\Command;
 
 use AppBundle\Entity\Post;
 use AppBundle\TextFilter\Bbcode2Html;
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Taxonomy\Model\Taxon;
+use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -42,11 +42,11 @@ class LoadForumCommand extends ContainerAwareCommand
         $output->writeln("<comment>" . $this->getDescription() . "</comment>");
         $this->deletePosts();
         $this->deleteTopics();
-        $this->deleteTaxons();
         $this->loadTopics();
         $this->loadPosts();
         $this->bbcode2Html();
         $taxonomy = $this->createOrReplaceTaxonomy();
+        $this->deleteTaxons($taxonomy);
         $this->loadTaxons($taxonomy);
         $this->setTopicsMainTaxon();
     }
@@ -72,12 +72,13 @@ class LoadForumCommand extends ContainerAwareCommand
     {
         $locale = $this->getContainer()->getParameter('locale');
 
+        /** @var TaxonInterface $taxon */
         $taxon = $this->getContainer()
             ->get('sylius.repository.taxon')
             ->findOneBy(array('name' => $data['name']));
 
         if (null === $taxon) {
-            $taxon = new Taxon();
+            $taxon = $this->getTaxonFactory()->createNew();
             $taxon->setCurrentLocale($locale);
             $taxon->setFallbackLocale($locale);
         }
@@ -85,18 +86,17 @@ class LoadForumCommand extends ContainerAwareCommand
         $taxon->setCode($data['code']);
         $taxon->setName($data['name']);
         $taxon->setParent($taxonomy->getRoot());
+        $taxonomy->addTaxon($taxon);
 
         $this->getTaxonManager()->persist($taxon);
-        $taxon->setTaxonomy($taxonomy);
+
     }
 
-    protected function deleteTaxons()
+    protected function deleteTaxons(TaxonomyInterface $taxonomy)
     {
-        $query = <<<EOM
-delete from Taxon where parent_id is not null;
-EOM;
-
-        return $this->getDatabaseConnection()->executeQuery($query);
+        return $this->getTaxonManager()
+            ->createQuery("delete from AppBundle:Taxon where taxonomy = :taxonomy ")
+            ->setParameter('taxonomy', $taxonomy);
     }
 
     protected function getTaxons()
@@ -291,10 +291,20 @@ EOM;
     }
 
     /**
+     * @return Factory
+     */
+    protected function getTaxonFactory()
+    {
+        return $this->getContainer()->get('sylius.factory.taxon');
+    }
+
+    /**
      * @return EntityRepository
      */
     protected function getPostRepository()
     {
         return $this->getContainer()->get('app.repository.post');
     }
+
+
 }

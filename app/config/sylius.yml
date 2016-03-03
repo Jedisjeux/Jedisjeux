@@ -7,6 +7,9 @@ sylius_taxonomy:
         taxon:
             classes:
                 model: AppBundle\Entity\Taxon
+            translation:
+                classes:
+                    model: AppBundle\Entity\TaxonTranslation
 
 sylius_content:
     driver: doctrine/phpcr-odm
