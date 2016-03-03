@@ -63,7 +63,7 @@ class LoadMechanismsCommand extends ContainerAwareCommand
         }
 
         $taxonomy->setCode('mechanisms');
-        $taxonomy->setName('mechanisms');
+        $taxonomy->setName('mecanismes');
 
         /** @var EntityManager $manager */
         $manager = $this->getContainer()
