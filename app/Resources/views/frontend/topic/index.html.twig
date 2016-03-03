@@ -5,12 +5,14 @@
 {% import 'macros/buttons.html.twig' as button %}
 
 {% block headline %}
-    Forum
+    {% if taxon is defined %}
+        {{ taxon }}
+    {% endif %}
 {% endblock %}
 
 {% block subtitle %}
     {% if taxon is defined %}
-        {{ taxon }}
+        {{ taxon.description }}
     {% endif %}
 {% endblock %}
 

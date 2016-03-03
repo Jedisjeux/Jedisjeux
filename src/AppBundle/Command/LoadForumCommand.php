@@ -85,6 +85,7 @@ class LoadForumCommand extends ContainerAwareCommand
 
         $taxon->setCode($data['code']);
         $taxon->setName($data['name']);
+        $taxon->setDescription($data['description'] ?: null);
         $taxon->setParent($taxonomy->getRoot());
         $taxonomy->addTaxon($taxon);
 
@@ -102,7 +103,7 @@ class LoadForumCommand extends ContainerAwareCommand
     protected function getTaxons()
     {
         $query = <<<EOM
-select forum_id as code, forum_name as name
+select forum_id as code, forum_name as name, forum_desc as description
 from jedisjeux.phpbb3_forums old
 where parent_id = 10
 order by old.left_id
