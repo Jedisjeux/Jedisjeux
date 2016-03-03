@@ -95,7 +95,7 @@ abstract class LoadCommand extends ContainerAwareCommand implements LoadCommandI
      * @param $data
      * @param $entity
      */
-    private function populateData($entity, $data)
+    protected function populateData($entity, $data)
     {
         $entityReflection = new \ReflectionClass($entity);
         foreach ($data as $key => $value) {

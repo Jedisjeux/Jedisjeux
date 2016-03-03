@@ -32,7 +32,7 @@ class TopicController extends ResourceController
     public function indexWithTaxonsAction(Request $request)
     {
         /** @var TaxonomyInterface $taxonomy */
-        $taxonomy = $this->getTaxonomyRepository()->findOneBy(array('name' => 'forumCategories'));
+        $taxonomy = $this->getTaxonomyRepository()->findOneBy(array('name' => 'forum'));
         $taxons = $this->getTaxonRepository()->getTaxonsAsList($taxonomy);
 
         $this->isGrantedOr403('index');
@@ -88,7 +88,7 @@ class TopicController extends ResourceController
     public function indexByTaxonSlugAction(Request $request, $permalink)
     {
         /** @var TaxonomyInterface $taxonomy */
-        $taxonomy = $this->getTaxonomyRepository()->findOneBy(array('name' => 'forumCategories'));
+        $taxonomy = $this->getTaxonomyRepository()->findOneBy(array('name' => 'forum'));
         /** @var TaxonInterface $taxon */
         $taxon = $this->getTaxonRepository()->findOneBy(array('slug' => $permalink));
 

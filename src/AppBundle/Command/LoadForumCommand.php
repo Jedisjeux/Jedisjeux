@@ -83,11 +83,11 @@ class LoadForumCommand extends ContainerAwareCommand
             $taxon->setFallbackLocale($locale);
         }
 
-        $taxon->setCode($data['code']);
+        $taxon->setCode('forum-'.$data['id']);
         $taxon->setName($data['name']);
         $taxon->setDescription($data['description'] ?: null);
         $taxon->setParent($taxonomy->getRoot());
-        $taxonomy->addTaxon($taxon);
+        $taxon->setTaxonomy($taxonomy);
 
         $this->getTaxonManager()->persist($taxon);
 
@@ -103,7 +103,7 @@ class LoadForumCommand extends ContainerAwareCommand
     protected function getTaxons()
     {
         $query = <<<EOM
-select forum_id as code, forum_name as name, forum_desc as description
+select forum_id as id, forum_name as name, forum_desc as description
 from jedisjeux.phpbb3_forums old
 where parent_id = 10
 order by old.left_id
@@ -117,7 +117,7 @@ EOM;
         $query = <<<EOM
 update jdj_topic topic
 inner join jedisjeux.phpbb3_topics old on old.topic_id = topic.id
-inner join Taxon taxon on old.forum_id = taxon.code
+inner join Taxon taxon on concat('forum-', old.forum_id) = taxon.code
 set topic.mainTaxon_id = taxon.id
 where taxon.parent_id is not null
 EOM;
@@ -132,7 +132,7 @@ EOM;
         /** @var TaxonomyInterface $taxonomy */
         $taxonomy = $this->getContainer()
             ->get('sylius.repository.taxonomy')
-            ->findOneBy(array('name' => 'forumCategories'));
+            ->findOneBy(array('name' => 'forum'));
 
         if (null === $taxonomy) {
             $taxonomy = $this->getContainer()
@@ -140,8 +140,8 @@ EOM;
                 ->createNew();
         }
 
-        $taxonomy->setCode('forum-categories');
-        $taxonomy->setName('forumCategories');
+        $taxonomy->setCode('forum');
+        $taxonomy->setName('forum');
 
         /** @var EntityManager $manager */
         $manager = $this->getContainer()

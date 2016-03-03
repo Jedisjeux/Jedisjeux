@@ -15,7 +15,8 @@ use Sylius\Component\Taxonomy\Model\TaxonTranslation as BaseTaxonTranslation;
  * @author Loïc Frémont <loic@mobizel.com>
  *
  * @ORM\Entity
- * @ORM\Table(name="sylius_taxon_translation")
+ * @ORM\Table(name="sylius_taxon_translation", uniqueConstraints={
+ *     @ORM\UniqueConstraint(name="permalink_uidx", columns={"locale", "permalink"})}))
  */
 class TaxonTranslation extends BaseTaxonTranslation
 {

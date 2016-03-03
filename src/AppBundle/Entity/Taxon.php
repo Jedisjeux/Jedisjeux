@@ -19,10 +19,4 @@ use Sylius\Component\Taxonomy\Model\Taxon as BaseTaxon;
  */
 class Taxon extends BaseTaxon
 {
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="text", nullable=true)
-     */
-    protected $description;
 }
