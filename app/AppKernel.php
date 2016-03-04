@@ -15,7 +15,11 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
 
+            new \Sylius\Bundle\ArchetypeBundle\SyliusArchetypeBundle(),
+            new Sylius\Bundle\ProductBundle\SyliusProductBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
+            new Sylius\Bundle\AttributeBundle\SyliusAttributeBundle(),
+            new Sylius\Bundle\VariationBundle\SyliusVariationBundle(),
             new Sylius\Bundle\TaxonomyBundle\SyliusTaxonomyBundle(),
             new Sylius\Bundle\TranslationBundle\SyliusTranslationBundle(),
 

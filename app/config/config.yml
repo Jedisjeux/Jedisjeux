@@ -162,7 +162,8 @@ stof_doctrine_extensions:
     default:
       tree: true
       sluggable: tree
-      timestampable: false # not needed: listeners are not enabled by default
+      timestampable: true
+      softdeleteable: true
 
 white_october_pagerfanta:
     exceptions_strategy:

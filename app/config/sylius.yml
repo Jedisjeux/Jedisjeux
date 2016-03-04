@@ -1,6 +1,25 @@
 sylius_translation:
     default_locale: "%locale%"
 
+sylius_archetype:
+    resources:
+        product:
+            archetype:
+                classes:
+                    model: Sylius\Component\Archetype\Model\Archetype
+                translation:
+                    classes:
+                        model: Sylius\Component\Product\Model\ArchetypeTranslation
+            subject: Sylius\Component\Product\Model\Product
+            attribute: Sylius\Component\Product\Model\Attribute
+            option: Sylius\Component\Product\Model\Option
+
+sylius_product:
+    driver: doctrine/orm # Configure the doctrine orm driver used in the documentation.
+
+sylius_variation:
+    driver: doctrine/orm # Configure the doctrine orm driver used in the documentation.
+
 sylius_taxonomy:
     driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
     resources:
