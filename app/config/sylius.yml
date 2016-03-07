@@ -10,12 +10,19 @@ sylius_archetype:
                 translation:
                     classes:
                         model: Sylius\Component\Product\Model\ArchetypeTranslation
-            subject: Sylius\Component\Product\Model\Product
+            subject: AppBundle\Entity\Product
             attribute: Sylius\Component\Product\Model\Attribute
             option: Sylius\Component\Product\Model\Option
 
 sylius_product:
     driver: doctrine/orm # Configure the doctrine orm driver used in the documentation.
+    resources:
+        product:
+            classes:
+                model: AppBundle\Entity\Product
+            translation:
+              classes:
+                  model: AppBundle\Entity\ProductTranslation
 
 sylius_variation:
     driver: doctrine/orm # Configure the doctrine orm driver used in the documentation.
