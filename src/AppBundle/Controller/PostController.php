@@ -8,8 +8,9 @@
 
 namespace AppBundle\Controller;
 
-use Hateoas\Configuration\Route;
+use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -19,51 +20,31 @@ class PostController extends ResourceController
 {
     public function indexByTopicAction(Request $request)
     {
-        $this->isGrantedOr403('index');
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
-        $criteria = $this->config->getCriteria();
-        $sorting = $this->config->getSorting();
+        $this->isGrantedOr403($configuration, ResourceActions::INDEX);
 
-        $repository = $this->getRepository();
-
+        $criteria = $configuration->getCriteria();
         $topic = $this->get('app.repository.topic')->find($criteria['topic']);
 
-        if ($this->config->isPaginated()) {
-            $resources = $this->resourceResolver->getResource(
-                $repository,
-                'createPaginator',
-                array($criteria, $sorting)
-            );
-            $resources->setCurrentPage($request->get('page', 1), true, true);
-            $resources->setMaxPerPage($this->config->getPaginationMaxPerPage());
+        $resources = $this->resourcesCollectionProvider->get($configuration, $this->repository);
 
-            if ($this->config->isApiRequest()) {
-                $resources = $this->getPagerfantaFactory()->createRepresentation(
-                    $resources,
-                    new Route(
-                        $request->attributes->get('_route'),
-                        array_merge($request->attributes->get('_route_params'), $request->query->all())
-                    )
-                );
-            }
-        } else {
-            $resources = $this->resourceResolver->getResource(
-                $repository,
-                'findBy',
-                array($criteria, $sorting, $this->config->getLimit())
-            );
+        $view = View::create($resources);
+
+        if ($configuration->isHtmlRequest()) {
+            $view
+                ->setTemplate($configuration->getTemplate(ResourceActions::INDEX))
+                ->setTemplateVar($this->metadata->getPluralName())
+                ->setData([
+                    'metadata' => $this->metadata,
+                    'resources' => $resources,
+                    'posts' => $resources,
+                    'topic' => $topic,
+                    $this->metadata->getPluralName() => $resources,
+                ])
+            ;
         }
 
-       $view = $this
-            ->view()
-            ->setTemplate($this->config->getTemplate('index.html'))
-            ->setTemplateVar($this->config->getPluralResourceName())
-            ->setData(array(
-                'posts' => $resources,
-                'topic' => $topic,
-            ))
-        ;
-
-        return $this->handleView($view);
+        return $this->viewHandler->handle($configuration, $view);
     }
 }

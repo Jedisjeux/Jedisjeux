@@ -8,12 +8,12 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Repository\TopicRepository;
-use Hateoas\Configuration\Route;
+use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\TaxonomyBundle\Doctrine\ORM\TaxonomyRepository;
 use Sylius\Bundle\TaxonomyBundle\Doctrine\ORM\TaxonRepository;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Resource\ResourceActions;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,53 +31,31 @@ class TopicController extends ResourceController
      */
     public function indexWithTaxonsAction(Request $request)
     {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        $this->isGrantedOr403($configuration, ResourceActions::INDEX);
+
         /** @var TaxonomyInterface $taxonomy */
         $taxonomy = $this->getTaxonomyRepository()->findOneBy(array('name' => 'forum'));
-        $taxons = $this->getTaxonRepository()->getTaxonsAsList($taxonomy);
 
-        $this->isGrantedOr403('index');
+        $resources = $this->resourcesCollectionProvider->get($configuration, $this->repository);
 
-        $criteria = $this->config->getCriteria();
-        $sorting = $this->config->getSorting();
+        $view = View::create($resources);
 
-        $repository = $this->getRepository();
-
-        if ($this->config->isPaginated()) {
-            $resources = $this->resourceResolver->getResource(
-                $repository,
-                'createPaginator',
-                array($criteria, $sorting)
-            );
-            $resources->setCurrentPage($request->get('page', 1), true, true);
-            $resources->setMaxPerPage($this->config->getPaginationMaxPerPage());
-
-            if ($this->config->isApiRequest()) {
-                $resources = $this->getPagerfantaFactory()->createRepresentation(
-                    $resources,
-                    new Route(
-                        $request->attributes->get('_route'),
-                        array_merge($request->attributes->get('_route_params'), $request->query->all())
-                    )
-                );
-            }
-        } else {
-            $resources = $this->resourceResolver->getResource(
-                $repository,
-                'findBy',
-                array($criteria, $sorting, $this->config->getLimit())
-            );
+        if ($configuration->isHtmlRequest()) {
+            $view
+                ->setTemplate($configuration->getTemplate(ResourceActions::INDEX))
+                ->setTemplateVar($this->metadata->getPluralName())
+                ->setData([
+                    'metadata' => $this->metadata,
+                    'resources' => $resources,
+                    'taxons' => $taxonomy->getTaxons(),
+                    $this->metadata->getPluralName() => $resources,
+                ])
+            ;
         }
 
-        $view = $this
-            ->view()
-            ->setTemplate($this->config->getTemplate('index.html'))
-            ->setTemplateVar($this->config->getPluralResourceName())
-            ->setData(array(
-                'taxons' => $taxons,
-                'topics' => $resources,
-            ));
-
-        return $this->handleView($view);
+        return $this->viewHandler->handle($configuration, $view);
     }
 
     /**
@@ -87,6 +65,10 @@ class TopicController extends ResourceController
      */
     public function indexByTaxonSlugAction(Request $request, $permalink)
     {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        $this->isGrantedOr403($configuration, ResourceActions::INDEX);
+
         /** @var TaxonomyInterface $taxonomy */
         $taxonomy = $this->getTaxonomyRepository()->findOneBy(array('name' => 'forum'));
         /** @var TaxonInterface $taxon */
@@ -96,48 +78,25 @@ class TopicController extends ResourceController
             throw new NotFoundHttpException('Requested taxon does not exist.');
         }
 
-        $this->isGrantedOr403('index');
+        $resources = $this->resourcesCollectionProvider->get($configuration, $this->repository);
 
-        $criteria = $this->config->getCriteria();
-        $sorting = $this->config->getSorting();
+        $view = View::create($resources);
 
-        $repository = $this->getRepository();
-
-        if ($this->config->isPaginated()) {
-            /** @var TopicRepository $repository */
-            $repository = $this->getRepository();
-            $resources = $repository->createByTaxonPaginator($taxon, $criteria, $sorting);
-            $resources->setCurrentPage($request->get('page', 1), true, true);
-            $resources->setMaxPerPage($this->config->getPaginationMaxPerPage());
-
-            if ($this->config->isApiRequest()) {
-                $resources = $this->getPagerfantaFactory()->createRepresentation(
-                    $resources,
-                    new Route(
-                        $request->attributes->get('_route'),
-                        array_merge($request->attributes->get('_route_params'), $request->query->all())
-                    )
-                );
-            }
-        } else {
-            $resources = $this->resourceResolver->getResource(
-                $repository,
-                'findBy',
-                array($criteria, $sorting, $this->config->getLimit())
-            );
+        if ($configuration->isHtmlRequest()) {
+            $view
+                ->setTemplate($configuration->getTemplate(ResourceActions::INDEX))
+                ->setTemplateVar($this->metadata->getPluralName())
+                ->setData([
+                    'metadata' => $this->metadata,
+                    'resources' => $resources,
+                    'taxon' => $taxon,
+                    'taxons' => $taxonomy->getTaxons(),
+                    $this->metadata->getPluralName() => $resources,
+                ])
+            ;
         }
 
-        $view = $this
-            ->view()
-            ->setTemplate($this->config->getTemplate('index.html'))
-            ->setTemplateVar($this->config->getPluralResourceName())
-            ->setData(array(
-                'taxon' => $taxon,
-                'taxons' => $taxonomy->getTaxons(),
-                'topics' => $resources,
-            ));
-
-        return $this->handleView($view);
+        return $this->viewHandler->handle($configuration, $view);
     }
 
     /**
