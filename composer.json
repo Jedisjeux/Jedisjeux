@@ -59,10 +59,9 @@
         "ob/highcharts-bundle": "^1.2",
         "bmatzner/jquery-ui-bundle": "^1.10",
         "knplabs/doctrine-behaviors": "~1.1",
-        "sylius/sylius": " ^0.16.0",
+        "sylius/sylius": "^0.17",
         "sensio/framework-extra-bundle": " ~3.0",
         "sensio/generator-bundle": "^3.0",
-        "sylius/taxonomy": "^0.16.0",
         "helios-ag/fm-bbcode-bundle": "^6.8"
     },
     "scripts": {
@@ -100,5 +99,6 @@
         "branch-alias": {
             "dev-master": "2.4-dev"
         }
-    }
+    },
+    "minimum-stability": "RC"
 }
