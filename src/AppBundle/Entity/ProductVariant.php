@@ -22,13 +22,6 @@ use Sylius\Component\Core\Model\ProductVariant as BaseProductVariant;
 class ProductVariant extends BaseProductVariant
 {
     /**
-     * @var Image
-     *
-     * @ORM\ManyToOne(targetEntity="JDJ\CoreBundle\Entity\Image")
-     */
-    protected $mainImage;
-
-    /**
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\ProductVariantImage", mappedBy="variant")
@@ -40,19 +33,13 @@ class ProductVariant extends BaseProductVariant
      */
     public function getMainImage()
     {
-        return $this->mainImage;
-    }
+        foreach ($this->images as $image) {
+            if ($image->isMain()) {
+                return $image;
+            }
+        }
 
-    /**
-     * @param Image $mainImage
-     *
-     * @return $this
-     */
-    public function setMainImage($mainImage)
-    {
-        $this->mainImage = $mainImage;
-
-        return $this;
+        return null;
     }
 
     /**

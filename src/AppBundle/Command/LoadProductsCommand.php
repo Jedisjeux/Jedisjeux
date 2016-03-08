@@ -53,7 +53,7 @@ class LoadProductsCommand extends ContainerAwareCommand
         if (null === $product) {
             $product = $this->getFactory()->createNew();
         }
-        $data['description'] = !empty($data['description']) ? $this->getHTMLFromText($data['description']) : "";
+        $data['description'] = !empty($data['description']) ? $this->getHTMLFromText($data['description']) : null;
         $data['joueurMin'] = !empty($data['joueurMin']) ? $data['joueurMin'] : null;
         $data['joueurMax'] = !empty($data['joueurMax']) ? $data['joueurMax'] : null;
         $data['ageMin'] = !empty($data['ageMin']) ? $data['ageMin'] : null;

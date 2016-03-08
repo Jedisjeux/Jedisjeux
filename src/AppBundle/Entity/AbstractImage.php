@@ -1,35 +1,26 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: loic_425
- * Date: 26/02/15
- * Time: 23:23
+ * User: loic
+ * Date: 08/03/2016
+ * Time: 13:40
  */
 
-namespace JDJ\CoreBundle\Entity;
+namespace AppBundle\Entity;
 
+use AppBundle\Model\Identifiable;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 /**
- * Class Image
- * @package JDJ\CoreBundle\Entity
+ * @author Loïc Frémont <loic@mobizel.com>
  *
- * @ORM\Entity
- * @ORM\Table(name="jdj_image")
+ * @ORM\MappedSuperclass
  */
-class Image
+abstract class AbstractImage
 {
-    /**
-     * @var integer
-     *
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+    Use Identifiable;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -49,32 +40,6 @@ class Image
     private $newFilename;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $description;
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-        
-        return $this;
-    }
-
-    /**
      * @return mixed
      */
     public function getPath()
@@ -89,26 +54,6 @@ class Image
     public function setPath($path)
     {
         $this->path = $path;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * @param string $description
-     *
-     * @return $this
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
 
         return $this;
     }
@@ -205,4 +150,4 @@ class Image
         // Clean the path file
         $this->file = null;
     }
-} 
+}

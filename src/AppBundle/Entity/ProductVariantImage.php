@@ -8,9 +8,7 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Model\Identifiable;
 use Doctrine\ORM\Mapping as ORM;
-use JDJ\CoreBundle\Entity\Image;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
 /**
@@ -19,7 +17,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
  * @ORM\Entity
  * @ORM\Table(name="sylius_product_variant_image")
  */
-class ProductVariantImage extends Image
+class ProductVariantImage extends AbstractImage
 {
     /**
      * The associated product variant.
@@ -29,6 +27,28 @@ class ProductVariantImage extends Image
      * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\VariantInterface", inversedBy="images")
      */
     protected $variant;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $description;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean", name="is_main")
+     */
+    protected $main;
+
+    /**
+     * ProductVariantImage constructor.
+     */
+    public function __construct()
+    {
+        $this->main = false;
+    }
 
     /**
      * {@inheritdoc}
@@ -47,4 +67,44 @@ class ProductVariantImage extends Image
 
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     *
+     * @return $this
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isMain()
+    {
+        return $this->main;
+    }
+
+    /**
+     * @param boolean $main
+     * @return $this
+     */
+    public function setMain($main)
+    {
+        $this->main = $main;
+
+        return $this;
+    }
+
 }
