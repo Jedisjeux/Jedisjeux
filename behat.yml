@@ -177,6 +177,14 @@ default:
             filters:
                 tags: "@subscriptions"
 
+        topics:
+             contexts:
+                 - Behat\MinkExtension\Context\MinkContext
+                 - JDJ\CoreBundle\Behat\UtilsContext
+                 - JDJ\UserBundle\Behat\UserContext
+             filters:
+                 tags: "@topics"
+
         bookEntries:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
