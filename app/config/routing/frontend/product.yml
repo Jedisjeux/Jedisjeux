@@ -1,0 +1,16 @@
+# TODO replace "/produits" path by "/jeux"
+sylius_product:
+    resource: |
+        alias: sylius.product
+        path: /produits
+        templates: :frontend/game
+        redirect: index
+    type: sylius.resource
+
+sylius_product_show:
+    methods: [GET]
+    path: /produits/{slug}
+    defaults:
+        _controller: sylius.controller.product:showAction
+        _sylius:
+            template: frontend/game/show.html.twig

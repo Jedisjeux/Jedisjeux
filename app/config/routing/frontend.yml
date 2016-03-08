@@ -7,3 +7,6 @@ app_game_review:
 
 app_game:
     resource: "frontend/game.yml"
+
+app_product:
+    resource: "frontend/product.yml"

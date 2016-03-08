@@ -11,6 +11,7 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JDJ\CoreBundle\Entity\Image;
 use Sylius\Component\Product\Model\Product as BaseProduct;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
@@ -30,6 +31,20 @@ class Product extends BaseProduct
     const NEED_A_REVIEW = "NEED_A_REVIEW";
     const READY_TO_PUBLISH = "READY_TO_PUBLISH";
     const PUBLISHED = "PUBLISHED";
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string")
+     */
+    protected $status;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", unique=true)
+     */
+    protected $code;
 
     /**
      * @var Collection
@@ -176,13 +191,96 @@ class Product extends BaseProduct
         $this->addons = new ArrayCollection();
         $this->taxons = new ArrayCollection();
         $this->durationByPlayer = false;
+        $this->status = self::WRITING;
     }
 
     /**
-     * @return Collection
+     * @return string
      */
-    public function getTaxons()
+    public function getStatus()
     {
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     * @return $this
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param string $code
+     * @return $this
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * @return Image
+     */
+    public function getMainImage()
+    {
+        return $this->getMasterVariant()->getMainImage();
+    }
+
+    /**
+     * @param Image $mainImage
+     * @return $this
+     */
+    public function setMainImage($mainImage)
+    {
+        return $this->getMasterVariant()->setMainImage($mainImage);
+    }
+
+    /**
+     * @deprecated
+     */
+    public function getImageCouverture()
+    {
+        return $this->getMainImage();
+    }
+
+    /**
+     * @deprecated
+     */
+    public function setImageCouverture($imageCouverture)
+    {
+        return $this->setMainImage($imageCouverture);
+    }
+
+    public function getImages()
+    {
+        return $this->getMasterVariant()->getImages();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTaxons($taxonomy = null)
+    {
+        if (null !== $taxonomy) {
+            return $this->taxons->filter(function (TaxonInterface $taxon) use ($taxonomy) {
+                return $taxonomy === strtolower($taxon->getTaxonomy()->getName());
+            });
+        }
+
         return $this->taxons;
     }
 
@@ -407,11 +505,27 @@ class Product extends BaseProduct
     }
 
     /**
+     * @deprecated
+     */
+    public function getAuteurs()
+    {
+        return $this->getDesigners();
+    }
+
+    /**
      * @return Collection
      */
     public function getArtists()
     {
         return $this->artists;
+    }
+
+    /**
+     * @deprecated
+     */
+    public function getIllustrateurs()
+    {
+        return $this->getArtists();
     }
 
     /**
@@ -431,6 +545,14 @@ class Product extends BaseProduct
     public function getPublishers()
     {
         return $this->publishers;
+    }
+
+    /**
+     * @deprecated
+     */
+    public function getEditeurs()
+    {
+        return $this->getPublishers();
     }
 
     /**
@@ -518,5 +640,44 @@ class Product extends BaseProduct
         $this->userGameAttributes = $userGameAttributes;
 
         return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getMechanisms()
+    {
+        return $this->getTaxons('mecanismes');
+    }
+
+    /**
+     * TODO add material image property
+     *
+     * @return null
+     */
+    public function getMaterialImage()
+    {
+        return null;
+    }
+
+    /**
+     * @deprecated
+     */
+    public function jeuImages()
+    {
+        return $this->getImages();
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getThemes()
+    {
+        return $this->getTaxons('themes');
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 }

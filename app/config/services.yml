@@ -8,6 +8,7 @@ services:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
+    # <!-- Subscribers -->
     app.subscriber.bill:
         class: JDJ\ComptaBundle\EventSubscriber\BillSubscriber
         arguments:
@@ -15,6 +16,14 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
+    app.subscriber.article_document_reference:
+        class: AppBundle\EventSubscriber\ArticleDocumentReferenceSubscriber
+        arguments:
+            [ "@doctrine_phpcr" ]
+        tags:
+            - { name: doctrine.event_subscriber }
+
+    # <!-- Forms -->
     app.form.filter.query:
         class: JDJ\CoreBundle\Form\Filter\QueryFilterType
         tags:

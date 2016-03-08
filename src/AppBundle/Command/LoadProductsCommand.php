@@ -82,10 +82,12 @@ class LoadProductsCommand extends ContainerAwareCommand
         $product->setDescription($data['description']);
         $product->setCreatedAt($data['createdAt']);
         $product
+            ->setCode($data['code'])
             ->setAgeMin($data['ageMin'])
             ->setJoueurMin($data['joueurMin'])
             ->setJoueurMax($data['joueurMax'])
-            ->setMateriel($data['materiel']);
+            ->setMateriel($data['materiel'])
+            ->setStatus($data['status']);
 
         $this->getManager()->persist($product);
         $this->getManager()->flush(); // Save changes in database.
@@ -98,7 +100,7 @@ class LoadProductsCommand extends ContainerAwareCommand
     public function getRows()
     {
         $query = <<<EOM
-select      old.id,
+select      concat('game-', old.id) as code,
             old.nom as name,
             old.min as joueurMin,
             old.max as joueurMax,

@@ -26,6 +26,11 @@ sylius_product:
 
 sylius_variation:
     driver: doctrine/orm # Configure the doctrine orm driver used in the documentation.
+    resources:
+        product:
+            variant:
+                classes:
+                    model: AppBundle\Entity\ProductVariant
 
 sylius_taxonomy:
     driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
