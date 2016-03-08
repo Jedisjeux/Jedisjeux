@@ -5,13 +5,12 @@ namespace JDJ\CollectionBundle\Controller;
 use JDJ\CollectionBundle\Entity\UserGameAttribute;
 use JDJ\CollectionBundle\Service\CollectionService;
 use JDJ\CollectionBundle\Service\UserGameAttributeService;
-use JDJ\JeuBundle\Entity\Jeu;
 use JDJ\UserBundle\Entity\User;
 use Pagerfanta\Pagerfanta;
+use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use JDJ\CollectionBundle\Entity\Collection;
 use JDJ\CollectionBundle\Form\CollectionType;
 use Symfony\Component\HttpFoundation\Response;
@@ -53,9 +52,9 @@ class CollectionController extends Controller
      * Displays the collection modal to create or update list with a game
      *
      * @Route("/{jeu}/collection-modal", name="collection_modal")
-     * @ParamConverter("jeu", class="JDJJeuBundle:Jeu")
+     * @ParamConverter("jeu", class="AppBundle:Product")
      */
-    public function modalDisplayAction(Jeu $jeu)
+    public function modalDisplayAction(ProductInterface $jeu)
     {
 
         /**
@@ -83,11 +82,11 @@ class CollectionController extends Controller
      * Creates a new Collection entity.
      *
      * @Route("/{jeu}/{user}/create", name="create_collection", options={"expose"=true})
-     * @ParamConverter("jeu", class="JDJJeuBundle:Jeu")
+     * @ParamConverter("jeu", class="AppBundle:Product")
      * @ParamConverter("user", class="JDJUserBundle:User")
      * @Method({"POST"})
      */
-    public function createAction(Jeu $jeu, User $user)
+    public function createAction(ProductInterface $jeu, User $user)
     {
 
         if ($jeu && $user && ($_POST['name'] !== "")) {

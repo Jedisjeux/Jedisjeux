@@ -7,9 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use JDJ\JediZoneBundle\Entity\Activity;
 use JDJ\JediZoneBundle\Entity\Notification;
 use JDJ\JediZoneBundle\Repository\NotificationRepository;
-use JDJ\JeuBundle\Entity\Jeu;
 use JDJ\UserBundle\Entity\User;
-use Symfony\Component\VarDumper\VarDumper;
 
 
 /**

@@ -4,8 +4,8 @@ namespace JDJ\CollectionBundle\Controller;
 
 use Doctrine\Common\Util\Debug;
 use JDJ\CollectionBundle\Service\UserGameAttributeService;
-use JDJ\JeuBundle\Entity\Jeu;
 use JDJ\UserBundle\Entity\User;
+use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -24,10 +24,10 @@ class UserGameAttributeController extends Controller
      * handle the click on favorite for a game
      *
      * @Route("/favorite/{jeu}/{user}", name="usergameattribute_favorite", options={"expose"=true})
-     * @ParamConverter("jeu", class="JDJJeuBundle:Jeu")
+     * @ParamConverter("jeu", class="AppBundle:Product")
      * @ParamConverter("user", class="JDJUserBundle:User")
      */
-    public function favoriteAction(Jeu $jeu, User $user)
+    public function favoriteAction(ProductInterface $jeu, User $user)
     {
 
         $this
@@ -42,10 +42,10 @@ class UserGameAttributeController extends Controller
      * handle the click on owned for a game
      *
      * @Route("/owned/{jeu}/{user}", name="usergameattribute_owned", options={"expose"=true})
-     * @ParamConverter("jeu", class="JDJJeuBundle:Jeu")
+     * @ParamConverter("jeu", class="AppBundle:Product")
      * @ParamConverter("user", class="JDJUserBundle:User")
      */
-    public function ownedAction(Jeu $jeu, User $user)
+    public function ownedAction(ProductInterface $jeu, User $user)
     {
         $this
             ->getUserGameAttributeService()
@@ -58,10 +58,10 @@ class UserGameAttributeController extends Controller
      * handle the click on wanted for a game
      *
      * @Route("/wanted/{jeu}/{user}", name="usergameattribute_wanted", options={"expose"=true})
-     * @ParamConverter("jeu", class="JDJJeuBundle:Jeu")
+     * @ParamConverter("jeu", class="AppBundle:Product")
      * @ParamConverter("user", class="JDJUserBundle:User")
      */
-    public function wantedAction(Jeu $jeu, User $user)
+    public function wantedAction(ProductInterface $jeu, User $user)
     {
         $this
             ->getUserGameAttributeService()
@@ -74,10 +74,10 @@ class UserGameAttributeController extends Controller
      * handle the click on played for a game
      *
      * @Route("/played/{jeu}/{user}", name="usergameattribute_played", options={"expose"=true})
-     * @ParamConverter("jeu", class="JDJJeuBundle:Jeu")
+     * @ParamConverter("jeu", class="AppBundle:Product")
      * @ParamConverter("user", class="JDJUserBundle:User")
      */
-    public function playedAction(Jeu $jeu, User $user)
+    public function playedAction(ProductInterface $jeu, User $user)
     {
         $this
             ->getUserGameAttributeService()

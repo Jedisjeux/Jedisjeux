@@ -6,8 +6,8 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping as ORM;
 use JDJ\JediZoneBundle\Entity\Activity;
 use JDJ\JediZoneBundle\Repository\ActivityRepository;
-use JDJ\JeuBundle\Entity\Jeu;
 use JDJ\UserBundle\Entity\User;
+use Sylius\Component\Product\Model\ProductInterface;
 
 
 /**
@@ -55,11 +55,11 @@ class ActivityService
      * create the activity if doesn't exist
      * add the user if isn't following
      *
-     * @param Jeu $jeu
+     * @param ProductInterface $jeu
      *
      * @return Activity
      */
-    public function getActivity(Jeu $jeu, User $user)
+    public function getActivity(ProductInterface $jeu, User $user)
     {
 
         $activity = $jeu->getActivity();
@@ -82,12 +82,12 @@ class ActivityService
     /**
      * This function will return a created activity
      *
-     * @param Jeu $jeu
+     * @param ProductInterface $jeu
      * @param User $user
      *
      * @return Activity
      */
-    public function createActivity(Jeu $jeu, User $user)
+    public function createActivity(ProductInterface $jeu, User $user)
     {
         //Create the new activity
         $activity = new Activity();

@@ -10,7 +10,7 @@ namespace AppBundle\Factory;
 
 use AppBundle\Entity\GameReview;
 use Doctrine\ORM\EntityRepository;
-use JDJ\JeuBundle\Entity\Jeu;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
@@ -23,20 +23,20 @@ class GameReviewFactory extends Factory
     /**
      * @param TokenStorage $tokenStorage
      * @param string $slug
-     * @param EntityRepository $gameRepository
+     * @param EntityRepository $productRepository
      *
      * @return GameReview
      */
-    public function createNewWithCurrentUserAndGame(TokenStorage $tokenStorage, $slug, EntityRepository $gameRepository)
+    public function createNewWithCurrentUserAndGame(TokenStorage $tokenStorage, $slug, EntityRepository $productRepository)
     {
         /** @var GameReview $gameReview */
         $gameReview =  parent::createNew();
 
-        /** @var Jeu $game */
-        $game = $gameRepository->findOneBy(array('slug' => $slug));
+        /** @var ProductInterface $game */
+        $game = $productRepository->findOneBy(array('slug' => $slug));
 
         if (null === $game) {
-            throw new NotFoundHttpException(sprintf('Game with slug %s not found', $slug));
+            throw new NotFoundHttpException(sprintf('Product with slug %s not found', $slug));
         }
 
         $gameReview

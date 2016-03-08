@@ -4,8 +4,8 @@ namespace JDJ\JediZoneBundle\Listener;
 
 use JDJ\JediZoneBundle\Service\ActivityService;
 use JDJ\JediZoneBundle\Service\NotificationService;
-use JDJ\JeuBundle\Entity\Jeu;
 use JDJ\UserBundle\Entity\User;
+use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\VarDumper\VarDumper;
@@ -29,7 +29,7 @@ class NotificationListener
     protected $activityService;
 
     /**
-     * @var JDJ\JeuBundle\Entity\Jeu
+     * @var ProductInterface
      */
     protected $jeu;
 
@@ -53,10 +53,10 @@ class NotificationListener
      *
      * @param NotificationService $notificationService
      * @param ActivityService $activityService
-     * @param Jeu $jeu
+     * @param ProductInterface $jeu
      * @param User $user
      */
-    public function __construct(NotificationService $notificationService,ActivityService $activityService, Jeu $jeu, User $user, $action, $comment)
+    public function __construct(NotificationService $notificationService,ActivityService $activityService, ProductInterface $jeu, User $user, $action, $comment)
     {
         $this->notificationService = $notificationService;
         $this->activityService = $activityService;

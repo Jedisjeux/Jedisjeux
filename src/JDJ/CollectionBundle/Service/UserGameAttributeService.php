@@ -2,14 +2,14 @@
 
 namespace JDJ\CollectionBundle\Service;
 
-use Doctrine\Common\Util\Debug;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping as ORM;
 use JDJ\CollectionBundle\Entity\UserGameAttribute;
 use JDJ\CollectionBundle\Manager\UserGameAttributeManager;
 use JDJ\CollectionBundle\Repository\UserGameAttributeRepository;
-use JDJ\JeuBundle\Entity\Jeu;
 use JDJ\UserBundle\Entity\User;
+use Sylius\Component\Product\Model\ProductInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
 /**
@@ -59,11 +59,11 @@ class UserGameAttributeService
     /**
      * This function handles the click on favorite
      *
-     * @param Jeu $jeu
+     * @param ProductInterface $jeu
      * @param User $user
      * @return bool
      */
-    public function favorite(Jeu $jeu, User $user)
+    public function favorite(ProductInterface $jeu, User $user)
     {
         //Checks if the user has the game in his favorites
         $userGameAttribute = $this->getUserGameAttribute($jeu, $user);
@@ -75,11 +75,11 @@ class UserGameAttributeService
     /**
      * This function handles the click on owned
      *
-     * @param Jeu $jeu
+     * @param ProductInterface $jeu
      * @param User $user
      * @return bool
      */
-    public function owned(Jeu $jeu, User $user)
+    public function owned(ProductInterface $jeu, User $user)
     {
         //Checks if the user has the game in his favorites
         $userGameAttribute = $this->getUserGameAttribute($jeu, $user);
@@ -91,11 +91,11 @@ class UserGameAttributeService
     /**
      * This function handles the click on wanted
      *
-     * @param Jeu $jeu
+     * @param ProductInterface $jeu
      * @param User $user
      * @return bool
      */
-    public function wanted(Jeu $jeu, User $user)
+    public function wanted(ProductInterface $jeu, User $user)
     {
         //Checks if the user has the game in his favorites
         $userGameAttribute = $this->getUserGameAttribute($jeu, $user);
@@ -107,11 +107,11 @@ class UserGameAttributeService
     /**
      * This function handles the click on played
      *
-     * @param Jeu $jeu
+     * @param ProductInterface $jeu
      * @param User $user
      * @return bool
      */
-    public function played(Jeu $jeu, User $user)
+    public function played(ProductInterface $jeu, User $user)
     {
         //Checks if the user has the game in his favorites
         $userGameAttribute = $this->getUserGameAttribute($jeu, $user);
@@ -125,11 +125,12 @@ class UserGameAttributeService
      * This function handles the different cases for putting a game to favorite
      *
      * @param UserGameAttribute $userGameAttribute
-     * @param Jeu $jeu
+     * @param ProductInterface $jeu
      * @param User $user
+     *
      * @return UserGameAttribute
      */
-    public function handleFavorite(UserGameAttribute $userGameAttribute = null, Jeu $jeu, User $user)
+    public function handleFavorite(UserGameAttribute $userGameAttribute = null, ProductInterface $jeu, User $user)
     {
         //Set the game to favorite or not
         if ($userGameAttribute) {
@@ -159,11 +160,12 @@ class UserGameAttributeService
      * This function handles the different cases for putting a game he owned
      *
      * @param UserGameAttribute $userGameAttribute
-     * @param Jeu $jeu
+     * @param ProductInterface $jeu
      * @param User $user
+     *
      * @return UserGameAttribute
      */
-    public function handleOwned(UserGameAttribute $userGameAttribute = null, Jeu $jeu, User $user)
+    public function handleOwned(UserGameAttribute $userGameAttribute = null, ProductInterface $jeu, User $user)
     {
 
         //Set the game to favorite or not
@@ -192,11 +194,12 @@ class UserGameAttributeService
      * This function handles the different cases for putting a game he wants
      *
      * @param UserGameAttribute $userGameAttribute
-     * @param Jeu $jeu
+     * @param ProductInterface $jeu
      * @param User $user
+     *
      * @return UserGameAttribute
      */
-    public function handleWanted(UserGameAttribute $userGameAttribute = null, Jeu $jeu, User $user)
+    public function handleWanted(UserGameAttribute $userGameAttribute = null, ProductInterface $jeu, User $user)
     {
 
         //Set the game to favorite or not
@@ -225,11 +228,12 @@ class UserGameAttributeService
      * This function handles the different cases for putting a game he has played
      *
      * @param UserGameAttribute $userGameAttribute
-     * @param Jeu $jeu
+     * @param ProductInterface $jeu
      * @param User $user
+     *
      * @return UserGameAttribute
      */
-    public function handlePlayed(UserGameAttribute $userGameAttribute = null, Jeu $jeu, User $user)
+    public function handlePlayed(UserGameAttribute $userGameAttribute = null, ProductInterface $jeu, User $user)
     {
 
         //Set the game to favorite or not
@@ -257,15 +261,15 @@ class UserGameAttributeService
     /**
      * This function get the userGameAttribute
      *
-     * @param Jeu $jeu
+     * @param ProductInterface $jeu
      * @param User $user
      * @return array
      */
-    public function getUserGameAttribute(Jeu $jeu, User $user)
+    public function getUserGameAttribute(ProductInterface $jeu, User $user)
     {
 
         if (!$jeu || !$user) {
-            throw $this->createNotFoundException('Unable to find Game or User entity.');
+            throw new NotFoundHttpException('Unable to find Game or User entity.');
         }
 
         $userGameAttribute = $this->repo->findOneUserGameAttribute($jeu, $user);

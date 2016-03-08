@@ -2,30 +2,14 @@
 
 namespace JDJ\JediZoneBundle\Controller;
 
-use JDJ\CollectionBundle\Entity\UserGameAttribute;
-use JDJ\CollectionBundle\Service\CollectionService;
-use JDJ\CollectionBundle\Service\UserGameAttributeService;
-use JDJ\JediZoneBundle\Entity\Activity;
 use JDJ\JediZoneBundle\Entity\Notification;
 use JDJ\JediZoneBundle\Service\NotificationService;
-use JDJ\JeuBundle\Entity\Jeu;
-use JDJ\UserBundle\Entity\User;
-use Pagerfanta\Pagerfanta;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use JDJ\CollectionBundle\Entity\Collection;
-use JDJ\CollectionBundle\Form\CollectionType;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
-use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\VarDumper\VarDumper;
 
 /**
  * Class NotificationController
@@ -76,7 +60,9 @@ class NotificationController extends Controller
      *
      * @Route("/{notification}/show", name="notification_show")
      * @ParamConverter("notification", class="JDJJediZoneBundle:Notification")
+     *
      * @param Notification $notification
+     *
      * @return Response
      */
     public function showAction(Notification $notification)

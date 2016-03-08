@@ -4,6 +4,7 @@ use Doctrine\Common\Util\Debug;
 use JDJ\CoreBundle\Entity\EntityRepository;
 use JDJ\JeuBundle\Entity\Jeu;
 use JDJ\UserBundle\Entity\User;
+use Sylius\Component\Product\Model\ProductInterface;
 
 /**
  * BlogRepository
@@ -17,12 +18,12 @@ class UserGameAttributeRepository extends EntityRepository
     /**
      * This function returns the UserGameAttribute
      *
-     * @param Jeu $game
+     * @param ProductInterface $game
      * @param User $user
      * @return mixed
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function findOneUserGameAttribute(Jeu $game, User $user)
+    public function findOneUserGameAttribute(ProductInterface $game, User $user)
     {
         $queryBuilder = $this->createQueryBuilder('u')
             ->andWhere('u.jeu = :game')

@@ -5,6 +5,7 @@ namespace JDJ\PartieBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Sylius\Component\Product\Model\ProductInterface;
 
 /**
  * Partie
@@ -41,9 +42,9 @@ class Partie
     private $author;
 
     /**
-     * @var \JDJ\JeuBundle\Entity\Jeu
+     * @var ProductInterface
      *
-     * @ORM\ManyToOne(targetEntity="JDJ\JeuBundle\Entity\Jeu", inversedBy="parties")
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface", inversedBy="parties")
      * @ORM\JoinColumn(nullable=false)
      */
     private $jeu;
@@ -201,10 +202,10 @@ class Partie
     /**
      * Set jeu
      *
-     * @param \JDJ\JeuBundle\Entity\Jeu $jeu
+     * @param ProductInterface $jeu
      * @return Partie
      */
-    public function setJeu(\JDJ\JeuBundle\Entity\Jeu $jeu)
+    public function setJeu(ProductInterface $jeu)
     {
         $this->jeu = $jeu;
 
@@ -214,7 +215,7 @@ class Partie
     /**
      * Get jeu
      *
-     * @return \JDJ\JeuBundle\Entity\Jeu 
+     * @return ProductInterface
      */
     public function getJeu()
     {
