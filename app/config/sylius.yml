@@ -28,6 +28,8 @@ sylius_product:
         product:
             classes:
                 model: AppBundle\Entity\Product
+                repository: AppBundle\Repository\ProductRepository
+                controller: AppBundle\Controller\ProductController
             translation:
               classes:
                   model: AppBundle\Entity\ProductTranslation

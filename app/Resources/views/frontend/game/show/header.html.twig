@@ -75,13 +75,13 @@
                                     <li>Mécanismes
                                         : {% for key, mechanism in jeu.mechanisms %}{% if (key > 0) %},{% endif %}
                                             <a
-                                            href="{{ path('app_game_index_by_mechanism', { 'permalink': mechanism.slug }) }}">{{ mechanism }}</a>{% endfor %}
+                                            href="{{ path('sylius_product_index_by_taxon', { 'permalink': mechanism.permalink }) }}">{{ mechanism }}</a>{% endfor %}
                                     </li>
                                 {% endif %}
 
                                 {% if jeu.themes|length > 0 %}
                                     <li>Thèmes : {% for key, theme in jeu.themes %}{% if (key > 0) %},{% endif %} <a
-                                            href="{{ path('app_game_index_by_theme', { 'permalink': theme.slug }) }}">{{ theme }}</a>{% endfor %}
+                                            href="{{ path('sylius_product_index_by_taxon', { 'permalink': theme.permalink }) }}">{{ theme }}</a>{% endfor %}
                                     </li>
                                 {% endif %}
 
