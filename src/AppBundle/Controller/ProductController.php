@@ -9,6 +9,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Repository\ProductRepository;
+use Doctrine\ORM\EntityRepository;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Resource\ResourceActions;
@@ -35,6 +36,8 @@ class ProductController extends ResourceController
             throw new NotFoundHttpException('Requested taxon does not exist.');
         }
 
+        $taxonomies = $this->getTaxonomyRepository()->findBy(array('name' => array('mecanismes', 'themes')));
+
         /** @var ProductRepository $repository */
         $repository = $this->repository;
 
@@ -52,11 +55,20 @@ class ProductController extends ResourceController
                 ->setData([
                     'metadata' => $this->metadata,
                     'taxon' => $taxon,
+                    'taxonomies' => $taxonomies,
                     'resources' => $resources,
                     $this->metadata->getPluralName() => $resources,
                 ]);
         }
 
         return $this->viewHandler->handle($configuration, $view);
+    }
+
+    /**
+     * @return EntityRepository
+     */
+    protected function getTaxonomyRepository()
+    {
+        return $this->get('sylius.repository.taxonomy');
     }
 }
