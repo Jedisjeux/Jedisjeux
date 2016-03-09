@@ -93,12 +93,6 @@ sylius_resource:
                 controller: AppBundle\Controller\GameController
                 repository: JDJ\JeuBundle\Repository\JeuRepository
                 model: JDJ\JeuBundle\Entity\Jeu
-        app.mechanism:
-            classes:
-                model: JDJ\JeuBundle\Entity\Mechanism
-        app.theme:
-            classes:
-                model: JDJ\JeuBundle\Entity\Theme
         app.country:
             classes:
                 model: AppBundle\Entity\Country
