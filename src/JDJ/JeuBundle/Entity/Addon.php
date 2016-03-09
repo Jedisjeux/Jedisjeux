@@ -4,6 +4,7 @@ namespace JDJ\JeuBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Sylius\Component\Product\Model\ProductInterface;
 
 /**
  * Addon
@@ -39,7 +40,7 @@ class Addon
     /**
      * @var \JDJ\JeuBundle\Entity\Addon
      *
-     * @ORM\ManyToOne(targetEntity="Jeu", inversedBy="addons")
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface", inversedBy="addons")
      */
     private $jeu;
 
@@ -124,10 +125,11 @@ class Addon
     /**
      * Set jeu
      *
-     * @param \JDJ\JeuBundle\Entity\Jeu $jeu
-     * @return Addon
+     * @param ProductInterface $jeu
+     *
+     * @return $this
      */
-    public function setJeu(\JDJ\JeuBundle\Entity\Jeu $jeu = null)
+    public function setJeu(ProductInterface $jeu = null)
     {
         $this->jeu = $jeu;
 
@@ -137,7 +139,7 @@ class Addon
     /**
      * Get jeu
      *
-     * @return \JDJ\JeuBundle\Entity\Addon 
+     * @return ProductInterface
      */
     public function getJeu()
     {
@@ -148,7 +150,8 @@ class Addon
      * Set typeAddon
      *
      * @param \JDJ\JeuBundle\Entity\TypeAddon $typeAddon
-     * @return Addon
+     *
+     * @return $this
      */
     public function setTypeAddon(\JDJ\JeuBundle\Entity\TypeAddon $typeAddon = null)
     {

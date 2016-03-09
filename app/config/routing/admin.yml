@@ -21,26 +21,6 @@ admin_game:
         redirect: index
     type: sylius.resource
 
-admin_mechanism:
-    resource: |
-        alias: app.mechanism
-        section: admin
-        path: mecanismes
-        form: JDJ\JeuBundle\Form\MechanismType
-        templates: :backend/mechanism
-        redirect: index
-    type: sylius.resource
-
-admin_theme:
-    resource: |
-        alias: app.theme
-        section: admin
-        path: themes
-        form: JDJ\JeuBundle\Form\ThemeType
-        templates: :backend/theme
-        redirect: index
-    type: sylius.resource
-
 admin_country:
     resource: |
         alias: app.country
@@ -60,3 +40,10 @@ admin_person:
         templates: :backend/person
         redirect: index
     type: sylius.resource
+
+sylius_admin_taxonomy:
+    resource: backend/taxonomy.yml
+
+sylius_admin_taxon:
+    resource: backend/taxon.yml
+    prefix: /taxonomies/{taxonomyId}/

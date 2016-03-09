@@ -9,7 +9,6 @@
 namespace AppBundle\Controller\Frontend;
 
 use JDJ\CoreBundle\Entity\EntityRepository;
-use JDJ\JeuBundle\Entity\Jeu;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

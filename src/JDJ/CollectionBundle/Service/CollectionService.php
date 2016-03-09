@@ -3,12 +3,12 @@
 namespace JDJ\CollectionBundle\Service;
 
 
-use Doctrine\Common\Util\Debug;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 use JDJ\CollectionBundle\Entity\Collection;
 use JDJ\CollectionBundle\Entity\ListElement;
-use JDJ\JeuBundle\Entity\Jeu;
 use JDJ\UserBundle\Entity\User;
+use Sylius\Component\Product\Model\ProductInterface;
 
 class CollectionService
 {
@@ -71,11 +71,11 @@ class CollectionService
     /**
      * This function adds a game to a collection
      *
-     * @param Jeu $jeu
+     * @param ProductInterface $jeu
      * @param Collection $collection
      * @return Collection
      */
-    public function addGameCollection(Jeu $jeu, Collection $collection)
+    public function addGameCollection(ProductInterface $jeu, Collection $collection)
     {
 
         if (!$this->checkJeuCollection($jeu, $collection)) {
@@ -132,6 +132,7 @@ class CollectionService
     {
 
         $jsonCollection = array();
+        /** @var Collection $collection */
         foreach($tabCollection as $collection)
         {
             $jsonCollection[] = array(
@@ -146,11 +147,11 @@ class CollectionService
     /**
      * This function checks if the game is already in the collection
      *
-     * @param Jeu $jeu
+     * @param ProductInterface $jeu
      * @param Collection $collection
      * @return bool
      */
-    private function checkJeuCollection(Jeu $jeu, Collection $collection)
+    private function checkJeuCollection(ProductInterface $jeu, Collection $collection)
     {
         $isJeuInCollection = false;
 

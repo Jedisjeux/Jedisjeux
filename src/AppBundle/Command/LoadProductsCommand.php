@@ -8,9 +8,9 @@
 
 namespace AppBundle\Command;
 
+use AppBundle\Entity\Product;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
-use Sylius\Component\Product\Model\Product;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -54,9 +54,40 @@ class LoadProductsCommand extends ContainerAwareCommand
             $product = $this->getFactory()->createNew();
         }
         $data['description'] = !empty($data['description']) ? $this->getHTMLFromText($data['description']) : null;
+        $data['joueurMin'] = !empty($data['joueurMin']) ? $data['joueurMin'] : null;
+        $data['joueurMax'] = !empty($data['joueurMax']) ? $data['joueurMax'] : null;
+        $data['ageMin'] = !empty($data['ageMin']) ? $data['ageMin'] : null;
+        $data['materiel'] = !empty($data['materiel']) ? trim($data['materiel']) : null;
+        $data['createdAt'] = \DateTime::createFromFormat('Y-m-d H:i:s', $data['createdAt']);
+        $data['updatedAt'] = \DateTime::createFromFormat('Y-m-d H:i:s', $data['updatedAt']);
+        switch ($data['status']) {
+            case 0 :
+                $data['status'] = Product::WRITING;
+                break;
+            case 1 :
+                $data['status'] = Product::PUBLISHED;
+                break;
+            case 2 :
+                $data['status'] = Product::NEED_A_TRANSLATION;
+                break;
+            case 5 :
+                $data['status'] = Product::NEED_A_REVIEW;
+                break;
+            case 3 :
+                $data['status'] = Product::READY_TO_PUBLISH;
+                break;
+        }
 
         $product->setName($data['name']);
         $product->setDescription($data['description']);
+        $product->setCreatedAt($data['createdAt']);
+        $product
+            ->setCode($data['code'])
+            ->setAgeMin($data['ageMin'])
+            ->setJoueurMin($data['joueurMin'])
+            ->setJoueurMax($data['joueurMax'])
+            ->setMateriel($data['materiel'])
+            ->setStatus($data['status']);
 
         $this->getManager()->persist($product);
         $this->getManager()->flush(); // Save changes in database.
@@ -69,7 +100,7 @@ class LoadProductsCommand extends ContainerAwareCommand
     public function getRows()
     {
         $query = <<<EOM
-select      old.id,
+select      concat('game-', old.id) as code,
             old.nom as name,
             old.min as joueurMin,
             old.max as joueurMax,
@@ -83,7 +114,8 @@ select      old.id,
             old.date as updatedAt
 from        jedisjeux.jdj_game old
 where       old.valid in (0, 1, 2, 5, 3)
-limit       5
+and         old.id_pere is null
+and         old.nom <> ""
 EOM;
         $rows = $this->getDatabaseConnection()->fetchAll($query);
 

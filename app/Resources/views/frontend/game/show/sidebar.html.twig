@@ -13,9 +13,9 @@
         <h5><i class="fa fa-camera color"></i> Photos</h5>
         <!-- Widgets Content -->
         <div class="widget-content gallery">
-            {% for jeuImage in jeu.Jeuimages %}
-                <a href="{{ jeuImage.image.webPath | imagine_filter('default') }}" rel="jeu" class="fancybox" title="{{ jeuImage.description }}">
-                    <img src="{{ jeuImage.image.webPath | imagine_filter('thumbnail_S') }}" alt="" class="img-responsive img-thumbnail"/>
+            {% for image in jeu.images %}
+                <a href="{{ image.webPath | imagine_filter('default') }}" rel="jeu" class="fancybox" title="{{ image.description }}">
+                    <img src="{{ image.webPath | imagine_filter('thumbnail_S') }}" alt="" class="img-responsive img-thumbnail"/>
                 </a>
             {% endfor %}
         </div>

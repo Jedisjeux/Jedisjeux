@@ -11,7 +11,7 @@ namespace AppBundle\Entity;
 use AppBundle\Traits\BlameableEntity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-use JDJ\JeuBundle\Entity\Jeu;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
@@ -35,9 +35,9 @@ class GameRate implements ResourceInterface
     protected $id;
 
     /**
-     * @var Jeu
+     * @var ProductInterface
      *
-     * @ORM\ManyToOne(targetEntity="JDJ\JeuBundle\Entity\Jeu")
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface")
      */
     protected $game;
 
@@ -69,7 +69,7 @@ class GameRate implements ResourceInterface
     }
 
     /**
-     * @return Jeu
+     * @return ProductInterface
      */
     public function getGame()
     {
@@ -77,7 +77,7 @@ class GameRate implements ResourceInterface
     }
 
     /**
-     * @param Jeu $game
+     * @param ProductInterface $game
      *
      * @return $this
      */

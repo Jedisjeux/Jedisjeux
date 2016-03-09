@@ -2,10 +2,11 @@
 
 namespace JDJ\JediZoneBundle\Repository;
 
+use AppBundle\Entity\Product;
 use JDJ\CoreBundle\Entity\EntityRepository;
 use JDJ\JediZoneBundle\Entity\Notification;
-use JDJ\JeuBundle\Entity\Jeu;
 use JDJ\UserBundle\Entity\User;
+use Sylius\Component\Product\Model\ProductInterface;
 
 
 /**
@@ -52,7 +53,7 @@ class NotificationRepository extends EntityRepository
             //If the game is published and the notification is read
             //Don't display the notification
             ->andWhere('NOT (j.status = :statusPublished AND n.isRead = 1)')
-            ->setParameter('statusPublished', Jeu::PUBLISHED)
+            ->setParameter('statusPublished', Product::PUBLISHED)
 
             //Most recent first
             ->orderBy('n.id', "DESC");

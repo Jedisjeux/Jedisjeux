@@ -3,9 +3,9 @@
 namespace JDJ\JediZoneBundle\Service;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping as ORM;
-use JDJ\JeuBundle\Entity\Jeu;
-use JDJ\UserBundle\Entity\User;
+use Sylius\Component\Product\Model\ProductInterface;
 
 
 /**
@@ -22,7 +22,7 @@ class StatusService
 
     /**
      * Entity-specific repo, useful for finding entities, for example
-     * @var JeuRepository
+     * @var EntityRepository
      */
     protected $repo;
 
@@ -49,11 +49,11 @@ class StatusService
     /**
      * This function change a game status
      *
-     * @param Jeu $jeu
+     * @param ProductInterface $jeu
      * @param String $status
      * @return bool
      */
-    public function changeGameStatus(Jeu $jeu, $status)
+    public function changeGameStatus(ProductInterface $jeu, $status)
     {
         $jeu->setStatus($status);
 

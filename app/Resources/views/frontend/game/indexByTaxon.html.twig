@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+{% from 'macros/misc.html.twig' import pagination %}
+{% from 'macros/sorting.html.twig' import sorting %}
+{% from 'macros/items.html.twig' import blockquoteOne %}
+
+{% block headline %}
+    Jeux
+{% endblock %}
+
+{% block subtitle %}
+    ayant pour taxon : {{ taxon }}
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    <a href="{{ path('sylius_product_index') }}">Jeux</a> /
+    {{ taxon }}
+{% endblock %}
+
+{% block body -%}
+
+    <div class="container">
+
+
+        <div class="row">
+            <div class="col-md-8">
+
+                <div class="container">
+
+                    {% if taxon.description %}
+                        {{ blockquoteOne(taxon.description) }}
+                    {% endif %}
+
+                    <div class="pull-right sorting">
+                        {% set sorting = app.request.get('sorting') %}
+
+                        {% set icon = false %}
+                        {% set currentOrder = null %}
+
+                        {% if null == sorting %}
+                            {% set icon = true %}
+                            {% set currentOrder = 'desc' %}
+                        {% endif %}
+
+                        Trier
+                        par {{ sorting('sylius_product_index_by_taxon', 'label.created_at'|trans, 'createdAt', 'desc', icon, currentOrder, {'permalink': taxon.slug}) }}
+                        ,
+                        {{ sorting('sylius_product_index_by_taxon', 'label.name'|trans, 'name', 'asc', null, null, {'permalink': taxon.slug} ) }}
+                    </div>
+
+                    {% include "jeu/index/list-3.html.twig" with {'jeux': products} only %}
+
+                    {% block Pagination %}
+                        <div class="pagination-wrapper">
+                            <div class="pagination-bottom">
+                                {{ pagination(products) }}
+                            </div>
+                        </div>
+                    {% endblock %}
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+                {% include 'frontend/game/_sidebar.html.twig' %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -86,23 +86,23 @@ class Personne implements ResourceInterface
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="JDJ\JeuBundle\Entity\Jeu", mappedBy="auteurs", cascade={"persist", "merge"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Product", mappedBy="designers", cascade={"persist", "merge"})
      */
-    private $auteurJeux;
+    private $designerProducts;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="JDJ\JeuBundle\Entity\Jeu", mappedBy="illustrateurs", cascade={"persist", "merge"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Product", mappedBy="artists", cascade={"persist", "merge"})
      */
-    private $illustrateurJeux;
+    private $artistProducts;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="JDJ\JeuBundle\Entity\Jeu", mappedBy="editeurs", cascade={"persist", "merge"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Product", mappedBy="publishers", cascade={"persist", "merge"})
      */
-    private $editeurJeux;
+    private $publisherProducts;
 
     /**
      * Constructor

@@ -1,0 +1,37 @@
+sylius_product:
+    resource: |
+        alias: sylius.product
+        path: /jeux
+        templates: :frontend/game
+        redirect: index
+    type: sylius.resource
+
+sylius_product_index:
+    methods: [GET]
+    path: /jeux/
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            repository:
+                method: createFilterPaginator
+            template: frontend/game/index.html.twig
+
+sylius_product_index_by_taxon:
+    methods: [GET]
+    path: /t/{permalink}
+    defaults:
+        _controller: sylius.controller.product:indexByTaxonAction
+        _sylius:
+            paginate: 12
+            template: frontend/game/indexByTaxon.html.twig
+    requirements:
+        permalink: ".+"
+
+sylius_product_show:
+    methods: [GET]
+    path: /p/{slug}
+    defaults:
+        _controller: sylius.controller.product:showAction
+        _sylius:
+            template: frontend/game/show.html.twig
+

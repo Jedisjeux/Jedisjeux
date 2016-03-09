@@ -5,6 +5,7 @@ namespace JDJ\JediZoneBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Sylius\Component\Product\Model\ProductInterface;
 
 /**
  * Class Activity
@@ -175,11 +176,11 @@ class Activity
     /**
      * Set jeu
      *
-     * @param \JDJ\JeuBundle\Entity\Jeu $jeu
+     * @param ProductInterface $jeu
      *
      * @return Activity
      */
-    public function setJeu(\JDJ\JeuBundle\Entity\Jeu $jeu = null)
+    public function setJeu(ProductInterface $jeu = null)
     {
         $this->jeu = $jeu;
 
@@ -189,7 +190,7 @@ class Activity
     /**
      * Get jeu
      *
-     * @return \JDJ\JeuBundle\Entity\Jeu
+     * @return ProductInterface
      */
     public function getJeu()
     {

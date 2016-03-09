@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\UserInterface;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use JDJ\CoreBundle\Entity\Like;
-use JDJ\JeuBundle\Entity\Jeu;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
@@ -93,7 +93,7 @@ class GameReview implements ResourceInterface
     }
 
     /**
-     * @return Jeu
+     * @return ProductInterface
      */
     public function getGame()
     {
@@ -101,7 +101,7 @@ class GameReview implements ResourceInterface
     }
 
     /**
-     * @param Jeu $game
+     * @param ProductInterface $game
      *
      * @return $this
      */

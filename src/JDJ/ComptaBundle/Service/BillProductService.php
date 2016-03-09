@@ -4,17 +4,12 @@ namespace JDJ\ComptaBundle\Service;
 
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Util\Debug;
 use Doctrine\ORM\EntityManager;
-use JDJ\CollectionBundle\Entity\Collection;
-use JDJ\CollectionBundle\Entity\ListElement;
+use Doctrine\ORM\EntityRepository;
 use JDJ\ComptaBundle\Entity\Bill;
 use JDJ\ComptaBundle\Entity\BillProduct;
 use JDJ\ComptaBundle\Entity\Manager\ProductManager;
-use JDJ\JeuBundle\Entity\Jeu;
-use JDJ\UserBundle\Entity\User;
 use Symfony\Component\Form\Form;
-use Symfony\Component\VarDumper\VarDumper;
 
 class BillProductService
 {

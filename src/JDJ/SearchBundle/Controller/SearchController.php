@@ -10,12 +10,10 @@ namespace JDJ\SearchBundle\Controller;
 
 use Elastica\Query\QueryString;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
-use JDJ\JeuBundle\Entity\Jeu;
-use JDJ\JeuBundle\Entity\Mechanism;
-use JDJ\JeuBundle\Entity\Theme;
 use JDJ\LudographieBundle\Entity\Personne;
 use JDJ\UserBundle\Entity\User;
 use Pagerfanta\Pagerfanta;
+use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -69,7 +67,7 @@ class SearchController extends Controller
         foreach ($paginator as $entity) {
             $result = array();
 
-            if ($entity instanceof Jeu) {
+            if ($entity instanceof ProductInterface) {
                 /** @var Jeu $jeu */
                 $jeu = $entity;
                 $result = array(
@@ -92,36 +90,6 @@ class SearchController extends Controller
                     'label' => $user->getUsername(),
                     'image' => (null === $user->getAvatar()) ? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : $this->get('liip_imagine.cache.manager')->getBrowserPath($user->getAvatar()->getWebPath(), 'thumbnail'),
                     'href' => "#",
-                );
-            }
-
-            if ($entity instanceof Mechanism) {
-                /** @var Mechanism $mechanism */
-                $mechanism = $entity;
-                $result = array(
-                    'value' => $mechanism->getName(),
-                    'label' => $mechanism->getName(),
-                    'image' => "",
-                    'href' => $this->generateUrl('mechanism_show', array(
-                            'id' => $mechanism->getId(),
-                            'slug' => $mechanism->getSlug(),
-                        )
-                    ),
-                );
-            }
-
-            if ($entity instanceof Theme) {
-                /** @var Theme $theme */
-                $theme = $entity;
-                $result = array(
-                    'value' => $theme->getName(),
-                    'label' => $theme->getName(),
-                    'image' => "",
-                    'href' => $this->generateUrl('theme_show', array(
-                            'id' => $theme->getId(),
-                            'slug' => $theme->getSlug(),
-                        )
-                    ),
                 );
             }
 
@@ -176,16 +144,10 @@ class SearchController extends Controller
     {
         $types = array();
         foreach ($results as $result) {
-            if ($result instanceof Jeu) {
+            if ($result instanceof ProductInterface) {
                 $types[] = "jeu";
             } elseif ($result instanceof Personne) {
                 $types[] = "personne";
-            } elseif ($result instanceof Mechanism) {
-                $types[] = "mechanism";
-            } elseif ($result instanceof Theme) {
-                $types[] = "theme";
-            } elseif ($result instanceof Theme) {
-                $types[] = "theme";
             } elseif ($result instanceof User) {
                 $types[] = "user";
             }
@@ -217,8 +179,7 @@ class SearchController extends Controller
     {
         $current = $paginator->getIterator()->current();
 
-        if ($current instanceof Jeu) {
-            /** @var Jeu $jeu */
+        if ($current instanceof ProductInterface) {
             $jeu = $current;
             return $this->redirect($this->generateUrl('jeu_show', array(
                     'id' => $jeu->getId(),
@@ -228,31 +189,10 @@ class SearchController extends Controller
         }
 
         if ($current instanceof Personne) {
-            /** @var Personne $personne */
             $personne = $current;
             return $this->redirect($this->generateUrl('personne_show', array(
                     'id' => $personne->getId(),
                     'slug' => $personne->getSlug(),
-                )
-            ));
-        }
-
-        if ($current instanceof Mechanism) {
-            /** @var Mechanism $mechanism */
-            $mechanism = $current;
-            return $this->redirect($this->generateUrl('mechanism_show', array(
-                    'id' => $mechanism->getId(),
-                    'slug' => $mechanism->getSlug(),
-                )
-            ));
-        }
-
-        if ($current instanceof Theme) {
-            /** @var Theme $theme */
-            $theme = $current;
-            return $this->redirect($this->generateUrl('theme_show', array(
-                    'id' => $theme->getId(),
-                    'slug' => $theme->getSlug(),
                 )
             ));
         }

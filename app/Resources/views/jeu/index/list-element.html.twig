@@ -1,6 +1,6 @@
 {% from "JDJJeuBundle:Jeu:macros.html.twig" import joueurCount %}
 
-{% set jeuHref = path('jeu_show', {'id': jeu.id, 'slug': jeu.slug}) %}
+{% set jeuHref = path('sylius_product_show', {'slug': jeu.slug}) %}
 
 <!-- Image Box #4 Item -->
 <div class="img-box-4-item portfolio">

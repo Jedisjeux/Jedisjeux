@@ -10,7 +10,7 @@ sylius_archetype:
                 translation:
                     classes:
                         model: Sylius\Component\Product\Model\ArchetypeTranslation
-            subject: Sylius\Component\Product\Model\Product
+            subject: AppBundle\Entity\Product
             attribute: Sylius\Component\Product\Model\Attribute
             option: Sylius\Component\Product\Model\Option
 
@@ -24,9 +24,23 @@ sylius_association:
 
 sylius_product:
     driver: doctrine/orm # Configure the doctrine orm driver used in the documentation.
+    resources:
+        product:
+            classes:
+                model: AppBundle\Entity\Product
+                repository: AppBundle\Repository\ProductRepository
+                controller: AppBundle\Controller\ProductController
+            translation:
+              classes:
+                  model: AppBundle\Entity\ProductTranslation
 
 sylius_variation:
     driver: doctrine/orm # Configure the doctrine orm driver used in the documentation.
+    resources:
+        product:
+            variant:
+                classes:
+                    model: AppBundle\Entity\ProductVariant
 
 sylius_taxonomy:
     driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
@@ -81,12 +95,6 @@ sylius_resource:
                 controller: AppBundle\Controller\GameController
                 repository: JDJ\JeuBundle\Repository\JeuRepository
                 model: JDJ\JeuBundle\Entity\Jeu
-        app.mechanism:
-            classes:
-                model: JDJ\JeuBundle\Entity\Mechanism
-        app.theme:
-            classes:
-                model: JDJ\JeuBundle\Entity\Theme
         app.country:
             classes:
                 model: AppBundle\Entity\Country
