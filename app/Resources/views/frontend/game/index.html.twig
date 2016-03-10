@@ -13,29 +13,49 @@
 
 {% block body -%}
 
-    <div class="pull-right sorting">
-        {% set sorting = app.request.get('sorting') %}
+    <div class="container">
 
-        {% set icon = false %}
-        {% set currentOrder = null %}
+        <div class="row">
 
-        {% if null == sorting %}
-            {% set icon = true %}
-            {% set currentOrder = 'desc' %}
-        {% endif %}
+            <div class="col-md-10">
 
-        Trier par {{ sorting('sylius_product_index', 'label.created_at'|trans, 'createdAt', 'desc', icon, currentOrder) }},
-        {{ sorting('sylius_product_index', 'label.name'|trans, 'name', 'asc') }}
-    </div>
+                <div class="container">
 
-    {% include "jeu/index/list-4.html.twig" with {'jeux': products} only %}
+                    <div class="pull-right sorting">
+                        {% set sorting = app.request.get('sorting') %}
 
-    {% block Pagination %}
-        <div class="pagination-wrapper">
-            <div class="pagination-bottom">
-                {{ pagination(products) }}
+                        {% set icon = false %}
+                        {% set currentOrder = null %}
+
+                        {% if null == sorting %}
+                            {% set icon = true %}
+                            {% set currentOrder = 'desc' %}
+                        {% endif %}
+
+                        Trier
+                        par {{ sorting('sylius_product_index', 'label.created_at'|trans, 'createdAt', 'desc', icon, currentOrder) }}
+                        ,
+                        {{ sorting('sylius_product_index', 'label.name'|trans, 'name', 'asc') }}
+                    </div>
+
+                    {% include "jeu/index/list-4.html.twig" with {'jeux': products} only %}
+
+
+                    <div class="pagination-wrapper">
+                        <div class="pagination-bottom">
+                            {{ pagination(products) }}
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
-        </div>
-    {% endblock %}
 
+            <div class="col-md-2">
+                {% include 'frontend/game/_sidebar.html.twig' %}
+            </div>
+
+        </div>
+
+    </div>
 {% endblock %}

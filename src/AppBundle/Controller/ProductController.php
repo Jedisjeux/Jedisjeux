@@ -23,6 +23,37 @@ class ProductController extends ResourceController
 {
     /**
      * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function indexWithTaxonsAction(Request $request)
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+        $this->isGrantedOr403($configuration, ResourceActions::INDEX);
+
+        $taxonomies = $this->getTaxonomyRepository()->findBy(array('name' => array('mecanismes', 'themes')));
+
+        $resources = $this->resourcesCollectionProvider->get($configuration, $this->repository);
+
+        $view = View::create($resources);
+
+        if ($configuration->isHtmlRequest()) {
+            $view
+                ->setTemplate($configuration->getTemplate(ResourceActions::INDEX))
+                ->setTemplateVar($this->metadata->getPluralName())
+                ->setData([
+                    'taxonomies' => $taxonomies,
+                    'metadata' => $this->metadata,
+                    'resources' => $resources,
+                    $this->metadata->getPluralName() => $resources,
+                ])
+            ;
+        }
+
+        return $this->viewHandler->handle($configuration, $view);
+    }
+
+    /**
+     * @param Request $request
      * @param $permalink
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -42,7 +73,7 @@ class ProductController extends ResourceController
         $repository = $this->repository;
 
         $resources = $repository
-            ->createByTaxonPaginator($taxon, $request->get('sorting', $configuration->getSorting()))
+            ->createByTaxonPaginator($taxon, $request->get('criteria', $configuration->getCriteria()), $request->get('sorting', $configuration->getSorting()))
             ->setMaxPerPage($configuration->getPaginationMaxPerPage())
             ->setCurrentPage($request->get('page', 1));
 

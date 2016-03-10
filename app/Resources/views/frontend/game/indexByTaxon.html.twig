@@ -50,13 +50,11 @@
 
                     {% include "jeu/index/list-4.html.twig" with {'jeux': products} only %}
 
-                    {% block Pagination %}
-                        <div class="pagination-wrapper">
-                            <div class="pagination-bottom">
-                                {{ pagination(products) }}
-                            </div>
+                    <div class="pagination-wrapper">
+                        <div class="pagination-bottom">
+                            {{ pagination(products) }}
                         </div>
-                    {% endblock %}
+                    </div>
 
                 </div>
 
