@@ -26,6 +26,12 @@
                     <div class="img-box-5-content">
 
                         <div class="row">
+                            {% if jeu.shortDescription %}
+                                {{ jeu.shortDescription|raw }}
+                            {% endif %}
+                        </div>
+
+                        <div class="row">
                             <ul class="list-6">
                                 {% if jeu.auteurs|length > 0 %}
                                     <li>

@@ -53,6 +53,7 @@ class LoadProductsCommand extends ContainerAwareCommand
         if (null === $product) {
             $product = $this->getFactory()->createNew();
         }
+        $data['shortDescription'] = !empty($data['shortDescription']) ? $this->getHTMLFromText($data['shortDescription']) : null;
         $data['description'] = !empty($data['description']) ? $this->getHTMLFromText($data['description']) : null;
         $data['joueurMin'] = !empty($data['joueurMin']) ? $data['joueurMin'] : null;
         $data['joueurMax'] = !empty($data['joueurMax']) ? $data['joueurMax'] : null;
@@ -83,6 +84,7 @@ class LoadProductsCommand extends ContainerAwareCommand
         $product->setCreatedAt($data['createdAt']);
         $product
             ->setCode($data['code'])
+            ->setShortDescription($data['shortDescription'])
             ->setAgeMin($data['ageMin'])
             ->setJoueurMin($data['joueurMin'])
             ->setJoueurMax($data['joueurMax'])
@@ -105,6 +107,7 @@ select      concat('game-', old.id) as code,
             old.min as joueurMin,
             old.max as joueurMax,
             old.age_min as ageMin,
+            old.intro as shortDescription,
             old.presentation as description,
             old.duree as durationMin,
             old.duree as durationMax,

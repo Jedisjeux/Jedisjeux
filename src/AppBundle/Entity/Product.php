@@ -108,13 +108,6 @@ class Product extends BaseProduct
      *
      * @ORM\Column(type="text", nullable=true)
      */
-    protected $intro;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="text", nullable=true)
-     */
     protected $materiel;
 
     /**
@@ -228,6 +221,25 @@ class Product extends BaseProduct
     public function setCode($code)
     {
         $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShortDescription()
+    {
+        return $this->translate()->getShortDescription();
+    }
+
+    /**
+     * @param string $shortDescription
+     * @return $this
+     */
+    public function setShortDescription($shortDescription)
+    {
+        $this->translate()->setShortDescription($shortDescription);
 
         return $this;
     }
@@ -424,25 +436,6 @@ class Product extends BaseProduct
     public function setDurationByPlayer($durationByPlayer)
     {
         $this->durationByPlayer = $durationByPlayer;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getIntro()
-    {
-        return $this->intro;
-    }
-
-    /**
-     * @param string $intro
-     * @return $this
-     */
-    public function setIntro($intro)
-    {
-        $this->intro = $intro;
 
         return $this;
     }
