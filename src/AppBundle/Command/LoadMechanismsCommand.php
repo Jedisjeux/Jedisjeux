@@ -51,10 +51,12 @@ class LoadMechanismsCommand extends ContainerAwareCommand
 
     protected function createOrReplaceTaxonomy()
     {
-        /** @var TaxonomyInterface $taxonomy */
-        $taxonomy = $this->getContainer()
-            ->get('sylius.repository.taxonomy')
-            ->findOneBy(array('name' => 'mechanisms'));
+        /** @var TaxonInterface $taxonRoot */
+        $taxonRoot = $this->getContainer()
+            ->get('sylius.repository.taxon')
+            ->findOneBy(array('code' => 'mechanisms'));
+
+        $taxonomy = $taxonRoot ? $taxonRoot->getTaxonomy() : null;
 
         if (null === $taxonomy) {
             $taxonomy = $this->getContainer()
@@ -63,7 +65,7 @@ class LoadMechanismsCommand extends ContainerAwareCommand
         }
 
         $taxonomy->setCode('mechanisms');
-        $taxonomy->setName('mecanismes');
+        $taxonomy->setName('Mécanismes');
 
         /** @var EntityManager $manager */
         $manager = $this->getContainer()

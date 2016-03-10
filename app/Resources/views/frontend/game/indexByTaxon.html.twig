@@ -23,7 +23,7 @@
 
 
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-10">
 
                 <div class="container">
 
@@ -48,7 +48,7 @@
                         {{ sorting('sylius_product_index_by_taxon', 'label.name'|trans, 'name', 'asc', null, null, {'permalink': taxon.slug} ) }}
                     </div>
 
-                    {% include "jeu/index/list-3.html.twig" with {'jeux': products} only %}
+                    {% include "jeu/index/list-4.html.twig" with {'jeux': products} only %}
 
                     {% block Pagination %}
                         <div class="pagination-wrapper">
@@ -62,7 +62,7 @@
 
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-2">
                 {% include 'frontend/game/_sidebar.html.twig' %}
             </div>
         </div>
