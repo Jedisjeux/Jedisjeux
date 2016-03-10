@@ -277,7 +277,7 @@ class Product extends BaseProduct
     {
         if (null !== $taxonomy) {
             return $this->taxons->filter(function (TaxonInterface $taxon) use ($taxonomy) {
-                return $taxonomy === strtolower($taxon->getTaxonomy()->getName());
+                return $taxonomy === strtolower($taxon->getTaxonomy()->getCode());
             });
         }
 
@@ -647,7 +647,7 @@ class Product extends BaseProduct
      */
     public function getMechanisms()
     {
-        return $this->getTaxons('mecanismes');
+        return $this->getTaxons('mechanisms');
     }
 
     /**
