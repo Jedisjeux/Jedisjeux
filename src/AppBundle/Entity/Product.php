@@ -128,7 +128,7 @@ class Product extends BaseProduct
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="JDJ\LudographieBundle\Entity\Personne", inversedBy="designerProducts", cascade={"persist", "merge"})
-     * @ORM\JoinTable(name="jdj_deisgner_product")
+     * @ORM\JoinTable(name="jdj_designer_product")
      */
     protected $designers;
 

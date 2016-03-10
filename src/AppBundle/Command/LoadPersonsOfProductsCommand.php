@@ -19,7 +19,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class LoadPersonsOfGamesCommand extends ContainerAwareCommand
+class LoadPersonsOfProductsCommand extends ContainerAwareCommand
 {
     protected $writeEntityInOutput = false;
 
@@ -29,8 +29,8 @@ class LoadPersonsOfGamesCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('app:persons-of-games:load')
-            ->setDescription('Load persons of games');
+            ->setName('app:persons-of-products:load')
+            ->setDescription('Load persons of products');
     }
 
     /**
@@ -39,7 +39,7 @@ class LoadPersonsOfGamesCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->output = $output;
-        $output->writeln("<comment>Load persons of games</comment>");
+        $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
 
         $this->loadAuthorsOfGames();
         $this->loadEditorsOfGames();
@@ -49,22 +49,22 @@ class LoadPersonsOfGamesCommand extends ContainerAwareCommand
     protected function loadAuthorsOfGames()
     {
         $query = <<<EOM
-        delete from jdj_auteur_jeu
+        delete from jdj_designer_product
 EOM;
         $this->getDatabaseConnection()->executeQuery($query);
 
         $query = <<<EOM
-insert into jdj_auteur_jeu (
+insert into jdj_designer_product (
             personne_id,
-            jeu_id
+            product_id
 )
 select      personne.id,
-            jeu.id
+  product.id
 from        jedisjeux.jdj_personne_game old
-inner join  jdj_jeu jeu
-                on jeu.id = old.id_game
-inner join  jdj_personne personne
-                on personne.id = old.id_personne
+  inner join  sylius_product product
+    on product.code = concat('game-', old.id_game)
+  inner join  jdj_personne personne
+    on personne.id = old.id_personne
 where       old.type_relation = 'auteur'
 EOM;
         $this->getDatabaseConnection()->executeQuery($query);
@@ -73,22 +73,22 @@ EOM;
     protected function loadEditorsOfGames()
     {
         $query = <<<EOM
-        delete from jdj_editeur_jeu
+        delete from jdj_publisher_product
 EOM;
         $this->getDatabaseConnection()->executeQuery($query);
 
         $query = <<<EOM
-insert into jdj_editeur_jeu (
+insert into jdj_publisher_product (
             personne_id,
-            jeu_id
+            product_id
 )
 select      personne.id,
-            jeu.id
+  product.id
 from        jedisjeux.jdj_personne_game old
-inner join  jdj_jeu jeu
-                on jeu.id = old.id_game
-inner join  jdj_personne personne
-                on personne.id = old.id_personne
+  inner join  sylius_product product
+    on product.code = concat('game-', old.id_game)
+  inner join  jdj_personne personne
+    on personne.id = old.id_personne
 where       old.type_relation = 'editeur'
 EOM;
         $this->getDatabaseConnection()->executeQuery($query);
@@ -97,22 +97,22 @@ EOM;
     protected function loadIllustratorsOfGames()
     {
         $query = <<<EOM
-        delete from jdj_illustrateur_jeu
+        delete from jdj_artist_product
 EOM;
         $this->getDatabaseConnection()->executeQuery($query);
 
         $query = <<<EOM
-insert into jdj_illustrateur_jeu (
+insert into jdj_artist_product (
             personne_id,
-            jeu_id
+            product_id
 )
 select      personne.id,
-            jeu.id
+  product.id
 from        jedisjeux.jdj_personne_game old
-inner join  jdj_jeu jeu
-                on jeu.id = old.id_game
-inner join  jdj_personne personne
-                on personne.id = old.id_personne
+  inner join  sylius_product product
+    on product.code = concat('game-', old.id_game)
+  inner join  jdj_personne personne
+    on personne.id = old.id_personne
 where       old.type_relation = 'illustrateur'
 EOM;
         $this->getDatabaseConnection()->executeQuery($query);
