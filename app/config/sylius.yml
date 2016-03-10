@@ -120,3 +120,6 @@ sylius_resource:
                 controller: AppBundle\Controller\PostController
                 form:
                     default: AppBundle\Form\Type\PostType
+        app.product_variant_image:
+            classes:
+                model: AppBundle\Entity\ProductVariantImage

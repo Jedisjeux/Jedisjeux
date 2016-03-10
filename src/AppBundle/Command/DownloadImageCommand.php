@@ -8,6 +8,8 @@
 
 namespace AppBundle\Command;
 
+use AppBundle\Entity\AbstractImage;
+use Doctrine\ORM\EntityRepository;
 use JDJ\CoreBundle\Entity\Image;
 use JDJ\CoreBundle\Service\ImageImportService;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -28,21 +30,37 @@ class DownloadImageCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        /** @var ImageImportService $imageImportService */
-        $imageImportService = $this->getContainer()->get('app.service.image.import');
+        /** @var EntityRepository $repository */
+        $repository = $this->getContainer()->get('app.repository.product_variant_image');
 
-        $images = $imageImportService
-            ->getImages();
+        $images = $repository
+            ->findAll();
 
-        /** @var Image $image */
+        /** @var AbstractImage $image */
         foreach ($images as $image) {
 
             if (!file_exists($image->getAbsolutePath())) {
-                $output->writeln('Downloading image <comment>'.$imageImportService->getImageOriginalPath($image).'</comment>');
+                $output->writeln('Downloading image <comment>'.$this->getImageOriginalPath($image).'</comment>');
 
-                $imageImportService
-                    ->downloadImage($image);
+                $this->downloadImage($image);
             }
         }
+    }
+
+    /**
+     * @param AbstractImage $image
+     * @return string
+     */
+    protected function getImageOriginalPath(AbstractImage $image)
+    {
+        return "http://www.jedisjeux.net/img/800/".$image->getPath();
+    }
+
+    /**
+     * @param AbstractImage $image
+     */
+    protected function downloadImage(AbstractImage $image)
+    {
+        file_put_contents($image->getAbsolutePath(), file_get_contents($this->getImageOriginalPath($image)));
     }
 }
