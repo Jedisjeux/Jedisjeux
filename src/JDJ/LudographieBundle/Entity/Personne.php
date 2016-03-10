@@ -2,6 +2,7 @@
 
 namespace JDJ\LudographieBundle\Entity;
 
+use AppBundle\Entity\Country;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -77,7 +78,7 @@ class Personne implements ResourceInterface
     private $slug;
 
     /**
-     * @var \JDJ\WebBundle\Entity\Pays
+     * @var Country
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Country")
      */
@@ -266,10 +267,10 @@ class Personne implements ResourceInterface
     /**
      * Set country
      *
-     * @param \JDJ\WebBundle\Entity\Pays $country
+     * @param Country $country
      * @return Personne
      */
-    public function setCountry(\JDJ\WebBundle\Entity\Pays $country = null)
+    public function setCountry(Country $country = null)
     {
         $this->country = $country;
 
@@ -279,110 +280,11 @@ class Personne implements ResourceInterface
     /**
      * Get country
      *
-     * @return \JDJ\WebBundle\Entity\Pays 
+     * @return Country
      */
     public function getCountry()
     {
         return $this->country;
-    }
-
-    /**
-     * Add auteurJeux
-     *
-     * @param \JDJ\JeuBundle\Entity\Jeu $auteurJeux
-     * @return Personne
-     */
-    public function addAuteurJeux(\JDJ\JeuBundle\Entity\Jeu $auteurJeux)
-    {
-        $this->auteurJeux[] = $auteurJeux;
-
-        return $this;
-    }
-
-    /**
-     * Remove auteurJeux
-     *
-     * @param \JDJ\JeuBundle\Entity\Jeu $auteurJeux
-     */
-    public function removeAuteurJeux(\JDJ\JeuBundle\Entity\Jeu $auteurJeux)
-    {
-        $this->auteurJeux->removeElement($auteurJeux);
-    }
-
-    /**
-     * Get auteurJeux
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getAuteurJeux()
-    {
-        return $this->auteurJeux;
-    }
-
-    /**
-     * Add illustrateurJeux
-     *
-     * @param \JDJ\JeuBundle\Entity\Jeu $illustrateurJeux
-     * @return Personne
-     */
-    public function addIllustrateurJeux(\JDJ\JeuBundle\Entity\Jeu $illustrateurJeux)
-    {
-        $this->illustrateurJeux[] = $illustrateurJeux;
-
-        return $this;
-    }
-
-    /**
-     * Remove illustrateurJeux
-     *
-     * @param \JDJ\JeuBundle\Entity\Jeu $illustrateurJeux
-     */
-    public function removeIllustrateurJeux(\JDJ\JeuBundle\Entity\Jeu $illustrateurJeux)
-    {
-        $this->illustrateurJeux->removeElement($illustrateurJeux);
-    }
-
-    /**
-     * Get illustrateurJeux
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getIllustrateurJeux()
-    {
-        return $this->illustrateurJeux;
-    }
-
-    /**
-     * Add editeurJeux
-     *
-     * @param \JDJ\JeuBundle\Entity\Jeu $editeurJeux
-     * @return Personne
-     */
-    public function addEditeurJeux(\JDJ\JeuBundle\Entity\Jeu $editeurJeux)
-    {
-        $this->editeurJeux[] = $editeurJeux;
-
-        return $this;
-    }
-
-    /**
-     * Remove editeurJeux
-     *
-     * @param \JDJ\JeuBundle\Entity\Jeu $editeurJeux
-     */
-    public function removeEditeurJeux(\JDJ\JeuBundle\Entity\Jeu $editeurJeux)
-    {
-        $this->editeurJeux->removeElement($editeurJeux);
-    }
-
-    /**
-     * Get editeurJeux
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getEditeurJeux()
-    {
-        return $this->editeurJeux;
     }
 
     /**
@@ -399,7 +301,6 @@ class Personne implements ResourceInterface
      */
     public function setImages($images)
     {
-
         return $this;
     }
 
