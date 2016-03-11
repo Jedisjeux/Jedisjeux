@@ -29,8 +29,7 @@ class LoadImagesOfProductsCommand extends ContainerAwareCommand
     {
         $this
             ->setName('app:images-of-products:load')
-            ->setDescription('Loading images of products')
-        ;
+            ->setDescription('Loading images of products');
     }
 
     /**
@@ -65,8 +64,12 @@ EOM;
         $this->getDatabaseConnection()->executeQuery($query);
 
         $query = <<<EOM
-insert into sylius_product_variant_image (id, variant_id, path, description, is_main)
-  select      distinct old.img_id, variant.id, img_nom, ie.legende, ie.main
+insert into sylius_product_variant_image (id, variant_id, path, description, is_main, is_material)
+  select      distinct old.img_id, variant.id, img_nom, ie.legende, ie.main,
+                case
+                    when ie.ordre = 1 then 1
+                    else 0
+                end as is_material
   from        jedisjeux.jdj_images old
     inner join  jedisjeux.jdj_images_elements ie
       on ie.img_id = old.img_id

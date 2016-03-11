@@ -43,11 +43,19 @@ class ProductVariantImage extends AbstractImage
     protected $main;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean", name="is_material")
+     */
+    protected $material;
+
+    /**
      * ProductVariantImage constructor.
      */
     public function __construct()
     {
         $this->main = false;
+        $this->material = false;
     }
 
     /**
@@ -98,6 +106,7 @@ class ProductVariantImage extends AbstractImage
 
     /**
      * @param boolean $main
+     *
      * @return $this
      */
     public function setMain($main)
@@ -107,4 +116,23 @@ class ProductVariantImage extends AbstractImage
         return $this;
     }
 
+    /**
+     * @return boolean
+     */
+    public function isMaterial()
+    {
+        return $this->material;
+    }
+
+    /**
+     * @param boolean $material
+     *
+     * @return $this
+     */
+    public function setMaterial($material)
+    {
+        $this->material = $material;
+
+        return $this;
+    }
 }

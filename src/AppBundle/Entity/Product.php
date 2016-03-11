@@ -262,6 +262,14 @@ class Product extends BaseProduct
     }
 
     /**
+     * @return Image
+     */
+    public function getMaterialImage()
+    {
+        return $this->getMasterVariant()->getMaterialImage();
+    }
+
+    /**
      * @deprecated
      */
     public function getImageCouverture()
@@ -641,16 +649,6 @@ class Product extends BaseProduct
     public function getMechanisms()
     {
         return $this->getTaxons('mechanisms');
-    }
-
-    /**
-     * TODO add material image property
-     *
-     * @return null
-     */
-    public function getMaterialImage()
-    {
-        return null;
     }
 
     /**

@@ -22,7 +22,7 @@ use Sylius\Component\Core\Model\ProductVariant as BaseProductVariant;
 class ProductVariant extends BaseProductVariant
 {
     /**
-     * @var ArrayCollection
+     * @var ArrayCollection|ProductVariantImage[]
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\ProductVariantImage", mappedBy="variant")
      */
@@ -43,7 +43,21 @@ class ProductVariant extends BaseProductVariant
     }
 
     /**
-     * @return ArrayCollection
+     * @return Image
+     */
+    public function getMaterialImage()
+    {
+        foreach ($this->images as $image) {
+            if ($image->isMaterial()) {
+                return $image;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @return ArrayCollection|ProductVariantImage[]
      */
     public function getImages()
     {
@@ -51,7 +65,7 @@ class ProductVariant extends BaseProductVariant
     }
 
     /**
-     * @param ArrayCollection $images
+     * @param ArrayCollection|ProductVariantImage[] $images
      *
      * @return $this
      */

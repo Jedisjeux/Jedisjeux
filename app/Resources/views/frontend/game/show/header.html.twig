@@ -1,8 +1,17 @@
 {% from "JDJJeuBundle:Jeu:macros.html.twig" import joueurCount %}
 {% from "macros/games.html.twig" import duration %}
+{% from 'macros/items.html.twig' import blockquoteOne %}
 
 
 {% include "jeu/partial/status.html.twig" with {'jeu': jeu} only %}
+
+<div class="container">
+    {% if jeu.shortDescription %}
+        {{ blockquoteOne(jeu.shortDescription) }}
+    {% endif %}
+</div>
+
+
 <div class="img-box-5">
     <!-- Container -->
     <div class="container">
@@ -24,12 +33,6 @@
                 <div class="col-md-8">
                     <!-- Image Box #5 Content -->
                     <div class="img-box-5-content">
-
-                        <div class="row">
-                            {% if jeu.shortDescription %}
-                                {{ jeu.shortDescription|raw }}
-                            {% endif %}
-                        </div>
 
                         <div class="row">
                             <ul class="list-6">
