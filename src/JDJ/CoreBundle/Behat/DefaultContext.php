@@ -23,7 +23,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-abstract class DefaultContext extends RawMinkContext implements Context, KernelAwareContext
+abstract class DefaultContext extends \Sylius\Bundle\ResourceBundle\Behat\DefaultContext
 {
     /**
      * Faker.

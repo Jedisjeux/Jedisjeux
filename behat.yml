@@ -12,6 +12,15 @@ default:
             filters:
                 tags: "@homepage && ~@javascript"
 
+        taxonomies:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - AppBundle\Behat\UtilsContext
+                - AppBundle\Behat\UserContext
+                - AppBundle\Behat\TaxonomyContext
+            filters:
+                tags: "@taxonomies"
+
         jeu:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
