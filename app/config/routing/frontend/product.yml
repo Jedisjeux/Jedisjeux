@@ -16,6 +16,9 @@ sylius_product_index:
             repository:
                 method: createFilterPaginator
                 arguments: [$criteria, $sorting]
+            sortable: true
+            sorting:
+                createdAt: desc
             template: frontend/game/index.html.twig
 
 sylius_product_index_by_taxon:
@@ -27,8 +30,10 @@ sylius_product_index_by_taxon:
             paginate: 12
             template: frontend/game/indexByTaxon.html.twig
             sortable: true
+            sorting:
+                createdAt: desc
     requirements:
-        permalink: ".+"
+        permalink: "[^?]+"
 
 sylius_product_show:
     methods: [GET]

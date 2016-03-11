@@ -43,9 +43,9 @@
                         {% endif %}
 
                         Trier
-                        par {{ sorting('sylius_product_index_by_taxon', 'label.created_at'|trans, 'createdAt', 'desc', icon, currentOrder, {'permalink': taxon.slug}) }}
+                        par {{ sorting('sylius_product_index_by_taxon', 'label.created_at'|trans, 'createdAt', 'desc', icon, currentOrder, {'permalink': taxon.permalink}) }}
                         ,
-                        {{ sorting('sylius_product_index_by_taxon', 'label.name'|trans, 'name', 'asc', null, null, {'permalink': taxon.slug} ) }}
+                        {{ sorting('sylius_product_index_by_taxon', 'label.name'|trans, 'name', 'asc', null, null, {'permalink': taxon.permalink} ) }}
                     </div>
 
                     {% include "jeu/index/list-4.html.twig" with {'jeux': products} only %}
