@@ -163,7 +163,7 @@ class SearchController extends Controller
     private function findByQuery($query)
     {
         /** @var TransformedFinder $finder */
-        $finder = $this->container->get('fos_elastica.finder.search');
+        $finder = $this->container->get('fos_elastica.finder.jedisjeux');
 
         /** @var Pagerfanta $userPaginator */
         $paginator = $finder->findPaginated($query);

@@ -394,7 +394,7 @@ fos_elastica:
     clients:
         default: { host: %fos_elastica.host%, port: %fos_elastica.port% }
     indexes:
-        search:
+        jedisjeux:
           finder: ~
           settings:
               index:
@@ -427,13 +427,13 @@ fos_elastica:
                       listener:
                           immediate: ~
                       finder: ~
-              jeu:
+              product:
                   mappings:
                       name: ~
                       slug: { search_analyzer: custom_search_analyzer, index_analyzer: custom_index_analyzer, type: string }
                   persistence:
                       driver: orm
-                      model: JDJ\JeuBundle\Entity\Jeu
+                      model: AppBundle\Entity\Product
                       provider: ~
                       listener:
                           immediate: ~
@@ -450,24 +450,13 @@ fos_elastica:
                       listener:
                           immediate: ~
                       finder: ~
-              mechanism:
+              taxon:
                   mappings:
                       name: ~
                       slug: { search_analyzer: custom_search_analyzer, index_analyzer: custom_index_analyzer, type: string }
                   persistence:
                       driver: orm
-                      model: JDJ\JeuBundle\Entity\Mechanism
-                      provider: ~
-                      listener:
-                          immediate: ~
-                      finder: ~
-              theme:
-                  mappings:
-                      name: ~
-                      slug: { search_analyzer: custom_search_analyzer, index_analyzer: custom_index_analyzer, type: string }
-                  persistence:
-                      driver: orm
-                      model: JDJ\JeuBundle\Entity\Theme
+                      model: AppBundle\Entity\Taxon
                       provider: ~
                       listener:
                           immediate: ~
