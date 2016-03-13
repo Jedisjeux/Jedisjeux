@@ -4,8 +4,6 @@
 
 {% include "jeu/partial/status.html.twig" with {'jeu': jeu} only %}
 
-
-
 <div class="img-box-5">
     <!-- Container -->
     <div class="container">
@@ -36,67 +34,75 @@
                             </div>
                         </div>
 
+                        <div class="container">
+                            <div class="row">
+                                <ul class="list-unstyled">
+                                    {% if jeu.joueurMin or jeu.joueurMax %}
+                                        <li>
+                                            <p class="bg-color square-2 rounded-2">
+                                                <span class="fa fa-user white"></span>
+                                            </p>
+                                            <span class="game-attribute">
+                                                 {{ playerCount(jeu) }}
+                                            </span>
+                                        </li>
+                                    {% endif %}
 
-                        <div class="row">
-                            <ul class="list-unstyled">
-                                {% if jeu.joueurMin or jeu.joueurMax %}
-                                    <li>
-                                        <p class="bg-color square-2 rounded-2">
-                                            <span class="fa fa-user white"></span>
-                                        </p>
-                                        {{ playerCount(jeu) }}
-                                    </li>
-                                {% endif %}
+                                    {% if jeu.ageMin %}
+                                        <li>
+                                            <p class="bg-color square-2 rounded-2">
+                                                <span class="fa fa-child white"></span>
+                                            </p>
+                                            <span class="game-attribute">
+                                            à partir de {{ jeu.ageMin }} ans
+                                                </span>
+                                        </li>
+                                    {% endif %}
 
-                                {% if jeu.ageMin %}
-                                    <li>
-                                        <p class="bg-color square-2 rounded-2">
-                                            <span class="fa fa-child white"></span>
-                                        </p>
-                                        à partir de {{ jeu.ageMin }} ans</li>
-                                {% endif %}
+                                    {% if jeu.durationMin %}
+                                        <li>
+                                            <span class="fa fa-clock-o color"></span>
+                                            <span class="game-attribute">
+                                                {{ duration(jeu) }}
+                                            </span>
+                                        </li>
+                                    {% endif %}
 
-                                {% if jeu.durationMin %}
-                                    <li>
-                                        <span class="fa fa-clock-o color"></span>
-                                        {{ duration(jeu) }}
-                                    </li>
-                                {% endif %}
-                            </ul>
+                                    {% if jeu.mechanisms|length > 0 %}
+                                        <li>
+                                            <p class="bg-color square-2 rounded-2">
+                                                <span class="fa fa-cog white"></span>
+                                            </p>
+                                            <span class="game-attribute">
+                                                Mécanismes :
+                                                {% for key, mechanism in jeu.mechanisms %}{% if (key > 0) %},{% endif %}
+                                                    <a
+                                                    href="{{ path('sylius_product_index_by_taxon', { 'permalink': mechanism.permalink }) }}">{{ mechanism }}</a>{% endfor %}
+                                            </span>
+                                        </li>
+                                    {% endif %}
+
+                                    {% if jeu.themes|length > 0 %}
+                                        <li>
+                                            <p class="bg-color square-2 rounded-2">
+                                                <span class="fa fa-picture-o white"></span>
+                                            </p>
+                                            <span class="game-attribute">
+                                                Thèmes :
+                                                {% for key, theme in jeu.themes %}{% if (key > 0) %},{% endif %} <a
+                                                    href="{{ path('sylius_product_index_by_taxon', { 'permalink': theme.permalink }) }}">{{ theme }}</a>{% endfor %}
+                                            </span>
+                                        </li>
+                                    {% endif %}
+
+                                </ul>
+                            </div>
+
+                            {#TODO voir pour un render url#}
+                            {% if userGameAttribute is defined %}
+                                {% include "frontend/game/show/toolbar.html.twig" with {'jeu': jeu, 'userGameAttribute': userGameAttribute} only %}
+                            {% endif %}
                         </div>
-
-                        <div class="row">
-                            <ul class="list-unstyled">
-
-                                {% if jeu.mechanisms|length > 0 %}
-                                    <li>
-                                        <p class="bg-color square-2 rounded-2">
-                                            <span class="fa fa-cog white"></span>
-                                        </p>
-                                        Mécanismes
-                                        : {% for key, mechanism in jeu.mechanisms %}{% if (key > 0) %},{% endif %}
-                                            <a
-                                            href="{{ path('sylius_product_index_by_taxon', { 'permalink': mechanism.permalink }) }}">{{ mechanism }}</a>{% endfor %}
-                                    </li>
-                                {% endif %}
-
-                                {% if jeu.themes|length > 0 %}
-                                    <li>
-                                        <p class="bg-color square-2 rounded-2">
-                                            <span class="fa fa-picture-o white"></span>
-                                        </p>
-                                        Thèmes : {% for key, theme in jeu.themes %}{% if (key > 0) %},{% endif %} <a
-                                            href="{{ path('sylius_product_index_by_taxon', { 'permalink': theme.permalink }) }}">{{ theme }}</a>{% endfor %}
-                                    </li>
-                                {% endif %}
-
-                            </ul>
-                        </div>
-
-                        {#TODO voir pour un render url#}
-                        {% if userGameAttribute is defined %}
-                            {% include "frontend/game/show/toolbar.html.twig" with {'jeu': jeu, 'userGameAttribute': userGameAttribute} only %}
-                        {% endif %}
 
                     </div>
                 </div>
