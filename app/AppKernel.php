@@ -18,6 +18,8 @@ class AppKernel extends Kernel
             new Sylius\Bundle\ArchetypeBundle\SyliusArchetypeBundle(),
             new Sylius\Bundle\ProductBundle\SyliusProductBundle(),
             new Sylius\Bundle\AssociationBundle\SyliusAssociationBundle(),
+            new Sylius\Bundle\UserBundle\SyliusUserBundle(),
+            new Sylius\Bundle\MailerBundle\SyliusMailerBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new Sylius\Bundle\AttributeBundle\SyliusAttributeBundle(),
             new Sylius\Bundle\VariationBundle\SyliusVariationBundle(),
