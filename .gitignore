@@ -21,8 +21,8 @@
 !/web/uploads/img/.gitkeep
 /web/media/*
 /web/assets/bower_components/*
-/web/css/compiled/
 /web/js/
+/web/css/
 
 .idea
 *.DS_Store
