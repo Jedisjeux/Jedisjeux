@@ -8,12 +8,14 @@
 
 namespace JDJ\SearchBundle\Controller;
 
+use AppBundle\Entity\Product;
 use Elastica\Query\QueryString;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use JDJ\LudographieBundle\Entity\Personne;
 use JDJ\UserBundle\Entity\User;
 use Pagerfanta\Pagerfanta;
 use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -67,16 +69,25 @@ class SearchController extends Controller
         foreach ($paginator as $entity) {
             $result = array();
 
-            if ($entity instanceof ProductInterface) {
-                /** @var Jeu $jeu */
-                $jeu = $entity;
+            if ($entity instanceof Product) {
                 $result = array(
-                    'value' => $jeu->getName(),
-                    'label' => $jeu->getName(),
-                    'image' => (null === $jeu->getImageCouverture()) ? null : $this->get('liip_imagine.cache.manager')->getBrowserPath($jeu->getImageCouverture()->getWebPath(), 'thumbnail'),
-                    'href' => $this->generateUrl('jeu_show', array(
-                            'id' => $jeu->getId(),
-                            'slug' => $jeu->getSlug(),
+                    'value' => $entity->getName(),
+                    'label' => $entity->getName(),
+                    'image' => (null === $entity->getMainImage()) ? null : $this->get('liip_imagine.cache.manager')->getBrowserPath($entity->getMainImage()->getWebPath(), 'thumbnail'),
+                    'href' => $this->generateUrl('sylius_product_show', array(
+                            'slug' => $entity->getSlug(),
+                        )
+                    ),
+                );
+            }
+
+            if ($entity instanceof TaxonInterface) {
+                $result = array(
+                    'value' => $entity->getName(),
+                    'label' => $entity->getName(),
+                    'image' =>  "//ssl.gstatic.com/accounts/ui/avatar_2x.png",
+                    'href' => $this->generateUrl('sylius_product_index_by_taxon', array(
+                            'permalink' => $entity->getPermalink(),
                         )
                     ),
                 );
@@ -94,15 +105,13 @@ class SearchController extends Controller
             }
 
             if ($entity instanceof Personne) {
-                /** @var Personne $personne */
-                $personne = $entity;
                 $result = array(
-                    'value' => (string)$personne,
-                    'label' => (string)$personne,
-                    'image' => (null === $personne->getImage()) ? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : $this->get('liip_imagine.cache.manager')->getBrowserPath($personne->getImage()->getWebPath(), 'thumbnail'),
+                    'value' => (string)$entity,
+                    'label' => (string)$entity,
+                    'image' => (null === $entity->getImage()) ? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : $this->get('liip_imagine.cache.manager')->getBrowserPath($entity->getImage()->getWebPath(), 'thumbnail'),
                     'href' => $this->generateUrl('personne_show', array(
-                            'id' => $personne->getId(),
-                            'slug' => $personne->getSlug(),
+                            'id' => $entity->getId(),
+                            'slug' => $entity->getSlug(),
                         )
                     ),
                 );
@@ -180,19 +189,23 @@ class SearchController extends Controller
         $current = $paginator->getIterator()->current();
 
         if ($current instanceof ProductInterface) {
-            $jeu = $current;
-            return $this->redirect($this->generateUrl('jeu_show', array(
-                    'id' => $jeu->getId(),
-                    'slug' => $jeu->getSlug(),
+            return $this->redirect($this->generateUrl('sylius_product_show', array(
+                    'slug' => $current->getSlug(),
+                )
+            ));
+        }
+
+        if ($current instanceof TaxonInterface) {
+            return $this->redirect($this->generateUrl('sylius_product_index_by_taxon', array(
+                    'permalink' => $current->getPermalink(),
                 )
             ));
         }
 
         if ($current instanceof Personne) {
-            $personne = $current;
             return $this->redirect($this->generateUrl('personne_show', array(
-                    'id' => $personne->getId(),
-                    'slug' => $personne->getSlug(),
+                    'id' => $current->getId(),
+                    'slug' => $current->getSlug(),
                 )
             ));
         }
