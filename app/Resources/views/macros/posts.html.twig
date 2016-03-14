@@ -3,15 +3,15 @@
     {% from 'macros/users.html.twig' import avatar %}
     {% import 'macros/buttons.html.twig' as button %}
 
-    {% set customer = post.createdBy %}
-    {% set imagePath = avatar(customer) %}
+    {% set user = post.createdBy %}
+    {% set imagePath = avatar(user) %}
 
     {% set meta %}
         <!-- Date -->
         <a href="#"><i class="fa fa-calendar"></i> &nbsp; {{ post.createdAt|date('d/m/Y') }}</a>
         &nbsp;
         <!-- Author -->
-        <a href="#"><i class="fa fa-user"></i> &nbsp; {{ customer }}</a>
+        <a href="#"><i class="fa fa-user"></i> &nbsp; {{ user.customer }}</a>
         &nbsp;
         <a href="#">
             <i class="fa fa-thumbs-up"></i>
@@ -24,6 +24,6 @@
         </a>
     {% endset %}
 
-    {{ item.blogCommentItem(imagePath, customer.user.username, 'thumbnail', 'img-responsive img-round', null, null, meta, post.body) }}
+    {{ item.blogCommentItem(imagePath, user.username, 'thumbnail', 'img-responsive img-round', null, null, meta, post.body) }}
 
 {% endmacro %}

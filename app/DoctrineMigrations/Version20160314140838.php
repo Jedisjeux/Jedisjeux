@@ -19,6 +19,8 @@ class Version20160314140838 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE sylius_customer ADD code VARCHAR(255) DEFAULT NULL');
+        $this->addSql('update jdj_post set createdBy_id = null, updatedBy_id = null');
+        $this->addSql('update jdj_topic set createdBy_id = null, updatedBy_id = null');
         $this->addSql('ALTER TABLE jdj_post DROP FOREIGN KEY FK_3312CC5B3174800F');
         $this->addSql('ALTER TABLE jdj_post DROP FOREIGN KEY FK_3312CC5B63D8C20E');
         $this->addSql('ALTER TABLE jdj_post DROP FOREIGN KEY FK_3312CC5B65FF1AEC');
@@ -41,6 +43,8 @@ class Version20160314140838 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
+        $this->addSql('update jdj_post set createdBy_id = null, updatedBy_id = null');
+        $this->addSql('update jdj_topic set createdBy_id = null, updatedBy_id = null');
         $this->addSql('ALTER TABLE jdj_post DROP FOREIGN KEY FK_3312CC5B3174800F');
         $this->addSql('ALTER TABLE jdj_post DROP FOREIGN KEY FK_3312CC5B65FF1AEC');
         $this->addSql('ALTER TABLE jdj_post DROP FOREIGN KEY FK_3312CC5B63D8C20E');
