@@ -10,7 +10,9 @@
 {% block breadcrumb_content %}
     {{ parent() }}
     <a href="{{ path('app_topic_index') }}">Forum</a> /
-    <a href="{{ path('app_topic_index_by_taxon', { 'permalink': topic.mainTaxon.slug }) }}">{{ topic.mainTaxon }}</a> /
+    {% if topic.mainTaxon %}
+        <a href="{{ path('app_topic_index_by_taxon', { 'permalink': topic.mainTaxon.slug }) }}">{{ topic.mainTaxon }}</a> /
+    {% endif %}
     {{ topic }}
 {% endblock %}
 
@@ -29,7 +31,9 @@
 
         {% set topicRepliesCount = topic.posts|length %}
         <div class="block-heading-two">
-            <h3><span>Réponses</span> <small>({{ topicRepliesCount }})</small></h3>
+            <h3><span>Réponses</span>
+                <small>({{ topicRepliesCount }})</small>
+            </h3>
         </div>
 
         <div class="blog-comments">

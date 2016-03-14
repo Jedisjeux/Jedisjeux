@@ -64,6 +64,7 @@ class LoadUsersCommand extends ContainerAwareCommand
             $user->setCustomer($customer);
         }
 
+        $user->getCustomer()->setCode('user-'.$data['id']);
         $user->setEmail($data['email']);
         $user->setUsername($data['username']);
         $user->setUsernameCanonical($canonicalizer->canonicalize($user->getUsername()));

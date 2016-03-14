@@ -27,6 +27,13 @@ class Customer extends BaseCustomer
     private $avatar;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $code;
+
+    /**
      * @return Avatar
      */
     public function getAvatar()
@@ -42,6 +49,26 @@ class Customer extends BaseCustomer
     public function setAvatar($avatar)
     {
         $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param string $code
+     *
+     * @return $this
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
 
         return $this;
     }
