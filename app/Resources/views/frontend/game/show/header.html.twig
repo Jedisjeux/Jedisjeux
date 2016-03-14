@@ -39,59 +39,61 @@
                                 <ul class="list-unstyled">
                                     {% if jeu.joueurMin or jeu.joueurMax %}
                                         <li>
-                                            <p class="bg-color square-2 rounded-2">
+                                            <p class="pull-left bg-color square-2 rounded-2">
                                                 <span class="fa fa-user white"></span>
                                             </p>
-                                            <span class="game-attribute">
+                                            <p class="game-attribute">
                                                  {{ playerCount(jeu) }}
-                                            </span>
+                                            </p>
                                         </li>
                                     {% endif %}
 
                                     {% if jeu.ageMin %}
                                         <li>
-                                            <p class="bg-color square-2 rounded-2">
+                                            <p class="pull-left bg-color square-2 rounded-2">
                                                 <span class="fa fa-child white"></span>
                                             </p>
-                                            <span class="game-attribute">
-                                            à partir de {{ jeu.ageMin }} ans
-                                                </span>
+                                            <p class="game-attribute">
+                                                à partir de {{ jeu.ageMin }} ans
+                                            </p>
                                         </li>
                                     {% endif %}
 
                                     {% if jeu.durationMin %}
                                         <li>
-                                            <span class="fa fa-clock-o color"></span>
-                                            <span class="game-attribute">
+                                            <p class="pull-left bg-color square-2 rounded-2">
+                                                <span class="fa clock-o color"></span>
+                                            </p>
+                                            <p class="game-attribute">
                                                 {{ duration(jeu) }}
-                                            </span>
+                                            </p>
                                         </li>
                                     {% endif %}
 
                                     {% if jeu.mechanisms|length > 0 %}
                                         <li>
-                                            <p class="bg-color square-2 rounded-2">
+                                            <p class="pull-left bg-color square-2 rounded-2">
                                                 <span class="fa fa-cog white"></span>
                                             </p>
-                                            <span class="game-attribute">
+                                            <p class="game-attribute">
                                                 Mécanismes :
                                                 {% for key, mechanism in jeu.mechanisms %}{% if (key > 0) %},{% endif %}
                                                     <a
                                                     href="{{ path('sylius_product_index_by_taxon', { 'permalink': mechanism.permalink }) }}">{{ mechanism }}</a>{% endfor %}
-                                            </span>
+                                            </p>
                                         </li>
                                     {% endif %}
 
                                     {% if jeu.themes|length > 0 %}
                                         <li>
-                                            <p class="bg-color square-2 rounded-2">
+                                            <p class="pull-left bg-color square-2 rounded-2">
                                                 <span class="fa fa-picture-o white"></span>
                                             </p>
-                                            <span class="game-attribute">
+                                            <p class="game-attribute">
                                                 Thèmes :
                                                 {% for key, theme in jeu.themes %}{% if (key > 0) %},{% endif %} <a
                                                     href="{{ path('sylius_product_index_by_taxon', { 'permalink': theme.permalink }) }}">{{ theme }}</a>{% endfor %}
-                                            </span>
+                                            </p>
                                         </li>
                                     {% endif %}
 
