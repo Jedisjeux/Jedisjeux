@@ -12,31 +12,35 @@
 
     <p id="profile-name" class="profile-name-card"></p>
 
-    <form action="{{ path("fos_user_security_check") }}"
+    <form action="{{ path("sylius_user_security_check") }}"
           novalidate
           class="form-signin"
           method="post">
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
 
-        <input type="text"
-               id="username"
-               name="_username"
-               value="{{ last_username }}"
-               class="form-control"
-               placeholder="{{ 'security.login.username'|trans }}" autofocus
-               required="required"/>
+        <div class="row">
+            <div class="col-md-12">
+                {{ form_errors(form) }}
+            </div>
+        </div>
 
-        <input type="password"
-               id="password"
-               name="_password"
-               class="form-control"
-               placeholder="{{ 'security.login.password'|trans }}"
-               required="required"/>
+        <div class="row">
+            <div class="col-md-12">
+                {{ form_widget(form._username, {attr: {'placeholder': 'sylius.form.user.email'|trans}}) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
 
-        <a href="{{ path('fos_user_resetting_request') }}" class="forgot-password">
-            Mot de passe oublié ?
-        </a>
-
+                {{ form_widget(form._password, {attr: {'placeholder': 'sylius.form.user.password.label'|trans}}) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p class="security-links">
+                    <a class="forgot-password" href="{{ path('sylius_user_request_password_reset_token') }}">Mot de passe oublié ?</a>
+                </p>
+            </div>
+        </div>
 
         <div id="remember" class="checkbox">
             <label>
@@ -44,6 +48,8 @@
                        value="on"> {{ 'security.login.remember_me'|trans }}
             </label>
         </div>
+
+        {{ form_rest(form) }}
 
         <button class="btn btn-lg btn-primary btn-block btn-signin"
                 type="submit"
@@ -57,7 +63,7 @@
     <p class="text-center">ou</p>
 
     <!-- /form -->
-    <a class="btn btn-lg btn-block btn-primary" href="{{ path('fos_user_registration_register') }}">
+    <a class="btn btn-lg btn-block btn-primary" href="{{ path('sylius_user_registration') }}">
         Créer un compte
     </a>
 {% endblock card_container_content %}
