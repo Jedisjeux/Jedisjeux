@@ -9,11 +9,9 @@
 namespace AppBundle\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
-use FOS\UserBundle\Model\UserManagerInterface;
-use JDJ\UserBundle\Entity\User;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -21,10 +19,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
  */
-class LoadUsersCommand extends LoadCommand
+class LoadUsersCommand extends ContainerAwareCommand
 {
-    protected $writeEntityInOutput = false;
-
     /**
      * @inheritdoc
      */
@@ -40,16 +36,14 @@ class LoadUsersCommand extends LoadCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->output = $output;
-        $output->writeln("<comment>Load users</comment>");
-
-        //parent::execute($input, $output);
+        $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
 
         foreach ($this->getUsers() as $data) {
+            $output->writeln(sprintf("Loading <info>%s</info> user", $data['username']));
             $user = $this->createOrReplaceUser($data);
             $this->getEntityManager()->persist($user);
             $this->getEntityManager()->flush();
-            $this->getEntityManager()->detach($user);
+            $this->getEntityManager()->clear($user);
         }
     }
 
@@ -74,6 +68,7 @@ class LoadUsersCommand extends LoadCommand
         $user->setEmail($data['email']);
         $user->setUsernameCanonical($canonicalizer->canonicalize($user->getUsername()));
         $user->setEmailCanonical($canonicalizer->canonicalize($user->getEmail()));
+
         if (null === $user->getId()) {
             $user->setPlainPassword(md5(uniqid($user->getUsername(), true)));
             $this->getContainer()->get('sylius.user.password_updater')->updatePassword($user);
@@ -95,15 +90,10 @@ class LoadUsersCommand extends LoadCommand
         return $user;
     }
 
-    protected function getUsers()
-    {
-        return $this->getRows();
-    }
-
     /**
      * @inheritdoc
      */
-    public function getRows()
+    public function getUsers()
     {
         // TODO find field for enabled property
         $query = <<<EOM
@@ -121,53 +111,6 @@ EOM;
         $rows = $this->getDatabaseConnection()->fetchAll($query);
 
         return $rows;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function postSetData($entity)
-    {
-        $roles = array('ROLE_USER');
-        switch($entity->getUsername()) {
-            case 'loic_425':
-                $roles[] = 'ROLE_ADMIN';
-                break;
-            case 'jedisjeux':
-                $roles[] = 'ROLE_ADMIN';
-                break;
-        }
-
-        if (null === $entity->getId()) {
-            $entity
-                ->setPlainPassword(md5(uniqid($entity->getUsername(), true)));
-        }
-
-        $this->getManager()->updateCanonicalFields($entity);
-        $this->getManager()->updatePassword($entity);
-    }
-
-    public function createEntityNewInstance()
-    {
-        return $this->getManager()->createUser();
-    }
-
-    public function getTableName()
-    {
-        return 'fos_user';
-    }
-
-    public function getRepository()
-    {
-        return $this->getEntityManager()->getRepository('JDJUserBundle:User');
-    }
-
-    /**
-     * @return UserManagerInterface
-     */
-    public function getManager()
-    {
-        return $this->getContainer()->get('fos_user.user_manager');
     }
 
     /**
@@ -200,5 +143,13 @@ EOM;
     protected function getUserRepository()
     {
         return $this->getContainer()->get('sylius.repository.user');
+    }
+
+    /**
+     * @return \Doctrine\DBAL\Connection
+     */
+    protected function getDatabaseConnection()
+    {
+        return $this->getContainer()->get('database_connection');
     }
 }
