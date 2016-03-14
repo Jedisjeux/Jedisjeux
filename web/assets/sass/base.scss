@@ -34,6 +34,8 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 @import "modules/gamesheet";
 
 body {
+  font-size: 14px;
+
   &.sf-toolbar {
     margin-top: 70px;
   }
