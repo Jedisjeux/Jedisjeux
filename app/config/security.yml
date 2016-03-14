@@ -44,11 +44,11 @@ security:
                 login_path: /login
                 check_path: /login_check
                 failure_path: /login
-                default_target_path: /admin/dashboard
+                default_target_path: /
                 use_forward:  false
                 use_referer: true
             logout:
-                target: /login
+                target: /
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
