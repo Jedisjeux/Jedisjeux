@@ -73,9 +73,9 @@ EOM;
         $this->getDatabaseConnection()->executeQuery($query);
 
         $query = <<<EOM
-update   fos_user user
-inner join jdj_customer_avatar avatar on avatar.id = user.id
-    set user.avatar_id = avatar.id
+update   sylius_customer customer
+inner join jdj_customer_avatar avatar on customer.code = concat('user-', avatar.id)
+    set customer.avatar_id = avatar.id
 EOM;
 
         $this->getDatabaseConnection()->executeQuery($query);
