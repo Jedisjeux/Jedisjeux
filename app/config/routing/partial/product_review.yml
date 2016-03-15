@@ -1,0 +1,16 @@
+sylius_partial_product_review:
+    resource: |
+        alias: sylius.product_review
+        section: partial
+        templates: :partial/product_review
+        only: [index]
+    type: sylius.resource
+
+sylius_partial_product_review_index:
+    methods: [GET]
+    path: /product-reviews/
+    defaults:
+        _controller: sylius.controller.product_review:indexAction
+        _sylius:
+            template: :partial/product_review/_sidebar_list.html.twig
+            paginate: 5

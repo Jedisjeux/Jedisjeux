@@ -17,6 +17,10 @@ admin:
     resource: "routing/admin.yml"
     prefix: /admin
 
+partial:
+    resource: "routing/partial.yml"
+    prefix: /_partial
+
 sylius_taxonomy:
     resource: @SyliusTaxonomyBundle/Resources/config/routing.yml
     prefix: /taxonomy
