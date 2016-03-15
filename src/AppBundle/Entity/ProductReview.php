@@ -19,5 +19,12 @@ use Sylius\Component\Review\Model\Review;
  */
 class ProductReview extends Review
 {
-
+    /**
+     * ProductReview constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->title = '';
+    }
 }
