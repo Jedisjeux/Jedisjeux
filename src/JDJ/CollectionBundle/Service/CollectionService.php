@@ -9,6 +9,7 @@ use JDJ\CollectionBundle\Entity\Collection;
 use JDJ\CollectionBundle\Entity\ListElement;
 use JDJ\UserBundle\Entity\User;
 use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\User\Model\UserInterface;
 
 class CollectionService
 {
@@ -108,10 +109,10 @@ class CollectionService
     /**
      * This function returns the list of the user collections
      *
-     * @param User $user
+     * @param UserInterface $user
      * @return mixed
      */
-    public function getUserCollection(User $user)
+    public function getUserCollection(UserInterface $user)
     {
         $tabCollection = $this->repo->findBy(
             array(

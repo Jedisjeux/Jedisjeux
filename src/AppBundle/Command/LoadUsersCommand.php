@@ -8,8 +8,10 @@
 
 namespace AppBundle\Command;
 
-use FOS\UserBundle\Model\UserManagerInterface;
-use JDJ\UserBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -17,10 +19,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
  */
-class LoadUsersCommand extends LoadCommand
+class LoadUsersCommand extends ContainerAwareCommand
 {
-    protected $writeEntityInOutput = false;
-
     /**
      * @inheritdoc
      */
@@ -36,16 +36,65 @@ class LoadUsersCommand extends LoadCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->output = $output;
-        $output->writeln("<comment>Load users</comment>");
+        $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
 
-        parent::execute($input, $output);
+        foreach ($this->getUsers() as $data) {
+            $output->writeln(sprintf("Loading <info>%s</info> user", $data['username']));
+            $user = $this->createOrReplaceUser($data);
+            $this->getEntityManager()->persist($user);
+            $this->getEntityManager()->flush();
+            $this->getEntityManager()->clear();
+        }
+    }
+
+
+    protected function createOrReplaceUser($data)
+    {
+        $canonicalizer = $this->getContainer()->get('sylius.user.canonicalizer');
+
+        /*
+         * @var UserInterface
+         * @var $customer CustomerInterface
+         */
+        $user = $this->getUserRepository()->findOneByEmail($data['email']);
+
+        if (null === $user) {
+            $user = $this->getUserFactory()->createNew();
+            $customer = $this->getCustomerFactory()->createNew();
+            $user->setCustomer($customer);
+        }
+
+        $user->getCustomer()->setCode('user-'.$data['id']);
+        $user->setEmail($data['email']);
+        $user->setUsername($data['username']);
+        $user->setUsernameCanonical($canonicalizer->canonicalize($user->getUsername()));
+        $user->setEmailCanonical($canonicalizer->canonicalize($user->getEmail()));
+
+        if (null === $user->getId()) {
+            $user->setPlainPassword(md5(uniqid($user->getUsername(), true)));
+            $this->getContainer()->get('sylius.user.password_updater')->updatePassword($user);
+        }
+
+        $roles = array('ROLE_USER');
+        switch($user->getUsername()) {
+            case 'loic_425':
+                $roles[] = 'ROLE_ADMIN';
+                break;
+            case 'jedisjeux':
+                $roles[] = 'ROLE_ADMIN';
+                break;
+        }
+
+        $user->setRoles($roles);
+        $user->setEnabled(true);
+
+        return $user;
     }
 
     /**
      * @inheritdoc
      */
-    public function getRows()
+    public function getUsers()
     {
         // TODO find field for enabled property
         $query = <<<EOM
@@ -66,49 +115,42 @@ EOM;
     }
 
     /**
-     * @inheritdoc
+     * @return EntityManagerInterface
      */
-    public function postSetData($entity)
+    protected function getEntityManager()
     {
-        $roles = array('ROLE_USER');
-        switch($entity->getUsername()) {
-            case 'loic_425':
-                $roles[] = 'ROLE_ADMIN';
-                break;
-            case 'jedisjeux':
-                $roles[] = 'ROLE_ADMIN';
-                break;
-        }
-
-        if (null === $entity->getId()) {
-            $entity
-                ->setPlainPassword(md5(uniqid($entity->getUsername(), true)));
-        }
-
-        $this->getManager()->updateCanonicalFields($entity);
-        $this->getManager()->updatePassword($entity);
-    }
-
-    public function createEntityNewInstance()
-    {
-        return $this->getManager()->createUser();
-    }
-
-    public function getTableName()
-    {
-        return 'fos_user';
-    }
-
-    public function getRepository()
-    {
-        return $this->getEntityManager()->getRepository('JDJUserBundle:User');
+        return $this->getContainer()->get('doctrine.orm.entity_manager');
     }
 
     /**
-     * @return UserManagerInterface
+     * @return FactoryInterface
      */
-    public function getManager()
+    protected function getUserFactory()
     {
-        return $this->getContainer()->get('fos_user.user_manager');
+        return $this->getContainer()->get('sylius.factory.user');
+    }
+
+    /**
+     * @return FactoryInterface
+     */
+    protected function getCustomerFactory()
+    {
+        return $this->getContainer()->get('sylius.factory.customer');
+    }
+
+    /**
+     * @return UserRepositoryInterface
+     */
+    protected function getUserRepository()
+    {
+        return $this->getContainer()->get('sylius.repository.user');
+    }
+
+    /**
+     * @return \Doctrine\DBAL\Connection
+     */
+    protected function getDatabaseConnection()
+    {
+        return $this->getContainer()->get('database_connection');
     }
 }

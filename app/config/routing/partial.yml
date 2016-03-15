@@ -1,0 +1,2 @@
+app_partial:
+    resource: 'partial/product_review.yml'

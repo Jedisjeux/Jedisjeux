@@ -83,7 +83,7 @@ class CollectionController extends Controller
      *
      * @Route("/{jeu}/{user}/create", name="create_collection", options={"expose"=true})
      * @ParamConverter("jeu", class="AppBundle:Product")
-     * @ParamConverter("user", class="JDJUserBundle:User")
+     * @ParamConverter("user", class="SyliusUserBundle:User")
      * @Method({"POST"})
      */
     public function createAction(ProductInterface $jeu, User $user)
@@ -161,7 +161,7 @@ class CollectionController extends Controller
      * returns the user lists
      *
      * @Route("/{user}/user-list", name="user_list", options={"expose"=true})
-     * @ParamConverter("user", class="JDJUserBundle:User")
+     * @ParamConverter("user", class="SyliusUserBundle:User")
      * @Method({"GET"})
      */
     public function userListAction(User $user)

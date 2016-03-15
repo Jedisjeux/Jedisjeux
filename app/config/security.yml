@@ -1,6 +1,10 @@
 security:
+    providers:
+        sylius_user_provider:
+            id: sylius.user_provider.name_or_email
     encoders:
-        FOS\UserBundle\Model\UserInterface: sha512
+        Sylius\Component\User\Model\UserInterface: sha512
+#        FOS\UserBundle\Model\UserInterface: sha512
 
     role_hierarchy:
         # Jedisjeux Team
@@ -30,28 +34,21 @@ security:
 
         # Admin
         ROLE_ADMIN:              ROLE_ADMIN_WORKFLOW, ROLE_MODERATOR, ROLE_OFFICE
-        
-
-    providers:
-        fos_userbundle:
-            id: fos_user.user_provider.username_email
 
     firewalls:
         main:
+            anonymous:    true
             pattern: ^/
             form_login:
-                provider: fos_userbundle
-                remember_me: true
+                provider: sylius_user_provider
+                login_path: /login
+                check_path: /login_check
+                failure_path: /login
+                default_target_path: /
+                use_forward:  false
                 use_referer: true
-                csrf_provider: form.csrf_provider
-            logout:       true
-            anonymous:    true
-            remember_me:
-                key:      "%secret%"
-                lifetime: 31536000
-                path:     /
-                domain:   ~
-                user_provider: fos_userbundle
+            logout:
+                target: /
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
@@ -68,3 +65,5 @@ security:
         - { path: ^/user-review/\d+/like, role: ROLE_USER }
         #JediZone
         - { path: ^/jedizone/, role: ROLE_WORKFLOW }
+
+        - { path: ^/_partial/, roles: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }

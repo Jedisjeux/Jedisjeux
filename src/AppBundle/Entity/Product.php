@@ -13,6 +13,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JDJ\CoreBundle\Entity\Image;
 use Sylius\Component\Product\Model\Product as BaseProduct;
+use Sylius\Component\Review\Model\ReviewableInterface;
+use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
@@ -21,7 +23,7 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
  * @ORM\Entity
  * @ORM\Table(name="sylius_product")
  */
-class Product extends BaseProduct
+class Product extends BaseProduct implements ReviewableInterface
 {
     /**
      * status constants
@@ -170,6 +172,18 @@ class Product extends BaseProduct
     protected $userGameAttributes;
 
     /**
+     * @var ArrayCollection
+     */
+    protected $reviews;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(type="float")
+     */
+    protected $averageRating = 0;
+
+    /**
      * Product constructor.
      */
     public function __construct()
@@ -185,6 +199,7 @@ class Product extends BaseProduct
         $this->taxons = new ArrayCollection();
         $this->durationByPlayer = false;
         $this->status = self::WRITING;
+        $this->reviews = new ArrayCollection();
     }
 
     /**
@@ -670,5 +685,71 @@ class Product extends BaseProduct
     public function __toString()
     {
         return $this->getName();
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getReviews()
+    {
+        return $this->reviews;
+    }
+
+    /**
+     * @param ArrayCollection $reviews
+     *
+     * @return $this
+     */
+    public function setReviews($reviews)
+    {
+        $this->reviews = $reviews;
+
+        return $this;
+    }
+
+    /**
+     * @param ReviewInterface $review
+     *
+     * @return $this
+     */
+    public function addReview(ReviewInterface $review)
+    {
+        if (!$this->reviews->contains($review)) {
+            $this->reviews->add($review);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param ReviewInterface $review
+     *
+     * @return $this
+     */
+    public function removeReview(ReviewInterface $review)
+    {
+        $this->reviews->remove($review);
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getAverageRating()
+    {
+        return $this->averageRating;
+    }
+
+    /**
+     * @param float $averageRating
+     *
+     * @return $this
+     */
+    public function setAverageRating($averageRating)
+    {
+        $this->averageRating = $averageRating;
+
+        return $this;
     }
 }

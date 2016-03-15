@@ -59,12 +59,12 @@ class LoadAvatarsOfUsersCommand extends ContainerAwareCommand
         $this->manager = $manager;
 
         $query = <<<EOM
-insert into jdj_avatar (id, path)
+insert into jdj_customer_avatar (id, path)
 select      distinct old.user_id, user_avatar
 from        jedisjeux.phpbb3_users old
 where not exists (
     select 0
-    from   jdj_avatar i
+    from   jdj_customer_avatar i
     where  i.id = old.user_id
 )
 and old.user_avatar <> ''
@@ -74,7 +74,7 @@ EOM;
 
         $query = <<<EOM
 update   fos_user user
-inner join jdj_avatar avatar on avatar.id = user.id
+inner join jdj_customer_avatar avatar on avatar.id = user.id
     set user.avatar_id = avatar.id
 EOM;
 

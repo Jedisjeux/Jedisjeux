@@ -70,6 +70,23 @@ sylius_content:
                 form:
                     choice: Sylius\Bundle\ContentBundle\Form\Type\StaticContentChoiceType
 
+sylius_review:
+    resources:
+        product:
+            subject: AppBundle\Entity\Product
+            reviewer:
+                classes:
+                    model: AppBundle\Entity\Customer
+            review:
+                classes:
+                    model: AppBundle\Entity\ProductReview
+
+sylius_user:
+    resources:
+        customer:
+            classes:
+                model: AppBundle\Entity\Customer
+
 sylius_resource:
     resources:
         app.article_content:
@@ -123,3 +140,6 @@ sylius_resource:
         app.product_variant_image:
             classes:
                 model: AppBundle\Entity\ProductVariantImage
+        app.avatar:
+            classes:
+                model: AppBundle\Entity\Avatar

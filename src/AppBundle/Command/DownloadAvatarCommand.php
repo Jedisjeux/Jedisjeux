@@ -8,7 +8,9 @@
 
 namespace AppBundle\Command;
 
-use JDJ\UserBundle\Entity\Avatar;
+use AppBundle\Entity\AbstractImage;
+use AppBundle\Entity\Avatar;
+use Doctrine\ORM\EntityRepository;
 use JDJ\UserBundle\Service\AvatarImportService;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -29,25 +31,44 @@ class DownloadAvatarCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        /** @var AvatarImportService $avatarImportService */
-        $avatarImportService = $this->getContainer()->get('app.service.avatar.import');
+        $output->writeln("<comment>" . $this->getDescription() . "</comment>");
 
-        $avatars = $avatarImportService
-            ->getAvatars();
+        /** @var EntityRepository $repository */
+        $repository = $this->getContainer()->get('app.repository.avatar');
+
+        $avatars = $repository
+            ->findAll();
 
         /** @var Avatar $avatar */
         foreach ($avatars as $avatar) {
 
             if (!file_exists($avatar->getAbsolutePath())) {
-                $output->writeln("Downloading avatar <info>".$avatarImportService->getAvatarOriginalPath($avatar)."</info>");
+                $output->writeln("Downloading avatar <info>".$this->getAvatarOriginalPath($avatar)."</info>");
 
                 try {
-                    $avatarImportService
+                    $this
                         ->downloadAvatar($avatar);
                 } catch(\Exception $e) {
-                    $output->writeln("<error>Downloading failed</error>");
+                    $output->writeln(sprintf("<error>%s</error>", $e->getMessage()));
                 }
             }
         }
+    }
+
+    /**
+     * @param Avatar $avatar
+     */
+    public function downloadAvatar(Avatar $avatar)
+    {
+        file_put_contents($avatar->getAbsolutePath(), file_get_contents($this->getAvatarOriginalPath($avatar)));
+    }
+
+    /**
+     * @param Avatar $avatar
+     * @return string
+     */
+    public function getAvatarOriginalPath(Avatar $avatar)
+    {
+        return "http://www.jedisjeux.net/phpbb3/download/file.php?avatar=".$avatar->getPath();
     }
 } 

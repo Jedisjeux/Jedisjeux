@@ -5,7 +5,7 @@ imports:
     - { resource: sylius.yml }
 
 parameters:
-    knp.doctrine_behaviors.blameable_subscriber.user_entity: JDJ\UserBundle\Entity\User
+    knp.doctrine_behaviors.blameable_subscriber.user_entity: Sylius\Component\User\Model\User
     locale: fr
     sylius.locale: "%locale%"
 
