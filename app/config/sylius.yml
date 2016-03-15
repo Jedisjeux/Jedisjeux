@@ -70,6 +70,17 @@ sylius_content:
                 form:
                     choice: Sylius\Bundle\ContentBundle\Form\Type\StaticContentChoiceType
 
+sylius_review:
+    resources:
+        product:
+            subject: AppBundle\Entity\Product
+            reviewer:
+                classes:
+                    model: AppBundle\Entity\Customer
+            review:
+                classes:
+                    model: AppBundle\Entity\ProductReview
+
 sylius_user:
     resources:
         customer:

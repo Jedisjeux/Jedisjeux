@@ -169,6 +169,8 @@ class Product extends BaseProduct
      */
     protected $userGameAttributes;
 
+    protected $reviews;
+
     /**
      * Product constructor.
      */
@@ -185,6 +187,7 @@ class Product extends BaseProduct
         $this->taxons = new ArrayCollection();
         $this->durationByPlayer = false;
         $this->status = self::WRITING;
+        $this->reviews = new ArrayCollection();
     }
 
     /**
@@ -670,5 +673,25 @@ class Product extends BaseProduct
     public function __toString()
     {
         return $this->getName();
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getReviews()
+    {
+        return $this->reviews;
+    }
+
+    /**
+     * @param ArrayCollection $reviews
+     *
+     * @return $this
+     */
+    public function setReviews($reviews)
+    {
+        $this->reviews = $reviews;
+
+        return $this;
     }
 }

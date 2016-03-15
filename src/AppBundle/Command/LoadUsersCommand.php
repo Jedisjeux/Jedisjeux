@@ -43,7 +43,7 @@ class LoadUsersCommand extends ContainerAwareCommand
             $user = $this->createOrReplaceUser($data);
             $this->getEntityManager()->persist($user);
             $this->getEntityManager()->flush();
-            $this->getEntityManager()->clear($user);
+            $this->getEntityManager()->clear();
         }
     }
 
