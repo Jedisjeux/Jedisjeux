@@ -14,6 +14,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -73,6 +74,9 @@ class LoadReviewsOfProductsCommand extends ContainerAwareCommand
         $productReview->setReviewSubject($product);
         $productReview->setRating($data['rating']);
         $productReview->setComment($data['comment']);
+        $productReview->setStatus(ReviewInterface::STATUS_ACCEPTED);
+        $averageRatingCalculator = $this->getContainer()->get('sylius.review.calculator.average_rating');
+        $product->setAverageRating($averageRatingCalculator->calculate($product));
 
         return $productReview;
     }
