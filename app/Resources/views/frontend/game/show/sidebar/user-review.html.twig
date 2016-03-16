@@ -16,7 +16,7 @@
                     <ul>
                         {{ render(url('sylius_partial_product_review_index', {
                             'criteria': {
-                                'game': jeu.id
+                                'reviewSubject': jeu.id
                             },
                             'sorting': {
                                 'createdAt': 'asc'
@@ -29,9 +29,9 @@
                 <!-- Recent posts -->
                 <div class="tab-pane fade" id="recent">
                     <ul>
-                        {{ render(url('user_review_index', {
+                        {{ render(url('sylius_partial_product_review_index', {
                             'criteria': {
-                                'game': jeu.id
+                                'reviewSubject': jeu.id
                             },
                             'sorting': {
                                 'createdAt': 'desc'
