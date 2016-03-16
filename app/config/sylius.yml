@@ -80,6 +80,7 @@ sylius_review:
             review:
                 classes:
                     model: AppBundle\Entity\ProductReview
+                    repository: AppBundle\Repository\ProductReviewRepository
 
 sylius_user:
     resources:

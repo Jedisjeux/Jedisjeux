@@ -30,12 +30,13 @@
 
             {{ render(url('sylius_partial_product_review_index', {
                 'criteria': {
-                    'reviewSubject': jeu.id
+                    'reviewSubject': jeu.id,
+                    'hasComment': 1
                 },
                 'sorting': {
                     'createdAt': 'desc'
                 },
-                'maxPerPage': 5,
+                'paginate': 10,
                 'template': 'partial/product_review/_indexByGame.html.twig'
             })) }}
         </div>

@@ -6,7 +6,7 @@ sylius_partial_product_review_index:
         _sylius:
             criteria: $criteria
             template: $template
-            paginate: 5
+            paginate: $paginate
             sortable: true
             sorting: $sorting
     requirements:
