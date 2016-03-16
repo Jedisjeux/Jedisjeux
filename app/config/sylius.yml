@@ -80,7 +80,6 @@ sylius_review:
             review:
                 classes:
                     model: AppBundle\Entity\ProductReview
-                    controller: AppBundle\Controller\ProductReviewController
 
 sylius_user:
     resources:
