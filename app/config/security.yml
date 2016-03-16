@@ -66,4 +66,5 @@ security:
         #JediZone
         - { path: ^/jedizone/, role: ROLE_WORKFLOW }
 
-        - { path: ^/_partial/, roles: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }
+        - { path: ^/_partial, roles: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }
+        - { path: ^/_partial, roles: ROLE_NO_ACCESS }
