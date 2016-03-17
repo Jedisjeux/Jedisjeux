@@ -419,10 +419,9 @@ fos_elastica:
               user:
                   mappings:
                       username: { search_analyzer: custom_search_analyzer, index_analyzer: custom_index_analyzer, type: string }
-                      email: ~
                   persistence:
                       driver: orm
-                      model: JDJ\UserBundle\Entity\User
+                      model: %sylius.model.user.class%
                       provider: ~
                       listener:
                           immediate: ~
@@ -433,7 +432,7 @@ fos_elastica:
                       slug: { search_analyzer: custom_search_analyzer, index_analyzer: custom_index_analyzer, type: string }
                   persistence:
                       driver: orm
-                      model: AppBundle\Entity\Product
+                      model: %sylius.model.product.class%
                       provider: ~
                       listener:
                           immediate: ~

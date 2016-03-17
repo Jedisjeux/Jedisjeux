@@ -59,3 +59,4 @@ end
 after 'deploy:updated', 'symfony:assets:install'
 after 'deploy:updated', 'symfony:assetic:dump'
 after 'deploy:updated', 'deploy:migrate'
+after 'deploy:updated', 'fos:elastica:populate'

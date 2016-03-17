@@ -8,6 +8,7 @@
 
 namespace JDJ\SearchBundle\Controller;
 
+use AppBundle\Entity\Customer;
 use AppBundle\Entity\Product;
 use Elastica\Query\QueryString;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
@@ -16,6 +17,8 @@ use JDJ\UserBundle\Entity\User;
 use Pagerfanta\Pagerfanta;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -93,13 +96,11 @@ class SearchController extends Controller
                 );
             }
 
-            if ($entity instanceof User) {
-                /** @var User $user */
-                $user = $entity;
+            if ($entity instanceof UserInterface) {
                 $result = array(
-                    'value' => $user->getUsername(),
-                    'label' => $user->getUsername(),
-                    'image' => (null === $user->getAvatar()) ? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : $this->get('liip_imagine.cache.manager')->getBrowserPath($user->getAvatar()->getWebPath(), 'thumbnail'),
+                    'value' => $entity->getUsername(),
+                    'label' => $entity->getUsername(),
+                    'image' => (null === $entity->getCustomer()->getAvatar()) ? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : $this->get('liip_imagine.cache.manager')->getBrowserPath($entity->getCustomer()->getAvatar()->getWebPath(), 'thumbnail'),
                     'href' => "#",
                 );
             }
