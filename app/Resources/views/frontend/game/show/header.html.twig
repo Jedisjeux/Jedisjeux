@@ -97,6 +97,18 @@
                                         </li>
                                     {% endif %}
 
+                                    {% if jeu.releasedAt is not null %}
+                                        <li>
+                                            <p class="pull-left bg-color square-2 rounded-2">
+                                                <span class="fa fa-calendar white"></span>
+                                            </p>
+                                            <p class="game-attribute">
+                                                sortie le {{ jeu.releasedAt|localizeddate('long', 'none') }}
+                                            </p>
+
+                                        </li>
+                                    {% endif %}
+
                                 </ul>
                             </div>
 

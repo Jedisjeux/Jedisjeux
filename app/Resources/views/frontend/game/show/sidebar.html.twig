@@ -47,12 +47,6 @@
                             href="{{ path('personne_show', { 'id': personne.id, 'slug': personne.slug }) }}">{{ personne }}</a>{% endfor %}
                     </li>
                 {% endif %}
-
-                {% if jeu.releasedAt is not null %}
-                    <li>
-                        sortie le {{ jeu.releasedAt|localizeddate('long', 'none') }}
-                    </li>
-                {% endif %}
             </ul>
 
         </div>
