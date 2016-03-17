@@ -306,6 +306,24 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
+     * @return \DateTime|null
+     */
+    public function getReleasedAt()
+    {
+        return $this->getMasterVariant()->getReleasedAt();
+    }
+
+    /**
+     * @param \DateTime $releasedAt
+     *
+     * @return $this
+     */
+    public function setReleasedAt($releasedAt)
+    {
+        return $this->getMasterVariant()->setReleasedAt($releasedAt);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getTaxons($taxonomy = null)

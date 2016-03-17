@@ -61,6 +61,7 @@ class LoadProductsCommand extends ContainerAwareCommand
         $data['materiel'] = !empty($data['materiel']) ? trim($data['materiel']) : null;
         $data['createdAt'] = \DateTime::createFromFormat('Y-m-d H:i:s', $data['createdAt']);
         $data['updatedAt'] = \DateTime::createFromFormat('Y-m-d H:i:s', $data['updatedAt']);
+        $data['releasedAt'] = $data['releasedAt'] ? \DateTime::createFromFormat('Y-m-d', $data['releasedAt']) : null;
         switch ($data['status']) {
             case 0 :
                 $data['status'] = Product::WRITING;
@@ -82,6 +83,8 @@ class LoadProductsCommand extends ContainerAwareCommand
         $product->setName($data['name']);
         $product->setDescription($data['description']);
         $product->setCreatedAt($data['createdAt']);
+        $product->setUpdatedAt($data['updatedAt']);
+        $product->setReleasedAt($data['releasedAt']);
         $product
             ->setCode($data['code'])
             ->setShortDescription($data['shortDescription'])
@@ -114,7 +117,8 @@ select      concat('game-', old.id) as code,
             old.materiel as materiel,
             old.valid as status,
             old.date as createdAt,
-            old.date as updatedAt
+            old.date as updatedAt,
+            old.date_sortie as releasedAt
 from        jedisjeux.jdj_game old
 where       old.valid in (0, 1, 2, 5, 3)
 and         old.id_pere is null

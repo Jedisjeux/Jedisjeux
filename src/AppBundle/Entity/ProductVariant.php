@@ -29,6 +29,13 @@ class ProductVariant extends BaseProductVariant
     protected $images;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(type="date", nullable=true)
+     */
+    protected $releasedAt;
+
+    /**
      * @return Image
      */
     public function getMainImage()
@@ -72,6 +79,26 @@ class ProductVariant extends BaseProductVariant
     public function setImages($images)
     {
         $this->images = $images;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getReleasedAt()
+    {
+        return $this->releasedAt;
+    }
+
+    /**
+     * @param \DateTime $releasedAt
+     *
+     * @return $this
+     */
+    public function setReleasedAt($releasedAt)
+    {
+        $this->releasedAt = $releasedAt;
 
         return $this;
     }
