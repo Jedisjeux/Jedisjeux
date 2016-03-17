@@ -1,2 +1,5 @@
-app_partial:
+app_partial_product_review:
     resource: 'partial/product_review.yml'
+
+app_partial_product:
+    resource: 'partial/product.yml'

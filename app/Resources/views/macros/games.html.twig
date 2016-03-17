@@ -30,6 +30,6 @@
             consectetur. </p>
     {% endset %}
 
-    {{ item.magazineItemOne(game.imageCouverture.webPath, game.name, 'magazine_item', 'img-responsive', path('jeu_show', {'id': game.id, 'slug': game.slug}), game.name, body, meta) }}
+    {{ item.magazineItemOne(game.imageCouverture.webPath, game.name, 'magazine_item', 'img-responsive', path('sylius_product_show', {'slug': game.slug}), game.name, body, meta) }}
 
 {% endmacro %}

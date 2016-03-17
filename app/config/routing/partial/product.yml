@@ -1,0 +1,13 @@
+sylius_partial_product_index:
+    methods: [GET]
+    path: /products/
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            criteria: $criteria
+            template: $template
+            paginate: $paginate
+            sortable: true
+            sorting: $sorting
+    requirements:
+        template: "[^?]+"

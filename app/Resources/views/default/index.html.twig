@@ -85,15 +85,16 @@
 
         <h4 class="mag-head"><i class="fa fa-puzzle-piece color"></i> Derniers jeux ajoutés</h4>
 
-
-
-        {#{{ render(url('game_index', {#}
-            {#'maxPerPage': 3,#}
-            {#'template': '_magazine_items_one.html.twig',#}
-            {#'criteria': {#}
-                {#'status': 'PUBLISHED'#}
-            {#}#}
-        {#})) }}#}
+        {{ render(url('sylius_partial_product_index', {
+            'paginate': 3,
+            'template': 'partial/product/_magazine_items_one.html.twig',
+            'criteria': {
+                'status': 'PUBLISHED'
+            },
+            'sorting': {
+                'createdAt': 'desc'
+            }
+        })) }}
 
         <hr/>
 
