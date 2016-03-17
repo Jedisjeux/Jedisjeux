@@ -53,10 +53,10 @@ end
 namespace :deploy do
   task :migrate do
     invoke 'symfony:console', 'doctrine:migrations:migrate', '--no-interaction', 'db'
+    invoke 'symfony:console', 'fos:elastica:populate'
   end
 end
 
 after 'deploy:updated', 'symfony:assets:install'
 after 'deploy:updated', 'symfony:assetic:dump'
 after 'deploy:updated', 'deploy:migrate'
-after 'deploy:updated', 'fos:elastica:populate'
