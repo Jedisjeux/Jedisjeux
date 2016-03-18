@@ -1,0 +1,17 @@
+{% macro magazineItemOne(game_play) %}
+    {% import 'macros/items.html.twig' as item %}
+
+    {% set game = game_play.product %}
+
+    {% set meta %}
+        <i class="fa fa-calendar"></i> <!-- TODO publishedAt -->{{ game.createdAt|localizeddate('long', 'none') }}
+        - <i class="fa fa-comments"></i> 5 Comments
+    {% endset %}
+    {% set body %}
+        <p>Nemo enim ipsam voluptatem quia quia neque porro qui dolorem ipsum quia dolor sit amet
+            consectetur. </p>
+    {% endset %}
+
+    {{ item.magazineItemOne(game.imageCouverture.webPath, game.name, 'magazine_item', 'img-responsive', '#', game.name, body, meta) }}
+
+{% endmacro %}

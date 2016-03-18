@@ -1,8 +1,8 @@
-sylius_partial_product_review_index:
+sylius_partial_game_play_index:
     methods: [GET]
-    path: /product-reviews/
+    path: /game-plays/
     defaults:
-        _controller: sylius.controller.product_review:indexAction
+        _controller: app.controller.game_play:indexAction
         _sylius:
             criteria: $criteria
             template: $template

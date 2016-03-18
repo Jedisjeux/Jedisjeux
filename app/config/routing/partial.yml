@@ -3,3 +3,6 @@ app_partial_product_review:
 
 app_partial_product:
     resource: 'partial/product.yml'
+
+app_partial_game_play:
+    resource: 'partial/game_play.yml'
