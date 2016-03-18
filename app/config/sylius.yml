@@ -119,6 +119,9 @@ sylius_resource:
         app.person:
             classes:
                 model: JDJ\LudographieBundle\Entity\Personne
+        app.game_play:
+            classes:
+                model: AppBundle\Entity\GamePlay
         app.game_review:
             classes:
                 model: AppBundle\Entity\GameReview
