@@ -4,212 +4,191 @@
   description: |
     <p>Un jeu abstrait est un jeu qui n'a pas de thème particulier. C'est un jeu où l'on fait totalement d'abstraction du thème.</p>
     <p>Exemple : Non merci, les échecs, le go</p>
-  slug: abstrait
 -
   id: 2
   name: Science-fiction
-  slug: science-fiction
+  children:
+      -
+        name: Space Opéra
+      -
+        name: Voyage dans le temps
+      -
+        id: 48
+        name: SteamPunk
+      -
+        name: Cyberpunk
 -
   id: 3
   name: Ville
-  slug: ville
 -
   id: 4
   name: Historique
-  slug: historique
+  children:
+      -
+        name: Renaissance
+      -
+        id: 21
+        name: Colonisation
+      -
+        id: 33
+        name: Préhistorique
+      -
+        id: 19
+        name: Renaissance
+      -
+        id: 20
+        name: Antiquité
+        children:
+            -
+              id: 13
+              name: Egypte antique
+            -
+              name: Grèce antique
+      -
+        id: 25
+        name: Guerre
+        children:
+            -
+              name: 2ème guerre mondiale
+-
+  name: Culture éthnique
+  children:
+      -
+        id: 32
+        name: Asie
+      -
+        id: 30
+        name: Western
+      -
+        name: Amérique
+      -
+        name: Italie
+-
+  name: Loisirs
+  children:
+      -
+        id: 6
+        name: TV & Cinéma
+      -
+        id: 40
+        name: Bande dessinée
+      -
+        id: 41
+        name: Musique & Chanson
+      -
+        id: 43
+        name: Cirque
 -
   id: 5
   name: Erotique
-  slug: erotique
--
-  id: 6
-  name: TV & Cinéma
-  slug: tv-cinema
 -
   id: 7
   name: Fantastique
-  slug: fantastique
--
-  id: 8
-  name: Halloween
-  slug: halloween
--
-  id: 9
-  name: Monstre
-  slug: monstre
+  children:
+      -
+        id: 8
+        name: Halloween
+      -
+        id: 9
+        name: Monstre
+      -
+        name: Surnaturel
+      -
+        id: 49
+        name: Horreur
 -
   id: 10
   name: Médiéval
-  slug: medieval
--
-  id: 11
-  name: Médiéval-fantastique
-  slug: medieval-fantastique
 -
   id: 12
   name: Labyrinthe
-  slug: labyrinthe
--
-  id: 13
-  name: Egypte
-  slug: egypte
 -
   id: 14
   name: Lettres & chiffres
-  slug: lettres-chiffres
--
-  id: 15
-  name: Maritime
-  slug: maritime
--
-  id: 16
-  name: Cochon
-  slug: cochon
 -
   id: 17
   name: Immobilier
-  slug: immobilier
 -
   id: 18
   name: Commerce
-  slug: commerce
--
-  id: 19
-  name: Renaissance
-  slug: renaissance
--
-  id: 20
-  name: Antiquité
-  slug: antiquite
--
-  id: 21
-  name: Colonisation
-  slug: colonisation
 -
   id: 22
-  name: Locomotion & voyage
-  slug: locomotion-voyage
+  name: Transport
+  children:
+      -
+        id: 15
+        name: Maritime
+      -
+        id: 47
+        name: Transport ferrovière
+      -
+        name: Aviation
 -
   id: 23
   name: Course
-  slug: course
+  children:
+      -
+        name: Course automobile
+      -
+        name: Course cycliste
+      -
+        name: Course d'animaux
 -
   id: 24
   name: Animaux
-  slug: animaux
--
-  id: 25
-  name: Guerre
-  slug: guerre
+  children:
+      -
+        name: Cheval
+      -
+        name: Animaux de la ferme
 -
   id: 26
   name: Fruits & légumes
-  slug: fruits-legumes
 -
   id: 27
   name: Art
-  slug: art
 -
   id: 28
   name: Sport
-  slug: sport
 -
   id: 29
   name: Pirate
-  slug: pirate
--
-  id: 30
-  name: Far-west
-  slug: far-west
 -
   id: 31
   name: Bourse & finances
-  slug: bourse-finances
--
-  id: 32
-  name: Asie
-  slug: asie
--
-  id: 33
-  name: Préhistorique
-  slug: prehistorique
 -
   id: 34
   name: Politique
-  slug: politique
 -
   id: 35
   name: Prospection minière
-  slug: prospection-miniere
 -
   id: 36
   name: Hospitalier
-  slug: hospitalier
--
-  id: 37
-  name: Divers
-  slug: divers
 -
   id: 38
   name: Exploration
-  slug: exploration
 -
   id: 39
   name: Pub
-  slug: pub
--
-  id: 40
-  name: Bande dessinée
-  slug: bande-dessinee
--
-  id: 41
-  name: Musique & Chanson
-  slug: musique-chanson
 -
   id: 42
   name: Enquêtes et Policiers
-  slug: enquetes-et-policiers
--
-  id: 43
-  name: Cirque
-  slug: cirque
 -
   id: 44
   name: Polaire
-  slug: polaire
 -
   id: 45
   name: Religion
-  slug: religion
 -
   id: 46
   name: Desert
-  slug: desert
--
-  id: 47
-  name: Rails
-  slug: rails
--
-  id: 48
-  name: SteamPunk
-  slug: steampunk
--
-  id: 49
-  name: Horreur
-  slug: horreur
 -
   id: 50
   name: Spiritualité
-  slug: spiritualite
 -
   id: 51
   name: Ecologie
-  slug: ecologie
--
-  id: 52
-  name: Ambiance
-  slug: ambiance
 -
   id: 53
   name: Cuisine
-  slug: cuisine
