@@ -7,11 +7,11 @@
  */
 
 namespace AppBundle\Command;
+
 use Doctrine\ORM\EntityManager;
 use JDJ\CoreBundle\Entity\EntityRepository;
-use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Resource\Factory\Factory;
-use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -23,6 +23,11 @@ use Symfony\Component\Yaml\Parser;
  */
 class LoadThemesCommand extends ContainerAwareCommand
 {
+    /**
+     * @var OutputInterface
+     */
+    protected $output;
+
     /**
      * @inheritdoc
      */
@@ -38,15 +43,30 @@ class LoadThemesCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $this->output = $output;
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
 
         $taxonomy = $this->createOrReplaceTaxonomy();
-        foreach ($this->getRows() as $data) {
-            $taxon = $this->createOrReplaceTaxon($data, $taxonomy);
+        $this->addTaxons($this->getRows(), $taxonomy->getRoot());
+    }
+
+    /**
+     * @param array $taxons
+     * @param TaxonInterface $parentTaxon
+     */
+    protected function addTaxons(array $taxons, TaxonInterface $parentTaxon)
+    {
+        foreach ($taxons as $data) {
+            $this->output->writeln(sprintf("<info>%s</info>", $data['name']));
+            $taxon = $this->createOrReplaceTaxon($data, $parentTaxon);
             $this->getManager()->persist($taxon);
+            $this->getManager()->flush();
+
+            if (isset($data['children'])) {
+                $this->addTaxons($data['children'], $taxon);
+            }
         }
 
-        $this->getManager()->flush();
     }
 
     protected function createOrReplaceTaxonomy()
@@ -79,9 +99,11 @@ class LoadThemesCommand extends ContainerAwareCommand
 
     /**
      * @param array $data
+     * @param TaxonInterface $parentTaxon
+     *
      * @return TaxonInterface
      */
-    protected function createOrReplaceTaxon(array $data, TaxonomyInterface $taxonomy)
+    protected function createOrReplaceTaxon(array $data, TaxonInterface $parentTaxon)
     {
         $locale = $this->getContainer()->getParameter('locale');
 
@@ -94,12 +116,13 @@ class LoadThemesCommand extends ContainerAwareCommand
             $taxon->setFallbackLocale($locale);
         }
 
-        $taxon->setCode('theme-'.$data['id']);
+        $code = isset($data['id']) ? 'theme-'.$data['id'] : uniqid();
+
+        $taxon->setCode($code);
         $taxon->setName($data['name']);
         $taxon->setDescription(isset($data['description']) ? $data['description'] : null);
 
-        //$taxon->setParent($taxonomy->getRoot());
-        $taxonomy->addTaxon($taxon);
+        $parentTaxon->addChild($taxon);
 
         return $taxon;
 
