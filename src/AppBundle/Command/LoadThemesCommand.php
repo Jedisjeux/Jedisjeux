@@ -24,6 +24,11 @@ use Symfony\Component\Yaml\Parser;
 class LoadThemesCommand extends ContainerAwareCommand
 {
     /**
+     * @var OutputInterface
+     */
+    protected $output;
+
+    /**
      * @inheritdoc
      */
     protected function configure()
@@ -38,28 +43,30 @@ class LoadThemesCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $this->output = $output;
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
 
         $taxonomy = $this->createOrReplaceTaxonomy();
-        foreach ($this->getRows() as $data) {
-            $this->addTaxons($data, $taxonomy->getRoot());
-        }
+        $this->addTaxons($this->getRows(), $taxonomy->getRoot());
     }
 
     /**
-     * @param array $data
-     *
+     * @param array $taxons
      * @param TaxonInterface $parentTaxon
      */
-    protected function addTaxons(array $data, TaxonInterface $parentTaxon)
+    protected function addTaxons(array $taxons, TaxonInterface $parentTaxon)
     {
-        $taxon = $this->createOrReplaceTaxon($data, $parentTaxon);
-        $this->getManager()->persist($taxon);
-        $this->getManager()->flush();
+        foreach ($taxons as $data) {
+            $this->output->writeln(sprintf("<info>%s</info>", $data['name']));
+            $taxon = $this->createOrReplaceTaxon($data, $parentTaxon);
+            $this->getManager()->persist($taxon);
+            $this->getManager()->flush();
 
-        if (isset($data['children'])) {
-            $this->addTaxons($data['children'], $taxon);
+            if (isset($data['children'])) {
+                $this->addTaxons($data['children'], $taxon);
+            }
         }
+
     }
 
     protected function createOrReplaceTaxonomy()
@@ -109,11 +116,12 @@ class LoadThemesCommand extends ContainerAwareCommand
             $taxon->setFallbackLocale($locale);
         }
 
-        $taxon->setCode('theme-'.isset($data['id']) ? $data['id'] : uniqid());
+        $code = isset($data['id']) ? 'theme-'.$data['id'] : uniqid();
+
+        $taxon->setCode($code);
         $taxon->setName($data['name']);
         $taxon->setDescription(isset($data['description']) ? $data['description'] : null);
 
-        //$taxon->setParent($taxonomy->getRoot());
         $parentTaxon->addChild($taxon);
 
         return $taxon;
