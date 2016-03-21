@@ -1,37 +1,29 @@
-sylius_admin_taxon:
-    resource: |
-        alias: sylius.taxon
-        section: admin
-        templates: :backend/taxon
-        redirect: index
-    type: sylius.resource
+sylius_admin_taxon_create:
+    path: /taxons/new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.taxon:createAction
+        _sylius:
+            template: backend/taxon/create.html.twig
+            factory:
+                method: createForTaxonomy
+                arguments: $taxonomyId
+            redirect:
+                route: sylius_backend_taxonomy_show
+                parameters: {'id': $taxonomyId}
 
-#app_admin_taxon_create:
-#    path: /new
-#    methods: [GET, POST]
-#    defaults:
-#        _controller: sylius.controller.taxon:createAction
-#        _sylius:
-#            template: SyliusWebBundle:Backend/Taxon:create.html.twig
-#            factory:
-#                method: createForTaxonomy
-#                arguments: $taxonomyId
-#            redirect:
-#                route: sylius_backend_taxonomy_show
-#                parameters: {'id': $taxonomyId}
-#
-#sylius_backend_taxon_update:
-#    path: /{id}/edit
-#    methods: [GET, PUT]
-#    defaults:
-#        _controller: sylius.controller.taxon:updateAction
-#        _sylius:
-#            template: SyliusWebBundle:Backend/Taxon:update.html.twig
-#            redirect:
-#                route: sylius_backend_taxonomy_show
-#                parameters: {'id': $taxonomyId}
-#
-#sylius_backend_taxon_product_index:
+sylius_admin_taxon_update:
+    path: /{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.taxon:updateAction
+        _sylius:
+            template: backend/taxon/update.html.twig
+            redirect:
+                route: sylius_backend_taxonomy_show
+                parameters: {'id': $taxonomyId}
+
+#sylius_admin_taxon_product_index:
 #    path: /{id}/products
 #    methods: [GET]
 #    defaults:
@@ -39,14 +31,14 @@ sylius_admin_taxon:
 #        _sylius:
 #            template: SyliusWebBundle:Backend/Taxon:productIndex.html.twig
 #            paginate: 30
-#
-#sylius_backend_taxon_delete:
-#    path: /{id}
-#    methods: [DELETE]
-#    defaults:
-#        _controller: sylius.controller.taxon:deleteAction
-#        _sylius:
-#            template: SyliusWebBundle:Backend/Misc:delete.html.twig
-#            redirect:
-#                route: sylius_backend_taxonomy_show
-#                parameters: {'id': $taxonomyId}
+
+sylius_admin_taxon_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.taxon:deleteAction
+        _sylius:
+            #template: SyliusWebBundle:Backend/Misc:delete.html.twig
+            redirect:
+                route: sylius_backend_taxonomy_show
+                parameters: {'id': $taxonomyId}

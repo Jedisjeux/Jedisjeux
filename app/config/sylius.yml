@@ -48,6 +48,8 @@ sylius_taxonomy:
         taxon:
             classes:
                 model: AppBundle\Entity\Taxon
+                form:
+                    default: AppBundle\Form\Type\TaxonType
             translation:
                 classes:
                     model: AppBundle\Entity\TaxonTranslation

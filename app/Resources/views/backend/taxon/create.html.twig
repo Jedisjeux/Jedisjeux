@@ -1,0 +1,20 @@
+{% extends "::base.html.twig" %}
+{% import 'macros/actions.html.twig' as action %}
+
+{% block headline %}
+    Nouveau taxon
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    <a href="{{ path('sylius_admin_taxonomy_index') }}">Catégories</a> /
+    <a href="{{ path('sylius_admin_taxonomy_show', { 'id': taxon.taxonomy.id }) }}">{{ taxon.taxonomy }}</a> /
+    Créer
+{% endblock %}
+
+{% block container %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ action.create() }}
+    {{ form_end(form) }}
+{% endblock container %}

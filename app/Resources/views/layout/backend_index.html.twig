@@ -7,23 +7,27 @@
 
 {% block container %}
 
-    {% block form_filter %}
-        <div class="well">
-            {{ form.filter('Recherche...') }}
+    <div class="container">
+        <div class="col-md-12">
+            {% block form_filter %}
+                <div class="well">
+                    {{ form.filter('Recherche...') }}
+                </div>
+            {% endblock form_filter %}
+
+            <ul class="list-inline pull-right">
+                <li>
+                    {% block new_entity_button %}
+                    {% endblock new_entity_button %}
+                </li>
+            </ul>
+
+            {% block list %}
+            {% endblock list %}
+
+            {% block Pagination %}
+            {% endblock %}
+
         </div>
-    {% endblock form_filter %}
-
-    <ul class="list-inline pull-right">
-        <li>
-            {% block new_entity_button %}
-            {% endblock new_entity_button %}
-        </li>
-    </ul>
-
-    {% block list %}
-    {% endblock list %}
-
-    {% block Pagination %}
-    {% endblock %}
-
+    </div>
 {% endblock container %}

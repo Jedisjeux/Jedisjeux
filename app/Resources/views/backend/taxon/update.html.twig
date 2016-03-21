@@ -1,0 +1,21 @@
+{% extends "::base.html.twig" %}
+{% import 'macros/actions.html.twig' as action %}
+
+{% block headline %}
+    Modifier un taxon
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    <a href="{{ path('sylius_admin_taxonomy_index') }}">Catégories</a> /
+    <a href="{{ path('sylius_admin_taxonomy_show', { 'id': taxon.taxonomy.id }) }}">{{ taxon.taxonomy }}</a> /
+    Modifier
+{% endblock %}
+
+{% block container %}
+    {{ form_start(form) }}
+    <input type="hidden" name="_method" value="PUT" />
+    {{ form_widget(form) }}
+    {{ action.update() }}
+    {{ form_end(form) }}
+{% endblock container %}

@@ -46,6 +46,9 @@
                 <td class="text-right">
                     <ul class="list-inline text-nowrap">
                         <li>
+                            {{ button.show(path('sylius_admin_taxonomy_show', { 'id': taxonomy.id })) }}
+                        </li>
+                        <li>
                             {{ button.edit(path('sylius_admin_taxonomy_update', { 'id': taxonomy.id })) }}
                         </li>
                         <li>
