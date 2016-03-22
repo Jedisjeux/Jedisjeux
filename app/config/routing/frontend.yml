@@ -5,6 +5,9 @@ app_forum:
 app_game_review:
     resource: "frontend/game_review.yml"
 
+app_game_play:
+    resource: "frontend/game_play.yml"
+
 #app_game:
 #    resource: "frontend/game.yml"
 

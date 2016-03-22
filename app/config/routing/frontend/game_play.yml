@@ -1,0 +1,7 @@
+app_game_play:
+    resource: |
+        alias: app.game_play
+        path: /parties
+        templates: :frontend/game_play
+        redirect: index
+    type: sylius.resource

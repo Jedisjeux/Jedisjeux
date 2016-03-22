@@ -42,6 +42,8 @@ class LoadTopicsOfGamePlayCommand extends ContainerAwareCommand
     {
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
 
+        $this->deleteGamePlayTopics();
+
         $gamePlayId = null;
         /** @var Topic $topic */
         $topic = null;
@@ -76,6 +78,30 @@ class LoadTopicsOfGamePlayCommand extends ContainerAwareCommand
 
             $gamePlayId = $data['game_play_id'];
         }
+    }
+
+    protected function deleteGamePlayTopics()
+    {
+        $query = <<<EOM
+update jdj_game_play set topic_id = null
+EOM;
+        $this->getDatabaseConnection()->executeQuery($query);
+
+        $query = <<<EOM
+update jdj_post post
+inner join jdj_topic topic on topic.mainPost_id =  post.id
+set topic.mainPost_id = null
+where topic.title like 'Partie de %'
+EOM;
+        $this->getDatabaseConnection()->executeQuery($query);
+
+        $query = <<<EOM
+delete post
+from jdj_post post
+inner join jdj_topic topic on post.topic_id = topic.id
+where topic.title like 'Partie de %'
+EOM;
+        $this->getDatabaseConnection()->executeQuery($query);
     }
 
     /**
