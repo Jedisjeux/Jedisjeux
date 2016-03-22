@@ -47,7 +47,13 @@ class TopicFactory extends Factory
 
         /** @var Topic $topic */
         $topic = parent::createNew();
-        $topic->setGamePlay($gamePlay);
+
+        $gamePlay
+            ->setTopic($topic);
+
+        $topic
+            ->setTitle("Partie de ".(string)$gamePlay->getProduct())
+            ->setCreatedBy($gamePlay->getAuthor()->getUser());
 
         return $topic;
     }

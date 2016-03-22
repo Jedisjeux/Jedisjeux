@@ -114,4 +114,24 @@ class GamePlay implements ResourceInterface
 
         return $this;
     }
+
+    /**
+     * @return Topic
+     */
+    public function getTopic()
+    {
+        return $this->topic;
+    }
+
+    /**
+     * @param Topic $topic
+     *
+     * @return $this
+     */
+    public function setTopic($topic)
+    {
+        $this->topic = $topic;
+
+        return $this;
+    }
 }
