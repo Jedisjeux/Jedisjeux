@@ -57,6 +57,13 @@ class Topic implements ResourceInterface
     protected $mainTaxon;
 
     /**
+     * @var GamePlay
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\GamePlay", mappedBy="topic")
+     */
+    protected $gamePlay;
+
+    /**
      * Topic constructor.
      */
     public function __construct()
@@ -74,6 +81,7 @@ class Topic implements ResourceInterface
 
     /**
      * @param string $title
+     *
      * @return $this
      */
     public function setTitle($title)
@@ -93,6 +101,7 @@ class Topic implements ResourceInterface
 
     /**
      * @param Post $mainPost
+     *
      * @return $this
      */
     public function setMainPost($mainPost)
@@ -132,6 +141,7 @@ class Topic implements ResourceInterface
 
     /**
      * @param Taxon $mainTaxon
+     *
      * @return $this
      */
     public function setMainTaxon($mainTaxon)
@@ -141,6 +151,29 @@ class Topic implements ResourceInterface
         return $this;
     }
 
+    /**
+     * @return GamePlay
+     */
+    public function getGamePlay()
+    {
+        return $this->gamePlay;
+    }
+
+    /**
+     * @param GamePlay $gamePlay
+     *
+     * @return $this
+     */
+    public function setGamePlay($gamePlay)
+    {
+        $this->gamePlay = $gamePlay;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->getTitle();

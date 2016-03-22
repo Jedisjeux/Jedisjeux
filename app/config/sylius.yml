@@ -132,6 +132,7 @@ sylius_resource:
         app.topic:
             classes:
                 model: AppBundle\Entity\Topic
+                factory: AppBundle\Factory\TopicFactory
                 controller: AppBundle\Controller\TopicController
                 repository: AppBundle\Repository\TopicRepository
                 form:

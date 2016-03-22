@@ -52,7 +52,7 @@ class GamePlay implements ResourceInterface
     /**
      * @var Topic
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Topic")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Topic", inversedBy="gamePlay")
      */
     protected $topic;
 
