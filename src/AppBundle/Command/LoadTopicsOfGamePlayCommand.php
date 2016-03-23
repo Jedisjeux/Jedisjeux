@@ -53,15 +53,16 @@ class LoadTopicsOfGamePlayCommand extends ContainerAwareCommand
 
             /** @var Post $post */
             $post = $this->getPostFactory()->createNew();
-            $this->getManager()->persist($post);
-
-            /** @var CustomerInterface $customer */
-            $customer = $this->getCustomerRepository()->find($data['customer_id']);
 
             /** Is first post of a topic */
             if ($gamePlayId !== $data['game_play_id']) {
+                if (null !== $topic) {
+                    $this->getManager()->persist($topic);
+                    $this->getManager()->flush();
+                    $this->getManager()->clear();
+                }
+
                 $topic = $this->getTopicFactory()->createForGamePlay($data['game_play_id']);
-                $this->getManager()->persist($topic);
                 $topic
                     ->setMainPost($post);
             } else {
@@ -69,12 +70,12 @@ class LoadTopicsOfGamePlayCommand extends ContainerAwareCommand
                 $topic->addPost($post);
             }
 
+            /** @var CustomerInterface $customer */
+            $customer = $this->getCustomerRepository()->find($data['customer_id']);
+
             $post
                 ->setCreatedBy($customer->getUser())
                 ->setBody($data['comment']);
-
-            $this->getManager()->flush();
-            $this->getManager()->clear();
 
             $gamePlayId = $data['game_play_id'];
         }
@@ -82,18 +83,28 @@ class LoadTopicsOfGamePlayCommand extends ContainerAwareCommand
 
     protected function deleteGamePlayTopics()
     {
-        $dql = <<<EOM
-            select o from AppBundle\Entity\Topic o
-            where o.title like 'Partie de %'
-EOM;
 
-        $queryBuilder = $this->getManager()->createQuery($dql);
-        foreach($queryBuilder->iterate() as $row) {
-            $topic = $row[0];
-            $this->getManager()->remove($topic);
+        $queryBuilder = $this->getManager()->createQueryBuilder();
+        $queryBuilder
+            ->select('post')
+            ->from('AppBundle\Entity\Post', 'post')
+            ->innerJoin('post.topic', 'topic')
+            ->where("topic.title like 'Partie de %'");
+
+        foreach ($queryBuilder->getQuery()->iterate() as $row) {
+            $post = $row[0];
+            $this->getManager()->remove($post);
             $this->getManager()->flush();
             $this->getManager()->clear();
         }
+
+        $dql = <<<EOM
+            delete from AppBundle\Entity\Topic topic
+            where topic.title like 'Partie de %'
+EOM;
+
+        $queryBuilder = $this->getManager()->createQuery($dql);
+        $queryBuilder->execute();
     }
 
     /**
