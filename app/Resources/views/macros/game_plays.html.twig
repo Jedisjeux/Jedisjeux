@@ -2,16 +2,17 @@
     {% import 'macros/items.html.twig' as item %}
 
     {% set game = game_play.product %}
+    {% set topic = game_play.topic %}
 
     {% set meta %}
         <i class="fa fa-calendar"></i> <!-- TODO publishedAt -->{{ game.createdAt|localizeddate('long', 'none') }}
-        - <i class="fa fa-comments"></i> 5 Comments
+        - <i class="fa fa-comments"></i> {% if topic %} {{ topic.posts|length }} {% endif %} Comments
     {% endset %}
     {% set body %}
         <p>Nemo enim ipsam voluptatem quia quia neque porro qui dolorem ipsum quia dolor sit amet
             consectetur. </p>
     {% endset %}
 
-    {{ item.magazineItemOne(game.imageCouverture.webPath, game.name, 'magazine_item', 'img-responsive', '#', game.name, body, meta) }}
+    {{ item.magazineItemOne(game.imageCouverture.webPath, game.name, 'magazine_item', 'img-responsive', path('app_game_play_show', {'productSlug': game_play.product.slug, 'id': game_play.id}), game.name, body, meta) }}
 
 {% endmacro %}

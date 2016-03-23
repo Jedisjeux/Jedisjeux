@@ -1,4 +1,4 @@
-sylius_partial_game_play_index:
+app_partial_game_play_index:
     methods: [GET]
     path: /game-plays/
     defaults:

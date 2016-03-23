@@ -34,16 +34,12 @@
         {% if topic %}
             <div class="block-heading-two">
                 <h3><span>Commentaires</span>
-                    <small>({{ topic.posts|length + topic.mainPost|length }})</small>
+                    <small>({{ topic.posts|length }})</small>
                 </h3>
             </div>
 
             <div class="blog-comments">
-            {% if topic.mainPost %}
-                {{ blogCommentItem(topic.mainPost) }}
-            {% endif %}
-
-            {% for post in topic.posts %}
+                {% for post in topic.posts %}
                 {{ blogCommentItem(post) }}
             {% endfor %}
             </div>

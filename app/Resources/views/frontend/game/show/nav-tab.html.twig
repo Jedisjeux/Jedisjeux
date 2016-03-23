@@ -3,7 +3,7 @@
     <!-- Nav tabs -->
     <ul class="nav nav-tabs">
         <li class="active"><a href="#resume" data-toggle="tab">Résumé</a></li>
-        <li><a href="#profile-2" data-toggle="tab">Article</a></li>
+        <li><a href="#articles" data-toggle="tab">Article</a></li>
         <li><a href="#critiques" data-toggle="tab">Critiques</a></li>
         <li><a href="#messages-2" data-toggle="tab">Add-ons</a></li>
         <li><a href="#settings-2" data-toggle="tab">Forum</a></li>
@@ -13,10 +13,8 @@
         <div class="tab-pane fade in active" id="resume">
             {% include "frontend/game/show/nav-tab/summary.html.twig" with {'jeu': jeu} only %}
         </div>
-        <div class="tab-pane fade" id="profile-2">
-            <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia
-                non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad
-                minima veniam, quis nostrum exercitationem ullam corporis.</p>
+        <div class="tab-pane fade" id="articles">
+            {% include "frontend/game/show/nav-tab/articles.html.twig" with {'product': jeu} only %}
         </div>
         <div class="tab-pane fade" id="critiques">
             {#{% for key, userReview in userReviews %}#}

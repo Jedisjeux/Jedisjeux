@@ -51,8 +51,7 @@ class LoadTopicsOfGamePlayCommand extends ContainerAwareCommand
         foreach ($this->getTopics() as $data) {
             $output->writeln(sprintf("Loading <info>%s</info> comment of <info>%s</info> gameplay", $data['id'], $data['game_play_id']));
 
-            /** @var Post $post */
-            $post = $this->getPostFactory()->createNew();
+
 
             /** Is first post of a topic */
             if ($gamePlayId !== $data['game_play_id']) {
@@ -63,12 +62,13 @@ class LoadTopicsOfGamePlayCommand extends ContainerAwareCommand
                 }
 
                 $topic = $this->getTopicFactory()->createForGamePlay($data['game_play_id']);
-                $topic
-                    ->setMainPost($post);
-            } else {
-                // add the answer to the topic
-                $topic->addPost($post);
             }
+
+            /** @var Post $post */
+            $post = $this->getPostFactory()->createNew();
+            // add the answer to the topic
+            $topic->addPost($post);
+
 
             /** @var CustomerInterface $customer */
             $customer = $this->getCustomerRepository()->find($data['customer_id']);

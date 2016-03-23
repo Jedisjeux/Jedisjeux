@@ -124,6 +124,7 @@ sylius_resource:
         app.game_play:
             classes:
                 model: AppBundle\Entity\GamePlay
+                repository: AppBundle\Repository\GamePlayRepository
         app.game_review:
             classes:
                 model: AppBundle\Entity\GameReview

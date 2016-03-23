@@ -1,0 +1,15 @@
+<div class="block-heading-two">
+    <h3><span>Parties</span></h3>
+</div>
+
+{{ render(url('app_partial_game_play_index', {
+    'criteria': {
+        'product': product.id,
+        'hasTopic': 1
+    },
+    'sorting': {
+        'createdAt': 'desc'
+    },
+    'paginate': 10,
+    'template': 'partial/game_play/_magazine_items_one.html.twig'
+})) }}
