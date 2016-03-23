@@ -2,8 +2,10 @@
 
 {% from 'macros/posts.html.twig' import blogCommentItem %}
 
+{% set topic = game_play.topic %}
+
 {% block headline %}
-    Partie
+    Partie de {{ game_play.product }}
 {% endblock %}
 
 {% block breadcrumb_content %}
@@ -13,16 +15,37 @@
 
 {% block container %}
 
+    <div class="container">
+        <div class="col-md-12">
+            <div class="blog-meta">
+                <!-- Date -->
+                <a href="#"><i class="fa fa-calendar"></i> &nbsp;
+                    le {{ game_play.createdAt|localizeddate('full', 'none') }}</a>
+                &nbsp;
+                <!-- Author -->
+                <a href="#"><i class="fa fa-user"></i> &nbsp; {{ game_play.author.user }}</a>
+            </div>
+        </div>
+
+    </div>
     <div class="col-md-8">
         {% include "frontend/game/show/header.html.twig" with {'jeu': game_play.product} only %}
 
-        {{ dump(game_play.topic.posts|length) }}
+        {% if topic %}
+            <div class="block-heading-two">
+                <h3><span>Commentaires</span>
+                    <small>({{ topic.posts|length + topic.mainPost|length }})</small>
+                </h3>
+            </div>
 
-        {% if game_play.topic %}
             <div class="blog-comments">
-                {% for post in game_play.topic.posts %}
-                    {{ blogCommentItem(post) }}
-                {% endfor %}
+            {% if topic.mainPost %}
+                {{ blogCommentItem(topic.mainPost) }}
+            {% endif %}
+
+            {% for post in topic.posts %}
+                {{ blogCommentItem(post) }}
+            {% endfor %}
             </div>
         {% endif %}
 
