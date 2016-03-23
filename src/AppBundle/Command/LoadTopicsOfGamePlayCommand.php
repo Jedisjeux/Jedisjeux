@@ -13,6 +13,7 @@ use AppBundle\Entity\Post;
 use AppBundle\Entity\Topic;
 use AppBundle\Factory\PostFactory;
 use AppBundle\Factory\TopicFactory;
+use AppBundle\TextFilter\Bbcode2Html;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\User\Model\CustomerInterface;
@@ -129,6 +130,40 @@ EOM;
         return $this->getDatabaseConnection()->fetchAll($query);
     }
 
+    protected function bbcode2Html()
+    {
+        $queryBuilder = $this->getPostRepository()->createQueryBuilder('o');
+        $queryBuilder
+            ->andWhere($queryBuilder->expr()->orX(
+                'o.body like :quote',
+                'o.body like :emoticon',
+                'o.body like :url',
+                'o.body like :image',
+                'o.body like :bold'
+            ))
+            ->setParameter('quote', '%[quote%')
+            ->setParameter('emoticon', '%SMILIES%')
+            ->setParameter('url', '%[url%')
+            ->setParameter('image', '%[img%')
+            ->setParameter('bold', '%[b%');
+
+        $posts = $queryBuilder->getQuery()->getArrayResult();
+
+        foreach ($posts as $data) {
+            $bbcode2html = new Bbcode2Html();
+            $body = $data['body'];
+            $body = $bbcode2html
+                ->setBody($body)
+                ->getFilteredBody();
+
+            /** @var Post $post */
+            $post = $this->getPostRepository()->find($data['id']);
+            $post->setBody($body);
+            $this->getManager()->flush($post);
+            $this->getManager()->clear($post);
+        }
+    }
+
     /**
      * @return EntityManager
      */
@@ -151,6 +186,14 @@ EOM;
     protected function getPostFactory()
     {
         return $this->getContainer()->get('app.factory.post');
+    }
+
+    /**
+     * @return EntityRepository
+     */
+    protected function getPostRepository()
+    {
+        return $this->getContainer()->get('app.repository.post');
     }
 
     /**

@@ -10,6 +10,7 @@ namespace JDJ\SearchBundle\Controller;
 
 use AppBundle\Entity\Customer;
 use AppBundle\Entity\Product;
+use AppBundle\Entity\Topic;
 use Elastica\Query\QueryString;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use JDJ\LudographieBundle\Entity\Personne;
@@ -96,6 +97,22 @@ class SearchController extends Controller
                 );
             }
 
+            if ($entity instanceof Topic) {
+                $result = array(
+                    'value' => $entity->getTitle(),
+                    'label' => $entity->getTitle(),
+                    'image' =>  (null === $entity->getCreatedBy()->getCustomer()->getAvatar()) ? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : $this->get('liip_imagine.cache.manager')->getBrowserPath($entity->getCreatedBy()->getCustomer()->getAvatar()->getWebPath(), 'thumbnail'),
+                    'href' => $entity->getGamePlay() ? $this->generateUrl('app_game_play_show', array(
+                            'productSlug' => $entity->getGamePlay()->getProduct()->getSlug(),
+                            'id' => $entity->getGamePlay()->getId(),
+                        )
+                    ) : $this->generateUrl('app_post_index_by_topic', array(
+                            'topicId' => $entity->getId(),
+                        )
+                    ),
+                );
+            }
+
             if ($entity instanceof UserInterface) {
                 $result = array(
                     'value' => $entity->getUsername(),
@@ -141,6 +158,8 @@ class SearchController extends Controller
             'libelle',
             'email',
             'username',
+            'title',
+            'name',
         ));
 
         return $searchQuery;

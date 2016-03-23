@@ -29,6 +29,7 @@ class Bbcode2Html
         $body = $this->quoteReplacement($body);
         $body = $this->imageReplacement($body);
         $body = $this->urlReplacement($body);
+        $body = $this->boldReplacement($body);
         return $body;
     }
 
@@ -117,6 +118,18 @@ EOM;
     {
         $pattern = '/\[url=(?P<path>.*?)\](?P<label>.*?)\[\/url:(.*?)\]/ms';
         $replacement = "<a href=\"$1\" target='_blank'>$2</a>";
+        $body = preg_replace($pattern, $replacement, $body);
+        return $body;
+    }
+
+    /**
+     * @param string $body
+     * @return string
+     */
+    protected function boldReplacement($body)
+    {
+        $pattern = '/\[b(.*?)\](?P<label>.*?)\[\/b:(.*?)\]/ms';
+        $replacement = "<strong>$2</strong>";
         $body = preg_replace($pattern, $replacement, $body);
         return $body;
     }
