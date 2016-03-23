@@ -65,8 +65,8 @@ class LoadTopicsOfGamePlayCommand extends ContainerAwareCommand
                 $topic
                     ->setMainPost($post);
             } else {
-                // answers to a topic
-                $post->setTopic($topic);
+                // add the answer to the topic
+                $topic->addPost($post);
             }
 
             $post
@@ -82,26 +82,18 @@ class LoadTopicsOfGamePlayCommand extends ContainerAwareCommand
 
     protected function deleteGamePlayTopics()
     {
-        $query = <<<EOM
-update jdj_game_play set topic_id = null
+        $dql = <<<EOM
+            select o from AppBundle\Entity\Topic o
+            where o.title like 'Partie de %'
 EOM;
-        $this->getDatabaseConnection()->executeQuery($query);
 
-        $query = <<<EOM
-update jdj_post post
-inner join jdj_topic topic on topic.mainPost_id =  post.id
-set topic.mainPost_id = null
-where topic.title like 'Partie de %'
-EOM;
-        $this->getDatabaseConnection()->executeQuery($query);
-
-        $query = <<<EOM
-delete post
-from jdj_post post
-inner join jdj_topic topic on post.topic_id = topic.id
-where topic.title like 'Partie de %'
-EOM;
-        $this->getDatabaseConnection()->executeQuery($query);
+        $queryBuilder = $this->getManager()->createQuery($dql);
+        foreach($queryBuilder->iterate() as $row) {
+            $topic = $row[0];
+            $this->getManager()->remove($topic);
+            $this->getManager()->flush();
+            $this->getManager()->clear();
+        }
     }
 
     /**

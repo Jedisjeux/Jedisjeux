@@ -53,6 +53,7 @@ class GamePlay implements ResourceInterface
      * @var Topic
      *
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Topic", inversedBy="gamePlay")
+     * @ORM\JoinColumn(onDelete="SET NULL")
      */
     protected $topic;
 

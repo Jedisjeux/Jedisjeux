@@ -38,14 +38,14 @@ class Topic implements ResourceInterface
      * @var Post
      *
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Post", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     protected $mainPost;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Post", mappedBy="topic")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Post", mappedBy="topic", cascade={"persist", "remove"})
      */
     protected $posts;
 
@@ -127,6 +127,21 @@ class Topic implements ResourceInterface
     public function setPosts($posts)
     {
         $this->posts = $posts;
+
+        return $this;
+    }
+
+    /**
+     * @param $post
+     *
+     * @return $this
+     */
+    public function addPost(Post $post)
+    {
+        if (!$this->posts->contains($post)) {
+            $post->setTopic($this);
+            $this->posts->add($post);
+        }
 
         return $this;
     }
