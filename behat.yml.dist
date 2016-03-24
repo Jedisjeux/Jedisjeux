@@ -1,0 +1,266 @@
+default:
+    formatters:
+        pretty:
+            verbose:  true
+            paths:    false
+            snippets: false
+    suites:
+
+        homepage:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+            filters:
+                tags: "@homepage && ~@javascript"
+
+        taxonomies:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - AppBundle\Behat\UtilsContext
+                - AppBundle\Behat\UserContext
+                - AppBundle\Behat\TaxonomyContext
+            filters:
+                tags: "@taxonomies"
+
+        jeu:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\CoreBundle\Behat\StatutContext
+                - JDJ\JeuBundle\Behat\JeuContext
+                - JDJ\JeuBundle\Behat\MechanismContext
+                - JDJ\JeuBundle\Behat\ThemeContext
+                - JDJ\LudographieBundle\Behat\PersonneContext
+                - JDJ\UserBundle\Behat\UserContext
+                - JDJ\CoreBundle\Behat\UtilsContext
+            filters:
+                tags: "@jeu && ~@javascript"
+
+        gameList:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\CoreBundle\Behat\StatutContext
+                - JDJ\JeuBundle\Behat\JeuContext
+                - JDJ\JeuBundle\Behat\MechanismContext
+                - JDJ\JeuBundle\Behat\ThemeContext
+                - JDJ\LudographieBundle\Behat\PersonneContext
+            filters:
+                tags: "@gameList && ~@javascript"
+
+        like:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\CoreBundle\Behat\StatutContext
+                - JDJ\CoreBundle\Behat\UtilsContext
+                - JDJ\JeuBundle\Behat\JeuContext
+                - JDJ\JeuBundle\Behat\MechanismContext
+                - JDJ\JeuBundle\Behat\ThemeContext
+                - JDJ\LudographieBundle\Behat\PersonneContext
+                - JDJ\UserBundle\Behat\UserContext
+                - JDJ\UserReviewBundle\Behat\NoteContext
+                - JDJ\UserReviewBundle\Behat\UserReviewContext
+            filters:
+                tags: "@like"
+
+        ludographie:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\CoreBundle\Behat\StatutContext
+                - JDJ\JeuBundle\Behat\JeuContext
+                - JDJ\LudographieBundle\Behat\PersonneContext
+            filters:
+                tags: "@ludographie && ~@javascript"
+
+        userLogin:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\UserBundle\Behat\UserContext
+                - JDJ\CoreBundle\Behat\UtilsContext
+            filters:
+                tags: "@userLogin && ~@javascript"
+
+        userAccount:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\CoreBundle\Behat\UtilsContext
+                - JDJ\UserBundle\Behat\UserContext
+            filters:
+                tags: "@userAccount && ~@javascript"
+
+        userReview:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\UserBundle\Behat\UserContext
+            filters:
+                tags: "@userReview && ~@javascript"
+
+        userAdmin:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\UserBundle\Behat\UserContext
+            filters:
+              tags: "@userAdmin && ~@javascript"
+
+        collection:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\CollectionBundle\Behat\CollectionContext
+                - JDJ\UserBundle\Behat\UserContext
+                - JDJ\CoreBundle\Behat\UtilsContext
+                - JDJ\CoreBundle\Behat\StatutContext
+                - JDJ\JeuBundle\Behat\JeuContext
+            filters:
+              tags: "@collection && ~@javascript"
+
+        partie:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\UserBundle\Behat\UserContext
+                - JDJ\CoreBundle\Behat\StatutContext
+                - JDJ\JeuBundle\Behat\JeuContext
+                - JDJ\PartieBundle\Behat\PartieContext
+            filters:
+                tags: "@partie && ~@javascript"
+
+        userReview:
+             contexts:
+                 - Behat\MinkExtension\Context\MinkContext
+                 - JDJ\UserBundle\Behat\UserContext
+                 - JDJ\CoreBundle\Behat\StatutContext
+                 - JDJ\JeuBundle\Behat\JeuContext
+                 - JDJ\UserReviewBundle\Behat\UserReviewContext
+                 - JDJ\UserReviewBundle\Behat\NoteContext
+             filters:
+                 tags: "@userReview && ~@javascript"
+
+        products:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\CoreBundle\Behat\UtilsContext
+                - JDJ\ComptaBundle\Behat\ProductContext
+                - JDJ\UserBundle\Behat\UserContext
+            filters:
+                tags: "@products"
+
+        paymentMethods:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\CoreBundle\Behat\UtilsContext
+                - JDJ\ComptaBundle\Behat\PaymentMethodContext
+                - JDJ\UserBundle\Behat\UserContext
+            filters:
+                tags: "@paymentMethods"
+
+        customers:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\ComptaBundle\Behat\CustomerContext
+                - JDJ\CoreBundle\Behat\UtilsContext
+                - JDJ\UserBundle\Behat\UserContext
+            filters:
+                tags: "@customers"
+
+        bills:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\CoreBundle\Behat\UtilsContext
+                - JDJ\UserBundle\Behat\UserContext
+                - JDJ\ComptaBundle\Behat\CustomerContext
+                - JDJ\ComptaBundle\Behat\ProductContext
+                - JDJ\ComptaBundle\Behat\BillProductContext
+                - JDJ\ComptaBundle\Behat\PaymentMethodContext
+                - JDJ\ComptaBundle\Behat\BillContext
+                - JDJ\ComptaBundle\Behat\DealerContext
+            filters:
+                tags: "@bills"
+
+        subscriptions:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\CoreBundle\Behat\UtilsContext
+                - JDJ\UserBundle\Behat\UserContext
+                - JDJ\ComptaBundle\Behat\CustomerContext
+                - JDJ\ComptaBundle\Behat\ProductContext
+                - JDJ\ComptaBundle\Behat\BillProductContext
+                - JDJ\ComptaBundle\Behat\PaymentMethodContext
+                - JDJ\ComptaBundle\Behat\BillContext
+                - JDJ\ComptaBundle\Behat\DealerContext
+            filters:
+                tags: "@subscriptions"
+
+        topics:
+             contexts:
+                 - Behat\MinkExtension\Context\MinkContext
+                 - AppBundle\Behat\UtilsContext
+                 - AppBundle\Behat\TaxonomyContext
+                 - AppBundle\Behat\UserContext
+             filters:
+                 tags: "@topics"
+
+        bookEntries:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\UserBundle\Behat\UserContext
+                - JDJ\ComptaBundle\Behat\PaymentMethodContext
+                - JDJ\ComptaBundle\Behat\BookEntryContext
+                - JDJ\CoreBundle\Behat\UtilsContext
+            filters:
+                tags: "@bookEntries"
+
+        comptaSubscription:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\UserBundle\Behat\UserContext
+            filters:
+                tags: "@comptaSubscription && ~@javascript"
+
+        jedizone:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\JeuBundle\Behat\JeuContext
+                - JDJ\LudographieBundle\Behat\PersonneContext
+                - JDJ\UserBundle\Behat\UserContext
+                - JDJ\CoreBundle\Behat\UtilsContext
+            filters:
+                tags: "@jedizone && ~@javascript"
+
+    extensions:
+        Behat\MinkExtension:
+            sessions:
+                default:
+                    selenium2: ~
+            browser_name: firefox
+            show_auto:    false
+            base_url: http://jdj.dev/app_test.php/
+        Behat\Symfony2Extension: ~
+
+firefox:
+     extensions:
+         Behat\MinkExtension:
+             sessions:
+                 default:
+                     selenium2: ~
+             browser_name: firefox
+             show_auto:    false
+             base_url: http://jdj.dev/app_test.php/
+         Behat\Symfony2Extension: ~
+
+chrome:
+     extensions:
+         Behat\MinkExtension:
+             sessions:
+                 default:
+                     selenium2: ~
+             browser_name: googlechrome
+             show_auto:    false
+             base_url: http://jdj.dev/app_test.php/
+         Behat\Symfony2Extension: ~
+
+ie:
+     extensions:
+         Behat\MinkExtension:
+             sessions:
+                 default:
+                     selenium2: ~
+             browser_name: ie
+             show_auto:    false
+             base_url: http://jdj.dev/app_test.php/
+         Behat\Symfony2Extension: ~

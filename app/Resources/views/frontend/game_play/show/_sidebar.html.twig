@@ -1,0 +1,65 @@
+{% set product = game_play.product %}
+
+<div class="sidebar">
+
+    <!-- Gallery Widget -->
+    <div class="s-widget">
+        <!-- Heading -->
+        <h5><i class="fa fa-camera color"></i> Photos</h5>
+        <!-- Widgets Content -->
+        <div class="widget-content gallery">
+            {% for image in game_play.images %}
+                <a href="{{ image.webPath | imagine_filter('default') }}" rel="jeu" class="fancybox" title="{{ image.description }}">
+                    <img src="{{ image.webPath | imagine_filter('thumbnail_S') }}" alt="" class="img-responsive img-thumbnail"/>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="s-widget">
+        <!-- Heading -->
+        <h5><i class="fa fa-bookmark color"></i> Édition</h5>
+        <div class="widget-content gallery">
+            <ul class="list-6">
+                {% if product.auteurs|length > 0 %}
+                    <li>
+                        Un jeu de
+                        {% for key, personne in product.auteurs %}{% if (key > 0) %},{% endif %} <a
+                            href="{{ path('personne_show', { 'id': personne.id, 'slug': personne.slug }) }}">{{ personne }}</a>{% endfor %}
+                    </li>
+                {% endif %}
+                {% if product.illustrateurs|length > 0 %}
+                    <li>
+                        illustré{% if product.illustrateurs|length > 1 %}s{% endif %} par
+                        {% for key, personne in product.illustrateurs %}{% if (key > 0) %},{% endif %} <a
+                            href="{{ path('personne_show', { 'id': personne.id, 'slug': personne.slug }) }}">{{ personne }}</a>{% endfor %}
+                    </li>
+                {% endif %}
+                {% if product.editeurs|length > 0 %}
+                    <li>
+                        édité{% if product.editeurs|length > 1 %}s{% endif %} par
+                        {% for key, personne in product.editeurs %}{% if (key > 0) %},{% endif %} <a
+                            href="{{ path('personne_show', { 'id': personne.id, 'slug': personne.slug }) }}">{{ personne }}</a>{% endfor %}
+                    </li>
+                {% endif %}
+            </ul>
+
+        </div>
+    </div>
+
+    <!-- Material list -->
+    {% if product.materiel %}
+    <div class="s-widget">
+        <!-- Heading -->
+        <h5><i class="fa fa-list color"></i> Matériel</h5>
+        <!-- Widgets Content -->
+        <div class="widget-content gallery">
+            <ul class="list-6">
+                {% for row in product.materiel|split("\n") %}
+                    <li>{{ row }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+</div>

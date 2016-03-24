@@ -143,4 +143,23 @@ class GamePlay implements ResourceInterface
 
         return $this;
     }
+
+    /**
+     * @return GamePlayImage[]|ArrayCollection
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    /**
+     * @param GamePlayImage[]|ArrayCollection $images
+     * @return $this
+     */
+    public function setImages($images)
+    {
+        $this->images = $images;
+
+        return $this;
+    }
 }

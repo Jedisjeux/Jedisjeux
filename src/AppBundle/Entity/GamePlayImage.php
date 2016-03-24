@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
 class GamePlayImage extends AbstractImage
 {
     /**
-     * @var
+     * @var GamePlay
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\GamePlay", inversedBy="images")
      */
@@ -31,4 +31,44 @@ class GamePlayImage extends AbstractImage
      * @ORM\Column(type="string", nullable=true)
      */
     protected $description;
+
+    /**
+     * @return GamePlay
+     */
+    public function getGamePlay()
+    {
+        return $this->gamePlay;
+    }
+
+    /**
+     * @param GamePlay $gamePlay
+     *
+     * @return $this
+     */
+    public function setGamePlay($gamePlay)
+    {
+        $this->gamePlay = $gamePlay;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     *
+     * @return $this
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
 }

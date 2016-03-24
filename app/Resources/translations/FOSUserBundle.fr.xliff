@@ -118,7 +118,7 @@
       </trans-unit>
       <trans-unit id="79c180ac5e987e195d1dfeda857a114ed692d07f" resname="security.login.submit">
         <source>security.login.submit</source>
-        <target state="new">Je me connecte</target>
+        <target state="new">Connexion</target>
         <jms:reference-file line="52">views/Security/login.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="64e1b2aaf6156a7e34a13fbc38801e89478efff8" resname="security.login.username">

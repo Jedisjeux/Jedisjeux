@@ -64,6 +64,7 @@ class DownloadImageCommand extends ContainerAwareCommand
                 $this->downloadImage($image);
             }
 
+            $this->getManager()->detach($image);
             $this->getManager()->clear();
         }
     }
