@@ -30,7 +30,7 @@ class GamePlay implements ResourceInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string", nullable=true, unique=true)
      */
     protected $code;
 
@@ -57,6 +57,13 @@ class GamePlay implements ResourceInterface
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
     protected $topic;
+
+    /**
+     * @var ArrayCollection|GamePlayImage[]
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\GamePlayImage", mappedBy="gamePlay")
+     */
+    protected $images;
 
     /**
      * @return string

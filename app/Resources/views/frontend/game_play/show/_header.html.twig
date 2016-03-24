@@ -1,0 +1,81 @@
+{% from "macros/games.html.twig" import duration, playerCount %}
+{% from 'macros/items.html.twig' import blockquoteOne %}
+
+{% set product = game_play.product %}
+
+<div class="img-box-5">
+    <!-- Container -->
+    <div class="container">
+        <!-- Image Box #5 Item -->
+        <div class="img-box-5-item">
+            <div class="row">
+                <div class="col-md-4">
+                    <!-- Image Box #5 Image -->
+                    <div class="img-box-5-img">
+                        <!-- Image -->
+                        {% if product.imageCouverture %}
+                            <a href="{{ product.imageCouverture.webPath | imagine_filter('default') }}" rel="product"
+                               class="fancybox"><img src="{{ product.imageCouverture.webPath | imagine_filter('default') }}"
+                                                     alt="" class="img-responsive img-thumbnail"/></a>
+                        {% endif %}
+
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <!-- Image Box #5 Content -->
+                    <div class="img-box-5-content">
+
+                        <div class="container">
+                            <div class="row">
+                                {% if product.shortDescription %}
+                                    {{ blockquoteOne(product.shortDescription) }}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="container">
+                            <div class="row">
+                                <ul class="list-unstyled">
+
+                                    {#TODO playerCount#}
+                                        <li>
+                                            <p class="pull-left bg-color square-2 rounded-2">
+                                                <span class="fa fa-user white"></span>
+                                            </p>
+                                            <p class="game-attribute">
+                                                4 joueurs
+                                            </p>
+                                        </li>
+
+
+                                    {#TODO playedAt#}
+                                    {% if game_play.createdAt is not null %}
+                                        <li>
+                                            <p class="pull-left bg-color square-2 rounded-2">
+                                                <span class="fa fa-calendar white"></span>
+                                            </p>
+                                            <p class="game-attribute">
+                                                Joué le {{ game_play.createdAt|localizeddate('long', 'none') }}
+                                            </p>
+
+                                        </li>
+                                    {% endif %}
+
+                                </ul>
+                            </div>
+
+                            {#TODO voir pour un render url#}
+                            {% if userGameAttribute is defined %}
+                                {% include "frontend/game/show/toolbar.html.twig" with {'product': product, 'userGameAttribute': userGameAttribute} only %}
+                            {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
