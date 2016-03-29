@@ -22,6 +22,14 @@ default:
             filters:
                 tags: "@taxonomies"
 
+        users:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - AppBundle\Behat\UtilsContext
+                - AppBundle\Behat\UserContext
+            filters:
+                tags: "@users"
+
         products:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext

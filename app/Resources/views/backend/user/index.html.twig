@@ -24,7 +24,7 @@
 {% endblock %}
 
 {% block new_entity_button %}
-    <a class="btn btn-primary" href="{{ path('app_admin_user_create') }}">
+    <a class="btn btn-primary" href="{{ path('sylius_admin_user_create') }}">
         <span class="glyphicon glyphicon-plus-sign"></span>
         Nouvel utilisateur
     </a>
@@ -36,7 +36,8 @@
         <tr>
             <th>#</th>
             <th>{{ 'label.name'|trans }}</th>
-            <th>{{ sorting('app_admin_user_index', 'label.created_at'|trans, 'created', 'desc', icon, currentOrder) }}</th>
+            <th>{{ 'label.email'|trans }}</th>
+            <th>{{ sorting('sylius_admin_user_index', 'label.created_at'|trans, 'created', 'desc', icon, currentOrder) }}</th>
         </tr>
         </thead>
         <tbody>
@@ -44,17 +45,18 @@
             <tr>
                 <td>{{ user.id }}</td>
                 <td>{{ user }}</td>
-                <td>{{ user.created|localizeddate('long', 'none') }}</td>
+                <td>{{ user.customer.email }}</td>
+                <td>{{ user.createdAt|localizeddate('long', 'none') }}</td>
                 <td class="text-right">
                     <ul class="list-inline text-nowrap">
                         {#<li>#}
                             {#{{ button.show(path('user_show', { 'id': user.id, 'slug': user.slug })) }}#}
                         {#</li>#}
                         <li>
-                            {{ button.edit(path('app_admin_user_update', { 'id': user.id })) }}
+                            {{ button.edit(path('sylius_admin_user_update', { 'id': user.id })) }}
                         </li>
                         <li>
-                            {{ button.delete(path('app_admin_user_delete', { 'id': user.id })) }}
+                            {{ button.delete(path('sylius_admin_user_delete', { 'id': user.id })) }}
                         </li>
                     </ul>
                 </td>

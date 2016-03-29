@@ -47,3 +47,6 @@ sylius_admin_taxonomy:
 sylius_admin_taxon:
     resource: backend/taxon.yml
     prefix: /taxonomies/{taxonomyId}/
+
+sylius_admin_user:
+    resource: backend/user.yml
