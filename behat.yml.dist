@@ -18,8 +18,18 @@ default:
                 - AppBundle\Behat\UtilsContext
                 - AppBundle\Behat\UserContext
                 - AppBundle\Behat\TaxonomyContext
+                - AppBundle\Behat\TaxonContext
             filters:
                 tags: "@taxonomies"
+
+        products:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - JDJ\CoreBundle\Behat\UtilsContext
+                - JDJ\ComptaBundle\Behat\ProductContext
+                - JDJ\UserBundle\Behat\UserContext
+            filters:
+                tags: "@products"
 
         jeu:
             contexts:
@@ -130,15 +140,6 @@ default:
                  - JDJ\UserReviewBundle\Behat\NoteContext
              filters:
                  tags: "@userReview && ~@javascript"
-
-        products:
-            contexts:
-                - Behat\MinkExtension\Context\MinkContext
-                - JDJ\CoreBundle\Behat\UtilsContext
-                - JDJ\ComptaBundle\Behat\ProductContext
-                - JDJ\UserBundle\Behat\UserContext
-            filters:
-                tags: "@products"
 
         paymentMethods:
             contexts:
