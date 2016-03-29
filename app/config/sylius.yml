@@ -121,6 +121,10 @@ sylius_resource:
         app.person:
             classes:
                 model: AppBundle\Entity\Person
+                repository: AppBundle\Repository\PersonRepository
+        app.person_image:
+            classes:
+                model: AppBundle\Entity\PersonImage
         app.game_play:
             classes:
                 model: AppBundle\Entity\GamePlay

@@ -63,6 +63,13 @@ class Person implements ResourceInterface
     private $slug;
 
     /**
+     * @var PersonImage[]|Collection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\PersonImage", mappedBy="person", cascade={"persist", "merge"})
+     */
+    protected $images;
+
+    /**
      * @var ProductInterface[]|Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Product", mappedBy="designers", cascade={"persist", "merge"})
@@ -94,6 +101,23 @@ class Person implements ResourceInterface
         $this->images = new ArrayCollection();
     }
 
+    /**
+     * @return PersonImage
+     */
+    public function getMainImage()
+    {
+        foreach ($this->images as $image) {
+            if ($image->isMain()) {
+                return $image;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @deprecated use getMainImage instead
+     */
     public function getImage()
     {
         return null;

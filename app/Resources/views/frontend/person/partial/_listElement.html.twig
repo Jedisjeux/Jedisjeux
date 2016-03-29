@@ -1,11 +1,11 @@
 {% from 'macros/persons.html.twig' import image %}
 
-{% set personHref = path('app_person_show', { 'id': person.id }) %}
+{% set personHref = path('app_person_show', { 'slug': person.slug }) %}
 
 <!-- Image Box #3 Item -->
 <div class="img-box-7-item">
     <a href="{{ personHref }}">
-        <img src="{{ image(person, 'thumbnail_XL') }}" alt="" class="img-round img-responsive">
+        <img src="{{ image(person, 'thumbnail_XL') }}" alt="" class="img-responsive">
     </a>
     <h4><a href="{{ personHref }}">{{ person }}</a></h4>
     <div class="bor bg-lblue"></div>
