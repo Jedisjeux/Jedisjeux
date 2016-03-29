@@ -120,7 +120,7 @@ sylius_resource:
                 model: AppBundle\Entity\Country
         app.person:
             classes:
-                model: JDJ\LudographieBundle\Entity\Personne
+                model: AppBundle\Entity\Person
         app.game_play:
             classes:
                 model: AppBundle\Entity\GamePlay

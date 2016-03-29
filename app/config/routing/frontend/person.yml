@@ -1,0 +1,7 @@
+app_person:
+    resource: |
+        alias: app.person
+        path: /ludographies
+        templates: :frontend/person
+        redirect: index
+    type: sylius.resource
