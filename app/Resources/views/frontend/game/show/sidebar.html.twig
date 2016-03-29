@@ -1,26 +1,5 @@
 <div class="sidebar">
 
-    {% include "frontend/game/show/sidebar/user-review.html.twig" with {'jeu': jeu} only %}
-
-    <!-- Gallery Widget -->
-    <div class="s-widget">
-        <div class="btn-group btn-group-xs pull-right title-button">
-            <a class="btn btn-black" href="{{ path('jeu_image_new', {'id': jeu.id}) }}">
-                <span class="fa fa-camera"></span> ajouter une photo
-            </a>
-        </div>
-        <!-- Heading -->
-        <h5><i class="fa fa-camera color"></i> Photos</h5>
-        <!-- Widgets Content -->
-        <div class="widget-content gallery">
-            {% for image in jeu.images %}
-                <a href="{{ image.webPath | imagine_filter('default') }}" rel="jeu" class="fancybox" title="{{ image.description }}">
-                    <img src="{{ image.webPath | imagine_filter('thumbnail_S') }}" alt="" class="img-responsive img-thumbnail"/>
-                </a>
-            {% endfor %}
-        </div>
-    </div>
-
     <div class="s-widget">
         <!-- Heading -->
         <h5><i class="fa fa-bookmark color"></i> Édition</h5>
@@ -51,6 +30,22 @@
 
         </div>
     </div>
+
+    <!-- Gallery Widget -->
+    <div class="s-widget">
+        <!-- Heading -->
+        <h5><i class="fa fa-camera color"></i> Photos</h5>
+        <!-- Widgets Content -->
+        <div class="widget-content gallery">
+            {% for image in jeu.images %}
+                <a href="{{ image.webPath | imagine_filter('default') }}" rel="jeu" class="fancybox" title="{{ image.description }}">
+                    <img src="{{ image.webPath | imagine_filter('thumbnail_S') }}" alt="" class="img-responsive img-thumbnail"/>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% include "frontend/game/show/sidebar/user-review.html.twig" with {'jeu': jeu} only %}
 
     <!-- Material list -->
     {% if jeu.materiel %}
