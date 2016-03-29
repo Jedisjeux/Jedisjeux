@@ -43,7 +43,7 @@
                                                 <span class="fa fa-user white"></span>
                                             </p>
                                             <p class="game-attribute">
-                                                 {{ playerCount(jeu) }}
+                                                {{ playerCount(jeu) }}
                                             </p>
                                         </li>
                                     {% endif %}
@@ -71,14 +71,16 @@
                                     {% endif %}
 
                                     {% if jeu.mechanisms|length > 0 %}
-                                        <li>
-                                            <p class="pull-left bg-color square-2 rounded-2">
-                                                <span class="fa fa-cog white"></span>
-                                            </p>
-                                            <p class="game-attribute">
-                                                Mécanismes :
-                                                {% for key, mechanism in jeu.mechanisms %}{% if (key > 0) %},{% endif %}
-                                                    <a
+                                    <li>
+                                        <p class="pull-left bg-color square-2 rounded-2">
+                                            <span class="fa fa-cog white"></span>
+                                        </p>
+                                        <p class="game-attribute">
+                                            Mécanismes :
+                                            {% set first = true %}
+                                            {% for mechanism in jeu.mechanisms %}{% if not first %},{% endif %}
+                                            {% set first = false %}
+                                            <a
                                                     href="{{ path('sylius_product_index_by_taxon', { 'permalink': mechanism.permalink }) }}">{{ mechanism }}</a>{% endfor %}
                                             </p>
                                         </li>
@@ -91,7 +93,10 @@
                                             </p>
                                             <p class="game-attribute">
                                                 Thèmes :
-                                                {% for key, theme in jeu.themes %}{% if (key > 0) %},{% endif %} <a
+                                                {% set first = true %}
+                                                {% for key, theme in jeu.themes %}{% if not first %},{% endif %}
+                                                {% set first = false %}
+                                                <a
                                                     href="{{ path('sylius_product_index_by_taxon', { 'permalink': theme.permalink }) }}">{{ theme }}</a>{% endfor %}
                                             </p>
                                         </li>
