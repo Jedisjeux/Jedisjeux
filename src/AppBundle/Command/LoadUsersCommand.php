@@ -66,9 +66,11 @@ class LoadUsersCommand extends ContainerAwareCommand
 
         $user->getCustomer()->setCode('user-'.$data['id']);
         $user->setEmail($data['email']);
+        $user->setEmailCanonical($canonicalizer->canonicalize($user->getEmail()));
         $user->setUsername($data['username']);
         $user->setUsernameCanonical($canonicalizer->canonicalize($user->getUsername()));
-        $user->setEmailCanonical($canonicalizer->canonicalize($user->getEmail()));
+        $user->setCreatedAt(\DateTime::createFromFormat('Y-m-d H:i:s', $data['createdAt']));
+        $user->setUpdatedAt(\DateTime::createFromFormat('Y-m-d H:i:s', $data['updatedAt']));
 
         if (null === $user->getId()) {
             $user->setPlainPassword(md5(uniqid($user->getUsername(), true)));
@@ -103,7 +105,9 @@ select      old.user_id as id,
             old.user_email as email,
             old.user_avatar,
             old.group_id,
-            1 as enabled
+            1 as enabled,
+            FROM_UNIXTIME(old.user_regdate) as createdAt,
+            FROM_UNIXTIME(old.user_regdate) as updatedAt
 from        jedisjeux.phpbb3_users old
 where       old.user_email != ''
 group by    old.username_clean
