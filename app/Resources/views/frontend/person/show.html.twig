@@ -12,14 +12,14 @@
 {% block body -%}
 
     <div class="col-md-8">
-        {#{% include "ludographie/personne/show/header.html.twig" with {'personne': personne} only %}#}
+        {% include "frontend/person/show/header.html.twig" %}
 
-        {#{% include "ludographie/personne/show/nav-tab.html.twig" with {'personne': personne, 'jeux': jeux} only %}#}
+        {% include "frontend/person/show/nav-tab.html.twig" %}
 
     </div>
 
     <div class="col-md-4">
-        {#{% include "ludographie/personne/show/sidebar.html.twig" with {'personne': personne} only %}#}
+        {% include "frontend/person/show/sidebar.html.twig" %}
     </div>
 
 {% endblock %}

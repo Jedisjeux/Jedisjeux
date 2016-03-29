@@ -258,7 +258,7 @@ class Person implements ResourceInterface
      *
      * @param string $description
      *
-     * @return Personne
+     * @return $this
      */
     public function setDescription($description)
     {
@@ -282,7 +282,7 @@ class Person implements ResourceInterface
      *
      * @param string $slug
      *
-     * @return Personne
+     * @return $this
      */
     public function setSlug($slug)
     {
@@ -299,6 +299,26 @@ class Person implements ResourceInterface
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * @return PersonImage[]|Collection
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    /**
+     * @param PersonImage[]|Collection $images
+     *
+     * @return $this
+     */
+    public function setImages($images)
+    {
+        $this->images = $images;
+
+        return $this;
     }
 
     /**
