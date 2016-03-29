@@ -55,16 +55,16 @@ EOM;
 
         $query = <<<EOM
 insert into jdj_designer_product (
-            personne_id,
+            person_id,
             product_id
 )
-select      personne.id,
+select      person.id,
   product.id
 from        jedisjeux.jdj_personne_game old
   inner join  sylius_product product
     on product.code = concat('game-', old.id_game)
-  inner join  jdj_personne personne
-    on personne.id = old.id_personne
+  inner join  jdj_person person
+    on person.id = old.id_personne
 where       old.type_relation = 'auteur'
 EOM;
         $this->getDatabaseConnection()->executeQuery($query);
@@ -79,16 +79,16 @@ EOM;
 
         $query = <<<EOM
 insert into jdj_publisher_product (
-            personne_id,
+            person_id,
             product_id
 )
-select      personne.id,
+select      person.id,
   product.id
 from        jedisjeux.jdj_personne_game old
   inner join  sylius_product product
     on product.code = concat('game-', old.id_game)
-  inner join  jdj_personne personne
-    on personne.id = old.id_personne
+  inner join  jdj_person person
+    on person.id = old.id_personne
 where       old.type_relation = 'editeur'
 EOM;
         $this->getDatabaseConnection()->executeQuery($query);
@@ -103,16 +103,16 @@ EOM;
 
         $query = <<<EOM
 insert into jdj_artist_product (
-            personne_id,
+            person_id,
             product_id
 )
-select      personne.id,
+select      person.id,
   product.id
 from        jedisjeux.jdj_personne_game old
   inner join  sylius_product product
     on product.code = concat('game-', old.id_game)
-  inner join  jdj_personne personne
-    on personne.id = old.id_personne
+  inner join  jdj_personne person
+    on person.id = old.id_personne
 where       old.type_relation = 'illustrateur'
 EOM;
         $this->getDatabaseConnection()->executeQuery($query);

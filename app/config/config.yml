@@ -437,14 +437,14 @@ fos_elastica:
                       listener:
                           immediate: ~
                       finder: ~
-              personne:
+              person:
                   mappings:
-                      prenom: ~
-                      nom: ~
+                      firstName: ~
+                      lastName: ~
                       slug: { search_analyzer: custom_search_analyzer, index_analyzer: custom_index_analyzer, type: string }
                   persistence:
                       driver: orm
-                      model: JDJ\LudographieBundle\Entity\Personne
+                      model: AppBundle\Entity\Person
                       provider: ~
                       listener:
                           immediate: ~

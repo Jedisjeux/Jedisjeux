@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+{% from 'macros/misc.html.twig' import pagination %}
+
+{% block headline %}
+    Les ludographies
+{% endblock %}
+
+{% block breadcrumb_content %}
+    <a href="{{ path('app_person_index') }}">Ludographies</a>
+{% endblock %}
+
+{% block body -%}
+
+    {% include 'frontend/person/partial/_list.html.twig' with {'persons': resources} %}
+    <div class="pagination-wrapper">
+        <div class="pagination-bottom">
+            {{ pagination(resources) }}
+        </div>
+    </div>
+{% endblock %}

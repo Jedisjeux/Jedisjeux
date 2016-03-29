@@ -122,7 +122,7 @@ class Product extends BaseProduct implements ReviewableInterface
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="JDJ\LudographieBundle\Entity\Personne", inversedBy="designerProducts", cascade={"persist", "merge"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Person", inversedBy="designerProducts", cascade={"persist", "merge"})
      * @ORM\JoinTable(name="jdj_designer_product")
      */
     protected $designers;
@@ -130,7 +130,7 @@ class Product extends BaseProduct implements ReviewableInterface
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="JDJ\LudographieBundle\Entity\Personne", inversedBy="artistProducts", cascade={"persist", "merge"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Person", inversedBy="artistProducts", cascade={"persist", "merge"})
      * @ORM\JoinTable(name="jdj_artist_product")
      */
     protected $artists;
@@ -138,7 +138,7 @@ class Product extends BaseProduct implements ReviewableInterface
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="JDJ\LudographieBundle\Entity\Personne", inversedBy="publisherProducts", cascade={"persist", "merge"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Person", inversedBy="publisherProducts", cascade={"persist", "merge"})
      * @ORM\JoinTable(name="jdj_publisher_product")
      */
     protected $publishers;

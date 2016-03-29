@@ -9,6 +9,7 @@
 namespace JDJ\SearchBundle\Controller;
 
 use AppBundle\Entity\Customer;
+use AppBundle\Entity\Person;
 use AppBundle\Entity\Product;
 use AppBundle\Entity\Topic;
 use Elastica\Query\QueryString;
@@ -122,13 +123,12 @@ class SearchController extends Controller
                 );
             }
 
-            if ($entity instanceof Personne) {
+            if ($entity instanceof Person) {
                 $result = array(
                     'value' => (string)$entity,
                     'label' => (string)$entity,
-                    'image' => (null === $entity->getImage()) ? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : $this->get('liip_imagine.cache.manager')->getBrowserPath($entity->getImage()->getWebPath(), 'thumbnail'),
-                    'href' => $this->generateUrl('personne_show', array(
-                            'id' => $entity->getId(),
+                    'image' => (null === $entity->getMainImage()) ? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : $this->get('liip_imagine.cache.manager')->getBrowserPath($entity->getMainImage()->getWebPath(), 'thumbnail'),
+                    'href' => $this->generateUrl('app_person_show', array(
                             'slug' => $entity->getSlug(),
                         )
                     ),

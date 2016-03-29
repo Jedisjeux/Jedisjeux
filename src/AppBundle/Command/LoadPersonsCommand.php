@@ -10,6 +10,7 @@ namespace AppBundle\Command;
 
 use Doctrine\ORM\EntityRepository;
 use JDJ\LudographieBundle\Entity\Personne;
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -19,7 +20,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class LoadPersonsCommand extends LoadCommand
 {
-    protected $writeEntityInOutput = false;
+    protected $writeEntityInOutput = true;
 
     /**
      * @inheritdoc
@@ -38,9 +39,9 @@ select      old.id,
             case
                 when old.nom_famille = '' then old.nom
                 else old.nom_famille
-            end as nom,
-            old.prenom as prenom,
-            old.siteweb as siteWeb,
+            end as lastName,
+            old.prenom as firstName,
+            old.siteweb as website,
             old.description as description,
             country.id as country_id
 from        jedisjeux.jdj_personnes old
@@ -59,10 +60,10 @@ EOM;
      */
     public function filterData(array $data)
     {
-        $data['country'] = !empty($data['country_id']) ? $this
-            ->getEntityManager()
-            ->getRepository('AppBundle:Country')
-            ->findOneBy(array('id' => $data['country_id'])) : null;
+//        $data['country'] = !empty($data['country_id']) ? $this
+//            ->getEntityManager()
+//            ->getRepository('AppBundle:Country')
+//            ->findOneBy(array('id' => $data['country_id'])) : null;
 
         return parent::filterData($data);
     }
@@ -80,16 +81,24 @@ EOM;
 
     public function createEntityNewInstance()
     {
-        return new Personne();
+        return $this->getFactory()->createNew();
+    }
+
+    /**
+     * @return Factory
+     */
+    public function getFactory()
+    {
+        return $this->getContainer()->get('app.factory.person');
     }
 
     public function getRepository()
     {
-        return $this->getEntityManager()->getRepository('JDJLudographieBundle:Personne');
+        return $this->getContainer()->get('app.repository.person');
     }
 
     public function getTableName()
     {
-        return "jdj_personne";
+        return "jdj_person";
     }
 }

@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block headline %}
+    {{ person }}
+{% endblock %}
+
+{% block breadcrumb_content %}
+    <a href="{{ path('app_person_index') }}">Ludographies</a>
+    / {{ person }}
+{% endblock %}
+
+{% block body -%}
+
+    <div class="col-md-8">
+        {% include "frontend/person/show/header.html.twig" %}
+
+        {% include "frontend/person/show/nav-tab.html.twig" %}
+
+    </div>
+
+    <div class="col-md-4">
+        {% include "frontend/person/show/sidebar.html.twig" %}
+    </div>
+
+{% endblock %}
