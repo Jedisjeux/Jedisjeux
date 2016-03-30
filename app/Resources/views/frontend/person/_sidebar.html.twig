@@ -1,151 +1,29 @@
 <!-- Sidebar -->
 <div class="sidebar">
 
-    {#{% for taxonomy in taxonomies %}#}
-        {#{% set taxons = taxonomy.taxons %}#}
-        {#<!-- Categories Widget -->#}
-        {#<div class="s-widget">#}
-            {#<!-- Heading -->#}
-            {#<h5><i class="fa fa-folder color"></i>&nbsp; {{ taxonomy.name }}</h5>#}
-            {#<!-- Widgets Content -->#}
-            {#<div class="widget-content categories">#}
-                {#<ul class="list-6">#}
-                    {#{% for key, thisTaxon in taxons %}#}
-                        {#{% if key < 5 %}#}
-                            {#{% set currentTaxon = taxon is defined and thisTaxon == taxon ? true : false %}#}
-                            {#<li>#}
-                                {#<a href="{{ path('sylius_product_index_by_taxon', { 'permalink': thisTaxon.permalink }) }}">#}
-                                    {#{% if currentTaxon %}#}
-                                    {#<strong>{% endif %}{{ thisTaxon }}{% if currentTaxon %}</strong>{% endif %}#}
-                                {#</a>#}
-                            {#</li>#}
-                        {#{% endif %}#}
-                    {#{% endfor %}#}
-                {#</ul>#}
-            {#</div>#}
-        {#</div>#}
-    {#{% endfor %}#}
-
-
-    <!-- Nav tab widget - popular, recent and comments -->
-    <div class="s-widget">
-        <h5><i class="fa fa-tags color"></i>&nbsp; Nav Tabs</h5>
-        <div class="widget-content tabs">
-            <div class="nav-tabs-two">
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs">
-                    <li class="active"><a href="#popular" data-toggle="tab">Popular</a></li>
-                    <li><a href="#recent" data-toggle="tab">Recent</a></li>
+    {% for taxonomy in taxonomies %}
+        {% set taxons = taxonomy.taxons %}
+        <!-- Categories Widget -->
+        <div class="s-widget">
+            <!-- Heading -->
+            <h5><i class="fa fa-folder color"></i>&nbsp; {{ taxonomy.name }}</h5>
+            <!-- Widgets Content -->
+            <div class="widget-content categories">
+                <ul class="list-6">
+                    {% for key, thisTaxon in taxons %}
+                        {% if key < 5 %}
+                            {% set currentTaxon = taxon is defined and thisTaxon == taxon ? true : false %}
+                            <li>
+                                <a href="{{ path('app_person_index_by_taxon', { 'permalink': thisTaxon.permalink }) }}">
+                                    {% if currentTaxon %}
+                                    <strong>{% endif %}{{ thisTaxon }}{% if currentTaxon %}</strong>{% endif %}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
                 </ul>
-                <!-- Tab content -->
-                <div class="tab-content">
-                    <!-- Popular posts -->
-                    <div class="tab-pane fade in active" id="popular">
-                        <ul>
-                            <li>
-                                <a href="#">
-                                    <!-- Item image -->
-                                    <img src="img/user/1.jpg" alt="" class="img-responsive img-thumbnail">
-                                    <!-- Item title -->
-                                    <span>Neque porro quisquam estui dolorem ipsum quia dolor sit</span>
-                                    <div class="clearfix"></div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <!-- Item image -->
-                                    <img src="img/user/2.jpg" alt="" class="img-responsive img-thumbnail">
-                                    <!-- Item title -->
-                                    <span>Temporibus autem quibusdam et aut officiis  aut rerum</span>
-                                    <div class="clearfix"></div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <!-- Item image -->
-                                    <img src="img/user/3.jpg" alt="" class="img-responsive img-thumbnail">
-                                    <!-- Item title -->
-                                    <span>Voluptates repudiandae sint et molestiae non recusand</span>
-                                    <div class="clearfix"></div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <!-- Item image -->
-                                    <img src="img/user/4.jpg" alt="" class="img-responsive img-thumbnail">
-                                    <!-- Item title -->
-                                    <span>Neque porro quisquam estui dolorem ipsum quia dolor sit</span>
-                                    <div class="clearfix"></div>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- Recent posts -->
-                    <div class="tab-pane fade" id="recent">
-                        <ul>
-                            <li>
-                                <a href="#">
-                                    <!-- Item image -->
-                                    <img src="img/user/1.jpg" alt="" class="img-responsive img-thumbnail">
-                                    <!-- Item title -->
-                                    <span>Neque porro quisquam estui dolorem ipsum quia dolor sit</span>
-                                    <div class="clearfix"></div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <!-- Item image -->
-                                    <img src="img/user/2.jpg" alt="" class="img-responsive img-thumbnail">
-                                    <!-- Item title -->
-                                    <span>Temporibus autem quibusdam et aut officiis  aut rerum</span>
-                                    <div class="clearfix"></div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <!-- Item image -->
-                                    <img src="img/user/3.jpg" alt="" class="img-responsive img-thumbnail">
-                                    <!-- Item title -->
-                                    <span>Voluptates repudiandae sint et molestiae non recusand</span>
-                                    <div class="clearfix"></div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <!-- Item image -->
-                                    <img src="img/user/4.jpg" alt="" class="img-responsive img-thumbnail">
-                                    <!-- Item title -->
-                                    <span>Neque porro quisquam estui dolorem ipsum quia dolor sit</span>
-                                    <div class="clearfix"></div>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
             </div>
         </div>
-    </div>
-
-    <!-- Tag Widget -->
-    <div class="s-widget">
-        <h5><i class="fa fa-tags color"></i>&nbsp; Tags</h5>
-        <!-- Widgets Content -->
-        <div class="widget-content">
-            <a href="#" class="label label-color">web</a>
-            <a href="#" class="label label-color">wordpress</a>
-            <a href="#" class="label label-color">php</a>
-            <a href="#" class="label label-color">jquery</a>
-            <a href="#" class="label label-color">java</a>
-            <a href="#" class="label label-color">photoshop</a>
-            <a href="#" class="label label-color">windows</a>
-            <a href="#" class="label label-color">android</a>
-            <a href="#" class="label label-color">ios</a>
-            <a href="#" class="label label-color">chrome</a>
-            <a href="#" class="label label-color">development</a>
-            <a href="#" class="label label-color">plugin</a>
-            <a href="#" class="label label-color">personal</a>
-            <a href="#" class="label label-color">general</a>
-        </div>
-    </div>
+    {% endfor %}
 
 </div>

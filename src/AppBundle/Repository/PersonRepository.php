@@ -10,6 +10,8 @@ namespace AppBundle\Repository;
 
 use Doctrine\ORM\QueryBuilder;
 use JDJ\CoreBundle\Entity\EntityRepository;
+use Pagerfanta\Pagerfanta;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -49,5 +51,31 @@ class PersonRepository extends EntityRepository
         parent::applySorting($queryBuilder, $sorting);
     }
 
+    /**
+     * Create paginator for products categorized under given taxon.
+     *
+     * @param TaxonInterface $taxon
+     * @param array $criteria
+     * @param array $sorting
+     *
+     * @return Pagerfanta
+     */
+    public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = [], array $sorting = [])
+    {
+        $queryBuilder = $this->getCollectionQueryBuilder();
+        $queryBuilder
+            ->innerJoin($this->getAlias().'.taxons', 'taxon')
+            ->andWhere($queryBuilder->expr()->orX(
+                'taxon = :taxon',
+                ':left < taxon.left AND taxon.right < :right'
+            ))
+            ->setParameter('taxon', $taxon)
+            ->setParameter('left', $taxon->getLeft())
+            ->setParameter('right', $taxon->getRight());
 
+        $this->applyCriteria($queryBuilder, $criteria);
+        $this->applySorting($queryBuilder, $sorting);
+
+        return $this->getPaginator($queryBuilder);
+    }
 }

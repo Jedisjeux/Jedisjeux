@@ -70,6 +70,14 @@ class Person implements ResourceInterface
     protected $images;
 
     /**
+     * @var Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Sylius\Component\Taxonomy\Model\TaxonInterface")
+     * @ORM\JoinTable("jdj_person_taxon")
+     */
+    protected $taxons;
+
+    /**
      * @var ProductInterface[]|Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Product", mappedBy="designers", cascade={"persist", "merge"})
@@ -317,6 +325,26 @@ class Person implements ResourceInterface
     public function setImages($images)
     {
         $this->images = $images;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getTaxons()
+    {
+        return $this->taxons;
+    }
+
+    /**
+     * @param Collection $taxons
+     *
+     * @return $this
+     */
+    public function setTaxons($taxons)
+    {
+        $this->taxons = $taxons;
 
         return $this;
     }

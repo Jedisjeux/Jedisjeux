@@ -18,6 +18,20 @@ app_person_index:
         sorting:
             gameCount: desc
 
+app_person_index_by_taxon:
+    methods: [GET]
+    path: /ludographies/{permalink}
+    defaults:
+        _controller: app.controller.person:indexByTaxonAction
+        _sylius:
+            paginate: 12
+            template: frontend/person/index.html.twig
+            sortable: true
+            sorting:
+                gameCount: desc
+    requirements:
+        permalink: "[^?]+"
+
 app_person_show:
     methods: [GET]
     path: /ludographie/{slug}

@@ -6,6 +6,12 @@
     Jeux
 {% endblock %}
 
+{% block subtitle %}
+    {% if taxon is defined %}
+        ayant pour {{ taxon.taxonomy }} : {{ taxon }}
+    {% endif %}
+{% endblock %}
+
 {% block breadcrumb_content %}
     {{ parent() }}
     Jeux /
