@@ -1,57 +1,61 @@
 -
-  id: 1
-  name: Allemagne
+  name: Europe
+  children:
+    -
+      id: 1
+      name: Allemagne
+    -
+      id: 2
+      name: France
+    -
+      id: 4
+      name: Italie
+    -
+      id: 5
+      name: Angleterre
+    -
+      id: 8
+      name: Belgique
+    -
+      id: 10
+      name: Suisse
+    -
+      id: 12
+      name: Espagne
+    -
+      id: 13
+      name: Autriche
+    -
+      id: 14
+      name: Pays-Bas
 -
-  id: 2
-  name: France
--
-  id: 3
-  name: Etat-Unis
--
-  id: 4
-  name: Italie
--
-  id: 5
-  name: Angleterre
+  name: Asie
+  children:
+    -
+      id: 46
+      name: Chine
+    -
+      id: 18
+      name: Japon
+    -
+      id: 22
+      name: Taïwan
 -
   id: 6
   name: Amérique
--
-  id: 7
-  name: Etats-Unis
--
-  id: 8
-  name: Belgique
--
-  id: 9
-  name: Etats Unis
--
-  id: 10
-  name: Suisse
--
-  id: 11
-  name: Belge
--
-  id: 12
-  name: Espagne
--
-  id: 13
-  name: Autriche
--
-  id: 14
-  name: Pays-Bas
--
-  id: 15
-  name: Canada
+  children:
+    -
+      id: 7
+      name: Etats-Unis
+    -
+      id: 15
+      name: Canada
 -
   id: 16
   name: Israël
 -
   id: 17
   name: Suédoise
--
-  id: 18
-  name: Japon
 -
   id: 19
   name: Luxembourg
@@ -62,17 +66,11 @@
   id: 21
   name: Polonaise
 -
-  id: 22
-  name: Taïwan
--
   id: 23
   name: Nouvelle Zélande
 -
   id: 24
   name: Québec
--
-  id: 25
-  name: Pays Bas
 -
   id: 26
   name: Pologne
@@ -88,9 +86,6 @@
 -
   id: 30
   name: Russie
--
-  id: 31
-  name: Etat Unis
 -
   id: 32
   name: Danemark
@@ -133,6 +128,3 @@
 -
   id: 45
   name: Roumanie
--
-  id: 46
-  name: Chine
