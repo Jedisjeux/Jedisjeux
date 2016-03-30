@@ -11,10 +11,22 @@
 
 {% block body -%}
 
-    {% include 'frontend/person/partial/_list.html.twig' with {'persons': resources} %}
-    <div class="pagination-wrapper">
-        <div class="pagination-bottom">
-            {{ pagination(resources) }}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+
+                <div class="container">
+                    {% include 'frontend/person/partial/_list.html.twig' with {'persons': resources} %}
+                    {{ pagination(resources) }}
+                </div>
+
+            </div>
+            <div class="col-md-2">
+                {% include 'frontend/person/_sidebar.html.twig' %}
+            </div>
         </div>
     </div>
+
+
+
 {% endblock %}

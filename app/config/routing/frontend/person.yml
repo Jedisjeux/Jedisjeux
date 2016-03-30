@@ -10,7 +10,7 @@ app_person_index:
     methods: [GET]
     path: /ludographies/
     defaults:
-      _controller: app.controller.person:indexAction
+      _controller: app.controller.person:indexWithTaxonsAction
       _sylius:
         template: frontend/person/index.html.twig
         sortable: true
