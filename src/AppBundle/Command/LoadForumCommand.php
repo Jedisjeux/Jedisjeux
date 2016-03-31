@@ -73,7 +73,7 @@ class LoadForumCommand extends ContainerAwareCommand
         /** @var TaxonInterface $taxon */
         $taxon = $this->getContainer()
             ->get('sylius.repository.taxon')
-            ->findOneBy(array('name' => $data['name']));
+            ->findOneBy(array('name' => $data['name'], 'taxonomy' => $taxonomy));
 
         if (null === $taxon) {
             $taxon = $this->getTaxonFactory()->createNew();

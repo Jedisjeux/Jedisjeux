@@ -64,6 +64,7 @@ from jedisjeux.jdj_personnes old
       on person.id = old.id
   inner join sylius_taxon_translation taxonTranslation
     on convert(taxonTranslation.name USING utf8) like convert(old.nationnalite USING utf8)
+    where taxonTranslation.permalink like 'zones%'
 EOM;
         $this->getDatabaseConnection()->executeQuery($query);
     }

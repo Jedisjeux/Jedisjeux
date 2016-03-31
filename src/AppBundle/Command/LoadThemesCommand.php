@@ -108,7 +108,7 @@ class LoadThemesCommand extends ContainerAwareCommand
         $locale = $this->getContainer()->getParameter('locale');
 
         /** @var TaxonInterface $taxon */
-        $taxon = $this->getRepository()->findOneBy(array('name' => $data['name']));
+        $taxon = $this->getRepository()->findOneBy(array('name' => $data['name'], 'taxonomy' => $parentTaxon->getTaxonomy()));
 
         if (null === $taxon) {
             $taxon = $this->getFactory()->createNew();
