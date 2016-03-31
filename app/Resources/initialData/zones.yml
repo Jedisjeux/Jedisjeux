@@ -28,6 +28,12 @@
     -
       id: 14
       name: Pays-Bas
+    -
+      id: 28
+      name: République Tchèque
+    -
+      id: 43
+      name: Portugal
 -
   name: Asie
   children:
@@ -40,6 +46,9 @@
     -
       id: 22
       name: Taïwan
+    -
+      id: 16
+      name: Israël
 -
   id: 6
   name: Amérique
@@ -50,18 +59,18 @@
     -
       id: 15
       name: Canada
--
-  id: 16
-  name: Israël
--
-  id: 17
-  name: Suédoise
+    -
+      id: 24
+      name: Québec
+    -
+      id: 41
+      name: Mexique
+    -
+      id: 33
+      name: Brésil
 -
   id: 19
   name: Luxembourg
--
-  id: 20
-  name: Tchéquie
 -
   id: 21
   name: Polonaise
@@ -69,17 +78,11 @@
   id: 23
   name: Nouvelle Zélande
 -
-  id: 24
-  name: Québec
--
   id: 26
   name: Pologne
 -
   id: 27
   name: Finlande
--
-  id: 28
-  name: République Tchèque
 -
   id: 29
   name: Ecosse
@@ -89,9 +92,6 @@
 -
   id: 32
   name: Danemark
--
-  id: 33
-  name: Brésil
 -
   id: 34
   name: Australie
@@ -114,14 +114,8 @@
   id: 40
   name: Croatie
 -
-  id: 41
-  name: Mexique
--
   id: 42
   name: Pays baltes
--
-  id: 43
-  name: Portugal
 -
   id: 44
   name: Corée
