@@ -20,13 +20,13 @@
 
 {% block breadcrumb_content %}
     {{ parent() }}
-    Catégories
+    Taxonomies
 {% endblock %}
 
 {% block new_entity_button %}
     <a class="btn btn-primary" href="{{ path('sylius_admin_taxonomy_create') }}">
         <span class="glyphicon glyphicon-plus-sign"></span>
-        Nouvelle catégorie
+        Nouvelle taxonomie
     </a>
 {% endblock new_entity_button %}
 

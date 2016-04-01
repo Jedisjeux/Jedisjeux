@@ -45,6 +45,10 @@ sylius_variation:
 sylius_taxonomy:
     driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
     resources:
+        taxonomy:
+            classes:
+                form:
+                    default: AppBundle\Form\Type\TaxonomyType
         taxon:
             classes:
                 model: AppBundle\Entity\Taxon

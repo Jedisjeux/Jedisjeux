@@ -584,6 +584,10 @@
         <target>Confirmation</target>
         <jms:reference-file line="6">Resources/views/_confirm_modal.html.twig</jms:reference-file>
       </trans-unit>
+      <trans-unit>
+          <source>label.code</source>
+          <target>Code</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
