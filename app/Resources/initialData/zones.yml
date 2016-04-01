@@ -34,6 +34,45 @@
     -
       id: 43
       name: Portugal
+    -
+      name: Europe occidentale
+      children:
+        -
+          id: 19
+          name: Luxembourg
+        -
+          id: 45
+          name: Roumanie
+        -
+          id: 29
+          name: Ecosse
+        -
+          id: 32
+          name: Danemark
+        -
+          id: 35
+          name: Suède
+        -
+          id: 39
+          name: Grèce
+        -
+          id: 40
+          name: Croatie
+    -
+      name: Europe de l'est
+      children:
+        -
+          id: 26
+          name: Pologne
+        -
+          id: 27
+          name: Finlande
+        -
+          id: 42
+          name: Pays baltes
+        -
+          id: 30
+          name: Russie
 -
   name: Asie
   children:
@@ -49,6 +88,9 @@
     -
       id: 16
       name: Israël
+    -
+      id: 44
+      name: Corée
 -
   id: 6
   name: Amérique
@@ -68,57 +110,21 @@
     -
       id: 33
       name: Brésil
+    -
+      name: Amérique du sud
+      children:
+        -
+          id: 37
+          name: Argentine
+        -
+          id: 38
+          name: Chili
 -
-  id: 19
-  name: Luxembourg
--
-  id: 21
-  name: Polonaise
--
-  id: 23
-  name: Nouvelle Zélande
--
-  id: 26
-  name: Pologne
--
-  id: 27
-  name: Finlande
--
-  id: 29
-  name: Ecosse
--
-  id: 30
-  name: Russie
--
-  id: 32
-  name: Danemark
--
-  id: 34
-  name: Australie
--
-  id: 35
-  name: Suède
--
-  id: 36
-  name: Hong Kong
--
-  id: 37
-  name: Argentine
--
-  id: 38
-  name: Chili
--
-  id: 39
-  name: Grèce
--
-  id: 40
-  name: Croatie
--
-  id: 42
-  name: Pays baltes
--
-  id: 44
-  name: Corée
--
-  id: 45
-  name: Roumanie
+  name: Océanie
+  children:
+    -
+      id: 23
+      name: Nouvelle Zélande
+    -
+      id: 34
+      name: Australie
