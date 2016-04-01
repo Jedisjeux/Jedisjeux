@@ -1,0 +1,13 @@
+app_partial_topic_index:
+    methods: [GET]
+    path: /topics/
+    defaults:
+        _controller: app.controller.topic:indexAction
+        _sylius:
+            criteria: $criteria
+            template: $template
+            paginate: $paginate
+            sortable: true
+            sorting: $sorting
+    requirements:
+        template: "[^?]+"
