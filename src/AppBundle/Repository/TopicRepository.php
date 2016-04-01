@@ -8,6 +8,7 @@
 
 namespace AppBundle\Repository;
 
+use Doctrine\ORM\QueryBuilder;
 use JDJ\CoreBundle\Entity\EntityRepository;
 use Pagerfanta\Pagerfanta;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
@@ -17,6 +18,22 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
  */
 class TopicRepository extends EntityRepository
 {
+    /**
+     * {@inheritdoc}
+     */
+    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = [])
+    {
+        if (isset($sorting['postCount'])) {
+
+            $queryBuilder
+                ->addSelect("SIZE(".$this->getPropertyName('posts')." as HIDDEN postCount")
+                ->addOrderBy('postCount', $sorting['postCount']);
+            unset($sorting['postCount']);
+        }
+
+        parent::applySorting($queryBuilder, $sorting);
+    }
+
     /**
      * Create paginator for products categorized under given taxon.
      *
