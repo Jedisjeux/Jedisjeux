@@ -31,15 +31,8 @@ admin_country:
         redirect: index
     type: sylius.resource
 
-admin_person:
-    resource: |
-        alias: app.person
-        section: admin
-        path: personnes
-        form: JDJ\LudographieBundle\Form\PersonneType
-        templates: :backend/person
-        redirect: index
-    type: sylius.resource
+app_admin_person:
+    resource: backend/person.yml
 
 sylius_admin_taxonomy:
     resource: backend/taxonomy.yml

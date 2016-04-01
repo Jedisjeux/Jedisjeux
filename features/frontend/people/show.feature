@@ -1,11 +1,11 @@
-@frontend @persons @index
-Feature: View persons
-  In order to manage persons
+@frontend @people @index
+Feature: View people
+  In order to manage people
   As a visitor
   I need to be able to view a person
 
   Background:
-    Given there are persons:
+    Given there are people:
       | first_name | last_name |
       | Reiner     | Knizia    |
       | Martin     | Wallace   |

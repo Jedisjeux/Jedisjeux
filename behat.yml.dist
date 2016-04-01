@@ -30,14 +30,14 @@ default:
             filters:
                 tags: "@users"
 
-        persons:
+        people:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - AppBundle\Behat\UtilsContext
                 - AppBundle\Behat\UserContext
                 - AppBundle\Behat\PersonContext
             filters:
-                tags: "@persons"
+                tags: "@people"
 
         topics:
              contexts:

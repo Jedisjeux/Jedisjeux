@@ -39,14 +39,14 @@
         </tr>
         </thead>
         <tbody>
-        {% for person in persons %}
+        {% for person in people %}
             <tr>
                 <td>{{ person.id }}</td>
                 <td>{{ person }}</td>
                 <td class="text-right">
                     <ul class="list-inline text-nowrap">
                         <li>
-                            {{ button.show(path('personne_show', { 'id': person.id, 'slug': person.slug })) }}
+                            {{ button.show(path('app_person_show', { 'slug': person.slug })) }}
                         </li>
                         <li>
                             {{ button.edit(path('app_admin_person_update', { 'id': person.id })) }}
@@ -65,7 +65,7 @@
 {% block Pagination %}
     <div class="pagination-wrapper">
         <div class="pagination-bottom">
-            {{ pagination(persons) }}
+            {{ pagination(people) }}
         </div>
     </div>
 {% endblock %}

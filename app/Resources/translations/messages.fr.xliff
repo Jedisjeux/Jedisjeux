@@ -588,6 +588,10 @@
           <source>label.code</source>
           <target>Code</target>
       </trans-unit>
+      <trans-unit>
+            <source>label.zone</source>
+            <target>Zone</target>
+        </trans-unit>
     </body>
   </file>
 </xliff>

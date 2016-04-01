@@ -16,13 +16,13 @@ use Behat\Gherkin\Node\TableNode;
 class PersonContext extends DefaultContext
 {
     /**
-     * @Given /^there are persons:$/
-     * @Given /^there are following persons:$/
-     * @Given /^the following persons exist:$/
+     * @Given /^there are people:$/
+     * @Given /^there are following people:$/
+     * @Given /^the following people exist:$/
      *
      * @param TableNode $table
      */
-    public function thereArePersons(TableNode $table)
+    public function thereArePeople(TableNode $table)
     {
         $manager = $this->getEntityManager();
 

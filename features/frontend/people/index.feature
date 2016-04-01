@@ -1,17 +1,17 @@
-@frontend @persons @index
-Feature: View list of persons
-  In order to manage persons
+@frontend @people @index
+Feature: View list of people
+  In order to manage people
   As a visitor
-  I need to be able to view all the persons
+  I need to be able to view all the people
 
   Background:
-    Given there are persons:
+    Given there are people:
       | first_name | last_name |
       | Reiner     | Knizia    |
       | Martin     | Wallace   |
       | Leo        | Colovini  |
 
-  Scenario: View list of persons
+  Scenario: View list of people
     When I am on "/ludographies/"
     Then I should see "Reiner Knizia"
     And I should see "Martin Wallace"

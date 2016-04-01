@@ -1,0 +1,7 @@
+admin_person:
+    resource: |
+        alias: app.person
+        section: admin
+        templates: :backend/person
+        redirect: index
+    type: sylius.resource

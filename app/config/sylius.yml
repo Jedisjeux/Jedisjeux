@@ -127,6 +127,8 @@ sylius_resource:
                 model: AppBundle\Entity\Person
                 repository: AppBundle\Repository\PersonRepository
                 controller: AppBundle\Controller\PersonController
+                form:
+                    default: AppBundle\Form\Type\PersonType
         app.person_image:
             classes:
                 model: AppBundle\Entity\PersonImage
