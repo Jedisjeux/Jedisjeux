@@ -24,7 +24,7 @@ class PersonType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('image', 'file', array(
+            ->add('mainImage', 'file', array(
                 'label' => 'label.image',
                 'required' => false,
             ))
@@ -35,7 +35,7 @@ class PersonType extends AbstractResourceType
                 'label' => 'label.first_name',
                 'required' => false,
             ))
-            ->add('taxons', 'entity', array(
+            ->add('zone', 'entity', array(
                 'label' => 'label.zone',
                 'class' => 'AppBundle:Taxon',
                 'choice_label' => 'name',

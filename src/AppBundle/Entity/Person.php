@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
  * Person
@@ -107,6 +108,7 @@ class Person implements ResourceInterface
         $this->artistProducts = new ArrayCollection();
         $this->publisherProducts = new ArrayCollection();
         $this->images = new ArrayCollection();
+        $this->taxons = new ArrayCollection();
     }
 
     /**
@@ -330,11 +332,28 @@ class Person implements ResourceInterface
     }
 
     /**
-     * @return Collection
+     * @param null|string $taxonomy
+     *
+     * @return Collection|\Sylius\Component\Taxonomy\Model\TaxonInterface[]
      */
-    public function getTaxons()
+    public function getTaxons($taxonomy = null)
     {
+        if (null !== $taxonomy) {
+            return $this->taxons->filter(function (TaxonInterface $taxon) use ($taxonomy) {
+                return $taxonomy === strtolower($taxon->getTaxonomy()->getCode());
+            });
+        }
+
         return $this->taxons;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getZone()
+    {
+        $zones = $this->getTaxons('zones');
+        return $zones->count() > 0 ? $zones->first() : null;
     }
 
     /**
