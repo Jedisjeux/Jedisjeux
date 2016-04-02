@@ -9,7 +9,7 @@ sylius_admin_taxon_create:
                 method: createForTaxonomy
                 arguments: $taxonomyId
             redirect:
-                route: sylius_backend_taxonomy_show
+                route: sylius_admin_taxonomy_show
                 parameters: {'id': $taxonomyId}
 
 sylius_admin_taxon_update:
@@ -20,7 +20,7 @@ sylius_admin_taxon_update:
         _sylius:
             template: backend/taxon/update.html.twig
             redirect:
-                route: sylius_backend_taxonomy_show
+                route: sylius_admin_taxonomy_show
                 parameters: {'id': $taxonomyId}
 
 #sylius_admin_taxon_product_index:
@@ -40,5 +40,5 @@ sylius_admin_taxon_delete:
         _sylius:
             #template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect:
-                route: sylius_backend_taxonomy_show
+                route: sylius_admin_taxonomy_show
                 parameters: {'id': $taxonomyId}
