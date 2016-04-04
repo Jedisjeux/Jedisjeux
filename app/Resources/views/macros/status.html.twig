@@ -4,20 +4,20 @@
     {% set statusClass = '' %}
     {% set iconClass = '' %}
 
-    {% if constant('JDJ\\JeuBundle\\Entity\\Jeu::PUBLISHED') == game.status %}
+    {% if constant('AppBundle\\Entity\\Product::PUBLISHED') == game.status %}
         {% set statusClass = 'success' %}
         {% set statusLabel = 'label.published'|trans %}
-    {% elseif constant('JDJ\\JeuBundle\\Entity\\Jeu::WRITING') == game.status %}
+    {% elseif constant('AppBundle\\Entity\\Product::WRITING') == game.status %}
         {% set statusClass = 'danger' %}
         {% set statusLabel = 'label.writing'|trans %}
-    {% elseif constant('JDJ\\JeuBundle\\Entity\\Jeu::NEED_A_TRANSLATION') == game.status %}
+    {% elseif constant('AppBundle\\Entity\\Product::NEED_A_TRANSLATION') == game.status %}
         {% set statusClass = 'danger' %}
         {% set statusLabel = 'label.need_a_translation'|trans %}
-    {% elseif constant('JDJ\\JeuBundle\\Entity\\NEED_A_REVIEW') == game.status %}
+    {% elseif constant('AppBundle\\Entity\\Product::NEED_A_REVIEW') == game.status %}
         {% set statusClass = 'warning' %}
         {% set statusLabel = 'label.need_a_review'|trans %}
         {% set iconClass = 'fa fa-laptop' %}
-    {% elseif constant('JDJ\\JeuBundle\\Entity\\Jeu::READY_TO_PUBLISH') == game.status %}
+    {% elseif constant('AppBundle\\Entity\\Product::READY_TO_PUBLISH') == game.status %}
         {% set statusClass = 'primary' %}
         {% set statusLabel = 'label.ready_to_published'|trans %}
     {% endif %}

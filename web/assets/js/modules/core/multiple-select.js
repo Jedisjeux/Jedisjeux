@@ -1,6 +1,4 @@
 $(function () {
-    $('.multiple-select').multipleSelect({
-        filter: true
-    });
+    $('.multiple-select').select2();
 
 });

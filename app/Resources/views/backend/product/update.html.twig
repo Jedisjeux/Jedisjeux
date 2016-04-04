@@ -12,9 +12,14 @@
 {% endblock %}
 
 {% block container %}
-    {{ form_start(form) }}
-    <input type="hidden" name="_method" value="PUT" />
-    {{ form_widget(form) }}
-    {{ action.update() }}
-    {{ form_end(form) }}
+    <div class="container">
+        <div class="col-md-12">
+            {{ form_start(form) }}
+            <input type="hidden" name="_method" value="PUT"/>
+            {% include 'backend/product/_form.html.twig' %}
+            <br />
+            {{ action.update() }}
+            {{ form_end(form) }}
+        </div>
+    </div>
 {% endblock container %}
