@@ -30,6 +30,8 @@ sylius_product:
                 model: AppBundle\Entity\Product
                 repository: AppBundle\Repository\ProductRepository
                 controller: AppBundle\Controller\ProductController
+                form:
+                    default: AppBundle\Form\Type\ProductType
             translation:
               classes:
                   model: AppBundle\Entity\ProductTranslation

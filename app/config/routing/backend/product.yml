@@ -1,0 +1,18 @@
+sylius_admin_product:
+    resource: |
+        alias: sylius.product
+        section: admin
+        templates: :backend/product
+        redirect: index
+    type: sylius.resource
+
+sylius_admin_product_index:
+    methods: [GET]
+    path: /products/
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            repository:
+                method: createFilterPaginator
+                arguments: [$criteria, $sorting]
+            template: backend/product/index.html.twig

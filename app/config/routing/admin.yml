@@ -43,3 +43,6 @@ sylius_admin_taxon:
 
 sylius_admin_user:
     resource: backend/user.yml
+
+sylius_admin_product:
+    resource: backend/product.yml

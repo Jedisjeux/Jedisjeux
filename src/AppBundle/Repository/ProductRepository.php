@@ -66,6 +66,12 @@ class ProductRepository extends BaseProductRepository
                 ->setParameter('name', '%' . $criteria['name'] . '%');
         }
 
+        if (!empty($criteria['query'])) {
+            $queryBuilder
+                ->andWhere('translation.name LIKE :query')
+                ->setParameter('query', '%' . $criteria['query'] . '%');
+        }
+
         if (empty($sorting)) {
             if (!is_array($sorting)) {
                 $sorting = [];
