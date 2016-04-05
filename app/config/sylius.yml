@@ -164,6 +164,8 @@ sylius_resource:
         app.product_variant_image:
             classes:
                 model: AppBundle\Entity\ProductVariantImage
+                form:
+                    default: AppBundle\Form\Type\ProductVariantImageType
         app.avatar:
             classes:
                 model: AppBundle\Entity\Avatar

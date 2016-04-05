@@ -11,7 +11,6 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use JDJ\CoreBundle\Entity\Image;
 use Sylius\Component\Product\Model\Product as BaseProduct;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
@@ -260,7 +259,7 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
-     * @return Image
+     * @return ProductVariantImage
      */
     public function getMainImage()
     {
@@ -268,7 +267,7 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
-     * @param Image $mainImage
+     * @param ProductVariantImage $mainImage
      * @return $this
      */
     public function setMainImage($mainImage)
@@ -277,7 +276,7 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
-     * @return Image
+     * @return ProductVariantImage
      */
     public function getMaterialImage()
     {

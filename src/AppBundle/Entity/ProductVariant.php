@@ -10,8 +10,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use JDJ\CoreBundle\Entity\Image;
-use Sylius\Component\Core\Model\ProductVariant as BaseProductVariant;
+use Sylius\Component\Product\Model\Variant;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -19,7 +18,7 @@ use Sylius\Component\Core\Model\ProductVariant as BaseProductVariant;
  * @ORM\Entity
  * @ORM\Table(name="sylius_product_variant")
  */
-class ProductVariant extends BaseProductVariant
+class ProductVariant extends Variant
 {
     /**
      * @var ArrayCollection|ProductVariantImage[]
@@ -36,7 +35,7 @@ class ProductVariant extends BaseProductVariant
     protected $releasedAt;
 
     /**
-     * @return Image
+     * @return ProductVariantImage
      */
     public function getMainImage()
     {
@@ -50,7 +49,7 @@ class ProductVariant extends BaseProductVariant
     }
 
     /**
-     * @return Image
+     * @return ProductVariantImage
      */
     public function getMaterialImage()
     {

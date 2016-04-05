@@ -609,6 +609,22 @@
           <target>Attributs</target>
       </trans-unit>
       <trans-unit>
+          <source>label.add_image</source>
+          <target>Ajouter une image</target>
+      </trans-unit>
+      <trans-unit>
+          <source>label.remove_this_image</source>
+          <target>Supprimer cette image</target>
+      </trans-unit>
+      <trans-unit>
+          <source>label.main</source>
+          <target>principale</target>
+      </trans-unit>
+      <trans-unit>
+          <source>label.material</source>
+          <target>Matériel</target>
+      </trans-unit>
+      <trans-unit>
           <source>label.zone</source>
           <target>Zone</target>
       </trans-unit>

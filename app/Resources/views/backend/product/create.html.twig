@@ -13,7 +13,8 @@
 
 {% block container %}
     {{ form_start(form) }}
-    {{ form_widget(form) }}
+    {% include 'backend/product/_form.html.twig' %}
+    <br />
     {{ action.create() }}
     {{ form_end(form) }}
 {% endblock container %}
