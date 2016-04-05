@@ -1,7 +1,5 @@
 <div class="tab-pane" id="categorization">
-    {{ form_row(form.mechanisms) }}
-    {{ form_row(form.themes) }}
-{#{% for taxonomyForm in form.taxons %}#}
-    {#{{ form_row(taxonomyForm) }}#}
-{#{% endfor %}#}
+{% for taxonomyForm in form.taxons %}
+    {{ form_row(taxonomyForm, { 'attr': { 'class': 'multiple-select' } } ) }}
+{% endfor %}
 </div>

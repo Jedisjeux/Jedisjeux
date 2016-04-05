@@ -334,7 +334,9 @@ class Product extends BaseProduct implements ReviewableInterface
             });
         }
 
-        return $this->taxons;
+        return $this->taxons->filter(function (TaxonInterface $taxon) use ($taxonomy) {
+            return $taxonomy !== 'forum';
+        });
     }
 
     /**

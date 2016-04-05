@@ -28,46 +28,7 @@ class ProductType extends AbstractResourceType
             ->add('name', null, array(
                 'label' => 'label.name',
             ))
-            ->add('mechanisms', 'entity', array(
-                'label' => 'label.mechanisms',
-                'class' => 'AppBundle:Taxon',
-                'attr' => array(
-                    'class' => 'multiple-select',
-                ),
-                'choice_label' => 'name',
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('o')
-                        ->join('o.taxonomy', 'taxonomy')
-                        ->join('taxonomy.root', 'rootTaxon')
-                        ->where('rootTaxon.code = :code')
-                        ->andWhere('o.parent IS NOT NULL')
-                        ->setParameter('code', 'mechanisms')
-                        ->orderBy('o.left');
-                },
-                'expanded' => false,
-                'multiple' => true,
-                'placeholder' => 'Choisissez un mécanisme',
-                'required' => false,
-            ))
-            ->add('themes', 'entity', array(
-                'label' => 'label.themes',
-                'class' => 'AppBundle:Taxon',
-                'attr' => array(
-                    'class' => 'multiple-select',
-                ),
-                'choice_label' => 'name',
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('o')
-                        ->join('o.taxonomy', 'taxonomy')
-                        ->join('taxonomy.root', 'rootTaxon')
-                        ->where('rootTaxon.code = :code')
-                        ->andWhere('o.parent IS NOT NULL')
-                        ->setParameter('code', 'themes')
-                        ->orderBy('o.left');
-                },
-                'expanded' => false,
-                'multiple' => true,
-                'placeholder' => 'Choisissez un thème',
+            ->add('taxons', 'sylius_taxon_selection', array(
                 'required' => false,
             ))
             ->add('shortDescription', 'ckeditor', array(
