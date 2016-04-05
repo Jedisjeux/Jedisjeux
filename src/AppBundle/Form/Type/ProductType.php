@@ -27,6 +27,9 @@ class ProductType extends AbstractResourceType
             ->add('name', null, array(
                 'label' => 'label.name',
             ))
+            ->add('masterVariant', 'sylius_product_variant', [
+                'master' => true,
+            ])
             ->add('taxons', 'sylius_taxon_selection', array(
                 'required' => false,
             ))
@@ -50,20 +53,6 @@ class ProductType extends AbstractResourceType
             ))
             ->add('joueurMax', null, array(
                 'label' => 'label.player_count_max',
-            ))
-            ->add('images', 'collection', array(
-                'type' => 'app_product_variant_image',
-                'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-                'prototype' => true,
-                'widget_add_btn' => array('label' => "label.add_image"),
-                'show_legend' => false, // dont show another legend of subform
-                'options' => array( // options for collection fields
-                    'label_render' => false,
-                    'horizontal_input_wrapper_class' => "col-lg-8",
-                    'widget_remove_btn' => array('label' => "label.remove_this_image"),
-                )
             ));
     }
 

@@ -23,7 +23,7 @@ class ProductVariant extends Variant
     /**
      * @var ArrayCollection|ProductVariantImage[]
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\ProductVariantImage", mappedBy="variant")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\ProductVariantImage", mappedBy="variant", cascade={"persist"})
      */
     protected $images;
 
@@ -33,6 +33,17 @@ class ProductVariant extends Variant
      * @ORM\Column(type="date", nullable=true)
      */
     protected $releasedAt;
+
+    /**
+     * ProductVariant constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->images = new ArrayCollection();
+    }
+
 
     /**
      * @return ProductVariantImage
@@ -63,23 +74,38 @@ class ProductVariant extends Variant
     }
 
     /**
+     * @param ProductVariantImage $image
+     *
+     * @return $this
+     */
+    public function removeImage(ProductVariantImage $image)
+    {
+        $this->images->remove($image);
+
+        return $this;
+    }
+
+    /**
+     * @param ProductVariantImage $image
+     *
+     * @return $this
+     */
+    public function addImage(ProductVariantImage $image)
+    {
+        if (!$this->images->contains($image)) {
+            $image->setVariant($this);
+            $this->images->add($image);
+        }
+
+        return $this;
+    }
+
+    /**
      * @return ArrayCollection|ProductVariantImage[]
      */
     public function getImages()
     {
         return $this->images;
-    }
-
-    /**
-     * @param ArrayCollection|ProductVariantImage[] $images
-     *
-     * @return $this
-     */
-    public function setImages($images)
-    {
-        $this->images = $images;
-
-        return $this;
     }
 
     /**

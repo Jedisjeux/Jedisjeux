@@ -43,6 +43,8 @@ sylius_variation:
             variant:
                 classes:
                     model: AppBundle\Entity\ProductVariant
+                    form:
+                        default: AppBundle\Form\Type\ProductVariantType
 
 sylius_taxonomy:
     driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
