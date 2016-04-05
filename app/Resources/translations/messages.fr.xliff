@@ -605,6 +605,10 @@
           <target>Catégorisation</target>
       </trans-unit>
       <trans-unit>
+          <source>label.attributes</source>
+          <target>Attributs</target>
+      </trans-unit>
+      <trans-unit>
           <source>label.zone</source>
           <target>Zone</target>
       </trans-unit>

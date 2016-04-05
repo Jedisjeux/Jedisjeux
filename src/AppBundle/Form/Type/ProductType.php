@@ -36,6 +36,21 @@ class ProductType extends AbstractResourceType
             ))
             ->add('description', 'ckeditor', array(
                 'label' => 'label.description',
+            ))
+            ->add('ageMin', null, array(
+                'label' => 'label.age_min',
+            ))
+            ->add('durationMin', null, array(
+                'label' => 'label.duration_min',
+            ))
+            ->add('durationMax', null, array(
+                'label' => 'label.duration_max',
+            ))
+            ->add('joueurMin', null, array(
+                'label' => 'label.player_count_min',
+            ))
+            ->add('joueurMax', null, array(
+                'label' => 'label.player_count_max',
             ));
     }
 
