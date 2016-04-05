@@ -1,4 +1,4 @@
 $(function () {
-    $('.multiple-select').select2();
+    $('.multiple-select').select2({ width: 'resolve' });
 
 });
