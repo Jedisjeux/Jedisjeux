@@ -23,7 +23,7 @@ class ProductVariant extends Variant
     /**
      * @var ArrayCollection|ProductVariantImage[]
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\ProductVariantImage", mappedBy="variant", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\ProductVariantImage", mappedBy="variant", cascade={"persist", "merge"})
      */
     protected $images;
 

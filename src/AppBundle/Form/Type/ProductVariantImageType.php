@@ -8,7 +8,6 @@
 
 namespace AppBundle\Form\Type;
 
-use AppBundle\Form\EventSubscriber\ImageUploadSubscriber;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -36,8 +35,7 @@ class ProductVariantImageType extends AbstractImageType
             ->add('material', null, array(
                 'required' => false,
                 'label' => 'label.material',
-            ))
-            ->addEventSubscriber(new ImageUploadSubscriber());
+            ));
     }
 
     /**

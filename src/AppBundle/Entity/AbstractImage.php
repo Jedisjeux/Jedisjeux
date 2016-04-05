@@ -17,6 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @author Loïc Frémont <loic@mobizel.com>
  *
  * @ORM\MappedSuperclass
+ * @ORM\HasLifecycleCallbacks()
  */
 abstract class AbstractImage
 {
@@ -134,6 +135,8 @@ abstract class AbstractImage
     /**
      * This function uploads the file to the server
      *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
      */
     public function upload()
     {

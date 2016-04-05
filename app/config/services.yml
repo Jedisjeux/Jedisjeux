@@ -23,11 +23,6 @@ services:
         tags:
             - { name: doctrine.event_subscriber }
 
-    app.form.subscriber.image_upload:
-        class: AppBundle\Form\EventSubscriber\ImageUploadSubscriber
-        tags:
-            - { name: kernel.event_subscriber }
-
     # <!-- Forms -->
     app.form.filter.query:
         class: JDJ\CoreBundle\Form\Filter\QueryFilterType
