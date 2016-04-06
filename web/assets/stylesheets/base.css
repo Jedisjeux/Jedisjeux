@@ -29242,6 +29242,15 @@ html body.login .forgot-password:focus {
   min-height: 80px;
 }
 
+/* line 9, ../sass/modules/_magazine.scss */
+.magazine-item.mag-1 h4 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  display: inline-block;
+}
+
 /* line 1, ../sass/modules/_rating.scss */
 .form-group .star-rating {
   line-height: normal;
@@ -29252,55 +29261,55 @@ html body.login .forgot-password:focus {
   margin-left: 65px;
 }
 
-/* line 37, ../sass/base.scss */
+/* line 41, ../sass/base.scss */
 body {
   font-size: 14px;
 }
-/* line 40, ../sass/base.scss */
+/* line 44, ../sass/base.scss */
 body.sf-toolbar {
   margin-top: 70px;
 }
 
-/* line 45, ../sass/base.scss */
+/* line 49, ../sass/base.scss */
 h1 {
   font-size: 26px;
 }
 
-/* line 50, ../sass/base.scss */
+/* line 54, ../sass/base.scss */
 .top-bar .avatar {
   width: 30px;
   height: 30px;
 }
 
-/* line 56, ../sass/base.scss */
+/* line 60, ../sass/base.scss */
 .img-round {
   border-radius: 50%;
 }
 
-/* line 61, ../sass/base.scss */
+/* line 65, ../sass/base.scss */
 .jeu-list .img-container {
   height: 148px;
   overflow: hidden;
 }
 
-/* line 67, ../sass/base.scss */
+/* line 71, ../sass/base.scss */
 .intro {
   font-style: italic;
   font-size: 1.3em;
 }
 
-/* line 72, ../sass/base.scss */
+/* line 76, ../sass/base.scss */
 .thumbnail-jeu {
   padding-left: 0;
   padding-top: 8px;
 }
 
-/* line 77, ../sass/base.scss */
+/* line 81, ../sass/base.scss */
 .title-button {
   padding-top: 7px;
 }
 
-/* line 83, ../sass/base.scss */
+/* line 87, ../sass/base.scss */
 .comment-author-image .anonymous-user {
   margin-right: 10px;
   margin-top: 3px;
@@ -29311,29 +29320,29 @@ h1 {
   vertical-align: middle;
   text-align: center;
 }
-/* line 93, ../sass/base.scss */
+/* line 97, ../sass/base.scss */
 .comment-author-image .anonymous-user .fa {
   font-size: 50px;
 }
 
-/* line 100, ../sass/base.scss */
+/* line 104, ../sass/base.scss */
 .blog-meta img {
   float: left;
   width: 32px;
 }
 
-/* line 106, ../sass/base.scss */
+/* line 110, ../sass/base.scss */
 .bloc-login {
   width: 430px !important;
 }
 
-/* line 110, ../sass/base.scss */
+/* line 114, ../sass/base.scss */
 ul.ui-autocomplete {
   padding: 0px;
   margin: 0px;
   list-style-type: none;
 }
-/* line 115, ../sass/base.scss */
+/* line 119, ../sass/base.scss */
 ul.ui-autocomplete img, ul.ui-autocomplete .anonymous-user {
   max-width: 60px;
   float: left;
@@ -29341,22 +29350,22 @@ ul.ui-autocomplete img, ul.ui-autocomplete .anonymous-user {
   margin-top: 3px;
 }
 
-/* line 125, ../sass/base.scss */
+/* line 129, ../sass/base.scss */
 .table th a, .table th a.color {
   color: #666666;
 }
 
-/* line 131, ../sass/base.scss */
+/* line 135, ../sass/base.scss */
 .no-padding-left {
   padding-left: 0 !important;
 }
 
-/* line 135, ../sass/base.scss */
+/* line 139, ../sass/base.scss */
 .no-padding-right {
   padding-right: 0 !important;
 }
 
-/* line 140, ../sass/base.scss */
+/* line 144, ../sass/base.scss */
 .article p {
   margin-bottom: 15px;
 }

@@ -18,8 +18,10 @@
     {% endif %}
 {% endspaceless %}{% endmacro %}
 
-{% macro magazineItemOne(game) %}
+{% macro magazineItemOne(game, filter) %}
     {% import 'macros/items.html.twig' as item %}
+
+    {% set filter = filter|default('magazine_item') %}
 
     {% set meta %}
         <i class="fa fa-calendar"></i> <!-- TODO publishedAt -->{{ game.createdAt|localizeddate('long', 'none') }}
@@ -30,6 +32,6 @@
             consectetur. </p>
     {% endset %}
 
-    {{ item.magazineItemOne(game.imageCouverture.webPath, game.name, 'magazine_item', 'img-responsive', path('sylius_product_show', {'slug': game.slug}), game.name, body, meta) }}
+    {{ item.magazineItemOne(game.imageCouverture.webPath, game.name, filter, 'img-responsive', path('sylius_product_show', {'slug': game.slug}), game.name, body, meta) }}
 
 {% endmacro %}

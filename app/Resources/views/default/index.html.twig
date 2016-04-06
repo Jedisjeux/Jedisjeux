@@ -7,75 +7,56 @@
 
 {% block container %}
 
-    <br />
+    <br/>
 
     <div class="col-md-8">
 
-    <!-- Carousel starts -->
+        <!-- Carousel starts -->
 
-    <!-- Bootstrap carousel usage
-        Bootstrap carousel should have id. Below i am using "bs-carousel-X". Where "X" denotes number". If a page has more than 1 carousel, then add the new carousel with the id "bs-carousel-1", "bs-carousel-2". You also need to update the id in, "carousel indicators" section and "carousel control" section.
+        <!-- Bootstrap carousel usage
+            Bootstrap carousel should have id. Below i am using "bs-carousel-X". Where "X" denotes number". If a page has more than 1 carousel, then add the new carousel with the id "bs-carousel-1", "bs-carousel-2". You also need to update the id in, "carousel indicators" section and "carousel control" section.
 
-        Carousel comes with 3 main data attributes which you can customize. They are...
-        data-interval - Time delay between item cycle. Default value "5000".
-        data-pause - Pause on hover. Default value "pause".
-        data-wrap - Continues cycle or stop at the end. Default value "true".
-    -->
+            Carousel comes with 3 main data attributes which you can customize. They are...
+            data-interval - Time delay between item cycle. Default value "5000".
+            data-pause - Pause on hover. Default value "pause".
+            data-wrap - Continues cycle or stop at the end. Default value "true".
+        -->
 
-    <!-- Outer layer -->
+        <!-- Outer layer -->
 
-    <div class="row">
+        <div class="row">
 
-        <div class="col-md-6 col-sm-6">
+            <div class="col-md-6 col-sm-6">
 
-            <h4 class="mag-head"><i class="fa fa-cloud color"></i> News Récentes</h4>
-            <!-- TODO publishedAt -->
-            {{ render(url('article_content_index', {
-                'template': '_magazine_items_one_and_list_items.html.twig',
-                'maxPerPage': 5,
-                'sorting': {
-                    'createdAt': 'desc'
-                }} )) }}
+                <h4 class="mag-head"><i class="fa fa-cloud color"></i> News Récentes</h4>
+                <!-- TODO publishedAt -->
+                {{ render(url('article_content_index', {
+                    'template': '_magazine_items_one_and_list_items.html.twig',
+                    'maxPerPage': 5,
+                    'sorting': {
+                        'createdAt': 'desc'
+                    }} )) }}
 
-            <hr/>
-        </div>
+                <hr/>
+            </div>
 
-        <div class="col-md-6 col-sm-6">
-            <h4 class="mag-head"><i class="fa fa-desktop color"></i> Top News</h4>
+            <div class="col-md-6 col-sm-6">
+                <h4 class="mag-head"><i class="fa fa-desktop color"></i> Top News</h4>
 
-            <!-- TODO publishedAt -->
-            {{ render(url('article_content_index', {
-                'template': '_magazine_items_one_and_list_items_image_less.html.twig',
-                'maxPerPage': 5,
-                'sorting': {
-                    'title': 'desc'
-                }} )) }}
+                <!-- TODO publishedAt -->
+                {{ render(url('article_content_index', {
+                    'template': '_magazine_items_one_and_list_items_image_less.html.twig',
+                    'maxPerPage': 5,
+                    'sorting': {
+                        'title': 'desc'
+                    }} )) }}
 
-            <hr/>
+                <hr/>
 
-        </div>
-
-    </div>
-
-    <div class="row">
-
-        <div class="col-md-12">
-
-            <h4 class="mag-head"><i class="fa fa-comments color"></i> Top Commented</h4>
-
-            <!-- TODO publishedAt -->
-            {{ render(url('article_content_index', {
-                'template': '_magazine_items_two.html.twig',
-                'maxPerPage': 5,
-                'sorting': {
-                    'title': 'desc'
-                }} )) }}
-
-            <hr/>
+            </div>
 
         </div>
 
-    </div>
 
         <h4 class="mag-head"><i class="fa fa-puzzle-piece color"></i> Derniers jeux ajoutés</h4>
 
@@ -112,161 +93,144 @@
     <!-- Sidebar column -->
     <div class="col-md-4">
 
-    <!-- Sidebar -->
-    <div class="sidebar">
+        <!-- Sidebar -->
+        <div class="sidebar">
 
-    <!-- Magazine item one starts -->
-    <div class="magazine-item mag-1">
-        <!-- Image -->
-        <a href="../../img/magazine/small/1.jpg" class="lightbox"><img src="../../img/magazine/small/1.jpg" alt=""
-                                                                    class="img-responsive"/></a>
-        <!-- Heading -->
-        <h4><a href="#">Amazing Theme Ever In The Internet</a></h4>
-        <!-- Meta -->
-        <div class="magazine-meta"><i class="fa fa-calendar"></i> 25 Jan 2014 - <i class="fa fa-comments"></i> 5
-            Comments
-        </div>
-        <!-- Para -->
-        <p>Nemo enim ipsam voluptatem quia quia neque porro qui dolorem ipsum quia dolor sit amet consectetur. </p>
-    </div>
-    <!-- Magazine item one ends -->
+            <div class="s-widget">
+                <h5><i class="fa fa-puzzle-piece color"></i> Sorties</h5>
 
-    <div class="magazine-item mag-1">
-        <a href="../../img/magazine/small/3.jpg" class="lightbox"><img src="../../img/magazine/small/3.jpg" alt=""
-                                                                    class="img-responsive"/></a>
-        <h4><a href="#">Nemo Enim Ipsam Voluptatem Quuia</a></h4>
+                <div class="widget-content">
 
-        <div class="magazine-meta"><i class="fa fa-calendar"></i> 25 Jan 2014 - <i class="fa fa-comments"></i> 5
-            Comments
-        </div>
-        <p>Nemo enim ipsam voluptatem quia quia neque porro qui dolorem ipsum quia dolor sit amet consectetur. </p>
-    </div>
+                    {{ render(url('sylius_partial_product_index', {
+                        'paginate': 2,
+                        'template': 'partial/product/_home_sidebar.html.twig',
+                        'criteria': {
+                            'status': 'PUBLISHED'
+                        },
+                        'sorting': {
+                            'variant.releasedAt': 'desc'
+                        }
+                    })) }}
 
-    <hr/>
-
-    <!-- Search Widget -->
-    <div class="s-widget">
-        <h5><i class="fa fa-search color"></i> Search</h5>
-        <!-- Widgets Content -->
-        <div class="widget-content search">
-            <form role="form">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Type Something">
-													<span class="input-group-btn">
-														<button class="btn btn-color" type="button">Search</button>
-													</span>
                 </div>
-            </form>
-        </div>
-    </div>
 
-    <hr/>
+            </div>
 
-    <!-- Social media widget -->
-    <div class="s-widget">
-        <!-- Widgets Content -->
-        <div class="widget-content brand-bg">
-            <!-- Social Media Icons -->
-            <a href="#" class="facebook"><i class="fa fa-facebook square-5"></i></a>
-            <a href="#" class="twitter"><i class="fa fa-twitter square-5"></i></a>
-            <a href="#" class="google-plus"><i class="fa fa-google-plus square-5"></i></a>
-            <a href="#" class="linkedin"><i class="fa fa-linkedin square-5"></i></a>
-            <a href="#" class="pinterest"><i class="fa fa-pinterest square-5"></i></a>
-            <a href="#" class="bitcoin"><i class="fa fa-bitcoin square-5"></i></a>
-            <a href="#" class="foursquare"><i class="fa fa-foursquare square-5"></i></a>
-            <a href="#" class="flickr"><i class="fa fa-flickr square-5"></i></a>
-        </div>
-    </div>
+            <hr/>
 
-    <hr/>
+            <!-- Social media widget -->
+            <div class="s-widget">
+                <!-- Widgets Content -->
+                <div class="widget-content brand-bg">
+                    <!-- Social Media Icons -->
+                    <a href="#" class="facebook"><i class="fa fa-facebook square-5"></i></a>
+                    <a href="#" class="twitter"><i class="fa fa-twitter square-5"></i></a>
+                    <a href="#" class="google-plus"><i class="fa fa-google-plus square-5"></i></a>
+                    <a href="#" class="linkedin"><i class="fa fa-linkedin square-5"></i></a>
+                    <a href="#" class="pinterest"><i class="fa fa-pinterest square-5"></i></a>
+                    <a href="#" class="bitcoin"><i class="fa fa-bitcoin square-5"></i></a>
+                    <a href="#" class="foursquare"><i class="fa fa-foursquare square-5"></i></a>
+                    <a href="#" class="flickr"><i class="fa fa-flickr square-5"></i></a>
+                </div>
+            </div>
 
-    <!-- Nav tab widget - popular, recent and comments -->
-    <div class="s-widget">
-        <h5><i class="fa fa-comments color"></i> Topics</h5>
+            <hr/>
 
-        <div class="widget-content tabs">
-            <div class="nav-tabs-two">
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs">
-                    <li class="active"><a href="#recent" data-toggle="tab">Récents</a></li>
-                    <li><a href="#popular" data-toggle="tab">Populaires</a></li>
-                </ul>
-                <!-- Tab content -->
-                <div class="tab-content">
-                    <!-- Recent posts -->
-                    <div class="tab-pane fade in active" id="recent">
-                        {{ render(url('app_partial_topic_index', {
-                            'sorting': {
-                                'createdAt': 'desc'
-                            },
-                            'paginate': 5,
-                            'template': 'partial/topic/_sidebarList.html.twig'
-                        })) }}
-                    </div>
-                    <!-- Popular posts -->
-                    <div class="tab-pane fade" id="popular">
-                        {{ render(url('app_partial_topic_index', {
-                            'sorting': {
-                                'postCount': 'desc'
-                            },
-                            'paginate': 5,
-                            'template': 'partial/topic/_sidebarList.html.twig'
-                        })) }}
+            <!-- Nav tab widget - popular, recent and comments -->
+            <div class="s-widget">
+                <h5><i class="fa fa-comments color"></i> Topics</h5>
+
+                <div class="widget-content tabs">
+                    <div class="nav-tabs-two">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#recent" data-toggle="tab">Récents</a></li>
+                            <li><a href="#popular" data-toggle="tab">Populaires</a></li>
+                        </ul>
+                        <!-- Tab content -->
+                        <div class="tab-content">
+                            <!-- Recent posts -->
+                            <div class="tab-pane fade in active" id="recent">
+                                {{ render(url('app_partial_topic_index', {
+                                    'sorting': {
+                                        'createdAt': 'desc'
+                                    },
+                                    'paginate': 5,
+                                    'template': 'partial/topic/_sidebarList.html.twig'
+                                })) }}
+                            </div>
+                            <!-- Popular posts -->
+                            <div class="tab-pane fade" id="popular">
+                                {{ render(url('app_partial_topic_index', {
+                                    'sorting': {
+                                        'postCount': 'desc'
+                                    },
+                                    'paginate': 5,
+                                    'template': 'partial/topic/_sidebarList.html.twig'
+                                })) }}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Tag Widget -->
+            <div class="s-widget">
+                <h5><i class="fa fa-tags color"></i> Tags</h5>
+                <!-- Widgets Content -->
+                <div class="widget-content tags">
+                    <a href="#" class="label">web</a>
+                    <a href="#" class="label">wordpress</a>
+                    <a href="#" class="label">php</a>
+                    <a href="#" class="label">jquery</a>
+                    <a href="#" class="label">java</a>
+                    <a href="#" class="label">photoshop</a>
+                    <a href="#" class="label">windows</a>
+                    <a href="#" class="label">android</a>
+                    <a href="#" class="label">ios</a>
+                    <a href="#" class="label">chrome</a>
+                    <a href="#" class="label">development</a>
+                    <a href="#" class="label">plugin</a>
+                    <a href="#" class="label">personal</a>
+                    <a href="#" class="label">general</a>
+                </div>
+            </div>
+
+            <!-- Gallery Widget -->
+            <div class="s-widget">
+                <!-- Heading -->
+                <h5><i class="fa fa-camera color"></i> Gallery</h5>
+                <!-- Widgets Content -->
+                <div class="widget-content gallery">
+                    <a href="../../img/gallery/small/1.jpg" class="lightbox"><img src="../../img/gallery/small/1.jpg"
+                                                                                  alt=""
+                                                                                  class="img-responsive img-thumbnail"/></a>
+                    <a href="../../img/gallery/small/2.jpg" class="lightbox"><img src="../../img/gallery/small/2.jpg"
+                                                                                  alt=""
+                                                                                  class="img-responsive img-thumbnail"/></a>
+                    <a href="../../img/gallery/small/3.jpg" class="lightbox"><img src="../../img/gallery/small/3.jpg"
+                                                                                  alt=""
+                                                                                  class="img-responsive img-thumbnail"/></a>
+                    <a href="../../img/gallery/small/1.jpg" class="lightbox"><img src="../../img/gallery/small/1.jpg"
+                                                                                  alt=""
+                                                                                  class="img-responsive img-thumbnail"/></a>
+                    <a href="../../img/gallery/small/2.jpg" class="lightbox"><img src="../../img/gallery/small/2.jpg"
+                                                                                  alt=""
+                                                                                  class="img-responsive img-thumbnail"/></a>
+                    <a href="../../img/gallery/small/3.jpg" class="lightbox"><img src="../../img/gallery/small/3.jpg"
+                                                                                  alt=""
+                                                                                  class="img-responsive img-thumbnail"/></a>
+                    <a href="../../img/gallery/small/1.jpg" class="lightbox"><img src="../../img/gallery/small/1.jpg"
+                                                                                  alt=""
+                                                                                  class="img-responsive img-thumbnail"/></a>
+                    <a href="../../img/gallery/small/2.jpg" class="lightbox"><img src="../../img/gallery/small/2.jpg"
+                                                                                  alt=""
+                                                                                  class="img-responsive img-thumbnail"/></a>
+                </div>
+            </div>
+
+
         </div>
-    </div>
-
-    <!-- Tag Widget -->
-    <div class="s-widget">
-        <h5><i class="fa fa-tags color"></i> Tags</h5>
-        <!-- Widgets Content -->
-        <div class="widget-content tags">
-            <a href="#" class="label">web</a>
-            <a href="#" class="label">wordpress</a>
-            <a href="#" class="label">php</a>
-            <a href="#" class="label">jquery</a>
-            <a href="#" class="label">java</a>
-            <a href="#" class="label">photoshop</a>
-            <a href="#" class="label">windows</a>
-            <a href="#" class="label">android</a>
-            <a href="#" class="label">ios</a>
-            <a href="#" class="label">chrome</a>
-            <a href="#" class="label">development</a>
-            <a href="#" class="label">plugin</a>
-            <a href="#" class="label">personal</a>
-            <a href="#" class="label">general</a>
-        </div>
-    </div>
-
-    <!-- Gallery Widget -->
-    <div class="s-widget">
-        <!-- Heading -->
-        <h5><i class="fa fa-camera color"></i> Gallery</h5>
-        <!-- Widgets Content -->
-        <div class="widget-content gallery">
-            <a href="../../img/gallery/small/1.jpg" class="lightbox"><img src="../../img/gallery/small/1.jpg" alt=""
-                                                                       class="img-responsive img-thumbnail"/></a>
-            <a href="../../img/gallery/small/2.jpg" class="lightbox"><img src="../../img/gallery/small/2.jpg" alt=""
-                                                                       class="img-responsive img-thumbnail"/></a>
-            <a href="../../img/gallery/small/3.jpg" class="lightbox"><img src="../../img/gallery/small/3.jpg" alt=""
-                                                                       class="img-responsive img-thumbnail"/></a>
-            <a href="../../img/gallery/small/1.jpg" class="lightbox"><img src="../../img/gallery/small/1.jpg" alt=""
-                                                                       class="img-responsive img-thumbnail"/></a>
-            <a href="../../img/gallery/small/2.jpg" class="lightbox"><img src="../../img/gallery/small/2.jpg" alt=""
-                                                                       class="img-responsive img-thumbnail"/></a>
-            <a href="../../img/gallery/small/3.jpg" class="lightbox"><img src="../../img/gallery/small/3.jpg" alt=""
-                                                                       class="img-responsive img-thumbnail"/></a>
-            <a href="../../img/gallery/small/1.jpg" class="lightbox"><img src="../../img/gallery/small/1.jpg" alt=""
-                                                                       class="img-responsive img-thumbnail"/></a>
-            <a href="../../img/gallery/small/2.jpg" class="lightbox"><img src="../../img/gallery/small/2.jpg" alt=""
-                                                                       class="img-responsive img-thumbnail"/></a>
-        </div>
-    </div>
-
-
-    </div>
     </div>
 
 
