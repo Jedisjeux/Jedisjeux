@@ -98,6 +98,7 @@ class LoadArticlesCommand extends ContainerAwareCommand
         $article->setName($data['name']);
         $article->setTitle($data['title']);
         $article->setPublishable(true);
+        $article->setPublishStartDate(\DateTime::createFromFormat('Y-m-d H:i:s', $data['publishedAt']));
 
         return $article;
     }
@@ -261,6 +262,7 @@ class LoadArticlesCommand extends ContainerAwareCommand
 select article.article_id as id,
       replace(article.titre_clean, ' ', '-') as name,
       article.titre as title,
+      article.date as publishedAt,
       article.intro as introduction,
       article.photo as mainImage,
       group_concat(block.text_id) as blocks

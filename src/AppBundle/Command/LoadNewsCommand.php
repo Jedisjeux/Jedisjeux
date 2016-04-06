@@ -68,7 +68,7 @@ class LoadNewsCommand extends ContainerAwareCommand
 select      old.news_id as id,
             old.titre as title,
             replace(old.titre_clean, ' ', '-') as name,
-            old.date as createdAt,
+            old.date as publishedAt,
             old.text as body,
             old.photo as mainImage
 from        jedisjeux.jdj_news old
@@ -131,6 +131,7 @@ EOM;
         $article->setName($data['name']);
         $article->setTitle($data['title']);
         $article->setPublishable(true);
+        $article->setPublishStartDate(\DateTime::createFromFormat('Y-m-d H:i:s', $data['publishedAt']));
 
         return $article;
     }
