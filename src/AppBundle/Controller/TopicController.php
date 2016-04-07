@@ -78,7 +78,11 @@ class TopicController extends ResourceController
             throw new NotFoundHttpException('Requested taxon does not exist.');
         }
 
-        $resources = $this->resourcesCollectionProvider->get($configuration, $this->repository);
+        $resources = $this
+            ->repository
+            ->createPaginator(array('mainTaxon' => $taxon), $request->get('sorting', $configuration->getSorting()))
+            ->setMaxPerPage($configuration->getPaginationMaxPerPage())
+            ->setCurrentPage($request->get('page', 1));
 
         $view = View::create($resources);
 
