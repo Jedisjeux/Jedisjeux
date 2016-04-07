@@ -3,7 +3,7 @@
     {% set imagineBlock = article.mainImage %}
 
     {% set meta %}
-        <i class="fa fa-calendar"></i> <!-- TODO publishedAt -->{{ article.createdAt|localizeddate('long', 'none') }}
+        <i class="fa fa-calendar"></i> {{ article.publishStartDate|localizeddate('long', 'none') }}
         - <i class="fa fa-comments"></i> 5 Comments
     {% endset %}
     {% set body %}
@@ -22,7 +22,7 @@
     {% set imagineBlock = article.mainImage %}
 
     {% set meta %}
-        <i class="fa fa-calendar"></i> <!-- TODO publishedAt -->{{ article.createdAt|localizeddate('long', 'none') }}
+        <i class="fa fa-calendar"></i> {{ article.publishStartDate|localizeddate('long', 'none') }}
         - <i class="fa fa-comments"></i> 5 Comments
     {% endset %}
     {% set body %}
@@ -41,7 +41,7 @@
     {% set imagineBlock = article.mainImage %}
 
     {% set meta %}
-        <i class="fa fa-calendar"></i> <!-- TODO publishedAt -->{{ article.createdAt|localizeddate('long', 'none') }}
+        <i class="fa fa-calendar"></i> {{ article.publishStartDate|localizeddate('long', 'none') }}
         - <i class="fa fa-comments"></i> 5 Comments
     {% endset %}
 
@@ -54,7 +54,7 @@
     {% set imagineBlock = article.mainImage %}
 
     {% set meta %}
-        <i class="fa fa-calendar"></i> <!-- TODO publishedAt -->{{ article.createdAt|localizeddate('long', 'none') }}
+        <i class="fa fa-calendar"></i> {{ article.publishStartDate|localizeddate('long', 'none') }}
         - <i class="fa fa-comments"></i> 5 Comments
     {% endset %}
 
