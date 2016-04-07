@@ -37,7 +37,7 @@ class GamePlay implements ResourceInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true)
      */
     protected $duration;
 

@@ -27,10 +27,30 @@ class GamePlayType extends AbstractResourceType
                 'label' => 'label.played_at',
                 'required' => false,
                 'widget' => 'single_text',
+                'widget_addon_append' => array(
+                    'icon' => 'calendar'
+                ),
                 'html5' => false,
                 'attr' => [
                     'class' => 'date',
                 ]
+            ])
+            ->add('duration', null, [
+                'label' => 'label.duration',
+                'required' => false,
+                'widget_addon_append' => array(
+                    'icon' => 'time'
+                ),
+                'attr' => [
+                    'class' => 'time',
+                ]
+            ])
+            ->add('playerCount', null, [
+                'label' => 'label.player_count',
+                'required' => false,
+                'widget_addon_append' => array(
+                    'icon' => 'user'
+                ),
             ])
             ->add('images', 'collection', array(
                 'type' => 'app_game_play_image',

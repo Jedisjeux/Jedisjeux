@@ -632,6 +632,14 @@
             <source>label.played_at</source>
             <target>Joué le</target>
         </trans-unit>
+        <trans-unit>
+                    <source>label.duration</source>
+                    <target>Durée</target>
+                </trans-unit>
+                <trans-unit>
+        <source>label.player_count</source>
+        <target>Nombre de joueurs</target>
+    </trans-unit>
     </body>
   </file>
 </xliff>
