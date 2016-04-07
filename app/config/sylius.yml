@@ -140,9 +140,13 @@ sylius_resource:
             classes:
                 model: AppBundle\Entity\GamePlay
                 repository: AppBundle\Repository\GamePlayRepository
+                form:
+                    default: AppBundle\Form\Type\GamePlayType
         app.game_play_image:
             classes:
                 model: AppBundle\Entity\GamePlayImage
+                form:
+                    default: AppBundle\Form\Type\GamePlayImageType
         app.game_review:
             classes:
                 model: AppBundle\Entity\GameReview

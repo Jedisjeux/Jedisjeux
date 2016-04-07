@@ -35,6 +35,27 @@ class GamePlay implements ResourceInterface
     protected $code;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $duration;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    protected $playerCount;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(type="date", nullable=true)
+     */
+    protected $playedAt;
+
+    /**
      * @var ProductInterface
      *
      * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface")
@@ -80,6 +101,66 @@ class GamePlay implements ResourceInterface
     public function setCode($code)
     {
         $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDuration()
+    {
+        return $this->duration;
+    }
+
+    /**
+     * @param string $duration
+     *
+     * @return $this
+     */
+    public function setDuration($duration)
+    {
+        $this->duration = $duration;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPlayerCount()
+    {
+        return $this->playerCount;
+    }
+
+    /**
+     * @param int $playerCount
+     *
+     * @return $this
+     */
+    public function setPlayerCount($playerCount)
+    {
+        $this->playerCount = $playerCount;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getPlayedAt()
+    {
+        return $this->playedAt;
+    }
+
+    /**
+     * @param \DateTime $playedAt
+     *
+     * @return $this
+     */
+    public function setPlayedAt($playedAt)
+    {
+        $this->playedAt = $playedAt;
 
         return $this;
     }

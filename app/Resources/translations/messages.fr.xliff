@@ -628,6 +628,10 @@
           <source>label.zone</source>
           <target>Zone</target>
       </trans-unit>
+      <trans-unit>
+            <source>label.played_at</source>
+            <target>Joué le</target>
+        </trans-unit>
     </body>
   </file>
 </xliff>
