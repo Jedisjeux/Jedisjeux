@@ -58,7 +58,7 @@ class ProductRepository extends BaseProductRepository
     {
         $queryBuilder = parent::getCollectionQueryBuilder()
             ->addSelect('variant')
-            ->leftJoin('product.variants', 'variant');
+            ->join('product.variants', 'variant');
 
         if (!empty($criteria['name'])) {
             $queryBuilder
@@ -70,6 +70,19 @@ class ProductRepository extends BaseProductRepository
             $queryBuilder
                 ->andWhere('translation.name LIKE :query')
                 ->setParameter('query', '%' . $criteria['query'] . '%');
+        }
+
+        if (!empty($criteria['releasedAtFrom'])) {
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->gte('variant.releasedAt', ':releasedAtFrom'))
+                ->setParameter('releasedAtAtFrom', $criteria['releasedAtFrom'])
+            ;
+        }
+        if (!empty($criteria['releasedAtTo'])) {
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->lte('variant.releasedAt', ':releasedAtTo'))
+                ->setParameter('releasedAtTo', $criteria['releasedAtTo'])
+            ;
         }
 
         if (empty($sorting)) {

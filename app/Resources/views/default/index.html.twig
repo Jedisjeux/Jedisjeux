@@ -105,7 +105,8 @@
                         'paginate': 2,
                         'template': 'partial/product/_home_sidebar.html.twig',
                         'criteria': {
-                            'status': 'PUBLISHED'
+                            'status': 'PUBLISHED',
+                            'releasedAtTo': "now"|date("Y-m-d")
                         },
                         'sorting': {
                             'variant.releasedAt': 'desc'
