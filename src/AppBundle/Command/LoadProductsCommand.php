@@ -48,7 +48,7 @@ class LoadProductsCommand extends ContainerAwareCommand
     protected function createOrReplaceProduct($data)
     {
         /** @var Product $product */
-        $product = $this->getRepository()->findOneBy(array('name' => $data['name']));
+        $product = $this->getRepository()->findOneBy(array('code' => $data['code']));
 
         if (null === $product) {
             $product = $this->getFactory()->createNew();
