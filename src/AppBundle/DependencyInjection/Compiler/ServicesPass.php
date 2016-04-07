@@ -26,5 +26,13 @@ class ServicesPass implements CompilerPassInterface
 
         $topicFactoryDefinition
             ->addMethodCall('setGamePlayRepository', [ new Reference('app.repository.game_play') ]);
+
+        $gamePlayFactoryDefinition = $container->getDefinition('app.factory.game_play');
+
+        $gamePlayFactoryDefinition
+            ->addMethodCall('setProductRepository', [ new Reference('sylius.repository.product') ])
+            ->addMethodCall('setCustomerContext', [ new Reference('sylius.context.customer') ]);
+
+
     }
 }

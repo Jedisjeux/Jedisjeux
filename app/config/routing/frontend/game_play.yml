@@ -4,4 +4,18 @@ app_game_play:
         path: /parties
         templates: :frontend/game_play
         redirect: index
+        only: [index, show, delete]
     type: sylius.resource
+
+app_game_play_new:
+    methods: [GET, POST]
+    path: /parties/new
+    defaults:
+        _controller: app.controller.game_play:createAction
+        _sylius:
+            factory:
+                method: createForProduct
+                arguments: [$productSlug]
+            redirect:
+                route: app_game_play_show
+                parameters: { productSlug: $productSlug, id: resource.id }

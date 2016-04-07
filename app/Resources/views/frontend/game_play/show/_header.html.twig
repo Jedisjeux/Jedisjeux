@@ -37,25 +37,37 @@
                             <div class="row">
                                 <ul class="list-unstyled">
 
-                                    {#TODO playerCount#}
+                                    {% if game_play.playerCount is not null %}
                                         <li>
                                             <p class="pull-left bg-color square-2 rounded-2">
                                                 <span class="fa fa-user white"></span>
                                             </p>
                                             <p class="game-attribute">
-                                                4 joueurs
+                                                {{ game_play.playerCount }} joueurs
                                             </p>
                                         </li>
+                                    {% endif %}
 
-
-                                    {#TODO playedAt#}
-                                    {% if game_play.createdAt is not null %}
+                                    {% if game_play.playedAt is not null %}
                                         <li>
                                             <p class="pull-left bg-color square-2 rounded-2">
                                                 <span class="fa fa-calendar white"></span>
                                             </p>
                                             <p class="game-attribute">
-                                                Joué le {{ game_play.createdAt|localizeddate('long', 'none') }}
+                                                Joué le {{ game_play.playedAt|localizeddate('long', 'none') }}
+                                            </p>
+
+                                        </li>
+                                    {% endif %}
+
+                                    {% if game_play.duration is not null %}
+                                        <li>
+                                            <p class="pull-left bg-color square-2 rounded-2">
+                                                <span class="glyphicon glyphicon-time white"></span>
+                                            </p>
+                                            <p class="game-attribute">
+                                                {{ game_play.duration|date('H') }} h
+                                                {{ game_play.duration|date('i') }}
                                             </p>
 
                                         </li>

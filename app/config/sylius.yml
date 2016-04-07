@@ -139,6 +139,7 @@ sylius_resource:
         app.game_play:
             classes:
                 model: AppBundle\Entity\GamePlay
+                factory: AppBundle\Factory\GamePlayFactory
                 repository: AppBundle\Repository\GamePlayRepository
                 form:
                     default: AppBundle\Form\Type\GamePlayType

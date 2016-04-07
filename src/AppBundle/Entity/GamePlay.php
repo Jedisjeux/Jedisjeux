@@ -82,16 +82,25 @@ class GamePlay implements ResourceInterface
     /**
      * @var ArrayCollection|GamePlayImage[]
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\GamePlayImage", mappedBy="gamePlay")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\GamePlayImage", mappedBy="gamePlay", cascade={"persist", "merge", "remove"})
      */
     protected $images;
 
     /**
      * @var ArrayCollection|Player[]
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Player", mappedBy="gamePlay")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Player", mappedBy="gamePlay", cascade={"persist", "merge", "remove"})
      */
     protected $players;
+
+    /**
+     * GamePlay constructor.
+     */
+    public function __construct()
+    {
+        $this->players = new ArrayCollection();
+        $this->images = new ArrayCollection();
+    }
 
     /**
      * @return string
@@ -241,12 +250,28 @@ class GamePlay implements ResourceInterface
     }
 
     /**
-     * @param GamePlayImage[]|ArrayCollection $images
+     * @param GamePlayImage $image
+     *
      * @return $this
      */
-    public function setImages($images)
+    public function addImage(GamePlayImage $image)
     {
-        $this->images = $images;
+        if (!$this->images->contains($image)) {
+            $image->setGamePlay($this);
+            $this->images->add($image);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param GamePlayImage $image
+     *
+     * @return $this
+     */
+    public function removeImage(GamePlayImage $image)
+    {
+        $this->images->remove($image);
 
         return $this;
     }
@@ -270,6 +295,18 @@ class GamePlay implements ResourceInterface
             $player->setGamePlay($this);
             $this->players->add($player);
         }
+
+        return $this;
+    }
+
+    /**
+     * @param Player $player
+     *
+     * @return $this
+     */
+    public function removePlayer(Player $player)
+    {
+        $this->players->remove($player);
 
         return $this;
     }
