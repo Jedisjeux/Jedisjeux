@@ -18,15 +18,20 @@
     {% endif %}
 {% endspaceless %}{% endmacro %}
 
-{% macro magazineItemOne(game, filter) %}
+{% macro magazineItemOne(game, filter, meta) %}
     {% import 'macros/items.html.twig' as item %}
 
     {% set filter = filter|default('magazine_item') %}
 
-    {% set meta %}
-        <i class="fa fa-calendar"></i> <!-- TODO publishedAt -->{{ game.createdAt|localizeddate('long', 'none') }}
-        - <i class="fa fa-comments"></i> 5 Comments
-    {% endset %}
+    {% set meta = meta|default() %}
+
+    {% if meta is empty %}
+        {% set meta %}
+            <i class="fa fa-calendar"></i> <!-- TODO publishedAt -->{{ game.createdAt|localizeddate('long', 'none') }}
+            - <i class="fa fa-comments"></i> 5 Comments
+        {% endset %}
+    {% endif %}
+
     {% set body %}
         <p>Nemo enim ipsam voluptatem quia quia neque porro qui dolorem ipsum quia dolor sit amet
             consectetur. </p>
