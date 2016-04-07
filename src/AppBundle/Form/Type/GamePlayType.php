@@ -38,9 +38,11 @@ class GamePlayType extends AbstractResourceType
             ->add('duration', null, [
                 'label' => 'label.duration',
                 'required' => false,
+                'widget' => 'single_text',
                 'widget_addon_append' => array(
                     'icon' => 'time'
                 ),
+                'html5' => false,
                 'attr' => [
                     'class' => 'time',
                 ]
@@ -48,9 +50,6 @@ class GamePlayType extends AbstractResourceType
             ->add('playerCount', null, [
                 'label' => 'label.player_count',
                 'required' => false,
-                'widget_addon_append' => array(
-                    'icon' => 'user'
-                ),
             ])
             ->add('images', 'collection', array(
                 'type' => 'app_game_play_image',
@@ -64,6 +63,20 @@ class GamePlayType extends AbstractResourceType
                     'label_render' => false,
                     'horizontal_input_wrapper_class' => "col-lg-8",
                     'widget_remove_btn' => array('label' => "label.remove_this_image"),
+                )
+            ))
+            ->add('players', 'collection', array(
+                'type' => 'app_player',
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'prototype' => true,
+                'widget_add_btn' => array('label' => "label.add_player"),
+                'show_legend' => false, // dont show another legend of subform
+                'options' => array( // options for collection fields
+                    'label_render' => false,
+                    'horizontal_input_wrapper_class' => "col-lg-8",
+                    'widget_remove_btn' => array('label' => "label.remove_this_player"),
                 )
             ));
     }

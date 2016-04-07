@@ -147,6 +147,11 @@ sylius_resource:
                 model: AppBundle\Entity\GamePlayImage
                 form:
                     default: AppBundle\Form\Type\GamePlayImageType
+        app.player:
+            classes:
+                model: AppBundle\Entity\Player
+                form:
+                    default: AppBundle\Form\Type\PlayerType
         app.game_review:
             classes:
                 model: AppBundle\Entity\GameReview

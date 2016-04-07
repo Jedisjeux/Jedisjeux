@@ -636,10 +636,26 @@
                     <source>label.duration</source>
                     <target>Durée</target>
                 </trans-unit>
-                <trans-unit>
-        <source>label.player_count</source>
-        <target>Nombre de joueurs</target>
-    </trans-unit>
+        <trans-unit>
+            <source>label.player_count</source>
+            <target>Nombre de joueurs</target>
+        </trans-unit>
+        <trans-unit>
+            <source>label.add_player</source>
+            <target>Ajouter un joueur</target>
+        </trans-unit>
+        <trans-unit>
+            <source>label.remove_this_player</source>
+            <target>Supprimer ce joueur</target>
+        </trans-unit>
+        <trans-unit>
+            <source>label.players</source>
+            <target>Joueurs</target>
+        </trans-unit>
+        <trans-unit>
+            <source>label.score</source>
+            <target>Score</target>
+        </trans-unit>
     </body>
   </file>
 </xliff>

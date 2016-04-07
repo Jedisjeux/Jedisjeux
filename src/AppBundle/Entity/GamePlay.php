@@ -87,6 +87,13 @@ class GamePlay implements ResourceInterface
     protected $images;
 
     /**
+     * @var ArrayCollection|Player[]
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Player", mappedBy="gamePlay")
+     */
+    protected $players;
+
+    /**
      * @return string
      */
     public function getCode()
@@ -240,6 +247,29 @@ class GamePlay implements ResourceInterface
     public function setImages($images)
     {
         $this->images = $images;
+
+        return $this;
+    }
+
+    /**
+     * @return Player[]|ArrayCollection
+     */
+    public function getPlayers()
+    {
+        return $this->players;
+    }
+
+    /**
+     * @param Player $player
+     *
+     * @return $this
+     */
+    public function addPlayer(Player $player)
+    {
+        if (!$this->players->contains($player)) {
+            $player->setGamePlay($this);
+            $this->players->add($player);
+        }
 
         return $this;
     }
