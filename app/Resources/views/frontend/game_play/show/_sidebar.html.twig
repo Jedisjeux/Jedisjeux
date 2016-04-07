@@ -25,21 +25,21 @@
                     <li>
                         Un jeu de
                         {% for key, personne in product.auteurs %}{% if (key > 0) %},{% endif %} <a
-                            href="{{ path('personne_show', { 'id': personne.id, 'slug': personne.slug }) }}">{{ personne }}</a>{% endfor %}
+                            href="{{ path('app_person_show', { 'slug': personne.slug }) }}">{{ personne }}</a>{% endfor %}
                     </li>
                 {% endif %}
                 {% if product.illustrateurs|length > 0 %}
                     <li>
                         illustré{% if product.illustrateurs|length > 1 %}s{% endif %} par
                         {% for key, personne in product.illustrateurs %}{% if (key > 0) %},{% endif %} <a
-                            href="{{ path('personne_show', { 'id': personne.id, 'slug': personne.slug }) }}">{{ personne }}</a>{% endfor %}
+                            href="{{ path('app_person_show', { 'slug': personne.slug }) }}">{{ personne }}</a>{% endfor %}
                     </li>
                 {% endif %}
                 {% if product.editeurs|length > 0 %}
                     <li>
                         édité{% if product.editeurs|length > 1 %}s{% endif %} par
                         {% for key, personne in product.editeurs %}{% if (key > 0) %},{% endif %} <a
-                            href="{{ path('personne_show', { 'id': personne.id, 'slug': personne.slug }) }}">{{ personne }}</a>{% endfor %}
+                            href="{{ path('app_person_show', { 'slug': personne.slug }) }}">{{ personne }}</a>{% endfor %}
                     </li>
                 {% endif %}
             </ul>
