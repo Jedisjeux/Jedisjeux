@@ -63,6 +63,7 @@ class LoadTopicsOfGamePlayCommand extends ContainerAwareCommand
                 }
 
                 $topic = $this->getTopicFactory()->createForGamePlay($data['game_play_id']);
+                $topic->setCreatedAt(\DateTime::createFromFormat('Y-m-d H:i:s', $data['createdAt']));
             }
 
             /** @var Post $post */
@@ -76,6 +77,7 @@ class LoadTopicsOfGamePlayCommand extends ContainerAwareCommand
 
             $post
                 ->setCreatedBy($customer->getUser())
+                ->setCreatedAt(\DateTime::createFromFormat('Y-m-d H:i:s', $data['createdAt']))
                 ->setBody($data['comment']);
 
             $gamePlayId = $data['game_play_id'];
