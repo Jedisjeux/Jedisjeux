@@ -1,3 +1,17 @@
+app_game_play_new:
+    methods: [GET, POST]
+    path: /parties/new
+    defaults:
+        _controller: app.controller.game_play:createAction
+        _sylius:
+            template: frontend/game_play/create.html.twig
+            factory:
+                method: createForProduct
+                arguments: [$productSlug]
+            redirect:
+                route: app_game_play_show
+                parameters: { productSlug: $productSlug, id: resource.id }
+
 app_game_play:
     resource: |
         alias: app.game_play
@@ -7,15 +21,3 @@ app_game_play:
         only: [index, show, delete]
     type: sylius.resource
 
-app_game_play_new:
-    methods: [GET, POST]
-    path: /parties/new
-    defaults:
-        _controller: app.controller.game_play:createAction
-        _sylius:
-            factory:
-                method: createForProduct
-                arguments: [$productSlug]
-            redirect:
-                route: app_game_play_show
-                parameters: { productSlug: $productSlug, id: resource.id }
