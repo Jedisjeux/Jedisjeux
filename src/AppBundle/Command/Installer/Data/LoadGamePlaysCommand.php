@@ -6,7 +6,7 @@
  * Time: 13:32
  */
 
-namespace AppBundle\Command;
+namespace AppBundle\Command\Installer\Data;
 
 use AppBundle\Entity\GamePlay;
 use Doctrine\ORM\EntityManager;

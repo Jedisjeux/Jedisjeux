@@ -6,7 +6,7 @@
  * Time: 17:09
  */
 
-namespace AppBundle\Command;
+namespace AppBundle\Command\Installer\Data;
 
 
 use Doctrine\Common\Persistence\ObjectManager;

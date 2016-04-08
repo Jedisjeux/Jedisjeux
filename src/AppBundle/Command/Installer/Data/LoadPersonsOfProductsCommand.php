@@ -6,7 +6,7 @@
  * Time: 13:51
  */
 
-namespace AppBundle\Command;
+namespace AppBundle\Command\Installer\Data;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;

@@ -6,7 +6,7 @@
  * Time: 13:34
  */
 
-namespace AppBundle\Command;
+namespace AppBundle\Command\Installer\Data;
 
 use AppBundle\Entity\Product;
 use Doctrine\ORM\EntityManager;

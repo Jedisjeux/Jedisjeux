@@ -1,22 +1,23 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: loic_425
- * Date: 07/03/16
- * Time: 16:46
+ * User: loic
+ * Date: 12/02/2016
+ * Time: 13:40
  */
 
-namespace AppBundle\Command;
+namespace AppBundle\Command\Installer\Data;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
-use JDJ\CoreBundle\Entity\Image;
-use JDJ\JeuBundle\Entity\Jeu;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class LoadImagesOfProductsCommand extends ContainerAwareCommand
+/**
+ * @author Loïc Frémont <loic@mobizel.com>
+ */
+class LoadAvatarsOfUsersCommand extends ContainerAwareCommand
 {
     /**
      * @var ObjectManager
@@ -28,8 +29,8 @@ class LoadImagesOfProductsCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('app:images-of-products:load')
-            ->setDescription('Loading images of products');
+            ->setName('app:avatars-of-users:load')
+            ->setDescription('Loading avatars of users');
     }
 
     /**
@@ -58,31 +59,25 @@ class LoadImagesOfProductsCommand extends ContainerAwareCommand
         $this->manager = $manager;
 
         $query = <<<EOM
-delete from sylius_product_variant_image
+insert into jdj_customer_avatar (id, path)
+select      distinct old.user_id, user_avatar
+from        jedisjeux.phpbb3_users old
+where not exists (
+    select 0
+    from   jdj_customer_avatar i
+    where  i.id = old.user_id
+)
+and old.user_avatar <> ''
 EOM;
 
         $this->getDatabaseConnection()->executeQuery($query);
 
         $query = <<<EOM
-insert into sylius_product_variant_image (id, variant_id, path, description, is_main, is_material)
-  select      distinct old.img_id, variant.id, img_nom, ie.legende, ie.main,
-                case
-                    when ie.ordre = 1 then 1
-                    else 0
-                end as is_material
-  from        jedisjeux.jdj_images old
-    inner join  jedisjeux.jdj_images_elements ie
-      on ie.img_id = old.img_id
-         and ie.elem_type = 'jeu'
-    inner join  sylius_product product
-      on product.code = concat('game-', ie.elem_id)
-    inner join  sylius_product_variant variant
-      on variant.product_id = product.id
-  where variant.is_master = 1
+update   sylius_customer customer
+inner join jdj_customer_avatar avatar on customer.code = concat('user-', avatar.id)
+    set customer.avatar_id = avatar.id
 EOM;
 
         $this->getDatabaseConnection()->executeQuery($query);
-
-
     }
-} 
+}

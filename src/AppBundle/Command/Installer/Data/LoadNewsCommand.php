@@ -6,7 +6,7 @@
  * Time: 09:04
  */
 
-namespace AppBundle\Command;
+namespace AppBundle\Command\Installer\Data;
 
 use AppBundle\Document\ArticleContent;
 use AppBundle\Document\SingleImageBlock;

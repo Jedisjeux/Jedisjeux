@@ -6,10 +6,7 @@
  * Time: 21:38
  */
 
-namespace AppBundle\Command;
-
-
-use Doctrine\ORM\EntityRepository;
+namespace AppBundle\Command\Installer\Data;
 
 interface LoadYamlDataInterface
 {

@@ -6,7 +6,7 @@
  * Time: 07:51
  */
 
-namespace AppBundle\Command;
+namespace AppBundle\Command\Installer\Data;
 
 use AppBundle\Entity\GamePlay;
 use AppBundle\Entity\Post;

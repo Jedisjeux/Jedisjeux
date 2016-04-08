@@ -6,7 +6,7 @@
  * Time: 13:18
  */
 
-namespace AppBundle\Command;
+namespace AppBundle\Command\Installer\Data;
 
 use Doctrine\ORM\EntityRepository;
 

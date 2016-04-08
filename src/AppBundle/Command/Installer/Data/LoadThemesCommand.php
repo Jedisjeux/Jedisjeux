@@ -2,27 +2,26 @@
 /**
  * Created by PhpStorm.
  * User: loic
- * Date: 23/12/2015
- * Time: 13:55
+ * Date: 21/12/2015
+ * Time: 13:52
  */
 
-namespace AppBundle\Command;
+namespace AppBundle\Command\Installer\Data;
 
-use AppBundle\Entity\Country;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityRepository;
-use Sylius\Component\Resource\Factory\Factory;
+use JDJ\CoreBundle\Entity\EntityRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
-use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Yaml\Parser;
 
+
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class LoadZonesCommand extends ContainerAwareCommand
+class LoadThemesCommand extends ContainerAwareCommand
 {
     /**
      * @var OutputInterface
@@ -35,8 +34,8 @@ class LoadZonesCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('app:zones:load')
-            ->setDescription('Load zones');
+            ->setName('app:themes:load')
+            ->setDescription('Load themes');
     }
 
     /**
@@ -58,7 +57,7 @@ class LoadZonesCommand extends ContainerAwareCommand
     protected function addTaxons(array $taxons, TaxonInterface $parentTaxon)
     {
         foreach ($taxons as $data) {
-            $this->output->writeln(sprintf("Loading <info>%s</info> zone", $data['name']));
+            $this->output->writeln(sprintf("<info>%s</info>", $data['name']));
             $taxon = $this->createOrReplaceTaxon($data, $parentTaxon);
             $this->getManager()->persist($taxon);
             $this->getManager()->flush();
@@ -68,6 +67,34 @@ class LoadZonesCommand extends ContainerAwareCommand
             }
         }
 
+    }
+
+    protected function createOrReplaceTaxonomy()
+    {
+        /** @var TaxonInterface $taxonRoot */
+        $taxonRoot = $this->getContainer()
+            ->get('sylius.repository.taxon')
+            ->findOneBy(array('code' => 'themes'));
+
+        $taxonomy = $taxonRoot ? $taxonRoot->getTaxonomy() : null;
+
+        if (null === $taxonomy) {
+            $taxonomy = $this->getContainer()
+                ->get('sylius.factory.taxonomy')
+                ->createNew();
+        }
+
+        $taxonomy->setCode('themes');
+        $taxonomy->setName('Thèmes');
+
+        /** @var EntityManager $manager */
+        $manager = $this->getContainer()
+            ->get('sylius.manager.taxonomy');
+
+        $manager->persist($taxonomy);
+        $manager->flush();
+
+        return $taxonomy;
     }
 
     /**
@@ -89,7 +116,7 @@ class LoadZonesCommand extends ContainerAwareCommand
             $taxon->setFallbackLocale($locale);
         }
 
-        $code = isset($data['id']) ? 'zone-'.$data['id'] : uniqid();
+        $code = isset($data['id']) ? 'theme-'.$data['id'] : uniqid();
 
         $taxon->setCode($code);
         $taxon->setName($data['name']);
@@ -102,35 +129,11 @@ class LoadZonesCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return TaxonomyInterface
+     * @return string
      */
-    protected function createOrReplaceTaxonomy()
+    public function getYAMLFileName()
     {
-        /** @var TaxonInterface $taxonRoot */
-        $taxonRoot = $this->getContainer()
-            ->get('sylius.repository.taxon')
-            ->findOneBy(array('code' => 'zones'));
-
-        /** @var TaxonomyInterface $taxonomy */
-        $taxonomy = $taxonRoot ? $taxonRoot->getTaxonomy() : null;
-
-        if (null === $taxonomy) {
-            $taxonomy = $this->getContainer()
-                ->get('sylius.factory.taxonomy')
-                ->createNew();
-        }
-
-        $taxonomy->setCode('zones');
-        $taxonomy->setName('Zones');
-
-        /** @var EntityManager $manager */
-        $manager = $this->getContainer()
-            ->get('sylius.manager.taxonomy');
-
-        $manager->persist($taxonomy);
-        $manager->flush();
-
-        return $taxonomy;
+        return $this->getContainer()->get('kernel')->getRootDir() . '/Resources/initialData/themes.yml';
     }
 
     /**
@@ -142,14 +145,6 @@ class LoadZonesCommand extends ContainerAwareCommand
     {
         $yaml = new Parser();
         return $yaml->parse(file_get_contents($this->getYAMLFileName()));
-    }
-
-    /**
-     * @return string
-     */
-    public function getYAMLFileName()
-    {
-        return $this->getContainer()->get('kernel')->getRootDir() . '/Resources/initialData/zones.yml';
     }
 
     /**
@@ -175,5 +170,4 @@ class LoadZonesCommand extends ContainerAwareCommand
     {
         return $this->getContainer()->get('sylius.manager.taxon');
     }
-
 }

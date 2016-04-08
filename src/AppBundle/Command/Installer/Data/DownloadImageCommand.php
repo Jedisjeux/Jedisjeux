@@ -6,7 +6,7 @@
  * Time: 19:34
  */
 
-namespace AppBundle\Command;
+namespace AppBundle\Command\Installer\Data;
 
 use AppBundle\Entity\AbstractImage;
 use Doctrine\ORM\EntityManager;

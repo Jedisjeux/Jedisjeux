@@ -6,7 +6,7 @@
  * Time: 12:38
  */
 
-namespace AppBundle\Command;
+namespace AppBundle\Command\Installer\Data;
 
 use AppBundle\Entity\Post;
 use AppBundle\TextFilter\Bbcode2Html;

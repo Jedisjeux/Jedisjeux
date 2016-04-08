@@ -6,7 +6,7 @@
  * Time: 18:58
  */
 
-namespace AppBundle\Command;
+namespace AppBundle\Command\Installer\Data;
 
 use AppBundle\Document\BlockquoteBlock;
 use AppBundle\Document\SingleImageBlock;

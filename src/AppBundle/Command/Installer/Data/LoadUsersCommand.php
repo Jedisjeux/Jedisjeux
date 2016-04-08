@@ -6,7 +6,7 @@
  * Time: 15:59
  */
 
-namespace AppBundle\Command;
+namespace AppBundle\Command\Installer\Data;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;

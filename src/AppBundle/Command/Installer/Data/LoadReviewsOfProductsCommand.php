@@ -6,7 +6,7 @@
  * Time: 09:38
  */
 
-namespace AppBundle\Command;
+namespace AppBundle\Command\Installer\Data;
 
 use AppBundle\Entity\Product;
 use AppBundle\Entity\ProductReview;

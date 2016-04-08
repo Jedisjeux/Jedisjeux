@@ -6,7 +6,7 @@
  * Time: 13:13
  */
 
-namespace AppBundle\Command;
+namespace AppBundle\Command\Installer\Data;
 
 use Doctrine\ORM\EntityRepository;
 use JDJ\LudographieBundle\Entity\Personne;
