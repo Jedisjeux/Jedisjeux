@@ -93,3 +93,22 @@
         </div>
     </div>
 {% endmacro %}
+
+{% macro blogAuthor(customer, body) %}
+    {% from 'macros/users.html.twig' import avatar %}
+
+    <div class="blog-author well">
+        <!-- Author image -->
+        <div class="blog-author-img">
+            <a href="#"><!-- Item image -->
+                <img src="{{ avatar(customer.user) | imagine_filter('thumbnail') }}"
+                     alt="" class="img-responsive img-round"/></a>
+        </div>
+        <!-- Author details -->
+        <div class="blog-author-content">
+            <h5><a href="#">Ashok Ramesh <small>Madurai</small></a></h5>
+            <p>Temporibus autem quibusdam et aut officiis debitis aut  molestiae non recusandae rerum hic tenetur rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae rerum hic tenetur.</p>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+{% endmacro %}

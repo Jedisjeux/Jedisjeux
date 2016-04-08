@@ -29261,6 +29261,20 @@ html body.login .forgot-password:focus {
   margin-left: 65px;
 }
 
+/* line 2, ../sass/modules/_game-plays.scss */
+.score-list-content span {
+  position: relative;
+  top: 16px;
+}
+/* line 6, ../sass/modules/_game-plays.scss */
+.score-list-content span.player-name {
+  margin-left: 10px;
+}
+/* line 11, ../sass/modules/_game-plays.scss */
+.score-list-content .divider-4 {
+  margin: 10px 0 10px 0;
+}
+
 /* line 41, ../sass/base.scss */
 body {
   font-size: 14px;

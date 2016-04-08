@@ -1,0 +1,14 @@
+.score-list-content {
+  span {
+    position: relative;
+    top: 16px;
+
+    &.player-name {
+      margin-left: 10px;
+    }
+  }
+
+  .divider-4 {
+      margin: 10px 0 10px 0;
+  }
+}

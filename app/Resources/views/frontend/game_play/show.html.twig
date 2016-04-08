@@ -1,6 +1,7 @@
 {% extends "::base.html.twig" %}
 
 {% from 'macros/posts.html.twig' import blogCommentItem %}
+{% import 'macros/items.html.twig' as item %}
 
 {% set topic = game_play.topic %}
 
@@ -31,6 +32,8 @@
     <div class="container">
         <div class="col-md-8">
             {% include "frontend/game_play/show/_header.html.twig" %}
+
+            {{ item.blogAuthor(game_play.author) }}
 
             {% if topic %}
                 <div class="block-heading-two">

@@ -1,6 +1,46 @@
+{% from 'macros/users.html.twig' import avatar %}
+
 {% set product = game_play.product %}
 
+
 <div class="sidebar">
+
+    <!-- Gallery Widget -->
+    <div class="s-widget">
+        <!-- Heading -->
+        <h5><i class="fa fa-users color"></i> Joueurs</h5>
+        <!-- Widgets Content -->
+        <div class="widget-content">
+            <div class="score-list">
+                <!-- content -->
+                <div class="score-list-content">
+                    <ul>
+                        {% for player in game_play.players %}
+                            {% set user = player.customer ? player.customer.user : null %}
+                            <li>
+
+                                <!-- Item image -->
+                                <img src="{{ user ? avatar(user) : '/assets/img/avatar_2x.png' | imagine_filter('thumbnail') }}"
+                                     alt="" class="img-responsive img-round"/>
+
+                                <!-- Item title -->
+                                <!-- Item title -->
+                                    <span class="pull-right">{% if player.score %}
+                                            <strong>{{ player.score }}</strong>
+                                        {% else %}
+                                            -
+                                        {% endif %} pt{% if player.score > 1 %}s{% endif %}</span>
+                                <span class="player-name">{{ player.name }}</span>
+
+                                <div class="clearfix"></div>
+                                <div class="divider-4"></div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Gallery Widget -->
     <div class="s-widget">
@@ -9,8 +49,10 @@
         <!-- Widgets Content -->
         <div class="widget-content gallery">
             {% for image in game_play.images %}
-                <a href="{{ image.webPath | imagine_filter('default') }}" rel="jeu" class="fancybox" title="{{ image.description }}">
-                    <img src="{{ image.webPath | imagine_filter('thumbnail_S') }}" alt="" class="img-responsive img-thumbnail"/>
+                <a href="{{ image.webPath | imagine_filter('default') }}" rel="jeu" class="fancybox"
+                   title="{{ image.description }}">
+                    <img src="{{ image.webPath | imagine_filter('thumbnail_S') }}" alt=""
+                         class="img-responsive img-thumbnail"/>
                 </a>
             {% endfor %}
         </div>
@@ -49,17 +91,17 @@
 
     <!-- Material list -->
     {% if product.materiel %}
-    <div class="s-widget">
-        <!-- Heading -->
-        <h5><i class="fa fa-list color"></i> Matériel</h5>
-        <!-- Widgets Content -->
-        <div class="widget-content gallery">
-            <ul class="list-6">
-                {% for row in product.materiel|split("\n") %}
-                    <li>{{ row }}</li>
-                {% endfor %}
-            </ul>
+        <div class="s-widget">
+            <!-- Heading -->
+            <h5><i class="fa fa-list color"></i> Matériel</h5>
+            <!-- Widgets Content -->
+            <div class="widget-content gallery">
+                <ul class="list-6">
+                    {% for row in product.materiel|split("\n") %}
+                        <li>{{ row }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
-    </div>
     {% endif %}
 </div>
