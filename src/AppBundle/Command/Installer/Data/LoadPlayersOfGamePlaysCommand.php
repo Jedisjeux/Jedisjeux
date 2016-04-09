@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: loic
- * Date: 24/03/16
- * Time: 08:37
+ * Date: 09/04/16
+ * Time: 14:25
  */
 
 namespace AppBundle\Command\Installer\Data;
@@ -16,13 +16,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class LoadImagesOfGamePlaysCommand extends ContainerAwareCommand
+class LoadPlayersOfGamePlaysCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
-            ->setName('app:images-of-game-plays:load')
-            ->setDescription('Loading images of game plays');
+            ->setName('app:players-of-game-plays:load')
+            ->setDescription('Loading players of game plays');
     }
 
     /**
@@ -31,27 +31,24 @@ class LoadImagesOfGamePlaysCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
-        $this->deleteGamePlaysImages();
-        $this->insertGamePlaysImages();
+        $this->deletePlayers();
+        $this->insertPlayers();
     }
 
-    protected function deleteGamePlaysImages()
+    protected function deletePlayers()
     {
-        $queryBuiler = $this->getManager()->createQuery('delete from AppBundle:GamePlayImage');
+        $queryBuiler = $this->getManager()->createQuery('delete from AppBundle:Player');
         $queryBuiler->execute();
     }
 
-    protected function insertGamePlaysImages()
+    protected function insertPlayers()
     {
         $query = <<<EOM
-insert into jdj_game_play_image(id, gamePlay_id, path, description)
-select    old.img_id, gamePlay.id as gamePlay_id, img_nom as path, ie.legende as description
-from        jedisjeux.jdj_images old
-  inner join  jedisjeux.jdj_images_elements ie
-    on ie.img_id = old.img_id
-       and ie.elem_type = 'partie'
+insert into jdj_player(gamePlay_id, name, score)
+select      gamePlay.id, old.joueur as name, old.score
+from        jedisjeux.jdj_scores old
   inner join  jdj_game_play gamePlay
-    on gamePlay.code = concat('game-play-', ie.elem_id);
+    on gamePlay.code = concat('game-play-', old.partie_id);
 EOM;
 
         $this->getDatabaseConnection()->executeQuery($query);
