@@ -44,11 +44,18 @@ class LoadPlayersOfGamePlaysCommand extends ContainerAwareCommand
     protected function insertPlayers()
     {
         $query = <<<EOM
-insert into jdj_player(gamePlay_id, name, score)
-select      gamePlay.id, old.joueur as name, old.score
+insert into jdj_player(gamePlay_id, name, score, customer_id)
+select      gamePlay.id,
+            case
+                when user.customer_id is null then old.joueur
+            else null
+            end as name,
+            old.score, user.customer_id
 from        jedisjeux.jdj_scores old
   inner join  jdj_game_play gamePlay
-    on gamePlay.code = concat('game-play-', old.partie_id);
+    on gamePlay.code = concat('game-play-', old.partie_id)
+  left join sylius_user user
+              on convert(user.username USING utf8) like convert(old.joueur USING utf8);
 EOM;
 
         $this->getDatabaseConnection()->executeQuery($query);

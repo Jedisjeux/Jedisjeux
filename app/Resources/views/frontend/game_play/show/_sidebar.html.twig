@@ -17,10 +17,11 @@
                     <ul>
                         {% for player in game_play.players %}
                             {% set user = player.customer ? player.customer.user : null %}
+                            {% set avatarPath = user ? avatar(user) : '/assets/img/avatar_2x.png' %}
                             <li>
 
                                 <!-- Item image -->
-                                <img src="{{ user ? avatar(user) : '/assets/img/avatar_2x.png' | imagine_filter('thumbnail') }}"
+                                <img src="{{ avatarPath | imagine_filter('thumbnail') }}"
                                      alt="" class="img-responsive img-round"/>
 
                                 <!-- Item title -->

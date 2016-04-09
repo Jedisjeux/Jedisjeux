@@ -78,7 +78,7 @@ class Player implements ResourceInterface
     public function getName()
     {
         if ($this->getCustomer()) {
-            return $this->getCustomer()->getFullname();
+            return $this->getCustomer()->getUser()->getUsername();
         }
 
         return $this->name;
