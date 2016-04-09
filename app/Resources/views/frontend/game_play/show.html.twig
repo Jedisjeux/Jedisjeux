@@ -17,23 +17,10 @@
 {% block container %}
 
     <div class="container">
-        <div class="col-md-12">
-            <div class="blog-meta">
-                <!-- Date -->
-                <a href="#"><i class="fa fa-calendar"></i> &nbsp;
-                    le {{ game_play.createdAt|localizeddate('full', 'none') }}</a>
-                &nbsp;
-                <!-- Author -->
-                <a href="#"><i class="fa fa-user"></i> &nbsp; {{ game_play.author.user }}</a>
-            </div>
-        </div>
-
-    </div>
-    <div class="container">
         <div class="col-md-8">
             {% include "frontend/game_play/show/_header.html.twig" %}
 
-            {{ item.blogAuthor(game_play.author) }}
+            {{ item.blogAuthor(game_play.author, null, game_play.createdAt) }}
 
             {% if topic %}
                 <div class="block-heading-two">
