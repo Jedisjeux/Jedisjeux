@@ -58,6 +58,16 @@ default:
              filters:
                  tags: "@topics"
 
+        game_plays:
+             contexts:
+                 - Behat\MinkExtension\Context\MinkContext
+                 - AppBundle\Behat\UtilsContext
+                 - AppBundle\Behat\TaxonomyContext
+                 - AppBundle\Behat\UserContext
+                 - AppBundle\Behat\ProductContext
+             filters:
+                 tags: "@game_plays"
+
         products:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext

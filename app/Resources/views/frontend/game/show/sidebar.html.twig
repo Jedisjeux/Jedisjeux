@@ -1,6 +1,22 @@
 <div class="sidebar">
 
     <div class="s-widget">
+        <h5><i class="fa fa-users color"></i> Participer</h5>
+        <!-- Widgets Content -->
+        <div class="widget-content search">
+            <ul class="list-6">
+                <li>
+                    <a href="{{ path('app_game_play_create', { 'productSlug': jeu.slug  } ) }}">
+                        <span class="glyphicon glyphicon-plus-sign"></span>
+                        Nouvelle partie
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
+    <div class="s-widget">
         <!-- Heading -->
         <h5><i class="fa fa-bookmark color"></i> Édition</h5>
         <div class="widget-content gallery">

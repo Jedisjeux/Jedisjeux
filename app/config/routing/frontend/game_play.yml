@@ -1,4 +1,4 @@
-app_game_play_new:
+app_game_play_create:
     methods: [GET, POST]
     path: /parties/new
     defaults:
