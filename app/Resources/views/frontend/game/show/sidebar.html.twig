@@ -4,13 +4,23 @@
         <h5><i class="fa fa-users color"></i> Participer</h5>
         <!-- Widgets Content -->
         <div class="widget-content search">
-            <ul class="list-6">
+            <ul class="list-unstyled">
                 <li>
-                    <a href="{{ path('app_game_play_create', { 'productSlug': jeu.slug  } ) }}">
-                        <span class="glyphicon glyphicon-plus-sign"></span>
+                    <input class="game-rating rating" type="number" min=0 max=5 step=0.5 data-size="xs" />
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="fa fa-star"></span>
+                        Votre avis
+                    </a>
+                </li>
+                <li>
+                    <a class="" href="{{ path('app_game_play_create', { 'productSlug': jeu.slug  } ) }}">
+                        <span class="fa fa-table"></span>
                         Nouvelle partie
                     </a>
                 </li>
+
             </ul>
 
         </div>
