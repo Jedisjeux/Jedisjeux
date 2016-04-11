@@ -11,7 +11,8 @@
 
 {% block breadcrumb_content %}
     <a href="{{ path('sylius_product_index') }}">Jeux</a>
-    / {{ game_play.product }}
+    / <a href="{{ path('sylius_product_show', {'slug': game_play.product.slug}) }}">{{ game_play.product }}</a>
+    / Parties
 {% endblock %}
 
 {% block container %}

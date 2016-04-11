@@ -100,6 +100,7 @@ class GamePlay implements ResourceInterface
     {
         $this->players = new ArrayCollection();
         $this->images = new ArrayCollection();
+        $this->playedAt = new \DateTime();
     }
 
     /**

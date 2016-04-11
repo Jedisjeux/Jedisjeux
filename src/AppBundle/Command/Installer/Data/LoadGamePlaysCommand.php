@@ -91,6 +91,7 @@ EOM;
         $gamePlay
             ->setCode($data['code'])
             ->setCreatedAt(\DateTime::createFromFormat('Y-m-d H:i:s', $data['createdAt']))
+            ->setPlayedAt($gamePlay->getCreatedAt())
             ->setProduct($product)
             ->setAuthor($customer);
 
