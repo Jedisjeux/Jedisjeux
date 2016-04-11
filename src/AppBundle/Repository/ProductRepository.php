@@ -8,6 +8,7 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Product;
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
@@ -101,5 +102,21 @@ class ProductRepository extends BaseProductRepository
         }
 
         return $this->getPaginator($queryBuilder);
+    }
+
+    /**
+     * @return int
+     *
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function findNbResults()
+    {
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder
+            ->select($queryBuilder->expr()->count($this->getAlias()))
+            ->where($queryBuilder->expr()->eq($this->getPropertyName('status'), ':published'))
+            ->setParameter('published', Product::PUBLISHED);
+        return $queryBuilder->getQuery()->getSingleScalarResult();
     }
 }
