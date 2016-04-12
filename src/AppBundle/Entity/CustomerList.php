@@ -25,6 +25,8 @@ class CustomerList implements ResourceInterface
     use Identifiable,
         Timestampable;
 
+    const CODE_GAME_LIBRARY = 'game-library';
+
     /**
      * @var string
      *
@@ -46,4 +48,65 @@ class CustomerList implements ResourceInterface
      * @ORM\JoinColumn(nullable=false)
      */
     protected $customer;
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param string $code
+     *
+     * @return $this
+     */
+    public function setCode($code)
+
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return CustomerInterface
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
+
+    /**
+     * @param CustomerInterface $customer
+     *
+     * @return $this
+     */
+    public function setCustomer($customer)
+    {
+        $this->customer = $customer;
+
+        return $this;
+    }
 }

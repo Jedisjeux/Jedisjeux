@@ -8,6 +8,7 @@
 
 namespace AppBundle\Command\Installer\Data;
 
+use AppBundle\Entity\CustomerList;
 use AppBundle\Entity\CustomerListElement;
 use AppBundle\Entity\Product;
 use Doctrine\ORM\EntityManager;
@@ -38,6 +39,7 @@ class LoadGameLibrariesCommand extends ContainerAwareCommand
     {
         $output->writeln("<comment>" . $this->getDescription() . "</comment>");
         $this->deleteGameLibraries();
+        $this->createLists();
         $this->insertGameLibraries();
     }
 
@@ -47,22 +49,46 @@ class LoadGameLibrariesCommand extends ContainerAwareCommand
         $queryBuiler->execute();
     }
 
-    protected function insertGameLibraries()
+    protected function createLists()
     {
         $query = <<<EOM
+insert into jdj_customer_list(code, customer_id)
+select      distinct :code, customer.id
+from jedisjeux.jdj_ludotheque as old
+inner join sylius_customer customer
+              on customer.code = concat('user-', old.user_id)
+where not exists (
+    select 0
+    from   jdj_customer_list list
+    where  list.code = :code
+    and    list.customer_id = customer.id
+);
+EOM;
+
+        $this->getDatabaseConnection()->executeQuery($query, [
+            'code' => CustomerList::CODE_GAME_LIBRARY,
+        ]);
+    }
+
+    protected function insertGameLibraries()
+    {
+
+        $query = <<<EOM
 insert into jdj_customer_list_element(customerList_id, object_class, object_id)
-select      1, :object_class, product.id
+select      list.id, :object_class, product.id
 from jedisjeux.jdj_ludotheque as old
 inner join sylius_customer customer
               on customer.code = concat('user-', old.user_id)
 inner join sylius_product product
   on product.code = concat('game-', old.game_id)
-where old.user_id=2;
-
+inner join jdj_customer_list list
+            on list.code = :code
+            and list.customer_id = customer.id;
 EOM;
 
         $this->getDatabaseConnection()->executeQuery($query, [
             'object_class' => Product::class,
+            'code' => CustomerList::CODE_GAME_LIBRARY,
         ]);
     }
 
