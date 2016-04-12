@@ -35,7 +35,7 @@ class GamePlay implements ResourceInterface
     protected $code;
 
     /**
-     * @var \DateTime
+     * @var string
      *
      * @ORM\Column(type="datetime", nullable=true)
      */
@@ -123,7 +123,7 @@ class GamePlay implements ResourceInterface
     }
 
     /**
-     * @return \DateTime
+     * @return string
      */
     public function getDuration()
     {
@@ -131,7 +131,7 @@ class GamePlay implements ResourceInterface
     }
 
     /**
-     * @param \DateTime $duration
+     * @param string $duration
      *
      * @return $this
      */

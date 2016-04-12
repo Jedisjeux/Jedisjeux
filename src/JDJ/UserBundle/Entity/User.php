@@ -6,7 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use JDJ\CollectionBundle\Entity\UserProductAttribute;
+use JDJ\CollectionBundle\Entity\UserGameAttribute;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
@@ -356,7 +356,7 @@ class User extends BaseUser implements ResourceInterface
      * @param UserGameAttribute $userGameAttributes
      * @return $this
      */
-    public function addUserGameAttribute(UserProductAttribute $userGameAttributes)
+    public function addUserGameAttribute(UserGameAttribute $userGameAttributes)
     {
         $this->userGameAttributes[] = $userGameAttributes;
 
@@ -368,7 +368,7 @@ class User extends BaseUser implements ResourceInterface
      *
      * @param UserGameAttribute $userGameAttributes
      */
-    public function removeUserGameAttribute(UserProductAttribute $userGameAttributes)
+    public function removeUserGameAttribute(UserGameAttribute $userGameAttributes)
     {
         $this->userGameAttributes->removeElement($userGameAttributes);
     }

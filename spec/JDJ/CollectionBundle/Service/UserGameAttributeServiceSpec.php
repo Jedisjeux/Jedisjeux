@@ -3,7 +3,7 @@
 namespace spec\JDJ\CollectionBundle\Service;
 
 use Doctrine\ORM\EntityManager;
-use JDJ\CollectionBundle\Entity\UserProductAttribute;
+use JDJ\CollectionBundle\Entity\UserGameAttribute;
 use JDJ\JeuBundle\Entity\Jeu;
 use JDJ\UserBundle\Entity\User;
 use PhpSpec\ObjectBehavior;
@@ -32,7 +32,7 @@ class UserGameAttributeServiceSpec extends ObjectBehavior
         $hasher = $prophet->prophesize('JeuBundle\Entity\Jeu');
         $jeu   = new Jeu($hasher->reveal());
 
-        $userGameAttribute = new UserProductAttribute();
+        $userGameAttribute = new UserGameAttribute();
         $userGameAttribute->setUser($user);
         $userGameAttribute->setJeu($jeu);
 
@@ -50,7 +50,7 @@ class UserGameAttributeServiceSpec extends ObjectBehavior
         $hasher = $prophet->prophesize('JeuBundle\Entity\Jeu');
         $jeu   = new Jeu($hasher->reveal());
 
-        $userGameAttribute = new UserProductAttribute();
+        $userGameAttribute = new UserGameAttribute();
         $userGameAttribute->setFavorite(true);
         $userGameAttribute->setUser($user);
         $userGameAttribute->setJeu($jeu);
@@ -83,7 +83,7 @@ class UserGameAttributeServiceSpec extends ObjectBehavior
         $hasher = $prophet->prophesize('JeuBundle\Entity\Jeu');
         $jeu   = new Jeu($hasher->reveal());
 
-        $userGameAttribute = new UserProductAttribute();
+        $userGameAttribute = new UserGameAttribute();
         $userGameAttribute->setUser($user);
         $userGameAttribute->setJeu($jeu);
 
@@ -100,7 +100,7 @@ class UserGameAttributeServiceSpec extends ObjectBehavior
         $hasher = $prophet->prophesize('JeuBundle\Entity\Jeu');
         $jeu   = new Jeu($hasher->reveal());
 
-        $userGameAttribute = new UserProductAttribute();
+        $userGameAttribute = new UserGameAttribute();
         $userGameAttribute->setOwned(true);
         $userGameAttribute->setUser($user);
         $userGameAttribute->setJeu($jeu);
@@ -133,7 +133,7 @@ class UserGameAttributeServiceSpec extends ObjectBehavior
         $hasher = $prophet->prophesize('JeuBundle\Entity\Jeu');
         $jeu   = new Jeu($hasher->reveal());
 
-        $userGameAttribute = new UserProductAttribute();
+        $userGameAttribute = new UserGameAttribute();
         $userGameAttribute->setUser($user);
         $userGameAttribute->setJeu($jeu);
 
@@ -150,7 +150,7 @@ class UserGameAttributeServiceSpec extends ObjectBehavior
         $hasher = $prophet->prophesize('JeuBundle\Entity\Jeu');
         $jeu   = new Jeu($hasher->reveal());
 
-        $userGameAttribute = new UserProductAttribute();
+        $userGameAttribute = new UserGameAttribute();
         $userGameAttribute->setWanted(true);
         $userGameAttribute->setUser($user);
         $userGameAttribute->setJeu($jeu);
@@ -182,7 +182,7 @@ class UserGameAttributeServiceSpec extends ObjectBehavior
         $hasher = $prophet->prophesize('JeuBundle\Entity\Jeu');
         $jeu   = new Jeu($hasher->reveal());
 
-        $userGameAttribute = new UserProductAttribute();
+        $userGameAttribute = new UserGameAttribute();
         $userGameAttribute->setUser($user);
         $userGameAttribute->setJeu($jeu);
 
@@ -199,7 +199,7 @@ class UserGameAttributeServiceSpec extends ObjectBehavior
         $hasher = $prophet->prophesize('JeuBundle\Entity\Jeu');
         $jeu   = new Jeu($hasher->reveal());
 
-        $userGameAttribute = new UserProductAttribute();
+        $userGameAttribute = new UserGameAttribute();
         $userGameAttribute->setPlayed(true);
         $userGameAttribute->setUser($user);
         $userGameAttribute->setJeu($jeu);
