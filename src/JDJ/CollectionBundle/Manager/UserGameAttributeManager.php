@@ -4,7 +4,7 @@ namespace JDJ\CollectionBundle\Manager;
 
 use Doctrine\Common\Util\Debug;
 use Doctrine\ORM\EntityManager;
-use JDJ\CollectionBundle\Entity\UserGameAttribute;
+use JDJ\CollectionBundle\Entity\UserProductAttribute;
 
 class UserGameAttributeManager
 {
@@ -26,7 +26,7 @@ class UserGameAttributeManager
      *
      * @param UserGameAttribute $userGameAttribute
      */
-    public function record(UserGameAttribute $userGameAttribute)
+    public function record(UserProductAttribute $userGameAttribute)
     {
         $this->em->persist($userGameAttribute);
         $this->em->flush();

@@ -4,7 +4,7 @@ namespace JDJ\CollectionBundle\Service;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping as ORM;
-use JDJ\CollectionBundle\Entity\UserGameAttribute;
+use JDJ\CollectionBundle\Entity\UserProductAttribute;
 use JDJ\CollectionBundle\Manager\UserGameAttributeManager;
 use JDJ\CollectionBundle\Repository\UserGameAttributeRepository;
 use JDJ\UserBundle\Entity\User;
@@ -130,7 +130,7 @@ class UserGameAttributeService
      *
      * @return UserGameAttribute
      */
-    public function handleFavorite(UserGameAttribute $userGameAttribute = null, ProductInterface $jeu, User $user)
+    public function handleFavorite(UserProductAttribute $userGameAttribute = null, ProductInterface $jeu, User $user)
     {
         //Set the game to favorite or not
         if ($userGameAttribute) {
@@ -145,7 +145,7 @@ class UserGameAttributeService
             /**
              * Create
              */
-            $userGameAttribute = new UserGameAttribute();
+            $userGameAttribute = new UserProductAttribute();
             $userGameAttribute->setFavorite(true);
             $userGameAttribute->setJeu($jeu);
             $userGameAttribute->setUser($user);
@@ -165,7 +165,7 @@ class UserGameAttributeService
      *
      * @return UserGameAttribute
      */
-    public function handleOwned(UserGameAttribute $userGameAttribute = null, ProductInterface $jeu, User $user)
+    public function handleOwned(UserProductAttribute $userGameAttribute = null, ProductInterface $jeu, User $user)
     {
 
         //Set the game to favorite or not
@@ -180,7 +180,7 @@ class UserGameAttributeService
             /**
              * Create
              */
-            $userGameAttribute = new UserGameAttribute();
+            $userGameAttribute = new UserProductAttribute();
             $userGameAttribute->setOwned(true);
             $userGameAttribute->setJeu($jeu);
             $userGameAttribute->setUser($user);
@@ -199,7 +199,7 @@ class UserGameAttributeService
      *
      * @return UserGameAttribute
      */
-    public function handleWanted(UserGameAttribute $userGameAttribute = null, ProductInterface $jeu, User $user)
+    public function handleWanted(UserProductAttribute $userGameAttribute = null, ProductInterface $jeu, User $user)
     {
 
         //Set the game to favorite or not
@@ -214,7 +214,7 @@ class UserGameAttributeService
             /**
              * Create
              */
-            $userGameAttribute = new UserGameAttribute();
+            $userGameAttribute = new UserProductAttribute();
             $userGameAttribute->setWanted(true);
             $userGameAttribute->setJeu($jeu);
             $userGameAttribute->setUser($user);
@@ -233,7 +233,7 @@ class UserGameAttributeService
      *
      * @return UserGameAttribute
      */
-    public function handlePlayed(UserGameAttribute $userGameAttribute = null, ProductInterface $jeu, User $user)
+    public function handlePlayed(UserProductAttribute $userGameAttribute = null, ProductInterface $jeu, User $user)
     {
 
         //Set the game to favorite or not
@@ -248,7 +248,7 @@ class UserGameAttributeService
             /**
              * Create
              */
-            $userGameAttribute = new UserGameAttribute();
+            $userGameAttribute = new UserProductAttribute();
             $userGameAttribute->setPlayed(true);
             $userGameAttribute->setJeu($jeu);
             $userGameAttribute->setUser($user);
