@@ -10,6 +10,7 @@ namespace AppBundle\Repository;
 
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Review\Model\ReviewInterface;
 
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
@@ -34,6 +35,22 @@ class ProductReviewRepository extends EntityRepository
 
 
         parent::applyCriteria($queryBuilder, $criteria);
+    }
+
+    /**
+     * @return int
+     *
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function findNbResults()
+    {
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder
+            ->select($queryBuilder->expr()->count($this->getAlias()))
+            ->where($queryBuilder->expr()->eq($this->getPropertyName('status'), ':status'))
+            ->setParameter('status', ReviewInterface::STATUS_ACCEPTED);
+        return $queryBuilder->getQuery()->getSingleScalarResult();
     }
 
 }

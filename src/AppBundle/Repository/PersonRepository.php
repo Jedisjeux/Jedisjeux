@@ -78,4 +78,18 @@ class PersonRepository extends EntityRepository
 
         return $this->getPaginator($queryBuilder);
     }
+
+    /**
+     * @return int
+     *
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function findNbResults()
+    {
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder
+            ->select($queryBuilder->expr()->count($this->getAlias()));
+        return $queryBuilder->getQuery()->getSingleScalarResult();
+    }
 }

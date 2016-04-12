@@ -1,16 +1,15 @@
 <!-- Foot Item -->
 <div class="foot-item">
     <!-- Heading -->
-    <h5 class="bold"><i class="fa fa-comments"></i>&nbsp;&nbsp;Recent Posts</h5>
+    <h5 class="bold"><i class="fa fa-comments"></i>&nbsp;&nbsp;Topics récents</h5>
     <!-- Foot Item Content -->
     <div class="foot-item-content">
-        <ul class="list-unstyled">
-            <!-- Link -->
-            <li><a href="#">Denocing Sapientes Contain</a></li>
-            <li><a href="#">Dignissim Electronic Typeset</a></li>
-            <li><a href="#">Laborum Desktop Publishing</a></li>
-            <li><a href="#">Quibus PageMaker Including</a></li>
-            <li><a href="#">Denocing Sapientes Contain</a></li>
-        </ul>
+        {{ render(url('app_partial_topic_index', {
+            'sorting': {
+                'createdAt': 'desc'
+            },
+            'paginate': 5,
+            'template': 'partial/topic/_footerList.html.twig'
+        })) }}
     </div>
 </div>
