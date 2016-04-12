@@ -156,6 +156,12 @@ sylius_resource:
                 model: AppBundle\Entity\Player
                 form:
                     default: AppBundle\Form\Type\PlayerType
+        app.customer_list:
+            classes:
+                model: AppBundle\Entity\CustomerList
+        app.customer_list_element:
+            classes:
+                model: AppBundle\Entity\CustomerListElement
         app.game_review:
             classes:
                 model: AppBundle\Entity\GameReview

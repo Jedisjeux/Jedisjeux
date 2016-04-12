@@ -23,6 +23,11 @@ services:
         tags:
             - { name: doctrine.event_subscriber }
 
+    app.subscriber.load_customer_element_object:
+        class: AppBundle\EventSubscriber\CustomerListElementReferenceSubscriber
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+
     # <!-- Forms -->
     app.form.filter.query:
         class: JDJ\CoreBundle\Form\Filter\QueryFilterType
