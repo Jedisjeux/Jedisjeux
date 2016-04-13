@@ -1,0 +1,37 @@
+{% from "JDJJeuBundle:Jeu:macros.html.twig" import joueurCount %}
+
+{% set productHref = path('sylius_product_show', {'slug': product.slug}) %}
+
+<!-- Image Box #4 Item -->
+<div class="img-box-4-item portfolio">
+    <!-- Image -->
+    <div class="img-container">
+        <a href="{{ productHref }}">
+            <div class="element">
+                <div class="image-style-one">
+                    {% if product.imageCouverture %}
+                    <img src="{{ product.imageCouverture.webPath | imagine_filter('default') }}" alt=""
+                         class="img-responsive"/>
+                    {% endif %}
+                    <div class="image-hover">
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Image Box #4 Content -->
+    <div class="img-box-4-content">
+        <!-- Icon -->
+        <a href="#"><i style="z-index: 10;" class="fa {{ faImg }} {{ bg }}"></i></a>
+        <!-- Heading -->
+        <h4><a href="{{ productHref }}">{{ product }}</a></h4>
+        <!-- Border -->
+        <div class="bor {{ bg }}"></div>
+        <!-- Paragraph -->
+        <p>
+            {{ joueurCount(product) }}<br/>
+            à partir de {{ product.ageMin }} ans<br/>
+        </p>
+    </div>
+</div>

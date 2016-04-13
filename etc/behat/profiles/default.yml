@@ -1,0 +1,29 @@
+default:
+    formatters:
+        pretty:
+            verbose:  true
+            paths:    false
+            snippets: false
+
+    extensions:
+        Behat\MinkExtension:
+            base_url: http://jdj.dev:8080/
+            default_session: firefox
+            sessions:
+                chrome:
+                    selenium2:
+                        browser: chrome
+                        capabilities:
+                            browserName: chrome
+                            browser: chrome
+                            version: ""
+                            chrome:
+                                switches:
+                                    - "start-fullscreen"
+                                    - "start-maximized"
+                                    - "no-sandbox"
+                firefox:
+                    selenium2:
+                        browser: firefox
+
+        Behat\Symfony2Extension: ~

@@ -1,0 +1,2 @@
+imports:
+    - suites/ui/user.yml
