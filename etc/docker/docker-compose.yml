@@ -47,6 +47,8 @@ php:
 
 elasticsearch:
     image: elasticsearch
+    ports:
+        - 9200:9200
 
 memcached:
     image: memcached
