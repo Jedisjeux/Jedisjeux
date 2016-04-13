@@ -2,7 +2,7 @@ app_game_library_show:
     methods: [GET]
     path: /users/{customerId}/ludotheque
     defaults:
-        _controller: app.controller.customer_list_element:indexAction
+        _controller: app.controller.customer_list_element:gameLibraryShowAction
         _sylius:
             template: frontend/game_library/show.html.twig
             paginate: 12

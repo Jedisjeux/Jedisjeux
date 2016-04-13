@@ -111,36 +111,4 @@ class AppKernel extends Kernel
         date_default_timezone_set( 'Europe/Paris' );
         parent::init();
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCacheDir()
-    {
-        if ($this->isVagrantEnvironment()) {
-            return '/dev/shm/jdj/cache/'.$this->environment;
-        }
-
-        return parent::getCacheDir();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getLogDir()
-    {
-        if ($this->isVagrantEnvironment()) {
-            return '/dev/shm/jdj/logs';
-        }
-
-        return parent::getLogDir();
-    }
-
-    /**
-     * @return boolean
-     */
-    protected function isVagrantEnvironment()
-    {
-        return (getenv('HOME') === '/home/vagrant' || getenv('VAGRANT') === 'VAGRANT') && is_dir('/dev/shm');
-    }
 }

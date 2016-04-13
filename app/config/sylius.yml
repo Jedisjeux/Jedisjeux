@@ -162,6 +162,7 @@ sylius_resource:
         app.customer_list_element:
             classes:
                 model: AppBundle\Entity\CustomerListElement
+                controller: AppBundle\Controller\CustomerListElementController
                 repository: AppBundle\Repository\CustomerListElementRepository
         app.game_review:
             classes:
