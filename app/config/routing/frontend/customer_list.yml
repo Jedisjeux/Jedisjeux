@@ -7,5 +7,5 @@ app_game_library_show:
             template: frontend/game_library/show.html.twig
             paginate: 12
             repository:
-                method: createFilterPaginator
+                method: createProductFilterPaginator
                 arguments: [$criteria, $sorting, $customerId, 'game-library']

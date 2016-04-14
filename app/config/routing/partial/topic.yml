@@ -4,10 +4,10 @@ app_partial_topic_index:
     defaults:
         _controller: app.controller.topic:indexAction
         _sylius:
-            criteria: $criteria
+            repository:
+                method: createFilterPaginator
+                arguments: [$criteria, $sorting]
             template: $template
             paginate: $paginate
-            sortable: true
-            sorting: $sorting
     requirements:
         template: "[^?]+"

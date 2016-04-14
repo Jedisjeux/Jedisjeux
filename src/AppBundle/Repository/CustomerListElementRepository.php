@@ -8,6 +8,7 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Product;
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\User\Model\CustomerInterface;
@@ -31,6 +32,52 @@ class CustomerListElementRepository extends EntityRepository
     {
         $queryBuilder = parent::getCollectionQueryBuilder()
             ->join('o.customerList', 'customerList')
+            ->andWhere('customerList.code = :code')
+            ->andWhere('customerList.customer = :customer')
+            ->setParameter('code', $code)
+            ->setParameter('customer', $customer);
+
+        if (!empty($criteria['query'])) {
+            $queryBuilder
+                ->andWhere('user.username LIKE :query')
+                ->setParameter('query', '%' . $criteria['query'] . '%');
+        }
+
+        if (empty($sorting)) {
+            if (!is_array($sorting)) {
+                $sorting = [];
+            }
+
+            $sorting['updatedAt'] = 'desc';
+        }
+
+        $this->applySorting($queryBuilder, $sorting);
+
+        return $this->getPaginator($queryBuilder);
+    }
+
+    /**
+     * Create product filter paginator.
+     *
+     * @param array $criteria
+     * @param array $sorting
+     * @param int|CustomerInterface $customer
+     * @param string $code
+     *
+     * @return Pagerfanta
+     */
+    public function createProductFilterPaginator($criteria = [], $sorting = [], $customer, $code)
+    {
+        $queryBuilder = parent::getCollectionQueryBuilder()
+            ->addSelect('product')
+            ->addSelect('variant')
+            ->addSelect('image')
+            ->addSelect('translation')
+            ->join('o.customerList', 'customerList')
+            ->join('o.product', 'product')
+            ->join('product.variants', 'variant')
+            ->join('product.translations', 'translation')
+            ->join('variant.images', 'image')
             ->andWhere('customerList.code = :code')
             ->andWhere('customerList.customer = :customer')
             ->setParameter('code', $code)

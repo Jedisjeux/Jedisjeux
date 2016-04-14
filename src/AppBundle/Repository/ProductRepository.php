@@ -59,7 +59,9 @@ class ProductRepository extends BaseProductRepository
     {
         $queryBuilder = parent::getCollectionQueryBuilder()
             ->addSelect('variant')
-            ->join('product.variants', 'variant');
+            ->addSelect('image')
+            ->join('product.variants', 'variant')
+            ->join('variant.images', 'image');
 
         if (!empty($criteria['name'])) {
             $queryBuilder

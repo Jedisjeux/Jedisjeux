@@ -74,8 +74,8 @@ EOM;
     {
 
         $query = <<<EOM
-insert into jdj_customer_list_element(customerList_id, object_class, object_id)
-select      list.id, :object_class, product.id
+insert into jdj_customer_list_element(customerList_id, object_class, object_id, product_id)
+select      list.id, :object_class, product.id, product.id
 from jedisjeux.jdj_ludotheque as old
 inner join sylius_customer customer
               on customer.code = concat('user-', old.user_id)

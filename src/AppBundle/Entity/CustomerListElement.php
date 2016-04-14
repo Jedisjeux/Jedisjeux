@@ -11,6 +11,7 @@ namespace AppBundle\Entity;
 use AppBundle\Model\Identifiable;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 
@@ -51,6 +52,13 @@ class CustomerListElement implements ResourceInterface
      * @var ResourceInterface
      */
     protected $element;
+
+    /**
+     * @var ProductInterface
+     *
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface")
+     */
+    protected $product;
 
     /**
      * @return CustomerList
@@ -124,6 +132,27 @@ class CustomerListElement implements ResourceInterface
     public function setElement($element)
     {
         $this->element = $element;
+
+        return $this;
+    }
+
+    /**
+     * @return ProductInterface
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * @param ProductInterface $product
+     *
+     * @return $this
+     */
+    public function setProduct($product)
+    {
+        $this->product = $product;
+        $this->setElement($product);
 
         return $this;
     }

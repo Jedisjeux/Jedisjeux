@@ -8,9 +8,12 @@
 
 namespace AppBundle\EventSubscriber;
 use AppBundle\Entity\CustomerListElement;
+use AppBundle\Entity\Product;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
+use Doctrine\ORM\Events;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 
@@ -25,9 +28,9 @@ class CustomerListElementReferenceSubscriber implements EventSubscriber
     public function getSubscribedEvents()
     {
         return array(
-            'prePersist',
-            'preUpdate',
-            'postLoad',
+            Events::prePersist,
+            Events::preUpdate,
+            Events::postLoad,
         );
     }
 
@@ -75,10 +78,14 @@ class CustomerListElementReferenceSubscriber implements EventSubscriber
         if (null === $customerListElement->getObjectId()) {
             return;
         }
-        
+
+        if (null !== $customerListElement->getProduct()) {
+            return;
+        }
+
         /** @var EntityRepository $repository */
         $repository = $event->getEntityManager()->getRepository($customerListElement->getObjectClass());
-        
+
         /** @var ResourceInterface $element */
         $element = $repository->find($customerListElement->getObjectId());
 

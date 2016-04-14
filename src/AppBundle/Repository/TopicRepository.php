@@ -26,7 +26,7 @@ class TopicRepository extends EntityRepository
         if (isset($sorting['postCount'])) {
 
             $queryBuilder
-                ->addSelect("SIZE(".$this->getPropertyName('posts')." as HIDDEN postCount")
+                ->addSelect("SIZE(" . $this->getPropertyName('posts') . " as HIDDEN postCount")
                 ->addOrderBy('postCount', $sorting['postCount']);
             unset($sorting['postCount']);
         }
@@ -35,10 +35,35 @@ class TopicRepository extends EntityRepository
     }
 
     /**
+     * Create filter paginator.
+     *
+     * @param array $criteria
+     * @param array $sorting
+     *
+     * @return Pagerfanta
+     */
+    public function createFilterPaginator($criteria = array(), $sorting = array())
+    {
+        $queryBuilder = $this->getCollectionQueryBuilder();
+        $queryBuilder
+            ->addSelect('user')
+            ->addSelect('customer')
+            ->addSelect('avatar')
+            ->join('o.createdBy', 'user')
+            ->join('user.customer', 'customer')
+            ->leftJoin('customer.avatar', 'avatar');
+
+        $this->applyCriteria($queryBuilder, (array)$criteria);
+        $this->applySorting($queryBuilder, (array)$sorting);
+
+        return $this->getPaginator($queryBuilder);
+    }
+
+    /**
      * Create paginator for products categorized under given taxon.
      *
      * @param TaxonInterface $taxon
-     * @param array          $criteria
+     * @param array $criteria
      *
      * @return Pagerfanta
      */
@@ -46,15 +71,14 @@ class TopicRepository extends EntityRepository
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
         $queryBuilder
-            ->innerJoin($this->getAlias().'.mainTaxon', 'taxon')
+            ->innerJoin($this->getAlias() . '.mainTaxon', 'taxon')
             ->andWhere($queryBuilder->expr()->orX(
                 'taxon = :taxon',
                 ':left < taxon.left AND taxon.right < :right'
             ))
             ->setParameter('taxon', $taxon)
             ->setParameter('left', $taxon->getLeft())
-            ->setParameter('right', $taxon->getRight())
-        ;
+            ->setParameter('right', $taxon->getRight());
 
         $this->applyCriteria($queryBuilder, $criteria);
         $this->applySorting($queryBuilder, $sorting);
