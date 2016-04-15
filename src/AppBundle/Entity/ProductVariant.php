@@ -21,6 +21,13 @@ use Sylius\Component\Product\Model\Variant;
 class ProductVariant extends Variant
 {
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", unique=true, nullable=true)
+     */
+    protected $code;
+
+    /**
      * @var ArrayCollection|ProductVariantImage[]
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\ProductVariantImage", mappedBy="variant", cascade={"persist", "merge"})
@@ -42,6 +49,26 @@ class ProductVariant extends Variant
         parent::__construct();
 
         $this->images = new ArrayCollection();
+    }
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param string $code
+     *
+     * @return $this
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
     }
 
 

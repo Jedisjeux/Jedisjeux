@@ -9,6 +9,7 @@
 namespace AppBundle\Command\Installer\Data;
 
 use AppBundle\Entity\Product;
+use AppBundle\Entity\ProductVariant;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\Factory;
@@ -40,8 +41,22 @@ class LoadProductsCommand extends ContainerAwareCommand
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
 
         foreach ($this->getRows() as $data) {
-            $output->writeln(sprintf("Loading <comment>%s</comment> product", $data['name']));
+            $output->writeln(sprintf("Loading <info>%s</info> product", $data['name']));
             $this->createOrReplaceProduct($data);
+        }
+
+        foreach ($this->getVariants() as $data) {
+            $output->writeln(sprintf("Loading <info>%s</info> variant for product <info%s</info>",
+                $data['name'],
+                $data['parent_code']
+            ));
+
+            /** @var Product $product */
+            $product = $this->getRepository()->findOneBy(['code' => $data['parent_code']]);
+            
+            if (null !== $product) {
+                $this->createOrReplaceProductVariant($product, $data);
+            }
         }
     }
 
@@ -100,6 +115,31 @@ class LoadProductsCommand extends ContainerAwareCommand
     }
 
     /**
+     * @param Product $product
+     * @param array $data
+     */
+    protected function createOrReplaceProductVariant(Product $product, array $data)
+    {
+        /** @var ProductVariant $productVariant */
+        $productVariant = $this->getProductVariantRepository()->findOneBy(['code' => $data['code']]);
+
+        if (null === $productVariant) {
+            /** @var ProductVariant $productVariant */
+            $productVariant = $this->getProductVariantFactory()->createNew();
+        }
+
+        $productVariant->setCode($data['code']);
+        $productVariant->setCreatedAt(\DateTime::createFromFormat('Y-m-d H:i:s', $data['createdAt']));
+        $productVariant->setReleasedAt($data['releasedAt'] ? \DateTime::createFromFormat('Y-m-d', $data['releasedAt']) : null);
+
+        $product->addVariant($productVariant);
+
+        $this->getManager()->persist($product);
+        $this->getManager()->flush();
+        $this->getManager()->clear();
+    }
+
+    /**
      * @inheritdoc
      */
     public function getRows()
@@ -124,9 +164,35 @@ where       old.valid in (0, 1, 2, 5, 3)
 and         old.id_pere is null
 and         old.nom <> ""
 EOM;
-        $rows = $this->getDatabaseConnection()->fetchAll($query);
+        return $this->getDatabaseConnection()->fetchAll($query);
+    }
 
-        return $rows;
+    private function getVariants()
+    {
+        $query = <<<EOM
+select      concat('game-', old.id) as code,
+            concat('game-', old.id_pere ) as parent_code,
+            old.nom as name,
+            old.min as joueurMin,
+            old.max as joueurMax,
+            old.age_min as ageMin,
+            old.intro as shortDescription,
+            old.presentation as description,
+            old.duree as durationMin,
+            old.duree as durationMax,
+            old.materiel as materiel,
+            old.valid as status,
+            old.date as createdAt,
+            old.date as updatedAt,
+            old.date_sortie as releasedAt
+from        jedisjeux.jdj_game old
+where       old.valid in (0, 1, 2, 5, 3)
+            and         old.id_pere is not null
+            and         old.nom <> ""
+EOM;
+
+        return $this->getDatabaseConnection()->fetchAll($query);
+
     }
 
     private function getHTMLFromText($text)
@@ -180,11 +246,27 @@ EOM;
     }
 
     /**
+     * @return Factory
+     */
+    protected function getProductVariantFactory()
+    {
+        return $this->getContainer()->get('sylius.factory.product_variant');
+    }
+
+    /**
      * @return EntityRepository
      */
     protected function getRepository()
     {
         return $this->getContainer()->get('sylius.repository.product');
+    }
+
+    /**
+     * @return EntityRepository
+     */
+    protected function getProductVariantRepository()
+    {
+        return $this->getContainer()->get('sylius.repository.product_variant');
     }
 
     /**
