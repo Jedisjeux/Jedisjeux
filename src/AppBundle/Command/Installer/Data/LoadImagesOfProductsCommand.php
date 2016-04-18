@@ -64,8 +64,8 @@ EOM;
         $this->getDatabaseConnection()->executeQuery($query);
 
         $query = <<<EOM
-insert into sylius_product_variant_image (id, variant_id, path, description, is_main, is_material)
-  select      distinct old.img_id, variant.id, img_nom, ie.legende, ie.main,
+insert into sylius_product_variant_image (variant_id, path, description, is_main, is_material)
+  select      distinct variant.id, img_nom, ie.legende, ie.main,
                 case
                     when ie.ordre = 1 then 1
                     else 0
@@ -74,15 +74,12 @@ insert into sylius_product_variant_image (id, variant_id, path, description, is_
     inner join  jedisjeux.jdj_images_elements ie
       on ie.img_id = old.img_id
          and ie.elem_type = 'jeu'
-    inner join  sylius_product product
-      on product.code = concat('game-', ie.elem_id)
     inner join  sylius_product_variant variant
-      on variant.product_id = product.id
-  where variant.is_master = 1
+        on variant.code = concat('game-', ie.elem_id)
+    inner join  sylius_product product
+      on product.id = variant.product_id
 EOM;
 
         $this->getDatabaseConnection()->executeQuery($query);
-
-
     }
 } 

@@ -12,6 +12,7 @@ use AppBundle\Entity\Product;
 use AppBundle\Entity\ProductVariant;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use Sylius\Component\Association\Model\AssociationType;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -40,13 +41,15 @@ class LoadProductsCommand extends ContainerAwareCommand
         $this->output = $output;
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
 
+        $associationType = $this->createOrReplaceAssociationTypeCollection();
+
         foreach ($this->getRows() as $data) {
             $output->writeln(sprintf("Loading <info>%s</info> product", $data['name']));
             $this->createOrReplaceProduct($data);
         }
 
         foreach ($this->getVariants() as $data) {
-            $output->writeln(sprintf("Loading <info>%s</info> variant for product <info%s</info>",
+            $output->writeln(sprintf("Loading <info>%s</info> variant for product <info>%s</info>",
                 $data['name'],
                 $data['parent_code']
             ));
@@ -58,6 +61,26 @@ class LoadProductsCommand extends ContainerAwareCommand
                 $this->createOrReplaceProductVariant($product, $data);
             }
         }
+
+        $this->insertProductsOfCollections($associationType);
+    }
+
+    protected function createOrReplaceAssociationTypeCollection()
+    {
+        /** @var AssociationType $assocationType */
+        $assocationType = $this->getContainer()->get('sylius.repository.product_association_type')->findOneBy(['code' => 'collection']);
+
+        if (null === $assocationType) {
+            $assocationType = $this->getContainer()->get('sylius.factory.product_association_type')->createNew();
+        }
+
+        $assocationType->setCode('collection');
+        $assocationType->setName('Dans la même collection');
+
+        $this->getManager()->persist($assocationType);
+        $this->getManager()->flush(); // Save changes in database.
+
+        return $assocationType;
     }
 
     protected function createOrReplaceProduct($data)
@@ -109,9 +132,49 @@ class LoadProductsCommand extends ContainerAwareCommand
             ->setMateriel($data['materiel'])
             ->setStatus($data['status']);
 
+        $product->getMasterVariant()->setCode($data['code']);
+
         $this->getManager()->persist($product);
         $this->getManager()->flush(); // Save changes in database.
         $this->getManager()->clear();
+    }
+
+    protected function insertProductsOfCollections(AssociationType $assocationType)
+    {
+        /** @var EntityRepository $repository */
+        $repository = $this->getContainer()->get('sylius.repository.product_association');
+
+        $queryBuilder = $repository->createQueryBuilder('o');
+        $queryBuilder
+            ->delete();
+
+        $queryBuilder->getQuery()->execute();
+
+        $query = <<<EOM
+insert into sylius_product_association(product_id, association_type_id)
+select      product.id,
+            :association_type_id
+from        sylius_product product
+where       product.code = concat('game-43')
+EOM;
+
+        $this->getDatabaseConnection()->executeQuery($query, ['association_type_id' => $assocationType->getId()]);
+
+        $query = <<<EOM
+insert into sylius_product_association_product(association_id, product_id)
+select      association.id, associated.id
+from        sylius_product_association association
+inner JOIN sylius_product product
+             on product.id = association.product_id
+inner JOIN jedisjeux.jdj_game old
+              on concat('game-', id_famille) = product.code
+inner JOIN sylius_product associated
+              on associated.code = concat('game-', old.id)
+where     old.id_famille <> old.id
+EOM;
+
+        $this->getDatabaseConnection()->executeQuery($query);
+
     }
 
     /**
@@ -161,7 +224,7 @@ select      concat('game-', old.id) as code,
             old.date_sortie as releasedAt
 from        jedisjeux.jdj_game old
 where       old.valid in (0, 1, 2, 5, 3)
-and         old.id_pere is null
+and         (old.id_pere is null or id_famille in (43))
 and         old.nom <> ""
 EOM;
         return $this->getDatabaseConnection()->fetchAll($query);
@@ -188,7 +251,9 @@ select      concat('game-', old.id) as code,
 from        jedisjeux.jdj_game old
 where       old.valid in (0, 1, 2, 5, 3)
             and         old.id_pere is not null
+            and id_famille not in (43)
             and         old.nom <> ""
+            and type_diff != 'extension'
 EOM;
 
         return $this->getDatabaseConnection()->fetchAll($query);
