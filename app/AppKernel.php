@@ -83,7 +83,6 @@ class AppKernel extends Kernel
             new JDJ\LudographieBundle\JDJLudographieBundle(),
             new JDJ\UserBundle\JDJUserBundle(),
             new JDJ\CommentBundle\JDJCommentBundle(),
-            new JDJ\PartieBundle\JDJPartieBundle(),
             new JDJ\UserReviewBundle\JDJUserReviewBundle(),
             new JDJ\CoreBundle\JDJCoreBundle(),
             new JDJ\SearchBundle\JDJSearchBundle(),
