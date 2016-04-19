@@ -48,7 +48,7 @@
                         {{ sorting('sylius_product_index_by_taxon', 'label.name'|trans, 'name', 'asc', null, null, {'permalink': taxon.permalink} ) }}
                     </div>
 
-                    {% include "jeu/index/list-4.html.twig" with {'jeux': products} only %}
+                    {% include "frontend/game/index/list-4.html.twig" %}
 
                     <div class="pagination-wrapper">
                         <div class="pagination-bottom">

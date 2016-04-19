@@ -13,6 +13,7 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use AppBundle\Entity\Article;
+use Doctrine\ORM\Events;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -40,9 +41,9 @@ class ArticleDocumentReferenceSubscriber implements EventSubscriber
     public function getSubscribedEvents()
     {
         return [
-            'prePersist',
-            'preUpdate',
-            'postLoad',
+            Events::prePersist,
+            Events::preUpdate,
+            Events::postLoad,
         ];
     }
 

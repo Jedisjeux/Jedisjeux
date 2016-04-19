@@ -11,9 +11,11 @@ namespace AppBundle\Command\Installer\Data;
 use AppBundle\Document\BlockquoteBlock;
 use AppBundle\Document\SingleImageBlock;
 use AppBundle\Document\ArticleContent;
+use AppBundle\Entity\Article;
 use Doctrine\ODM\PHPCR\Document\Generic;
 use Doctrine\ODM\PHPCR\DocumentManager;
 use Doctrine\ODM\PHPCR\DocumentRepository;
+use Doctrine\ORM\EntityManager;
 use PHPCR\Util\NodeHelper;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
@@ -49,13 +51,25 @@ class LoadArticlesCommand extends ContainerAwareCommand
         foreach ($this->getArticles() as $data) {
             $page = $this->createOrReplaceArticle($data);
             $block = $this->createOrReplaceIntroductionBlock($page, $data);
-             $page->addChild($block);
+            $page->addChild($block);
             $blocks = $this->getBlocks($data['blocks']);
             $this->populateBlocks($page, $blocks);
             $this->getManager()->persist($page);
             $this->getManager()->flush();
             $this->getManager()->clear();
 
+            $article = $this->getContainer()->get('app.repository.article')->findOneBy(['documentId' => $page->getId()]);
+
+            if (null === $article) {
+                /** @var Article $article */
+                $article = $this->getContainer()->get('app.factory.article')->createNew();
+                $article
+                    ->setDocument($page);
+            }
+
+            $this->getArticleManager()->persist($article);
+            $this->getArticleManager()->flush();
+            $this->getArticleManager()->clear();
         }
     }
 
@@ -65,17 +79,16 @@ class LoadArticlesCommand extends ContainerAwareCommand
      */
     protected function createOrReplaceArticle(array $data)
     {
-        $article = $this->findPage($data['name']);
+        $articleDocument = $this->findPage($data['name']);
 
-        if (null === $article) {
-            $article = new ArticleContent();
-            $article
+        if (null === $articleDocument) {
+            $articleDocument = new ArticleContent();
+            $articleDocument
                 ->setParentDocument($this->getParent());
-
         }
 
         if (null !== $data['mainImage']) {
-            $mainImage = $article->getMainImage();
+            $mainImage = $articleDocument->getMainImage();
 
             if (null === $mainImage) {
                 $mainImage = new ImagineBlock();
@@ -86,21 +99,21 @@ class LoadArticlesCommand extends ContainerAwareCommand
             $image->setFileContent(file_get_contents($this->getImageOriginalPath($data['mainImage'])));
 
             $mainImage
-                ->setParentDocument($article)
+                ->setParentDocument($articleDocument)
                 ->setImage($image);
 
             // $this->getManager()->persist($mainImage);
 
-            $article
+            $articleDocument
                 ->setMainImage($mainImage);
         }
 
-        $article->setName($data['name']);
-        $article->setTitle($data['title']);
-        $article->setPublishable(true);
-        $article->setPublishStartDate(\DateTime::createFromFormat('Y-m-d H:i:s', $data['publishedAt']));
+        $articleDocument->setName($data['name']);
+        $articleDocument->setTitle($data['title']);
+        $articleDocument->setPublishable(true);
+        $articleDocument->setPublishStartDate(\DateTime::createFromFormat('Y-m-d H:i:s', $data['publishedAt']));
 
-        return $article;
+        return $articleDocument;
     }
 
     protected function createOrReplaceIntroductionBlock(ArticleContent $page, array $data)
@@ -246,6 +259,14 @@ class LoadArticlesCommand extends ContainerAwareCommand
     public function getManager()
     {
         return $this->getContainer()->get('app.manager.article_content');
+    }
+
+    /**
+     * @return EntityManager
+     */
+    protected function getArticleManager()
+    {
+        return $this->getContainer()->get('app.manager.article');
     }
 
     /**

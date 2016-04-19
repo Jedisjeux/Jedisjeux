@@ -1,4 +1,4 @@
-{% from "JDJJeuBundle:Jeu:macros.html.twig" import joueurCount %}
+{% from "macros/games.html.twig" import playerCount %}
 
 {% set productHref = path('sylius_product_show', {'slug': product.slug}) %}
 
@@ -30,7 +30,7 @@
         <div class="bor {{ bg }}"></div>
         <!-- Paragraph -->
         <p>
-            {{ joueurCount(product) }}<br/>
+            {{ playerCount(product) }}<br/>
             à partir de {{ product.ageMin }} ans<br/>
         </p>
     </div>

@@ -7,10 +7,12 @@
  */
 
 namespace AppBundle\EventSubscriber;
+
 use AppBundle\Entity\CustomerListElement;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Events;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 
@@ -25,9 +27,9 @@ class CustomerListElementReferenceSubscriber implements EventSubscriber
     public function getSubscribedEvents()
     {
         return array(
-            'prePersist',
-            'preUpdate',
-            'postLoad',
+            Events::prePersist,
+            Events::preUpdate,
+            Events::postLoad,
         );
     }
 

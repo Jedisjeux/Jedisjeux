@@ -103,6 +103,9 @@ sylius_user:
 
 sylius_resource:
     resources:
+        app.article:
+            classes:
+                model: AppBundle\Entity\Article
         app.article_content:
             driver: doctrine/phpcr-odm
             classes:
