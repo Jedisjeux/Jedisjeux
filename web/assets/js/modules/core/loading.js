@@ -32,5 +32,5 @@ function manageAjaxEvent() {
     });
 }
 
-manageAjaxEvent();
+//manageAjaxEvent();
 

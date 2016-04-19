@@ -13,21 +13,19 @@
 
         <!-- Login form starts -->
         {% if not app.user %}
-            {% if app.request.attributes.get('_route') != 'fos_user_security_login' %}
-                <div class="tb-shopping-cart pull-right ">
-                    <!-- Link with badge -->
-                    Vous avez déjà un compte ? <a href="#" id="topBarLoginDropdown" class="b-dropdown"><i
-                                class="fa fa-user color"></i> Connexion</a>
-                    <!-- Dropdown content with item details -->
-                    <div class="b-dropdown-block bloc-login">
-                        <!-- Heading -->
-                        <h4><i class="fa fa-user color"></i> Connexion</h4>
-                        {{ render(url('user_login_form'))}}
-                    </div>
-                </div>
-            {% endif %}
+            <div class="tb-shopping-cart pull-right ">
+                <!-- Link with badge -->
+                Vous avez déjà un compte ? <a href="#"><i
+                            class="fa fa-user color"></i> Connexion</a>
+            </div>
         {% endif %}
         <!-- Login form ends -->
+
+        <!-- Alarm notification starts -->
+        {% if app.user %}
+            {% include 'layout/top-bar/_alarm-notification.html.twig' %}
+        {% endif %}
+        <!-- Alarm notification ends -->
 
         <!-- user starts -->
         <div class="tb-language dropdown pull-right">
@@ -39,7 +37,7 @@
                 <!-- Dropdown menu with languages -->
                 <ul class="dropdown-menu dropdown-mini" role="menu">
                     <li><a href="#">Mon compte</a></li>
-                    <li><a href="{{ path('my_collections') }}">Mes listes</a></li>
+                    <li><a href="#">Mes listes</a></li>
                     <li><a href="#">Mes parties</a></li>
                     <li><a href="{{ path('sylius_user_security_logout') }}">Déconnexion</a></li>
                 </ul>

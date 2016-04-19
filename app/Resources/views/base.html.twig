@@ -68,7 +68,7 @@
                     <div class="pull-right">
                         {% block breadcrumb_container %}
                             <div class="breads">
-                                <a href="{{ path('jdj_web_homepage') }}">Accueil</a> /
+                                <a href="{{ path('app_homepage') }}">Accueil</a> /
                                 {% block breadcrumb_content %}
                                     {#<a href="#">Page</a> / #}
                                     {#<a href="#">Sub Page</a>#}
@@ -101,11 +101,8 @@
 
         <div class="main-block">
 
-
             {% include "layout/_flashes.html.twig" %}
             {% include "layout/_notify.html.twig" %}
-
-            {% include "layout/login-form-modal.html.twig" %}
 
             {% block full_content %}
 
@@ -212,8 +209,7 @@
     'assets/bower_components/jquery-countTo/jquery.countTo.js'
     'assets/js/includes/*.js'
     'assets/js/*.js'
-    'assets/js/modules/*/*'
-    '@JDJJeuBundle/Resources/public/js/jeu/*' %}
+    'assets/js/modules/*/*' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>

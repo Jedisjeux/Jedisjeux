@@ -148,6 +148,11 @@ sylius_resource:
                 model: AppBundle\Entity\Player
                 form:
                     default: AppBundle\Form\Type\PlayerType
+        app.notification:
+            classes:
+                model: AppBundle\Entity\Notification
+                repository: AppBundle\Repository\NotificationRepository
+                controller: AppBundle\Controller\NotificationController
         app.customer_list:
             classes:
                 model: AppBundle\Entity\CustomerList

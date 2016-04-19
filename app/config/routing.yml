@@ -17,6 +17,12 @@ admin:
     resource: "routing/admin.yml"
     prefix: /admin
 
+app_api:
+    resource: "routing/api.yml"
+    prefix: /api
+    defaults:
+        _format: json
+
 partial:
     resource: "routing/partial.yml"
     prefix: /_partial
