@@ -118,9 +118,6 @@ sylius_resource:
             classes:
                 model: AppBundle\Document\BlockquoteBlock
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
-        app.user:
-            classes:
-                model: JDJ\UserBundle\Entity\User
         app.game:
             classes:
                 controller: AppBundle\Controller\GameController

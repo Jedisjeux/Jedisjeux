@@ -5,7 +5,6 @@ namespace spec\JDJ\CollectionBundle\Service;
 use Doctrine\ORM\EntityManager;
 use JDJ\CollectionBundle\Entity\Collection;
 use JDJ\JeuBundle\Entity\Jeu;
-use JDJ\UserBundle\Entity\User;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Prophecy\Prophet;

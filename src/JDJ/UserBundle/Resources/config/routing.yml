@@ -1,7 +1,0 @@
-jdj_user_espace_personnel:
-    resource: "@JDJUserBundle/Controller/UserController.php"
-    type: annotation
-
-jdj_user_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: JDJUserBundle:Default:index }

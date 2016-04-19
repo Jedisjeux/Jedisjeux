@@ -48,7 +48,6 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
-            new FOS\UserBundle\FOSUserBundle(),
             new Sonata\IntlBundle\SonataIntlBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new FOS\CommentBundle\FOSCommentBundle(),
@@ -79,7 +78,6 @@ class AppKernel extends Kernel
             // TODO there can be only one !
             new JDJ\ComptaBundle\JDJComptaBundle(),
             new JDJ\JeuBundle\JDJJeuBundle(),
-            new JDJ\UserBundle\JDJUserBundle(),
             new JDJ\CoreBundle\JDJCoreBundle(),
             new JDJ\SearchBundle\JDJSearchBundle(),
             new JDJ\CollectionBundle\JDJCollectionBundle(),

@@ -170,17 +170,6 @@ white_october_pagerfanta:
         out_of_range_page:        to_http_not_found
         not_valid_current_page:   to_http_not_found
 
-fos_user:
-  db_driver: orm
-  firewall_name: main
-  user_class: JDJ\UserBundle\Entity\User
-  registration:
-    form:
-        type: jdj_user_registration
-  profile:
-    form:
-        type: jdj_user_profile
-
 fos_comment:
     db_driver: orm
     class:

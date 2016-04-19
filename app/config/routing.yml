@@ -41,10 +41,6 @@ jdj_core:
     resource: "@JDJCoreBundle/Resources/config/routing.yml"
     prefix:   /
 
-jdj_user:
-    resource: "@JDJUserBundle/Resources/config/routing.yml"
-    prefix:   /
-
 jdj_jeu:
     resource: "@JDJJeuBundle/Resources/config/routing.yml"
     prefix:   /jeu
