@@ -44,24 +44,24 @@ class LoadProductsCommand extends ContainerAwareCommand
         $associationTypeCollection = $this->createOrReplaceAssociationTypeCollection();
         $associationTypeExpansion = $this->createOrReplaceAssociationTypeExpansion();
 
-        foreach ($this->getRows() as $data) {
-            $output->writeln(sprintf("Loading <info>%s</info> product", $data['name']));
-            $this->createOrReplaceProduct($data);
-        }
-
-        foreach ($this->getVariants() as $data) {
-            $output->writeln(sprintf("Loading <info>%s</info> variant for product <info>%s</info>",
-                $data['name'],
-                $data['parent_code']
-            ));
-
-            /** @var Product $product */
-            $product = $this->getRepository()->findOneBy(['code' => $data['parent_code']]);
-            
-            if (null !== $product) {
-                $this->createOrReplaceProductVariant($product, $data);
-            }
-        }
+//        foreach ($this->getRows() as $data) {
+//            $output->writeln(sprintf("Loading <info>%s</info> product", $data['name']));
+//            $this->createOrReplaceProduct($data);
+//        }
+//
+//        foreach ($this->getVariants() as $data) {
+//            $output->writeln(sprintf("Loading <info>%s</info> variant for product <info>%s</info>",
+//                $data['name'],
+//                $data['parent_code']
+//            ));
+//
+//            /** @var Product $product */
+//            $product = $this->getRepository()->findOneBy(['code' => $data['parent_code']]);
+//
+//            if (null !== $product) {
+//                $this->createOrReplaceProductVariant($product, $data);
+//            }
+//        }
 
         $this->deleteProductAssociations();
         $this->insertProductsOfCollections($associationTypeCollection);
@@ -177,9 +177,17 @@ class LoadProductsCommand extends ContainerAwareCommand
         $query = <<<EOM
 insert into sylius_product_association(product_id, association_type_id)
 select      product.id,
-            :association_type_id
+  :association_type_id
 from        sylius_product product
-where       product.code = concat('game-43')
+  inner join jedisjeux.jdj_game old
+    on concat('game-', old.id) = product.code
+where       old.id_pere is null
+and exists (
+    select 0
+    from  jedisjeux.jdj_game a
+    where a.id_famille = old.id
+    and   a.type_diff = 'collection'
+)
 EOM;
 
         $this->getDatabaseConnection()->executeQuery($query, ['association_type_id' => $assocationType->getId()]);
@@ -195,7 +203,7 @@ inner JOIN jedisjeux.jdj_game old
 inner JOIN sylius_product associated
               on associated.code = concat('game-', old.id)
 where     old.id_famille <> old.id
-and       old.type_diff <> 'extension'
+and       old.type_diff = 'collection'
 and       association.association_type_id = :association_type_id
 EOM;
 
@@ -283,7 +291,7 @@ select      concat('game-', old.id) as code,
             old.date_sortie as releasedAt
 from        jedisjeux.jdj_game old
 where       old.valid in (0, 1, 2, 5, 3)
-and         (old.id_pere is null or id_famille in (43) or type_diff = 'extension')
+and         (old.id_pere is null or type_diff in ('extension', 'collection'))
 and         old.nom <> ""
 EOM;
         return $this->getDatabaseConnection()->fetchAll($query);
@@ -310,9 +318,8 @@ select      concat('game-', old.id) as code,
 from        jedisjeux.jdj_game old
 where       old.valid in (0, 1, 2, 5, 3)
             and         old.id_pere is not null
-            and id_famille not in (43)
             and         old.nom <> ""
-            and type_diff != 'extension'
+            and type_diff in ('regle', 'materiel')
 EOM;
 
         return $this->getDatabaseConnection()->fetchAll($query);
