@@ -77,7 +77,6 @@ class AppKernel extends Kernel
             //JDJ
             // TODO there can be only one !
             new JDJ\ComptaBundle\JDJComptaBundle(),
-            new JDJ\JeuBundle\JDJJeuBundle(),
             new JDJ\CoreBundle\JDJCoreBundle(),
             new JDJ\SearchBundle\JDJSearchBundle(),
             new JDJ\CollectionBundle\JDJCollectionBundle(),

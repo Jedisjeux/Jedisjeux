@@ -37,10 +37,6 @@ jdj_search:
     resource: "@JDJSearchBundle/Resources/config/routing.yml"
     prefix:   /recherche
 
-jdj_jeu:
-    resource: "@JDJJeuBundle/Resources/config/routing.yml"
-    prefix:   /jeu
-
 jdj_compta:
     resource: "@JDJComptaBundle/Controller/"
     type:     annotation
