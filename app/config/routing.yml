@@ -57,10 +57,6 @@ jdj_user:
     resource: "@JDJUserBundle/Resources/config/routing.yml"
     prefix:   /
 
-jdj_ludographie:
-    resource: "@JDJLudographieBundle/Resources/config/routing.yml"
-    prefix:   /ludographie
-
 jdj_jeu:
     resource: "@JDJJeuBundle/Resources/config/routing.yml"
     prefix:   /jeu

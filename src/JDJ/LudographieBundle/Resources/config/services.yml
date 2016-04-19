@@ -1,7 +1,0 @@
-parameters:
-#    jdj_ludographie.example.class: JDJ\LudographieBundle\Example
-
-services:
-#    jdj_ludographie.example:
-#        class: %jdj_ludographie.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]

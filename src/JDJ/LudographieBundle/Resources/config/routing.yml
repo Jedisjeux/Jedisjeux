@@ -1,4 +1,0 @@
-jdj_ludographie_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: JDJLudographieBundle:Default:index }
-
