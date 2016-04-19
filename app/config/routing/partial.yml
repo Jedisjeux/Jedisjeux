@@ -9,3 +9,6 @@ app_partial_game_play:
 
 app_partial_topic:
     resource: 'partial/topic.yml'
+
+app_partial_article:
+    resource: 'partial/article.yml'

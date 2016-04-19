@@ -1,0 +1,10 @@
+{% from 'macros/articles.html.twig' import magazineItemOne, magazineListItem %}
+
+<div class="row">
+
+    {% for article in articles %}
+        <div class="col-md-4 col-sm-6">
+            {{ magazineItemOne(article.document) }}
+        </div>
+    {% endfor %}
+</div>

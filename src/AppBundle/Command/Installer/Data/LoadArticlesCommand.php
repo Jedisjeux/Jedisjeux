@@ -17,6 +17,7 @@ use Doctrine\ODM\PHPCR\DocumentManager;
 use Doctrine\ODM\PHPCR\DocumentRepository;
 use Doctrine\ORM\EntityManager;
 use PHPCR\Util\NodeHelper;
+use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
 use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
@@ -65,6 +66,14 @@ class LoadArticlesCommand extends ContainerAwareCommand
                 $article = $this->getContainer()->get('app.factory.article')->createNew();
                 $article
                     ->setDocument($page);
+            }
+
+            if (null !== $data['product_id']) {
+                /** @var ProductInterface $product */
+                $product = $this->getContainer()->get('sylius.repository.product')->find($data['product_id']);
+
+                $article
+                    ->setProduct($product);
             }
 
             $this->getArticleManager()->persist($article);
@@ -286,10 +295,15 @@ select article.article_id as id,
       article.date as publishedAt,
       article.intro as introduction,
       article.photo as mainImage,
+      product.id as product_id,
       group_concat(block.text_id) as blocks
 from jedisjeux.jdj_article article
 inner join jedisjeux.jdj_article_text as block
       on block.article_id = article.article_id
+left join sylius_product_variant productVariant
+            on productVariant.code = concat('game-', article.game_id)
+left join sylius_product product
+             on product.id = productVariant.product_id
 where titre_clean != ''
 group by article.article_id
 limit 5
