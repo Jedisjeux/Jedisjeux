@@ -29,10 +29,6 @@ jdj_jedi_zone:
     resource: "@JDJJediZoneBundle/Resources/config/routing.yml"
     prefix:   /
 
-jdj_collection:
-    resource: "@JDJCollectionBundle/Resources/config/routing.yml"
-    prefix:   /
-
 jdj_search:
     resource: "@JDJSearchBundle/Resources/config/routing.yml"
     prefix:   /recherche

@@ -79,7 +79,6 @@ class AppKernel extends Kernel
             new JDJ\ComptaBundle\JDJComptaBundle(),
             new JDJ\CoreBundle\JDJCoreBundle(),
             new JDJ\SearchBundle\JDJSearchBundle(),
-            new JDJ\CollectionBundle\JDJCollectionBundle(),
             new JDJ\JediZoneBundle\JDJJediZoneBundle(),
             new AppBundle\AppBundle(),
         );
