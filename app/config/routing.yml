@@ -70,10 +70,6 @@ jdj_compta:
     type:     annotation
     prefix:   /compta
 
-jdj_web:
-    resource: "@JDJWebBundle/Resources/config/routing.yml"
-    prefix:   /
-
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
 

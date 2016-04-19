@@ -143,13 +143,6 @@ class Product extends BaseProduct implements ReviewableInterface
     protected $publishers;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\OneToMany(targetEntity="JDJ\JeuBundle\Entity\Addon", mappedBy="jeu")
-     */
-    protected $addons;
-
-    /**
      * @var ArrayCollection
      */
     protected $reviews;

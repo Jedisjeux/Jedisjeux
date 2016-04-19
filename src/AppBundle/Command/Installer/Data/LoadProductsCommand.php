@@ -44,24 +44,24 @@ class LoadProductsCommand extends ContainerAwareCommand
         $associationTypeCollection = $this->createOrReplaceAssociationTypeCollection();
         $associationTypeExpansion = $this->createOrReplaceAssociationTypeExpansion();
 
-//        foreach ($this->getRows() as $data) {
-//            $output->writeln(sprintf("Loading <info>%s</info> product", $data['name']));
-//            $this->createOrReplaceProduct($data);
-//        }
-//
-//        foreach ($this->getVariants() as $data) {
-//            $output->writeln(sprintf("Loading <info>%s</info> variant for product <info>%s</info>",
-//                $data['name'],
-//                $data['parent_code']
-//            ));
-//
-//            /** @var Product $product */
-//            $product = $this->getRepository()->findOneBy(['code' => $data['parent_code']]);
-//
-//            if (null !== $product) {
-//                $this->createOrReplaceProductVariant($product, $data);
-//            }
-//        }
+        foreach ($this->getRows() as $data) {
+            $output->writeln(sprintf("Loading <info>%s</info> product", $data['name']));
+            $this->createOrReplaceProduct($data);
+        }
+
+        foreach ($this->getVariants() as $data) {
+            $output->writeln(sprintf("Loading <info>%s</info> variant for product <info>%s</info>",
+                $data['name'],
+                $data['parent_code']
+            ));
+
+            /** @var Product $product */
+            $product = $this->getRepository()->findOneBy(['code' => $data['parent_code']]);
+
+            if (null !== $product) {
+                $this->createOrReplaceProductVariant($product, $data);
+            }
+        }
 
         $this->deleteProductAssociations();
         $this->insertProductsOfCollections($associationTypeCollection);
