@@ -118,11 +118,6 @@ sylius_resource:
             classes:
                 model: AppBundle\Document\BlockquoteBlock
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
-        app.game:
-            classes:
-                controller: AppBundle\Controller\GameController
-                repository: JDJ\JeuBundle\Repository\JeuRepository
-                model: JDJ\JeuBundle\Entity\Jeu
         app.country:
             classes:
                 model: AppBundle\Entity\Country

@@ -9,8 +9,8 @@
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\QueryBuilder;
-use JDJ\CoreBundle\Entity\EntityRepository;
 use Pagerfanta\Pagerfanta;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
