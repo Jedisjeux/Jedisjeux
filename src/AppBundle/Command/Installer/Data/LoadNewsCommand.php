@@ -103,6 +103,7 @@ select      old.news_id as id,
             old.text as body,
             old.photo as mainImage,
             customer.id as author_id,
+            old.photo as mainImage,
             product.id as product_id
 from        jedisjeux.jdj_news old
   inner join sylius_customer customer
