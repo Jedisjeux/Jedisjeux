@@ -2,7 +2,7 @@
 
     {% if is_granted('ROLE_WORKFLOW') %}
 
-        {% if(jeu.status != constant('JDJ\\JeuBundle\\Entity\\Jeu::PUBLISHED')) %}
+        {% if(jeu.status != constant('AppBundle\\Entity\\Product::PUBLISHED')) %}
             <div class="alert alert-warning changeStatusContainer" role="alert">
                 <span class="fa fa-exclamation-triangle"></span>
 
@@ -21,7 +21,7 @@
                     </div>
                     {% include "jeu/partial/_refuse-modal.html.twig" with {'jeu': jeu, 'status': constant('JDJ\\JeuBundle\\Entity\\Jeu::NEED_A_TRANSLATION') } only %}
 
-                {% elseif (is_granted('ROLE_TRANSLATOR') and jeu.status == constant('JDJ\\JeuBundle\\Entity\\Jeu::NEED_A_TRANSLATION')) %}
+                {% elseif (is_granted('ROLE_TRANSLATOR') and jeu.status == constant('AppBundle\\Entity\\Product::NEED_A_TRANSLATION')) %}
                     <div class="pull-right control-group">
                         <a href="#" class="btn btn-success acceptStatus clearfix" name="Passer en relecture"
                            data-jeu-id="{{ jeu.id }}"
@@ -34,7 +34,7 @@
                            title="Refuser">Refuser</a>
 
                     </div>
-                    {% include "jeu/partial/_refuse-modal.html.twig" with {'jeu': jeu, 'status': constant('JDJ\\JeuBundle\\Entity\\Jeu::NEED_A_REVIEW') } only %}
+                    {% include "jeu/partial/_refuse-modal.html.twig" with {'jeu': jeu, 'status': constant('AppBundle\\Entity\\Product::NEED_A_REVIEW') } only %}
 
                 {% elseif (is_granted('ROLE_REVIEWER') and jeu.status == constant('JDJ\\JeuBundle\\Entity\\Jeu::NEED_A_REVIEW')) %}
                     <div class="pull-right control-group">
@@ -48,20 +48,20 @@
                            type="button" data-toggle="tooltip" data-placement="top"
                            title="Refuser">Refuser</a>
                     </div>
-                    {% include "jeu/partial/_refuse-modal.html.twig" with {'jeu': jeu, 'status':  constant('JDJ\\JeuBundle\\Entity\\Jeu::READY_TO_PUBLISH') } only %}
+                    {% include "jeu/partial/_refuse-modal.html.twig" with {'jeu': jeu, 'status':  constant('AppBundle\\Entity\\Product::READY_TO_PUBLISH') } only %}
 
-                {% elseif (is_granted('ROLE_PUBLISHER') and jeu.status == constant('JDJ\\JeuBundle\\Entity\\Jeu::READY_TO_PUBLISH')) %}
+                {% elseif (is_granted('ROLE_PUBLISHER') and jeu.status == constant('AppBundle\\Entity\\Product::READY_TO_PUBLISH')) %}
                     <div class="pull-right control-group">
                         <a href="#" class="btn btn-success acceptStatus clearfix" name="Publier"
                            data-jeu-id="{{ jeu.id }}"
-                           data-status="{{ constant('JDJ\\JeuBundle\\Entity\\Jeu::PUBLISHED') }}"
-                           data-action="{{ constant('JDJ\\JediZoneBundle\\Entity\\Notification::ACTION_ACCEPT') }}"
+                           data-status="{{ constant('AppBundle\\Entity\\Product::PUBLISHED') }}"
+                           data-action="{{ constant('AppBundle\\Entity\\Product::ACTION_ACCEPT') }}"
                            ">Publier</a>
                         <a href="#refuseStatusModal" class="btn btn-danger clearfix" name="Refuser" data-toggle="modal"
                            type="button" data-toggle="tooltip" data-placement="top"
                            title="Refuser">Refuser</a>
                     </div>
-                    {% include "jeu/partial/_refuse-modal.html.twig" with {'jeu': jeu, 'status':  constant('JDJ\\JeuBundle\\Entity\\Jeu::PUBLISHED') } only %}
+                    {% include "jeu/partial/_refuse-modal.html.twig" with {'jeu': jeu, 'status':  constant('AppBundle\\Entity\\Product::PUBLISHED') } only %}
 
                 {% endif %}
                 Ce jeu est encore au statut <strong>{{ jeu.status |trans }}</strong>.

@@ -2,9 +2,6 @@ app_forum:
     resource: "frontend/forum.yml"
     prefix: /forum
 
-app_game_review:
-    resource: "frontend/game_review.yml"
-
 app_game_play:
     prefix: /jeu-de-societe/{productSlug}
     resource: "frontend/game_play.yml"

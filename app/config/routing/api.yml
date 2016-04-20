@@ -1,0 +1,4 @@
+app_api:
+    resource: "api/notification.yml"
+    options:
+      expose: true

@@ -17,6 +17,12 @@ admin:
     resource: "routing/admin.yml"
     prefix: /admin
 
+app_api:
+    resource: "routing/api.yml"
+    prefix: /api
+    defaults:
+        _format: json
+
 partial:
     resource: "routing/partial.yml"
     prefix: /_partial
@@ -29,54 +35,14 @@ jdj_jedi_zone:
     resource: "@JDJJediZoneBundle/Resources/config/routing.yml"
     prefix:   /
 
-jdj_cms:
-    resource: "@JDJCMSBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-jdj_collection:
-    resource: "@JDJCollectionBundle/Resources/config/routing.yml"
-    prefix:   /
-
 jdj_search:
     resource: "@JDJSearchBundle/Resources/config/routing.yml"
     prefix:   /recherche
-
-jdj_core:
-    resource: "@JDJCoreBundle/Resources/config/routing.yml"
-    prefix:   /
-
-jdj_comment:
-    resource: "@JDJCommentBundle/Resources/config/routing.yml"
-
-jdj_user_review:
-    resource: "@JDJUserReviewBundle/Resources/config/routing.yml"
-    prefix:   /
-
-jdj_partie:
-    resource: "@JDJPartieBundle/Resources/config/routing.yml"
-    prefix:   /
-
-jdj_user:
-    resource: "@JDJUserBundle/Resources/config/routing.yml"
-    prefix:   /
-
-jdj_ludographie:
-    resource: "@JDJLudographieBundle/Resources/config/routing.yml"
-    prefix:   /ludographie
-
-jdj_jeu:
-    resource: "@JDJJeuBundle/Resources/config/routing.yml"
-    prefix:   /jeu
 
 jdj_compta:
     resource: "@JDJComptaBundle/Controller/"
     type:     annotation
     prefix:   /compta
-
-jdj_web:
-    resource: "@JDJWebBundle/Resources/config/routing.yml"
-    prefix:   /
 
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"

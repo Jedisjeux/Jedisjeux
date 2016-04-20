@@ -103,6 +103,9 @@ sylius_user:
 
 sylius_resource:
     resources:
+        app.article:
+            classes:
+                model: AppBundle\Entity\Article
         app.article_content:
             driver: doctrine/phpcr-odm
             classes:
@@ -118,14 +121,6 @@ sylius_resource:
             classes:
                 model: AppBundle\Document\BlockquoteBlock
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
-        app.user:
-            classes:
-                model: JDJ\UserBundle\Entity\User
-        app.game:
-            classes:
-                controller: AppBundle\Controller\GameController
-                repository: JDJ\JeuBundle\Repository\JeuRepository
-                model: JDJ\JeuBundle\Entity\Jeu
         app.country:
             classes:
                 model: AppBundle\Entity\Country
@@ -156,6 +151,11 @@ sylius_resource:
                 model: AppBundle\Entity\Player
                 form:
                     default: AppBundle\Form\Type\PlayerType
+        app.notification:
+            classes:
+                model: AppBundle\Entity\Notification
+                repository: AppBundle\Repository\NotificationRepository
+                controller: AppBundle\Controller\NotificationController
         app.customer_list:
             classes:
                 model: AppBundle\Entity\CustomerList
@@ -164,11 +164,6 @@ sylius_resource:
                 model: AppBundle\Entity\CustomerListElement
                 controller: AppBundle\Controller\CustomerListElementController
                 repository: AppBundle\Repository\CustomerListElementRepository
-        app.game_review:
-            classes:
-                model: AppBundle\Entity\GameReview
-                repository: AppBundle\Repository\GameReviewRepository
-                factory: AppBundle\Factory\GameReviewFactory
         app.topic:
             classes:
                 model: AppBundle\Entity\Topic

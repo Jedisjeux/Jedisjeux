@@ -175,7 +175,7 @@ class SearchController extends Controller
         foreach ($results as $result) {
             if ($result instanceof ProductInterface) {
                 $types[] = "jeu";
-            } elseif ($result instanceof Personne) {
+            } elseif ($result instanceof Person) {
                 $types[] = "personne";
             } elseif ($result instanceof User) {
                 $types[] = "user";
@@ -222,7 +222,7 @@ class SearchController extends Controller
             ));
         }
 
-        if ($current instanceof Personne) {
+        if ($current instanceof Person) {
             return $this->redirect($this->generateUrl('personne_show', array(
                     'id' => $current->getId(),
                     'slug' => $current->getSlug(),

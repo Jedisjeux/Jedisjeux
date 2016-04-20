@@ -143,34 +143,6 @@ class Product extends BaseProduct implements ReviewableInterface
     protected $publishers;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\OneToMany(targetEntity="JDJ\JeuBundle\Entity\Addon", mappedBy="jeu")
-     */
-    protected $addons;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\OneToMany(targetEntity="JDJ\PartieBundle\Entity\Partie", mappedBy="jeu")
-     */
-    protected $parties;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\OneToMany(targetEntity="JDJ\CollectionBundle\Entity\ListElement", mappedBy="jeu")
-     */
-    protected $listElements;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\OneToMany(targetEntity="JDJ\CollectionBundle\Entity\UserGameAttribute", mappedBy="jeu")
-     */
-    protected $userGameAttributes;
-
-    /**
      * @var ArrayCollection
      */
     protected $reviews;
@@ -621,63 +593,6 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
-     * @return Collection
-     */
-    public function getParties()
-    {
-        return $this->parties;
-    }
-
-    /**
-     * @param Collection $parties
-     * @return $this
-     */
-    public function setParties($parties)
-    {
-        $this->parties = $parties;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getListElements()
-    {
-        return $this->listElements;
-    }
-
-    /**
-     * @param Collection $listElements
-     * @return $this
-     */
-    public function setListElements($listElements)
-    {
-        $this->listElements = $listElements;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getUserGameAttributes()
-    {
-        return $this->userGameAttributes;
-    }
-
-    /**
-     * @param Collection $userGameAttributes
-     * @return $this
-     */
-    public function setUserGameAttributes($userGameAttributes)
-    {
-        $this->userGameAttributes = $userGameAttributes;
-
-        return $this;
-    }
-
-    /**
      * @return ArrayCollection
      */
     public function getMechanisms()
@@ -699,11 +614,6 @@ class Product extends BaseProduct implements ReviewableInterface
     public function getThemes()
     {
         return $this->getTaxons('themes');
-    }
-
-    public function __toString()
-    {
-        return $this->getName();
     }
 
     /**
@@ -770,5 +680,13 @@ class Product extends BaseProduct implements ReviewableInterface
         $this->averageRating = $averageRating;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return $this->getName();
     }
 }

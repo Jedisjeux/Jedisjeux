@@ -1,0 +1,22 @@
+{% from 'macros/games.html.twig' import magazineItemOne %}
+
+{% for association in product.associations %}
+
+    <div class="block-heading-two">
+        <h3><span>{{ association.type }}</span></h3>
+    </div>
+
+    <div class="row">
+        {% for key, game in association.associatedObjects %}
+            {% if key%3 == 0 and key > 1 %}
+                </div>
+                <div class="row">
+            {% endif %}
+            <div class="col-md-4 col-sm-6">
+                {{ magazineItemOne(game) }}
+            </div>
+        {% endfor %}
+    </div>
+
+
+{% endfor %}

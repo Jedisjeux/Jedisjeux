@@ -7,12 +7,11 @@
  */
 
 namespace AppBundle\EventSubscriber;
+
 use AppBundle\Entity\CustomerListElement;
-use AppBundle\Entity\Product;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Events;
 use Sylius\Component\Resource\Model\ResourceInterface;
 

@@ -11,7 +11,9 @@ namespace AppBundle\Entity;
 use AppBundle\Document\ArticleContent;
 use AppBundle\Model\Identifiable;
 use Doctrine\ORM\Mapping as ORM;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\User\Model\CustomerInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -34,6 +36,20 @@ class Article implements ResourceInterface
      * @var ArticleContent
      */
     protected $document;
+
+    /**
+     * @var ProductInterface
+     *
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface")
+     */
+    protected $product;
+
+    /**
+     * @var CustomerInterface
+     *
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\User\Model\CustomerInterface")
+     */
+    protected $author;
 
     /**
      * @return int
@@ -71,6 +87,46 @@ class Article implements ResourceInterface
     public function setDocument($document)
     {
         $this->document = $document;
+
+        return $this;
+    }
+
+    /**
+     * @return ProductInterface
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * @param ProductInterface $product
+     *
+     * @return $this
+     */
+    public function setProduct($product)
+    {
+        $this->product = $product;
+
+        return $this;
+    }
+
+    /**
+     * @return CustomerInterface
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param CustomerInterface $author
+     *
+     * @return $this
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
 
         return $this;
     }

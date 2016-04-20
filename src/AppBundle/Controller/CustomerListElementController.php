@@ -10,6 +10,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\CustomerList;
 use AppBundle\Repository\CustomerListElementRepository;
+use Doctrine\ORM\EntityRepository;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Resource\ResourceActions;
@@ -26,6 +27,8 @@ class CustomerListElementController extends ResourceController
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $this->isGrantedOr403($configuration, ResourceActions::INDEX);
 
+        $taxonomies = $this->getTaxonomyRepository()->findBy(array('name' => array('mecanismes', 'themes')));
+        
         /** @var CustomerInterface $customer */
         $customer = $this->get('sylius.repository.customer')->find($request->get('customerId'));
 
@@ -39,6 +42,7 @@ class CustomerListElementController extends ResourceController
                 ->setTemplateVar($this->metadata->getPluralName())
                 ->setData([
                     'customer' => $customer,
+                    'taxonomies' => $taxonomies,
                     'metadata' => $this->metadata,
                     'resources' => $resources,
                     $this->metadata->getPluralName() => $resources,
@@ -47,5 +51,13 @@ class CustomerListElementController extends ResourceController
         }
 
         return $this->viewHandler->handle($configuration, $view);
+    }
+
+    /**
+     * @return EntityRepository
+     */
+    protected function getTaxonomyRepository()
+    {
+        return $this->get('sylius.repository.taxonomy');
     }
 }

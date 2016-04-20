@@ -10,10 +10,14 @@ namespace AppBundle\Command\Installer\Data;
 
 use AppBundle\Document\ArticleContent;
 use AppBundle\Document\SingleImageBlock;
+use AppBundle\Entity\Article;
 use Doctrine\ODM\PHPCR\Document\Generic;
 use Doctrine\ODM\PHPCR\DocumentManager;
 use Doctrine\ODM\PHPCR\DocumentRepository;
+use Doctrine\ORM\EntityManager;
 use PHPCR\Util\NodeHelper;
+use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
 use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
@@ -55,9 +59,36 @@ class LoadNewsCommand extends ContainerAwareCommand
                 ]
             ];
             $this->populateBlocks($page, $blocks);
+
             $this->getManager()->persist($page);
             $this->getManager()->flush();
+
+            $article = $this->getContainer()->get('app.repository.article')->findOneBy(['documentId' => $page->getId()]);
+
+            if (null === $article) {
+                /** @var Article $article */
+                $article = $this->getContainer()->get('app.factory.article')->createNew();
+                $article
+                    ->setDocument($page);
+            }
+
+            if (null !== $data['product_id']) {
+                /** @var ProductInterface $product */
+                $product = $this->getContainer()->get('sylius.repository.product')->find($data['product_id']);
+
+                $article
+                    ->setProduct($product);
+            }
+
+            /** @var CustomerInterface $author */
+            $author = $this->getContainer()->get('sylius.repository.customer')->find($data['author_id']);
+            $article
+                ->setAuthor($author);
+
+            $this->getArticleManager()->persist($article);
+            $this->getArticleManager()->flush();
             $this->getManager()->clear();
+
 
         }
     }
@@ -70,10 +101,18 @@ select      old.news_id as id,
             replace(old.titre_clean, ' ', '-') as name,
             old.date as publishedAt,
             old.text as body,
-            old.photo as mainImage
+            old.photo as mainImage,
+            customer.id as author_id,
+            product.id as product_id
 from        jedisjeux.jdj_news old
+  inner join sylius_customer customer
+    on customer.code = concat('user-', old.user_id)
+  left join sylius_product_variant productVariant
+    on productVariant.code = concat('game-', old.game_id)
+  left join sylius_product product
+    on product.id = productVariant.product_id
 WHERE       old.valid = 1
-  AND       old.type_lien in (0, 1)
+            AND       old.type_lien in (0, 1)
 order by    old.date desc
 limit       10
 EOM;
@@ -260,6 +299,14 @@ EOM;
     public function getManager()
     {
         return $this->getContainer()->get('app.manager.article_content');
+    }
+
+    /**
+     * @return EntityManager
+     */
+    protected function getArticleManager()
+    {
+        return $this->getContainer()->get('app.manager.article');
     }
 
     /**
