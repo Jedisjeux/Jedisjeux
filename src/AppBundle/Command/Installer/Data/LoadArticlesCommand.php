@@ -57,7 +57,6 @@ class LoadArticlesCommand extends ContainerAwareCommand
             $this->populateBlocks($page, $blocks);
             $this->getManager()->persist($page);
             $this->getManager()->flush();
-            $this->getManager()->clear();
 
             $article = $this->getContainer()->get('app.repository.article')->findOneBy(['documentId' => $page->getId()]);
 
