@@ -1,6 +1,9 @@
 {% extends "base.html.twig" %}
 
+{% from 'macros/posts.html.twig' import blogCommentItem %}
 {% import 'macros/items.html.twig' as item %}
+
+{% set topic = article.topic %}
 
 {% block body_class %}article{% endblock %}
 
@@ -27,6 +30,21 @@
             {% endfor %}
 
             {{ item.blogAuthor(article.author, null, article.document.publishStartDate) }}
+
+            {% if topic %}
+                <div class="block-heading-two">
+                    <h3><span>Commentaires</span>
+                        <small>({{ topic.posts|length }})</small>
+                    </h3>
+                </div>
+
+                <div class="blog-comments">
+                    {% for post in topic.posts %}
+                        {{ blogCommentItem(post) }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
         </div>
     </div>
 
