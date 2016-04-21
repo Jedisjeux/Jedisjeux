@@ -1,14 +1,16 @@
 {% extends "base.html.twig" %}
 
+{% import 'macros/items.html.twig' as item %}
+
 {% block body_class %}article{% endblock %}
 
 {% block headline %}
-    {{ article.title }}
+    {{ article.document.title }}
 {% endblock %}
 
 {% block breadcrumb_content %}
     Articles /
-    {{ article.title }}
+    {{ article.document.title }}
 {% endblock %}
 
 {% block body -%}
@@ -16,13 +18,15 @@
     <div class="container">
         <div class="col-md-12">
 
-        {% for block in article.children %}
+            {% for block in article.document.children %}
 
-            {{ sonata_block_render({
-                'name': block.id
-            }) }}
+                {{ sonata_block_render({
+                    'name': block.id
+                }) }}
 
-        {% endfor %}
+            {% endfor %}
+
+            {{ item.blogAuthor(article.author, null, article.document.publishStartDate) }}
         </div>
     </div>
 

@@ -31,7 +31,8 @@ class ArticleContentController extends Controller
      */
     public function showAction($name)
     {
-        $article = $this->findOr404($name);
+        $articleContent = $this->findOr404($name);
+        $article = $this->get('app.repository.article')->findOneBy(['documentId' => $articleContent->getId()]);
 
         return $this->render("frontend/content/page/article_content/show.html.twig", array(
             'article' => $article,
