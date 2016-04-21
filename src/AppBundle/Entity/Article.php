@@ -52,6 +52,14 @@ class Article implements ResourceInterface
     protected $author;
 
     /**
+     * @var Topic
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Topic", inversedBy="article")
+     * @ORM\JoinColumn(onDelete="SET NULL")
+     */
+    protected $topic;
+
+    /**
      * @return int
      */
     public function getDocumentId()
@@ -127,6 +135,26 @@ class Article implements ResourceInterface
     public function setAuthor($author)
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * @return Topic
+     */
+    public function getTopic()
+    {
+        return $this->topic;
+    }
+
+    /**
+     * @param Topic $topic
+     *
+     * @return $this
+     */
+    public function setTopic($topic)
+    {
+        $this->topic = $topic;
 
         return $this;
     }

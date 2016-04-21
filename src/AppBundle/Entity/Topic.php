@@ -64,6 +64,13 @@ class Topic implements ResourceInterface
     protected $gamePlay;
 
     /**
+     * @var Article
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Article", mappedBy="topic")
+     */
+    protected $article;
+
+    /**
      * Topic constructor.
      */
     public function __construct()
@@ -182,6 +189,26 @@ class Topic implements ResourceInterface
     public function setGamePlay($gamePlay)
     {
         $this->gamePlay = $gamePlay;
+
+        return $this;
+    }
+
+    /**
+     * @return Article
+     */
+    public function getArticle()
+    {
+        return $this->article;
+    }
+
+    /**
+     * @param Article $article
+     *
+     * @return $this
+     */
+    public function setArticle($article)
+    {
+        $this->article = $article;
 
         return $this;
     }

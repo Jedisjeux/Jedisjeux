@@ -24,7 +24,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class LoadTopicsOfGamePlayCommand extends ContainerAwareCommand
+class LoadTopicsOfGamePlaysCommand extends ContainerAwareCommand
 {
     /**
      * @inheritdoc

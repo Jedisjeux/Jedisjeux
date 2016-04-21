@@ -11,6 +11,7 @@ namespace AppBundle\Command\Installer\Data;
 use AppBundle\Document\ArticleContent;
 use AppBundle\Document\SingleImageBlock;
 use AppBundle\Entity\Article;
+use AppBundle\Entity\Topic;
 use Doctrine\ODM\PHPCR\Document\Generic;
 use Doctrine\ODM\PHPCR\DocumentManager;
 use Doctrine\ODM\PHPCR\DocumentRepository;
@@ -80,6 +81,14 @@ class LoadNewsCommand extends ContainerAwareCommand
                     ->setProduct($product);
             }
 
+            if (null !== $data['topic_id']) {
+                /** @var Topic $topic */
+                $topic = $this->getContainer()->get('app.repository.topic')->find($data['topic_id']);
+
+                $article
+                    ->setTopic($topic);
+            }
+
             /** @var CustomerInterface $author */
             $author = $this->getContainer()->get('sylius.repository.customer')->find($data['author_id']);
             $article
@@ -104,7 +113,8 @@ select      old.news_id as id,
             old.photo as mainImage,
             customer.id as author_id,
             old.photo as mainImage,
-            product.id as product_id
+            product.id as product_id,
+            topic.id as topic_id
 from        jedisjeux.jdj_news old
   inner join sylius_customer customer
     on customer.code = concat('user-', old.user_id)
@@ -112,6 +122,8 @@ from        jedisjeux.jdj_news old
     on productVariant.code = concat('game-', old.game_id)
   left join sylius_product product
     on product.id = productVariant.product_id
+  left join jdj_topic topic
+    on topic.id = old.topic_id
 WHERE       old.valid = 1
             AND       old.type_lien in (0, 1)
 order by    old.date desc

@@ -104,7 +104,7 @@ class LoadForumCommand extends ContainerAwareCommand
         $query = <<<EOM
 select forum_id as id, forum_name as name, forum_desc as description
 from jedisjeux.phpbb3_forums old
-where parent_id = 10
+where parent_id in (10, 12) or old.forum_id in (20, 21)
 order by old.left_id
 EOM;
 
@@ -196,7 +196,7 @@ from jedisjeux.phpbb3_posts old
         on user.customer_id = customer.id
     inner join jedisjeux.phpbb3_forums forum
         on forum.forum_id = old.forum_id
-    where forum.parent_id = 10
+    where forum.parent_id in (10, 12) or forum.forum_id in (20, 21)
 EOM;
 
         $this->getDatabaseConnection()->executeQuery($query);
