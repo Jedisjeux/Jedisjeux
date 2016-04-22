@@ -23,9 +23,11 @@
 
             {% for block in article.document.children %}
 
-                {{ sonata_block_render({
-                    'name': block.id
-                }) }}
+                {% if 'mainImage' != block.name %}
+                    {{ sonata_block_render({
+                        'name': block.id
+                    }) }}
+                {% endif %}
 
             {% endfor %}
 
