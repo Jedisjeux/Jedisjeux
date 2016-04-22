@@ -86,6 +86,7 @@ class LoadArticlesCommand extends ContainerAwareCommand
 
             $this->getArticleManager()->persist($article);
             $this->getArticleManager()->flush();
+            $this->getArticleManager()->detach($article);
             $this->getArticleManager()->clear();
         }
     }
@@ -159,10 +160,15 @@ class LoadArticlesCommand extends ContainerAwareCommand
     {
         foreach ($blocks as $data) {
             $block = $this->createOrReplaceBlock($page, $data);
-            $page->addChild($block);
+            $block
+                ->setParentDocument($page);
             if (isset($data['image'])) {
                 $this->createOrReplaceImagineBlock($block, $data);
             }
+
+            $this->getManager()->persist($block);
+            $this->getManager()->persist($page);
+            $this->getManager()->flush();
         }
     }
 
@@ -174,15 +180,13 @@ class LoadArticlesCommand extends ContainerAwareCommand
     protected function createOrReplaceBlock(ArticleContent $page, array $data)
     {
         $name = 'block'.$data['id'];
-
+        
         $block = $this
             ->getSingleImageBlockRepository()
             ->findOneBy(array('name' => $name));
 
         if (null === $block) {
             $block = new SingleImageBlock();
-            $block
-                ->setParentDocument($page);
         }
 
         $block
