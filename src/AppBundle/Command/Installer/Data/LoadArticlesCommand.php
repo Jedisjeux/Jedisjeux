@@ -12,6 +12,7 @@ use AppBundle\Document\BlockquoteBlock;
 use AppBundle\Document\SingleImageBlock;
 use AppBundle\Document\ArticleContent;
 use AppBundle\Entity\Article;
+use AppBundle\Entity\Topic;
 use Doctrine\ODM\PHPCR\Document\Generic;
 use Doctrine\ODM\PHPCR\DocumentManager;
 use Doctrine\ODM\PHPCR\DocumentRepository;
@@ -73,6 +74,14 @@ class LoadArticlesCommand extends ContainerAwareCommand
 
                 $article
                     ->setProduct($product);
+            }
+
+            if (null !== $data['topic_id']) {
+                /** @var Topic $topic */
+                $topic = $this->getContainer()->get('app.repository.topic')->find($data['topic_id']);
+
+                $article
+                    ->setTopic($topic);
             }
 
             $this->getArticleManager()->persist($article);
@@ -295,6 +304,7 @@ select article.article_id as id,
       article.intro as introduction,
       article.photo as mainImage,
       product.id as product_id,
+      topic.id as topic_id,
       group_concat(block.text_id) as blocks
 from jedisjeux.jdj_article article
 inner join jedisjeux.jdj_article_text as block
@@ -303,6 +313,8 @@ left join sylius_product_variant productVariant
             on productVariant.code = concat('game-', article.game_id)
 left join sylius_product product
              on product.id = productVariant.product_id
+left join jdj_topic topic
+    on topic.id = article.topic_id             
 where titre_clean != ''
 group by article.article_id
 limit 5

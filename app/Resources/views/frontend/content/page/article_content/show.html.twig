@@ -29,7 +29,9 @@
 
             {% endfor %}
 
-            {{ item.blogAuthor(article.author, null, article.document.publishStartDate) }}
+            {% if article.author %}
+                {{ item.blogAuthor(article.author, null, article.document.publishStartDate) }}
+            {% endif %}
 
             {% if topic %}
                 <div class="block-heading-two">
