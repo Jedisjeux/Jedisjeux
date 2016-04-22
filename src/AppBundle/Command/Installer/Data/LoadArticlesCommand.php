@@ -19,6 +19,7 @@ use Doctrine\ODM\PHPCR\DocumentRepository;
 use Doctrine\ORM\EntityManager;
 use PHPCR\Util\NodeHelper;
 use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
 use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
@@ -82,6 +83,13 @@ class LoadArticlesCommand extends ContainerAwareCommand
 
                 $article
                     ->setTopic($topic);
+            }
+
+            if (null !== $data['author_id']) {
+                /** @var CustomerInterface $author */
+                $author = $this->getContainer()->get('sylius.repository.customer')->find($data['author_id']);
+                $article
+                    ->setAuthor($author);
             }
 
             $this->getArticleManager()->persist($article);
@@ -179,8 +187,8 @@ class LoadArticlesCommand extends ContainerAwareCommand
      */
     protected function createOrReplaceBlock(ArticleContent $page, array $data)
     {
-        $name = 'block'.$data['id'];
-        
+        $name = 'block' . $data['id'];
+
         $block = $this
             ->getSingleImageBlockRepository()
             ->findOneBy(array('name' => $name));
@@ -202,7 +210,7 @@ class LoadArticlesCommand extends ContainerAwareCommand
 
     protected function createOrReplaceImagineBlock(SingleImageBlock $block, array $data)
     {
-        $name = 'image'.$data['id'];
+        $name = 'image' . $data['id'];
 
         if (false === $block->hasChildren()) {
             $imagineBlock = new ImagineBlock();
@@ -302,23 +310,26 @@ class LoadArticlesCommand extends ContainerAwareCommand
     {
         $query = <<<EOM
 select article.article_id as id,
-      replace(article.titre_clean, ' ', '-') as name,
-      article.titre as title,
-      article.date as publishedAt,
-      article.intro as introduction,
-      article.photo as mainImage,
-      product.id as product_id,
-      topic.id as topic_id,
-      group_concat(block.text_id) as blocks
+       replace(article.titre_clean, ' ', '-') as name,
+       article.titre as title,
+       article.date as publishedAt,
+       article.intro as introduction,
+       article.photo as mainImage,
+       product.id as product_id,
+       topic.id as topic_id,
+       user.customer_id as author_id,
+       group_concat(block.text_id ORDER BY block.ordre) as blocks
 from jedisjeux.jdj_article article
-inner join jedisjeux.jdj_article_text as block
-      on block.article_id = article.article_id
-left join sylius_product_variant productVariant
-            on productVariant.code = concat('game-', article.game_id)
-left join sylius_product product
-             on product.id = productVariant.product_id
-left join jdj_topic topic
-    on topic.id = article.topic_id             
+  inner join jedisjeux.jdj_article_text as block
+    on block.article_id = article.article_id
+  left join sylius_product_variant productVariant
+    on productVariant.code = concat('game-', article.game_id)
+  left join sylius_product product
+    on product.id = productVariant.product_id
+  left join jdj_topic topic
+    on topic.id = article.topic_id
+  left join sylius_user user
+    on convert(user.username USING UTF8) = convert(article.auteur USING UTF8)
 where titre_clean != ''
 group by article.article_id
 limit 5
@@ -359,7 +370,8 @@ EOM;
         where block.text_id in ($ids)
         order by block.ordre
 EOM;
-     return $this->getDatabaseConnection()->fetchAll($query);
+
+        return $this->getDatabaseConnection()->fetchAll($query);
     }
 
     /**
@@ -368,11 +380,11 @@ EOM;
      */
     protected function getImageOriginalPath($path)
     {
-        return "http://www.jedisjeux.net/img/800/".$path;
+        return "http://www.jedisjeux.net/img/800/" . $path;
     }
 
     protected function nl2p($string)
     {
-        return "<p>".str_replace("\n", "</p><p>", trim($string))."</p>";
+        return "<p>" . str_replace("\n", "</p><p>", trim($string)) . "</p>";
     }
 }
