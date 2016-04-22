@@ -14,7 +14,7 @@
                         {% if key < 5 %}
                             {% set currentTaxon = taxon is defined and thisTaxon == taxon ? true : false %}
                             <li>
-                                <a href="{{ path('app_game_library_show_by_taxon', { 'permalink': thisTaxon.permalink }) }}">
+                                <a href="{{ path('app_game_library_show_by_taxon', { 'customerId': app.request.get('customerId'), 'permalink': thisTaxon.permalink }) }}">
                                     {% if currentTaxon %}
                                     <strong>{% endif %}{{ thisTaxon }}{% if currentTaxon %}</strong>{% endif %}
                                 </a>
