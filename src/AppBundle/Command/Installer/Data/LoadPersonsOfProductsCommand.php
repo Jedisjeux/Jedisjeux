@@ -111,7 +111,7 @@ select      person.id,
 from        jedisjeux.jdj_personne_game old
   inner join  sylius_product product
     on product.code = concat('game-', old.id_game)
-  inner join  jdj_personne person
+  inner join  jdj_person person
     on person.id = old.id_personne
 where       old.type_relation = 'illustrateur'
 EOM;
