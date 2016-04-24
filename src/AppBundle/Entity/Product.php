@@ -119,30 +119,6 @@ class Product extends BaseProduct implements ReviewableInterface
     private $but;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Person", inversedBy="designerProducts", cascade={"persist", "merge"})
-     * @ORM\JoinTable(name="jdj_designer_product")
-     */
-    protected $designers;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Person", inversedBy="artistProducts", cascade={"persist", "merge"})
-     * @ORM\JoinTable(name="jdj_artist_product")
-     */
-    protected $artists;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Person", inversedBy="publisherProducts", cascade={"persist", "merge"})
-     * @ORM\JoinTable(name="jdj_publisher_product")
-     */
-    protected $publishers;
-
-    /**
      * @var ArrayCollection
      */
     protected $reviews;
@@ -160,13 +136,6 @@ class Product extends BaseProduct implements ReviewableInterface
     public function __construct()
     {
         parent::__construct();
-        $this->userGameAttributes = new ArrayCollection();
-        $this->listElements = new ArrayCollection();
-        $this->designers = new ArrayCollection();
-        $this->artists = new ArrayCollection();
-        $this->publishers = new ArrayCollection();
-        $this->parties = new ArrayCollection();
-        $this->addons = new ArrayCollection();
         $this->taxons = new ArrayCollection();
         $this->durationByPlayer = false;
         $this->status = self::WRITING;
@@ -183,6 +152,7 @@ class Product extends BaseProduct implements ReviewableInterface
 
     /**
      * @param string $status
+     *
      * @return $this
      */
     public function setStatus($status)
@@ -202,6 +172,7 @@ class Product extends BaseProduct implements ReviewableInterface
 
     /**
      * @param string $code
+     *
      * @return $this
      */
     public function setCode($code)
@@ -221,6 +192,7 @@ class Product extends BaseProduct implements ReviewableInterface
 
     /**
      * @param string $shortDescription
+     *
      * @return $this
      */
     public function setShortDescription($shortDescription)
@@ -240,6 +212,7 @@ class Product extends BaseProduct implements ReviewableInterface
 
     /**
      * @param ProductVariantImage $mainImage
+     *
      * @return $this
      */
     public function setMainImage($mainImage)
@@ -312,6 +285,7 @@ class Product extends BaseProduct implements ReviewableInterface
 
     /**
      * @param Collection $taxons
+     *
      * @return $this
      */
     public function setTaxons($taxons)
@@ -331,6 +305,7 @@ class Product extends BaseProduct implements ReviewableInterface
 
     /**
      * @param TaxonInterface $mainTaxon
+     *
      * @return $this
      */
     public function setMainTaxon($mainTaxon)
@@ -350,6 +325,7 @@ class Product extends BaseProduct implements ReviewableInterface
 
     /**
      * @param int $ageMin
+     *
      * @return $this
      */
     public function setAgeMin($ageMin)
@@ -369,6 +345,7 @@ class Product extends BaseProduct implements ReviewableInterface
 
     /**
      * @param int $joueurMin
+     *
      * @return $this
      */
     public function setJoueurMin($joueurMin)
@@ -388,6 +365,7 @@ class Product extends BaseProduct implements ReviewableInterface
 
     /**
      * @param int $joueurMax
+     *
      * @return $this
      */
     public function setJoueurMax($joueurMax)
@@ -407,6 +385,7 @@ class Product extends BaseProduct implements ReviewableInterface
 
     /**
      * @param int $durationMin
+     *
      * @return $this
      */
     public function setDurationMin($durationMin)
@@ -426,6 +405,7 @@ class Product extends BaseProduct implements ReviewableInterface
 
     /**
      * @param int $durationMax
+     *
      * @return $this
      */
     public function setDurationMax($durationMax)
@@ -445,6 +425,7 @@ class Product extends BaseProduct implements ReviewableInterface
 
     /**
      * @param boolean $durationByPlayer
+     *
      * @return $this
      */
     public function setDurationByPlayer($durationByPlayer)
@@ -464,6 +445,7 @@ class Product extends BaseProduct implements ReviewableInterface
 
     /**
      * @param string $materiel
+     *
      * @return $this
      */
     public function setMateriel($materiel)
@@ -483,6 +465,7 @@ class Product extends BaseProduct implements ReviewableInterface
 
     /**
      * @param string $but
+     *
      * @return $this
      */
     public function setBut($but)
@@ -493,103 +476,28 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
-     * @return Collection
+     * @return Collection|Person[]
      */
     public function getDesigners()
     {
-        return $this->designers;
+        return $this->getMasterVariant()->getDesigners();
     }
 
-    /**
-     * @param Collection $designers
-     * @return $this
-     */
-    public function setDesigners($designers)
-    {
-        $this->designers = $designers;
-
-        return $this;
-    }
 
     /**
-     * @deprecated
-     */
-    public function getAuteurs()
-    {
-        return $this->getDesigners();
-    }
-
-    /**
-     * @return Collection
+     * @return Collection|Person[]
      */
     public function getArtists()
     {
-        return $this->artists;
+        return $this->getMasterVariant()->getArtists();
     }
 
     /**
-     * @deprecated
-     */
-    public function getIllustrateurs()
-    {
-        return $this->getArtists();
-    }
-
-    /**
-     * @param Collection $artists
-     * @return $this
-     */
-    public function setArtists($artists)
-    {
-        $this->artists = $artists;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection
+     * @return Collection|Person[]
      */
     public function getPublishers()
     {
-        return $this->publishers;
-    }
-
-    /**
-     * @deprecated
-     */
-    public function getEditeurs()
-    {
-        return $this->getPublishers();
-    }
-
-    /**
-     * @param Collection $publishers
-     * @return $this
-     */
-    public function setPublishers($publishers)
-    {
-        $this->publishers = $publishers;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getAddons()
-    {
-        return $this->addons;
-    }
-
-    /**
-     * @param Collection $addons
-     * @return $this
-     */
-    public function setAddons($addons)
-    {
-        $this->addons = $addons;
-
-        return $this;
+        return $this->getMasterVariant()->getPublishers();
     }
 
     /**

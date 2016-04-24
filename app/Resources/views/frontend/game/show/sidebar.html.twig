@@ -31,24 +31,24 @@
         <h5><i class="fa fa-bookmark color"></i> Édition</h5>
         <div class="widget-content gallery">
             <ul class="list-6">
-                {% if jeu.auteurs|length > 0 %}
+                {% if jeu.designers|length > 0 %}
                     <li>
                         Un jeu de
-                        {% for key, person in jeu.auteurs %}{% if (key > 0) %},{% endif %} <a
+                        {% for key, person in jeu.designers %}{% if (key > 0) %},{% endif %} <a
                             href="{{ path('app_person_show', { 'slug': person.slug }) }}">{{ person }}</a>{% endfor %}
                     </li>
                 {% endif %}
-                {% if jeu.illustrateurs|length > 0 %}
+                {% if jeu.artists|length > 0 %}
                     <li>
-                        illustré{% if jeu.illustrateurs|length > 1 %}s{% endif %} par
-                        {% for key, person in jeu.illustrateurs %}{% if (key > 0) %},{% endif %} <a
+                        illustré{% if jeu.artists|length > 1 %}s{% endif %} par
+                        {% for key, person in jeu.artists %}{% if (key > 0) %},{% endif %} <a
                             href="{{ path('app_person_show', { 'slug': person.slug }) }}">{{ person }}</a>{% endfor %}
                     </li>
                 {% endif %}
-                {% if jeu.editeurs|length > 0 %}
+                {% if jeu.publishers|length > 0 %}
                     <li>
-                        édité{% if jeu.editeurs|length > 1 %}s{% endif %} par
-                        {% for key, person in jeu.editeurs %}{% if (key > 0) %},{% endif %} <a
+                        édité{% if jeu.publishers|length > 1 %}s{% endif %} par
+                        {% for key, person in jeu.publishers %}{% if (key > 0) %},{% endif %} <a
                             href="{{ path('app_person_show', { 'slug': person.slug }) }}">{{ person }}</a>{% endfor %}
                     </li>
                 {% endif %}

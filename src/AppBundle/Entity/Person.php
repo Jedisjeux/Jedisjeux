@@ -81,21 +81,21 @@ class Person implements ResourceInterface
     /**
      * @var ProductInterface[]|Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Product", mappedBy="designers", cascade={"persist", "merge"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\ProductVariant", mappedBy="designers", cascade={"persist", "merge"})
      */
     private $designerProducts;
 
     /**
      * @var ProductInterface[]|Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Product", mappedBy="artists", cascade={"persist", "merge"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\ProductVariant", mappedBy="artists", cascade={"persist", "merge"})
      */
     private $artistProducts;
 
     /**
      * @var ProductInterface[]|Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Product", mappedBy="publishers", cascade={"persist", "merge"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\ProductVariant", mappedBy="publishers", cascade={"persist", "merge"})
      */
     private $publisherProducts;
 

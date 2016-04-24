@@ -49,20 +49,20 @@ class LoadPersonsOfProductsCommand extends ContainerAwareCommand
     protected function loadAuthorsOfGames()
     {
         $query = <<<EOM
-        delete from jdj_designer_product
+        delete from jdj_designer_product_variant
 EOM;
         $this->getDatabaseConnection()->executeQuery($query);
 
         $query = <<<EOM
-insert into jdj_designer_product (
+insert into jdj_designer_product_variant (
             person_id,
-            product_id
+            productvariant_id
 )
 select      person.id,
-  product.id
+  variant.id
 from        jedisjeux.jdj_personne_game old
-  inner join  sylius_product product
-    on product.code = concat('game-', old.id_game)
+  inner join  sylius_product_variant variant
+    on variant.code = concat('game-', old.id_game)
   inner join  jdj_person person
     on person.id = old.id_personne
 where       old.type_relation = 'auteur'
@@ -73,20 +73,20 @@ EOM;
     protected function loadEditorsOfGames()
     {
         $query = <<<EOM
-        delete from jdj_publisher_product
+        delete from jdj_publisher_product_variant
 EOM;
         $this->getDatabaseConnection()->executeQuery($query);
 
         $query = <<<EOM
-insert into jdj_publisher_product (
+insert into jdj_publisher_product_variant (
             person_id,
-            product_id
+            productvariant_id
 )
 select      person.id,
-  product.id
+  variant.id
 from        jedisjeux.jdj_personne_game old
-  inner join  sylius_product product
-    on product.code = concat('game-', old.id_game)
+  inner join  sylius_product_variant variant
+    on variant.code = concat('game-', old.id_game)
   inner join  jdj_person person
     on person.id = old.id_personne
 where       old.type_relation = 'editeur'
@@ -97,20 +97,20 @@ EOM;
     protected function loadIllustratorsOfGames()
     {
         $query = <<<EOM
-        delete from jdj_artist_product
+        delete from jdj_artist_product_variant
 EOM;
         $this->getDatabaseConnection()->executeQuery($query);
 
         $query = <<<EOM
-insert into jdj_artist_product (
+insert into jdj_artist_product_variant (
             person_id,
-            product_id
+            productvariant_id
 )
 select      person.id,
-  product.id
+  variant.id
 from        jedisjeux.jdj_personne_game old
-  inner join  sylius_product product
-    on product.code = concat('game-', old.id_game)
+  inner join  sylius_product_variant variant
+    on variant.code = concat('game-', old.id_game)
   inner join  jdj_person person
     on person.id = old.id_personne
 where       old.type_relation = 'illustrateur'
