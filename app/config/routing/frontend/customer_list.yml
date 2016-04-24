@@ -12,12 +12,11 @@ app_game_library_show:
 
 app_game_library_show_by_taxon:
     methods: [GET]
-    path: /users/{customerId}/ludotheque
+    path: /users/{customerId}/ludotheque/{permalink}
     defaults:
-        _controller: app.controller.customer_list_element:gameLibraryShowAction
+        _controller: app.controller.customer_list_element:gameLibraryShowByTaxonAction
         _sylius:
             template: frontend/game_library/show.html.twig
             paginate: 12
-            repository:
-                method: createProductFilterPaginator
-                arguments: [$criteria, $sorting, $customerId, 'game-library']
+    requirements:
+        permalink: "[^?]+"

@@ -19,6 +19,16 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 class ProductRepository extends BaseProductRepository
 {
     /**
+     * {@inheritdoc}
+     */
+    protected function getQueryBuilder()
+    {
+        return parent::getQueryBuilder()
+            ->addSelect('image')
+            ->leftJoin('variant.images', 'image');
+    }
+
+    /**
      * Create paginator for products categorized under given taxon.
      *
      * @param TaxonInterface $taxon
@@ -57,11 +67,7 @@ class ProductRepository extends BaseProductRepository
      */
     public function createFilterPaginator($criteria = [], $sorting = [], $deleted = false)
     {
-        $queryBuilder = parent::getCollectionQueryBuilder()
-            ->addSelect('variant')
-            ->addSelect('image')
-            ->join('product.variants', 'variant')
-            ->join('variant.images', 'image');
+        $queryBuilder = $this->getQueryBuilder();
 
         if (!empty($criteria['name'])) {
             $queryBuilder
