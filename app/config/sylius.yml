@@ -91,6 +91,9 @@ sylius_review:
                 classes:
                     model: AppBundle\Entity\ProductReview
                     repository: AppBundle\Repository\ProductReviewRepository
+                    form:
+                        admin: AppBundle\Form\Type\ProductReviewType
+                        default: AppBundle\Form\Type\ProductReviewType
 
 sylius_user:
     resources:

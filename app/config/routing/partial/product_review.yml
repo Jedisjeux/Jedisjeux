@@ -11,3 +11,15 @@ sylius_partial_product_review_index:
             sorting: $sorting
     requirements:
         template: "[^?]+"
+
+sylius_partial_product_review_create:
+    path: /products/{productId}/reviews/new
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_review:createAction
+        _sylius:
+            template: 'partial/product_review/_form.html.twig'
+            factory:
+                method: createForSubject
+                arguments: [$productId]
+            permission: false

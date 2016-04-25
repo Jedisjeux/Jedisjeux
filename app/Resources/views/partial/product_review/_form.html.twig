@@ -1,0 +1,9 @@
+{{ form_start(form, {'action': path('sylius_product_review_create', { 'productId': app.request.attributes.get('productId') }) }) }}
+
+{{ form_widget(form) }}
+
+<div class="pull-right">
+    <button type="submit" class="btn btn-primary">{{ 'label.create'|trans }}</button>
+</div>
+
+{{ form_end(form) }}
