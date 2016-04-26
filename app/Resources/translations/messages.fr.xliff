@@ -656,6 +656,10 @@
             <source>label.score</source>
             <target>Score</target>
         </trans-unit>
+        <trans-unit>
+            <source>label.rate</source>
+            <target>Note</target>
+        </trans-unit>
     </body>
   </file>
 </xliff>

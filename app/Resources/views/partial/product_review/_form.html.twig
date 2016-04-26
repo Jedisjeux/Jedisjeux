@@ -4,16 +4,24 @@
 <div class="form-group">
     {{ form_label(form.rating) }}
     <div class="col-sm-9">
-        <div class="rating" data-input="sylius_product_review_rating" data-rate-value="6" data-step-size="0.5"></div>
+        <div class="rating yellow" data-input="sylius_product_review_rating" data-rate-value="6" data-step-size="0.5"></div>
+    </div>
+</div>
+
+
+<div class="form-group">
+    {{ form_label(form.author.email) }}
+    <div class="col-sm-9">
+        {{ form_widget(form.author.email) }}
     </div>
 </div>
 
 {{ form_widget(form) }}
-
-
 
 <div class="pull-right">
     <button type="submit" class="btn btn-primary">{{ 'label.create'|trans }}</button>
 </div>
 
 {{ form_end(form) }}
+
+<div class="clearfix"></div>

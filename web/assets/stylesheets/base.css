@@ -29252,8 +29252,9 @@ html body.login .forgot-password:focus {
 }
 
 /* line 1, ../sass/modules/_rating.scss */
-.form-group .star-rating {
+.form-group .rating {
   line-height: normal;
+  font-size: 20px;
 }
 
 /* line 1, ../sass/modules/_gamesheet.scss */

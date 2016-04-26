@@ -244,7 +244,7 @@ ivory_ck_editor:
         forum:
             language: %locale%
             stylesSet: custom_styles  # Chargement des styles personnalisables
-            contentsCss:  ['assets/stylesheets/app.css']
+            contentsCss:  ['assets/stylesheets/base.css']
             toolbar: [ [ 'Bold','Italic','Underline', 'Blockquote' ], [ 'NumberedList','BulletedList' ], [ 'Link','Unlink' ], [ 'Image' ], [ 'Styles', 'Format' ]; ]
     styles:         # Configuration des styles personnalisables
         custom_styles:
