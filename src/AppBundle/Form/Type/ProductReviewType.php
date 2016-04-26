@@ -24,11 +24,8 @@ class ProductReviewType extends ReviewType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('rating', 'choice', [
-                'choices' => $this->createRatingList($options['rating_steps']),
+            ->add('rating', 'hidden', [
                 'label' => 'label.rate',
-                'expanded' => true,
-                'multiple' => false,
             ])
             ->add('author', 'sylius_customer_guest', [
                 'label' => false,
