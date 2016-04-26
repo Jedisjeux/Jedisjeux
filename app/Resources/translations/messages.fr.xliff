@@ -660,6 +660,10 @@
             <source>label.rate</source>
             <target>Note</target>
         </trans-unit>
+        <trans-unit>
+            <source>label.your_rate</source>
+            <target>Votre note</target>
+        </trans-unit>
     </body>
   </file>
 </xliff>

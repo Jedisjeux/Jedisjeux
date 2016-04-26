@@ -39,6 +39,15 @@ services:
         tags:
           - { name: form.type, alias: app_post }
 
+    sylius.form.type.product_review_rating:
+        class: AppBundle\Form\Type\RatingType
+        arguments:
+            - %sylius.model.product_review.class%
+            - []
+            - 'product'
+        tags:
+          - { name: form.type, alias: sylius_product_review_rating }
+
     app.form.type.game_rate:
         class: AppBundle\Form\Type\GameRateType
         tags:

@@ -6,7 +6,7 @@
         <div class="widget-content search">
             <ul class="list-unstyled">
                 <li>
-                    <input class="game-rating rating" type="number" min=0 max=5 step=0.5 data-size="xs" />
+                    {% render(url('sylius_partial_product_rating_create', { 'productId': product.id })) %}
                 </li>
                 <li>
                     <a href="#">

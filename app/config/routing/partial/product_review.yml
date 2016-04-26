@@ -23,3 +23,16 @@ sylius_partial_product_review_create:
                 method: createForSubject
                 arguments: [$productId]
             permission: false
+
+sylius_partial_product_rating_create:
+    path: /products/{productId}/rating/new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.product_review:createAction
+        _sylius:
+            template: 'partial/product_review/rating/_form.html.twig'
+            form: sylius_product_review_rating
+            factory:
+                method: createForSubject
+                arguments: [$productId]
+            permission: false
