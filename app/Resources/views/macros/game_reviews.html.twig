@@ -19,8 +19,10 @@
             <span data-user-review="2" class="nbDislikes">0{#{{ game_review.nbDislikes }}#}</span>
         </a>
     {% endset %}
-    <div class="pull-right rating-container rating-gly-star" data-content="">
-        <div class="rating-stars" data-content="" style="width: {{ game_review.rating*2 }}0%;"></div>
+
+    <div class="pull-right">
+        <div class="rating yellow" data-readonly="true" data-rate-value="{{ game_review.rating/2 }}" data-step-size="0.5"></div>
     </div>
+
     {{ item.blogCommentItem(imagePath, user.username, 'thumbnail', 'img-responsive img-round', '#', game_review.title, meta, game_review.comment) }}
 {% endmacro %}

@@ -11,9 +11,8 @@
             <!-- Item title -->
             <span>{{ product_review.title }}</span><br/>
 
-            <div class="rating-container rating-gly-star" data-content="">
-                <div class="rating-stars" data-content=""
-                     style="width: {{ product_review.rating }}0%;"></div>
+            <div class="rating-container">
+                <div class="rating yellow" data-readonly="true" data-rate-value="{{ product_review.rating/2 }}" data-step-size="0.5"></div>
             </div>
 
             <div class="clearfix"></div>
