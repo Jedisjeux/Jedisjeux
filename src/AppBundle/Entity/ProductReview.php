@@ -10,6 +10,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Review\Model\Review;
+use Sylius\Component\Review\Model\ReviewInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -26,5 +27,6 @@ class ProductReview extends Review
     {
         parent::__construct();
         $this->title = '';
+        $this->status = ReviewInterface::STATUS_ACCEPTED;
     }
 }

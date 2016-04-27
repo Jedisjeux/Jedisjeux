@@ -35,4 +35,7 @@ sylius_partial_product_rating_create:
             factory:
                 method: createForSubject
                 arguments: [$productId]
+            redirect:
+                route: sylius_product_show
+                parameters: { slug: resource.reviewSubject.slug }
             permission: false
