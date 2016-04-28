@@ -119,6 +119,12 @@
                                         </li>
                                     {% endif %}
 
+                                    <li>
+                                        <div class="game-attribute">
+                                            <strong>Votre note :</strong>  {% render(url('sylius_partial_product_rating_show', { 'productId': product.id })) %}
+                                        </div>
+                                    </li>
+
                                 </ul>
                             </div>
                         </div>

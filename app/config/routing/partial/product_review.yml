@@ -24,18 +24,13 @@ sylius_partial_product_review_create:
                 arguments: [$productId]
             permission: false
 
-sylius_partial_product_rating_create:
-    path: /products/{productId}/rating/new
-    methods: [GET, POST]
+sylius_partial_product_rating_show:
+    path: /products/{productId}/rating/show
+    methods: [GET]
     defaults:
-        _controller: sylius.controller.product_review:createAction
+        _controller: sylius.controller.product_review:showRatingAction
         _sylius:
-            template: 'partial/product_review/rating/_form.html.twig'
-            form: sylius_product_review_rating
-            factory:
-                method: createForSubject
-                arguments: [$productId]
-            redirect:
-                route: sylius_product_show
-                parameters: { slug: resource.reviewSubject.slug }
-            permission: false
+            template: 'partial/product_review/rating/_show.html.twig'
+            repository:
+                method: findOneBy
+                arguments: [{reviewSubject: $productId, author: expr:service('sylius.context.customer').getCustomer()}]

@@ -1,14 +1,4 @@
+<div class="rating md" data-max-value="10"  data-update-input-field-name="sylius_product_review_rating_rating" data-step-size="1"></div>
 {{ form_start(form, {'action': path('sylius_partial_product_rating_create', { 'productId': app.request.attributes.get('productId') }) }) }}
-
-<div class="form-group">
-    <div class="col-sm-4">
-        <label class="control-label">{{ 'label.your_rate'|trans }}</label>
-    </div>
-    <div class="col-sm-8">
-        <div class="rating yellow md" data-max-value="10"  data-update-input-field-name="sylius_product_review_rating_rating" data-step-size="1"></div>
-    </div>
-</div>
-
 {{ form_widget(form) }}
-
 {{ form_end(form) }}
