@@ -11,6 +11,11 @@
         <div class="img-box-5-item">
             <div class="row">
                 <div class="col-md-4">
+                    <div class="col-md-2 col-sm-2">
+
+
+                    </div>
+
                     <!-- Image Box #5 Image -->
                     <div class="img-box-5-img">
                         <!-- Image -->
@@ -113,6 +118,12 @@
 
                                         </li>
                                     {% endif %}
+
+                                    <li>
+                                        <div class="game-attribute">
+                                            <strong>Votre note :</strong>  {% render(url('sylius_partial_product_rating_show', { 'productId': product.id })) %}
+                                        </div>
+                                    </li>
 
                                 </ul>
                             </div>

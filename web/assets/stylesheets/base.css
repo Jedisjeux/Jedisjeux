@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*!
  * Bootstrap v3.3.6 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
@@ -29251,9 +29252,14 @@ html body.login .forgot-password:focus {
   display: inline-block;
 }
 
-/* line 1, ../sass/modules/_rating.scss */
-.form-group .star-rating {
-  line-height: normal;
+/* line 3, ../sass/modules/_rating.scss */
+.form-group .rating.md {
+  line-height: 34px;
+}
+
+/* line 11, ../sass/modules/_rating.scss */
+.rating.md {
+  font-size: 20px;
 }
 
 /* line 1, ../sass/modules/_gamesheet.scss */

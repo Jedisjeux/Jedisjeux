@@ -1,3 +1,14 @@
-.form-group .star-rating {
-  line-height: normal;
+.form-group {
+  .rating {
+    &.md {
+      line-height: 34px;
+    }
+
+  }
+}
+
+.rating {
+  &.md {
+    font-size: 20px;
+  }
 }

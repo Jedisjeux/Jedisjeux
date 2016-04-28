@@ -1,0 +1,27 @@
+{{ form_start(form, {'action': path('sylius_product_review_create', { 'productId': app.request.attributes.get('productId') }) }) }}
+
+
+<div class="form-group">
+    {{ form_label(form.rating) }}
+    <div class="col-sm-9">
+        <div class="rating md" data-max-value="10" data-input="sylius_product_review_rating" data-step-size="1"></div>
+    </div>
+</div>
+
+
+<div class="form-group">
+    {{ form_label(form.author.email) }}
+    <div class="col-sm-9">
+        {{ form_widget(form.author.email) }}
+    </div>
+</div>
+
+{{ form_widget(form) }}
+
+<div class="pull-right">
+    <button type="submit" class="btn btn-primary">{{ 'label.create'|trans }}</button>
+</div>
+
+<div class="clearfix"></div>
+
+{{ form_end(form) }}
