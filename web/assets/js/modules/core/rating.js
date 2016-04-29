@@ -3,7 +3,7 @@ $(function() {
     "use strict";
 
     var $ratingForm = $('form[name=sylius_product_review_rating]');
-    var successMessage = "Votre note a bien été pris enregistrée.";
+    var successMessage = "Votre note a bien été enregistrée.";
 
     //initializeAjaxForm(successMessage);
 
@@ -13,6 +13,7 @@ $(function() {
             readonly: $(this).attr("data-readonly"),
             selected_symbol_type: 'fontawesome_star',
             update_input_field_name: $('#' + $(this).attr("data-update-input-field-name")),
+            step_size: $(this).attr("data-step-size"),
             symbols: {
                 fontawesome_star: {
                     base: '<i class="fa fa-star grey"></i>',
@@ -23,8 +24,34 @@ $(function() {
         });
     });
 
-    $('.rating').on("change", function(ev, data) {
-        $(this).next().submit();
+    $('.rating.rate').on("change", function(event, data) {
+
+        var rateValue = $(this).attr('data-rate-value');
+        var productId = $(this).attr('data-product-id');
+        var routeName;
+        var type;
+        var newRateValue = data.to;
+
+        if (rateValue > 0) {
+            routeName = 'sylius_product_rating_update';
+            type = 'PUT';
+        } else {
+            routeName = 'sylius_product_rating_create';
+            type = 'POST';
+        }
+
+        $.ajax({
+            url: Routing.generate(routeName, { 'productId': productId }),
+            type: type,
+            data: {'rating': newRateValue}
+        }).done(function() {
+            appendFlash(successMessage);
+        }).fail(function(xhr) {
+            if(xhr.status==403 || xhr.status==405) {
+                //handle error
+                window.location.replace(Routing.generate('sylius_user_security_login'));
+            }
+        });
     });
 
     function initializeAjaxForm(successMessage, messageHolderSelector) {
@@ -65,7 +92,7 @@ $(function() {
     function parseFormToJson(form) {
         var formJson = {};
         $.each(form.serializeArray(), function(index, field) {
-            var name = field.name.replace('sylius_product_review_rating[', '').replace(']', '');
+            var name = field.name.replace('sylius_product_review[', '').replace(']', '');
             formJson[name] = field.value || '';
         });
 
@@ -73,7 +100,7 @@ $(function() {
     }
 
     function appendFlash(successMessage, messageHolderSelector) {
-        messageHolderSelector = messageHolderSelector ? messageHolderSelector : '#flashes-container';
+        messageHolderSelector = messageHolderSelector ? messageHolderSelector : '#flashes';
 
         $(messageHolderSelector).html('<div class="alert alert-success"><a class="close" data-dismiss="alert" href="#">×</a>' + successMessage + '</div>');
     }

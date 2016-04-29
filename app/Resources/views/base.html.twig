@@ -65,6 +65,10 @@
         {% block page_heading %}
             <div class="container">
                 <div class="col-md-12">
+
+                    {% include "layout/_flashes.html.twig" %}
+                    {% include "layout/_notify.html.twig" %}
+
                     <div class="pull-right">
                         {% block breadcrumb_container %}
                             <div class="breads">
@@ -100,9 +104,6 @@
         <!-- Main content starts -->
 
         <div class="main-block">
-
-            {% include "layout/_flashes.html.twig" %}
-            {% include "layout/_notify.html.twig" %}
 
             {% block full_content %}
 

@@ -15,7 +15,7 @@
         {% if not app.user %}
             <div class="tb-shopping-cart pull-right ">
                 <!-- Link with badge -->
-                Vous avez déjà un compte ? <a href="#"><i
+                Vous avez déjà un compte ? <a href="{{ path('sylius_user_security_login') }}"><i
                             class="fa fa-user color"></i> Connexion</a>
             </div>
         {% endif %}

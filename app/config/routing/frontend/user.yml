@@ -17,6 +17,8 @@ sylius_user_security_login:
     methods: [GET]
     defaults:
         _controller: sylius.controller.user_security:loginAction
+    options:
+        expose: true
 
 sylius_user_security_check:
     path: /login_check

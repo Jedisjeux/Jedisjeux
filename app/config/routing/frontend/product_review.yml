@@ -8,4 +8,33 @@ sylius_product_review_create:
             factory:
                 method: createForSubject
                 arguments: [$productId]
-            permission: false
+
+sylius_product_rating_create:
+    path: /products/{productId}/rating/new
+    methods: [GET, POST]
+    defaults:
+        _format: json
+        _controller: sylius.controller.product_review:createAction
+        _sylius:
+            template: 'partial/product_review/rating/_form.html.twig'
+            form: sylius_product_review_rating
+            factory:
+                method: createForSubject
+                arguments: [$productId]
+    options:
+        expose: true
+
+sylius_product_rating_update:
+    path: /products/{productId}/rating/edit
+    methods: [GET, PUT, PATCH]
+    defaults:
+        _controller: sylius.controller.product_review:updateAction
+        _format: json
+        _sylius:
+            template: 'partial/product_review/rating/_form.html.twig'
+            form: sylius_product_review_rating
+            repository:
+                method: findOneBy
+                arguments: [{reviewSubject: $productId, author: expr:service('sylius.context.customer').getCustomer()}]
+    options:
+        expose: true

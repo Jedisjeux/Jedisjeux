@@ -31,7 +31,9 @@ class ProductReviewController extends ResourceController
         $this->isGrantedOr403($configuration, ResourceActions::SHOW);
         $resource = $this->singleResourceProvider->get($configuration, $this->repository);
 
-        $this->eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $resource);
+        if (null !== $resource) {
+            $this->eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $resource);
+        }
 
         $view = View::create($resource);
 
