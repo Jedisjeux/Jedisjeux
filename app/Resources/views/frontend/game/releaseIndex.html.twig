@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block headline %}
+    Les sorties de jeux
+{% endblock %}
+
+{% block body -%}
+
+    <div class="row">
+
+        <div class="col-md-4 col-sm-4">
+
+            <h4 class="mag-head"><i class="fa fa-puzzle-piece color"></i> Sorties du mois</h4>
+
+            {{ render(url('sylius_partial_product_index', {
+                'paginate': 3,
+                'template': 'partial/product/_magazine_items_one_and_list_items.html.twig',
+                'criteria': {
+                    'status': 'PUBLISHED',
+                    'releasedAtFrom': "first_day_of_the_month",
+                    'releasedAtTo': "last_day_of_the_month"
+                },
+                'sorting': {
+                    'variant.releasedAt': 'desc'
+                }
+            })) }}
+
+        </div>
+
+        <div class="col-md-4 col-sm-4">
+
+            <h4 class="mag-head"><i class="fa fa-puzzle-piece color"></i> Sorties du mois dernier</h4>
+
+            {{ render(url('sylius_partial_product_index', {
+                'paginate': 3,
+                'template': 'partial/product/_magazine_items_one_and_list_items.html.twig',
+                'criteria': {
+                    'status': 'PUBLISHED',
+                    'releasedAtFrom': "first_day_of_previous_month",
+                    'releasedAtTo': "last_day_of_previous_month"
+                },
+                'sorting': {
+                    'variant.releasedAt': 'desc'
+                }
+            })) }}
+
+        </div>
+
+        <div class="col-md-4 col-sm-4">
+
+            <h4 class="mag-head"><i class="fa fa-puzzle-piece color"></i> Sorties du mois prochain</h4>
+
+            {{ render(url('sylius_partial_product_index', {
+                'paginate': 3,
+                'template': '_magazine_items_one_and_list_items.html.twig',
+                'criteria': {
+                    'status': 'PUBLISHED',
+                    'releasedAtFrom': "first_day_of_next_month",
+                    'releasedAtTo': "last_day_of_next_month"
+                },
+                'sorting': {
+                    'variant.releasedAt': 'desc'
+                }
+            })) }}
+
+        </div>
+
+    </div>
+
+{% endblock %}

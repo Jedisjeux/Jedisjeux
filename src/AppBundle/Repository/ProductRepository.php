@@ -9,6 +9,7 @@
 namespace AppBundle\Repository;
 
 use AppBundle\Entity\Product;
+use AppBundle\Utils\DateCalculator;
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
@@ -82,15 +83,17 @@ class ProductRepository extends BaseProductRepository
         }
 
         if (!empty($criteria['releasedAtFrom'])) {
+            $dateCaclulator = new DateCalculator();
             $queryBuilder
                 ->andWhere($queryBuilder->expr()->gte('variant.releasedAt', ':releasedAtFrom'))
-                ->setParameter('releasedAtAtFrom', $criteria['releasedAtFrom'])
+                ->setParameter('releasedAtFrom', $dateCaclulator->getDay($criteria['releasedAtFrom']))
             ;
         }
         if (!empty($criteria['releasedAtTo'])) {
+            $dateCaclulator = new DateCalculator();
             $queryBuilder
                 ->andWhere($queryBuilder->expr()->lte('variant.releasedAt', ':releasedAtTo'))
-                ->setParameter('releasedAtTo', $criteria['releasedAtTo'])
+                ->setParameter('releasedAtTo', $dateCaclulator->getDay($criteria['releasedAtTo']))
             ;
         }
 

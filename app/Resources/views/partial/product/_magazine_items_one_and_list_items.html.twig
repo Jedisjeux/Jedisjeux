@@ -1,0 +1,24 @@
+{% from 'macros/images.html.twig' import image %}
+{% from 'macros/games.html.twig' import magazineItemOne, magazineListItem %}
+
+{% set product = products.currentPageResults.current %}
+{% if (product) %}
+    {{ magazineItemOne(product) }}
+{% endif %}
+<hr>
+
+<!-- Magazine list -->
+<div class="magazine-list">
+    <ul class="list-unstyled">
+        <!-- List item starts -->
+        {% for key, product in products.currentPageResults %}
+            {% if (key > 1) %}
+                <li>
+                    {{ magazineListItem(product) }}
+                    <div class="clearfix"></div>
+                </li>
+            {% endif %}
+        {% endfor %}
+        <!-- List item ends -->
+    </ul>
+</div>
