@@ -43,13 +43,16 @@ $(function() {
         $.ajax({
             url: Routing.generate(routeName, { 'productId': productId }),
             type: type,
-            data: {'rating': newRateValue}
-        }).done(function() {
-            appendFlash(successMessage);
-        }).fail(function(xhr) {
-            if(xhr.status==403 || xhr.status==405) {
-                //handle error
-                window.location.replace(Routing.generate('sylius_user_security_login'));
+            data: {'rating': newRateValue},
+            success: function(data, textStatus, xhr) {
+                appendFlash(successMessage);
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                if(xhr.status==403 || xhr.status==405) {
+                    //handle error
+                    window.location.replace(Routing.generate('sylius_user_security_login'));
+                }
+                renderErrors(xhr, form);
             }
         });
     });
