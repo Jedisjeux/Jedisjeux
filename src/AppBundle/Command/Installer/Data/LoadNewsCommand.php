@@ -12,6 +12,7 @@ use AppBundle\Document\ArticleContent;
 use AppBundle\Document\SingleImageBlock;
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Topic;
+use AppBundle\TextFilter\Bbcode2Html;
 use Doctrine\ODM\PHPCR\Document\Generic;
 use Doctrine\ODM\PHPCR\DocumentManager;
 use Doctrine\ODM\PHPCR\DocumentRepository;
@@ -54,7 +55,9 @@ class LoadNewsCommand extends ContainerAwareCommand
                 [
                     'id' => $data['id'],
                     'body' => $data['body'],
-                    'image_position' => null,
+                    'image_position' => 'left',
+                    'image_label' => null,
+                    'image' => $data['mainImage'],
                     'title' => null,
                     'class' => null,
                 ]
@@ -206,11 +209,18 @@ EOM;
             $block
                 ->setParentDocument($page);
         }
+        
+        $bbcode2html = new Bbcode2Html();
+        $body = $data['body'];
+        $body = $bbcode2html
+            ->setBody($body)
+            ->getFilteredBody();
+        
 
         $block
             ->setImagePosition($data['image_position'])
             ->setTitle($data['title'])
-            ->setBody($this->nl2p($data['body']))
+            ->setBody($this->nl2p($body))
             ->setName($name)
             ->setClass($data['class'] ?: null)
             ->setPublishable(true);
