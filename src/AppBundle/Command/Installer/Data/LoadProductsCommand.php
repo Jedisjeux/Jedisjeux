@@ -66,6 +66,7 @@ class LoadProductsCommand extends ContainerAwareCommand
         $this->deleteProductAssociations();
         $this->insertProductsOfCollections($associationTypeCollection);
         $this->insertProductsOfExpansions($associationTypeExpansion);
+        $this->recalculateMasters();
     }
 
     protected function createOrReplaceAssociationTypeCollection()
@@ -323,6 +324,29 @@ where       old.valid in (0, 1, 2, 5, 3)
 EOM;
 
         return $this->getDatabaseConnection()->fetchAll($query);
+
+    }
+
+    protected function recalculateMasters()
+    {
+        // first, set all variants as master
+        $query = <<<EOM
+update sylius_product_variant variant
+ set variant.is_master = 1;
+EOM;
+
+        $this->getDatabaseConnection()->executeQuery($query);
+
+        // only keep the most recent id as master
+        $query = <<<EOM
+        update sylius_product_variant variant
+  inner JOIN sylius_product_variant other_variant
+    on other_variant.product_id = variant.product_id
+set variant.is_master = 0
+where variant.id < other_variant.id;
+EOM;
+
+        $this->getDatabaseConnection()->executeQuery($query);
 
     }
 
