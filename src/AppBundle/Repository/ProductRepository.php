@@ -69,6 +69,9 @@ class ProductRepository extends BaseProductRepository
     public function createFilterPaginator($criteria = [], $sorting = [], $deleted = false)
     {
         $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder
+            ->andWhere('variant.master = :master')
+            ->setParameter('master', 1);
 
         if (!empty($criteria['name'])) {
             $queryBuilder
