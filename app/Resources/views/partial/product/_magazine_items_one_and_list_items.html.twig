@@ -11,13 +11,15 @@
 <div class="magazine-list">
     <ul class="list-unstyled">
         <!-- List item starts -->
-        {% for key, product in products.currentPageResults %}
-            {% if (key > 1) %}
+        {% set first = true %}
+        {% for product in products.currentPageResults %}
+            {% if not first %}
                 <li>
                     {{ magazineListItem(product) }}
                     <div class="clearfix"></div>
                 </li>
             {% endif %}
+            {% set first = false %}
         {% endfor %}
         <!-- List item ends -->
     </ul>
