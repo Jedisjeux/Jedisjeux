@@ -12,11 +12,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-                <h4 class="mag-head"><i class="fa fa-puzzle-piece color"></i> Sorties du mois</h4>
+                <h4 class="mag-head"><i class="fa fa-calendar color"></i> Sorties du mois</h4>
 
                 {{ render(url('sylius_partial_product_index', {
                     'paginate': 3,
-                    'template': 'partial/product/_magazine_items_one.html.twig',
+                    'template': 'partial/recent_release_product/_magazine_items_one.html.twig',
                     'criteria': {
                         'status': 'PUBLISHED',
                         'releasedAtFrom': "first_day_of_the_month",
@@ -29,11 +29,11 @@
 
                 <hr/>
 
-                <h4 class="mag-head"><i class="fa fa-puzzle-piece color"></i> Sorties des mois précédents</h4>
+                <h4 class="mag-head"><i class="fa fa-calendar color"></i> Sorties des mois précédents</h4>
 
                 {{ render(url('sylius_partial_product_index', {
                     'paginate': 3,
-                    'template': '/partial/product/_magazine_items_one.html.twig',
+                    'template': '/partial/recent_release_product/_magazine_items_one.html.twig',
                     'criteria': {
                         'status': 'PUBLISHED',
                         'releasedAtTo': "last_day_of_previous_month"
@@ -45,11 +45,11 @@
 
                 <hr />
 
-                <h4 class="mag-head"><i class="fa fa-puzzle-piece color"></i> Sorties des prochains mois</h4>
+                <h4 class="mag-head"><i class="fa fa-calendar color"></i> Sorties des prochains mois</h4>
 
                 {{ render(url('sylius_partial_product_index', {
                     'paginate': 3,
-                    'template': '/partial/product/_magazine_items_one.html.twig',
+                    'template': '/partial/recent_release_product/_magazine_items_one.html.twig',
                     'criteria': {
                         'status': 'PUBLISHED',
                         'releasedAtFrom': "first_day_of_next_month",
