@@ -252,16 +252,8 @@ EOM;
     {
         $queryBuilder = $this->getPostRepository()->createQueryBuilder('o');
         $queryBuilder
-            ->andWhere($queryBuilder->expr()->orX(
-                'o.body like :quote',
-                'o.body like :emoticon',
-                'o.body like :url',
-                'o.body like :image'
-            ))
-            ->setParameter('quote', '%[quote%')
-            ->setParameter('emoticon', '%SMILIES%')
-            ->setParameter('url', '%[url%')
-            ->setParameter('image', '%[img%');
+            ->andWhere($queryBuilder->expr()->like('o.body', ':bracket'))
+            ->setParameter('quote', '%[%');
 
         $posts = $queryBuilder->getQuery()->getArrayResult();
 
