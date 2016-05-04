@@ -10,7 +10,7 @@
                 <!-- Image Box #4 Item -->
                 <div class="img-box-4-item">
                     <!-- Image -->
-                    {{ image(imagineBlock.image.id, 'cmf_block', imagineBlock.label, 'img-responsive', imagineBlock.linkUrl) }}
+                    {{ image(imagineBlock.image.id, 'top' == block.imagePosition ? 'cmf_block' : 'cmf_block_medium', imagineBlock.label, 'img-responsive', imagineBlock.linkUrl) }}
                    <!-- Image Box #4 Content -->
                     <div class="img-box-4-content">
                         <!-- Paragraph -->

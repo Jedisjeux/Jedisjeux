@@ -288,6 +288,10 @@ liip_imagine:
             quality: 100
             filters:
                 thumbnail: { size: [80, 55], mode: outbound }
+        cmf_block_medium:
+            data_loader: cmf_media_doctrine_phpcr
+            filters:
+                relative_resize: { widen: 380 }
         magazine_item:
             quality: 100
             filters:
