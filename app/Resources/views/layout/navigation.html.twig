@@ -12,6 +12,7 @@
                 <li><a href="{{ path('sylius_product_index') }}">Jeux</a>
                     <ul>
                         <li><a href="{{ path('sylius_product_index') }}">Liste complète</a></li>
+                        <li><a href="{{ path('sylius_product_release_index') }}">Les sorties</a></li>
                     </ul>
                 </li>
 
@@ -33,36 +34,6 @@
                 {#<li>#}
                 {#<a href="contact-us-one.html">Contactez-Nous</a>#}
                 {#</li>#}
-
-                {% if is_granted('ROLE_OFFICE') %}
-                    <li>
-                        <a href="{{ path('compta_home') }}">Compta</a>
-
-                        <ul>
-                            <li>
-                                <a href="{{ path('compta_book_entry') }}">Ecritures comptables</a>
-                            </li>
-                            <li>
-                                <a href="{{ path('compta_bill') }}">Factures</a>
-                            </li>
-                            <li>
-                                <a href="{{ path('compta_customer') }}">Clients</a>
-                            </li>
-                            <li>
-                                <a href="{{ path('compta_subscription') }}">Abonnements</a>
-                            </li>
-                            <li>
-                                <a href="{{ path('compta_product') }}">Produits</a>
-                            </li>
-                            <li>
-                                <a href="{{ path('compta_payment_method') }}">Modes de paiement</a>
-                            </li>
-                            <li>
-                                <a href="{{ path('compta_dealer') }}">Distributeurs</a>
-                            </li>
-                        </ul>
-                    </li>
-                {% endif %}
             </ul>
         </div>
     </div>
