@@ -253,7 +253,7 @@ EOM;
         $queryBuilder = $this->getPostRepository()->createQueryBuilder('o');
         $queryBuilder
             ->andWhere($queryBuilder->expr()->like('o.body', ':bracket'))
-            ->setParameter('quote', '%[%');
+            ->setParameter('bracket', '%[%');
 
         $posts = $queryBuilder->getQuery()->getArrayResult();
 

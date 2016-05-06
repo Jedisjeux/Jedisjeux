@@ -52,7 +52,6 @@ $(function() {
                     //handle error
                     window.location.replace(Routing.generate('sylius_user_security_login'));
                 }
-                renderErrors(xhr, form);
             }
         });
     });
