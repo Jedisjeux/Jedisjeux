@@ -3,24 +3,19 @@
 {% set imageBlock %}
     {% if block.hasChildren %}
         {% set imagineBlock = block.children.first %}
-
-        <div class="text-center">
-            <div class="container {% if 'left' == block.imagePosition %}no-padding-left{% elseif 'right' == block.imagePosition %}no-padding-right{% endif %}">
+            <div class="text-center">
                 <!-- Image -->
                 <!-- Image Box #4 Item -->
                 <div class="img-box-4-item">
                     <!-- Image -->
-                    {{ image(imagineBlock.image.id, 'top' == block.imagePosition ? 'cmf_block' : 'cmf_block_medium', imagineBlock.label, 'img-responsive', imagineBlock.linkUrl) }}
-                   <!-- Image Box #4 Content -->
+                    {{ image(imagineBlock.image.id, 'cmf_block', imagineBlock.label, 'img-responsive', imagineBlock.linkUrl) }}
+                    <!-- Image Box #4 Content -->
                     <div class="img-box-4-content">
                         <!-- Paragraph -->
                         <p>{{ imagineBlock.label }}</p>
                     </div>
                 </div>
             </div>
-        </div>
-
-
     {% endif %}
 {% endset %}
 
@@ -34,25 +29,24 @@
 {% endset %}
 
 <div class="{{ block.class }}">
-{% if 'left' == block.imagePosition %}
-    <div class="pull-left">
+    {% if 'left' == block.imagePosition %}
+        <div class="col-sm-5 col-md-5 pull-left no-padding-left">
+            {{ imageBlock }}
+        </div>
+        <h4><a href="#">{{ block.title }}</a></h4>
+        {{ block.body|raw }}
+    {% elseif 'right' == block.imagePosition %}
+        <div class="col-sm-5 col-md-5 pull-right no-padding-right">
+            {{ imageBlock }}
+        </div>
+        <h4><a href="#">{{ block.title }}</a></h4>
+        {{ block.body|raw }}
+    {% else %}
+        <h4><a href="#">{{ block.title }}</a></h4>
+        <div class="bor bg-color"></div>
         {{ imageBlock }}
-    </div>
-    <h4><a href="#">{{ block.title }}</a></h4>
-    {{ block.body|raw }}
-{% elseif 'right' == block.imagePosition %}
-    <div class="pull-right">
-        {{ imageBlock }}
-    </div>
-    <h4><a href="#">{{ block.title }}</a></h4>
-    {{ block.body|raw }}
-{% else %}
+        {{ block.body|raw }}
 
-    <h4><a href="#">{{ block.title }}</a></h4>
-    <div class="bor bg-color"></div>
-    {{ imageBlock }}
-    {{ block.body|raw }}
-
-{% endif %}
+    {% endif %}
 </div>
 <div class="clearfix"></div>

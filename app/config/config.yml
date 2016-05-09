@@ -242,7 +242,9 @@ ivory_ck_editor:
         standard:
             toolbar: standard
         forum:
-            extraPlugins: 'templates'
+            protectedSource: ['/<span[^>]*><\/span>/g']
+            allowedContent:  ['p', 'div(*)', 'ul(*)', 'li', 'span(*)', 'em', 'strong']
+            extraPlugins: 'templates,div'
             templates:    "my_templates"
             language: %locale%
             stylesSet: custom_styles  # Chargement des styles personnalisables
@@ -261,7 +263,7 @@ ivory_ck_editor:
                     title:       "Introduction"
                     image:       "template1.gif"
                     description: "My awesome template"
-                    html:        '<div class="quote-one"><div class="row"><!-- Quote One Item --><div class="quote-one-item"><span class="color">“</span><div class="quote-one-right">Le jeu de société moderne a évolué dans son concept visuel tendant vers des illustrations peaufinées bien au delà de la boîte du jeu. Pions en cartons, plateau en papier cèdent leur place à des figurines moulées, des pions en bois et plateaux bourrés d''illustrations. Etudions le phénomène et voyons les différents avantages et inconvénients du design des jeux actuels.</div></div></div></div>'
+                    html:        '<div class="quote-one"><div class="row"><!-- Quote One Item --><div class="quote-one-item"><span class="color">“</span><div class="quote-one-right"><p>Nemo enim ipsam voluptatem quia quia neque porro qui dolorem ipsum quia dolor sit amet consectetur.</p></div></div></div></div>'
     styles:         # Configuration des styles personnalisables
         custom_styles:
             - { name: "Alerte Success", element: "div",  attributes: { class: "alert alert-success", role: "alert" }}
