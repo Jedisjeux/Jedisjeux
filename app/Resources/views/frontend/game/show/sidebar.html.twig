@@ -57,10 +57,10 @@
     <!-- Gallery Widget -->
     <div class="s-widget">
         <!-- Heading -->
-        <h5><i class="fa fa-camera color"></i> Photos <small>({{ jeu.images|length }})</small></h5>
+        <h5><i class="fa fa-camera color"></i> Photos <small>({{ jeu.imagesOfAllVariants|length }})</small></h5>
         <!-- Widgets Content -->
         <div class="widget-content gallery">
-            {% for image in jeu.images %}
+            {% for image in jeu.imagesOfAllVariants %}
                 <a href="{{ image.webPath | imagine_filter('default') }}" rel="jeu" class="fancybox" title="{{ image.description }}">
                     <img src="{{ image.webPath | imagine_filter('thumbnail_S') }}" alt="" class="img-responsive img-thumbnail"/>
                 </a>

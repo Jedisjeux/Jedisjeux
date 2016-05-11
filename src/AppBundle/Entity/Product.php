@@ -244,9 +244,26 @@ class Product extends BaseProduct implements ReviewableInterface
         return $this->setMainImage($imageCouverture);
     }
 
+    /**
+     * @return ArrayCollection|ProductVariantImage[]
+     */
     public function getImages()
     {
         return $this->getMasterVariant()->getImages();
+    }
+
+    public function getImagesOfAllVariants()
+    {
+        $collection = new ArrayCollection();
+
+        /** @var ProductVariant $variant */
+        foreach ($this->variants as $variant) {
+            foreach($variant->getImages() as $image) {
+                $collection->add($image);
+            }
+        }
+
+        return $collection;
     }
 
     /**
