@@ -26,8 +26,7 @@ class AppKernel extends Kernel
             new Sylius\Bundle\AttributeBundle\SyliusAttributeBundle(),
             new Sylius\Bundle\VariationBundle\SyliusVariationBundle(),
             new Sylius\Bundle\TaxonomyBundle\SyliusTaxonomyBundle(),
-            new Sylius\Bundle\TranslationBundle\SyliusTranslationBundle(),
-
+            
             new Sonata\BlockBundle\SonataBlockBundle(),
 
             new Symfony\Cmf\Bundle\CoreBundle\CmfCoreBundle(),

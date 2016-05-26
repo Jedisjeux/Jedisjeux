@@ -59,7 +59,7 @@
         "ob/highcharts-bundle": "^1.2",
         "bmatzner/jquery-ui-bundle": "^1.10",
         "knplabs/doctrine-behaviors": "~1.1",
-        "sylius/sylius": "^0.17",
+        "sylius/sylius": "^0.18",
         "sensio/framework-extra-bundle": " ~3.0",
         "sensio/generator-bundle": "^3.0",
         "helios-ag/fm-bbcode-bundle": "^6.8"
