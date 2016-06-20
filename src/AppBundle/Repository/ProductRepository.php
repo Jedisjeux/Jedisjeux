@@ -11,13 +11,13 @@ namespace AppBundle\Repository;
 use AppBundle\Entity\Product;
 use AppBundle\Utils\DateCalculator;
 use Pagerfanta\Pagerfanta;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository as BaseRepository;
+use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class ProductRepository extends BaseRepository
+class ProductRepository extends BaseProductRepository
 {
     /**
      * {@inheritdoc}
