@@ -25,7 +25,7 @@ class GamePlayRepository extends EntityRepository
         if (array_key_exists('hasTopic', $criteria)) {
             if ($criteria['hasTopic']) {
                 $queryBuilder
-                    ->andWhere($this->getAlias().'.topic is not null');
+                    ->andWhere('o.topic is not null');
             }
             unset($criteria['hasTopic']);
         }

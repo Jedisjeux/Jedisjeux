@@ -4,9 +4,11 @@ sylius_archetype:
             archetype:
                 classes:
                     model: Sylius\Component\Archetype\Model\Archetype
+                    interface: Sylius\Component\Product\Model\ArchetypeInterface
                 translation:
                     classes:
                         model: Sylius\Component\Product\Model\ArchetypeTranslation
+                        interface: Sylius\Component\Product\Model\ArchetypeTranslationInterface
             subject: AppBundle\Entity\Product
             attribute: Sylius\Component\Product\Model\Attribute
             option: Sylius\Component\Product\Model\Option

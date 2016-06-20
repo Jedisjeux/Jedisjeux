@@ -62,9 +62,9 @@ class PersonRepository extends EntityRepository
      */
     public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = [], array $sorting = [])
     {
-        $queryBuilder = $this->getCollectionQueryBuilder();
+        $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder
-            ->innerJoin($this->getAlias().'.taxons', 'taxon')
+            ->innerJoin('o.taxons', 'taxon')
             ->andWhere($queryBuilder->expr()->orX(
                 'taxon = :taxon',
                 ':left < taxon.left AND taxon.right < :right'
@@ -87,9 +87,9 @@ class PersonRepository extends EntityRepository
      */
     public function findNbResults()
     {
-        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder
-            ->select($queryBuilder->expr()->count($this->getAlias()));
+            ->select($queryBuilder->expr()->count('o'));
         return $queryBuilder->getQuery()->getSingleScalarResult();
     }
 }

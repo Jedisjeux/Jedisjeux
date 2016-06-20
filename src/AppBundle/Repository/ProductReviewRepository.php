@@ -45,9 +45,9 @@ class ProductReviewRepository extends EntityRepository
      */
     public function findNbResults()
     {
-        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder
-            ->select($queryBuilder->expr()->count($this->getAlias()))
+            ->select($queryBuilder->expr()->count('o'))
             ->where($queryBuilder->expr()->eq($this->getPropertyName('status'), ':status'))
             ->setParameter('status', ReviewInterface::STATUS_ACCEPTED);
         return $queryBuilder->getQuery()->getSingleScalarResult();
