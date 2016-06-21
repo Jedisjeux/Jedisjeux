@@ -12,13 +12,12 @@ use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\TaxonomyBundle\Doctrine\ORM\TaxonomyRepository;
 use Sylius\Bundle\TaxonomyBundle\Doctrine\ORM\TaxonRepository;
-use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -35,8 +34,8 @@ class TopicController extends ResourceController
 
         $this->isGrantedOr403($configuration, ResourceActions::INDEX);
 
-        /** @var TaxonomyInterface $taxonomy */
-        $taxonomy = $this->getTaxonomyRepository()->findOneBy(array('name' => 'forum'));
+        /** @var TaxonInterface $rootTaxon */
+        $rootTaxon = $this->getTaxonRepository()->findOneBy(array('code' => 'forum'));
 
         $resources = $this->resourcesCollectionProvider->get($configuration, $this->repository);
 
@@ -49,7 +48,7 @@ class TopicController extends ResourceController
                 ->setData([
                     'metadata' => $this->metadata,
                     'resources' => $resources,
-                    'taxons' => $taxonomy->getTaxons(),
+                    'taxons' => $rootTaxon->getChildren(),
                     $this->metadata->getPluralName() => $resources,
                 ])
             ;
@@ -103,13 +102,6 @@ class TopicController extends ResourceController
         return $this->viewHandler->handle($configuration, $view);
     }
 
-    /**
-     * @return TaxonomyRepository
-     */
-    protected function getTaxonomyRepository()
-    {
-        return $this->get('sylius.repository.taxonomy');
-    }
 
     /**
      * @return TaxonRepository
