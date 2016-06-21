@@ -8,6 +8,7 @@
 
 namespace AppBundle\Command\Installer\Data;
 
+use AppBundle\Repository\TaxonRepository;
 use Doctrine\ORM\EntityManager;
 use JDJ\CoreBundle\Entity\EntityRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
@@ -46,8 +47,8 @@ class LoadThemesCommand extends ContainerAwareCommand
         $this->output = $output;
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
 
-        $taxonomy = $this->createOrReplaceTaxonomy();
-        $this->addTaxons($this->getRows(), $taxonomy->getRoot());
+        $taxonRoot = $this->createOrReplaceRootTaxon();
+        $this->addTaxons($this->getRows(), $taxonRoot);
     }
 
     /**
@@ -69,32 +70,30 @@ class LoadThemesCommand extends ContainerAwareCommand
 
     }
 
-    protected function createOrReplaceTaxonomy()
+    /**
+     * @return TaxonInterface
+     */
+    protected function createOrReplaceRootTaxon()
     {
         /** @var TaxonInterface $taxonRoot */
         $taxonRoot = $this->getContainer()
             ->get('sylius.repository.taxon')
             ->findOneBy(array('code' => 'themes'));
 
-        $taxonomy = $taxonRoot ? $taxonRoot->getTaxonomy() : null;
-
-        if (null === $taxonomy) {
-            $taxonomy = $this->getContainer()
-                ->get('sylius.factory.taxonomy')
-                ->createNew();
+        if (null === $taxonRoot) {
+            $taxonRoot = $this->getFactory()->createNew();
         }
 
-        $taxonomy->setCode('themes');
-        $taxonomy->setName('Thèmes');
+        $taxonRoot->setCode('themes');
+        $taxonRoot->setName('Thèmes');
 
         /** @var EntityManager $manager */
-        $manager = $this->getContainer()
-            ->get('sylius.manager.taxonomy');
+        $manager = $this->getManager();
 
-        $manager->persist($taxonomy);
+        $manager->persist($taxonRoot);
         $manager->flush();
 
-        return $taxonomy;
+        return $taxonRoot;
     }
 
     /**
@@ -108,7 +107,7 @@ class LoadThemesCommand extends ContainerAwareCommand
         $locale = $this->getContainer()->getParameter('locale');
 
         /** @var TaxonInterface $taxon */
-        $taxon = $this->getRepository()->findOneBy(array('name' => $data['name'], 'taxonomy' => $parentTaxon->getTaxonomy()));
+        $taxon = $this->getRepository()->findOneByNameAndRoot($data['name'], $parentTaxon);
 
         if (null === $taxon) {
             $taxon = $this->getFactory()->createNew();
@@ -156,7 +155,7 @@ class LoadThemesCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return EntityRepository
+     * @return TaxonRepository
      */
     public function getRepository()
     {
