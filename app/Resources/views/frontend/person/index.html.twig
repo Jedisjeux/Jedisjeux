@@ -7,7 +7,7 @@
 
 {% block subtitle %}
     {% if taxon is defined %}
-        ayant pour {{ taxon.taxonomy }} : {{ taxon }}
+        ayant pour {{ taxon.root }} : {{ taxon }}
     {% endif %}
 {% endblock %}
 

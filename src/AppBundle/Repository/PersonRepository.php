@@ -25,7 +25,7 @@ class PersonRepository extends EntityRepository
     {
         if (isset($criteria['query'])) {
             $queryBuilder
-                ->andWhere($this->getAlias().'.slug like :query')
+                ->andWhere('o.slug like :query')
                 ->setParameter('query', '%'.$criteria['query'].'%');
             unset($criteria['query']);
         }
@@ -40,9 +40,9 @@ class PersonRepository extends EntityRepository
     {
         if (isset($sorting['gameCount'])) {
             $queryBuilder->addSelect($queryBuilder->expr()->sum(
-                    "SIZE(".$this->getAlias().".designerProducts)",
-                    "SIZE(".$this->getAlias().".publisherProducts)",
-                    "SIZE(".$this->getAlias().".artistProducts)").
+                    "SIZE(o.designerProducts)",
+                    "SIZE(o.publisherProducts)",
+                    "SIZE(o.artistProducts)").
                 " as HIDDEN gameCount");
             $queryBuilder->addOrderBy("gameCount", $sorting['gameCount']);
             unset($sorting['gameCount']);
