@@ -6,15 +6,7 @@ app_admin_person:
 
 sylius_admin_taxon:
     resource: backend/taxon.yml
-    prefix: /taxonomies/{taxonomyId}/
-
-sylius_admin_taxon_index:
-    path: /taxons/
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.taxon:indexAction
-        _sylius:
-            template: backend/taxon/index.html.twig
+    prefix: /taxons
 
 sylius_admin_user:
     resource: backend/user.yml
