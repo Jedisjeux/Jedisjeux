@@ -8,11 +8,10 @@
 
 namespace AppBundle\Command\Installer\Data;
 
+use AppBundle\Repository\TaxonRepository;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityRepository;
-use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Resource\Factory\Factory;
-use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -40,54 +39,48 @@ class LoadMechanismsCommand extends ContainerAwareCommand
     {
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
 
-        $taxonomy = $this->createOrReplaceTaxonomy();
+        $rootTaxon = $this->createOrReplaceRootTaxon();
         foreach ($this->getRows() as $data) {
-            $taxon = $this->createOrReplaceTaxon($data, $taxonomy);
+            $taxon = $this->createOrReplaceTaxon($data, $rootTaxon);
             $this->getManager()->persist($taxon);
         }
 
         $this->getManager()->flush();
     }
 
-    protected function createOrReplaceTaxonomy()
+    protected function createOrReplaceRootTaxon()
     {
-        /** @var TaxonInterface $taxonRoot */
-        $taxonRoot = $this->getContainer()
+        /** @var TaxonInterface $rootTaxon */
+        $rootTaxon = $this->getContainer()
             ->get('sylius.repository.taxon')
             ->findOneBy(array('code' => 'mechanisms'));
 
-        $taxonomy = $taxonRoot ? $taxonRoot->getTaxonomy() : null;
-
-        if (null === $taxonomy) {
-            $taxonomy = $this->getContainer()
-                ->get('sylius.factory.taxonomy')
-                ->createNew();
+        if (null === $rootTaxon) {
+            $rootTaxon = $this->getFactory()->createNew();
         }
 
-        $taxonomy->setCode('mechanisms');
-        $taxonomy->setName('Mécanismes');
+        $rootTaxon->setCode('mechanisms');
+        $rootTaxon->setName('Mécanismes');
 
-        /** @var EntityManager $manager */
-        $manager = $this->getContainer()
-            ->get('sylius.manager.taxonomy');
+        $manager = $this->getManager();
 
-        $manager->persist($taxonomy);
+        $manager->persist($rootTaxon);
         $manager->flush();
 
-        return $taxonomy;
+        return $rootTaxon;
     }
 
     /**
      * @param array $data
-     * @param TaxonomyInterface $taxonomy
+     * @param TaxonInterface $parentTaxon
      * @return TaxonInterface
      */
-    protected function createOrReplaceTaxon(array $data, TaxonomyInterface $taxonomy)
+    protected function createOrReplaceTaxon(array $data, TaxonInterface $parentTaxon)
     {
         $locale = $this->getContainer()->getParameter('locale');
 
         /** @var TaxonInterface $taxon */
-        $taxon = $this->getRepository()->findOneBy(array('name' => $data['name'], 'taxonomy' => $taxonomy));
+        $taxon = $this->getRepository()->findOneByNameAndRoot($data['name'], $parentTaxon);
 
         if (null === $taxon) {
             $taxon = $this->getFactory()->createNew();
@@ -100,7 +93,7 @@ class LoadMechanismsCommand extends ContainerAwareCommand
         $taxon->setDescription(isset($data['description']) ? $data['description'] : null);
 
         //$taxon->setParent($taxonomy->getRoot());
-        $taxonomy->addTaxon($taxon);
+        $parentTaxon->addChild($taxon);
 
         return $taxon;
 
@@ -134,7 +127,7 @@ class LoadMechanismsCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return EntityRepository
+     * @return TaxonRepository
      */
     public function getRepository()
     {

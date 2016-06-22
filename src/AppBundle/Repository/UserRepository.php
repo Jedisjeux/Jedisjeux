@@ -23,9 +23,9 @@ class UserRepository extends BaseUserRepository
      */
     public function findNbResults()
     {
-        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder
-            ->select($queryBuilder->expr()->count($this->getAlias()))
+            ->select($queryBuilder->expr()->count('o'))
             ->andWhere($queryBuilder->expr()->eq($this->getPropertyName('enabled'), ':enabled'))
             ->setParameter('enabled', '1');
         return $queryBuilder->getQuery()->getSingleScalarResult();

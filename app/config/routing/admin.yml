@@ -4,12 +4,9 @@
 app_admin_person:
     resource: backend/person.yml
 
-sylius_admin_taxonomy:
-    resource: backend/taxonomy.yml
-
 sylius_admin_taxon:
     resource: backend/taxon.yml
-    prefix: /taxonomies/{taxonomyId}/
+    prefix: /taxons
 
 sylius_admin_user:
     resource: backend/user.yml

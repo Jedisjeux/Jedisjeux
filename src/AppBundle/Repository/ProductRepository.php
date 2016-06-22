@@ -24,7 +24,10 @@ class ProductRepository extends BaseProductRepository
      */
     protected function getQueryBuilder()
     {
-        return parent::getQueryBuilder()
+        return parent::createQueryBuilder('o')
+            ->select('o, option, variant')
+            ->leftJoin('o.options', 'option')
+            ->leftJoin('o.variants', 'variant')
             ->addSelect('image')
             ->leftJoin('variant.images', 'image');
     }
@@ -40,9 +43,9 @@ class ProductRepository extends BaseProductRepository
      */
     public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = [], array $sorting = [])
     {
-        $queryBuilder = $this->getCollectionQueryBuilder();
+        $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
-            ->innerJoin('product.taxons', 'taxon')
+            ->innerJoin('o.taxons', 'taxon')
             ->andWhere($queryBuilder->expr()->orX(
                 'taxon = :taxon',
                 ':left < taxon.left AND taxon.right < :right'
@@ -112,7 +115,7 @@ class ProductRepository extends BaseProductRepository
 
         if ($deleted) {
             $this->_em->getFilters()->disable('softdeleteable');
-            $queryBuilder->andWhere('product.deletedAt IS NOT NULL');
+            $queryBuilder->andWhere('o.deletedAt IS NOT NULL');
         }
 
         return $this->getPaginator($queryBuilder);
@@ -126,9 +129,9 @@ class ProductRepository extends BaseProductRepository
      */
     public function findNbResults()
     {
-        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder
-            ->select($queryBuilder->expr()->count($this->getAlias()))
+            ->select($queryBuilder->expr()->count('o'))
             ->where($queryBuilder->expr()->eq($this->getPropertyName('status'), ':published'))
             ->setParameter('published', Product::PUBLISHED);
         return $queryBuilder->getQuery()->getSingleScalarResult();

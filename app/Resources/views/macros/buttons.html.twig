@@ -1,4 +1,4 @@
-{% macro btn(url, message, id, icon, class) %}
+{% macro generic(url, message, id, icon, class) %}
     <a class="btn {% if class is not empty %} {{ class }} {% else %}btn-default{% endif %}"
             {% if id is not empty %} id="{{ id }}"{% endif %}
        href="{{ url }}">
@@ -7,6 +7,12 @@
         {% endif %}
         {{ message|trans }}
     </a>
+{% endmacro %}
+
+{% macro btn(url, message, id, icon, class) %}
+    {% import _self as buttons %}
+
+    {{ buttons.generic(url, message, id, icon, class) }}
 {% endmacro %}
 
 {% macro show(url, message, id, class) %}

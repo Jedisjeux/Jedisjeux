@@ -1,12 +1,12 @@
 <!-- Sidebar -->
 <div class="sidebar">
 
-    {% for taxonomy in taxonomies %}
-        {% set taxons = taxonomy.taxons %}
+    {% for rootTaxon in rootTaxons %}
+        {% set taxons = rootTaxon.children %}
         <!-- Categories Widget -->
         <div class="s-widget">
             <!-- Heading -->
-            <h5><i class="fa fa-folder color"></i>&nbsp; {{ taxonomy.name }}</h5>
+            <h5><i class="fa fa-folder color"></i>&nbsp; {{ rootTaxon }}</h5>
             <!-- Widgets Content -->
             <div class="widget-content categories">
                 <ul class="list-6">

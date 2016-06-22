@@ -1,15 +1,14 @@
-sylius_translation:
-    default_locale: "%locale%"
-
 sylius_archetype:
     resources:
         product:
             archetype:
                 classes:
                     model: Sylius\Component\Archetype\Model\Archetype
+                    interface: Sylius\Component\Product\Model\ArchetypeInterface
                 translation:
                     classes:
                         model: Sylius\Component\Product\Model\ArchetypeTranslation
+                        interface: Sylius\Component\Product\Model\ArchetypeTranslationInterface
             subject: AppBundle\Entity\Product
             attribute: Sylius\Component\Product\Model\Attribute
             option: Sylius\Component\Product\Model\Option
@@ -21,6 +20,7 @@ sylius_association:
             association:
                 classes:
                     model: Sylius\Component\Product\Model\ProductAssociation
+                    interface: Sylius\Component\Product\Model\ProductAssociationInterface
 
 sylius_product:
     driver: doctrine/orm # Configure the doctrine orm driver used in the documentation.
@@ -49,13 +49,10 @@ sylius_variation:
 sylius_taxonomy:
     driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
     resources:
-        taxonomy:
-            classes:
-                form:
-                    default: AppBundle\Form\Type\TaxonomyType
         taxon:
             classes:
                 model: AppBundle\Entity\Taxon
+                repository: AppBundle\Repository\TaxonRepository
                 form:
                     default: AppBundle\Form\Type\TaxonType
             translation:
@@ -106,6 +103,8 @@ sylius_user:
                 model: AppBundle\Entity\Customer
 
 sylius_resource:
+    translation:
+        default_locale: %locale%
     resources:
         app.article:
             classes:

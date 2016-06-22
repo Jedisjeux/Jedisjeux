@@ -20,7 +20,7 @@ class AppBundle extends AbstractResourceBundle
         $container->addCompilerPass(new ServicesPass());
     }
 
-    public static function getSupportedDrivers()
+    public function getSupportedDrivers()
     {
         return array(
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,

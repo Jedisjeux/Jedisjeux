@@ -1,7 +1,0 @@
-sylius_admin_taxonomy:
-    resource: |
-        alias: sylius.taxonomy
-        section: admin
-        templates: :backend/taxonomy
-        redirect: index
-    type: sylius.resource

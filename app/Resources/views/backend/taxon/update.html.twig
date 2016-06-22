@@ -7,8 +7,8 @@
 
 {% block breadcrumb_content %}
     {{ parent() }}
-    <a href="{{ path('sylius_admin_taxonomy_index') }}">Catégories</a> /
-    <a href="{{ path('sylius_admin_taxonomy_show', { 'id': taxon.taxonomy.id }) }}">{{ taxon.taxonomy }}</a> /
+    <a href="{{ path('sylius_backend_taxon_index') }}">Catégories</a> /
+    <a href="{{ path('sylius_backend_taxon_show', { 'id': taxon.root.id }) }}">{{ taxon.root }}</a> /
     Modifier
 {% endblock %}
 

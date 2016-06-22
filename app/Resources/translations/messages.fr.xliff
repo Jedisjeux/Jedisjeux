@@ -664,6 +664,10 @@
             <source>label.your_rate</source>
             <target>Votre note</target>
         </trans-unit>
+        <trans-unit>
+            <source>title.categories</source>
+            <target>Catégories</target>
+        </trans-unit>
     </body>
   </file>
 </xliff>

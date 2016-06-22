@@ -44,7 +44,7 @@ class TopicRepository extends EntityRepository
      */
     public function createFilterPaginator($criteria = array(), $sorting = array())
     {
-        $queryBuilder = $this->getCollectionQueryBuilder();
+        $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder
             ->addSelect('user')
             ->addSelect('customer')
@@ -69,9 +69,9 @@ class TopicRepository extends EntityRepository
      */
     public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = array(), array $sorting = array())
     {
-        $queryBuilder = $this->getCollectionQueryBuilder();
+        $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder
-            ->innerJoin($this->getAlias() . '.mainTaxon', 'taxon')
+            ->innerJoin('o.mainTaxon', 'taxon')
             ->andWhere($queryBuilder->expr()->orX(
                 'taxon = :taxon',
                 ':left < taxon.left AND taxon.right < :right'

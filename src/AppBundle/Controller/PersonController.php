@@ -30,7 +30,7 @@ class PersonController extends ResourceController
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $this->isGrantedOr403($configuration, ResourceActions::INDEX);
 
-        $taxonomies = $this->getTaxonomyRepository()->findBy(array('name' => array('Zones')));
+        $rootTaxon = $this->getTaxonRepository()->findOneBy(array('code' => array('zones')));
 
         $resources = $this->resourcesCollectionProvider->get($configuration, $this->repository);
 
@@ -41,7 +41,7 @@ class PersonController extends ResourceController
                 ->setTemplate($configuration->getTemplate(ResourceActions::INDEX))
                 ->setTemplateVar($this->metadata->getPluralName())
                 ->setData([
-                    'taxonomies' => $taxonomies,
+                    'rootTaxon' => $rootTaxon,
                     'metadata' => $this->metadata,
                     'resources' => $resources,
                     $this->metadata->getPluralName() => $resources,
@@ -62,12 +62,12 @@ class PersonController extends ResourceController
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $this->isGrantedOr403($configuration, ResourceActions::INDEX);
 
-        $taxon = $this->get('sylius.repository.taxon')->findOneBy(array('permalink' => $permalink));
+        $taxon = $this->get('sylius.repository.taxon')->findOneByPermalink($permalink);
         if (!isset($taxon)) {
             throw new NotFoundHttpException('Requested taxon does not exist.');
         }
 
-        $taxonomies = $this->getTaxonomyRepository()->findBy(array('name' => array('Zones')));
+        $rootTaxon = $this->getTaxonRepository()->findOneBy(array('code' => array('zones')));
 
         /** @var PersonRepository $repository */
         $repository = $this->repository;
@@ -86,7 +86,7 @@ class PersonController extends ResourceController
                 ->setData([
                     'metadata' => $this->metadata,
                     'taxon' => $taxon,
-                    'taxonomies' => $taxonomies,
+                    'rootTaxon' => $rootTaxon,
                     'resources' => $resources,
                     $this->metadata->getPluralName() => $resources,
                 ]);
@@ -98,8 +98,8 @@ class PersonController extends ResourceController
     /**
      * @return EntityRepository
      */
-    protected function getTaxonomyRepository()
+    protected function getTaxonRepository()
     {
-        return $this->get('sylius.repository.taxonomy');
+        return $this->get('sylius.repository.taxon');
     }
 }

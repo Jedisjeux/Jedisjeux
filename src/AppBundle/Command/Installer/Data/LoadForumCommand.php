@@ -9,6 +9,7 @@
 namespace AppBundle\Command\Installer\Data;
 
 use AppBundle\Entity\Post;
+use AppBundle\Repository\TaxonRepository;
 use AppBundle\TextFilter\Bbcode2Html;
 use Doctrine\ORM\EntityManager;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
@@ -45,9 +46,9 @@ class LoadForumCommand extends ContainerAwareCommand
         $this->loadTopics();
         $this->loadPosts();
         $this->bbcode2Html();
-        $taxonomy = $this->createOrReplaceTaxonomy();
-        $this->deleteTaxons($taxonomy);
-        $this->loadTaxons($taxonomy);
+        $rootTaxon = $this->createOrReplaceRootTaxon();
+        $this->deleteTaxons($rootTaxon);
+        $this->loadTaxons($rootTaxon);
         $this->setTopicsMainTaxon();
     }
 
@@ -59,21 +60,20 @@ class LoadForumCommand extends ContainerAwareCommand
         return $this->getContainer()->get('database_connection');
     }
 
-    public function loadTaxons(TaxonomyInterface $taxonomy)
+    public function loadTaxons(TaxonInterface $rootTaxon)
     {
         foreach ($this->getTaxons() as $data) {
-            $this->createOrReplaceTaxon($data, $taxonomy);
+            $this->createOrReplaceTaxon($data, $rootTaxon);
         }
     }
 
-    protected function createOrReplaceTaxon(array $data, TaxonomyInterface $taxonomy)
+    protected function createOrReplaceTaxon(array $data, TaxonInterface $rootTaxon)
     {
         $locale = $this->getContainer()->getParameter('locale');
 
         /** @var TaxonInterface $taxon */
-        $taxon = $this->getContainer()
-            ->get('sylius.repository.taxon')
-            ->findOneBy(array('name' => $data['name'], 'taxonomy' => $taxonomy));
+        $taxon = $this->getTaxonRepository()
+            ->findOneByNameAndRoot($data['name'], $rootTaxon);
 
         if (null === $taxon) {
             $taxon = $this->getTaxonFactory()->createNew();
@@ -84,19 +84,19 @@ class LoadForumCommand extends ContainerAwareCommand
         $taxon->setCode('forum-'.$data['id']);
         $taxon->setName($data['name']);
         $taxon->setDescription($data['description'] ?: null);
-        $taxon->setParent($taxonomy->getRoot());
-        $taxonomy->addTaxon($taxon);
+        $taxon->setParent($rootTaxon);
+        $rootTaxon->addChild($taxon);
 
         $this->getTaxonManager()->persist($taxon);
         $this->getTaxonManager()->flush();
 
     }
 
-    protected function deleteTaxons(TaxonomyInterface $taxonomy)
+    protected function deleteTaxons(TaxonInterface $rootTaxon)
     {
         return $this->getTaxonManager()
-            ->createQuery("delete from AppBundle:Taxon where taxonomy = :taxonomy ")
-            ->setParameter('taxonomy', $taxonomy);
+            ->createQuery("delete from AppBundle:Taxon where root = :root")
+            ->setParameter('root', $rootTaxon);
     }
 
     protected function getTaxons()
@@ -124,32 +124,30 @@ EOM;
     }
 
     /**
-     * @return TaxonomyInterface
+     * @return TaxonInterface
      */
-    public function createOrReplaceTaxonomy()
+    public function createOrReplaceRootTaxon()
     {
-        /** @var TaxonomyInterface $taxonomy */
-        $taxonomy = $this->getContainer()
-            ->get('sylius.repository.taxonomy')
-            ->findOneBy(array('name' => 'forum'));
+        /** @var TaxonInterface $taxon */
+        $taxon = $this->getContainer()
+            ->get('sylius.repository.taxon')
+            ->findOneBy(array('code' => 'forum'));
 
-        if (null === $taxonomy) {
-            $taxonomy = $this->getContainer()
-                ->get('sylius.factory.taxonomy')
-                ->createNew();
+        if (null === $taxon) {
+            $taxon = $this->getTaxonFactory()->createNew();
         }
 
-        $taxonomy->setCode('forum');
-        $taxonomy->setName('forum');
+        $taxon->setCode('forum');
+        $taxon->setName('forum');
 
         /** @var EntityManager $manager */
         $manager = $this->getContainer()
-            ->get('sylius.manager.taxonomy');
+            ->get('sylius.manager.taxon');
 
-        $manager->persist($taxonomy);
+        $manager->persist($taxon);
         $manager->flush();
 
-        return $taxonomy;
+        return $taxon;
     }
 
     public function deletePosts()
@@ -278,6 +276,14 @@ EOM;
     protected function getPostManager()
     {
         return $this->getContainer()->get('app.manager.post');
+    }
+
+    /**
+     * @return TaxonRepository
+     */
+    protected function getTaxonRepository()
+    {
+        return $this->getContainer()->get('sylius.repository.taxon');
     }
 
     /**
