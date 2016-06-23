@@ -1,4 +1,4 @@
-@frontend @topics @create
+@ui @frontend @topic @create
 Feature: Topic creation
   In order to manage topics
   As a user

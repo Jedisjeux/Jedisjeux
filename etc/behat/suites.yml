@@ -1,2 +1,3 @@
 imports:
     - suites/ui/user.yml
+    - suites/ui/topic.yml

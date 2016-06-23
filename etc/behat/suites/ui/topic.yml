@@ -1,9 +1,11 @@
 default:
     suites:
-        ui_user:
+        ui_topic:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - AppBundle\Behat\UtilsContext
                 - AppBundle\Behat\UserContext
+                - AppBundle\Behat\TopicContext
+                - AppBundle\Behat\TaxonContext
             filters:
-                tags: "@user && @ui"
+                tags: "@topic && @ui"
