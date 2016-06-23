@@ -9,6 +9,7 @@
 namespace AppBundle\Command\Installer\Data;
 
 use AppBundle\Entity\Country;
+use AppBundle\Repository\TaxonRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\Factory;
@@ -47,8 +48,8 @@ class LoadZonesCommand extends ContainerAwareCommand
         $this->output = $output;
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
 
-        $taxonomy = $this->createOrReplaceTaxonomy();
-        $this->addTaxons($this->getRows(), $taxonomy->getRoot());
+        $rootTaxon = $this->createOrReplaceRootTaxon();
+        $this->addTaxons($this->getRows(), $rootTaxon);
     }
 
     /**
@@ -81,7 +82,7 @@ class LoadZonesCommand extends ContainerAwareCommand
         $locale = $this->getContainer()->getParameter('locale');
 
         /** @var TaxonInterface $taxon */
-        $taxon = $this->getRepository()->findOneBy(array('name' => $data['name'], 'taxonomy' => $parentTaxon->getTaxonomy()));
+        $taxon = $this->getRepository()->findOneByNameAndRoot($data['name'], $parentTaxon->getRoot());
 
         if (null === $taxon) {
             $taxon = $this->getFactory()->createNew();
@@ -102,35 +103,29 @@ class LoadZonesCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return TaxonomyInterface
+     * @return TaxonInterface
      */
-    protected function createOrReplaceTaxonomy()
+    protected function createOrReplaceRootTaxon()
     {
-        /** @var TaxonInterface $taxonRoot */
-        $taxonRoot = $this->getContainer()
+        /** @var TaxonInterface $rootTaxon */
+        $rootTaxon = $this->getContainer()
             ->get('sylius.repository.taxon')
             ->findOneBy(array('code' => 'zones'));
 
-        /** @var TaxonomyInterface $taxonomy */
-        $taxonomy = $taxonRoot ? $taxonRoot->getTaxonomy() : null;
-
-        if (null === $taxonomy) {
-            $taxonomy = $this->getContainer()
-                ->get('sylius.factory.taxonomy')
-                ->createNew();
+        if (null === $rootTaxon) {
+            $rootTaxon = $this->getFactory()->createNew();
         }
 
-        $taxonomy->setCode('zones');
-        $taxonomy->setName('Zones');
+        $rootTaxon->setCode('zones');
+        $rootTaxon->setName('Zones');
 
         /** @var EntityManager $manager */
-        $manager = $this->getContainer()
-            ->get('sylius.manager.taxonomy');
+        $manager = $this->getManager();
 
-        $manager->persist($taxonomy);
+        $manager->persist($rootTaxon);
         $manager->flush();
 
-        return $taxonomy;
+        return $rootTaxon;
     }
 
     /**
@@ -161,7 +156,7 @@ class LoadZonesCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return EntityRepository
+     * @return TaxonRepository
      */
     public function getRepository()
     {
