@@ -1,3 +1,4 @@
 imports:
     - suites/ui/user.yml
     - suites/ui/topic.yml
+    - suites/ui/product.yml

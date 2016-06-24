@@ -14,9 +14,10 @@ use Sylius\Component\Attribute\AttributeType\CheckboxAttributeType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
- * @author LoÃ¯c FrÃ©mont <loic@mobizel.com>
+ * @author Loïc Frémont <loic@mobizel.com>
  */
 class ProductContext extends DefaultContext
 {
@@ -33,11 +34,19 @@ class ProductContext extends DefaultContext
 
         foreach ($table->getHash() as $data) {
 
+            /** @var TaxonInterface $mainTaxon */
+            $mainTaxon = null;
+
+            if (isset($data['main-taxon'])) {
+                $mainTaxon = $this->getRepository('taxon')->findOneByName($data['main-taxon']);
+            }
+
             /** @var Product $product */
             $product = $this->getFactory('product')->createNew();
             $product->setCode($this->faker->unique()->postcode);
             $product->setName(isset($data['name']) ? $data['name'] : $this->faker->name);
             $product->setDescription(isset($data['description']) ? $data['description'] : $this->faker->realText());
+            $product->setMainTaxon($mainTaxon);
 
             $manager->persist($product);
         }
