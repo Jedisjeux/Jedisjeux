@@ -14,6 +14,7 @@ use AppBundle\Model\Identifiable;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
@@ -154,7 +155,7 @@ class Topic implements ResourceInterface
     }
 
     /**
-     * @return Taxon
+     * @return Taxon|TaxonInterface
      */
     public function getMainTaxon()
     {
@@ -162,7 +163,7 @@ class Topic implements ResourceInterface
     }
 
     /**
-     * @param Taxon $mainTaxon
+     * @param TaxonInterface $mainTaxon
      *
      * @return $this
      */

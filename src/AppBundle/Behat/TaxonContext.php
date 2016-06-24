@@ -30,7 +30,7 @@ class TaxonContext extends DefaultContext
         foreach ($table->getHash() as $data) {
 
             /** @var TaxonInterface $parent */
-            $parent = $this->findOneBy('taxon', ['name' => $data['parent']]);
+            $parent = $this->getRepository('taxon')->findOneByName($data['parent']);
 
             /** @var TaxonInterface $taxon */
             $taxon = $this->getFactory('taxon')->createNew();
