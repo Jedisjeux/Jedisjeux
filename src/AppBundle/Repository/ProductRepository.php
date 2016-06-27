@@ -48,6 +48,7 @@ class ProductRepository extends BaseProductRepository
             ->innerJoin('o.taxons', 'taxon')
             ->andWhere($queryBuilder->expr()->orX(
                 'taxon = :taxon',
+                'o.mainTaxon = :taxon',
                 ':left < taxon.left AND taxon.right < :right'
             ))
             ->setParameter('taxon', $taxon)

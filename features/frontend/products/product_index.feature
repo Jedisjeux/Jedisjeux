@@ -13,9 +13,15 @@ Feature: View list of products
       | mechanism-1 | Enchères | Mécanismes |
       | mechanism-2 | Majorité | Mécanismes |
     And there are products:
-      | name      | main-taxon |
-      | Palazzo   | Enchères   |
-      | Louis XIV | Majorité   |
+      | name      |
+      | Palazzo   |
+      | Louis XIV |
+    And product "Palazzo" has following taxons:
+      | name     |
+      | Enchères |
+    And product "Louis XIV" has following taxons:
+      | name     |
+      | Majorité |
 
   Scenario: View list of products
     When I am on "/jeux-de-societe/"

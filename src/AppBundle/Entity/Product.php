@@ -48,7 +48,7 @@ class Product extends BaseProduct implements ReviewableInterface
     protected $code;
 
     /**
-     * @var Collection
+     * @var ArrayCollection|TaxonInterface[]
      *
      * @ORM\ManyToMany(targetEntity="Sylius\Component\Taxonomy\Model\TaxonInterface")
      * @ORM\JoinTable("sylius_product_taxon")
@@ -301,13 +301,15 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
-     * @param Collection $taxons
+     * @param TaxonInterface $taxon
      *
      * @return $this
      */
-    public function setTaxons($taxons)
+    public function addTaxon(TaxonInterface $taxon)
     {
-        $this->taxons = $taxons;
+        if (!$this->taxons->contains($taxon)) {
+            $this->taxons->add($taxon);
+        }
 
         return $this;
     }

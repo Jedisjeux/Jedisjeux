@@ -121,4 +121,21 @@ class ProductContext extends DefaultContext
 
         return $attribute;
     }
+
+    /**
+     * @Given /^product "([^"]*)" has following taxons:$/
+     */
+    public function productHasTaxons($productName, TableNode $table)
+    {
+        /** @var Product $product */
+        $product = $this->findOneByName('product', $productName);
+
+        foreach ($table->getHash() as $data) {
+            /** @var TaxonInterface $parent */
+            $taxon = $this->getRepository('taxon')->findOneByName($data['name']);
+            $product->addTaxon($taxon);
+        }
+
+        $this->getEntityManager()->flush();
+    }
 }
