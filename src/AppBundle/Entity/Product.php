@@ -291,7 +291,7 @@ class Product extends BaseProduct implements ReviewableInterface
     {
         if (null !== $taxonomy) {
             return $this->taxons->filter(function (TaxonInterface $taxon) use ($taxonomy) {
-                return $taxonomy === strtolower($taxon->getTaxonomy()->getCode());
+                return $taxonomy === strtolower($taxon->getRoot()->getCode());
             });
         }
 

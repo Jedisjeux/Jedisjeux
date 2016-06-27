@@ -25,7 +25,7 @@ class ProductReviewRepository extends EntityRepository
         if (isset($criteria['hasComment']) and $criteria['hasComment'] !== '') {
             if ($criteria['hasComment']) {
                 $queryBuilder
-                    ->andWhere($this->getAlias().'.comment is not null');
+                    ->andWhere('o.comment is not null');
             } else {
                 // Sylius entity repository handles this case
                 $criteria['comment'] = null;
