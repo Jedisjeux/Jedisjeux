@@ -8,14 +8,15 @@
 {% endblock headline %}
 
 {% block subtitle_container %}
-    <div class="icon-box-4">
-        <div class="icon-box-4-item">
-            <a href="#" class="icon-box-4-icon bg-yellow"> <i class="fa fa-star"></i> </a>
-            <h4><a href="#">{{ product.averageRating|round(1) }}</a></h4>
-
+    {% if product.averageRating %}
+        <div class="icon-box-4">
+            <div class="icon-box-4-item">
+                <a href="#" class="icon-box-4-icon bg-yellow"> <i class="fa fa-star"></i> </a>
+                <h4>{{ product.averageRating|round(1) }}</h4>
+            </div>
         </div>
-    </div>
-    {% endblock %}
+    {% endif %}
+{% endblock %}
 
 {% block breadcrumb_content %}
     <a href="{{ path('sylius_product_index') }}">Jeux</a>
