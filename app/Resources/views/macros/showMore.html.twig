@@ -1,0 +1,9 @@
+{% macro showMore(text) %}
+    <div class="content hideContent">
+        {{ text|raw }}
+    </div>
+    <div class="show-more">
+        <a href="#" data-closed="1" data-closed-label="Lire la suite..." data-opened-label="Replier...">Lire la
+            suite...</a>
+    </div>
+{% endmacro %}

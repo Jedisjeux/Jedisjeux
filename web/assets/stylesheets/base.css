@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /*!
  * Bootstrap v3.3.6 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
@@ -28878,6 +28877,13 @@ blockquote.blockquote-reverse {
 /* line 1, ../sass/parts/_text.scss */
 .text-small {
   font-size: 0.5em !important;
+}
+
+/* line 5, ../sass/parts/_text.scss */
+.hideContent {
+  overflow: hidden;
+  line-height: 1em;
+  height: 9em;
 }
 
 /* line 1, ../sass/parts/_buttons.scss */

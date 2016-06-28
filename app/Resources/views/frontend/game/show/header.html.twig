@@ -1,5 +1,6 @@
 {% from "macros/games.html.twig" import duration, playerCount %}
 {% from 'macros/items.html.twig' import blockquoteOne %}
+{% from 'macros/showMore.html.twig' import showMore %}
 
 
 {% include "jeu/partial/status.html.twig" with {'jeu': jeu} only %}
@@ -29,7 +30,7 @@
                         <div class="container">
                             <div class="row">
                                 {% if jeu.shortDescription %}
-                                    {{ blockquoteOne(jeu.shortDescription) }}
+                                    {{ blockquoteOne(showMore(jeu.shortDescription)) }}
                                 {% endif %}
                             </div>
                         </div>
