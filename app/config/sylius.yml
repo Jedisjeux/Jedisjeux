@@ -28,6 +28,7 @@ sylius_product:
         product:
             classes:
                 model: AppBundle\Entity\Product
+                factory: AppBundle\Factory\ProductFactory
                 repository: AppBundle\Repository\ProductRepository
                 controller: AppBundle\Controller\ProductController
                 form:

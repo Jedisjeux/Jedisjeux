@@ -16,3 +16,16 @@ sylius_admin_product_index:
                 method: createFilterPaginator
                 arguments: [$criteria, $sorting]
             template: backend/product/index.html.twig
+
+sylius_admin_product_from_bgg_new:
+    methods: [GET]
+    path: /products/bgg/new/{bggPath}
+    defaults:
+        _controller: sylius.controller.product:createAction
+        _sylius:
+            factory:
+                method: createFromBgg
+                arguments: [$bggPath]
+            template: backend/product/create.html.twig
+    requirements:
+        bggPath: "[^?]+"
