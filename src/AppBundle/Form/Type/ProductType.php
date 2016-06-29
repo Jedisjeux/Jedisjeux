@@ -30,8 +30,12 @@ class ProductType extends AbstractResourceType
             ->add('masterVariant', 'sylius_product_variant', [
                 'master' => true,
             ])
-            ->add('taxons', 'sylius_taxon_selection', array(
+            ->add('mainTaxon', 'sylius_taxon_choice', array(
                 'required' => false,
+            ))
+            ->add('taxons', 'sylius_taxon_choice', array(
+                'required' => false,
+                'multiple' => true,
             ))
             ->add('shortDescription', 'ckeditor', array(
                 'label' => 'label.short_description',
