@@ -19,7 +19,7 @@ sylius_admin_product_index:
 
 sylius_admin_product_from_bgg_new:
     methods: [GET]
-    path: /products/bgg/new/{bggPath}
+    path: /products/bgg/new
     defaults:
         _controller: sylius.controller.product:createAction
         _sylius:

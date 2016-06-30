@@ -7,8 +7,8 @@ app_api_notification_read:
             repository:
                 method: findOneBy
                 arguments:
-                  - id: $id
-                  - recipient: expr:service('sylius.context.customer').getCustomer().getId()
+                  - {id: $id, recipient: expr:service('sylius.context.customer').getCustomer().getId()}
+
 
 app_api_notification_index:
     methods: [GET]
@@ -16,12 +16,7 @@ app_api_notification_index:
     defaults:
         _controller: app.controller.notification:indexAction
         _sylius:
-            paginate: false
             repository:
                 method: findBy
                 arguments:
-                  - recipient: expr:service('sylius.context.customer').getCustomer().getId()
-                  - read: 0
-            sortable: true
-            sorting:
-                createdAt: desc
+                  - {read: 0, recipient: expr:service('sylius.context.customer').getCustomer().getId()}

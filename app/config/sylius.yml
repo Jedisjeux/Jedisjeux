@@ -158,7 +158,6 @@ sylius_resource:
         app.notification:
             classes:
                 model: AppBundle\Entity\Notification
-                repository: AppBundle\Repository\NotificationRepository
                 controller: AppBundle\Controller\NotificationController
         app.customer_list:
             classes:
