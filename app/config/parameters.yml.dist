@@ -1,19 +1,19 @@
 parameters:
     database_driver:   pdo_mysql
-    database_host:     jdj.dev
+    database_host:     192.168.99.100
     database_port:     ~
     database_name:     jdj
     database_user:     root
-    database_password: ~
+    database_password: root
 
     mailer_transport:  smtp
-    mailer_host:       127.0.0.1
+    mailer_host:       192.168.99.100
     mailer_user:       ~
     mailer_password:   ~
 
     secret:            ThisTokenIsNotSoSecretChangeIt
 
-    fos_elastica.host: jdj.dev
+    fos_elastica.host: 192.168.99.100
     fos_elastica.port: 9200
 
     phpcr.backend:
