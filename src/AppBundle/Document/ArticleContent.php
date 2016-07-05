@@ -32,14 +32,14 @@ class ArticleContent extends ContainerBlock
     /**
      * @var string
      *
-     * @PHPCR\String(nullable=false)
+     * @PHPCR\Field(type="string", nullable=false)
      */
     protected $title;
 
     /**
      * @var string
      *
-     * @PHPCR\String(nullable=false)
+     * @PHPCR\Field(type="string", nullable=false)
      */
     protected $state = null;
 

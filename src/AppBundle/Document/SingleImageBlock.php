@@ -25,21 +25,21 @@ class SingleImageBlock extends SlideshowBlock
     /**
      * @var string
      *
-     * @PHPCR\String(nullable=false)
+     * @PHPCR\Field(type="string", nullable=false)
      */
     protected $body;
 
     /**
      * @var string
      *
-     * @PHPCR\String(nullable=true)
+     * @PHPCR\Field(type="string", nullable=true)
      */
     protected $class;
 
     /**
      * @var string
      *
-     * @PHPCR\String(nullable=true)
+     * @PHPCR\Field(type="string", nullable=true)
      */
     protected $imagePosition;
 
