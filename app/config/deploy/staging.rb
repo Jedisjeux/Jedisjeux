@@ -7,7 +7,7 @@
 # server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
 # server 'db.example.com', user: 'deploy', roles: %w{db}
 
-server '51.254.219.31',
+server '92.243.10.152',
   user: 'jedisjeux',
   roles: %w{app db web},
   ssh_options: {
@@ -31,9 +31,9 @@ server '51.254.219.31',
 # role :web, %w{user1@primary.com user2@additional.com}, other_property: :other_value
 # role :db,  %w{deploy@example.com}
 
-role :app, %w{jedisjeux@51.254.219.31}
-role :web, %w{jedisjeux@51.254.219.31}
-role :db,  %w{jedisjeux@51.254.219.31}
+role :app, %w{jedisjeux@92.243.10.152}
+role :web, %w{jedisjeux@92.243.10.152}
+role :db,  %w{jedisjeux@92.243.10.152}
 
 
 # Configuration
