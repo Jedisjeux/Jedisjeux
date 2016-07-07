@@ -76,8 +76,8 @@ class LoadThemesCommand extends ContainerAwareCommand
     protected function createOrReplaceRootTaxon()
     {
         /** @var TaxonInterface $taxonRoot */
-        $taxonRoot = $this->getContainer()
-            ->get('sylius.repository.taxon')
+        $taxonRoot = $this
+            ->getRepository()
             ->findOneBy(array('code' => 'themes'));
 
         if (null === $taxonRoot) {
@@ -107,7 +107,7 @@ class LoadThemesCommand extends ContainerAwareCommand
         $locale = $this->getContainer()->getParameter('locale');
 
         /** @var TaxonInterface $taxon */
-        $taxon = $this->getRepository()->findOneByNameAndRoot($data['name'], $parentTaxon);
+        $taxon = $this->getRepository()->findOneByNameAndRoot($data['name'], $parentTaxon->getRoot());
 
         if (null === $taxon) {
             $taxon = $this->getFactory()->createNew();

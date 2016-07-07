@@ -51,8 +51,8 @@ class LoadMechanismsCommand extends ContainerAwareCommand
     protected function createOrReplaceRootTaxon()
     {
         /** @var TaxonInterface $rootTaxon */
-        $rootTaxon = $this->getContainer()
-            ->get('sylius.repository.taxon')
+        $rootTaxon = $this
+            ->getRepository()
             ->findOneBy(array('code' => 'mechanisms'));
 
         if (null === $rootTaxon) {
@@ -80,7 +80,7 @@ class LoadMechanismsCommand extends ContainerAwareCommand
         $locale = $this->getContainer()->getParameter('locale');
 
         /** @var TaxonInterface $taxon */
-        $taxon = $this->getRepository()->findOneByNameAndRoot($data['name'], $parentTaxon);
+        $taxon = $this->getRepository()->findOneByNameAndRoot($data['name'], $parentTaxon->getRoot());
 
         if (null === $taxon) {
             $taxon = $this->getFactory()->createNew();

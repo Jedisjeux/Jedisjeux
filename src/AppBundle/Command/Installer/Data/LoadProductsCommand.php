@@ -176,9 +176,10 @@ class LoadProductsCommand extends ContainerAwareCommand
     protected function insertProductsOfCollections(AssociationType $assocationType)
     {
         $query = <<<EOM
-insert into sylius_product_association(product_id, association_type_id)
+insert into sylius_product_association(product_id, association_type_id, created_at)
 select      product.id,
-  :association_type_id
+  :association_type_id,
+  now()
 from        sylius_product product
   inner join jedisjeux.jdj_game old
     on concat('game-', old.id) = product.code
@@ -215,9 +216,10 @@ EOM;
     protected function insertProductsOfExpansions(AssociationType $assocationType)
     {
         $query = <<<EOM
-insert into sylius_product_association(product_id, association_type_id)
+insert into sylius_product_association(product_id, association_type_id, created_at)
 select distinct parent.id,
-        :association_type_id
+        :association_type_id,
+        now()
 from   jedisjeux.jdj_game old
   inner join sylius_product parent
     on parent.code = concat('game-', old.id_pere)
