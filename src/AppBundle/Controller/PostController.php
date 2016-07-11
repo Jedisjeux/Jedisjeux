@@ -8,9 +8,11 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Repository\TaxonRepository;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Resource\ResourceActions;
+use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -23,6 +25,9 @@ class PostController extends ResourceController
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $this->isGrantedOr403($configuration, ResourceActions::INDEX);
+
+        /** @var TaxonTranslationInterface $rootTaxon */
+        $rootTaxon = $this->getTaxonRepository()->findOneBy(array('code' => 'forum'));
 
         $criteria = $configuration->getCriteria();
         $topic = $this->get('app.repository.topic')->find($criteria['topic']);
@@ -40,11 +45,20 @@ class PostController extends ResourceController
                     'resources' => $resources,
                     'posts' => $resources,
                     'topic' => $topic,
+                    'taxons' => $rootTaxon->getChildren(),
                     $this->metadata->getPluralName() => $resources,
                 ])
             ;
         }
 
         return $this->viewHandler->handle($configuration, $view);
+    }
+
+    /**
+     * @return TaxonRepository
+     */
+    protected function getTaxonRepository()
+    {
+        return $this->get('sylius.repository.taxon');
     }
 }
