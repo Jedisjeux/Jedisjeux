@@ -38,13 +38,23 @@ class LoadUsersCommand extends ContainerAwareCommand
     {
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
 
+        $batchSize = 20;
+        $i = 0;
+
         foreach ($this->getUsers() as $data) {
             $output->writeln(sprintf("Loading <info>%s</info> user", $data['username']));
             $user = $this->createOrReplaceUser($data);
             $this->getEntityManager()->persist($user);
-            $this->getEntityManager()->flush();
-            $this->getEntityManager()->clear();
+
+            if (($i % $batchSize) === 0) {
+                $this->getEntityManager()->flush(); // Executes all updates.
+                $this->getEntityManager()->clear(); // Detaches all objects from Doctrine!
+            }
+
+            ++$i;
         }
+
+        $this->getEntityManager()->flush();
     }
 
 

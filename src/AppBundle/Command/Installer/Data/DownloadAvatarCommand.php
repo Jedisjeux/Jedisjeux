@@ -33,14 +33,11 @@ class DownloadAvatarCommand extends ContainerAwareCommand
     {
         $output->writeln("<comment>" . $this->getDescription() . "</comment>");
 
-        /** @var EntityRepository $repository */
-        $repository = $this->getContainer()->get('app.repository.avatar');
+        $repository = $this->getRepository();
 
-        $avatars = $repository
-            ->findAll();
-
-        /** @var Avatar $avatar */
-        foreach ($avatars as $avatar) {
+        foreach ($repository->createQueryBuilder('o')->getQuery()->iterate() as $row) {
+            /** @var Avatar $avatar */
+            $avatar = $row[0];
 
             if (!file_exists($avatar->getAbsolutePath())) {
                 $output->writeln("Downloading avatar <info>".$this->getAvatarOriginalPath($avatar)."</info>");
@@ -53,6 +50,13 @@ class DownloadAvatarCommand extends ContainerAwareCommand
                 }
             }
         }
+    }
+
+    /**
+     * @return EntityRepository $repository
+     */
+    protected function getRepository() {
+        return $this->getContainer()->get('app.repository.avatar');
     }
 
     /**
