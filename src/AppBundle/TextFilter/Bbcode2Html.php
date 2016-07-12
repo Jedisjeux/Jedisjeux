@@ -133,7 +133,7 @@ EOM;
      */
     protected function colorReplacement($body)
     {
-        $pattern = '/\[color:(.*?)\](?P<text>.*?)\[\/color:(.*?)\]/ms';
+        $pattern = '/\[color=(.*?)\](?P<text>.*?)\[\/color:(.*?)\]/ms';
         $replacement = "$2";
         $body = preg_replace($pattern, $replacement, $body);
         return $body;
@@ -145,7 +145,7 @@ EOM;
      */
     protected function sizeReplacement($body)
     {
-        $pattern = '/\[size:(.*?)\](?P<text>.*?)\[\/size:(.*?)\]/ms';
+        $pattern = '/\[size=(.*?)\](?P<text>.*?)\[\/size:(.*?)\]/ms';
         $replacement = "$2";
         $body = preg_replace($pattern, $replacement, $body);
         return $body;
