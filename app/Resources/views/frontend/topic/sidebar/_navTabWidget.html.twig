@@ -1,0 +1,36 @@
+<!-- Nav tab widget - popular, recent and comments -->
+<div class="s-widget">
+    <h5><i class="fa fa-tags color"></i>&nbsp; Nav Tabs</h5>
+    <div class="widget-content tabs">
+        <div class="nav-tabs-two">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#popular" data-toggle="tab">Populaires</a></li>
+                <li><a href="#recent" data-toggle="tab">Recent</a></li>
+            </ul>
+            <!-- Tab content -->
+            <div class="tab-content">
+                <!-- Popular posts -->
+                <div class="tab-pane fade in active" id="popular">
+                    {{ render(url('app_partial_topic_index', {
+                        'sorting': {
+                            'postCount': 'desc'
+                        },
+                        'paginate': 5,
+                        'template': 'partial/topic/_sidebarList.html.twig'
+                    })) }}
+                </div>
+                <!-- Recent posts -->
+                <div class="tab-pane fade" id="recent">
+                    {{ render(url('app_partial_topic_index', {
+                        'sorting': {
+                            'createdAt': 'desc'
+                        },
+                        'paginate': 5,
+                        'template': 'partial/topic/_sidebarList.html.twig'
+                    })) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

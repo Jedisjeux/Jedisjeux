@@ -25,12 +25,6 @@
 
                 <div class="container">
 
-                    <div class="pull-right">
-                        {# TODO post reply #}
-                        {{ button.btn(path('app_post_create_by_topic', {'topicId' : topic.id}), 'Répondre au sujet', null, 'plus-sign', 'btn-color') }}
-                    </div>
-                    <div class="clearfix"></div>
-
                     <div class="blog-comments">
                         {{ blogCommentItem(topic.mainPost) }}
                     </div>
@@ -55,7 +49,7 @@
             </div>
 
             <div class="col-md-4">
-                {% include 'frontend/topic/_sidebar.html.twig' %}
+                {% include 'frontend/post/_sidebar.html.twig' %}
             </div>
         </div>
 
