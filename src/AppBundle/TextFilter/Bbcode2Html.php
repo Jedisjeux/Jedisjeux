@@ -27,6 +27,8 @@ class Bbcode2Html
         $body = $this->body;
         $body = $this->nl2p($body);
         $body = $this->emoticonReplacement($body);
+        $body = $this->colorReplacement($body);
+        $body = $this->sizeReplacement($body);
         $body = $this->quoteReplacement($body);
         $body = $this->imageReplacement($body);
         $body = $this->urlReplacement($body);
@@ -60,6 +62,7 @@ class Bbcode2Html
         $body = str_replace(':mrgreen:', 'xD', $body);
         $body = str_replace(':wink:', ';)', $body);
         $body = str_replace(':lol:', ':)', $body);
+        $body = str_replace(':light:', '', $body);
         return $body;
     }
 
@@ -120,6 +123,30 @@ EOM;
     {
         $pattern = '/\[img:(.*?)\](?P<path>.*?)\[\/img:(.*?)\]/ms';
         $replacement = "<img src=\"$2\" class=\"img-responsive\" />";
+        $body = preg_replace($pattern, $replacement, $body);
+        return $body;
+    }
+
+    /**
+     * @param string $body
+     * @return string
+     */
+    protected function colorReplacement($body)
+    {
+        $pattern = '/\[color:(.*?)\](?P<text>.*?)\[\/color:(.*?)\]/ms';
+        $replacement = "$2";
+        $body = preg_replace($pattern, $replacement, $body);
+        return $body;
+    }
+
+    /**
+     * @param string $body
+     * @return string
+     */
+    protected function sizeReplacement($body)
+    {
+        $pattern = '/\[size:(.*?)\](?P<text>.*?)\[\/size:(.*?)\]/ms';
+        $replacement = "$2";
         $body = preg_replace($pattern, $replacement, $body);
         return $body;
     }
