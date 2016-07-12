@@ -55,6 +55,7 @@ class LoadUsersCommand extends ContainerAwareCommand
         }
 
         $this->getEntityManager()->flush();
+        $this->getEntityManager()->clear();
     }
 
 

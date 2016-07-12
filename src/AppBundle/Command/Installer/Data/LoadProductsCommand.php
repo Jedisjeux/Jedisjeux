@@ -23,6 +23,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class LoadProductsCommand extends ContainerAwareCommand
 {
+    const BATCH_SIZE = 20;
+
     /**
      * @inheritdoc
      */
@@ -44,10 +46,24 @@ class LoadProductsCommand extends ContainerAwareCommand
         $associationTypeCollection = $this->createOrReplaceAssociationTypeCollection();
         $associationTypeExpansion = $this->createOrReplaceAssociationTypeExpansion();
 
+        $i = 0;
+
         foreach ($this->getRows() as $data) {
             $output->writeln(sprintf("Loading <info>%s</info> product", $data['name']));
-            $this->createOrReplaceProduct($data);
+
+            $product = $this->createOrReplaceProduct($data);
+            $this->getManager()->persist($product);
+
+            if (($i % self::BATCH_SIZE) === 0) {
+                $this->getManager()->flush(); // Executes all updates.
+                $this->getManager()->clear(); // Detaches all objects from Doctrine!
+            }
+
+            ++$i;
         }
+
+        $this->getManager()->flush();
+        $this->getManager()->clear();
 
         foreach ($this->getVariants() as $data) {
             $output->writeln(sprintf("Loading <info>%s</info> variant for product <info>%s</info>",
@@ -87,25 +103,33 @@ class LoadProductsCommand extends ContainerAwareCommand
         return $assocationType;
     }
 
+    /**
+     * @return AssociationType
+     */
     protected function createOrReplaceAssociationTypeExpansion()
     {
-        /** @var AssociationType $assocationType */
-        $assocationType = $this->getContainer()->get('sylius.repository.product_association_type')->findOneBy(['code' => 'expansion']);
+        /** @var AssociationType $associationType */
+        $associationType = $this->getContainer()->get('sylius.repository.product_association_type')->findOneBy(['code' => 'expansion']);
 
-        if (null === $assocationType) {
-            $assocationType = $this->getContainer()->get('sylius.factory.product_association_type')->createNew();
+        if (null === $associationType) {
+            $associationType = $this->getContainer()->get('sylius.factory.product_association_type')->createNew();
         }
 
-        $assocationType->setCode('expansion');
-        $assocationType->setName('Extensions');
+        $associationType->setCode('expansion');
+        $associationType->setName('Extensions');
 
-        $this->getManager()->persist($assocationType);
+        $this->getManager()->persist($associationType);
         $this->getManager()->flush(); // Save changes in database.
 
-        return $assocationType;
+        return $associationType;
     }
 
-    protected function createOrReplaceProduct($data)
+    /**
+     * @param array $data
+     * 
+     * @return Product
+     */
+    protected function createOrReplaceProduct(array $data)
     {
         /** @var Product $product */
         $product = $this->getRepository()->findOneBy(array('code' => $data['code']));
@@ -156,9 +180,7 @@ class LoadProductsCommand extends ContainerAwareCommand
 
         $product->getMasterVariant()->setCode($data['code']);
 
-        $this->getManager()->persist($product);
-        $this->getManager()->flush(); // Save changes in database.
-        $this->getManager()->clear();
+        return $product;
     }
 
     protected function deleteProductAssociations()
@@ -173,6 +195,11 @@ class LoadProductsCommand extends ContainerAwareCommand
         $queryBuilder->getQuery()->execute();
     }
 
+    /**
+     * @param AssociationType $assocationType
+     * 
+     * @throws \Doctrine\DBAL\DBALException
+     */
     protected function insertProductsOfCollections(AssociationType $assocationType)
     {
         $query = <<<EOM
@@ -213,6 +240,11 @@ EOM;
 
     }
 
+    /**
+     * @param AssociationType $assocationType
+     * 
+     * @throws \Doctrine\DBAL\DBALException
+     */
     protected function insertProductsOfExpansions(AssociationType $assocationType)
     {
         $query = <<<EOM
@@ -273,7 +305,7 @@ EOM;
     }
 
     /**
-     * @inheritdoc
+     * @return array
      */
     public function getRows()
     {
@@ -300,6 +332,9 @@ EOM;
         return $this->getDatabaseConnection()->fetchAll($query);
     }
 
+    /**
+     * @return array
+     */
     private function getVariants()
     {
         $query = <<<EOM
