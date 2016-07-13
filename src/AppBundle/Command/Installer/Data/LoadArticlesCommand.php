@@ -21,13 +21,12 @@ use Doctrine\ORM\EntityManager;
 use PHPCR\Util\NodeHelper;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\User\Model\CustomerInterface;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
 use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class LoadArticlesCommand extends ContainerAwareCommand
+class LoadArticlesCommand extends AbstractLoadDocumentCommand
 {
     /**
      * @var OutputInterface
@@ -58,8 +57,8 @@ class LoadArticlesCommand extends ContainerAwareCommand
             $page->addChild($block);
             $blocks = $this->getBlocks($data['blocks']);
             $this->populateBlocks($page, $blocks);
-            $this->getManager()->persist($page);
-            $this->getManager()->flush();
+            $this->getDocumentManager()->persist($page);
+            $this->getDocumentManager()->flush();
 
             $article = $this->getContainer()->get('app.repository.article')->findOneBy(['documentId' => $page->getId()]);
 
@@ -93,10 +92,10 @@ class LoadArticlesCommand extends ContainerAwareCommand
                     ->setAuthor($author);
             }
 
-            $this->getArticleManager()->persist($article);
-            $this->getArticleManager()->flush();
-            $this->getArticleManager()->detach($article);
-            $this->getArticleManager()->clear();
+            $this->getManager()->persist($article);
+            $this->getManager()->flush();
+            $this->getManager()->detach($article);
+            $this->getManager()->clear();
         }
     }
 
@@ -128,8 +127,6 @@ class LoadArticlesCommand extends ContainerAwareCommand
             $mainImage
                 ->setParentDocument($articleDocument)
                 ->setImage($image);
-
-            // $this->getManager()->persist($mainImage);
 
             $articleDocument
                 ->setMainImage($mainImage);
@@ -165,84 +162,6 @@ class LoadArticlesCommand extends ContainerAwareCommand
         return $block;
     }
 
-    protected function populateBlocks(ArticleContent $page, array $blocks)
-    {
-        foreach ($blocks as $data) {
-            $block = $this->createOrReplaceBlock($page, $data);
-            $block
-                ->setParentDocument($page);
-            if (isset($data['image'])) {
-                $this->createOrReplaceImagineBlock($block, $data);
-            }
-
-            $this->getManager()->persist($block);
-            $this->getManager()->persist($page);
-            $this->getManager()->flush();
-        }
-    }
-
-    /**
-     * @param ArticleContent $page
-     * @param array $data
-     * @return SingleImageBlock
-     */
-    protected function createOrReplaceBlock(ArticleContent $page, array $data)
-    {
-        $name = 'block' . $data['id'];
-
-        $block = $this
-            ->getSingleImageBlockRepository()
-            ->findOneBy(array('name' => $name));
-
-        if (null === $block) {
-            $block = new SingleImageBlock();
-        }
-
-        $bbcode2html = new Bbcode2Html();
-        $body = $data['body'];
-        $body = $bbcode2html
-            ->setBody($body)
-            ->getFilteredBody();
-
-        $block
-            ->setImagePosition($data['image_position'])
-            ->setTitle($data['title'])
-            ->setBody($body)
-            ->setName($name)
-            ->setClass($data['class'] ?: null)
-            ->setPublishable(true);
-
-        return $block;
-    }
-
-    protected function createOrReplaceImagineBlock(SingleImageBlock $block, array $data)
-    {
-        $name = 'image' . $data['id'];
-
-        if (false === $block->hasChildren()) {
-            $imagineBlock = new ImagineBlock();
-            $block
-                ->addChild($imagineBlock);
-        } else {
-            /** @var ImagineBlock $imagineBlock */
-            $imagineBlock = $block->getChildren()->first();
-        }
-
-        $image = new Image();
-        $image->setFileContent(file_get_contents($this->getImageOriginalPath($data['image'])));
-        $image->setName($data['image']);
-
-        $imagineBlock
-            ->setName($name)
-            ->setParentDocument($block)
-            ->setImage($image)
-            ->setLabel($data['image_label']);
-
-        $this->getManager()->persist($imagineBlock);
-
-        return $imagineBlock;
-    }
-
     /**
      * @param string $name
      * @return ArticleContent
@@ -262,12 +181,12 @@ class LoadArticlesCommand extends ContainerAwareCommand
     protected function getParent()
     {
         $contentBasepath = '/cms/pages/articles';
-        $parent = $this->getManager()->find(null, $contentBasepath);
+        $parent = $this->getDocumentManager()->find(null, $contentBasepath);
 
         if (null === $parent) {
-            $session = $this->getManager()->getPhpcrSession();
+            $session = $this->getDocumentManager()->getPhpcrSession();
             NodeHelper::createPath($session, $contentBasepath);
-            $parent = $this->getManager()->find(null, $contentBasepath);
+            $parent = $this->getDocumentManager()->find(null, $contentBasepath);
         }
 
         return $parent;
@@ -282,37 +201,8 @@ class LoadArticlesCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return DocumentRepository
+     * @return array
      */
-    public function getSingleImageBlockRepository()
-    {
-        return $this->getContainer()->get('app.repository.single_image_block');
-    }
-
-    /**
-     * @return DocumentManager
-     */
-    public function getManager()
-    {
-        return $this->getContainer()->get('app.manager.article_content');
-    }
-
-    /**
-     * @return EntityManager
-     */
-    protected function getArticleManager()
-    {
-        return $this->getContainer()->get('app.manager.article');
-    }
-
-    /**
-     * @return \Doctrine\DBAL\Connection
-     */
-    protected function getDatabaseConnection()
-    {
-        return $this->getContainer()->get('database_connection');
-    }
-
     protected function getArticles()
     {
         $query = <<<EOM
@@ -380,13 +270,14 @@ EOM;
 
         return $this->getDatabaseConnection()->fetchAll($query);
     }
-
+    
     /**
-     * @param string $path
-     * @return string
+     * @return EntityManager
      */
-    protected function getImageOriginalPath($path)
+    protected function getManager()
     {
-        return "http://www.jedisjeux.net/img/800/" . $path;
+        return $this->getContainer()->get('app.manager.article');
     }
+
+
 }
