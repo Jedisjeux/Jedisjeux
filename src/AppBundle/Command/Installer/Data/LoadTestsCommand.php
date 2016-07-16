@@ -93,6 +93,7 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
             $this->getManager()->persist($article);
             $this->getManager()->flush();
             $this->getManager()->clear();
+            $this->getDocumentManager()->clear();
         }
     }
 
