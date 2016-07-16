@@ -13,11 +13,11 @@ namespace AppBundle\Command\Installer\Data;
 
 use AppBundle\Document\ArticleContent;
 use AppBundle\Document\BlockquoteBlock;
+use AppBundle\Entity\Article;
 use Doctrine\ODM\PHPCR\Document\Generic;
 use Doctrine\ODM\PHPCR\DocumentRepository;
+use Doctrine\ORM\EntityManager;
 use PHPCR\Util\NodeHelper;
-use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
-use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -49,9 +49,50 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
             $page = $this->createOrReplaceTest($data);
             $block = $this->createOrReplaceIntroductionBlock($page, $data);
             $page->addChild($block);
+            $blocks = [
+                [
+                    'id' => $data['name'].'0',
+                    'body' => $data['material'],
+                    'image_position' => 'left',
+                    'image_label' => null,
+                    'image' => $data['material_image_path'],
+                    'title' => 'Matériel',
+                    'class' => null,
+                ], [
+                    'id' => $data['name'].'1',
+                    'body' => $data['rules'],
+                    'image_position' => 'right',
+                    'image_label' => null,
+                    'image' => $data['rules_image_path'],
+                    'title' => 'Règles',
+                    'class' => null,
+                ], [
+                    'id' => $data['name'].'2',
+                    'body' => $data['lifetime'],
+                    'image_position' => 'center',
+                    'image_label' => null,
+                    'image' => $data['lifetime_image_path'],
+                    'title' => 'Durée de vie',
+                    'class' => null,
+                ]
+            ];
+            $this->populateBlocks($page, $blocks);
 
             $this->getDocumentManager()->persist($page);
             $this->getDocumentManager()->flush();
+
+            $article = $this->getContainer()->get('app.repository.article')->findOneBy(['documentId' => $page->getId()]);
+
+            if (null === $article) {
+                /** @var Article $article */
+                $article = $this->getContainer()->get('app.factory.article')->createNew();
+                $article
+                    ->setDocument($page);
+            }
+
+            $this->getManager()->persist($article);
+            $this->getManager()->flush();
+            $this->getManager()->clear();
         }
     }
 
@@ -138,6 +179,14 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
     }
 
     /**
+     * @return EntityManager
+     */
+    protected function getManager()
+    {
+        return $this->getContainer()->get('app.manager.article');
+    }
+
+    /**
      * @return array
      */
     protected function getTests()
@@ -147,12 +196,17 @@ select test.game_id as id,
        test.date as publishedAt,
        product.id as product_id,
        productTranslation.name as product_name,
-       concat('Test de ', productTranslation.name) as name,
+       concat('Test de ', productTranslation.name) as title,
+       concat('test-de-', productTranslation.slug) as name,
        topic.id as topic_id,
        customer.id as author_id,
        test.intro as introduction,
        test.materiel as material,
-       test.regle as rules
+       test.regle as rules,
+       test.duree_vie as lifetime,
+       material_image.img_nom as material_image_path,
+       rules_image.img_nom as rules_image_path,
+       lifetime_image.img_nom as lifetime_image_path
 from jedisjeux.jdj_tests test
   inner join sylius_product_variant productVariant
     on productVariant.code = concat('game-', test.game_id)
@@ -165,7 +219,24 @@ from jedisjeux.jdj_tests test
     on topic.id = test.topic_id
   inner join sylius_customer customer
     on customer.code = concat('user-', test.user_id)
-limit 5;
+  left join jedisjeux.jdj_images_elements material_img
+        on material_img.elem_type = 'test'  
+        and material_img.elem_id = test.game_id
+        and material_img.ordre = 1
+  left join jedisjeux.jdj_images material_image
+        on material_image.img_id = material_img.img_id
+  left join jedisjeux.jdj_images_elements rules_img
+        on rules_img.elem_type = 'test'  
+        and rules_img.elem_id = test.game_id
+        and rules_img.ordre = 2
+  left join jedisjeux.jdj_images rules_image
+        on rules_image.img_id = rules_img.img_id
+  left join jedisjeux.jdj_images_elements lifetime_img
+        on lifetime_img.elem_type = 'test'  
+        and lifetime_img.elem_id = test.game_id
+        and lifetime_img.ordre = 3
+  left join jedisjeux.jdj_images lifetime_image
+        on lifetime_image.img_id = lifetime_img.img_id
 EOM;
 
         return $this->getDatabaseConnection()->fetchAll($query);
