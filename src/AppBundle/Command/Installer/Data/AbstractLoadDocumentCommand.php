@@ -32,20 +32,21 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
     protected function populateBlocks(ArticleContent $page, array $blocks)
     {
         foreach ($blocks as $data) {
-            $block = $this->createOrReplaceBlock($data);
+            $block = $this->createOrReplaceBlock($page, $data);
             $page->addChild($block);
             if (isset($data['image'])) {
                 $this->createOrReplaceImagineBlock($block, $data);
             }
         }
     }
-    
+
     /**
+     * @param ArticleContent $page
      * @param array $data
      *
      * @return SingleImageBlock
      */
-    protected function createOrReplaceBlock(array $data)
+    protected function createOrReplaceBlock(ArticleContent $page, array $data)
     {
         $name = 'block' . $data['id'];
 
@@ -55,6 +56,8 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
 
         if (null === $block) {
             $block = new SingleImageBlock();
+            $block
+                ->setParentDocument($page);
         }
 
         $bbcode2html = new Bbcode2Html();
