@@ -18,6 +18,7 @@ use Doctrine\ODM\PHPCR\Document\Generic;
 use Doctrine\ODM\PHPCR\DocumentRepository;
 use Doctrine\ORM\EntityManager;
 use PHPCR\Util\NodeHelper;
+use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -121,7 +122,7 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
 
         $articleDocument->setName($data['name']);
         $articleDocument->setTitle($data['title']);
-        $articleDocument->setPublishable(true);
+        $articleDocument->setPublishable((bool)$data['published']);
         $articleDocument->setPublishStartDate(\DateTime::createFromFormat('Y-m-d H:i:s', $data['publishedAt']));
 
         return $articleDocument;
@@ -213,6 +214,7 @@ select test.game_id as id,
        test.materiel as material,
        test.regle as rules,
        test.duree_vie as lifetime,
+       test.valid as published,
        material_image.img_nom as material_image_path,
        rules_image.img_nom as rules_image_path,
        lifetime_image.img_nom as lifetime_image_path
