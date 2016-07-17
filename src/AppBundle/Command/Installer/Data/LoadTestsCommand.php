@@ -19,6 +19,8 @@ use Doctrine\ODM\PHPCR\DocumentRepository;
 use Doctrine\ORM\EntityManager;
 use PHPCR\Util\NodeHelper;
 use Sylius\Component\Product\Model\ProductInterface;
+use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
+use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -120,6 +122,25 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
                 ->setParentDocument($this->getParent());
         }
 
+        if (null !== $data['main_image']) {
+            $mainImage = $articleDocument->getMainImage();
+
+            if (null === $mainImage) {
+                $mainImage = new ImagineBlock();
+            }
+
+
+            $image = new Image();
+            $image->setFileContent(file_get_contents($this->getImageOriginalPath($data['main_image'])));
+
+            $mainImage
+                ->setParentDocument($articleDocument)
+                ->setImage($image);
+
+            $articleDocument
+                ->setMainImage($mainImage);
+        }
+
         $articleDocument->setName($data['name']);
         $articleDocument->setTitle($data['title']);
         $articleDocument->setPublishable((bool)$data['published']);
@@ -206,6 +227,7 @@ select test.game_id as id,
        test.date as publishedAt,
        product.id as product_id,
        productTranslation.name as product_name,
+       game.couverture as main_image,
        concat('Test de ', productTranslation.name) as title,
        concat('test-de-', productTranslation.slug) as name,
        topic.id as topic_id,
@@ -219,6 +241,8 @@ select test.game_id as id,
        rules_image.img_nom as rules_image_path,
        lifetime_image.img_nom as lifetime_image_path
 from jedisjeux.jdj_tests test
+  inner join jedisjeux.jdj_game game
+    on game.id = test.game_id
   inner join sylius_product_variant productVariant
     on productVariant.code = concat('game-', test.game_id)
   inner join sylius_product product
