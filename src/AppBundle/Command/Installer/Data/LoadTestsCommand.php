@@ -90,6 +90,14 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
                     ->setDocument($page);
             }
 
+            if (null !== $data['product_id']) {
+                /** @var ProductInterface $product */
+                $product = $this->getContainer()->get('sylius.repository.product')->find($data['product_id']);
+
+                $article
+                    ->setProduct($product);
+            }
+
             $this->getManager()->persist($article);
             $this->getManager()->flush();
             $this->getManager()->clear();
@@ -238,6 +246,8 @@ from jedisjeux.jdj_tests test
         and lifetime_img.ordre = 3
   left join jedisjeux.jdj_images lifetime_image
         on lifetime_image.img_id = lifetime_img.img_id
+  order by test.date desc
+  limit 10
 EOM;
 
         return $this->getDatabaseConnection()->fetchAll($query);
