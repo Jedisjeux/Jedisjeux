@@ -45,3 +45,28 @@
         {% endif %}
     {% endfor %}
 {% endmacro %}
+
+{% macro sidebarList(taxons, routeName, currentTaxon) %}
+    <ul class="list-6">
+        {% for taxon in taxons %}
+
+            {#TODO improve for multi-levels of children#}
+            {% set is_parent = currentTaxon and (taxon == currentTaxon or (taxon.hasChild(currentTaxon))) %}
+
+            <li>
+                <a href="{{ path(routeName, { 'permalink': taxon.permalink }) }}">
+                    {% if is_parent %}
+                    <strong>
+                        {% endif %}
+                        {{ taxon }}
+                        {% if is_parent %}
+                    </strong>
+                    {% endif %}
+                </a>
+                {% if (is_parent and taxon.children|length > 0) %}
+                    {{ _self.sidebarList(taxon.children, routeName, currentTaxon) }}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endmacro %}
