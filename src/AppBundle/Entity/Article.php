@@ -10,9 +10,12 @@ namespace AppBundle\Entity;
 
 use AppBundle\Document\ArticleContent;
 use AppBundle\Model\Identifiable;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\Review\Model\ReviewableInterface;
+use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 
 /**
@@ -21,7 +24,7 @@ use Sylius\Component\User\Model\CustomerInterface;
  * @ORM\Entity
  * @ORM\Table(name="jdj_article")
  */
-class Article implements ResourceInterface
+class Article implements ResourceInterface, ReviewableInterface
 {
     use Identifiable;
 
@@ -58,6 +61,29 @@ class Article implements ResourceInterface
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
     protected $topic;
+
+    /**
+     * @var ArrayCollection|ArticleReview[]
+     *
+     * @ORM\OneToMany(targetEntity="ArticleReview", mappedBy="reviewSubject")
+     */
+    protected $reviews;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(type="float")
+     */
+    protected $averageRating = 0;
+
+    /**
+     * Article constructor.
+     */
+    public function __construct()
+    {
+        $this->reviews = new ArrayCollection();
+    }
+
 
     /**
      * @return int
@@ -158,4 +184,68 @@ class Article implements ResourceInterface
 
         return $this;
     }
+
+    /**
+     * @return ArticleReview[]|ArrayCollection
+     */
+    public function getReviews()
+    {
+        return $this->reviews;
+    }
+
+    /**
+     * @param ReviewInterface $review
+     *
+     * @return $this
+     */
+    public function addReview(ReviewInterface $review)
+    {
+        if (!$this->reviews->contains($review)) {
+            $review->setReviewSubject($this);
+            $this->reviews->add($review);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param ReviewInterface $review
+     *
+     * @return $this
+     */
+    public function removeReview(ReviewInterface $review)
+    {
+        $this->reviews->remove($review);
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getAverageRating()
+    {
+        return $this->averageRating;
+    }
+
+    /**
+     * @param float $averageRating
+     *
+     * @return $this
+     */
+    public function setAverageRating($averageRating)
+    {
+        $this->averageRating = $averageRating;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->getDocument()->getTitle();
+    }
+
 }

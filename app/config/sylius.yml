@@ -93,7 +93,6 @@ sylius_review:
                     form:
                         admin: AppBundle\Form\Type\ProductReviewType
                         default: AppBundle\Form\Type\ProductReviewType
-
 sylius_user:
     resources:
         user:
@@ -110,6 +109,9 @@ sylius_resource:
         app.article:
             classes:
                 model: AppBundle\Entity\Article
+        app.article_review:
+            classes:
+                model: AppBundle\Entity\ArticleReview
         app.article_content:
             driver: doctrine/phpcr-odm
             classes:
