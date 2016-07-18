@@ -2,6 +2,7 @@
 
 {% from 'macros/posts.html.twig' import blogCommentItem %}
 {% import 'macros/items.html.twig' as item %}
+{% from 'macros/game_reviews.html.twig' import blogCommentItem %}
 
 {% set topic = article.topic %}
 
@@ -40,6 +41,13 @@
             {% if article.author %}
                 {{ item.blogAuthor(article.author, null, article.document.publishStartDate) }}
             {% endif %}
+
+            <div class="blog-comments">
+                {% for review in article.reviews %}
+                    {{ blogCommentItem(review) }}
+                {% endfor %}
+            </div>
+
 
             {% if topic %}
                 <div class="block-heading-two">
