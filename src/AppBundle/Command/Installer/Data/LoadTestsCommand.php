@@ -19,6 +19,7 @@ use Doctrine\ODM\PHPCR\DocumentRepository;
 use Doctrine\ORM\EntityManager;
 use PHPCR\Util\NodeHelper;
 use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
 use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
 use Symfony\Component\Console\Input\InputInterface;
@@ -101,10 +102,17 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
                     ->setProduct($product);
             }
 
+            if (null !== $data['author_id']) {
+                /** @var CustomerInterface $author */
+                $author = $this->getContainer()->get('sylius.repository.customer')->find($data['author_id']);
+                $article
+                    ->setAuthor($author);
+            }
+
             $this->getManager()->persist($article);
             $this->getManager()->flush();
-            $this->getManager()->clear();
             $this->getDocumentManager()->clear();
+            $this->getManager()->clear();
         }
     }
 
