@@ -13,13 +13,14 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Review\Model\Review;
+use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  *
  * @ORM\Entity
- * @ORM\Table(name="app_article_review")
+ * @ORM\Table(name="jdj_article_review")
  */
 class ArticleReview extends Review
 {
@@ -29,6 +30,13 @@ class ArticleReview extends Review
      * @ORM\ManyToOne(targetEntity="Article", inversedBy="reviews")
      */
     protected $reviewSubject;
+
+    /**
+     * @var ReviewerInterface
+     *
+     * @ORM\ManyToOne(targetEntity="Customer")
+     */
+    protected $author;
 
     /**
      * ProductReview constructor.
