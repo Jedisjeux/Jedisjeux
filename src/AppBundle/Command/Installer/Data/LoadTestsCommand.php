@@ -14,6 +14,7 @@ namespace AppBundle\Command\Installer\Data;
 use AppBundle\Document\ArticleContent;
 use AppBundle\Document\BlockquoteBlock;
 use AppBundle\Entity\Article;
+use AppBundle\Entity\Topic;
 use Doctrine\ODM\PHPCR\Document\Generic;
 use Doctrine\ODM\PHPCR\DocumentRepository;
 use Doctrine\ORM\EntityManager;
@@ -55,7 +56,7 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
             $page->addChild($block);
             $blocks = [
                 [
-                    'id' => $data['name'].'0',
+                    'id' => $data['name'] . '0',
                     'body' => $data['material'],
                     'image_position' => 'left',
                     'image_label' => null,
@@ -63,7 +64,7 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
                     'title' => 'Matériel',
                     'class' => null,
                 ], [
-                    'id' => $data['name'].'1',
+                    'id' => $data['name'] . '1',
                     'body' => $data['rules'],
                     'image_position' => 'right',
                     'image_label' => null,
@@ -71,7 +72,7 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
                     'title' => 'Règles',
                     'class' => null,
                 ], [
-                    'id' => $data['name'].'2',
+                    'id' => $data['name'] . '2',
                     'body' => $data['lifetime'],
                     'image_position' => 'center',
                     'image_label' => null,
@@ -102,12 +103,25 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
                     ->setProduct($product);
             }
 
+            if (null !== $data['topic_id']) {
+                /** @var Topic $topic */
+                $topic = $this->getContainer()->get('app.repository.topic')->find($data['topic_id']);
+
+                $article
+                    ->setTopic($topic);
+            }
+
             if (null !== $data['author_id']) {
                 /** @var CustomerInterface $author */
                 $author = $this->getContainer()->get('sylius.repository.customer')->find($data['author_id']);
                 $article
                     ->setAuthor($author);
             }
+
+            $article
+                ->setMaterialRating($data['materialRating'])
+                ->setRulesRating($data['rulesRating'])
+                ->setLifetimeRating($data['lifetimeRating']);
 
             $this->getManager()->persist($article);
             $this->getManager()->flush();
@@ -244,6 +258,9 @@ select test.game_id as id,
        test.materiel as material,
        test.regle as rules,
        test.duree_vie as lifetime,
+       test.note_materiel/2 as materialRating,
+       test.note_regle/2 as rulesRating,
+       test.note_duree_vie/2 as lifetimeRating,
        test.valid as published,
        material_image.img_nom as material_image_path,
        rules_image.img_nom as rules_image_path,

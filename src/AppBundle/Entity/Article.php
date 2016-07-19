@@ -77,6 +77,27 @@ class Article implements ResourceInterface, ReviewableInterface
     protected $averageRating = 0;
 
     /**
+     * @var float
+     *
+     * @ORM\Column(type="float")
+     */
+    protected $materialRating = 0;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(type="float")
+     */
+    protected $rulesRating = 0;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(type="float")
+     */
+    protected $lifetimeRating = 0;
+
+    /**
      * Article constructor.
      */
     public function __construct()
@@ -236,6 +257,66 @@ class Article implements ResourceInterface, ReviewableInterface
     public function setAverageRating($averageRating)
     {
         $this->averageRating = $averageRating;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getMaterialRating()
+    {
+        return $this->materialRating;
+    }
+
+    /**
+     * @param float $materialRating
+     *
+     * @return $this
+     */
+    public function setMaterialRating($materialRating)
+    {
+        $this->materialRating = $materialRating;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getRulesRating()
+    {
+        return $this->rulesRating;
+    }
+
+    /**
+     * @param float $rulesRating
+     *
+     * @return $this
+     */
+    public function setRulesRating($rulesRating)
+    {
+        $this->rulesRating = $rulesRating;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLifetimeRating()
+    {
+        return $this->lifetimeRating;
+    }
+
+    /**
+     * @param float $lifetimeRating
+     *
+     * @return $this
+     */
+    public function setLifetimeRating($lifetimeRating)
+    {
+        $this->lifetimeRating = $lifetimeRating;
 
         return $this;
     }
