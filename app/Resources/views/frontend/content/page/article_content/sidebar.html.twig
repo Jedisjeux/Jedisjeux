@@ -5,24 +5,23 @@
 
         <div class="s-widget">
             <h5>Note</h5>
-            <div class="widget-content search">
-                <ul class="list-unstyled">
-                    <li>
-                        <div class="icon-box-4">
-                            <div class="icon-box-4-item">
-                                <a href="#" class="icon-box-4-icon bg-yellow"> <i class="fa fa-star"></i> </a>
-                                <h4>{{ article.averageRating|round(1) }}</h4>
+            <div class="widget-content">
+                <div class="icon-box-1 text-center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <!-- Icon Box One Item -->
+                                <div class="icon-box-1-item">
+                                    <!-- Icon Box One Icon -->
+                                    <a href="#"><i class="fa fa-star yellow"></i></a>
+                                    <!-- Icon Box One Headeing -->
+                                    <strong>{{ article.averageRating|round(1) }}/10</strong>
+                                </div>
                             </div>
                         </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
+                    </div>
 
-        <div class="s-widget">
-            <h5>Notes par critères</h5>
-            <!-- Widgets Content -->
-            <div class="widget-content search">
+                </div>
                 <ul class="list-unstyled">
                     <li>
                         <div class="col-md-6">
@@ -31,7 +30,8 @@
                         </div>
                         <div class="col-md-6">
                             <div class="rating-container">
-                                <div class="rating yellow" data-readonly="true" data-rate-value="{{ article.materialRating }}"
+                                <div class="rating yellow" data-readonly="true"
+                                     data-rate-value="{{ article.materialRating }}"
                                      data-step-size="0.5"></div>
                             </div>
                         </div>
@@ -43,7 +43,8 @@
                         </div>
                         <div class="col-md-6">
                             <div class="rating-container">
-                                <div class="rating yellow" data-readonly="true" data-rate-value="{{ article.rulesRating }}"
+                                <div class="rating yellow" data-readonly="true"
+                                     data-rate-value="{{ article.rulesRating }}"
                                      data-step-size="0.5"></div>
                             </div>
                         </div>
@@ -55,15 +56,23 @@
                         </div>
                         <div class="col-md-6">
                             <div class="rating-container">
-                                <div class="rating yellow" data-readonly="true" data-rate-value="{{ article.lifetimeRating }}"
+                                <div class="rating yellow" data-readonly="true"
+                                     data-rate-value="{{ article.lifetimeRating }}"
                                      data-step-size="0.5"></div>
                             </div>
                         </div>
                     </li>
                 </ul>
             </div>
+
+            <div class="clearfix"></div>
         </div>
+        <hr>
+
     {% endif %}
+
+
+
 
     <!-- Tag Widget -->
     <div class="s-widget">

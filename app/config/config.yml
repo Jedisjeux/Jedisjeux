@@ -43,7 +43,7 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ "FOSCommentBundle", "MopaBootstrapBundle", "CmfCreateBundle" ]
+    bundles:        [ "MopaBootstrapBundle", "CmfCreateBundle" ]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -171,15 +171,6 @@ white_october_pagerfanta:
     exceptions_strategy:
         out_of_range_page:        to_http_not_found
         not_valid_current_page:   to_http_not_found
-
-fos_comment:
-    db_driver: orm
-    class:
-        model:
-            comment: JDJ\CommentBundle\Entity\Comment
-            thread: JDJ\CommentBundle\Entity\Thread
-            vote: JDJ\CommentBundle\Entity\Vote
-
 
 services:
   gedmo.listener.blameable:
