@@ -298,7 +298,6 @@ from jedisjeux.jdj_tests test
   left join jedisjeux.jdj_images lifetime_image
         on lifetime_image.img_id = lifetime_img.img_id
   order by test.date desc
-  limit 10
 EOM;
 
         return $this->getDatabaseConnection()->fetchAll($query);
