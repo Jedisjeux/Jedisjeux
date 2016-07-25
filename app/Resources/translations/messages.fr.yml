@@ -35,6 +35,16 @@ label:
   your_rate: Votre note
   zone: Zone
 
+emails:
+    ending: Cordialement
+    signature: "L'équipe Jedisjeux"
+    user_password_reset:
+        subject: Réinitialisation du mot de passe
+        content:  "Pour réinitialiser votre mot de passe cliquez <a href='%LINK%'>ici</a>. <br/><br/> Si vous rencontrez un soucis, copier coller le lien suivant : %LINK%"
+    user_registration:
+        subject: Bienvenue sur AppName
+        content:  "Merci d'avoir créé un compte sur Jedisjeux"
+
 
 #        <trans-unit id="17ac1e4a2a3435442a0841898d9a519162ac2533" resname="label.create">
 #          <source>label.create</source>

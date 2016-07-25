@@ -9,6 +9,13 @@ services:
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
     # <!-- Subscribers -->
+    app.subscriber.send_registration_email:
+        class: AppBundle\EventSubscriber\SendRegistrationEmailSubscriber
+        arguments:
+            - @sylius.email_sender
+        tags:
+            - { name: kernel.event_subscriber }
+
     app.subscriber.bill:
         class: JDJ\ComptaBundle\EventSubscriber\BillSubscriber
         arguments:

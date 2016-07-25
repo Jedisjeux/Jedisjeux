@@ -2,12 +2,14 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-    - { resource: sylius.yml }
+    - { resource: app/main.yml }
 
 parameters:
     knp.doctrine_behaviors.blameable_subscriber.user_entity: Sylius\Component\User\Model\User
     locale: fr
     sylius.locale: "%locale%"
+    email_sender: jedisjeux@jedisjeux.net
+    email_name: Contact Jedisjeux
 
 framework:
     #esi:             ~
