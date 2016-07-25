@@ -9,6 +9,13 @@ services:
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
     # <!-- Subscribers -->
+    app.subscriber.add_topic_follower:
+        class: AppBundle\EventSubscriber\AddTopicFollowerSubscriber
+        arguments:
+            - @sylius.context.customer
+        tags:
+            - { name: kernel.event_subscriber }
+
     app.subscriber.send_registration_email:
         class: AppBundle\EventSubscriber\SendRegistrationEmailSubscriber
         arguments:

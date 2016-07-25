@@ -18,6 +18,7 @@ label:
   create: Créer
   created_at: Créé le
   duration: Durée
+  hello: Bonjour
   label: Libellé
   main: Principale
   material: Matériel

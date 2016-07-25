@@ -177,6 +177,9 @@ sylius_resource:
                 repository: AppBundle\Repository\TopicRepository
                 form:
                     default: AppBundle\Form\Type\TopicType
+        app.topic_follower:
+            classes:
+                model: AppBundle\Entity\TopicFollower
         app.post:
             classes:
                 model: AppBundle\Entity\Post

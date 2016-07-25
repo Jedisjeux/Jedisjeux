@@ -15,6 +15,7 @@ use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Component\User\Model\CustomerInterface;
 
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
@@ -72,11 +73,20 @@ class Topic implements ResourceInterface
     protected $article;
 
     /**
+     * @var ArrayCollection|CustomerInterface[]
+     *
+     * @ORM\ManyToMany(targetEntity="Sylius\Component\User\Model\CustomerInterface", cascade={"persist", "remove"})
+     * @ORM\JoinTable(name="jdj_topic_follower")
+     */
+    protected $followers;
+
+    /**
      * Topic constructor.
      */
     public function __construct()
     {
         $this->posts = new ArrayCollection();
+        $this->followers = new ArrayCollection();
     }
 
     /**
@@ -210,6 +220,40 @@ class Topic implements ResourceInterface
     public function setArticle($article)
     {
         $this->article = $article;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection|\Sylius\Component\User\Model\CustomerInterface[]
+     */
+    public function getFollowers()
+    {
+        return $this->followers;
+    }
+
+    /**
+     * @param CustomerInterface $follower
+     *
+     * @return $this
+     */
+    public function addFollower(CustomerInterface $follower)
+    {
+        if (!$this->followers->contains($follower)) {
+            $this->followers->add($follower);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param CustomerInterface $follower
+     *
+     * @return $this
+     */
+    public function removeFollower(CustomerInterface $follower)
+    {
+        $this->followers->remove($follower);
 
         return $this;
     }
