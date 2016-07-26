@@ -8,6 +8,8 @@
 
 namespace AppBundle\Form\Type;
 
+use AppBundle\Entity\Taxon;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -30,6 +32,23 @@ class TopicType extends AbstractType
             ))
             ->add('mainPost', 'app_post',  array(
                 'label' => false,
+            ))
+            ->add('mainTaxon', 'entity', array(
+                'label' => 'label.category',
+                'class' => 'AppBundle:Taxon',
+                'choice_label' => 'name',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('o')
+                        ->join('o.root', 'rootTaxon')
+                        ->where('rootTaxon.code = :code')
+                        ->andWhere('o.parent IS NOT NULL')
+                        ->setParameter('code', Taxon::CODE_FORUM)
+                        ->orderBy('o.left');
+                },
+                'expanded' => false,
+                'multiple' => false,
+                'placeholder' => 'Choisissez une catégorie',
+                'required' => false,
             ));
     }
 

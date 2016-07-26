@@ -8,6 +8,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Taxon;
 use AppBundle\Repository\TaxonRepository;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
@@ -27,7 +28,7 @@ class PostController extends ResourceController
         $this->isGrantedOr403($configuration, ResourceActions::INDEX);
 
         /** @var TaxonTranslationInterface $rootTaxon */
-        $rootTaxon = $this->getTaxonRepository()->findOneBy(array('code' => 'forum'));
+        $rootTaxon = $this->getTaxonRepository()->findOneBy(array('code' => Taxon::CODE_FORUM));
 
         $criteria = $configuration->getCriteria();
         $topic = $this->get('app.repository.topic')->find($criteria['topic']);

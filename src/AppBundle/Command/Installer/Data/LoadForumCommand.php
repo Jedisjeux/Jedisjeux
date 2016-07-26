@@ -9,8 +9,10 @@
 namespace AppBundle\Command\Installer\Data;
 
 use AppBundle\Entity\Post;
+use AppBundle\Entity\Taxon;
 use AppBundle\Repository\TaxonRepository;
 use AppBundle\TextFilter\Bbcode2Html;
+use AppBundle\Updater\TopicCountByTaxonUpdater;
 use Doctrine\ORM\EntityManager;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\Factory;
@@ -41,15 +43,16 @@ class LoadForumCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln("<comment>" . $this->getDescription() . "</comment>");
-        $this->deletePosts();
-        $this->deleteTopics();
-        $this->loadTopics();
-        $this->loadPosts();
-        $this->bbcode2Html();
-        $rootTaxon = $this->createOrReplaceRootTaxon();
-        $this->deleteTaxons($rootTaxon);
-        $this->loadTaxons($rootTaxon);
-        $this->setTopicsMainTaxon();
+//        $this->deletePosts();
+//        $this->deleteTopics();
+//        $this->loadTopics();
+//        $this->loadPosts();
+//        $this->bbcode2Html();
+//        $rootTaxon = $this->createOrReplaceRootTaxon();
+//        $this->deleteTaxons($rootTaxon);
+//        $this->loadTaxons($rootTaxon);
+//        $this->setTopicsMainTaxon();
+        $this->calculateTopicCountByTaxon();
     }
 
     /**
@@ -131,13 +134,13 @@ EOM;
         /** @var TaxonInterface $taxon */
         $taxon = $this->getContainer()
             ->get('sylius.repository.taxon')
-            ->findOneBy(array('code' => 'forum'));
+            ->findOneBy(array('code' => Taxon::CODE_FORUM));
 
         if (null === $taxon) {
             $taxon = $this->getTaxonFactory()->createNew();
         }
 
-        $taxon->setCode('forum');
+        $taxon->setCode(Taxon::CODE_FORUM);
         $taxon->setName('forum');
 
         /** @var EntityManager $manager */
@@ -172,6 +175,18 @@ delete from jdj_topic;
 EOM;
 
         $this->getDatabaseConnection()->executeQuery($query);
+    }
+
+    public function calculateTopicCountByTaxon()
+    {
+        $taxons = $this->getTaxonRepository()->findChildrenByRootCode(Taxon::CODE_FORUM);
+
+        foreach ($taxons as $taxon) {
+            $this->getTopicCountByTaxonUpdater()->update($taxon);
+            $this->getManager()->flush();
+        }
+
+        $this->getManager()->clear();
     }
 
     /**
@@ -269,6 +284,22 @@ EOM;
             $this->getPostManager()->flush($post);
             $this->getPostManager()->clear($post);
         }
+    }
+
+    /**
+     * @return TopicCountByTaxonUpdater
+     */
+    protected function getTopicCountByTaxonUpdater()
+    {
+        return $this->getContainer()->get('app.updater.topic_count_by_taxon');
+    }
+
+    /**
+     * @return EntityManager
+     */
+    protected function getManager()
+    {
+        return $this->getContainer()->get('doctrine.orm.entity_manager');
     }
 
     /**

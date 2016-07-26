@@ -19,4 +19,38 @@ use Sylius\Component\Taxonomy\Model\Taxon as BaseTaxon;
  */
 class Taxon extends BaseTaxon
 {
+    const CODE_FORUM = 'forum';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer")
+     */
+    protected $topicCount;
+
+    /**
+     * Taxon constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->topicCount = 0;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTopicCount()
+    {
+        return $this->topicCount;
+    }
+
+    /**
+     * @param int $topicCount
+     */
+    public function setTopicCount($topicCount)
+    {
+        $this->topicCount = $topicCount;
+    }
 }

@@ -8,6 +8,18 @@ services:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
+    # <!-- calculators -->
+    app.calculator.topic_count_by_taxon:
+        class: AppBundle\Calculator\TopicCountByTaxonCalculator
+        arguments:
+            - @app.repository.topic
+
+    # <!-- updaters -->
+    app.updater.topic_count_by_taxon:
+        class: AppBundle\Updater\TopicCountByTaxonUpdater
+        arguments:
+            - @app.calculator.topic_count_by_taxon
+
     # <!-- Subscribers -->
     app.subscriber.add_topic_follower:
         class: AppBundle\EventSubscriber\AddTopicFollowerSubscriber
@@ -29,6 +41,13 @@ services:
         class: AppBundle\EventSubscriber\SendRegistrationEmailSubscriber
         arguments:
             - @sylius.email_sender
+        tags:
+            - { name: kernel.event_subscriber }
+
+    app.subscriber.calculate_topic_count_by_taxon:
+        class: AppBundle\EventSubscriber\CalculateTopicCountByTaxonSubscriber
+        arguments:
+            - @app.updater.topic_count_by_taxon
         tags:
             - { name: kernel.event_subscriber }
 

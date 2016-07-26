@@ -60,7 +60,7 @@ class TopicRepository extends EntityRepository
     }
 
     /**
-     * Create paginator for products categorized under given taxon.
+     * Create paginator for topics categorized under given taxon.
      *
      * @param TaxonInterface $taxon
      * @param array $criteria
@@ -84,5 +84,29 @@ class TopicRepository extends EntityRepository
         $this->applySorting($queryBuilder, $sorting);
 
         return $this->getPaginator($queryBuilder);
+    }
+
+    /**
+     * Count topics categorized under given taxon.
+     *
+     * @param TaxonInterface $taxon
+     *
+     * @return Pagerfanta
+     */
+    public function countByTaxon(TaxonInterface $taxon)
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder
+            ->select('count(o)')
+            ->innerJoin('o.mainTaxon', 'taxon')
+            ->andWhere($queryBuilder->expr()->orX(
+                'taxon = :taxon',
+                ':left < taxon.left AND taxon.right < :right'
+            ))
+            ->setParameter('taxon', $taxon)
+            ->setParameter('left', $taxon->getLeft())
+            ->setParameter('right', $taxon->getRight());
+
+        return $queryBuilder->getQuery()->getSingleScalarResult();
     }
 }

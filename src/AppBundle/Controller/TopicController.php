@@ -8,6 +8,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Taxon;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use AppBundle\Repository\TaxonRepository;
@@ -33,7 +34,7 @@ class TopicController extends ResourceController
         $this->isGrantedOr403($configuration, ResourceActions::INDEX);
 
         /** @var TaxonInterface $rootTaxon */
-        $rootTaxon = $this->getTaxonRepository()->findOneBy(array('code' => 'forum'));
+        $rootTaxon = $this->getTaxonRepository()->findOneBy(array('code' => Taxon::CODE_FORUM));
 
         $resources = $this->resourcesCollectionProvider->get($configuration, $this->repository);
 
@@ -67,7 +68,7 @@ class TopicController extends ResourceController
         $this->isGrantedOr403($configuration, ResourceActions::INDEX);
 
         /** @var TaxonInterface $rootTaxon */
-        $rootTaxon = $this->getTaxonRepository()->findOneBy(array('code' => 'forum'));
+        $rootTaxon = $this->getTaxonRepository()->findOneBy(array('code' => Taxon::CODE_FORUM));
         /** @var TaxonInterface $taxon */
         $taxon = $this->getTaxonRepository()->findOneBySlug($permalink);
 

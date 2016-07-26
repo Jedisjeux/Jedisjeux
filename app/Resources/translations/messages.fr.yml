@@ -9,6 +9,7 @@ label:
   attributes: Attributs
   body: Corps
   cancel: Annuler
+  category: Catégorie
   categories: Catégories
   categorization: Catégorisation
   city: Ville
