@@ -34,6 +34,7 @@ class Bbcode2Html
         $body = $this->urlReplacement($body);
         $body = $this->boldReplacement($body);
         $body = $this->italicReplacement($body);
+        $body = $this->underlineReplacement($body);
         $body = $this->centerReplacement($body);
         $body = $this->listReplacement($body);
         $body = $this->emptyTagsReplacement($body);
@@ -183,6 +184,18 @@ EOM;
     {
         $pattern = '/\[i:(.*?)\](?P<label>.*?)\[\/i:(.*?)\]/ms';
         $replacement = "<em>$2</em>";
+        $body = preg_replace($pattern, $replacement, $body);
+        return $body;
+    }
+
+    /**
+     * @param string $body
+     * @return string
+     */
+    protected function underlineReplacement($body)
+    {
+        $pattern = '/\[u:(.*?)\](?P<label>.*?)\[\/u:(.*?)\]/ms';
+        $replacement = "<strong>$2</strong>";
         $body = preg_replace($pattern, $replacement, $body);
         return $body;
     }
