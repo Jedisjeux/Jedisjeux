@@ -9,7 +9,7 @@ Feature: Resetting password
       | bobby.cyclette@example.com | password |
     And I am on "/resetting/request-token"
     And I fill in the following:
-      | E-mail | bobby.cyclette@example.com |
+      | Nom d'utilisateur ou email | bobby.cyclette@example.com |
     When I press "Valider"
     Then I should see "vous recevrez un message avec les instructions pour réinitialiser votre mot de passe"
 

@@ -13,7 +13,8 @@ namespace AppBundle\EventSubscriber;
 
 use AppBundle\AppEvents;
 use AppBundle\Entity\Post;
-use AppBundle\Entity\Topic;
+use AppBundle\Factory\NotificationFactory;
+use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\UserBundle\Context\CustomerContext;
 use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -22,7 +23,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class AddTopicFollowerSubscriber implements EventSubscriberInterface
+class CreateTopicNotificationSubscriber implements EventSubscriberInterface
 {
     /**
      * @var CustomerContext
@@ -30,13 +31,27 @@ class AddTopicFollowerSubscriber implements EventSubscriberInterface
     protected $customerContext;
 
     /**
-     * AddTopicFollowerSubscriber constructor.
+     * @var NotificationFactory
+     */
+    protected $factory;
+
+    /**
+     * @var ObjectManager
+     */
+    protected $manager;
+
+    /**
+     * CreateTopicNotificationSubscriber constructor.
      *
      * @param CustomerContext $customerContext
+     * @param NotificationFactory $factory
+     * @param ObjectManager $manager
      */
-    public function __construct(CustomerContext $customerContext)
+    public function __construct(CustomerContext $customerContext, NotificationFactory $factory, ObjectManager $manager)
     {
         $this->customerContext = $customerContext;
+        $this->factory = $factory;
+        $this->manager = $manager;
     }
 
     /**
@@ -45,20 +60,8 @@ class AddTopicFollowerSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            AppEvents::TOPIC_PRE_CREATE => 'onTopicCreate',
-            AppEvents::POST_PRE_CREATE => 'onPostCreate',
+            AppEvents::POST_POST_CREATE => 'onPostCreate',
         );
-    }
-
-    /**
-     * @param GenericEvent $event
-     */
-    public function onTopicCreate(GenericEvent $event)
-    {
-        /** @var Topic $topic */
-        $topic = $event->getSubject();
-
-        $topic->addFollower($this->getCustomer());
     }
 
     /**
@@ -69,8 +72,19 @@ class AddTopicFollowerSubscriber implements EventSubscriberInterface
         /** @var Post $post */
         $post = $event->getSubject();
 
-        $topic = $post->getTopic();
-        $topic->addFollower($this->getCustomer());
+        foreach ($post->getTopic()->getFollowers() as $follower) {
+            /**
+             * Don't notify the current customer
+             */
+            if ($follower === $this->getCustomer()) {
+                continue;
+            }
+
+            $notification = $this->factory->createForPost($post, $follower);
+            $this->manager->persist($notification);
+        }
+
+        $this->manager->flush();
     }
 
     /**

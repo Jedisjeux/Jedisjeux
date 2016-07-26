@@ -55,6 +55,22 @@ class Notification implements ResourceInterface
     protected $message;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     * @Expose
+     */
+    protected $target;
+
+    /**
+     * @var Topic
+     *
+     * @ORM\ManyToOne(targetEntity="Topic")
+     * @Expose
+     */
+    protected $topic;
+
+    /**
      * Notification constructor.
      */
     public function __construct()
@@ -118,6 +134,46 @@ class Notification implements ResourceInterface
     public function setMessage($message)
     {
         $this->message = $message;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTarget()
+    {
+        return $this->target;
+    }
+
+    /**
+     * @param string $target
+     *
+     * @return $this
+     */
+    public function setTarget($target)
+    {
+        $this->target = $target;
+
+        return $this;
+    }
+
+    /**
+     * @return Topic
+     */
+    public function getTopic()
+    {
+        return $this->topic;
+    }
+
+    /**
+     * @param Topic $topic
+     *
+     * @return $this
+     */
+    public function setTopic($topic)
+    {
+        $this->topic = $topic;
 
         return $this;
     }

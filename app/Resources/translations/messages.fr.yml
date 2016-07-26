@@ -14,6 +14,7 @@ label:
   city: Ville
   code: Code
   company: Société
+  connection: Connexion
   country: Pays
   create: Créer
   created_at: Créé le
@@ -27,14 +28,22 @@ label:
   players: Joueurs
   player_count: Nombre de joueurs
   rate: Note
+  remember_me: Se souvenir de moi
   remove_this_image: Supprimer cette image
   remove_this_player: Supprimer ce joueur
   score: Score
   short_description: Description courte
   themes: Thèmes
   title: Titre
+  username: Nom d'utilisateur
+  username_or_email: Nom d'utilisateur ou email
+  validate: Valider
   your_rate: Votre note
   zone: Zone
+
+text:
+  notification:
+    topic_reply: %USERNAME% a répondu au sujet %TOPIC_NAME%
 
 emails:
     ending: Cordialement

@@ -11,6 +11,7 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Model\Identifiable;
+use JMS\Serializer\Annotation as JMS;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -22,6 +23,8 @@ use Sylius\Component\User\Model\CustomerInterface;
  *
  * @ORM\Entity
  * @ORM\Table("jdj_topic")
+ *
+ * @JMS\ExclusionPolicy("all")
  */
 class Topic implements ResourceInterface
 {
@@ -33,6 +36,7 @@ class Topic implements ResourceInterface
      * @var string
      *
      * @ORM\Column(type="string", nullable=false)
+     * @JMS\Expose
      */
     protected $title;
 

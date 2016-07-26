@@ -160,6 +160,7 @@ sylius_resource:
         app.notification:
             classes:
                 model: AppBundle\Entity\Notification
+                factory: AppBundle\Factory\NotificationFactory
                 controller: AppBundle\Controller\NotificationController
         app.customer_list:
             classes:

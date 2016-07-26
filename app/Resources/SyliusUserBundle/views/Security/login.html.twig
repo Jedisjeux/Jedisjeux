@@ -1,5 +1,4 @@
 {% extends 'layout/minimal.html.twig' %}
-{% trans_default_domain 'FOSUserBundle' %}
 
 {% block card_container_content %}
 
@@ -25,7 +24,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                {{ form_widget(form._username, {attr: {'placeholder': 'security.login.username'|trans}}) }}
+                {{ form_widget(form._username, {attr: {'placeholder': 'label.username_or_email'|trans}}) }}
             </div>
         </div>
         <div class="row">
@@ -45,7 +44,7 @@
         <div id="remember" class="checkbox">
             <label>
                 <input type="checkbox" id="remember_me" name="_remember_me"
-                       value="on"> {{ 'security.login.remember_me'|trans }}
+                       value="on"> {{ 'label.remember_me'|trans }}
             </label>
         </div>
 
@@ -55,7 +54,7 @@
                 type="submit"
                 id="_submit"
                 name="_submit">
-            {{ 'security.login.submit'|trans }}
+            {{ 'label.connection'|trans }}
         </button>
 
     </form>

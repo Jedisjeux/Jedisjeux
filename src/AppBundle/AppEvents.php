@@ -17,4 +17,8 @@ namespace AppBundle;
 class AppEvents
 {
     const TOPIC_PRE_CREATE = 'app.topic.pre_create';
+
+    const POST_PRE_CREATE = 'app.post.pre_create';
+
+    const POST_POST_CREATE = 'app.post.post_create';
 }

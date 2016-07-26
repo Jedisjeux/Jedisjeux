@@ -23,16 +23,17 @@ class ServicesPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         $topicFactoryDefinition = $container->getDefinition('app.factory.topic');
-
         $topicFactoryDefinition
             ->addMethodCall('setGamePlayRepository', [ new Reference('app.repository.game_play') ]);
 
-        $gamePlayFactoryDefinition = $container->getDefinition('app.factory.game_play');
+        $notificationFactoryDefinition = $container->getDefinition('app.factory.notification');
+        $notificationFactoryDefinition
+            ->addMethodCall('setRouter', [ new Reference('router') ])
+            ->addMethodCall('setTranslator', [ new Reference('translator') ]);
 
+        $gamePlayFactoryDefinition = $container->getDefinition('app.factory.game_play');
         $gamePlayFactoryDefinition
             ->addMethodCall('setProductRepository', [ new Reference('sylius.repository.product') ])
             ->addMethodCall('setCustomerContext', [ new Reference('sylius.context.customer') ]);
-
-
     }
 }
