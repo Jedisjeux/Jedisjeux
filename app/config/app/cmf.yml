@@ -1,0 +1,45 @@
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.block.service.text: ~
+
+cmf_create:
+    persistence:
+        phpcr:
+            image: false
+
+cmf_routing:
+    chain:
+        routers_by_id:
+            router.default: 100
+            cmf_routing.dynamic_router: 20
+    dynamic:
+        generic_controller: cmf_content.controller:indexAction
+        persistence:
+            phpcr:
+                enabled: true
+                route_basepath: /cms/routes
+cmf_block:
+    persistence:
+        phpcr:
+            block_basepath: /cms/content
+cmf_content:
+    persistence:
+        phpcr:
+            content_basepath: /cms/pages
+    default_template: SyliusWebBundle:Frontend/StaticContent:show.html.twig
+
+cmf_media:
+    persistence:
+        phpcr:
+            enabled: true
+            manager_name:    ~
+            media_basepath:  /cms/media
+            media_class:     Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Media
+            file_class:      Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\File
+            directory_class: Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Directory
+            image_class:     Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image
+            event_listeners:
+                stream_rewind:    true
+                image_dimensions: true
+                imagine_cache:    auto

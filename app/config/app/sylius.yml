@@ -109,6 +109,7 @@ sylius_resource:
         app.article:
             classes:
                 model: AppBundle\Entity\Article
+                factory: AppBundle\Factory\ArticleFactory
         app.article_review:
             classes:
                 model: AppBundle\Entity\ArticleReview
@@ -116,6 +117,7 @@ sylius_resource:
             driver: doctrine/phpcr-odm
             classes:
                 model: AppBundle\Document\ArticleContent
+                factory: AppBundle\Factory\ArticleContentFactory
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
         app.single_image_block:
             driver: doctrine/phpcr-odm

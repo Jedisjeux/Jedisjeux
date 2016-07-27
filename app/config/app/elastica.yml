@@ -1,0 +1,80 @@
+fos_elastica:
+    clients:
+        default: { host: %fos_elastica.host%, port: %fos_elastica.port% }
+    indexes:
+        jedisjeux:
+          finder: ~
+          settings:
+              index:
+                  analysis:
+                      analyzer:
+                          custom_search_analyzer:
+                              type: custom
+                              tokenizer: standard
+                              filter   : [standard, lowercase, asciifolding]
+                          custom_index_analyzer:
+                              type: custom
+                              tokenizer: standard
+                              filter   : [standard, lowercase, asciifolding, custom_filter]
+                      filter:
+                          custom_filter:
+                              type: edgeNGram
+                              side: front
+                              min_gram: 1
+                              max_gram: 20
+
+          types:
+              user:
+                  mappings:
+                      username: { search_analyzer: custom_search_analyzer, index_analyzer: custom_index_analyzer, type: string }
+                  persistence:
+                      driver: orm
+                      model: %sylius.model.user.class%
+                      provider: ~
+                      listener:
+                          immediate: ~
+                      finder: ~
+              product:
+                  mappings:
+                      name: ~
+                      slug: { search_analyzer: custom_search_analyzer, index_analyzer: custom_index_analyzer, type: string }
+                  persistence:
+                      driver: orm
+                      model: %sylius.model.product.class%
+                      provider: ~
+                      listener:
+                          immediate: ~
+                      finder: ~
+              person:
+                  mappings:
+                      firstName: ~
+                      lastName: ~
+                      slug: { search_analyzer: custom_search_analyzer, index_analyzer: custom_index_analyzer, type: string }
+                  persistence:
+                      driver: orm
+                      model: AppBundle\Entity\Person
+                      provider: ~
+                      listener:
+                          immediate: ~
+                      finder: ~
+              taxon:
+                  mappings:
+                      name: ~
+                      slug: { search_analyzer: custom_search_analyzer, index_analyzer: custom_index_analyzer, type: string }
+                  persistence:
+                      driver: orm
+                      model: AppBundle\Entity\Taxon
+                      provider: ~
+                      listener:
+                          immediate: ~
+                      finder: ~
+              topic:
+                  mappings:
+                      title: { search_analyzer: custom_search_analyzer, index_analyzer: custom_index_analyzer, type: string }
+                  persistence:
+                      driver: orm
+                      model: AppBundle\Entity\Topic
+                      provider: ~
+                      listener:
+                          immediate: ~
+                      finder: ~
