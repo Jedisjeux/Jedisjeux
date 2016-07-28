@@ -1,0 +1,16 @@
+{% extends "::base.html.twig" %}
+{% import 'macros/actions.html.twig' as action %}
+
+{% block headline %}
+    Nouvel article
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    <a href="{{ path('app_admin_article_index') }}">Articles</a> /
+    Nouveau
+{% endblock %}
+
+{% block container %}
+{#{{ dump(article) }}#}
+{% endblock container %}

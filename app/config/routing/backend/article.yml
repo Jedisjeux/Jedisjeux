@@ -1,0 +1,18 @@
+app_admin_article:
+    resource: |
+        alias: app.article
+        section: admin
+        templates: :backend/article
+        redirect: index
+    type: sylius.resource
+
+app_admin_article_create_for_test:
+    methods: [GET]
+    path: /articles/tests/{productId}/new
+    defaults:
+        _controller: app.controller.article:createAction
+        _sylius:
+            factory:
+                method: createForProductId
+                arguments: [$productId]
+            template: backend/article/create.html.twig

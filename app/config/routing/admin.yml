@@ -4,6 +4,9 @@
 app_admin_person:
     resource: backend/person.yml
 
+app_admin_article:
+    resource: backend/article.yml
+
 sylius_admin_taxon:
     resource: backend/taxon.yml
     prefix: /taxons
