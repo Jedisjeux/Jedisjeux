@@ -58,8 +58,8 @@ class ArticleFactory extends Factory
     }
 
     /**
-     * @TODO replace by createForProduct when this PR below will be merged
-     * @see https://github.com/Sylius/Sylius/pull/5622
+     * @TODO replace by createForProduct when this PR below will be in release of sylius
+     * @see https://github.com/Sylius/Sylius/pull/5559
      *
      * @param integer $productId
      *

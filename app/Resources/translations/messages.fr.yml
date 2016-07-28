@@ -25,6 +25,7 @@ label:
   main: Principale
   material: Matériel
   mechanisms: Mécanismes
+  name: Nom
   played_at: Joué le
   players: Joueurs
   player_count: Nombre de joueurs
@@ -32,6 +33,7 @@ label:
   remember_me: Se souvenir de moi
   remove_this_image: Supprimer cette image
   remove_this_player: Supprimer ce joueur
+  search: Rechercher
   score: Score
   short_description: Description courte
   themes: Thèmes

@@ -1,0 +1,58 @@
+{% extends "layout/backend_index.html.twig" %}
+
+{% from '::macros/misc.html.twig' import pagination %}
+{% import 'macros/buttons.html.twig' as buttons %}
+{% from 'macros/sorting.html.twig' import sorting %}
+
+{% block headline %}
+    Articles
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }} /
+    Contenu /
+    Articles
+{% endblock %}
+
+{% block new_entity_button %}
+    {{ buttons.create(path('sylius_backend_taxon_create'), 'label.create_taxon'|trans) }}
+{% endblock new_entity_button %}
+
+{% set sorting = app.request.get('sorting') %}
+
+{% if null == sorting %}
+    {% set icon = true %}
+    {% set currentOrder = 'asc' %}
+{% endif %}
+
+{% block list %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>{{ sorting('app_admin_article_index', 'label.title'|trans, 'name', 'asc', icon, currentOrder) }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article.id }}</td>
+                <td>{{ article.document.title }}</td>
+                {#<td class="text-right">#}
+                    {#<ul class="list-inline text-nowrap">#}
+                        {#<li>#}
+                            {#{{ button.show(path('theme_show', { 'id': theme.id, 'slug': article.document.name })) }}#}
+                        {#</li>#}
+                        {#<li>#}
+                            {#{{ button.edit(path('app_admin_theme_update', { 'id': article.id })) }}#}
+                        {#</li>#}
+                        {#<li>#}
+                            {#{{ button.delete(path('app_admin_theme_delete', { 'id': article.id })) }}#}
+                        {#</li>#}
+                    {#</ul>#}
+                {#</td>#}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
