@@ -22,7 +22,7 @@
     {% set articleIsTest = 'tests' == article.document.parentDocument.nodeName %}
 
     <div class="container">
-        <div class="col-md-8">
+        <div class="col-md-9">
 
             {% if articleIsTest %}
                 {% include "frontend/game/show/header.html.twig" with {'product': article.product, 'jeu': article.product} only %}
@@ -71,8 +71,8 @@
             {% endif %}
 
         </div>
-        <div class="col-md-4">
-            {% include "frontend/content/page/article_content/sidebar.html.twig" %}
+        <div class="col-md-3">
+            {% include "frontend/content/page/article_content/_sidebar.html.twig" %}
         </div>
     </div>
 

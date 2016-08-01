@@ -1,3 +1,5 @@
+{% from 'macros/users.html.twig' import avatar %}
+
 <!-- Sidebar -->
 <div class="sidebar">
 
@@ -24,11 +26,11 @@
                 </div>
                 <ul class="list-unstyled">
                     <li>
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <!-- Item title -->
                             <i class="fa fa-list"></i> <span>Matériel</span>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4 text-right">
                             <div class="rating-container">
                                 <div class="rating yellow" data-readonly="true"
                                      data-rate-value="{{ article.materialRating }}"
@@ -37,11 +39,11 @@
                         </div>
                     </li>
                     <li>
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <!-- Item title -->
                             <i class="fa fa-book"></i> <span>Règles</span>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4 text-right">
                             <div class="rating-container">
                                 <div class="rating yellow" data-readonly="true"
                                      data-rate-value="{{ article.rulesRating }}"
@@ -50,11 +52,11 @@
                         </div>
                     </li>
                     <li>
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <!-- Item title -->
                             <i class="fa fa-calendar"></i> <span>Durée de vie</span>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4 text-right">
                             <div class="rating-container">
                                 <div class="rating yellow" data-readonly="true"
                                      data-rate-value="{{ article.lifetimeRating }}"
@@ -69,9 +71,39 @@
         </div>
         <hr>
 
+        <!-- Nav tab widget - popular, recent and comments -->
+        <div class="s-widget">
+            <h5><i class="fa fa-comments color"></i> Critiques</h5>
+            <div class="widget-content">
+                <ul class="list-unstyled">
+                    {% for review in article.reviews %}
+                        {% set author = review.author %}
+                        <li>
+                            <div class="col-md-6">
+                                <!-- Item image -->
+                                <img src="{{ avatar(author.user) | imagine_filter('thumbnail') }}" alt=""
+                                     class="img-responsive img-round"/>
+
+                            </div>
+                            <div class="col-md-6">
+                                <!-- Item title -->
+                                <span>{{ author }}</span><br/>
+
+                                <div class="rating-container">
+                                    <div class="rating yellow" data-readonly="true"
+                                         data-rate-value="{{ review.rating }}" data-step-size="0.5"></div>
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
     {% endif %}
-
-
 
 
     <!-- Tag Widget -->
