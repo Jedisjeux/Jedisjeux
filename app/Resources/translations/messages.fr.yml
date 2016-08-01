@@ -19,8 +19,12 @@ label:
   country: Pays
   create: Créer
   created_at: Créé le
+  create_article: Créer un article
+  create_category: Créer une catégorie
+  delete: Supprimer
   duration: Durée
   hello: Bonjour
+  edit: Modifier
   label: Libellé
   main: Principale
   material: Matériel
@@ -36,6 +40,7 @@ label:
   search: Rechercher
   score: Score
   short_description: Description courte
+  show: Voir
   themes: Thèmes
   title: Titre
   username: Nom d'utilisateur
