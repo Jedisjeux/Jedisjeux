@@ -41,29 +41,28 @@ EOT
 
         
         $commands = [
+            'app:blocks:load',
             'app:users:load',
             'app:products:load',
+            'app:game-libraries:load',
             'app:persons:load',
-            'app:forum:load',
             'app:persons-of-products:load',
+            'app:forum:load',
             'app:mechanisms:load',
             'app:mechanisms-of-products:load',
             'app:themes:load',
             'app:themes-of-products:load',
-            'doctrine:phpcr:repository:init',
-            'app:blocks:load',
             'app:articles:load',
             'app:news:load',
+            'app:tests:load',
+            'app:reviews-of-articles:load',
             'app:game-plays:load',
             'app:players-of-game-plays:load',
             'app:topics-of-game-plays:load',
             'app:reviews-of-products:load',
-            'app:game-libraries:load',
             'app:images-of-products:load',
             'app:images-of-persons:load',
             'app:avatars-of-users:load',
-            'app:avatars:download',
-            'app:images:download',
         ];
 
         $this->runCommands($commands, $input, $output);

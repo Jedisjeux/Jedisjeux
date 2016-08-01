@@ -17,8 +17,16 @@ class InstallCommand extends AbstractInstallCommand
      */
     private $commands = [
         [
-            'command' => 'data',
-            'message' => 'Data Loading.',
+            'command' => 'database',
+            'message' => 'Setting up the database.',
+        ],
+        [
+            'command' => 'download-images',
+            'message' => 'Downloading images and avatars.',
+        ],
+        [
+            'command' => 'assets',
+            'message' => 'Installing assets.',
         ],
     ];
 
