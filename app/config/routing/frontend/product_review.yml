@@ -4,7 +4,7 @@ sylius_product_review_create:
     defaults:
         _controller: sylius.controller.product_review:createAction
         _sylius:
-            template: 'partial/product_review/_form.html.twig'
+            template: 'frontend/product_review/_form.html.twig'
             factory:
                 method: createForSubject
                 arguments: [$productId]
@@ -16,7 +16,7 @@ sylius_product_rating_create:
         _format: json
         _controller: sylius.controller.product_review:createAction
         _sylius:
-            template: 'partial/product_review/rating/_form.html.twig'
+            template: 'frontend/product_review/rating/_form.html.twig'
             form: sylius_product_review_rating
             factory:
                 method: createForSubject
@@ -31,7 +31,7 @@ sylius_product_rating_update:
         _controller: sylius.controller.product_review:updateAction
         _format: json
         _sylius:
-            template: 'partial/product_review/rating/_form.html.twig'
+            template: 'frontend/product_review/rating/_form.html.twig'
             form: sylius_product_review_rating
             repository:
                 method: findOneBy
