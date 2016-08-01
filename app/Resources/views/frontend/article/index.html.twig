@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% from 'macros/misc.html.twig' import pagination %}
+
+{% from 'macros/articles.html.twig' import magazineItemTwo %}
+
+{% block headline %}
+   {{ 'title.articles'|trans }}
+{% endblock headline %}
+
+{% block container %}
+
+    {% for article in articles %}
+        {{ magazineItemTwo(article.document) }}
+        <div class="clearfix"></div>
+    {% endfor %}
+
+    {{ pagination(articles) }}
+
+{% endblock %}

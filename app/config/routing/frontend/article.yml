@@ -1,0 +1,7 @@
+app_frontend_article:
+    resource: |
+        alias: app.article
+        section: frontend
+        templates: :frontend/article
+        only: [index]
+    type: sylius.resource

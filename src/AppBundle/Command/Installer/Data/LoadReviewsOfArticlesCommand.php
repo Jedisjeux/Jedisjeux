@@ -16,6 +16,7 @@ use AppBundle\Entity\ArticleReview;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Review\Calculator\AverageRatingCalculator;
 use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -79,6 +80,7 @@ class LoadReviewsOfArticlesCommand extends ContainerAwareCommand
         $articleReview->setReviewSubject($article);
         $articleReview->setRating($data['rating']);
         $articleReview->setComment($data['comment']);
+        /** @var AverageRatingCalculator $averageRatingCalculator */
         $averageRatingCalculator = $this->getContainer()->get('sylius.review.calculator.average_rating');
         $article->setAverageRating($averageRatingCalculator->calculate($article));
 

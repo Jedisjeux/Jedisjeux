@@ -1,3 +1,6 @@
+app_article:
+    resource: "frontend/article.yml"
+
 app_forum:
     resource: "frontend/forum.yml"
     prefix: /forum
