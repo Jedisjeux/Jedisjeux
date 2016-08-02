@@ -1,0 +1,39 @@
+{
+  "dependencies": {
+    "jquery": "^2.2.0",
+    "bootstrap-sass": "^3.3.6",
+    "bootstrap-star-rating": "~3.5.1",
+    "font-awesome": "~4.2.0",
+    "fancybox": "2.1.5",
+    "multiple-select": "1.1.0",
+    "jquery-ui": "~1.11.4",
+    "eonasdan-bootstrap-datetimepicker": "~4.14.30",
+    "magnific-popup": "1.0.0",
+    "owlcarousel": "1.3.2",
+    "select2": "4.0.2",
+    "mhuggins/jquery-countTo": "1.2.0",
+    "rater": "latest"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-debug": "^2.1.2",
+    "gulp-if": "^2.0.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-order": "^1.1.1",
+    "gulp-sass": "^2.1.1",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.1",
+    "gulp-uglifycss": "^1.0.5",
+    "merge-stream": "^1.0.0"
+  },
+  "scripts": {
+    "gulp": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://loic_425@bitbucket.org/jedisjeux/jdj.git"
+  },
+  "author": "Loïc Frémont",
+  "license": "MIT"
+}
