@@ -16,6 +16,7 @@ use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 
 /**
@@ -39,6 +40,41 @@ class Article implements ResourceInterface, ReviewableInterface
      * @var ArticleContent
      */
     protected $document;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $title;
+
+    /**
+     * @var \DateTime|null
+     *
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $publishStartDate;
+
+    /**
+     * @var TaxonInterface
+     *
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Taxonomy\Model\TaxonInterface")
+     */
+    protected $mainTaxon;
+
+    /**
+     * @var \DateTime|null
+     *
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $publishEndDate;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean")
+     */
+    protected $publishable = true;
 
     /**
      * @var ProductInterface
@@ -102,6 +138,7 @@ class Article implements ResourceInterface, ReviewableInterface
      */
     public function __construct()
     {
+        $this->publishable = false;
         $this->reviews = new ArrayCollection();
     }
 
@@ -324,9 +361,108 @@ class Article implements ResourceInterface, ReviewableInterface
     /**
      * @return string
      */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     *
+     * @return $this
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getPublishStartDate()
+    {
+        return $this->publishStartDate;
+    }
+
+    /**
+     * @param \DateTime|null $publishStartDate
+     *
+     * @return $this
+     */
+    public function setPublishStartDate($publishStartDate)
+    {
+        $this->publishStartDate = $publishStartDate;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getPublishEndDate()
+    {
+        return $this->publishEndDate;
+    }
+
+    /**
+     * @param \DateTime|null $publishEndDate
+     *
+     * @return $this
+     */
+    public function setPublishEndDate($publishEndDate)
+    {
+        $this->publishEndDate = $publishEndDate;
+
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isPublishable()
+    {
+        return $this->publishable;
+    }
+
+    /**
+     * @param boolean $publishable
+     *
+     * @return $this
+     */
+    public function setPublishable($publishable)
+    {
+        $this->publishable = $publishable;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
     public function getName()
     {
         return $this->getDocument()->getTitle();
     }
 
+    /**
+     * @return TaxonInterface
+     */
+    public function getMainTaxon()
+    {
+        return $this->mainTaxon;
+    }
+
+    /**
+     * @param TaxonInterface $mainTaxon
+     *
+     * @return $this
+     */
+    public function setMainTaxon($mainTaxon)
+    {
+        $this->mainTaxon = $mainTaxon;
+
+        return $this;
+    }
 }

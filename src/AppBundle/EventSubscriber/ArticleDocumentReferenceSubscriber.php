@@ -73,7 +73,12 @@ class ArticleDocumentReferenceSubscriber implements EventSubscriber
             $id = $document->getId();
         }
 
-        $article->setDocumentId($id);
+        $article
+            ->setDocumentId($id)
+            ->setTitle($document->getTitle())
+            ->setPublishable($document->isPublishable())
+            ->setPublishStartDate($document->getPublishStartDate())
+            ->setPublishEndDate($document->getPublishEndDate());
     }
 
     /**

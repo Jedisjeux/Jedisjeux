@@ -2,5 +2,5 @@
 {% from 'macros/articles.html.twig' import magazineItemTwo %}
 
 {% for article in articles %}
-    {{ magazineItemTwo(article) }}
+    {{ magazineItemTwo(article.document) }}
 {% endfor %}

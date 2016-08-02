@@ -1,9 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: loic
- * Date: 19/02/2016
- * Time: 12:38
+
+/*
+ * This file is part of Jedisjeux project.
+ *
+ * (c) Jedisjeux
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AppBundle\Command\Installer\Data;
@@ -48,7 +51,7 @@ class LoadForumCommand extends ContainerAwareCommand
         $this->loadTopics();
         $this->loadPosts();
         $this->bbcode2Html();
-        $rootTaxon = $this->createOrReplaceRootTaxon();
+        $rootTaxon = $this->getRootTaxon();
         $this->deleteTaxons($rootTaxon);
         $this->loadTaxons($rootTaxon);
         $this->setTopicsMainTaxon();
@@ -129,28 +132,11 @@ EOM;
     /**
      * @return TaxonInterface
      */
-    public function createOrReplaceRootTaxon()
+    public function getRootTaxon()
     {
-        /** @var TaxonInterface $taxon */
-        $taxon = $this->getContainer()
+        return $this->getContainer()
             ->get('sylius.repository.taxon')
             ->findOneBy(array('code' => Taxon::CODE_FORUM));
-
-        if (null === $taxon) {
-            $taxon = $this->getTaxonFactory()->createNew();
-        }
-
-        $taxon->setCode(Taxon::CODE_FORUM);
-        $taxon->setName('forum');
-
-        /** @var EntityManager $manager */
-        $manager = $this->getContainer()
-            ->get('sylius.manager.taxon');
-
-        $manager->persist($taxon);
-        $manager->flush();
-
-        return $taxon;
     }
 
     public function deletePosts()
@@ -349,6 +335,4 @@ EOM;
     {
         return $this->getContainer()->get('app.repository.post');
     }
-
-
 }

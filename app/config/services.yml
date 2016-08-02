@@ -12,35 +12,35 @@ services:
     app.calculator.topic_count_by_taxon:
         class: AppBundle\Calculator\TopicCountByTaxonCalculator
         arguments:
-            - @app.repository.topic
+            - "@app.repository.topic"
 
     # <!-- updaters -->
     app.updater.topic_count_by_taxon:
         class: AppBundle\Updater\TopicCountByTaxonUpdater
         arguments:
-            - @app.calculator.topic_count_by_taxon
+            - "@app.calculator.topic_count_by_taxon"
 
     # <!-- Subscribers -->
     app.subscriber.add_topic_follower:
         class: AppBundle\EventSubscriber\AddTopicFollowerSubscriber
         arguments:
-            - @sylius.context.customer
+            - "@sylius.context.customer"
         tags:
             - { name: kernel.event_subscriber }
 
     app.subscriber.create_topic_notification:
         class: AppBundle\EventSubscriber\CreateTopicNotificationSubscriber
         arguments:
-            - @sylius.context.customer
-            - @app.factory.notification
-            - @app.manager.notification
+            - "@sylius.context.customer"
+            - "@app.factory.notification"
+            - "@app.manager.notification"
         tags:
             - { name: kernel.event_subscriber }
 
     app.subscriber.send_registration_email:
         class: AppBundle\EventSubscriber\SendRegistrationEmailSubscriber
         arguments:
-            - @sylius.email_sender
+            - "@sylius.email_sender"
         tags:
             - { name: kernel.event_subscriber }
 
@@ -99,7 +99,7 @@ services:
         class: Sonata\BlockBundle\Block\Service\RssBlockService
         arguments:
             - sonata.block.service.rss
-            - @templating
+            - "@templating"
         tags:
             - { name: sonata.block }
 
@@ -110,7 +110,7 @@ services:
         class: AppBundle\Block\BlockquoteBlockService
         arguments:
             - app.block.blockquote
-            - @templating
+            - "@templating"
         tags:
             - {name: sonata.block}
 
@@ -118,6 +118,6 @@ services:
         class: AppBundle\Block\SingleImageBlockService
         arguments:
             - app.block.single_image
-            - @templating
+            - "@templating"
         tags:
             - {name: sonata.block}

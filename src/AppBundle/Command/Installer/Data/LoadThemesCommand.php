@@ -8,6 +8,7 @@
 
 namespace AppBundle\Command\Installer\Data;
 
+use AppBundle\Entity\Taxon;
 use AppBundle\Repository\TaxonRepository;
 use Doctrine\ORM\EntityManager;
 use JDJ\CoreBundle\Entity\EntityRepository;
@@ -47,7 +48,7 @@ class LoadThemesCommand extends ContainerAwareCommand
         $this->output = $output;
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
 
-        $taxonRoot = $this->createOrReplaceRootTaxon();
+        $taxonRoot = $this->getRootTaxon();
         $this->addTaxons($this->getRows(), $taxonRoot);
     }
 
@@ -73,27 +74,11 @@ class LoadThemesCommand extends ContainerAwareCommand
     /**
      * @return TaxonInterface
      */
-    protected function createOrReplaceRootTaxon()
+    public function getRootTaxon()
     {
-        /** @var TaxonInterface $taxonRoot */
-        $taxonRoot = $this
-            ->getRepository()
-            ->findOneBy(array('code' => 'themes'));
-
-        if (null === $taxonRoot) {
-            $taxonRoot = $this->getFactory()->createNew();
-        }
-
-        $taxonRoot->setCode('themes');
-        $taxonRoot->setName('Thèmes');
-
-        /** @var EntityManager $manager */
-        $manager = $this->getManager();
-
-        $manager->persist($taxonRoot);
-        $manager->flush();
-
-        return $taxonRoot;
+        return $this->getContainer()
+            ->get('sylius.repository.taxon')
+            ->findOneBy(array('code' => Taxon::CODE_THEME));
     }
 
     /**

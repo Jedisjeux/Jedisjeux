@@ -19,7 +19,13 @@ use Sylius\Component\Taxonomy\Model\Taxon as BaseTaxon;
  */
 class Taxon extends BaseTaxon
 {
+    const CODE_ARTICLE = 'articles';
     const CODE_FORUM = 'forum';
+    const CODE_INTERVIEW = 'interviews';
+    const CODE_MECHANISM = 'mechanisms';
+    const CODE_REVIEW_ARTICLE = 'review-articles';
+    const CODE_THEME = 'themes';
+    const CODE_ZONE = 'zones';
 
     /**
      * @var integer

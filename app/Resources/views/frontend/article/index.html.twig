@@ -5,16 +5,24 @@
 {% from 'macros/articles.html.twig' import magazineItemTwo %}
 
 {% block headline %}
-   {{ 'title.articles'|trans }}
+    {{ 'title.articles'|trans }}
 {% endblock headline %}
 
 {% block container %}
 
-    {% for article in articles %}
-        {{ magazineItemTwo(article.document) }}
-        <div class="clearfix"></div>
-    {% endfor %}
+    <div class="container">
+        <div class="col-md-9">
+            {% for article in articles %}
+                {{ magazineItemTwo(article.document) }}
+                <div class="clearfix"></div>
+            {% endfor %}
 
-    {{ pagination(articles) }}
+            {{ pagination(articles) }}
+
+        </div>
+        <div class="col-md-3">
+            {% include 'frontend/article/_sidebar.html.twig' %}
+        </div>
+    </div>
 
 {% endblock %}

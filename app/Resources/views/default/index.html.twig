@@ -11,17 +11,6 @@
 
     <div class="col-md-8">
 
-        <!-- Carousel starts -->
-
-        <!-- Bootstrap carousel usage
-            Bootstrap carousel should have id. Below i am using "bs-carousel-X". Where "X" denotes number". If a page has more than 1 carousel, then add the new carousel with the id "bs-carousel-1", "bs-carousel-2". You also need to update the id in, "carousel indicators" section and "carousel control" section.
-
-            Carousel comes with 3 main data attributes which you can customize. They are...
-            data-interval - Time delay between item cycle. Default value "5000".
-            data-pause - Pause on hover. Default value "pause".
-            data-wrap - Continues cycle or stop at the end. Default value "true".
-        -->
-
         <!-- Outer layer -->
 
         <div class="row">
@@ -30,9 +19,12 @@
 
                 <h4 class="mag-head"><i class="fa fa-cloud color"></i> News Récentes</h4>
                 <!-- TODO publishedAt -->
-                {{ render(url('article_content_index', {
-                    'template': '_magazine_items_one_and_list_items.html.twig',
-                    'maxPerPage': 5,
+                {{ render(url('app_partial_article_index', {
+                    'template': 'frontend/article/_magazine_items_one_and_list_items.html.twig',
+                    'paginate': 5,
+                    'criteria': {
+                        'publishable': 1
+                    },
                     'sorting': {
                         'publishStartDate': 'desc'
                     }} )) }}
@@ -44,9 +36,12 @@
                 <h4 class="mag-head"><i class="fa fa-desktop color"></i> Top News</h4>
 
                 <!-- TODO publishedAt -->
-                {{ render(url('article_content_index', {
-                    'template': '_magazine_items_one_and_list_items_image_less.html.twig',
-                    'maxPerPage': 5,
+                {{ render(url('app_partial_article_index', {
+                    'template': 'frontend/article/_magazine_items_one_and_list_items_image_less.html.twig',
+                    'paginate': 5,
+                    'criteria': {
+                        'publishable': 1
+                    },
                     'sorting': {
                         'title': 'desc'
                     }} )) }}

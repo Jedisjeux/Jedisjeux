@@ -1,14 +1,18 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: loic
- * Date: 23/12/2015
- * Time: 13:55
+
+/*
+ * This file is part of Jedisjeux project.
+ *
+ * (c) Jedisjeux
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AppBundle\Command\Installer\Data;
 
 use AppBundle\Entity\Country;
+use AppBundle\Entity\Taxon;
 use AppBundle\Repository\TaxonRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
@@ -48,7 +52,7 @@ class LoadZonesCommand extends ContainerAwareCommand
         $this->output = $output;
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
 
-        $rootTaxon = $this->createOrReplaceRootTaxon();
+        $rootTaxon = $this->getRootTaxon();
         $this->addTaxons($this->getRows(), $rootTaxon);
     }
 
@@ -105,27 +109,11 @@ class LoadZonesCommand extends ContainerAwareCommand
     /**
      * @return TaxonInterface
      */
-    protected function createOrReplaceRootTaxon()
+    public function getRootTaxon()
     {
-        /** @var TaxonInterface $rootTaxon */
-        $rootTaxon = $this->getContainer()
+        return $this->getContainer()
             ->get('sylius.repository.taxon')
-            ->findOneBy(array('code' => 'zones'));
-
-        if (null === $rootTaxon) {
-            $rootTaxon = $this->getFactory()->createNew();
-        }
-
-        $rootTaxon->setCode('zones');
-        $rootTaxon->setName('Zones');
-
-        /** @var EntityManager $manager */
-        $manager = $this->getManager();
-
-        $manager->persist($rootTaxon);
-        $manager->flush();
-
-        return $rootTaxon;
+            ->findOneBy(array('code' => Taxon::CODE_ZONE));
     }
 
     /**
