@@ -1,7 +1,7 @@
-app_frontend_article:
-    resource: |
-        alias: app.article
-        section: frontend
-        templates: :frontend/article
-        only: [index]
-    type: sylius.resource
+app_frontend_article_index_with_taxons:
+    methods: [GET]
+    path: /articles/
+    defaults:
+      _controller: app.controller.article:indexWithTaxonsAction
+      _sylius:
+          template: frontend/article/index.html.twig

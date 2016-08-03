@@ -110,6 +110,7 @@ sylius_resource:
             classes:
                 model: AppBundle\Entity\Article
                 factory: AppBundle\Factory\ArticleFactory
+                controller: AppBundle\Controller\ArticleController
                 form:
                     default: AppBundle\Form\Type\ArticleType
         app.article_review:

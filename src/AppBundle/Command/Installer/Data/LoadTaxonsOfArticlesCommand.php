@@ -48,8 +48,8 @@ class LoadTaxonsOfArticlesCommand extends ContainerAwareCommand
         foreach ($this->getRootTaxons() as $data) {
             $output->writeln(sprintf("Loading <comment>%s</comment> taxon", $data['name']));
 
-            $rootTaxon = $this->createOrReplaceTaxon($data, $rootTaxon);
-            $this->getManager()->persist($rootTaxon);
+            $taxon = $this->createOrReplaceTaxon($data, $rootTaxon);
+            $this->getManager()->persist($taxon);
         }
 
         $this->getManager()->flush();

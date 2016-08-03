@@ -1,24 +1,29 @@
 <!-- Sidebar -->
 <div class="sidebar">
-    <!-- Categories Widget -->
-    <div class="s-widget">
-        <!-- Heading -->
-        <h5><i class="fa fa-folder color"></i>&nbsp; Categories</h5>
-        <!-- Widgets Content -->
-        <div class="widget-content categories">
-            <ul class="list-6">
-                {#{% for thisTaxon in taxons %}#}
-                    {#{% set currentTaxon = taxon is defined and thisTaxon == taxon ? true : false %}#}
-                    {#<li>#}
-                        {#<a href="{{ path('app_topic_index_by_taxon', { 'permalink': thisTaxon.slug }) }}">#}
-                            {#{% if currentTaxon %}<strong>{% endif %}{{ thisTaxon }}{% if currentTaxon %}</strong>{% endif %}#}
-                            {#<span class="color">({{ thisTaxon.topicCount }})</span>#}
-                        {#</a>#}
-                    {#</li>#}
-                {#{% endfor %}#}
-            </ul>
+    {% for rootTaxon in rootTaxons %}
+        {% set taxons = rootTaxon.children %}
+        <!-- Categories Widget -->
+        <div class="s-widget">
+            <!-- Heading -->
+            <h5><i class="fa fa-folder color"></i>&nbsp; {{ rootTaxon }}</h5>
+            <!-- Widgets Content -->
+            <div class="widget-content categories">
+                <ul class="list-6">
+                    {% for key, thisTaxon in taxons %}
+                        {% if key < 5 %}
+                            {% set currentTaxon = taxon is defined and thisTaxon == taxon ? true : false %}
+                            <li>
+                                <a href="{{ path('sylius_product_index_by_taxon', { 'permalink': thisTaxon.permalink }) }}">
+                                    {% if currentTaxon %}
+                                    <strong>{% endif %}{{ thisTaxon }}{% if currentTaxon %}</strong>{% endif %}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
-    </div>
+    {% endfor %}
     <hr>
 
 
