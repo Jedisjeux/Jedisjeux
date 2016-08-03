@@ -15,13 +15,17 @@ use AppBundle\Command\LogMemoryUsageTrait;
 use AppBundle\Document\ArticleContent;
 use AppBundle\Document\BlockquoteBlock;
 use AppBundle\Entity\Article;
+use AppBundle\Entity\Taxon;
 use AppBundle\Entity\Topic;
-use Doctrine\ODM\PHPCR\ChildrenCollection;
+use AppBundle\Repository\TaxonRepository;
 use Doctrine\ODM\PHPCR\Document\Generic;
 use Doctrine\ODM\PHPCR\DocumentRepository;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 use PHPCR\Util\NodeHelper;
 use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
 use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
@@ -65,9 +69,15 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
 
             $this->logMemoryUsage($output);
 
-            $page = $this->createOrReplaceTest($data);
-            $block = $this->createOrReplaceIntroductionBlock($page, $data);
-            $page->addChild($block);
+            $article = $this->createOrReplaceTest($data);
+
+            /** @var TaxonInterface $mainTaxon */
+            $mainTaxon = $this->getTaxonRepository()->findOneBy(['code' => Taxon::CODE_REVIEW_ARTICLE]);
+            $article->setMainTaxon($mainTaxon);
+
+            $articleDocument = $article->getDocument();
+            $block = $this->createOrReplaceIntroductionBlock($articleDocument, $data);
+            $articleDocument->addChild($block);
             $blocks = [
                 [
                     'id' => $data['name'] . '0',
@@ -95,19 +105,7 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
                     'class' => null,
                 ]
             ];
-            $this->populateBlocks($page, $blocks);
-
-            $this->getDocumentManager()->persist($page);
-            $this->getDocumentManager()->flush();
-
-            $article = $this->getContainer()->get('app.repository.article')->findOneBy(['documentId' => $page->getId()]);
-
-            if (null === $article) {
-                /** @var Article $article */
-                $article = $this->getContainer()->get('app.factory.article')->createNew();
-                $article
-                    ->setDocument($page);
-            }
+            $this->populateBlocks($articleDocument, $blocks);
 
             if (null !== $data['product_id']) {
                 /** @var ProductInterface $product */
@@ -137,27 +135,34 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
                 ->setRulesRating($data['rulesRating'])
                 ->setLifetimeRating($data['lifetimeRating']);
 
+            $this->getDocumentManager()->persist($articleDocument);
+            $this->getDocumentManager()->flush();
+
             $this->getManager()->persist($article);
             $this->getManager()->flush();
             $this->getManager()->clear();
-            $this->getDocumentManager()->flush();
+
+            $this->getDocumentManager()->detach($articleDocument);
             $this->getDocumentManager()->clear();
         }
     }
 
+
+
     /**
      * @param array $data
-     * @return ArticleContent
+     *
+     * @return Article
      */
     protected function createOrReplaceTest(array $data)
     {
-        $articleDocument = $this->findPage($data['name']);
+        $article = $this->findArticle($data['name']);
 
-        if (null === $articleDocument) {
-            $articleDocument = new ArticleContent();
-            $articleDocument
-                ->setParentDocument($this->parent);
+        if (null === $article) {
+            $article = $this->getFactory()->createNew();
         }
+
+        $articleDocument = $article->getDocument();
 
         if (null !== $data['main_image']) {
             $mainImage = $articleDocument->getMainImage();
@@ -183,7 +188,7 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
         $articleDocument->setPublishable((bool)$data['published']);
         $articleDocument->setPublishStartDate(\DateTime::createFromFormat('Y-m-d H:i:s', $data['publishedAt']));
 
-        return $articleDocument;
+        return $article;
     }
 
     protected function createOrReplaceIntroductionBlock(ArticleContent $page, array $data)
@@ -214,14 +219,31 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
      */
     protected function findPage($name)
     {
-        $id = $this->parent->getId() . '/' .  $name;
+        $id = $this->parent->getId() . '/' . $name;
 
         /** @var ArticleContent $page */
         $page = $this
-            ->getRepository()
+            ->getDocumentRepository()
             ->find($id);
 
         return $page;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return Article
+     */
+    protected function findArticle($name)
+    {
+        $documentId = $this->parent->getId() . '/' . $name;
+
+        /** @var Article $article */
+        $article = $this
+            ->getRepository()
+            ->findOneBy(['documentId' => $documentId]);
+
+        return $article;
     }
 
     /**
@@ -229,7 +251,7 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
      */
     protected function getParent()
     {
-        $contentBasepath = '/cms/pages/articles/tests';
+        $contentBasepath = '/cms/pages/articles';
         /** @var Generic $parent */
         $parent = $this->getDocumentManager()->find(null, $contentBasepath);
 
@@ -243,9 +265,41 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
     }
 
     /**
-     * @return DocumentRepository
+     * @return Factory
+     */
+    public function getDocumentFactory()
+    {
+        return $this->getContainer()->get('app.factory.article_content');
+    }
+
+    /**
+     * @return Factory
+     */
+    public function getFactory()
+    {
+        return $this->getContainer()->get('app.factory.article');
+    }
+
+    /**
+     * @return TaxonRepository
+     */
+    public function getTaxonRepository()
+    {
+        return $this->getContainer()->get('sylius.repository.taxon');
+    }
+
+    /**
+     * @return EntityRepository
      */
     public function getRepository()
+    {
+        return $this->getContainer()->get('app.repository.article');
+    }
+
+    /**
+     * @return DocumentRepository
+     */
+    public function getDocumentRepository()
     {
         return $this->getContainer()->get('app.repository.article_content');
     }

@@ -41,6 +41,8 @@ EOT
 
         
         $commands = [
+            'app:root-taxons:load',
+            'app:taxons-of-articles:load',
             'app:blocks:load',
             'app:users:load',
             'app:products:load',
