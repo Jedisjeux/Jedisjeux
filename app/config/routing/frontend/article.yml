@@ -2,6 +2,18 @@ app_frontend_article_index_with_taxons:
     methods: [GET]
     path: /articles/
     defaults:
-      _controller: app.controller.article:indexWithTaxonsAction
-      _sylius:
-          template: frontend/article/index.html.twig
+        _controller: app.controller.article:indexWithTaxonsAction
+        _sylius:
+            paginate: 12
+            template: frontend/article/index.html.twig
+
+app_frontend_article_index_by_taxon:
+    methods: [GET]
+    path: /articles/{permalink}
+    defaults:
+        _controller: app.controller.article:indexByTaxonAction
+        _sylius:
+            paginate: 12
+            template: frontend/article/index.html.twig
+    requirements:
+        permalink: "[^?]+"

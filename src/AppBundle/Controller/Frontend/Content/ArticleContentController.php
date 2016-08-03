@@ -19,7 +19,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  *
- * @Route("/articles")
+ * @Route("/article")
  */
 class ArticleContentController extends Controller
 {
