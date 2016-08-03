@@ -6,6 +6,10 @@ app_frontend_article_index:
         _sylius:
             paginate: 12
             template: frontend/article/index.html.twig
+            criteria:
+                publishable: 1
+            sorting:
+                publishStartDate: desc
 
 app_frontend_article_index_by_taxon:
     methods: [GET]
@@ -15,5 +19,9 @@ app_frontend_article_index_by_taxon:
         _sylius:
             paginate: 12
             template: frontend/article/index.html.twig
+            criteria:
+                publishable: 1
+            sorting:
+                publishStartDate: desc
     requirements:
         permalink: "[^?]+"
