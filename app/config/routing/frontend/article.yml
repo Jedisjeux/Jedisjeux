@@ -1,4 +1,4 @@
-app_frontend_article_index_with_taxons:
+app_frontend_article_index:
     methods: [GET]
     path: /articles/
     defaults:

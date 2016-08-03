@@ -9,6 +9,17 @@
     {{ 'title.articles'|trans }}
 {% endblock headline %}
 
+{% block breadcrumb_content %}
+    {{ parent() }}
+
+    {% if taxon is defined %}
+        <a href="{{ path('app_frontend_article_index') }}">Articles</a>
+        / {{ taxon }}
+    {% else %}
+        Articles
+    {% endif %}
+{% endblock %}
+
 {% block container %}
 
     <div class="container">
