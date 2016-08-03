@@ -164,14 +164,14 @@ class LoadProductsCommand extends ContainerAwareCommand
                 break;
         }
 
-        $product->setName($data['name']);
-        $product->setDescription($data['description']);
+        $product->setName(trim($data['name']));
+        $product->setDescription(trim($data['description']));
         $product->setCreatedAt($data['createdAt']);
         $product->setUpdatedAt($data['updatedAt']);
         $product->setReleasedAt($data['releasedAt']);
         $product
             ->setCode($data['code'])
-            ->setShortDescription($data['shortDescription'])
+            ->setShortDescription(trim($data['shortDescription']))
             ->setAgeMin($data['ageMin'])
             ->setJoueurMin($data['joueurMin'])
             ->setJoueurMax($data['joueurMax'])

@@ -11,10 +11,12 @@
 
 namespace AppBundle\Command\Installer\Data;
 
+use AppBundle\Command\LogMemoryUsageTrait;
 use AppBundle\Document\ArticleContent;
 use AppBundle\Document\BlockquoteBlock;
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Topic;
+use Doctrine\ODM\PHPCR\ChildrenCollection;
 use Doctrine\ODM\PHPCR\Document\Generic;
 use Doctrine\ODM\PHPCR\DocumentRepository;
 use Doctrine\ORM\EntityManager;
@@ -31,6 +33,13 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class LoadTestsCommand extends AbstractLoadDocumentCommand
 {
+    use LogMemoryUsageTrait;
+
+    /**
+     * @var Generic
+     */
+    protected $parent;
+
     /**
      * {@inheritdoc}
      */
@@ -46,10 +55,15 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        gc_collect_cycles();
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
+
+        $this->parent = $this->getParent();
 
         foreach ($this->getTests() as $data) {
             $output->writeln(sprintf("Loading test of <info>%s</info> product", $data['product_name']));
+
+            $this->logMemoryUsage($output);
 
             $page = $this->createOrReplaceTest($data);
             $block = $this->createOrReplaceIntroductionBlock($page, $data);
@@ -125,8 +139,9 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
 
             $this->getManager()->persist($article);
             $this->getManager()->flush();
-            $this->getDocumentManager()->clear();
             $this->getManager()->clear();
+            $this->getDocumentManager()->flush();
+            $this->getDocumentManager()->clear();
         }
     }
 
@@ -141,7 +156,7 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
         if (null === $articleDocument) {
             $articleDocument = new ArticleContent();
             $articleDocument
-                ->setParentDocument($this->getParent());
+                ->setParentDocument($this->parent);
         }
 
         if (null !== $data['main_image']) {
@@ -199,9 +214,12 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
      */
     protected function findPage($name)
     {
+        $id = $this->parent->getId() . '/' .  $name;
+
+        /** @var ArticleContent $page */
         $page = $this
             ->getRepository()
-            ->findOneBy(array('name' => $name));
+            ->find($id);
 
         return $page;
     }
@@ -212,6 +230,7 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
     protected function getParent()
     {
         $contentBasepath = '/cms/pages/articles/tests';
+        /** @var Generic $parent */
         $parent = $this->getDocumentManager()->find(null, $contentBasepath);
 
         if (null === $parent) {
