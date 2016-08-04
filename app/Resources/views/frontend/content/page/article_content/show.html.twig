@@ -19,15 +19,11 @@
 
 {% block body -%}
 
-    {% set mainTaxon = article.mainTaxon ? article.mainTaxon.code : null %}
-    {% set articleIsTest = 'review-articles' == mainTaxon %}
+    {% set mainTaxonCode = article.mainTaxon ? article.mainTaxon.code : null %}
+    {% set articleIsTest = 'review-articles' == mainTaxonCode %}
 
     <div class="container">
         <div class="col-md-9">
-
-            {% if articleIsTest %}
-                {% include "frontend/game/show/header.html.twig" with {'product': article.product, 'jeu': article.product} only %}
-            {% endif %}
 
             {% for block in article.document.children %}
 

@@ -8,9 +8,11 @@
 
 namespace AppBundle\Command\Installer\Data;
 
+use AppBundle\Command\LogMemoryUsageTrait;
 use AppBundle\Document\ArticleContent;
 use AppBundle\Document\SingleImageBlock;
 use AppBundle\Entity\Article;
+use AppBundle\Entity\Taxon;
 use AppBundle\Entity\Topic;
 use AppBundle\TextFilter\Bbcode2Html;
 use Doctrine\ODM\PHPCR\Document\Generic;
@@ -18,6 +20,7 @@ use Doctrine\ODM\PHPCR\DocumentManager;
 use Doctrine\ODM\PHPCR\DocumentRepository;
 use Doctrine\ORM\EntityManager;
 use PHPCR\Util\NodeHelper;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -29,8 +32,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class LoadNewsCommand extends ContainerAwareCommand
+class LoadNewsCommand extends AbstractLoadDocumentCommand
 {
+    use LogMemoryUsageTrait;
+
     /**
      * @inheritdoc
      */
@@ -46,10 +51,14 @@ class LoadNewsCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        gc_collect_cycles();
         $this->output = $output;
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
 
         foreach ($this->getNews() as $data) {
+            $output->writeln(sprintf("Loading <info>%s</info> news", $data['title']));
+            $this->logMemoryUsage($output);
+
             $page = $this->createOrReplaceArticle($data);
             $blocks = [
                 [
@@ -67,6 +76,7 @@ class LoadNewsCommand extends ContainerAwareCommand
             $this->getManager()->persist($page);
             $this->getManager()->flush();
 
+            /** @var Article $article */
             $article = $this->getContainer()->get('app.repository.article')->findOneBy(['documentId' => $page->getId()]);
 
             if (null === $article) {
@@ -75,6 +85,10 @@ class LoadNewsCommand extends ContainerAwareCommand
                 $article
                     ->setDocument($page);
             }
+
+            /** @var TaxonInterface $mainTaxon */
+            $mainTaxon = $this->getTaxonRepository()->findOneBy(['code' => Taxon::CODE_NEWS]);
+            $article->setMainTaxon($mainTaxon);
 
             if (null !== $data['product_id']) {
                 /** @var ProductInterface $product */
@@ -100,6 +114,7 @@ class LoadNewsCommand extends ContainerAwareCommand
             $this->getArticleManager()->persist($article);
             $this->getArticleManager()->flush();
             $this->getManager()->clear();
+            $this->getArticleManager()->clear();
 
 
         }
@@ -130,7 +145,7 @@ from        jedisjeux.jdj_news old
 WHERE       old.valid = 1
             AND       old.type_lien in (0, 1)
 order by    old.date desc
-limit       10
+limit       20
 EOM;
 
         return $this->getDatabaseConnection()->fetchAll($query);
@@ -267,23 +282,6 @@ EOM;
             ->findOneBy(array('name' => $name));
 
         return $page;
-    }
-
-    /**
-     * @return Generic
-     */
-    protected function getParent()
-    {
-        $contentBasepath = '/cms/pages/articles';
-        $parent = $this->getManager()->find(null, $contentBasepath);
-
-        if (null === $parent) {
-            $session = $this->getManager()->getPhpcrSession();
-            NodeHelper::createPath($session, $contentBasepath);
-            $parent = $this->getManager()->find(null, $contentBasepath);
-        }
-
-        return $parent;
     }
 
     /**

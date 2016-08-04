@@ -164,32 +164,17 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
 
     /**
      * @param string $name
+     *
      * @return ArticleContent
      */
     protected function findPage($name)
     {
+        /** @var ArticleContent $page */
         $page = $this
             ->getRepository()
             ->findOneBy(array('name' => $name));
 
         return $page;
-    }
-
-    /**
-     * @return Generic
-     */
-    protected function getParent()
-    {
-        $contentBasepath = '/cms/pages/articles';
-        $parent = $this->getDocumentManager()->find(null, $contentBasepath);
-
-        if (null === $parent) {
-            $session = $this->getDocumentManager()->getPhpcrSession();
-            NodeHelper::createPath($session, $contentBasepath);
-            $parent = $this->getDocumentManager()->find(null, $contentBasepath);
-        }
-
-        return $parent;
     }
 
     /**
@@ -269,14 +254,6 @@ EOM;
 EOM;
 
         return $this->getDatabaseConnection()->fetchAll($query);
-    }
-    
-    /**
-     * @return EntityManager
-     */
-    protected function getManager()
-    {
-        return $this->getContainer()->get('app.manager.article');
     }
 
 

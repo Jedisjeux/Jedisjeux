@@ -1,21 +1,41 @@
 {% extends "base.html.twig" %}
 
 {% from 'macros/misc.html.twig' import pagination %}
+{% from 'macros/articles.html.twig' import magazineItemOne %}
 
-{% from 'macros/articles.html.twig' import magazineItemTwo %}
+{% block body_class %}magazine{% endblock %}
 
 {% block headline %}
     {{ 'title.articles'|trans }}
 {% endblock headline %}
 
+{% block breadcrumb_content %}
+    {{ parent() }}
+
+    {% if taxon is defined %}
+        <a href="{{ path('app_frontend_article_index') }}">Articles</a>
+        / {{ taxon }}
+    {% else %}
+        Articles
+    {% endif %}
+{% endblock %}
+
 {% block container %}
 
     <div class="container">
         <div class="col-md-9">
-            {% for article in articles %}
-                {{ magazineItemTwo(article.document) }}
-                <div class="clearfix"></div>
-            {% endfor %}
+            <div class="row">
+                {% for key, article in articles %}
+                {% if key > 0 and key%3 == 0 %}
+            </div>
+            <div class="row">
+                {% endif %}
+                <div class="col-md-4">
+                    {{ magazineItemOne(article.document) }}
+                </div>
+                {% endfor %}
+            </div>
+            <div class="clearfix"></div>
 
             {{ pagination(articles) }}
 

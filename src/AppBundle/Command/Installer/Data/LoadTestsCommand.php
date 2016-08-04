@@ -17,14 +17,8 @@ use AppBundle\Document\BlockquoteBlock;
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Taxon;
 use AppBundle\Entity\Topic;
-use AppBundle\Repository\TaxonRepository;
 use Doctrine\ODM\PHPCR\Document\Generic;
-use Doctrine\ODM\PHPCR\DocumentRepository;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityRepository;
-use PHPCR\Util\NodeHelper;
 use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
@@ -62,11 +56,8 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
         gc_collect_cycles();
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
 
-        $this->parent = $this->getParent();
-
         foreach ($this->getTests() as $data) {
             $output->writeln(sprintf("Loading test of <info>%s</info> product", $data['product_name']));
-
             $this->logMemoryUsage($output);
 
             $article = $this->createOrReplaceTest($data);
@@ -147,8 +138,6 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
         }
     }
 
-
-
     /**
      * @param array $data
      *
@@ -211,105 +200,6 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
             ->setPublishable(true);
 
         return $block;
-    }
-
-    /**
-     * @param string $name
-     * @return ArticleContent
-     */
-    protected function findPage($name)
-    {
-        $id = $this->parent->getId() . '/' . $name;
-
-        /** @var ArticleContent $page */
-        $page = $this
-            ->getDocumentRepository()
-            ->find($id);
-
-        return $page;
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return Article
-     */
-    protected function findArticle($name)
-    {
-        $documentId = $this->parent->getId() . '/' . $name;
-
-        /** @var Article $article */
-        $article = $this
-            ->getRepository()
-            ->findOneBy(['documentId' => $documentId]);
-
-        return $article;
-    }
-
-    /**
-     * @return Generic
-     */
-    protected function getParent()
-    {
-        $contentBasepath = '/cms/pages/articles';
-        /** @var Generic $parent */
-        $parent = $this->getDocumentManager()->find(null, $contentBasepath);
-
-        if (null === $parent) {
-            $session = $this->getDocumentManager()->getPhpcrSession();
-            NodeHelper::createPath($session, $contentBasepath);
-            $parent = $this->getDocumentManager()->find(null, $contentBasepath);
-        }
-
-        return $parent;
-    }
-
-    /**
-     * @return Factory
-     */
-    public function getDocumentFactory()
-    {
-        return $this->getContainer()->get('app.factory.article_content');
-    }
-
-    /**
-     * @return Factory
-     */
-    public function getFactory()
-    {
-        return $this->getContainer()->get('app.factory.article');
-    }
-
-    /**
-     * @return TaxonRepository
-     */
-    public function getTaxonRepository()
-    {
-        return $this->getContainer()->get('sylius.repository.taxon');
-    }
-
-    /**
-     * @return EntityRepository
-     */
-    public function getRepository()
-    {
-        return $this->getContainer()->get('app.repository.article');
-    }
-
-    /**
-     * @return DocumentRepository
-     */
-    public function getDocumentRepository()
-    {
-        return $this->getContainer()->get('app.repository.article_content');
-    }
-
-    /**
-     * @return EntityManager
-     */
-    protected function getManager()
-    {
-        return $this->getContainer()->get('app.manager.article');
     }
 
     /**

@@ -97,7 +97,7 @@ class LoadRootTaxonsCommand extends ContainerAwareCommand
             ],
             [
                 'code' => Taxon::CODE_ARTICLE,
-                'name' => 'Articles',
+                'name' => 'Catégories',
             ],
         ];
     }

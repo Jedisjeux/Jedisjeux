@@ -13,9 +13,16 @@ namespace AppBundle\Command\Installer\Data;
 
 use AppBundle\Document\ArticleContent;
 use AppBundle\Document\SingleImageBlock;
+use AppBundle\Entity\Article;
+use AppBundle\Repository\TaxonRepository;
 use AppBundle\TextFilter\Bbcode2Html;
+use Doctrine\ODM\PHPCR\Document\Generic;
 use Doctrine\ODM\PHPCR\DocumentManager;
 use Doctrine\ODM\PHPCR\DocumentRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
+use PHPCR\Util\NodeHelper;
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
 use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
@@ -25,6 +32,11 @@ use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
  */
 abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
 {
+    /**
+     * @var Generic
+     */
+    protected $parent;
+
     /**
      * @param ArticleContent $page
      * @param array $blocks
@@ -110,6 +122,47 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
 
         return $imagineBlock;
     }
+
+    /**
+     * @param string $name
+     *
+     * @return Article
+     */
+    protected function findArticle($name)
+    {
+        $documentId = $this->getParent()->getId() . '/' . $name;
+
+        /** @var Article $article */
+        $article = $this
+            ->getRepository()
+            ->findOneBy(['documentId' => $documentId]);
+
+        return $article;
+    }
+
+    /**
+     * @return Generic
+     */
+    protected function getParent()
+    {
+        if (null !== $this->parent) {
+            return $this->parent;
+        }
+
+        $contentBasepath = '/cms/pages/articles';
+        /** @var Generic $parent */
+        $parent = $this->getDocumentManager()->find(null, $contentBasepath);
+
+        if (null === $parent) {
+            $session = $this->getDocumentManager()->getPhpcrSession();
+            NodeHelper::createPath($session, $contentBasepath);
+            $parent = $this->getDocumentManager()->find(null, $contentBasepath);
+        }
+
+        $this->parent = $parent;
+
+        return $this->parent;
+    }
     
     /**
      * @param string $path
@@ -127,6 +180,54 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
     protected function getSingleImageBlockRepository()
     {
         return $this->getContainer()->get('app.repository.single_image_block');
+    }
+
+    /**
+     * @return Factory
+     */
+    public function getDocumentFactory()
+    {
+        return $this->getContainer()->get('app.factory.article_content');
+    }
+
+    /**
+     * @return Factory
+     */
+    public function getFactory()
+    {
+        return $this->getContainer()->get('app.factory.article');
+    }
+
+    /**
+     * @return TaxonRepository
+     */
+    public function getTaxonRepository()
+    {
+        return $this->getContainer()->get('sylius.repository.taxon');
+    }
+
+    /**
+     * @return EntityRepository
+     */
+    public function getRepository()
+    {
+        return $this->getContainer()->get('app.repository.article');
+    }
+
+    /**
+     * @return DocumentRepository
+     */
+    public function getDocumentRepository()
+    {
+        return $this->getContainer()->get('app.repository.article_content');
+    }
+
+    /**
+     * @return EntityManager
+     */
+    public function getManager()
+    {
+        return $this->getContainer()->get('app.manager.article');
     }
 
     /**

@@ -10,6 +10,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Taxonomy\Model\Taxon as BaseTaxon;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -23,6 +24,7 @@ class Taxon extends BaseTaxon
     const CODE_FORUM = 'forum';
     const CODE_INTERVIEW = 'interviews';
     const CODE_MECHANISM = 'mechanisms';
+    const CODE_NEWS = 'news';
     const CODE_REVIEW_ARTICLE = 'review-articles';
     const CODE_THEME = 'themes';
     const CODE_ZONE = 'zones';
@@ -33,6 +35,18 @@ class Taxon extends BaseTaxon
      * @ORM\Column(type="integer")
      */
     protected $topicCount;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setParent(TaxonInterface $parent = null)
+    {
+        if ($parent !== $this->parent) {
+            $this->setPermalink(null);
+        }
+
+        parent::setParent($parent);
+    }
 
     /**
      * Taxon constructor.
