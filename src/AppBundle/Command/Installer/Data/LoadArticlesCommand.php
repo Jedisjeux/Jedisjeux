@@ -54,22 +54,16 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
             $output->writeln(sprintf("Loading <info>%s</info> article", $data['title']));
             $this->logMemoryUsage($output);
 
-            $page = $this->createOrReplaceArticle($data);
-            $block = $this->createOrReplaceIntroductionBlock($page, $data);
-            $page->addChild($block);
+            $article = $this->createOrReplaceArticle($data);
+            $articleDocument = $article->getDocument();
+
+            $block = $this->createOrReplaceIntroductionBlock($articleDocument, $data);
+            $articleDocument->addChild($block);
             $blocks = $this->getBlocks($data['blocks']);
-            $this->populateBlocks($page, $blocks);
-            $this->getDocumentManager()->persist($page);
+            $this->populateBlocks($articleDocument, $blocks);
+
+            $this->getDocumentManager()->persist($articleDocument);
             $this->getDocumentManager()->flush();
-
-            $article = $this->getContainer()->get('app.repository.article')->findOneBy(['documentId' => $page->getId()]);
-
-            if (null === $article) {
-                /** @var Article $article */
-                $article = $this->getContainer()->get('app.factory.article')->createNew();
-                $article
-                    ->setDocument($page);
-            }
 
             if (null !== $data['mainTaxon']) {
                 /** @var TaxonInterface $mainTaxon */
@@ -100,23 +94,32 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
                     ->setAuthor($author);
             }
 
-            $this->getDocumentManager()->persist($page);
+            $this->getDocumentManager()->persist($articleDocument);
+            $this->getDocumentManager()->flush();
+
             $this->getManager()->persist($article);
             $this->getManager()->flush();
-            $this->getManager()->detach($article);
             $this->getManager()->clear();
-            $this->getDocumentManager()->detach($page);
+
+            $this->getDocumentManager()->detach($articleDocument);
             $this->getDocumentManager()->clear();
         }
     }
 
     /**
      * @param array $data
-     * @return ArticleContent
+     *
+     * @return Article
      */
     protected function createOrReplaceArticle(array $data)
     {
-        $articleDocument = $this->findPage($data['name']);
+        $article = $this->findArticle($data['name']);
+
+        if (null === $article) {
+            $article = $this->getFactory()->createNew();
+        }
+
+        $articleDocument = $article->getDocument();
 
         if (null === $articleDocument) {
             $articleDocument = new ArticleContent();
@@ -148,7 +151,7 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
         $articleDocument->setPublishable(true);
         $articleDocument->setPublishStartDate(\DateTime::createFromFormat('Y-m-d H:i:s', $data['publishedAt']));
 
-        return $articleDocument;
+        return $article;
     }
 
     protected function createOrReplaceIntroductionBlock(ArticleContent $page, array $data)
@@ -171,29 +174,6 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
             ->setPublishable(true);
 
         return $block;
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return ArticleContent
-     */
-    protected function findPage($name)
-    {
-        /** @var ArticleContent $page */
-        $page = $this
-            ->getRepository()
-            ->findOneBy(array('name' => $name));
-
-        return $page;
-    }
-
-    /**
-     * @return DocumentRepository
-     */
-    public function getRepository()
-    {
-        return $this->getContainer()->get('app.repository.article_content');
     }
 
     /**

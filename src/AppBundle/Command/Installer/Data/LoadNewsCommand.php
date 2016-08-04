@@ -112,6 +112,8 @@ class LoadNewsCommand extends AbstractLoadDocumentCommand
                 ->setAuthor($author);
 
             $this->getManager()->persist($page);
+            $this->getManager()->flush();
+
             $this->getArticleManager()->persist($article);
             $this->getArticleManager()->flush();
             $this->getManager()->clear();
@@ -192,7 +194,7 @@ EOM;
                 ->setParentDocument($article)
                 ->setImage($image);
 
-            // $this->getManager()->persist($mainImage);
+            $this->getManager()->persist($mainImage);
 
             $article
                 ->setMainImage($mainImage);
