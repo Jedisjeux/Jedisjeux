@@ -122,9 +122,9 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
         $articleDocument = $article->getDocument();
 
         if (null === $articleDocument) {
-            $articleDocument = new ArticleContent();
-            $articleDocument
-                ->setParentDocument($this->getParent());
+            $articleDocument = $this->getDocumentFactory()->createNew();
+            $article
+                ->setDocument($articleDocument);
         }
 
         if (null !== $data['mainImage']) {
@@ -133,7 +133,6 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
             if (null === $mainImage) {
                 $mainImage = new ImagineBlock();
             }
-
 
             $image = new Image();
             $image->setFileContent(file_get_contents($this->getImageOriginalPath($data['mainImage'])));

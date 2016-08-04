@@ -10,20 +10,13 @@ namespace AppBundle\Command\Installer\Data;
 
 use AppBundle\Command\LogMemoryUsageTrait;
 use AppBundle\Document\ArticleContent;
-use AppBundle\Document\SingleImageBlock;
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Taxon;
 use AppBundle\Entity\Topic;
-use AppBundle\TextFilter\Bbcode2Html;
-use Doctrine\ODM\PHPCR\Document\Generic;
-use Doctrine\ODM\PHPCR\DocumentManager;
 use Doctrine\ODM\PHPCR\DocumentRepository;
-use Doctrine\ORM\EntityManager;
-use PHPCR\Util\NodeHelper;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\User\Model\CustomerInterface;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
 use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
 use Symfony\Component\Console\Input\InputInterface;
@@ -59,7 +52,9 @@ class LoadNewsCommand extends AbstractLoadDocumentCommand
             $output->writeln(sprintf("Loading <info>%s</info> news", $data['title']));
             $this->logMemoryUsage($output);
 
-            $page = $this->createOrReplaceArticle($data);
+            $article = $this->createOrReplaceArticle($data);
+            $articleContent = $article->getDocument();
+
             $blocks = [
                 [
                     'id' => $data['id'],
@@ -71,20 +66,10 @@ class LoadNewsCommand extends AbstractLoadDocumentCommand
                     'class' => null,
                 ]
             ];
-            $this->populateBlocks($page, $blocks);
+            $this->populateBlocks($articleContent, $blocks);
 
-            $this->getManager()->persist($page);
-            $this->getManager()->flush();
-
-            /** @var Article $article */
-            $article = $this->getContainer()->get('app.repository.article')->findOneBy(['documentId' => $page->getId()]);
-
-            if (null === $article) {
-                /** @var Article $article */
-                $article = $this->getContainer()->get('app.factory.article')->createNew();
-                $article
-                    ->setDocument($page);
-            }
+            $this->getDocumentManager()->persist($articleContent);
+            $this->getDocumentManager()->flush();
 
             /** @var TaxonInterface $mainTaxon */
             $mainTaxon = $this->getTaxonRepository()->findOneBy(['code' => Taxon::CODE_NEWS]);
@@ -111,13 +96,15 @@ class LoadNewsCommand extends AbstractLoadDocumentCommand
             $article
                 ->setAuthor($author);
 
-            $this->getManager()->persist($page);
-            $this->getManager()->flush();
+            $this->getDocumentManager()->persist($articleContent);
+            $this->getDocumentManager()->flush();
 
-            $this->getArticleManager()->persist($article);
-            $this->getArticleManager()->flush();
+            $this->getManager()->persist($article);
+            $this->getManager()->flush();
             $this->getManager()->clear();
-            $this->getArticleManager()->clear();
+
+            $this->getDocumentManager()->detach($articleContent);
+            $this->getDocumentManager()->clear();
 
 
         }
@@ -153,185 +140,50 @@ EOM;
         return $this->getDatabaseConnection()->fetchAll($query);
     }
 
-    protected function populateBlocks(ArticleContent $page, array $blocks)
-    {
-        foreach ($blocks as $data) {
-            $block = $this->createOrReplaceBlock($page, $data);
-            $page->addChild($block);
-            if (isset($data['image'])) {
-                $this->createOrReplaceImagineBlock($block, $data);
-            }
-        }
-    }
-
     /**
      * @param array $data
-     * @return ArticleContent
+     *
+     * @return Article
      */
     protected function createOrReplaceArticle(array $data)
     {
-        $article = $this->findPage($data['name']);
+        $article = $this->findArticle($data['name']);
 
         if (null === $article) {
-            $article = new ArticleContent();
-            $article
-                ->setParentDocument($this->getParent());
+            $article = $this->getFactory()->createNew();
+        }
 
+        $articleDocument = $article->getDocument();
+
+        if (null === $articleDocument) {
+            $articleDocument = $this->getDocumentFactory()->createNew();
+            $article
+                ->setDocument($articleDocument);
         }
 
         if (null !== $data['mainImage']) {
-            $mainImage = $article->getMainImage();
+            $mainImage = $articleDocument->getMainImage();
 
             if (null === $mainImage) {
                 $mainImage = new ImagineBlock();
             }
 
-
             $image = new Image();
             $image->setFileContent(file_get_contents($this->getImageOriginalPath($data['mainImage'])));
 
             $mainImage
-                ->setParentDocument($article)
+                ->setParentDocument($articleDocument)
                 ->setImage($image);
 
-            $this->getManager()->persist($mainImage);
-
-            $article
+            $articleDocument
                 ->setMainImage($mainImage);
         }
 
-        $article->setName($data['name']);
-        $article->setTitle($data['title']);
-        $article->setPublishable(true);
-        $article->setPublishStartDate(\DateTime::createFromFormat('Y-m-d H:i:s', $data['publishedAt']));
+        $articleDocument->setName($data['name']);
+        $articleDocument->setTitle($data['title']);
+        $articleDocument->setPublishable(true);
+        $articleDocument->setPublishStartDate(\DateTime::createFromFormat('Y-m-d H:i:s', $data['publishedAt']));
 
         return $article;
-    }
-
-    /**
-     * @param ArticleContent $page
-     * @param array $data
-     * @return SingleImageBlock
-     */
-    protected function createOrReplaceBlock(ArticleContent $page, array $data)
-    {
-        $name = 'block'.$data['id'];
-
-        $block = $this
-            ->getSingleImageBlockRepository()
-            ->findOneBy(array('name' => $name));
-
-        if (null === $block) {
-            $block = new SingleImageBlock();
-            $block
-                ->setParentDocument($page);
-        }
-        
-        $bbcode2html = new Bbcode2Html();
-        $body = $data['body'];
-        $body = $bbcode2html
-            ->setBody($body)
-            ->getFilteredBody();
-        
-
-        $block
-            ->setImagePosition($data['image_position'])
-            ->setTitle($data['title'])
-            ->setBody($body)
-            ->setName($name)
-            ->setClass($data['class'] ?: null)
-            ->setPublishable(true);
-
-        return $block;
-    }
-
-    protected function createOrReplaceImagineBlock(SingleImageBlock $block, array $data)
-    {
-        $name = 'image'.$data['id'];
-
-        if (false === $block->hasChildren()) {
-            $imagineBlock = new ImagineBlock();
-            $block
-                ->addChild($imagineBlock);
-        } else {
-            /** @var ImagineBlock $imagineBlock */
-            $imagineBlock = $block->getChildren()->first();
-        }
-
-        $image = new Image();
-        $image->setFileContent(file_get_contents($this->getImageOriginalPath($data['image'])));
-        $image->setName($data['image']);
-
-        $imagineBlock
-            ->setName($name)
-            ->setParentDocument($block)
-            ->setImage($image)
-            ->setLabel($data['image_label']);
-
-        $this->getManager()->persist($imagineBlock);
-
-        return $imagineBlock;
-    }
-
-    /**
-     * @param string $name
-     * @return ArticleContent
-     */
-    protected function findPage($name)
-    {
-        $page = $this
-            ->getRepository()
-            ->findOneBy(array('name' => $name));
-
-        return $page;
-    }
-
-    /**
-     * @param string $path
-     * @return string
-     */
-    protected function getImageOriginalPath($path)
-    {
-        return "http://www.jedisjeux.net/img/800/".$path;
-    }
-
-    /**
-     * @return DocumentRepository
-     */
-    public function getRepository()
-    {
-        return $this->getContainer()->get('app.repository.article_content');
-    }
-
-    /**
-     * @return DocumentRepository
-     */
-    public function getSingleImageBlockRepository()
-    {
-        return $this->getContainer()->get('app.repository.single_image_block');
-    }
-
-    /**
-     * @return DocumentManager
-     */
-    public function getManager()
-    {
-        return $this->getContainer()->get('app.manager.article_content');
-    }
-
-    /**
-     * @return EntityManager
-     */
-    protected function getArticleManager()
-    {
-        return $this->getContainer()->get('app.manager.article');
-    }
-
-    /**
-     * @return \Doctrine\DBAL\Connection
-     */
-    protected function getDatabaseConnection()
-    {
-        return $this->getContainer()->get('database_connection');
     }
 }

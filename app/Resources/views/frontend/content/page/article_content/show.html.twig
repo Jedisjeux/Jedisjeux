@@ -13,7 +13,10 @@
 {% endblock %}
 
 {% block breadcrumb_content %}
-    Articles /
+    <a href="{{ path('app_frontend_article_index') }}">Articles</a> /
+    {% if article.mainTaxon %}
+        <a href="{{ path('app_frontend_article_index_by_taxon', {'permalink': article.mainTaxon.permalink}) }}">{{ article.mainTaxon }}</a> /
+    {% endif %}
     {{ article.document.title }}
 {% endblock %}
 
