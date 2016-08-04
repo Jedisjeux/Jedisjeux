@@ -145,7 +145,6 @@ from        jedisjeux.jdj_news old
 WHERE       old.valid = 1
             AND       old.type_lien in (0, 1)
 order by    old.date desc
-limit       20
 EOM;
 
         return $this->getDatabaseConnection()->fetchAll($query);

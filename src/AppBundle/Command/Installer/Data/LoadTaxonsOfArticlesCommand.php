@@ -91,6 +91,14 @@ class LoadTaxonsOfArticlesCommand extends ContainerAwareCommand
                 'name' => 'Critiques',
             ],
             [
+                'code' => Taxon::CODE_PREVIEWS,
+                'name' => 'Previews',
+            ],
+            [
+                'code' => Taxon::CODE_IN_THE_BOXES,
+                'name' => 'C\'est dans la boîte',
+            ],
+            [
                 'code' => Taxon::CODE_INTERVIEW,
                 'name' => 'Interviews',
             ],

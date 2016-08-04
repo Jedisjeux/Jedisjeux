@@ -23,8 +23,10 @@ class Taxon extends BaseTaxon
     const CODE_ARTICLE = 'articles';
     const CODE_FORUM = 'forum';
     const CODE_INTERVIEW = 'interviews';
+    const CODE_IN_THE_BOXES = 'in-the-boxes';
     const CODE_MECHANISM = 'mechanisms';
     const CODE_NEWS = 'news';
+    const CODE_PREVIEWS = 'previews';
     const CODE_REVIEW_ARTICLE = 'review-articles';
     const CODE_THEME = 'themes';
     const CODE_ZONE = 'zones';

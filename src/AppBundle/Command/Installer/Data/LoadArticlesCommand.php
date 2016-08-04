@@ -8,18 +8,14 @@
 
 namespace AppBundle\Command\Installer\Data;
 
+use AppBundle\Command\LogMemoryUsageTrait;
 use AppBundle\Document\BlockquoteBlock;
-use AppBundle\Document\SingleImageBlock;
 use AppBundle\Document\ArticleContent;
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Topic;
-use AppBundle\TextFilter\Bbcode2Html;
-use Doctrine\ODM\PHPCR\Document\Generic;
-use Doctrine\ODM\PHPCR\DocumentManager;
 use Doctrine\ODM\PHPCR\DocumentRepository;
-use Doctrine\ORM\EntityManager;
-use PHPCR\Util\NodeHelper;
 use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
 use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
@@ -28,6 +24,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class LoadArticlesCommand extends AbstractLoadDocumentCommand
 {
+    use LogMemoryUsageTrait;
+
     /**
      * @var OutputInterface
      */
@@ -48,10 +46,14 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        gc_collect_cycles();
         $this->output = $output;
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
 
         foreach ($this->getArticles() as $data) {
+            $output->writeln(sprintf("Loading <info>%s</info> article", $data['title']));
+            $this->logMemoryUsage($output);
+
             $page = $this->createOrReplaceArticle($data);
             $block = $this->createOrReplaceIntroductionBlock($page, $data);
             $page->addChild($block);
@@ -67,6 +69,12 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
                 $article = $this->getContainer()->get('app.factory.article')->createNew();
                 $article
                     ->setDocument($page);
+            }
+
+            if (null !== $data['mainTaxon']) {
+                /** @var TaxonInterface $mainTaxon */
+                $mainTaxon = $this->getTaxonRepository()->findOneBy(['code' => $data['mainTaxon']]);
+                $article->setMainTaxon($mainTaxon);
             }
 
             if (null !== $data['product_id']) {
@@ -96,6 +104,8 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
             $this->getManager()->flush();
             $this->getManager()->detach($article);
             $this->getManager()->clear();
+            $this->getDocumentManager()->detach($page);
+            $this->getDocumentManager()->clear();
         }
     }
 
@@ -197,6 +207,13 @@ select article.article_id as id,
        article.date as publishedAt,
        article.intro as introduction,
        article.photo as mainImage,
+       case article.type_article
+            when 'article' then null
+            when 'interview' then 'interviews'
+            when 'cdlb' then 'in-the-boxes'
+            when 'preview' then 'previews'
+            else null
+       end as mainTaxon,     
        product.id as product_id,
        topic.id as topic_id,
        user.customer_id as author_id,
@@ -213,8 +230,8 @@ from jedisjeux.jdj_article article
   left join sylius_user user
     on convert(user.username USING UTF8) = convert(article.auteur USING UTF8)
 where titre_clean != ''
+and type_article != 'reportage'
 group by article.article_id
-limit 5
 EOM;
 
         return $this->getDatabaseConnection()->fetchAll($query);
