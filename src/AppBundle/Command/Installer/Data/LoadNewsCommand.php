@@ -111,6 +111,7 @@ class LoadNewsCommand extends AbstractLoadDocumentCommand
             $article
                 ->setAuthor($author);
 
+            $this->getManager()->persist($page);
             $this->getArticleManager()->persist($article);
             $this->getArticleManager()->flush();
             $this->getManager()->clear();

@@ -100,6 +100,7 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
                     ->setAuthor($author);
             }
 
+            $this->getDocumentManager()->persist($page);
             $this->getManager()->persist($article);
             $this->getManager()->flush();
             $this->getManager()->detach($article);
