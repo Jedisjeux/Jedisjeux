@@ -4,7 +4,7 @@ app_frontend_article_index:
     defaults:
         _controller: app.controller.article:indexWithTaxonsAction
         _sylius:
-            paginate: 12
+            paginate: 15
             sortable: true
             sorting:
                 publishStartDate: desc
@@ -16,7 +16,7 @@ app_frontend_article_index_by_taxon:
     defaults:
         _controller: app.controller.article:indexByTaxonAction
         _sylius:
-            paginate: 12
+            paginate: 15
             sortable: true
             sorting:
                 publishStartDate: desc

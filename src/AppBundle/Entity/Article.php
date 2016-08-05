@@ -30,7 +30,14 @@ class Article implements ResourceInterface, ReviewableInterface
     use Identifiable;
 
     /**
-     * @var integer
+     * @var string
+     *
+     * @ORM\Column(type="string", unique=true, nullable=true)
+     */
+    protected $code;
+
+    /**
+     * @var string
      *
      * @ORM\Column(type="string", unique=true)
      */
@@ -142,9 +149,28 @@ class Article implements ResourceInterface, ReviewableInterface
         $this->reviews = new ArrayCollection();
     }
 
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
 
     /**
-     * @return int
+     * @param string $code
+     *
+     * @return $this
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * @return string
      */
     public function getDocumentId()
     {
@@ -152,7 +178,7 @@ class Article implements ResourceInterface, ReviewableInterface
     }
 
     /**
-     * @param int $documentId
+     * @param string $documentId
      *
      * @return $this
      */
