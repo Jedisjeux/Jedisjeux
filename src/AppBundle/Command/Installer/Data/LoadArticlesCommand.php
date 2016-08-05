@@ -13,13 +13,13 @@ use AppBundle\Document\BlockquoteBlock;
 use AppBundle\Document\ArticleContent;
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Topic;
-use Doctrine\ODM\PHPCR\DocumentRepository;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
 use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class LoadArticlesCommand extends AbstractLoadDocumentCommand
@@ -27,27 +27,45 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
     use LogMemoryUsageTrait;
 
     /**
+     * @var InputInterface
+     */
+    protected $input;
+
+    /**
      * @var OutputInterface
      */
     protected $output;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
+     */
+    protected function initialize(InputInterface $input, OutputInterface $output)
+    {
+        parent::initialize($input, $output);
+
+        $this->input = $input;
+        $this->output = $output;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     protected function configure()
     {
         $this
             ->setName('app:articles:load')
-            ->setDescription('Load articles');
+            ->setDescription('Load articles')
+            ->addOption('no-update')
+            ->addOption('limit', null, InputOption::VALUE_REQUIRED, 'Set limit of articles to import');
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         gc_collect_cycles();
-        $this->output = $output;
+
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
 
         foreach ($this->getArticles() as $data) {
@@ -118,6 +136,9 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
         if (null === $article) {
             $article = $this->getFactory()->createNew();
         }
+
+        $article
+            ->setCode(sprintf('article-%s', $data['id']));
 
         $articleDocument = $article->getDocument();
 
@@ -210,9 +231,23 @@ from jedisjeux.jdj_article article
   left join sylius_user user
     on convert(user.username USING UTF8) = convert(article.auteur USING UTF8)
 where titre_clean != ''
-and type_article != 'reportage'
 group by article.article_id
 EOM;
+
+        if ($this->input->hasOption('no-update')) {
+            $query .= <<<EOM
+
+AND not exists (
+   select 0
+   from jdj_article a
+   where a.code = concat('article-', article.article_id)
+)
+EOM;
+        }
+
+        if ($this->input->hasOption('limit')) {
+            $query .= sprintf(' limit %s', $this->input->getOption('limit'));
+        }
 
         return $this->getDatabaseConnection()->fetchAll($query);
     }
