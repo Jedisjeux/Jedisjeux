@@ -26,7 +26,7 @@
     {% set articleIsTest = 'review-articles' == mainTaxonCode %}
 
     <div class="container">
-        <div class="col-md-9">
+        <div class="col-md-8">
 
             {% for block in article.document.children %}
 
@@ -71,7 +71,7 @@
             {% endif %}
 
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             {% include "frontend/content/page/article_content/_sidebar.html.twig" %}
         </div>
     </div>

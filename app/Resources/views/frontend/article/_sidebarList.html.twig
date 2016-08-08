@@ -4,6 +4,7 @@
     {% for article in articles %}
         {% set user = article.author.user %}
         {% set articleDocument = article.document %}
+        {% set imagineBlock = articleDocument.mainImage %}
 
         {% set meta %}
             <!-- Date -->
@@ -21,7 +22,7 @@
         <li>
             <a href="{{ path('article_content_show', {'name': articleDocument.name}) }}">
                 <!-- Item image -->
-                <img src="{{ avatar(user) | imagine_filter('thumbnail') }}" alt="" class="img-responsive img-round"/>
+                <img src="{{ imagineBlock.image.id | imagine_filter('cmf_thumbnail') }}" alt="" class="img-responsive img-round"/>
 
                 <!-- Item title -->
                 <span>{{ article.title }}</span><br/>
