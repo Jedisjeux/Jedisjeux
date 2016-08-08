@@ -1,8 +1,8 @@
 {% extends "base.html.twig" %}
 
-{% from 'macros/posts.html.twig' import blogCommentItem %}
+{% from 'macros/posts.html.twig' import blogCommentItem as postComment %}
 {% import 'macros/items.html.twig' as item %}
-{% from 'macros/game_reviews.html.twig' import blogCommentItem %}
+{% from 'macros/game_reviews.html.twig' import blogCommentItem as reviewComment %}
 
 {% set topic = article.topic %}
 
@@ -50,7 +50,7 @@
 
                 <div class="blog-comments">
                     {% for review in article.reviews %}
-                        {{ blogCommentItem(review) }}
+                        {{ reviewComment(review) }}
                     {% endfor %}
                 </div>
             {% endif %}
@@ -65,14 +65,14 @@
 
                 <div class="blog-comments">
                     {% for post in topic.posts %}
-                        {{ blogCommentItem(post) }}
+                        {{ postComment(post) }}
                     {% endfor %}
                 </div>
             {% endif %}
 
         </div>
         <div class="col-md-3">
-            {% include "frontend/content/page/article_content/_sidebar.html.twig" %}
+            {#{% include "frontend/content/page/article_content/_sidebar.html.twig" %}#}
         </div>
     </div>
 
