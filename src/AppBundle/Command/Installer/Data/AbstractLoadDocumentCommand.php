@@ -206,6 +206,17 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
         return $this->parent;
     }
 
+    /**
+     * @param integer $itemCount
+     * @param integer $totalCount
+     */
+    protected function showTotalOfItemsLoaded($itemCount, $totalCount)
+    {
+        $percentage = round($itemCount * 100 / $totalCount);
+
+        $this->output->writeln(sprintf('<comment>%s</comment> items loaded of <comment>%s</comment> (<comment>%s percent</comment>)', $itemCount, $totalCount, $percentage));
+    }
+
     protected function clearDoctrineCache()
     {
         $commands = [

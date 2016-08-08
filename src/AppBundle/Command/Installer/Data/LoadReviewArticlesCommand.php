@@ -136,6 +136,8 @@ class LoadReviewArticlesCommand extends AbstractLoadDocumentCommand
         }
 
         $this->clearDoctrineCache();
+        $stats = $this->getTotalOfItemsLoaded();
+        $this->showTotalOfItemsLoaded($stats['itemCount'], $stats['totalCount']);
     }
 
     /**
@@ -284,5 +286,20 @@ EOM;
         }
 
         return $this->getDatabaseConnection()->fetchAll($query);
+    }
+
+    /**
+     * @return array
+     */
+    protected function getTotalOfItemsLoaded()
+    {
+        $query = <<<EOM
+select count(article.id) as itemCount, count(0) as totalCount
+from jedisjeux.jdj_tests old
+  left join jdj_article article
+    on article.code = concat('review-article-', old.game_id);
+EOM;
+
+        return $this->getDatabaseConnection()->fetchAssoc($query);
     }
 }

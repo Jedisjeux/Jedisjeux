@@ -109,8 +109,8 @@ class LoadNewsCommand extends AbstractLoadDocumentCommand
         }
 
         $this->clearDoctrineCache();
-        $stats = $this->getTotalOfNewsLoaded();
-        $this->showTotalOfNewsLoaded($stats['itemCount'], $stats['totalCount']);
+        $stats = $this->getTotalOfItemsLoaded();
+        $this->showTotalOfItemsLoaded($stats['itemCount'], $stats['totalCount']);
     }
 
     protected function getNews()
@@ -162,30 +162,18 @@ EOM;
     }
 
     /**
-     * @param integer $itemCount
-     * @param integer $totalCount
-     */
-    protected function showTotalOfNewsLoaded($itemCount, $totalCount)
-    {
-        $percentage = round($itemCount * 100 / $totalCount);
-
-        $this->output->writeln(sprintf('<comment>%s</comment> items loaded of <comment>%s</comment> (<comment>%s percent</comment>)', $itemCount, $totalCount, $percentage));
-    }
-
-    /**
      * @return array
      */
-    protected function getTotalOfNewsLoaded()
+    protected function getTotalOfItemsLoaded()
     {
         $query = <<<EOM
 select count(article.id) as itemCount, count(0) as totalCount
   from jedisjeux.jdj_news news
 left join jdj_article article
-    on article.code = concat('news-', news.news_id);
+    on article.code = concat('news-', news.news_id)
 EOM;
 
         return $this->getDatabaseConnection()->fetchAssoc($query);
-
     }
 
     /**

@@ -103,6 +103,8 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
         }
 
         $this->clearDoctrineCache();
+        $stats = $this->getTotalOfItemsLoaded();
+        $this->showTotalOfItemsLoaded($stats['itemCount'], $stats['totalCount']);
     }
 
     /**
@@ -157,13 +159,9 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
 
     protected function createOrReplaceIntroductionBlock(ArticleContent $page, array $data)
     {
-        $name = 'block0';
+        $block = $page->getChildren()->first();
 
-        $block = $this
-            ->getSingleImageBlockRepository()
-            ->findOneBy(array('name' => $name));
-
-        if (null === $block) {
+        if (false === $block) {
             $block = new BlockquoteBlock();
             $block
                 ->setParentDocument($page);
@@ -171,7 +169,7 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
 
         $block
             ->setBody(sprintf('<p>%s</p>', $data['introduction']))
-            ->setName($name)
+            ->setName('introduction')
             ->setPublishable(true);
 
         return $block;
@@ -212,7 +210,6 @@ from jedisjeux.jdj_article article
   left join sylius_user user
     on convert(user.username USING UTF8) = convert(article.auteur USING UTF8)
 where titre_clean != ''
-group by article.article_id
 EOM;
 
         if ($this->input->hasOption('no-update')) {
@@ -235,6 +232,7 @@ EOM;
 
     /**
      * @param string $ids
+     *
      * @return array
      */
     protected function getBlocks($ids)
@@ -269,5 +267,18 @@ EOM;
         return $this->getDatabaseConnection()->fetchAll($query);
     }
 
+    /**
+     * @return array
+     */
+    protected function getTotalOfItemsLoaded()
+    {
+        $query = <<<EOM
+select count(article.id) as itemCount, count(0) as totalCount
+from jedisjeux.jdj_article old
+  left join jdj_article article
+    on article.code = concat('article-', old.article_id)
+EOM;
 
+        return $this->getDatabaseConnection()->fetchAssoc($query);
+    }
 }
