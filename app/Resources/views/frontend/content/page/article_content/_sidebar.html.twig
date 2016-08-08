@@ -105,6 +105,50 @@
 
     {% endif %}
 
+    <!-- Nav tab widget - popular, recent and comments -->
+    <div class="s-widget">
+        <h5><i class="fa fa-book color"></i> A lire aussi...</h5>
+
+        <div class="widget-content tabs">
+            <div class="nav-tabs-two">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#recent" data-toggle="tab">Récents</a></li>
+                    <li><a href="#popular" data-toggle="tab">Populaires</a></li>
+                </ul>
+                <!-- Tab content -->
+                <div class="tab-content">
+                    <!-- Recent posts -->
+                    <div class="tab-pane fade in active" id="recent">
+                        {{ render(url('app_partial_article_index', {
+                            'criteria': {
+                                'publishable': 1
+                            },
+                            'sorting': {
+                                'publishStartDate': 'desc'
+                            },
+                            'paginate': 5,
+                            'template': 'frontend/article/_sidebarList.html.twig'
+                        })) }}
+                    </div>
+                    <!-- Popular posts -->
+                    <div class="tab-pane fade" id="popular">
+                        {{ render(url('app_partial_article_index', {
+                            'criteria': {
+                                'publishable': 1
+                            },
+                            'sorting': {
+                                'topic.postCount': 'desc'
+                            },
+                            'paginate': 5,
+                            'template': 'frontend/article/_sidebarList.html.twig'
+                        })) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Tag Widget -->
     <div class="s-widget">
