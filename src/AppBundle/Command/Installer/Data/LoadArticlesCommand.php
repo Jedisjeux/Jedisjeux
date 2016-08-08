@@ -223,6 +223,11 @@ AND not exists (
 EOM;
         }
 
+        $query .= <<<EOM
+        
+        group by article.article_id
+EOM;
+
         if ($this->input->hasOption('limit')) {
             $query .= sprintf(' limit %s', $this->input->getOption('limit'));
         }
