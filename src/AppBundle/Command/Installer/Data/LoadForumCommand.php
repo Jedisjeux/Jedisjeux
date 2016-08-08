@@ -55,6 +55,7 @@ class LoadForumCommand extends ContainerAwareCommand
         $this->deleteTaxons($rootTaxon);
         $this->loadTaxons($rootTaxon);
         $this->setTopicsMainTaxon();
+        $this->updatePostCountByTopic();
         $this->calculateTopicCountByTaxon();
     }
 
@@ -270,6 +271,25 @@ EOM;
             $this->getPostManager()->flush($post);
             $this->getPostManager()->clear($post);
         }
+    }
+
+    protected function updatePostCountByTopic()
+    {
+        $query = <<<EOM
+update jdj_topic topic
+    inner join jdj_post post
+    on post.topic_id = topic.id
+set topic.postCount = (
+    select count(0)
+  from jdj_post a
+    where a.topic_id = topic.id
+  group by a.topic_id
+)
+
+EOM;
+
+        $this->getDatabaseConnection()->executeQuery($query);
+
     }
 
     /**

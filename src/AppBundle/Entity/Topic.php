@@ -35,7 +35,7 @@ class Topic implements ResourceInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=false)
+     * @ORM\Column(type="string")
      * @JMS\Expose
      */
     protected $title;
@@ -54,6 +54,14 @@ class Topic implements ResourceInterface
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Post", mappedBy="topic", cascade={"persist", "remove"})
      */
     protected $posts;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @JMS\Expose
+     */
+    protected $postCount;
 
     /**
      * @var Taxon
@@ -91,6 +99,7 @@ class Topic implements ResourceInterface
     {
         $this->posts = new ArrayCollection();
         $this->followers = new ArrayCollection();
+        $this->postCount = 0;
     }
 
     /**
@@ -109,6 +118,26 @@ class Topic implements ResourceInterface
     public function setTitle($title)
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPostCount()
+    {
+        return $this->postCount;
+    }
+
+    /**
+     * @param int $postCount
+     *
+     * @return $this
+     */
+    public function setPostCount($postCount)
+    {
+        $this->postCount = $postCount;
 
         return $this;
     }
