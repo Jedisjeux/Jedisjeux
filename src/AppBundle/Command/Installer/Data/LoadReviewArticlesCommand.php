@@ -24,19 +24,15 @@ use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
 use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class LoadTestsCommand extends AbstractLoadDocumentCommand
+class LoadReviewArticlesCommand extends AbstractLoadDocumentCommand
 {
     use LogMemoryUsageTrait;
-
-    /**
-     * @var Generic
-     */
-    protected $parent;
 
     /**
      * {@inheritdoc}
@@ -44,8 +40,10 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
     protected function configure()
     {
         $this
-            ->setName('app:tests:load')
-            ->setDescription('Load tests');
+            ->setName('app:review-articles:load')
+            ->setDescription('Load review articles')
+            ->addOption('no-update')
+            ->addOption('limit', null, InputOption::VALUE_REQUIRED, 'Set limit of review-articles to import');
     }
 
     /**
@@ -57,10 +55,10 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
 
         foreach ($this->getTests() as $data) {
-            $output->writeln(sprintf("Loading test of <info>%s</info> product", $data['product_name']));
+            $output->writeln(sprintf("Loading test of <comment>%s</comment> product", $data['product_name']));
             $this->logMemoryUsage($output);
 
-            $article = $this->createOrReplaceTest($data);
+            $article = $this->createOrReplaceArticle($data);
 
             /** @var TaxonInterface $mainTaxon */
             $mainTaxon = $this->getTaxonRepository()->findOneBy(['code' => Taxon::CODE_REVIEW_ARTICLE]);
@@ -136,6 +134,8 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
             $this->getDocumentManager()->detach($articleDocument);
             $this->getDocumentManager()->clear();
         }
+
+        $this->clearDoctrineCache();
     }
 
     /**
@@ -143,7 +143,7 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
      *
      * @return Article
      */
-    protected function createOrReplaceTest(array $data)
+    protected function createOrReplaceArticle(array $data)
     {
         $article = $this->findArticle($data['name']);
 
@@ -151,6 +151,7 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
             $article = $this->getFactory()->createNew();
         }
 
+        $article->setCode('review-article-'.$data['id']);
         $articleDocument = $article->getDocument();
 
         if (null !== $data['main_image']) {
@@ -213,8 +214,8 @@ select test.game_id as id,
        product.id as product_id,
        productTranslation.name as product_name,
        game.couverture as main_image,
-       concat('Test de ', productTranslation.name) as title,
-       concat('test-de-', productTranslation.slug) as name,
+       concat('Critique de ', productTranslation.name) as title,
+       concat('critique-', productTranslation.slug, '-ra-', test.game_id) as name,
        topic.id as topic_id,
        customer.id as author_id,
        test.intro as introduction,
@@ -260,8 +261,27 @@ from jedisjeux.jdj_tests test
         and lifetime_img.ordre = 3
   left join jedisjeux.jdj_images lifetime_image
         on lifetime_image.img_id = lifetime_img.img_id
-  order by test.date desc
 EOM;
+
+        if ($this->input->hasOption('no-update')) {
+            $query .= <<<EOM
+
+WHERE not exists (
+   select 0
+   from jdj_article a
+   where a.code = concat('review-article-', test.game_id)
+)
+EOM;
+        }
+
+        $query .= <<<EOM
+
+order by    test.date desc
+EOM;
+
+        if ($this->input->hasOption('limit')) {
+            $query .= sprintf(' limit %s', $this->input->getOption('limit'));
+        }
 
         return $this->getDatabaseConnection()->fetchAll($query);
     }

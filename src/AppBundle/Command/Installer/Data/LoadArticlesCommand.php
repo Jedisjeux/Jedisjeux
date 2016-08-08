@@ -27,27 +27,6 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
     use LogMemoryUsageTrait;
 
     /**
-     * @var InputInterface
-     */
-    protected $input;
-
-    /**
-     * @var OutputInterface
-     */
-    protected $output;
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function initialize(InputInterface $input, OutputInterface $output)
-    {
-        parent::initialize($input, $output);
-
-        $this->input = $input;
-        $this->output = $output;
-    }
-
-    /**
      * {@inheritdoc}
      */
     protected function configure()
@@ -69,7 +48,7 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
 
         foreach ($this->getArticles() as $data) {
-            $output->writeln(sprintf("Loading <info>%s</info> article", $data['title']));
+            $output->writeln(sprintf("Loading <comment>%s</comment> article", $data['title']));
             $this->logMemoryUsage($output);
 
             $article = $this->createOrReplaceArticle($data);
@@ -122,6 +101,8 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
             $this->getDocumentManager()->detach($articleDocument);
             $this->getDocumentManager()->clear();
         }
+
+        $this->clearDoctrineCache();
     }
 
     /**
@@ -203,7 +184,7 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
     {
         $query = <<<EOM
 select article.article_id as id,
-       replace(article.titre_clean, ' ', '-') as name,
+       concat(replace(article.titre_clean, ' ', '-'), '-a-', article.article_id) as name,
        article.titre as title,
        article.date as publishedAt,
        article.intro as introduction,

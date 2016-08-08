@@ -29,27 +29,6 @@ class LoadNewsCommand extends AbstractLoadDocumentCommand
     use LogMemoryUsageTrait;
 
     /**
-     * @var InputInterface
-     */
-    protected $input;
-
-    /**
-     * @var OutputInterface
-     */
-    protected $output;
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function initialize(InputInterface $input, OutputInterface $output)
-    {
-        parent::initialize($input, $output);
-
-        $this->input = $input;
-        $this->output = $output;
-    }
-
-    /**
      * {@inheritdoc}
      */
     protected function configure()
@@ -71,7 +50,7 @@ class LoadNewsCommand extends AbstractLoadDocumentCommand
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
 
         foreach ($this->getNews() as $data) {
-            $output->writeln(sprintf("Loading <info>%s</info> news", $data['title']));
+            $output->writeln(sprintf("Loading <comment>%s</comment> news", $data['title']));
             $this->logMemoryUsage($output);
 
             $article = $this->createOrReplaceArticle($data);
@@ -127,9 +106,11 @@ class LoadNewsCommand extends AbstractLoadDocumentCommand
 
             $this->getDocumentManager()->detach($articleContent);
             $this->getDocumentManager()->clear();
-
-
         }
+
+        $this->clearDoctrineCache();
+        $stats = $this->getTotalOfNewsLoaded();
+        $this->showTotalOfNewsLoaded($stats['itemCount'], $stats['totalCount']);
     }
 
     protected function getNews()
@@ -137,7 +118,7 @@ class LoadNewsCommand extends AbstractLoadDocumentCommand
         $query = <<<EOM
 select      old.news_id as id,
             old.titre as title,
-            replace(old.titre_clean, ' ', '-') as name,
+            concat(replace(old.titre_clean, ' ', '-'), '-n-', old.news_id) as name,
             old.date as publishedAt,
             old.text as body,
             old.photo as mainImage,
@@ -156,6 +137,7 @@ from        jedisjeux.jdj_news old
     on topic.id = old.topic_id
 WHERE       old.valid = 1
             AND       old.type_lien in (0, 1)
+AND old.news_id not in (5070)
 EOM;
 
         if ($this->input->hasOption('no-update')) {
@@ -177,6 +159,33 @@ EOM;
         }
 
         return $this->getDatabaseConnection()->fetchAll($query);
+    }
+
+    /**
+     * @param integer $itemCount
+     * @param integer $totalCount
+     */
+    protected function showTotalOfNewsLoaded($itemCount, $totalCount)
+    {
+        $percentage = round($itemCount * 100 / $totalCount);
+
+        $this->output->writeln(sprintf('<comment>%s</comment> items loaded of <comment>%s</comment> (<comment>%s percent</comment>)', $itemCount, $totalCount, $percentage));
+    }
+
+    /**
+     * @return array
+     */
+    protected function getTotalOfNewsLoaded()
+    {
+        $query = <<<EOM
+select count(article.id) as itemCount, count(0) as totalCount
+  from jedisjeux.jdj_news news
+left join jdj_article article
+    on article.code = concat('news-', news.news_id);
+EOM;
+
+        return $this->getDatabaseConnection()->fetchAssoc($query);
+
     }
 
     /**

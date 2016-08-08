@@ -22,10 +22,14 @@ use Doctrine\ODM\PHPCR\DocumentRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use PHPCR\Util\NodeHelper;
+use Sylius\Bundle\InstallerBundle\Command\CommandExecutor;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
 use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Process\Exception\RuntimeException;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -36,6 +40,44 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
      * @var Generic
      */
     protected $parent;
+
+    /**
+     * @var InputInterface
+     */
+    protected $input;
+
+    /**
+     * @var OutputInterface
+     */
+    protected $output;
+
+    /**
+     * @var CommandExecutor
+     */
+    protected $commandExecutor;
+
+    /**
+     * @var bool
+     */
+    private $isErrored = false;
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function initialize(InputInterface $input, OutputInterface $output)
+    {
+        $this->input = $input;
+        $this->output = $output;
+
+        $application = $this->getApplication();
+        $application->setCatchExceptions(false);
+
+        $this->commandExecutor = new CommandExecutor(
+            $input,
+            $output,
+            $application
+        );
+    }
 
     /**
      * @param ArticleContent $page
@@ -88,7 +130,7 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
 
         return $block;
     }
-    
+
     /**
      * @param SingleImageBlock $block
      * @param array $data
@@ -163,7 +205,27 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
 
         return $this->parent;
     }
-    
+
+    protected function clearDoctrineCache()
+    {
+        $commands = [
+            'clear-metadata',
+            'clear-query',
+            'clear-result',
+        ];
+
+        foreach ($commands as $step => $command) {
+            try {
+                $this->commandExecutor->runCommand('doctrine:cache:'.$command, [], $this->output);
+                $this->output->writeln('');
+            } catch (RuntimeException $exception) {
+                $this->isErrored = true;
+
+                continue;
+            }
+        }
+    }
+
     /**
      * @param string $path
      *
