@@ -9,7 +9,6 @@
 namespace AppBundle\Entity;
 
 use AppBundle\Document\ArticleContent;
-use AppBundle\Model\IdentifiableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -47,6 +46,13 @@ class Article implements ResourceInterface, ReviewableInterface
      * @var ArticleContent
      */
     protected $document;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $name;
 
     /**
      * @var string
@@ -165,6 +171,26 @@ class Article implements ResourceInterface, ReviewableInterface
     public function setCode($code)
     {
         $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
 
         return $this;
     }
@@ -462,14 +488,6 @@ class Article implements ResourceInterface, ReviewableInterface
         $this->publishable = $publishable;
 
         return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->getDocument()->getTitle();
     }
 
     /**

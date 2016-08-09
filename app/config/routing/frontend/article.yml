@@ -23,3 +23,14 @@ app_frontend_article_index_by_taxon:
             template: frontend/article/index.html.twig
     requirements:
         permalink: "[^?]+"
+
+app_frontend_article_show:
+    methods: [GET]
+    path: /article/{name}
+    defaults:
+        _controller: app.controller.article:showWithTaxonsAction
+        _sylius:
+            repository:
+                method: findOneBy
+                arguments: [name: $name]
+            template: frontend/article/show.html.twig

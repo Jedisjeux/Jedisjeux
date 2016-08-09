@@ -26,6 +26,39 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class ArticleController extends ResourceController
 {
+
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showWithTaxonsAction(Request $request)
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        $this->isGrantedOr403($configuration, ResourceActions::SHOW);
+        $resource = $this->findOr404($configuration);
+
+        $this->eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $resource);
+
+        $view = View::create($resource);
+
+        if ($configuration->isHtmlRequest()) {
+            $view
+                ->setTemplate($configuration->getTemplate(ResourceActions::SHOW . '.html'))
+                ->setTemplateVar($this->metadata->getName())
+                ->setData([
+                    'rootTaxons' => $this->getRootTaxons(),
+                    'configuration' => $configuration,
+                    'metadata' => $this->metadata,
+                    'resource' => $resource,
+                    $this->metadata->getName() => $resource,
+                ])
+            ;
+        }
+
+        return $this->viewHandler->handle($configuration, $view);
+    }
+
     /**
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
@@ -34,8 +67,6 @@ class ArticleController extends ResourceController
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $this->isGrantedOr403($configuration, ResourceActions::INDEX);
-
-        $rootTaxons = $this->getTaxonRepository()->findBy(['code' => [Taxon::CODE_ARTICLE]]);
 
         $resources = $this->resourcesCollectionProvider->get($configuration, $this->repository);
 
@@ -46,7 +77,7 @@ class ArticleController extends ResourceController
                 ->setTemplate($configuration->getTemplate(ResourceActions::INDEX))
                 ->setTemplateVar($this->metadata->getPluralName())
                 ->setData([
-                    'rootTaxons' => $rootTaxons,
+                    'rootTaxons' => $this->getRootTaxons(),
                     'metadata' => $this->metadata,
                     'resources' => $resources,
                     $this->metadata->getPluralName() => $resources,
@@ -72,8 +103,6 @@ class ArticleController extends ResourceController
             throw new NotFoundHttpException('Requested taxon does not exist.');
         }
 
-        $rootTaxons = $this->getTaxonRepository()->findBy(['code' => [Taxon::CODE_ARTICLE]]);
-
         /** @var ArticleRepository $repository */
         $repository = $this->repository;
 
@@ -90,7 +119,7 @@ class ArticleController extends ResourceController
                 ->setTemplateVar($this->metadata->getPluralName())
                 ->setData([
                     'taxon' => $taxon,
-                    'rootTaxons' => $rootTaxons,
+                    'rootTaxons' => $this->getRootTaxons(),
                     'metadata' => $this->metadata,
                     'resources' => $resources,
                     $this->metadata->getPluralName() => $resources,
@@ -99,6 +128,14 @@ class ArticleController extends ResourceController
         }
 
         return $this->viewHandler->handle($configuration, $view);
+    }
+
+    /**
+     * @return array
+     */
+    protected function getRootTaxons()
+    {
+        return $this->getTaxonRepository()->findBy(['code' => [Taxon::CODE_ARTICLE]]);
     }
 
     /**

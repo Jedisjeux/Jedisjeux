@@ -80,6 +80,9 @@ class LoadReviewsOfArticlesCommand extends ContainerAwareCommand
         $articleReview->setReviewSubject($article);
         $articleReview->setRating($data['rating']);
         $articleReview->setComment($data['comment']);
+
+        $article->addReview($articleReview);
+
         /** @var AverageRatingCalculator $averageRatingCalculator */
         $averageRatingCalculator = $this->getContainer()->get('sylius.review.calculator.average_rating');
         $article->setAverageRating($averageRatingCalculator->calculate($article));

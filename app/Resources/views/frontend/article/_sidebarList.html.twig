@@ -20,7 +20,7 @@
 
 
         <li>
-            <a href="{{ path('article_content_show', {'name': articleDocument.name}) }}">
+            <a href="{{ path('app_frontend_article_show', {'name': article.name}) }}">
                 <!-- Item image -->
                 <img src="{{ imagineBlock.image.id | imagine_filter('cmf_thumbnail') }}" alt="" class="img-responsive img-round"/>
 

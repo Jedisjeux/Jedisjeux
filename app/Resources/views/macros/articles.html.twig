@@ -12,7 +12,7 @@
 
     {% set imageFilter = imageFilter|default('cmf_magazine_item_wide') %}
 
-    {{ item.magazineItemOne(imagineBlock.image.id, imagineBlock.label, imageFilter, 'img-responsive', path('article_content_show', {'name': articleDocument.name}), articleDocument.title, body, meta) }}
+    {{ item.magazineItemOne(imagineBlock.image.id, imagineBlock.label, imageFilter, 'img-responsive', path('app_frontend_article_show', {'name': article.name}), articleDocument.title, body, meta) }}
 
 {% endmacro %}
 
@@ -30,7 +30,7 @@
 
     {% set imageFilter = imageFilter|default('cmf_magazine_item') %}
 
-    {{ item.magazineItemTwo(imagineBlock.image.id, imagineBlock.label, imageFilter, 'img-responsive', path('article_content_show', {'name': articleDocument.name}), articleDocument.title, body, meta) }}
+    {{ item.magazineItemTwo(imagineBlock.image.id, imagineBlock.label, imageFilter, 'img-responsive', path('app_frontend_article_show', {'name': article.name}), articleDocument.title, body, meta) }}
 
 {% endmacro %}
 
@@ -45,7 +45,7 @@
         - <i class="fa fa-comments"></i> {{ article.topic ? article.topic.postCount : 0 }} Comments
     {% endset %}
 
-    {{ item.magazineListItem(imagineBlock.image.id, imagineBlock.label, 'cmf_thumbnail', 'img-responsive', path('article_content_show', {'name': articleDocument.name}), articleDocument.title, meta) }}
+    {{ item.magazineListItem(imagineBlock.image.id, imagineBlock.label, 'cmf_thumbnail', 'img-responsive', path('app_frontend_article_show', {'name': article.name}), articleDocument.title, meta) }}
 
 {% endmacro %}
 
@@ -60,6 +60,6 @@
         - <i class="fa fa-comments"></i> {{ article.topic ? article.topic.postCount : 0 }} Comments
     {% endset %}
 
-    {{ item.magazineListItemImageLess(path('article_content_show', {'name': articleDocument.name}), articleDocument.title, meta) }}
+    {{ item.magazineListItemImageLess(path('app_frontend_article_show', {'name': article.name}), articleDocument.title, meta) }}
 
 {% endmacro %}
