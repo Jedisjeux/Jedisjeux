@@ -29,21 +29,8 @@
                 </ul>
                 <!-- Tab content -->
                 <div class="tab-content">
-                    <!-- Recent posts -->
-                    <div class="tab-pane fade in active" id="recent">
-                        {{ render(url('app_partial_article_index', {
-                            'criteria': {
-                                'publishable': 1
-                            },
-                            'sorting': {
-                                'publishStartDate': 'desc'
-                            },
-                            'paginate': 5,
-                            'template': 'frontend/article/_sidebarList.html.twig'
-                        })) }}
-                    </div>
                     <!-- Popular posts -->
-                    <div class="tab-pane fade" id="popular">
+                    <div class="tab-pane fade in active" id="popular">
                         {{ render(url('app_partial_article_index', {
                             'criteria': {
                                 'publishable': 1
@@ -55,6 +42,20 @@
                             'template': 'frontend/article/_sidebarList.html.twig'
                         })) }}
                     </div>
+                    <!-- Recent posts -->
+                    <div class="tab-pane fade" id="recent">
+                        {{ render(url('app_partial_article_index', {
+                            'criteria': {
+                                'publishable': 1
+                            },
+                            'sorting': {
+                                'publishStartDate': 'desc'
+                            },
+                            'paginate': 5,
+                            'template': 'frontend/article/_sidebarList.html.twig'
+                        })) }}
+                    </div>
+
                 </div>
             </div>
         </div>
