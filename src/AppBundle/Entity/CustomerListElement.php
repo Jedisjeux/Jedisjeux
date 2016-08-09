@@ -8,12 +8,10 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Model\Identifiable;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
-
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -23,7 +21,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  */
 class CustomerListElement implements ResourceInterface
 {
-    use Identifiable,
+    use IdentifiableTrait,
         Timestampable;
 
     /**

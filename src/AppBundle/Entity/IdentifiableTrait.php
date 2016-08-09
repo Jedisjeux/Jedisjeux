@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Model;
+namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Expose;
@@ -10,7 +10,7 @@ use JMS\Serializer\Annotation\Expose;
  *
  * Should be used inside entity, that needs to have an id.
  */
-trait Identifiable
+trait IdentifiableTrait
 {
     /**
      * @var integer

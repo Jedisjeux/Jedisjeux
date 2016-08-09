@@ -9,7 +9,7 @@
 namespace AppBundle\Entity;
 
 use AppBundle\Document\ArticleContent;
-use AppBundle\Model\Identifiable;
+use AppBundle\Model\IdentifiableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -27,7 +27,7 @@ use Sylius\Component\User\Model\CustomerInterface;
  */
 class Article implements ResourceInterface, ReviewableInterface
 {
-    use Identifiable;
+    use IdentifiableTrait;
 
     /**
      * @var string

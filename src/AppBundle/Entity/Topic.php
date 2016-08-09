@@ -10,7 +10,6 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use AppBundle\Model\Identifiable;
 use JMS\Serializer\Annotation as JMS;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
@@ -28,7 +27,7 @@ use Sylius\Component\User\Model\CustomerInterface;
  */
 class Topic implements ResourceInterface
 {
-    use Identifiable,
+    use IdentifiableTrait,
         Blameable,
         Timestampable;
 

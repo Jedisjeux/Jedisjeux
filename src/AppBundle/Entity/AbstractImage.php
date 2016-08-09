@@ -8,7 +8,6 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Model\Identifiable;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -21,7 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 abstract class AbstractImage
 {
-    Use Identifiable;
+    Use IdentifiableTrait;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)

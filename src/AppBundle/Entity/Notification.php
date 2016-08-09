@@ -8,7 +8,6 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Model\Identifiable;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
@@ -26,7 +25,7 @@ use Sylius\Component\User\Model\CustomerInterface;
  */
 class Notification implements ResourceInterface
 {
-    use Identifiable,
+    use IdentifiableTrait,
         Timestampable;
 
     /**
