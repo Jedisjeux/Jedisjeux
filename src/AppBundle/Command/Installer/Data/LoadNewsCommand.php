@@ -137,11 +137,12 @@ from        jedisjeux.jdj_news old
     on topic.id = old.topic_id
 WHERE       old.valid = 1
             AND       old.type_lien in (0, 1)
-AND old.news_id not in (5070)
+
 EOM;
 
-        if ($this->input->hasOption('no-update')) {
+        if ($this->input->getOption('no-update')) {
             $query .= <<<EOM
+
 AND not exists (
    select 0
    from jdj_article article
@@ -151,7 +152,8 @@ EOM;
         }
 
         $query .= <<<EOM
- order by    old.date desc
+ 
+order by    old.date desc
 EOM;
 
         if ($this->input->hasOption('limit')) {
@@ -171,6 +173,7 @@ select count(article.id) as itemCount, count(0) as totalCount
   from jedisjeux.jdj_news news
 left join jdj_article article
     on article.code = concat('news-', news.news_id)
+where news.type_lien in (0, 1)
 EOM;
 
         return $this->getDatabaseConnection()->fetchAssoc($query);

@@ -21,6 +21,7 @@ use Doctrine\ODM\PHPCR\DocumentManager;
 use Doctrine\ODM\PHPCR\DocumentRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use Jackalope\NodeType\NodeProcessor;
 use PHPCR\Util\NodeHelper;
 use Sylius\Bundle\InstallerBundle\Command\CommandExecutor;
 use Sylius\Component\Resource\Factory\Factory;
@@ -119,6 +120,8 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
         $body = $bbcode2html
             ->setBody($body)
             ->getFilteredBody();
+
+        $body = preg_replace(NodeProcessor::VALIDATE_STRING, '', $body);
 
         $block
             ->setImagePosition($data['image_position'])

@@ -228,7 +228,7 @@ EOM;
         group by article.article_id
 EOM;
 
-        if ($this->input->hasOption('limit')) {
+        if ($this->input->getOption('limit')) {
             $query .= sprintf(' limit %s', $this->input->getOption('limit'));
         }
 

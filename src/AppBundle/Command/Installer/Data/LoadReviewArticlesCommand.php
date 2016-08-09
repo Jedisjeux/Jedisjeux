@@ -265,7 +265,7 @@ from jedisjeux.jdj_tests test
         on lifetime_image.img_id = lifetime_img.img_id
 EOM;
 
-        if ($this->input->hasOption('no-update')) {
+        if ($this->input->getOption('no-update')) {
             $query .= <<<EOM
 
 WHERE not exists (
