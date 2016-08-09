@@ -1,4 +1,4 @@
-{% from 'macros/taxons.html.twig' import sidebarList  %}
+{% from 'macros/taxons.html.twig' import sidebarList %}
 
 <!-- Sidebar -->
 <div class="sidebar">
@@ -16,27 +16,47 @@
     {% endfor %}
     <hr>
 
-
-    <!-- Tag Widget -->
+    <!-- widget - popular -->
     <div class="s-widget">
-        <h5><i class="fa fa-tags color"></i>&nbsp; Tags</h5>
-        <!-- Widgets Content -->
-        <div class="widget-content">
-            <a href="#" class="label label-color">web</a>
-            <a href="#" class="label label-color">wordpress</a>
-            <a href="#" class="label label-color">php</a>
-            <a href="#" class="label label-color">jquery</a>
-            <a href="#" class="label label-color">java</a>
-            <a href="#" class="label label-color">photoshop</a>
-            <a href="#" class="label label-color">windows</a>
-            <a href="#" class="label label-color">android</a>
-            <a href="#" class="label label-color">ios</a>
-            <a href="#" class="label label-color">chrome</a>
-            <a href="#" class="label label-color">development</a>
-            <a href="#" class="label label-color">plugin</a>
-            <a href="#" class="label label-color">personal</a>
-            <a href="#" class="label label-color">general</a>
+        <h5><i class="fa fa-book color"></i> A lire aussi...</h5>
+
+        <div class="widget-content tabs">
+            <div class="nav-tabs-two">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#popular" data-toggle="tab">Populaires</a></li>
+                    <li><a href="#recent" data-toggle="tab">Récents</a></li>
+                </ul>
+                <!-- Tab content -->
+                <div class="tab-content">
+                    <!-- Recent posts -->
+                    <div class="tab-pane fade in active" id="recent">
+                        {{ render(url('app_partial_article_index', {
+                            'criteria': {
+                                'publishable': 1
+                            },
+                            'sorting': {
+                                'publishStartDate': 'desc'
+                            },
+                            'paginate': 5,
+                            'template': 'frontend/article/_sidebarList.html.twig'
+                        })) }}
+                    </div>
+                    <!-- Popular posts -->
+                    <div class="tab-pane fade" id="popular">
+                        {{ render(url('app_partial_article_index', {
+                            'criteria': {
+                                'publishable': 1
+                            },
+                            'sorting': {
+                                'topic.postCount': 'desc'
+                            },
+                            'paginate': 5,
+                            'template': 'frontend/article/_sidebarList.html.twig'
+                        })) }}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
 </div>
