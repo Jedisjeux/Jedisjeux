@@ -7,6 +7,7 @@
  */
 
 namespace AppBundle\TextFilter;
+use Doctrine\DBAL\Connection;
 
 
 /**
@@ -18,6 +19,21 @@ class Bbcode2Html
      * @var string
      */
     protected $body;
+
+    /**
+     * @var Connection
+     */
+    protected $databaseConnection;
+
+    /**
+     * Bbcode2Html constructor.
+     *
+     * @param Connection $databaseConnection
+     */
+    public function __construct(Connection $databaseConnection)
+    {
+        $this->databaseConnection = $databaseConnection;
+    }
 
     /**
      * @return string

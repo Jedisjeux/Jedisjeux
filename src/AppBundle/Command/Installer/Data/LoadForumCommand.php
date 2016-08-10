@@ -259,7 +259,7 @@ EOM;
         $posts = $queryBuilder->getQuery()->getArrayResult();
 
         foreach ($posts as $data) {
-            $bbcode2html = new Bbcode2Html();
+            $bbcode2html = $this->getBbcode2Html();
             $body = $data['body'];
             $body = $bbcode2html
                 ->setBody($body)
@@ -290,6 +290,14 @@ EOM;
 
         $this->getDatabaseConnection()->executeQuery($query);
 
+    }
+
+    /**
+     * @return Bbcode2Html
+     */
+    protected function getBbcode2Html()
+    {
+        return $this->getContainer()->get('app.text.filter.bbcode2html');
     }
 
     /**

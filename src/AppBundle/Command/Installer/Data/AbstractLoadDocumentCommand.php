@@ -115,7 +115,7 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
                 ->setParentDocument($page);
         }
 
-        $bbcode2html = new Bbcode2Html();
+        $bbcode2html = $this->getBbcode2Html();
         $body = $data['body'];
         $body = $bbcode2html
             ->setBody($body)
@@ -248,6 +248,14 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
     protected function getImageOriginalPath($path)
     {
         return "http://www.jedisjeux.net/img/800/" . $path;
+    }
+
+    /**
+     * @return Bbcode2Html
+     */
+    protected function getBbcode2Html()
+    {
+        return $this->getContainer()->get('app.text.filter.bbcode2html');
     }
 
     /**

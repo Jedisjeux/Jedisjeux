@@ -105,6 +105,13 @@ services:
         tags:
           - { name: form.type, alias: app_game_rate }
 
+
+    # <!-- Text Filters -->
+    app.text.filter.bbcode2html:
+        class: AppBundle\TextFilter\Bbcode2Html
+        arguments:
+            - @database_connection
+
     sonata.block.service.rss:
         class: Sonata\BlockBundle\Block\Service\RssBlockService
         arguments:
