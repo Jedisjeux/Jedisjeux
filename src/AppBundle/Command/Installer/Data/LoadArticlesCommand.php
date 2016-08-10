@@ -20,6 +20,7 @@ use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SlideshowBlock;
 use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
+use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -37,7 +38,8 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
             ->setName('app:articles:load')
             ->setDescription('Load articles')
             ->addOption('no-update')
-            ->addOption('limit', null, InputOption::VALUE_REQUIRED, 'Set limit of articles to import');
+            ->addOption('limit', null, InputOption::VALUE_REQUIRED, 'Set limit of articles to import')
+            ->addOption('mainTaxon', null, InputOption::VALUE_REQUIRED, 'Restrict articles with given taxons');
     }
 
     /**
@@ -71,7 +73,6 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
             } else {
                 $this->populateBlocks($articleDocument, $blocks);
             }
-
 
             if (null !== $data['mainTaxon']) {
                 /** @var TaxonInterface $mainTaxon */
@@ -265,6 +266,32 @@ AND not exists (
    where a.code = concat('article-', article.article_id)
 )
 EOM;
+        }
+
+        if ($this->input->getOption('mainTaxon')) {
+
+            switch ($this->input->getOption('mainTaxon')) {
+                case Taxon::CODE_REPORT_ARTICLE:
+                    $type = 'reportage';
+                    break;
+                case Taxon::CODE_PREVIEWS:
+                    $type = 'preview';
+                    break;
+                case Taxon::CODE_IN_THE_BOXES:
+                    $type = 'cdlb';
+                    break;
+                case Taxon::CODE_INTERVIEW:
+                    $type = 'interview';
+                    break;
+                default:
+                    $type = null;
+            }
+
+            if (null === $type) {
+                Throw new InvalidArgumentException(sprintf('Type %s not found', $this->input->getOption('mainTaxon')));
+            }
+
+            $query .= sprintf(" AND article.type_article = '%s'", $type);
         }
 
         $query .= <<<EOM
