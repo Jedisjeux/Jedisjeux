@@ -272,6 +272,11 @@ EOM;
         group by article.article_id
 EOM;
 
+        $query .= <<<EOM
+ 
+order by    article.date desc
+EOM;
+
         if ($this->input->getOption('limit')) {
             $query .= sprintf(' limit %s', $this->input->getOption('limit'));
         }
