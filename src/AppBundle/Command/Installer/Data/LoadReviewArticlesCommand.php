@@ -65,6 +65,9 @@ class LoadReviewArticlesCommand extends AbstractLoadDocumentCommand
             $article->setMainTaxon($mainTaxon);
 
             $articleDocument = $article->getDocument();
+            $this->getDocumentManager()->persist($articleDocument);
+            $this->getDocumentManager()->flush();
+
             $block = $this->createOrReplaceIntroductionBlock($articleDocument, $data);
             $articleDocument->addChild($block);
             $blocks = [

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of Jedisjeux project.
+ *
+ * (c) Jedisjeux
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace AppBundle;
 
 use AppBundle\DependencyInjection\Compiler\ServicesPass;
@@ -10,8 +19,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class AppBundle extends AbstractResourceBundle
 {
     /**
-     *  Add a comment to this line
-     * @param ContainerBuilder $container
+     * {@inheritdoc}
      */
     public function build(ContainerBuilder $container)
     {
@@ -20,6 +28,9 @@ class AppBundle extends AbstractResourceBundle
         $container->addCompilerPass(new ServicesPass());
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getSupportedDrivers()
     {
         return array(

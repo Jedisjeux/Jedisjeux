@@ -309,6 +309,11 @@ liip_imagine:
             quality: 100
             filters:
                 thumbnail: { size: [80, 55], mode: outbound }
+        cmf_thumbnail_S:
+            data_loader: cmf_media_doctrine_phpcr
+            quality: 100
+            filters:
+                thumbnail: { size: [80, 55], mode: outbound }
         cmf_block_medium:
             data_loader: cmf_media_doctrine_phpcr
             filters:

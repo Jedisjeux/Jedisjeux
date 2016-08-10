@@ -12,11 +12,13 @@ use AppBundle\Command\LogMemoryUsageTrait;
 use AppBundle\Document\BlockquoteBlock;
 use AppBundle\Document\ArticleContent;
 use AppBundle\Entity\Article;
+use AppBundle\Entity\Taxon;
 use AppBundle\Entity\Topic;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
+use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SlideshowBlock;
 use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -57,10 +59,19 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
             $block = $this->createOrReplaceIntroductionBlock($articleDocument, $data);
             $articleDocument->addChild($block);
             $blocks = $this->getBlocks($data['blocks']);
-            $this->populateBlocks($articleDocument, $blocks);
 
             $this->getDocumentManager()->persist($articleDocument);
             $this->getDocumentManager()->flush();
+
+            if (Taxon::CODE_REPORT_ARTICLE === $data['mainTaxon']) {
+                $slideshowBlock = $this->createOrReplaceSlideshowBlock($articleDocument);
+                $this->getDocumentManager()->persist($slideshowBlock);
+                $this->getDocumentManager()->flush();
+                $this->populateBlocks($slideshowBlock, $blocks);
+            } else {
+                $this->populateBlocks($articleDocument, $blocks);
+            }
+
 
             if (null !== $data['mainTaxon']) {
                 /** @var TaxonInterface $mainTaxon */
@@ -183,6 +194,31 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
     }
 
     /**
+     * @param ArticleContent $page
+     *
+     * @return SlideshowBlock
+     */
+    protected function createOrReplaceSlideshowBlock(ArticleContent $page)
+    {
+        /** @var SlideshowBlock $block */
+        $block = $page->getChildren()->next();
+
+        if (false === $block) {
+            $block = new SlideshowBlock();
+            $block
+                ->setParentDocument($page);
+        }
+
+        $block
+            ->setTitle('Slideshow')
+            ->setName('slideshow')
+            ->setPublishable(true);
+
+        return $block;
+    }
+
+
+    /**
      * @return array
      */
     protected function getArticles()
@@ -218,6 +254,7 @@ from jedisjeux.jdj_article article
   left join sylius_user user
     on convert(user.username USING UTF8) = convert(article.auteur USING UTF8)
 where titre_clean != ''
+and article.type_article = 'reportage'
 EOM;
 
         if ($this->input->hasOption('no-update')) {

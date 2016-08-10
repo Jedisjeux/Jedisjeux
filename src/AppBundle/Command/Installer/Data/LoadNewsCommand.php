@@ -56,6 +56,9 @@ class LoadNewsCommand extends AbstractLoadDocumentCommand
             $article = $this->createOrReplaceArticle($data);
             $articleContent = $article->getDocument();
 
+            $this->getDocumentManager()->persist($articleContent);
+            $this->getDocumentManager()->flush();
+
             $blocks = [
                 [
                     'id' => $data['id'],

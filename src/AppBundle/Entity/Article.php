@@ -509,4 +509,26 @@ class Article implements ResourceInterface, ReviewableInterface
 
         return $this;
     }
+
+    /**
+     * @return bool
+     */
+    public function isReviewArticle() {
+        if (null === $this->getMainTaxon()) {
+            return false;
+        }
+
+        return Taxon::CODE_REVIEW_ARTICLE === $this->getMainTaxon()->getCode();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isReportArticle() {
+        if (null === $this->getMainTaxon()) {
+            return false;
+        }
+
+        return Taxon::CODE_REPORT_ARTICLE === $this->getMainTaxon()->getCode();
+    }
 }

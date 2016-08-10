@@ -27,6 +27,8 @@ use PHPCR\Util\NodeHelper;
 use Sylius\Bundle\InstallerBundle\Command\CommandExecutor;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\AbstractBlock;
+use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ContainerBlock;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
 use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
 use Symfony\Component\Console\Input\InputInterface;
@@ -82,14 +84,14 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param ArticleContent $page
+     * @param ContainerBlock $parent
      * @param array $blocks
      */
-    protected function populateBlocks(ArticleContent $page, array $blocks)
+    protected function populateBlocks(ContainerBlock $parent, array $blocks)
     {
         foreach ($blocks as $data) {
-            $block = $this->createOrReplaceBlock($page, $data);
-            $page->addChild($block);
+            $block = $this->createOrReplaceBlock($parent, $data);
+            $parent->addChild($block);
             if (isset($data['image'])) {
                 $this->createOrReplaceImagineBlock($block, $data);
             }
@@ -97,15 +99,16 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param ArticleContent $page
+     * @param ContainerBlock $parent
      * @param array $data
      *
      * @return SingleImageBlock
      */
-    protected function createOrReplaceBlock(ArticleContent $page, array $data)
+    protected function createOrReplaceBlock(ContainerBlock $parent, array $data)
     {
         $name = 'block' . $data['id'];
-        $id = $page->getParentDocument()->getId().'/'.$page->getName().'/'.$name;
+
+        $id = $parent->getParentDocument()->getId().'/'.$name;
 
         try {
             $block = $this
@@ -114,13 +117,13 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
         } catch(PathNotFoundException $exception) {
             $block = new SingleImageBlock();
             $block
-                ->setParentDocument($page);
+                ->setParentDocument($parent);
         }
 
         if (null === $block) {
             $block = new SingleImageBlock();
             $block
-                ->setParentDocument($page);
+                ->setParentDocument($parent);
         }
 
         $bbcode2html = $this->getBbcode2Html();
