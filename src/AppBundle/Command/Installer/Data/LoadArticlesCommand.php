@@ -254,7 +254,6 @@ from jedisjeux.jdj_article article
   left join sylius_user user
     on convert(user.username USING UTF8) = convert(article.auteur USING UTF8)
 where titre_clean != ''
-and article.type_article = 'reportage'
 EOM;
 
         if ($this->input->hasOption('no-update')) {
