@@ -157,8 +157,15 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
         return $article;
     }
 
+    /**
+     * @param ArticleContent $page
+     * @param array $data
+     *
+     * @return BlockquoteBlock
+     */
     protected function createOrReplaceIntroductionBlock(ArticleContent $page, array $data)
     {
+        /** @var BlockquoteBlock $block */
         $block = $page->getChildren()->first();
 
         if (false === $block) {
@@ -189,6 +196,7 @@ select article.article_id as id,
        article.photo as mainImage,
        case article.type_article
             when 'article' then null
+            when 'reportage' then 'report-articles'
             when 'interview' then 'interviews'
             when 'cdlb' then 'in-the-boxes'
             when 'preview' then 'previews'

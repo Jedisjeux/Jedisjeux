@@ -22,6 +22,7 @@ use Doctrine\ODM\PHPCR\DocumentRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Jackalope\NodeType\NodeProcessor;
+use PHPCR\PathNotFoundException;
 use PHPCR\Util\NodeHelper;
 use Sylius\Bundle\InstallerBundle\Command\CommandExecutor;
 use Sylius\Component\Resource\Factory\Factory;
@@ -104,10 +105,17 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
     protected function createOrReplaceBlock(ArticleContent $page, array $data)
     {
         $name = 'block' . $data['id'];
+        $id = $page->getParentDocument()->getId().'/'.$page->getName().'/'.$name;
 
-        $block = $this
-            ->getSingleImageBlockRepository()
-            ->findOneBy(array('name' => $name));
+        try {
+            $block = $this
+                ->getSingleImageBlockRepository()
+                ->findOneBy(array('id' => $id));
+        } catch(PathNotFoundException $exception) {
+            $block = new SingleImageBlock();
+            $block
+                ->setParentDocument($page);
+        }
 
         if (null === $block) {
             $block = new SingleImageBlock();

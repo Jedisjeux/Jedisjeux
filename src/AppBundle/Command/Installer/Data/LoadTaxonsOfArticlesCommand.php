@@ -99,6 +99,10 @@ class LoadTaxonsOfArticlesCommand extends ContainerAwareCommand
                 'name' => 'C\'est dans la boîte',
             ],
             [
+                'code' => Taxon::CODE_REPORT_ARTICLE,
+                'name' => 'Reportages',
+            ],
+            [
                 'code' => Taxon::CODE_INTERVIEW,
                 'name' => 'Interviews',
             ],
