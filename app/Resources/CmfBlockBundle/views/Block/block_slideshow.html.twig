@@ -1,28 +1,39 @@
 {% extends sonata_block.templates.block_base %}
 {% from 'macros/images.html.twig' import image %}
-{% from 'macros/items.html.twig' import magazineItemOne %}
 
 {% block block %}
 
     {% if block.children %}
-        <div class="col-md-12">
-            <div class="row">
-                {% set key = 0 %}
-                {% for slideshowBlock in block.children %}
-                {% set imageBlock = slideshowBlock.children.first %}
-
-                {% if key > 0 and key%4 == 0 %}
-            </div>
-            <div class="row">
-                {% endif %}
-                <div class="col-md-3">
-
-                    {{ magazineItemOne(imageBlock.image.id, imageBlock.label, 'cmf_magazine_item', 'img-responsive', imageBlock.linkUrl, null, slideshowBlock.body, null) }}
-                </div>
-                {% set key = key + 1 %}
+        <div id="{{ block.name }}" class="carousel slide" data-ride="carousel" data-interval="5000" data-pause="hover"
+             data-wrap="true">
+            <!-- Slides. You can also add captions -->
+            <div class="carousel-inner">
+                {% set firstItem = true %}
+                {% for item in block.children %}
+                    {% set imageBlock = item.children.first %}
+                    <!-- Item, First item should have extra class "active" -->
+                    <div class="item{% if firstItem %} active{% endif %}">
+                        {{ image(imageBlock.image.id, 'cmf_block', imageBlock.label, null, imageBlock.linkUrl) }}
+                        {% if item.body %}
+                            <!-- Caption -->
+                            <div class="carousel-caption c-bottom-right">
+                                <!-- Heading -->
+                                {#<h4><a href="#">Some heading here</a></h4>#}
+                                <!-- Para -->
+                                {{ item.body|raw }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    {% set firstItem = false %}
                 {% endfor %}
-
             </div>
+            <!-- Carousel controls (arrows). If you don't need controls, remove the below section -->
+            <a class="left carousel-control" href="#{{ block.name }}" role="button" data-slide="prev">
+                <span class="fa fa-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#{{ block.name }}" role="button" data-slide="next">
+                <span class="fa fa-chevron-right"></span>
+            </a>
         </div>
     {% endif %}
 

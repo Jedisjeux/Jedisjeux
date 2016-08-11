@@ -2,7 +2,6 @@
 
 <ul>
     {% for article in articles %}
-        {% set user = article.author.user %}
         {% set articleDocument = article.document %}
         {% set imagineBlock = articleDocument.mainImage %}
 
