@@ -20,6 +20,9 @@ services:
         arguments:
             - "@app.calculator.topic_count_by_taxon"
 
+    app.updater.post_count_by_topic:
+        class: AppBundle\Updater\PostCountByTopicUpdater
+
     # <!-- Subscribers -->
     app.subscriber.add_topic_follower:
         class: AppBundle\EventSubscriber\AddTopicFollowerSubscriber
@@ -48,6 +51,13 @@ services:
         class: AppBundle\EventSubscriber\CalculateTopicCountByTaxonSubscriber
         arguments:
             - @app.updater.topic_count_by_taxon
+        tags:
+            - { name: kernel.event_subscriber }
+
+    app.subscriber.calculate_post_count_by_topic:
+        class: AppBundle\EventSubscriber\CalculatePostCountByTopicSubscriber
+        arguments:
+            - @app.updater.post_count_by_topic
         tags:
             - { name: kernel.event_subscriber }
 
@@ -94,6 +104,14 @@ services:
         class: AppBundle\Form\Type\GameRateType
         tags:
           - { name: form.type, alias: app_game_rate }
+
+
+    # <!-- Text Filters -->
+    app.text.filter.bbcode2html:
+        class: AppBundle\TextFilter\Bbcode2Html
+        arguments:
+            - @database_connection
+            - @sylius.repository.product
 
     sonata.block.service.rss:
         class: Sonata\BlockBundle\Block\Service\RssBlockService

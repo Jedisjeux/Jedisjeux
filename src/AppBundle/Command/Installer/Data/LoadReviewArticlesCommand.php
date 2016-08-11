@@ -17,32 +17,22 @@ use AppBundle\Document\BlockquoteBlock;
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Taxon;
 use AppBundle\Entity\Topic;
-use AppBundle\Repository\TaxonRepository;
 use Doctrine\ODM\PHPCR\Document\Generic;
-use Doctrine\ODM\PHPCR\DocumentRepository;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityRepository;
-use PHPCR\Util\NodeHelper;
 use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
 use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class LoadTestsCommand extends AbstractLoadDocumentCommand
+class LoadReviewArticlesCommand extends AbstractLoadDocumentCommand
 {
     use LogMemoryUsageTrait;
-
-    /**
-     * @var Generic
-     */
-    protected $parent;
 
     /**
      * {@inheritdoc}
@@ -50,8 +40,10 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
     protected function configure()
     {
         $this
-            ->setName('app:tests:load')
-            ->setDescription('Load tests');
+            ->setName('app:review-articles:load')
+            ->setDescription('Load review articles')
+            ->addOption('no-update')
+            ->addOption('limit', null, InputOption::VALUE_REQUIRED, 'Set limit of review-articles to import');
     }
 
     /**
@@ -62,20 +54,20 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
         gc_collect_cycles();
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
 
-        $this->parent = $this->getParent();
-
-        foreach ($this->getTests() as $data) {
-            $output->writeln(sprintf("Loading test of <info>%s</info> product", $data['product_name']));
-
+        foreach ($this->getTests() as $key => $data) {
+            $output->writeln(sprintf("Loading test of <comment>%s</comment> product", $data['product_name']));
             $this->logMemoryUsage($output);
 
-            $article = $this->createOrReplaceTest($data);
+            $article = $this->createOrReplaceArticle($data);
 
             /** @var TaxonInterface $mainTaxon */
             $mainTaxon = $this->getTaxonRepository()->findOneBy(['code' => Taxon::CODE_REVIEW_ARTICLE]);
             $article->setMainTaxon($mainTaxon);
 
             $articleDocument = $article->getDocument();
+            $this->getDocumentManager()->persist($articleDocument);
+            $this->getDocumentManager()->flush();
+
             $block = $this->createOrReplaceIntroductionBlock($articleDocument, $data);
             $articleDocument->addChild($block);
             $blocks = [
@@ -144,17 +136,23 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
 
             $this->getDocumentManager()->detach($articleDocument);
             $this->getDocumentManager()->clear();
+
+            if ($key > 0 and $key%10 === 0) {
+                $this->clearDoctrineCache();
+            }
         }
+
+        $this->clearDoctrineCache();
+        $stats = $this->getTotalOfItemsLoaded();
+        $this->showTotalOfItemsLoaded($stats['itemCount'], $stats['totalCount']);
     }
-
-
 
     /**
      * @param array $data
      *
      * @return Article
      */
-    protected function createOrReplaceTest(array $data)
+    protected function createOrReplaceArticle(array $data)
     {
         $article = $this->findArticle($data['name']);
 
@@ -162,6 +160,7 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
             $article = $this->getFactory()->createNew();
         }
 
+        $article->setCode('review-article-'.$data['id']);
         $articleDocument = $article->getDocument();
 
         if (null !== $data['main_image']) {
@@ -214,105 +213,6 @@ class LoadTestsCommand extends AbstractLoadDocumentCommand
     }
 
     /**
-     * @param string $name
-     * @return ArticleContent
-     */
-    protected function findPage($name)
-    {
-        $id = $this->parent->getId() . '/' . $name;
-
-        /** @var ArticleContent $page */
-        $page = $this
-            ->getDocumentRepository()
-            ->find($id);
-
-        return $page;
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return Article
-     */
-    protected function findArticle($name)
-    {
-        $documentId = $this->parent->getId() . '/' . $name;
-
-        /** @var Article $article */
-        $article = $this
-            ->getRepository()
-            ->findOneBy(['documentId' => $documentId]);
-
-        return $article;
-    }
-
-    /**
-     * @return Generic
-     */
-    protected function getParent()
-    {
-        $contentBasepath = '/cms/pages/articles';
-        /** @var Generic $parent */
-        $parent = $this->getDocumentManager()->find(null, $contentBasepath);
-
-        if (null === $parent) {
-            $session = $this->getDocumentManager()->getPhpcrSession();
-            NodeHelper::createPath($session, $contentBasepath);
-            $parent = $this->getDocumentManager()->find(null, $contentBasepath);
-        }
-
-        return $parent;
-    }
-
-    /**
-     * @return Factory
-     */
-    public function getDocumentFactory()
-    {
-        return $this->getContainer()->get('app.factory.article_content');
-    }
-
-    /**
-     * @return Factory
-     */
-    public function getFactory()
-    {
-        return $this->getContainer()->get('app.factory.article');
-    }
-
-    /**
-     * @return TaxonRepository
-     */
-    public function getTaxonRepository()
-    {
-        return $this->getContainer()->get('sylius.repository.taxon');
-    }
-
-    /**
-     * @return EntityRepository
-     */
-    public function getRepository()
-    {
-        return $this->getContainer()->get('app.repository.article');
-    }
-
-    /**
-     * @return DocumentRepository
-     */
-    public function getDocumentRepository()
-    {
-        return $this->getContainer()->get('app.repository.article_content');
-    }
-
-    /**
-     * @return EntityManager
-     */
-    protected function getManager()
-    {
-        return $this->getContainer()->get('app.manager.article');
-    }
-
-    /**
      * @return array
      */
     protected function getTests()
@@ -323,8 +223,8 @@ select test.game_id as id,
        product.id as product_id,
        productTranslation.name as product_name,
        game.couverture as main_image,
-       concat('Test de ', productTranslation.name) as title,
-       concat('test-de-', productTranslation.slug) as name,
+       concat('Critique de ', productTranslation.name) as title,
+       concat('critique-', productTranslation.slug, '-ra-', test.game_id) as name,
        topic.id as topic_id,
        customer.id as author_id,
        test.intro as introduction,
@@ -370,9 +270,43 @@ from jedisjeux.jdj_tests test
         and lifetime_img.ordre = 3
   left join jedisjeux.jdj_images lifetime_image
         on lifetime_image.img_id = lifetime_img.img_id
-  order by test.date desc
 EOM;
 
+        if ($this->input->getOption('no-update')) {
+            $query .= <<<EOM
+
+WHERE not exists (
+   select 0
+   from jdj_article a
+   where a.code = concat('review-article-', test.game_id)
+)
+EOM;
+        }
+
+        $query .= <<<EOM
+
+order by    test.date desc
+EOM;
+
+        if ($this->input->hasOption('limit')) {
+            $query .= sprintf(' limit %s', $this->input->getOption('limit'));
+        }
+
         return $this->getDatabaseConnection()->fetchAll($query);
+    }
+
+    /**
+     * @return array
+     */
+    protected function getTotalOfItemsLoaded()
+    {
+        $query = <<<EOM
+select count(article.id) as itemCount, count(0) as totalCount
+from jedisjeux.jdj_tests old
+  left join jdj_article article
+    on article.code = concat('review-article-', old.game_id);
+EOM;
+
+        return $this->getDatabaseConnection()->fetchAssoc($query);
     }
 }

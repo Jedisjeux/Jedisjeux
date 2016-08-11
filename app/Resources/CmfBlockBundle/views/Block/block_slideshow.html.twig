@@ -6,29 +6,21 @@
     {% if block.children %}
         <div id="{{ block.name }}" class="carousel slide" data-ride="carousel" data-interval="5000" data-pause="hover"
              data-wrap="true">
-            <!-- Bootstrap indicators. If you don't need indicators, remove the below section -->
-            <ol class="carousel-indicators">
-                {% set key = 0 %}
-                {% for item in block.children %}
-                    <li data-target="#{{ block.name }}" data-slide-to="{{ key }}"
-                        class="{% if (key == 0) %}active{% endif %}"></li>
-                    {% set key = key + 1 %}
-                {% endfor %}
-            </ol>
             <!-- Slides. You can also add captions -->
             <div class="carousel-inner">
                 {% set firstItem = true %}
                 {% for item in block.children %}
+                    {% set imageBlock = item.children.first %}
                     <!-- Item, First item should have extra class "active" -->
                     <div class="item{% if firstItem %} active{% endif %}">
-                        {{ image(item.image.id, 'cmf_block', item.label, null, item.linkUrl) }}
-                        {% if item.label %}
+                        {{ image(imageBlock.image.id, 'cmf_block', imageBlock.label, null, imageBlock.linkUrl) }}
+                        {% if item.body %}
                             <!-- Caption -->
                             <div class="carousel-caption c-bottom-right">
                                 <!-- Heading -->
                                 {#<h4><a href="#">Some heading here</a></h4>#}
                                 <!-- Para -->
-                                <p>{{ item.label }}</p>
+                                {{ item.body|raw }}
                             </div>
                         {% endif %}
                     </div>

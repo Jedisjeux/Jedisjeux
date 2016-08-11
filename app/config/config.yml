@@ -297,11 +297,20 @@ liip_imagine:
             quality: 100
             filters:
                 thumbnail: { size: [60, 60], mode: outbound }
+        cmf_thumbnail:
+            data_loader: cmf_media_doctrine_phpcr
+            filters:
+                thumbnail: { size: [60, 60] }
         thumbnail_XL:
             quality: 100
             filters:
                 thumbnail: { size: [80, 80], mode: outbound }
         thumbnail_S:
+            quality: 100
+            filters:
+                thumbnail: { size: [80, 55], mode: outbound }
+        cmf_thumbnail_S:
+            data_loader: cmf_media_doctrine_phpcr
             quality: 100
             filters:
                 thumbnail: { size: [80, 55], mode: outbound }
@@ -340,10 +349,6 @@ liip_imagine:
             data_loader: cmf_media_doctrine_phpcr
             filters:
                 relative_resize: { scale: 1 }
-        cmf_thumbnail:
-            data_loader: cmf_media_doctrine_phpcr
-            filters:
-                thumbnail: { size: [100, 69] }
 
 jms_translation:
     configs:

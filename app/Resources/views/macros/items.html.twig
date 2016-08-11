@@ -97,7 +97,7 @@
 {% macro blogAuthor(customer, body, createdAt) %}
     {% from 'macros/users.html.twig' import avatar %}
 
-    <div class="blog-author well">
+    <div class="blog-author">
         <!-- Author image -->
         <div class="blog-author-img">
             <a href="#"><!-- Item image -->
@@ -107,7 +107,6 @@
         <!-- Author details -->
         <div class="blog-author-content">
             <h5><a href="#">{{ customer.user.username }} <small>le {{ createdAt|localizeddate('full', 'none') }}</small></a></h5>
-            <p>Temporibus autem quibusdam et aut officiis debitis aut  molestiae non recusandae rerum hic tenetur rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae rerum hic tenetur.</p>
         </div>
         <div class="clearfix"></div>
     </div>

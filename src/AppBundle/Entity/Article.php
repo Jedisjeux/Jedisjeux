@@ -9,7 +9,6 @@
 namespace AppBundle\Entity;
 
 use AppBundle\Document\ArticleContent;
-use AppBundle\Model\Identifiable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -27,10 +26,17 @@ use Sylius\Component\User\Model\CustomerInterface;
  */
 class Article implements ResourceInterface, ReviewableInterface
 {
-    use Identifiable;
+    use IdentifiableTrait;
 
     /**
-     * @var integer
+     * @var string
+     *
+     * @ORM\Column(type="string", unique=true, nullable=true)
+     */
+    protected $code;
+
+    /**
+     * @var string
      *
      * @ORM\Column(type="string", unique=true)
      */
@@ -40,6 +46,13 @@ class Article implements ResourceInterface, ReviewableInterface
      * @var ArticleContent
      */
     protected $document;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $name;
 
     /**
      * @var string
@@ -142,9 +155,48 @@ class Article implements ResourceInterface, ReviewableInterface
         $this->reviews = new ArrayCollection();
     }
 
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
 
     /**
-     * @return int
+     * @param string $code
+     *
+     * @return $this
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return string
      */
     public function getDocumentId()
     {
@@ -152,7 +204,7 @@ class Article implements ResourceInterface, ReviewableInterface
     }
 
     /**
-     * @param int $documentId
+     * @param string $documentId
      *
      * @return $this
      */
@@ -439,14 +491,6 @@ class Article implements ResourceInterface, ReviewableInterface
     }
 
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->getDocument()->getTitle();
-    }
-
-    /**
      * @return TaxonInterface
      */
     public function getMainTaxon()
@@ -464,5 +508,27 @@ class Article implements ResourceInterface, ReviewableInterface
         $this->mainTaxon = $mainTaxon;
 
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isReviewArticle() {
+        if (null === $this->getMainTaxon()) {
+            return false;
+        }
+
+        return Taxon::CODE_REVIEW_ARTICLE === $this->getMainTaxon()->getCode();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isReportArticle() {
+        if (null === $this->getMainTaxon()) {
+            return false;
+        }
+
+        return Taxon::CODE_REPORT_ARTICLE === $this->getMainTaxon()->getCode();
     }
 }

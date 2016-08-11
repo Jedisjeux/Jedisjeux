@@ -23,7 +23,7 @@
 {% block container %}
 
     <div class="container">
-        <div class="col-md-9">
+        <div class="col-md-8">
             <div class="row">
                 {% for key, article in articles %}
                 {% if key > 0 and key%3 == 0 %}
@@ -31,7 +31,7 @@
             <div class="row">
                 {% endif %}
                 <div class="col-md-4">
-                    {{ magazineItemOne(article.document) }}
+                    {{ magazineItemOne(article) }}
                 </div>
                 {% endfor %}
             </div>
@@ -40,7 +40,7 @@
             {{ pagination(articles) }}
 
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             {% include 'frontend/article/_sidebar.html.twig' %}
         </div>
     </div>

@@ -8,65 +8,76 @@
 
 namespace AppBundle\Command\Installer\Data;
 
+use AppBundle\Command\LogMemoryUsageTrait;
 use AppBundle\Document\BlockquoteBlock;
-use AppBundle\Document\SingleImageBlock;
 use AppBundle\Document\ArticleContent;
 use AppBundle\Entity\Article;
+use AppBundle\Entity\Taxon;
 use AppBundle\Entity\Topic;
-use AppBundle\TextFilter\Bbcode2Html;
-use Doctrine\ODM\PHPCR\Document\Generic;
-use Doctrine\ODM\PHPCR\DocumentManager;
-use Doctrine\ODM\PHPCR\DocumentRepository;
-use Doctrine\ORM\EntityManager;
-use PHPCR\Util\NodeHelper;
 use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
+use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SlideshowBlock;
 use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
+use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class LoadArticlesCommand extends AbstractLoadDocumentCommand
 {
-    /**
-     * @var OutputInterface
-     */
-    protected $output;
+    use LogMemoryUsageTrait;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function configure()
     {
         $this
             ->setName('app:articles:load')
-            ->setDescription('Load articles');
+            ->setDescription('Load articles')
+            ->addOption('no-update')
+            ->addOption('limit', null, InputOption::VALUE_REQUIRED, 'Set limit of articles to import')
+            ->addOption('mainTaxon', null, InputOption::VALUE_REQUIRED, 'Restrict articles with given taxons');
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->output = $output;
+        gc_collect_cycles();
+
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
 
-        foreach ($this->getArticles() as $data) {
-            $page = $this->createOrReplaceArticle($data);
-            $block = $this->createOrReplaceIntroductionBlock($page, $data);
-            $page->addChild($block);
+        foreach ($this->getArticles() as $key => $data) {
+            $output->writeln(sprintf("Loading <comment>%s</comment> article", $data['title']));
+            $this->logMemoryUsage($output);
+
+            $article = $this->createOrReplaceArticle($data);
+            $articleDocument = $article->getDocument();
+
+            $block = $this->createOrReplaceIntroductionBlock($articleDocument, $data);
+            $articleDocument->addChild($block);
             $blocks = $this->getBlocks($data['blocks']);
-            $this->populateBlocks($page, $blocks);
-            $this->getDocumentManager()->persist($page);
+
+            $this->getDocumentManager()->persist($articleDocument);
             $this->getDocumentManager()->flush();
 
-            $article = $this->getContainer()->get('app.repository.article')->findOneBy(['documentId' => $page->getId()]);
+            if (Taxon::CODE_REPORT_ARTICLE === $data['mainTaxon']) {
+                $slideshowBlock = $this->createOrReplaceSlideshowBlock($articleDocument);
+                $this->getDocumentManager()->persist($slideshowBlock);
+                $this->getDocumentManager()->flush();
+                $this->populateBlocks($slideshowBlock, $blocks);
+            } else {
+                $this->populateBlocks($articleDocument, $blocks);
+            }
 
-            if (null === $article) {
-                /** @var Article $article */
-                $article = $this->getContainer()->get('app.factory.article')->createNew();
-                $article
-                    ->setDocument($page);
+            if (null !== $data['mainTaxon']) {
+                /** @var TaxonInterface $mainTaxon */
+                $mainTaxon = $this->getTaxonRepository()->findOneBy(['code' => $data['mainTaxon']]);
+                $article->setMainTaxon($mainTaxon);
             }
 
             if (null !== $data['product_id']) {
@@ -92,25 +103,48 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
                     ->setAuthor($author);
             }
 
+            $this->getDocumentManager()->persist($articleDocument);
+            $this->getDocumentManager()->flush();
+
             $this->getManager()->persist($article);
             $this->getManager()->flush();
-            $this->getManager()->detach($article);
             $this->getManager()->clear();
+
+            $this->getDocumentManager()->detach($articleDocument);
+            $this->getDocumentManager()->clear();
+
+            if ($key > 0 and $key%10 === 0) {
+                $this->clearDoctrineCache();
+            }
         }
+
+        $this->clearDoctrineCache();
+        $stats = $this->getTotalOfItemsLoaded();
+        $this->showTotalOfItemsLoaded($stats['itemCount'], $stats['totalCount']);
     }
 
     /**
      * @param array $data
-     * @return ArticleContent
+     *
+     * @return Article
      */
     protected function createOrReplaceArticle(array $data)
     {
-        $articleDocument = $this->findPage($data['name']);
+        $article = $this->findArticle($data['name']);
+
+        if (null === $article) {
+            $article = $this->getFactory()->createNew();
+        }
+
+        $article
+            ->setCode(sprintf('article-%s', $data['id']));
+
+        $articleDocument = $article->getDocument();
 
         if (null === $articleDocument) {
-            $articleDocument = new ArticleContent();
-            $articleDocument
-                ->setParentDocument($this->getParent());
+            $articleDocument = $this->getDocumentFactory()->createNew();
+            $article
+                ->setDocument($articleDocument);
         }
 
         if (null !== $data['mainImage']) {
@@ -119,7 +153,6 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
             if (null === $mainImage) {
                 $mainImage = new ImagineBlock();
             }
-
 
             $image = new Image();
             $image->setFileContent(file_get_contents($this->getImageOriginalPath($data['mainImage'])));
@@ -137,18 +170,21 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
         $articleDocument->setPublishable(true);
         $articleDocument->setPublishStartDate(\DateTime::createFromFormat('Y-m-d H:i:s', $data['publishedAt']));
 
-        return $articleDocument;
+        return $article;
     }
 
+    /**
+     * @param ArticleContent $page
+     * @param array $data
+     *
+     * @return BlockquoteBlock
+     */
     protected function createOrReplaceIntroductionBlock(ArticleContent $page, array $data)
     {
-        $name = 'block0';
+        /** @var BlockquoteBlock $block */
+        $block = $page->getChildren()->first();
 
-        $block = $this
-            ->getSingleImageBlockRepository()
-            ->findOneBy(array('name' => $name));
-
-        if (null === $block) {
+        if (false === $block) {
             $block = new BlockquoteBlock();
             $block
                 ->setParentDocument($page);
@@ -156,49 +192,36 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
 
         $block
             ->setBody(sprintf('<p>%s</p>', $data['introduction']))
-            ->setName($name)
+            ->setName('introduction')
             ->setPublishable(true);
 
         return $block;
     }
 
     /**
-     * @param string $name
-     * @return ArticleContent
+     * @param ArticleContent $page
+     *
+     * @return SlideshowBlock
      */
-    protected function findPage($name)
+    protected function createOrReplaceSlideshowBlock(ArticleContent $page)
     {
-        $page = $this
-            ->getRepository()
-            ->findOneBy(array('name' => $name));
+        /** @var SlideshowBlock $block */
+        $block = $page->getChildren()->next();
 
-        return $page;
-    }
-
-    /**
-     * @return Generic
-     */
-    protected function getParent()
-    {
-        $contentBasepath = '/cms/pages/articles';
-        $parent = $this->getDocumentManager()->find(null, $contentBasepath);
-
-        if (null === $parent) {
-            $session = $this->getDocumentManager()->getPhpcrSession();
-            NodeHelper::createPath($session, $contentBasepath);
-            $parent = $this->getDocumentManager()->find(null, $contentBasepath);
+        if (false === $block) {
+            $block = new SlideshowBlock();
+            $block
+                ->setParentDocument($page);
         }
 
-        return $parent;
+        $block
+            ->setTitle('Slideshow')
+            ->setName('slideshow')
+            ->setPublishable(true);
+
+        return $block;
     }
 
-    /**
-     * @return DocumentRepository
-     */
-    public function getRepository()
-    {
-        return $this->getContainer()->get('app.repository.article_content');
-    }
 
     /**
      * @return array
@@ -207,11 +230,19 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
     {
         $query = <<<EOM
 select article.article_id as id,
-       replace(article.titre_clean, ' ', '-') as name,
+       concat(replace(article.titre_clean, ' ', '-'), '-a-', article.article_id) as name,
        article.titre as title,
        article.date as publishedAt,
        article.intro as introduction,
        article.photo as mainImage,
+       case article.type_article
+            when 'article' then null
+            when 'reportage' then 'report-articles'
+            when 'interview' then 'interviews'
+            when 'cdlb' then 'in-the-boxes'
+            when 'preview' then 'previews'
+            else null
+       end as mainTaxon,     
        product.id as product_id,
        topic.id as topic_id,
        user.customer_id as author_id,
@@ -228,15 +259,65 @@ from jedisjeux.jdj_article article
   left join sylius_user user
     on convert(user.username USING UTF8) = convert(article.auteur USING UTF8)
 where titre_clean != ''
-group by article.article_id
-limit 5
 EOM;
+
+        if ($this->input->hasOption('no-update')) {
+            $query .= <<<EOM
+
+AND not exists (
+   select 0
+   from jdj_article a
+   where a.code = concat('article-', article.article_id)
+)
+EOM;
+        }
+
+        if ($this->input->getOption('mainTaxon')) {
+
+            switch ($this->input->getOption('mainTaxon')) {
+                case Taxon::CODE_REPORT_ARTICLE:
+                    $type = 'reportage';
+                    break;
+                case Taxon::CODE_PREVIEWS:
+                    $type = 'preview';
+                    break;
+                case Taxon::CODE_IN_THE_BOXES:
+                    $type = 'cdlb';
+                    break;
+                case Taxon::CODE_INTERVIEW:
+                    $type = 'interview';
+                    break;
+                default:
+                    $type = null;
+            }
+
+            if (null === $type) {
+                Throw new InvalidArgumentException(sprintf('Type %s not found', $this->input->getOption('mainTaxon')));
+            }
+
+            $query .= sprintf(" AND article.type_article = '%s'", $type);
+        }
+
+        $query .= <<<EOM
+        
+        group by article.article_id
+EOM;
+
+        $query .= <<<EOM
+ 
+order by    article.date desc
+EOM;
+
+        if ($this->input->getOption('limit')) {
+            $query .= sprintf(' limit %s', $this->input->getOption('limit'));
+        }
 
         return $this->getDatabaseConnection()->fetchAll($query);
     }
 
     /**
      * @param string $ids
+     *
      * @return array
      */
     protected function getBlocks($ids)
@@ -270,14 +351,19 @@ EOM;
 
         return $this->getDatabaseConnection()->fetchAll($query);
     }
-    
+
     /**
-     * @return EntityManager
+     * @return array
      */
-    protected function getManager()
+    protected function getTotalOfItemsLoaded()
     {
-        return $this->getContainer()->get('app.manager.article');
+        $query = <<<EOM
+select count(article.id) as itemCount, count(0) as totalCount
+from jedisjeux.jdj_article old
+  left join jdj_article article
+    on article.code = concat('article-', old.article_id)
+EOM;
+
+        return $this->getDatabaseConnection()->fetchAssoc($query);
     }
-
-
 }

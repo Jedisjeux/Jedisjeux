@@ -8,7 +8,6 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Model\Identifiable;
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\User\Model\CustomerInterface;
@@ -21,7 +20,7 @@ use Sylius\Component\User\Model\CustomerInterface;
  */
 class Player implements ResourceInterface
 {
-    use Identifiable;
+    use IdentifiableTrait;
 
     /**
      * @var float

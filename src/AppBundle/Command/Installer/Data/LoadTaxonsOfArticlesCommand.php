@@ -83,12 +83,28 @@ class LoadTaxonsOfArticlesCommand extends ContainerAwareCommand
     {
         return [
             [
-                'code' => Taxon::CODE_INTERVIEW,
-                'name' => 'Interviews',
+                'code' => Taxon::CODE_NEWS,
+                'name' => 'Actualités',
             ],
             [
                 'code' => Taxon::CODE_REVIEW_ARTICLE,
                 'name' => 'Critiques',
+            ],
+            [
+                'code' => Taxon::CODE_PREVIEWS,
+                'name' => 'Previews',
+            ],
+            [
+                'code' => Taxon::CODE_IN_THE_BOXES,
+                'name' => 'C\'est dans la boîte',
+            ],
+            [
+                'code' => Taxon::CODE_REPORT_ARTICLE,
+                'name' => 'Reportages',
+            ],
+            [
+                'code' => Taxon::CODE_INTERVIEW,
+                'name' => 'Interviews',
             ],
         ];
     }

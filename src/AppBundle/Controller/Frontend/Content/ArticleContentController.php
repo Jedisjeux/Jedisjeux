@@ -48,22 +48,6 @@ class ArticleContentController extends Controller
     }
 
     /**
-     * @Route("/{name}", requirements={"name" = ".+"}, name="article_content_show")
-     *
-     * @param string $name
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function showAction($name)
-    {
-        $articleContent = $this->findOr404($name);
-        $article = $this->get('app.repository.article')->findOneBy(['documentId' => $articleContent->getId()]);
-
-        return $this->render("frontend/content/page/article_content/show.html.twig", array(
-            'article' => $article,
-        ));
-    }
-
-    /**
      * @param string $name
      * @return ArticleContent
      */

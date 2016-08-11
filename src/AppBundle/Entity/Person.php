@@ -18,14 +18,7 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
  */
 class Person implements ResourceInterface
 {
-    /**
-     * @var integer
-     *
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+    use IdentifiableTrait;
 
     /**
      * @var string
@@ -131,16 +124,6 @@ class Person implements ResourceInterface
     public function getImage()
     {
         return null;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**

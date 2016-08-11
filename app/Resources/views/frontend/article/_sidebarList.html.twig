@@ -1,0 +1,37 @@
+{% from 'macros/users.html.twig' import avatar %}
+
+<ul>
+    {% for article in articles %}
+        {% set articleDocument = article.document %}
+        {% set imagineBlock = articleDocument.mainImage %}
+
+        {% set meta %}
+            <!-- Date -->
+            <i class="fa fa-calendar"></i>
+            &nbsp; {{ article.publishStartDate|localizeddate('long', 'none') }}
+            &nbsp;
+            <!-- Comments -->
+        {% set commentCount = article.topic ? article.topic.postCount : 0 %}
+            <i class="fa fa-comments"></i> &nbsp; {{ commentCount }} <span
+                class="hidden-xs"></span> &nbsp;
+        {% endset %}
+
+
+
+        <li>
+            <a href="{{ path('app_frontend_article_show', {'name': article.name}) }}">
+                <!-- Item image -->
+                <img src="{{ imagineBlock.image.id | imagine_filter('cmf_thumbnail') }}" alt="" class="img-responsive img-round"/>
+
+                <!-- Item title -->
+                <span>{{ article.title }}</span><br/>
+            </a>
+
+            <div class="meta">
+                {{ meta|raw }}
+            </div>
+
+            <div class="clearfix"></div>
+        </li>
+    {% endfor %}
+</ul>

@@ -8,7 +8,6 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Model\Identifiable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
@@ -24,7 +23,7 @@ use Sylius\Component\User\Model\CustomerInterface;
  */
 class GamePlay implements ResourceInterface
 {
-    use Identifiable,
+    use IdentifiableTrait,
         Timestampable;
 
     /**

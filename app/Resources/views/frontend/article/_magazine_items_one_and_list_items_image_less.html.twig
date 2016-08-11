@@ -4,7 +4,7 @@
 {% set article = articles.currentPageResults[0] %}
 {% if (article) %}
     {% set imagineBlock = article.document.mainImage %}
-    {{ magazineItemOne(article.document) }}
+    {{ magazineItemOne(article) }}
 {% endif %}
 <hr>
 
@@ -14,7 +14,7 @@
         <!-- List item starts -->
         {% for article in articles.currentPageResults|slice(1, 4) %}
             <li>
-                {{ magazineListItemImageLess(article.document) }}
+                {{ magazineListItemImageLess(article) }}
             </li>
         {% endfor %}
         <!-- List item ends -->

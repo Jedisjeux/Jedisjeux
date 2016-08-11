@@ -8,49 +8,57 @@
 
 namespace AppBundle\Command\Installer\Data;
 
-use AppBundle\Document\ArticleContent;
-use AppBundle\Document\SingleImageBlock;
+use AppBundle\Command\LogMemoryUsageTrait;
 use AppBundle\Entity\Article;
+use AppBundle\Entity\Taxon;
 use AppBundle\Entity\Topic;
-use AppBundle\TextFilter\Bbcode2Html;
-use Doctrine\ODM\PHPCR\Document\Generic;
-use Doctrine\ODM\PHPCR\DocumentManager;
-use Doctrine\ODM\PHPCR\DocumentRepository;
-use Doctrine\ORM\EntityManager;
-use PHPCR\Util\NodeHelper;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\User\Model\CustomerInterface;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
 use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class LoadNewsCommand extends ContainerAwareCommand
+class LoadNewsCommand extends AbstractLoadDocumentCommand
 {
+    use LogMemoryUsageTrait;
+
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function configure()
     {
         $this
             ->setName('app:news:load')
-            ->setDescription('Load news');
+            ->setDescription('Load news')
+            ->addOption('no-update')
+            ->addOption('limit', null, InputOption::VALUE_REQUIRED, 'Set limit of news to import');
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->output = $output;
+        gc_collect_cycles();
+
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
 
-        foreach ($this->getNews() as $data) {
-            $page = $this->createOrReplaceArticle($data);
+        foreach ($this->getNews() as $key => $data) {
+            $output->writeln(sprintf("Loading <comment>%s</comment> news", $data['title']));
+            $this->logMemoryUsage($output);
+
+            $article = $this->createOrReplaceArticle($data);
+            $articleContent = $article->getDocument();
+
+            $this->getDocumentManager()->persist($articleContent);
+            $this->getDocumentManager()->flush();
+
             $blocks = [
                 [
                     'id' => $data['id'],
@@ -62,19 +70,13 @@ class LoadNewsCommand extends ContainerAwareCommand
                     'class' => null,
                 ]
             ];
-            $this->populateBlocks($page, $blocks);
+            $this->populateBlocks($articleContent, $blocks);
 
-            $this->getManager()->persist($page);
-            $this->getManager()->flush();
+            $this->getDocumentManager()->flush();
 
-            $article = $this->getContainer()->get('app.repository.article')->findOneBy(['documentId' => $page->getId()]);
-
-            if (null === $article) {
-                /** @var Article $article */
-                $article = $this->getContainer()->get('app.factory.article')->createNew();
-                $article
-                    ->setDocument($page);
-            }
+            /** @var TaxonInterface $mainTaxon */
+            $mainTaxon = $this->getTaxonRepository()->findOneBy(['code' => Taxon::CODE_NEWS]);
+            $article->setMainTaxon($mainTaxon);
 
             if (null !== $data['product_id']) {
                 /** @var ProductInterface $product */
@@ -97,12 +99,24 @@ class LoadNewsCommand extends ContainerAwareCommand
             $article
                 ->setAuthor($author);
 
-            $this->getArticleManager()->persist($article);
-            $this->getArticleManager()->flush();
+            $this->getDocumentManager()->persist($articleContent);
+            $this->getDocumentManager()->flush();
+
+            $this->getManager()->persist($article);
+            $this->getManager()->flush();
             $this->getManager()->clear();
 
+            $this->getDocumentManager()->detach($articleContent);
+            $this->getDocumentManager()->clear();
 
+            if ($key > 0 and $key%10 === 0) {
+                $this->clearDoctrineCache();
+            }
         }
+
+        $this->clearDoctrineCache();
+        $stats = $this->getTotalOfItemsLoaded();
+        $this->showTotalOfItemsLoaded($stats['itemCount'], $stats['totalCount']);
     }
 
     protected function getNews()
@@ -110,7 +124,7 @@ class LoadNewsCommand extends ContainerAwareCommand
         $query = <<<EOM
 select      old.news_id as id,
             old.titre as title,
-            replace(old.titre_clean, ' ', '-') as name,
+            concat(replace(old.titre_clean, ' ', '-'), '-n-', old.news_id) as name,
             old.date as publishedAt,
             old.text as body,
             old.photo as mainImage,
@@ -129,209 +143,95 @@ from        jedisjeux.jdj_news old
     on topic.id = old.topic_id
 WHERE       old.valid = 1
             AND       old.type_lien in (0, 1)
-order by    old.date desc
-limit       10
+
 EOM;
+
+        if ($this->input->getOption('no-update')) {
+            $query .= <<<EOM
+
+AND not exists (
+   select 0
+   from jdj_article article
+   where article.code = concat('news-', old.news_id)
+)
+EOM;
+        }
+
+        $query .= <<<EOM
+ 
+order by    old.date desc
+EOM;
+
+        if ($this->input->getOption('limit')) {
+            $query .= sprintf(' limit %s', $this->input->getOption('limit'));
+        }
 
         return $this->getDatabaseConnection()->fetchAll($query);
     }
 
-    protected function populateBlocks(ArticleContent $page, array $blocks)
+    /**
+     * @return array
+     */
+    protected function getTotalOfItemsLoaded()
     {
-        foreach ($blocks as $data) {
-            $block = $this->createOrReplaceBlock($page, $data);
-            $page->addChild($block);
-            if (isset($data['image'])) {
-                $this->createOrReplaceImagineBlock($block, $data);
-            }
-        }
+        $query = <<<EOM
+select count(article.id) as itemCount, count(0) as totalCount
+  from jedisjeux.jdj_news news
+left join jdj_article article
+    on article.code = concat('news-', news.news_id)
+where news.type_lien in (0, 1)
+EOM;
+
+        return $this->getDatabaseConnection()->fetchAssoc($query);
     }
 
     /**
      * @param array $data
-     * @return ArticleContent
+     *
+     * @return Article
      */
     protected function createOrReplaceArticle(array $data)
     {
-        $article = $this->findPage($data['name']);
+        $article = $this->findArticle($data['name']);
 
         if (null === $article) {
-            $article = new ArticleContent();
-            $article
-                ->setParentDocument($this->getParent());
+            $article = $this->getFactory()->createNew();
+        }
 
+        $article
+            ->setCode(sprintf('news-%s', $data['id']));
+
+        $articleDocument = $article->getDocument();
+
+        if (null === $articleDocument) {
+            $articleDocument = $this->getDocumentFactory()->createNew();
+            $article
+                ->setDocument($articleDocument);
         }
 
         if (null !== $data['mainImage']) {
-            $mainImage = $article->getMainImage();
+            $mainImage = $articleDocument->getMainImage();
 
             if (null === $mainImage) {
                 $mainImage = new ImagineBlock();
             }
 
-
             $image = new Image();
             $image->setFileContent(file_get_contents($this->getImageOriginalPath($data['mainImage'])));
 
             $mainImage
-                ->setParentDocument($article)
+                ->setParentDocument($articleDocument)
                 ->setImage($image);
 
-            // $this->getManager()->persist($mainImage);
-
-            $article
+            $articleDocument
                 ->setMainImage($mainImage);
         }
 
-        $article->setName($data['name']);
-        $article->setTitle($data['title']);
-        $article->setPublishable(true);
-        $article->setPublishStartDate(\DateTime::createFromFormat('Y-m-d H:i:s', $data['publishedAt']));
+        $articleDocument->setName($data['name']);
+        $articleDocument->setTitle($data['title']);
+        $articleDocument->setPublishable(true);
+        $articleDocument->setPublishStartDate(\DateTime::createFromFormat('Y-m-d H:i:s', $data['publishedAt']));
 
         return $article;
-    }
-
-    /**
-     * @param ArticleContent $page
-     * @param array $data
-     * @return SingleImageBlock
-     */
-    protected function createOrReplaceBlock(ArticleContent $page, array $data)
-    {
-        $name = 'block'.$data['id'];
-
-        $block = $this
-            ->getSingleImageBlockRepository()
-            ->findOneBy(array('name' => $name));
-
-        if (null === $block) {
-            $block = new SingleImageBlock();
-            $block
-                ->setParentDocument($page);
-        }
-        
-        $bbcode2html = new Bbcode2Html();
-        $body = $data['body'];
-        $body = $bbcode2html
-            ->setBody($body)
-            ->getFilteredBody();
-        
-
-        $block
-            ->setImagePosition($data['image_position'])
-            ->setTitle($data['title'])
-            ->setBody($body)
-            ->setName($name)
-            ->setClass($data['class'] ?: null)
-            ->setPublishable(true);
-
-        return $block;
-    }
-
-    protected function createOrReplaceImagineBlock(SingleImageBlock $block, array $data)
-    {
-        $name = 'image'.$data['id'];
-
-        if (false === $block->hasChildren()) {
-            $imagineBlock = new ImagineBlock();
-            $block
-                ->addChild($imagineBlock);
-        } else {
-            /** @var ImagineBlock $imagineBlock */
-            $imagineBlock = $block->getChildren()->first();
-        }
-
-        $image = new Image();
-        $image->setFileContent(file_get_contents($this->getImageOriginalPath($data['image'])));
-        $image->setName($data['image']);
-
-        $imagineBlock
-            ->setName($name)
-            ->setParentDocument($block)
-            ->setImage($image)
-            ->setLabel($data['image_label']);
-
-        $this->getManager()->persist($imagineBlock);
-
-        return $imagineBlock;
-    }
-
-    /**
-     * @param string $name
-     * @return ArticleContent
-     */
-    protected function findPage($name)
-    {
-        $page = $this
-            ->getRepository()
-            ->findOneBy(array('name' => $name));
-
-        return $page;
-    }
-
-    /**
-     * @return Generic
-     */
-    protected function getParent()
-    {
-        $contentBasepath = '/cms/pages/articles';
-        $parent = $this->getManager()->find(null, $contentBasepath);
-
-        if (null === $parent) {
-            $session = $this->getManager()->getPhpcrSession();
-            NodeHelper::createPath($session, $contentBasepath);
-            $parent = $this->getManager()->find(null, $contentBasepath);
-        }
-
-        return $parent;
-    }
-
-    /**
-     * @param string $path
-     * @return string
-     */
-    protected function getImageOriginalPath($path)
-    {
-        return "http://www.jedisjeux.net/img/800/".$path;
-    }
-
-    /**
-     * @return DocumentRepository
-     */
-    public function getRepository()
-    {
-        return $this->getContainer()->get('app.repository.article_content');
-    }
-
-    /**
-     * @return DocumentRepository
-     */
-    public function getSingleImageBlockRepository()
-    {
-        return $this->getContainer()->get('app.repository.single_image_block');
-    }
-
-    /**
-     * @return DocumentManager
-     */
-    public function getManager()
-    {
-        return $this->getContainer()->get('app.manager.article_content');
-    }
-
-    /**
-     * @return EntityManager
-     */
-    protected function getArticleManager()
-    {
-        return $this->getContainer()->get('app.manager.article');
-    }
-
-    /**
-     * @return \Doctrine\DBAL\Connection
-     */
-    protected function getDatabaseConnection()
-    {
-        return $this->getContainer()->get('database_connection');
     }
 }

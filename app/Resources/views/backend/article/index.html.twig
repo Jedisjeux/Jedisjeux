@@ -39,7 +39,7 @@
                 <td class="text-right">
                     <ul class="list-inline text-nowrap">
                         <li>
-                            {{ buttons.show(path('article_content_show', { 'name': article.document.name })) }}
+                            {{ buttons.show(path('app_frontend_article_show', { 'name': article.name })) }}
                         </li>
                         <li>
                             {{ buttons.edit(path('app_admin_article_update', { 'id': article.id })) }}

@@ -1,8 +1,8 @@
 {% extends "base.html.twig" %}
 
-{% from 'macros/posts.html.twig' import blogCommentItem %}
+{% from 'macros/posts.html.twig' import blogCommentItem as postComment %}
 {% import 'macros/items.html.twig' as item %}
-{% from 'macros/game_reviews.html.twig' import blogCommentItem %}
+{% from 'macros/game_reviews.html.twig' import blogCommentItem as reviewComment %}
 
 {% set topic = article.topic %}
 
@@ -13,17 +13,23 @@
 {% endblock %}
 
 {% block breadcrumb_content %}
-    Articles /
+    <a href="{{ path('app_frontend_article_index') }}">Articles</a> /
+    {% if article.mainTaxon %}
+        <a href="{{ path('app_frontend_article_index_by_taxon', {'permalink': article.mainTaxon.permalink}) }}">{{ article.mainTaxon }}</a> /
+    {% endif %}
     {{ article.document.title }}
 {% endblock %}
 
 {% block body -%}
 
-    {% set mainTaxonCode = article.mainTaxon ? article.mainTaxon.code : null %}
-    {% set articleIsTest = 'review-articles' == mainTaxonCode %}
-
     <div class="container">
-        <div class="col-md-9">
+        <div class="col-md-8">
+
+            {% if article.author %}
+                {{ item.blogAuthor(article.author, null, article.document.publishStartDate) }}
+            {% endif %}
+
+            {% set blockImageCount = 0 %}
 
             {% for block in article.document.children %}
 
@@ -35,10 +41,6 @@
 
             {% endfor %}
 
-            {% if article.author %}
-                {{ item.blogAuthor(article.author, null, article.document.publishStartDate) }}
-            {% endif %}
-
             {% if article.reviews|length > 0 %}
                 <div class="block-heading-two">
                     <h3><span>Avis de la rédaction</span>
@@ -47,7 +49,7 @@
 
                 <div class="blog-comments">
                     {% for review in article.reviews %}
-                        {{ blogCommentItem(review) }}
+                        {{ reviewComment(review) }}
                     {% endfor %}
                 </div>
             {% endif %}
@@ -62,14 +64,14 @@
 
                 <div class="blog-comments">
                     {% for post in topic.posts %}
-                        {{ blogCommentItem(post) }}
+                        {{ postComment(post) }}
                     {% endfor %}
                 </div>
             {% endif %}
 
         </div>
-        <div class="col-md-3">
-            {% include "frontend/content/page/article_content/_sidebar.html.twig" %}
+        <div class="col-md-4">
+            {% include "frontend/article/_sidebarShow.html.twig" %}
         </div>
     </div>
 
