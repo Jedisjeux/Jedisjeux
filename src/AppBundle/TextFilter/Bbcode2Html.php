@@ -211,7 +211,7 @@ EOM;
         $pattern = '/\[jeu:(.*?)\\](?P<id>.*?)\[\/jeu:(.*?)\\]/ms';
         preg_match_all($pattern, $body, $matches);
 
-        $replacement = "[game]--$2--[/game]";
+        $replacement = '<div class="entity" data-entity="game">--$2--</div>';
         $body = preg_replace($pattern, $replacement, $body);
 
         foreach ($matches['id'] as $key => $id) {
