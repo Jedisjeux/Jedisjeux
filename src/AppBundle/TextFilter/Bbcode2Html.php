@@ -7,6 +7,7 @@
  */
 
 namespace AppBundle\TextFilter;
+
 use Doctrine\DBAL\Connection;
 
 
@@ -47,6 +48,7 @@ class Bbcode2Html
         $body = $this->sizeReplacement($body);
         $body = $this->quoteReplacement($body);
         $body = $this->imageReplacement($body);
+        $body = $this->imageWithIdReplacement($body);
         $body = $this->urlReplacement($body);
         $body = $this->boldReplacement($body);
         $body = $this->italicReplacement($body);
@@ -54,12 +56,13 @@ class Bbcode2Html
         $body = $this->centerReplacement($body);
         $body = $this->listReplacement($body);
         $body = $this->emptyTagsReplacement($body);
+
         return $body;
     }
 
     protected function nl2p($body)
     {
-        return "<p>".str_replace("\n", "</p><p>", trim($body))."</p>";
+        return "<p>" . str_replace("\n", "</p><p>", trim($body)) . "</p>";
     }
 
     protected function emptyTagsReplacement($body)
@@ -80,6 +83,7 @@ class Bbcode2Html
         $body = str_replace(':wink:', ';)', $body);
         $body = str_replace(':lol:', ':)', $body);
         $body = str_replace(':light:', '', $body);
+
         return $body;
     }
 
@@ -141,7 +145,44 @@ EOM;
         $pattern = '/\[img:(.*?)\](?P<path>.*?)\[\/img:(.*?)\]/ms';
         $replacement = "<img src=\"$2\" class=\"img-responsive\" />";
         $body = preg_replace($pattern, $replacement, $body);
+
         return $body;
+    }
+
+    /**
+     * @param string $body
+     *
+     * @return string
+     */
+    protected function imageWithIdReplacement($body)
+    {
+
+        $pattern = '/\[image\=?(?P<properties>.*?):(.*?)\\](?P<id>.*?)\[\/image:(.*?)\\]/ms';
+        preg_match_all($pattern, $body, $matches);
+
+        $replacement = "<img src=\"$1-IMAGE-REPLACEMENT-$3\" class=\"img-responsive\" />";
+        $body = preg_replace($pattern, $replacement, $body);
+
+        foreach ($matches['id'] as $key => $id) {
+            $imageName = $this->getImageNameById($id);
+            $properties = $matches['properties'][$key];
+            $data = false !== !empty($properties) ? explode(',', $properties) : [];
+            $size = isset($data[0]) ? $data[0] : null;
+            $position = isset($data[1]) ? $data[1] : null;
+            $imagePath = $this->getImageOriginalPath($imageName, $size);
+
+            //list ($size, $position) = explode('-IMAGE-REPLACEMENT-', $properties);
+            $body = str_replace(sprintf('%s-IMAGE-REPLACEMENT-%s', $properties, $id), $imagePath, $body);
+        }
+
+        return $body;
+    }
+
+    protected function getImageNameById($id)
+    {
+        $query = sprintf('select img_nom from jedisjeux.jdj_images WHERE img_id = %s', $id);
+
+        return $this->databaseConnection->fetchColumn($query);
     }
 
     /**
@@ -153,6 +194,7 @@ EOM;
         $pattern = '/\[color=(.*?)\](?P<text>.*?)\[\/color:(.*?)\]/ms';
         $replacement = "$2";
         $body = preg_replace($pattern, $replacement, $body);
+
         return $body;
     }
 
@@ -165,6 +207,7 @@ EOM;
         $pattern = '/\[size=(.*?)\](?P<text>.*?)\[\/size:(.*?)\]/ms';
         $replacement = "$2";
         $body = preg_replace($pattern, $replacement, $body);
+
         return $body;
     }
 
@@ -177,6 +220,7 @@ EOM;
         $pattern = '/\[url=(?P<path>.*?)\](?P<label>.*?)\[\/url:(.*?)\]/ms';
         $replacement = "<a href=\"$1\" target='_blank'>$2</a>";
         $body = preg_replace($pattern, $replacement, $body);
+
         return $body;
     }
 
@@ -189,6 +233,7 @@ EOM;
         $pattern = '/\[b:(.*?)\](?P<label>.*?)\[\/b:(.*?)\]/ms';
         $replacement = "<strong>$2</strong>";
         $body = preg_replace($pattern, $replacement, $body);
+
         return $body;
     }
 
@@ -201,6 +246,7 @@ EOM;
         $pattern = '/\[i:(.*?)\](?P<label>.*?)\[\/i:(.*?)\]/ms';
         $replacement = "<em>$2</em>";
         $body = preg_replace($pattern, $replacement, $body);
+
         return $body;
     }
 
@@ -213,6 +259,7 @@ EOM;
         $pattern = '/\[u:(.*?)\](?P<label>.*?)\[\/u:(.*?)\]/ms';
         $replacement = "<strong>$2</strong>";
         $body = preg_replace($pattern, $replacement, $body);
+
         return $body;
     }
 
@@ -225,6 +272,7 @@ EOM;
         $pattern = '/\[center:(.*?)\](?P<label>.*?)\[\/center:(.*?)\]/ms';
         $replacement = '$2';
         $body = preg_replace($pattern, $replacement, $body);
+
         return $body;
     }
 
@@ -246,6 +294,19 @@ EOM;
         $body = str_replace("</li></p><p>", "</li>", $body);
 
         return $body;
+    }
+
+    /**
+     * @param string $name
+     * @param string|null $size
+     *
+     * @return string
+     */
+    protected function getImageOriginalPath($name, $size = null)
+    {
+        $size = null !== $size ? $size : '800';
+
+        return "http://www.jedisjeux.net/img/" . $size . "/" . $name;
     }
 
     /**
