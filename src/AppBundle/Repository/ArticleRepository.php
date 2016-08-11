@@ -13,17 +13,17 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 class ArticleRepository extends EntityRepository
 {
     /**
-     * @param array $criteria
-     * @param array $sorting
+     * @param array|null $criteria
+     * @param array|null $sorting
      *
      * @return Pagerfanta
      */
-    public function createFilterPaginator(array $criteria = [], array $sorting = [])
+    public function createFilterPaginator(array $criteria = null, array $sorting = null)
     {
         $queryBuilder = $this->getQueryBuilder();
 
-        $this->applyCriteria($queryBuilder, $criteria);
-        $this->applySorting($queryBuilder, $sorting);
+        $this->applyCriteria($queryBuilder, (array)$criteria);
+        $this->applySorting($queryBuilder, (array)$sorting);
 
         return $this->getPaginator($queryBuilder);
     }
@@ -32,12 +32,12 @@ class ArticleRepository extends EntityRepository
      * Create paginator for products categorized under given taxon.
      *
      * @param TaxonInterface $taxon
-     * @param array $criteria
-     * @param array $sorting
+     * @param array|null $criteria
+     * @param array|null $sorting
      *
      * @return Pagerfanta
      */
-    public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = [], array $sorting = [])
+    public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = null, array $sorting = null)
     {
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder
@@ -50,8 +50,8 @@ class ArticleRepository extends EntityRepository
             ->setParameter('left', $taxon->getLeft())
             ->setParameter('right', $taxon->getRight());
 
-        $this->applyCriteria($queryBuilder, $criteria);
-        $this->applySorting($queryBuilder, $sorting);
+        $this->applyCriteria($queryBuilder, (array)$criteria);
+        $this->applySorting($queryBuilder, (array)$sorting);
 
         return $this->getPaginator($queryBuilder);
     }
