@@ -108,12 +108,12 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
     {
         $name = 'block' . $data['id'];
 
-        $id = $parent->getParentDocument()->getId().'/'.$name;
+        $id = $parent->getId().'/'.$name;
 
         try {
             $block = $this
                 ->getSingleImageBlockRepository()
-                ->findOneBy(array('id' => $id));
+                ->find($id);
         } catch(PathNotFoundException $exception) {
             $block = new SingleImageBlock();
             $block

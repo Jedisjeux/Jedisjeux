@@ -49,7 +49,7 @@ class LoadNewsCommand extends AbstractLoadDocumentCommand
 
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
 
-        foreach ($this->getNews() as $data) {
+        foreach ($this->getNews() as $key => $data) {
             $output->writeln(sprintf("Loading <comment>%s</comment> news", $data['title']));
             $this->logMemoryUsage($output);
 
@@ -108,6 +108,10 @@ class LoadNewsCommand extends AbstractLoadDocumentCommand
 
             $this->getDocumentManager()->detach($articleContent);
             $this->getDocumentManager()->clear();
+
+            if ($key > 0 and $key%10 === 0) {
+                $this->clearDoctrineCache();
+            }
         }
 
         $this->clearDoctrineCache();
@@ -158,7 +162,7 @@ EOM;
 order by    old.date desc
 EOM;
 
-        if ($this->input->hasOption('limit')) {
+        if ($this->input->getOption('limit')) {
             $query .= sprintf(' limit %s', $this->input->getOption('limit'));
         }
 
