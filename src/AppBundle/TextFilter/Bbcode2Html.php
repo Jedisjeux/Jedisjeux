@@ -9,6 +9,8 @@
 namespace AppBundle\TextFilter;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\ORM\EntityRepository;
+use Sylius\Component\Product\Model\ProductInterface;
 
 
 /**
@@ -27,13 +29,20 @@ class Bbcode2Html
     protected $databaseConnection;
 
     /**
+     * @var EntityRepository
+     */
+    protected $productRepository;
+
+    /**
      * Bbcode2Html constructor.
      *
      * @param Connection $databaseConnection
+     * @param EntityRepository $productRepository
      */
-    public function __construct(Connection $databaseConnection)
+    public function __construct(Connection $databaseConnection, EntityRepository $productRepository)
     {
         $this->databaseConnection = $databaseConnection;
+        $this->productRepository = $productRepository;
     }
 
     /**
@@ -49,6 +58,7 @@ class Bbcode2Html
         $body = $this->quoteReplacement($body);
         $body = $this->imageReplacement($body);
         $body = $this->imageWithIdReplacement($body);
+        $body = $this->gameWithIdReplacement($body);
         $body = $this->urlReplacement($body);
         $body = $this->boldReplacement($body);
         $body = $this->italicReplacement($body);
@@ -166,23 +176,56 @@ EOM;
         foreach ($matches['id'] as $key => $id) {
             $imageName = $this->getImageNameById($id);
             $properties = $matches['properties'][$key];
+
             $data = false !== !empty($properties) ? explode(',', $properties) : [];
             $size = isset($data[0]) ? $data[0] : null;
             $position = isset($data[1]) ? $data[1] : null;
-            $imagePath = $this->getImageOriginalPath($imageName, $size);
 
-            //list ($size, $position) = explode('-IMAGE-REPLACEMENT-', $properties);
+            $imagePath = $this->getImageOriginalPath($imageName, $size);
             $body = str_replace(sprintf('%s-IMAGE-REPLACEMENT-%s', $properties, $id), $imagePath, $body);
         }
 
         return $body;
     }
 
+    /**
+     * @param int $id
+     *
+     * @return string
+     */
     protected function getImageNameById($id)
     {
         $query = sprintf('select img_nom from jedisjeux.jdj_images WHERE img_id = %s', $id);
 
         return $this->databaseConnection->fetchColumn($query);
+    }
+
+    /**
+     * @param string $body
+     *
+     * @return string
+     */
+    protected function gameWithIdReplacement($body)
+    {
+
+        $pattern = '/\[jeu:(.*?)\\](?P<id>.*?)\[\/jeu:(.*?)\\]/ms';
+        preg_match_all($pattern, $body, $matches);
+
+        $replacement = "[game]--$2--[/game]";
+        $body = preg_replace($pattern, $replacement, $body);
+
+        foreach ($matches['id'] as $key => $id) {
+            /** @var ProductInterface $product */
+            $product = $this->productRepository->findOneBy(['code' => sprintf('game-%s', $id)]);
+
+            if (null === $product) {
+                continue;
+            }
+
+            $body = str_replace(sprintf('--%s--', $id), $product->getSlug(), $body);
+        }
+
+        return $body;
     }
 
     /**

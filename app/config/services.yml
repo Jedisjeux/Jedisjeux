@@ -111,6 +111,7 @@ services:
         class: AppBundle\TextFilter\Bbcode2Html
         arguments:
             - @database_connection
+            - @sylius.repository.product
 
     sonata.block.service.rss:
         class: Sonata\BlockBundle\Block\Service\RssBlockService

@@ -72,7 +72,6 @@ class LoadNewsCommand extends AbstractLoadDocumentCommand
             ];
             $this->populateBlocks($articleContent, $blocks);
 
-            $this->getDocumentManager()->persist($articleContent);
             $this->getDocumentManager()->flush();
 
             /** @var TaxonInterface $mainTaxon */
