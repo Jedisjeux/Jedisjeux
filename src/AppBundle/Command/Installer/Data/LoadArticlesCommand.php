@@ -51,7 +51,7 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
 
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
 
-        foreach ($this->getArticles() as $data) {
+        foreach ($this->getArticles() as $key => $data) {
             $output->writeln(sprintf("Loading <comment>%s</comment> article", $data['title']));
             $this->logMemoryUsage($output);
 
@@ -112,6 +112,10 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
 
             $this->getDocumentManager()->detach($articleDocument);
             $this->getDocumentManager()->clear();
+
+            if ($key > 0 and $key%10 === 0) {
+                $this->clearDoctrineCache();
+            }
         }
 
         $this->clearDoctrineCache();

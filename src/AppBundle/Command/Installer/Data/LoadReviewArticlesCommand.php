@@ -54,7 +54,7 @@ class LoadReviewArticlesCommand extends AbstractLoadDocumentCommand
         gc_collect_cycles();
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
 
-        foreach ($this->getTests() as $data) {
+        foreach ($this->getTests() as $key => $data) {
             $output->writeln(sprintf("Loading test of <comment>%s</comment> product", $data['product_name']));
             $this->logMemoryUsage($output);
 
@@ -136,6 +136,10 @@ class LoadReviewArticlesCommand extends AbstractLoadDocumentCommand
 
             $this->getDocumentManager()->detach($articleDocument);
             $this->getDocumentManager()->clear();
+
+            if ($key > 0 and $key%10 === 0) {
+                $this->clearDoctrineCache();
+            }
         }
 
         $this->clearDoctrineCache();
