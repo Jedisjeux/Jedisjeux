@@ -10,6 +10,7 @@ namespace AppBundle\TextFilter;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityRepository;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 
 
@@ -31,18 +32,18 @@ class Bbcode2Html
     /**
      * @var EntityRepository
      */
-    protected $productRepository;
+    protected $productVariantRepository;
 
     /**
      * Bbcode2Html constructor.
      *
      * @param Connection $databaseConnection
-     * @param EntityRepository $productRepository
+     * @param EntityRepository $productVariantRepository
      */
-    public function __construct(Connection $databaseConnection, EntityRepository $productRepository)
+    public function __construct(Connection $databaseConnection, EntityRepository $productVariantRepository)
     {
         $this->databaseConnection = $databaseConnection;
-        $this->productRepository = $productRepository;
+        $this->productVariantRepository = $productVariantRepository;
     }
 
     /**
@@ -215,14 +216,14 @@ EOM;
         $body = preg_replace($pattern, $replacement, $body);
 
         foreach ($matches['id'] as $key => $id) {
-            /** @var ProductInterface $product */
-            $product = $this->productRepository->findOneBy(['code' => sprintf('game-%s', $id)]);
+            /** @var ProductVariantInterface $productVariant */
+            $productVariant = $this->productVariantRepository->findOneBy(['code' => sprintf('game-%s', $id)]);
 
-            if (null === $product) {
+            if (null === $productVariant) {
                 continue;
             }
 
-            $body = str_replace(sprintf('--%s--', $id), $product->getSlug(), $body);
+            $body = str_replace(sprintf('--%s--', $id), $productVariant->getProduct()->getId(), $body);
         }
 
         return $body;

@@ -11,6 +11,7 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
 use Sylius\Component\Product\Model\Product as BaseProduct;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
@@ -21,6 +22,8 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
  *
  * @ORM\Entity
  * @ORM\Table(name="sylius_product")
+ *
+ * @JMS\ExclusionPolicy("all")
  */
 class Product extends BaseProduct implements ReviewableInterface
 {
@@ -66,6 +69,10 @@ class Product extends BaseProduct implements ReviewableInterface
      * @var integer
      *
      * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
+     *
+     * @JMS\Expose
+     * @JMS\SerializedName("min_age")
+     * @JMS\Groups({"Details"})
      */
     protected $ageMin;
 
@@ -73,6 +80,7 @@ class Product extends BaseProduct implements ReviewableInterface
      * @var integer
      *
      * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
+     * @JMS\Groups({"Details"})
      */
     protected $joueurMin;
 
@@ -80,6 +88,7 @@ class Product extends BaseProduct implements ReviewableInterface
      * @var integer
      *
      * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
+     * @JMS\Groups({"Details"})
      */
     protected $joueurMax;
 
@@ -87,6 +96,7 @@ class Product extends BaseProduct implements ReviewableInterface
      * @var integer
      *
      * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
+     * @JMS\Groups({"Details"})
      */
     protected $durationMin;
 
@@ -615,5 +625,29 @@ class Product extends BaseProduct implements ReviewableInterface
     public function __toString()
     {
         return $this->getName();
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @JMS\VirtualProperty
+     * @JMS\SerializedName("name")
+     * @JMS\Groups({"Details"})
+     */
+    public function getName()
+    {
+        return parent::getName();
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @JMS\VirtualProperty
+     * @JMS\SerializedName("slug")
+     * @JMS\Groups({"Details"})
+     */
+    public function getSlug()
+    {
+        return parent::getSlug();
     }
 }

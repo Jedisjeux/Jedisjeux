@@ -25,11 +25,23 @@ class ProductRepository extends BaseProductRepository
     protected function getQueryBuilder()
     {
         return parent::createQueryBuilder('o')
-            ->select('o, option, variant')
+            ->select('o, option, variant, image, translation')
+            ->leftJoin('o.translations', 'translation')
             ->leftJoin('o.options', 'option')
             ->leftJoin('o.variants', 'variant')
-            ->addSelect('image')
             ->leftJoin('variant.images', 'image');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findOneById($id)
+    {
+        return $this->getQueryBuilder()
+            ->where('o.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
     /**
@@ -93,15 +105,13 @@ class ProductRepository extends BaseProductRepository
             $dateCaclulator = new DateCalculator();
             $queryBuilder
                 ->andWhere($queryBuilder->expr()->gte('variant.releasedAt', ':releasedAtFrom'))
-                ->setParameter('releasedAtFrom', $dateCaclulator->getDay($criteria['releasedAtFrom']))
-            ;
+                ->setParameter('releasedAtFrom', $dateCaclulator->getDay($criteria['releasedAtFrom']));
         }
         if (!empty($criteria['releasedAtTo'])) {
             $dateCaclulator = new DateCalculator();
             $queryBuilder
                 ->andWhere($queryBuilder->expr()->lte('variant.releasedAt', ':releasedAtTo'))
-                ->setParameter('releasedAtTo', $dateCaclulator->getDay($criteria['releasedAtTo']))
-            ;
+                ->setParameter('releasedAtTo', $dateCaclulator->getDay($criteria['releasedAtTo']));
         }
 
         if (empty($sorting)) {
@@ -135,6 +145,7 @@ class ProductRepository extends BaseProductRepository
             ->select($queryBuilder->expr()->count('o'))
             ->where($queryBuilder->expr()->eq($this->getPropertyName('status'), ':published'))
             ->setParameter('published', Product::PUBLISHED);
+
         return $queryBuilder->getQuery()->getSingleScalarResult();
     }
 }
