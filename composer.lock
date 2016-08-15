@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a580c2b5570448302fa6a08c05f2ad2d",
-    "content-hash": "ac089947a66bd6f8e9abc8d162db8f13",
+    "hash": "31c85085c927e6d429947029214fdadb",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2123,7 +2122,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Gregwar/FormBundle/zipball/31722025f5a46d43bf92344d4d7450537a1d9805",
+                "url": "https://api.github.com/repos/Gregwar/FormBundle/zipball/9c67740a2eeb780b2e12228471aa3fb5b8a31c34",
                 "reference": "31722025f5a46d43bf92344d4d7450537a1d9805",
                 "shasum": ""
             },
@@ -2249,7 +2248,6 @@
                 "rest",
                 "web service"
             ],
-            "abandoned": "guzzlehttp/guzzle",
             "time": "2015-03-18 18:23:50"
         },
         {
@@ -2467,67 +2465,6 @@
                 "test"
             ],
             "time": "2015-05-11 14:41:42"
-        },
-        {
-            "name": "helios-ag/fm-bbcode-bundle",
-            "version": "6.8",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/helios-ag/FMBbCodeBundle.git",
-                "reference": "7208401df22c0ca3eb0de047a0f52fb1af2b3057"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/helios-ag/FMBbCodeBundle/zipball/7208401df22c0ca3eb0de047a0f52fb1af2b3057",
-                "reference": "7208401df22c0ca3eb0de047a0f52fb1af2b3057",
-                "shasum": ""
-            },
-            "require": {
-                "mjohnson/decoda": "6.*",
-                "php": ">=5.3.2",
-                "sensio/distribution-bundle": ">=2.1",
-                "symfony/assetic-bundle": "~2.0",
-                "symfony/config": "~2.0",
-                "symfony/console": "~2.0",
-                "symfony/dependency-injection": "~2.0",
-                "symfony/framework-bundle": "~2.1",
-                "symfony/http-foundation": "~2.1",
-                "symfony/http-kernel": "~2.0",
-                "symfony/process": "~2.0",
-                "symfony/templating": "~2.0",
-                "symfony/twig-bundle": "~2.0",
-                "symfony/yaml": "~2.0"
-            },
-            "require-dev": {
-                "symfony/symfony": "~2.1"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "6.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "FM\\BbcodeBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Albert Ganiev",
-                    "email": "helios.ag@gmail.com"
-                }
-            ],
-            "description": "Symfony FMBbCodeBundle",
-            "homepage": "https://github.com/helios-ag/FMBbCodeBundle",
-            "keywords": [
-                "bbcode"
-            ],
-            "time": "2015-09-25 08:51:39"
         },
         {
             "name": "imagine/imagine",
@@ -3314,7 +3251,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/JMSTranslationBundle/zipball/f5adfcc617823ea18f2a2cc40f153331db1287bb",
+                "url": "https://api.github.com/repos/schmittjoh/JMSTranslationBundle/zipball/e79fe1cd77e7749223c870bdae0bd400c21a102d",
                 "reference": "f5adfcc617823ea18f2a2cc40f153331db1287bb",
                 "shasum": ""
             },
@@ -4097,7 +4034,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/0136c1352ea6264244d3a6a32174e2d48c2d2af9",
+                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/319645645ae64f6c81e27051866448b838281b6f",
                 "reference": "0136c1352ea6264244d3a6a32174e2d48c2d2af9",
                 "shasum": ""
             },
@@ -4207,56 +4144,6 @@
                 "rdfa"
             ],
             "time": "2015-07-03 13:41:50"
-        },
-        {
-            "name": "mjohnson/decoda",
-            "version": "6.7.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/milesj/decoda.git",
-                "reference": "b692742f980e1c25bc953e4ea2008ab581e2a60c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/milesj/decoda/zipball/b692742f980e1c25bc953e4ea2008ab581e2a60c",
-                "reference": "b692742f980e1c25bc953e4ea2008ab581e2a60c",
-                "shasum": ""
-            },
-            "require": {
-                "ext-mbstring": "*",
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.8"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Decoda": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Miles Johnson",
-                    "homepage": "http://milesj.me"
-                }
-            ],
-            "description": "A lightweight lexical string parser for BBCode styled markup.",
-            "homepage": "http://milesj.me/code/php/decoda",
-            "keywords": [
-                "HOOK",
-                "bbcode",
-                "decoda",
-                "filter",
-                "lexer",
-                "markup",
-                "parser"
-            ],
-            "time": "2016-05-15 06:38:28"
         },
         {
             "name": "mockery/mockery",
@@ -4412,7 +4299,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phiamo/MopaBootstrapBundle/zipball/5f05310a402a1df686da090808a160ab627507d3",
+                "url": "https://api.github.com/repos/phiamo/MopaBootstrapBundle/zipball/0141c79a1866ab5ba6d368b74eceb695599b7bbb",
                 "reference": "5f05310a402a1df686da090808a160ab627507d3",
                 "shasum": ""
             },
@@ -7899,7 +7786,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataIntlBundle/zipball/ddc93fa1b26cf7b7895a2cc035327413d718a267",
+                "url": "https://api.github.com/repos/sonata-project/SonataIntlBundle/zipball/b68df5e7a61b313df75bfebe44cc734fcab0a79d",
                 "reference": "ddc93fa1b26cf7b7895a2cc035327413d718a267",
                 "shasum": ""
             },
@@ -10150,7 +10037,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap-sass/zipball/6424fb7c845880ecf56f8ac31be10e35a77f0b59",
+                "url": "https://api.github.com/repos/twbs/bootstrap-sass/zipball/5d6b2ebba0c2a5885ce2f0e01e9218db3d3b5e47",
                 "reference": "6424fb7c845880ecf56f8ac31be10e35a77f0b59",
                 "shasum": ""
             },
@@ -10366,7 +10253,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/whiteoctober/WhiteOctoberPagerfantaBundle/zipball/ed0754faabf7d2263ccfe452897e3f8c872ed601",
+                "url": "https://api.github.com/repos/whiteoctober/WhiteOctoberPagerfantaBundle/zipball/f7e0fdf94a763a21a7c4c36ec9d9b5bcf4e12521",
                 "reference": "ed0754faabf7d2263ccfe452897e3f8c872ed601",
                 "shasum": ""
             },
@@ -11367,7 +11254,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Symfony2Extension/zipball/e21aa731007fdafd0ba1c61f95f19460d27901e1",
+                "url": "https://api.github.com/repos/Behat/Symfony2Extension/zipball/c59756034c0837e11f36806893c308fe27fe9c4c",
                 "reference": "e21aa731007fdafd0ba1c61f95f19460d27901e1",
                 "shasum": ""
             },
@@ -11520,6 +11407,56 @@
                 "webtest"
             ],
             "time": "2015-06-15 20:19:33"
+        },
+        {
+            "name": "mjohnson/decoda",
+            "version": "6.7.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/milesj/decoda.git",
+                "reference": "b692742f980e1c25bc953e4ea2008ab581e2a60c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/milesj/decoda/zipball/b692742f980e1c25bc953e4ea2008ab581e2a60c",
+                "reference": "b692742f980e1c25bc953e4ea2008ab581e2a60c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Decoda": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Miles Johnson",
+                    "homepage": "http://milesj.me"
+                }
+            ],
+            "description": "A lightweight lexical string parser for BBCode styled markup.",
+            "homepage": "http://milesj.me/code/php/decoda",
+            "keywords": [
+                "HOOK",
+                "bbcode",
+                "decoda",
+                "filter",
+                "lexer",
+                "markup",
+                "parser"
+            ],
+            "time": "2016-05-15 06:38:28"
         },
         {
             "name": "phpdocumentor/reflection-common",

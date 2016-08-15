@@ -75,7 +75,6 @@ class AppKernel extends Kernel
             new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
             new Bmatzner\JQueryUIBundle\BmatznerJQueryUIBundle(),
             new Bmatzner\JQueryBundle\BmatznerJQueryBundle(),
-            new FM\BbcodeBundle\FMBbcodeBundle(),
 
             //JDJ
             // TODO there can be only one !
