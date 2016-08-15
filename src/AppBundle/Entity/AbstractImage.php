@@ -9,6 +9,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -151,5 +152,23 @@ abstract class AbstractImage
 
         // Clean the path file
         $this->file = null;
+    }
+
+    /**
+     * @JMS\VirtualProperty
+     * @JMS\SerializedName("thumbnail")
+     * @JMS\Type("LiipSerializer")
+     * @JMS\Groups({"Details"})
+     */
+    public function getThumbnailSerialize()
+    {
+        if ($this->getWebPath() === null) {
+            return null;
+        }
+
+        return [
+            'filename' => $this->getWebPath(),
+            'filter' => 'thumbnail'
+        ];
     }
 }

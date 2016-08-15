@@ -139,3 +139,11 @@ services:
             - "@templating"
         tags:
             - {name: sonata.block}
+
+    # <!-- Serializers -->
+    app.serializer.liip_serializer_handler:
+        class: AppBundle\Handler\LiipSerializeHandler
+        arguments:
+            - "@liip_imagine.cache.manager"
+        tags:
+            - {name: jms_serializer.handler, type: LiipSerializer, format: json}

@@ -214,6 +214,10 @@ class Product extends BaseProduct implements ReviewableInterface
 
     /**
      * @return ProductVariantImage
+     *
+     * @JMS\VirtualProperty
+     * @JMS\SerializedName("image")
+     * @JMS\Groups({"Details"})
      */
     public function getMainImage()
     {
