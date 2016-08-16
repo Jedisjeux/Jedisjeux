@@ -183,9 +183,9 @@ EOM;
             $position = isset($data[1]) ? $data[1] : null;
 
             if ('left' === $position) {
-                $body = str_replace(sprintf('IMAGE-CLASS-%s', $id), 'pull-left col-md-6 no-padding-right', $body); 
+                $body = str_replace(sprintf('IMAGE-CLASS-%s', $id), 'pull-left col-md-6 no-padding-left', $body); 
             } elseif ('right' === $position) {
-                $body = str_replace(sprintf('IMAGE-CLASS-%s', $id), 'pull-right col-md-6 no-padding-left', $body);
+                $body = str_replace(sprintf('IMAGE-CLASS-%s', $id), 'pull-right col-md-6 no-padding-right', $body);
             } else {
                 $body = str_replace(sprintf('IMAGE-CLASS-%s', $id), '', $body);
             }
