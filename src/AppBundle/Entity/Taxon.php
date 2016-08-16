@@ -9,6 +9,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
 use Sylius\Component\Taxonomy\Model\Taxon as BaseTaxon;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
@@ -59,6 +60,30 @@ class Taxon extends BaseTaxon
         parent::__construct();
 
         $this->topicCount = 0;
+    }
+
+    /**
+     * @return string
+     *
+     * @JMS\VirtualProperty
+     * @JMS\SerializedName("permalink")
+     * @JMS\Groups({"Details"})
+     */
+    public function getPermalink()
+    {
+        return parent::getPermalink();
+    }
+
+    /**
+     * @return string
+     *
+     * @JMS\VirtualProperty
+     * @JMS\SerializedName("name")
+     * @JMS\Groups({"Details"})
+     */
+    public function getName()
+    {
+        return parent::getName();
     }
 
     /**

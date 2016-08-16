@@ -80,6 +80,9 @@ class Product extends BaseProduct implements ReviewableInterface
      * @var integer
      *
      * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
+     *
+     * @JMS\Expose
+     * @JMS\SerializedName("min_player_count")
      * @JMS\Groups({"Details"})
      */
     protected $joueurMin;
@@ -88,6 +91,9 @@ class Product extends BaseProduct implements ReviewableInterface
      * @var integer
      *
      * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
+     *
+     * @JMS\Expose
+     * @JMS\SerializedName("max_player_count")
      * @JMS\Groups({"Details"})
      */
     protected $joueurMax;
@@ -96,6 +102,9 @@ class Product extends BaseProduct implements ReviewableInterface
      * @var integer
      *
      * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
+     *
+     * @JMS\Expose
+     * @JMS\SerializedName("min_duration")
      * @JMS\Groups({"Details"})
      */
     protected $durationMin;
@@ -104,6 +113,10 @@ class Product extends BaseProduct implements ReviewableInterface
      * @var integer
      *
      * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
+     *
+     * @JMS\Expose
+     * @JMS\SerializedName("max_duration")
+     * @JMS\Groups({"Details"})
      */
     protected $durationMax;
 
@@ -194,6 +207,9 @@ class Product extends BaseProduct implements ReviewableInterface
 
     /**
      * @return string
+     *
+     * @JMS\VirtualProperty
+     * @JMS\Groups({"Details"})
      */
     public function getShortDescription()
     {
@@ -535,6 +551,10 @@ class Product extends BaseProduct implements ReviewableInterface
 
     /**
      * @return ArrayCollection
+     *
+     * @JMS\VirtualProperty
+     * @JMS\Groups({"Details"})
+     * @JMS\Type("ArrayCollection<AppBundle\Entity\Taxon>")
      */
     public function getMechanisms()
     {
@@ -551,6 +571,10 @@ class Product extends BaseProduct implements ReviewableInterface
 
     /**
      * @return ArrayCollection
+     *
+     * @JMS\VirtualProperty
+     * @JMS\Groups({"Details"})
+     * @JMS\Type("ArrayCollection<AppBundle\Entity\Taxon>")
      */
     public function getThemes()
     {
@@ -653,5 +677,17 @@ class Product extends BaseProduct implements ReviewableInterface
     public function getSlug()
     {
         return parent::getSlug();
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @JMS\VirtualProperty
+     * @JMS\SerializedName("createdAt")
+     * @JMS\Groups({"Details"})
+     */
+    public function getCreatedAt()
+    {
+        return parent::getCreatedAt();
     }
 }

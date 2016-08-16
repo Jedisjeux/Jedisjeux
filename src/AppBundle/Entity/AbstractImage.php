@@ -156,6 +156,24 @@ abstract class AbstractImage
 
     /**
      * @JMS\VirtualProperty
+     * @JMS\SerializedName("default")
+     * @JMS\Type("LiipSerializer")
+     * @JMS\Groups({"Details"})
+     */
+    public function getDefaultSerialize()
+    {
+        if ($this->getWebPath() === null) {
+            return null;
+        }
+
+        return [
+            'filename' => $this->getWebPath(),
+            'filter' => 'default'
+        ];
+    }
+
+    /**
+     * @JMS\VirtualProperty
      * @JMS\SerializedName("thumbnail")
      * @JMS\Type("LiipSerializer")
      * @JMS\Groups({"Details"})
@@ -169,6 +187,24 @@ abstract class AbstractImage
         return [
             'filename' => $this->getWebPath(),
             'filter' => 'thumbnail'
+        ];
+    }
+
+    /**
+     * @JMS\VirtualProperty
+     * @JMS\SerializedName("magazine_item")
+     * @JMS\Type("LiipSerializer")
+     * @JMS\Groups({"Details"})
+     */
+    public function getMagazineItemSerialize()
+    {
+        if ($this->getWebPath() === null) {
+            return null;
+        }
+
+        return [
+            'filename' => $this->getWebPath(),
+            'filter' => 'magazine_item'
         ];
     }
 }

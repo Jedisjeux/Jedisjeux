@@ -41,6 +41,8 @@ sylius_product_index_by_taxon:
                 createdAt: desc
     requirements:
         permalink: "[^?]+"
+    options:
+      expose: true
 
 sylius_product_show:
     methods: [GET]
