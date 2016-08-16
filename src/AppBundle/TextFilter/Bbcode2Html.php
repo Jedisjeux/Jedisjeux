@@ -171,7 +171,7 @@ EOM;
         $pattern = '/\[image\=?(?P<properties>.*?):(.*?)\\](?P<id>.*?)\[\/image:(.*?)\\]/ms';
         preg_match_all($pattern, $body, $matches);
 
-        $replacement = "<img src=\"$1-IMAGE-REPLACEMENT-$3\" class=\"img-responsive\" />";
+        $replacement = "<div class=\"IMAGE-CLASS-$3\"><img src=\"$1-IMAGE-REPLACEMENT-$3\" class=\"img-responsive\" /></div>";
         $body = preg_replace($pattern, $replacement, $body);
 
         foreach ($matches['id'] as $key => $id) {
@@ -181,6 +181,14 @@ EOM;
             $data = false !== !empty($properties) ? explode(',', $properties) : [];
             $size = isset($data[0]) ? $data[0] : null;
             $position = isset($data[1]) ? $data[1] : null;
+
+            if ('left' === $position) {
+                $body = str_replace(sprintf('IMAGE-CLASS-%s', $id), 'pull-left col-md-6 no-padding-right', $body); 
+            } elseif ('right' === $position) {
+                $body = str_replace(sprintf('IMAGE-CLASS-%s', $id), 'pull-right col-md-6 no-padding-left', $body);
+            } else {
+                $body = str_replace(sprintf('IMAGE-CLASS-%s', $id), '', $body);
+            }
 
             $imagePath = $this->getImageOriginalPath($imageName, $size);
             $body = str_replace(sprintf('%s-IMAGE-REPLACEMENT-%s', $properties, $id), $imagePath, $body);
