@@ -30,6 +30,7 @@ class Product extends BaseProduct implements ReviewableInterface
     /**
      * status constants
      */
+    const STATUS_NEW = "new";
     const WRITING = "WRITING";
     const NEED_A_TRANSLATION = "NEED_A_TRANSLATION";
     const NEED_A_REVIEW = "NEED_A_REVIEW";

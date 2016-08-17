@@ -168,7 +168,7 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
 
         $articleDocument->setName($data['name']);
         $articleDocument->setTitle($data['title']);
-        $articleDocument->setPublishable(true);
+        $articleDocument->setPublishable($data['publishable']);
         $articleDocument->setPublishStartDate(\DateTime::createFromFormat('Y-m-d H:i:s', $data['publishedAt']));
 
         return $article;
@@ -244,6 +244,7 @@ select article.article_id as id,
             when 'preview' then 'previews'
             else null
        end as mainTaxon,     
+       article.valid as publishable,
        product.id as product_id,
        topic.id as topic_id,
        user.customer_id as author_id,

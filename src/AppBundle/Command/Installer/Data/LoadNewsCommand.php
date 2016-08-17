@@ -10,6 +10,7 @@ namespace AppBundle\Command\Installer\Data;
 
 use AppBundle\Command\LogMemoryUsageTrait;
 use AppBundle\Entity\Article;
+use AppBundle\Entity\Product;
 use AppBundle\Entity\Taxon;
 use AppBundle\Entity\Topic;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
@@ -132,7 +133,11 @@ select      old.news_id as id,
             old.photo as mainImage,
             product.id as product_id,
             topic.id as topic_id,
-            old.nb_clicks as view_count
+            old.nb_clicks as view_count,
+            case valid
+                when 1 then 'PUBLISHED'
+                else 'new'
+            end as status
 from        jedisjeux.jdj_news old
   inner join sylius_customer customer
     on customer.code = concat('user-', old.user_id)
@@ -142,7 +147,7 @@ from        jedisjeux.jdj_news old
     on product.id = productVariant.product_id
   left join jdj_topic topic
     on topic.id = old.topic_id
-WHERE       old.valid = 1
+WHERE       old.valid >= 0
             AND       old.type_lien in (0, 1)
 
 EOM;
@@ -231,7 +236,7 @@ EOM;
 
         $articleDocument->setName($data['name']);
         $articleDocument->setTitle($data['title']);
-        $articleDocument->setPublishable(true);
+        $articleDocument->setPublishable(Product::PUBLISHED === $data['status']);
         $articleDocument->setPublishStartDate(\DateTime::createFromFormat('Y-m-d H:i:s', $data['publishedAt']));
 
         return $article;
