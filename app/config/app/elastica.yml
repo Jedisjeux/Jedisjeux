@@ -24,6 +24,16 @@ fos_elastica:
                               max_gram: 20
 
           types:
+              article:
+                  mappings:
+                      title: { search_analyzer: custom_search_analyzer, index_analyzer: custom_index_analyzer, type: string }
+                  persistence:
+                      driver: orm
+                      model: AppBundle\Entity\Article
+                      provider: ~
+                      listener:
+                          immediate: ~
+                      finder: ~
               user:
                   mappings:
                       username: { search_analyzer: custom_search_analyzer, index_analyzer: custom_index_analyzer, type: string }

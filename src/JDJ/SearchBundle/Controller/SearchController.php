@@ -8,6 +8,7 @@
 
 namespace JDJ\SearchBundle\Controller;
 
+use AppBundle\Entity\Article;
 use AppBundle\Entity\Customer;
 use AppBundle\Entity\Person;
 use AppBundle\Entity\Product;
@@ -130,6 +131,18 @@ class SearchController extends Controller
                     'image' => (null === $entity->getMainImage()) ? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : $this->get('liip_imagine.cache.manager')->getBrowserPath($entity->getMainImage()->getWebPath(), 'thumbnail'),
                     'href' => $this->generateUrl('app_person_show', array(
                             'slug' => $entity->getSlug(),
+                        )
+                    ),
+                );
+            }
+
+            if ($entity instanceof Article) {
+                $result = array(
+                    'value' => (string)$entity,
+                    'label' => (string)$entity,
+                    'image' => (null === $entity->getDocument()->getMainImage()) ? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : $this->get('liip_imagine.cache.manager')->getBrowserPath($entity->getDocument()->getMainImage()->getImage()->getId(), 'cmf_thumbnail'),
+                    'href' => $this->generateUrl('app_frontend_article_show', array(
+                            'name' => $entity->getName(),
                         )
                     ),
                 );

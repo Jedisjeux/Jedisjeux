@@ -561,4 +561,12 @@ class Article implements ResourceInterface, ReviewableInterface
 
         return Taxon::CODE_REPORT_ARTICLE === $this->getMainTaxon()->getCode();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
 }
