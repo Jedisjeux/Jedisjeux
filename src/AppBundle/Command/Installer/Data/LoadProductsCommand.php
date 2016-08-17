@@ -49,7 +49,7 @@ class LoadProductsCommand extends ContainerAwareCommand
         $i = 0;
 
         foreach ($this->getRows() as $data) {
-            $output->writeln(sprintf("Loading <info>%s</info> product", $data['name']));
+            $output->writeln(sprintf("Loading <comment>%s</comment> product", $data['name']));
 
             $product = $this->createOrReplaceProduct($data);
             $this->getManager()->persist($product);
@@ -66,7 +66,7 @@ class LoadProductsCommand extends ContainerAwareCommand
         $this->getManager()->clear();
 
         foreach ($this->getVariants() as $data) {
-            $output->writeln(sprintf("Loading <info>%s</info> variant for product <info>%s</info>",
+            $output->writeln(sprintf("Loading <comment>%s</comment> variant for product <comment>%s</comment>",
                 $data['name'],
                 $data['parent_code']
             ));
@@ -131,12 +131,16 @@ class LoadProductsCommand extends ContainerAwareCommand
      */
     protected function createOrReplaceProduct(array $data)
     {
-        /** @var Product $product */
-        $product = $this->getRepository()->findOneBy(array('code' => $data['code']));
+        /** @var ProductVariant $productVariant */
+        $productVariant = $this->getProductVariantRepository()->findOneBy(['code' => $data['code']]);
+        $product = null !== $productVariant ? $productVariant->getProduct() : null;
 
         if (null === $product) {
             $product = $this->getFactory()->createNew();
+        } else {
+            $product->setMasterVariant($productVariant);
         }
+
         $data['shortDescription'] = !empty($data['shortDescription']) ? $this->getHTMLFromText($data['shortDescription']) : null;
         $data['description'] = !empty($data['description']) ? $this->getHTMLFromText($data['description']) : null;
         $data['joueurMin'] = !empty($data['joueurMin']) ? $data['joueurMin'] : null;
