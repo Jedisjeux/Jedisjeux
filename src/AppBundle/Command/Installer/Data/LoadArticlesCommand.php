@@ -137,7 +137,8 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
         }
 
         $article
-            ->setCode(sprintf('article-%s', $data['id']));
+            ->setCode(sprintf('article-%s', $data['id']))
+            ->setViewCount($data['view_count']);
 
         $articleDocument = $article->getDocument();
 
@@ -246,10 +247,13 @@ select article.article_id as id,
        product.id as product_id,
        topic.id as topic_id,
        user.customer_id as author_id,
-       group_concat(block.text_id ORDER BY block.ordre) as blocks
+       group_concat(block.text_id ORDER BY block.ordre) as blocks,
+       article_view.view_count
 from jedisjeux.jdj_article article
   inner join jedisjeux.jdj_article_text as block
     on block.article_id = article.article_id
+  left join jedisjeux.jdj_v_article_view_count as article_view  
+    on article_view.id = article.article_id
   left join sylius_product_variant productVariant
     on productVariant.code = concat('game-', article.game_id)
   left join sylius_product product

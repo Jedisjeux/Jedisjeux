@@ -23,7 +23,7 @@
                     'template': 'frontend/article/_magazine_items_one_and_list_items.html.twig',
                     'paginate': 5,
                     'criteria': {
-                        'publishable': 1
+                        'publishable': 1,
                     },
                     'sorting': {
                         'publishStartDate': 'desc'
@@ -40,10 +40,11 @@
                     'template': 'frontend/article/_magazine_items_one_and_list_items_image_less.html.twig',
                     'paginate': 5,
                     'criteria': {
-                        'publishable': 1
+                        'publishable': 1,
+                        'publishStartDateFrom': '1 months ago'|date('Y-m-d')
                     },
                     'sorting': {
-                        'topic.postCount': 'desc'
+                        'viewCount': 'desc'
                     }} )) }}
 
                 <hr/>

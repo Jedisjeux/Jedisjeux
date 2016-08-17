@@ -12,6 +12,20 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
  */
 class ArticleRepository extends EntityRepository
 {
+    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = [])
+    {
+        if (isset($criteria['publishStartDateFrom'])) {
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->gte($this->getPropertyName('publishStartDate'), ':publishStartDateFrom'))
+                ->setParameter('publishStartDateFrom', $criteria['publishStartDateFrom']);
+
+            unset($criteria['publishStartDateFrom']);
+        }
+
+        parent::applyCriteria($queryBuilder, $criteria);
+    }
+
+
     /**
      * @param array|null $criteria
      * @param array|null $sorting
@@ -59,7 +73,8 @@ class ArticleRepository extends EntityRepository
     /**
      * @return QueryBuilder
      */
-    protected function getQueryBuilder() {
+    protected function getQueryBuilder()
+    {
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder
             ->leftJoin('o.topic', 'topic');

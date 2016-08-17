@@ -22,7 +22,10 @@ use Sylius\Component\User\Model\CustomerInterface;
  * @author Loïc Frémont <loic@mobizel.com>
  *
  * @ORM\Entity
- * @ORM\Table(name="jdj_article")
+ * @ORM\Table(name="jdj_article", indexes={
+ *      @ORM\index(name="publish_start_date_idx", columns={"publishStartDate"}),
+ *      @ORM\index(name="publishable_idx", columns={"publishable"})
+ * })
  */
 class Article implements ResourceInterface, ReviewableInterface
 {

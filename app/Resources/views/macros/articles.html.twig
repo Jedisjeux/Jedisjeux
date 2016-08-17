@@ -6,7 +6,8 @@
 
     {% set meta %}
         <i class="fa fa-calendar"></i> {{ articleDocument.publishStartDate|localizeddate('long', 'none') }}
-        - <i class="fa fa-comments"></i> {{ article.topic ? article.topic.postCount : 0 }} Comments
+        - <i class="fa fa-eye"></i> {{ article.viewCount }}
+        - <i class="fa fa-comments"></i> {{ article.topic ? article.topic.postCount : 0 }}
     {% endset %}
     {% set body %}{% endset %}
 
@@ -42,7 +43,8 @@
 
     {% set meta %}
         <i class="fa fa-calendar"></i> {{ articleDocument.publishStartDate|localizeddate('long', 'none') }}
-        - <i class="fa fa-comments"></i> {{ article.topic ? article.topic.postCount : 0 }} Comments
+        - <i class="fa fa-eye"></i> {{ article.viewCount }}
+        - <i class="fa fa-comments"></i> {{ article.topic ? article.topic.postCount : 0 }}
     {% endset %}
 
     {{ item.magazineListItem(imagineBlock.image.id, imagineBlock.label, 'cmf_thumbnail', 'img-responsive', path('app_frontend_article_show', {'name': article.name}), articleDocument.title, meta) }}
@@ -57,7 +59,8 @@
 
     {% set meta %}
         <i class="fa fa-calendar"></i> {{ articleDocument.publishStartDate|localizeddate('long', 'none') }}
-        - <i class="fa fa-comments"></i> {{ article.topic ? article.topic.postCount : 0 }} Comments
+        - <i class="fa fa-eye"></i> {{ article.viewCount }}
+        - <i class="fa fa-comments"></i> {{ article.topic ? article.topic.postCount : 0 }}
     {% endset %}
 
     {{ item.magazineListItemImageLess(path('app_frontend_article_show', {'name': article.name}), articleDocument.title, meta) }}

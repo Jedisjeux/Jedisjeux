@@ -1,7 +1,7 @@
 {% from 'macros/images.html.twig' import image %}
 {% from 'macros/articles.html.twig' import magazineItemOne, magazineListItemImageLess %}
 
-{% set article = articles.currentPageResults[0] %}
+{% set article = articles.currentPageResults|length ? articles.currentPageResults[0] : null %}
 {% if (article) %}
     {% set imagineBlock = article.document.mainImage %}
     {{ magazineItemOne(article) }}
