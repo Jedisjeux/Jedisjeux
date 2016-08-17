@@ -37,6 +37,7 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 @import "modules/gamesheet";
 @import "modules/game-plays";
 @import "modules/entities";
+@import "modules/errors";
 
 body {
   font-size: 14px;

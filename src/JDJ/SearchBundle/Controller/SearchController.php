@@ -9,18 +9,14 @@
 namespace JDJ\SearchBundle\Controller;
 
 use AppBundle\Entity\Article;
-use AppBundle\Entity\Customer;
 use AppBundle\Entity\Person;
 use AppBundle\Entity\Product;
 use AppBundle\Entity\Topic;
 use Elastica\Query\QueryString;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
-use JDJ\LudographieBundle\Entity\Personne;
-use JDJ\UserBundle\Entity\User;
 use Pagerfanta\Pagerfanta;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
-use Sylius\Component\User\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
