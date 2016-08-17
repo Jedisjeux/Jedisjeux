@@ -253,7 +253,7 @@ select article.article_id as id,
 from jedisjeux.jdj_article article
   inner join jedisjeux.jdj_article_text as block
     on block.article_id = article.article_id
-  left join jedisjeux.jdj_v_article_view_count as article_view  
+  inner join jedisjeux.jdj_v_article_view_count as article_view  
     on article_view.id = article.article_id
   left join sylius_product_variant productVariant
     on productVariant.code = concat('game-', article.game_id)

@@ -160,7 +160,9 @@ class LoadReviewArticlesCommand extends AbstractLoadDocumentCommand
             $article = $this->getFactory()->createNew();
         }
 
-        $article->setCode('review-article-'.$data['id']);
+        $article
+            ->setCode('review-article-'.$data['id'])
+            ->setViewCount($data['view_count']);
         $articleDocument = $article->getDocument();
 
         if (null !== $data['main_image']) {
@@ -235,10 +237,13 @@ select test.game_id as id,
        test.note_regle/2 as rulesRating,
        test.note_duree_vie/2 as lifetimeRating,
        test.valid as published,
+       review_article_view.view_count,
        material_image.img_nom as material_image_path,
        rules_image.img_nom as rules_image_path,
        lifetime_image.img_nom as lifetime_image_path
 from jedisjeux.jdj_tests test
+  inner join jedisjeux.jdj_v_review_article_view_count as review_article_view  
+    on review_article_view.id = test.game_id
   inner join jedisjeux.jdj_game game
     on game.id = test.game_id
   inner join sylius_product_variant productVariant
