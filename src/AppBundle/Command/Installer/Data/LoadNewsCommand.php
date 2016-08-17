@@ -131,7 +131,8 @@ select      old.news_id as id,
             customer.id as author_id,
             old.photo as mainImage,
             product.id as product_id,
-            topic.id as topic_id
+            topic.id as topic_id,
+            old.nb_clicks as view_count
 from        jedisjeux.jdj_news old
   inner join sylius_customer customer
     on customer.code = concat('user-', old.user_id)
@@ -199,7 +200,8 @@ EOM;
         }
 
         $article
-            ->setCode(sprintf('news-%s', $data['id']));
+            ->setCode(sprintf('news-%s', $data['id']))
+            ->setViewCount($data['view_count']);
 
         $articleDocument = $article->getDocument();
 
