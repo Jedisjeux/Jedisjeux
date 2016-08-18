@@ -8,9 +8,9 @@ Feature: Topic creation
     Given there are following users:
       | email             | password | role      |
       | kevin@example.com | password | ROLE_USER |
-    And there are taxonomies:
-      | name  |
-      | forum |
+    Given there are root taxons:
+      | code  | name  |
+      | forum | Forum |
     And I am logged in as user "kevin@example.com" with password "password"
 
   Scenario: Create new topic
