@@ -228,49 +228,6 @@ services:
 
 gregwar_form: ~
 
-ivory_ck_editor:
-    default_config: forum
-    configs:
-        minimal:
-            language: %locale%
-            toolbar: basic
-        standard:
-            toolbar: standard
-        forum:
-            protectedSource: ['/<span[^>]*><\/span>/g']
-            extraPlugins: 'templates,div'
-            templates:    "my_templates"
-            language: %locale%
-            stylesSet: custom_styles  # Chargement des styles personnalisables
-            contentsCss:  ['assets/stylesheets/base.css']
-            toolbar: [ ['Templates' ], [ 'Bold','Italic','Underline', 'Blockquote' ], [ 'NumberedList','BulletedList' ], [ 'Link','Unlink' ], [ 'Image' ], [ 'Styles', 'Format' ]; ]
-    templates:
-        my_templates:
-            imagesPath: "/assets/ckeditor/templates/images/"
-            templates:
-                -
-                    title:       "Image à gauche et texte"
-                    image:       "template1.gif"
-                    description: "Une image principale, un titre et un texte entourant l'image."
-                    html:        '<div class="col-sm-5 col-md-5 pull-left no-padding-left"><div class="text-center"><div class="img-box-4-item"><img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350x150&w=350&h=150" alt="" class="img-responsive" /><div class="img-box-4-content"><p>euphrat &amp; tigris version US</p></div></div></div></div><h4><a href="#">Le problème de lisibilité</a></h4><p>Nemo enim ipsam voluptatem quia quia neque porro qui dolorem ipsum quia dolor sit amet consectetur.</p>'
-                -
-                    title:       "Image à droite et texte"
-                    image:       "template1.gif"
-                    description: "Une image principale, un titre et un texte entourant l'image."
-                    html:        '<div class="col-sm-5 col-md-5 pull-right no-padding-right"><div class="text-center"><div class="img-box-4-item"><img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350x150&w=350&h=150" alt="" class="img-responsive" /><div class="img-box-4-content"><p>euphrat &amp; tigris version US</p></div></div></div></div><h4><a href="#">Le problème de lisibilité</a></h4><p>Nemo enim ipsam voluptatem quia quia neque porro qui dolorem ipsum quia dolor sit amet consectetur.</p>'
-                -
-                    title:       "Introduction"
-                    image:       "template1.gif"
-                    description: "My awesome template"
-                    html:        '<div class="quote-one"><div class="row"><div class="quote-one-item"><span class="color">“</span><div class="quote-one-right"><p>Nemo enim ipsam voluptatem quia quia neque porro qui dolorem ipsum quia dolor sit amet consectetur.</p></div></div></div></div>'
-    styles:         # Configuration des styles personnalisables
-        custom_styles:
-            - { name: "Alerte Success", element: "div",  attributes: { class: "alert alert-success", role: "alert" }}
-            - { name: "Alerte Info", element: "div",  attributes: { class: "alert alert-info", role: "alert" }}
-            - { name: "Alerte Warning", element: "div",  attributes: { class: "alert alert-warning", role: "alert" }}
-            - { name: "Alerte Danger", element: "div",  attributes: { class: "alert alert-danger", role: "alert" }}
-            - { name: "Badge", element: "span",  attributes: { class: "badge" }}
-
 knp_snappy:
     pdf:
         enabled:    true

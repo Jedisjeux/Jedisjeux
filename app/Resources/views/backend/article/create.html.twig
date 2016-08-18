@@ -1,6 +1,8 @@
 {% extends "::base.html.twig" %}
 {% import 'macros/actions.html.twig' as action %}
 
+{% block body_class %}magazine{% endblock %}
+
 {% block headline %}
     Nouvel article
 {% endblock %}
@@ -12,5 +14,42 @@
 {% endblock %}
 
 {% block container %}
-{#{{ dump(article) }}#}
+
+    <div class="container">
+        <div class="col-md-8">
+            <div></div>
+            <div class="droppable bg-grey text-center"
+                 style="width: 100%; height: 150px; padding: 0.5em; float: left; margin: 10px;">
+                <em>Glisser un bloc ici</em>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            {% include "backend/article/_sidebar.html.twig" %}
+        </div>
+    </div>
+
+    <div id="ImageAtLeftTemplate" style="display: none">
+        <div class="col-sm-5 col-md-5 pull-left no-padding-left">
+            <div class="text-center">
+                <div class="img-box-4-item">
+                    <img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350x150&w=350&h=150" alt=""
+                         class="img-responsive"/>
+                    <div class="img-box-4-content">
+                        <p>euphrat &amp; tigris version US</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h4><a href="#">Le problème de lisibilité</a></h4>
+        <p>Nemo enim ipsam voluptatem quia quia neque porro qui dolorem ipsum quia dolor sit amet consectetur.</p>
+        <div class="clearfix"></div>
+    </div>
+
+    <div id="ImageAtRightTemplate" style="display: none">
+        <div class="col-sm-5 col-md-5 pull-right no-padding-right"><div class="text-center"><div class="img-box-4-item"><img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350x150&w=350&h=150" alt="" class="img-responsive" /><div class="img-box-4-content"><p>euphrat &amp; tigris version US</p></div></div></div></div><h4><a href="#">Le problème de lisibilité</a></h4><p>Nemo enim ipsam voluptatem quia quia neque porro qui dolorem ipsum quia dolor sit amet consectetur.</p>
+        <div class="clearfix"></div>
+    </div>
+
+    {#{{ dump(article) }}#}
 {% endblock container %}
