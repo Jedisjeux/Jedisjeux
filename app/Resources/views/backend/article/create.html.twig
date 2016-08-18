@@ -1,7 +1,7 @@
 {% extends "::base.html.twig" %}
 {% import 'macros/actions.html.twig' as action %}
 
-{% block body_class %}magazine{% endblock %}
+{% block body_class %}magazine article{% endblock %}
 
 {% block headline %}
     Nouvel article
@@ -16,39 +16,180 @@
 {% block container %}
 
     <div class="container">
-        <div class="col-md-8">
-            <div></div>
-            <div class="droppable bg-grey text-center"
-                 style="width: 100%; height: 150px; padding: 0.5em; float: left; margin: 10px;">
-                <em>Glisser un bloc ici</em>
+        <div class="row">
+            <div class="col-md-8">
+                <div id="articleContent">
+
+                </div>
+
+                <div class="droppable bg-grey text-center"
+                     style="width: 100%; height: 150px; padding: 0.5em; float: left; margin: 10px;">
+                    <em>Glisser un bloc ici</em>
+                </div>
+
+                <h5><i class="fa fa-th-large color"></i> Blocs</h5>
+                <!-- Container -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-3">
+                            <div class="revertible draggable" data-template="introductionTemplate">
+                                <img class="img-responsive"
+                                     src="{{ asset('assets/ckeditor/templates/images/introduction.gif') }}"/>
+                                <p>Introduction</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3">
+                            <div class="revertible draggable" data-template="imageAtLeftTemplate">
+                                <img class="img-responsive"
+                                     src="{{ asset('assets/ckeditor/templates/images/image_at_left.gif') }}"/>
+                                <p>Image à gauche</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3">
+                            <div class="revertible draggable" data-template="imageAtRightTemplate">
+                                <img class="img-responsive"
+                                     src="{{ asset('assets/ckeditor/templates/images/image_at_right.gif') }}"/>
+                                <p>Image à droite</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3">
+                            <div class="revertible draggable" data-template="wellTemplate">
+                                <img class="img-responsive"
+                                     src="{{ asset('assets/ckeditor/templates/images/introduction.gif') }}"/>
+                                <p>Encart</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-        </div>
-        <div class="col-md-4">
-            {% include "backend/article/_sidebar.html.twig" %}
-        </div>
-    </div>
 
-    <div id="ImageAtLeftTemplate" style="display: none">
-        <div class="col-sm-5 col-md-5 pull-left no-padding-left">
-            <div class="text-center">
-                <div class="img-box-4-item">
-                    <img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350x150&w=350&h=150" alt=""
-                         class="img-responsive"/>
-                    <div class="img-box-4-content">
-                        <p>euphrat &amp; tigris version US</p>
+            <div class="col-md-4">
+                {% include "backend/article/_sidebar.html.twig" %}
+            </div>
+
+            <div id="introductionTemplate" style="display: none">
+                <div class="quote-one">
+                    <div class="row">
+                        <!-- Quote One Item -->
+                        <div class="quote-one-item">
+                            <span class="color">“</span>
+                            <div class="quote-one-right">
+                                <p>Halvah liquorice lemon drops sesame snaps. Pastry dessert soufflé brownie tiramisu
+                                    gummi
+                                    bears. Jelly-o apple
+                                    pie icing. Sweet pastry chupa chups icing candy canes muffin candy jelly beans.</p>
+                                <p>Toffee ice cream bonbon biscuit cupcake. Gingerbread chocolate cake cookie sugar plum
+                                    bonbon
+                                    pastry. Dessert
+                                    gummies brownie muffin jelly beans jelly beans jelly chocolate bar oat cake.</p>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
-        </div>
-        <h4><a href="#">Le problème de lisibilité</a></h4>
-        <p>Nemo enim ipsam voluptatem quia quia neque porro qui dolorem ipsum quia dolor sit amet consectetur.</p>
-        <div class="clearfix"></div>
-    </div>
 
-    <div id="ImageAtRightTemplate" style="display: none">
-        <div class="col-sm-5 col-md-5 pull-right no-padding-right"><div class="text-center"><div class="img-box-4-item"><img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350x150&w=350&h=150" alt="" class="img-responsive" /><div class="img-box-4-content"><p>euphrat &amp; tigris version US</p></div></div></div></div><h4><a href="#">Le problème de lisibilité</a></h4><p>Nemo enim ipsam voluptatem quia quia neque porro qui dolorem ipsum quia dolor sit amet consectetur.</p>
-        <div class="clearfix"></div>
+            <div id="imageAtLeftTemplate" style="display: none">
+                <div class="col-sm-5 col-md-5 pull-left no-padding-left">
+                    <div class="text-center">
+                        <div class="img-box-4-item">
+                            <img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=Image...&w=350&h=150" alt=""
+                                 class="img-responsive"/>
+                            <div class="img-box-4-content">
+                                <p>Légende de l'image...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h4><a href="#">Titre du bloc...</a></h4>
+                <p>Halvah liquorice lemon drops sesame snaps. Pastry dessert soufflé brownie tiramisu gummi bears.
+                    Jelly-o
+                    apple
+                    pie icing. Sweet pastry chupa chups icing candy canes muffin candy jelly beans. Fruitcake brownie
+                    macaroon
+                    croissant tart candy canes. Cupcake cookie tart toffee cookie bear claw wafer jelly-o toffee. Gummi
+                    bears
+                    pie marzipan candy canes dessert jelly cupcake jelly. Sugar plum cupcake lemon drops apple pie.
+                    Biscuit
+                    brownie dessert brownie cheesecake croissant ice cream.</p>
+                <p>Toffee ice cream bonbon biscuit cupcake. Gingerbread chocolate cake cookie sugar plum bonbon pastry.
+                    Dessert
+                    gummies brownie muffin jelly beans jelly beans jelly chocolate bar oat cake. Lemon drops marzipan
+                    tart
+                    cotton candy. Gingerbread cake apple pie cheesecake liquorice sugar plum. Powder chocolate bar
+                    chocolate
+                    bar
+                    biscuit pie. Jelly-o jelly beans marzipan candy wafer.</p>
+                <div class="clearfix"></div>
+            </div>
+
+            <div id="imageAtRightTemplate" style="display: none">
+                <div class="col-sm-5 col-md-5 pull-right no-padding-right">
+                    <div class="text-center">
+                        <div class="img-box-4-item">
+                            <img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=Image...&w=350&h=150" alt=""
+                                 class="img-responsive"/>
+                            <div class="img-box-4-content">
+                                <p>Légende de l'image...</p></div>
+                        </div>
+                    </div>
+                </div>
+                <h4><a href="#">Titre du bloc...</a></h4>
+                <p>Halvah liquorice lemon drops sesame snaps. Pastry dessert soufflé brownie tiramisu gummi bears.
+                    Jelly-o
+                    apple
+                    pie icing. Sweet pastry chupa chups icing candy canes muffin candy jelly beans. Fruitcake brownie
+                    macaroon
+                    croissant tart candy canes. Cupcake cookie tart toffee cookie bear claw wafer jelly-o toffee. Gummi
+                    bears
+                    pie marzipan candy canes dessert jelly cupcake jelly. Sugar plum cupcake lemon drops apple pie.
+                    Biscuit
+                    brownie dessert brownie cheesecake croissant ice cream.</p>
+                <p>Toffee ice cream bonbon biscuit cupcake. Gingerbread chocolate cake cookie sugar plum bonbon pastry.
+                    Dessert
+                    gummies brownie muffin jelly beans jelly beans jelly chocolate bar oat cake. Lemon drops marzipan
+                    tart
+                    cotton candy. Gingerbread cake apple pie cheesecake liquorice sugar plum. Powder chocolate bar
+                    chocolate
+                    bar
+                    biscuit pie. Jelly-o jelly beans marzipan candy wafer.</p>
+                <div class="clearfix"></div>
+            </div>
+
+            <div id="wellTemplate" style="display: none">
+                <div class="well">
+                    <h4><a href="#">Titre du bloc...</a></h4>
+                    <img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=Image...&w=800&h=400" alt=""
+                         class="img-responsive"/>
+                    <p>Halvah liquorice lemon drops sesame snaps. Pastry dessert soufflé brownie tiramisu gummi bears.
+                        Jelly-o
+                        apple
+                        pie icing. Sweet pastry chupa chups icing candy canes muffin candy jelly beans. Fruitcake
+                        brownie
+                        macaroon
+                        croissant tart candy canes. Cupcake cookie tart toffee cookie bear claw wafer jelly-o toffee.
+                        Gummi
+                        bears
+                        pie marzipan candy canes dessert jelly cupcake jelly. Sugar plum cupcake lemon drops apple pie.
+                        Biscuit
+                        brownie dessert brownie cheesecake croissant ice cream.</p>
+                    <p>Toffee ice cream bonbon biscuit cupcake. Gingerbread chocolate cake cookie sugar plum bonbon
+                        pastry.
+                        Dessert
+                        gummies brownie muffin jelly beans jelly beans jelly chocolate bar oat cake. Lemon drops
+                        marzipan
+                        tart
+                        cotton candy. Gingerbread cake apple pie cheesecake liquorice sugar plum. Powder chocolate bar
+                        chocolate
+                        bar
+                        biscuit pie. Jelly-o jelly beans marzipan candy wafer.</p>
+                    <div class="clearfix"></div>
+                </div>
+
+            </div>
+        </div>
     </div>
 
     {#{{ dump(article) }}#}
