@@ -31,11 +31,17 @@ label:
   duration: Durée
   hello: Bonjour
   edit: Modifier
+  email: Email
+  first_name: Prénom
   label: Libellé
+  last_name: Nom
   main: Principale
   material: Matériel
   mechanisms: Mécanismes
   name: Nom
+  password: Mot de passe
+  password_confirmation: Confirmation mot de passe
+  phone_number: Téléphone
   played_at: Joué le
   players: Joueurs
   player_count: Nombre de joueurs
