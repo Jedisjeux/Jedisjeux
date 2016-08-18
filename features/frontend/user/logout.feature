@@ -12,4 +12,4 @@ Feature: Logout
   Scenario: Logout
     Given I am on "/"
     When I am on "/logout"
-    Then I should be on "/login"
+    Then I should be on "/"

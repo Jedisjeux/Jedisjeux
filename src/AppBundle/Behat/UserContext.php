@@ -25,7 +25,7 @@ class UserContext extends DefaultContext
     public function iAmLoggedInUserWithPassword($username, $password)
     {
         $this->visitPath("/login");
-        $this->fillField("Nom d'utilisateur", $username);
+        $this->fillField("Nom d'utilisateur ou email", $username);
         $this->fillField('Mot de passe', $password);
         $this->pressButton('Connexion');
     }
@@ -80,6 +80,12 @@ class UserContext extends DefaultContext
         $user->setEnabled(isset($data['enabled']) ? (bool)$data['enabled'] : true);
         $user->setLocked(isset($data['locked']) ? (bool)$data['locked'] : false);
         $user->addRole(isset($data['role']) ? $data['role'] : 'ROLE_USER');
+
+        $user->setConfirmationToken(isset($data['confirmation_token']) ? $data['confirmation_token'] : null);
+
+        if (isset($data['confirmation_token'])) {
+            $user->setPasswordRequestedAt(isset($data['password_requested_At']) ? \DateTime::createFromFormat('Y-m-d', $data['password_requested_At']) : new \DateTime());
+        }
     }
 
     /**
