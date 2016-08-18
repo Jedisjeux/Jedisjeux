@@ -1,4 +1,5 @@
 imports:
+    - suites/ui/error.yml
     - suites/ui/user.yml
     - suites/ui/topic.yml
     - suites/ui/product.yml
