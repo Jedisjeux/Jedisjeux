@@ -36,6 +36,21 @@ class ArticleRepository extends EntityRepository
     {
         $queryBuilder = $this->getQueryBuilder();
 
+        if (isset($criteria['query'])) {
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->like($this->getPropertyName('title'), ':query'))
+                ->setParameter('query', '%' . $criteria['query'] . '%');
+
+            unset($criteria['query']);
+        }
+
+        if (!$sorting) {
+            $sorting = [
+                'publishStartDate' => 'desc',
+            ];
+        }
+
+
         $this->applyCriteria($queryBuilder, (array)$criteria);
         $this->applySorting($queryBuilder, (array)$sorting);
 

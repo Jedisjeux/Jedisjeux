@@ -28,31 +28,38 @@ label:
   create_article: Créer un article
   create_category: Créer une catégorie
   delete: Supprimer
+  description: Description
   duration: Durée
   hello: Bonjour
   edit: Modifier
   email: Email
   first_name: Prénom
+  image: Image
   label: Libellé
   last_name: Nom
   main: Principale
   material: Matériel
   mechanisms: Mécanismes
   name: Nom
+  new: Nouveau
+  need_a_translation: A traduire
   password: Mot de passe
   password_confirmation: Confirmation mot de passe
   phone_number: Téléphone
   played_at: Joué le
   players: Joueurs
   player_count: Nombre de joueurs
+  published: Publié
   rate: Note
   remember_me: Se souvenir de moi
   remove_this_image: Supprimer cette image
   remove_this_player: Supprimer ce joueur
+  save_changes: Mettre à jour
   search: Rechercher
   score: Score
   short_description: Description courte
   show: Voir
+  status: Statut
   themes: Thèmes
   title: Titre
   username: Nom d'utilisateur

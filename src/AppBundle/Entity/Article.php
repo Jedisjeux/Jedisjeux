@@ -32,6 +32,14 @@ class Article implements ResourceInterface, ReviewableInterface
     use IdentifiableTrait;
 
     /**
+     * status constants
+     */
+    const STATUS_NEW = "new";
+    const STATUS_NEED_A_REVIEW = "need-a-review";
+    const STATUS_READY_TO_PUBLISH = "ready-to-publish";
+    const STATUS_PUBLISHED = "published";
+
+    /**
      * @var string
      *
      * @ORM\Column(type="string", unique=true, nullable=true)
@@ -91,6 +99,13 @@ class Article implements ResourceInterface, ReviewableInterface
      * @ORM\Column(type="boolean")
      */
     protected $publishable = true;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $status;
 
     /**
      * @var int
@@ -163,6 +178,7 @@ class Article implements ResourceInterface, ReviewableInterface
     {
         $this->publishable = false;
         $this->reviews = new ArrayCollection();
+        $this->status = self::STATUS_NEW;
     }
 
     /**
@@ -201,6 +217,26 @@ class Article implements ResourceInterface, ReviewableInterface
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     *
+     * @return $this
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
 
         return $this;
     }

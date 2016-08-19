@@ -3,13 +3,14 @@
 {% from '::macros/misc.html.twig' import pagination %}
 {% import 'macros/buttons.html.twig' as buttons %}
 {% from 'macros/sorting.html.twig' import sorting %}
+{% from 'macros/status.html.twig' import articleStatus as status %}
 
 {% block headline %}
     Articles
 {% endblock %}
 
 {% block breadcrumb_content %}
-    {{ parent() }} /
+    {{ parent() }}
     Contenu /
     Articles
 {% endblock %}
@@ -19,6 +20,9 @@
 {% endblock new_entity_button %}
 
 {% set sorting = app.request.get('sorting') %}
+
+{% set icon = false %}
+{% set currentOrder = null %}
 
 {% if null == sorting %}
     {% set icon = true %}
@@ -30,12 +34,16 @@
         <thead>
         <tr>
             <th>{{ sorting('app_admin_article_index', 'label.title'|trans, 'name', 'asc', icon, currentOrder) }}</th>
+            <th>{{ sorting('app_admin_article_index', 'label.category'|trans, 'mainTaxon', 'asc') }}</th>
+            <th>{{ sorting('app_admin_article_index', 'label.status'|trans, 'status', 'asc') }}</th>
         </tr>
         </thead>
         <tbody>
         {% for article in articles %}
             <tr>
-                <td>{{ article.document.title }}</td>
+                <td>{{ article.title }}</td>
+                <td>{{ article.mainTaxon }}</td>
+                <td>{{ status(article) }}</td>
                 <td class="text-right">
                     <ul class="list-inline text-nowrap">
                         <li>
@@ -53,4 +61,8 @@
         {% endfor %}
         </tbody>
     </table>
+{% endblock %}
+
+{% block Pagination %}
+    {{ pagination(articles) }}
 {% endblock %}

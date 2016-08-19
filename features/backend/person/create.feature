@@ -16,6 +16,5 @@ Feature: Creates people
     And I fill in the following:
       | Prénom | Reiner |
       | Nom    | Knizia |
-    And I wait "5" seconds until "$('textarea#app_person_description').is('visible')"
     When I press "Créer"
     Then I should see "a bien été créé"

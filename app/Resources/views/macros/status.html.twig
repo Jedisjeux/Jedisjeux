@@ -29,6 +29,34 @@
 
 {% endmacro %}
 
+{% macro articleStatus(article) %}
+
+    {% set statusLabel = article.status %}
+    {% set statusClass = '' %}
+    {% set iconClass = '' %}
+
+    {% if constant('AppBundle\\Entity\\Article::STATUS_PUBLISHED') == article.status %}
+        {% set statusClass = 'success' %}
+        {% set statusLabel = 'label.published'|trans %}
+    {% elseif constant('AppBundle\\Entity\\Article::STATUS_NEW') == article.status %}
+        {% set statusClass = 'color' %}
+        {% set statusLabel = 'label.new'|trans %}
+    {% elseif constant('AppBundle\\Entity\\Article::STATUS_NEED_A_REVIEW') == article.status %}
+        {% set statusClass = 'warning' %}
+        {% set statusLabel = 'label.need_a_review'|trans %}
+        {% set iconClass = 'fa fa-laptop' %}
+    {% elseif constant('AppBundle\\Entity\\Article::STATUS_READY_TO_PUBLISH') == article.status %}
+        {% set statusClass = 'primary' %}
+        {% set statusLabel = 'label.ready_to_published'|trans %}
+    {% endif %}
+
+    <span class="label label-{{ statusClass }}">
+        <span class="{{ iconClass }}"></span>
+        {{ statusLabel }}
+    </span>
+
+{% endmacro %}
+
 {% macro subscriptionStatus(subscription) %}
 
     {% import 'macros/modal.html.twig' as modal %}

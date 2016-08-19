@@ -135,7 +135,9 @@ select      old.news_id as id,
             topic.id as topic_id,
             old.nb_clicks as view_count,
             case valid
-                when 1 then 'PUBLISHED'
+                when 1 then 'published'
+                when 5 then 'need-a-review'
+                when 3 then 'ready-to-publish'
                 else 'new'
             end as status
 from        jedisjeux.jdj_news old
@@ -206,6 +208,7 @@ EOM;
 
         $article
             ->setCode(sprintf('news-%s', $data['id']))
+            ->setStatus($data['status'])
             ->setViewCount($data['view_count']);
 
         $articleDocument = $article->getDocument();

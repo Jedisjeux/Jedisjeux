@@ -138,7 +138,8 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
 
         $article
             ->setCode(sprintf('article-%s', $data['id']))
-            ->setViewCount($data['view_count']);
+            ->setViewCount($data['view_count'])
+            ->setStatus($data['publishable'] ? Article::STATUS_PUBLISHED : Article::STATUS_NEW);
 
         $articleDocument = $article->getDocument();
 

@@ -1,4 +1,5 @@
-{% extends "::base.html.twig" %}
+{% extends "backend/base.html.twig" %}
+
 {% import 'macros/actions.html.twig' as action %}
 
 {% block headline %}
@@ -6,7 +7,7 @@
 {% endblock %}
 
 {% block breadcrumb_content %}
-    {{ parent() }}
+    {{ parent() }} /
     <a href="{{ path('app_admin_person_index') }}">Personnes</a> /
     Nouveau
 {% endblock %}

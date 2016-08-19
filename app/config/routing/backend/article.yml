@@ -6,6 +6,18 @@ app_admin_article:
         redirect: index
     type: sylius.resource
 
+app_admin_article_index:
+    methods: [GET]
+    path: /articles/
+    defaults:
+        _controller: app.controller.article:indexAction
+        _sylius:
+            repository:
+                method: createFilterPaginator
+                arguments: [$criteria, $sorting]
+            template: backend/article/index.html.twig
+
+
 app_admin_article_create_for_test:
     methods: [GET]
     path: /articles/tests/{productId}/new
