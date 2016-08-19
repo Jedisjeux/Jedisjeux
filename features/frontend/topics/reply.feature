@@ -1,8 +1,8 @@
-@ui @frontend @topic @answer
-Feature: Topic answer
+@ui @frontend @topic @reply
+Feature: Topic reply
   In order to use forum
   As a user
-  I need to be able to answer to a topic
+  I need to be able to reply to a topic
 
   Background:
     Given there are following users:
@@ -16,7 +16,7 @@ Feature: Topic answer
       | Zoo Topic |
     And I am logged in as user "kevin@example.com" with password "password"
 
-  Scenario: Answer to a topic
+  Scenario: Reply to a topic
     Given I am on "/forum/topics/"
     And I follow "Lire le sujet"
     And I follow "Répondre au sujet"
