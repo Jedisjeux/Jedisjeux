@@ -1,4 +1,4 @@
-@frontend @people @index
+@ui @frontend @person @index
 Feature: View people
   In order to manage people
   As a visitor

@@ -1,0 +1,10 @@
+default:
+    suites:
+        ui_taxon:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - AppBundle\Behat\UtilsContext
+                - AppBundle\Behat\UserContext
+                - AppBundle\Behat\TaxonContext
+            filters:
+                tags: "@taxon && @ui"

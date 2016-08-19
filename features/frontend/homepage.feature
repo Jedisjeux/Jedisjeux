@@ -1,4 +1,4 @@
-@frontend @homepage
+@ui @frontend @homepage
 Feature: View homepage
   In order to visit the website
   As a visitor

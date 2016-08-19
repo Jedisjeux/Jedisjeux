@@ -138,4 +138,15 @@ class ProductContext extends DefaultContext
 
         $this->getEntityManager()->flush();
     }
+
+    /**
+     * @When /^I request get "([^"]*)" product$/
+     */
+    public function iRequestGetProduct($productName)
+    {
+        /** @var Product $product */
+        $product = $this->findOneByName('product', $productName);
+
+        $this->makeRequest(sprintf('/api/products/%s', $product->getId()));
+    }
 }

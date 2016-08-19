@@ -8,6 +8,7 @@
 
 namespace AppBundle\Form\Type;
 
+use AppBundle\Entity\Taxon;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -41,11 +42,10 @@ class PersonType extends AbstractResourceType
                 'choice_label' => 'name',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('o')
-                        ->join('o.taxonomy', 'taxonomy')
-                        ->join('taxonomy.root', 'rootTaxon')
+                        ->join('o.root', 'rootTaxon')
                         ->where('rootTaxon.code = :code')
                         ->andWhere('o.parent IS NOT NULL')
-                        ->setParameter('code', 'zones')
+                        ->setParameter('code', Taxon::CODE_ZONE)
                         ->orderBy('o.left');
                 },
                 'expanded' => false,

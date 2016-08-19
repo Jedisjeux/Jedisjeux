@@ -55,7 +55,9 @@
         "sylius/user-bundle": "^0.18",
         "sylius/mailer-bundle": "^0.18",
         "sylius/review-bundle": "^0.18",
-        "sylius/taxonomy-bundle": "^0.18"
+        "sylius/taxonomy-bundle": "^0.18",
+        "eightpoints/guzzle-bundle": "^4.5",
+        "guzzlehttp/guzzle": "^6.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

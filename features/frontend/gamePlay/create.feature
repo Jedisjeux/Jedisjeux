@@ -1,4 +1,4 @@
-@frontend @game_plays @create
+@ui @frontend @gamePlay @create
 Feature: Game-play creation
   In order to manage game-plays
   As a user

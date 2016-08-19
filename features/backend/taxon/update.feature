@@ -1,8 +1,8 @@
-@backend @taxons @delete
-Feature: Remove taxons
+@backend @taxon @update
+Feature: Edit taxons
   In order to manage taxons
   As an admin
-  I need to be able to remove taxons
+  I need to be able to update taxons
 
   Background:
     Given there are users:
@@ -16,10 +16,11 @@ Feature: Remove taxons
       | Thèmes | Science-fiction |
     And I am logged in as user "admin@example.com" with password "password"
 
-  Scenario: Remove a taxon
+  Scenario: Update a taxon
     Given I am on "/admin/taxonomies/"
     And I follow "Détails"
-    When I press "Supprimer"
-    And I wait until modal is visible
-    And I follow "Supprimer"
-    Then I should see "a bien été supprimé"
+    And I follow "Modifier"
+    And I fill in the following:
+      | Nom | Fantastique |
+    When I press "Mettre à jour"
+    Then I should see "a bien été mis à jour"

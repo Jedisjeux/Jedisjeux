@@ -1,4 +1,4 @@
-@backend @people @create
+@ui @backend @person @create
 Feature: Creates people
   In order to manage people
   As an admin

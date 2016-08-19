@@ -1,4 +1,4 @@
-@backend @taxons @create
+@backend @taxon @create
 Feature: Creates taxons
   In order to manage taxons
   As an admin

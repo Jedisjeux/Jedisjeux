@@ -1,4 +1,4 @@
-@backend @people @update
+@ui @backend @person @update
 Feature: Edit people
   In order to manage people
   As an admin
@@ -19,6 +19,5 @@ Feature: Edit people
     And I fill in the following:
       | Prénom | Leo      |
       | Nom    | Colovini |
-    And I wait "5" seconds until "$('textarea#app_person_description').is('visible')"
     When I press "Mettre à jour"
     Then I should see "a bien été mis à jour"

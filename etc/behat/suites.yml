@@ -1,5 +1,11 @@
 imports:
     - suites/ui/error.yml
-    - suites/ui/user.yml
-    - suites/ui/topic.yml
+    - suites/ui/gamePlay.yml
+    - suites/ui/homepage.yml
+    - suites/ui/person.yml
     - suites/ui/product.yml
+    - suites/ui/taxon.yml
+    - suites/ui/topic.yml
+    - suites/ui/user.yml
+
+    - suites/api/product.yml

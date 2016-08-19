@@ -1,0 +1,8 @@
+default:
+    suites:
+        ui_homepage:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - AppBundle\Behat\UtilsContext
+            filters:
+                tags: "@homepage && @ui"

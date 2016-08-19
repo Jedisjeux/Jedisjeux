@@ -58,6 +58,7 @@ label:
   username: Nom d'utilisateur
   username_or_email: Nom d'utilisateur ou email
   validate: Valider
+  website: Site web
   your_rate: Votre note
   zone: Zone
 

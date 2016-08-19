@@ -1,4 +1,4 @@
-@backend @people @delete
+@ui @backend @person @delete
 Feature: Remove people
   In order to manage people
   As an admin

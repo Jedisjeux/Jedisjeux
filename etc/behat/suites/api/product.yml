@@ -1,0 +1,12 @@
+default:
+    suites:
+        api_product:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - AppBundle\Behat\UtilsContext
+                - AppBundle\Behat\ApiContext
+                - AppBundle\Behat\UserContext
+                - AppBundle\Behat\TaxonContext
+                - AppBundle\Behat\ProductContext
+            filters:
+                tags: "@product && @api"
