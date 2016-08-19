@@ -18,5 +18,6 @@ Feature: Topic creation
     And I follow "Nouveau sujet"
     When I fill in the following:
       | Titre | Zoo Topic |
+    And I fill in wysiwyg field "app_topic_mainPost_body" with "Here is my awesome topic message."
     And I press "Créer"
     Then I should see "Topic a bien été créé"

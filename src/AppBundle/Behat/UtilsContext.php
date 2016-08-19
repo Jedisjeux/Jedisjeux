@@ -11,6 +11,7 @@ namespace AppBundle\Behat;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementHtmlException;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Mink\Exception\ExpectationException;
 
 /**
  * Class UtilsContext
@@ -265,5 +266,27 @@ class UtilsContext extends DefaultContext
                 throw new ElementHtmlException($message, $this->getSession(), $select);
             }
         }
+    }
+
+    /**
+     * @Then /^I fill in wysiwyg field "([^"]*)" with "([^"]*)"$/
+     */
+    public function iFillInWysiwygOnFieldWith($element, $value) {
+        $element = $this->fixStepArgument($element);
+        $page = $this->getSession()->getPage();
+        $field = $page->findField($element);
+
+        if (empty($field)) {
+            throw new ExpectationException('Could not find WYSIWYG with locator: ' . $element, $this->getSession());
+        }
+
+
+        $fieldId = $field->getAttribute('id');
+
+        if (empty($fieldId)) {
+            throw new ExpectationException('Could not find an id for field with locator: ' . $element, $this->getSession());
+        }
+
+        $this->getSession()->executeScript("CKEDITOR.instances[\"$fieldId\"].setData(\"$value\");");
     }
 }
