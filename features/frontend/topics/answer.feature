@@ -1,8 +1,8 @@
-@ui @frontend @topic @create
-Feature: Topic creation
+@ui @frontend @topic @answer
+Feature: Topic answer
   In order to use forum
   As a user
-  I need to be able to create new topics
+  I need to be able to answer to a topic
 
   Background:
     Given there are following users:
@@ -11,13 +11,15 @@ Feature: Topic creation
     Given there are root taxons:
       | code  | name  |
       | forum | Forum |
+    And there are topics:
+      | name      |
+      | Zoo Topic |
     And I am logged in as user "kevin@example.com" with password "password"
 
-  Scenario: Create new topic
+  Scenario: Answer to a topic
     Given I am on "/forum/topics/"
-    And I follow "Nouveau sujet"
-    When I fill in the following:
-      | Titre | Zoo Topic |
-    And I fill in wysiwyg field "app_topic_mainPost_body" with "Here is my awesome topic message."
+    And I follow "Lire le sujet"
+    And I follow "Répondre au sujet"
+    When I fill in wysiwyg field "app_post_body" with "Here is my awesome topic answer."
     And I press "Créer"
-    Then I should see "Topic a bien été créé"
+    Then I should see "a bien été créé"
