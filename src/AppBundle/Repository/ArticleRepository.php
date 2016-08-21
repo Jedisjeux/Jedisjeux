@@ -35,6 +35,9 @@ class ArticleRepository extends EntityRepository
     public function createFilterPaginator(array $criteria = null, array $sorting = null)
     {
         $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder
+            ->innerJoin('o.mainTaxon', 'taxon')
+            ->innerJoin('taxon.translations', 'taxonTranslation');
 
         if (isset($criteria['query'])) {
             $queryBuilder
