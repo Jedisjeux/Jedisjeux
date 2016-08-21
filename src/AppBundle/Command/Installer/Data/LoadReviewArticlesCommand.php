@@ -162,7 +162,8 @@ class LoadReviewArticlesCommand extends AbstractLoadDocumentCommand
 
         $article
             ->setCode('review-article-'.$data['id'])
-            ->setViewCount($data['view_count']);
+            ->setViewCount($data['view_count'])
+            ->setStatus($data['publishable'] ? Article::STATUS_PUBLISHED : Article::STATUS_NEW);
         $articleDocument = $article->getDocument();
 
         if (null !== $data['main_image']) {
@@ -186,7 +187,7 @@ class LoadReviewArticlesCommand extends AbstractLoadDocumentCommand
 
         $articleDocument->setName($data['name']);
         $articleDocument->setTitle($data['title']);
-        $articleDocument->setPublishable((bool)$data['published']);
+        $articleDocument->setPublishable((bool)$data['publishable']);
         $articleDocument->setPublishStartDate(\DateTime::createFromFormat('Y-m-d H:i:s', $data['publishedAt']));
 
         return $article;
@@ -236,7 +237,7 @@ select test.game_id as id,
        test.note_materiel/2 as materialRating,
        test.note_regle/2 as rulesRating,
        test.note_duree_vie/2 as lifetimeRating,
-       test.valid as published,
+       test.valid as publishable,
        review_article_view.view_count,
        material_image.img_nom as material_image_path,
        rules_image.img_nom as rules_image_path,
