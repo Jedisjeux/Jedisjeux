@@ -4,6 +4,7 @@
 {% import 'macros/buttons.html.twig' as buttons %}
 {% from 'macros/sorting.html.twig' import sorting %}
 {% from 'macros/status.html.twig' import articleStatus as status %}
+{% from 'macros/images.html.twig' import image %}
 
 {% block headline %}
     Articles
@@ -33,6 +34,7 @@
     <table class="table table-striped">
         <thead>
         <tr>
+            <th>#</th>
             <th>{{ sorting('app_admin_article_index', 'label.title'|trans, 'name', 'asc') }}</th>
             <th>{{ sorting('app_admin_article_index', 'label.category'|trans, 'taxonTranslation.name', 'asc') }}</th>
             <th>{{ sorting('app_admin_article_index', 'label.published_at'|trans, 'publishStartDate', 'asc', icon, currentOrder) }}</th>
@@ -42,6 +44,11 @@
         <tbody>
         {% for article in articles %}
             <tr>
+                <td>
+                    {% if article.document.mainImage %}
+                        {{ image(article.document.mainImage.image.id, 'cmf_thumbnail', article.title, 'img-responsive img-round') }}
+                    {% endif %}
+                </td>
                 <td>{{ article.title }}</td>
                 <td>{{ article.mainTaxon }}</td>
                 <td>{{ article.publishStartDate|localizeddate('full', 'none') }}</td>
