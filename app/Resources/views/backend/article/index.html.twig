@@ -26,15 +26,16 @@
 
 {% if null == sorting %}
     {% set icon = true %}
-    {% set currentOrder = 'asc' %}
+    {% set currentOrder = 'desc' %}
 {% endif %}
 
 {% block list %}
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>{{ sorting('app_admin_article_index', 'label.title'|trans, 'name', 'asc', icon, currentOrder) }}</th>
+            <th>{{ sorting('app_admin_article_index', 'label.title'|trans, 'name', 'asc') }}</th>
             <th>{{ sorting('app_admin_article_index', 'label.category'|trans, 'taxonTranslation.name', 'asc') }}</th>
+            <th>{{ sorting('app_admin_article_index', 'label.published_at'|trans, 'publishStartDate', 'asc', icon, currentOrder) }}</th>
             <th>{{ sorting('app_admin_article_index', 'label.status'|trans, 'status', 'asc') }}</th>
         </tr>
         </thead>
@@ -43,6 +44,7 @@
             <tr>
                 <td>{{ article.title }}</td>
                 <td>{{ article.mainTaxon }}</td>
+                <td>{{ article.publishStartDate|localizeddate('full', 'none') }}</td>
                 <td>{{ status(article) }}</td>
                 <td class="text-right">
                     <ul class="list-inline text-nowrap">

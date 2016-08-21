@@ -51,6 +51,7 @@ label:
   players: Joueurs
   player_count: Nombre de joueurs
   published: Publié
+  published_at: Publié le
   rate: Note
   remember_me: Se souvenir de moi
   remove_this_image: Supprimer cette image
