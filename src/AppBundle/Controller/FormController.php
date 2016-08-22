@@ -1,28 +1,28 @@
 <?php
 
-namespace JDJ\CoreBundle\Controller;
+namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Form;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 
 /**
- * Backend forms controller.
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Loïc Frémont <loic@mobizel.com>
  */
 class FormController extends Controller
 {
     /**
+     * @param Request $request
      * @param string $type
      * @param string $placeholder
      * @param string $template
      *
+     * @param null $criteria
      * @return Response
      */
-    public function showAction($type, $placeholder, $template)
+    public function showAction(Request $request, $type, $placeholder, $template, $criteria = null)
     {
         return $this->render($template, array(
             'form' => $this->createForm($type)->createView(),
@@ -40,19 +40,19 @@ class FormController extends Controller
      * @param null|array $criteria
      * @return Response
      */
-    public function filterAction( $type, $placeholder, $template = 'form:_filter.html.twig', array $criteria = null)
+    public function filterAction($type, $placeholder, $template = 'backend/form/_filterForm.html.twig', array $criteria = null)
     {
-        /** @var Form $form */
+        /** @var FormBuilderInterface $form */
         $form = $this->get('form.factory')->createNamed('criteria', $type);
 
         if (is_array($criteria)) {
             /** @var FormInterface $child */
-            foreach($form->all() as $name => $child) {
+            foreach ($form->all() as $name => $child) {
                 if (array_key_exists($name, $criteria)) {
                     $value = $criteria[$name];
 
-                    if ($child->getConfig()->getType()->getName()== 'checkbox') {
-                        $value= true;
+                    if ($child->getConfig()->getType()->getName() == 'checkbox') {
+                        $value = true;
                     }
 
                     $child->setData($value);

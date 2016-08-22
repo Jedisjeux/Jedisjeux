@@ -1,17 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: loic
- * Date: 16/09/2015
- * Time: 16:29
- */
 
-namespace JDJ\CoreBundle\Form\Filter;
+
+namespace AppBundle\Form\Filter;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>

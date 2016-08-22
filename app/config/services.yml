@@ -61,13 +61,6 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
-    app.subscriber.bill:
-        class: JDJ\ComptaBundle\EventSubscriber\BillSubscriber
-        arguments:
-            [ "@app.manager.book_entry", "@app.manager.subscription" ]
-        tags:
-            - { name: kernel.event_subscriber }
-
     app.subscriber.article_document_reference:
         class: AppBundle\EventSubscriber\ArticleDocumentReferenceSubscriber
         arguments:
@@ -81,8 +74,13 @@ services:
             - { name: doctrine.event_subscriber, connection: default }
 
     # <!-- Forms -->
+    app.controller.form:
+        class: AppBundle\Controller\FormController
+        calls:
+            - [ setContainer, ['@service_container'] ]
+
     app.form.filter.query:
-        class: JDJ\CoreBundle\Form\Filter\QueryFilterType
+        class: AppBundle\Form\Filter\QueryFilterType
         tags:
           - { name: form.type, alias: app_filter_query }
 

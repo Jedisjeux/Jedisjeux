@@ -34,7 +34,7 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>#</th>
+            <th>{{ 'label.image'|trans }}</th>
             <th>{{ sorting('app_admin_article_index', 'label.title'|trans, 'name', 'asc') }}</th>
             <th>{{ sorting('app_admin_article_index', 'label.category'|trans, 'taxonTranslation.name', 'asc') }}</th>
             <th>{{ sorting('app_admin_article_index', 'label.published_at'|trans, 'publishStartDate', 'asc', icon, currentOrder) }}</th>

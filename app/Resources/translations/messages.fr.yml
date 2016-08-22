@@ -43,6 +43,7 @@ label:
   mechanisms: Mécanismes
   name: Nom
   new: Nouveau
+  need_a_review: En relecture
   need_a_translation: A traduire
   password: Mot de passe
   password_confirmation: Confirmation mot de passe

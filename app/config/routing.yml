@@ -39,11 +39,6 @@ jdj_search:
     resource: "@JDJSearchBundle/Resources/config/routing.yml"
     prefix:   /recherche
 
-jdj_compta:
-    resource: "@JDJComptaBundle/Controller/"
-    type:     annotation
-    prefix:   /compta
-
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
 
