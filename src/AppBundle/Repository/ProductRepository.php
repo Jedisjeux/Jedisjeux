@@ -95,6 +95,12 @@ class ProductRepository extends BaseProductRepository
                 ->setParameter('name', '%' . $criteria['name'] . '%');
         }
 
+        if (!empty($criteria['status'])) {
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->eq($this->getPropertyName('status'), ':status'))
+                ->setParameter('status', $criteria['status']);
+        }
+
         if (!empty($criteria['query'])) {
             $queryBuilder
                 ->andWhere('translation.name LIKE :query')

@@ -20,6 +20,15 @@
     Liste des jeux
 {% endblock %}
 
+{% block form_filter %}
+    {{ render(controller('app.controller.form:filterAction', {
+        'type': 'app_filter_product',
+        'placeholder': 'label.search',
+        'template': 'backend/product/_filterForm.html.twig',
+        'criteria':app.request.get('criteria')
+    })) }}
+{% endblock %}
+
 {% block breadcrumb_content %}
     {{ parent() }}
     Jeux

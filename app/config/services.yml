@@ -90,6 +90,11 @@ services:
         tags:
           - { name: form.type, alias: app_filter_query }
 
+    app.form.filter.product:
+        class: AppBundle\Form\Filter\ProductFilterType
+        tags:
+            - { name: 'form.type', alias: 'app_filter_product' }
+
     app.form.type.post:
         class: AppBundle\Form\Type\PostType
         tags:
