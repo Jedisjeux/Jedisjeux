@@ -1,7 +1,7 @@
 $(function() {
 
     $( ".mainSearch" ).imgcomplete({
-        source: Routing.generate('search_autocomplete'),
+        source: Routing.generate('app_api_search_autocomplete'),
         minLength: 2,
         delay: 100,
         focus: function() {

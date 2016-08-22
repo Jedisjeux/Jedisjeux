@@ -31,10 +31,6 @@ sylius_taxonomy:
     resource: @SyliusTaxonomyBundle/Resources/config/routing.yml
     prefix: /taxonomy
 
-jdj_search:
-    resource: "@JDJSearchBundle/Resources/config/routing.yml"
-    prefix:   /recherche
-
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
 

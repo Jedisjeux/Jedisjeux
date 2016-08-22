@@ -1,12 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: loic_425
- * Date: 20/09/2014
- * Time: 14:16
- */
 
-namespace JDJ\SearchBundle\Controller;
+namespace AppBundle\Controller;
 
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Person;
@@ -25,8 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
- * Class SearchController
- * @package JDJ\SearchBundle\Controller
+ * @author Loïc Frémont <loic@mobizel.com>
  */
 class SearchController extends Controller
 {

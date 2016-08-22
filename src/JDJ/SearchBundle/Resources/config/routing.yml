@@ -1,7 +1,0 @@
-jdj_search_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: JDJSearchBundle:Default:index }
-
-jdj_search:
-    resource: "@JDJSearchBundle/Resources/config/routing/search.yml"
-    prefix:   /

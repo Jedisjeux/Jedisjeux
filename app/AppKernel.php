@@ -77,9 +77,6 @@ class AppKernel extends Kernel
             new Bmatzner\JQueryUIBundle\BmatznerJQueryUIBundle(),
             new Bmatzner\JQueryBundle\BmatznerJQueryBundle(),
 
-            //JDJ
-            // TODO there can be only one !
-            new JDJ\SearchBundle\JDJSearchBundle(),
             new AppBundle\AppBundle(),
         );
 

@@ -73,12 +73,18 @@ services:
         tags:
             - { name: doctrine.event_subscriber, connection: default }
 
-    # <!-- Forms -->
+    # <!-- Controllers -->
+    app.controller.search:
+        class: AppBundle\Controller\SearchController
+        calls:
+            - [ setContainer, ['@service_container'] ]
+
     app.controller.form:
         class: AppBundle\Controller\FormController
         calls:
             - [ setContainer, ['@service_container'] ]
 
+    # <!-- Forms -->
     app.form.filter.query:
         class: AppBundle\Form\Filter\QueryFilterType
         tags:

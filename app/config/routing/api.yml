@@ -7,3 +7,8 @@ app_api_product:
     resource: "api/product.yml"
     options:
       expose: true
+
+app_api_search:
+    resource: "api/search.yml"
+    options:
+      expose: true
