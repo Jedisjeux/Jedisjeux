@@ -8,7 +8,7 @@
 {% block breadcrumb_content %}
     {{ parent() }}
     <a href="{{ path('sylius_backend_taxon_index') }}">Catégories</a> /
-    <a href="{{ path('sylius_backend_taxon_show', { 'id': taxon.root.id }) }}">{{ taxon.root }}</a> /
+    <a href="{{ path('sylius_backend_taxon_index_by_root', { 'rootCode': taxon.root.code }) }}">{{ taxon.root }}</a> /
     Modifier
 {% endblock %}
 
