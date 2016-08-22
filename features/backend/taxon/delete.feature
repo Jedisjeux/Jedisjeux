@@ -1,4 +1,4 @@
-@backend @taxon @delete
+@ui @backend @taxon @delete
 Feature: Remove taxons
   In order to manage taxons
   As an admin
@@ -8,7 +8,7 @@ Feature: Remove taxons
     Given there are users:
       | first_name | email             | role       | password |
       | Chuck      | admin@example.com | ROLE_ADMIN | password |
-    And there are taxonomies:
+    And there are root taxons:
       | code   | name   |
       | themes | Thèmes |
     And there are taxons:
@@ -17,8 +17,8 @@ Feature: Remove taxons
     And I am logged in as user "admin@example.com" with password "password"
 
   Scenario: Remove a taxon
-    Given I am on "/admin/taxonomies/"
-    And I follow "Détails"
+    Given I am on "/admin/taxons/"
+    And I follow "Thèmes"
     When I press "Supprimer"
     And I wait until modal is visible
     And I follow "Supprimer"

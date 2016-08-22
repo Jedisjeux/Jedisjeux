@@ -1,7 +1,6 @@
 {% extends "layout/backend_index.html.twig" %}
 
 {% import 'macros/buttons.html.twig' as buttons %}
-{% from 'macros/taxons.html.twig' import list %}
 
 {% block new_entity_button %}
     {{ buttons.create(path('sylius_backend_taxon_create'), 'label.create_category'|trans) }}
@@ -13,6 +12,32 @@
 
 {% block list %}
 
-{{ list(taxons) }}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>{{ 'label.code'|trans  }}</th>
+            <th>{{ 'label.name'|trans }}</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for taxon in taxons %}
+            <tr id="{{ taxon.id }}">
+                <td>
+                    {{ taxon.code }}
+                </td>
+                <td>
+                    <a href="{{ path('sylius_backend_taxon_index_by_root', {'rootCode': taxon.code}) }}">{{ taxon.name }}</a>
+                </td>
+                <td>
+                    <div class="pull-right">
+                        {{ buttons.edit(path('sylius_backend_taxon_update', {'id': taxon.id})) }}
+                        {{ buttons.delete(path('sylius_backend_taxon_delete', {'id': taxon.id})) }}
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
 {% endblock %}

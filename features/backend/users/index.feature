@@ -1,4 +1,4 @@
-@backend @users @index
+@ui @backend @users @index
 Feature: View list of users
   In order to manage users
   As an admin
