@@ -39,10 +39,11 @@
                         {% endif %}
 
                         Trier
-                        par {{ sorting('sylius_product_index', 'label.created_at'|trans, 'createdAt', 'desc', icon, currentOrder) }}
-                        ,
+                        par {{ sorting('sylius_product_index', 'label.created_at'|trans, 'createdAt', 'desc', icon, currentOrder) }},
                         {{ sorting('sylius_product_index', 'label.name'|trans, 'name', 'asc') }}
                     </div>
+
+                    <div class="clearfix"></div>
 
                     {% include "frontend/game/index/list-4.html.twig" %}
 

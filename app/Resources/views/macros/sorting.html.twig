@@ -1,4 +1,4 @@
-{% macro sorting(routeName, label, property, defaultOrder = 'asc', icon = false, currentOrder = null, routeParams = {}) %}
+{% macro sorting(routeName, label, property, defaultOrder = 'asc', icon = false, currentOrder = null, routeParams = {}) %}{% spaceless %}
 
     {% set sorting = app.request.get('sorting') %}
     {% set criteria = app.request.get('criteria') %}
@@ -30,4 +30,4 @@
             {%- endif %}
         {%- endif %}
     </a>
-{% endmacro %}
+{% endspaceless %}{% endmacro %}
