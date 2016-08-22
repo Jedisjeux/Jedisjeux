@@ -2,6 +2,7 @@
 
 {% from 'macros/misc.html.twig' import pagination %}
 {% from 'macros/articles.html.twig' import magazineItemOne %}
+{% from 'macros/sorting.html.twig' import sorting %}
 
 {% block body_class %}magazine{% endblock %}
 
@@ -24,6 +25,28 @@
 
     <div class="container">
         <div class="col-md-8">
+            <div class="pull-right sorting">
+                {% set sorting = app.request.get('sorting') %}
+
+                {% set icon = false %}
+                {% set currentOrder = null %}
+
+                {% if null == sorting %}
+                    {% set icon = true %}
+                    {% set currentOrder = 'desc' %}
+                {% endif %}
+
+                {% set routeName =  app.request.get('_route') %}
+                {% set routeParams =  app.request.get('_route_params') %}
+
+                Trier
+                par {{ sorting(routeName, 'label.published_at'|trans, 'publishStartDate', 'desc', icon, currentOrder, routeParams) }},
+                {{ sorting(routeName, 'label.most_viewed'|trans, 'viewCount', 'desc', null, null, routeParams) }},
+                {{ sorting(routeName, 'label.most_commented'|trans, 'topic.postCount', 'desc', null, null, routeParams) }}
+            </div>
+
+            <div class="clearfix"></div>
+
             <div class="row">
                 {% for key, article in articles %}
                 {% if key > 0 and key%3 == 0 %}

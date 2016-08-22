@@ -5,12 +5,12 @@ app_frontend_article_index:
         _controller: app.controller.article:indexWithTaxonsAction
         _sylius:
             paginate: 15
-            sortable: true
-            sorting:
-                publishStartDate: desc
+            repository:
+                method: createFilterPaginator
+                arguments:
+                  - $criteria
+                  - $sorting
             template: frontend/article/index.html.twig
-            criteria:
-                publishable: 1
             sorting:
                 publishStartDate: desc
 
@@ -27,8 +27,6 @@ app_frontend_article_index_by_taxon:
             template: frontend/article/index.html.twig
             criteria:
                 publishable: 1
-            sorting:
-                publishStartDate: desc
     requirements:
         permalink: "[^?]+"
 

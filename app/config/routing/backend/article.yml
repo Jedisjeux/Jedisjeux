@@ -14,7 +14,7 @@ app_admin_article_index:
         _sylius:
             repository:
                 method: createFilterPaginator
-                arguments: [$criteria, $sorting]
+                arguments: [$criteria, $sorting, false]
             template: backend/article/index.html.twig
 
 

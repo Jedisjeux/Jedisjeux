@@ -29,10 +29,11 @@ class ArticleRepository extends EntityRepository
     /**
      * @param array|null $criteria
      * @param array|null $sorting
+     * @param bool $publishable
      *
      * @return Pagerfanta
      */
-    public function createFilterPaginator(array $criteria = null, array $sorting = null)
+    public function createFilterPaginator(array $criteria = null, array $sorting = null, $publishable = true)
     {
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
@@ -45,6 +46,12 @@ class ArticleRepository extends EntityRepository
                 ->setParameter('query', '%' . $criteria['query'] . '%');
 
             unset($criteria['query']);
+        }
+
+        if ($publishable) {
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->eq($this->getPropertyName('publishable'), ':publishable'))
+                ->setParameter('publishable', 1);
         }
 
         if (!$sorting) {
@@ -66,12 +73,13 @@ class ArticleRepository extends EntityRepository
      * @param TaxonInterface $taxon
      * @param array|null $criteria
      * @param array|null $sorting
+     * @param bool $publishable
      *
      * @return Pagerfanta
      */
-    public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = null, array $sorting = null)
+    public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = null, array $sorting = null, $publishable = true)
     {
-        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
             ->innerJoin('o.mainTaxon', 'taxon')
             ->andWhere($queryBuilder->expr()->orX(
@@ -81,6 +89,12 @@ class ArticleRepository extends EntityRepository
             ->setParameter('taxon', $taxon)
             ->setParameter('left', $taxon->getLeft())
             ->setParameter('right', $taxon->getRight());
+
+        if ($publishable) {
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->eq($this->getPropertyName('publishable'), ':publishable'))
+                ->setParameter('publishable', 1);
+        }
 
         $this->applyCriteria($queryBuilder, (array)$criteria);
         $this->applySorting($queryBuilder, (array)$sorting);
@@ -95,6 +109,7 @@ class ArticleRepository extends EntityRepository
     {
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder
+            ->addSelect('topic')
             ->leftJoin('o.topic', 'topic');
 
         return $queryBuilder;
