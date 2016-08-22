@@ -16,6 +16,15 @@
     Articles
 {% endblock %}
 
+{% block form_filter %}
+    {{ render(controller('app.controller.form:filterAction', {
+        'type': 'app_filter_article',
+        'placeholder': 'label.search_query',
+        'template': 'backend/article/_filterForm.html.twig',
+        'criteria':app.request.get('criteria')
+    })) }}
+{% endblock %}
+
 {% block new_entity_button %}
     {{ buttons.create(path('app_admin_article_create'), 'label.create_article'|trans) }}
 {% endblock new_entity_button %}

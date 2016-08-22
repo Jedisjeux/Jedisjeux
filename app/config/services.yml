@@ -95,6 +95,12 @@ services:
         tags:
             - { name: 'form.type', alias: 'app_filter_product' }
 
+    app.form.filter.article:
+        class: AppBundle\Form\Filter\ArticleFilterType
+        tags:
+            - { name: 'form.type', alias: 'app_filter_article' }
+
+    # TODO remove (in sylius.yml) !
     app.form.type.post:
         class: AppBundle\Form\Type\PostType
         tags:

@@ -23,7 +23,7 @@
 {% block form_filter %}
     {{ render(controller('app.controller.form:filterAction', {
         'type': 'app_filter_product',
-        'placeholder': 'label.search',
+        'placeholder': 'label.search_query',
         'template': 'backend/product/_filterForm.html.twig',
         'criteria':app.request.get('criteria')
     })) }}
