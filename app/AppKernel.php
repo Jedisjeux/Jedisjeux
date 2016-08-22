@@ -80,7 +80,6 @@ class AppKernel extends Kernel
             //JDJ
             // TODO there can be only one !
             new JDJ\SearchBundle\JDJSearchBundle(),
-            new JDJ\JediZoneBundle\JDJJediZoneBundle(),
             new AppBundle\AppBundle(),
         );
 

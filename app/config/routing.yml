@@ -31,10 +31,6 @@ sylius_taxonomy:
     resource: @SyliusTaxonomyBundle/Resources/config/routing.yml
     prefix: /taxonomy
 
-jdj_jedi_zone:
-    resource: "@JDJJediZoneBundle/Resources/config/routing.yml"
-    prefix:   /
-
 jdj_search:
     resource: "@JDJSearchBundle/Resources/config/routing.yml"
     prefix:   /recherche
