@@ -13,6 +13,8 @@ app_partial_topic:
 app_partial_article:
     resource: 'partial/article.yml'
 
-
 app_partial_single_image_block:
     resource: 'partial/single_image_block.yml'
+
+app_partial_blockquote_block:
+    resource: 'partial/blockquote_block.yml'

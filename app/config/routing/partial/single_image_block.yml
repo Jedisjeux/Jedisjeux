@@ -9,3 +9,4 @@ app_partial_single_image_block_create:
                 method: createWithFakeData
                 arguments:
                   - $imagePosition
+                  - $class

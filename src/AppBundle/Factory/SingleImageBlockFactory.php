@@ -22,9 +22,12 @@ use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
 class SingleImageBlockFactory extends Factory
 {
     /**
+     * @param string $imagePosition
+     * @param string|null $class
+     *
      * @return SingleImageBlock
      */
-    public function createWithFakeData($imagePosition)
+    public function createWithFakeData($imagePosition, $class = null)
     {
         /** @var SingleImageBlock $block */
         $block = $this->createNew();
@@ -39,6 +42,7 @@ class SingleImageBlockFactory extends Factory
         $imagineBlock->setLabel('Légende de l\'image');
 
         $block->setImagePosition($imagePosition);
+        $block->setClass($class);
 
         $block->addChild($imagineBlock);
 

@@ -9,6 +9,7 @@
 namespace AppBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\StringBlock;
 
 /**
@@ -16,7 +17,7 @@ use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\StringBlock;
  *
  * @PHPCR\Document(referenceable=true)
  */
-class BlockquoteBlock extends StringBlock
+class BlockquoteBlock extends StringBlock implements ResourceInterface
 {
     public function getType()
     {
