@@ -27,21 +27,30 @@ class PolymorphicCollectionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         // Tack on our event subscriber
-        $builder->addEventSubscriber(new PolymorphicCollectionSubscriber($builder->getFormFactory(), $options['type'], $options['type_callback'], $options));
+        $builder->addEventSubscriber(new PolymorphicCollectionSubscriber($builder->getFormFactory(), $options['type'], $options['type_callback'], []));
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getParent()
     {
         return "collection";
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired(array('type_callback'));
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
-        return "app_polymorphic_collection";
+        return 'app_polymorphic_collection';
     }
 }

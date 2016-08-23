@@ -80,7 +80,7 @@ $(function () {
      * @returns {{name: *, title: (*|jQuery|HTMLElement), body: (*|jQuery), imagePosition: *, class: null}}
      */
     function getBlockData($block, key, title) {
-      var blockTitle = $('h4 a', $block).html().trim();
+      var blockTitle = $('h4 a', $block).html() ? $('h4 a', $block).html().trim() : null;
 
       return {
         name: slugMe(title + ' ' + key),
