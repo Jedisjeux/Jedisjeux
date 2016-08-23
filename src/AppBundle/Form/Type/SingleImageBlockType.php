@@ -26,6 +26,9 @@ class SingleImageBlockType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options = array())
     {
         $builder
+            ->add('name', null, array(
+                'label' => 'label.internal_name'
+            ))
             ->add('title', null, array(
                 'label' => 'label.title'
             ))

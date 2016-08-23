@@ -11,7 +11,9 @@
                 {% if imagineBlock.image is not null %}
                     {{ image(imagineBlock.image.id, 'cmf_block', imagineBlock.label, 'img-responsive', imagineBlock.linkUrl) }}
                 {% else %}
-                    <img class="img-responsive" src="https://placeholdit.imgix.net/~text?txtsize=150&txt=Image...&w=1600&h=900" alt="{{ imagineBlock.label }}"/>
+                    <img class="img-responsive"
+                         src="https://placeholdit.imgix.net/~text?txtsize=150&txt=Image...&w=1600&h=900"
+                         alt="{{ imagineBlock.label }}"/>
                 {% endif %}
 
                 <!-- Image Box #4 Content -->
@@ -39,19 +41,24 @@
             {{ imageBlock }}
         </div>
         <h4><a href="#">{{ block.title }}</a></h4>
-        {{ block.body|raw }}
+        <div class="block-body">
+            {{ block.body|raw }}
+        </div>
     {% elseif 'right' == block.imagePosition %}
         <div class="col-sm-5 col-md-5 pull-right no-padding-right">
             {{ imageBlock }}
         </div>
         <h4><a href="#">{{ block.title }}</a></h4>
-        {{ block.body|raw }}
+        <div class="block-body">
+            {{ block.body|raw }}
+        </div>
     {% else %}
         <h4><a href="#">{{ block.title }}</a></h4>
         <div class="bor bg-color"></div>
         {{ imageBlock }}
-        {{ block.body|raw }}
-
+        <div class="block-body">
+            {{ block.body|raw }}
+        </div>
     {% endif %}
 </div>
 <div class="clearfix"></div>

@@ -28,7 +28,15 @@ class ArticleContentType extends AbstractResourceType
 
         $builder
             ->add('name')
-            ->add('title');
+            ->add('title')
+            ->add('children', 'collection', [
+                'type' => 'app_single_image_block',
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'label' => false,
+                'cascade_validation' => true,
+            ]);
     }
 
     public function getName()
