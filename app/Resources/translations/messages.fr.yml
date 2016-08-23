@@ -28,6 +28,7 @@ label:
   created_at: Créé le
   create_article: Créer un article
   create_category: Créer une catégorie
+  css_class: Classe CSS
   delete: Supprimer
   description: Description
   duration: Durée
@@ -36,6 +37,8 @@ label:
   email: Email
   first_name: Prénom
   image: Image
+  image_position: Position de l'image
+  internal_name: Nom interne
   label: Libellé
   last_name: Nom
   main: Principale
@@ -47,6 +50,9 @@ label:
   new: Nouveau
   need_a_review: En relecture
   need_a_translation: A traduire
+  on_top: En haut
+  on_the_left_side: À gauche
+  on_the_right_side: À droite
   password: Mot de passe
   password_confirmation: Confirmation mot de passe
   phone_number: Téléphone

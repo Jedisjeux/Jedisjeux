@@ -9,6 +9,7 @@
 namespace AppBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SlideshowBlock;
 
 /**
@@ -16,7 +17,7 @@ use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SlideshowBlock;
  *
  * @PHPCR\Document(referenceable=true)
  */
-class SingleImageBlock extends SlideshowBlock
+class SingleImageBlock extends SlideshowBlock implements ResourceInterface
 {
     const POSITION_LEFT = 'left';
     const POSITION_RIGHT = 'right';

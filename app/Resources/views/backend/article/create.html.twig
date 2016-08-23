@@ -32,28 +32,35 @@
                 <!-- Container -->
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-3 col-sm-3">
+                        <div class="col-md-2 col-sm-2">
                             <div class="revertible draggable" data-template="introductionTemplate">
                                 <img class="img-responsive"
                                      src="{{ asset('assets/ckeditor/templates/images/introduction.gif') }}"/>
                                 <p>Introduction</p>
                             </div>
                         </div>
-                        <div class="col-md-3 col-sm-3">
+                        <div class="col-md-2 col-sm-2">
                             <div class="revertible draggable" data-template="imageAtLeftTemplate">
                                 <img class="img-responsive"
                                      src="{{ asset('assets/ckeditor/templates/images/image_at_left.gif') }}"/>
                                 <p>Image à gauche</p>
                             </div>
                         </div>
-                        <div class="col-md-3 col-sm-3">
+                        <div class="col-md-2 col-sm-2">
+                            <div class="revertible draggable" data-template="imageOnTopTemplate">
+                                <img class="img-responsive"
+                                     src="{{ asset('assets/ckeditor/templates/images/image_at_left.gif') }}"/>
+                                <p>Image au-dessus</p>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2">
                             <div class="revertible draggable" data-template="imageAtRightTemplate">
                                 <img class="img-responsive"
                                      src="{{ asset('assets/ckeditor/templates/images/image_at_right.gif') }}"/>
                                 <p>Image à droite</p>
                             </div>
                         </div>
-                        <div class="col-md-3 col-sm-3">
+                        <div class="col-md-2 col-sm-2">
                             <div class="revertible draggable" data-template="wellTemplate">
                                 <img class="img-responsive"
                                      src="{{ asset('assets/ckeditor/templates/images/introduction.gif') }}"/>
@@ -91,56 +98,15 @@
             </div>
 
             <div id="imageAtLeftTemplate" style="display: none">
-                <div class="col-sm-5 col-md-5 pull-left no-padding-left">
-                    <div class="text-center">
-                        <div class="img-box-4-item">
-                            <img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=Image...&w=350&h=150" alt=""
-                                 class="img-responsive"/>
-                            <div class="img-box-4-content">
-                                <p>Légende de l'image...</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <h4><a href="#">Titre du bloc...</a></h4>
-                <p>Halvah liquorice lemon drops sesame snaps. Pastry dessert soufflé brownie tiramisu gummi
-                    bears. Jelly-o apple pie icing. Sweet pastry chupa chups icing candy canes muffin candy jelly
-                    beans. Fruitcake brownie macaroon croissant tart candy canes. Cupcake cookie tart toffee cookie
-                    bear claw wafer jelly-o toffee. Gummi bears pie marzipan candy canes dessert jelly cupcake
-                    jelly. Sugar plum cupcake lemon drops apple pie. Biscuit brownie dessert brownie cheesecake
-                    croissant ice cream.</p>
-                <p>Toffee ice cream bonbon biscuit cupcake. Gingerbread chocolate cake cookie sugar plum bonbon
-                    pastry. Dessert gummies brownie muffin jelly beans jelly beans jelly chocolate bar oat cake.
-                    Lemon drops marzipan tart cotton candy. Gingerbread cake apple pie cheesecake liquorice sugar
-                    plum. Powder chocolate bar chocolate bar biscuit pie. Jelly-o jelly beans marzipan candy
-                    wafer.</p>
-                <div class="clearfix"></div>
+                {{ render(url('app_partial_single_image_block_create', {'imagePosition': 'left'})) }}
+            </div>
+
+            <div id="imageOnTopTemplate" style="display: none">
+                {{ render(url('app_partial_single_image_block_create', {'imagePosition': 'top'})) }}
             </div>
 
             <div id="imageAtRightTemplate" style="display: none">
-                <div class="col-sm-5 col-md-5 pull-right no-padding-right">
-                    <div class="text-center">
-                        <div class="img-box-4-item">
-                            <img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=Image...&w=350&h=150" alt=""
-                                 class="img-responsive"/>
-                            <div class="img-box-4-content">
-                                <p>Légende de l'image...</p></div>
-                        </div>
-                    </div>
-                </div>
-                <h4><a href="#">Titre du bloc...</a></h4>
-                <p>Halvah liquorice lemon drops sesame snaps. Pastry dessert soufflé brownie tiramisu gummi
-                    bears. Jelly-o apple pie icing. Sweet pastry chupa chups icing candy canes muffin candy jelly
-                    beans. Fruitcake brownie macaroon croissant tart candy canes. Cupcake cookie tart toffee cookie
-                    bear claw wafer jelly-o toffee. Gummi bears pie marzipan candy canes dessert jelly cupcake
-                    jelly. Sugar plum cupcake lemon drops apple pie. Biscuit brownie dessert brownie cheesecake
-                    croissant ice cream.</p>
-                <p>Toffee ice cream bonbon biscuit cupcake. Gingerbread chocolate cake cookie sugar plum bonbon
-                    pastry. Dessert gummies brownie muffin jelly beans jelly beans jelly chocolate bar oat cake.
-                    Lemon drops marzipan tart cotton candy. Gingerbread cake apple pie cheesecake liquorice sugar
-                    plum. Powder chocolate bar chocolate bar biscuit pie. Jelly-o jelly beans marzipan candy
-                    wafer.</p>
-                <div class="clearfix"></div>
+                {{ render(url('app_partial_single_image_block_create', {'imagePosition': 'right'})) }}
             </div>
 
             <div id="wellTemplate" style="display: none">

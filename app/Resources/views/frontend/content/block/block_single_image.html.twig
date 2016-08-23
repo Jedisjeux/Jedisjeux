@@ -3,19 +3,24 @@
 {% set imageBlock %}
     {% if block.hasChildren %}
         {% set imagineBlock = block.children.first %}
-            <div class="text-center">
+        <div class="text-center">
+            <!-- Image -->
+            <!-- Image Box #4 Item -->
+            <div class="img-box-4-item">
                 <!-- Image -->
-                <!-- Image Box #4 Item -->
-                <div class="img-box-4-item">
-                    <!-- Image -->
+                {% if imagineBlock.image is not null %}
                     {{ image(imagineBlock.image.id, 'cmf_block', imagineBlock.label, 'img-responsive', imagineBlock.linkUrl) }}
-                    <!-- Image Box #4 Content -->
-                    <div class="img-box-4-content">
-                        <!-- Paragraph -->
-                        <p>{{ imagineBlock.label }}</p>
-                    </div>
+                {% else %}
+                    <img class="img-responsive" src="https://placeholdit.imgix.net/~text?txtsize=150&txt=Image...&w=1600&h=900" alt="{{ imagineBlock.label }}"/>
+                {% endif %}
+
+                <!-- Image Box #4 Content -->
+                <div class="img-box-4-content">
+                    <!-- Paragraph -->
+                    <p>{{ imagineBlock.label }}</p>
                 </div>
             </div>
+        </div>
     {% endif %}
 {% endset %}
 
