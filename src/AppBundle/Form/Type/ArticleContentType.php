@@ -27,6 +27,7 @@ class ArticleContentType extends AbstractResourceType
         parent::buildForm($builder, $options);
 
         $builder
+            ->add('name')
             ->add('title');
     }
 

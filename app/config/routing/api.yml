@@ -12,3 +12,8 @@ app_api_search:
     resource: "api/search.yml"
     options:
       expose: true
+
+app_api_article:
+    resource: "api/article.yml"
+    options:
+      expose: true

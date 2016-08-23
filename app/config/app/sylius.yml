@@ -123,6 +123,8 @@ sylius_resource:
                 model: AppBundle\Document\ArticleContent
                 factory: AppBundle\Factory\ArticleContentFactory
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
+                form:
+                    default: AppBundle\Form\Type\ArticleContentType
         app.single_image_block:
             driver: doctrine/phpcr-odm
             classes:

@@ -1,0 +1,9 @@
+app_api_article_create:
+    methods: [POST]
+    path: /articles/
+    defaults:
+        _controller: app.controller.article:createAction
+        _sylius:
+            factory:
+                #TODO createWithFakeData
+                method: createNew

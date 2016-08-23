@@ -25,6 +25,8 @@ class ArticleType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
+
+        $builder->add('document', 'app_article_content');
     }
 
     public function getName()

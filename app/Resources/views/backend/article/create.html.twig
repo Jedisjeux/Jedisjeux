@@ -22,6 +22,9 @@
                 <div id="articleContent">
 
                 </div>
+                {{ form_start(form) }}
+                {{ action.update() }}
+                {{ form_end(form, {'render_rest': false}) }}
 
                 <div class="droppable bg-grey text-center"
                      style="width: 100%; height: 150px; padding: 0.5em; float: left; margin: 10px;">
