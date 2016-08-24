@@ -30,7 +30,7 @@ class PolymorphicCollectionSubscriber implements EventSubscriberInterface
     protected $factory;
 
     /**
-     * @var AbstractType
+     * @var string
      */
     protected $type;
 
@@ -48,15 +48,15 @@ class PolymorphicCollectionSubscriber implements EventSubscriberInterface
      * PolymorphicCollectionSubscriber constructor.
      *
      * @param FormFactoryInterface $factory
-     * @param AbstractType $type
-     * @param AbstractType $childType
+     * @param string $type
+     * @param callback $typeCallback
      * @param array $options
      */
-    public function __construct(FormFactoryInterface $factory, AbstractType $type, AbstractType $childType, array $options)
+    public function __construct(FormFactoryInterface $factory, $type, $typeCallback, array $options)
     {
         $this->factory = $factory;
         $this->type = $type;
-        $this->typeCallback = $childType;
+        $this->typeCallback = $typeCallback;
         $this->options = $options;
     }
 
