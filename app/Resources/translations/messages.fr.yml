@@ -35,6 +35,7 @@ label:
   hello: Bonjour
   edit: Modifier
   email: Email
+  end_date: Date de fin
   first_name: Prénom
   image: Image
   image_position: Position de l'image
@@ -72,6 +73,7 @@ label:
   score: Score
   short_description: Description courte
   show: Voir
+  start_date: Date de début
   status: Statut
   themes: Thèmes
   title: Titre

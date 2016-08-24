@@ -11,8 +11,6 @@
 
 namespace AppBundle\Form\Type;
 
-use AppBundle\Document\BlockquoteBlock;
-use AppBundle\Document\SingleImageBlock;
 use Infinite\FormBundle\Form\Type\PolyCollectionType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -31,9 +29,11 @@ class ArticleContentType extends AbstractResourceType
 
         $builder
             ->add('name', null, [
+                'label' => 'label.internal_name',
+            ])
+            ->add('title', null, [
                 'label' => 'label.title',
             ])
-            ->add('title')
             ->add('children', PolyCollectionType::class, [
                 'types' => [
                     'app_single_image_block',
@@ -43,7 +43,28 @@ class ArticleContentType extends AbstractResourceType
                 'allow_delete' => true,
                 'by_reference' => false,
                 'cascade_validation' => true,
-            ]);
+            ])
+            ->add('publishable', null, array(
+                'label' => 'label.published'
+            ))
+            ->add('publishStartDate', 'datetime', array(
+                'label' => 'label.start_date',
+                'widget' => 'single_text',
+                'html5' => false,
+                'required' => false,
+                'attr' => array(
+                    'class' => 'datetime',
+                )
+            ))
+            ->add('publishEndDate', 'datetime', array(
+                'label' => 'label.end_date',
+                'widget' => 'single_text',
+                'html5' => false,
+                'required' => false,
+                'attr' => array(
+                    'class' => 'datetime',
+                )
+            ));
     }
 
     /**

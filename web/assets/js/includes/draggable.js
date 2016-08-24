@@ -61,7 +61,7 @@ $(function () {
      * Get article serialized data
      */
     function getArticleData() {
-      var title = $('#app_article_document_title').html().trim();
+      var title = $('#app_article_document_title').val().trim();
       var children = [];
 
       $articleContent.children().each(function (key) {

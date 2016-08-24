@@ -11,6 +11,14 @@ $(".b-tooltip").tooltip();
 
 $(".b-popover").popover();
 
+/* ****************** */
+/* Switchs */
+/* ****************** */
+
+$(".switch").bootstrapSwitch();
+
+$(".b-popover").popover();
+
 /* ************** */
 /* Magnific Popup */
 /* ************** */
