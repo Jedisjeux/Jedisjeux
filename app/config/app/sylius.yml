@@ -141,6 +141,13 @@ sylius_resource:
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
                 form:
                     default: AppBundle\Form\Type\BlockquoteBlockType
+        app.imagine_block:
+            driver: doctrine/phpcr-odm
+            classes:
+                model: AppBundle\Document\ImagineBlock
+                repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
+                form:
+                    default: AppBundle\Form\Type\ImagineBlockType
         app.country:
             classes:
                 model: AppBundle\Entity\Country

@@ -8,14 +8,13 @@
 
 namespace AppBundle\Form\Type;
 
-use Symfony\Component\Form\AbstractType;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class ImagineBlockType extends AbstractType
+class ImagineBlockType extends AbstractResourceType
 {
     /**
      * @inheritdoc
@@ -25,7 +24,7 @@ class ImagineBlockType extends AbstractType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('name', 'text', array(
+            ->add('name', null, array(
                 'label' => 'label.internal_name'
             ))
            ->add('image', 'cmf_media_image', array(
@@ -33,16 +32,17 @@ class ImagineBlockType extends AbstractType
                 'attr' => array('class' => 'imagine-thumbnail'),
                 'required' => false
             ))
-            ->add('label', 'text', array(
+            ->add('label', null, array(
                 'label' => 'label.description',
                 'required' => false,
             ))
-            ->add('linkUrl', 'text', array(
+            ->add('linkUrl', null, array(
                 'label' => 'label.link_url',
                 'required' => false
             ))
             ->add('publishable', null, array(
-                'label' => 'label.publishable'
+                'label' => 'label.publishable',
+                'required' => false,
             ))
             ->add('publishStartDate', 'datetime', array(
                 'label' => 'label.publish_start_date',
@@ -62,16 +62,6 @@ class ImagineBlockType extends AbstractType
                     'class' => 'datetime',
                 )
             ));
-    }
-
-    /**
-     * @param OptionsResolver $resolver
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(array(
-            'data_class' => 'Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock'
-        ));
     }
 
     public function getName()

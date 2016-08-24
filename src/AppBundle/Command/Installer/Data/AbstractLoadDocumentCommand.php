@@ -12,6 +12,7 @@
 namespace AppBundle\Command\Installer\Data;
 
 use AppBundle\Document\ArticleContent;
+use AppBundle\Document\ImagineBlock;
 use AppBundle\Document\SingleImageBlock;
 use AppBundle\Entity\Article;
 use AppBundle\Repository\TaxonRepository;
@@ -29,7 +30,6 @@ use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\AbstractBlock;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ContainerBlock;
-use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
 use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

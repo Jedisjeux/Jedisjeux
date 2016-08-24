@@ -101,18 +101,6 @@ services:
             - { name: 'form.type', alias: 'app_filter_article' }
 
     # <!-- Forms -->
-    app.form.type.polymorphic_collection:
-        class: AppBundle\Form\Type\PolymorphicCollectionType
-        tags:
-            - { name: 'form.type', alias: 'app_polymorphic_collection' }
-
-    # TODO remove
-    app.form.type.article_block:
-        class: AppBundle\Form\Type\ArticleBlockType
-        tags:
-            - { name: 'form.type', alias: 'app_article_block' }
-
-
     # TODO remove (in sylius.yml) !
     app.form.type.post:
         class: AppBundle\Form\Type\PostType

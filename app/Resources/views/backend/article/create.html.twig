@@ -81,7 +81,7 @@
             </div>
 
             <div id="introductionTemplate" style="display: none">
-                <div class="block-editing">
+                <div class="block-editing" data-type="blockquote">
                     {{ render(url('app_partial_blockquote_block_create')) }}
                 </div>
             </div>
@@ -89,25 +89,25 @@
             {#TODO use the existing constant for imagePosition#}
 
             <div id="imageAtLeftTemplate" style="display: none">
-                <div class="block-editing" data-image-position="left">
+                <div class="block-editing" data-type="single_image" data-image-position="left">
                     {{ render(url('app_partial_single_image_block_create', {'imagePosition': 'left'})) }}
                 </div>
             </div>
 
             <div id="imageOnTopTemplate" style="display: none">
-                <div class="block-editing" data-image-position="top">
+                <div class="block-editing" data-type="single_image" data-image-position="top">
                     {{ render(url('app_partial_single_image_block_create', {'imagePosition': 'top'})) }}
                 </div>
             </div>
 
             <div id="imageAtRightTemplate" style="display: none">
-                <div class="block-editing" data-image-position="right">
+                <div class="block-editing" data-type="single_image" data-image-position="right">
                     {{ render(url('app_partial_single_image_block_create', {'imagePosition': 'right'})) }}
                 </div>
             </div>
 
             <div id="wellTemplate" style="display: none">
-                <div class="block-editing" data-image-position="top">
+                <div class="block-editing" data-type="single_image" data-image-position="top">
                     {{ render(url('app_partial_single_image_block_create', {'imagePosition': 'top', 'class': 'well'})) }}
                 </div>
             </div>

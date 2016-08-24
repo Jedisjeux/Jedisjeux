@@ -16,6 +16,8 @@ $(function () {
       $('button', $form).click(function (event) {
         event.preventDefault();
 
+        console.log(getArticleData());
+
         $.ajax({
           type: "POST",
           url: Routing.generate('app_api_article_create'),
@@ -51,8 +53,6 @@ $(function () {
 
     /**
      * Get article serialized data
-     *
-     * @returns {{document: {name: *, title: (*|jQuery), children: Array}}}
      */
     function getArticleData() {
       var title = $('span', 'h2').html().trim();
@@ -73,22 +73,40 @@ $(function () {
 
     /**
      * Get serialized data of a block
-     *
-     * @param $block
-     * @param key
-     * @param title
-     * @returns {{name: *, title: (*|jQuery|HTMLElement), body: (*|jQuery), imagePosition: *, class: null}}
      */
     function getBlockData($block, key, title) {
       var blockTitle = $('h4 a', $block).html() ? $('h4 a', $block).html().trim() : null;
 
-      return {
-        name: slugMe(title + ' ' + key),
-        title: blockTitle,
-        body: $('.block-body', $block).html().trim(),
-        imagePosition: $block.attr('data-image-position'),
-        class: null
-      };
+      var type = $block.attr('data-type');
+      var name = slugMe(title + ' ' + key);
+      var body = $('.block-body', $block).html().trim();
+
+      if ('single_image' === type) {
+
+        var data = new FormData();
+
+        return {
+          name: name,
+          title: blockTitle,
+          body: body,
+          imagePosition: $block.attr('data-image-position'),
+          children: [{
+            name: 'image' + key/*,
+            image: {
+              ContentUrl: 'https://placeholdit.imgix.net/~text?txtsize=150&txt=Image...&w=1600&h=900'
+            }*/
+          }],
+          class: null,
+          _type: $block.attr('data-type')
+        };
+      } else {
+        return {
+          name: name,
+          body: body,
+          _type: $block.attr('data-type')
+        };
+      }
+
     }
 
     /** use npm slug instead

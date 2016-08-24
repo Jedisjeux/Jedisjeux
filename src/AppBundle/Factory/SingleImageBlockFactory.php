@@ -11,10 +11,9 @@
 
 namespace AppBundle\Factory;
 
+use AppBundle\Document\ImagineBlock;
 use AppBundle\Document\SingleImageBlock;
 use Sylius\Component\Resource\Factory\Factory;
-use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
-use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>

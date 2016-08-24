@@ -13,7 +13,12 @@ namespace AppBundle\Form\Type;
 
 use AppBundle\Document\SingleImageBlock;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -32,10 +37,10 @@ class SingleImageBlockType extends AbstractResourceType
             ->add('title', null, array(
                 'label' => 'label.title'
             ))
-            ->add('body', 'textarea', array(
+            ->add('body', TextareaType::class, array(
                 'label' => 'label.body',
             ))
-            ->add('imagePosition', 'choice', array(
+            ->add('imagePosition', ChoiceType::class, array(
                 'label' => 'label.image_position',
                 'required' => false,
                 'choices' => [
@@ -45,11 +50,32 @@ class SingleImageBlockType extends AbstractResourceType
                 ],
                 'choices_as_values' => true,
             ))
-
             ->add('class', null, array(
                 'label' => 'label.css_class',
                 'required' => false,
-            ));
+            ))
+            ->add('children', CollectionType::class, [
+                'type' => 'app_imagine_block',
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'cascade_validation' => true,
+            ])
+            ->add('_type', HiddenType::class, [
+                'data' => 'single_image',
+                'mapped' => false,
+            ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        parent::configureOptions($resolver);
+
+        $resolver
+            ->setDefault('model_class', $this->dataClass);
     }
 
     /**
