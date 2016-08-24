@@ -58,7 +58,7 @@ class AppKernel extends Kernel
             new Sonata\IntlBundle\SonataIntlBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle($this),
-            new \Liip\ImagineBundle\LiipImagineBundle(),
+            new Liip\ImagineBundle\LiipImagineBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new Gregwar\FormBundle\GregwarFormBundle(),
             new FOS\ElasticaBundle\FOSElasticaBundle(),
@@ -70,6 +70,7 @@ class AppKernel extends Kernel
             new Bmatzner\FontAwesomeBundle\BmatznerFontAwesomeBundle(),
             new JMS\AopBundle\JMSAopBundle(),
             new EightPoints\Bundle\GuzzleBundle\GuzzleBundle(),
+            new Infinite\FormBundle\InfiniteFormBundle(),
 
             new Ob\HighchartsBundle\ObHighchartsBundle(),
             new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
