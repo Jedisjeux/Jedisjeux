@@ -38,8 +38,6 @@ class ArticleContentFactory extends Factory
 
         $articleContent
             ->setParentDocument($this->getParent());
-        //var_dump($articleContent->getParent()->getId());
-        //exit;
 
         return $articleContent;
     }

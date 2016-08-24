@@ -30,7 +30,9 @@ class ArticleContentType extends AbstractResourceType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('name')
+            ->add('name', null, [
+                'label' => 'label.title',
+            ])
             ->add('title')
             ->add('children', PolyCollectionType::class, [
                 'types' => [

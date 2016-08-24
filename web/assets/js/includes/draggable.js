@@ -2,6 +2,7 @@ $(function () {
   'use strict';
 
   $(document).ready(function () {
+
     var $form = $("form[name=app_article]");
     var $articleContent = $("#articleContent");
 
@@ -13,7 +14,7 @@ $(function () {
      * Call Api on submit button click
      */
     function submitFormHandler() {
-      $('button', $form).click(function (event) {
+      $form.submit(function (event) {
         event.preventDefault();
 
         console.log(getArticleData());
@@ -46,7 +47,12 @@ $(function () {
       $(".droppable").droppable({
         drop: function (event, ui) {
           var $template = $("#" + ui.draggable.data('template'));
-          $articleContent.append($template.html());
+
+          var $block = $template.children().first().clone();
+          $block.attr('contenteditable', 'true');
+          console.log($block);
+
+          $articleContent.append($block);
         }
       });
     }
@@ -55,7 +61,7 @@ $(function () {
      * Get article serialized data
      */
     function getArticleData() {
-      var title = $('span', 'h2').html().trim();
+      var title = $('#app_article_document_title').html().trim();
       var children = [];
 
       $articleContent.children().each(function (key) {
