@@ -1,6 +1,8 @@
 $(function () {
   'use strict';
 
+  var successMessage = "Votre article a bien été enregistrée.";
+
   $(document).ready(function () {
 
     var $form = $("form[name=app_article]");
@@ -17,12 +19,22 @@ $(function () {
       $form.submit(function (event) {
         event.preventDefault();
 
-        console.log(getArticleData());
-
         $.ajax({
           type: "POST",
           url: Routing.generate('app_api_article_create'),
-          data: getArticleData()
+          data: getArticleData(),
+          success: function() {
+            appendFlash(successMessage);
+          },
+          error: function(xhr, textStatus, errorThrown) {
+            if(xhr.status===401) {
+              //handle error
+              window.location.replace(Routing.generate('sylius_user_security_login'));
+            } else {
+              var message = xhr.responseJSON.error.exception[0].message;
+              appendFlash(message, null, 'danger');
+            }
+          }
         });
 
       });
@@ -147,6 +159,13 @@ $(function () {
         .replace(/\s+/g, '-')
         .replace(/[^a-z0-9-]/g, '')
         .replace(/\-{2,}/g, '-');
+    }
+
+    function appendFlash(successMessage, messageHolderSelector, type) {
+      type = type ? type : 'success';
+      $("html, body").animate({ scrollTop: 0 }, "slow");
+      messageHolderSelector = messageHolderSelector ? messageHolderSelector : '#flashes';
+      $(messageHolderSelector).html('<div class="alert alert-' + type + '"><a class="close" data-dismiss="alert" href="#">×</a>' + successMessage + '</div>');
     }
 
   });

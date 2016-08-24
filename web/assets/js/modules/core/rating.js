@@ -48,7 +48,7 @@ $(function() {
                 appendFlash(successMessage);
             },
             error: function(xhr, textStatus, errorThrown) {
-                if(xhr.status==403 || xhr.status==405) {
+                if(xhr.status===401) {
                     //handle error
                     window.location.replace(Routing.generate('sylius_user_security_login'));
                 }
