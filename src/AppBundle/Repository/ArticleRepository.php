@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Article;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
@@ -29,11 +30,11 @@ class ArticleRepository extends EntityRepository
     /**
      * @param array|null $criteria
      * @param array|null $sorting
-     * @param bool $publishable
+     * @param string|null $status
      *
      * @return Pagerfanta
      */
-    public function createFilterPaginator(array $criteria = null, array $sorting = null, $publishable = true)
+    public function createFilterPaginator(array $criteria = null, array $sorting = null, $status = Article::STATUS_PUBLISHED)
     {
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
@@ -48,10 +49,10 @@ class ArticleRepository extends EntityRepository
             unset($criteria['query']);
         }
 
-        if ($publishable) {
+        if (null !== $status) {
             $queryBuilder
-                ->andWhere($queryBuilder->expr()->eq($this->getPropertyName('publishable'), ':publishable'))
-                ->setParameter('publishable', 1);
+                ->andWhere($queryBuilder->expr()->eq($this->getPropertyName('status'), ':status'))
+                ->setParameter('status', $status);
         }
 
         if (!$sorting) {
