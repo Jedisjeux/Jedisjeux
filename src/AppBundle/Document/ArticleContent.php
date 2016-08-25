@@ -57,6 +57,7 @@ class ArticleContent extends ContainerBlock
     {
         parent::__construct();
         $this->state = self::WRITING;
+        $this->publishable = false;
     }
 
     /**

@@ -45,7 +45,7 @@ class ArticleContentType extends AbstractResourceType
                 'cascade_validation' => true,
             ])
             ->add('publishable', null, [
-                'label' => 'label.published'
+                'label' => 'label.publishable'
             ])
             ->add('publishStartDate', 'datetime', [
                 'label' => 'label.start_date',

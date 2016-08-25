@@ -31,7 +31,7 @@ class ArticleType extends AbstractResourceType
         $builder
             ->add('document', 'app_article_content')
             ->add('status', ChoiceType::class, [
-                'label' => 'label.show_only_suggestions_with_status',
+                'label' => 'label.status',
                 'required' => false,
                 'choices' => [
                     'label.new' => Article::STATUS_NEW,

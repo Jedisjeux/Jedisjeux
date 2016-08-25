@@ -5,6 +5,13 @@
         <h5><i class="fa fa-info color"></i> Informations</h5>
         <div class="widget-content">
             {{ form_row(form.document.title) }}
+            {{ form_row(form.status) }}
+        </div>
+    </div>
+
+    <div class="s-widget">
+        <h5><i class="fa fa-clock-o color"></i> Publication programmée</h5>
+        <div class="widget-content">
             <div class="form-group">
                 {{ form_label(form.document.publishable) }}
                 <div class="col-sm-9">
@@ -12,12 +19,6 @@
                     {{ form_errors(form.document.publishable) }}
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="s-widget">
-        <h5><i class="fa fa-clock-o color"></i> Publication programmée</h5>
-        <div class="widget-content">
             {{ form_row(form.document.publishStartDate) }}
             {{ form_row(form.document.publishEndDate) }}
         </div>
