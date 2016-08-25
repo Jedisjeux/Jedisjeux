@@ -17,14 +17,11 @@
 
             <div class="col-md-6 col-sm-6">
 
-                <h4 class="mag-head"><i class="fa fa-cloud color"></i> News Récentes</h4>
+                <h4 class="mag-head"><i class="fa fa-cloud color"></i> Articles Récents</h4>
                 <!-- TODO publishedAt -->
                 {{ render(url('app_partial_article_index', {
                     'template': 'frontend/article/_magazine_items_one_and_list_items.html.twig',
                     'paginate': 5,
-                    'criteria': {
-                        'publishable': 1,
-                    },
                     'sorting': {
                         'publishStartDate': 'desc'
                     }} )) }}
@@ -33,14 +30,13 @@
             </div>
 
             <div class="col-md-6 col-sm-6">
-                <h4 class="mag-head"><i class="fa fa-desktop color"></i> Top News</h4>
+                <h4 class="mag-head"><i class="fa fa-desktop color"></i> Top Articles</h4>
 
                 <!-- TODO publishedAt -->
                 {{ render(url('app_partial_article_index', {
                     'template': 'frontend/article/_magazine_items_one_and_list_items_image_less.html.twig',
                     'paginate': 5,
                     'criteria': {
-                        'publishable': 1,
                         'publishStartDateFrom': '1 months ago'|date('Y-m-d')
                     },
                     'sorting': {
