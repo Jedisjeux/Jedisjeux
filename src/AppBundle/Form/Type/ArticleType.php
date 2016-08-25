@@ -11,7 +11,9 @@
 
 namespace AppBundle\Form\Type;
 
+use AppBundle\Entity\Article;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -26,7 +28,19 @@ class ArticleType extends AbstractResourceType
     {
         parent::buildForm($builder, $options);
 
-        $builder->add('document', 'app_article_content');
+        $builder
+            ->add('document', 'app_article_content')
+            ->add('status', ChoiceType::class, [
+                'label' => 'label.show_only_suggestions_with_status',
+                'required' => false,
+                'choices' => [
+                    'label.new' => Article::STATUS_NEW,
+                    'label.need_a_review' => Article::STATUS_NEED_A_REVIEW,
+                    'label.ready_to_publish' => Article::STATUS_READY_TO_PUBLISH,
+                    'label.published' => Article::STATUS_PUBLISHED,
+                ],
+                'choices_as_values' => true,
+            ]);
     }
 
     public function getName()

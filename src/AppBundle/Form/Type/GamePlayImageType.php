@@ -1,9 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: loic
- * Date: 07/04/2016
- * Time: 13:25
+
+/*
+ * This file is part of Jedisjeux project.
+ *
+ * (c) Jedisjeux
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AppBundle\Form\Type;
@@ -16,22 +19,21 @@ use Symfony\Component\Form\FormBuilderInterface;
 class GamePlayImageType extends AbstractImageType
 {
     /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('description', null, array(
+            ->add('description', null, [
                 'required' => false,
                 'label' => 'label.description',
-            ));
+            ]);
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getName()
     {

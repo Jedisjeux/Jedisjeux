@@ -13,6 +13,8 @@ namespace AppBundle\Form\Filter;
 
 use AppBundle\Entity\Article;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,13 +29,13 @@ class ArticleFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('query', 'text', array(
+            ->add('query', TextType::class, [
                 'label' => 'label.search',
                 'required' => false,
-            ))
-            ->add('status', 'choice', array(
+            ])
+            ->add('status', ChoiceType::class, [
                 'label' => 'label.show_only_suggestions_with_status',
-                'required' => false,
+                'required' => true,
                 'choices' => [
                     'label.new' => Article::STATUS_NEW,
                     'label.need_a_review' => Article::STATUS_NEED_A_REVIEW,
@@ -41,7 +43,7 @@ class ArticleFilterType extends AbstractType
                     'label.published' => Article::STATUS_PUBLISHED,
                 ],
                 'choices_as_values' => true,
-            ));
+            ]);
     }
 
     /**
@@ -50,10 +52,10 @@ class ArticleFilterType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'data_class' => null,
                 'criteria' => null,
-            ));
+            ]);
     }
 
     /**

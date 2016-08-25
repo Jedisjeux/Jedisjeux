@@ -44,10 +44,10 @@ class ArticleContentType extends AbstractResourceType
                 'by_reference' => false,
                 'cascade_validation' => true,
             ])
-            ->add('publishable', null, array(
+            ->add('publishable', null, [
                 'label' => 'label.published'
-            ))
-            ->add('publishStartDate', 'datetime', array(
+            ])
+            ->add('publishStartDate', 'datetime', [
                 'label' => 'label.start_date',
                 'widget' => 'single_text',
                 'html5' => false,
@@ -55,16 +55,16 @@ class ArticleContentType extends AbstractResourceType
                 'attr' => array(
                     'class' => 'datetime',
                 )
-            ))
-            ->add('publishEndDate', 'datetime', array(
+            ])
+            ->add('publishEndDate', 'datetime', [
                 'label' => 'label.end_date',
                 'widget' => 'single_text',
                 'html5' => false,
                 'required' => false,
-                'attr' => array(
+                'attr' => [
                     'class' => 'datetime',
-                )
-            ));
+                ]
+            ]);
     }
 
     /**

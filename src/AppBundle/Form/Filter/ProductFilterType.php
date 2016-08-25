@@ -13,6 +13,8 @@ namespace AppBundle\Form\Filter;
 
 use AppBundle\Entity\Product;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,11 +29,11 @@ class ProductFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('query', 'text', array(
+            ->add('query', TextType::class, [
                 'label' => 'label.search',
                 'required' => false,
-            ))
-            ->add('status', 'choice', array(
+            ])
+            ->add('status', ChoiceType::class, [
                 'label' => 'label.show_only_suggestions_with_status',
                 'required' => false,
                 'choices' => [
@@ -42,7 +44,7 @@ class ProductFilterType extends AbstractType
                     'label.published' => Product::PUBLISHED,
                 ],
                 'choices_as_values' => true,
-            ));
+            ]);
     }
 
     /**
@@ -51,10 +53,10 @@ class ProductFilterType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'data_class' => null,
                 'criteria' => null,
-            ));
+            ]);
     }
 
     /**

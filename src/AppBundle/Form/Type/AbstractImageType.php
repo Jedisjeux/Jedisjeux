@@ -1,9 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: loic_425
- * Date: 05/04/16
- * Time: 13:18
+
+/*
+ * This file is part of Jedisjeux project.
+ *
+ * (c) Jedisjeux
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AppBundle\Form\Type;
@@ -17,12 +20,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 class AbstractImageType extends AbstractResourceType
 {
     /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('file');
     }
-} 
+}

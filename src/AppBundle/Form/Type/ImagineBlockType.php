@@ -1,9 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: loic
- * Date: 26/01/2016
- * Time: 12:57
+
+/*
+ * This file is part of Jedisjeux project.
+ *
+ * (c) Jedisjeux
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AppBundle\Form\Type;
@@ -24,44 +27,44 @@ class ImagineBlockType extends AbstractResourceType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('name', null, array(
+            ->add('name', null, [
                 'label' => 'label.internal_name'
-            ))
-           ->add('image', 'cmf_media_image', array(
+            ])
+           ->add('image', 'cmf_media_image', [
                 'label' => 'label.image',
-                'attr' => array('class' => 'imagine-thumbnail'),
+                'attr' => ['class' => 'imagine-thumbnail'],
                 'required' => false
-            ))
-            ->add('label', null, array(
+            ])
+            ->add('label', null, [
                 'label' => 'label.description',
                 'required' => false,
-            ))
-            ->add('linkUrl', null, array(
+            ])
+            ->add('linkUrl', null, [
                 'label' => 'label.link_url',
                 'required' => false
-            ))
-            ->add('publishable', null, array(
+            ])
+            ->add('publishable', null, [
                 'label' => 'label.publishable',
                 'required' => false,
-            ))
-            ->add('publishStartDate', 'datetime', array(
+            ])
+            ->add('publishStartDate', 'datetime', [
                 'label' => 'label.publish_start_date',
                 'widget' => 'single_text',
                 'html5' => false,
                 'required' => false,
-                'attr' => array(
+                'attr' => [
                     'class' => 'datetime',
-                )
-            ))
-            ->add('publishEndDate', 'datetime', array(
+                ]
+            ])
+            ->add('publishEndDate', 'datetime', [
                 'label' => 'label.publish_end_date',
                 'widget' => 'single_text',
                 'html5' => false,
                 'required' => false,
-                'attr' => array(
+                'attr' => [
                     'class' => 'datetime',
-                )
-            ));
+                ]
+            ]);
     }
 
     public function getName()

@@ -25,15 +25,15 @@ class BlockquoteBlockType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options = array())
+    public function buildForm(FormBuilderInterface $builder, array $options = [])
     {
         $builder
-            ->add('name', null, array(
+            ->add('name', null, [
                 'label' => 'label.internal_name'
-            ))
-            ->add('body', TextareaType::class, array(
+            ])
+            ->add('body', TextareaType::class, [
                 'label' => 'label.body',
-            ))
+            ])
             ->add('_type', HiddenType::class, [
                 'data' => 'blockquote',
                 'mapped' => false,

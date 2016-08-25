@@ -1,9 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: loic
- * Date: 07/04/2016
- * Time: 13:21
+
+/*
+ * This file is part of Jedisjeux project.
+ *
+ * (c) Jedisjeux
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AppBundle\Form\Type;
@@ -17,8 +20,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 class GamePlayType extends AbstractResourceType
 {
     /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -27,9 +29,9 @@ class GamePlayType extends AbstractResourceType
                 'label' => 'label.played_at',
                 'required' => false,
                 'widget' => 'single_text',
-                'widget_addon_append' => array(
+                'widget_addon_append' => [
                     'icon' => 'calendar'
-                ),
+                ],
                 'html5' => false,
                 'attr' => [
                     'class' => 'date',
@@ -39,9 +41,9 @@ class GamePlayType extends AbstractResourceType
                 'label' => 'label.duration',
                 'required' => false,
                 'widget' => 'single_text',
-                'widget_addon_append' => array(
+                'widget_addon_append' => [
                     'icon' => 'time'
-                ),
+                ],
                 'html5' => false,
                 'attr' => [
                     'class' => 'time',
@@ -51,38 +53,38 @@ class GamePlayType extends AbstractResourceType
                 'label' => 'label.player_count',
                 'required' => false,
             ])
-            ->add('images', 'collection', array(
+            ->add('images', 'collection', [
                 'type' => 'app_game_play_image',
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
                 'prototype' => true,
-                'widget_add_btn' => array('label' => "label.add_image"),
+                'widget_add_btn' => ['label' => "label.add_image"],
                 'show_legend' => false, // dont show another legend of subform
-                'options' => array( // options for collection fields
+                'options' => [ // options for collection fields
                     'label_render' => false,
                     'horizontal_input_wrapper_class' => "col-lg-8",
-                    'widget_remove_btn' => array('label' => "label.remove_this_image"),
-                )
-            ))
-            ->add('players', 'collection', array(
+                    'widget_remove_btn' => ['label' => "label.remove_this_image"],
+                ]
+            ])
+            ->add('players', 'collection', [
                 'type' => 'app_player',
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
                 'prototype' => true,
-                'widget_add_btn' => array('label' => "label.add_player"),
+                'widget_add_btn' => ['label' => "label.add_player"],
                 'show_legend' => false, // dont show another legend of subform
-                'options' => array( // options for collection fields
+                'options' => [ // options for collection fields
                     'label_render' => false,
                     'horizontal_input_wrapper_class' => "col-lg-8",
-                    'widget_remove_btn' => array('label' => "label.remove_this_player"),
-                )
-            ));
+                    'widget_remove_btn' => ['label' => "label.remove_this_player"],
+                ]
+            ]);
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getName()
     {

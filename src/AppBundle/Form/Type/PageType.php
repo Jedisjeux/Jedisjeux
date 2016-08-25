@@ -1,9 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: loic
- * Date: 13/01/2016
- * Time: 13:17
+
+/*
+ * This file is part of Jedisjeux project.
+ *
+ * (c) Jedisjeux
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AppBundle\Form\Type;
@@ -17,42 +20,45 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class PageType extends AbstractType
 {
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('name', 'text', array(
+            ->add('name', 'text', [
                 'label' => 'label.internal_name'
-            ))
-            ->add('title', 'text', array(
+            ])
+            ->add('title', 'text', [
                 'label' => 'label.title'
-            ))
-            ->add('body', 'ckeditor', array(
+            ])
+            ->add('body', 'ckeditor', [
                 'required' => false,
                 'label'    => 'label.body',
-            ))
-            ->add('publishable', null, array(
+            ])
+            ->add('publishable', null, [
                 'label' => 'label.publishable'
-            ))
-            ->add('publishStartDate', 'datetime', array(
+            ])
+            ->add('publishStartDate', 'datetime', [
                 'label' => 'label.publish_start_date',
                 'widget' => 'single_text',
                 'html5' => false,
                 'required' => false,
-                'attr' => array(
+                'attr' => [
                     'class' => 'datetime',
-                )
-            ))
-            ->add('publishEndDate', 'datetime', array(
+                ]
+            ])
+            ->add('publishEndDate', 'datetime', [
                 'label' => 'label.publish_end_date',
                 'widget' => 'single_text',
                 'html5' => false,
                 'required' => false,
-                'attr' => array(
+                'attr' => [
                     'class' => 'datetime',
-                )
-            ));
+                ]
+            ]);
     }
 
     /**
@@ -60,9 +66,9 @@ class PageType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'Symfony\Cmf\Bundle\ContentBundle\Doctrine\Phpcr\StaticContent'
-        ));
+        ]);
     }
 
     public function getName()

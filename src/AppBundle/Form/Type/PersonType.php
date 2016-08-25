@@ -1,9 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: loic
- * Date: 01/04/16
- * Time: 20:30
+
+/*
+ * This file is part of Jedisjeux project.
+ *
+ * (c) Jedisjeux
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AppBundle\Form\Type;
@@ -25,17 +28,17 @@ class PersonType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('mainImage', 'file', array(
+            ->add('mainImage', 'file', [
                 'label' => 'label.image',
                 'required' => false,
-            ))
-            ->add('lastName', null, array(
+            ])
+            ->add('lastName', null, [
                 'label' => 'label.last_name',
-            ))
-            ->add('firstName', null, array(
+            ])
+            ->add('firstName', null, [
                 'label' => 'label.first_name',
                 'required' => false,
-            ))
+            ])
             ->add('zone', 'entity', array(
                 'label' => 'label.zone',
                 'class' => 'AppBundle:Taxon',
@@ -53,14 +56,14 @@ class PersonType extends AbstractResourceType
                 'placeholder' => 'Choisissez une zone',
                 'required' => false,
             ))
-            ->add('website', null, array(
+            ->add('website', null, [
                 'label' => 'label.website',
                 'required' => false,
-            ))
-            ->add('description', 'ckeditor', array(
+            ])
+            ->add('description', 'ckeditor', [
                 'label' => 'label.description',
                 'required' => false,
-            ))
+            ])
         ;
     }
 
