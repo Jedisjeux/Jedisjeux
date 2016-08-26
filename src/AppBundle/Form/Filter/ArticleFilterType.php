@@ -12,6 +12,8 @@
 namespace AppBundle\Form\Filter;
 
 use AppBundle\Entity\Article;
+use AppBundle\Entity\Taxon;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -34,8 +36,8 @@ class ArticleFilterType extends AbstractType
                 'required' => false,
             ])
             ->add('status', ChoiceType::class, [
-                'label' => 'label.show_only_suggestions_with_status',
-                'required' => true,
+                'label' => 'label.status',
+                'required' => false,
                 'choices' => [
                     'label.new' => Article::STATUS_NEW,
                     'label.need_a_review' => Article::STATUS_NEED_A_REVIEW,
@@ -43,7 +45,24 @@ class ArticleFilterType extends AbstractType
                     'label.published' => Article::STATUS_PUBLISHED,
                 ],
                 'choices_as_values' => true,
-            ]);
+            ])
+            ->add('mainTaxon', 'entity', array(
+                'label' => 'label.category',
+                'class' => 'AppBundle:Taxon',
+                'choice_label' => 'name',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('o')
+                        ->join('o.root', 'rootTaxon')
+                        ->where('rootTaxon.code = :code')
+                        ->andWhere('o.parent IS NOT NULL')
+                        ->setParameter('code', Taxon::CODE_ARTICLE)
+                        ->orderBy('o.left');
+                },
+                'expanded' => false,
+                'multiple' => false,
+                'placeholder' => '',
+                'required' => false,
+            ));
     }
 
     /**
