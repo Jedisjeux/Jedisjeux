@@ -40,6 +40,10 @@ class ArticleType extends AbstractResourceType
                     'label.published' => Article::STATUS_PUBLISHED,
                 ],
                 'choices_as_values' => true,
+            ])
+            ->add('body', 'ckeditor', [
+                'mapped' => false,
+                'required' => false,
             ]);
     }
 

@@ -7,6 +7,7 @@ $(function () {
 
     var $form = $("form[name=app_article]");
     var $articleContent = $("#articleContent");
+    var editorId = 0;
 
     initDraggableEvents();
     initDroppableEvents();
@@ -23,11 +24,11 @@ $(function () {
           type: "POST",
           url: Routing.generate('app_api_article_create'),
           data: getArticleData(),
-          success: function() {
+          success: function () {
             appendFlash(successMessage);
           },
-          error: function(xhr, textStatus, errorThrown) {
-            if(xhr.status===401) {
+          error: function (xhr, textStatus, errorThrown) {
+            if (xhr.status === 401) {
               //handle error
               window.location.replace(Routing.generate('sylius_user_security_login'));
             } else {
@@ -59,12 +60,14 @@ $(function () {
       $(".droppable").droppable({
         drop: function (event, ui) {
           var $template = $("#" + ui.draggable.data('template'));
-
-          var $block = $template.children().first().clone();
-          $block.attr('contenteditable', 'true');
-          console.log($block);
+          var $block = $('.block-editing', $template).clone();
+          editorId = editorId + 1;
+          $block
+            .attr('contenteditable', 'true')
+            .attr('id', 'editor' + editorId);
 
           $articleContent.append($block);
+          CKEDITOR.inline('editor' + editorId);
         }
       });
     }
@@ -111,9 +114,9 @@ $(function () {
           imagePosition: $block.attr('data-image-position'),
           children: [{
             name: 'image' + key/*,
-            image: {
-              ContentUrl: 'https://placeholdit.imgix.net/~text?txtsize=150&txt=Image...&w=1600&h=900'
-            }*/
+             image: {
+             ContentUrl: 'https://placeholdit.imgix.net/~text?txtsize=150&txt=Image...&w=1600&h=900'
+             }*/
           }],
           class: null,
           _type: $block.attr('data-type')
@@ -164,7 +167,7 @@ $(function () {
 
     function appendFlash(successMessage, messageHolderSelector, type) {
       type = type ? type : 'success';
-      $("html, body").animate({ scrollTop: 0 }, "slow");
+      $("html, body").animate({scrollTop: 0}, "slow");
       messageHolderSelector = messageHolderSelector ? messageHolderSelector : '#flashes';
       $(messageHolderSelector).html('<div class="alert alert-' + type + '"><a class="close" data-dismiss="alert" href="#">×</a>' + successMessage + '</div>');
     }

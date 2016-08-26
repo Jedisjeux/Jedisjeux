@@ -21,6 +21,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8">
+
+                <div style="display: none">
+                    {{ form_row(form.body) }}
+                </div>
+
                 <div id="articleContent">
 
                 </div>
@@ -75,7 +80,6 @@
                 </div>
 
             </div>
-
 
             <div class="col-md-4">
                 {% include "backend/article/_sidebar.html.twig" %}
