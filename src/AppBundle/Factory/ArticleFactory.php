@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of VPS.
+ * This file is part of Jedisjeux project.
  *
- * (c) Mobizel
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -15,6 +15,7 @@ use AppBundle\Entity\Article;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Component\User\Context\CustomerContextInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -32,6 +33,11 @@ class ArticleFactory extends Factory
     protected $productRepository;
 
     /**
+     * @var CustomerContextInterface
+     */
+    protected $customerContext;
+
+    /**
      * @return Article
      */
     public function createNew()
@@ -40,6 +46,7 @@ class ArticleFactory extends Factory
         $article = parent::createNew();
         $articleContent = $this->articleContentFactory->createNew();
         $article->setDocument($articleContent);
+        $article->setAuthor($this->customerContext->getCustomer());
 
         return $article;
     }
@@ -69,10 +76,7 @@ class ArticleFactory extends Factory
     {
         $product = $this->productRepository->find($productId);
 
-        $article = $this->createNew();
-        $article->setProduct($product);
-
-        return $article;
+        return $this->createForProduct($product);
     }
 
     /**
@@ -80,14 +84,14 @@ class ArticleFactory extends Factory
      *
      * @return Article
      */
-    public function createForTest(ProductInterface $product)
+    public function createReviewArticleForProduct(ProductInterface $product)
     {
         $article = $this->createForProduct($product);
 
-        $faker = \Faker\Factory::create();
-
         $articleContent = $article->getDocument();
-        $articleContent->setTitle($faker->title);
+        $articleContent->setTitle(sprintf('Critique de %s', (string)$product));
+
+        // TODO set review-article taxon
 
         return $article;
     }
@@ -106,5 +110,13 @@ class ArticleFactory extends Factory
     public function setProductRepository($productRepository)
     {
         $this->productRepository = $productRepository;
+    }
+
+    /**
+     * @param CustomerContextInterface $customerContext
+     */
+    public function setCustomerContext($customerContext)
+    {
+        $this->customerContext = $customerContext;
     }
 }

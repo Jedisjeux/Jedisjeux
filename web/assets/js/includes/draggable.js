@@ -81,6 +81,7 @@ $(function () {
       });
 
       return {
+        status: $('#app_article_status').val(),
         document: {
           name: slugMe(title),
           title: title,

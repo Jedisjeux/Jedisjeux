@@ -75,19 +75,18 @@ class ApiContext extends DefaultContext
     }
 
     /**
-     * @Then /^the response should be JSON$/
+     * @Then /^(?:|the )response should be JSON$/
      */
     public function theResponseShouldBeJson()
     {
-        $data = json_decode(parent::$response->getBody(true));
-
+        $data = json_decode(parent::$response->getBody());
         if (empty($data)) {
-            throw new \Exception("Response was not JSON\n" . parent::$response);
+            throw new \Exception("Response was not JSON\n" . parent::$response->getBody()->getContents());
         }
     }
 
     /**
-     * @Then /^the api response status code should be (\d+)$/
+     * @Then /^(?:|the )api response status code should be (\d+)$/
      *
      * @param $httpStatus
      * @throws \Exception
@@ -101,14 +100,14 @@ class ApiContext extends DefaultContext
     }
 
     /**
-     * @Then /^the response is an array containing "([^"]*)" rows$/
+     * @Then /^(?:|the )response is an array containing "([^"]*)" rows$/
      *
      * @param $nbRows
      * @throws \Exception
      */
     public function theResponseIsAnArrayContaining($nbRows)
     {
-        $data = json_decode(parent::$response->getBody(true));
+        $data = json_decode(parent::$response->getBody());
         if (!empty($data)) {
             if (!is_array($data)) {
                 throw new \Exception("Response is not an array!\n");
@@ -118,12 +117,12 @@ class ApiContext extends DefaultContext
                 throw new \Exception("The array contains " . count($data) . " but it should contain " . $nbRows . " rows !\n");
             }
         } else {
-            throw new \Exception("Response was not JSON\n" . parent::$response->getBody(true));
+            throw new \Exception("Response was not JSON\n" . parent::$response->getBody()->getContents());
         }
     }
 
     /**
-     * @Then /^the response has a row "([^"]*)" with property "([^"]*)"$/
+     * @Then /^(?:|the )response has a row "([^"]*)" with property "([^"]*)"$/
      *
      * @param $key
      * @param $propertyName
@@ -131,7 +130,7 @@ class ApiContext extends DefaultContext
      */
     public function theResponseHasARowWithProperty($key, $propertyName)
     {
-        $data = json_decode(parent::$response->getBody(true));
+        $data = json_decode(parent::$response->getBody());
         if (!empty($data)) {
             if (!is_array($data)) {
                 throw new \Exception("Response is not an array!\n");
@@ -145,12 +144,12 @@ class ApiContext extends DefaultContext
                 throw new \Exception("Property '" . $propertyName . "' does not appear in row with key " . $key . " but it should\n");
             }
         } else {
-            throw new \Exception("Response was not JSON\n" . parent::$response->getBody(true));
+            throw new \Exception("Response was not JSON\n" . parent::$response->getBody()->getContents());
         }
     }
 
     /**
-     * @Then /^the response has a row "([^"]*)" with property "([^"]*)" equals to "([^"]*)"$/
+     * @Then /^(?:|the )response has a row "([^"]*)" with property "([^"]*)" equals to "([^"]*)"$/
      *
      * @param $key
      * @param $propertyName
@@ -159,7 +158,7 @@ class ApiContext extends DefaultContext
      */
     public function theResponseHasARowWithPropertyEqualsTo($key, $propertyName, $value)
     {
-        $data = json_decode(parent::$response->getBody(true));
+        $data = json_decode(parent::$response->getBody());
         if (!empty($data)) {
             if (!is_array($data)) {
                 throw new \Exception("Response is not an array!\n");
@@ -179,31 +178,31 @@ class ApiContext extends DefaultContext
                 throw new \Exception("Value is equals to '" . $actualValue . "' but it should be equals to " . $value . "\n");
             }
         } else {
-            throw new \Exception("Response was not JSON\n" . $this->response->getBody(true));
+            throw new \Exception("Response was not JSON\n" . parent::$response->getBody()->getContents());
         }
     }
 
     /**
-     * @Then /^the response has a "([^"]*)" property$/
+     * @Then /^(?:|the )response has a "([^"]*)" property$/
      *
      * @param $propertyName
      * @throws \Exception
      */
     public function theResponseHasAProperty($propertyName)
     {
-        $data = json_decode(parent::$response->getBody(true), true);
+        $data = json_decode(parent::$response->getBody(), true);
         if (!empty($data)) {
             if (!$this->isKeyExist($propertyName, $data)) {
                 throw new \Exception("Property '" . $propertyName . "' is not set!\n");
             }
         } else {
-            throw new \Exception("Response was not JSON\n" . parent::$response->getBody(true));
+            throw new \Exception("Response was not JSON\n" . parent::$response->getBody()->getContents());
         }
     }
 
     /**
-     * @Then /^the response has a "([^"]*)" property equals to (.*)$/
-     * @Then /^the "([^"]*)" property equals "([^"]*)"$/
+     * @Then /^(?:|the )response has a "([^"]*)" property equals to "?(.*?)"?$/
+     * @Then /^(?:|the )"([^"]*)" property equals to "([^"]*)"$/
      *
      * @param string $propertyName
      * @param mixed $propertyValue
@@ -211,26 +210,26 @@ class ApiContext extends DefaultContext
      */
     public function theResponseHasAPropertyEquals($propertyName, $propertyValue)
     {
-        $data = json_decode(parent::$response->getBody(true), true);
+        $data = json_decode(parent::$response->getBody(), true);
 
-        if (!empty($data)) {
-            if (!$this->isKeyExist($propertyName, $data)) {
-                throw new \Exception("Property '" . $propertyName . "' is not set!\n");
-            }
-
-            $currentPropertyValue = $this->findKeyValue($propertyName, $data);
-
-            if (is_array($currentPropertyValue)) {
-                $currentPropertyValue = json_encode($currentPropertyValue);
-            }
-
-            if ($currentPropertyValue !== $propertyValue) {
-                throw new \Exception("Property '" . $propertyName . "' equals ".$currentPropertyValue." but it should equals ".$propertyValue." \n");
-            }
-
-        } else {
-            throw new \Exception("Response was not JSON\n" . parent::$response->getBody(true));
+        if (empty($data)) {
+            throw new \Exception("Response was not array\n" . parent::$response->getBody()->getContents());
         }
+
+        if (!$this->isKeyExist($propertyName, $data)) {
+            throw new \Exception("Property '" . $propertyName . "' is not set!\n");
+        }
+
+        $currentPropertyValue = $this->findKeyValue($propertyName, $data);
+
+        if (is_array($currentPropertyValue)) {
+            $currentPropertyValue = json_encode($currentPropertyValue);
+        }
+
+        if ($currentPropertyValue != $propertyValue) {
+            throw new \Exception("Property '" . $propertyName . "' equals " . $currentPropertyValue . " but it should equals " . $propertyValue . " \n");
+        }
+
     }
 
     /**
@@ -239,7 +238,8 @@ class ApiContext extends DefaultContext
      *
      * @return bool
      */
-    protected function isKeyExist($key, array $array) {
+    protected function isKeyExist($key, array $array)
+    {
 
         // is in base array?
         if (array_key_exists($key, $array)) {
@@ -264,7 +264,8 @@ class ApiContext extends DefaultContext
      *
      * @return mixed|null
      */
-    protected function findKeyValue($key, array $array) {
+    protected function findKeyValue($key, array $array)
+    {
 
         // is in base array?
         if (array_key_exists($key, $array)) {

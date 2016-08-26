@@ -32,7 +32,7 @@ class ArticleType extends AbstractResourceType
             ->add('document', 'app_article_content')
             ->add('status', ChoiceType::class, [
                 'label' => 'label.status',
-                'required' => false,
+                'required' => true,
                 'choices' => [
                     'label.new' => Article::STATUS_NEW,
                     'label.need_a_review' => Article::STATUS_NEED_A_REVIEW,
