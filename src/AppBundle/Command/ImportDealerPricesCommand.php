@@ -227,8 +227,11 @@ EOT
                 case 'disponible':
                     $status = DealerPrice::STATUS_AVAILABLE;
                     break;
+                case 'indisponible':
+                    $status = DealerPrice::STATUS_OUT_OF_STOCK;
+                    break;
                 default:
-                    throw new \Exception(sprintf('Shopper with code %s does not exist', $code));
+                    throw new \Exception(sprintf('Status with code %s does not exist', $rowData[3]));
             }
 
             $data[] = [
