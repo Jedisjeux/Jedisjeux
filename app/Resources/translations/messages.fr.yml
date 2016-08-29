@@ -60,6 +60,8 @@ label:
   played_at: Joué le
   players: Joueurs
   player_count: Nombre de joueurs
+  product: Produit
+  price: Prix
   publishable: Publiable
   published: Publié
   published_at: Publié le
@@ -72,12 +74,14 @@ label:
   search: Rechercher
   search_query: Recherche...
   score: Score
+  shopper: Vendeur
   short_description: Description courte
   show: Voir
   start_date: Date de début
   status: Statut
   themes: Thèmes
   title: Titre
+  url: Url
   username: Nom d'utilisateur
   username_or_email: Nom d'utilisateur ou email
   validate: Valider

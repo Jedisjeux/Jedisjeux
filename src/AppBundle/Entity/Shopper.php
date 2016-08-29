@@ -104,4 +104,12 @@ class Shopper implements ResourceInterface
 
         return $this;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }

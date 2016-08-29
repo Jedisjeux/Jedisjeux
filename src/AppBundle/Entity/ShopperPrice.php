@@ -26,6 +26,9 @@ class ShopperPrice implements ResourceInterface
     use IdentifiableTrait,
         Timestampable;
 
+    const STATUS_AVAILABLE = 'available';
+    const STATUS_OUT_OF_STOCK = 'out-of-stock';
+
     /**
      * @var Shopper
      *
@@ -60,6 +63,13 @@ class ShopperPrice implements ResourceInterface
      * @ORM\Column(type="integer")
      */
     protected $price;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $status;
 
     /**
      * @return Shopper
@@ -157,6 +167,26 @@ class ShopperPrice implements ResourceInterface
     public function setPrice($price)
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     *
+     * @return $this
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
 
         return $this;
     }

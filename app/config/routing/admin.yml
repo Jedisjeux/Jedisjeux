@@ -16,3 +16,6 @@ sylius_admin_user:
 
 sylius_admin_product:
     resource: backend/product.yml
+
+app_backend_shopper_price:
+    resource: backend/shopper_price.yml

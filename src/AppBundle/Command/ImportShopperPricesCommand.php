@@ -193,6 +193,7 @@ EOT
             ->setUrl($data['url'])
             ->setName($data['product_name'])
             ->setPrice($price)
+            ->setStatus($data['status'])
             ->setUpdatedAt(new \DateTime()); // ensure doctrine will update data when no data has changed
 
         return $shopperPrice;
@@ -211,6 +212,8 @@ EOT
 
     /**
      * @return array
+     *
+     * @throws \Exception
      */
     protected function getCsvData()
     {
@@ -220,11 +223,19 @@ EOT
         foreach (file($file) as $row) {
             $rowData = str_getcsv($row, ';');
 
+            switch ($rowData[3]) {
+                case 'disponible':
+                    $status = ShopperPrice::STATUS_AVAILABLE;
+                    break;
+                default:
+                    throw new \Exception(sprintf('Shopper with code %s does not exist', $code));
+            }
+
             $data[] = [
                 'url' => $rowData[0],
                 'product_name' => $rowData[1],
                 'price' => $rowData[2],
-                'status' => $rowData[3],
+                'status' => $status,
                 'publisher' => isset($rowData[4]) ? $rowData[4] : null,
                 'barcode' => isset($rowData[5]) ? $rowData[5] : null,
             ];
