@@ -27,7 +27,7 @@ class Shopper implements ResourceInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string", unique=true, nullable=true)
+     * @ORM\Column(type="string", unique=true)
      */
     protected $code;
 
@@ -40,6 +40,8 @@ class Shopper implements ResourceInterface
 
     /**
      * @var boolean
+     *
+     * @ORM\Column(type="boolean", name="is_active")
      */
     protected $active;
 

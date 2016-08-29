@@ -125,14 +125,9 @@ sylius_resource:
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
                 form:
                     default: AppBundle\Form\Type\ArticleContentType
-        app.single_image_block:
-            driver: doctrine/phpcr-odm
+        app.avatar:
             classes:
-                model: AppBundle\Document\SingleImageBlock
-                factory: AppBundle\Factory\SingleImageBlockFactory
-                repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
-                form:
-                    default: AppBundle\Form\Type\SingleImageBlockType
+                model: AppBundle\Entity\Avatar
         app.blockquote_block:
             driver: doctrine/phpcr-odm
             classes:
@@ -148,9 +143,6 @@ sylius_resource:
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
                 form:
                     default: AppBundle\Form\Type\ImagineBlockType
-        app.country:
-            classes:
-                model: AppBundle\Entity\Country
         app.person:
             classes:
                 model: AppBundle\Entity\Person
@@ -161,6 +153,23 @@ sylius_resource:
         app.person_image:
             classes:
                 model: AppBundle\Entity\PersonImage
+        app.single_image_block:
+            driver: doctrine/phpcr-odm
+            classes:
+                model: AppBundle\Document\SingleImageBlock
+                factory: AppBundle\Factory\SingleImageBlockFactory
+                repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
+                form:
+                    default: AppBundle\Form\Type\SingleImageBlockType
+        app.shopper:
+            classes:
+                model: AppBundle\Entity\Shopper
+        app.shopper_price:
+            classes:
+                model: AppBundle\Entity\ShopperPrice
+        app.country:
+            classes:
+                model: AppBundle\Entity\Country
         app.game_play:
             classes:
                 model: AppBundle\Entity\GamePlay
@@ -214,6 +223,3 @@ sylius_resource:
                 model: AppBundle\Entity\ProductVariantImage
                 form:
                     default: AppBundle\Form\Type\ProductVariantImageType
-        app.avatar:
-            classes:
-                model: AppBundle\Entity\Avatar

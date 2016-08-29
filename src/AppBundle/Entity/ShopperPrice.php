@@ -29,23 +29,30 @@ class ShopperPrice implements ResourceInterface
     /**
      * @var Shopper
      *
-     * @ORM\ManyToOne(entity="Shopper")
+     * @ORM\ManyToOne(targetEntity="Shopper")
      */
     protected $shopper;
 
     /**
-     * @var ProductVariant
+     * @var Product
      *
-     * @ORM\ManyToOne(entity="ProductVariant")
+     * @ORM\ManyToOne(targetEntity="Product")
      */
-    protected $productVariant;
+    protected $product;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", unique=true)
+     */
+    protected $url;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string")
      */
-    protected $url;
+    protected $name;
 
     /**
      * @var integer
@@ -75,21 +82,21 @@ class ShopperPrice implements ResourceInterface
     }
 
     /**
-     * @return ProductVariant
+     * @return Product
      */
-    public function getProductVariant()
+    public function getProduct()
     {
-        return $this->productVariant;
+        return $this->product;
     }
 
     /**
-     * @param ProductVariant $productVariant
+     * @param Product $product
      *
      * @return $this
      */
-    public function setProductVariant($productVariant)
+    public function setProduct($product)
     {
-        $this->productVariant = $productVariant;
+        $this->product = $product;
 
         return $this;
     }
@@ -110,6 +117,26 @@ class ShopperPrice implements ResourceInterface
     public function setUrl($url)
     {
         $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
 
         return $this;
     }
