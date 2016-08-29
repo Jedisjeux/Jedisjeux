@@ -1,0 +1,18 @@
+app_backend_dealer_price:
+    resource: |
+        alias: app.dealer_price
+        section: backend
+        templates: :backend/dealer_price
+        redirect: index
+    type: sylius.resource
+
+app_backend_dealer_price_index:
+    methods: [GET]
+    path: /dealer-prices/
+    defaults:
+        _controller: app.controller.dealer_price:indexAction
+        _sylius:
+            repository:
+                method: createFilterPaginator
+                arguments: [$criteria, $sorting]
+            template: backend/dealer_price/index.html.twig

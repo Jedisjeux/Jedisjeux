@@ -19,9 +19,9 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  * @author Loïc Frémont <loic@mobizel.com>
  *
  * @ORM\Entity
- * @ORM\Table(name="jdj_shopper_price")
+ * @ORM\Table(name="jdj_dealer_price")
  */
-class ShopperPrice implements ResourceInterface
+class DealerPrice implements ResourceInterface
 {
     use IdentifiableTrait,
         Timestampable;
@@ -30,11 +30,11 @@ class ShopperPrice implements ResourceInterface
     const STATUS_OUT_OF_STOCK = 'out-of-stock';
 
     /**
-     * @var Shopper
+     * @var Dealer
      *
-     * @ORM\ManyToOne(targetEntity="Shopper")
+     * @ORM\ManyToOne(targetEntity="Dealer")
      */
-    protected $shopper;
+    protected $dealer;
 
     /**
      * @var Product
@@ -72,21 +72,21 @@ class ShopperPrice implements ResourceInterface
     protected $status;
 
     /**
-     * @return Shopper
+     * @return Dealer
      */
-    public function getShopper()
+    public function getDealer()
     {
-        return $this->shopper;
+        return $this->dealer;
     }
 
     /**
-     * @param Shopper $shopper
+     * @param Dealer $dealer
      *
      * @return $this
      */
-    public function setShopper($shopper)
+    public function setDealer($dealer)
     {
-        $this->shopper = $shopper;
+        $this->dealer = $dealer;
 
         return $this;
     }

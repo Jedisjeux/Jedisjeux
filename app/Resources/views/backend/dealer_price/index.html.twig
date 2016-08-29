@@ -1,0 +1,78 @@
+{% extends "layout/backend_index.html.twig" %}
+{% from '::macros/misc.html.twig' import pagination %}
+{% import 'macros/buttons.html.twig' as button %}
+{% from 'macros/sorting.html.twig' import sorting %}
+{% import 'macros/modal.html.twig' as modal %}
+
+{% set sorting = app.request.get('sorting') %}
+
+{% set icon = false %}
+{% set currentOrder = null %}
+
+{% if null == sorting %}
+    {% set icon = true %}
+    {% set currentOrder = 'desc' %}
+{% endif %}
+
+{% block headline %}
+    Liste des prix
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    Liste des prix
+{% endblock %}
+
+{% block new_entity_button %}
+    <a class="btn btn-primary" href="{{ path('app_backend_dealer_price_create') }}">
+        <span class="glyphicon glyphicon-plus-sign"></span>
+        Nouvelle dealer_pricene
+    </a>
+{% endblock new_entity_button %}
+
+{% block list %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>{{ sorting('app_backend_dealer_price_index', 'label.dealer'|trans, 'dealer.name', 'asc') }}</th>
+            <th>{{ sorting('app_backend_dealer_price_index', 'label.name'|trans, 'name', 'asc') }}</th>
+            <th>{{ sorting('app_backend_dealer_price_index', 'label.product'|trans, 'product.name', 'asc') }}</th>
+            <th>{{ sorting('app_backend_dealer_price_index', 'label.price'|trans, 'price', 'asc') }}</th>
+            <th>{{ sorting('app_backend_dealer_price_index', 'label.created_at'|trans, 'createdAt', 'desc', icon, currentOrder) }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for dealer_price in dealer_prices %}
+            <tr>
+                <td>{{ dealer_price.dealer }}</td>
+                <td><a href="{{ dealer_price.url }}" target="_blank">{{ dealer_price.name }}</a></td>
+                <td>
+                    {% if dealer_price.product %}
+                        <a href="{{ path('sylius_product_show', {'slug': dealer_price.product.slug }) }}">{{ dealer_price.product }}</a>
+                    {% endif %}
+                </td>
+                <td>{{ (dealer_price.price/100)|localizedcurrency('EUR') }}</td>
+                <td>{{ dealer_price.createdAt|date('d/m/Y') }}</td>
+                <td class="text-right">
+                    <ul class="list-inline text-nowrap">
+                        <li>
+                            {{ button.edit(path('app_backend_dealer_price_update', { 'id': dealer_price.id })) }}
+                        </li>
+                        <li>
+                            {{ button.delete(path('app_backend_dealer_price_delete', { 'id': dealer_price.id })) }}
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock list %}
+
+{% block Pagination %}
+    <div class="pagination-wrapper">
+        <div class="pagination-bottom">
+            {{ pagination(dealer_prices) }}
+        </div>
+    </div>
+{% endblock %}

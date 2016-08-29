@@ -18,9 +18,9 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  * @author Loïc Frémont <loic@mobizel.com>
  *
  * @ORM\Entity
- * @ORM\Table(name="jdj_shopper")
+ * @ORM\Table(name="jdj_dealer")
  */
-class Shopper implements ResourceInterface
+class Dealer implements ResourceInterface
 {
     use IdentifiableTrait;
 

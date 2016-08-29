@@ -161,12 +161,13 @@ sylius_resource:
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
                 form:
                     default: AppBundle\Form\Type\SingleImageBlockType
-        app.shopper:
+        app.dealer:
             classes:
-                model: AppBundle\Entity\Shopper
-        app.shopper_price:
+                model: AppBundle\Entity\Dealer
+        app.dealer_price:
             classes:
-                model: AppBundle\Entity\ShopperPrice
+                model: AppBundle\Entity\DealerPrice
+                repository: AppBundle\Repository\DealerPriceRepository
         app.country:
             classes:
                 model: AppBundle\Entity\Country

@@ -12,8 +12,8 @@
 namespace AppBundle\Command;
 
 use AppBundle\Entity\Product;
-use AppBundle\Entity\Shopper;
-use AppBundle\Entity\ShopperPrice;
+use AppBundle\Entity\Dealer;
+use AppBundle\Entity\DealerPrice;
 use AppBundle\Repository\ProductRepository;
 use Behat\Transliterator\Transliterator;
 use Doctrine\ORM\EntityManager;
@@ -30,7 +30,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class ImportShopperPricesCommand extends ContainerAwareCommand
+class ImportDealerPricesCommand extends ContainerAwareCommand
 {
     const BATCH_SIZE = 20;
 
@@ -61,12 +61,12 @@ class ImportShopperPricesCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('app:shopper-prices:import')
-            ->addArgument('shopper', InputArgument::REQUIRED, 'shopper')
+            ->setName('app:dealer-prices:import')
+            ->addArgument('dealer', InputArgument::REQUIRED, 'dealer')
             ->addArgument('file', InputArgument::REQUIRED, 'file to import')
-            ->setDescription('Import prices from a shopper')
+            ->setDescription('Import prices from a dealer')
             ->setHelp(<<<EOT
-The <info>%command.name%</info> command import prices from a shopper.
+The <info>%command.name%</info> command import prices from a dealer.
 EOT
             );
     }
@@ -76,20 +76,20 @@ EOT
      */
     protected function interact(InputInterface $input, OutputInterface $output)
     {
-        if (!$input->getArgument('shopper')) {
-            $shopper = $this->getHelper('dialog')->askAndValidate(
+        if (!$input->getArgument('dealer')) {
+            $dealer = $this->getHelper('dialog')->askAndValidate(
                 $output,
-                'Please enter a shopper code:',
-                function ($shopper) {
-                    if (empty($shopper)) {
-                        throw new \Exception('Shopper can not be empty');
+                'Please enter a dealer code:',
+                function ($dealer) {
+                    if (empty($dealer)) {
+                        throw new \Exception('Dealer can not be empty');
                     }
 
-                    return $shopper;
+                    return $dealer;
                 }
             );
 
-            $input->setArgument('shopper', $shopper);
+            $input->setArgument('dealer', $dealer);
         }
 
         if (!$input->getArgument('file')) {
@@ -116,24 +116,24 @@ EOT
     {
         $output->writeln(sprintf('<comment>%s</comment>', $this->getDescription()));
 
-        $shopper = $this->ensureShopperAlreadyExists();
+        $dealer = $this->ensureDealerAlreadyExists();
         $i = 0;
 
         foreach ($this->getCsvData() as $data) {
             $output->writeln(sprintf('Import of <comment>%s</comment> product', $data['product_name']));
 
-            $shopperPrice = $this->createOrReplaceShopperPrice($data, $shopper);
+            $dealerPrice = $this->createOrReplaceDealerPrice($data, $dealer);
 
-            if (!$this->getManager()->contains($shopperPrice)) {
-                $this->getManager()->persist($shopperPrice);
+            if (!$this->getManager()->contains($dealerPrice)) {
+                $this->getManager()->persist($dealerPrice);
             }
 
             if (($i % self::BATCH_SIZE) === 0) {
                 $this->getManager()->flush(); // Executes all updates.
                 $this->getManager()->clear(); // Detaches all objects from Doctrine!
 
-                // shopper is detached from doctrine, so we have to find it again
-                $shopper = $this->ensureShopperAlreadyExists();
+                // dealer is detached from doctrine, so we have to find it again
+                $dealer = $this->ensureDealerAlreadyExists();
             }
 
             ++$i;
@@ -144,59 +144,59 @@ EOT
     }
 
     /**
-     * @return Shopper
+     * @return Dealer
      *
      * @throws \Exception
      */
-    protected function ensureShopperAlreadyExists()
+    protected function ensureDealerAlreadyExists()
     {
-        $code = $this->input->getArgument('shopper');
-        /** @var Shopper $shopper */
-        $shopper = $this->getShopperRepository()->findOneBy(['code' => $code]);
+        $code = $this->input->getArgument('dealer');
+        /** @var Dealer $dealer */
+        $dealer = $this->getDealerRepository()->findOneBy(['code' => $code]);
 
-        if (null === $shopper) {
-            throw new \Exception(sprintf('Shopper with code %s does not exist', $code));
+        if (null === $dealer) {
+            throw new \Exception(sprintf('Dealer with code %s does not exist', $code));
         }
 
-        return $shopper;
+        return $dealer;
     }
 
     /**
      * @param array $data
-     * @param Shopper $shopper
+     * @param Dealer $dealer
      *
-     * @return ShopperPrice
+     * @return DealerPrice
      */
-    protected function createOrReplaceShopperPrice(array $data, Shopper $shopper)
+    protected function createOrReplaceDealerPrice(array $data, Dealer $dealer)
     {
-        /** @var ShopperPrice $shopperPrice */
-        $shopperPrice = $this->getRepository()->findOneBy(['url' => $data['url']]);
+        /** @var DealerPrice $dealerPrice */
+        $dealerPrice = $this->getRepository()->findOneBy(['url' => $data['url']]);
 
-        if (null === $shopperPrice) {
-            $shopperPrice = $this->getFactory()->createNew();
+        if (null === $dealerPrice) {
+            $dealerPrice = $this->getFactory()->createNew();
         }
 
-        if (null === $shopperPrice->getProduct()) {
+        if (null === $dealerPrice->getProduct()) {
             /** @var Product $product */
             $product = $this->findOneProductByData($data);
 
             if (null !== $product) {
-                $shopperPrice
+                $dealerPrice
                     ->setProduct($product);
             }
         }
 
         $price = $this->formatPrice($data['price']);
 
-        $shopperPrice
-            ->setShopper($shopper)
+        $dealerPrice
+            ->setDealer($dealer)
             ->setUrl($data['url'])
             ->setName($data['product_name'])
             ->setPrice($price)
             ->setStatus($data['status'])
             ->setUpdatedAt(new \DateTime()); // ensure doctrine will update data when no data has changed
 
-        return $shopperPrice;
+        return $dealerPrice;
     }
 
     protected function formatPrice($price)
@@ -225,7 +225,7 @@ EOT
 
             switch ($rowData[3]) {
                 case 'disponible':
-                    $status = ShopperPrice::STATUS_AVAILABLE;
+                    $status = DealerPrice::STATUS_AVAILABLE;
                     break;
                 default:
                     throw new \Exception(sprintf('Shopper with code %s does not exist', $code));
@@ -251,7 +251,7 @@ EOT
      */
     protected function findOneProductByData(array $data)
     {
-        $query = Transliterator::urlize($data['product_name']);
+        $query = Transliterator::transliterate($data['product_name']);
         $finder = $this->getProductFinder();
 
         $searchQuery = new Query\QueryString();
@@ -294,9 +294,9 @@ EOT
     /**
      * @return EntityRepository
      */
-    protected function getShopperRepository()
+    protected function getDealerRepository()
     {
-        return $this->getContainer()->get('app.repository.shopper');
+        return $this->getContainer()->get('app.repository.dealer');
     }
 
     /**
@@ -304,7 +304,7 @@ EOT
      */
     protected function getFactory()
     {
-        return $this->getContainer()->get('app.factory.shopper_price');
+        return $this->getContainer()->get('app.factory.dealer_price');
     }
 
     /**
@@ -312,7 +312,7 @@ EOT
      */
     protected function getRepository()
     {
-        return $this->getContainer()->get('app.repository.shopper_price');
+        return $this->getContainer()->get('app.repository.dealer_price');
     }
 
     /**

@@ -10,6 +10,7 @@ namespace AppBundle\Command\Installer\Data;
 
 use AppBundle\Entity\Product;
 use AppBundle\Entity\ProductVariant;
+use Behat\Transliterator\Transliterator;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Association\Model\AssociationType;
@@ -169,6 +170,7 @@ class LoadProductsCommand extends ContainerAwareCommand
         }
 
         $product->setName(trim($data['name']));
+        $product->setSlug(null); // enforce slug to be updated
         $product->setDescription(trim($data['description']));
         $product->setCreatedAt($data['createdAt']);
         $product->setUpdatedAt($data['updatedAt']);
@@ -200,11 +202,11 @@ class LoadProductsCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param AssociationType $assocationType
+     * @param AssociationType $associationType
      * 
      * @throws \Doctrine\DBAL\DBALException
      */
-    protected function insertProductsOfCollections(AssociationType $assocationType)
+    protected function insertProductsOfCollections(AssociationType $associationType)
     {
         $query = <<<EOM
 insert into sylius_product_association(product_id, association_type_id, created_at)
@@ -223,7 +225,7 @@ and exists (
 )
 EOM;
 
-        $this->getDatabaseConnection()->executeQuery($query, ['association_type_id' => $assocationType->getId()]);
+        $this->getDatabaseConnection()->executeQuery($query, ['association_type_id' => $associationType->getId()]);
 
         $query = <<<EOM
 insert into sylius_product_association_product(association_id, product_id)
@@ -240,7 +242,7 @@ and       old.type_diff = 'collection'
 and       association.association_type_id = :association_type_id
 EOM;
 
-        $this->getDatabaseConnection()->executeQuery($query, ['association_type_id' => $assocationType->getId()]);
+        $this->getDatabaseConnection()->executeQuery($query, ['association_type_id' => $associationType->getId()]);
 
     }
 

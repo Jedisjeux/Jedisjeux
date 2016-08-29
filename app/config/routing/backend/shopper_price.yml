@@ -1,7 +1,0 @@
-app_backend_shopper_price:
-    resource: |
-        alias: app.shopper_price
-        section: backend
-        templates: :backend/shopper_price
-        redirect: index
-    type: sylius.resource
