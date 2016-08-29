@@ -230,6 +230,9 @@ EOT
                 case 'indisponible':
                     $status = DealerPrice::STATUS_OUT_OF_STOCK;
                     break;
+                case 'précommande':
+                    $status = DealerPrice::STATUS_OUT_OF_STOCK;
+                    break;
                 default:
                     throw new \Exception(sprintf('Status with code %s does not exist', $rowData[3]));
             }
