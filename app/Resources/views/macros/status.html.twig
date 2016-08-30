@@ -54,7 +54,34 @@
     {% elseif constant('AppBundle\\Entity\\Article::STATUS_READY_TO_PUBLISH') == article.status %}
         {% set statusClass = 'primary' %}
         {% set statusLabel = 'label.ready_to_published'|trans %}
-        {% set iconClass = 'fa fa-clock' %}
+        {% set iconClass = 'fa fa-clock-o' %}
+    {% endif %}
+
+    <span class="label label-{{ statusClass }}">
+        <span class="{{ iconClass }}"></span>
+        {{ statusLabel }}
+    </span>
+
+{% endmacro %}
+
+{% macro dealerPriceStatus(dealer_price) %}
+
+    {% set statusLabel = dealer_price.status %}
+    {% set statusClass = '' %}
+    {% set iconClass = '' %}
+
+    {% if constant('AppBundle\\Entity\\DealerPrice::STATUS_AVAILABLE') == dealer_price.status %}
+        {% set statusClass = 'success' %}
+        {% set statusLabel = 'label.available'|trans %}
+        {% set iconClass = 'fa fa-check' %}
+    {% elseif constant('AppBundle\\Entity\\DealerPrice::STATUS_PRE_ORDER') == dealer_price.status %}
+        {% set statusClass = 'warning' %}
+        {% set statusLabel = 'label.pre_order'|trans %}
+        {% set iconClass = 'fa fa-book' %}
+    {% elseif constant('AppBundle\\Entity\\DealerPrice::STATUS_OUT_OF_STOCK') == dealer_price.status %}
+        {% set statusClass = 'danger' %}
+        {% set statusLabel = 'label.out_of_stock'|trans %}
+        {% set iconClass = 'fa fa-clock-o' %}
     {% endif %}
 
     <span class="label label-{{ statusClass }}">

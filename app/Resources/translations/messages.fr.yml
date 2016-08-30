@@ -14,6 +14,7 @@ label:
   amount: Montant
   at: À
   attributes: Attributs
+  available: Disponible
   body: Corps
   cancel: Annuler
   category: Catégorie
@@ -55,6 +56,7 @@ label:
   on_top: En haut
   on_the_left_side: À gauche
   on_the_right_side: À droite
+  out_of_stock: Rupture
   password: Mot de passe
   password_confirmation: Confirmation mot de passe
   phone_number: Téléphone

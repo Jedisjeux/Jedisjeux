@@ -176,14 +176,12 @@ EOT
             $dealerPrice = $this->getFactory()->createNew();
         }
 
-        if (null === $dealerPrice->getProduct()) {
-            /** @var Product $product */
-            $product = $this->findOneProductByData($data);
+        /** @var Product $product */
+        $product = $this->findOneProductByData($data);
 
-            if (null !== $product) {
-                $dealerPrice
-                    ->setProduct($product);
-            }
+        if (null !== $product) {
+            $dealerPrice
+                ->setProduct($product);
         }
 
         $price = $this->formatPrice($data['price']);
@@ -257,11 +255,18 @@ EOT
      */
     protected function findOneProductByData(array $data)
     {
-        $query = Transliterator::transliterate($data['product_name']);
+        $slug = Transliterator::transliterate($data['product_name']);
+
+        $product = $this->getProductRepository()->findOneBySlug($slug);
+
+        if (null !== $product) {
+            return $product;
+        }
+
         $finder = $this->getProductFinder();
 
         $searchQuery = new Query\QueryString();
-        $searchQuery->setParam('query', $query);
+        $searchQuery->setParam('query', $slug);
 
         $searchQuery->setDefaultOperator('AND');
 

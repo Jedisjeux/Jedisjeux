@@ -3,6 +3,7 @@
 {% import 'macros/buttons.html.twig' as button %}
 {% from 'macros/sorting.html.twig' import sorting %}
 {% import 'macros/modal.html.twig' as modal %}
+{% from 'macros/status.html.twig' import dealerPriceStatus as status %}
 
 {% set sorting = app.request.get('sorting') %}
 
@@ -34,16 +35,18 @@
     <table class="table table-striped">
         <thead>
         <tr>
+            <th>{{ sorting('app_backend_dealer_price_index', 'label.created_at'|trans, 'createdAt', 'desc', icon, currentOrder) }}</th>
             <th>{{ sorting('app_backend_dealer_price_index', 'label.dealer'|trans, 'dealer.name', 'asc') }}</th>
             <th>{{ sorting('app_backend_dealer_price_index', 'label.name'|trans, 'name', 'asc') }}</th>
-            <th>{{ sorting('app_backend_dealer_price_index', 'label.product'|trans, 'product.name', 'asc') }}</th>
+            <th>{{ sorting('app_backend_dealer_price_index', 'label.product'|trans, 'productTranslation.name', 'asc') }}</th>
+            <th>{{ sorting('app_backend_dealer_price_index', 'label.status'|trans, 'status', 'asc') }}</th>
             <th>{{ sorting('app_backend_dealer_price_index', 'label.price'|trans, 'price', 'asc') }}</th>
-            <th>{{ sorting('app_backend_dealer_price_index', 'label.created_at'|trans, 'createdAt', 'desc', icon, currentOrder) }}</th>
         </tr>
         </thead>
         <tbody>
         {% for dealer_price in dealer_prices %}
             <tr>
+                <td>{{ dealer_price.createdAt|date('d/m/Y') }}</td>
                 <td>{{ dealer_price.dealer }}</td>
                 <td><a href="{{ dealer_price.url }}" target="_blank">{{ dealer_price.name }}</a></td>
                 <td>
@@ -51,8 +54,8 @@
                         <a href="{{ path('sylius_product_show', {'slug': dealer_price.product.slug }) }}">{{ dealer_price.product }}</a>
                     {% endif %}
                 </td>
+                <td>{{ status(dealer_price) }}</td>
                 <td>{{ (dealer_price.price/100)|localizedcurrency('EUR') }}</td>
-                <td>{{ dealer_price.createdAt|date('d/m/Y') }}</td>
                 <td class="text-right">
                     <ul class="list-inline text-nowrap">
                         <li>

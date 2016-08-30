@@ -21,10 +21,20 @@ class DealerPriceRepository extends EntityRepository
     /**
      * {@inheritdoc}
      */
+    protected function getQueryBuilder()
+    {
+        return parent::createQueryBuilder('o')
+            ->innerJoin($this->getPropertyName('dealer'), 'dealer')
+            ->leftJoin($this->getPropertyName('product'), 'product')
+            ->leftJoin($this->getPropertyName('product.translations'), 'productTranslation');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function createFilterPaginator(array $criteria = null, array $sorting = null)
     {
-        $queryBuilder = $this->createQueryBuilder('o')
-            ->innerJoin($this->getPropertyName('dealer'), 'dealer');
+        $queryBuilder = $this->getQueryBuilder();
 
         if (isset($criteria['query'])) {
             $queryBuilder
