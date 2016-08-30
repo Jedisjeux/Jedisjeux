@@ -41,6 +41,16 @@ $ app/console app:install
 
 And have a good coffee...
 
+Import Prices of Dealers
+------------------------
+
+```bash
+$ sudo scp admin@jedisjeux.net:/home/admin/philibert/export.csv ./philibert.csv
+$ sudo scp admin@jedisjeux.net:/home/admin/ludomus/jedisjeux-export-tarif.csv ./ludomus.csv
+$ sudo scp admin@jedisjeux.net:/home/admin/espritJeu.csv ./esprit-jeu.csv
+```
+
+
 [Behat](http://behat.org) scenarios
 -----------------------------------
 

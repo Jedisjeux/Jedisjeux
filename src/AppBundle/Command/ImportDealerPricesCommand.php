@@ -25,6 +25,7 @@ use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -63,7 +64,7 @@ class ImportDealerPricesCommand extends ContainerAwareCommand
         $this
             ->setName('app:dealer-prices:import')
             ->addArgument('dealer', InputArgument::REQUIRED, 'dealer')
-            ->addArgument('file', InputArgument::REQUIRED, 'file to import')
+            ->addOption('filename', null, InputOption::VALUE_REQUIRED, 'filename to import')
             ->setDescription('Import prices from a dealer')
             ->setHelp(<<<EOT
 The <info>%command.name%</info> command import prices from a dealer.
@@ -92,7 +93,7 @@ EOT
             $input->setArgument('dealer', $dealer);
         }
 
-        if (!$input->getArgument('file')) {
+        if (!$input->getOption('filename')) {
             $file = $this->getHelper('dialog')->askAndValidate(
                 $output,
                 'Please enter a file path:',
@@ -105,7 +106,7 @@ EOT
                 }
             );
 
-            $input->setArgument('file', $file);
+            $input->setOption('filename', $file);
         }
     }
 
@@ -215,16 +216,19 @@ EOT
      */
     protected function getCsvData()
     {
-        $file = $this->input->getArgument('file');
+        $filename = $this->input->getOption('filename');
         $data = [];
 
-        foreach (file($file) as $row) {
+        foreach (file($filename) as $row) {
             $rowData = str_getcsv($row, ';');
 
             switch ($rowData[3]) {
+                case 'Dispo':
+                case 'Disponible':
                 case 'disponible':
                     $status = DealerPrice::STATUS_AVAILABLE;
                     break;
+                case 'En cours de réappro':
                 case 'indisponible':
                     $status = DealerPrice::STATUS_OUT_OF_STOCK;
                     break;

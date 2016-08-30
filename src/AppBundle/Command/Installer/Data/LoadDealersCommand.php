@@ -88,10 +88,41 @@ EOT
     {
         return [
             [
+                'code' => 'blue-glaucus',
+                'name' => 'Blue Glaucus',
+                'active' => true,
+            ],
+            [
+                'code' => 'esprit-jeu',
+                'name' => 'Esprit Jeu',
+                'active' => true,
+            ],
+            [
+                'code' => 'fungames',
+                'name' => 'Fungames',
+                'active' => true,
+            ],
+            [
+                'code' => 'ludibay',
+                'name' => 'Ludibay',
+                'active' => true,
+            ],
+            [
+                'code' => 'ludomus',
+                'name' => 'Ludomus',
+                'active' => true,
+            ],
+            [
                 'code' => 'philibert',
                 'name' => 'Philibert',
                 'active' => true,
             ],
+            [
+                'code' => 'sur-la-route-du-jeu',
+                'name' => 'Sur La Route Du Jeu',
+                'active' => true,
+            ],
+
         ];
     }
 
