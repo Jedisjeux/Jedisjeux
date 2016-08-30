@@ -18,3 +18,6 @@ app_partial_single_image_block:
 
 app_partial_blockquote_block:
     resource: 'partial/blockquote_block.yml'
+
+app_partial_dealer_price:
+    resource: 'partial/dealer_price.yml'

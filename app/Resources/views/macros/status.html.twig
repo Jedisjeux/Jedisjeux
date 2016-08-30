@@ -24,7 +24,7 @@
     {% elseif constant('AppBundle\\Entity\\Product::READY_TO_PUBLISH') == game.status %}
         {% set statusClass = 'primary' %}
         {% set statusLabel = 'label.ready_to_published'|trans %}
-        {% set iconClass = 'fa fa-clock' %}
+        {% set iconClass = 'fa fa-clock-o' %}
     {% endif %}
 
     <span class="label label-{{ statusClass }}">

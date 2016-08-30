@@ -11,6 +11,7 @@
 
 namespace AppBundle\Repository;
 
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
@@ -21,9 +22,28 @@ class DealerPriceRepository extends EntityRepository
     /**
      * {@inheritdoc}
      */
+    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = [])
+    {
+        if (isset($criteria['hasProduct'])) {
+            if ($criteria['hasProduct']) {
+                $queryBuilder
+                    ->andWhere($queryBuilder->expr()->isNotNull($this->getPropertyName('product')));
+            } else {
+                $queryBuilder
+                    ->andWhere($queryBuilder->expr()->isNull($this->getPropertyName('product')));
+            }
+        }
+
+        parent::applyCriteria($queryBuilder, $criteria);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getQueryBuilder()
     {
         return parent::createQueryBuilder('o')
+            ->addSelect('dealer, product, productTranslation')
             ->innerJoin($this->getPropertyName('dealer'), 'dealer')
             ->leftJoin($this->getPropertyName('product'), 'product')
             ->leftJoin($this->getPropertyName('product.translations'), 'productTranslation');
@@ -43,6 +63,8 @@ class DealerPriceRepository extends EntityRepository
                     $this->getPropertyName('dealer.name like :query')
                 ))
                 ->setParameter('query', '%' . $criteria['query'] . '%');
+
+            unset($criteria['query']);
         }
 
         if (empty($sorting)) {
@@ -51,8 +73,10 @@ class DealerPriceRepository extends EntityRepository
             }
 
             $sorting['createdAt'] = 'desc';
+            $sorting['id'] = 'desc';
         }
 
+        $this->applyCriteria($queryBuilder, (array)$criteria);
         $this->applySorting($queryBuilder, $sorting);
 
         return $this->getPaginator($queryBuilder);

@@ -21,8 +21,8 @@ Import Jedisjeux production data
 Ask administrator the admin password or ask him a sql backup file :
 
 ```bash
-$ sudo scp admin@jedisjeux.net:/srv/d_jedisjeux/www/sav/dmp_jdj_1.sql.gz ./
-$ sudo gzip -d dmp_jdj_1.sql.gz
+$ scp admin@jedisjeux.net:/srv/d_jedisjeux/www/sav/dmp_jdj_1.sql.gz ./
+$ gzip -d dmp_jdj_1.sql.gz
 ```
 
 Then create a new empty database called jedisjeux and import backup file
@@ -45,9 +45,9 @@ Import Prices of Dealers
 ------------------------
 
 ```bash
-$ sudo scp admin@jedisjeux.net:/home/admin/philibert/export.csv ./philibert.csv
-$ sudo scp admin@jedisjeux.net:/home/admin/ludomus/jedisjeux-export-tarif.csv ./ludomus.csv
-$ sudo scp admin@jedisjeux.net:/home/admin/espritJeu.csv ./esprit-jeu.csv
+$ scp admin@jedisjeux.net:/home/admin/philibert/export.csv ./philibert.csv
+$ scp admin@jedisjeux.net:/home/admin/ludomus/jedisjeux-export-tarif.csv ./ludomus.csv
+$ scp admin@jedisjeux.net:/home/admin/espritJeu.csv ./esprit-jeu.csv
 ```
 
 

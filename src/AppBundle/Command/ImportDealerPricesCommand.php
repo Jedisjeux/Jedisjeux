@@ -65,6 +65,7 @@ class ImportDealerPricesCommand extends ContainerAwareCommand
             ->setName('app:dealer-prices:import')
             ->addArgument('dealer', InputArgument::REQUIRED, 'dealer')
             ->addOption('filename', null, InputOption::VALUE_REQUIRED, 'filename to import')
+            ->addOption('remove-first-line', null, InputOption::VALUE_REQUIRED, false)
             ->setDescription('Import prices from a dealer')
             ->setHelp(<<<EOT
 The <info>%command.name%</info> command import prices from a dealer.
@@ -219,7 +220,11 @@ EOT
         $filename = $this->input->getOption('filename');
         $data = [];
 
-        foreach (file($filename) as $row) {
+        foreach (file($filename) as $key => $row) {
+            if ($this->input->getOption('remove-first-line') and $key === 0) {
+                continue;
+            }
+
             $rowData = str_getcsv($row, ';');
 
             switch ($rowData[3]) {

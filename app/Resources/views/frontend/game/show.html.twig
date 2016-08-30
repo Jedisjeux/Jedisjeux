@@ -25,13 +25,18 @@
 
 {% block container %}
 
-
-
-
     <div class="col-md-8">
         {% include "frontend/game/show/header.html.twig" with {'jeu': jeu} %}
 
         {% include "frontend/game/show/nav-tab.html.twig" with {'jeu': jeu} %}
+
+        {% render(url('app_partial_dealer_price_index', {
+            template: 'frontend/dealer_price/_index.html.twig',
+            paginate: 6,
+            criteria: {
+                'product': product.id
+            }
+        })) %}
 
         {% include "frontend/game/show/associations.html.twig" %}
 
