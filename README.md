@@ -45,9 +45,10 @@ Import Prices of Dealers
 ------------------------
 
 ```bash
-$ scp admin@jedisjeux.net:/home/admin/philibert/export.csv ./philibert.csv
+$ scp admin@jedisjeux.net:/home/admin/export.csv ./philibert.csv
 $ scp admin@jedisjeux.net:/home/admin/ludomus/jedisjeux-export-tarif.csv ./ludomus.csv
 $ scp admin@jedisjeux.net:/home/admin/espritJeu.csv ./esprit-jeu.csv
+$ scp admin@jedisjeux.net:/home/admin/jedisjeux-export-tarifs.csv ./ludifolie.csv
 ```
 
 

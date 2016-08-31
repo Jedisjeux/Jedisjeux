@@ -103,6 +103,11 @@ EOT
                 'active' => true,
             ],
             [
+                'code' => 'ludifolie',
+                'name' => 'Ludifolie',
+                'active' => true,
+            ],
+            [
                 'code' => 'ludibay',
                 'name' => 'Ludibay',
                 'active' => true,

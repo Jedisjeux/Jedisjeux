@@ -7,8 +7,8 @@
 
 <div class="row">
     {% for dealer_price in dealer_prices %}
-        <div class="col-md-2 text-center">
-            <h4>{{ dealer_price.dealer }}</h4>
+        <div class="col-md-3 text-center">
+            <h4><a href="{{ dealer_price.url }}" target="_blank">{{ dealer_price.dealer }}</a></h4>
             <p><strong>{{ (dealer_price.price/100)|localizedcurrency('EUR') }}</strong></p>
             <p>{{ status(dealer_price) }}</p>
         </div>
