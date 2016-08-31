@@ -17,5 +17,8 @@ sylius_admin_user:
 sylius_admin_product:
     resource: backend/product.yml
 
+app_backend_dealer:
+    resource: backend/dealer.yml
+
 app_backend_dealer_price:
     resource: backend/dealer_price.yml

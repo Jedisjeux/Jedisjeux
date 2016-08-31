@@ -1,0 +1,68 @@
+{% extends "layout/backend_index.html.twig" %}
+{% from '::macros/misc.html.twig' import pagination %}
+{% import 'macros/buttons.html.twig' as button %}
+{% from 'macros/sorting.html.twig' import sorting %}
+{% import 'macros/modal.html.twig' as modal %}
+{% from 'macros/status.html.twig' import dealerPriceStatus as status %}
+
+{% set sorting = app.request.get('sorting') %}
+
+{% set icon = false %}
+{% set currentOrder = null %}
+
+{% if null == sorting %}
+    {% set icon = true %}
+    {% set currentOrder = 'asc' %}
+{% endif %}
+
+{% block headline %}
+    {{ 'label.dealers'|trans }}
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    {{ 'label.dealers'|trans }}
+{% endblock %}
+
+{% block new_entity_button %}
+    <a class="btn btn-primary" href="{{ path('app_backend_dealer_create') }}">
+        <span class="glyphicon glyphicon-plus-sign"></span>
+        {{ 'label.new_dealer'|trans }}
+    </a>
+{% endblock new_entity_button %}
+
+{% block list %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>{{ sorting('app_backend_dealer_index', 'label.code'|trans, 'code', 'asc') }}</th>
+            <th>{{ sorting('app_backend_dealer_index', 'label.name'|trans, 'name', 'asc', icon, currentOrder) }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for dealer in dealers %}
+            <tr>
+                <td>{{ dealer.code }}</td>
+                <td>{{ dealer }}</td>
+                <td class="text-right">
+                    <ul class="list-inline text-nowrap">
+                        <li>
+                            {{ button.generic(path('app_backend_dealer_price_index', { 'criteria': {'dealer': dealer.id } })) }}
+                        </li>
+                        <li>
+                            {{ button.edit(path('app_backend_dealer_update', { 'id': dealer.id })) }}
+                        </li>
+                        <li>
+                            {{ button.delete(path('app_backend_dealer_delete', { 'id': dealer.id })) }}
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock list %}
+
+{% block Pagination %}
+    {{ pagination(dealers) }}
+{% endblock %}

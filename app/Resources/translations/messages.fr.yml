@@ -31,11 +31,13 @@ label:
   create_category: Créer une catégorie
   css_class: Classe CSS
   dealer: Vendeur
+  dealers: Vendeurs
   delete: Supprimer
   description: Description
   duration: Durée
   hello: Bonjour
   edit: Modifier
+  edit_dealer: Modifier un vendeur
   email: Email
   end_date: Date de fin
   first_name: Prénom
@@ -51,6 +53,7 @@ label:
   most_viewed: Les plus vus
   name: Nom
   new: Nouveau
+  new_dealer: Nouveau vendeur
   need_a_review: En relecture
   need_a_translation: A traduire
   on_top: En haut

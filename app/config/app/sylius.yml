@@ -136,6 +136,14 @@ sylius_resource:
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
                 form:
                     default: AppBundle\Form\Type\BlockquoteBlockType
+        app.dealer:
+            classes:
+                model: AppBundle\Entity\Dealer
+                repository: AppBundle\Repository\DealerRepository
+        app.dealer_price:
+            classes:
+                model: AppBundle\Entity\DealerPrice
+                repository: AppBundle\Repository\DealerPriceRepository
         app.imagine_block:
             driver: doctrine/phpcr-odm
             classes:
@@ -161,13 +169,6 @@ sylius_resource:
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
                 form:
                     default: AppBundle\Form\Type\SingleImageBlockType
-        app.dealer:
-            classes:
-                model: AppBundle\Entity\Dealer
-        app.dealer_price:
-            classes:
-                model: AppBundle\Entity\DealerPrice
-                repository: AppBundle\Repository\DealerPriceRepository
         app.country:
             classes:
                 model: AppBundle\Entity\Country
