@@ -47,7 +47,7 @@
                 <td class="text-right">
                     <ul class="list-inline text-nowrap">
                         <li>
-                            {{ button.generic(path('app_backend_dealer_price_index', { 'criteria': {'dealer': dealer.id } })) }}
+                            {{ button.generic(path('app_backend_dealer_price_index', { 'criteria': {'dealer': dealer.id } }), 'label.products', null, 'list') }}
                         </li>
                         <li>
                             {{ button.edit(path('app_backend_dealer_update', { 'id': dealer.id })) }}
