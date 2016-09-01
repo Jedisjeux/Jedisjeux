@@ -34,6 +34,10 @@ class DealerType extends AbstractResourceType
             ->add('name', null, [
                 'label' => 'label.name',
             ])
+            ->add('image', 'file', [
+                'label' => 'label.image',
+                'required' => false,
+            ])
             ->add('active', ChoiceType::class, [
                 'label' => 'label.active',
                 'choices' => array(
