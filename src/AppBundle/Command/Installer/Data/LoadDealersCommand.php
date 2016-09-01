@@ -12,6 +12,7 @@
 namespace AppBundle\Command\Installer\Data;
 
 use AppBundle\Entity\Dealer;
+use AppBundle\Entity\DealerImage;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\Factory;
@@ -73,6 +74,19 @@ EOT
             $dealer = $this->getFactory()->createNew();
         }
 
+        if (isset($data['image'])) {
+            $imageInfos = pathinfo($data['image']);
+            $dealerImage = $dealer->getImage();
+
+            if (null === $dealerImage) {
+                $dealerImage = new DealerImage();
+                $dealer->setImage($dealerImage);
+            }
+
+            $dealerImage->setPath($data['code'] . "." . $imageInfos['extension']);
+            file_put_contents($dealer->getImage()->getAbsolutePath(), file_get_contents($data['image']));
+        }
+
         $dealer
             ->setCode($data['code'])
             ->setName($data['name'])
@@ -96,6 +110,7 @@ EOT
                 'code' => 'esprit-jeu',
                 'name' => 'Esprit Jeu',
                 'active' => true,
+                'image' => __DIR__ . '/../../../../../web/assets/img/Logo-Esprit-Jeu-HD.png',
             ],
             [
                 'code' => 'fungames',
@@ -106,21 +121,25 @@ EOT
                 'code' => 'ludifolie',
                 'name' => 'Ludifolie',
                 'active' => true,
+                'image' => 'http://www.ludifolie.com/images/logo-400x200.jpg',
             ],
             [
                 'code' => 'ludibay',
                 'name' => 'Ludibay',
                 'active' => true,
+                'image' => 'http://festivaldujeu.istres.free.fr/images/ludibay%20logo%20court.jpg',
             ],
             [
                 'code' => 'ludomus',
                 'name' => 'Ludomus',
                 'active' => true,
+                'image' => 'https://geodorthophonie.files.wordpress.com/2015/09/ludomus.jpg',
             ],
             [
                 'code' => 'philibert',
                 'name' => 'Philibert',
                 'active' => true,
+                'image' => 'http://ulule.me/presales/0/6/6/9660/philibert_jpg_640x860_q85.jpg',
             ],
             [
                 'code' => 'sur-la-route-du-jeu',

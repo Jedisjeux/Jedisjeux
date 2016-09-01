@@ -46,6 +46,13 @@ class Dealer implements ResourceInterface
     protected $active;
 
     /**
+     * @var DealerImage
+     *
+     * @ORM\OneToOne(targetEntity="DealerImage", cascade={"persist"})
+     */
+    protected $image;
+
+    /**
      * @return string
      */
     public function getCode()
@@ -101,6 +108,26 @@ class Dealer implements ResourceInterface
     public function setActive($active)
     {
         $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * @return DealerImage
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param DealerImage $image
+     *
+     * @return $this
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
 
         return $this;
     }

@@ -1,6 +1,6 @@
-{% macro image(path, filter, label, class, linkUrl) %}
+{% macro image(path, filter, label, class, linkUrl, target) %}
     {% if linkUrl %}
-        <a href="{{ linkUrl }}" title="{{ label|default('') }}">
+        <a href="{{ linkUrl }}" title="{{ label|default('') }}"{% if target %} target="{{ target }}" {% endif %}>
     {% endif %}
     <img class="{{ class }}" src="{{ path | imagine_filter(filter|default('full')) }}" alt="{{ label }}"/>
     {% if linkUrl %}
