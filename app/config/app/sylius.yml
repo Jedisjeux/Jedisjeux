@@ -140,6 +140,8 @@ sylius_resource:
             classes:
                 model: AppBundle\Entity\Dealer
                 repository: AppBundle\Repository\DealerRepository
+                form:
+                    default: AppBundle\Form\Type\DealerType
         app.dealer_price:
             classes:
                 model: AppBundle\Entity\DealerPrice

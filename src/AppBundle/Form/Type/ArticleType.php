@@ -47,6 +47,9 @@ class ArticleType extends AbstractResourceType
             ]);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'app_article';

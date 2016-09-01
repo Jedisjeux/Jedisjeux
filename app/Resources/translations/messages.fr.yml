@@ -5,6 +5,7 @@ title:
   page_not_found: Page introuvable
 
 label:
+  active: Actif
   add_image: Ajouter une image
   add_player: Ajouter un joueur
   add_product: Ajouter un produit
@@ -56,6 +57,7 @@ label:
   new_dealer: Nouveau vendeur
   need_a_review: En relecture
   need_a_translation: A traduire
+  no: Non
   on_top: En haut
   on_the_left_side: À gauche
   on_the_right_side: À droite
@@ -91,6 +93,7 @@ label:
   username_or_email: Nom d'utilisateur ou email
   validate: Valider
   website: Site web
+  yes: Oui
   your_rate: Votre note
   zone: Zone
 
