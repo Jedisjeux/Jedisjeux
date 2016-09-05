@@ -51,6 +51,12 @@ $ scp admin@jedisjeux.net:/home/admin/espritJeu.csv ./esprit-jeu.csv
 $ scp admin@jedisjeux.net:/home/admin/jedisjeux-export-tarifs.csv ./ludifolie.csv
 ```
 
+```bash
+$ app/console app:dealer-prices:import philibert --filename=philibert.csv
+$ app/console app:dealer-prices:import ludifolie --filename=ludifolie.csv
+$ app/console app:dealer-prices:import ludomus --filename=ludomus.csv --remove-first-line=true
+$ app/console app:dealer-prices:import esprit-jeu --filename=esprit-jeu.csv
+```
 
 [Behat](http://behat.org) scenarios
 -----------------------------------
