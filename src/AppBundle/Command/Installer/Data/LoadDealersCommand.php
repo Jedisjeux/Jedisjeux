@@ -13,6 +13,7 @@ namespace AppBundle\Command\Installer\Data;
 
 use AppBundle\Entity\Dealer;
 use AppBundle\Entity\DealerImage;
+use AppBundle\Entity\PricesList;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\Factory;
@@ -87,6 +88,22 @@ EOT
             file_put_contents($dealer->getImage()->getAbsolutePath(), file_get_contents($data['image']));
         }
 
+        if (isset($data['pricesList'])) {
+            $pricesList = $dealer->getPricesList();
+
+            if (null === $pricesList) {
+                $pricesList = new PricesList();
+            }
+
+            $pricesList
+                ->setDealer($dealer)
+                ->setActive($data['pricesList']['active'])
+                ->setPath($data['pricesList']['path'])
+                ->setHeaders($data['pricesList']['headers']);
+
+            $dealer->setPricesList($pricesList);
+        }
+
         $dealer
             ->setCode($data['code'])
             ->setName($data['name'])
@@ -140,6 +157,11 @@ EOT
                 'name' => 'Philibert',
                 'active' => true,
                 'image' => 'http://ulule.me/presales/0/6/6/9660/philibert_jpg_640x860_q85.jpg',
+                'pricesList' => [
+                    'active' => true,
+                    'path' => 'philibert.csv',
+                    'headers' => false,
+                ],
             ],
             [
                 'code' => 'sur-la-route-du-jeu',

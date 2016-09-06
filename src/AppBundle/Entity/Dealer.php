@@ -53,6 +53,13 @@ class Dealer implements ResourceInterface
     protected $image;
 
     /**
+     * @var PricesList
+     *
+     * @ORM\OneToOne(targetEntity="PricesList", mappedBy="dealer", cascade={"persist"})
+     */
+    protected $pricesList;
+
+    /**
      * @return string
      */
     public function getCode()
@@ -128,6 +135,34 @@ class Dealer implements ResourceInterface
     public function setImage($image)
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasPricesList()
+    {
+        return null !== $this->pricesList;
+    }
+
+    /**
+     * @return PricesList
+     */
+    public function getPricesList()
+    {
+        return $this->pricesList;
+    }
+
+    /**
+     * @param PricesList $pricesList
+     *
+     * @return $this
+     */
+    public function setPricesList($pricesList)
+    {
+        $this->pricesList = $pricesList;
 
         return $this;
     }
