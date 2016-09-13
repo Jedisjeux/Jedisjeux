@@ -191,7 +191,7 @@ EOT
         $dealerPrice
             ->setDealer($dealer)
             ->setUrl($data['url'])
-            ->setName($data['product_name'])
+            ->setName(preg_replace('/[[:^print:]]/', '', $data['product_name']))
             ->setPrice($price)
             ->setStatus($data['status'])
             ->setUpdatedAt(new \DateTime()); // ensure doctrine will update data when no data has changed
