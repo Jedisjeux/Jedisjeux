@@ -27,6 +27,7 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 @import "parts/text";
 @import "parts/buttons";
 @import "parts/tabs";
+@import "parts/grid";
 
 @import "modules/login";
 @import "modules/collection";
@@ -37,6 +38,7 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 @import "modules/gamesheet";
 @import "modules/game-plays";
 @import "modules/entities";
+@import "modules/dealer-prices";
 @import "modules/errors";
 
 body {
