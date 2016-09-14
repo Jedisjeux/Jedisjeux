@@ -148,6 +148,13 @@ class Product extends BaseProduct implements ReviewableInterface
     protected $reviews;
 
     /**
+     * @var ArrayCollection|ProductBarcode[]
+     *
+     * @ORM\OneToMany(targetEntity="ProductBarcode", mappedBy="product")
+     */
+    protected $barcodes;
+
+    /**
      * @var float
      *
      * @ORM\Column(type="float")
@@ -644,6 +651,40 @@ class Product extends BaseProduct implements ReviewableInterface
     public function setAverageRating($averageRating)
     {
         $this->averageRating = $averageRating;
+
+        return $this;
+    }
+
+    /**
+     * @return ProductBarcode[]|ArrayCollection
+     */
+    public function getBarcodes()
+    {
+        return $this->barcodes;
+    }
+
+    /**
+     * @param ProductBarcode $barcode
+     *
+     * @return $this
+     */
+    public function addBarcode($barcode)
+    {
+        if (!$this->barcodes->contains($barcode)) {
+            $this->barcodes->add($barcode);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param ProductBarcode $barcode
+     *
+     * @return $this
+     */
+    public function removeBarcode($barcode)
+    {
+        $this->barcodes->remove($barcode);
 
         return $this;
     }
