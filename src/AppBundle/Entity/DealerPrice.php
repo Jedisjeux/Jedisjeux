@@ -68,6 +68,13 @@ class DealerPrice implements ResourceInterface
     /**
      * @var string
      *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $barcode;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(type="string")
      */
     protected $status;
@@ -171,6 +178,27 @@ class DealerPrice implements ResourceInterface
 
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getBarcode()
+    {
+        return $this->barcode;
+    }
+
+    /**
+     * @param string $barcode
+     *
+     * @return $this
+     */
+    public function setBarcode($barcode)
+    {
+        $this->barcode = $barcode;
+
+        return $this;
+    }
+
 
     /**
      * @return string

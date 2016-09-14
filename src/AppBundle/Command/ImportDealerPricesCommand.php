@@ -193,6 +193,7 @@ EOT
             ->setUrl($data['url'])
             ->setName(preg_replace('/[[:^print:]]/', '', $data['product_name']))
             ->setPrice($price)
+            ->setBarcode($data['barcode'])
             ->setStatus($data['status'])
             ->setUpdatedAt(new \DateTime()); // ensure doctrine will update data when no data has changed
 
@@ -265,8 +266,13 @@ EOT
      */
     protected function findOneProductByData(array $data)
     {
-        $slug = Transliterator::transliterate($data['product_name']);
+        $product = $this->getProductRepository()->findOneByBarcode($data['barcode']);
 
+        if (null !== $product) {
+            return $product;
+        }
+
+        $slug = Transliterator::transliterate($data['product_name']);
         $product = $this->getProductRepository()->findOneBySlug($slug);
 
         if (null !== $product) {

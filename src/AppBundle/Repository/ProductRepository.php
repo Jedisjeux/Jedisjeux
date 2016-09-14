@@ -45,6 +45,19 @@ class ProductRepository extends BaseProductRepository
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function findOneByBarcode($barcode)
+    {
+        return $this->getQueryBuilder()
+            ->join('o.barcodes', 'barcode')
+            ->where('barcode.code = :barcode')
+            ->setParameter('barcode', $barcode)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    /**
      * Create paginator for products categorized under given taxon.
      *
      * @param TaxonInterface $taxon

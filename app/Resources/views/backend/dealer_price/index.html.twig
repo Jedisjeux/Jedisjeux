@@ -39,6 +39,7 @@
             <th>{{ sorting('app_backend_dealer_price_index', 'label.dealer'|trans, 'dealer.name', 'asc') }}</th>
             <th>{{ sorting('app_backend_dealer_price_index', 'label.name'|trans, 'name', 'asc') }}</th>
             <th>{{ sorting('app_backend_dealer_price_index', 'label.product'|trans, 'productTranslation.name', 'asc') }}</th>
+            <th>{{ sorting('app_backend_dealer_price_index', 'label.barcode'|trans, 'barcode', 'asc') }}</th>
             <th>{{ sorting('app_backend_dealer_price_index', 'label.status'|trans, 'status', 'asc') }}</th>
             <th>{{ sorting('app_backend_dealer_price_index', 'label.price'|trans, 'price', 'asc') }}</th>
         </tr>
@@ -54,6 +55,7 @@
                         <a href="{{ path('sylius_product_show', {'slug': dealer_price.product.slug }) }}">{{ dealer_price.product }}</a>
                     {% endif %}
                 </td>
+                <td>{{ dealer_price.barcode }}</td>
                 <td>{{ status(dealer_price) }}</td>
                 <td>{{ (dealer_price.price/100)|localizedcurrency('EUR') }}</td>
                 <td class="text-right">
