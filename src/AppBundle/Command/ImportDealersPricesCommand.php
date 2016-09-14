@@ -12,6 +12,7 @@
 namespace AppBundle\Command;
 
 use AppBundle\Entity\Dealer;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\InstallerBundle\Command\CommandExecutor;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -75,18 +76,22 @@ EOT
         $dealers = $this->getDealers();
 
         foreach ($dealers as $step => $dealer) {
-            try {
-                $output->writeln(sprintf('<comment>Step %d of %d.</comment> <info>%s</info>', $step + 1, count($dealers), $dealer->getCode()));
-                $this->commandExecutor->runCommand('app:dealer-prices:import', [
-                    'dealer' => $dealer->getCode(),
-                    '--filename' => $dealer->getPricesList()->getPath(),
-                    '--remove-first-line' => $dealer->getPricesList()->hasHeaders(),
-                ], $this->output);
-                $output->writeln('');
-            } catch (RuntimeException $exception) {
-                $this->isErrored = true;
+            if ($dealer->hasPricesList() and $dealer->getPricesList()->isActive()) {
+                try {
+                    $output->writeln(sprintf('<comment>Step %d of %d.</comment> <info>%s</info>', $step + 1, count($dealers), $dealer->getCode()));
+                    $this->commandExecutor->runCommand('app:dealer-prices:import', [
+                        'dealer' => $dealer->getCode(),
+                        '--filename' => $dealer->getPricesList()->getPath(),
+                        '--remove-first-line' => $dealer->getPricesList()->hasHeaders(),
+                    ], $output);
+                    $output->writeln('');
+                } catch (RuntimeException $exception) {
+                    $this->isErrored = true;
 
-                continue;
+                    continue;
+                }
+            } else {
+                $this->removeDealerPricesFromDealer($dealer);
             }
         }
     }
@@ -97,12 +102,22 @@ EOT
     protected function getDealers()
     {
         $queryBuilder = $this->getDealerRepository()->createQueryBuilder('o');
-        $queryBuilder
-            ->join('o.pricesList', 'pricesList')
-            ->andWhere('pricesList.active = :active')
-            ->setParameter('active', 1);
 
         return $queryBuilder->getQuery()->getResult();
+    }
+
+    /**
+     * @param Dealer $dealer
+     *
+     * @return int nbRows deleted
+     */
+    protected function removeDealerPricesFromDealer(Dealer $dealer)
+    {
+        $query = $this->getManager()->createQuery('delete from AppBundle:DealerPrice o where o.dealer = :dealer');
+
+        return $query->execute([
+            'dealer' => $dealer,
+        ]);
     }
 
     /**
@@ -111,5 +126,13 @@ EOT
     protected function getDealerRepository()
     {
         return $this->getContainer()->get('app.repository.dealer');
+    }
+
+    /**
+     * @return EntityManager
+     */
+    protected function getManager()
+    {
+        return $this->getContainer()->get('doctrine.orm.entity_manager');
     }
 }

@@ -142,6 +142,7 @@ EOT
         }
 
         $this->getManager()->flush();
+        $this->removeOutOfCatalogDealerPrices($dealer);
         $this->getManager()->clear();
     }
 
@@ -300,6 +301,19 @@ EOT
         }
 
         return null;
+    }
+
+    /**
+     * @return integer nbRows deleted
+     */
+    protected function removeOutOfCatalogDealerPrices(Dealer $dealer)
+    {
+        $query = $this->getManager()->createQuery('delete from AppBundle:DealerPrice o where o.dealer = :dealer and o.updatedAt < :today');
+
+        return $query->execute([
+            'dealer' => $dealer,
+            'today' => (new \DateTime('today'))->format('Y-m-d H:i:s'),
+        ]);
     }
 
     /**
