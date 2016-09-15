@@ -202,12 +202,13 @@ EOM;
         $this->getDatabaseConnection()->executeQuery($query);
 
         $query = <<<EOM
-insert into jdj_topic (id, title, createdBy_id, createdAt, mainPost_id)
+insert into jdj_topic (id, title, createdBy_id, createdAt, mainPost_id, postCount)
 select  old.topic_id as id,
         old.topic_title as title,
         user.id as createdBy_id,
         FROM_UNIXTIME(old.topic_time) as createdAt,
-        old.topic_first_post_id as mainPost_id
+        old.topic_first_post_id as mainPost_id,
+        0
 from jedisjeux.phpbb3_topics old
     inner join sylius_customer customer
         on customer.code = concat('user-', old.topic_poster)
