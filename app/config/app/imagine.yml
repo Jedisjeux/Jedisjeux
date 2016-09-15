@@ -1,3 +1,4 @@
+# @see http://symfony.com/doc/current/bundles/LiipImagineBundle/filters.html
 liip_imagine:
     resolvers:
        default:
@@ -66,6 +67,9 @@ liip_imagine:
             data_loader: cmf_media_doctrine_phpcr
             filters:
                 relative_resize: { scale: 1 }
+        small_width_fixed:
+            filters:
+                relative_resize: { widen: 100 }
         small_height_fixed:
             filters:
-                relative_resize: { heighten: 80 } # Transforms 50x40 to 75x60
+                relative_resize: { heighten: 80 }

@@ -39,13 +39,6 @@ class Dealer implements ResourceInterface
     protected $name;
 
     /**
-     * @var boolean
-     *
-     * @ORM\Column(type="boolean", name="is_active")
-     */
-    protected $active;
-
-    /**
      * @var DealerImage
      *
      * @ORM\OneToOne(targetEntity="DealerImage", cascade={"persist"})
@@ -95,26 +88,6 @@ class Dealer implements ResourceInterface
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isActive()
-    {
-        return $this->active;
-    }
-
-    /**
-     * @param boolean $active
-     *
-     * @return $this
-     */
-    public function setActive($active)
-    {
-        $this->active = $active;
 
         return $this;
     }

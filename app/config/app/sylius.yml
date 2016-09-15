@@ -142,6 +142,11 @@ sylius_resource:
                 repository: AppBundle\Repository\DealerRepository
                 form:
                     default: AppBundle\Form\Type\DealerType
+        app.dealer_image:
+            classes:
+                model: AppBundle\Entity\DealerImage
+                form:
+                    default: AppBundle\Form\Type\DealerImageType
         app.dealer_price:
             classes:
                 model: AppBundle\Entity\DealerPrice
@@ -191,6 +196,11 @@ sylius_resource:
                 model: AppBundle\Entity\Player
                 form:
                     default: AppBundle\Form\Type\PlayerType
+        app.price_list:
+            classes:
+                model: AppBundle\Entity\PriceList
+                form:
+                    default: AppBundle\Form\Type\PriceListType
         app.notification:
             classes:
                 model: AppBundle\Entity\Notification

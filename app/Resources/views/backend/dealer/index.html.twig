@@ -4,6 +4,7 @@
 {% from 'macros/sorting.html.twig' import sorting %}
 {% import 'macros/modal.html.twig' as modal %}
 {% from 'macros/status.html.twig' import dealerPriceStatus as status %}
+{% from 'macros/images.html.twig' import image %}
 
 {% set sorting = app.request.get('sorting') %}
 
@@ -42,6 +43,11 @@
         <tbody>
         {% for dealer in dealers %}
             <tr>
+                <td>
+                    {% if dealer.image %}
+                        {{ image(dealer.image.webPath, 'small_width_fixed', dealer.name, 'img-responsive') }}
+                    {% endif %}
+                </td>
                 <td>{{ dealer.code }}</td>
                 <td>{{ dealer }}</td>
                 <td class="text-right">

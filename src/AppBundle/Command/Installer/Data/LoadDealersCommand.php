@@ -106,8 +106,7 @@ EOT
 
         $dealer
             ->setCode($data['code'])
-            ->setName($data['name'])
-            ->setActive($data['active']);
+            ->setName($data['name']);
 
         return $dealer;
     }
@@ -121,41 +120,34 @@ EOT
             [
                 'code' => 'blue-glaucus',
                 'name' => 'Blue Glaucus',
-                'active' => true,
             ],
             [
                 'code' => 'esprit-jeu',
                 'name' => 'Esprit Jeu',
-                'active' => true,
                 'image' => __DIR__ . '/../../../../../web/assets/img/Logo-Esprit-Jeu-HD.png',
             ],
             [
                 'code' => 'fungames',
                 'name' => 'Fungames',
-                'active' => true,
             ],
             [
                 'code' => 'ludifolie',
                 'name' => 'Ludifolie',
-                'active' => true,
                 'image' => 'http://www.ludifolie.com/images/logo-400x200.jpg',
             ],
             [
                 'code' => 'ludibay',
                 'name' => 'Ludibay',
-                'active' => true,
                 'image' => 'http://festivaldujeu.istres.free.fr/images/ludibay%20logo%20court.jpg',
             ],
             [
                 'code' => 'ludomus',
                 'name' => 'Ludomus',
-                'active' => true,
                 'image' => 'https://geodorthophonie.files.wordpress.com/2015/09/ludomus.jpg',
             ],
             [
                 'code' => 'philibert',
                 'name' => 'Philibert',
-                'active' => true,
                 'image' => 'http://ulule.me/presales/0/6/6/9660/philibert_jpg_640x860_q85.jpg',
                 'priceList' => [
                     'active' => true,
@@ -166,7 +158,6 @@ EOT
             [
                 'code' => 'sur-la-route-du-jeu',
                 'name' => 'Sur La Route Du Jeu',
-                'active' => true,
             ],
 
         ];

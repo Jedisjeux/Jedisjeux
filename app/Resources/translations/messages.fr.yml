@@ -37,11 +37,13 @@ label:
   delete: Supprimer
   description: Description
   duration: Durée
+  headers: Entêtes
   hello: Bonjour
   edit: Modifier
   edit_dealer: Modifier un vendeur
   email: Email
   end_date: Date de fin
+  file: Fichier
   first_name: Prénom
   image: Image
   image_position: Position de l'image
@@ -65,6 +67,7 @@ label:
   out_of_stock: Rupture
   password: Mot de passe
   password_confirmation: Confirmation mot de passe
+  path: Chemin
   phone_number: Téléphone
   played_at: Joué le
   players: Joueurs
@@ -72,6 +75,7 @@ label:
   product: Produit
   products: Produits
   price: Prix
+  price_list: Liste de prix
   publishable: Publiable
   published: Publié
   published_at: Publié le
