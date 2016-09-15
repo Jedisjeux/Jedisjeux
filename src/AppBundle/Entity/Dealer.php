@@ -53,11 +53,11 @@ class Dealer implements ResourceInterface
     protected $image;
 
     /**
-     * @var PricesList
+     * @var PriceList
      *
-     * @ORM\OneToOne(targetEntity="PricesList", mappedBy="dealer", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="PriceList", mappedBy="dealer", cascade={"persist"})
      */
-    protected $pricesList;
+    protected $priceList;
 
     /**
      * @return string
@@ -142,27 +142,27 @@ class Dealer implements ResourceInterface
     /**
      * @return bool
      */
-    public function hasPricesList()
+    public function hasPriceList()
     {
-        return null !== $this->pricesList;
+        return null !== $this->priceList;
     }
 
     /**
-     * @return PricesList
+     * @return PriceList
      */
-    public function getPricesList()
+    public function getPriceList()
     {
-        return $this->pricesList;
+        return $this->priceList;
     }
 
     /**
-     * @param PricesList $pricesList
+     * @param PriceList $priceList
      *
      * @return $this
      */
-    public function setPricesList($pricesList)
+    public function setPriceList($priceList)
     {
-        $this->pricesList = $pricesList;
+        $this->priceList = $priceList;
 
         return $this;
     }

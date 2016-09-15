@@ -13,7 +13,7 @@ namespace AppBundle\Command\Installer\Data;
 
 use AppBundle\Entity\Dealer;
 use AppBundle\Entity\DealerImage;
-use AppBundle\Entity\PricesList;
+use AppBundle\Entity\PriceList;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\Factory;
@@ -88,20 +88,20 @@ EOT
             file_put_contents($dealer->getImage()->getAbsolutePath(), file_get_contents($data['image']));
         }
 
-        if (isset($data['pricesList'])) {
-            $pricesList = $dealer->getPricesList();
+        if (isset($data['priceList'])) {
+            $priceList = $dealer->getPriceList();
 
-            if (null === $pricesList) {
-                $pricesList = new PricesList();
+            if (null === $priceList) {
+                $priceList = new PriceList();
             }
 
-            $pricesList
+            $priceList
                 ->setDealer($dealer)
-                ->setActive($data['pricesList']['active'])
-                ->setPath($data['pricesList']['path'])
-                ->setHeaders($data['pricesList']['headers']);
+                ->setActive($data['priceList']['active'])
+                ->setPath($data['priceList']['path'])
+                ->setHeaders($data['priceList']['headers']);
 
-            $dealer->setPricesList($pricesList);
+            $dealer->setPriceList($priceList);
         }
 
         $dealer
@@ -157,7 +157,7 @@ EOT
                 'name' => 'Philibert',
                 'active' => true,
                 'image' => 'http://ulule.me/presales/0/6/6/9660/philibert_jpg_640x860_q85.jpg',
-                'pricesList' => [
+                'priceList' => [
                     'active' => true,
                     'path' => 'philibert.csv',
                     'headers' => false,

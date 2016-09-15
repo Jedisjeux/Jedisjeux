@@ -76,13 +76,13 @@ EOT
         $dealers = $this->getDealers();
 
         foreach ($dealers as $step => $dealer) {
-            if ($dealer->hasPricesList() and $dealer->getPricesList()->isActive()) {
+            if ($dealer->hasPriceList() and $dealer->getPriceList()->isActive()) {
                 try {
                     $output->writeln(sprintf('<comment>Step %d of %d.</comment> <info>%s</info>', $step + 1, count($dealers), $dealer->getCode()));
                     $this->commandExecutor->runCommand('app:dealer-prices:import', [
                         'dealer' => $dealer->getCode(),
-                        '--filename' => $dealer->getPricesList()->getPath(),
-                        '--remove-first-line' => $dealer->getPricesList()->hasHeaders(),
+                        '--filename' => $dealer->getPriceList()->getPath(),
+                        '--remove-first-line' => $dealer->getPriceList()->hasHeaders(),
                     ], $output);
                     $output->writeln('');
                 } catch (RuntimeException $exception) {

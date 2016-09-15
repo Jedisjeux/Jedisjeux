@@ -17,16 +17,16 @@ use Doctrine\ORM\Mapping as ORM;
  * @author Loïc Frémont <loic@mobizel.com>
  *
  * @ORM\Entity
- * @ORM\Table("jdj_prices_list")
+ * @ORM\Table("jdj_price_list")
  */
-class PricesList
+class PriceList
 {
     use IdentifiableTrait;
 
     /**
      * @var Dealer
      *
-     * @ORM\OneToOne(targetEntity="Dealer", inversedBy="pricesList")
+     * @ORM\OneToOne(targetEntity="Dealer", inversedBy="priceList")
      */
     protected $dealer;
 
