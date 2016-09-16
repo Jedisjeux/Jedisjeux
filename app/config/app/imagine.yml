@@ -73,3 +73,7 @@ liip_imagine:
         small_height_fixed:
             filters:
                 relative_resize: { heighten: 80 }
+        pub_banner:
+            quality: 100
+            filters:
+                thumbnail: { size: [250, 250], mode: outbound }

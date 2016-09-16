@@ -1,0 +1,6 @@
+{% set pub_banner = pub_banners|length > 0 ? pub_banners[0] : null %}
+
+{% if pub_banner %}
+    <img src="http://cdn.adnxs.com/p/06/6b/f0/8f/066bf08f4c8c902293f335b99f6abc04.jpg" class="img-responsive" />
+    {#<img src="{{ pub_banners[0].webPath|imagine_filter('pub_banner') }}"/>#}
+{% endif %}
