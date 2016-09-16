@@ -49,14 +49,14 @@ class Dealer implements ResourceInterface
     /**
      * @var PriceList
      *
-     * @ORM\OneToOne(targetEntity="PriceList", mappedBy="dealer", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="PriceList", mappedBy="dealer", cascade={"persist", "merge", "remove"})
      */
     protected $priceList;
 
     /**
      * @var ArrayCollection|PubBanner[]
      *
-     * @ORM\OneToMany(targetEntity="PubBanner", mappedBy="dealer", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="PubBanner", mappedBy="dealer", cascade={"persist", "merge", "remove"})
      */
     protected $pubBanners;
 
@@ -143,6 +143,7 @@ class Dealer implements ResourceInterface
      */
     public function setPriceList($priceList)
     {
+        $priceList->setDealer($this);
         $this->priceList = $priceList;
 
         return $this;
