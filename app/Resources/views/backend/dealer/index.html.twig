@@ -37,7 +37,6 @@
         <thead>
         <tr>
             <th>{{ 'label.image'|trans }}</th>
-            <th>{{ sorting('app_backend_dealer_index', 'label.code'|trans, 'code', 'asc') }}</th>
             <th>{{ sorting('app_backend_dealer_index', 'label.name'|trans, 'name', 'asc', icon, currentOrder) }}</th>
             <th>{{ 'label.price_list'|trans }}</th>
             <th>{{ 'label.pub_banners'|trans }}</th>
@@ -51,7 +50,6 @@
                         {{ image(dealer.image.webPath, 'small_width_fixed', dealer.name, 'img-responsive') }}
                     {% endif %}
                 </td>
-                <td>{{ dealer.code }}</td>
                 <td>{{ dealer }}</td>
                 <td>
                     {% if dealer.hasPriceList and dealer.priceList.active %}
