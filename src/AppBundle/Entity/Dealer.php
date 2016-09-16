@@ -11,6 +11,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
@@ -51,6 +52,13 @@ class Dealer implements ResourceInterface
      * @ORM\OneToOne(targetEntity="PriceList", mappedBy="dealer", cascade={"persist"})
      */
     protected $priceList;
+
+    /**
+     * @var ArrayCollection|PubBanner[]
+     *
+     * @ORM\OneToMany(targetEntity="PubBanner", mappedBy="dealer", cascade={"persist", "remove"})
+     */
+    protected $pubBanners;
 
     /**
      * @return string
@@ -136,6 +144,41 @@ class Dealer implements ResourceInterface
     public function setPriceList($priceList)
     {
         $this->priceList = $priceList;
+
+        return $this;
+    }
+
+    /**
+     * @return PubBanner[]|ArrayCollection
+     */
+    public function getPubBanners()
+    {
+        return $this->pubBanners;
+    }
+
+    /**
+     * @param PubBanner $pubBanner
+     *
+     * @return $this
+     */
+    public function addPubBanner($pubBanner)
+    {
+        if (!$this->pubBanners->contains($pubBanner)) {
+            $pubBanner->setDealer($this);
+            $this->pubBanners->add($pubBanner);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param PubBanner $pubBanner
+     *
+     * @return $this
+     */
+    public function removePubBanner($pubBanner)
+    {
+        $this->pubBanners->remove($pubBanner);
 
         return $this;
     }

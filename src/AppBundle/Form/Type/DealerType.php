@@ -42,7 +42,22 @@ class DealerType extends AbstractResourceType
             ->add('priceList', 'app_price_list', [
                 'label' => 'label.price_list',
                 'required' => false,
-            ]);
+            ])
+            ->add('pubBanners', 'collection', array(
+                'label' => 'label.pub_banners',
+                'type' => 'app_pub_banner',
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'prototype' => true,
+                'widget_add_btn' => array('label' => "label.add_image"),
+                'show_legend' => false, // dont show another legend of subform
+                'options' => array( // options for collection fields
+                    'label_render' => false,
+                    'horizontal_input_wrapper_class' => "col-lg-8",
+                    'widget_remove_btn' => array('label' => "label.remove_this_image"),
+                )
+            ));
     }
 
     /**

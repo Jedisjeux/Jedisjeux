@@ -168,6 +168,11 @@ sylius_resource:
         app.person_image:
             classes:
                 model: AppBundle\Entity\PersonImage
+        app.pub_banner:
+            classes:
+                model: AppBundle\Entity\PubBanner
+                form:
+                    default: AppBundle\Form\Type\PubBannerType
         app.single_image_block:
             driver: doctrine/phpcr-odm
             classes:

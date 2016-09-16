@@ -39,6 +39,8 @@
             <th>{{ 'label.image'|trans }}</th>
             <th>{{ sorting('app_backend_dealer_index', 'label.code'|trans, 'code', 'asc') }}</th>
             <th>{{ sorting('app_backend_dealer_index', 'label.name'|trans, 'name', 'asc', icon, currentOrder) }}</th>
+            <th>{{ 'label.price_list'|trans }}</th>
+            <th>{{ 'label.pub_banners'|trans }}</th>
         </tr>
         </thead>
         <tbody>
@@ -51,6 +53,18 @@
                 </td>
                 <td>{{ dealer.code }}</td>
                 <td>{{ dealer }}</td>
+                <td>
+                    {% if dealer.hasPriceList and dealer.priceList.active %}
+                        <span class="fa fa-check green"></span>
+                        {% else %}
+                            <span class="fa fa-remove red"></span>
+                    {% endif %}
+                </td>
+                <td> {% if dealer.pubBanners|length > 0 %}
+                        <span class="fa fa-check green"></span>
+                    {% else %}
+                        <span class="fa fa-remove red"></span>
+                    {% endif %}</td>
                 <td class="text-right">
                     <ul class="list-inline text-nowrap">
                         <li>
