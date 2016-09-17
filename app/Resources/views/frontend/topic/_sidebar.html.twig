@@ -18,17 +18,7 @@
 
     <hr />
 
-    <!-- Banner Widget -->
-    <div class="s-widget">
-        <!-- Widgets Content -->
-        <div class="widget-content">
-            {{ render(url('app_partial_pub_banner_index', {
-                template: 'frontend/pub_banner/_showRandom.html.twig'
-            })) }}
-        </div>
-    </div>
+    {% include 'frontend/pub_banner/_sidebarWidget.html.twig' %}
 
     {% include 'frontend/topic/sidebar/_navTabWidget.html.twig' %}
-
-
 </div>

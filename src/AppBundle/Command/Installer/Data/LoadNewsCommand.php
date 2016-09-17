@@ -239,7 +239,7 @@ EOM;
 
         $articleDocument->setName($data['name']);
         $articleDocument->setTitle($data['title']);
-        $articleDocument->setPublishable(Product::PUBLISHED === $data['status']);
+        $articleDocument->setPublishable(Article::STATUS_PUBLISHED === $data['status']);
         $articleDocument->setPublishStartDate(\DateTime::createFromFormat('Y-m-d H:i:s', $data['publishedAt']));
 
         return $article;

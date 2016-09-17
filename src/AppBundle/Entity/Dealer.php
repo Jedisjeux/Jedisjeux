@@ -179,7 +179,7 @@ class Dealer implements ResourceInterface
      */
     public function removePubBanner($pubBanner)
     {
-        $this->pubBanners->remove($pubBanner);
+        $this->pubBanners->removeElement($pubBanner);
 
         return $this;
     }
