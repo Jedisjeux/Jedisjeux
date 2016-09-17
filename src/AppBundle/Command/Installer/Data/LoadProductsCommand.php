@@ -47,38 +47,38 @@ class LoadProductsCommand extends ContainerAwareCommand
         $associationTypeCollection = $this->createOrReplaceAssociationTypeCollection();
         $associationTypeExpansion = $this->createOrReplaceAssociationTypeExpansion();
 
-//        $i = 0;
-//
-//        foreach ($this->getRows() as $data) {
-//            $output->writeln(sprintf("Loading <comment>%s</comment> product", $data['name']));
-//
-//            $product = $this->createOrReplaceProduct($data);
-//            $this->getManager()->persist($product);
-//
-//            if (($i % self::BATCH_SIZE) === 0) {
-//                $this->getManager()->flush(); // Executes all updates.
-//                $this->getManager()->clear(); // Detaches all objects from Doctrine!
-//            }
-//
-//            ++$i;
-//        }
-//
-//        $this->getManager()->flush();
-//        $this->getManager()->clear();
-//
-//        foreach ($this->getVariants() as $data) {
-//            $output->writeln(sprintf("Loading <comment>%s</comment> variant for product <comment>%s</comment>",
-//                $data['name'],
-//                $data['parent_code']
-//            ));
-//
-//            /** @var Product $product */
-//            $product = $this->getRepository()->findOneBy(['code' => $data['parent_code']]);
-//
-//            if (null !== $product) {
-//                $this->createOrReplaceProductVariant($product, $data);
-//            }
-//        }
+        $i = 0;
+
+        foreach ($this->getRows() as $data) {
+            $output->writeln(sprintf("Loading <comment>%s</comment> product", $data['name']));
+
+            $product = $this->createOrReplaceProduct($data);
+            $this->getManager()->persist($product);
+
+            if (($i % self::BATCH_SIZE) === 0) {
+                $this->getManager()->flush(); // Executes all updates.
+                $this->getManager()->clear(); // Detaches all objects from Doctrine!
+            }
+
+            ++$i;
+        }
+
+        $this->getManager()->flush();
+        $this->getManager()->clear();
+
+        foreach ($this->getVariants() as $data) {
+            $output->writeln(sprintf("Loading <comment>%s</comment> variant for product <comment>%s</comment>",
+                $data['name'],
+                $data['parent_code']
+            ));
+
+            /** @var Product $product */
+            $product = $this->getRepository()->findOneBy(['code' => $data['parent_code']]);
+
+            if (null !== $product) {
+                $this->createOrReplaceProductVariant($product, $data);
+            }
+        }
 
         $this->deleteProductAssociations();
         $this->insertProductsOfCollections($associationTypeCollection);
