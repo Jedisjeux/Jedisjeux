@@ -10,12 +10,26 @@
  */
 
 namespace AppBundle\Form\Type;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
 class PubBannerType extends AbstractImageType
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        parent::buildForm($builder, $options);
+
+        $builder->add('targetUrl', TextType::class, [
+            'label' => 'label.target_url',
+        ]);
+    }
+
     /**
      * {@inheritdoc}
      */

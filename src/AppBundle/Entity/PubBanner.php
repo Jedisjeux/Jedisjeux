@@ -22,11 +22,38 @@ use Doctrine\ORM\Mapping as ORM;
 class PubBanner extends AbstractImage
 {
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $targetUrl;
+
+    /**
      * @var Dealer
      *
      * @ORM\ManyToOne(targetEntity="Dealer", inversedBy="pubBanners")
      */
     protected $dealer;
+
+    /**
+     * @return string
+     */
+    public function getTargetUrl()
+    {
+        return $this->targetUrl;
+    }
+
+    /**
+     * @param string $targetUrl
+     *
+     * @return $this
+     */
+    public function setTargetUrl($targetUrl)
+    {
+        $this->targetUrl = $targetUrl;
+
+        return $this;
+    }
 
     /**
      * @return Dealer

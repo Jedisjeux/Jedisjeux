@@ -93,6 +93,7 @@ label:
   show: Voir
   start_date: Date de début
   status: Statut
+  target_url: Url cible
   themes: Thèmes
   title: Titre
   topics: Sujets
