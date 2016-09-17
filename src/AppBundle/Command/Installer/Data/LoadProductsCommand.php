@@ -96,7 +96,7 @@ class LoadProductsCommand extends ContainerAwareCommand
         }
 
         $assocationType->setCode('collection');
-        $assocationType->setName('Dans la même collection');
+        $assocationType->setName('Dans la même série');
 
         $this->getManager()->persist($assocationType);
         $this->getManager()->flush(); // Save changes in database.
