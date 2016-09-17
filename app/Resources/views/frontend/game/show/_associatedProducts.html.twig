@@ -1,0 +1,13 @@
+{% from 'macros/games.html.twig' import magazineItemOne %}
+
+<div class="row">
+    {% for key, product in products %}
+    {% if key%3 == 0 and key > 1 %}
+</div>
+<div class="row">
+    {% endif %}
+    <div class="col-md-4 col-sm-6">
+        {{ magazineItemOne(product) }}
+    </div>
+    {% endfor %}
+</div>
