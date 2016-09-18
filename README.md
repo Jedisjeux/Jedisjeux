@@ -32,6 +32,28 @@ $ create database jedisjeux;
 $ mysql -u root -proot jedisjeux < dmp_jdj_1.sql
 ```
 
+```bash
+create or replace view jdj_v_article_view_count as
+select element_id as id, sum(count_click) as view_count
+  from jdj_clicks
+where from_id = 'articles'
+group by element_id;
+
+create or replace view jdj_v_news_view_count as
+  select element_id as id, sum(count_click) as view_count
+  from jdj_clicks
+  where from_id = 'news'
+  group by element_id;
+
+create or replace view jdj_v_review_article_view_count as
+  select element_id as id, sum(count_click) as view_count
+  from jdj_clicks
+  where from_id = 'tests'
+  group by element_id;
+
+```
+
+
 Finally execute the Jedisjeux install command :
 
 ```bash

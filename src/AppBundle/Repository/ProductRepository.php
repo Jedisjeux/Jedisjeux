@@ -121,16 +121,30 @@ class ProductRepository extends BaseProductRepository
         }
 
         if (!empty($criteria['releasedAtFrom'])) {
-            $dateCaclulator = new DateCalculator();
+            $dateCalculator = new DateCalculator();
             $queryBuilder
                 ->andWhere($queryBuilder->expr()->gte('variant.releasedAt', ':releasedAtFrom'))
-                ->setParameter('releasedAtFrom', $dateCaclulator->getDay($criteria['releasedAtFrom']));
+                ->setParameter('releasedAtFrom', $dateCalculator->getDay($criteria['releasedAtFrom']));
         }
+
         if (!empty($criteria['releasedAtTo'])) {
-            $dateCaclulator = new DateCalculator();
+            $dateCalculator = new DateCalculator();
             $queryBuilder
                 ->andWhere($queryBuilder->expr()->lte('variant.releasedAt', ':releasedAtTo'))
-                ->setParameter('releasedAtTo', $dateCaclulator->getDay($criteria['releasedAtTo']));
+                ->setParameter('releasedAtTo', $dateCalculator->getDay($criteria['releasedAtTo']));
+        }
+
+        if (!empty($criteria['person'])) {
+            $queryBuilder
+                ->leftJoin('variant.designers', 'designer')
+                ->leftJoin('variant.artists', 'artist')
+                ->leftJoin('variant.publishers', 'publisher')
+                ->andWhere($queryBuilder->expr()->orX(
+                    'designer = :person',
+                    'artist = :person',
+                    'publisher = :person'
+                ))
+                ->setParameter('person', $criteria['person']);
         }
 
         if (empty($sorting)) {
