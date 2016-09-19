@@ -6,17 +6,20 @@ title:
 
 label:
   active: Actif
+  add_barcode: Ajouter un code-barres
   add_image: Ajouter une image
   add_player: Ajouter un joueur
   add_product: Ajouter un produit
   add_slide: Ajouter un slide
   additional_address_info: Complément d'adresse
   address: Adresse
+  age_min: Age min
   amount: Montant
   at: À
   attributes: Attributs
   available: Disponible
   barcode: Code-barres
+  barcodes: Codes-barres
   body: Corps
   cancel: Annuler
   category: Catégorie
@@ -37,6 +40,8 @@ label:
   delete: Supprimer
   description: Description
   duration: Durée
+  duration_min: Durée min
+  duration_max: Durée max
   headers: Entêtes
   hello: Bonjour
   edit: Modifier
@@ -73,6 +78,8 @@ label:
   played_at: Joué le
   players: Joueurs
   player_count: Nombre de joueurs
+  player_count_min: Nombre de joueurs min
+  player_count_max: Nombre de joueurs max
   product: Produit
   products: Produits
   price: Prix
@@ -84,6 +91,7 @@ label:
   rate: Note
   ready_to_publish: Prêt à publier
   remember_me: Se souvenir de moi
+  remove_this_barcode: Supprimer ce code-barres
   remove_this_image: Supprimer cette image
   remove_this_player: Supprimer ce joueur
   save_changes: Mettre à jour

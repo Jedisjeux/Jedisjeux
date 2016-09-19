@@ -12,6 +12,7 @@
 namespace AppBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -60,6 +61,21 @@ class ProductType extends AbstractResourceType
             ))
             ->add('joueurMax', null, array(
                 'label' => 'label.player_count_max',
+            ))
+            ->add('barcodes', CollectionType::class, array(
+                'label' => 'label.barcodes',
+                'type' => 'app_product_barcode',
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'prototype' => true,
+                'widget_add_btn' => array('label' => "label.add_barcode"),
+                'show_legend' => false, // dont show another legend of subform
+                'options' => array( // options for collection fields
+                    'label_render' => false,
+                    'horizontal_input_wrapper_class' => "col-lg-8",
+                    'widget_remove_btn' => array('label' => "label.remove_this_barcode"),
+                )
             ));
     }
 
