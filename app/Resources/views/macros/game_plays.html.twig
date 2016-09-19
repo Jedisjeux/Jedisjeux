@@ -5,7 +5,7 @@
     {% set topic = game_play.topic %}
 
     {% set meta %}
-        <i class="fa fa-calendar"></i> {{ game_play.createdAt|localizeddate('long', 'none') }}
+        <i class="fa fa-calendar"></i> {{ game_play.createdAt|localizeddate('medium', 'none') }}
         - <i class="fa fa-comments"></i> {% if topic %} {{ topic.posts|length }} {% endif %} Comments
     {% endset %}
     {% set body %}
