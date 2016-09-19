@@ -10,8 +10,8 @@
             <div class="element">
                 <div class="image-style-one">
                     {% if product.imageCouverture %}
-                    <img src="{{ product.imageCouverture.webPath | imagine_filter('default') }}" alt=""
-                         class="img-responsive"/>
+                        <img src="{{ product.imageCouverture.webPath | imagine_filter('default') }}" alt=""
+                             class="img-responsive"/>
                     {% endif %}
                     <div class="image-hover">
                     </div>
@@ -36,6 +36,9 @@
         <div class="rating-container">
             <div class="rating yellow" data-readonly="true"
                  data-max-value="10" data-rate-value="{{ product.averageRating }}" data-step-size="0.1"></div>
+        </div>
+        <div class="magazine-meta">
+            <span class="fa fa-calendar"></span> sortie le {{ product.releasedAt|localizeddate('medium', 'none') }}
         </div>
     </div>
 </div>

@@ -13,7 +13,12 @@
         <div class="tab-pane fade in active" id="jeux">
 
             <div class="block-heading-two">
-                <h3><span>Les plus populaires</span></h3>
+                <h3><a href="{{ path('sylius_product_index_by_person', {
+                        'slug': person.slug,
+                            'sorting': {
+                                'averageRating': 'desc'
+                        }
+                    }) }}"><span>Les plus populaires</span></a></h3>
             </div>
 
             {{ render(url('sylius_partial_product_index', {
@@ -28,7 +33,12 @@
             })) }}
 
             <div class="block-heading-two">
-                <h3><span>Les plus récents</span></h3>
+                <h3><a href="{{ path('sylius_product_index_by_person', {
+                        'slug': person.slug,
+                        'sorting': {
+                            'variant.releasedAt': 'desc'
+                        }
+                    }) }}"><span>Les plus récents</span></a></h3>
             </div>
 
             {{ render(url('sylius_partial_product_index', {
