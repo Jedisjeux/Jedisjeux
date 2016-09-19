@@ -11,10 +11,33 @@
     <!-- Tab content -->
     <div class="tab-content">
         <div class="tab-pane fade in active" id="jeux">
+
+            <div class="block-heading-two">
+                <h3><span>Les plus populaires</span></h3>
+            </div>
+
             {{ render(url('sylius_partial_product_index', {
-                'paginate': 12,
+                'paginate': 3,
                 'criteria': {
                     'person': person.id
+                },
+                'sorting': {
+                    'averageRating': 'desc'
+                },
+                'template': 'partial/product/_magazine_items_one.html.twig'
+            })) }}
+
+            <div class="block-heading-two">
+                <h3><span>Les plus récents</span></h3>
+            </div>
+
+            {{ render(url('sylius_partial_product_index', {
+                'paginate': 3,
+                'criteria': {
+                    'person': person.id
+                },
+                'sorting': {
+                    'variant.releasedAt': 'desc'
                 },
                 'template': 'partial/product/_magazine_items_one.html.twig'
             })) }}

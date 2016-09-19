@@ -10,6 +10,7 @@ namespace AppBundle\Repository;
 
 use AppBundle\Entity\Product;
 use AppBundle\Utils\DateCalculator;
+use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
@@ -20,7 +21,7 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 class ProductRepository extends BaseProductRepository
 {
     /**
-     * {@inheritdoc}
+     * @return QueryBuilder
      */
     protected function getQueryBuilder()
     {
