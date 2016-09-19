@@ -5,7 +5,7 @@
     {% set imagineBlock = articleDocument.mainImage %}
 
     {% set meta %}
-        <i class="fa fa-calendar"></i> {{ articleDocument.publishStartDate|localizeddate('long', 'none') }}
+        <i class="fa fa-calendar"></i> {{ articleDocument.publishStartDate|localizeddate('medium', 'none') }}
         - <i class="fa fa-eye"></i> {{ article.viewCount }}
         - <i class="fa fa-comments"></i> {{ article.topic ? article.topic.postCount : 0 }}
     {% endset %}
@@ -24,7 +24,7 @@
     {% set imagineBlock = articleDocument.mainImage %}
 
     {% set meta %}
-        <i class="fa fa-calendar"></i> {{ articleDocument.publishStartDate|localizeddate('long', 'none') }}
+        <i class="fa fa-calendar"></i> {{ articleDocument.publishStartDate|localizeddate('medium', 'none') }}
         - <i class="fa fa-comments"></i> {{ article.topic ? article.topic.postCount : 0 }} Comments
     {% endset %}
     {% set body %}{% endset %}
@@ -42,7 +42,7 @@
     {% set imagineBlock = articleDocument.mainImage %}
 
     {% set meta %}
-        <i class="fa fa-calendar"></i> {{ articleDocument.publishStartDate|localizeddate('long', 'none') }}
+        <i class="fa fa-calendar"></i> {{ articleDocument.publishStartDate|localizeddate('medium', 'none') }}
         - <i class="fa fa-eye"></i> {{ article.viewCount }}
         - <i class="fa fa-comments"></i> {{ article.topic ? article.topic.postCount : 0 }}
     {% endset %}
