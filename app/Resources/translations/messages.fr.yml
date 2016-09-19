@@ -45,6 +45,7 @@ label:
   end_date: Date de fin
   file: Fichier
   first_name: Prénom
+  games: Jeux
   image: Image
   image_position: Position de l'image
   internal_name: Nom interne

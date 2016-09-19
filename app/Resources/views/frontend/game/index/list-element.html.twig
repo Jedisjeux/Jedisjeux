@@ -33,5 +33,9 @@
             {{ playerCount(product) }}<br/>
             à partir de {{ product.ageMin }} ans<br/>
         </p>
+        <div class="rating-container">
+            <div class="rating yellow" data-readonly="true"
+                 data-max-value="10" data-rate-value="{{ product.averageRating }}" data-step-size="0.1"></div>
+        </div>
     </div>
 </div>

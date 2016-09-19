@@ -14,6 +14,7 @@ use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -23,7 +24,8 @@ class ProductController extends ResourceController
 {
     /**
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @return Response
      */
     public function indexWithTaxonsAction(Request $request)
     {
@@ -54,8 +56,9 @@ class ProductController extends ResourceController
 
     /**
      * @param Request $request
-     * @param $permalink
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param string $permalink
+     *
+     * @return Response
      */
     public function indexByTaxonAction(Request $request, $permalink)
     {
@@ -87,6 +90,54 @@ class ProductController extends ResourceController
                     'metadata' => $this->metadata,
                     'taxon' => $taxon,
                     'rootTaxons' => $rootTaxons,
+                    'resources' => $resources,
+                    $this->metadata->getPluralName() => $resources,
+                ]);
+        }
+
+        return $this->viewHandler->handle($configuration, $view);
+    }
+
+    /**
+     * @param Request $request
+     * @param string $slug
+     *
+     * @return Response
+     */
+    public function indexByPersonAction(Request $request, $slug)
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+        $this->isGrantedOr403($configuration, ResourceActions::INDEX);
+
+        $person = $this->get('app.repository.person')->findOneBy(['slug' => $slug]);
+        if (!isset($person)) {
+            throw new NotFoundHttpException('Requested person does not exist.');
+        }
+
+        $rootTaxons = $this->getTaxonRepository()->findBy(array('code' => array('mechanisms', 'themes')));
+
+        /** @var ProductRepository $repository */
+        $repository = $this->repository;
+
+        $criteria = array_merge($request->get('criteria', $configuration->getCriteria()), [
+            'person' => $person,
+        ]);
+
+        $resources = $repository
+            ->createFilterPaginator($criteria, $request->get('sorting', $configuration->getSorting()))
+            ->setMaxPerPage($configuration->getPaginationMaxPerPage())
+            ->setCurrentPage($request->get('page', 1));
+
+        $view = View::create($resources);
+
+        if ($configuration->isHtmlRequest()) {
+            $view
+                ->setTemplate($configuration->getTemplate('indexByPerson.html'))
+                ->setTemplateVar($this->metadata->getPluralName())
+                ->setData([
+                    'metadata' => $this->metadata,
+                    'rootTaxons' => $rootTaxons,
+                    'person' => $person,
                     'resources' => $resources,
                     $this->metadata->getPluralName() => $resources,
                 ]);
