@@ -4,7 +4,7 @@
     <!-- Nav tabs -->
     <ul class="nav nav-tabs">
         <li class="active"><a href="#jeux" data-toggle="tab">Jeux</a></li>
-        <li><a href="#profile-2" data-toggle="tab">Articles</a></li>
+        <li><a href="#articles" data-toggle="tab">Articles</a></li>
         <li><a href="#avis" data-toggle="tab">Avis</a></li>
     </ul>
     <!-- Tab content -->
@@ -51,15 +51,18 @@
                 'template': 'frontend/game/index/list-3.html.twig'
             })) }}
         </div>
-        <div class="tab-pane fade" id="profile-2">
-            <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia
-                non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad
-                minima veniam, quis nostrum exercitationem ullam corporis.</p>
-        </div>
-        <div class="tab-pane fade" id="messages-2">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.</p>
+        <div class="tab-pane fade" id="articles">
+            <!-- TODO publishedAt -->
+            {{ render(url('app_partial_article_index', {
+                'template': 'frontend/article/_index.html.twig',
+                'paginate': 12,
+                'criteria': {
+                    'person': person.id
+                },
+                'sorting': {
+                    'publishStartDate': 'desc'
+                }} )) }}
+
         </div>
         <div class="tab-pane fade" id="avis">
             {{ render(url('sylius_partial_product_review_index', {

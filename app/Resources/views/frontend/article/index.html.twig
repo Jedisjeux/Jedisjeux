@@ -1,7 +1,6 @@
 {% extends "base.html.twig" %}
 
 {% from 'macros/misc.html.twig' import pagination %}
-{% from 'macros/articles.html.twig' import magazineItemOne %}
 {% from 'macros/sorting.html.twig' import sorting %}
 
 {% block body_class %}magazine{% endblock %}
@@ -47,18 +46,7 @@
 
             <div class="clearfix"></div>
 
-            <div class="row">
-                {% for key, article in articles %}
-                {% if key > 0 and key%3 == 0 %}
-            </div>
-            <div class="row">
-                {% endif %}
-                <div class="col-md-4">
-                    {{ magazineItemOne(article) }}
-                </div>
-                {% endfor %}
-            </div>
-            <div class="clearfix"></div>
+            {% include 'frontend/article/_index.html.twig' %}
 
             {{ pagination(articles) }}
 

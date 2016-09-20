@@ -13,6 +13,25 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
  */
 class ArticleRepository extends EntityRepository
 {
+    /**
+     * @return QueryBuilder
+     */
+    protected function getQueryBuilder()
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder
+            ->select('o, topic, product, productVariant, productTranslation')
+            ->leftJoin('o.topic', 'topic')
+            ->leftJoin('o.product', 'product')
+            ->leftJoin('product.variants', 'productVariant')
+            ->leftJoin('product.translations', 'productTranslation');
+
+        return $queryBuilder;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = [])
     {
         if (isset($criteria['publishStartDateFrom'])) {
@@ -47,6 +66,21 @@ class ArticleRepository extends EntityRepository
                 ->setParameter('query', '%' . $criteria['query'] . '%');
 
             unset($criteria['query']);
+        }
+
+        if (isset($criteria['person'])) {
+            $queryBuilder
+                ->leftJoin('productVariant.designers', 'designer')
+                ->leftJoin('productVariant.artists', 'artist')
+                ->leftJoin('productVariant.publishers', 'publisher')
+                ->andWhere($queryBuilder->expr()->orX(
+                    'designer = :person',
+                    'artist = :person',
+                    'publisher = :person'
+                ))
+                ->setParameter('person', $criteria['person']);
+
+            unset($criteria['person']);
         }
 
         if (null !== $status) {
@@ -101,18 +135,5 @@ class ArticleRepository extends EntityRepository
         $this->applySorting($queryBuilder, (array)$sorting);
 
         return $this->getPaginator($queryBuilder);
-    }
-
-    /**
-     * @return QueryBuilder
-     */
-    protected function getQueryBuilder()
-    {
-        $queryBuilder = $this->createQueryBuilder('o');
-        $queryBuilder
-            ->addSelect('topic')
-            ->leftJoin('o.topic', 'topic');
-
-        return $queryBuilder;
     }
 }
