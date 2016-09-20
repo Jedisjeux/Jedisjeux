@@ -4,8 +4,8 @@
     <!-- Nav tabs -->
     <ul class="nav nav-tabs">
         <li class="active"><a href="#jeux" data-toggle="tab">Jeux</a></li>
-        <li><a href="#profile-2" data-toggle="tab">Article</a></li>
-        <li><a href="#profile-2" data-toggle="tab">Critiques</a></li>
+        <li><a href="#profile-2" data-toggle="tab">Articles</a></li>
+        <li><a href="#avis" data-toggle="tab">Avis</a></li>
     </ul>
     <!-- Tab content -->
     <div class="tab-content">
@@ -61,10 +61,18 @@
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
                 ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.</p>
         </div>
-        <div class="tab-pane fade" id="settings-2">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.</p>
+        <div class="tab-pane fade" id="avis">
+            {{ render(url('sylius_partial_product_review_index', {
+                'criteria': {
+                    'person': person.id,
+                    'hasComment': 1
+                },
+                'sorting': {
+                    'createdAt': 'desc'
+                },
+                'paginate': 10,
+                'template': 'frontend/product_review/_index.html.twig'
+            })) }}
         </div>
     </div>
 </div>

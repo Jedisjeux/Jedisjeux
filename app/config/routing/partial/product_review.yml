@@ -4,11 +4,11 @@ sylius_partial_product_review_index:
     defaults:
         _controller: sylius.controller.product_review:indexAction
         _sylius:
-            criteria: $criteria
+            repository:
+                method: createFilterPaginator
+                arguments: [$criteria, $sorting]
             template: $template
             paginate: $paginate
-            sortable: true
-            sorting: $sorting
     requirements:
         template: "[^?]+"
 
