@@ -44,6 +44,7 @@
 
                         Trier
                         par {{ sorting('sylius_product_index_by_taxon', 'label.created_at'|trans, 'createdAt', 'desc', icon, currentOrder, {'permalink': taxon.permalink}) }},
+                        par {{ sorting('sylius_product_index_by_taxon', 'label.rate'|trans, 'averageRating', 'desc', null, null, {'permalink': taxon.permalink}) }},
                         {{ sorting('sylius_product_index_by_taxon', 'label.name'|trans, 'translation.name', 'asc', null, null, {'permalink': taxon.permalink} ) }}
                     </div>
 

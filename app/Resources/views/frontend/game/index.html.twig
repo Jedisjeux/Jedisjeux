@@ -40,6 +40,7 @@
 
                         Trier
                         par {{ sorting('sylius_product_index', 'label.created_at'|trans, 'createdAt', 'desc', icon, currentOrder) }},
+                        par {{ sorting('sylius_product_index', 'label.rate'|trans, 'averageRating', 'desc'}) }},
                         {{ sorting('sylius_product_index', 'label.name'|trans, 'translation.name', 'asc') }}
                     </div>
 
