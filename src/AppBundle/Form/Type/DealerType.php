@@ -11,9 +11,8 @@
 
 namespace AppBundle\Form\Type;
 
+use Sonata\CoreBundle\Form\Type\CollectionType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -43,7 +42,7 @@ class DealerType extends AbstractResourceType
                 'label' => 'label.price_list',
                 'required' => false,
             ])
-            ->add('pubBanners', 'collection', array(
+            ->add('pubBanners', CollectionType::class, array(
                 'label' => 'label.pub_banners',
                 'type' => 'app_pub_banner',
                 'allow_add' => true,

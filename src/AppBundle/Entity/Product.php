@@ -150,7 +150,7 @@ class Product extends BaseProduct implements ReviewableInterface
     /**
      * @var ArrayCollection|ProductBarcode[]
      *
-     * @ORM\OneToMany(targetEntity="ProductBarcode", mappedBy="product")
+     * @ORM\OneToMany(targetEntity="ProductBarcode", mappedBy="product", cascade={"persist", "merge", "remove"})
      */
     protected $barcodes;
 
@@ -348,6 +348,18 @@ class Product extends BaseProduct implements ReviewableInterface
         if (!$this->taxons->contains($taxon)) {
             $this->taxons->add($taxon);
         }
+
+        return $this;
+    }
+
+    /**
+     * @param TaxonInterface $taxon
+     *
+     * @return $this
+     */
+    public function removeTaxon(TaxonInterface $taxon)
+    {
+        $this->taxons->removeElement($taxon);
 
         return $this;
     }
@@ -671,6 +683,7 @@ class Product extends BaseProduct implements ReviewableInterface
     public function addBarcode($barcode)
     {
         if (!$this->barcodes->contains($barcode)) {
+            $barcode->setProduct($this);
             $this->barcodes->add($barcode);
         }
 

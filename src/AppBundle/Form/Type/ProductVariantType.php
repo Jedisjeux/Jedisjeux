@@ -12,6 +12,7 @@
 namespace AppBundle\Form\Type;
 
 use Sylius\Bundle\VariationBundle\Form\Type\VariantType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -28,7 +29,7 @@ class ProductVariantType extends VariantType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('images', 'collection', array(
+            ->add('images', CollectionType::class, array(
                 'type' => 'app_product_variant_image',
                 'allow_add' => true,
                 'allow_delete' => true,
