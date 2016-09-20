@@ -26,6 +26,7 @@ class ServicesPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         $this->processFactories($container);
+        $this->processFormTypes($container);
     }
 
     /**
@@ -56,5 +57,15 @@ class ServicesPass implements CompilerPassInterface
             ->addMethodCall('setArticleContentFactory', [new Reference('app.factory.article_content')])
             ->addMethodCall('setProductRepository', [new Reference('sylius.factory.product')])
             ->addMethodCall('setCustomerContext', [new Reference('sylius.context.customer')]);
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     */
+    protected function processFormTypes(ContainerBuilder $container)
+    {
+        $dealerFormTypeDefinition = $container->getDefinition('app.form.type.dealer');
+        $dealerFormTypeDefinition
+            ->addMethodCall('setManager', [new Reference('app.manager.dealer')]);
     }
 }
