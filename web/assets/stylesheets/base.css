@@ -28871,9 +28871,10 @@ blockquote.blockquote-reverse {
 
 /* line 11, ../sass/parts/_heading.scss */
 .header-1 {
-  margin-top: 35px;
+  position: relative;
+  top: -25px;
 }
-/* line 14, ../sass/parts/_heading.scss */
+/* line 15, ../sass/parts/_heading.scss */
 .header-1 .affix {
   z-index: 1030;
   width: 100%;

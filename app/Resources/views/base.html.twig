@@ -43,7 +43,7 @@
 <!-- Add class "boxed" along with body for boxed layout. -->
 <!-- Add "pattern-x" (1 to 5) for background patterns. -->
 <!-- Add "img-x" (1 to 5) for background images. -->
-<body class="{% block body_class %}{% endblock %}">
+<body class="{% block body_class %}{% endblock %} {% if is_granted('ROLE_ADMIN') %}sf-toolbar{% endif %}">
 
 {% include 'layout/loading.html.twig' %}
 
