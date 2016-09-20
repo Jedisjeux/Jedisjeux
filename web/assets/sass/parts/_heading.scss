@@ -7,3 +7,14 @@
     border-color: #32c8de;
   }
 }
+
+.header-1 {
+  position: relative;
+  top: -25px;
+
+  .affix {
+    z-index:1030;
+    width: 100%;
+    top: 43px;
+  }
+}

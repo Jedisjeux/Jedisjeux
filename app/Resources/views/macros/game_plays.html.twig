@@ -8,10 +8,7 @@
         <i class="fa fa-calendar"></i> {{ game_play.createdAt|localizeddate('medium', 'none') }}
         - <i class="fa fa-comments"></i> {% if topic %} {{ topic.posts|length }} {% endif %} Comments
     {% endset %}
-    {% set body %}
-        <p>Nemo enim ipsam voluptatem quia quia neque porro qui dolorem ipsum quia dolor sit amet
-            consectetur. </p>
-    {% endset %}
+    {% set body %}{% endset %}
 
     {{ item.magazineItemOne(game.imageCouverture ? game.imageCouverture.webPath : 'assets/img/avatar_2x.png', game.name, 'magazine_item', 'img-responsive', path('app_game_play_show', {'productSlug': game_play.product.slug, 'id': game_play.id}), game.name, body, meta) }}
 
