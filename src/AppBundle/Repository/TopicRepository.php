@@ -19,6 +19,21 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 class TopicRepository extends EntityRepository
 {
     /**
+     * @return QueryBuilder
+     */
+    protected function getQueryBuilder()
+    {
+        return $this
+            ->createQueryBuilder('o')
+            ->addSelect('user')
+            ->addSelect('customer')
+            ->addSelect('avatar')
+            ->join('o.createdBy', 'user')
+            ->join('user.customer', 'customer')
+            ->leftJoin('customer.avatar', 'avatar');
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function applySorting(QueryBuilder $queryBuilder, array $sorting = [])
@@ -44,14 +59,21 @@ class TopicRepository extends EntityRepository
      */
     public function createFilterPaginator($criteria = array(), $sorting = array())
     {
-        $queryBuilder = $this->createQueryBuilder('o');
-        $queryBuilder
-            ->addSelect('user')
-            ->addSelect('customer')
-            ->addSelect('avatar')
-            ->join('o.createdBy', 'user')
-            ->join('user.customer', 'customer')
-            ->leftJoin('customer.avatar', 'avatar');
+        $queryBuilder = $this->getQueryBuilder();
+
+        if ($criteria['product']) {
+
+            $queryBuilder
+                ->leftJoin('o.article', 'article')
+                ->leftJoin('o.gamePlay', 'gamePlay')
+                ->where($queryBuilder->expr()->orX(
+                    'article.product = :product',
+                    'gamePlay.product = :product'
+                ))
+                ->setParameter('product', $criteria['product']);
+
+            unset($criteria['product']);
+        }
 
         $this->applyCriteria($queryBuilder, (array)$criteria);
         $this->applySorting($queryBuilder, (array)$sorting);

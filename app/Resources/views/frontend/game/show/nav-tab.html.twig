@@ -33,16 +33,15 @@
 
         </div>
         <div class="tab-pane fade" id="forum">
-            {{ render(url('app_partial_game_play_index', {
+            {{ render(url('app_partial_topic_index', {
                 'criteria': {
-                    'product': jeu.id,
-                    'hasTopic': 1
+                    'product': jeu.id
                 },
                 'sorting': {
                     'createdAt': 'desc'
                 },
-                'paginate': 10,
-                'template': 'partial/game_play/_magazine_items_one.html.twig'
+                'paginate': 5,
+                'template': 'frontend/topic/_index.html.twig'
             })) }}
         </div>
     </div>

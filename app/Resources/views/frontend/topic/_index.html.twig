@@ -1,0 +1,43 @@
+{% from 'macros/users.html.twig' import avatar %}
+{% from 'macros/topics.html.twig' import getPath %}
+{% from 'macros/images.html.twig' import image %}
+
+{% for topic in topics %}
+
+    {% set user = topic.createdBy %}
+    {% set imagePath = avatar(user) %}
+    {% set linkUrl = getPath(topic) %}
+
+    {% set meta %}
+        <!-- Date -->
+        <a href="#"><i class="fa fa-calendar"></i>
+            &nbsp; {{ topic.createdAt|localizeddate('long', 'none') }}</a>
+        &nbsp;
+        <!-- Author -->
+        <a href="#"><i class="fa fa-customer"></i> &nbsp; {{ user }}</a>
+        &nbsp;
+        <!-- Comments -->
+        {% set commentCount = topic.posts|length %}
+        <a href="#"><i class="fa fa-comments"></i> &nbsp; {{ commentCount }} <span
+                    class="hidden-xs">Commentaire{% if commentCount > 1 %}s{% endif %}</span></a> &nbsp;
+    {% endset %}
+
+    <div class="blog-author well">
+        <!-- Author image -->
+        <div class="blog-author-img">
+            {{ image(imagePath, 'thumbnail', user.username, 'img-responsive img-round', linkUrl) }}
+        </div>
+        <!-- Author details -->
+        <div class="blog-author-content">
+            <div class="pull-right hidden-xs">
+                <a href="{{ linkUrl }}" class="btn btn-color">
+                    <span class="fa fa-arrow-circle-o-right"></span>
+                    Lire le sujet
+                </a>
+            </div>
+            <h5><a href="{{ linkUrl }}">{{ topic.title }}</a></h5>
+            {{ meta|raw }}
+        </div>
+        <div class="clearfix"></div>
+    </div>
+{% endfor %}
