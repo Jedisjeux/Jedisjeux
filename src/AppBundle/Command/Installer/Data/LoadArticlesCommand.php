@@ -39,7 +39,7 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
             ->setDescription('Load articles')
             ->addOption('no-update')
             ->addOption('limit', null, InputOption::VALUE_REQUIRED, 'Set limit of articles to import')
-            ->addOption('mainTaxon', null, InputOption::VALUE_REQUIRED, 'Restrict articles with given taxons');
+            ->addOption('main-taxon', null, InputOption::VALUE_REQUIRED, 'Restrict articles with given taxons');
     }
 
     /**
@@ -65,7 +65,7 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
             $this->getDocumentManager()->persist($articleDocument);
             $this->getDocumentManager()->flush();
 
-            if (Taxon::CODE_REPORT_ARTICLE === $data['mainTaxon']) {
+            if (Taxon::CODE_REPORT_ARTICLE === $data['main-taxon']) {
                 $slideshowBlock = $this->createOrReplaceSlideshowBlock($articleDocument);
                 $this->getDocumentManager()->persist($slideshowBlock);
                 $this->getDocumentManager()->flush();
@@ -278,9 +278,9 @@ AND not exists (
 EOM;
         }
 
-        if ($this->input->getOption('mainTaxon')) {
+        if ($this->input->getOption('main-taxon')) {
 
-            switch ($this->input->getOption('mainTaxon')) {
+            switch ($this->input->getOption('main-taxon')) {
                 case Taxon::CODE_REPORT_ARTICLE:
                     $type = 'reportage';
                     break;
@@ -298,7 +298,7 @@ EOM;
             }
 
             if (null === $type) {
-                Throw new InvalidArgumentException(sprintf('Type %s not found', $this->input->getOption('mainTaxon')));
+                Throw new InvalidArgumentException(sprintf('Type %s not found', $this->input->getOption('main-taxon')));
             }
 
             $query .= sprintf(" AND article.type_article = '%s'", $type);

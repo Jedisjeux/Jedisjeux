@@ -11,6 +11,28 @@
         <div class="row">
             {% endif %}
 
+            {% set bgColor = 'bg-lblue' %}
+            {% set icon = 'fa fa-video-camera' %}
+
+            {% if article.mainTaxon.code == constant('AppBundle\\Entity\\Taxon::CODE_REVIEW_ARTICLE') %}
+                {% set bgColor = 'bg-red' %}
+                {% set icon = 'fa fa-bar-chart' %}
+            {% elseif article.mainTaxon.code == constant('AppBundle\\Entity\\Taxon::CODE_IN_THE_BOXES') %}
+                {% set bgColor = 'bg-lblue' %}
+                {% set icon = 'fa fa-th-large' %}
+            {% elseif article.mainTaxon.code == constant('AppBundle\\Entity\\Taxon::CODE_NEWS') %}
+                {% set bgColor = 'bg-purple' %}
+                {% set icon = 'fa fa-newspaper-o' %}
+            {% elseif article.mainTaxon.code == constant('AppBundle\\Entity\\Taxon::CODE_PREVIEWS') %}
+                {% set bgColor = 'bg-green' %}
+                {% set icon = 'fa fa-arrow-right' %}
+            {% elseif article.mainTaxon.code == constant('AppBundle\\Entity\\Taxon::CODE_REPORT_ARTICLE') %}
+                {% set bgColor = 'bg-black' %}
+                {% set icon = 'fa fa-camera' %}
+            {% endif %}
+
+
+
             {% set imagineBlock = article.document.mainImage %}
 
             <div class="col-md-4 col-sm-6">
@@ -22,9 +44,9 @@
 
                     </div>
                     <div class="img-box-4-content">
-                        <a href="{{ path('app_frontend_article_show', {'name': article.name} ) }}"><i class="fa fa-video-camera bg-lblue"></i></a>
+                        <a href="{{ path('app_frontend_article_show', {'name': article.name} ) }}"><i class="{{ icon }} {{ bgColor }}"></i></a>
                         <h4><a href="#">{{ article }}</a></h4>
-                        <div class="bor bg-lblue"></div>
+                        <div class="bor {{ bgColor }}"></div>
                         <p>Publié le {{ article.publishStartDate|localizeddate('medium', 'none') }}</p>
 
                         <div class="magazine-meta">
