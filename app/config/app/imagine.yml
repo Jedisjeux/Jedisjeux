@@ -11,6 +11,11 @@ liip_imagine:
             quality: 100
             filters:
               relative_resize: { scale: 1 }
+        cmf_full:
+            data_loader: cmf_media_doctrine_phpcr
+            quality: 100
+            filters:
+              relative_resize: { scale: 1 }
         thumbnail:
             quality: 100
             filters:
