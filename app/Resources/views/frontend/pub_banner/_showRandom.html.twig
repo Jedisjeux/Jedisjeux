@@ -4,6 +4,6 @@
 
 {% if pub_banner %}
     <a href="{{ pub_banner.targetUrl }}" target="_blank">
-        <img src="{{ pub_banner.webPath|imagine_filter('pub_banner') }}" alt="{{ pub_banner.dealer }}"/>
+        <img class="img-responsive" src="{{ pub_banner.webPath|imagine_filter('pub_banner') }}" alt="{{ pub_banner.dealer }}"/>
     </a>
 {% endif %}

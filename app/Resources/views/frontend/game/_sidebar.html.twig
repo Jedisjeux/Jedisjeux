@@ -1,6 +1,71 @@
 <!-- Sidebar -->
 <div class="sidebar">
 
+    <!-- Nav tab widget - popular, recent and comments -->
+    <div class="s-widget">
+        <h5><i class="fa fa-puzzle-piece color"></i> Jeux</h5>
+
+        <div class="widget-content tabs">
+            <div class="nav-tabs-two">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#popular" data-toggle="tab">Populaires</a></li>
+                    <li><a href="#recent" data-toggle="tab">Récents</a></li>
+                </ul>
+                <!-- Tab content -->
+                <div class="tab-content">
+
+                    <!-- Popular posts -->
+                    <div class="tab-pane fade in active" id="popular">
+                        {% if taxon is defined %}
+                            {{ render(url('sylius_partial_product_index_by_taxon', {
+                                'permalink': taxon.permalink,
+                                'sorting': {
+                                    'averageRating': 'desc'
+                                },
+                                'paginate': 5,
+                                'template': 'frontend/game/_sidebarList.html.twig'
+                            })) }}
+                        {% else %}
+
+                            {{ render(url('sylius_partial_product_index', {
+                                'sorting': {
+                                    'averageRating': 'desc'
+                                },
+                                'paginate': 5,
+                                'template': 'frontend/game/_sidebarList.html.twig'
+                            })) }}
+                        {% endif %}
+                    </div>
+                    <!-- Recent posts -->
+                    <div class="tab-pane fade" id="recent">
+                        {% if taxon is defined %}
+                            {{ render(url('sylius_partial_product_index_by_taxon', {
+                                'permalink': taxon.permalink,
+                                'sorting': {
+                                    'createdAt': 'desc'
+                                },
+                                'paginate': 5,
+                                'template': 'frontend/game/_sidebarList.html.twig'
+                            })) }}
+                        {% else %}
+
+                            {{ render(url('sylius_partial_product_index', {
+                                'sorting': {
+                                    'createdAt': 'desc'
+                                },
+                                'paginate': 5,
+                                'template': 'frontend/game/_sidebarList.html.twig'
+                            })) }}
+
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     {% for rootTaxon in rootTaxons %}
         {% set taxons = rootTaxon.children %}
         <!-- Categories Widget -->
@@ -26,6 +91,6 @@
         </div>
     {% endfor %}
 
-    <hr/>
     {% include 'frontend/pub_banner/_sidebarWidget.html.twig' %}
+
 </div>

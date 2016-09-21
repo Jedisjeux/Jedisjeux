@@ -11,3 +11,18 @@ sylius_partial_product_index:
             paginate: $paginate
     requirements:
         template: "[^?]+"
+
+sylius_partial_product_index_by_taxon:
+    methods: [GET]
+    path: /products/{permalink}
+    defaults:
+        _controller: sylius.controller.product:indexByTaxonAction
+        _sylius:
+            repository:
+                method: createByTaxonPaginator
+                arguments: [$criteria, $sorting]
+            template: $template
+            paginate: $paginate
+    requirements:
+        permalink: "[^?]+"
+        template: "[^?]+"
