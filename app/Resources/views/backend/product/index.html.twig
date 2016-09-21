@@ -65,7 +65,7 @@
                 <td class="text-right">
                     <ul class="list-inline">
                         <li>
-                            {{ button.show(path('sylius_product_show', { 'slug': product.slug })) }}
+                            {{ button.generic(path('sylius_backend_product_variant_index', { 'productId': product.id }), 'label.variants', null, 'list') }}
                         </li>
                         <li>
                             {{ button.edit(path('sylius_admin_product_update', { 'id': product.id })) }}
