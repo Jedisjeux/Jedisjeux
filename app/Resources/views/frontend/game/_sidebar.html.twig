@@ -1,3 +1,5 @@
+{% from 'macros/taxons.html.twig' import sidebarList %}
+
 <!-- Sidebar -->
 <div class="sidebar">
 
@@ -74,19 +76,7 @@
             <h5><i class="fa fa-folder color"></i>&nbsp; {{ rootTaxon }}</h5>
             <!-- Widgets Content -->
             <div class="widget-content categories">
-                <ul class="list-6">
-                    {% for key, thisTaxon in taxons %}
-                        {% if key < 5 %}
-                            {% set currentTaxon = taxon is defined and thisTaxon == taxon ? true : false %}
-                            <li>
-                                <a href="{{ path('sylius_product_index_by_taxon', { 'permalink': thisTaxon.permalink }) }}">
-                                    {% if currentTaxon %}
-                                    <strong>{% endif %}{{ thisTaxon }}{% if currentTaxon %}</strong>{% endif %}
-                                </a>
-                            </li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
+                {{ sidebarList(taxons, 'sylius_product_index_by_taxon', taxon is defined ? taxon : null) }}
             </div>
         </div>
     {% endfor %}

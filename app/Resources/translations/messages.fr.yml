@@ -53,6 +53,7 @@ label:
   games: Jeux
   image: Image
   image_position: Position de l'image
+  images: Images
   internal_name: Nom interne
   label: Libellé
   last_name: Nom
@@ -87,6 +88,7 @@ label:
   publishable: Publiable
   published: Publié
   published_at: Publié le
+  publishers: Editeurs
   pub_banners: Bannières de pub
   rate: Note
   ready_to_publish: Prêt à publier
@@ -110,6 +112,7 @@ label:
   username: Nom d'utilisateur
   username_or_email: Nom d'utilisateur ou email
   validate: Valider
+  variants: Variants
   website: Site web
   yes: Oui
   your_rate: Votre note
