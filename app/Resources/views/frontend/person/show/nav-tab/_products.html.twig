@@ -1,0 +1,58 @@
+{% set popularUrl = path('sylius_product_index_by_person', {
+'slug': person.slug,
+'sorting': {
+'averageRating': 'desc'
+}
+}) %}
+
+<div class="block-heading-two">
+    <h3><a href="{{ popularUrl }}"><span>Les plus populaires</span></a></h3>
+</div>
+
+{{ render(url('sylius_partial_product_index', {
+    'paginate': 3,
+    'criteria': {
+        'person': person.id
+    },
+    'sorting': {
+        'averageRating': 'desc'
+    },
+    'template': 'frontend/game/index/list-3.html.twig'
+})) }}
+
+<div class="text-center">
+    <a href="{{ popularUrl }}" class="btn btn-color">
+        <span class="fa fa-plus"></span>
+        Plus de jeux populaires
+    </a>
+</div>
+
+
+{% set recentUrl = path('sylius_product_index_by_person', {
+'slug': person.slug,
+'sorting': {
+'variant.releasedAt': 'desc'
+}
+}) %}
+
+<div class="block-heading-two">
+    <h3><a href="{{ recentUrl }}"><span>Les plus récents</span></a></h3>
+</div>
+
+{{ render(url('sylius_partial_product_index', {
+    'paginate': 3,
+    'criteria': {
+        'person': person.id
+    },
+    'sorting': {
+        'variant.releasedAt': 'desc'
+    },
+    'template': 'frontend/game/index/list-3.html.twig'
+})) }}
+
+<div class="text-center">
+    <a href="{{ recentUrl }}" class="btn btn-color">
+        <span class="fa fa-plus"></span>
+        Plus de jeux récents
+    </a>
+</div>
