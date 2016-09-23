@@ -174,6 +174,21 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function setName($name)
+    {
+        parent::setName($name);
+
+        /** @var ProductVariant $masterVariant */
+        $masterVariant = $this->getMasterVariant();
+
+        if ($masterVariant) {
+            $masterVariant->setName($name);
+        }
+    }
+
+    /**
      * @return string
      */
     public function getStatus()

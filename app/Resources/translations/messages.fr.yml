@@ -58,6 +58,7 @@ label:
   label: Libellé
   last_name: Nom
   main: Principale
+  master: Master
   material: Matériel
   mechanisms: Mécanismes
   most_commented: Les plus commentés

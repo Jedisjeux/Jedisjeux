@@ -185,6 +185,7 @@ class LoadProductsCommand extends ContainerAwareCommand
             ->setStatus($data['status']);
 
         $product->getMasterVariant()->setCode($data['code']);
+        $product->getMasterVariant()->setName($data['name']);
 
         return $product;
     }
@@ -304,6 +305,7 @@ EOM;
         }
 
         $productVariant->setCode($data['code']);
+        $productVariant->setName($data['name']);
         $productVariant->setCreatedAt(\DateTime::createFromFormat('Y-m-d H:i:s', $data['createdAt']));
         $productVariant->setReleasedAt($data['releasedAt'] ? \DateTime::createFromFormat('Y-m-d', $data['releasedAt']) : null);
 
@@ -377,24 +379,31 @@ EOM;
     protected function recalculateMasters()
     {
         // first, set all variants as master
-        $query = <<<EOM
+        $this->getDatabaseConnection()->executeQuery(<<<EOM
 update sylius_product_variant variant
  set variant.is_master = 1;
-EOM;
+EOM
+        );
 
-        $this->getDatabaseConnection()->executeQuery($query);
 
         // only keep the most recent id as master
-        $query = <<<EOM
-        update sylius_product_variant variant
+        $this->getDatabaseConnection()->executeQuery(<<<EOM
+update sylius_product_variant variant
   inner JOIN sylius_product_variant other_variant
     on other_variant.product_id = variant.product_id
 set variant.is_master = 0
 where variant.id < other_variant.id;
-EOM;
+EOM
+        );
 
-        $this->getDatabaseConnection()->executeQuery($query);
-
+        $this->getDatabaseConnection()->executeQuery(<<<EOM
+update sylius_product_variant variant
+ inner join sylius_product_translation productTranslation 
+    on productTranslation.translatable_id = variant.product_id
+ set variant.is_master = 1
+ where variant.is_master = 1;
+EOM
+        );
     }
 
     private function getHTMLFromText($text)

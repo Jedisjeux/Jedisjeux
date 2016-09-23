@@ -10,6 +10,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Sylius\Component\Product\Model\Variant;
 
 /**
@@ -26,6 +27,21 @@ class ProductVariant extends Variant
      * @ORM\Column(type="string", unique=true, nullable=true)
      */
     protected $code;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $name;
+
+    /**
+     * @var string
+     *
+     * @Gedmo\Slug(fields={"name"}, separator="-", unique=true)
+     * @ORM\Column(type="string")
+     */
+    private $slug;
 
     /**
      * @var ArrayCollection|ProductVariantImage[]
@@ -98,6 +114,45 @@ class ProductVariant extends Variant
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     *
+     * @return $this
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
 
     /**
      * @return ProductVariantImage

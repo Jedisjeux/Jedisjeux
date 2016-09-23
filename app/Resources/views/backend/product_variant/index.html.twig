@@ -33,7 +33,9 @@
         <thead>
         <tr>
             <th>{{ 'label.image'|trans }}</th>
+            <th>{{ 'label.name'|trans }}</th>
             <th>{{ 'label.publishers'|trans }}</th>
+            <th>{{ 'label.master'|trans }}</th>
             <th>{{ 'label.created_at'|trans }}</th>
         </tr>
         </thead>
@@ -46,7 +48,15 @@
                         {{ image(product_variant.mainImage.webPath, 'thumbnail', product.name, 'img-responsive img-round') }}
                     {% endif %}
                 </td>
+                <td>{{ product_variant.name }}</td>
                 <td>{{ product_variant.publishers|join(', ') }}</td>
+                <td>
+                    {% if product_variant.master %}
+                        <span class="fa fa-check green"></span>
+                    {% else %}
+                        <span class="fa fa-remove red"></span>
+                    {% endif %}
+                </td>
                 <td>{{ product_variant.createdAt|localizeddate('long', 'none') }}</td>
                 <td class="text-right">
                     <ul class="list-inline">
