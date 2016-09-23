@@ -28,7 +28,7 @@ class PersonType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('mainImage', 'file', [
+            ->add('mainImage', 'app_person_image', [
                 'label' => 'label.image',
                 'required' => false,
             ])
@@ -42,6 +42,7 @@ class PersonType extends AbstractResourceType
             ->add('zone', 'entity', array(
                 'label' => 'label.zone',
                 'class' => 'AppBundle:Taxon',
+                'group_by' => 'parent',
                 'choice_label' => 'name',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('o')

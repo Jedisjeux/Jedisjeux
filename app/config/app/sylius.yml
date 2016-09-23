@@ -168,6 +168,8 @@ sylius_resource:
         app.person_image:
             classes:
                 model: AppBundle\Entity\PersonImage
+                form:
+                    default: AppBundle\Form\Type\PersonImageType
         app.product_barcode:
             classes:
                 model: AppBundle\Entity\ProductBarcode

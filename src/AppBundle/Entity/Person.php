@@ -315,15 +315,15 @@ class Person implements ResourceInterface
     }
 
     /**
-     * @param null|string $taxonomy
+     * @param null|string $rootTaxon
      *
      * @return Collection|\Sylius\Component\Taxonomy\Model\TaxonInterface[]
      */
-    public function getTaxons($taxonomy = null)
+    public function getTaxons($rootTaxon = null)
     {
-        if (null !== $taxonomy) {
-            return $this->taxons->filter(function (TaxonInterface $taxon) use ($taxonomy) {
-                return $taxonomy === strtolower($taxon->getTaxonomy()->getCode());
+        if (null !== $rootTaxon) {
+            return $this->taxons->filter(function (TaxonInterface $taxon) use ($rootTaxon) {
+                return $rootTaxon === strtolower($taxon->getRoot()->getCode());
             });
         }
 
