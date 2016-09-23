@@ -1,0 +1,26 @@
+{% from "macros/games.html.twig" import playerCount %}
+
+{% if product.variants|length > 1 %}
+    <div class="block-heading-two">
+        <h3><span>Versions</span></h3>
+    </div>
+
+    <div class="img-box-4 text-center jeu-list">
+
+        <div class="row">
+            {% for key, product_variant in product.variants %}
+            {% if key != 0 and key%3 == 0 %}
+        </div>
+
+        <div class="row">
+
+            {% endif %}
+
+            <div class="col-md-4 col-sm-6">
+                {% include "frontend/product_variant/index/_list-element.html.twig" %}
+            </div>
+
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

@@ -1,0 +1,35 @@
+{% from "macros/games.html.twig" import playerCount %}
+
+{% set productHref = '#' %}
+
+<!-- Image Box #4 Item -->
+<div class="img-box-4-item portfolio">
+    <!-- Image -->
+    <div class="img-container">
+        <a href="{{ productHref }}">
+            <div class="element">
+                <div class="image-style-one">
+                    {% if product_variant.mainImage %}
+                        <img src="{{ product_variant.mainImage.webPath | imagine_filter('default') }}" alt=""
+                             class="img-responsive"/>
+                    {% endif %}
+                    <div class="image-hover">
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Image Box #4 Content -->
+    <div class="img-box-4-content">
+        <!-- Heading -->
+        <h4><a href="{{ productHref }}">{{ product_variant.name }}</a></h4>
+        <!-- Border -->
+        <div class="bor bg-color"></div>
+        <!-- Paragraph -->
+        <p>
+            {{ product_variant.publishers|join(', ') }}<br/>
+            sortie le {{ product_variant.releasedAt|date('d/m/Y') }}<br/>
+        </p>
+    </div>
+</div>
