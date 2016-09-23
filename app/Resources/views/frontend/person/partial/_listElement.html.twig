@@ -3,9 +3,9 @@
 {% set personHref = path('app_person_show', { 'slug': person.slug }) %}
 
 <!-- Image Box #3 Item -->
-<div class="img-box-7-item">
+<div class="img-box-4-item">
     <a href="{{ personHref }}">
-        <img src="{{ image(person, 'thumbnail_XL') }}" alt="" class="img-responsive">
+        <img src="{{ image(person, 'small_height_fixed') }}" alt="" class="center-block img-responsive">
     </a>
     <h4><a href="{{ personHref }}">{{ person }}</a></h4>
     <div class="bor bg-lblue"></div>
@@ -21,3 +21,5 @@
         {% endif %}
     </ul>
 </div>
+
+

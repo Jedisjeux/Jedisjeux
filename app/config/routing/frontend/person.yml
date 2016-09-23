@@ -14,7 +14,7 @@ app_person_index:
       _sylius:
         template: frontend/person/index.html.twig
         sortable: true
-        paginate: 12
+        paginate: 16
         sorting:
             gameCount: desc
 
@@ -24,7 +24,7 @@ app_person_index_by_taxon:
     defaults:
         _controller: app.controller.person:indexByTaxonAction
         _sylius:
-            paginate: 12
+            paginate: 16
             template: frontend/person/index.html.twig
             sortable: true
             sorting:

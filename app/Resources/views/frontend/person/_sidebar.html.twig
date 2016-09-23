@@ -11,21 +11,9 @@
         <div class="widget-content categories">
 
             {{ sidebarList(taxons, 'app_person_index_by_taxon', taxon is defined ? taxon : null) }}
-
-            {#<ul class="list-6">#}
-            {#{% for key, thisTaxon in taxons %}#}
-            {#{% if key < 5 %}#}
-            {#{% set currentTaxon = taxon is defined and thisTaxon == taxon ? true : false %}#}
-            {#<li>#}
-            {#<a href="{{ path('app_person_index_by_taxon', { 'permalink': thisTaxon.permalink }) }}">#}
-            {#{% if currentTaxon %}#}
-            {#<strong>{% endif %}{{ thisTaxon }}{% if currentTaxon %}</strong>{% endif %}#}
-            {#</a>#}
-            {#</li>#}
-            {#{% endif %}#}
-            {#{% endfor %}#}
-            {#</ul>#}
         </div>
     </div>
+
+    {% include 'frontend/pub_banner/_sidebarWidget.html.twig' %}
 
 </div>
