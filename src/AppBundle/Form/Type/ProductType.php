@@ -11,6 +11,8 @@
 
 namespace AppBundle\Form\Type;
 
+use AppBundle\Entity\Taxon;
+use Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -37,9 +39,41 @@ class ProductType extends AbstractResourceType
             ->add('mainTaxon', 'sylius_taxon_choice', array(
                 'required' => false,
             ))
-            ->add('taxons', 'sylius_taxon_choice', array(
-                'required' => false,
+            ->add('mechanisms', 'entity', array(
+                'label' => 'label.mechanisms',
+                'class' => 'AppBundle:Taxon',
+                'group_by' => 'parent',
+                'choice_label' => 'name',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('o')
+                        ->join('o.root', 'rootTaxon')
+                        ->where('rootTaxon.code = :code')
+                        ->andWhere('o.root IS NOT NULL')
+                        ->setParameter('code', Taxon::CODE_MECHANISM)
+                        ->orderBy('o.left');
+                },
+                'expanded' => false,
                 'multiple' => true,
+                'placeholder' => 'label.choose_mechanisms',
+                'required' => false,
+            ))
+            ->add('themes', 'entity', array(
+                'label' => 'label.themes',
+                'class' => 'AppBundle:Taxon',
+                'group_by' => 'parent',
+                'choice_label' => 'name',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('o')
+                        ->join('o.root', 'rootTaxon')
+                        ->where('rootTaxon.code = :code')
+                        ->andWhere('o.root IS NOT NULL')
+                        ->setParameter('code', Taxon::CODE_THEME)
+                        ->orderBy('o.left');
+                },
+                'expanded' => false,
+                'multiple' => true,
+                'placeholder' => 'label.choose_themes',
+                'required' => false,
             ))
             ->add('shortDescription', 'ckeditor', array(
                 'label' => 'label.short_description',
