@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ffd21fe98efea176291057feeb666af0",
-    "content-hash": "917c46516ed9fd3420c385fbfdccba5e",
+    "hash": "9dc24901a10d82500063113e7e85663f",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1753,44 +1752,47 @@
         },
         {
             "name": "friendsofsymfony/elastica-bundle",
-            "version": "3.1.8",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSElasticaBundle.git",
-                "reference": "19ca605228c3baabd4e57f120528e3571c9d7647"
+                "reference": "40cb2852fb3c0a4cf9de60eb6f1c5245ec84a1c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSElasticaBundle/zipball/19ca605228c3baabd4e57f120528e3571c9d7647",
-                "reference": "19ca605228c3baabd4e57f120528e3571c9d7647",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSElasticaBundle/zipball/40cb2852fb3c0a4cf9de60eb6f1c5245ec84a1c9",
+                "reference": "40cb2852fb3c0a4cf9de60eb6f1c5245ec84a1c9",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2",
                 "psr/log": "~1.0",
                 "ruflin/elastica": "~2.1",
-                "symfony/console": "~2.1",
-                "symfony/form": "~2.1",
-                "symfony/framework-bundle": "~2.3",
-                "symfony/property-access": "~2.3"
+                "symfony/console": "~2.1|~3.0",
+                "symfony/form": "~2.1|~3.0",
+                "symfony/framework-bundle": "~2.3|~3.0",
+                "symfony/property-access": "~2.3|~3.0"
             },
             "require-dev": {
                 "doctrine/doctrine-bundle": "~1.2",
                 "doctrine/orm": "~2.4",
+                "doctrine/phpcr-bundle": "~1.2",
+                "jackalope/jackalope-doctrine-dbal": "~1.1",
                 "jms/serializer-bundle": "@stable",
                 "knplabs/knp-components": "~1.2",
                 "knplabs/knp-paginator-bundle": "~2.4",
                 "pagerfanta/pagerfanta": "~1.0",
                 "phpunit/phpunit": "~4.1",
                 "propel/propel1": "1.6.*",
-                "symfony/browser-kit": "~2.3",
-                "symfony/expression-language": "~2.4",
-                "symfony/twig-bundle": "~2.3"
+                "symfony/browser-kit": "~2.3|~3.0",
+                "symfony/expression-language": "~2.4|~3.0",
+                "symfony/serializer": "~2.7|~3.0",
+                "symfony/twig-bundle": "~2.3|~3.0"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.1.x-dev"
+                    "dev-master": "3.2.x-dev"
                 }
             },
             "autoload": {
@@ -1830,7 +1832,7 @@
                 "propel",
                 "search"
             ],
-            "time": "2016-01-07 04:54:39"
+            "time": "2016-08-04 14:52:25"
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
@@ -2242,7 +2244,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Gregwar/FormBundle/zipball/31722025f5a46d43bf92344d4d7450537a1d9805",
+                "url": "https://api.github.com/repos/Gregwar/FormBundle/zipball/9c67740a2eeb780b2e12228471aa3fb5b8a31c34",
                 "reference": "31722025f5a46d43bf92344d4d7450537a1d9805",
                 "shasum": ""
             },
@@ -2368,7 +2370,6 @@
                 "rest",
                 "web service"
             ],
-            "abandoned": "guzzlehttp/guzzle",
             "time": "2015-03-18 18:23:50"
         },
         {
@@ -3126,7 +3127,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/JMSDiExtraBundle/zipball/8fc65b143bfbc980fa6ab6832cca84a5bebf6b82",
+                "url": "https://api.github.com/repos/schmittjoh/JMSDiExtraBundle/zipball/53d0a974d79f1793a4168fbafe98f273d3e1b3e0",
                 "reference": "8fc65b143bfbc980fa6ab6832cca84a5bebf6b82",
                 "shasum": ""
             },
@@ -3428,7 +3429,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/JMSTranslationBundle/zipball/f5adfcc617823ea18f2a2cc40f153331db1287bb",
+                "url": "https://api.github.com/repos/schmittjoh/JMSTranslationBundle/zipball/e79fe1cd77e7749223c870bdae0bd400c21a102d",
                 "reference": "f5adfcc617823ea18f2a2cc40f153331db1287bb",
                 "shasum": ""
             },
@@ -4211,7 +4212,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/0136c1352ea6264244d3a6a32174e2d48c2d2af9",
+                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/7b101d1a93f319d66c915ba2a50e37d16937ec3a",
                 "reference": "0136c1352ea6264244d3a6a32174e2d48c2d2af9",
                 "shasum": ""
             },
@@ -4476,7 +4477,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phiamo/MopaBootstrapBundle/zipball/5f05310a402a1df686da090808a160ab627507d3",
+                "url": "https://api.github.com/repos/phiamo/MopaBootstrapBundle/zipball/b9d03ffac2c41b57904350345499140768eabdf9",
                 "reference": "5f05310a402a1df686da090808a160ab627507d3",
                 "shasum": ""
             },
@@ -7963,7 +7964,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataIntlBundle/zipball/ddc93fa1b26cf7b7895a2cc035327413d718a267",
+                "url": "https://api.github.com/repos/sonata-project/SonataIntlBundle/zipball/b68df5e7a61b313df75bfebe44cc734fcab0a79d",
                 "reference": "ddc93fa1b26cf7b7895a2cc035327413d718a267",
                 "shasum": ""
             },
@@ -10214,7 +10215,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap-sass/zipball/6424fb7c845880ecf56f8ac31be10e35a77f0b59",
+                "url": "https://api.github.com/repos/twbs/bootstrap-sass/zipball/5d6b2ebba0c2a5885ce2f0e01e9218db3d3b5e47",
                 "reference": "6424fb7c845880ecf56f8ac31be10e35a77f0b59",
                 "shasum": ""
             },
@@ -10430,7 +10431,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/whiteoctober/WhiteOctoberPagerfantaBundle/zipball/ed0754faabf7d2263ccfe452897e3f8c872ed601",
+                "url": "https://api.github.com/repos/whiteoctober/WhiteOctoberPagerfantaBundle/zipball/f7e0fdf94a763a21a7c4c36ec9d9b5bcf4e12521",
                 "reference": "ed0754faabf7d2263ccfe452897e3f8c872ed601",
                 "shasum": ""
             },
@@ -11431,7 +11432,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Symfony2Extension/zipball/e21aa731007fdafd0ba1c61f95f19460d27901e1",
+                "url": "https://api.github.com/repos/Behat/Symfony2Extension/zipball/c59756034c0837e11f36806893c308fe27fe9c4c",
                 "reference": "e21aa731007fdafd0ba1c61f95f19460d27901e1",
                 "shasum": ""
             },

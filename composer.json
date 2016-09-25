@@ -33,7 +33,7 @@
         "fzaninotto/faker":                  "~1.2",
         "egeloen/ckeditor-bundle":           "~2.0",
         "gregwar/form-bundle":              "dev-master",
-        "friendsofsymfony/elastica-bundle": "~3.0",
+        "friendsofsymfony/elastica-bundle": "^3.2",
         "sonata-project/block-bundle": "~2.2",
         "mopa/bootstrap-bundle": "dev-master",
         "twbs/bootstrap-sass": "dev-master",

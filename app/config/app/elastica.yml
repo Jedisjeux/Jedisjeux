@@ -31,8 +31,6 @@ fos_elastica:
                       driver: orm
                       model: AppBundle\Entity\Article
                       provider: ~
-                      listener:
-                          immediate: ~
                       finder: ~
               user:
                   mappings:
@@ -41,8 +39,6 @@ fos_elastica:
                       driver: orm
                       model: %sylius.model.user.class%
                       provider: ~
-                      listener:
-                          immediate: ~
                       finder: ~
               product:
                   mappings:
@@ -52,8 +48,6 @@ fos_elastica:
                       driver: orm
                       model: %sylius.model.product.class%
                       provider: ~
-                      listener:
-                          immediate: ~
                       finder: ~
               person:
                   mappings:
@@ -64,8 +58,6 @@ fos_elastica:
                       driver: orm
                       model: AppBundle\Entity\Person
                       provider: ~
-                      listener:
-                          immediate: ~
                       finder: ~
               taxon:
                   mappings:
@@ -75,8 +67,6 @@ fos_elastica:
                       driver: orm
                       model: AppBundle\Entity\Taxon
                       provider: ~
-                      listener:
-                          immediate: ~
                       finder: ~
               topic:
                   mappings:
@@ -85,6 +75,4 @@ fos_elastica:
                       driver: orm
                       model: AppBundle\Entity\Topic
                       provider: ~
-                      listener:
-                          immediate: ~
                       finder: ~
