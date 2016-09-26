@@ -28,9 +28,13 @@ class TopicRepository extends EntityRepository
             ->addSelect('user')
             ->addSelect('customer')
             ->addSelect('avatar')
+            ->addSelect('article')
+            ->addSelect('gamePlay')
             ->join('o.createdBy', 'user')
             ->join('user.customer', 'customer')
-            ->leftJoin('customer.avatar', 'avatar');
+            ->leftJoin('customer.avatar', 'avatar')
+            ->leftJoin('o.article', 'article')
+            ->leftJoin('o.gamePlay', 'gamePlay');
     }
 
     /**
@@ -64,8 +68,6 @@ class TopicRepository extends EntityRepository
         if ($criteria['product']) {
 
             $queryBuilder
-                ->leftJoin('o.article', 'article')
-                ->leftJoin('o.gamePlay', 'gamePlay')
                 ->where($queryBuilder->expr()->orX(
                     'article.product = :product',
                     'gamePlay.product = :product'
