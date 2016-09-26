@@ -111,6 +111,13 @@ class Article implements ResourceInterface, ReviewableInterface
     protected $status;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $imagePath;
+
+    /**
      * @var int
      *
      * @ORM\Column(type="integer")
