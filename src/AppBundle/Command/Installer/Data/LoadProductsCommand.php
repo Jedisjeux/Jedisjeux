@@ -395,15 +395,6 @@ set variant.is_master = 0
 where variant.id < other_variant.id;
 EOM
         );
-
-        $this->getDatabaseConnection()->executeQuery(<<<EOM
-update sylius_product_variant variant
- inner join sylius_product_translation productTranslation 
-    on productTranslation.translatable_id = variant.product_id
- set variant.is_master = 1
- where variant.is_master = 1;
-EOM
-        );
     }
 
     private function getHTMLFromText($text)
