@@ -547,6 +547,26 @@ class Article implements ResourceInterface, ReviewableInterface
     }
 
     /**
+     * @return string
+     */
+    public function getImagePath()
+    {
+        return $this->imagePath;
+    }
+
+    /**
+     * @param string $imagePath
+     *
+     * @return $this
+     */
+    public function setImagePath($imagePath)
+    {
+        $this->imagePath = $imagePath;
+
+        return $this;
+    }
+
+    /**
      * @return int
      */
     public function getViewCount()
