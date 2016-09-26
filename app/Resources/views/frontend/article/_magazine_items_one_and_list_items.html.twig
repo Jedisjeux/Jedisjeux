@@ -3,7 +3,6 @@
 
 {% set article = articles.currentPageResults|length ? articles.currentPageResults[0] : null %}
 {% if (article) %}
-    {% set imagineBlock = article.document.mainImage %}
     {{ magazineItemOne(article) }}
 {% endif %}
 <hr>

@@ -33,13 +33,11 @@
 
 
 
-            {% set imagineBlock = article.document.mainImage %}
-
             <div class="col-md-4 col-sm-6">
                 <div class="img-box-4-item">
                     <div class="img-container">
                         <a href="{{ path('app_frontend_article_show', {'name': article.name} ) }}" class="lightbox"><img
-                                    src="{{ imagineBlock.image.id|imagine_filter('cmf_full') }}" alt=""
+                                    src="{{ article.imagePath|imagine_filter('cmf_full') }}" alt=""
                                     class="img-responsive"></a>
 
                     </div>
