@@ -1,6 +1,7 @@
 title:
   articles: Articles
   categories: Catégories
+  confirmation: Confirmation
   error: Erreur
   page_not_found: Page introuvable
 
@@ -122,6 +123,7 @@ label:
   zone: Zone
 
 text:
+  confirmation: Souhaitez-vous supprimer cet élément ?
   error:
     404: "<p>Dans le néant on ne vous entend pas crier : \"ahhhhhh !!!\"</p>"
     500: "<p>Quelque chose est cassée. Merci de nous envoyer un email et écrivez ce que vous faisiez avant de rencontrer cette erreur. Nous corrigerons aussi vite que possible. Désolé pour la gêne occasionnée.</p>"
