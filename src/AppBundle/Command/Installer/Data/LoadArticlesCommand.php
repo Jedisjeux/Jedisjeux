@@ -65,7 +65,7 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
             $this->getDocumentManager()->persist($articleDocument);
             $this->getDocumentManager()->flush();
 
-            if (Taxon::CODE_REPORT_ARTICLE === $data['main-taxon']) {
+            if (Taxon::CODE_REPORT_ARTICLE === $data['mainTaxon']) {
                 $slideshowBlock = $this->createOrReplaceSlideshowBlock($articleDocument);
                 $this->getDocumentManager()->persist($slideshowBlock);
                 $this->getDocumentManager()->flush();
