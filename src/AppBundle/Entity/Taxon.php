@@ -21,16 +21,28 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
  */
 class Taxon extends BaseTaxon
 {
+    // taxons of articles
     const CODE_ARTICLE = 'articles';
-    const CODE_FORUM = 'forum';
     const CODE_INTERVIEW = 'interviews';
     const CODE_IN_THE_BOXES = 'in-the-boxes';
-    const CODE_MECHANISM = 'mechanisms';
     const CODE_NEWS = 'news';
     const CODE_PREVIEWS = 'previews';
     const CODE_REPORT_ARTICLE = 'report-articles';
     const CODE_REVIEW_ARTICLE = 'review-articles';
+
+    // taxons of forum
+    const CODE_FORUM = 'forum';
+
+    // taxons of products
+    const CODE_MECHANISM = 'mechanisms';
     const CODE_THEME = 'themes';
+    const CODE_TARGET_AUDIENCE = 'target-audience';
+    const CODE_CHILD = 'target-audience-1';
+    const CODE_BEGINNER = 'target-audience-2';
+    const CODE_ADVANCED_USER = 'target-audience-3';
+    const CODE_EXPERT = 'target-audience-4';
+
+    // taxons of people
     const CODE_ZONE = 'zones';
 
     /**

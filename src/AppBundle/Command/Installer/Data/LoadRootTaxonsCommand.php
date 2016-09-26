@@ -92,6 +92,10 @@ class LoadRootTaxonsCommand extends ContainerAwareCommand
                 'name' => 'Mécanismes',
             ],
             [
+                'code' => Taxon::CODE_TARGET_AUDIENCE,
+                'name' => 'Cibles',
+            ],
+            [
                 'code' => Taxon::CODE_ZONE,
                 'name' => 'Zones',
             ],

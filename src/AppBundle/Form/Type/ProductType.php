@@ -37,42 +37,24 @@ class ProductType extends AbstractResourceType
                 'master' => true,
             ])
             ->add('mainTaxon', 'sylius_taxon_choice', array(
+                'label' => 'label.target_audience',
+                'placeholder' => 'label.choose_target_audience',
+                'root' => Taxon::CODE_TARGET_AUDIENCE,
+                'multiple' => false,
                 'required' => false,
             ))
-            ->add('mechanisms', 'entity', array(
+            ->add('mechanisms', 'sylius_taxon_choice', array(
                 'label' => 'label.mechanisms',
-                'class' => 'AppBundle:Taxon',
-                'group_by' => 'parent',
-                'choice_label' => 'name',
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('o')
-                        ->join('o.root', 'rootTaxon')
-                        ->where('rootTaxon.code = :code')
-                        ->andWhere('o.root IS NOT NULL')
-                        ->setParameter('code', Taxon::CODE_MECHANISM)
-                        ->orderBy('o.left');
-                },
-                'expanded' => false,
-                'multiple' => true,
                 'placeholder' => 'label.choose_mechanisms',
+                'root' => Taxon::CODE_MECHANISM,
+                'multiple' => true,
                 'required' => false,
             ))
-            ->add('themes', 'entity', array(
+            ->add('themes', 'sylius_taxon_choice', array(
                 'label' => 'label.themes',
-                'class' => 'AppBundle:Taxon',
-                'group_by' => 'parent',
-                'choice_label' => 'name',
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('o')
-                        ->join('o.root', 'rootTaxon')
-                        ->where('rootTaxon.code = :code')
-                        ->andWhere('o.root IS NOT NULL')
-                        ->setParameter('code', Taxon::CODE_THEME)
-                        ->orderBy('o.left');
-                },
-                'expanded' => false,
-                'multiple' => true,
                 'placeholder' => 'label.choose_themes',
+                'root' => Taxon::CODE_THEME,
+                'multiple' => true,
                 'required' => false,
             ))
             ->add('shortDescription', 'ckeditor', array(

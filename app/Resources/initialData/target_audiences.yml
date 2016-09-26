@@ -1,0 +1,16 @@
+-
+  id: 1
+  name: Enfants
+  slug: enfants
+-
+  id: 2
+  name: Débutants
+  slug: debutants
+-
+  id: 3
+  name: Joueurs avancés
+  slug: joueurs-avances
+-
+  id: 4
+  name: Experts
+  slug: experts
