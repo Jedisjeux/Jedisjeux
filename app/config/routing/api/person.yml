@@ -1,0 +1,5 @@
+app_api_person:
+    resource: |
+        section: api
+        alias: app.person
+    type: sylius.resource_api

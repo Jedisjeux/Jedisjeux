@@ -4,17 +4,18 @@ imports:
     - { resource: services.yml }
     - { resource: app/main.yml }
 
+# Put parameters here that don't need to change on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     knp.doctrine_behaviors.blameable_subscriber.user_entity: Sylius\Component\User\Model\User
     locale: fr
     sylius.locale: "%locale%"
-    email_sender: jedisjeux@jedisjeux.net
+    email_sender: no-reply@jedisjeux.net
     email_name: Contact Jedisjeux
 
 framework:
     #esi:             ~
-    translator:      { fallback: "%locale%" }
-    translator: ~
+    translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -22,6 +23,7 @@ framework:
     form:            ~
     csrf_protection: ~
     validation:      { enable_annotations: true }
+    #serializer:      { enable_annotations: true }
     templating:
         engines: ['twig']
         #assets_version: SomeVersionScheme
@@ -38,8 +40,6 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
-    form_themes:
-      - ":form:ckeditor_widget.html.twig"
 
 # Assetic Configuration
 assetic:
@@ -87,11 +87,12 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
-        mapping_types:
-          enum: string
-        # if using pdo_sqlite as your database driver, add the path in parameters.yml
-        # e.g. database_path: "%kernel.root_dir%/data/data.db3"
-        # path:     "%database_path%"
+        # if using pdo_sqlite as your database driver:
+        #   1. add the path in parameters.yml
+        #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
+        #   2. Uncomment database_path in parameters.yml.dist
+        #   3. Uncomment next line:
+        #     path:     "%database_path%"
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
@@ -143,6 +144,14 @@ doctrine_cache:
         phpcr_meta: %dos.cache%
         phpcr_nodes: %dos.cache%
 
+stof_doctrine_extensions:
+    default_locale: fr_FR
+    orm:
+        default:
+            tree: true
+            sluggable: true
+            softdeleteable: true
+
 knp_doctrine_behaviors:
     blameable:      true
     timestampable:  true
@@ -150,7 +159,6 @@ knp_doctrine_behaviors:
     loggable:       ~
     sluggable:      true
     soft_deletable: true
-    # All others behaviors are disabled
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -160,62 +168,7 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
-stof_doctrine_extensions:
-  default_locale: fr_FR
-  orm:
-    default:
-      tree: true
-      sluggable: tree
-      timestampable: true
-      softdeleteable: true
-
-white_october_pagerfanta:
-    exceptions_strategy:
-        out_of_range_page:        to_http_not_found
-        not_valid_current_page:   to_http_not_found
-
 services:
-  gedmo.listener.blameable:
-      class: Gedmo\Blameable\BlameableListener
-      tags:
-          - { name: doctrine.event_subscriber, connection: default }
-      calls:
-          - [ setAnnotationReader, [ "@annotation_reader" ] ]
-  gedmo.listener.softdeleteable:
-      class: Gedmo\SoftDeleteable\SoftDeleteableListener
-      tags:
-        - { name: doctrine.event_subscriber, connection: default }
-      calls:
-        - [ setAnnotationReader, [ @annotation_reader ] ]
-
-  gedmo.listener.timestampable:
-      class: Gedmo\Timestampable\TimestampableListener
-      tags:
-        - { name: doctrine.event_subscriber, connection: default }
-      calls:
-        - [ setAnnotationReader, [ @annotation_reader ] ]
-
-  gedmo.listener.sluggable:
-      class: Gedmo\Sluggable\SluggableListener
-      tags:
-        - { name: doctrine.event_subscriber, connection: default }
-      calls:
-        - [ setAnnotationReader, [ @annotation_reader ] ]
-
-  gedmo.listener.sortable:
-      class: Gedmo\Sortable\SortableListener
-      tags:
-        - { name: doctrine.event_subscriber, connection: default }
-      calls:
-        - [ setAnnotationReader, [ @annotation_reader ] ]
-
-  gedmo.listener.loggable:
-      class: Gedmo\Loggable\LoggableListener
-      tags:
-        - { name: doctrine.event_subscriber, connection: default }
-      calls:
-        - [ setAnnotationReader, [ @annotation_reader ] ]
-
   twig.extension.intl:
           class: Twig_Extensions_Extension_Intl
           tags:
@@ -226,23 +179,9 @@ services:
       tags:
           - { name: twig.extension }
 
-gregwar_form: ~
-
-knp_snappy:
-    pdf:
-        enabled:    true
-        binary:     /usr/local/bin/wkhtmltopdf.sh
-        options:    []
-    image:
-        enabled:    true
-        binary:     /usr/local/bin/wkhtmltoimage
-        options:    []
-
-jms_translation:
-    configs:
-        app:
-            dirs: [%kernel.root_dir%, %kernel.root_dir%/../src]
-            output_dir: %kernel.root_dir%/Resources/translations
-            ignored_domains: [routes]
-            excluded_names: ["*Context.php", "*TestCase.php", "*Test.php", "*.feature"]
-            excluded_dirs: [Behat, cache, data, logs]
+jms_serializer:
+    metadata:
+        directories:
+            app:
+                namespace_prefix: "AppBundle"
+                path: "@AppBundle/Resources/config/serializer"

@@ -22,6 +22,12 @@ class AppKernel extends Kernel
             new Symfony\Bundle\MonologBundle\MonologBundle(),
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
+            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
+            new JMS\TranslationBundle\JMSTranslationBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+            new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
 
             new Sylius\Bundle\InstallerBundle\SyliusInstallerBundle(),
             new Sylius\Bundle\ArchetypeBundle\SyliusArchetypeBundle(),
@@ -34,7 +40,7 @@ class AppKernel extends Kernel
             new Sylius\Bundle\AttributeBundle\SyliusAttributeBundle(),
             new Sylius\Bundle\VariationBundle\SyliusVariationBundle(),
             new Sylius\Bundle\TaxonomyBundle\SyliusTaxonomyBundle(),
-            
+
             new Sonata\BlockBundle\SonataBlockBundle(),
 
             new Symfony\Cmf\Bundle\CoreBundle\CmfCoreBundle(),
@@ -46,34 +52,18 @@ class AppKernel extends Kernel
             new Symfony\Cmf\Bundle\MediaBundle\CmfMediaBundle(),
             new Sylius\Bundle\ContentBundle\SyliusContentBundle(),
 
+            new FOS\RestBundle\FOSRestBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new FOS\ElasticaBundle\FOSElasticaBundle(),
+
             new Doctrine\Bundle\PHPCRBundle\DoctrinePHPCRBundle(),
             new Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
 
-            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
-            new Sonata\IntlBundle\SonataIntlBundle(),
-            new FOS\RestBundle\FOSRestBundle(),
-            new JMS\SerializerBundle\JMSSerializerBundle($this),
+            new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
-            new Gregwar\FormBundle\GregwarFormBundle(),
-            new FOS\ElasticaBundle\FOSElasticaBundle(),
-            new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
-            new Craue\FormFlowBundle\CraueFormFlowBundle(),
-            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
-            new JMS\TranslationBundle\JMSTranslationBundle(),
-            new JMS\DiExtraBundle\JMSDiExtraBundle($this),
-            new Bmatzner\FontAwesomeBundle\BmatznerFontAwesomeBundle(),
-            new JMS\AopBundle\JMSAopBundle(),
-            new EightPoints\Bundle\GuzzleBundle\GuzzleBundle(),
-            new Infinite\FormBundle\InfiniteFormBundle(),
-
-            new Ob\HighchartsBundle\ObHighchartsBundle(),
-            new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
             new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
             new Bmatzner\JQueryUIBundle\BmatznerJQueryUIBundle(),
             new Bmatzner\JQueryBundle\BmatznerJQueryBundle(),
@@ -82,6 +72,7 @@ class AppKernel extends Kernel
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
+            $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
