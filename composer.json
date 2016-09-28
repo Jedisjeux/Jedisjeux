@@ -45,7 +45,8 @@
     "mopa/bootstrap-bundle": "^3.1",
     "egeloen/ckeditor-bundle": "^4.0",
     "bmatzner/jquery-ui-bundle": "^1.10",
-    "fzaninotto/Faker": "^1.5"
+    "fzaninotto/Faker": "^1.5",
+    "bmatzner/fontawesome-bundle": "^4.6"
   },
   "require-dev": {
     "sensio/generator-bundle": "~2.3",
