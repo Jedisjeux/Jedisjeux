@@ -43,7 +43,7 @@ $(function () {
     if (repo.loading) return repo.text;
 
     var markup =
-      "<div class='row'>" +
+      "<div>" +
         "<div class='pull-left'><img style='width: 50px; height: 50px; margin-right: 10px;' class='img-responsive img-round' src='" + getImage(repo) + "' /></div>" +
         "<div>" + repo.full_name + "</div>";
       "</div>";
