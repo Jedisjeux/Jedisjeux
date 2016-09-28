@@ -80,6 +80,7 @@ label:
   password: Mot de passe
   password_confirmation: Confirmation mot de passe
   path: Chemin
+  people: Personnes
   phone_number: Téléphone
   played_at: Joué le
   players: Joueurs

@@ -27,10 +27,35 @@ class PersonRepository extends EntityRepository
             $queryBuilder
                 ->andWhere('o.slug like :query')
                 ->setParameter('query', '%'.$criteria['query'].'%');
+
             unset($criteria['query']);
         }
 
         parent::applyCriteria($queryBuilder, $criteria);
+    }
+
+    /**
+     * @param array $criteria
+     * @param array $sorting
+     *
+     * @return Pagerfanta
+     */
+    public function createFilterPaginator($criteria = [], $sorting = [])
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        if (empty($sorting)) {
+            if (!is_array($sorting)) {
+                $sorting = [];
+            }
+
+            $sorting['id'] = 'asc';
+        }
+
+        $this->applyCriteria($queryBuilder, (array)$criteria);
+        $this->applySorting($queryBuilder, $sorting);
+
+        return $this->getPaginator($queryBuilder);
     }
 
     /**

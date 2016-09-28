@@ -124,6 +124,10 @@ class Person implements ResourceInterface
 
     /**
      * @return PersonImage
+     *
+     * @JMS\VirtualProperty
+     * @JMS\SerializedName("image")
+     * @JMS\Groups({"Default", "Detailed"})
      */
     public function getMainImage()
     {
@@ -133,14 +137,6 @@ class Person implements ResourceInterface
             }
         }
 
-        return null;
-    }
-
-    /**
-     * @deprecated use getMainImage instead
-     */
-    public function getImage()
-    {
         return null;
     }
 
@@ -370,15 +366,27 @@ class Person implements ResourceInterface
     }
 
     /**
+     * @return string
+     *
+     * @JMS\VirtualProperty
+     * @JMS\SerializedName("full_name")
+     * @JMS\Groups({"Default", "Detailed"})
+     */
+    public function getFullName()
+    {
+        /**
+         * firstname is not mandatory, thus we trim concatenation
+         */
+        return trim($this->getFirstName() . ' ' . $this->getLastName());
+    }
+
+    /**
      * Convert Entity To String
      *
      * @return string
      */
     public function __toString()
     {
-        /**
-         * firstname is not mandatory, thus we trim concatenation
-         */
-        return trim($this->getFirstName() . ' ' . $this->getLastName());
+        return $this->getFullName();
     }
 }

@@ -53,60 +53,70 @@ Response will contain a paginated list of people.
       "_embedded": {
         "items": [
           {
+            "full_name": "Andreas Seyfarth",
             "last_name": "Seyfarth",
             "first_name": "Andreas",
             "slug": "andreas-seyfarth",
             "id": 1
           },
           {
+            "full_name": "Franz Vohwinkel",
             "last_name": "Vohwinkel",
             "first_name": "Franz",
             "slug": "franz-vohwinkel",
             "id": 2
           },
           {
+            "full_name": "Bruno Faidutti",
             "last_name": "Faidutti",
             "first_name": "Bruno",
             "slug": "bruno-faidutti",
             "id": 3
           },
           {
+            "full_name": "Julien Delval",
             "last_name": "Delval",
             "first_name": "Julien",
             "slug": "julien-delval",
             "id": 4
           },
           {
+            "full_name": "Florence Magnin",
             "last_name": "Magnin",
             "first_name": "Florence",
             "slug": "florence-magnin",
             "id": 5
           },
           {
+            "full_name": "Jean-Louis Mourier",
             "last_name": "Mourier",
             "first_name": "Jean-Louis",
             "slug": "jean-louis-mourier",
             "id": 6
           },
           {
+            "full_name": "Richard Ulrich",
             "last_name": "Ulrich",
             "first_name": "Richard",
             "slug": "richard-ulrich",
             "id": 7
           },
           {
+            "full_name": "Wolfgang Kramer",
             "last_name": "Kramer",
             "first_name": "Wolfgang",
             "slug": "wolfgang-kramer",
             "id": 8
           },
           {
+            "full_name": "Michael Schacht",
             "last_name": "Schacht",
             "first_name": "Michael",
             "slug": "michael-schacht",
             "id": 9
           },
           {
+            "full_name": "Franck Dion",
             "last_name": "Dion",
             "first_name": "Franck",
             "slug": "franck-dion",
@@ -135,6 +145,7 @@ Response
 .. code-block:: json
 
     {
+      "full_name": "Andreas Seyfarth",
       "last_name": "Seyfarth",
       "first_name": "Andreas",
       "website": "",

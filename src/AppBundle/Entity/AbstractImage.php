@@ -159,7 +159,9 @@ abstract class AbstractImage implements ResourceInterface
      * @JMS\VirtualProperty
      * @JMS\SerializedName("default")
      * @JMS\Type("LiipSerializer")
-     * @JMS\Groups({"Details"})
+     * @JMS\Groups({"Default", "Details", "Detailed"})
+     *
+     * TODO REMOVE group Details
      */
     public function getDefaultSerialize()
     {

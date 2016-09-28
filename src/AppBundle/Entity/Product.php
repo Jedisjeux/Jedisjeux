@@ -719,14 +719,6 @@ class Product extends BaseProduct implements ReviewableInterface
 
     /**
      * {@inheritdoc}
-     */
-    public function __toString()
-    {
-        return $this->getName();
-    }
-
-    /**
-     * {@inheritdoc}
      *
      * @JMS\VirtualProperty
      * @JMS\SerializedName("name")
@@ -759,5 +751,13 @@ class Product extends BaseProduct implements ReviewableInterface
     public function getCreatedAt()
     {
         return parent::getCreatedAt();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return $this->getName();
     }
 }
