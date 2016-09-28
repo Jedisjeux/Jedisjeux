@@ -39,7 +39,7 @@
         {% include 'backend/product/_form.html.twig' %}
         <br/>
         {{ action.create() }}
-        {{ form_end(form) }}
+        {{ form_end(form, {'render_rest': false}) }}
 
     </div>
 {% endblock container %}

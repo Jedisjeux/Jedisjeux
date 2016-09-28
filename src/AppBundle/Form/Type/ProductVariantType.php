@@ -12,6 +12,8 @@
 namespace AppBundle\Form\Type;
 
 use Sylius\Bundle\VariationBundle\Form\Type\VariantType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -42,6 +44,27 @@ class ProductVariantType extends VariantType
                     'horizontal_input_wrapper_class' => "col-lg-8",
                     'widget_remove_btn' => array('label' => "label.remove_this_image"),
                 )
+            ))
+            ->add('designers', EntityType::class, array(
+                'label' => 'label.designers',
+                'class' => 'AppBundle:Person',
+                'required' => false,
+                'expanded' => false,
+                'multiple' => true,
+            ))
+            ->add('artists', EntityType::class, array(
+                'label' => 'label.artists',
+                'class' => 'AppBundle:Person',
+                'required' => false,
+                'expanded' => false,
+                'multiple' => true,
+            ))
+            ->add('publishers', EntityType::class, array(
+                'label' => 'label.publishers',
+                'class' => 'AppBundle:Person',
+                'required' => false,
+                'expanded' => false,
+                'multiple' => true,
             ))
             ->remove('presentation');
     }
