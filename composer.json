@@ -44,7 +44,8 @@
     "twbs/bootstrap-sass": "^3.3",
     "mopa/bootstrap-bundle": "^3.1",
     "egeloen/ckeditor-bundle": "^4.0",
-    "bmatzner/jquery-ui-bundle": "^1.10"
+    "bmatzner/jquery-ui-bundle": "^1.10",
+    "fzaninotto/Faker": "^1.5"
   },
   "require-dev": {
     "sensio/generator-bundle": "~2.3",
@@ -54,7 +55,6 @@
     "behat/mink-browserkit-driver": "~1.2@dev",
     "behat/mink-selenium2-driver": "@dev",
     "behat/mink": "~1.6@dev",
-    "fzaninotto/Faker": "^1.5",
     "se/selenium-server-standalone": " ^2.52",
     "friends-of-behat/performance-extension": "^1.0"
   },
