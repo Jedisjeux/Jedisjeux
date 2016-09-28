@@ -1,5 +1,18 @@
-app_api_person:
-    resource: |
-        section: api
-        alias: app.person
-    type: sylius.resource_api
+app_api_person_index:
+    path: /people/
+    methods: [GET]
+    defaults:
+        _controller: app.controller.person:indexAction
+        _sylius:
+            serialization_groups: [Default]
+            paginate: $limit
+            sorting:
+                id: asc
+
+app_api_person_show:
+    path: /people/{id}
+    methods: [GET]
+    defaults:
+        _controller: app.controller.person:showAction
+        _sylius:
+            serialization_groups: [Detailed]

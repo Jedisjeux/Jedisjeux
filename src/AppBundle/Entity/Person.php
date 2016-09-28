@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as JMS;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
@@ -15,6 +16,8 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
  *
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PersonRepository")
  * @ORM\Table(name="jdj_person", indexes={@ORM\Index(name="search_idx", columns={"slug"})})
+ *
+ * @JMS\ExclusionPolicy("all")
  */
 class Person implements ResourceInterface
 {
@@ -24,6 +27,9 @@ class Person implements ResourceInterface
      * @var string
      *
      * @ORM\Column(type="string", length=50, nullable=false)
+     *
+     * @JMS\Expose
+     * @JMS\Groups({"Default", "Detailed"})
      */
     private $lastName;
 
@@ -31,6 +37,9 @@ class Person implements ResourceInterface
      * @var string
      *
      * @ORM\Column(type="string", length=50, nullable=false)
+     *
+     * @JMS\Expose
+     * @JMS\Groups({"Default", "Detailed"})
      */
     private $firstName;
 
@@ -38,6 +47,9 @@ class Person implements ResourceInterface
      * @var string
      *
      * @ORM\Column(type="string", length=200, nullable=true)
+     *
+     * @JMS\Expose
+     * @JMS\Groups({"Detailed"})
      */
     private $website;
 
@@ -45,6 +57,9 @@ class Person implements ResourceInterface
      * @var string
      *
      * @ORM\Column(type="text", nullable=true)
+     *
+     * @JMS\Expose
+     * @JMS\Groups({"Detailed"})
      */
     private $description;
 
@@ -53,6 +68,9 @@ class Person implements ResourceInterface
      *
      * @Gedmo\Slug(fields={"firstName","lastName"}, separator="-")
      * @ORM\Column(type="string", length=128, unique=true)
+     *
+     * @JMS\Expose
+     * @JMS\Groups({"Default", "Detailed"})
      */
     private $slug;
 
