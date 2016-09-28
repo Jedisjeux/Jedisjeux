@@ -3,6 +3,7 @@ $(function () {
   "use strict";
 
   $(".peopleAutocomplete").select2({
+    width: '100%',
     ajax: {
       url: Routing.generate('app_api_person_index'),
       dataType: 'json',

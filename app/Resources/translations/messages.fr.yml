@@ -16,6 +16,7 @@ label:
   address: Adresse
   age_min: Age min
   amount: Montant
+  artists: Illustrateurs
   at: À
   attributes: Attributs
   available: Disponible
@@ -42,6 +43,7 @@ label:
   dealer: Vendeur
   dealers: Vendeurs
   delete: Supprimer
+  designers: Auteurs
   description: Description
   duration: Durée
   duration_min: Durée min
