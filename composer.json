@@ -42,8 +42,9 @@
     "jms/di-extra-bundle": "^1.8",
     "friendsofsymfony/elastica-bundle": "^3.2",
     "twbs/bootstrap-sass": "^3.3",
+    "mopa/bootstrap-bundle": "^3.1",
     "egeloen/ckeditor-bundle": "^4.0",
-    "mopa/bootstrap-bundle": "^3.1"
+    "bmatzner/jquery-ui-bundle": "^1.10"
   },
   "require-dev": {
     "sensio/generator-bundle": "~2.3",
