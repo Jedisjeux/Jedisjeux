@@ -43,10 +43,9 @@ $(function () {
     if (repo.loading) return repo.text;
 
     var markup =
-      "<div>" +
+      "<div class='clearfix'>" +
         "<div class='pull-left'><img style='width: 50px; height: 50px; margin-right: 10px;' class='img-responsive img-round' src='" + getImage(repo) + "' /></div>" +
         "<div>" + repo.full_name + "</div>";
-        "<div class='clearfix'></div>";
       "</div>";
 
     return markup;
@@ -59,6 +58,8 @@ $(function () {
   function getImage(repo) {
     if (repo.image) {
       return repo.image.default;
+    } else {
+      return '//ssl.gstatic.com/accounts/ui/avatar_2x.png';
     }
   }
 
