@@ -1,5 +1,5 @@
 ivory_ck_editor:
-    default_config: forum
+    default_config: minimal
     configs:
         minimal:
             language: %locale%

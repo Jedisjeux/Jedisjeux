@@ -12,9 +12,9 @@
 namespace AppBundle\Form\Type;
 
 use AppBundle\Entity\Taxon;
-use Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -62,6 +62,10 @@ class ProductType extends AbstractResourceType
             ))
             ->add('description', 'ckeditor', array(
                 'label' => 'label.description',
+            ))
+            ->add('materiel', TextareaType::class, array(
+                'required' => false,
+                'label' => 'label.material',
             ))
             ->add('ageMin', null, array(
                 'label' => 'label.age_min',
