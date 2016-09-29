@@ -14,7 +14,7 @@
     <div class="img-box-3-item">
         <div class=" bg-purple img-collection-container" >
             <a href="{{ path('my-list' , {'id': entity.id} ) }}">
-                <img class="img-collection" src="{{ entity.listElements[size-1].jeu.imageCouverture.webPath | imagine_filter('default') }}" alt="" class="'fa-picture-o'">
+                <img class="img-collection" src="{{ entity.listElements[size-1].jeu.mainImage.webPath | imagine_filter('default') }}" alt="" class="'fa-picture-o'">
             </a>
         </div>
         <h4><a href="{{ path('my-list' , {'id': entity.id} ) }}">{{ entity.name }}</a></h4>

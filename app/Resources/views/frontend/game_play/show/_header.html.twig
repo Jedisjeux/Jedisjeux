@@ -13,9 +13,9 @@
                     <!-- Image Box #5 Image -->
                     <div class="img-box-5-img">
                         <!-- Image -->
-                        {% if product.imageCouverture %}
-                            <a href="{{ product.imageCouverture.webPath | imagine_filter('default') }}" rel="product"
-                               class="fancybox"><img src="{{ product.imageCouverture.webPath | imagine_filter('default') }}"
+                        {% if product.mainImage %}
+                            <a href="{{ product.mainImage.webPath | imagine_filter('default') }}" rel="product"
+                               class="fancybox"><img src="{{ product.mainImage.webPath | imagine_filter('default') }}"
                                                      alt="" class="img-responsive img-thumbnail"/></a>
                         {% endif %}
 

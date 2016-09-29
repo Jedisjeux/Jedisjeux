@@ -260,6 +260,18 @@ class ProductVariant extends Variant
     }
 
     /**
+     * @param Person $designer
+     *
+     * @return $this
+     */
+    public function removeDesigner($designer)
+    {
+        $this->designers->removeElement($designer);
+
+        return $this;
+    }
+
+    /**
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getArtists()
@@ -282,6 +294,18 @@ class ProductVariant extends Variant
     }
 
     /**
+     * @param Person $artist
+     *
+     * @return $this
+     */
+    public function removeArtist($artist)
+    {
+        $this->artists->removeElement($artist);
+
+        return $this;
+    }
+
+    /**
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getPublishers()
@@ -299,6 +323,18 @@ class ProductVariant extends Variant
         if (!$this->publishers->contains($publisher)) {
             $this->publishers->add($publisher);
         }
+
+        return $this;
+    }
+
+    /**
+     * @param Person $publisher
+     *
+     * @return $this
+     */
+    public function removePublisher($publisher)
+    {
+        $this->publishers->removeElement($publisher);
 
         return $this;
     }

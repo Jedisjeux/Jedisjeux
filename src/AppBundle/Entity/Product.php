@@ -282,22 +282,6 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
-     * @deprecated
-     */
-    public function getImageCouverture()
-    {
-        return $this->getMainImage();
-    }
-
-    /**
-     * @deprecated
-     */
-    public function setImageCouverture($imageCouverture)
-    {
-        return $this->setMainImage($imageCouverture);
-    }
-
-    /**
      * @return ArrayCollection|ProductVariantImage[]
      */
     public function getImages()
@@ -305,6 +289,9 @@ class Product extends BaseProduct implements ReviewableInterface
         return $this->getMasterVariant()->getImages();
     }
 
+    /**
+     * @return ArrayCollection|ProductVariantImage[]
+     */
     public function getImagesOfAllVariants()
     {
         $collection = new ArrayCollection();
@@ -597,11 +584,23 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
-     * @deprecated
+     * @param TaxonInterface $mechanism
+     *
+     * @return $this
      */
-    public function jeuImages()
+    public function addMechanism(TaxonInterface $mechanism)
     {
-        return $this->getImages();
+        return $this->addTaxon($mechanism);
+    }
+
+    /**
+     * @param TaxonInterface $mechanism
+     *
+     * @return $this
+     */
+    public function removeMechanism(TaxonInterface $mechanism)
+    {
+        return $this->removeTaxon($mechanism);
     }
 
     /**
@@ -614,6 +613,26 @@ class Product extends BaseProduct implements ReviewableInterface
     public function getThemes()
     {
         return $this->getTaxons('themes');
+    }
+
+    /**
+     * @param TaxonInterface $theme
+     *
+     * @return $this
+     */
+    public function addTheme(TaxonInterface $theme)
+    {
+        return $this->addTaxon($theme);
+    }
+
+    /**
+     * @param TaxonInterface $theme
+     *
+     * @return $this
+     */
+    public function removeTheme(TaxonInterface $theme)
+    {
+        return $this->removeTaxon($theme);
     }
 
     /**

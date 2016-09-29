@@ -22,9 +22,9 @@
         <div class="img-box-3-item">
             <div class="bg-{{ color }} img-collection-container">
                 <a href="{{ path('my-list-usergameattribute' , {'type': type} ) }}">
-                    {% if  lastJeu.imageCouverture %}
+                    {% if  lastJeu.mainImage %}
                         <img class="img-collection"
-                             src="{{ lastJeu.imageCouverture.webPath | imagine_filter('default') }}"
+                             src="{{ lastJeu.mainImage.webPath | imagine_filter('default') }}"
                              alt="" class="'fa-picture-o'">
                     {% endif %}
                 </a>

@@ -2,19 +2,31 @@
     <div class="form-group">
         {{ form_label(form.masterVariant.designers) }}
         <div class="col-sm-9">
-            <select name="sylius_product[masterVariant][designers][]" class="peopleAutocomplete form-control" multiple></select>
+            <select name="sylius_product[masterVariant][designers][]" class="peopleAutocomplete form-control" multiple>
+                {% for person in product.masterVariant.designers %}
+                    <option value="{{ person.id }}" selected="selected">{{ person }}</option>
+                {% endfor %}
+            </select>
         </div>
     </div>
     <div class="form-group">
         {{ form_label(form.masterVariant.artists) }}
         <div class="col-sm-9">
-            <select name="sylius_product[masterVariant][artists][]" class="peopleAutocomplete form-control" multiple></select>
+            <select name="sylius_product[masterVariant][artists][]" class="peopleAutocomplete form-control" multiple>
+                {% for person in product.masterVariant.artists %}
+                    <option value="{{ person.id }}" selected="selected">{{ person }}</option>
+                {% endfor %}
+            </select>
         </div>
     </div>
     <div class="form-group">
         {{ form_label(form.masterVariant.publishers) }}
         <div class="col-sm-9">
-            <select name="sylius_product[masterVariant][publishers][]" class="peopleAutocomplete form-control" multiple></select>
+            <select name="sylius_product[masterVariant][publishers][]" class="peopleAutocomplete form-control" multiple>
+                {% for person in product.masterVariant.publishers %}
+                    <option value="{{ person.id }}" selected="selected">{{ person }}</option>
+                {% endfor %}
+            </select>
         </div>
     </div>
 </div>

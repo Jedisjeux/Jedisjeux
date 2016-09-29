@@ -9,8 +9,8 @@
         <a href="{{ productHref }}">
             <div class="element">
                 <div class="image-style-one">
-                    {% if product.imageCouverture %}
-                        <img src="{{ product.imageCouverture.webPath | imagine_filter('default') }}" alt=""
+                    {% if product.mainImage %}
+                        <img src="{{ product.mainImage.webPath | imagine_filter('default') }}" alt=""
                              class="img-responsive"/>
                     {% endif %}
                     <div class="image-hover">

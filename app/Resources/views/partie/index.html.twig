@@ -27,7 +27,7 @@
                         {% if partie.partieImages | length > 0 %}
                             {% set imagePath = partie.partieImages[0].image.webPath %}
                         {% else %}
-                            {% set imagePath = partie.jeu.imageCouverture.webPath %}
+                            {% set imagePath = partie.jeu.mainImage.webPath %}
                         {% endif %}
                         <a href="{{ url }}"><img src="{{ imagePath | imagine_filter('default') }}" alt=""
                                                  class="img-responsive"></a>
