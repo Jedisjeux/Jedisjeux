@@ -71,16 +71,16 @@ class ProductType extends AbstractResourceType
                 'label' => 'label.age_min',
             ))
             ->add('durationMin', null, array(
-                'label' => 'label.duration_min',
+                'label' => 'label.min',
             ))
             ->add('durationMax', null, array(
-                'label' => 'label.duration_max',
+                'label' => 'label.max',
             ))
             ->add('joueurMin', null, array(
-                'label' => 'label.player_count_min',
+                'label' => 'label.min',
             ))
             ->add('joueurMax', null, array(
-                'label' => 'label.player_count_max',
+                'label' => 'label.max',
             ))
             ->add('barcodes', CollectionType::class, array(
                 'label' => 'label.barcodes',

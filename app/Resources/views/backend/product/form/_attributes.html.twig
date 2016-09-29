@@ -1,8 +1,30 @@
 <div class="tab-pane" id="attributes">
     {{ form_row(form.ageMin) }}
-    {{ form_row(form.durationMin) }}
-    {{ form_row(form.durationMax) }}
-    {{ form_row(form.joueurMin) }}
-    {{ form_row(form.joueurMax) }}
+    <div class="row">
+        <label class="control-label col-sm-3">{{ 'label.player_count' | trans }}</label>
+        <div class="col-sm-9">
+            <div class="row">
+                <div class="col-sm-6">
+                    {{ form_row(form.joueurMin) }}
+                </div>
+                <div class="col-sm-6">
+                    {{ form_row(form.joueurMax) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <label class="control-label col-sm-3">{{ 'label.duration' | trans }}</label>
+        <div class="col-sm-9">
+            <div class="row">
+                <div class="col-sm-6">
+                    {{ form_row(form.durationMin) }}
+                </div>
+                <div class="col-sm-6">
+                    {{ form_row(form.durationMax) }}
+                </div>
+            </div>
+        </div>
+    </div>
     {{ form_row(form.barcodes) }}
 </div>
