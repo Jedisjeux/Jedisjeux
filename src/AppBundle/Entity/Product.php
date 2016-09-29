@@ -47,7 +47,7 @@ class Product extends BaseProduct implements ReviewableInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string", unique=true)
+     * @ORM\Column(type="string", unique=true, nullable=true)
      */
     protected $code;
 
