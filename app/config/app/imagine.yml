@@ -41,6 +41,9 @@ liip_imagine:
             data_loader: cmf_media_doctrine_phpcr
             filters:
                 relative_resize: { widen: 380 }
+        image_box_4:
+            filters:
+                relative_resize: { widen: 300 }
         magazine_item:
             quality: 100
             filters:

@@ -10,7 +10,7 @@
             <div class="element">
                 <div class="image-style-one">
                     {% if product.mainImage %}
-                        <img src="{{ product.mainImage.webPath | imagine_filter('default') }}" alt=""
+                        <img src="{{ product.mainImage.webPath | imagine_filter('image_box_4') }}" alt="{{ product }}"
                              class="img-responsive"/>
                     {% endif %}
                     <div class="image-hover">
