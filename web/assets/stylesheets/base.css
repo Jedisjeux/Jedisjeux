@@ -29362,7 +29362,7 @@ h1 {
 
 /* line 69, ../sass/base.scss */
 .jeu-list .img-container {
-  height: 148px;
+  max-height: 120px;
   overflow: hidden;
 }
 
