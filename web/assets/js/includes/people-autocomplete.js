@@ -58,7 +58,7 @@ $(function () {
 
   function getImage(repo) {
     if (repo.image) {
-      return repo.image.default;
+      return repo.image.thumbnail;
     } else {
       return '//ssl.gstatic.com/accounts/ui/avatar_2x.png';
     }
