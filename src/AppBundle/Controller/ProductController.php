@@ -8,6 +8,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Taxon;
 use AppBundle\Repository\ProductRepository;
 use Doctrine\ORM\EntityRepository;
 use FOS\RestBundle\View\View;
@@ -32,8 +33,6 @@ class ProductController extends ResourceController
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $this->isGrantedOr403($configuration, ResourceActions::INDEX);
 
-        $rootTaxons = $this->getTaxonRepository()->findBy(array('code' => array('mechanisms', 'themes')));
-
         $resources = $this->resourcesCollectionProvider->get($configuration, $this->repository);
 
         $view = View::create($resources);
@@ -43,12 +42,11 @@ class ProductController extends ResourceController
                 ->setTemplate($configuration->getTemplate(ResourceActions::INDEX))
                 ->setTemplateVar($this->metadata->getPluralName())
                 ->setData([
-                    'rootTaxons' => $rootTaxons,
+                    'rootTaxons' => $this->getRootTaxons(),
                     'metadata' => $this->metadata,
                     'resources' => $resources,
                     $this->metadata->getPluralName() => $resources,
-                ])
-            ;
+                ]);
         }
 
         return $this->viewHandler->handle($configuration, $view);
@@ -70,8 +68,6 @@ class ProductController extends ResourceController
             throw new NotFoundHttpException('Requested taxon does not exist.');
         }
 
-        $rootTaxons = $this->getTaxonRepository()->findBy(array('code' => array('mechanisms', 'themes')));
-
         /** @var ProductRepository $repository */
         $repository = $this->repository;
 
@@ -89,7 +85,7 @@ class ProductController extends ResourceController
                 ->setData([
                     'metadata' => $this->metadata,
                     'taxon' => $taxon,
-                    'rootTaxons' => $rootTaxons,
+                    'rootTaxons' => $this->getRootTaxons(),
                     'resources' => $resources,
                     $this->metadata->getPluralName() => $resources,
                 ]);
@@ -114,8 +110,6 @@ class ProductController extends ResourceController
             throw new NotFoundHttpException('Requested person does not exist.');
         }
 
-        $rootTaxons = $this->getTaxonRepository()->findBy(array('code' => array('mechanisms', 'themes')));
-
         /** @var ProductRepository $repository */
         $repository = $this->repository;
 
@@ -136,7 +130,7 @@ class ProductController extends ResourceController
                 ->setTemplateVar($this->metadata->getPluralName())
                 ->setData([
                     'metadata' => $this->metadata,
-                    'rootTaxons' => $rootTaxons,
+                    'rootTaxons' => $this->getRootTaxons(),
                     'person' => $person,
                     'resources' => $resources,
                     $this->metadata->getPluralName() => $resources,
@@ -144,6 +138,20 @@ class ProductController extends ResourceController
         }
 
         return $this->viewHandler->handle($configuration, $view);
+    }
+
+    /**
+     * @return array|Taxon[]
+     */
+    protected function getRootTaxons()
+    {
+        return $this->getTaxonRepository()->findBy([
+            'code' => [
+                Taxon::CODE_MECHANISM,
+                Taxon::CODE_THEME,
+                Taxon::CODE_TARGET_AUDIENCE,
+            ]
+        ]);
     }
 
     /**
