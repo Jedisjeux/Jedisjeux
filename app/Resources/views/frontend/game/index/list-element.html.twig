@@ -20,18 +20,39 @@
         </a>
     </div>
 
+    {% set taxonCode = product.mainTaxon ? product.mainTaxon.code : null %}
+
+    {% if taxonCode == constant('AppBundle\\Entity\\Taxon::CODE_BEGINNER') %}
+        {% set color = 'green' %}
+        {% set icon = 'fa fa-user' %}
+    {% elseif taxonCode == constant('AppBundle\\Entity\\Taxon::CODE_CHILD') %}
+        {% set color = 'lblue' %}
+        {% set icon = 'fa fa-child' %}
+    {% elseif taxonCode == constant('AppBundle\\Entity\\Taxon::CODE_ADVANCED_USER') %}
+        {% set color = 'purple' %}
+        {% set icon = 'fa fa-user-plus' %}
+    {% elseif taxonCode == constant('AppBundle\\Entity\\Taxon::CODE_EXPERT') %}
+        {% set color = 'red' %}
+        {% set icon = 'fa fa-star' %}
+    {% endif %}
+
     <!-- Image Box #4 Content -->
     <div class="img-box-4-content">
         <!-- Icon -->
-        <a href="#"><i style="z-index: 10;" class="fa {{ faImg }} {{ bg }}"></i></a>
+        <a href="#">
+            {% if color is defined %}
+                <i style="z-index: 10;" class="{{ icon }} bg-{{ color }}"></i>
+            {% endif %}
+        </a>
         <!-- Heading -->
         <h4><a href="{{ productHref }}">{{ product }}</a></h4>
         <!-- Border -->
-        <div class="bor {{ bg }}"></div>
-        <!-- Paragraph -->
-        <p>
-            {{ playerCount(product) }}<br/>
-            à partir de {{ product.ageMin }} ans<br/>
+
+        <div class="bor bg-{{ color|default('black') }}"></div>
+        <!-- >
+            {{ playerCount(product) }}<br/>Paragraph -->
+        <p
+                à partir de {{ product.ageMin }} ans<br/>
         </p>
         <div class="rating-container">
             <div class="rating yellow" data-readonly="true"

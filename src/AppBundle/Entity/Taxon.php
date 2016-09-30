@@ -37,10 +37,10 @@ class Taxon extends BaseTaxon
     const CODE_MECHANISM = 'mechanisms';
     const CODE_THEME = 'themes';
     const CODE_TARGET_AUDIENCE = 'target-audience';
-    const CODE_CHILD = 'target-audience-1';
-    const CODE_BEGINNER = 'target-audience-2';
-    const CODE_ADVANCED_USER = 'target-audience-3';
-    const CODE_EXPERT = 'target-audience-4';
+    const CODE_CHILD = 'target-audiences-1';
+    const CODE_BEGINNER = 'target-audiences-2';
+    const CODE_ADVANCED_USER = 'target-audiences-3';
+    const CODE_EXPERT = 'target-audiences-4';
 
     // taxons of people
     const CODE_ZONE = 'zones';
