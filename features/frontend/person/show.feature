@@ -15,4 +15,4 @@ Feature: View people
     Given I am on "/ludographies/"
     When I follow "Reiner Knizia"
     Then I should see "Reiner Knizia"
-    And I should see "Critiques"
+    And I should see "Avis"
