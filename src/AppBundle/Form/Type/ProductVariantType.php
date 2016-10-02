@@ -15,6 +15,7 @@ use Sylius\Bundle\VariationBundle\Form\Type\VariantType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -31,6 +32,10 @@ class ProductVariantType extends VariantType
         parent::buildForm($builder, $options);
 
         $builder
+            ->add('name', TextType::class, [
+                'label' => 'label.name',
+                'required' => false,
+            ])
             ->add('images', CollectionType::class, array(
                 'type' => 'app_product_variant_image',
                 'allow_add' => true,

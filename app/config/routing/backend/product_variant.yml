@@ -1,3 +1,12 @@
+sylius_backend_product_variant:
+    resource: |
+        alias: sylius.product_variant
+        section: backend
+        templates: :backend/product_variant
+        redirect: index
+        only: [update, delete]
+    type: sylius.resource
+
 sylius_backend_product_variant_index:
     methods: [GET]
     path: /products/{productId}/variants

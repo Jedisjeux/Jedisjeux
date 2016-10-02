@@ -16,11 +16,10 @@
     <div class="container">
         <div class="col-md-12">
             {{ form_start(form) }}
-            <input type="hidden" name="_method" value="PUT"/>
-            {{ form_widget(form) }}
+            {% include 'backend/product_variant/_form.html.twig' %}
             <br />
             {{ action.update() }}
-            {{ form_end(form) }}
+            {{ form_end(form, {'render_rest': false}) }}
         </div>
     </div>
 {% endblock container %}
