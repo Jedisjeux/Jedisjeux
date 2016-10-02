@@ -19,7 +19,7 @@ Feature: List products
       | Thèmes | Fantastique     |
     And I am logged in as user "admin@example.com" with password "password"
 
-  Scenario: List taxons
+  Scenario: List products
     Given there are products:
      | name |
      | Puerto Rico |
