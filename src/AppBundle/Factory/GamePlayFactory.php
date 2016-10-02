@@ -12,6 +12,7 @@
 namespace AppBundle\Factory;
 
 use AppBundle\Entity\GamePlay;
+use AppBundle\Repository\ProductRepository;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\UserBundle\Context\CustomerContext;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -42,7 +43,7 @@ class GamePlayFactory extends Factory
     public function createForProduct($productSlug)
     {
         /** @var ProductInterface $product */
-        $product = $this->productRepository->findOneBy(['slug' => $productSlug]);
+        $product = $this->productRepository->findOneBySlug($productSlug);
 
         if (null === $product) {
             throw new \InvalidArgumentException(sprintf('Requested product does not exist with slug "%s".', $productSlug));
@@ -59,7 +60,7 @@ class GamePlayFactory extends Factory
     }
 
     /**
-     * @param EntityRepository $productRepository
+     * @param ProductRepository $productRepository
      */
     public function setProductRepository($productRepository)
     {
