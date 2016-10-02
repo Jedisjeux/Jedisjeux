@@ -22,7 +22,7 @@
 {% endblock %}
 
 {% block new_entity_button %}
-    <a class="btn btn-primary" href="{{ path('sylius_admin_product_create') }}">
+    <a class="btn btn-primary" href="{{ path('sylius_backend_product_variant_create', {productId: app.request.get('productId')}) }}">
         <span class="glyphicon glyphicon-plus-sign"></span>
         Nouveau variant
     </a>
