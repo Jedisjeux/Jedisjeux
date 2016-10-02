@@ -11,12 +11,7 @@
 
 {% block subtitle_container %}
     {% if product.averageRating %}
-        <div class="icon-box-4">
-            <div class="icon-box-4-item">
-                <a href="#" class="icon-box-4-icon bg-yellow"> <i class="fa fa-star"></i> </a>
-                <h4>{{ product.averageRating|round(1) }}</h4>
-            </div>
-        </div>
+        <span class="fa fa-star yellow"></span> {{ product.averageRating|round(1) }}
     {% endif %}
 {% endblock %}
 
