@@ -91,7 +91,7 @@ class LoadThemesCommand extends ContainerAwareCommand
     {
         $locale = $this->getContainer()->getParameter('locale');
 
-        /** @var TaxonInterface $taxon */
+        /** @var Taxon $taxon */
         $taxon = $this->getRepository()->findOneByNameAndRoot($data['name'], $parentTaxon->getRoot());
 
         if (null === $taxon) {
@@ -104,6 +104,7 @@ class LoadThemesCommand extends ContainerAwareCommand
 
         $taxon->setCode($code);
         $taxon->setName($data['name']);
+        $taxon->setIconClass(isset($data['icon_class']) ? $data['icon_class'] : null);
         $taxon->setDescription(isset($data['description']) ? $data['description'] : null);
 
         $parentTaxon->addChild($taxon);

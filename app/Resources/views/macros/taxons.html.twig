@@ -47,7 +47,7 @@
 {% endmacro %}
 
 {% macro sidebarList(taxons, routeName, currentTaxon) %}
-    <ul class="list-6">
+    <ul class="list-unstyled">
         {% set hiddenElements = false %}
         {% for key, taxon in taxons %}
             {#TODO improve for multi-levels of children#}
@@ -58,7 +58,7 @@
             <li{% if hiddenElements %} class="closed" style="display: none"{% endif %}>
                 <a href="{{ path(routeName, { 'permalink': taxon.permalink }) }}">
                     {% if taxon.iconClass %}
-                        <span class="circle-1 {{ taxon.iconClass }} bg-{{ taxon.color }} white"></span>&nbsp;
+                        <span class="{{ taxon.iconClass }} {{ taxon.color|default('color') }}"></span>&nbsp;
                     {% endif %}
                     {% if is_parent %}
                     <strong>
@@ -67,6 +67,7 @@
                         {% if is_parent %}
                     </strong>
                     {% endif %}
+                    <span class="color">(57)</span>
                 </a>
                 {% if (is_parent and taxon.children|length > 0) %}
                     {{ _self.sidebarList(taxon.children, routeName, currentTaxon) }}
