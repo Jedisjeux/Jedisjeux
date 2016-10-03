@@ -46,7 +46,7 @@
     {% endfor %}
 {% endmacro %}
 
-{% macro sidebarList(taxons, routeName, currentTaxon) %}
+{% macro sidebarList(taxons, routeName, currentTaxon, itemCountProperty) %}
     <ul class="list-unstyled">
         {% set hiddenElements = false %}
         {% for key, taxon in taxons %}
@@ -67,7 +67,9 @@
                         {% if is_parent %}
                     </strong>
                     {% endif %}
-                    <span class="color">(57)</span>
+                    {% if itemCountProperty %}
+                        <span class="color">({{ attribute(taxon, itemCountProperty) }})</span>
+                    {% endif %}
                 </a>
                 {% if (is_parent and taxon.children|length > 0) %}
                     {{ _self.sidebarList(taxon.children, routeName, currentTaxon) }}

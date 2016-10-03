@@ -67,6 +67,13 @@ class Taxon extends BaseTaxon
     protected $topicCount;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer")
+     */
+    protected $productCount;
+
+    /**
      * {@inheritdoc}
      */
     public function setParent(TaxonInterface $parent = null)
@@ -86,6 +93,7 @@ class Taxon extends BaseTaxon
         parent::__construct();
 
         $this->topicCount = 0;
+        $this->productCount = 0;
     }
 
     /**
@@ -166,5 +174,25 @@ class Taxon extends BaseTaxon
     public function setTopicCount($topicCount)
     {
         $this->topicCount = $topicCount;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProductCount()
+    {
+        return $this->productCount;
+    }
+
+    /**
+     * @param mixed $productCount
+     *
+     * @return $this
+     */
+    public function setProductCount($productCount)
+    {
+        $this->productCount = $productCount;
+
+        return $this;
     }
 }

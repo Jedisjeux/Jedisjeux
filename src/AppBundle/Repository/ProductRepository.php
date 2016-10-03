@@ -167,6 +167,33 @@ class ProductRepository extends BaseProductRepository
     }
 
     /**
+     * Count products categorized under given taxon.
+     *
+     * @param TaxonInterface $taxon
+     *
+     * @return Pagerfanta
+     */
+    public function countByTaxon(TaxonInterface $taxon)
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder
+            ->select('count(o)')
+            ->leftJoin('o.mainTaxon', 'mainTaxon')
+            ->leftJoin('o.taxons', 'taxon')
+            ->andWhere($queryBuilder->expr()->orX(
+                'mainTaxon = :taxon',
+                ':left < mainTaxon.left AND mainTaxon.right < :right',
+                'taxon = :taxon',
+                ':left < taxon.left AND taxon.right < :right'
+            ))
+            ->setParameter('taxon', $taxon)
+            ->setParameter('left', $taxon->getLeft())
+            ->setParameter('right', $taxon->getRight());
+
+        return $queryBuilder->getQuery()->getSingleScalarResult();
+    }
+
+    /**
      * @return int
      *
      * @throws \Doctrine\ORM\NoResultException

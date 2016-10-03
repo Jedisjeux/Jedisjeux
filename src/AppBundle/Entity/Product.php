@@ -367,7 +367,7 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
-     * @return TaxonInterface
+     * @return TaxonInterface|Taxon
      */
     public function getMainTaxon()
     {

@@ -14,6 +14,11 @@ services:
         arguments:
             - "@app.repository.topic"
 
+    app.calculator.product_count_by_taxon:
+        class: AppBundle\Calculator\ProductCountByTaxonCalculator
+        arguments:
+            - "@sylius.repository.product"
+
     # <!-- updaters -->
     app.updater.topic_count_by_taxon:
         class: AppBundle\Updater\TopicCountByTaxonUpdater
@@ -22,6 +27,11 @@ services:
 
     app.updater.post_count_by_topic:
         class: AppBundle\Updater\PostCountByTopicUpdater
+
+    app.updater.product_count_by_taxon:
+        class: AppBundle\Updater\ProductCountByTaxonUpdater
+        arguments:
+            - "@app.calculator.product_count_by_taxon"
 
     # <!-- Subscribers -->
     app.subscriber.add_topic_follower:
@@ -58,6 +68,13 @@ services:
         class: AppBundle\EventSubscriber\CalculatePostCountByTopicSubscriber
         arguments:
             - @app.updater.post_count_by_topic
+        tags:
+            - { name: kernel.event_subscriber }
+
+    app.subscriber.calculate_product_count_by_taxon:
+        class: AppBundle\EventSubscriber\CalculateProductCountByTaxonSubscriber
+        arguments:
+            - @app.updater.product_count_by_taxon
         tags:
             - { name: kernel.event_subscriber }
 
