@@ -151,6 +151,8 @@ class LoadProductsCommand extends ContainerAwareCommand
         $data['createdAt'] = \DateTime::createFromFormat('Y-m-d H:i:s', $data['createdAt']);
         $data['updatedAt'] = \DateTime::createFromFormat('Y-m-d H:i:s', $data['updatedAt']);
         $data['releasedAt'] = $data['releasedAt'] ? \DateTime::createFromFormat('Y-m-d', $data['releasedAt']) : null;
+        $product->getMasterVariant()->setReleasedAtPrecision($this->getReleasedAtPrecision($data));
+
         switch ($data['status']) {
             case 0 :
                 $data['status'] = Product::WRITING;
@@ -188,6 +190,25 @@ class LoadProductsCommand extends ContainerAwareCommand
         $product->getMasterVariant()->setName($data['name']);
 
         return $product;
+    }
+
+    /**
+     * @param $data
+     *
+     * @return null|string
+     */
+    protected function getReleasedAtPrecision(array $data)
+    {
+        switch ($data['releasedAtPrecision']) {
+            case 'jour' :
+                return ProductVariant::RELEASED_AT_PRECISION_ON_DAY;
+            case 'mois' :
+                return ProductVariant::RELEASED_AT_PRECISION_ON_MONTH;
+            case 'annee' :
+                return ProductVariant::RELEASED_AT_PRECISION_ON_YEAR;
+        }
+
+        return null;
     }
 
     protected function deleteProductAssociations()
@@ -308,6 +329,7 @@ EOM;
         $productVariant->setName($data['name']);
         $productVariant->setCreatedAt(\DateTime::createFromFormat('Y-m-d H:i:s', $data['createdAt']));
         $productVariant->setReleasedAt($data['releasedAt'] ? \DateTime::createFromFormat('Y-m-d', $data['releasedAt']) : null);
+        $productVariant->setReleasedAtPrecision($this->getReleasedAtPrecision($data));
 
         $product->addVariant($productVariant);
 
@@ -335,7 +357,8 @@ select      concat('game-', old.id) as code,
             old.valid as status,
             old.date as createdAt,
             old.date as updatedAt,
-            old.date_sortie as releasedAt
+            old.date_sortie as releasedAt,
+            old.precis_sortie as releasedAtPrecision
 from        jedisjeux.jdj_game old
 where       old.valid in (0, 1, 2, 5, 3)
 and         (old.id_pere is null or type_diff in ('extension', 'collection'))
@@ -364,7 +387,8 @@ select      concat('game-', old.id) as code,
             old.valid as status,
             old.date as createdAt,
             old.date as updatedAt,
-            old.date_sortie as releasedAt
+            old.date_sortie as releasedAt,
+            old.precis_sortie as releasedAtPrecision
 from        jedisjeux.jdj_game old
 where       old.valid in (0, 1, 2, 5, 3)
             and         old.id_pere is not null

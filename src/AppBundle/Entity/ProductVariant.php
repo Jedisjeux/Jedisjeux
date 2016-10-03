@@ -21,6 +21,10 @@ use Sylius\Component\Product\Model\Variant;
  */
 class ProductVariant extends Variant
 {
+    const RELEASED_AT_PRECISION_ON_DAY = 'on-day';
+    const RELEASED_AT_PRECISION_ON_MONTH = 'on-month';
+    const RELEASED_AT_PRECISION_ON_YEAR = 'on-year';
+
     /**
      * @var string
      *
@@ -56,6 +60,13 @@ class ProductVariant extends Variant
      * @ORM\Column(type="date", nullable=true)
      */
     protected $releasedAt;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $releasedAtPrecision;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -233,6 +244,26 @@ class ProductVariant extends Variant
     public function setReleasedAt($releasedAt)
     {
         $this->releasedAt = $releasedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReleasedAtPrecision()
+    {
+        return $this->releasedAtPrecision;
+    }
+
+    /**
+     * @param string $releasedAtPrecision
+     *
+     * @return $this
+     */
+    public function setReleasedAtPrecision($releasedAtPrecision)
+    {
+        $this->releasedAtPrecision = $releasedAtPrecision;
 
         return $this;
     }

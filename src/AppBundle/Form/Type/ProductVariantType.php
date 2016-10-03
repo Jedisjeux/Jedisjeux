@@ -11,6 +11,7 @@
 
 namespace AppBundle\Form\Type;
 
+use AppBundle\Entity\ProductVariant;
 use Sylius\Bundle\VariationBundle\Form\Type\VariantType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -40,6 +41,16 @@ class ProductVariantType extends VariantType
             ->add('releasedAt', DateType::class, [
                 'label' => 'label.release_date',
                 'required' => false,
+            ])
+            ->add('releasedAtPrecision', ChoiceType::class, [
+                'label' => 'label.release_date_precision',
+                'required' => true,
+                'choices'  => array(
+                    'label.day' => ProductVariant::RELEASED_AT_PRECISION_ON_DAY,
+                    'label.month' => ProductVariant::RELEASED_AT_PRECISION_ON_MONTH,
+                    'label.year' => ProductVariant::RELEASED_AT_PRECISION_ON_YEAR,
+                ),
+                'choices_as_values' => true,
             ])
             ->add('images', CollectionType::class, array(
                 'type' => 'app_product_variant_image',
