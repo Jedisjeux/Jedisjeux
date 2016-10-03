@@ -109,7 +109,7 @@
                                                 <span class="fa fa-calendar white"></span>
                                             </p>
                                             <p class="game-attribute">
-                                                sortie le {{ jeu.releasedAt|localizeddate('long', 'none') }}
+                                                {{ 'label.released_at'|trans }} {{ jeu.releasedAt|localizeddate('long', 'none') }}
                                             </p>
 
                                         </li>

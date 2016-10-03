@@ -102,6 +102,8 @@ label:
   pub_banners: Bannières de pub
   rate: Note
   ready_to_publish: Prêt à publier
+  released_at: Sortie le
+  release_date: Date de sortie
   remember_me: Se souvenir de moi
   remove_this_barcode: Supprimer ce code-barres
   remove_this_image: Supprimer cette image
