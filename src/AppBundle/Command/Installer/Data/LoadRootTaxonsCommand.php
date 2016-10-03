@@ -60,7 +60,7 @@ class LoadRootTaxonsCommand extends ContainerAwareCommand
      */
     protected function createOrReplaceRootTaxon(array $data)
     {
-        /** @var TaxonInterface $rootTaxon */
+        /** @var Taxon $rootTaxon */
         $rootTaxon = $this->getRepository()->findOneBy(['code' => $data['code']]);
 
         if (null === $rootTaxon) {
@@ -69,6 +69,7 @@ class LoadRootTaxonsCommand extends ContainerAwareCommand
 
         $rootTaxon->setCode($data['code']);
         $rootTaxon->setName($data['name']);
+        $rootTaxon->setIconClass(isset($data['icon_class']) ? $data['icon_class'] : null);
 
         return $rootTaxon;
     }
@@ -86,14 +87,17 @@ class LoadRootTaxonsCommand extends ContainerAwareCommand
             [
                 'code' => Taxon::CODE_THEME,
                 'name' => 'Thèmes',
+                'icon_class' => 'fa fa-picture-o',
             ],
             [
                 'code' => Taxon::CODE_MECHANISM,
                 'name' => 'Mécanismes',
+                'icon_class' => 'fa fa-cogs',
             ],
             [
                 'code' => Taxon::CODE_TARGET_AUDIENCE,
                 'name' => 'Cibles',
+                'icon_class' => 'glyphicon glyphicon-screenshot',
             ],
             [
                 'code' => Taxon::CODE_ZONE,

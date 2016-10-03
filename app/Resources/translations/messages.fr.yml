@@ -106,7 +106,7 @@ label:
   ready_to_publish: Prêt à publier
   released_at: Sortie le
   release_date: Date de sortie
-  released_at_precision: Précision de la date de sortie
+  release_date_precision: Précision de la date de sortie
   remember_me: Se souvenir de moi
   remove_this_barcode: Supprimer ce code-barres
   remove_this_image: Supprimer cette image
