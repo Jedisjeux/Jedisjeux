@@ -20,20 +20,9 @@
         </a>
     </div>
 
-    {% set taxonCode = product.mainTaxon ? product.mainTaxon.code : null %}
-
-    {% if taxonCode == constant('AppBundle\\Entity\\Taxon::CODE_BEGINNER') %}
-        {% set color = 'green' %}
-        {% set icon = 'fa fa-user' %}
-    {% elseif taxonCode == constant('AppBundle\\Entity\\Taxon::CODE_CHILD') %}
-        {% set color = 'lblue' %}
-        {% set icon = 'fa fa-child' %}
-    {% elseif taxonCode == constant('AppBundle\\Entity\\Taxon::CODE_ADVANCED_USER') %}
-        {% set color = 'purple' %}
-        {% set icon = 'fa fa-user-plus' %}
-    {% elseif taxonCode == constant('AppBundle\\Entity\\Taxon::CODE_EXPERT') %}
-        {% set color = 'red' %}
-        {% set icon = 'fa fa-star' %}
+    {% if product.mainTaxon %}
+        {% set color = product.mainTaxon.color %}
+        {% set icon = product.mainTaxon.iconClass %}
     {% endif %}
 
     <!-- Image Box #4 Content -->

@@ -46,6 +46,20 @@ class Taxon extends BaseTaxon
     const CODE_ZONE = 'zones';
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $iconClass;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $color;
+
+    /**
      * @var integer
      *
      * @ORM\Column(type="integer")
@@ -96,6 +110,46 @@ class Taxon extends BaseTaxon
     public function getName()
     {
         return parent::getName();
+    }
+
+    /**
+     * @return string
+     */
+    public function getIconClass()
+    {
+        return $this->iconClass;
+    }
+
+    /**
+     * @param string $iconClass
+     *
+     * @return $this
+     */
+    public function setIconClass($iconClass)
+    {
+        $this->iconClass = $iconClass;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getColor()
+    {
+        return $this->color;
+    }
+
+    /**
+     * @param string $color
+     *
+     * @return $this
+     */
+    public function setColor($color)
+    {
+        $this->color = $color;
+
+        return $this;
     }
 
     /**

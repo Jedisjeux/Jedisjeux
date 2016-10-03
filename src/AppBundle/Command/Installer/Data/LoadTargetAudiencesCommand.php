@@ -71,7 +71,7 @@ class LoadTargetAudiencesCommand extends ContainerAwareCommand
     {
         $locale = $this->getContainer()->getParameter('locale');
 
-        /** @var TaxonInterface $taxon */
+        /** @var Taxon $taxon */
         $taxon = $this->getRepository()->findOneByNameAndRoot($data['name'], $parentTaxon->getRoot());
 
         if (null === $taxon) {
@@ -82,6 +82,8 @@ class LoadTargetAudiencesCommand extends ContainerAwareCommand
 
         $taxon->setCode('target-audiences-'.$data['id']);
         $taxon->setName($data['name']);
+        $taxon->setColor(isset($data['color']) ? $data['color'] : null);
+        $taxon->setIconClass(isset($data['icon_class']) ? $data['icon_class'] : null);
         $taxon->setDescription(isset($data['description']) ? $data['description'] : null);
 
         $parentTaxon->addChild($taxon);

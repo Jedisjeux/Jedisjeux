@@ -2,18 +2,26 @@
   id: 1
   name: Enfants
   slug: enfants
+  color: lblue
+  icon_class: "fa fa-child"
 -
   id: 2
   name: Débutants
   slug: debutants
+  color: green
+  icon_class: "fa fa-user"
   description: <p>J'ai joué à un jeu chez quelqu'un, j'ai beaucoup aimé et je souhaite découvrir de nouveaux jeux qui me seraient accessibles. Je peux lire et comprendre facilement à la lecture des règles, je peux y jouer sans des joueurs y ayant joués. Le livret se résume à quelques mécanismes simples sur 1 ou 2 pages.</p>
 -
   id: 3
   name: Joueurs avancés
   slug: joueurs-avances
+  color: purple
+  icon_class: "fa fa-user-plus"
   description: <p>J'ai découvert déjà quelques premiers jeux et je souhaite continuer à découvrir encore davantage de jeux accessibles pour aller plus loin. J'ai joué déjà à 10-15 jeux simples, je peux m'attaquer à une lecture de 5-6 pages de règles bien claires.</p>
 -
   id: 4
   name: Experts
   slug: experts
+  color: red
+  icon_class: "fa fa-star"
   description: <p>Je joue régulièrement aux jeux de société. J'ai passé le cap des 30 jeux différents joués. Je ne dis plus "Vas-y on joue, je comprendrai en jouant". Une partie de 1h30 à 3h ne dérange pas. Une lecture d'un livret de 20-25 pages bien expliquées ne me font pas peur.</p>
