@@ -5,6 +5,19 @@ app_post:
         templates: :frontend/post
     type: sylius.resource
 
+app_post_update:
+    methods: [GET, PUT]
+    path: /posts/{id}/edit
+    defaults:
+        _controller: app.controller.post:updateAction
+        _sylius:
+            repository:
+                method: findOneBy
+                arguments: [{id: $id, createdBy: expr:service('sylius.context.customer').getCustomer().getUser()}]
+            redirect:
+                route: app_post_index_by_topic
+                parameters: { topicId: resource.topic.id }
+            template: frontend/topic/update.html.twig
 
 app_post_index_by_topic:
     methods: [GET]
