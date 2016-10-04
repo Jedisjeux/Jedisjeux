@@ -62,7 +62,7 @@ class LoadTaxonsOfArticlesCommand extends ContainerAwareCommand
      */
     protected function createOrReplaceTaxon(array $data, $rootTaxon)
     {
-        /** @var TaxonInterface $taxon */
+        /** @var Taxon $taxon */
         $taxon = $this->getRepository()->findOneBy(['code' => $data['code']]);
 
         if (null === $taxon) {
@@ -72,6 +72,8 @@ class LoadTaxonsOfArticlesCommand extends ContainerAwareCommand
         $taxon->setParent($rootTaxon);
         $taxon->setCode($data['code']);
         $taxon->setName($data['name']);
+        $taxon->setIconClass(isset($data['icon_class']) ? $data['icon_class'] : null);
+        $taxon->setColor(isset($data['color']) ? $data['color'] : null);
 
         return $taxon;
     }
@@ -85,22 +87,32 @@ class LoadTaxonsOfArticlesCommand extends ContainerAwareCommand
             [
                 'code' => Taxon::CODE_NEWS,
                 'name' => 'Actualités',
+                'color' => 'purple',
+                'icon_class' => 'fa fa-newspaper-o',
             ],
             [
                 'code' => Taxon::CODE_REVIEW_ARTICLE,
                 'name' => 'Critiques',
+                'color' => 'red',
+                'icon_class' => 'fa fa-bar-chart',
             ],
             [
                 'code' => Taxon::CODE_PREVIEWS,
                 'name' => 'Previews',
+                'color' => 'green',
+                'icon_class' => 'fa fa-arrow-right',
             ],
             [
                 'code' => Taxon::CODE_IN_THE_BOXES,
                 'name' => 'C\'est dans la boîte',
+                'color' => 'lblue',
+                'icon_class' => 'fa fa-cubes',
             ],
             [
                 'code' => Taxon::CODE_REPORT_ARTICLE,
                 'name' => 'Reportages',
+                'color' => 'black',
+                'icon_class' => 'fa fa-camera',
             ],
             [
                 'code' => Taxon::CODE_INTERVIEW,

@@ -1,0 +1,31 @@
+{% set color = null %}
+{% set icon = null %}
+
+{% if article.mainTaxon %}
+    {% set color = article.mainTaxon.color %}
+    {% set icon = article.mainTaxon.iconClass %}
+{% endif %}
+
+<div class="img-box-4-item">
+    <div class="img-container">
+        <a href="{{ path('app_frontend_article_show', {'name': article.name} ) }}" class="lightbox"><img
+                    src="{{ article.imagePath|imagine_filter('cmf_full') }}" alt=""
+                    class="img-responsive"></a>
+
+    </div>
+    <div class="img-box-4-content">
+        {% if icon %}
+            <a href="{{ path('app_frontend_article_index_by_taxon', {'permalink': article.mainTaxon.permalink} ) }}">
+                <i class="{{ icon }} bg-{{ color|default('color') }}"></i>
+            </a>
+        {% endif %}
+        <h4><a href="#">{{ article }}</a></h4>
+        <div class="bor bg-{{ color|default('color') }}"></div>
+        <p>Publié le {{ article.publishStartDate|localizeddate('short', 'none') }}</p>
+
+        <div class="magazine-meta">
+            <i class="fa fa-eye"></i> {{ article.viewCount }}
+            - <i class="fa fa-comments"></i> {{ article.topic ? article.topic.postCount : 0 }}
+        </div>
+    </div>
+</div>
