@@ -45,7 +45,7 @@
                         <a href="{{ path('app_frontend_article_show', {'name': article.name} ) }}"><i class="{{ icon }} {{ bgColor }}"></i></a>
                         <h4><a href="#">{{ article }}</a></h4>
                         <div class="bor {{ bgColor }}"></div>
-                        <p>Publié le {{ article.publishStartDate|localizeddate('medium', 'none') }}</p>
+                        <p>Publié le {{ article.publishStartDate|localizeddate('short', 'none') }}</p>
 
                         <div class="magazine-meta">
                             <i class="fa fa-eye"></i> {{ article.viewCount }}

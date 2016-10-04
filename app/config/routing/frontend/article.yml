@@ -4,7 +4,7 @@ app_frontend_article_index:
     defaults:
         _controller: app.controller.article:indexWithTaxonsAction
         _sylius:
-            paginate: 15
+            paginate: 16
             repository:
                 method: createFilterPaginator
                 arguments:
@@ -20,7 +20,7 @@ app_frontend_article_index_by_taxon:
     defaults:
         _controller: app.controller.article:indexByTaxonAction
         _sylius:
-            paginate: 15
+            paginate: 16
             sortable: true
             sorting:
                 publishStartDate: desc
