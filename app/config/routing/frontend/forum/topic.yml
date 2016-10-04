@@ -9,6 +9,18 @@ app_frontend_topic_create:
                 route: app_post_index_by_topic
                 parameters: { topicId: resource.id }
 
+app_frontend_topic_index:
+    methods: [GET]
+    path: /topics/
+    defaults:
+        _controller: app.controller.topic:indexWithTaxonsAction
+        _sylius:
+            paginate: 10
+            sortable: true
+            sorting:
+                createdAt: desc
+            template: frontend/topic/index.html.twig
+
 app_frontend_topic_update:
     methods: [GET, PUT]
     path: /topics/{id}/edit
@@ -18,6 +30,9 @@ app_frontend_topic_update:
             repository:
                 method: findOneBy
                 arguments: [{id: $id, createdBy: expr:service('sylius.context.customer').getCustomer().getUser()}]
+            redirect:
+                route: app_post_index_by_topic
+                parameters: { topicId: $id }
             template: frontend/topic/update.html.twig
 
 app_frontend_topic_index_by_taxon:
@@ -32,21 +47,10 @@ app_frontend_topic_index_by_taxon:
                 createdAt: desc
             template: frontend/topic/index.html.twig
 
-app_frontend_topic_index:
-    methods: [GET]
-    path: /topics/
-    defaults:
-        _controller: app.controller.topic:indexWithTaxonsAction
-        _sylius:
-            paginate: 10
-            sortable: true
-            sorting:
-                createdAt: desc
-            template: frontend/topic/index.html.twig
-
 app_frontend_topic:
     resource: |
         alias: app.topic
         templates: :frontend/topic
         only: [delete]
+        redirect: index
     type: sylius.resource
