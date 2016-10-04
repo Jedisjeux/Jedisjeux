@@ -16,30 +16,24 @@
     {#TODO macro to handle recursivity#}
     {% if taxon is defined %}
         {% if taxon.parent and not taxon.parent.isRoot %}
-            / <a href="{{ path('app_person_index_by_taxon', {'permalink': taxon.parent.permalink}) }}">{{ taxon.parent }}</a>
+            / <a
+                href="{{ path('app_person_index_by_taxon', {'permalink': taxon.parent.permalink}) }}">{{ taxon.parent }}</a>
         {% endif %}
         / {{ taxon }}
     {% endif %}
 {% endblock %}
 
 {% block body -%}
+    <div class="col-md-9">
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-
-                <div class="container">
-                    {% include 'frontend/person/partial/_list.html.twig' %}
-                    {{ pagination(people) }}
-                </div>
-
-            </div>
-            <div class="col-md-4">
-                {% include 'frontend/person/_sidebar.html.twig' %}
-            </div>
+        <div class="container">
+            {% include 'frontend/person/partial/_list.html.twig' %}
+            {{ pagination(people) }}
         </div>
+
     </div>
-
-
+    <div class="col-md-3">
+        {% include 'frontend/person/_sidebar.html.twig' %}
+    </div>
 
 {% endblock %}

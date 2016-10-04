@@ -1,7 +1,7 @@
 {% macro image(person, filter) %}
     {% set filter = filter|default('thumbnail') %}
 
-    {% set imageSrc = '//ssl.gstatic.com/accounts/ui/avatar_2x.png' %}
+    {% set imageSrc = asset('assets/img/avatar_2x.png') | imagine_filter(filter) %}
 
     {% if (person.mainImage) %}
         {% set imageSrc = person.mainImage.webPath | imagine_filter(filter) %}
