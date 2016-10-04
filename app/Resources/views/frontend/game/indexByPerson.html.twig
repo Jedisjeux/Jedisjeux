@@ -18,45 +18,39 @@
 {% endblock %}
 
 {% block body -%}
+    <div class="col-md-9">
 
-    <div class="container">
+        <div class="container">
 
+            {% include "frontend/person/show/_header.html.twig" %}
 
-        <div class="row">
-            <div class="col-md-9">
+            <div class="pull-right sorting">
+                {% set sorting = app.request.get('sorting') %}
 
-                <div class="container">
+                {% set icon = false %}
+                {% set currentOrder = null %}
 
-                    {% include "frontend/person/show/_header.html.twig" %}
+                {% if null == sorting %}
+                    {% set icon = true %}
+                    {% set currentOrder = 'desc' %}
+                {% endif %}
 
-                    <div class="pull-right sorting">
-                        {% set sorting = app.request.get('sorting') %}
-
-                        {% set icon = false %}
-                        {% set currentOrder = null %}
-
-                        {% if null == sorting %}
-                            {% set icon = true %}
-                            {% set currentOrder = 'desc' %}
-                        {% endif %}
-
-                        Trier
-                        par {{ sorting('sylius_product_index_by_person', 'label.created_at'|trans, 'createdAt', 'desc', icon, currentOrder, {'slug': person.slug}) }},
-                        par {{ sorting('sylius_product_index_by_person', 'label.rate'|trans, 'averageRating', 'desc', null, null, {'slug': person.slug}) }},
-                        {{ sorting('sylius_product_index_by_person', 'label.name'|trans, 'translation.name', 'asc', null, null, {'slug': person.slug} ) }}
-                    </div>
-
-                    <div class="clearfix"></div>
-                    {% include "frontend/game/index/list-4.html.twig" %}
-                    {{ pagination(products) }}
-                </div>
-
+                Trier
+                par {{ sorting('sylius_product_index_by_person', 'label.created_at'|trans, 'createdAt', 'desc', icon, currentOrder, {'slug': person.slug}) }}
+                ,
+                par {{ sorting('sylius_product_index_by_person', 'label.rate'|trans, 'averageRating', 'desc', null, null, {'slug': person.slug}) }}
+                ,
+                {{ sorting('sylius_product_index_by_person', 'label.name'|trans, 'translation.name', 'asc', null, null, {'slug': person.slug} ) }}
             </div>
 
-            <div class="col-md-3">
-                {% include 'frontend/game/_sidebar.html.twig' %}
-            </div>
+            <div class="clearfix"></div>
+            {% include "frontend/game/index/list-4.html.twig" %}
+            {{ pagination(products) }}
         </div>
+
     </div>
 
+    <div class="col-md-3">
+        {% include 'frontend/game/_sidebar.html.twig' %}
+    </div>
 {% endblock %}

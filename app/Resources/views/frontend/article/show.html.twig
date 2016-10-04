@@ -21,60 +21,54 @@
 {% endblock %}
 
 {% block body -%}
+    <div class="col-md-8">
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
+        {% if article.author %}
+            {{ item.blogAuthor(article.author, null, article.document.publishStartDate) }}
+        {% endif %}
 
-                {% if article.author %}
-                    {{ item.blogAuthor(article.author, null, article.document.publishStartDate) }}
-                {% endif %}
+        {% set blockImageCount = 0 %}
 
-                {% set blockImageCount = 0 %}
+        {% for block in article.document.children %}
 
-                {% for block in article.document.children %}
+            {% if 'mainImage' != block.name %}
+                {{ sonata_block_render({
+                    'name': block.id
+                }) }}
+            {% endif %}
 
-                    {% if 'mainImage' != block.name %}
-                        {{ sonata_block_render({
-                            'name': block.id
-                        }) }}
-                    {% endif %}
+        {% endfor %}
 
+        {% if article.reviews|length > 0 %}
+            <div class="block-heading-two">
+                <h3><span>Avis de la rédaction</span>
+                </h3>
+            </div>
+
+            <div class="blog-comments">
+                {% for review in article.reviews %}
+                    {{ reviewComment(review) }}
                 {% endfor %}
-
-                {% if article.reviews|length > 0 %}
-                    <div class="block-heading-two">
-                        <h3><span>Avis de la rédaction</span>
-                        </h3>
-                    </div>
-
-                    <div class="blog-comments">
-                        {% for review in article.reviews %}
-                            {{ reviewComment(review) }}
-                        {% endfor %}
-                    </div>
-                {% endif %}
-
-
-                {% if topic %}
-                    <div class="block-heading-two">
-                        <h3><span>Commentaires</span>
-                            <small>({{ topic.posts|length }})</small>
-                        </h3>
-                    </div>
-
-                    <div class="blog-comments">
-                        {% for post in topic.posts %}
-                            {{ postComment(post) }}
-                        {% endfor %}
-                    </div>
-                {% endif %}
-
             </div>
-            <div class="col-md-4">
-                {% include "frontend/article/_sidebarShow.html.twig" %}
+        {% endif %}
+
+
+        {% if topic %}
+            <div class="block-heading-two">
+                <h3><span>Commentaires</span>
+                    <small>({{ topic.posts|length }})</small>
+                </h3>
             </div>
-        </div>
+
+            <div class="blog-comments">
+                {% for post in topic.posts %}
+                    {{ postComment(post) }}
+                {% endfor %}
+            </div>
+        {% endif %}
+
     </div>
-
+    <div class="col-md-4">
+        {% include "frontend/article/_sidebarShow.html.twig" %}
+    </div>
 {% endblock %}

@@ -17,41 +17,34 @@
 {% endblock %}
 
 {% block body -%}
-    <div class="container">
+    <div class="col-md-8">
 
-        <div class="row">
+        <div class="container">
 
-            <div class="col-md-8">
-
-                <div class="container">
-
-                    <div class="blog-comments">
-                        {{ blogCommentItem(topic.mainPost) }}
-                    </div>
-
-                    {% set topicRepliesCount = topic.posts|length %}
-                    <div class="block-heading-two">
-                        <h3><span>Réponses</span>
-                            <small>({{ topicRepliesCount }})</small>
-                        </h3>
-                    </div>
-
-                    <div class="blog-comments">
-                        {% for post in posts %}
-                            {{ blogCommentItem(post) }}
-                        {% endfor %}
-                    </div>
-
-                    {{ pagination(posts) }}
-
-                </div>
-
+            <div class="blog-comments">
+                {{ blogCommentItem(topic.mainPost) }}
             </div>
 
-            <div class="col-md-4">
-                {% include 'frontend/post/_sidebar.html.twig' %}
+            {% set topicRepliesCount = topic.posts|length %}
+            <div class="block-heading-two">
+                <h3><span>Réponses</span>
+                    <small>({{ topicRepliesCount }})</small>
+                </h3>
             </div>
+
+            <div class="blog-comments">
+                {% for post in posts %}
+                    {{ blogCommentItem(post) }}
+                {% endfor %}
+            </div>
+
+            {{ pagination(posts) }}
+
         </div>
 
+    </div>
+
+    <div class="col-md-4">
+        {% include 'frontend/post/_sidebar.html.twig' %}
     </div>
 {% endblock %}
