@@ -64,36 +64,38 @@
 
         {% block page_heading %}
             <div class="container">
-                <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
 
-                    {% include "layout/_flashes.html.twig" %}
-                    {% include "layout/_notify.html.twig" %}
+                        {% include "layout/_flashes.html.twig" %}
+                        {% include "layout/_notify.html.twig" %}
 
-                    <div class="pull-right">
-                        {% block breadcrumb_container %}
-                            <div class="breads">
-                                <a href="{{ path('app_homepage') }}">Accueil</a> /
-                                {% block breadcrumb_content %}
-                                    {#<a href="#">Page</a> / #}
-                                    {#<a href="#">Sub Page</a>#}
-                                {% endblock breadcrumb_content %}
-                            </div>
-                        {% endblock breadcrumb_container %}
-                    </div>
+                        <div class="pull-right">
+                            {% block breadcrumb_container %}
+                                <div class="breads">
+                                    <a href="{{ path('app_homepage') }}">Accueil</a> /
+                                    {% block breadcrumb_content %}
+                                        {#<a href="#">Page</a> / #}
+                                        {#<a href="#">Sub Page</a>#}
+                                    {% endblock breadcrumb_content %}
+                                </div>
+                            {% endblock breadcrumb_container %}
+                        </div>
 
-                    {% block headline_container %}
-                        <div class="block-heading-two">
-                            <h2><span>{% block headline %}Titre de la page{% endblock headline %}</span>
-                                {% block subtitle_container %}
-                                    <span class="text-small">
+                        {% block headline_container %}
+                            <div class="block-heading-two">
+                                <h2><span>{% block headline %}Titre de la page{% endblock headline %}</span>
+                                    {% block subtitle_container %}
+                                        <span class="text-small">
                                     {% block subtitle %}{#Something can go here#}{% endblock subtitle %}
                                     </span>
-                                {% endblock subtitle_container %}
-                            </h2>
-                        </div>
-                    {% endblock headline_container %}
+                                    {% endblock subtitle_container %}
+                                </h2>
+                            </div>
+                        {% endblock headline_container %}
 
 
+                    </div>
                 </div>
             </div>
 
