@@ -18,29 +18,29 @@
 {% block container %}
 
     <div class="container">
-        <div class="col-md-8">
-            {% include "frontend/game_play/show/_header.html.twig" %}
+        <div class="row">
+            <div class="col-md-8">
+                {{ item.blogAuthor(game_play.author, null, game_play.createdAt) }}
 
-            {{ item.blogAuthor(game_play.author, null, game_play.createdAt) }}
+                {% include "frontend/game_play/show/_header.html.twig" %}
 
-            {% if topic %}
-                <div class="block-heading-two">
-                    <h3><span>Commentaires</span>
-                        <small>({{ topic.posts|length }})</small>
-                    </h3>
-                </div>
+                {% if topic %}
+                    <div class="block-heading-two">
+                        <h3><span>Commentaires</span>
+                            <small>({{ topic.posts|length }})</small>
+                        </h3>
+                    </div>
 
-                <div class="blog-comments">
-                    {% for post in topic.posts %}
-                        {{ blogCommentItem(post) }}
-                    {% endfor %}
-                </div>
-            {% endif %}
-
-        </div>
-
-        <div class="col-md-4">
-            {% include "frontend/game_play/show/_sidebar.html.twig" %}
+                    <div class="blog-comments">
+                        {% for post in topic.posts %}
+                            {{ blogCommentItem(post) }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-4">
+                {% include "frontend/game_play/show/_sidebar.html.twig" %}
+            </div>
         </div>
     </div>
 
