@@ -1,4 +1,4 @@
-app_topic_create:
+app_frontend_topic_create:
     methods: [GET, POST]
     path: /topics/new
     defaults:
@@ -9,7 +9,7 @@ app_topic_create:
                 route: app_post_index_by_topic
                 parameters: { topicId: resource.id }
 
-app_topic_index_by_taxon:
+app_frontend_topic_index_by_taxon:
     methods: [GET]
     path: /topics/{permalink}
     defaults:
@@ -21,14 +21,7 @@ app_topic_index_by_taxon:
                 createdAt: desc
             template: frontend/topic/index.html.twig
 
-app_topic:
-    resource: |
-        alias: app.topic
-        templates: :frontend/topic
-        except: [create, index]
-    type: sylius.resource
-
-app_topic_index:
+app_frontend_topic_index:
     methods: [GET]
     path: /topics/
     defaults:
@@ -40,3 +33,9 @@ app_topic_index:
                 createdAt: desc
             template: frontend/topic/index.html.twig
 
+app_frontend_topic:
+    resource: |
+        alias: app.topic
+        templates: :frontend/topic
+        only: [update, delete]
+    type: sylius.resource

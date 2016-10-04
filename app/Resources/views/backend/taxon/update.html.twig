@@ -13,9 +13,11 @@
 {% endblock %}
 
 {% block container %}
-    {{ form_start(form) }}
-    <input type="hidden" name="_method" value="PUT" />
-    {{ form_widget(form) }}
-    {{ action.update() }}
-    {{ form_end(form) }}
+    <div class="col-md-12">
+        {{ form_start(form) }}
+        <input type="hidden" name="_method" value="PUT"/>
+        {{ form_widget(form) }}
+        {{ action.update() }}
+        {{ form_end(form) }}
+    </div>
 {% endblock container %}

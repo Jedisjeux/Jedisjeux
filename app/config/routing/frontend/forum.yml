@@ -1,4 +1,4 @@
-app_topic:
+app_frontend_topic:
     resource: "forum/topic.yml"
 
 app_post:

@@ -17,105 +17,100 @@
 {% block container %}
 
     {{ form_start(form) }}
+    <div class="col-md-8">
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
+        <div style="display: none">
+            {{ form_row(form.body) }}
+        </div>
 
-                <div style="display: none">
-                    {{ form_row(form.body) }}
-                </div>
+        <div id="articleContent">
 
-                <div id="articleContent">
+        </div>
 
-                </div>
+        {{ action.update() }}
 
-                {{ action.update() }}
+        <div class="droppable bg-grey text-center"
+             style="width: 100%; height: 150px; padding: 0.5em; float: left; margin: 10px;">
+            <em>Glisser un bloc ici</em>
+        </div>
 
-                <div class="droppable bg-grey text-center"
-                     style="width: 100%; height: 150px; padding: 0.5em; float: left; margin: 10px;">
-                    <em>Glisser un bloc ici</em>
-                </div>
-
-                <h5><i class="fa fa-th-large color"></i> Blocs</h5>
-                <!-- Container -->
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-2 col-sm-2">
-                            <div class="revertible draggable" data-template="introductionTemplate">
-                                <img class="img-responsive"
-                                     src="{{ asset('assets/ckeditor/templates/images/introduction.gif') }}"/>
-                                <p>Introduction</p>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2">
-                            <div class="revertible draggable" data-template="imageAtLeftTemplate">
-                                <img class="img-responsive"
-                                     src="{{ asset('assets/ckeditor/templates/images/image_at_left.gif') }}"/>
-                                <p>Image à gauche</p>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2">
-                            <div class="revertible draggable" data-template="imageOnTopTemplate">
-                                <img class="img-responsive"
-                                     src="{{ asset('assets/ckeditor/templates/images/image_at_left.gif') }}"/>
-                                <p>Image au-dessus</p>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2">
-                            <div class="revertible draggable" data-template="imageAtRightTemplate">
-                                <img class="img-responsive"
-                                     src="{{ asset('assets/ckeditor/templates/images/image_at_right.gif') }}"/>
-                                <p>Image à droite</p>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2">
-                            <div class="revertible draggable" data-template="wellTemplate">
-                                <img class="img-responsive"
-                                     src="{{ asset('assets/ckeditor/templates/images/introduction.gif') }}"/>
-                                <p>Encart</p>
-                            </div>
-                        </div>
+        <h5><i class="fa fa-th-large color"></i> Blocs</h5>
+        <!-- Container -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2 col-sm-2">
+                    <div class="revertible draggable" data-template="introductionTemplate">
+                        <img class="img-responsive"
+                             src="{{ asset('assets/ckeditor/templates/images/introduction.gif') }}"/>
+                        <p>Introduction</p>
                     </div>
                 </div>
-
-            </div>
-
-            <div class="col-md-4">
-                {% include "backend/article/_sidebar.html.twig" %}
-            </div>
-
-            <div id="introductionTemplate" style="display: none">
-                <div class="block-editing" data-type="blockquote">
-                    {{ render(url('app_partial_blockquote_block_create')) }}
+                <div class="col-md-2 col-sm-2">
+                    <div class="revertible draggable" data-template="imageAtLeftTemplate">
+                        <img class="img-responsive"
+                             src="{{ asset('assets/ckeditor/templates/images/image_at_left.gif') }}"/>
+                        <p>Image à gauche</p>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2">
+                    <div class="revertible draggable" data-template="imageOnTopTemplate">
+                        <img class="img-responsive"
+                             src="{{ asset('assets/ckeditor/templates/images/image_at_left.gif') }}"/>
+                        <p>Image au-dessus</p>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2">
+                    <div class="revertible draggable" data-template="imageAtRightTemplate">
+                        <img class="img-responsive"
+                             src="{{ asset('assets/ckeditor/templates/images/image_at_right.gif') }}"/>
+                        <p>Image à droite</p>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2">
+                    <div class="revertible draggable" data-template="wellTemplate">
+                        <img class="img-responsive"
+                             src="{{ asset('assets/ckeditor/templates/images/introduction.gif') }}"/>
+                        <p>Encart</p>
+                    </div>
                 </div>
             </div>
+        </div>
 
-            {#TODO use the existing constant for imagePosition#}
+    </div>
 
-            <div id="imageAtLeftTemplate" style="display: none">
-                <div class="block-editing" data-type="single_image" data-image-position="left">
-                    {{ render(url('app_partial_single_image_block_create', {'imagePosition': 'left'})) }}
-                </div>
-            </div>
+    <div class="col-md-4">
+        {% include "backend/article/_sidebar.html.twig" %}
+    </div>
 
-            <div id="imageOnTopTemplate" style="display: none">
-                <div class="block-editing" data-type="single_image" data-image-position="top">
-                    {{ render(url('app_partial_single_image_block_create', {'imagePosition': 'top'})) }}
-                </div>
-            </div>
+    <div id="introductionTemplate" style="display: none">
+        <div class="block-editing" data-type="blockquote">
+            {{ render(url('app_partial_blockquote_block_create')) }}
+        </div>
+    </div>
 
-            <div id="imageAtRightTemplate" style="display: none">
-                <div class="block-editing" data-type="single_image" data-image-position="right">
-                    {{ render(url('app_partial_single_image_block_create', {'imagePosition': 'right'})) }}
-                </div>
-            </div>
+    {#TODO use the existing constant for imagePosition#}
 
-            <div id="wellTemplate" style="display: none">
-                <div class="block-editing" data-type="single_image" data-image-position="top">
-                    {{ render(url('app_partial_single_image_block_create', {'imagePosition': 'top', 'class': 'well'})) }}
-                </div>
-            </div>
+    <div id="imageAtLeftTemplate" style="display: none">
+        <div class="block-editing" data-type="single_image" data-image-position="left">
+            {{ render(url('app_partial_single_image_block_create', {'imagePosition': 'left'})) }}
+        </div>
+    </div>
+
+    <div id="imageOnTopTemplate" style="display: none">
+        <div class="block-editing" data-type="single_image" data-image-position="top">
+            {{ render(url('app_partial_single_image_block_create', {'imagePosition': 'top'})) }}
+        </div>
+    </div>
+
+    <div id="imageAtRightTemplate" style="display: none">
+        <div class="block-editing" data-type="single_image" data-image-position="right">
+            {{ render(url('app_partial_single_image_block_create', {'imagePosition': 'right'})) }}
+        </div>
+    </div>
+
+    <div id="wellTemplate" style="display: none">
+        <div class="block-editing" data-type="single_image" data-image-position="top">
+            {{ render(url('app_partial_single_image_block_create', {'imagePosition': 'top', 'class': 'well'})) }}
         </div>
     </div>
 

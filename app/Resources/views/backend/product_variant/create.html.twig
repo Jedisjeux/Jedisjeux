@@ -13,13 +13,11 @@
 {% endblock %}
 
 {% block container %}
-    <div class="container">
-        <div class="col-md-12">
-            {{ form_start(form) }}
-            {% include 'backend/product_variant/_form.html.twig' %}
-            <br />
-            {{ action.update() }}
-            {{ form_end(form, {'render_rest': false}) }}
-        </div>
+    <div class="col-md-12">
+        {{ form_start(form) }}
+        {% include 'backend/product_variant/_form.html.twig' %}
+        <br/>
+        {{ action.update() }}
+        {{ form_end(form, {'render_rest': false}) }}
     </div>
 {% endblock container %}
