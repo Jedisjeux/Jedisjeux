@@ -5,7 +5,7 @@
         {% set meta %}
             <!-- Date -->
             <i class="fa fa-calendar"></i>
-            &nbsp; {{ article.publishStartDate|localizeddate('long', 'none') }}
+            &nbsp; {{ article.publishStartDate|localizeddate('short', 'none') }}
             &nbsp;
             <!-- Comments -->
         {% set commentCount = article.topic ? article.topic.postCount : 0 %}
