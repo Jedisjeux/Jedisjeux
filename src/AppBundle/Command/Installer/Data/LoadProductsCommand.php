@@ -10,6 +10,10 @@ namespace AppBundle\Command\Installer\Data;
 
 use AppBundle\Entity\Product;
 use AppBundle\Entity\ProductVariant;
+use AppBundle\Entity\Taxon;
+use AppBundle\Repository\TaxonRepository;
+use AppBundle\Updater\ProductCountByTaxonUpdater;
+use AppBundle\Updater\TopicCountByTaxonUpdater;
 use Behat\Transliterator\Transliterator;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
@@ -84,6 +88,7 @@ class LoadProductsCommand extends ContainerAwareCommand
         $this->insertProductsOfCollections($associationTypeCollection);
         $this->insertProductsOfExpansions($associationTypeExpansion);
         $this->recalculateMasters();
+        $this->calculateProductCountByTaxons();
     }
 
     protected function createOrReplaceAssociationTypeCollection()
@@ -209,6 +214,28 @@ class LoadProductsCommand extends ContainerAwareCommand
         }
 
         return null;
+    }
+
+    protected function calculateProductCountByTaxons()
+    {
+        $this->calculateProductCountByTaxonCode(Taxon::CODE_MECHANISM);
+        $this->calculateProductCountByTaxonCode(Taxon::CODE_THEME);
+        $this->calculateProductCountByTaxonCode(Taxon::CODE_TARGET_AUDIENCE);
+    }
+
+    /**
+     * @param $rootCode
+     */
+    protected function calculateProductCountByTaxonCode($rootCode)
+    {
+        $taxons = $this->getTaxonRepository()->findChildrenByRootCode($rootCode);
+
+        foreach ($taxons as $taxon) {
+            $this->getProductCountByTaxonUpdater()->update($taxon);
+            $this->getManager()->flush();
+        }
+
+        $this->getManager()->clear();
     }
 
     protected function deleteProductAssociations()
@@ -456,6 +483,14 @@ EOM
     }
 
     /**
+     * @return ProductCountByTaxonUpdater
+     */
+    protected function getProductCountByTaxonUpdater()
+    {
+        return $this->getContainer()->get('app.updater.product_count_by_taxon');
+    }
+
+    /**
      * @return \Doctrine\DBAL\Connection
      */
     protected function getDatabaseConnection()
@@ -493,6 +528,14 @@ EOM
     protected function getProductVariantRepository()
     {
         return $this->getContainer()->get('sylius.repository.product_variant');
+    }
+
+    /**
+     * @return TaxonRepository
+     */
+    protected function getTaxonRepository()
+    {
+        return $this->getContainer()->get('sylius.repository.taxon');
     }
 
     /**
