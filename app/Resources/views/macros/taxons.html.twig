@@ -57,9 +57,6 @@
 
             <li{% if hiddenElements %} class="closed" style="display: none"{% endif %}>
                 <a href="{{ path(routeName, { 'permalink': taxon.permalink }) }}">
-                    {% if taxon.iconClass %}
-                        <span class="{{ taxon.iconClass }} {{ taxon.color|default('color') }}"></span>&nbsp;
-                    {% endif %}
                     {% if is_parent %}
                     <strong>
                         {% endif %}
