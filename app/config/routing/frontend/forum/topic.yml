@@ -9,6 +9,17 @@ app_frontend_topic_create:
                 route: app_post_index_by_topic
                 parameters: { topicId: resource.id }
 
+app_frontend_topic_update:
+    methods: [GET, PUT]
+    path: /topics/{id}/edit
+    defaults:
+        _controller: app.controller.topic:updateAction
+        _sylius:
+            repository:
+                method: findOneBy
+                arguments: [{id: $id, createdBy: expr:service('sylius.context.customer').getCustomer().getUser()}]
+            template: frontend/topic/update.html.twig
+
 app_frontend_topic_index_by_taxon:
     methods: [GET]
     path: /topics/{permalink}
@@ -37,5 +48,5 @@ app_frontend_topic:
     resource: |
         alias: app.topic
         templates: :frontend/topic
-        only: [update, delete]
+        only: [delete]
     type: sylius.resource
