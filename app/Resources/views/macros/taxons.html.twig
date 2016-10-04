@@ -47,10 +47,9 @@
 {% endmacro %}
 
 {% macro sidebarList(taxons, routeName, currentTaxon, itemCountProperty) %}
-    <ul class="list-unstyled">
+    <ul class="list-6">
         {% set hiddenElements = false %}
         {% for key, taxon in taxons %}
-            {#TODO improve for multi-levels of children#}
             {% set is_parent = currentTaxon and (taxon == currentTaxon or (taxon.hasChild(currentTaxon))) %}
 
             {% set hiddenElements = key >= 5 %}

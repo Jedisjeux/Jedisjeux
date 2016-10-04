@@ -55,6 +55,7 @@
               name: 2ème guerre mondiale
 -
   name: Culture éthnique
+  icon_class: fa fa-globe
   children:
       -
         id: 32
@@ -72,9 +73,11 @@
       -
         id: 6
         name: TV & Cinéma
+        icon_class: fa fa-film
       -
         id: 40
         name: Bande dessinée
+        icon_class: fa fa-comments
       -
         id: 41
         name: Musique & Chanson
