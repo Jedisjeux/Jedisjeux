@@ -8,7 +8,7 @@
 
 <div class="img-box-4-item">
     <div class="img-container">
-        <a href="{{ path('app_frontend_article_show', {'name': article.name} ) }}" class="lightbox"><img
+        <a href="{{ path('app_frontend_article_show', {'name': article.name} ) }}"><img
                     src="{{ article.imagePath|imagine_filter('cmf_full') }}" alt=""
                     class="img-responsive"></a>
 
@@ -19,7 +19,7 @@
                 <i class="{{ icon }} bg-{{ color|default('color') }}"></i>
             </a>
         {% endif %}
-        <h4><a href="#">{{ article }}</a></h4>
+        <h4><a href="{{ path('app_frontend_article_show', {'name': article.name} ) }}">{{ article }}</a></h4>
         <div class="bor bg-{{ color|default('color') }}"></div>
         <p>Publié le {{ article.publishStartDate|localizeddate('short', 'none') }}</p>
 
