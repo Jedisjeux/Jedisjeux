@@ -76,7 +76,7 @@ class LoadTopicsOfGamePlaysCommand extends ContainerAwareCommand
             $customer = $this->getCustomerRepository()->find($data['customer_id']);
 
             $post
-                ->setCreatedBy($customer->getUser())
+                ->setAuthor($customer)
                 ->setCreatedAt(\DateTime::createFromFormat('Y-m-d H:i:s', $data['createdAt']))
                 ->setBody($data['comment']);
 
