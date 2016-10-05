@@ -78,14 +78,14 @@
                 {% if product.artists|length > 0 %}
                     <li>
                         illustré{% if product.artists|length > 1 %}s{% endif %} par
-                        {% for key, personne in product.illustrateurs %}{% if (key > 0) %},{% endif %} <a
+                        {% for key, personne in product.artists %}{% if (key > 0) %},{% endif %} <a
                             href="{{ path('app_person_show', { 'slug': personne.slug }) }}">{{ personne }}</a>{% endfor %}
                     </li>
                 {% endif %}
                 {% if product.publishers|length > 0 %}
                     <li>
                         édité{% if product.publishers|length > 1 %}s{% endif %} par
-                        {% for key, personne in product.editeurs %}{% if (key > 0) %},{% endif %} <a
+                        {% for key, personne in product.publishers %}{% if (key > 0) %},{% endif %} <a
                             href="{{ path('app_person_show', { 'slug': personne.slug }) }}">{{ personne }}</a>{% endfor %}
                     </li>
                 {% endif %}
