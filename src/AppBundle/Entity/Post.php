@@ -14,6 +14,7 @@ use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\User\Model\CustomerInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -30,6 +31,7 @@ class Post implements ResourceInterface
      * @var string
      *
      * @ORM\Column(type="text")
+     * @Assert\NotBlank()
      */
     protected $body;
 

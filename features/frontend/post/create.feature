@@ -26,3 +26,10 @@ Feature: Post creation
     And I fill in wysiwyg field "app_post_body" with "Here is my awesome topic response message."
     When I press "Créer"
     Then I should see "a bien été créé"
+
+    Scenario: Body is required
+      Given I am on "/forum/topics/"
+      And I follow "Lire le sujet"
+      And I follow "Répondre au sujet"
+      When I press "Créer"
+      Then I should see "Cette valeur ne doit pas être vide"

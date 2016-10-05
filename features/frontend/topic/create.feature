@@ -16,8 +16,16 @@ Feature: Topic creation
   Scenario: Create new topic
     Given I am on "/forum/topics/"
     And I follow "Nouveau sujet"
-    When I fill in the following:
+    And I fill in the following:
       | Titre | Zoo Topic |
     And I fill in wysiwyg field "app_topic_mainPost_body" with "Here is my awesome topic message."
-    And I press "Créer"
+    When I press "Créer"
     Then I should see "Topic a bien été créé"
+
+  Scenario: Body is required
+    Given I am on "/forum/topics/"
+    And I follow "Nouveau sujet"
+    And I fill in the following:
+      | Titre | Zoo Topic |
+    When I press "Créer"
+    Then I should see "Cette valeur ne doit pas être vide"

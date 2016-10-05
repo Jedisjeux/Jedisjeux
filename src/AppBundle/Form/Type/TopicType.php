@@ -13,6 +13,7 @@ namespace AppBundle\Form\Type;
 
 use AppBundle\Entity\Taxon;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class TopicType extends AbstractType
+class TopicType extends AbstractResourceType
 {
     /**
      * @inheritdoc
@@ -60,9 +61,11 @@ class TopicType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Topic'
-        ));
+        parent::configureOptions($resolver);
+
+        $resolver->setDefaults([
+            'cascade_validation' => true,
+        ]);
     }
 
     /**
