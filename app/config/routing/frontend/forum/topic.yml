@@ -50,6 +50,7 @@ app_frontend_topic_index_by_taxon:
 app_frontend_topic:
     resource: |
         alias: app.topic
+        section: frontend
         templates: :frontend/topic
         only: [delete]
         redirect: index
