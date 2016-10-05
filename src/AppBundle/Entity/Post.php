@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\User\Model\CustomerInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -39,6 +40,13 @@ class Post implements ResourceInterface
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Topic", inversedBy="posts")
      */
     protected $topic;
+
+    /**
+     * @var CustomerInterface
+     *
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\User\Model\CustomerInterface")
+     */
+    protected $author;
 
     /**
      * @var Post
@@ -98,6 +106,26 @@ class Post implements ResourceInterface
     public function setTopic($topic)
     {
         $this->topic = $topic;
+
+        return $this;
+    }
+
+    /**
+     * @return CustomerInterface
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param CustomerInterface $author
+     *
+     * @return $this
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
 
         return $this;
     }

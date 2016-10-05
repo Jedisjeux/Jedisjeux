@@ -3,7 +3,7 @@
     {% from 'macros/users.html.twig' import avatar %}
     {% import 'macros/buttons.html.twig' as button %}
 
-    {% set user = post.createdBy %}
+    {% set user = post.author.user %}
     {% set imagePath = avatar(user) %}
 
     {% set meta %}

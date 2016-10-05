@@ -15,6 +15,7 @@ use AppBundle\Entity\Post;
 use AppBundle\Entity\Topic;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Component\User\Context\CustomerContextInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -23,12 +24,29 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class PostFactory extends Factory
 {
     /**
+     * @var CustomerContextInterface
+     */
+    protected $customerContext;
+
+    /**
+     * @return Post
+     */
+    public function createNew()
+    {
+        /** @var Post $post */
+        $post = parent::createNew();
+        $post->setAuthor($this->customerContext->getCustomer());
+
+        return $post;
+    }
+
+    /**
      * @param int $topicId
      * @param EntityRepository $topicRepository
      *
      * @return Post
      */
-    public function createNewWithTopic($topicId, EntityRepository $topicRepository)
+    public function createForTopic($topicId, EntityRepository $topicRepository)
     {
         /** @var Post $post */
         $post =  parent::createNew();
@@ -44,5 +62,13 @@ class PostFactory extends Factory
             ->setTopic($topic);
 
         return $post;
+    }
+
+    /**
+     * @param CustomerContextInterface $customerContext
+     */
+    public function setCustomerContext(CustomerContextInterface $customerContext)
+    {
+        $this->customerContext = $customerContext;
     }
 }

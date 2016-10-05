@@ -40,7 +40,7 @@ app_post_create_by_topic:
         _sylius:
             form: AppBundle\Form\Type\PostType
             factory:
-                method: createNewWithTopic
+                method: createForTopic
                 arguments:
                     - $topicId
                     - expr:service('app.repository.topic')
