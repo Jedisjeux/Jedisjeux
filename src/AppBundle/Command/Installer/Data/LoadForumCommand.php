@@ -182,9 +182,9 @@ EOM;
     public function loadTopics()
     {
         $query = <<<EOM
-        insert into jdj_post(id, createdBy_id, body, createdAt)
+        insert into jdj_post(id, author_id, body, createdAt)
 select old.post_id as id,
-       user.id as createdBy_id,
+       customer.id as author_id,
        concat ('<p>', replace(old.post_text, '\n\n', '</p><p>'), '</p>') as body,
        FROM_UNIXTIME(old.post_time) as createdAt
 from jedisjeux.phpbb3_posts old
@@ -192,8 +192,6 @@ from jedisjeux.phpbb3_posts old
         on old_topic.topic_first_post_id = old.post_id
     inner join sylius_customer customer
         on customer.code = concat('user-', old.poster_id)
-    inner join sylius_user user
-        on user.customer_id = customer.id
     inner join jedisjeux.phpbb3_forums forum
         on forum.forum_id = old.forum_id
     where forum.parent_id in (10, 12) or forum.forum_id in (20, 21)

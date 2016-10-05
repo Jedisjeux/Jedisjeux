@@ -7,7 +7,7 @@
     {% set imagePath = avatar(user) %}
 
     {% set meta %}
-        {% if post.createdBy == app.user %}
+        {% if post.author.user == app.user %}
             {% set editPath = path('app_post_update', { 'id': post.id }) %}
             <a class="pull-right" title="{{ 'label.edit'|trans }}" href="{{ editPath }}">
                 <span class="fa fa-pencil"></span>

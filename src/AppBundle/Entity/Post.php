@@ -24,7 +24,6 @@ use Sylius\Component\User\Model\CustomerInterface;
 class Post implements ResourceInterface
 {
     use IdentifiableTrait,
-        Blameable,
         Timestampable;
 
     /**
