@@ -30,8 +30,8 @@ class TopicRepository extends EntityRepository
             ->addSelect('avatar')
             ->addSelect('article')
             ->addSelect('gamePlay')
-            ->join('o.createdBy', 'user')
-            ->join('user.customer', 'customer')
+            ->join('o.author', 'customer')
+            ->join('customer.user', 'user')
             ->leftJoin('customer.avatar', 'avatar')
             ->leftJoin('o.article', 'article')
             ->leftJoin('o.gamePlay', 'gamePlay');

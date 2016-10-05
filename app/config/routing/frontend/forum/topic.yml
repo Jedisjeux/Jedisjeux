@@ -29,7 +29,7 @@ app_frontend_topic_update:
         _sylius:
             repository:
                 method: findOneBy
-                arguments: [{id: $id, createdBy: expr:service('sylius.context.customer').getCustomer().getUser()}]
+                arguments: [{id: $id, author: expr:service('sylius.context.customer').getCustomer()}]
             redirect:
                 route: app_post_index_by_topic
                 parameters: { topicId: $id }

@@ -28,7 +28,6 @@ use Sylius\Component\User\Model\CustomerInterface;
 class Topic implements ResourceInterface
 {
     use IdentifiableTrait,
-        Blameable,
         Timestampable;
 
     /**
@@ -38,6 +37,13 @@ class Topic implements ResourceInterface
      * @JMS\Expose
      */
     protected $title;
+
+    /**
+     * @var CustomerInterface
+     *
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\User\Model\CustomerInterface")
+     */
+    protected $author;
 
     /**
      * @var Post
@@ -137,6 +143,26 @@ class Topic implements ResourceInterface
     public function setPostCount($postCount)
     {
         $this->postCount = $postCount;
+
+        return $this;
+    }
+
+    /**
+     * @return CustomerInterface
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param CustomerInterface $author
+     *
+     * @return $this
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
 
         return $this;
     }

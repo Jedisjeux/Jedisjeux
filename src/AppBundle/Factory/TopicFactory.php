@@ -15,6 +15,7 @@ use AppBundle\Entity\GamePlay;
 use AppBundle\Entity\Topic;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Component\User\Context\CustomerContextInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -22,9 +23,22 @@ use Sylius\Component\Resource\Factory\Factory;
 class TopicFactory extends Factory
 {
     /**
+     * @var CustomerContextInterface
+     */
+    protected $customerContext;
+
+    /**
      * @var EntityRepository
      */
     protected $gamePlayRepository;
+
+    /**
+     * @param CustomerContextInterface $customerContext
+     */
+    public function setCustomerContext(CustomerContextInterface $customerContext)
+    {
+        $this->customerContext = $customerContext;
+    }
 
     /**
      * @param EntityRepository $gamePlayRepository
@@ -32,6 +46,18 @@ class TopicFactory extends Factory
     public function setGamePlayRepository($gamePlayRepository)
     {
         $this->gamePlayRepository = $gamePlayRepository;
+    }
+
+    /**
+     * @return Topic
+     */
+    public function createNew()
+    {
+        /** @var Topic $topic */
+        $topic = parent::createNew();
+        $topic->setAuthor($this->customerContext->getCustomer());
+
+        return $topic;
     }
 
     /**
@@ -49,14 +75,14 @@ class TopicFactory extends Factory
         }
 
         /** @var Topic $topic */
-        $topic = parent::createNew();
+        $topic = $this->createNew();
 
         $gamePlay
             ->setTopic($topic);
 
         $topic
             ->setTitle("Partie de ".(string)$gamePlay->getProduct())
-            ->setCreatedBy($gamePlay->getAuthor()->getUser());
+            ->setAuthor($gamePlay->getAuthor());
 
         return $topic;
     }

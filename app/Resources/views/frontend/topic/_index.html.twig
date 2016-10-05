@@ -4,7 +4,7 @@
 
 {% for topic in topics %}
 
-    {% set user = topic.createdBy %}
+    {% set user = topic.author.user %}
     {% set imagePath = avatar(user) %}
     {% set linkUrl = getPath(topic) %}
 

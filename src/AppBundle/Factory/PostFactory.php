@@ -29,6 +29,14 @@ class PostFactory extends Factory
     protected $customerContext;
 
     /**
+     * @param CustomerContextInterface $customerContext
+     */
+    public function setCustomerContext(CustomerContextInterface $customerContext)
+    {
+        $this->customerContext = $customerContext;
+    }
+
+    /**
      * @return Post
      */
     public function createNew()
@@ -49,7 +57,7 @@ class PostFactory extends Factory
     public function createForTopic($topicId, EntityRepository $topicRepository)
     {
         /** @var Post $post */
-        $post =  parent::createNew();
+        $post =  $this->createNew();
 
         /** @var Topic $topic */
         $topic = $topicRepository->find($topicId);
@@ -62,13 +70,5 @@ class PostFactory extends Factory
             ->setTopic($topic);
 
         return $post;
-    }
-
-    /**
-     * @param CustomerContextInterface $customerContext
-     */
-    public function setCustomerContext(CustomerContextInterface $customerContext)
-    {
-        $this->customerContext = $customerContext;
     }
 }

@@ -38,11 +38,14 @@ class TopicContext extends DefaultContext
                 $mainTaxon = $this->getRepository('taxon')->findOneByName($data['main-taxon']);
             }
 
+            $author = isset($data['author']) ? $this->getRepository('customer')->findOneBy(['email' => $data['author']]) : null;
+
             /** @var Topic $topic */
             $topic = $this->getFactory('topic', 'app')->createNew();
             $topic
                 ->setTitle(isset($data['title']) ? $data['title'] : $this->faker->title)
-                ->setMainTaxon($mainTaxon);
+                ->setMainTaxon($mainTaxon)
+                ->setAuthor($author);
 
             $manager->persist($topic);
             $manager->flush();
