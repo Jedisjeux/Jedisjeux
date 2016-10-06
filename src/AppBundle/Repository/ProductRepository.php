@@ -26,11 +26,12 @@ class ProductRepository extends BaseProductRepository
     protected function getQueryBuilder()
     {
         return parent::createQueryBuilder('o')
-            ->select('o, option, variant, image, translation')
+            ->select('o, option, variant, image, translation, mainTaxon')
             ->leftJoin('o.translations', 'translation')
             ->leftJoin('o.options', 'option')
             ->leftJoin('o.variants', 'variant')
-            ->leftJoin('variant.images', 'image');
+            ->leftJoin('variant.images', 'image')
+            ->leftJoin('o.mainTaxon', 'mainTaxon');
     }
 
     /**
