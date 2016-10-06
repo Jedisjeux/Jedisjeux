@@ -28,3 +28,5 @@ parameters:
 
     dos.cache:
         type: file_system
+
+    google.analytics.tracking_id : UA-85328296-1
