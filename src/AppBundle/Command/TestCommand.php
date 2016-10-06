@@ -11,10 +11,12 @@
 
 namespace AppBundle\Command;
 
-use AppBundle\TextFilter\Bbcode2Html;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Widop\GoogleAnalytics\Client;
+use Widop\GoogleAnalytics\Query;
+use Widop\GoogleAnalytics\Service;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -41,35 +43,40 @@ EOT
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $body = $this->getBody();
-        $bbcode2html = $this->getBbcode2Html();
-        $body = $bbcode2html
-            ->setBody($body)
-            ->getFilteredBody();
-        $output->writeln($body);
+        $service = $this->getService();
+
+        $service->getClient()->getAccessToken();
+
+        $query = $this->getQuery();
+        $query
+            ->setStartDate(new \DateTime('2 days ago'))
+            ->setEndDate(new \DateTime())
+            ->setMetrics(array('ga:visits' ,'ga:bounces'));
+
+        $response = $service->query($query);
     }
 
     /**
-     * @return Bbcode2Html
+     * @return Service
      */
-    protected function getBbcode2Html()
+    protected function getService()
     {
-        return $this->getContainer()->get('app.text.filter.bbcode2html');
+        return $this->getContainer()->get('widop_google_analytics');
     }
 
     /**
-     * @return string
+     * @return Client
      */
-    protected function getBody()
+    protected function getClient()
     {
-        return <<<EOM
+        return $this->getContainer()->get('widop_google_analytics.client');
+    }
 
-[center][image=800,center:808080]45999[/image:808080][/center]
-
-[jeu:pbptg1eo]42[/jeu:pbptg1eo]
-
-[jeu:pbptg1eo]1[/jeu:pbptg1eo]
-EOM;
-
+    /**
+     * @return Query
+     */
+    protected function getQuery()
+    {
+        return $this->getContainer()->get('widop_google_analytics.query');
     }
 }
