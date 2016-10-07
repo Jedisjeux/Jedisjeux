@@ -1,0 +1,5 @@
+widop_google_analytics:
+    client_id:        "%google.analytics.client_id%"
+    profile_id:       "%google.analytics.profile_id%"
+    private_key_file: "%google.analytics.private_key_file%"
+    http_adapter:     "widop_http_adapter.curl"

@@ -28,3 +28,8 @@ parameters:
 
     dos.cache:
         type: file_system
+
+    google.analytics.profile_id: ga:XXXXXX
+    google.analytics.tracking_id: UA-XXXXX-1
+    google.analytics.client_id: XXXXXXXXXXXX@developer.gserviceaccount.com
+    google.analytics.private_key_file: %kernel.root_dir%/Resources/bin/Jedisjeux-186280a3c320.p12
