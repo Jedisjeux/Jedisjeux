@@ -9,7 +9,6 @@ app_forum:
     prefix: /forum
 
 app_game_play:
-    prefix: /jeu-de-societe/{productSlug}
     resource: "frontend/game_play.yml"
 
 app_person:

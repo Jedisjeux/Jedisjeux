@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+{% from 'macros/misc.html.twig' import pagination %}
+{% from 'macros/sorting.html.twig' import sorting %}
+{% from 'macros/game_plays.html.twig' import magazineItemOne %}
+
+{% block headline %}
+    Parties
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    Parties /
+{% endblock %}
+
+{% block body -%}
+    <div class="col-md-9">
+
+        <div class="container">
+
+            <div class="pull-right sorting">
+                {% set sorting = app.request.get('sorting') %}
+
+                {% set icon = false %}
+                {% set currentOrder = null %}
+
+                {% if null == sorting %}
+                    {% set icon = true %}
+                    {% set currentOrder = 'desc' %}
+                {% endif %}
+
+                Trier
+                par {{ sorting('sylius_product_index', 'label.created_at'|trans, 'createdAt', 'desc', icon, currentOrder) }}
+                ,
+                par {{ sorting('sylius_product_index', 'label.rate'|trans, 'averageRating', 'desc') }},
+                {{ sorting('sylius_product_index', 'label.name'|trans, 'translation.name', 'asc') }}
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                {% for game_play in game_plays %}
+                    <div class="col-md-4 col-sm-6">
+                        {{ magazineItemOne(game_play) }}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="pagination-wrapper">
+                <div class="pagination-bottom">
+                    {{ pagination(game_plays) }}
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+    </div>
+{% endblock %}
