@@ -12,12 +12,24 @@ app_game_play_create:
                 route: app_game_play_show
                 parameters: { productSlug: $productSlug, id: resource.id }
 
+app_frontend_game_play_index:
+    methods: [GET]
+    path: /parties/
+    defaults:
+        _controller: app.controller.game_play:indexAction
+        _sylius:
+            template: frontend/game_play/index.html.twig
+            paginate: 12
+            repository:
+                method: createFilterPaginator
+                arguments: [$criteria, $sorting]
+
 app_game_play:
     resource: |
         alias: app.game_play
         path: /parties
         templates: :frontend/game_play
         redirect: index
-        only: [index, show, delete]
+        only: [show, delete]
     type: sylius.resource
 

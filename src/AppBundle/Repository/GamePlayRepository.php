@@ -33,4 +33,20 @@ class GamePlayRepository extends EntityRepository
         parent::applyCriteria($queryBuilder, $criteria);
     }
 
+    /**
+     * @param array $criteria
+     * @param array $sorting
+     *
+     * @return \Pagerfanta\Pagerfanta
+     */
+    public function createFilterPaginator($criteria = [], $sorting = [])
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        $this->applyCriteria($queryBuilder, (array)$criteria);
+        $this->applySorting($queryBuilder, (array)$sorting);
+
+        return $this->getPaginator($queryBuilder);
+    }
+
 }
