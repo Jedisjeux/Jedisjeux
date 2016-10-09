@@ -10,44 +10,42 @@
                     <!-- Image Box #5 Image -->
                     <div class="img-box-5-img">
                         <!-- Image -->
-                        {% if (person.mainImage) %}
-                            <a href="{{ person.mainImage.webPath | imagine_filter('default') }}" rel="person" class="fancybox"><img
-                                        src="{{ person.mainImage.webPath | imagine_filter('default') }}" alt=""
-                                        class="img-responsive img-thumbnail"/></a>
-                        {% else %}
-                            <span class="fa fa-user"></span>
-                        {% endif %}
+                        {% set imagePath = person.mainImage ? person.mainImage.webPath : asset('assets/img/avatar_2x.png') %}
+                        <a href="{{ imagePath | imagine_filter('default') }}" rel="person" class="fancybox"><img
+                                    src="{{ imagePath | imagine_filter('default') }}" alt=""
+                                    class="img-responsive img-thumbnail"/></a>
 
                     </div>
                 </div>
                 <div class="col-md-8">
-
-                    {{ blockquoteOne(person.description) }}
+                    {% if person.description %}
+                        {{ blockquoteOne(person.description) }}
+                    {% endif %}
 
                     <!-- Image Box #5 Content -->
                     <div class="img-box-5-content">
 
                         {#{% if (person.country) %}#}
-                            {#<div class="row">#}
-                                {#<label class="col-md-3">Pays</label>#}
+                        {#<div class="row">#}
+                        {#<label class="col-md-3">Pays</label>#}
 
-                                {#<div class="col-md-9">{{ person.country }}</div>#}
-                            {#</div>#}
+                        {#<div class="col-md-9">{{ person.country }}</div>#}
+                        {#</div>#}
                         {#{% endif %}#}
 
                         <div class="container">
                             <div class="row">
                                 <ul class="list-unstyled">
                                     {% if person.website %}
-                                    <li>
-                                        <p class="pull-left bg-color square-2 rounded-2">
-                                            <span class="fa fa-desktop white"></span>
-                                        </p>
-                                        <p class="game-attribute">
-                                            <a target="_blank"
-                                               href="{{ person.website }}">{{ person.website }}</a>
-                                        </p>
-                                    </li>
+                                        <li>
+                                            <p class="pull-left bg-color square-2 rounded-2">
+                                                <span class="fa fa-desktop white"></span>
+                                            </p>
+                                            <p class="game-attribute">
+                                                <a target="_blank"
+                                                   href="{{ person.website }}">{{ person.website }}</a>
+                                            </p>
+                                        </li>
                                     {% endif %}
 
                                     {% if person.designerProducts|length > 0 %}
@@ -56,7 +54,8 @@
                                                 <span class="fa fa-cog white"></span>
                                             </p>
                                             <p class="game-attribute">
-                                                Auteur de {{ person.designerProducts|length }} jeu{% if person.designerProducts|length > 1 %}x{% endif %}
+                                                Auteur de {{ person.designerProducts|length }}
+                                                jeu{% if person.designerProducts|length > 1 %}x{% endif %}
                                             </p>
                                         </li>
                                     {% endif %}
@@ -66,7 +65,8 @@
                                             <p class="pull-left bg-color square-2 rounded-2">
                                                 <span class="fa fa-picture-o white"></span>
                                             </p>
-                                            <p class="game-attribute">Illustrateur de {{ person.artistProducts|length }} jeu{% if person.artistProducts|length > 1 %}x{% endif %}</p>
+                                            <p class="game-attribute">Illustrateur de {{ person.artistProducts|length }}
+                                                jeu{% if person.artistProducts|length > 1 %}x{% endif %}</p>
                                         </li>
                                     {% endif %}
 
@@ -76,7 +76,8 @@
                                                 <span class="fa fa-picture-o white"></span>
                                             </p>
                                             <p class="game-attribute">
-                                                Editeur de {{ person.publisherProducts|length }} jeu{% if person.publisherProducts|length > 1 %}x{% endif %}
+                                                Editeur de {{ person.publisherProducts|length }}
+                                                jeu{% if person.publisherProducts|length > 1 %}x{% endif %}
                                             </p>
                                         </li>
                                     {% endif %}
