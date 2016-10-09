@@ -1,4 +1,4 @@
-app_game_library_show:
+app_frontend_game_library_show:
     methods: [GET]
     path: /users/{customerId}/ludotheque
     defaults:
@@ -10,7 +10,7 @@ app_game_library_show:
                 method: createProductFilterPaginator
                 arguments: [$criteria, $sorting, $customerId, 'game-library']
 
-app_game_library_show_by_taxon:
+app_frontend_game_library_show_by_taxon:
     methods: [GET]
     path: /users/{customerId}/ludotheque/{permalink}
     defaults:
