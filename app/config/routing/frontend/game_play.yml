@@ -12,6 +12,15 @@ app_game_play_create:
                 route: app_game_play_show
                 parameters: { productSlug: $productSlug, id: resource.id }
 
+app_game_play_show:
+    methods: [GET, POST]
+    path: /jeu-de-societe/{productSlug}/parties/{id}
+    defaults:
+        _controller: app.controller.game_play:showAction
+        _sylius:
+            template: frontend/game_play/show.html.twig
+
+
 app_frontend_game_play_index:
     methods: [GET]
     path: /parties/
@@ -30,6 +39,6 @@ app_game_play:
         path: /parties
         templates: :frontend/game_play
         redirect: index
-        only: [show, delete]
+        only: [delete]
     type: sylius.resource
 
