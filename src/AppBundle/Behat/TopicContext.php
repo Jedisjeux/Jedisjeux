@@ -9,6 +9,7 @@
 
 namespace AppBundle\Behat;
 
+use AppBundle\Entity\Post;
 use AppBundle\Entity\Topic;
 use Behat\Gherkin\Node\TableNode;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
@@ -40,9 +41,15 @@ class TopicContext extends DefaultContext
 
             $author = isset($data['author']) ? $this->getRepository('customer')->findOneBy(['email' => $data['author']]) : null;
 
+            /** @var Post $mainPost */
+            $mainPost = $this->getFactory('post', 'app')->createNew();
+            $mainPost->setBody($this->faker->realText());
+            $mainPost->setAuthor($author);
+
             /** @var Topic $topic */
             $topic = $this->getFactory('topic', 'app')->createNew();
             $topic
+                ->setMainPost($mainPost)
                 ->setTitle(isset($data['title']) ? $data['title'] : $this->faker->title)
                 ->setMainTaxon($mainTaxon)
                 ->setAuthor($author);
