@@ -53,7 +53,6 @@ class LoadTopicsOfGamePlaysCommand extends ContainerAwareCommand
             $output->writeln(sprintf("Loading <info>%s</info> comment of <info>%s</info> gameplay", $data['id'], $data['game_play_id']));
 
 
-
             /** Is first post of a topic */
             if ($gamePlayId !== $data['game_play_id']) {
                 if (null !== $topic) {
@@ -82,6 +81,8 @@ class LoadTopicsOfGamePlaysCommand extends ContainerAwareCommand
 
             $gamePlayId = $data['game_play_id'];
         }
+
+        $this->updatePostCountByTopic();
     }
 
     protected function deleteGamePlayTopics()
@@ -164,6 +165,24 @@ EOM;
             $this->getManager()->flush($post);
             $this->getManager()->clear($post);
         }
+    }
+
+    protected function updatePostCountByTopic()
+    {
+        $this->getDatabaseConnection()->executeQuery(<<<EOM
+update jdj_topic topic
+    inner join jdj_post post
+    on post.topic_id = topic.id
+set topic.postCount = (
+    select count(0)
+  from jdj_post a
+    where a.topic_id = topic.id
+  group by a.topic_id
+)
+
+EOM
+        );
+
     }
 
     /**
