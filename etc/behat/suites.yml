@@ -1,4 +1,5 @@
 imports:
+    - suites/ui/contact_request.yml
     - suites/ui/error.yml
     - suites/ui/game_play.yml
     - suites/ui/homepage.yml
