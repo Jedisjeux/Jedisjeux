@@ -35,6 +35,8 @@ label:
   company: Société
   connection: Connexion
   contact: Contact
+  contact_request: Demande de contact
+  contact_requests: Demandes de contact
   contact_us: Contactez-nous
   country: Pays
   create: Créer

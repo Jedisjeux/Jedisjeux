@@ -1,0 +1,21 @@
+app_backend_contact_request:
+    resource: |
+        alias: app.contact_request
+        section: backend
+        templates: :backend/contact_request
+        only: [show, delete]
+        redirect: index
+    type: sylius.resource
+
+app_backend_contact_request_index:
+    methods: [GET]
+    path: /contact-requests/
+    defaults:
+        _controller: app.controller.contact_request:indexAction
+        _sylius:
+            template: backend/contact_request/index.html.twig
+            repository:
+                method: createFilterPaginator
+                arguments: [$criteria, $sorting]
+            paginate: 10
+            sortable: true

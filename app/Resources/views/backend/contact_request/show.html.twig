@@ -1,0 +1,37 @@
+{% extends "backend/base.html.twig" %}
+{% import 'macros/actions.html.twig' as action %}
+
+{% block headline %}
+    {{ 'label.contact_request'|trans }}
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    / <a href="{{ path('app_backend_contact_request_index') }}">{{ 'label.contact_requests'|trans }}</a>
+    / {{ 'label.show'|trans }}
+{% endblock %}
+
+{% block container %}
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-sm-3">
+                <label>{{ 'label.name'|trans }}</label>
+            </div>
+            <div class="col-sm-9">
+                {{ contact_request.fullName }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <label>{{ 'label.email'|trans }}</label>
+            </div>
+            <div class="col-sm-9">
+                {{ contact_request.email }}
+            </div>
+        </div>
+
+        <div class="well">
+            <p>{{ contact_request.body|raw }}</p>
+        </div>
+    </div>
+{% endblock container %}
