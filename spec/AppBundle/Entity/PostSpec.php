@@ -5,14 +5,19 @@ namespace spec\AppBundle\Entity;
 use AppBundle\Entity\Post;
 use AppBundle\Entity\Topic;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 class PostSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
         $this->shouldHaveType(Post::class);
+    }
+
+    function it_implements_resource_interface()
+    {
+        $this->shouldImplement(ResourceInterface::class);
     }
 
     function it_sets_body()
