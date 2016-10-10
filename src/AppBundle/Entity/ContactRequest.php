@@ -97,6 +97,14 @@ class ContactRequest implements ResourceInterface
     /**
      * @return string
      */
+    public function getFullName()
+    {
+        return $this->getFirstName() . ' ' . $this->getLastName();
+    }
+
+    /**
+     * @return string
+     */
     public function getEmail()
     {
         return $this->email;

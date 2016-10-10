@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+{% import 'macros/actions.html.twig' as action %}
+
+{% block headline %}
+    {{ 'label.contact'|trans }}
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    {{ 'label.contact'|trans }}
+{% endblock %}
+
+{% block container %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <div class="pull-right">
+        <button type="submit"
+                class="btn btn-primary">
+            <span class="glyphicon glyphicon-ok"></span>
+            {{ 'label.send'|trans }}
+        </button>
+        {{ action.cancelButton() }}
+    </div>
+    {{ form_end(form) }}
+{% endblock container %}

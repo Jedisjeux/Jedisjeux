@@ -34,6 +34,8 @@ label:
   code: Code
   company: Société
   connection: Connexion
+  contact: Contact
+  contact_us: Contactez-nous
   country: Pays
   create: Créer
   created_at: Créé le
@@ -116,6 +118,7 @@ label:
   save_changes: Mettre à jour
   search: Rechercher
   search_query: Recherche...
+  send: Envoyer
   score: Score
   short_description: Description courte
   show: Voir
@@ -159,3 +162,6 @@ emails:
         content:
             introduction: "L'équipe de Jedisjeux vient de sortir son nouveau site internet. Le changement de plateforme nécessite que <strong>vous réinitialisez votre mot de passe</strong>."
             reset_password: "<strong>Pour réinitialiser votre mot de passe cliquez <a href='%LINK%'>ici</a></strong>. <br/><br/> Si vous rencontrez un soucis, copier coller le lien suivant : %LINK%"
+    contact_request:
+        subject: Nouveau message de contact Jedisjeux
+        content: Vous avez reçu un message de <strong>%FULLNAME%</strong>

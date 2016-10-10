@@ -19,4 +19,6 @@ class Emails
     const USER_REGISTRATION = 'user_registration';
 
     const WEBSITE_RELEASE = 'website_release';
+
+    const CONTACT_REQUEST = 'contact_request';
 }

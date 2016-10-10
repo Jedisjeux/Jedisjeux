@@ -4,6 +4,9 @@ app_homepage:
 app_article:
     resource: "frontend/article.yml"
 
+app_contact_request:
+    resource: "frontend/contact_request.yml"
+
 app_forum:
     resource: "frontend/forum.yml"
     prefix: /forum

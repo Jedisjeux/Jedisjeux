@@ -13,4 +13,7 @@ sylius_mailer:
         website_release:
             subject: Nouveau Jedisjeux en ligne
             template: emails/websiteRelease.html.twig
+        contact_request:
+            subject: Nouveau message de contact Jedisjeux
+            template: emails/contactRequest.html.twig
 

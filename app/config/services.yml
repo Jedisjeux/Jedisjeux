@@ -57,6 +57,13 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
+    app.subscriber.send_contact_email:
+        class: AppBundle\EventSubscriber\SendContactEmailSubscriber
+        arguments:
+            - "@sylius.email_sender"
+        tags:
+            - { name: kernel.event_subscriber }
+
     app.subscriber.calculate_topic_count_by_taxon:
         class: AppBundle\EventSubscriber\CalculateTopicCountByTaxonSubscriber
         arguments:
