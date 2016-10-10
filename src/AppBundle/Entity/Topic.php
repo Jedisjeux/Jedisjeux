@@ -1,9 +1,12 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: loic_425
- * Date: 17/02/2016
- * Time: 13:35
+ * This file is part of Jedisjeux
+ *
+ * (c) Loïc Frémont
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AppBundle\Entity;
@@ -214,12 +217,33 @@ class Topic implements ResourceInterface
      */
     public function addPost(Post $post)
     {
-        if (!$this->posts->contains($post)) {
+        if (!$this->hasPost($post)) {
             $post->setTopic($this);
             $this->posts->add($post);
         }
 
         return $this;
+    }
+
+    /**
+     * @param Post $post
+     *
+     * @return $this
+     */
+    public function removePost(Post $post)
+    {
+        $this->posts->removeElement($post);
+
+        return $this;
+    }
+
+    /**
+     * @param Post $post
+     *
+     * @return bool
+     */
+    public function hasPost(Post $post) {
+        return $this->posts->contains($post);
     }
 
     /**
@@ -297,7 +321,7 @@ class Topic implements ResourceInterface
      */
     public function addFollower(CustomerInterface $follower)
     {
-        if (!$this->followers->contains($follower)) {
+        if (!$this->hasFollower($follower)) {
             $this->followers->add($follower);
         }
 
@@ -311,9 +335,19 @@ class Topic implements ResourceInterface
      */
     public function removeFollower(CustomerInterface $follower)
     {
-        $this->followers->remove($follower);
+        $this->followers->removeElement($follower);
 
         return $this;
+    }
+
+    /**
+     * @param CustomerInterface $follower
+     *
+     * @return bool
+     */
+    public function hasFollower(CustomerInterface $follower)
+    {
+        return $this->followers->contains($follower);
     }
 
     /**
