@@ -11,6 +11,8 @@
 
 namespace spec\AppBundle\Entity;
 
+use AppBundle\Entity\Article;
+use AppBundle\Entity\GamePlay;
 use AppBundle\Entity\Post;
 use AppBundle\Entity\Topic;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -41,6 +43,13 @@ class TopicSpec extends ObjectBehavior
         $this->getTitle()->shouldReturn('Subject title');
     }
 
+    function it_sets_post_count()
+    {
+        $this->setPostCount(7);
+
+        $this->getPostCount()->shouldReturn(7);
+    }
+
     function its_posts_is_collection()
     {
         $this->getPosts()->shouldHaveType(ArrayCollection::class);
@@ -67,6 +76,18 @@ class TopicSpec extends ObjectBehavior
     {
         $this->setMainTaxon($mainTaxon);
         $this->getMainTaxon()->shouldReturn($mainTaxon);
+    }
+
+    function its_article_is_mutable(Article $article)
+    {
+        $this->setArticle($article);
+        $this->getArticle()->shouldReturn($article);
+    }
+
+    function its_game_play_is_mutable(GamePlay $gamePlay)
+    {
+        $this->setGamePlay($gamePlay);
+        $this->getGamePlay()->shouldReturn($gamePlay);
     }
 
     function it_can_remove_posts(Post $post)
