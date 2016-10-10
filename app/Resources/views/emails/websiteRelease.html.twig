@@ -1,0 +1,11 @@
+{% block subject %}
+    {{ 'emails.website_release.subject' | trans }}
+{% endblock %}
+
+{% block body %}
+    <h3>{{ 'label.hello'|trans }} {{ customer.user.username }},</h3>
+    <p>{{ 'emails.website_release.content.introduction'|trans|raw }}</p>
+    <p>{{ 'emails.website_release.content.reset_password'|trans|raw }}</p>
+    <p>{{ 'emails.ending'|trans }}</p>
+    <p>{{ 'emails.signature'|trans }}</p>
+{% endblock %}

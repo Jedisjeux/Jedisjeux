@@ -17,4 +17,6 @@ namespace AppBundle;
 class Emails
 {
     const USER_REGISTRATION = 'user_registration';
+
+    const WEBSITE_RELEASE = 'website_release';
 }

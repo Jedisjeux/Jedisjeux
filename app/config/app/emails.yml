@@ -10,3 +10,7 @@ sylius_mailer:
         user_registration:
             subject: Bienvenue sur Cyclocom
             template: emails/userRegistration.html.twig
+        website_release:
+            subject: Nouveau Jedisjeux en ligne
+            template: emails/websiteRelease.html.twig
+

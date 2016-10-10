@@ -49,6 +49,7 @@ label:
   duration: Durée
   duration_min: Durée min
   duration_max: Durée max
+  games: Jeux
   headers: Entêtes
   hello: Bonjour
   edit: Modifier
@@ -58,6 +59,7 @@ label:
   file: Fichier
   first_name: Prénom
   games: Jeux
+  home: Accueil
   image: Image
   image_position: Position de l'image
   images: Images
@@ -144,7 +146,7 @@ text:
     topic_reply: %USERNAME% a répondu au sujet %TOPIC_NAME%
 
 emails:
-    ending: Cordialement
+    ending: Cordialement,
     signature: "L'équipe Jedisjeux"
     user_password_reset:
         subject: Réinitialisation du mot de passe
@@ -152,3 +154,8 @@ emails:
     user_registration:
         subject: Bienvenue sur AppName
         content:  "Merci d'avoir créé un compte sur Jedisjeux"
+    website_release:
+        subject: Nouveau Jedisjeux en ligne
+        content:
+            introduction: "L'équipe de Jedisjeux vient de sortir son nouveau site internet. Le changement de plateforme nécessite que <strong>vous réinitialisez votre mot de passe</strong>."
+            reset_password: "<strong>Pour réinitialiser votre mot de passe cliquez <a href='%LINK%'>ici</a></strong>. <br/><br/> Si vous rencontrez un soucis, copier coller le lien suivant : %LINK%"
