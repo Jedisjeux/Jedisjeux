@@ -38,6 +38,13 @@ class Post implements ResourceInterface
     /**
      * @var Topic
      *
+     * @ORM\OneToOne(targetEntity="Topic", mappedBy="mainPost")
+     */
+    protected $parent;
+
+    /**
+     * @var Topic
+     *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Topic", inversedBy="posts")
      */
     protected $topic;
@@ -87,6 +94,26 @@ class Post implements ResourceInterface
     public function setBody($body)
     {
         $this->body = $body;
+
+        return $this;
+    }
+
+    /**
+     * @return Topic
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @param Topic $parent
+     *
+     * @return $this
+     */
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
 
         return $this;
     }

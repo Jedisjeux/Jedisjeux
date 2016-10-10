@@ -17,6 +17,20 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 class GamePlayRepository extends EntityRepository
 {
     /**
+     * @return QueryBuilder
+     */
+    protected function getQueryBuilder()
+    {
+        return $this->createQueryBuilder('o')
+            ->select('o', 'product', 'variant', 'productTranslation', 'image')
+            ->join('o.product', 'product')
+            ->join('product.variants', 'variant')
+            ->join('product.translations', 'productTranslation')
+            ->leftJoin('variant.images', 'image');
+
+    }
+
+    /**
      * @param QueryBuilder $queryBuilder
      * @param array $criteria
      */
@@ -31,6 +45,28 @@ class GamePlayRepository extends EntityRepository
         }
 
         parent::applyCriteria($queryBuilder, $criteria);
+    }
+
+    /**
+     * @param array $criteria
+     * @param array $sorting
+     *
+     * @return \Pagerfanta\Pagerfanta
+     */
+    public function createFilterPaginator($criteria = [], $sorting = [])
+    {
+        $queryBuilder = $this->getQueryBuilder();
+
+        if (empty($sorting)) {
+            $sorting = array(
+              'createdAt' => 'desc',
+            );
+        }
+
+        $this->applyCriteria($queryBuilder, (array)$criteria);
+        $this->applySorting($queryBuilder, (array)$sorting);
+
+        return $this->getPaginator($queryBuilder);
     }
 
 }

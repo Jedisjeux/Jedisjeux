@@ -9,7 +9,9 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\CustomerList;
+use AppBundle\Entity\Taxon;
 use AppBundle\Repository\CustomerListElementRepository;
+use AppBundle\Repository\TaxonRepository;
 use Doctrine\ORM\EntityRepository;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
@@ -28,8 +30,6 @@ class CustomerListElementController extends ResourceController
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $this->isGrantedOr403($configuration, ResourceActions::INDEX);
 
-        $taxonomies = $this->getTaxonomyRepository()->findBy(array('name' => array('mecanismes', 'themes')));
-        
         /** @var CustomerInterface $customer */
         $customer = $this->get('sylius.repository.customer')->find($request->get('customerId'));
 
@@ -43,7 +43,7 @@ class CustomerListElementController extends ResourceController
                 ->setTemplateVar($this->metadata->getPluralName())
                 ->setData([
                     'customer' => $customer,
-                    'taxonomies' => $taxonomies,
+                    'rootTaxons' => $this->getRootTaxons(),
                     'metadata' => $this->metadata,
                     'resources' => $resources,
                     $this->metadata->getPluralName() => $resources,
@@ -103,10 +103,24 @@ class CustomerListElementController extends ResourceController
     }
 
     /**
-     * @return EntityRepository
+     * @return array|Taxon[]
      */
-    protected function getTaxonomyRepository()
+    protected function getRootTaxons()
     {
-        return $this->get('sylius.repository.taxonomy');
+        return $this->getTaxonRepository()->findBy([
+            'code' => [
+                Taxon::CODE_MECHANISM,
+                Taxon::CODE_THEME,
+                Taxon::CODE_TARGET_AUDIENCE,
+            ]
+        ]);
+    }
+
+    /**
+     * @return TaxonRepository
+     */
+    protected function getTaxonRepository()
+    {
+        return $this->get('sylius.repository.taxon');
     }
 }

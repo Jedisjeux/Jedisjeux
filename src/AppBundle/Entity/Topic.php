@@ -48,7 +48,7 @@ class Topic implements ResourceInterface
     /**
      * @var Post
      *
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Post", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Post", inversedBy="parent", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     protected $mainPost;

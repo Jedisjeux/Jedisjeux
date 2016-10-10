@@ -20,6 +20,14 @@ use Sylius\Component\User\Model\CustomerInterface;
 class CustomerListElementRepository extends EntityRepository
 {
     /**
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    protected function getQueryBuilder()
+    {
+        return $this->createQueryBuilder('o');
+    }
+
+    /**
      * Create filter paginator.
      *
      * @param array $criteria
@@ -31,7 +39,7 @@ class CustomerListElementRepository extends EntityRepository
      */
     public function createFilterPaginator($criteria = [], $sorting = [], $customer, $code)
     {
-        $queryBuilder = parent::getCollectionQueryBuilder()
+        $queryBuilder = $this->getQueryBuilder()
             ->join('o.customerList', 'customerList')
             ->andWhere('customerList.code = :code')
             ->andWhere('customerList.customer = :customer')
@@ -69,7 +77,7 @@ class CustomerListElementRepository extends EntityRepository
      */
     public function createProductFilterPaginator($criteria = [], $sorting = [], $customer, $code)
     {
-        $queryBuilder = parent::getCollectionQueryBuilder()
+        $queryBuilder = $this->getQueryBuilder()
             ->addSelect('product')
             ->addSelect('variant')
             ->addSelect('image')
@@ -116,7 +124,7 @@ class CustomerListElementRepository extends EntityRepository
      */
     public function createProductFilterByTaxonPaginator(TaxonInterface $taxon, $criteria = [], $sorting = [], $customer, $code)
     {
-        $queryBuilder = parent::getCollectionQueryBuilder();
+        $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
             ->addSelect('product')
             ->addSelect('variant')
