@@ -12,6 +12,7 @@
 namespace AppBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -35,7 +36,7 @@ class ContactRequestType extends AbstractResourceType
             ->add('lastName', TextType::class, [
                 'label' => 'label.last_name',
             ])
-            ->add('email', TextType::class, [
+            ->add('email', EmailType::class, [
                 'label' => 'label.email',
             ])
             ->add('body', TextareaType::class, [
