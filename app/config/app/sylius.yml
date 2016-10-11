@@ -140,6 +140,7 @@ sylius_resource:
         app.contact_request:
             classes:
                 model: AppBundle\Entity\ContactRequest
+                factory: AppBundle\Factory\ContactRequestFactory
                 repository: AppBundle\Repository\ContactRequestRepository
                 form:
                     default: AppBundle\Form\Type\ContactRequestType
