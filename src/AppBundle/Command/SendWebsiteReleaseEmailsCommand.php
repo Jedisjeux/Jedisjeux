@@ -16,6 +16,7 @@ use AppBundle\Entity\Customer;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Mailer\Sender\Sender;
+use Sylius\Component\User\Security\TokenProvider;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -50,6 +51,13 @@ EOT
             /** @var Customer $customer */
             $customer = $row[0];
 
+            $user = $customer->getUser();
+
+            $user->setConfirmationToken($this->getTokenProvider()->generateUniqueToken());
+            $user->setPasswordRequestedAt(new \DateTime());
+
+            $this->getManager()->flush();
+
             $output->writeln(sprintf('Sending email to <info>%s</info>', $customer->getEmail()));
 
             $this->getEmailSender()->send(Emails::WEBSITE_RELEASE, [$customer->getEmail()], [
@@ -61,6 +69,15 @@ EOT
     }
 
     /**
+     * @return TokenProvider
+     */
+    protected function getTokenProvider()
+    {
+        return $this->getContainer()->get('sylius.user.token_provider');
+    }
+
+    /**
+     *
      * @return Sender
      */
     protected function getEmailSender()
@@ -73,7 +90,9 @@ EOT
      */
     protected function getCustomerQueryBuilder()
     {
-        return $this->getCustomerRepository()->createQueryBuilder('o');
+        return $this->getCustomerRepository()->createQueryBuilder('o')
+            ->select('o, user')
+            ->join('o.user', 'user');
     }
 
     /**
