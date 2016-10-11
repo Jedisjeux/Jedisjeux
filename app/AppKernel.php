@@ -61,6 +61,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
 
+            new Infinite\FormBundle\InfiniteFormBundle(),
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),

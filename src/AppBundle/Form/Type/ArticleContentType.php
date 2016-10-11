@@ -13,6 +13,8 @@ namespace AppBundle\Form\Type;
 
 use Infinite\FormBundle\Form\Type\PolyCollectionType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -28,10 +30,10 @@ class ArticleContentType extends AbstractResourceType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('name', null, [
+            ->add('name', TextType::class, [
                 'label' => 'label.internal_name',
             ])
-            ->add('title', null, [
+            ->add('title', TextType::class, [
                 'label' => 'label.title',
             ])
             ->add('children', PolyCollectionType::class, [
@@ -47,7 +49,7 @@ class ArticleContentType extends AbstractResourceType
             ->add('publishable', null, [
                 'label' => 'label.publishable'
             ])
-            ->add('publishStartDate', 'datetime', [
+            ->add('publishStartDate', DateTimeType::class, [
                 'label' => 'label.start_date',
                 'widget' => 'single_text',
                 'html5' => false,
@@ -56,7 +58,7 @@ class ArticleContentType extends AbstractResourceType
                     'class' => 'datetime',
                 )
             ])
-            ->add('publishEndDate', 'datetime', [
+            ->add('publishEndDate', DateTimeType::class, [
                 'label' => 'label.end_date',
                 'widget' => 'single_text',
                 'html5' => false,

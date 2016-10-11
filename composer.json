@@ -47,7 +47,8 @@
     "bmatzner/jquery-ui-bundle": "^1.10",
     "fzaninotto/Faker": "^1.5",
     "bmatzner/fontawesome-bundle": "^4.6",
-    "widop/google-analytics-bundle": "^1.1"
+    "widop/google-analytics-bundle": "^1.1",
+    "infinite-networks/form-bundle": "^1.0"
   },
   "require-dev": {
     "sensio/generator-bundle": "~2.3",

@@ -18,6 +18,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManager;
 use Sonata\CoreBundle\Form\Type\CollectionType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -45,10 +46,10 @@ class DealerType extends AbstractResourceType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('code', null, [
+            ->add('code', TextType::class, [
                 'label' => 'label.code',
             ])
-            ->add('name', null, [
+            ->add('name', TextType::class, [
                 'label' => 'label.name',
             ])
             ->add('image', 'app_dealer_image', [
