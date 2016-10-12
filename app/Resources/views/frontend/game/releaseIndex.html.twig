@@ -4,12 +4,12 @@
 {% endblock %}
 
 {% block body -%}
-    <div class="col-md-8">
+    <div class="col-md-12">
         <h4 class="mag-head"><i class="fa fa-calendar color"></i> Sorties du mois</h4>
 
         {{ render(url('sylius_partial_product_index', {
-            'paginate': 3,
-            'template': 'partial/recent_release_product/_magazine_items_one.html.twig',
+            'paginate': 4,
+            'template': 'frontend/game/index/_recentReleaseIndex.html.twig',
             'criteria': {
                 'status': 'PUBLISHED',
                 'releasedAtFrom': "first_day_of_the_month",
@@ -25,8 +25,8 @@
         <h4 class="mag-head"><i class="fa fa-calendar color"></i> Sorties des mois précédents</h4>
 
         {{ render(url('sylius_partial_product_index', {
-            'paginate': 3,
-            'template': '/partial/recent_release_product/_magazine_items_one.html.twig',
+            'paginate': 4,
+            'template': 'frontend/game/index/_recentReleaseIndex.html.twig',
             'criteria': {
                 'status': 'PUBLISHED',
                 'releasedAtTo': "last_day_of_previous_month"
@@ -41,8 +41,8 @@
         <h4 class="mag-head"><i class="fa fa-calendar color"></i> Sorties des prochains mois</h4>
 
         {{ render(url('sylius_partial_product_index', {
-            'paginate': 3,
-            'template': '/partial/recent_release_product/_magazine_items_one.html.twig',
+            'paginate': 4,
+            'template': 'frontend/game/index/_recentReleaseIndex.html.twig',
             'criteria': {
                 'status': 'PUBLISHED',
                 'releasedAtFrom': "first_day_of_next_month",
@@ -53,109 +53,6 @@
         })) }}
 
 
-    </div>
-    <!-- Sidebar column -->
-    <div class="col-md-4">
-
-        <!-- Sidebar -->
-        <div class="sidebar">
-
-
-            <!-- Nav tab widget - popular, recent and comments -->
-            <div class="s-widget">
-                <h5><i class="fa fa-comments color"></i> Topics</h5>
-
-                <div class="widget-content tabs">
-                    <div class="nav-tabs-two">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a href="#recent" data-toggle="tab">Récents</a></li>
-                            <li><a href="#popular" data-toggle="tab">Populaires</a></li>
-                        </ul>
-                        <!-- Tab content -->
-                        <div class="tab-content">
-                            <!-- Recent posts -->
-                            <div class="tab-pane fade in active" id="recent">
-                                {{ render(url('app_partial_topic_index', {
-                                    'sorting': {
-                                        'createdAt': 'desc'
-                                    },
-                                    'paginate': 5,
-                                    'template': 'partial/topic/_sidebarList.html.twig'
-                                })) }}
-                            </div>
-                            <!-- Popular posts -->
-                            <div class="tab-pane fade" id="popular">
-                                {{ render(url('app_partial_topic_index', {
-                                    'sorting': {
-                                        'postCount': 'desc'
-                                    },
-                                    'paginate': 5,
-                                    'template': 'partial/topic/_sidebarList.html.twig'
-                                })) }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tag Widget -->
-            <div class="s-widget">
-                <h5><i class="fa fa-tags color"></i> Tags</h5>
-                <!-- Widgets Content -->
-                <div class="widget-content tags">
-                    <a href="#" class="label">web</a>
-                    <a href="#" class="label">wordpress</a>
-                    <a href="#" class="label">php</a>
-                    <a href="#" class="label">jquery</a>
-                    <a href="#" class="label">java</a>
-                    <a href="#" class="label">photoshop</a>
-                    <a href="#" class="label">windows</a>
-                    <a href="#" class="label">android</a>
-                    <a href="#" class="label">ios</a>
-                    <a href="#" class="label">chrome</a>
-                    <a href="#" class="label">development</a>
-                    <a href="#" class="label">plugin</a>
-                    <a href="#" class="label">personal</a>
-                    <a href="#" class="label">general</a>
-                </div>
-            </div>
-
-            <!-- Gallery Widget -->
-            <div class="s-widget">
-                <!-- Heading -->
-                <h5><i class="fa fa-camera color"></i> Gallery</h5>
-                <!-- Widgets Content -->
-                <div class="widget-content gallery">
-                    <a href="../../img/gallery/small/1.jpg" class="lightbox"><img src="../../img/gallery/small/1.jpg"
-                                                                                  alt=""
-                                                                                  class="img-responsive img-thumbnail"/></a>
-                    <a href="../../img/gallery/small/2.jpg" class="lightbox"><img src="../../img/gallery/small/2.jpg"
-                                                                                  alt=""
-                                                                                  class="img-responsive img-thumbnail"/></a>
-                    <a href="../../img/gallery/small/3.jpg" class="lightbox"><img src="../../img/gallery/small/3.jpg"
-                                                                                  alt=""
-                                                                                  class="img-responsive img-thumbnail"/></a>
-                    <a href="../../img/gallery/small/1.jpg" class="lightbox"><img src="../../img/gallery/small/1.jpg"
-                                                                                  alt=""
-                                                                                  class="img-responsive img-thumbnail"/></a>
-                    <a href="../../img/gallery/small/2.jpg" class="lightbox"><img src="../../img/gallery/small/2.jpg"
-                                                                                  alt=""
-                                                                                  class="img-responsive img-thumbnail"/></a>
-                    <a href="../../img/gallery/small/3.jpg" class="lightbox"><img src="../../img/gallery/small/3.jpg"
-                                                                                  alt=""
-                                                                                  class="img-responsive img-thumbnail"/></a>
-                    <a href="../../img/gallery/small/1.jpg" class="lightbox"><img src="../../img/gallery/small/1.jpg"
-                                                                                  alt=""
-                                                                                  class="img-responsive img-thumbnail"/></a>
-                    <a href="../../img/gallery/small/2.jpg" class="lightbox"><img src="../../img/gallery/small/2.jpg"
-                                                                                  alt=""
-                                                                                  class="img-responsive img-thumbnail"/></a>
-                </div>
-            </div>
-
-
-        </div>
     </div>
 
 {% endblock %}
