@@ -42,6 +42,7 @@ class TopicRepository extends EntityRepository
      */
     protected function applySorting(QueryBuilder $queryBuilder, array $sorting = [])
     {
+        // TODO verify if used and remove
         if (isset($sorting['postCount'])) {
 
             $queryBuilder

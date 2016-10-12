@@ -127,7 +127,7 @@ class Article implements ResourceInterface, ReviewableInterface
     /**
      * @var ProductInterface
      *
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface")
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface", inversedBy="articles")
      */
     protected $product;
 

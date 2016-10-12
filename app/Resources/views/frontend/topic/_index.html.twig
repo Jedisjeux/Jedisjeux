@@ -1,6 +1,7 @@
 {% from 'macros/users.html.twig' import avatar %}
 {% from 'macros/topics.html.twig' import getPath %}
 {% from 'macros/images.html.twig' import image %}
+{% from 'macros/misc.html.twig' import no_data %}
 
 {% for topic in topics %}
 
@@ -40,4 +41,6 @@
         </div>
         <div class="clearfix"></div>
     </div>
+{% else %}
+    {{ no_data('Aucun topic') }}
 {% endfor %}

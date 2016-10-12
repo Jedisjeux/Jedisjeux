@@ -1,8 +1,11 @@
 {% from 'macros/game_reviews.html.twig' import blogCommentItem %}
+{% from 'macros/misc.html.twig' import no_data %}
 
 <div class="blog-comments">
     {% for game_review in product_reviews %}
         {{ blogCommentItem(game_review) }}
+    {% else %}
+        {{ no_data('Aucun avis') }}
     {% endfor %}
 </div>
 

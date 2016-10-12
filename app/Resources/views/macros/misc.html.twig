@@ -5,3 +5,9 @@
         </div>
     {% endif %}
 {% endmacro %}
+
+{% macro no_data(text) %}
+<div class="alert alert-info">
+    {{ text|raw }}
+</div>
+{% endmacro %}

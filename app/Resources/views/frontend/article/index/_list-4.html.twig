@@ -1,5 +1,7 @@
 {% from 'macros/articles.html.twig' import magazineItemOne %}
+{% from 'macros/misc.html.twig' import no_data %}
 
+{% if articles|length %}
 <!-- Image Box #4 Starts -->
 <div class="img-box-4 text-center jeu-list">
     <!-- Container -->
@@ -20,3 +22,6 @@
     </div>
 </div>
 <!-- Image Box #4 Ends -->
+{% else %}
+    {{ no_data('Aucun article') }}
+{% endif %}

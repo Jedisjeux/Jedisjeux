@@ -3,8 +3,8 @@
     <!-- Nav tabs -->
     <ul class="nav nav-tabs">
         <li class="active"><a href="#resume" data-toggle="tab">Résumé</a></li>
-        <li><a href="#articles" data-toggle="tab">Articles</a></li>
-        <li><a href="#critiques" data-toggle="tab">Avis</a></li>
+        <li><a href="#articles" data-toggle="tab">Articles <span class="color">({{ product.articles | length }})</span></a></li>
+        <li><a href="#critiques" data-toggle="tab">Avis <span class="color">({{ product.commentedReviews | length }})</span></a></li>
         <li><a href="#forum" data-toggle="tab">Forum</a></li>
     </ul>
     <!-- Tab content -->

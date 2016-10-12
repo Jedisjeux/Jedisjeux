@@ -162,6 +162,13 @@ class Product extends BaseProduct implements ReviewableInterface
     protected $averageRating = 0;
 
     /**
+     * @var Collection|Article[]
+     *
+     * @ORM\OneToMany(targetEntity="Article", mappedBy="product")
+     */
+    protected $articles;
+
+    /**
      * Product constructor.
      */
     public function __construct()
@@ -171,6 +178,7 @@ class Product extends BaseProduct implements ReviewableInterface
         $this->durationByPlayer = false;
         $this->status = self::WRITING;
         $this->reviews = new ArrayCollection();
+        $this->articles = new ArrayCollection();
     }
 
     /**
@@ -644,18 +652,6 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
-     * @param ArrayCollection $reviews
-     *
-     * @return $this
-     */
-    public function setReviews($reviews)
-    {
-        $this->reviews = $reviews;
-
-        return $this;
-    }
-
-    /**
      * @param ReviewInterface $review
      *
      * @return $this
@@ -679,6 +675,26 @@ class Product extends BaseProduct implements ReviewableInterface
         $this->reviews->remove($review);
 
         return $this;
+    }
+
+    /**
+     * @return Collection|ReviewInterface[]
+     */
+    public function getRatings()
+    {
+        return $this->reviews->filter(function (ReviewInterface $review) {
+            return null === $review->getComment();
+        });
+    }
+
+    /**
+     * @return Collection|ReviewInterface[]
+     */
+    public function getCommentedReviews()
+    {
+        return $this->reviews->filter(function (ReviewInterface $review) {
+            return null !== $review->getComment();
+        });
     }
 
     /**
@@ -734,6 +750,14 @@ class Product extends BaseProduct implements ReviewableInterface
         $this->barcodes->remove($barcode);
 
         return $this;
+    }
+
+    /**
+     * @return Article[]|Collection
+     */
+    public function getArticles()
+    {
+        return $this->articles;
     }
 
     /**
