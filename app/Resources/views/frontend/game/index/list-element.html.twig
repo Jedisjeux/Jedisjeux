@@ -1,4 +1,4 @@
-{% from "macros/games.html.twig" import playerCount %}
+{% from "macros/games.html.twig" import playerCount, image %}
 
 {% set productHref = path('sylius_product_show', {'slug': product.slug}) %}
 
@@ -9,10 +9,9 @@
         <a href="{{ productHref }}">
             <div class="element">
                 <div class="image-style-one">
-                    {% if product.mainImage %}
-                        <img src="{{ product.mainImage.webPath | imagine_filter('image_box_4') }}" alt="{{ product }}"
+
+                        <img src="{{ image(product, 'image_box_4') }}" alt="{{ product }}"
                              class="img-responsive"/>
-                    {% endif %}
                     <div class="image-hover">
                     </div>
                 </div>

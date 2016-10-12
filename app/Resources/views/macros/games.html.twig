@@ -1,3 +1,15 @@
+{% macro image(product, filter) %}
+    {% set filter = filter|default('thumbnail') %}
+
+    {% set imageSrc = asset('assets/img/product-placeholder.png') | imagine_filter(filter) %}
+
+    {% if (product.mainImage) %}
+        {% set imageSrc = product.mainImage.webPath | imagine_filter(filter) %}
+    {% endif %}
+
+    {{ imageSrc }}
+{% endmacro %}
+
 {% macro playerCount(jeu) %}
     {% if jeu.joueurMin == jeu.joueurMax %}
         à {{ jeu.joueurMin }} joueur{% if jeu.joueurMin>1 %}s{% endif %} exclusivement

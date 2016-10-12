@@ -9,8 +9,8 @@
 !app/cache/.gitkeep
 
 /app/config/parameters.yml
-/app/config/parameters_dev.yml
-/app/config/parameters_test.yml
+/app/config/*.local.yml
+
 /app/Resources/bin/
 
 /build/
@@ -24,6 +24,7 @@
 /web/assets/bower_components/*
 /web/js/
 /web/css/
+/behat.yml
 
 .idea
 *.DS_Store

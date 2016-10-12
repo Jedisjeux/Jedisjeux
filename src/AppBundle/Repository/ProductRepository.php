@@ -154,7 +154,7 @@ class ProductRepository extends BaseProductRepository
                 $sorting = [];
             }
 
-            $sorting['updatedAt'] = 'desc';
+            $sorting['createdAt'] = 'desc';
         }
 
         $this->applySorting($queryBuilder, $sorting);

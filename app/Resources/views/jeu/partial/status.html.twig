@@ -6,29 +6,24 @@
             <div class="alert alert-warning changeStatusContainer" role="alert">
                 <span class="fa fa-exclamation-triangle"></span>
 
-                {% if (is_granted('ROLE_REDACTOR') and jeu.status == constant('JDJ\\JeuBundle\\Entity\\Jeu::WRITING')) %}
+                {% if (is_granted('ROLE_REDACTOR') and jeu.status == constant('AppBundle\\Entity\\Product::WRITING')) %}
 
                     <div class="pull-right control-group">
                         <a href="#" class="btn btn-success acceptStatus clearfix" name="Passer en Traduction"
                            data-jeu-id="{{ jeu.id }}"
-                           data-status="{{ constant('JDJ\\JeuBundle\\Entity\\Jeu::NEED_A_TRANSLATION') }}"
-                           data-action="{{ constant('JDJ\\JediZoneBundle\\Entity\\Notification::ACTION_ACCEPT') }}"
-                           ">Passer en
+                           data-status="{{ constant('AppBundle\\Entity\\Product::NEED_A_TRANSLATION') }}">Passer en
                             Traduction</a>
                         <a href="#refuseStatusModal" class="btn btn-danger clearfix" name="Refuser" data-toggle="modal"
                            type="button" data-toggle="tooltip" data-placement="top"
                            title="Refuser">Refuser</a>
                     </div>
-                    {% include "jeu/partial/_refuse-modal.html.twig" with {'jeu': jeu, 'status': constant('JDJ\\JeuBundle\\Entity\\Jeu::NEED_A_TRANSLATION') } only %}
+                    {% include "jeu/partial/_refuse-modal.html.twig" with {'jeu': jeu, 'status': constant('AppBundle\\Entity\\Product::NEED_A_TRANSLATION') } only %}
 
                 {% elseif (is_granted('ROLE_TRANSLATOR') and jeu.status == constant('AppBundle\\Entity\\Product::NEED_A_TRANSLATION')) %}
                     <div class="pull-right control-group">
                         <a href="#" class="btn btn-success acceptStatus clearfix" name="Passer en relecture"
                            data-jeu-id="{{ jeu.id }}"
-                           data-status="{{ constant('JDJ\\JeuBundle\\Entity\\Jeu::NEED_A_REVIEW') }}"
-                           data-action="{{ constant('JDJ\\JediZoneBundle\\Entity\\Notification::ACTION_ACCEPT') }}"
-                           ">Passer en
-                            relecture</a>
+                           data-status="{{ constant('AppBundle\\Entity\\Product::NEED_A_REVIEW') }}">Passer en relecture</a>
                         <a href="#refuseStatusModal" class="btn btn-danger clearfix" name="Refuser" data-toggle="modal"
                            type="button" data-toggle="tooltip" data-placement="top"
                            title="Refuser">Refuser</a>
@@ -40,10 +35,7 @@
                     <div class="pull-right control-group">
                         <a href="#" class="btn btn-success acceptStatus clearfix" name="Passer en publication"
                            data-jeu-id="{{ jeu.id }}"
-                           data-status="{{ constant('JDJ\\JeuBundle\\Entity\\Jeu::READY_TO_PUBLISH') }}"
-                           data-action="{{ constant('JDJ\\JediZoneBundle\\Entity\\Notification::ACTION_ACCEPT') }}"
-                           ">Passer en
-                            publication</a>
+                           data-status="{{ constant('AppBundle\\Entity\\Product::READY_TO_PUBLISH') }}">Passer en publication</a>
                         <a href="#refuseStatusModal" class="btn btn-danger clearfix" name="Refuser" data-toggle="modal"
                            type="button" data-toggle="tooltip" data-placement="top"
                            title="Refuser">Refuser</a>
@@ -54,9 +46,7 @@
                     <div class="pull-right control-group">
                         <a href="#" class="btn btn-success acceptStatus clearfix" name="Publier"
                            data-jeu-id="{{ jeu.id }}"
-                           data-status="{{ constant('AppBundle\\Entity\\Product::PUBLISHED') }}"
-                           data-action="{{ constant('AppBundle\\Entity\\Product::ACTION_ACCEPT') }}"
-                           ">Publier</a>
+                           data-status="{{ constant('AppBundle\\Entity\\Product::PUBLISHED') }}">Publier</a>
                         <a href="#refuseStatusModal" class="btn btn-danger clearfix" name="Refuser" data-toggle="modal"
                            type="button" data-toggle="tooltip" data-placement="top"
                            title="Refuser">Refuser</a>
