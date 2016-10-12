@@ -36,6 +36,12 @@ security:
         ROLE_ADMIN:              ROLE_ADMIN_WORKFLOW, ROLE_MODERATOR, ROLE_OFFICE
 
     firewalls:
+        api:
+            pattern: ^/api/
+            anonymous: true
+            entry_point: app.security.api_entry_point
+            context: user
+
         main:
             anonymous:    true
             pattern: ^/
@@ -49,6 +55,7 @@ security:
                 use_referer: true
             logout:
                 target: /
+            context: user
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
@@ -61,6 +68,8 @@ security:
         - { path: /new$, role: ROLE_USER }
         # update existing entity
         - { path: /edit$, role: ROLE_USER }
+        # rate a product
+        - { path: ^/api/products/\d+/ratings/, role: ROLE_USER}
         #like it
         - { path: ^/user-review/\d+/like, role: ROLE_USER }
         #JediZone

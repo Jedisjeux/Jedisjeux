@@ -187,3 +187,7 @@ services:
             - "@liip_imagine.cache.manager"
         tags:
             - {name: jms_serializer.handler, type: LiipSerializer, format: json}
+
+    # <!-- Security -->
+    app.security.api_entry_point:
+        class: AppBundle\Security\Authentication\ApiEntryPoint

@@ -33,10 +33,10 @@ $(function() {
         var newRateValue = data.to;
 
         if (rateValue > 0) {
-            routeName = 'sylius_product_rating_update';
+            routeName = 'sylius_api_product_review_rating_update';
             type = 'PUT';
         } else {
-            routeName = 'sylius_product_rating_create';
+            routeName = 'sylius_api_product_review_rating_create';
             type = 'POST';
         }
 
@@ -51,6 +51,8 @@ $(function() {
                 if(xhr.status===401) {
                     //handle error
                     window.location.replace(Routing.generate('sylius_user_security_login'));
+                } else {
+                    renderErrors(xhr);
                 }
             }
         });
