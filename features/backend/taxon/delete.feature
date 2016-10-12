@@ -16,6 +16,7 @@ Feature: Remove taxons
       | Thèmes | Science-fiction |
     And I am logged in as user "admin@example.com" with password "password"
 
+  @javascript
   Scenario: Remove a taxon
     Given I am on "/admin/taxons/"
     And I follow "Thèmes"

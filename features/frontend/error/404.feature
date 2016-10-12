@@ -2,6 +2,7 @@
 Feature: As a visitor
   I need to be able to see a 404 when page does not exist
 
+  @javascript
   Scenario: See a 404
     When I am on "/qsdfmoijg"
     Then I should see "Page introuvable"

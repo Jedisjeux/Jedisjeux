@@ -10,6 +10,8 @@ default:
             base_url: http://jdj.dev/app_test.php/
             default_session: firefox
             sessions:
+                symfony:
+                    symfony2: ~
                 chrome:
                     selenium2:
                         browser: chrome
@@ -27,3 +29,5 @@ default:
                         browser: firefox
 
         Behat\Symfony2Extension: ~
+
+        FriendsOfBehat\PerformanceExtension: ~

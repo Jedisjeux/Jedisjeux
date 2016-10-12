@@ -13,6 +13,7 @@ Feature: Remove people
       | Reiner     | Knizia    |
     And I am logged in as user "admin@example.com" with password "password"
 
+  @javascript
   Scenario: Remove a person
     Given I am on "/admin/people/"
     When I press "Supprimer"

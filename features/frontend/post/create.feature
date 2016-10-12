@@ -19,6 +19,7 @@ Feature: Post creation
       | Jeux avec handicap | Moi je dis jeux |
     And I am logged in as user "kevin@example.com" with password "password"
 
+  @javascript
   Scenario: Create new post
     Given I am on "/forum/topics/"
     And I follow "Lire le sujet"
@@ -27,9 +28,9 @@ Feature: Post creation
     When I press "Créer"
     Then I should see "a bien été créé"
 
-    Scenario: Body is required
-      Given I am on "/forum/topics/"
-      And I follow "Lire le sujet"
-      And I follow "Répondre au sujet"
-      When I press "Créer"
-      Then I should see "Cette valeur ne doit pas être vide"
+  Scenario: Body is required
+    Given I am on "/forum/topics/"
+    And I follow "Lire le sujet"
+    And I follow "Répondre au sujet"
+    When I press "Créer"
+    Then I should see "Cette valeur ne doit pas être vide"

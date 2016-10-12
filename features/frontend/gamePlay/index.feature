@@ -23,6 +23,7 @@ Feature: List game-plays
     Then I should see "Lewis & Clark"
     And I should see "Les princes de Florence"
 
+  @javascript
   Scenario: List game-plays of logged user
     Given there are following users:
       | email           | password | role      |
