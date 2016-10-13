@@ -5,14 +5,24 @@
 
     {% set user = post.author.user %}
     {% set imagePath = avatar(user) %}
+    {% set isTopic = post.parent ? true : false %}
 
     {% set meta %}
         {% if post.author.user == app.user %}
-            {% set editPath = post.parent ? path('app_frontend_topic_update', { 'id': post.parent.id }) : path('app_post_update', { 'id': post.id }) %}
+            {% set editPath = isTopic ? path('app_frontend_topic_update', { 'id': post.parent.id }) : path('app_post_update', { 'id': post.id }) %}
+            {% set removePath = isTopic ? path('app_frontend_topic_delete', {'id': post.parent.id}) : path('app_post_delete', {'id': post.id}) %}
             <div class="btn-group pull-right">
-                <a class="btn" title="{{ 'label.edit'|trans }}" href="{{ editPath }}">
+                <a class="btn btn-default" title="{{ 'label.edit'|trans }}" href="{{ editPath }}">
                     <span class="fa fa-pencil"></span>
                 </a>
+                {% if isTopic and post.parent.posts|length == 0 or not isTopic %}
+                    <form action="{{ removePath }}" name="form" method="post" style="display: inline;">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button class="btn btn-default btn-confirm" type="submit" title="{{ 'label.delete'|trans }}">
+                            <i class="fa fa-remove"></i>
+                        </button>
+                    </form>
+                {% endif %}
             </div>
         {% endif %}
 

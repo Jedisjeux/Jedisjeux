@@ -12,9 +12,11 @@
 namespace AppBundle\Factory;
 
 use AppBundle\Entity\GamePlay;
+use AppBundle\Entity\Post;
 use AppBundle\Entity\Topic;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Context\CustomerContextInterface;
 
 /**
@@ -33,6 +35,11 @@ class TopicFactory extends Factory
     protected $gamePlayRepository;
 
     /**
+     * @var FactoryInterface
+     */
+    protected $postFactory;
+
+    /**
      * @param CustomerContextInterface $customerContext
      */
     public function setCustomerContext(CustomerContextInterface $customerContext)
@@ -43,9 +50,17 @@ class TopicFactory extends Factory
     /**
      * @param EntityRepository $gamePlayRepository
      */
-    public function setGamePlayRepository($gamePlayRepository)
+    public function setGamePlayRepository(EntityRepository $gamePlayRepository)
     {
         $this->gamePlayRepository = $gamePlayRepository;
+    }
+
+    /**
+     * @param FactoryInterface $postFactory
+     */
+    public function setPostFactory(FactoryInterface $postFactory)
+    {
+        $this->postFactory = $postFactory;
     }
 
     /**
@@ -56,6 +71,10 @@ class TopicFactory extends Factory
         /** @var Topic $topic */
         $topic = parent::createNew();
         $topic->setAuthor($this->customerContext->getCustomer());
+
+        /** @var Post $mainPost */
+        $mainPost = $this->postFactory->createNew();
+        $topic->setMainPost($mainPost);
 
         return $topic;
     }

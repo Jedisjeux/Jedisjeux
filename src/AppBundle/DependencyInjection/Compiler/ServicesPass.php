@@ -37,7 +37,8 @@ class ServicesPass implements CompilerPassInterface
         $topicFactoryDefinition = $container->getDefinition('app.factory.topic');
         $topicFactoryDefinition
             ->addMethodCall('setCustomerContext', [new Reference('sylius.context.customer')])
-            ->addMethodCall('setGamePlayRepository', [new Reference('app.repository.game_play')]);
+            ->addMethodCall('setGamePlayRepository', [new Reference('app.repository.game_play')])
+            ->addMethodCall('setPostFactory', [new Reference('app.factory.post')]);
 
         $postFactoryDefinition = $container->getDefinition('app.factory.post');
         $postFactoryDefinition

@@ -10,6 +10,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Taxon;
 use AppBundle\Repository\ProductRepository;
+use AppBundle\Repository\TaxonRepository;
 use Doctrine\ORM\EntityRepository;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
@@ -155,7 +156,7 @@ class ProductController extends ResourceController
     }
 
     /**
-     * @return EntityRepository
+     * @return TaxonRepository
      */
     protected function getTaxonRepository()
     {
