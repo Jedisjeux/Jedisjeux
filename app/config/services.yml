@@ -190,4 +190,4 @@ services:
 
     # <!-- Security -->
     app.security.api_entry_point:
-        class: AppBundle\Security\Authentication\ApiEntryPoint
+        class: AppBundle\Security\Authentication\EntryPoint\ApiEntryPoint
