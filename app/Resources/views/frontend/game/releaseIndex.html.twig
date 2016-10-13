@@ -19,7 +19,7 @@
 
         {{ render(url('sylius_partial_product_index', {
             'paginate': 4,
-            'template': 'frontend/game/index/_recentReleaseIndex.html.twig',
+            'template': 'frontend/game/index/list-4.html.twig',
             'criteria': {
                 'status': 'PUBLISHED',
                 'releasedAtFrom': "first_day_of_the_month",
@@ -52,7 +52,7 @@
 
         {{ render(url('sylius_partial_product_index', {
             'paginate': 4,
-            'template': 'frontend/game/index/_recentReleaseIndex.html.twig',
+            'template': 'frontend/game/index/list-4.html.twig',
             'criteria': {
                 'status': 'PUBLISHED',
                 'releasedAtTo': "last_day_of_previous_month"
@@ -84,7 +84,7 @@
 
         {{ render(url('sylius_partial_product_index', {
             'paginate': 4,
-            'template': 'frontend/game/index/_recentReleaseIndex.html.twig',
+            'template': 'frontend/game/index/list-4.html.twig',
             'criteria': {
                 'status': 'PUBLISHED',
                 'releasedAtFrom': "first_day_of_next_month",
