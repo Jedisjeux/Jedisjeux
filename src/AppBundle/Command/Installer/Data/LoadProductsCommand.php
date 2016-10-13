@@ -157,6 +157,13 @@ class LoadProductsCommand extends ContainerAwareCommand
         $data['updatedAt'] = \DateTime::createFromFormat('Y-m-d H:i:s', $data['updatedAt']);
         $data['releasedAt'] = $data['releasedAt'] ? \DateTime::createFromFormat('Y-m-d', $data['releasedAt']) : null;
         $product->getMasterVariant()->setReleasedAtPrecision($this->getReleasedAtPrecision($data));
+        if (null !== $data['releasedAt']) {
+            if (ProductVariant::RELEASED_AT_PRECISION_ON_MONTH === $product->getMasterVariant()->getReleasedAtPrecision()) {
+                $data['releasedAt'] = $data['releasedAt']->add(new \DateInterval('P1D'));
+            } elseif (ProductVariant::RELEASED_AT_PRECISION_ON_YEAR === $product->getMasterVariant()->getReleasedAtPrecision()) {
+                $data['releasedAt'] = $data['releasedAt']->add(new \DateInterval('P1D'))->add(new \DateInterval('P1M'));
+            }
+        }
 
         switch ($data['status']) {
             case 0 :
