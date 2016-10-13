@@ -1,0 +1,21 @@
+{% extends "backend/base.html.twig" %}
+{% import 'macros/actions.html.twig' as action %}
+
+{% block headline %}
+    {{ 'label.new_dealer'|trans }}
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    / <a href="{{ path('app_backend_dealer_index') }}">{{ 'label.dealers'|trans }}</a> /
+    {{ 'label.new'|trans }}
+{% endblock %}
+
+{% block container %}
+    <div class="col-md-12">
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ action.create() }}
+        {{ form_end(form) }}
+    </div>
+{% endblock container %}

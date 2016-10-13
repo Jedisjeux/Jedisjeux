@@ -1,0 +1,22 @@
+{% extends "backend/base.html.twig" %}
+{% import 'macros/actions.html.twig' as action %}
+
+{% block headline %}
+    {{ 'label.edit_dealer'|trans }}
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    / <a href="{{ path('app_backend_dealer_index') }}">{{ 'label.dealers'|trans }}</a>
+    / {{ 'label.edit'|trans }}
+{% endblock %}
+
+{% block container %}
+    <div class="col-md-12">
+        {{ form_start(form) }}
+        <input type="hidden" name="_method" value="PUT"/>
+        {{ form_widget(form) }}
+        {{ action.update() }}
+        {{ form_end(form) }}
+    </div>
+{% endblock container %}

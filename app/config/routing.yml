@@ -13,8 +13,8 @@ backend:
 frontend:
     resource: "routing/frontend.yml"
 
-admin:
-    resource: "routing/admin.yml"
+app_backend:
+    resource: "routing/backend.yml"
     prefix: /admin
 
 app_api:

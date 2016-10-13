@@ -66,7 +66,19 @@ class TopicRepository extends EntityRepository
     {
         $queryBuilder = $this->getQueryBuilder();
 
-        if ($criteria['product']) {
+        if (!empty($criteria['query'])) {
+
+            $queryBuilder
+                ->where($queryBuilder->expr()->orX(
+                    'user.username like :query',
+                    'o.title like :query'
+                ))
+                ->setParameter('query', '%' . $criteria['query'] . '%');
+
+            unset($criteria['query']);
+        }
+
+        if (isset($criteria['product'])) {
 
             $queryBuilder
                 ->where($queryBuilder->expr()->orX(
