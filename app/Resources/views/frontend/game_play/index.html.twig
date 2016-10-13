@@ -36,13 +36,7 @@
 
             <div class="clearfix"></div>
 
-            <div class="row">
-                {% for game_play in game_plays %}
-                    <div class="col-md-4 col-sm-6">
-                        {{ magazineItemOne(game_play) }}
-                    </div>
-                {% endfor %}
-            </div>
+            {% include 'frontend/game_play/_list3.html.twig' %}
 
             <div class="pagination-wrapper">
                 <div class="pagination-bottom">
