@@ -16,6 +16,7 @@ use Sylius\Bundle\UserBundle\Mailer\Emails as SyliusEmails;
 use Faker\Factory as FakerFactory;
 use Faker\Generator;
 use Sylius\Bundle\UserBundle\UserEvents;
+use Sylius\Component\Mailer\Sender\Sender;
 use Sylius\Component\User\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -43,7 +44,6 @@ class TestEmailsCommand extends ContainerAwareCommand
         $this->faker = FakerFactory::create();
     }
 
-
     /**
      * {@inheritdoc}
      */
@@ -55,8 +55,7 @@ class TestEmailsCommand extends ContainerAwareCommand
             ->setHelp(<<<EOT
 The <info>%command.name%</info> command tests all emails.
 EOT
-            )
-        ;
+            );
     }
 
     /**
@@ -69,8 +68,10 @@ EOT
         $this->sendRegistrationEmail();
         $output->writeln(sprintf('Envoi de l\'email <info>%s</info>', SyliusEmails::RESET_PASSWORD_TOKEN));
         $this->sendResetPasswordTokenEmail();
+        $output->writeln(sprintf('Envoi de l\'email <info>%s</info>', Emails::WEBSITE_RELEASE));
+        $this->sendWebsiteReleaseEmail();
     }
-    
+
     protected function sendRegistrationEmail()
     {
         $customer = $this->createCustomer();
@@ -84,6 +85,15 @@ EOT
         $this->getEventDispatcher()->dispatch(UserEvents::REQUEST_RESET_PASSWORD_TOKEN, new GenericEvent($user));
     }
 
+    protected function sendWebsiteReleaseEmail()
+    {
+        $customer = $this->createCustomer();
+        $customer->getUser()->setConfirmationToken($this->faker->creditCardNumber);
+        $this->getEmailSender()->send(Emails::WEBSITE_RELEASE, [$customer->getEmail()], [
+            'customer' => $customer,
+        ]);
+    }
+
     /**
      * @return CustomerInterface
      */
@@ -93,7 +103,7 @@ EOT
         $user = $this->getContainer()->get('sylius.factory.user')->createNew();
 
         /** @var CustomerInterface $customer */
-        $customer  = $this->getContainer()->get('sylius.factory.customer')->createNew();
+        $customer = $this->getContainer()->get('sylius.factory.customer')->createNew();
         $customer->setUser($user);
 
         $customer->setEmail($this->faker->email);
@@ -101,6 +111,15 @@ EOT
         $customer->setLastName($this->faker->lastName);
 
         return $customer;
+    }
+
+    /**
+     *
+     * @return Sender
+     */
+    protected function getEmailSender()
+    {
+        return $this->getContainer()->get('sylius.email_sender');
     }
 
     /**

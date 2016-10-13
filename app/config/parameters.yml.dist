@@ -10,8 +10,13 @@ parameters:
     mailer_host:       192.168.99.100
     mailer_user:       ~
     mailer_password:   ~
+    mailer_port:       2525
+    mailer_auth:       cram-md5
 
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    router.request_context.host: jdj.dev
+    router.request_context.scheme: http
 
     fos_elastica.host: 192.168.99.100
     fos_elastica.port: 9200

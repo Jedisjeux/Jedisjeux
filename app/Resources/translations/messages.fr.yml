@@ -158,7 +158,7 @@ emails:
         subject: Réinitialisation du mot de passe
         content:  "Pour réinitialiser votre mot de passe cliquez <a href='%LINK%'>ici</a>. <br/><br/> Si vous rencontrez un soucis, copier coller le lien suivant : %LINK%"
     user_registration:
-        subject: Bienvenue sur AppName
+        subject: Bienvenue sur Jedisjeux
         content:  "Merci d'avoir créé un compte sur Jedisjeux"
     website_release:
         subject: Nouveau Jedisjeux en ligne
