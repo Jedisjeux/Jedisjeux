@@ -1,3 +1,5 @@
 app:
   topic:
-    create: Le topic a bien été créé.
+    create: Le sujet a bien été créé.
+    update: Le sujet a bien été mis à jour.
+    delete: Le sujet a bien été supprimé.
