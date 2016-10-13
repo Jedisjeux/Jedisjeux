@@ -94,10 +94,11 @@ class ProductRepository extends BaseProductRepository
      * @param array $criteria
      * @param array $sorting
      * @param bool $deleted
+     * @param null|string $status
      *
      * @return Pagerfanta
      */
-    public function createFilterPaginator($criteria = [], $sorting = [], $deleted = false)
+    public function createFilterPaginator($criteria = [], $sorting = [], $deleted = false, $status = Product::PUBLISHED)
     {
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
@@ -110,10 +111,12 @@ class ProductRepository extends BaseProductRepository
                 ->setParameter('name', '%' . $criteria['name'] . '%');
         }
 
-        if (!empty($criteria['status'])) {
+        $status = (null === $status and !empty($criteria['status'])) ? $criteria['status'] : $status;
+
+        if (null !== $status) {
             $queryBuilder
                 ->andWhere($queryBuilder->expr()->eq($this->getPropertyName('status'), ':status'))
-                ->setParameter('status', $criteria['status']);
+                ->setParameter('status', $status);
         }
 
         if (!empty($criteria['query'])) {

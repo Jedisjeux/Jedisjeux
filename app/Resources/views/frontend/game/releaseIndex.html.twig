@@ -4,8 +4,18 @@
 {% endblock %}
 
 {% block body -%}
+    {% set currentMonthUrl = path('sylius_product_index', {
+    'criteria': {
+        'releasedAtFrom': "first_day_of_the_month",
+        'releasedAtTo': "last_day_of_the_month"
+    },
+    'sorting': {
+        'variant.releasedAt': 'desc'
+    }
+    }) %}
+
     <div class="col-md-12">
-        <h4 class="mag-head"><i class="fa fa-calendar color"></i> Sorties du mois</h4>
+        <h4 class="mag-head"><a href="{{ currentMonthUrl }}"><i class="fa fa-calendar color"></i> Sorties du mois</a></h4>
 
         {{ render(url('sylius_partial_product_index', {
             'paginate': 4,
@@ -21,7 +31,7 @@
         })) }}
 
         <div class="text-center">
-            <a href="#" class="btn btn-color">
+            <a href="{{ currentMonthUrl }}" class="btn btn-color">
                 <span class="fa fa-plus"></span>
                 Plus de sorties du mois
             </a>
@@ -29,7 +39,16 @@
 
         <hr/>
 
-        <h4 class="mag-head"><i class="fa fa-calendar color"></i> Sorties des mois précédents</h4>
+        {% set previousMonthUrl = path('sylius_product_index', {
+        'criteria': {
+            'releasedAtTo': "last_day_of_previous_month"
+        },
+        'sorting': {
+            'variant.releasedAt': 'desc'
+        }
+        }) %}
+
+        <h4 class="mag-head"><a href="{{ previousMonthUrl }}"><i class="fa fa-calendar color"></i> Sorties des mois précédents</a></h4>
 
         {{ render(url('sylius_partial_product_index', {
             'paginate': 4,
@@ -44,7 +63,7 @@
         })) }}
 
         <div class="text-center">
-            <a href="#" class="btn btn-color">
+            <a href="{{ previousMonthUrl }}" class="btn btn-color">
                 <span class="fa fa-plus"></span>
                 Plus de sorties des mois précédents
             </a>
@@ -52,7 +71,16 @@
 
         <hr/>
 
-        <h4 class="mag-head"><i class="fa fa-calendar color"></i> Sorties des prochains mois</h4>
+        {% set nextMonthUrl = path('sylius_product_index', {
+        'criteria': {
+        'releasedAtFrom': "first_day_of_next_month"
+        },
+        'sorting': {
+        'variant.releasedAt': 'desc'
+        }
+        }) %}
+
+        <h4 class="mag-head"><a href="{{ nextMonthUrl }}"><i class="fa fa-calendar color"></i> Sorties des prochains mois</a></h4>
 
         {{ render(url('sylius_partial_product_index', {
             'paginate': 4,
@@ -67,7 +95,7 @@
         })) }}
 
         <div class="text-center">
-            <a href="#" class="btn btn-color">
+            <a href="{{ nextMonthUrl }}" class="btn btn-color">
                 <span class="fa fa-plus"></span>
                 Plus de sorties des prochains mois
             </a>

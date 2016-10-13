@@ -14,7 +14,7 @@ sylius_admin_product_index:
         _sylius:
             repository:
                 method: createFilterPaginator
-                arguments: [$criteria, $sorting]
+                arguments: [$criteria, $sorting, false, null]
             template: backend/product/index.html.twig
 
 sylius_admin_product_from_bgg_new:
