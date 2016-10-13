@@ -110,6 +110,7 @@ label:
   pub_banners: Bannières de pub
   rate: Note
   ready_to_publish: Prêt à publier
+  release: Sortie
   released_at: Sortie le
   release_date: Date de sortie
   release_date_precision: Précision de la date de sortie

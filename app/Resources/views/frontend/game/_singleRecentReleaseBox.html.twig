@@ -1,4 +1,4 @@
-{% from "macros/games.html.twig" import image %}
+{% from "macros/games.html.twig" import image, releasedAt %}
 
 {% set productHref = path('sylius_product_show', {'slug': product.slug}) %}
 
@@ -39,7 +39,7 @@
         <div class="bor bg-{{ color|default('black') }}"></div>
         <!-- Paragraph -->
         <p>
-            {{ product.releasedAt|localizeddate('medium', 'none') }}
+            {{ releasedAt(product.masterVariant, 'long') }}
         </p>
     </div>
 </div>

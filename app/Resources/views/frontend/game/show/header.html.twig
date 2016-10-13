@@ -1,4 +1,4 @@
-{% from "macros/games.html.twig" import duration, playerCount, image %}
+{% from "macros/games.html.twig" import duration, playerCount, image, releasedAt %}
 {% from 'macros/items.html.twig' import blockquoteOne %}
 {% from 'macros/showMore.html.twig' import showMore %}
 
@@ -106,7 +106,7 @@
                                                 <span class="fa fa-calendar white"></span>
                                             </p>
                                             <p class="game-attribute">
-                                                {{ 'label.released_at'|trans }} {{ jeu.releasedAt|localizeddate('long', 'none') }}
+                                                {{ 'label.release'|trans }} : {{ releasedAt(jeu.masterVariant, 'long') }}
                                             </p>
 
                                         </li>
