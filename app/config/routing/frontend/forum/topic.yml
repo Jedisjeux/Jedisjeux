@@ -35,6 +35,17 @@ app_frontend_topic_update:
                 parameters: { topicId: $id }
             template: frontend/topic/update.html.twig
 
+app_frontend_topic_delete:
+    methods: [DELETE]
+    path: /topics/{id}
+    defaults:
+        _controller: app.controller.topic:deleteAction
+        _sylius:
+            repository:
+                method: findOneBy
+                arguments: [{id: $id, author: expr:service('sylius.context.customer').getCustomer()}]
+            redirect: app_frontend_topic_index
+
 app_frontend_topic_index_by_taxon:
     methods: [GET]
     path: /topics/{permalink}
@@ -46,15 +57,3 @@ app_frontend_topic_index_by_taxon:
             sorting:
                 createdAt: desc
             template: frontend/topic/index.html.twig
-
-app_frontend_topic_delete:
-    methods: [DELETE]
-    path: /topics/{id}
-    defaults:
-        _controller: app.controller.topic:deleteAction
-        _sylius:
-            repository:
-                method: findOneBy
-                arguments: [{id: $id, author: expr:service('sylius.context.customer').getCustomer()}]
-            redirect:
-                route: app_frontend_topic_index

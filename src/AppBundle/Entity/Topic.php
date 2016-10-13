@@ -95,7 +95,7 @@ class Topic implements ResourceInterface
     /**
      * @var ArrayCollection|CustomerInterface[]
      *
-     * @ORM\ManyToMany(targetEntity="Sylius\Component\User\Model\CustomerInterface", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="Sylius\Component\User\Model\CustomerInterface")
      * @ORM\JoinTable(name="jdj_topic_follower")
      */
     protected $followers;
