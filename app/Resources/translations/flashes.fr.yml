@@ -1,5 +1,10 @@
 app:
+  post:
+    create: Le message a bien été créé.
+    update: Le message a bien été mis à jour.
+    delete: Le message a bien été supprimé.
   topic:
     create: Le sujet a bien été créé.
     update: Le sujet a bien été mis à jour.
     delete: Le sujet a bien été supprimé.
+    
