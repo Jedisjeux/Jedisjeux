@@ -11,8 +11,8 @@
 
 namespace AppBundle\Security\Authentication\EntryPoint;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
 
@@ -26,8 +26,9 @@ class ApiEntryPoint implements AuthenticationEntryPointInterface
      */
     public function start(Request $request, AuthenticationException $authException = null)
     {
-        $response = new Response('', 401);
-        $response->headers->set('Content-Type', 'application/json');
+        $response = new JsonResponse();
+        $response->setContent($authException->getMessage());
+        $response->setStatusCode(401);
 
         return $response;
     }
