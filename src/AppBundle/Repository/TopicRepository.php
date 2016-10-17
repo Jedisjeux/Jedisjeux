@@ -90,6 +90,14 @@ class TopicRepository extends EntityRepository
             unset($criteria['product']);
         }
 
+        if (empty($sorting)) {
+            if (!is_array($sorting)) {
+                $sorting = [];
+            }
+
+            $sorting['createdAt'] = 'desc';
+        }
+
         $this->applyCriteria($queryBuilder, (array)$criteria);
         $this->applySorting($queryBuilder, (array)$sorting);
 

@@ -58,6 +58,7 @@ label:
   hello: Bonjour
   edit: Modifier
   edit_dealer: Modifier un vendeur
+  edit_post: Modifier un message
   email: Email
   end_date: Date de fin
   file: Fichier
@@ -132,6 +133,7 @@ label:
   target_url: Url cible
   themes: Thèmes
   title: Titre
+  topic: Sujet
   topics: Sujets
   url: Url
   username: Nom d'utilisateur

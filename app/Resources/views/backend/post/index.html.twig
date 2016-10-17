@@ -17,12 +17,12 @@
 {% endif %}
 
 {% block headline %}
-    {{ 'label.topics'|trans }}
+    {{ 'label.posts'|trans }}
 {% endblock %}
 
 {% block breadcrumb_content %}
     {{ parent() }}
-    {{ 'label.topics'|trans }}
+    {{ 'label.posts'|trans }}
 {% endblock %}
 
 {% block new_entity_button %}
@@ -33,30 +33,30 @@
         <thead>
         <tr>
             <th>#</th>
-            <th>{{ sorting('app_backend_topic_index', 'label.username'|trans, 'user.username', 'asc') }}</th>
-            <th>{{ sorting('app_backend_topic_index', 'label.name'|trans, 'name', 'asc') }}</th>
-            <th>{{ sorting('app_backend_topic_index', 'label.created_at'|trans, 'createdAt', 'desc', icon, currentOrder) }}</th>
+            <th>{{ sorting('app_backend_post_index', 'label.username'|trans, 'user.username', 'asc') }}</th>
+            <th>{{ sorting('app_backend_post_index', 'label.topic'|trans, 'topic.title', 'asc') }}</th>
+            <th>{{ sorting('app_backend_post_index', 'label.created_at'|trans, 'createdAt', 'desc', icon, currentOrder) }}</th>
             <th></th>
         </tr>
         </thead>
         <tbody>
-        {% for topic in topics %}
-            {% set user = topic.author.user %}
+        {% for post in posts %}
+            {% set user = post.author.user %}
             <tr>
                 <td>{{ image(avatar(user), 'thumbnail', user.customer, 'img-responsive img-round') }}</td>
                 <td>{{ user }}</td>
-                <td>{{ topic.title }}</td>
-                <td>{{ topic.createdAt|localizeddate('medium', 'none') }}</td>
+                <td>{{ post.topic ? post.topic.title : post.parent.title }}</td>
+                <td>{{ post.createdAt|localizeddate('medium', 'none') }}</td>
                 <td class="text-right">
                     <ul class="list-inline text-nowrap">
+                        {#<li>#}
+                            {#{{ button.generic(path('app_backend_post_index', { 'criteria': {'post': post.id } }), 'label.posts', null, 'list') }}#}
+                        {#</li>#}
                         <li>
-                            {{ button.generic(path('app_backend_post_index', { 'criteria': {'topic': topic.id } }), 'label.posts', null, 'list') }}
+                            {{ button.edit(path('app_backend_post_update', { 'id': post.id })) }}
                         </li>
                         <li>
-                            {{ button.edit(path('app_backend_topic_update', { 'id': topic.id })) }}
-                        </li>
-                        <li>
-                            {{ button.delete(path('app_backend_topic_delete', { 'id': topic.id })) }}
+                            {{ button.delete(path('app_backend_post_delete', { 'id': post.id })) }}
                         </li>
                     </ul>
                 </td>
@@ -67,5 +67,5 @@
 {% endblock list %}
 
 {% block Pagination %}
-    {{ pagination(topics) }}
+    {{ pagination(posts) }}
 {% endblock %}

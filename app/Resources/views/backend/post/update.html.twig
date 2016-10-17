@@ -2,20 +2,21 @@
 {% import 'macros/actions.html.twig' as action %}
 
 {% block headline %}
-    {{ 'label.new_dealer'|trans }}
+    {{ 'label.edit_post'|trans }}
 {% endblock %}
 
 {% block breadcrumb_content %}
     {{ parent() }}
-    / <a href="{{ path('app_backend_dealer_index') }}">{{ 'label.dealers'|trans }}</a> /
-    {{ 'label.new'|trans }}
+    / <a href="{{ path('app_backend_post_index') }}">{{ 'label.posts'|trans }}</a>
+    / {{ 'label.edit'|trans }}
 {% endblock %}
 
 {% block container %}
     <div class="col-md-12">
         {{ form_start(form) }}
+        <input type="hidden" name="_method" value="PUT"/>
         {{ form_widget(form) }}
-        {{ action.create() }}
+        {{ action.update() }}
         {{ form_end(form) }}
     </div>
 {% endblock container %}

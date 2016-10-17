@@ -29,5 +29,8 @@ app_backend_dealer:
 app_backend_dealer_price:
     resource: backend/dealer_price.yml
 
+app_backend_post:
+    resource: backend/post.yml
+
 app_backend_topic:
     resource: backend/topic.yml

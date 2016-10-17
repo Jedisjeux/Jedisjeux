@@ -2,12 +2,12 @@
 {% import 'macros/actions.html.twig' as action %}
 
 {% block headline %}
-    {{ 'label.edit_dealer'|trans }}
+    {{ 'label.edit_topic'|trans }}
 {% endblock %}
 
 {% block breadcrumb_content %}
     {{ parent() }}
-    / <a href="{{ path('app_backend_dealer_index') }}">{{ 'label.dealers'|trans }}</a>
+    / <a href="{{ path('app_backend_topic_index') }}">{{ 'label.topics'|trans }}</a>
     / {{ 'label.edit'|trans }}
 {% endblock %}
 
