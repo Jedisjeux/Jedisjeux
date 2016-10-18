@@ -17,6 +17,9 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\User\Context\CustomerContextInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\SecurityContext;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -24,16 +27,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class TopicType extends AbstractResourceType
 {
     /**
-     * @var CustomerContextInterface
+     * @var AuthorizationChecker
      */
-    protected $customerContext;
+    protected $authorizationChecker;
 
     /**
-     * @param CustomerContextInterface $customerContext
+     * @param CustomerContextInterface $authorizationChecker
      */
-    public function setCustomerContext($customerContext)
+    public function setAuthorizationChecker($authorizationChecker)
     {
-        $this->customerContext = $customerContext;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     /**
@@ -55,12 +58,25 @@ class TopicType extends AbstractResourceType
                 'class' => 'AppBundle:Taxon',
                 'choice_label' => 'name',
                 'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('o')
+                    $queryBuilder = $er->createQueryBuilder('o');
+                    $queryBuilder
                         ->join('o.root', 'rootTaxon')
                         ->where('rootTaxon.code = :code')
                         ->andWhere('o.parent IS NOT NULL')
                         ->setParameter('code', Taxon::CODE_FORUM)
+
                         ->orderBy('o.left');
+
+                    $onlyPublic = $this->authorizationChecker->isGranted('ROLE_STAFF') ? false : true;
+
+                    if ($onlyPublic) {
+                        $queryBuilder
+                            ->andWhere('o.public = :public')
+                            ->setParameter('public', true);
+
+                    }
+                    
+                    return $queryBuilder;
                 },
                 'expanded' => false,
                 'multiple' => false,
