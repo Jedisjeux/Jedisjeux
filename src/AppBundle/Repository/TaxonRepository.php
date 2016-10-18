@@ -11,6 +11,7 @@ namespace AppBundle\Repository;
 use Sylius\Bundle\TaxonomyBundle\Doctrine\ORM\TaxonRepository as BaseTaxonRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -39,7 +40,12 @@ class TaxonRepository extends BaseTaxonRepository
             ->addSelect('translation')
             ->leftJoin('o.translations', 'translation');
 
-        $onlyPublic = $this->authorizationChecker->isGranted('ROLE_STAFF') ? false : true;
+        try {
+            $onlyPublic = $this->authorizationChecker->isGranted('ROLE_STAFF') ? false : true;
+        } catch (AuthenticationCredentialsNotFoundException $exception) {
+            // on command, allow private taxon
+            $onlyPublic = false;
+        }
 
         if ($onlyPublic) {
             $queryBuilder
@@ -62,8 +68,7 @@ class TaxonRepository extends BaseTaxonRepository
             ->andWhere('o.parent = :parent')
             ->addOrderBy('o.root')
             ->addOrderBy('o.left')
-            ->setParameter('parent', $taxon)
-        ;
+            ->setParameter('parent', $taxon);
 
         return $queryBuilder->getQuery()->getResult();
     }
@@ -88,14 +93,15 @@ class TaxonRepository extends BaseTaxonRepository
      */
     public function findOneByNameAndRoot($name, TaxonInterface $root)
     {
-        return $this->getQueryBuilder()
+        return $this->createQueryBuilder('o')
+            ->addSelect('translation')
+            ->leftJoin('o.translations', 'translation')
             ->where('translation.name = :name')
             ->andWhere('o.root = :root')
             ->setParameter('name', $name)
             ->setParameter('root', $root)
             ->getQuery()
-            ->getOneOrNullResult()
-            ;
+            ->getOneOrNullResult();
     }
 
     /**
@@ -111,7 +117,6 @@ class TaxonRepository extends BaseTaxonRepository
             ->where('translation.slug = :slug')
             ->setParameter('slug', $slug)
             ->getQuery()
-            ->getOneOrNullResult()
-            ;
+            ->getOneOrNullResult();
     }
 }
