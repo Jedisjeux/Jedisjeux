@@ -105,6 +105,7 @@ label:
   products: Produits
   price: Prix
   price_list: Liste de prix
+  public: Public
   publishable: Publiable
   published: Publié
   published_at: Publié le

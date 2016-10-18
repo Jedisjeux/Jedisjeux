@@ -13,6 +13,8 @@ namespace AppBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\TaxonomyBundle\Form\EventListener\BuildTaxonFormSubscriber;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -28,11 +30,19 @@ class TaxonType extends AbstractResourceType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('code', null, array(
+            ->add('code', TextType::class, array(
                 'label' => 'label.code',
             ))
-            ->add('name', null, array(
+            ->add('name', TextType::class, array(
                 'label' => 'label.name',
+            ))
+            ->add('public', ChoiceType::class, array(
+                'label' => 'label.public',
+                'choices'  => array(
+                    'label.yes' => true,
+                    'label.no' => false,
+                ),
+                'choices_as_values' => true,
             ))
             ->addEventSubscriber(new BuildTaxonFormSubscriber($builder->getFormFactory()));
     }
