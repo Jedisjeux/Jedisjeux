@@ -63,6 +63,13 @@ class Taxon extends BaseTaxon
     protected $color;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean")
+     */
+    protected $public;
+
+    /**
      * @var integer
      *
      * @ORM\Column(type="integer")
@@ -97,6 +104,7 @@ class Taxon extends BaseTaxon
 
         $this->topicCount = 0;
         $this->productCount = 0;
+        $this->public = true;
     }
 
     /**
@@ -159,6 +167,26 @@ class Taxon extends BaseTaxon
     public function setColor($color)
     {
         $this->color = $color;
+
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isPublic()
+    {
+        return $this->public;
+    }
+
+    /**
+     * @param boolean $public
+     *
+     * @return Taxon
+     */
+    public function setPublic($public)
+    {
+        $this->public = $public;
 
         return $this;
     }
