@@ -24,7 +24,7 @@ Feature: Creates taxons
       | Nom  | Antique |
     And I select "Thèmes" from "Parent"
     When I press "Créer"
-    Then I should see "a bien été créé"
+    Then I should see "a bien été créée"
 
   Scenario: Create a taxon with a parent
     Given I am on "/admin/taxons/"
@@ -35,4 +35,4 @@ Feature: Creates taxons
       | Nom  | Space-Opéra |
     And I select "Science-fiction" from "Parent"
     When I press "Créer"
-    Then I should see "a bien été créé"
+    Then I should see "a bien été créée"

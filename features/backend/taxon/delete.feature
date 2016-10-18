@@ -23,4 +23,4 @@ Feature: Remove taxons
     When I press "Supprimer"
     And I wait until modal is visible
     And I follow "Supprimer"
-    Then I should see "a bien été supprimé"
+    Then I should see "a bien été supprimée"

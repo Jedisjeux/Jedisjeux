@@ -7,4 +7,8 @@ app:
     create: Le sujet a bien été créé.
     update: Le sujet a bien été mis à jour.
     delete: Le sujet a bien été supprimé.
-    
+sylius:
+  taxon:
+    create: La catégorie a bien été créée.
+    update: La catégorie a bien été mise à jour.
+    delete: La catégorie a bien été supprimée.
