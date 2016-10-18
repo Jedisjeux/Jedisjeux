@@ -18,6 +18,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -25,6 +26,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class TaxonController extends ResourceController
 {
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
     public function indexByCodeAction(Request $request)
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);

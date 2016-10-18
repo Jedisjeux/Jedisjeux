@@ -12,6 +12,7 @@ use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -19,22 +20,47 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 class TopicRepository extends EntityRepository
 {
     /**
+     * @var AuthorizationChecker
+     */
+    protected $authorizationChecker;
+
+    /**
+     * @param AuthorizationChecker $authorizationChecker
+     */
+    public function setAuthorizationChecker($authorizationChecker)
+    {
+        $this->authorizationChecker = $authorizationChecker;
+    }
+
+    /**
      * @return QueryBuilder
      */
     protected function getQueryBuilder()
     {
-        return $this
+        $queryBuilder = $this
             ->createQueryBuilder('o')
             ->addSelect('user')
             ->addSelect('customer')
             ->addSelect('avatar')
             ->addSelect('article')
             ->addSelect('gamePlay')
+            ->addSelect('mainTaxon')
             ->join('o.author', 'customer')
             ->join('customer.user', 'user')
             ->leftJoin('customer.avatar', 'avatar')
             ->leftJoin('o.article', 'article')
-            ->leftJoin('o.gamePlay', 'gamePlay');
+            ->leftJoin('o.gamePlay', 'gamePlay')
+            ->leftJoin('o.mainTaxon', 'mainTaxon');
+
+        $onlyPublic = $this->authorizationChecker->isGranted('ROLE_STAFF') ? false : true;
+
+        if ($onlyPublic) {
+            $queryBuilder
+                ->andWhere('mainTaxon.id is null or mainTaxon.public = :public')
+                ->setParameter('public', true);
+        }
+
+        return $queryBuilder;
     }
 
     /**
@@ -114,9 +140,8 @@ class TopicRepository extends EntityRepository
      */
     public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = array(), array $sorting = array())
     {
-        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
-            ->innerJoin('o.mainTaxon', 'taxon')
             ->andWhere($queryBuilder->expr()->orX(
                 'taxon = :taxon',
                 ':left < taxon.left AND taxon.right < :right'

@@ -10,6 +10,7 @@ namespace AppBundle\Repository;
 
 use Sylius\Bundle\TaxonomyBundle\Doctrine\ORM\TaxonRepository as BaseTaxonRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -17,13 +18,36 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 class TaxonRepository extends BaseTaxonRepository
 {
     /**
+     * @var AuthorizationChecker
+     */
+    protected $authorizationChecker;
+
+    /**
+     * @param AuthorizationChecker $authorizationChecker
+     */
+    public function setAuthorizationChecker($authorizationChecker)
+    {
+        $this->authorizationChecker = $authorizationChecker;
+    }
+
+    /**
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function getQueryBuilder()
     {
-        return $this->createQueryBuilder('o')
+        $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('translation')
             ->leftJoin('o.translations', 'translation');
+
+        $onlyPublic = $this->authorizationChecker->isGranted('ROLE_STAFF') ? false : true;
+
+        if ($onlyPublic) {
+            $queryBuilder
+                ->andWhere('o.public = :public')
+                ->setParameter('public', true);
+        }
+
+        return $queryBuilder;
     }
 
     /**
@@ -31,10 +55,8 @@ class TaxonRepository extends BaseTaxonRepository
      */
     public function findChildrenAsTree(TaxonInterface $taxon)
     {
-        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
-            ->addSelect('translation')
-            ->leftJoin('o.translations', 'translation')
             ->addSelect('children')
             ->leftJoin('o.children', 'children')
             ->andWhere('o.parent = :parent')
@@ -66,9 +88,7 @@ class TaxonRepository extends BaseTaxonRepository
      */
     public function findOneByNameAndRoot($name, TaxonInterface $root)
     {
-        return $this->createQueryBuilder('o')
-            ->addSelect('translation')
-            ->leftJoin('o.translations', 'translation')
+        return $this->getQueryBuilder()
             ->where('translation.name = :name')
             ->andWhere('o.root = :root')
             ->setParameter('name', $name)
@@ -85,9 +105,7 @@ class TaxonRepository extends BaseTaxonRepository
      */
     public function findOneBySlug($slug)
     {
-        return $this->createQueryBuilder('o')
-            ->addSelect('translation')
-            ->leftJoin('o.translations', 'translation')
+        return $this->getQueryBuilder()
             ->where('translation.slug = :slug')
             ->setParameter('slug', $slug)
             ->getQuery()

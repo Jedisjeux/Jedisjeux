@@ -15,6 +15,9 @@ app_frontend_topic_index:
     defaults:
         _controller: app.controller.topic:indexWithTaxonsAction
         _sylius:
+            repository:
+                method: createFilterPaginator
+                arguments: [$criteria, $sorting]
             paginate: 10
             sortable: true
             sorting:
