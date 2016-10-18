@@ -92,7 +92,7 @@ class SearchController extends Controller
                 $result = array(
                     'value' => $entity->getTitle(),
                     'label' => $entity->getTitle(),
-                    'image' =>  (null === $entity->getCreatedBy()->getCustomer()->getAvatar()) ? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : $this->get('liip_imagine.cache.manager')->getBrowserPath($entity->getCreatedBy()->getCustomer()->getAvatar()->getWebPath(), 'thumbnail'),
+                    'image' =>  (null === $entity->getAuthor()->getAvatar()) ? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : $this->get('liip_imagine.cache.manager')->getBrowserPath($entity->getAuthor()->getAvatar()->getWebPath(), 'thumbnail'),
                     'href' => $entity->getGamePlay() ? $this->generateUrl('app_game_play_show', array(
                             'productSlug' => $entity->getGamePlay()->getProduct()->getSlug(),
                             'id' => $entity->getGamePlay()->getId(),

@@ -14,6 +14,7 @@ namespace AppBundle\Command\Installer\Data;
 use AppBundle\Entity\Topic;
 use AppBundle\Factory\TopicFactory;
 use AppBundle\Repository\TopicRepository;
+use AppBundle\TextFilter\Bbcode2Html;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\User\Model\CustomerInterface;
@@ -82,9 +83,15 @@ class LoadTopicsCommand extends ContainerAwareCommand
         /** @var CustomerInterface $author */
         $author = $this->getCustomerRepository()->find($data['author_id']);
 
+        $bbcode2html = $this->getBbcode2Html();
+        $body = $data['body'];
+        $body = $bbcode2html
+            ->setBody($body)
+            ->getFilteredBody();
+
         $topic
             ->setTitle($data['title'])
-            ->getMainPost()->setBody($data['body'])
+            ->getMainPost()->setBody($body)
             ->setAuthor($author)
             ->setCreatedAt(new \DateTime($data['createdAt']));
 
@@ -111,6 +118,14 @@ from jedisjeux.phpbb3_topics old
 EOM;
 
         return $this->getManager()->getConnection()->fetchAll($query);
+    }
+
+    /**
+     * @return Bbcode2Html
+     */
+    protected function getBbcode2Html()
+    {
+        return $this->getContainer()->get('app.text.filter.bbcode2html');
     }
 
     /**
