@@ -77,5 +77,9 @@ class ServicesPass implements CompilerPassInterface
         $dealerFormTypeDefinition = $container->getDefinition('app.form.type.dealer');
         $dealerFormTypeDefinition
             ->addMethodCall('setManager', [new Reference('app.manager.dealer')]);
+
+        $topicFormTypeDefinition = $container->getDefinition('app.form.type.topic');
+        $topicFormTypeDefinition
+            ->addMethodCall('setCustomerContext', [new Reference('sylius.context.customer')]);
     }
 }
