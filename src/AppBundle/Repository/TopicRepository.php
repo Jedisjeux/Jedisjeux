@@ -56,7 +56,7 @@ class TopicRepository extends EntityRepository
 
         if ($onlyPublic) {
             $queryBuilder
-                ->andWhere('mainTaxon.id is null or mainTaxon.public = :public')
+                ->andWhere('mainTaxon is null or mainTaxon.public = :public')
                 ->setParameter('public', true);
         }
 
@@ -143,8 +143,8 @@ class TopicRepository extends EntityRepository
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
             ->andWhere($queryBuilder->expr()->orX(
-                'taxon = :taxon',
-                ':left < taxon.left AND taxon.right < :right'
+                'mainTaxon = :taxon',
+                ':left < mainTaxon.left AND mainTaxon.right < :right'
             ))
             ->setParameter('taxon', $taxon)
             ->setParameter('left', $taxon->getLeft())

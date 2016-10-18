@@ -36,12 +36,7 @@ class PostController extends ResourceController
         $criteria = $configuration->getCriteria();
         /** @var Topic $topic */
         $topic = $this->get('app.repository.topic')->find($criteria['topic']);
-
-        $onlyPublic = $this->getAuthorizationChecker()->isGranted('ROLE_STAFF') ? false : true;
-
-        if (null !== $topic->getMainTaxon() and !$topic->getMainTaxon()->isPublic() and $onlyPublic) {
-            throw new AccessDeniedException();
-        }
+        $this->topicIsGrantedOr403($topic);
 
         $resources = $this->resourcesCollectionProvider->get($configuration, $this->repository);
 
@@ -63,6 +58,24 @@ class PostController extends ResourceController
         }
 
         return $this->viewHandler->handle($configuration, $view);
+    }
+
+    /**
+     * @param Topic $topic
+     *
+     * @throws AccessDeniedException
+     */
+    protected function topicIsGrantedOr403(Topic $topic)
+    {
+        if (null === $mainTaxon = $topic->getMainTaxon()) {
+            return;
+        }
+
+        $onlyPublic = $this->getAuthorizationChecker()->isGranted('ROLE_STAFF') ? false : true;
+
+        if (!$mainTaxon->isPublic() and $onlyPublic) {
+            throw new AccessDeniedException();
+        }
     }
 
     /**

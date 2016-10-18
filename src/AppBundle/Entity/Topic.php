@@ -36,6 +36,13 @@ class Topic implements ResourceInterface
     /**
      * @var string
      *
+     * @ORM\Column(type="string", nullable=true, unique=true)
+     */
+    protected $code;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(type="string")
      * @JMS\Expose
      */
@@ -108,6 +115,22 @@ class Topic implements ResourceInterface
         $this->posts = new ArrayCollection();
         $this->followers = new ArrayCollection();
         $this->postCount = 0;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param string $code
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
     }
 
     /**

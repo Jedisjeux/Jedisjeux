@@ -105,7 +105,9 @@ class TaxonRepository extends BaseTaxonRepository
      */
     public function findOneBySlug($slug)
     {
-        return $this->getQueryBuilder()
+        return $this->createQueryBuilder('o')
+            ->addSelect('translation')
+            ->leftJoin('o.translations', 'translation')
             ->where('translation.slug = :slug')
             ->setParameter('slug', $slug)
             ->getQuery()
