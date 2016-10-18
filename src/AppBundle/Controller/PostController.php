@@ -9,12 +9,15 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Taxon;
+use AppBundle\Entity\Topic;
 use AppBundle\Repository\TaxonRepository;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Resource\ResourceActions;
 use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -31,7 +34,14 @@ class PostController extends ResourceController
         $rootTaxon = $this->getTaxonRepository()->findOneBy(array('code' => Taxon::CODE_FORUM));
 
         $criteria = $configuration->getCriteria();
+        /** @var Topic $topic */
         $topic = $this->get('app.repository.topic')->find($criteria['topic']);
+
+        $onlyPublic = $this->getAuthorizationChecker()->isGranted('ROLE_STAFF') ? false : true;
+
+        if (null !== $topic->getMainTaxon() and !$topic->getMainTaxon()->isPublic() and $onlyPublic) {
+            throw new AccessDeniedException();
+        }
 
         $resources = $this->resourcesCollectionProvider->get($configuration, $this->repository);
 
@@ -53,6 +63,14 @@ class PostController extends ResourceController
         }
 
         return $this->viewHandler->handle($configuration, $view);
+    }
+
+    /**
+     * @return AuthorizationChecker
+     */
+    protected function getAuthorizationChecker()
+    {
+        return $this->get('security.authorization_checker');
     }
 
     /**
