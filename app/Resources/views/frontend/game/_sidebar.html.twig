@@ -11,7 +11,11 @@
             <h5><i class="{{ rootTaxon.iconClass|default('fa fa-folder') }} color"></i>&nbsp; {{ rootTaxon }}</h5>
             <!-- Widgets Content -->
             <div class="widget-content categories">
-                {{ sidebarList(taxons, 'sylius_product_index_by_taxon', taxon is defined ? taxon : null, 'productCount') }}
+                {% render(url('sylius_partial_taxon_index_by_code', {
+                    'code': rootTaxon.code,
+                    'currentSlug': taxon is defined ? taxon.slug : null,
+                    'template': 'frontend/game/_taxonList.html.twig'
+                })) %}
             </div>
         </div>
     {% endfor %}

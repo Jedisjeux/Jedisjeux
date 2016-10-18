@@ -55,6 +55,7 @@ sylius_taxonomy:
             classes:
                 model: AppBundle\Entity\Taxon
                 repository: AppBundle\Repository\TaxonRepository
+                controller: AppBundle\Controller\TaxonController
                 form:
                     default: AppBundle\Form\Type\TaxonType
             translation:

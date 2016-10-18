@@ -17,6 +17,51 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 class TaxonRepository extends BaseTaxonRepository
 {
     /**
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getQueryBuilder()
+    {
+        return $this->createQueryBuilder('o')
+            ->addSelect('translation')
+            ->leftJoin('o.translations', 'translation');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findChildrenAsTree(TaxonInterface $taxon)
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder
+            ->addSelect('translation')
+            ->leftJoin('o.translations', 'translation')
+            ->addSelect('children')
+            ->leftJoin('o.children', 'children')
+            ->andWhere('o.parent = :parent')
+            ->addOrderBy('o.root')
+            ->addOrderBy('o.left')
+            ->setParameter('parent', $taxon)
+        ;
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findChildrenAsTreeByRootCode($code)
+    {
+        /** @var TaxonInterface|null $root */
+        $root = $this->findOneBy(['code' => $code]);
+
+        if (null === $root) {
+            return [];
+        }
+
+        return $this->findChildrenAsTree($root);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function findOneByNameAndRoot($name, TaxonInterface $root)

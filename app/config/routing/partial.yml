@@ -10,6 +10,9 @@ app_partial_game_play:
 app_partial_topic:
     resource: 'partial/topic.yml'
 
+sylius_partial_taxon:
+    resource: 'partial/taxon.yml'
+
 app_partial_article:
     resource: 'partial/article.yml'
 
