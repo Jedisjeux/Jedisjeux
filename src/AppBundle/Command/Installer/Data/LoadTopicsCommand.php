@@ -17,6 +17,7 @@ use AppBundle\Repository\TopicRepository;
 use AppBundle\TextFilter\Bbcode2Html;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -89,6 +90,9 @@ class LoadTopicsCommand extends ContainerAwareCommand
             ->setBody($body)
             ->getFilteredBody();
 
+        /** @var TaxonInterface $mainTaxon */
+        $mainTaxon = $this->getTaxonRepository()->find($data['taxon_id']);
+
         $mainPost = $topic->getMainPost();
         $mainPost
             ->setBody($body)
@@ -96,6 +100,8 @@ class LoadTopicsCommand extends ContainerAwareCommand
             ->setCreatedAt(new \DateTime($data['createdAt']));
 
         $topic
+            ->setMainTaxon($mainTaxon)
+            ->setMainPost($mainPost)
             ->setCode($code)
             ->setTitle($data['title'])
             ->setAuthor($author)
@@ -110,17 +116,23 @@ class LoadTopicsCommand extends ContainerAwareCommand
     protected function getTopics()
     {
         $query = <<<EOM
-select  old.topic_id as id,
-        old.topic_title as title,
-        customer.id as author_id,
-        FROM_UNIXTIME(old.topic_time) as createdAt,
-        old.topic_first_post_id as mainPost_id,
-        oldMainPost.post_text as body
-from jedisjeux.phpbb3_topics old
-  inner join jedisjeux.phpbb3_posts oldMainPost
-    on oldMainPost.post_id = old.topic_first_post_id
-  inner join sylius_customer customer
-    on customer.code = concat('user-', old.topic_poster)
+SELECT
+  old.topic_id                   AS id,
+  old.topic_title                AS title,
+  customer.id                    AS author_id,
+  FROM_UNIXTIME(old.topic_time)  AS createdAt,
+  old.topic_first_post_id        AS mainPost_id,
+  oldMainPost.post_text          AS body,
+  taxon.id                       AS taxon_id
+FROM jedisjeux.phpbb3_topics old
+  INNER JOIN jedisjeux.phpbb3_posts oldMainPost
+    ON oldMainPost.post_id = old.topic_first_post_id
+  INNER JOIN sylius_customer customer
+    ON customer.code = concat('user-', old.topic_poster)
+  INNER JOIN jedisjeux.phpbb3_forums forum
+    ON forum.forum_id = old.forum_id
+  INNER JOIN Taxon taxon
+    ON taxon.code = concat('forum-', old.forum_id)
 EOM;
 
         return $this->getManager()->getConnection()->fetchAll($query);
@@ -148,6 +160,14 @@ EOM;
     protected function getCustomerRepository()
     {
         return $this->getContainer()->get('sylius.repository.customer');
+    }
+
+    /**
+     * @return EntityRepository
+     */
+    protected function getTaxonRepository()
+    {
+        return $this->getContainer()->get('sylius.repository.taxon');
     }
 
     /**

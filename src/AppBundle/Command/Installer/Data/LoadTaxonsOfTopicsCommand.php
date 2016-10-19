@@ -133,6 +133,7 @@ old.forum_desc as description,
 old.left_id as tree_left,
 old.right_id as tree_right
 from jedisjeux.phpbb3_forums old
+where old.parent_id > 0
 order by old.left_id
 EOM;
 
