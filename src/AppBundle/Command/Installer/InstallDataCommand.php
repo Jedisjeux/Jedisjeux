@@ -52,6 +52,7 @@ EOT
             'app:persons-of-products:load',
             'app:zones-of-persons:load',
             'app:topics:load',
+            'app:posts:load',
             'app:mechanisms:load',
             'app:mechanisms-of-products:load',
             'app:themes:load',
