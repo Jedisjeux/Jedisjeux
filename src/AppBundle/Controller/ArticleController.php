@@ -20,6 +20,7 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -106,8 +107,10 @@ class ArticleController extends ResourceController
         /** @var ArticleRepository $repository */
         $repository = $this->repository;
 
+        $onlyPublic = !$this->getAuthorizationChecker()->isGranted('ROLE_STAFF');
+
         $resources = $repository
-            ->createByTaxonPaginator($taxon, $request->get('criteria', $configuration->getCriteria()), $request->get('sorting', $configuration->getSorting()))
+            ->createByTaxonPaginator($taxon, $request->get('criteria', $configuration->getCriteria()), $request->get('sorting', $configuration->getSorting()), $onlyPublic)
             ->setMaxPerPage($configuration->getPaginationMaxPerPage())
             ->setCurrentPage($request->get('page', 1));
 
@@ -128,6 +131,14 @@ class ArticleController extends ResourceController
         }
 
         return $this->viewHandler->handle($configuration, $view);
+    }
+
+    /**
+     * @return AuthorizationChecker
+     */
+    protected function getAuthorizationChecker()
+    {
+        return $this->get('security.authorization_checker');
     }
 
     /**

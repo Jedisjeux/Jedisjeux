@@ -17,7 +17,7 @@ app_frontend_topic_index:
         _sylius:
             repository:
                 method: createFilterPaginator
-                arguments: [$criteria, $sorting]
+                arguments: [$criteria, $sorting, !expr:service('security.authorization_checker').isGranted('ROLE_STAFF')]
             paginate: 10
             sortable: true
             sorting:

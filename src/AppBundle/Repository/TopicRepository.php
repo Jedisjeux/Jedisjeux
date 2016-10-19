@@ -20,24 +20,11 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 class TopicRepository extends EntityRepository
 {
     /**
-     * @var AuthorizationChecker
-     */
-    protected $authorizationChecker;
-
-    /**
-     * @param AuthorizationChecker $authorizationChecker
-     */
-    public function setAuthorizationChecker($authorizationChecker)
-    {
-        $this->authorizationChecker = $authorizationChecker;
-    }
-
-    /**
      * @return QueryBuilder
      */
     protected function getQueryBuilder()
     {
-        $queryBuilder = $this
+        return $this
             ->createQueryBuilder('o')
             ->addSelect('user')
             ->addSelect('customer')
@@ -51,16 +38,6 @@ class TopicRepository extends EntityRepository
             ->leftJoin('o.article', 'article')
             ->leftJoin('o.gamePlay', 'gamePlay')
             ->leftJoin('o.mainTaxon', 'mainTaxon');
-
-        $onlyPublic = $this->authorizationChecker->isGranted('ROLE_STAFF') ? false : true;
-
-        if ($onlyPublic) {
-            $queryBuilder
-                ->andWhere('mainTaxon is null or mainTaxon.public = :public')
-                ->setParameter('public', true);
-        }
-
-        return $queryBuilder;
     }
 
     /**
@@ -85,12 +62,19 @@ class TopicRepository extends EntityRepository
      *
      * @param array $criteria
      * @param array $sorting
+     * @param bool $onlyPublic
      *
      * @return Pagerfanta
      */
-    public function createFilterPaginator($criteria = array(), $sorting = array())
+    public function createFilterPaginator($criteria = array(), $sorting = array(), $onlyPublic = false)
     {
         $queryBuilder = $this->getQueryBuilder();
+
+        if ($onlyPublic) {
+            $queryBuilder
+                ->andWhere('mainTaxon is null or mainTaxon.public = :public')
+                ->setParameter('public', true);
+        }
 
         if (!empty($criteria['query'])) {
 
@@ -135,12 +119,21 @@ class TopicRepository extends EntityRepository
      *
      * @param TaxonInterface $taxon
      * @param array $criteria
+     * @param array $sorting
+     * @param bool $onlyPublic
      *
      * @return Pagerfanta
      */
-    public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = array(), array $sorting = array())
+    public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = array(), array $sorting = array(), $onlyPublic = false)
     {
         $queryBuilder = $this->getQueryBuilder();
+
+        if ($onlyPublic) {
+            $queryBuilder
+                ->andWhere('mainTaxon is null or mainTaxon.public = :public')
+                ->setParameter('public', true);
+        }
+
         $queryBuilder
             ->andWhere($queryBuilder->expr()->orX(
                 'mainTaxon = :taxon',
