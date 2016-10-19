@@ -89,9 +89,14 @@ class LoadTopicsCommand extends ContainerAwareCommand
             ->setBody($body)
             ->getFilteredBody();
 
+        $mainPost = $topic->getMainPost();
+        $mainPost
+            ->setBody($body)
+            ->setAuthor($author)
+            ->setCreatedAt(new \DateTime($data['createdAt']));
+
         $topic
             ->setTitle($data['title'])
-            ->getMainPost()->setBody($body)
             ->setAuthor($author)
             ->setCreatedAt(new \DateTime($data['createdAt']));
 

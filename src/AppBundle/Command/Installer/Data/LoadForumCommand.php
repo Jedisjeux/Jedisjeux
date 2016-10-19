@@ -48,15 +48,15 @@ class LoadForumCommand extends ContainerAwareCommand
         $output->writeln("<comment>" . $this->getDescription() . "</comment>");
         $this->deletePosts();
         $this->deleteTopics();
-        $this->loadTopics();
-        $this->loadPosts();
-        $this->bbcode2Html();
-        $rootTaxon = $this->getRootTaxon();
-        $this->deleteTaxons($rootTaxon);
-        $this->loadTaxons($rootTaxon);
-        $this->setTopicsMainTaxon();
-        $this->updatePostCountByTopic();
-        $this->calculateTopicCountByTaxon();
+//        $this->loadTopics();
+//        $this->loadPosts();
+//        $this->bbcode2Html();
+//        $rootTaxon = $this->getRootTaxon();
+//        $this->deleteTaxons($rootTaxon);
+//        $this->loadTaxons($rootTaxon);
+//        $this->setTopicsMainTaxon();
+//        $this->updatePostCountByTopic();
+//        $this->calculateTopicCountByTaxon();
     }
 
     /**
