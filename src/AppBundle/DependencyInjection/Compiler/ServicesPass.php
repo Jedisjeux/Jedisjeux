@@ -89,10 +89,6 @@ class ServicesPass implements CompilerPassInterface
      */
     protected function processRepositories(ContainerBuilder $container)
     {
-        $taxonRepositoryDefinition = $container->getDefinition('sylius.repository.taxon');
-        $taxonRepositoryDefinition
-            ->addMethodCall('setAuthorizationChecker', [new Reference('security.authorization_checker')]);
-
         $topicRepositoryDefinition = $container->getDefinition('app.repository.topic');
         $topicRepositoryDefinition
             ->addMethodCall('setAuthorizationChecker', [new Reference('security.authorization_checker')]);

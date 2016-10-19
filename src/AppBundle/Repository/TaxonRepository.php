@@ -11,7 +11,6 @@ namespace AppBundle\Repository;
 use Sylius\Bundle\TaxonomyBundle\Doctrine\ORM\TaxonRepository as BaseTaxonRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
-use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -19,47 +18,19 @@ use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundE
 class TaxonRepository extends BaseTaxonRepository
 {
     /**
-     * @var AuthorizationChecker
-     */
-    protected $authorizationChecker;
-
-    /**
-     * @param AuthorizationChecker $authorizationChecker
-     */
-    public function setAuthorizationChecker($authorizationChecker)
-    {
-        $this->authorizationChecker = $authorizationChecker;
-    }
-
-    /**
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function getQueryBuilder()
     {
-        $queryBuilder = $this->createQueryBuilder('o')
+        return $this->createQueryBuilder('o')
             ->addSelect('translation')
             ->leftJoin('o.translations', 'translation');
-
-        try {
-            $onlyPublic = $this->authorizationChecker->isGranted('ROLE_STAFF') ? false : true;
-        } catch (AuthenticationCredentialsNotFoundException $exception) {
-            // on command, allow private taxon
-            $onlyPublic = false;
-        }
-
-        if ($onlyPublic) {
-            $queryBuilder
-                ->andWhere('o.public = :public')
-                ->setParameter('public', true);
-        }
-
-        return $queryBuilder;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function findChildrenAsTree(TaxonInterface $taxon)
+    public function findChildrenAsTree(TaxonInterface $taxon, $onlyPublic = false)
     {
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
@@ -70,13 +41,19 @@ class TaxonRepository extends BaseTaxonRepository
             ->addOrderBy('o.left')
             ->setParameter('parent', $taxon);
 
+        if ($onlyPublic) {
+            $queryBuilder
+                ->andWhere('o.public = :public')
+                ->setParameter('public', true);
+        }
+
         return $queryBuilder->getQuery()->getResult();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function findChildrenAsTreeByRootCode($code)
+    public function findChildrenAsTreeByRootCode($code, $onlyPublic = false)
     {
         /** @var TaxonInterface|null $root */
         $root = $this->findOneBy(['code' => $code]);
@@ -85,7 +62,7 @@ class TaxonRepository extends BaseTaxonRepository
             return [];
         }
 
-        return $this->findChildrenAsTree($root);
+        return $this->findChildrenAsTree($root, $onlyPublic);
     }
 
     /**
