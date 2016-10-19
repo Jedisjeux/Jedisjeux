@@ -1,7 +1,7 @@
 <?php
 
-/**
- * This file is part of Jedisjeux
+/*
+ * This file is part of jedisjeux.
  *
  * (c) Loïc Frémont
  *
@@ -11,9 +11,10 @@
 
 namespace AppBundle\Command\Installer\Data;
 
+use AppBundle\Entity\Post;
 use AppBundle\Entity\Topic;
-use AppBundle\Factory\TopicFactory;
-use AppBundle\Repository\TopicRepository;
+use AppBundle\Factory\PostFactory;
+use AppBundle\Repository\PostRepository;
 use AppBundle\TextFilter\Bbcode2Html;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
@@ -25,7 +26,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class LoadTopicsCommand extends ContainerAwareCommand
+class LoadPostsCommand extends ContainerAwareCommand
 {
     const BATCH_SIZE = 20;
 
@@ -35,8 +36,8 @@ class LoadTopicsCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('app:topics:load')
-            ->setDescription('Load topics');
+            ->setName('app:posts:load')
+            ->setDescription('Load posts');
     }
 
     /**
@@ -48,9 +49,9 @@ class LoadTopicsCommand extends ContainerAwareCommand
 
         $i = 0;
 
-        foreach ($this->getTopics() as $data) {
-            $output->writeln(sprintf('Load <info>%s</info> topic', $data['title']));
-            $topic = $this->createOrReplaceTopic($data);
+        foreach ($this->getPosts() as $data) {
+            $output->writeln(sprintf('Load a post of <info>%s</info> topic', $data['topic_title']));
+            $topic = $this->createOrReplacePost($data);
             $this->getManager()->persist($topic);
 
             if (($i % self::BATCH_SIZE) === 0) {
@@ -68,17 +69,21 @@ class LoadTopicsCommand extends ContainerAwareCommand
     /**
      * @param array $data
      *
-     * @return Topic
+     * @return Post
      */
-    protected function createOrReplaceTopic(array $data)
+    protected function createOrReplacePost(array $data)
     {
-        $code = 'topic-'.$data['id'];
+        $code = 'post-' . $data['id'];
 
-        $topic = $this->getRepository()->findOneBy(['code' => $code]);
+        /** @var Post $post */
+        $post = $this->getRepository()->findOneBy(['code' => $code]);
 
-        if (null === $topic) {
-            $topic = $this->getFactory()->createNew();
+        if (null === $post) {
+            $post = $this->getFactory()->createNew();
         }
+
+        /** @var Topic $topic */
+        $topic = $this->getTopicRepository()->find($data['topic_id']);
 
         /** @var CustomerInterface $author */
         $author = $this->getCustomerRepository()->find($data['author_id']);
@@ -89,38 +94,34 @@ class LoadTopicsCommand extends ContainerAwareCommand
             ->setBody($body)
             ->getFilteredBody();
 
-        $mainPost = $topic->getMainPost();
-        $mainPost
-            ->setBody($body)
-            ->setAuthor($author)
-            ->setCreatedAt(new \DateTime($data['createdAt']));
-
-        $topic
+        $post
             ->setCode($code)
-            ->setTitle($data['title'])
+            ->setTopic($topic)
             ->setAuthor($author)
+            ->setBody($body)
             ->setCreatedAt(new \DateTime($data['createdAt']));
 
-        return $topic;
+        return $post;
     }
 
     /**
      * @return array
      */
-    protected function getTopics()
+    protected function getPosts()
     {
         $query = <<<EOM
-select  old.topic_id as id,
-        old.topic_title as title,
-        customer.id as author_id,
-        FROM_UNIXTIME(old.topic_time) as createdAt,
-        old.topic_first_post_id as mainPost_id,
-        oldMainPost.post_text as body
-from jedisjeux.phpbb3_topics old
-  inner join jedisjeux.phpbb3_posts oldMainPost
-    on oldMainPost.post_id = old.topic_first_post_id
+select old.post_id as id,
+       old.topic_id as topic_id,
+       customer.id as author_id,
+       old.post_text as body,
+       FROM_UNIXTIME(old.post_time) as createdAt,
+       topic.title as topic_title
+from jedisjeux.phpbb3_posts old
   inner join sylius_customer customer
-    on customer.code = concat('user-', old.topic_poster)
+    on customer.code = concat('user-', old.poster_id)
+  inner join jdj_topic topic
+    on topic.code = concat('topic-', old.topic_id)
+where old.post_id <> topic.mainPost_id
 EOM;
 
         return $this->getManager()->getConnection()->fetchAll($query);
@@ -135,11 +136,11 @@ EOM;
     }
 
     /**
-     * @return TopicFactory
+     * @return PostFactory
      */
     protected function getFactory()
     {
-        return $this->getContainer()->get('app.factory.topic');
+        return $this->getContainer()->get('app.factory.post');
     }
 
     /**
@@ -151,11 +152,19 @@ EOM;
     }
 
     /**
-     * @return TopicRepository
+     * @return EntityRepository
+     */
+    protected function getTopicRepository()
+    {
+        return $this->getContainer()->get('app.repository.topic');
+    }
+
+    /**
+     * @return PostRepository
      */
     protected function getRepository()
     {
-        return $this->getContainer()->get('app.repository.topic');
+        return $this->getContainer()->get('app.repository.post');
     }
 
     /**

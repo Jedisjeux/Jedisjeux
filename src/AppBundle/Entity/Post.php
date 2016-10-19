@@ -30,6 +30,13 @@ class Post implements ResourceInterface
     /**
      * @var string
      *
+     * @ORM\Column(type="string", nullable=true, unique=true)
+     */
+    protected $code;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(type="text")
      * @Assert\NotBlank()
      */
@@ -76,6 +83,26 @@ class Post implements ResourceInterface
     public function __construct()
     {
         $this->replies = new ArrayCollection();
+    }
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param string $code
+     *
+     * @return Post
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
     }
 
     /**
