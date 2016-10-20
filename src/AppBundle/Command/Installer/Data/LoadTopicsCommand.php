@@ -11,10 +11,13 @@
 
 namespace AppBundle\Command\Installer\Data;
 
+use AppBundle\Entity\Taxon;
 use AppBundle\Entity\Topic;
 use AppBundle\Factory\TopicFactory;
+use AppBundle\Repository\TaxonRepository;
 use AppBundle\Repository\TopicRepository;
 use AppBundle\TextFilter\Bbcode2Html;
+use AppBundle\Updater\TopicCountByTaxonUpdater;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
@@ -64,6 +67,8 @@ class LoadTopicsCommand extends ContainerAwareCommand
 
         $this->getManager()->flush();
         $this->getManager()->clear();
+
+        $this->calculateTopicCountByTaxon();
     }
 
     /**
@@ -138,6 +143,26 @@ EOM;
         return $this->getManager()->getConnection()->fetchAll($query);
     }
 
+    public function calculateTopicCountByTaxon()
+    {
+        $taxons = $this->getTaxonRepository()->findChildrenByRootCode(Taxon::CODE_FORUM);
+
+        foreach ($taxons as $taxon) {
+            $this->getTopicCountByTaxonUpdater()->update($taxon);
+            $this->getManager()->flush();
+        }
+
+        $this->getManager()->clear();
+    }
+
+    /**
+     * @return TopicCountByTaxonUpdater
+     */
+    protected function getTopicCountByTaxonUpdater()
+    {
+        return $this->getContainer()->get('app.updater.topic_count_by_taxon');
+    }
+
     /**
      * @return Bbcode2Html
      */
@@ -163,7 +188,7 @@ EOM;
     }
 
     /**
-     * @return EntityRepository
+     * @return TaxonRepository
      */
     protected function getTaxonRepository()
     {

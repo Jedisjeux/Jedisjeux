@@ -85,7 +85,7 @@ class TopicController extends ResourceController
         $repository = $this->repository;
 
         $resources = $repository
-            ->createByTaxonPaginator($taxon, $request->get('sorting', $configuration->getSorting()))
+            ->createByTaxonPaginator($taxon, $request->get('criteria', $configuration->getCriteria()), $request->get('sorting', $configuration->getSorting()))
             ->setMaxPerPage($configuration->getPaginationMaxPerPage())
             ->setCurrentPage($request->get('page', 1));
 
