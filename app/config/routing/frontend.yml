@@ -9,7 +9,6 @@ app_contact_request:
 
 app_forum:
     resource: "frontend/forum.yml"
-    prefix: /forum
 
 app_game_play:
     resource: "frontend/game_play.yml"

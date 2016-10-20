@@ -64,7 +64,7 @@ class TopicController extends ResourceController
      * @param $permalink
      * @return Response
      */
-    public function indexByTaxonSlugAction(Request $request, $permalink)
+    public function indexByTaxonAction(Request $request, $permalink)
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
@@ -73,10 +73,10 @@ class TopicController extends ResourceController
         /** @var TaxonInterface $rootTaxon */
         $rootTaxon = $this->getTaxonRepository()->findOneBy(array('code' => Taxon::CODE_FORUM));
         /** @var TaxonInterface $taxon */
-        $taxon = $this->getTaxonRepository()->findOneBySlug($permalink);
+        $taxon = $this->getTaxonRepository()->findOneByPermalink($permalink);
 
         if (!isset($taxon)) {
-            throw new NotFoundHttpException('Requested taxon does not exist.');
+            throw new NotFoundHttpException('Requested taxon does not exist.'.$permalink);
         }
 
         $this->taxonIsGrantedOr403($taxon);

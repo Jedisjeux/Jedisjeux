@@ -1,9 +1,3 @@
-{% for thisTaxon in taxons %}
-    {% set currentTaxon = taxon is defined and thisTaxon == taxon ? true : false %}
-    <li>
-        <a href="{{ path('app_frontend_topic_index_by_taxon', { 'permalink': thisTaxon.slug }) }}">
-            {% if currentTaxon %}<strong>{% endif %}{{ thisTaxon }}{% if currentTaxon %}</strong>{% endif %}
-            <span class="color">({{ thisTaxon.topicCount }})</span>
-        </a>
-    </li>
-{% endfor %}
+{% from 'macros/taxons.html.twig' import sidebarList %}
+
+{{ sidebarList(taxons, 'app_frontend_topic_index_by_taxon', current, 'topicCount') }}
