@@ -1,5 +1,4 @@
 imports:
-    - { resource: analytics.yml }
     - { resource: sylius.yml }
     - { resource: emails.yml }
     - { resource: elastica.yml }

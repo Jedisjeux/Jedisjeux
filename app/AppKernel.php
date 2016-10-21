@@ -69,8 +69,6 @@ class AppKernel extends Kernel
             new Bmatzner\JQueryUIBundle\BmatznerJQueryUIBundle(),
             new Bmatzner\JQueryBundle\BmatznerJQueryBundle(),
             new Bmatzner\FontAwesomeBundle\BmatznerFontAwesomeBundle(),
-            new Widop\GoogleAnalyticsBundle\WidopGoogleAnalyticsBundle(),
-            new Widop\HttpAdapterBundle\WidopHttpAdapterBundle(),
 
             new AppBundle\AppBundle(),
         );
