@@ -95,6 +95,7 @@ class TopicFactory extends Factory
 
         /** @var Topic $topic */
         $topic = $this->createNew();
+        $topic->setMainPost(null); // topic for game play has no main post
 
         $gamePlay
             ->setTopic($topic);

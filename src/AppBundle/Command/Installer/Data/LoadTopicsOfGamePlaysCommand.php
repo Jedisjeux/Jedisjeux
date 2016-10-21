@@ -62,9 +62,6 @@ class LoadTopicsOfGamePlaysCommand extends ContainerAwareCommand
                 }
 
                 $topic = $this->getTopicFactory()->createForGamePlay($data['game_play_id']);
-                if (null === $topic->getMainPost()->getBody()) {
-                    $topic->getMainPost()->setBody('');
-                }
                 $topic->setCreatedAt(\DateTime::createFromFormat('Y-m-d H:i:s', $data['createdAt']));
             }
 
