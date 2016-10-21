@@ -7,6 +7,6 @@ sylius_partial_taxon_index_by_code:
             template: $template
             repository:
                 method: findChildrenAsTreeByRootCode
-                arguments: [$code, !expr:service('security.authorization_checker').isGranted('ROLE_STAFF')]
+                arguments: [$code, expr:service('security.authorization_checker').isGranted('ROLE_STAFF')]
     requirements:
         template: "[^?]+"

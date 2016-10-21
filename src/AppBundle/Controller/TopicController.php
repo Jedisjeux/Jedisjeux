@@ -72,7 +72,7 @@ class TopicController extends ResourceController
 
         /** @var TaxonInterface $rootTaxon */
         $rootTaxon = $this->getTaxonRepository()->findOneBy(array('code' => Taxon::CODE_FORUM));
-        /** @var TaxonInterface $taxon */
+        /** @var Taxon $taxon */
         $taxon = $this->getTaxonRepository()->findOneByPermalink($permalink);
 
         if (!isset($taxon)) {

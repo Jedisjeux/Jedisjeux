@@ -30,7 +30,7 @@ class TaxonRepository extends BaseTaxonRepository
     /**
      * {@inheritdoc}
      */
-    public function findChildrenAsTree(TaxonInterface $taxon, $onlyPublic = false)
+    public function findChildrenAsTree(TaxonInterface $taxon, $showPrivate = true)
     {
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
@@ -41,7 +41,7 @@ class TaxonRepository extends BaseTaxonRepository
             ->addOrderBy('o.left')
             ->setParameter('parent', $taxon);
 
-        if ($onlyPublic) {
+        if (!$showPrivate) {
             $queryBuilder
                 ->andWhere('o.public = :public')
                 ->setParameter('public', true);
@@ -53,7 +53,7 @@ class TaxonRepository extends BaseTaxonRepository
     /**
      * {@inheritdoc}
      */
-    public function findChildrenAsTreeByRootCode($code, $onlyPublic = false)
+    public function findChildrenAsTreeByRootCode($code, $showPrivate = true)
     {
         /** @var TaxonInterface|null $root */
         $root = $this->findOneBy(['code' => $code]);
@@ -62,7 +62,7 @@ class TaxonRepository extends BaseTaxonRepository
             return [];
         }
 
-        return $this->findChildrenAsTree($root, $onlyPublic);
+        return $this->findChildrenAsTree($root, $showPrivate);
     }
 
     /**
