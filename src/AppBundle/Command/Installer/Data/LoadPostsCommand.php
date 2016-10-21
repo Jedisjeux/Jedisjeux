@@ -120,11 +120,13 @@ SELECT
   FROM_UNIXTIME(old.post_time) AS createdAt,
   topic.title                  AS topic_title
 FROM jedisjeux.phpbb3_posts old
+  INNER JOIN jedisjeux.phpbb3_topics oldTopic
+    ON oldTopic.topic_id = old.topic_id
   INNER JOIN sylius_customer customer
     ON customer.code = concat('user-', old.poster_id)
   INNER JOIN jdj_topic topic
     ON topic.code = concat('topic-', old.topic_id)
-WHERE old.post_id <> topic.mainPost_id
+WHERE old.post_id <> oldTopic.topic_first_post_id
 EOM;
 
         return $this->getManager()->getConnection()->fetchAll($query);
