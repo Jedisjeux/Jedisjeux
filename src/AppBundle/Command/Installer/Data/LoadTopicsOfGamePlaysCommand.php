@@ -62,6 +62,9 @@ class LoadTopicsOfGamePlaysCommand extends ContainerAwareCommand
                 }
 
                 $topic = $this->getTopicFactory()->createForGamePlay($data['game_play_id']);
+                if (null === $topic->getMainPost()->getBody()) {
+                    $topic->getMainPost()->setBody('');
+                }
                 $topic->setCreatedAt(\DateTime::createFromFormat('Y-m-d H:i:s', $data['createdAt']));
             }
 
@@ -74,6 +77,10 @@ class LoadTopicsOfGamePlaysCommand extends ContainerAwareCommand
             /** @var CustomerInterface $customer */
             $customer = $this->getCustomerRepository()->find($data['customer_id']);
 
+
+            if (empty($data['comment'])) {
+
+            }
             $post
                 ->setAuthor($customer)
                 ->setCreatedAt(\DateTime::createFromFormat('Y-m-d H:i:s', $data['createdAt']))
