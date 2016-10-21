@@ -74,14 +74,16 @@ class LoadTopicsOfGamePlaysCommand extends ContainerAwareCommand
             /** @var CustomerInterface $customer */
             $customer = $this->getCustomerRepository()->find($data['customer_id']);
 
+            $bbcode2html = $this->getBbcode2Html();
+            $body = $data['comment'];
+            $body = $bbcode2html
+                ->setBody($body)
+                ->getFilteredBody();
 
-            if (empty($data['comment'])) {
-
-            }
             $post
                 ->setAuthor($customer)
                 ->setCreatedAt(\DateTime::createFromFormat('Y-m-d H:i:s', $data['createdAt']))
-                ->setBody($data['comment']);
+                ->setBody($body);
 
             $gamePlayId = $data['game_play_id'];
         }
