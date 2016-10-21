@@ -64,6 +64,8 @@ class LoadPostsCommand extends ContainerAwareCommand
 
         $this->getManager()->flush();
         $this->getManager()->clear();
+
+        $this->calculatePostCountByTopics();
     }
 
     /**
@@ -110,21 +112,39 @@ class LoadPostsCommand extends ContainerAwareCommand
     protected function getPosts()
     {
         $query = <<<EOM
-select old.post_id as id,
-       old.topic_id as topic_id,
-       customer.id as author_id,
-       old.post_text as body,
-       FROM_UNIXTIME(old.post_time) as createdAt,
-       topic.title as topic_title
-from jedisjeux.phpbb3_posts old
-  inner join sylius_customer customer
-    on customer.code = concat('user-', old.poster_id)
-  inner join jdj_topic topic
-    on topic.code = concat('topic-', old.topic_id)
-where old.post_id <> topic.mainPost_id
+SELECT
+  old.post_id                  AS id,
+  topic.id                     AS topic_id,
+  customer.id                  AS author_id,
+  old.post_text                AS body,
+  FROM_UNIXTIME(old.post_time) AS createdAt,
+  topic.title                  AS topic_title
+FROM jedisjeux.phpbb3_posts old
+  INNER JOIN sylius_customer customer
+    ON customer.code = concat('user-', old.poster_id)
+  INNER JOIN jdj_topic topic
+    ON topic.code = concat('topic-', old.topic_id)
+WHERE old.post_id <> topic.mainPost_id
 EOM;
 
         return $this->getManager()->getConnection()->fetchAll($query);
+    }
+
+    protected function calculatePostCountByTopics()
+    {
+        $this->getManager()->getConnection()->executeQuery(<<<EOF
+update jdj_topic topic
+  inner join
+(
+  SELECT
+    topic_id,
+    count(0) AS post_count
+  FROM jdj_post post
+  GROUP BY post.topic_id
+) as a on a.topic_id = topic.id
+    set topic.postCount = post_count;
+EOF
+);
     }
 
     /**
