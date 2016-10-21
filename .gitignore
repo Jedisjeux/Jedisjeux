@@ -11,7 +11,7 @@
 /app/config/parameters.yml
 /app/config/*.local.yml
 
-/app/Resources/bin/
+/app/Resources/credentials/
 
 /build/
 /vendor/

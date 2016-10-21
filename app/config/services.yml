@@ -191,3 +191,11 @@ services:
     # <!-- Security -->
     app.security.api_entry_point:
         class: AppBundle\Security\Authentication\EntryPoint\ApiEntryPoint
+
+    # <!-- Google Analytics -->
+    app.google_analytics.client:
+        class: Google_Client
+        calls:
+            - [ setApplicationName, ['Jedisjeux'] ]
+            - [ setAuthConfig, ['%google.analytics.private_key_file%'] ]
+            - [ addScope, ['https://www.googleapis.com/auth/analytics.readonly'] ]
