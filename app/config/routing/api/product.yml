@@ -16,3 +16,11 @@ sylius_api_product_show:
                 arguments:
                     - $id
             serialization_groups: [Details]
+
+sylius_api_product_view_count_update:
+    methods: [PUT, PATCH]
+    path: /products/{id}/view-count
+    defaults:
+        _controller: sylius.controller.product:updateAction
+        _sylius:
+            form: sylius.form.type.product_view_count

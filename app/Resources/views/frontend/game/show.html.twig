@@ -47,4 +47,6 @@
         {% include "JDJJeuBundle:Jeu:partial/onglet.html.twig" with {'jeu': jeu, 'userReviews': userReviews} %}
         {% render url('jeu_if_you_like_this_game', { 'id': jeu.id }) %}#}
 
+    <div id="page-views" data-object="product" data-id="{{ product.id }}" data-page-path="{{ path('sylius_product_show', {'slug' : product.slug}) }}"></div>
+
 {% endblock container %}
