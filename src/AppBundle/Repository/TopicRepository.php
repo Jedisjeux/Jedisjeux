@@ -59,15 +59,15 @@ class TopicRepository extends EntityRepository
      *
      * @param array $criteria
      * @param array $sorting
-     * @param bool $onlyPublic
+     * @param bool $showPrivate
      *
      * @return Pagerfanta
      */
-    public function createFilterPaginator($criteria = array(), $sorting = array(), $onlyPublic = false)
+    public function createFilterPaginator($criteria = array(), $sorting = array(), $showPrivate = true)
     {
         $queryBuilder = $this->getQueryBuilder();
 
-        if ($onlyPublic) {
+        if (!$showPrivate) {
             $queryBuilder
                 ->andWhere('mainTaxon is null or mainTaxon.public = :public')
                 ->setParameter('public', true);
@@ -117,15 +117,15 @@ class TopicRepository extends EntityRepository
      * @param TaxonInterface $taxon
      * @param array $criteria
      * @param array $sorting
-     * @param bool $onlyPublic
+     * @param bool $showPrivate
      *
      * @return Pagerfanta
      */
-    public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = array(), array $sorting = array(), $onlyPublic = false)
+    public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = array(), array $sorting = array(), $showPrivate = true)
     {
         $queryBuilder = $this->getQueryBuilder();
 
-        if ($onlyPublic) {
+        if (!$showPrivate) {
             $queryBuilder
                 ->andWhere('mainTaxon is null or mainTaxon.public = :public')
                 ->setParameter('public', true);

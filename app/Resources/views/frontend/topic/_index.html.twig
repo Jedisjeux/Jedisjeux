@@ -36,7 +36,12 @@
                     </a>
                 </div>
                 <h5 class="media-heading">
-                    <a href="{{ linkUrl }}">{{ topic.title }}</a> &nbsp; <small><a href="#">{{ topic.mainTaxon }}</a></small>
+                    <a href="{{ linkUrl }}">{{ topic.title }}</a> &nbsp;
+                    {% if topic.mainTaxon %}
+                        <small>
+                            <a href="{{ path('app_frontend_topic_index_by_taxon', {'permalink': topic.mainTaxon.permalink}) }}">{{ topic.mainTaxon }}</a>
+                        </small>
+                    {% endif %}
                 </h5>
                 {{ meta|raw }}
             </div>
