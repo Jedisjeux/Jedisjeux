@@ -23,4 +23,4 @@ sylius_api_product_view_count_update:
     defaults:
         _controller: sylius.controller.product:updateAction
         _sylius:
-            form: sylius.form.type.product_view_count
+            form: sylius_product_view_count

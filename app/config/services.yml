@@ -149,7 +149,7 @@ services:
         class: AppBundle\Form\Type\ProductViewCountType
         arguments:
             - %sylius.model.product.class%
-            - ['sylius']
+            - []
         tags:
           - { name: form.type, alias: sylius_product_view_count }
 
