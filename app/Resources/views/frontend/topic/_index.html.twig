@@ -12,7 +12,8 @@
     {% set meta %}
         <!-- Date -->
         <a href="#"><i class="fa fa-calendar"></i>
-            &nbsp; {{ topic.createdAt|localizeddate('medium', 'none') }}</a>
+            &nbsp; {{ topic.createdAt|localizeddate('medium', 'none') }}
+        </a>
         &nbsp;
         <!-- Author -->
         <a href="#"><i class="fa fa-user"></i> &nbsp; {{ user }}</a>
@@ -23,24 +24,24 @@
     {% endset %}
 
     <div class="blog-author well">
-        <!-- Author image -->
-        <div class="blog-author-img">
-            {{ image(imagePath, 'thumbnail', user.username, 'img-responsive img-round', linkUrl) }}
-        </div>
-        <!-- Author details -->
-        <div class="blog-author-content">
-            <div class="pull-right hidden-xs">
-                <a href="{{ linkUrl }}" class="btn btn-color">
-                    <span class="fa fa-arrow-circle-o-right"></span>
-                    Lire le sujet
-                </a>
+        <div class="media">
+            <div class="media-left">
+                {{ image(imagePath, 'thumbnail', user.username, 'img-round media-object', linkUrl) }}
             </div>
-            <h5>
-                <a href="{{ linkUrl }}">{{ topic.title }}</a> &nbsp; <small><a href="#">{{ topic.mainTaxon }}</a></small>
-            </h5>
-            {{ meta|raw }}
+            <div class="media-body">
+                <div class="pull-right hidden-xs">
+                    <a href="{{ linkUrl }}" class="btn btn-color">
+                        <span class="fa fa-arrow-circle-o-right"></span>
+                        Lire le sujet
+                    </a>
+                </div>
+                <h5 class="media-heading">
+                    <a href="{{ linkUrl }}">{{ topic.title }}</a> &nbsp; <small><a href="#">{{ topic.mainTaxon }}</a></small>
+                </h5>
+                {{ meta|raw }}
+            </div>
+            <div class="clearfix"></div>
         </div>
-        <div class="clearfix"></div>
     </div>
 {% else %}
     {{ no_data('Aucun topic') }}
