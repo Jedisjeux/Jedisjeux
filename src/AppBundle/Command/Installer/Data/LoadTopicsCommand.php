@@ -69,6 +69,7 @@ class LoadTopicsCommand extends ContainerAwareCommand
         $this->getManager()->clear();
 
         $this->calculateTopicCountByTaxon();
+        $this->updateFollowers();
     }
 
     /**
@@ -153,6 +154,26 @@ EOM;
         }
 
         $this->getManager()->clear();
+    }
+
+    protected function updateFollowers()
+    {
+        $this->getManager()->getConnection()->executeQuery(<<<EOF
+TRUNCATE table jdj_topic_follower
+EOF
+        );
+
+        $this->getManager()->getConnection()->executeQuery(<<<EOF
+INSERT INTO jdj_topic_follower(topic_id, customerinterface_id)
+SELECT topic.id as topic_id, customer.id as customer_id
+FROM jedisjeux.phpbb3_topics_watch topicWatch
+  INNER JOIN jdj_topic topic
+    ON topic.code = concat('topic-', topicWatch.topic_id)
+  INNER JOIN sylius_customer customer
+    ON customer.code = concat('user-', topicWatch.user_id)
+WHERE topicWatch.notify_status = 1
+EOF
+);
     }
 
     /**
