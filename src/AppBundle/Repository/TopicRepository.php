@@ -45,12 +45,9 @@ class TopicRepository extends EntityRepository
      */
     protected function applySorting(QueryBuilder $queryBuilder, array $sorting = [])
     {
-        // TODO verify if used and remove
         if (isset($sorting['postCount'])) {
-
             $queryBuilder
-                ->addSelect("SIZE(" . $this->getPropertyName('posts') . " as HIDDEN postCount")
-                ->addOrderBy('postCount', $sorting['postCount']);
+                ->addOrderBy('o.postCount', $sorting['postCount']);
             unset($sorting['postCount']);
         }
 

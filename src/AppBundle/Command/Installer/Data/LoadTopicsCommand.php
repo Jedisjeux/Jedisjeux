@@ -69,6 +69,7 @@ class LoadTopicsCommand extends ContainerAwareCommand
         $this->getManager()->clear();
 
         $this->calculateTopicCountByTaxon();
+        $this->updatePostCountByTopic();
         $this->updateFollowers();
     }
 
@@ -154,6 +155,23 @@ EOM;
         }
 
         $this->getManager()->clear();
+    }
+
+    protected function updatePostCountByTopic()
+    {
+        $this->getManager()->getConnection()->executeQuery(<<<EOM
+update jdj_topic topic
+    inner join jdj_post post
+    on post.topic_id = topic.id
+set topic.postCount = (
+    select count(0)
+  from jdj_post a
+    where a.topic_id = topic.id
+  group by a.topic_id
+)
+EOM
+        );
+
     }
 
     protected function updateFollowers()

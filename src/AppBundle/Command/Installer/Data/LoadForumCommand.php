@@ -55,7 +55,7 @@ class LoadForumCommand extends ContainerAwareCommand
         $this->deleteTaxons($rootTaxon);
 //        $this->loadTaxons($rootTaxon);
 //        $this->setTopicsMainTaxon();
-//        $this->updatePostCountByTopic();
+        $this->updatePostCountByTopic();
 //        $this->calculateTopicCountByTaxon();
     }
 

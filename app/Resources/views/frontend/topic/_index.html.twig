@@ -12,15 +12,14 @@
     {% set meta %}
         <!-- Date -->
         <a href="#"><i class="fa fa-calendar"></i>
-            &nbsp; {{ topic.createdAt|localizeddate('long', 'none') }}</a>
+            &nbsp; {{ topic.createdAt|localizeddate('medium', 'none') }}</a>
         &nbsp;
         <!-- Author -->
         <a href="#"><i class="fa fa-user"></i> &nbsp; {{ user }}</a>
         &nbsp;
         <!-- Comments -->
         {% set commentCount = topic.posts|length %}
-        <a href="#"><i class="fa fa-comments"></i> &nbsp; {{ commentCount }} <span
-                    class="hidden-xs">Commentaire{% if commentCount > 1 %}s{% endif %}</span></a> &nbsp;
+        <a href="#"><i class="fa fa-comments"></i> &nbsp; {{ commentCount }}</a> &nbsp;
     {% endset %}
 
     <div class="blog-author well">
@@ -36,7 +35,9 @@
                     Lire le sujet
                 </a>
             </div>
-            <h5><a href="{{ linkUrl }}">{{ topic.title }}</a></h5>
+            <h5>
+                <a href="{{ linkUrl }}">{{ topic.title }}</a> &nbsp; <small><a href="#">{{ topic.mainTaxon }}</a></small>
+            </h5>
             {{ meta|raw }}
         </div>
         <div class="clearfix"></div>
