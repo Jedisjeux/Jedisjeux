@@ -3,11 +3,9 @@ $(function () {
 
   $(document).ready(function () {
 
-    var $pageViews = $("#page-views")
-
+    var $pageViews = $("#page-views");
 
     if ($pageViews.length > 0) {
-
       var pagePath = $pageViews.data('page-path');
 
       $.ajax({
@@ -15,13 +13,8 @@ $(function () {
         url: Routing.generate('app_api_page_views_show', {'pagePath': pagePath}),
         success: function (results) {
           updatePageViews(results.view_count);
-
-        },
-        error: function (xhr, textStatus, errorThrown) {
-
         }
       });
-
     }
 
     function updatePageViews(viewCount) {
@@ -30,6 +23,8 @@ $(function () {
 
       if ('product' === $pageViews.data('object')) {
         updatePath = 'sylius_api_product_view_count_update';
+      } else if ('article' === $pageViews.data('object')) {
+        updatePath = 'app_api_article_view_count_update';
       }
 
       if (updatePath) {
@@ -41,8 +36,6 @@ $(function () {
           }
         });
       }
-
     }
-
   });
 });

@@ -48,7 +48,7 @@ class PageViewsService
         $results = $this->getResults($analytics, $this->profileId, $pagePath);
 
         if ($results->totalResults === 0) {
-            return null;
+            return 0;
         }
 
         return (int)$results->rows[0][1];
@@ -73,6 +73,26 @@ class PageViewsService
             [
                 'dimensions' => 'ga:pagePath',
                 'filters' => 'ga:pagePath==' . $pagePath,
+            ]);
+    }
+
+    /**
+     * @param \Google_Service_Analytics $analytics
+     * @param $profileId
+     * @param $pagePath
+     *
+     * @return \Google_Service_Analytics_RealtimeData
+     */
+    protected function getRealtimeResults(\Google_Service_Analytics $analytics, $profileId, $pagePath)
+    {
+        // Calls the Core Reporting API and queries for the number of sessions
+        // for the last seven days.
+        return $analytics->data_realtime->get(
+            'ga:' . $profileId,
+            'rt:pageviews',
+            [
+                'dimensions' => 'rt:pagePath',
+                'filters' => 'rt:pagePath==' . $pagePath,
             ]);
     }
 }

@@ -3,6 +3,7 @@
 {% from 'macros/posts.html.twig' import blogCommentItem as postComment %}
 {% import 'macros/items.html.twig' as item %}
 {% from 'macros/game_reviews.html.twig' import blogCommentItem as reviewComment %}
+{% import 'macros/pageViews.html.twig' as pageViews %}
 
 {% set topic = article.topic %}
 
@@ -66,6 +67,8 @@
                 {% endfor %}
             </div>
         {% endif %}
+
+        {{ pageViews.render(article.id, 'article', path('app_frontend_article_show', {'name' : article.name})) }}
 
     </div>
     <div class="col-md-4">

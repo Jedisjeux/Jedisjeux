@@ -116,6 +116,7 @@ sylius_resource:
                 controller: AppBundle\Controller\ArticleController
                 form:
                     default: AppBundle\Form\Type\ArticleType
+                    view_count: AppBundle\Form\Type\ArticleViewCountType
         app.article_review:
             classes:
                 model: AppBundle\Entity\ArticleReview
