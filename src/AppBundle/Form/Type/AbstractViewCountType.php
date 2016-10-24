@@ -1,7 +1,7 @@
 <?php
 
-/*
- * This file is part of jedisjeux.
+/**
+ * This file is part of Jedisjeux
  *
  * (c) Loïc Frémont
  *
@@ -18,13 +18,15 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class ProductViewCountType extends AbstractViewCountType
+abstract class AbstractViewCountType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        return 'sylius_product_view_count';
+        parent::buildForm($builder, $options);
+
+        $builder->add('viewCount', IntegerType::class);
     }
 }

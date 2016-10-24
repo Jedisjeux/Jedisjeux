@@ -40,7 +40,8 @@ class PageViewsService
 
     /**
      * @param $pagePath
-     * @return mixed
+     *
+     * @return int
      */
     public function get($pagePath)
     {
@@ -56,8 +57,8 @@ class PageViewsService
 
     /**
      * @param \Google_Service_Analytics $analytics
-     * @param $profileId
-     * @param $pagePath
+     * @param string $profileId
+     * @param string $pagePath
      *
      * @return \Google_Service_Analytics_GaData
      */
@@ -69,7 +70,7 @@ class PageViewsService
             'ga:' . $profileId,
             '2005-01-01',
             'today',
-            'ga:pageViews',
+            'ga:uniquePageviews',
             [
                 'dimensions' => 'ga:pagePath',
                 'filters' => 'ga:pagePath==' . $pagePath,
@@ -78,8 +79,8 @@ class PageViewsService
 
     /**
      * @param \Google_Service_Analytics $analytics
-     * @param $profileId
-     * @param $pagePath
+     * @param string $profileId
+     * @param string $pagePath
      *
      * @return \Google_Service_Analytics_RealtimeData
      */

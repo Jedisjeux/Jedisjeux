@@ -18,18 +18,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class ArticleViewCountType extends AbstractResourceType
+class ArticleViewCountType extends AbstractViewCountType
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        parent::buildForm($builder, $options);
-
-        $builder->add('viewCount', IntegerType::class);
-    }
-
     /**
      * {@inheritdoc}
      */

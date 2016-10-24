@@ -79,6 +79,13 @@ class Topic implements ResourceInterface
     protected $postCount;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     */
+    protected $viewCount = 0;
+
+    /**
      * @var Taxon
      *
      * @ORM\ManyToOne(targetEntity="Sylius\Component\Taxonomy\Model\TaxonInterface")
@@ -173,6 +180,26 @@ class Topic implements ResourceInterface
     public function setPostCount($postCount)
     {
         $this->postCount = $postCount;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getViewCount()
+    {
+        return $this->viewCount;
+    }
+
+    /**
+     * @param int $viewCount
+     *
+     * @return $this
+     */
+    public function setViewCount($viewCount)
+    {
+        $this->viewCount = $viewCount;
 
         return $this;
     }

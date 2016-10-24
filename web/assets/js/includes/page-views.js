@@ -20,11 +20,14 @@ $(function () {
     function updatePageViews(viewCount) {
 
       var updatePath = null;
+      var object = $pageViews.data('object');
 
-      if ('product' === $pageViews.data('object')) {
+      if ('product' === object) {
         updatePath = 'sylius_api_product_view_count_update';
-      } else if ('article' === $pageViews.data('object')) {
+      } else if ('article' === object) {
         updatePath = 'app_api_article_view_count_update';
+      } else if ('topic' === object) {
+        updatePath = 'app_api_topic_view_count_update';
       }
 
       if (updatePath) {

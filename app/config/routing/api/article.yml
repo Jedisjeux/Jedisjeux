@@ -1,3 +1,11 @@
+app_api_article_view_count_update:
+    methods: [PUT, PATCH]
+    path: /articles/{id}/view-count
+    defaults:
+        _controller: app.controller.article:updateAction
+        _sylius:
+            form: app_article_view_count
+
 app_api_article_create:
     methods: [POST]
     path: /articles/
@@ -7,11 +15,3 @@ app_api_article_create:
             factory:
                 #TODO createWithFakeData
                 method: createNew
-
-app_api_article_view_count_update:
-    methods: [PUT, PATCH]
-    path: /articles/view-count/{id}
-    defaults:
-        _controller: app.controller.article:updateAction
-        _sylius:
-            form: app_article_view_count

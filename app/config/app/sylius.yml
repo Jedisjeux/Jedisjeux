@@ -244,6 +244,7 @@ sylius_resource:
                 repository: AppBundle\Repository\TopicRepository
                 form:
                     default: AppBundle\Form\Type\TopicType
+                    view_count: AppBundle\Form\Type\TopicViewCountType
         app.topic_follower:
             classes:
                 model: AppBundle\Entity\TopicFollower

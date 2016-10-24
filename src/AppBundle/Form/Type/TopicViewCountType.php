@@ -1,7 +1,7 @@
 <?php
 
-/*
- * This file is part of jedisjeux.
+/**
+ * This file is part of Jedisjeux
  *
  * (c) Loïc Frémont
  *
@@ -11,20 +11,16 @@
 
 namespace AppBundle\Form\Type;
 
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\FormBuilderInterface;
-
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class ProductViewCountType extends AbstractViewCountType
+class TopicViewCountType extends AbstractViewCountType
 {
     /**
      * {@inheritdoc}
      */
     public function getName()
     {
-        return 'sylius_product_view_count';
+        return 'app_topic_view_count';
     }
 }
