@@ -10,17 +10,20 @@
     {% set linkUrl = getPath(topic) %}
 
     {% set meta %}
-        <!-- Date -->
-        <a href="#"><i class="fa fa-calendar"></i>
-            &nbsp; {{ topic.createdAt|localizeddate('medium', 'none') }}
-        </a>
-        &nbsp;
-        <!-- Author -->
-        <a href="#"><i class="fa fa-user"></i> &nbsp; {{ user }}</a>
-        &nbsp;
-        <!-- Comments -->
-        {% set commentCount = topic.posts|length %}
-        <a href="#"><i class="fa fa-comments"></i> &nbsp; {{ commentCount }}</a> &nbsp;
+        <div class="magazine-meta">
+            <small>
+                <!-- Date -->
+                <i class="fa fa-calendar"></i>
+                &nbsp; {{ topic.createdAt|localizeddate('medium', 'none') }}
+                &nbsp;
+                <!-- Author -->
+                <i class="fa fa-user"></i> &nbsp; {{ user }}
+                &nbsp;
+                <!-- Comments -->
+                {% set commentCount = topic.posts|length %}
+                <i class="fa fa-comments"></i> &nbsp; {{ commentCount }} &nbsp;
+            </small>
+        </div>
     {% endset %}
 
     <div class="blog-author well">
