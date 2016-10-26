@@ -167,7 +167,7 @@ class LoadProductsCommand extends ContainerAwareCommand
 
         switch ($data['status']) {
             case 0 :
-                $data['status'] = Product::WRITING;
+                $data['status'] = Product::STATUS_NEW;
                 break;
             case 1 :
                 $data['status'] = Product::PUBLISHED;

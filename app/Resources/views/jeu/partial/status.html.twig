@@ -6,7 +6,7 @@
             <div class="alert alert-warning changeStatusContainer" role="alert">
                 <span class="fa fa-exclamation-triangle"></span>
 
-                {% if (is_granted('ROLE_REDACTOR') and jeu.status == constant('AppBundle\\Entity\\Product::WRITING')) %}
+                {% if (is_granted('ROLE_REDACTOR') and jeu.status == constant('AppBundle\\Entity\\Product::NEW')) %}
 
                     <div class="pull-right control-group">
                         <a href="#" class="btn btn-success acceptStatus clearfix" name="Passer en Traduction"

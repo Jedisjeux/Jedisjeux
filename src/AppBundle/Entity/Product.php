@@ -34,11 +34,10 @@ class Product extends BaseProduct implements ReviewableInterface
      * status constants
      */
     const STATUS_NEW = "new";
-    const WRITING = "WRITING";
-    const NEED_A_TRANSLATION = "NEED_A_TRANSLATION";
-    const NEED_A_REVIEW = "NEED_A_REVIEW";
-    const READY_TO_PUBLISH = "READY_TO_PUBLISH";
-    const PUBLISHED = "PUBLISHED";
+    const NEED_A_TRANSLATION = "need_a_translation";
+    const NEED_A_REVIEW = "need_a_review";
+    const READY_TO_PUBLISH = "ready_to_publish";
+    const PUBLISHED = "published";
 
     /**
      * @var string
@@ -186,7 +185,7 @@ class Product extends BaseProduct implements ReviewableInterface
         parent::__construct();
         $this->taxons = new ArrayCollection();
         $this->durationByPlayer = false;
-        $this->status = self::WRITING;
+        $this->status = self::STATUS_NEW;
         $this->reviews = new ArrayCollection();
         $this->articles = new ArrayCollection();
     }

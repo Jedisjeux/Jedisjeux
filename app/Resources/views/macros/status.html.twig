@@ -7,9 +7,6 @@
     {% if constant('AppBundle\\Entity\\Product::PUBLISHED') == game.status %}
         {% set statusClass = 'success' %}
         {% set statusLabel = 'label.published'|trans %}
-    {% elseif constant('AppBundle\\Entity\\Product::WRITING') == game.status %}
-        {% set statusClass = 'danger' %}
-        {% set statusLabel = 'label.writing'|trans %}
     {% elseif constant('AppBundle\\Entity\\Product::STATUS_NEW') == game.status %}
         {% set statusClass = 'color' %}
         {% set statusLabel = 'label.new'|trans %}

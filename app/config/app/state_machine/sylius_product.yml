@@ -1,0 +1,27 @@
+winzou_state_machine:
+    sylius_product:
+        class: "%sylius.model.product.class%"
+        property_path: status
+        graph: sylius_product
+        state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
+        states:
+            new: ~
+            need_a_translation: ~
+            need_a_review: ~
+            ready_to_publish: ~
+            published: ~
+        transitions:
+            request_translation:
+                from: [new]
+                to: need_a_translation
+            request_review:
+                from: [new, need_a_translation]
+                to: need_a_review
+            request_publication:
+
+        callbacks:
+            after:
+                update_rating:
+                    on: "accept"
+                    do: ["@sylius.average_rating_updater", updateFromReview]
+                    args: ["object"]
