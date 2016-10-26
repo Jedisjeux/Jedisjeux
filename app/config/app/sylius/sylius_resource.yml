@@ -1,0 +1,157 @@
+sylius_resource:
+    translation:
+        default_locale: %locale%
+    resources:
+        app.article:
+            classes:
+                model: AppBundle\Entity\Article
+                factory: AppBundle\Factory\ArticleFactory
+                repository: AppBundle\Repository\ArticleRepository
+                controller: AppBundle\Controller\ArticleController
+                form:
+                    default: AppBundle\Form\Type\ArticleType
+                    view_count: AppBundle\Form\Type\ArticleViewCountType
+        app.article_review:
+            classes:
+                model: AppBundle\Entity\ArticleReview
+        app.article_content:
+            driver: doctrine/phpcr-odm
+            classes:
+                model: AppBundle\Document\ArticleContent
+                factory: AppBundle\Factory\ArticleContentFactory
+                repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
+                form:
+                    default: AppBundle\Form\Type\ArticleContentType
+        app.avatar:
+            classes:
+                model: AppBundle\Entity\Avatar
+        app.blockquote_block:
+            driver: doctrine/phpcr-odm
+            classes:
+                model: AppBundle\Document\BlockquoteBlock
+                factory: AppBundle\Factory\BlockquoteFactory
+                repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
+                form:
+                    default: AppBundle\Form\Type\BlockquoteBlockType
+        app.contact_request:
+            classes:
+                model: AppBundle\Entity\ContactRequest
+                factory: AppBundle\Factory\ContactRequestFactory
+                repository: AppBundle\Repository\ContactRequestRepository
+                form:
+                    default: AppBundle\Form\Type\ContactRequestType
+        app.dealer:
+            classes:
+                model: AppBundle\Entity\Dealer
+                repository: AppBundle\Repository\DealerRepository
+                form:
+                    default: AppBundle\Form\Type\DealerType
+        app.dealer_image:
+            classes:
+                model: AppBundle\Entity\DealerImage
+                form:
+                    default: AppBundle\Form\Type\DealerImageType
+        app.dealer_price:
+            classes:
+                model: AppBundle\Entity\DealerPrice
+                repository: AppBundle\Repository\DealerPriceRepository
+        app.imagine_block:
+            driver: doctrine/phpcr-odm
+            classes:
+                model: AppBundle\Document\ImagineBlock
+                repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
+                form:
+                    default: AppBundle\Form\Type\ImagineBlockType
+        app.person:
+            classes:
+                model: AppBundle\Entity\Person
+                repository: AppBundle\Repository\PersonRepository
+                controller: AppBundle\Controller\PersonController
+                form:
+                    default: AppBundle\Form\Type\PersonType
+        app.person_image:
+            classes:
+                model: AppBundle\Entity\PersonImage
+                form:
+                    default: AppBundle\Form\Type\PersonImageType
+        app.product_barcode:
+            classes:
+                model: AppBundle\Entity\ProductBarcode
+                form:
+                    default: AppBundle\Form\Type\ProductBarcodeType
+        app.pub_banner:
+            classes:
+                model: AppBundle\Entity\PubBanner
+                form:
+                    default: AppBundle\Form\Type\PubBannerType
+        app.single_image_block:
+            driver: doctrine/phpcr-odm
+            classes:
+                model: AppBundle\Document\SingleImageBlock
+                factory: AppBundle\Factory\SingleImageBlockFactory
+                repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
+                form:
+                    default: AppBundle\Form\Type\SingleImageBlockType
+        app.country:
+            classes:
+                model: AppBundle\Entity\Country
+        app.game_play:
+            classes:
+                model: AppBundle\Entity\GamePlay
+                factory: AppBundle\Factory\GamePlayFactory
+                repository: AppBundle\Repository\GamePlayRepository
+                form:
+                    default: AppBundle\Form\Type\GamePlayType
+        app.game_play_image:
+            classes:
+                model: AppBundle\Entity\GamePlayImage
+                form:
+                    default: AppBundle\Form\Type\GamePlayImageType
+        app.player:
+            classes:
+                model: AppBundle\Entity\Player
+                form:
+                    default: AppBundle\Form\Type\PlayerType
+        app.price_list:
+            classes:
+                model: AppBundle\Entity\PriceList
+                form:
+                    default: AppBundle\Form\Type\PriceListType
+        app.notification:
+            classes:
+                model: AppBundle\Entity\Notification
+                factory: AppBundle\Factory\NotificationFactory
+                controller: AppBundle\Controller\NotificationController
+        app.customer_list:
+            classes:
+                model: AppBundle\Entity\CustomerList
+        app.customer_list_element:
+            classes:
+                model: AppBundle\Entity\CustomerListElement
+                controller: AppBundle\Controller\CustomerListElementController
+                repository: AppBundle\Repository\CustomerListElementRepository
+        app.topic:
+            classes:
+                model: AppBundle\Entity\Topic
+                factory: AppBundle\Factory\TopicFactory
+                controller: AppBundle\Controller\TopicController
+                repository: AppBundle\Repository\TopicRepository
+                form:
+                    default: AppBundle\Form\Type\TopicType
+                    view_count: AppBundle\Form\Type\TopicViewCountType
+        app.topic_follower:
+            classes:
+                model: AppBundle\Entity\TopicFollower
+        app.post:
+            classes:
+                model: AppBundle\Entity\Post
+                factory: AppBundle\Factory\PostFactory
+                repository: AppBundle\Repository\PostRepository
+                controller: AppBundle\Controller\PostController
+                form:
+                    default: AppBundle\Form\Type\PostType
+        app.product_variant_image:
+            classes:
+                model: AppBundle\Entity\ProductVariantImage
+                form:
+                    default: AppBundle\Form\Type\ProductVariantImageType

@@ -1,0 +1,15 @@
+sylius_review:
+    resources:
+        product:
+            subject: AppBundle\Entity\Product
+            reviewer:
+                classes:
+                    model: AppBundle\Entity\Customer
+            review:
+                classes:
+                    model: AppBundle\Entity\ProductReview
+                    repository: AppBundle\Repository\ProductReviewRepository
+                    controller: AppBundle\Controller\ProductReviewController
+                    form:
+                        admin: AppBundle\Form\Type\ProductReviewType
+                        default: AppBundle\Form\Type\ProductReviewType

@@ -21,19 +21,6 @@ parameters:
     fos_elastica.host: 192.168.99.100
     fos_elastica.port: 9200
 
-    phpcr.backend:
-        type: doctrinedbal
-        connection: default
-        caches:
-            meta: doctrine_cache.providers.phpcr_meta
-            nodes: doctrine_cache.providers.phpcr_nodes
-    phpcr.workspace: default
-    phpcr.user: root
-    phpcr.pass: ~
-
-    dos.cache:
-        type: file_system
-
     google.analytics.tracking_id: UA-XXXXX-1
     google.analytics.profile_id: XXXXXXXX
     google.analytics.private_key_file: %kernel.root_dir%/Resources/credentials/client_secret.json

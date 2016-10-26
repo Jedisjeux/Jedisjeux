@@ -10,6 +10,8 @@ parameters:
     knp.doctrine_behaviors.blameable_subscriber.user_entity: Sylius\Component\User\Model\User
     locale: fr
     sylius.locale: "%locale%"
+    sylius.cache:
+        type: file_system
     email_sender: no-reply@jedisjeux.net
     email_name: Contact Jedisjeux
 
@@ -130,21 +132,6 @@ doctrine:
               softdeleteable:
                   class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
                   enabled: true
-
-doctrine_phpcr:
-    session:
-        backend: %phpcr.backend%
-        workspace: %phpcr.workspace%
-        username: %phpcr.user%
-        password: %phpcr.pass%
-    odm:
-        auto_mapping: true
-        auto_generate_proxy_classes: %kernel.debug%
-
-doctrine_cache:
-    providers:
-        phpcr_meta: %dos.cache%
-        phpcr_nodes: %dos.cache%
 
 stof_doctrine_extensions:
     default_locale: fr_FR

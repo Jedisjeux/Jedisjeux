@@ -1,0 +1,8 @@
+sylius_association:
+    resources:
+        product:
+            subject: %sylius.model.product.class%
+            association:
+                classes:
+                    model: Sylius\Component\Product\Model\ProductAssociation
+                    interface: Sylius\Component\Product\Model\ProductAssociationInterface

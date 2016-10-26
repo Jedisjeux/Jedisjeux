@@ -1,6 +1,5 @@
 imports:
     - { resource: sylius.yml }
-    - { resource: emails.yml }
     - { resource: elastica.yml }
     - { resource: cmf.yml }
     - { resource: imagine.yml }

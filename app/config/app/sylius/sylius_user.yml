@@ -1,0 +1,8 @@
+sylius_user:
+    resources:
+        user:
+            classes:
+                repository: AppBundle\Repository\UserRepository
+        customer:
+            classes:
+                model: AppBundle\Entity\Customer
