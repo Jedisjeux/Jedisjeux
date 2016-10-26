@@ -2,8 +2,10 @@
 {% from 'macros/items.html.twig' import blockquoteOne %}
 {% from 'macros/showMore.html.twig' import showMore %}
 
-
-{% include "jeu/partial/status.html.twig" with {'jeu': jeu} only %}
+{{ render(url('sylius_partial_product_status_show', {
+    'id': product.id,
+    'template': 'frontend/game/_status.html.twig'
+})) }}
 
 <div class="img-box-5">
     <!-- Container -->

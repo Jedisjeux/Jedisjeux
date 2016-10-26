@@ -13,7 +13,9 @@ use AppBundle\Repository\ProductRepository;
 use AppBundle\Repository\TaxonRepository;
 use Doctrine\ORM\EntityRepository;
 use FOS\RestBundle\View\View;
+use SM\Factory\Factory;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -139,6 +141,48 @@ class ProductController extends ResourceController
         }
 
         return $this->viewHandler->handle($configuration, $view);
+    }
+
+    public function showStatusAction(Request $request)
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        $this->isGrantedOr403($configuration, ResourceActions::SHOW);
+        /** @var ProductInterface $resource */
+        $resource = $this->findOr404($configuration);
+
+        $this->eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $resource);
+
+        $view = View::create($resource);
+
+        if ($configuration->isHtmlRequest()) {
+            $view
+                ->setTemplate($configuration->getTemplate(ResourceActions::SHOW . '.html'))
+                ->setTemplateVar($this->metadata->getName())
+                ->setData([
+                    'configuration' => $configuration,
+                    'metadata' => $this->metadata,
+                    'resource' => $resource,
+                    $this->metadata->getName() => $resource,
+                    'state_machine' => $this->getStateMachine($resource),
+                ])
+            ;
+        }
+
+        return $this->viewHandler->handle($configuration, $view);
+    }
+
+    /**
+     * @param ProductInterface $product
+     *
+     * @return \SM\StateMachine\StateMachineInterface
+     */
+    protected function getStateMachine(ProductInterface $product)
+    {
+        /** @var Factory $factory */
+        $factory = $this->get('sm.factory');
+
+        return $factory->get($product, 'sylius_product');
     }
 
     /**
