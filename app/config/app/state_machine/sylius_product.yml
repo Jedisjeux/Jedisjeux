@@ -6,17 +6,24 @@ winzou_state_machine:
         state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
         states:
             new: ~
-            need_a_translation: ~
-            need_a_review: ~
-            ready_to_publish: ~
+            pending_translation: ~
+            pending_translation_changes: ~
+            pending_review: ~
+            pending_publication: ~
             published: ~
         transitions:
-            request_translation:
+            ask_for_translation:
                 from: [new]
-                to: need_a_translation
-            request_review:
-                from: [new, need_a_translation]
-                to: need_a_review
-            request_publication:
-                from: [need_a_review]
-                to: ready_to_publish
+                to: pending_translation
+            ask_for_review:
+                from: [new, pending_translation, pending_translation_changes]
+                to: pending_review
+            ask_for_translation_changes:
+                from: [pending_review]
+                to: pending_translation_changes
+            ask_for_publication:
+                from: [pending_review]
+                to: pending_publication
+            publish:
+                from: [pending_publication]
+                to: published

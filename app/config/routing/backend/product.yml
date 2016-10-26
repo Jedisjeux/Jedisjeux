@@ -6,6 +6,12 @@ sylius_admin_product:
         redirect: index
     type: sylius.resource
 
+sylius_admin_product_update_state:
+    methods: [PATCH]
+    path: /products/{id}/status/{transition}/{graph}
+    defaults:
+        _controller: sylius.controller.product:updateStateAction
+
 sylius_admin_product_index:
     methods: [GET]
     path: /products/

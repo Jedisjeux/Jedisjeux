@@ -40,8 +40,8 @@ class ArticleFilterType extends AbstractType
                 'required' => false,
                 'choices' => [
                     'label.new' => Article::STATUS_NEW,
-                    'label.need_a_review' => Article::STATUS_NEED_A_REVIEW,
-                    'label.ready_to_publish' => Article::STATUS_READY_TO_PUBLISH,
+                    'label.pending_review' => Article::STATUS_PENDING_REVIEW,
+                    'label.pending_publication' => Article::STATUS_PENDING_PUBLICATION,
                     'label.published' => Article::STATUS_PUBLISHED,
                 ],
                 'choices_as_values' => true,

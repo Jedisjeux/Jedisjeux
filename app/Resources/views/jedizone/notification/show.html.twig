@@ -4,11 +4,11 @@
 {# set colors for display depending on status #}
 {% if notification.changeStatus == constant('JDJ\\JeuBundle\\Entity\\Jeu::WRITING') %}
     {% set color = 'grey' %}
-{% elseif notification.changeStatus == constant('JDJ\\JeuBundle\\Entity\\Jeu::NEED_A_TRANSLATION') %}
+{% elseif notification.changeStatus == constant('JDJ\\JeuBundle\\Entity\\Jeu::PENDING_TRANSLATION') %}
     {% set color = 'purple' %}
 {% elseif notification.changeStatus == constant('JDJ\\JeuBundle\\Entity\\Jeu::NEED_A_REVIEW') %}
     {% set color = 'orange' %}
-{% elseif notification.changeStatus == constant('JDJ\\JeuBundle\\Entity\\Jeu::READY_TO_PUBLISH') %}
+{% elseif notification.changeStatus == constant('JDJ\\JeuBundle\\Entity\\Jeu::PENDING_PUBLICATION') %}
     {% set color = 'rose' %}
 {% elseif notification.changeStatus == constant('JDJ\\JeuBundle\\Entity\\Jeu::PUBLISHED') %}
     {% set color = 'blue' %}

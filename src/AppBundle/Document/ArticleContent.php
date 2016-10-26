@@ -26,8 +26,8 @@ class ArticleContent extends ContainerBlock
      * state constants
      */
     const WRITING = "writing";
-    const NEED_A_REVIEW = "need_a_review";
-    const READY_TO_PUBLISH = "ready_to_publish";
+    const PENDING_REVIEW = "pending_review";
+    const PENDING_PUBLICATION = "pending_publication";
     const PUBLISHED = "published";
 
 
