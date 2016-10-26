@@ -18,10 +18,5 @@ winzou_state_machine:
                 from: [new, need_a_translation]
                 to: need_a_review
             request_publication:
-
-        callbacks:
-            after:
-                update_rating:
-                    on: "accept"
-                    do: ["@sylius.average_rating_updater", updateFromReview]
-                    args: ["object"]
+                from: [need_a_review]
+                to: ready_to_publish
