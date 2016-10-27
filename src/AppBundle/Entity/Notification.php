@@ -13,6 +13,7 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 
@@ -20,6 +21,7 @@ use Sylius\Component\User\Model\CustomerInterface;
  * @author Loïc Frémont <loic@mobizel.com>
  *
  * @ORM\Entity
+ * @ORM\Table(name="jdj_notification")
  *
  * @ExclusionPolicy("all")
  */
@@ -68,6 +70,13 @@ class Notification implements ResourceInterface
      * @Expose
      */
     protected $topic;
+
+    /**
+     * @var ProductInterface
+     *
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface")
+     */
+    protected $product;
 
     /**
      * Notification constructor.
@@ -173,6 +182,26 @@ class Notification implements ResourceInterface
     public function setTopic($topic)
     {
         $this->topic = $topic;
+
+        return $this;
+    }
+
+    /**
+     * @return ProductInterface
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * @param ProductInterface $product
+     *
+     * @return Notification
+     */
+    public function setProduct($product)
+    {
+        $this->product = $product;
 
         return $this;
     }

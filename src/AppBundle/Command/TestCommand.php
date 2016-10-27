@@ -11,12 +11,14 @@
 
 namespace AppBundle\Command;
 
+use AppBundle\Entity\Product;
+use AppBundle\Repository\ProductRepository;
+use Doctrine\ORM\EntityManager;
+use SM\Factory\Factory;
+use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Widop\GoogleAnalytics\Client;
-use Widop\GoogleAnalytics\Query;
-use Widop\GoogleAnalytics\Service;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -43,40 +45,47 @@ EOT
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $service = $this->getService();
+        /** @var Product $product */
+        $product = $this->getRepository()->findOneBySlug('patchwork');
+        $product->setStatus('pending_review');
+        $this->getManager()->flush();
 
-        $service->getClient()->getAccessToken();
+        $output->writeln($product->getStatus());
 
-        $query = $this->getQuery();
-        $query
-            ->setStartDate(new \DateTime('2 days ago'))
-            ->setEndDate(new \DateTime())
-            ->setMetrics(array('ga:visits' ,'ga:bounces'));
+        $stateMachine = $this->getStateMachine($product);
+        $stateMachine->apply('ask_for_publication');
 
-        $response = $service->query($query);
+        $this->getManager()->flush();
+
+        $output->writeln($product->getStatus());
     }
 
     /**
-     * @return Service
+     * @param ProductInterface $product
+     *
+     * @return \SM\StateMachine\StateMachineInterface
      */
-    protected function getService()
+    protected function getStateMachine(ProductInterface $product)
     {
-        return $this->getContainer()->get('widop_google_analytics');
+        /** @var Factory $factory */
+        $factory = $this->getContainer()->get('sm.factory');
+
+        return $factory->get($product, 'sylius_product');
     }
 
     /**
-     * @return Client
+     * @return ProductRepository
      */
-    protected function getClient()
+    protected function getRepository()
     {
-        return $this->getContainer()->get('widop_google_analytics.client');
+        return $this->getContainer()->get('sylius.repository.product');
     }
 
     /**
-     * @return Query
+     * @return EntityManager
      */
-    protected function getQuery()
+    protected function getManager()
     {
-        return $this->getContainer()->get('widop_google_analytics.query');
+        return $this->getContainer()->get('doctrine.orm.entity_manager');
     }
 }

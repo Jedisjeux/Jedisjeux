@@ -153,7 +153,10 @@ text:
     404: "<p>Dans le néant on ne vous entend pas crier : \"ahhhhhh !!!\"</p>"
     500: "<p>Quelque chose est cassée. Merci de nous envoyer un email et écrivez ce que vous faisiez avant de rencontrer cette erreur. Nous corrigerons aussi vite que possible. Désolé pour la gêne occasionnée.</p>"
   notification:
-    topic_reply: %USERNAME% a répondu au sujet %TOPIC_NAME%
+    topic_reply: %USERNAME% a répondu au sujet %TOPIC_NAME%.
+    product_translation: Le jeu <strong>%PRODUCT_NAME%</strong> a besoin d'une traduction.
+    product_review: Le jeu <strong>%PRODUCT_NAME%</strong> a besoin d'une relecture.
+    product_publication: Le jeu <strong>%PRODUCT_NAME%</strong> est prêt à valider.
 
 emails:
     ending: Cordialement,
