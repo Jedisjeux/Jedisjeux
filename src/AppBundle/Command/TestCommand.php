@@ -11,9 +11,9 @@
 
 namespace AppBundle\Command;
 
-use AppBundle\Entity\Product;
-use AppBundle\Repository\ProductRepository;
+use AppBundle\Entity\Article;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 use SM\Factory\Factory;
 use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -45,40 +45,40 @@ EOT
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        /** @var Product $product */
-        $product = $this->getRepository()->findOneBySlug('patchwork');
-        $product->setStatus('pending_review');
+        /** @var Article $article */
+        $article = $this->getRepository()->findOneBy(['name' => 'la-liste-essen-2016-est-enfin-la-n-5749']);
+        $article->setStatus('pending_review');
         $this->getManager()->flush();
 
-        $output->writeln($product->getStatus());
+        $output->writeln($article->getStatus());
 
-        $stateMachine = $this->getStateMachine($product);
+        $stateMachine = $this->getStateMachine($article);
         $stateMachine->apply('ask_for_publication');
 
         $this->getManager()->flush();
 
-        $output->writeln($product->getStatus());
+        $output->writeln($article->getStatus());
     }
 
     /**
-     * @param ProductInterface $product
+     * @param Article $article
      *
      * @return \SM\StateMachine\StateMachineInterface
      */
-    protected function getStateMachine(ProductInterface $product)
+    protected function getStateMachine(Article $article)
     {
         /** @var Factory $factory */
         $factory = $this->getContainer()->get('sm.factory');
 
-        return $factory->get($product, 'sylius_product');
+        return $factory->get($article, 'app_article');
     }
 
     /**
-     * @return ProductRepository
+     * @return EntityRepository
      */
     protected function getRepository()
     {
-        return $this->getContainer()->get('sylius.repository.product');
+        return $this->getContainer()->get('app.repository.article');
     }
 
     /**

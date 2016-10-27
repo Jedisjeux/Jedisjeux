@@ -11,6 +11,7 @@
 
 namespace AppBundle\Factory;
 
+use AppBundle\Entity\Article;
 use AppBundle\Entity\Notification;
 use AppBundle\Entity\Post;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -84,6 +85,22 @@ class NotificationFactory extends Factory
         $notification = $this->createForCustomer($customer);
         $notification
             ->setProduct($product);
+
+        return $notification;
+    }
+
+    /**
+     * @param Article $article
+     * @param CustomerInterface $customer
+     *
+     * @return Notification
+     */
+    public function createForArticle(Article $article, CustomerInterface $customer)
+    {
+        /** @var Notification $notification */
+        $notification = $this->createForCustomer($customer);
+        $notification
+            ->setArticle($article);
 
         return $notification;
     }

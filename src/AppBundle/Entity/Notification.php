@@ -79,6 +79,13 @@ class Notification implements ResourceInterface
     protected $product;
 
     /**
+     * @var Article
+     *
+     * @ORM\ManyToOne(targetEntity="Article")
+     */
+    protected $article;
+
+    /**
      * Notification constructor.
      */
     public function __construct()
@@ -202,6 +209,26 @@ class Notification implements ResourceInterface
     public function setProduct($product)
     {
         $this->product = $product;
+
+        return $this;
+    }
+
+    /**
+     * @return Article
+     */
+    public function getArticle()
+    {
+        return $this->article;
+    }
+
+    /**
+     * @param Article $article
+     *
+     * @return Notification
+     */
+    public function setArticle($article)
+    {
+        $this->article = $article;
 
         return $this;
     }

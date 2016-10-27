@@ -11,10 +11,10 @@
 
 namespace AppBundle\NotificationManager;
 
+use AppBundle\Entity\Article;
 use AppBundle\Factory\NotificationFactory;
 use AppBundle\Repository\UserRepository;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -22,7 +22,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class ProductNotificationManager
+class ArticleNotificationManager
 {
     /**
      * @var NotificationFactory
@@ -68,55 +68,42 @@ class ProductNotificationManager
     }
 
     /**
-     * @param ProductInterface $product
+     * @param Article $article
      */
-    public function notifyTranslators(ProductInterface $product)
-    {
-        /** @var UserInterface[] $users */
-        $users = $this->userRepository->findByRole('ROLE_TRANSLATOR');
-
-        $this->notifyUsers($this->translator->trans('text.notification.product.ask_for_translation', [
-            '%PRODUCT_NAME%' => $product->getName(),
-        ]), $product, $users);
-    }
-
-    /**
-     * @param ProductInterface $product
-     */
-    public function notifyReviewers(ProductInterface $product)
+    public function notifyReviewers(Article $article)
     {
         /** @var UserInterface[] $users */
         $users = $this->userRepository->findByRole('ROLE_REVIEWER');
 
-        $this->notifyUsers($this->translator->trans('text.notification.product.ask_for_review', [
-            '%PRODUCT_NAME%' => $product->getName(),
-        ]), $product, $users);
+        $this->notifyUsers($this->translator->trans('text.notification.article.ask_for_review', [
+            '%ARTICLE_NAME%' => $article->getName(),
+        ]), $article, $users);
     }
 
     /**
-     * @param ProductInterface $product
+     * @param Article $article
      */
-    public function notifyPublishers(ProductInterface $product)
+    public function notifyPublishers(Article $article)
     {
         /** @var UserInterface[] $users */
         $users = $this->userRepository->findByRole('ROLE_PUBLISHER');
 
-        $this->notifyUsers($this->translator->trans('text.notification.product.ask_for_publication', [
-            '%PRODUCT_NAME%' => $product->getName(),
-        ]), $product, $users);
+        $this->notifyUsers($this->translator->trans('text.notification.article.ask_for_publication', [
+            '%ARTICLE_NAME%' => $article->getName(),
+        ]), $article, $users);
     }
 
     /**
      * @param string $message
-     * @param ProductInterface $product
+     * @param Article $article
      * @param array $users
      */
-    protected function notifyUsers($message, ProductInterface $product, array $users)
+    protected function notifyUsers($message, Article $article, array $users)
     {
         foreach ($users as $user) {
-            $notification = $this->factory->createForProduct($product, $user->getCustomer());
+            $notification = $this->factory->createForArticle($article, $user->getCustomer());
             $notification
-                ->setTarget($this->router->generate('sylius_product_show', ['slug' => $product->getSlug()]))
+                ->setTarget($this->router->generate('app_frontend_article_show', ['name' => $article->getName()]))
                 ->setMessage($message);
 
             $this->manager->persist($notification);
