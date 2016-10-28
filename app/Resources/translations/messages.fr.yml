@@ -156,10 +156,17 @@ label:
 text:
   confirmation: Souhaitez-vous supprimer cet élément ?
   error:
-    404: "<p>Dans le néant on ne vous entend pas crier : \"ahhhhhh !!!\"</p>"
-    500: "<p>Quelque chose est cassée. Merci de nous envoyer un email et écrivez ce que vous faisiez avant de rencontrer cette erreur. Nous corrigerons aussi vite que possible. Désolé pour la gêne occasionnée.</p>"
+      404: "<p>Dans le néant on ne vous entend pas crier : \"ahhhhhh !!!\"</p>"
+      500: "<p>Quelque chose est cassée. Merci de nous envoyer un email et écrivez ce que vous faisiez avant de rencontrer cette erreur. Nous corrigerons aussi vite que possible. Désolé pour la gêne occasionnée.</p>"
   notification:
-    topic_reply: %USERNAME% a répondu au sujet %TOPIC_NAME%
+      article:
+          ask_for_review: L'article <strong>%ARTICLE_NAME%</strong> a besoin d'une relecture.
+          ask_for_publication: L'article <strong>%ARTICLE_NAME%</strong> est prêt à valider.
+      product:
+          ask_for_translation: Le jeu <strong>%PRODUCT_NAME%</strong> a besoin d'une traduction.
+          ask_for_review: Le jeu <strong>%PRODUCT_NAME%</strong> a besoin d'une relecture.
+          ask_for_publication: Le jeu <strong>%PRODUCT_NAME%</strong> est prêt à valider.
+      topic_reply: %USERNAME% a répondu au sujet %TOPIC_NAME%.
 
 emails:
     ending: Cordialement,

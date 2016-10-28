@@ -8,6 +8,7 @@
 
 namespace AppBundle\Repository;
 
+use Sylius\Bundle\ApiBundle\Model\UserInterface;
 use Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository as BaseUserRepository;
 
 /**
@@ -15,6 +16,24 @@ use Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository as BaseUserRepository;
  */
 class UserRepository extends BaseUserRepository
 {
+    /**
+     * @param string $role
+     *
+     * @return array|UserInterface[]
+     */
+    public function findByRole($role)
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder
+            ->addSelect('customer')
+            ->leftJoin('o.customer', 'customer')
+            ->where($queryBuilder->expr()->like('o.roles', ':role'))
+            ->setParameter('role', '%"' . $role . '"%');
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+
     /**
      * @return int
      *

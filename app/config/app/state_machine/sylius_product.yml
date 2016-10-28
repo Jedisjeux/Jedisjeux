@@ -3,7 +3,7 @@ winzou_state_machine:
         class: "%sylius.model.product.class%"
         property_path: status
         graph: sylius_product
-        state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
+        state_machine_class: "%sylius.state_machine.class%"
         states:
             new: ~
             pending_translation: ~
@@ -27,3 +27,17 @@ winzou_state_machine:
             publish:
                 from: [pending_publication]
                 to: published
+        callbacks:
+            after:
+                notify_translators:
+                    on: "ask_for_translation"
+                    do: ["@app.notification_manager.product", "notifyTranslators"]
+                    args: ["object"]
+                notify_reviewers:
+                    on: "ask_for_review"
+                    do: ["@app.notification_manager.product", "notifyReviewers"]
+                    args: ["object"]
+                notify_publishers:
+                    on: "ask_for_publication"
+                    do: ["@app.notification_manager.product", "notifyPublishers"]
+                    args: ["object"]

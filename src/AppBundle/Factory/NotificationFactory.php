@@ -11,8 +11,10 @@
 
 namespace AppBundle\Factory;
 
+use AppBundle\Entity\Article;
 use AppBundle\Entity\Notification;
 use AppBundle\Entity\Post;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
@@ -59,7 +61,7 @@ class NotificationFactory extends Factory
         /** @var Notification $notification */
         $notification = $this->createForCustomer($customer);
 
-        /** TODO use translation */
+        /** TODO only set topic and move target and message in a post notification manager */
         $notification
             ->setTopic($post->getTopic())
             ->setTarget($this->router->generate('app_post_index_by_topic', ['topicId' => $post->getTopic()->getId()]))
@@ -67,6 +69,38 @@ class NotificationFactory extends Factory
                 '%USERNAME%' => $post->getCreatedBy()->getCustomer(),
                 '%TOPIC_NAME%' => $post->getTopic()->getTitle(),
             ]));
+
+        return $notification;
+    }
+
+    /**
+     * @param ProductInterface $product
+     * @param CustomerInterface $customer
+     *
+     * @return Notification
+     */
+    public function createForProduct(ProductInterface $product, CustomerInterface $customer)
+    {
+        /** @var Notification $notification */
+        $notification = $this->createForCustomer($customer);
+        $notification
+            ->setProduct($product);
+
+        return $notification;
+    }
+
+    /**
+     * @param Article $article
+     * @param CustomerInterface $customer
+     *
+     * @return Notification
+     */
+    public function createForArticle(Article $article, CustomerInterface $customer)
+    {
+        /** @var Notification $notification */
+        $notification = $this->createForCustomer($customer);
+        $notification
+            ->setArticle($article);
 
         return $notification;
     }

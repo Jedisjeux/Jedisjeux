@@ -11,12 +11,14 @@
 
 namespace AppBundle\Command;
 
+use AppBundle\Entity\Article;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
+use SM\Factory\Factory;
+use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Widop\GoogleAnalytics\Client;
-use Widop\GoogleAnalytics\Query;
-use Widop\GoogleAnalytics\Service;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -43,40 +45,47 @@ EOT
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $service = $this->getService();
+        /** @var Article $article */
+        $article = $this->getRepository()->findOneBy(['name' => 'la-liste-essen-2016-est-enfin-la-n-5749']);
+        $article->setStatus('pending_review');
+        $this->getManager()->flush();
 
-        $service->getClient()->getAccessToken();
+        $output->writeln($article->getStatus());
 
-        $query = $this->getQuery();
-        $query
-            ->setStartDate(new \DateTime('2 days ago'))
-            ->setEndDate(new \DateTime())
-            ->setMetrics(array('ga:visits' ,'ga:bounces'));
+        $stateMachine = $this->getStateMachine($article);
+        $stateMachine->apply('ask_for_publication');
 
-        $response = $service->query($query);
+        $this->getManager()->flush();
+
+        $output->writeln($article->getStatus());
     }
 
     /**
-     * @return Service
+     * @param Article $article
+     *
+     * @return \SM\StateMachine\StateMachineInterface
      */
-    protected function getService()
+    protected function getStateMachine(Article $article)
     {
-        return $this->getContainer()->get('widop_google_analytics');
+        /** @var Factory $factory */
+        $factory = $this->getContainer()->get('sm.factory');
+
+        return $factory->get($article, 'app_article');
     }
 
     /**
-     * @return Client
+     * @return EntityRepository
      */
-    protected function getClient()
+    protected function getRepository()
     {
-        return $this->getContainer()->get('widop_google_analytics.client');
+        return $this->getContainer()->get('app.repository.article');
     }
 
     /**
-     * @return Query
+     * @return EntityManager
      */
-    protected function getQuery()
+    protected function getManager()
     {
-        return $this->getContainer()->get('widop_google_analytics.query');
+        return $this->getContainer()->get('doctrine.orm.entity_manager');
     }
 }

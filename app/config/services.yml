@@ -187,6 +187,25 @@ services:
         tags:
             - {name: sonata.block}
 
+    # <!-- Notifications -->
+    app.notification_manager.article:
+        class: AppBundle\NotificationManager\ArticleNotificationManager
+        arguments:
+            - "@app.factory.notification"
+            - "@doctrine.orm.entity_manager"
+            - "@sylius.repository.user"
+            - "@router"
+            - "@translator"
+
+    app.notification_manager.product:
+        class: AppBundle\NotificationManager\ProductNotificationManager
+        arguments:
+            - "@app.factory.notification"
+            - "@doctrine.orm.entity_manager"
+            - "@sylius.repository.user"
+            - "@router"
+            - "@translator"
+
     # <!-- Serializers -->
     app.serializer.liip_serializer_handler:
         class: AppBundle\Handler\LiipSerializeHandler

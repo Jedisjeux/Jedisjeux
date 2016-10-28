@@ -1,0 +1,31 @@
+winzou_state_machine:
+    app_article:
+        class: "%app.model.article.class%"
+        property_path: status
+        graph: app_article
+        state_machine_class: "%sylius.state_machine.class%"
+        states:
+            new: ~
+            pending_review: ~
+            pending_publication: ~
+            published: ~
+        transitions:
+            ask_for_review:
+                from: [new]
+                to: pending_review
+            ask_for_publication:
+                from: [pending_review]
+                to: pending_publication
+            publish:
+                from: [pending_review]
+                to: published
+        callbacks:
+            after:
+                notify_reviewers:
+                    on: "ask_for_review"
+                    do: ["@app.notification_manager.article", "notifyReviewers"]
+                    args: ["object"]
+                notify_publishers:
+                    on: "ask_for_publication"
+                    do: ["@app.notification_manager.article", "notifyPublishers"]
+                    args: ["object"]
