@@ -10,15 +10,15 @@
     {% elseif constant('AppBundle\\Entity\\Product::STATUS_NEW') == game.status %}
         {% set statusClass = 'color' %}
         {% set statusLabel = 'label.new'|trans %}
-    {% elseif constant('AppBundle\\Entity\\Product::NEED_A_TRANSLATION') == game.status %}
+    {% elseif constant('AppBundle\\Entity\\Product::PENDING_TRANSLATION') == game.status %}
         {% set statusClass = 'danger' %}
-        {% set statusLabel = 'label.need_a_translation'|trans %}
+        {% set statusLabel = 'label.pending_translation'|trans %}
         {% set iconClass = 'fa fa-flag' %}
-    {% elseif constant('AppBundle\\Entity\\Product::NEED_A_REVIEW') == game.status %}
+    {% elseif constant('AppBundle\\Entity\\Product::PENDING_REVIEW') == game.status %}
         {% set statusClass = 'warning' %}
-        {% set statusLabel = 'label.need_a_review'|trans %}
+        {% set statusLabel = 'label.pending_review'|trans %}
         {% set iconClass = 'fa fa-book' %}
-    {% elseif constant('AppBundle\\Entity\\Product::READY_TO_PUBLISH') == game.status %}
+    {% elseif constant('AppBundle\\Entity\\Product::PENDING_PUBLICATION') == game.status %}
         {% set statusClass = 'primary' %}
         {% set statusLabel = 'label.ready_to_published'|trans %}
         {% set iconClass = 'fa fa-clock-o' %}
@@ -44,11 +44,11 @@
     {% elseif constant('AppBundle\\Entity\\Article::STATUS_NEW') == article.status %}
         {% set statusClass = 'color' %}
         {% set statusLabel = 'label.new'|trans %}
-    {% elseif constant('AppBundle\\Entity\\Article::STATUS_NEED_A_REVIEW') == article.status %}
+    {% elseif constant('AppBundle\\Entity\\Article::STATUS_PENDING_REVIEW') == article.status %}
         {% set statusClass = 'warning' %}
-        {% set statusLabel = 'label.need_a_review'|trans %}
+        {% set statusLabel = 'label.pending_review'|trans %}
         {% set iconClass = 'fa fa-book' %}
-    {% elseif constant('AppBundle\\Entity\\Article::STATUS_READY_TO_PUBLISH') == article.status %}
+    {% elseif constant('AppBundle\\Entity\\Article::STATUS_PENDING_PUBLICATION') == article.status %}
         {% set statusClass = 'primary' %}
         {% set statusLabel = 'label.ready_to_published'|trans %}
         {% set iconClass = 'fa fa-clock-o' %}

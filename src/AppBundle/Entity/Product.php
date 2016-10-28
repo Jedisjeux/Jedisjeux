@@ -34,9 +34,9 @@ class Product extends BaseProduct implements ReviewableInterface
      * status constants
      */
     const STATUS_NEW = "new";
-    const NEED_A_TRANSLATION = "need_a_translation";
-    const NEED_A_REVIEW = "need_a_review";
-    const READY_TO_PUBLISH = "ready_to_publish";
+    const PENDING_TRANSLATION = "pending_translation";
+    const PENDING_REVIEW = "pending_review";
+    const PENDING_PUBLICATION = "pending_publication";
     const PUBLISHED = "published";
 
     /**

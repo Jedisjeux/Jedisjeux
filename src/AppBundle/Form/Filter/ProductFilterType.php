@@ -38,9 +38,9 @@ class ProductFilterType extends AbstractType
                 'required' => false,
                 'choices' => [
                     'label.new' => Product::STATUS_NEW,
-                    'label.need_a_translation' => Product::NEED_A_TRANSLATION,
-                    'label.need_a_review' => Product::NEED_A_REVIEW,
-                    'label.ready_to_publish' => Product::READY_TO_PUBLISH,
+                    'label.pending_translation' => Product::NEED_A_TRANSLATION,
+                    'label.pending_review' => Product::PENDING_REVIEW,
+                    'label.pending_publication' => Product::PENDING_PUBLICATION,
                     'label.published' => Product::PUBLISHED,
                 ],
                 'choices_as_values' => true,

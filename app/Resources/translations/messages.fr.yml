@@ -17,6 +17,10 @@ label:
   age_min: Age min
   amount: Montant
   artists: Illustrateurs
+  ask_for_publication: Demander la publication
+  ask_for_review: Demander une relecture
+  ask_for_translation: Demander une traduction
+  ask_for_translation_changes: Demander des modifs de trad
   at: À
   attributes: Attributs
   available: Disponible
@@ -83,8 +87,10 @@ label:
   name: Nom
   new: Nouveau
   new_dealer: Nouveau vendeur
-  need_a_review: En relecture
-  need_a_translation: A traduire
+  pending_publication: Prêt à publier
+  pending_review: En relecture
+  pending_translation: En attente de traduction
+  pending_translation_changes: En attente de modifs de trad
   no: Non
   on_top: En haut
   on_the_left_side: À gauche
@@ -106,13 +112,13 @@ label:
   price: Prix
   price_list: Liste de prix
   public: Public
+  publish: Publier
   publishable: Publiable
   published: Publié
   published_at: Publié le
   publishers: Editeurs
   pub_banners: Bannières de pub
   rate: Note
-  ready_to_publish: Prêt à publier
   release: Sortie
   released_at: Sortie le
   release_date: Date de sortie

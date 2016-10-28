@@ -173,13 +173,13 @@ class LoadProductsCommand extends ContainerAwareCommand
                 $data['status'] = Product::PUBLISHED;
                 break;
             case 2 :
-                $data['status'] = Product::NEED_A_TRANSLATION;
+                $data['status'] = Product::PENDING_REVIEW;
                 break;
             case 5 :
-                $data['status'] = Product::NEED_A_REVIEW;
+                $data['status'] = Product::PENDING_REVIEW;
                 break;
             case 3 :
-                $data['status'] = Product::READY_TO_PUBLISH;
+                $data['status'] = Product::PENDING_PUBLICATION;
                 break;
         }
 
