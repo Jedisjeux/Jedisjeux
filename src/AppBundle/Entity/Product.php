@@ -47,13 +47,6 @@ class Product extends BaseProduct implements ReviewableInterface
     protected $status;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(type="string", unique=true, nullable=true)
-     */
-    protected $code;
-
-    /**
      * @var ArrayCollection|TaxonInterface[]
      *
      * @ORM\ManyToMany(targetEntity="Sylius\Component\Taxonomy\Model\TaxonInterface")
@@ -188,6 +181,7 @@ class Product extends BaseProduct implements ReviewableInterface
         $this->status = self::STATUS_NEW;
         $this->reviews = new ArrayCollection();
         $this->articles = new ArrayCollection();
+        $this->code = uniqid('product_');
     }
 
     /**

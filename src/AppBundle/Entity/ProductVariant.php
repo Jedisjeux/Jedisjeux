@@ -28,20 +28,6 @@ class ProductVariant extends Variant
     /**
      * @var string
      *
-     * @ORM\Column(type="string", unique=true, nullable=true)
-     */
-    protected $code;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string")
-     */
-    protected $name;
-
-    /**
-     * @var string
-     *
      * @Gedmo\Slug(fields={"name"}, separator="-", unique=true)
      * @ORM\Column(type="string")
      */
@@ -103,6 +89,7 @@ class ProductVariant extends Variant
         $this->designers = new ArrayCollection();
         $this->artists = new ArrayCollection();
         $this->publishers = new ArrayCollection();
+        $this->code = uniqid('variant_');
     }
 
     /**
