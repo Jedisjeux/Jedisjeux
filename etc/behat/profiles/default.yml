@@ -12,6 +12,9 @@ default:
             sessions:
                 symfony:
                     symfony2: ~
+                firefox:
+                    selenium2:
+                        browser: firefox
                 chrome:
                     selenium2:
                         browser: chrome
@@ -24,9 +27,6 @@ default:
                                     - "start-fullscreen"
                                     - "start-maximized"
                                     - "no-sandbox"
-                firefox:
-                    selenium2:
-                        browser: firefox
 
         Behat\Symfony2Extension: ~
 

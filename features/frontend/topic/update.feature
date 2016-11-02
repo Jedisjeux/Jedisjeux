@@ -17,7 +17,7 @@ Feature: Edit Topic
     And I am logged in as user "kevin@example.com" with password "password"
 
   Scenario: Update my topic
-    Given I am on "/forum/topics/"
+    Given I am on "/topics/"
     And I follow "Lire le sujet"
     And I follow "Modifier"
     When I press "Mettre à jour"

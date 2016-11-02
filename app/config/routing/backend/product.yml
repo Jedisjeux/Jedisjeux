@@ -3,14 +3,31 @@ sylius_admin_product:
         alias: sylius.product
         section: admin
         templates: :backend/product
+        only: [update, delete]
         redirect: index
     type: sylius.resource
 
+sylius_admin_product_create:
+    methods: [GET, POST]
+    path: /products/new
+    defaults:
+        _controller: sylius.controller.product:createAction
+        _sylius:
+            redirect: sylius_admin_product_update
+            factory:
+                method: createWithVariant
+            template: backend/product/create.html.twig
+
 sylius_admin_product_update_state:
     methods: [PATCH]
-    path: /products/{id}/status/{transition}/{graph}
+    path: /products/{id}/status/{transition}
     defaults:
-        _controller: sylius.controller.product:updateStateAction
+        _controller: sylius.controller.product:applyStateMachineTransitionAction
+        _sylius:
+            state_machine:
+                graph: sylius_product
+                transition: $transition
+            redirect: referer
 
 sylius_admin_product_index:
     methods: [GET]

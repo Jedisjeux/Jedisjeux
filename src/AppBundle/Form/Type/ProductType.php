@@ -33,9 +33,7 @@ class ProductType extends AbstractResourceType
             ->add('name', null, array(
                 'label' => 'label.name',
             ))
-            ->add('masterVariant', 'sylius_product_variant', [
-                'master' => true,
-            ])
+            ->add('firstVariant', 'sylius_product_variant', [])
             ->add('mainTaxon', 'sylius_taxon_choice', array(
                 'label' => 'label.target_audience',
                 'placeholder' => 'label.choose_target_audience',

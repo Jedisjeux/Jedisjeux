@@ -35,7 +35,7 @@ class ProductFactory extends BaseProductFactory
 
         $product->setName($bggProduct->getName());
         $product->setDescription($bggProduct->getDescription());
-        //$product->getMasterVariant()->setReleasedAt($bggProduct->getReleasedAtYear());
+        //$product->getFirstVariant()->setReleasedAt($bggProduct->getReleasedAtYear());
         $product->setAgeMin($bggProduct->getAge());
         $product->setDurationMin($bggProduct->getDuration());
         $product->setDurationMax($bggProduct->getDuration());

@@ -14,16 +14,16 @@ Feature: Topic creation
     And I am logged in as user "kevin@example.com" with password "password"
 
   Scenario: Create new topic
-    Given I am on "/forum/topics/"
+    Given I am on "/topics/"
     And I follow "Nouveau sujet"
     And I fill in the following:
       | Titre | Zoo Topic |
     And I fill in wysiwyg field "app_topic_mainPost_body" with "Here is my awesome topic message."
     When I press "Créer"
-    Then I should see "Topic a bien été créé"
+    Then I should see "a bien été créé"
 
   Scenario: Body is required
-    Given I am on "/forum/topics/"
+    Given I am on "/topics/"
     And I follow "Nouveau sujet"
     And I fill in the following:
       | Titre | Zoo Topic |

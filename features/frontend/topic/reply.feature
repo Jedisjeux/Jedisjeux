@@ -17,7 +17,7 @@ Feature: Topic reply
     And I am logged in as user "kevin@example.com" with password "password"
 
   Scenario: Reply to a topic
-    Given I am on "/forum/topics/"
+    Given I am on "/topics/"
     And I follow "Lire le sujet"
     And I follow "Répondre au sujet"
     When I fill in wysiwyg field "app_post_body" with "Here is my awesome topic answer."

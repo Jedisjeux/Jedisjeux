@@ -191,11 +191,11 @@ class Product extends BaseProduct implements ReviewableInterface
     {
         parent::setName($name);
 
-        /** @var ProductVariant $masterVariant */
-        $masterVariant = $this->getMasterVariant();
+        /** @var ProductVariant $firstVariant */
+        $firstVariant = $this->getFirstVariant();
 
-        if ($masterVariant) {
-            $masterVariant->setName($name);
+        if ($firstVariant) {
+            $firstVariant->setName($name);
         }
     }
 
@@ -271,17 +271,7 @@ class Product extends BaseProduct implements ReviewableInterface
      */
     public function getMainImage()
     {
-        return $this->getMasterVariant()->getMainImage();
-    }
-
-    /**
-     * @param ProductVariantImage $mainImage
-     *
-     * @return $this
-     */
-    public function setMainImage($mainImage)
-    {
-        return $this->getMasterVariant()->setMainImage($mainImage);
+        return $this->getFirstVariant()->getMainImage();
     }
 
     /**
@@ -289,7 +279,7 @@ class Product extends BaseProduct implements ReviewableInterface
      */
     public function getMaterialImage()
     {
-        return $this->getMasterVariant()->getMaterialImage();
+        return $this->getFirstVariant()->getMaterialImage();
     }
 
     /**
@@ -297,7 +287,27 @@ class Product extends BaseProduct implements ReviewableInterface
      */
     public function getImages()
     {
-        return $this->getMasterVariant()->getImages();
+        return $this->getFirstVariant()->getImages();
+    }
+
+    /**
+     * @return ProductVariant|null
+     */
+    public function getFirstVariant()
+    {
+        if ($this->variants->isEmpty()) {
+            return null;
+        }
+
+        return $this->variants->first();
+    }
+
+    /**
+     * @deprecated
+     */
+    public function getMasterVariant()
+    {
+        return $this->getFirstVariant();
     }
 
     /**
@@ -322,7 +332,7 @@ class Product extends BaseProduct implements ReviewableInterface
      */
     public function getReleasedAt()
     {
-        return $this->getMasterVariant()->getReleasedAt();
+        return $this->getFirstVariant()->getReleasedAt();
     }
 
     /**
@@ -332,7 +342,9 @@ class Product extends BaseProduct implements ReviewableInterface
      */
     public function setReleasedAt($releasedAt)
     {
-        return $this->getMasterVariant()->setReleasedAt($releasedAt);
+        $this->getFirstVariant()->setReleasedAt($releasedAt);
+
+        return $this;
     }
 
     /**
@@ -582,7 +594,7 @@ class Product extends BaseProduct implements ReviewableInterface
      */
     public function getDesigners()
     {
-        return $this->getMasterVariant()->getDesigners();
+        return $this->getFirstVariant()->getDesigners();
     }
 
 
@@ -591,7 +603,7 @@ class Product extends BaseProduct implements ReviewableInterface
      */
     public function getArtists()
     {
-        return $this->getMasterVariant()->getArtists();
+        return $this->getFirstVariant()->getArtists();
     }
 
     /**
@@ -599,7 +611,7 @@ class Product extends BaseProduct implements ReviewableInterface
      */
     public function getPublishers()
     {
-        return $this->getMasterVariant()->getPublishers();
+        return $this->getFirstVariant()->getPublishers();
     }
 
     /**

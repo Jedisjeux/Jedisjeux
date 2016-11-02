@@ -18,12 +18,12 @@ Feature: View list of topics
       | Jeux avec handicap             | Moi je dis jeux |
 
   Scenario: View list of topics
-    When I am on "/forum/topics/"
+    When I am on "/topics/"
     Then I should see "Retour de Cannes jour par jour"
     And I should see "Jeux avec handicap"
 
   Scenario: View list of topics under a taxon
-    Given I am on "/forum/topics/"
+    Given I am on "/topics/"
     When I follow "Moi je dis jeux"
     Then I should see "Jeux avec handicap"
     But I should not see "Retour de Cannes jour par jour"

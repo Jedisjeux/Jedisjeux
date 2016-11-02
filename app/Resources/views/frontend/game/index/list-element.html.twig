@@ -42,7 +42,7 @@
             {{ playerCount(product) }}<br/>
             à partir de {{ product.ageMin }} ans<br/>
             {% if product.releasedAt %}
-                {{ 'label.release'|trans }} : {{ releasedAt(product.masterVariant, 'long') }}
+                {{ 'label.release'|trans }} : {{ releasedAt(product.firstVariant, 'long') }}
             {% endif %}
         </p>
         <div class="rating-container">

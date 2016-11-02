@@ -1,29 +1,29 @@
 <div class="tab-pane" id="people">
     <div class="form-group">
-        {{ form_label(form.masterVariant.designers) }}
+        {{ form_label(form.firstVariant.designers) }}
         <div class="col-sm-9">
-            <select name="sylius_product[masterVariant][designers][]" class="peopleAutocomplete form-control" multiple>
-                {% for person in product.masterVariant.designers %}
+            <select name="sylius_product[firstVariant][designers][]" class="peopleAutocomplete form-control" multiple>
+                {% for person in product.firstVariant.designers %}
                     <option value="{{ person.id }}" selected="selected">{{ person }}</option>
                 {% endfor %}
             </select>
         </div>
     </div>
     <div class="form-group">
-        {{ form_label(form.masterVariant.artists) }}
+        {{ form_label(form.firstVariant.artists) }}
         <div class="col-sm-9">
-            <select name="sylius_product[masterVariant][artists][]" class="peopleAutocomplete form-control" multiple>
-                {% for person in product.masterVariant.artists %}
+            <select name="sylius_product[firstVariant][artists][]" class="peopleAutocomplete form-control" multiple>
+                {% for person in product.firstVariant.artists %}
                     <option value="{{ person.id }}" selected="selected">{{ person }}</option>
                 {% endfor %}
             </select>
         </div>
     </div>
     <div class="form-group">
-        {{ form_label(form.masterVariant.publishers) }}
+        {{ form_label(form.firstVariant.publishers) }}
         <div class="col-sm-9">
-            <select name="sylius_product[masterVariant][publishers][]" class="peopleAutocomplete form-control" multiple>
-                {% for person in product.masterVariant.publishers %}
+            <select name="sylius_product[firstVariant][publishers][]" class="peopleAutocomplete form-control" multiple>
+                {% for person in product.firstVariant.publishers %}
                     <option value="{{ person.id }}" selected="selected">{{ person }}</option>
                 {% endfor %}
             </select>

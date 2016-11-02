@@ -42,7 +42,7 @@ class ProductContext extends DefaultContext
             }
 
             /** @var Product $product */
-            $product = $this->getFactory('product')->createNew();
+            $product = $this->getFactory('product')->createWithVariant();
             $product->setCode($this->faker->unique()->postcode);
             $product->setName(isset($data['name']) ? $data['name'] : $this->faker->name);
             $product->setDescription(isset($data['description']) ? $data['description'] : $this->faker->realText());

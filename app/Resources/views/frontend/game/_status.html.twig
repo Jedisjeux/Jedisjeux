@@ -3,8 +3,7 @@
 
     {{ buttons.patch(path('sylius_admin_product_update_state', {
         'id': product.id,
-        'transition': transition,
-        'graph': 'sylius_product'
+        'transition': transition
     }), 'label.'~transition, icon, color|default('color')) }}
 {% endmacro %}
 
