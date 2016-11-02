@@ -15,7 +15,7 @@ sylius_resource:
             classes:
                 model: AppBundle\Entity\ArticleReview
         app.article_content:
-            driver: doctrine/phpcr-odm
+            #driver: doctrine/phpcr-odm
             classes:
                 model: AppBundle\Document\ArticleContent
                 factory: AppBundle\Factory\ArticleContentFactory
@@ -26,7 +26,7 @@ sylius_resource:
             classes:
                 model: AppBundle\Entity\Avatar
         app.blockquote_block:
-            driver: doctrine/phpcr-odm
+            #driver: doctrine/phpcr-odm
             classes:
                 model: AppBundle\Document\BlockquoteBlock
                 factory: AppBundle\Factory\BlockquoteFactory
@@ -56,7 +56,7 @@ sylius_resource:
                 model: AppBundle\Entity\DealerPrice
                 repository: AppBundle\Repository\DealerPriceRepository
         app.imagine_block:
-            driver: doctrine/phpcr-odm
+            #driver: doctrine/phpcr-odm
             classes:
                 model: AppBundle\Document\ImagineBlock
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
@@ -85,7 +85,7 @@ sylius_resource:
                 form:
                     default: AppBundle\Form\Type\PubBannerType
         app.single_image_block:
-            driver: doctrine/phpcr-odm
+            #driver: doctrine/phpcr-odm
             classes:
                 model: AppBundle\Document\SingleImageBlock
                 factory: AppBundle\Factory\SingleImageBlockFactory
