@@ -1,6 +1,6 @@
 sylius_resource:
-    translation:
-        default_locale: %locale%
+#    translation:
+#        default_locale: %locale%
     resources:
         app.article:
             classes:
@@ -139,9 +139,6 @@ sylius_resource:
                 form:
                     default: AppBundle\Form\Type\TopicType
                     view_count: AppBundle\Form\Type\TopicViewCountType
-        app.topic_follower:
-            classes:
-                model: AppBundle\Entity\TopicFollower
         app.post:
             classes:
                 model: AppBundle\Entity\Post

@@ -14,19 +14,32 @@ namespace AppBundle\Factory;
 use AppBundle\Entity\Post;
 use AppBundle\Entity\Topic;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Resource\Factory\Factory;
-use Sylius\Component\User\Context\CustomerContextInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class PostFactory extends Factory
+class PostFactory implements FactoryInterface
 {
+    /**
+     * @var FactoryInterface
+     */
+    private $factory;
+
     /**
      * @var CustomerContextInterface
      */
     protected $customerContext;
+
+    /**
+     * @param FactoryInterface $factory
+     */
+    public function __construct(FactoryInterface $factory)
+    {
+        $this->factory = $factory;
+    }
 
     /**
      * @param CustomerContextInterface $customerContext
@@ -42,7 +55,7 @@ class PostFactory extends Factory
     public function createNew()
     {
         /** @var Post $post */
-        $post = parent::createNew();
+        $post = $this->factory->createNew();
         $post->setAuthor($this->customerContext->getCustomer());
 
         return $post;

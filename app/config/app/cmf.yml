@@ -21,10 +21,10 @@ sonata_block:
     blocks:
         sonata.block.service.text: ~
 
-cmf_create:
-    persistence:
-        phpcr:
-            image: false
+#cmf_create:
+#    persistence:
+#        phpcr:
+#            image: false
 
 cmf_routing:
     chain:

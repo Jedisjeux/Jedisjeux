@@ -12,6 +12,7 @@
 namespace AppBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ContainerBlock;
 
 
@@ -20,7 +21,7 @@ use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ContainerBlock;
  *
  * @PHPCR\Document(referenceable=true)
  */
-class ArticleContent extends ContainerBlock
+class ArticleContent extends ContainerBlock implements ResourceInterface
 {
     /**
      * state constants

@@ -13,6 +13,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -20,7 +21,7 @@ use Sylius\Component\Product\Model\ProductInterface;
  * @ORM\Entity
  * @ORM\Table(name="jdj_product_barcode")
  */
-class ProductBarcode
+class ProductBarcode implements ResourceInterface
 {
     use IdentifiableTrait;
 

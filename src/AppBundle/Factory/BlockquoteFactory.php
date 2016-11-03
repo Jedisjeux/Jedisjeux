@@ -12,20 +12,41 @@
 namespace AppBundle\Factory;
 
 use AppBundle\Document\BlockquoteBlock;
-use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class BlockquoteFactory extends Factory
+class BlockquoteFactory implements FactoryInterface
 {
+    /**
+     * @var FactoryInterface
+     */
+    private $factory;
+
+    /**
+     * @param FactoryInterface $factory
+     */
+    public function __construct(FactoryInterface $factory)
+    {
+        $this->factory = $factory;
+    }
+
+    /**
+     * @return object
+     */
+    public function createNew()
+    {
+        return $this->factory->createNew();
+    }
+
     /**
      * @return BlockquoteBlock
      */
     public function createWithFakeData()
     {
         /** @var BlockquoteBlock $block */
-        $block = $this->createNew();
+        $block = $this->factory->createNew();
 
         $faker = \Faker\Factory::create();
         $paragraphs = $faker->paragraphs(2);

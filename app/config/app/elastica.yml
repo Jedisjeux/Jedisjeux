@@ -37,7 +37,7 @@ fos_elastica:
                       username: { search_analyzer: custom_search_analyzer, index_analyzer: custom_index_analyzer, type: string }
                   persistence:
                       driver: orm
-                      model: %sylius.model.user.class%
+                      model: %sylius.model.shop_user.class%
                       provider: ~
                       finder: ~
               product:

@@ -12,19 +12,32 @@
 namespace AppBundle\Factory;
 
 use AppBundle\Entity\ContactRequest;
-use Sylius\Component\Resource\Factory\Factory;
-use Sylius\Component\User\Context\CustomerContextInterface;
-use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Customer\Context\CustomerContextInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class ContactRequestFactory extends Factory
+class ContactRequestFactory implements FactoryInterface
 {
+    /**
+     * @var FactoryInterface
+     */
+    private $factory;
+
     /**
      * @var CustomerContextInterface
      */
     protected $customerContext;
+
+    /**
+     * @param FactoryInterface $factory
+     */
+    public function __construct(FactoryInterface $factory)
+    {
+        $this->factory = $factory;
+    }
 
     /**
      * @param CustomerContextInterface $customerContext
@@ -40,7 +53,7 @@ class ContactRequestFactory extends Factory
     public function createNew()
     {
         /** @var ContactRequest $contactRequest */
-        $contactRequest = parent::createNew();
+        $contactRequest = $this->factory->createNew();
 
         /** @var CustomerInterface $customer */
         $customer = $this->customerContext->getCustomer();

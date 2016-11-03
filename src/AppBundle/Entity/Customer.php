@@ -10,7 +10,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Review\Model\ReviewerInterface;
-use Sylius\Component\User\Model\Customer as BaseCustomer;
+use Sylius\Component\Customer\Model\Customer as BaseCustomer;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>

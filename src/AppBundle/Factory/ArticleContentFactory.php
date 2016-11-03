@@ -15,17 +15,30 @@ use AppBundle\Document\ArticleContent;
 use Doctrine\ODM\PHPCR\Document\Generic;
 use Doctrine\ODM\PHPCR\DocumentManager;
 use PHPCR\Util\NodeHelper;
-use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class ArticleContentFactory extends Factory
+class ArticleContentFactory implements FactoryInterface
 {
+    /**
+     * @var FactoryInterface
+     */
+    private $factory;
+
     /**
      * @var DocumentManager
      */
     protected $documentManager;
+
+    /**
+     * @param FactoryInterface $factory
+     */
+    public function __construct(FactoryInterface $factory)
+    {
+        $this->factory = $factory;
+    }
 
     /**
      * @return ArticleContent
@@ -33,9 +46,7 @@ class ArticleContentFactory extends Factory
     public function createNew()
     {
         /** @var ArticleContent $articleContent */
-        $articleContent = parent::createNew();
-
-
+        $articleContent = $this->factory->createNew();
         $articleContent
             ->setParentDocument($this->getParent());
 

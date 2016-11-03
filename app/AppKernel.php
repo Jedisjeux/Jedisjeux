@@ -29,16 +29,16 @@ class AppKernel extends Kernel
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
 
-            new Sylius\Bundle\InstallerBundle\SyliusInstallerBundle(),
-            new Sylius\Bundle\ArchetypeBundle\SyliusArchetypeBundle(),
+            //new Sylius\Bundle\ArchetypeBundle\SyliusArchetypeBundle(),
             new Sylius\Bundle\ProductBundle\SyliusProductBundle(),
             new Sylius\Bundle\AssociationBundle\SyliusAssociationBundle(),
             new Sylius\Bundle\UserBundle\SyliusUserBundle(),
+            new Sylius\Bundle\CustomerBundle\SyliusCustomerBundle(),
             new Sylius\Bundle\MailerBundle\SyliusMailerBundle(),
             new Sylius\Bundle\ReviewBundle\SyliusReviewBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new Sylius\Bundle\AttributeBundle\SyliusAttributeBundle(),
-            new Sylius\Bundle\VariationBundle\SyliusVariationBundle(),
+            //new Sylius\Bundle\VariationBundle\SyliusVariationBundle(),
             new Sylius\Bundle\TaxonomyBundle\SyliusTaxonomyBundle(),
             new winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
 
@@ -49,7 +49,7 @@ class AppKernel extends Kernel
             new Symfony\Cmf\Bundle\ContentBundle\CmfContentBundle(),
             new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
             new Symfony\Cmf\Bundle\MenuBundle\CmfMenuBundle(),
-            new Symfony\Cmf\Bundle\CreateBundle\CmfCreateBundle(),
+            //new Symfony\Cmf\Bundle\CreateBundle\CmfCreateBundle(),
             new Symfony\Cmf\Bundle\MediaBundle\CmfMediaBundle(),
             new Sylius\Bundle\ContentBundle\SyliusContentBundle(),
 

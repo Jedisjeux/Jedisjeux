@@ -14,24 +14,48 @@ namespace AppBundle\Factory;
 use AppBundle\Entity\GamePlay;
 use AppBundle\Repository\ProductRepository;
 use Doctrine\ORM\EntityRepository;
-use Sylius\Bundle\UserBundle\Context\CustomerContext;
+use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class GamePlayFactory extends Factory
+class GamePlayFactory implements FactoryInterface
 {
+    /**
+     * @var FactoryInterface
+     */
+    private $factory;
+
     /**
      * @var EntityRepository
      */
     protected $productRepository;
 
     /**
-     * @var CustomerContext
+     * @var CustomerContextInterface
      */
     protected $customerContext;
+
+    /**
+     * @param FactoryInterface $factory
+     */
+    public function __construct(FactoryInterface $factory)
+    {
+        $this->factory = $factory;
+    }
+
+    /**
+     * @return GamePlay
+     */
+    public function createNew()
+    {
+        /** @var GamePlay $gamePlay */
+        $gamePlay = $this->factory->createNew();
+
+        return $gamePlay;
+    }
 
     /**
      * Create new game-play for a product

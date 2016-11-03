@@ -49,7 +49,7 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ "MopaBootstrapBundle", "CmfCreateBundle" ]
+    bundles:        [ "MopaBootstrapBundle" ]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~

@@ -1,8 +1,7 @@
 sylius_user:
     resources:
-        user:
-            classes:
-                repository: AppBundle\Repository\UserRepository
-        customer:
-            classes:
-                model: AppBundle\Entity\Customer
+        shop:
+            user:
+                classes:
+                    model: Sylius\Component\User\Model\User
+                    repository: AppBundle\Repository\UserRepository

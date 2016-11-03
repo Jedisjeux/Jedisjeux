@@ -15,15 +15,19 @@ use AppBundle\Entity\GamePlay;
 use AppBundle\Entity\Post;
 use AppBundle\Entity\Topic;
 use Doctrine\ORM\EntityRepository;
-use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\User\Context\CustomerContextInterface;
+use Sylius\Component\Customer\Context\CustomerContextInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class TopicFactory extends Factory
+class TopicFactory implements FactoryInterface
 {
+    /**
+     * @var FactoryInterface
+     */
+    private $factory;
+
     /**
      * @var CustomerContextInterface
      */
@@ -38,6 +42,14 @@ class TopicFactory extends Factory
      * @var FactoryInterface
      */
     protected $postFactory;
+
+    /**
+     * @param FactoryInterface $factory
+     */
+    public function __construct(FactoryInterface $factory)
+    {
+        $this->factory = $factory;
+    }
 
     /**
      * @param CustomerContextInterface $customerContext
@@ -69,7 +81,7 @@ class TopicFactory extends Factory
     public function createNew()
     {
         /** @var Topic $topic */
-        $topic = parent::createNew();
+        $topic = $this->factory->createNew();
         $topic->setAuthor($this->customerContext->getCustomer());
 
         /** @var Post $mainPost */

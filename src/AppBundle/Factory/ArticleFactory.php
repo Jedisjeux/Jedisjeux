@@ -13,15 +13,20 @@ namespace AppBundle\Factory;
 
 use AppBundle\Entity\Article;
 use Doctrine\ORM\EntityRepository;
+use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Component\Resource\Factory\Factory;
-use Sylius\Component\User\Context\CustomerContextInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class ArticleFactory extends Factory
+class ArticleFactory implements FactoryInterface
 {
+    /**
+     * @var FactoryInterface
+     */
+    private $factory;
+
     /**
      * @var ArticleContentFactory
      */
@@ -38,12 +43,20 @@ class ArticleFactory extends Factory
     protected $customerContext;
 
     /**
+     * @param FactoryInterface $factory
+     */
+    public function __construct(FactoryInterface $factory)
+    {
+        $this->factory = $factory;
+    }
+
+    /**
      * @return Article
      */
     public function createNew()
     {
         /** @var Article $article */
-        $article = parent::createNew();
+        $article = $this->factory->createNew();
         $articleContent = $this->articleContentFactory->createNew();
         $article->setDocument($articleContent);
         $article->setAuthor($this->customerContext->getCustomer());

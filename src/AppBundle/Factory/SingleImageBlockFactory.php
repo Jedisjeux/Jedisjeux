@@ -13,13 +13,37 @@ namespace AppBundle\Factory;
 
 use AppBundle\Document\ImagineBlock;
 use AppBundle\Document\SingleImageBlock;
-use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class SingleImageBlockFactory extends Factory
+class SingleImageBlockFactory implements FactoryInterface
 {
+    /**
+     * @var FactoryInterface
+     */
+    private $factory;
+
+    /**
+     * @param FactoryInterface $factory
+     */
+    public function __construct(FactoryInterface $factory)
+    {
+        $this->factory = $factory;
+    }
+
+    /**
+     * @return SingleImageBlock
+     */
+    public function createNew()
+    {
+        /** @var SingleImageBlock $singleImageBlock */
+        $singleImageBlock = $this->factory->createNew();
+
+        return $singleImageBlock;
+    }
+
     /**
      * @param string $imagePosition
      * @param string|null $class

@@ -15,16 +15,21 @@ use AppBundle\Entity\Article;
 use AppBundle\Entity\Notification;
 use AppBundle\Entity\Post;
 use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Component\Resource\Factory\Factory;
-use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Translation\Translator;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class NotificationFactory extends Factory
+class NotificationFactory implements FactoryInterface
 {
+    /**
+     * @var FactoryInterface
+     */
+    private $factory;
+
     /**
      * @var Router
      */
@@ -36,15 +41,32 @@ class NotificationFactory extends Factory
     protected $translator;
 
     /**
+     * @param FactoryInterface $factory
+     */
+    public function __construct(FactoryInterface $factory)
+    {
+        $this->factory = $factory;
+    }
+
+    /**
+     * @return Notification
+     */
+    public function createNew()
+    {
+        /** @var Notification $notification */
+        $notification = $this->factory->createNew();
+
+        return $notification;
+    }
+
+    /**
      * @param CustomerInterface $customer
      *
      * @return Notification
      */
     public function createForCustomer(CustomerInterface $customer)
     {
-        /** @var Notification $notification */
         $notification = $this->createNew();
-
         $notification->setRecipient($customer);
 
         return $notification;
@@ -66,7 +88,7 @@ class NotificationFactory extends Factory
             ->setTopic($post->getTopic())
             ->setTarget($this->router->generate('app_post_index_by_topic', ['topicId' => $post->getTopic()->getId()]))
             ->setMessage($this->translator->trans('text.notification.topic_reply', [
-                '%USERNAME%' => $post->getCreatedBy()->getCustomer(),
+                '%USERNAME%' => $post->getAuthor(),
                 '%TOPIC_NAME%' => $post->getTopic()->getTitle(),
             ]));
 
