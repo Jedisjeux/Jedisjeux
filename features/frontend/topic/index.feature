@@ -5,7 +5,10 @@ Feature: View list of topics
   I need to be able to view all the topics
 
   Background:
-    Given there are root taxons:
+    Given there are users:
+      | email             |
+      | kevin@example.com |
+    And there are root taxons:
       | code  | name  |
       | forum | Forum |
     And there are taxons:
@@ -13,9 +16,9 @@ Feature: View list of topics
       | 666  | Moi je dis jeux | Forum  |
       | XYZ  | Réglons-ça      | Forum  |
     And there are topics:
-      | title                          | main-taxon      |
-      | Retour de Cannes jour par jour | Réglons-ça      |
-      | Jeux avec handicap             | Moi je dis jeux |
+      | title                          | main_taxon      | author            |
+      | Retour de Cannes jour par jour | Réglons-ça      | kevin@example.com |
+      | Jeux avec handicap             | Moi je dis jeux | kevin@example.com |
 
   Scenario: View list of topics
     When I am on "/topics/"

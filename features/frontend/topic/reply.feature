@@ -12,8 +12,8 @@ Feature: Topic reply
       | code  | name  |
       | forum | Forum |
     And there are topics:
-      | name      |
-      | Zoo Topic |
+      | name      | author            |
+      | Zoo Topic | kevin@example.com |
     And I am logged in as user "kevin@example.com" with password "password"
 
   Scenario: Reply to a topic
