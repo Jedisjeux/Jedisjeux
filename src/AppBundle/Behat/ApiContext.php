@@ -12,7 +12,7 @@
 namespace AppBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
-use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>

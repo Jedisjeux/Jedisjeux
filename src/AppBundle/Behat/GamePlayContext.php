@@ -15,7 +15,7 @@ use AppBundle\Entity\GamePlay;
 use AppBundle\Factory\GamePlayFactory;
 use AppBundle\Repository\ProductRepository;
 use Behat\Gherkin\Node\TableNode;
-use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>

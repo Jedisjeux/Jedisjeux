@@ -50,7 +50,7 @@ class Topic implements ResourceInterface
     /**
      * @var CustomerInterface
      *
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\User\Model\CustomerInterface")
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Customer\Model\CustomerInterface")
      * @ORM\JoinColumn(nullable=false)
      */
     protected $author;
@@ -109,7 +109,7 @@ class Topic implements ResourceInterface
     /**
      * @var ArrayCollection|CustomerInterface[]
      *
-     * @ORM\ManyToMany(targetEntity="Sylius\Component\User\Model\CustomerInterface")
+     * @ORM\ManyToMany(targetEntity="Sylius\Component\Customer\Model\CustomerInterface")
      * @ORM\JoinTable(name="jdj_topic_follower")
      */
     protected $followers;
@@ -361,7 +361,7 @@ class Topic implements ResourceInterface
     }
 
     /**
-     * @return ArrayCollection|\Sylius\Component\User\Model\CustomerInterface[]
+     * @return ArrayCollection|\Sylius\Component\Customer\Model\CustomerInterface[]
      */
     public function getFollowers()
     {

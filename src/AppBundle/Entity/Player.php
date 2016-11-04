@@ -10,7 +10,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Resource\Model\ResourceInterface;
-use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -39,7 +39,7 @@ class Player implements ResourceInterface
     /**
      * @var CustomerInterface
      *
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\User\Model\CustomerInterface")
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Customer\Model\CustomerInterface")
      */
     protected $customer;
 

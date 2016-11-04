@@ -12,3 +12,9 @@ sylius_product:
             translation:
               classes:
                   model: AppBundle\Entity\ProductTranslation
+        product_variant:
+              classes:
+                  model: AppBundle\Entity\ProductVariant
+                  factory: Sylius\Component\Product\Factory\ProductVariantFactory
+                  form:
+                      default: AppBundle\Form\Type\ProductVariantType

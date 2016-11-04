@@ -12,7 +12,7 @@ use AppBundle\Entity\Product;
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
-use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>

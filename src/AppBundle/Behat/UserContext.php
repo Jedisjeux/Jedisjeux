@@ -10,7 +10,7 @@ namespace AppBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
 
 

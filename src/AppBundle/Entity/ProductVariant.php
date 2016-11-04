@@ -11,7 +11,7 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Sylius\Component\Product\Model\Variant;
+use Sylius\Component\Product\Model\ProductVariant as BaseProductVariant;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -19,7 +19,7 @@ use Sylius\Component\Product\Model\Variant;
  * @ORM\Entity
  * @ORM\Table(name="sylius_product_variant")
  */
-class ProductVariant extends Variant
+class ProductVariant extends BaseProductVariant
 {
     const RELEASED_AT_PRECISION_ON_DAY = 'on-day';
     const RELEASED_AT_PRECISION_ON_MONTH = 'on-month';

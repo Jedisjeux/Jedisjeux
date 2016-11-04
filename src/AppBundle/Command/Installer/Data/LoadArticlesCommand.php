@@ -16,7 +16,7 @@ use AppBundle\Entity\Taxon;
 use AppBundle\Entity\Topic;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
-use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SlideshowBlock;
 use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;

@@ -17,7 +17,7 @@ use Faker\Factory as FakerFactory;
 use Faker\Generator;
 use Sylius\Bundle\UserBundle\UserEvents;
 use Sylius\Component\Mailer\Sender\Sender;
-use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;

@@ -13,7 +13,7 @@ namespace AppBundle\EventSubscriber;
 
 use AppBundle\Emails;
 use Sylius\Component\Mailer\Sender\SenderInterface;
-use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 

@@ -9,7 +9,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Sylius\Component\Product\Model\VariantInterface;
+use Sylius\Component\Product\Model\ProductVariantInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -22,9 +22,9 @@ class ProductVariantImage extends AbstractImage
     /**
      * The associated product variant.
      *
-     * @var VariantInterface
+     * @var ProductVariantInterface
      *
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\VariantInterface", inversedBy="images")
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductVariantInterface", inversedBy="images")
      */
     protected $variant;
 
@@ -69,7 +69,7 @@ class ProductVariantImage extends AbstractImage
     /**
      * {@inheritdoc}
      */
-    public function setVariant(VariantInterface $variant = null)
+    public function setVariant(ProductVariantInterface $variant = null)
     {
         $this->variant = $variant;
 

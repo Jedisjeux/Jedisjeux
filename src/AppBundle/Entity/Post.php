@@ -61,7 +61,7 @@ class Post implements ResourceInterface
     /**
      * @var CustomerInterface
      *
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\User\Model\CustomerInterface")
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Customer\Model\CustomerInterface")
      */
     protected $author;
 

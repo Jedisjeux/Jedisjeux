@@ -16,7 +16,7 @@ use AppBundle\Entity\Post;
 use AppBundle\Factory\NotificationFactory;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\UserBundle\Context\CustomerContext;
-use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 

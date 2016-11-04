@@ -20,7 +20,7 @@ use AppBundle\Entity\Topic;
 use Doctrine\ODM\PHPCR\Document\Generic;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
-use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
 use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
 use Symfony\Component\Console\Input\InputInterface;

@@ -15,7 +15,7 @@ use AppBundle\Emails;
 use AppBundle\EventSubscriber\SendRegistrationEmailSubscriber;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Mailer\Sender\Sender;
-use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 

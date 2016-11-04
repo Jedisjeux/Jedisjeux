@@ -65,7 +65,7 @@ class GamePlay implements ResourceInterface
     /**
      * @var CustomerInterface
      *
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\User\Model\CustomerInterface")
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Customer\Model\CustomerInterface")
      * @ORM\JoinColumn(nullable=false)
      */
     protected $author;

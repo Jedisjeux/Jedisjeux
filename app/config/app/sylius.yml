@@ -9,4 +9,3 @@ imports:
     - { resource: sylius/sylius_review.yml }
     - { resource: sylius/sylius_taxonomy.yml }
     - { resource: sylius/sylius_user.yml }
-    #- { resource: sylius/sylius_variation.yml }

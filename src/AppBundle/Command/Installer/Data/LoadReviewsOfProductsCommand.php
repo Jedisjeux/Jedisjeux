@@ -15,7 +15,7 @@ use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
-use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

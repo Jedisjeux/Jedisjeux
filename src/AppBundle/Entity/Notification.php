@@ -34,7 +34,7 @@ class Notification implements ResourceInterface
      * @var CustomerInterface
      *
      * @ORM\ManyToOne(
-     *      targetEntity="Sylius\Component\User\Model\CustomerInterface"
+     *      targetEntity="Sylius\Component\Customer\Model\CustomerInterface"
      * )
      * @ORM\JoinColumn(nullable=false)
      */
