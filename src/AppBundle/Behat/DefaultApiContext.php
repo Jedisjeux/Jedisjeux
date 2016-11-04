@@ -17,13 +17,12 @@ use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Cookie\SetCookie;
 use GuzzleHttp\HandlerStack;
 use Psr\Http\Message\ResponseInterface;
-use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\User\Model\UserInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class DefaultApiContext extends DefaultContext
+class DefaultApiContext extends AbstractDefaultContext
 {
     /**
      * @var string
