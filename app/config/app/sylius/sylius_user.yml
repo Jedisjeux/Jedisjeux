@@ -3,7 +3,7 @@ sylius_user:
         shop:
             user:
                 classes:
-                    model: Sylius\Component\User\Model\User
+                    model: AppBundle\Entity\User
                     repository: AppBundle\Repository\UserRepository
         admin_oauth:
             user:
