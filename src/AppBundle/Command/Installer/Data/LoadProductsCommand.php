@@ -18,6 +18,7 @@ use Behat\Transliterator\Transliterator;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Association\Model\AssociationType;
+use Sylius\Component\Product\Factory\ProductFactory;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -141,9 +142,7 @@ class LoadProductsCommand extends ContainerAwareCommand
         $product = null !== $productVariant ? $productVariant->getProduct() : null;
 
         if (null === $product) {
-            $product = $this->getFactory()->createNew();
-        } else {
-            $product->setMasterVariant($productVariant);
+            $product = $this->getFactory()->createWithVariant();
         }
 
         $data['shortDescription'] = !empty($data['shortDescription']) ? $this->getHTMLFromText($data['shortDescription']) : null;
@@ -484,7 +483,7 @@ EOM;
     }
 
     /**
-     * @return Factory
+     * @return ProductFactory
      */
     protected function getFactory()
     {
