@@ -12,12 +12,12 @@
 namespace spec\AppBundle\EventSubscriber;
 
 use AppBundle\AppEvents;
+use AppBundle\Context\CustomerContext;
 use AppBundle\Entity\Post;
 use AppBundle\Entity\Topic;
 use AppBundle\EventSubscriber\AddTopicFollowerSubscriber;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\UserBundle\Context\CustomerContext;
-use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 

@@ -3,7 +3,6 @@
 namespace AppBundle\Command\Installer;
 
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
-use Sylius\Bundle\InstallerBundle\Command\AbstractInstallCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 

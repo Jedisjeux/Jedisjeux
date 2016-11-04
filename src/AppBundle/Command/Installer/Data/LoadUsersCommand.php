@@ -158,7 +158,7 @@ EOM;
      */
     protected function getUserRepository()
     {
-        return $this->getContainer()->get('sylius.repository.user');
+        return $this->getContainer()->get('sylius.repository.shop_user');
     }
 
     /**

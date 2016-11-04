@@ -13,7 +13,7 @@ app_post_update:
         _sylius:
             repository:
                 method: findOneBy
-                arguments: [{id: $id, author: expr:service('sylius.context.customer').getCustomer()}]
+                arguments: [{id: $id, author: expr:service('app.context.customer').getCustomer()}]
             redirect:
                 route: app_post_index_by_topic
                 parameters: { topicId: resource.topic.id }
@@ -27,7 +27,7 @@ app_post_delete:
         _sylius:
             repository:
                 method: findOneBy
-                arguments: [{id: $id, author: expr:service('sylius.context.customer').getCustomer()}]
+                arguments: [{id: $id, author: expr:service('app.context.customer').getCustomer()}]
             redirect: referer
 
 app_post_index_by_topic:

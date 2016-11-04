@@ -2,7 +2,6 @@
 
 namespace AppBundle\Command\Installer;
 
-use Sylius\Bundle\InstallerBundle\Command\AbstractInstallCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\Exception\RuntimeException;

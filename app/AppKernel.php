@@ -30,6 +30,7 @@ class AppKernel extends Kernel
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
 
             //new Sylius\Bundle\ArchetypeBundle\SyliusArchetypeBundle(),
+            new Sylius\Bundle\LocaleBundle\SyliusLocaleBundle(),
             new Sylius\Bundle\ProductBundle\SyliusProductBundle(),
             new Sylius\Bundle\AssociationBundle\SyliusAssociationBundle(),
             new Sylius\Bundle\UserBundle\SyliusUserBundle(),
@@ -63,6 +64,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
 
             new Infinite\FormBundle\InfiniteFormBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),

@@ -14,8 +14,8 @@ namespace AppBundle\EventSubscriber;
 use AppBundle\AppEvents;
 use AppBundle\Entity\Post;
 use AppBundle\Entity\Topic;
-use Sylius\Bundle\UserBundle\Context\CustomerContext;
-use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\Customer\Context\CustomerContextInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -25,16 +25,16 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 class AddTopicFollowerSubscriber implements EventSubscriberInterface
 {
     /**
-     * @var CustomerContext
+     * @var CustomerContextInterface
      */
     protected $customerContext;
 
     /**
      * AddTopicFollowerSubscriber constructor.
      *
-     * @param CustomerContext $customerContext
+     * @param CustomerContextInterface $customerContext
      */
-    public function __construct(CustomerContext $customerContext)
+    public function __construct(CustomerContextInterface $customerContext)
     {
         $this->customerContext = $customerContext;
     }

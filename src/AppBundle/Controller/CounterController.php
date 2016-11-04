@@ -60,7 +60,7 @@ class CounterController extends Controller
      */
     protected function getUserRepository()
     {
-        return $this->get('sylius.repository.user');
+        return $this->get('sylius.repository.shop_user');
     }
 
     /**

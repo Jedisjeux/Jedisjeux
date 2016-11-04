@@ -17,7 +17,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Validator\ConstraintViolationList;
 
-class AbstractInstallCommand extends ContainerAwareCommand
+abstract class AbstractInstallCommand extends ContainerAwareCommand
 {
     const APP_CACHE = 'app/cache/';
     const WEB_ASSETS_DIRECTORY = 'web/assets/';

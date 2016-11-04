@@ -14,12 +14,10 @@ namespace AppBundle\Form\Type;
 use AppBundle\Entity\Taxon;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Component\User\Context\CustomerContextInterface;
+use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
-use Symfony\Component\Security\Core\SecurityContext;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>

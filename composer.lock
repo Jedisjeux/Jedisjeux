@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ecc8ab240a14b03445c3ccc3c6cb04ff",
+    "content-hash": "11826f385baed1a7c6f71754c159f92d",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -5508,6 +5508,133 @@
             "time": "2016-11-01 01:43:17"
         },
         {
+            "name": "sylius/locale",
+            "version": "v1.0.0-alpha.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sylius/Locale.git",
+                "reference": "41fcd1ca416f93d971b464e66bfb70f2ad24dc22"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Sylius/Locale/zipball/41fcd1ca416f93d971b464e66bfb70f2ad24dc22",
+                "reference": "41fcd1ca416f93d971b464e66bfb70f2ad24dc22",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6|^7.0",
+                "sylius/resource": "^1.0",
+                "symfony/intl": "^2.8",
+                "zendframework/zend-stdlib": "^2.0|^3.0"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "^3.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sylius\\Component\\Locale\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sylius project",
+                    "homepage": "http://sylius.org"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "http://github.com/Sylius/Sylius/contributors"
+                },
+                {
+                    "name": "Paweł Jędrzejewski",
+                    "homepage": "http://pjedrzejewski.com"
+                }
+            ],
+            "description": "Locale handling for PHP applications.",
+            "homepage": "http://sylius.org",
+            "keywords": [
+                "i18n",
+                "internationalization",
+                "language",
+                "locale",
+                "localization"
+            ],
+            "time": "2016-10-14 14:19:11"
+        },
+        {
+            "name": "sylius/locale-bundle",
+            "version": "v1.0.0-alpha.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sylius/SyliusLocaleBundle.git",
+                "reference": "768f86d80faecef0c70b64c7463576e6fa988a48"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Sylius/SyliusLocaleBundle/zipball/768f86d80faecef0c70b64c7463576e6fa988a48",
+                "reference": "768f86d80faecef0c70b64c7463576e6fa988a48",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6|^7.0",
+                "sylius/locale": "^1.0",
+                "sylius/resource-bundle": "^1.0",
+                "symfony/framework-bundle": "^2.8"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "^3.1",
+                "twig/twig": "^1.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sylius\\Bundle\\LocaleBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sylius project",
+                    "homepage": "http://sylius.org"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "http://github.com/Sylius/Sylius/contributors"
+                },
+                {
+                    "name": "Paweł Jędrzejewski",
+                    "homepage": "http://pjedrzejewski.com"
+                }
+            ],
+            "description": "Locales management for Symfony2 projects.",
+            "homepage": "http://sylius.org",
+            "keywords": [
+                "i18n",
+                "internationalization",
+                "language",
+                "locale",
+                "localization"
+            ],
+            "time": "2016-10-14 14:19:11"
+        },
+        {
             "name": "sylius/mailer",
             "version": "v1.0.0-alpha.1",
             "source": {
@@ -8306,16 +8433,16 @@
         },
         {
             "name": "winzou/state-machine",
-            "version": "0.3.1",
+            "version": "0.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/winzou/state-machine.git",
-                "reference": "fdba1892d30bbef1b245b9dfe465731fb36ff6f0"
+                "reference": "4ef48e7bba494514f36884a618a9b889eec3a5b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/winzou/state-machine/zipball/fdba1892d30bbef1b245b9dfe465731fb36ff6f0",
-                "reference": "fdba1892d30bbef1b245b9dfe465731fb36ff6f0",
+                "url": "https://api.github.com/repos/winzou/state-machine/zipball/4ef48e7bba494514f36884a618a9b889eec3a5b0",
+                "reference": "4ef48e7bba494514f36884a618a9b889eec3a5b0",
                 "shasum": ""
             },
             "require": {
@@ -8356,7 +8483,7 @@
                 "state",
                 "statemachine"
             ],
-            "time": "2016-10-27 15:57:45"
+            "time": "2016-11-03 13:24:00"
         },
         {
             "name": "winzou/state-machine-bundle",

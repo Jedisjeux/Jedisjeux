@@ -29,6 +29,7 @@
     "sylius/user-bundle": "^1.0",
     "sylius/customer-bundle": "^1.0",
     "sylius/content-bundle": "^1.0",
+    "sylius/locale-bundle": "^1.0",
     "sylius/mailer-bundle": "^1.0",
     "sylius/review-bundle": "^1.0",
     "sylius/product-bundle": "^1.0",

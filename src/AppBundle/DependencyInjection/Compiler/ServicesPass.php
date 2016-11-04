@@ -27,6 +27,8 @@ class ServicesPass implements CompilerPassInterface
     {
         $this->processFactories($container);
         $this->processFormTypes($container);
+
+        $container->setAlias('sylius.context.customer', 'app.context.customer');
     }
 
     /**
@@ -36,13 +38,13 @@ class ServicesPass implements CompilerPassInterface
     {
         $topicFactoryDefinition = $container->getDefinition('app.factory.topic');
         $topicFactoryDefinition
-            ->addMethodCall('setCustomerContext', [new Reference('sylius.context.customer')])
+            ->addMethodCall('setCustomerContext', [new Reference('app.context.customer')])
             ->addMethodCall('setGamePlayRepository', [new Reference('app.repository.game_play')])
             ->addMethodCall('setPostFactory', [new Reference('app.factory.post')]);
 
         $postFactoryDefinition = $container->getDefinition('app.factory.post');
         $postFactoryDefinition
-            ->addMethodCall('setCustomerContext', [new Reference('sylius.context.customer')]);
+            ->addMethodCall('setCustomerContext', [new Reference('app.context.customer')]);
 
         $notificationFactoryDefinition = $container->getDefinition('app.factory.notification');
         $notificationFactoryDefinition
@@ -52,7 +54,7 @@ class ServicesPass implements CompilerPassInterface
         $gamePlayFactoryDefinition = $container->getDefinition('app.factory.game_play');
         $gamePlayFactoryDefinition
             ->addMethodCall('setProductRepository', [new Reference('sylius.repository.product')])
-            ->addMethodCall('setCustomerContext', [new Reference('sylius.context.customer')]);
+            ->addMethodCall('setCustomerContext', [new Reference('app.context.customer')]);
 
         $articleContentFactoryDefinition = $container->getDefinition('app.factory.article_content');
         $articleContentFactoryDefinition
@@ -62,11 +64,11 @@ class ServicesPass implements CompilerPassInterface
         $articleFactoryDefinition
             ->addMethodCall('setArticleContentFactory', [new Reference('app.factory.article_content')])
             ->addMethodCall('setProductRepository', [new Reference('sylius.factory.product')])
-            ->addMethodCall('setCustomerContext', [new Reference('sylius.context.customer')]);
+            ->addMethodCall('setCustomerContext', [new Reference('app.context.customer')]);
 
         $contactRequestFactoryDefinition = $container->getDefinition('app.factory.contact_request');
         $contactRequestFactoryDefinition
-            ->addMethodCall('setCustomerContext', [new Reference('sylius.context.customer')]);
+            ->addMethodCall('setCustomerContext', [new Reference('app.context.customer')]);
     }
 
     /**

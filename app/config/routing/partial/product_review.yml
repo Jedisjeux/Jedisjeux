@@ -33,4 +33,4 @@ sylius_partial_product_rating_show:
             template: 'frontend/product_review/rating/_show.html.twig'
             repository:
                 method: findOneBy
-                arguments: [{reviewSubject: $productId, author: expr:service('sylius.context.customer').getCustomer()}]
+                arguments: [{reviewSubject: $productId, author: expr:service('app.context.customer').getCustomer()}]

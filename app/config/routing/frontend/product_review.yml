@@ -35,6 +35,6 @@ sylius_product_rating_update:
             form: sylius_product_review_rating
             repository:
                 method: findOneBy
-                arguments: [{reviewSubject: $productId, author: expr:service('sylius.context.customer').getCustomer()}]
+                arguments: [{reviewSubject: $productId, author: expr:service('app.context.customer').getCustomer()}]
     options:
         expose: true

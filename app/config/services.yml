@@ -37,14 +37,14 @@ services:
     app.subscriber.add_topic_follower:
         class: AppBundle\EventSubscriber\AddTopicFollowerSubscriber
         arguments:
-            - "@sylius.context.customer"
+            - "@app.context.customer"
         tags:
             - { name: kernel.event_subscriber }
 
     app.subscriber.create_topic_notification:
         class: AppBundle\EventSubscriber\CreateTopicNotificationSubscriber
         arguments:
-            - "@sylius.context.customer"
+            - "@app.context.customer"
             - "@app.factory.notification"
             - "@app.manager.notification"
         tags:
@@ -193,7 +193,7 @@ services:
         arguments:
             - "@app.factory.notification"
             - "@doctrine.orm.entity_manager"
-            - "@sylius.repository.user"
+            - "@sylius.repository.shop_user"
             - "@router"
             - "@translator"
 
@@ -202,7 +202,7 @@ services:
         arguments:
             - "@app.factory.notification"
             - "@doctrine.orm.entity_manager"
-            - "@sylius.repository.user"
+            - "@sylius.repository.shop_user"
             - "@router"
             - "@translator"
 
@@ -231,3 +231,10 @@ services:
         arguments:
             - @app.google_analytics.client
             - %google.analytics.profile_id%
+
+    # <!-- Context -->
+    app.context.customer:
+        class: AppBundle\Context\CustomerContext
+        arguments:
+            - @security.token_storage
+            - @security.authorization_checker
