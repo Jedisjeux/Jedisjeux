@@ -75,7 +75,7 @@ class LoadReviewsOfProductsCommand extends ContainerAwareCommand
         $productReview->setRating($data['rating']);
         $productReview->setComment($data['comment']);
         $productReview->setStatus(ReviewInterface::STATUS_ACCEPTED);
-        $averageRatingCalculator = $this->getContainer()->get('sylius.review.calculator.average_rating');
+        $averageRatingCalculator = $this->getContainer()->get('sylius.average_rating_calculator');
         $product->setAverageRating($averageRatingCalculator->calculate($product));
 
         return $productReview;
