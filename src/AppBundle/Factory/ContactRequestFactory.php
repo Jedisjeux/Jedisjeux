@@ -22,9 +22,9 @@ use Sylius\Component\Customer\Model\CustomerInterface;
 class ContactRequestFactory implements FactoryInterface
 {
     /**
-     * @var FactoryInterface
+     * @var string
      */
-    private $factory;
+    private $className;
 
     /**
      * @var CustomerContextInterface
@@ -32,11 +32,11 @@ class ContactRequestFactory implements FactoryInterface
     protected $customerContext;
 
     /**
-     * @param FactoryInterface $factory
+     * @param string $className
      */
-    public function __construct(FactoryInterface $factory)
+    public function __construct($className)
     {
-        $this->factory = $factory;
+        $this->className = $className;
     }
 
     /**
@@ -53,7 +53,7 @@ class ContactRequestFactory implements FactoryInterface
     public function createNew()
     {
         /** @var ContactRequest $contactRequest */
-        $contactRequest = $this->factory->createNew();
+        $contactRequest = new $this->className;
 
         /** @var CustomerInterface $customer */
         $customer = $this->customerContext->getCustomer();

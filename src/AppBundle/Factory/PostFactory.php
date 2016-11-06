@@ -24,21 +24,21 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class PostFactory implements FactoryInterface
 {
     /**
-     * @var FactoryInterface
+     * @var string
      */
-    private $factory;
+    private $className;
 
     /**
      * @var CustomerContextInterface
      */
     protected $customerContext;
-
+    
     /**
-     * @param FactoryInterface $factory
+     * @param string $className
      */
-    public function __construct(FactoryInterface $factory)
+    public function __construct($className)
     {
-        $this->factory = $factory;
+        $this->className = $className;
     }
 
     /**
@@ -55,7 +55,7 @@ class PostFactory implements FactoryInterface
     public function createNew()
     {
         /** @var Post $post */
-        $post = $this->factory->createNew();
+        $post = new $this->className;
         $post->setAuthor($this->customerContext->getCustomer());
 
         return $post;

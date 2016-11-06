@@ -24,9 +24,9 @@ use Sylius\Component\Customer\Context\CustomerContextInterface;
 class TopicFactory implements FactoryInterface
 {
     /**
-     * @var FactoryInterface
+     * @var string
      */
-    private $factory;
+    private $className;
 
     /**
      * @var CustomerContextInterface
@@ -44,11 +44,11 @@ class TopicFactory implements FactoryInterface
     protected $postFactory;
 
     /**
-     * @param FactoryInterface $factory
+     * @param $className
      */
-    public function __construct(FactoryInterface $factory)
+    public function __construct($className)
     {
-        $this->factory = $factory;
+        $this->className = $className;
     }
 
     /**
@@ -81,7 +81,7 @@ class TopicFactory implements FactoryInterface
     public function createNew()
     {
         /** @var Topic $topic */
-        $topic = $this->factory->createNew();
+        $topic = new $this->className;
         $topic->setAuthor($this->customerContext->getCustomer());
 
         /** @var Post $mainPost */

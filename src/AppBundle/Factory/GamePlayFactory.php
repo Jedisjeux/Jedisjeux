@@ -24,9 +24,9 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 class GamePlayFactory implements FactoryInterface
 {
     /**
-     * @var FactoryInterface
+     * @var string
      */
-    private $factory;
+    private $className;
 
     /**
      * @var EntityRepository
@@ -39,11 +39,11 @@ class GamePlayFactory implements FactoryInterface
     protected $customerContext;
 
     /**
-     * @param FactoryInterface $factory
+     * @param string $className
      */
-    public function __construct(FactoryInterface $factory)
+    public function __construct($className)
     {
-        $this->factory = $factory;
+        $this->className = $className;
     }
 
     /**
@@ -52,7 +52,7 @@ class GamePlayFactory implements FactoryInterface
     public function createNew()
     {
         /** @var GamePlay $gamePlay */
-        $gamePlay = $this->factory->createNew();
+        $gamePlay = new $this->className;
 
         return $gamePlay;
     }

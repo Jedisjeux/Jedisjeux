@@ -26,9 +26,9 @@ use Symfony\Component\Translation\Translator;
 class NotificationFactory implements FactoryInterface
 {
     /**
-     * @var FactoryInterface
+     * @var string
      */
-    private $factory;
+    private $className;
 
     /**
      * @var Router
@@ -41,11 +41,11 @@ class NotificationFactory implements FactoryInterface
     protected $translator;
 
     /**
-     * @param FactoryInterface $factory
+     * @param string $className
      */
-    public function __construct(FactoryInterface $factory)
+    public function __construct($className)
     {
-        $this->factory = $factory;
+        $this->className = $className;
     }
 
     /**
@@ -54,7 +54,7 @@ class NotificationFactory implements FactoryInterface
     public function createNew()
     {
         /** @var Notification $notification */
-        $notification = $this->factory->createNew();
+        $notification = new $this->className;
 
         return $notification;
     }
