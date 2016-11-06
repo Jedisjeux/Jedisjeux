@@ -26,8 +26,28 @@ class User extends BaseUser
     /**
      * @var CustomerInterface
      *
-     * @ORM\OneToOne(targetEntity="Sylius\Component\Customer\Model\CustomerInterface")
+     * @ORM\OneToOne(targetEntity="Sylius\Component\Customer\Model\CustomerInterface", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     protected $customer;
+
+    /**
+     * @return CustomerInterface
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
+
+    /**
+     * @param CustomerInterface $customer
+     *
+     * @return $this
+     */
+    public function setCustomer($customer)
+    {
+        $this->customer = $customer;
+
+        return $this;
+    }
 }

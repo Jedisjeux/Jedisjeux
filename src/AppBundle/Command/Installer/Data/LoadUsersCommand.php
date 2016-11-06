@@ -61,7 +61,7 @@ class LoadUsersCommand extends ContainerAwareCommand
 
     protected function createOrReplaceUser($data)
     {
-        $canonicalizer = $this->getContainer()->get('sylius.user.canonicalizer');
+        $canonicalizer = $this->getContainer()->get('sylius.canonicalizer');
 
         /*
          * @var UserInterface
@@ -75,9 +75,14 @@ class LoadUsersCommand extends ContainerAwareCommand
             $user->setCustomer($customer);
         }
 
+        $email = $data['email'];
+        $emailCanonical = $canonicalizer->canonicalize($email);
+
         $user->getCustomer()->setCode('user-'.$data['id']);
-        $user->setEmail($data['email']);
-        $user->setEmailCanonical($canonicalizer->canonicalize($user->getEmail()));
+        $user->getCustomer()->setEmail($email);
+        $user->getCustomer()->setEmailCanonical($emailCanonical);
+        $user->setEmail($email);
+        $user->setEmailCanonical($emailCanonical);
         $user->setUsername($data['username']);
         $user->setUsernameCanonical($canonicalizer->canonicalize($user->getUsername()));
         $user->setCreatedAt(\DateTime::createFromFormat('Y-m-d H:i:s', $data['createdAt']));
@@ -85,7 +90,7 @@ class LoadUsersCommand extends ContainerAwareCommand
 
         if (null === $user->getId()) {
             $user->setPlainPassword(md5(uniqid($user->getUsername(), true)));
-            $this->getContainer()->get('sylius.user.password_updater')->updatePassword($user);
+            $this->getContainer()->get('sylius.security.password_updater')->updatePassword($user);
         }
 
         $roles = array('ROLE_USER');
@@ -98,7 +103,14 @@ class LoadUsersCommand extends ContainerAwareCommand
                 break;
         }
 
-        $user->setRoles($roles);
+        foreach ($user->getRoles() as $role) {
+            $user->removeRole($role);
+        }
+
+        foreach ($roles as $role) {
+            $user->addRole($role);
+        }
+
         $user->setEnabled(true);
 
         return $user;
@@ -142,7 +154,7 @@ EOM;
      */
     protected function getUserFactory()
     {
-        return $this->getContainer()->get('sylius.factory.user');
+        return $this->getContainer()->get('sylius.factory.shop_user');
     }
 
     /**
