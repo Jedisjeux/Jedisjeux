@@ -17,7 +17,6 @@ use AppBundle\Document\BlockquoteBlock;
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Taxon;
 use AppBundle\Entity\Topic;
-use Doctrine\ODM\PHPCR\Document\Generic;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;

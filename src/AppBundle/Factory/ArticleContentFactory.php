@@ -23,9 +23,9 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 class ArticleContentFactory implements FactoryInterface
 {
     /**
-     * @var FactoryInterface
+     * @var string
      */
-    private $factory;
+    private $className;
 
     /**
      * @var DocumentManager
@@ -33,11 +33,11 @@ class ArticleContentFactory implements FactoryInterface
     protected $documentManager;
 
     /**
-     * @param FactoryInterface $factory
+     * @param string $className
      */
-    public function __construct(FactoryInterface $factory)
+    public function __construct($className)
     {
-        $this->factory = $factory;
+        $this->className = $className;
     }
 
     /**
@@ -46,7 +46,7 @@ class ArticleContentFactory implements FactoryInterface
     public function createNew()
     {
         /** @var ArticleContent $articleContent */
-        $articleContent = $this->factory->createNew();
+        $articleContent = new $this->className;
         $articleContent
             ->setParentDocument($this->getParent());
 

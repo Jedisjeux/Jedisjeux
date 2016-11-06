@@ -25,7 +25,7 @@ use Doctrine\ORM\EntityRepository;
 use Jackalope\NodeType\NodeProcessor;
 use PHPCR\PathNotFoundException;
 use PHPCR\Util\NodeHelper;
-use Sylius\Bundle\InstallerBundle\Command\CommandExecutor;
+use AppBundle\Command\Installer\CommandExecutor;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\AbstractBlock;
