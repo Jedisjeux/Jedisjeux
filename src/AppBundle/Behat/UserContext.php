@@ -45,8 +45,8 @@ class UserContext extends DefaultContext
 
         foreach ($table->getHash() as $data) {
 
-            $customer = $this->createCustomerByData($data);
-            $manager->persist($customer);
+            $user = $this->createUserByData($data);
+            $manager->persist($user);
         }
 
         $manager->flush();
@@ -54,9 +54,9 @@ class UserContext extends DefaultContext
 
     /**
      * @param array $data
-     * @return CustomerInterface
+     * @return UserInterface
      */
-    protected function createCustomerByData(array $data)
+    protected function createUserByData(array $data)
     {
         /** @var CustomerInterface $customer */
         $customer = $this->getCustomerFactory()->createNew();
@@ -68,7 +68,7 @@ class UserContext extends DefaultContext
 
         $this->getContainer()->get('sylius.listener.password_updater')->updateUserPassword($user);
 
-        return $customer;
+        return $user;
     }
 
     /**
@@ -78,8 +78,10 @@ class UserContext extends DefaultContext
     protected function populateUser(UserInterface $user, array $data)
     {
         $user->setUsername(isset($data['email']) ? trim($data['email']) : $this->faker->email);
+        $user->setUsernameCanonical($this->getCanonicalizer()->canonicalize($user->getUsername()));
         $user->setPlainPassword(isset($data['password']) ? trim($data['password']) : $this->faker->password());
         $user->setEmail(isset($data['email']) ? trim($data['email']) : $this->faker->email);
+        $user->setEmailCanonical($this->getCanonicalizer()->canonicalize($user->getEmail()));
         $user->setEnabled(isset($data['enabled']) ? (bool)$data['enabled'] : true);
         $user->setLocked(isset($data['locked']) ? (bool)$data['locked'] : false);
         $user->addRole(isset($data['role']) ? $data['role'] : 'ROLE_USER');
