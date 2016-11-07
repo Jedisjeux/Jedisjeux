@@ -51,6 +51,7 @@ class LoadRootTaxonsCommand extends ContainerAwareCommand
         }
 
         $this->getManager()->flush();
+        $output->writeln(sprintf("<info>%s root taxons successfully loaded</info>", count($this->getRootTaxons())));
     }
 
     /**
