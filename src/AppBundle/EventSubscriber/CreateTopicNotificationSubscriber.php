@@ -15,7 +15,7 @@ use AppBundle\AppEvents;
 use AppBundle\Entity\Post;
 use AppBundle\Factory\NotificationFactory;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\UserBundle\Context\CustomerContext;
+use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -26,7 +26,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 class CreateTopicNotificationSubscriber implements EventSubscriberInterface
 {
     /**
-     * @var CustomerContext
+     * @var CustomerContextInterface
      */
     protected $customerContext;
 
@@ -43,11 +43,11 @@ class CreateTopicNotificationSubscriber implements EventSubscriberInterface
     /**
      * CreateTopicNotificationSubscriber constructor.
      *
-     * @param CustomerContext $customerContext
+     * @param CustomerContextInterface $customerContext
      * @param NotificationFactory $factory
      * @param ObjectManager $manager
      */
-    public function __construct(CustomerContext $customerContext, NotificationFactory $factory, ObjectManager $manager)
+    public function __construct(CustomerContextInterface $customerContext, NotificationFactory $factory, ObjectManager $manager)
     {
         $this->customerContext = $customerContext;
         $this->factory = $factory;

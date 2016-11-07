@@ -236,5 +236,5 @@ services:
     app.context.customer:
         class: AppBundle\Context\CustomerContext
         arguments:
-            - @security.token_storage
-            - @security.authorization_checker
+            - "@security.token_storage"
+            - "@security.authorization_checker"

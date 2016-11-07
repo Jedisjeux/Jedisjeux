@@ -1,6 +1,6 @@
 sylius_admin_user:
     resource: |
-        alias: sylius.user
+        alias: sylius.shop_user
         section: admin
         templates: :backend/user
         redirect: index

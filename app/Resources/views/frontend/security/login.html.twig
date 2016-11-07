@@ -11,7 +11,7 @@
 
     <p id="profile-name" class="profile-name-card"></p>
 
-    <form action="{{ path("sylius_user_security_check") }}"
+    <form action="{{ path("sylius_shop_login_check") }}"
           novalidate
           class="form-signin"
           method="post">
@@ -36,7 +36,7 @@
         <div class="row">
             <div class="col-md-12">
                 <p class="security-links">
-                    <a class="forgot-password" href="{{ path('sylius_user_request_password_reset_token') }}">Mot de passe oublié ?</a>
+                    <a class="forgot-password" href="{{ path('sylius_shop_request_password_reset_token') }}">Mot de passe oublié ?</a>
                 </p>
             </div>
         </div>
@@ -62,7 +62,7 @@
     <p class="text-center">ou</p>
 
     <!-- /form -->
-    <a class="btn btn-lg btn-block btn-primary" href="{{ path('sylius_user_registration') }}">
+    <a class="btn btn-lg btn-block btn-primary" href="{{ path('sylius_shop_register') }}">
         Créer un compte
     </a>
 {% endblock card_container_content %}

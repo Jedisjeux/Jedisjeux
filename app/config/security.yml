@@ -47,14 +47,15 @@ security:
             pattern: ^/
             form_login:
                 provider: sylius_user_provider
-                login_path: /login
-                check_path: /login_check
-                failure_path: /login
+                login_path: sylius_shop_login
+                check_path: sylius_shop_login_check
+                failure_path: sylius_shop_login
                 default_target_path: /
                 use_forward:  false
                 use_referer: true
             logout:
-                target: /
+               path: sylius_shop_logout
+               target: sylius_shop_login
             context: user
 
     access_control:

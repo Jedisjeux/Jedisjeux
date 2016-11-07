@@ -8,6 +8,7 @@
 
 namespace AppBundle\Behat;
 
+use AppBundle\Repository\TaxonRepository;
 use Behat\Gherkin\Node\TableNode;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
@@ -29,8 +30,14 @@ class TaxonContext extends DefaultContext
 
         foreach ($table->getHash() as $data) {
 
+            /** @var TaxonRepository $repository */
+            $repository = $this->getRepository('taxon');
+
             /** @var TaxonInterface $parent */
-            $parent = $this->getRepository('taxon')->findOneByName($data['parent']);
+            $parents = $repository->findByName($data['parent'], $this->getContainer()->getParameter('locale'));
+            if (count($parents) > 0) {
+                $parent = $parents[0];
+            }
 
             /** @var TaxonInterface $taxon */
             $taxon = $this->getFactory('taxon')->createNew();
@@ -60,6 +67,7 @@ class TaxonContext extends DefaultContext
             $taxon = $this->getFactory('taxon')->createNew();
             $taxon->setCode(isset($data['code']) ? $data['code'] : $this->faker->unique()->text(5));
             $taxon->setName(isset($data['name']) ? $data['name'] : $this->faker->name);
+            $taxon->setCurrentLocale($this->getContainer()->getParameter('locale'));
 
             $manager->persist($taxon);
             $manager->flush();

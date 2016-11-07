@@ -8,9 +8,11 @@
 
 namespace AppBundle\Behat;
 
+use AppBundle\Entity\User;
 use Behat\Gherkin\Node\TableNode;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\User\Canonicalizer\Canonicalizer;
 use Sylius\Component\User\Model\UserInterface;
 
 
@@ -58,13 +60,14 @@ class UserContext extends DefaultContext
     {
         /** @var CustomerInterface $customer */
         $customer = $this->getCustomerFactory()->createNew();
-        /** @var UserInterface $user */
+        /** @var User $user */
         $user = $this->getUserFactory()->createNew();
-        $customer->setUser($user);
+        $user->setCustomer($customer);
         $this->populateUser($user, $data);
         $this->populateCustomer($customer, $data);
 
-        $this->getContainer()->get('sylius.user.password_updater')->updatePassword($user);
+        $this->getContainer()->get('sylius.listener.password_updater')->updateUserPassword($user);
+
         return $customer;
     }
 
@@ -81,7 +84,7 @@ class UserContext extends DefaultContext
         $user->setLocked(isset($data['locked']) ? (bool)$data['locked'] : false);
         $user->addRole(isset($data['role']) ? $data['role'] : 'ROLE_USER');
 
-        $user->setConfirmationToken(isset($data['confirmation_token']) ? $data['confirmation_token'] : null);
+        $user->setPasswordResetToken(isset($data['confirmation_token']) ? $data['confirmation_token'] : null);
 
         if (isset($data['confirmation_token'])) {
             $user->setPasswordRequestedAt(isset($data['password_requested_At']) ? \DateTime::createFromFormat('Y-m-d', $data['password_requested_At']) : new \DateTime());
@@ -94,6 +97,8 @@ class UserContext extends DefaultContext
      */
     protected function populateCustomer(CustomerInterface $customer, array $data)
     {
+        $customer->setEmail(isset($data['email']) ? trim($data['email']) : $this->faker->email);
+        $customer->setEmailCanonical($this->getCanonicalizer()->canonicalize($customer->getEmail()));
         $customer->setFirstName(isset($data['first_name']) ? trim($data['first_name']) : $this->faker->firstName);
         $customer->setLastName(isset($data['last_name']) ? trim($data['last_name']) : $this->faker->lastName);
     }
@@ -103,7 +108,7 @@ class UserContext extends DefaultContext
      */
     protected function getUserFactory()
     {
-        return $this->getContainer()->get('sylius.factory.user');
+        return $this->getContainer()->get('sylius.factory.shop_user');
     }
 
     /**
@@ -112,5 +117,13 @@ class UserContext extends DefaultContext
     protected function getCustomerFactory()
     {
         return $this->getContainer()->get('sylius.factory.customer');
+    }
+
+    /**
+     * @return Canonicalizer
+     */
+    protected function getCanonicalizer()
+    {
+        return $this->getContainer()->get('sylius.canonicalizer');
     }
 }

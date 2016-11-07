@@ -37,17 +37,5 @@ _liip_imagine:
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
-create:
-    resource: "@CmfCreateBundle/Resources/config/routing/rest.xml"
-
-create_image:
-    resource: "@CmfCreateBundle/Resources/config/routing/image.xml"
-
-cmf_media_file:
-    resource: "@CmfMediaBundle/Resources/config/routing/file.xml"
-
-cmf_media_image:
-    resource: "@CmfMediaBundle/Resources/config/routing/image.xml"
-
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
