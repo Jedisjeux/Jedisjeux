@@ -11,6 +11,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\Customer\Model\Customer as BaseCustomer;
+use Sylius\Component\User\Model\UserInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -20,6 +21,13 @@ use Sylius\Component\Customer\Model\Customer as BaseCustomer;
  */
 class Customer extends BaseCustomer implements ReviewerInterface
 {
+    /**
+     * @var UserInterface
+     *
+     * @ORM\OneToOne(targetEntity="Sylius\Component\User\Model\UserInterface", mappedBy="customer")
+     */
+    private $user;
+
     /**
      * @var Avatar
      *
