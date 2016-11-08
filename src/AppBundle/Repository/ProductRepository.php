@@ -11,8 +11,10 @@ namespace AppBundle\Repository;
 use AppBundle\Entity\Product;
 use AppBundle\Utils\DateCalculator;
 use Doctrine\ORM\QueryBuilder;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
@@ -32,6 +34,23 @@ class ProductRepository extends BaseProductRepository
             ->leftJoin('o.variants', 'variant')
             ->leftJoin('variant.images', 'image')
             ->leftJoin('o.mainTaxon', 'mainTaxon');
+    }
+
+    /**
+     * @param string $slug
+     *
+     * @return ProductInterface|null
+     */
+    public function findOneBySlug($slug)
+    {
+        return $this->createQueryBuilder('o')
+            ->leftJoin('o.translations', 'translation')
+            ->andWhere('o.enabled = true')
+            ->andWhere('translation.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
     }
 
     /**
@@ -209,5 +228,16 @@ class ProductRepository extends BaseProductRepository
             ->setParameter('published', Product::PUBLISHED);
 
         return $queryBuilder->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @param QueryBuilder $queryBuilder
+     *
+     * @return Pagerfanta
+     */
+    protected function getPaginator(QueryBuilder $queryBuilder)
+    {
+        // Use output walkers option in DoctrineORMAdapter should be false as it affects performance greatly (see #3775)
+        return new Pagerfanta(new DoctrineORMAdapter($queryBuilder, true, true));
     }
 }

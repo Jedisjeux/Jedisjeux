@@ -81,4 +81,24 @@ class Customer extends BaseCustomer implements ReviewerInterface
 
         return $this;
     }
+
+    /**
+     * @return UserInterface
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param UserInterface $user
+     *
+     * @return Customer
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
 }

@@ -67,7 +67,6 @@ class TaxonContext extends DefaultContext
             $taxon = $this->getFactory('taxon')->createNew();
             $taxon->setCode(isset($data['code']) ? $data['code'] : $this->faker->unique()->text(5));
             $taxon->setName(isset($data['name']) ? $data['name'] : $this->faker->name);
-            $taxon->setCurrentLocale($this->getContainer()->getParameter('locale'));
 
             $manager->persist($taxon);
             $manager->flush();

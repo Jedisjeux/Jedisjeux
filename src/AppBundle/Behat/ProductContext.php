@@ -9,6 +9,7 @@
 namespace AppBundle\Behat;
 
 use AppBundle\Entity\Product;
+use AppBundle\Repository\ProductRepository;
 use Behat\Gherkin\Node\TableNode;
 use Sylius\Component\Attribute\AttributeType\CheckboxAttributeType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
@@ -127,12 +128,15 @@ class ProductContext extends DefaultContext
      */
     public function productHasTaxons($productName, TableNode $table)
     {
+        /** @var ProductRepository $productRepository */
+        $productRepository = $this->getRepository('product');
+
         /** @var Product $product */
-        $product = $this->findOneByName('product', $productName);
+        $product = $productRepository->findByName($productName, $this->getContainer()->getParameter('locale'))[0];
 
         foreach ($table->getHash() as $data) {
             /** @var TaxonInterface $parent */
-            $taxon = $this->getRepository('taxon')->findOneByName($data['name']);
+            $taxon = $this->getRepository('taxon')->findByName($data['name'], $this->getContainer()->getParameter('locale'))[0];
             $product->addTaxon($taxon);
         }
 
@@ -144,8 +148,11 @@ class ProductContext extends DefaultContext
      */
     public function iRequestGetProduct($productName)
     {
+        /** @var ProductRepository $productRepository */
+        $productRepository = $this->getRepository('product');
+
         /** @var Product $product */
-        $product = $this->findOneByName('product', $productName);
+        $product = $productRepository->findByName($productName, $this->getContainer()->getParameter('locale'))[0];
 
         $this->makeRequest(sprintf('/api/products/%s', $product->getId()));
     }

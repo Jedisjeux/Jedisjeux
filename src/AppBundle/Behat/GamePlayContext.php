@@ -37,7 +37,7 @@ class GamePlayContext extends DefaultContext
 
             /** @var ProductRepository $productRepository */
             $productRepository = $this->getRepository('product');
-            $product = $productRepository->findOneByName($data['product']);
+            $product = $productRepository->findByName($data['product'], $this->getContainer()->getParameter('locale'))[0];
 
             /** @var CustomerInterface $author */
             $author = $this->getRepository('customer')->findOneBy(['email' => $data['author']]);

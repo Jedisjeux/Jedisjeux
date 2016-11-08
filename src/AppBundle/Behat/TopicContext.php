@@ -36,7 +36,7 @@ class TopicContext extends DefaultContext
             $mainTaxon = null;
             
             if (isset($data['main_taxon'])) {
-                $mainTaxon = $this->getRepository('taxon')->findOneByName($data['main_taxon']);
+                $mainTaxon = $this->getRepository('taxon')->findByName($data['main_taxon'], $this->getContainer()->getParameter('locale'))[0];
             }
 
             $author = isset($data['author']) ? $this->getRepository('customer')->findOneBy(['email' => $data['author']]) : null;
