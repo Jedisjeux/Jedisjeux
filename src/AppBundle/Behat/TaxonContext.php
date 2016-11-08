@@ -34,9 +34,12 @@ class TaxonContext extends DefaultContext
             $repository = $this->getRepository('taxon');
 
             /** @var TaxonInterface $parent */
-            $parents = $repository->findByName($data['parent'], $this->getContainer()->getParameter('locale'));
-            if (count($parents) > 0) {
-                $parent = $parents[0];
+            $parent = $repository->findOneByPermalink($data['parent']);
+
+            if (null === $parent) {
+                throw new \InvalidArgumentException(
+                    sprintf('Taxon with permalink "%s" was not found.', $data['parent'])
+                );
             }
 
             /** @var TaxonInterface $taxon */

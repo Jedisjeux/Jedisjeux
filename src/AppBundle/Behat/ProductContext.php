@@ -38,8 +38,12 @@ class ProductContext extends DefaultContext
             /** @var TaxonInterface $mainTaxon */
             $mainTaxon = null;
 
-            if (isset($data['main-taxon'])) {
-                $mainTaxon = $this->getRepository('taxon')->findOneByName($data['main-taxon']);
+            if (isset($data['main_taxon'])) {
+                $mainTaxon = $this->getRepository('taxon')->findOneByName($data['main_taxon']);
+
+                throw new \InvalidArgumentException(
+                    sprintf('Taxon with permalink "%s" was not found.', $data['main_taxon'])
+                );
             }
 
             /** @var Product $product */
@@ -136,7 +140,7 @@ class ProductContext extends DefaultContext
 
         foreach ($table->getHash() as $data) {
             /** @var TaxonInterface $parent */
-            $taxon = $this->getRepository('taxon')->findByName($data['name'], $this->getContainer()->getParameter('locale'))[0];
+            $taxon = $this->getRepository('taxon')->findOneByPermalink($data['permalink']);
             $product->addTaxon($taxon);
         }
 

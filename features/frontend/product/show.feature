@@ -17,9 +17,9 @@ Feature: View a product
       | name      |
       | Louis XIV |
     And product "Louis XIV" has following taxons:
-      | name       |
-      | Majorité   |
-      | Historique |
+      | name                |
+      | mecanismes/majorite |
+      | themes/historique   |
 
   Scenario: View product
     Given I am on "/jeux-de-societe/"

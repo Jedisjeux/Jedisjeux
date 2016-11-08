@@ -13,7 +13,7 @@ Feature: Creates taxons
       | themes | Thèmes |
     And there are taxons:
       | parent | name            |
-      | Thèmes | Science-fiction |
+      | themes | Science-fiction |
     And I am logged in as user "admin@example.com" with password "password"
 
   Scenario: Create a taxon without parent

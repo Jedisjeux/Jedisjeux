@@ -1,9 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: loic
- * Date: 07/08/2015
- * Time: 10:51
+
+/*
+ * This file is part of Jedisjeux project.
+ *
+ * (c) Jedisjeux
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AppBundle\Behat;
@@ -14,7 +17,6 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\User\Canonicalizer\Canonicalizer;
 use Sylius\Component\User\Model\UserInterface;
-
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>

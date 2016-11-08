@@ -15,8 +15,8 @@ Feature: Creates products
       | target-audience | Public cible |
     And there are taxons:
       | parent | name            |
-      | Thèmes | Science-fiction |
-      | Thèmes | Fantastique     |
+      | themes | Science-fiction |
+      | themes | Fantastique     |
 
     And I am logged in as user "admin@example.com" with password "password"
 

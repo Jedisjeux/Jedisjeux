@@ -69,7 +69,7 @@ class TopicRepository extends EntityRepository
 
         if (!$showPrivate) {
             $queryBuilder
-                ->andWhere('mainTaxon is null or mainTaxon.public = :public')
+                ->andWhere('o.mainTaxon is null or mainTaxon.public = :public')
                 ->setParameter('public', true);
         }
 

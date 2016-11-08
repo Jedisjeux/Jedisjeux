@@ -13,12 +13,12 @@ Feature: View list of topics
       | forum | Forum |
     And there are taxons:
       | code | name            | parent |
-      | 666  | Moi je dis jeux | Forum  |
-      | XYZ  | Réglons-ça      | Forum  |
+      | 666  | Moi je dis jeux | forum  |
+      | XYZ  | Réglons-ça      | forum  |
     And there are topics:
-      | title                          | main_taxon      | author            |
-      | Retour de Cannes jour par jour | Réglons-ça      | kevin@example.com |
-      | Jeux avec handicap             | Moi je dis jeux | kevin@example.com |
+      | title                          | main_taxon            | author            |
+      | Retour de Cannes jour par jour | forum/reglons-ca      | kevin@example.com |
+      | Jeux avec handicap             | forum/moi-je-dis-jeux | kevin@example.com |
 
   Scenario: View list of topics
     When I am on "/topics/"

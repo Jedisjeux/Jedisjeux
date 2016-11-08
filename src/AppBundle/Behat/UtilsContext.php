@@ -1,9 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: pbrun
- * Date: 21/04/15
- * Time: 10:48
+
+/*
+ * This file is part of Jedisjeux project.
+ *
+ * (c) Jedisjeux
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AppBundle\Behat;

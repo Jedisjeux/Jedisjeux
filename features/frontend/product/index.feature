@@ -10,18 +10,18 @@ Feature: View list of products
       | mechanisms | Mécanismes |
     And there are taxons:
       | code        | name     | parent     |
-      | mechanism-1 | Enchères | Mécanismes |
-      | mechanism-2 | Majorité | Mécanismes |
+      | mechanism-1 | Enchères | mecanismes |
+      | mechanism-2 | Majorité | mecanismes |
     And there are products:
       | name      |
       | Palazzo   |
       | Louis XIV |
     And product "Palazzo" has following taxons:
-      | name     |
-      | Enchères |
+      | permalink           |
+      | mecanismes/encheres |
     And product "Louis XIV" has following taxons:
-      | name     |
-      | Majorité |
+      | permalink           |
+      | mecanismes/majorite |
 
   Scenario: View list of products
     When I am on "/jeux-de-societe/"

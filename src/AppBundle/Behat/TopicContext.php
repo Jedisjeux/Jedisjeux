@@ -1,10 +1,12 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: loic
- * Date: 23/06/2016
- * Time: 13:48
+/*
+ * This file is part of Jedisjeux project.
+ *
+ * (c) Jedisjeux
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AppBundle\Behat;
@@ -12,6 +14,7 @@ namespace AppBundle\Behat;
 use AppBundle\Entity\Post;
 use AppBundle\Entity\Topic;
 use Behat\Gherkin\Node\TableNode;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
@@ -33,13 +36,22 @@ class TopicContext extends DefaultContext
         foreach ($table->getHash() as $data) {
 
             /** @var TaxonInterface $mainTaxon */
-            $mainTaxon = null;
-            
-            if (isset($data['main_taxon'])) {
-                $mainTaxon = $this->getRepository('taxon')->findByName($data['main_taxon'], $this->getContainer()->getParameter('locale'))[0];
+            $mainTaxon = $this->getRepository('taxon')->findOneByPermalink($data['main_taxon']);
+
+            if (null === $mainTaxon) {
+                throw new \InvalidArgumentException(
+                    sprintf('Taxon with permalink "%s" was not found.', $data['main_taxon'])
+                );
             }
 
-            $author = isset($data['author']) ? $this->getRepository('customer')->findOneBy(['email' => $data['author']]) : null;
+            /** @var CustomerInterface $author */
+            $author = $this->getRepository('customer')->findOneBy(['email' => $data['author']]);
+
+            if (null === $mainTaxon) {
+                throw new \InvalidArgumentException(
+                    sprintf('Customer with email "%s" was not found.', $data['author'])
+                );
+            }
 
             /** @var Post $mainPost */
             $mainPost = $this->getFactory('post', 'app')->createNew();
@@ -59,3 +71,4 @@ class TopicContext extends DefaultContext
         }
     }
 }
+
