@@ -34,7 +34,7 @@ assetic:
 
 doctrine:
     dbal:
-        dbname:   "%database_name%_test"
+        dbname:   "%database_name%_dev"
 
 #swiftmailer:
 #    delivery_address: me@example.com
