@@ -114,45 +114,42 @@
 
                     <div class="row">
 
-                        {% block fos_user_content %}
-                            {% block body %}
-                                {% block container %}
-                                    <!--
-                                    Inherit this block to write
-                                    Content without sidebar
-                                    -->
-                                    <div class="col-md-8">
+                        {% block body %}
+                            {% block container %}
+                                <!--
+                                Inherit this block to write
+                                Content without sidebar
+                                -->
+                                <div class="col-md-8">
 
-                                        {% block container_content %}
+                                    {% block container_content %}
+                                        <!--
+                                        Inherit this block to write
+                                        Content with a sidebar
+                                        -->
+                                    {% endblock container_content %}
+
+                                </div>
+
+                                <!-- Sidebar column -->
+                                <div class="col-md-4">
+
+                                    <!-- Sidebar -->
+                                    <div class="sidebar">
+
+                                        {% block sidebar_content %}
                                             <!--
                                             Inherit this block to write
-                                            Content with a sidebar
+                                            Content in the sidebar
                                             -->
-                                        {% endblock container_content %}
+                                        {% endblock sidebar_content %}
 
                                     </div>
 
-                                    <!-- Sidebar column -->
-                                    <div class="col-md-4">
+                                </div>
 
-                                        <!-- Sidebar -->
-                                        <div class="sidebar">
-
-                                            {% block sidebar_content %}
-                                                <!--
-                                                Inherit this block to write
-                                                Content in the sidebar
-                                                -->
-                                            {% endblock sidebar_content %}
-
-                                        </div>
-
-                                    </div>
-
-                                {% endblock container %}
-                            {% endblock body %}
-                        {% endblock fos_user_content %}
-
+                            {% endblock container %}
+                        {% endblock body %}
                     </div>
 
                 </div>

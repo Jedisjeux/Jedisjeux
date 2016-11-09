@@ -74,7 +74,7 @@ class GamePlayFactory implements FactoryInterface
         }
 
         /** @var GamePlay $gamePlay */
-        $gamePlay = parent::createNew();
+        $gamePlay = $this->createNew();
 
         $gamePlay
             ->setProduct($product)
@@ -92,7 +92,7 @@ class GamePlayFactory implements FactoryInterface
     }
 
     /**
-     * @param CustomerContext $customerContext
+     * @param CustomerContextInterface $customerContext
      */
     public function setCustomerContext($customerContext)
     {

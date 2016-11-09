@@ -6,19 +6,24 @@ Feature: Edit Post
 
   Background:
     Given there are following users:
-      | email             | password | role      |
-      | kevin@example.com | password | ROLE_USER |
+      | email              | password | role      |
+      | author@example.com | password | ROLE_USER |
+      | kevin@example.com  | password | ROLE_USER |
     Given there are root taxons:
       | code  | name  |
-      | forum | Forum |
+      | forum | forum |
+    And there are taxons:
+      | code | name            | parent |
+      | 666  | Moi je dis jeux | forum  |
     And there are topics:
-      | name      |
-      | Zoo Topic |
+      | name      | main_taxon            | author             |
+      | Zoo Topic | forum/moi-je-dis-jeux | author@example.com |
     And I am logged in as user "kevin@example.com" with password "password"
 
   Scenario: Update my post
     Given I am on "/topics/"
     And I follow "Lire le sujet"
+    And I wait "10" seconds
     And I follow "Répondre au sujet"
     And I fill in wysiwyg field "app_post_body" with "Here is my awesome topic answer."
     And I press "Créer"

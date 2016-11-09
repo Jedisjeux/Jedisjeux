@@ -13,10 +13,10 @@ Feature: Post creation
       | forum | Forum |
     And there are taxons:
       | code | name            | parent |
-      | 666  | Moi je dis jeux | Forum  |
+      | 666  | Moi je dis jeux | forum  |
     And there are topics:
-      | title              | main_taxon      |
-      | Jeux avec handicap | Moi je dis jeux |
+      | title              | main_taxon            | author            |
+      | Jeux avec handicap | forum/moi-je-dis-jeux | kevin@example.com |
     And I am logged in as user "kevin@example.com" with password "password"
 
   @javascript
