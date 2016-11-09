@@ -17,7 +17,7 @@ Feature: Get product
       | name      |
       | Louis XIV |
     And product "Louis XIV" has following taxons:
-      | name       |
+      | permalink  |
       | Majorité   |
       | Historique |
 

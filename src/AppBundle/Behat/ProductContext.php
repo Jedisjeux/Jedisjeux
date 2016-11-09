@@ -52,6 +52,7 @@ class ProductContext extends DefaultContext
             $product->setName(isset($data['name']) ? $data['name'] : $this->faker->name);
             $product->setDescription(isset($data['description']) ? $data['description'] : $this->faker->realText());
             $product->setMainTaxon($mainTaxon);
+            $product->setStatus(Product::PUBLISHED);
 
             $manager->persist($product);
         }
