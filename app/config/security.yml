@@ -54,8 +54,8 @@ security:
                 use_forward:  false
                 use_referer: true
             logout:
-               path: sylius_shop_logout
-               target: sylius_shop_login
+               path: app_frontend_logout
+               target: app_homepage
             context: user
 
     access_control:

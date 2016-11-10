@@ -50,4 +50,35 @@ class User extends BaseUser
 
         return $this;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEmail()
+    {
+        return $this->customer->getEmail();
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function setEmail($email)
+    {
+        $this->customer->setEmail($email);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEmailCanonical()
+    {
+        return $this->customer->getEmailCanonical();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setEmailCanonical($emailCanonical)
+    {
+        $this->customer->setEmailCanonical($emailCanonical);
+    }
 }

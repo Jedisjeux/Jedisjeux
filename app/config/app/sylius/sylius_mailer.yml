@@ -16,4 +16,7 @@ sylius_mailer:
         contact_request:
             subject: Nouveau message de contact Jedisjeux
             template: emails/contactRequest.html.twig
+        verification_token:
+            subject: emails.verification_token.subject
+            template: "emails/verification.html.twig"
 

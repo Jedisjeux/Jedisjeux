@@ -39,7 +39,7 @@
                     <li><a href="#">Mon compte</a></li>
                     <li><a href="{{ path('app_frontend_game_library_show', {'customerId': app.user.customer.id}) }}">Ma ludothèque</a></li>
                     <li><a href="{{ path('app_frontend_game_play_index', { 'criteria': {'author': app.user.customer.id} } ) }}">Mes parties</a></li>
-                    <li><a href="{{ path('sylius_shop_logout') }}">Déconnexion</a></li>
+                    <li><a href="{{ path('app_frontend_logout') }}">Déconnexion</a></li>
                 </ul>
             {% endif %}
         </div>

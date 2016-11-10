@@ -23,7 +23,6 @@ Feature: Edit Post
   Scenario: Update my post
     Given I am on "/topics/"
     And I follow "Lire le sujet"
-    And I wait "10" seconds
     And I follow "Répondre au sujet"
     And I fill in wysiwyg field "app_post_body" with "Here is my awesome topic answer."
     And I press "Créer"

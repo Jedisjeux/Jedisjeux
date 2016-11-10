@@ -11,20 +11,20 @@ sylius_shop_login_check:
     defaults:
         _controller: sylius.controller.user_security:checkAction
 
-sylius_shop_logout:
+app_frontend_logout:
     path: /logout
 
-sylius_shop_register:
+app_frontend_register:
     path: /register
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.customer:createAction
         _sylius:
-            form: sylius_customer_registration
+            form: sylius_customer_simple_registration
             event: register
-            template: SyliusShopBundle::register.html.twig
+            template: frontend/register.html.twig
             redirect:
-                route: sylius_shop_account_dashboard
+                route: app_homepage
             flash: sylius.customer.register
 
 sylius_shop_request_password_reset_token:
@@ -57,3 +57,17 @@ sylius_shop_user_check_action:
                 arguments:
                     email: $email
             serialization_groups: [Secured]
+
+sylius_shop_user_request_verification_token:
+    path: /
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.shop_user:requestVerificationTokenAction
+
+sylius_shop_user_verification:
+    path: /{token}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.shop_user:verifyAction
+        _sylius:
+            redirect: app_homepage

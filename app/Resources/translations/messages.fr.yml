@@ -185,3 +185,6 @@ emails:
     contact_request:
         subject: Nouveau message de contact Jedisjeux
         content: Vous avez reçu un message de <strong>%FULLNAME%</strong>
+    verification:
+        subject: Vérification de l'adresse e-mail
+        content: Pour vérifier votre adresse email, visitez %url%

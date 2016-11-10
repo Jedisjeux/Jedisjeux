@@ -24,7 +24,7 @@ class Customer extends BaseCustomer implements ReviewerInterface
     /**
      * @var UserInterface
      *
-     * @ORM\OneToOne(targetEntity="Sylius\Component\User\Model\UserInterface", mappedBy="customer")
+     * @ORM\OneToOne(targetEntity="Sylius\Component\User\Model\UserInterface", mappedBy="customer", cascade={"persist"})
      */
     private $user;
 
@@ -97,8 +97,19 @@ class Customer extends BaseCustomer implements ReviewerInterface
      */
     public function setUser($user)
     {
-        $this->user = $user;
+        if ($this->user !== $user) {
+            $this->user = $user;
+            $this->assignCustomer($user);
+        }
+    }
 
-        return $this;
+    /**
+     * @param User|null $user
+     */
+    protected function assignCustomer($user = null)
+    {
+        if (null !== $user) {
+            $user->setCustomer($this);
+        }
     }
 }
