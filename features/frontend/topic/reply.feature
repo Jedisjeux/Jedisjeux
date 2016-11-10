@@ -11,9 +11,13 @@ Feature: Topic reply
     Given there are root taxons:
       | code  | name  |
       | forum | Forum |
+    And there are taxons:
+      | code | name            | parent |
+      | 666  | Moi je dis jeux | forum  |
+      | XYZ  | Réglons-ça      | forum  |
     And there are topics:
-      | name      | author            |
-      | Zoo Topic | kevin@example.com |
+      | name      | author            | main_taxon            |
+      | Zoo Topic | kevin@example.com | forum/moi-je-dis-jeux |
     And I am logged in as user "kevin@example.com" with password "password"
 
   Scenario: Reply to a topic

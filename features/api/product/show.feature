@@ -11,15 +11,15 @@ Feature: Get product
       | themes     | Thèmes     |
     And there are taxons:
       | code        | name       | parent     |
-      | mechanism-1 | Majorité   | Mécanismes |
-      | theme-1     | Historique | Thèmes     |
+      | mechanism-1 | Majorité   | mecanismes |
+      | theme-1     | Historique | themes     |
     And there are products:
       | name      |
       | Louis XIV |
     And product "Louis XIV" has following taxons:
-      | permalink  |
-      | Majorité   |
-      | Historique |
+      | permalink           |
+      | mecanismes/majorité |
+      | themes/historique   |
 
   Scenario: Get product data
     When I request get "Louis XIV" product
