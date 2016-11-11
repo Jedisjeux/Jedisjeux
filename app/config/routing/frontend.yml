@@ -25,5 +25,5 @@ app_product_review:
 app_customer_list:
     resource: "frontend/customer_list.yml"
 
-sylius_user:
-    resource: "frontend/user.yml"
+sylius_security:
+    resource: "frontend/security.yml"

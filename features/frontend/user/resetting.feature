@@ -7,7 +7,7 @@ Feature: Resetting password
     Given there are users:
       | email                      | password |
       | bobby.cyclette@example.com | password |
-    And I am on "/resetting/request-token"
+    And I am on "/forgotten-password"
     And I fill in the following:
       | Nom d'utilisateur ou email | bobby.cyclette@example.com |
     When I press "Valider"
@@ -17,9 +17,9 @@ Feature: Resetting password
     Given there are users:
       | email                      | confirmation_token |
       | felicie.clyste@example.com | 666                |
-    And I am on "/resetting/666"
+    And I am on "/forgotten-password/666"
     And I fill in the following:
       | Nouveau mot de passe | password |
-      | Confirmation | password |
+      | Confirmation         | password |
     When I press "Valider"
     Then I should see "Votre mot de passe a été réinitialisé avec succès"
