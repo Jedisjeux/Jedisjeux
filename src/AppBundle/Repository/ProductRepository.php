@@ -238,6 +238,6 @@ class ProductRepository extends BaseProductRepository
     protected function getPaginator(QueryBuilder $queryBuilder)
     {
         // Use output walkers option in DoctrineORMAdapter should be false as it affects performance greatly (see #3775)
-        return new Pagerfanta(new DoctrineORMAdapter($queryBuilder, false, true));
+        return new Pagerfanta(new DoctrineORMAdapter($queryBuilder, true, true));
     }
 }
