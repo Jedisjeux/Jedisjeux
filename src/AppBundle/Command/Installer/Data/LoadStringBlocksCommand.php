@@ -8,9 +8,9 @@
 
 namespace AppBundle\Command\Installer\Data;
 
-use Doctrine\ODM\PHPCR\Document\Generic;
+use AppBundle\Document\StringBlock;
+use AppBundle\Factory\StringBlockFactory;
 use Doctrine\ODM\PHPCR\DocumentManager;
-use PHPCR\Util\NodeHelper;
 use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SimpleBlock;
@@ -20,7 +20,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class LoadBlocksCommand extends ContainerAwareCommand
+class LoadStringBlocksCommand extends ContainerAwareCommand
 {
     /**
      * @var OutputInterface
@@ -33,7 +33,7 @@ class LoadBlocksCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('app:blocks:load')
+            ->setName('app:string-blocks:load')
             ->setDescription('Load blocks');
     }
 
@@ -54,20 +54,17 @@ class LoadBlocksCommand extends ContainerAwareCommand
 
     /**
      * @param array $data
-     * @return SimpleBlock
+     * @return StringBlock
      */
     protected function createOrReplaceBlock(array $data)
     {
         $block = $this->findBlock($data['name']);
 
         if (null === $block) {
-            $block = new SimpleBlock();
-            $block
-                ->setParentDocument($this->getParent());
+            $block = $this->getFactory()->createNew();
         }
 
         $block->setName($data['name']);
-        $block->setTitle($data['title']);
         $block->setBody($data['body']);
         $block->setPublishable(true);
 
@@ -82,26 +79,17 @@ class LoadBlocksCommand extends ContainerAwareCommand
     {
         $page = $this
             ->getRepository()
-            ->find('/cms/blocks/' . $id);
+            ->find('/cms/content/' . $id);
 
         return $page;
     }
 
     /**
-     * @return Generic
+     * @return StringBlockFactory
      */
-    protected function getParent()
+    public function getFactory()
     {
-        $contentBasepath = '/cms/blocks';
-        $parent = $this->getManager()->find(null, $contentBasepath);
-
-        if (null === $parent) {
-            $session = $this->getManager()->getPhpcrSession();
-            NodeHelper::createPath($session, $contentBasepath);
-            $parent = $this->getManager()->find(null, $contentBasepath);
-        }
-
-        return $parent;
+        return $this->getContainer()->get('app.factory.string_block');
     }
 
     /**
@@ -109,7 +97,7 @@ class LoadBlocksCommand extends ContainerAwareCommand
      */
     public function getRepository()
     {
-        return $this->getContainer()->get('sylius.repository.simple_block');
+        return $this->getContainer()->get('app.repository.string_block');
     }
 
     /**
@@ -117,7 +105,7 @@ class LoadBlocksCommand extends ContainerAwareCommand
      */
     public function getManager()
     {
-        return $this->getContainer()->get('sylius.manager.static_content');
+        return $this->getContainer()->get('app.manager.string_block');
     }
 
     protected function getBlocks()
@@ -125,14 +113,12 @@ class LoadBlocksCommand extends ContainerAwareCommand
         return array(
             array(
                 'name' => 'about',
-                'title' => 'A propos',
                 'body' => '
 <p>Jedisjeux est une association loi 1901.</p>
                 ',
             ),
             array(
                 'name' => 'head-office',
-                'title' => 'Siège social',
                 'body' => '
     <p class="add">
         16 rue DOM François Plaine<br>

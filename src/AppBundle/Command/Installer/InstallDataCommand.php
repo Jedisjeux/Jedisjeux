@@ -43,7 +43,7 @@ EOT
             'app:root-taxons:load',
             'app:taxons-of-articles:load',
             'app:zones:load',
-            'app:blocks:load',
+            'app:string-blocks:load',
             'app:users:load',
             'app:products:load',
             'app:game-libraries:load',

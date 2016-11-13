@@ -13,6 +13,7 @@ namespace AppBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -69,6 +70,11 @@ class ServicesPass implements CompilerPassInterface
         $contactRequestFactoryDefinition = $container->getDefinition('app.factory.contact_request');
         $contactRequestFactoryDefinition
             ->addMethodCall('setCustomerContext', [new Reference('app.context.customer')]);
+
+        $stringBlockFactoryDefinition = $container->getDefinition('app.factory.string_block');
+        $stringBlockFactoryDefinition
+            ->addArgument(new Reference('doctrine_phpcr.odm.document_manager'))
+            ->addArgument(new Parameter('cmf_block.persistence.phpcr.block_basepath'));
     }
 
     /**
