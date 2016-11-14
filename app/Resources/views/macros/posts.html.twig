@@ -4,11 +4,12 @@
     {% import 'macros/buttons.html.twig' as button %}
 
     {% set user = post.author.user %}
+    {% set isAuthor = app.user and app.user.id == user.id %}
     {% set imagePath = avatar(user) %}
     {% set isTopic = post.parent ? true : false %}
 
     {% set meta %}
-        {% if post.author.user == app.user %}
+        {% if isAuthor %}
             {% set editPath = isTopic ? path('app_frontend_topic_update', { 'id': post.parent.id }) : path('app_post_update', { 'id': post.id }) %}
             {% set removePath = isTopic ? path('app_frontend_topic_delete', {'id': post.parent.id}) : path('app_post_delete', {'id': post.id}) %}
             <div class="btn-group pull-right">
