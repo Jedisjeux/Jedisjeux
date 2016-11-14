@@ -9,7 +9,7 @@ Feature: Resetting password
       | bobby.cyclette@example.com | password |
     And I am on "/forgotten-password"
     And I fill in the following:
-      | Nom d'utilisateur ou email | bobby.cyclette@example.com |
+      | Email | bobby.cyclette@example.com |
     When I press "Valider"
     Then I should see "vous recevrez un message avec les instructions pour réinitialiser votre mot de passe"
 

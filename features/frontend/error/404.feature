@@ -4,5 +4,5 @@ Feature: As a visitor
 
   @javascript
   Scenario: See a 404
-    When I am on "/qsdfmoijg"
+    When I am on "/error/404"
     Then I should see "Page introuvable"

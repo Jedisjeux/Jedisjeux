@@ -25,6 +25,7 @@ Feature: View list of topics
     Then I should see "Retour de Cannes jour par jour"
     And I should see "Jeux avec handicap"
 
+  @todo
   Scenario: View list of topics under a taxon
     Given I am on "/topics/"
     When I follow "Moi je dis jeux"

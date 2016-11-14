@@ -14,7 +14,7 @@ sylius_backend_product_variant_index:
         _controller: sylius.controller.product_variant:indexAction
         _sylius:
             criteria:
-                object: $productId
+                product: $productId
             sorting:
                 createdAt: desc
             template: backend/product_variant/index.html.twig

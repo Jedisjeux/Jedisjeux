@@ -12,7 +12,7 @@
 namespace AppBundle\Form\Type;
 
 use AppBundle\Entity\ProductVariant;
-use Sylius\Bundle\VariationBundle\Form\Type\VariantType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType as BaseProductVariantType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -23,7 +23,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class ProductVariantType extends VariantType
+class ProductVariantType extends BaseProductVariantType
 {
     /**
      * @param FormBuilderInterface $builder
