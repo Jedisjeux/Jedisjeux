@@ -21,16 +21,16 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 class SingleImageBlockFactory implements FactoryInterface
 {
     /**
-     * @var FactoryInterface
+     * @var string
      */
-    private $factory;
+    private $className;
 
     /**
-     * @param FactoryInterface $factory
+     * @param string $className
      */
-    public function __construct(FactoryInterface $factory)
+    public function __construct($className)
     {
-        $this->factory = $factory;
+        $this->className = $className;
     }
 
     /**
@@ -39,7 +39,7 @@ class SingleImageBlockFactory implements FactoryInterface
     public function createNew()
     {
         /** @var SingleImageBlock $singleImageBlock */
-        $singleImageBlock = $this->factory->createNew();
+        $singleImageBlock = new $this->className;
 
         return $singleImageBlock;
     }

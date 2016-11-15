@@ -20,16 +20,16 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 class BlockquoteFactory implements FactoryInterface
 {
     /**
-     * @var FactoryInterface
+     * @var string
      */
-    private $factory;
+    private $className;
 
     /**
-     * @param FactoryInterface $factory
+     * @param string $className
      */
-    public function __construct(FactoryInterface $factory)
+    public function __construct($className)
     {
-        $this->factory = $factory;
+        $this->className = $className;
     }
 
     /**
@@ -37,7 +37,7 @@ class BlockquoteFactory implements FactoryInterface
      */
     public function createNew()
     {
-        return $this->factory->createNew();
+        return new $this->className;
     }
 
     /**
@@ -46,7 +46,7 @@ class BlockquoteFactory implements FactoryInterface
     public function createWithFakeData()
     {
         /** @var BlockquoteBlock $block */
-        $block = $this->factory->createNew();
+        $block = $this->createNew();
 
         $faker = \Faker\Factory::create();
         $paragraphs = $faker->paragraphs(2);
