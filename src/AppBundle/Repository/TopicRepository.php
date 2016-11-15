@@ -43,6 +43,24 @@ class TopicRepository extends EntityRepository
     /**
      * {@inheritdoc}
      */
+    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = [])
+    {
+        if (isset($criteria['query'])) {
+            $queryBuilder
+                ->where($queryBuilder->expr()->orX(
+                    'o.title like :query'
+                ))
+                ->setParameter('query', '%' . $criteria['query'] . '%');
+
+            unset($criteria['query']);
+        }
+
+        parent::applyCriteria($queryBuilder, $criteria);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function applySorting(QueryBuilder $queryBuilder, array $sorting = [])
     {
         if (isset($sorting['postCount'])) {

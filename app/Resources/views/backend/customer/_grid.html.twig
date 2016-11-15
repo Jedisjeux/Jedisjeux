@@ -23,7 +23,7 @@
             <td>{{ image(avatar(customer.user), 'thumbnail', customer, 'img-responsive img-round') }}</td>
             <td>{{ customer.user.username }}</td>
             <td>{{ customer.email }}</td>
-            <td>{{ customer.createdAt|localizeddate('short', 'none') }}</td>
+            <td>{{ customer.createdAt|localizeddate('medium', 'none') }}</td>
             <td>
                 <div class="ui buttons">
                     {{ button.edit(path('sylius_backend_customer_update', { 'id': customer.id } )) }}

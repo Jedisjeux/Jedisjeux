@@ -1,13 +1,22 @@
 <div class="item">
     <div class="header">{{ 'sylius.ui.customer'|trans }}</div>
     <div class="menu">
-        <a href="#" class="item">
+        <a href="{{ path('sylius_backend_customer_index') }}" class="item">
             <i class="users icon"></i>
             {{ 'sylius.ui.customers'|trans }}
         </a>
         <a href="#" class="item">
             <i class="archive icon"></i>
             {{ 'sylius.ui.groups'|trans }}
+        </a>
+    </div>
+</div>
+<div class="item">
+    <div class="header">{{ 'app.ui.forum'|trans }}</div>
+    <div class="menu">
+        <a href="{{ path('app_backend_topic_index') }}" class="item">
+            <i class="comments icon"></i>
+            {{ 'app.ui.topics'|trans }}
         </a>
     </div>
 </div>

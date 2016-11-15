@@ -3,12 +3,17 @@ app:
         administration: Administration
         avatar: Avatar
         created_at_female: Créée le
+        edit_topic: Modifier le sujet
+        forum: Forum
         logout: Déconnection
+        manage_topics: Gérer les sujets
         name: Nom
         overview_of_your_website: Aperçu de votre site web
         request_placeholder: Recherche....
+        topics: Sujets
 sylius:
     ui:
+        groups: Groupes
         no_label: Non
         yes_label: Oui
 
