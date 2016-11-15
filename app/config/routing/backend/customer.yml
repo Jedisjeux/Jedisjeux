@@ -1,0 +1,28 @@
+sylius_backend_customer:
+    resource: |
+        section: backend
+        alias: sylius.customer
+        templates: :backend/crud
+        except: ['index']
+        redirect: index
+    type: sylius.resource
+
+sylius_backend_customer_index:
+    methods: GET
+    path: /customers/
+    defaults:
+      _controller: sylius.controller.customer:indexAction
+      _sylius:
+          template: backend/crud/index.html.twig
+          filterable: true
+          sortable: true
+          sorting:
+              createdAt: desc
+          vars:
+              templates:
+                  grid: backend/customer/_grid.html.twig
+              icon: users
+              subheader: sylius.ui.manage_your_customers
+              actions:
+                  create:
+                      route: sylius_backend_customer_create

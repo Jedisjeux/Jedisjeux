@@ -1,6 +1,12 @@
 # These routes use Generic Crud Routing with SyliusResourceBundle
 # @see http://docs.sylius.org/en/latest/bundles/SyliusResourceBundle/routing.html
 
+app_backend_dashboard:
+    path: /dashboard
+    defaults:
+        _controller:  FrameworkBundle:Template:template
+        template:     'backend/index.html.twig'
+
 app_admin_person:
     resource: backend/person.yml
 
@@ -9,6 +15,9 @@ app_admin_article:
 
 app_admin_contact_request:
     resource: backend/contact_request.yml
+
+sylius_backend_customer:
+    resource: backend/customer.yml
 
 sylius_admin_taxon:
     resource: backend/taxon.yml

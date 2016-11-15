@@ -1,3 +1,17 @@
+app:
+    ui:
+        administration: Administration
+        avatar: Avatar
+        created_at_female: Créée le
+        logout: Déconnection
+        name: Nom
+        overview_of_your_website: Aperçu de votre site web
+        request_placeholder: Recherche....
+sylius:
+    ui:
+        no_label: Non
+        yes_label: Oui
+
 title:
   articles: Articles
   categories: Catégories

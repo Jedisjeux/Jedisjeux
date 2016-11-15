@@ -1,0 +1,11 @@
+{% import 'SyliusUiBundle:Macro:buttons.html.twig' as button %}
+
+<div class="ui segment">
+    <form method="get" action="{{ action|default('') }}" class="ui form">
+        <div class="one field">
+            {{ form_widget(form.query, {attr: {'placeholder': placeholder}}) }}
+        </div>
+        {{ button.filter('sylius.ui.search'|trans) }}
+    </form>
+
+</div>
