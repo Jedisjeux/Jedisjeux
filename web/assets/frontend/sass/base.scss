@@ -2,18 +2,18 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 @import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
 
 // Bootstrap overrides, such as the asset-url(..) function.
-@import "../../bundles/mopabootstrap/sass/bootstrap_and_overrides";
+@import "../../../bundles/mopabootstrap/sass/bootstrap_and_overrides";
 
 @import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
 
 // The Paginator less for MopaBootstrapBundle
-@import "../../bundles/mopabootstrap/sass/paginator";
+@import "../../../bundles/mopabootstrap/sass/paginator";
 
 // Collection support for MopaBootstrapBundle
-@import "../../bundles/mopabootstrap/sass/collections.scss";
+@import "../../../bundles/mopabootstrap/sass/collections.scss";
 
 // FormFlow support for MopaBootstrapBundle
-@import "../../bundles/mopabootstrap/sass/form_flow.scss";
+@import "../../../bundles/mopabootstrap/sass/form_flow.scss";
 
 @import "mixins/ellipsis";
 

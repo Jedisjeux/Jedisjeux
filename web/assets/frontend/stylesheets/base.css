@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /*!
- * Bootstrap v3.3.6 (http://getbootstrap.com)
- * Copyright 2011-2015 Twitter, Inc.
+ * Bootstrap v3.3.7 (http://getbootstrap.com)
+ * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
@@ -1747,7 +1747,6 @@ a:hover, a:focus {
 }
 /* line 58, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_scaffolding.scss */
 a:focus {
-  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -3801,7 +3800,6 @@ select[size] {
 input[type="file"]:focus,
 input[type="radio"]:focus,
 input[type="checkbox"]:focus {
-  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -4439,7 +4437,6 @@ select[multiple].input-lg,
 }
 /* line 26, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_buttons.scss */
 .btn:focus, .btn.focus, .btn:active:focus, .btn:active.focus, .btn.active:focus, .btn.active.focus {
-  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -8793,8 +8790,8 @@ button.close {
   }
 }
 /*!
- * Bootstrap v3.3.6 (http://getbootstrap.com)
- * Copyright 2011-2015 Twitter, Inc.
+ * Bootstrap v3.3.7 (http://getbootstrap.com)
+ * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
@@ -10539,7 +10536,6 @@ a:hover, a:focus {
 }
 /* line 58, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_scaffolding.scss */
 a:focus {
-  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -12593,7 +12589,6 @@ select[size] {
 input[type="file"]:focus,
 input[type="radio"]:focus,
 input[type="checkbox"]:focus {
-  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -13231,7 +13226,6 @@ select[multiple].input-lg,
 }
 /* line 26, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_buttons.scss */
 .btn:focus, .btn.focus, .btn:active:focus, .btn:active.focus, .btn.active:focus, .btn.active.focus {
-  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -17587,18 +17581,18 @@ button.close {
 /*!
  * MopaBootstrapBundle pagination support
  */
-/* line 6, ../../bundles/mopabootstrap/sass/paginator.scss */
+/* line 6, ../../../bundles/mopabootstrap/sass/paginator.scss */
 .pagination .disabled a, .pagination .disabled a:hover {
   background-color: transparent;
   text-decoration: none;
   color: #BFBFBF;
   cursor: default;
 }
-/* line 13, ../../bundles/mopabootstrap/sass/paginator.scss */
+/* line 13, ../../../bundles/mopabootstrap/sass/paginator.scss */
 .pagination .last a {
   border: 0;
 }
-/* line 16, ../../bundles/mopabootstrap/sass/paginator.scss */
+/* line 16, ../../../bundles/mopabootstrap/sass/paginator.scss */
 .pagination .next a {
   border-right: 1px solid;
   border-right-color: rgba(0, 0, 0, 0.15);
@@ -17607,7 +17601,7 @@ button.close {
 /*!
  * MopaBootstrapBundle collection support
  */
-/* line 5, ../../bundles/mopabootstrap/sass/collections.scss */
+/* line 5, ../../../bundles/mopabootstrap/sass/collections.scss */
 .row .collection-item, .form-group .collection-item {
   margin-bottom: 9px;
   padding-left: 15px;
@@ -17623,21 +17617,21 @@ button.close {
   clear: both;
 }
 
-/* line 1, ../../bundles/mopabootstrap/sass/form_flow.scss */
+/* line 1, ../../../bundles/mopabootstrap/sass/form_flow.scss */
 .form-flow-actions {
   zoom: 1;
 }
-/* line 2, ../../bundles/mopabootstrap/sass/form_flow.scss */
+/* line 2, ../../../bundles/mopabootstrap/sass/form_flow.scss */
 .form-flow-actions .btn {
   float: right;
   margin-left: 3px;
 }
-/* line 7, ../../bundles/mopabootstrap/sass/form_flow.scss */
+/* line 7, ../../../bundles/mopabootstrap/sass/form_flow.scss */
 .form-flow-actions::before, .form-flow-actions::after {
   content: "";
   display: table;
 }
-/* line 12, ../../bundles/mopabootstrap/sass/form_flow.scss */
+/* line 12, ../../../bundles/mopabootstrap/sass/form_flow.scss */
 .form-flow-actions::after {
   clear: both;
 }

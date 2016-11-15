@@ -33,7 +33,7 @@ set :use_set_permissions, true
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 # Bower
-set :bower_target_path, lambda { "#{release_path}/web/assets/" }
+set :bower_target_path, lambda { "#{release_path}/web/assets/frontend/" }
 
 set :keep_releases, 3
 

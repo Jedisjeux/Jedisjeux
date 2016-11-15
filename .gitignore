@@ -21,7 +21,7 @@
 !/web/uploads/avatar/.gitkeep
 !/web/uploads/img/.gitkeep
 /web/media/*
-/web/assets/bower_components/*
+**/bower_components/*
 /web/js/
 /web/css/
 /behat.yml
