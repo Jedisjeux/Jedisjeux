@@ -35,6 +35,7 @@
     "sylius/product-bundle": "^1.0",
     "sylius/association-bundle": "^1.0",
     "sylius/taxonomy-bundle": "^1.0",
+    "sylius/ui-bundle": "^1.0",
     "winzou/state-machine-bundle": "^0.2",
     "liip/imagine-bundle": "^1.6",
     "jms/translation-bundle": "^1.3",
