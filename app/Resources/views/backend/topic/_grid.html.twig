@@ -21,7 +21,7 @@
     {% for topic in topics %}
         {% set user = topic.author.user %}
         <tr>
-            <td>{{ image(avatar(user), 'thumbnail', user.customer, 'img-responsive img-round') }}</td>
+            <td>{{ image(avatar(user), 'thumbnail', user.customer, 'ui circular image') }}</td>
             <td>{{ user }}</td>
             <td>{{ topic.title }}</td>
             <td>{{ topic.createdAt|localizeddate('medium', 'none') }}</td>
