@@ -38,7 +38,15 @@ sylius_admin_product_index:
             repository:
                 method: createFilterPaginator
                 arguments: [$criteria, $sorting, false, null]
-            template: backend/product/index.html.twig
+            template: backend/crud/index.html.twig
+            vars:
+              templates:
+                  grid: backend/product/_grid.html.twig
+              icon: users
+              subheader: sylius.ui.manage_products
+              actions:
+                  create:
+                      route: sylius_admin_product_create
 
 sylius_admin_product_from_bgg_new:
     methods: [GET]
