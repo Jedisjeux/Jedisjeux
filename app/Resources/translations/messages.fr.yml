@@ -1,9 +1,13 @@
 app:
     ui:
         administration: Administration
+        articles: Articles
         avatar: Avatar
         catalog: Catalogue
+        contact_requests: Demandes de contact
+        content: Contenu
         created_at_female: Créée le
+        dealers: Vendeurs
         edit_person: Modifier une personne
         edit_topic: Modifier le sujet
         forum: Forum
@@ -14,6 +18,7 @@ app:
         new_person: Nouvelle personne
         overview_of_your_website: Aperçu de votre site web
         people: Personnes
+        prices: Tarifs
         request_placeholder: Recherche....
         topics: Sujets
 sylius:
