@@ -262,3 +262,15 @@ services:
         arguments:
             - "@security.token_storage"
             - "@security.authorization_checker"
+
+    # <!-- Paginator -->
+    pagerfanta.view.semantic_ui:
+        class: AppBundle\View\SemanticUiView
+
+    pagerfanta.view.semantic_ui_translated:
+        class: AppBundle\View\SemanticUiTranslatedView
+        arguments:
+            - "@pagerfanta.view.semantic_ui"
+            - "@translator"
+        tags:
+            - { name: 'pagerfanta.view', alias: 'semantic_ui_translated' }
