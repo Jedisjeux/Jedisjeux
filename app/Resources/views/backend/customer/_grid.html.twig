@@ -20,7 +20,7 @@
     <tbody>
     {% for customer in customers %}
         <tr>
-            <td>{{ image(avatar(customer.user), 'thumbnail', customer, 'img-responsive img-round') }}</td>
+            <td>{{ image(avatar(customer.user), 'thumbnail', customer, 'ui circular image') }}</td>
             <td>{{ customer.user.username }}</td>
             <td>{{ customer.email }}</td>
             <td>{{ customer.createdAt|localizeddate('medium', 'none') }}</td>
