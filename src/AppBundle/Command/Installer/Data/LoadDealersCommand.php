@@ -124,7 +124,7 @@ EOT
             [
                 'code' => 'esprit-jeu',
                 'name' => 'Esprit Jeu',
-                'image' => __DIR__ . '/../../../../../web/assets/img/Logo-Esprit-Jeu-HD.png',
+                'image' => __DIR__ . '/../../../../../web/assets/frontend/img/Logo-Esprit-Jeu-HD.png',
             ],
             [
                 'code' => 'fungames',

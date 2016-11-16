@@ -8,17 +8,22 @@ app:
         content: Contenu
         created_at_female: Créée le
         dealers: Vendeurs
-        edit_person: Modifier une personne
+        edit_dealer: Modifier le vendeur
+        edit_person: Modifier la personne
         edit_topic: Modifier le sujet
         forum: Forum
         logout: Déconnection
-        manage_people: Gérer les perosnnes
+        manage_dealers: Gérer les vendeurs
+        manage_people: Gérer les personnes
         manage_topics: Gérer les sujets
         name: Nom
+        new_dealer: Nouveau vendeur
         new_person: Nouvelle personne
         overview_of_your_website: Aperçu de votre site web
         people: Personnes
         prices: Tarifs
+        price_list: Liste de prix
+        pub_banners: Bannières de pub
         request_placeholder: Recherche....
         topics: Sujets
 sylius:

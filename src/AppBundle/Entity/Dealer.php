@@ -61,6 +61,14 @@ class Dealer implements ResourceInterface
     protected $pubBanners;
 
     /**
+     * Dealer constructor.
+     */
+    public function __construct()
+    {
+        $this->pubBanners = new ArrayCollection();
+    }
+
+    /**
      * @return string
      */
     public function getCode()

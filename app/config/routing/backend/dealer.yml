@@ -2,7 +2,7 @@ app_backend_dealer:
     resource: |
         alias: app.dealer
         section: backend
-        templates: :backend/dealer
+        templates: :backend/crud
         redirect: index
     type: sylius.resource
 
@@ -15,4 +15,12 @@ app_backend_dealer_index:
             repository:
                 method: createFilterPaginator
                 arguments: [$criteria, $sorting]
-            template: backend/dealer/index.html.twig
+            template: backend/crud/index.html.twig
+            vars:
+              templates:
+                  grid: backend/dealer/_grid.html.twig
+              icon: users
+              subheader: app.ui.manage_dealers
+              actions:
+                  create:
+                      route: app_backend_dealer_create
