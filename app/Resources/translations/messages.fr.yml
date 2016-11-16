@@ -4,6 +4,7 @@ app:
         articles: Articles
         avatar: Avatar
         catalog: Catalogue
+        contact_request: Demande de contact
         contact_requests: Demandes de contact
         content: Contenu
         created_at_female: Créée le
@@ -13,6 +14,7 @@ app:
         edit_topic: Modifier le sujet
         forum: Forum
         logout: Déconnection
+        manage_contact_requests: Gérer les demandes de contact
         manage_dealers: Gérer les vendeurs
         manage_people: Gérer les personnes
         manage_topics: Gérer les sujets
@@ -26,6 +28,7 @@ app:
         pub_banners: Bannières de pub
         request_placeholder: Recherche....
         topics: Sujets
+        view_details: Voir les détails
 sylius:
     ui:
         groups: Groupes
