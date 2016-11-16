@@ -2,13 +2,18 @@ app:
     ui:
         administration: Administration
         avatar: Avatar
+        catalog: Catalogue
         created_at_female: Créée le
+        edit_person: Modifier une personne
         edit_topic: Modifier le sujet
         forum: Forum
         logout: Déconnection
+        manage_people: Gérer les perosnnes
         manage_topics: Gérer les sujets
         name: Nom
+        new_person: Nouvelle personne
         overview_of_your_website: Aperçu de votre site web
+        people: Personnes
         request_placeholder: Recherche....
         topics: Sujets
 sylius:

@@ -27,7 +27,7 @@ app_frontend_register:
                 route: app_homepage
             flash: sylius.customer.register
 
-sylius_shop_request_password_reset_token:
+sylius_user_request_password_reset_token:
     path: /forgotten-password
     methods: [GET, POST]
     defaults:

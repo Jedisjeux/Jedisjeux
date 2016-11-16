@@ -1,4 +1,17 @@
 <div class="item">
+    <div class="header">{{ 'app.ui.catalog'|trans }}</div>
+    <div class="menu">
+        <a href="{{ path('sylius_admin_product_index') }}" class="item">
+            <i class="cube icon"></i>
+            {{ 'sylius.ui.products'|trans }}
+        </a>
+        <a href="{{ path('app_backend_person_index') }}" class="item">
+            <i class="user icon"></i>
+            {{ 'app.ui.people'|trans }}
+        </a>
+    </div>
+</div>
+<div class="item">
     <div class="header">{{ 'sylius.ui.customer'|trans }}</div>
     <div class="menu">
         <a href="{{ path('sylius_backend_customer_index') }}" class="item">
