@@ -42,7 +42,7 @@ sylius_admin_product_index:
             vars:
               templates:
                   grid: backend/product/_grid.html.twig
-              icon: users
+              icon: cube
               subheader: sylius.ui.manage_products
               actions:
                   create:

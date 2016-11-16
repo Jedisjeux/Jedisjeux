@@ -21,7 +21,7 @@ app_backend_person_index:
           vars:
               templates:
                   grid: backend/person/_grid.html.twig
-              icon: users
+              icon: spy
               subheader: app.ui.manage_people
               actions:
                   create:

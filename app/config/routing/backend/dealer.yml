@@ -19,7 +19,7 @@ app_backend_dealer_index:
             vars:
               templates:
                   grid: backend/dealer/_grid.html.twig
-              icon: users
+              icon: building
               subheader: app.ui.manage_dealers
               actions:
                   create:

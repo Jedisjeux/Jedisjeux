@@ -31,5 +31,5 @@ app_backend_contact_request_index:
             vars:
               templates:
                   grid: backend/contact_request/_grid.html.twig
-              icon: users
+              icon: mail
               subheader: app.ui.manage_contact_requests
