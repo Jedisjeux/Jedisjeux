@@ -23,7 +23,7 @@ class SemanticUiTemplate extends Template
         'next_message'        => 'Next &rarr;',
         'dots_message'        => '&hellip;',
         'active_suffix'       => '',
-        'css_container_class' => 'ui pagination menu',
+        'css_container_class' => 'ui stackable fluid pagination menu',
         'css_item_class'      => 'item',
         'css_prev_class'      => 'prev',
         'css_next_class'      => 'next',
