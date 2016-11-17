@@ -1,0 +1,4 @@
+{% from 'macros/images.html.twig' import image %}
+{% if (data.mainImage) %}
+    {{ image(data.mainImage.webPath, 'thumbnail', data.fullName, 'ui circular image') }}
+{% endif %}

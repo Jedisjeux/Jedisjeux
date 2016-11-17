@@ -1,0 +1,12 @@
+{% macro getPath(resource) %}{% spaceless %}
+    {% set imageSrc = resource.avatar ? resource.avatar.webPath : '/assets/img/avatar_2x.png' %}
+
+    {{ imageSrc }}
+{% endspaceless %}{% endmacro %}
+
+{% macro render(resource, filter, label, class, linkUrl, target) %}{% spaceless %}
+    {% import _self as avatar %}
+    {% from 'macros/images.html.twig' import image %}
+
+    {{ image(avatar.getPath(resource), filter, resource, class, linkUrl, target) }}
+{% endspaceless %}{% endmacro %}
