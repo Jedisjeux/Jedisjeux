@@ -7,7 +7,7 @@ admin_person:
         grid: app_backend_person
         vars:
             all:
-                subheader: sylius.ui.manage_people
+                subheader: app.ui.manage_people
             index:
                 icon: spy
     type: sylius.resource
