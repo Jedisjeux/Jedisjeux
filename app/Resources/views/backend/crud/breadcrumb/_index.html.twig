@@ -1,9 +1,0 @@
-{% import 'backend/crud/macro/breadcrumb.html.twig' as breadcrumb %}
-
-{% set breadcrumbs = [
-        { label: 'app.ui.administration'|trans, url: path('app_backend_dashboard') },
-        { label: (metadata.applicationName~'.ui.'~metadata.pluralName)|trans },
-    ]
-%}
-
-{{ breadcrumb.crumble(breadcrumbs) }}

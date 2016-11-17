@@ -1,38 +1,15 @@
 {% extends 'backend/layout.html.twig' %}
 
 {% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
-{% import 'backend/macros/pagination.html.twig' as pagination %}
-{% import 'SyliusUiBundle:Macro:buttons.html.twig' as button %}
-{% from 'backend/macros/forms.html.twig' import filter %}
+
+{% set definition = resources.definition %}
+{% set data = resources.data %}
 
 {% set header = configuration.vars.header|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
 
 {% block title %}{{ parent() }} {{ header|trans }}{% endblock %}
 
 {% block content %}
-    <div class="ui stackable two column grid">
-        <div class="column">
-            {{ headers.default(header|trans, configuration.vars.icon|default('list'), configuration.vars.subheader|default(null)|trans) }}
-
-            {% include configuration.vars.templates.breadcrumb|default('backend/crud/breadcrumb/_index.html.twig') %}
-        </div>
-        <div class="middle aligned column">
-            <div class="ui right floated buttons">
-                {% if configuration.vars.actions.create.route is defined %}
-                    {{ button.create(path(configuration.vars.actions.create.route), ('sylius.ui.create')|trans) }}
-                {% endif %}
-            </div>
-        </div>
-    </div>
-
-    {{ filter() }}
-
-    {% if configuration.vars.templates.grid is defined %}
-        <div class="ui segment">
-            {{ pagination.render(resources) }}
-            {% include configuration.vars.templates.grid %}
-            {{ pagination.render(resources) }}
-        </div>
-    {% endif %}
-
+    {% include 'backend/crud/index/_header.html.twig' %}
+    {% include 'backend/crud/index/_content.html.twig' %}
 {% endblock %}
