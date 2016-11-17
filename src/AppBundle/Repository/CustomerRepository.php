@@ -19,23 +19,5 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
  */
 class CustomerRepository extends EntityRepository
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = [])
-    {
-        if (isset($criteria['query'])) {
-            $queryBuilder
-                ->andWhere($queryBuilder->expr()->orX(
-                    'o.email like :query'
-                ))
-                ->setParameter('query', '%' . $criteria['query'] . '%');
-
-            unset($criteria['query']);
-        }
-
-        parent::applyCriteria($queryBuilder, $criteria);
-    }
-
-
+    
 }

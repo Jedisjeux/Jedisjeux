@@ -31,7 +31,10 @@ app:
         view_details: Voir les détails
 sylius:
     ui:
+        customer_groups: Groupes
+        filter: Filtrer
         groups: Groupes
+        manage_customer_groups: Gérer les groupes
         no_label: Non
         yes_label: Oui
 

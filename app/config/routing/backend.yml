@@ -19,6 +19,9 @@ app_admin_contact_request:
 sylius_backend_customer:
     resource: backend/customer.yml
 
+sylius_backend_customer_group:
+    resource: backend/customer_group.yml
+
 sylius_admin_taxon:
     resource: backend/taxon.yml
     prefix: /taxons
