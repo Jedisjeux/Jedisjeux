@@ -36,6 +36,7 @@ sylius:
         groups: Groupes
         manage_customer_groups: Gérer les groupes
         no_label: Non
+        show: Voir
         yes_label: Oui
 
 title:
