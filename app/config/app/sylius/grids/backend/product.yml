@@ -34,6 +34,9 @@ sylius_grid:
                     options:
                         fields: [code, translation.name]
             actions:
+                main:
+                    create:
+                        type: create
                 item:
                     manage_variants:
                         type: manage_variants
