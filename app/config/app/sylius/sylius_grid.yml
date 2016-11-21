@@ -3,6 +3,7 @@ imports:
   - { resource: 'grids/backend/customer.yml' }
   - { resource: 'grids/backend/customer_group.yml' }
   - { resource: 'grids/backend/person.yml' }
+  - { resource: 'grids/backend/product.yml' }
 
 sylius_grid:
     templates:
@@ -11,6 +12,7 @@ sylius_grid:
             create: "backend/grid/action/create.html.twig"
             update: "backend/grid/action/update.html.twig"
             delete: "backend/grid/action/delete.html.twig"
+            manage_variants: "backend/product/grid/action/manageVariants.html.twig"
         filter:
             string: "backend/grid/filter/string.html.twig"
             boolean: "backend/grid/filter/boolean.html.twig"
