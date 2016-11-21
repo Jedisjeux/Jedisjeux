@@ -25,8 +25,12 @@ sylius_grid:
                     options:
                         template: "backend/grid/field/date/medium.html.twig"
                 status:
-                    type: string
+                    type: twig
                     label: sylius.ui.status
+                    options:
+                        template: "backend/grid/field/state.html.twig"
+                        vars:
+                            labels: "backend/product/label/state"
             filters:
                 search:
                     type: string
