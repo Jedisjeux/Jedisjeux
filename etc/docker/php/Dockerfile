@@ -16,7 +16,6 @@ RUN apt-get update && apt-get install -y \
         libpng12-dev \
         libicu-dev \
         libicu52  \
-        libxml2-dev  \
     && docker-php-ext-install iconv \
     && docker-php-ext-install exif \
     && docker-php-ext-install mbstring \
@@ -24,14 +23,13 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install pdo \
     && docker-php-ext-install intl \
     && docker-php-ext-install opcache \
-    && docker-php-ext-install soap \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install gd \
     && docker-php-ext-install zip
 
 RUN yes | pecl install xdebug
 
-COPY php.ini         /usr/local/etc/php/conf.d/
+COPY php.ini        /usr/local/etc/php/conf.d/
 COPY default.conf    /usr/local/etc/php-fpm.d/www.conf
 COPY xdebug.ini    /usr/local/etc/php/conf.d/xdebug.ini
 

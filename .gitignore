@@ -26,6 +26,7 @@
 /web/js/
 /web/css/
 /behat.yml
+/etc/docker/variables.env
 
 .idea
 *.DS_Store

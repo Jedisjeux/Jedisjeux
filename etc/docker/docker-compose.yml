@@ -1,4 +1,4 @@
-data:
+jdj_data:
     image: busybox
     volumes:
         - ../../:/var/www/jdj
@@ -7,12 +7,12 @@ data:
         - ~/.composer:/root/.composer
         - /tmpfs
 
-nginx:
+jdj_nginx:
     image: nginx
     links:
-        - php
+        - jdj_php
     volumes_from:
-        - data
+        - jdj_data
     volumes:
         - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
         - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
@@ -21,40 +21,32 @@ nginx:
         - 80:80
         - 8080:8080
 
-mysql:
+jdj_mysql:
     image: mariadb
     environment:
         MYSQL_ROOT_PASSWORD: root
         MYSQL_DATABASE: jdj_dev
         MYSQL_USER: jdj
-        MYSQL_PASSWORD: jdj
+        MYSQL_PASSWORD: password
     ports:
         - 3306:3306
 
-php:
+jdj_php:
     build: php
     working_dir: /var/www/jdj
     volumes_from:
-        - data
+        - jdj_data
     links:
-        - mysql
-        - elasticsearch
-        - memcached
-        - selenium
-    mem_limit: 2000000000
-    ports:
-        - 9000:9000
+        - jdj_mysql
+        - jdj_elasticsearch
+        - jdj_memcached
+    env_file: ./variables.env
 
-elasticsearch:
+jdj_elasticsearch:
     image: elasticsearch
-    ports:
-        - 9200:9200
 
-memcached:
+jdj_memcached:
     image: memcached
 
-selenium:
+jdj_selenium:
     image: selenium/standalone-chrome-debug
-    ports:
-        - 4444:4444
-        - 5900:5900
