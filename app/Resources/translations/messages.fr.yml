@@ -3,12 +3,16 @@ app:
         administration: Administration
         articles: Articles
         avatar: Avatar
+        barcode: Code-barres
+        barcodes: Code-barres
         catalog: Catalogue
         contact_request: Demande de contact
         contact_requests: Demandes de contact
         content: Contenu
         created_at_female: Créée le
+        dealer: Vendeur
         dealers: Vendeurs
+        dealer_prices: Tarifs des vendeurs
         edit_dealer: Modifier le vendeur
         edit_person: Modifier la personne
         edit_topic: Modifier le sujet
@@ -16,6 +20,7 @@ app:
         logout: Déconnection
         manage_contact_requests: Gérer les demandes de contact
         manage_dealers: Gérer les vendeurs
+        manage_dealer_prices: Gérer les tarifs des vendeurs
         manage_people: Gérer les personnes
         manage_topics: Gérer les sujets
         name: Nom
@@ -31,15 +36,18 @@ app:
         view_details: Voir les détails
 sylius:
     ui:
+        available: Disponible
         customer_groups: Groupes
         filter: Filtrer
         groups: Groupes
         manage_customer_groups: Gérer les groupes
         no_label: Non
+        out_of_stock: Rupture
         pending_publication: Prêt à publier
         pending_review: En relecture
         pending_translation: En attente de traduction
         pending_translation_changes: En attente de modifs de trad
+        pre_order: Pré-commande
         published: Publié
         show: Voir
         yes_label: Oui

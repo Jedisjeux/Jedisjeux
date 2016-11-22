@@ -26,9 +26,9 @@ class DealerPrice implements ResourceInterface
     use IdentifiableTrait,
         Timestampable;
 
-    const STATUS_PRE_ORDER = 'pre-order';
+    const STATUS_PRE_ORDER = 'pre_order';
     const STATUS_AVAILABLE = 'available';
-    const STATUS_OUT_OF_STOCK = 'out-of-stock';
+    const STATUS_OUT_OF_STOCK = 'out_of_stock';
 
     /**
      * @var Dealer
