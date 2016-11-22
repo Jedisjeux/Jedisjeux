@@ -23,6 +23,22 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 class ProductRepository extends BaseProductRepository
 {
     /**
+     * {@inheritdoc}
+     */
+    public function createQueryBuilderWithLocaleCode($localeCode)
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        $queryBuilder
+            ->addSelect('translation')
+            ->leftJoin('o.translations', 'translation')
+            ->andWhere('translation.locale = :localeCode')
+            ->setParameter('localeCode', $localeCode);
+
+        return $queryBuilder;
+    }
+
+    /**
      * @return QueryBuilder
      */
     protected function getQueryBuilder()
@@ -49,8 +65,7 @@ class ProductRepository extends BaseProductRepository
             ->andWhere('translation.slug = :slug')
             ->setParameter('slug', $slug)
             ->getQuery()
-            ->getOneOrNullResult()
-            ;
+            ->getOneOrNullResult();
     }
 
     /**

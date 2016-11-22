@@ -5,6 +5,9 @@ sylius_grid:
                 name: doctrine/orm
                 options:
                     class: "%sylius.model.product.class%"
+                    repository:
+                        method: createQueryBuilderWithLocaleCode
+                        arguments: ["%locale%"]
             sorting:
                 createdAt: desc
             fields:
@@ -17,7 +20,6 @@ sylius_grid:
                 name:
                     type: string
                     label: sylius.ui.name
-                    sortable: translation.name
                 createdAt:
                     type: twig
                     label: sylius.ui.created_at
