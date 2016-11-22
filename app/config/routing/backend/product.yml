@@ -35,13 +35,13 @@ sylius_admin_product_index:
     defaults:
         _controller: sylius.controller.product:indexAction
         _sylius:
+            section: admin
             repository:
                 method: createFilterPaginator
                 arguments: [$criteria, $sorting, false, null]
             template: backend/crud/index.html.twig
+            grid: sylius_backend_product
             vars:
-              templates:
-                  grid: backend/product/_grid.html.twig
               icon: cube
               subheader: sylius.ui.manage_products
               actions:

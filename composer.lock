@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fa6becac5df6db5c9957ddc320d40fff",
-    "content-hash": "c4bad1d34c2bf2b63b9408ba65a15ee0",
+    "hash": "c64e8a12a75a0715330caff61f480fe7",
+    "content-hash": "2a165beef817d48bc054e2065b530a8a",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -5508,6 +5508,145 @@
                 "groups"
             ],
             "time": "2016-11-15 02:43:02"
+        },
+        {
+            "name": "sylius/grid",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sylius/Grid.git",
+                "reference": "fd36c02d46f6089c2e6602021e5ed61ff13762ba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Sylius/Grid/zipball/fd36c02d46f6089c2e6602021e5ed61ff13762ba",
+                "reference": "fd36c02d46f6089c2e6602021e5ed61ff13762ba",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6|^7.0",
+                "sylius/registry": "^1.0"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "^3.1",
+                "symfony/property-access": "^2.8"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sylius\\Component\\Grid\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sylius project",
+                    "homepage": "http://sylius.org"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "http://github.com/Sylius/Sylius/contributors"
+                },
+                {
+                    "name": "Paweł Jędrzejewski",
+                    "homepage": "http://pjedrzejewski.com"
+                }
+            ],
+            "description": "PHP library to handle building grid of objects with fields and filters support.",
+            "homepage": "http://sylius.org",
+            "keywords": [
+                "admin",
+                "api",
+                "doctrine",
+                "ecommerce",
+                "grid",
+                "resource",
+                "shop",
+                "sylius"
+            ],
+            "time": "2016-10-21 12:36:57"
+        },
+        {
+            "name": "sylius/grid-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sylius/SyliusGridBundle.git",
+                "reference": "a64f6cef0031ea0cd32a6f5a9e2050203a6c4535"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Sylius/SyliusGridBundle/zipball/a64f6cef0031ea0cd32a6f5a9e2050203a6c4535",
+                "reference": "a64f6cef0031ea0cd32a6f5a9e2050203a6c4535",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6|^7.0",
+                "sylius/grid": "^1.0",
+                "symfony/form": "^2.8",
+                "symfony/framework-bundle": "^2.8"
+            },
+            "require-dev": {
+                "doctrine/orm": "^2.4.8",
+                "doctrine/phpcr-odm": "^1.3.0",
+                "jackalope/jackalope-doctrine-dbal": "^1.2",
+                "matthiasnoback/symfony-config-test": "^2.0",
+                "matthiasnoback/symfony-dependency-injection-test": "^1.0",
+                "pagerfanta/pagerfanta": "^1.0",
+                "phpspec/phpspec": "^3.1",
+                "phpunit/phpunit": "^5.6",
+                "twig/twig": "~1.11"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sylius\\Bundle\\GridBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sylius project",
+                    "homepage": "http://sylius.org"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "http://github.com/Sylius/Sylius/contributors"
+                },
+                {
+                    "name": "Paweł Jędrzejewski",
+                    "homepage": "http://pjedrzejewski.com"
+                }
+            ],
+            "description": "Amazing grids with support of filters and custom fields integrated into Symfony.",
+            "homepage": "http://sylius.org",
+            "keywords": [
+                "admin",
+                "crud",
+                "ecommerce",
+                "grid",
+                "shop",
+                "store",
+                "sylius",
+                "webshop"
+            ],
+            "time": "2016-11-15 11:38:48"
         },
         {
             "name": "sylius/locale",

@@ -31,8 +31,17 @@ app:
         view_details: Voir les détails
 sylius:
     ui:
+        customer_groups: Groupes
+        filter: Filtrer
         groups: Groupes
+        manage_customer_groups: Gérer les groupes
         no_label: Non
+        pending_publication: Prêt à publier
+        pending_review: En relecture
+        pending_translation: En attente de traduction
+        pending_translation_changes: En attente de modifs de trad
+        published: Publié
+        show: Voir
         yes_label: Oui
 
 title:

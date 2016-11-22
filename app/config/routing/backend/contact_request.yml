@@ -3,8 +3,14 @@ app_backend_contact_request:
         alias: app.contact_request
         section: backend
         templates: :backend/crud
-        only: [delete]
+        only: ['index', 'delete']
         redirect: index
+        grid: app_backend_contact_request
+        vars:
+            all:
+                subheader: app.ui.manage_contact_requests
+            index:
+                icon: mail
     type: sylius.resource
 
 app_backend_contact_request_show:
@@ -15,21 +21,3 @@ app_backend_contact_request_show:
         _sylius:
             section: backend
             template: backend/contact_request/show.html.twig
-
-app_backend_contact_request_index:
-    methods: [GET]
-    path: /contact-requests/
-    defaults:
-        _controller: app.controller.contact_request:indexAction
-        _sylius:
-            template: backend/crud/index.html.twig
-            repository:
-                method: createFilterPaginator
-                arguments: [$criteria, $sorting]
-            paginate: 10
-            sortable: true
-            vars:
-              templates:
-                  grid: backend/contact_request/_grid.html.twig
-              icon: mail
-              subheader: app.ui.manage_contact_requests

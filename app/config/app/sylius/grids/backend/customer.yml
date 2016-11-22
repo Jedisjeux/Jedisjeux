@@ -1,0 +1,41 @@
+sylius_grid:
+    grids:
+        sylius_backend_customer:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.customer.class%"
+            sorting:
+                createdAt: desc
+            fields:
+                avatar:
+                    type: twig
+                    label: app.ui.avatar
+                    path: .
+                    options:
+                        template: "backend/customer/grid/field/avatar.html.twig"
+                email:
+                    type: string
+                    label: sylius.ui.email
+                    sortable: email
+                createdAt:
+                    type: twig
+                    label: sylius.ui.created_at
+                    sortable: createdAt
+                    options:
+                        template: "backend/grid/field/date/medium.html.twig"
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    options:
+                        fields: [email]
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete

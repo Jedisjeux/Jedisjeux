@@ -26,6 +26,7 @@ sylius_backend_product_variant_create:
         _controller: sylius.controller.product_variant:createAction
         _sylius:
             factory:
-                method: createForProductWithId
-                arguments: [$productId]
+                method: createForProduct
+                arguments:
+                  - expr:service('sylius.repository.product').find($productId)
             template: backend/product_variant/create.html.twig

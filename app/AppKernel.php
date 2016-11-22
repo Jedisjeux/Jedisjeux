@@ -53,6 +53,8 @@ class AppKernel extends Kernel
             new Symfony\Cmf\Bundle\MediaBundle\CmfMediaBundle(),
             new Sylius\Bundle\ContentBundle\SyliusContentBundle(),
 
+            new Sylius\Bundle\GridBundle\SyliusGridBundle(),
+
             new FOS\RestBundle\FOSRestBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new FOS\ElasticaBundle\FOSElasticaBundle(),

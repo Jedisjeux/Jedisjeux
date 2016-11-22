@@ -1,0 +1,38 @@
+sylius_grid:
+    grids:
+        app_backend_contact_request:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%app.model.contact_request.class%"
+            sorting:
+                createdAt: desc
+            fields:
+                createdAt:
+                    type: twig
+                    label: sylius.ui.created_at
+                    sortable: createdAt
+                    options:
+                        template: "backend/grid/field/date/medium.html.twig"
+                fullName:
+                    type: twig
+                    label: sylius.ui.name
+                    path: fullName
+                    options:
+                        template: "backend/grid/field/string.html.twig"
+                email:
+                    type: string
+                    label: sylius.ui.email
+                    sortable: email
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    options:
+                        fields: [firstName, lastName]
+            actions:
+                item:
+                    show:
+                        type: show
+                    delete:
+                        type: delete

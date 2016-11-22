@@ -3,23 +3,12 @@ app_backend_topic:
         alias: app.topic
         section: backend
         templates: :backend/crud
-        except: ['index']
+        except: ['show']
         redirect: index
+        grid: app_backend_topic
+        vars:
+            all:
+                subheader: app.ui.manage_topics
+            index:
+                icon: comments
     type: sylius.resource
-
-app_backend_topic_index:
-    methods: GET
-    path: /topics/
-    defaults:
-      _controller: app.controller.topic:indexAction
-      _sylius:
-          template: backend/crud/index.html.twig
-          filterable: true
-          sortable: true
-          sorting:
-              createdAt: desc
-          vars:
-              templates:
-                  grid: backend/topic/_grid.html.twig
-              icon: comments
-              subheader: app.ui.manage_topics
