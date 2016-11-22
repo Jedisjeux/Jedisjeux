@@ -2,6 +2,7 @@ imports:
   - { resource: 'grids/backend/contact_request.yml' }
   - { resource: 'grids/backend/customer.yml' }
   - { resource: 'grids/backend/customer_group.yml' }
+  - { resource: 'grids/backend/dealer.yml' }
   - { resource: 'grids/backend/person.yml' }
   - { resource: 'grids/backend/product.yml' }
   - { resource: 'grids/backend/topic.yml' }

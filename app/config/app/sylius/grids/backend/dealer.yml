@@ -1,0 +1,47 @@
+sylius_grid:
+    grids:
+        app_backend_dealer:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%app.model.dealer.class%"
+            sorting:
+                name: asc
+            fields:
+                image:
+                    type: twig
+                    label: sylius.ui.image
+                    path: .
+                    options:
+                        template: "backend/dealer/grid/field/image.html.twig"
+                name:
+                    type: string
+                    label: sylius.ui.name
+                    sortable: name
+                priceList:
+                    type: twig
+                    label: app.ui.price_list
+                    path: .
+                    options:
+                        template: "backend/dealer/grid/field/priceList.html.twig"
+                pubBanners:
+                    type: twig
+                    label: app.ui.pub_banners
+                    path: .
+                    options:
+                        template: "backend/dealer/grid/field/pubBanners.html.twig"
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    options:
+                        fields: [name]
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete

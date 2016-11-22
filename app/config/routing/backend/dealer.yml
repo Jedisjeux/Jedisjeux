@@ -4,23 +4,10 @@ app_backend_dealer:
         section: backend
         templates: :backend/crud
         redirect: index
+        grid: app_backend_dealer
+        vars:
+            all:
+                subheader: app.ui.manage_dealers
+            index:
+                icon: building
     type: sylius.resource
-
-app_backend_dealer_index:
-    methods: [GET]
-    path: /dealers/
-    defaults:
-        _controller: app.controller.dealer:indexAction
-        _sylius:
-            repository:
-                method: createFilterPaginator
-                arguments: [$criteria, $sorting]
-            template: backend/crud/index.html.twig
-            vars:
-              templates:
-                  grid: backend/dealer/_grid.html.twig
-              icon: building
-              subheader: app.ui.manage_dealers
-              actions:
-                  create:
-                      route: app_backend_dealer_create
