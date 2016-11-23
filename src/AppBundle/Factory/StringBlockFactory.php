@@ -10,13 +10,15 @@
  */
 
 namespace AppBundle\Factory;
+
 use AppBundle\Document\StringBlock;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class StringBlockFactory
+class StringBlockFactory implements FactoryInterface
 {
     /**
      * @var string

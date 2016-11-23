@@ -14,4 +14,5 @@ sylius_content:
             classes:
                 repository: Sylius\Bundle\ContentBundle\Doctrine\ODM\PHPCR\StaticContentRepository
                 form:
+                    default: AppBundle\Form\Type\StaticContentType
                     choice: Sylius\Bundle\ContentBundle\Form\Type\StaticContentChoiceType

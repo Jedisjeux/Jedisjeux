@@ -15,23 +15,28 @@ app:
         dealer_prices: Tarifs des vendeurs
         edit_dealer: Modifier le vendeur
         edit_person: Modifier la personne
+        edit_string_block: Modifer le bloc de chaîne
         edit_topic: Modifier le sujet
         forum: Forum
+        internal_name: Nom interne
         logout: Déconnection
         manage_contact_requests: Gérer les demandes de contact
         manage_dealers: Gérer les vendeurs
         manage_dealer_prices: Gérer les tarifs des vendeurs
         manage_people: Gérer les personnes
+        manage_string_blocks: Gérer les blocs de chaîne
         manage_topics: Gérer les sujets
         name: Nom
         new_dealer: Nouveau vendeur
         new_person: Nouvelle personne
+        new_string_block: Nouveau bloc de chaîne
         overview_of_your_website: Aperçu de votre site web
         people: Personnes
         prices: Tarifs
         price_list: Liste de prix
         pub_banners: Bannières de pub
         request_placeholder: Recherche....
+        string_blocks: Blocs de chaîne
         topics: Sujets
         view_details: Voir les détails
 sylius:
@@ -41,6 +46,7 @@ sylius:
         filter: Filtrer
         groups: Groupes
         manage_customer_groups: Gérer les groupes
+        manage_static_contents: Gérer les contenus statiques
         no_label: Non
         out_of_stock: Rupture
         pending_publication: Prêt à publier

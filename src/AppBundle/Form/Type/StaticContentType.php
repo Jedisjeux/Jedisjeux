@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux project.
+ * This file is part of Jedisjeux.
  *
- * (c) Jedisjeux
+ * (c) Loïc Frémont
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,7 +17,10 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class StringBlockType extends AbstractResourceType
+/**
+ * @author Loïc Frémont <loic@mobizel.com>
+ */
+class StaticContentType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
@@ -31,8 +34,12 @@ class StringBlockType extends AbstractResourceType
             ->add('name', TextType::class, [
                 'label' => 'app.ui.internal_name',
             ])
+            ->add('title', TextType::class, [
+                'label' => 'sylius.form.static_content.title',
+            ])
             ->add('body', CKEditorType::class, [
-                'label' => 'sylius.ui.body',
+                'required' => false,
+                'label' => 'sylius.form.static_content.body',
             ]);
     }
 
@@ -53,6 +60,6 @@ class StringBlockType extends AbstractResourceType
      */
     public function getName()
     {
-        return 'app_string_block';
+        return 'sylius_static_content';
     }
 }

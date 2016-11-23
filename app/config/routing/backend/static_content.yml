@@ -1,0 +1,46 @@
+sylius_backend_static_content:
+    resource: |
+        section: backend
+        alias: sylius.static_content
+        only: ['create']
+        templates: :backend/crud
+        redirect: index
+    type: sylius.resource
+
+sylius_backend_static_content_update:
+    methods: [GET, PUT, PATCH]
+    path: /static-contents/{id}/edit
+    defaults:
+      _controller: sylius.controller.static_content:updateAction
+      _sylius:
+          section: backend
+          template: backend/crud/update.html.twig
+    requirements:
+        id: ".+"
+
+sylius_backend_static_content_delete:
+    methods: [DELETE]
+    path: /static-contents/{id}
+    defaults:
+      _controller: sylius.controller.static_content:deleteAction
+      _sylius:
+          section: backend
+    requirements:
+        id: ".+"
+
+sylius_backend_static_content_index:
+    methods: [GET]
+    path: /static-contents/
+    defaults:
+      _controller: sylius.controller.static_content:indexAction
+      _sylius:
+          template: backend/static_content/index.html.twig
+          filterable: true
+          vars:
+              templates:
+                  grid: backend/static_content/_grid.html.twig
+              icon: file
+              subheader: sylius.ui.manage_static_contents
+              actions:
+                  create:
+                      route: sylius_backend_static_content_create

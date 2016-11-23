@@ -1,0 +1,32 @@
+{% from 'macros/sorting.html.twig' import sorting %}
+{% import 'SyliusUiBundle:Macro:buttons.html.twig' as button %}
+
+{% set defaultSorting = app.request.get('sorting') ? false : true %}
+{% set defaultOrder = 'asc' %}
+{% set currentOrder = defaultSorting ? defaultOrder : app.request.get('sorting') %}
+
+{% if string_blocks|length > 0 %}
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th>{{ sorting('app_backend_string_block_index', 'sylius.ui.name'|trans, 'id', defaultOrder, true, currentOrder ) }}</th>
+            <th>{{ 'sylius.ui.actions'|trans }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for string_block in string_blocks %}
+            <tr>
+                <td>{{ string_block.id }}</td>
+                <td>
+                    <div class="ui buttons">
+                        {{ button.edit(path('app_backend_string_block_update', { 'id': string_block.id } )) }}
+                        {{ button.delete(path('app_backend_string_block_delete', { 'id': string_block.id } )) }}
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        {{ messages.info('sylius.ui.no_results_to_display'|trans) }}
+{% endif %}
