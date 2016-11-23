@@ -26,7 +26,7 @@
 {% endblock %}
 
 {% block new_entity_button %}
-    {{ buttons.create(path('app_admin_article_create'), 'label.create_article'|trans) }}
+    {{ buttons.create(path('app_backend_article_create'), 'label.create_article'|trans) }}
 {% endblock new_entity_button %}
 
 {% set sorting = app.request.get('sorting') %}
@@ -44,10 +44,10 @@
         <thead>
         <tr>
             <th>{{ 'label.image'|trans }}</th>
-            <th>{{ sorting('app_admin_article_index', 'label.title'|trans, 'name', 'asc') }}</th>
-            <th>{{ sorting('app_admin_article_index', 'label.category'|trans, 'taxonTranslation.name', 'asc') }}</th>
-            <th>{{ sorting('app_admin_article_index', 'label.published_at'|trans, 'publishStartDate', 'asc', icon, currentOrder) }}</th>
-            <th>{{ sorting('app_admin_article_index', 'label.status'|trans, 'status', 'asc') }}</th>
+            <th>{{ sorting('app_backend_article_index', 'label.title'|trans, 'name', 'asc') }}</th>
+            <th>{{ sorting('app_backend_article_index', 'label.category'|trans, 'taxonTranslation.name', 'asc') }}</th>
+            <th>{{ sorting('app_backend_article_index', 'label.published_at'|trans, 'publishStartDate', 'asc', icon, currentOrder) }}</th>
+            <th>{{ sorting('app_backend_article_index', 'label.status'|trans, 'status', 'asc') }}</th>
         </tr>
         </thead>
         <tbody>
@@ -68,10 +68,10 @@
                             {{ buttons.show(path('app_frontend_article_show', { 'name': article.name })) }}
                         </li>
                         <li>
-                            {{ buttons.edit(path('app_admin_article_update', { 'id': article.id })) }}
+                            {{ buttons.edit(path('app_backend_article_update', { 'id': article.id })) }}
                         </li>
                         <li>
-                            {{ buttons.delete(path('app_admin_article_delete', { 'id': article.id })) }}
+                            {{ buttons.delete(path('app_backend_article_delete', { 'id': article.id })) }}
                         </li>
                     </ul>
                 </td>

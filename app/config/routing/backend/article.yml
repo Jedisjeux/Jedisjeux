@@ -1,24 +1,24 @@
-app_admin_article:
+app_backend_article:
     resource: |
         alias: app.article
-        section: admin
+        section: backend
         templates: :backend/article
         redirect: index
     type: sylius.resource
 
-app_admin_article_index:
+app_backend_article_index:
     methods: [GET]
     path: /articles/
     defaults:
         _controller: app.controller.article:indexAction
         _sylius:
-            repository:
-                method: createFilterPaginator
-                arguments: [$criteria, $sorting, null]
-            template: backend/article/index.html.twig
+            section: backend
+            grid: app_backend_article
+            filterable: true
+            template: backend/crud/index.html.twig
 
 
-app_admin_article_create_for_test:
+app_backend_article_create_for_test:
     methods: [GET]
     path: /articles/tests/{productId}/new
     defaults:

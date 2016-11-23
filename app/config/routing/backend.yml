@@ -10,7 +10,7 @@ app_backend_dashboard:
 app_admin_person:
     resource: backend/person.yml
 
-app_admin_article:
+app_backend_article:
     resource: backend/article.yml
 
 app_admin_contact_request:

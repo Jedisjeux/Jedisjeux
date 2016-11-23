@@ -35,6 +35,7 @@ app:
         prices: Tarifs
         price_list: Liste de prix
         pub_banners: Bannières de pub
+        published_at: Publié le
         request_placeholder: Recherche....
         string_blocks: Blocs de chaîne
         topics: Sujets
