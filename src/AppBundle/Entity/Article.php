@@ -38,8 +38,8 @@ class Article implements ResourceInterface, ReviewableInterface
      * status constants
      */
     const STATUS_NEW = "new";
-    const STATUS_PENDING_REVIEW = "need-a-review";
-    const STATUS_PENDING_PUBLICATION = "ready-to-publish";
+    const STATUS_PENDING_REVIEW = "pending_review";
+    const STATUS_PENDING_PUBLICATION = "pending_publication";
     const STATUS_PUBLISHED = "published";
 
     /**

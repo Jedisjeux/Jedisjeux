@@ -18,6 +18,13 @@ sylius_grid:
                     type: string
                     label: sylius.ui.title
                     sortable: title
+                status:
+                    type: twig
+                    label: sylius.ui.status
+                    options:
+                        template: "backend/grid/field/state.html.twig"
+                        vars:
+                            labels: "backend/article/label/state"
                 publishStartDate:
                     type: twig
                     label: app.ui.published_at
