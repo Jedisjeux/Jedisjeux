@@ -11,6 +11,7 @@
 
 namespace AppBundle\Form\Type;
 
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -31,7 +32,7 @@ class BlockquoteBlockType extends AbstractResourceType
             ->add('name', null, [
                 'label' => 'label.internal_name'
             ])
-            ->add('body', TextareaType::class, [
+            ->add('body', CKEditorType::class, [
                 'label' => 'label.body',
             ])
             ->add('_type', HiddenType::class, [

@@ -233,3 +233,21 @@ if(n.debug("Changing setting",t,o),e.isPlainObject(t))e.extend(!0,f,t);else{if(o
     });
   });
 })(jQuery);
+
+$(document).ready(function () {
+
+    var $menu = $('#new_block_menu');
+
+    function initNewBlockEvent() {
+
+        $('a', $menu).click(function(event) {
+            event.preventDefault();
+            var $block = $("#" + $(this).data('block')).clone();
+            $block.show();
+            $('#form_blocks').append($block);
+        });
+    }
+
+    initNewBlockEvent();
+
+});

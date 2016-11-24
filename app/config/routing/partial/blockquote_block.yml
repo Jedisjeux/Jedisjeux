@@ -5,5 +5,3 @@ app_partial_blockquote_block_create:
         _controller: app.controller.blockquote_block:createAction
         _sylius:
             template: backend/blockquote_block/_create.html.twig
-            factory:
-                method: createWithFakeData

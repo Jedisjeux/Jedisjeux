@@ -1,0 +1,39 @@
+{% import 'SyliusUiBundle:Macro:buttons.html.twig' as buttons %}
+
+<h4 class="ui dividing header">{{ 'app.ui.article_details'|trans }}</h4>
+{{ form_row(form.document.title) }}
+
+<div id="form_blocks">
+
+</div>
+
+{#{{ render(url('app_partial_single_image_block_create', {'imagePosition': 'left'})) }}#}
+
+<div class="ui labeled icon bottom right floating dropdown button primary link">
+    <i class="plus icon"></i>
+    <span class="text">{{ 'app.ui.new_block'|trans }}</span>
+    <div id="new_block_menu" class="menu">
+        <div class="header">
+            <i class="cube icon"></i>
+            {{ 'sylius.ui.type'|trans }}
+        </div>
+        <div class="divider"></div>
+        <a class="item" data-block="introduction" href="#">{{ 'app.ui.introduction'|trans }}</a>
+        <a class="item" data-block="image_on_the_left_side" href="#">{{ 'app.ui.image_on_the_left_side'|trans }}</a>
+        <a class="item" data-block="image_on_the_right_side" href="#">{{ 'app.ui.image_on_the_right_side'|trans }}</a>
+        <a class="item" data-block="box" href="#">{{ 'app.ui.box'|trans }}</a>
+        {#{% render(url('sylius_admin_get_attribute_types')) %}#}
+    </div>
+</div>
+
+<div id="introduction" style="display: none">
+    {{ render(url('app_partial_blockquote_block_create')) }}
+</div>
+
+<div id="image_on_the_left_side" style="display: none">
+    {{ render(url('app_partial_single_image_block_create', {'imagePosition': 'left'})) }}
+</div>
+
+<div id="image_on_the_right_side" style="display: none">
+    {{ render(url('app_partial_single_image_block_create', {'imagePosition': 'right'})) }}
+</div>

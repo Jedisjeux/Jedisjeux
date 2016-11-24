@@ -1,18 +1,14 @@
-<div class="ui two column stackable grid">
-    {{ form_errors(form) }}
-    <div class="column">
+{{ form_errors(form) }}
+
+<div class="ui stackable grid">
+    <div class="ten wide column">
         <div class="ui segment">
-            <h4 class="ui dividing header">{{ 'app.ui.article_details'|trans }}</h4>
-            {{ form_row(form.document.title) }}
+            {% include 'backend/article/_content.html.twig' %}
         </div>
     </div>
-    <div class="column">
+    <div class="six wide column">
         <div class="ui segment">
-            <h4 class="ui dividing header">{{ 'app.ui.article_settings'|trans }}</h4>
-            <div id="user-form">
-                {{ form_row(form.document.name) }}
-                {{ form_row(form.status) }}
-            </div>
+            {% include 'backend/article/_menu.html.twig' %}
         </div>
     </div>
 </div>
