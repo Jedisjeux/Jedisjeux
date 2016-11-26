@@ -42,6 +42,14 @@ class BlockquoteBlockType extends AbstractResourceType
     }
 
     /**
+     * @return string
+     */
+    public function getBlockPrefix()
+    {
+        return 'blockquote_block';
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)

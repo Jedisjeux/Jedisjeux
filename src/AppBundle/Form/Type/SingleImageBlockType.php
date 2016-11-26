@@ -12,7 +12,6 @@
 namespace AppBundle\Form\Type;
 
 use AppBundle\Document\SingleImageBlock;
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -38,7 +37,7 @@ class SingleImageBlockType extends AbstractResourceType
             ->add('title', null, array(
                 'label' => 'label.title'
             ))
-            ->add('body', CKEditorType::class, array(
+            ->add('body', TextareaType::class, array(
                 'label' => 'label.body',
             ))
             ->add('imagePosition', ChoiceType::class, array(
@@ -66,6 +65,14 @@ class SingleImageBlockType extends AbstractResourceType
                 'data' => 'single_image',
                 'mapped' => false,
             ]);
+    }
+
+    /**
+     * @return string
+     */
+    public function getBlockPrefix()
+    {
+        return 'single_image_block';
     }
 
     /**

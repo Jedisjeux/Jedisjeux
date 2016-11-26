@@ -12,7 +12,7 @@
     {%- if errors|length > 0 -%}
         {%- for error in errors -%}
             <div class="ui red pointing label sylius-validation-error">
-            {{ error.message }}
+                {{ error.message }}
             </div>
         {%- endfor -%}
     {%- endif -%}
@@ -82,15 +82,16 @@
 
     {% spaceless %}
         <div data-form-type="collection" {{ block('widget_container_attributes') }}
-            {% if prototype is defined and allow_add %}
-                data-prototype='{{ _self.collection_item(prototype, allow_delete, button_delete_label, '__name__')|e }}'
-            {%- endif -%}
+                {% if prototype is defined and allow_add %}
+                    data-prototype='{{ _self.collection_item(prototype, allow_delete, button_delete_label, '__name__')|e }}'
+                {%- endif -%}
         >
             {{ error(form.vars.errors) }}
 
             {% if prototypes|default is iterable %}
                 {% for key, subPrototype in prototypes %}
-                    <input type="hidden" data-form-prototype="{{ key }}" value="{{ _self.collection_item(subPrototype, allow_delete, button_delete_label, '__name__')|e }}" />
+                    <input type="hidden" data-form-prototype="{{ key }}"
+                           value="{{ _self.collection_item(subPrototype, allow_delete, button_delete_label, '__name__')|e }}"/>
                 {% endfor %}
             {% endif %}
 
@@ -115,7 +116,8 @@
         <div data-form-collection="item" data-form-collection-index="{{ index }}">
             {{ form_widget(form) }}
             {% if allow_delete %}
-                <a href="#" data-form-collection="delete" class="ui red labeled icon button" style="margin-bottom: 1em;">
+                <a href="#" data-form-collection="delete" class="ui red labeled icon button"
+                   style="margin-bottom: 1em;">
                     <i class="trash icon"></i>
                     {{ button_delete_label|trans }}
                 </a>
@@ -123,3 +125,30 @@
         </div>
     {% endspaceless %}
 {% endmacro %}
+
+{% block infinite_form_polycollection_row %}
+    {% set collectionForm = form %}
+    <div data-form-type="collection" {{ block('widget_container_attributes') }}>
+        <div class="collection">
+            <div class="ui labeled icon bottom right floating dropdown button primary link">
+                <i class="plus icon"></i>
+                <span class="text">{{ 'app.ui.new_block'|trans }}</span>
+                <div class="menu">
+                    <div class="header">
+                        <i class="cube icon"></i>
+                        {{ 'sylius.ui.type'|trans }}
+                    </div>
+                    <div class="divider"></div>
+                    {% set form = prototypes.blockquote %}
+                    <a class="item" data-form-collection="add" href="#"
+                       data-prototype="{{ _self.collection_item(form, true) | escape }}">{{ 'app.ui.introduction'|trans }}</a>
+                    {% set form = prototypes.single_image %}
+                    <a class="item" data-form-collection="add" href="#"
+                       data-prototype="{{ _self.collection_item(form, true) | escape }}">{{ 'app.ui.image_on_the_left_side'|trans }}</a>
+                    <a class="item" href="#">{{ 'app.ui.image_on_the_right_side'|trans }}</a>
+                    {#{% render(url('sylius_admin_get_attribute_types')) %}#}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
