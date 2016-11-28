@@ -9,7 +9,7 @@ Quick Installation
 $ cd etc/docker
 $ docker-compose build
 $ docker-compose up -d
-$ docker exec -it $(docker-compose ps -q php) bash
+$ docker exec -it $(docker-compose ps -q jdj_php) bash
 $ composer install
 $ php app/console doctrine:migrations:migrate
 $ exit
@@ -28,8 +28,11 @@ $ gzip -d dmp_jdj_1.sql.gz
 Then create a new empty database called jedisjeux and import backup file
 
 ```bash
+$ apt-get install mysql-client
+$ mysql -h jdj_mysql -u root -proot
 $ create database jedisjeux;
-$ mysql -u root -proot jedisjeux < dmp_jdj_1.sql
+$ exit;
+$ mysql -h jdj_mysql -u root -proot jedisjeux < dmp_jdj_1.sql
 ```
 
 ```bash

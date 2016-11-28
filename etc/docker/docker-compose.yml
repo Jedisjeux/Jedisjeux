@@ -44,6 +44,8 @@ jdj_php:
 
 jdj_elasticsearch:
     image: elasticsearch
+    ports:
+        - 9200:9200
 
 jdj_memcached:
     image: memcached
