@@ -22,6 +22,2276 @@ m={initialize:function(){m.verbose("Initializing module"),m.determine.searchFiel
 i.on("click"+E,n)):w.error(P.notFound,t)},show:function(t){if(t=e.isFunction(t)?t:function(){},w.is.hidden()){if(w.refreshSidebars(),k.overlay&&(w.error(P.overlay),k.transition="overlay"),w.refresh(),w.othersActive())if(w.debug("Other sidebars currently visible"),k.exclusive){if("overlay"!=k.transition)return void w.hideOthers(w.show);w.hideOthers()}else k.transition="overlay";w.pushPage(function(){t.call(M),k.onShow.call(M)}),k.onChange.call(M),k.onVisible.call(M)}else w.debug("Sidebar is already visible")},hide:function(t){t=e.isFunction(t)?t:function(){},(w.is.visible()||w.is.animating())&&(w.debug("Hiding sidebar",t),w.refreshSidebars(),w.pullPage(function(){t.call(M),k.onHidden.call(M)}),k.onChange.call(M),k.onHide.call(M))},othersAnimating:function(){return q.not(O).filter("."+T.animating).length>0},othersVisible:function(){return q.not(O).filter("."+T.visible).length>0},othersActive:function(){return w.othersVisible()||w.othersAnimating()},hideOthers:function(e){var t=q.not(O).filter("."+T.visible),n=t.length,i=0;e=e||function(){},t.sidebar("hide",function(){i++,i==n&&e()})},toggle:function(){w.verbose("Determining toggled direction"),w.is.hidden()?w.show():w.hide()},pushPage:function(t){var n,i,o,a=w.get.transition(),r="overlay"===a||w.othersActive()?O:z;t=e.isFunction(t)?t:function(){},"scale down"==k.transition&&w.scrollToTop(),w.set.transition(a),w.repaint(),n=function(){w.bind.clickaway(),w.add.inlineCSS(),w.set.animating(),w.set.visible()},i=function(){w.set.dimmed()},o=function(e){e.target==r[0]&&(r.off(C+b,o),w.remove.animating(),w.bind.scrollLock(),t.call(M))},r.off(C+b),r.on(C+b,o),v(n),k.dimPage&&!w.othersVisible()&&v(i)},pullPage:function(t){var n,i,o=w.get.transition(),a="overlay"==o||w.othersActive()?O:z;t=e.isFunction(t)?t:function(){},w.verbose("Removing context push state",w.get.direction()),w.unbind.clickaway(),w.unbind.scrollLock(),n=function(){w.set.transition(o),w.set.animating(),w.remove.visible(),k.dimPage&&!w.othersVisible()&&z.removeClass(T.dimmed)},i=function(e){e.target==a[0]&&(a.off(C+b,i),w.remove.animating(),w.remove.transition(),w.remove.inlineCSS(),("scale down"==o||k.returnScroll&&w.is.mobile())&&w.scrollBack(),t.call(M))},a.off(C+b),a.on(C+b,i),v(n)},scrollToTop:function(){w.verbose("Scrolling to top of page to avoid animation issues"),x=e(t).scrollTop(),O.scrollTop(0),t.scrollTo(0,0)},scrollBack:function(){w.verbose("Scrolling back to original page position"),t.scrollTo(0,x)},clear:{cache:function(){w.verbose("Clearing cached dimensions"),w.cache={}}},set:{ios:function(){c.addClass(T.ios)},pushed:function(){D.addClass(T.pushed)},pushable:function(){D.addClass(T.pushable)},dimmed:function(){z.addClass(T.dimmed)},active:function(){O.addClass(T.active)},animating:function(){O.addClass(T.animating)},transition:function(e){e=e||w.get.transition(),O.addClass(e)},direction:function(e){e=e||w.get.direction(),O.addClass(T[e])},visible:function(){O.addClass(T.visible)},overlay:function(){O.addClass(T.overlay)}},remove:{inlineCSS:function(){w.debug("Removing inline css styles",r),r&&r.length>0&&r.remove()},ios:function(){c.removeClass(T.ios)},pushed:function(){D.removeClass(T.pushed)},pushable:function(){D.removeClass(T.pushable)},active:function(){O.removeClass(T.active)},animating:function(){O.removeClass(T.animating)},transition:function(e){e=e||w.get.transition(),O.removeClass(e)},direction:function(e){e=e||w.get.direction(),O.removeClass(T[e])},visible:function(){O.removeClass(T.visible)},overlay:function(){O.removeClass(T.overlay)}},get:{direction:function(){return O.hasClass(T.top)?T.top:O.hasClass(T.right)?T.right:O.hasClass(T.bottom)?T.bottom:T.left},transition:function(){var e,t=w.get.direction();return e=w.is.mobile()?"auto"==k.mobileTransition?k.defaultTransition.mobile[t]:k.mobileTransition:"auto"==k.transition?k.defaultTransition.computer[t]:k.transition,w.verbose("Determined transition",e),e},transitionEvent:function(){var e,t=n.createElement("element"),o={transition:"transitionend",OTransition:"oTransitionEnd",MozTransition:"transitionend",WebkitTransition:"webkitTransitionEnd"};for(e in o)if(t.style[e]!==i)return o[e]}},is:{ie:function(){var e=!t.ActiveXObject&&"ActiveXObject"in t,n="ActiveXObject"in t;return e||n},ios:function(){var e=navigator.userAgent,t=e.match(R.ios),n=e.match(R.mobileChrome);return!(!t||n)&&(w.verbose("Browser was found to be iOS",e),!0)},mobile:function(){var e=navigator.userAgent,t=e.match(R.mobile);return t?(w.verbose("Browser was found to be mobile",e),!0):(w.verbose("Browser is not mobile, using regular transition",e),!1)},hidden:function(){return!w.is.visible()},visible:function(){return O.hasClass(T.visible)},open:function(){return w.is.visible()},closed:function(){return w.is.hidden()},vertical:function(){return O.hasClass(T.top)},animating:function(){return D.hasClass(T.animating)},rtl:function(){return w.cache.rtl===i&&(w.cache.rtl="rtl"==O.css("direction")),w.cache.rtl}},setting:function(t,n){if(w.debug("Changing setting",t,n),e.isPlainObject(t))e.extend(!0,k,t);else{if(n===i)return k[t];e.isPlainObject(k[t])?e.extend(!0,k[t],n):k[t]=n}},internal:function(t,n){if(e.isPlainObject(t))e.extend(!0,w,t);else{if(n===i)return w[t];w[t]=n}},debug:function(){!k.silent&&k.debug&&(k.performance?w.performance.log(arguments):(w.debug=Function.prototype.bind.call(console.info,console,k.name+":"),w.debug.apply(console,arguments)))},verbose:function(){!k.silent&&k.verbose&&k.debug&&(k.performance?w.performance.log(arguments):(w.verbose=Function.prototype.bind.call(console.info,console,k.name+":"),w.verbose.apply(console,arguments)))},error:function(){k.silent||(w.error=Function.prototype.bind.call(console.error,console,k.name+":"),w.error.apply(console,arguments))},performance:{log:function(e){var t,n,i;k.performance&&(t=(new Date).getTime(),i=f||t,n=t-i,f=t,m.push({Name:e[0],Arguments:[].slice.call(e,1)||"",Element:M,"Execution Time":n})),clearTimeout(w.performance.timer),w.performance.timer=setTimeout(w.performance.display,500)},display:function(){var t=k.name+":",n=0;f=!1,clearTimeout(w.performance.timer),e.each(m,function(e,t){n+=t["Execution Time"]}),t+=" "+n+"ms",d&&(t+=" '"+d+"'"),(console.group!==i||console.table!==i)&&m.length>0&&(console.groupCollapsed(t),console.table?console.table(m):e.each(m,function(e,t){console.log(t.Name+": "+t["Execution Time"]+"ms")}),console.groupEnd()),m=[]}},invoke:function(t,n,o){var r,s,l,c=I;return n=n||h,o=M||o,"string"==typeof t&&c!==i&&(t=t.split(/[\. ]/),r=t.length-1,e.each(t,function(n,o){var a=n!=r?o+t[n+1].charAt(0).toUpperCase()+t[n+1].slice(1):t;if(e.isPlainObject(c[a])&&n!=r)c=c[a];else{if(c[a]!==i)return s=c[a],!1;if(!e.isPlainObject(c[o])||n==r)return c[o]!==i?(s=c[o],!1):(w.error(P.method,t),!1);c=c[o]}})),e.isFunction(s)?l=s.apply(o,n):s!==i&&(l=s),e.isArray(a)?a.push(l):a!==i?a=[a,l]:l!==i&&(a=l),s}},p?(I===i&&w.initialize(),w.invoke(g)):(I!==i&&w.invoke("destroy"),w.initialize())}),a!==i?a:this},e.fn.sidebar.settings={name:"Sidebar",namespace:"sidebar",silent:!1,debug:!1,verbose:!1,performance:!0,transition:"auto",mobileTransition:"auto",defaultTransition:{computer:{left:"uncover",right:"uncover",top:"overlay",bottom:"overlay"},mobile:{left:"uncover",right:"uncover",top:"overlay",bottom:"overlay"}},context:"body",exclusive:!1,closable:!0,dimPage:!0,scrollLock:!1,returnScroll:!1,delaySetup:!1,duration:500,onChange:function(){},onShow:function(){},onHide:function(){},onHidden:function(){},onVisible:function(){},className:{active:"active",animating:"animating",dimmed:"dimmed",ios:"ios",pushable:"pushable",pushed:"pushed",right:"right",top:"top",left:"left",bottom:"bottom",visible:"visible"},selector:{fixed:".fixed",omitted:"script, link, style, .ui.modal, .ui.dimmer, .ui.nag, .ui.fixed",pusher:".pusher",sidebar:".ui.sidebar"},regExp:{ios:/(iPad|iPhone|iPod)/g,mobileChrome:/(CriOS)/g,mobile:/Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/g},error:{method:"The method you called is not defined.",pusher:"Had to add pusher element. For optimal performance make sure body content is inside a pusher element",movedSidebar:"Had to move sidebar. For optimal performance make sure sidebar and pusher are direct children of your body tag",overlay:"The overlay setting is no longer supported, use animation: overlay",notFound:"There were no elements that matched the specified selector"}}}(jQuery,window,document),function(e,t,n,i){"use strict";t="undefined"!=typeof t&&t.Math==Math?t:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")(),e.fn.sticky=function(o){var a,r=e(this),s=r.selector||"",l=(new Date).getTime(),c=[],u=arguments[0],d="string"==typeof u,f=[].slice.call(arguments,1);return r.each(function(){var r,m,g,p,h,v=e.isPlainObject(o)?e.extend(!0,{},e.fn.sticky.settings,o):e.extend({},e.fn.sticky.settings),b=v.className,y=v.namespace,x=v.error,C="."+y,w="module-"+y,k=e(this),S=e(t),T=e(v.scrollContext),A=(k.selector||"",k.data(w)),R=t.requestAnimationFrame||t.mozRequestAnimationFrame||t.webkitRequestAnimationFrame||t.msRequestAnimationFrame||function(e){setTimeout(e,0)},P=this;h={initialize:function(){h.determineContainer(),h.determineContext(),h.verbose("Initializing sticky",v,r),h.save.positions(),h.checkErrors(),h.bind.events(),v.observeChanges&&h.observeChanges(),h.instantiate()},instantiate:function(){h.verbose("Storing instance of module",h),A=h,k.data(w,h)},destroy:function(){h.verbose("Destroying previous instance"),h.reset(),g&&g.disconnect(),p&&p.disconnect(),S.off("load"+C,h.event.load).off("resize"+C,h.event.resize),T.off("scrollchange"+C,h.event.scrollchange),k.removeData(w)},observeChanges:function(){"MutationObserver"in t&&(g=new MutationObserver(h.event.documentChanged),p=new MutationObserver(h.event.changed),g.observe(n,{childList:!0,subtree:!0}),p.observe(P,{childList:!0,subtree:!0}),p.observe(m[0],{childList:!0,subtree:!0}),h.debug("Setting up mutation observer",p))},determineContainer:function(){r=k.offsetParent()},determineContext:function(){if(m=v.context?e(v.context):r,0===m.length)return void h.error(x.invalidContext,v.context,k)},checkErrors:function(){if(h.is.hidden()&&h.error(x.visible,k),h.cache.element.height>h.cache.context.height)return h.reset(),void h.error(x.elementSize,k)},bind:{events:function(){S.on("load"+C,h.event.load).on("resize"+C,h.event.resize),T.off("scroll"+C).on("scroll"+C,h.event.scroll).on("scrollchange"+C,h.event.scrollchange)}},event:{changed:function(e){clearTimeout(h.timer),h.timer=setTimeout(function(){h.verbose("DOM tree modified, updating sticky menu",e),h.refresh()},100)},documentChanged:function(t){[].forEach.call(t,function(t){t.removedNodes&&[].forEach.call(t.removedNodes,function(t){(t==P||e(t).find(P).length>0)&&(h.debug("Element removed from DOM, tearing down events"),h.destroy())})})},load:function(){h.verbose("Page contents finished loading"),R(h.refresh)},resize:function(){h.verbose("Window resized"),R(h.refresh)},scroll:function(){R(function(){T.triggerHandler("scrollchange"+C,T.scrollTop())})},scrollchange:function(e,t){h.stick(t),v.onScroll.call(P)}},refresh:function(e){h.reset(),v.context||h.determineContext(),e&&h.determineContainer(),h.save.positions(),h.stick(),v.onReposition.call(P)},supports:{sticky:function(){var t=e("<div/>");t[0];return t.addClass(b.supported),t.css("position").match("sticky")}},save:{lastScroll:function(e){h.lastScroll=e},elementScroll:function(e){h.elementScroll=e},positions:function(){var e={height:T.height()},t={margin:{top:parseInt(k.css("margin-top"),10),bottom:parseInt(k.css("margin-bottom"),10)},offset:k.offset(),width:k.outerWidth(),height:k.outerHeight()},n={offset:m.offset(),height:m.outerHeight()};({height:r.outerHeight()});h.is.standardScroll()||(h.debug("Non-standard scroll. Removing scroll offset from element offset"),e.top=T.scrollTop(),e.left=T.scrollLeft(),t.offset.top+=e.top,n.offset.top+=e.top,t.offset.left+=e.left,n.offset.left+=e.left),h.cache={fits:t.height<e.height,scrollContext:{height:e.height},element:{margin:t.margin,top:t.offset.top-t.margin.top,left:t.offset.left,width:t.width,height:t.height,bottom:t.offset.top+t.height},context:{top:n.offset.top,height:n.height,bottom:n.offset.top+n.height}},h.set.containerSize(),h.set.size(),h.stick(),h.debug("Caching element positions",h.cache)}},get:{direction:function(e){var t="down";return e=e||T.scrollTop(),h.lastScroll!==i&&(h.lastScroll<e?t="down":h.lastScroll>e&&(t="up")),t},scrollChange:function(e){return e=e||T.scrollTop(),h.lastScroll?e-h.lastScroll:0},currentElementScroll:function(){return h.elementScroll?h.elementScroll:h.is.top()?Math.abs(parseInt(k.css("top"),10))||0:Math.abs(parseInt(k.css("bottom"),10))||0},elementScroll:function(e){e=e||T.scrollTop();var t=h.cache.element,n=h.cache.scrollContext,i=h.get.scrollChange(e),o=t.height-n.height+v.offset,a=h.get.currentElementScroll(),r=a+i;return a=h.cache.fits||r<0?0:r>o?o:r}},remove:{lastScroll:function(){delete h.lastScroll},elementScroll:function(e){delete h.elementScroll},offset:function(){k.css("margin-top","")}},set:{offset:function(){h.verbose("Setting offset on element",v.offset),k.css("margin-top",v.offset)},containerSize:function(){var e=r.get(0).tagName;"HTML"===e||"body"==e?h.determineContainer():Math.abs(r.outerHeight()-h.cache.context.height)>v.jitter&&(h.debug("Context has padding, specifying exact height for container",h.cache.context.height),r.css({height:h.cache.context.height}))},minimumSize:function(){var e=h.cache.element;r.css("min-height",e.height)},scroll:function(e){h.debug("Setting scroll on element",e),h.elementScroll!=e&&(h.is.top()&&k.css("bottom","").css("top",-e),h.is.bottom()&&k.css("top","").css("bottom",e))},size:function(){0!==h.cache.element.height&&0!==h.cache.element.width&&(P.style.setProperty("width",h.cache.element.width+"px","important"),P.style.setProperty("height",h.cache.element.height+"px","important"))}},is:{standardScroll:function(){return T[0]==t},top:function(){return k.hasClass(b.top)},bottom:function(){return k.hasClass(b.bottom)},initialPosition:function(){return!h.is.fixed()&&!h.is.bound()},hidden:function(){return!k.is(":visible")},bound:function(){return k.hasClass(b.bound)},fixed:function(){return k.hasClass(b.fixed)}},stick:function(e){var t=e||T.scrollTop(),n=h.cache,i=n.fits,o=n.element,a=n.scrollContext,r=n.context,s=h.is.bottom()&&v.pushing?v.bottomOffset:v.offset,e={top:t+s,bottom:t+s+a.height},l=(h.get.direction(e.top),i?0:h.get.elementScroll(e.top)),c=!i,u=0!==o.height;u&&(h.is.initialPosition()?e.top>=r.bottom?(h.debug("Initial element position is bottom of container"),h.bindBottom()):e.top>o.top&&(o.height+e.top-l>=r.bottom?(h.debug("Initial element position is bottom of container"),h.bindBottom()):(h.debug("Initial element position is fixed"),h.fixTop())):h.is.fixed()?h.is.top()?e.top<=o.top?(h.debug("Fixed element reached top of container"),h.setInitialPosition()):o.height+e.top-l>=r.bottom?(h.debug("Fixed element reached bottom of container"),h.bindBottom()):c&&(h.set.scroll(l),h.save.lastScroll(e.top),h.save.elementScroll(l)):h.is.bottom()&&(e.bottom-o.height<=o.top?(h.debug("Bottom fixed rail has reached top of container"),h.setInitialPosition()):e.bottom>=r.bottom?(h.debug("Bottom fixed rail has reached bottom of container"),h.bindBottom()):c&&(h.set.scroll(l),h.save.lastScroll(e.top),h.save.elementScroll(l))):h.is.bottom()&&(e.top<=o.top?(h.debug("Jumped from bottom fixed to top fixed, most likely used home/end button"),h.setInitialPosition()):v.pushing?h.is.bound()&&e.bottom<=r.bottom&&(h.debug("Fixing bottom attached element to bottom of browser."),h.fixBottom()):h.is.bound()&&e.top<=r.bottom-o.height&&(h.debug("Fixing bottom attached element to top of browser."),h.fixTop())))},bindTop:function(){h.debug("Binding element to top of parent container"),h.remove.offset(),k.css({left:"",top:"",marginBottom:""}).removeClass(b.fixed).removeClass(b.bottom).addClass(b.bound).addClass(b.top),v.onTop.call(P),v.onUnstick.call(P)},bindBottom:function(){h.debug("Binding element to bottom of parent container"),h.remove.offset(),k.css({left:"",top:""}).removeClass(b.fixed).removeClass(b.top).addClass(b.bound).addClass(b.bottom),v.onBottom.call(P),v.onUnstick.call(P)},setInitialPosition:function(){h.debug("Returning to initial position"),h.unfix(),h.unbind()},fixTop:function(){h.debug("Fixing element to top of page"),h.set.minimumSize(),h.set.offset(),k.css({left:h.cache.element.left,bottom:"",marginBottom:""}).removeClass(b.bound).removeClass(b.bottom).addClass(b.fixed).addClass(b.top),v.onStick.call(P)},fixBottom:function(){h.debug("Sticking element to bottom of page"),h.set.minimumSize(),h.set.offset(),k.css({left:h.cache.element.left,bottom:"",marginBottom:""}).removeClass(b.bound).removeClass(b.top).addClass(b.fixed).addClass(b.bottom),v.onStick.call(P)},unbind:function(){h.is.bound()&&(h.debug("Removing container bound position on element"),h.remove.offset(),k.removeClass(b.bound).removeClass(b.top).removeClass(b.bottom))},unfix:function(){h.is.fixed()&&(h.debug("Removing fixed position on element"),h.remove.offset(),k.removeClass(b.fixed).removeClass(b.top).removeClass(b.bottom),v.onUnstick.call(P))},reset:function(){h.debug("Resetting elements position"),h.unbind(),h.unfix(),h.resetCSS(),h.remove.offset(),h.remove.lastScroll()},resetCSS:function(){k.css({width:"",height:""}),r.css({height:""})},setting:function(t,n){if(e.isPlainObject(t))e.extend(!0,v,t);else{if(n===i)return v[t];v[t]=n}},internal:function(t,n){if(e.isPlainObject(t))e.extend(!0,h,t);else{if(n===i)return h[t];h[t]=n}},debug:function(){!v.silent&&v.debug&&(v.performance?h.performance.log(arguments):(h.debug=Function.prototype.bind.call(console.info,console,v.name+":"),h.debug.apply(console,arguments)))},verbose:function(){!v.silent&&v.verbose&&v.debug&&(v.performance?h.performance.log(arguments):(h.verbose=Function.prototype.bind.call(console.info,console,v.name+":"),h.verbose.apply(console,arguments)))},error:function(){v.silent||(h.error=Function.prototype.bind.call(console.error,console,v.name+":"),h.error.apply(console,arguments))},performance:{log:function(e){var t,n,i;v.performance&&(t=(new Date).getTime(),i=l||t,n=t-i,l=t,c.push({Name:e[0],Arguments:[].slice.call(e,1)||"",Element:P,"Execution Time":n})),clearTimeout(h.performance.timer),h.performance.timer=setTimeout(h.performance.display,0)},display:function(){var t=v.name+":",n=0;l=!1,clearTimeout(h.performance.timer),e.each(c,function(e,t){n+=t["Execution Time"]}),t+=" "+n+"ms",s&&(t+=" '"+s+"'"),(console.group!==i||console.table!==i)&&c.length>0&&(console.groupCollapsed(t),console.table?console.table(c):e.each(c,function(e,t){console.log(t.Name+": "+t["Execution Time"]+"ms")}),console.groupEnd()),c=[]}},invoke:function(t,n,o){var r,s,l,c=A;return n=n||f,o=P||o,"string"==typeof t&&c!==i&&(t=t.split(/[\. ]/),r=t.length-1,e.each(t,function(n,o){var a=n!=r?o+t[n+1].charAt(0).toUpperCase()+t[n+1].slice(1):t;if(e.isPlainObject(c[a])&&n!=r)c=c[a];else{if(c[a]!==i)return s=c[a],!1;if(!e.isPlainObject(c[o])||n==r)return c[o]!==i&&(s=c[o],!1);c=c[o]}})),e.isFunction(s)?l=s.apply(o,n):s!==i&&(l=s),e.isArray(a)?a.push(l):a!==i?a=[a,l]:l!==i&&(a=l),s}},d?(A===i&&h.initialize(),h.invoke(u)):(A!==i&&A.invoke("destroy"),h.initialize())}),a!==i?a:this},e.fn.sticky.settings={name:"Sticky",namespace:"sticky",silent:!1,debug:!1,verbose:!0,performance:!0,pushing:!1,context:!1,scrollContext:t,offset:0,bottomOffset:0,jitter:5,observeChanges:!1,onReposition:function(){},onScroll:function(){},onStick:function(){},onUnstick:function(){},onTop:function(){},onBottom:function(){},error:{container:"Sticky element must be inside a relative container",visible:"Element is hidden, you must call refresh after element becomes visible. Use silent setting to surpress this warning in production.",method:"The method you called is not defined.",invalidContext:"Context specified does not exist",elementSize:"Sticky element is larger than its container, cannot create sticky."},className:{bound:"bound",fixed:"fixed",supported:"native",top:"top",bottom:"bottom"}}}(jQuery,window,document),function(e,t,n,i){"use strict";t="undefined"!=typeof t&&t.Math==Math?t:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")(),e.fn.tab=function(o){var a,r=e(e.isFunction(this)?t:this),s=r.selector||"",l=(new Date).getTime(),c=[],u=arguments[0],d="string"==typeof u,f=[].slice.call(arguments,1),m=!1;return r.each(function(){var g,p,h,v,b,y,x=e.isPlainObject(o)?e.extend(!0,{},e.fn.tab.settings,o):e.extend({},e.fn.tab.settings),C=x.className,w=x.metadata,k=x.selector,S=x.error,T="."+x.namespace,A="module-"+x.namespace,R=e(this),P={},E=!0,F=0,O=this,D=R.data(A);b={initialize:function(){b.debug("Initializing tab menu item",R),b.fix.callbacks(),b.determineTabs(),b.debug("Determining tabs",x.context,p),x.auto&&b.set.auto(),b.bind.events(),x.history&&!m&&(b.initializeHistory(),m=!0),b.instantiate()},instantiate:function(){b.verbose("Storing instance of module",b),D=b,R.data(A,b)},destroy:function(){b.debug("Destroying tabs",R),R.removeData(A).off(T)},bind:{events:function(){e.isWindow(O)||(b.debug("Attaching tab activation events to element",R),R.on("click"+T,b.event.click))}},determineTabs:function(){var t;"parent"===x.context?(R.closest(k.ui).length>0?(t=R.closest(k.ui),b.verbose("Using closest UI element as parent",t)):t=R,g=t.parent(),b.verbose("Determined parent element for creating context",g)):x.context?(g=e(x.context),b.verbose("Using selector for tab context",x.context,g)):g=e("body"),x.childrenOnly?(p=g.children(k.tabs),b.debug("Searching tab context children for tabs",g,p)):(p=g.find(k.tabs),b.debug("Searching tab context for tabs",g,p))},fix:{callbacks:function(){e.isPlainObject(o)&&(o.onTabLoad||o.onTabInit)&&(o.onTabLoad&&(o.onLoad=o.onTabLoad,delete o.onTabLoad,b.error(S.legacyLoad,o.onLoad)),o.onTabInit&&(o.onFirstLoad=o.onTabInit,delete o.onTabInit,b.error(S.legacyInit,o.onFirstLoad)),x=e.extend(!0,{},e.fn.tab.settings,o))}},initializeHistory:function(){if(b.debug("Initializing page state"),e.address===i)return b.error(S.state),!1;if("state"==x.historyType){if(b.debug("Using HTML5 to manage state"),x.path===!1)return b.error(S.path),!1;e.address.history(!0).state(x.path)}e.address.bind("change",b.event.history.change)},event:{click:function(t){var n=e(this).data(w.tab);n!==i?(x.history?(b.verbose("Updating page state",t),e.address.value(n)):(b.verbose("Changing tab",t),b.changeTab(n)),t.preventDefault()):b.debug("No tab specified")},history:{change:function(t){var n=t.pathNames.join("/")||b.get.initialPath(),o=x.templates.determineTitle(n)||!1;b.performance.display(),b.debug("History change event",n,t),y=t,n!==i&&b.changeTab(n),o&&e.address.title(o)}}},refresh:function(){h&&(b.debug("Refreshing tab",h),b.changeTab(h))},cache:{read:function(e){return e!==i&&P[e]},add:function(e,t){e=e||h,b.debug("Adding cached content for",e),P[e]=t},remove:function(e){e=e||h,b.debug("Removing cached content for",e),delete P[e]}},set:{auto:function(){var t="string"==typeof x.path?x.path.replace(/\/$/,"")+"/{$tab}":"/{$tab}";b.verbose("Setting up automatic tab retrieval from server",t),e.isPlainObject(x.apiSettings)?x.apiSettings.url=t:x.apiSettings={url:t}},loading:function(e){var t=b.get.tabElement(e),n=t.hasClass(C.loading);n||(b.verbose("Setting loading state for",t),t.addClass(C.loading).siblings(p).removeClass(C.active+" "+C.loading),t.length>0&&x.onRequest.call(t[0],e))},state:function(t){e.address.value(t)}},changeTab:function(n){var i=t.history&&t.history.pushState,o=i&&x.ignoreFirstLoad&&E,a=x.auto||e.isPlainObject(x.apiSettings),r=a&&!o?b.utilities.pathToArray(n):b.get.defaultPathArray(n);n=b.utilities.arrayToPath(r),e.each(r,function(t,i){var s,l,c,u,d=r.slice(0,t+1),f=b.utilities.arrayToPath(d),m=b.is.tab(f),p=t+1==r.length,k=b.get.tabElement(f);if(b.verbose("Looking for tab",i),m){if(b.verbose("Tab was found",i),h=f,v=b.utilities.filterArray(r,d),p?u=!0:(l=r.slice(0,t+2),c=b.utilities.arrayToPath(l),u=!b.is.tab(c),u&&b.verbose("Tab parameters found",l)),u&&a)return o?(b.debug("Ignoring remote content on first tab load",f),E=!1,b.cache.add(n,k.html()),b.activate.all(f),x.onFirstLoad.call(k[0],f,v,y),x.onLoad.call(k[0],f,v,y)):(b.activate.navigation(f),b.fetch.content(f,n)),!1;b.debug("Opened local tab",f),b.activate.all(f),b.cache.read(f)||(b.cache.add(f,!0),b.debug("First time tab loaded calling tab init"),x.onFirstLoad.call(k[0],f,v,y)),x.onLoad.call(k[0],f,v,y)}else{if(n.search("/")!=-1||""===n)return b.error(S.missingTab,R,g,f),!1;if(s=e("#"+n+', a[name="'+n+'"]'),f=s.closest("[data-tab]").data(w.tab),k=b.get.tabElement(f),s&&s.length>0&&f)return b.debug("Anchor link used, opening parent tab",k,s),k.hasClass(C.active)||setTimeout(function(){b.scrollTo(s)},0),b.activate.all(f),b.cache.read(f)||(b.cache.add(f,!0),b.debug("First time tab loaded calling tab init"),x.onFirstLoad.call(k[0],f,v,y)),x.onLoad.call(k[0],f,v,y),!1}})},scrollTo:function(t){var i=!!(t&&t.length>0)&&t.offset().top;i!==!1&&(b.debug("Forcing scroll to an in-page link in a hidden tab",i,t),e(n).scrollTop(i))},update:{content:function(e,t,n){var o=b.get.tabElement(e),a=o[0];n=n!==i?n:x.evaluateScripts,n?(b.debug("Updating HTML and evaluating inline scripts",e,t),o.html(t)):(b.debug("Updating HTML",e,t),a.innerHTML=t)}},fetch:{content:function(t,n){var o,a,r=b.get.tabElement(t),s={dataType:"html",encodeParameters:!1,on:"now",cache:x.alwaysRefresh,headers:{"X-Remote":!0},onSuccess:function(e){"response"==x.cacheType&&b.cache.add(n,e),b.update.content(t,e),t==h?(b.debug("Content loaded",t),b.activate.tab(t)):b.debug("Content loaded in background",t),x.onFirstLoad.call(r[0],t,v,y),x.onLoad.call(r[0],t,v,y),"response"!=x.cacheType&&b.cache.add(n,r.html())},urlData:{tab:n}},l=r.api("get request")||!1,c=l&&"pending"===l.state();n=n||t,a=b.cache.read(n),x.cache&&a?(b.activate.tab(t),b.debug("Adding cached content",n),"once"==x.evaluateScripts?b.update.content(t,a,!1):b.update.content(t,a),x.onLoad.call(r[0],t,v,y)):c?(b.set.loading(t),b.debug("Content is already loading",n)):e.api!==i?(o=e.extend(!0,{},x.apiSettings,s),b.debug("Retrieving remote content",n,o),b.set.loading(t),r.api(o)):b.error(S.api)}},activate:{all:function(e){b.activate.tab(e),b.activate.navigation(e)},tab:function(e){var t=b.get.tabElement(e),n="siblings"==x.deactivate?t.siblings(p):p.not(t),i=t.hasClass(C.active);b.verbose("Showing tab content for",t),i||(t.addClass(C.active),n.removeClass(C.active+" "+C.loading),t.length>0&&x.onVisible.call(t[0],e))},navigation:function(e){var t=b.get.navElement(e),n="siblings"==x.deactivate?t.siblings(r):r.not(t),i=t.hasClass(C.active);b.verbose("Activating tab navigation for",t,e),i||(t.addClass(C.active),n.removeClass(C.active+" "+C.loading))}},deactivate:{all:function(){b.deactivate.navigation(),b.deactivate.tabs()},navigation:function(){r.removeClass(C.active)},tabs:function(){p.removeClass(C.active+" "+C.loading)}},is:{tab:function(e){return e!==i&&b.get.tabElement(e).length>0}},get:{initialPath:function(){return r.eq(0).data(w.tab)||p.eq(0).data(w.tab)},path:function(){return e.address.value()},defaultPathArray:function(e){return b.utilities.pathToArray(b.get.defaultPath(e))},defaultPath:function(e){var t=r.filter("[data-"+w.tab+'^="'+e+'/"]').eq(0),n=t.data(w.tab)||!1;if(n){if(b.debug("Found default tab",n),F<x.maxDepth)return F++,b.get.defaultPath(n);b.error(S.recursion)}else b.debug("No default tabs found for",e,p);return F=0,e},navElement:function(e){return e=e||h,r.filter("[data-"+w.tab+'="'+e+'"]')},tabElement:function(e){var t,n,i,o;return e=e||h,i=b.utilities.pathToArray(e),o=b.utilities.last(i),t=p.filter("[data-"+w.tab+'="'+e+'"]'),n=p.filter("[data-"+w.tab+'="'+o+'"]'),t.length>0?t:n},tab:function(){return h}},utilities:{filterArray:function(t,n){return e.grep(t,function(t){return e.inArray(t,n)==-1})},last:function(t){return!!e.isArray(t)&&t[t.length-1]},pathToArray:function(e){return e===i&&(e=h),"string"==typeof e?e.split("/"):[e]},arrayToPath:function(t){return!!e.isArray(t)&&t.join("/")}},setting:function(t,n){if(b.debug("Changing setting",t,n),e.isPlainObject(t))e.extend(!0,x,t);else{if(n===i)return x[t];e.isPlainObject(x[t])?e.extend(!0,x[t],n):x[t]=n}},internal:function(t,n){if(e.isPlainObject(t))e.extend(!0,b,t);else{if(n===i)return b[t];b[t]=n}},debug:function(){!x.silent&&x.debug&&(x.performance?b.performance.log(arguments):(b.debug=Function.prototype.bind.call(console.info,console,x.name+":"),b.debug.apply(console,arguments)))},verbose:function(){!x.silent&&x.verbose&&x.debug&&(x.performance?b.performance.log(arguments):(b.verbose=Function.prototype.bind.call(console.info,console,x.name+":"),b.verbose.apply(console,arguments)))},error:function(){x.silent||(b.error=Function.prototype.bind.call(console.error,console,x.name+":"),b.error.apply(console,arguments))},performance:{log:function(e){var t,n,i;x.performance&&(t=(new Date).getTime(),i=l||t,n=t-i,l=t,c.push({Name:e[0],Arguments:[].slice.call(e,1)||"",Element:O,"Execution Time":n})),clearTimeout(b.performance.timer),b.performance.timer=setTimeout(b.performance.display,500)},display:function(){var t=x.name+":",n=0;l=!1,clearTimeout(b.performance.timer),e.each(c,function(e,t){n+=t["Execution Time"]}),t+=" "+n+"ms",s&&(t+=" '"+s+"'"),(console.group!==i||console.table!==i)&&c.length>0&&(console.groupCollapsed(t),console.table?console.table(c):e.each(c,function(e,t){console.log(t.Name+": "+t["Execution Time"]+"ms")}),console.groupEnd()),c=[]}},invoke:function(t,n,o){var r,s,l,c=D;return n=n||f,o=O||o,"string"==typeof t&&c!==i&&(t=t.split(/[\. ]/),r=t.length-1,e.each(t,function(n,o){var a=n!=r?o+t[n+1].charAt(0).toUpperCase()+t[n+1].slice(1):t;if(e.isPlainObject(c[a])&&n!=r)c=c[a];else{if(c[a]!==i)return s=c[a],!1;if(!e.isPlainObject(c[o])||n==r)return c[o]!==i?(s=c[o],!1):(b.error(S.method,t),!1);c=c[o]}})),e.isFunction(s)?l=s.apply(o,n):s!==i&&(l=s),e.isArray(a)?a.push(l):a!==i?a=[a,l]:l!==i&&(a=l),s}},d?(D===i&&b.initialize(),b.invoke(u)):(D!==i&&D.invoke("destroy"),b.initialize())}),a!==i?a:this},e.tab=function(){e(t).tab.apply(this,arguments)},e.fn.tab.settings={name:"Tab",namespace:"tab",silent:!1,debug:!1,verbose:!1,performance:!0,auto:!1,history:!1,historyType:"hash",path:!1,context:!1,childrenOnly:!1,maxDepth:25,deactivate:"siblings",alwaysRefresh:!1,cache:!0,cacheType:"response",ignoreFirstLoad:!1,apiSettings:!1,evaluateScripts:"once",onFirstLoad:function(e,t,n){},onLoad:function(e,t,n){},onVisible:function(e,t,n){},onRequest:function(e,t,n){},templates:{determineTitle:function(e){}},error:{api:"You attempted to load content without API module",method:"The method you called is not defined",missingTab:"Activated tab cannot be found. Tabs are case-sensitive.",noContent:"The tab you specified is missing a content url.",path:"History enabled, but no path was specified",recursion:"Max recursive depth reached",legacyInit:"onTabInit has been renamed to onFirstLoad in 2.0, please adjust your code.",legacyLoad:"onTabLoad has been renamed to onLoad in 2.0. Please adjust your code",state:"History requires Asual's Address library <https://github.com/asual/jquery-address>"},metadata:{tab:"tab",loaded:"loaded",promise:"promise"},className:{loading:"loading",active:"active"},selector:{tabs:".ui.tab",ui:".ui"}}}(jQuery,window,document),function(e,t,n,i){"use strict";t="undefined"!=typeof t&&t.Math==Math?t:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")(),e.fn.transition=function(){var o,a=e(this),r=a.selector||"",s=(new Date).getTime(),l=[],c=arguments,u=c[0],d=[].slice.call(arguments,1),f="string"==typeof u;t.requestAnimationFrame||t.mozRequestAnimationFrame||t.webkitRequestAnimationFrame||t.msRequestAnimationFrame||function(e){setTimeout(e,0)};return a.each(function(t){var m,g,p,h,v,b,y,x,C,w=e(this),k=this;C={initialize:function(){m=C.get.settings.apply(k,c),h=m.className,p=m.error,v=m.metadata,x="."+m.namespace,
 y="module-"+m.namespace,g=w.data(y)||C,b=C.get.animationEndEvent(),f&&(f=C.invoke(u)),f===!1&&(C.verbose("Converted arguments into settings object",m),m.interval?C.delay(m.animate):C.animate(),C.instantiate())},instantiate:function(){C.verbose("Storing instance of module",C),g=C,w.data(y,g)},destroy:function(){C.verbose("Destroying previous module for",k),w.removeData(y)},refresh:function(){C.verbose("Refreshing display type on next animation"),delete C.displayType},forceRepaint:function(){C.verbose("Forcing element repaint");var e=w.parent(),t=w.next();0===t.length?w.detach().appendTo(e):w.detach().insertBefore(t)},repaint:function(){C.verbose("Repainting element");k.offsetWidth},delay:function(e){var n,o,r=C.get.animationDirection();r||(r=C.can.transition()?C.get.direction():"static"),e=e!==i?e:m.interval,n="auto"==m.reverse&&r==h.outward,o=n||1==m.reverse?(a.length-t)*m.interval:t*m.interval,C.debug("Delaying animation by",o),setTimeout(C.animate,o)},animate:function(e){if(m=e||m,!C.is.supported())return C.error(p.support),!1;if(C.debug("Preparing animation",m.animation),C.is.animating()){if(m.queue)return!m.allowRepeats&&C.has.direction()&&C.is.occurring()&&C.queuing!==!0?C.debug("Animation is currently occurring, preventing queueing same animation",m.animation):C.queue(m.animation),!1;if(!m.allowRepeats&&C.is.occurring())return C.debug("Animation is already occurring, will not execute repeated animation",m.animation),!1;C.debug("New animation started, completing previous early",m.animation),g.complete()}C.can.animate()?C.set.animating(m.animation):C.error(p.noAnimation,m.animation,k)},reset:function(){C.debug("Resetting animation to beginning conditions"),C.remove.animationCallbacks(),C.restore.conditions(),C.remove.animating()},queue:function(e){C.debug("Queueing animation of",e),C.queuing=!0,w.one(b+".queue"+x,function(){C.queuing=!1,C.repaint(),C.animate.apply(this,m)})},complete:function(e){C.debug("Animation complete",m.animation),C.remove.completeCallback(),C.remove.failSafe(),C.is.looping()||(C.is.outward()?(C.verbose("Animation is outward, hiding element"),C.restore.conditions(),C.hide()):C.is.inward()?(C.verbose("Animation is outward, showing element"),C.restore.conditions(),C.show()):(C.verbose("Static animation completed"),C.restore.conditions(),m.onComplete.call(k)))},force:{visible:function(){var e=w.attr("style"),t=C.get.userStyle(),n=C.get.displayType(),o=t+"display: "+n+" !important;",a=w.css("display"),r=e===i||""===e;a!==n?(C.verbose("Overriding default display to show element",n),w.attr("style",o)):r&&w.removeAttr("style")},hidden:function(){var e=w.attr("style"),t=w.css("display"),n=e===i||""===e;"none"===t||C.is.hidden()?n&&w.removeAttr("style"):(C.verbose("Overriding default display to hide element"),w.css("display","none"))}},has:{direction:function(t){var n=!1;return t=t||m.animation,"string"==typeof t&&(t=t.split(" "),e.each(t,function(e,t){t!==h.inward&&t!==h.outward||(n=!0)})),n},inlineDisplay:function(){var t=w.attr("style")||"";return e.isArray(t.match(/display.*?;/,""))}},set:{animating:function(e){var t;C.remove.completeCallback(),e=e||m.animation,t=C.get.animationClass(e),C.save.animation(t),C.force.visible(),C.remove.hidden(),C.remove.direction(),C.start.animation(t)},duration:function(e,t){t=t||m.duration,t="number"==typeof t?t+"ms":t,(t||0===t)&&(C.verbose("Setting animation duration",t),w.css({"animation-duration":t}))},direction:function(e){e=e||C.get.direction(),e==h.inward?C.set.inward():C.set.outward()},looping:function(){C.debug("Transition set to loop"),w.addClass(h.looping)},hidden:function(){w.addClass(h.transition).addClass(h.hidden)},inward:function(){C.debug("Setting direction to inward"),w.removeClass(h.outward).addClass(h.inward)},outward:function(){C.debug("Setting direction to outward"),w.removeClass(h.inward).addClass(h.outward)},visible:function(){w.addClass(h.transition).addClass(h.visible)}},start:{animation:function(e){e=e||C.get.animationClass(),C.debug("Starting tween",e),w.addClass(e).one(b+".complete"+x,C.complete),m.useFailSafe&&C.add.failSafe(),C.set.duration(m.duration),m.onStart.call(k)}},save:{animation:function(e){C.cache||(C.cache={}),C.cache.animation=e},displayType:function(e){"none"!==e&&w.data(v.displayType,e)},transitionExists:function(t,n){e.fn.transition.exists[t]=n,C.verbose("Saving existence of transition",t,n)}},restore:{conditions:function(){var e=C.get.currentAnimation();e&&(w.removeClass(e),C.verbose("Removing animation class",C.cache)),C.remove.duration()}},add:{failSafe:function(){var e=C.get.duration();C.timer=setTimeout(function(){w.triggerHandler(b)},e+m.failSafeDelay),C.verbose("Adding fail safe timer",C.timer)}},remove:{animating:function(){w.removeClass(h.animating)},animationCallbacks:function(){C.remove.queueCallback(),C.remove.completeCallback()},queueCallback:function(){w.off(".queue"+x)},completeCallback:function(){w.off(".complete"+x)},display:function(){w.css("display","")},direction:function(){w.removeClass(h.inward).removeClass(h.outward)},duration:function(){w.css("animation-duration","")},failSafe:function(){C.verbose("Removing fail safe timer",C.timer),C.timer&&clearTimeout(C.timer)},hidden:function(){w.removeClass(h.hidden)},visible:function(){w.removeClass(h.visible)},looping:function(){C.debug("Transitions are no longer looping"),C.is.looping()&&(C.reset(),w.removeClass(h.looping))},transition:function(){w.removeClass(h.visible).removeClass(h.hidden)}},get:{settings:function(t,n,i){return"object"==typeof t?e.extend(!0,{},e.fn.transition.settings,t):"function"==typeof i?e.extend({},e.fn.transition.settings,{animation:t,onComplete:i,duration:n}):"string"==typeof n||"number"==typeof n?e.extend({},e.fn.transition.settings,{animation:t,duration:n}):"object"==typeof n?e.extend({},e.fn.transition.settings,n,{animation:t}):"function"==typeof n?e.extend({},e.fn.transition.settings,{animation:t,onComplete:n}):e.extend({},e.fn.transition.settings,{animation:t})},animationClass:function(e){var t=e||m.animation,n=C.can.transition()&&!C.has.direction()?C.get.direction()+" ":"";return h.animating+" "+h.transition+" "+n+t},currentAnimation:function(){return!(!C.cache||C.cache.animation===i)&&C.cache.animation},currentDirection:function(){return C.is.inward()?h.inward:h.outward},direction:function(){return C.is.hidden()||!C.is.visible()?h.inward:h.outward},animationDirection:function(t){var n;return t=t||m.animation,"string"==typeof t&&(t=t.split(" "),e.each(t,function(e,t){t===h.inward?n=h.inward:t===h.outward&&(n=h.outward)})),!!n&&n},duration:function(e){return e=e||m.duration,e===!1&&(e=w.css("animation-duration")||0),"string"==typeof e?e.indexOf("ms")>-1?parseFloat(e):1e3*parseFloat(e):e},displayType:function(){return m.displayType?m.displayType:(w.data(v.displayType)===i&&C.can.transition(!0),w.data(v.displayType))},userStyle:function(e){return e=e||w.attr("style")||"",e.replace(/display.*?;/,"")},transitionExists:function(t){return e.fn.transition.exists[t]},animationStartEvent:function(){var e,t=n.createElement("div"),o={animation:"animationstart",OAnimation:"oAnimationStart",MozAnimation:"mozAnimationStart",WebkitAnimation:"webkitAnimationStart"};for(e in o)if(t.style[e]!==i)return o[e];return!1},animationEndEvent:function(){var e,t=n.createElement("div"),o={animation:"animationend",OAnimation:"oAnimationEnd",MozAnimation:"mozAnimationEnd",WebkitAnimation:"webkitAnimationEnd"};for(e in o)if(t.style[e]!==i)return o[e];return!1}},can:{transition:function(t){var n,o,a,r,s,l,c,u=m.animation,d=C.get.transitionExists(u);if(d===i||t){if(C.verbose("Determining whether animation exists"),n=w.attr("class"),o=w.prop("tagName"),a=e("<"+o+" />").addClass(n).insertAfter(w),r=a.addClass(u).removeClass(h.inward).removeClass(h.outward).addClass(h.animating).addClass(h.transition).css("animationName"),s=a.addClass(h.inward).css("animationName"),c=a.attr("class",n).removeAttr("style").removeClass(h.hidden).removeClass(h.visible).show().css("display"),C.verbose("Determining final display state",c),C.save.displayType(c),a.remove(),r!=s)C.debug("Direction exists for animation",u),l=!0;else{if("none"==r||!r)return void C.debug("No animation defined in css",u);C.debug("Static animation found",u,c),l=!1}C.save.transitionExists(u,l)}return d!==i?d:l},animate:function(){return C.can.transition()!==i}},is:{animating:function(){return w.hasClass(h.animating)},inward:function(){return w.hasClass(h.inward)},outward:function(){return w.hasClass(h.outward)},looping:function(){return w.hasClass(h.looping)},occurring:function(e){return e=e||m.animation,e="."+e.replace(" ","."),w.filter(e).length>0},visible:function(){return w.is(":visible")},hidden:function(){return"hidden"===w.css("visibility")},supported:function(){return b!==!1}},hide:function(){C.verbose("Hiding element"),C.is.animating()&&C.reset(),k.blur(),C.remove.display(),C.remove.visible(),C.set.hidden(),C.force.hidden(),m.onHide.call(k),m.onComplete.call(k)},show:function(e){C.verbose("Showing element",e),C.remove.hidden(),C.set.visible(),C.force.visible(),m.onShow.call(k),m.onComplete.call(k)},toggle:function(){C.is.visible()?C.hide():C.show()},stop:function(){C.debug("Stopping current animation"),w.triggerHandler(b)},stopAll:function(){C.debug("Stopping all animation"),C.remove.queueCallback(),w.triggerHandler(b)},clear:{queue:function(){C.debug("Clearing animation queue"),C.remove.queueCallback()}},enable:function(){C.verbose("Starting animation"),w.removeClass(h.disabled)},disable:function(){C.debug("Stopping animation"),w.addClass(h.disabled)},setting:function(t,n){if(C.debug("Changing setting",t,n),e.isPlainObject(t))e.extend(!0,m,t);else{if(n===i)return m[t];e.isPlainObject(m[t])?e.extend(!0,m[t],n):m[t]=n}},internal:function(t,n){if(e.isPlainObject(t))e.extend(!0,C,t);else{if(n===i)return C[t];C[t]=n}},debug:function(){!m.silent&&m.debug&&(m.performance?C.performance.log(arguments):(C.debug=Function.prototype.bind.call(console.info,console,m.name+":"),C.debug.apply(console,arguments)))},verbose:function(){!m.silent&&m.verbose&&m.debug&&(m.performance?C.performance.log(arguments):(C.verbose=Function.prototype.bind.call(console.info,console,m.name+":"),C.verbose.apply(console,arguments)))},error:function(){m.silent||(C.error=Function.prototype.bind.call(console.error,console,m.name+":"),C.error.apply(console,arguments))},performance:{log:function(e){var t,n,i;m.performance&&(t=(new Date).getTime(),i=s||t,n=t-i,s=t,l.push({Name:e[0],Arguments:[].slice.call(e,1)||"",Element:k,"Execution Time":n})),clearTimeout(C.performance.timer),C.performance.timer=setTimeout(C.performance.display,500)},display:function(){var t=m.name+":",n=0;s=!1,clearTimeout(C.performance.timer),e.each(l,function(e,t){n+=t["Execution Time"]}),t+=" "+n+"ms",r&&(t+=" '"+r+"'"),a.length>1&&(t+=" ("+a.length+")"),(console.group!==i||console.table!==i)&&l.length>0&&(console.groupCollapsed(t),console.table?console.table(l):e.each(l,function(e,t){console.log(t.Name+": "+t["Execution Time"]+"ms")}),console.groupEnd()),l=[]}},invoke:function(t,n,a){var r,s,l,c=g;return n=n||d,a=k||a,"string"==typeof t&&c!==i&&(t=t.split(/[\. ]/),r=t.length-1,e.each(t,function(n,o){var a=n!=r?o+t[n+1].charAt(0).toUpperCase()+t[n+1].slice(1):t;if(e.isPlainObject(c[a])&&n!=r)c=c[a];else{if(c[a]!==i)return s=c[a],!1;if(!e.isPlainObject(c[o])||n==r)return c[o]!==i&&(s=c[o],!1);c=c[o]}})),e.isFunction(s)?l=s.apply(a,n):s!==i&&(l=s),e.isArray(o)?o.push(l):o!==i?o=[o,l]:l!==i&&(o=l),s!==i&&s}},C.initialize()}),o!==i?o:this},e.fn.transition.exists={},e.fn.transition.settings={name:"Transition",silent:!1,debug:!1,verbose:!1,performance:!0,namespace:"transition",interval:0,reverse:"auto",onStart:function(){},onComplete:function(){},onShow:function(){},onHide:function(){},useFailSafe:!0,failSafeDelay:100,allowRepeats:!1,displayType:!1,animation:"fade",duration:!1,queue:!0,metadata:{displayType:"display"},className:{animating:"animating",disabled:"disabled",hidden:"hidden",inward:"in",loading:"loading",looping:"looping",outward:"out",transition:"transition",visible:"visible"},error:{noAnimation:"Element is no longer attached to DOM. Unable to animate.  Use silent setting to surpress this warning in production.",repeated:"That animation is already occurring, cancelling repeated animation",method:"The method you called is not defined",support:"This browser does not support CSS animations"}}}(jQuery,window,document),function(e,t,n,i){"use strict";var t="undefined"!=typeof t&&t.Math==Math?t:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();e.api=e.fn.api=function(n){var o,a=e(e.isFunction(this)?t:this),r=a.selector||"",s=(new Date).getTime(),l=[],c=arguments[0],u="string"==typeof c,d=[].slice.call(arguments,1);return a.each(function(){var a,f,m,g,p,h,v=e.isPlainObject(n)?e.extend(!0,{},e.fn.api.settings,n):e.extend({},e.fn.api.settings),b=v.namespace,y=v.metadata,x=v.selector,C=v.error,w=v.className,k="."+b,S="module-"+b,T=e(this),A=T.closest(x.form),R=v.stateContext?e(v.stateContext):T,P=this,E=R[0],F=T.data(S);h={initialize:function(){u||h.bind.events(),h.instantiate()},instantiate:function(){h.verbose("Storing instance of module",h),F=h,T.data(S,F)},destroy:function(){h.verbose("Destroying previous module for",P),T.removeData(S).off(k)},bind:{events:function(){var e=h.get.event();e?(h.verbose("Attaching API events to element",e),T.on(e+k,h.event.trigger)):"now"==v.on&&(h.debug("Querying API endpoint immediately"),h.query())}},decode:{json:function(e){if(e!==i&&"string"==typeof e)try{e=JSON.parse(e)}catch(t){}return e}},read:{cachedResponse:function(e){var n;return t.Storage===i?void h.error(C.noStorage):(n=sessionStorage.getItem(e),h.debug("Using cached response",e,n),n=h.decode.json(n))}},write:{cachedResponse:function(n,o){return o&&""===o?void h.debug("Response empty, not caching",o):t.Storage===i?void h.error(C.noStorage):(e.isPlainObject(o)&&(o=JSON.stringify(o)),sessionStorage.setItem(n,o),void h.verbose("Storing cached response for url",n,o))}},query:function(){if(h.is.disabled())return void h.debug("Element is disabled API request aborted");if(h.is.loading()){if(!v.interruptRequests)return void h.debug("Cancelling request, previous request is still pending");h.debug("Interrupting previous request"),h.abort()}return v.defaultData&&e.extend(!0,v.urlData,h.get.defaultData()),v.serializeForm&&(v.data=h.add.formData(v.data)),f=h.get.settings(),f===!1?(h.cancelled=!0,void h.error(C.beforeSend)):(h.cancelled=!1,m=h.get.templatedURL(),m||h.is.mocked()?(m=h.add.urlData(m),m||h.is.mocked()?(f.url=v.base+m,a=e.extend(!0,{},v,{type:v.method||v.type,data:g,url:v.base+m,beforeSend:v.beforeXHR,success:function(){},failure:function(){},complete:function(){}}),h.debug("Querying URL",a.url),h.verbose("Using AJAX settings",a),"local"===v.cache&&h.read.cachedResponse(m)?(h.debug("Response returned from local cache"),h.request=h.create.request(),void h.request.resolveWith(E,[h.read.cachedResponse(m)])):void(v.throttle?v.throttleFirstRequest||h.timer?(h.debug("Throttling request",v.throttle),clearTimeout(h.timer),h.timer=setTimeout(function(){h.timer&&delete h.timer,h.debug("Sending throttled request",g,a.method),h.send.request()},v.throttle)):(h.debug("Sending request",g,a.method),h.send.request(),h.timer=setTimeout(function(){},v.throttle)):(h.debug("Sending request",g,a.method),h.send.request()))):void 0):void h.error(C.missingURL))},should:{removeError:function(){return v.hideError===!0||"auto"===v.hideError&&!h.is.form()}},is:{disabled:function(){return T.filter(x.disabled).length>0},expectingJSON:function(){return"json"===v.dataType||"jsonp"===v.dataType},form:function(){return T.is("form")||R.is("form")},mocked:function(){return v.mockResponse||v.mockResponseAsync||v.response||v.responseAsync},input:function(){return T.is("input")},loading:function(){return!!h.request&&"pending"==h.request.state()},abortedRequest:function(e){return e&&e.readyState!==i&&0===e.readyState?(h.verbose("XHR request determined to be aborted"),!0):(h.verbose("XHR request was not aborted"),!1)},validResponse:function(t){return h.is.expectingJSON()&&e.isFunction(v.successTest)?(h.debug("Checking JSON returned success",v.successTest,t),v.successTest(t)?(h.debug("Response passed success test",t),!0):(h.debug("Response failed success test",t),!1)):(h.verbose("Response is not JSON, skipping validation",v.successTest,t),!0)}},was:{cancelled:function(){return h.cancelled||!1},succesful:function(){return h.request&&"resolved"==h.request.state()},failure:function(){return h.request&&"rejected"==h.request.state()},complete:function(){return h.request&&("resolved"==h.request.state()||"rejected"==h.request.state())}},add:{urlData:function(t,n){var o,a;return t&&(o=t.match(v.regExp.required),a=t.match(v.regExp.optional),n=n||v.urlData,o&&(h.debug("Looking for required URL variables",o),e.each(o,function(o,a){var r=a.indexOf("$")!==-1?a.substr(2,a.length-3):a.substr(1,a.length-2),s=e.isPlainObject(n)&&n[r]!==i?n[r]:T.data(r)!==i?T.data(r):R.data(r)!==i?R.data(r):n[r];return s===i?(h.error(C.requiredParameter,r,t),t=!1,!1):(h.verbose("Found required variable",r,s),s=v.encodeParameters?h.get.urlEncodedValue(s):s,t=t.replace(a,s),void 0)})),a&&(h.debug("Looking for optional URL variables",o),e.each(a,function(o,a){var r=a.indexOf("$")!==-1?a.substr(3,a.length-4):a.substr(2,a.length-3),s=e.isPlainObject(n)&&n[r]!==i?n[r]:T.data(r)!==i?T.data(r):R.data(r)!==i?R.data(r):n[r];s!==i?(h.verbose("Optional variable Found",r,s),t=t.replace(a,s)):(h.verbose("Optional variable not found",r),t=t.indexOf("/"+a)!==-1?t.replace("/"+a,""):t.replace(a,""))}))),t},formData:function(t){var n,o=e.fn.serializeObject!==i,a=o?A.serializeObject():A.serialize();return t=t||v.data,n=e.isPlainObject(t),n?o?(h.debug("Extending existing data with form data",t,a),t=e.extend(!0,{},t,a)):(h.error(C.missingSerialize),h.debug("Cant extend data. Replacing data with form data",t,a),t=a):(h.debug("Adding form data",a),t=a),t}},send:{request:function(){h.set.loading(),h.request=h.create.request(),h.is.mocked()?h.mockedXHR=h.create.mockedXHR():h.xhr=h.create.xhr(),v.onRequest.call(E,h.request,h.xhr)}},event:{trigger:function(e){h.query(),"submit"!=e.type&&"click"!=e.type||e.preventDefault()},xhr:{always:function(){},done:function(t,n,i){var o=this,a=(new Date).getTime()-p,r=v.loadingDuration-a,s=!!e.isFunction(v.onResponse)&&(h.is.expectingJSON()?v.onResponse.call(o,e.extend(!0,{},t)):v.onResponse.call(o,t));r=r>0?r:0,s&&(h.debug("Modified API response in onResponse callback",v.onResponse,s,t),t=s),r>0&&h.debug("Response completed early delaying state change by",r),setTimeout(function(){h.is.validResponse(t)?h.request.resolveWith(o,[t,i]):h.request.rejectWith(o,[i,"invalid"])},r)},fail:function(e,t,n){var i=this,o=(new Date).getTime()-p,a=v.loadingDuration-o;a=a>0?a:0,a>0&&h.debug("Response completed early delaying state change by",a),setTimeout(function(){h.is.abortedRequest(e)?h.request.rejectWith(i,[e,"aborted",n]):h.request.rejectWith(i,[e,"error",t,n])},a)}},request:{done:function(e,t){h.debug("Successful API Response",e),"local"===v.cache&&m&&(h.write.cachedResponse(m,e),h.debug("Saving server response locally",h.cache)),v.onSuccess.call(E,e,T,t)},complete:function(e,t){var n,i;h.was.succesful()?(i=e,n=t):(n=e,i=h.get.responseFromXHR(n)),h.remove.loading(),v.onComplete.call(E,i,T,n)},fail:function(e,t,n){var o=h.get.responseFromXHR(e),r=h.get.errorFromRequest(o,t,n);return"aborted"==t?(h.debug("XHR Aborted (Most likely caused by page navigation or CORS Policy)",t,n),v.onAbort.call(E,t,T,e),!0):("invalid"==t?h.debug("JSON did not pass success test. A server-side error has most likely occurred",o):"error"==t&&e!==i&&(h.debug("XHR produced a server error",t,n),200!=e.status&&n!==i&&""!==n&&h.error(C.statusMessage+n,a.url),v.onError.call(E,r,T,e)),v.errorDuration&&"aborted"!==t&&(h.debug("Adding error state"),h.set.error(),h.should.removeError()&&setTimeout(h.remove.error,v.errorDuration)),h.debug("API Request failed",r,e),void v.onFailure.call(E,o,T,e))}}},create:{request:function(){return e.Deferred().always(h.event.request.complete).done(h.event.request.done).fail(h.event.request.fail)},mockedXHR:function(){var t,n,i,o=!1,a=!1,r=!1,s=v.mockResponse||v.response,l=v.mockResponseAsync||v.responseAsync;return i=e.Deferred().always(h.event.xhr.complete).done(h.event.xhr.done).fail(h.event.xhr.fail),s?(e.isFunction(s)?(h.debug("Using specified synchronous callback",s),n=s.call(E,f)):(h.debug("Using settings specified response",s),n=s),i.resolveWith(E,[n,o,{responseText:n}])):e.isFunction(l)&&(t=function(e){h.debug("Async callback returned response",e),e?i.resolveWith(E,[e,o,{responseText:e}]):i.rejectWith(E,[{responseText:e},a,r])},h.debug("Using specified async response callback",l),l.call(E,f,t)),i},xhr:function(){var t;return t=e.ajax(a).always(h.event.xhr.always).done(h.event.xhr.done).fail(h.event.xhr.fail),h.verbose("Created server request",t,a),t}},set:{error:function(){h.verbose("Adding error state to element",R),R.addClass(w.error)},loading:function(){h.verbose("Adding loading state to element",R),R.addClass(w.loading),p=(new Date).getTime()}},remove:{error:function(){h.verbose("Removing error state from element",R),R.removeClass(w.error)},loading:function(){h.verbose("Removing loading state from element",R),R.removeClass(w.loading)}},get:{responseFromXHR:function(t){return!!e.isPlainObject(t)&&(h.is.expectingJSON()?h.decode.json(t.responseText):t.responseText)},errorFromRequest:function(t,n,o){return e.isPlainObject(t)&&t.error!==i?t.error:v.error[n]!==i?v.error[n]:o},request:function(){return h.request||!1},xhr:function(){return h.xhr||!1},settings:function(){var t;return t=v.beforeSend.call(E,v),t&&(t.success!==i&&(h.debug("Legacy success callback detected",t),h.error(C.legacyParameters,t.success),t.onSuccess=t.success),t.failure!==i&&(h.debug("Legacy failure callback detected",t),h.error(C.legacyParameters,t.failure),t.onFailure=t.failure),t.complete!==i&&(h.debug("Legacy complete callback detected",t),h.error(C.legacyParameters,t.complete),t.onComplete=t.complete)),t===i&&h.error(C.noReturnedValue),t===!1?t:t!==i?e.extend(!0,{},t):e.extend(!0,{},v)},urlEncodedValue:function(e){var n=t.decodeURIComponent(e),i=t.encodeURIComponent(e),o=n!==e;return o?(h.debug("URL value is already encoded, avoiding double encoding",e),e):(h.verbose("Encoding value using encodeURIComponent",e,i),i)},defaultData:function(){var t={};return e.isWindow(P)||(h.is.input()?t.value=T.val():h.is.form()||(t.text=T.text())),t},event:function(){return e.isWindow(P)||"now"==v.on?(h.debug("API called without element, no events attached"),!1):"auto"==v.on?T.is("input")?P.oninput!==i?"input":P.onpropertychange!==i?"propertychange":"keyup":T.is("form")?"submit":"click":v.on},templatedURL:function(e){if(e=e||T.data(y.action)||v.action||!1,m=T.data(y.url)||v.url||!1)return h.debug("Using specified url",m),m;if(e){if(h.debug("Looking up url for action",e,v.api),v.api[e]===i&&!h.is.mocked())return void h.error(C.missingAction,v.action,v.api);m=v.api[e]}else h.is.form()&&(m=T.attr("action")||R.attr("action")||!1,h.debug("No url or action specified, defaulting to form action",m));return m}},abort:function(){var e=h.get.xhr();e&&"resolved"!==e.state()&&(h.debug("Cancelling API request"),e.abort())},reset:function(){h.remove.error(),h.remove.loading()},setting:function(t,n){if(h.debug("Changing setting",t,n),e.isPlainObject(t))e.extend(!0,v,t);else{if(n===i)return v[t];e.isPlainObject(v[t])?e.extend(!0,v[t],n):v[t]=n}},internal:function(t,n){if(e.isPlainObject(t))e.extend(!0,h,t);else{if(n===i)return h[t];h[t]=n}},debug:function(){!v.silent&&v.debug&&(v.performance?h.performance.log(arguments):(h.debug=Function.prototype.bind.call(console.info,console,v.name+":"),h.debug.apply(console,arguments)))},verbose:function(){!v.silent&&v.verbose&&v.debug&&(v.performance?h.performance.log(arguments):(h.verbose=Function.prototype.bind.call(console.info,console,v.name+":"),h.verbose.apply(console,arguments)))},error:function(){v.silent||(h.error=Function.prototype.bind.call(console.error,console,v.name+":"),h.error.apply(console,arguments))},performance:{log:function(e){var t,n,i;v.performance&&(t=(new Date).getTime(),i=s||t,n=t-i,s=t,l.push({Name:e[0],Arguments:[].slice.call(e,1)||"","Execution Time":n})),clearTimeout(h.performance.timer),h.performance.timer=setTimeout(h.performance.display,500)},display:function(){var t=v.name+":",n=0;s=!1,clearTimeout(h.performance.timer),e.each(l,function(e,t){n+=t["Execution Time"]}),t+=" "+n+"ms",r&&(t+=" '"+r+"'"),(console.group!==i||console.table!==i)&&l.length>0&&(console.groupCollapsed(t),console.table?console.table(l):e.each(l,function(e,t){console.log(t.Name+": "+t["Execution Time"]+"ms")}),console.groupEnd()),l=[]}},invoke:function(t,n,a){var r,s,l,c=F;return n=n||d,a=P||a,"string"==typeof t&&c!==i&&(t=t.split(/[\. ]/),r=t.length-1,e.each(t,function(n,o){var a=n!=r?o+t[n+1].charAt(0).toUpperCase()+t[n+1].slice(1):t;if(e.isPlainObject(c[a])&&n!=r)c=c[a];else{if(c[a]!==i)return s=c[a],!1;if(!e.isPlainObject(c[o])||n==r)return c[o]!==i?(s=c[o],!1):(h.error(C.method,t),!1);c=c[o]}})),e.isFunction(s)?l=s.apply(a,n):s!==i&&(l=s),e.isArray(o)?o.push(l):o!==i?o=[o,l]:l!==i&&(o=l),s}},u?(F===i&&h.initialize(),h.invoke(c)):(F!==i&&F.invoke("destroy"),h.initialize())}),o!==i?o:this},e.api.settings={name:"API",namespace:"api",debug:!1,verbose:!1,performance:!0,api:{},cache:!0,interruptRequests:!0,on:"auto",stateContext:!1,loadingDuration:0,hideError:"auto",errorDuration:2e3,encodeParameters:!0,action:!1,url:!1,base:"",urlData:{},defaultData:!0,serializeForm:!1,throttle:0,throttleFirstRequest:!0,method:"get",data:{},dataType:"json",mockResponse:!1,mockResponseAsync:!1,response:!1,responseAsync:!1,beforeSend:function(e){return e},beforeXHR:function(e){},onRequest:function(e,t){},onResponse:!1,onSuccess:function(e,t){},onComplete:function(e,t){},onFailure:function(e,t){},onError:function(e,t){},onAbort:function(e,t){},successTest:!1,error:{beforeSend:"The before send function has aborted the request",error:"There was an error with your request",exitConditions:"API Request Aborted. Exit conditions met",JSONParse:"JSON could not be parsed during error handling",legacyParameters:"You are using legacy API success callback names",method:"The method you called is not defined",missingAction:"API action used but no url was defined",missingSerialize:"jquery-serialize-object is required to add form data to an existing data object",missingURL:"No URL specified for api event",noReturnedValue:"The beforeSend callback must return a settings object, beforeSend ignored.",noStorage:"Caching responses locally requires session storage",parseError:"There was an error parsing your request",requiredParameter:"Missing a required URL parameter: ",statusMessage:"Server gave an error: ",timeout:"Your request timed out"},regExp:{required:/\{\$*[A-z0-9]+\}/g,optional:/\{\/\$*[A-z0-9]+\}/g},className:{loading:"loading",error:"error"},selector:{disabled:".disabled",form:"form"},metadata:{action:"action",url:"url"}}}(jQuery,window,document),function(e,t,n,i){"use strict";t="undefined"!=typeof t&&t.Math==Math?t:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")(),e.fn.state=function(t){var o,a=e(this),r=a.selector||"",s=("ontouchstart"in n.documentElement,(new Date).getTime()),l=[],c=arguments[0],u="string"==typeof c,d=[].slice.call(arguments,1);return a.each(function(){var n,f=e.isPlainObject(t)?e.extend(!0,{},e.fn.state.settings,t):e.extend({},e.fn.state.settings),m=f.error,g=f.metadata,p=f.className,h=f.namespace,v=f.states,b=f.text,y="."+h,x=h+"-module",C=e(this),w=this,k=C.data(x);n={initialize:function(){n.verbose("Initializing module"),f.automatic&&n.add.defaults(),f.context&&""!==r?e(f.context).on(r,"mouseenter"+y,n.change.text).on(r,"mouseleave"+y,n.reset.text).on(r,"click"+y,n.toggle.state):C.on("mouseenter"+y,n.change.text).on("mouseleave"+y,n.reset.text).on("click"+y,n.toggle.state),n.instantiate()},instantiate:function(){n.verbose("Storing instance of module",n),k=n,C.data(x,n)},destroy:function(){n.verbose("Destroying previous module",k),C.off(y).removeData(x)},refresh:function(){n.verbose("Refreshing selector cache"),C=e(w)},add:{defaults:function(){var o=t&&e.isPlainObject(t.states)?t.states:{};e.each(f.defaults,function(t,a){n.is[t]!==i&&n.is[t]()&&(n.verbose("Adding default states",t,w),e.extend(f.states,a,o))})}},is:{active:function(){return C.hasClass(p.active)},loading:function(){return C.hasClass(p.loading)},inactive:function(){return!C.hasClass(p.active)},state:function(e){return p[e]!==i&&C.hasClass(p[e])},enabled:function(){return!C.is(f.filter.active)},disabled:function(){return C.is(f.filter.active)},textEnabled:function(){return!C.is(f.filter.text)},button:function(){return C.is(".button:not(a, .submit)")},input:function(){return C.is("input")},progress:function(){return C.is(".ui.progress")}},allow:function(e){n.debug("Now allowing state",e),v[e]=!0},disallow:function(e){n.debug("No longer allowing",e),v[e]=!1},allows:function(e){return v[e]||!1},enable:function(){C.removeClass(p.disabled)},disable:function(){C.addClass(p.disabled)},setState:function(e){n.allows(e)&&C.addClass(p[e])},removeState:function(e){n.allows(e)&&C.removeClass(p[e])},toggle:{state:function(){var t,o;if(n.allows("active")&&n.is.enabled()){if(n.refresh(),e.fn.api!==i)if(t=C.api("get request"),o=C.api("was cancelled"))n.debug("API Request cancelled by beforesend"),f.activateTest=function(){return!1},f.deactivateTest=function(){return!1};else if(t)return void n.listenTo(t);n.change.state()}}},listenTo:function(t){n.debug("API request detected, waiting for state signal",t),t&&(b.loading&&n.update.text(b.loading),e.when(t).then(function(){"resolved"==t.state()?(n.debug("API request succeeded"),f.activateTest=function(){return!0},f.deactivateTest=function(){return!0}):(n.debug("API request failed"),f.activateTest=function(){return!1},f.deactivateTest=function(){return!1}),n.change.state()}))},change:{state:function(){n.debug("Determining state change direction"),n.is.inactive()?n.activate():n.deactivate(),f.sync&&n.sync(),f.onChange.call(w)},text:function(){n.is.textEnabled()&&(n.is.disabled()?(n.verbose("Changing text to disabled text",b.hover),n.update.text(b.disabled)):n.is.active()?b.hover?(n.verbose("Changing text to hover text",b.hover),n.update.text(b.hover)):b.deactivate&&(n.verbose("Changing text to deactivating text",b.deactivate),n.update.text(b.deactivate)):b.hover?(n.verbose("Changing text to hover text",b.hover),n.update.text(b.hover)):b.activate&&(n.verbose("Changing text to activating text",b.activate),n.update.text(b.activate)))}},activate:function(){f.activateTest.call(w)&&(n.debug("Setting state to active"),C.addClass(p.active),n.update.text(b.active),f.onActivate.call(w))},deactivate:function(){f.deactivateTest.call(w)&&(n.debug("Setting state to inactive"),C.removeClass(p.active),n.update.text(b.inactive),f.onDeactivate.call(w))},sync:function(){n.verbose("Syncing other buttons to current state"),n.is.active()?a.not(C).state("activate"):a.not(C).state("deactivate")},get:{text:function(){return f.selector.text?C.find(f.selector.text).text():C.html()},textFor:function(e){return b[e]||!1}},flash:{text:function(e,t,i){var o=n.get.text();n.debug("Flashing text message",e,t),e=e||f.text.flash,t=t||f.flashDuration,i=i||function(){},n.update.text(e),setTimeout(function(){n.update.text(o),i.call(w)},t)}},reset:{text:function(){var e=b.active||C.data(g.storedText),t=b.inactive||C.data(g.storedText);n.is.textEnabled()&&(n.is.active()&&e?(n.verbose("Resetting active text",e),n.update.text(e)):t&&(n.verbose("Resetting inactive text",e),n.update.text(t)))}},update:{text:function(e){var t=n.get.text();e&&e!==t?(n.debug("Updating text",e),f.selector.text?C.data(g.storedText,e).find(f.selector.text).text(e):C.data(g.storedText,e).html(e)):n.debug("Text is already set, ignoring update",e)}},setting:function(t,o){
 if(n.debug("Changing setting",t,o),e.isPlainObject(t))e.extend(!0,f,t);else{if(o===i)return f[t];e.isPlainObject(f[t])?e.extend(!0,f[t],o):f[t]=o}},internal:function(t,o){if(e.isPlainObject(t))e.extend(!0,n,t);else{if(o===i)return n[t];n[t]=o}},debug:function(){!f.silent&&f.debug&&(f.performance?n.performance.log(arguments):(n.debug=Function.prototype.bind.call(console.info,console,f.name+":"),n.debug.apply(console,arguments)))},verbose:function(){!f.silent&&f.verbose&&f.debug&&(f.performance?n.performance.log(arguments):(n.verbose=Function.prototype.bind.call(console.info,console,f.name+":"),n.verbose.apply(console,arguments)))},error:function(){f.silent||(n.error=Function.prototype.bind.call(console.error,console,f.name+":"),n.error.apply(console,arguments))},performance:{log:function(e){var t,i,o;f.performance&&(t=(new Date).getTime(),o=s||t,i=t-o,s=t,l.push({Name:e[0],Arguments:[].slice.call(e,1)||"",Element:w,"Execution Time":i})),clearTimeout(n.performance.timer),n.performance.timer=setTimeout(n.performance.display,500)},display:function(){var t=f.name+":",o=0;s=!1,clearTimeout(n.performance.timer),e.each(l,function(e,t){o+=t["Execution Time"]}),t+=" "+o+"ms",r&&(t+=" '"+r+"'"),(console.group!==i||console.table!==i)&&l.length>0&&(console.groupCollapsed(t),console.table?console.table(l):e.each(l,function(e,t){console.log(t.Name+": "+t["Execution Time"]+"ms")}),console.groupEnd()),l=[]}},invoke:function(t,a,r){var s,l,c,u=k;return a=a||d,r=w||r,"string"==typeof t&&u!==i&&(t=t.split(/[\. ]/),s=t.length-1,e.each(t,function(o,a){var r=o!=s?a+t[o+1].charAt(0).toUpperCase()+t[o+1].slice(1):t;if(e.isPlainObject(u[r])&&o!=s)u=u[r];else{if(u[r]!==i)return l=u[r],!1;if(!e.isPlainObject(u[a])||o==s)return u[a]!==i?(l=u[a],!1):(n.error(m.method,t),!1);u=u[a]}})),e.isFunction(l)?c=l.apply(r,a):l!==i&&(c=l),e.isArray(o)?o.push(c):o!==i?o=[o,c]:c!==i&&(o=c),l}},u?(k===i&&n.initialize(),n.invoke(c)):(k!==i&&k.invoke("destroy"),n.initialize())}),o!==i?o:this},e.fn.state.settings={name:"State",debug:!1,verbose:!1,namespace:"state",performance:!0,onActivate:function(){},onDeactivate:function(){},onChange:function(){},activateTest:function(){return!0},deactivateTest:function(){return!0},automatic:!0,sync:!1,flashDuration:1e3,filter:{text:".loading, .disabled",active:".disabled"},context:!1,error:{beforeSend:"The before send function has cancelled state change",method:"The method you called is not defined."},metadata:{promise:"promise",storedText:"stored-text"},className:{active:"active",disabled:"disabled",error:"error",loading:"loading",success:"success",warning:"warning"},selector:{text:!1},defaults:{input:{disabled:!0,loading:!0,active:!0},button:{disabled:!0,loading:!0,active:!0},progress:{active:!0,success:!0,warning:!0,error:!0}},states:{active:!0,disabled:!0,error:!0,loading:!0,success:!0,warning:!0},text:{disabled:!1,flash:!1,hover:!1,active:!1,inactive:!1,activate:!1,deactivate:!1}}}(jQuery,window,document),function(e,t,n,i){"use strict";t="undefined"!=typeof t&&t.Math==Math?t:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")(),e.fn.visibility=function(o){var a,r=e(this),s=r.selector||"",l=(new Date).getTime(),c=[],u=arguments[0],d="string"==typeof u,f=[].slice.call(arguments,1),m=r.length,g=0;return r.each(function(){var r,p,h,v,b=e.isPlainObject(o)?e.extend(!0,{},e.fn.visibility.settings,o):e.extend({},e.fn.visibility.settings),y=b.className,x=b.namespace,C=b.error,w=b.metadata,k="."+x,S="module-"+x,T=e(t),A=e(this),R=e(b.context),P=(A.selector||"",A.data(S)),E=t.requestAnimationFrame||t.mozRequestAnimationFrame||t.webkitRequestAnimationFrame||t.msRequestAnimationFrame||function(e){setTimeout(e,0)},F=this,O=!1;v={initialize:function(){v.debug("Initializing",b),v.setup.cache(),v.should.trackChanges()&&("image"==b.type&&v.setup.image(),"fixed"==b.type&&v.setup.fixed(),b.observeChanges&&v.observeChanges(),v.bind.events()),v.save.position(),v.is.visible()||v.error(C.visible,A),b.initialCheck&&v.checkVisibility(),v.instantiate()},instantiate:function(){v.debug("Storing instance",v),A.data(S,v),P=v},destroy:function(){v.verbose("Destroying previous module"),h&&h.disconnect(),p&&p.disconnect(),T.off("load"+k,v.event.load).off("resize"+k,v.event.resize),R.off("scroll"+k,v.event.scroll).off("scrollchange"+k,v.event.scrollchange),"fixed"==b.type&&(v.resetFixed(),v.remove.placeholder()),A.off(k).removeData(S)},observeChanges:function(){"MutationObserver"in t&&(p=new MutationObserver(v.event.contextChanged),h=new MutationObserver(v.event.changed),p.observe(n,{childList:!0,subtree:!0}),h.observe(F,{childList:!0,subtree:!0}),v.debug("Setting up mutation observer",h))},bind:{events:function(){v.verbose("Binding visibility events to scroll and resize"),b.refreshOnLoad&&T.on("load"+k,v.event.load),T.on("resize"+k,v.event.resize),R.off("scroll"+k).on("scroll"+k,v.event.scroll).on("scrollchange"+k,v.event.scrollchange)}},event:{changed:function(e){v.verbose("DOM tree modified, updating visibility calculations"),v.timer=setTimeout(function(){v.verbose("DOM tree modified, updating sticky menu"),v.refresh()},100)},contextChanged:function(t){[].forEach.call(t,function(t){t.removedNodes&&[].forEach.call(t.removedNodes,function(t){(t==F||e(t).find(F).length>0)&&(v.debug("Element removed from DOM, tearing down events"),v.destroy())})})},resize:function(){v.debug("Window resized"),b.refreshOnResize&&E(v.refresh)},load:function(){v.debug("Page finished loading"),E(v.refresh)},scroll:function(){b.throttle?(clearTimeout(v.timer),v.timer=setTimeout(function(){R.triggerHandler("scrollchange"+k,[R.scrollTop()])},b.throttle)):E(function(){R.triggerHandler("scrollchange"+k,[R.scrollTop()])})},scrollchange:function(e,t){v.checkVisibility(t)}},precache:function(t,i){t instanceof Array||(t=[t]);for(var o=t.length,a=0,r=[],s=n.createElement("img"),l=function(){a++,a>=t.length&&e.isFunction(i)&&i()};o--;)s=n.createElement("img"),s.onload=l,s.onerror=l,s.src=t[o],r.push(s)},enableCallbacks:function(){v.debug("Allowing callbacks to occur"),O=!1},disableCallbacks:function(){v.debug("Disabling all callbacks temporarily"),O=!0},should:{trackChanges:function(){return d?(v.debug("One time query, no need to bind events"),!1):(v.debug("Callbacks being attached"),!0)}},setup:{cache:function(){v.cache={occurred:{},screen:{},element:{}}},image:function(){var e=A.data(w.src);e&&(v.verbose("Lazy loading image",e),b.once=!0,b.observeChanges=!1,b.onOnScreen=function(){v.debug("Image on screen",F),v.precache(e,function(){v.set.image(e,function(){g++,g==m&&b.onAllLoaded.call(this),b.onLoad.call(this)})})})},fixed:function(){v.debug("Setting up fixed"),b.once=!1,b.observeChanges=!1,b.initialCheck=!0,b.refreshOnLoad=!0,o.transition||(b.transition=!1),v.create.placeholder(),v.debug("Added placeholder",r),b.onTopPassed=function(){v.debug("Element passed, adding fixed position",A),v.show.placeholder(),v.set.fixed(),b.transition&&e.fn.transition!==i&&A.transition(b.transition,b.duration)},b.onTopPassedReverse=function(){v.debug("Element returned to position, removing fixed",A),v.hide.placeholder(),v.remove.fixed()}}},create:{placeholder:function(){v.verbose("Creating fixed position placeholder"),r=A.clone(!1).css("display","none").addClass(y.placeholder).insertAfter(A)}},show:{placeholder:function(){v.verbose("Showing placeholder"),r.css("display","block").css("visibility","hidden")}},hide:{placeholder:function(){v.verbose("Hiding placeholder"),r.css("display","none").css("visibility","")}},set:{fixed:function(){v.verbose("Setting element to fixed position"),A.addClass(y.fixed).css({position:"fixed",top:b.offset+"px",left:"auto",zIndex:b.zIndex}),b.onFixed.call(F)},image:function(t,n){A.attr("src",t),b.transition?e.fn.transition!==i?A.transition(b.transition,b.duration,n):A.fadeIn(b.duration,n):A.show()}},is:{onScreen:function(){var e=v.get.elementCalculations();return e.onScreen},offScreen:function(){var e=v.get.elementCalculations();return e.offScreen},visible:function(){return!(!v.cache||!v.cache.element)&&!(0===v.cache.element.width&&0===v.cache.element.offset.top)}},refresh:function(){v.debug("Refreshing constants (width/height)"),"fixed"==b.type&&v.resetFixed(),v.reset(),v.save.position(),b.checkOnRefresh&&v.checkVisibility(),b.onRefresh.call(F)},resetFixed:function(){v.remove.fixed(),v.remove.occurred()},reset:function(){v.verbose("Resetting all cached values"),e.isPlainObject(v.cache)&&(v.cache.screen={},v.cache.element={})},checkVisibility:function(e){v.verbose("Checking visibility of element",v.cache.element),!O&&v.is.visible()&&(v.save.scroll(e),v.save.calculations(),v.passed(),v.passingReverse(),v.topVisibleReverse(),v.bottomVisibleReverse(),v.topPassedReverse(),v.bottomPassedReverse(),v.onScreen(),v.offScreen(),v.passing(),v.topVisible(),v.bottomVisible(),v.topPassed(),v.bottomPassed(),b.onUpdate&&b.onUpdate.call(F,v.get.elementCalculations()))},passed:function(t,n){var o=v.get.elementCalculations();if(t&&n)b.onPassed[t]=n;else{if(t!==i)return v.get.pixelsPassed(t)>o.pixelsPassed;o.passing&&e.each(b.onPassed,function(e,t){o.bottomVisible||o.pixelsPassed>v.get.pixelsPassed(e)?v.execute(t,e):b.once||v.remove.occurred(t)})}},onScreen:function(e){var t=v.get.elementCalculations(),n=e||b.onOnScreen,o="onScreen";if(e&&(v.debug("Adding callback for onScreen",e),b.onOnScreen=e),t.onScreen?v.execute(n,o):b.once||v.remove.occurred(o),e!==i)return t.onOnScreen},offScreen:function(e){var t=v.get.elementCalculations(),n=e||b.onOffScreen,o="offScreen";if(e&&(v.debug("Adding callback for offScreen",e),b.onOffScreen=e),t.offScreen?v.execute(n,o):b.once||v.remove.occurred(o),e!==i)return t.onOffScreen},passing:function(e){var t=v.get.elementCalculations(),n=e||b.onPassing,o="passing";if(e&&(v.debug("Adding callback for passing",e),b.onPassing=e),t.passing?v.execute(n,o):b.once||v.remove.occurred(o),e!==i)return t.passing},topVisible:function(e){var t=v.get.elementCalculations(),n=e||b.onTopVisible,o="topVisible";if(e&&(v.debug("Adding callback for top visible",e),b.onTopVisible=e),t.topVisible?v.execute(n,o):b.once||v.remove.occurred(o),e===i)return t.topVisible},bottomVisible:function(e){var t=v.get.elementCalculations(),n=e||b.onBottomVisible,o="bottomVisible";if(e&&(v.debug("Adding callback for bottom visible",e),b.onBottomVisible=e),t.bottomVisible?v.execute(n,o):b.once||v.remove.occurred(o),e===i)return t.bottomVisible},topPassed:function(e){var t=v.get.elementCalculations(),n=e||b.onTopPassed,o="topPassed";if(e&&(v.debug("Adding callback for top passed",e),b.onTopPassed=e),t.topPassed?v.execute(n,o):b.once||v.remove.occurred(o),e===i)return t.topPassed},bottomPassed:function(e){var t=v.get.elementCalculations(),n=e||b.onBottomPassed,o="bottomPassed";if(e&&(v.debug("Adding callback for bottom passed",e),b.onBottomPassed=e),t.bottomPassed?v.execute(n,o):b.once||v.remove.occurred(o),e===i)return t.bottomPassed},passingReverse:function(e){var t=v.get.elementCalculations(),n=e||b.onPassingReverse,o="passingReverse";if(e&&(v.debug("Adding callback for passing reverse",e),b.onPassingReverse=e),t.passing?b.once||v.remove.occurred(o):v.get.occurred("passing")&&v.execute(n,o),e!==i)return!t.passing},topVisibleReverse:function(e){var t=v.get.elementCalculations(),n=e||b.onTopVisibleReverse,o="topVisibleReverse";if(e&&(v.debug("Adding callback for top visible reverse",e),b.onTopVisibleReverse=e),t.topVisible?b.once||v.remove.occurred(o):v.get.occurred("topVisible")&&v.execute(n,o),e===i)return!t.topVisible},bottomVisibleReverse:function(e){var t=v.get.elementCalculations(),n=e||b.onBottomVisibleReverse,o="bottomVisibleReverse";if(e&&(v.debug("Adding callback for bottom visible reverse",e),b.onBottomVisibleReverse=e),t.bottomVisible?b.once||v.remove.occurred(o):v.get.occurred("bottomVisible")&&v.execute(n,o),e===i)return!t.bottomVisible},topPassedReverse:function(e){var t=v.get.elementCalculations(),n=e||b.onTopPassedReverse,o="topPassedReverse";if(e&&(v.debug("Adding callback for top passed reverse",e),b.onTopPassedReverse=e),t.topPassed?b.once||v.remove.occurred(o):v.get.occurred("topPassed")&&v.execute(n,o),e===i)return!t.onTopPassed},bottomPassedReverse:function(e){var t=v.get.elementCalculations(),n=e||b.onBottomPassedReverse,o="bottomPassedReverse";if(e&&(v.debug("Adding callback for bottom passed reverse",e),b.onBottomPassedReverse=e),t.bottomPassed?b.once||v.remove.occurred(o):v.get.occurred("bottomPassed")&&v.execute(n,o),e===i)return!t.bottomPassed},execute:function(e,t){var n=v.get.elementCalculations(),i=v.get.screenCalculations();e=e||!1,e&&(b.continuous?(v.debug("Callback being called continuously",t,n),e.call(F,n,i)):v.get.occurred(t)||(v.debug("Conditions met",t,n),e.call(F,n,i))),v.save.occurred(t)},remove:{fixed:function(){v.debug("Removing fixed position"),A.removeClass(y.fixed).css({position:"",top:"",left:"",zIndex:""}),b.onUnfixed.call(F)},placeholder:function(){v.debug("Removing placeholder content"),r&&r.remove()},occurred:function(e){if(e){var t=v.cache.occurred;t[e]!==i&&t[e]===!0&&(v.debug("Callback can now be called again",e),v.cache.occurred[e]=!1)}else v.cache.occurred={}}},save:{calculations:function(){v.verbose("Saving all calculations necessary to determine positioning"),v.save.direction(),v.save.screenCalculations(),v.save.elementCalculations()},occurred:function(e){e&&(v.cache.occurred[e]!==i&&v.cache.occurred[e]===!0||(v.verbose("Saving callback occurred",e),v.cache.occurred[e]=!0))},scroll:function(e){e=e+b.offset||R.scrollTop()+b.offset,v.cache.scroll=e},direction:function(){var e,t=v.get.scroll(),n=v.get.lastScroll();return e=t>n&&n?"down":t<n&&n?"up":"static",v.cache.direction=e,v.cache.direction},elementPosition:function(){var e=v.cache.element,t=v.get.screenSize();return v.verbose("Saving element position"),e.fits=e.height<t.height,e.offset=A.offset(),e.width=A.outerWidth(),e.height=A.outerHeight(),v.cache.element=e,e},elementCalculations:function(){var e=v.get.screenCalculations(),t=v.get.elementPosition();return b.includeMargin?(t.margin={},t.margin.top=parseInt(A.css("margin-top"),10),t.margin.bottom=parseInt(A.css("margin-bottom"),10),t.top=t.offset.top-t.margin.top,t.bottom=t.offset.top+t.height+t.margin.bottom):(t.top=t.offset.top,t.bottom=t.offset.top+t.height),t.topVisible=e.bottom>=t.top,t.topPassed=e.top>=t.top,t.bottomVisible=e.bottom>=t.bottom,t.bottomPassed=e.top>=t.bottom,t.pixelsPassed=0,t.percentagePassed=0,t.onScreen=t.topVisible&&!t.bottomPassed,t.passing=t.topPassed&&!t.bottomPassed,t.offScreen=!t.onScreen,t.passing&&(t.pixelsPassed=e.top-t.top,t.percentagePassed=(e.top-t.top)/t.height),v.cache.element=t,v.verbose("Updated element calculations",t),t},screenCalculations:function(){var e=v.get.scroll();return v.save.direction(),v.cache.screen.top=e,v.cache.screen.bottom=e+v.cache.screen.height,v.cache.screen},screenSize:function(){v.verbose("Saving window position"),v.cache.screen={height:R.height()}},position:function(){v.save.screenSize(),v.save.elementPosition()}},get:{pixelsPassed:function(e){var t=v.get.elementCalculations();return e.search("%")>-1?t.height*(parseInt(e,10)/100):parseInt(e,10)},occurred:function(e){return v.cache.occurred!==i&&(v.cache.occurred[e]||!1)},direction:function(){return v.cache.direction===i&&v.save.direction(),v.cache.direction},elementPosition:function(){return v.cache.element===i&&v.save.elementPosition(),v.cache.element},elementCalculations:function(){return v.cache.element===i&&v.save.elementCalculations(),v.cache.element},screenCalculations:function(){return v.cache.screen===i&&v.save.screenCalculations(),v.cache.screen},screenSize:function(){return v.cache.screen===i&&v.save.screenSize(),v.cache.screen},scroll:function(){return v.cache.scroll===i&&v.save.scroll(),v.cache.scroll},lastScroll:function(){return v.cache.screen===i?(v.debug("First scroll event, no last scroll could be found"),!1):v.cache.screen.top}},setting:function(t,n){if(e.isPlainObject(t))e.extend(!0,b,t);else{if(n===i)return b[t];b[t]=n}},internal:function(t,n){if(e.isPlainObject(t))e.extend(!0,v,t);else{if(n===i)return v[t];v[t]=n}},debug:function(){!b.silent&&b.debug&&(b.performance?v.performance.log(arguments):(v.debug=Function.prototype.bind.call(console.info,console,b.name+":"),v.debug.apply(console,arguments)))},verbose:function(){!b.silent&&b.verbose&&b.debug&&(b.performance?v.performance.log(arguments):(v.verbose=Function.prototype.bind.call(console.info,console,b.name+":"),v.verbose.apply(console,arguments)))},error:function(){b.silent||(v.error=Function.prototype.bind.call(console.error,console,b.name+":"),v.error.apply(console,arguments))},performance:{log:function(e){var t,n,i;b.performance&&(t=(new Date).getTime(),i=l||t,n=t-i,l=t,c.push({Name:e[0],Arguments:[].slice.call(e,1)||"",Element:F,"Execution Time":n})),clearTimeout(v.performance.timer),v.performance.timer=setTimeout(v.performance.display,500)},display:function(){var t=b.name+":",n=0;l=!1,clearTimeout(v.performance.timer),e.each(c,function(e,t){n+=t["Execution Time"]}),t+=" "+n+"ms",s&&(t+=" '"+s+"'"),(console.group!==i||console.table!==i)&&c.length>0&&(console.groupCollapsed(t),console.table?console.table(c):e.each(c,function(e,t){console.log(t.Name+": "+t["Execution Time"]+"ms")}),console.groupEnd()),c=[]}},invoke:function(t,n,o){var r,s,l,c=P;return n=n||f,o=F||o,"string"==typeof t&&c!==i&&(t=t.split(/[\. ]/),r=t.length-1,e.each(t,function(n,o){var a=n!=r?o+t[n+1].charAt(0).toUpperCase()+t[n+1].slice(1):t;if(e.isPlainObject(c[a])&&n!=r)c=c[a];else{if(c[a]!==i)return s=c[a],!1;if(!e.isPlainObject(c[o])||n==r)return c[o]!==i?(s=c[o],!1):(v.error(C.method,t),!1);c=c[o]}})),e.isFunction(s)?l=s.apply(o,n):s!==i&&(l=s),e.isArray(a)?a.push(l):a!==i?a=[a,l]:l!==i&&(a=l),s}},d?(P===i&&v.initialize(),P.save.scroll(),P.save.calculations(),v.invoke(u)):(P!==i&&P.invoke("destroy"),v.initialize())}),a!==i?a:this},e.fn.visibility.settings={name:"Visibility",namespace:"visibility",debug:!1,verbose:!1,performance:!0,observeChanges:!0,initialCheck:!0,refreshOnLoad:!0,refreshOnResize:!0,checkOnRefresh:!0,once:!0,continuous:!1,offset:0,includeMargin:!1,context:t,throttle:!1,type:!1,zIndex:"10",transition:"fade in",duration:1e3,onPassed:{},onOnScreen:!1,onOffScreen:!1,onPassing:!1,onTopVisible:!1,onBottomVisible:!1,onTopPassed:!1,onBottomPassed:!1,onPassingReverse:!1,onTopVisibleReverse:!1,onBottomVisibleReverse:!1,onTopPassedReverse:!1,onBottomPassedReverse:!1,onLoad:function(){},onAllLoaded:function(){},onFixed:function(){},onUnfixed:function(){},onUpdate:!1,onRefresh:function(){},metadata:{src:"src"},className:{fixed:"fixed",placeholder:"placeholder"},error:{method:"The method you called is not defined.",visible:"Element is hidden, you must call refresh after element becomes visible"}}}(jQuery,window,document);
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+(function ( $ ) {
+    $.fn.extend({
+        apiLogin: function (apiSettings) {
+            var element = $(this);
+            var apiSettings = apiSettings;
+            var passwordField = element.find('input[type=\'password\']');
+            var emailField = element.find('input[type=\'email\']');
+            var signInButton = element.find('.button');
+            var validationField = element.find('.red.label');
+            validationField.hide();
+
+            signInButton.api({
+                action: apiSettings.action,
+                method: apiSettings.method,
+                dataType: apiSettings.dataType || 'json',
+                throttle: apiSettings.throttle || 0,
+                debug: apiSettings.debug || false,
+
+                beforeSend: function (settings) {
+                    settings.data = {
+                        _username: emailField.val(),
+                        _password: passwordField.val()
+                    };
+
+                    return settings;
+                },
+
+                successTest: function (response) {
+                    return response.success;
+                },
+
+                onSuccess: function (response) {
+                    element.remove();
+                    location.reload();
+                },
+
+                onFailure: function (response) {
+                    validationField.show();
+                    validationField.html(response.message);
+                }
+            });
+
+        }
+    });
+})( jQuery );
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+(function ( $ ) {
+    $.fn.extend({
+        apiToggle: function (apiSettings, toggleableElement, isHidden) {
+            var element = $(this);
+            var apiSettings = apiSettings;
+            var toggleableElement = toggleableElement;
+            var isHidden = isHidden || true;
+
+            if (isHidden) {
+                toggleableElement.hide();
+            }
+
+            element.api({
+                action: apiSettings.action,
+                method: apiSettings.method,
+                dataType: apiSettings.dataType || 'json',
+                throttle: apiSettings.throttle || 0,
+                debug: apiSettings.debug || false,
+
+                beforeSend: apiSettings.beforeSend,
+                successTest: apiSettings.successTest,
+
+                onSuccess: function (response) {
+                    toggleableElement.show();
+                },
+
+                onFailure: function (response) {
+                    toggleableElement.hide();
+                }
+            });
+
+        }
+    });
+})( jQuery );
+
+(function($) {
+  $.fn.extend({
+    toggleElement: function() {
+      return this.each(function() {
+        $(this).on('change', function(event) {
+          event.preventDefault();
+
+          var toggleElement = $(this);
+          var targetElement = $('#' + toggleElement.data('toggles'));
+
+          if (toggleElement.is(':checked')) {
+            targetElement.show();
+          } else {
+            targetElement.hide();
+          }
+        });
+
+        return $(this).trigger('change');
+      });
+    }
+  });
+
+  $.fn.extend({
+    requireConfirmation: function() {
+      return this.each(function() {
+        return $(this).on('click', function(event) {
+          event.preventDefault();
+
+          var actionButton = $(this);
+
+          if (actionButton.is('a')) {
+            $('#confirmation-button').attr('href', actionButton.attr('href'));
+          }
+          if (actionButton.is('button')) {
+            $('#confirmation-button').on('click', function(event) {
+              event.preventDefault();
+
+              return actionButton.closest('form').submit();
+            });
+          }
+
+          return $('#confirmation-modal').modal('show');
+        });
+      });
+    }
+  });
+
+  $(document).ready(function() {
+    $('#sidebar')
+        .first()
+        .sidebar('attach events', '#sidebar-toggle', 'show')
+    ;
+
+    $('.ui.checkbox').checkbox();
+    $('.ui.accordion').accordion();
+    $('.ui.menu .dropdown').dropdown({action: 'hide'});
+    $('.ui.inline.dropdown').dropdown();
+    $('.link.ui.dropdown').dropdown({action: 'hide'});
+    $('.button.ui.dropdown').dropdown({action: 'hide'});
+    $('.ui.fluid.search.selection.ui.dropdown').dropdown();
+    $('.menu .item').tab();
+    $('.card .image').dimmer({on: 'hover'});
+    $('.ui.rating').rating('disable');
+    $('.cart.button')
+        .popup({
+            popup: $('.cart.popup'),
+            on: 'click',
+        })
+    ;
+
+    $('form.loadable button').on('click', function() {
+      return $(this).closest('form').addClass('loading');
+    });
+    $('.loadable.button').on('click', function() {
+      return $(this).addClass('loading');
+    });
+    $('.message .close').on('click', function() {
+      return $(this).closest('.message').transition('fade');
+    });
+
+    $('[data-requires-confirmation]').requireConfirmation();
+    $('[data-toggles]').toggleElement();
+
+    $('.special.cards .image').dimmer({
+      on: 'hover'
+    });
+
+    var email = $('#sylius_checkout_address_customer_email');
+    email.apiToggle({
+      action: 'user check',
+      dataType: 'json',
+      method: 'GET',
+      throttle: 1500,
+
+      beforeSend: function (settings) {
+        settings.data = {
+          email: email.val()
+        };
+
+        return settings;
+      },
+
+      successTest: function (response) {
+        return email.val() === response.username;
+      }
+    }, $('#sylius-api-login-form'));
+
+    $('#sylius-api-login').apiLogin({
+      action: 'login check',
+      method: 'POST',
+      throttle: 500
+    });
+  });
+})(jQuery);
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+/**
+ * @author Arnaud Langlade <arn0d.dev@gmail.com>
+ */
+!function($){
+
+    "use strict";
+
+    /**
+     * Collection Form plugin
+     *
+     * @param element
+     * @constructor
+     */
+    var CollectionForm = function (element) {
+        this.$element = $(element);
+        this.$list = this.$element.find('[data-form-collection="list"]:first');
+        this.count = this.$list.children().length;
+        this.lastChoice = null;
+
+        this.$element.on(
+            'click',
+            '[data-form-collection="add"]:first',
+            $.proxy(this.addItem, this)
+        );
+
+        this.$element.on(
+            'click',
+            '[data-form-collection="delete"]',
+            $.proxy(this.deleteItem, this)
+        );
+
+        this.$element.on(
+            'change',
+            '[data-form-collection="update"]',
+            $.proxy(this.updateItem, this)
+        );
+
+        $(document).on(
+            'change',
+            '[data-form-prototype="update"]',
+            $.proxy(this.updatePrototype, this)
+        );
+    }
+    CollectionForm.prototype = {
+        constructor : CollectionForm,
+
+        /**
+         * Add a item to the collection.
+         * @param event
+         */
+        addItem: function (event) {
+            event.preventDefault();
+
+            var prototype = this.$element.data('prototype');
+
+            prototype = prototype.replace(
+                /__name__/g,
+                this.count
+            );
+
+            this.$list.append(prototype);
+            this.count = this.count + 1;
+
+            $(document).trigger('collection-form-add', [this.$list.children().last()]);
+        },
+
+        /**
+         * Update item from the collection
+         */
+        updateItem: function (event) {
+            event.preventDefault();
+            var $element = $(event.currentTarget),
+                url = $element.data('form-url'),
+                value = $element.val(),
+                $container = $element.closest('[data-form-collection="item"]'),
+                index = $container.data('form-collection-index'),
+                position = $container.data('form-collection-index');
+            if (url) {
+                $container.load(url, {'id' : value, 'position' : position});
+            } else {
+                var prototype = this.$element.find('[data-form-prototype="'+ value +'"]').val();
+
+                prototype = prototype.replace(
+                    /__name__/g,
+                    index
+                );
+
+                $container.replaceWith(prototype);
+            }
+            $(document).trigger('collection-form-update', [$(event.currentTarget)]);
+        },
+
+        /**
+         * Delete item from the collection
+         * @param event
+         */
+        deleteItem: function (event) {
+            event.preventDefault();
+
+            $(event.currentTarget)
+                .closest('[data-form-collection="item"]')
+                .remove();
+
+            $(document).trigger('collection-form-delete', [$(event.currentTarget)]);
+        },
+
+        /**
+         * Update the prototype
+         * @param event
+         */
+        updatePrototype: function (event) {
+            var $target = $(event.currentTarget);
+            var prototypeName = $target.val();
+
+            if (undefined !== $target.data('form-prototype-prefix')) {
+                prototypeName = $target.data('form-prototype-prefix') + prototypeName;
+            }
+
+            if (null !== this.lastChoice && this.lastChoice !== prototypeName) {
+                this.$list.html('');
+            }
+
+            this.lastChoice = prototypeName;
+
+            this.$element.data(
+                'prototype',
+                this.$element.find('[data-form-prototype="'+ prototypeName +'"]').val()
+            );
+        }
+    };
+
+    /*
+     * Plugin definition
+     */
+
+    $.fn.CollectionForm = function (option) {
+        return this.each(function () {
+            var $this = $(this);
+            var data = $this.data('collectionForm');
+            var options = typeof option == 'object' && option;
+
+            if (!data) {
+                $this.data(
+                    'collectionForm',
+                    (data = new CollectionForm(this, options))
+                )
+            }
+        })
+    };
+
+    $.fn.CollectionForm.Constructor = CollectionForm;
+
+    /*
+     * Apply to standard CollectionForm elements
+     */
+
+    $(document).on('collection-form-add', function(e, addedElement) {
+        $(addedElement).find('[data-form-type="collection"]').CollectionForm();
+        $(document).trigger('dom-node-inserted', [$(addedElement)]);
+    });
+
+    $(document).ready(function () {
+        $('[data-form-type="collection"]').CollectionForm();
+    });
+}(jQuery);
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+(function ( $ ) {
+    'use strict';
+
+    $(document).ready(function() {
+        $('.ui.fluid.search.selection.dropdown').dropdown({
+            delay: {
+                search: 250,
+            },
+            apiSettings: {
+                action: 'get taxons',
+                dataType: 'JSON',
+                cache: false,
+                data: { 
+                    criteria: { name: { type: 'contains', value: '' } }
+                },
+                beforeSend: function(settings) {
+                    settings.data.criteria.name.value = settings.urlData.query;
+                    return settings;
+                },
+                onResponse: function (response) {
+                    var myResults = [];
+                    $.each(response._embedded.items, function (index, item) {
+                        myResults.push({
+                            name: item.name,
+                            value: item.id
+                        });
+                    });
+                    return {
+                        success: true,
+                        results: myResults
+                    };
+                }
+            }
+        })
+    })
+})( jQuery );
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+(function ($) {
+    'use strict';
+
+    $('table thead th.sortable').on('click', function () {
+        window.location = $(this).find('a').attr('href');
+    })
+}) (jQuery);
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+(function ($) {
+    'use strict';
+
+    function addAttributesNumber(number) {
+        var currentIndex = parseInt(getNextIndex());
+        $('#attributesContainer').attr('data-count', currentIndex+number);
+    }
+
+    function getNextIndex() {
+        return $('#attributesContainer').attr('data-count');
+    }
+
+    function controlAttributesList() {
+        $('#attributesContainer .attribute').each(function() {
+            var value = $(this).attr('data-id');
+            $('[name="sylius_product_attribute_choice"]').dropdown('set selected', value);
+        });
+    }
+
+    function modifyAttributesListOnSelectorElementDelete(removedValue) {
+        $('#attributesContainer > .attribute[data-id="'+removedValue+'"]').remove();
+    }
+
+    function modifySelectorOnAttributesListElementDelete() {
+        $('.attribute button').off('click').on('click', function() {
+            var attributeId = $(this).parents('.attribute').attr('data-id');
+
+            $('div#attributeChoice > .ui.dropdown.search').dropdown('remove selected', attributeId);
+            $(this).parent().remove();
+        });
+    }
+
+    function modifyAttributeForms(data) {
+        $.each($(data).find('input,select,textarea'), function() {
+            if ($(this).attr('data-name') != null) {
+                $(this).attr('name', $(this).attr('data-name'));
+            }
+        });
+
+        return data;
+    }
+
+    function setAttributeChoiceListener() {
+        $('#attributeChoice button').on('click', function(event) {
+            var $attributesContainer = $('#attributesContainer');
+            event.preventDefault();
+
+            var data = '';
+            $(this).parent().find('select').val().forEach(function(item) {
+                data += 'sylius_product_attribute_choice[]=' + item + "&";
+            });
+            data += "count=" + getNextIndex();
+
+            $.ajax({
+                type: 'GET',
+                url: $(this).parent().attr('data-action'),
+                data: data,
+                dataType: 'html'
+            }).done(function(data) {
+                var finalData = modifyAttributeForms($(data));
+                $attributesContainer.append(finalData);
+
+                $('[name="sylius_product_attribute_choice"]').val('')
+
+                addAttributesNumber($.grep($(finalData), function (a) { return $(a).hasClass('attribute'); }).length);
+                modifySelectorOnAttributesListElementDelete();
+
+                $('form').removeClass('loading');
+            });
+        });
+    }
+
+    $(document).ready(function() {
+        setAttributeChoiceListener();
+        controlAttributesList();
+
+        $('div#attributeChoice > .ui.dropdown.search').dropdown({
+            onRemove: function(removedValue, removedText, $removedChoice) {
+                modifyAttributesListOnSelectorElementDelete(removedValue);
+            }
+        });
+
+        modifySelectorOnAttributesListElementDelete();
+    });
+})( jQuery );
+
+$(function () {
+  'use strict';
+
+  var successMessage = "Votre article a bien été enregistrée.";
+
+  $(document).ready(function () {
+
+    var $form = $("form[name=app_article]");
+    var $articleContent = $("#articleContent");
+    var editorId = 0;
+
+    initDraggableEvents();
+    initDroppableEvents();
+    submitFormHandler();
+
+    /**
+     * Call Api on submit button click
+     */
+    function submitFormHandler() {
+      $form.submit(function (event) {
+        event.preventDefault();
+
+        $.ajax({
+          type: "POST",
+          url: Routing.generate('app_api_article_create'),
+          data: getArticleData(),
+          success: function () {
+            appendFlash(successMessage);
+          },
+          error: function (xhr, textStatus, errorThrown) {
+            if (xhr.status === 401) {
+              //handle error
+              window.location.replace(Routing.generate('sylius_user_security_login'));
+            } else {
+              var message = xhr.responseJSON.error.exception[0].message;
+              appendFlash(message, null, 'danger');
+            }
+          }
+        });
+
+      });
+    }
+
+    /**
+     * Init draggable events
+     */
+    function initDraggableEvents() {
+      $(".draggable.revertible").draggable({
+        revert: true,
+        data: {
+          'template': 'test'
+        }
+      });
+    }
+
+    /**
+     * Init droppable events
+     */
+    function initDroppableEvents() {
+      $(".droppable").droppable({
+        drop: function (event, ui) {
+          var $template = $("#" + ui.draggable.data('template'));
+          var $block = $('.block-editing', $template).clone();
+          editorId = editorId + 1;
+          $block
+            .attr('contenteditable', 'true')
+            .attr('id', 'editor' + editorId);
+
+          $articleContent.append($block);
+          CKEDITOR.inline('editor' + editorId);
+        }
+      });
+    }
+
+    /**
+     * Get article serialized data
+     */
+    function getArticleData() {
+      var title = $('#app_article_document_title').val().trim();
+      var children = [];
+
+      $articleContent.children().each(function (key) {
+        children.push(getBlockData($(this), key, title));
+      });
+
+      return {
+        status: $('#app_article_status').val(),
+        document: {
+          name: slugMe(title),
+          title: title,
+          children: children
+        }
+      };
+    }
+
+    /**
+     * Get serialized data of a block
+     */
+    function getBlockData($block, key, title) {
+      var blockTitle = $('h4 a', $block).html() ? $('h4 a', $block).html().trim() : null;
+
+      var type = $block.attr('data-type');
+      var name = slugMe(title + ' ' + key);
+      var body = $('.block-body', $block).html().trim();
+
+      if ('single_image' === type) {
+
+        var data = new FormData();
+
+        return {
+          name: name,
+          title: blockTitle,
+          body: body,
+          imagePosition: $block.attr('data-image-position'),
+          children: [{
+            name: 'image' + key/*,
+             image: {
+             ContentUrl: 'https://placeholdit.imgix.net/~text?txtsize=150&txt=Image...&w=1600&h=900'
+             }*/
+          }],
+          class: null,
+          _type: $block.attr('data-type')
+        };
+      } else {
+        return {
+          name: name,
+          body: body,
+          _type: $block.attr('data-type')
+        };
+      }
+
+    }
+
+    /** use npm slug instead
+     * @see https://www.npmjs.com/package/slug
+     **/
+
+    function slugMe(value) {
+      var rExps = [
+        {re: /[\xC0-\xC6]/g, ch: 'A'},
+        {re: /[\xE0-\xE6]/g, ch: 'a'},
+        {re: /[\xC8-\xCB]/g, ch: 'E'},
+        {re: /[\xE8-\xEB]/g, ch: 'e'},
+        {re: /[\xCC-\xCF]/g, ch: 'I'},
+        {re: /[\xEC-\xEF]/g, ch: 'i'},
+        {re: /[\xD2-\xD6]/g, ch: 'O'},
+        {re: /[\xF2-\xF6]/g, ch: 'o'},
+        {re: /[\xD9-\xDC]/g, ch: 'U'},
+        {re: /[\xF9-\xFC]/g, ch: 'u'},
+        {re: /[\xC7-\xE7]/g, ch: 'c'},
+        {re: /[\xD1]/g, ch: 'N'},
+        {re: /[\xF1]/g, ch: 'n'}];
+
+      // convertit les caractères accentués en leurs équivalent alpha
+      for (var i = 0, len = rExps.length; i < len; i++)
+        value = value.replace(rExps[i].re, rExps[i].ch);
+
+      // 1) met en bas de casse
+      // 2) remplace les espaces par des tirets
+      // 3) enleve tout les caractères non alphanumériques
+      // 4) enlève les doubles tirets
+      return value.toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^a-z0-9-]/g, '')
+        .replace(/\-{2,}/g, '-');
+    }
+
+    function appendFlash(successMessage, messageHolderSelector, type) {
+      type = type ? type : 'success';
+      $("html, body").animate({scrollTop: 0}, "slow");
+      messageHolderSelector = messageHolderSelector ? messageHolderSelector : '#flashes';
+      $(messageHolderSelector).html('<div class="alert alert-' + type + '"><a class="close" data-dismiss="alert" href="#">×</a>' + successMessage + '</div>');
+    }
+
+  });
+});
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+(function ( $ ) {
+    'use strict';
+
+    $(document).ready(function() {
+        var deleteButton;
+
+        $(document).on('click', '.btn-confirm',function(e) {
+            e.preventDefault();
+
+            deleteButton = $(this);
+
+            if (deleteButton.is("a")) {
+                $('#confirmation-modal #confirmation-modal-confirm').attr('href', deleteButton.attr('href'));
+            }
+
+            $('#confirmation-modal').modal('show');
+        });
+
+        $('#confirmation-modal #confirmation-modal-confirm').click(function(e) {
+            if (deleteButton.is("button")) {
+                e.preventDefault();
+                deleteButton.closest('form').submit();
+            }
+        });
+    });
+})( jQuery );
+(function ($) {
+  'use strict';
+
+  $(document).ready(function () {
+    $('.entity').each(function () {
+      var $entity = $(this);
+
+      var id = parseInt($entity.html());
+      var entityName = $entity.data('entity');
+
+      if (isNaN(id)) {
+        return;
+      }
+
+      switch (entityName) {
+        case 'game':
+          showGame($entity, id);
+          break;
+      }
+    });
+
+    /**
+     * @param $entity
+     * @param id
+     */
+    function showGame($entity, id) {
+      $.get(Routing.generate('sylius_api_product_show', {'id': id}), function (product) {
+        $entity.html(
+          $('<div>').addClass('img-box-5')
+            .append($('<div>').addClass('container')
+              .append($('<div>').addClass('img-box-5-item')
+                .append($('<div>').addClass('row')
+                  .append($('<div>').addClass('col-md-4')
+                    .append($('<div>').addClass('img-box-5-img')
+                      .append(
+                        $('<a>').attr('href', Routing.generate('sylius_product_show', {'slug': product.slug})).append(
+                          $('<img>')
+                            .addClass('img-responsive img-thumbnail')
+                            .attr('src', product.image.default)
+                        )
+                      )
+                    )
+                  )
+                  .append($('<div>').addClass('col-md-8')
+                    .append($('<div>').addClass('img-box-5-content').append($('<div>').addClass('container')
+                        .append($('<div>').addClass('row')
+                          .append($('<h4>')
+                            .html(product.name)
+                          )
+                        )
+                        .append($('<div>').addClass('row')
+                          .append(getShortDescriptionContainer(product))
+                        )
+                      ).append(
+                      $('<div>').addClass('container')
+                        .append($('<div>').addClass('row')
+                          .append($('<ul>').addClass('list-unstyled')
+                            .append($('<li>')
+                              .append($('<p>').addClass('pull-left bg-color square-2 rounded-2').append(
+                                $('<span>').addClass('fa fa-user white')
+                                )
+                              ).append($('<p>').addClass('game-attribute')
+                                .html(product.min_player_count + ' à ' + product.max_player_count + ' joueurs')
+                              )
+                            )
+                            .append($('<li>')
+                              .append($('<p>').addClass('pull-left bg-color square-2 rounded-2').append(
+                                $('<span>').addClass('fa fa-child white')
+                                )
+                              ).append($('<p>').addClass('game-attribute')
+                                .html('à partir de ' + product.min_age + ' ans')
+                              )
+                            )
+                            .append(getDurationContainer(product))
+                            .append(getMechanismsContainer(product))
+                            .append(getThemesContainer(product))
+                          )
+                        )
+                      )
+                    )
+                  )
+                )
+              )
+            ))
+          .append(
+            $('<div>')
+              .addClass('clearfix')
+          );
+
+
+      });
+    }
+  });
+
+  /**
+   * @param product
+   * @returns {*}
+   */
+  function getDurationContainer(product) {
+    if (typeof product.min_duration === 'undefined') {
+      return $('<span>');
+    }
+
+    return $('<li>')
+      .append(
+        $('<p>').addClass('pull-left bg-color square-2 rounded-2')
+          .append(
+            $('<span>')
+              .addClass('fa fa-clock-o white')
+          )
+      )
+      .append(
+        $('<p>').addClass('game-attribute')
+          .html(product.min_duration + ' minutes')
+      )
+  }
+
+  function getShortDescriptionContainer(product) {
+    if (typeof product.short_description === 'undefined') {
+      return $('<span>');
+    }
+
+
+    return $('<div>').addClass('quote-one')
+      .append($('<div>').addClass('row')
+        .append($('<div>').addClass('quote-one-item')
+          .append($('<span>').addClass('color').html('“'))
+          .append($('<div>').addClass('quote-one-right')
+            .append($('<div>').addClass('content hideContent').html(product.short_description))
+            .append(
+              $('<div>').addClass('show-more')
+                .append($('<a>').attr('href', '#').html('Lire la suite...'))
+            )
+          )
+        ));
+  }
+
+  /**
+   * @param product
+   * @returns {*}
+   */
+  function getMechanismsContainer(product) {
+    if (product.mechanisms.length === 0) {
+      return $('<span>');
+    }
+
+    var $paragraph = $('<p>').addClass('game-attribute');
+    var first = true;
+
+    $.each(product.mechanisms, function () {
+
+      if (false === first) {
+        $paragraph.append(
+          $('<span>').html(', ')
+        );
+      }
+
+      $paragraph.append(
+        $('<a>').attr('href', Routing.generate('sylius_product_index_by_taxon', {'permalink': this.permalink}))
+          .html(this.name)
+      );
+
+      first = false;
+
+    });
+
+    return $('<li>')
+      .append(
+        $('<p>').addClass('pull-left bg-color square-2 rounded-2')
+          .append(
+            $('<span>')
+              .addClass('fa fa-cog white')
+          )
+      )
+      .append($paragraph);
+  }
+
+  /**
+   * @param product
+   * @returns {*}
+   */
+  function getThemesContainer(product) {
+    if (product.themes.length === 0) {
+      return $('<span>');
+    }
+
+    var $paragraph = $('<p>').addClass('game-attribute');
+    var first = true;
+
+    $.each(product.themes, function () {
+
+      if (false === first) {
+        $paragraph.append(
+          $('<span>').html(', ')
+        );
+      }
+
+      $paragraph.append(
+        $('<a>').attr('href', Routing.generate('sylius_product_index_by_taxon', {'permalink': this.permalink}))
+          .html(this.name)
+      );
+
+      first = false;
+
+    });
+
+    return $('<li>')
+      .append(
+        $('<p>').addClass('pull-left bg-color square-2 rounded-2')
+          .append(
+            $('<span>')
+              .addClass('fa fa-picture-o white')
+          )
+      )
+      .append($paragraph);
+  }
+
+})(jQuery);
+$(function() {
+
+    "use strict";
+
+    $('.form-modal-confirm').click(function() {
+        var button = this;
+        var $form = $('form', $(button).parent().prev());
+        $form.submit();
+    });
+
+});
+/**
+* @preserve HTML5 Shiv 3.7.2 | @afarkas @jdalton @jon_neal @rem | MIT/GPL2 Licensed
+*/
+!function(a,b){function c(a,b){var c=a.createElement("p"),d=a.getElementsByTagName("head")[0]||a.documentElement;return c.innerHTML="x<style>"+b+"</style>",d.insertBefore(c.lastChild,d.firstChild)}function d(){var a=t.elements;return"string"==typeof a?a.split(" "):a}function e(a,b){var c=t.elements;"string"!=typeof c&&(c=c.join(" ")),"string"!=typeof a&&(a=a.join(" ")),t.elements=c+" "+a,j(b)}function f(a){var b=s[a[q]];return b||(b={},r++,a[q]=r,s[r]=b),b}function g(a,c,d){if(c||(c=b),l)return c.createElement(a);d||(d=f(c));var e;return e=d.cache[a]?d.cache[a].cloneNode():p.test(a)?(d.cache[a]=d.createElem(a)).cloneNode():d.createElem(a),!e.canHaveChildren||o.test(a)||e.tagUrn?e:d.frag.appendChild(e)}function h(a,c){if(a||(a=b),l)return a.createDocumentFragment();c=c||f(a);for(var e=c.frag.cloneNode(),g=0,h=d(),i=h.length;i>g;g++)e.createElement(h[g]);return e}function i(a,b){b.cache||(b.cache={},b.createElem=a.createElement,b.createFrag=a.createDocumentFragment,b.frag=b.createFrag()),a.createElement=function(c){return t.shivMethods?g(c,a,b):b.createElem(c)},a.createDocumentFragment=Function("h,f","return function(){var n=f.cloneNode(),c=n.createElement;h.shivMethods&&("+d().join().replace(/[\w\-:]+/g,function(a){return b.createElem(a),b.frag.createElement(a),'c("'+a+'")'})+");return n}")(t,b.frag)}function j(a){a||(a=b);var d=f(a);return!t.shivCSS||k||d.hasCSS||(d.hasCSS=!!c(a,"article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}template{display:none}")),l||i(a,d),a}var k,l,m="3.7.2",n=a.html5||{},o=/^<|^(?:button|map|select|textarea|object|iframe|option|optgroup)$/i,p=/^(?:a|b|code|div|fieldset|h1|h2|h3|h4|h5|h6|i|label|li|ol|p|q|span|strong|style|table|tbody|td|th|tr|ul)$/i,q="_html5shiv",r=0,s={};!function(){try{var a=b.createElement("a");a.innerHTML="<xyz></xyz>",k="hidden"in a,l=1==a.childNodes.length||function(){b.createElement("a");var a=b.createDocumentFragment();return"undefined"==typeof a.cloneNode||"undefined"==typeof a.createDocumentFragment||"undefined"==typeof a.createElement}()}catch(c){k=!0,l=!0}}();var t={elements:n.elements||"abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output picture progress section summary template time video",version:m,shivCSS:n.shivCSS!==!1,supportsUnknownElements:l,shivMethods:n.shivMethods!==!1,type:"default",shivDocument:j,createElement:g,createDocumentFragment:h,addElements:e};a.html5=t,j(b)}(this,document);
+$(function () {
+  'use strict';
+
+  $(document).ready(function () {
+
+    var $pageViews = $("#page-views");
+
+    if ($pageViews.length > 0) {
+      var pagePath = $pageViews.data('page-path');
+
+      $.ajax({
+        type: "GET",
+        url: Routing.generate('app_api_page_views_show', {'pagePath': pagePath}),
+        success: function (results) {
+          updatePageViews(results.view_count);
+        }
+      });
+    }
+
+    function updatePageViews(viewCount) {
+
+      var updatePath = null;
+      var object = $pageViews.data('object');
+
+      if ('product' === object) {
+        updatePath = 'sylius_api_product_view_count_update';
+      } else if ('article' === object) {
+        updatePath = 'app_api_article_view_count_update';
+      } else if ('topic' === object) {
+        updatePath = 'app_api_topic_view_count_update';
+      }
+
+      if (updatePath) {
+        $.ajax({
+          type: "PATCH",
+          url: Routing.generate(updatePath, {'id': $pageViews.data('id')}),
+          data: {
+            'viewCount': viewCount
+          }
+        });
+      }
+    }
+  });
+});
+$(function () {
+
+  "use strict";
+
+  $(".peopleAutocomplete").select2({
+    width: '100%',
+    ajax: {
+      url: Routing.generate('app_api_person_index'),
+      dataType: 'json',
+      delay: 250,
+      data: function (params) {
+        return {
+          criteria: {
+            query: params.term // search term
+          },
+          page: params.page
+        };
+      },
+      processResults: function (data, params) {
+        // parse the results into the format expected by Select2
+        // since we are using custom formatting functions we do not need to
+        // alter the remote JSON data, except to indicate that infinite
+        // scrolling can be used
+        params.page = params.page || 1;
+
+        return {
+          results: data._embedded.items,
+          pagination: {
+            more: (params.page * 30) < data.total
+          }
+        };
+      },
+      cache: true
+    },
+    escapeMarkup: function (markup) {
+      return markup;
+    }, // let our custom formatter work
+    minimumInputLength: 1,
+    templateResult: formatRepo, // omitted for brevity, see the source of this page
+    templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+  });
+
+  function formatRepo(repo) {
+    if (repo.loading) return repo.text;
+
+    var markup =
+      "<div class='clearfix'>" +
+        "<div class='pull-left'><img style='width: 50px; height: 50px; margin-right: 10px;' class='img-responsive img-round' src='" + getImage(repo) + "' /></div>" +
+        "<div>" + repo.full_name + "</div>";
+      "</div>";
+
+    return markup;
+  }
+
+  function formatRepoSelection(repo) {
+    return repo.full_name || repo.text;
+  }
+
+  function getImage(repo) {
+    if (repo.image) {
+      return repo.image.thumbnail;
+    } else {
+      return '//ssl.gstatic.com/accounts/ui/avatar_2x.png';
+    }
+  }
+
+});
+/* Placeholders.js v3.0.2 */
+(function(t){"use strict";function e(t,e,r){return t.addEventListener?t.addEventListener(e,r,!1):t.attachEvent?t.attachEvent("on"+e,r):void 0}function r(t,e){var r,n;for(r=0,n=t.length;n>r;r++)if(t[r]===e)return!0;return!1}function n(t,e){var r;t.createTextRange?(r=t.createTextRange(),r.move("character",e),r.select()):t.selectionStart&&(t.focus(),t.setSelectionRange(e,e))}function a(t,e){try{return t.type=e,!0}catch(r){return!1}}t.Placeholders={Utils:{addEventListener:e,inArray:r,moveCaret:n,changeType:a}}})(this),function(t){"use strict";function e(){}function r(){try{return document.activeElement}catch(t){}}function n(t,e){var r,n,a=!!e&&t.value!==e,u=t.value===t.getAttribute(V);return(a||u)&&"true"===t.getAttribute(D)?(t.removeAttribute(D),t.value=t.value.replace(t.getAttribute(V),""),t.className=t.className.replace(R,""),n=t.getAttribute(F),parseInt(n,10)>=0&&(t.setAttribute("maxLength",n),t.removeAttribute(F)),r=t.getAttribute(P),r&&(t.type=r),!0):!1}function a(t){var e,r,n=t.getAttribute(V);return""===t.value&&n?(t.setAttribute(D,"true"),t.value=n,t.className+=" "+I,r=t.getAttribute(F),r||(t.setAttribute(F,t.maxLength),t.removeAttribute("maxLength")),e=t.getAttribute(P),e?t.type="text":"password"===t.type&&M.changeType(t,"text")&&t.setAttribute(P,"password"),!0):!1}function u(t,e){var r,n,a,u,i,l,o;if(t&&t.getAttribute(V))e(t);else for(a=t?t.getElementsByTagName("input"):b,u=t?t.getElementsByTagName("textarea"):f,r=a?a.length:0,n=u?u.length:0,o=0,l=r+n;l>o;o++)i=r>o?a[o]:u[o-r],e(i)}function i(t){u(t,n)}function l(t){u(t,a)}function o(t){return function(){m&&t.value===t.getAttribute(V)&&"true"===t.getAttribute(D)?M.moveCaret(t,0):n(t)}}function c(t){return function(){a(t)}}function s(t){return function(e){return A=t.value,"true"===t.getAttribute(D)&&A===t.getAttribute(V)&&M.inArray(C,e.keyCode)?(e.preventDefault&&e.preventDefault(),!1):void 0}}function d(t){return function(){n(t,A),""===t.value&&(t.blur(),M.moveCaret(t,0))}}function g(t){return function(){t===r()&&t.value===t.getAttribute(V)&&"true"===t.getAttribute(D)&&M.moveCaret(t,0)}}function v(t){return function(){i(t)}}function p(t){t.form&&(T=t.form,"string"==typeof T&&(T=document.getElementById(T)),T.getAttribute(U)||(M.addEventListener(T,"submit",v(T)),T.setAttribute(U,"true"))),M.addEventListener(t,"focus",o(t)),M.addEventListener(t,"blur",c(t)),m&&(M.addEventListener(t,"keydown",s(t)),M.addEventListener(t,"keyup",d(t)),M.addEventListener(t,"click",g(t))),t.setAttribute(j,"true"),t.setAttribute(V,x),(m||t!==r())&&a(t)}var b,f,m,h,A,y,E,x,L,T,N,S,w,B=["text","search","url","tel","email","password","number","textarea"],C=[27,33,34,35,36,37,38,39,40,8,46],k="#ccc",I="placeholdersjs",R=RegExp("(?:^|\\s)"+I+"(?!\\S)"),V="data-placeholder-value",D="data-placeholder-active",P="data-placeholder-type",U="data-placeholder-submit",j="data-placeholder-bound",q="data-placeholder-focus",z="data-placeholder-live",F="data-placeholder-maxlength",G=document.createElement("input"),H=document.getElementsByTagName("head")[0],J=document.documentElement,K=t.Placeholders,M=K.Utils;if(K.nativeSupport=void 0!==G.placeholder,!K.nativeSupport){for(b=document.getElementsByTagName("input"),f=document.getElementsByTagName("textarea"),m="false"===J.getAttribute(q),h="false"!==J.getAttribute(z),y=document.createElement("style"),y.type="text/css",E=document.createTextNode("."+I+" { color:"+k+"; }"),y.styleSheet?y.styleSheet.cssText=E.nodeValue:y.appendChild(E),H.insertBefore(y,H.firstChild),w=0,S=b.length+f.length;S>w;w++)N=b.length>w?b[w]:f[w-b.length],x=N.attributes.placeholder,x&&(x=x.nodeValue,x&&M.inArray(B,N.type)&&p(N));L=setInterval(function(){for(w=0,S=b.length+f.length;S>w;w++)N=b.length>w?b[w]:f[w-b.length],x=N.attributes.placeholder,x?(x=x.nodeValue,x&&M.inArray(B,N.type)&&(N.getAttribute(j)||p(N),(x!==N.getAttribute(V)||"password"===N.type&&!N.getAttribute(P))&&("password"===N.type&&!N.getAttribute(P)&&M.changeType(N,"text")&&N.setAttribute(P,"password"),N.value===N.getAttribute(V)&&(N.value=x),N.setAttribute(V,x)))):N.getAttribute(D)&&(n(N),N.removeAttribute(V));h||clearInterval(L)},100)}M.addEventListener(t,"beforeunload",function(){K.disable()}),K.disable=K.nativeSupport?e:i,K.enable=K.nativeSupport?e:l}(this);
+/*! Respond.js v1.4.2: min/max-width media query polyfill * Copyright 2013 Scott Jehl
+ * Licensed under https://github.com/scottjehl/Respond/blob/master/LICENSE-MIT
+ *  */
+
+!function(a){"use strict";a.matchMedia=a.matchMedia||function(a){var b,c=a.documentElement,d=c.firstElementChild||c.firstChild,e=a.createElement("body"),f=a.createElement("div");return f.id="mq-test-1",f.style.cssText="position:absolute;top:-100em",e.style.background="none",e.appendChild(f),function(a){return f.innerHTML='&shy;<style media="'+a+'"> #mq-test-1 { width: 42px; }</style>',c.insertBefore(e,d),b=42===f.offsetWidth,c.removeChild(e),{matches:b,media:a}}}(a.document)}(this),function(a){"use strict";function b(){u(!0)}var c={};a.respond=c,c.update=function(){};var d=[],e=function(){var b=!1;try{b=new a.XMLHttpRequest}catch(c){b=new a.ActiveXObject("Microsoft.XMLHTTP")}return function(){return b}}(),f=function(a,b){var c=e();c&&(c.open("GET",a,!0),c.onreadystatechange=function(){4!==c.readyState||200!==c.status&&304!==c.status||b(c.responseText)},4!==c.readyState&&c.send(null))};if(c.ajax=f,c.queue=d,c.regex={media:/@media[^\{]+\{([^\{\}]*\{[^\}\{]*\})+/gi,keyframes:/@(?:\-(?:o|moz|webkit)\-)?keyframes[^\{]+\{(?:[^\{\}]*\{[^\}\{]*\})+[^\}]*\}/gi,urls:/(url\()['"]?([^\/\)'"][^:\)'"]+)['"]?(\))/g,findStyles:/@media *([^\{]+)\{([\S\s]+?)$/,only:/(only\s+)?([a-zA-Z]+)\s?/,minw:/\([\s]*min\-width\s*:[\s]*([\s]*[0-9\.]+)(px|em)[\s]*\)/,maxw:/\([\s]*max\-width\s*:[\s]*([\s]*[0-9\.]+)(px|em)[\s]*\)/},c.mediaQueriesSupported=a.matchMedia&&null!==a.matchMedia("only all")&&a.matchMedia("only all").matches,!c.mediaQueriesSupported){var g,h,i,j=a.document,k=j.documentElement,l=[],m=[],n=[],o={},p=30,q=j.getElementsByTagName("head")[0]||k,r=j.getElementsByTagName("base")[0],s=q.getElementsByTagName("link"),t=function(){var a,b=j.createElement("div"),c=j.body,d=k.style.fontSize,e=c&&c.style.fontSize,f=!1;return b.style.cssText="position:absolute;font-size:1em;width:1em",c||(c=f=j.createElement("body"),c.style.background="none"),k.style.fontSize="100%",c.style.fontSize="100%",c.appendChild(b),f&&k.insertBefore(c,k.firstChild),a=b.offsetWidth,f?k.removeChild(c):c.removeChild(b),k.style.fontSize=d,e&&(c.style.fontSize=e),a=i=parseFloat(a)},u=function(b){var c="clientWidth",d=k[c],e="CSS1Compat"===j.compatMode&&d||j.body[c]||d,f={},o=s[s.length-1],r=(new Date).getTime();if(b&&g&&p>r-g)return a.clearTimeout(h),h=a.setTimeout(u,p),void 0;g=r;for(var v in l)if(l.hasOwnProperty(v)){var w=l[v],x=w.minw,y=w.maxw,z=null===x,A=null===y,B="em";x&&(x=parseFloat(x)*(x.indexOf(B)>-1?i||t():1)),y&&(y=parseFloat(y)*(y.indexOf(B)>-1?i||t():1)),w.hasquery&&(z&&A||!(z||e>=x)||!(A||y>=e))||(f[w.media]||(f[w.media]=[]),f[w.media].push(m[w.rules]))}for(var C in n)n.hasOwnProperty(C)&&n[C]&&n[C].parentNode===q&&q.removeChild(n[C]);n.length=0;for(var D in f)if(f.hasOwnProperty(D)){var E=j.createElement("style"),F=f[D].join("\n");E.type="text/css",E.media=D,q.insertBefore(E,o.nextSibling),E.styleSheet?E.styleSheet.cssText=F:E.appendChild(j.createTextNode(F)),n.push(E)}},v=function(a,b,d){var e=a.replace(c.regex.keyframes,"").match(c.regex.media),f=e&&e.length||0;b=b.substring(0,b.lastIndexOf("/"));var g=function(a){return a.replace(c.regex.urls,"$1"+b+"$2$3")},h=!f&&d;b.length&&(b+="/"),h&&(f=1);for(var i=0;f>i;i++){var j,k,n,o;h?(j=d,m.push(g(a))):(j=e[i].match(c.regex.findStyles)&&RegExp.$1,m.push(RegExp.$2&&g(RegExp.$2))),n=j.split(","),o=n.length;for(var p=0;o>p;p++)k=n[p],l.push({media:k.split("(")[0].match(c.regex.only)&&RegExp.$2||"all",rules:m.length-1,hasquery:k.indexOf("(")>-1,minw:k.match(c.regex.minw)&&parseFloat(RegExp.$1)+(RegExp.$2||""),maxw:k.match(c.regex.maxw)&&parseFloat(RegExp.$1)+(RegExp.$2||"")})}u()},w=function(){if(d.length){var b=d.shift();f(b.href,function(c){v(c,b.href,b.media),o[b.href]=!0,a.setTimeout(function(){w()},0)})}},x=function(){for(var b=0;b<s.length;b++){var c=s[b],e=c.href,f=c.media,g=c.rel&&"stylesheet"===c.rel.toLowerCase();e&&g&&!o[e]&&(c.styleSheet&&c.styleSheet.rawCssText?(v(c.styleSheet.rawCssText,e,f),o[e]=!0):(!/^([a-zA-Z:]*\/\/)/.test(e)&&!r||e.replace(RegExp.$1,"").split("/")[0]===a.location.host)&&("//"===e.substring(0,2)&&(e=a.location.protocol+e),d.push({href:e,media:f})))}w()};x(),c.update=x,c.getEmValue=t,a.addEventListener?a.addEventListener("resize",b,!1):a.attachEvent&&a.attachEvent("onresize",b)}}(this);
+$(function () {
+  'use strict';
+
+  $(document).ready(function () {
+    $(".show-more a").on("click", function (event) {
+      event.preventDefault();
+
+      var $this = $(this);
+      var $content = $this.parent().prev("div.content");
+
+      if ($this.attr('data-closed') === '1') {
+        $content.switchClass("hideContent", "showContent", 400);
+        $this.text($this.attr('data-opened-label'));
+        $this.attr('data-closed', '0');
+
+      } else {
+        $content.switchClass("showContent", "hideContent", 400);
+        $this.text($this.attr('data-closed-label'));
+        $this.attr('data-closed', '1');
+      }
+    });
+
+    $("a.show-more-2").on("click", function (event) {
+      event.preventDefault();
+
+      var $this = $(this);
+      var $content = $this.parent();
+
+      if ($this.attr('data-closed')) {
+        $('li', $content).show('slow');
+        $this.removeAttr('data-closed');
+        $this.html('<span class="fa fa-chevron-up"></span> ' + $this.attr('data-close-label'));
+      } else {
+        $('li.closed', $content).hide('slow');
+        $this.attr('data-closed', '1');
+        $this.html('<span class="fa fa-chevron-down"></span> ' + $this.attr('data-open-label'));
+      }
+    });
+
+  });
+});
+$(function() {
+
+    "use strict";
+
+    var $form = $('form[name=jdj_comptabundle_bill_payment]');
+
+    if ($form.length > 0) {
+        /**
+         * datePickers from the form
+         */
+        $('.billPaymentPaidAt').datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+    }
+
+});
+$(function() {
+
+    "use strict";
+
+    /**
+     * datePickers from the form
+     */
+    $('#jdj_comptabundle_book_entry_activeAt').datetimepicker({
+        format: 'YYYY-MM-DD'
+    });
+});
+$(document).ready(function () {
+
+    /**
+     * Handles click to display the modal
+     */
+    $("#submit-form-login-modal").click(function (e) {
+        e.preventDefault();
+
+        //authentification
+        checkLogin($('#formLoginModal'));
+
+        $('#login-form-modal').modal('hide');
+
+    });
+
+
+    /**
+     * Handles click to display the modal
+     */
+    $("#submit-form-login").click(function (e) {
+        e.preventDefault();
+
+        //authentification
+        checkLogin($('#formLogin'));
+
+    });
+
+    /**
+     * checks for the authentification
+     *
+     * @returns {boolean}
+     */
+    function checkLogin($form) {
+
+        var isLoggedIn = false;
+        $.ajax({
+            type        : $form.attr( 'method' ),
+            url         : $form.attr( 'action' ),
+            data        : $form.serialize(),
+            dataType    : 'json',
+            async       : false,
+            success: function (data) {
+                if (data.has_error == true) {
+                    //Login KO
+                    isLoggedIn = false;
+                }
+                else  {
+                    //login OK
+                    isLoggedIn = true;
+                }
+            }
+        });
+
+        console.log(isLoggedIn);
+
+        notifyLogin(isLoggedIn);
+
+    }
+
+
+    function notifyLogin(isLoggedIn)
+    {
+        if(isLoggedIn){
+            //Notify login
+            notifySuccess("Vous êtes connecté.");
+
+            //reload page
+            window.location
+                .reload()
+                .delay(3000)
+                .fadeOut();
+
+        } else {
+            notifyError("Problème de connexion.");
+        }
+
+    }
+
+});
+$(document).ready(function () {
+
+    /**
+     * This function displays a success notification
+     *
+     * @param message
+     */
+    window.notifySuccess = function(message) {
+
+        $('.message-notify', '#notify').html(message);
+
+        $('#notify')
+            .removeClass('alert-danger')
+            .addClass('alert-success')
+            .show()
+            .delay(5000)
+            .fadeOut();
+
+        $('html, body').animate({ scrollTop: 0 }, 'fast');
+
+
+    };
+
+
+    /**
+     * This function displays an error notification
+     *
+     * @param message
+     */
+    window.notifyError = function(message) {
+
+        $('.message-notify', '#notify').html(message);
+
+        $('#notify')
+            .removeClass('alert-success')
+            .addClass('alert-danger')
+            .show()
+            .delay(5000)
+            .fadeOut();
+
+        $('html, body').animate({ scrollTop: 0 }, 'fast');
+    };
+
+    $('.datetime').datetimepicker({
+        format: 'YYYY-MM-DD'
+    });
+});
+$(function() {
+
+    "use strict";
+
+    /**
+     * datePickers for the form
+     */
+    $('.date').datetimepicker({
+        format: 'YYYY-MM-DD'
+    });
+
+    $('.time').datetimepicker({
+        format: 'LT'
+    })
+});
+/* ************** */
+/* Magnific Popup */
+/* ************** */
+
+$(document).ready(function() {
+    $(".fancybox").fancybox({
+        prevEffect		: 'none',
+        nextEffect		: 'none',
+        closeBtn		: false,
+        autoPlay        : true,
+        helpers		: {
+            title	: { type : 'inside' },
+            buttons	: {}
+        }
+    });
+});
+$(function() {
+    $( document ).on( 'click','.likeButton',function() {
+        var $likeButton = $(this);
+        var $form = $likeButton.closest('form');
+        var userReview = $('.userReview', $form).val();
+        var comment = $('.comment', $form).val();
+
+        var like = 0;
+        if ($likeButton.hasClass('likeIt')) {
+            like = 1;
+        }
+
+        $('.like', $form).val(like);
+
+        $.post($form.attr('action'), $form.serialize())
+            .done(function (response) {
+
+                /**
+                 * disable active state on other buttons
+                 */
+                $likeButton
+                    .siblings()
+                    .removeClass('btn-yellow')
+                    .addClass('btn-default');
+
+                /**
+                 * enable active state on clicked button
+                 */
+                $likeButton
+                    .removeClass('btn-default')
+                    .addClass('btn-yellow');
+
+                /**
+                 * update nbLikes and nbDislikes on userReview
+                 */
+                if(userReview)
+                {
+                    $('.nbLikes[data-user-review=' + userReview + ']').html(response.nbLikes);
+                    $('.nbDislikes[data-user-review=' + userReview + ']').html(response.nbDislikes);
+                }
+
+                /**
+                 * update nbLikes and nbDislikes on comment
+                 */
+                if(comment)
+                {
+                    $('.nbLikes[data-comment=' + comment + ']').html(response.nbLikes);
+                    $('.nbDislikes[data-comment=' + comment + ']').html(response.nbDislikes);
+                }
+
+            });
+    });
+});
+/**
+ * Created by mfoussette on 06/02/2015.
+ */
+/**
+ * Démarrage du spinner
+ */
+function startSpinner() {
+    $('.loading').show().addClass('display-flex');
+}
+
+/**
+ * Arrêt du spinner
+ */
+function stopSpinner() {
+    $('.loading').hide();
+}
+
+/**
+ * Gestion du spinner en fonction des appels ajax
+ */
+function manageAjaxEvent() {
+    $(document).ajaxComplete(function (event, request, settings) {
+        stopSpinner();
+    });
+
+    $(document).ajaxSend(function (event, request, settings) {
+        startSpinner();
+    });
+
+    $(document).ajaxError(function (event, request, settings) {
+        stopSpinner();
+    });
+}
+
+//manageAjaxEvent();
+
+
+$(function () {
+    $('.multiple-select').select2({ width: '100%' });
+
+});
+$(function () {
+
+  var $notificationBlock = $('#notificationBlock');
+
+  if ($notificationBlock.length > 0) {
+
+    var $notificationItemClone = $('.notificationItem', $notificationBlock).clone();
+
+    function readNotification($a) {
+      $.ajax({
+        url: Routing.generate('app_api_notification_read', {'id': $a.attr('data-id')}),
+        type: 'PATCH',
+        success: function () {
+          window.location.replace($a.attr('data-target'));
+        },
+        error: function (xhr) {
+          if (xhr.status == 403) {
+            //handle error
+            window.location.replace(Routing.generate('fos_user_security_login'));
+          }
+        }
+      });
+    }
+
+    function refresh() {
+      $.get(Routing.generate('app_api_notification_index'), function (response) {
+        $('.notificationItem', $notificationBlock).remove();
+
+        $.each(response, function (index, entity) {
+          var $item = $notificationItemClone.clone();
+
+          $('.notificationMessage', $item).html(entity.message);
+          $('.notificationA', $item).attr('data-id', entity.id);
+          $('.notificationA', $item).attr('data-target', entity.target);
+          $('.notificationContainer', $notificationBlock).append($item);
+
+          $('.notificationA', $item).click(function (event) {
+            event.preventDefault();
+            readNotification($(this));
+          });
+        });
+
+        if (response.length > 0) {
+          $('.badge').show().html(response.length);
+        } else {
+          $('.badge').hide();
+        }
+      });
+
+      setTimeout(refresh, 10000);
+    }
+
+    refresh();
+  }
+});
+$(function() {
+
+    "use strict";
+
+    var $ratingForm = $('form[name=sylius_product_review_rating]');
+    var successMessage = "Votre note a bien été enregistrée.";
+
+    //initializeAjaxForm(successMessage);
+
+    $(".rating").each(function() {
+        $(this).rate({
+            max_value: $(this).attr("data-max-value"),
+            readonly: $(this).attr("data-readonly"),
+            selected_symbol_type: 'fontawesome_star',
+            update_input_field_name: $('#' + $(this).attr("data-update-input-field-name")),
+            step_size: $(this).attr("data-step-size"),
+            symbols: {
+                fontawesome_star: {
+                    base: '<i class="fa fa-star grey"></i>',
+                    hover: '<i class="fa fa-star yellow"></i>',
+                    selected: '<i class="fa fa-star yellow"></i>',
+                }
+            }
+        });
+    });
+
+    $('.rating.rate').on("change", function(event, data) {
+
+        var rateValue = $(this).attr('data-rate-value');
+        var productId = $(this).attr('data-product-id');
+        var routeName;
+        var type;
+        var newRateValue = data.to;
+
+        if (rateValue > 0) {
+            routeName = 'sylius_api_product_review_rating_update';
+            type = 'PUT';
+        } else {
+            routeName = 'sylius_api_product_review_rating_create';
+            type = 'POST';
+        }
+
+        $.ajax({
+            url: Routing.generate(routeName, { 'productId': productId }),
+            type: type,
+            data: {'rating': newRateValue},
+            success: function(data, textStatus, xhr) {
+                appendFlash(successMessage);
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                if(xhr.status===401) {
+                    //handle error
+                    window.location.replace(Routing.generate('sylius_user_security_login'));
+                } else {
+                    renderErrors(xhr);
+                }
+            }
+        });
+    });
+
+    function initializeAjaxForm(successMessage, messageHolderSelector) {
+        $ratingForm.submit(function(e) {
+            e.preventDefault();
+            var form = $(this);
+
+            $.ajax({
+                type: "POST",
+                url: form.attr('action'),
+                data: parseFormToJson(form),
+                dataType: "json",
+                accept: "application/json",
+                success: function(data, textStatus, xhr) {
+                    completeRequest(form);
+                    appendFlash(successMessage, messageHolderSelector);
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    renderErrors(xhr, form);
+                }
+            });
+        });
+    }
+
+    function renderErrors(xhr, form) {
+        clearErrors(form);
+
+        $.each(xhr.responseJSON.errors.errors, function(key, value) {
+            $('div.panel-body').addClass('has-error').prepend('<span class="help-block form-error">' + value + '</span>');
+        });
+    }
+
+    function clearErrors(form) {
+        form.find('.form-error').remove();
+        form.find('.has-error').removeClass('has-error');
+    }
+
+    function parseFormToJson(form) {
+        var formJson = {};
+        $.each(form.serializeArray(), function(index, field) {
+            var name = field.name.replace('sylius_product_review[', '').replace(']', '');
+            formJson[name] = field.value || '';
+        });
+
+        return formJson;
+    }
+
+    function appendFlash(successMessage, messageHolderSelector) {
+        messageHolderSelector = messageHolderSelector ? messageHolderSelector : '#flashes';
+
+        $(messageHolderSelector).html('<div class="alert alert-success"><a class="close" data-dismiss="alert" href="#">×</a>' + successMessage + '</div>');
+    }
+
+    function completeRequest(form) {
+        form[0].reset();
+        clearErrors(form);
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+    }
+
+});
+$(function() {
+    // Javascript to enable link to tab
+    var url = document.location.toString();
+    if (url.match('#')) {
+        $('.nav-tabs a[href=#'+url.split('#')[1]+']').tab('show') ;
+    }
+
+    // Change hash for page-reload
+    $('.nav-tabs a').on('shown', function (e) {
+        window.location.hash = e.target.hash;
+    })
+});
+$(document).ready(function () {
+
+    initializeForms();
+
+
+    /**
+     * Handles the radio button to choose the method to add a game to a list
+     */
+    $('input[type=radio][name=choose-list]').change(function () {
+        if ($("#radio-existing-list").is(':checked') == true) {
+            $("#add-in-list").show();
+            $("#create-list").hide();
+        } else {
+            $("#add-in-list").hide();
+            $("#create-list").show();
+        }
+    });
+
+
+    /**
+     * Handles click to display the modal
+     */
+    $("#addGameCollectionModal").click(function (e) {
+        e.preventDefault();
+        if ($(this).data('user-id') <= 0) {
+            $('#login-form-modal').modal('show');
+        }
+    });
+
+    /**
+     * Handles click to add a new collection
+     */
+    $("#add-list-collection").click(function (e) {
+        e.preventDefault();
+
+        if ($('#input-list-name').val() !== "") {
+            createCollection($(this).data('jeu-id'), $(this).data('user-id'), $('#input-list-name').val(), $('#input-list-description').val());
+        } else {
+            $('#form-group-name-list').addClass('has-error');
+        }
+    });
+
+
+    /**
+     * Handles click to add a new collection
+     */
+    $("#add-game-collection").click(function (e) {
+        e.preventDefault();
+
+        if(Array.isArray($("#input-existing-collection").val()))
+        {
+            var jeuId = $(this).data('jeu-id');
+            $.each($("#input-existing-collection").val(), function( index, value ) {
+                addGameCollection(jeuId, value);
+            });
+        }
+        $('#collectionModal').modal('hide');
+        initializeForms();
+        notifySuccess("Le jeu a été rajoutée à mes listes.");
+
+
+    });
+
+
+    /**
+     * create a new list with the game
+     *
+     * @param jeuId
+     * @param userId
+     * @param name
+     * @param description
+     * @returns {boolean}
+     */
+    function createCollection(jeuId, userId, name, description) {
+        var response = false;
+
+        $.ajax({
+            url: Routing.generate('create_collection', {jeu: jeuId, user: userId}),
+            type: 'POST',
+            data: {name: name, description: description},
+            async: false
+        })
+            .done(function () {
+                response = true;
+
+                $('#collectionModal').modal('hide');
+                notifySuccess("La liste a été créé.");
+                /** if no list yet reload page */
+                if ($('#add-in-list').length == 0) {
+
+                    window.location
+                        .reload()
+                        .delay(3000)
+                        .fadeOut();
+                }
+
+                reloadUserLists(userId);
+                initializeForms();
+
+
+            })
+            .fail(function () {
+                notifyError("Une erreur s'est produite. Merci de réessayer plus tard.");
+                $('#collectionModal').modal('hide');
+            });
+        return response;
+    }
+
+
+    /**
+     * Add a game to an existing collection
+     *
+     * @param jeuId
+     * @param collectionId
+     * @returns {boolean}
+     */
+    function addGameCollection(jeuId, collectionId) {
+        var response = false;
+
+        $.ajax({
+            url: Routing.generate('add_game_collection', {jeu: jeuId, collection: collectionId}),
+            type: 'GET',
+            async: false
+        })
+            .done(function () {
+                response = true;
+            })
+            .fail(function () {
+                notifyError("Une erreur s'est produite. Merci de réessayer plus tard.");
+                $('#collectionModal').modal('hide');
+            });
+        return response;
+    }
+
+
+    /**
+     * reload the user lists
+     *
+     * @param userId
+     * @returns {boolean}
+     */
+    function reloadUserLists(userId) {
+
+        $.ajax({
+            url: Routing.generate('user_list', {user: userId}),
+            type: 'GET',
+            async: false
+        })
+            .done(function (data) {
+                var tabCollection = data.tabCollection;
+                reloadSelectDOM(tabCollection)
+            })
+            .fail(function () {
+                notifyError("Une erreur s'est produite. Merci de réessayer plus tard.");
+            });
+
+    }
+
+    /**
+     * This function reload the select in the dom with the user lists
+     *
+     * @param tabCollection
+     */
+    function reloadSelectDOM(tabCollection) {
+
+        selectCollection = "";
+        tabCollection.forEach(function (collection, index) {
+            selectCollection += '<option value="' + collection.id + '">' + collection.name + '</option>';
+        });
+
+        $("#input-existing-collection").html(selectCollection);
+    }
+
+    /**
+     * This function initialize the forms in the modals
+     */
+    function initializeForms(){
+        /** initialize */
+
+        $('#input-existing-collection').multipleSelect({
+            filter: true,
+            isOpen: true,
+            keepOpen: true
+        });
+
+        $("#radio-existing-list").prop("checked", true)
+        $("#add-in-list").show();
+        if ($('#add-in-list').length > 0) {
+            $("#create-list").hide();
+        }
+        $('#input-list-name').val("");
+        $('#input-list-description').val("");
+        $('#form-group-name-list').removeClass('has-error');
+    }
+
+
+});
+$(function () {
+
+    var $form = $('form[name=jdj_jeubundle_jeu]');
+
+    if ($form.length > 0) {
+        $('#jdj_jeubundle_jeu_mechanisms, #jdj_jeubundle_jeu_themes').multipleSelect({
+            filter: true
+        });
+    }
+});
+$(function() {
+    // Document is ready
+
+    var defaultOptions = {
+        'starCaptions': {
+            0.5: 'Nul',
+            1: 'Très mauvais',
+            1.5: 'Mauvais',
+            2: 'Bof',
+            2.5: 'Moyen',
+            3: 'Pas mal',
+            3.5: 'Bon',
+            4: 'Très bon',
+            4.5: 'Excellent',
+            5: 'Mythique'
+        }
+    };
+
+    $(".game-rating").rating(defaultOptions);
+});
+
+$(document).ready(function () {
+
+
+    /**
+     * Handles click to display to change the game status
+     */
+    $(".acceptStatus").click(function (e) {
+        e.preventDefault();
+        changeGameStatus($(this).data('jeu-id'), $(this).data('status'), $(this).data('action'), "");
+    });
+
+    /**
+     * Handles click to display to change the game status
+     */
+    $(".refuseStatus").click(function (e) {
+        e.preventDefault();
+        changeGameStatus($(this).data('jeu-id'), $(this).data('status'), $(this).data('action'), $("#inputCommentRefuse").val());
+    });
+
+    /**
+     * Call the change status service
+     *
+     * @param jeuId
+     * @param status
+     * @param action
+     * @param comment
+     */
+    function changeGameStatus(jeuId, status, action, comment) {
+
+        $.ajax({
+            url: Routing.generate('change_status', {jeu: jeuId, status: status, action: action}),
+            type: 'POST',
+            data: {comment: comment},
+            async: false
+        })
+            .done(function (data) {
+                $('#refuseStatusModal').modal('hide');
+                $('.changeStatus').hide();
+                $('.changeStatusContainer').hide();
+
+                notifySuccess(data.message);
+
+                //Reload the page
+                window.location
+                    .reload()
+                    .delay(5000)
+                    .fadeOut();
+
+
+            })
+            .fail(function (xhr) {
+                var data = eval("(" + xhr.responseText + ")");
+                notifyError(data.message);
+            });
+    }
+
+
+});
+$(document).ready(function () {
+
+    /**
+     * Handles click on owned
+     */
+    $(".owned").click(function (e) {
+        e.preventDefault();
+
+        if($(this).data("uid") <= 0) {
+            $('#login-form-modal').modal('show');
+        } else {
+            handleUsergameAttribute($(this), 'owned');
+        }
+    });
+
+    /**
+     * Handles click on wanted
+     */
+    $(".wanted").click(function (e) {
+        e.preventDefault();
+
+        if($(this).data("uid") <= 0) {
+            $('#login-form-modal').modal('show');
+        } else {
+            handleUsergameAttribute($(this), 'wanted');
+        }
+    });
+
+    /**
+     * Handles click on played
+     */
+    $(".played").click(function (e) {
+        e.preventDefault();
+
+        if($(this).data("uid") <= 0) {
+            $('#login-form-modal').modal('show');
+        } else {
+            handleUsergameAttribute($(this), 'played');
+        }
+    });
+
+    /**
+     * Handles click on favorite
+     */
+    $(".favorite").click(function (e) {
+        e.preventDefault();
+
+        if($(this).data("uid") <= 0) {
+            $('#login-form-modal').modal('show');
+        } else {
+            handleUsergameAttribute($(this), 'favorite');
+        }
+    });
+
+
+    /**
+     * handle the back end update and modify display
+     *
+     * @param element
+     * @param classElement
+     */
+    function handleUsergameAttribute(element, classElement)
+    {
+        /**
+         * set the user game attribute
+         */
+        var isset = setUserGameAttribute(
+            element.data("jeu-id"),
+            element.data("uid"),
+            classElement
+        );
+
+        if (isset) {
+            modifyDisplay("." + classElement);
+        }
+    }
+
+    /**
+     * change the display by adding a class
+     *
+     * @param classElement
+     */
+    function modifyDisplay(classElement)
+    {
+        notifySuccesUserGameAttributes(classElement);
+        if ($(classElement).hasClass("btn-default")) {
+            $(classElement).addClass("btn-yellow");
+            $(classElement).removeClass("btn-default");
+        } else {
+            $(classElement).addClass("btn-default");
+            $(classElement).removeClass("btn-yellow");
+        }
+
+    }
+
+
+    /**
+     * Set the usergameattribute
+     *
+     * @param jeuId
+     * @param userId
+     * @param attribute
+     */
+    function setUserGameAttribute(jeuId, userId, attribute) {
+        var response = false;
+
+        $.ajax({
+            url: Routing.generate('usergameattribute_' + attribute, { jeu: jeuId, user: userId }),
+            type: 'GET',
+            async: false
+        })
+            .done(function () {
+                response = true;
+
+            })
+            .fail(function () {
+                alert("An error occured. Please try again later.");
+            });
+        return response;
+    }
+
+    /**
+     * This function displays a success notification
+     *
+     * @param attribute
+     */
+    function notifySuccesUserGameAttributes(attribute)
+    {
+        var message = "";
+
+        switch(attribute) {
+            case ".owned":
+                if ($(attribute).hasClass("btn-default")) {
+                    message = "Le Jeu a été ajouté à votre ludothèque.";
+                } else {
+                    message = "Le Jeu a été supprimé de votre ludothèque.";
+                }
+                break;
+            case ".wanted":
+                if ($(attribute).hasClass("btn-default")) {
+                    message = "Le Jeu a été ajouté à votre liste d'envie.";
+                } else {
+                    message = "Le Jeu a été supprimé de votre liste d'envie.";
+                }
+                break;
+            case ".played":
+                if ($(attribute).hasClass("btn-default")) {
+                    message = "Le Jeu a été ajouté à la liste de jeu auxquels vous avez joué.";
+                } else {
+                    message = "Le Jeu a été supprimé de la liste de jeu auxquels vous avez joué.";
+                }
+                break;
+            case ".favorite":
+                if ($(attribute).hasClass("btn-default")) {
+                    message = "Le Jeu a été ajouté à vos coup de coeur.";
+                } else {
+                    message = "Le Jeu a été supprimé de vos coup de coeur.";
+                }
+                break;
+        }
+        /*$('#notify')
+            .removeClass('alert-danger')
+            .addClass('alert-success')
+            .show()
+            .delay(5000)
+            .fadeOut();
+
+        $('#message-jeu').html(message);
+        $('html, body').animate({ scrollTop: 0 }, 'fast');*/
+
+        notifySuccess(message);
+
+    }
+
+
+});
+$(function() {
+
+    if ($('#user-review').length > 0) {
+        $('html, body').animate({
+            scrollTop:$("#user-review").offset().top
+        }, 'fast');
+    }
+
+});
+$.widget( "custom.imgcomplete", $.ui.autocomplete, {
+    _renderItem: function( ul, item ) {
+        return $( "<li>" )
+            .append( $('<a>')
+                .attr("href", item.href)
+                .append($('<img>')
+                    .addClass('img-responsive')
+                    .addClass('img-thumbnail')
+                    .attr('src', item.image)
+                )
+                .append($('<span>')
+                    .html(item.label)
+                )
+                .append($('<div>')
+                    .addClass('clearfix')
+                )
+            )
+            .appendTo( ul );
+    }
+});
+$(function() {
+
+    $( ".mainSearch" ).imgcomplete({
+        source: Routing.generate('app_api_search_autocomplete'),
+        minLength: 2,
+        delay: 100,
+        focus: function() {
+            // prevent value inserted on focus
+            return false;
+        },
+        select: function( event, ui ) {
+            window.location = ui.item.href;
+            // prevent value inserted on focus
+            return false;
+        }
+    });
+
+});
+/* ************************ */
+/* Theme name  : Brave      */
+/* Author name : Ashok      */
+/* ************************ */
+
+/* ****************** */
+/* Tooltips & Popover */
+/* ****************** */
+
+$(".b-tooltip").tooltip();
+
+$(".b-popover").popover();
+
+/* ****************** */
+/* Switchs */
+/* ****************** */
+
+$(".switch").bootstrapSwitch();
+
+$(".b-popover").popover();
+
+/* ************** */
+/* Magnific Popup */
+/* ************** */
+
+$(document).ready(function() {
+  $('.lightbox').magnificPopup({type:'image'});
+});
+
+/* *************** */
+/* Custom Dropdown */
+/* *************** */
+
+$(document).ready(function(){
+	var hidden = true;
+	$(".b-dropdown").click(function(e){
+		e.preventDefault();
+		if (hidden){
+           $(this).next('.b-dropdown-block').slideToggle(400, function(){hidden = false;});
+      }
+	}); 
+	$('html').click(function() {
+        if (!hidden) {
+            $('.b-dropdown-block').slideUp();
+            hidden=true;
+        }
+   });
+   $('.b-dropdown-block').click(function(event) {
+        event.stopPropagation();
+   }); 
+});
+
+/* ************ */
+/* Owl Carousel */
+/* ************ */
+
+$(document).ready(function() {
+	/* Owl carousel */
+	$(".owl-carousel").owlCarousel({
+		slideSpeed : 500,
+		rewindSpeed : 1000,
+		mouseDrag : true,
+		stopOnHover : true
+	});
+	/* Own navigation */
+	$(".owl-nav-prev").click(function(){
+		$(this).parent().next(".owl-carousel").trigger('owl.prev');
+	});
+	$(".owl-nav-next").click(function(){
+		$(this).parent().next(".owl-carousel").trigger('owl.next');
+	});
+});
+
+/* ************* */
+/* Scroll to top */
+/* ************* */
+
+$(document).ready(function() {
+	$(window).scroll(function(){
+		if ($(this).scrollTop() > 200) {
+			$('.totop').fadeIn();
+		} else {
+			$('.totop').fadeOut();
+		}
+	});
+	$(".totop a").click(function(e) {
+		e.preventDefault();
+		$("html, body").animate({ scrollTop: 0 }, "slow");
+		return false;
+	});
+});
+
+/* *************** */
+/* Navigation menu */
+/* *************** */
+
 $(document).ready(function(){
 
+
+	$.fn.menumaker = function(options) {
+      
+    var cssmenu = $(this), settings = $.extend({
+        title: "Menu",
+        format: "dropdown",
+        sticky: false
+      }, options);
+
+      return this.each(function() {
+		
+		cssmenu.prepend('<div id="menu-button">' + settings.title + '</div>');
+		$(this).find("#menu-button").on('click', function(){
+		  $(this).toggleClass('menu-opened');
+		  var mainmenu = $(this).next('ul');
+		  if (mainmenu.hasClass('open')) { 
+			mainmenu.slideUp().removeClass('open');
+		  }
+		  else {
+			mainmenu.slideDown().addClass('open');
+			if (settings.format === "dropdown") {
+			  mainmenu.find('ul').slideDown();
+			}
+		  }
+		});
+		
+		cssmenu.find('li ul').parent().addClass('has-sub');
+
+		multiTg = function() {
+		  cssmenu.find(".has-sub").prepend('<span class="submenu-button"></span>');
+		  cssmenu.find('.submenu-button').on('click', function() {
+			$(this).toggleClass('submenu-opened');
+			if ($(this).siblings('ul').hasClass('open')) {
+			  $(this).siblings('ul').removeClass('open').slideUp();
+			}
+			else {
+			  $(this).siblings('ul').addClass('open').slideDown();
+			}
+		  });
+		};
+
+		if (settings.format === 'multitoggle') multiTg();
+		else cssmenu.addClass('dropdown');
+		
+		
+      });
+	};
+
+	$(".navy").menumaker({
+		title: "Menu",
+		format: "multitoggle"
+	});
 });

@@ -1,0 +1,35 @@
+{
+  "dependencies": {
+    "bootstrap-sass": "^3.3.6",
+    "bootstrap-star-rating": "^4.0.2",
+    "bootstrap-switch": "3.3.2",
+    "chosen-js": "^1.6.2",
+    "eonasdan-bootstrap-datetimepicker": "~4.14.30",
+    "fancybox": "2.1.5",
+    "font-awesome": "~4.2.0",
+    "jquery-count-to": "^1.2.1",
+    "jquery-ui": "^1.12.1",
+    "magnific-popup": "1.0.0",
+    "multiple-select": "^1.2.0",
+    "owl.carousel": "^2.2.0",
+    "rater": "0.0.2",
+    "select2": "^4.0.3"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-if": "^2.0.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-order": "^1.1.1",
+    "gulp-sass": "^2.1.1",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.1",
+    "gulp-uglifycss": "^1.0.5",
+    "merge-stream": "^1.0.0"
+  },
+  "scripts": {
+    "gulp": "gulp"
+  },
+  "author": "Loïc Frémont",
+  "license": "MIT"
+}

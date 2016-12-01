@@ -11,7 +11,9 @@ use Symfony\Component\Debug\Debug;
  *
  *   env[JDJ_APP_DEV_PERMITTED] = 1
  */
-if (!getenv("JDJ_APP_DEV_PERMITTED") && (
+if (!getenv("APP_NAME_APP_DEV_PERMITTED")
+    && !getenv("JDJ_APP_DEV_PERMITTED")
+    && (
         isset($_SERVER['HTTP_CLIENT_IP'])
         || isset($_SERVER['HTTP_X_FORWARDED_FOR'])
         || !(in_array(@$_SERVER['REMOTE_ADDR'], array('10.0.0.1', '127.0.0.1', 'fe80::1', '::1')) || php_sapi_name() === 'cli-server')

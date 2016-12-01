@@ -12,13 +12,13 @@ config = [
 ];
 
 gulp.task('admin', function() {
-    gulp.src('web/assets/backend2/Gulpfile.js', { read: false })
+    gulp.src('web/assets/backend/Gulpfile.js', { read: false })
         .pipe(chug({ args: config }))
     ;
 });
 
 gulp.task('shop', function() {
-    gulp.src('src/Sylius/Bundle/ShopBundle/Gulpfile.js', { read: false })
+    gulp.src('web/assets/frontend/Gulpfile.js', { read: false })
         .pipe(chug({ args: config }))
     ;
 });

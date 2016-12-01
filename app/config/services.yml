@@ -274,3 +274,9 @@ services:
             - "@translator"
         tags:
             - { name: 'pagerfanta.view', alias: 'semantic_ui_translated' }
+
+    # <!-- Installer -->
+    sylius.installer.checker.command_directory:
+        class: AppBundle\Installer\Checker\CommandDirectoryChecker
+        arguments:
+            - "@filesystem"

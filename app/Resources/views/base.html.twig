@@ -13,25 +13,7 @@
     {#'assets/bower_components/jquery-ui/themes/base/jquery-ui.min.css'#}
 
     {% block head_style %}
-        {% stylesheets
-        'bundles/bmatznerfontawesome/css/font-awesome.min.css'
-        'assets/frontend/css/magnific-popup.css'
-        'bundles/bmatznerjqueryui/css/smoothness/jquery-ui.css'
-        'assets/frontend/bower_components/bootstrap-star-rating/css/star-rating.min.css'
-        'assets/frontend/bower_components/fancybox/source/jquery.fancybox.css'
-        'assets/frontend/bower_components/fancybox/source/helpers/jquery.fancybox-buttons.css'
-        'assets/frontend/bower_components/fancybox/source/helpers/jquery.fancybox-thumbs.css'
-        'assets/frontend/bower_components/multiple-select/multiple-select.css'
-        'assets/frontend/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'
-        'assets/frontend/bower_components/owlcarousel/owl-carousel/owl.carousel.css'
-        'assets/frontend/bower_components/select2/dist/css/select2.css'
-        'assets/frontend/bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css'
-        'assets/frontend/stylesheets/base.css'
-        filter='cssrewrite' output='css/compiled/all.css' %}
-        <link rel="stylesheet" href="{{ asset_url }}"/>
-
-        {% endstylesheets %}
-
+        {% include 'SyliusUiBundle::_stylesheets.html.twig' with {'path': 'assets/frontend/compiled/css/style.css'} %}
     {% endblock head_style %}
 
     <!-- Styles -->
@@ -188,33 +170,33 @@
 <!-- Javascript files -->
 
 {% block foot_script_assetic %}
-    {% javascripts output='js/compiled/all.js'
-    'bundles/bmatznerjquery/js/jquery.min.js'
-    'bundles/bmatznerjqueryui/js/minified/jquery-ui.min.js'
-    '@MopaBootstrapBundle/Resources/public/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js'
-    '@MopaBootstrapBundle/Resources/public/bootstrap-sass/assets/javascripts/bootstrap/*.js'
-    '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-collection.js'
-    '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-subnav.js'
-    'assets/frontend/bower_components/bootstrap-star-rating/js/star-rating.min.js'
-    'assets/frontend/bower_components/fancybox/lib/jquery.mousewheel-3.0.6.pack.js'
-    'assets/frontend/bower_components/fancybox/source/jquery.fancybox.pack.js'
-    'assets/frontend/bower_components/fancybox/source/helpers/jquery.fancybox-buttons.js'
-    'assets/frontend/bower_components/fancybox/source/helpers/jquery.fancybox-media.js'
-    'assets/frontend/bower_components/fancybox/source/helpers/jquery.fancybox-thumbs.js'
-    'assets/frontend/bower_components/multiple-select/jquery.multiple.select.js'
-    'assets/frontend/bower_components/magnific-popup/dist/jquery.magnific-popup.min.js'
-    'assets/frontend/bower_components/moment/min/moment.min.js'
-    'assets/frontend/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
-    'assets/frontend/bower_components/owlcarousel/owl-carousel/owl.carousel.js'
-    'assets/frontend/bower_components/select2/dist/js/select2.js'
-    'assets/frontend/bower_components/jquery-countTo/jquery.countTo.js'
-    'assets/frontend/bower_components/rater/rater.js'
-    'assets/frontend/bower_components/bootstrap-switch/dist/js/bootstrap-switch.min.js'
-    'assets/frontend/js/includes/*.js'
-    'assets/frontend/js/*.js'
-    'assets/frontend/js/modules/*/*' %}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    {#{% javascripts output='js/compiled/all.js'#}
+    {#'bundles/bmatznerjquery/js/jquery.min.js'#}
+    {#'bundles/bmatznerjqueryui/js/minified/jquery-ui.min.js'#}
+    {#'@MopaBootstrapBundle/Resources/public/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js'#}
+    {#'@MopaBootstrapBundle/Resources/public/bootstrap-sass/assets/javascripts/bootstrap/*.js'#}
+    {#'@MopaBootstrapBundle/Resources/public/js/mopabootstrap-collection.js'#}
+    {#'@MopaBootstrapBundle/Resources/public/js/mopabootstrap-subnav.js'#}
+    {#'assets/frontend/bower_components/bootstrap-star-rating/js/star-rating.min.js'#}
+    {#'assets/frontend/bower_components/fancybox/lib/jquery.mousewheel-3.0.6.pack.js'#}
+    {#'assets/frontend/bower_components/fancybox/source/jquery.fancybox.pack.js'#}
+    {#'assets/frontend/bower_components/fancybox/source/helpers/jquery.fancybox-buttons.js'#}
+    {#'assets/frontend/bower_components/fancybox/source/helpers/jquery.fancybox-media.js'#}
+    {#'assets/frontend/bower_components/fancybox/source/helpers/jquery.fancybox-thumbs.js'#}
+    {#'assets/frontend/bower_components/multiple-select/jquery.multiple.select.js'#}
+    {#'assets/frontend/bower_components/magnific-popup/dist/jquery.magnific-popup.min.js'#}
+    {#'assets/frontend/bower_components/moment/min/moment.min.js'#}
+    {#'assets/frontend/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'#}
+    {#'assets/frontend/bower_components/owlcarousel/owl-carousel/owl.carousel.js'#}
+    {#'assets/frontend/bower_components/select2/dist/js/select2.js'#}
+    {#'assets/frontend/bower_components/jquery-countTo/jquery.countTo.js'#}
+    {#'assets/frontend/bower_components/rater/rater.js'#}
+    {#'assets/frontend/bower_components/bootstrap-switch/dist/js/bootstrap-switch.min.js'#}
+    {#'assets/frontend/js/includes/*.js'#}
+    {#'assets/frontend/js/*.js'#}
+    {#'assets/frontend/js/modules/*/*' %}#}
+    {#<script type="text/javascript" src="{{ asset_url }}"></script>#}
+    {#{% endjavascripts %}#}
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 {% endblock foot_script_assetic %}
