@@ -16,13 +16,23 @@ var shopRootPath = rootPath + 'frontend/compiled/';
 var vendorPath = argv.vendorPath || '';
 var vendorUiPath = '' === vendorPath ? '../../../vendor/sylius/ui-bundle/' : vendorPath + 'sylius/ui-bundle/';
 var nodeModulesPath = argv.nodeModulesPath;
+var bundlesPath = rootPath + '../bundles/';
 
 var paths = {
     shop: {
         js: [
             nodeModulesPath + 'jquery/dist/jquery.min.js',
-            nodeModulesPath + 'semantic-ui-css/semantic.min.js',
-            vendorUiPath + 'Resources/private/js/**',
+            bundlesPath + 'bmatznerjqueryui/js/minified/jquery-ui.min.js',
+            nodeModulesPath + 'bootstrap-star-rating/js/star-rating.min.js',
+            nodeModulesPath + 'fancybox/dist/js/jquery.fancybox.pack.js',
+            nodeModulesPath + 'fancybox/dist/helpers/jquery.fancybox-buttons.js',
+            nodeModulesPath + 'fancybox/dist/helpers/jquery.fancybox-media.js',
+            nodeModulesPath + 'fancybox/dist/helpers/jquery.fancybox-thumbs.js',
+            nodeModulesPath + 'multiple-select/multiple.select.js',
+            nodeModulesPath + 'owlcarousel/dist/owl.carousel.js',
+            nodeModulesPath + 'select2/dist/js/select2.js',
+            nodeModulesPath + 'jquery-countTo/build/jquery.countTo.js',
+            nodeModulesPath + 'rater/index.js',
             'js/**'
         ],
         sass: [
@@ -30,8 +40,8 @@ var paths = {
             'sass/**'
         ],
         css: [
-            nodeModulesPath + 'font-awesome/css/font-awesome.min.css',
             'css/magnific-popup.css',
+            bundlesPath + 'bmatznerfontawesome/css/font-awesome.css',
             nodeModulesPath + 'jquery-ui/themes/base/all.css',
             nodeModulesPath + 'bootstrap-star-rating/css/star-rating.min.css',
             nodeModulesPath + 'fancybox/dist/css/jquery.fancybox.css',
@@ -45,6 +55,9 @@ var paths = {
         img: [
             vendorUiPath + 'Resources/private/img/**',
             'img/**'
+        ],
+        font: [
+            bundlesPath + 'bmatznerfontawesome/fonts/**'
         ]
     }
 };
@@ -87,6 +100,13 @@ gulp.task('shop-img', function() {
     ;
 });
 
+gulp.task('shop-font', function() {
+  return gulp.src(paths.shop.font)
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest(shopRootPath + 'fonts/'))
+    ;
+});
+
 gulp.task('shop-watch', function() {
     livereload.listen();
 
@@ -94,7 +114,8 @@ gulp.task('shop-watch', function() {
     gulp.watch(paths.shop.sass, ['shop-css']);
     gulp.watch(paths.shop.css, ['shop-css']);
     gulp.watch(paths.shop.img, ['shop-img']);
+    gulp.watch(paths.shop.font, ['shop-font']);
 });
 
-gulp.task('default', ['shop-js', 'shop-css', 'shop-img']);
+gulp.task('default', ['shop-js', 'shop-css', 'shop-img', 'shop-font']);
 gulp.task('watch', ['default', 'shop-watch']);

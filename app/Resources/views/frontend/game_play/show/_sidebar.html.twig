@@ -18,7 +18,7 @@
                         <ul>
                             {% for player in game_play.players %}
                                 {% set user = player.customer ? player.customer.user : null %}
-                                {% set avatarPath = user ? avatar(user) : '/assets/img/avatar_2x.png' %}
+                                {% set avatarPath = user ? avatar(user) : '/assets/frontend/img/avatar_2x.png' %}
                                 <li>
 
                                     <!-- Item image -->

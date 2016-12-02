@@ -7,7 +7,7 @@
 <div class="foot-recent-img">
     {% endif %}
     {% set key = key + 1 %}
-    <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}"><img src="{{ product.mainImage ? product.mainImage.webPath | imagine_filter('thumbnail') : 'assets/img/avatar_2x.png' | imagine_filter('thumbnail') }}" alt=""
+    <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}"><img src="{{ product.mainImage ? product.mainImage.webPath | imagine_filter('thumbnail') : 'assets/frontend/img/avatar_2x.png' | imagine_filter('thumbnail') }}" alt=""
                                                              class="img-responsive img-round"/></a>
     {% endfor %}
 </div>

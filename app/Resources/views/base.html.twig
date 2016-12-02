@@ -197,6 +197,7 @@
     {#'assets/frontend/js/modules/*/*' %}#}
     {#<script type="text/javascript" src="{{ asset_url }}"></script>#}
     {#{% endjavascripts %}#}
+    <script src="{{ asset('assets/frontend/compiled/js/app.js') }}"></script>
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 {% endblock foot_script_assetic %}

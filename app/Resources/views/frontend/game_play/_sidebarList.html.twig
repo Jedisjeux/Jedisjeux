@@ -3,7 +3,7 @@
 <ul>
     {% for game_play in game_plays %}
         {% set user = game_play.author.user %}
-        {% set imagePath = game_play.product.mainImage ? game_play.product.mainImage.webPath : 'assets/img/avatar_2x.png' %}
+        {% set imagePath = game_play.product.mainImage ? game_play.product.mainImage.webPath : 'assets/frontend/img/avatar_2x.png' %}
 
         {% set meta %}
             <!-- Date -->
