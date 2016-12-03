@@ -14,7 +14,7 @@ namespace spec\AppBundle\EventSubscriber;
 use AppBundle\Emails;
 use AppBundle\EventSubscriber\SendRegistrationEmailSubscriber;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Mailer\Sender\Sender;
+use Sylius\Component\Mailer\Sender\SenderInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -24,7 +24,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class SendRegistrationEmailSubscriberSpec extends ObjectBehavior
 {
-    function let(Sender $sender)
+    function let(SenderInterface $sender)
     {
         $this->beConstructedWith($sender);
     }

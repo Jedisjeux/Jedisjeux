@@ -5,7 +5,7 @@ namespace spec\AppBundle\Entity;
 use AppBundle\Entity\Post;
 use AppBundle\Entity\Topic;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 class PostSpec extends ObjectBehavior
