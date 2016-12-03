@@ -62,13 +62,13 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        #- { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/admin/, role: ROLE_ADMIN }
         #seul les membres du bureau ont accès à la partie compta
         - { path: ^/compta/, role: ROLE_OFFICE }
         # create new entity
-        #- { path: /new$, role: ROLE_USER }
+        - { path: /new$, role: ROLE_USER }
         # update existing entity
-        #- { path: /edit$, role: ROLE_USER }
+        - { path: /edit$, role: ROLE_USER }
         # rate a product
         - { path: ^/api/products/\d+/ratings/, role: ROLE_USER}
         #like it
