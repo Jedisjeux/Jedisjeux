@@ -170,33 +170,6 @@
 <!-- Javascript files -->
 
 {% block foot_script_assetic %}
-    {#{% javascripts output='js/compiled/all.js'#}
-    {#'bundles/bmatznerjquery/js/jquery.min.js'#}
-    {#'bundles/bmatznerjqueryui/js/minified/jquery-ui.min.js'#}
-    {#'@MopaBootstrapBundle/Resources/public/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js'#}
-    {#'@MopaBootstrapBundle/Resources/public/bootstrap-sass/assets/javascripts/bootstrap/*.js'#}
-    {#'@MopaBootstrapBundle/Resources/public/js/mopabootstrap-collection.js'#}
-    {#'@MopaBootstrapBundle/Resources/public/js/mopabootstrap-subnav.js'#}
-    {#'assets/frontend/bower_components/bootstrap-star-rating/js/star-rating.min.js'#}
-    {#'assets/frontend/bower_components/fancybox/lib/jquery.mousewheel-3.0.6.pack.js'#}
-    {#'assets/frontend/bower_components/fancybox/source/jquery.fancybox.pack.js'#}
-    {#'assets/frontend/bower_components/fancybox/source/helpers/jquery.fancybox-buttons.js'#}
-    {#'assets/frontend/bower_components/fancybox/source/helpers/jquery.fancybox-media.js'#}
-    {#'assets/frontend/bower_components/fancybox/source/helpers/jquery.fancybox-thumbs.js'#}
-    {#'assets/frontend/bower_components/multiple-select/jquery.multiple.select.js'#}
-    {#'assets/frontend/bower_components/magnific-popup/dist/jquery.magnific-popup.min.js'#}
-    {#'assets/frontend/bower_components/moment/min/moment.min.js'#}
-    {#'assets/frontend/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'#}
-    {#'assets/frontend/bower_components/owlcarousel/owl-carousel/owl.carousel.js'#}
-    {#'assets/frontend/bower_components/select2/dist/js/select2.js'#}
-    {#'assets/frontend/bower_components/jquery-countTo/jquery.countTo.js'#}
-    {#'assets/frontend/bower_components/rater/rater.js'#}
-    {#'assets/frontend/bower_components/bootstrap-switch/dist/js/bootstrap-switch.min.js'#}
-    {#'assets/frontend/js/includes/*.js'#}
-    {#'assets/frontend/js/*.js'#}
-    {#'assets/frontend/js/modules/*/*' %}#}
-    {#<script type="text/javascript" src="{{ asset_url }}"></script>#}
-    {#{% endjavascripts %}#}
     <script src="{{ asset('assets/frontend/compiled/js/app.js') }}"></script>
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
