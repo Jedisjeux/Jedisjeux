@@ -5,7 +5,6 @@ jdj_data:
         - /vendor
         - ~/.ssh/id_rsa:/root/.ssh/id_rsa:ro
         - ~/.composer:/root/.composer
-        - /tmpfs
 
 jdj_nginx:
     image: nginx
