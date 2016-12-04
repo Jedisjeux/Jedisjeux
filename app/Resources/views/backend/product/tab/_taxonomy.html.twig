@@ -1,4 +1,5 @@
-<div class="tab-pane" id="categorization">
+<div class="ui tab" data-tab="taxonomy">
+    <h3 class="ui dividing header">{{ 'sylius.ui.taxonomy'|trans }}</h3>
     {{ form_row(form.mainTaxon, { 'attr': { 'class': 'multiple-select' } } ) }}
     {{ form_row(form.mechanisms, { 'attr': { 'class': 'multiple-select' } } ) }}
     {{ form_row(form.themes, { 'attr': { 'class': 'multiple-select' } } ) }}
