@@ -2,9 +2,16 @@ sylius_admin_product:
     resource: |
         alias: sylius.product
         section: admin
-        templates: :backend/product
+        templates: :backend/crud
         only: [update, delete]
         redirect: index
+        vars:
+            all:
+                subheader: sylius.ui.manage_products
+                templates:
+                    form: backend/product/_form.html.twig
+            index:
+                icon: cube
     type: sylius.resource
 
 sylius_admin_product_create:
@@ -16,7 +23,10 @@ sylius_admin_product_create:
             redirect: sylius_admin_product_update
             factory:
                 method: createWithVariant
-            template: backend/product/create.html.twig
+            template: backend/crud/create.html.twig
+            vars:
+                templates:
+                    form: backend/product/_form.html.twig
 
 sylius_admin_product_update_state:
     methods: [PATCH]

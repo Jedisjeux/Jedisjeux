@@ -1,12 +1,12 @@
-<div class="nav-tabs-two">
-    {% include 'backend/product/form/_tabs.html.twig' %}
-    <div class="tab-content">
-        {% include 'backend/product/form/_main.html.twig' %}
-        {% include 'backend/product/form/_attributes.html.twig' %}
-        {% include 'backend/product/form/_categorization.html.twig' %}
-        {% include 'backend/product/form/_people.html.twig' %}
-        {% include 'backend/product/form/_images.html.twig' %}
+{{ form_errors(form) }}
+
+<div class="ui stackable grid">
+    <div class="three wide column">
+        {% include 'backend/product/_menu.html.twig' %}
+    </div>
+    <div class="thirteen wide column">
+        <div class="ui segment">
+            {% include 'backend/product/_tabs.html.twig' %}
+        </div>
     </div>
 </div>
-
-{{ form_row(form._token) }}
