@@ -29,9 +29,6 @@ class BlockquoteBlockType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options = [])
     {
         $builder
-            ->add('name', null, [
-                'label' => 'label.internal_name'
-            ])
             ->add('body', CKEditorType::class, [
                 'label' => 'label.body',
             ])

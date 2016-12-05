@@ -1,4 +1,8 @@
 app:
+  article:
+     create: L'article a bien été créé.
+     update: L'article a bien été mis à jour.
+     delete: L'article a bien été supprimé.
   post:
     create: Le message a bien été créé.
     update: Le message a bien été mis à jour.

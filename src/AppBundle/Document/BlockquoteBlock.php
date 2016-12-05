@@ -22,6 +22,14 @@ use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\StringBlock;
  */
 class BlockquoteBlock extends StringBlock implements ResourceInterface
 {
+    /**
+     * BlockquoteBlock constructor.
+     */
+    public function __construct()
+    {
+        $this->name = uniqid('block_');
+    }
+
     public function getType()
     {
         return 'app.block.blockquote';

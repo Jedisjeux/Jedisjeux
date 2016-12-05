@@ -13,6 +13,7 @@ namespace AppBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -27,10 +28,7 @@ class ImagineBlockType extends AbstractResourceType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('name', null, [
-                'label' => 'label.internal_name'
-            ])
-           ->add('image', 'cmf_media_image', [
+            ->add('image', 'cmf_media_image', [
                 'label' => 'label.image',
                 'attr' => ['class' => 'imagine-thumbnail'],
                 'required' => false
@@ -42,29 +40,19 @@ class ImagineBlockType extends AbstractResourceType
             ->add('linkUrl', null, [
                 'label' => 'label.link_url',
                 'required' => false
-            ])
-            ->add('publishable', null, [
-                'label' => 'label.publishable',
-                'required' => false,
-            ])
-            ->add('publishStartDate', 'datetime', [
-                'label' => 'label.publish_start_date',
-                'widget' => 'single_text',
-                'html5' => false,
-                'required' => false,
-                'attr' => [
-                    'class' => 'datetime',
-                ]
-            ])
-            ->add('publishEndDate', 'datetime', [
-                'label' => 'label.publish_end_date',
-                'widget' => 'single_text',
-                'html5' => false,
-                'required' => false,
-                'attr' => [
-                    'class' => 'datetime',
-                ]
             ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'data_class' => $this->dataClass,
+            'validation_groups' => $this->validationGroups,
+            'cascade_validation' => true,
+        ]);
     }
 
     public function getName()

@@ -48,6 +48,14 @@ class SingleImageBlock extends SlideshowBlock implements ResourceInterface
     protected $imagePosition;
 
     /**
+     * SingleImageBlock constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct(uniqid('block_'));
+    }
+
+    /**
      * @return string
      */
     public function getImagePosition()
@@ -108,6 +116,34 @@ class SingleImageBlock extends SlideshowBlock implements ResourceInterface
     public function setClass($class)
     {
         $this->class = $class;
+
+        return $this;
+    }
+
+    /**
+     * @return null|ImagineBlock
+     */
+    public function getImagineBlock()
+    {
+        return $this->children->first() ?: null;
+    }
+
+    /**
+     * @param ImagineBlock|null $imagineBlock
+     *
+     * @return $this
+     */
+    public function setImagineBlock(ImagineBlock $imagineBlock = null)
+    {
+        foreach ($this->children as $child) {
+            $this->removeChild($child);
+        }
+
+        if (null === $imagineBlock) {
+            return $this;
+        }
+
+        $this->addChild($imagineBlock);
 
         return $this;
     }

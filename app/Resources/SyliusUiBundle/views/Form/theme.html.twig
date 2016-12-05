@@ -141,7 +141,7 @@
     {% endspaceless %}
 {% endmacro %}
 
-{% block infinite_form_polycollection_row %}
+{% block infinite_form_polycollection_row -%}
     {% set polycollectionForm = form %}
 
     {% set form = prototypes.blockquote %}
@@ -176,4 +176,4 @@
         </div>
     </div>
 
-{% endblock %}
+{%- endblock %}

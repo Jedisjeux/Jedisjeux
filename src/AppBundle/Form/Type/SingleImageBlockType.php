@@ -32,9 +32,6 @@ class SingleImageBlockType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options = array())
     {
         $builder
-            ->add('name', null, array(
-                'label' => 'label.internal_name'
-            ))
             ->add('title', null, array(
                 'label' => 'label.title'
             ))
@@ -55,12 +52,8 @@ class SingleImageBlockType extends AbstractResourceType
                 'label' => 'label.css_class',
                 'required' => false,
             ))
-            ->add('children', CollectionType::class, [
-                'type' => 'app_imagine_block',
-                'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-                'cascade_validation' => true,
+            ->add('imagineBlock', 'app_imagine_block', [
+                'label' => 'sylius.ui.image',
             ])
             ->add('_type', HiddenType::class, [
                 'data' => 'single_image',
