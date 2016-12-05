@@ -126,19 +126,34 @@
     {% endspaceless %}
 {% endmacro %}
 
+{% macro polycollection_item(form, allow_delete, button_delete_label, index) %}
+    {% spaceless %}
+        <div data-form-polycollection="item" data-form-polycollection-index="{{ index }}">
+            {{ form_widget(form) }}
+            {% if allow_delete %}
+                <a href="#" data-form-polycollection="delete" class="ui red labeled icon button"
+                   style="margin-bottom: 1em;">
+                    <i class="trash icon"></i>
+                    {{ button_delete_label|trans }}
+                </a>
+            {% endif %}
+        </div>
+    {% endspaceless %}
+{% endmacro %}
+
 {% block infinite_form_polycollection_row %}
-    {% set collectionForm = form %}
+    {% set polycollectionForm = form %}
 
     {% set form = prototypes.blockquote %}
-    <div data-form-type="collection" {{ block('widget_container_attributes') }}
-         data-prototype="{{ _self.collection_item(form, allow_delete, button_delete_label|default('sylius.ui.delete')) | escape }}">
+    <div data-form-type="polycollection" data-form-polycollection="add" href="#" {{ block('widget_container_attributes') }}>
 
-        <div data-form-collection="list">
-            {% for child in collectionForm %}
-                {{ _self.collection_item(child, allow_delete, button_delete_label|default('sylius.ui.delete'), loop.index0) }}
+        <div data-form-polycollection="list">
+            {% for child in polycollectionForm %}
+                {{ _self.polycollection_item(child, allow_delete, button_delete_label|default('sylius.ui.delete'), loop.index0) }}
             {% endfor %}
         </div>
-        <div class="collection">
+
+        <div class="polycollection">
             <div class="ui labeled icon bottom right floating dropdown button primary link">
                 <i class="plus icon"></i>
                 <span class="text">{{ 'app.ui.new_block'|trans }}</span>
@@ -149,9 +164,11 @@
                     </div>
                     <div class="divider"></div>
                     {% set form = prototypes.blockquote %}
-                    <a class="item" data-form-collection="add" href="#">{{ 'app.ui.introduction'|trans }}</a>
+                    <a class="item" data-form-polycollection="add" href="#" data-prototype="{{ _self.polycollection_item(form, allow_delete, button_delete_label|default('sylius.ui.delete')) | escape }}">
+                        {{ 'app.ui.introduction'|trans }}
+                    </a>
                     {% set form = prototypes.single_image %}
-                    <a class="item" data-form-collection="add" href="#">{{ 'app.ui.image_on_the_left_side'|trans }}</a>
+                    <a class="item" data-form-polycollection="add" href="#" data-prototype="{{ _self.polycollection_item(form, allow_delete, button_delete_label|default('sylius.ui.delete')) | escape }}">{{ 'app.ui.image_on_the_left_side'|trans }}</a>
                     <a class="item" href="#">{{ 'app.ui.image_on_the_right_side'|trans }}</a>
                     {#{% render(url('sylius_admin_get_attribute_types')) %}#}
                 </div>
