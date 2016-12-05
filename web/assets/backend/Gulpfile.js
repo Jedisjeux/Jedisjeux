@@ -16,13 +16,16 @@ var adminRootPath = rootPath + 'backend/compiled/';
 var vendorPath = argv.vendorPath || '';
 var vendorUiPath = '' === vendorPath ? '../../../vendor/sylius/ui-bundle/' : vendorPath + 'sylius/ui-bundle/';
 var nodeModulesPath = argv.nodeModulesPath;
+var bowerComponentsPath = rootPath + 'backend/bower_components/';
 
 var paths = {
     admin: {
         js: [
             nodeModulesPath + 'jquery/dist/jquery.min.js',
             nodeModulesPath + 'semantic-ui-css/semantic.min.js',
+            nodeModulesPath + 'select2/dist/js/select2.full.js',
             vendorUiPath + 'Resources/private/js/**',
+            bowerComponentsPath + 'select2/dist/js/select2.js',
             'js/**'
         ],
         sass: [
@@ -31,6 +34,8 @@ var paths = {
         ],
         css: [
             nodeModulesPath + 'semantic-ui-css/semantic.min.css',
+            nodeModulesPath + 'select2/dist/css/select2.min.css',
+            bowerComponentsPath + 'select2/dist/css/select2.css',
             vendorUiPath + 'Resources/private/css/**',
             'css/**'
         ],

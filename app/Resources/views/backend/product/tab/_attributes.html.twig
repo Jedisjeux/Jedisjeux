@@ -1,34 +1,23 @@
 <div class="ui tab" data-tab="attributes">
     <h3 class="ui dividing header">{{ 'sylius.ui.attributes'|trans }}</h3>
 
-    {{ form_row(form.firstVariant.releasedAtPrecision) }}
-    {{ form_row(form.firstVariant.releasedAt) }}
     {{ form_row(form.ageMin) }}
-    <div class="row">
-        <label class="control-label col-sm-3">{{ 'label.player_count' | trans }}</label>
-        <div class="col-sm-9">
-            <div class="row">
-                <div class="col-sm-6">
-                    {{ form_row(form.joueurMin) }}
-                </div>
-                <div class="col-sm-6">
-                    {{ form_row(form.joueurMax) }}
-                </div>
-            </div>
-        </div>
+
+    <h4 class="ui dividing header">{{ 'label.release_date'|trans }}</h4>
+    <div class="two fields">
+        {{ form_row(form.firstVariant.releasedAtPrecision) }}
+        {{ form_row(form.firstVariant.releasedAt) }}
     </div>
-    <div class="row">
-        <label class="control-label col-sm-3">{{ 'label.duration' | trans }}</label>
-        <div class="col-sm-9">
-            <div class="row">
-                <div class="col-sm-6">
-                    {{ form_row(form.durationMin) }}
-                </div>
-                <div class="col-sm-6">
-                    {{ form_row(form.durationMax) }}
-                </div>
-            </div>
-        </div>
+
+    <h4 class="ui dividing header">{{ 'label.player_count'|trans }}</h4>
+    <div class="two fields">
+        {{ form_row(form.joueurMin) }}
+        {{ form_row(form.joueurMax) }}
     </div>
-    {{ form_row(form.barcodes) }}
+
+    <h4 class="ui dividing header">{{ 'label.duration'|trans }}</h4>
+    <div class="two fields">
+        {{ form_row(form.durationMin) }}
+        {{ form_row(form.durationMax) }}
+    </div>
 </div>
