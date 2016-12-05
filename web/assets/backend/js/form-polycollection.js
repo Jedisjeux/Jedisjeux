@@ -28,7 +28,7 @@
 
     this.$element.on(
       'click',
-      '[data-form-polycollection="add"]:first',
+      '[data-form-polycollection="add"]',
       $.proxy(this.addItem, this)
     );
 
@@ -61,7 +61,7 @@
       event.preventDefault();
 
       //var prototype = this.$element.data('prototype');
-      var prototype = $(event.target).data('prototype');
+      var prototype = $(event.currentTarget).data('prototype');
 
       prototype = prototype.replace(
         /__name__/g,
