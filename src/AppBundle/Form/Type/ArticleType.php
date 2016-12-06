@@ -15,7 +15,6 @@ use AppBundle\Entity\Article;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -46,18 +45,6 @@ class ArticleType extends AbstractResourceType
                 'mapped' => false,
                 'required' => false,
             ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults([
-            'data_class' => $this->dataClass,
-            'validation_groups' => $this->validationGroups,
-            'cascade_validation' => true,
-        ]);
     }
 
     /**

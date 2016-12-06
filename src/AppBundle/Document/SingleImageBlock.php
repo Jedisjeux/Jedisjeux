@@ -143,6 +143,7 @@ class SingleImageBlock extends SlideshowBlock implements ResourceInterface
             return $this;
         }
 
+        $imagineBlock->setParentDocument($this);
         $this->addChild($imagineBlock);
 
         return $this;
