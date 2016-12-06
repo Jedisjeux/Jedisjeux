@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class LeftImageBlockType extends SingleImageBlockType
+class RightImageBlockType extends SingleImageBlockType
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class LeftImageBlockType extends SingleImageBlockType
 
         $builder
             ->add('imagePosition', HiddenType::class, array(
-                'data' => SingleImageBlock::POSITION_LEFT,
+                'data' => SingleImageBlock::POSITION_RIGHT,
             ))
             ->remove('class')
             ->add('_type', HiddenType::class, [
-                'data' => 'single_image_left',
-                'label' => 'app.ui.image_on_the_left_side',
+                'data' => 'single_image_right',
+                'label' => 'app.ui.image_on_the_right_side',
                 'mapped' => false,
             ]);
     }
@@ -45,7 +45,7 @@ class LeftImageBlockType extends SingleImageBlockType
      */
     public function getBlockPrefix()
     {
-        return 'single_image_left_block';
+        return 'single_image_right_block';
     }
 
     /**
@@ -53,6 +53,6 @@ class LeftImageBlockType extends SingleImageBlockType
      */
     public function getName()
     {
-        return 'app_single_image_block_left';
+        return 'app_single_image_block_right';
     }
 }

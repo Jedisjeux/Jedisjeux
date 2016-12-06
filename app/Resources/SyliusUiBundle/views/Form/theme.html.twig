@@ -144,7 +144,6 @@
 {% block infinite_form_polycollection_row -%}
     {% set polycollectionForm = form %}
 
-    {% set form = prototypes.blockquote %}
     <div data-form-type="polycollection" data-form-polycollection="add" href="#" {{ block('widget_container_attributes') }}>
 
         <div data-form-polycollection="list">
@@ -163,17 +162,41 @@
                         {{ 'sylius.ui.type'|trans }}
                     </div>
                     <div class="divider"></div>
-                    {% set form = prototypes.blockquote %}
-                    <a class="item" data-form-polycollection="add" href="#" data-prototype="{{ _self.polycollection_item(form, allow_delete, button_delete_label|default('sylius.ui.delete')) | escape }}">
-                        {{ 'app.ui.introduction'|trans }}
-                    </a>
-                    {% set form = prototypes.single_image %}
-                    <a class="item" data-form-polycollection="add" href="#" data-prototype="{{ _self.polycollection_item(form, allow_delete, button_delete_label|default('sylius.ui.delete')) | escape }}">{{ 'app.ui.image_on_the_left_side'|trans }}</a>
-                    <a class="item" href="#">{{ 'app.ui.image_on_the_right_side'|trans }}</a>
-                    {#{% render(url('sylius_admin_get_attribute_types')) %}#}
+                    {% for key, prototype in prototypes %}
+                        {% set form = prototype %}
+                        <a class="item" data-form-polycollection="add" href="#" data-prototype="{{ _self.polycollection_item(form, allow_delete, button_delete_label|default('sylius.ui.delete')) | escape }}">
+                            {{ form._type.vars.label|trans }}
+                        </a>
+                    {% endfor %}
                 </div>
             </div>
         </div>
     </div>
 
+{%- endblock %}
+
+{% block single_image_left_block_widget -%}
+    <div class="ui stackable grid">
+        <div class="six wide column">
+            {{ form_row(form.imagineBlock.image) }}
+            {{ form_row(form.imagineBlock.label) }}
+        </div>
+        <div class="ten wide column">
+            {{ form_row(form.title) }}
+            {{ form_row(form.body) }}
+        </div>
+    </div>
+{%- endblock %}
+
+{% block single_image_right_block_widget -%}
+    <div class="ui stackable grid">
+        <div class="ten wide column">
+            {{ form_row(form.title) }}
+            {{ form_row(form.body) }}
+        </div>
+        <div class="six wide column">
+            {{ form_row(form.imagineBlock.image) }}
+            {{ form_row(form.imagineBlock.label) }}
+        </div>
+    </div>
 {%- endblock %}

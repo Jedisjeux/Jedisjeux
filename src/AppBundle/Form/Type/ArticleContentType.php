@@ -39,8 +39,9 @@ class ArticleContentType extends AbstractResourceType
             ])
             ->add('children', PolyCollectionType::class, [
                 'types' => [
-                    'app_single_image_block',
                     'app_blockquote_block',
+                    'app_single_image_block_left',
+                    'app_single_image_block_right',
                 ],
                 'allow_add' => true,
                 'allow_delete' => true,

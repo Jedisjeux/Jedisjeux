@@ -95,6 +95,8 @@ sylius_resource:
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
                 form:
                     default: AppBundle\Form\Type\SingleImageBlockType
+                    left: AppBundle\Form\Type\SingleImageBlock\LeftImageBlockType
+                    right: AppBundle\Form\Type\SingleImageBlock\RightImageBlockType
         app.string_block:
             driver: doctrine/phpcr-odm
             classes:
