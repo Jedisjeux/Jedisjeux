@@ -7,6 +7,7 @@ app:
         avatar: Avatar
         barcode: Code-barres
         barcodes: Code-barres
+        blocks: Blocs
         box: Encart
         catalog: Catalogue
         contact_request: Demande de contact
@@ -36,7 +37,6 @@ app:
         manage_topics: Gérer les sujets
         name: Nom
         new_article: Nouvel article
-        new_block: Nouveau bloc
         new_dealer: Nouveau vendeur
         new_person: Nouvelle personne
         new_string_block: Nouveau bloc de chaîne
