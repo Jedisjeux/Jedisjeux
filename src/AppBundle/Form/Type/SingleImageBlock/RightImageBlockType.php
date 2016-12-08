@@ -53,6 +53,6 @@ class RightImageBlockType extends SingleImageBlockType
      */
     public function getName()
     {
-        return 'app_single_image_block_right';
+        return 'app_right_image_block';
     }
 }

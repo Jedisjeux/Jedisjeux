@@ -65,6 +65,14 @@ sylius_resource:
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
                 form:
                     default: AppBundle\Form\Type\ImagineBlockType
+        app.left_image_block:
+            driver: doctrine/phpcr-odm
+            classes:
+                model: AppBundle\Document\LeftImageBlock
+                factory: AppBundle\Factory\SingleImageBlockFactory
+                repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
+                form:
+                    default: AppBundle\Form\Type\SingleImageBlock\LeftImageBlockType
         app.person:
             classes:
                 model: AppBundle\Entity\Person
@@ -87,6 +95,14 @@ sylius_resource:
                 model: AppBundle\Entity\PubBanner
                 form:
                     default: AppBundle\Form\Type\PubBannerType
+        app.right_image_block:
+            driver: doctrine/phpcr-odm
+            classes:
+                model: AppBundle\Document\RightImageBlock
+                factory: AppBundle\Factory\SingleImageBlockFactory
+                repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
+                form:
+                    default: AppBundle\Form\Type\SingleImageBlock\RightImageBlockType
         app.single_image_block:
             driver: doctrine/phpcr-odm
             classes:
@@ -95,8 +111,6 @@ sylius_resource:
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
                 form:
                     default: AppBundle\Form\Type\SingleImageBlockType
-                    left: AppBundle\Form\Type\SingleImageBlock\LeftImageBlockType
-                    right: AppBundle\Form\Type\SingleImageBlock\RightImageBlockType
         app.string_block:
             driver: doctrine/phpcr-odm
             classes:

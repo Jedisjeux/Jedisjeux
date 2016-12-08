@@ -186,6 +186,8 @@
             {{ form_row(form.body) }}
         </div>
     </div>
+
+    {{ form_row(form._type) }}
 {%- endblock %}
 
 {% block single_image_right_block_widget -%}
@@ -199,4 +201,6 @@
             {{ form_row(form.imagineBlock.label) }}
         </div>
     </div>
+
+    {{ form_row(form._type) }}
 {%- endblock %}
