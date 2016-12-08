@@ -11,8 +11,12 @@
 
 namespace AppBundle\Document;
 
+use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
+
 /**
  * @author Loïc Frémont <loic@mobizel.com>
+ *
+ * @PHPCR\Document(referenceable=true)
  */
 class LeftImageBlock extends SingleImageBlock
 {
