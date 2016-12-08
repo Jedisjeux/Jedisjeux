@@ -29,9 +29,7 @@ class RightImageBlockType extends SingleImageBlockType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('imagePosition', HiddenType::class, array(
-                'data' => SingleImageBlock::POSITION_RIGHT,
-            ))
+            ->remove('imagePosition')
             ->remove('class')
             ->add('_type', HiddenType::class, [
                 'data' => 'single_image_right',

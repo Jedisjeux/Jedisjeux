@@ -29,9 +29,7 @@ class LeftImageBlockType extends SingleImageBlockType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('imagePosition', HiddenType::class, array(
-                'data' => SingleImageBlock::POSITION_LEFT,
-            ))
+            ->remove('imagePosition')
             ->remove('class')
             ->add('_type', HiddenType::class, [
                 'data' => 'single_image_left',
