@@ -42,6 +42,8 @@ class ArticleContentType extends AbstractResourceType
                     'app_blockquote_block',
                     'app_left_image_block',
                     'app_right_image_block',
+                    'app_top_image_block',
+                    'app_well_image_block',
                 ],
                 'allow_add' => true,
                 'allow_delete' => true,

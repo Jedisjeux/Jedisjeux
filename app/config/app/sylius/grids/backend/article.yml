@@ -6,7 +6,7 @@ sylius_grid:
                 options:
                     class: "%app.model.article.class%"
             sorting:
-                publishStartDate: desc
+                position: desc
             fields:
                 image:
                     type: twig

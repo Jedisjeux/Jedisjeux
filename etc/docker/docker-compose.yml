@@ -3,7 +3,6 @@ jdj_data:
     volumes:
         - ../../:/var/www/jdj
         - /vendor
-        - ~/.ssh/id_rsa:/root/.ssh/id_rsa:ro
         - ~/.composer:/root/.composer
 
 jdj_nginx:

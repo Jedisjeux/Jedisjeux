@@ -144,7 +144,8 @@
 {% block infinite_form_polycollection_row -%}
     {% set polycollectionForm = form %}
 
-    <div data-form-type="polycollection" data-form-polycollection="add" href="#" {{ block('widget_container_attributes') }}>
+    <div data-form-type="polycollection" data-form-polycollection="add"
+         href="#" {{ block('widget_container_attributes') }}>
 
         <div data-form-polycollection="list">
             {% for child in polycollectionForm %}
@@ -164,7 +165,8 @@
                     <div class="divider"></div>
                     {% for key, prototype in prototypes %}
                         {% set form = prototype %}
-                        <a class="item" data-form-polycollection="add" href="#" data-prototype="{{ _self.polycollection_item(form, allow_delete, button_delete_label|default('sylius.ui.delete')) | escape }}">
+                        <a class="item" data-form-polycollection="add" href="#"
+                           data-prototype="{{ _self.polycollection_item(form, allow_delete, button_delete_label|default('sylius.ui.delete')) | escape }}">
                             {{ form._type.vars.label|trans }}
                         </a>
                     {% endfor %}
@@ -201,6 +203,24 @@
             {{ form_row(form.imagineBlock.label) }}
         </div>
     </div>
+
+    {{ form_row(form._type) }}
+{%- endblock %}
+
+{% block single_image_top_block_widget -%}
+    {{ form_row(form.title) }}
+    {{ form_row(form.imagineBlock.image) }}
+    {{ form_row(form.imagineBlock.label) }}
+    {{ form_row(form.body) }}
+
+    {{ form_row(form._type) }}
+{%- endblock %}
+
+{% block single_image_well_block_widget -%}
+    {{ form_row(form.title) }}
+    {{ form_row(form.imagineBlock.image) }}
+    {{ form_row(form.imagineBlock.label) }}
+    {{ form_row(form.body) }}
 
     {{ form_row(form._type) }}
 {%- endblock %}

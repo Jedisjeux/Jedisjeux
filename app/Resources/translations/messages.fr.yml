@@ -23,8 +23,10 @@ app:
         edit_string_block: Modifer le bloc de chaîne
         edit_topic: Modifier le sujet
         forum: Forum
+        framed: Encadré
         image_on_the_left_side: Image à gauche
         image_on_the_right_side: Image à droite
+        image_on_the_top_side: Image en haut
         internal_name: Nom interne
         introduction: Introduction
         logout: Déconnection
