@@ -14,6 +14,7 @@ namespace AppBundle\Entity;
 use AppBundle\Document\ArticleContent;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
@@ -33,6 +34,7 @@ use Sylius\Component\Customer\Model\CustomerInterface;
 class Article implements ResourceInterface, ReviewableInterface
 {
     use IdentifiableTrait;
+    use Timestampable;
 
     /**
      * status constants

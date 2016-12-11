@@ -6,7 +6,7 @@ sylius_grid:
                 options:
                     class: "%app.model.article.class%"
             sorting:
-                position: desc
+                createdAt: desc
             fields:
                 image:
                     type: twig
@@ -25,10 +25,10 @@ sylius_grid:
                         template: "backend/grid/field/state.html.twig"
                         vars:
                             labels: "backend/article/label/state"
-                publishStartDate:
+                createdAt:
                     type: twig
-                    label: app.ui.published_at
-                    sortable: publishStartDate
+                    label: app.ui.created_at
+                    sortable: createdAt
                     options:
                         template: "backend/grid/field/date/medium.html.twig"
             filters:

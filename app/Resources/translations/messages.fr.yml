@@ -13,6 +13,7 @@ app:
         contact_request: Demande de contact
         contact_requests: Demandes de contact
         content: Contenu
+        created_at: Créé le
         created_at_female: Créée le
         dealer: Vendeur
         dealers: Vendeurs
