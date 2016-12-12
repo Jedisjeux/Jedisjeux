@@ -26,5 +26,7 @@ app_backend_article_create_for_product_review:
                 arguments: expr:service('sylius.repository.product').find($productId)
             template: backend/crud/create.html.twig
             vars:
+                route:
+                    name: app_backend_article_create_for_product_review
                 templates:
                     form: backend/article/_form.html.twig
