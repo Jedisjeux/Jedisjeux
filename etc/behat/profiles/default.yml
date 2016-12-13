@@ -7,8 +7,9 @@ default:
 
     extensions:
         Behat\MinkExtension:
-            base_url: http://jdj.dev/app_test.php/
-            default_session: firefox
+            base_url: http://jdj.dev:8080/
+            default_session: symfony
+            javascript_session: firefox
             sessions:
                 symfony:
                     symfony2: ~
