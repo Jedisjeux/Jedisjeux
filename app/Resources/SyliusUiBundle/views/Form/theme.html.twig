@@ -180,6 +180,12 @@
 {% block single_image_left_block_widget -%}
     <div class="ui stackable grid">
         <div class="six wide column">
+            {% set image = form.imagineBlock.image %}
+
+            {% if image.vars.data %}
+                <img class="ui fluid image" src="{{ image.vars.data.id | imagine_filter('cmf_block') }}"/>
+            {% endif %}
+
             {{ form_row(form.imagineBlock.image) }}
             {{ form_row(form.imagineBlock.label) }}
         </div>
@@ -199,6 +205,11 @@
             {{ form_row(form.body) }}
         </div>
         <div class="six wide column">
+            {% set image = form.imagineBlock.image %}
+
+            {% if image.vars.data %}
+                <img class="ui fluid image" src="{{ image.vars.data.id | imagine_filter('cmf_block') }}"/>
+            {% endif %}
             {{ form_row(form.imagineBlock.image) }}
             {{ form_row(form.imagineBlock.label) }}
         </div>
@@ -209,6 +220,11 @@
 
 {% block single_image_top_block_widget -%}
     {{ form_row(form.title) }}
+    {% set image = form.imagineBlock.image %}
+
+    {% if image.vars.data %}
+        <img class="ui fluid image" src="{{ image.vars.data.id | imagine_filter('cmf_block') }}"/>
+    {% endif %}
     {{ form_row(form.imagineBlock.image) }}
     {{ form_row(form.imagineBlock.label) }}
     {{ form_row(form.body) }}
@@ -218,6 +234,11 @@
 
 {% block single_image_well_block_widget -%}
     {{ form_row(form.title) }}
+    {% set image = form.imagineBlock.image %}
+
+    {% if image.vars.data %}
+        <img class="ui fluid image" src="{{ image.vars.data.id | imagine_filter('cmf_block') }}"/>
+    {% endif %}
     {{ form_row(form.imagineBlock.image) }}
     {{ form_row(form.imagineBlock.label) }}
     {{ form_row(form.body) }}

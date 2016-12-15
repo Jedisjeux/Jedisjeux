@@ -19,5 +19,5 @@ Feature: Edit people
     And I fill in the following:
       | Prénom | Leo      |
       | Nom    | Colovini |
-    When I press "Mettre à jour"
+    When I press "Enregistrer les modifications"
     Then I should see "a bien été mis à jour"
