@@ -5,6 +5,7 @@ app_backend_article:
         templates: :backend/crud
         redirect: index
         grid: app_backend_article
+        except: ['show']
         vars:
             all:
                 subheader: app.ui.manage_articles
@@ -15,7 +16,7 @@ app_backend_article:
     type: sylius.resource
 
 app_backend_article_create_for_product_review:
-    methods: [GET]
+    methods: [GET, POST]
     path: /articles/products/{productId}/new
     defaults:
         _controller: app.controller.article:createAction
@@ -23,8 +24,13 @@ app_backend_article_create_for_product_review:
             section: backend
             factory:
                 method: createReviewArticleForProduct
-                arguments: expr:service('sylius.repository.product').find($productId)
+                arguments:
+                  - expr:service('sylius.repository.product').find($productId)
             template: backend/crud/create.html.twig
             vars:
+                route:
+                    name: app_backend_article_create_for_product_review
+                    parameters:
+                        productId: $productId
                 templates:
                     form: backend/article/_form.html.twig
