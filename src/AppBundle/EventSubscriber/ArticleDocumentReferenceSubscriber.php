@@ -13,6 +13,7 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use AppBundle\Entity\Article;
+use Doctrine\ORM\Event\PreFlushEventArgs;
 use Doctrine\ORM\Events;
 
 /**
@@ -64,10 +65,10 @@ class ArticleDocumentReferenceSubscriber implements EventSubscriber
             return;
         }
 
+        $manager = $this->managerRegistry->getManagerForClass(get_class($document));
         $id = $document->getId();
 
         if (null === $id) {
-            $manager = $this->managerRegistry->getManagerForClass(get_class($document));
             $manager->persist($document);
             $manager->flush();
             $id = $document->getId();
@@ -81,6 +82,8 @@ class ArticleDocumentReferenceSubscriber implements EventSubscriber
             ->setPublishStartDate($document->getPublishStartDate())
             ->setPublishEndDate($document->getPublishEndDate())
             ->setImagePath($document->getMainImage() ? $document->getMainImage()->getImage()->getId() : null);
+
+        $manager->flush();
     }
 
     /**

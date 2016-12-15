@@ -15,6 +15,8 @@ use AppBundle\Entity\Article;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -45,6 +47,15 @@ class ArticleType extends AbstractResourceType
                 'mapped' => false,
                 'required' => false,
             ]);
+
+        $builder->addEventListener(
+            FormEvents::POST_SUBMIT,
+            function (FormEvent $event) {
+                /** @var Article $article */
+                $article = $event->getData();
+                $article->setUpdatedAt(new \DateTime());
+            }
+        );
     }
 
     /**
