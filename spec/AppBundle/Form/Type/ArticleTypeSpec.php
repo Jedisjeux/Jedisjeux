@@ -18,6 +18,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvents;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -49,6 +50,8 @@ class ArticleTypeSpec extends ObjectBehavior
         $builder->add('document', 'app_article_content', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('status', ChoiceType::class, Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('body', 'ckeditor', Argument::any())->shouldBeCalled()->willReturn($builder);
+        $builder->addEventListener(FormEvents::POST_SUBMIT, Argument::any())->willReturn($builder);
+
         $this->buildForm($builder, []);
     }
 }
