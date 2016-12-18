@@ -27,6 +27,8 @@ use PHPCR\PathNotFoundException;
 use PHPCR\Util\NodeHelper;
 use AppBundle\Command\Installer\CommandExecutor;
 use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\AbstractBlock;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ContainerBlock;
@@ -110,18 +112,38 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
 
         $id = $parent->getId().'/'.$name;
 
+        switch ($data['image_position']) {
+            case SingleImageBlock::POSITION_LEFT:
+                $alias = 'left_image_block';
+                break;
+            case SingleImageBlock::POSITION_RIGHT:
+                $alias = 'right_image_block';
+                break;
+            case SingleImageBlock::POSITION_TOP:
+                $alias = 'top_image_block';
+                break;
+            default:
+                $alias = 'single_image_block';
+                break;
+        }
+
+        /** @var FactoryInterface $factory */
+        $factory = $this->getContainer()->get('app.factory.' . $alias);
+        /** @var RepositoryInterface $repository */
+        $repository = $this->getContainer()->get('app.repository.' . $alias);
+
         try {
-            $block = $this
-                ->getSingleImageBlockRepository()
+            /** @var SingleImageBlock $block */
+            $block = $repository
                 ->find($id);
         } catch(PathNotFoundException $exception) {
-            $block = new SingleImageBlock();
+            $block = $factory->createNew();
             $block
                 ->setParentDocument($parent);
         }
 
         if (null === $block) {
-            $block = new SingleImageBlock();
+            $block = $factory->createNew();
             $block
                 ->setParentDocument($parent);
         }
@@ -135,7 +157,6 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
         $body = preg_replace(NodeProcessor::VALIDATE_STRING, '', $body);
 
         $block
-            ->setImagePosition($data['image_position'])
             ->setTitle($data['title'])
             ->setBody($body)
             ->setName($name)

@@ -60,7 +60,7 @@ create or replace view jdj_v_review_article_view_count as
 Finally execute the Jedisjeux install command :
 
 ```bash
-$ docker exec -it $(docker-compose ps -q php) bash
+$ docker exec -it $(docker-compose ps -q jdj_php) bash
 $ app/console app:install
 ```
 
