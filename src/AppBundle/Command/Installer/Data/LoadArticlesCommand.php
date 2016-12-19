@@ -150,7 +150,7 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
         }
 
         if (null !== $data['mainImage']) {
-            $mainImage = $articleDocument->getMainImage();
+            $mainImage = $this->getContainer()->get('app.factory.imagine_block')->createNew();
 
             if (null === $mainImage) {
                 $mainImage = new ImagineBlock();

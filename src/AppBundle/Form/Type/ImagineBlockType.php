@@ -12,6 +12,7 @@
 namespace AppBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -40,6 +41,11 @@ class ImagineBlockType extends AbstractResourceType
             ->add('linkUrl', null, [
                 'label' => 'label.link_url',
                 'required' => false
+            ])
+            ->add('_type', HiddenType::class, [
+                'data' => 'imagine',
+                'label' => 'app.ui.main_image',
+                'mapped' => false,
             ]);
     }
 

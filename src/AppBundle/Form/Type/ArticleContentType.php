@@ -42,6 +42,7 @@ class ArticleContentType extends AbstractResourceType
             ])*/
             ->add('children', PolyCollectionType::class, [
                 'types' => [
+                    'app_imagine_block',
                     'app_blockquote_block',
                     'app_left_image_block',
                     'app_right_image_block',

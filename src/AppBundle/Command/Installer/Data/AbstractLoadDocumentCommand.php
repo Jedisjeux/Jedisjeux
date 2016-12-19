@@ -11,7 +11,6 @@
 
 namespace AppBundle\Command\Installer\Data;
 
-use AppBundle\Document\ArticleContent;
 use AppBundle\Document\ImagineBlock;
 use AppBundle\Document\SingleImageBlock;
 use AppBundle\Entity\Article;
@@ -30,7 +29,6 @@ use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\AbstractBlock;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ContainerBlock;
 use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
 use Symfony\Component\Console\Input\InputInterface;
@@ -177,7 +175,8 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
         $name = 'image' . $data['id'];
 
         if (false === $block->hasChildren()) {
-            $imagineBlock = new ImagineBlock();
+            /** @var ImagineBlock $imagineBlock */
+            $imagineBlock = $this->getContainer()->get('app.factory.imagine_block')->createNew();
             $block
                 ->addChild($imagineBlock);
         } else {
