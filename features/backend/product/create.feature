@@ -17,7 +17,6 @@ Feature: Creates products
       | parent | name            |
       | themes | Science-fiction |
       | themes | Fantastique     |
-
     And I am logged in as user "admin@example.com" with password "password"
 
   Scenario: Create a product

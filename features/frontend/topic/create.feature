@@ -13,6 +13,7 @@ Feature: Topic creation
       | forum | Forum |
     And I am logged in as user "kevin@example.com" with password "password"
 
+  @javascript
   Scenario: Create new topic
     Given I am on "/topics/"
     And I follow "Nouveau sujet"

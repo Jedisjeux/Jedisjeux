@@ -20,6 +20,7 @@ Feature: Edit Post
       | Zoo Topic | forum/moi-je-dis-jeux | author@example.com |
     And I am logged in as user "kevin@example.com" with password "password"
 
+  @javascript
   Scenario: Update my post
     Given I am on "/topics/"
     And I follow "Lire le sujet"

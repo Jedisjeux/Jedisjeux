@@ -22,5 +22,5 @@ Feature: Edit taxons
     And I follow "Modifier"
     And I fill in the following:
       | Nom | Fantastique |
-    When I press "Enregistrer les modifications"
+    When I press "Mettre à jour"
     Then I should see "a bien été mise à jour"

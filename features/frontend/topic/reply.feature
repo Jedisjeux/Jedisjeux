@@ -20,6 +20,7 @@ Feature: Topic reply
       | Zoo Topic | kevin@example.com | forum/moi-je-dis-jeux |
     And I am logged in as user "kevin@example.com" with password "password"
 
+  @javascript
   Scenario: Reply to a topic
     Given I am on "/topics/"
     And I follow "Lire le sujet"
