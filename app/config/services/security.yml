@@ -1,0 +1,31 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+#    service_name:
+#        class: AppBundle\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+    wsse.security.authentication.provider:
+        class: AppBundle\Security\Authentication\Provider\WsseProvider
+        public: false
+        arguments:
+            - "@user.manager"
+            - %kernel.cache_dir%/security/nonces
+            - "@security.user_checker"
+
+    wsse.security.authentication.listener:
+        class: AppBundle\Security\Firewall\WsseListener
+        public: false
+        arguments:
+            - "@security.token_storage"
+            - "@security.authentication.manager"
+            - "@monolog.logger"
+        tags:
+            - { name: monolog.logger, channel: wsse }
+
+    # <!-- Security -->
+    app.security.api_entry_point:
+        class: AppBundle\Security\Authentication\EntryPoint\ApiEntryPoint

@@ -1,0 +1,27 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+#    service_name:
+#        class: AppBundle\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+    app.notification_manager.article:
+        class: AppBundle\NotificationManager\ArticleNotificationManager
+        arguments:
+            - "@app.factory.notification"
+            - "@doctrine.orm.entity_manager"
+            - "@sylius.repository.shop_user"
+            - "@router"
+            - "@translator"
+
+    app.notification_manager.product:
+        class: AppBundle\NotificationManager\ProductNotificationManager
+        arguments:
+            - "@app.factory.notification"
+            - "@doctrine.orm.entity_manager"
+            - "@sylius.repository.shop_user"
+            - "@router"
+            - "@translator"
