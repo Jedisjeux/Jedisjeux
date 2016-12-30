@@ -32,7 +32,7 @@ class ImagineBlockType extends AbstractResourceType
             ->add('image', 'cmf_media_image', [
                 'label' => 'label.image',
                 'attr' => ['class' => 'imagine-thumbnail'],
-                'required' => false
+                'required' => false,
             ])
             ->add('label', null, [
                 'label' => 'label.description',
@@ -40,7 +40,7 @@ class ImagineBlockType extends AbstractResourceType
             ])
             ->add('linkUrl', null, [
                 'label' => 'label.link_url',
-                'required' => false
+                'required' => false,
             ])
             ->add('_type', HiddenType::class, [
                 'data' => 'imagine',

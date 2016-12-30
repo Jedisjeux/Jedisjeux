@@ -68,7 +68,8 @@ var paths = {
             'img/**'
         ],
         font: [
-            bundlesPath + 'bmatznerfontawesome/fonts/**'
+            bundlesPath + 'bmatznerfontawesome/fonts/**',
+            bundlesPath + 'mopabootstrap/fonts/**'
         ]
     }
 };
