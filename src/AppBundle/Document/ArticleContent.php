@@ -116,8 +116,10 @@ class ArticleContent extends ContainerBlock implements ResourceInterface
      *
      * @return $this
      */
-    public function setMainImage($mainImage)
+    public function setMainImage(ImagineBlock $mainImage = null)
     {
+        $mainImage->setParentDocument($this);
+        $mainImage->setName('mainImage');
         $this->mainImage = $mainImage;
 
         return $this;

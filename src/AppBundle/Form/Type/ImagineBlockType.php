@@ -11,9 +11,12 @@
 
 namespace AppBundle\Form\Type;
 
+use AppBundle\Form\EventSubscriber\PreventOverwriteImageFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -47,6 +50,8 @@ class ImagineBlockType extends AbstractResourceType
                 'label' => 'app.ui.main_image',
                 'mapped' => false,
             ]);
+
+        $builder->addEventSubscriber(new PreventOverwriteImageFormSubscriber());
     }
 
     /**
