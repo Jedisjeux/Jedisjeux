@@ -12,6 +12,7 @@
 namespace AppBundle\Form\Type;
 
 use AppBundle\Document\SingleImageBlock;
+use AppBundle\Form\EventSubscriber\PreventOverwriteImagineBlockFormSubscriber;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;

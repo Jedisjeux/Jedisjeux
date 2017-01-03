@@ -48,6 +48,13 @@ class SingleImageBlock extends SlideshowBlock implements ResourceInterface
     protected $imagePosition;
 
     /**
+     * @var ImagineBlock
+     *
+     * @PHPCR\Child()
+     */
+    protected $imagineBlock;
+
+    /**
      * SingleImageBlock constructor.
      */
     public function __construct()
@@ -125,26 +132,19 @@ class SingleImageBlock extends SlideshowBlock implements ResourceInterface
      */
     public function getImagineBlock()
     {
-        return $this->children->first() ?: null;
+        return $this->imagineBlock;
     }
 
     /**
-     * @param ImagineBlock|null $imagineBlock
+     * @param ImagineBlock $imagineBlock
      *
      * @return $this
      */
     public function setImagineBlock(ImagineBlock $imagineBlock = null)
     {
-        foreach ($this->children as $child) {
-            $this->removeChild($child);
-        }
-
-        if (null === $imagineBlock) {
-            return $this;
-        }
-
         $imagineBlock->setParentDocument($this);
-        $this->addChild($imagineBlock);
+        $imagineBlock->setName('imagineBlock');
+        $this->imagineBlock = $imagineBlock;
 
         return $this;
     }
