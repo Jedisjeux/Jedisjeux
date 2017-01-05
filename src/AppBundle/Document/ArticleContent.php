@@ -11,6 +11,7 @@
 
 namespace AppBundle\Document;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ContainerBlock;
@@ -54,6 +55,11 @@ class ArticleContent extends ContainerBlock implements ResourceInterface
     protected $mainImage;
 
     /**
+     * @PHPCR\Children(filter="block*")
+     */
+    protected $blocks;
+
+    /**
      * Article constructor.
      */
     public function __construct()
@@ -61,6 +67,7 @@ class ArticleContent extends ContainerBlock implements ResourceInterface
         parent::__construct();
         $this->state = self::WRITING;
         $this->publishable = false;
+        $this->blocks = new ArrayCollection();
     }
 
     /**
@@ -121,6 +128,50 @@ class ArticleContent extends ContainerBlock implements ResourceInterface
         $mainImage->setParentDocument($this);
         $mainImage->setName('mainImage');
         $this->mainImage = $mainImage;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBlocks()
+    {
+        return $this->blocks;
+    }
+
+    /**
+     * @param ContainerBlock $block
+     *
+     * @return bool
+     */
+    public function hasBlock(ContainerBlock $block)
+    {
+        return $this->blocks->contains($block);
+    }
+
+    /**
+     * @param ContainerBlock $block
+     *
+     * @return $this
+     */
+    public function addBlock(ContainerBlock $block)
+    {
+        if (!$this->hasBlock($block)) {
+            $this->blocks->add($block);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param ContainerBlock $block
+     *
+     * @return $this
+     */
+    public function removeBlock(ContainerBlock $block)
+    {
+        $this->blocks->removeElement($block);
 
         return $this;
     }

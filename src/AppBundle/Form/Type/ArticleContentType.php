@@ -37,10 +37,10 @@ class ArticleContentType extends AbstractResourceType
             ->add('title', TextType::class, [
                 'label' => 'label.title',
             ])
-            /*->add('mainImage', 'app_imagine_block', [
+            ->add('mainImage', 'app_imagine_block', [
                 'label' => 'app.ui.main_image',
-            ])*/
-            ->add('children', PolyCollectionType::class, [
+            ])
+            ->add('blocks', PolyCollectionType::class, [
                 'types' => [
                     'app_imagine_block',
                     'app_blockquote_block',

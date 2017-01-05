@@ -3,7 +3,7 @@ app_backend_article:
         alias: app.article
         section: backend
         templates: :backend/crud
-        redirect: index
+        redirect: update
         grid: app_backend_article
         except: ['show']
         vars:
