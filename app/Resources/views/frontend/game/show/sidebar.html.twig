@@ -1,29 +1,5 @@
 <div class="sidebar">
 
-    <div class="s-widget">
-        <h5><i class="fa fa-users color"></i> Participer</h5>
-        <!-- Widgets Content -->
-        <div class="widget-content search">
-            <ul class="list-unstyled">
-                <li>
-                    <a href="#">
-                        <span class="fa fa-star"></span>
-                        Votre avis
-                    </a>
-                </li>
-                <li>
-                    <a class="" href="{{ path('app_game_play_create', { 'productSlug': jeu.slug  } ) }}">
-                        <span class="fa fa-table"></span>
-                        Nouvelle partie
-                    </a>
-                </li>
-
-            </ul>
-
-        </div>
-    </div>
-
-    <hr/>
     {% include 'frontend/pub_banner/_sidebarWidget.html.twig' %}
 
     <div class="s-widget">
@@ -60,12 +36,16 @@
     <!-- Gallery Widget -->
     <div class="s-widget">
         <!-- Heading -->
-        <h5><i class="fa fa-camera color"></i> Photos <small>({{ jeu.imagesOfAllVariants|length }})</small></h5>
+        <h5><i class="fa fa-camera color"></i> Photos
+            <small>({{ jeu.imagesOfAllVariants|length }})</small>
+        </h5>
         <!-- Widgets Content -->
         <div class="widget-content gallery">
             {% for image in jeu.imagesOfAllVariants %}
-                <a href="{{ image.webPath | imagine_filter('default') }}" rel="jeu" class="fancybox" title="{{ image.description }}">
-                    <img src="{{ image.webPath | imagine_filter('thumbnail_S') }}" alt="" class="img-responsive img-thumbnail"/>
+                <a href="{{ image.webPath | imagine_filter('default') }}" rel="jeu" class="fancybox"
+                   title="{{ image.description }}">
+                    <img src="{{ image.webPath | imagine_filter('thumbnail_S') }}" alt=""
+                         class="img-responsive img-thumbnail"/>
                 </a>
             {% endfor %}
         </div>
@@ -75,17 +55,17 @@
 
     <!-- Material list -->
     {% if jeu.materiel %}
-    <div class="s-widget">
-        <!-- Heading -->
-        <h5><i class="fa fa-list color"></i> Matériel</h5>
-        <!-- Widgets Content -->
-        <div class="widget-content gallery">
-            <ul class="list-6">
-                {% for row in jeu.materiel|split("\n") %}
-                    <li>{{ row }}</li>
-                {% endfor %}
-            </ul>
+        <div class="s-widget">
+            <!-- Heading -->
+            <h5><i class="fa fa-list color"></i> Matériel</h5>
+            <!-- Widgets Content -->
+            <div class="widget-content gallery">
+                <ul class="list-6">
+                    {% for row in jeu.materiel|split("\n") %}
+                        <li>{{ row }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
-    </div>
     {% endif %}
 </div>

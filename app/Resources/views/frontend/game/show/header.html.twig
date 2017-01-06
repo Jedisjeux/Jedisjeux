@@ -121,7 +121,30 @@
                                         </div>
                                     </li>
 
+                                    <li>
+                                        <div class="game-attribute btn-group">
+                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false" title="Ajouter à une liste ">
+                                                <span class="fa fa-list"></span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="#"><span class="fa fa-plus"> Ma ludothèque</a></li>
+                                                <li><a href="#"><span class="fa fa-heart"></span> Mes envies</a></li>
+                                                <li><a href="#"><span class="fa fa-clock-o"></span> A regarder plus tard</a></li>
+                                            </ul>
+                                            <a href="#" class="btn btn-default" title="Donnez votre avis">
+                                                <span class="fa fa-star"></span>
+                                            </a>
+                                            <a class="btn btn-default" title="Nouvelle partie"
+                                               href="{{ path('app_game_play_create', { 'productSlug': jeu.slug  } ) }}">
+                                                <span class="fa fa-table"></span>
+                                            </a>
+                                        </div>
+                                    </li>
+
                                 </ul>
+
+
                             </div>
                         </div>
 
