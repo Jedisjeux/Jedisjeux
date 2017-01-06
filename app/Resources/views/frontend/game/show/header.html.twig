@@ -132,7 +132,7 @@
                                                 <li><a href="#"><span class="fa fa-heart"></span> Mes envies</a></li>
                                                 <li><a href="#"><span class="fa fa-clock-o"></span> A regarder plus tard</a></li>
                                             </ul>
-                                            <a href="#" class="btn btn-default" title="Donnez votre avis">
+                                            <a href="{{ path('sylius_product_review_create', { 'productId': jeu.id  } ) }}" class="btn btn-default" title="Donnez votre avis">
                                                 <span class="fa fa-star"></span>
                                             </a>
                                             <a class="btn btn-default" title="Nouvelle partie"

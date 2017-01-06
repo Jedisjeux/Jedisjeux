@@ -12,6 +12,8 @@
 namespace AppBundle\Form\Type;
 
 use Sylius\Bundle\ReviewBundle\Form\Type\ReviewType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,17 +29,14 @@ class ProductReviewType extends ReviewType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('rating', 'hidden', [
+            ->add('rating', HiddenType::class, [
                 'label' => 'label.rate',
             ])
-            ->add('author', 'sylius_customer_guest', [
-                'label' => false,
-            ])
-            ->add('title', 'text', [
-                'label' => 'label.title',
+            ->add('title', TextType::class, [
+                'label' => 'sylius.ui.title',
             ])
             ->add('comment', 'ckeditor', [
-                'label' => 'label.comment',
+                'label' => 'sylius.ui.comment',
             ])
         ;
     }
