@@ -49,7 +49,8 @@ class ArticleContentTypeSpec extends ObjectBehavior
     {
         $builder->add('name', TextType::class, Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('title', TextType::class, Argument::any())->shouldBeCalled()->willReturn($builder);
-        $builder->add('children', PolyCollectionType::class, Argument::any())->shouldBeCalled()->willReturn($builder);
+        $builder->add('mainImage', 'app_imagine_block', Argument::any())->shouldBeCalled()->willReturn($builder);
+        $builder->add('blocks', PolyCollectionType::class, Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('publishable', null, Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('publishStartDate', DateTimeType::class, Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('publishEndDate', DateTimeType::class, Argument::any())->shouldBeCalled()->willReturn($builder);
