@@ -11,9 +11,13 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
@@ -32,9 +36,17 @@ class ProductList implements ResourceInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string")
      */
     protected $code;
+
+    /**
+     * @var string
+     *
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(type="string")
+     */
+    protected $slug;
 
     /**
      * @var string
@@ -52,19 +64,28 @@ class ProductList implements ResourceInterface
     protected $owner;
 
     /**
-     * @return string
+     * @var Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Sylius\Component\Product\Model\ProductInterface")
+     * @ORM\JoinTable(name="jdj_product_list_product")
      */
-    public function getCode()
+    protected $products;
+
+    /**
+     * ProductList constructor.
+     */
+    public function __construct()
     {
-        return $this->code;
+        $this->code = uniqid('list_');
+        $this->products = new ArrayCollection();
     }
 
     /**
-     * @param string $code
+     * @return string
      */
-    public function setCode($code)
+    public function getSlug()
     {
-        $this->code = $code;
+        return $this->slug;
     }
 
     /**
@@ -97,5 +118,49 @@ class ProductList implements ResourceInterface
     public function setOwner(CustomerInterface $owner = null)
     {
         $this->owner = $owner;
+    }
+
+    /**
+     * @return Collection|ProductInterface[]
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * @param ProductInterface $product
+     *
+     * @return bool
+     */
+    public function hasProduct(ProductInterface $product)
+    {
+        return $this->products->contains($product);
+    }
+
+    /**
+     * @param ProductInterface $product
+     *
+     * @return $this
+     */
+    public function addProduct(ProductInterface $product)
+    {
+        if (!$this->hasProduct($product)) {
+            $this->products->add($product);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param ProductInterface $element
+     *
+     * @return $this
+     */
+    public function removeProduct(ProductInterface $element)
+    {
+        $this->products->removeElement($element);
+
+        return $this;
     }
 }

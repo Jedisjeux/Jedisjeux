@@ -90,6 +90,12 @@ sylius_resource:
                 model: AppBundle\Entity\ProductBarcode
                 form:
                     default: AppBundle\Form\Type\ProductBarcodeType
+        app.product_list:
+            classes:
+                model: AppBundle\Entity\ProductList
+                form:
+                    default: AppBundle\Form\Type\ProductListType
+                    product: AppBundle\Form\Type\ProductListProductType
         app.pub_banner:
             classes:
                 model: AppBundle\Entity\PubBanner
