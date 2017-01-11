@@ -129,9 +129,9 @@
                                                 <span class="fa fa-plus"></span> Ajouter à
                                             </button>
                                             <ul class="dropdown-menu productList" style="white-space: nowrap; padding: 10px">
-                                                <li><input type="checkbox" data-product-id="{{ product.id }}" data-code="game-library"/> <label for="game-library">Ma ludothèque</label></li>
+                                                <li><input type="checkbox" data-product-id="{{ product.id }}" data-code="game_library"/> <label for="game-library">Ma ludothèque</label></li>
                                                 <li><input type="checkbox" data-product-id="{{ product.id }}" data-code="wishes"/> <label for="wishes">Mes envies</label></li>
-                                                <li><input type="checkbox" data-product-id="{{ product.id }}" data-code="see-later"/> <label for="see-later">A regarder plus tard</label></li>
+                                                <li><input type="checkbox" data-product-id="{{ product.id }}" data-code="see_later"/> <label for="see-later">A regarder plus tard</label></li>
                                             </ul>
                                             <a href="{{ path('sylius_product_review_create', { 'productId': jeu.id  } ) }}" class="btn btn-default" title="Donnez votre avis">
                                                 <span class="fa fa-star"></span> Votre avis
