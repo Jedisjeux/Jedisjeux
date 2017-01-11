@@ -7,16 +7,24 @@ app_api_product_list:
 
 app_api_product_list_add_product:
     methods: [POST]
-    path: /product-lists/{id}/products/{productId}
+    path: /product-lists/{code}/products/{productId}
     defaults:
-        _controller: app.controller.product_list.updateAction
+        _controller: app.controller.product_list:addProductAction
         _sylius:
+            repository:
+                method: findOneBy
+                arguments:
+                    - { owner: expr:service('app.context.customer').getCustomer(), code: $code }
             form: app_product_list_product
 
 app_api_product_list_remove_product:
     methods: [DELETE]
-    path: /product-lists/{id}/products/{productId}
+    path: /product-lists/{code}/products/{productId}
     defaults:
-        _controller: app.controller.product_list.updateAction
+        _controller: app.controller.product_list:removeProductAction
         _sylius:
+            repository:
+                method: findOneBy
+                arguments:
+                    - { owner: expr:service('app.context.customer').getCustomer(), code: $code }
             form: app_product_list_product

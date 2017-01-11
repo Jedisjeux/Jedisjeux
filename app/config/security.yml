@@ -71,6 +71,8 @@ security:
         - { path: /edit$, role: ROLE_USER }
         # rate a product
         - { path: ^/api/products/\d+/ratings/, role: ROLE_USER}
+        # add/remove a product to/from a list
+        - { path: ^/api/product-lists/.+/products/\d+, role: ROLE_USER}
         #like it
         - { path: ^/user-review/\d+/like, role: ROLE_USER }
         #JediZone
