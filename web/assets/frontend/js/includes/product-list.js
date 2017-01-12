@@ -21,7 +21,7 @@ $(function () {
           success: function (results) {
             var message = method === 'POST' ? successMessageForAdd : successMessageForRemove;
 
-            appendFlash(message, messageHolderSelector);
+            appendFlash(message);
           },
           error: function(xhr, textStatus, errorThrown) {
             if(xhr.status === 401) {
