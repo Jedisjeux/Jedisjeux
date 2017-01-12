@@ -93,6 +93,7 @@ sylius_resource:
         app.product_list:
             classes:
                 model: AppBundle\Entity\ProductList
+                factory: AppBundle\Factory\ProductListFactory
                 controller: AppBundle\Controller\ProductListController
                 form:
                     default: AppBundle\Form\Type\ProductListType

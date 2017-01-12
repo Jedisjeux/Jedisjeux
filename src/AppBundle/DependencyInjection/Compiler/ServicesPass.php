@@ -79,6 +79,10 @@ class ServicesPass implements CompilerPassInterface
         $stringBlockFactoryDefinition
             ->addArgument(new Reference('doctrine_phpcr.odm.document_manager'))
             ->addArgument(new Parameter('cmf_block.persistence.phpcr.block_basepath'));
+
+        $productListFactoryDefinition = $container->getDefinition('app.factory.product_list');
+        $productListFactoryDefinition
+            ->addArgument(new Reference('app.context.customer'));
     }
 
     /**

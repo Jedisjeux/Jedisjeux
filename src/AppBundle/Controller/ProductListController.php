@@ -12,6 +12,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\ProductList;
+use AppBundle\Factory\ProductListFactory;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Resource\ResourceActions;
@@ -36,7 +37,15 @@ class ProductListController extends ResourceController
 
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
         /** @var ProductList $list */
-        $list = $this->findOr404($configuration);
+        $list = $this->singleResourceProvider->get($configuration, $this->repository);
+
+        if (null === $list) {
+            /** @var ProductListFactory $factory */
+            $factory = $this->factory;
+            $list = $factory->createForCode($request->get('code'));
+            $this->manager->persist($list);
+        }
+
 
         $product = $this->get('sylius.repository.product')->find($productId);
 

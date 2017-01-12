@@ -12,6 +12,7 @@
 namespace AppBundle\Factory;
 
 use AppBundle\Entity\ProductList;
+use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
@@ -25,11 +26,17 @@ class ProductListFactory implements FactoryInterface
     private $className;
 
     /**
+     * @var CustomerContextInterface
+     */
+    protected $customerContext;
+
+    /**
      * @param string $className
      */
-    public function __construct($className)
+    public function __construct($className, CustomerContextInterface $customerContext)
     {
         $this->className = $className;
+        $this->customerContext = $customerContext;
     }
 
     /**
@@ -39,6 +46,8 @@ class ProductListFactory implements FactoryInterface
     {
         /** @var ProductList $productList */
         $productList = new $this->className;
+        $productList
+            ->setOwner($this->customerContext->getCustomer());
 
         return $productList;
     }
