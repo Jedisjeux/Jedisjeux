@@ -1,0 +1,13 @@
+app_backend_dealer:
+    resource: |
+        alias: app.dealer
+        section: backend
+        templates: :backend/crud
+        redirect: index
+        grid: app_backend_dealer
+        vars:
+            all:
+                subheader: app.ui.manage_dealers
+            index:
+                icon: building
+    type: sylius.resource

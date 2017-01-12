@@ -1,0 +1,5 @@
+{% from 'macros/games.html.twig' import magazineItemOne %}
+
+{% for game in products %}
+    {{ magazineItemOne(game, 'magazine_item_wide') }}
+{% endfor %}

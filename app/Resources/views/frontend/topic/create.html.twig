@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+{% import 'macros/actions.html.twig' as action %}
+
+{% block headline %}
+    Nouveau sujet
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    <a href="{{ path('app_frontend_topic_index') }}">Forum</a> /
+    Nouveau sujet
+{% endblock %}
+
+{% block body -%}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ action.create() }}
+    {{ form_end(form) }}
+{% endblock %}

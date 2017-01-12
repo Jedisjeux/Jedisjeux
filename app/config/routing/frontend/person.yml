@@ -1,0 +1,41 @@
+app_person:
+    resource: |
+        alias: app.person
+        path: /ludographies
+        templates: :frontend/person
+        redirect: index
+    type: sylius.resource
+
+app_person_index:
+    methods: [GET]
+    path: /ludographies/
+    defaults:
+      _controller: app.controller.person:indexWithTaxonsAction
+      _sylius:
+        template: frontend/person/index.html.twig
+        sortable: true
+        paginate: 16
+        sorting:
+            gameCount: desc
+
+app_person_index_by_taxon:
+    methods: [GET]
+    path: /ludographies/{permalink}
+    defaults:
+        _controller: app.controller.person:indexByTaxonAction
+        _sylius:
+            paginate: 16
+            template: frontend/person/index.html.twig
+            sortable: true
+            sorting:
+                gameCount: desc
+    requirements:
+        permalink: "[^?]+"
+
+app_person_show:
+    methods: [GET]
+    path: /ludographie/{slug}
+    defaults:
+      _controller: app.controller.person:showAction
+      _sylius:
+        template: frontend/person/show.html.twig

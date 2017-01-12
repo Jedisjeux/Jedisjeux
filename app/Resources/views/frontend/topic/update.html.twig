@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+{% import 'macros/actions.html.twig' as action %}
+
+{% block headline %}
+    Modifier un sujet
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    <a href="{{ path('app_frontend_topic_index') }}">Forum</a> /
+    Modifier un sujet
+{% endblock %}
+
+{% block body -%}
+    {{ form_start(form) }}
+    <input type="hidden" name="_method" value="PUT"/>
+    {{ form_widget(form) }}
+    {{ action.update() }}
+    {{ form_end(form) }}
+{% endblock %}

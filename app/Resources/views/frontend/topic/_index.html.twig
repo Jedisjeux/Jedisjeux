@@ -1,0 +1,56 @@
+{% from 'macros/users.html.twig' import avatar %}
+{% from 'macros/topics.html.twig' import getPath %}
+{% from 'macros/images.html.twig' import image %}
+{% from 'macros/misc.html.twig' import no_data %}
+
+{% for topic in topics %}
+
+    {% set user = topic.author.user %}
+    {% set imagePath = avatar(user) %}
+    {% set linkUrl = getPath(topic) %}
+
+    {% set meta %}
+        <div class="magazine-meta">
+            <small>
+                <!-- Date -->
+                <i class="fa fa-calendar"></i>
+                &nbsp; {{ topic.createdAt|localizeddate('medium', 'none') }}
+                &nbsp;
+                <!-- Author -->
+                <i class="fa fa-user"></i> &nbsp; {{ user }}
+                &nbsp;
+                <!-- Comments -->
+                {% set commentCount = topic.posts|length %}
+                <i class="fa fa-comments"></i> &nbsp; {{ commentCount }} &nbsp;
+            </small>
+        </div>
+    {% endset %}
+
+    <div class="blog-author well">
+        <div class="media">
+            <div class="media-left">
+                {{ image(imagePath, 'thumbnail', user.username, 'img-round media-object', linkUrl) }}
+            </div>
+            <div class="media-body">
+                <div class="pull-right hidden-xs">
+                    <a href="{{ linkUrl }}" class="btn btn-color">
+                        <span class="fa fa-arrow-circle-o-right"></span>
+                        Lire le sujet
+                    </a>
+                </div>
+                <h5 class="media-heading">
+                    <a href="{{ linkUrl }}">{{ topic.title }}</a> &nbsp;
+                    {% if topic.mainTaxon %}
+                        <small>
+                            <a href="{{ path('app_frontend_topic_index_by_taxon', {'permalink': topic.mainTaxon.permalink}) }}">{{ topic.mainTaxon }}</a>
+                        </small>
+                    {% endif %}
+                </h5>
+                {{ meta|raw }}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% else %}
+    {{ no_data('Aucun topic') }}
+{% endfor %}

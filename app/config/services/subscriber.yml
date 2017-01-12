@@ -1,0 +1,72 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+#    service_name:
+#        class: AppBundle\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+    app.subscriber.add_topic_follower:
+        class: AppBundle\EventSubscriber\AddTopicFollowerSubscriber
+        arguments:
+            - "@app.context.customer"
+        tags:
+            - { name: kernel.event_subscriber }
+
+    app.subscriber.create_topic_notification:
+        class: AppBundle\EventSubscriber\CreateTopicNotificationSubscriber
+        arguments:
+            - "@app.context.customer"
+            - "@app.factory.notification"
+            - "@app.manager.notification"
+        tags:
+            - { name: kernel.event_subscriber }
+
+    app.subscriber.send_registration_email:
+        class: AppBundle\EventSubscriber\SendRegistrationEmailSubscriber
+        arguments:
+            - "@sylius.email_sender"
+        tags:
+            - { name: kernel.event_subscriber }
+
+    app.subscriber.send_contact_email:
+        class: AppBundle\EventSubscriber\SendContactEmailSubscriber
+        arguments:
+            - "@sylius.email_sender"
+        tags:
+            - { name: kernel.event_subscriber }
+
+    app.subscriber.calculate_topic_count_by_taxon:
+        class: AppBundle\EventSubscriber\CalculateTopicCountByTaxonSubscriber
+        arguments:
+            - @app.updater.topic_count_by_taxon
+        tags:
+            - { name: kernel.event_subscriber }
+
+    app.subscriber.calculate_post_count_by_topic:
+        class: AppBundle\EventSubscriber\CalculatePostCountByTopicSubscriber
+        arguments:
+            - @app.updater.post_count_by_topic
+        tags:
+            - { name: kernel.event_subscriber }
+
+    app.subscriber.calculate_product_count_by_taxon:
+        class: AppBundle\EventSubscriber\CalculateProductCountByTaxonSubscriber
+        arguments:
+            - @app.updater.product_count_by_taxon
+        tags:
+            - { name: kernel.event_subscriber }
+
+    app.subscriber.article_document_reference:
+        class: AppBundle\EventSubscriber\ArticleDocumentReferenceSubscriber
+        arguments:
+            [ "@doctrine_phpcr" ]
+        tags:
+            - { name: doctrine.event_subscriber }
+
+    app.subscriber.load_customer_element_object:
+        class: AppBundle\EventSubscriber\CustomerListElementReferenceSubscriber
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }

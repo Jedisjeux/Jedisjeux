@@ -1,0 +1,23 @@
+body.error {
+
+  color: white;
+  background: black;
+
+  &:after {
+    content: "";
+    background: black url("../img/error.jpg") no-repeat fixed center;
+    opacity: 0.3;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+  }
+
+
+
+  .outer {
+    background: transparent;
+  }
+}

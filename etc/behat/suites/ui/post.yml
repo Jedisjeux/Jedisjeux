@@ -1,0 +1,11 @@
+default:
+    suites:
+        ui_post:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - AppBundle\Behat\UtilsContext
+                - AppBundle\Behat\UserContext
+                - AppBundle\Behat\TopicContext
+                - AppBundle\Behat\TaxonContext
+            filters:
+                tags: "@post && @ui"

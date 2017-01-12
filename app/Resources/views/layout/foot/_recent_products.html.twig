@@ -1,0 +1,21 @@
+<!-- Foot Item -->
+<div class="foot-item">
+    <!-- Heading -->
+    <h5 class="bold"><i class="fa fa-puzzle-piece"></i>&nbsp;&nbsp;Sorties de jeux</h5>
+    <!-- Foot Item Content -->
+    <div class="foot-item-content">
+
+        {{ render(url('sylius_partial_product_index', {
+            'paginate': 9,
+            'template': 'partial/recent_release_product/_footerList.html.twig',
+            'criteria': {
+                'status': 'PUBLISHED',
+                'releasedAtTo': "now"|date("Y-m-d")
+            },
+            'sorting': {
+                'variant.releasedAt': 'desc'
+            }
+        })) }}
+
+    </div>
+</div>

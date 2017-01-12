@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+{% import 'macros/actions.html.twig' as action %}
+
+{% set topic = post.topic %}
+
+{% block headline %}
+    {{ topic }}
+{% endblock %}
+
+{% block subtitle %}
+    Votre réponse
+{% endblock %}
+
+{% block body -%}
+    <div class="col-md-12">
+        {{ form_start(form) }}
+        <input type="hidden" name="_method" value="PUT"/>
+        {{ form_widget(form) }}
+        {{ action.update() }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

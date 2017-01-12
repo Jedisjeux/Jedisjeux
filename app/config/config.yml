@@ -1,10 +1,23 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: services.yml }
+    - { resource: app/main.yml }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    knp.doctrine_behaviors.blameable_subscriber.user_entity: Sylius\Component\User\Model\User
+    locale: fr
+    sylius.locale: "%locale%"
+    sylius.cache:
+        type: file_system
+    email_sender: no-reply@jedisjeux.net
+    email_name: Contact Jedisjeux
 
 framework:
     #esi:             ~
-    #translator:      { fallback: "%locale%" }
+    translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -12,6 +25,7 @@ framework:
     form:            ~
     csrf_protection: ~
     validation:      { enable_annotations: true }
+    #serializer:      { enable_annotations: true }
     templating:
         engines: ['twig']
         #assets_version: SomeVersionScheme
@@ -28,12 +42,14 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+        ga_tracking: "%google.analytics.tracking_id%"
 
 # Assetic Configuration
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ 'JDJWebBundle', 'JDJFoundationBundle', 'JDJJeuBundle']
+    bundles:        [ "MopaBootstrapBundle" ]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -41,6 +57,29 @@ assetic:
         #    jar: "%kernel.root_dir%/Resources/java/compiler.jar"
         #yui_css:
         #    jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
+        compass:
+            sass: /usr/local/bin/compass
+            apply_to: "[^mopabootstrapbundle]\.(scss|sass)$"
+#        yui_css:
+#            jar: %kernel.root_dir%/Resources/java/yuicompressor-2.4.6.jar
+#            apply_to: "\.css$"
+#        yui_js:
+#            jar: %kernel.root_dir%/Resources/java/yuicompressor-2.4.6.jar
+
+mopa_bootstrap:
+    form:
+        show_legend: false # default is true
+        render_required_asterisk: true # default is false
+        render_optional_text: false # default is true
+        collection:
+          widget_remove_btn:
+            icon: remove
+            attr:
+              class: btn btn-danger
+          widget_add_btn:
+            icon: plus
+            attr:
+              class: btn btn-primary
 
 # Doctrine Configuration
 doctrine:
@@ -52,11 +91,12 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
-        mapping_types:
-          enum: string
-        # if using pdo_sqlite as your database driver, add the path in parameters.yml
-        # e.g. database_path: "%kernel.root_dir%/data/data.db3"
-        # path:     "%database_path%"
+        # if using pdo_sqlite as your database driver:
+        #   1. add the path in parameters.yml
+        #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
+        #   2. Uncomment database_path in parameters.yml.dist
+        #   3. Uncomment next line:
+        #     path:     "%database_path%"
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
@@ -93,7 +133,21 @@ doctrine:
                   class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
                   enabled: true
 
+stof_doctrine_extensions:
+    default_locale: fr_FR
+    orm:
+        default:
+            tree: true
+            sluggable: true
+            softdeleteable: true
 
+knp_doctrine_behaviors:
+    blameable:      true
+    timestampable:  true
+    geocodable:     ~     # Here null is converted to false
+    loggable:       ~
+    sluggable:      true
+    soft_deletable: true
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -101,52 +155,24 @@ swiftmailer:
     host:      "%mailer_host%"
     username:  "%mailer_user%"
     password:  "%mailer_password%"
+    port:      "%mailer_port%"
+    auth_mode: "%mailer_auth%"
     spool:     { type: memory }
 
-stof_doctrine_extensions:
-  default_locale: fr_FR
-  orm:
-    default:
-      tree: true
-      timestampable: false # not needed: listeners are not enabled by default
-
-white_october_pagerfanta:
-    exceptions_strategy:
-        out_of_range_page:        to_http_not_found
-        not_valid_current_page:   to_http_not_found
-
 services:
-  gedmo.listener.softdeleteable:
-      class: Gedmo\SoftDeleteable\SoftDeleteableListener
-      tags:
-        - { name: doctrine.event_subscriber, connection: default }
-      calls:
-        - [ setAnnotationReader, [ @annotation_reader ] ]
+  twig.extension.intl:
+          class: Twig_Extensions_Extension_Intl
+          tags:
+              - { name: twig.extension }
 
-  gedmo.listener.timestampable:
-      class: Gedmo\Timestampable\TimestampableListener
+  twig.extension.text:
+      class: Twig_Extensions_Extension_Text
       tags:
-        - { name: doctrine.event_subscriber, connection: default }
-      calls:
-        - [ setAnnotationReader, [ @annotation_reader ] ]
+          - { name: twig.extension }
 
-  gedmo.listener.sluggable:
-      class: Gedmo\Sluggable\SluggableListener
-      tags:
-        - { name: doctrine.event_subscriber, connection: default }
-      calls:
-        - [ setAnnotationReader, [ @annotation_reader ] ]
-
-  gedmo.listener.sortable:
-      class: Gedmo\Sortable\SortableListener
-      tags:
-        - { name: doctrine.event_subscriber, connection: default }
-      calls:
-        - [ setAnnotationReader, [ @annotation_reader ] ]
-
-  gedmo.listener.loggable:
-      class: Gedmo\Loggable\LoggableListener
-      tags:
-        - { name: doctrine.event_subscriber, connection: default }
-      calls:
-        - [ setAnnotationReader, [ @annotation_reader ] ]
+jms_serializer:
+    metadata:
+        directories:
+            app:
+                namespace_prefix: "AppBundle"
+                path: "@AppBundle/Resources/config/serializer"

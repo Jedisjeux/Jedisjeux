@@ -1,0 +1,10 @@
+app_partial_pub_banner_index:
+    methods: [GET]
+    path: /pub-banners/
+    defaults:
+        _controller: app.controller.pub_banner:indexAction
+        _sylius:
+            template: $template
+            paginate: false
+    requirements:
+        template: "[^?]+"

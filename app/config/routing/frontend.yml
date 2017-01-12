@@ -1,0 +1,29 @@
+app_homepage:
+    resource: "frontend/homepage.yml"
+
+app_article:
+    resource: "frontend/article.yml"
+
+app_contact_request:
+    resource: "frontend/contact_request.yml"
+
+app_forum:
+    resource: "frontend/forum.yml"
+
+app_game_play:
+    resource: "frontend/game_play.yml"
+
+app_person:
+    resource: "frontend/person.yml"
+
+app_product:
+    resource: "frontend/product.yml"
+
+app_product_review:
+    resource: "frontend/product_review.yml"
+
+app_customer_list:
+    resource: "frontend/customer_list.yml"
+
+sylius_security:
+    resource: "frontend/security.yml"

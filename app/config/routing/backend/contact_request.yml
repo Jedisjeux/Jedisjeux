@@ -1,0 +1,23 @@
+app_backend_contact_request:
+    resource: |
+        alias: app.contact_request
+        section: backend
+        templates: :backend/crud
+        only: ['index', 'delete']
+        redirect: index
+        grid: app_backend_contact_request
+        vars:
+            all:
+                subheader: app.ui.manage_contact_requests
+            index:
+                icon: mail
+    type: sylius.resource
+
+app_backend_contact_request_show:
+    methods: [GET]
+    path: /contact-requests/{id}
+    defaults:
+        _controller: app.controller.contact_request:showAction
+        _sylius:
+            section: backend
+            template: backend/contact_request/show.html.twig

@@ -1,0 +1,33 @@
+{% macro sorting(routeName, label, property, defaultOrder = 'asc', icon = false, currentOrder = null, routeParams = {}) %}{% spaceless %}
+
+    {% set sorting = app.request.get('sorting') %}
+    {% set criteria = app.request.get('criteria') %}
+
+    {% if sorting %}
+        {% if attribute(sorting, property) is defined %}
+            {% set icon = true %}
+            {% set currentOrder = attribute(sorting, property) %}
+        {% endif %}
+    {% endif %}
+
+    {% set routeParams = routeParams | merge({'criteria': criteria }) %}
+
+    {% if currentOrder == 'desc' or (currentOrder is null and defaultOrder == 'asc') %}
+        {% set routeParams = routeParams | merge({'sorting': {(property): 'asc'} }) %}
+    {% else %}
+        {% set routeParams = routeParams | merge({'sorting': {(property): 'desc'} }) %}
+    {% endif %}
+
+    {% set url = path(routeName, routeParams) %}
+
+    <a href="{{ url }}" class="{% if icon %}color{% endif %}">
+        {{ label }}
+        {% if icon -%}
+            {%- if currentOrder == 'desc' -%}
+                <i class="glyphicon glyphicon-chevron-down"></i>
+            {%- else -%}
+                <i class="glyphicon glyphicon-chevron-up"></i>
+            {%- endif %}
+        {%- endif %}
+    </a>
+{% endspaceless %}{% endmacro %}

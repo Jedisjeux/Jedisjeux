@@ -1,0 +1,42 @@
+{% extends "::base.html.twig" %}
+
+{% from 'macros/posts.html.twig' import blogCommentItem %}
+{% import 'macros/items.html.twig' as item %}
+
+{% set topic = game_play.topic %}
+
+{% block headline %}
+    Partie de {{ game_play.product }}
+{% endblock %}
+
+{% block breadcrumb_content %}
+    <a href="{{ path('sylius_product_index') }}">Jeux</a>
+    / <a href="{{ path('sylius_product_show', {'slug': game_play.product.slug}) }}">{{ game_play.product }}</a>
+    / Parties
+{% endblock %}
+
+{% block container %}
+    <div class="col-md-8">
+        {{ item.blogAuthor(game_play.author, null, game_play.createdAt) }}
+
+        {% include "frontend/game_play/show/_header.html.twig" %}
+
+        {% if topic %}
+            <div class="block-heading-two">
+                <h3><span>Commentaires</span>
+                    <small>({{ topic.posts|length }})</small>
+                </h3>
+            </div>
+
+            <div class="blog-comments">
+                {% for post in topic.posts %}
+                    {{ blogCommentItem(post) }}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+    <div class="col-md-4">
+        {% include "frontend/game_play/show/_sidebar.html.twig" %}
+    </div>
+
+{% endblock container %}

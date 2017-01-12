@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block container %}
+
+    <div class="col-md-8">
+
+        <div class="block-heading-two">
+            <h3><span>JediZone</span></h3>
+        </div>
+        {% for notification in notifications %}
+            {% include "jedizone/notification/_notification.html.twig" with {'notification': notification} only %}
+        {% endfor %}
+    </div>
+    <div class="col-md-4">
+        {% include "jedizone/sidebar/show.html.twig" with {'notificationFilterCount': notificationFilterCount} only %}
+    </div>
+
+{% endblock container %}

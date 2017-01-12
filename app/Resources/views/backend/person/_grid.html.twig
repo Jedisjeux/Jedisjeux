@@ -1,0 +1,35 @@
+{% from 'backend/macros/sorting.html.twig' import sorting %}
+{% import 'SyliusUiBundle:Macro:buttons.html.twig' as button %}
+{% from 'macros/images.html.twig' import image %}
+
+{% set defaultSorting = app.request.get('sorting') ? false : true %}
+{% set defaultOrder = 'desc' %}
+{% set currentOrder = defaultSorting ? defaultOrder : app.request.get('sorting') %}
+
+<table class="ui celled table">
+    <thead>
+    <tr>
+        <th>{{ 'sylius.ui.image'|trans }}</th>
+        <th>{{ sorting('app_backend_person_index', 'sylius.ui.name'|trans, 'slug', defaultOrder, true, currentOrder) }}</th>
+        <th>{{ 'sylius.ui.actions'|trans }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for person in people %}
+        <tr>
+            <td>
+                {% if person.mainImage %}
+                    {{ image(person.mainImage.webPath, 'thumbnail', person.fullName, 'ui circular image') }}
+                {% endif %}
+            </td>
+            <td>{{ person }}</td>
+            <td>
+                <div class="ui buttons">
+                    {{ button.edit(path('app_backend_person_update', { 'id': person.id } )) }}
+                    {{ button.delete(path('app_backend_person_delete', { 'id': person.id } )) }}
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

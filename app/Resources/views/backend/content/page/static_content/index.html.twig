@@ -1,0 +1,71 @@
+{% extends "layout/backend_index.html.twig" %}
+{% from 'macros/misc.html.twig' import pagination %}
+{% import 'macros/buttons.html.twig' as button %}
+{% from 'macros/sorting.html.twig' import sorting %}
+{% import 'macros/modal.html.twig' as modal %}
+
+{% set sorting = app.request.get('sorting') %}
+
+{% set icon = false %}
+{% set currentOrder = null %}
+
+{% if null == sorting %}
+    {% set icon = true %}
+    {% set currentOrder = 'asc' %}
+{% endif %}
+
+{% block headline %}
+    Liste des pages
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    Pages
+{% endblock %}
+
+{% block new_entity_button %}
+    <a class="btn btn-primary" href="{{ path('admin_static_content_new') }}">
+        <span class="glyphicon glyphicon-plus-sign"></span>
+        Nouvelle page
+    </a>
+{% endblock new_entity_button %}
+
+{% block list %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>{{ sorting('admin_static_content_index', 'label.title'|trans, 'title', 'asc', icon, currentOrder) }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for page in pages %}
+            <tr>
+                <td>{{ page.id }}</td>
+                <td>{{ page.title }}</td>
+                <td class="text-right">
+                    <ul class="list-inline text-nowrap">
+                        <li>
+                            {{ button.show(path('page_show', { 'name': page.name })) }}
+                        </li>
+                        <li>
+                            {{ button.edit(path('admin_static_content_edit', { 'name': page.name })) }}
+                        </li>
+                        <li>
+                            {{ button.delete(path('admin_static_content_delete', { 'name': page.name })) }}
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock list %}
+
+{% block Pagination %}
+    <div class="pagination-wrapper">
+        <div class="pagination-bottom">
+            {{ pagination(pages) }}
+        </div>
+    </div>
+{% endblock %}

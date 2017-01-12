@@ -1,0 +1,112 @@
+{% from 'macros/users.html.twig' import avatar %}
+
+{% set product = game_play.product %}
+
+
+<div class="sidebar">
+
+    {% if game_play.players|length > 0 %}
+        <!-- Gallery Widget -->
+        <div class="s-widget">
+            <!-- Heading -->
+            <h5><i class="fa fa-users color"></i> Joueurs</h5>
+            <!-- Widgets Content -->
+            <div class="widget-content">
+                <div class="score-list">
+                    <!-- content -->
+                    <div class="score-list-content">
+                        <ul>
+                            {% for player in game_play.players %}
+                                {% set user = player.customer ? player.customer.user : null %}
+                                {% set avatarPath = user ? avatar(user) : '/assets/frontend/img/avatar_2x.png' %}
+                                <li>
+
+                                    <!-- Item image -->
+                                    <img src="{{ avatarPath | imagine_filter('thumbnail') }}"
+                                         alt="" class="img-responsive img-round"/>
+
+                                    <!-- Item title -->
+                                    <!-- Item title -->
+                                    <span class="pull-right">{% if player.score %}
+                                            <strong>{{ player.score }}</strong>
+                                        {% else %}
+                                            -
+                                        {% endif %} pt{% if player.score > 1 %}s{% endif %}</span>
+                                    <span class="player-name">{{ player.name }}</span>
+
+                                    <div class="clearfix"></div>
+                                    <div class="divider-4"></div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if game_play.images|length > 0 %}
+        <!-- Gallery Widget -->
+        <div class="s-widget">
+            <!-- Heading -->
+            <h5><i class="fa fa-camera color"></i> Photos</h5>
+            <!-- Widgets Content -->
+            <div class="widget-content gallery">
+                {% for image in game_play.images %}
+                    <a href="{{ image.webPath | imagine_filter('default') }}" rel="jeu" class="fancybox"
+                       title="{{ image.description }}">
+                        <img src="{{ image.webPath | imagine_filter('thumbnail_S') }}" alt=""
+                             class="img-responsive img-thumbnail"/>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="s-widget">
+        <!-- Heading -->
+        <h5><i class="fa fa-bookmark color"></i> Édition</h5>
+        <div class="widget-content gallery">
+            <ul class="list-6">
+                {% if product.designers|length > 0 %}
+                    <li>
+                        Un jeu de
+                        {% for key, personne in product.designers %}{% if (key > 0) %},{% endif %} <a
+                            href="{{ path('app_person_show', { 'slug': personne.slug }) }}">{{ personne }}</a>{% endfor %}
+                    </li>
+                {% endif %}
+                {% if product.artists|length > 0 %}
+                    <li>
+                        illustré{% if product.artists|length > 1 %}s{% endif %} par
+                        {% for key, personne in product.artists %}{% if (key > 0) %},{% endif %} <a
+                            href="{{ path('app_person_show', { 'slug': personne.slug }) }}">{{ personne }}</a>{% endfor %}
+                    </li>
+                {% endif %}
+                {% if product.publishers|length > 0 %}
+                    <li>
+                        édité{% if product.publishers|length > 1 %}s{% endif %} par
+                        {% for key, personne in product.publishers %}{% if (key > 0) %},{% endif %} <a
+                            href="{{ path('app_person_show', { 'slug': personne.slug }) }}">{{ personne }}</a>{% endfor %}
+                    </li>
+                {% endif %}
+            </ul>
+
+        </div>
+    </div>
+
+    <!-- Material list -->
+    {% if product.materiel %}
+        <div class="s-widget">
+            <!-- Heading -->
+            <h5><i class="fa fa-list color"></i> Matériel</h5>
+            <!-- Widgets Content -->
+            <div class="widget-content gallery">
+                <ul class="list-6">
+                    {% for row in product.materiel|split("\n") %}
+                        <li>{{ row }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+</div>

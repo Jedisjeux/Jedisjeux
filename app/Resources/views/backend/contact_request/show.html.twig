@@ -1,0 +1,37 @@
+{% extends 'backend/layout.html.twig' %}
+
+{% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
+{% import 'backend/macro/breadcrumb.html.twig' as breadcrumb %}
+
+{% set breadcrumbs = [
+{ label: 'app.ui.administration'|trans, url: path('app_backend_dashboard') },
+{ label: (metadata.applicationName~'.ui.'~metadata.pluralName)|trans, url: path(configuration.getRouteName('index'), configuration.vars.route.parameters|default({})) },
+{ label: resource.id }
+]
+%}
+
+{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.'~metadata.name) %}
+
+{% block title %}{{ parent() }} {{ header|trans }}{% endblock %}
+
+{% block content %}
+    {{ headers.default(header|trans, configuration.vars.icon|default('mail'), configuration.vars.subheader|default(null)|trans) }}
+
+    {{ breadcrumb.crumble(breadcrumbs) }}
+
+    <div class="ui list">
+        <div class="item">
+            <div class="header"><i class="user icon"></i> {{ 'sylius.ui.name'|trans }}</div>
+            {{ contact_request.fullName }}
+        </div>
+        <div class="item">
+            <div class="header"><i class="mail icon"></i> {{ 'sylius.ui.email'|trans }}</div>
+            {{ contact_request.email }}
+        </div>
+    </div>
+
+    <div class="ui message">
+        <p>{{ contact_request.body|raw }}</p>
+    </div>
+
+{% endblock %}

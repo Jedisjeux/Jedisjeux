@@ -1,0 +1,14 @@
+app_partial_game_play_index:
+    methods: [GET]
+    path: /game-plays/
+    defaults:
+        _controller: app.controller.game_play:indexAction
+        _sylius:
+            repository:
+                method: createFilterPaginator
+                arguments: [$criteria, $sorting]
+            template: $template
+            paginate: $paginate
+            sortable: true
+    requirements:
+        template: "[^?]+"

@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+{% from 'macros/misc.html.twig' import pagination %}
+
+{% block headline %}
+    Les avis de jeux
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    <a href="{{ path('game_review_index') }}">Avis</a>
+{% endblock %}
+
+{% block body -%}
+    {% include 'frontend/game_review/_index_by_game.html.twig' %}
+{% endblock %}
+
+{% block Pagination %}
+    {{ pagination(game_reviews) }}
+{% endblock %}

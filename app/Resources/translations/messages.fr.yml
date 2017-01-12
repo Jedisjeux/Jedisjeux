@@ -1,0 +1,264 @@
+app:
+    ui:
+        administration: Administration
+        articles: Articles
+        article_details: Détails de l'article
+        article_settings: Configuration de l'article
+        avatar: Avatar
+        barcode: Code-barres
+        barcodes: Code-barres
+        blocks: Blocs
+        box: Encart
+        catalog: Catalogue
+        contact_request: Demande de contact
+        contact_requests: Demandes de contact
+        content: Contenu
+        created_at: Créé le
+        created_at_female: Créée le
+        dealer: Vendeur
+        dealers: Vendeurs
+        dealer_prices: Tarifs des vendeurs
+        edit_article: Modifier l'article
+        edit_dealer: Modifier le vendeur
+        edit_person: Modifier la personne
+        edit_string_block: Modifer le bloc de chaîne
+        edit_topic: Modifier le sujet
+        forum: Forum
+        framed: Encadré
+        image_on_the_left_side: Image à gauche
+        image_on_the_right_side: Image à droite
+        image_on_the_top_side: Image en haut
+        internal_name: Nom interne
+        introduction: Introduction
+        logout: Déconnection
+        manage_articles: Gérer les articles
+        manage_contact_requests: Gérer les demandes de contact
+        manage_dealers: Gérer les vendeurs
+        manage_dealer_prices: Gérer les tarifs des vendeurs
+        manage_people: Gérer les personnes
+        manage_string_blocks: Gérer les blocs de chaîne
+        manage_topics: Gérer les sujets
+        name: Nom
+        new_article: Nouvel article
+        new_dealer: Nouveau vendeur
+        new_person: Nouvelle personne
+        new_string_block: Nouveau bloc de chaîne
+        overview_of_your_website: Aperçu de votre site web
+        people: Personnes
+        prices: Tarifs
+        price_list: Liste de prix
+        pub_banners: Bannières de pub
+        published_at: Publié le
+        request_placeholder: Recherche....
+        string_blocks: Blocs de chaîne
+        topics: Sujets
+        view_details: Voir les détails
+sylius:
+    ui:
+        available: Disponible
+        customer_groups: Groupes
+        filter: Filtrer
+        groups: Groupes
+        manage_customer_groups: Gérer les groupes
+        manage_static_contents: Gérer les contenus statiques
+        no_label: Non
+        out_of_stock: Rupture
+        pending_publication: Prêt à publier
+        pending_review: En relecture
+        pending_translation: En attente de traduction
+        pending_translation_changes: En attente de modifs de trad
+        pre_order: Pré-commande
+        published: Publié
+        show: Voir
+        yes_label: Oui
+
+title:
+  articles: Articles
+  categories: Catégories
+  confirmation: Confirmation
+  error: Erreur
+  page_not_found: Page introuvable
+
+label:
+  active: Actif
+  add_barcode: Ajouter un code-barres
+  add_image: Ajouter une image
+  add_player: Ajouter un joueur
+  add_product: Ajouter un produit
+  add_slide: Ajouter un slide
+  additional_address_info: Complément d'adresse
+  address: Adresse
+  age_min: Age min
+  amount: Montant
+  artists: Illustrateurs
+  ask_for_publication: Demander la publication
+  ask_for_review: Demander une relecture
+  ask_for_translation: Demander une traduction
+  ask_for_translation_changes: Demander des modifs de trad
+  at: À
+  attributes: Attributs
+  available: Disponible
+  barcode: Code-barres
+  barcodes: Codes-barres
+  body: Corps
+  cancel: Annuler
+  category: Catégorie
+  categories: Catégories
+  categorization: Catégorisation
+  choose_mechanisms: Choisissez des mécanismes
+  choose_target_audience: Choisissez le public visé
+  choose_themes: Choisissez des thèmes
+  city: Ville
+  code: Code
+  company: Société
+  connection: Connexion
+  contact: Contact
+  contact_request: Demande de contact
+  contact_requests: Demandes de contact
+  contact_us: Contactez-nous
+  country: Pays
+  create: Créer
+  created_at: Créé le
+  create_article: Créer un article
+  create_category: Créer une catégorie
+  css_class: Classe CSS
+  day: Jour
+  dealer: Vendeur
+  dealers: Vendeurs
+  delete: Supprimer
+  designers: Auteurs
+  description: Description
+  duration: Durée
+  duration_min: Durée min
+  duration_max: Durée max
+  games: Jeux
+  headers: Entêtes
+  hello: Bonjour
+  edit: Modifier
+  edit_dealer: Modifier un vendeur
+  edit_post: Modifier un message
+  email: Email
+  end_date: Date de fin
+  file: Fichier
+  first_name: Prénom
+  games: Jeux
+  home: Accueil
+  image: Image
+  image_position: Position de l'image
+  images: Images
+  internal_name: Nom interne
+  label: Libellé
+  last_name: Nom
+  main: Principale
+  master: Master
+  material: Matériel
+  max: Max
+  mechanisms: Mécanismes
+  min: Min
+  month: Mois
+  most_commented: Les plus commentés
+  most_viewed: Les plus vus
+  name: Nom
+  new: Nouveau
+  new_dealer: Nouveau vendeur
+  pending_publication: Prêt à publier
+  pending_review: En relecture
+  pending_translation: En attente de traduction
+  pending_translation_changes: En attente de modifs de trad
+  no: Non
+  on_top: En haut
+  on_the_left_side: À gauche
+  on_the_right_side: À droite
+  out_of_stock: Rupture
+  password: Mot de passe
+  password_confirmation: Confirmation mot de passe
+  path: Chemin
+  people: Personnes
+  phone_number: Téléphone
+  played_at: Joué le
+  players: Joueurs
+  player_count: Nombre de joueurs
+  player_count_min: Nombre de joueurs min
+  player_count_max: Nombre de joueurs max
+  posts: Messages
+  product: Produit
+  products: Produits
+  price: Prix
+  price_list: Liste de prix
+  public: Public
+  publish: Publier
+  publishable: Publiable
+  published: Publié
+  published_at: Publié le
+  publishers: Editeurs
+  pub_banners: Bannières de pub
+  rate: Note
+  release: Sortie
+  released_at: Sortie le
+  release_date: Date de sortie
+  release_date_precision: Précision de la date de sortie
+  remember_me: Se souvenir de moi
+  remove_this_barcode: Supprimer ce code-barres
+  remove_this_image: Supprimer cette image
+  remove_this_player: Supprimer ce joueur
+  save_changes: Mettre à jour
+  search: Rechercher
+  search_query: Recherche...
+  send: Envoyer
+  score: Score
+  short_description: Description courte
+  show: Voir
+  start_date: Date de début
+  status: Statut
+  target_audience: Public visé
+  target_url: Url cible
+  themes: Thèmes
+  title: Titre
+  topic: Sujet
+  topics: Sujets
+  url: Url
+  username: Nom d'utilisateur
+  username_or_email: Nom d'utilisateur ou email
+  validate: Valider
+  variants: Variants
+  website: Site web
+  year: Année
+  yes: Oui
+  your_rate: Votre note
+  zone: Zone
+
+text:
+  confirmation: Souhaitez-vous supprimer cet élément ?
+  error:
+      404: "<p>Dans le néant on ne vous entend pas crier : \"ahhhhhh !!!\"</p>"
+      500: "<p>Quelque chose est cassée. Merci de nous envoyer un email et écrivez ce que vous faisiez avant de rencontrer cette erreur. Nous corrigerons aussi vite que possible. Désolé pour la gêne occasionnée.</p>"
+  notification:
+      article:
+          ask_for_review: L'article <strong>%ARTICLE_NAME%</strong> a besoin d'une relecture.
+          ask_for_publication: L'article <strong>%ARTICLE_NAME%</strong> est prêt à valider.
+      product:
+          ask_for_translation: Le jeu <strong>%PRODUCT_NAME%</strong> a besoin d'une traduction.
+          ask_for_review: Le jeu <strong>%PRODUCT_NAME%</strong> a besoin d'une relecture.
+          ask_for_publication: Le jeu <strong>%PRODUCT_NAME%</strong> est prêt à valider.
+      topic_reply: %USERNAME% a répondu au sujet %TOPIC_NAME%.
+
+emails:
+    ending: Cordialement,
+    signature: "L'équipe Jedisjeux"
+    user_password_reset:
+        subject: Réinitialisation du mot de passe
+        content:  "Pour réinitialiser votre mot de passe cliquez <a href='%LINK%'>ici</a>. <br/><br/> Si vous rencontrez un soucis, copier coller le lien suivant : %LINK%"
+    user_registration:
+        subject: Bienvenue sur Jedisjeux
+        content:  "Merci d'avoir créé un compte sur Jedisjeux"
+    website_release:
+        subject: Nouveau Jedisjeux en ligne
+        content:
+            introduction: "L'équipe de Jedisjeux vient de sortir son nouveau site internet. Le changement de plateforme nécessite que <strong>vous réinitialisez votre mot de passe</strong>."
+            reset_password: "<strong>Pour réinitialiser votre mot de passe cliquez <a href='%LINK%'>ici</a></strong>. <br/><br/> Si vous rencontrez un soucis, copier coller le lien suivant : %LINK%"
+    contact_request:
+        subject: Nouveau message de contact Jedisjeux
+        content: Vous avez reçu un message de <strong>%FULLNAME%</strong>
+    verification:
+        subject: Vérification de l'adresse e-mail
+        content: Pour vérifier votre adresse email, visitez %url%

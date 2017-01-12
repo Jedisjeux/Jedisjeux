@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+{% from 'macros/misc.html.twig' import pagination %}
+{% from 'macros/sorting.html.twig' import sorting %}
+{% from 'macros/items.html.twig' import blockquoteOne %}
+
+{% block headline %}
+    Jeux
+{% endblock %}
+
+{% block subtitle %}
+    ayant pour {{ taxon.root }} : {{ taxon }}
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    <a href="{{ path('sylius_product_index') }}">Jeux</a> /
+    {{ taxon }}
+{% endblock %}
+
+{% block body -%}
+    <div class="col-md-9">
+
+        <div class="container">
+
+            {% if taxon.description %}
+                {{ blockquoteOne(taxon.description) }}
+            {% endif %}
+
+            <div class="pull-right sorting">
+                {% set sorting = app.request.get('sorting') %}
+
+                {% set icon = false %}
+                {% set currentOrder = null %}
+
+                {% if null == sorting %}
+                    {% set icon = true %}
+                    {% set currentOrder = 'desc' %}
+                {% endif %}
+
+                Trier
+                par {{ sorting('sylius_product_index_by_taxon', 'label.created_at'|trans, 'createdAt', 'desc', icon, currentOrder, {'permalink': taxon.permalink}) }}
+                ,
+                par {{ sorting('sylius_product_index_by_taxon', 'label.rate'|trans, 'averageRating', 'desc', null, null, {'permalink': taxon.permalink}) }}
+                ,
+                {{ sorting('sylius_product_index_by_taxon', 'label.name'|trans, 'translation.name', 'asc', null, null, {'permalink': taxon.permalink} ) }}
+            </div>
+
+            {% include "frontend/game/index/list-4.html.twig" %}
+
+            <div class="pagination-wrapper">
+                <div class="pagination-bottom">
+                    {{ pagination(products) }}
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+        {% include 'frontend/game/_sidebar.html.twig' %}
+    </div>
+{% endblock %}

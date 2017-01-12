@@ -1,0 +1,21 @@
+app_api_person_index:
+    path: /people/
+    methods: [GET]
+    defaults:
+        _controller: app.controller.person:indexAction
+        _sylius:
+            serialization_groups: [Default]
+            repository:
+                method: createFilterPaginator
+                arguments: [$criteria, $sorting]
+            paginate: $limit
+            sorting:
+                id: asc
+
+app_api_person_show:
+    path: /people/{id}
+    methods: [GET]
+    defaults:
+        _controller: app.controller.person:showAction
+        _sylius:
+            serialization_groups: [Detailed]

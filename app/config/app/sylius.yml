@@ -1,0 +1,13 @@
+imports:
+    #- { resource: sylius/sylius_archetype.yml }
+    - { resource: sylius/sylius_association.yml }
+    - { resource: sylius/sylius_content.yml }
+    - { resource: sylius/sylius_customer.yml }
+    - { resource: sylius/sylius_grid.yml }
+    - { resource: sylius/sylius_locale.yml }
+    - { resource: sylius/sylius_mailer.yml }
+    - { resource: sylius/sylius_product.yml }
+    - { resource: sylius/sylius_resource.yml }
+    - { resource: sylius/sylius_review.yml }
+    - { resource: sylius/sylius_taxonomy.yml }
+    - { resource: sylius/sylius_user.yml }

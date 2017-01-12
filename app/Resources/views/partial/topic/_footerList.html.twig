@@ -1,0 +1,12 @@
+{% from 'macros/topics.html.twig' import getPath %}
+
+<ul class="list-unstyled">
+    {% for topic in topics %}
+        <li>
+            <a href="{{ getPath(topic) }}">
+                <!-- Item title -->
+               {{ topic.title }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>

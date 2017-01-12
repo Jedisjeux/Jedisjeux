@@ -1,9 +1,0 @@
-{% macro joueurCount(jeu) %}
-    {% if jeu.joueurMin == jeu.joueurMax %}
-        à {{ jeu.joueurMin }} joueur{% if jeu.joueurMin>1 %}s{% endif %} exclusivement
-    {% elseif not jeu.joueurMax %}
-        à partir de {{ jeu.joueurMin }} joueur{% if jeu.joueurMin>1 %}s{% endif %}
-    {% else %}
-        de {{ jeu.joueurMin }} à {{ jeu.joueurMax }} joueurs
-    {% endif %}
-{% endmacro %}

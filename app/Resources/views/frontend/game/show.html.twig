@@ -1,0 +1,55 @@
+{% extends "::base.html.twig" %}
+
+{% import 'macros/pageViews.html.twig' as pageViews %}
+
+ {#TODO REMOVE #}
+{% set jeu = product is defined ? product : jeu %}
+
+{% block headline %}
+    {{ jeu }}
+{% endblock headline %}
+
+{% block subtitle_container %}
+    {% if product.averageRating %}
+        <span class="fa fa-star yellow"></span> {{ product.averageRating|round(1) }}
+    {% endif %}
+{% endblock %}
+
+{% block breadcrumb_content %}
+    <a href="{{ path('sylius_product_index') }}">Jeux</a>
+    / {{ jeu }}
+{% endblock %}
+
+{% block container %}
+
+    <div class="col-md-8">
+        {% include "frontend/game/show/header.html.twig" with {'jeu': jeu} %}
+
+        {% include "frontend/game/show/nav-tab.html.twig" with {'jeu': jeu} %}
+
+        {% render(url('app_partial_dealer_price_index', {
+            template: 'frontend/dealer_price/_index.html.twig',
+            paginate: 4,
+            criteria: {
+                'product': product.id
+            }
+        })) %}
+
+        {% include "frontend/game/show/_variants.html.twig" %}
+        {% include "frontend/game/show/_associations.html.twig" %}
+
+    </div>
+
+    <div class="col-md-4">
+        {% include "frontend/game/show/sidebar.html.twig" with {'jeu': jeu} %}
+    </div>
+
+
+    {#    {% render controller('JDJUserReviewBundle:JeuNote:new', { 'idJeu': jeu.id }) %}
+        {% include "JDJJeuBundle:Jeu:partial/onglet.html.twig" with {'jeu': jeu, 'userReviews': userReviews} %}
+        {% render url('jeu_if_you_like_this_game', { 'id': jeu.id }) %}#}
+
+
+    {{ pageViews.render(product.id, 'product', path('sylius_product_show', {'slug' : product.slug})) }}
+
+{% endblock container %}

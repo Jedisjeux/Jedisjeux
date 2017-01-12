@@ -1,0 +1,14 @@
+{% import 'SyliusUiBundle:Macro:buttons.html.twig' as buttons %}
+
+{% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
+
+{# ... #}
+
+{% set prototypes = form.document.children.vars.prototypes %}
+
+<h4 class="ui dividing header">{{ 'app.ui.article_details'|trans }}</h4>
+{{ form_row(form.document.title) }}
+{{ form_row(form.document.children) }}
+
+{#{{ render(url('app_partial_single_image_block_create', {'imagePosition': 'left'})) }}#}
+

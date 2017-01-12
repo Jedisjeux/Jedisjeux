@@ -1,0 +1,22 @@
+app_api_notification_read:
+    methods: [PATCH]
+    path: /notifications/{id}
+    defaults:
+        _controller: app.controller.notification:readAction
+        _sylius:
+            repository:
+                method: findOneBy
+                arguments:
+                  - {id: $id, recipient: expr:service('app.context.customer').getCustomer().getId()}
+
+
+app_api_notification_index:
+    methods: [GET]
+    path: /notifications/
+    defaults:
+        _controller: app.controller.notification:indexAction
+        _sylius:
+            repository:
+                method: findBy
+                arguments:
+                  - {read: 0, recipient: expr:service('app.context.customer').getCustomer().getId()}

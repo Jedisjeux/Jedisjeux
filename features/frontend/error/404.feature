@@ -1,0 +1,8 @@
+@ui @frontend @error @404
+Feature: As a visitor
+  I need to be able to see a 404 when page does not exist
+
+  @javascript
+  Scenario: See a 404
+    When I am on "/error/404"
+    Then I should see "Page introuvable"

@@ -1,0 +1,259 @@
+-
+  id: 1
+  name: Enchères
+  description: |
+    <p>Mécanisme où les joueurs misent et renchérissent (avec des Meeples, des jetons, de l'argent ou autre selon le jeu) afin d'obtenir un avantage. Il existe plusieurs systèmes d'enchères.</p>
+    <p>Exemples : Goa, Megawatts, Keyflower...</p>
+  slug: encheres
+-
+  id: 2
+  name: Conquêtes
+  description: |
+    <p>Dans ce type de jeux, les joueurs devront tenter de conquérir du terrain neutre et/ou du terrain adverse sur le plateau. Celui qui aura le plus étendu son territoire remportera la partie.</p>
+    <p>Exemple : Risk, Catane, Civilization, Le Trône de Fer...</p>
+  slug: conquetes
+-
+  id: 3
+  name: Capture
+  description: |
+    <p>Dans ce type de jeux, les joueurs doivent capturer un élément neutre ou appartenant à un adversaire.
+    Exemples : Jeu de Dames, Wiz-War, Jungle Speed, Reef Encounter...</p>
+  slug: capture
+-
+  id: 4
+  name: Combinaisons
+  description: |
+    <p>Parfois surnommé "combo". Faire des combo c’est optimiser ses actions pour qu’elles soient les plus avantageuses possibles. Certains jeux de cartes notamment sont entièrement pensés pour fonctionner par combo.</p>
+    <p>Ex: Magic, Seasons, Smash Up...</p>
+  slug: combinaisons
+-
+  id: 5
+  name: Plis
+  description: |
+    <p>Un jeu de plis ou de "levées" est un type de jeux de cartes dans lequel les joueurs exposent tour à tour une carte sur la table et celui qui a joué la plus forte, selon les règles du jeu, s'empare de l'ensemble en le levant et le pliant devant lui : il regroupe les cartes en tas et les retourne, faces cachées, devant lui (alors on dit que le joueur fait une levée ou un pli).
+    Exemple : le Bridge, Le Diable dans la Bouteille, Stupide Vautour, Mito...</p>
+  slug: pli
+-
+  id: 6
+  name: Parcours
+  description: <p>Type de jeu où les joueurs ont un chemin défini à parcourir pour gagner, il peut s'agir d'un jeu de course ou d'un jeu de l'oie repensé et amélioré. Ex: Talisman, Formule 1, Jack Bananas, Jamaica...</p>
+  slug: parcours
+-
+  id: 7
+  name: Habileté
+  description: |
+    <p>Un jeu d'habileté ou "d'adresse" est un type de jeu qui se base en grande partie sur la dextérité (et/ou la rapidité physique) des joueurs.
+    Exemple : Mölkky, PitchCar, Carrom, Hop la bille, Perplexus, Jungle Speed...</p>
+  slug: habilete
+-
+  id: 8
+  name: Rangement
+  description: <p>Le jeu de rangement propose aux joueurs d'imbriquer des pièces dans un ordre précis (il peut y avoir qu'une seule solution comme dans les puzzles ou plusieurs possibles comme dans Katamino par exemple).</p>
+  slug: rangement
+-
+  id: 9
+  name: Hasard
+  description: |
+    <p>"Un jeu de hasard est un jeu dont le déroulement est partiellement ou totalement soumis à la chance. Celle-ci peut provenir d'un tirage ou d'une distribution de cartes, d'un jet de dé, etc.
+    Lorsque le jeu est totalement soumis au hasard, on parle de jeu de hasard pur. Lorsque le joueur doit déterminer son action en fonction d'événements aléatoires passés ou futurs et de probabilités, on parle plus volontiers de jeu de hasard raisonné." (Wikipédia)
+    Exemples de jeux de jeu de hasard raisonné : Perudo, Roll Through the Ages, Yspahan, La Guerre de l'Anneau, Ultimate Warriorz : Tribal Rumble...</p>
+  slug: hasard
+-
+  id: 10
+  name: Mémoire
+  description: <p>Comme son nom l'indique, un jeu de mémoire utilise la capacité de mémorisation des joueurs. Le célèbre mémory en est un exemple parlant, mais d'autres jeux utilisent la mémoire sans tout axer la-dessus. Exemples : Crôa!, Ovo, Shadows over Camelot, Divinare, Time's up...</p>
+  slug: memoire
+-
+  id: 11
+  name: Simulation
+  description: |
+    <p>Vous trouverez dans cette catégorie des jeux qui simulent une situation. Cela peut être une situation politique (exemple : Junta, War of terror...), économique (1830...), historique (Antiquity, Liberté...), militaire (Combat Commander...) ou une situation plus théâtrale (exemples : Petits meurtres et faits divers, les jeux de rôles...).
+    Note :
+    Lorsque la simulation porte sur une guerre ou une bataille réelle ou fictive, on parle plutôt de jeu de guerre ou jeu de stratégie. Le jeu de figurines est une forme de représentation du jeu de guerre (exemple : Mémoire 44, Wings of war...).</p>
+  slug: simulation
+-
+  id: 12
+  name: Coopératif
+  description: |
+    <p>Jeux de société sans (ou presque sans) compétition entre joueurs puisqu'ils partagent les mêmes intérêts, le même objectif et doivent trouver ensemble une solution de battre le jeu qui leur propose un défi.
+    Exemples : Les Chevaliers de la Table Ronde, Pandémie, Dungeon Fighter, Sherlock Holmes detective conseil, Defender of the realm...
+
+    Note : Certains jeux fonctionnent par équipe qui s'opposent (Pictionary, Times's up...), d'autres sont des jeux "semi-coopératifs" et mettent généralement en jeu un joueur contre les autres.  Exemples : Descent, Scotland Yard, Garibaldi...</p>
+  slug: cooperatif
+-
+  id: 13
+  name: Bluff
+  description: |
+    <p>Dans les jeux de bluff vous allez devoir tirer partie de la situation en abusant vos adversaire avec vos actions et vos paroles.
+    Ex: Poker, Non Merci, Ca$h'n Gun$, Perudo, Coyote, Diplomatie, Junta, Petits Meurtres et Faits Divers...</p>
+  slug: bluff
+-
+  id: 14
+  name: Déduction
+  description: <p>Un jeu de déduction est un jeu de société dans lequel un joueur doit découvrir, selon des règles établies, un ou plusieurs éléments cachés (par un adversaire ou par le jeu lui-même). Ex: Dixit, Sherlock Holmes - Détective Conseil, Time's up, MasterMind, Intrigues à Venise, Cluedo, Compatibility...</p>
+  slug: deduction
+-
+  id: 16
+  name: Construction
+  description: |
+    <p>Dans cette catégorie vous trouverez des jeux où les joueurs ont la sensation de construire quelque chose pendant la partie : un empire, une cité, un bâtiment, un réseau commercial ou ferroviaire etc...
+    Ce genre de jeu nécessite souvent une certaine planification des étapes.
+    Ex : Citadelle, Antike, Funkenschlag, Through the Ages, Catane, Galaxy Trucker...</p>
+  slug: construction
+-
+  id: 17
+  name: Placement
+  slug: placement
+-
+  id: 18
+  name: Courses
+  description: <p>Le but est généralement de progresser le plus rapidement possible d'un point à un point autre pour gagner sur les autres ou sur un élément du jeu. Très souvent dans les jeux de courses, le premier arrivé remporte la partie.</p>
+  slug: courses
+-
+  id: 19
+  name: Affrontement
+  description: <p>Un jeu d'affrontement propose aux joueurs une interaction directe, cela peut se traduire par de la prise de pièces adverses (cartes, jetons, figurines etc), de la prise de position sur le terrain ou d'une manière plus générale, une possibilité d'interférer directement dans la stratégie adverse.</p>
+  slug: affrontement
+-
+  id: 20
+  name: Simultané
+  description: <p>Ce terme signifie simplement qu' une plusieurs phases importante(s) du jeu se déroulent simultanément, autrement dit, que tous les joueurs agissent en même temps et non à tour de rôle comme il est d'usage traditionnellement. Ex : Galaxy Trucker, Jungle speed, Contrario, 7 wonders...</p>
+  slug: simultane
+-
+  id: 21
+  name: Blocage
+  description: <p>A l'origine, dans ces jeux, les adversaires déplacent un de leurs pions, chacun leur tour, sur un plateau. Lorsqu'un joueur bloqué et ne peut plus déplacer le moindre dee ses pions, il a perdu. Par extensions, l'expression "jeu de blocage" désigne un jeu où les joueurs vont jouer des éléments (cartes, pion, tuiles, meeples...) de façon à bloquer l'adversaire. C'est une composante importante de l'interaction souvent qualifiée d'"indirecte".</p>
+  slug: blocage
+-
+  id: 22
+  name: Question
+  description: <p>Dans cette catégorie sont regroupés les jeux où l'on doit répondre à des questions. Le trivial pursuit est un exemple très célèbre : il s'agit de question de culture générale, mais il peut également s'agir de jeux avec des questions absurdes (burger quizz), personnelles (privacy) ou des énigmes à résoudre (mystères à l'abbaye, Black Stories...).</p>
+  slug: question
+-
+  id: 23
+  name: Défausse
+  description: <p>Un jeu de défausse est généralement un jeu de carte où vous devez vous débarrasser de vos cartes pour gagner. Ex: Uno, Cardline, Gang of four...</p>
+  slug: defausse
+-
+  id: 24
+  name: Linguistique
+  description: |
+    <p>Sous ce terme nous regroupons tous les jeux qui jouent sur les mots ou les capacités d'argumentation/narration des joueurs.
+
+    Ex : Linq, le mot le plus court, Taboo, Oui, Seigneur des Ténèbres !, Petits Meurtres et Faits Divers...</p>
+  slug: linguistique
+-
+  id: 25
+  name: Négociation
+  description: |
+    <p>Dans ces jeux, les joueurs doivent s'attendre à parlementer avec les autres.
+    Des capacités de marchandage seront parfois requises pour des jeux de commerce par exemple, mais il peut également s'agir de jeux coopératifs qui nécessitent une bonne collaboration.</p>
+  slug: negociation
+-
+  id: 26
+  name: Créativité
+  description: <p>Ce type de jeu fait appel aux capacités inventives des joueurs pour raconter ou dessiner quelque chose par exemple...</p>
+  slug: creativite
+-
+  id: 27
+  name: Objectif secret
+  description: |
+    <p>Dans ce type de jeu, chaque joueur possède un objectif tenu secret des autres. Parfois tout le monde a le même objectif sauf un joueur (/ou par équipe) mais les joueurs ne savent pas "qui est qui" ou "qui cherche à faire quoi", et ce suspens tient en haleine jusqu'à un certain stade voir jusqu'à la résolution de la partie.
+
+    ex : Les Chevaliers de la Table Ronde, les Aventuriers du rail, La Guerre des Moutons, Lords of waterdeep, Bang, Les Loups-Garous de Thiercelieux...</p>
+  slug: objectif secret
+-
+  id: 28
+  name: Tuiles
+  slug: tuiles
+-
+  id: 29
+  name: Programmation
+  slug: programmation
+-
+  id: 30
+  name: Observation
+  slug: observation
+-
+  id: 31
+  name: Pari
+  slug: pari
+-
+  id: 32
+  name: Réflexe
+  slug: reflexe
+-
+  id: 33
+  name: Points d'action
+  slug: points-action
+-
+  id: 34
+  name: Majorité
+  slug: majorite
+-
+  id: 35
+  name: Draft
+  description: <p>C’est le fait de constituer son jeu à partir d’une base tirée aléatoirement. Par exemple : chaque joueur a une main de cartes, chaque joueur en sélectionne une qu’il va souhaiter garder et fait passer le reste des cartes. On recommence jusqu’à constitution de la main de départ.</p>
+  slug: draft
+-
+  id: 36
+  name: Gages
+  slug: gages
+-
+  id: 37
+  name: Gestion de main
+  slug: gestion-de-main
+-
+  id: 38
+  name: Roue
+  slug: roue
+-
+  id: 40
+  name: Rapidité
+  slug: rapidite
+-
+  id: 41
+  name: Dés
+  slug: des
+-
+  id: 42
+  name: Pose d'ouvriers
+  slug: pose-ouvriers
+-
+  id: 43
+  name: Deckbuilding
+  description: |
+    <p>Mécanique de jeu où l'on constitue son deck en jouant (sachant que le "deck" est la traduction de "paquet de cartes", en réalité c'est votre pioche personnelle, parfois commune).
+
+    Exemples : Magic, Dominion, Thunderstone, Nightfall, Rune Age,
+    Ascension...
+
+    Remarque :
+    Il existe aussi le même système mais avec des dés : on monte son set de dés (dés qui nous servent ensuite à réaliser des actions). On parle de "dice building".
+
+    Exemples: Quarriors!, The Lord of the Rings Dice Building Game...</p>
+  slug: deckbuilding
+-
+  id: 44
+  name: Semi-coopératif
+  slug: semi-cooperatif
+-
+  id: 45
+  name: Connaissances
+  slug: connaissances
+-
+  id: 46
+  name: Elimination
+  slug: elimination
+-
+  id: 47
+  name: Cartes personnages
+  slug: cartes-personnages
+-
+  id: 48
+  name: Stop ou encore
+  slug: stop-ou-encore
+-
+  id: 49
+  name: Pioche
+  slug: pioche

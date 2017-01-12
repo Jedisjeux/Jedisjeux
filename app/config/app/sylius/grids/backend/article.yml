@@ -1,0 +1,48 @@
+sylius_grid:
+    grids:
+        app_backend_article:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%app.model.article.class%"
+            sorting:
+                createdAt: desc
+            fields:
+                image:
+                    type: twig
+                    label: sylius.ui.image
+                    path: .
+                    options:
+                        template: "backend/article/grid/field/image.html.twig"
+                title:
+                    type: string
+                    label: sylius.ui.title
+                    sortable: title
+                status:
+                    type: twig
+                    label: sylius.ui.status
+                    options:
+                        template: "backend/grid/field/state.html.twig"
+                        vars:
+                            labels: "backend/article/label/state"
+                createdAt:
+                    type: twig
+                    label: app.ui.created_at
+                    sortable: createdAt
+                    options:
+                        template: "backend/grid/field/date/medium.html.twig"
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    options:
+                        fields: [title]
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete

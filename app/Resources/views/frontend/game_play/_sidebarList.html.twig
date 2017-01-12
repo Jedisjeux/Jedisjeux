@@ -1,0 +1,36 @@
+{% from 'macros/users.html.twig' import avatar %}
+
+<ul>
+    {% for game_play in game_plays %}
+        {% set user = game_play.author.user %}
+        {% set imagePath = game_play.product.mainImage ? game_play.product.mainImage.webPath : 'assets/frontend/img/avatar_2x.png' %}
+
+        {% set meta %}
+            <!-- Date -->
+            <i class="fa fa-calendar"></i>
+            &nbsp; {{ game_play.createdAt|localizeddate('medium', 'none') }}
+            &nbsp;
+            <!-- Comments -->
+        {% set commentCount = game_play.topic ? game_play.topic.postCount : 0 %}
+            <i class="fa fa-comments"></i> &nbsp; {{ commentCount }} <span
+                class="hidden-xs"></span> &nbsp;
+        {% endset %}
+
+
+        <li>
+            <a href="{{ path('app_game_play_show', {'productSlug': game_play.product.slug, 'id': game_play.id}) }}">
+                <!-- Item image -->
+                <img src="{{ imagePath | imagine_filter('thumbnail') }}" alt="{{ game_play.product }}" class="img-responsive img-round"/>
+
+                <!-- Item title -->
+                <span>{{ game_play.product }}</span><br/>
+            </a>
+
+            <div class="meta">
+                {{ meta|raw }}
+            </div>
+
+            <div class="clearfix"></div>
+        </li>
+    {% endfor %}
+</ul>

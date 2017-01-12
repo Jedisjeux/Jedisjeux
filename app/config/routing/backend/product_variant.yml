@@ -1,0 +1,32 @@
+sylius_backend_product_variant:
+    resource: |
+        alias: sylius.product_variant
+        section: backend
+        templates: :backend/product_variant
+        redirect: index
+        only: [update, delete]
+    type: sylius.resource
+
+sylius_backend_product_variant_index:
+    methods: [GET]
+    path: /products/{productId}/variants
+    defaults:
+        _controller: sylius.controller.product_variant:indexAction
+        _sylius:
+            criteria:
+                product: $productId
+            sorting:
+                createdAt: desc
+            template: backend/product_variant/index.html.twig
+
+sylius_backend_product_variant_create:
+    methods: [GET, POST]
+    path: /products/{productId}/variants/new
+    defaults:
+        _controller: sylius.controller.product_variant:createAction
+        _sylius:
+            factory:
+                method: createForProduct
+                arguments:
+                  - expr:service('sylius.repository.product').find($productId)
+            template: backend/product_variant/create.html.twig

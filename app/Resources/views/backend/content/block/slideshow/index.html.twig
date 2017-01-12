@@ -1,0 +1,83 @@
+{% extends "layout/backend_index.html.twig" %}
+{% from 'macros/misc.html.twig' import pagination %}
+{% import 'macros/buttons.html.twig' as button %}
+{% from 'macros/sorting.html.twig' import sorting %}
+{% import 'macros/modal.html.twig' as modal %}
+
+{% set sorting = app.request.get('sorting') %}
+
+{% set icon = false %}
+{% set currentOrder = null %}
+
+{% if null == sorting %}
+    {% set icon = true %}
+    {% set currentOrder = 'asc' %}
+{% endif %}
+
+{% block headline %}
+    Blocs diaporama
+{% endblock headline %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    Contenu /
+    <a href="{{ path('admin_block_index') }}">Blocs</a> /
+    Blocs diaporama
+{% endblock %}
+
+
+{% block new_entity_button %}
+    <a class="btn btn-primary" href="{{ path('admin_slideshow_block_new') }}">
+        <span class="glyphicon glyphicon-plus-sign"></span>
+        Nouveau bloc
+    </a>
+{% endblock new_entity_button %}
+
+{% block list %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>{{ sorting('admin_slideshow_block_index', 'label.title'|trans, 'title', 'asc', icon, currentOrder) }}</th>
+            <th>{{ 'label.images'|trans }}</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for block in blocks %}
+            <tr>
+                <td>{{ block.id }}</td>
+                <td>{{ block.title }}</td>
+                <td>
+                    {% for imagineBlock in block.children %}
+                        <img class="img-round"
+                             src="{{ imagineBlock.image.id | imagine_filter("image_upload_thumbnail") }}"
+                             alt="{{ imagineBlock.label }}"/>
+                    {% endfor %}
+                </td>
+                <td class="text-right">
+                    <ul class="list-inline text-nowrap">
+                        <li>
+                            {{ button.show(path('admin_slideshow_block_show', { 'name': block.name })) }}
+                        </li>
+                        <li>
+                            {{ button.edit(path('admin_slideshow_block_edit', { 'name': block.name })) }}
+                        </li>
+                        <li>
+                            {{ button.delete(path('admin_slideshow_block_delete', { 'name': block.name })) }}
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock list %}
+
+{% block Pagination %}
+    <div class="pagination-wrapper">
+        <div class="pagination-bottom">
+            {{ pagination(blocks) }}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,72 @@
+sylius_admin_product:
+    resource: |
+        alias: sylius.product
+        section: admin
+        templates: :backend/crud
+        only: [update, delete]
+        redirect: index
+        vars:
+            all:
+                subheader: sylius.ui.manage_products
+                templates:
+                    form: backend/product/_form.html.twig
+            index:
+                icon: cube
+    type: sylius.resource
+
+sylius_admin_product_create:
+    methods: [GET, POST]
+    path: /products/new
+    defaults:
+        _controller: sylius.controller.product:createAction
+        _sylius:
+            redirect: sylius_admin_product_update
+            factory:
+                method: createWithVariant
+            template: backend/crud/create.html.twig
+            vars:
+                templates:
+                    form: backend/product/_form.html.twig
+
+sylius_admin_product_update_state:
+    methods: [PATCH]
+    path: /products/{id}/status/{transition}
+    defaults:
+        _controller: sylius.controller.product:applyStateMachineTransitionAction
+        _sylius:
+            state_machine:
+                graph: sylius_product
+                transition: $transition
+            redirect: referer
+
+sylius_admin_product_index:
+    methods: [GET]
+    path: /products/
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            section: admin
+            repository:
+                method: createFilterPaginator
+                arguments: [$criteria, $sorting, false, null]
+            template: backend/crud/index.html.twig
+            grid: sylius_backend_product
+            vars:
+              icon: cube
+              subheader: sylius.ui.manage_products
+              actions:
+                  create:
+                      route: sylius_admin_product_create
+
+sylius_admin_product_from_bgg_new:
+    methods: [GET]
+    path: /products/bgg/new
+    defaults:
+        _controller: sylius.controller.product:createAction
+        _sylius:
+            factory:
+                method: createFromBgg
+                arguments: [$bggPath]
+            template: backend/product/create.html.twig
+    requirements:
+        bggPath: "[^?]+"

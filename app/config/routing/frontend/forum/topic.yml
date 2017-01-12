@@ -1,0 +1,64 @@
+app_frontend_topic_create:
+    methods: [GET, POST]
+    path: /topics/new
+    defaults:
+        _controller: app.controller.topic:createAction
+        _sylius:
+            template: frontend/topic/create.html.twig
+            redirect:
+                route: app_post_index_by_topic
+                parameters: { topicId: resource.id }
+
+app_frontend_topic_index:
+    methods: [GET]
+    path: /topics/
+    defaults:
+        _controller: app.controller.topic:indexWithTaxonsAction
+        _sylius:
+            repository:
+                method: createFilterPaginator
+                arguments: [$criteria, $sorting, expr:service('security.authorization_checker').isGranted('ROLE_STAFF')]
+            paginate: 10
+            sortable: true
+            sorting:
+                createdAt: desc
+            template: frontend/topic/index.html.twig
+
+app_frontend_topic_update:
+    methods: [GET, PUT]
+    path: /topics/{id}/edit
+    defaults:
+        _controller: app.controller.topic:updateAction
+        _sylius:
+            repository:
+                method: findOneBy
+                arguments: [{id: $id, author: expr:service('app.context.customer').getCustomer()}]
+            redirect:
+                route: app_post_index_by_topic
+                parameters: { topicId: $id }
+            template: frontend/topic/update.html.twig
+
+app_frontend_topic_delete:
+    methods: [DELETE]
+    path: /topics/{id}
+    defaults:
+        _controller: app.controller.topic:deleteAction
+        _sylius:
+            repository:
+                method: findOneBy
+                arguments: [{id: $id, author: expr:service('app.context.customer').getCustomer()}]
+            redirect: app_frontend_topic_index
+
+app_frontend_topic_index_by_taxon:
+    methods: [GET]
+    path: /topics/{permalink}
+    defaults:
+        _controller: app.controller.topic:indexByTaxonAction
+        _sylius:
+            paginate: 10
+            sortable: true
+            sorting:
+                createdAt: desc
+            template: frontend/topic/index.html.twig
+    requirements:
+        permalink: "[^?]+"

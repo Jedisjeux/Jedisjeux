@@ -1,13 +1,179 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Jedisjeux - et les autres jours aussi{% endblock title %}</title>
+    <!-- Description, Keywords and Author -->
+    <meta name="description" content="Your description">
+    <meta name="keywords" content="Your,Keywords">
+    <meta name="author" content="ResponsiveWebInc">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {#'assets/bower_components/jquery-ui/themes/base/jquery-ui.min.css'#}
+
+    {% block head_style %}
+        {% include 'SyliusUiBundle::_stylesheets.html.twig' with {'path': 'assets/frontend/compiled/css/style.css'} %}
+    {% endblock head_style %}
+
+    <!-- Styles -->
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+</head>
+
+<!-- Add class "boxed" along with body for boxed layout. -->
+<!-- Add "pattern-x" (1 to 5) for background patterns. -->
+<!-- Add "img-x" (1 to 5) for background images. -->
+<body class="{% block body_class %}magazine{% endblock %}">
+
+{% include 'layout/_analytics.html.twig' %}
+{% include 'layout/loading.html.twig' %}
+
+<!-- Outer Starts -->
+<div class="outer">
+
+    {% block outer %}
+
+        <!-- Top bar starts -->
+        {% include "layout/_top-bar.html.twig" %}
+
+        <!-- Top bar ends -->
+
+        <!-- Header One Starts -->
+        {% include "layout/_header-1.html.twig" %}
+
+        <!-- Header one ends -->
+
+        {% block page_heading %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        {% include "layout/_flashes.html.twig" %}
+                        {% include "layout/_notify.html.twig" %}
+
+                        <div class="pull-right">
+                            {% block breadcrumb_container %}
+                                <div class="breads">
+                                    <a href="{{ path('app_homepage') }}">Accueil</a> /
+                                    {% block breadcrumb_content %}
+                                        {#<a href="#">Page</a> / #}
+                                        {#<a href="#">Sub Page</a>#}
+                                    {% endblock breadcrumb_content %}
+                                </div>
+                            {% endblock breadcrumb_container %}
+                        </div>
+
+                        {% block headline_container %}
+                            <div class="block-heading-two">
+                                <h2><span>{% block headline %}Titre de la page{% endblock headline %}</span>
+                                    {% block subtitle_container %}
+                                        <span class="text-small">
+                                    {% block subtitle %}{#Something can go here#}{% endblock subtitle %}
+                                    </span>
+                                    {% endblock subtitle_container %}
+                                </h2>
+                            </div>
+                        {% endblock headline_container %}
+
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        {% endblock page_heading %}
+
+        <!-- Main content starts -->
+
+        <div class="main-block">
+
+            {% block full_content %}
+
+                <div class="container">
+
+                    <div class="row">
+
+                        {% block body %}
+                            {% block container %}
+                                <!--
+                                Inherit this block to write
+                                Content without sidebar
+                                -->
+                                <div class="col-md-8">
+
+                                    {% block container_content %}
+                                        <!--
+                                        Inherit this block to write
+                                        Content with a sidebar
+                                        -->
+                                    {% endblock container_content %}
+
+                                </div>
+
+                                <!-- Sidebar column -->
+                                <div class="col-md-4">
+
+                                    <!-- Sidebar -->
+                                    <div class="sidebar">
+
+                                        {% block sidebar_content %}
+                                            <!--
+                                            Inherit this block to write
+                                            Content in the sidebar
+                                            -->
+                                        {% endblock sidebar_content %}
+
+                                    </div>
+
+                                </div>
+
+                            {% endblock container %}
+                        {% endblock body %}
+                    </div>
+
+                </div>
+
+            {% endblock full_content %}
+
+
+            <!-- Main content ends -->
+
+        </div>
+
+        {# Confirmation modal #}
+        {% include '_confirm_modal.html.twig' %}
+
+        <!-- Foot Starts -->
+
+        {% include "layout/_foot.html.twig" %}
+
+        <!-- Foot Ends -->
+
+        <!-- Footer Starts -->
+
+        {% include "layout/_footer.html.twig" %}
+
+        <!-- Footer Ends -->
+
+    {% endblock outer %}
+
+</div>
+
+<!-- Outer Ends -->
+
+<!-- Scroll to top -->
+<span class="totop"><a href="#"><i class="fa fa-angle-up bg-color"></i></a></span>
+
+<!-- Javascript files -->
+
+{% block foot_script_assetic %}
+    <script src="{{ asset('assets/frontend/compiled/js/app.js') }}"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+{% endblock foot_script_assetic %}
+
+</body>
 </html>

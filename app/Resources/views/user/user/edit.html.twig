@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+{% block fos_user_content %}
+
+    <h1>Edition du compte de {{ entity.username }}</h1>
+    <div class="right inline">
+        <a href="{{ path('jdj_user_list') }}">
+            Retour à la liste des Utilisateurs
+        </a>
+    </div>
+        {{ form(form) }}
+
+{% endblock fos_user_content %}

@@ -1,16 +1,41 @@
-jdj_ludographie:
-    resource: "@JDJLudographieBundle/Resources/config/routing.yml"
-    prefix:   /ludographie
-
-jdj_jeu:
-    resource: "@JDJJeuBundle/Resources/config/routing.yml"
-    prefix:   /jeu
-
-jdj_compta:
-    resource: "@JDJComptaBundle/Resources/config/routing.yml"
-    prefix:   /compta
-
-jdj_web:
-    resource: "@JDJWebBundle/Resources/config/routing.yml"
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
     prefix:   /
 
+# TODO remove this route when no route in backend controllers is used anymore
+# use admin route instead
+backend:
+    resource: "@AppBundle/Controller/Backend/"
+    type:     annotation
+    prefix:   /admin
+
+frontend:
+    resource: "routing/frontend.yml"
+
+app_backend:
+    resource: "routing/backend.yml"
+    prefix: /admin
+
+app_api:
+    resource: "routing/api.yml"
+    prefix: /api
+    defaults:
+        _format: json
+
+partial:
+    resource: "routing/partial.yml"
+    prefix: /_partial
+
+sylius_taxonomy:
+    resource: @SyliusTaxonomyBundle/Resources/config/routing.yml
+    prefix: /taxonomy
+
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"

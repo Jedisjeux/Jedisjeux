@@ -1,0 +1,247 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{% block form_row -%}
+    <div class="{% if required %}required {% endif %}field{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
+        {{- form_label(form) -}}
+        {{- form_widget(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+{%- endblock form_row %}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+        {%- for error in errors -%}
+            <div class="ui red pointing label sylius-validation-error">
+                {{ error.message }}
+            </div>
+        {%- endfor -%}
+    {%- endif -%}
+{%- endblock form_errors -%}
+
+{% block checkbox_row -%}
+    <div class="field{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
+        <div class="ui toggle checkbox">
+            {{- form_label(form) -}}
+            {{- form_widget(form) -}}
+            {{- form_errors(form) -}}
+        </div>
+    </div>
+{%- endblock checkbox_row %}
+
+{% block radio_row -%}
+    <div class="field{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
+        <div class="ui radio checkbox">
+            {{- form_label(form) -}}
+            {{- form_widget(form) -}}
+            {{- form_errors(form) -}}
+        </div>
+    </div>
+{%- endblock radio_row %}
+
+{% block money_widget -%}
+    <div class="ui labeled input">
+        <div class="ui label">€</div>
+        {{- form_widget(form) -}}
+    </div>
+{%- endblock money_widget %}
+
+{% block choice_row -%}
+    <div class="{% if required %}required {% endif %}field{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
+        {{- form_label(form) -}}
+        {% set attr = attr|merge({'class': attr.class|default ~ ' ui dropdown'}) %}
+        {{- form_widget(form, {'attr': attr}) -}}
+        {{- form_errors(form) -}}
+    </div>
+{%- endblock choice_row %}
+
+{%- block choice_widget_expanded -%}
+    <div {{ block('widget_container_attributes') }}>
+        <div class="grouped fields">
+            {%- for child in form %}
+                <div class="field">
+                    <div class="ui toggle checkbox">
+                        {{- form_label(child, null, {translation_domain: choice_translation_domain}) -}}
+                        {{- form_widget(child) -}}
+                    </div>
+                </div>
+            {% endfor -%}
+        </div>
+    </div>
+{%- endblock choice_widget_expanded -%}
+
+{% block percent_widget -%}
+    <div class="ui right labeled input">
+        {{- form_widget(form) -}}
+        <div class="ui basic label">%</div>
+    </div>
+{%- endblock percent_widget %}
+
+{% block collection_widget -%}
+    {% from 'SyliusResourceBundle:Macros:notification.html.twig' import error %}
+    {% set attr = attr|merge({'class': attr.class|default ~ ' controls collection-widget'}) %}
+
+    {% spaceless %}
+        <div data-form-type="collection" {{ block('widget_container_attributes') }}
+                {% if prototype is defined and allow_add %}
+                    data-prototype='{{ _self.collection_item(prototype, allow_delete, button_delete_label, '__name__')|e }}'
+                {%- endif -%}
+        >
+            {{ error(form.vars.errors) }}
+
+            {% if prototypes|default is iterable %}
+                {% for key, subPrototype in prototypes %}
+                    <input type="hidden" data-form-prototype="{{ key }}"
+                           value="{{ _self.collection_item(subPrototype, allow_delete, button_delete_label, '__name__')|e }}"/>
+                {% endfor %}
+            {% endif %}
+
+            <div data-form-collection="list">
+                {% for child in form %}
+                    {{ _self.collection_item(child, allow_delete, button_delete_label, loop.index0) }}
+                {% endfor %}
+            </div>
+
+            {% if prototype is defined and allow_add %}
+                <a href="#" class="ui labeled icon button" data-form-collection="add">
+                    <i class="plus square outline icon"></i>
+                    {{ button_add_label|trans }}
+                </a>
+            {% endif %}
+        </div>
+    {% endspaceless %}
+{%- endblock collection_widget %}
+
+{% macro collection_item(form, allow_delete, button_delete_label, index) %}
+    {% spaceless %}
+        <div data-form-collection="item" data-form-collection-index="{{ index }}">
+            {{ form_widget(form) }}
+            {% if allow_delete %}
+                <a href="#" data-form-collection="delete" class="ui red labeled icon button"
+                   style="margin-bottom: 1em;">
+                    <i class="trash icon"></i>
+                    {{ button_delete_label|trans }}
+                </a>
+            {% endif %}
+        </div>
+    {% endspaceless %}
+{% endmacro %}
+
+{% macro polycollection_item(form, allow_delete, button_delete_label, index) %}
+    {% spaceless %}
+        <div data-form-polycollection="item" data-form-polycollection-index="{{ index }}">
+            {{ form_widget(form) }}
+            {% if allow_delete %}
+                <a href="#" data-form-polycollection="delete" class="ui red labeled icon button"
+                   style="margin-bottom: 1em;">
+                    <i class="trash icon"></i>
+                    {{ button_delete_label|trans }}
+                </a>
+            {% endif %}
+        </div>
+    {% endspaceless %}
+{% endmacro %}
+
+{% block infinite_form_polycollection_row -%}
+    {% set polycollectionForm = form %}
+
+    <div data-form-type="polycollection" data-form-polycollection="add"
+         href="#" {{ block('widget_container_attributes') }}>
+
+        <div data-form-polycollection="list">
+            {% for child in polycollectionForm %}
+                {{ _self.polycollection_item(child, allow_delete, button_delete_label|default('sylius.ui.delete'), loop.index0) }}
+            {% endfor %}
+        </div>
+
+        <div class="polycollection">
+            <div class="ui labeled icon bottom right floating dropdown button primary link">
+                <i class="plus icon"></i>
+                <span class="text">{{ 'sylius.ui.add'|trans }}</span>
+                <div class="menu">
+                    <div class="header">
+                        <i class="cube icon"></i>
+                        {{ 'sylius.ui.type'|trans }}
+                    </div>
+                    <div class="divider"></div>
+                    {% for key, prototype in prototypes %}
+                        {% set form = prototype %}
+                        <a class="item" data-form-polycollection="add" href="#"
+                           data-prototype="{{ _self.polycollection_item(form, allow_delete, button_delete_label|default('sylius.ui.delete')) | escape }}">
+                            {{ form._type.vars.label|trans }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{%- endblock %}
+
+{% block single_image_left_block_widget -%}
+    <div class="ui stackable grid">
+        <div class="six wide column">
+            {% set image = form.imagineBlock.image %}
+
+            {% if image.vars.data %}
+                <img class="ui fluid image" src="{{ image.vars.data.id | imagine_filter('cmf_block') }}"/>
+            {% endif %}
+
+            {{ form_row(form.imagineBlock.image) }}
+            {{ form_row(form.imagineBlock.label) }}
+        </div>
+        <div class="ten wide column">
+            {{ form_row(form.title) }}
+            {{ form_row(form.body) }}
+        </div>
+    </div>
+
+    {{ form_row(form._type) }}
+{%- endblock %}
+
+{% block single_image_right_block_widget -%}
+    <div class="ui stackable grid">
+        <div class="ten wide column">
+            {{ form_row(form.title) }}
+            {{ form_row(form.body) }}
+        </div>
+        <div class="six wide column">
+            {% set image = form.imagineBlock.image %}
+
+            {% if image.vars.data %}
+                <img class="ui fluid image" src="{{ image.vars.data.id | imagine_filter('cmf_block') }}"/>
+            {% endif %}
+            {{ form_row(form.imagineBlock.image) }}
+            {{ form_row(form.imagineBlock.label) }}
+        </div>
+    </div>
+
+    {{ form_row(form._type) }}
+{%- endblock %}
+
+{% block single_image_top_block_widget -%}
+    {{ form_row(form.title) }}
+    {% set image = form.imagineBlock.image %}
+
+    {% if image.vars.data %}
+        <img class="ui fluid image" src="{{ image.vars.data.id | imagine_filter('cmf_block') }}"/>
+    {% endif %}
+    {{ form_row(form.imagineBlock.image) }}
+    {{ form_row(form.imagineBlock.label) }}
+    {{ form_row(form.body) }}
+
+    {{ form_row(form._type) }}
+{%- endblock %}
+
+{% block single_image_well_block_widget -%}
+    {{ form_row(form.title) }}
+    {% set image = form.imagineBlock.image %}
+
+    {% if image.vars.data %}
+        <img class="ui fluid image" src="{{ image.vars.data.id | imagine_filter('cmf_block') }}"/>
+    {% endif %}
+    {{ form_row(form.imagineBlock.image) }}
+    {{ form_row(form.imagineBlock.label) }}
+    {{ form_row(form.body) }}
+
+    {{ form_row(form._type) }}
+{%- endblock %}

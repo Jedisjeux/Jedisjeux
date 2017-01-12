@@ -1,0 +1,14 @@
+.form-group {
+  .rating {
+    &.md {
+      line-height: 34px;
+    }
+
+  }
+}
+
+.rating {
+  &.md {
+    font-size: 20px;
+  }
+}

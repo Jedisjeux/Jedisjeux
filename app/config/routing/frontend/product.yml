@@ -1,0 +1,72 @@
+sylius_product:
+    resource: |
+        alias: sylius.product
+        path: /jeux
+        templates: :frontend/game
+        redirect: index
+    type: sylius.resource
+
+sylius_product_index:
+    methods: [GET]
+    path: /jeux-de-societe/
+    defaults:
+        _controller: sylius.controller.product:indexWithTaxonsAction
+        _sylius:
+            paginate: 16
+            repository:
+                method: createFilterPaginator
+                arguments: [$criteria, $sorting]
+            sortable: true
+            sorting:
+                createdAt: desc
+            template: frontend/game/index.html.twig
+
+sylius_product_release_index:
+    methods: [GET]
+    path: /jeux-de-societe/les-sorties
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    frontend/game/releaseIndex.html.twig
+
+sylius_product_index_by_person:
+    methods: [GET]
+    path: /jeux-de-societe/personnes/{slug}
+    defaults:
+        _controller: sylius.controller.product:indexByPersonAction
+        _sylius:
+            paginate: 16
+            template: frontend/game/indexByPerson.html.twig
+            sortable: true
+            sorting:
+                createdAt: desc
+
+sylius_product_index_by_taxon:
+    methods: [GET]
+    path: /jeux-de-societe/{permalink}
+    defaults:
+        _controller: sylius.controller.product:indexByTaxonAction
+        _sylius:
+            paginate: 16
+            template: frontend/game/indexByTaxon.html.twig
+            sortable: true
+            sorting:
+                createdAt: desc
+    requirements:
+        permalink: "[^?]+"
+    options:
+      expose: true
+
+sylius_product_show:
+    methods: [GET]
+    path: /jeu-de-societe/{slug}
+    defaults:
+        _controller: sylius.controller.product:showAction
+        _sylius:
+            repository:
+                method: findOneBySlug
+                arguments: [$slug]
+            template: frontend/game/show.html.twig
+    options:
+      expose: true
+
+

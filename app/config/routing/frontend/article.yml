@@ -1,0 +1,42 @@
+app_frontend_article_index:
+    methods: [GET]
+    path: /articles/
+    defaults:
+        _controller: app.controller.article:indexWithTaxonsAction
+        _sylius:
+            paginate: 16
+            repository:
+                method: createFilterPaginator
+                arguments:
+                  - $criteria
+                  - $sorting
+            template: frontend/article/index.html.twig
+            sorting:
+                publishStartDate: desc
+
+app_frontend_article_index_by_taxon:
+    methods: [GET]
+    path: /articles/{permalink}
+    defaults:
+        _controller: app.controller.article:indexByTaxonAction
+        _sylius:
+            paginate: 16
+            sortable: true
+            sorting:
+                publishStartDate: desc
+            template: frontend/article/index.html.twig
+            criteria:
+                publishable: 1
+    requirements:
+        permalink: "[^?]+"
+
+app_frontend_article_show:
+    methods: [GET]
+    path: /article/{name}
+    defaults:
+        _controller: app.controller.article:showWithTaxonsAction
+        _sylius:
+            repository:
+                method: findOneBy
+                arguments: [name: $name]
+            template: frontend/article/show.html.twig

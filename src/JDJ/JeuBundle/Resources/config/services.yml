@@ -1,7 +1,0 @@
-parameters:
-#    jdj_jeu.example.class: JDJ\JeuBundle\Example
-
-services:
-#    jdj_jeu.example:
-#        class: %jdj_jeu.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,14 @@
+{% import 'SyliusUiBundle:Macro:buttons.html.twig' as buttons %}
+
+<div class="ui stackable two column grid">
+    <div class="column">
+        {{ headers.default(header|trans, configuration.vars.icon|default('list'), configuration.vars.subheader|default(null)|trans) }}
+
+        {% include configuration.vars.templates.breadcrumb|default('backend/crud/index/_breadcrumb.html.twig') %}
+    </div>
+    <div class="middle aligned column">
+        <div class="ui right floated buttons">
+            {{ buttons.create(path('app_backend_string_block_create')) }}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="img-box-4 text-center jeu-list">
+    <div class="row">
+        {% for key, product in products %}
+        {% if key != 0 and key%4 == 0 %}
+    </div>
+    <div class="row">
+        {% endif %}
+        <div class="col-md-3 col-sm-6">
+            {% include "frontend/game/index/list-element.html.twig" %}
+        </div>
+        {% endfor %}
+    </div>
+</div>

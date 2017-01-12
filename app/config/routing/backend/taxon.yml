@@ -1,0 +1,58 @@
+sylius_backend_taxon_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.taxon:indexAction
+        _sylius:
+            template: backend/taxon/index.html.twig
+            paginate: false
+            repository:
+                method: findRootNodes
+
+sylius_backend_taxon_index_by_root:
+    path: /index-by-root/{rootCode}/
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.taxon:indexAction
+        _sylius:
+            template: backend/taxon/indexByRoot.html.twig
+            paginate: false
+            repository:
+                method: findChildrenByRootCode
+                arguments:
+                    - $rootCode
+
+sylius_backend_taxon_create:
+    path: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.taxon:createAction
+        _sylius:
+            template: backend/taxon/create.html.twig
+            redirect: sylius_backend_taxon_index
+
+sylius_backend_taxon_update:
+    path: /{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.taxon:updateAction
+        _sylius:
+            template: backend/taxon/update.html.twig
+            redirect: sylius_backend_taxon_index
+
+sylius_backend_taxon_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.taxon:deleteAction
+        _sylius:
+            redirect: sylius_backend_taxon_index
+
+sylius_backend_taxon_product_index:
+    path: /{id}/products
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexByTaxonIdAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Taxon:productIndex.html.twig
+            paginate: 30

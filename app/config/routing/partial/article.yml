@@ -1,0 +1,14 @@
+app_partial_article_index:
+    methods: [GET]
+    path: /articles/
+    defaults:
+        _controller: app.controller.article:indexAction
+        _sylius:
+            template: $template
+            paginate: $paginate
+            sortable: true
+            repository:
+                method: createFilterPaginator
+                arguments: [$criteria, $sorting]
+    requirements:
+        template: "[^?]+"

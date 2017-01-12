@@ -1,0 +1,13 @@
+{% from 'macros/games.html.twig' import magazineItemOne %}
+
+<div class="row">
+
+    {% for game in games %}
+
+    <div class="col-md-4 col-sm-6">
+        {{ magazineItemOne(game) }}
+    </div>
+
+    {% endfor %}
+
+</div>

@@ -1,0 +1,40 @@
+{% extends sonata_block.templates.block_base %}
+{% from 'macros/images.html.twig' import image %}
+
+{% block block %}
+
+    {% if block.children %}
+        <div id="{{ block.name }}" class="carousel slide" data-ride="carousel" data-interval="5000" data-pause="hover"
+             data-wrap="true">
+            <!-- Slides. You can also add captions -->
+            <div class="carousel-inner">
+                {% set firstItem = true %}
+                {% for item in block.children %}
+                    {% set imageBlock = item.children.first %}
+                    <!-- Item, First item should have extra class "active" -->
+                    <div class="item{% if firstItem %} active{% endif %}">
+                        {{ image(imageBlock.image.id, 'cmf_block', imageBlock.label, null, imageBlock.linkUrl) }}
+                        {% if item.body %}
+                            <!-- Caption -->
+                            <div class="carousel-caption c-bottom-right">
+                                <!-- Heading -->
+                                {#<h4><a href="#">Some heading here</a></h4>#}
+                                <!-- Para -->
+                                {{ item.body|raw }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    {% set firstItem = false %}
+                {% endfor %}
+            </div>
+            <!-- Carousel controls (arrows). If you don't need controls, remove the below section -->
+            <a class="left carousel-control" href="#{{ block.name }}" role="button" data-slide="prev">
+                <span class="fa fa-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#{{ block.name }}" role="button" data-slide="next">
+                <span class="fa fa-chevron-right"></span>
+            </a>
+        </div>
+    {% endif %}
+
+{% endblock %}

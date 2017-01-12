@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block body -%}
+    <div class="col-md-8">
+        {% include "frontend/game/show/header.html.twig" with {'jeu': game_review.rate.game} only %}
+
+        <div id="user-review">
+            {% include "user-review/partial/_show.html.twig" with {'userReview': game_review} %}
+        </div>
+
+    </div>
+    <div class="col-md-4">
+        {% include "frontend/game/show/sidebar.html.twig" with {'jeu': game_review.rate.game, 'userReviews': []} only %}
+    </div>
+{% endblock %}

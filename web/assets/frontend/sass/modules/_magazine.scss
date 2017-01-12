@@ -1,0 +1,13 @@
+.magazine-list {
+  li {
+    min-height: 80px;
+  }
+}
+
+.magazine-item {
+  &.mag-1 {
+    h4 {
+      @include ellipsis;
+    }
+  }
+}

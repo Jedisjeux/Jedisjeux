@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+{% import 'macros/actions.html.twig' as action %}
+
+{% set game = game_review.game %}
+
+{% block subtitle %}
+    votre avis
+    {% endblock %}
+
+{% block headline %}
+    {{ game }}
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    <a href="{{ path('jeu_show', { 'id': game.id , 'slug': game.slug } ) }}">{{ game }}</a> /
+    <a href="{{ path('jeu_show', { 'id': game.id , 'slug': game.slug } ) }}#critiques">Avis</a> /
+    Nouveau
+{% endblock %}
+
+{% block body -%}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ action.create() }}
+    {{ form_end(form) }}
+{% endblock %}

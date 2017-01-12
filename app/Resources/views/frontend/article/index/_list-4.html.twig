@@ -1,0 +1,27 @@
+{% from 'macros/articles.html.twig' import magazineItemOne %}
+{% from 'macros/misc.html.twig' import no_data %}
+
+{% if articles|length %}
+<!-- Image Box #4 Starts -->
+<div class="img-box-4 text-center jeu-list">
+    <!-- Container -->
+    <div class="container">
+        <div class="row">
+            {% for key, article in articles %}
+            {% if key > 0 and key%4 == 0 %}
+        </div>
+        <div class="row">
+            {% endif %}
+
+            <div class="col-md-3 col-sm-6">
+                {% include 'frontend/article/_singleBox.html.twig' %}
+            </div>
+            {% endfor %}
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<!-- Image Box #4 Ends -->
+{% else %}
+    {{ no_data('Aucun article') }}
+{% endif %}

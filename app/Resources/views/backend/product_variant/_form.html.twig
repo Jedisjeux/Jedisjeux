@@ -1,0 +1,10 @@
+<div class="nav-tabs-two">
+    {% include 'backend/product_variant/form/_tabs.html.twig' %}
+    <div class="tab-content">
+        {% include 'backend/product_variant/form/_main.html.twig' %}
+        {% include 'backend/product_variant/form/_people.html.twig' %}
+        {% include 'backend/product_variant/form/_images.html.twig' %}
+    </div>
+</div>
+
+{{ form_row(form._token) }}

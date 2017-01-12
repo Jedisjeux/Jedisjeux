@@ -1,0 +1,52 @@
+jdj_data:
+    image: busybox
+    volumes:
+        - ../../:/var/www/jdj
+        - /vendor
+        - ~/.composer:/root/.composer
+
+jdj_nginx:
+    image: nginx
+    links:
+        - jdj_php
+    volumes_from:
+        - jdj_data
+    volumes:
+        - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+        - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+        - ./nginx/test.conf:/etc/nginx/conf.d/test.conf:ro
+    ports:
+        - 80:80
+        - 8080:8080
+
+jdj_mysql:
+    image: mariadb
+    environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: jdj_dev
+        MYSQL_USER: jdj
+        MYSQL_PASSWORD: password
+    ports:
+        - 3306:3306
+
+jdj_php:
+    build: php
+    working_dir: /var/www/jdj
+    volumes_from:
+        - jdj_data
+    links:
+        - jdj_mysql
+        - jdj_elasticsearch
+        - jdj_memcached
+    env_file: ./variables.env
+
+jdj_elasticsearch:
+    image: elasticsearch
+    ports:
+        - 9200:9200
+
+jdj_memcached:
+    image: memcached
+
+jdj_selenium:
+    image: selenium/standalone-chrome-debug

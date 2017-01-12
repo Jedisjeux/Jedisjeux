@@ -1,0 +1,19 @@
+{% from 'macros/taxons.html.twig' import sidebarList %}
+
+<!-- Sidebar -->
+<div class="sidebar">
+    {% for rootTaxon in rootTaxons %}
+        {% set taxons = rootTaxon.children %}
+        <!-- Categories Widget -->
+        <div class="s-widget">
+            <!-- Heading -->
+            <h5><i class="{{ rootTaxon.iconClass|default('fa fa-folder') }} color"></i>&nbsp; {{ rootTaxon }}</h5>
+            <!-- Widgets Content -->
+            <div class="widget-content categories">
+                {{ sidebarList(taxons, 'sylius_product_index_by_taxon', taxon is defined ? taxon : null) }}
+            </div>
+        </div>
+    {% endfor %}
+
+    {% include 'frontend/pub_banner/_sidebarWidget.html.twig' %}
+</div>

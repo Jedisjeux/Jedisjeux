@@ -1,0 +1,36 @@
+sylius_partial_product_review_index:
+    methods: [GET]
+    path: /product-reviews/
+    defaults:
+        _controller: sylius.controller.product_review:indexAction
+        _sylius:
+            repository:
+                method: createFilterPaginator
+                arguments: [$criteria, $sorting]
+            template: $template
+            paginate: $paginate
+    requirements:
+        template: "[^?]+"
+
+sylius_partial_product_review_create:
+    path: /products/{productId}/reviews/new
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_review:createAction
+        _sylius:
+            template: 'frontend/product_review/_form.html.twig'
+            factory:
+                method: createForSubject
+                arguments: [$productId]
+            permission: false
+
+sylius_partial_product_rating_show:
+    path: /products/{productId}/rating/show
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_review:showRatingAction
+        _sylius:
+            template: 'frontend/product_review/rating/_show.html.twig'
+            repository:
+                method: findOneBy
+                arguments: [{reviewSubject: $productId, author: expr:service('app.context.customer').getCustomer()}]

@@ -1,0 +1,38 @@
+{% set size = tabUserGameAttribute.getNbResults %}
+{% set listJeu = "" %}
+
+{% if size >= 1 %}
+    {% if size < tabUserGameAttribute.getMaxPerPage %}
+        {% set lastJeu = tabUserGameAttribute.getIterator().offsetGet(size-1).jeu %}
+    {% else %}
+        {% set lastIndexOfPage = tabUserGameAttribute.getMaxPerPage - 1 %}
+        {% set lastJeu = tabUserGameAttribute.getIterator().offsetGet(lastIndexOfPage).jeu %}
+    {% endif %}
+
+
+    {% for index, userGameAttribute in tabUserGameAttribute %}
+        {% if index == 0 %}
+            {% set listJeu = userGameAttribute.jeu.name %}
+        {% else %}
+            {% set listJeu = listJeu  ~ ", " ~ userGameAttribute.jeu.name %}
+        {% endif %}
+    {% endfor %}
+    <div class="col-md-3 col-sm-6">
+        <!-- Image Box #3 Item -->
+        <div class="img-box-3-item">
+            <div class="bg-{{ color }} img-collection-container">
+                <a href="{{ path('my-list-usergameattribute' , {'type': type} ) }}">
+                    {% if  lastJeu.mainImage %}
+                        <img class="img-collection"
+                             src="{{ lastJeu.mainImage.webPath | imagine_filter('default') }}"
+                             alt="" class="'fa-picture-o'">
+                    {% endif %}
+                </a>
+            </div>
+            <h4><a href="{{ path('my-list-usergameattribute' , {'type': type} ) }}">{{ title }}</a></h4>
+
+            <div class="bor bg-{{ color }}"></div>
+            <p>{{ listJeu|length > 50 ? listJeu|slice(0, 50) ~ '...' : listJeu }}</p>
+        </div>
+    </div>
+{% endif %}

@@ -1,0 +1,10 @@
+{% from 'macros/games.html.twig' import magazineItemOne %}
+
+{% for game in products %}
+
+    {% set meta %}
+        <i class="fa fa-calendar"></i> <!-- TODO publishedAt -->{{ game.releasedAt|localizeddate('long', 'none') }}
+    {% endset %}
+
+    {{ magazineItemOne(game, 'magazine_item_wide', meta) }}
+{% endfor %}

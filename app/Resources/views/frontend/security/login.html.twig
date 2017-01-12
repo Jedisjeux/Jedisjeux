@@ -1,0 +1,68 @@
+{% extends 'layout/minimal.html.twig' %}
+
+{% block card_container_content %}
+
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+    <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"/>
+
+    <p id="profile-name" class="profile-name-card"></p>
+
+    <form action="{{ path("sylius_shop_login_check") }}"
+          novalidate
+          class="form-signin"
+          method="post">
+
+        <div class="row">
+            <div class="col-md-12">
+                {{ form_errors(form) }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                {{ form_widget(form._username, {attr: {'placeholder': 'label.username_or_email'|trans}}) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+
+                {{ form_widget(form._password, {attr: {'placeholder': 'sylius.form.user.password.label'|trans}}) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p class="security-links">
+                    <a class="forgot-password" href="{{ path('sylius_user_request_password_reset_token') }}">Mot de passe oublié ?</a>
+                </p>
+            </div>
+        </div>
+
+        <div id="remember" class="checkbox">
+            <label>
+                <input type="checkbox" id="remember_me" name="_remember_me"
+                       value="on"> {{ 'label.remember_me'|trans }}
+            </label>
+        </div>
+
+        {{ form_rest(form) }}
+
+        <button class="btn btn-lg btn-primary btn-block btn-signin"
+                type="submit"
+                id="_submit"
+                name="_submit">
+            {{ 'label.connection'|trans }}
+        </button>
+
+    </form>
+
+    <p class="text-center">ou</p>
+
+    <!-- /form -->
+    <a class="btn btn-lg btn-block btn-primary" href="{{ path('app_frontend_register') }}">
+        Créer un compte
+    </a>
+{% endblock card_container_content %}

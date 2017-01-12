@@ -1,0 +1,40 @@
+<div class="header-1">
+
+    <!-- Container -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-4">
+                <!-- Logo section -->
+                <div class="logo">
+                    <h1><a href="{{ path('app_homepage') }}">
+                            <img src="{{ asset('assets/frontend/img/logo.png')|imagine_filter('logo') }}" alt="Jedisjeux"/></a></h1>
+                </div>
+            </div>
+            <div class="col-md-3 col-md-offset-5 col-sm-5 col-sm-offset-3 hidden-xs">
+                <!-- Search Form -->
+                <div class="head-search pull-right">
+
+                    <form role="form">
+                        <!-- Input Group -->
+                        <div class="input-group">
+                            <input type="text" class="form-control mainSearch"
+                                   placeholder="Recherche...">
+										<span class="input-group-btn">
+											<button class="btn btn-color" type="button">Rechercher</button>
+										</span>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation starts -->
+
+    {% include "layout/navigation.html.twig" %}
+
+    <!-- Navigation ends -->
+
+</div>

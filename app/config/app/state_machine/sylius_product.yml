@@ -1,0 +1,43 @@
+winzou_state_machine:
+    sylius_product:
+        class: "%sylius.model.product.class%"
+        property_path: status
+        graph: sylius_product
+        state_machine_class: "%sylius.state_machine.class%"
+        states:
+            new: ~
+            pending_translation: ~
+            pending_translation_changes: ~
+            pending_review: ~
+            pending_publication: ~
+            published: ~
+        transitions:
+            ask_for_translation:
+                from: [new]
+                to: pending_translation
+            ask_for_review:
+                from: [new, pending_translation, pending_translation_changes]
+                to: pending_review
+            ask_for_translation_changes:
+                from: [pending_review]
+                to: pending_translation_changes
+            ask_for_publication:
+                from: [pending_review]
+                to: pending_publication
+            publish:
+                from: [pending_publication]
+                to: published
+        callbacks:
+            after:
+                notify_translators:
+                    on: "ask_for_translation"
+                    do: ["@app.notification_manager.product", "notifyTranslators"]
+                    args: ["object"]
+                notify_reviewers:
+                    on: "ask_for_review"
+                    do: ["@app.notification_manager.product", "notifyReviewers"]
+                    args: ["object"]
+                notify_publishers:
+                    on: "ask_for_publication"
+                    do: ["@app.notification_manager.product", "notifyPublishers"]
+                    args: ["object"]

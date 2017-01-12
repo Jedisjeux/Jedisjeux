@@ -1,0 +1,41 @@
+{% macro updateStateButton(product, transition, icon, color) %}
+    {% import 'macros/buttons.html.twig' as buttons %}
+
+    {{ buttons.patch(path('sylius_admin_product_update_state', {
+        'id': product.id,
+        'transition': transition
+    }), 'label.'~transition, icon, color|default('color')) }}
+{% endmacro %}
+
+{% if is_granted('ROLE_WORKFLOW') %}
+
+    {% if(product.status != constant('AppBundle\\Entity\\Product::PUBLISHED')) %}
+        <div class="alert alert-warning changeStatusContainer" role="alert">
+            <span class="fa fa-exclamation-triangle"></span>
+
+            <div class="pull-right control-group">
+                {% if state_machine.can('ask_for_translation') %}
+                    {{ _self.updateStateButton(product, 'ask_for_translation', 'flag', 'warning') }}
+                {% endif %}
+
+                {% if state_machine.can('ask_for_review') %}
+                    {{ _self.updateStateButton(product, 'ask_for_review', 'book', 'warning') }}
+                {% endif %}
+
+                {% if state_machine.can('ask_for_translation_changes') %}
+                    {{ _self.updateStateButton(product, 'ask_for_translation_changes', 'remove', 'danger') }}
+                {% endif %}
+
+                {% if state_machine.can('ask_for_publication') %}
+                    {{ _self.updateStateButton(product, 'ask_for_publication', 'ok', 'success') }}
+                {% endif %}
+
+                {% if state_machine.can('publish') %}
+                    {{ _self.updateStateButton(product, 'publish', 'upload', 'success') }}
+                {% endif %}
+
+            </div>
+            Ce jeu est <strong>{{ ('label.' ~ product.status)|trans }}</strong>.
+        </div>
+    {% endif %}
+{% endif %}

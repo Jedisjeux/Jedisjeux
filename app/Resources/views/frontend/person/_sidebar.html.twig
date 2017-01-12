@@ -1,0 +1,19 @@
+{% from 'macros/taxons.html.twig' import sidebarList %}
+
+<!-- Sidebar -->
+<div class="sidebar">
+    {% set taxons = rootTaxon.children %}
+    <!-- Categories Widget -->
+    <div class="s-widget">
+        <!-- Heading -->
+        <h5><i class="fa fa-folder color"></i>&nbsp; {{ rootTaxon }}</h5>
+        <!-- Widgets Content -->
+        <div class="widget-content categories">
+
+            {{ sidebarList(taxons, 'app_person_index_by_taxon', taxon is defined ? taxon : null) }}
+        </div>
+    </div>
+
+    {% include 'frontend/pub_banner/_sidebarWidget.html.twig' %}
+
+</div>

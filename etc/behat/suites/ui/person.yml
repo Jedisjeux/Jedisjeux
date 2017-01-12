@@ -1,0 +1,11 @@
+default:
+    suites:
+        ui_person:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - AppBundle\Behat\UtilsContext
+                - AppBundle\Behat\UserContext
+                - AppBundle\Behat\TaxonContext
+                - AppBundle\Behat\PersonContext
+            filters:
+                tags: "@person && @ui"

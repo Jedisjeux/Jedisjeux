@@ -1,0 +1,16 @@
+imports:
+    - { resource: services/analytic.yml }
+    - { resource: services/block.yml }
+    - { resource: services/calculator.yml }
+    - { resource: services/context.yml }
+    - { resource: services/controller.yml }
+    - { resource: services/form.yml }
+    - { resource: services/installer.yml }
+    - { resource: services/listener.yml }
+    - { resource: services/notification.yml }
+    - { resource: services/security.yml }
+    - { resource: services/serializer.yml }
+    - { resource: services/subscriber.yml }
+    - { resource: services/text_filter.yml }
+    - { resource: services/updater.yml }
+    - { resource: services/view.yml }

@@ -1,0 +1,49 @@
+<!-- Nav tab widget - popular, recent and comments -->
+<div class="s-widget">
+    <h5><i class="fa fa-comments color"></i> Critiques</h5>
+
+    <div class="widget-content tabs">
+        <div class="nav-tabs-two">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#popular" data-toggle="tab">Populaires</a></li>
+                <li><a href="#recent" data-toggle="tab">Récents</a></li>
+            </ul>
+            <!-- Tab content -->
+            <div class="tab-content">
+                <!-- Popular posts -->
+                <div class="tab-pane fade in active" id="popular">
+                    <ul>
+                        {{ render(url('sylius_partial_product_review_index', {
+                            'criteria': {
+                                'reviewSubject': jeu.id,
+                                'hasComment': 1
+                            },
+                            'sorting': {
+                                'createdAt': 'asc'
+                            },
+                            'paginate': 5,
+                            'template': 'frontend/product_review/_sidebarList.html.twig'
+                        })) }}
+                    </ul>
+                </div>
+                <!-- Recent posts -->
+                <div class="tab-pane fade" id="recent">
+                    <ul>
+                        {{ render(url('sylius_partial_product_review_index', {
+                            'criteria': {
+                                'reviewSubject': jeu.id,
+                                'hasComment': 1
+                            },
+                            'sorting': {
+                                'createdAt': 'desc'
+                            },
+                            'paginate': 5,
+                            'template': 'frontend/product_review/_sidebarList.html.twig'
+                        })) }}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+{% import 'macros/actions.html.twig' as action %}
+
+{% set topic = post.topic %}
+
+{% block headline %}
+    {{ topic }}
+{% endblock %}
+
+{% block subtitle %}
+    Votre réponse
+{% endblock %}
+
+{% block body -%}
+    <div class="col-md-12">
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ action.create() }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

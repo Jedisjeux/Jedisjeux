@@ -1,0 +1,26 @@
+sylius_api_product_view_count_update:
+    methods: [PUT, PATCH]
+    path: /products/{id}/view-count
+    defaults:
+        _controller: sylius.controller.product:updateAction
+        _sylius:
+            form: sylius_product_view_count
+
+sylius_api_product:
+    resource: |
+        section: api
+        alias: sylius.product
+        only: [index]
+    type: sylius.resource_api
+
+sylius_api_product_show:
+    methods: [GET]
+    path: /products/{id}
+    defaults:
+        _controller: sylius.controller.product:showAction
+        _sylius:
+            repository:
+                method: findOneById
+                arguments:
+                    - $id
+            serialization_groups: [Details]

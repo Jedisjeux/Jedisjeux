@@ -1,0 +1,38 @@
+sylius_grid:
+    grids:
+        app_backend_person:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%app.model.person.class%"
+            sorting:
+                slug: asc
+            fields:
+                image:
+                    type: twig
+                    label: sylius.ui.image
+                    path: .
+                    options:
+                        template: "backend/person/grid/field/image.html.twig"
+                slug:
+                    type: twig
+                    label: sylius.ui.name
+                    path: .
+                    sortable: slug
+                    options:
+                        template: "backend/grid/field/string.html.twig"
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    options:
+                        fields: [firstName, lastName]
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete

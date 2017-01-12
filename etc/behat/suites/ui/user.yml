@@ -1,0 +1,9 @@
+default:
+    suites:
+        ui_user:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - AppBundle\Behat\UtilsContext
+                - AppBundle\Behat\UserContext
+            filters:
+                tags: "@user && @ui"

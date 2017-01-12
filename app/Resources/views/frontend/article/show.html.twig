@@ -1,0 +1,77 @@
+{% extends "base.html.twig" %}
+
+{% from 'macros/posts.html.twig' import blogCommentItem as postComment %}
+{% import 'macros/items.html.twig' as item %}
+{% from 'macros/game_reviews.html.twig' import blogCommentItem as reviewComment %}
+{% import 'macros/pageViews.html.twig' as pageViews %}
+
+{% set topic = article.topic %}
+
+{% block body_class %}article{% endblock %}
+
+{% block headline %}
+    {{ article.document.title }}
+{% endblock %}
+
+{% block breadcrumb_content %}
+    <a href="{{ path('app_frontend_article_index') }}">Articles</a> /
+    {% if article.mainTaxon %}
+        <a href="{{ path('app_frontend_article_index_by_taxon', {'permalink': article.mainTaxon.permalink}) }}">{{ article.mainTaxon }}</a> /
+    {% endif %}
+    {{ article.document.title }}
+{% endblock %}
+
+{% block body -%}
+    <div class="col-md-8">
+
+        {% if article.author %}
+            {{ item.blogAuthor(article.author, null, article.document.publishStartDate) }}
+        {% endif %}
+
+        {% set blockImageCount = 0 %}
+
+        {% for block in article.document.children %}
+
+            {% if 'mainImage' != block.name %}
+                {{ sonata_block_render({
+                    'name': block.id
+                }) }}
+            {% endif %}
+
+        {% endfor %}
+
+        {% if article.reviews|length > 0 %}
+            <div class="block-heading-two">
+                <h3><span>Avis de la rédaction</span>
+                </h3>
+            </div>
+
+            <div class="blog-comments">
+                {% for review in article.reviews %}
+                    {{ reviewComment(review) }}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+
+        {% if topic %}
+            <div class="block-heading-two">
+                <h3><span>Commentaires</span>
+                    <small>({{ topic.posts|length }})</small>
+                </h3>
+            </div>
+
+            <div class="blog-comments">
+                {% for post in topic.posts %}
+                    {{ postComment(post) }}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {{ pageViews.render(article.id, 'article', path('app_frontend_article_show', {'name' : article.name})) }}
+
+    </div>
+    <div class="col-md-4">
+        {% include "frontend/article/_sidebarShow.html.twig" %}
+    </div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "::base.html.twig" %}
+{% import 'macros/actions.html.twig' as action %}
+
+{% block headline %}
+    Modifier un taxon
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    <a href="{{ path('sylius_backend_taxon_index') }}">Catégories</a> /
+    <a href="{{ path('sylius_backend_taxon_index_by_root', { 'rootCode': taxon.root.code }) }}">{{ taxon.root }}</a> /
+    Modifier
+{% endblock %}
+
+{% block container %}
+    <div class="col-md-12">
+        {{ form_start(form) }}
+        <input type="hidden" name="_method" value="PUT"/>
+        {{ form_widget(form) }}
+        {{ action.update() }}
+        {{ form_end(form) }}
+    </div>
+{% endblock container %}

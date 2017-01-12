@@ -1,0 +1,23 @@
+{% extends "::base.html.twig" %}
+{% import 'macros/actions.html.twig' as action %}
+
+{% block headline %}
+    Créer un variant
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    <a href="{{ path('sylius_admin_product_index') }}">Jeux</a> /
+    <a href="{{ path('sylius_backend_product_variant_index', {'productId': product_variant.product.id}) }}">{{ 'label.variants'|trans }}</a> /
+    Modifier
+{% endblock %}
+
+{% block container %}
+    <div class="col-md-12">
+        {{ form_start(form) }}
+        {% include 'backend/product_variant/_form.html.twig' %}
+        <br/>
+        {{ action.update() }}
+        {{ form_end(form, {'render_rest': false}) }}
+    </div>
+{% endblock container %}

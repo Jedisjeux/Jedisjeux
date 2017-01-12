@@ -1,0 +1,22 @@
+app_frontend_game_library_show:
+    methods: [GET]
+    path: /users/{customerId}/ludotheque
+    defaults:
+        _controller: app.controller.customer_list_element:gameLibraryShowAction
+        _sylius:
+            template: frontend/game_library/show.html.twig
+            paginate: 12
+            repository:
+                method: createProductFilterPaginator
+                arguments: [$criteria, $sorting, $customerId, 'game-library']
+
+app_frontend_game_library_show_by_taxon:
+    methods: [GET]
+    path: /users/{customerId}/ludotheque/{permalink}
+    defaults:
+        _controller: app.controller.customer_list_element:gameLibraryShowByTaxonAction
+        _sylius:
+            template: frontend/game_library/show.html.twig
+            paginate: 12
+    requirements:
+        permalink: "[^?]+"

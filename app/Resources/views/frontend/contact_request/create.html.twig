@@ -1,0 +1,37 @@
+{% extends "base.html.twig" %}
+{% import 'macros/actions.html.twig' as action %}
+
+{% block headline %}
+    {{ 'label.contact'|trans }}
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    {{ 'label.contact'|trans }}
+{% endblock %}
+
+{% block container %}
+    <div class="col-md-9">
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <div class="pull-right">
+            <button type="submit"
+                    class="btn btn-primary">
+                <span class="glyphicon glyphicon-ok"></span>
+                {{ 'label.send'|trans }}
+            </button>
+            {{ action.cancelButton() }}
+        </div>
+        {{ form_end(form) }}
+
+    </div>
+    <div class="col-md-3">
+        <h3><span class="fa fa-home"></span> Adresse postale</h3>
+        <p>Jedisjeux</p>
+        {{ sonata_block_render({'name': '/cms/blocks/head-office'}, {'template': 'frontend/content/block/block_content.html.twig'}) }}
+    </div>
+
+
+
+
+{% endblock container %}

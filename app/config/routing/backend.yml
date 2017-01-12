@@ -1,0 +1,54 @@
+# These routes use Generic Crud Routing with SyliusResourceBundle
+# @see http://docs.sylius.org/en/latest/bundles/SyliusResourceBundle/routing.html
+
+app_backend_dashboard:
+    path: /dashboard
+    defaults:
+        _controller:  FrameworkBundle:Template:template
+        template:     'backend/index.html.twig'
+
+app_admin_person:
+    resource: backend/person.yml
+
+app_backend_article:
+    resource: backend/article.yml
+
+app_admin_contact_request:
+    resource: backend/contact_request.yml
+
+sylius_backend_customer:
+    resource: backend/customer.yml
+
+sylius_backend_customer_group:
+    resource: backend/customer_group.yml
+
+sylius_admin_taxon:
+    resource: backend/taxon.yml
+    prefix: /taxons
+
+sylius_admin_user:
+    resource: backend/user.yml
+
+sylius_admin_product:
+    resource: backend/product.yml
+
+sylius_backend_product_variant:
+    resource: backend/product_variant.yml
+
+app_backend_dealer:
+    resource: backend/dealer.yml
+
+app_backend_dealer_price:
+    resource: backend/dealer_price.yml
+
+app_backend_post:
+    resource: backend/post.yml
+
+sylius_backend_static_content:
+    resource: "backend/static_content.yml"
+
+app_backend_string_block:
+    resource: backend/string_block.yml
+
+app_backend_topic:
+    resource: backend/topic.yml

@@ -1,0 +1,12 @@
+default:
+    suites:
+        ui_game_play:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - AppBundle\Behat\UtilsContext
+                - AppBundle\Behat\UserContext
+                - AppBundle\Behat\TaxonContext
+                - AppBundle\Behat\ProductContext
+                - AppBundle\Behat\GamePlayContext
+            filters:
+                tags: "@gamePlay && @ui"

@@ -1,0 +1,7 @@
+{{ render(url('app_partial_article_index', {
+    'criteria': {
+        'product': product.id
+    },
+    'paginate': 10,
+    'template': 'frontend/article/_index.html.twig'
+})) }}

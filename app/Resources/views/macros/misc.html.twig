@@ -1,0 +1,13 @@
+{% macro pagination(paginator) %}
+    {% if paginator.haveToPaginate() %}
+        <div class="text-center">
+            {{ pagerfanta(paginator, 'twitter_bootstrap3_translated') }}
+        </div>
+    {% endif %}
+{% endmacro %}
+
+{% macro no_data(text) %}
+<div class="alert alert-info">
+    {{ text|raw }}
+</div>
+{% endmacro %}

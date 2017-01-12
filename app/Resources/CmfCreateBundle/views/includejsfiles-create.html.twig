@@ -1,0 +1,63 @@
+{# basic js files needed for vie #}
+
+<script type="text/javascript">
+    {%  if cmfCreateImageUploadEnabled %}
+        var cmfCreateImageUpload = '{{ path('cmf_create_image_upload', { editor: cmfCreateEditor }) }}';
+        var cmfCreateImageSearch = '{{ path('cmf_create_image_search') }}';
+        var cmfCreateLinkRelatedPath = '{{ path('cmf_create_image_related') }}';
+        var cmfCreateBrowseUrl = '{{ cmfCreateBrowseUrl }}';
+    {% else %}
+        var cmfCreateImageUpload = false;
+        var cmfCreateImageSearch = false;
+        var cmfCreateLinkRelatedPath = false;
+        var cmfCreateBrowseUrl = false;
+    {% endif %}
+
+    {# we must add a trailing slash as the js code will concat the id which might not start with / #}
+    var cmfCreatePutDocument = '{{ path('cmf_create_put_document_base') }}/';
+    var cmfCreateWorkflows = '{{ path('cmf_create_workflows_base') }}/';
+    var cmfCreateStanbolUrl = '{{ cmfCreateStanbolUrl }}';
+
+    var cmfCreatePlainTextTypes = {{ cmfCreatePlainTextTypes|raw }};
+</script>
+
+{% javascripts output="js/create.js"
+    '@CmfCreateBundle/Resources/public/vendor/create/lib/underscore/underscore.js'
+    '@CmfCreateBundle/Resources/public/vendor/create/lib/backbone/backbone.js'
+    '@CmfCreateBundle/Resources/public/vendor/create/lib/rangy/rangy-core.js'
+    '@CmfCreateBundle/Resources/public/vendor/create/lib/vie/vie.js'
+    '@CmfCreateBundle/Resources/public/vendor/create/lib/jquery-rdfquery/jquery.rdfquery.core.js'
+    '@CmfCreateBundle/Resources/public/vendor/create/lib/jquery-rdfquery/jquery.rdfquery.rules.js'
+    '@CmfCreateBundle/Resources/public/vendor/create/lib/jquery.tagsinput/jquery.tagsinput.js'
+    '@CmfCreateBundle/Resources/public/vendor/create/lib/annotate/annotate.js'
+
+    '@CmfCreateBundle/Resources/public/vendor/create/dist/create.js'
+%}
+    <script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+{#
+to develop create use this instead of create-min
+    '@CmfCreateBundle/Resources/public/vendor/create/src/*.js'
+
+to develop on vie, clone the vie bundle into vendor and add the following instead of vie-min.js
+(explicitly listed as the order is relevant)
+    '@CmfCreateBundle/Resources/public/vendor/vie/lib/rdfquery/latest/jquery.rdfquery.debug.js'
+    '@CmfCreateBundle/Resources/public/vendor/vie/src/VIE.js'
+    '@CmfCreateBundle/Resources/public/vendor/vie/src/Able.js'
+    '@CmfCreateBundle/Resources/public/vendor/vie/src/Util.js'
+    '@CmfCreateBundle/Resources/public/vendor/vie/src/Entity.js'
+    '@CmfCreateBundle/Resources/public/vendor/vie/src/Collection.js'
+    '@CmfCreateBundle/Resources/public/vendor/vie/src/Type.js'
+    '@CmfCreateBundle/Resources/public/vendor/vie/src/Attribute.js'
+    '@CmfCreateBundle/Resources/public/vendor/vie/src/Namespace.js'
+    '@CmfCreateBundle/Resources/public/vendor/vie/src/Classic.js'
+    '@CmfCreateBundle/Resources/public/vendor/vie/src/service/*.js'
+    '@CmfCreateBundle/Resources/public/vendor/vie/src/view/*.js'
+
+to develop on hallo, clone the hallo bundle into vendor and add the following instead of hallo.js
+and set up assetic to handle coffee script files
+    '@CmfCreateBundle/Resources/public/js/init-vie-hallo.js'
+    '@CmfCreateBundle/Resources/public/vendor/hallo/hallo.coffee'
+    '@CmfCreateBundle/Resources/public/vendor/hallo/plugins/*.coffee'
+#}

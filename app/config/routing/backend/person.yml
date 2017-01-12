@@ -1,0 +1,13 @@
+admin_person:
+    resource: |
+        alias: app.person
+        section: backend
+        templates: :backend/crud
+        redirect: index
+        grid: app_backend_person
+        vars:
+            all:
+                subheader: app.ui.manage_people
+            index:
+                icon: spy
+    type: sylius.resource

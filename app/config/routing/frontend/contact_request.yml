@@ -1,0 +1,8 @@
+app_frontend_contact_request_create:
+    methods: [GET, POST]
+    path: /contact
+    defaults:
+        _controller: app.controller.contact_request:createAction
+        _sylius:
+            template: frontend/contact_request/create.html.twig
+            redirect: app_frontend_contact_request_create

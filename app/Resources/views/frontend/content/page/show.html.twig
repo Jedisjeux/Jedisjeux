@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% if cmfMainContent is not defined %}
+    {% set cmfMainContent = page %}
+{% endif %}
+
+{% block headline_container %}
+    {% createphp cmfMainContent as='rdf' noautotag %}
+    <div {{ createphp_attributes(rdf) }}>
+        <h2 {{ createphp_attributes(rdf.title) }}>{{ createphp_content(rdf.title) }}</h2>
+    </div>
+    {% endcreatephp %}
+{% endblock %}
+
+{% block body -%}
+    {% createphp cmfMainContent as='rdf' noautotag %}
+    <div {{ createphp_attributes(rdf) }}>
+        <div {{ createphp_attributes(rdf.body) }}>{{ createphp_content(rdf.body) }}</div>
+    </div>
+    {% endcreatephp %}
+{% endblock %}

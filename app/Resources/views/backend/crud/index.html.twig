@@ -1,0 +1,15 @@
+{% extends 'backend/layout.html.twig' %}
+
+{% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
+
+{% set definition = resources.definition %}
+{% set data = resources.data %}
+
+{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
+
+{% block title %}{{ parent() }} {{ header|trans }}{% endblock %}
+
+{% block content %}
+    {% include 'backend/crud/index/_header.html.twig' %}
+    {% include 'backend/crud/index/_content.html.twig' %}
+{% endblock %}

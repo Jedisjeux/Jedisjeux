@@ -1,0 +1,8 @@
+{% extends "base.html.twig" %}
+
+{% block body -%}
+
+    <h2>Ajouter un joueur</h2>
+    {% include "partie/joueur/partial/_form.html.twig" with {'entity': entity} %}
+
+{% endblock %}

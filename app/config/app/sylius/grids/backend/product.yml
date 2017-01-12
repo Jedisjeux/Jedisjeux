@@ -1,0 +1,52 @@
+sylius_grid:
+    grids:
+        sylius_backend_product:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.product.class%"
+                    repository:
+                        method: createQueryBuilderWithLocaleCode
+                        arguments: ["%locale%"]
+            sorting:
+                createdAt: desc
+            fields:
+                image:
+                    type: twig
+                    label: sylius.ui.image
+                    path: .
+                    options:
+                        template: "backend/product/grid/field/image.html.twig"
+                name:
+                    type: string
+                    label: sylius.ui.name
+                createdAt:
+                    type: twig
+                    label: sylius.ui.created_at
+                    sortable: createdAt
+                    options:
+                        template: "backend/grid/field/date/medium.html.twig"
+                status:
+                    type: twig
+                    label: sylius.ui.status
+                    options:
+                        template: "backend/grid/field/state.html.twig"
+                        vars:
+                            labels: "backend/product/label/state"
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    options:
+                        fields: [code, translation.name]
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    manage_variants:
+                        type: manage_variants
+                    update:
+                        type: update
+                    delete:
+                        type: delete

@@ -1,0 +1,50 @@
+<!-- Nav tab style 2 starts -->
+<div class="nav-tabs-two">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#resume" data-toggle="tab">Résumé</a></li>
+        <li><a href="#articles" data-toggle="tab">Articles <span class="color">({{ product.articles | length }})</span></a></li>
+        <li><a href="#critiques" data-toggle="tab">Avis <span class="color">({{ product.commentedReviews | length }})</span></a></li>
+        <li><a href="#forum" data-toggle="tab">Forum</a></li>
+    </ul>
+    <!-- Tab content -->
+    <div class="tab-content">
+        <div class="tab-pane fade in active" id="resume">
+            {% include "frontend/game/show/nav-tab/summary.html.twig" with {'jeu': jeu} only %}
+        </div>
+        <div class="tab-pane fade" id="articles">
+            {% include "frontend/game/show/nav-tab/articles.html.twig" with {'product': jeu} only %}
+        </div>
+        <div class="tab-pane fade" id="critiques">
+
+            {#{% render(url('sylius_product_review_create', { 'productId': product.id })) %}#}
+
+            {{ render(url('sylius_partial_product_review_index', {
+                'criteria': {
+                    'reviewSubject': jeu.id,
+                    'hasComment': 1
+                },
+                'sorting': {
+                    'createdAt': 'desc'
+                },
+                'paginate': 10,
+                'template': 'frontend/product_review/_indexByGame.html.twig'
+            })) }}
+
+        </div>
+        <div class="tab-pane fade" id="forum">
+            {{ render(url('app_partial_topic_index', {
+                'criteria': {
+                    'product': jeu.id
+                },
+                'sorting': {
+                    'createdAt': 'desc'
+                },
+                'paginate': 5,
+                'template': 'frontend/topic/_index.html.twig'
+            })) }}
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<!-- Nav tab style 2 ends -->

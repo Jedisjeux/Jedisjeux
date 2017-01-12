@@ -1,0 +1,25 @@
+{% from 'macros/persons.html.twig' import image %}
+
+{% set personHref = path('app_person_show', { 'slug': person.slug }) %}
+
+<!-- Image Box #3 Item -->
+<div class="img-box-4-item">
+    <a href="{{ personHref }}">
+        <img src="{{ image(person, 'small_height_fixed') }}" alt="" class="center-block img-responsive">
+    </a>
+    <h4><a href="{{ personHref }}">{{ person }}</a></h4>
+    <div class="bor bg-lblue"></div>
+    <ul class="list-unstyled">
+        {% if person.designerProducts|length > 0 %}
+            <li>Auteur de {{ person.designerProducts|length }} jeu{% if person.designerProducts|length > 1 %}x{% endif %}</li>
+        {% endif %}
+        {% if person.artistProducts|length > 0 %}
+            <li>Illustrateur de {{ person.artistProducts|length }} jeu{% if person.artistProducts|length > 1 %}x{% endif %}</li>
+        {% endif %}
+        {% if person.publisherProducts|length > 0 %}
+            <li>Éditeur de {{ person.publisherProducts|length }} jeu{% if person.publisherProducts|length > 1 %}x{% endif %}</li>
+        {% endif %}
+    </ul>
+</div>
+
+

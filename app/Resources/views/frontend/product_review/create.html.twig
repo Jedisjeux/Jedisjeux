@@ -1,0 +1,13 @@
+{% extends "::base.html.twig" %}
+
+{% block headline %}
+    {{ resource.reviewSubject }}
+{% endblock headline %}
+
+{% block subtitle %}
+    Votre avis
+{% endblock %}
+
+{% block container %}
+    {% include 'frontend/product_review/_form.html.twig' %}
+{% endblock %}
