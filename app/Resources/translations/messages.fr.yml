@@ -42,6 +42,7 @@ app:
         name: Nom
         new_article: Nouvel article
         new_dealer: Nouveau vendeur
+        new_list: Nouvelle liste
         new_person: Nouvelle personne
         new_string_block: Nouveau bloc de chaîne
         overview_of_your_website: Aperçu de votre site web

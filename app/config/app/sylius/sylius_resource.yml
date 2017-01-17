@@ -97,7 +97,6 @@ sylius_resource:
                 controller: AppBundle\Controller\ProductListController
                 form:
                     default: AppBundle\Form\Type\ProductListType
-                    product: AppBundle\Form\Type\ProductListProductType
         app.pub_banner:
             classes:
                 model: AppBundle\Entity\PubBanner
