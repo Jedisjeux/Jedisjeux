@@ -12763,32 +12763,69 @@ $(function () {
 
     var successMessageForAdd = "le jeu a bien été ajouté à votre liste.";
     var successMessageForRemove = "le jeu a bien été supprimé de votre liste.";
+    var $newProductListForm = $('#newProductListForm');
+    var $productList = $('.productList');
 
-    $('input', '.productList').change(function() {
-        console.log($(this));
+    selectListHandler();
+    createNewListHandler();
 
-        var code = $(this).data('code');
-        var productId = $(this).data('product-id');
-        var method = $(this).prop('checked') ? 'POST' : 'DELETE';
+    function createNewListHandler() {
+      $newProductListForm.submit(function (event) {
+        event.preventDefault();
+
+        var name = $('input[name=name]', $newProductListForm).val();
+        var productId = $('input[name=productId]', $newProductListForm).val();
 
         $.ajax({
-          type: method,
-          url: Routing.generate('app_api_product_list_add_product', {
-            'code': code, 'productId': productId
-          }),
-          success: function (results) {
-            var message = method === 'POST' ? successMessageForAdd : successMessageForRemove;
-
-            appendFlash(message, messageHolderSelector);
+          type: 'POST',
+          url: Routing.generate('app_api_product_list_create'),
+          data: {
+            'name': name
           },
-          error: function(xhr, textStatus, errorThrown) {
-            if(xhr.status === 401) {
+          success: function (list) {
+            var code = list.code;
+            addOrRemoveProductFromList('POST', code, productId);
+          },
+          error: function (xhr, textStatus, errorThrown) {
+            if (xhr.status === 401) {
               //handle error
               window.location.replace('/login');
             }
           }
         });
-    });
+
+      });
+    }
+
+    function selectListHandler() {
+      $('input', $productList).change(function () {
+        var code = $(this).data('code');
+        var productId = $(this).data('product-id');
+        var method = $(this).prop('checked') ? 'POST' : 'DELETE';
+
+        addOrRemoveProductFromList(method, code, productId);
+      });
+    }
+
+    function addOrRemoveProductFromList(method, code, productId) {
+      $.ajax({
+        type: method,
+        url: Routing.generate('app_api_product_list_add_product', {
+          'code': code, 'productId': productId
+        }),
+        success: function (results) {
+          var message = method === 'POST' ? successMessageForAdd : successMessageForRemove;
+
+          appendFlash(message);
+        },
+        error: function (xhr, textStatus, errorThrown) {
+          if (xhr.status === 401) {
+            //handle error
+            window.location.replace('/login');
+          }
+        }
+      });
+    }
 
     function appendFlash(successMessage, messageHolderSelector) {
       messageHolderSelector = messageHolderSelector ? messageHolderSelector : '#flashes';
@@ -12843,6 +12880,33 @@ $(function () {
     });
 
   });
+});
+$(function() {
+
+    "use strict";
+
+    var $form = $('form[name=jdj_comptabundle_bill_payment]');
+
+    if ($form.length > 0) {
+        /**
+         * datePickers from the form
+         */
+        $('.billPaymentPaidAt').datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+    }
+
+});
+$(function() {
+
+    "use strict";
+
+    /**
+     * datePickers from the form
+     */
+    $('#jdj_comptabundle_book_entry_activeAt').datetimepicker({
+        format: 'YYYY-MM-DD'
+    });
 });
 $(document).ready(function () {
 
@@ -13201,32 +13265,84 @@ $(function() {
         window.location.hash = e.target.hash;
     })
 });
-$(function() {
-
-    "use strict";
-
-    var $form = $('form[name=jdj_comptabundle_bill_payment]');
-
-    if ($form.length > 0) {
-        /**
-         * datePickers from the form
-         */
-        $('.billPaymentPaidAt').datetimepicker({
-            format: 'YYYY-MM-DD'
-        });
-    }
-
-});
-$(function() {
-
-    "use strict";
+$(document).ready(function () {
 
     /**
-     * datePickers from the form
+     * Handles click to display the modal
      */
-    $('#jdj_comptabundle_book_entry_activeAt').datetimepicker({
-        format: 'YYYY-MM-DD'
+    $("#submit-form-login-modal").click(function (e) {
+        e.preventDefault();
+
+        //authentification
+        checkLogin($('#formLoginModal'));
+
+        $('#login-form-modal').modal('hide');
+
     });
+
+
+    /**
+     * Handles click to display the modal
+     */
+    $("#submit-form-login").click(function (e) {
+        e.preventDefault();
+
+        //authentification
+        checkLogin($('#formLogin'));
+
+    });
+
+    /**
+     * checks for the authentification
+     *
+     * @returns {boolean}
+     */
+    function checkLogin($form) {
+
+        var isLoggedIn = false;
+        $.ajax({
+            type        : $form.attr( 'method' ),
+            url         : $form.attr( 'action' ),
+            data        : $form.serialize(),
+            dataType    : 'json',
+            async       : false,
+            success: function (data) {
+                if (data.has_error == true) {
+                    //Login KO
+                    isLoggedIn = false;
+                }
+                else  {
+                    //login OK
+                    isLoggedIn = true;
+                }
+            }
+        });
+
+        console.log(isLoggedIn);
+
+        notifyLogin(isLoggedIn);
+
+    }
+
+
+    function notifyLogin(isLoggedIn)
+    {
+        if(isLoggedIn){
+            //Notify login
+            notifySuccess("Vous êtes connecté.");
+
+            //reload page
+            window.location
+                .reload()
+                .delay(3000)
+                .fadeOut();
+
+        } else {
+            notifyError("Problème de connexion.");
+        }
+
+    }
+
 });
 $(document).ready(function () {
 
@@ -13696,85 +13812,6 @@ $(function() {
         $('html, body').animate({
             scrollTop:$("#user-review").offset().top
         }, 'fast');
-    }
-
-});
-$(document).ready(function () {
-
-    /**
-     * Handles click to display the modal
-     */
-    $("#submit-form-login-modal").click(function (e) {
-        e.preventDefault();
-
-        //authentification
-        checkLogin($('#formLoginModal'));
-
-        $('#login-form-modal').modal('hide');
-
-    });
-
-
-    /**
-     * Handles click to display the modal
-     */
-    $("#submit-form-login").click(function (e) {
-        e.preventDefault();
-
-        //authentification
-        checkLogin($('#formLogin'));
-
-    });
-
-    /**
-     * checks for the authentification
-     *
-     * @returns {boolean}
-     */
-    function checkLogin($form) {
-
-        var isLoggedIn = false;
-        $.ajax({
-            type        : $form.attr( 'method' ),
-            url         : $form.attr( 'action' ),
-            data        : $form.serialize(),
-            dataType    : 'json',
-            async       : false,
-            success: function (data) {
-                if (data.has_error == true) {
-                    //Login KO
-                    isLoggedIn = false;
-                }
-                else  {
-                    //login OK
-                    isLoggedIn = true;
-                }
-            }
-        });
-
-        console.log(isLoggedIn);
-
-        notifyLogin(isLoggedIn);
-
-    }
-
-
-    function notifyLogin(isLoggedIn)
-    {
-        if(isLoggedIn){
-            //Notify login
-            notifySuccess("Vous êtes connecté.");
-
-            //reload page
-            window.location
-                .reload()
-                .delay(3000)
-                .fadeOut();
-
-        } else {
-            notifyError("Problème de connexion.");
-        }
-
     }
 
 });

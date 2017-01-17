@@ -57,7 +57,7 @@ class ProductListController extends ResourceController
         $this->manager->flush();
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_CREATED));
+            return $this->viewHandler->handle($configuration, View::create($list, Response::HTTP_CREATED));
         }
 
         $view = View::create()

@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as JMS;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -25,6 +26,8 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  *
  * @ORM\Entity
  * @ORM\Table(name="jdj_product_list")
+ *
+ * @JMS\ExclusionPolicy("all")
  */
 class ProductList implements ResourceInterface
 {
@@ -37,6 +40,8 @@ class ProductList implements ResourceInterface
      * @var string
      *
      * @ORM\Column(type="string")
+     * @JMS\Expose
+     * @JMS\Groups({"Default"})
      */
     protected $code;
 
@@ -52,6 +57,8 @@ class ProductList implements ResourceInterface
      * @var string
      *
      * @ORM\Column(type="string", nullable=true)
+     * @JMS\Expose
+     * @JMS\Groups({"Default"})
      */
     protected $name;
 

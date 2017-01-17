@@ -76,12 +76,14 @@
                                                 <span class="fa fa-cog white"></span>
                                             </p>
                                             <p class="game-attribute">
-                                                Mécanismes :
-                                                {% set first = true %}
-                                                {% for mechanism in jeu.mechanisms %}{% if not first %},{% endif %}
-                                                    {% set first = false %}
-                                                    <a
-                                                    href="{{ path('sylius_product_index_by_taxon', { 'permalink': mechanism.permalink }) }}">{{ mechanism }}</a>{% endfor %}
+                                                {% spaceless %}
+                                                    Mécanismes :
+                                                    {% set first = true %}
+                                                    {% for mechanism in jeu.mechanisms %}{% if not first %},{% endif %}
+                                                        {% set first = false %}
+                                                        <a
+                                                        href="{{ path('sylius_product_index_by_taxon', { 'permalink': mechanism.permalink }) }}">{{ mechanism }}</a>{% endfor %}
+                                                {% endspaceless %}
                                             </p>
                                         </li>
                                     {% endif %}
@@ -92,12 +94,14 @@
                                                 <span class="fa fa-picture-o white"></span>
                                             </p>
                                             <p class="game-attribute">
-                                                Thèmes :
-                                                {% set first = true %}
-                                                {% for key, theme in jeu.themes %}{% if not first %},{% endif %}
-                                                    {% set first = false %}
-                                                    <a
-                                                    href="{{ path('sylius_product_index_by_taxon', { 'permalink': theme.permalink }) }}">{{ theme }}</a>{% endfor %}
+                                                {% spaceless %}
+                                                    Thèmes :
+                                                    {% set first = true %}
+                                                    {% for key, theme in jeu.themes %}{% if not first %},{% endif %}
+                                                        {% set first = false %}
+                                                        <a
+                                                        href="{{ path('sylius_product_index_by_taxon', { 'permalink': theme.permalink }) }}">{{ theme }}</a>{% endfor %}
+                                                {% endspaceless %}
                                             </p>
                                         </li>
                                     {% endif %}
@@ -116,24 +120,51 @@
 
                                     <li>
                                         <div class="game-attribute">
-                                            <strong>Votre note
-                                                :</strong> {% render(url('sylius_partial_product_rating_show', { 'productId': product.id })) %}
+                                            <strong>Votre note:</strong>
+                                            {% render(url('sylius_partial_product_rating_show', { 'productId': product.id })) %}
                                         </div>
-                                        <hr />
+                                        <hr/>
                                     </li>
 
                                     <li>
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                            <button type="button" class="btn btn-default dropdown-toggle"
+                                                    data-toggle="dropdown"
                                                     aria-haspopup="true" aria-expanded="false" title="Ajouter à">
                                                 <span class="fa fa-plus"></span> Ajouter à
                                             </button>
-                                            <ul class="dropdown-menu productList" style="white-space: nowrap; padding: 10px">
-                                                <li><input type="checkbox" data-product-id="{{ product.id }}" data-code="game_library"/> <label for="game-library">Ma ludothèque</label></li>
-                                                <li><input type="checkbox" data-product-id="{{ product.id }}" data-code="wishes"/> <label for="wishes">Mes envies</label></li>
-                                                <li><input type="checkbox" data-product-id="{{ product.id }}" data-code="see_later"/> <label for="see-later">A regarder plus tard</label></li>
+                                            <ul class="dropdown-menu productList"
+                                                style="white-space: nowrap; padding: 10px">
+                                                <li><input id="game_library" type="checkbox"
+                                                           data-product-id="{{ product.id }}" data-code="game_library"/>
+                                                    <label for="game_library">Ma ludothèque</label></li>
+                                                <li><input id="wishes" type="checkbox"
+                                                           data-product-id="{{ product.id }}" data-code="wishes"/>
+                                                    <label for="wishes">Mes envies</label></li>
+                                                <li><input id="see_later" type="checkbox"
+                                                           data-product-id="{{ product.id }}" data-code="see_later"/>
+                                                    <label for="see_later">A regarder plus tard</label></li>
+                                                <li>
+                                                    <hr/>
+                                                    <form method="post" class="form-inline" id="newProductListForm">
+                                                        <div class="form-group">
+                                                            <input type="text"
+                                                                   id="list_name"
+                                                                   name="name"
+                                                                   class="form-control"
+                                                                   placeholder="{{ 'app.ui.new_list'|trans }}"/>
+                                                        </div>
+                                                        <button type="submit"
+                                                                class="btn btn-lblue"><span
+                                                                    class="fa fa-check"></span> {{ 'sylius.ui.create'|trans }}
+                                                        </button>
+                                                        <input type="hidden" name="productId"
+                                                               value="{{ product.id }}"/>
+                                                    </form>
+                                                </li>
                                             </ul>
-                                            <a href="{{ path('sylius_product_review_create', { 'productId': jeu.id  } ) }}" class="btn btn-default" title="Donnez votre avis">
+                                            <a href="{{ path('sylius_product_review_create', { 'productId': jeu.id  } ) }}"
+                                               class="btn btn-default" title="Donnez votre avis">
                                                 <span class="fa fa-star"></span> Votre avis
                                             </a>
                                             <a class="btn btn-default" title="Nouvelle partie"
