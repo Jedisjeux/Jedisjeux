@@ -12785,6 +12785,7 @@ $(function () {
           success: function (list) {
             var code = list.code;
             addOrRemoveProductFromList('POST', code, productId);
+            addNewListOnDom(code, name, productId);
           },
           error: function (xhr, textStatus, errorThrown) {
             if (xhr.status === 401) {
@@ -12795,6 +12796,26 @@ $(function () {
         });
 
       });
+    }
+
+    function addNewListOnDom(code, name, productId) {
+      $('form', $productList).append(
+        $('<div>')
+          .attr('class', 'list')
+          .append(
+            $('<input>')
+              .attr('id', code)
+              .attr('type', 'checkbox')
+              .attr('data-product-id', productId)
+              .attr('data-code', code)
+          )
+          .append(' ')
+          .append(
+            $('<label>')
+              .attr('for', code)
+              .html(name)
+          )
+      );
     }
 
     function selectListHandler() {
