@@ -14,7 +14,7 @@ echo 'Listen 80
       Listen 443
 ' >  /etc/apache2/ports.conf
 
-cat ${CONFIG_PATH}/apache/jdj.vhost.conf > /etc/apache2/sites-available/${APP_DOMAIN}.conf
+cat ${CONFIG_PATH}/apache/app.vhost.conf > /etc/apache2/sites-available/${APP_DOMAIN}.conf
 a2ensite ${APP_DOMAIN}.conf
 
 service apache2 restart
