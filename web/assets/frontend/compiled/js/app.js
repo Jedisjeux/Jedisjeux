@@ -12763,18 +12763,57 @@ $(function () {
 
     var successMessageForAdd = "le jeu a bien été ajouté à votre liste.";
     var successMessageForRemove = "le jeu a bien été supprimé de votre liste.";
+    var $productListForm = $('#productListForm');
     var $newProductListForm = $('#newProductListForm');
-    var $productList = $('.productList');
+    var productId = $('input[name=productId]', $productListForm).val();
 
+    initLists();
     selectListHandler();
     createNewListHandler();
+
+    function initLists() {
+      $.ajax({
+        type: 'GET',
+        url: Routing.generate('app_api_product_list_index'),
+        success: function (lists) {
+          $.each(lists, function (index, list) {
+            addNewListOnDom(list.code, list.name)
+          });
+
+          getListsByProducts();
+        },
+        error: function (xhr, textStatus, errorThrown) {
+          if (xhr.status === 401) {
+            //handle error
+            window.location.replace('/login');
+          }
+        }
+      });
+    }
+
+    function getListsByProducts() {
+      $.ajax({
+        type: 'GET',
+        url: Routing.generate('app_api_product_list_by_product', {'productId': productId}),
+        success: function (lists) {
+          $.each(lists, function (index, list) {
+            selectList(list.code)
+          });
+        },
+        error: function (xhr, textStatus, errorThrown) {
+          if (xhr.status === 401) {
+            //handle error
+            window.location.replace('/login');
+          }
+        }
+      });
+    }
 
     function createNewListHandler() {
       $newProductListForm.submit(function (event) {
         event.preventDefault();
 
         var name = $('input[name=name]', $newProductListForm).val();
-        var productId = $('input[name=productId]', $newProductListForm).val();
 
         $.ajax({
           type: 'POST',
@@ -12784,8 +12823,8 @@ $(function () {
           },
           success: function (list) {
             var code = list.code;
-            addOrRemoveProductFromList('POST', code, productId);
-            addNewListOnDom(code, name, productId);
+            addOrRemoveProductFromList('POST', code);
+            addNewListOnDom(code, name);
           },
           error: function (xhr, textStatus, errorThrown) {
             if (xhr.status === 401) {
@@ -12798,15 +12837,18 @@ $(function () {
       });
     }
 
-    function addNewListOnDom(code, name, productId) {
-      $('form', $productList).append(
+    function addNewListOnDom(code, name) {
+      if (isListOnDom(code)) {
+        return;
+      }
+
+      $productListForm.append(
         $('<div>')
           .attr('class', 'list')
           .append(
             $('<input>')
               .attr('id', code)
               .attr('type', 'checkbox')
-              .attr('data-product-id', productId)
               .attr('data-code', code)
           )
           .append(' ')
@@ -12818,17 +12860,38 @@ $(function () {
       );
     }
 
-    function selectListHandler() {
-      $('input', $productList).change(function () {
-        var code = $(this).data('code');
-        var productId = $(this).data('product-id');
-        var method = $(this).prop('checked') ? 'POST' : 'DELETE';
-
-        addOrRemoveProductFromList(method, code, productId);
+    function selectList(code) {
+      $('input', $productListForm).each(function () {
+        if (code === $(this).attr('data-code')) {
+          $(this).prop('checked', 'checked');
+        }
       });
     }
 
-    function addOrRemoveProductFromList(method, code, productId) {
+    function isListOnDom(code) {
+      var present = false;
+
+      $('input', $productListForm).each(function () {
+        if (code === $(this).attr('data-code')) {
+          present = true;
+        }
+      });
+
+      return present;
+    }
+
+
+
+    function selectListHandler() {
+      $('input', $productListForm).change(function () {
+        var code = $(this).data('code');
+        var method = $(this).prop('checked') ? 'POST' : 'DELETE';
+
+        addOrRemoveProductFromList(method, code);
+      });
+    }
+
+    function addOrRemoveProductFromList(method, code) {
       $.ajax({
         type: method,
         url: Routing.generate('app_api_product_list_add_product', {
@@ -13285,85 +13348,6 @@ $(function() {
     $('.nav-tabs a').on('shown', function (e) {
         window.location.hash = e.target.hash;
     })
-});
-$(document).ready(function () {
-
-    /**
-     * Handles click to display the modal
-     */
-    $("#submit-form-login-modal").click(function (e) {
-        e.preventDefault();
-
-        //authentification
-        checkLogin($('#formLoginModal'));
-
-        $('#login-form-modal').modal('hide');
-
-    });
-
-
-    /**
-     * Handles click to display the modal
-     */
-    $("#submit-form-login").click(function (e) {
-        e.preventDefault();
-
-        //authentification
-        checkLogin($('#formLogin'));
-
-    });
-
-    /**
-     * checks for the authentification
-     *
-     * @returns {boolean}
-     */
-    function checkLogin($form) {
-
-        var isLoggedIn = false;
-        $.ajax({
-            type        : $form.attr( 'method' ),
-            url         : $form.attr( 'action' ),
-            data        : $form.serialize(),
-            dataType    : 'json',
-            async       : false,
-            success: function (data) {
-                if (data.has_error == true) {
-                    //Login KO
-                    isLoggedIn = false;
-                }
-                else  {
-                    //login OK
-                    isLoggedIn = true;
-                }
-            }
-        });
-
-        console.log(isLoggedIn);
-
-        notifyLogin(isLoggedIn);
-
-    }
-
-
-    function notifyLogin(isLoggedIn)
-    {
-        if(isLoggedIn){
-            //Notify login
-            notifySuccess("Vous êtes connecté.");
-
-            //reload page
-            window.location
-                .reload()
-                .delay(3000)
-                .fadeOut();
-
-        } else {
-            notifyError("Problème de connexion.");
-        }
-
-    }
-
 });
 $(document).ready(function () {
 
@@ -13833,6 +13817,85 @@ $(function() {
         $('html, body').animate({
             scrollTop:$("#user-review").offset().top
         }, 'fast');
+    }
+
+});
+$(document).ready(function () {
+
+    /**
+     * Handles click to display the modal
+     */
+    $("#submit-form-login-modal").click(function (e) {
+        e.preventDefault();
+
+        //authentification
+        checkLogin($('#formLoginModal'));
+
+        $('#login-form-modal').modal('hide');
+
+    });
+
+
+    /**
+     * Handles click to display the modal
+     */
+    $("#submit-form-login").click(function (e) {
+        e.preventDefault();
+
+        //authentification
+        checkLogin($('#formLogin'));
+
+    });
+
+    /**
+     * checks for the authentification
+     *
+     * @returns {boolean}
+     */
+    function checkLogin($form) {
+
+        var isLoggedIn = false;
+        $.ajax({
+            type        : $form.attr( 'method' ),
+            url         : $form.attr( 'action' ),
+            data        : $form.serialize(),
+            dataType    : 'json',
+            async       : false,
+            success: function (data) {
+                if (data.has_error == true) {
+                    //Login KO
+                    isLoggedIn = false;
+                }
+                else  {
+                    //login OK
+                    isLoggedIn = true;
+                }
+            }
+        });
+
+        console.log(isLoggedIn);
+
+        notifyLogin(isLoggedIn);
+
+    }
+
+
+    function notifyLogin(isLoggedIn)
+    {
+        if(isLoggedIn){
+            //Notify login
+            notifySuccess("Vous êtes connecté.");
+
+            //reload page
+            window.location
+                .reload()
+                .delay(3000)
+                .fadeOut();
+
+        } else {
+            notifyError("Problème de connexion.");
+        }
+
     }
 
 });

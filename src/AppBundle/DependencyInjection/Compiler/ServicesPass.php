@@ -50,7 +50,7 @@ class ServicesPass implements CompilerPassInterface
         $notificationFactoryDefinition = $container->getDefinition('app.factory.notification');
         $notificationFactoryDefinition
             ->addMethodCall('setRouter', [new Reference('router')])
-            ->addMethodCall('setTranslator', [new Reference('translator')]);
+            ->addMethodCall('setTranslator', [new Reference('translator.default')]);
 
         $gamePlayFactoryDefinition = $container->getDefinition('app.factory.game_play');
         $gamePlayFactoryDefinition
@@ -82,7 +82,8 @@ class ServicesPass implements CompilerPassInterface
 
         $productListFactoryDefinition = $container->getDefinition('app.factory.product_list');
         $productListFactoryDefinition
-            ->addArgument(new Reference('app.context.customer'));
+            ->addArgument(new Reference('app.context.customer'))
+            ->addArgument(new Reference('translator.default'));
     }
 
     /**

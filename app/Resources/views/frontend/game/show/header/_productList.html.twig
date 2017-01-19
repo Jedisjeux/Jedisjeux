@@ -4,24 +4,23 @@
             aria-haspopup="true" aria-expanded="false" title="Ajouter à">
         <span class="fa fa-plus"></span> Ajouter à
     </button>
-    <ul class="dropdown-menu productList"
+    <ul class="dropdown-menu"
         style="white-space: nowrap; padding: 10px">
         <li>
-            <form>
+            <form id="productListForm">
+                <input type="hidden" name="productId"
+                       value="{{ product.id }}"/>
                 <div class="list">
-                    <input id="game_library" type="checkbox"
-                           data-product-id="{{ product.id }}" data-code="game_library"/>
-                    <label for="game_library">Ma ludothèque</label>
+                    <input id="game_library" type="checkbox" data-code="game_library"/>
+                    <label for="game_library">{{ 'app.ui.game_library'|trans }}</label>
                 </div>
                 <div class="list">
-                    <input id="wishes" type="checkbox"
-                           data-product-id="{{ product.id }}" data-code="wishes"/>
-                    <label for="wishes">Mes envies</label>
+                    <input id="wishes" type="checkbox" data-code="wishes"/>
+                    <label for="wishes">{{ 'app.ui.wishes'|trans }}</label>
                 </div>
                 <div class="list">
-                    <input id="see_later" type="checkbox"
-                           data-product-id="{{ product.id }}" data-code="see_later"/>
-                    <label for="see_later">A regarder plus tard</label>
+                    <input id="see_later" type="checkbox" data-code="see_later"/>
+                    <label for="see_later">{{ 'app.ui.see_later'|trans }}</label>
                 </div>
             </form>
         </li>
@@ -39,8 +38,6 @@
                         class="btn btn-lblue"><span
                             class="fa fa-check"></span> {{ 'sylius.ui.create'|trans }}
                 </button>
-                <input type="hidden" name="productId"
-                       value="{{ product.id }}"/>
             </form>
         </li>
     </ul>
