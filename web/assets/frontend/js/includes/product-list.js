@@ -3,8 +3,8 @@ $(function () {
 
   $(document).ready(function () {
 
-    var successMessageForAdd = "le jeu a bien été ajouté à votre liste.";
-    var successMessageForRemove = "le jeu a bien été supprimé de votre liste.";
+    var successMessageForAdd = "Le jeu a bien été ajouté à votre liste.";
+    var successMessageForRemove = "Le jeu a bien été supprimé de votre liste.";
     var $productListForm = $('#productListForm');
     var $newProductListForm = $('#newProductListForm');
     var productId = $('input[name=productId]', $productListForm).val();
@@ -13,6 +13,9 @@ $(function () {
     selectListHandler();
     createNewListHandler();
 
+    /**
+     * Init all lists
+     */
     function initLists() {
       $.ajax({
         type: 'GET',
@@ -122,10 +125,8 @@ $(function () {
       return present;
     }
 
-
-
     function selectListHandler() {
-      $('input', $productListForm).change(function () {
+      $($productListForm).on('change', 'input', function () {
         var code = $(this).data('code');
         var method = $(this).prop('checked') ? 'POST' : 'DELETE';
 
