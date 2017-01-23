@@ -190,4 +190,14 @@ class ProductList implements ResourceInterface
 
         return $this;
     }
+
+    /**
+     * @return ProductInterface|null
+     */
+    public function getLastProduct()
+    {
+        $lastProduct = $this->products->last();
+
+        return null !== $lastProduct ? $lastProduct : null;
+    }
 }

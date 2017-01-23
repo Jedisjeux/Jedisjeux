@@ -4,6 +4,10 @@ app_homepage:
 app_article:
     resource: "frontend/article.yml"
 
+app_account:
+    resource: "frontend/account.yml"
+    prefix: "mon-compte"
+
 app_contact_request:
     resource: "frontend/contact_request.yml"
 
@@ -16,10 +20,10 @@ app_game_play:
 app_person:
     resource: "frontend/person.yml"
 
-app_product:
+sylius_product:
     resource: "frontend/product.yml"
 
-app_product_review:
+sylius_product_review:
     resource: "frontend/product_review.yml"
 
 app_customer_list:
