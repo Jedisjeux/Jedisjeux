@@ -23,6 +23,9 @@ app_person:
 sylius_product:
     resource: "frontend/product.yml"
 
+app_frontend_product_list_product:
+    resource: "frontend/product_list/product.yml"
+
 sylius_product_review:
     resource: "frontend/product_review.yml"
 

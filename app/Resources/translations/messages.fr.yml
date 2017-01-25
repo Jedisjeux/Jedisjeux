@@ -1,6 +1,7 @@
 app:
     ui:
         administration: Administration
+        add_date: Date d'ajout
         articles: Articles
         article_details: Détails de l'article
         article_settings: Configuration de l'article

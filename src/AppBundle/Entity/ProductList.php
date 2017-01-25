@@ -49,7 +49,7 @@ class ProductList implements ResourceInterface
      * @var string
      *
      * @Gedmo\Slug(fields={"name"})
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", unique=true)
      */
     protected $slug;
 
@@ -73,7 +73,7 @@ class ProductList implements ResourceInterface
     /**
      * @var Collection
      *
-     * @ORM\ManyToMany(targetEntity="Sylius\Component\Product\Model\ProductInterface")
+     * @ORM\ManyToMany(targetEntity="Sylius\Component\Product\Model\ProductInterface", inversedBy="lists")
      * @ORM\JoinTable(name="jdj_product_list_product")
      */
     protected $products;
@@ -199,5 +199,13 @@ class ProductList implements ResourceInterface
         $lastProduct = $this->products->last();
 
         return null !== $lastProduct ? $lastProduct : null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return $this->getName();
     }
 }

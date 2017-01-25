@@ -32,15 +32,19 @@
                             {% set color = 'blue' %}
                         {% endif %}
 
+                        {% set productListPath = path('sylius_frontend_product_list_product_index', {'productListSlug': product_list.slug}) %}
+
                         <div class="col-md-3 col-sm-6">
                             <!-- Image Box #3 Item -->
-                            <div class="img-box-3-item">
+                            <div class="img-box-3-item product-list-item">
                                 <div class="img-box-3-icon bg-{{ color }}">
                                     {% if lastProduct %}
-                                        {{ image(lastProduct.mainImage.webPath, 'thumbnail_XL', lastProduct.name, 'img-round') }}
+                                        <a href="{{ productListPath }}">
+                                            {{ image(lastProduct.mainImage.webPath, 'thumbnail_XL', lastProduct.name, 'img-round') }}
+                                        </a>
                                     {% endif %}
                                 </div>
-                                <h4><a href="#">{{ product_list.name }}</a></h4>
+                                <h4><a href="{{ productListPath }}">{{ product_list.name }}</a></h4>
                                 <div class="bor bg-{{ color }}"></div>
                             </div>
                         </div>

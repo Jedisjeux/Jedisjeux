@@ -171,6 +171,13 @@ class Product extends BaseProduct implements ReviewableInterface
     protected $articles;
 
     /**
+     * @var Collection|ProductList[]
+     *
+     * @ORM\ManyToMany(targetEntity="ProductList", mappedBy="products")
+     */
+    protected $lists;
+
+    /**
      * Product constructor.
      */
     public function __construct()
@@ -181,6 +188,7 @@ class Product extends BaseProduct implements ReviewableInterface
         $this->status = self::STATUS_NEW;
         $this->reviews = new ArrayCollection();
         $this->articles = new ArrayCollection();
+        $this->lists = new ArrayCollection();
         $this->code = uniqid('product_');
     }
 

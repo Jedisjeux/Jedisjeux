@@ -1,0 +1,43 @@
+{% extends "base.html.twig" %}
+
+{% from 'macros/misc.html.twig' import pagination %}
+{% from 'macros/images.html.twig' import image %}
+{% import 'macros/buttons.html.twig' as button %}
+{% from 'macros/sorting.html.twig' import sorting %}
+
+{% block headline %}
+    {{ product_list }}
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    <a href="#">Listes de jeux</a>
+    / {{ product_list }}
+{% endblock %}
+
+{% block body -%}
+    <div class="col-md-12">
+        <div class="container">
+            <div class="pull-right sorting">
+                {% set sorting = app.request.get('sorting') %}
+
+                {% set icon = false %}
+                {% set currentOrder = null %}
+
+                {% if null == sorting %}
+                    {% set icon = true %}
+                    {% set currentOrder = 'desc' %}
+                {% endif %}
+
+                Trier
+                par {{ sorting('sylius_frontend_product_list_product_index', 'app.ui.add_date'|trans, 'createdAt', 'desc', icon, currentOrder, {'productListSlug': app.request.get('productListSlug')}) }}
+            </div>
+
+            <div class="clearfix"></div>
+
+            {% include "frontend/game/index/list-4.html.twig" with {'products': products.data} %}
+
+            {{ pagination(products.data) }}
+        </div>
+    </div>
+{% endblock %}

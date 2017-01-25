@@ -39,6 +39,28 @@ class ProductRepository extends BaseProductRepository
     }
 
     /**
+     * @param string $productListSlug
+     * @param string $locale
+     *
+     * @return QueryBuilder
+     */
+    public function createQueryBuilderByProductList($productListSlug, $locale)
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        $queryBuilder
+            ->addSelect('translation')
+            ->leftJoin('o.translations', 'translation')
+            ->innerJoin('o.lists', 'list')
+            ->andWhere('translation.locale = :locale')
+            ->andWhere('list.slug = :productListSlug')
+            ->setParameter('locale', $locale)
+            ->setParameter('productListSlug', $productListSlug);
+
+        return $queryBuilder;
+    }
+
+    /**
      * @return QueryBuilder
      */
     protected function getQueryBuilder()

@@ -1,0 +1,8 @@
+sylius_frontend_product_list_product_index:
+    methods: [GET]
+    path: /liste-de-jeux/{productListSlug}
+    defaults:
+        _controller: sylius.controller.product:indexByProductListAction
+        _sylius:
+            template: "frontend/product_list/product/index.html.twig"
+            grid: sylius_frontend_product_list_product
