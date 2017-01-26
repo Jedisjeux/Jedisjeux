@@ -12,6 +12,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\ProductList;
+use AppBundle\Entity\ProductListItem;
 use AppBundle\Factory\ProductListFactory;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
@@ -26,6 +27,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ProductListController extends ResourceController
 {
     /**
+     * TODO handle directly productListItemController
+     *
      * @param Request $request
      * @param int $productId
      *
@@ -53,7 +56,13 @@ class ProductListController extends ResourceController
             throw new NotFoundHttpException();
         }
 
-        $list->addProduct($product);
+        /** @var ProductListItem $item */
+        $item = $this->get('app.factory.product_list_item')->createNew();
+        $item
+            ->setProduct($product)
+            ->setList($list);
+
+        $list->addItem($item);
         $this->manager->flush();
 
         if (!$configuration->isHtmlRequest()) {
@@ -73,6 +82,8 @@ class ProductListController extends ResourceController
     }
 
     /**
+     * TODO handle directly productListItemController
+     *
      * @param Request $request
      * @param $productId
      *
@@ -92,7 +103,13 @@ class ProductListController extends ResourceController
             throw new NotFoundHttpException();
         }
 
-        $list->removeProduct($product);
+        $item = $this->get('app.repository.product_list_item')->findOneBy(['product' => $product, 'list' => $list]);
+
+        if (null === $item) {
+            throw new NotFoundHttpException();
+        }
+
+        $list->removeItem($item);
         $this->manager->flush();
 
         if (!$configuration->isHtmlRequest()) {

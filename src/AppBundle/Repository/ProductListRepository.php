@@ -33,7 +33,8 @@ class ProductListRepository extends EntityRepository
             ->join('o.owner', 'owner')
             ->andWhere('owner = :owner')
             ->setParameter('owner', $owner)
-            ->join('o.products', 'product')
+            ->join('o.items', 'item')
+            ->join('item.product', 'product')
             ->andWhere('product = :product')
             ->setParameter('product', $product);
 

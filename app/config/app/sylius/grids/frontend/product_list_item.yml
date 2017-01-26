@@ -1,10 +1,10 @@
 sylius_grid:
     grids:
-        sylius_frontend_product_list_product:
+        app_frontend_product_list_item:
             driver:
                 name: doctrine/orm
                 options:
-                    class: "%sylius.model.product.class%"
+                    class: "%app.model.product_list_item.class%"
                     repository:
                         method: createQueryBuilderByProductList
                         arguments: [$productListSlug, "%locale%"]

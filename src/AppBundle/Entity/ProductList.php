@@ -73,10 +73,9 @@ class ProductList implements ResourceInterface
     /**
      * @var Collection
      *
-     * @ORM\ManyToMany(targetEntity="Sylius\Component\Product\Model\ProductInterface", inversedBy="lists")
-     * @ORM\JoinTable(name="jdj_product_list_product")
+     * @ORM\OneToMany(targetEntity="ProductListItem", mappedBy="list", cascade={"all"})
      */
-    protected $products;
+    protected $items;
 
     /**
      * ProductList constructor.
@@ -84,7 +83,7 @@ class ProductList implements ResourceInterface
     public function __construct()
     {
         $this->code = uniqid('list_');
-        $this->products = new ArrayCollection();
+        $this->items = new ArrayCollection();
     }
 
     /**
@@ -150,43 +149,43 @@ class ProductList implements ResourceInterface
     /**
      * @return Collection|ProductInterface[]
      */
-    public function getProducts()
+    public function getItems()
     {
-        return $this->products;
+        return $this->items;
     }
 
     /**
-     * @param ProductInterface $product
+     * @param ProductListItem $item
      *
      * @return bool
      */
-    public function hasProduct(ProductInterface $product)
+    public function hasItem(ProductListItem $item)
     {
-        return $this->products->contains($product);
+        return $this->items->contains($item);
     }
 
     /**
-     * @param ProductInterface $product
+     * @param ProductListItem $item
      *
      * @return $this
      */
-    public function addProduct(ProductInterface $product)
+    public function addItem(ProductListItem $item)
     {
-        if (!$this->hasProduct($product)) {
-            $this->products->add($product);
+        if (!$this->hasItem($item)) {
+            $this->items->add($item);
         }
 
         return $this;
     }
 
     /**
-     * @param ProductInterface $element
+     * @param ProductListItem $item
      *
      * @return $this
      */
-    public function removeProduct(ProductInterface $element)
+    public function removeItem(ProductListItem $item)
     {
-        $this->products->removeElement($element);
+        $this->items->removeElement($item);
 
         return $this;
     }
@@ -196,9 +195,10 @@ class ProductList implements ResourceInterface
      */
     public function getLastProduct()
     {
-        $lastProduct = $this->products->last();
+        /** @var ProductListItem $lastItem */
+        $lastItem = $this->items->last();
 
-        return null !== $lastProduct ? $lastProduct : null;
+        return false !== $lastItem ? $lastItem->getProduct() : null;
     }
 
     /**

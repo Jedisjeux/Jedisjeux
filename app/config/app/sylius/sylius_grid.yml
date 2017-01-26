@@ -9,7 +9,7 @@ imports:
   - { resource: 'grids/backend/product.yml' }
   - { resource: 'grids/backend/topic.yml' }
 
-  - { resource: 'grids/frontend/product_list/product.yml' }
+  - { resource: 'grids/frontend/product_list_item.yml' }
 
 sylius_grid:
     templates:
