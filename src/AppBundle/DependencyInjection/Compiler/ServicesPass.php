@@ -28,6 +28,7 @@ class ServicesPass implements CompilerPassInterface
     {
         $this->processFactories($container);
         $this->processFormTypes($container);
+        $this->processControllers($container);
 
         $container->setAlias('sylius.context.customer', 'app.context.customer');
     }
@@ -98,5 +99,15 @@ class ServicesPass implements CompilerPassInterface
         $topicFormTypeDefinition = $container->getDefinition('app.form.type.topic');
         $topicFormTypeDefinition
             ->addMethodCall('setAuthorizationChecker', [new Reference('security.authorization_checker')]);
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     */
+    protected function processControllers(ContainerBuilder $container)
+    {
+        $resourcesCollectionProviderDefinition = $container->getDefinition('sylius.resource_controller.resources_collection_provider');
+        $resourcesCollectionProviderDefinition
+            ->setClass('AppBundle\Controller\ResourcesCollectionProvider');
     }
 }

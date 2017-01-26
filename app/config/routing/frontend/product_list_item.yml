@@ -6,3 +6,4 @@ app_frontend_product_list_item_index:
         _sylius:
             template: "frontend/product_list_item/index.html.twig"
             grid: app_frontend_product_list_item
+            paginate: 12
