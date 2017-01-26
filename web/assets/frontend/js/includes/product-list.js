@@ -70,6 +70,7 @@ $(function () {
             var code = list.code;
             addOrRemoveProductFromList('POST', code);
             addNewListOnDom(code, name);
+            selectList(list.code);
           },
           error: function (xhr, textStatus, errorThrown) {
             if (xhr.status === 401) {
