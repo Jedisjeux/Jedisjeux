@@ -12966,6 +12966,33 @@ $(function () {
 
   });
 });
+$(function() {
+
+    "use strict";
+
+    var $form = $('form[name=jdj_comptabundle_bill_payment]');
+
+    if ($form.length > 0) {
+        /**
+         * datePickers from the form
+         */
+        $('.billPaymentPaidAt').datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+    }
+
+});
+$(function() {
+
+    "use strict";
+
+    /**
+     * datePickers from the form
+     */
+    $('#jdj_comptabundle_book_entry_activeAt').datetimepicker({
+        format: 'YYYY-MM-DD'
+    });
+});
 $(document).ready(function () {
 
     /**
@@ -13322,33 +13349,6 @@ $(function() {
     $('.nav-tabs a').on('shown', function (e) {
         window.location.hash = e.target.hash;
     })
-});
-$(function() {
-
-    "use strict";
-
-    var $form = $('form[name=jdj_comptabundle_bill_payment]');
-
-    if ($form.length > 0) {
-        /**
-         * datePickers from the form
-         */
-        $('.billPaymentPaidAt').datetimepicker({
-            format: 'YYYY-MM-DD'
-        });
-    }
-
-});
-$(function() {
-
-    "use strict";
-
-    /**
-     * datePickers from the form
-     */
-    $('#jdj_comptabundle_book_entry_activeAt').datetimepicker({
-        format: 'YYYY-MM-DD'
-    });
 });
 $(document).ready(function () {
 
