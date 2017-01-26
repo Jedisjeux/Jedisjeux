@@ -35,6 +35,8 @@ class ProductList implements ResourceInterface
         Timestampable;
 
     const CODE_GAME_LIBRARY = 'game_library';
+    const CODE_WISHES = 'wishes';
+    const CODE_SEE_LATER = 'see_later';
 
     /**
      * @var string
