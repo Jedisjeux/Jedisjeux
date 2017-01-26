@@ -106,7 +106,8 @@ SELECT
 FROM jedisjeux.jdj_liste old
   INNER JOIN sylius_customer customer
     ON customer.code = concat('user-', old.id_user)
-WHERE id_type = 5;
+WHERE id_type = 5
+    AND nom LIKE 'Liste d\'achats de %';
 EOF
         );
     }
