@@ -25,7 +25,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class LoadWishListsCommand extends ContainerAwareCommand
+class LoadProductListsCommand extends ContainerAwareCommand
 {
     const BATCH_SIZE = 20;
 
@@ -35,8 +35,8 @@ class LoadWishListsCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('app:wish-lists:load')
-            ->setDescription('Loading wish lists');
+            ->setName('app:product-lists:load')
+            ->setDescription('Loading product lists');
     }
 
     /**
@@ -49,7 +49,7 @@ class LoadWishListsCommand extends ContainerAwareCommand
         $i = 0;
 
         foreach ($this->getLists() as $data) {
-            $output->writeln(sprintf("Loading <comment>%s</comment> wish list", $data['email']));
+            $output->writeln(sprintf("Loading <comment>%s</comment> product list from %s", $data['name'], $data['email']));
 
             $list = $this->createOrReplaceList($data);
             $this->getManager()->persist($list);
@@ -77,17 +77,17 @@ class LoadWishListsCommand extends ContainerAwareCommand
      */
     protected function createOrReplaceList(array $data)
     {
-        $owner = $this->getContainer()->get('sylius.repository.customer')->find($data['id']);
+        $owner = $this->getContainer()->get('sylius.repository.customer')->find($data['owner_id']);
 
         /** @var ProductList $list */
-        $list = $this->getRepository()->findOneBy([
-            'code' => ProductList::CODE_WISHES,
-            'owner' => $owner,
-        ]);
+        $list = $this->getRepository()->findOneBy(['code' => $data['code']]);
 
         if (null === $list) {
-            $list = $this->getFactory()->createForCode(ProductList::CODE_WISHES);
+            $list = $this->getFactory()->createNew();
             $list->setOwner($owner);
+            $list
+                ->setCode($data['code'])
+                ->setName($data['name']);
         }
 
         return $list;
@@ -101,13 +101,13 @@ class LoadWishListsCommand extends ContainerAwareCommand
         return $this->getManager()->getConnection()->fetchAll(
             <<<EOF
 SELECT
-  customer.id,
-  customer.email
+  concat('list_', old.id_liste) as code,
+  customer.id as owner_id,
+  customer.email,
+  old.nom as name
 FROM jedisjeux.jdj_liste old
   INNER JOIN sylius_customer customer
-    ON customer.code = concat('user-', old.id_user)
-WHERE id_type = 5
-    AND nom LIKE 'Liste d\'achats de %';
+    ON customer.code = concat('user-', old.id_user);
 EOF
         );
     }
@@ -124,6 +124,7 @@ INSERT INTO jdj_product_list_item (list_id, product_id, createdAt, updatedAt)
   FROM jedisjeux.jdj_liste AS old
     INNER JOIN jedisjeux.jdj_liste_element item
       ON item.id_liste = old.id_liste
+      AND item.type_elem = 'jeu'
     INNER JOIN sylius_customer customer
       ON customer.code = concat('user-', old.id_user)
     INNER JOIN sylius_product_variant variant
@@ -131,8 +132,7 @@ INSERT INTO jdj_product_list_item (list_id, product_id, createdAt, updatedAt)
     INNER JOIN sylius_product product
       ON product.id = variant.product_id
     INNER JOIN jdj_product_list list
-      ON list.code = :code
-         AND list.owner_id = customer.id;
+      ON list.code = concat('list_', old.id_liste);
 EOM;
 
         $this->getManager()->getConnection()->executeQuery($query, [
