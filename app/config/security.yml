@@ -63,6 +63,7 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/mon-compte.*, role: ROLE_USER }
         #seul les membres du bureau ont accès à la partie compta
         - { path: ^/compta/, role: ROLE_OFFICE }
         # create new entity

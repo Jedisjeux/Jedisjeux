@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block headline %}
+    {{ product_list }}
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    <a href="#">Listes de jeux</a>
+    / {{ product_list }}
+{% endblock %}
+
+{% block body -%}
+    {% include 'frontend/product_list_item/index/_content.html.twig' %}
+{% endblock %}

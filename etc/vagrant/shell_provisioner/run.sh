@@ -19,6 +19,7 @@ DEPENDENCIES=(
     mysql
     apache
     node
+    elasticsearch
 )
 
 for MODULE in ${DEPENDENCIES[@]}; do

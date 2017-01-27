@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block headline %}
+
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    Mes listes de jeux
+{% endblock %}
+
+{% block body -%}
+    <div class="col-md-12">
+
+        <div class="container">
+            {% include 'frontend/product_list/index/_content.html.twig' %}
+        </div>
+
+    </div>
+{% endblock %}

@@ -94,9 +94,15 @@ sylius_resource:
             classes:
                 model: AppBundle\Entity\ProductList
                 factory: AppBundle\Factory\ProductListFactory
+                repository: AppBundle\Repository\ProductListRepository
                 controller: AppBundle\Controller\ProductListController
                 form:
                     default: AppBundle\Form\Type\ProductListType
+        app.product_list_item:
+            classes:
+                model: AppBundle\Entity\ProductListItem
+                repository: AppBundle\Repository\ProductListItemRepository
+                controller: AppBundle\Controller\ProductListItemController
         app.pub_banner:
             classes:
                 model: AppBundle\Entity\PubBanner

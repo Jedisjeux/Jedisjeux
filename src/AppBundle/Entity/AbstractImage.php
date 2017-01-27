@@ -37,11 +37,6 @@ abstract class AbstractImage implements ResourceInterface
     private $file;
 
     /**
-     * @var string
-     */
-    private $newFilename;
-
-    /**
      * @return mixed
      */
     public function getPath()
@@ -75,25 +70,6 @@ abstract class AbstractImage implements ResourceInterface
     public function setFile($file)
     {
         $this->file = $file;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getNewFilename()
-    {
-        return $this->newFilename;
-    }
-
-    /**
-     * @param string $newFilename
-     * @return $this
-     */
-    public function setNewFilename($newFilename)
-    {
-        $this->newFilename = $newFilename;
 
         return $this;
     }
@@ -146,7 +122,9 @@ abstract class AbstractImage implements ResourceInterface
             return;
         }
 
-        $newFilename = (null !== $this->getNewFilename()) ? $this->getNewFilename() : $this->file->getClientOriginalName();
+        $hash = uniqid("", true);
+        $extension = $this->file->getClientOriginalExtension();
+        $newFilename = $hash.'.'.$extension;
 
         $this->file->move($this->getUploadRootDir(), $newFilename);
         $this->path = $newFilename;

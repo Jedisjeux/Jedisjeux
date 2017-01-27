@@ -1,0 +1,9 @@
+app_frontend_account_product_list_item_index:
+    methods: [GET]
+    path: /liste-de-jeux/{productListSlug}
+    defaults:
+        _controller: app.controller.product_list_item:indexByProductListAction
+        _sylius:
+            template: "frontend/account/product_list_item/index.html.twig"
+            grid: app_frontend_product_list_item
+            paginate: 12

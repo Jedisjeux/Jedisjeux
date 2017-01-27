@@ -1,0 +1,17 @@
+sylius_grid:
+    grids:
+        app_frontend_product_list_item:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%app.model.product_list_item.class%"
+                    repository:
+                        method: createQueryBuilderByProductList
+                        arguments: [$productListSlug, "%locale%"]
+            sorting:
+                createdAt: desc
+            fields:
+                createdAt:
+                    type: twig
+                    label: sylius.ui.created_at
+                    sortable: ~

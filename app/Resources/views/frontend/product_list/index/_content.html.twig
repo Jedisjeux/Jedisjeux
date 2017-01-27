@@ -1,0 +1,37 @@
+{% from 'macros/misc.html.twig' import pagination %}
+{% from 'macros/images.html.twig' import image %}
+
+<div class="img-box-3 text-center">
+    <div class="row">
+        {% for product_list in product_lists %}
+            {% set lastProduct = product_list.lastProduct %}
+            {% set color = 'black' %}
+            {% if loop.index == 1 %}
+                {% set color = 'red' %}
+            {% elseif loop.index == 2 %}
+                {% set color = 'lblue' %}
+            {% elseif loop.index == 3 %}
+                {% set color = 'green' %}
+            {% elseif loop.index == 4 %}
+                {% set color = 'blue' %}
+            {% endif %}
+
+            {% set productListPath = path(targetPath|default('app_frontend_product_list_item_index'), {'productListSlug': product_list.slug}) %}
+
+            <div class="col-md-3 col-sm-6">
+                <!-- Image Box #3 Item -->
+                <div class="img-box-3-item product-list-item">
+                    <div class="img-box-3-icon bg-{{ color }}">
+                        {% if lastProduct %}
+                            <a href="{{ productListPath }}">
+                                {{ image(lastProduct.mainImage.webPath, 'thumbnail_XL', lastProduct.name, 'img-round') }}
+                            </a>
+                        {% endif %}
+                    </div>
+                    <h4><a href="{{ productListPath }}">{{ product_list.name }}</a></h4>
+                    <div class="bor bg-{{ color }}"></div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

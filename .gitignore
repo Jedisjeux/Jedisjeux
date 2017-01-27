@@ -17,7 +17,8 @@
 /vendor/
 /bin/
 /composer.phar
-/web/uploads/*
+/web/uploads/img/*
+/web/uploads/avatar/*
 !/web/uploads/avatar/.gitkeep
 !/web/uploads/img/.gitkeep
 /web/media/*

@@ -28,6 +28,7 @@ class ServicesPass implements CompilerPassInterface
     {
         $this->processFactories($container);
         $this->processFormTypes($container);
+        $this->processControllers($container);
 
         $container->setAlias('sylius.context.customer', 'app.context.customer');
     }
@@ -50,7 +51,7 @@ class ServicesPass implements CompilerPassInterface
         $notificationFactoryDefinition = $container->getDefinition('app.factory.notification');
         $notificationFactoryDefinition
             ->addMethodCall('setRouter', [new Reference('router')])
-            ->addMethodCall('setTranslator', [new Reference('translator')]);
+            ->addMethodCall('setTranslator', [new Reference('translator.default')]);
 
         $gamePlayFactoryDefinition = $container->getDefinition('app.factory.game_play');
         $gamePlayFactoryDefinition
@@ -82,7 +83,8 @@ class ServicesPass implements CompilerPassInterface
 
         $productListFactoryDefinition = $container->getDefinition('app.factory.product_list');
         $productListFactoryDefinition
-            ->addArgument(new Reference('app.context.customer'));
+            ->addArgument(new Reference('app.context.customer'))
+            ->addArgument(new Reference('translator.default'));
     }
 
     /**
@@ -97,5 +99,15 @@ class ServicesPass implements CompilerPassInterface
         $topicFormTypeDefinition = $container->getDefinition('app.form.type.topic');
         $topicFormTypeDefinition
             ->addMethodCall('setAuthorizationChecker', [new Reference('security.authorization_checker')]);
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     */
+    protected function processControllers(ContainerBuilder $container)
+    {
+        $resourcesCollectionProviderDefinition = $container->getDefinition('sylius.resource_controller.resources_collection_provider');
+        $resourcesCollectionProviderDefinition
+            ->setClass('AppBundle\Controller\ResourcesCollectionProvider');
     }
 }

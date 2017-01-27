@@ -1,0 +1,52 @@
+<div class="btn-group">
+    <button type="button" class="btn btn-default dropdown-toggle"
+            data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false" title="Ajouter à">
+        <span class="fa fa-plus"></span> Ajouter à
+    </button>
+    <ul class="dropdown-menu"
+        style="white-space: nowrap; padding: 10px">
+        <li>
+            <form id="productListForm">
+                <input type="hidden" name="productId"
+                       value="{{ product.id }}"/>
+                <div class="list">
+                    <input id="game_library" type="checkbox" data-code="game_library"/>
+                    <label for="game_library">{{ 'app.ui.game_library'|trans }}</label>
+                </div>
+                <div class="list">
+                    <input id="wishes" type="checkbox" data-code="wishes"/>
+                    <label for="wishes">{{ 'app.ui.wishes'|trans }}</label>
+                </div>
+                <div class="list">
+                    <input id="see_later" type="checkbox" data-code="see_later"/>
+                    <label for="see_later">{{ 'app.ui.see_later'|trans }}</label>
+                </div>
+            </form>
+        </li>
+        <li>
+            <hr/>
+            <form method="post" class="form-inline" id="newProductListForm">
+                <div class="form-group">
+                    <input type="text"
+                           id="list_name"
+                           name="name"
+                           class="form-control"
+                           placeholder="{{ 'app.ui.new_list'|trans }}"/>
+                </div>
+                <button type="submit"
+                        class="btn btn-lblue"><span
+                            class="fa fa-check"></span> {{ 'sylius.ui.create'|trans }}
+                </button>
+            </form>
+        </li>
+    </ul>
+    <a href="{{ path('sylius_product_review_create', { 'productId': jeu.id  } ) }}"
+       class="btn btn-default" title="Donnez votre avis">
+        <span class="fa fa-star"></span> Votre avis
+    </a>
+    <a class="btn btn-default" title="Nouvelle partie"
+       href="{{ path('app_game_play_create', { 'productSlug': jeu.slug  } ) }}">
+        <span class="fa fa-table"></span> Nouvelle partie
+    </a>
+</div>

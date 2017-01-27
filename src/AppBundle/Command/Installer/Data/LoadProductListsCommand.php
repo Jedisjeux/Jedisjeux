@@ -25,7 +25,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class LoadGameLibrariesCommand extends ContainerAwareCommand
+class LoadProductListsCommand extends ContainerAwareCommand
 {
     const BATCH_SIZE = 20;
 
@@ -35,8 +35,8 @@ class LoadGameLibrariesCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('app:game-libraries:load')
-            ->setDescription('Loading game libraries');
+            ->setName('app:product-lists:load')
+            ->setDescription('Loading product lists');
     }
 
     /**
@@ -49,7 +49,7 @@ class LoadGameLibrariesCommand extends ContainerAwareCommand
         $i = 0;
 
         foreach ($this->getLists() as $data) {
-            $output->writeln(sprintf("Loading <comment>%s</comment> game library", $data['email']));
+            $output->writeln(sprintf("Loading <comment>%s</comment> product list from %s", $data['name'], $data['email']));
 
             $list = $this->createOrReplaceList($data);
             $this->getManager()->persist($list);
@@ -65,10 +65,9 @@ class LoadGameLibrariesCommand extends ContainerAwareCommand
         $this->getManager()->flush();
         $this->getManager()->clear();
 
-        $this->deleteItems();
         $this->insertItems();
 
-        $output->writeln(sprintf("<info>%s</info>", "Game library has been successfully loaded."));
+        $output->writeln(sprintf("<info>%s</info>", "Wish lists has been successfully loaded."));
     }
 
     /**
@@ -78,17 +77,17 @@ class LoadGameLibrariesCommand extends ContainerAwareCommand
      */
     protected function createOrReplaceList(array $data)
     {
-        $owner = $this->getContainer()->get('sylius.repository.customer')->find($data['id']);
+        $owner = $this->getContainer()->get('sylius.repository.customer')->find($data['owner_id']);
 
         /** @var ProductList $list */
-        $list = $this->getRepository()->findOneBy([
-            'code' => ProductList::CODE_GAME_LIBRARY,
-            'owner' => $owner,
-        ]);
+        $list = $this->getRepository()->findOneBy(['code' => $data['code']]);
 
         if (null === $list) {
-            $list = $this->getFactory()->createForCode(ProductList::CODE_GAME_LIBRARY);
+            $list = $this->getFactory()->createNew();
             $list->setOwner($owner);
+            $list
+                ->setCode($data['code'])
+                ->setName($data['name']);
         }
 
         return $list;
@@ -101,18 +100,16 @@ class LoadGameLibrariesCommand extends ContainerAwareCommand
     {
         return $this->getManager()->getConnection()->fetchAll(
             <<<EOF
-select      distinct customer.id, customer.email
-from jedisjeux.jdj_ludotheque as old
-inner join sylius_customer customer
-              on customer.code = concat('user-', old.user_id)
+SELECT
+  concat('list_', old.id_liste) as code,
+  customer.id as owner_id,
+  customer.email,
+  old.nom as name
+FROM jedisjeux.jdj_liste old
+  INNER JOIN sylius_customer customer
+    ON customer.code = concat('user-', old.id_user);
 EOF
         );
-    }
-
-    protected function deleteItems()
-    {
-        $queryBuilder = $this->getManager()->createQuery('delete from AppBundle:ProductListItem');
-        $queryBuilder->execute();
     }
 
     protected function insertItems()
@@ -122,22 +119,24 @@ INSERT INTO jdj_product_list_item (list_id, product_id, createdAt, updatedAt)
   SELECT
     list.id,
     product.id,
-    DATE_ADD(DATE('2000-01-01 00:00:00'), INTERVAL old.ludo_id SECOND),
-    DATE_ADD(DATE('2000-01-01 00:00:00'), INTERVAL old.ludo_id SECOND)
-  FROM jedisjeux.jdj_ludotheque AS old
+    item.dateadd,
+    item.dateadd
+  FROM jedisjeux.jdj_liste AS old
+    INNER JOIN jedisjeux.jdj_liste_element item
+      ON item.id_liste = old.id_liste
+      AND item.type_elem = 'jeu'
     INNER JOIN sylius_customer customer
-      ON customer.code = concat('user-', old.user_id)
+      ON customer.code = concat('user-', old.id_user)
     INNER JOIN sylius_product_variant variant
-      ON variant.code = concat('game-', old.game_id)
+      ON variant.code = concat('game-', item.id_element)
     INNER JOIN sylius_product product
       ON product.id = variant.product_id
     INNER JOIN jdj_product_list list
-      ON list.code = :code
-         AND list.owner_id = customer.id;
+      ON list.code = concat('list_', old.id_liste);
 EOM;
 
         $this->getManager()->getConnection()->executeQuery($query, [
-            'code' => ProductList::CODE_GAME_LIBRARY,
+            'code' => ProductList::CODE_WISHES,
         ]);
     }
 
