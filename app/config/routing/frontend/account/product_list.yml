@@ -4,7 +4,7 @@ app_frontend_account_product_list_index:
     defaults:
         _controller: app.controller.product_list:indexACTION
         _sylius:
-            template: frontend/product_list/index.html.twig
+            template: frontend/account/product_list/index.html.twig
             paginate: 16
             filterable: true
             criteria:

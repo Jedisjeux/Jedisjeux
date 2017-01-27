@@ -40,6 +40,7 @@ app:
         manage_people: Gérer les personnes
         manage_string_blocks: Gérer les blocs de chaîne
         manage_topics: Gérer les sujets
+        my_game_lists: Mes listes de jeux
         name: Nom
         new_article: Nouvel article
         new_dealer: Nouveau vendeur

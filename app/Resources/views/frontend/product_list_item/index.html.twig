@@ -1,10 +1,5 @@
 {% extends "base.html.twig" %}
 
-{% from 'macros/misc.html.twig' import pagination %}
-{% from 'macros/images.html.twig' import image %}
-{% import 'macros/buttons.html.twig' as button %}
-{% from 'macros/sorting.html.twig' import sorting %}
-
 {% block headline %}
     {{ product_list }}
 {% endblock %}
@@ -16,40 +11,5 @@
 {% endblock %}
 
 {% block body -%}
-    <div class="col-md-12">
-        <div class="container">
-            <div class="pull-right sorting">
-                {% set sorting = app.request.get('sorting') %}
-
-                {% set icon = false %}
-                {% set currentOrder = null %}
-
-                {% if null == sorting %}
-                    {% set icon = true %}
-                    {% set currentOrder = 'desc' %}
-                {% endif %}
-
-                Trier
-                par {{ sorting('app_frontend_product_list_item_index', 'app.ui.add_date'|trans, 'createdAt', 'desc', icon, currentOrder, {'productListSlug': app.request.get('productListSlug')}) }}
-            </div>
-
-            <div class="clearfix"></div>
-
-            <div class="img-box-4 text-center jeu-list">
-                <div class="row">
-                    {% for product_list_item in product_list_items.data %}
-                    {% if loop.index0 != 0 and loop.index0%4 == 0 %}
-                </div>
-                <div class="row">
-                    {% endif %}
-                    <div class="col-md-3 col-sm-6">
-                        {% include "frontend/game/index/list-element.html.twig" with {'product': product_list_item.product} %}
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-
-            {{ pagination(product_list_items.data) }}
-        </div>
-    </div>
+    {% include 'frontend/product_list_item/index/_content.html.twig' %}
 {% endblock %}

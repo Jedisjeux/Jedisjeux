@@ -1,19 +1,19 @@
 {% extends "base.html.twig" %}
 
 {% block headline %}
-
+    {{ 'app.ui.my_game_lists'|trans }}
 {% endblock %}
 
 {% block breadcrumb_content %}
     {{ parent() }}
-    Mes listes de jeux
+    {{ 'app.ui.my_game_lists'|trans }}
 {% endblock %}
 
 {% block body -%}
     <div class="col-md-12">
 
         <div class="container">
-            {% include 'frontend/product_list/index/_content.html.twig' %}
+            {% include 'frontend/product_list/index/_content.html.twig' with {'targetPath': 'app_frontend_account_product_list_item_index'} %}
         </div>
 
     </div>

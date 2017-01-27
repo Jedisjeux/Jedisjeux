@@ -1,2 +1,5 @@
 app_product_list:
     resource: "account/product_list.yml"
+
+app_product_list_item:
+    resource: "account/product_list_item.yml"
