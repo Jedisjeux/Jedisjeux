@@ -4,6 +4,8 @@
 {{ form_row(form.currentPassword) }}
 {{ form_row(form.newPassword.first) }}
 {{ form_row(form.newPassword.second) }}
-<button class="btn btn-primary">{{ 'sylius.ui.save_changes'|trans }}</button>
+<div class="pull-right">
+    <button class="btn btn-primary">{{ 'sylius.ui.save_changes'|trans }}</button>
+</div>
 {{ form_row(form._token) }}
 {{ form_end(form, {'render_rest': false}) }}
