@@ -4,8 +4,14 @@
 <div class="img-box-3 text-center">
     <div class="row">
         {% for product_list in product_lists %}
+        {% if loop.index0 > 0 and (loop.index0 % 4) == 0 %}
+    </div>
+    <div class="row">
+        {% endif %}
+
             {% set lastProduct = product_list.lastProduct %}
             {% set color = 'black' %}
+
             {% if loop.index == 1 %}
                 {% set color = 'red' %}
             {% elseif loop.index == 2 %}
