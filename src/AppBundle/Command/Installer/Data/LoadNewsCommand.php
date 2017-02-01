@@ -148,7 +148,7 @@ from        jedisjeux.jdj_news old
   left join sylius_product product
     on product.id = productVariant.product_id
   left join jdj_topic topic
-    on topic.id = old.topic_id
+    on topic.code = concat('topic-', old.topic_id)
 WHERE       old.valid >= 0
             AND       old.type_lien in (0, 1)
 
@@ -223,7 +223,8 @@ EOM;
             $mainImage = $articleDocument->getMainImage();
 
             if (null === $mainImage) {
-                $mainImage = new ImagineBlock();
+                /** @var ImagineBlock $mainImage */
+                $mainImage = $this->getContainer()->get('app.factory.imagine_block')->createNew();
             }
 
             $image = new Image();
