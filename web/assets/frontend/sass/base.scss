@@ -15,6 +15,9 @@ $icon-font-path: "../../compiled/fonts/bootstrap/";
 // FormFlow support for MopaBootstrapBundle
 @import "../../../bundles/mopabootstrap/sass/form_flow.scss";
 
+// Font-awesome
+@import "../node_modules/font-awesome/scss/font-awesome";
+
 @import "mixins/ellipsis";
 
 @import "modules/style";

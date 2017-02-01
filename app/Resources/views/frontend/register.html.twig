@@ -3,17 +3,21 @@
 {% block card_container_content %}
     <div class="small-12 user-form">
 
+        {{ form_errors(form) }}
+
         <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"/>
 
         <form action="{{ path('app_frontend_register') }}?" method="post" class="form-signin" >
             <div class="row">
                 <div class="col-md-12">
                     {{ form_widget(form.email, {attr: {'placeholder': 'label.email'|trans}}) }}
+                    {{ form_errors(form.email) }}
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     {{ form_widget(form.user.username, {attr: {'placeholder': 'label.username'|trans}}) }}
+                    {{ form_errors(form.user.username) }}
                 </div>
             </div>
             <div class="row">

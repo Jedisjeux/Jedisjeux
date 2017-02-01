@@ -5,7 +5,7 @@
     "bootstrap-switch": "3.3.2",
     "chosen-js": "^1.6.2",
     "eonasdan-bootstrap-datetimepicker": "~4.14.30",
-    "font-awesome": "~4.2.0",
+    "font-awesome": "^4.7.0",
     "jquery-count-to": "^1.2.1",
     "jquery-ui": "^1.12.1",
     "magnific-popup": "1.0.0",
