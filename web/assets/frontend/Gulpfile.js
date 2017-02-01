@@ -68,7 +68,7 @@ var paths = {
             'img/**'
         ],
         font: [
-            bundlesPath + 'bmatznerfontawesome/fonts/**',
+            nodeModulesPath + 'font-awesome/fonts/**',
             bundlesPath + 'mopabootstrap/fonts/**'
         ]
     }

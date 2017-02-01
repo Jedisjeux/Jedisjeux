@@ -28,6 +28,8 @@ sylius_resource:
         app.avatar:
             classes:
                 model: AppBundle\Entity\Avatar
+                form:
+                    default: AppBundle\Form\Type\AvatarType
         app.blockquote_block:
             driver: doctrine/phpcr-odm
             classes:

@@ -14,13 +14,13 @@ namespace AppBundle\Command\Installer\Data;
 use AppBundle\Command\LogMemoryUsageTrait;
 use AppBundle\Document\ArticleContent;
 use AppBundle\Document\BlockquoteBlock;
+use AppBundle\Document\ImagineBlock;
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Taxon;
 use AppBundle\Entity\Topic;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
-use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
 use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -169,7 +169,8 @@ class LoadReviewArticlesCommand extends AbstractLoadDocumentCommand
             $mainImage = $articleDocument->getMainImage();
 
             if (null === $mainImage) {
-                $mainImage = new ImagineBlock();
+                /** @var ImagineBlock $mainImage */
+                $mainImage = $this->getContainer()->get('app.factory.imagine_block')->createNew();
             }
 
 

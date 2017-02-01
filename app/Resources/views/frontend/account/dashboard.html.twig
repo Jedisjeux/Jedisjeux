@@ -1,0 +1,47 @@
+{% extends "base.html.twig" %}
+
+{% import 'macro/avatar.html.twig' as avatar %}
+{% import 'macros/buttons.html.twig' as buttons %}
+
+{% block headline %}
+    {{ 'sylius.ui.my_account'|trans }}
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    {{ 'sylius.ui.my_account'|trans }}
+{% endblock %}
+
+{% block body -%}
+    <div class="col-md-9 col-sm-8 col-md-push-3 col-sm-push-4">
+        <div class="row">
+            <div class="col-md-2 col-sm-3 col-xs-4">
+                <!-- Image -->
+                {{ avatar.render(customer, 'thumbnail_XL', customer.user, 'img-responsive img-thumbnail img-round') }}
+            </div>
+            <div class="col-md-10 col-sm-9 col-xs-8">
+                <!-- Your Name / Heading -->
+                <h4>{{ customer.user }}</h4>
+                <!-- Email Address -->
+                <span><i class="fa fa-envelope color"></i>&nbsp; {{ customer.email }}</span>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="btn-group">
+                    {{ buttons.btn(path('sylius_frontend_account_profile_update'), 'sylius.ui.edit', null, 'pencil') }}
+                    {{ buttons.btn(path('sylius_frontend_account_profile_update'), 'sylius.ui.change_password', null, 'lock') }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="col-md-3 col-sm-4 col-md-pull-9 col-sm-pull-8">
+        {% include 'frontend/account/_sidebar.html.twig' %}
+    </div>
+
+{% endblock %}

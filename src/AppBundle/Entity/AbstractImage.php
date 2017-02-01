@@ -10,6 +10,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -22,7 +23,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 abstract class AbstractImage implements ResourceInterface
 {
-    Use IdentifiableTrait;
+    Use IdentifiableTrait,
+        Timestampable;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -70,6 +72,7 @@ abstract class AbstractImage implements ResourceInterface
     public function setFile($file)
     {
         $this->file = $file;
+        $this->updatedAt = new \DateTime();
 
         return $this;
     }
