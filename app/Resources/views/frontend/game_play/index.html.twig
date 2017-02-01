@@ -30,17 +30,15 @@
 
                 Trier
                 par {{ sorting('app_frontend_game_play_index', 'label.created_at'|trans, 'createdAt', 'desc', icon, currentOrder) }}
-                ,
-                {{ sorting('app_frontend_game_play_index', 'label.name'|trans, 'productTranslation.name', 'asc') }}
             </div>
 
             <div class="clearfix"></div>
 
-            {% include 'frontend/game_play/_list3.html.twig' %}
+            {% include 'frontend/game_play/_list3.html.twig' with {'game_plays' : game_plays.data} %}
 
             <div class="pagination-wrapper">
                 <div class="pagination-bottom">
-                    {{ pagination(game_plays) }}
+                    {{ pagination(game_plays.data) }}
                 </div>
             </div>
 
