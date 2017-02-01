@@ -29,10 +29,40 @@
         <hr>
         <div class="row">
             <div class="col-sm-12">
-
                 <div class="btn-group">
                     {{ buttons.btn(path('sylius_frontend_account_profile_update'), 'sylius.ui.edit', null, 'pencil') }}
                     {{ buttons.btn(path('sylius_frontend_account_profile_update'), 'sylius.ui.change_password', null, 'lock') }}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="icon-box-1 text-center">
+                    <!-- Container -->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-6">
+                                <!-- Icon Box One Item -->
+                                <div class="icon-box-1-item">
+                                    <!-- Icon Box One Icon -->
+                                    <a href="{{ path('app_frontend_account_product_list_index') }}"><i class="fa fa-list black"></i></a>
+                                    <!-- Icon Box One Headeing -->
+                                    <h4><a href="{{ path('app_frontend_account_product_list_index') }}">{{ 'app.ui.my_game_lists'|trans }}</a></h4>
+                                    <!-- Icon Box One Paragraph -->
+                                    <p>Gérer votre ludothèque, vos envies et autres listes.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <!-- Icon Box One Item -->
+                                <div class="icon-box-1-item">
+                                    <a href="#"><i class="fa fa-play lblue"></i></a>
+                                    <h4><a href="#">{{ 'app.ui.my_game_plays'|trans }}</a></h4>
+                                    <p>Gérer vos parties de jeux.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
