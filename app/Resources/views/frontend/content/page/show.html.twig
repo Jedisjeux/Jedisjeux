@@ -1,21 +1,17 @@
 {% extends "base.html.twig" %}
 
-{% if cmfMainContent is not defined %}
-    {% set cmfMainContent = page %}
-{% endif %}
+{% block headline %}
+    {{ static_content.title }}
+{% endblock %}
 
-{% block headline_container %}
-    {% createphp cmfMainContent as='rdf' noautotag %}
-    <div {{ createphp_attributes(rdf) }}>
-        <h2 {{ createphp_attributes(rdf.title) }}>{{ createphp_content(rdf.title) }}</h2>
-    </div>
-    {% endcreatephp %}
+{% block breadcrumb_content %}
+    {{ parent() }}
+    {{ static_content.title }}
 {% endblock %}
 
 {% block body -%}
-    {% createphp cmfMainContent as='rdf' noautotag %}
-    <div {{ createphp_attributes(rdf) }}>
-        <div {{ createphp_attributes(rdf.body) }}>{{ createphp_content(rdf.body) }}</div>
+    <div class="col-md-12">
+        {{ static_content.body|raw }}
     </div>
-    {% endcreatephp %}
+
 {% endblock %}
