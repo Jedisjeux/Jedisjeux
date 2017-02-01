@@ -32,6 +32,33 @@ class GamePlayRepository extends EntityRepository
     }
 
     /**
+     * @return QueryBuilder
+     */
+    public function createCommentedListQueryBuilder($locale)
+    {
+        $queryBuilder = $this->createQueryBuilder('o')
+            ->addSelect('product')
+            ->addSelect('variant')
+            ->addSelect('productTranslation')
+            ->addSelect('image')
+            ->addSelect('topic')
+            ->addSelect('article')
+            ->addSelect('players')
+            ->join('o.product', 'product')
+            ->join('product.variants', 'variant')
+            ->join('product.translations', 'productTranslation')
+            ->leftJoin('variant.images', 'image')
+            ->join('o.topic', 'topic')
+            ->leftJoin('topic.article', 'article')
+            ->leftJoin('o.players', 'players')
+            ->andWhere('productTranslation.locale = :locale')
+            ->setParameter('locale', $locale);
+
+        return $queryBuilder;
+
+    }
+
+    /**
      * @param QueryBuilder $queryBuilder
      * @param array $criteria
      */
@@ -60,7 +87,7 @@ class GamePlayRepository extends EntityRepository
 
         if (empty($sorting)) {
             $sorting = array(
-              'createdAt' => 'desc',
+                'createdAt' => 'desc',
             );
         }
 

@@ -1,0 +1,17 @@
+sylius_grid:
+    grids:
+        app_frontend_game_play:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%app.model.game_play.class%"
+                    repository:
+                        method: createCommentedListQueryBuilder
+                        arguments: ["%locale%"]
+            sorting:
+                createdAt: desc
+            fields:
+                createdAt:
+                    type: twig
+                    label: sylius.ui.created_at
+                    sortable: ~
