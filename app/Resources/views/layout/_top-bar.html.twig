@@ -36,9 +36,10 @@
                             class="fa fa-angle-down color"></i></a>
                 <!-- Dropdown menu with languages -->
                 <ul class="dropdown-menu dropdown-mini" role="menu">
-                    <li><a href="{{ path('sylius_frontend_account_dashboard') }}">Mon compte</a></li>
-                    <li><a href="{{ path('app_frontend_account_product_list_index') }}">Mes listes de jeux</a></li>
-                    <li><a href="{{ path('app_frontend_logout') }}">Déconnexion</a></li>
+                    <li><a href="{{ path('sylius_frontend_account_dashboard') }}">{{ 'sylius.ui.my_account'|trans }}</a></li>
+                    <li><a href="{{ path('app_frontend_account_product_list_index') }}">{{ 'app.ui.my_game_lists'|trans }}</a></li>
+                <li><a href="{{ path('app_frontend_account_game_play_index') }}">{{ 'app.ui.my_game_plays'|trans }}</a></li>
+                    <li><a href="{{ path('app_frontend_logout') }}">{{ 'sylius.ui.logout'|trans }}</a></li>
                 </ul>
             {% endif %}
         </div>

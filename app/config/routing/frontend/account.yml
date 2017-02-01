@@ -36,8 +36,12 @@ sylius_frontend_account_change_password:
             template: "frontend/account/changePassword.html.twig"
             redirect: sylius_frontend_account_dashboard
 
-app_product_list:
+
+app_account_game_play:
+    resource: "account/game_play.yml"
+
+app_account_product_list:
     resource: "account/product_list.yml"
 
-app_product_list_item:
+app_account_product_list_item:
     resource: "account/product_list_item.yml"
