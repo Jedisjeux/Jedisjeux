@@ -21,6 +21,26 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 class PostRepository extends EntityRepository
 {
     /**
+     * @param integer|null $topicId
+     *
+     * @return QueryBuilder
+     */
+    public function createListQueryBuilder($topicId = null)
+    {
+        $queryBuilder = $this
+            ->createQueryBuilder('o')
+            ->join('o.topic', 'topic');
+
+        if (null !== $topicId) {
+            $queryBuilder
+                ->andWhere('topic = :topic')
+                ->setParameter('topic', $topicId);
+        }
+
+        return $queryBuilder;
+    }
+
+    /**
      * @return QueryBuilder
      */
     protected function getQueryBuilder()
@@ -33,7 +53,7 @@ class PostRepository extends EntityRepository
             ->addSelect('topic')
             ->join('o.author', 'customer')
             ->join('customer.user', 'user')
-            ->join('o.topic', 'topic') // assume mainPost is excluded
+            ->join('o.topic', 'topic')// assume mainPost is excluded
             ->leftJoin('customer.avatar', 'avatar');
     }
 

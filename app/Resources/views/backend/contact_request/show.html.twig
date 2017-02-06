@@ -19,19 +19,21 @@
 
     {{ breadcrumb.crumble(breadcrumbs) }}
 
-    <div class="ui list">
-        <div class="item">
-            <div class="header"><i class="user icon"></i> {{ 'sylius.ui.name'|trans }}</div>
-            {{ contact_request.fullName }}
+    <div class="ui two column stackable grid">
+        <div class="column">
+            <div class="ui segment">
+                <h4 class="ui dividing header">{{ 'sylius.ui.customer_details'|trans }}</h4>
+                <p><strong>{{ 'sylius.ui.first_name'|trans }} :</strong> {{ contact_request.firstName }}</p>
+                <p><strong>{{ 'sylius.ui.last_name'|trans }} :</strong> {{ contact_request.lastName }}</p>
+                <p><strong>{{ 'sylius.ui.email'|trans }} :</strong> {{ contact_request.email }}</p>
+            </div>
         </div>
-        <div class="item">
-            <div class="header"><i class="mail icon"></i> {{ 'sylius.ui.email'|trans }}</div>
-            {{ contact_request.email }}
+        <div class="column">
+            <div class="ui segment">
+                <p><strong>{{ 'sylius.ui.body'|trans }} :</strong> {{ contact_request.body|raw }}</p>
+            </div>
         </div>
     </div>
 
-    <div class="ui message">
-        <p>{{ contact_request.body|raw }}</p>
-    </div>
 
 {% endblock %}

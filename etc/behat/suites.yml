@@ -7,6 +7,7 @@ imports:
     - suites/ui/person.yml
     - suites/ui/product.yml
     - suites/ui/product_variant.yml
+    - suites/ui/static_content.yml
     - suites/ui/taxon.yml
     - suites/ui/topic.yml
     - suites/ui/user.yml

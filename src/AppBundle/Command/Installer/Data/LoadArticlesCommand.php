@@ -257,7 +257,7 @@ from jedisjeux.jdj_article article
   left join sylius_product product
     on product.id = productVariant.product_id
   left join jdj_topic topic
-    on topic.id = article.topic_id
+    on topic.code = concat('topic-', article.topic_id)
   left join sylius_user user
     on convert(user.username USING UTF8) = convert(article.auteur USING UTF8)
 where titre_clean != ''

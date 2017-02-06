@@ -11,4 +11,4 @@ Feature: Contact request
       | Prénom | Cyclette                   |
       | Corps  | Here is my awesome message |
     When I press "Envoyer"
-    Then I should see "a bien été créé"
+    Then I should see "a bien été envoyé"

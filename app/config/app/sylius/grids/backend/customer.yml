@@ -31,11 +31,6 @@ sylius_grid:
                     options:
                         fields: [email]
             actions:
-                main:
-                    create:
-                        type: create
                 item:
                     update:
                         type: update
-                    delete:
-                        type: delete

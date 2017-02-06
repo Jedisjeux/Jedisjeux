@@ -1,0 +1,39 @@
+{% from 'macros/misc.html.twig' import pagination %}
+{% from 'macros/sorting.html.twig' import sorting %}
+{% from 'macros/game_plays.html.twig' import magazineItemOne %}
+
+<div class="col-md-8">
+    <div class="container">
+        <div class="pull-right sorting">
+            {% set sorting = app.request.get('sorting') %}
+
+            {% set icon = false %}
+            {% set currentOrder = null %}
+
+            {% if null == sorting %}
+                {% set icon = true %}
+                {% set currentOrder = 'desc' %}
+            {% endif %}
+
+            {% set indexPath = indexPath|default('app_frontend_game_play_index') %}
+
+            Trier
+            par {{ sorting(indexPath, 'label.created_at'|trans, 'createdAt', 'desc', icon, currentOrder) }}
+        </div>
+
+        <div class="clearfix"></div>
+
+        {% include 'frontend/game_play/_list3.html.twig' with {'game_plays' : game_plays.data} %}
+
+        <div class="pagination-wrapper">
+            <div class="pagination-bottom">
+                {{ pagination(game_plays.data) }}
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="col-md-4">
+    {% include 'frontend/game_play/_sidebar.html.twig' %}
+</div>

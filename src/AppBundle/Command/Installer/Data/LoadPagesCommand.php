@@ -11,8 +11,8 @@ namespace AppBundle\Command\Installer\Data;
 use Doctrine\ODM\PHPCR\Document\Generic;
 use Doctrine\ODM\PHPCR\DocumentManager;
 use Sylius\Bundle\ContentBundle\Doctrine\ODM\PHPCR\StaticContentRepository;
+use Sylius\Bundle\ContentBundle\Document\StaticContent;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Cmf\Bundle\ContentBundle\Doctrine\Phpcr\StaticContent;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -58,7 +58,8 @@ class LoadPagesCommand extends ContainerAwareCommand
         $page = $this->findPage($data['name']);
 
         if (null === $page) {
-            $page = new StaticContent();
+            /** @var StaticContent $page */
+            $page = $this->getContainer()->get('sylius.factory.static_content')->createNew();
             $page
                 ->setParentDocument($this->getParent());
         }
@@ -77,15 +78,16 @@ class LoadPagesCommand extends ContainerAwareCommand
      */
     protected function findPage($id)
     {
+        /** @var StaticContent $page */
         $page = $this
             ->getRepository()
-            ->findStaticContent($id);
+            ->findOneBy(['name' => $id]);
 
         return $page;
     }
 
     /**
-     * @return Generic
+     * @return Generic|object
      */
     protected function getParent()
     {
@@ -93,7 +95,7 @@ class LoadPagesCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return StaticContentRepository
+     * @return StaticContentRepository|object
      */
     public function getRepository()
     {

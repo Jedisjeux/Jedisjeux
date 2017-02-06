@@ -35,6 +35,8 @@ sylius_grid:
                         fields: [title]
             actions:
                 item:
+                    posts:
+                        type: list_posts
                     update:
                         type: update
                     delete:

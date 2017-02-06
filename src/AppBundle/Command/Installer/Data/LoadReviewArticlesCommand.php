@@ -255,7 +255,7 @@ from jedisjeux.jdj_tests test
     on productTranslation.translatable_id = product.id
        and locale = 'fr'
   left join jdj_topic topic
-    on topic.id = test.topic_id
+    on topic.code = concat('topic-', test.topic_id)
   inner join sylius_customer customer
     on customer.code = concat('user-', test.user_id)
   left join jedisjeux.jdj_images_elements material_img

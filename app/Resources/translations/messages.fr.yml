@@ -22,6 +22,7 @@ app:
         edit_article: Modifier l'article
         edit_dealer: Modifier le vendeur
         edit_person: Modifier la personne
+        edit_post: Modifier le message
         edit_string_block: Modifer le bloc de chaîne
         edit_topic: Modifier le sujet
         forum: Forum
@@ -38,35 +39,50 @@ app:
         manage_dealers: Gérer les vendeurs
         manage_dealer_prices: Gérer les tarifs des vendeurs
         manage_people: Gérer les personnes
+        manage_posts: Gérer les messages
         manage_string_blocks: Gérer les blocs de chaîne
         manage_topics: Gérer les sujets
         my_game_lists: Mes listes de jeux
+        my_game_plays: Mes parties de jeux
         name: Nom
         new_article: Nouvel article
         new_dealer: Nouveau vendeur
         new_list: Nouvelle liste
         new_person: Nouvelle personne
+        new_post: Nouveau message
         new_string_block: Nouveau bloc de chaîne
         overview_of_your_website: Aperçu de votre site web
         people: Personnes
+        posts: Messages
         prices: Tarifs
         price_list: Liste de prix
         pub_banners: Bannières de pub
         published_at: Publié le
         request_placeholder: Recherche....
         see_later: A regarder plus tard
+        show_posts: Voir les messages
         string_blocks: Blocs de chaîne
+        topic: Sujet
         topics: Sujets
         view_details: Voir les détails
         wishes: Envies
+        view_website: Voir le site
 sylius:
     ui:
         available: Disponible
+        customer: Membre
+        customers: Membres
         customer_groups: Groupes
+        edit_customer: Modifier le membre
+        edit_product: Modifier le jeu
         filter: Filtrer
         groups: Groupes
+        manage_your_customers: Gérer vos membres
         manage_customer_groups: Gérer les groupes
+        manage_products: Gérer les jeux
         manage_static_contents: Gérer les contenus statiques
+        new_customer: Nouveau membre
+        new_product: Nouveau jeu
         no_label: Non
         out_of_stock: Rupture
         pending_publication: Prêt à publier
@@ -74,7 +90,9 @@ sylius:
         pending_translation: En attente de traduction
         pending_translation_changes: En attente de modifs de trad
         pre_order: Pré-commande
+        products: Jeux
         published: Publié
+        search_products: Chercher un jeu
         show: Voir
         yes_label: Oui
 

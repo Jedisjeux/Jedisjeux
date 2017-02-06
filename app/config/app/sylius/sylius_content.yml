@@ -12,7 +12,7 @@ sylius_content:
 #                repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
         static_content:
             classes:
-                repository: Sylius\Bundle\ContentBundle\Doctrine\ODM\PHPCR\StaticContentRepository
+                repository: AppBundle\Repository\StaticContentRepository
                 form:
                     default: AppBundle\Form\Type\StaticContentType
                     choice: Sylius\Bundle\ContentBundle\Form\Type\StaticContentChoiceType

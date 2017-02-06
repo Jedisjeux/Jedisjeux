@@ -1,0 +1,12 @@
+sylius_frontend_static_content_show:
+    methods: [GET]
+    path: pages/{id}
+    defaults:
+        _controller: sylius.controller.static_content:showAction
+        _sylius:
+            template: frontend/content/page/show.html.twig
+            section: frontend
+            repository:
+                method: findOneBy
+                arguments:
+                    - name: "$id"

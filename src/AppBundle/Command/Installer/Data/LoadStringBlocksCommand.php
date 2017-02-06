@@ -46,6 +46,7 @@ class LoadStringBlocksCommand extends ContainerAwareCommand
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
 
         foreach ($this->getBlocks() as $data) {
+            $output->writeln(sprintf("Loading <info>%s</info> string block", $data['name']));
             $block = $this->createOrReplaceBlock($data);
             $this->getManager()->persist($block);
             $this->getManager()->flush();
@@ -54,6 +55,7 @@ class LoadStringBlocksCommand extends ContainerAwareCommand
 
     /**
      * @param array $data
+     *
      * @return StringBlock
      */
     protected function createOrReplaceBlock(array $data)
@@ -73,6 +75,7 @@ class LoadStringBlocksCommand extends ContainerAwareCommand
 
     /**
      * @param string $id
+     *
      * @return SimpleBlock
      */
     protected function findBlock($id)
@@ -85,7 +88,7 @@ class LoadStringBlocksCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return StringBlockFactory
+     * @return StringBlockFactory|object
      */
     public function getFactory()
     {
@@ -93,7 +96,7 @@ class LoadStringBlocksCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return DocumentRepository
+     * @return DocumentRepository|object
      */
     public function getRepository()
     {
@@ -101,13 +104,16 @@ class LoadStringBlocksCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return DocumentManager
+     * @return DocumentManager|object
      */
     public function getManager()
     {
         return $this->getContainer()->get('app.manager.string_block');
     }
 
+    /**
+     * @return array
+     */
     protected function getBlocks()
     {
         return array(

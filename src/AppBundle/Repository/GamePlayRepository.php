@@ -32,6 +32,46 @@ class GamePlayRepository extends EntityRepository
     }
 
     /**
+     * @param string $locale
+     * @param string|null $authorId
+     *
+     * @return QueryBuilder
+     */
+    public function createListQueryBuilder($locale, $authorId = null)
+    {
+        $queryBuilder = $this->createQueryBuilder('o')
+            ->addSelect('product')
+            ->addSelect('variant')
+            ->addSelect('productTranslation')
+            ->addSelect('image')
+            ->addSelect('topic')
+            ->addSelect('article')
+            ->addSelect('players')
+            ->addSelect('author')
+            ->join('o.product', 'product')
+            ->join('o.author', 'author')
+            ->join('product.variants', 'variant')
+            ->join('product.translations', 'productTranslation')
+            ->leftJoin('variant.images', 'image')
+            ->leftJoin('o.topic', 'topic')
+            ->leftJoin('topic.article', 'article')
+            ->leftJoin('o.players', 'players')
+            ->andWhere('productTranslation.locale = :locale')
+            ->setParameter('locale', $locale);
+
+        if ($authorId) {
+            $queryBuilder
+                ->andWhere('author = :author')
+                ->setParameter('author', $authorId);
+        }
+
+        return $queryBuilder;
+
+    }
+
+    /**
+     * @param string $locale
+     *
      * @return QueryBuilder
      */
     public function createCommentedListQueryBuilder($locale)

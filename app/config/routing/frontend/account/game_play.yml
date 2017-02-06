@@ -1,0 +1,9 @@
+app_frontend_account_game_play_index:
+    methods: [GET]
+    path: /parties/
+    defaults:
+        _controller: app.controller.game_play:indexAction
+        _sylius:
+            template: frontend/account/game_play/index.html.twig
+            paginate: 12
+            grid: app_frontend_game_play_from_author

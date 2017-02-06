@@ -20950,18 +20950,6 @@ html body.login {
     transform: scale(1);
     -webkit-transform: scale(1); } }
 
-.pricing-item-12 {
-  position: relative;
-  max-width: 700px !important;
-  margin: 15px auto;
-  padding: 20px;
-  border: 1px solid #EEE;
-  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.05);
-  border-radius: 3px; }
-
-.notification-box {
-  margin: 0 !important; }
-
 .magazine-list li {
   min-height: 80px; }
 

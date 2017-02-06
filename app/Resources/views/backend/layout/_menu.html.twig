@@ -49,8 +49,12 @@
     <div class="header">{{ 'app.ui.forum'|trans }}</div>
     <div class="menu">
         <a href="{{ path('app_backend_topic_index') }}" class="item">
-            <i class="comments icon"></i>
+            <i class="comment icon"></i>
             {{ 'app.ui.topics'|trans }}
+        </a>
+        <a href="{{ path('app_backend_post_index') }}" class="item">
+            <i class="comments icon"></i>
+            {{ 'app.ui.posts'|trans }}
         </a>
     </div>
 </div>
