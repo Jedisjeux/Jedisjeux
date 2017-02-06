@@ -1,0 +1,4 @@
+sylius_admin_ajax_product:
+    resource: ajax/product.yml
+    prefix: /products
+
