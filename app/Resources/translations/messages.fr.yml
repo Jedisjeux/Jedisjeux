@@ -63,11 +63,19 @@ app:
 sylius:
     ui:
         available: Disponible
+        customer: Membre
+        customers: Membres
         customer_groups: Groupes
+        edit_customer: Modifier le membre
+        edit_product: Modifier le jeu
         filter: Filtrer
         groups: Groupes
+        manage_your_customers: Gérer vos membres
         manage_customer_groups: Gérer les groupes
+        manage_products: Gérer les jeux
         manage_static_contents: Gérer les contenus statiques
+        new_customer: Nouveau membre
+        new_product: Nouveau jeu
         no_label: Non
         out_of_stock: Rupture
         pending_publication: Prêt à publier
@@ -75,6 +83,7 @@ sylius:
         pending_translation: En attente de traduction
         pending_translation_changes: En attente de modifs de trad
         pre_order: Pré-commande
+        products: Jeux
         published: Publié
         show: Voir
         yes_label: Oui
