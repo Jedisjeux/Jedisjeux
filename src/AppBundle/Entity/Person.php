@@ -317,13 +317,37 @@ class Person implements ResourceInterface
     }
 
     /**
-     * @param PersonImage[]|Collection $images
+     * @param PersonImage $image
+     *
+     * @return bool
+     */
+    public function hasImage(PersonImage $image)
+    {
+        return $this->images->contains($image);
+    }
+
+    /**
+     * @param PersonImage $image
      *
      * @return $this
      */
-    public function setImages($images)
+    public function addImage(PersonImage $image)
     {
-        $this->images = $images;
+        if (!$this->hasImage($image)) {
+            $this->images->add($image);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param PersonImage $image
+     *
+     * @return $this
+     */
+    public function removeImage(PersonImage $image)
+    {
+        $this->images->removeElement($image);
 
         return $this;
     }
@@ -345,7 +369,7 @@ class Person implements ResourceInterface
     }
 
     /**
-     * @return ArrayCollection
+     * @return TaxonInterface
      */
     public function getZone()
     {
@@ -354,13 +378,50 @@ class Person implements ResourceInterface
     }
 
     /**
-     * @param Collection $taxons
+     * @param TaxonInterface $zone
      *
      * @return $this
      */
-    public function setTaxons($taxons)
+    public function setZone(TaxonInterface $zone)
     {
-        $this->taxons = $taxons;
+        $this->removeTaxon($this->getZone());
+        $this->addTaxon($zone);
+
+        return $this;
+    }
+
+    /**
+     * @param TaxonInterface $taxon
+     *
+     * @return bool
+     */
+    public function hasTaxon(TaxonInterface $taxon)
+    {
+        return $this->taxons->contains($taxon);
+    }
+
+    /**
+     * @param TaxonInterface $taxon
+     *
+     * @return $this
+     */
+    public function addTaxon(TaxonInterface $taxon)
+    {
+        if (!$this->hasTaxon($taxon)) {
+            $this->taxons->add($taxon);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param TaxonInterface $taxon
+     *
+     * @return $this
+     */
+    public function removeTaxon(TaxonInterface $taxon)
+    {
+        $this->taxons->removeElement($taxon);
 
         return $this;
     }

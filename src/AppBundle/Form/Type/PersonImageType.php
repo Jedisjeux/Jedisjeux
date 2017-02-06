@@ -11,11 +11,24 @@
 
 namespace AppBundle\Form\Type;
 
+use Symfony\Component\Form\FormBuilderInterface;
+
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
 class PersonImageType extends AbstractImageType
 {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        parent::buildForm($builder, $options);
+
+        $builder->add('main', null, [
+            'required' => false,
+            'label' => 'label.main',
+        ]);
+    }
+
+
     /**
      * @return string
      */
