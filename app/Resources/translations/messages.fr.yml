@@ -66,6 +66,7 @@ app:
         topics: Sujets
         view_details: Voir les détails
         wishes: Envies
+        view_website: Voir le site
 sylius:
     ui:
         available: Disponible
@@ -91,6 +92,7 @@ sylius:
         pre_order: Pré-commande
         products: Jeux
         published: Publié
+        search_products: Chercher un jeu
         show: Voir
         yes_label: Oui
 
