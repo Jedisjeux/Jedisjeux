@@ -131,6 +131,7 @@ sylius_resource:
             classes:
                 model: AppBundle\Document\StringBlock
                 factory: AppBundle\Factory\StringBlockFactory
+                repository: AppBundle\Repository\StringBlockRepository
                 form:
                     default: AppBundle\Form\Type\StringBlockType
         app.top_image_block:
