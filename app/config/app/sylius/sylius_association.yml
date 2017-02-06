@@ -6,6 +6,3 @@ sylius_association:
                 classes:
                     model: Sylius\Component\Product\Model\ProductAssociation
                     interface: Sylius\Component\Product\Model\ProductAssociationInterface
-            association_type:
-                classes:
-                    repository: AppBundle\Repository\ProductAssocationTypeRepository

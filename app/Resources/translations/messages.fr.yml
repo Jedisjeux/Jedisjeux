@@ -68,6 +68,9 @@ app:
         wishes: Envies
         view_website: Voir le site
 sylius:
+    form:
+        product_association_type:
+            name: Nom
     ui:
         available: Disponible
         customer: Membre
@@ -75,14 +78,17 @@ sylius:
         customer_groups: Groupes
         edit_customer: Modifier le membre
         edit_product: Modifier le jeu
+        edit_product_association_type: Modifier le type d'association de jeux
         filter: Filtrer
         groups: Groupes
         manage_your_customers: Gérer vos membres
         manage_customer_groups: Gérer les groupes
         manage_products: Gérer les jeux
+        manage_association_types_of_your_products: Gérer les types d'association de vos jeux
         manage_static_contents: Gérer les contenus statiques
         new_customer: Nouveau membre
         new_product: Nouveau jeu
+        new_product_association_type: Nouveau type d'association de jeux
         no_label: Non
         out_of_stock: Rupture
         pending_publication: Prêt à publier
@@ -91,6 +97,7 @@ sylius:
         pending_translation_changes: En attente de modifs de trad
         pre_order: Pré-commande
         products: Jeux
+        product_association_types: Types d'association de jeux
         published: Publié
         search_products: Chercher un jeu
         show: Voir
