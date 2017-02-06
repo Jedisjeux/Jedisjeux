@@ -8,6 +8,7 @@ imports:
   - { resource: 'grids/backend/person.yml' }
   - { resource: 'grids/backend/post.yml' }
   - { resource: 'grids/backend/product.yml' }
+  - { resource: 'grids/backend/product_association_type.yml' }
   - { resource: 'grids/backend/topic.yml' }
 
   - { resource: 'grids/frontend/game_play.yml' }
