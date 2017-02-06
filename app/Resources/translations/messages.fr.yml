@@ -22,6 +22,7 @@ app:
         edit_article: Modifier l'article
         edit_dealer: Modifier le vendeur
         edit_person: Modifier la personne
+        edit_post: Modifier le message
         edit_string_block: Modifer le bloc de chaîne
         edit_topic: Modifier le sujet
         forum: Forum
@@ -38,6 +39,7 @@ app:
         manage_dealers: Gérer les vendeurs
         manage_dealer_prices: Gérer les tarifs des vendeurs
         manage_people: Gérer les personnes
+        manage_posts: Gérer les messages
         manage_string_blocks: Gérer les blocs de chaîne
         manage_topics: Gérer les sujets
         my_game_lists: Mes listes de jeux
@@ -47,16 +49,20 @@ app:
         new_dealer: Nouveau vendeur
         new_list: Nouvelle liste
         new_person: Nouvelle personne
+        new_post: Nouveau message
         new_string_block: Nouveau bloc de chaîne
         overview_of_your_website: Aperçu de votre site web
         people: Personnes
+        posts: Messages
         prices: Tarifs
         price_list: Liste de prix
         pub_banners: Bannières de pub
         published_at: Publié le
         request_placeholder: Recherche....
         see_later: A regarder plus tard
+        show_posts: Voir les messages
         string_blocks: Blocs de chaîne
+        topic: Sujet
         topics: Sujets
         view_details: Voir les détails
         wishes: Envies

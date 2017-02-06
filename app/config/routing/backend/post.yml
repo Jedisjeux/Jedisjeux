@@ -2,17 +2,13 @@ app_backend_post:
     resource: |
         alias: app.post
         section: backend
-        templates: :backend/post
+        templates: :backend/crud
+        except: ['create', 'show']
+        grid: app_backend_post
         redirect: index
+        vars:
+            all:
+                subheader: app.ui.manage_posts
+            index:
+                icon: comments
     type: sylius.resource
-
-app_backend_post_index:
-    methods: [GET]
-    path: /posts/
-    defaults:
-        _controller: app.controller.post:indexAction
-        _sylius:
-            repository:
-                method: createFilterPaginator
-                arguments: [$criteria, $sorting]
-            template: backend/post/index.html.twig

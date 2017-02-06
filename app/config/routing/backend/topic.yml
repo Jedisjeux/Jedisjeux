@@ -10,5 +10,5 @@ app_backend_topic:
             all:
                 subheader: app.ui.manage_topics
             index:
-                icon: comments
+                icon: comment
     type: sylius.resource

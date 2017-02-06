@@ -44,6 +44,7 @@ EOT
             'app:taxons-of-articles:load',
             'app:zones:load',
             'app:string-blocks:load',
+            'app:pages:load',
             'app:users:load',
             'app:products:load',
             'app:game-libraries:load',
