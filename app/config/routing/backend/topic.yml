@@ -9,6 +9,8 @@ app_backend_topic:
         vars:
             all:
                 subheader: app.ui.manage_topics
+                templates:
+                    form: backend/topic/_form.html.twig
             index:
                 icon: comment
     type: sylius.resource

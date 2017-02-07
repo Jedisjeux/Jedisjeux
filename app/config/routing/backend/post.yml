@@ -9,6 +9,8 @@ app_backend_post:
         vars:
             all:
                 subheader: app.ui.manage_posts
+                templates:
+                    form: backend/post/_form.html.twig
             index:
                 icon: comments
     type: sylius.resource

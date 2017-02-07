@@ -1,0 +1,13 @@
+<div class="ui stackable grid">
+    <div class="twelve wide column">
+        <div class="ui segment">
+            {{ form_errors(form) }}
+            {{ form_row(form.title) }}
+            {{ form_row(form.mainPost.body) }}
+            {{ form_row(form.mainTaxon) }}
+        </div>
+    </div>
+    <div class="four wide column">
+        {% include 'backend/topic/_author.html.twig' %}
+    </div>
+</div>
