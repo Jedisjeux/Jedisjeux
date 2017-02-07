@@ -18,17 +18,6 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class PersonImageType extends AbstractImageType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        parent::buildForm($builder, $options);
-
-        $builder->add('main', null, [
-            'required' => false,
-            'label' => 'label.main',
-        ]);
-    }
-
-
     /**
      * @return string
      */

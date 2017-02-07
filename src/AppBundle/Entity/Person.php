@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
@@ -21,7 +22,8 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
  */
 class Person implements ResourceInterface
 {
-    use IdentifiableTrait;
+    use IdentifiableTrait,
+        Timestampable;
 
     /**
      * @var string
@@ -125,19 +127,25 @@ class Person implements ResourceInterface
     /**
      * @return PersonImage
      *
+     * @deprecated
+     */
+    public function getMainImage()
+    {
+        return $this->getFirstImage();
+    }
+
+    /**
+     * @return PersonImage
+     *
      * @JMS\VirtualProperty
      * @JMS\SerializedName("image")
      * @JMS\Groups({"Default", "Detailed"})
      */
-    public function getMainImage()
+    public function getFirstImage()
     {
-        foreach ($this->images as $image) {
-            if ($image->isMain()) {
-                return $image;
-            }
-        }
+        $firstImage = $this->images->first();
 
-        return null;
+        return false !== $firstImage ? $firstImage : null;
     }
 
     /**
@@ -334,6 +342,7 @@ class Person implements ResourceInterface
     public function addImage(PersonImage $image)
     {
         if (!$this->hasImage($image)) {
+            $image->setPerson($this);
             $this->images->add($image);
         }
 
@@ -384,7 +393,10 @@ class Person implements ResourceInterface
      */
     public function setZone(TaxonInterface $zone)
     {
-        $this->removeTaxon($this->getZone());
+        if ($this->getZone()) {
+            $this->removeTaxon($this->getZone());
+        }
+
         $this->addTaxon($zone);
 
         return $this;
