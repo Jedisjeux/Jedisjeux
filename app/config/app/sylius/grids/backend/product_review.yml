@@ -1,0 +1,41 @@
+sylius_grid:
+    grids:
+        sylius_backend_product_review:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.product_review.class%"
+            sorting:
+                date: desc
+            fields:
+                date:
+                    type: datetime
+                    label: sylius.ui.date
+                    path: createdAt
+                    sortable: createdAt
+                    options:
+                        format: d-m-Y H:i:s
+                title:
+                    type: string
+                    label: sylius.ui.title
+                    sortable: ~
+                rating:
+                    type: string
+                    label: sylius.ui.rating
+                    sortable: ~
+                reviewSubject:
+                    type: string
+                    label: sylius.ui.product
+                author:
+                    type: string
+                    label: sylius.ui.customer
+            filters:
+                title:
+                    type: string
+                    label: sylius.ui.title
+            actions:
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete
