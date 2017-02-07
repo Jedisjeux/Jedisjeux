@@ -40,6 +40,21 @@ class UtilsContext extends DefaultContext
     }
 
     /**
+     * @When /^I press confirm button$/
+     */
+    public function iPressConfirmButton()
+    {
+        $id = 'confirmation-button';
+        $button = $this->getSession()->getPage()->findById($id);
+
+        if (null === $button) {
+            throw new ElementNotFoundException($this->getSession(), 'div', 'id', $id);
+        }
+
+        $button->press();
+    }
+
+    /**
      * @When /^I wait "([^""]*)" seconds$/
      *
      * @param integer $time

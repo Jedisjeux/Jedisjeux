@@ -12,7 +12,7 @@ Feature: Creates people
 
   Scenario: Create a person
     Given I am on "/admin/people/"
-    And I follow "Nouvelle personne"
+    And I follow "Créer"
     And I fill in the following:
       | Prénom | Reiner |
       | Nom    | Knizia |

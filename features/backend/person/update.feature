@@ -20,4 +20,4 @@ Feature: Edit people
       | Prénom | Leo      |
       | Nom    | Colovini |
     When I press "Enregistrer les modifications"
-    Then I should see "a bien été mis à jour"
+    Then I should see "a bien été mise à jour"

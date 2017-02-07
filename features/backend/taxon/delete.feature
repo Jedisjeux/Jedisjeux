@@ -22,5 +22,5 @@ Feature: Remove taxons
     And I follow "Thèmes"
     When I press "Supprimer"
     And I wait until modal is visible
-    And I follow "Supprimer"
+    And I press confirm button
     Then I should see "a bien été supprimée"
