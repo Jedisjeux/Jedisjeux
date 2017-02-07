@@ -35,6 +35,9 @@ sylius_admin_product:
 sylius_backend_product_association_type:
     resource: backend/product_association_type.yml
 
+sylius_backend_product_review:
+    resource: backend/product_review.yml
+
 sylius_backend_product_variant:
     resource: backend/product_variant.yml
 

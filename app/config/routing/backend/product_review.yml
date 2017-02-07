@@ -1,0 +1,16 @@
+sylius_backend_product_review:
+    resource: |
+        alias: sylius.product_review
+        section: backend
+        templates: :backend/crud
+        except: ['show', 'create']
+        redirect: update
+        grid: sylius_backend_product_review
+        vars:
+            all:
+                subheader: sylius.ui.manage_reviews_of_your_products
+                templates:
+                    form: backend/product_review/_form.html.twig
+            index:
+                icon: star
+    type: sylius.resource
