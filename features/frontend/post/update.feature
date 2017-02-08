@@ -1,4 +1,4 @@
-@ui @frontend @post @edit
+@ui @frontend @post @update
 Feature: Edit Post
   In order to use forum
   As a user
@@ -16,18 +16,16 @@ Feature: Edit Post
       | code | name            | parent |
       | 666  | Moi je dis jeux | forum  |
     And there are topics:
-      | name      | main_taxon            | author             |
+      | title     | main_taxon            | author             |
       | Zoo Topic | forum/moi-je-dis-jeux | author@example.com |
+    And there are posts:
+      | topic     | author            |
+      | Zoo Topic | kevin@example.com |
     And I am logged in as user "kevin@example.com" with password "password"
 
-  @javascript
   Scenario: Update my post
     Given I am on "/topics/"
     And I follow "Lire le sujet"
-    And I follow "Répondre au sujet"
-    And I fill in wysiwyg field "app_post_body" with "Here is my awesome topic answer."
-    And I press "Créer"
     And I follow "Modifier"
-    And I fill in wysiwyg field "app_post_body" with "Here is my awesome topic answer edited."
     When I press "Mettre à jour"
     Then I should see "a bien été mis à jour"
