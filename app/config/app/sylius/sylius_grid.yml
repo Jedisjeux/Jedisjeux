@@ -5,6 +5,7 @@ imports:
   - { resource: 'grids/backend/customer_group.yml' }
   - { resource: 'grids/backend/dealer.yml' }
   - { resource: 'grids/backend/dealer_price.yml' }
+  - { resource: 'grids/backend/game_play.yml' }
   - { resource: 'grids/backend/person.yml' }
   - { resource: 'grids/backend/post.yml' }
   - { resource: 'grids/backend/product.yml' }

@@ -1,0 +1,14 @@
+app_backend_game_play:
+    resource: |
+        alias: app.game_play
+        section: backend
+        templates: :backend/crud
+        except: ['show', 'create']
+        redirect: index
+        grid: app_backend_game_play
+        vars:
+            all:
+                subheader: app.ui.manage_game_plays
+            index:
+                icon: play
+    type: sylius.resource
