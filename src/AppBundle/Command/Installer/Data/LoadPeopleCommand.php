@@ -1,24 +1,24 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: loic
- * Date: 22/12/2015
- * Time: 13:13
+
+/*
+ * This file is part of Jedisjeux project.
+ *
+ * (c) Jedisjeux
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AppBundle\Command\Installer\Data;
 
-use Doctrine\ORM\EntityRepository;
-use JDJ\LudographieBundle\Entity\Personne;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class LoadPersonsCommand extends LoadCommand
+class LoadPeopleCommand extends LoadCommand
 {
     protected $writeEntityInOutput = true;
 
@@ -28,8 +28,8 @@ class LoadPersonsCommand extends LoadCommand
     protected function configure()
     {
         $this
-            ->setName('app:persons:load')
-            ->setDescription('Load persons');
+            ->setName('app:people:load')
+            ->setDescription('Load people');
     }
 
     public function getRows()
@@ -74,7 +74,7 @@ EOM;
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->output = $output;
-        $output->writeln("<comment>Load persons</comment>");
+        $output->writeln("<comment>Load people</comment>");
 
         parent::execute($input, $output);
     }
