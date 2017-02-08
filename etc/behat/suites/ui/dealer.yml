@@ -1,0 +1,10 @@
+default:
+    suites:
+        ui_dealer:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - AppBundle\Behat\UtilsContext
+                - AppBundle\Behat\UserContext
+                - AppBundle\Behat\DealerContext
+            filters:
+                tags: "@dealer && @ui"
