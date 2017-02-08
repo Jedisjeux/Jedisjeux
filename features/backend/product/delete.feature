@@ -1,8 +1,8 @@
-@ui @backend @product @index
-Feature: List products
+@ui @backend @product @delete
+Feature: Remove products
   In order to manage products
-  As an administrator
-  I need to be able to list products
+  As an admin
+  I need to be able to remove products
 
   Background:
     Given there are users:
@@ -17,13 +17,21 @@ Feature: List products
       | parent | name            |
       | themes | Science-fiction |
       | themes | Fantastique     |
-    And I am logged in as user "admin@example.com" with password "password"
-
-  Scenario: List products
-    Given there are products:
+    And there are products:
       | name                    |
       | Puerto Rico             |
       | Les princes de Florence |
-    When I am on "/admin/products/"
-    Then I should see "Les princes de Florence"
-    And I should see "Puerto Rico"
+    And I am logged in as user "admin@example.com" with password "password"
+
+  Scenario: Remove a product
+    Given I am on "/admin/products/"
+    When I press "Supprimer"
+    Then I should see "a bien été supprimé"
+
+  @javascript
+  Scenario: Remove a product with modal
+    Given I am on "/admin/products/"
+    When I press "Supprimer"
+    And I wait until modal is visible
+    And I press confirm button
+    Then I should see "a bien été supprimé"

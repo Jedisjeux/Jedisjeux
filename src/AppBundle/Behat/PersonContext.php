@@ -1,12 +1,16 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: loic
- * Date: 30/03/16
- * Time: 08:17
+
+/*
+ * This file is part of Jedisjeux project.
+ *
+ * (c) Jedisjeux
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AppBundle\Behat;
+
 use AppBundle\Entity\Person;
 use Behat\Gherkin\Node\TableNode;
 

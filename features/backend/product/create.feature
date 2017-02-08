@@ -21,7 +21,7 @@ Feature: Creates products
 
   Scenario: Create a product
     Given I am on "/admin/products/"
-    And I follow "Nouveau jeu"
+    And I follow "Créer"
     And I fill in the following:
       | Nom | Les Princes de Florence |
     When I press "Créer"
