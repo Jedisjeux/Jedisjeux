@@ -21,6 +21,7 @@ app:
         dealer_prices: Tarifs des vendeurs
         edit_article: Modifier l'article
         edit_dealer: Modifier le vendeur
+        edit_game_play: Modifier la partie de jeu
         edit_person: Modifier la personne
         edit_post: Modifier le message
         edit_string_block: Modifer le bloc de chaîne
@@ -28,6 +29,7 @@ app:
         forum: Forum
         framed: Encadré
         game_library: Ludothèque
+        game_plays: Parties de jeu
         image_on_the_left_side: Image à gauche
         image_on_the_right_side: Image à droite
         image_on_the_top_side: Image en haut
@@ -38,6 +40,7 @@ app:
         manage_contact_requests: Gérer les demandes de contact
         manage_dealers: Gérer les vendeurs
         manage_dealer_prices: Gérer les tarifs des vendeurs
+        manage_game_plays: Gérer les parties de jeu
         manage_people: Gérer les personnes
         manage_posts: Gérer les messages
         manage_string_blocks: Gérer les blocs de chaîne
@@ -99,6 +102,7 @@ sylius:
         pending_translation: En attente de traduction
         pending_translation_changes: En attente de modifs de trad
         pre_order: Pré-commande
+        product: Jeu
         products: Jeux
         product_association_types: Types d'association de jeux
         product_reviews: Avis de jeu
