@@ -14,7 +14,7 @@ Feature: Edit dealer prices
     And I run import dealer prices command for "Philibert"
     And I am logged in as user "admin@example.com" with password "password"
 
-  Scenario: Update a dealer
+  Scenario: Update a dealer price
     Given I am on "/admin/dealer-prices/"
     And I follow "Modifier"
     When I press "Enregistrer les modifications"

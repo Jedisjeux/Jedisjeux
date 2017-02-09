@@ -14,13 +14,13 @@ Feature: Remove dealer prices
     Given I run import dealer prices command for "Philibert"
     And I am logged in as user "admin@example.com" with password "password"
 
-  Scenario: Remove a dealer
+  Scenario: Remove a dealer price
     Given I am on "/admin/dealer-prices/"
     When I press "Supprimer"
     Then I should see "a bien été supprimé"
 
   @javascript
-  Scenario: Remove a dealer with modal
+  Scenario: Remove a dealer price with modal
     Given I am on "/admin/dealer-prices/"
     When I press "Supprimer"
     And I wait until modal is visible
