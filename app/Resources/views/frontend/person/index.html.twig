@@ -27,8 +27,8 @@
     <div class="col-md-9">
 
         <div class="container">
-            {% include 'frontend/person/partial/_list.html.twig' %}
-            {{ pagination(people) }}
+            {% include 'frontend/person/partial/_list.html.twig' with {'people': people.data} %}
+            {{ pagination(people.data) }}
         </div>
 
     </div>

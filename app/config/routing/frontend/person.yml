@@ -13,10 +13,8 @@ app_person_index:
       _controller: app.controller.person:indexWithTaxonsAction
       _sylius:
         template: frontend/person/index.html.twig
-        sortable: true
+        grid: app_frontend_person
         paginate: 16
-        sorting:
-            gameCount: desc
 
 app_person_index_by_taxon:
     methods: [GET]
@@ -24,11 +22,9 @@ app_person_index_by_taxon:
     defaults:
         _controller: app.controller.person:indexByTaxonAction
         _sylius:
-            paginate: 16
             template: frontend/person/index.html.twig
-            sortable: true
-            sorting:
-                gameCount: desc
+            grid: app_frontend_person_from_taxon
+            paginate: 16
     requirements:
         permalink: "[^?]+"
 

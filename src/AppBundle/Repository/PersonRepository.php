@@ -18,6 +18,25 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
  */
 class PersonRepository extends EntityRepository
 {
+    public function createListQueryBuilder(TaxonInterface $taxon = null)
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        if ($taxon) {
+            $queryBuilder
+                ->innerJoin('o.taxons', 'taxon')
+                ->andWhere($queryBuilder->expr()->orX(
+                    'taxon = :taxon',
+                    ':left < taxon.left AND taxon.right < :right'
+                ))
+                ->setParameter('taxon', $taxon)
+                ->setParameter('left', $taxon->getLeft())
+                ->setParameter('right', $taxon->getRight());
+        }
+
+        return $queryBuilder;
+    }
+
     /**
      * @inheritdoc
      */
