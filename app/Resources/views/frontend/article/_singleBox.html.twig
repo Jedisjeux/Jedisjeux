@@ -8,10 +8,11 @@
 
 <div class="img-box-4-item">
     <div class="img-container">
-        <a href="{{ path('app_frontend_article_show', {'name': article.name} ) }}"><img
-                    src="{{ article.imagePath|imagine_filter('cmf_full') }}" alt=""
-                    class="img-responsive"></a>
-
+        {% if article.imagePath %}
+            <a href="{{ path('app_frontend_article_show', {'name': article.name} ) }}"><img
+                        src="{{ article.imagePath|imagine_filter('cmf_full') }}" alt=""
+                        class="img-responsive"></a>
+        {% endif %}
     </div>
     <div class="img-box-4-content">
         {% if icon %}

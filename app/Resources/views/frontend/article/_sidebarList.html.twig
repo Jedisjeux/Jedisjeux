@@ -13,12 +13,13 @@
                 class="hidden-xs"></span> &nbsp;
         {% endset %}
 
-
-
         <li>
             <a href="{{ path('app_frontend_article_show', {'name': article.name}) }}">
-                <!-- Item image -->
-                <img src="{{ article.imagePath | imagine_filter('cmf_thumbnail') }}" alt="" class="img-responsive img-round"/>
+                {% if article.imagePath %}
+                    <!-- Item image -->
+                    <img src="{{ article.imagePath | imagine_filter('cmf_thumbnail') }}" alt=""
+                         class="img-responsive img-round"/>
+                {% endif %}
 
                 <!-- Item title -->
                 <span>{{ article.title }}</span><br/>
