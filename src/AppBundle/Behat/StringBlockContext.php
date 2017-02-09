@@ -33,7 +33,7 @@ class StringBlockContext extends DefaultContext
         foreach ($table->getHash() as $data) {
 
             /** @var StringBlock $stringBlock */
-            $stringBlock = $this->getFactory('string_block')->createNew();
+            $stringBlock = $this->getFactory('string_block', 'app')->createNew();
             $stringBlock->setName(isset($data['name']) ? $data['name'] : $this->faker->slug);
             $stringBlock->setBody(isset($data['body']) ? $data['body'] : $this->faker->realText(400));
 
