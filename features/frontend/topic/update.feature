@@ -1,4 +1,4 @@
-@ui @frontend @topic @edit
+@ui @frontend @topic @update
 Feature: Edit Topic
   In order to use forum
   As a user
