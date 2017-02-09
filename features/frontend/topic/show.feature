@@ -1,8 +1,8 @@
-@ui @frontend @topic @index
-Feature: View list of topics
-  In order to use forum
+@ui @frontend @topic @show
+Feature: View topic
+  In order to manage topics
   As a visitor
-  I need to be able to view all the topics
+  I need to be able to view a topic
 
   Background:
     Given there are users:
@@ -20,12 +20,8 @@ Feature: View list of topics
       | Retour de Cannes jour par jour | forum/reglons-ca      | kevin@example.com |
       | Jeux avec handicap             | forum/moi-je-dis-jeux | kevin@example.com |
 
-  Scenario: View list of topics
-    When I am on "/topics/"
-    Then I should see "Retour de Cannes jour par jour"
-    And I should see "Jeux avec handicap"
-
-  Scenario: View list of topics under a taxon
+  Scenario: View a topic
     Given I am on "/topics/"
-    When I follow "Moi je dis jeux"
-    Then I should see "Jeux avec handicap"
+    When I follow "Retour de Cannes jour par jour"
+    Then I should see "Retour de Cannes jour par jour"
+    And I should see "Répondre au sujet"
