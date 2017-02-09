@@ -1,0 +1,16 @@
+sylius_grid:
+    grids:
+        app_frontend_person:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%app.model.person.class%"
+                    repository:
+                        method: createListQueryBuilder
+            sorting:
+                createdAt: desc
+            fields:
+                createdAt:
+                    type: twig
+                    label: sylius.ui.created_at
+                    sortable: ~
