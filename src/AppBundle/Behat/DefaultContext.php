@@ -52,7 +52,7 @@ class DefaultContext extends DefaultApiContext
         $stmt->execute();
         $purger = new ORMPurger($this->getService('doctrine.orm.entity_manager'));
         $purger->purge();
-        //$this->purgePhpcrDatabase();
+        $this->purgePhpcrDatabase();
         $stmt = $em
             ->getConnection()
             ->prepare('SET foreign_key_checks = 1;');

@@ -12,6 +12,7 @@ imports:
     - suites/ui/product_review.yml
     - suites/ui/product_variant.yml
     - suites/ui/static_content.yml
+    - suites/ui/string_block.yml
     - suites/ui/taxon.yml
     - suites/ui/topic.yml
     - suites/ui/user.yml
