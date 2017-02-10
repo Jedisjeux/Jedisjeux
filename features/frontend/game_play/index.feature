@@ -36,3 +36,12 @@ Feature: List game-plays
     And I wait "2" seconds until "$('.dropdown-menu').is('visible')"
     When I follow "Mes parties"
     Then I should see "Les princes de Florence"
+
+  Scenario: Sorting game-plays
+    Given there are game plays:
+      | product                 | author            |
+      | Lewis & Clark           | kevin@example.com |
+      | Les princes de Florence | kevin@example.com |
+    And I am on "/parties/"
+    When I follow "Date de création"
+    Then I should see "Lewis & Clark"
