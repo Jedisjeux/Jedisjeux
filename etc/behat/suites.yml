@@ -9,6 +9,7 @@ imports:
     - suites/ui/post.yml
     - suites/ui/person.yml
     - suites/ui/product.yml
+    - suites/ui/product_list.yml
     - suites/ui/product_review.yml
     - suites/ui/product_variant.yml
     - suites/ui/static_content.yml
