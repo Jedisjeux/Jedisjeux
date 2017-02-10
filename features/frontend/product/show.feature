@@ -9,6 +9,7 @@ Feature: View a product
       | code       | name       |
       | mechanisms | Mécanismes |
       | themes     | Thèmes     |
+      | forums      | Forum      |
     And there are taxons:
       | code        | name       | parent     |
       | mechanism-1 | Majorité   | Mécanismes |
@@ -27,3 +28,27 @@ Feature: View a product
     Then I should see "Louis XIV"
     And I should see "Majorité"
     And I should see "Historique"
+
+  @javascript
+  Scenario: View Articles tab
+    Given I am on "/jeux-de-societe/"
+    And I follow "Louis XIV"
+    When I follow "Articles" on ".nav-tabs"
+    And I wait "1" seconds
+    Then I should see "Aucun article"
+
+  @javascript
+  Scenario: View Avis tab
+    Given I am on "/jeux-de-societe/"
+    And I follow "Louis XIV"
+    When I follow "Avis" on ".nav-tabs"
+    And I wait "1" seconds
+    Then I should see "Aucun avis"
+
+  @javascript
+  Scenario: View Forum tab
+    Given I am on "/jeux-de-societe/"
+    And I follow "Louis XIV"
+    When I follow "Forum" on ".nav-tabs"
+    And I wait "1" seconds
+    Then I should see "Aucun topic"
