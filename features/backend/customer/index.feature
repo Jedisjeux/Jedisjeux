@@ -1,8 +1,8 @@
-@ui @backend @users @index
-Feature: View list of users
-  In order to manage users
+@ui @backend @customer @index
+Feature: View list of customers
+  In order to manage customers
   As an admin
-  I need to be able to view all the users
+  I need to be able to view all the customers
 
   Background:
     Given there are users:
@@ -10,6 +10,6 @@ Feature: View list of users
       | admin@example.com | ROLE_ADMIN | password |
     And I am logged in as user "admin@example.com" with password "password"
 
-  Scenario: View list of users
-    When I am on "/admin/users/"
+  Scenario: View list of customers
+    When I am on "/admin/customers/"
     Then I should see "admin@example.com"
