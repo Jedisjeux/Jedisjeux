@@ -20,7 +20,7 @@ Feature: Edit articles
     And I am logged in as user "admin@example.com" with password "password"
 
   @todo
-  Scenario: Update a article
+  Scenario: Update an article
     Given I am on "/admin/articles/"
     And I follow "Modifier"
     When I press "Enregistrer les modifications"

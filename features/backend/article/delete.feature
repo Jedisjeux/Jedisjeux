@@ -19,7 +19,7 @@ Feature: Remove articles
       | articles/actualites | King of New York : Power Up! |
     And I am logged in as user "admin@example.com" with password "password"
 
-  Scenario: Remove a article
+  Scenario: Remove an article
     Given I am on "/admin/articles/"
     When I press "Supprimer"
     Then I should see "a bien été supprimé"
