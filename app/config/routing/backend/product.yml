@@ -20,6 +20,7 @@ sylius_admin_product_create:
     defaults:
         _controller: sylius.controller.product:createAction
         _sylius:
+            section: admin
             redirect: sylius_admin_product_update
             factory:
                 method: createWithVariant
@@ -34,6 +35,7 @@ sylius_admin_product_update_state:
     defaults:
         _controller: sylius.controller.product:applyStateMachineTransitionAction
         _sylius:
+            section: admin
             state_machine:
                 graph: sylius_product
                 transition: $transition
@@ -64,6 +66,7 @@ sylius_admin_product_from_bgg_new:
     defaults:
         _controller: sylius.controller.product:createAction
         _sylius:
+            section: admin
             factory:
                 method: createFromBgg
                 arguments: [$bggPath]

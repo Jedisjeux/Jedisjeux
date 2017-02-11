@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 use Sylius\Component\Product\Model\Product as BaseProduct;
+use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
@@ -308,6 +309,19 @@ class Product extends BaseProduct implements ReviewableInterface
         }
 
         return $this->variants->first();
+    }
+
+    public function setFirstVariant(ProductVariantInterface $variant)
+    {
+        $firstVariant = $this->getFirstVariant();
+
+        if (null !== $firstVariant) {
+            $firstVariant = $variant;
+        } else {
+            $this->addVariant($variant);
+        }
+
+        return $this;
     }
 
     /**
