@@ -14,6 +14,7 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -29,6 +30,7 @@ class Dealer implements ResourceInterface
      * @var string
      *
      * @ORM\Column(type="string", unique=true)
+     * @Assert\NotBlank()
      */
     protected $code;
 
@@ -36,6 +38,7 @@ class Dealer implements ResourceInterface
      * @var string
      *
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      */
     protected $name;
 

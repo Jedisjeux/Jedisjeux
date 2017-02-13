@@ -11,11 +11,12 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Person
  *
- * @ORM\Entity(repositoryClass="AppBundle\Repository\PersonRepository")
+ * @ORM\Entity
  * @ORM\Table(name="jdj_person", indexes={@ORM\Index(name="search_idx", columns={"slug"})})
  *
  * @JMS\ExclusionPolicy("all")
@@ -28,7 +29,9 @@ class Person implements ResourceInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=50, nullable=false)
+     * @ORM\Column(type="string", length=50)
+     *
+     * @Assert\NotBlank()
      *
      * @JMS\Expose
      * @JMS\Groups({"Default", "Detailed"})
@@ -38,7 +41,9 @@ class Person implements ResourceInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=50, nullable=false)
+     * @ORM\Column(type="string", length=50)
+     *
+     * @Assert\NotBlank()
      *
      * @JMS\Expose
      * @JMS\Groups({"Default", "Detailed"})

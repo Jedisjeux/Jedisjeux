@@ -142,9 +142,6 @@ sylius_resource:
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
                 form:
                     default: AppBundle\Form\Type\SingleImageBlock\TopImageBlockType
-        app.country:
-            classes:
-                model: AppBundle\Entity\Country
         app.game_play:
             classes:
                 model: AppBundle\Entity\GamePlay
@@ -172,14 +169,6 @@ sylius_resource:
                 model: AppBundle\Entity\Notification
                 factory: AppBundle\Factory\NotificationFactory
                 controller: AppBundle\Controller\NotificationController
-        app.customer_list:
-            classes:
-                model: AppBundle\Entity\CustomerList
-        app.customer_list_element:
-            classes:
-                model: AppBundle\Entity\CustomerListElement
-                controller: AppBundle\Controller\CustomerListElementController
-                repository: AppBundle\Repository\CustomerListElementRepository
         app.topic:
             classes:
                 model: AppBundle\Entity\Topic

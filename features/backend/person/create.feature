@@ -18,3 +18,9 @@ Feature: Creates people
       | Nom    | Knizia |
     When I press "Créer"
     Then I should see "a bien été créé"
+
+  Scenario: Cannot create empty person
+    Given I am on "/admin/people/"
+    And I follow "Créer"
+    When I press "Créer"
+    Then I should see "Cette valeur ne doit pas être vide."

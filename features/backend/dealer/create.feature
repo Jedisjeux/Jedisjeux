@@ -18,3 +18,9 @@ Feature: Creates dealers
       | Nom  | Ludibay |
     When I press "Créer"
     Then I should see "a bien été créé"
+
+  Scenario: Cannot create empty dealer
+    Given I am on "/admin/dealers/"
+    And I follow "Créer"
+    When I press "Créer"
+    Then I should see "Cette valeur ne doit pas être vide."
