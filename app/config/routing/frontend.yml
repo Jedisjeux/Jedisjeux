@@ -32,8 +32,5 @@ sylius_product_review:
 sylius_static_content:
     resource: "frontend/static_content.yml"
 
-app_customer_list:
-    resource: "frontend/customer_list.yml"
-
 sylius_security:
     resource: "frontend/security.yml"
