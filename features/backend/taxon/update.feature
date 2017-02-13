@@ -18,9 +18,7 @@ Feature: Edit taxons
 
   Scenario: Update a taxon
     Given I am on "/admin/taxons/"
-    And I follow "Thèmes"
+    And I follow "Voir les sous-catégories"
     And I follow "Modifier"
-    And I fill in the following:
-      | Nom | Fantastique |
-    When I press "Mettre à jour"
+    When I press "Enregistrer les modifications"
     Then I should see "a bien été mise à jour"

@@ -16,10 +16,29 @@ Feature: Remove taxons
       | themes | Science-fiction |
     And I am logged in as user "admin@example.com" with password "password"
 
-  @javascript
-  Scenario: Remove a taxon
+  Scenario: Remove a root taxon
     Given I am on "/admin/taxons/"
-    And I follow "Thèmes"
+    When I press "Supprimer"
+    Then I should see "a bien été supprimée"
+
+  @javascript
+  Scenario: Remove a root taxon with modal
+    Given I am on "/admin/taxons/"
+    When I press "Supprimer"
+    And I wait until modal is visible
+    And I press confirm button
+    Then I should see "a bien été supprimée"
+
+  Scenario: Remove a child taxon
+    Given I am on "/admin/taxons/"
+    And I follow "Voir les sous-catégories"
+    When I press "Supprimer"
+    Then I should see "a bien été supprimée"
+
+  @javascript
+  Scenario: Remove a child taxon with modal
+    Given I am on "/admin/taxons/"
+    And I follow "Voir les sous-catégories"
     When I press "Supprimer"
     And I wait until modal is visible
     And I press confirm button
