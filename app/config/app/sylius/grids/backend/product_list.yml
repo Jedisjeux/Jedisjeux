@@ -5,6 +5,8 @@ sylius_grid:
                 name: doctrine/orm
                 options:
                     class: "%app.model.product_list.class%"
+                    repository:
+                        method: createListQueryBuilder
             sorting:
                 createdAt: desc
             fields:
@@ -32,7 +34,7 @@ sylius_grid:
                     type: string
                     label: sylius.ui.search
                     options:
-                        fields: [name]
+                        fields: [name, owner.email, user.username]
             actions:
                 item:
                     update:

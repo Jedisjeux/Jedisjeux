@@ -20,6 +20,16 @@ use Sylius\Component\Product\Model\ProductInterface;
  */
 class ProductListRepository extends EntityRepository
 {
+    public function createListQueryBuilder()
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder
+            ->join('o.owner', 'owner')
+            ->leftJoin('owner.user', 'user');
+
+        return $queryBuilder;
+    }
+
     /**
      * @param int|CustomerInterface $owner
      * @param int|ProductInterface $product
