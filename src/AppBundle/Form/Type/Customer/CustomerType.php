@@ -51,6 +51,7 @@ class CustomerType extends BaseCustomerType
         parent::buildForm($builder, $options);
 
         $builder
+            ->remove('gender')
             ->add('phoneNumber', TextType::class, [
                 'label' => 'sylius.ui.phone_number',
                 'required' => false,
