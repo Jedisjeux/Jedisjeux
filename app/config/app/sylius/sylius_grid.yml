@@ -12,6 +12,8 @@ imports:
   - { resource: 'grids/backend/product_association_type.yml' }
   - { resource: 'grids/backend/product_list.yml' }
   - { resource: 'grids/backend/product_review.yml' }
+  - { resource: 'grids/backend/root_taxon.yml' }
+  - { resource: 'grids/backend/taxon_from_root.yml' }
   - { resource: 'grids/backend/topic.yml' }
 
   - { resource: 'grids/frontend/game_play.yml' }
@@ -30,6 +32,7 @@ sylius_grid:
 
             manage_variants: "backend/product/grid/action/manageVariants.html.twig"
             list_posts: "backend/topic/grid/action/posts.html.twig"
+            list_taxons: "backend/taxon/grid/action/taxons.html.twig"
         filter:
             string: "backend/grid/filter/string.html.twig"
             boolean: "backend/grid/filter/boolean.html.twig"
