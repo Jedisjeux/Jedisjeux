@@ -63,10 +63,12 @@ app:
         price_list: Liste de prix
         product_lists: Listes de jeu
         pub_banners: Bannières de pub
+        public: Public
         published_at: Publié le
         request_placeholder: Recherche....
         see_later: A regarder plus tard
         show_posts: Voir les messages
+        show_sub_categories: Voir les sous-catégories
         string_blocks: Blocs de chaîne
         topic: Sujet
         topics: Sujets
@@ -104,6 +106,7 @@ sylius:
         pending_review: En relecture
         pending_translation: En attente de traduction
         pending_translation_changes: En attente de modifs de trad
+        position: Position
         pre_order: Pré-commande
         product: Jeu
         products: Jeux
