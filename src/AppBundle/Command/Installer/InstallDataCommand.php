@@ -48,6 +48,7 @@ EOT
             'app:users:load',
             'app:products:load',
             'app:game-libraries:load',
+            'app:product-lists:load',
             'app:people:load',
             'app:persons-of-products:load',
             'app:zones-of-persons:load',

@@ -24,6 +24,7 @@ app:
         edit_game_play: Modifier la partie de jeu
         edit_person: Modifier la personne
         edit_post: Modifier le message
+        edit_product_list: Modifier la liste de jeu
         edit_string_block: Modifer le bloc de chaîne
         edit_topic: Modifier le sujet
         forum: Forum
@@ -43,6 +44,7 @@ app:
         manage_game_plays: Gérer les parties de jeu
         manage_people: Gérer les personnes
         manage_posts: Gérer les messages
+        manage_product_lists: Gérer les listes de jeu
         manage_string_blocks: Gérer les blocs de chaîne
         manage_topics: Gérer les sujets
         my_game_lists: Mes listes de jeux
@@ -59,6 +61,7 @@ app:
         posts: Messages
         prices: Tarifs
         price_list: Liste de prix
+        product_lists: Listes de jeu
         pub_banners: Bannières de pub
         published_at: Publié le
         request_placeholder: Recherche....
