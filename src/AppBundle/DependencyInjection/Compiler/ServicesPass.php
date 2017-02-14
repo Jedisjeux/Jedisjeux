@@ -11,6 +11,7 @@
 
 namespace AppBundle\DependencyInjection\Compiler;
 
+use AppBundle\EventListener\PasswordUpdaterListener;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Parameter;
@@ -29,6 +30,7 @@ class ServicesPass implements CompilerPassInterface
         $this->processFactories($container);
         $this->processFormTypes($container);
         $this->processControllers($container);
+        $this->processListeners($container);
 
         $container->setAlias('sylius.context.customer', 'app.context.customer');
     }
@@ -113,5 +115,19 @@ class ServicesPass implements CompilerPassInterface
         $resourcesCollectionProviderDefinition = $container->getDefinition('sylius.resource_controller.resources_collection_provider');
         $resourcesCollectionProviderDefinition
             ->setClass('AppBundle\Controller\ResourcesCollectionProvider');
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     */
+    private function processListeners(ContainerBuilder $container)
+    {
+        $listenerPasswordUpdaterDefinition = $container->getDefinition('sylius.listener.password_updater');
+        $listenerPasswordUpdaterDefinition
+            ->setClass(PasswordUpdaterListener::class);
+        $listenerPasswordUpdaterDefinition->addTag('kernel.event_listener', [
+            'event' => 'sylius.customer.pre_update',
+            'method' => 'customerUpdateEvent'
+        ]);
     }
 }
