@@ -8,6 +8,7 @@ sylius_product_review_create:
             factory:
                 method: createForSubject
                 arguments: [$productId]
+            redirect: referer
 
 sylius_product_rating_create:
     path: /products/{productId}/rating/new
