@@ -53,7 +53,6 @@ class CustomerSimpleRegistrationType extends AbstractResourceType
                 'label' => false,
             ])
             ->addEventSubscriber(new CustomerRegistrationFormSubscriber($this->customerRepository))
-            ->addEventSubscriber(new UserRegistrationFormSubscriber())
             ->setDataLocked(false)
         ;
     }
