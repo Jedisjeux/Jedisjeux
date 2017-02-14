@@ -20,7 +20,7 @@ Feature: Remove game plays
   Scenario: Remove a game play
     Given I am on "/admin/game-plays/"
     When I press "Supprimer"
-    Then I should see "a bien été supprimé"
+    Then I should see "a bien été supprimée"
 
   @javascript
   Scenario: Remove a game play with modal
@@ -28,4 +28,4 @@ Feature: Remove game plays
     When I press "Supprimer"
     And I wait until modal is visible
     And I press confirm button
-    Then I should see "a bien été supprimé"
+    Then I should see "a bien été supprimée"

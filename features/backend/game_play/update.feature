@@ -21,4 +21,4 @@ Feature: Edit game plays
     Given I am on "/admin/game-plays/"
     And I follow "Modifier"
     When I press "Enregistrer les modifications"
-    Then I should see "a bien été mis à jour"
+    Then I should see "a bien été mise à jour"
