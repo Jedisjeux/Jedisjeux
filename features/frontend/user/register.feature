@@ -26,4 +26,4 @@ Feature: Register as a new user
       | Mot de passe              | password          |
       | Confirmation mot de passe | password          |
     When I press "Valider"
-    Then I should see "L'email est déjà utilisé."
+    Then I should see "Cet e-mail est déjà utilisé."
