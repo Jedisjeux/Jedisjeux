@@ -44,6 +44,9 @@ class TopicType extends AbstractResourceType
     {
         parent::buildForm($builder, $options);
 
+        $onlyPublic = $this->authorizationChecker->isGranted('ROLE_STAFF') ? false : true;
+
+
         $builder
             ->add('title', null, array(
                 'label' => 'label.title',
@@ -51,32 +54,19 @@ class TopicType extends AbstractResourceType
             ->add('mainPost', 'app_post',  array(
                 'label' => false,
             ))
-            ->add('mainTaxon', 'entity', array(
+            ->add('mainTaxon', 'sylius_taxon_choice', array(
                 'label' => 'label.category',
-                'class' => 'AppBundle:Taxon',
                 'choice_label' => 'name',
-                'query_builder' => function (EntityRepository $er) {
-                    $queryBuilder = $er->createQueryBuilder('o');
-                    $queryBuilder
-                        ->join('o.root', 'rootTaxon')
-                        ->where('rootTaxon.code = :code')
-                        ->andWhere('o.parent IS NOT NULL')
-                        ->setParameter('code', Taxon::CODE_FORUM)
-
-                        ->orderBy('o.left');
-
-                    $onlyPublic = $this->authorizationChecker->isGranted('ROLE_STAFF') ? false : true;
-
+                'root' => Taxon::CODE_FORUM,
+                'filter' => function(Taxon $taxon) use ($onlyPublic) {
                     if ($onlyPublic) {
-                        $queryBuilder
-                            ->andWhere('o.public = :public')
-                            ->setParameter('public', true);
-
+                        if (!$taxon->isPublic()) {
+                            return false;
+                        }
                     }
-                    
-                    return $queryBuilder;
+
+                    return $taxon;
                 },
-                'expanded' => false,
                 'multiple' => false,
                 'placeholder' => 'Choisissez une catégorie',
                 'required' => false,
