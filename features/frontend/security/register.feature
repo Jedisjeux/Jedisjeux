@@ -1,4 +1,4 @@
-@ui @frontend @user @register
+@ui @frontend @security @register
 Feature: Register as a new user
   As a visitor
   I need to be able to register as a new user

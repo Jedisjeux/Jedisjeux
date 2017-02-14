@@ -1,4 +1,4 @@
-@ui @frontend @user @login
+@ui @frontend @security @login
 Feature: Login as a user
   As a visitor
   I need to be able to login as a user

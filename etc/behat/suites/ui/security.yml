@@ -1,9 +1,9 @@
 default:
     suites:
-        ui_user:
+        ui_security:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - AppBundle\Behat\UtilsContext
                 - AppBundle\Behat\UserContext
             filters:
-                tags: "@user && @ui"
+                tags: "@security && @ui"

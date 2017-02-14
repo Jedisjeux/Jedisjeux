@@ -1,4 +1,4 @@
-@ui @frontend @user @logout
+@ui @frontend @security @logout
 Feature: Logout
   As a user
   I need to be able to logout
