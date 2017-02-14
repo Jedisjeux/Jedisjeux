@@ -11,6 +11,10 @@ app:
         create: Le vendeur a bien été créé.
         update: Le vendeur a bien été mis à jour.
         delete: Le vendeur a bien été supprimé.
+    game_play:
+        create: La partie de jeu a bien été créée.
+        update: La partie de jeu a bien été mise à jour.
+        delete: La partie de jeu a bien été supprimée.
     person:
         create: La personne a bien été créée.
         update: La personne a bien été mise à jour.
