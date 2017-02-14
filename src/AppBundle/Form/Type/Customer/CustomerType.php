@@ -14,6 +14,7 @@ namespace AppBundle\Form\Type\Customer;
 use Sylius\Bundle\CustomerBundle\Form\Type\CustomerType as BaseCustomerType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -50,18 +51,16 @@ class CustomerType extends BaseCustomerType
         parent::buildForm($builder, $options);
 
         $builder
-            ->remove('email')
-            ->add('emailContact', EmailType::class, [
-                'label' => 'sylius.ui.email',
-                'required' => false,
-            ])
+            ->remove('gender')
             ->add('phoneNumber', TextType::class, [
                 'label' => 'sylius.ui.phone_number',
                 'required' => false,
             ])
-            ->add('cellPhoneNumber', TextType::class, [
-                'label' => 'app.ui.cellphone_number',
-                'required' => false,
+            ->add('firstName', HiddenType::class, [
+                'data' => 'John',
+            ])
+            ->add('lastName', HiddenType::class, [
+                'data' => 'Doe',
             ]);
 
         $builder

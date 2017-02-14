@@ -99,6 +99,10 @@ class ServicesPass implements CompilerPassInterface
         $topicFormTypeDefinition = $container->getDefinition('app.form.type.topic');
         $topicFormTypeDefinition
             ->addMethodCall('setAuthorizationChecker', [new Reference('security.authorization_checker')]);
+
+        $customerFormTypeDefinition = $container->getDefinition('sylius.form.type.customer');
+        $customerFormTypeDefinition
+            ->addArgument(new Reference('sylius.form.event_subscriber.add_shop_user_type'));
     }
 
     /**
