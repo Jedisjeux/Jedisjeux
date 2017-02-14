@@ -32,6 +32,10 @@ sylius:
         create: Le jeu a bien été créé.
         update: Le jeu a bien été mis à jour.
         delete: Le jeu a bien été supprimé.
+    product_review:
+        create: L'avis a bien été créé.
+        update: L'avis a bien été mis à jour.
+        delete: L'avis a bien été supprimé.
     static_content:
         create: Le contenu statique a bien été créé.
         update: Le contenu statique a bien été mis à jour.
