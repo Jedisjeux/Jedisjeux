@@ -1,4 +1,4 @@
-@ui @frontend @user @resetting
+@ui @frontend @security @resetting
 Feature: Resetting password
   As a visitor
   I need to be able to resetting my password
