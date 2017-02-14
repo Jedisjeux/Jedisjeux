@@ -24,7 +24,7 @@ Feature: List game-plays
     And I should see "Les princes de Florence"
 
   @javascript
-  Scenario: List game-plays of logged user
+  Scenario: List my game-plays from top bar
     Given there are following users:
       | email           | password | role      |
       | 666@example.com | password | ROLE_USER |
@@ -35,6 +35,17 @@ Feature: List game-plays
     And I follow "kevin@example.com"
     And I wait "2" seconds until "$('.dropdown-menu').is('visible')"
     When I follow "Mes parties"
+    Then I should see "Les princes de Florence"
+
+  Scenario: List my game plays from account dashboard
+    Given there are following users:
+      | email           | password | role      |
+      | 666@example.com | password | ROLE_USER |
+    And there are game plays:
+      | product                 | author            |
+      | Les princes de Florence | kevin@example.com |
+    And I am on "/mon-compte/accueil"
+    When I follow "Mes parties de jeu"
     Then I should see "Les princes de Florence"
 
   Scenario: Sorting game-plays

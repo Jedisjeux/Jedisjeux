@@ -17,6 +17,6 @@ Feature: View list of product lists
 
   Scenario: View my product lists
     When I am on "/mon-compte/accueil"
-    And I follow "Mes listes de jeux"
+    And I follow "Mes listes de jeu"
     Then I should see "Liste de cadeaux"
     But I should not see "Liste other user"
