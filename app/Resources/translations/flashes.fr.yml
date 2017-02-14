@@ -19,7 +19,7 @@ app:
         create: Le message a bien été créé.
         update: Le message a bien été mis à jour.
         delete: Le message a bien été supprimé.
-    static_content:
+    string_block:
         create: Le bloc de chaîne a bien été créé.
         update: Le bloc de chaîne a bien été mis à jour.
         delete: Le bloc de chaîne a bien été supprimé.

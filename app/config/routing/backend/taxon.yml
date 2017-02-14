@@ -24,7 +24,8 @@ sylius_backend_taxon_create:
     defaults:
         _controller: sylius.controller.taxon:createAction
         _sylius:
-            template: backend/taxon/create.html.twig
+            section: backend
+            template: backend/crud/create.html.twig
             redirect: sylius_backend_taxon_index
 
 sylius_backend_taxon_update:
@@ -33,7 +34,8 @@ sylius_backend_taxon_update:
     defaults:
         _controller: sylius.controller.taxon:updateAction
         _sylius:
-            template: backend/taxon/update.html.twig
+            section: backend
+            template: backend/crud/update.html.twig
             redirect: sylius_backend_taxon_index
 
 sylius_backend_taxon_delete:
