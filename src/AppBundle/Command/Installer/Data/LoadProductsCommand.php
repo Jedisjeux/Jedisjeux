@@ -10,20 +10,15 @@ namespace AppBundle\Command\Installer\Data;
 
 use AppBundle\Entity\Product;
 use AppBundle\Entity\ProductVariant;
-use AppBundle\Entity\Redirect;
 use AppBundle\Entity\Taxon;
 use AppBundle\Repository\TaxonRepository;
 use AppBundle\Updater\ProductCountByTaxonUpdater;
-use AppBundle\Updater\TopicCountByTaxonUpdater;
-use Behat\Transliterator\Transliterator;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Association\Model\AssociationType;
 use Sylius\Component\Product\Factory\ProductFactory;
-use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
