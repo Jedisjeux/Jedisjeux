@@ -1,5 +1,6 @@
 app_homepage:
     path: /
+    methods: [GET]
     defaults:
         _controller: FrameworkBundle:Template:template
         template: 'default/index.html.twig'

@@ -49,7 +49,8 @@
     "bmatzner/fontawesome-bundle": "^4.6",
     "infinite-networks/form-bundle": "^1.0",
     "google/apiclient": "^2.0",
-    "sylius/grid-bundle": "^1.0"
+    "sylius/grid-bundle": "^1.0",
+    "zenstruck/redirect-bundle": "^3.0"
   },
   "require-dev": {
     "sensio/generator-bundle": "~2.3",

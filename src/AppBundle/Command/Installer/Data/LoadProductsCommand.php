@@ -13,8 +13,6 @@ use AppBundle\Entity\ProductVariant;
 use AppBundle\Entity\Taxon;
 use AppBundle\Repository\TaxonRepository;
 use AppBundle\Updater\ProductCountByTaxonUpdater;
-use AppBundle\Updater\TopicCountByTaxonUpdater;
-use Behat\Transliterator\Transliterator;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Association\Model\AssociationType;
@@ -132,7 +130,7 @@ class LoadProductsCommand extends ContainerAwareCommand
 
     /**
      * @param array $data
-     * 
+     *
      * @return Product
      */
     protected function createOrReplaceProduct(array $data)
@@ -187,6 +185,7 @@ class LoadProductsCommand extends ContainerAwareCommand
         $product->setCreatedAt($data['createdAt']);
         $product->setUpdatedAt($data['updatedAt']);
         $product->setReleasedAt($data['releasedAt']);
+
         $product
             ->setCode($data['code'])
             ->setShortDescription(trim($data['shortDescription']))
@@ -194,7 +193,8 @@ class LoadProductsCommand extends ContainerAwareCommand
             ->setJoueurMin($data['joueurMin'])
             ->setJoueurMax($data['joueurMax'])
             ->setMateriel($data['materiel'])
-            ->setStatus($data['status']);
+            ->setStatus($data['status'])
+            ->setOldHref($data['href']);
 
         $product->getMasterVariant()->setCode($data['code']);
         $product->getMasterVariant()->setName($data['name']);
@@ -257,7 +257,7 @@ class LoadProductsCommand extends ContainerAwareCommand
 
     /**
      * @param AssociationType $associationType
-     * 
+     *
      * @throws \Doctrine\DBAL\DBALException
      */
     protected function insertProductsOfCollections(AssociationType $associationType)
@@ -306,7 +306,7 @@ EOM;
 
     /**
      * @param AssociationType $assocationType
-     * 
+     *
      * @throws \Doctrine\DBAL\DBALException
      */
     protected function insertProductsOfExpansions(AssociationType $assocationType)
@@ -376,26 +376,29 @@ EOM;
     public function getRows()
     {
         $query = <<<EOM
-select      concat('game-', old.id) as code,
-            old.nom as name,
-            old.min as joueurMin,
-            old.max as joueurMax,
-            old.age_min as ageMin,
-            old.intro as shortDescription,
-            old.presentation as description,
-            old.duree as durationMin,
-            old.duree as durationMax,
-            old.materiel as materiel,
-            old.valid as status,
-            old.date as createdAt,
-            old.date as updatedAt,
-            old.date_sortie as releasedAt,
-            old.precis_sortie as releasedAtPrecision
-from        jedisjeux.jdj_game old
-where       old.valid in (0, 1, 2, 5, 3)
-and         (old.id_pere is null or type_diff in ('extension', 'collection'))
-and         old.nom <> ""
+SELECT
+  concat('game-', old.id) AS code,
+  old.nom                 AS name,
+  old.min                 AS joueurMin,
+  old.max                 AS joueurMax,
+  old.age_min             AS ageMin,
+  old.intro               AS shortDescription,
+  old.presentation        AS description,
+  old.duree               AS durationMin,
+  old.duree               AS durationMax,
+  old.materiel            AS materiel,
+  old.valid               AS status,
+  old.date                AS createdAt,
+  old.date                AS updatedAt,
+  old.date_sortie         AS releasedAt,
+  old.precis_sortie       AS releasedAtPrecision,
+  old.href                AS href
+FROM jedisjeux.jdj_game old
+WHERE old.valid IN (0, 1, 2, 5, 3)
+      AND (old.id_pere IS NULL OR type_diff IN ('extension', 'collection'))
+      AND old.nom <> ""
 EOM;
+
         return $this->getDatabaseConnection()->fetchAll($query);
     }
 
@@ -405,27 +408,30 @@ EOM;
     private function getVariants()
     {
         $query = <<<EOM
-select      concat('game-', old.id) as code,
-            concat('game-', old.id_pere ) as parent_code,
-            old.nom as name,
-            old.min as joueurMin,
-            old.max as joueurMax,
-            old.age_min as ageMin,
-            old.intro as shortDescription,
-            old.presentation as description,
-            old.duree as durationMin,
-            old.duree as durationMax,
-            old.materiel as materiel,
-            old.valid as status,
-            old.date as createdAt,
-            old.date as updatedAt,
-            old.date_sortie as releasedAt,
-            old.precis_sortie as releasedAtPrecision
-from        jedisjeux.jdj_game old
-where       old.valid in (0, 1, 2, 5, 3)
-            and         old.id_pere is not null
-            and         old.nom <> ""
-            and type_diff in ('regle', 'materiel')
+SELECT
+  concat('game-', old.id)      AS code,
+  concat('game-', old.id_pere) AS parent_code,
+  old.nom                      AS name,
+  old.min                      AS joueurMin,
+  old.max                      AS joueurMax,
+  old.age_min                  AS ageMin,
+  old.intro                    AS shortDescription,
+  old.presentation             AS description,
+  old.duree                    AS durationMin,
+  old.duree                    AS durationMax,
+  old.materiel                 AS materiel,
+  old.valid                    AS status,
+  old.date                     AS createdAt,
+  old.date                     AS updatedAt,
+  old.date_sortie              AS releasedAt,
+  old.precis_sortie            AS releasedAtPrecision,
+  old.href                     AS href
+FROM jedisjeux.jdj_game old
+WHERE old.valid IN (0, 1, 2, 5, 3)
+      AND old.id_pere IS NOT NULL
+      AND old.nom <> ""
+      AND type_diff IN ('regle', 'materiel')
+
 EOM;
 
         return $this->getDatabaseConnection()->fetchAll($query);
@@ -455,6 +461,7 @@ EOM;
         $text = preg_replace("/\<p\>( )*\<\/p\>/", '', $text);
 
         $text = preg_replace("/\<p\><p\>/", '<p>', $text);
+
         return $text;
     }
 
@@ -463,6 +470,7 @@ EOM;
         $text = preg_replace("/\[(b):[0-9a-z]+\]/", '</p><h4>', $text);
         $text = preg_replace("/\[(\/)?(b):[0-9a-z]+\]/", '</h4><p>', $text);
         $text = preg_replace("/\[(\/)?(i):[0-9a-z]+\]/", '<${1}i>', $text);
+
         return $text;
     }
 
