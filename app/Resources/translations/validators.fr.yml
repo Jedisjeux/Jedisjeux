@@ -1,0 +1,5 @@
+zenstruck_redirect:
+    source:
+        blank: Cette valeur ne doit pas être vide.
+    destination:
+        blank: Cette valeur ne doit pas être vide.
