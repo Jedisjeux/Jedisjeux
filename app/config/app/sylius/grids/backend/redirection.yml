@@ -1,0 +1,43 @@
+sylius_grid:
+    grids:
+        app_backend_redirection:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%app.model.redirection.class%"
+            sorting:
+                source: asc
+            fields:
+                source:
+                    type: string
+                    label: app.ui.source
+                    sortable: ~
+                destination:
+                    type: string
+                    label: app.ui.destination
+                    sortable: ~
+                count:
+                    type: string
+                    label: app.ui.redirection_count
+                    sortable: ~
+                lastAccessed:
+                    type: twig
+                    label: app.ui.last_used_at
+                    sortable: ~
+                    options:
+                        template: "backend/grid/field/date/medium.html.twig"
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    options:
+                        fields: [source, destination]
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete

@@ -21,7 +21,7 @@ use Zenstruck\RedirectBundle\Model\Redirect as BaseRedirect;
  * @ORM\Entity
  * @ORM\Table(name="jdj_redirect")
  */
-class Redirect extends BaseRedirect implements ResourceInterface
+class Redirection extends BaseRedirect implements ResourceInterface
 {
     /**
      * @ORM\Id
