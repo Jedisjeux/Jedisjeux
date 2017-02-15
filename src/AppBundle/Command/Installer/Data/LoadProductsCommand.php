@@ -94,32 +94,6 @@ class LoadProductsCommand extends ContainerAwareCommand
         $this->calculateProductCountByTaxons();
     }
 
-    /**
-     * @param ProductInterface $product
-     * @param string $oldHref
-     *
-     * @return Redirect
-     */
-    protected function createOrReplaceRedirectForProduct(ProductInterface $product, $oldHref)
-    {
-        /** @var Redirect $redirect */
-        $redirect = $this->getContainer()->get('app.repository.redirect')->findOneBy(['source' => $oldHref]);
-
-        if (null === $redirect) {
-            $redirect = $this->getContainer()->get('app.factory.redirect')->createNew();
-        }
-
-        /** @var Router $router */
-        $router = $this->getContainer()->get('router');
-        $destination = $router->generate('sylius_product_show', ['slug' => $product->getSlug()]);
-
-        $redirect->setSource($oldHref);
-        $redirect->setDestination($destination);
-        $redirect->setPermanent(true);
-
-        return $redirect;
-    }
-
     protected function createOrReplaceAssociationTypeCollection()
     {
         /** @var AssociationType $assocationType */
