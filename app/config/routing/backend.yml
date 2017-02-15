@@ -53,6 +53,9 @@ app_backend_game_play:
 app_backend_post:
     resource: backend/post.yml
 
+app_backend_redirect:
+    resource: backend/redirect.yml
+
 sylius_backend_static_content:
     resource: "backend/static_content.yml"
 

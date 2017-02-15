@@ -19,12 +19,14 @@ app:
         dealer: Vendeur
         dealers: Vendeurs
         dealer_prices: Tarifs des vendeurs
+        destination: Destination
         edit_article: Modifier l'article
         edit_dealer: Modifier le vendeur
         edit_game_play: Modifier la partie de jeu
         edit_person: Modifier la personne
         edit_post: Modifier le message
         edit_product_list: Modifier la liste de jeu
+        edit_redirection: Modifier la redirection
         edit_string_block: Modifer le bloc de chaîne
         edit_topic: Modifier le sujet
         forum: Forum
@@ -36,6 +38,7 @@ app:
         image_on_the_top_side: Image en haut
         internal_name: Nom interne
         introduction: Introduction
+        last_used_at: Dernière utilisation
         logout: Déconnection
         manage_articles: Gérer les articles
         manage_contact_requests: Gérer les demandes de contact
@@ -45,6 +48,7 @@ app:
         manage_people: Gérer les personnes
         manage_posts: Gérer les messages
         manage_product_lists: Gérer les listes de jeu
+        manage_redirections: Gérer les redirections
         manage_string_blocks: Gérer les blocs de chaîne
         manage_topics: Gérer les sujets
         my_game_lists: Mes listes de jeu
@@ -54,10 +58,12 @@ app:
         new_dealer: Nouveau vendeur
         new_list: Nouvelle liste
         new_person: Nouvelle personne
+        new_redirection: Nouvelle redirection
         new_post: Nouveau message
         new_string_block: Nouveau bloc de chaîne
         overview_of_your_website: Aperçu de votre site web
         people: Personnes
+        permanent: Permanent
         posts: Messages
         prices: Tarifs
         price_list: Liste de prix
@@ -65,10 +71,13 @@ app:
         pub_banners: Bannières de pub
         public: Public
         published_at: Publié le
+        redirections: Redirections
+        redirection_count: Nombre de redirections
         request_placeholder: Recherche....
         see_later: A regarder plus tard
         show_posts: Voir les messages
         show_sub_categories: Voir les sous-catégories
+        source: Source
         string_blocks: Blocs de chaîne
         topic: Sujet
         topics: Sujets

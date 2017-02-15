@@ -12,7 +12,7 @@
 namespace AppBundle\Command\Installer\Data;
 
 use AppBundle\Entity\Product;
-use AppBundle\Entity\Redirect;
+use AppBundle\Entity\Redirection;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -25,7 +25,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class LoadRedirectsForProductsCommand extends ContainerAwareCommand
+class LoadRedirectionsForProductsCommand extends ContainerAwareCommand
 {
     const BATCH_SIZE = 20;
 
@@ -35,8 +35,8 @@ class LoadRedirectsForProductsCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('app:redirects-for-products:load')
-            ->setDescription('Load all redirects for products');
+            ->setName('app:redirections-for-products:load')
+            ->setDescription('Load all redirections for products');
     }
 
     /**
@@ -52,7 +52,7 @@ class LoadRedirectsForProductsCommand extends ContainerAwareCommand
             /** @var Product $product */
             $product = $row[0];
 
-            $redirect = $this->createOrReplaceRedirectForProduct($product);
+            $redirect = $this->createOrReplaceRedirectionForProduct($product);
             $this->getManager()->persist($redirect);
 
             if (($i % self::BATCH_SIZE) === 0) {
@@ -84,28 +84,28 @@ class LoadRedirectsForProductsCommand extends ContainerAwareCommand
     /**
      * @param Product $product
      *
-     * @return Redirect
+     * @return Redirection
      */
-    protected function createOrReplaceRedirectForProduct(Product $product)
+    protected function createOrReplaceRedirectionForProduct(Product $product)
     {
         $oldHref = '/'.$product->getOldHref();
 
-        /** @var Redirect $redirect */
-        $redirect = $this->getRepository()->findOneBy(['source' => $oldHref]);
+        /** @var Redirection $redirection */
+        $redirection = $this->getRepository()->findOneBy(['source' => $oldHref]);
 
-        if (null === $redirect) {
-            $redirect = $this->getFactory()->createNew();
+        if (null === $redirection) {
+            $redirection = $this->getFactory()->createNew();
         }
 
         /** @var Router $router */
         $router = $this->getContainer()->get('router');
         $destination = $router->generate('sylius_product_show', ['slug' => $product->getSlug()]);
 
-        $redirect->setSource($oldHref);
-        $redirect->setDestination($destination);
-        $redirect->setPermanent(true);
+        $redirection->setSource($oldHref);
+        $redirection->setDestination($destination);
+        $redirection->setPermanent(true);
 
-        return $redirect;
+        return $redirection;
     }
 
     /**
@@ -121,7 +121,7 @@ class LoadRedirectsForProductsCommand extends ContainerAwareCommand
      */
     protected function getRepository()
     {
-        return $this->getContainer()->get('app.repository.redirect');
+        return $this->getContainer()->get('app.repository.redirection');
     }
 
     /**
@@ -129,7 +129,7 @@ class LoadRedirectsForProductsCommand extends ContainerAwareCommand
      */
     protected function getFactory()
     {
-        return $this->getContainer()->get('app.factory.redirect');
+        return $this->getContainer()->get('app.factory.redirection');
     }
 
     /**
