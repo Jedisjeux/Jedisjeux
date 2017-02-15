@@ -1,0 +1,14 @@
+app_backend_not_found_page:
+    resource: |
+        alias: app.not_found_page
+        section: backend
+        templates: :backend/crud
+        only: ['index']
+        redirect: index
+        grid: app_backend_not_found_page
+        vars:
+            all:
+                subheader: app.ui.manage_not_found_pages
+            index:
+                icon: warning sign
+    type: sylius.resource

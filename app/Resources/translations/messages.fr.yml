@@ -29,6 +29,7 @@ app:
         edit_redirection: Modifier la redirection
         edit_string_block: Modifer le bloc de chaîne
         edit_topic: Modifier le sujet
+        errors: Erreurs
         forum: Forum
         framed: Encadré
         game_library: Ludothèque
@@ -45,6 +46,7 @@ app:
         manage_dealers: Gérer les vendeurs
         manage_dealer_prices: Gérer les tarifs des vendeurs
         manage_game_plays: Gérer les parties de jeu
+        manage_not_found_pages: Gérer les pages non trouvées
         manage_people: Gérer les personnes
         manage_posts: Gérer les messages
         manage_product_lists: Gérer les listes de jeu
@@ -61,7 +63,9 @@ app:
         new_redirection: Nouvelle redirection
         new_post: Nouveau message
         new_string_block: Nouveau bloc de chaîne
+        not_found_pages: Pages non trouvées
         overview_of_your_website: Aperçu de votre site web
+        path: Chemin
         people: Personnes
         permanent: Permanent
         posts: Messages
@@ -73,6 +77,7 @@ app:
         published_at: Publié le
         redirections: Redirections
         redirection_count: Nombre de redirections
+        referer: Référent
         request_placeholder: Recherche....
         see_later: A regarder plus tard
         show_posts: Voir les messages

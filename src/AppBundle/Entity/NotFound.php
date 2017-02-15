@@ -12,6 +12,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Zenstruck\RedirectBundle\Model\NotFound as BaseNotFound;
 
 /**
@@ -20,7 +21,7 @@ use Zenstruck\RedirectBundle\Model\NotFound as BaseNotFound;
  * @ORM\Entity
  * @ORM\Table(name="jdj_not_found")
  */
-class NotFound extends BaseNotFound
+class NotFound extends BaseNotFound implements ResourceInterface
 {
     /**
      * @ORM\Id
@@ -28,4 +29,12 @@ class NotFound extends BaseNotFound
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 }
