@@ -110,6 +110,9 @@ sylius_resource:
                 model: AppBundle\Entity\PubBanner
                 form:
                     default: AppBundle\Form\Type\PubBannerType
+        app.redirect:
+            classes:
+                model: AppBundle\Entity\Redirect
         app.right_image_block:
             driver: doctrine/phpcr-odm
             classes:

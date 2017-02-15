@@ -43,8 +43,8 @@ security:
             context: user
 
         main:
-            anonymous:    true
-            pattern: ^/
+            anonymous: true
+            pattern: /.*
             form_login:
                 provider: sylius_user_provider
                 login_path: sylius_shop_login
@@ -59,13 +59,17 @@ security:
             context: user
 
     access_control:
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "^/_partial.*", role: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }
+        - { path: "^/_partial.*", role: ROLE_NO_ACCESS }
+
+        - { path: ^/login.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/verify, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/mon-compte.*, role: ROLE_USER }
-        #seul les membres du bureau ont accès à la partie compta
-        - { path: ^/compta/, role: ROLE_OFFICE }
+
+        - { path: ^/admin/, role: ROLE_ADMIN }
+
         # create new entity
         - { path: /new$, role: ROLE_USER }
         # update existing entity
@@ -76,6 +80,3 @@ security:
         - { path: ^/api/product-lists/.+/products/\d+, role: ROLE_USER}
         #like it
         - { path: ^/user-review/\d+/like, role: ROLE_USER }
-
-        - { path: ^/_partial, roles: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }
-        - { path: ^/_partial, roles: ROLE_NO_ACCESS }

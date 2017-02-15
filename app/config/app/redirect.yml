@@ -1,0 +1,3 @@
+zenstruck_redirect:
+    redirect_class: AppBundle\Entity\Redirect
+    not_found_class: AppBundle\Entity\NotFound
