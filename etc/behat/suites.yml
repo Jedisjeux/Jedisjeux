@@ -14,6 +14,7 @@ imports:
     - suites/ui/product_list.yml
     - suites/ui/product_review.yml
     - suites/ui/product_variant.yml
+    - suites/ui/redirection.yml
     - suites/ui/security.yml
     - suites/ui/static_content.yml
     - suites/ui/string_block.yml
