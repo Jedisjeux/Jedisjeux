@@ -98,6 +98,16 @@
 </div>
 
 <div class="item">
+    <div class="header">{{ 'app.ui.errors'|trans }}</div>
+    <div class="menu">
+        <a href="{{ path('app_backend_not_found_page_index') }}" class="item">
+            <i class="warning sign icon"></i>
+            {{ 'app.ui.not_found_pages'|trans }}
+        </a>
+    </div>
+</div>
+
+<div class="item">
     <div class="header">{{ 'sylius.ui.configuration'|trans }}</div>
     <div class="menu">
         <a href="{{ path('app_backend_redirection_index') }}" class="item">
