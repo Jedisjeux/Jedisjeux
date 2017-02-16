@@ -44,8 +44,7 @@ SELECT
   END             AS lastName,
   old.prenom      AS firstName,
   old.siteweb     AS website,
-  old.description AS description,
-  old.href        AS oldHref
+  old.description AS description
 FROM jedisjeux.jdj_personnes old
 WHERE old.id <> 14
       AND (old.nom_famille <> '' OR old.nom <> '')
