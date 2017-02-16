@@ -77,6 +77,7 @@ EOT
             'app:redirections-for-people:load',
             'app:redirections-for-products:load',
             'app:redirections-for-review-articles:load',
+            'app:redirections-for-articles:load',
         ];
 
         $this->runCommands($commands, $input, $output);
