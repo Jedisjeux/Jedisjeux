@@ -5,6 +5,7 @@ app_frontend_game_play_create:
         _controller: app.controller.game_play:createAction
         _sylius:
             template: frontend/game_play/create.html.twig
+            section: frontend
             factory:
                 method: createForProduct
                 arguments: [$productSlug]
@@ -19,6 +20,7 @@ app_frontend_game_play_show:
         _controller: app.controller.game_play:showAction
         _sylius:
             template: frontend/game_play/show.html.twig
+            section: frontend
 
 
 app_frontend_game_play_index:
@@ -28,6 +30,7 @@ app_frontend_game_play_index:
         _controller: app.controller.game_play:indexAction
         _sylius:
             template: frontend/game_play/index.html.twig
+            section: frontend
             paginate: 12
             grid: app_frontend_game_play
 
