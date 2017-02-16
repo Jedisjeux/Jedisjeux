@@ -11,24 +11,18 @@
 
 namespace AppBundle\Command\Installer\Data;
 
-use AppBundle\Entity\Product;
-use AppBundle\Entity\ProductVariant;
+use AppBundle\Entity\Person;
 use AppBundle\Entity\Redirection;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
-use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class LoadRedirectionsForProductsCommand extends AbstractLoadRedirectionsCommand
+class LoadRedirectionsForPeoplesCommand extends AbstractLoadRedirectionsCommand
 {
-    const BATCH_SIZE = 20;
+    const BATCH_SIZE = 1;
 
     /**
      * @inheritdoc
@@ -36,8 +30,8 @@ class LoadRedirectionsForProductsCommand extends AbstractLoadRedirectionsCommand
     protected function configure()
     {
         $this
-            ->setName('app:redirections-for-products:load')
-            ->setDescription('Load all redirections for products');
+            ->setName('app:redirections-for-people:load')
+            ->setDescription('Load all redirections for people');
     }
 
     /**
@@ -50,12 +44,12 @@ class LoadRedirectionsForProductsCommand extends AbstractLoadRedirectionsCommand
         $i = 0;
 
         foreach ($this->createListQueryBuilder()->getQuery()->iterate() as $row) {
-            /** @var ProductVariant $productVariant */
-            $productVariant = $row[0];
+            /** @var Person $person */
+            $person = $row[0];
 
-            $output->writeln(sprintf("Loading redirection for <comment>%s</comment> url", '/'.$productVariant->getOldHref()));
+            $output->writeln(sprintf("Loading redirection for <comment>%s</comment> person", '/'.$person->getFullName()));
 
-            $redirect = $this->createOrReplaceRedirectionForProductVariant($productVariant);
+            $redirect = $this->createOrReplaceRedirectionForPerson($person);
             $this->getManager()->persist($redirect);
 
             if (($i % self::BATCH_SIZE) === 0) {
@@ -77,7 +71,7 @@ class LoadRedirectionsForProductsCommand extends AbstractLoadRedirectionsCommand
      */
     protected function createListQueryBuilder()
     {
-        $queryBuilder = $this->getProductVariantRepository()->createQueryBuilder('o');
+        $queryBuilder = $this->getPersonRepository()->createQueryBuilder('o');
         $queryBuilder
             ->andWhere($queryBuilder->expr()->isNotNull('o.oldHref'));
 
@@ -85,13 +79,13 @@ class LoadRedirectionsForProductsCommand extends AbstractLoadRedirectionsCommand
     }
 
     /**
-     * @param ProductVariant $productVariant
+     * @param Person $person
      *
      * @return Redirection
      */
-    protected function createOrReplaceRedirectionForProductVariant(ProductVariant $productVariant)
+    protected function createOrReplaceRedirectionForPerson(Person $person)
     {
-        $oldHref = '/'.$productVariant->getOldHref();
+        $oldHref = '/'.$person->getOldHref();
 
         /** @var Redirection $redirection */
         $redirection = $this->getRepository()->findOneBy(['source' => $oldHref]);
@@ -100,7 +94,7 @@ class LoadRedirectionsForProductsCommand extends AbstractLoadRedirectionsCommand
             $redirection = $this->getFactory()->createNew();
         }
 
-        $destination = $this->getRooter()->generate('sylius_product_show', ['slug' => $productVariant->getProduct()->getSlug()]);
+        $destination = $this->getRooter()->generate('app_person_show', ['slug' => $person->getSlug()]);
 
         $redirection->setSource($oldHref);
         $redirection->setDestination($destination);
@@ -112,8 +106,8 @@ class LoadRedirectionsForProductsCommand extends AbstractLoadRedirectionsCommand
     /**
      * @return EntityRepository|object
      */
-    protected function getProductVariantRepository()
+    protected function getPersonRepository()
     {
-        return $this->getContainer()->get('sylius.repository.product_variant');
+        return $this->getContainer()->get('app.repository.person');
     }
 }
