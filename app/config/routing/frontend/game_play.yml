@@ -1,4 +1,4 @@
-app_game_play_create:
+app_frontend_game_play_create:
     methods: [GET, POST]
     path: /jeu-de-societe/{productSlug}/parties/new
     defaults:
@@ -9,10 +9,10 @@ app_game_play_create:
                 method: createForProduct
                 arguments: [$productSlug]
             redirect:
-                route: app_game_play_show
+                route: app_frontend_game_play_show
                 parameters: { productSlug: $productSlug, id: resource.id }
 
-app_game_play_show:
+app_frontend_game_play_show:
     methods: [GET, POST]
     path: /jeu-de-societe/{productSlug}/parties/{id}
     defaults:
@@ -31,10 +31,11 @@ app_frontend_game_play_index:
             paginate: 12
             grid: app_frontend_game_play
 
-app_game_play:
+app_frontend_game_play:
     resource: |
         alias: app.game_play
         path: /parties
+        section: frontend
         templates: :frontend/game_play
         redirect: index
         only: [delete]
