@@ -93,6 +93,10 @@ class LoadRedirectionsForIndexPagesCommand extends AbstractLoadRedirectionsComma
                 'destination' => $this->getRooter()->generate('app_frontend_topic_index'),
             ],
             [
+                'source' => '/phpbb3/viewforum.php',
+                'destination' => $this->getRooter()->generate('app_frontend_topic_index'),
+            ],
+            [
                 'source' => '/ludographie.php',
                 'destination' => $this->getRooter()->generate('app_frontend_person_index'),
             ],

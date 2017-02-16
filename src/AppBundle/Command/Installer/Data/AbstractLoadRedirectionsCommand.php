@@ -11,6 +11,7 @@
 
 namespace AppBundle\Command\Installer\Data;
 
+use AppBundle\Entity\Redirection;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -22,6 +23,27 @@ use Symfony\Bundle\FrameworkBundle\Routing\Router;
  */
 abstract class AbstractLoadRedirectionsCommand extends ContainerAwareCommand
 {
+    /**
+     * @param array $data
+     *
+     * @return Redirection
+     */
+    protected function createOrReplaceRedirection(array $data)
+    {
+        /** @var Redirection $redirection */
+        $redirection = $this->getRepository()->findOneBy(['source' => $data['source']]);
+
+        if (null === $redirection) {
+            $redirection = $this->getFactory()->createNew();
+        }
+
+        $redirection->setSource($data['source']);
+        $redirection->setDestination($data['destination']);
+        $redirection->setPermanent(true);
+
+        return $redirection;
+    }
+
     /**
      * @return EntityManager|object
      */
