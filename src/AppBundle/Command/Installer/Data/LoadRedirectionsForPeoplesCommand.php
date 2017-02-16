@@ -43,13 +43,10 @@ class LoadRedirectionsForPeoplesCommand extends AbstractLoadRedirectionsCommand
 
         $i = 0;
 
-        foreach ($this->createListQueryBuilder()->getQuery()->iterate() as $row) {
-            /** @var Person $person */
-            $person = $row[0];
+        foreach ($this->getPeople() as $data) {
+            $output->writeln(sprintf("Loading redirection for <comment>%s</comment> page", $data['source']));
 
-            $output->writeln(sprintf("Loading redirection for <comment>%s</comment> person", '/'.$person->getFullName()));
-
-            $redirect = $this->createOrReplaceRedirectionForPerson($person);
+            $redirect = $this->createOrReplaceRedirection($data);
             $this->getManager()->persist($redirect);
 
             if (($i % self::BATCH_SIZE) === 0) {
@@ -63,51 +60,24 @@ class LoadRedirectionsForPeoplesCommand extends AbstractLoadRedirectionsCommand
         $this->getManager()->flush();
         $this->getManager()->clear();
 
-        $output->writeln(sprintf("<info>%s</info>", "Redirects for products have been successfully loaded."));
+        $output->writeln(sprintf("<info>%s</info>", "Redirects for people have been successfully loaded."));
     }
 
     /**
-     * @return \Doctrine\ORM\QueryBuilder
+     * @return array
      */
-    protected function createListQueryBuilder()
+    protected function getPeople()
     {
-        $queryBuilder = $this->getPersonRepository()->createQueryBuilder('o');
-        $queryBuilder
-            ->andWhere($queryBuilder->expr()->isNotNull('o.oldHref'));
+        $query = <<<EOM
+SELECT
+  concat('/', old.href)                AS source,
+  concat('/ludographie/', person.slug) AS destination
+FROM jedisjeux.jdj_personnes old
+  INNER JOIN jdj_person person
+    ON old.id = person.id
+EOM;
 
-        return $queryBuilder;
-    }
+        return $this->getManager()->getConnection()->fetchAll($query);
 
-    /**
-     * @param Person $person
-     *
-     * @return Redirection
-     */
-    protected function createOrReplaceRedirectionForPerson(Person $person)
-    {
-        $oldHref = '/'.$person->getOldHref();
-
-        /** @var Redirection $redirection */
-        $redirection = $this->getRepository()->findOneBy(['source' => $oldHref]);
-
-        if (null === $redirection) {
-            $redirection = $this->getFactory()->createNew();
-        }
-
-        $destination = $this->getRooter()->generate('app_frontend_person_show', ['slug' => $person->getSlug()]);
-
-        $redirection->setSource($oldHref);
-        $redirection->setDestination($destination);
-        $redirection->setPermanent(true);
-
-        return $redirection;
-    }
-
-    /**
-     * @return EntityRepository|object
-     */
-    protected function getPersonRepository()
-    {
-        return $this->getContainer()->get('app.repository.person');
     }
 }
