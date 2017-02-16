@@ -1,34 +1,28 @@
-app_person:
-    resource: |
-        alias: app.person
-        path: /ludographies
-        templates: :frontend/person
-        redirect: index
-    type: sylius.resource
-
-app_person_index:
+app_frontend_person_index:
     methods: [GET]
     path: /ludographies/
     defaults:
       _controller: app.controller.person:indexWithTaxonsAction
       _sylius:
         template: frontend/person/index.html.twig
+        section: frontend
         grid: app_frontend_person
         paginate: 16
 
-app_person_index_by_taxon:
+app_frontend_person_index_by_taxon:
     methods: [GET]
     path: /ludographies/{permalink}
     defaults:
         _controller: app.controller.person:indexByTaxonAction
         _sylius:
             template: frontend/person/index.html.twig
+            section: frontend
             grid: app_frontend_person_from_taxon
             paginate: 16
     requirements:
         permalink: "[^?]+"
 
-app_person_show:
+app_frontend_person_show:
     methods: [GET]
     path: /ludographie/{slug}
     defaults:

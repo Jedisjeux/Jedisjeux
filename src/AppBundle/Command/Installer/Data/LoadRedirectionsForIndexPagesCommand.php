@@ -94,7 +94,7 @@ class LoadRedirectionsForIndexPagesCommand extends AbstractLoadRedirectionsComma
             ],
             [
                 'source' => '/ludographie.php',
-                'destination' => $this->getRooter()->generate('app_person_index'),
+                'destination' => $this->getRooter()->generate('app_frontend_person_index'),
             ],
             [
                 'source' => '/jeux_accueil.php',
