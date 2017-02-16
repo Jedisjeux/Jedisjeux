@@ -11,21 +11,21 @@
                     <li>
                         Un jeu de
                         {% for key, person in jeu.designers %}{% if (key > 0) %},{% endif %} <a
-                            href="{{ path('app_person_show', { 'slug': person.slug }) }}">{{ person }}</a>{% endfor %}
+                            href="{{ path('app_frontend_person_show', { 'slug': person.slug }) }}">{{ person }}</a>{% endfor %}
                     </li>
                 {% endif %}
                 {% if jeu.artists|length > 0 %}
                     <li>
                         illustré{% if jeu.artists|length > 1 %}s{% endif %} par
                         {% for key, person in jeu.artists %}{% if (key > 0) %},{% endif %} <a
-                            href="{{ path('app_person_show', { 'slug': person.slug }) }}">{{ person }}</a>{% endfor %}
+                            href="{{ path('app_frontend_person_show', { 'slug': person.slug }) }}">{{ person }}</a>{% endfor %}
                     </li>
                 {% endif %}
                 {% if jeu.publishers|length > 0 %}
                     <li>
                         édité{% if jeu.publishers|length > 1 %}s{% endif %} par
                         {% for key, person in jeu.publishers %}{% if (key > 0) %},{% endif %} <a
-                            href="{{ path('app_person_show', { 'slug': person.slug }) }}">{{ person }}</a>{% endfor %}
+                            href="{{ path('app_frontend_person_show', { 'slug': person.slug }) }}">{{ person }}</a>{% endfor %}
                     </li>
                 {% endif %}
             </ul>

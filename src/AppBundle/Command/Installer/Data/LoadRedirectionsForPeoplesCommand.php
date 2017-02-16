@@ -94,7 +94,7 @@ class LoadRedirectionsForPeoplesCommand extends AbstractLoadRedirectionsCommand
             $redirection = $this->getFactory()->createNew();
         }
 
-        $destination = $this->getRooter()->generate('app_person_show', ['slug' => $person->getSlug()]);
+        $destination = $this->getRooter()->generate('app_frontend_person_show', ['slug' => $person->getSlug()]);
 
         $redirection->setSource($oldHref);
         $redirection->setDestination($destination);
