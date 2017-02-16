@@ -1,6 +1,6 @@
 {% macro getPath(topic) %}{% spaceless %}
     {% if topic.gamePlay %}
-        {% set linkUrl = path('app_game_play_show', {'productSlug': topic.gamePlay.product.slug, 'id': topic.gamePlay.id }) %}
+        {% set linkUrl = path('app_frontend_game_play_show', {'productSlug': topic.gamePlay.product.slug, 'id': topic.gamePlay.id }) %}
     {% elseif topic.article %}
         {% set linkUrl = path('app_frontend_article_show', {'name': topic.article.name}) %}
     {% else %}
