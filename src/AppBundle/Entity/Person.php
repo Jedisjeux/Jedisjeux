@@ -82,6 +82,13 @@ class Person implements ResourceInterface
     private $slug;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=false)
+     */
+    protected $oldHref;
+
+    /**
      * @var PersonImage[]|Collection
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\PersonImage", mappedBy="person", cascade={"persist", "merge"})
@@ -319,6 +326,26 @@ class Person implements ResourceInterface
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOldHref()
+    {
+        return $this->oldHref;
+    }
+
+    /**
+     * @param string $oldHref
+     *
+     * @return $this
+     */
+    public function setOldHref($oldHref)
+    {
+        $this->oldHref = $oldHref;
+
+        return $this;
     }
 
     /**

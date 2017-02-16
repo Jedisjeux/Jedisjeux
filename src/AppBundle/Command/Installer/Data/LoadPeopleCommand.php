@@ -35,21 +35,21 @@ class LoadPeopleCommand extends LoadCommand
     public function getRows()
     {
         $query = <<<EOM
-select      old.id,
-            case
-                when old.nom_famille = '' then old.nom
-                else old.nom_famille
-            end as lastName,
-            old.prenom as firstName,
-            old.siteweb as website,
-            old.description as description,
-            country.id as country_id
-from        jedisjeux.jdj_personnes old
-left join   jdj_country country
-                on CONVERT(country.name USING utf8) = CONVERT(old.nationnalite USING utf8)
-where       old.id <>14
-and         (old.nom_famille <> '' or old.nom <> '')
-order by    old.id
+SELECT
+  old.id,
+  CASE
+  WHEN old.nom_famille = ''
+    THEN old.nom
+  ELSE old.nom_famille
+  END             AS lastName,
+  old.prenom      AS firstName,
+  old.siteweb     AS website,
+  old.description AS description,
+  old.href        AS oldHref
+FROM jedisjeux.jdj_personnes old
+WHERE old.id <> 14
+      AND (old.nom_famille <> '' OR old.nom <> '')
+ORDER BY old.id
 EOM;
 
         return $this->getDatabaseConnection()->fetchAll($query);
@@ -85,7 +85,7 @@ EOM;
     }
 
     /**
-     * @return Factory
+     * @return Factory|object
      */
     public function getFactory()
     {
