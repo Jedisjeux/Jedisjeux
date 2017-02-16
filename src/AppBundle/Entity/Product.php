@@ -146,13 +146,6 @@ class Product extends BaseProduct implements ReviewableInterface
     protected $viewCount = 0;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(type="string", nullable=false)
-     */
-    protected $oldHref;
-
-    /**
      * @var ArrayCollection
      */
     protected $reviews;
@@ -614,26 +607,6 @@ class Product extends BaseProduct implements ReviewableInterface
     public function setViewCount($viewCount)
     {
         $this->viewCount = $viewCount;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getOldHref()
-    {
-        return $this->oldHref;
-    }
-
-    /**
-     * @param string $oldHref
-     *
-     * @return $this
-     */
-    public function setOldHref($oldHref)
-    {
-        $this->oldHref = $oldHref;
 
         return $this;
     }

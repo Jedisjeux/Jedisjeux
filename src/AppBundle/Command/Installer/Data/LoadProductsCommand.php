@@ -137,6 +137,7 @@ class LoadProductsCommand extends ContainerAwareCommand
     {
         /** @var ProductVariant $productVariant */
         $productVariant = $this->getProductVariantRepository()->findOneBy(['code' => $data['code']]);
+        /** @var Product $product */
         $product = null !== $productVariant ? $productVariant->getProduct() : null;
 
         if (null === $product) {
@@ -151,8 +152,9 @@ class LoadProductsCommand extends ContainerAwareCommand
         $data['materiel'] = !empty($data['materiel']) ? trim($data['materiel']) : null;
         $data['createdAt'] = \DateTime::createFromFormat('Y-m-d H:i:s', $data['createdAt']);
         $data['updatedAt'] = \DateTime::createFromFormat('Y-m-d H:i:s', $data['updatedAt']);
+        $product->getFirstVariant()->setOldHref(!empty($data['href']) ? $data['href'] : null);
         $data['releasedAt'] = $data['releasedAt'] ? \DateTime::createFromFormat('Y-m-d', $data['releasedAt']) : null;
-        $product->getMasterVariant()->setReleasedAtPrecision($this->getReleasedAtPrecision($data));
+        $product->getFirstVariant()->setReleasedAtPrecision($this->getReleasedAtPrecision($data));
         if (null !== $data['releasedAt']) {
             if (ProductVariant::RELEASED_AT_PRECISION_ON_MONTH === $product->getMasterVariant()->getReleasedAtPrecision()) {
                 $data['releasedAt'] = $data['releasedAt']->add(new \DateInterval('P1D'));
@@ -193,8 +195,7 @@ class LoadProductsCommand extends ContainerAwareCommand
             ->setJoueurMin($data['joueurMin'])
             ->setJoueurMax($data['joueurMax'])
             ->setMateriel($data['materiel'])
-            ->setStatus($data['status'])
-            ->setOldHref($data['href']);
+            ->setStatus($data['status']);
 
         $product->getMasterVariant()->setCode($data['code']);
         $product->getMasterVariant()->setName($data['name']);
@@ -359,6 +360,7 @@ EOM;
 
         $productVariant->setCode($data['code']);
         $productVariant->setName($data['name']);
+        $productVariant->setOldHref(!empty($data['href']) ? $data['href'] : null);
         $productVariant->setCreatedAt(\DateTime::createFromFormat('Y-m-d H:i:s', $data['createdAt']));
         $productVariant->setReleasedAt($data['releasedAt'] ? \DateTime::createFromFormat('Y-m-d', $data['releasedAt']) : null);
         $productVariant->setReleasedAtPrecision($this->getReleasedAtPrecision($data));
