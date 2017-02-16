@@ -55,6 +55,13 @@ class ProductVariant extends BaseProductVariant
     protected $releasedAtPrecision;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=false)
+     */
+    protected $oldHref;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Person", inversedBy="designerProducts", cascade={"persist", "merge"})
@@ -254,6 +261,28 @@ class ProductVariant extends BaseProductVariant
 
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getOldHref()
+    {
+        return $this->oldHref;
+    }
+
+    /**
+     * @param string $oldHref
+     *
+     * @return $this
+     */
+    public function setOldHref($oldHref)
+    {
+        $this->oldHref = $oldHref;
+
+        return $this;
+    }
+
+
 
     /**
      * @return \Doctrine\Common\Collections\Collection

@@ -1,3 +1,5 @@
+# see https://github.com/kbond/ZenstruckRedirectBundle/blob/master/README.md
+
 zenstruck_redirect:
     redirect_class: AppBundle\Entity\Redirection
     not_found_class: AppBundle\Entity\NotFound

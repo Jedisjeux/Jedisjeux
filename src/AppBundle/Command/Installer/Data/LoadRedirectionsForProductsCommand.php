@@ -12,6 +12,7 @@
 namespace AppBundle\Command\Installer\Data;
 
 use AppBundle\Entity\Product;
+use AppBundle\Entity\ProductVariant;
 use AppBundle\Entity\Redirection;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
@@ -49,10 +50,12 @@ class LoadRedirectionsForProductsCommand extends ContainerAwareCommand
         $i = 0;
 
         foreach ($this->createListQueryBuilder()->getQuery()->iterate() as $row) {
-            /** @var Product $product */
-            $product = $row[0];
+            /** @var ProductVariant $productVariant */
+            $productVariant = $row[0];
 
-            $redirect = $this->createOrReplaceRedirectionForProduct($product);
+            $output->writeln(sprintf("Loading redirection for <comment>%s</comment> url", '/'.$productVariant->getOldHref()));
+
+            $redirect = $this->createOrReplaceRedirectionForProductVariant($productVariant);
             $this->getManager()->persist($redirect);
 
             if (($i % self::BATCH_SIZE) === 0) {
@@ -74,7 +77,7 @@ class LoadRedirectionsForProductsCommand extends ContainerAwareCommand
      */
     protected function createListQueryBuilder()
     {
-        $queryBuilder = $this->getProductRepository()->createQueryBuilder('o');
+        $queryBuilder = $this->getProductVariantRepository()->createQueryBuilder('o');
         $queryBuilder
             ->andWhere($queryBuilder->expr()->isNotNull('o.oldHref'));
 
@@ -82,13 +85,13 @@ class LoadRedirectionsForProductsCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param Product $product
+     * @param ProductVariant $productVariant
      *
      * @return Redirection
      */
-    protected function createOrReplaceRedirectionForProduct(Product $product)
+    protected function createOrReplaceRedirectionForProductVariant(ProductVariant $productVariant)
     {
-        $oldHref = '/'.$product->getOldHref();
+        $oldHref = '/'.$productVariant->getOldHref();
 
         /** @var Redirection $redirection */
         $redirection = $this->getRepository()->findOneBy(['source' => $oldHref]);
@@ -99,7 +102,7 @@ class LoadRedirectionsForProductsCommand extends ContainerAwareCommand
 
         /** @var Router $router */
         $router = $this->getContainer()->get('router');
-        $destination = $router->generate('sylius_product_show', ['slug' => $product->getSlug()]);
+        $destination = $router->generate('sylius_product_show', ['slug' => $productVariant->getProduct()->getSlug()]);
 
         $redirection->setSource($oldHref);
         $redirection->setDestination($destination);
@@ -135,9 +138,9 @@ class LoadRedirectionsForProductsCommand extends ContainerAwareCommand
     /**
      * @return EntityRepository|object
      */
-    protected function getProductRepository()
+    protected function getProductVariantRepository()
     {
-        return $this->getContainer()->get('sylius.repository.product');
+        return $this->getContainer()->get('sylius.repository.product_variant');
     }
 
     /**
