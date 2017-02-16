@@ -10,14 +10,14 @@
  */
 
 namespace AppBundle\Command\Installer\Data;
-
+use AppBundle\Entity\Redirection;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class LoadRedirectionsForReviewArticlesCommand extends AbstractLoadRedirectionsCommand
+class LoadRedirectionsForNewsCommand extends AbstractLoadRedirectionsCommand
 {
     const BATCH_SIZE = 20;
 
@@ -27,8 +27,8 @@ class LoadRedirectionsForReviewArticlesCommand extends AbstractLoadRedirectionsC
     protected function configure()
     {
         $this
-            ->setName('app:redirections-for-review-articles:load')
-            ->setDescription('Load all redirections for review articles');
+            ->setName('app:redirections-for-news:load')
+            ->setDescription('Load all redirections for news');
     }
 
     /**
@@ -40,8 +40,8 @@ class LoadRedirectionsForReviewArticlesCommand extends AbstractLoadRedirectionsC
 
         $i = 0;
 
-        foreach ($this->getReviewArticles() as $data) {
-            $output->writeln(sprintf("Loading redirection for <comment>%s</comment> page", $data['source']));
+        foreach ($this->getNews() as $data) {
+            $output->writeln(sprintf("Loading redirection for <comment>%s</comment> news", $data['source']));
 
             $redirect = $this->createOrReplaceRedirection($data);
             $this->getManager()->persist($redirect);
@@ -57,23 +57,21 @@ class LoadRedirectionsForReviewArticlesCommand extends AbstractLoadRedirectionsC
         $this->getManager()->flush();
         $this->getManager()->clear();
 
-        $output->writeln(sprintf("<info>%s</info>", "Redirects for pages have been successfully loaded."));
+        $output->writeln(sprintf("<info>%s</info>", "Redirects for news have been successfully loaded."));
     }
 
     /**
      * @return array
      */
-    protected function getReviewArticles()
+    protected function getNews()
     {
         $query = <<<EOM
 SELECT
-  concat('/', replace(oldGame.mot_cle, ' ', '-'), '-t-', old.game_id, '.html') AS source,
+  concat('/', replace(old.titre_clean, ' ', '-'), '-n-', old.news_id, '.html') AS source,
   concat('/article/', article.name)                                            AS destination
-FROM jedisjeux.jdj_tests old
-  INNER JOIN jedisjeux.jdj_game oldGame
-    ON oldGame.id = old.game_id
+FROM jedisjeux.jdj_news old
   INNER JOIN jdj_article article
-    ON article.code = concat('review-article-', old.game_id)
+    ON article.code = concat('news-', old.news_id)
 EOM;
 
         return $this->getManager()->getConnection()->fetchAll($query);
