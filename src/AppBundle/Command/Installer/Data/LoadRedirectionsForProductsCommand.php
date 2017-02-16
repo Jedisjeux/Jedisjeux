@@ -26,7 +26,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class LoadRedirectionsForProductsCommand extends ContainerAwareCommand
+class LoadRedirectionsForProductsCommand extends AbstractLoadRedirectionsCommand
 {
     const BATCH_SIZE = 20;
 
@@ -100,9 +100,7 @@ class LoadRedirectionsForProductsCommand extends ContainerAwareCommand
             $redirection = $this->getFactory()->createNew();
         }
 
-        /** @var Router $router */
-        $router = $this->getContainer()->get('router');
-        $destination = $router->generate('sylius_product_show', ['slug' => $productVariant->getProduct()->getSlug()]);
+        $destination = $this->getRooter()->generate('sylius_product_show', ['slug' => $productVariant->getProduct()->getSlug()]);
 
         $redirection->setSource($oldHref);
         $redirection->setDestination($destination);
@@ -112,42 +110,10 @@ class LoadRedirectionsForProductsCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return EntityManager|object
-     */
-    protected function getManager()
-    {
-        return $this->getContainer()->get('doctrine.orm.entity_manager');
-    }
-
-    /**
-     * @return EntityRepository|object
-     */
-    protected function getRepository()
-    {
-        return $this->getContainer()->get('app.repository.redirection');
-    }
-
-    /**
-     * @return FactoryInterface|object
-     */
-    protected function getFactory()
-    {
-        return $this->getContainer()->get('app.factory.redirection');
-    }
-
-    /**
      * @return EntityRepository|object
      */
     protected function getProductVariantRepository()
     {
         return $this->getContainer()->get('sylius.repository.product_variant');
-    }
-
-    /**
-     * @return Router|object
-     */
-    protected function getRooter()
-    {
-        return $this->getContainer()->get('router');
     }
 }
