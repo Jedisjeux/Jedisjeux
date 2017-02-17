@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
 
     "use strict";
 
@@ -7,7 +7,7 @@ $(function() {
 
     //initializeAjaxForm(successMessage);
 
-    $(".rating").each(function() {
+    $(".rating").each(function () {
         $(this).rate({
             max_value: $(this).attr("data-max-value"),
             readonly: $(this).attr("data-readonly"),
@@ -24,7 +24,7 @@ $(function() {
         });
     });
 
-    $('.rating.rate').on("change", function(event, data) {
+    $('.rating.rate').on("change", function (event, data) {
 
         var rateValue = $(this).attr('data-rate-value');
         var productId = $(this).attr('data-product-id');
@@ -41,14 +41,17 @@ $(function() {
         }
 
         $.ajax({
-            url: Routing.generate(routeName, { 'productId': productId }),
+            url: Routing.generate(routeName, {'productId': productId}),
             type: type,
             data: {'rating': newRateValue},
-            success: function(data, textStatus, xhr) {
+            success: function (data, textStatus, xhr) {
+                if (xhr.status === 201) {
+                    updateProductReviewButtonPath(productId, data.id);
+                }
                 appendFlash(successMessage);
             },
-            error: function(xhr, textStatus, errorThrown) {
-                if(xhr.status===401) {
+            error: function (xhr, textStatus, errorThrown) {
+                if (xhr.status === 401) {
                     //handle error
                     window.location.replace('/login');
                 } else {
@@ -58,8 +61,14 @@ $(function() {
         });
     });
 
+    function updateProductReviewButtonPath(productId, resourceId) {
+        $('#productReviewButton').attr('href', Routing.generate('sylius_product_review_update', {
+            'productId': productId, 'id': resourceId
+        }));
+    }
+
     function initializeAjaxForm(successMessage, messageHolderSelector) {
-        $ratingForm.submit(function(e) {
+        $ratingForm.submit(function (e) {
             e.preventDefault();
             var form = $(this);
 
@@ -69,11 +78,11 @@ $(function() {
                 data: parseFormToJson(form),
                 dataType: "json",
                 accept: "application/json",
-                success: function(data, textStatus, xhr) {
+                success: function (data, textStatus, xhr) {
                     completeRequest(form);
                     appendFlash(successMessage, messageHolderSelector);
                 },
-                error: function(xhr, textStatus, errorThrown) {
+                error: function (xhr, textStatus, errorThrown) {
                     renderErrors(xhr, form);
                 }
             });
@@ -83,7 +92,7 @@ $(function() {
     function renderErrors(xhr, form) {
         clearErrors(form);
 
-        $.each(xhr.responseJSON.errors.errors, function(key, value) {
+        $.each(xhr.responseJSON.errors.errors, function (key, value) {
             $('div.panel-body').addClass('has-error').prepend('<span class="help-block form-error">' + value + '</span>');
         });
     }
@@ -95,7 +104,7 @@ $(function() {
 
     function parseFormToJson(form) {
         var formJson = {};
-        $.each(form.serializeArray(), function(index, field) {
+        $.each(form.serializeArray(), function (index, field) {
             var name = field.name.replace('sylius_product_review[', '').replace(']', '');
             formJson[name] = field.value || '';
         });
@@ -112,7 +121,7 @@ $(function() {
     function completeRequest(form) {
         form[0].reset();
         clearErrors(form);
-        $("html, body").animate({ scrollTop: 0 }, "slow");
+        $("html, body").animate({scrollTop: 0}, "slow");
     }
 
 });
