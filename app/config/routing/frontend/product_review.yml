@@ -23,6 +23,8 @@ sylius_product_review_update:
                 method: findOneBy
                 arguments: [{id: $id, author: expr:service('app.context.customer').getCustomer()}]
             redirect: referer
+    options:
+        expose: true
 
 sylius_product_rating_create:
     path: /rating/new
