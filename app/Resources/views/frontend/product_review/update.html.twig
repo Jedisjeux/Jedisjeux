@@ -12,11 +12,12 @@
 
 {% block container %}
     {{ form_start(form) }}
+    <input type="hidden" name="_method" value="PUT"/>
 
     {% include 'frontend/product_review/_form.html.twig' %}
 
     <div class="pull-right">
-        {{ actions.create() }}
+        {{ actions.update() }}
     </div>
 
     <div class="clearfix"></div>
