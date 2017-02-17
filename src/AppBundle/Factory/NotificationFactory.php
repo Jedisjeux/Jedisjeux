@@ -86,7 +86,7 @@ class NotificationFactory implements FactoryInterface
         /** TODO only set topic and move target and message in a post notification manager */
         $notification
             ->setTopic($post->getTopic())
-            ->setTarget($this->router->generate('app_post_index_by_topic', ['topicId' => $post->getTopic()->getId()]))
+            ->setTarget($this->router->generate('app_frontend_post_index_by_topic', ['topicId' => $post->getTopic()->getId()]))
             ->setMessage($this->translator->trans('text.notification.topic_reply', [
                 '%USERNAME%' => $post->getAuthor(),
                 '%TOPIC_NAME%' => $post->getTopic()->getTitle(),

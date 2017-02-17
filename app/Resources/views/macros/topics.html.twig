@@ -4,7 +4,7 @@
     {% elseif topic.article %}
         {% set linkUrl = path('app_frontend_article_show', {'name': topic.article.name}) %}
     {% else %}
-        {% set linkUrl = path('app_post_index_by_topic', {'topicId': topic.id}) %}
+        {% set linkUrl = path('app_frontend_post_index_by_topic', {'topicId': topic.id}) %}
     {% endif %}
 
     {{ linkUrl }}

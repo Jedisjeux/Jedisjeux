@@ -6,7 +6,7 @@ app_frontend_topic_create:
         _sylius:
             template: frontend/topic/create.html.twig
             redirect:
-                route: app_post_index_by_topic
+                route: app_frontend_post_index_by_topic
                 parameters: { topicId: resource.id }
 
 app_frontend_topic_index:
@@ -34,7 +34,7 @@ app_frontend_topic_update:
                 method: findOneBy
                 arguments: [{id: $id, author: expr:service('app.context.customer').getCustomer()}]
             redirect:
-                route: app_post_index_by_topic
+                route: app_frontend_post_index_by_topic
                 parameters: { topicId: $id }
             template: frontend/topic/update.html.twig
 

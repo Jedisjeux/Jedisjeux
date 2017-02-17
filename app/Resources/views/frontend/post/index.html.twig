@@ -41,7 +41,7 @@
 
             {{ pagination(posts) }}
 
-            {{ pageViews.render(topic.id, 'topic', path('app_post_index_by_topic', {'topicId' : topic.id})) }}
+            {{ pageViews.render(topic.id, 'topic', path('app_frontend_post_index_by_topic', {'topicId' : topic.id})) }}
         </div>
 
     </div>
