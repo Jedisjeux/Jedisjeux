@@ -67,6 +67,9 @@ var paths = {
             vendorUiPath + 'Resources/private/img/**',
             'img/**'
         ],
+        css_img: [
+            bowerComponentsPath + 'fancybox/source/helpers/*.png'
+        ],
         font: [
             nodeModulesPath + 'font-awesome/fonts/**',
             bundlesPath + 'mopabootstrap/fonts/**'
@@ -112,6 +115,14 @@ gulp.task('shop-img', function() {
     ;
 });
 
+
+gulp.task('shop-css-img', function() {
+    return gulp.src(paths.shop.css_img)
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest(shopRootPath + 'css/'))
+        ;
+});
+
 gulp.task('shop-font', function() {
   return gulp.src(paths.shop.font)
     .pipe(sourcemaps.write('./'))
@@ -126,8 +137,9 @@ gulp.task('shop-watch', function() {
     gulp.watch(paths.shop.sass, ['shop-css']);
     gulp.watch(paths.shop.css, ['shop-css']);
     gulp.watch(paths.shop.img, ['shop-img']);
+    gulp.watch(paths.shop.img, ['shop-css-img']);
     gulp.watch(paths.shop.font, ['shop-font']);
 });
 
-gulp.task('default', ['shop-js', 'shop-css', 'shop-img', 'shop-font']);
+gulp.task('default', ['shop-js', 'shop-css', 'shop-img', 'shop-css-img', 'shop-font']);
 gulp.task('watch', ['default', 'shop-watch']);
