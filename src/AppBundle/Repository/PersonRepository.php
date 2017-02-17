@@ -30,6 +30,13 @@ class PersonRepository extends EntityRepository
             ->leftJoin('o.artistProducts', 'artistProduct')
             ->leftJoin('o.publisherProducts', 'publisherProduct');
 
+        $queryBuilder->addSelect($queryBuilder->expr()->sum(
+            "SIZE(o.designerProducts)",
+            "SIZE(o.publisherProducts)",
+            "SIZE(o.artistProducts)") .
+        " as HIDDEN gameCount");
+        $queryBuilder->addOrderBy("gameCount", 'desc');
+
         if ($taxon) {
             $queryBuilder
                 ->innerJoin('o.taxons', 'taxon')
