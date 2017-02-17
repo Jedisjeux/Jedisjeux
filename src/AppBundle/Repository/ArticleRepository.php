@@ -21,7 +21,9 @@ class ArticleRepository extends EntityRepository
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder
             ->select('o, topic, product, productVariant, productTranslation')
+            ->addSelect('gamePlay')
             ->leftJoin('o.topic', 'topic')
+            ->leftJoin('topic.gamePlay', 'gamePlay')
             ->leftJoin('o.product', 'product')
             ->leftJoin('product.variants', 'productVariant')
             ->leftJoin('product.translations', 'productTranslation');
@@ -57,6 +59,8 @@ class ArticleRepository extends EntityRepository
     {
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
+            ->addSelect('taxon')
+            ->addSelect('taxonTranslation')
             ->innerJoin('o.mainTaxon', 'taxon')
             ->innerJoin('taxon.translations', 'taxonTranslation');
 
@@ -116,7 +120,10 @@ class ArticleRepository extends EntityRepository
     {
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
+            ->addSelect('taxon')
+            ->addSelect('taxonTranslation')
             ->innerJoin('o.mainTaxon', 'taxon')
+            ->innerJoin('taxon.translations', 'taxonTranslation')
             ->andWhere($queryBuilder->expr()->orX(
                 'taxon = :taxon',
                 ':left < taxon.left AND taxon.right < :right'
