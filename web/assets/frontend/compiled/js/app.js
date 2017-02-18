@@ -12967,6 +12967,516 @@ $(function () {
 
   });
 });
+$(function() {
+
+    "use strict";
+
+    var $form = $('form[name=jdj_comptabundle_bill_payment]');
+
+    if ($form.length > 0) {
+        /**
+         * datePickers from the form
+         */
+        $('.billPaymentPaidAt').datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+    }
+
+});
+$(function() {
+
+    "use strict";
+
+    /**
+     * datePickers from the form
+     */
+    $('#jdj_comptabundle_book_entry_activeAt').datetimepicker({
+        format: 'YYYY-MM-DD'
+    });
+});
+$(document).ready(function () {
+
+    /**
+     * This function displays a success notification
+     *
+     * @param message
+     */
+    window.notifySuccess = function(message) {
+
+        $('.message-notify', '#notify').html(message);
+
+        $('#notify')
+            .removeClass('alert-danger')
+            .addClass('alert-success')
+            .show()
+            .delay(5000)
+            .fadeOut();
+
+        $('html, body').animate({ scrollTop: 0 }, 'fast');
+
+
+    };
+
+
+    /**
+     * This function displays an error notification
+     *
+     * @param message
+     */
+    window.notifyError = function(message) {
+
+        $('.message-notify', '#notify').html(message);
+
+        $('#notify')
+            .removeClass('alert-success')
+            .addClass('alert-danger')
+            .show()
+            .delay(5000)
+            .fadeOut();
+
+        $('html, body').animate({ scrollTop: 0 }, 'fast');
+    };
+
+    $('.datetime').datetimepicker({
+        format: 'YYYY-MM-DD'
+    });
+});
+$(function() {
+
+    "use strict";
+
+    /**
+     * datePickers for the form
+     */
+    $('.date').datetimepicker({
+        format: 'YYYY-MM-DD'
+    });
+
+    $('.time').datetimepicker({
+        format: 'LT'
+    })
+});
+/* ************** */
+/* Magnific Popup */
+/* ************** */
+
+$(document).ready(function() {
+    $(".fancybox").fancybox({
+        prevEffect		: 'none',
+        nextEffect		: 'none',
+        closeBtn		: false,
+        autoPlay        : true,
+        helpers		: {
+            title	: { type : 'inside' },
+            buttons	: {}
+        }
+    });
+});
+$(function() {
+    $( document ).on( 'click','.likeButton',function() {
+        var $likeButton = $(this);
+        var $form = $likeButton.closest('form');
+        var userReview = $('.userReview', $form).val();
+        var comment = $('.comment', $form).val();
+
+        var like = 0;
+        if ($likeButton.hasClass('likeIt')) {
+            like = 1;
+        }
+
+        $('.like', $form).val(like);
+
+        $.post($form.attr('action'), $form.serialize())
+            .done(function (response) {
+
+                /**
+                 * disable active state on other buttons
+                 */
+                $likeButton
+                    .siblings()
+                    .removeClass('btn-yellow')
+                    .addClass('btn-default');
+
+                /**
+                 * enable active state on clicked button
+                 */
+                $likeButton
+                    .removeClass('btn-default')
+                    .addClass('btn-yellow');
+
+                /**
+                 * update nbLikes and nbDislikes on userReview
+                 */
+                if(userReview)
+                {
+                    $('.nbLikes[data-user-review=' + userReview + ']').html(response.nbLikes);
+                    $('.nbDislikes[data-user-review=' + userReview + ']').html(response.nbDislikes);
+                }
+
+                /**
+                 * update nbLikes and nbDislikes on comment
+                 */
+                if(comment)
+                {
+                    $('.nbLikes[data-comment=' + comment + ']').html(response.nbLikes);
+                    $('.nbDislikes[data-comment=' + comment + ']').html(response.nbDislikes);
+                }
+
+            });
+    });
+});
+/**
+ * Created by mfoussette on 06/02/2015.
+ */
+/**
+ * Démarrage du spinner
+ */
+function startSpinner() {
+    $('.loading').show().addClass('display-flex');
+}
+
+/**
+ * Arrêt du spinner
+ */
+function stopSpinner() {
+    $('.loading').hide();
+}
+
+/**
+ * Gestion du spinner en fonction des appels ajax
+ */
+function manageAjaxEvent() {
+    $(document).ajaxComplete(function (event, request, settings) {
+        stopSpinner();
+    });
+
+    $(document).ajaxSend(function (event, request, settings) {
+        startSpinner();
+    });
+
+    $(document).ajaxError(function (event, request, settings) {
+        stopSpinner();
+    });
+}
+
+//manageAjaxEvent();
+
+
+$(function () {
+    $('.multiple-select').select2({ width: '100%' });
+
+});
+$(function () {
+
+  var $notificationBlock = $('#notificationBlock');
+
+  if ($notificationBlock.length > 0) {
+
+    var $notificationItemClone = $('.notificationItem', $notificationBlock).clone();
+
+    function readNotification($a) {
+      $.ajax({
+        url: Routing.generate('app_api_notification_read', {'id': $a.attr('data-id')}),
+        type: 'PATCH',
+        success: function () {
+          window.location.replace($a.attr('data-target'));
+        },
+        error: function (xhr) {
+          if (xhr.status == 403) {
+            //handle error
+            window.location.replace(Routing.generate('fos_user_security_login'));
+          }
+        }
+      });
+    }
+
+    function refresh() {
+      $.get(Routing.generate('app_api_notification_index'), function (response) {
+        $('.notificationItem', $notificationBlock).remove();
+
+        $.each(response, function (index, entity) {
+          var $item = $notificationItemClone.clone();
+
+          $('.notificationMessage', $item).html(entity.message);
+          $('.notificationA', $item).attr('data-id', entity.id);
+          $('.notificationA', $item).attr('data-target', entity.target);
+          $('.notificationContainer', $notificationBlock).append($item);
+
+          $('.notificationA', $item).click(function (event) {
+            event.preventDefault();
+            readNotification($(this));
+          });
+        });
+
+        if (response.length > 0) {
+          $('.badge').show().html(response.length);
+        } else {
+          $('.badge').hide();
+        }
+      });
+
+      setTimeout(refresh, 10000);
+    }
+
+    refresh();
+  }
+});
+$(function () {
+
+    "use strict";
+
+    var $ratingForm = $('form[name=sylius_product_review_rating]');
+    var successMessage = "Votre note a bien été enregistrée.";
+
+    //initializeAjaxForm(successMessage);
+
+    $(".rating").each(function () {
+        $(this).rate({
+            max_value: $(this).attr("data-max-value"),
+            readonly: $(this).attr("data-readonly"),
+            selected_symbol_type: 'fontawesome_star',
+            update_input_field_name: $('#' + $(this).attr("data-update-input-field-name")),
+            step_size: $(this).attr("data-step-size"),
+            symbols: {
+                fontawesome_star: {
+                    base: '<i class="fa fa-star grey"></i>',
+                    hover: '<i class="fa fa-star yellow"></i>',
+                    selected: '<i class="fa fa-star yellow"></i>',
+                }
+            }
+        });
+    });
+
+    $('.rating.rate').on("change", function (event, data) {
+
+        var rateValue = $(this).attr('data-rate-value');
+        var productId = $(this).attr('data-product-id');
+        var routeName;
+        var type;
+        var newRateValue = data.to;
+
+        if (rateValue > 0) {
+            routeName = 'sylius_api_product_review_rating_update';
+            type = 'PUT';
+        } else {
+            routeName = 'sylius_api_product_review_rating_create';
+            type = 'POST';
+        }
+
+        $.ajax({
+            url: Routing.generate(routeName, {'productId': productId}),
+            type: type,
+            data: {'rating': newRateValue},
+            success: function (data, textStatus, xhr) {
+                if (xhr.status === 201) {
+                    updateProductReviewButtonPath(productId, data.id);
+                }
+                appendFlash(successMessage);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                if (xhr.status === 401) {
+                    //handle error
+                    window.location.replace('/login');
+                } else {
+                    renderErrors(xhr);
+                }
+            }
+        });
+    });
+
+    function updateProductReviewButtonPath(productId, resourceId) {
+        $('#productReviewButton').attr('href', Routing.generate('sylius_product_review_update', {
+            'productId': productId, 'id': resourceId
+        }));
+    }
+
+    function initializeAjaxForm(successMessage, messageHolderSelector) {
+        $ratingForm.submit(function (e) {
+            e.preventDefault();
+            var form = $(this);
+
+            $.ajax({
+                type: "POST",
+                url: form.attr('action'),
+                data: parseFormToJson(form),
+                dataType: "json",
+                accept: "application/json",
+                success: function (data, textStatus, xhr) {
+                    completeRequest(form);
+                    appendFlash(successMessage, messageHolderSelector);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    renderErrors(xhr, form);
+                }
+            });
+        });
+    }
+
+    function renderErrors(xhr, form) {
+        clearErrors(form);
+
+        $.each(xhr.responseJSON.errors.errors, function (key, value) {
+            $('div.panel-body').addClass('has-error').prepend('<span class="help-block form-error">' + value + '</span>');
+        });
+    }
+
+    function clearErrors(form) {
+        form.find('.form-error').remove();
+        form.find('.has-error').removeClass('has-error');
+    }
+
+    function parseFormToJson(form) {
+        var formJson = {};
+        $.each(form.serializeArray(), function (index, field) {
+            var name = field.name.replace('sylius_product_review[', '').replace(']', '');
+            formJson[name] = field.value || '';
+        });
+
+        return formJson;
+    }
+
+    function appendFlash(successMessage, messageHolderSelector) {
+        messageHolderSelector = messageHolderSelector ? messageHolderSelector : '#flashes';
+
+        $(messageHolderSelector).html('<div class="alert alert-success"><a class="close" data-dismiss="alert" href="#">×</a>' + successMessage + '</div>');
+    }
+
+    function completeRequest(form) {
+        form[0].reset();
+        clearErrors(form);
+        $("html, body").animate({scrollTop: 0}, "slow");
+    }
+
+});
+$(function() {
+    // Javascript to enable link to tab
+    var url = document.location.toString();
+    if (url.match('#')) {
+        $('.nav-tabs a[href=#'+url.split('#')[1]+']').tab('show') ;
+    }
+
+    // Change hash for page-reload
+    $('.nav-tabs a').on('shown', function (e) {
+        window.location.hash = e.target.hash;
+    })
+});
+$(document).ready(function () {
+
+    /**
+     * Handles click to display the modal
+     */
+    $("#submit-form-login-modal").click(function (e) {
+        e.preventDefault();
+
+        //authentification
+        checkLogin($('#formLoginModal'));
+
+        $('#login-form-modal').modal('hide');
+
+    });
+
+
+    /**
+     * Handles click to display the modal
+     */
+    $("#submit-form-login").click(function (e) {
+        e.preventDefault();
+
+        //authentification
+        checkLogin($('#formLogin'));
+
+    });
+
+    /**
+     * checks for the authentification
+     *
+     * @returns {boolean}
+     */
+    function checkLogin($form) {
+
+        var isLoggedIn = false;
+        $.ajax({
+            type        : $form.attr( 'method' ),
+            url         : $form.attr( 'action' ),
+            data        : $form.serialize(),
+            dataType    : 'json',
+            async       : false,
+            success: function (data) {
+                if (data.has_error == true) {
+                    //Login KO
+                    isLoggedIn = false;
+                }
+                else  {
+                    //login OK
+                    isLoggedIn = true;
+                }
+            }
+        });
+
+        console.log(isLoggedIn);
+
+        notifyLogin(isLoggedIn);
+
+    }
+
+
+    function notifyLogin(isLoggedIn)
+    {
+        if(isLoggedIn){
+            //Notify login
+            notifySuccess("Vous êtes connecté.");
+
+            //reload page
+            window.location
+                .reload()
+                .delay(3000)
+                .fadeOut();
+
+        } else {
+            notifyError("Problème de connexion.");
+        }
+
+    }
+
+});
+$.widget( "custom.imgcomplete", $.ui.autocomplete, {
+    _renderItem: function( ul, item ) {
+        return $( "<li>" )
+            .append( $('<a>')
+                .attr("href", item.href)
+                .append($('<img>')
+                    .addClass('img-responsive')
+                    .addClass('img-thumbnail')
+                    .attr('src', item.image)
+                )
+                .append($('<span>')
+                    .html(item.label)
+                )
+                .append($('<div>')
+                    .addClass('clearfix')
+                )
+            )
+            .appendTo( ul );
+    }
+});
+$(function() {
+
+    $( ".mainSearch" ).imgcomplete({
+        source: Routing.generate('app_api_search_autocomplete'),
+        minLength: 2,
+        delay: 100,
+        focus: function() {
+            // prevent value inserted on focus
+            return false;
+        },
+        select: function( event, ui ) {
+            window.location = ui.item.href;
+            // prevent value inserted on focus
+            return false;
+        }
+    });
+
+});
 $(document).ready(function () {
 
     initializeForms();
@@ -13436,515 +13946,5 @@ $(function() {
             scrollTop:$("#user-review").offset().top
         }, 'fast');
     }
-
-});
-$(document).ready(function () {
-
-    /**
-     * This function displays a success notification
-     *
-     * @param message
-     */
-    window.notifySuccess = function(message) {
-
-        $('.message-notify', '#notify').html(message);
-
-        $('#notify')
-            .removeClass('alert-danger')
-            .addClass('alert-success')
-            .show()
-            .delay(5000)
-            .fadeOut();
-
-        $('html, body').animate({ scrollTop: 0 }, 'fast');
-
-
-    };
-
-
-    /**
-     * This function displays an error notification
-     *
-     * @param message
-     */
-    window.notifyError = function(message) {
-
-        $('.message-notify', '#notify').html(message);
-
-        $('#notify')
-            .removeClass('alert-success')
-            .addClass('alert-danger')
-            .show()
-            .delay(5000)
-            .fadeOut();
-
-        $('html, body').animate({ scrollTop: 0 }, 'fast');
-    };
-
-    $('.datetime').datetimepicker({
-        format: 'YYYY-MM-DD'
-    });
-});
-$(function() {
-
-    "use strict";
-
-    /**
-     * datePickers for the form
-     */
-    $('.date').datetimepicker({
-        format: 'YYYY-MM-DD'
-    });
-
-    $('.time').datetimepicker({
-        format: 'LT'
-    })
-});
-/* ************** */
-/* Magnific Popup */
-/* ************** */
-
-$(document).ready(function() {
-    $(".fancybox").fancybox({
-        prevEffect		: 'none',
-        nextEffect		: 'none',
-        closeBtn		: false,
-        autoPlay        : true,
-        helpers		: {
-            title	: { type : 'inside' },
-            buttons	: {}
-        }
-    });
-});
-$(function() {
-    $( document ).on( 'click','.likeButton',function() {
-        var $likeButton = $(this);
-        var $form = $likeButton.closest('form');
-        var userReview = $('.userReview', $form).val();
-        var comment = $('.comment', $form).val();
-
-        var like = 0;
-        if ($likeButton.hasClass('likeIt')) {
-            like = 1;
-        }
-
-        $('.like', $form).val(like);
-
-        $.post($form.attr('action'), $form.serialize())
-            .done(function (response) {
-
-                /**
-                 * disable active state on other buttons
-                 */
-                $likeButton
-                    .siblings()
-                    .removeClass('btn-yellow')
-                    .addClass('btn-default');
-
-                /**
-                 * enable active state on clicked button
-                 */
-                $likeButton
-                    .removeClass('btn-default')
-                    .addClass('btn-yellow');
-
-                /**
-                 * update nbLikes and nbDislikes on userReview
-                 */
-                if(userReview)
-                {
-                    $('.nbLikes[data-user-review=' + userReview + ']').html(response.nbLikes);
-                    $('.nbDislikes[data-user-review=' + userReview + ']').html(response.nbDislikes);
-                }
-
-                /**
-                 * update nbLikes and nbDislikes on comment
-                 */
-                if(comment)
-                {
-                    $('.nbLikes[data-comment=' + comment + ']').html(response.nbLikes);
-                    $('.nbDislikes[data-comment=' + comment + ']').html(response.nbDislikes);
-                }
-
-            });
-    });
-});
-/**
- * Created by mfoussette on 06/02/2015.
- */
-/**
- * Démarrage du spinner
- */
-function startSpinner() {
-    $('.loading').show().addClass('display-flex');
-}
-
-/**
- * Arrêt du spinner
- */
-function stopSpinner() {
-    $('.loading').hide();
-}
-
-/**
- * Gestion du spinner en fonction des appels ajax
- */
-function manageAjaxEvent() {
-    $(document).ajaxComplete(function (event, request, settings) {
-        stopSpinner();
-    });
-
-    $(document).ajaxSend(function (event, request, settings) {
-        startSpinner();
-    });
-
-    $(document).ajaxError(function (event, request, settings) {
-        stopSpinner();
-    });
-}
-
-//manageAjaxEvent();
-
-
-$(function () {
-    $('.multiple-select').select2({ width: '100%' });
-
-});
-$(function () {
-
-  var $notificationBlock = $('#notificationBlock');
-
-  if ($notificationBlock.length > 0) {
-
-    var $notificationItemClone = $('.notificationItem', $notificationBlock).clone();
-
-    function readNotification($a) {
-      $.ajax({
-        url: Routing.generate('app_api_notification_read', {'id': $a.attr('data-id')}),
-        type: 'PATCH',
-        success: function () {
-          window.location.replace($a.attr('data-target'));
-        },
-        error: function (xhr) {
-          if (xhr.status == 403) {
-            //handle error
-            window.location.replace(Routing.generate('fos_user_security_login'));
-          }
-        }
-      });
-    }
-
-    function refresh() {
-      $.get(Routing.generate('app_api_notification_index'), function (response) {
-        $('.notificationItem', $notificationBlock).remove();
-
-        $.each(response, function (index, entity) {
-          var $item = $notificationItemClone.clone();
-
-          $('.notificationMessage', $item).html(entity.message);
-          $('.notificationA', $item).attr('data-id', entity.id);
-          $('.notificationA', $item).attr('data-target', entity.target);
-          $('.notificationContainer', $notificationBlock).append($item);
-
-          $('.notificationA', $item).click(function (event) {
-            event.preventDefault();
-            readNotification($(this));
-          });
-        });
-
-        if (response.length > 0) {
-          $('.badge').show().html(response.length);
-        } else {
-          $('.badge').hide();
-        }
-      });
-
-      setTimeout(refresh, 10000);
-    }
-
-    refresh();
-  }
-});
-$(function () {
-
-    "use strict";
-
-    var $ratingForm = $('form[name=sylius_product_review_rating]');
-    var successMessage = "Votre note a bien été enregistrée.";
-
-    //initializeAjaxForm(successMessage);
-
-    $(".rating").each(function () {
-        $(this).rate({
-            max_value: $(this).attr("data-max-value"),
-            readonly: $(this).attr("data-readonly"),
-            selected_symbol_type: 'fontawesome_star',
-            update_input_field_name: $('#' + $(this).attr("data-update-input-field-name")),
-            step_size: $(this).attr("data-step-size"),
-            symbols: {
-                fontawesome_star: {
-                    base: '<i class="fa fa-star grey"></i>',
-                    hover: '<i class="fa fa-star yellow"></i>',
-                    selected: '<i class="fa fa-star yellow"></i>',
-                }
-            }
-        });
-    });
-
-    $('.rating.rate').on("change", function (event, data) {
-
-        var rateValue = $(this).attr('data-rate-value');
-        var productId = $(this).attr('data-product-id');
-        var routeName;
-        var type;
-        var newRateValue = data.to;
-
-        if (rateValue > 0) {
-            routeName = 'sylius_api_product_review_rating_update';
-            type = 'PUT';
-        } else {
-            routeName = 'sylius_api_product_review_rating_create';
-            type = 'POST';
-        }
-
-        $.ajax({
-            url: Routing.generate(routeName, {'productId': productId}),
-            type: type,
-            data: {'rating': newRateValue},
-            success: function (data, textStatus, xhr) {
-                if (xhr.status === 201) {
-                    updateProductReviewButtonPath(productId, data.id);
-                }
-                appendFlash(successMessage);
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                if (xhr.status === 401) {
-                    //handle error
-                    window.location.replace('/login');
-                } else {
-                    renderErrors(xhr);
-                }
-            }
-        });
-    });
-
-    function updateProductReviewButtonPath(productId, resourceId) {
-        $('#productReviewButton').attr('href', Routing.generate('sylius_product_review_update', {
-            'productId': productId, 'id': resourceId
-        }));
-    }
-
-    function initializeAjaxForm(successMessage, messageHolderSelector) {
-        $ratingForm.submit(function (e) {
-            e.preventDefault();
-            var form = $(this);
-
-            $.ajax({
-                type: "POST",
-                url: form.attr('action'),
-                data: parseFormToJson(form),
-                dataType: "json",
-                accept: "application/json",
-                success: function (data, textStatus, xhr) {
-                    completeRequest(form);
-                    appendFlash(successMessage, messageHolderSelector);
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    renderErrors(xhr, form);
-                }
-            });
-        });
-    }
-
-    function renderErrors(xhr, form) {
-        clearErrors(form);
-
-        $.each(xhr.responseJSON.errors.errors, function (key, value) {
-            $('div.panel-body').addClass('has-error').prepend('<span class="help-block form-error">' + value + '</span>');
-        });
-    }
-
-    function clearErrors(form) {
-        form.find('.form-error').remove();
-        form.find('.has-error').removeClass('has-error');
-    }
-
-    function parseFormToJson(form) {
-        var formJson = {};
-        $.each(form.serializeArray(), function (index, field) {
-            var name = field.name.replace('sylius_product_review[', '').replace(']', '');
-            formJson[name] = field.value || '';
-        });
-
-        return formJson;
-    }
-
-    function appendFlash(successMessage, messageHolderSelector) {
-        messageHolderSelector = messageHolderSelector ? messageHolderSelector : '#flashes';
-
-        $(messageHolderSelector).html('<div class="alert alert-success"><a class="close" data-dismiss="alert" href="#">×</a>' + successMessage + '</div>');
-    }
-
-    function completeRequest(form) {
-        form[0].reset();
-        clearErrors(form);
-        $("html, body").animate({scrollTop: 0}, "slow");
-    }
-
-});
-$(function() {
-    // Javascript to enable link to tab
-    var url = document.location.toString();
-    if (url.match('#')) {
-        $('.nav-tabs a[href=#'+url.split('#')[1]+']').tab('show') ;
-    }
-
-    // Change hash for page-reload
-    $('.nav-tabs a').on('shown', function (e) {
-        window.location.hash = e.target.hash;
-    })
-});
-$(document).ready(function () {
-
-    /**
-     * Handles click to display the modal
-     */
-    $("#submit-form-login-modal").click(function (e) {
-        e.preventDefault();
-
-        //authentification
-        checkLogin($('#formLoginModal'));
-
-        $('#login-form-modal').modal('hide');
-
-    });
-
-
-    /**
-     * Handles click to display the modal
-     */
-    $("#submit-form-login").click(function (e) {
-        e.preventDefault();
-
-        //authentification
-        checkLogin($('#formLogin'));
-
-    });
-
-    /**
-     * checks for the authentification
-     *
-     * @returns {boolean}
-     */
-    function checkLogin($form) {
-
-        var isLoggedIn = false;
-        $.ajax({
-            type        : $form.attr( 'method' ),
-            url         : $form.attr( 'action' ),
-            data        : $form.serialize(),
-            dataType    : 'json',
-            async       : false,
-            success: function (data) {
-                if (data.has_error == true) {
-                    //Login KO
-                    isLoggedIn = false;
-                }
-                else  {
-                    //login OK
-                    isLoggedIn = true;
-                }
-            }
-        });
-
-        console.log(isLoggedIn);
-
-        notifyLogin(isLoggedIn);
-
-    }
-
-
-    function notifyLogin(isLoggedIn)
-    {
-        if(isLoggedIn){
-            //Notify login
-            notifySuccess("Vous êtes connecté.");
-
-            //reload page
-            window.location
-                .reload()
-                .delay(3000)
-                .fadeOut();
-
-        } else {
-            notifyError("Problème de connexion.");
-        }
-
-    }
-
-});
-$(function() {
-
-    "use strict";
-
-    var $form = $('form[name=jdj_comptabundle_bill_payment]');
-
-    if ($form.length > 0) {
-        /**
-         * datePickers from the form
-         */
-        $('.billPaymentPaidAt').datetimepicker({
-            format: 'YYYY-MM-DD'
-        });
-    }
-
-});
-$(function() {
-
-    "use strict";
-
-    /**
-     * datePickers from the form
-     */
-    $('#jdj_comptabundle_book_entry_activeAt').datetimepicker({
-        format: 'YYYY-MM-DD'
-    });
-});
-$.widget( "custom.imgcomplete", $.ui.autocomplete, {
-    _renderItem: function( ul, item ) {
-        return $( "<li>" )
-            .append( $('<a>')
-                .attr("href", item.href)
-                .append($('<img>')
-                    .addClass('img-responsive')
-                    .addClass('img-thumbnail')
-                    .attr('src', item.image)
-                )
-                .append($('<span>')
-                    .html(item.label)
-                )
-                .append($('<div>')
-                    .addClass('clearfix')
-                )
-            )
-            .appendTo( ul );
-    }
-});
-$(function() {
-
-    $( ".mainSearch" ).imgcomplete({
-        source: Routing.generate('app_api_search_autocomplete'),
-        minLength: 2,
-        delay: 100,
-        focus: function() {
-            // prevent value inserted on focus
-            return false;
-        },
-        select: function( event, ui ) {
-            window.location = ui.item.href;
-            // prevent value inserted on focus
-            return false;
-        }
-    });
 
 });
