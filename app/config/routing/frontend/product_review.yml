@@ -1,5 +1,5 @@
 sylius_product_review_create:
-    path: /products/{productId}/reviews/new
+    path: /reviews/new
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.product_review:createAction
@@ -8,10 +8,26 @@ sylius_product_review_create:
             factory:
                 method: createForSubject
                 arguments: [$productId]
+            redirect:
+                route: sylius_product_review_update
+                parameters: { productId: $productId, id: resource.id }
+            
+sylius_product_review_update:
+    path: /reviews/{id}/update
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.product_review:updateAction
+        _sylius:
+            template: 'frontend/product_review/update.html.twig'
+            repository:
+                method: findOneBy
+                arguments: [{id: $id, author: expr:service('app.context.customer').getCustomer()}]
             redirect: referer
+    options:
+        expose: true
 
 sylius_product_rating_create:
-    path: /products/{productId}/rating/new
+    path: /rating/new
     methods: [GET, POST]
     defaults:
         _format: json
@@ -26,7 +42,7 @@ sylius_product_rating_create:
         expose: true
 
 sylius_product_rating_update:
-    path: /products/{productId}/rating/edit
+    path: /rating/edit
     methods: [GET, PUT, PATCH]
     defaults:
         _controller: sylius.controller.product_review:updateAction

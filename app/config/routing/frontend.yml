@@ -28,6 +28,7 @@ app_frontend_product_list_item:
 
 sylius_product_review:
     resource: "frontend/product_review.yml"
+    prefix: /products/{productId}
 
 sylius_static_content:
     resource: "frontend/static_content.yml"

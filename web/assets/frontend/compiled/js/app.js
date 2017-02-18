@@ -12997,85 +12997,6 @@ $(function() {
 $(document).ready(function () {
 
     /**
-     * Handles click to display the modal
-     */
-    $("#submit-form-login-modal").click(function (e) {
-        e.preventDefault();
-
-        //authentification
-        checkLogin($('#formLoginModal'));
-
-        $('#login-form-modal').modal('hide');
-
-    });
-
-
-    /**
-     * Handles click to display the modal
-     */
-    $("#submit-form-login").click(function (e) {
-        e.preventDefault();
-
-        //authentification
-        checkLogin($('#formLogin'));
-
-    });
-
-    /**
-     * checks for the authentification
-     *
-     * @returns {boolean}
-     */
-    function checkLogin($form) {
-
-        var isLoggedIn = false;
-        $.ajax({
-            type        : $form.attr( 'method' ),
-            url         : $form.attr( 'action' ),
-            data        : $form.serialize(),
-            dataType    : 'json',
-            async       : false,
-            success: function (data) {
-                if (data.has_error == true) {
-                    //Login KO
-                    isLoggedIn = false;
-                }
-                else  {
-                    //login OK
-                    isLoggedIn = true;
-                }
-            }
-        });
-
-        console.log(isLoggedIn);
-
-        notifyLogin(isLoggedIn);
-
-    }
-
-
-    function notifyLogin(isLoggedIn)
-    {
-        if(isLoggedIn){
-            //Notify login
-            notifySuccess("Vous êtes connecté.");
-
-            //reload page
-            window.location
-                .reload()
-                .delay(3000)
-                .fadeOut();
-
-        } else {
-            notifyError("Problème de connexion.");
-        }
-
-    }
-
-});
-$(document).ready(function () {
-
-    /**
      * This function displays a success notification
      *
      * @param message
@@ -13300,7 +13221,7 @@ $(function () {
     refresh();
   }
 });
-$(function() {
+$(function () {
 
     "use strict";
 
@@ -13309,7 +13230,7 @@ $(function() {
 
     //initializeAjaxForm(successMessage);
 
-    $(".rating").each(function() {
+    $(".rating").each(function () {
         $(this).rate({
             max_value: $(this).attr("data-max-value"),
             readonly: $(this).attr("data-readonly"),
@@ -13326,7 +13247,7 @@ $(function() {
         });
     });
 
-    $('.rating.rate').on("change", function(event, data) {
+    $('.rating.rate').on("change", function (event, data) {
 
         var rateValue = $(this).attr('data-rate-value');
         var productId = $(this).attr('data-product-id');
@@ -13343,14 +13264,17 @@ $(function() {
         }
 
         $.ajax({
-            url: Routing.generate(routeName, { 'productId': productId }),
+            url: Routing.generate(routeName, {'productId': productId}),
             type: type,
             data: {'rating': newRateValue},
-            success: function(data, textStatus, xhr) {
+            success: function (data, textStatus, xhr) {
+                if (xhr.status === 201) {
+                    updateProductReviewButtonPath(productId, data.id);
+                }
                 appendFlash(successMessage);
             },
-            error: function(xhr, textStatus, errorThrown) {
-                if(xhr.status===401) {
+            error: function (xhr, textStatus, errorThrown) {
+                if (xhr.status === 401) {
                     //handle error
                     window.location.replace('/login');
                 } else {
@@ -13360,8 +13284,14 @@ $(function() {
         });
     });
 
+    function updateProductReviewButtonPath(productId, resourceId) {
+        $('#productReviewButton').attr('href', Routing.generate('sylius_product_review_update', {
+            'productId': productId, 'id': resourceId
+        }));
+    }
+
     function initializeAjaxForm(successMessage, messageHolderSelector) {
-        $ratingForm.submit(function(e) {
+        $ratingForm.submit(function (e) {
             e.preventDefault();
             var form = $(this);
 
@@ -13371,11 +13301,11 @@ $(function() {
                 data: parseFormToJson(form),
                 dataType: "json",
                 accept: "application/json",
-                success: function(data, textStatus, xhr) {
+                success: function (data, textStatus, xhr) {
                     completeRequest(form);
                     appendFlash(successMessage, messageHolderSelector);
                 },
-                error: function(xhr, textStatus, errorThrown) {
+                error: function (xhr, textStatus, errorThrown) {
                     renderErrors(xhr, form);
                 }
             });
@@ -13385,7 +13315,7 @@ $(function() {
     function renderErrors(xhr, form) {
         clearErrors(form);
 
-        $.each(xhr.responseJSON.errors.errors, function(key, value) {
+        $.each(xhr.responseJSON.errors.errors, function (key, value) {
             $('div.panel-body').addClass('has-error').prepend('<span class="help-block form-error">' + value + '</span>');
         });
     }
@@ -13397,7 +13327,7 @@ $(function() {
 
     function parseFormToJson(form) {
         var formJson = {};
-        $.each(form.serializeArray(), function(index, field) {
+        $.each(form.serializeArray(), function (index, field) {
             var name = field.name.replace('sylius_product_review[', '').replace(']', '');
             formJson[name] = field.value || '';
         });
@@ -13414,7 +13344,7 @@ $(function() {
     function completeRequest(form) {
         form[0].reset();
         clearErrors(form);
-        $("html, body").animate({ scrollTop: 0 }, "slow");
+        $("html, body").animate({scrollTop: 0}, "slow");
     }
 
 });
@@ -13429,6 +13359,123 @@ $(function() {
     $('.nav-tabs a').on('shown', function (e) {
         window.location.hash = e.target.hash;
     })
+});
+$(document).ready(function () {
+
+    /**
+     * Handles click to display the modal
+     */
+    $("#submit-form-login-modal").click(function (e) {
+        e.preventDefault();
+
+        //authentification
+        checkLogin($('#formLoginModal'));
+
+        $('#login-form-modal').modal('hide');
+
+    });
+
+
+    /**
+     * Handles click to display the modal
+     */
+    $("#submit-form-login").click(function (e) {
+        e.preventDefault();
+
+        //authentification
+        checkLogin($('#formLogin'));
+
+    });
+
+    /**
+     * checks for the authentification
+     *
+     * @returns {boolean}
+     */
+    function checkLogin($form) {
+
+        var isLoggedIn = false;
+        $.ajax({
+            type        : $form.attr( 'method' ),
+            url         : $form.attr( 'action' ),
+            data        : $form.serialize(),
+            dataType    : 'json',
+            async       : false,
+            success: function (data) {
+                if (data.has_error == true) {
+                    //Login KO
+                    isLoggedIn = false;
+                }
+                else  {
+                    //login OK
+                    isLoggedIn = true;
+                }
+            }
+        });
+
+        console.log(isLoggedIn);
+
+        notifyLogin(isLoggedIn);
+
+    }
+
+
+    function notifyLogin(isLoggedIn)
+    {
+        if(isLoggedIn){
+            //Notify login
+            notifySuccess("Vous êtes connecté.");
+
+            //reload page
+            window.location
+                .reload()
+                .delay(3000)
+                .fadeOut();
+
+        } else {
+            notifyError("Problème de connexion.");
+        }
+
+    }
+
+});
+$.widget( "custom.imgcomplete", $.ui.autocomplete, {
+    _renderItem: function( ul, item ) {
+        return $( "<li>" )
+            .append( $('<a>')
+                .attr("href", item.href)
+                .append($('<img>')
+                    .addClass('img-responsive')
+                    .addClass('img-thumbnail')
+                    .attr('src', item.image)
+                )
+                .append($('<span>')
+                    .html(item.label)
+                )
+                .append($('<div>')
+                    .addClass('clearfix')
+                )
+            )
+            .appendTo( ul );
+    }
+});
+$(function() {
+
+    $( ".mainSearch" ).imgcomplete({
+        source: Routing.generate('app_api_search_autocomplete'),
+        minLength: 2,
+        delay: 100,
+        focus: function() {
+            // prevent value inserted on focus
+            return false;
+        },
+        select: function( event, ui ) {
+            window.location = ui.item.href;
+            // prevent value inserted on focus
+            return false;
+        }
+    });
+
 });
 $(document).ready(function () {
 
@@ -13899,43 +13946,5 @@ $(function() {
             scrollTop:$("#user-review").offset().top
         }, 'fast');
     }
-
-});
-$.widget( "custom.imgcomplete", $.ui.autocomplete, {
-    _renderItem: function( ul, item ) {
-        return $( "<li>" )
-            .append( $('<a>')
-                .attr("href", item.href)
-                .append($('<img>')
-                    .addClass('img-responsive')
-                    .addClass('img-thumbnail')
-                    .attr('src', item.image)
-                )
-                .append($('<span>')
-                    .html(item.label)
-                )
-                .append($('<div>')
-                    .addClass('clearfix')
-                )
-            )
-            .appendTo( ul );
-    }
-});
-$(function() {
-
-    $( ".mainSearch" ).imgcomplete({
-        source: Routing.generate('app_api_search_autocomplete'),
-        minLength: 2,
-        delay: 100,
-        focus: function() {
-            // prevent value inserted on focus
-            return false;
-        },
-        select: function( event, ui ) {
-            window.location = ui.item.href;
-            // prevent value inserted on focus
-            return false;
-        }
-    });
 
 });

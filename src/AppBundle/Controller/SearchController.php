@@ -97,7 +97,7 @@ class SearchController extends Controller
                             'productSlug' => $entity->getGamePlay()->getProduct()->getSlug(),
                             'id' => $entity->getGamePlay()->getId(),
                         )
-                    ) : $this->generateUrl('app_post_index_by_topic', array(
+                    ) : $this->generateUrl('app_frontend_post_index_by_topic', array(
                             'topicId' => $entity->getId(),
                         )
                     ),
