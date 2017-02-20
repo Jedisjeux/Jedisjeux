@@ -1,4 +1,4 @@
-app_frontend_post_create_by_game_play:
+app_frontend_game_play_post_create:
     methods: [GET, POST]
     path: /game-plays/{gamePlayId}/posts/new
     defaults:
@@ -13,3 +13,18 @@ app_frontend_post_create_by_game_play:
             redirect:
                 route: app_frontend_game_play_show
                 parameters: { id: $gamePlayId, productSlug: resource.gamePlay.product.slug }
+
+app_frontend_game_play_post_update:
+    methods: [GET, PUT]
+    path: /game-plays/{gamePlayId}/posts/{id}/edit
+    defaults:
+        _controller: app.controller.post:updateAction
+        _sylius:
+            section: frontend
+            repository:
+                method: findOneBy
+                arguments: [{id: $id, author: expr:service('app.context.customer').getCustomer()}]
+            redirect:
+                route: app_frontend_game_play_show
+                parameters: { topicId: resource.topic.id }
+            template: frontend/game_play/post/update.html.twig
