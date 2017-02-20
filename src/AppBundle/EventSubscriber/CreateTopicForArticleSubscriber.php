@@ -41,7 +41,7 @@ class CreateTopicForArticleSubscriber implements EventSubscriberInterface
     protected $topicFactory;
 
     /**
-     * CreateTopicForGamePlaySubscriber constructor.
+     * CreateTopicForArticleSubscriber constructor.
      *
      * @param ObjectManager $manager
      * @param TopicRepository $topicRepository
