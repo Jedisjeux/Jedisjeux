@@ -92,19 +92,12 @@ class TopicFactory implements FactoryInterface
     }
 
     /**
-     * @param int $gamePlayId
+     * @param GamePlay $gamePlay
      *
      * @return Topic
      */
-    public function createForGamePlay($gamePlayId)
+    public function createForGamePlay(GamePlay $gamePlay)
     {
-        /** @var GamePlay $gamePlay */
-        $gamePlay = $this->gamePlayRepository->find($gamePlayId);
-
-        if (null === $gamePlay) {
-            throw new \InvalidArgumentException(sprintf('Requested gameplay does not exist with id "%s".', $gamePlayId));
-        }
-
         /** @var Topic $topic */
         $topic = $this->createNew();
         $topic->setMainPost(null); // topic for game play has no main post
@@ -113,7 +106,7 @@ class TopicFactory implements FactoryInterface
             ->setTopic($topic);
 
         $topic
-            ->setTitle("Partie de ".(string)$gamePlay->getProduct())
+            ->setTitle("Partie de ".(string) $gamePlay->getProduct())
             ->setAuthor($gamePlay->getAuthor());
 
         return $topic;

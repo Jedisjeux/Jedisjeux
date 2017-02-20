@@ -72,7 +72,11 @@ class CreateTopicNotificationSubscriber implements EventSubscriberInterface
         /** @var Post $post */
         $post = $event->getSubject();
 
-        foreach ($post->getTopic()->getFollowers() as $follower) {
+        if (null === $topic = $post->getTopic()) {
+            return;
+        }
+
+        foreach ($topic->getFollowers() as $follower) {
             /**
              * Don't notify the current customer
              */

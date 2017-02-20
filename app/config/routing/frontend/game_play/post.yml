@@ -1,0 +1,15 @@
+app_frontend_post_create_by_game_play:
+    methods: [GET, POST]
+    path: /game-plays/{gamePlayId}/posts/new
+    defaults:
+        _controller: app.controller.post:createAction
+        _sylius:
+            section: frontend
+            factory:
+                method: createForGamePlay
+                arguments:
+                    - expr:service('app.repository.game_play').find($gamePlayId)
+            template: frontend/game_play/post/create.html.twig
+            redirect:
+                route: app_frontend_game_play_show
+                parameters: { id: $gamePlayId, productSlug: resource.gamePlay.product.slug }

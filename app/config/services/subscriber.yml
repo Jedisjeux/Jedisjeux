@@ -8,6 +8,15 @@ services:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
+    app.subscriber.create_topic_for_game_play:
+        class: AppBundle\EventSubscriber\CreateTopicForGamePlaySubscriber
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@app.repository.topic"
+            - "@app.factory.topic"
+        tags:
+            - { name: kernel.event_subscriber, priority: -1 }
+
     app.subscriber.add_topic_follower:
         class: AppBundle\EventSubscriber\AddTopicFollowerSubscriber
         arguments:

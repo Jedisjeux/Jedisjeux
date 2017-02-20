@@ -59,6 +59,13 @@ class Post implements ResourceInterface
     protected $topic;
 
     /**
+     * @var GamePlay
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\GamePlay")
+     */
+    protected $gamePlay;
+
+    /**
      * @var CustomerInterface
      *
      * @ORM\ManyToOne(targetEntity="Sylius\Component\Customer\Model\CustomerInterface")
@@ -163,6 +170,26 @@ class Post implements ResourceInterface
     public function setTopic($topic)
     {
         $this->topic = $topic;
+
+        return $this;
+    }
+
+    /**
+     * @return GamePlay
+     */
+    public function getGamePlay()
+    {
+        return $this->gamePlay;
+    }
+
+    /**
+     * @param GamePlay $gamePlay
+     *
+     * @return $this
+     */
+    public function setGamePlay($gamePlay)
+    {
+        $this->gamePlay = $gamePlay;
 
         return $this;
     }
