@@ -11,13 +11,13 @@ Feature: Edit game-plays
     And there are products:
       | name          |
       | Lewis & Clark |
+    And there are game plays:
+      | product       | author            |
+      | Lewis & Clark | kevin@example.com |
     And I am logged in as user "kevin@example.com" with password "password"
 
   Scenario: Update my game play
-    Given there are game plays:
-      | product       | author            |
-      | Lewis & Clark | kevin@example.com |
-    And I am on "/mon-compte/parties"
+    Given I am on "/mon-compte/parties"
     And I follow "Lewis & Clark"
     And I follow "Modifier la partie"
     When I press "Mettre à jour"
