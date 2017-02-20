@@ -13,15 +13,11 @@ Feature: Edit game-plays
       | Lewis & Clark |
     And I am logged in as user "kevin@example.com" with password "password"
 
-  @javascript
   Scenario: Update my game play
     Given there are game plays:
       | product       | author            |
       | Lewis & Clark | kevin@example.com |
-    And I am on homepage
-    And I follow "kevin@example.com"
-    And I wait "2" seconds until "$('.dropdown-menu').is('visible')"
-    And I follow "Mes parties"
+    And I am on "/mon-compte/parties"
     And I follow "Lewis & Clark"
     And I follow "Modifier la partie"
     When I press "Mettre à jour"

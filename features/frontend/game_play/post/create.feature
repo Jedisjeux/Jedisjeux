@@ -1,4 +1,4 @@
-@ui @frontend @gamePlay @create
+@ui @frontend @gamePlay @comment @create
 Feature: Game-play comment creation
   In order to comment game plays
   As a user
