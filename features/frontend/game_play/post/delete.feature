@@ -1,8 +1,8 @@
-@ui @frontend @gamePlay @comment @update
-Feature: Edit game play comment
+@ui @frontend @gamePlay @comment @delete
+Feature: Remove game play comment
   In order to comment game plays
   As a user
-  I need to be able to edit my comments
+  I need to be able to remove my comments
 
   Background:
     Given there are following users:
@@ -20,9 +20,17 @@ Feature: Edit game play comment
       | kevin@example.com |
     And I am logged in as user "kevin@example.com" with password "password"
 
-  Scenario: Update my comment
+  Scenario: Remove my comment
     Given I am on "/mon-compte/parties"
     And I follow "Lewis & Clark"
-    And I follow "Modifier"
-    When I press "Mettre à jour"
-    Then I should see "a bien été mis à jour"
+    When I press "Supprimer"
+    Then I should see "a bien été supprimé"
+
+  @javascript
+  Scenario: Remove my comment with modal
+    Given I am on "/mon-compte/parties"
+    And I follow "Lewis & Clark"
+    When I press "Supprimer"
+    And I wait until modal is visible
+    And I follow "Supprimer"
+    Then I should see "a bien été supprimé"
