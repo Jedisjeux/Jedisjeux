@@ -73,6 +73,10 @@ class CreateTopicForGamePlaySubscriber implements EventSubscriberInterface
         $post = $event->getSubject();
         $gamePlay = $post->getGamePlay();
 
+        if (null === $gamePlay) {
+            return;
+        }
+
         $topic = $this->topicRepository->findOneByGamePlay($gamePlay);
 
         if (null == $topic) {

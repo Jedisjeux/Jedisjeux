@@ -63,22 +63,14 @@ class PostFactory implements FactoryInterface
     }
 
     /**
-     * @param int $topicId
-     * @param EntityRepository $topicRepository
+     * @param Topic $topic
      *
      * @return Post
      */
-    public function createForTopic($topicId, EntityRepository $topicRepository)
+    public function createForTopic($topic)
     {
         /** @var Post $post */
         $post =  $this->createNew();
-
-        /** @var Topic $topic */
-        $topic = $topicRepository->find($topicId);
-
-        if (null === $topic) {
-            throw new NotFoundHttpException(sprintf('Topic with id %s not found', $topicId));
-        }
 
         $post
             ->setTopic($topic);

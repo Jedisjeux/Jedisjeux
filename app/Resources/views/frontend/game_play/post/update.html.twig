@@ -1,10 +1,11 @@
 {% extends "base.html.twig" %}
+
 {% import 'macros/actions.html.twig' as action %}
 
 {% set game_play = post.gamePlay %}
 
 {% block headline %}
-    Votre commentaire
+    Modifier votre commentaire
 {% endblock %}
 
 {% block breadcrumb_content %}
@@ -16,8 +17,9 @@
 {% block body -%}
     <div class="col-md-12">
         {{ form_start(form) }}
+        <input type="hidden" name="_method" value="PUT"/>
         {{ form_widget(form) }}
-        {{ action.create() }}
+        {{ action.update() }}
         {{ form_end(form) }}
     </div>
 {% endblock %}

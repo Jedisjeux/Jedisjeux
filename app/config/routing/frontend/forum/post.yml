@@ -58,9 +58,7 @@ app_frontend_post_create_by_topic:
             factory:
                 method: createForTopic
                 arguments:
-                    - $topicId
-                    - expr:service('app.repository.topic')
-            paginate: 10
+                    - expr:service('app.repository.topic').find($topicId)
             template: frontend/post/create.html.twig
             redirect:
                 route: app_frontend_post_index_by_topic

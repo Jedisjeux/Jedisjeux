@@ -10,7 +10,7 @@
         <h5><i class="fa fa-users color"></i> Participer</h5>
         <!-- Widgets Content -->
         <div class="widget-content search">
-            {{ button.btn(path('app_frontend_post_create_by_game_play', {'gamePlayId' : game_play.id}), 'Commenter la partie', null, 'plus-sign', 'btn-color btn-lg') }}
+            {{ button.btn(path('app_frontend_game_play_post_create', {'gamePlayId' : game_play.id}), 'Commenter la partie', null, 'plus-sign', 'btn-color btn-lg') }}
         </div>
     </div>
 
