@@ -1,0 +1,30 @@
+app_frontend_article_post_create:
+    methods: [GET, POST]
+    path: /article/{articleName}/posts/new
+    defaults:
+        _controller: app.controller.post:createAction
+        _sylius:
+            section: frontend
+            factory:
+                method: createForArticle
+                arguments:
+                    - expr:service('app.repository.article').findOneByName($articleName)
+            template: frontend/article/post/create.html.twig
+            redirect:
+                route: app_frontend_article_show
+                parameters: { name: $articleName }
+
+app_frontend_article_post_update:
+    methods: [GET, PUT]
+    path: /article/{articleName}/posts/{id}/edit
+    defaults:
+        _controller: app.controller.post:updateAction
+        _sylius:
+            section: frontend
+            repository:
+                method: findOneBy
+                arguments: [{id: $id, author: expr:service('app.context.customer').getCustomer()}]
+            redirect:
+                route: app_frontend_article_show
+                parameters: { name: $articleName }
+            template: frontend/article/post/update.html.twig

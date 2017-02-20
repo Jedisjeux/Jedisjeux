@@ -1,3 +1,6 @@
+app_frontend_article_post:
+    resource: article/post.yml
+
 app_frontend_article_index:
     methods: [GET]
     path: /articles/

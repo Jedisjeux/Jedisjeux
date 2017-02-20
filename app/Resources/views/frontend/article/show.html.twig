@@ -1,6 +1,5 @@
 {% extends "base.html.twig" %}
 
-{% from 'macros/posts.html.twig' import blogCommentItem as postComment %}
 {% import 'macros/items.html.twig' as item %}
 {% from 'macros/game_reviews.html.twig' import blogCommentItem as reviewComment %}
 {% import 'macros/pageViews.html.twig' as pageViews %}
@@ -63,7 +62,9 @@
 
             <div class="blog-comments">
                 {% for post in topic.posts %}
-                    {{ postComment(post) }}
+                    {% include 'frontend/post/show/_content.html.twig' with {
+                    'editPath': path('app_frontend_article_post_update', {'id': post.id, 'articleName': article.name})
+                    } %}
                 {% endfor %}
             </div>
         {% endif %}
