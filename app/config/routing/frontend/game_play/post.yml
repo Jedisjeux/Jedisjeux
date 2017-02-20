@@ -26,5 +26,5 @@ app_frontend_game_play_post_update:
                 arguments: [{id: $id, author: expr:service('app.context.customer').getCustomer()}]
             redirect:
                 route: app_frontend_game_play_show
-                parameters: { topicId: resource.topic.id }
+                parameters: { id: $gamePlayId, productSlug: resource.gamePlay.product.slug }
             template: frontend/game_play/post/update.html.twig

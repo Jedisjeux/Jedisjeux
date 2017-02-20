@@ -1,8 +1,8 @@
-@ui @frontend @gamePlay @update
-Feature: Edit game-plays
-  In order to manage my game-plays
+@ui @frontend @gamePlay @comment @create
+Feature: Game-play comment creation
+  In order to comment game plays
   As a user
-  I need to be able to edit my game-plays
+  I need to be able to create new comments on a game play
 
   Background:
     Given there are following users:
@@ -16,9 +16,11 @@ Feature: Edit game-plays
       | Lewis & Clark | kevin@example.com |
     And I am logged in as user "kevin@example.com" with password "password"
 
-  Scenario: Update my game play
+  @javascript
+  Scenario: Create new comment
     Given I am on "/mon-compte/parties"
     And I follow "Lewis & Clark"
-    And I follow "Modifier la partie"
-    When I press "Mettre à jour"
-    Then I should see "a bien été mise à jour"
+    And I follow "Commenter la partie"
+    And I fill in wysiwyg field "app_post_body" with "Here is my awesome comment."
+    When I press "Créer"
+    Then I should see "a bien été créé"
