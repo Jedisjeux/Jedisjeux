@@ -1,15 +1,15 @@
 {% extends "base.html.twig" %}
 {% import 'macros/actions.html.twig' as action %}
 
-{% set game_play = post.gamePlay %}
+{% set article = post.article %}
 
 {% block headline %}
     Votre commentaire
 {% endblock %}
 
 {% block breadcrumb_content %}
-    <a href="{{ path('app_frontend_game_play_index') }}">{{ 'app.ui.game_plays'|trans }}</a>
-    / <a href="{{ path('app_frontend_game_play_show', {'id': game_play.id, 'productSlug': game_play.product.slug}) }}">{{ game_play.product }}</a>
+    <a href="{{ path('app_frontend_article_index') }}">{{ 'app.ui.articles'|trans }}</a>
+    / <a href="{{ path('app_frontend_article_show', {'name': article.name}) }}">{{ article.title }}</a>
     / Créer votre commentaire
 {% endblock %}
 

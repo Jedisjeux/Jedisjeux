@@ -11,6 +11,7 @@
 
 namespace AppBundle\Factory;
 
+use AppBundle\Entity\Article;
 use AppBundle\Entity\GamePlay;
 use AppBundle\Entity\Post;
 use AppBundle\Entity\Topic;
@@ -90,6 +91,22 @@ class PostFactory implements FactoryInterface
 
         $post
             ->setGamePlay($gamePlay);
+
+        return $post;
+    }
+
+    /**
+     * @param Article $article
+     *
+     * @return Post
+     */
+    public function createForArticle(Article $article)
+    {
+        /** @var Post $post */
+        $post =  $this->createNew();
+
+        $post
+            ->setArticle($article);
 
         return $post;
     }

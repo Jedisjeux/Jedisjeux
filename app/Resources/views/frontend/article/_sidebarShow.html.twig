@@ -1,7 +1,18 @@
 {% from 'macros/users.html.twig' import avatar %}
+{% import 'macros/buttons.html.twig' as button %}
 
 <!-- Sidebar -->
 <div class="sidebar">
+
+    <div class="s-widget">
+        <h5><i class="fa fa-users color"></i> Participer</h5>
+        <!-- Widgets Content -->
+        <div class="widget-content search">
+            {{ button.btn(path('app_frontend_article_post_create', {'articleName' : article.name}), 'Commenter l\'article', null, 'plus-sign', 'btn-color btn-lg') }}
+        </div>
+    </div>
+
+    <hr/>
 
     {% if article.isReviewArticle %}
 

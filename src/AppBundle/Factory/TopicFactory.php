@@ -11,6 +11,7 @@
 
 namespace AppBundle\Factory;
 
+use AppBundle\Entity\Article;
 use AppBundle\Entity\GamePlay;
 use AppBundle\Entity\Post;
 use AppBundle\Entity\Topic;
@@ -108,6 +109,27 @@ class TopicFactory implements FactoryInterface
         $topic
             ->setTitle("Partie de ".(string) $gamePlay->getProduct())
             ->setAuthor($gamePlay->getAuthor());
+
+        return $topic;
+    }
+
+    /**
+     * @param Article $article
+     *
+     * @return Topic
+     */
+    public function createForArticle(Article $article)
+    {
+        /** @var Topic $topic */
+        $topic = $this->createNew();
+        $topic->setMainPost(null); // topic for article has no main post
+
+        $article
+            ->setTopic($topic);
+
+        $topic
+            ->setTitle($article->getTitle())
+            ->setAuthor($article->getAuthor());
 
         return $topic;
     }
