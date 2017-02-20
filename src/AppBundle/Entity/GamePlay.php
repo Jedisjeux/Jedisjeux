@@ -34,9 +34,9 @@ class GamePlay implements ResourceInterface
     protected $code;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
      */
     protected $duration;
 

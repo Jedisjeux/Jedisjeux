@@ -66,8 +66,8 @@
                                                 <span class="glyphicon glyphicon-time white"></span>
                                             </p>
                                             <p class="game-attribute">
-                                                {{ game_play.duration|date('H') }} h
-                                                {{ game_play.duration|date('i') }}
+                                                {% set duration = "today"|date_modify("+" ~ game_play.duration ~ "minute" ) %}
+                                                {{ duration|date('G') }} h {{ duration|date('i') }}
                                             </p>
 
                                         </li>
