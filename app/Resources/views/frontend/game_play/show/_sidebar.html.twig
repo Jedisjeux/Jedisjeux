@@ -1,9 +1,19 @@
 {% from 'macros/users.html.twig' import avatar %}
+{% import 'macros/buttons.html.twig' as button %}
 
 {% set product = game_play.product %}
 
 
 <div class="sidebar">
+
+    <div class="s-widget">
+        <!-- Widgets Content -->
+        <div class="widget-content">
+            {{ button.btn(path('app_frontend_game_play_update', {'id' : game_play.id, 'productSlug': game_play.product.slug}), 'Modifier la partie', null, 'pencil', 'btn-color btn-lg') }}
+        </div>
+    </div>
+
+    <hr />
 
     {% if game_play.players|length > 0 %}
         <!-- Gallery Widget -->
