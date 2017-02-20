@@ -16,7 +16,7 @@
 {% block container %}
     <div class="col-md-8">
 
-        {% if app.user and app.user.id == game_play.author.id %}
+        {% if app.user and app.user.customer.id == game_play.author.id %}
             <div class="pull-right">
                 <a title="Modifier la partie" class="btn btn-default"
                    href="{{ path('app_frontend_game_play_update', {'id' : game_play.id, 'productSlug': game_play.product.slug}) }}">
