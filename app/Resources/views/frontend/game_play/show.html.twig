@@ -17,8 +17,18 @@
 
 {% block container %}
     <div class="col-md-8">
-        {{ item.blogAuthor(game_play.author, null, game_play.createdAt) }}
 
+        {% if app.user and app.user.id == game_play.author.id %}
+            <div class="pull-right">
+                <a title="Modifier la partie" class="btn btn-default" href="{{ path('app_frontend_game_play_update', {'id' : game_play.id, 'productSlug': game_play.product.slug}) }}">
+                    <span class="fa fa-pencil">
+                    </span>
+                </a>
+            </div>
+
+        {% endif %}
+
+        {{ item.blogAuthor(game_play.author, null, game_play.createdAt) }}
         {% include "frontend/game_play/show/_header.html.twig" %}
 
         {% if topic %}

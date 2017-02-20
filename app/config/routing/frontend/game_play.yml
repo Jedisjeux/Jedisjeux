@@ -1,3 +1,6 @@
+app_frontend_game_play_post:
+    resource: game_play/post.yml
+
 app_frontend_game_play_create:
     methods: [GET, POST]
     path: /jeu-de-societe/{productSlug}/parties/new

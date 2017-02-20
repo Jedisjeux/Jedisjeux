@@ -7,13 +7,15 @@
 <div class="sidebar">
 
     <div class="s-widget">
+        <h5><i class="fa fa-users color"></i> Participer</h5>
         <!-- Widgets Content -->
-        <div class="widget-content">
-            {{ button.btn(path('app_frontend_game_play_update', {'id' : game_play.id, 'productSlug': game_play.product.slug}), 'Modifier la partie', null, 'pencil', 'btn-color btn-lg') }}
+        <div class="widget-content search">
+            {{ button.btn(path('app_frontend_post_create_by_game_play', {'gamePlayId' : game_play.id}), 'Commenter la partie', null, 'plus-sign', 'btn-color btn-lg') }}
         </div>
     </div>
 
-    <hr />
+    <hr/>
+
 
     {% if game_play.players|length > 0 %}
         <!-- Gallery Widget -->

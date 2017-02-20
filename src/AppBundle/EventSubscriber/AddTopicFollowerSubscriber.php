@@ -69,7 +69,10 @@ class AddTopicFollowerSubscriber implements EventSubscriberInterface
         /** @var Post $post */
         $post = $event->getSubject();
 
-        $topic = $post->getTopic();
+        if (null === $topic = $post->getTopic()) {
+            return;
+        }
+
         $topic->addFollower($this->getCustomer());
     }
 

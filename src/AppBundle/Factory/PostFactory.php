@@ -11,6 +11,7 @@
 
 namespace AppBundle\Factory;
 
+use AppBundle\Entity\GamePlay;
 use AppBundle\Entity\Post;
 use AppBundle\Entity\Topic;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
@@ -81,6 +82,22 @@ class PostFactory implements FactoryInterface
 
         $post
             ->setTopic($topic);
+
+        return $post;
+    }
+
+    /**
+     * @param GamePlay $gamePlay
+     *
+     * @return Post
+     */
+    public function createForGamePlay(GamePlay $gamePlay)
+    {
+        /** @var Post $post */
+        $post =  $this->createNew();
+
+        $post
+            ->setGamePlay($gamePlay);
 
         return $post;
     }
