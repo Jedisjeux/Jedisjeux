@@ -68,6 +68,8 @@ class LoadTopicsOfGamePlaysCommand extends ContainerAwareCommand
 
         $this->getManager()->flush();
         $this->getManager()->clear();
+
+        $this->updatePostCountByTopic();
     }
 
     /**
@@ -104,7 +106,8 @@ class LoadTopicsOfGamePlaysCommand extends ContainerAwareCommand
         $post
             ->setCode($data['code'])
             ->setBody($body)
-            ->setAuthor($author);
+            ->setAuthor($author)
+            ->setCreatedAt(\DateTime::createFromFormat('Y-m-d H:i:s', $data['createdAt']));
 
         return $post;
     }
