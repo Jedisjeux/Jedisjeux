@@ -87,6 +87,7 @@ class LoadTopicsOfGamePlaysCommand extends ContainerAwareCommand
 
         if (null === $topic = $gamePlay->getTopic()) {
             $topic = $this->getTopicFactory()->createForGamePlay($gamePlay);
+            $topic->setCreatedAt(\DateTime::createFromFormat('Y-m-d H:i:s', $data['createdAt']));
         }
 
         /** @var Post $post */
