@@ -11,6 +11,7 @@
 
 namespace AppBundle\Behat;
 
+use AppBundle\Entity\Article;
 use AppBundle\Entity\GamePlay;
 use AppBundle\Entity\Post;
 use AppBundle\Entity\Topic;
@@ -20,7 +21,6 @@ use AppBundle\Repository\ProductRepository;
 use Behat\Gherkin\Node\TableNode;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -65,7 +65,7 @@ class PostContext extends DefaultContext
      * @param string $topicAuthorEmail
      * @param TableNode $table
      */
-    public function thereAreGamePlayComments($productName, $topicAuthorEmail, TableNode $table)
+    public function gamePlayHasComments($productName, $topicAuthorEmail, TableNode $table)
     {
         $manager = $this->getEntityManager();
 
@@ -98,6 +98,43 @@ class PostContext extends DefaultContext
 
             /** @var Post $post */
             $post = $postFactory->createForGamePlay($gamePlay);
+            $post
+                ->setTopic($topic)
+                ->setAuthor($author)
+                ->setBody(isset($data['body']) ? $data['body'] : $this->faker->realText());
+
+            $manager->persist($post);
+            $manager->flush();
+        }
+    }
+
+    /**
+     * @Given /^article "([^""]*)" has following comments:$/
+     *
+     * @param string $articleTitle
+     * @param TableNode $table
+     */
+    public function articleHasComments($articleTitle, TableNode $table)
+    {
+        $manager = $this->getEntityManager();
+
+        /** @var Article $article */
+        $article = $this->findOneBy('article', ['title' => $articleTitle], 'app');
+
+        /** @var TopicFactory $topicFactory */
+        $topicFactory = $this->getFactory('topic', 'app');
+        $topic = $topicFactory->createForArticle($article);
+        $manager->persist($topic);
+
+        /** @var PostFactory $postFactory */
+        $postFactory = $this->getFactory('post', 'app');
+
+        foreach ($table->getHash() as $data) {
+            /** @var CustomerInterface $author */
+            $author = $this->getRepository('customer')->findOneBy(['email' => $data['author']]);
+
+            /** @var Post $post */
+            $post = $postFactory->createForArticle($article);
             $post
                 ->setTopic($topic)
                 ->setAuthor($author)
