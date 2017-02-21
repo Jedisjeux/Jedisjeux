@@ -94,6 +94,7 @@ class Bbcode2Html
         $body = str_replace(':wink:', ';)', $body);
         $body = str_replace(':lol:', ':)', $body);
         $body = str_replace(':light:', '', $body);
+        $body = str_replace(':dark:', '', $body);
 
         return $body;
     }
