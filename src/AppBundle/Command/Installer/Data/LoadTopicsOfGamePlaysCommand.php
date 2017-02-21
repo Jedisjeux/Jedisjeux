@@ -26,6 +26,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class LoadTopicsOfGamePlaysCommand extends ContainerAwareCommand
 {
+    const BATCH_SIZE = 20;
+
     /**
      * @inheritdoc
      */
@@ -43,147 +45,104 @@ class LoadTopicsOfGamePlaysCommand extends ContainerAwareCommand
     {
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
 
-        $this->deleteGamePlayTopics();
+        $i = 0;
 
-        $gamePlayId = null;
-        /** @var Topic $topic */
-        $topic = null;
+        foreach ($this->getPosts() as $data) {
+            $output->writeln(sprintf("Load <info>%s</info> post for <info>%s</info> game play", $data['code'], $data['gamePlayId']));
 
-        foreach ($this->getTopics() as $data) {
-            $output->writeln(sprintf("Loading <info>%s</info> comment of <info>%s</info> gameplay", $data['id'], $data['game_play_id']));
+            $post = $this->createOrReplacePost($data);
 
+            $this->getManager()->persist($post->getTopic());
+            $this->getManager()->persist($post);
 
-            /** Is first post of a topic */
-            if ($gamePlayId !== $data['game_play_id']) {
-                if (null !== $topic) {
-                    $this->getManager()->persist($topic);
-                    $this->getManager()->flush();
-                    $this->getManager()->clear();
-                }
-
-                $topic = $this->getTopicFactory()->createForGamePlay($data['game_play_id']);
-                $topic->setCreatedAt(\DateTime::createFromFormat('Y-m-d H:i:s', $data['createdAt']));
+            if (($i % self::BATCH_SIZE) === 0) {
+                $this->getManager()->flush(); // Executes all updates.
+                $this->getManager()->clear(); // Detaches all objects from Doctrine!
             }
 
-            /** @var Post $post */
-            $post = $this->getPostFactory()->createNew();
-            // add the answer to the topic
-            $topic->addPost($post);
+            ++$i;
 
-
-            /** @var CustomerInterface $customer */
-            $customer = $this->getCustomerRepository()->find($data['customer_id']);
-
-            $bbcode2html = $this->getBbcode2Html();
-            $body = $data['comment'];
-            $body = $bbcode2html
-                ->setBody($body)
-                ->getFilteredBody();
-
-            $post
-                ->setAuthor($customer)
-                ->setCreatedAt(\DateTime::createFromFormat('Y-m-d H:i:s', $data['createdAt']))
-                ->setBody($body);
-
-            $gamePlayId = $data['game_play_id'];
-        }
-
-        $this->updatePostCountByTopic();
-    }
-
-    protected function deleteGamePlayTopics()
-    {
-
-        $queryBuilder = $this->getManager()->createQueryBuilder();
-        $queryBuilder
-            ->select('post')
-            ->from('AppBundle\Entity\Post', 'post')
-            ->innerJoin('post.topic', 'topic')
-            ->where("topic.title like 'Partie de %'");
-
-        foreach ($queryBuilder->getQuery()->iterate() as $row) {
-            $post = $row[0];
-            $this->getManager()->remove($post);
             $this->getManager()->flush();
             $this->getManager()->clear();
         }
 
-        $dql = <<<EOM
-            delete from AppBundle\Entity\Topic topic
-            where topic.title like 'Partie de %'
-EOM;
+        $this->getManager()->flush();
+        $this->getManager()->clear();
+    }
 
-        $queryBuilder = $this->getManager()->createQuery($dql);
-        $queryBuilder->execute();
+    /**
+     * @param array $data
+     *
+     * @return Post
+     */
+    protected function createOrReplacePost(array $data)
+    {
+        /** @var GamePlay $gamePlay */
+        $gamePlay = $this->getGamePlayRepository()->find($data['gamePlayId']);
+
+        /** @var CustomerInterface $author */
+        $author = $this->getCustomerRepository()->find($data['customerId']);
+
+        if (null === $topic = $gamePlay->getTopic()) {
+            $topic = $this->getTopicFactory()->createForGamePlay($gamePlay);
+        }
+
+        /** @var Post $post */
+        $post = $this->getPostRepository()->findOneBy(['code' => $data['code']]);
+
+        if (null === $post) {
+            $post = $this->getPostFactory()->createForGamePlay($gamePlay);
+            $post->setTopic($topic);
+        }
+
+        $bbcode2html = $this->getBbcode2Html();
+        $body = $data['body'];
+        $body = $bbcode2html
+            ->setBody($body)
+            ->getFilteredBody();
+
+        $post
+            ->setCode($data['code'])
+            ->setBody($body)
+            ->setAuthor($author);
+
+        return $post;
     }
 
     /**
      * @return array
      */
-    protected function getTopics()
+    protected function getPosts()
     {
         $query = <<<EOM
-select      old.id as id,
-            customer.id as customer_id,
-            old.commentaire as comment,
-            old.date as createdAt,
-            gamePlay.id as game_play_id
-from        jedisjeux.jdj_parties_commentaires old
-inner join  jdj_game_play gamePlay
-              on gamePlay.code = concat('game-play-', old.partie_id)
-inner join  sylius_customer customer
-              on customer.code = concat('user-', old.user_id)
-order BY    gamePlay.id, old.date;
+SELECT
+  concat('article-post-', old.id) AS code,
+  customer.id                     AS customerId,
+  old.commentaire                 AS body,
+  old.date                        AS createdAt,
+  gamePlay.id                     AS gamePlayId
+FROM jedisjeux.jdj_parties_commentaires old
+  INNER JOIN jdj_game_play gamePlay
+    ON gamePlay.code = concat('game-play-', old.partie_id)
+  INNER JOIN sylius_customer customer
+    ON customer.code = concat('user-', old.user_id)
+ORDER BY gamePlay.id, old.date
 EOM;
 
-        return $this->getDatabaseConnection()->fetchAll($query);
-    }
-
-    protected function bbcode2Html()
-    {
-        $queryBuilder = $this->getPostRepository()->createQueryBuilder('o');
-        $queryBuilder
-            ->andWhere($queryBuilder->expr()->orX(
-                'o.body like :quote',
-                'o.body like :emoticon',
-                'o.body like :url',
-                'o.body like :image',
-                'o.body like :bold'
-            ))
-            ->setParameter('quote', '%[quote%')
-            ->setParameter('emoticon', '%SMILIES%')
-            ->setParameter('url', '%[url%')
-            ->setParameter('image', '%[img%')
-            ->setParameter('bold', '%[b%');
-
-        $posts = $queryBuilder->getQuery()->getArrayResult();
-
-        foreach ($posts as $data) {
-            $bbcode2html = $this->getBbcode2Html();
-            $body = $data['body'];
-            $body = $bbcode2html
-                ->setBody($body)
-                ->getFilteredBody();
-
-            /** @var Post $post */
-            $post = $this->getPostRepository()->find($data['id']);
-            $post->setBody($body);
-            $this->getManager()->flush($post);
-            $this->getManager()->clear($post);
-        }
+        return $this->getManager()->getConnection()->fetchAll($query);
     }
 
     protected function updatePostCountByTopic()
     {
-        $this->getDatabaseConnection()->executeQuery(<<<EOM
-update jdj_topic topic
-    inner join jdj_post post
-    on post.topic_id = topic.id
-set topic.postCount = (
-    select count(0)
-  from jdj_post a
-    where a.topic_id = topic.id
-  group by a.topic_id
+        $this->getManager()->getConnection()->executeQuery(<<<EOM
+UPDATE jdj_topic topic
+  INNER JOIN jdj_post post
+    ON post.topic_id = topic.id
+SET topic.postCount = (
+  SELECT count(0)
+  FROM jdj_post a
+  WHERE a.topic_id = topic.id
+  GROUP BY a.topic_id
 )
 
 EOM
@@ -192,7 +151,7 @@ EOM
     }
 
     /**
-     * @return Bbcode2Html
+     * @return Bbcode2Html|object
      */
     protected function getBbcode2Html()
     {
@@ -200,7 +159,7 @@ EOM
     }
 
     /**
-     * @return EntityManager
+     * @return EntityManager|object
      */
     protected function getManager()
     {
@@ -208,7 +167,7 @@ EOM
     }
 
     /**
-     * @return TopicFactory
+     * @return TopicFactory|object
      */
     protected function getTopicFactory()
     {
@@ -216,7 +175,7 @@ EOM
     }
 
     /**
-     * @return PostFactory
+     * @return PostFactory|object
      */
     protected function getPostFactory()
     {
@@ -224,7 +183,7 @@ EOM
     }
 
     /**
-     * @return EntityRepository
+     * @return EntityRepository|object
      */
     protected function getPostRepository()
     {
@@ -232,18 +191,18 @@ EOM
     }
 
     /**
-     * @return EntityRepository
+     * @return EntityRepository|object
+     */
+    protected function getGamePlayRepository()
+    {
+        return $this->getContainer()->get('app.repository.game_play');
+    }
+
+    /**
+     * @return EntityRepository|object
      */
     protected function getCustomerRepository()
     {
         return $this->getContainer()->get('sylius.repository.customer');
-    }
-
-    /**
-     * @return \Doctrine\DBAL\Connection
-     */
-    protected function getDatabaseConnection()
-    {
-        return $this->getContainer()->get('database_connection');
     }
 }
