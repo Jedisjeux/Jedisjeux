@@ -10,6 +10,7 @@
  */
 
 namespace AppBundle\Command\Installer\Data;
+
 use AppBundle\Entity\Redirection;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -70,7 +71,7 @@ SELECT
   concat('/', replace(old.titre_clean, ' ', '-'), '-a-', old.article_id, '.html') AS source,
   concat('/article/', article.name)                                               AS destination
 FROM jedisjeux.jdj_article old
-  INNER JOIN jdj_dev.jdj_article article
+  INNER JOIN jdj_article article
     ON article.code = concat('article-', old.article_id)
 EOM;
 
