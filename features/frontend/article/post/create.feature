@@ -15,8 +15,8 @@ Feature: Article comment creation
       | code | name       | parent   |
       | news | Actualités | articles |
     And there are articles:
-      | taxon               | title                        |
-      | articles/actualites | Critique de Vroom Vroom      |
+      | taxon               | title                   | author            |
+      | articles/actualites | Critique de Vroom Vroom | kevin@example.com |
     And I am logged in as user "kevin@example.com" with password "password"
 
   @javascript

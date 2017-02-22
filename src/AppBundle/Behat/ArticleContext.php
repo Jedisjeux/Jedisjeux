@@ -14,6 +14,7 @@ namespace AppBundle\Behat;
 use AppBundle\Document\ArticleContent;
 use AppBundle\Entity\Article;
 use Behat\Gherkin\Node\TableNode;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
@@ -36,6 +37,9 @@ class ArticleContext extends DefaultContext
             /** @var TaxonInterface $taxon */
             $taxon = $this->getRepository('taxon')->findOneByPermalink($data['taxon']);
 
+            /** @var CustomerInterface $author */
+            $author = $this->getRepository('customer')->findOneBy(['email' => $data['author']]);
+
             if (null === $taxon) {
                 throw new \InvalidArgumentException(
                     sprintf('Taxon with permalink "%s" was not found.', $data['taxon'])
@@ -47,7 +51,8 @@ class ArticleContext extends DefaultContext
             $article
                 ->setCode(isset($data['code']) ? $data['code'] : $this->faker->postcode)
                 ->setStatus(Article::STATUS_PUBLISHED)
-                ->setMainTaxon($taxon);
+                ->setMainTaxon($taxon)
+                ->setAuthor($author);
 
             /** @var ArticleContent $articleContent */
             $articleContent = $article->getDocument();

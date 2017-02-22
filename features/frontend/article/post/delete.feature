@@ -6,8 +6,8 @@ Feature: Remove article comment
 
   Background:
     Given there are following users:
-      | email              | password | role      |
-      | kevin@example.com  | password | ROLE_USER |
+      | email             | password | role      |
+      | kevin@example.com | password | ROLE_USER |
     And there are root taxons:
       | code     | name     |
       | articles | Articles |
@@ -15,8 +15,8 @@ Feature: Remove article comment
       | code | name       | parent   |
       | news | Actualités | articles |
     And there are articles:
-      | taxon               | title                        |
-      | articles/actualites | Critique de Vroom Vroom      |
+      | taxon               | title                   | author            |
+      | articles/actualites | Critique de Vroom Vroom | kevin@example.com |
     And article "Critique de Vroom Vroom" has following comments:
       | author            |
       | kevin@example.com |
