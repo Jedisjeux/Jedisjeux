@@ -172,6 +172,12 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
      */
     protected function createOrReplaceImagineBlock(SingleImageBlock $block, array $data)
     {
+        $originalPath = $this->getImageOriginalPath($data['image']);
+
+        if (!is_file($originalPath)) {
+            return null;
+        }
+
         $name = 'image' . $data['id'];
 
         if (false === $block->hasChildren()) {
@@ -185,7 +191,7 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
         }
 
         $image = new Image();
-        $image->setFileContent(file_get_contents($this->getImageOriginalPath($data['image'])));
+        $image->setFileContent(file_get_contents($originalPath));
         $image->setName($data['image']);
 
         $imagineBlock
@@ -282,7 +288,7 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return Bbcode2Html
+     * @return Bbcode2Html|object
      */
     protected function getBbcode2Html()
     {
@@ -290,7 +296,7 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return DocumentRepository
+     * @return DocumentRepository|object
      */
     protected function getSingleImageBlockRepository()
     {
@@ -298,7 +304,7 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return Factory
+     * @return Factory|object
      */
     public function getDocumentFactory()
     {
@@ -306,7 +312,7 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return Factory
+     * @return Factory|object
      */
     public function getFactory()
     {
@@ -314,7 +320,7 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return TaxonRepository
+     * @return TaxonRepository|object
      */
     public function getTaxonRepository()
     {
@@ -322,7 +328,7 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return EntityRepository
+     * @return EntityRepository|object
      */
     public function getRepository()
     {
@@ -330,7 +336,7 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return DocumentRepository
+     * @return DocumentRepository|object
      */
     public function getDocumentRepository()
     {
@@ -338,7 +344,7 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return EntityManager
+     * @return EntityManager|object
      */
     public function getManager()
     {
@@ -346,7 +352,7 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return DocumentManager
+     * @return DocumentManager|object
      */
     public function getDocumentManager()
     {
@@ -354,7 +360,7 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return \Doctrine\DBAL\Connection
+     * @return \Doctrine\DBAL\Connection|object
      */
     protected function getDatabaseConnection()
     {
