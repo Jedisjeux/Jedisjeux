@@ -150,17 +150,26 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
         }
 
         if (null !== $data['mainImage']) {
-            $mainImage = $this->getContainer()->get('app.factory.imagine_block')->createNew();
+            $imageOriginalPath = $this->getImageOriginalPath($data['mainImage']);
 
-            $image = new Image();
-            $image->setFileContent(file_get_contents($this->getImageOriginalPath($data['mainImage'])));
+            if (is_file($imageOriginalPath)) {
+                $mainImage = $articleDocument->getMainImage();
 
-            $mainImage
-                ->setParentDocument($articleDocument)
-                ->setImage($image);
+                if (null === $mainImage) {
+                    /** @var ImagineBlock $mainImage */
+                    $mainImage = $this->getContainer()->get('app.factory.imagine_block')->createNew();
+                }
 
-            $articleDocument
-                ->setMainImage($mainImage);
+                $image = new Image();
+                $image->setFileContent(file_get_contents($imageOriginalPath));
+
+                $mainImage
+                    ->setParentDocument($articleDocument)
+                    ->setImage($image);
+
+                $articleDocument
+                    ->setMainImage($mainImage);
+            }
         }
 
         $articleDocument->setName($data['name']);

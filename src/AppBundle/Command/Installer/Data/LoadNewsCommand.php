@@ -220,22 +220,26 @@ EOM;
         }
 
         if (null !== $data['mainImage']) {
-            $mainImage = $articleDocument->getMainImage();
+            $imageOriginalPath = $this->getImageOriginalPath($data['mainImage']);
 
-            if (null === $mainImage) {
-                /** @var ImagineBlock $mainImage */
-                $mainImage = $this->getContainer()->get('app.factory.imagine_block')->createNew();
+            if (is_file($imageOriginalPath)) {
+                $mainImage = $articleDocument->getMainImage();
+
+                if (null === $mainImage) {
+                    /** @var ImagineBlock $mainImage */
+                    $mainImage = $this->getContainer()->get('app.factory.imagine_block')->createNew();
+                }
+
+                $image = new Image();
+                $image->setFileContent(file_get_contents($imageOriginalPath));
+
+                $mainImage
+                    ->setParentDocument($articleDocument)
+                    ->setImage($image);
+
+                $articleDocument
+                    ->setMainImage($mainImage);
             }
-
-            $image = new Image();
-            $image->setFileContent(file_get_contents($this->getImageOriginalPath($data['mainImage'])));
-
-            $mainImage
-                ->setParentDocument($articleDocument)
-                ->setImage($image);
-
-            $articleDocument
-                ->setMainImage($mainImage);
         }
 
         $articleDocument->setName($data['name']);
