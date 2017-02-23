@@ -32,7 +32,6 @@ class ArticleContent extends ContainerBlock implements ResourceInterface
     const PENDING_PUBLICATION = "pending_publication";
     const PUBLISHED = "published";
 
-
     /**
      * @var string
      *
@@ -159,9 +158,12 @@ class ArticleContent extends ContainerBlock implements ResourceInterface
      *
      * @return $this
      */
-    public function addBlock(ContainerBlock $block)
+    public function addBlock(ContainerBlock $block, $key = null)
     {
         if (!$this->hasBlock($block)) {
+            $block->setParentDocument($this);
+            //$nextKey = count($this->blocks) + 1;
+            //$block->setName('block-' . $nextKey);
             $this->blocks->add($block);
         }
 

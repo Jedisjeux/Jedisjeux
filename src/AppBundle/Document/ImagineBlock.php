@@ -22,11 +22,5 @@ use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock as BaseImagineBlo
  */
 class ImagineBlock extends BaseImagineBlock implements ResourceInterface
 {
-    /**
-     * SingleImageBlock constructor.
-     */
-    public function __construct()
-    {
-        $this->name = uniqid('block_');
-    }
+
 }
