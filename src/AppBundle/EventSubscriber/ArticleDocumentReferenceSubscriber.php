@@ -81,7 +81,7 @@ class ArticleDocumentReferenceSubscriber implements EventSubscriber
             ->setPublishable($document->isPublishable())
             ->setPublishStartDate($document->getPublishStartDate())
             ->setPublishEndDate($document->getPublishEndDate())
-            ->setImagePath($document->getMainImage() ? $document->getMainImage()->getImage()->getId() : null);
+            ->setImagePath($document->getMainImage() && $document->getMainImage()->getImage() ? $document->getMainImage()->getImage()->getId() : null);
 
         $manager->flush();
     }

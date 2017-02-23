@@ -17,9 +17,9 @@ Feature: View list of articles
       | news    | Actualités | articles |
       | reviews | Critiques  | articles |
     And there are articles:
-      | taxon               | title                        |
-      | articles/actualites | King of New York : Power Up! |
-      | articles/critiques  | Critique de Vroom Vroom      |
+      | taxon               | title                        | author            |
+      | articles/actualites | King of New York : Power Up! | admin@example.com |
+      | articles/critiques  | Critique de Vroom Vroom      | admin@example.com |
     And I am logged in as user "admin@example.com" with password "password"
 
   Scenario: View list of articles
