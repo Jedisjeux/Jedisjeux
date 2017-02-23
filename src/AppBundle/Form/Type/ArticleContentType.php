@@ -42,7 +42,6 @@ class ArticleContentType extends AbstractResourceType
             ])
             ->add('blocks', PolyCollectionType::class, [
                 'types' => [
-                    'app_imagine_block',
                     'app_blockquote_block',
                     'app_left_image_block',
                     'app_right_image_block',
@@ -52,7 +51,6 @@ class ArticleContentType extends AbstractResourceType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'cascade_validation' => true,
             ])
             ->add('publishable', null, [
                 'label' => 'label.publishable'
@@ -75,6 +73,18 @@ class ArticleContentType extends AbstractResourceType
                     'class' => 'datetime',
                 ]
             ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'data_class' => $this->dataClass,
+            'validation_groups' => $this->validationGroups,
+            'cascade_validation' => true,
+        ]);
     }
 
     /**

@@ -36,6 +36,7 @@ class SingleImageBlockType extends AbstractResourceType
             ->add('title', null, array(
                 'label' => 'label.title'
             ))
+            ->add('name', HiddenType::class)
             ->add('body', CKEditorType::class, array(
                 'label' => 'label.body',
             ))

@@ -18,3 +18,9 @@ Feature: Creates articles
       | Titre | King of New York : Power Up! |
     When I press "Créer"
     Then I should see "a bien été créé"
+
+  Scenario: Cannot create empty article
+    Given I am on "/admin/articles/"
+    And I follow "Créer"
+    When I press "Créer"
+    Then I should see "Cette valeur ne doit pas être vide."

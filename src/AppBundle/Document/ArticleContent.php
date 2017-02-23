@@ -14,8 +14,8 @@ namespace AppBundle\Document;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ContainerBlock;
-
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -32,11 +32,12 @@ class ArticleContent extends ContainerBlock implements ResourceInterface
     const PENDING_PUBLICATION = "pending_publication";
     const PUBLISHED = "published";
 
-
     /**
      * @var string
      *
      * @PHPCR\Field(type="string", nullable=false)
+     *
+     * @Assert\NotBlank
      */
     protected $title;
 
@@ -44,6 +45,8 @@ class ArticleContent extends ContainerBlock implements ResourceInterface
      * @var string
      *
      * @PHPCR\Field(type="string", nullable=false)
+     *
+     * @Assert\NotBlank
      */
     protected $state = null;
 
@@ -155,9 +158,12 @@ class ArticleContent extends ContainerBlock implements ResourceInterface
      *
      * @return $this
      */
-    public function addBlock(ContainerBlock $block)
+    public function addBlock(ContainerBlock $block, $key = null)
     {
         if (!$this->hasBlock($block)) {
+            $block->setParentDocument($this);
+            //$nextKey = count($this->blocks) + 1;
+            //$block->setName('block-' . $nextKey);
             $this->blocks->add($block);
         }
 
