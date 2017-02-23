@@ -14,8 +14,8 @@ namespace AppBundle\Document;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ContainerBlock;
-
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -37,6 +37,8 @@ class ArticleContent extends ContainerBlock implements ResourceInterface
      * @var string
      *
      * @PHPCR\Field(type="string", nullable=false)
+     *
+     * @Assert\NotBlank
      */
     protected $title;
 
@@ -44,6 +46,8 @@ class ArticleContent extends ContainerBlock implements ResourceInterface
      * @var string
      *
      * @PHPCR\Field(type="string", nullable=false)
+     *
+     * @Assert\NotBlank
      */
     protected $state = null;
 
