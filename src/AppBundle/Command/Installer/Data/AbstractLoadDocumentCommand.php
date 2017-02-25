@@ -11,6 +11,7 @@
 
 namespace AppBundle\Command\Installer\Data;
 
+use AppBundle\Document\ArticleContent;
 use AppBundle\Document\ImagineBlock;
 use AppBundle\Document\SingleImageBlock;
 use AppBundle\Entity\Article;
@@ -30,6 +31,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ContainerBlock;
+use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SlideshowBlock;
 use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -84,14 +86,22 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param ContainerBlock $parent
+     * @param ArticleContent $parent
      * @param array $blocks
      */
-    protected function populateBlocks(ContainerBlock $parent, array $blocks)
+    protected function populateBlocks(ArticleContent $parent, array $blocks, SlideshowBlock $slideshowBlock = null)
     {
         foreach ($blocks as $data) {
+            if (null !== $slideshowBlock && isset($data['image'])) {
+                $block = $this->createOrReplaceBlock($slideshowBlock, $data);
+                $this->createOrReplaceImagineBlock($block, $data);
+                $slideshowBlock->addChild($block);
+                continue;
+            }
+
             $block = $this->createOrReplaceBlock($parent, $data);
-            $parent->addChild($block);
+            $parent->addBlock($block);
+
             if (isset($data['image'])) {
                 $this->createOrReplaceImagineBlock($block, $data);
             }
