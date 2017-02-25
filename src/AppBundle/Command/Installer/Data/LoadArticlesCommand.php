@@ -113,7 +113,7 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
             $this->getDocumentManager()->detach($articleDocument);
             $this->getDocumentManager()->clear();
 
-            if ($key > 0 and $key%10 === 0) {
+            if ($key > 0 and $key % 10 === 0) {
                 $this->clearDoctrineCache();
             }
         }
@@ -149,27 +149,25 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
                 ->setDocument($articleDocument);
         }
 
-        if (null !== $data['mainImage']) {
+        if (null !== $data['mainImage'] && !empty($data['mainImage'])) {
             $imageOriginalPath = $this->getImageOriginalPath($data['mainImage']);
+            $mainImage = $articleDocument->getMainImage();
 
-            if (file_exists($imageOriginalPath)) {
-                $mainImage = $articleDocument->getMainImage();
-
-                if (null === $mainImage) {
-                    /** @var ImagineBlock $mainImage */
-                    $mainImage = $this->getContainer()->get('app.factory.imagine_block')->createNew();
-                }
-
-                $image = new Image();
-                $image->setFileContent(file_get_contents($imageOriginalPath));
-
-                $mainImage
-                    ->setParentDocument($articleDocument)
-                    ->setImage($image);
-
-                $articleDocument
-                    ->setMainImage($mainImage);
+            if (null === $mainImage) {
+                /** @var ImagineBlock $mainImage */
+                $mainImage = $this->getContainer()->get('app.factory.imagine_block')->createNew();
             }
+
+            $image = new Image();
+            $image->setFileContent(file_get_contents($imageOriginalPath));
+
+            $mainImage
+                ->setParentDocument($articleDocument)
+                ->setImage($image);
+
+            $articleDocument
+                ->setMainImage($mainImage);
+
         }
 
         $articleDocument->setName($data['name']);

@@ -110,7 +110,7 @@ class LoadNewsCommand extends AbstractLoadDocumentCommand
             $this->getDocumentManager()->detach($articleContent);
             $this->getDocumentManager()->clear();
 
-            if ($key > 0 and $key%10 === 0) {
+            if ($key > 0 and $key % 10 === 0) {
                 $this->clearDoctrineCache();
             }
         }
@@ -219,27 +219,26 @@ EOM;
                 ->setDocument($articleDocument);
         }
 
-        if (null !== $data['mainImage']) {
+        if (null !== $data['mainImage'] && !empty($data['mainImage'])) {
             $imageOriginalPath = $this->getImageOriginalPath($data['mainImage']);
 
-            if (file_exists($imageOriginalPath)) {
-                $mainImage = $articleDocument->getMainImage();
+            $mainImage = $articleDocument->getMainImage();
 
-                if (null === $mainImage) {
-                    /** @var ImagineBlock $mainImage */
-                    $mainImage = $this->getContainer()->get('app.factory.imagine_block')->createNew();
-                }
-
-                $image = new Image();
-                $image->setFileContent(file_get_contents($imageOriginalPath));
-
-                $mainImage
-                    ->setParentDocument($articleDocument)
-                    ->setImage($image);
-
-                $articleDocument
-                    ->setMainImage($mainImage);
+            if (null === $mainImage) {
+                /** @var ImagineBlock $mainImage */
+                $mainImage = $this->getContainer()->get('app.factory.imagine_block')->createNew();
             }
+
+            $image = new Image();
+            $image->setFileContent(file_get_contents($imageOriginalPath));
+
+            $mainImage
+                ->setParentDocument($articleDocument)
+                ->setImage($image);
+
+            $articleDocument
+                ->setMainImage($mainImage);
+
         }
 
         $articleDocument->setName($data['name']);
