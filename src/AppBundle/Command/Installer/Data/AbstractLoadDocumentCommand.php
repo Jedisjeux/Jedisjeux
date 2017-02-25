@@ -172,13 +172,13 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
      */
     protected function createOrReplaceImagineBlock(SingleImageBlock $block, array $data)
     {
-        $originalPath = $this->getImageOriginalPath($data['image']);
-
-        if (file_exists($originalPath)) {
+        if (null === $data['image'] || empty($data['image'])) {
             return null;
         }
 
-        if (false === $imagineBlock = $block->getImagineBlock()) {
+        $originalPath = $this->getImageOriginalPath($data['image']);
+
+        if (null === $imagineBlock = $block->getImagineBlock()) {
             /** @var ImagineBlock $imagineBlock */
             $imagineBlock = $this->getContainer()->get('app.factory.imagine_block')->createNew();
             $block
