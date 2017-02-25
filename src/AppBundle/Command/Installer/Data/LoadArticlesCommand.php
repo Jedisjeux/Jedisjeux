@@ -152,7 +152,7 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
         if (null !== $data['mainImage']) {
             $imageOriginalPath = $this->getImageOriginalPath($data['mainImage']);
 
-            if (is_file($imageOriginalPath)) {
+            if (file_exists($imageOriginalPath)) {
                 $mainImage = $articleDocument->getMainImage();
 
                 if (null === $mainImage) {
@@ -272,7 +272,7 @@ from jedisjeux.jdj_article article
 where titre_clean != ''
 EOM;
 
-        if ($this->input->hasOption('no-update')) {
+        if ($this->input->getOption('no-update')) {
             $query .= <<<EOM
 
 AND not exists (

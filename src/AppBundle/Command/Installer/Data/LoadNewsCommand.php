@@ -222,7 +222,7 @@ EOM;
         if (null !== $data['mainImage']) {
             $imageOriginalPath = $this->getImageOriginalPath($data['mainImage']);
 
-            if (is_file($imageOriginalPath)) {
+            if (file_exists($imageOriginalPath)) {
                 $mainImage = $articleDocument->getMainImage();
 
                 if (null === $mainImage) {

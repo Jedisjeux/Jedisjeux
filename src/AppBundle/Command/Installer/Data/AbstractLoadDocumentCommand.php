@@ -174,20 +174,15 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
     {
         $originalPath = $this->getImageOriginalPath($data['image']);
 
-        if (!is_file($originalPath)) {
+        if (file_exists($originalPath)) {
             return null;
         }
 
-        $name = 'image' . $data['id'];
-
-        if (false === $block->hasChildren()) {
+        if (false === $imagineBlock = $block->getImagineBlock()) {
             /** @var ImagineBlock $imagineBlock */
             $imagineBlock = $this->getContainer()->get('app.factory.imagine_block')->createNew();
             $block
-                ->addChild($imagineBlock);
-        } else {
-            /** @var ImagineBlock $imagineBlock */
-            $imagineBlock = $block->getChildren()->first();
+                ->setImagineBlock($imagineBlock);
         }
 
         $image = new Image();
@@ -195,8 +190,6 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
         $image->setName($data['image']);
 
         $imagineBlock
-            ->setName($name)
-            ->setParentDocument($block)
             ->setImage($image)
             ->setLabel($data['image_label']);
 
