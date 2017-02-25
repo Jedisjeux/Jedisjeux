@@ -69,7 +69,7 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
                 $slideshowBlock = $this->createOrReplaceSlideshowBlock($articleDocument);
                 $this->getDocumentManager()->persist($slideshowBlock);
                 $this->getDocumentManager()->flush();
-                $this->populateBlocks($slideshowBlock, $blocks);
+                $this->populateBlocks($articleDocument, $blocks, $slideshowBlock);
             } else {
                 $this->populateBlocks($articleDocument, $blocks);
             }
