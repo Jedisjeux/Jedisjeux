@@ -52,6 +52,10 @@ class ArticleContentType extends AbstractResourceType
                 'allow_delete' => true,
                 'by_reference' => false,
             ])
+            ->add('slideShowBlock', 'app_slideshow_block', [
+                'label' => false,
+                'required' => false,
+            ])
             ->add('publishable', null, [
                 'label' => 'label.publishable'
             ])

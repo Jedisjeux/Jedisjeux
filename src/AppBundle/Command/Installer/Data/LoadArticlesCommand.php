@@ -214,7 +214,7 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
         $block = $page->getChildren()->next();
 
         if (false === $block) {
-            $block = new SlideshowBlock();
+            $block = $this->getContainer()->get('app.factory.slideshow_block')->createNew();
             $block
                 ->setParentDocument($page);
         }

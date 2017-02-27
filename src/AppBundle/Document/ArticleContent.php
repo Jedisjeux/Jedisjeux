@@ -58,6 +58,13 @@ class ArticleContent extends ContainerBlock implements ResourceInterface
     protected $mainImage;
 
     /**
+     * @var ImagineBlock
+     *
+     * @PHPCR\Child(nodeName="slideshow")
+     */
+    protected $slideShowBlock;
+
+    /**
      * @PHPCR\Children(filter="block*")
      */
     protected $blocks;
@@ -131,6 +138,28 @@ class ArticleContent extends ContainerBlock implements ResourceInterface
         $mainImage->setParentDocument($this);
         $mainImage->setName('mainImage');
         $this->mainImage = $mainImage;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSlideShowBlock()
+    {
+        return $this->slideShowBlock;
+    }
+
+    /**
+     * @param mixed $slideShowBlock
+     *
+     * @return $this
+     */
+    public function setSlideShowBlock($slideShowBlock)
+    {
+        $slideShowBlock->setParentDocument($this);
+        $slideShowBlock->setName('slideshow');
+        $this->slideShowBlock = $slideShowBlock;
 
         return $this;
     }
