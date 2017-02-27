@@ -183,7 +183,7 @@
             {% set image = form.imagineBlock.image %}
 
             {% if image.vars.data and image.vars.data.id is defined %}
-                <img class="ui fluid image" src="{{ image.vars.data.id | imagine_filter('cmf_block') }}"/>
+                <img class="ui fluid image" src="{{ image.vars.data.id | imagine_filter('cmf_magazine_item') }}"/>
             {% endif %}
 
             {{ form_row(form.imagineBlock.image) }}
@@ -208,7 +208,7 @@
             {% set image = form.imagineBlock.image %}
 
             {% if image.vars.data and image.vars.data.id is defined %}
-                <img class="ui fluid image" src="{{ image.vars.data.id | imagine_filter('cmf_block') }}"/>
+                <img class="ui fluid image" src="{{ image.vars.data.id | imagine_filter('cmf_magazine_item') }}"/>
             {% endif %}
             {{ form_row(form.imagineBlock.image) }}
             {{ form_row(form.imagineBlock.label) }}
@@ -223,7 +223,7 @@
     {% set image = form.imagineBlock.image %}
 
     {% if image.vars.data and image.vars.data.id is defined %}
-        <img class="ui fluid image" src="{{ image.vars.data.id | imagine_filter('cmf_block') }}"/>
+        <img class="ui image" src="{{ image.vars.data.id | imagine_filter('cmf_magazine_item') }}"/>
     {% endif %}
     {{ form_row(form.imagineBlock.image) }}
     {{ form_row(form.imagineBlock.label) }}
@@ -237,7 +237,7 @@
     {% set image = form.imagineBlock.image %}
 
     {% if image.vars.data and image.vars.data.id is defined %}
-        <img class="ui fluid image" src="{{ image.vars.data.id | imagine_filter('cmf_block') }}"/>
+        <img class="ui fluid image" src="{{ image.vars.data.id | imagine_filter('cmf_magazine_item') }}"/>
     {% endif %}
     {{ form_row(form.imagineBlock.image) }}
     {{ form_row(form.imagineBlock.label) }}
