@@ -102,6 +102,9 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
             $block = $this->createOrReplaceBlock($parent, $data);
             $parent->addBlock($block);
 
+            // to fix block order
+            $this->getDocumentManager()->flush($parent);
+
             if (isset($data['image'])) {
                 $this->createOrReplaceImagineBlock($block, $data);
             }
