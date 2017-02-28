@@ -59,21 +59,21 @@ services:
     app.subscriber.calculate_topic_count_by_taxon:
         class: AppBundle\EventSubscriber\CalculateTopicCountByTaxonSubscriber
         arguments:
-            - @app.updater.topic_count_by_taxon
+            - "@app.updater.topic_count_by_taxon"
         tags:
             - { name: kernel.event_subscriber }
 
     app.subscriber.calculate_post_count_by_topic:
         class: AppBundle\EventSubscriber\CalculatePostCountByTopicSubscriber
         arguments:
-            - @app.updater.post_count_by_topic
+            - "@app.updater.post_count_by_topic"
         tags:
             - { name: kernel.event_subscriber }
 
     app.subscriber.calculate_product_count_by_taxon:
         class: AppBundle\EventSubscriber\CalculateProductCountByTaxonSubscriber
         arguments:
-            - @app.updater.product_count_by_taxon
+            - "@app.updater.product_count_by_taxon"
         tags:
             - { name: kernel.event_subscriber }
 

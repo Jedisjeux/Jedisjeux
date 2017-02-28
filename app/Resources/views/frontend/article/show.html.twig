@@ -3,6 +3,7 @@
 {% import 'macros/items.html.twig' as item %}
 {% from 'macros/game_reviews.html.twig' import blogCommentItem as reviewComment %}
 {% import 'macros/pageViews.html.twig' as pageViews %}
+{% import 'macros/buttons.html.twig' as button %}
 
 {% set topic = article.topic %}
 
@@ -69,10 +70,13 @@
             </div>
         {% endif %}
 
-        {{ pageViews.render(article.id, 'article', path('app_frontend_article_show', {'name' : article.name})) }}
+        <h5><i class="fa fa-users color"></i> Participer</h5>
+        {{ button.btn(path('app_frontend_article_post_create', {'articleName' : article.name}), 'Commenter l\'article', null, 'plus-sign', 'btn-color btn-lg') }}
+        <hr/>
 
+        {{ pageViews.render(article.id, 'article', path('app_frontend_article_show', {'name' : article.name})) }}
     </div>
     <div class="col-md-4">
-        {% include "frontend/article/_sidebarShow.html.twig" %}
+        {% include "frontend/article/show/_sidebar.html.twig" %}
     </div>
 {% endblock %}

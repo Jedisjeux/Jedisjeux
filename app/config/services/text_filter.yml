@@ -11,5 +11,5 @@ services:
     app.text.filter.bbcode2html:
         class: AppBundle\TextFilter\Bbcode2Html
         arguments:
-            - @database_connection
-            - @sylius.repository.product_variant
+            - "@database_connection"
+            - "@sylius.repository.product_variant"

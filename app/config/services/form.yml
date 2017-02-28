@@ -34,7 +34,7 @@ services:
     sylius.form.type.product_review_rating:
         class: AppBundle\Form\Type\RatingType
         arguments:
-            - %sylius.model.product_review.class%
+            - "%sylius.model.product_review.class%"
             - []
             - 'product'
         tags:
@@ -48,7 +48,7 @@ services:
     sylius.form.type.product_view_count:
         class: AppBundle\Form\Type\ProductViewCountType
         arguments:
-            - %sylius.model.product.class%
+            - "%sylius.model.product.class%"
             - []
         tags:
           - { name: form.type, alias: sylius_product_view_count }
