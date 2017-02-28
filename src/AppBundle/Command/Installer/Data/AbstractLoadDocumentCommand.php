@@ -108,8 +108,6 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
             if (isset($data['image'])) {
                 $this->createOrReplaceImagineBlock($block, $data);
             }
-
-
         }
     }
 
