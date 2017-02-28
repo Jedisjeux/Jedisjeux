@@ -56,6 +56,7 @@ class Bbcode2Html
         $body = $this->emoticonReplacement($body);
         $body = $this->colorReplacement($body);
         $body = $this->sizeReplacement($body);
+        $body = $this->blockReplacement($body);
         $body = $this->quoteReplacement($body);
         $body = $this->imageReplacement($body);
         $body = $this->imageWithIdReplacement($body);
@@ -184,7 +185,7 @@ EOM;
             $position = isset($data[1]) ? $data[1] : null;
 
             if ('left' === $position) {
-                $body = str_replace(sprintf('IMAGE-CLASS-%s', $id), 'pull-left col-md-6 no-padding-left', $body); 
+                $body = str_replace(sprintf('IMAGE-CLASS-%s', $id), 'pull-left col-md-6 no-padding-left', $body);
             } elseif ('right' === $position) {
                 $body = str_replace(sprintf('IMAGE-CLASS-%s', $id), 'pull-right col-md-6 no-padding-right', $body);
             } else {
@@ -240,12 +241,31 @@ EOM;
 
     /**
      * @param string $body
+     *
      * @return string
      */
     protected function colorReplacement($body)
     {
         $pattern = '/\[color=(.*?)\](?P<text>.*?)\[\/color:(.*?)\]/ms';
         $replacement = "$2";
+        $body = preg_replace($pattern, $replacement, $body);
+
+        return $body;
+    }
+
+    /**
+     * @param string $body
+     *
+     * @return string
+     */
+    protected function blockReplacement($body)
+    {
+        $pattern = '/\[bleft:(.*?)\](?P<text>.*?)\[\/bleft:(.*?)\]/ms';
+        $replacement = "<div class=\"clearfix\"></div><div style=\"margin-right: 10px\" class=\"pull-left\">$2</div>";
+        $body = preg_replace($pattern, $replacement, $body);
+
+        $pattern = '/\[bright:(.*?)\](?P<text>.*?)\[\/bright:(.*?)\]/ms';
+        $replacement = "<div class=\"clearfix\"></div><div style=\"margin-left: 10px\" class=\"pull-right\">$2</div>";
         $body = preg_replace($pattern, $replacement, $body);
 
         return $body;
