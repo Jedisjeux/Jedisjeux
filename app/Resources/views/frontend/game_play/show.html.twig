@@ -1,6 +1,7 @@
 {% extends "::base.html.twig" %}
 
 {% import 'macros/items.html.twig' as item %}
+{% import 'macros/buttons.html.twig' as button %}
 
 {% set topic = game_play.topic %}
 
@@ -40,11 +41,15 @@
             <div class="blog-comments">
                 {% for post in topic.posts %}
                     {% include 'frontend/post/show/_content.html.twig' with {
-                        'editPath': path('app_frontend_game_play_post_update', {'id': post.id, 'gamePlayId': game_play.id})
+                    'editPath': path('app_frontend_game_play_post_update', {'id': post.id, 'gamePlayId': game_play.id})
                     } %}
                 {% endfor %}
             </div>
         {% endif %}
+
+        <h5><i class="fa fa-users color"></i> Participer</h5>
+        {{ button.btn(path('app_frontend_game_play_post_create', {'gamePlayId' : game_play.id}), 'Commenter la partie', null, 'plus-sign', 'btn-color btn-lg') }}
+        <hr/>
     </div>
     <div class="col-md-4">
         {% include "frontend/game_play/show/_sidebar.html.twig" %}

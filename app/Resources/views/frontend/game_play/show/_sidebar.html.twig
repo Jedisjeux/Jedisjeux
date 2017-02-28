@@ -1,22 +1,8 @@
 {% from 'macros/users.html.twig' import avatar %}
-{% import 'macros/buttons.html.twig' as button %}
 
 {% set product = game_play.product %}
 
-
 <div class="sidebar">
-
-    <div class="s-widget">
-        <h5><i class="fa fa-users color"></i> Participer</h5>
-        <!-- Widgets Content -->
-        <div class="widget-content search">
-            {{ button.btn(path('app_frontend_game_play_post_create', {'gamePlayId' : game_play.id}), 'Commenter la partie', null, 'plus-sign', 'btn-color btn-lg') }}
-        </div>
-    </div>
-
-    <hr/>
-
-
     {% if game_play.players|length > 0 %}
         <!-- Gallery Widget -->
         <div class="s-widget">
