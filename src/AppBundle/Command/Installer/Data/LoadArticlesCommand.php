@@ -58,8 +58,7 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
             $article = $this->createOrReplaceArticle($data);
             $articleDocument = $article->getDocument();
 
-            $block = $this->createOrReplaceIntroductionBlock($articleDocument, $data);
-            $articleDocument->addChild($block);
+            $this->createOrReplaceIntroductionBlock($articleDocument, $data);
             $blocks = $this->getBlocks($data['blocks']);
 
             $this->getDocumentManager()->persist($articleDocument);
@@ -188,17 +187,19 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
     {
         /** @var BlockquoteBlock $block */
         $block = $page->getChildren()->first();
+        $name = 'block0';
 
         if (false === $block) {
-            $block = new BlockquoteBlock();
-            $block
-                ->setParentDocument($page);
+            $block = $this->getContainer()->get('app.factory.blockquote_block')->createNew();
+            $block->setName($name);
         }
 
         $block
             ->setBody(sprintf('<p>%s</p>', $data['introduction']))
-            ->setName('introduction')
+            ->setName($name)
             ->setPublishable(true);
+
+        $page->addBlock($block);
 
         return $block;
     }

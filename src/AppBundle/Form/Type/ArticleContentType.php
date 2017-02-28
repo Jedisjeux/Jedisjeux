@@ -11,6 +11,10 @@
 
 namespace AppBundle\Form\Type;
 
+use AppBundle\Form\Type\SingleImageBlock\LeftImageBlockType;
+use AppBundle\Form\Type\SingleImageBlock\RightImageBlockType;
+use AppBundle\Form\Type\SingleImageBlock\TopImageBlockType;
+use AppBundle\Form\Type\SingleImageBlock\WellImageBlockType;
 use Infinite\FormBundle\Form\Type\PolyCollectionType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -42,11 +46,11 @@ class ArticleContentType extends AbstractResourceType
             ])
             ->add('blocks', PolyCollectionType::class, [
                 'types' => [
-                    'app_blockquote_block',
-                    'app_left_image_block',
-                    'app_right_image_block',
-                    'app_top_image_block',
-                    'app_well_image_block',
+                    LeftImageBlockType::class,
+                    RightImageBlockType::class,
+                    TopImageBlockType::class,
+                    WellImageBlockType::class,
+                    BlockquoteBlockType::class,
                 ],
                 'allow_add' => true,
                 'allow_delete' => true,

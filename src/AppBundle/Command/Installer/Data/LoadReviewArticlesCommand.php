@@ -15,6 +15,7 @@ use AppBundle\Command\LogMemoryUsageTrait;
 use AppBundle\Document\ArticleContent;
 use AppBundle\Document\BlockquoteBlock;
 use AppBundle\Document\ImagineBlock;
+use AppBundle\Document\SingleImageBlock;
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Taxon;
 use AppBundle\Entity\Topic;
@@ -67,13 +68,12 @@ class LoadReviewArticlesCommand extends AbstractLoadDocumentCommand
             $this->getDocumentManager()->persist($articleDocument);
             $this->getDocumentManager()->flush();
 
-            $block = $this->createOrReplaceIntroductionBlock($articleDocument, $data);
-            $articleDocument->addChild($block);
+            $this->createOrReplaceIntroductionBlock($articleDocument, $data);
             $blocks = [
                 [
                     'id' => $data['name'] . '0',
                     'body' => $data['material'],
-                    'image_position' => 'left',
+                    'image_position' => SingleImageBlock::POSITION_LEFT,
                     'image_label' => null,
                     'image' => $data['material_image_path'],
                     'title' => 'Matériel',
@@ -81,7 +81,7 @@ class LoadReviewArticlesCommand extends AbstractLoadDocumentCommand
                 ], [
                     'id' => $data['name'] . '1',
                     'body' => $data['rules'],
-                    'image_position' => 'right',
+                    'image_position' => SingleImageBlock::POSITION_RIGHT,
                     'image_label' => null,
                     'image' => $data['rules_image_path'],
                     'title' => 'Règles',
@@ -89,7 +89,7 @@ class LoadReviewArticlesCommand extends AbstractLoadDocumentCommand
                 ], [
                     'id' => $data['name'] . '2',
                     'body' => $data['lifetime'],
-                    'image_position' => 'center',
+                    'image_position' => SingleImageBlock::POSITION_TOP,
                     'image_label' => null,
                     'image' => $data['lifetime_image_path'],
                     'title' => 'Durée de vie',
@@ -193,24 +193,37 @@ class LoadReviewArticlesCommand extends AbstractLoadDocumentCommand
         return $article;
     }
 
+    /**
+     * @param ArticleContent $page
+     * @param array $data
+     *
+     * @return BlockquoteBlock|null|object
+     */
     protected function createOrReplaceIntroductionBlock(ArticleContent $page, array $data)
     {
-        $name = 'block0';
+        if (!isset($data['introduction'])) {
+            return null;
+        }
 
+        $name = 'block0';
+        $id = $page->getId().'/'.$name;
+
+        /** @var BlockquoteBlock $block */
         $block = $this
-            ->getSingleImageBlockRepository()
-            ->findOneBy(array('name' => $name));
+            ->getContainer()->get('app.repository.blockquote_block')
+            ->find($id);
 
         if (null === $block) {
-            $block = new BlockquoteBlock();
-            $block
-                ->setParentDocument($page);
+            $block = $this->getContainer()->get('app.factory.blockquote_block')->createNew();
+            $block->setName($name);
         }
 
         $block
             ->setBody(sprintf('<p>%s</p>', $data['introduction']))
             ->setName($name)
             ->setPublishable(true);
+
+        $page->addBlock($block);
 
         return $block;
     }

@@ -12,8 +12,11 @@
 namespace AppBundle\Document;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
+use Sonata\BlockBundle\Model\BlockInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\AbstractBlock;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ContainerBlock;
 
@@ -165,7 +168,7 @@ class ArticleContent extends ContainerBlock implements ResourceInterface
     }
 
     /**
-     * @return mixed
+     * @return Collection|AbstractBlock[]
      */
     public function getBlocks()
     {
@@ -173,26 +176,24 @@ class ArticleContent extends ContainerBlock implements ResourceInterface
     }
 
     /**
-     * @param ContainerBlock $block
+     * @param AbstractBlock $block
      *
      * @return bool
      */
-    public function hasBlock(ContainerBlock $block)
+    public function hasBlock(AbstractBlock $block)
     {
         return $this->blocks->contains($block);
     }
 
     /**
-     * @param ContainerBlock $block
+     * @param AbstractBlock $block
      *
      * @return $this
      */
-    public function addBlock(ContainerBlock $block, $key = null)
+    public function addBlock(AbstractBlock $block, $key = null)
     {
         if (!$this->hasBlock($block)) {
             $block->setParentDocument($this);
-            //$nextKey = count($this->blocks) + 1;
-            //$block->setName('block-' . $nextKey);
             $this->blocks->add($block);
         }
 
