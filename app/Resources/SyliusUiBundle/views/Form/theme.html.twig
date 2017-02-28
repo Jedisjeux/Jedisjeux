@@ -177,6 +177,11 @@
 
 {%- endblock %}
 
+{% block blockquote_block_widget -%}
+    {{ form_row(form.body) }}
+    {{ form_row(form._type) }}
+{%- endblock %}
+
 {% block single_image_left_block_widget -%}
     <div class="ui stackable grid">
         <div class="six wide column">
