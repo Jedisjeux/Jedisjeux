@@ -96,6 +96,19 @@ class LoadReviewArticlesCommand extends AbstractLoadDocumentCommand
                     'class' => null,
                 ]
             ];
+
+            if (!empty($data['advice'])) {
+                $blocks[] = [
+                    'id' => $data['name'] . '3',
+                    'body' => $data['advice'],
+                    'image_position' => SingleImageBlock::POSITION_TOP,
+                    'image_label' => null,
+                    'image' => null,
+                    'title' => 'Le conseil de Jedisjeux',
+                    'class' => 'well',
+                ];
+            }
+
             $this->populateBlocks($articleDocument, $blocks);
 
             if (null !== $data['product_id']) {
@@ -234,61 +247,63 @@ class LoadReviewArticlesCommand extends AbstractLoadDocumentCommand
     protected function getTests()
     {
         $query = <<<EOM
-select test.game_id as id,
-       test.date as publishedAt,
-       product.id as product_id,
-       productTranslation.name as product_name,
-       game.couverture as main_image,
-       concat('Critique de ', productTranslation.name) as title,
-       concat('critique-', productTranslation.slug, '-ra-', test.game_id) as name,
-       topic.id as topic_id,
-       customer.id as author_id,
-       test.intro as introduction,
-       test.materiel as material,
-       test.regle as rules,
-       test.duree_vie as lifetime,
-       test.note_materiel/2 as materialRating,
-       test.note_regle/2 as rulesRating,
-       test.note_duree_vie/2 as lifetimeRating,
-       test.valid as publishable,
-       review_article_view.view_count,
-       material_image.img_nom as material_image_path,
-       rules_image.img_nom as rules_image_path,
-       lifetime_image.img_nom as lifetime_image_path
-from jedisjeux.jdj_tests test
-  inner join jedisjeux.jdj_v_review_article_view_count as review_article_view  
-    on review_article_view.id = test.game_id
-  inner join jedisjeux.jdj_game game
-    on game.id = test.game_id
-  inner join sylius_product_variant productVariant
-    on productVariant.code = concat('game-', test.game_id)
-  inner join sylius_product product
-    on product.id = productVariant.product_id
-  inner join sylius_product_translation productTranslation
-    on productTranslation.translatable_id = product.id
-       and locale = 'fr'
-  left join jdj_topic topic
-    on topic.code = concat('topic-', test.topic_id)
-  inner join sylius_customer customer
-    on customer.code = concat('user-', test.user_id)
-  left join jedisjeux.jdj_images_elements material_img
-        on material_img.elem_type = 'test'  
-        and material_img.elem_id = test.game_id
-        and material_img.ordre = 1
-  left join jedisjeux.jdj_images material_image
-        on material_image.img_id = material_img.img_id
-  left join jedisjeux.jdj_images_elements rules_img
-        on rules_img.elem_type = 'test'  
-        and rules_img.elem_id = test.game_id
-        and rules_img.ordre = 2
-  left join jedisjeux.jdj_images rules_image
-        on rules_image.img_id = rules_img.img_id
-  left join jedisjeux.jdj_images_elements lifetime_img
-        on lifetime_img.elem_type = 'test'  
-        and lifetime_img.elem_id = test.game_id
-        and lifetime_img.ordre = 3
-  left join jedisjeux.jdj_images lifetime_image
-        on lifetime_image.img_id = lifetime_img.img_id
+SELECT
+  test.game_id                                                       AS id,
+  test.date                                                          AS publishedAt,
+  product.id                                                         AS product_id,
+  productTranslation.name                                            AS product_name,
+  game.couverture                                                    AS main_image,
+  concat('Critique de ', productTranslation.name)                    AS title,
+  concat('critique-', productTranslation.slug, '-ra-', test.game_id) AS name,
+  topic.id                                                           AS topic_id,
+  customer.id                                                        AS author_id,
+  test.intro                                                         AS introduction,
+  test.materiel                                                      AS material,
+  test.regle                                                         AS rules,
+  test.duree_vie                                                     AS lifetime,
+  test.conseil                                                       AS advice,
+  test.note_materiel / 2                                             AS materialRating,
+  test.note_regle / 2                                                AS rulesRating,
+  test.note_duree_vie / 2                                            AS lifetimeRating,
+  test.valid                                                         AS publishable,
+  review_article_view.view_count,
+  material_image.img_nom                                             AS material_image_path,
+  rules_image.img_nom                                                AS rules_image_path,
+  lifetime_image.img_nom                                             AS lifetime_image_path
+FROM jedisjeux.jdj_tests test
+  INNER JOIN jedisjeux.jdj_v_review_article_view_count AS review_article_view
+    ON review_article_view.id = test.game_id
+  INNER JOIN jedisjeux.jdj_game game
+    ON game.id = test.game_id
+  INNER JOIN sylius_product_variant productVariant
+    ON productVariant.code = concat('game-', test.game_id)
+  INNER JOIN sylius_product product
+    ON product.id = productVariant.product_id
+  INNER JOIN sylius_product_translation productTranslation
+    ON productTranslation.translatable_id = product.id
+       AND locale = 'fr'
+  LEFT JOIN jdj_topic topic
+    ON topic.code = concat('topic-', test.topic_id)
+  INNER JOIN sylius_customer customer
+    ON customer.code = concat('user-', test.user_id)
+  LEFT JOIN jedisjeux.jdj_images_elements material_img
+    ON material_img.elem_type = 'test'
+       AND material_img.elem_id = test.game_id
+       AND material_img.ordre = 1
+  LEFT JOIN jedisjeux.jdj_images material_image
+    ON material_image.img_id = material_img.img_id
+  LEFT JOIN jedisjeux.jdj_images_elements rules_img
+    ON rules_img.elem_type = 'test'
+       AND rules_img.elem_id = test.game_id
+       AND rules_img.ordre = 2
+  LEFT JOIN jedisjeux.jdj_images rules_image
+    ON rules_image.img_id = rules_img.img_id
+  LEFT JOIN jedisjeux.jdj_images_elements lifetime_img
+    ON lifetime_img.elem_type = 'test'
+       AND lifetime_img.elem_id = test.game_id
+       AND lifetime_img.ordre = 3
+  LEFT JOIN jedisjeux.jdj_images lifetime_image
+    ON lifetime_image.img_id = lifetime_img.img_id
 EOM;
 
         if ($this->input->getOption('no-update')) {

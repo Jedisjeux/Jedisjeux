@@ -131,7 +131,7 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
                 $alias = 'right_image_block';
                 break;
             case SingleImageBlock::POSITION_TOP:
-                $alias = 'top_image_block';
+                $alias = $data['class'] === 'well' ? 'well_image_block' : 'top_image_block';
                 break;
             default:
                 $alias = 'single_image_block';
