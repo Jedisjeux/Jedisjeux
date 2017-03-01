@@ -42,7 +42,7 @@ class SearchController extends Controller
 
         $types = $this->getTypesOfResults($paginator);
 
-        return $this->render('JDJSearchBundle:Search:searchResults.html.twig', array(
+        return $this->render('frontend/search/index.html.twig', array(
             'results' => $paginator,
             'types' => $types,
         ));
@@ -176,14 +176,19 @@ class SearchController extends Controller
         $types = array();
         foreach ($results as $result) {
             if ($result instanceof ProductInterface) {
-                $types[] = "jeu";
+                $types[] = "game";
             } elseif ($result instanceof Person) {
-                $types[] = "personne";
-            } elseif ($result instanceof User) {
+                $types[] = "person";
+            } elseif ($result instanceof UserInterface) {
                 $types[] = "user";
+            } elseif ($result instanceof Article) {
+                $types[] = "article";
+            } else {
+                $types[] = "";
             }
 
         }
+
         return $types;
     }
 

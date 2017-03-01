@@ -79,6 +79,7 @@ app:
         redirection_count: Nombre de redirections
         referer: Référent
         request_placeholder: Recherche....
+        results_of_your_query: Résultats de votre recherche
         see_later: A regarder plus tard
         show_posts: Voir les messages
         show_sub_categories: Voir les sous-catégories

@@ -30,6 +30,9 @@ sylius_product_review:
     resource: "frontend/product_review.yml"
     prefix: /products/{productId}
 
+app_search:
+    resource: "frontend/search.yml"
+
 sylius_static_content:
     resource: "frontend/static_content.yml"
 
