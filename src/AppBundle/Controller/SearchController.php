@@ -183,6 +183,8 @@ class SearchController extends Controller
                 $types[] = "user";
             } elseif ($result instanceof Article) {
                 $types[] = "article";
+            } elseif ($result instanceof Topic) {
+                $types[] = "topic";
             } else {
                 $types[] = "";
             }
