@@ -92,12 +92,11 @@ class Bbcode2Html
         $replacement = "$2";
         $body = preg_replace($pattern, $replacement, $body);
 
-        $pattern = '/<img src="{SMILIES_PATH}\/(.*?)\.gif" alt=":wink:" title="(.*?)" \/>/ms';
-        $body = preg_replace($pattern, ';)', $body);
+        $body = str_replace(':mrgreen:', 'xD', $body);
+        $body = str_replace(':wink:', ';)', $body);
+        $body = str_replace(':lol:', ':)', $body);
 
-        $pattern = '/<img src="{SMILIES_PATH}\/(.*?)\.gif" alt=":lol:" title="(.*?)" \/>/ms';
-        $body = preg_replace($pattern, ':)', $body);
-
+        // star wars emoticons
         $pattern = '/<img src="{SMILIES_PATH}\/(.*?)\.gif" alt="(:light:|:dark:|:boba:|:d2:)" title="(.*?)" \/>/ms';
         $body = preg_replace($pattern, '', $body);
 
