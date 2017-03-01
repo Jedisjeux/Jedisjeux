@@ -1,0 +1,21 @@
+{% set topic = topic is defined ? topic : resource %}
+{% set imageSrc = asset('assets/frontend/img/product-placeholder.png'| imagine_filter('image_box_4')) %}
+{% set path = path('app_frontend_post_index_by_topic', {'topicId': topic.id}) %}
+
+<div class="img-box-4-item">
+    <div class="img-container">
+        <a href="{{ path }}">
+            <img src="{{ imageSrc }}" alt="{{ topic }}"
+                 class="img-responsive"/>
+        </a>
+    </div>
+    <div class="img-box-4-content">
+        <h4><a href="{{ path }}">{{ topic }}</a></h4>
+        <p>Créé le {{ topic.createdAt|localizeddate('short', 'none') }}</p>
+
+        <div class="magazine-meta">
+            <i class="fa fa-eye"></i> {{ topic.viewCount }}
+            - <i class="fa fa-comments"></i> {{ topic ? topic.postCount : 0 }}
+        </div>
+    </div>
+</div>

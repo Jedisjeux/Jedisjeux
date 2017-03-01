@@ -14,10 +14,10 @@
                 <!-- Search Form -->
                 <div class="head-search pull-right">
 
-                    <form role="form">
+                    <form role="form" action="{{ path('app_frontend_search_index') }}">
                         <!-- Input Group -->
                         <div class="input-group">
-                            <input type="text" class="form-control mainSearch"
+                            <input type="text" name="query" class="form-control mainSearch"
                                    placeholder="Recherche...">
 										<span class="input-group-btn">
 											<button class="btn btn-color" type="button">Rechercher</button>
