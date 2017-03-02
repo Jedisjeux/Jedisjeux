@@ -86,7 +86,6 @@ class LoadProductsCommand extends ContainerAwareCommand
         $this->deleteProductAssociations();
         $this->insertProductsOfCollections($associationTypeCollection);
         $this->insertProductsOfExpansions($associationTypeExpansion);
-        $this->calculateProductCountByTaxons();
     }
 
     protected function createOrReplaceAssociationTypeCollection()
@@ -220,28 +219,6 @@ class LoadProductsCommand extends ContainerAwareCommand
         }
 
         return null;
-    }
-
-    protected function calculateProductCountByTaxons()
-    {
-        $this->calculateProductCountByTaxonCode(Taxon::CODE_MECHANISM);
-        $this->calculateProductCountByTaxonCode(Taxon::CODE_THEME);
-        $this->calculateProductCountByTaxonCode(Taxon::CODE_TARGET_AUDIENCE);
-    }
-
-    /**
-     * @param $rootCode
-     */
-    protected function calculateProductCountByTaxonCode($rootCode)
-    {
-        $taxons = $this->getTaxonRepository()->findChildrenByRootCode($rootCode);
-
-        foreach ($taxons as $taxon) {
-            $this->getProductCountByTaxonUpdater()->update($taxon);
-            $this->getManager()->flush();
-        }
-
-        $this->getManager()->clear();
     }
 
     protected function deleteProductAssociations()
@@ -477,15 +454,7 @@ EOM;
     }
 
     /**
-     * @return ProductCountByTaxonUpdater
-     */
-    protected function getProductCountByTaxonUpdater()
-    {
-        return $this->getContainer()->get('app.updater.product_count_by_taxon');
-    }
-
-    /**
-     * @return \Doctrine\DBAL\Connection
+     * @return \Doctrine\DBAL\Connection|object
      */
     protected function getDatabaseConnection()
     {
@@ -493,7 +462,7 @@ EOM;
     }
 
     /**
-     * @return ProductFactory
+     * @return ProductFactory|object
      */
     protected function getFactory()
     {
@@ -501,7 +470,7 @@ EOM;
     }
 
     /**
-     * @return Factory
+     * @return Factory|object
      */
     protected function getProductVariantFactory()
     {
@@ -509,7 +478,7 @@ EOM;
     }
 
     /**
-     * @return EntityRepository
+     * @return EntityRepository|object
      */
     protected function getRepository()
     {
@@ -517,7 +486,7 @@ EOM;
     }
 
     /**
-     * @return EntityRepository
+     * @return EntityRepository|object
      */
     protected function getProductVariantRepository()
     {
@@ -525,7 +494,7 @@ EOM;
     }
 
     /**
-     * @return TaxonRepository
+     * @return TaxonRepository|object
      */
     protected function getTaxonRepository()
     {
@@ -533,7 +502,7 @@ EOM;
     }
 
     /**
-     * @return EntityManager
+     * @return EntityManager|object
      */
     protected function getManager()
     {

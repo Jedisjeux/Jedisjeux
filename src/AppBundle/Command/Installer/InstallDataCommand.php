@@ -60,6 +60,7 @@ EOT
             'app:themes:load',
             'app:themes-of-products:load',
             'app:target-audiences:load',
+            'app:products:count-by-taxon',
             'app:articles:load' => ['--no-debug', '--limit' => 50],
             'app:news:load' => ['--no-debug', '--limit' => 50],
             'app:review-articles:load' => ['--no-debug', '--limit' => 50],
