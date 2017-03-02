@@ -6,6 +6,9 @@ Feature: View list of articles
 
   Background:
     Given init doctrine phpcr repository
+    And there are users:
+      | email             |
+      | kevin@example.com |
     And there are root taxons:
       | code     | name     |
       | articles | Articles |
@@ -14,9 +17,9 @@ Feature: View list of articles
       | news    | Actualités | articles |
       | reviews | Critiques  | articles |
     And there are articles:
-      | taxon               | title                        |
-      | articles/actualites | King of New York : Power Up! |
-      | articles/critiques  | Critique de Vroom Vroom      |
+      | taxon               | title                        | author            |
+      | articles/actualites | King of New York : Power Up! | kevin@example.com |
+      | articles/critiques  | Critique de Vroom Vroom      | kevin@example.com |
 
   Scenario: View list of articles
     When I am on "/articles/"
