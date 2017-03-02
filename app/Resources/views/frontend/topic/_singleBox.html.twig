@@ -1,6 +1,8 @@
+{% from 'macros/topics.html.twig' import getPath %}
+
 {% set topic = topic is defined ? topic : resource %}
 {% set imageSrc = asset('assets/frontend/img/product-placeholder.png'| imagine_filter('image_box_4')) %}
-{% set path = path('app_frontend_post_index_by_topic', {'topicId': topic.id}) %}
+{% set path = getPath(topic) %}
 
 <div class="img-box-4-item">
     <div class="img-container">
