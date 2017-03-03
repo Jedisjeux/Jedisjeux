@@ -25,6 +25,10 @@ class Block implements ResourceInterface
 {
     use IdentifiableTrait;
 
+    const POSITION_LEFT = 'left';
+    const POSITION_RIGHT = 'right';
+    const POSITION_TOP = 'top';
+
     /**
      * @var string
      *
@@ -45,6 +49,13 @@ class Block implements ResourceInterface
      * @ORM\Column(type="string", nullable=true)
      */
     protected $body;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $imagePosition;
 
     /**
      * @var integer
@@ -125,6 +136,26 @@ class Block implements ResourceInterface
     public function setBody($body)
     {
         $this->body = $body;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImagePosition()
+    {
+        return $this->imagePosition;
+    }
+
+    /**
+     * @param string $imagePosition
+     *
+     * @return $this
+     */
+    public function setImagePosition($imagePosition)
+    {
+        $this->imagePosition = $imagePosition;
 
         return $this;
     }

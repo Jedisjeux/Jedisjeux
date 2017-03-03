@@ -13,6 +13,7 @@ namespace AppBundle\Command\Installer\Data;
 
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Block;
+use AppBundle\Entity\BlockImage;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -89,13 +90,36 @@ EOT
             $block = $this->getFactory()->createNew();
         }
 
+        if (null !== $data['image']) {
+            $block->setImage($this->createOrReplaceImage($block, $data));
+        }
+
         $block
             ->setCode($data['code'])
             ->setTitle($data['title'] ?: null)
-            ->setBody($data['body'] ?: null);
+            ->setBody($data['body'] ?: null)
+            ->setImagePosition($data['image_position'] ?: null);
 
 
         return $block;
+    }
+
+    /**
+     * @param Block $block
+     * @param array $data
+     *
+     * @return BlockImage
+     */
+    protected function createOrReplaceImage(Block $block, array $data)
+    {
+        if (null === $image = $block->getImage()) {
+            $image = $this->getContainer()->get('app.factory.block_image')->createNew();
+        }
+
+        $image
+            ->setPath($data['image']);
+
+        return $image;
     }
 
     /**

@@ -36,6 +36,9 @@ sylius_resource:
         app.block:
             classes:
                 model: AppBundle\Entity\Block
+        app.block_image:
+            classes:
+                model: AppBundle\Entity\BlockImage
         app.blockquote_block:
             driver: doctrine/phpcr-odm
             classes:
