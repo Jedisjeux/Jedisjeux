@@ -28,6 +28,13 @@ class Block implements ResourceInterface
     /**
      * @var string
      *
+     * @ORM\Column(type="string", unique=true, nullable=true)
+     */
+    protected $code;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(type="string", nullable=true)
      */
     protected $title;
@@ -35,7 +42,7 @@ class Block implements ResourceInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $body;
 
@@ -60,6 +67,26 @@ class Block implements ResourceInterface
      * @ORM\ManyToOne(targetEntity="Article", inversedBy="blocks")
      */
     protected $article;
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param string $code
+     *
+     * @return $this
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
 
     /**
      * @return string
