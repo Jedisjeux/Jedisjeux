@@ -13,6 +13,7 @@ namespace AppBundle\Entity;
 
 use AppBundle\Document\ArticleContent;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -149,6 +150,13 @@ class Article implements ResourceInterface, ReviewableInterface
     protected $topic;
 
     /**
+     * @var Collection|Block[]
+     *
+     * @ORM\OneToMany(targetEntity="Block", mappedBy="article", cascade={"persist", "merge"})
+     */
+    protected $blocks;
+
+    /**
      * @var ArrayCollection|ArticleReview[]
      *
      * @ORM\OneToMany(targetEntity="ArticleReview", mappedBy="reviewSubject")
@@ -189,6 +197,7 @@ class Article implements ResourceInterface, ReviewableInterface
     public function __construct()
     {
         $this->publishable = false;
+        $this->blocks = new ArrayCollection();
         $this->reviews = new ArrayCollection();
         $this->status = self::STATUS_NEW;
     }
@@ -349,6 +358,51 @@ class Article implements ResourceInterface, ReviewableInterface
     public function setTopic($topic)
     {
         $this->topic = $topic;
+
+        return $this;
+    }
+
+    /**
+     * @return Block[]|Collection
+     */
+    public function getBlocks()
+    {
+        return $this->blocks;
+    }
+
+    /**
+     * @param Block $block
+     *
+     * @return bool
+     */
+    public function hasBlock(Block $block)
+    {
+        return $this->blocks->contains($block);
+    }
+
+    /**
+     * @param Block $block
+     *
+     * @return $this
+     */
+    public function addBlock(Block $block)
+    {
+        if (!$this->hasBlock($block)) {
+            $block->setArticle($this);
+            $this->blocks->add($block);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Block $block
+     *
+     * @return $this
+     */
+    public function removeBlock(Block $block)
+    {
+        $this->blocks->removeElement($block);
 
         return $this;
     }
