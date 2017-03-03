@@ -52,7 +52,7 @@ class Block implements ResourceInterface
      * @Gedmo\SortablePosition
      * @ORM\column(type="integer")
      */
-    protected $position = 0;
+    protected $position;
 
     /**
      * @var BlockImage
@@ -64,6 +64,7 @@ class Block implements ResourceInterface
     /**
      * @var Article
      *
+     * @Gedmo\SortableGroup
      * @ORM\ManyToOne(targetEntity="Article", inversedBy="blocks")
      */
     protected $article;
