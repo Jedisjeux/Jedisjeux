@@ -52,7 +52,7 @@ class LoadImagesOfPersonsCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return \Doctrine\DBAL\Connection
+     * @return \Doctrine\DBAL\Connection|object
      */
     public function getDatabaseConnection()
     {
@@ -82,7 +82,7 @@ EOM;
     }
 
     /**
-     * @return EntityManager
+     * @return EntityManager|object
      */
     protected function getManager()
     {

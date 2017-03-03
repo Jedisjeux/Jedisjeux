@@ -14,6 +14,9 @@ sylius_resource:
                 form:
                     default: AppBundle\Form\Type\ArticleType
                     view_count: AppBundle\Form\Type\ArticleViewCountType
+        app.article_image:
+            classes:
+                model: AppBundle\Entity\ArticleImage
         app.article_review:
             classes:
                 model: AppBundle\Entity\ArticleReview

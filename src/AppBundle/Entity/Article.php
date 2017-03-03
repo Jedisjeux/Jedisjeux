@@ -55,18 +55,6 @@ class Article implements ResourceInterface, ReviewableInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string", unique=true)
-     */
-    protected $documentId;
-
-    /**
-     * @var ArticleContent
-     */
-    protected $document;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(type="string")
      */
     protected $name;
@@ -84,6 +72,13 @@ class Article implements ResourceInterface, ReviewableInterface
      * @ORM\Column(type="datetime", nullable=true)
      */
     protected $publishStartDate;
+
+    /**
+     * @var ArticleImage
+     *
+     * @ORM\OneToOne(targetEntity="ArticleImage", cascade={"persist", "merge"})
+     */
+    protected $mainImage;
 
     /**
      * @var TaxonInterface
@@ -258,46 +253,6 @@ class Article implements ResourceInterface, ReviewableInterface
     public function setStatus($status)
     {
         $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDocumentId()
-    {
-        return $this->documentId;
-    }
-
-    /**
-     * @param string $documentId
-     *
-     * @return $this
-     */
-    public function setDocumentId($documentId)
-    {
-        $this->documentId = $documentId;
-
-        return $this;
-    }
-
-    /**
-     * @return ArticleContent
-     */
-    public function getDocument()
-    {
-        return $this->document;
-    }
-
-    /**
-     * @param ArticleContent $document
-     *
-     * @return $this
-     */
-    public function setDocument($document)
-    {
-        $this->document = $document;
 
         return $this;
     }
@@ -638,6 +593,26 @@ class Article implements ResourceInterface, ReviewableInterface
     public function setViewCount($viewCount)
     {
         $this->viewCount = $viewCount;
+
+        return $this;
+    }
+
+    /**
+     * @return ArticleImage
+     */
+    public function getMainImage()
+    {
+        return $this->mainImage;
+    }
+
+    /**
+     * @param ArticleImage $mainImage
+     *
+     * @return $this
+     */
+    public function setMainImage($mainImage)
+    {
+        $this->mainImage = $mainImage;
 
         return $this;
     }

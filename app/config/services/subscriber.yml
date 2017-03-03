@@ -77,13 +77,6 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
-    app.subscriber.article_document_reference:
-        class: AppBundle\EventSubscriber\ArticleDocumentReferenceSubscriber
-        arguments:
-            [ "@doctrine_phpcr" ]
-        tags:
-            - { name: doctrine.event_subscriber }
-
     app.subscriber.load_customer_element_object:
         class: AppBundle\EventSubscriber\CustomerListElementReferenceSubscriber
         tags:
