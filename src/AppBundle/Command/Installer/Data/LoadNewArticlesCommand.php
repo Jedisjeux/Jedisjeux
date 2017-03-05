@@ -124,7 +124,12 @@ EOT
 
         $article
             ->setCode($code)
+            ->setName($data['name'])
+            ->setTitle($data['title'])
             ->setViewCount($data['view_count'])
+            ->setShortDescription($data['shortDescription'] ?: null)
+            ->setPublishable($data['publishable'])
+            ->setPublishStartDate(\DateTime::createFromFormat('Y-m-d H:i:s', $data['publishedAt']))
             ->setStatus($data['publishable'] ? Article::STATUS_PUBLISHED : Article::STATUS_NEW);
 
 
@@ -138,11 +143,6 @@ EOT
             $mainImage
                 ->setPath($data['mainImage']);
         }
-
-        $article->setName($data['name']);
-        $article->setTitle($data['title']);
-        $article->setPublishable($data['publishable']);
-        $article->setPublishStartDate(\DateTime::createFromFormat('Y-m-d H:i:s', $data['publishedAt']));
 
         return $article;
     }
@@ -158,7 +158,7 @@ SELECT
   concat(replace(article.titre_clean, ' ', '-'), '-a-', article.article_id) AS name,
   article.titre                                                             AS title,
   article.date                                                              AS publishedAt,
-  article.intro                                                             AS introduction,
+  article.intro                                                             AS shortDescription,
   article.photo                                                             AS mainImage,
   CASE article.type_article
   WHEN 'article'

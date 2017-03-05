@@ -98,7 +98,8 @@ EOT
             ->setCode($data['code'])
             ->setTitle($data['title'] ?: null)
             ->setBody($data['body'] ?: null)
-            ->setImagePosition($data['image_position'] ?: null);
+            ->setImagePosition($data['image_position'] ?: null)
+            ->setClass($data['class'] ?: null);
 
 
         return $block;
@@ -117,7 +118,8 @@ EOT
         }
 
         $image
-            ->setPath($data['image']);
+            ->setPath($data['image'])
+            ->setLabel($data['image_label']);
 
         return $image;
     }

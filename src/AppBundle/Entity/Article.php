@@ -74,6 +74,13 @@ class Article implements ResourceInterface, ReviewableInterface
     protected $publishStartDate;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $shortDescription;
+
+    /**
      * @var ArticleImage
      *
      * @ORM\OneToOne(targetEntity="ArticleImage", cascade={"persist", "merge"})
@@ -533,6 +540,26 @@ class Article implements ResourceInterface, ReviewableInterface
     public function setPublishEndDate($publishEndDate)
     {
         $this->publishEndDate = $publishEndDate;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShortDescription()
+    {
+        return $this->shortDescription;
+    }
+
+    /**
+     * @param string $shortDescription
+     *
+     * @return Article
+     */
+    public function setShortDescription($shortDescription)
+    {
+        $this->shortDescription = $shortDescription;
 
         return $this;
     }

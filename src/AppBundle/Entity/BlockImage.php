@@ -21,5 +21,57 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class BlockImage extends AbstractImage
 {
-    
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $label;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $linkUrl;
+
+    /**
+     * @return string
+     */
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
+    /**
+     * @param string $label
+     *
+     * @return BlockImage
+     */
+    public function setLabel($label)
+    {
+        $this->label = $label;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLinkUrl()
+    {
+        return $this->linkUrl;
+    }
+
+    /**
+     * @param string $linkUrl
+     *
+     * @return BlockImage
+     */
+    public function setLinkUrl($linkUrl)
+    {
+        $this->linkUrl = $linkUrl;
+
+        return $this;
+    }
 }

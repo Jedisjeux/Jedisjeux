@@ -46,7 +46,7 @@ class Block implements ResourceInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     protected $body;
 
@@ -56,6 +56,13 @@ class Block implements ResourceInterface
      * @ORM\Column(type="string", nullable=true)
      */
     protected $imagePosition;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $class;
 
     /**
      * @var integer
@@ -156,6 +163,26 @@ class Block implements ResourceInterface
     public function setImagePosition($imagePosition)
     {
         $this->imagePosition = $imagePosition;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getClass()
+    {
+        return $this->class;
+    }
+
+    /**
+     * @param string $class
+     *
+     * @return Block
+     */
+    public function setClass($class)
+    {
+        $this->class = $class;
 
         return $this;
     }
