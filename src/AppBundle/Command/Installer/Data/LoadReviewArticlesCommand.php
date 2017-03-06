@@ -10,6 +10,7 @@
  */
 
 namespace AppBundle\Command\Installer\Data;
+
 use AppBundle\Entity\Taxon;
 use AppBundle\Entity\Topic;
 use Sylius\Component\Customer\Model\CustomerInterface;
@@ -101,33 +102,41 @@ EOT
     {
         $query = <<<EOM
 SELECT
-  concat('review-article-', test.game_id)                            AS code,
-  test.date                                                          AS publishedAt,
-  product.id                                                         AS product_id,
-  productTranslation.name                                            AS product_name,
-  game.couverture                                                    AS mainImage,
-  concat('Critique de ', productTranslation.name)                    AS title,
-  concat('critique-', productTranslation.slug, '-ra-', test.game_id) AS name,
-  topic.id                                                           AS topic_id,
-  customer.id                                                        AS author_id,
-  test.valid                                                         AS publishable,
-  review_article_view.view_count                                     AS view_count
+  article.id              AS article_id,
+  article.title           AS article_title,
+  article.code            AS article_code,
+  test.materiel           AS material,
+  test.regle              AS rules,
+  test.duree_vie          AS lifetime,
+  test.conseil            AS advice,
+  test.note_materiel / 2  AS materialRating,
+  test.note_regle / 2     AS rulesRating,
+  test.note_duree_vie / 2 AS lifetimeRating,
+  material_image.img_nom  AS material_image_path,
+  rules_image.img_nom     AS rules_image_path,
+  lifetime_image.img_nom  AS lifetime_image_path
 FROM jedisjeux.jdj_tests test
-  INNER JOIN jedisjeux.jdj_v_review_article_view_count AS review_article_view
-    ON review_article_view.id = test.game_id
-  INNER JOIN jedisjeux.jdj_game game
-    ON game.id = test.game_id
-  INNER JOIN sylius_product_variant productVariant
-    ON productVariant.code = concat('game-', test.game_id)
-  INNER JOIN sylius_product product
-    ON product.id = productVariant.product_id
-  INNER JOIN sylius_product_translation productTranslation
-    ON productTranslation.translatable_id = product.id
-       AND locale = 'fr'
-  LEFT JOIN jdj_topic topic
-    ON topic.code = concat('topic-', test.topic_id)
-  INNER JOIN sylius_customer customer
-    ON customer.code = concat('user-', test.user_id)
+  INNER JOIN jdj_article article
+    ON article.code = concat('review-article-', test.game_id)
+  LEFT JOIN jedisjeux.jdj_images_elements material_img
+    ON material_img.elem_type = 'test'
+       AND material_img.elem_id = test.game_id
+       AND material_img.ordre = 1
+  LEFT JOIN jedisjeux.jdj_images material_image
+    ON material_image.img_id = material_img.img_id
+  LEFT JOIN jedisjeux.jdj_images_elements rules_img
+    ON rules_img.elem_type = 'test'
+       AND rules_img.elem_id = test.game_id
+       AND rules_img.ordre = 2
+  LEFT JOIN jedisjeux.jdj_images rules_image
+    ON rules_image.img_id = rules_img.img_id
+  LEFT JOIN jedisjeux.jdj_images_elements lifetime_img
+    ON lifetime_img.elem_type = 'test'
+       AND lifetime_img.elem_id = test.game_id
+       AND lifetime_img.ordre = 3
+  LEFT JOIN jedisjeux.jdj_images lifetime_image
+    ON lifetime_image.img_id = lifetime_img.img_id
+;
 EOM;
 
         return $this->getManager()->getConnection()->fetchAll($query);

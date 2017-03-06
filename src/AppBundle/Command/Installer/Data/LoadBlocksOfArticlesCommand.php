@@ -52,7 +52,7 @@ EOT
 
         $i = 0;
 
-        foreach ($this->getBlocks() as $key => $data) {
+        foreach ($this->getReviewArticlesBlocks() as $key => $data) {
             $output->writeln(sprintf("Loading block <comment>%s</comment> of <comment>%s</comment> article", $data['code'], $data['article_title']));
 
             /** @var Article $article */
@@ -135,7 +135,7 @@ EOT
     /**
      * @return array
      */
-    protected function getBlocks()
+    protected function getReviewArticlesBlocks()
     {
         $query = <<<EOM
 SELECT
