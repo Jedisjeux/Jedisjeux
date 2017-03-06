@@ -157,7 +157,9 @@ SELECT
   article.article_id                                                        AS id,
   concat(replace(article.titre_clean, ' ', '-'), '-a-', article.article_id) AS name,
   article.titre                                                             AS title,
-  article.date                                                              AS publishedAt,
+  CASE WHEN article.date = '0000-00-00 00:00:00'
+    THEN '2000-01-01 00:00:00'
+  ELSE article.date END                                                     AS publishedAt,
   article.intro                                                             AS shortDescription,
   article.photo                                                             AS mainImage,
   CASE article.type_article
