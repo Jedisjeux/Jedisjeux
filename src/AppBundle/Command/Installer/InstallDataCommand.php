@@ -65,7 +65,7 @@ EOT
             'app:blocks-of-articles:load',
             'app:news:load',
             'app:blocks-of-news:load',
-            //'app:review-articles:load',
+            'app:review-articles:load',
             //'app:blocks-of-review-articles:load',
             'app:reviews-of-articles:load',
             'app:game-plays:load',
