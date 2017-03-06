@@ -96,21 +96,19 @@ class LoadReviewsOfArticlesCommand extends ContainerAwareCommand
     protected function getReviews()
     {
         $query = <<<EOM
-select      
+SELECT
   customer.email,
-  customer.id as customer_id,
-  article.id as article_id,
-  old.note as rating,
-  old.avis as comment
-from        jedisjeux.jdj_tests_avis old
-  inner join  sylius_product product
-    on product.code = concat('game-', old.game_id)
-  inner join  sylius_customer customer
-    on customer.code = concat('user-', old.user_id)
-inner join jdj_article article
-    on article.product_id = product.id
-inner join phpcr_nodes node
-    on node.path = article.documentId
+  customer.id AS customer_id,
+  article.id  AS article_id,
+  old.note    AS rating,
+  old.avis    AS comment
+FROM jedisjeux.jdj_tests_avis old
+  INNER JOIN sylius_product product
+    ON product.code = concat('game-', old.game_id)
+  INNER JOIN sylius_customer customer
+    ON customer.code = concat('user-', old.user_id)
+  INNER JOIN jdj_article article
+    ON article.product_id = product.id
 EOM;
 
         return $this->getDatabaseConnection()->fetchAll($query);
