@@ -194,6 +194,9 @@ class ArticleContent extends ContainerBlock implements ResourceInterface
     {
         if (!$this->hasBlock($block)) {
             $block->setParentDocument($this);
+            if (empty($block->getName())) {
+                $block->setName(uniqid('block_'));
+            }
             $this->blocks->add($block);
         }
 

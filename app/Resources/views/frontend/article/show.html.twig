@@ -10,7 +10,7 @@
 {% block body_class %}article{% endblock %}
 
 {% block headline %}
-    {{ article.document.title }}
+    {{ article.title }}
 {% endblock %}
 
 {% block breadcrumb_content %}
@@ -18,26 +18,37 @@
     {% if article.mainTaxon %}
         <a href="{{ path('app_frontend_article_index_by_taxon', {'permalink': article.mainTaxon.permalink}) }}">{{ article.mainTaxon }}</a> /
     {% endif %}
-    {{ article.document.title }}
+    {{ article.title }}
 {% endblock %}
 
 {% block body -%}
     <div class="col-md-8">
 
         {% if article.author %}
-            {{ item.blogAuthor(article.author, null, article.document.publishStartDate) }}
+            {{ item.blogAuthor(article.author, null, article.publishStartDate) }}
+        {% endif %}
+
+        {% if article.shortDescription %}
+            <div class="quote-one">
+                <div class="row">
+                    <!-- Quote One Item -->
+                    <div class="quote-one-item">
+                        <span class="color">“</span>
+                        <div class="quote-one-right">
+                            <div class="block-body">
+                                {{ article.shortDescription|raw }}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         {% endif %}
 
         {% set blockImageCount = 0 %}
 
-        {% for block in article.document.children %}
-
-            {% if 'mainImage' != block.name %}
-                {{ sonata_block_render({
-                    'name': block.id
-                }) }}
-            {% endif %}
-
+        {% for block in article.blocks %}
+            {% include 'frontend/block/show/_content.html.twig' %}
         {% endfor %}
 
         {% if article.reviews|length > 0 %}

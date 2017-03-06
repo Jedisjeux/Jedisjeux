@@ -9,9 +9,9 @@
 
 <div class="img-box-4-item">
     <div class="img-container">
-        {% if article.imagePath %}
+        {% if article.mainImage %}
             <a href="{{ path('app_frontend_article_show', {'name': article.name} ) }}"><img
-                        src="{{ article.imagePath|imagine_filter('cmf_full') }}" alt=""
+                        src="{{ article.mainImage.webPath|imagine_filter('full') }}" alt=""
                         class="img-responsive"></a>
         {% endif %}
     </div>

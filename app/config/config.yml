@@ -142,6 +142,7 @@ stof_doctrine_extensions:
             tree: true
             sluggable: true
             softdeleteable: true
+            sortable: true
 
 knp_doctrine_behaviors:
     blameable:      true
