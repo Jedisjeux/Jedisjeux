@@ -13,11 +13,19 @@
                 class="hidden-xs"></span> &nbsp;
         {% endset %}
 
+        {% set filter = 'thumbnail' %}
+        {% set imageSrc = asset('assets/frontend/img/product-placeholder.png'| imagine_filter(filter)) %}
+
+        {% if (article.mainImage) %}
+            {% set imageSrc = article.mainImage.webPath | imagine_filter(filter) %}
+        {% endif %}
+
         <li>
             <a href="{{ path('app_frontend_article_show', {'name': article.name}) }}">
-                {% if article.imagePath %}
+
+                {% if article.mainImage %}
                     <!-- Item image -->
-                    <img src="{{ article.imagePath | imagine_filter('cmf_thumbnail') }}" alt=""
+                    <img src="{{ imageSrc }}" alt="{{ article.title }}"
                          class="img-responsive img-round"/>
                 {% endif %}
 
