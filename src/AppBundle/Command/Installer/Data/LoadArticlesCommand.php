@@ -14,9 +14,13 @@ use AppBundle\Document\ArticleContent;
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Taxon;
 use AppBundle\Entity\Topic;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SlideshowBlock;
 use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
@@ -25,9 +29,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class LoadArticlesCommand extends AbstractLoadDocumentCommand
+class LoadArticlesCommand extends ContainerAwareCommand
 {
-    use LogMemoryUsageTrait;
+    const BATCH_SIZE = 20;
 
     /**
      * {@inheritdoc}
@@ -37,9 +41,10 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
         $this
             ->setName('app:articles:load')
             ->setDescription('Load articles')
-            ->addOption('no-update')
-            ->addOption('limit', null, InputOption::VALUE_REQUIRED, 'Set limit of articles to import')
-            ->addOption('main-taxon', null, InputOption::VALUE_REQUIRED, 'Restrict articles with given taxons');
+            ->setHelp(<<<EOT
+The <info>%command.name%</info> command loads all articles.
+EOT
+            );
     }
 
     /**
@@ -47,35 +52,18 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        gc_collect_cycles();
-
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
+
+        $i = 0;
 
         foreach ($this->getArticles() as $key => $data) {
             $output->writeln(sprintf("Loading <comment>%s</comment> article", $data['title']));
-            $this->logMemoryUsage($output);
 
             $article = $this->createOrReplaceArticle($data);
-            $articleDocument = $article->getDocument();
-
-            $this->createOrReplaceIntroductionBlock($articleDocument, $data);
-            $blocks = $this->getBlocks($data['blocks']);
-
-            $this->getDocumentManager()->persist($articleDocument);
-            $this->getDocumentManager()->flush();
-
-            if (Taxon::CODE_REPORT_ARTICLE === $data['mainTaxon']) {
-                $slideshowBlock = $this->createOrReplaceSlideshowBlock($articleDocument);
-                $this->getDocumentManager()->persist($slideshowBlock);
-                $this->getDocumentManager()->flush();
-                $this->populateBlocks($articleDocument, $blocks, $slideshowBlock);
-            } else {
-                $this->populateBlocks($articleDocument, $blocks);
-            }
 
             if (null !== $data['mainTaxon']) {
                 /** @var TaxonInterface $mainTaxon */
-                $mainTaxon = $this->getTaxonRepository()->findOneBy(['code' => $data['mainTaxon']]);
+                $mainTaxon = $this->getContainer()->get('sylius.repository.taxon')->findOneBy(['code' => $data['mainTaxon']]);
                 $article->setMainTaxon($mainTaxon);
             }
 
@@ -102,24 +90,20 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
                     ->setAuthor($author);
             }
 
-            $this->getDocumentManager()->persist($articleDocument);
-            $this->getDocumentManager()->flush();
-
             $this->getManager()->persist($article);
-            $this->getManager()->flush();
-            $this->getManager()->clear();
 
-            $this->getDocumentManager()->detach($articleDocument);
-            $this->getDocumentManager()->clear();
-
-            if ($key > 0 and $key % 10 === 0) {
-                $this->clearDoctrineCache();
+            if (($i % self::BATCH_SIZE) === 0) {
+                $this->getManager()->flush(); // Executes all updates.
+                $this->getManager()->clear(); // Detaches all objects from Doctrine!
             }
+
+            ++$i;
         }
 
-        $this->clearDoctrineCache();
-        $stats = $this->getTotalOfItemsLoaded();
-        $this->showTotalOfItemsLoaded($stats['itemCount'], $stats['totalCount']);
+        $this->getManager()->flush();
+        $this->getManager()->clear();
+
+        $output->writeln(sprintf("<info>%s</info>", "Articles have been successfully loaded."));
     }
 
     /**
@@ -129,105 +113,39 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
      */
     protected function createOrReplaceArticle(array $data)
     {
-        $article = $this->findArticle($data['name']);
+        $code = $data['code'] ?? sprintf('article-%s', $data['id']);
+
+        /** @var Article $article */
+        $article = $this->getRepository()->findOneBy(['code'=> $code]);
 
         if (null === $article) {
             $article = $this->getFactory()->createNew();
         }
 
         $article
-            ->setCode(sprintf('article-%s', $data['id']))
+            ->setCode($code)
+            ->setName($data['name'])
+            ->setTitle($data['title'])
             ->setViewCount($data['view_count'])
+            ->setShortDescription($data['shortDescription'] ?? null)
+            ->setPublishable($data['publishable'])
+            ->setPublishStartDate(\DateTime::createFromFormat('Y-m-d H:i:s', $data['publishedAt']))
             ->setStatus($data['publishable'] ? Article::STATUS_PUBLISHED : Article::STATUS_NEW);
 
-        $articleDocument = $article->getDocument();
-
-        if (null === $articleDocument) {
-            $articleDocument = $this->getDocumentFactory()->createNew();
-            $article
-                ->setDocument($articleDocument);
-        }
 
         if (null !== $data['mainImage'] && !empty($data['mainImage'])) {
-            $imageOriginalPath = $this->getImageOriginalPath($data['mainImage']);
-            $mainImage = $articleDocument->getMainImage();
-
-            if (null === $mainImage) {
-                /** @var ImagineBlock $mainImage */
-                $mainImage = $this->getContainer()->get('app.factory.imagine_block')->createNew();
+            if (null === $mainImage = $article->getMainImage()) {
+                $mainImage = $this->getContainer()->get('app.factory.article_image')->createNew();
+                $article
+                    ->setMainImage($mainImage);
             }
 
-            $image = new Image();
-            $image->setFileContent(file_get_contents($imageOriginalPath));
-
             $mainImage
-                ->setParentDocument($articleDocument)
-                ->setImage($image);
-
-            $articleDocument
-                ->setMainImage($mainImage);
-
+                ->setPath($data['mainImage']);
         }
-
-        $articleDocument->setName($data['name']);
-        $articleDocument->setTitle($data['title']);
-        $articleDocument->setPublishable($data['publishable']);
-        $articleDocument->setPublishStartDate(\DateTime::createFromFormat('Y-m-d H:i:s', $data['publishedAt']));
 
         return $article;
     }
-
-    /**
-     * @param ArticleContent $page
-     * @param array $data
-     *
-     * @return BlockquoteBlock
-     */
-    protected function createOrReplaceIntroductionBlock(ArticleContent $page, array $data)
-    {
-        /** @var BlockquoteBlock $block */
-        $block = $page->getChildren()->first();
-        $name = 'block0';
-
-        if (false === $block) {
-            $block = $this->getContainer()->get('app.factory.blockquote_block')->createNew();
-            $block->setName($name);
-        }
-
-        $block
-            ->setBody(sprintf('<p>%s</p>', $data['introduction']))
-            ->setName($name)
-            ->setPublishable(true);
-
-        $page->addBlock($block);
-
-        return $block;
-    }
-
-    /**
-     * @param ArticleContent $page
-     *
-     * @return SlideshowBlock
-     */
-    protected function createOrReplaceSlideshowBlock(ArticleContent $page)
-    {
-        /** @var SlideshowBlock $block */
-        $block = $page->getChildren()->next();
-
-        if (false === $block) {
-            $block = $this->getContainer()->get('app.factory.slideshow_block')->createNew();
-            $block
-                ->setParentDocument($page);
-        }
-
-        $block
-            ->setTitle('Slideshow')
-            ->setName('slideshow')
-            ->setPublishable(true);
-
-        return $block;
-    }
-
 
     /**
      * @return array
@@ -235,145 +153,72 @@ class LoadArticlesCommand extends AbstractLoadDocumentCommand
     protected function getArticles()
     {
         $query = <<<EOM
-select article.article_id as id,
-       concat(replace(article.titre_clean, ' ', '-'), '-a-', article.article_id) as name,
-       article.titre as title,
-       article.date as publishedAt,
-       article.intro as introduction,
-       article.photo as mainImage,
-       case article.type_article
-            when 'article' then null
-            when 'reportage' then 'report-articles'
-            when 'interview' then 'interviews'
-            when 'cdlb' then 'in-the-boxes'
-            when 'preview' then 'previews'
-            else null
-       end as mainTaxon,     
-       article.valid as publishable,
-       product.id as product_id,
-       topic.id as topic_id,
-       user.customer_id as author_id,
-       group_concat(block.text_id ORDER BY block.ordre) as blocks,
-       article_view.view_count
-from jedisjeux.jdj_article article
-  inner join jedisjeux.jdj_article_text as block
-    on block.article_id = article.article_id
-  inner join jedisjeux.jdj_v_article_view_count as article_view  
-    on article_view.id = article.article_id
-  left join sylius_product_variant productVariant
-    on productVariant.code = concat('game-', article.game_id)
-  left join sylius_product product
-    on product.id = productVariant.product_id
-  left join jdj_topic topic
-    on topic.code = concat('topic-', article.topic_id)
-  left join sylius_user user
-    on convert(user.username USING UTF8) = convert(article.auteur USING UTF8)
-where titre_clean != ''
+SELECT
+  article.article_id                                                        AS id,
+  concat(replace(article.titre_clean, ' ', '-'), '-a-', article.article_id) AS name,
+  article.titre                                                             AS title,
+  article.date                                                              AS publishedAt,
+  article.intro                                                             AS shortDescription,
+  article.photo                                                             AS mainImage,
+  CASE article.type_article
+  WHEN 'article'
+    THEN NULL
+  WHEN 'reportage'
+    THEN 'report-articles'
+  WHEN 'interview'
+    THEN 'interviews'
+  WHEN 'cdlb'
+    THEN 'in-the-boxes'
+  WHEN 'preview'
+    THEN 'previews'
+  ELSE NULL
+  END                                                                       AS mainTaxon,
+  article.valid                                                             AS publishable,
+  product.id                                                                AS product_id,
+  CASE WHEN article.topic_id = 5280 AND article.article_id <> 313
+    THEN NULL
+  ELSE topic.id END                                                         AS topic_id,
+  user.customer_id                                                          AS author_id,
+  article_view.view_count
+FROM jedisjeux.jdj_article article
+  INNER JOIN jedisjeux.jdj_v_article_view_count AS article_view
+    ON article_view.id = article.article_id
+  LEFT JOIN sylius_product_variant productVariant
+    ON productVariant.code = concat('game-', article.game_id)
+  LEFT JOIN sylius_product product
+    ON product.id = productVariant.product_id
+  LEFT JOIN jdj_topic topic
+    ON topic.code = concat('topic-', article.topic_id)
+  LEFT JOIN sylius_user user
+    ON convert(user.username USING UTF8) = convert(article.auteur USING UTF8)
+WHERE titre_clean != ''
+ORDER BY article.date DESC
 EOM;
 
-        if ($this->input->getOption('no-update')) {
-            $query .= <<<EOM
-
-AND not exists (
-   select 0
-   from jdj_article a
-   where a.code = concat('article-', article.article_id)
-)
-EOM;
-        }
-
-        if ($this->input->getOption('main-taxon')) {
-
-            switch ($this->input->getOption('main-taxon')) {
-                case Taxon::CODE_REPORT_ARTICLE:
-                    $type = 'reportage';
-                    break;
-                case Taxon::CODE_PREVIEWS:
-                    $type = 'preview';
-                    break;
-                case Taxon::CODE_IN_THE_BOXES:
-                    $type = 'cdlb';
-                    break;
-                case Taxon::CODE_INTERVIEW:
-                    $type = 'interview';
-                    break;
-                default:
-                    $type = null;
-            }
-
-            if (null === $type) {
-                Throw new InvalidArgumentException(sprintf('Type %s not found', $this->input->getOption('main-taxon')));
-            }
-
-            $query .= sprintf(" AND article.type_article = '%s'", $type);
-        }
-
-        $query .= <<<EOM
-        
-        group by article.article_id
-EOM;
-
-        $query .= <<<EOM
- 
-order by    article.date desc
-EOM;
-
-        if ($this->input->getOption('limit')) {
-            $query .= sprintf(' limit %s', $this->input->getOption('limit'));
-        }
-
-        return $this->getDatabaseConnection()->fetchAll($query);
+        return $this->getManager()->getConnection()->fetchAll($query);
     }
 
     /**
-     * @param string $ids
-     *
-     * @return array
+     * @return FactoryInterface|object
      */
-    protected function getBlocks($ids)
+    protected function getFactory()
     {
-        $query = <<<EOM
-        select block.text_id as id,
-                block.text_titre as title,
-                block.text as body,
-                case block.style
-                    when 5 then 'well'
-                end as class,
-                case block.style
-                    when 1 then 'left'
-                    when 2 then 'right'
-                    when 5 then 'top'
-                    when 6 then 'top'
-                end as image_position,
-                block.ordre as position,
-                image.img_nom as image,
-                imageElements.legende as image_label
-        from jedisjeux.jdj_article_text as block
-        left join jedisjeux.jdj_images image
-                    on image.img_id = block.img_id
-        left join jedisjeux.jdj_images_elements imageElements
-                on imageElements.img_id = image.img_id
-                and imageElements.elem_type = 'article'
-                and imageElements.elem_id = block.article_id
-        where block.text_id in ($ids)
-        order by block.ordre
-EOM;
-
-        return $this->getDatabaseConnection()->fetchAll($query);
+        return $this->getContainer()->get('app.factory.article');
     }
 
     /**
-     * @return array
+     * @return EntityRepository|object
      */
-    protected function getTotalOfItemsLoaded()
+    protected function getRepository()
     {
-        $query = <<<EOM
-select count(article.id) as itemCount, count(0) as totalCount
-from jedisjeux.jdj_article old
-  left join jdj_article article
-    on article.code = concat('article-', old.article_id)
-EOM;
+        return $this->getContainer()->get('app.repository.article');
+    }
 
-        return $this->getDatabaseConnection()->fetchAssoc($query);
+    /**
+     * @return EntityManager|object
+     */
+    protected function getManager()
+    {
+        return $this->getContainer()->get('doctrine.orm.entity_manager');
     }
 }

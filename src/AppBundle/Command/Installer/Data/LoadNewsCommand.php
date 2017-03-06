@@ -1,33 +1,29 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: loic
- * Date: 06/04/2016
- * Time: 09:04
+
+/*
+ * This file is part of jdj.
+ *
+ * (c) Mobizel
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AppBundle\Command\Installer\Data;
-
-use AppBundle\Command\LogMemoryUsageTrait;
-use AppBundle\Entity\Article;
-use AppBundle\Entity\Product;
 use AppBundle\Entity\Taxon;
 use AppBundle\Entity\Topic;
-use Sylius\Component\Taxonomy\Model\TaxonInterface;
-use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
-use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
-use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
+use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class LoadNewsCommand extends AbstractLoadDocumentCommand
+class LoadNewsCommand extends LoadArticlesCommand
 {
-    use LogMemoryUsageTrait;
+    const BATCH_SIZE = 20;
 
     /**
      * {@inheritdoc}
@@ -37,8 +33,10 @@ class LoadNewsCommand extends AbstractLoadDocumentCommand
         $this
             ->setName('app:news:load')
             ->setDescription('Load news')
-            ->addOption('no-update')
-            ->addOption('limit', null, InputOption::VALUE_REQUIRED, 'Set limit of news to import');
+            ->setHelp(<<<EOT
+The <info>%command.name%</info> command loads all news.
+EOT
+            );
     }
 
     /**
@@ -46,37 +44,16 @@ class LoadNewsCommand extends AbstractLoadDocumentCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        gc_collect_cycles();
-
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
+
+        $i = 0;
 
         foreach ($this->getNews() as $key => $data) {
             $output->writeln(sprintf("Loading <comment>%s</comment> news", $data['title']));
-            $this->logMemoryUsage($output);
-
             $article = $this->createOrReplaceArticle($data);
-            $articleContent = $article->getDocument();
-
-            $this->getDocumentManager()->persist($articleContent);
-            $this->getDocumentManager()->flush();
-
-            $blocks = [
-                [
-                    'id' => $data['id'],
-                    'body' => $data['body'],
-                    'image_position' => 'left',
-                    'image_label' => null,
-                    'image' => $data['mainImage'],
-                    'title' => null,
-                    'class' => null,
-                ]
-            ];
-            $this->populateBlocks($articleContent, $blocks);
-
-            $this->getDocumentManager()->flush();
 
             /** @var TaxonInterface $mainTaxon */
-            $mainTaxon = $this->getTaxonRepository()->findOneBy(['code' => Taxon::CODE_NEWS]);
+            $mainTaxon = $this->getContainer()->get('sylius.repository.taxon')->findOneBy(['code' => Taxon::CODE_NEWS]);
             $article->setMainTaxon($mainTaxon);
 
             if (null !== $data['product_id']) {
@@ -100,152 +77,67 @@ class LoadNewsCommand extends AbstractLoadDocumentCommand
             $article
                 ->setAuthor($author);
 
-            $this->getDocumentManager()->persist($articleContent);
-            $this->getDocumentManager()->flush();
-
             $this->getManager()->persist($article);
-            $this->getManager()->flush();
-            $this->getManager()->clear();
 
-            $this->getDocumentManager()->detach($articleContent);
-            $this->getDocumentManager()->clear();
-
-            if ($key > 0 and $key % 10 === 0) {
-                $this->clearDoctrineCache();
+            if (($i % self::BATCH_SIZE) === 0) {
+                $this->getManager()->flush(); // Executes all updates.
+                $this->getManager()->clear(); // Detaches all objects from Doctrine!
             }
+
+            ++$i;
         }
 
-        $this->clearDoctrineCache();
-        $stats = $this->getTotalOfItemsLoaded();
-        $this->showTotalOfItemsLoaded($stats['itemCount'], $stats['totalCount']);
-    }
+        $this->getManager()->flush();
+        $this->getManager()->clear();
 
-    protected function getNews()
-    {
-        $query = <<<EOM
-select      old.news_id as id,
-            old.titre as title,
-            concat(replace(old.titre_clean, ' ', '-'), '-n-', old.news_id) as name,
-            old.date as publishedAt,
-            old.text as body,
-            old.photo as mainImage,
-            customer.id as author_id,
-            old.photo as mainImage,
-            product.id as product_id,
-            topic.id as topic_id,
-            old.nb_clicks as view_count,
-            case valid
-                when 1 then 'published'
-                when 5 then 'need-a-review'
-                when 3 then 'ready-to-publish'
-                else 'new'
-            end as status
-from        jedisjeux.jdj_news old
-  inner join sylius_customer customer
-    on customer.code = concat('user-', old.user_id)
-  left join sylius_product_variant productVariant
-    on productVariant.code = concat('game-', old.game_id)
-  left join sylius_product product
-    on product.id = productVariant.product_id
-  left join jdj_topic topic
-    on topic.code = concat('topic-', old.topic_id)
-WHERE       old.valid >= 0
-            AND       old.type_lien in (0, 1)
+        $output->writeln(sprintf("<info>%s</info>", "News have been successfully loaded."));
 
-EOM;
-
-        if ($this->input->getOption('no-update')) {
-            $query .= <<<EOM
-
-AND not exists (
-   select 0
-   from jdj_article article
-   where article.code = concat('news-', old.news_id)
-)
-EOM;
-        }
-
-        $query .= <<<EOM
- 
-order by    old.date desc
-EOM;
-
-        if ($this->input->getOption('limit')) {
-            $query .= sprintf(' limit %s', $this->input->getOption('limit'));
-        }
-
-        return $this->getDatabaseConnection()->fetchAll($query);
     }
 
     /**
      * @return array
      */
-    protected function getTotalOfItemsLoaded()
+    protected function getNews()
     {
         $query = <<<EOM
-select count(article.id) as itemCount, count(0) as totalCount
-  from jedisjeux.jdj_news news
-left join jdj_article article
-    on article.code = concat('news-', news.news_id)
-where news.type_lien in (0, 1)
+SELECT
+  concat('news-', old.news_id)                                   AS code,
+  old.titre                                                      AS title,
+  concat(replace(old.titre_clean, ' ', '-'), '-n-', old.news_id) AS name,
+  old.date                                                       AS publishedAt,
+  old.text                                                       AS body,
+  old.photo                                                      AS mainImage,
+  customer.id                                                    AS author_id,
+  old.photo                                                      AS mainImage,
+  product.id                                                     AS product_id,
+  CASE WHEN old.news_id NOT IN (371, 3650)
+    THEN topic.id
+  ELSE NULL END                                                  AS topic_id,
+  old.nb_clicks                                                  AS view_count,
+  old.valid                                                      AS publishable,
+  CASE old.valid
+  WHEN 1
+    THEN 'published'
+  WHEN 5
+    THEN 'need-a-review'
+  WHEN 3
+    THEN 'ready-to-publish'
+  ELSE 'new'
+  END                                                            AS status
+FROM jedisjeux.jdj_news old
+  INNER JOIN sylius_customer customer
+    ON customer.code = concat('user-', old.user_id)
+  LEFT JOIN sylius_product_variant productVariant
+    ON productVariant.code = concat('game-', old.game_id)
+  LEFT JOIN sylius_product product
+    ON product.id = productVariant.product_id
+  LEFT JOIN jdj_topic topic
+    ON topic.code = concat('topic-', old.topic_id)
+WHERE old.valid >= 0
+      AND old.type_lien IN (0, 1)
+ORDER BY old.date DESC
 EOM;
 
-        return $this->getDatabaseConnection()->fetchAssoc($query);
-    }
-
-    /**
-     * @param array $data
-     *
-     * @return Article
-     */
-    protected function createOrReplaceArticle(array $data)
-    {
-        $article = $this->findArticle($data['name']);
-
-        if (null === $article) {
-            $article = $this->getFactory()->createNew();
-        }
-
-        $article
-            ->setCode(sprintf('news-%s', $data['id']))
-            ->setStatus($data['status'])
-            ->setViewCount($data['view_count']);
-
-        $articleDocument = $article->getDocument();
-
-        if (null === $articleDocument) {
-            $articleDocument = $this->getDocumentFactory()->createNew();
-            $article
-                ->setDocument($articleDocument);
-        }
-
-        if (null !== $data['mainImage'] && !empty($data['mainImage'])) {
-            $imageOriginalPath = $this->getImageOriginalPath($data['mainImage']);
-
-            $mainImage = $articleDocument->getMainImage();
-
-            if (null === $mainImage) {
-                /** @var ImagineBlock $mainImage */
-                $mainImage = $this->getContainer()->get('app.factory.imagine_block')->createNew();
-            }
-
-            $image = new Image();
-            $image->setFileContent(file_get_contents($imageOriginalPath));
-
-            $mainImage
-                ->setParentDocument($articleDocument)
-                ->setImage($image);
-
-            $articleDocument
-                ->setMainImage($mainImage);
-
-        }
-
-        $articleDocument->setName($data['name']);
-        $articleDocument->setTitle($data['title']);
-        $articleDocument->setPublishable(Article::STATUS_PUBLISHED === $data['status']);
-        $articleDocument->setPublishStartDate(\DateTime::createFromFormat('Y-m-d H:i:s', $data['publishedAt']));
-
-        return $article;
+        return $this->getManager()->getConnection()->fetchAll($query);
     }
 }

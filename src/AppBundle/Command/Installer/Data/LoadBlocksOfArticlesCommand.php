@@ -14,6 +14,7 @@ namespace AppBundle\Command\Installer\Data;
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Block;
 use AppBundle\Entity\BlockImage;
+use AppBundle\TextFilter\Bbcode2Html;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -94,10 +95,17 @@ EOT
             $block->setImage($this->createOrReplaceImage($block, $data));
         }
 
+        $body = $data['body'] ?? null;
+
+        $bbcode2html = $this->getBbcode2Html();
+        $body = $bbcode2html
+            ->setBody($body)
+            ->getFilteredBody();
+
         $block
             ->setCode($data['code'])
             ->setTitle($data['title'] ?: null)
-            ->setBody($data['body'] ?: null)
+            ->setBody($body)
             ->setImagePosition($data['image_position'] ?: null)
             ->setClass($data['class'] ?: null);
 
@@ -169,6 +177,14 @@ ORDER BY block.ordre
 EOM;
 
         return $this->getManager()->getConnection()->fetchAll($query);
+    }
+
+    /**
+     * @return Bbcode2Html|object
+     */
+    protected function getBbcode2Html()
+    {
+        return $this->getContainer()->get('app.text.filter.bbcode2html');
     }
 
     /**
