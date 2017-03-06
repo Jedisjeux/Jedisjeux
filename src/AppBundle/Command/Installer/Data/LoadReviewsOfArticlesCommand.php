@@ -103,8 +103,10 @@ SELECT
   old.note    AS rating,
   old.avis    AS comment
 FROM jedisjeux.jdj_tests_avis old
+  INNER JOIN sylius_product_variant variant
+    ON variant.code = concat('game-', old.game_id)
   INNER JOIN sylius_product product
-    ON product.code = concat('game-', old.game_id)
+    on product.id = variant.product_id
   INNER JOIN sylius_customer customer
     ON customer.code = concat('user-', old.user_id)
   INNER JOIN jdj_article article

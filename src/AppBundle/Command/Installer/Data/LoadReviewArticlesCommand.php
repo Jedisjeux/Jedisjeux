@@ -53,6 +53,11 @@ EOT
             $output->writeln(sprintf("Loading <comment>%s</comment> review article", $data['title']));
             $article = $this->createOrReplaceArticle($data);
 
+            $article
+                ->setMaterialRating($data['materialRating'])
+                ->setRulesRating($data['rulesRating'])
+                ->setLifetimeRating($data['lifetimeRating']);
+
             /** @var TaxonInterface $mainTaxon */
             $mainTaxon = $this->getContainer()->get('sylius.repository.taxon')->findOneBy(['code' => Taxon::CODE_REVIEW_ARTICLE]);
             $article->setMainTaxon($mainTaxon);
@@ -112,6 +117,9 @@ SELECT
   topic.id                                                           AS topic_id,
   customer.id                                                        AS author_id,
   test.valid                                                         AS publishable,
+  test.note_materiel / 2                                             AS materialRating,
+  test.note_regle / 2                                                AS rulesRating,
+  test.note_duree_vie / 2                                            AS lifetimeRating,
   review_article_view.view_count                                     AS view_count
 FROM jedisjeux.jdj_tests test
   INNER JOIN jedisjeux.jdj_v_review_article_view_count AS review_article_view
