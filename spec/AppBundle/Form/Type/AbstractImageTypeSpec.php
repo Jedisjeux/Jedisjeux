@@ -37,10 +37,4 @@ class AbstractImageTypeSpec extends ObjectBehavior
     {
         $this->shouldHaveType(AbstractResourceType::class);
     }
-
-    function it_builds_form(FormBuilderInterface $builder)
-    {
-        $builder->add('file', FileType::class, Argument::any())->shouldBeCalled()->willReturn($builder);
-        $this->buildForm($builder, []);
-    }
 }
