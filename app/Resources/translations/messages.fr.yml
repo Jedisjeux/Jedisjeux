@@ -34,6 +34,7 @@ app:
         framed: Encadré
         game_library: Ludothèque
         game_plays: Parties de jeu
+        image_legend: Légende de l'image
         image_on_the_left_side: Image à gauche
         image_on_the_right_side: Image à droite
         image_on_the_top_side: Image en haut
@@ -41,6 +42,7 @@ app:
         introduction: Introduction
         last_used_at: Dernière utilisation
         logout: Déconnection
+        main_image: Image principale
         manage_articles: Gérer les articles
         manage_contact_requests: Gérer les demandes de contact
         manage_dealers: Gérer les vendeurs

@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux project.
+ * This file is part of jdj project.
  *
- * (c) Jedisjeux
+ * (c) Loïc Frémont
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,10 +11,9 @@
 
 namespace AppBundle\Form\Type;
 
-use AppBundle\Entity\Article;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class ArticleType extends AbstractResourceType
+class BlockType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
@@ -32,36 +31,24 @@ class ArticleType extends AbstractResourceType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('name', TextType::class, [
-                'label' => 'label.internal_name',
-            ])
             ->add('title', TextType::class, [
-                'label' => 'label.title',
-            ])
-            ->add('mainImage', ArticleImageType::class, [
-                'label' => false,
-                'file_label' => 'app.ui.main_image',
-            ])
-            ->add('status', ChoiceType::class, [
-                'label' => 'label.status',
-                'required' => true,
-                'choices' => [
-                    'label.new' => Article::STATUS_NEW,
-                    'label.pending_review' => Article::STATUS_PENDING_REVIEW,
-                    'label.pending_publication' => Article::STATUS_PENDING_PUBLICATION,
-                    'label.published' => Article::STATUS_PUBLISHED,
-                ],
-                'choices_as_values' => true,
-            ])
-            ->add('body', 'ckeditor', [
-                'mapped' => false,
+                'label' => 'sylius.ui.title',
                 'required' => false,
             ])
-            ->add('blocks', CollectionType::class, [
+            ->add('image', BlockImageType::class, [
                 'label' => false,
-                'entry_type' => BlockType::class,
-                'allow_add' => true,
-                'allow_delete' => true,
+                'required' => false,
+            ])
+            ->add('class', ChoiceType::class, [
+                'required' => false,
+                'choices_as_values' => true,
+                'choices' => [
+                    'app.ui.framed' => 'well'
+                ],
+            ])
+            ->add('body', CKEditorType::class, [
+                'label' => 'sylius.ui.body',
+                'required' => false,
             ]);
     }
 
@@ -82,6 +69,6 @@ class ArticleType extends AbstractResourceType
      */
     public function getName()
     {
-        return 'app_article';
+        return 'app_block';
     }
 }
