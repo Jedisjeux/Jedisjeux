@@ -143,12 +143,9 @@ sylius_resource:
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
                 form:
                     default: AppBundle\Form\Type\SingleImageBlockType
-        app.slideshow_block:
-            driver: doctrine/phpcr-odm
+        app.slide_show_block:
             classes:
-                model: AppBundle\Document\SlideshowBlock
-                form:
-                    default: AppBundle\Form\Type\SlideshowBlockType
+                model: AppBundle\Entity\SlideShowBlock
         app.string_block:
             driver: doctrine/phpcr-odm
             classes:

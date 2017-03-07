@@ -14,6 +14,8 @@ namespace AppBundle\Command\Installer\Data;
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Block;
 use AppBundle\Entity\BlockImage;
+use AppBundle\Entity\SlideShowBlock;
+use AppBundle\Entity\Taxon;
 use AppBundle\TextFilter\Bbcode2Html;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
@@ -57,9 +59,19 @@ EOT
 
             /** @var Article $article */
             $article = $this->getContainer()->get('app.repository.article')->find($data['article_id']);
+
             $block = $this->createOrReplaceBlock($data);
-            $article
-                ->addBlock($block);
+
+            $taxonCode = $article->getMainTaxon() ? $article->getMainTaxon()->getCode() : null;
+
+            if (Taxon::CODE_REPORT_ARTICLE === $taxonCode and isset($data['image'])) {
+                $slideShowBlock = $this->createOrReplaceSlideShowBlock($article);
+                $slideShowBlock
+                    ->addBlock($block);
+            } else {
+                $article
+                    ->addBlock($block);
+            }
 
             $this->getManager()->persist($block);
 
@@ -130,6 +142,25 @@ EOT
             ->setLabel($data['image_label']);
 
         return $image;
+    }
+
+    /**
+     * @param Article $article
+     *
+     * @return SlideShowBlock
+     */
+    protected function createOrReplaceSlideshowBlock(Article $article)
+    {
+        /** @var SlideShowBlock $slideShowBlock */
+        $slideShowBlock = $article->getSlideShowBlock();
+
+        if (null === $slideShowBlock) {
+            $slideShowBlock = $this->getContainer()->get('app.factory.slide_show_block')->createNew();
+            $article
+                ->setSlideShowBlock($slideShowBlock);
+        }
+
+        return $slideShowBlock;
     }
 
     /**

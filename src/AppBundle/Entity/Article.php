@@ -130,6 +130,13 @@ class Article implements ResourceInterface, ReviewableInterface
     protected $viewCount = 0;
 
     /**
+     * @var SlideShowBlock|null
+     *
+     * @ORM\OneToOne(targetEntity="SlideShowBlock", cascade={"persist", "merge"})
+     */
+    protected $slideShowBlock;
+
+    /**
      * @var ProductInterface
      *
      * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface", inversedBy="articles")
@@ -260,6 +267,26 @@ class Article implements ResourceInterface, ReviewableInterface
     public function setStatus($status)
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return SlideShowBlock|null
+     */
+    public function getSlideShowBlock()
+    {
+        return $this->slideShowBlock;
+    }
+
+    /**
+     * @param SlideShowBlock|null $slideShowBlock
+     *
+     * @return $this
+     */
+    public function setSlideShowBlock($slideShowBlock)
+    {
+        $this->slideShowBlock = $slideShowBlock;
 
         return $this;
     }
