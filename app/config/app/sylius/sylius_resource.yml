@@ -38,9 +38,13 @@ sylius_resource:
         app.block:
             classes:
                 model: AppBundle\Entity\Block
+                form:
+                    default: AppBundle\Form\Type\BlockType
         app.block_image:
             classes:
                 model: AppBundle\Entity\BlockImage
+                form:
+                    default: AppBundle\Form\Type\BlockImageType
         app.blockquote_block:
             driver: doctrine/phpcr-odm
             classes:
