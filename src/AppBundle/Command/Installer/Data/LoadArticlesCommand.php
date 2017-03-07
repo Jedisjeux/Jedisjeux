@@ -130,6 +130,7 @@ EOT
             ->setShortDescription($data['shortDescription'] ?? null)
             ->setPublishable($data['publishable'])
             ->setPublishStartDate(\DateTime::createFromFormat('Y-m-d H:i:s', $data['publishedAt']))
+            ->setCreatedAt($article->getPublishStartDate())
             ->setStatus($data['publishable'] ? Article::STATUS_PUBLISHED : Article::STATUS_NEW);
 
 
