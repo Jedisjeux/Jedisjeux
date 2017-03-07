@@ -88,6 +88,14 @@ class Block implements ResourceInterface
     protected $article;
 
     /**
+     * @var SlideShowBlock
+     *
+     * @Gedmo\SortableGroup
+     * @ORM\ManyToOne(targetEntity="SlideShowBlock", inversedBy="blocks")
+     */
+    protected $slideShowBlock;
+
+    /**
      * @return string
      */
     public function getCode()
@@ -243,6 +251,26 @@ class Block implements ResourceInterface
     public function setArticle($article)
     {
         $this->article = $article;
+
+        return $this;
+    }
+
+    /**
+     * @return SlideShowBlock
+     */
+    public function getSlideShowBlock(): SlideShowBlock
+    {
+        return $this->slideShowBlock;
+    }
+
+    /**
+     * @param SlideShowBlock $slideShowBlock
+     *
+     * @return $this
+     */
+    public function setSlideShowBlock($slideShowBlock)
+    {
+        $this->slideShowBlock = $slideShowBlock;
 
         return $this;
     }

@@ -45,6 +45,10 @@
             </div>
         {% endif %}
 
+        {% if article.slideShowBlock %}
+            {% include 'frontend/block/show/_slideshow.html.twig' with {'slideShowBlock': article.slideShowBlock } %}
+        {% endif %}
+
         {% set blockImageCount = 0 %}
 
         {% for block in article.blocks %}
