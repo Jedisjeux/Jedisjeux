@@ -17,6 +17,8 @@ sylius_resource:
         app.article_image:
             classes:
                 model: AppBundle\Entity\ArticleImage
+                form:
+                    default: AppBundle\Form\Type\ArticleImageType
         app.article_review:
             classes:
                 model: AppBundle\Entity\ArticleReview
