@@ -91,7 +91,7 @@ class Block implements ResourceInterface
      * @var SlideShowBlock
      *
      * @Gedmo\SortableGroup
-     * @ORM\ManyToOne(targetEntity="SlideShowBlock", inversedBy="blocks")
+     * @ORM\ManyToOne(targetEntity="SlideShowBlock", inversedBy="blocks", cascade={"persist", "merge"})
      */
     protected $slideShowBlock;
 
