@@ -14,9 +14,8 @@ namespace AppBundle\Form\Type;
 use AppBundle\Entity\Article;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -32,7 +31,15 @@ class ArticleType extends AbstractResourceType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('document', 'app_article_content')
+            ->add('name', TextType::class, [
+                'label' => 'label.internal_name',
+            ])
+            ->add('title', TextType::class, [
+                'label' => 'label.title',
+            ])
+            ->add('mainImage', ArticleImageType::class, [
+                'label' => 'app.ui.main_image',
+            ])
             ->add('status', ChoiceType::class, [
                 'label' => 'label.status',
                 'required' => true,
@@ -48,15 +55,6 @@ class ArticleType extends AbstractResourceType
                 'mapped' => false,
                 'required' => false,
             ]);
-
-        $builder->addEventListener(
-            FormEvents::POST_SUBMIT,
-            function (FormEvent $event) {
-                /** @var Article $article */
-                $article = $event->getData();
-                $article->setUpdatedAt(new \DateTime());
-            }
-        );
     }
 
     /**
