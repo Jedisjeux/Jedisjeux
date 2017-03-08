@@ -50,7 +50,6 @@ class ArticleContext extends DefaultContext
             $article = $this->getFactory('article', 'app')->createNew();
             $article
                 ->setCode(isset($data['code']) ? $data['code'] : $this->faker->postcode)
-                ->setName(isset($data['name']) ? $data['name'] : $this->faker->slug())
                 ->setTitle(isset($data['title']) ? $data['title'] : $this->faker->text(20))
                 ->setPublishable(true)
                 ->setStatus(Article::STATUS_PUBLISHED)
