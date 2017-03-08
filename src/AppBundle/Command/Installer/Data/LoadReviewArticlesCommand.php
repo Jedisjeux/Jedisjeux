@@ -116,6 +116,7 @@ SELECT
   concat('critique-', productTranslation.slug, '-ra-', test.game_id) AS name,
   topic.id                                                           AS topic_id,
   customer.id                                                        AS author_id,
+  test.intro                                                         AS shortDescription,
   test.valid                                                         AS publishable,
   test.note_materiel / 2                                             AS materialRating,
   test.note_regle / 2                                                AS rulesRating,
