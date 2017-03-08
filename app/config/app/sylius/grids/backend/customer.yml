@@ -20,7 +20,7 @@ sylius_grid:
                     sortable: email
                 createdAt:
                     type: twig
-                    label: sylius.ui.created_at
+                    label: sylius.ui.registration_date
                     sortable: createdAt
                     options:
                         template: "backend/grid/field/date/medium.html.twig"

@@ -12,6 +12,7 @@
 namespace AppBundle\Form\Type;
 
 use AppBundle\Entity\Article;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -53,8 +54,8 @@ class ArticleType extends AbstractResourceType
                 ],
                 'choices_as_values' => true,
             ])
-            ->add('body', 'ckeditor', [
-                'mapped' => false,
+            ->add('shortDescription', CKEditorType::class, [
+                'label' => 'app.ui.short_description',
                 'required' => false,
             ])
             ->add('blocks', CollectionType::class, [
