@@ -11,10 +11,10 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Document\ArticleContent;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -58,6 +58,14 @@ class Article implements ResourceInterface, ReviewableInterface
      * @ORM\Column(type="string")
      */
     protected $name;
+
+    /**
+     * @var string
+     *
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(type="string", unique=true, nullable=true)
+     */
+    protected $slug;
 
     /**
      * @var string
