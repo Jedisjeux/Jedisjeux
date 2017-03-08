@@ -22,6 +22,7 @@ use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -71,6 +72,7 @@ class Article implements ResourceInterface, ReviewableInterface
      * @var string
      *
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      */
     protected $title;
 
@@ -113,6 +115,7 @@ class Article implements ResourceInterface, ReviewableInterface
      * @var bool
      *
      * @ORM\Column(type="boolean")
+     * @Assert\NotBlank()
      */
     protected $publishable = true;
 
@@ -120,6 +123,7 @@ class Article implements ResourceInterface, ReviewableInterface
      * @var string
      *
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      */
     protected $status;
 
@@ -134,6 +138,7 @@ class Article implements ResourceInterface, ReviewableInterface
      * @var int
      *
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank()
      */
     protected $viewCount = 0;
 
