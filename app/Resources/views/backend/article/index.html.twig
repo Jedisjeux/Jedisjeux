@@ -65,7 +65,7 @@
                 <td class="text-right">
                     <ul class="list-inline text-nowrap">
                         <li>
-                            {{ buttons.show(path('app_frontend_article_show', { 'name': article.name })) }}
+                            {{ buttons.show(path('app_frontend_article_show', { 'slug': article.slug })) }}
                         </li>
                         <li>
                             {{ buttons.edit(path('app_backend_article_update', { 'id': article.id })) }}

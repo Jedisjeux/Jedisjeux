@@ -1,6 +1,6 @@
 app_frontend_article_post_create:
     methods: [GET, POST]
-    path: /article/{articleName}/posts/new
+    path: /article/{articleSlug}/posts/new
     defaults:
         _controller: app.controller.post:createAction
         _sylius:
@@ -8,15 +8,15 @@ app_frontend_article_post_create:
             factory:
                 method: createForArticle
                 arguments:
-                    - expr:service('app.repository.article').findOneByName($articleName)
+                    - expr:service('app.repository.article').findOneBySlug($articleSlug)
             template: frontend/article/post/create.html.twig
             redirect:
                 route: app_frontend_article_show
-                parameters: { name: $articleName }
+                parameters: { slug: $articleSlug }
 
 app_frontend_article_post_update:
     methods: [GET, PUT]
-    path: /article/{articleName}/posts/{id}/edit
+    path: /article/{articleSlug}/posts/{id}/edit
     defaults:
         _controller: app.controller.post:updateAction
         _sylius:
@@ -26,5 +26,5 @@ app_frontend_article_post_update:
                 arguments: [{id: $id, author: expr:service('app.context.customer').getCustomer()}]
             redirect:
                 route: app_frontend_article_show
-                parameters: { name: $articleName }
+                parameters: { slug: $articleSlug }
             template: frontend/article/post/update.html.twig

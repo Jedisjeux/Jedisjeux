@@ -101,7 +101,7 @@ default:
 Then run selenium-server-standalone:
 
 ```bash
-$ bin/selenium-server-standalone
+$ bin/selenium-server-standalone -Dwebdriver.chrome.driver=$PWD/bin/chromedriver
 ```
 
 Then setup your test database:
@@ -109,6 +109,8 @@ Then setup your test database:
 ```bash
 $ php app/console doctrine:database:create --env=test
 $ php app/console doctrine:schema:create --env=test
+$ php app/console cache:clear --no-warmup --env=test
+$ php app/console doctrine:phpcr:repository:init --env=test
 ```
 
 You can run Behat using the following commands:

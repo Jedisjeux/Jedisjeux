@@ -14,7 +14,7 @@ Feature: Edit contact requests
       | kevin@example.com |
     And I am logged in as user "admin@example.com" with password "password"
 
-  Scenario: Update a contact request
+  Scenario: Show a contact request
     Given I am on "/admin/contact-requests/"
     And I follow "Voir"
     Then I should see "kevin@example.com"

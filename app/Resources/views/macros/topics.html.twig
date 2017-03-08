@@ -2,7 +2,7 @@
     {% if topic.gamePlay %}
         {% set linkUrl = path('app_frontend_game_play_show', {'productSlug': topic.gamePlay.product.slug, 'id': topic.gamePlay.id }) %}
     {% elseif topic.article %}
-        {% set linkUrl = path('app_frontend_article_show', {'name': topic.article.name}) %}
+        {% set linkUrl = path('app_frontend_article_show', {'slug': topic.article.slug}) %}
     {% else %}
         {% set linkUrl = path('app_frontend_post_index_by_topic', {'topicId': topic.id}) %}
     {% endif %}

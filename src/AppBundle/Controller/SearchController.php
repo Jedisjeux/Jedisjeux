@@ -131,7 +131,7 @@ class SearchController extends Controller
                     'label' => (string)$entity,
                     'image' => (null === $entity->getDocument()->getMainImage()) ? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : $this->get('liip_imagine.cache.manager')->getBrowserPath($entity->getDocument()->getMainImage()->getImage()->getId(), 'cmf_thumbnail'),
                     'href' => $this->generateUrl('app_frontend_article_show', array(
-                            'name' => $entity->getName(),
+                            'slug' => $entity->getSlug(),
                         )
                     ),
                 );

@@ -11,10 +11,10 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Document\ArticleContent;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -22,6 +22,7 @@ use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -55,14 +56,16 @@ class Article implements ResourceInterface, ReviewableInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(type="string", unique=true, nullable=true)
      */
-    protected $name;
+    protected $slug;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      */
     protected $title;
 
@@ -105,6 +108,7 @@ class Article implements ResourceInterface, ReviewableInterface
      * @var bool
      *
      * @ORM\Column(type="boolean")
+     * @Assert\NotBlank()
      */
     protected $publishable = true;
 
@@ -112,6 +116,7 @@ class Article implements ResourceInterface, ReviewableInterface
      * @var string
      *
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      */
     protected $status;
 
@@ -126,6 +131,7 @@ class Article implements ResourceInterface, ReviewableInterface
      * @var int
      *
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank()
      */
     protected $viewCount = 0;
 
@@ -232,21 +238,29 @@ class Article implements ResourceInterface, ReviewableInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getName()
     {
-        return $this->name;
+        return $this->getTitle();
     }
 
     /**
-     * @param string $name
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
      *
      * @return $this
      */
-    public function setName($name)
+    public function setSlug(string $slug)
     {
-        $this->name = $name;
+        $this->slug = $slug;
 
         return $this;
     }

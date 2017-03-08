@@ -10,7 +10,7 @@
 
 {% block breadcrumb_content %}
     <a href="{{ path('app_frontend_article_index') }}">{{ 'app.ui.articles'|trans }}</a>
-    / <a href="{{ path('app_frontend_article_show', {'name': article.name}) }}">{{ article.title }}</a>
+    / <a href="{{ path('app_frontend_article_show', {'slug': article.slug}) }}">{{ article.title }}</a>
     / Modifier votre commentaire
 {% endblock %}
 

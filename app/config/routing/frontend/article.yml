@@ -35,11 +35,11 @@ app_frontend_article_index_by_taxon:
 
 app_frontend_article_show:
     methods: [GET]
-    path: /article/{name}
+    path: /article/{slug}
     defaults:
         _controller: app.controller.article:showWithTaxonsAction
         _sylius:
             repository:
                 method: findOneBy
-                arguments: [name: $name]
+                arguments: [slug: $slug]
             template: frontend/article/show.html.twig

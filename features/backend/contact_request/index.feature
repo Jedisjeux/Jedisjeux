@@ -16,5 +16,4 @@ Feature: View list of contact requests
 
   Scenario: View list of contact requests
     When I am on "/admin/contact-requests/"
-    Then I should see "Retour de Cannes jour par jour"
-    And I should see "Jeux avec handicap"
+    Then I should see "kevin@example.com"
