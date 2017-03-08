@@ -14,7 +14,6 @@ Feature: Creates articles
     Given I am on "/admin/articles/"
     And I follow "Créer"
     And I fill in the following:
-      | Nom   | king-of-new-york-power-up    |
       | Titre | King of New York : Power Up! |
     When I press "Créer"
     Then I should see "a bien été créé"

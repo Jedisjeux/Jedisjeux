@@ -10,7 +10,7 @@
 
     {% set imageFilter = imageFilter|default('magazine_item_wide') %}
 
-    {{ item.magazineItemOne(article.mainImage ? article.mainImage.webPath : null, article.title, imageFilter, 'img-responsive', path('app_frontend_article_show', {'name': article.name}), article.title, body, meta) }}
+    {{ item.magazineItemOne(article.mainImage ? article.mainImage.webPath : null, article.title, imageFilter, 'img-responsive', path('app_frontend_article_show', {'slug': article.slug}), article.title, body, meta) }}
 
 {% endmacro %}
 
@@ -25,7 +25,7 @@
 
     {% set imageFilter = imageFilter|default('magazine_item') %}
 
-    {{ item.magazineItemTwo(article.mainImage.webPath, article.title, imageFilter, 'img-responsive', path('app_frontend_article_show', {'name': article.name}), article.title, body, meta) }}
+    {{ item.magazineItemTwo(article.mainImage.webPath, article.title, imageFilter, 'img-responsive', path('app_frontend_article_show', {'slug': article.slug}), article.title, body, meta) }}
 
 {% endmacro %}
 
@@ -38,7 +38,7 @@
         - <i class="fa fa-comments"></i> {{ article.topic ? article.topic.postCount : 0 }}
     {% endset %}
 
-    {{ item.magazineListItem(article.mainImage ? article.mainImage.webPath : null, article.title, 'thumbnail', 'img-responsive', path('app_frontend_article_show', {'name': article.name}), article.title, meta) }}
+    {{ item.magazineListItem(article.mainImage ? article.mainImage.webPath : null, article.title, 'thumbnail', 'img-responsive', path('app_frontend_article_show', {'slug': article.slug}), article.title, meta) }}
 
 {% endmacro %}
 
@@ -51,6 +51,6 @@
         - <i class="fa fa-comments"></i> {{ article.topic ? article.topic.postCount : 0 }}
     {% endset %}
 
-    {{ item.magazineListItemImageLess(path('app_frontend_article_show', {'name': article.name}), article.title, meta) }}
+    {{ item.magazineListItemImageLess(path('app_frontend_article_show', {'slug': article.slug}), article.title, meta) }}
 
 {% endmacro %}

@@ -79,17 +79,17 @@
             <div class="blog-comments">
                 {% for post in topic.posts %}
                     {% include 'frontend/post/show/_content.html.twig' with {
-                    'editPath': path('app_frontend_article_post_update', {'id': post.id, 'articleName': article.name})
+                    'editPath': path('app_frontend_article_post_update', {'id': post.id, 'articleSlug': article.slug})
                     } %}
                 {% endfor %}
             </div>
         {% endif %}
 
         <h5><i class="fa fa-users color"></i> Participer</h5>
-        {{ button.btn(path('app_frontend_article_post_create', {'articleName' : article.name}), 'Commenter l\'article', null, 'plus-sign', 'btn-color btn-lg') }}
+        {{ button.btn(path('app_frontend_article_post_create', {'articleSlug' : article.slug}), 'Commenter l\'article', null, 'plus-sign', 'btn-color btn-lg') }}
         <hr/>
 
-        {{ pageViews.render(article.id, 'article', path('app_frontend_article_show', {'name' : article.name})) }}
+        {{ pageViews.render(article.id, 'article', path('app_frontend_article_show', {'slug' : article.slug})) }}
     </div>
     <div class="col-md-4">
         {% include "frontend/article/show/_sidebar.html.twig" %}

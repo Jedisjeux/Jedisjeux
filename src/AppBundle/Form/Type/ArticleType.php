@@ -33,9 +33,6 @@ class ArticleType extends AbstractResourceType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('name', TextType::class, [
-                'label' => 'label.internal_name',
-            ])
             ->add('title', TextType::class, [
                 'label' => 'label.title',
             ])

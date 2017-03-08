@@ -56,13 +56,6 @@ class Article implements ResourceInterface, ReviewableInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
-     */
-    protected $name;
-
-    /**
-     * @var string
-     *
      * @Gedmo\Slug(fields={"title"})
      * @ORM\Column(type="string", unique=true, nullable=true)
      */
@@ -245,21 +238,29 @@ class Article implements ResourceInterface, ReviewableInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getName()
     {
-        return $this->name;
+        return $this->getTitle();
     }
 
     /**
-     * @param string $name
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
      *
      * @return $this
      */
-    public function setName($name)
+    public function setSlug(string $slug)
     {
-        $this->name = $name;
+        $this->slug = $slug;
 
         return $this;
     }
