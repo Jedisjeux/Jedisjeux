@@ -11,9 +11,11 @@
 
 namespace AppBundle\Form\Type;
 
+use AppBundle\Entity\Block;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -39,7 +41,19 @@ class BlockType extends AbstractResourceType
                 'label' => false,
                 'required' => false,
             ])
+            ->add('imagePosition', ChoiceType::class, [
+                'label' => 'app.ui.image_position',
+                'required' => false,
+                'choices_as_values' => true,
+                'choices' => [
+                    'app.ui.image_on_the_left_side' => Block::POSITION_LEFT,
+                    'app.ui.image_on_the_right_side' => Block::POSITION_RIGHT,
+                    'app.ui.image_on_the_top_side' => Block::POSITION_TOP,
+                ],
+            ])
             ->add('class', ChoiceType::class, [
+                'label' => 'app.ui.style',
+                'placeholder' => 'app.ui.normal',
                 'required' => false,
                 'choices_as_values' => true,
                 'choices' => [
@@ -62,6 +76,14 @@ class BlockType extends AbstractResourceType
             'validation_groups' => $this->validationGroups,
             'cascade_validation' => true,
         ]);
+    }
+
+    /**
+     * @return string
+     */
+    public function getBlockPrefix()
+    {
+        return 'single_image_block';
     }
 
     /**

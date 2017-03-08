@@ -38,6 +38,7 @@ app:
         image_on_the_left_side: Image à gauche
         image_on_the_right_side: Image à droite
         image_on_the_top_side: Image en haut
+        image_position: Position de l'image
         internal_name: Nom interne
         introduction: Introduction
         last_used_at: Dernière utilisation
@@ -65,6 +66,7 @@ app:
         new_redirection: Nouvelle redirection
         new_post: Nouveau message
         new_string_block: Nouveau bloc de chaîne
+        normal: Normal
         not_found_pages: Pages non trouvées
         overview_of_your_website: Aperçu de votre site web
         path: Chemin
@@ -83,11 +85,13 @@ app:
         request_placeholder: Recherche....
         results_of_your_query: Résultats de votre recherche
         see_later: A regarder plus tard
+        short_description: Description courte
         show_posts: Voir les messages
         show_sub_categories: Voir les sous-catégories
         slide_show: Carousel
         source: Source
         string_blocks: Blocs de chaîne
+        style: Style
         topic: Sujet
         topics: Sujets
         view_details: Voir les détails
