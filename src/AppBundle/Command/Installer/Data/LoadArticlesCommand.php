@@ -124,7 +124,6 @@ EOT
 
         $article
             ->setCode($code)
-            ->setName($data['name'])
             ->setTitle($data['title'])
             ->setViewCount($data['view_count'])
             ->setShortDescription($data['shortDescription'] ?? null)
@@ -155,14 +154,17 @@ EOT
     {
         $query = <<<EOM
 SELECT
-  article.article_id                                                        AS id,
-  concat(replace(article.titre_clean, ' ', '-'), '-a-', article.article_id) AS name,
-  article.titre                                                             AS title,
+  article.article_id     AS id,
+  CASE WHEN article.titre = '' AND article.titre_clean = ''
+    THEN 'Untitled'
+  WHEN article.titre = '' AND article.titre_clean <> ''
+    THEN article.titre_clean
+  ELSE article.titre END AS title,
   CASE WHEN article.date = '0000-00-00 00:00:00'
     THEN '2000-01-01 00:00:00'
-  ELSE article.date END                                                     AS publishedAt,
-  article.intro                                                             AS shortDescription,
-  article.photo                                                             AS mainImage,
+  ELSE article.date END  AS publishedAt,
+  article.intro          AS shortDescription,
+  article.photo          AS mainImage,
   CASE article.type_article
   WHEN 'article'
     THEN NULL
@@ -175,13 +177,13 @@ SELECT
   WHEN 'preview'
     THEN 'previews'
   ELSE NULL
-  END                                                                       AS mainTaxon,
-  article.valid                                                             AS publishable,
-  product.id                                                                AS product_id,
+  END                    AS mainTaxon,
+  article.valid          AS publishable,
+  product.id             AS product_id,
   CASE WHEN article.topic_id = 5280 AND article.article_id <> 313
     THEN NULL
-  ELSE topic.id END                                                         AS topic_id,
-  user.customer_id                                                          AS author_id,
+  ELSE topic.id END      AS topic_id,
+  user.customer_id       AS author_id,
   article_view.view_count
 FROM jedisjeux.jdj_article article
   INNER JOIN jedisjeux.jdj_v_article_view_count AS article_view
@@ -194,7 +196,6 @@ FROM jedisjeux.jdj_article article
     ON topic.code = concat('topic-', article.topic_id)
   LEFT JOIN sylius_user user
     ON convert(user.username USING UTF8) = convert(article.auteur USING UTF8)
-WHERE titre_clean != ''
 ORDER BY article.date DESC
 EOM;
 

@@ -69,7 +69,7 @@ class LoadRedirectionsForArticlesCommand extends AbstractLoadRedirectionsCommand
         $query = <<<EOM
 SELECT
   concat('/', replace(old.titre_clean, ' ', '-'), '-a-', old.article_id, '.html') AS source,
-  concat('/article/', article.name)                                               AS destination
+  concat('/article/', article.slug)                                               AS destination
 FROM jedisjeux.jdj_article old
   INNER JOIN jdj_article article
     ON article.code = concat('article-', old.article_id)

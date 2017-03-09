@@ -68,7 +68,7 @@ class LoadRedirectionsForReviewArticlesCommand extends AbstractLoadRedirectionsC
         $query = <<<EOM
 SELECT
   concat('/', replace(oldGame.mot_cle, ' ', '-'), '-t-', old.game_id, '.html') AS source,
-  concat('/article/', article.name)                                            AS destination
+  concat('/article/', article.slug)                                            AS destination
 FROM jedisjeux.jdj_tests old
   INNER JOIN jedisjeux.jdj_game oldGame
     ON oldGame.id = old.game_id
