@@ -82,6 +82,7 @@ EOT
             'app:redirections-for-products:load',
             'app:redirections-for-review-articles:load',
             'app:redirections-for-articles:load',
+            'app:dealers-prices:import',
         ];
 
         $this->runCommands($commands, $input, $output);
