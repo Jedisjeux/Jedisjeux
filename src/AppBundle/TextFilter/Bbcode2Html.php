@@ -293,8 +293,8 @@ EOM;
      */
     protected function urlReplacement($body)
     {
-        $pattern = '/\[url=(?P<path>.*?)\](?P<label>.*?)\[\/url:(.*?)\]/ms';
-        $replacement = "<a href=\"$1\" target='_blank'>$2</a>";
+        $pattern = '/\[url=(?P<path>.*?):(.*?)\](?P<label>.*?)\[\/url:(.*?)\]/ms';
+        $replacement = "<a href=\"$1\" target='_blank'>$3</a>";
         $body = preg_replace($pattern, $replacement, $body);
 
         return $body;

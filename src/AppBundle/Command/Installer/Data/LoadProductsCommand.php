@@ -12,6 +12,7 @@ use AppBundle\Entity\Product;
 use AppBundle\Entity\ProductVariant;
 use AppBundle\Entity\Taxon;
 use AppBundle\Repository\TaxonRepository;
+use AppBundle\TextFilter\Bbcode2Html;
 use AppBundle\Updater\ProductCountByTaxonUpdater;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
@@ -143,8 +144,18 @@ class LoadProductsCommand extends ContainerAwareCommand
             $product = $this->getFactory()->createWithVariant();
         }
 
-        $data['shortDescription'] = !empty($data['shortDescription']) ? $this->getHTMLFromText($data['shortDescription']) : null;
-        $data['description'] = !empty($data['description']) ? $this->getHTMLFromText($data['description']) : null;
+        $bbcode2html = $this->getBbcode2Html();
+
+        $shortDescription = $data['shortDescription'] ?? null;
+        $shortDescription = $bbcode2html
+            ->setBody($shortDescription)
+            ->getFilteredBody();
+
+        $description = $data['description'] ?? null;
+        $description = $bbcode2html
+            ->setBody($description)
+            ->getFilteredBody();
+
         $data['joueurMin'] = !empty($data['joueurMin']) ? $data['joueurMin'] : null;
         $data['joueurMax'] = !empty($data['joueurMax']) ? $data['joueurMax'] : null;
         $data['ageMin'] = !empty($data['ageMin']) ? $data['ageMin'] : null;
@@ -182,14 +193,14 @@ class LoadProductsCommand extends ContainerAwareCommand
 
         $product->setName(trim($data['name']));
         $product->setSlug(null); // enforce slug to be updated
-        $product->setDescription(trim($data['description']));
+        $product->setDescription(trim($description));
         $product->setCreatedAt($data['createdAt']);
         $product->setUpdatedAt($data['updatedAt']);
         $product->setReleasedAt($data['releasedAt']);
 
         $product
             ->setCode($data['code'])
-            ->setShortDescription(trim($data['shortDescription']))
+            ->setShortDescription(trim($shortDescription))
             ->setAgeMin($data['ageMin'])
             ->setJoueurMin($data['joueurMin'])
             ->setJoueurMax($data['joueurMax'])
@@ -257,7 +268,7 @@ and exists (
 )
 EOM;
 
-        $this->getDatabaseConnection()->executeQuery($query, ['association_type_id' => $associationType->getId()]);
+        $this->getManager()->getConnection()->executeQuery($query, ['association_type_id' => $associationType->getId()]);
 
         $query = <<<EOM
 insert into sylius_product_association_product(association_id, product_id)
@@ -278,7 +289,7 @@ and (oldAssociated.id_pere is null or oldAssociated.type_diff = 'collection')
 and old.id <> oldAssociated.id
 EOM;
 
-        $this->getDatabaseConnection()->executeQuery($query, ['association_type_id' => $associationType->getId()]);
+        $this->getManager()->getConnection()->executeQuery($query, ['association_type_id' => $associationType->getId()]);
 
     }
 
@@ -300,7 +311,7 @@ from   jedisjeux.jdj_game old
 where type_diff = 'extension'
 EOM;
 
-        $this->getDatabaseConnection()->executeQuery($query, ['association_type_id' => $assocationType->getId()]);
+        $this->getManager()->getConnection()->executeQuery($query, ['association_type_id' => $assocationType->getId()]);
 
         $query = <<<EOM
 insert into sylius_product_association_product(association_id, product_id)
@@ -317,7 +328,7 @@ and       association.association_type_id = :association_type_id
 and       old.type_diff = 'extension'
 EOM;
 
-        $this->getDatabaseConnection()->executeQuery($query, ['association_type_id' => $assocationType->getId()]);
+        $this->getManager()->getConnection()->executeQuery($query, ['association_type_id' => $assocationType->getId()]);
 
     }
 
@@ -378,7 +389,7 @@ WHERE old.valid IN (0, 1, 2, 5, 3)
       AND old.nom <> ""
 EOM;
 
-        return $this->getDatabaseConnection()->fetchAll($query);
+        return $this->getManager()->getConnection()->fetchAll($query);
     }
 
     /**
@@ -413,52 +424,16 @@ WHERE old.valid IN (0, 1, 2, 5, 3)
 
 EOM;
 
-        return $this->getDatabaseConnection()->fetchAll($query);
+        return $this->getManager()->getConnection()->fetchAll($query);
 
-    }
-
-    private function getHTMLFromText($text)
-    {
-        $text = trim($text);
-
-        /**
-         * Turn Double carryage returns into <p>
-         */
-        $text = "<p>" . preg_replace("/\\n(\\r)?\n/", "</p><p>", $text) . "</p>";
-
-        /**
-         * Turn Simple carryage returns into <br />
-         */
-        $text = "<p>" . preg_replace("/\\n/", "<br />", $text) . "</p>";
-
-        $text = $this->cleanBBCode($text);
-
-        $text = preg_replace("/\<(b|strong)\>/", '</p><h4>', $text);
-        $text = preg_replace("/\<\/(b|strong)\>/", '</h4><p>', $text);
-
-        $text = preg_replace("/\<p\>( |\n|\r)*\<br \/>/", '<p>', $text);
-        $text = preg_replace("/\<p\>( )*\<\/p\>/", '', $text);
-
-        $text = preg_replace("/\<p\><p\>/", '<p>', $text);
-
-        return $text;
-    }
-
-    private function cleanBBCode($text)
-    {
-        $text = preg_replace("/\[(b):[0-9a-z]+\]/", '</p><h4>', $text);
-        $text = preg_replace("/\[(\/)?(b):[0-9a-z]+\]/", '</h4><p>', $text);
-        $text = preg_replace("/\[(\/)?(i):[0-9a-z]+\]/", '<${1}i>', $text);
-
-        return $text;
     }
 
     /**
-     * @return \Doctrine\DBAL\Connection|object
+     * @return Bbcode2Html|object
      */
-    protected function getDatabaseConnection()
+    protected function getBbcode2Html()
     {
-        return $this->getContainer()->get('database_connection');
+        return $this->getContainer()->get('app.text.filter.bbcode2html');
     }
 
     /**

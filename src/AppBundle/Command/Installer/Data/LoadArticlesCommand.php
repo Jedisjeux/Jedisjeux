@@ -14,6 +14,7 @@ use AppBundle\Document\ArticleContent;
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Taxon;
 use AppBundle\Entity\Topic;
+use AppBundle\TextFilter\Bbcode2Html;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -122,11 +123,18 @@ EOT
             $article = $this->getFactory()->createNew();
         }
 
+        $shortDescription = $data['shortDescription'] ?? null;
+
+        $bbcode2html = $this->getBbcode2Html();
+        $shortDescription = $bbcode2html
+            ->setBody($shortDescription)
+            ->getFilteredBody();
+
         $article
             ->setCode($code)
             ->setTitle($data['title'])
             ->setViewCount($data['view_count'])
-            ->setShortDescription($data['shortDescription'] ?? null)
+            ->setShortDescription($shortDescription)
             ->setPublishable($data['publishable'])
             ->setPublishStartDate(\DateTime::createFromFormat('Y-m-d H:i:s', $data['publishedAt']))
             ->setCreatedAt($article->getPublishStartDate())
@@ -200,6 +208,14 @@ ORDER BY article.date DESC
 EOM;
 
         return $this->getManager()->getConnection()->fetchAll($query);
+    }
+
+    /**
+     * @return Bbcode2Html|object
+     */
+    protected function getBbcode2Html()
+    {
+        return $this->getContainer()->get('app.text.filter.bbcode2html');
     }
 
     /**
