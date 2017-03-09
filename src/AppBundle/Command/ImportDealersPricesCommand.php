@@ -11,10 +11,10 @@
 
 namespace AppBundle\Command;
 
+use AppBundle\Command\Installer\CommandExecutor;
 use AppBundle\Entity\Dealer;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
-use Sylius\Bundle\InstallerBundle\Command\CommandExecutor;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Process\Exception\RuntimeException;
 use Symfony\Component\Console\Input\InputInterface;
@@ -25,6 +25,11 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class ImportDealersPricesCommand extends ContainerAwareCommand
 {
+    /**
+     * @var OutputInterface
+     */
+    protected $output;
+
     /**
      * @var CommandExecutor
      */
@@ -83,6 +88,8 @@ EOT
                         'dealer' => $dealer->getCode(),
                         '--filename' => $dealer->getPriceList()->getPath(),
                         '--remove-first-line' => $dealer->getPriceList()->hasHeaders(),
+                        '--delimiter' => $dealer->getPriceList()->getDelimiter(),
+                        '--utf8' => $dealer->getPriceList()->isUtf8(),
                     ], $output);
                     $output->writeln('');
                 } catch (RuntimeException $exception) {
@@ -121,7 +128,7 @@ EOT
     }
 
     /**
-     * @return EntityRepository
+     * @return EntityRepository|object
      */
     protected function getDealerRepository()
     {
@@ -129,7 +136,7 @@ EOT
     }
 
     /**
-     * @return EntityManager
+     * @return EntityManager|object
      */
     protected function getManager()
     {
