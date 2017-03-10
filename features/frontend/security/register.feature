@@ -6,7 +6,7 @@ Feature: Register as a new user
   Scenario: Register as a new user
     Given I am on "/register"
     And I fill in the following:
-      | Email                     | kevin@example.com |
+      | E-mail                     | kevin@example.com |
       | Nom d'utilisateur         | Kevin             |
       | Mot de passe              | password          |
       | Confirmation mot de passe | password          |
