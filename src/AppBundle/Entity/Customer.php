@@ -113,4 +113,16 @@ class Customer extends BaseCustomer implements ReviewerInterface, UserAwareInter
             $user->setCustomer($this);
         }
     }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        if (null === $user = $this->user) {
+            return parent::__toString();
+        }
+
+        return $user->getUsername();
+    }
 }
