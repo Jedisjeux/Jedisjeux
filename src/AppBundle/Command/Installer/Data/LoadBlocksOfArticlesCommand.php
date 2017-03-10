@@ -107,7 +107,7 @@ EOT
             $block->setImage($this->createOrReplaceImage($block, $data));
         }
 
-        $body = $data['body'] ?? null;
+        $body = $data['body'] ?: null;
 
         $bbcode2html = $this->getBbcode2Html();
         $body = $bbcode2html

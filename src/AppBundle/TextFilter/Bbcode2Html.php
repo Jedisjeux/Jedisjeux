@@ -47,11 +47,16 @@ class Bbcode2Html
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getFilteredBody()
     {
         $body = $this->body;
+
+        if (null === $body) {
+            return null;
+        }
+
         $body = $this->nl2p($body);
         $body = $this->emoticonReplacement($body);
         $body = $this->colorReplacement($body);
