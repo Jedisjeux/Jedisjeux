@@ -1,53 +1,27 @@
-{% extends 'layout/minimal.html.twig' %}
+{% extends 'base.html.twig' %}
 
-{% block card_container_content %}
+{% set pageTitle = 'sylius.ui.register'|trans %}
+
+{% block headline %}
+    {{ pageTitle }}
+{% endblock %}
+
+{% block container %}
     <div class="small-12 user-form">
 
         {{ form_errors(form) }}
 
-        <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"/>
+        <form action="{{ path('app_frontend_register') }}?" method="post" class="form-horizontal">
 
-        <form action="{{ path('app_frontend_register') }}?" method="post" class="form-signin" >
-            <div class="row">
-                <div class="col-md-12">
-                    {{ form_widget(form.email, {attr: {'placeholder': 'label.email'|trans}}) }}
-                    {{ form_errors(form.email) }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    {{ form_widget(form.user.username, {attr: {'placeholder': 'label.username'|trans}}) }}
-                    {{ form_errors(form.user.username) }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    {{ form_widget(form.user.plainPassword.first, {attr: {'placeholder': 'label.password'|trans}}) }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    {{ form_widget(form.user.plainPassword.second, {attr: {'placeholder': 'label.password_confirmation'|trans}}) }}
-                </div>
-            </div>
-            {#<div class="row">#}
-                {#<div class="col-md-12">#}
-                    {#{{ form_widget(form.lastName, {attr: {'placeholder': 'label.last_name'|trans}}) }}#}
-                {#</div>#}
-            {#</div>#}
-            {#<div class="row">#}
-                {#<div class="col-md-12">#}
-                    {#{{ form_widget(form.firstName, {attr: {'placeholder': 'label.first_name'|trans}}) }}#}
-                {#</div>#}
-            {#</div>#}
-            {#<div class="row">#}
-                {#<div class="col-md-12">#}
-                    {#{{ form_widget(form.phoneNumber, {attr: {'placeholder': 'label.phone_number'|trans}}) }}#}
-                {#</div>#}
-            {#</div>#}
+            {{ form_row(form.email, {attr: {'placeholder': 'sylius.ui.email'|trans}}) }}
+            {{ form_row(form.user.username, {attr: {'placeholder': 'sylius.ui.username'|trans}}) }}
+            {{ form_row(form.user.plainPassword.first, {attr: {'placeholder': 'sylius.ui.password'|trans}}) }}
+            {{ form_row(form.user.plainPassword.second, {attr: {'placeholder': 'sylius.ui.repeat_new_password'|trans}}) }}
+
             {{ form_rest(form) }}
-            <div class="action-buttons">
-                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" id="_submit" name="_submit">{{ 'label.validate'|trans }}</button>
+            <div class="pull-right">
+                <button class="btn btn-primary" type="submit" id="_submit"
+                        name="_submit">{{ 'label.validate'|trans }}</button>
             </div>
         </form>
 
