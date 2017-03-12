@@ -19,7 +19,7 @@ Feature: Resetting password
       | felicie.clyste@example.com | 666                |
     And I am on "/forgotten-password/666"
     And I fill in the following:
-      | Nouveau mot de passe      | password |
-      | Confirmer le mot de passe | password |
+      | Mot de passe | password |
+      | Vérification | password |
     When I press "Valider"
     Then I should see "Votre mot de passe a été réinitialisé avec succès"
