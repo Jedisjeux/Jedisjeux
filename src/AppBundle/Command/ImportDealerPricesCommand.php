@@ -65,9 +65,9 @@ class ImportDealerPricesCommand extends ContainerAwareCommand
             ->setName('app:dealer-prices:import')
             ->addArgument('dealer', InputArgument::REQUIRED, 'dealer')
             ->addOption('filename', null, InputOption::VALUE_REQUIRED, 'filename to import')
-            ->addOption('remove-first-line', null, InputOption::VALUE_REQUIRED, false)
-            ->addOption('delimiter', null, InputOption::VALUE_REQUIRED, ';')
-            ->addOption('utf8', null, InputOption::VALUE_REQUIRED, true)
+            ->addOption('remove-first-line', null, InputOption::VALUE_REQUIRED, null, false)
+            ->addOption('delimiter', null, InputOption::VALUE_REQUIRED, null, ';')
+            ->addOption('utf8', null, InputOption::VALUE_REQUIRED, null, true)
             ->setDescription('Import prices from a dealer')
             ->setHelp(<<<EOT
 The <info>%command.name%</info> command import prices from a dealer.
