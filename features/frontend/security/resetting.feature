@@ -9,7 +9,7 @@ Feature: Resetting password
       | bobby.cyclette@example.com | password |
     And I am on "/forgotten-password"
     And I fill in the following:
-      | Email | bobby.cyclette@example.com |
+      | E-mail | bobby.cyclette@example.com |
     When I press "Valider"
     Then I should see "vous recevrez un message avec les instructions pour réinitialiser votre mot de passe"
 
@@ -19,7 +19,7 @@ Feature: Resetting password
       | felicie.clyste@example.com | 666                |
     And I am on "/forgotten-password/666"
     And I fill in the following:
-      | Nouveau mot de passe | password |
-      | Confirmation         | password |
+      | Nouveau mot de passe      | password |
+      | Confirmer le mot de passe | password |
     When I press "Valider"
     Then I should see "Votre mot de passe a été réinitialisé avec succès"
