@@ -14,15 +14,16 @@ sed -i "s/database_user.*/database_user: ${MYSQL_USER}/" app/config/parameters.y
 sed -i "s/database_password.*/database_password: ${MYSQL_PASSWORD}/" app/config/parameters.yml
 sed -i "s/dbname.*/dbname: test/" app/config/config_test.yml
 
-# php
-sudo sed -i 's/^memory_limit.*/memory_limit = -1/' /home/rof/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-sudo service php7.0-fpm restart
-
 # elastic search
 sed -i "s/fos_elastica\.host.*/fos_elastica\.host: 127.0.0.1/" app/config/parameters.yml
 
+# php
+sed -i 's/^memory_limit.*/memory_limit = -1/' ${HOME}/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+sudo service php7.0-fpm restart
+
 # lanch elasticsearch
 sudo /etc/init.d/elasticsearch start
+
 # database creation
 php app/console doctrine:migrations:migrate --env=test -n
 php app/console cache:clear --no-warmup --env=test
