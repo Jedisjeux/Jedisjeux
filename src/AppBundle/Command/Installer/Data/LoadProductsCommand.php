@@ -146,12 +146,12 @@ class LoadProductsCommand extends ContainerAwareCommand
 
         $bbcode2html = $this->getBbcode2Html();
 
-        $shortDescription = $data['shortDescription'] ?? null;
+        $shortDescription = $data['shortDescription'] ?: null;
         $shortDescription = $bbcode2html
             ->setBody($shortDescription)
             ->getFilteredBody();
 
-        $description = $data['description'] ?? null;
+        $description = $data['description'] ?: null;
         $description = $bbcode2html
             ->setBody($description)
             ->getFilteredBody();
