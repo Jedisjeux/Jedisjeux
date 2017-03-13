@@ -18,8 +18,7 @@ sed -i "s/dbname.*/dbname: test/" app/config/config_test.yml
 sed -i "s/fos_elastica\.host.*/fos_elastica\.host: 127.0.0.1/" app/config/parameters.yml
 
 # php
-sed -i 's/^memory_limit.*/memory_limit = -1/' ${HOME}/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-sudo service php7.0-fpm restart
+sed -i'' 's/^memory_limit=.*/memory_limit = -1/g' ${HOME}/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
 # lanch elasticsearch
 sudo /etc/init.d/elasticsearch start
