@@ -29,3 +29,13 @@ Feature: View list of topics
     Given I am on "/topics/"
     When I follow "Moi je dis jeux"
     Then I should see "Jeux avec handicap"
+
+  Scenario: Does not allow indexing private topics
+    Given there are taxons:
+      | code     | name                | parent | public |
+      | tatooine | Tatooine la Cantina | forum  | 0      |
+    And there are topics:
+      | title                        | main_taxon                | author            |
+      | Topic in Tatooine la Cantina | forum/tatooine-la-cantina | kevin@example.com |
+    When I am on "/topics/"
+    Then I should not see "Topic in Tatooine la Cantina"
