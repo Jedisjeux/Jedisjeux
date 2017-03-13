@@ -15,7 +15,7 @@ sed -i "s/database_password.*/database_password: ${MYSQL_PASSWORD}/" app/config/
 sed -i "s/dbname.*/dbname: test/" app/config/config_test.yml
 
 # php
-sed -i 's/^memory_limit.*/memory_limit = -1/' /home/rof/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+sudo sed -i 's/^memory_limit.*/memory_limit = -1/' /home/rof/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 sudo service php7.0-fpm restart
 
 # elastic search
