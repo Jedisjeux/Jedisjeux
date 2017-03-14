@@ -108,7 +108,6 @@ class Article implements ResourceInterface, ReviewableInterface
      * @var bool
      *
      * @ORM\Column(type="boolean")
-     * @Assert\NotBlank()
      */
     protected $publishable = true;
 

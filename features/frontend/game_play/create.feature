@@ -13,6 +13,7 @@ Feature: Game-play creation
       | Lewis & Clark |
     And I am logged in as user "kevin@example.com" with password "password"
 
+  @javascript
   Scenario: Create new game-play
     Given I am on "/jeu-de-societe/lewis-clark"
     And I follow "Nouvelle partie"
