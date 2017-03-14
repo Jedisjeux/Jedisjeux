@@ -32,8 +32,10 @@ app:
         errors: Erreurs
         forum: Forum
         framed: Encadré
+        game_details: Informations du jeu
         game_library: Ludothèque
         game_plays: Parties de jeu
+        game_play_details: Informations de la partie
         image_legend: Légende de l'image
         image_on_the_left_side: Image à gauche
         image_on_the_right_side: Image à droite
@@ -87,6 +89,7 @@ app:
         see_later: A regarder plus tard
         short_description: Description courte
         show_posts: Voir les messages
+        show_game_sheet: Voir la fiche de jeu
         show_sub_categories: Voir les sous-catégories
         slide_show: Carousel
         source: Source

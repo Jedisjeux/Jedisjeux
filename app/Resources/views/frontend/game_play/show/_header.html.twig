@@ -1,4 +1,4 @@
-{% from "macros/games.html.twig" import duration, playerCount %}
+{% from "macros/games.html.twig" import duration, playerCount, releasedAt %}
 {% from 'macros/items.html.twig' import blockquoteOne %}
 
 {% set product = game_play.product %}
@@ -14,9 +14,10 @@
                     <div class="img-box-5-img">
                         <!-- Image -->
                         {% if product.mainImage %}
-                            <a href="{{ product.mainImage.webPath | imagine_filter('default') }}" rel="product"
-                               class="fancybox"><img src="{{ product.mainImage.webPath | imagine_filter('default') }}"
-                                                     alt="" class="img-responsive img-thumbnail"/></a>
+                            <a href="{{ path('sylius_product_show', { 'slug': product.slug }) }}" rel="product"
+                               title="{{ 'app.ui.show_game_sheet'|trans }}"><img
+                                        src="{{ product.mainImage.webPath | imagine_filter('default') }}"
+                                        alt="" class="img-responsive img-thumbnail"/></a>
                         {% endif %}
 
                     </div>
@@ -27,14 +28,100 @@
 
                         <div class="container">
                             <div class="row">
-                                {% if product.shortDescription %}
-                                    {{ blockquoteOne(product.shortDescription) }}
-                                {% endif %}
+                                <h4>{{ 'app.ui.game_details'|trans }} <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}"><small class="color">({{ product }})</small></a></h4>
+
+                                <ul class="list-unstyled">
+                                    {% if product.joueurMin or product.joueurMax %}
+                                        <li>
+                                            <p class="pull-left bg-color square-2 rounded-2">
+                                                <span class="fa fa-user white"></span>
+                                            </p>
+                                            <p class="game-attribute">
+                                                {{ playerCount(product) }}
+                                            </p>
+                                        </li>
+                                    {% endif %}
+
+                                    {% if product.ageMin %}
+                                        <li>
+                                            <p class="pull-left bg-color square-2 rounded-2">
+                                                <span class="fa fa-child white"></span>
+                                            </p>
+                                            <p class="game-attribute">
+                                                à partir de {{ product.ageMin }} ans
+                                            </p>
+                                        </li>
+                                    {% endif %}
+
+                                    {% if product.durationMin %}
+                                        <li>
+                                            <p class="pull-left bg-color square-2 rounded-2">
+                                                <span class="fa clock-o color"></span>
+                                            </p>
+                                            <p class="game-attribute">
+                                                {{ duration(product) }}
+                                            </p>
+                                        </li>
+                                    {% endif %}
+
+                                    {% if product.mechanisms|length > 0 %}
+                                        <li>
+                                            <p class="pull-left bg-color square-2 rounded-2">
+                                                <span class="fa fa-cog white"></span>
+                                            </p>
+                                            <p class="game-attribute">
+                                                {% spaceless %}
+                                                    Mécanismes :
+                                                    {% set first = true %}
+                                                    {% for mechanism in product.mechanisms %}{% if not first %},{% endif %}
+                                                        {% set first = false %}
+                                                        <a
+                                                        href="{{ path('sylius_product_index_by_taxon', { 'permalink': mechanism.permalink }) }}">{{ mechanism }}</a>{% endfor %}
+                                                {% endspaceless %}
+                                            </p>
+                                        </li>
+                                    {% endif %}
+
+                                    {% if product.themes|length > 0 %}
+                                        <li>
+                                            <p class="pull-left bg-color square-2 rounded-2">
+                                                <span class="fa fa-picture-o white"></span>
+                                            </p>
+                                            <p class="game-attribute">
+                                                {% spaceless %}
+                                                    Thèmes :
+                                                    {% set first = true %}
+                                                    {% for key, theme in product.themes %}{% if not first %},{% endif %}
+                                                        {% set first = false %}
+                                                        <a
+                                                        href="{{ path('sylius_product_index_by_taxon', { 'permalink': theme.permalink }) }}">{{ theme }}</a>{% endfor %}
+                                                {% endspaceless %}
+                                            </p>
+                                        </li>
+                                    {% endif %}
+
+                                    {% if product.releasedAt is not null %}
+                                        <li>
+                                            <p class="pull-left bg-color square-2 rounded-2">
+                                                <span class="fa fa-calendar white"></span>
+                                            </p>
+                                            <p class="game-attribute">
+                                                {{ 'label.release'|trans }}
+                                                : {{ releasedAt(product.firstVariant, 'long') }}
+                                            </p>
+
+                                        </li>
+                                    {% endif %}
+                                    <hr/>
+                                </ul>
                             </div>
                         </div>
 
+
                         <div class="container">
                             <div class="row">
+                                <h4>{{ 'app.ui.game_play_details'|trans }}</h4>
+
                                 <ul class="list-unstyled">
 
                                     {% if game_play.playerCount is not null %}
