@@ -57,7 +57,7 @@ class GamePlay implements ResourceInterface
     /**
      * @var ProductInterface
      *
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface")
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface", inversedBy="gamePlays")
      * @ORM\JoinColumn(nullable=false)
      */
     protected $product;

@@ -172,6 +172,13 @@ class Product extends BaseProduct implements ReviewableInterface
     protected $articles;
 
     /**
+     * @var Collection|GamePlay[]
+     *
+     * @ORM\OneToMany(targetEntity="GamePlay", mappedBy="product")
+     */
+    protected $gamePlays;
+
+    /**
      * @var Collection|ProductList[]
      *
      * @ORM\OneToMany(targetEntity="ProductListItem", mappedBy="product")
@@ -190,6 +197,7 @@ class Product extends BaseProduct implements ReviewableInterface
         $this->reviews = new ArrayCollection();
         $this->articles = new ArrayCollection();
         $this->listItems = new ArrayCollection();
+        $this->gamePlays = new ArrayCollection();
         $this->code = uniqid('product_');
     }
 
@@ -815,6 +823,14 @@ class Product extends BaseProduct implements ReviewableInterface
     public function getArticles()
     {
         return $this->articles;
+    }
+
+    /**
+     * @return GamePlay[]|Collection
+     */
+    public function getGamePlays()
+    {
+        return $this->gamePlays;
     }
 
     /**
