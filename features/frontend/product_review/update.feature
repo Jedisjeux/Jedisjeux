@@ -16,6 +16,7 @@ Feature: Edit product reviews
       | Puerto Rico | kevin@example.com | Super jeu |
     And I am logged in as user "kevin@example.com" with password "password"
 
+  @javascript
   Scenario: Update a product review
     Given I am on "/jeu-de-societe/puerto-rico"
     And I follow "Votre avis"

@@ -16,7 +16,7 @@ Feature: List variants of a product
     And I am logged in as user "admin@example.com" with password "password"
 
   @todo
-  Scenario: List products
+  Scenario: List product variants
     Given there are products:
       | name                    |
       | Les princes de Florence |

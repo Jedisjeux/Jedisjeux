@@ -20,5 +20,3 @@ imports:
     - suites/ui/string_block.yml
     - suites/ui/taxon.yml
     - suites/ui/topic.yml
-
-    - suites/api/product.yml
