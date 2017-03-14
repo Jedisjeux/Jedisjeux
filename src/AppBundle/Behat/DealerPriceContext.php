@@ -54,7 +54,7 @@ class DealerPriceContext extends DefaultContext
         $this->tester->execute([
             'command' => $this->command,
             'dealer' => $dealer->getCode(),
-            '--filename' => 'app/resources/test/philibert.csv'
+            '--filename' => $this->getKernel()->getRootDir(). '/../app/resources/test/philibert.csv'
         ]);
     }
 }
