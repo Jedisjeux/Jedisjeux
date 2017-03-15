@@ -1,23 +1,32 @@
 {% from 'macros/topics.html.twig' import getPath %}
 
 {% set topic = topic is defined ? topic : resource %}
-{% set imageSrc = asset('assets/frontend/img/product-placeholder.png'| imagine_filter('image_box_4')) %}
-{% set path = getPath(topic) %}
 
-<div class="img-box-4-item">
-    <div class="img-container">
-        <a href="{{ path }}">
-            <img src="{{ imageSrc }}" alt="{{ topic }}"
-                 class="img-responsive"/>
-        </a>
-    </div>
-    <div class="img-box-4-content">
-        <h4><a href="{{ path }}">{{ topic }}</a></h4>
-        <p>Créé le {{ topic.createdAt|localizeddate('short', 'none') }}</p>
+{% if topic.article %}
+    {% include 'frontend/article/_singleBox.html.twig' with {'article': topic.article} %}
+{% elseif topic.gamePlay %}
+    {% include 'frontend/game_play/_singleBox.html.twig' with {'game_play': topic.gamePlay} %}
+{% else %}
 
-        <div class="magazine-meta">
-            <i class="fa fa-eye"></i> {{ topic.viewCount }}
-            - <i class="fa fa-comments"></i> {{ topic ? topic.postCount : 0 }}
+    {% set imageSrc = asset('assets/frontend/img/product-placeholder.png'| imagine_filter('image_box_4')) %}
+    {% set path = getPath(topic) %}
+
+    <div class="img-box-4-item">
+        <div class="img-container">
+            <a href="{{ path }}">
+                <img src="{{ imageSrc }}" alt="{{ topic }}"
+                     class="img-responsive"/>
+            </a>
+        </div>
+        <div class="img-box-4-content">
+            <h4><a href="{{ path }}">{{ topic }}</a></h4>
+            <p>Créé le {{ topic.createdAt|localizeddate('short', 'none') }}</p>
+
+            <div class="magazine-meta">
+                <i class="fa fa-eye"></i> {{ topic.viewCount }}
+                - <i class="fa fa-comments"></i> {{ topic ? topic.postCount : 0 }}
+            </div>
         </div>
     </div>
-</div>
+{% endif %}
+

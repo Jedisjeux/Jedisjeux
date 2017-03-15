@@ -28,6 +28,10 @@
                     {% endif %}
 
                     <div class="col-md-3 col-sm-6">
+                        <div class="block-heading-two text-left">
+                            <h3><span>{{ ('app.ui.' ~ type)|trans }}</span></h3>
+                        </div>
+
                         {% include 'frontend/' ~ type ~ '/_singleBox.html.twig' ignore missing %}
                     </div>
                     {% endfor %}

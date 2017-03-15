@@ -40,7 +40,7 @@ class DealerPriceContext extends DefaultContext
     /**
      * @When /^I run import dealer prices command for "([^""]*)"$/
      */
-    public function iRunSyliusCommandLineInstaller($dealerName)
+    public function iRunImportDealerPricesCommandLineInstaller($dealerName)
     {
         /** @var Dealer $dealer */
         $dealer = $this->findOneBy('dealer', ['name' => $dealerName], 'app');
