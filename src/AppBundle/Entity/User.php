@@ -14,12 +14,19 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\User\Model\User as BaseUser;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
  *
  * @ORM\Entity
  * @ORM\Table("sylius_user")
+ * @UniqueEntity(
+ *     fields={"username"},
+ *     errorPath="username",
+ *     message="app.user.username.unique",
+ *     groups="sylius"
+ * )
  */
 class User extends BaseUser
 {
