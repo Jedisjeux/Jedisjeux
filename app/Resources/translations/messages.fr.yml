@@ -2,6 +2,7 @@ app:
     ui:
         administration: Administration
         added_at: Date d'ajout
+        article: Article
         articles: Articles
         article_details: Détails de l'article
         article_settings: Configuration de l'article
@@ -32,6 +33,7 @@ app:
         errors: Erreurs
         forum: Forum
         framed: Encadré
+        game: Jeu
         game_details: Informations du jeu
         game_library: Ludothèque
         game_plays: Parties de jeu
@@ -72,6 +74,7 @@ app:
         not_found_pages: Pages non trouvées
         overview_of_your_website: Aperçu de votre site web
         path: Chemin
+        person: Personne
         people: Personnes
         permanent: Permanent
         posts: Messages
