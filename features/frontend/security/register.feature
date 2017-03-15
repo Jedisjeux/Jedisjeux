@@ -20,9 +20,22 @@ Feature: Register as a new user
       | kevin@example.com |
     And I am on "/register"
     And I fill in the following:
-      | E-mail                       | kevin@example.com |
-      | Nom d'utilisateur            | Kevin             |
-      | Mot de passe                 | password          |
+      | E-mail                    | kevin@example.com |
+      | Nom d'utilisateur         | Kevin             |
+      | Mot de passe              | password          |
       | Confirmer le mot de passe | password          |
     When I press "Valider"
     Then I should see "Cet e-mail est déjà utilisé."
+
+  Scenario: Register with an existing username
+    Given there are users:
+      | username |
+      | Kevin    |
+    And I am on "/register"
+    And I fill in the following:
+      | E-mail                    | kevin@example.com |
+      | Nom d'utilisateur         | Kevin             |
+      | Mot de passe              | password          |
+      | Confirmer le mot de passe | password          |
+    When I press "Valider"
+    Then I should see "Ce nom d'utilisateur est déjà utilisé."
