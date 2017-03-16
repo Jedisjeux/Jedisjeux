@@ -29,7 +29,8 @@ Feature: View list of articles
   Scenario: View list of articles under a taxon
     Given I am on "/articles/"
     When I follow "Actualités"
-    Then I should see "Critique de Vroom Vroom"
+    Then I should see "King of New York : Power Up!"
+    But I should not see "Critique de Vroom Vroom"
 
   Scenario: Sorting articles
     Given I am on "/articles/"
