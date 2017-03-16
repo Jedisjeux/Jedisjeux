@@ -1,0 +1,23 @@
+AppBundle\Entity\ProductTranslation:
+    productTranslation1:
+        locale: 'fr'
+        name: 'Puerto Rico'
+        slug: 'puerto-rico'
+        shortDescription: <paragraph(2)>
+        description: <paragraph(5)>
+        translatable: "@product1"
+
+AppBundle\Entity\ProductVariant:
+    productVariant:
+        code: 'product_1'
+        product: "@product1"
+
+AppBundle\Entity\Product:
+    product1:
+        currentLocale: 'fr'
+        code: 'product_1'
+        joueurMin: 2
+        joueurMax: 5
+        ageMin: 12
+        translations:
+            - "@productTranslation1"
