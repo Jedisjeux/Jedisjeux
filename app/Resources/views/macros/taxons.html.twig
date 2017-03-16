@@ -74,8 +74,8 @@
                         <span class="color">({{ attribute(taxon, itemCountProperty) }})</span>
                     {% endif %}
                 </a>
-                {% if (is_parent and taxon.children|length > 0) %}
-                    {{ _self.sidebarList(taxon.children, routeName, currentTaxon) }}
+                {% if (taxon.children|length > 0) %}
+                    {{ _self.sidebarList(taxon.children, routeName, currentTaxon, itemCountProperty) }}
                 {% endif %}
             </li>
 
