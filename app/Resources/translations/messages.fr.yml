@@ -142,6 +142,7 @@ sylius:
         product_reviews: Avis de jeu
         published: Publié
         search_products: Chercher un jeu
+        select_products: 'Sélectionner les jeux'
         show: Voir
         yes_label: Oui
 

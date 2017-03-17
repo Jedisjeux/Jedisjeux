@@ -4,5 +4,5 @@ sylius_association:
             subject: %sylius.model.product.class%
             association:
                 classes:
-                    model: Sylius\Component\Product\Model\ProductAssociation
+                    model: AppBundle\Entity\ProductAssociation
                     interface: Sylius\Component\Product\Model\ProductAssociationInterface
