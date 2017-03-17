@@ -58,6 +58,6 @@ class ProductApiTest extends JsonApiTestCase
      */
     private function getProductUrl(ProductInterface $product)
     {
-        return '/api/products/' . $product->getId();
+        return '/api/products/' . $product->getCode();
     }
 }

@@ -5,26 +5,22 @@
     $('.entity').each(function () {
       var $entity = $(this);
 
-      var id = parseInt($entity.html());
+      var code = $entity.html();
       var entityName = $entity.data('entity');
-
-      if (isNaN(id)) {
-        return;
-      }
 
       switch (entityName) {
         case 'game':
-          showGame($entity, id);
+          showGame($entity, code);
           break;
       }
     });
 
     /**
      * @param $entity
-     * @param id
+     * @param code
      */
-    function showGame($entity, id) {
-      $.get(Routing.generate('sylius_api_product_show', {'id': id}), function (product) {
+    function showGame($entity, code) {
+      $.get(Routing.generate('sylius_api_product_show', {'code': code}), function (product) {
         $entity.html(
           $('<div>').addClass('img-box-5')
             .append($('<div>').addClass('container')
@@ -126,7 +122,7 @@
         .append($('<div>').addClass('quote-one-item')
           .append($('<span>').addClass('color').html('“'))
           .append($('<div>').addClass('quote-one-right')
-            .append($('<div>').addClass('content hideContent').html(product.short_description))
+            .append($('<div>').addClass('content hcodeeContent').html(product.short_description))
             .append(
               $('<div>').addClass('show-more')
                 .append($('<a>').attr('href', '#').html('Lire la suite...'))

@@ -10,9 +10,7 @@ namespace AppBundle\TextFilter;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityRepository;
-use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Product\Model\ProductInterface;
-
+use Sylius\Component\Product\Model\ProductVariantInterface;
 
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
@@ -241,7 +239,7 @@ EOM;
                 continue;
             }
 
-            $body = str_replace(sprintf('--%s--', $id), $productVariant->getProduct()->getId(), $body);
+            $body = str_replace(sprintf('--%s--', $id), $productVariant->getProduct()->getCode(), $body);
         }
 
         return $body;
