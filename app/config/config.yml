@@ -37,7 +37,7 @@ framework:
     fragments:       ~
     http_method_override: true
     assets:
-        version: 'v0.2'
+        version: 'v0.4'
         version_format: '%%s?version=%%s'
 
 # Twig Configuration
@@ -142,6 +142,7 @@ stof_doctrine_extensions:
             tree: true
             sluggable: true
             softdeleteable: true
+            sortable: true
 
 knp_doctrine_behaviors:
     blameable:      true

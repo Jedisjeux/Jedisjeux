@@ -15,10 +15,12 @@ Feature: List variants of a product
       | target-audience | Public cible |
     And I am logged in as user "admin@example.com" with password "password"
 
-  Scenario: List products
+  @todo
+  Scenario: List product variants
     Given there are products:
-     | name |
-     | Les princes de Florence |
+      | name                    |
+      | Les princes de Florence |
     And I am on "/admin/products/"
-    When I follow "Variants"
+    When I follow "Gérer les variantes" on "table .dropdown"
+    And I follow "Liste des variantes"
     Then I should see "Les princes de Florence"

@@ -44,14 +44,4 @@ class ArticleTypeSpec extends ObjectBehavior
     {
         $this->getName()->shouldReturn('app_article');
     }
-
-    function it_builds_form(FormBuilderInterface $builder)
-    {
-        $builder->add('document', 'app_article_content', Argument::any())->shouldBeCalled()->willReturn($builder);
-        $builder->add('status', ChoiceType::class, Argument::any())->shouldBeCalled()->willReturn($builder);
-        $builder->add('body', 'ckeditor', Argument::any())->shouldBeCalled()->willReturn($builder);
-        $builder->addEventListener(FormEvents::POST_SUBMIT, Argument::any())->willReturn($builder);
-
-        $this->buildForm($builder, []);
-    }
 }

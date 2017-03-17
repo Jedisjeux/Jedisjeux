@@ -12,11 +12,13 @@
 namespace AppBundle\Form\Type;
 
 use AppBundle\Entity\Article;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -31,7 +33,13 @@ class ArticleType extends AbstractResourceType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('document', 'app_article_content')
+            ->add('title', TextType::class, [
+                'label' => 'label.title',
+            ])
+            ->add('mainImage', ArticleImageType::class, [
+                'label' => false,
+                'file_label' => 'app.ui.main_image',
+            ])
             ->add('status', ChoiceType::class, [
                 'label' => 'label.status',
                 'required' => true,
@@ -43,19 +51,28 @@ class ArticleType extends AbstractResourceType
                 ],
                 'choices_as_values' => true,
             ])
-            ->add('body', 'ckeditor', [
-                'mapped' => false,
+            ->add('shortDescription', CKEditorType::class, [
+                'label' => 'app.ui.short_description',
                 'required' => false,
+            ])
+            ->add('blocks', CollectionType::class, [
+                'label' => false,
+                'entry_type' => BlockType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
             ]);
+    }
 
-        $builder->addEventListener(
-            FormEvents::POST_SUBMIT,
-            function (FormEvent $event) {
-                /** @var Article $article */
-                $article = $event->getData();
-                $article->setUpdatedAt(new \DateTime());
-            }
-        );
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'data_class' => $this->dataClass,
+            'validation_groups' => $this->validationGroups,
+            'cascade_validation' => true,
+        ]);
     }
 
     /**

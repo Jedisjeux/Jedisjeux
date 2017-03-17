@@ -18,7 +18,7 @@ Feature: Creates taxons
 
   Scenario: Create a taxon without parent
     Given I am on "/admin/taxons/"
-    And I follow "Créer une catégorie"
+    And I follow "Créer"
     And I fill in the following:
       | Code | antique |
       | Nom  | Antique |
@@ -28,8 +28,8 @@ Feature: Creates taxons
 
   Scenario: Create a taxon with a parent
     Given I am on "/admin/taxons/"
-    And I follow "Thèmes"
-    And I follow "Créer une catégorie"
+    And I follow "Voir les sous-catégories"
+    And I follow "Créer"
     And I fill in the following:
       | Code | space-opera |
       | Nom  | Space-Opéra |

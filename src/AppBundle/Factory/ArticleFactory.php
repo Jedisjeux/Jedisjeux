@@ -82,8 +82,6 @@ class ArticleFactory implements FactoryInterface
     {
         /** @var Article $article */
         $article = new $this->className;
-        $articleContent = $this->articleContentFactory->createNew();
-        $article->setDocument($articleContent);
         $article->setAuthor($this->customerContext->getCustomer());
 
         return $article;

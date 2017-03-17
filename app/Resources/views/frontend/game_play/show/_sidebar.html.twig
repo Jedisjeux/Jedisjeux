@@ -2,9 +2,7 @@
 
 {% set product = game_play.product %}
 
-
 <div class="sidebar">
-
     {% if game_play.players|length > 0 %}
         <!-- Gallery Widget -->
         <div class="s-widget">
@@ -72,21 +70,21 @@
                     <li>
                         Un jeu de
                         {% for key, personne in product.designers %}{% if (key > 0) %},{% endif %} <a
-                            href="{{ path('app_person_show', { 'slug': personne.slug }) }}">{{ personne }}</a>{% endfor %}
+                            href="{{ path('app_frontend_person_show', { 'slug': personne.slug }) }}">{{ personne }}</a>{% endfor %}
                     </li>
                 {% endif %}
                 {% if product.artists|length > 0 %}
                     <li>
                         illustré{% if product.artists|length > 1 %}s{% endif %} par
                         {% for key, personne in product.artists %}{% if (key > 0) %},{% endif %} <a
-                            href="{{ path('app_person_show', { 'slug': personne.slug }) }}">{{ personne }}</a>{% endfor %}
+                            href="{{ path('app_frontend_person_show', { 'slug': personne.slug }) }}">{{ personne }}</a>{% endfor %}
                     </li>
                 {% endif %}
                 {% if product.publishers|length > 0 %}
                     <li>
                         édité{% if product.publishers|length > 1 %}s{% endif %} par
                         {% for key, personne in product.publishers %}{% if (key > 0) %},{% endif %} <a
-                            href="{{ path('app_person_show', { 'slug': personne.slug }) }}">{{ personne }}</a>{% endfor %}
+                            href="{{ path('app_frontend_person_show', { 'slug': personne.slug }) }}">{{ personne }}</a>{% endfor %}
                     </li>
                 {% endif %}
             </ul>

@@ -53,6 +53,16 @@ class DownloadImageCommand extends ContainerAwareCommand
         $repository = $this->getContainer()->get('app.repository.person_image');
         $queryBuilder = $repository->createQueryBuilder('o');
         $this->downloadImages($queryBuilder);
+
+        /** @var EntityRepository $repository */
+        $repository = $this->getContainer()->get('app.repository.article_image');
+        $queryBuilder = $repository->createQueryBuilder('o');
+        $this->downloadImages($queryBuilder);
+
+        /** @var EntityRepository $repository */
+        $repository = $this->getContainer()->get('app.repository.block_image');
+        $queryBuilder = $repository->createQueryBuilder('o');
+        $this->downloadImages($queryBuilder);
     }
 
     /**

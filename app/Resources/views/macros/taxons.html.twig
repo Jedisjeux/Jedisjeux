@@ -57,7 +57,7 @@
     <ul class="list-6">
         {% set hiddenElements = false %}
         {% for key, taxon in taxons %}
-            {% set is_parent = currentTaxon and (taxon == currentTaxon or (taxon.hasChild(currentTaxon))) %}
+            {% set is_parent = currentTaxon and taxon == currentTaxon %}
 
             {% set hiddenElements = key >= 5 %}
 
@@ -74,8 +74,8 @@
                         <span class="color">({{ attribute(taxon, itemCountProperty) }})</span>
                     {% endif %}
                 </a>
-                {% if (is_parent and taxon.children|length > 0) %}
-                    {{ _self.sidebarList(taxon.children, routeName, currentTaxon) }}
+                {% if (taxon.children|length > 0) %}
+                    {{ _self.sidebarList(taxon.children, routeName, currentTaxon, itemCountProperty) }}
                 {% endif %}
             </li>
 

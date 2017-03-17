@@ -7,26 +7,31 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Person
  *
- * @ORM\Entity(repositoryClass="AppBundle\Repository\PersonRepository")
+ * @ORM\Entity
  * @ORM\Table(name="jdj_person", indexes={@ORM\Index(name="search_idx", columns={"slug"})})
  *
  * @JMS\ExclusionPolicy("all")
  */
 class Person implements ResourceInterface
 {
-    use IdentifiableTrait;
+    use IdentifiableTrait,
+        Timestampable;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=50, nullable=false)
+     * @ORM\Column(type="string", length=50)
+     *
+     * @Assert\NotBlank()
      *
      * @JMS\Expose
      * @JMS\Groups({"Default", "Detailed"})
@@ -36,7 +41,9 @@ class Person implements ResourceInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=50, nullable=false)
+     * @ORM\Column(type="string", length=50)
+     *
+     * @Assert\NotBlank()
      *
      * @JMS\Expose
      * @JMS\Groups({"Default", "Detailed"})
@@ -125,19 +132,25 @@ class Person implements ResourceInterface
     /**
      * @return PersonImage
      *
+     * @deprecated
+     */
+    public function getMainImage()
+    {
+        return $this->getFirstImage();
+    }
+
+    /**
+     * @return PersonImage
+     *
      * @JMS\VirtualProperty
      * @JMS\SerializedName("image")
      * @JMS\Groups({"Default", "Detailed"})
      */
-    public function getMainImage()
+    public function getFirstImage()
     {
-        foreach ($this->images as $image) {
-            if ($image->isMain()) {
-                return $image;
-            }
-        }
+        $firstImage = $this->images->first();
 
-        return null;
+        return false !== $firstImage ? $firstImage : null;
     }
 
     /**
@@ -317,13 +330,38 @@ class Person implements ResourceInterface
     }
 
     /**
-     * @param PersonImage[]|Collection $images
+     * @param PersonImage $image
+     *
+     * @return bool
+     */
+    public function hasImage(PersonImage $image)
+    {
+        return $this->images->contains($image);
+    }
+
+    /**
+     * @param PersonImage $image
      *
      * @return $this
      */
-    public function setImages($images)
+    public function addImage(PersonImage $image)
     {
-        $this->images = $images;
+        if (!$this->hasImage($image)) {
+            $image->setPerson($this);
+            $this->images->add($image);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param PersonImage $image
+     *
+     * @return $this
+     */
+    public function removeImage(PersonImage $image)
+    {
+        $this->images->removeElement($image);
 
         return $this;
     }
@@ -345,7 +383,7 @@ class Person implements ResourceInterface
     }
 
     /**
-     * @return ArrayCollection
+     * @return TaxonInterface
      */
     public function getZone()
     {
@@ -354,13 +392,53 @@ class Person implements ResourceInterface
     }
 
     /**
-     * @param Collection $taxons
+     * @param TaxonInterface $zone
      *
      * @return $this
      */
-    public function setTaxons($taxons)
+    public function setZone(TaxonInterface $zone)
     {
-        $this->taxons = $taxons;
+        if ($this->getZone()) {
+            $this->removeTaxon($this->getZone());
+        }
+
+        $this->addTaxon($zone);
+
+        return $this;
+    }
+
+    /**
+     * @param TaxonInterface $taxon
+     *
+     * @return bool
+     */
+    public function hasTaxon(TaxonInterface $taxon)
+    {
+        return $this->taxons->contains($taxon);
+    }
+
+    /**
+     * @param TaxonInterface $taxon
+     *
+     * @return $this
+     */
+    public function addTaxon(TaxonInterface $taxon)
+    {
+        if (!$this->hasTaxon($taxon)) {
+            $this->taxons->add($taxon);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param TaxonInterface $taxon
+     *
+     * @return $this
+     */
+    public function removeTaxon(TaxonInterface $taxon)
+    {
+        $this->taxons->removeElement($taxon);
 
         return $this;
     }

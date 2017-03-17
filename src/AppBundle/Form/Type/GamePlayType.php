@@ -12,6 +12,7 @@
 namespace AppBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -37,17 +38,13 @@ class GamePlayType extends AbstractResourceType
                     'class' => 'date',
                 ]
             ])
-            ->add('duration', null, [
+            ->add('duration', IntegerType::class, [
                 'label' => 'label.duration',
                 'required' => false,
-                'widget' => 'single_text',
                 'widget_addon_append' => [
                     'icon' => 'time'
                 ],
-                'html5' => false,
-                'attr' => [
-                    'class' => 'time',
-                ]
+                'help_label' => '(en minutes)',
             ])
             ->add('playerCount', null, [
                 'label' => 'label.player_count',

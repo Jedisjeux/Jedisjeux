@@ -11,6 +11,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\Customer\Model\Customer as BaseCustomer;
+use Sylius\Component\User\Model\UserAwareInterface;
 use Sylius\Component\User\Model\UserInterface;
 
 /**
@@ -19,7 +20,7 @@ use Sylius\Component\User\Model\UserInterface;
  * @ORM\Entity
  * @ORM\Table(name="sylius_customer")
  */
-class Customer extends BaseCustomer implements ReviewerInterface
+class Customer extends BaseCustomer implements ReviewerInterface, UserAwareInterface
 {
     /**
      * @var UserInterface
@@ -95,7 +96,7 @@ class Customer extends BaseCustomer implements ReviewerInterface
      *
      * @return Customer
      */
-    public function setUser($user)
+    public function setUser(UserInterface $user = null)
     {
         if ($this->user !== $user) {
             $this->user = $user;
@@ -111,5 +112,17 @@ class Customer extends BaseCustomer implements ReviewerInterface
         if (null !== $user) {
             $user->setCustomer($this);
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        if (null === $user = $this->user) {
+            return parent::__toString();
+        }
+
+        return $user->getUsername();
     }
 }

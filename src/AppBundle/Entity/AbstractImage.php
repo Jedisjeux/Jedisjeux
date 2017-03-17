@@ -140,9 +140,7 @@ abstract class AbstractImage implements ResourceInterface
      * @JMS\VirtualProperty
      * @JMS\SerializedName("default")
      * @JMS\Type("LiipSerializer")
-     * @JMS\Groups({"Default", "Details", "Detailed"})
-     *
-     * TODO REMOVE group Details
+     * @JMS\Groups({"Default", "Detailed"})
      */
     public function getDefaultSerialize()
     {
@@ -160,7 +158,7 @@ abstract class AbstractImage implements ResourceInterface
      * @JMS\VirtualProperty
      * @JMS\SerializedName("thumbnail")
      * @JMS\Type("LiipSerializer")
-     * @JMS\Groups({"Default", "Details", "Detailed"})
+     * @JMS\Groups({"Default", "Detailed"})
      */
     public function getThumbnailSerialize()
     {
@@ -178,7 +176,7 @@ abstract class AbstractImage implements ResourceInterface
      * @JMS\VirtualProperty
      * @JMS\SerializedName("magazine_item")
      * @JMS\Type("LiipSerializer")
-     * @JMS\Groups({"Default", "Details", "Detailed"})
+     * @JMS\Groups({"Default", "Detailed"})
      */
     public function getMagazineItemSerialize()
     {

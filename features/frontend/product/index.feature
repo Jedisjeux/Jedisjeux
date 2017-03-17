@@ -33,3 +33,12 @@ Feature: View list of products
     When I follow "Enchères"
     Then I should see "Palazzo"
     But I should not see "Louis XIV"
+
+  Scenario: Sorting products
+    Given I am on "/jeux-de-societe/"
+    When I follow "Date de création"
+    Then I should see "Palazzo"
+    When I follow "Note"
+    Then I should see "Palazzo"
+    When I follow "Nom"
+    Then I should see "Palazzo"

@@ -1,0 +1,32 @@
+sylius_grid:
+    grids:
+        app_backend_not_found_page:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%app.model.not_found_page.class%"
+            sorting:
+                timestamp: desc
+            fields:
+                timestamp:
+                    type: twig
+                    label: sylius.ui.created_at
+                    sortable: ~
+                    options:
+                        template: "backend/grid/field/date/medium.html.twig"
+                path:
+                    type: string
+                    label: app.ui.path
+                    sortable: ~
+                referer:
+                    type: twig
+                    label: app.ui.referer
+                    sortable: ~
+                    options:
+                        template: "backend/not_found_page/grid/field/referer.html.twig"
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    options:
+                        fields: [path, referer]

@@ -1,7 +1,7 @@
 {% from "macros/games.html.twig" import playerCount, image, releasedAt %}
 
 {% set product = game_play.product %}
-{% set gamePlayHref = path('app_game_play_show', {'id': game_play.id,'productSlug': product.slug}) %}
+{% set gamePlayHref = path('app_frontend_game_play_show', {'id': game_play.id,'productSlug': product.slug}) %}
 
 <!-- Image Box #4 Item -->
 <div class="img-box-4-item portfolio">

@@ -28,7 +28,7 @@
                 <!-- Image Box #3 Item -->
                 <div class="img-box-3-item product-list-item">
                     <div class="img-box-3-icon bg-{{ color }}">
-                        {% if lastProduct %}
+                        {% if lastProduct and lastProduct.mainImage %}
                             <a href="{{ productListPath }}">
                                 {{ image(lastProduct.mainImage.webPath, 'thumbnail_XL', lastProduct.name, 'img-round') }}
                             </a>

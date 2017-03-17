@@ -12,10 +12,13 @@
 namespace AppBundle\Document;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
+use Sonata\BlockBundle\Model\BlockInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\AbstractBlock;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ContainerBlock;
-
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -32,11 +35,12 @@ class ArticleContent extends ContainerBlock implements ResourceInterface
     const PENDING_PUBLICATION = "pending_publication";
     const PUBLISHED = "published";
 
-
     /**
      * @var string
      *
      * @PHPCR\Field(type="string", nullable=false)
+     *
+     * @Assert\NotBlank
      */
     protected $title;
 
@@ -44,6 +48,8 @@ class ArticleContent extends ContainerBlock implements ResourceInterface
      * @var string
      *
      * @PHPCR\Field(type="string", nullable=false)
+     *
+     * @Assert\NotBlank
      */
     protected $state = null;
 
@@ -53,6 +59,13 @@ class ArticleContent extends ContainerBlock implements ResourceInterface
      * @PHPCR\Child()
      */
     protected $mainImage;
+
+    /**
+     * @var ImagineBlock
+     *
+     * @PHPCR\Child(nodeName="slideshow")
+     */
+    protected $slideShowBlock;
 
     /**
      * @PHPCR\Children(filter="block*")
@@ -135,29 +148,55 @@ class ArticleContent extends ContainerBlock implements ResourceInterface
     /**
      * @return mixed
      */
+    public function getSlideShowBlock()
+    {
+        return $this->slideShowBlock;
+    }
+
+    /**
+     * @param mixed $slideShowBlock
+     *
+     * @return $this
+     */
+    public function setSlideShowBlock($slideShowBlock)
+    {
+        $slideShowBlock->setParentDocument($this);
+        $slideShowBlock->setName('slideshow');
+        $this->slideShowBlock = $slideShowBlock;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|AbstractBlock[]
+     */
     public function getBlocks()
     {
         return $this->blocks;
     }
 
     /**
-     * @param ContainerBlock $block
+     * @param AbstractBlock $block
      *
      * @return bool
      */
-    public function hasBlock(ContainerBlock $block)
+    public function hasBlock(AbstractBlock $block)
     {
         return $this->blocks->contains($block);
     }
 
     /**
-     * @param ContainerBlock $block
+     * @param AbstractBlock $block
      *
      * @return $this
      */
-    public function addBlock(ContainerBlock $block)
+    public function addBlock(AbstractBlock $block, $key = null)
     {
         if (!$this->hasBlock($block)) {
+            $block->setParentDocument($this);
+            if (empty($block->getName())) {
+                $block->setName(uniqid('block_'));
+            }
             $this->blocks->add($block);
         }
 

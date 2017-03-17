@@ -15,12 +15,12 @@ sylius_api_product:
 
 sylius_api_product_show:
     methods: [GET]
-    path: /products/{id}
+    path: /products/{code}
     defaults:
         _controller: sylius.controller.product:showAction
         _sylius:
             repository:
-                method: findOneById
+                method: findOneByCode
                 arguments:
-                    - $id
-            serialization_groups: [Details]
+                    - $code
+            serialization_groups: [Detailed]

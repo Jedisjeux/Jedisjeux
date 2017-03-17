@@ -21,9 +21,9 @@ Feature: List products
 
   Scenario: List products
     Given there are products:
-     | name |
-     | Puerto Rico |
-     | Les princes de Florence |
+      | name                    |
+      | Puerto Rico             |
+      | Les princes de Florence |
     When I am on "/admin/products/"
     Then I should see "Les princes de Florence"
     And I should see "Puerto Rico"

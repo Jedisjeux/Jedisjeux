@@ -18,7 +18,7 @@
 
 
         <li>
-            <a href="{{ path('app_game_play_show', {'productSlug': game_play.product.slug, 'id': game_play.id}) }}">
+            <a href="{{ path('app_frontend_game_play_show', {'productSlug': game_play.product.slug, 'id': game_play.id}) }}">
                 <!-- Item image -->
                 <img src="{{ imagePath | imagine_filter('thumbnail') }}" alt="{{ game_play.product }}" class="img-responsive img-round"/>
 

@@ -42,7 +42,7 @@ class SearchController extends Controller
 
         $types = $this->getTypesOfResults($paginator);
 
-        return $this->render('JDJSearchBundle:Search:searchResults.html.twig', array(
+        return $this->render('frontend/search/index.html.twig', array(
             'results' => $paginator,
             'types' => $types,
         ));
@@ -93,11 +93,11 @@ class SearchController extends Controller
                     'value' => $entity->getTitle(),
                     'label' => $entity->getTitle(),
                     'image' =>  (null === $entity->getAuthor()->getAvatar()) ? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : $this->get('liip_imagine.cache.manager')->getBrowserPath($entity->getAuthor()->getAvatar()->getWebPath(), 'thumbnail'),
-                    'href' => $entity->getGamePlay() ? $this->generateUrl('app_game_play_show', array(
+                    'href' => $entity->getGamePlay() ? $this->generateUrl('app_frontend_game_play_show', array(
                             'productSlug' => $entity->getGamePlay()->getProduct()->getSlug(),
                             'id' => $entity->getGamePlay()->getId(),
                         )
-                    ) : $this->generateUrl('app_post_index_by_topic', array(
+                    ) : $this->generateUrl('app_frontend_post_index_by_topic', array(
                             'topicId' => $entity->getId(),
                         )
                     ),
@@ -118,7 +118,7 @@ class SearchController extends Controller
                     'value' => (string)$entity,
                     'label' => (string)$entity,
                     'image' => (null === $entity->getMainImage()) ? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : $this->get('liip_imagine.cache.manager')->getBrowserPath($entity->getMainImage()->getWebPath(), 'thumbnail'),
-                    'href' => $this->generateUrl('app_person_show', array(
+                    'href' => $this->generateUrl('app_frontend_person_show', array(
                             'slug' => $entity->getSlug(),
                         )
                     ),
@@ -131,7 +131,7 @@ class SearchController extends Controller
                     'label' => (string)$entity,
                     'image' => (null === $entity->getDocument()->getMainImage()) ? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : $this->get('liip_imagine.cache.manager')->getBrowserPath($entity->getDocument()->getMainImage()->getImage()->getId(), 'cmf_thumbnail'),
                     'href' => $this->generateUrl('app_frontend_article_show', array(
-                            'name' => $entity->getName(),
+                            'slug' => $entity->getSlug(),
                         )
                     ),
                 );
@@ -176,14 +176,21 @@ class SearchController extends Controller
         $types = array();
         foreach ($results as $result) {
             if ($result instanceof ProductInterface) {
-                $types[] = "jeu";
+                $types[] = "game";
             } elseif ($result instanceof Person) {
-                $types[] = "personne";
-            } elseif ($result instanceof User) {
+                $types[] = "person";
+            } elseif ($result instanceof UserInterface) {
                 $types[] = "user";
+            } elseif ($result instanceof Article) {
+                $types[] = "article";
+            } elseif ($result instanceof Topic) {
+                $types[] = "topic";
+            } else {
+                $types[] = "";
             }
 
         }
+
         return $types;
     }
 

@@ -101,7 +101,8 @@ class LoadPostsCommand extends ContainerAwareCommand
             ->setTopic($topic)
             ->setAuthor($author)
             ->setBody($body)
-            ->setCreatedAt(new \DateTime($data['createdAt']));
+            ->setCreatedAt(new \DateTime($data['createdAt']))
+            ->setArticle($topic->getArticle());
 
         return $post;
     }

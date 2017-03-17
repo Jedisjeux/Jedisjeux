@@ -3,5 +3,6 @@ imports:
     - { resource: elastica.yml }
     - { resource: cmf.yml }
     - { resource: imagine.yml }
+    - { resource: redirect.yml }
     - { resource: ckeditor.yml }
     - { resource: state_machine.yml}

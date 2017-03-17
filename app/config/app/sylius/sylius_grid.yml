@@ -5,14 +5,23 @@ imports:
   - { resource: 'grids/backend/customer_group.yml' }
   - { resource: 'grids/backend/dealer.yml' }
   - { resource: 'grids/backend/dealer_price.yml' }
+  - { resource: 'grids/backend/game_play.yml' }
+  - { resource: 'grids/backend/not_found_page.yml' }
   - { resource: 'grids/backend/person.yml' }
   - { resource: 'grids/backend/post.yml' }
   - { resource: 'grids/backend/product.yml' }
   - { resource: 'grids/backend/product_association_type.yml' }
+  - { resource: 'grids/backend/product_list.yml' }
+  - { resource: 'grids/backend/product_review.yml' }
+  - { resource: 'grids/backend/redirection.yml' }
+  - { resource: 'grids/backend/root_taxon.yml' }
+  - { resource: 'grids/backend/taxon_from_root.yml' }
   - { resource: 'grids/backend/topic.yml' }
 
   - { resource: 'grids/frontend/game_play.yml' }
   - { resource: 'grids/frontend/game_play_from_author.yml' }
+  - { resource: 'grids/frontend/person.yml' }
+  - { resource: 'grids/frontend/person_from_taxon.yml' }
   - { resource: 'grids/frontend/product_list_item.yml' }
 
 sylius_grid:
@@ -25,6 +34,7 @@ sylius_grid:
 
             manage_variants: "backend/product/grid/action/manageVariants.html.twig"
             list_posts: "backend/topic/grid/action/posts.html.twig"
+            list_taxons: "backend/taxon/grid/action/taxons.html.twig"
         filter:
             string: "backend/grid/filter/string.html.twig"
             boolean: "backend/grid/filter/boolean.html.twig"

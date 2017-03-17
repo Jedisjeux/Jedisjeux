@@ -1,41 +1,45 @@
 app_post:
     resource: |
         alias: app.post
-        form: AppBundle\Form\Type\PostType
+        section: frontend
+        only: ['index', 'create']
         templates: :frontend/post
     type: sylius.resource
 
-app_post_update:
+app_frontend_post_update:
     methods: [GET, PUT]
     path: /posts/{id}/edit
     defaults:
         _controller: app.controller.post:updateAction
         _sylius:
+            section: frontend
             repository:
                 method: findOneBy
                 arguments: [{id: $id, author: expr:service('app.context.customer').getCustomer()}]
             redirect:
-                route: app_post_index_by_topic
+                route: app_frontend_post_index_by_topic
                 parameters: { topicId: resource.topic.id }
-            template: frontend/topic/update.html.twig
+            template: frontend/post/update.html.twig
 
-app_post_delete:
+app_frontend_post_delete:
     methods: [DELETE]
     path: /posts/{id}
     defaults:
         _controller: app.controller.post:deleteAction
         _sylius:
+            section: frontend
             repository:
                 method: findOneBy
                 arguments: [{id: $id, author: expr:service('app.context.customer').getCustomer()}]
             redirect: referer
 
-app_post_index_by_topic:
+app_frontend_post_index_by_topic:
     methods: [GET]
     path: /topics/{topicId}/posts/
     defaults:
         _controller: app.controller.post:indexByTopicAction
         _sylius:
+            section: frontend
             paginate: 10
             criteria:
                 topic: $topicId
@@ -43,20 +47,19 @@ app_post_index_by_topic:
                 createdAt: asc
             template: frontend/post/index.html.twig
 
-app_post_create_by_topic:
+app_frontend_post_create_by_topic:
     methods: [GET, POST]
     path: /topics/{topicId}/posts/new
     defaults:
         _controller: app.controller.post:createAction
         _sylius:
+            section: frontend
             form: AppBundle\Form\Type\PostType
             factory:
                 method: createForTopic
                 arguments:
-                    - $topicId
-                    - expr:service('app.repository.topic')
-            paginate: 10
+                    - expr:service('app.repository.topic').find($topicId)
             template: frontend/post/create.html.twig
             redirect:
-                route: app_post_index_by_topic
+                route: app_frontend_post_index_by_topic
                 parameters: { topicId: $topicId }

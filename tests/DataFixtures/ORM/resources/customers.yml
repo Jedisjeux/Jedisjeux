@@ -1,0 +1,16 @@
+AppBundle\Entity\User:
+    user_{Oliver, Roy, Thea}:
+        plainPassword: '123pa$$word'
+        roles: [ROLE_USER]
+        enabled: true
+        customer: "@customer_<current()>"
+        username: <current()>
+        usernameCanonical: <current()>
+
+AppBundle\Entity\Customer:
+    customer_{Oliver, Roy, Thea, Barry, Joe}:
+        firstName: <current()>
+        lastName: Doe
+        email: <current()>@doe.com
+        emailCanonical: <current()>@doe.com
+        birthday: <date()>

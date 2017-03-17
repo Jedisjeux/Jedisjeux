@@ -1,0 +1,21 @@
+{% extends "::base.html.twig" %}
+
+{% import 'macros/actions.html.twig' as action %}
+
+{% block headline %}
+    Modifier la partie
+{% endblock %}
+
+{% block breadcrumb_content %}
+    <a href="{{ path('sylius_product_index') }}">Jeux</a>
+    / {{ game_play.product }}
+    / Modifier la partie
+{% endblock %}
+{% block container %}
+    {{ form_start(form) }}
+    <input type="hidden" name="_method" value="PUT"/>
+    {% include 'frontend/game_play/_form.html.twig' %}
+    <br />
+    {{ action.update() }}
+    {{ form_end(form) }}
+{% endblock container %}

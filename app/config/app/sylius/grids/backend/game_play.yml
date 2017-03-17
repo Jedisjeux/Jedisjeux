@@ -1,0 +1,41 @@
+sylius_grid:
+    grids:
+        app_backend_game_play:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%app.model.game_play.class%"
+                    repository:
+                        method: createListQueryBuilder
+                        arguments: ["%locale%"]
+            sorting:
+                createdAt: desc
+            fields:
+                avatar:
+                    type: twig
+                    label: app.ui.avatar
+                    path: author
+                    options:
+                        template: "backend/customer/grid/field/avatar.html.twig"
+                name:
+                    type: string
+                    label: sylius.ui.product
+                    path: product.name
+                createdAt:
+                    type: twig
+                    label: sylius.ui.created_at
+                    sortable: ~
+                    options:
+                        template: "backend/grid/field/date/medium.html.twig"
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    options:
+                        fields: [author.email, productTranslation.name]
+            actions:
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete

@@ -12047,217 +12047,6 @@ S2.define('jquery.select2',[
  */
 
 (function(){var t=[].slice;!function(e,i){"use strict";var n;return n=function(){function t(t,i){null==i&&(i={}),this.$element=e(t),this.options=e.extend({},e.fn.bootstrapSwitch.defaults,{state:this.$element.is(":checked"),size:this.$element.data("size"),animate:this.$element.data("animate"),disabled:this.$element.is(":disabled"),readonly:this.$element.is("[readonly]"),indeterminate:this.$element.data("indeterminate"),inverse:this.$element.data("inverse"),radioAllOff:this.$element.data("radio-all-off"),onColor:this.$element.data("on-color"),offColor:this.$element.data("off-color"),onText:this.$element.data("on-text"),offText:this.$element.data("off-text"),labelText:this.$element.data("label-text"),handleWidth:this.$element.data("handle-width"),labelWidth:this.$element.data("label-width"),baseClass:this.$element.data("base-class"),wrapperClass:this.$element.data("wrapper-class")},i),this.$wrapper=e("<div>",{"class":function(t){return function(){var e;return e=[""+t.options.baseClass].concat(t._getClasses(t.options.wrapperClass)),e.push(t.options.state?""+t.options.baseClass+"-on":""+t.options.baseClass+"-off"),null!=t.options.size&&e.push(""+t.options.baseClass+"-"+t.options.size),t.options.disabled&&e.push(""+t.options.baseClass+"-disabled"),t.options.readonly&&e.push(""+t.options.baseClass+"-readonly"),t.options.indeterminate&&e.push(""+t.options.baseClass+"-indeterminate"),t.options.inverse&&e.push(""+t.options.baseClass+"-inverse"),t.$element.attr("id")&&e.push(""+t.options.baseClass+"-id-"+t.$element.attr("id")),e.join(" ")}}(this)()}),this.$container=e("<div>",{"class":""+this.options.baseClass+"-container"}),this.$on=e("<span>",{html:this.options.onText,"class":""+this.options.baseClass+"-handle-on "+this.options.baseClass+"-"+this.options.onColor}),this.$off=e("<span>",{html:this.options.offText,"class":""+this.options.baseClass+"-handle-off "+this.options.baseClass+"-"+this.options.offColor}),this.$label=e("<span>",{html:this.options.labelText,"class":""+this.options.baseClass+"-label"}),this.$element.on("init.bootstrapSwitch",function(e){return function(){return e.options.onInit.apply(t,arguments)}}(this)),this.$element.on("switchChange.bootstrapSwitch",function(e){return function(){return e.options.onSwitchChange.apply(t,arguments)}}(this)),this.$container=this.$element.wrap(this.$container).parent(),this.$wrapper=this.$container.wrap(this.$wrapper).parent(),this.$element.before(this.options.inverse?this.$off:this.$on).before(this.$label).before(this.options.inverse?this.$on:this.$off),this.options.indeterminate&&this.$element.prop("indeterminate",!0),this._init(),this._elementHandlers(),this._handleHandlers(),this._labelHandlers(),this._formHandler(),this._externalLabelHandler(),this.$element.trigger("init.bootstrapSwitch")}return t.prototype._constructor=t,t.prototype.state=function(t,e){return"undefined"==typeof t?this.options.state:this.options.disabled||this.options.readonly?this.$element:this.options.state&&!this.options.radioAllOff&&this.$element.is(":radio")?this.$element:(this.options.indeterminate&&this.indeterminate(!1),t=!!t,this.$element.prop("checked",t).trigger("change.bootstrapSwitch",e),this.$element)},t.prototype.toggleState=function(t){return this.options.disabled||this.options.readonly?this.$element:this.options.indeterminate?(this.indeterminate(!1),this.state(!0)):this.$element.prop("checked",!this.options.state).trigger("change.bootstrapSwitch",t)},t.prototype.size=function(t){return"undefined"==typeof t?this.options.size:(null!=this.options.size&&this.$wrapper.removeClass(""+this.options.baseClass+"-"+this.options.size),t&&this.$wrapper.addClass(""+this.options.baseClass+"-"+t),this._width(),this._containerPosition(),this.options.size=t,this.$element)},t.prototype.animate=function(t){return"undefined"==typeof t?this.options.animate:(t=!!t,t===this.options.animate?this.$element:this.toggleAnimate())},t.prototype.toggleAnimate=function(){return this.options.animate=!this.options.animate,this.$wrapper.toggleClass(""+this.options.baseClass+"-animate"),this.$element},t.prototype.disabled=function(t){return"undefined"==typeof t?this.options.disabled:(t=!!t,t===this.options.disabled?this.$element:this.toggleDisabled())},t.prototype.toggleDisabled=function(){return this.options.disabled=!this.options.disabled,this.$element.prop("disabled",this.options.disabled),this.$wrapper.toggleClass(""+this.options.baseClass+"-disabled"),this.$element},t.prototype.readonly=function(t){return"undefined"==typeof t?this.options.readonly:(t=!!t,t===this.options.readonly?this.$element:this.toggleReadonly())},t.prototype.toggleReadonly=function(){return this.options.readonly=!this.options.readonly,this.$element.prop("readonly",this.options.readonly),this.$wrapper.toggleClass(""+this.options.baseClass+"-readonly"),this.$element},t.prototype.indeterminate=function(t){return"undefined"==typeof t?this.options.indeterminate:(t=!!t,t===this.options.indeterminate?this.$element:this.toggleIndeterminate())},t.prototype.toggleIndeterminate=function(){return this.options.indeterminate=!this.options.indeterminate,this.$element.prop("indeterminate",this.options.indeterminate),this.$wrapper.toggleClass(""+this.options.baseClass+"-indeterminate"),this._containerPosition(),this.$element},t.prototype.inverse=function(t){return"undefined"==typeof t?this.options.inverse:(t=!!t,t===this.options.inverse?this.$element:this.toggleInverse())},t.prototype.toggleInverse=function(){var t,e;return this.$wrapper.toggleClass(""+this.options.baseClass+"-inverse"),e=this.$on.clone(!0),t=this.$off.clone(!0),this.$on.replaceWith(t),this.$off.replaceWith(e),this.$on=t,this.$off=e,this.options.inverse=!this.options.inverse,this.$element},t.prototype.onColor=function(t){var e;return e=this.options.onColor,"undefined"==typeof t?e:(null!=e&&this.$on.removeClass(""+this.options.baseClass+"-"+e),this.$on.addClass(""+this.options.baseClass+"-"+t),this.options.onColor=t,this.$element)},t.prototype.offColor=function(t){var e;return e=this.options.offColor,"undefined"==typeof t?e:(null!=e&&this.$off.removeClass(""+this.options.baseClass+"-"+e),this.$off.addClass(""+this.options.baseClass+"-"+t),this.options.offColor=t,this.$element)},t.prototype.onText=function(t){return"undefined"==typeof t?this.options.onText:(this.$on.html(t),this._width(),this._containerPosition(),this.options.onText=t,this.$element)},t.prototype.offText=function(t){return"undefined"==typeof t?this.options.offText:(this.$off.html(t),this._width(),this._containerPosition(),this.options.offText=t,this.$element)},t.prototype.labelText=function(t){return"undefined"==typeof t?this.options.labelText:(this.$label.html(t),this._width(),this.options.labelText=t,this.$element)},t.prototype.handleWidth=function(t){return"undefined"==typeof t?this.options.handleWidth:(this.options.handleWidth=t,this._width(),this._containerPosition(),this.$element)},t.prototype.labelWidth=function(t){return"undefined"==typeof t?this.options.labelWidth:(this.options.labelWidth=t,this._width(),this._containerPosition(),this.$element)},t.prototype.baseClass=function(){return this.options.baseClass},t.prototype.wrapperClass=function(t){return"undefined"==typeof t?this.options.wrapperClass:(t||(t=e.fn.bootstrapSwitch.defaults.wrapperClass),this.$wrapper.removeClass(this._getClasses(this.options.wrapperClass).join(" ")),this.$wrapper.addClass(this._getClasses(t).join(" ")),this.options.wrapperClass=t,this.$element)},t.prototype.radioAllOff=function(t){return"undefined"==typeof t?this.options.radioAllOff:(t=!!t,t===this.options.radioAllOff?this.$element:(this.options.radioAllOff=t,this.$element))},t.prototype.onInit=function(t){return"undefined"==typeof t?this.options.onInit:(t||(t=e.fn.bootstrapSwitch.defaults.onInit),this.options.onInit=t,this.$element)},t.prototype.onSwitchChange=function(t){return"undefined"==typeof t?this.options.onSwitchChange:(t||(t=e.fn.bootstrapSwitch.defaults.onSwitchChange),this.options.onSwitchChange=t,this.$element)},t.prototype.destroy=function(){var t;return t=this.$element.closest("form"),t.length&&t.off("reset.bootstrapSwitch").removeData("bootstrap-switch"),this.$container.children().not(this.$element).remove(),this.$element.unwrap().unwrap().off(".bootstrapSwitch").removeData("bootstrap-switch"),this.$element},t.prototype._width=function(){var t,e;return t=this.$on.add(this.$off),t.add(this.$label).css("width",""),e="auto"===this.options.handleWidth?Math.max(this.$on.width(),this.$off.width()):this.options.handleWidth,t.width(e),this.$label.width(function(t){return function(i,n){return"auto"!==t.options.labelWidth?t.options.labelWidth:e>n?e:n}}(this)),this._handleWidth=this.$on.outerWidth(),this._labelWidth=this.$label.outerWidth(),this.$container.width(2*this._handleWidth+this._labelWidth),this.$wrapper.width(this._handleWidth+this._labelWidth)},t.prototype._containerPosition=function(t,e){return null==t&&(t=this.options.state),this.$container.css("margin-left",function(e){return function(){var i;return i=[0,"-"+e._handleWidth+"px"],e.options.indeterminate?"-"+e._handleWidth/2+"px":t?e.options.inverse?i[1]:i[0]:e.options.inverse?i[0]:i[1]}}(this)),e?setTimeout(function(){return e()},50):void 0},t.prototype._init=function(){var t,e;return t=function(t){return function(){return t._width(),t._containerPosition(null,function(){return t.options.animate?t.$wrapper.addClass(""+t.options.baseClass+"-animate"):void 0})}}(this),this.$wrapper.is(":visible")?t():e=i.setInterval(function(n){return function(){return n.$wrapper.is(":visible")?(t(),i.clearInterval(e)):void 0}}(this),50)},t.prototype._elementHandlers=function(){return this.$element.on({"change.bootstrapSwitch":function(t){return function(i,n){var o;return i.preventDefault(),i.stopImmediatePropagation(),o=t.$element.is(":checked"),t._containerPosition(o),o!==t.options.state?(t.options.state=o,t.$wrapper.toggleClass(""+t.options.baseClass+"-off").toggleClass(""+t.options.baseClass+"-on"),n?void 0:(t.$element.is(":radio")&&e("[name='"+t.$element.attr("name")+"']").not(t.$element).prop("checked",!1).trigger("change.bootstrapSwitch",!0),t.$element.trigger("switchChange.bootstrapSwitch",[o]))):void 0}}(this),"focus.bootstrapSwitch":function(t){return function(e){return e.preventDefault(),t.$wrapper.addClass(""+t.options.baseClass+"-focused")}}(this),"blur.bootstrapSwitch":function(t){return function(e){return e.preventDefault(),t.$wrapper.removeClass(""+t.options.baseClass+"-focused")}}(this),"keydown.bootstrapSwitch":function(t){return function(e){if(e.which&&!t.options.disabled&&!t.options.readonly)switch(e.which){case 37:return e.preventDefault(),e.stopImmediatePropagation(),t.state(!1);case 39:return e.preventDefault(),e.stopImmediatePropagation(),t.state(!0)}}}(this)})},t.prototype._handleHandlers=function(){return this.$on.on("click.bootstrapSwitch",function(t){return function(e){return e.preventDefault(),e.stopPropagation(),t.state(!1),t.$element.trigger("focus.bootstrapSwitch")}}(this)),this.$off.on("click.bootstrapSwitch",function(t){return function(e){return e.preventDefault(),e.stopPropagation(),t.state(!0),t.$element.trigger("focus.bootstrapSwitch")}}(this))},t.prototype._labelHandlers=function(){return this.$label.on({"mousedown.bootstrapSwitch touchstart.bootstrapSwitch":function(t){return function(e){return t._dragStart||t.options.disabled||t.options.readonly?void 0:(e.preventDefault(),e.stopPropagation(),t._dragStart=(e.pageX||e.originalEvent.touches[0].pageX)-parseInt(t.$container.css("margin-left"),10),t.options.animate&&t.$wrapper.removeClass(""+t.options.baseClass+"-animate"),t.$element.trigger("focus.bootstrapSwitch"))}}(this),"mousemove.bootstrapSwitch touchmove.bootstrapSwitch":function(t){return function(e){var i;if(null!=t._dragStart&&(e.preventDefault(),i=(e.pageX||e.originalEvent.touches[0].pageX)-t._dragStart,!(i<-t._handleWidth||i>0)))return t._dragEnd=i,t.$container.css("margin-left",""+t._dragEnd+"px")}}(this),"mouseup.bootstrapSwitch touchend.bootstrapSwitch":function(t){return function(e){var i;if(t._dragStart)return e.preventDefault(),t.options.animate&&t.$wrapper.addClass(""+t.options.baseClass+"-animate"),t._dragEnd?(i=t._dragEnd>-(t._handleWidth/2),t._dragEnd=!1,t.state(t.options.inverse?!i:i)):t.state(!t.options.state),t._dragStart=!1}}(this),"mouseleave.bootstrapSwitch":function(t){return function(){return t.$label.trigger("mouseup.bootstrapSwitch")}}(this)})},t.prototype._externalLabelHandler=function(){var t;return t=this.$element.closest("label"),t.on("click",function(e){return function(i){return i.preventDefault(),i.stopImmediatePropagation(),i.target===t[0]?e.toggleState():void 0}}(this))},t.prototype._formHandler=function(){var t;return t=this.$element.closest("form"),t.data("bootstrap-switch")?void 0:t.on("reset.bootstrapSwitch",function(){return i.setTimeout(function(){return t.find("input").filter(function(){return e(this).data("bootstrap-switch")}).each(function(){return e(this).bootstrapSwitch("state",this.checked)})},1)}).data("bootstrap-switch",!0)},t.prototype._getClasses=function(t){var i,n,o,s;if(!e.isArray(t))return[""+this.options.baseClass+"-"+t];for(n=[],o=0,s=t.length;s>o;o++)i=t[o],n.push(""+this.options.baseClass+"-"+i);return n},t}(),e.fn.bootstrapSwitch=function(){var i,o,s;return o=arguments[0],i=2<=arguments.length?t.call(arguments,1):[],s=this,this.each(function(){var t,a;return t=e(this),a=t.data("bootstrap-switch"),a||t.data("bootstrap-switch",a=new n(this,o)),"string"==typeof o?s=a[o].apply(a,i):void 0}),s},e.fn.bootstrapSwitch.Constructor=n,e.fn.bootstrapSwitch.defaults={state:!0,size:null,animate:!0,disabled:!1,readonly:!1,indeterminate:!1,inverse:!1,radioAllOff:!1,onColor:"primary",offColor:"default",onText:"ON",offText:"OFF",labelText:"&nbsp;",handleWidth:"auto",labelWidth:"auto",baseClass:"bootstrap-switch",wrapperClass:"wrapper",onInit:function(){},onSwitchChange:function(){}}}(window.jQuery,window)}).call(this);
-$(function () {
-  'use strict';
-
-  var successMessage = "Votre article a bien été enregistrée.";
-
-  $(document).ready(function () {
-
-    var $form = $("form[name=app_article]");
-    var $articleContent = $("#articleContent");
-    var editorId = 0;
-
-    initDraggableEvents();
-    initDroppableEvents();
-    submitFormHandler();
-
-    /**
-     * Call Api on submit button click
-     */
-    function submitFormHandler() {
-      $form.submit(function (event) {
-        event.preventDefault();
-
-        $.ajax({
-          type: "POST",
-          url: Routing.generate('app_api_article_create'),
-          data: getArticleData(),
-          success: function () {
-            appendFlash(successMessage);
-          },
-          error: function (xhr, textStatus, errorThrown) {
-            if (xhr.status === 401) {
-              //handle error
-              window.location.replace(Routing.generate('sylius_user_security_login'));
-            } else {
-              var message = xhr.responseJSON.error.exception[0].message;
-              appendFlash(message, null, 'danger');
-            }
-          }
-        });
-
-      });
-    }
-
-    /**
-     * Init draggable events
-     */
-    function initDraggableEvents() {
-      $(".draggable.revertible").draggable({
-        revert: true,
-        data: {
-          'template': 'test'
-        }
-      });
-    }
-
-    /**
-     * Init droppable events
-     */
-    function initDroppableEvents() {
-      $(".droppable").droppable({
-        drop: function (event, ui) {
-          var $template = $("#" + ui.draggable.data('template'));
-          var $block = $('.block-editing', $template).clone();
-          editorId = editorId + 1;
-          $block
-            .attr('contenteditable', 'true')
-            .attr('id', 'editor' + editorId);
-
-          $articleContent.append($block);
-          CKEDITOR.inline('editor' + editorId);
-        }
-      });
-    }
-
-    /**
-     * Get article serialized data
-     */
-    function getArticleData() {
-      var title = $('#app_article_document_title').val().trim();
-      var children = [];
-
-      $articleContent.children().each(function (key) {
-        children.push(getBlockData($(this), key, title));
-      });
-
-      return {
-        status: $('#app_article_status').val(),
-        document: {
-          name: slugMe(title),
-          title: title,
-          children: children
-        }
-      };
-    }
-
-    /**
-     * Get serialized data of a block
-     */
-    function getBlockData($block, key, title) {
-      var blockTitle = $('h4 a', $block).html() ? $('h4 a', $block).html().trim() : null;
-
-      var type = $block.attr('data-type');
-      var name = slugMe(title + ' ' + key);
-      var body = $('.block-body', $block).html().trim();
-
-      if ('single_image' === type) {
-
-        var data = new FormData();
-
-        return {
-          name: name,
-          title: blockTitle,
-          body: body,
-          imagePosition: $block.attr('data-image-position'),
-          children: [{
-            name: 'image' + key/*,
-             image: {
-             ContentUrl: 'https://placeholdit.imgix.net/~text?txtsize=150&txt=Image...&w=1600&h=900'
-             }*/
-          }],
-          class: null,
-          _type: $block.attr('data-type')
-        };
-      } else {
-        return {
-          name: name,
-          body: body,
-          _type: $block.attr('data-type')
-        };
-      }
-
-    }
-
-    /** use npm slug instead
-     * @see https://www.npmjs.com/package/slug
-     **/
-
-    function slugMe(value) {
-      var rExps = [
-        {re: /[\xC0-\xC6]/g, ch: 'A'},
-        {re: /[\xE0-\xE6]/g, ch: 'a'},
-        {re: /[\xC8-\xCB]/g, ch: 'E'},
-        {re: /[\xE8-\xEB]/g, ch: 'e'},
-        {re: /[\xCC-\xCF]/g, ch: 'I'},
-        {re: /[\xEC-\xEF]/g, ch: 'i'},
-        {re: /[\xD2-\xD6]/g, ch: 'O'},
-        {re: /[\xF2-\xF6]/g, ch: 'o'},
-        {re: /[\xD9-\xDC]/g, ch: 'U'},
-        {re: /[\xF9-\xFC]/g, ch: 'u'},
-        {re: /[\xC7-\xE7]/g, ch: 'c'},
-        {re: /[\xD1]/g, ch: 'N'},
-        {re: /[\xF1]/g, ch: 'n'}];
-
-      // convertit les caractères accentués en leurs équivalent alpha
-      for (var i = 0, len = rExps.length; i < len; i++)
-        value = value.replace(rExps[i].re, rExps[i].ch);
-
-      // 1) met en bas de casse
-      // 2) remplace les espaces par des tirets
-      // 3) enleve tout les caractères non alphanumériques
-      // 4) enlève les doubles tirets
-      return value.toLowerCase()
-        .replace(/\s+/g, '-')
-        .replace(/[^a-z0-9-]/g, '')
-        .replace(/\-{2,}/g, '-');
-    }
-
-    function appendFlash(successMessage, messageHolderSelector, type) {
-      type = type ? type : 'success';
-      $("html, body").animate({scrollTop: 0}, "slow");
-      messageHolderSelector = messageHolderSelector ? messageHolderSelector : '#flashes';
-      $(messageHolderSelector).html('<div class="alert alert-' + type + '"><a class="close" data-dismiss="alert" href="#">×</a>' + successMessage + '</div>');
-    }
-
-  });
-});
-
-/*
- * This file is part of the Sylius package.
- *
- * (c) Paweł Jędrzejewski
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-(function ( $ ) {
-    'use strict';
-
-    $(document).ready(function() {
-        var deleteButton;
-
-        $(document).on('click', '.btn-confirm',function(e) {
-            e.preventDefault();
-
-            deleteButton = $(this);
-
-            if (deleteButton.is("a")) {
-                $('#confirmation-modal #confirmation-modal-confirm').attr('href', deleteButton.attr('href'));
-            }
-
-            $('#confirmation-modal').modal('show');
-        });
-
-        $('#confirmation-modal #confirmation-modal-confirm').click(function(e) {
-            if (deleteButton.is("button")) {
-                e.preventDefault();
-                deleteButton.closest('form').submit();
-            }
-        });
-    });
-})( jQuery );
 (function ($) {
   'use strict';
 
@@ -12265,26 +12054,22 @@ $(function () {
     $('.entity').each(function () {
       var $entity = $(this);
 
-      var id = parseInt($entity.html());
+      var code = $entity.html();
       var entityName = $entity.data('entity');
-
-      if (isNaN(id)) {
-        return;
-      }
 
       switch (entityName) {
         case 'game':
-          showGame($entity, id);
+          showGame($entity, code);
           break;
       }
     });
 
     /**
      * @param $entity
-     * @param id
+     * @param code
      */
-    function showGame($entity, id) {
-      $.get(Routing.generate('sylius_api_product_show', {'id': id}), function (product) {
+    function showGame($entity, code) {
+      $.get(Routing.generate('sylius_api_product_show', {'code': code}), function (product) {
         $entity.html(
           $('<div>').addClass('img-box-5')
             .append($('<div>').addClass('container')
@@ -12386,7 +12171,7 @@ $(function () {
         .append($('<div>').addClass('quote-one-item')
           .append($('<span>').addClass('color').html('“'))
           .append($('<div>').addClass('quote-one-right')
-            .append($('<div>').addClass('content hideContent').html(product.short_description))
+            .append($('<div>').addClass('content hcodeeContent').html(product.short_description))
             .append(
               $('<div>').addClass('show-more')
                 .append($('<a>').attr('href', '#').html('Lire la suite...'))
@@ -12476,6 +12261,192 @@ $(function () {
   }
 
 })(jQuery);
+/* ************************ */
+/* Theme name  : Brave      */
+/* Author name : Ashok      */
+/* ************************ */
+
+/* ****************** */
+/* Tooltips & Popover */
+/* ****************** */
+
+$(".b-tooltip").tooltip();
+
+$(".b-popover").popover();
+
+/* ****************** */
+/* Switchs */
+/* ****************** */
+
+$(".switch").bootstrapSwitch();
+
+$(".b-popover").popover();
+
+/* ************** */
+/* Magnific Popup */
+/* ************** */
+
+$(document).ready(function() {
+  $('.lightbox').magnificPopup({type:'image'});
+});
+
+/* *************** */
+/* Custom Dropdown */
+/* *************** */
+
+$(document).ready(function(){
+	var hidden = true;
+	$(".b-dropdown").click(function(e){
+		e.preventDefault();
+		if (hidden){
+           $(this).next('.b-dropdown-block').slideToggle(400, function(){hidden = false;});
+      }
+	}); 
+	$('html').click(function() {
+        if (!hidden) {
+            $('.b-dropdown-block').slideUp();
+            hidden=true;
+        }
+   });
+   $('.b-dropdown-block').click(function(event) {
+        event.stopPropagation();
+   }); 
+});
+
+/* ************ */
+/* Owl Carousel */
+/* ************ */
+
+$(document).ready(function() {
+	/* Owl carousel */
+	$(".owl-carousel").owlCarousel({
+		slideSpeed : 500,
+		rewindSpeed : 1000,
+		mouseDrag : true,
+		stopOnHover : true
+	});
+	/* Own navigation */
+	$(".owl-nav-prev").click(function(){
+		$(this).parent().next(".owl-carousel").trigger('owl.prev');
+	});
+	$(".owl-nav-next").click(function(){
+		$(this).parent().next(".owl-carousel").trigger('owl.next');
+	});
+});
+
+/* ************* */
+/* Scroll to top */
+/* ************* */
+
+$(document).ready(function() {
+	$(window).scroll(function(){
+		if ($(this).scrollTop() > 200) {
+			$('.totop').fadeIn();
+		} else {
+			$('.totop').fadeOut();
+		}
+	});
+	$(".totop a").click(function(e) {
+		e.preventDefault();
+		$("html, body").animate({ scrollTop: 0 }, "slow");
+		return false;
+	});
+});
+
+/* *************** */
+/* Navigation menu */
+/* *************** */
+
+$(document).ready(function(){
+
+
+	$.fn.menumaker = function(options) {
+      
+    var cssmenu = $(this), settings = $.extend({
+        title: "Menu",
+        format: "dropdown",
+        sticky: false
+      }, options);
+
+      return this.each(function() {
+		
+		cssmenu.prepend('<div id="menu-button">' + settings.title + '</div>');
+		$(this).find("#menu-button").on('click', function(){
+		  $(this).toggleClass('menu-opened');
+		  var mainmenu = $(this).next('ul');
+		  if (mainmenu.hasClass('open')) { 
+			mainmenu.slideUp().removeClass('open');
+		  }
+		  else {
+			mainmenu.slideDown().addClass('open');
+			if (settings.format === "dropdown") {
+			  mainmenu.find('ul').slideDown();
+			}
+		  }
+		});
+		
+		cssmenu.find('li ul').parent().addClass('has-sub');
+
+		multiTg = function() {
+		  cssmenu.find(".has-sub").prepend('<span class="submenu-button"></span>');
+		  cssmenu.find('.submenu-button').on('click', function() {
+			$(this).toggleClass('submenu-opened');
+			if ($(this).siblings('ul').hasClass('open')) {
+			  $(this).siblings('ul').removeClass('open').slideUp();
+			}
+			else {
+			  $(this).siblings('ul').addClass('open').slideDown();
+			}
+		  });
+		};
+
+		if (settings.format === 'multitoggle') multiTg();
+		else cssmenu.addClass('dropdown');
+		
+		
+      });
+	};
+
+	$(".navy").menumaker({
+		title: "Menu",
+		format: "multitoggle"
+	});
+});
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+(function ( $ ) {
+    'use strict';
+
+    $(document).ready(function() {
+        var deleteButton;
+
+        $(document).on('click', '.btn-confirm',function(e) {
+            e.preventDefault();
+
+            deleteButton = $(this);
+
+            if (deleteButton.is("a")) {
+                $('#confirmation-modal #confirmation-modal-confirm').attr('href', deleteButton.attr('href'));
+            }
+
+            $('#confirmation-modal').modal('show');
+        });
+
+        $('#confirmation-modal #confirmation-modal-confirm').click(function(e) {
+            if (deleteButton.is("button")) {
+                e.preventDefault();
+                deleteButton.closest('form').submit();
+            }
+        });
+    });
+})( jQuery );
 $(function() {
 
     "use strict";
@@ -12815,33 +12786,6 @@ $(function () {
 
   });
 });
-$(function() {
-
-    "use strict";
-
-    var $form = $('form[name=jdj_comptabundle_bill_payment]');
-
-    if ($form.length > 0) {
-        /**
-         * datePickers from the form
-         */
-        $('.billPaymentPaidAt').datetimepicker({
-            format: 'YYYY-MM-DD'
-        });
-    }
-
-});
-$(function() {
-
-    "use strict";
-
-    /**
-     * datePickers from the form
-     */
-    $('#jdj_comptabundle_book_entry_activeAt').datetimepicker({
-        format: 'YYYY-MM-DD'
-    });
-});
 $(document).ready(function () {
 
     /**
@@ -13069,7 +13013,7 @@ $(function () {
     refresh();
   }
 });
-$(function() {
+$(function () {
 
     "use strict";
 
@@ -13078,7 +13022,7 @@ $(function() {
 
     //initializeAjaxForm(successMessage);
 
-    $(".rating").each(function() {
+    $(".rating").each(function () {
         $(this).rate({
             max_value: $(this).attr("data-max-value"),
             readonly: $(this).attr("data-readonly"),
@@ -13095,7 +13039,7 @@ $(function() {
         });
     });
 
-    $('.rating.rate').on("change", function(event, data) {
+    $('.rating.rate').on("change", function (event, data) {
 
         var rateValue = $(this).attr('data-rate-value');
         var productId = $(this).attr('data-product-id');
@@ -13112,14 +13056,17 @@ $(function() {
         }
 
         $.ajax({
-            url: Routing.generate(routeName, { 'productId': productId }),
+            url: Routing.generate(routeName, {'productId': productId}),
             type: type,
             data: {'rating': newRateValue},
-            success: function(data, textStatus, xhr) {
+            success: function (data, textStatus, xhr) {
+                if (xhr.status === 201) {
+                    updateProductReviewButtonPath(productId, data.id);
+                }
                 appendFlash(successMessage);
             },
-            error: function(xhr, textStatus, errorThrown) {
-                if(xhr.status===401) {
+            error: function (xhr, textStatus, errorThrown) {
+                if (xhr.status === 401) {
                     //handle error
                     window.location.replace('/login');
                 } else {
@@ -13129,8 +13076,14 @@ $(function() {
         });
     });
 
+    function updateProductReviewButtonPath(productId, resourceId) {
+        $('#productReviewButton').attr('href', Routing.generate('sylius_product_review_update', {
+            'productId': productId, 'id': resourceId
+        }));
+    }
+
     function initializeAjaxForm(successMessage, messageHolderSelector) {
-        $ratingForm.submit(function(e) {
+        $ratingForm.submit(function (e) {
             e.preventDefault();
             var form = $(this);
 
@@ -13140,11 +13093,11 @@ $(function() {
                 data: parseFormToJson(form),
                 dataType: "json",
                 accept: "application/json",
-                success: function(data, textStatus, xhr) {
+                success: function (data, textStatus, xhr) {
                     completeRequest(form);
                     appendFlash(successMessage, messageHolderSelector);
                 },
-                error: function(xhr, textStatus, errorThrown) {
+                error: function (xhr, textStatus, errorThrown) {
                     renderErrors(xhr, form);
                 }
             });
@@ -13154,7 +13107,7 @@ $(function() {
     function renderErrors(xhr, form) {
         clearErrors(form);
 
-        $.each(xhr.responseJSON.errors.errors, function(key, value) {
+        $.each(xhr.responseJSON.errors.errors, function (key, value) {
             $('div.panel-body').addClass('has-error').prepend('<span class="help-block form-error">' + value + '</span>');
         });
     }
@@ -13166,7 +13119,7 @@ $(function() {
 
     function parseFormToJson(form) {
         var formJson = {};
-        $.each(form.serializeArray(), function(index, field) {
+        $.each(form.serializeArray(), function (index, field) {
             var name = field.name.replace('sylius_product_review[', '').replace(']', '');
             formJson[name] = field.value || '';
         });
@@ -13183,569 +13136,7 @@ $(function() {
     function completeRequest(form) {
         form[0].reset();
         clearErrors(form);
-        $("html, body").animate({ scrollTop: 0 }, "slow");
-    }
-
-});
-$(function() {
-    // Javascript to enable link to tab
-    var url = document.location.toString();
-    if (url.match('#')) {
-        $('.nav-tabs a[href=#'+url.split('#')[1]+']').tab('show') ;
-    }
-
-    // Change hash for page-reload
-    $('.nav-tabs a').on('shown', function (e) {
-        window.location.hash = e.target.hash;
-    })
-});
-$(document).ready(function () {
-
-    /**
-     * Handles click to display the modal
-     */
-    $("#submit-form-login-modal").click(function (e) {
-        e.preventDefault();
-
-        //authentification
-        checkLogin($('#formLoginModal'));
-
-        $('#login-form-modal').modal('hide');
-
-    });
-
-
-    /**
-     * Handles click to display the modal
-     */
-    $("#submit-form-login").click(function (e) {
-        e.preventDefault();
-
-        //authentification
-        checkLogin($('#formLogin'));
-
-    });
-
-    /**
-     * checks for the authentification
-     *
-     * @returns {boolean}
-     */
-    function checkLogin($form) {
-
-        var isLoggedIn = false;
-        $.ajax({
-            type        : $form.attr( 'method' ),
-            url         : $form.attr( 'action' ),
-            data        : $form.serialize(),
-            dataType    : 'json',
-            async       : false,
-            success: function (data) {
-                if (data.has_error == true) {
-                    //Login KO
-                    isLoggedIn = false;
-                }
-                else  {
-                    //login OK
-                    isLoggedIn = true;
-                }
-            }
-        });
-
-        console.log(isLoggedIn);
-
-        notifyLogin(isLoggedIn);
-
-    }
-
-
-    function notifyLogin(isLoggedIn)
-    {
-        if(isLoggedIn){
-            //Notify login
-            notifySuccess("Vous êtes connecté.");
-
-            //reload page
-            window.location
-                .reload()
-                .delay(3000)
-                .fadeOut();
-
-        } else {
-            notifyError("Problème de connexion.");
-        }
-
-    }
-
-});
-$(document).ready(function () {
-
-    initializeForms();
-
-
-    /**
-     * Handles the radio button to choose the method to add a game to a list
-     */
-    $('input[type=radio][name=choose-list]').change(function () {
-        if ($("#radio-existing-list").is(':checked') == true) {
-            $("#add-in-list").show();
-            $("#create-list").hide();
-        } else {
-            $("#add-in-list").hide();
-            $("#create-list").show();
-        }
-    });
-
-
-    /**
-     * Handles click to display the modal
-     */
-    $("#addGameCollectionModal").click(function (e) {
-        e.preventDefault();
-        if ($(this).data('user-id') <= 0) {
-            $('#login-form-modal').modal('show');
-        }
-    });
-
-    /**
-     * Handles click to add a new collection
-     */
-    $("#add-list-collection").click(function (e) {
-        e.preventDefault();
-
-        if ($('#input-list-name').val() !== "") {
-            createCollection($(this).data('jeu-id'), $(this).data('user-id'), $('#input-list-name').val(), $('#input-list-description').val());
-        } else {
-            $('#form-group-name-list').addClass('has-error');
-        }
-    });
-
-
-    /**
-     * Handles click to add a new collection
-     */
-    $("#add-game-collection").click(function (e) {
-        e.preventDefault();
-
-        if(Array.isArray($("#input-existing-collection").val()))
-        {
-            var jeuId = $(this).data('jeu-id');
-            $.each($("#input-existing-collection").val(), function( index, value ) {
-                addGameCollection(jeuId, value);
-            });
-        }
-        $('#collectionModal').modal('hide');
-        initializeForms();
-        notifySuccess("Le jeu a été rajoutée à mes listes.");
-
-
-    });
-
-
-    /**
-     * create a new list with the game
-     *
-     * @param jeuId
-     * @param userId
-     * @param name
-     * @param description
-     * @returns {boolean}
-     */
-    function createCollection(jeuId, userId, name, description) {
-        var response = false;
-
-        $.ajax({
-            url: Routing.generate('create_collection', {jeu: jeuId, user: userId}),
-            type: 'POST',
-            data: {name: name, description: description},
-            async: false
-        })
-            .done(function () {
-                response = true;
-
-                $('#collectionModal').modal('hide');
-                notifySuccess("La liste a été créé.");
-                /** if no list yet reload page */
-                if ($('#add-in-list').length == 0) {
-
-                    window.location
-                        .reload()
-                        .delay(3000)
-                        .fadeOut();
-                }
-
-                reloadUserLists(userId);
-                initializeForms();
-
-
-            })
-            .fail(function () {
-                notifyError("Une erreur s'est produite. Merci de réessayer plus tard.");
-                $('#collectionModal').modal('hide');
-            });
-        return response;
-    }
-
-
-    /**
-     * Add a game to an existing collection
-     *
-     * @param jeuId
-     * @param collectionId
-     * @returns {boolean}
-     */
-    function addGameCollection(jeuId, collectionId) {
-        var response = false;
-
-        $.ajax({
-            url: Routing.generate('add_game_collection', {jeu: jeuId, collection: collectionId}),
-            type: 'GET',
-            async: false
-        })
-            .done(function () {
-                response = true;
-            })
-            .fail(function () {
-                notifyError("Une erreur s'est produite. Merci de réessayer plus tard.");
-                $('#collectionModal').modal('hide');
-            });
-        return response;
-    }
-
-
-    /**
-     * reload the user lists
-     *
-     * @param userId
-     * @returns {boolean}
-     */
-    function reloadUserLists(userId) {
-
-        $.ajax({
-            url: Routing.generate('user_list', {user: userId}),
-            type: 'GET',
-            async: false
-        })
-            .done(function (data) {
-                var tabCollection = data.tabCollection;
-                reloadSelectDOM(tabCollection)
-            })
-            .fail(function () {
-                notifyError("Une erreur s'est produite. Merci de réessayer plus tard.");
-            });
-
-    }
-
-    /**
-     * This function reload the select in the dom with the user lists
-     *
-     * @param tabCollection
-     */
-    function reloadSelectDOM(tabCollection) {
-
-        selectCollection = "";
-        tabCollection.forEach(function (collection, index) {
-            selectCollection += '<option value="' + collection.id + '">' + collection.name + '</option>';
-        });
-
-        $("#input-existing-collection").html(selectCollection);
-    }
-
-    /**
-     * This function initialize the forms in the modals
-     */
-    function initializeForms(){
-        /** initialize */
-
-        $('#input-existing-collection').multipleSelect({
-            filter: true,
-            isOpen: true,
-            keepOpen: true
-        });
-
-        $("#radio-existing-list").prop("checked", true)
-        $("#add-in-list").show();
-        if ($('#add-in-list').length > 0) {
-            $("#create-list").hide();
-        }
-        $('#input-list-name').val("");
-        $('#input-list-description').val("");
-        $('#form-group-name-list').removeClass('has-error');
-    }
-
-
-});
-$(function () {
-
-    var $form = $('form[name=jdj_jeubundle_jeu]');
-
-    if ($form.length > 0) {
-        $('#jdj_jeubundle_jeu_mechanisms, #jdj_jeubundle_jeu_themes').multipleSelect({
-            filter: true
-        });
-    }
-});
-$(function() {
-    // Document is ready
-
-    var defaultOptions = {
-        'starCaptions': {
-            0.5: 'Nul',
-            1: 'Très mauvais',
-            1.5: 'Mauvais',
-            2: 'Bof',
-            2.5: 'Moyen',
-            3: 'Pas mal',
-            3.5: 'Bon',
-            4: 'Très bon',
-            4.5: 'Excellent',
-            5: 'Mythique'
-        }
-    };
-
-    $(".game-rating").rating(defaultOptions);
-});
-
-$(document).ready(function () {
-
-
-    /**
-     * Handles click to display to change the game status
-     */
-    $(".acceptStatus").click(function (e) {
-        e.preventDefault();
-        changeGameStatus($(this).data('jeu-id'), $(this).data('status'), $(this).data('action'), "");
-    });
-
-    /**
-     * Handles click to display to change the game status
-     */
-    $(".refuseStatus").click(function (e) {
-        e.preventDefault();
-        changeGameStatus($(this).data('jeu-id'), $(this).data('status'), $(this).data('action'), $("#inputCommentRefuse").val());
-    });
-
-    /**
-     * Call the change status service
-     *
-     * @param jeuId
-     * @param status
-     * @param action
-     * @param comment
-     */
-    function changeGameStatus(jeuId, status, action, comment) {
-
-        $.ajax({
-            url: Routing.generate('change_status', {jeu: jeuId, status: status, action: action}),
-            type: 'POST',
-            data: {comment: comment},
-            async: false
-        })
-            .done(function (data) {
-                $('#refuseStatusModal').modal('hide');
-                $('.changeStatus').hide();
-                $('.changeStatusContainer').hide();
-
-                notifySuccess(data.message);
-
-                //Reload the page
-                window.location
-                    .reload()
-                    .delay(5000)
-                    .fadeOut();
-
-
-            })
-            .fail(function (xhr) {
-                var data = eval("(" + xhr.responseText + ")");
-                notifyError(data.message);
-            });
-    }
-
-
-});
-$(document).ready(function () {
-
-    /**
-     * Handles click on owned
-     */
-    $(".owned").click(function (e) {
-        e.preventDefault();
-
-        if($(this).data("uid") <= 0) {
-            $('#login-form-modal').modal('show');
-        } else {
-            handleUsergameAttribute($(this), 'owned');
-        }
-    });
-
-    /**
-     * Handles click on wanted
-     */
-    $(".wanted").click(function (e) {
-        e.preventDefault();
-
-        if($(this).data("uid") <= 0) {
-            $('#login-form-modal').modal('show');
-        } else {
-            handleUsergameAttribute($(this), 'wanted');
-        }
-    });
-
-    /**
-     * Handles click on played
-     */
-    $(".played").click(function (e) {
-        e.preventDefault();
-
-        if($(this).data("uid") <= 0) {
-            $('#login-form-modal').modal('show');
-        } else {
-            handleUsergameAttribute($(this), 'played');
-        }
-    });
-
-    /**
-     * Handles click on favorite
-     */
-    $(".favorite").click(function (e) {
-        e.preventDefault();
-
-        if($(this).data("uid") <= 0) {
-            $('#login-form-modal').modal('show');
-        } else {
-            handleUsergameAttribute($(this), 'favorite');
-        }
-    });
-
-
-    /**
-     * handle the back end update and modify display
-     *
-     * @param element
-     * @param classElement
-     */
-    function handleUsergameAttribute(element, classElement)
-    {
-        /**
-         * set the user game attribute
-         */
-        var isset = setUserGameAttribute(
-            element.data("jeu-id"),
-            element.data("uid"),
-            classElement
-        );
-
-        if (isset) {
-            modifyDisplay("." + classElement);
-        }
-    }
-
-    /**
-     * change the display by adding a class
-     *
-     * @param classElement
-     */
-    function modifyDisplay(classElement)
-    {
-        notifySuccesUserGameAttributes(classElement);
-        if ($(classElement).hasClass("btn-default")) {
-            $(classElement).addClass("btn-yellow");
-            $(classElement).removeClass("btn-default");
-        } else {
-            $(classElement).addClass("btn-default");
-            $(classElement).removeClass("btn-yellow");
-        }
-
-    }
-
-
-    /**
-     * Set the usergameattribute
-     *
-     * @param jeuId
-     * @param userId
-     * @param attribute
-     */
-    function setUserGameAttribute(jeuId, userId, attribute) {
-        var response = false;
-
-        $.ajax({
-            url: Routing.generate('usergameattribute_' + attribute, { jeu: jeuId, user: userId }),
-            type: 'GET',
-            async: false
-        })
-            .done(function () {
-                response = true;
-
-            })
-            .fail(function () {
-                alert("An error occured. Please try again later.");
-            });
-        return response;
-    }
-
-    /**
-     * This function displays a success notification
-     *
-     * @param attribute
-     */
-    function notifySuccesUserGameAttributes(attribute)
-    {
-        var message = "";
-
-        switch(attribute) {
-            case ".owned":
-                if ($(attribute).hasClass("btn-default")) {
-                    message = "Le Jeu a été ajouté à votre ludothèque.";
-                } else {
-                    message = "Le Jeu a été supprimé de votre ludothèque.";
-                }
-                break;
-            case ".wanted":
-                if ($(attribute).hasClass("btn-default")) {
-                    message = "Le Jeu a été ajouté à votre liste d'envie.";
-                } else {
-                    message = "Le Jeu a été supprimé de votre liste d'envie.";
-                }
-                break;
-            case ".played":
-                if ($(attribute).hasClass("btn-default")) {
-                    message = "Le Jeu a été ajouté à la liste de jeu auxquels vous avez joué.";
-                } else {
-                    message = "Le Jeu a été supprimé de la liste de jeu auxquels vous avez joué.";
-                }
-                break;
-            case ".favorite":
-                if ($(attribute).hasClass("btn-default")) {
-                    message = "Le Jeu a été ajouté à vos coup de coeur.";
-                } else {
-                    message = "Le Jeu a été supprimé de vos coup de coeur.";
-                }
-                break;
-        }
-        /*$('#notify')
-            .removeClass('alert-danger')
-            .addClass('alert-success')
-            .show()
-            .delay(5000)
-            .fadeOut();
-
-        $('#message-jeu').html(message);
-        $('html, body').animate({ scrollTop: 0 }, 'fast');*/
-
-        notifySuccess(message);
-
-    }
-
-
-});
-$(function() {
-
-    if ($('#user-review').length > 0) {
-        $('html, body').animate({
-            scrollTop:$("#user-review").offset().top
-        }, 'fast');
+        $("html, body").animate({scrollTop: 0}, "slow");
     }
 
 });
@@ -13787,154 +13178,12 @@ $(function() {
     });
 
 });
-/* ************************ */
-/* Theme name  : Brave      */
-/* Author name : Ashok      */
-/* ************************ */
+$(function() {
 
-/* ****************** */
-/* Tooltips & Popover */
-/* ****************** */
+    if ($('#user-review').length > 0) {
+        $('html, body').animate({
+            scrollTop:$("#user-review").offset().top
+        }, 'fast');
+    }
 
-$(".b-tooltip").tooltip();
-
-$(".b-popover").popover();
-
-/* ****************** */
-/* Switchs */
-/* ****************** */
-
-$(".switch").bootstrapSwitch();
-
-$(".b-popover").popover();
-
-/* ************** */
-/* Magnific Popup */
-/* ************** */
-
-$(document).ready(function() {
-  $('.lightbox').magnificPopup({type:'image'});
-});
-
-/* *************** */
-/* Custom Dropdown */
-/* *************** */
-
-$(document).ready(function(){
-	var hidden = true;
-	$(".b-dropdown").click(function(e){
-		e.preventDefault();
-		if (hidden){
-           $(this).next('.b-dropdown-block').slideToggle(400, function(){hidden = false;});
-      }
-	}); 
-	$('html').click(function() {
-        if (!hidden) {
-            $('.b-dropdown-block').slideUp();
-            hidden=true;
-        }
-   });
-   $('.b-dropdown-block').click(function(event) {
-        event.stopPropagation();
-   }); 
-});
-
-/* ************ */
-/* Owl Carousel */
-/* ************ */
-
-$(document).ready(function() {
-	/* Owl carousel */
-	$(".owl-carousel").owlCarousel({
-		slideSpeed : 500,
-		rewindSpeed : 1000,
-		mouseDrag : true,
-		stopOnHover : true
-	});
-	/* Own navigation */
-	$(".owl-nav-prev").click(function(){
-		$(this).parent().next(".owl-carousel").trigger('owl.prev');
-	});
-	$(".owl-nav-next").click(function(){
-		$(this).parent().next(".owl-carousel").trigger('owl.next');
-	});
-});
-
-/* ************* */
-/* Scroll to top */
-/* ************* */
-
-$(document).ready(function() {
-	$(window).scroll(function(){
-		if ($(this).scrollTop() > 200) {
-			$('.totop').fadeIn();
-		} else {
-			$('.totop').fadeOut();
-		}
-	});
-	$(".totop a").click(function(e) {
-		e.preventDefault();
-		$("html, body").animate({ scrollTop: 0 }, "slow");
-		return false;
-	});
-});
-
-/* *************** */
-/* Navigation menu */
-/* *************** */
-
-$(document).ready(function(){
-
-
-	$.fn.menumaker = function(options) {
-      
-    var cssmenu = $(this), settings = $.extend({
-        title: "Menu",
-        format: "dropdown",
-        sticky: false
-      }, options);
-
-      return this.each(function() {
-		
-		cssmenu.prepend('<div id="menu-button">' + settings.title + '</div>');
-		$(this).find("#menu-button").on('click', function(){
-		  $(this).toggleClass('menu-opened');
-		  var mainmenu = $(this).next('ul');
-		  if (mainmenu.hasClass('open')) { 
-			mainmenu.slideUp().removeClass('open');
-		  }
-		  else {
-			mainmenu.slideDown().addClass('open');
-			if (settings.format === "dropdown") {
-			  mainmenu.find('ul').slideDown();
-			}
-		  }
-		});
-		
-		cssmenu.find('li ul').parent().addClass('has-sub');
-
-		multiTg = function() {
-		  cssmenu.find(".has-sub").prepend('<span class="submenu-button"></span>');
-		  cssmenu.find('.submenu-button').on('click', function() {
-			$(this).toggleClass('submenu-opened');
-			if ($(this).siblings('ul').hasClass('open')) {
-			  $(this).siblings('ul').removeClass('open').slideUp();
-			}
-			else {
-			  $(this).siblings('ul').addClass('open').slideDown();
-			}
-		  });
-		};
-
-		if (settings.format === 'multitoggle') multiTg();
-		else cssmenu.addClass('dropdown');
-		
-		
-      });
-	};
-
-	$(".navy").menumaker({
-		title: "Menu",
-		format: "multitoggle"
-	});
 });

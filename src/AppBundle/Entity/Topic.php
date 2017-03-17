@@ -18,6 +18,7 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
@@ -43,6 +44,9 @@ class Topic implements ResourceInterface
      * @var string
      *
      * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank()
+     *
      * @JMS\Expose
      */
     protected $title;

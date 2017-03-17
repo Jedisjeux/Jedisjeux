@@ -14,6 +14,11 @@ sylius_resource:
                 form:
                     default: AppBundle\Form\Type\ArticleType
                     view_count: AppBundle\Form\Type\ArticleViewCountType
+        app.article_image:
+            classes:
+                model: AppBundle\Entity\ArticleImage
+                form:
+                    default: AppBundle\Form\Type\ArticleImageType
         app.article_review:
             classes:
                 model: AppBundle\Entity\ArticleReview
@@ -30,6 +35,16 @@ sylius_resource:
                 model: AppBundle\Entity\Avatar
                 form:
                     default: AppBundle\Form\Type\AvatarType
+        app.block:
+            classes:
+                model: AppBundle\Entity\Block
+                form:
+                    default: AppBundle\Form\Type\BlockType
+        app.block_image:
+            classes:
+                model: AppBundle\Entity\BlockImage
+                form:
+                    default: AppBundle\Form\Type\BlockImageType
         app.blockquote_block:
             driver: doctrine/phpcr-odm
             classes:
@@ -75,6 +90,9 @@ sylius_resource:
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
                 form:
                     default: AppBundle\Form\Type\SingleImageBlock\LeftImageBlockType
+        app.not_found_page:
+            classes:
+                model: AppBundle\Entity\NotFound
         app.person:
             classes:
                 model: AppBundle\Entity\Person
@@ -110,6 +128,11 @@ sylius_resource:
                 model: AppBundle\Entity\PubBanner
                 form:
                     default: AppBundle\Form\Type\PubBannerType
+        app.redirection:
+            classes:
+                model: AppBundle\Entity\Redirection
+                form:
+                    default: AppBundle\Form\Type\RedirectionType
         app.right_image_block:
             driver: doctrine/phpcr-odm
             classes:
@@ -126,6 +149,9 @@ sylius_resource:
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
                 form:
                     default: AppBundle\Form\Type\SingleImageBlockType
+        app.slide_show_block:
+            classes:
+                model: AppBundle\Entity\SlideShowBlock
         app.string_block:
             driver: doctrine/phpcr-odm
             classes:
@@ -142,9 +168,6 @@ sylius_resource:
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
                 form:
                     default: AppBundle\Form\Type\SingleImageBlock\TopImageBlockType
-        app.country:
-            classes:
-                model: AppBundle\Entity\Country
         app.game_play:
             classes:
                 model: AppBundle\Entity\GamePlay
@@ -172,14 +195,6 @@ sylius_resource:
                 model: AppBundle\Entity\Notification
                 factory: AppBundle\Factory\NotificationFactory
                 controller: AppBundle\Controller\NotificationController
-        app.customer_list:
-            classes:
-                model: AppBundle\Entity\CustomerList
-        app.customer_list_element:
-            classes:
-                model: AppBundle\Entity\CustomerListElement
-                controller: AppBundle\Controller\CustomerListElementController
-                repository: AppBundle\Repository\CustomerListElementRepository
         app.topic:
             classes:
                 model: AppBundle\Entity\Topic

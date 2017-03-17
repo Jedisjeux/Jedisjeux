@@ -18,6 +18,40 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
  */
 class PersonRepository extends EntityRepository
 {
+    public function createListQueryBuilder(TaxonInterface $taxon = null)
+    {
+        $queryBuilder = $this->createQueryBuilder('o')
+            ->addSelect('designerProduct')
+            ->addSelect('artistProduct')
+            ->addSelect('publisherProduct')
+            ->addSelect('image')
+            ->leftJoin('o.images', 'image')
+            ->leftJoin('o.designerProducts', 'designerProduct')
+            ->leftJoin('o.artistProducts', 'artistProduct')
+            ->leftJoin('o.publisherProducts', 'publisherProduct');
+
+        $queryBuilder->addSelect($queryBuilder->expr()->sum(
+            "SIZE(o.designerProducts)",
+            "SIZE(o.publisherProducts)",
+            "SIZE(o.artistProducts)") .
+        " as HIDDEN gameCount");
+        $queryBuilder->addOrderBy("gameCount", 'desc');
+
+        if ($taxon) {
+            $queryBuilder
+                ->innerJoin('o.taxons', 'taxon')
+                ->andWhere($queryBuilder->expr()->orX(
+                    'taxon = :taxon',
+                    ':left < taxon.left AND taxon.right < :right'
+                ))
+                ->setParameter('taxon', $taxon)
+                ->setParameter('left', $taxon->getLeft())
+                ->setParameter('right', $taxon->getRight());
+        }
+
+        return $queryBuilder;
+    }
+
     /**
      * @inheritdoc
      */
@@ -26,7 +60,7 @@ class PersonRepository extends EntityRepository
         if (isset($criteria['query'])) {
             $queryBuilder
                 ->andWhere('o.slug like :query')
-                ->setParameter('query', '%'.$criteria['query'].'%');
+                ->setParameter('query', '%' . $criteria['query'] . '%');
 
             unset($criteria['query']);
         }
@@ -67,7 +101,7 @@ class PersonRepository extends EntityRepository
             $queryBuilder->addSelect($queryBuilder->expr()->sum(
                     "SIZE(o.designerProducts)",
                     "SIZE(o.publisherProducts)",
-                    "SIZE(o.artistProducts)").
+                    "SIZE(o.artistProducts)") .
                 " as HIDDEN gameCount");
             $queryBuilder->addOrderBy("gameCount", $sorting['gameCount']);
             unset($sorting['gameCount']);

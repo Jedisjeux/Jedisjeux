@@ -177,71 +177,74 @@
 
 {%- endblock %}
 
-{% block single_image_left_block_widget -%}
+{% block single_image_block_widget %}
+    {% import _self as blocks %}
+
+    {% set imagePosition = form.imagePosition.vars.data %}
+    {% set type = 'single_image_' ~ imagePosition %}
+
+    {% if attribute(blocks, type) is defined %}
+        {{ attribute(blocks, type, [form]) }}
+    {% else %}
+        {{ form_row(form, {'label': false}) }}
+    {% endif %}
+
+{% endblock %}
+
+{% macro single_image_left(form) %}
     <div class="ui stackable grid">
         <div class="six wide column">
-            {% set image = form.imagineBlock.image %}
+            {{ form_row(form.imagePosition) }}
 
-            {% if image.vars.data %}
-                <img class="ui fluid image" src="{{ image.vars.data.id | imagine_filter('cmf_block') }}"/>
+            {% set image = form.image %}
+
+            {% if image.vars.data and image.vars.data.webPath %}
+                <img class="ui fluid image" src="{{ image.vars.data.webPath | imagine_filter('magazine_item') }}"/>
             {% endif %}
 
-            {{ form_row(form.imagineBlock.image) }}
-            {{ form_row(form.imagineBlock.label) }}
+            {{ form_row(form.image.file) }}
+            {{ form_row(form.image.label) }}
         </div>
         <div class="ten wide column">
             {{ form_row(form.title) }}
-            {{ form_row(form.body) }}
+            {{ form_row(form.body) }}{{ form_row(form.class) }}
         </div>
     </div>
 
-    {{ form_row(form._type) }}
-{%- endblock %}
+    {{ form_row(form.imagePosition) }}
+{% endmacro %}
 
-{% block single_image_right_block_widget -%}
+{% macro single_image_right(form) %}
     <div class="ui stackable grid">
         <div class="ten wide column">
             {{ form_row(form.title) }}
             {{ form_row(form.body) }}
+            {{ form_row(form.class) }}
         </div>
         <div class="six wide column">
-            {% set image = form.imagineBlock.image %}
+            {{ form_row(form.imagePosition) }}
 
-            {% if image.vars.data %}
-                <img class="ui fluid image" src="{{ image.vars.data.id | imagine_filter('cmf_block') }}"/>
+            {% set image = form.image %}
+
+            {% if image.vars.data and image.vars.data.webPath %}
+                <img class="ui fluid image" src="{{ image.vars.data.webPath | imagine_filter('magazine_item') }}"/>
             {% endif %}
-            {{ form_row(form.imagineBlock.image) }}
-            {{ form_row(form.imagineBlock.label) }}
+            {{ form_row(form.image.file) }}
+            {{ form_row(form.image.label) }}
         </div>
     </div>
+{% endmacro %}
 
-    {{ form_row(form._type) }}
-{%- endblock %}
-
-{% block single_image_top_block_widget -%}
+{% macro single_image_top(form) -%}
     {{ form_row(form.title) }}
-    {% set image = form.imagineBlock.image %}
+    {{ form_row(form.imagePosition) }}
+    {% set image = form.image %}
 
-    {% if image.vars.data %}
-        <img class="ui fluid image" src="{{ image.vars.data.id | imagine_filter('cmf_block') }}"/>
+    {% if image.vars.data and image.vars.data.webPath %}
+        <img class="ui image" src="{{ image.vars.data.webPath | imagine_filter('magazine_item') }}"/>
     {% endif %}
-    {{ form_row(form.imagineBlock.image) }}
-    {{ form_row(form.imagineBlock.label) }}
+    {{ form_row(form.image.file) }}
+    {{ form_row(form.image.label) }}
     {{ form_row(form.body) }}
-
-    {{ form_row(form._type) }}
-{%- endblock %}
-
-{% block single_image_well_block_widget -%}
-    {{ form_row(form.title) }}
-    {% set image = form.imagineBlock.image %}
-
-    {% if image.vars.data %}
-        <img class="ui fluid image" src="{{ image.vars.data.id | imagine_filter('cmf_block') }}"/>
-    {% endif %}
-    {{ form_row(form.imagineBlock.image) }}
-    {{ form_row(form.imagineBlock.label) }}
-    {{ form_row(form.body) }}
-
-    {{ form_row(form._type) }}
-{%- endblock %}
+    {{ form_row(form.class) }}
+{%- endmacro %}

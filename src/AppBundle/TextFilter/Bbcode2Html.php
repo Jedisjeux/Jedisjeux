@@ -10,9 +10,7 @@ namespace AppBundle\TextFilter;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityRepository;
-use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Product\Model\ProductInterface;
-
+use Sylius\Component\Product\Model\ProductVariantInterface;
 
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
@@ -47,15 +45,21 @@ class Bbcode2Html
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getFilteredBody()
     {
         $body = $this->body;
+
+        if (null === $body) {
+            return null;
+        }
+
         $body = $this->nl2p($body);
         $body = $this->emoticonReplacement($body);
         $body = $this->colorReplacement($body);
         $body = $this->sizeReplacement($body);
+        $body = $this->blockReplacement($body);
         $body = $this->quoteReplacement($body);
         $body = $this->imageReplacement($body);
         $body = $this->imageWithIdReplacement($body);
@@ -90,10 +94,14 @@ class Bbcode2Html
         $pattern = '/\<img src\=\"\{SMILIES_PATH\}\/icon_(.*?)\.gif\" alt\=\"(?P<alt>.*?)\" title\=\"(.*?)\" \/\>/ms';
         $replacement = "$2";
         $body = preg_replace($pattern, $replacement, $body);
+
         $body = str_replace(':mrgreen:', 'xD', $body);
         $body = str_replace(':wink:', ';)', $body);
         $body = str_replace(':lol:', ':)', $body);
-        $body = str_replace(':light:', '', $body);
+
+        // star wars emoticons
+        $pattern = '/<img src="{SMILIES_PATH}\/(.*?)\.gif" alt="(:light:|:dark:|:boba:|:d2:)" title="(.*?)" \/>/ms';
+        $body = preg_replace($pattern, '', $body);
 
         return $body;
     }
@@ -183,7 +191,7 @@ EOM;
             $position = isset($data[1]) ? $data[1] : null;
 
             if ('left' === $position) {
-                $body = str_replace(sprintf('IMAGE-CLASS-%s', $id), 'pull-left col-md-6 no-padding-left', $body); 
+                $body = str_replace(sprintf('IMAGE-CLASS-%s', $id), 'pull-left col-md-6 no-padding-left', $body);
             } elseif ('right' === $position) {
                 $body = str_replace(sprintf('IMAGE-CLASS-%s', $id), 'pull-right col-md-6 no-padding-right', $body);
             } else {
@@ -231,7 +239,7 @@ EOM;
                 continue;
             }
 
-            $body = str_replace(sprintf('--%s--', $id), $productVariant->getProduct()->getId(), $body);
+            $body = str_replace(sprintf('--%s--', $id), $productVariant->getProduct()->getCode(), $body);
         }
 
         return $body;
@@ -239,12 +247,31 @@ EOM;
 
     /**
      * @param string $body
+     *
      * @return string
      */
     protected function colorReplacement($body)
     {
         $pattern = '/\[color=(.*?)\](?P<text>.*?)\[\/color:(.*?)\]/ms';
         $replacement = "$2";
+        $body = preg_replace($pattern, $replacement, $body);
+
+        return $body;
+    }
+
+    /**
+     * @param string $body
+     *
+     * @return string
+     */
+    protected function blockReplacement($body)
+    {
+        $pattern = '/\[bleft:(.*?)\](?P<text>.*?)\[\/bleft:(.*?)\]/ms';
+        $replacement = "<div class=\"clearfix\"></div><div style=\"margin-right: 10px\" class=\"pull-left\">$2</div>";
+        $body = preg_replace($pattern, $replacement, $body);
+
+        $pattern = '/\[bright:(.*?)\](?P<text>.*?)\[\/bright:(.*?)\]/ms';
+        $replacement = "<div class=\"clearfix\"></div><div style=\"margin-left: 10px\" class=\"pull-right\">$2</div>";
         $body = preg_replace($pattern, $replacement, $body);
 
         return $body;
@@ -269,8 +296,8 @@ EOM;
      */
     protected function urlReplacement($body)
     {
-        $pattern = '/\[url=(?P<path>.*?)\](?P<label>.*?)\[\/url:(.*?)\]/ms';
-        $replacement = "<a href=\"$1\" target='_blank'>$2</a>";
+        $pattern = '/\[url=(?P<path>.*?):(.*?)\](?P<label>.*?)\[\/url:(.*?)\]/ms';
+        $replacement = "<a href=\"$1\" target='_blank'>$3</a>";
         $body = preg_replace($pattern, $replacement, $body);
 
         return $body;

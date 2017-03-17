@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+{% import 'macros/actions.html.twig' as action %}
+
+{% set article = post.article %}
+
+{% block headline %}
+    Votre commentaire
+{% endblock %}
+
+{% block breadcrumb_content %}
+    <a href="{{ path('app_frontend_article_index') }}">{{ 'app.ui.articles'|trans }}</a>
+    / <a href="{{ path('app_frontend_article_show', {'slug': article.slug}) }}">{{ article.title }}</a>
+    / Créer votre commentaire
+{% endblock %}
+
+{% block body -%}
+    <div class="col-md-12">
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ action.create() }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

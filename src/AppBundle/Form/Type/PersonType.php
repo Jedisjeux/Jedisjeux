@@ -14,7 +14,9 @@ namespace AppBundle\Form\Type;
 use AppBundle\Entity\Taxon;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -28,10 +30,6 @@ class PersonType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('mainImage', 'app_person_image', [
-                'label' => 'label.image',
-                'required' => false,
-            ])
             ->add('lastName', null, [
                 'label' => 'label.last_name',
             ])
@@ -65,7 +63,28 @@ class PersonType extends AbstractResourceType
                 'label' => 'label.description',
                 'required' => false,
             ])
+            ->add('images', CollectionType::class, [
+                'type' => PersonImageType::class,
+                'label' => 'sylius.ui.images',
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'required' => false,
+            ])
+
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'data_class' => $this->dataClass,
+            'validation_groups' => $this->validationGroups,
+            'cascade_validation' => true,
+        ]);
     }
 
     /**

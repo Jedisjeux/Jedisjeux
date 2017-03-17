@@ -54,8 +54,10 @@
 
 {% macro magazineListItem(imagePath, imageLabel, imageFilter, imageClass, linkUrl, title, meta) %}
     {% from 'macros/images.html.twig' import image %}
-    {{ image(imagePath, imageFilter, imageLabel, imageClass, linkUrl) }}
 
+    {% if (imagePath) %}
+        {{ image(imagePath, imageFilter, imageLabel, imageClass, linkUrl) }}
+    {% endif %}
     <div class="m-list-content">
         <!-- Heading -->
         <h5><a href="{{ linkUrl }}">{{ title }}</a></h5>
@@ -106,7 +108,10 @@
         </div>
         <!-- Author details -->
         <div class="blog-author-content">
-            <h5><a href="#">{{ customer.user.username }} <small>le {{ createdAt|localizeddate('full', 'none') }} {{ 'label.at'|trans|lower }} {{ createdAt|localizeddate('none', 'short') }}</small></a></h5>
+            <h5><a href="#">{{ customer.user.username }}
+                    <small>
+                        le {{ createdAt|localizeddate('full', 'none') }} {{ 'label.at'|trans|lower }} {{ createdAt|localizeddate('none', 'short') }}</small>
+                </a></h5>
         </div>
         <div class="clearfix"></div>
     </div>

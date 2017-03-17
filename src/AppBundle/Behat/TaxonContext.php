@@ -8,6 +8,7 @@
 
 namespace AppBundle\Behat;
 
+use AppBundle\Entity\Taxon;
 use AppBundle\Repository\TaxonRepository;
 use Behat\Gherkin\Node\TableNode;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
@@ -42,10 +43,11 @@ class TaxonContext extends DefaultContext
                 );
             }
 
-            /** @var TaxonInterface $taxon */
+            /** @var Taxon $taxon */
             $taxon = $this->getFactory('taxon')->createNew();
             $taxon->setCode(isset($data['code']) ? $data['code'] : $this->faker->unique()->text(5));
             $taxon->setName(isset($data['name']) ? $data['name'] : $this->faker->name);
+            $taxon->setPublic(isset($data['public']) ? (bool)$data['public'] : true);
 
             $parent->addChild($taxon);
             $manager->persist($taxon);

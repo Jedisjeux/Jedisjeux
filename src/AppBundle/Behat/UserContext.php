@@ -79,7 +79,7 @@ class UserContext extends DefaultContext
      */
     protected function populateUser(UserInterface $user, array $data)
     {
-        $user->setUsername(isset($data['email']) ? trim($data['email']) : $this->faker->email);
+        $user->setUsername(isset($data['username']) ? trim($data['username']) : $this->faker->userName);
         $user->setUsernameCanonical($this->getCanonicalizer()->canonicalize($user->getUsername()));
         $user->setPlainPassword(isset($data['password']) ? trim($data['password']) : $this->faker->password());
         $user->setEmail(isset($data['email']) ? trim($data['email']) : $this->faker->email);

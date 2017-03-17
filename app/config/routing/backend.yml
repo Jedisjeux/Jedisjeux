@@ -32,14 +32,20 @@ sylius_admin_taxon:
     resource: backend/taxon.yml
     prefix: /taxons
 
-sylius_admin_user:
-    resource: backend/user.yml
+app_backend_person:
+    resource: backend/person.yml
 
 sylius_admin_product:
     resource: backend/product.yml
 
 sylius_backend_product_association_type:
     resource: backend/product_association_type.yml
+
+app_backend_product_list:
+    resource: backend/product_list.yml
+
+sylius_backend_product_review:
+    resource: backend/product_review.yml
 
 sylius_backend_product_variant:
     resource: backend/product_variant.yml
@@ -50,8 +56,17 @@ app_backend_dealer:
 app_backend_dealer_price:
     resource: backend/dealer_price.yml
 
+app_backend_game_play:
+    resource: backend/game_play.yml
+
+app_backend_not_found_page:
+    resource: backend/not_found_page.yml
+
 app_backend_post:
     resource: backend/post.yml
+
+app_backend_redirection:
+    resource: backend/redirection.yml
 
 sylius_backend_static_content:
     resource: "backend/static_content.yml"
@@ -61,3 +76,6 @@ app_backend_string_block:
 
 app_backend_topic:
     resource: backend/topic.yml
+
+sylius_admin_user:
+    resource: backend/user.yml

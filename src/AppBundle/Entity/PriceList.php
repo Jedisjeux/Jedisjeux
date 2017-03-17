@@ -46,6 +46,20 @@ class PriceList implements ResourceInterface
     protected $headers = false;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $delimiter = ';';
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean", name="is_utf8")
+     */
+    protected $utf8 = true;
+
+    /**
      * @var boolean
      *
      * @ORM\Column(type="boolean")
@@ -108,6 +122,46 @@ class PriceList implements ResourceInterface
     public function setHeaders($headers)
     {
         $this->headers = $headers;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDelimiter(): string
+    {
+        return $this->delimiter;
+    }
+
+    /**
+     * @param string $delimiter
+     *
+     * @return $this
+     */
+    public function setDelimiter($delimiter)
+    {
+        $this->delimiter = $delimiter;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isUtf8()
+    {
+        return $this->utf8;
+    }
+
+    /**
+     * @param bool $utf8
+     *
+     * @return $this
+     */
+    public function setUtf8($utf8)
+    {
+        $this->utf8 = $utf8;
 
         return $this;
     }

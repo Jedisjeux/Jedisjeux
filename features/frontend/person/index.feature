@@ -5,7 +5,10 @@ Feature: View list of people
   I need to be able to view all the people
 
   Background:
-    Given there are people:
+    Given there are root taxons:
+      | code  | name  |
+      | zones | Zones |
+    And there are people:
       | first_name | last_name |
       | Reiner     | Knizia    |
       | Martin     | Wallace   |

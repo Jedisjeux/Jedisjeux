@@ -13,10 +13,15 @@ Feature: Remove people
       | Reiner     | Knizia    |
     And I am logged in as user "admin@example.com" with password "password"
 
-  @javascript
   Scenario: Remove a person
     Given I am on "/admin/people/"
     When I press "Supprimer"
+    Then I should see "a bien été supprimée"
+
+  @javascript
+  Scenario: Remove a person with modal
+    Given I am on "/admin/people/"
+    When I press "Supprimer"
     And I wait until modal is visible
-    And I follow "Supprimer"
-    Then I should see "a bien été supprimé"
+    And I press confirm button
+    Then I should see "a bien été supprimée"

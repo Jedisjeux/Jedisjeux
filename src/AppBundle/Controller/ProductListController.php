@@ -110,6 +110,7 @@ class ProductListController extends ResourceController
         }
 
         $list->removeItem($item);
+        $this->manager->remove($item);
         $this->manager->flush();
 
         if (!$configuration->isHtmlRequest()) {

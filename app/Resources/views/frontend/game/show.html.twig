@@ -6,26 +6,26 @@
 {% set jeu = product is defined ? product : jeu %}
 
 {% block headline %}
-    {{ jeu }}
+    {{ product }}
 {% endblock headline %}
 
 {% block subtitle_container %}
     {% if product.averageRating %}
-        <span class="fa fa-star yellow"></span> {{ product.averageRating|round(1) }}
+        &nbsp;&nbsp;<span class="fa fa-star yellow"></span> {{ product.averageRating|round(1) }} <small>/10</small>
     {% endif %}
 {% endblock %}
 
 {% block breadcrumb_content %}
-    <a href="{{ path('sylius_product_index') }}">Jeux</a>
-    / {{ jeu }}
+    <a href="{{ path('sylius_product_index') }}">{{ 'sylius.ui.products'|trans }}</a>
+    / {{ product }}
 {% endblock %}
 
 {% block container %}
 
     <div class="col-md-8">
-        {% include "frontend/game/show/header.html.twig" with {'jeu': jeu} %}
+        {% include "frontend/game/show/header.html.twig" with {'jeu': product} %}
 
-        {% include "frontend/game/show/nav-tab.html.twig" with {'jeu': jeu} %}
+        {% include "frontend/game/show/nav-tab.html.twig" with {'jeu': product} %}
 
         {% render(url('app_partial_dealer_price_index', {
             template: 'frontend/dealer_price/_index.html.twig',
@@ -41,7 +41,7 @@
     </div>
 
     <div class="col-md-4">
-        {% include "frontend/game/show/sidebar.html.twig" with {'jeu': jeu} %}
+        {% include "frontend/game/show/sidebar.html.twig" with {'jeu': product} %}
     </div>
 
 

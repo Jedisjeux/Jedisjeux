@@ -2,6 +2,10 @@
 
 {% block title %}Jedisjeux | {% endblock %}
 
+{% block metatags %}
+    {% include '_favicon.html.twig' %}
+{% endblock %}
+
 {% block stylesheets %}
     {% include 'SyliusUiBundle::_stylesheets.html.twig' with {'path': 'assets/backend/compiled/css/style.css'} %}
 {% endblock %}

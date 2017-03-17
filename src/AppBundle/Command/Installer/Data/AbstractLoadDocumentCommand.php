@@ -11,6 +11,7 @@
 
 namespace AppBundle\Command\Installer\Data;
 
+use AppBundle\Document\ArticleContent;
 use AppBundle\Document\ImagineBlock;
 use AppBundle\Document\SingleImageBlock;
 use AppBundle\Entity\Article;
@@ -30,6 +31,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ContainerBlock;
+use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SlideshowBlock;
 use Symfony\Cmf\Bundle\MediaBundle\Doctrine\Phpcr\Image;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -84,14 +86,25 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param ContainerBlock $parent
+     * @param ArticleContent $parent
      * @param array $blocks
      */
-    protected function populateBlocks(ContainerBlock $parent, array $blocks)
+    protected function populateBlocks(ArticleContent $parent, array $blocks, SlideshowBlock $slideshowBlock = null)
     {
         foreach ($blocks as $data) {
+            if (null !== $slideshowBlock && isset($data['image'])) {
+                $block = $this->createOrReplaceBlock($slideshowBlock, $data);
+                $this->createOrReplaceImagineBlock($block, $data);
+                $slideshowBlock->addChild($block);
+                continue;
+            }
+
             $block = $this->createOrReplaceBlock($parent, $data);
-            $parent->addChild($block);
+            $parent->addBlock($block);
+
+            // to fix block order
+            $this->getDocumentManager()->flush($parent);
+
             if (isset($data['image'])) {
                 $this->createOrReplaceImagineBlock($block, $data);
             }
@@ -118,7 +131,7 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
                 $alias = 'right_image_block';
                 break;
             case SingleImageBlock::POSITION_TOP:
-                $alias = 'top_image_block';
+                $alias = $data['class'] === 'well' ? 'well_image_block' : 'top_image_block';
                 break;
             default:
                 $alias = 'single_image_block';
@@ -172,25 +185,24 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
      */
     protected function createOrReplaceImagineBlock(SingleImageBlock $block, array $data)
     {
-        $name = 'image' . $data['id'];
+        if (null === $data['image'] || empty($data['image'])) {
+            return null;
+        }
 
-        if (false === $block->hasChildren()) {
+        $originalPath = $this->getImageOriginalPath($data['image']);
+
+        if (null === $imagineBlock = $block->getImagineBlock()) {
             /** @var ImagineBlock $imagineBlock */
             $imagineBlock = $this->getContainer()->get('app.factory.imagine_block')->createNew();
             $block
-                ->addChild($imagineBlock);
-        } else {
-            /** @var ImagineBlock $imagineBlock */
-            $imagineBlock = $block->getChildren()->first();
+                ->setImagineBlock($imagineBlock);
         }
 
         $image = new Image();
-        $image->setFileContent(file_get_contents($this->getImageOriginalPath($data['image'])));
+        $image->setFileContent(file_get_contents($originalPath));
         $image->setName($data['image']);
 
         $imagineBlock
-            ->setName($name)
-            ->setParentDocument($block)
             ->setImage($image)
             ->setLabel($data['image_label']);
 
@@ -282,7 +294,7 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return Bbcode2Html
+     * @return Bbcode2Html|object
      */
     protected function getBbcode2Html()
     {
@@ -290,7 +302,7 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return DocumentRepository
+     * @return DocumentRepository|object
      */
     protected function getSingleImageBlockRepository()
     {
@@ -298,7 +310,7 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return Factory
+     * @return Factory|object
      */
     public function getDocumentFactory()
     {
@@ -306,7 +318,7 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return Factory
+     * @return Factory|object
      */
     public function getFactory()
     {
@@ -314,7 +326,7 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return TaxonRepository
+     * @return TaxonRepository|object
      */
     public function getTaxonRepository()
     {
@@ -322,7 +334,7 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return EntityRepository
+     * @return EntityRepository|object
      */
     public function getRepository()
     {
@@ -330,7 +342,7 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return DocumentRepository
+     * @return DocumentRepository|object
      */
     public function getDocumentRepository()
     {
@@ -338,7 +350,7 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return EntityManager
+     * @return EntityManager|object
      */
     public function getManager()
     {
@@ -346,7 +358,7 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return DocumentManager
+     * @return DocumentManager|object
      */
     public function getDocumentManager()
     {
@@ -354,7 +366,7 @@ abstract class AbstractLoadDocumentCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return \Doctrine\DBAL\Connection
+     * @return \Doctrine\DBAL\Connection|object
      */
     protected function getDatabaseConnection()
     {

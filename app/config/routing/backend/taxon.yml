@@ -4,10 +4,9 @@ sylius_backend_taxon_index:
     defaults:
         _controller: sylius.controller.taxon:indexAction
         _sylius:
-            template: backend/taxon/index.html.twig
-            paginate: false
-            repository:
-                method: findRootNodes
+            template: backend/crud/index.html.twig
+            section: backend
+            grid: sylius_backend_root_taxon
 
 sylius_backend_taxon_index_by_root:
     path: /index-by-root/{rootCode}/
@@ -15,12 +14,9 @@ sylius_backend_taxon_index_by_root:
     defaults:
         _controller: sylius.controller.taxon:indexAction
         _sylius:
-            template: backend/taxon/indexByRoot.html.twig
-            paginate: false
-            repository:
-                method: findChildrenByRootCode
-                arguments:
-                    - $rootCode
+            template: backend/crud/index.html.twig
+            section: backend
+            grid: sylius_backend_taxon_from_root
 
 sylius_backend_taxon_create:
     path: /new
@@ -28,7 +24,8 @@ sylius_backend_taxon_create:
     defaults:
         _controller: sylius.controller.taxon:createAction
         _sylius:
-            template: backend/taxon/create.html.twig
+            section: backend
+            template: backend/crud/create.html.twig
             redirect: sylius_backend_taxon_index
 
 sylius_backend_taxon_update:
@@ -37,7 +34,8 @@ sylius_backend_taxon_update:
     defaults:
         _controller: sylius.controller.taxon:updateAction
         _sylius:
-            template: backend/taxon/update.html.twig
+            section: backend
+            template: backend/crud/update.html.twig
             redirect: sylius_backend_taxon_index
 
 sylius_backend_taxon_delete:

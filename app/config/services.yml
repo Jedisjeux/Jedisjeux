@@ -13,4 +13,5 @@ imports:
     - { resource: services/subscriber.yml }
     - { resource: services/text_filter.yml }
     - { resource: services/updater.yml }
+    - { resource: services/validator.yml }
     - { resource: services/view.yml }

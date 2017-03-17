@@ -83,10 +83,21 @@ class NotificationFactory implements FactoryInterface
         /** @var Notification $notification */
         $notification = $this->createForCustomer($customer);
 
+        $topic = $post->getTopic();
+
+        if (null !== $article = $topic->getArticle()) {
+            $targetPath = $this->router->generate('app_frontend_article_show', ['slug' => $article->getSlug()]);
+        } elseif (null !== $gamePlay = $topic->getGamePlay()) {
+            $targetPath = $this->router->generate('app_frontend_game_play_show', ['productSlug' => $gamePlay->getProduct()->getSlug(), 'id' => $gamePlay->getId()]);
+        } else {
+            $targetPath = $this->router->generate('app_frontend_post_index_by_topic', ['topicId' => $post->getTopic()->getId()]);
+        }
+
+
         /** TODO only set topic and move target and message in a post notification manager */
         $notification
             ->setTopic($post->getTopic())
-            ->setTarget($this->router->generate('app_post_index_by_topic', ['topicId' => $post->getTopic()->getId()]))
+            ->setTarget($targetPath)
             ->setMessage($this->translator->trans('text.notification.topic_reply', [
                 '%USERNAME%' => $post->getAuthor(),
                 '%TOPIC_NAME%' => $post->getTopic()->getTitle(),

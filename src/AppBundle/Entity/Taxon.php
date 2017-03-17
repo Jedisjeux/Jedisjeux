@@ -112,7 +112,7 @@ class Taxon extends BaseTaxon
      *
      * @JMS\VirtualProperty
      * @JMS\SerializedName("permalink")
-     * @JMS\Groups({"Details"})
+     * @JMS\Groups({"Detailed"})
      */
     public function getPermalink()
     {
@@ -124,7 +124,7 @@ class Taxon extends BaseTaxon
      *
      * @JMS\VirtualProperty
      * @JMS\SerializedName("name")
-     * @JMS\Groups({"Details"})
+     * @JMS\Groups({"Detailed"})
      */
     public function getName()
     {

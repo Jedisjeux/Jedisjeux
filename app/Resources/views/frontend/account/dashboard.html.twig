@@ -31,7 +31,7 @@
             <div class="col-sm-12">
                 <div class="btn-group">
                     {{ buttons.btn(path('sylius_frontend_account_profile_update'), 'sylius.ui.edit', null, 'pencil') }}
-                    {{ buttons.btn(path('sylius_frontend_account_profile_update'), 'sylius.ui.change_password', null, 'lock') }}
+                    {{ buttons.btn(path('sylius_frontend_account_change_password'), 'sylius.ui.change_password', null, 'lock') }}
                 </div>
             </div>
         </div>
@@ -56,9 +56,9 @@
                             <div class="col-md-3 col-sm-6">
                                 <!-- Icon Box One Item -->
                                 <div class="icon-box-1-item">
-                                    <a href="#"><i class="fa fa-play lblue"></i></a>
-                                    <h4><a href="#">{{ 'app.ui.my_game_plays'|trans }}</a></h4>
-                                    <p>Gérer vos parties de jeux.</p>
+                                    <a href="{{ path('app_frontend_account_game_play_index') }}"><i class="fa fa-play lblue"></i></a>
+                                    <h4><a href="{{ path('app_frontend_account_game_play_index') }}">{{ 'app.ui.my_game_plays'|trans }}</a></h4>
+                                    <p>Gérer vos parties de jeu.</p>
                                 </div>
                             </div>
                         </div>

@@ -99,7 +99,10 @@ EOT
                 ->setDealer($dealer)
                 ->setActive($data['priceList']['active'])
                 ->setPath($data['priceList']['path'])
-                ->setHeaders($data['priceList']['headers']);
+                ->setHeaders($data['priceList']['headers'])
+                ->setDelimiter($data['priceList']['delimiter'] ?? ';')
+                ->setUtf8($data['priceList']['utf8'] ?? true);
+
 
             $dealer->setPriceList($priceList);
         }
@@ -125,6 +128,11 @@ EOT
                 'code' => 'esprit-jeu',
                 'name' => 'Esprit Jeu',
                 'image' => __DIR__ . '/../../../../../web/assets/frontend/img/Logo-Esprit-Jeu-HD.png',
+                'priceList' => [
+                    'active' => true,
+                    'path' => 'http://www.espritjeu.com/dhtml/fluxComparateur.php?w=2&c=016ab62aea63a0eaa98ce3aebee5ed39&t=csv',
+                    'headers' => true,
+                ]
             ],
             [
                 'code' => 'fungames',
@@ -144,21 +152,38 @@ EOT
                 'code' => 'ludomus',
                 'name' => 'Ludomus',
                 'image' => 'https://geodorthophonie.files.wordpress.com/2015/09/ludomus.jpg',
+                'priceList' => [
+                    'active' => true,
+                    'path' => 'http://www.ludomus.com/export/jedisjeux-export-tarif.csv',
+                    'headers' => true,
+                    'utf8' => false,
+                ]
             ],
             [
                 'code' => 'philibert',
                 'name' => 'Philibert',
                 'image' => 'http://ulule.me/presales/0/6/6/9660/philibert_jpg_640x860_q85.jpg',
-                'priceList' => [
-                    'active' => true,
-                    'path' => 'philibert.csv',
-                    'headers' => false,
-                ],
+//                'priceList' => [
+//                    'active' => true,
+//                    'path' => 'philibert.csv',
+//                    'headers' => false,
+//                ],
             ],
             [
                 'code' => 'sur-la-route-du-jeu',
                 'name' => 'Sur La Route Du Jeu',
             ],
+            [
+                'code' => 'jeux-en-boite',
+                'name' => 'Jeux en boite',
+                'priceList' => [
+                    'active' => true,
+                    'path' => 'http://www.jeuxenboite.be/presta/jedisjeux-export-tarifs.csv',
+                    'headers' => false,
+                    'delimiter' => ',',
+                    'utf8' => false,
+                ]
+            ]
 
         ];
     }

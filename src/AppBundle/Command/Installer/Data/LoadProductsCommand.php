@@ -12,9 +12,8 @@ use AppBundle\Entity\Product;
 use AppBundle\Entity\ProductVariant;
 use AppBundle\Entity\Taxon;
 use AppBundle\Repository\TaxonRepository;
+use AppBundle\TextFilter\Bbcode2Html;
 use AppBundle\Updater\ProductCountByTaxonUpdater;
-use AppBundle\Updater\TopicCountByTaxonUpdater;
-use Behat\Transliterator\Transliterator;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Association\Model\AssociationType;
@@ -88,7 +87,6 @@ class LoadProductsCommand extends ContainerAwareCommand
         $this->deleteProductAssociations();
         $this->insertProductsOfCollections($associationTypeCollection);
         $this->insertProductsOfExpansions($associationTypeExpansion);
-        $this->calculateProductCountByTaxons();
     }
 
     protected function createOrReplaceAssociationTypeCollection()
@@ -132,29 +130,41 @@ class LoadProductsCommand extends ContainerAwareCommand
 
     /**
      * @param array $data
-     * 
+     *
      * @return Product
      */
     protected function createOrReplaceProduct(array $data)
     {
         /** @var ProductVariant $productVariant */
         $productVariant = $this->getProductVariantRepository()->findOneBy(['code' => $data['code']]);
+        /** @var Product $product */
         $product = null !== $productVariant ? $productVariant->getProduct() : null;
 
         if (null === $product) {
             $product = $this->getFactory()->createWithVariant();
         }
 
-        $data['shortDescription'] = !empty($data['shortDescription']) ? $this->getHTMLFromText($data['shortDescription']) : null;
-        $data['description'] = !empty($data['description']) ? $this->getHTMLFromText($data['description']) : null;
+        $bbcode2html = $this->getBbcode2Html();
+
+        $shortDescription = $data['shortDescription'] ?: null;
+        $shortDescription = $bbcode2html
+            ->setBody($shortDescription)
+            ->getFilteredBody();
+
+        $description = $data['description'] ?: null;
+        $description = $bbcode2html
+            ->setBody($description)
+            ->getFilteredBody();
+
         $data['joueurMin'] = !empty($data['joueurMin']) ? $data['joueurMin'] : null;
         $data['joueurMax'] = !empty($data['joueurMax']) ? $data['joueurMax'] : null;
         $data['ageMin'] = !empty($data['ageMin']) ? $data['ageMin'] : null;
         $data['materiel'] = !empty($data['materiel']) ? trim($data['materiel']) : null;
         $data['createdAt'] = \DateTime::createFromFormat('Y-m-d H:i:s', $data['createdAt']);
         $data['updatedAt'] = \DateTime::createFromFormat('Y-m-d H:i:s', $data['updatedAt']);
+        $product->getFirstVariant()->setOldHref(!empty($data['href']) ? $data['href'] : null);
         $data['releasedAt'] = $data['releasedAt'] ? \DateTime::createFromFormat('Y-m-d', $data['releasedAt']) : null;
-        $product->getMasterVariant()->setReleasedAtPrecision($this->getReleasedAtPrecision($data));
+        $product->getFirstVariant()->setReleasedAtPrecision($this->getReleasedAtPrecision($data));
         if (null !== $data['releasedAt']) {
             if (ProductVariant::RELEASED_AT_PRECISION_ON_MONTH === $product->getMasterVariant()->getReleasedAtPrecision()) {
                 $data['releasedAt'] = $data['releasedAt']->add(new \DateInterval('P1D'));
@@ -183,13 +193,14 @@ class LoadProductsCommand extends ContainerAwareCommand
 
         $product->setName(trim($data['name']));
         $product->setSlug(null); // enforce slug to be updated
-        $product->setDescription(trim($data['description']));
+        $product->setDescription(trim($description));
         $product->setCreatedAt($data['createdAt']);
         $product->setUpdatedAt($data['updatedAt']);
         $product->setReleasedAt($data['releasedAt']);
+
         $product
             ->setCode($data['code'])
-            ->setShortDescription(trim($data['shortDescription']))
+            ->setShortDescription(trim($shortDescription))
             ->setAgeMin($data['ageMin'])
             ->setJoueurMin($data['joueurMin'])
             ->setJoueurMax($data['joueurMax'])
@@ -221,28 +232,6 @@ class LoadProductsCommand extends ContainerAwareCommand
         return null;
     }
 
-    protected function calculateProductCountByTaxons()
-    {
-        $this->calculateProductCountByTaxonCode(Taxon::CODE_MECHANISM);
-        $this->calculateProductCountByTaxonCode(Taxon::CODE_THEME);
-        $this->calculateProductCountByTaxonCode(Taxon::CODE_TARGET_AUDIENCE);
-    }
-
-    /**
-     * @param $rootCode
-     */
-    protected function calculateProductCountByTaxonCode($rootCode)
-    {
-        $taxons = $this->getTaxonRepository()->findChildrenByRootCode($rootCode);
-
-        foreach ($taxons as $taxon) {
-            $this->getProductCountByTaxonUpdater()->update($taxon);
-            $this->getManager()->flush();
-        }
-
-        $this->getManager()->clear();
-    }
-
     protected function deleteProductAssociations()
     {
         /** @var EntityRepository $repository */
@@ -257,7 +246,7 @@ class LoadProductsCommand extends ContainerAwareCommand
 
     /**
      * @param AssociationType $associationType
-     * 
+     *
      * @throws \Doctrine\DBAL\DBALException
      */
     protected function insertProductsOfCollections(AssociationType $associationType)
@@ -279,7 +268,7 @@ and exists (
 )
 EOM;
 
-        $this->getDatabaseConnection()->executeQuery($query, ['association_type_id' => $associationType->getId()]);
+        $this->getManager()->getConnection()->executeQuery($query, ['association_type_id' => $associationType->getId()]);
 
         $query = <<<EOM
 insert into sylius_product_association_product(association_id, product_id)
@@ -300,13 +289,13 @@ and (oldAssociated.id_pere is null or oldAssociated.type_diff = 'collection')
 and old.id <> oldAssociated.id
 EOM;
 
-        $this->getDatabaseConnection()->executeQuery($query, ['association_type_id' => $associationType->getId()]);
+        $this->getManager()->getConnection()->executeQuery($query, ['association_type_id' => $associationType->getId()]);
 
     }
 
     /**
      * @param AssociationType $assocationType
-     * 
+     *
      * @throws \Doctrine\DBAL\DBALException
      */
     protected function insertProductsOfExpansions(AssociationType $assocationType)
@@ -322,7 +311,7 @@ from   jedisjeux.jdj_game old
 where type_diff = 'extension'
 EOM;
 
-        $this->getDatabaseConnection()->executeQuery($query, ['association_type_id' => $assocationType->getId()]);
+        $this->getManager()->getConnection()->executeQuery($query, ['association_type_id' => $assocationType->getId()]);
 
         $query = <<<EOM
 insert into sylius_product_association_product(association_id, product_id)
@@ -339,7 +328,7 @@ and       association.association_type_id = :association_type_id
 and       old.type_diff = 'extension'
 EOM;
 
-        $this->getDatabaseConnection()->executeQuery($query, ['association_type_id' => $assocationType->getId()]);
+        $this->getManager()->getConnection()->executeQuery($query, ['association_type_id' => $assocationType->getId()]);
 
     }
 
@@ -359,6 +348,7 @@ EOM;
 
         $productVariant->setCode($data['code']);
         $productVariant->setName($data['name']);
+        $productVariant->setOldHref(!empty($data['href']) ? $data['href'] : null);
         $productVariant->setCreatedAt(\DateTime::createFromFormat('Y-m-d H:i:s', $data['createdAt']));
         $productVariant->setReleasedAt($data['releasedAt'] ? \DateTime::createFromFormat('Y-m-d', $data['releasedAt']) : null);
         $productVariant->setReleasedAtPrecision($this->getReleasedAtPrecision($data));
@@ -376,27 +366,30 @@ EOM;
     public function getRows()
     {
         $query = <<<EOM
-select      concat('game-', old.id) as code,
-            old.nom as name,
-            old.min as joueurMin,
-            old.max as joueurMax,
-            old.age_min as ageMin,
-            old.intro as shortDescription,
-            old.presentation as description,
-            old.duree as durationMin,
-            old.duree as durationMax,
-            old.materiel as materiel,
-            old.valid as status,
-            old.date as createdAt,
-            old.date as updatedAt,
-            old.date_sortie as releasedAt,
-            old.precis_sortie as releasedAtPrecision
-from        jedisjeux.jdj_game old
-where       old.valid in (0, 1, 2, 5, 3)
-and         (old.id_pere is null or type_diff in ('extension', 'collection'))
-and         old.nom <> ""
+SELECT
+  concat('game-', old.id) AS code,
+  old.nom                 AS name,
+  old.min                 AS joueurMin,
+  old.max                 AS joueurMax,
+  old.age_min             AS ageMin,
+  old.intro               AS shortDescription,
+  old.presentation        AS description,
+  old.duree               AS durationMin,
+  old.duree               AS durationMax,
+  old.materiel            AS materiel,
+  old.valid               AS status,
+  old.date                AS createdAt,
+  old.date                AS updatedAt,
+  old.date_sortie         AS releasedAt,
+  old.precis_sortie       AS releasedAtPrecision,
+  old.href                AS href
+FROM jedisjeux.jdj_game old
+WHERE old.valid IN (0, 1, 2, 5, 3)
+      AND (old.id_pere IS NULL OR type_diff IN ('extension', 'collection'))
+      AND old.nom <> ""
 EOM;
-        return $this->getDatabaseConnection()->fetchAll($query);
+
+        return $this->getManager()->getConnection()->fetchAll($query);
     }
 
     /**
@@ -405,85 +398,46 @@ EOM;
     private function getVariants()
     {
         $query = <<<EOM
-select      concat('game-', old.id) as code,
-            concat('game-', old.id_pere ) as parent_code,
-            old.nom as name,
-            old.min as joueurMin,
-            old.max as joueurMax,
-            old.age_min as ageMin,
-            old.intro as shortDescription,
-            old.presentation as description,
-            old.duree as durationMin,
-            old.duree as durationMax,
-            old.materiel as materiel,
-            old.valid as status,
-            old.date as createdAt,
-            old.date as updatedAt,
-            old.date_sortie as releasedAt,
-            old.precis_sortie as releasedAtPrecision
-from        jedisjeux.jdj_game old
-where       old.valid in (0, 1, 2, 5, 3)
-            and         old.id_pere is not null
-            and         old.nom <> ""
-            and type_diff in ('regle', 'materiel')
+SELECT
+  concat('game-', old.id)      AS code,
+  concat('game-', old.id_pere) AS parent_code,
+  old.nom                      AS name,
+  old.min                      AS joueurMin,
+  old.max                      AS joueurMax,
+  old.age_min                  AS ageMin,
+  old.intro                    AS shortDescription,
+  old.presentation             AS description,
+  old.duree                    AS durationMin,
+  old.duree                    AS durationMax,
+  old.materiel                 AS materiel,
+  old.valid                    AS status,
+  old.date                     AS createdAt,
+  old.date                     AS updatedAt,
+  old.date_sortie              AS releasedAt,
+  old.precis_sortie            AS releasedAtPrecision,
+  old.href                     AS href
+FROM jedisjeux.jdj_game old
+WHERE old.valid IN (0, 1, 2, 5, 3)
+      AND old.id_pere IS NOT NULL
+      AND old.nom <> ""
+      AND type_diff IN ('regle', 'materiel')
+
 EOM;
 
-        return $this->getDatabaseConnection()->fetchAll($query);
+        return $this->getManager()->getConnection()->fetchAll($query);
 
-    }
-
-    private function getHTMLFromText($text)
-    {
-        $text = trim($text);
-
-        /**
-         * Turn Double carryage returns into <p>
-         */
-        $text = "<p>" . preg_replace("/\\n(\\r)?\n/", "</p><p>", $text) . "</p>";
-
-        /**
-         * Turn Simple carryage returns into <br />
-         */
-        $text = "<p>" . preg_replace("/\\n/", "<br />", $text) . "</p>";
-
-        $text = $this->cleanBBCode($text);
-
-        $text = preg_replace("/\<(b|strong)\>/", '</p><h4>', $text);
-        $text = preg_replace("/\<\/(b|strong)\>/", '</h4><p>', $text);
-
-        $text = preg_replace("/\<p\>( |\n|\r)*\<br \/>/", '<p>', $text);
-        $text = preg_replace("/\<p\>( )*\<\/p\>/", '', $text);
-
-        $text = preg_replace("/\<p\><p\>/", '<p>', $text);
-        return $text;
-    }
-
-    private function cleanBBCode($text)
-    {
-        $text = preg_replace("/\[(b):[0-9a-z]+\]/", '</p><h4>', $text);
-        $text = preg_replace("/\[(\/)?(b):[0-9a-z]+\]/", '</h4><p>', $text);
-        $text = preg_replace("/\[(\/)?(i):[0-9a-z]+\]/", '<${1}i>', $text);
-        return $text;
     }
 
     /**
-     * @return ProductCountByTaxonUpdater
+     * @return Bbcode2Html|object
      */
-    protected function getProductCountByTaxonUpdater()
+    protected function getBbcode2Html()
     {
-        return $this->getContainer()->get('app.updater.product_count_by_taxon');
+        return $this->getContainer()->get('app.text.filter.bbcode2html');
     }
 
     /**
-     * @return \Doctrine\DBAL\Connection
-     */
-    protected function getDatabaseConnection()
-    {
-        return $this->getContainer()->get('database_connection');
-    }
-
-    /**
-     * @return ProductFactory
+     * @return ProductFactory|object
      */
     protected function getFactory()
     {
@@ -491,7 +445,7 @@ EOM;
     }
 
     /**
-     * @return Factory
+     * @return Factory|object
      */
     protected function getProductVariantFactory()
     {
@@ -499,7 +453,7 @@ EOM;
     }
 
     /**
-     * @return EntityRepository
+     * @return EntityRepository|object
      */
     protected function getRepository()
     {
@@ -507,7 +461,7 @@ EOM;
     }
 
     /**
-     * @return EntityRepository
+     * @return EntityRepository|object
      */
     protected function getProductVariantRepository()
     {
@@ -515,7 +469,7 @@ EOM;
     }
 
     /**
-     * @return TaxonRepository
+     * @return TaxonRepository|object
      */
     protected function getTaxonRepository()
     {
@@ -523,7 +477,7 @@ EOM;
     }
 
     /**
-     * @return EntityManager
+     * @return EntityManager|object
      */
     protected function getManager()
     {

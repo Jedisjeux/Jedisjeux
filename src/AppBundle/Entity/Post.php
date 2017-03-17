@@ -54,9 +54,23 @@ class Post implements ResourceInterface
     /**
      * @var Topic
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Topic", inversedBy="posts")
+     * @ORM\ManyToOne(targetEntity="Topic", inversedBy="posts")
      */
     protected $topic;
+
+    /**
+     * @var GamePlay
+     *
+     * @ORM\ManyToOne(targetEntity="GamePlay")
+     */
+    protected $gamePlay;
+
+    /**
+     * @var Article
+     *
+     * @ORM\ManyToOne(targetEntity="Article")
+     */
+    protected $article;
 
     /**
      * @var CustomerInterface
@@ -163,6 +177,46 @@ class Post implements ResourceInterface
     public function setTopic($topic)
     {
         $this->topic = $topic;
+
+        return $this;
+    }
+
+    /**
+     * @return GamePlay
+     */
+    public function getGamePlay()
+    {
+        return $this->gamePlay;
+    }
+
+    /**
+     * @param GamePlay $gamePlay
+     *
+     * @return $this
+     */
+    public function setGamePlay($gamePlay)
+    {
+        $this->gamePlay = $gamePlay;
+
+        return $this;
+    }
+
+    /**
+     * @return Article
+     */
+    public function getArticle()
+    {
+        return $this->article;
+    }
+
+    /**
+     * @param Article $article
+     *
+     * @return Post
+     */
+    public function setArticle(Article $article = null)
+    {
+        $this->article = $article;
 
         return $this;
     }

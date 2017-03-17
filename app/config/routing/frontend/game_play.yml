@@ -1,24 +1,45 @@
-app_game_play_create:
+app_frontend_game_play_post:
+    resource: game_play/post.yml
+
+app_frontend_game_play_create:
     methods: [GET, POST]
     path: /jeu-de-societe/{productSlug}/parties/new
     defaults:
         _controller: app.controller.game_play:createAction
         _sylius:
             template: frontend/game_play/create.html.twig
+            section: frontend
             factory:
                 method: createForProduct
                 arguments: [$productSlug]
             redirect:
-                route: app_game_play_show
+                route: app_frontend_game_play_show
                 parameters: { productSlug: $productSlug, id: resource.id }
 
-app_game_play_show:
+app_frontend_game_play_update:
+    methods: [GET, PUT]
+    path: /jeu-de-societe/{productSlug}/parties/{id}/edit
+    defaults:
+        _controller: app.controller.game_play:updateAction
+        _sylius:
+            template: frontend/game_play/update.html.twig
+            section: frontend
+            repository:
+                method: findOneBy
+                arguments: [{id: $id, author: expr:service('app.context.customer').getCustomer()}]
+            redirect:
+                route: app_frontend_game_play_show
+                parameters: { productSlug: $productSlug, id: resource.id }
+
+
+app_frontend_game_play_show:
     methods: [GET, POST]
     path: /jeu-de-societe/{productSlug}/parties/{id}
     defaults:
         _controller: app.controller.game_play:showAction
         _sylius:
             template: frontend/game_play/show.html.twig
+            section: frontend
 
 
 app_frontend_game_play_index:
@@ -28,13 +49,15 @@ app_frontend_game_play_index:
         _controller: app.controller.game_play:indexAction
         _sylius:
             template: frontend/game_play/index.html.twig
+            section: frontend
             paginate: 12
             grid: app_frontend_game_play
 
-app_game_play:
+app_frontend_game_play:
     resource: |
         alias: app.game_play
         path: /parties
+        section: frontend
         templates: :frontend/game_play
         redirect: index
         only: [delete]

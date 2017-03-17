@@ -8,6 +8,9 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Article;
+use AppBundle\Entity\GamePlay;
+use AppBundle\Entity\Topic;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
@@ -186,5 +189,37 @@ class TopicRepository extends EntityRepository
             ->setParameter('right', $taxon->getRight());
 
         return $queryBuilder->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @param GamePlay $gamePlay
+     *
+     * @return Topic|null
+     */
+    public function findOneByGamePlay(GamePlay $gamePlay)
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder
+            ->join('o.gamePlay', 'gamePlay')
+            ->where('gamePlay = :gamePlay')
+            ->setParameter('gamePlay', $gamePlay);
+
+        return $queryBuilder->getQuery()->getOneOrNullResult();
+    }
+
+    /**
+     * @param Article $article
+     *
+     * @return Topic|null
+     */
+    public function findOneByArticle(Article $article)
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder
+            ->join('o.article', 'article')
+            ->where('article = :article')
+            ->setParameter('article', $article);
+
+        return $queryBuilder->getQuery()->getOneOrNullResult();
     }
 }

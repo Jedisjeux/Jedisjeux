@@ -2,6 +2,7 @@ app:
     ui:
         administration: Administration
         added_at: Date d'ajout
+        article: Article
         articles: Articles
         article_details: Détails de l'article
         article_settings: Configuration de l'article
@@ -19,49 +20,84 @@ app:
         dealer: Vendeur
         dealers: Vendeurs
         dealer_prices: Tarifs des vendeurs
+        destination: Destination
         edit_article: Modifier l'article
         edit_dealer: Modifier le vendeur
+        edit_game_play: Modifier la partie de jeu
         edit_person: Modifier la personne
         edit_post: Modifier le message
+        edit_product_list: Modifier la liste de jeu
+        edit_redirection: Modifier la redirection
         edit_string_block: Modifer le bloc de chaîne
         edit_topic: Modifier le sujet
+        errors: Erreurs
         forum: Forum
         framed: Encadré
+        game: Jeu
+        game_details: Informations du jeu
         game_library: Ludothèque
+        game_plays: Parties de jeu
+        game_play_details: Informations de la partie
+        image_legend: Légende de l'image
         image_on_the_left_side: Image à gauche
         image_on_the_right_side: Image à droite
         image_on_the_top_side: Image en haut
+        image_position: Position de l'image
         internal_name: Nom interne
         introduction: Introduction
+        last_used_at: Dernière utilisation
         logout: Déconnection
+        main_image: Image principale
         manage_articles: Gérer les articles
         manage_contact_requests: Gérer les demandes de contact
         manage_dealers: Gérer les vendeurs
         manage_dealer_prices: Gérer les tarifs des vendeurs
+        manage_game_plays: Gérer les parties de jeu
+        manage_not_found_pages: Gérer les pages non trouvées
         manage_people: Gérer les personnes
         manage_posts: Gérer les messages
+        manage_product_lists: Gérer les listes de jeu
+        manage_redirections: Gérer les redirections
         manage_string_blocks: Gérer les blocs de chaîne
         manage_topics: Gérer les sujets
-        my_game_lists: Mes listes de jeux
-        my_game_plays: Mes parties de jeux
+        my_game_lists: Mes listes de jeu
+        my_game_plays: Mes parties de jeu
         name: Nom
         new_article: Nouvel article
         new_dealer: Nouveau vendeur
         new_list: Nouvelle liste
         new_person: Nouvelle personne
+        new_redirection: Nouvelle redirection
         new_post: Nouveau message
         new_string_block: Nouveau bloc de chaîne
+        normal: Normal
+        not_found_pages: Pages non trouvées
         overview_of_your_website: Aperçu de votre site web
+        path: Chemin
+        person: Personne
         people: Personnes
+        permanent: Permanent
         posts: Messages
         prices: Tarifs
         price_list: Liste de prix
+        product_lists: Listes de jeu
         pub_banners: Bannières de pub
+        public: Public
         published_at: Publié le
+        redirections: Redirections
+        redirection_count: Nombre de redirections
+        referer: Référent
         request_placeholder: Recherche....
+        results_of_your_query: Résultats de votre recherche
         see_later: A regarder plus tard
+        short_description: Description courte
         show_posts: Voir les messages
+        show_game_sheet: Voir la fiche de jeu
+        show_sub_categories: Voir les sous-catégories
+        slide_show: Carousel
+        source: Source
         string_blocks: Blocs de chaîne
+        style: Style
         topic: Sujet
         topics: Sujets
         view_details: Voir les détails
@@ -74,17 +110,20 @@ sylius:
     ui:
         available: Disponible
         customer: Membre
+        customer_since: Membre depuis le
         customers: Membres
         customer_groups: Groupes
         edit_customer: Modifier le membre
         edit_product: Modifier le jeu
         edit_product_association_type: Modifier le type d'association de jeux
+        edit_product_review: Modifier l'avis de jeu
         filter: Filtrer
         groups: Groupes
+        manage_association_types_of_your_products: Gérer les types d'association de vos jeux
         manage_your_customers: Gérer vos membres
         manage_customer_groups: Gérer les groupes
         manage_products: Gérer les jeux
-        manage_association_types_of_your_products: Gérer les types d'association de vos jeux
+        manage_reviews_of_your_products: Gérer les avis de jeu
         manage_static_contents: Gérer les contenus statiques
         new_customer: Nouveau membre
         new_product: Nouveau jeu
@@ -95,9 +134,12 @@ sylius:
         pending_review: En relecture
         pending_translation: En attente de traduction
         pending_translation_changes: En attente de modifs de trad
+        position: Position
         pre_order: Pré-commande
+        product: Jeu
         products: Jeux
         product_association_types: Types d'association de jeux
+        product_reviews: Avis de jeu
         published: Publié
         search_products: Chercher un jeu
         show: Voir

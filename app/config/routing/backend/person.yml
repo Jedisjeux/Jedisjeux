@@ -8,6 +8,8 @@ admin_person:
         vars:
             all:
                 subheader: app.ui.manage_people
+                templates:
+                    form: backend/person/_form.html.twig
             index:
                 icon: spy
     type: sylius.resource

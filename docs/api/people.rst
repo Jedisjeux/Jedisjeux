@@ -1,10 +1,10 @@
 People API
-============
+==========
 
 People API endpoint is ``/api/people``.
 
 Index of all people
----------------------
+-------------------
 
 To browse all people available you can call the following GET request:
 
@@ -127,7 +127,7 @@ Response will contain a paginated list of people.
     }
 
 Getting a single person
-------------------------
+-----------------------
 
 You can view a single person by executing the following request:
 
