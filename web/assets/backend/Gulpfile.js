@@ -24,7 +24,12 @@ var paths = {
             nodeModulesPath + 'jquery/dist/jquery.min.js',
             nodeModulesPath + 'semantic-ui-css/semantic.min.js',
             nodeModulesPath + 'select2/dist/js/select2.full.js',
-            vendorUiPath + 'Resources/private/js/**',
+            vendorUiPath + 'Resources/private/js/api-login.js',
+            vendorUiPath + 'Resources/private/js/api-toggle.js',
+            vendorUiPath + 'Resources/private/js/app.js',
+            vendorUiPath + 'Resources/private/js/form-collection.js',
+            vendorUiPath + 'Resources/private/js/grid-sorting.js',
+            vendorUiPath + 'Resources/private/js/product-attributes.js',
             bowerComponentsPath + 'select2/dist/js/select2.js',
             'js/**'
         ],
