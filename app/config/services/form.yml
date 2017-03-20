@@ -61,3 +61,18 @@ services:
             - "@sylius.repository.customer"
         tags:
           - { name: form.type, alias: sylius_customer_simple_registration }
+
+    sylius.form.type.sylius_product_associations:
+        class: AppBundle\Form\Type\ProductAssociationsType
+        arguments:
+          - "@sylius.repository.product_association_type"
+          - "@sylius.form.type.data_transformer.products_to_product_associations"
+        tags:
+          - { name: form.type }
+
+    sylius.form.type.data_transformer.products_to_product_associations:
+        class: AppBundle\Form\DataTransformer\ProductsToProductAssociationsTransformer
+        arguments:
+            - "@sylius.factory.product_association"
+            - "@sylius.repository.product"
+            - "@sylius.repository.product_association_type"

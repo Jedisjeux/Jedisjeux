@@ -176,6 +176,7 @@ EOT
             [
                 'code' => 'jeux-en-boite',
                 'name' => 'Jeux en boite',
+                'image' => 'http://www.jeuxenboite.be/presta/img/logo.jpg',
                 'priceList' => [
                     'active' => true,
                     'path' => 'http://www.jeuxenboite.be/presta/jedisjeux-export-tarifs.csv',

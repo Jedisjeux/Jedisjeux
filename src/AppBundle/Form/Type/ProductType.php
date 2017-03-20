@@ -95,7 +95,10 @@ class ProductType extends AbstractResourceType
                     'horizontal_input_wrapper_class' => "col-lg-8",
                     'widget_remove_btn' => array('label' => "label.remove_this_barcode"),
                 )
-            ));
+            ))
+            ->add('associations', ProductAssociationsType::class, [
+                'label' => false,
+            ]);
     }
 
     /**

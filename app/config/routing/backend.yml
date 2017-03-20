@@ -7,6 +7,15 @@ app_backend_dashboard:
         _controller:  FrameworkBundle:Template:template
         template:     'backend/index.html.twig'
 
+app_backend_ajax:
+    resource: backend/ajax.yml
+    prefix: /ajax
+    defaults:
+        _format: json
+
+app_admin_person:
+    resource: backend/person.yml
+
 app_backend_article:
     resource: backend/article.yml
 
