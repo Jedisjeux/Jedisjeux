@@ -1,4 +1,14 @@
 {
+    "id": @integer@,
+    "code": "product_1",
+    "available_on": "@string@.isDateTime()",
+    "attributes": [],
+    "variants": @array@,
+    "options": [],
+    "associations": [],
+    "translations": @array@,
+    "current_locale": "fr",
+    "fallback_locale": "fr",
     "createdAt": "@string@.isDateTime()",
     "short_description": "@string@",
     "mechanisms": [],
@@ -7,5 +17,6 @@
     "slug": "puerto-rico",
     "min_age": 12,
     "min_player_count": 2,
-    "max_player_count": 5
+    "max_player_count": 5,
+    "enabled": true
 }
