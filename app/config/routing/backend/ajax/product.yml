@@ -5,3 +5,4 @@ sylius_admin_ajax_product_index:
         _controller: sylius.controller.product:indexAction
         _sylius:
             grid: sylius_backend_product
+            serialization_groups: [Default]

@@ -12,12 +12,13 @@
                     {% for association in product.associations %}
                         {% if association.type.code == associationForm.vars.name %}
                             {% for associatedProduct in association.associatedProducts %}
-                                <div class="item" data-value="{{ associatedProduct.id }}">{{ associatedProduct.name }}</div>
+                                <div class="item" data-value="{{ associatedProduct.code }}">{{ associatedProduct.name|default(associatedProduct.code) }}</div>
                             {% endfor %}
                         {% endif %}
                     {% endfor %}
                 </div>
             </div>
+            {{ form_errors(associationForm) }}
         </div>
     {% endfor %}
 </div>

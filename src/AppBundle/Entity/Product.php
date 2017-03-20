@@ -838,7 +838,7 @@ class Product extends BaseProduct implements ReviewableInterface
      *
      * @JMS\VirtualProperty
      * @JMS\SerializedName("name")
-     * @JMS\Groups({"Detailed"})
+     * @JMS\Groups({"Default"})
      */
     public function getName()
     {
@@ -850,7 +850,7 @@ class Product extends BaseProduct implements ReviewableInterface
      *
      * @JMS\VirtualProperty
      * @JMS\SerializedName("slug")
-     * @JMS\Groups({"Detailed"})
+     * @JMS\Groups({"Default"})
      */
     public function getSlug()
     {
