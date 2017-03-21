@@ -123,6 +123,12 @@ EOT
             [
                 'code' => 'blue-glaucus',
                 'name' => 'Blue Glaucus',
+                'image' => 'http://www.blueglaucus.com/img/themes/normal/blue_glaucus.png',
+                'priceList' => [
+                    'active' => true,
+                    'path' => 'http://www.blueglaucus.com/files/csv_divers/jeudisjeux.csv',
+                    'headers' => false,
+                ],
             ],
             [
                 'code' => 'esprit-jeu',
@@ -132,7 +138,7 @@ EOT
                     'active' => true,
                     'path' => 'http://www.espritjeu.com/dhtml/fluxComparateur.php?w=2&c=016ab62aea63a0eaa98ce3aebee5ed39&t=csv',
                     'headers' => true,
-                ]
+                ],
             ],
             [
                 'code' => 'fungames',
@@ -142,6 +148,12 @@ EOT
                 'code' => 'ludifolie',
                 'name' => 'Ludifolie',
                 'image' => 'http://www.ludifolie.com/images/logo-400x200.jpg',
+                'priceList' => [
+                    'active' => true,
+                    'path' => 'http://www.ludifolie.com/jedisjeux-export-tarifs.csv',
+                    'headers' => false,
+                    'utf8' => false,
+                ],
             ],
             [
                 'code' => 'ludibay',
@@ -157,17 +169,17 @@ EOT
                     'path' => 'http://www.ludomus.com/export/jedisjeux-export-tarif.csv',
                     'headers' => true,
                     'utf8' => false,
-                ]
+                ],
             ],
             [
                 'code' => 'philibert',
                 'name' => 'Philibert',
                 'image' => 'http://ulule.me/presales/0/6/6/9660/philibert_jpg_640x860_q85.jpg',
-//                'priceList' => [
-//                    'active' => true,
-//                    'path' => 'philibert.csv',
-//                    'headers' => false,
-//                ],
+                'priceList' => [
+                    'active' => true,
+                    'path' => 'http://www.philibertnet.com/modules/ukoo_fluxjedisjeux/export.csv',
+                    'headers' => false,
+                ],
             ],
             [
                 'code' => 'sur-la-route-du-jeu',
@@ -183,9 +195,19 @@ EOT
                     'headers' => false,
                     'delimiter' => ',',
                     'utf8' => false,
-                ]
-            ]
+                ],
+            ],
+            [
+                'code' => 'jumanji-shop',
+                'name' => 'JumanjiShop',
+                'priceList' => [
+                    'active' => true,
+                    'path' => 'http://www.jumanji-shop.com/jedisjeux.csv',
+                    'headers' => false,
+                    'delimiter' => '|',
 
+                ],
+            ],
         ];
     }
 

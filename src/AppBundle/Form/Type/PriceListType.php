@@ -12,6 +12,7 @@
 namespace AppBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -31,10 +32,16 @@ class PriceListType extends AbstractResourceType
             ->add('path', TextType::class, [
                 'label' => 'label.path',
             ])
-            ->add('headers', null, [
+            ->add('headers', CheckboxType::class, [
                 'label' => 'label.headers',
             ])
-            ->add('active', null, [
+            ->add('delimiter', TextType::class, [
+                'label' => 'app.ui.delimiter',
+            ])
+            ->add('utf8', CheckboxType::class, [
+                'label' => 'app.ui.utf8',
+            ])
+            ->add('active', CheckboxType::class, [
                 'label' => 'label.active',
             ]);
     }

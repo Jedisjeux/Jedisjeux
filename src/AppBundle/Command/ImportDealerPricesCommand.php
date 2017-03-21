@@ -245,12 +245,13 @@ EOT
                     $status = DealerPrice::STATUS_AVAILABLE;
                     break;
                 case 'En cours de réappro':
+                case 'Rupture':
                 case 'indisponible':
                     $status = DealerPrice::STATUS_OUT_OF_STOCK;
                     break;
-                case 'précommande':
+                case 'Pr?commande':
                 case preg_replace('/[^a-z]/', '', $rowData[3]) === 'prcommande':
-                    $status = DealerPrice::STATUS_OUT_OF_STOCK;
+                    $status = DealerPrice::STATUS_PRE_ORDER;
                     break;
                 default:
                     $this->output->writeln(sprintf('<error>Status with code %s does not exist on %s</error>', $rowData[3], $rowData[0]));

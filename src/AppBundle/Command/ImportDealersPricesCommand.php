@@ -16,6 +16,7 @@ use AppBundle\Entity\Dealer;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Debug\Exception\ContextErrorException;
 use Symfony\Component\Process\Exception\RuntimeException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -81,9 +82,12 @@ EOT
         $dealers = $this->getDealers();
 
         foreach ($dealers as $step => $dealer) {
+            $output->writeln(sprintf('<comment>Step %d of %d.</comment> <info>%s</info>', $step + 1, count($dealers), $dealer->getCode()));
+
             if ($dealer->hasPriceList() and $dealer->getPriceList()->isActive()) {
+                $output->writeln(sprintf('Import prices for <info>%s</info>.', $dealer->getName()));
+
                 try {
-                    $output->writeln(sprintf('<comment>Step %d of %d.</comment> <info>%s</info>', $step + 1, count($dealers), $dealer->getCode()));
                     $this->commandExecutor->runCommand('app:dealer-prices:import', [
                         'dealer' => $dealer->getCode(),
                         '--filename' => $dealer->getPriceList()->getPath(),
@@ -96,8 +100,15 @@ EOT
                     $this->isErrored = true;
 
                     continue;
+                } catch (ContextErrorException $exception) {
+                    $output->writeln(sprintf('<errror>%s</errror>', $exception->getMessage()));
+                    $this->isErrored = true;
+
+                    continue;
                 }
             } else {
+                $output->writeln(sprintf('Remove prices for <info>%s</info>.', $dealer->getName()));
+
                 $this->removeDealerPricesFromDealer($dealer);
             }
         }
