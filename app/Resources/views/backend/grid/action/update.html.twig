@@ -1,3 +1,8 @@
 {% import 'SyliusUiBundle:Macro:buttons.html.twig' as buttons %}
 
-{{ buttons.edit(path(grid.requestConfiguration.getRouteName('update'), {'id': data.id})) }}
+{% set routeParameters = grid.requestConfiguration.vars.route.parameters|default([]) %}
+{% set routeParameters = routeParameters | merge({'id': data.id}) %}
+{% set path = path(grid.requestConfiguration.getRouteName('update'), routeParameters|default({'id': data.id})) %}
+
+{{ buttons.edit(path, action.label) }}
+

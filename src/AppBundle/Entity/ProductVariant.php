@@ -283,7 +283,6 @@ class ProductVariant extends BaseProductVariant
     }
 
 
-
     /**
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -385,4 +384,14 @@ class ProductVariant extends BaseProductVariant
 
         return $this;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
+
 }
