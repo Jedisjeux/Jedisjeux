@@ -2,3 +2,6 @@ sylius_admin_ajax_product:
     resource: ajax/product.yml
     prefix: /products
 
+sylius_backend_ajax_product_variant:
+    resource: ajax/product_variant.yml
+    prefix: /product-variants

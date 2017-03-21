@@ -143,6 +143,7 @@ EOT
             [
                 'code' => 'fungames',
                 'name' => 'Fungames',
+                'image' => 'http://www.fungamesnet.fr/img/fungamesnet-logo-1488007203.jpg',
             ],
             [
                 'code' => 'ludifolie',
@@ -182,10 +183,6 @@ EOT
                 ],
             ],
             [
-                'code' => 'sur-la-route-du-jeu',
-                'name' => 'Sur La Route Du Jeu',
-            ],
-            [
                 'code' => 'jeux-en-boite',
                 'name' => 'Jeux en boite',
                 'image' => 'http://www.jeuxenboite.be/presta/img/logo.jpg',
@@ -205,7 +202,6 @@ EOT
                     'path' => 'http://www.jumanji-shop.com/jedisjeux.csv',
                     'headers' => false,
                     'delimiter' => '|',
-
                 ],
             ],
         ];

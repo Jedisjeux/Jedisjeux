@@ -62,12 +62,27 @@ class ProductVariant extends BaseProductVariant
     protected $oldHref;
 
     /**
+     * @var integer
+     *
+     * @Gedmo\SortablePosition
+     * @ORM\Column(name="position", type="integer")
+     */
+    private $position;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Person", inversedBy="designerProducts", cascade={"persist", "merge"})
      * @ORM\JoinTable(name="jdj_designer_product_variant")
      */
     protected $designers;
+
+    /**
+     * {@inheritdoc}
+     *
+     * @Gedmo\SortableGroup
+     */
+    protected $product;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -282,6 +297,25 @@ class ProductVariant extends BaseProductVariant
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @param mixed $position
+     *
+     * @return $this
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
 
     /**
      * @return \Doctrine\Common\Collections\Collection

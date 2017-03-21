@@ -1,8 +1,0 @@
-app_admin_ajax_people_index:
-    path: /
-    methods: [GET]
-    defaults:
-        _controller: app.controller.people:indexAction
-        _sylius:
-            grid: app_backend_person
-            serialization_groups: [Default]

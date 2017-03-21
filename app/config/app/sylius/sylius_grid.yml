@@ -36,6 +36,7 @@ sylius_grid:
             manage_variants: "backend/product/grid/action/manageVariants.html.twig"
             list_posts: "backend/topic/grid/action/posts.html.twig"
             list_taxons: "backend/taxon/grid/action/taxons.html.twig"
+            update_product_variant_positions: "backend/product_variant/grid/action/updatePositions.html.twig"
         filter:
             string: "backend/grid/filter/string.html.twig"
             boolean: "backend/grid/filter/boolean.html.twig"
