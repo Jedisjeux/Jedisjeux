@@ -4,5 +4,5 @@
 {% set routeParameters = routeParameters | merge({'id': data.id}) %}
 {% set path = path(grid.requestConfiguration.getRouteName('update'), routeParameters|default({'id': data.id})) %}
 
-{{ buttons.edit(path, action.label) }}
+{{ buttons.edit(path) }}
 
