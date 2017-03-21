@@ -51,38 +51,38 @@ class LoadProductsCommand extends ContainerAwareCommand
         $associationTypeCollection = $this->createOrReplaceAssociationTypeCollection();
         $associationTypeExpansion = $this->createOrReplaceAssociationTypeExpansion();
 
-        $i = 0;
-
-        foreach ($this->getRows() as $data) {
-            $output->writeln(sprintf("Loading <comment>%s</comment> product", $data['name']));
-
-            $product = $this->createOrReplaceProduct($data);
-            $this->getManager()->persist($product);
-
-            if (($i % self::BATCH_SIZE) === 0) {
-                $this->getManager()->flush(); // Executes all updates.
-                $this->getManager()->clear(); // Detaches all objects from Doctrine!
-            }
-
-            ++$i;
-        }
-
-        $this->getManager()->flush();
-        $this->getManager()->clear();
-
-        foreach ($this->getVariants() as $data) {
-            $output->writeln(sprintf("Loading <comment>%s</comment> variant for product <comment>%s</comment>",
-                $data['name'],
-                $data['parent_code']
-            ));
-
-            /** @var Product $product */
-            $product = $this->getRepository()->findOneBy(['code' => $data['parent_code']]);
-
-            if (null !== $product) {
-                $this->createOrReplaceProductVariant($product, $data);
-            }
-        }
+//        $i = 0;
+//
+//        foreach ($this->getRows() as $data) {
+//            $output->writeln(sprintf("Loading <comment>%s</comment> product", $data['name']));
+//
+//            $product = $this->createOrReplaceProduct($data);
+//            $this->getManager()->persist($product);
+//
+//            if (($i % self::BATCH_SIZE) === 0) {
+//                $this->getManager()->flush(); // Executes all updates.
+//                $this->getManager()->clear(); // Detaches all objects from Doctrine!
+//            }
+//
+//            ++$i;
+//        }
+//
+//        $this->getManager()->flush();
+//        $this->getManager()->clear();
+//
+//        foreach ($this->getVariants() as $data) {
+//            $output->writeln(sprintf("Loading <comment>%s</comment> variant for product <comment>%s</comment>",
+//                $data['name'],
+//                $data['parent_code']
+//            ));
+//
+//            /** @var Product $product */
+//            $product = $this->getRepository()->findOneBy(['code' => $data['parent_code']]);
+//
+//            if (null !== $product) {
+//                $this->createOrReplaceProductVariant($product, $data);
+//            }
+//        }
 
         $this->deleteProductAssociations();
         $this->insertProductsOfCollections($associationTypeCollection);
@@ -302,30 +302,32 @@ EOM;
     {
         $query = <<<EOM
 insert into sylius_product_association(product_id, association_type_id, created_at)
-select distinct parent.id,
-        :association_type_id,
-        now()
-from   jedisjeux.jdj_game old
-  inner join sylius_product parent
-    on parent.code = concat('game-', old.id_pere)
-where type_diff = 'extension'
+SELECT DISTINCT
+  parent.product_id,
+  :association_type_id,
+  now()
+FROM jedisjeux.jdj_game old
+  INNER JOIN sylius_product_variant parent
+    ON parent.code = concat('game-', old.id_pere)
+WHERE type_diff = 'extension'
 EOM;
 
         $this->getManager()->getConnection()->executeQuery($query, ['association_type_id' => $assocationType->getId()]);
 
         $query = <<<EOM
 insert into sylius_product_association_product(association_id, product_id)
-select      association.id, associated.id
-from        sylius_product_association association
-inner JOIN sylius_product product
-             on product.id = association.product_id
-inner JOIN jedisjeux.jdj_game old
-              on concat('game-', id_famille) = product.code
-inner JOIN sylius_product associated
-              on associated.code = concat('game-', old.id)
-where     old.id_famille <> old.id
-and       association.association_type_id = :association_type_id
-and       old.type_diff = 'extension'
+SELECT
+  association.id,
+  associatedVariant.product_id
+FROM sylius_product_association association
+  INNER JOIN sylius_product_variant baseVariant
+    ON baseVariant.product_id = association.product_id
+  INNER JOIN jedisjeux.jdj_game old
+    ON concat('game-', old.id_pere) = baseVariant.code
+       AND old.type_diff = 'extension'
+  INNER JOIN sylius_product_variant associatedVariant
+    on associatedVariant.code = concat('game-', old.id)
+WHERE association.association_type_id = :association_type_id
 EOM;
 
         $this->getManager()->getConnection()->executeQuery($query, ['association_type_id' => $assocationType->getId()]);
