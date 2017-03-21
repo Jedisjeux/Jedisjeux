@@ -129,7 +129,7 @@ class SearchController extends Controller
                 $result = array(
                     'value' => (string)$entity,
                     'label' => (string)$entity,
-                    'image' => (null === $entity->getDocument()->getMainImage()) ? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : $this->get('liip_imagine.cache.manager')->getBrowserPath($entity->getDocument()->getMainImage()->getImage()->getId(), 'cmf_thumbnail'),
+                    'image' => (null === $entity->getMainImage()) ? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : $this->get('liip_imagine.cache.manager')->getBrowserPath($entity->getMainImage()->getWebPath(), 'cmf_thumbnail'),
                     'href' => $this->generateUrl('app_frontend_article_show', array(
                             'slug' => $entity->getSlug(),
                         )
@@ -162,6 +162,7 @@ class SearchController extends Controller
             'username',
             'title',
             'name',
+            'variants',
         ));
 
         return $searchQuery;

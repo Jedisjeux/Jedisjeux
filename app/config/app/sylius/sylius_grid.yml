@@ -13,6 +13,7 @@ imports:
   - { resource: 'grids/backend/product_association_type.yml' }
   - { resource: 'grids/backend/product_list.yml' }
   - { resource: 'grids/backend/product_review.yml' }
+  - { resource: 'grids/backend/product_variant.yml' }
   - { resource: 'grids/backend/redirection.yml' }
   - { resource: 'grids/backend/root_taxon.yml' }
   - { resource: 'grids/backend/taxon_from_root.yml' }

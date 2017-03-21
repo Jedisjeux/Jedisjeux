@@ -16,5 +16,6 @@ sylius_product:
               classes:
                   model: AppBundle\Entity\ProductVariant
                   factory: Sylius\Component\Product\Factory\ProductVariantFactory
+                  repository: AppBundle\Repository\ProductVariantRepository
                   form:
                       default: AppBundle\Form\Type\ProductVariantType
