@@ -1,0 +1,5 @@
+sylius_backend_ajax_product_variants_update_position:
+    methods: [PUT]
+    path: /save-positions
+    defaults:
+        _controller: sylius.controller.product_variant:updatePositionsAction

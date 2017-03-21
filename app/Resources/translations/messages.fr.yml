@@ -142,6 +142,7 @@ sylius:
         product_association_types: Types d'association de jeux
         product_reviews: Avis de jeu
         published: Publié
+        save_positions: 'Enregistrer les positions'
         search_products: Chercher un jeu
         select_products: 'Sélectionner les jeux'
         show: Voir
