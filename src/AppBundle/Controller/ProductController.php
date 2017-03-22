@@ -143,6 +143,11 @@ class ProductController extends ResourceController
         return $this->viewHandler->handle($configuration, $view);
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
     public function showStatusAction(Request $request)
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);

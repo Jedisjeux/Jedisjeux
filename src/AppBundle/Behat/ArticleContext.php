@@ -52,7 +52,7 @@ class ArticleContext extends DefaultContext
                 ->setCode(isset($data['code']) ? $data['code'] : $this->faker->postcode)
                 ->setTitle(isset($data['title']) ? $data['title'] : $this->faker->text(20))
                 ->setPublishable(true)
-                ->setStatus(Article::STATUS_PUBLISHED)
+                ->setStatus(isset($data['status']) ? $data['status'] : Article::STATUS_PUBLISHED)
                 ->setMainTaxon($taxon)
                 ->setAuthor($author);
 

@@ -11,14 +11,17 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Article;
 use AppBundle\Entity\Taxon;
 use AppBundle\Repository\ArticleRepository;
 use AppBundle\Repository\TaxonRepository;
 use Doctrine\ORM\EntityRepository;
 use FOS\RestBundle\View\View;
+use SM\Factory\Factory;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
@@ -134,7 +137,54 @@ class ArticleController extends ResourceController
     }
 
     /**
-     * @return AuthorizationChecker
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function showStatusAction(Request $request)
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        $this->isGrantedOr403($configuration, ResourceActions::SHOW);
+        /** @var Article $resource */
+        $resource = $this->findOr404($configuration);
+
+        $this->eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $resource);
+
+        $view = View::create($resource);
+
+        if ($configuration->isHtmlRequest()) {
+            $view
+                ->setTemplate($configuration->getTemplate(ResourceActions::SHOW . '.html'))
+                ->setTemplateVar($this->metadata->getName())
+                ->setData([
+                    'configuration' => $configuration,
+                    'metadata' => $this->metadata,
+                    'resource' => $resource,
+                    $this->metadata->getName() => $resource,
+                    'state_machine' => $this->getStateMachine($resource),
+                ])
+            ;
+        }
+
+        return $this->viewHandler->handle($configuration, $view);
+    }
+
+    /**
+     * @param Article $article
+     *
+     * @return \SM\StateMachine\StateMachineInterface
+     */
+    protected function getStateMachine(Article $article)
+    {
+        /** @var Factory $factory */
+        $factory = $this->get('sm.factory');
+
+        return $factory->get($article, 'app_article');
+    }
+
+    /**
+     * @return AuthorizationChecker|object
      */
     protected function getAuthorizationChecker()
     {
@@ -150,7 +200,7 @@ class ArticleController extends ResourceController
     }
 
     /**
-     * @return TaxonRepository
+     * @return TaxonRepository|object
      */
     protected function getTaxonRepository()
     {

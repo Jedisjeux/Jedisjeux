@@ -12,3 +12,13 @@ app_partial_article_index:
                 arguments: [$criteria, $sorting]
     requirements:
         template: "[^?]+"
+
+app_partial_article_status_show:
+    methods: [GET]
+    path: /articles/{id}/status
+    defaults:
+        _controller: app.controller.article:showStatusAction
+        _sylius:
+            template: $template
+    requirements:
+        template: "[^?]+"
