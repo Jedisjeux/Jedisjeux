@@ -13,6 +13,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 use Sylius\Component\Product\Model\Product as BaseProduct;
@@ -316,7 +317,13 @@ class Product extends BaseProduct implements ReviewableInterface
             return null;
         }
 
-        return $this->variants->first();
+        // todo remove after sylius update (variants will be sorted by position)
+        $sort = Criteria::create();
+        $sort->orderBy(Array(
+            'position' => Criteria::ASC
+        ));
+
+        return $this->variants->matching($sort)->first();
     }
 
     public function setFirstVariant(ProductVariantInterface $variant)
