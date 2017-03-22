@@ -47,6 +47,7 @@ EOT
             'app:pages:load',
             'app:users:load',
             'app:products:load',
+            'app:product-variants:recalculate-positions',
             'app:game-libraries:load',
             'app:product-lists:load',
             'app:people:load',
