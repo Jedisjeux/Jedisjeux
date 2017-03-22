@@ -20,6 +20,7 @@ app:
         dealer: Vendeur
         dealers: Vendeurs
         dealer_prices: Tarifs des vendeurs
+        delimiter: Separateur
         destination: Destination
         edit_article: Modifier l'article
         edit_dealer: Modifier le vendeur
