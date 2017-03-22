@@ -29,6 +29,9 @@ class PriceListType extends AbstractResourceType
         parent::buildForm($builder, $options);
 
         $builder
+            ->add('active', CheckboxType::class, [
+                'label' => 'label.active',
+            ])
             ->add('path', TextType::class, [
                 'label' => 'label.path',
             ])
@@ -40,9 +43,6 @@ class PriceListType extends AbstractResourceType
             ])
             ->add('utf8', CheckboxType::class, [
                 'label' => 'app.ui.utf8',
-            ])
-            ->add('active', CheckboxType::class, [
-                'label' => 'label.active',
             ]);
     }
 

@@ -13,6 +13,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -48,7 +49,7 @@ class PriceList implements ResourceInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $delimiter = ';';
 
@@ -129,7 +130,7 @@ class PriceList implements ResourceInterface
     /**
      * @return string
      */
-    public function getDelimiter(): string
+    public function getDelimiter()
     {
         return $this->delimiter;
     }
