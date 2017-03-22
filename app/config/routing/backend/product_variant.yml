@@ -9,7 +9,7 @@ sylius_backend_product_variant:
 
 sylius_backend_product_variant_index:
     methods: [GET]
-    path: /products/{productId}/variants
+    path: /products/{productId}/variants/
     defaults:
         _controller: sylius.controller.product_variant:indexAction
         _sylius:
