@@ -198,7 +198,7 @@ EOT
     }
 
     /**
-     * @return Factory
+     * @return Factory|object
      */
     protected function getFactory()
     {
@@ -206,7 +206,7 @@ EOT
     }
 
     /**
-     * @return EntityManager
+     * @return EntityManager|object
      */
     protected function getManager()
     {
@@ -214,7 +214,7 @@ EOT
     }
 
     /**
-     * @return EntityRepository
+     * @return EntityRepository|object
      */
     protected function getRepository()
     {
