@@ -7,5 +7,6 @@ default:
                 - AppBundle\Behat\UserContext
                 - AppBundle\Behat\TaxonContext
                 - AppBundle\Behat\ProductContext
+                - AppBundle\Behat\NotificationContext
             filters:
                 tags: "@product && @ui"

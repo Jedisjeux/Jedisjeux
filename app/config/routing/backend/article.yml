@@ -34,3 +34,15 @@ app_backend_article_create_for_product_review:
                         productId: $productId
                 templates:
                     form: backend/article/_form.html.twig
+
+app_backend_article_update_state:
+    methods: [PATCH]
+    path: /articles/{id}/status/{transition}
+    defaults:
+        _controller: app.controller.article:applyStateMachineTransitionAction
+        _sylius:
+            section: admin
+            state_machine:
+                graph: app_article
+                transition: $transition
+            redirect: referer

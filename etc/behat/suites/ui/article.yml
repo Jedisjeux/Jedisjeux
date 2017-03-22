@@ -9,5 +9,6 @@ default:
                 - AppBundle\Behat\TaxonContext
                 - AppBundle\Behat\PostContext
                 - AppBundle\Behat\ArticleContext
+                - AppBundle\Behat\NotificationContext
             filters:
                 tags: "@article && @ui"

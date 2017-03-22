@@ -24,6 +24,11 @@
 {% block body -%}
     <div class="col-md-8">
 
+        {{ render(url('app_partial_article_status_show', {
+            'id': article.id,
+            'template': 'frontend/article/_status.html.twig'
+        })) }}
+
         {% if article.author %}
             {{ item.blogAuthor(article.author, null, article.publishStartDate) }}
         {% endif %}
