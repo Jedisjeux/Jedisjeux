@@ -164,11 +164,17 @@ class LoadProductsCommand extends ContainerAwareCommand
         $data['updatedAt'] = \DateTime::createFromFormat('Y-m-d H:i:s', $data['updatedAt']);
         $product->getFirstVariant()->setOldHref(!empty($data['href']) ? $data['href'] : null);
         $data['releasedAt'] = $data['releasedAt'] ? \DateTime::createFromFormat('Y-m-d', $data['releasedAt']) : null;
+
+        if (false === $data['releasedAt']) {
+            $data['releasedAt'] = null;
+        }
+
         $product->getFirstVariant()->setReleasedAtPrecision($this->getReleasedAtPrecision($data));
+
         if (null !== $data['releasedAt']) {
-            if (ProductVariant::RELEASED_AT_PRECISION_ON_MONTH === $product->getMasterVariant()->getReleasedAtPrecision()) {
+            if (ProductVariant::RELEASED_AT_PRECISION_ON_MONTH === $product->getFirstVariant()->getReleasedAtPrecision()) {
                 $data['releasedAt'] = $data['releasedAt']->add(new \DateInterval('P1D'));
-            } elseif (ProductVariant::RELEASED_AT_PRECISION_ON_YEAR === $product->getMasterVariant()->getReleasedAtPrecision()) {
+            } elseif (ProductVariant::RELEASED_AT_PRECISION_ON_YEAR === $product->getFirstVariant()->getReleasedAtPrecision()) {
                 $data['releasedAt'] = $data['releasedAt']->add(new \DateInterval('P1D'))->add(new \DateInterval('P1M'));
             }
         }
@@ -207,8 +213,8 @@ class LoadProductsCommand extends ContainerAwareCommand
             ->setMateriel($data['materiel'])
             ->setStatus($data['status']);
 
-        $product->getMasterVariant()->setCode($data['code']);
-        $product->getMasterVariant()->setName($data['name']);
+        $product->getFirstVariant()->setCode($data['code']);
+        $product->getFirstVariant()->setName($data['name']);
 
         return $product;
     }
@@ -352,7 +358,14 @@ EOM;
         $productVariant->setName($data['name']);
         $productVariant->setOldHref(!empty($data['href']) ? $data['href'] : null);
         $productVariant->setCreatedAt(\DateTime::createFromFormat('Y-m-d H:i:s', $data['createdAt']));
-        $productVariant->setReleasedAt($data['releasedAt'] ? \DateTime::createFromFormat('Y-m-d', $data['releasedAt']) : null);
+
+        $releasedAt = $data['releasedAt'] ? \DateTime::createFromFormat('Y-m-d', $data['releasedAt']) : null;
+
+        if (false === $releasedAt) {
+            $releasedAt = null;
+        }
+
+        $productVariant->setReleasedAt($releasedAt);
         $productVariant->setReleasedAtPrecision($this->getReleasedAtPrecision($data));
 
         $product->addVariant($productVariant);
@@ -382,7 +395,10 @@ SELECT
   old.valid               AS status,
   old.date                AS createdAt,
   old.date                AS updatedAt,
-  old.date_sortie         AS releasedAt,
+  CASE WHEN old.date_sortie IS NULL AND old.annee IS NOT NULL
+    THEN concat(old.annee, '-01-01')
+  ELSE old.date_sortie
+  END                     AS releasedAt,
   old.precis_sortie       AS releasedAtPrecision,
   old.href                AS href
 FROM jedisjeux.jdj_game old
@@ -415,7 +431,10 @@ SELECT
   old.valid                    AS status,
   old.date                     AS createdAt,
   old.date                     AS updatedAt,
-  old.date_sortie              AS releasedAt,
+  CASE WHEN old.date_sortie IS NULL AND old.annee IS NOT NULL
+    THEN concat(old.annee, '-01-01')
+  ELSE old.date_sortie
+  END                          AS releasedAt,
   old.precis_sortie            AS releasedAtPrecision,
   old.href                     AS href
 FROM jedisjeux.jdj_game old
