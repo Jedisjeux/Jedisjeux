@@ -194,16 +194,6 @@ EOT
                     'utf8' => false,
                 ],
             ],
-            [
-                'code' => 'jumanji-shop',
-                'name' => 'JumanjiShop',
-                'priceList' => [
-                    'active' => true,
-                    'path' => 'http://www.jumanji-shop.com/jedisjeux.csv',
-                    'headers' => false,
-                    'delimiter' => '|',
-                ],
-            ],
         ];
     }
 
