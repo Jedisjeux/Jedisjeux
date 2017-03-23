@@ -17,7 +17,7 @@ winzou_state_machine:
                 from: [pending_review]
                 to: pending_publication
             publish:
-                from: [pending_review]
+                from: [pending_publication]
                 to: published
         callbacks:
             after:

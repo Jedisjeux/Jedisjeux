@@ -40,17 +40,6 @@ class ArticleType extends AbstractResourceType
                 'label' => false,
                 'file_label' => 'app.ui.main_image',
             ])
-            ->add('status', ChoiceType::class, [
-                'label' => 'label.status',
-                'required' => true,
-                'choices' => [
-                    'label.new' => Article::STATUS_NEW,
-                    'label.pending_review' => Article::STATUS_PENDING_REVIEW,
-                    'label.pending_publication' => Article::STATUS_PENDING_PUBLICATION,
-                    'label.published' => Article::STATUS_PUBLISHED,
-                ],
-                'choices_as_values' => true,
-            ])
             ->add('shortDescription', CKEditorType::class, [
                 'label' => 'app.ui.short_description',
                 'required' => false,

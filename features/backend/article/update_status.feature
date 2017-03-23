@@ -24,17 +24,18 @@ Feature: Update article status
     Given there are articles:
       | taxon               | title                        | status | author            |
       | articles/actualites | King of New York : Power Up! | new    | admin@example.com |
-    And I am on "/article/king-of-new-york-power-up"
+    And I am on "/admin/articles/"
+    And I follow "Modifier"
     When I press "Demander une relecture"
     Then I should see "a bien été mis à jour"
-    And I should see "Cet article est En relecture."
     And there is a notification to "reviewer@example.com" for "King of New York : Power Up!" article
 
   Scenario: Ask for publication
     Given there are articles:
       | taxon               | title                        | status         | author            |
       | articles/actualites | King of New York : Power Up! | pending_review | admin@example.com |
-    And I am on "/article/king-of-new-york-power-up"
+    And I am on "/admin/articles/"
+    And I follow "Modifier"
     When I press "Demander la publication"
     Then I should see "a bien été mis à jour"
     And I should see "Cet article est Prêt à publier."
