@@ -12,6 +12,10 @@ sylius_admin_product:
                     form: backend/product/_form.html.twig
             index:
                 icon: cube
+            update:
+                templates:
+                    form: backend/product/_form.html.twig
+                    toolbar: backend/product/_toolbar.html.twig
     type: sylius.resource
 
 sylius_admin_product_create:
