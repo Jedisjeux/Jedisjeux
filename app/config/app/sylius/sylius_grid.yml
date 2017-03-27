@@ -33,6 +33,7 @@ sylius_grid:
             update: "backend/grid/action/update.html.twig"
             delete: "backend/grid/action/delete.html.twig"
 
+            manage_articles: "backend/product/grid/action/manageArticles.html.twig"
             manage_variants: "backend/product/grid/action/manageVariants.html.twig"
             list_posts: "backend/topic/grid/action/posts.html.twig"
             list_taxons: "backend/taxon/grid/action/taxons.html.twig"
