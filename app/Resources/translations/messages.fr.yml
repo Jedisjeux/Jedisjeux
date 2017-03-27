@@ -1,7 +1,8 @@
 app:
     ui:
         administration: Administration
-        add_review_article: Ajouter un test de jeu
+        add_article: Créer un article
+        add_review_article: Créer un test de jeu
         added_at: Date d'ajout
         article: Article
         articles: Articles

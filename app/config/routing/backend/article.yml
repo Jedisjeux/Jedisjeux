@@ -19,9 +19,30 @@ app_backend_article:
                     toolbar: backend/article/_toolbar.html.twig
     type: sylius.resource
 
-app_backend_article_create_for_product_review:
+
+app_backend_article_create_for_product:
     methods: [GET, POST]
     path: /articles/products/{productId}/new
+    defaults:
+        _controller: app.controller.article:createAction
+        _sylius:
+            section: backend
+            factory:
+                method: createForProduct
+                arguments:
+                  - expr:service('sylius.repository.product').find($productId)
+            template: backend/crud/create.html.twig
+            vars:
+                route:
+                    name: app_backend_article_create_for_product
+                    parameters:
+                        productId: $productId
+                templates:
+                    form: backend/article/_form.html.twig
+
+app_backend_article_create_for_product_review:
+    methods: [GET, POST]
+    path: /articles/reviews/{productId}/new
     defaults:
         _controller: app.controller.article:createAction
         _sylius:
