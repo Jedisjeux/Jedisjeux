@@ -53,18 +53,11 @@ class ProductVariantType extends BaseProductVariantType
                 'choices_as_values' => true,
             ])
             ->add('images', CollectionType::class, array(
+                'label' => false,
                 'type' => 'app_product_variant_image',
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'prototype' => true,
-                'widget_add_btn' => array('label' => "label.add_image"),
-                'show_legend' => false, // dont show another legend of subform
-                'options' => array( // options for collection fields
-                    'label_render' => false,
-                    'horizontal_input_wrapper_class' => "col-lg-8",
-                    'widget_remove_btn' => array('label' => "label.remove_this_image"),
-                )
             ))
             ->add('designers', EntityType::class, array(
                 'label' => 'label.designers',
