@@ -19,8 +19,12 @@ sylius_grid:
                         template: "backend/customer/grid/field/avatar.html.twig"
                 name:
                     type: string
+                    label: sylius.ui.username
+                    path: author
+                product:
+                    type: string
                     label: sylius.ui.product
-                    path: product.name
+                    path: product
                 createdAt:
                     type: twig
                     label: sylius.ui.created_at
