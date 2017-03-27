@@ -7,3 +7,7 @@
         </a>
     {% endif %}
 {% endmacro %}
+
+{% macro render(path, filter, label, class) %}
+    <img class="{{ class }}" src="{{ path | imagine_filter(filter|default('full')) }}" alt="{{ label }}"/>
+{% endmacro %}
