@@ -12,8 +12,10 @@
 namespace AppBundle\Form\Type;
 
 use AppBundle\Entity\Article;
+use AppBundle\Entity\Taxon;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -44,6 +46,13 @@ class ArticleType extends AbstractResourceType
                 'label' => 'app.ui.short_description',
                 'required' => false,
             ])
+            ->add('mainTaxon', TaxonChoiceType::class, array(
+                'label' => 'sylius.ui.category',
+                'placeholder' => 'app.ui.choose_category',
+                'root' => Taxon::CODE_ARTICLE,
+                'multiple' => false,
+                'required' => true,
+            ))
             ->add('blocks', CollectionType::class, [
                 'label' => false,
                 'entry_type' => BlockType::class,

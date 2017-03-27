@@ -112,11 +112,11 @@ class ArticleRepository extends EntityRepository
      * @param TaxonInterface $taxon
      * @param array|null $criteria
      * @param array|null $sorting
-     * @param bool $publishable
+     * @param string $status
      *
      * @return Pagerfanta
      */
-    public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = null, array $sorting = null, $publishable = true)
+    public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = null, array $sorting = null, $status = Article::STATUS_PUBLISHED)
     {
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
@@ -132,10 +132,10 @@ class ArticleRepository extends EntityRepository
             ->setParameter('left', $taxon->getLeft())
             ->setParameter('right', $taxon->getRight());
 
-        if ($publishable) {
+        if (null !== $status) {
             $queryBuilder
-                ->andWhere($queryBuilder->expr()->eq($this->getPropertyName('publishable'), ':publishable'))
-                ->setParameter('publishable', 1);
+                ->andWhere($queryBuilder->expr()->eq($this->getPropertyName('status'), ':status'))
+                ->setParameter('status', $status);
         }
 
         $this->applyCriteria($queryBuilder, (array)$criteria);

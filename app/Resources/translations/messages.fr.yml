@@ -12,6 +12,7 @@ app:
         blocks: Blocs
         box: Encart
         catalog: Catalogue
+        choose_category: Choisir une catégorie
         contact_request: Demande de contact
         contact_requests: Demandes de contact
         content: Contenu

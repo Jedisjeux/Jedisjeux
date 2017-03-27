@@ -29,3 +29,7 @@ winzou_state_machine:
                     on: "ask_for_publication"
                     do: ["@app.notification_manager.article", "notifyPublishers"]
                     args: ["object"]
+                start:
+                    on: "publish"
+                    do: ["@app.publication_manager.article", "start"]
+                    args: ["object"]
