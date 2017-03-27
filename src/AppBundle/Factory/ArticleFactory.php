@@ -11,10 +11,6 @@
 
 namespace AppBundle\Factory;
 
-use AppBundle\Document\BlockquoteBlock;
-use AppBundle\Document\LeftImageBlock;
-use AppBundle\Document\RightImageBlock;
-use AppBundle\Document\WellImageBlock;
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Block;
 use Doctrine\ORM\EntityRepository;
@@ -34,11 +30,6 @@ class ArticleFactory implements FactoryInterface
     private $className;
 
     /**
-     * @var ArticleContentFactory
-     */
-    protected $articleContentFactory;
-
-    /**
      * @var EntityRepository
      */
     protected $productRepository;
@@ -51,27 +42,7 @@ class ArticleFactory implements FactoryInterface
     /**
      * @var FactoryInterface
      */
-    protected $leftImageBlockFactory;
-
-    /**
-     * @var FactoryInterface
-     */
-    protected $rightImageBlockFactory;
-
-    /**
-     * @var FactoryInterface
-     */
-    protected $wellImageBlockFactory;
-
-    /**
-     * @var FactoryInterface
-     */
     protected $blockFactory;
-
-    /**
-     * @var FactoryInterface
-     */
-    protected $blockquoteBlockFactory;
 
     /**
      * @param string $className
@@ -150,14 +121,6 @@ class ArticleFactory implements FactoryInterface
         // TODO set review-article taxon
 
         return $article;
-    }
-
-    /**
-     * @param ArticleContentFactory $articleContentFactory
-     */
-    public function setArticleContentFactory($articleContentFactory)
-    {
-        $this->articleContentFactory = $articleContentFactory;
     }
 
     /**
