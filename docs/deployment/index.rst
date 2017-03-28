@@ -18,6 +18,7 @@ Install dependencies
 
 .. code-block:: bash
 
+    $ gem install bundler
     $ bundle install
 
 Deploy the staging environment
