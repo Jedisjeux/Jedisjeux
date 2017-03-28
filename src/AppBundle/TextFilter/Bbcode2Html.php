@@ -179,7 +179,7 @@ EOM;
         $pattern = '/\[image\=?(?P<properties>.*?):(.*?)\\](?P<id>.*?)\[\/image:(.*?)\\]/ms';
         preg_match_all($pattern, $body, $matches);
 
-        $replacement = "<div class=\"IMAGE-CLASS-$3\"><img src=\"$1-IMAGE-REPLACEMENT-$3\" class=\"img-responsive\" /></div>";
+        $replacement = "<div class=\"clearfix\"></div><div class=\"IMAGE-CLASS-$3\"><img src=\"$1-IMAGE-REPLACEMENT-$3\" class=\"img-responsive\" /></div>";
         $body = preg_replace($pattern, $replacement, $body);
 
         foreach ($matches['id'] as $key => $id) {
