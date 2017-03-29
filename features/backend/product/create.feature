@@ -21,7 +21,8 @@ Feature: Creates products
 
   Scenario: Create a product
     Given I am on "/admin/products/"
-    And I follow "Créer"
+    And I click on "Créer" dropdown
+    And follow "Produit standard"
     And I fill in the following:
       | Nom | Les Princes de Florence |
     When I press "Créer"

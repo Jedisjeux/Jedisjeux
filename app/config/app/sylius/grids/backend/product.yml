@@ -42,7 +42,7 @@ sylius_grid:
             actions:
                 main:
                     create:
-                        type: create
+                        type: create_product
                 item:
                     manage_articles:
                         type: manage_articles

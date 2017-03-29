@@ -37,6 +37,7 @@ app:
         errors: Erreurs
         forum: Forum
         framed: Encadré
+        from_board_game_geek: À partir de BoardGameGeek
         game: Jeu
         game_details: Informations du jeu
         game_library: Ludothèque
@@ -98,12 +99,14 @@ app:
         show_posts: Voir les messages
         show_game_sheet: Voir la fiche de jeu
         show_sub_categories: Voir les sous-catégories
+        submit: Envoyer
         slide_show: Carousel
         source: Source
         string_blocks: Blocs de chaîne
         style: Style
         topic: Sujet
         topics: Sujets
+        url: Url
         utf8: Utf8
         view_details: Voir les détails
         wishes: Envies
