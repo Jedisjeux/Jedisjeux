@@ -13,9 +13,6 @@
 
 {% endmacro %}
 
-
-
-
 {% if is_granted('ROLE_WORKFLOW') %}
 
     {% if(article.status != constant('AppBundle\\Entity\\Article::STATUS_PUBLISHED')) %}
