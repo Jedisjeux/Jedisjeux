@@ -16,6 +16,7 @@ use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -58,6 +59,22 @@ class ProductContext extends DefaultContext
         }
 
         $manager->flush();
+    }
+
+    /**
+     * @Then :productName product should exist
+     *
+     * @param string $productName
+     */
+    public function productWithFollowingNameShouldExist($productName)
+    {
+        /** @var ProductRepository $repository */
+        $repository = $this->getRepository('product');
+
+        /** @var ProductInterface $product */
+        $products = $repository->findByName($productName, $this->getContainer()->getParameter('locale'));
+
+        Assert::notEq(0, count($products), sprintf("%s product should exist but it does not", $productName));
     }
 
     /**

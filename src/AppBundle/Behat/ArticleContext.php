@@ -63,7 +63,6 @@ class ArticleContext extends DefaultContext
         $manager->flush();
     }
 
-
     /**
      * @Then :articleTitle article should have :statusName status
      *

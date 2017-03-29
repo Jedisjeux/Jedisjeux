@@ -41,6 +41,8 @@ class ProductVariantType extends BaseProductVariantType
             ->add('releasedAt', DateType::class, [
                 'label' => 'label.release_date',
                 'required' => false,
+                'years' => range(1902, date('Y') + 2),
+
             ])
             ->add('releasedAtPrecision', ChoiceType::class, [
                 'label' => 'label.release_date_precision',

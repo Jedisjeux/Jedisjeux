@@ -36,13 +36,17 @@ class ProductFactory extends BaseProductFactory
 
         $product->setName($bggProduct->getName());
         $product->setDescription($bggProduct->getDescription());
-        $releasedAt = \DateTime::createFromFormat('Y-m-d', $bggProduct->getReleasedAtYear(). '-01-01');
 
-        if (false !== $releasedAt) {
-            $product->getFirstVariant()
-                ->setReleasedAt($releasedAt)
-                ->setReleasedAtPrecision(ProductVariant::RELEASED_AT_PRECISION_ON_YEAR);
+        if (null !== $releasedAtYear = $bggProduct->getReleasedAtYear()) {
+            $releasedAt = \DateTime::createFromFormat('Y-m-d', $releasedAtYear . '-01-01');
+
+            if (false !== $releasedAt) {
+                $product->getFirstVariant()
+                    ->setReleasedAt($releasedAt)
+                    ->setReleasedAtPrecision(ProductVariant::RELEASED_AT_PRECISION_ON_YEAR);
+            }
         }
+
 
         $product->setAgeMin($bggProduct->getAge());
         $product->setDurationMin($bggProduct->getDuration());
