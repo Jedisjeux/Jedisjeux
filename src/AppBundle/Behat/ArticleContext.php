@@ -16,6 +16,7 @@ use AppBundle\Entity\Article;
 use Behat\Gherkin\Node\TableNode;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -60,5 +61,20 @@ class ArticleContext extends DefaultContext
         }
 
         $manager->flush();
+    }
+
+
+    /**
+     * @Then :articleTitle article should have :statusName status
+     *
+     * @param string $articleTitle
+     * @param string $status
+     */
+    public function articleHasFollowingStatus($articleTitle, $status)
+    {
+        /** @var Article $article */
+        $article = $this->findOneBy('article', ['title' => $articleTitle], 'app');
+
+        Assert::eq($status, $article->getStatus(), sprintf("%s article has %s status but it should have %s status", $article->getTitle(), $article->getStatus(), $status));
     }
 }

@@ -71,9 +71,12 @@ sylius_admin_product_from_bgg_new:
         _controller: sylius.controller.product:createAction
         _sylius:
             section: admin
+            template: backend/crud/create.html.twig
             factory:
                 method: createFromBgg
                 arguments: [$bggPath]
-            template: backend/product/create.html.twig
+            vars:
+                templates:
+                    form: backend/product/_form.html.twig
     requirements:
         bggPath: "[^?]+"

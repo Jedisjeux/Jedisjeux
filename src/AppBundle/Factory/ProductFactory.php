@@ -12,6 +12,7 @@
 namespace AppBundle\Factory;
 
 use AppBundle\Entity\Product;
+use AppBundle\Entity\ProductVariant;
 use AppBundle\Utils\BggProduct;
 use AppBundle\Utils\ProductFromBggPath;
 use Sylius\Component\Product\Factory\ProductFactory as BaseProductFactory;
@@ -29,13 +30,20 @@ class ProductFactory extends BaseProductFactory
     public function createFromBgg($bggPath)
     {
         /** @var Product $product */
-        $product = parent::createNew();
+        $product = parent::createWithVariant();
 
         $bggProduct = new BggProduct($bggPath);
 
         $product->setName($bggProduct->getName());
         $product->setDescription($bggProduct->getDescription());
-        //$product->getFirstVariant()->setReleasedAt($bggProduct->getReleasedAtYear());
+        $releasedAt = \DateTime::createFromFormat('Y-m-d', $bggProduct->getReleasedAtYear(). '-01-01');
+
+        if (false !== $releasedAt) {
+            $product->getFirstVariant()
+                ->setReleasedAt($releasedAt)
+                ->setReleasedAtPrecision(ProductVariant::RELEASED_AT_PRECISION_ON_YEAR);
+        }
+
         $product->setAgeMin($bggProduct->getAge());
         $product->setDurationMin($bggProduct->getDuration());
         $product->setDurationMax($bggProduct->getDuration());
