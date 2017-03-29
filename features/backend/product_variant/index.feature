@@ -13,13 +13,13 @@ Feature: List variants of a product
       | themes          | Thèmes       |
       | mechanisms      | Mécanismes   |
       | target-audience | Public cible |
+    And there are products:
+      | name                    |
+      | Les princes de Florence |
     And I am logged in as user "admin@example.com" with password "password"
 
   Scenario: List product variants
-    Given there are products:
-      | name                    |
-      | Les princes de Florence |
-    And I am on "/admin/products/"
+    Given I am on "/admin/products/"
     When I click on "Gérer les variantes" dropdown
     And I follow "Liste des variantes"
     Then I should see "Les princes de Florence"

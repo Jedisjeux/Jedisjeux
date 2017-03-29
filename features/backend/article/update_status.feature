@@ -28,6 +28,7 @@ Feature: Update article status
     And I follow "Modifier"
     When I press "Demander une relecture"
     Then I should see "a bien été mis à jour"
+    And "King of New York : Power Up!" article should have "pending_review" status
     And there is a notification to "reviewer@example.com" for "King of New York : Power Up!" article
 
   Scenario: Ask for publication
@@ -38,5 +39,15 @@ Feature: Update article status
     And I follow "Modifier"
     When I press "Demander la publication"
     Then I should see "a bien été mis à jour"
-    And I should see "Cet article est Prêt à publier."
+    And "King of New York : Power Up!" article should have "pending_publication" status
     And there is a notification to "publisher@example.com" for "King of New York : Power Up!" article
+
+  Scenario: Publish
+    Given there are articles:
+      | taxon               | title                        | status              | author            |
+      | articles/actualites | King of New York : Power Up! | pending_publication | admin@example.com |
+    And I am on "/admin/articles/"
+    And I follow "Modifier"
+    When I press "Publier"
+    Then I should see "a bien été mis à jour"
+    And "King of New York : Power Up!" article should have "published" status
