@@ -11,6 +11,7 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as JMS;
 use Sylius\Component\Product\Model\ProductVariant as BaseProductVariant;
 
 /**
@@ -18,6 +19,8 @@ use Sylius\Component\Product\Model\ProductVariant as BaseProductVariant;
  *
  * @ORM\Entity
  * @ORM\Table(name="sylius_product_variant")
+ *
+ * @JMS\ExclusionPolicy("all")
  */
 class ProductVariant extends BaseProductVariant
 {
@@ -37,6 +40,8 @@ class ProductVariant extends BaseProductVariant
      * @var ArrayCollection|ProductVariantImage[]
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\ProductVariantImage", mappedBy="variant", cascade={"persist", "merge"})
+     *
+     * @JMS\Groups({"Detailed"})
      */
     protected $images;
 
@@ -44,6 +49,8 @@ class ProductVariant extends BaseProductVariant
      * @var \DateTime
      *
      * @ORM\Column(type="date", nullable=true)
+     *
+     * @JMS\Groups({"Detailed"})
      */
     protected $releasedAt;
 
@@ -51,6 +58,8 @@ class ProductVariant extends BaseProductVariant
      * @var string
      *
      * @ORM\Column(type="string", nullable=true)
+     *
+     * @JMS\Groups({"Detailed"})
      */
     protected $releasedAtPrecision;
 
