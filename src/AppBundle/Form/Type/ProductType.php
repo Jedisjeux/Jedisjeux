@@ -32,6 +32,7 @@ class ProductType extends AbstractResourceType
 
         $builder
             ->add('name', null, array(
+                'required' => true,
                 'label' => 'label.name',
             ))
             ->add('firstVariant', 'sylius_product_variant', [])
@@ -57,11 +58,13 @@ class ProductType extends AbstractResourceType
                 'required' => false,
             ))
             ->add('shortDescription', 'ckeditor', array(
+                'required' => false,
                 'label' => 'label.short_description',
             ))
-            ->add('description', 'ckeditor', array(
+            ->add('description', 'ckeditor', [
+                'required' => false,
                 'label' => 'label.description',
-            ))
+            ])
             ->add('materiel', TextareaType::class, array(
                 'required' => false,
                 'label' => 'label.material',

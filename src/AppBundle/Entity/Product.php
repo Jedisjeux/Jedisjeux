@@ -21,6 +21,7 @@ use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -71,6 +72,10 @@ class Product extends BaseProduct implements ReviewableInterface
      * @JMS\Expose
      * @JMS\SerializedName("min_age")
      * @JMS\Groups({"Detailed"})
+     *
+     * @Assert\Range(
+     *      min = 0
+     * )
      */
     protected $ageMin;
 
@@ -82,6 +87,10 @@ class Product extends BaseProduct implements ReviewableInterface
      * @JMS\Expose
      * @JMS\SerializedName("min_player_count")
      * @JMS\Groups({"Detailed"})
+     *
+     * @Assert\Range(
+     *      min = 1
+     * )
      */
     protected $joueurMin;
 
@@ -93,6 +102,10 @@ class Product extends BaseProduct implements ReviewableInterface
      * @JMS\Expose
      * @JMS\SerializedName("max_player_count")
      * @JMS\Groups({"Detailed"})
+     *
+     * @Assert\Range(
+     *      min = 1
+     * )
      */
     protected $joueurMax;
 
@@ -104,6 +117,10 @@ class Product extends BaseProduct implements ReviewableInterface
      * @JMS\Expose
      * @JMS\SerializedName("min_duration")
      * @JMS\Groups({"Detailed"})
+     *
+     * @Assert\Range(
+     *      min = 1
+     * )
      */
     protected $durationMin;
 
@@ -115,6 +132,10 @@ class Product extends BaseProduct implements ReviewableInterface
      * @JMS\Expose
      * @JMS\SerializedName("max_duration")
      * @JMS\Groups({"Detailed"})
+     *
+     * @Assert\Range(
+     *      min = 1
+     * )
      */
     protected $durationMax;
 
