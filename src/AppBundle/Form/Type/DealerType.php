@@ -100,7 +100,7 @@ class DealerType extends AbstractResourceType
         foreach ($this->originalPubBanners as $pubBanner) {
             if (false === $dealer->getPubBanners()->contains($pubBanner)) {
                 $dealer->removePubBanner($pubBanner);
-                $this->manager->persist($pubBanner);
+                $this->manager->remove($pubBanner);
             }
         }
     }

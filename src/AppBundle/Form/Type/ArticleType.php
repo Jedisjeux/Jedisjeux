@@ -12,7 +12,11 @@
 namespace AppBundle\Form\Type;
 
 use AppBundle\Entity\Article;
+use AppBundle\Entity\Block;
 use AppBundle\Entity\Taxon;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\EntityManager;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonChoiceType;
@@ -20,6 +24,8 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -27,6 +33,24 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class ArticleType extends AbstractResourceType
 {
+    /**
+     * @var Collection|Block[]
+     */
+    protected $originalBlocks;
+
+    /**
+     * @var EntityManager
+     */
+    protected $manager;
+
+    /**
+     * @param EntityManager $manager
+     */
+    public function setManager($manager)
+    {
+        $this->manager = $manager;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -58,7 +82,42 @@ class ArticleType extends AbstractResourceType
                 'entry_type' => BlockType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
-            ]);
+                'by_reference' => false,
+            ])
+            ->addEventListener(FormEvents::POST_SET_DATA, array($this, 'onPostSetData'))
+            ->addEventListener(FormEvents::POST_SUBMIT, array($this, 'onPostSubmit'));
+    }
+
+    /**
+     * @param FormEvent $event
+     */
+    public function onPostSetData(FormEvent $event)
+    {
+        /** @var Article $article */
+        $article = $event->getData();
+
+        $this->originalBlocks = new ArrayCollection();
+
+        foreach($article->getBlocks() as $block) {
+            $this->originalBlocks->add($block);
+        }
+    }
+
+    /**
+     * @param FormEvent $event
+     */
+    public function onPostSubmit(FormEvent $event)
+    {
+        /** @var Article $article */
+        $article = $event->getData();
+
+        // remove pub banners not present in submit form
+        foreach ($this->originalBlocks as $block) {
+            if (false === $article->hasBlock($block)) {
+                $article->removeBlock($block);
+                $this->manager->remove($block);
+            }
+        }
     }
 
     /**

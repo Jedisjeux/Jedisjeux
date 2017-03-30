@@ -15,7 +15,6 @@ use AppBundle\Entity\Block;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -43,12 +42,12 @@ class BlockType extends AbstractResourceType
             ])
             ->add('imagePosition', ChoiceType::class, [
                 'label' => 'app.ui.image_position',
-                'required' => false,
+                'required' => true,
                 'choices_as_values' => true,
                 'choices' => [
+                    'app.ui.image_on_the_top_side' => Block::POSITION_TOP,
                     'app.ui.image_on_the_left_side' => Block::POSITION_LEFT,
                     'app.ui.image_on_the_right_side' => Block::POSITION_RIGHT,
-                    'app.ui.image_on_the_top_side' => Block::POSITION_TOP,
                 ],
             ])
             ->add('class', ChoiceType::class, [

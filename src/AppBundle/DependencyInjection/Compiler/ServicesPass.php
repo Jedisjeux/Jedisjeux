@@ -94,6 +94,10 @@ class ServicesPass implements CompilerPassInterface
         $dealerFormTypeDefinition
             ->addMethodCall('setManager', [new Reference('app.manager.dealer')]);
 
+        $articleFormTypeDefinition = $container->getDefinition('app.form.type.article');
+        $articleFormTypeDefinition
+            ->addMethodCall('setManager', [new Reference('doctrine.orm.entity_manager')]);
+
         $topicFormTypeDefinition = $container->getDefinition('app.form.type.topic');
         $topicFormTypeDefinition
             ->addMethodCall('setAuthorizationChecker', [new Reference('security.authorization_checker')]);
