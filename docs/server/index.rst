@@ -7,9 +7,11 @@ Configuration d'Apache
 Virtual host
 ~~~~~~~~~~~~
 
+For more details, you can read `virtualHostsTutorial`_
+
 .. code-block:: bash
 
-    $ touch /etc/httpd/vhosts/01-jedisjeux.conf
+    $ touch /etc/httpd/sites-available/01-jedisjeux.conf
 
 .. code-block:: bash
 
@@ -21,8 +23,8 @@ Virtual host
                     Options Indexes FollowSymLinks MultiViews
                     AllowOverride All
             </Directory>
-            ServerName 92.243.10.152
-            ServerAlias 92.243.10.152
+            ServerName XX.XXX.XX.XXX
+            ServerAlias XX.XXX.XX.XXX
             CustomLog logs/ovh-access_log combined
             ErrorLog  /var/log/httpd/jedisjeux-error_log
     </VirtualHost>
@@ -61,3 +63,6 @@ Ensure access
     $ chmod g-w /home/jedisjeux
     $ chmod 700 /home/jedisjeux/.ssh
     $ chmod 600 /home/jedisjeux/.ssh/authorized_keys
+
+
+.. _virtualHostsTutorial: https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-hosts-on-centos-7

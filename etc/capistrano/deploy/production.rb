@@ -7,7 +7,7 @@
 # server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
 # server 'db.example.com', user: 'deploy', roles: %w{db}
 
-server 'XX.XXX.XXX.XX',
+server '46.226.108.147',
   user: 'jedisjeux',
   roles: %w{app db web},
   ssh_options: {
