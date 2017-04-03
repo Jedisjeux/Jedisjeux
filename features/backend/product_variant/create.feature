@@ -21,7 +21,7 @@ Feature: Creates product variants
   Scenario: Create a product variant
     Given I am on "/admin/products/"
     And I click on "Gérer les variantes" dropdown
-    And I follow "Créer"
+    And I follow "Ajouter"
     And I fill in the following:
       | Nom | Die fürsten von Florenz |
     When I press "Créer"
