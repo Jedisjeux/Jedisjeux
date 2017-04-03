@@ -120,7 +120,7 @@ class LoadStringBlocksCommand extends ContainerAwareCommand
             array(
                 'name' => 'about',
                 'body' => '
-<p>Jedisjeux est un site communautaire et une association à but non lucratif qui rassemble des bénévoles passionnés par les jeux de société. Vous pouvez y trouver des actualités, des critiques, des reportages, des interviews, un forum de discussion ainsi qu’une grande base de données de jeux avec la possibilité de répertorier votre ludothèque, un calendrier avec les dates de sorties et les informations sur les événements ludiques.</p>
+<p>Jedisjeux est une association qui rassemble des bénévoles passionnés par les jeux de société. Vous y trouverez des actualités, des critiques, des reportages, des interviews, un forum de discussion, une grande base de données de jeux ainsi qu’un calendrier avec les principales dates de sortie.</p>
                 ',
             ),
             array(
