@@ -22,6 +22,7 @@ use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -79,9 +80,11 @@ class LoadProductsCommand extends ContainerAwareCommand
             /** @var Product $product */
             $product = $this->getRepository()->findOneBy(['code' => $data['parent_code']]);
 
-            if (null !== $product) {
-                $this->createOrReplaceProductVariant($product, $data);
+            if (null === $product) {
+                throw new NotFoundHttpException(sprintf('Product with code %s was not found.', $data['parent_code']));
             }
+
+            $this->createOrReplaceProductVariant($product, $data);
         }
 
         $this->deleteProductAssociations();
@@ -180,9 +183,6 @@ class LoadProductsCommand extends ContainerAwareCommand
         }
 
         switch ($data['status']) {
-            case 0 :
-                $data['status'] = Product::STATUS_NEW;
-                break;
             case 1 :
                 $data['status'] = Product::PUBLISHED;
                 break;
@@ -194,6 +194,11 @@ class LoadProductsCommand extends ContainerAwareCommand
                 break;
             case 3 :
                 $data['status'] = Product::PENDING_PUBLICATION;
+                break;
+            case 0 :
+            case 4 :
+            default:
+                $data['status'] = Product::STATUS_NEW;
                 break;
         }
 
@@ -402,8 +407,8 @@ SELECT
   old.precis_sortie       AS releasedAtPrecision,
   old.href                AS href
 FROM jedisjeux.jdj_game old
-WHERE old.valid IN (0, 1, 2, 5, 3)
-      AND (old.id_pere IS NULL OR type_diff IN ('extension', 'collection'))
+WHERE old.valid > 0
+      AND (old.id_pere IS NULL OR id_pere = id_famille OR type_diff IN ('extension', 'collection'))
       AND old.nom <> ""
 EOM;
 
@@ -417,29 +422,30 @@ EOM;
     {
         $query = <<<EOM
 SELECT
-  concat('game-', old.id)      AS code,
-  concat('game-', old.id_pere) AS parent_code,
-  old.nom                      AS name,
-  old.min                      AS joueurMin,
-  old.max                      AS joueurMax,
-  old.age_min                  AS ageMin,
-  old.intro                    AS shortDescription,
-  old.presentation             AS description,
-  old.duree                    AS durationMin,
-  old.duree                    AS durationMax,
-  old.materiel                 AS materiel,
-  old.valid                    AS status,
-  old.date                     AS createdAt,
-  old.date                     AS updatedAt,
+  concat('game-', old.id)         AS code,
+  concat('game-', old.id_famille) AS parent_code,
+  old.nom                         AS name,
+  old.min                         AS joueurMin,
+  old.max                         AS joueurMax,
+  old.age_min                     AS ageMin,
+  old.intro                       AS shortDescription,
+  old.presentation                AS description,
+  old.duree                       AS durationMin,
+  old.duree                       AS durationMax,
+  old.materiel                    AS materiel,
+  old.valid                       AS status,
+  old.date                        AS createdAt,
+  old.date                        AS updatedAt,
   CASE WHEN old.date_sortie IS NULL AND old.annee IS NOT NULL
     THEN concat(old.annee, '-01-01')
   ELSE old.date_sortie
-  END                          AS releasedAt,
-  old.precis_sortie            AS releasedAtPrecision,
-  old.href                     AS href
+  END                             AS releasedAt,
+  old.precis_sortie               AS releasedAtPrecision,
+  old.href                        AS href
 FROM jedisjeux.jdj_game old
-WHERE old.valid IN (0, 1, 2, 5, 3)
+WHERE old.valid > 0
       AND old.id_pere IS NOT NULL
+      AND old.id_pere <> old.id_famille
       AND old.nom <> ""
       AND type_diff IN ('regle', 'materiel')
 
