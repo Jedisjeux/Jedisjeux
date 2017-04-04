@@ -226,14 +226,14 @@ class Product extends BaseProduct implements ReviewableInterface
     /**
      * {@inheritdoc}
      */
-    public function setName($name)
+    public function setName($name, $updateVariant = true)
     {
         parent::setName($name);
 
         /** @var ProductVariant $firstVariant */
         $firstVariant = $this->getFirstVariant();
 
-        if ($firstVariant) {
+        if ($firstVariant and $updateVariant) {
             $firstVariant->setName($name);
         }
     }

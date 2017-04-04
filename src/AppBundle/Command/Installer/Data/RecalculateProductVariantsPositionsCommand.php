@@ -96,8 +96,8 @@ EOT
             return;
         }
 
-        $product->setName($lastVariant->getName());
         $lastVariant->setPosition(0);
+        $product->setName($lastVariant->getName(), false);
     }
 
     /**
