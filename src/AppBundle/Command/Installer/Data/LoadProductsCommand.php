@@ -408,7 +408,7 @@ SELECT
   old.href                AS href
 FROM jedisjeux.jdj_game old
 WHERE old.valid > 0
-      AND (old.id_pere IS NULL OR id_pere = id_famille OR type_diff IN ('extension', 'collection'))
+      AND (old.id_pere IS NULL OR old.id = old.id_famille OR type_diff IN ('extension', 'collection'))
       AND old.nom <> ""
 EOM;
 
@@ -445,7 +445,7 @@ SELECT
 FROM jedisjeux.jdj_game old
 WHERE old.valid > 0
       AND old.id_pere IS NOT NULL
-      AND old.id_pere <> old.id_famille
+      AND old.id <> old.id_famille
       AND old.nom <> ""
       AND type_diff IN ('regle', 'materiel')
 

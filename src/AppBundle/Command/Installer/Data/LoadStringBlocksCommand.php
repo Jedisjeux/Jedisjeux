@@ -120,7 +120,7 @@ class LoadStringBlocksCommand extends ContainerAwareCommand
             array(
                 'name' => 'about',
                 'body' => '
-<p>Jedisjeux est une association qui rassemble des bénévoles passionnés par les jeux de société. Vous y trouverez des actualités, des critiques, des reportages, des interviews, un forum de discussion, une grande base de données de jeux ainsi qu’un calendrier avec les principales dates de sortie.</p>
+<p>Jedisjeux est une association qui rassemble des bénévoles passionnés par les jeux de société. Vous y trouverez des actualités, des critiques, des reportages, des interviews, un forum de discussion, une grande base de données ainsi qu’un calendrier avec les principales dates de sortie des jeux.</p>
                 ',
             ),
             array(
