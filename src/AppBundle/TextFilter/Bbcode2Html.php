@@ -70,6 +70,7 @@ class Bbcode2Html
         $body = $this->underlineReplacement($body);
         $body = $this->centerReplacement($body);
         $body = $this->listReplacement($body);
+        $body = $this->videoReplacement($body);
         $body = $this->emptyTagsReplacement($body);
 
         return $body;
@@ -87,6 +88,7 @@ class Bbcode2Html
 
     /**
      * @param string $body
+     *
      * @return string
      */
     protected function emoticonReplacement($body)
@@ -108,6 +110,7 @@ class Bbcode2Html
 
     /**
      * @param string $body
+     *
      * @return string
      */
     protected function quoteReplacement($body)
@@ -157,6 +160,7 @@ EOM;
 
     /**
      * @param string $body
+     *
      * @return string
      */
     protected function imageReplacement($body)
@@ -279,6 +283,7 @@ EOM;
 
     /**
      * @param string $body
+     *
      * @return string
      */
     protected function sizeReplacement($body)
@@ -292,6 +297,21 @@ EOM;
 
     /**
      * @param string $body
+     *
+     * @return string
+     */
+    protected function videoReplacement($body)
+    {
+        $pattern = '/\[flv=(.*?):(.*?)\](?P<text>.*?)\[\/flv:(.*?)\]/ms';
+        $replacement = "<iframe style=\"max-width: 100%\" width=\"800\" height=\"450\" src=\"$3\" frameborder=\"0\" allowfullscreen=\"\"></iframe>";
+        $body = preg_replace($pattern, $replacement, $body);
+
+        return $body;
+    }
+
+    /**
+     * @param string $body
+     *
      * @return string
      */
     protected function urlReplacement($body)
@@ -305,6 +325,7 @@ EOM;
 
     /**
      * @param string $body
+     *
      * @return string
      */
     protected function boldReplacement($body)
@@ -318,6 +339,7 @@ EOM;
 
     /**
      * @param string $body
+     *
      * @return string
      */
     protected function italicReplacement($body)
@@ -331,6 +353,7 @@ EOM;
 
     /**
      * @param string $body
+     *
      * @return string
      */
     protected function underlineReplacement($body)
@@ -344,6 +367,7 @@ EOM;
 
     /**
      * @param string $body
+     *
      * @return string
      */
     protected function centerReplacement($body)
@@ -357,6 +381,7 @@ EOM;
 
     /**
      * @param string $body
+     *
      * @return string
      */
     protected function listReplacement($body)
