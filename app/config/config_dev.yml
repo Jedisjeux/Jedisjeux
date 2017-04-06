@@ -29,9 +29,6 @@ monolog:
         #    type:   chromephp
         #    level:  info
 
-assetic:
-    use_controller: true
-
 doctrine:
     dbal:
         dbname:   "%database_name%_dev"
