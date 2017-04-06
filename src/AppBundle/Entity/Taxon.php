@@ -20,7 +20,7 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
  * @author Loïc Frémont <loic@mobizel.com>
  *
  * @ORM\Entity
- * @ORM\Table(name="Taxon")
+ * @ORM\Table(name="sylius_taxon")
  */
 class Taxon extends BaseTaxon
 {

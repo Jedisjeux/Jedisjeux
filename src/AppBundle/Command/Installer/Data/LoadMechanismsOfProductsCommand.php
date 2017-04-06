@@ -53,7 +53,7 @@ class LoadMechanismsOfProductsCommand extends ContainerAwareCommand
         $query = <<<EOM
 delete productTaxon
 from sylius_product_taxon productTaxon
-inner join Taxon taxon on taxon.id = productTaxon.taxoninterface_id
+inner join sylius_taxon taxon on taxon.id = productTaxon.taxoninterface_id
 where taxon.code like 'mechanism-%'
 EOM;
         $this->getDatabaseConnection()->executeQuery($query);
@@ -69,7 +69,7 @@ insert into sylius_product_taxon(product_id, taxoninterface_id)
 select product.id, taxon.id
 from jedisjeux.jdj_mecanismelieur old
 inner join sylius_product product on product.code = concat('game-', old.jeux_id)
-inner join Taxon taxon on taxon.code = concat('mechanism-', old.mecanisme_id)
+inner join sylius_taxon taxon on taxon.code = concat('mechanism-', old.mecanisme_id)
 EOM;
         $this->getDatabaseConnection()->executeQuery($query);
     }
