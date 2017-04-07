@@ -52,7 +52,7 @@ EOT
             'app:product-lists:load',
             'app:people:load',
             'app:persons-of-products:load',
-            'app:zones-of-persons:load',
+            'app:zones-of-people:load',
             'app:taxons-of-topics:load',
             'app:topics:load',
             'app:posts:load',
