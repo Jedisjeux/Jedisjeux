@@ -32,6 +32,7 @@ class Taxon extends BaseTaxon
     const CODE_PREVIEWS = 'previews';
     const CODE_REPORT_ARTICLE = 'report-articles';
     const CODE_REVIEW_ARTICLE = 'review-articles';
+    const CODE_VIDEO = 'videos';
 
     // taxons of forum
     const CODE_FORUM = 'forum';

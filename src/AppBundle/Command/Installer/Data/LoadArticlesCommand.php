@@ -184,6 +184,8 @@ SELECT
     THEN 'in-the-boxes'
   WHEN 'preview'
     THEN 'previews'
+  WHEN 'video'
+    THEN 'videos'
   ELSE NULL
   END                    AS mainTaxon,
   article.valid          AS publishable,

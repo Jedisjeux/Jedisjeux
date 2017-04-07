@@ -306,6 +306,12 @@ EOM;
         $replacement = "<iframe style=\"max-width: 100%\" width=\"800\" height=\"450\" src=\"$3\" frameborder=\"0\" allowfullscreen=\"\"></iframe>";
         $body = preg_replace($pattern, $replacement, $body);
 
+        $pattern = '/\[flv=(.*?)\](?P<text>.*?)\[\/flv\]/ms';
+        $replacement = "<iframe style=\"max-width: 100%\" width=\"800\" height=\"450\" src=\"$2\" frameborder=\"0\" allowfullscreen=\"\"></iframe>";
+        $body = preg_replace($pattern, $replacement, $body);
+
+        $body = str_replace('autoplay=1', 'autoplay=0', $body);
+
         return $body;
     }
 
