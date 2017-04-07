@@ -22,12 +22,13 @@ class GamePlayRepository extends EntityRepository
     protected function getQueryBuilder()
     {
         return $this->createQueryBuilder('o')
-            ->select('o', 'product', 'variant', 'productTranslation', 'image', 'topic')
+            ->select('o', 'product', 'variant', 'productTranslation', 'image', 'topic', 'article')
             ->join('o.product', 'product')
             ->join('product.variants', 'variant')
             ->join('product.translations', 'productTranslation')
             ->leftJoin('variant.images', 'image')
-            ->leftJoin('o.topic', 'topic');
+            ->leftJoin('o.topic', 'topic')
+            ->leftJoin('topic.article', 'article');
 
     }
 
