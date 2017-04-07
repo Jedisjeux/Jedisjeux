@@ -35,12 +35,16 @@ class TopicRepository extends EntityRepository
             ->addSelect('article')
             ->addSelect('gamePlay')
             ->addSelect('mainTaxon')
+            ->addSelect('product')
+            ->addSelect('productTranslation')
             ->join('o.author', 'customer')
             ->join('customer.user', 'user')
             ->leftJoin('customer.avatar', 'avatar')
             ->leftJoin('o.article', 'article')
             ->leftJoin('o.gamePlay', 'gamePlay')
-            ->leftJoin('o.mainTaxon', 'mainTaxon');
+            ->leftJoin('o.mainTaxon', 'mainTaxon')
+            ->leftJoin('gamePlay.product', 'product')
+            ->leftJoin('product.translations', 'productTranslation');
     }
 
     /**
@@ -59,20 +63,6 @@ class TopicRepository extends EntityRepository
         }
 
         parent::applyCriteria($queryBuilder, $criteria);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = [])
-    {
-        if (isset($sorting['postCount'])) {
-            $queryBuilder
-                ->addOrderBy('o.postCount', $sorting['postCount']);
-            unset($sorting['postCount']);
-        }
-
-        parent::applySorting($queryBuilder, $sorting);
     }
 
     /**
