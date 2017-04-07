@@ -22,6 +22,8 @@ class ArticleRepository extends EntityRepository
         $queryBuilder
             ->select('o, topic, product, productVariant, productTranslation')
             ->addSelect('gamePlay')
+            ->addSelect('mainImage')
+            ->leftJoin('o.mainImage', 'mainImage')
             ->leftJoin('o.topic', 'topic')
             ->leftJoin('topic.gamePlay', 'gamePlay')
             ->leftJoin('o.product', 'product')
