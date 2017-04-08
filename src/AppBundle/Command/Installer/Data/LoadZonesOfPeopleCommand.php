@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class LoadZonesOfPersonsCommand extends ContainerAwareCommand
+class LoadZonesOfPeopleCommand extends ContainerAwareCommand
 {
     /**
      * @inheritdoc
@@ -21,8 +21,8 @@ class LoadZonesOfPersonsCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('app:zones-of-persons:load')
-            ->setDescription('Load zones of persons');
+            ->setName('app:zones-of-people:load')
+            ->setDescription('Load zones of people');
     }
 
     /**
@@ -44,7 +44,7 @@ class LoadZonesOfPersonsCommand extends ContainerAwareCommand
         $query = <<<EOM
 delete personTaxon
 from jdj_person_taxon personTaxon
-inner join Taxon taxon on taxon.id = personTaxon.taxoninterface_id
+inner join sylius_taxon taxon on taxon.id = personTaxon.taxoninterface_id
 inner join sylius_taxon_translation taxonTranslation on taxonTranslation.translatable_id = taxon.id
 where taxonTranslation.permalink like 'zones%'
 EOM;

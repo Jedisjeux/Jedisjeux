@@ -13,12 +13,7 @@ sylius_product_index:
         _controller: sylius.controller.product:indexWithTaxonsAction
         _sylius:
             paginate: 16
-            repository:
-                method: createFilterPaginator
-                arguments: [$criteria, $sorting]
-            sortable: true
-            sorting:
-                createdAt: desc
+            grid: sylius_frontend_product
             template: frontend/game/index.html.twig
 
 sylius_product_release_index:

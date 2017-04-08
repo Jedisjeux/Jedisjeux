@@ -25,6 +25,28 @@ class ProductRepository extends BaseProductRepository
     /**
      * {@inheritdoc}
      */
+    public function createListQueryBuilder($localeCode)
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        $queryBuilder
+            ->addSelect('translation')
+            ->addSelect('variant')
+            ->addSelect('image')
+            ->addSelect('mainTaxon')
+            ->leftJoin('o.translations', 'translation')
+            ->leftJoin('o.variants', 'variant')
+            ->leftJoin('variant.images', 'image')
+            ->leftJoin('o.mainTaxon', 'mainTaxon')
+            ->andWhere('translation.locale = :localeCode')
+            ->setParameter('localeCode', $localeCode);
+
+        return $queryBuilder;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function createQueryBuilderWithLocaleCode($localeCode)
     {
         $queryBuilder = $this->createQueryBuilder('o');

@@ -3,6 +3,9 @@
 # Set php version through phpenv. 5.3, 5.4 and 5.5 available
 phpenv local 7.0
 
+# lanch elasticsearch
+sudo /etc/init.d/elasticsearch start
+
 # Install dependencies through Composer
 composer install --prefer-dist --no-interaction
 
@@ -19,9 +22,6 @@ sed -i "s/fos_elastica\.host.*/fos_elastica\.host: 127.0.0.1/" app/config/parame
 
 # php
 sed -i'' 's/^memory_limit=.*/memory_limit = -1/g' ${HOME}/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-
-# lanch elasticsearch
-sudo /etc/init.d/elasticsearch start
 
 # database creation
 php app/console doctrine:migrations:migrate --env=test -n
