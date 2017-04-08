@@ -40,5 +40,3 @@ Feature: View list of products
     Then I should see "Palazzo"
     When I follow "Note"
     Then I should see "Palazzo"
-    When I follow "Nom"
-    Then I should see "Palazzo"
