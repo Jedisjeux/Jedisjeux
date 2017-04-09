@@ -108,7 +108,7 @@ EOM;
         update Taxon taxon
   INNER JOIN sylius_taxon_translation translation
     ON translation.translatable_id = taxon.id
-  LEFT JOIN Taxon child
+  LEFT JOIN sylius_taxon child
     ON child.tree_left >= taxon.tree_left
        AND child.tree_right <= taxon.tree_right
        AND child.tree_root = taxon.tree_root
