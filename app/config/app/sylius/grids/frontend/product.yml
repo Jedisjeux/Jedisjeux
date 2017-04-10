@@ -7,14 +7,17 @@ sylius_grid:
                     class: "%sylius.model.product.class%"
                     repository:
                         method: createListQueryBuilder
-                        arguments: ["%locale%"]
+                        arguments: ["%locale%", true, "$criteria"]
             sorting:
                 createdAt: desc
             fields:
                 createdAt:
-                    type: twig
-                    label: sylius.ui.created_at
+                    type: string
                     sortable: ~
                 averageRating:
+                    type: string
+                    sortable: ~
+                variant.releasedAt:
+                    path: variant.releasedAt
                     type: string
                     sortable: ~

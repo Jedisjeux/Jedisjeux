@@ -11,6 +11,7 @@
 
 namespace AppBundle\DependencyInjection\Compiler;
 
+use AppBundle\Doctrine\ORM\Driver;
 use AppBundle\EventListener\PasswordUpdaterListener;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -33,6 +34,9 @@ class ServicesPass implements CompilerPassInterface
         $this->processListeners($container);
 
         $container->setAlias('sylius.context.customer', 'app.context.customer');
+
+        $dataProviderDefinition = $container->getDefinition('sylius.grid_driver.doctrine.orm');
+        $dataProviderDefinition->setClass(Driver::class);
     }
 
     /**

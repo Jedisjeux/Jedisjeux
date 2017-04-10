@@ -10,6 +10,7 @@ namespace AppBundle\Repository;
 
 use AppBundle\Entity\Product;
 use AppBundle\Utils\DateCalculator;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
@@ -23,9 +24,13 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 class ProductRepository extends BaseProductRepository
 {
     /**
-     * {@inheritdoc}
+     * @param $localeCode
+     * @param bool $onlyPublished
+     * @param array $criteria
+     *
+     * @return QueryBuilder
      */
-    public function createListQueryBuilder($localeCode)
+    public function createListQueryBuilder($localeCode, $onlyPublished=true, array $criteria = [])
     {
         $queryBuilder = $this->createQueryBuilder('o');
 
@@ -34,12 +39,32 @@ class ProductRepository extends BaseProductRepository
             ->addSelect('variant')
             ->addSelect('image')
             ->addSelect('mainTaxon')
-            ->leftJoin('o.translations', 'translation')
-            ->leftJoin('o.variants', 'variant')
+            ->leftJoin('o.translations', 'translation', Join::WITH, 'translation.locale = :localeCode')
+            ->leftJoin('o.variants', 'variant', Join::WITH, 'variant.position = 0')
             ->leftJoin('variant.images', 'image')
             ->leftJoin('o.mainTaxon', 'mainTaxon')
-            ->andWhere('translation.locale = :localeCode')
+            ->addGroupBy('o.id')
             ->setParameter('localeCode', $localeCode);
+
+        if ($onlyPublished) {
+            $queryBuilder
+                ->andWhere('o.status = :published')
+                ->setParameter('published', Product::PUBLISHED);
+        }
+
+        if (!empty($criteria['releasedAtFrom'])) {
+            $dateCalculator = new DateCalculator();
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->gte('variant.releasedAt', ':releasedAtFrom'))
+                ->setParameter('releasedAtFrom', $dateCalculator->getDay($criteria['releasedAtFrom']));
+        }
+
+        if (!empty($criteria['releasedAtTo'])) {
+            $dateCalculator = new DateCalculator();
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->lte('variant.releasedAt', ':releasedAtTo'))
+                ->setParameter('releasedAtTo', $dateCalculator->getDay($criteria['releasedAtTo']));
+        }
 
         return $queryBuilder;
     }
