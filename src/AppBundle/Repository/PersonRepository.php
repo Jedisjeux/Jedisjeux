@@ -8,6 +8,7 @@
 
 namespace AppBundle\Repository;
 
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
@@ -21,19 +22,14 @@ class PersonRepository extends EntityRepository
     public function createListQueryBuilder(TaxonInterface $taxon = null)
     {
         $queryBuilder = $this->createQueryBuilder('o')
-            ->addSelect('designerProduct')
-            ->addSelect('artistProduct')
-            ->addSelect('publisherProduct')
             ->addSelect('image')
-            ->leftJoin('o.images', 'image')
-            ->leftJoin('o.designerProducts', 'designerProduct')
-            ->leftJoin('o.artistProducts', 'artistProduct')
-            ->leftJoin('o.publisherProducts', 'publisherProduct');
+            ->leftJoin('o.images', 'image', Join::WITH, 'image.main = 1')
+            ->groupBy('o.id');
 
         $queryBuilder->addSelect($queryBuilder->expr()->sum(
-            "SIZE(o.designerProducts)",
-            "SIZE(o.publisherProducts)",
-            "SIZE(o.artistProducts)") .
+                "o.productCountAsDesigner",
+                "o.productCountAsPublisher",
+                "o.productCountAsArtist") .
         " as HIDDEN gameCount");
         $queryBuilder->addOrderBy("gameCount", 'desc');
 
@@ -99,9 +95,9 @@ class PersonRepository extends EntityRepository
     {
         if (isset($sorting['gameCount'])) {
             $queryBuilder->addSelect($queryBuilder->expr()->sum(
-                    "SIZE(o.designerProducts)",
-                    "SIZE(o.publisherProducts)",
-                    "SIZE(o.artistProducts)") .
+                    "o.productCountAsDesigner",
+                    "o.productCountAsPublisher",
+                    "o.productCountAsArtist") .
                 " as HIDDEN gameCount");
             $queryBuilder->addOrderBy("gameCount", $sorting['gameCount']);
             unset($sorting['gameCount']);

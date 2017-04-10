@@ -62,6 +62,7 @@ EOT
             'app:themes-of-products:load',
             'app:target-audiences:load',
             'app:products:count-by-taxon',
+            'app:products:count-by-person',
             'app:articles:load',
             'app:blocks-of-articles:load',
             'app:news:load',
