@@ -52,14 +52,16 @@ class GamePlayRepository extends EntityRepository
             ->addSelect('author')
             ->join('o.product', 'product')
             ->join('o.author', 'author')
-            ->join('product.variants', 'variant')
+            ->join('product.variants', 'variant', Join::WITH, 'variant.position = 0')
             ->join('product.translations', 'productTranslation')
-            ->leftJoin('variant.images', 'image')
+            ->leftJoin('variant.images', 'image', Join::WITH, 'image.main = :main')
             ->leftJoin('o.topic', 'topic')
             ->leftJoin('topic.article', 'article')
             ->leftJoin('o.players', 'players')
             ->andWhere('productTranslation.locale = :locale')
-            ->setParameter('locale', $locale);
+            ->groupBy('o.id')
+            ->setParameter('locale', $locale)
+            ->setParameter('main', true);
 
         if ($authorId) {
             $queryBuilder
