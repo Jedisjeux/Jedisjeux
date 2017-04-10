@@ -82,6 +82,27 @@ class Person implements ResourceInterface
     private $slug;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer")
+     */
+    protected $productCountAsDesigner = 0;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer")
+     */
+    protected $productCountAsArtist = 0;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer")
+     */
+    protected $productCountAsPublisher = 0;
+
+    /**
      * @var PersonImage[]|Collection
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\PersonImage", mappedBy="person", cascade={"persist", "merge"})
@@ -319,6 +340,66 @@ class Person implements ResourceInterface
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * @return int
+     */
+    public function getProductCountAsDesigner(): int
+    {
+        return $this->productCountAsDesigner;
+    }
+
+    /**
+     * @param int $productCountAsDesigner
+     *
+     * @return $this
+     */
+    public function setProductCountAsDesigner($productCountAsDesigner)
+    {
+        $this->productCountAsDesigner = $productCountAsDesigner;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getProductCountAsArtist(): int
+    {
+        return $this->productCountAsArtist;
+    }
+
+    /**
+     * @param int $productCountAsArtist
+     *
+     * @return $this
+     */
+    public function setProductCountAsArtist($productCountAsArtist)
+    {
+        $this->productCountAsArtist = $productCountAsArtist;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getProductCountAsPublisher(): int
+    {
+        return $this->productCountAsPublisher;
+    }
+
+    /**
+     * @param int $productCountAsPublisher
+     *
+     * @return $this
+     */
+    public function setProductCountAsPublisher($productCountAsPublisher)
+    {
+        $this->productCountAsPublisher = $productCountAsPublisher;
+
+        return $this;
     }
 
     /**
