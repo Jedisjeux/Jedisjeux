@@ -1,9 +1,9 @@
 {% from 'macros/misc.html.twig' import no_data %}
 
-{% if game_plays|length %}
+{% if game_plays.data|length %}
     <div class="img-box-4 text-center jeu-list">
         <div class="row">
-            {% for key, game_play in game_plays %}
+            {% for key, game_play in game_plays.data %}
             {% if key != 0 and key%3 == 0 %}
         </div>
         <div class="row">

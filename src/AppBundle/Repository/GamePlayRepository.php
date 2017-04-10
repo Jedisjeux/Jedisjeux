@@ -75,10 +75,11 @@ class GamePlayRepository extends EntityRepository
 
     /**
      * @param string $locale
+     * @param array $criteria
      *
      * @return QueryBuilder
      */
-    public function createCommentedListQueryBuilder($locale)
+    public function createCommentedListQueryBuilder($locale, array $criteria = [])
     {
         $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('product')
@@ -87,18 +88,22 @@ class GamePlayRepository extends EntityRepository
             ->addSelect('image')
             ->addSelect('topic')
             ->addSelect('article')
-            ->addSelect('players')
             ->join('o.product', 'product')
             ->join('product.variants', 'variant', Join::WITH, 'variant.position = 0')
             ->join('product.translations', 'productTranslation')
             ->leftJoin('variant.images', 'image', Join::WITH, 'image.main = :main')
             ->join('o.topic', 'topic')
             ->leftJoin('topic.article', 'article')
-            ->leftJoin('o.players', 'players')
             ->andWhere('productTranslation.locale = :locale')
             ->groupBy('o.id')
             ->setParameter('locale', $locale)
             ->setParameter('main', true);
+
+        if (isset($criteria['product'])) {
+            $queryBuilder
+                ->andWhere('product = :product')
+                ->setParameter('product', $criteria['product']);
+        }
 
         return $queryBuilder;
 

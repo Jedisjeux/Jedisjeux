@@ -7,7 +7,9 @@ sylius_grid:
                     class: "%app.model.game_play.class%"
                     repository:
                         method: createCommentedListQueryBuilder
-                        arguments: ["%locale%"]
+                        arguments:
+                            locale: "%locale%"
+                            criteria: "expr:service('request_stack').getCurrentRequest().get('criteria', [])"
             sorting:
                 createdAt: desc
             fields:
