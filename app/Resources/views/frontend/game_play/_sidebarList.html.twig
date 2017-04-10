@@ -1,7 +1,7 @@
 {% from 'macros/users.html.twig' import avatar %}
 
 <ul>
-    {% for game_play in game_plays %}
+    {% for game_play in game_plays.data %}
         {% set user = game_play.author.user %}
         {% set imagePath = game_play.product.mainImage ? game_play.product.mainImage.webPath : 'assets/frontend/img/avatar_2x.png' %}
 
