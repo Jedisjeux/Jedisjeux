@@ -160,6 +160,7 @@ class ProductRepository extends BaseProductRepository
                 'o.mainTaxon = :taxon',
                 ':left < taxon.left AND taxon.right < :right'
             ))
+            ->addGroupBy('o.id')
             ->setParameter('taxon', $taxon)
             ->setParameter('left', $taxon->getLeft())
             ->setParameter('right', $taxon->getRight());
@@ -183,6 +184,8 @@ class ProductRepository extends BaseProductRepository
     public function createFilterPaginator($criteria = [], $sorting = [], $deleted = false, $status = Product::PUBLISHED)
     {
         $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder
+            ->addGroupBy('o.id');
 
         if (!empty($criteria['name'])) {
             $queryBuilder
@@ -241,11 +244,6 @@ class ProductRepository extends BaseProductRepository
 
         $this->applySorting($queryBuilder, $sorting);
 
-        if ($deleted) {
-            $this->_em->getFilters()->disable('softdeleteable');
-            $queryBuilder->andWhere('o.deletedAt IS NOT NULL');
-        }
-
         return $this->getPaginator($queryBuilder);
     }
 
@@ -301,6 +299,6 @@ class ProductRepository extends BaseProductRepository
     protected function getPaginator(QueryBuilder $queryBuilder)
     {
         // Use output walkers option in DoctrineORMAdapter should be false as it affects performance greatly (see #3775)
-        return new Pagerfanta(new DoctrineORMAdapter($queryBuilder, true, true));
+        return new Pagerfanta(new DoctrineORMAdapter($queryBuilder, false, false));
     }
 }
