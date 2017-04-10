@@ -10,6 +10,7 @@ namespace AppBundle\Repository;
 
 use AppBundle\Entity\Product;
 use AppBundle\Utils\DateCalculator;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
@@ -22,6 +23,53 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
  */
 class ProductRepository extends BaseProductRepository
 {
+    /**
+     * @param $localeCode
+     * @param bool $onlyPublished
+     * @param array $criteria
+     *
+     * @return QueryBuilder
+     */
+    public function createListQueryBuilder($localeCode, $onlyPublished=true, array $criteria = [])
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        $queryBuilder
+            ->addSelect('translation')
+            ->addSelect('variant')
+            ->addSelect('image')
+            ->addSelect('mainTaxon')
+            ->leftJoin('o.translations', 'translation', Join::WITH, 'translation.locale = :localeCode')
+            ->leftJoin('o.variants', 'variant', Join::WITH, 'variant.position = 0')
+            ->leftJoin('variant.images', 'image', Join::WITH, 'image.main = :main')
+            ->leftJoin('o.mainTaxon', 'mainTaxon')
+            ->addGroupBy('o.id')
+            ->setParameter('localeCode', $localeCode)
+            ->setParameter('main', true);
+
+        if ($onlyPublished) {
+            $queryBuilder
+                ->andWhere('o.status = :published')
+                ->setParameter('published', Product::PUBLISHED);
+        }
+
+        if (!empty($criteria['releasedAtFrom'])) {
+            $dateCalculator = new DateCalculator();
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->gte('variant.releasedAt', ':releasedAtFrom'))
+                ->setParameter('releasedAtFrom', $dateCalculator->getDay($criteria['releasedAtFrom']));
+        }
+
+        if (!empty($criteria['releasedAtTo'])) {
+            $dateCalculator = new DateCalculator();
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->lte('variant.releasedAt', ':releasedAtTo'))
+                ->setParameter('releasedAtTo', $dateCalculator->getDay($criteria['releasedAtTo']));
+        }
+
+        return $queryBuilder;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -112,6 +160,7 @@ class ProductRepository extends BaseProductRepository
                 'o.mainTaxon = :taxon',
                 ':left < taxon.left AND taxon.right < :right'
             ))
+            ->addGroupBy('o.id')
             ->setParameter('taxon', $taxon)
             ->setParameter('left', $taxon->getLeft())
             ->setParameter('right', $taxon->getRight());
@@ -135,6 +184,8 @@ class ProductRepository extends BaseProductRepository
     public function createFilterPaginator($criteria = [], $sorting = [], $deleted = false, $status = Product::PUBLISHED)
     {
         $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder
+            ->addGroupBy('o.id');
 
         if (!empty($criteria['name'])) {
             $queryBuilder
@@ -193,11 +244,6 @@ class ProductRepository extends BaseProductRepository
 
         $this->applySorting($queryBuilder, $sorting);
 
-        if ($deleted) {
-            $this->_em->getFilters()->disable('softdeleteable');
-            $queryBuilder->andWhere('o.deletedAt IS NOT NULL');
-        }
-
         return $this->getPaginator($queryBuilder);
     }
 
@@ -253,6 +299,6 @@ class ProductRepository extends BaseProductRepository
     protected function getPaginator(QueryBuilder $queryBuilder)
     {
         // Use output walkers option in DoctrineORMAdapter should be false as it affects performance greatly (see #3775)
-        return new Pagerfanta(new DoctrineORMAdapter($queryBuilder, true, true));
+        return new Pagerfanta(new DoctrineORMAdapter($queryBuilder, false, false));
     }
 }

@@ -1,5 +1,7 @@
 {% from 'macros/misc.html.twig' import no_data %}
 
+{% set game_plays = game_plays.data is defined ? game_plays.data : game_plays %}
+
 {% if game_plays|length %}
     <div class="img-box-4 text-center jeu-list">
         <div class="row">

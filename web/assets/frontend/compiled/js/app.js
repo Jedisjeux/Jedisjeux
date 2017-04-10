@@ -12586,9 +12586,11 @@ $(function () {
     var $newProductListForm = $('#newProductListForm');
     var productId = $('input[name=productId]', $productListForm).val();
 
-    initLists();
-    selectListHandler();
-    createNewListHandler();
+    if ($productListForm.length > 0) {
+      initLists();
+      selectListHandler();
+      createNewListHandler();
+    }
 
     /**
      * Init all lists
@@ -13140,6 +13142,15 @@ $(function () {
     }
 
 });
+$(function() {
+
+    if ($('#user-review').length > 0) {
+        $('html, body').animate({
+            scrollTop:$("#user-review").offset().top
+        }, 'fast');
+    }
+
+});
 $.widget( "custom.imgcomplete", $.ui.autocomplete, {
     _renderItem: function( ul, item ) {
         return $( "<li>" )
@@ -13176,14 +13187,5 @@ $(function() {
             return false;
         }
     });
-
-});
-$(function() {
-
-    if ($('#user-review').length > 0) {
-        $('html, body').animate({
-            scrollTop:$("#user-review").offset().top
-        }, 'fast');
-    }
 
 });

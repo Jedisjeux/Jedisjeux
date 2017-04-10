@@ -118,6 +118,10 @@ class LoadTaxonsOfArticlesCommand extends ContainerAwareCommand
                 'code' => Taxon::CODE_INTERVIEW,
                 'name' => 'Interviews',
             ],
+            [
+                'code' => Taxon::CODE_VIDEO,
+                'name' => 'Vidéos',
+            ],
         ];
     }
 

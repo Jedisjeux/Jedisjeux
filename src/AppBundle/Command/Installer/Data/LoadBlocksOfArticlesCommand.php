@@ -62,16 +62,12 @@ EOT
 
             $block = $this->createOrReplaceBlock($data);
 
-            $taxonCode = $article->getMainTaxon() ? $article->getMainTaxon()->getCode() : null;
-
-            if (Taxon::CODE_REPORT_ARTICLE === $taxonCode and isset($data['image'])) {
-                $slideShowBlock = $this->createOrReplaceSlideShowBlock($article);
-                $slideShowBlock
-                    ->addBlock($block);
-            } else {
-                $article
-                    ->addBlock($block);
+            if ('video' === $data['type']) {
+                $block = $this->createOrReplaceVideoBlock($data);
             }
+
+            $article
+                ->addBlock($block);
 
             $this->getManager()->persist($block);
 
@@ -126,6 +122,37 @@ EOT
     }
 
     /**
+     * @param array $data
+     *
+     * @return Block
+     */
+    protected function createOrReplaceVideoBlock(array $data)
+    {
+        $code = sprintf('%s-video', $data['code']);
+
+        /** @var Block $block */
+        $block = $this->getRepository()->findOneBy(['code' => $code]);
+
+        if (null === $block) {
+            $block = $this->getFactory()->createNew();
+        }
+
+        $body = $data['image_label'] ?: null;
+
+        $bbcode2html = $this->getBbcode2Html();
+        $body = $bbcode2html
+            ->setBody($body)
+            ->getFilteredBody();
+
+        $block
+            ->setCode($code)
+            ->setBody($body)
+            ->setImagePosition(Block::POSITION_TOP);
+
+        return $block;
+    }
+
+    /**
      * @param Block $block
      * @param array $data
      *
@@ -137,30 +164,17 @@ EOT
             $image = $this->getContainer()->get('app.factory.block_image')->createNew();
         }
 
-        $image
-            ->setPath($data['image'])
-            ->setLabel($data['image_label']);
-
-        return $image;
-    }
-
-    /**
-     * @param Article $article
-     *
-     * @return SlideShowBlock
-     */
-    protected function createOrReplaceSlideshowBlock(Article $article)
-    {
-        /** @var SlideShowBlock $slideShowBlock */
-        $slideShowBlock = $article->getSlideShowBlock();
-
-        if (null === $slideShowBlock) {
-            $slideShowBlock = $this->getContainer()->get('app.factory.slide_show_block')->createNew();
-            $article
-                ->setSlideShowBlock($slideShowBlock);
+        if (isset($data['type']) and 'video' === $data['type']) {
+            $image
+                ->setPath($data['image'])
+                ->setLabel(null);
+        } else {
+            $image
+                ->setPath($data['image'])
+                ->setLabel($data['image_label']);
         }
 
-        return $slideShowBlock;
+        return $image;
     }
 
     /**
@@ -175,11 +189,18 @@ SELECT
   block.text_titre                AS title,
   block.text                      AS body,
   CASE block.style
+  WHEN 8
+    THEN 'video'
+  ELSE 'single-image'
+  END                             AS type,
+  CASE block.style
   WHEN 5
     THEN 'well'
   END                             AS class,
   CASE block.style
   WHEN 1
+    THEN 'left'
+  WHEN 8
     THEN 'left'
   WHEN 2
     THEN 'right'

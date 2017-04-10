@@ -1,22 +1,26 @@
 sylius_grid:
     grids:
-        app_frontend_game_play:
+        sylius_frontend_product:
             driver:
                 name: doctrine/orm
                 options:
-                    class: "%app.model.game_play.class%"
+                    class: "%sylius.model.product.class%"
                     repository:
-                        method: createCommentedListQueryBuilder
+                        method: createListQueryBuilder
                         arguments:
                             locale: "%locale%"
+                            onlyPublished: true
                             criteria: "expr:service('request_stack').getCurrentRequest().get('criteria', [])"
             sorting:
                 createdAt: desc
             fields:
                 createdAt:
-                    type: twig
-                    label: sylius.ui.created_at
+                    type: string
                     sortable: ~
-                topic.postCount:
-                    type: twig
+                averageRating:
+                    type: string
+                    sortable: ~
+                variant.releasedAt:
+                    path: variant.releasedAt
+                    type: string
                     sortable: ~

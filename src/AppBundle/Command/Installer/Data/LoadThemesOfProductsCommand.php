@@ -53,7 +53,7 @@ class LoadThemesOfProductsCommand extends ContainerAwareCommand
         $query = <<<EOM
 delete productTaxon
 from sylius_product_taxon productTaxon
-inner join Taxon taxon on taxon.id = productTaxon.taxoninterface_id
+inner join sylius_taxon taxon on taxon.id = productTaxon.taxoninterface_id
 where taxon.code like 'theme-%'
 EOM;
         $this->getDatabaseConnection()->executeQuery($query);
@@ -69,7 +69,7 @@ insert into sylius_product_taxon(product_id, taxoninterface_id)
 select product.id, taxon.id
 from jedisjeux.jdj_themelieur old
 inner join sylius_product product on product.code = concat('game-', old.jeux_id)
-inner join Taxon taxon on taxon.code = concat('theme-', old.theme_id)
+inner join sylius_taxon taxon on taxon.code = concat('theme-', old.theme_id)
 EOM;
         $this->getDatabaseConnection()->executeQuery($query);
     }

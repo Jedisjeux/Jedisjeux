@@ -41,8 +41,8 @@
         <!-- Paragraph -->
         <p>
             {{ 'label.played_at'|trans|lower }} {{ game_play.playedAt|localizeddate('medium', 'none') }}<br/>
-            {% if game_play.players|length > 0 %}
-                à {{ game_play.players|length }} joueur{% if game_play.players|length > 1 %}s{% endif %}<br/>
+            {% if game_play.playerCount > 0 %}
+                à {{ game_play.playerCount }} joueur{% if game_play.playerCount > 1 %}s{% endif %}<br/>
             {% endif %}
         </p>
         <div class="magazine-meta">

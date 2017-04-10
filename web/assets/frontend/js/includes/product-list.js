@@ -9,9 +9,11 @@ $(function () {
     var $newProductListForm = $('#newProductListForm');
     var productId = $('input[name=productId]', $productListForm).val();
 
-    initLists();
-    selectListHandler();
-    createNewListHandler();
+    if ($productListForm.length > 0) {
+      initLists();
+      selectListHandler();
+      createNewListHandler();
+    }
 
     /**
      * Init all lists

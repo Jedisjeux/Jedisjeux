@@ -138,7 +138,7 @@ FROM jedisjeux.phpbb3_topics old
     ON customer.code = concat('user-', old.topic_poster)
   INNER JOIN jedisjeux.phpbb3_forums forum
     ON forum.forum_id = old.forum_id
-  INNER JOIN Taxon taxon
+  INNER JOIN sylius_taxon taxon
     ON taxon.code = concat('forum-', old.forum_id)
 EOM;
 

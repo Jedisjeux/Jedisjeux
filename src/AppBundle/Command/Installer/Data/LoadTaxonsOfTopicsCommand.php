@@ -105,10 +105,10 @@ EOM;
     protected function updatePrivateTaxons()
     {
         $this->getManager()->getConnection()->executeQuery(<<<EOF
-        update Taxon taxon
+        update sylius_taxon taxon
   INNER JOIN sylius_taxon_translation translation
     ON translation.translatable_id = taxon.id
-  LEFT JOIN Taxon child
+  LEFT JOIN sylius_taxon child
     ON child.tree_left >= taxon.tree_left
        AND child.tree_right <= taxon.tree_right
        AND child.tree_root = taxon.tree_root
