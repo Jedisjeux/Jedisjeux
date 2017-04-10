@@ -6,8 +6,7 @@ sylius_taxonomy:
                 model: AppBundle\Entity\Taxon
                 repository: AppBundle\Repository\TaxonRepository
                 controller: AppBundle\Controller\TaxonController
-                form:
-                    default: AppBundle\Form\Type\TaxonType
+                form: AppBundle\Form\Type\TaxonType
             translation:
                 classes:
                     model: AppBundle\Entity\TaxonTranslation

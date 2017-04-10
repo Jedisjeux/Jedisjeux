@@ -7,8 +7,7 @@ sylius_product:
                 factory: AppBundle\Factory\ProductFactory
                 repository: AppBundle\Repository\ProductRepository
                 controller: AppBundle\Controller\ProductController
-                form:
-                    default: AppBundle\Form\Type\ProductType
+                form: AppBundle\Form\Type\ProductType
             translation:
               classes:
                   model: AppBundle\Entity\ProductTranslation
@@ -18,5 +17,4 @@ sylius_product:
                   factory: Sylius\Component\Product\Factory\ProductVariantFactory
                   repository: AppBundle\Repository\ProductVariantRepository
                   controller: AppBundle\Controller\ProductVariantController
-                  form:
-                      default: AppBundle\Form\Type\ProductVariantType
+                  form: AppBundle\Form\Type\ProductVariantType

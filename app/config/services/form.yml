@@ -24,6 +24,21 @@ services:
         tags:
             - { name: 'form.type', alias: 'app_filter_article' }
 
+    app.form.type.article:
+        class: AppBundle\Form\Type\ArticleType
+        tags:
+            - { name: 'form.type', alias: 'app_article' }
+
+    app.form.type.dealer:
+        class: AppBundle\Form\Type\DealerType
+        tags:
+            - { name: 'form.type', alias: 'app_dealer' }
+
+    app.form.type.topic:
+        class: AppBundle\Form\Type\TopicType
+        tags:
+            - { name: 'form.type', alias: 'app_topic' }
+
     # <!-- Forms -->
     # TODO remove (in sylius.yml) !
     app.form.type.post:
