@@ -1,3 +1,5 @@
+{% set products = products.data is defined ? products.data : products %}
+
 <div class="img-box-4 text-center jeu-list">
     <div class="row">
         {% for key, product in products %}

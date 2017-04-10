@@ -4,9 +4,7 @@ sylius_partial_product_index:
     defaults:
         _controller: sylius.controller.product:indexAction
         _sylius:
-            repository:
-                method: createFilterPaginator
-                arguments: [$criteria, $sorting]
+            grid: sylius_frontend_product
             template: $template
             paginate: $paginate
     requirements:
