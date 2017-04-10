@@ -164,7 +164,7 @@ EOT
             $image = $this->getContainer()->get('app.factory.block_image')->createNew();
         }
 
-        if ('video' === $data['type']) {
+        if (isset($data['type']) and 'video' === $data['type']) {
             $image
                 ->setPath($data['image'])
                 ->setLabel(null);
