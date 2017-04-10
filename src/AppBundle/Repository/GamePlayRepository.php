@@ -8,6 +8,7 @@
 
 namespace AppBundle\Repository;
 
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
@@ -86,14 +87,16 @@ class GamePlayRepository extends EntityRepository
             ->addSelect('article')
             ->addSelect('players')
             ->join('o.product', 'product')
-            ->join('product.variants', 'variant')
+            ->join('product.variants', 'variant', Join::WITH, 'variant.position = 0')
             ->join('product.translations', 'productTranslation')
-            ->leftJoin('variant.images', 'image')
+            ->leftJoin('variant.images', 'image', Join::WITH, 'image.main = :main')
             ->join('o.topic', 'topic')
             ->leftJoin('topic.article', 'article')
             ->leftJoin('o.players', 'players')
             ->andWhere('productTranslation.locale = :locale')
-            ->setParameter('locale', $locale);
+            ->groupBy('o.id')
+            ->setParameter('locale', $locale)
+            ->setParameter('main', true);
 
         return $queryBuilder;
 

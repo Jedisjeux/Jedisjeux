@@ -41,10 +41,11 @@ class ProductRepository extends BaseProductRepository
             ->addSelect('mainTaxon')
             ->leftJoin('o.translations', 'translation', Join::WITH, 'translation.locale = :localeCode')
             ->leftJoin('o.variants', 'variant', Join::WITH, 'variant.position = 0')
-            ->leftJoin('variant.images', 'image')
+            ->leftJoin('variant.images', 'image', Join::WITH, 'image.main = :main')
             ->leftJoin('o.mainTaxon', 'mainTaxon')
             ->addGroupBy('o.id')
-            ->setParameter('localeCode', $localeCode);
+            ->setParameter('localeCode', $localeCode)
+            ->setParameter('main', true);
 
         if ($onlyPublished) {
             $queryBuilder
