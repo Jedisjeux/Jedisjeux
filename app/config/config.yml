@@ -8,7 +8,7 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     knp.doctrine_behaviors.blameable_subscriber.user_entity: Sylius\Component\User\Model\User
-    locale: fr
+    locale: fr_FR
     sylius.locale: "%locale%"
     sylius.cache:
         type: file_system
@@ -17,7 +17,7 @@ parameters:
 
 framework:
     #esi:             ~
-    translator:      { fallbacks: ["%locale%"] }
+    translator:      { fallbacks: ["%locale%", "fr"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -85,11 +85,12 @@ doctrine:
         auto_mapping: true
 
 stof_doctrine_extensions:
-    default_locale: fr_FR
+    default_locale: "%locale%"
     orm:
         default:
             tree: true
             sluggable: true
+            timestampable: true
             softdeleteable: true
             sortable: true
 

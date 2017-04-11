@@ -82,7 +82,11 @@ class ProductVariant extends BaseProductVariant
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Person", inversedBy="designerProducts", cascade={"persist", "merge"})
-     * @ORM\JoinTable(name="jdj_designer_product_variant")
+     * @ORM\JoinTable(
+     *      name="jdj_designer_product_variant",
+     *      joinColumns={@ORM\JoinColumn(name="productvariant_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id")}
+     * )
      */
     protected $designers;
 
@@ -97,7 +101,10 @@ class ProductVariant extends BaseProductVariant
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Person", inversedBy="artistProducts", cascade={"persist", "merge"})
-     * @ORM\JoinTable(name="jdj_artist_product_variant")
+     * @ORM\JoinTable(name="jdj_artist_product_variant",
+     *      joinColumns={@ORM\JoinColumn(name="productvariant_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id")}
+     * )
      */
     protected $artists;
 
@@ -105,7 +112,10 @@ class ProductVariant extends BaseProductVariant
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Person", inversedBy="publisherProducts", cascade={"persist", "merge"})
-     * @ORM\JoinTable(name="jdj_publisher_product_variant")
+     * @ORM\JoinTable(name="jdj_publisher_product_variant",
+     *      joinColumns={@ORM\JoinColumn(name="productvariant_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id")}
+     * )
      */
     protected $publishers;
 

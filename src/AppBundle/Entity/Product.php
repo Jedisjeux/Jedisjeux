@@ -53,7 +53,9 @@ class Product extends BaseProduct implements ReviewableInterface
      * @var ArrayCollection|TaxonInterface[]
      *
      * @ORM\ManyToMany(targetEntity="Sylius\Component\Taxonomy\Model\TaxonInterface")
-     * @ORM\JoinTable("sylius_product_taxon")
+     * @ORM\JoinTable("sylius_product_taxon",
+     *      inverseJoinColumns={@ORM\JoinColumn(name="taxoninterface_id", referencedColumnName="id")}
+     * )
      */
     protected $taxons;
 

@@ -1,6 +1,4 @@
 sylius_resource:
-#    translation:
-#        default_locale: %locale%
     drivers:
         - doctrine/orm
         - doctrine/phpcr-odm

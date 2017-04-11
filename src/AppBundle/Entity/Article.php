@@ -29,7 +29,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Entity
  * @ORM\Table(name="jdj_article", indexes={
- *      @ORM\Index(name="publish_start_date_idx", columns={"publishStartDate"}),
  *      @ORM\Index(name="publishable_idx", columns={"publishable"})
  * })
  */

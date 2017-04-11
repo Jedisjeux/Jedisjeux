@@ -114,7 +114,9 @@ class Topic implements ResourceInterface
      * @var ArrayCollection|CustomerInterface[]
      *
      * @ORM\ManyToMany(targetEntity="Sylius\Component\Customer\Model\CustomerInterface")
-     * @ORM\JoinTable(name="jdj_topic_follower")
+     * @ORM\JoinTable(name="jdj_topic_follower",
+     *      inverseJoinColumns={@ORM\JoinColumn(name="customerinterface_id", referencedColumnName="id")}
+     * )
      */
     protected $followers;
 

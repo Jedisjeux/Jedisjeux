@@ -12,3 +12,10 @@ services:
         class: AppBundle\Installer\Checker\CommandDirectoryChecker
         arguments:
             - "@filesystem"
+
+    sylius.setup.locale:
+        class: AppBundle\Installer\Setup\LocaleSetup
+        arguments:
+            - "@sylius.repository.locale"
+            - "@sylius.factory.locale"
+            - "%locale%"

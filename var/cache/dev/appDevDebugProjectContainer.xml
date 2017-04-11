@@ -334,8 +334,8 @@
     <parameter key="google.analytics.profile_id">XXXXXXXX</parameter>
     <parameter key="google.analytics.private_key_file">/Users/loicfremont/www/jdj/app/Resources/credentials/client_secret.json</parameter>
     <parameter key="knp.doctrine_behaviors.blameable_subscriber.user_entity">Sylius\Component\User\Model\User</parameter>
-    <parameter key="locale">fr</parameter>
-    <parameter key="sylius.locale">fr</parameter>
+    <parameter key="locale">fr_FR</parameter>
+    <parameter key="sylius.locale">fr_FR</parameter>
     <parameter key="sylius.cache" type="collection">
       <parameter key="type">file_system</parameter>
     </parameter>
@@ -347,7 +347,7 @@
     <parameter key="kernel.http_method_override">true</parameter>
     <parameter key="kernel.trusted_hosts" type="collection"/>
     <parameter key="kernel.trusted_proxies" type="collection"/>
-    <parameter key="kernel.default_locale">fr</parameter>
+    <parameter key="kernel.default_locale">fr_FR</parameter>
     <parameter key="templating.helper.code.file_link_format">null</parameter>
     <parameter key="debug.file_link_format">null</parameter>
     <parameter key="session.metadata.storage_key">_sf2_meta</parameter>
@@ -1385,7 +1385,7 @@
     <parameter key="sylius.model.locale.class">Sylius\Component\Locale\Model\Locale</parameter>
     <parameter key="sylius.controller.locale.class">Sylius\Bundle\ResourceBundle\Controller\ResourceController</parameter>
     <parameter key="sylius.factory.locale.class">Sylius\Component\Resource\Factory\Factory</parameter>
-    <parameter key="sylius_locale.locale">fr</parameter>
+    <parameter key="sylius_locale.locale">fr_FR</parameter>
     <parameter key="sylius.repository.product_attribute.class">Sylius\Bundle\AttributeBundle\Doctrine\ORM\AttributeRepository</parameter>
     <parameter key="sylius.repository.product_option.class">Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductOptionRepository</parameter>
     <parameter key="sylius_product.driver.doctrine/orm">true</parameter>
@@ -2470,7 +2470,7 @@
             <parameter key="repository" type="collection">
               <parameter key="method">createListQueryBuilder</parameter>
               <parameter key="arguments" type="collection">
-                <parameter>fr</parameter>
+                <parameter>fr_FR</parameter>
               </parameter>
             </parameter>
           </parameter>
@@ -2732,7 +2732,7 @@
             <parameter key="repository" type="collection">
               <parameter key="method">createQueryBuilderWithLocaleCode</parameter>
               <parameter key="arguments" type="collection">
-                <parameter>fr</parameter>
+                <parameter>fr_FR</parameter>
               </parameter>
             </parameter>
           </parameter>
@@ -3181,7 +3181,7 @@
               <parameter key="method">createRootListQueryBuilder</parameter>
               <parameter key="arguments" type="collection">
                 <parameter type="collection">
-                  <parameter>fr</parameter>
+                  <parameter>fr_FR</parameter>
                 </parameter>
               </parameter>
             </parameter>
@@ -3250,7 +3250,7 @@
               <parameter key="method">createChildrenListQueryBuilder</parameter>
               <parameter key="arguments" type="collection">
                 <parameter type="collection">
-                  <parameter>fr</parameter>
+                  <parameter>fr_FR</parameter>
                 </parameter>
                 <parameter>expr:service('sylius.repository.taxon').findOneByCode($rootCode)</parameter>
               </parameter>
@@ -3399,7 +3399,7 @@
             <parameter key="repository" type="collection">
               <parameter key="method">createCommentedListQueryBuilder</parameter>
               <parameter key="arguments" type="collection">
-                <parameter key="locale">fr</parameter>
+                <parameter key="locale">fr_FR</parameter>
                 <parameter key="criteria">expr:service('request_stack').getCurrentRequest().get('criteria', [])</parameter>
               </parameter>
             </parameter>
@@ -3434,7 +3434,7 @@
             <parameter key="repository" type="collection">
               <parameter key="method">createListQueryBuilder</parameter>
               <parameter key="arguments" type="collection">
-                <parameter>fr</parameter>
+                <parameter>fr_FR</parameter>
                 <parameter>expr:service('app.context.customer').getCustomer().getId()</parameter>
               </parameter>
             </parameter>
@@ -3516,7 +3516,7 @@
             <parameter key="repository" type="collection">
               <parameter key="method">createListQueryBuilder</parameter>
               <parameter key="arguments" type="collection">
-                <parameter key="locale">fr</parameter>
+                <parameter key="locale">fr_FR</parameter>
                 <parameter key="onlyPublished">true</parameter>
                 <parameter key="criteria">expr:service('request_stack').getCurrentRequest().get('criteria', [])</parameter>
               </parameter>
@@ -3559,7 +3559,7 @@
               <parameter key="method">createQueryBuilderByProductList</parameter>
               <parameter key="arguments" type="collection">
                 <parameter>$productListSlug</parameter>
-                <parameter>fr</parameter>
+                <parameter>fr_FR</parameter>
               </parameter>
             </parameter>
           </parameter>
@@ -4682,6 +4682,11 @@
     <service id="sylius.installer.checker.command_directory" class="AppBundle\Installer\Checker\CommandDirectoryChecker">
       <argument type="service" id="filesystem"/>
     </service>
+    <service id="sylius.setup.locale" class="AppBundle\Installer\Setup\LocaleSetup">
+      <argument type="service" id="sylius.repository.locale"/>
+      <argument type="service" id="sylius.factory.locale"/>
+      <argument>fr_FR</argument>
+    </service>
     <service id="sylius.listener.canonicalizer" class="AppBundle\EventListener\CanonicalizerListener">
       <tag name="doctrine.event_listener" event="prePersist"/>
       <tag name="doctrine.event_listener" event="preUpdate"/>
@@ -4808,7 +4813,7 @@
     <service id="locale_listener" class="Symfony\Component\HttpKernel\EventListener\LocaleListener">
       <tag name="kernel.event_subscriber"/>
       <argument type="service" id="request_stack"/>
-      <argument>fr</argument>
+      <argument>fr_FR</argument>
       <argument type="service" id="cmf_routing.router" on-invalid="ignore"/>
     </service>
     <service id="validate_request_listener" class="Symfony\Component\HttpKernel\EventListener\ValidateRequestListener">
@@ -4860,7 +4865,7 @@
                 <tag name="cache.pool" clearer="cache.default_clearer"/>
                 <argument>WvUIk8LfIg</argument>
                 <argument>0</argument>
-                <argument>Vf8gNdMTuqjhf8Vu7AF-Xh</argument>
+                <argument>mSAx1P1h9OTOq7lHVG7fHU</argument>
                 <argument>/Users/loicfremont/www/jdj/var/cache/dev/pools</argument>
                 <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                 <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -5055,7 +5060,7 @@
       <tag name="cache.pool" clearer="cache.default_clearer"/>
       <argument>vk4VlOcKNM</argument>
       <argument>0</argument>
-      <argument>Vf8gNdMTuqjhf8Vu7AF-Xh</argument>
+      <argument>mSAx1P1h9OTOq7lHVG7fHU</argument>
       <argument>/Users/loicfremont/www/jdj/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -5065,7 +5070,7 @@
       <tag name="cache.pool" clearer="cache.default_clearer"/>
       <argument>3xypzREBRL</argument>
       <argument>0</argument>
-      <argument>Vf8gNdMTuqjhf8Vu7AF-Xh</argument>
+      <argument>mSAx1P1h9OTOq7lHVG7fHU</argument>
       <argument>/Users/loicfremont/www/jdj/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -6091,6 +6096,7 @@
       </call>
       <call method="setFallbackLocales">
         <argument type="collection">
+          <argument>fr_FR</argument>
           <argument>fr</argument>
         </argument>
       </call>
@@ -7730,7 +7736,7 @@
       <argument type="collection">
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>58ec7d89513c93.67415802</argument>
+            <argument>58ecd215246dd3.81429637</argument>
           </service>
         </argument>
         <argument type="service">
@@ -7751,7 +7757,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>58ec7d89513c93.67415802</argument>
+            <argument>58ecd215246dd3.81429637</argument>
           </service>
         </argument>
       </argument>
@@ -8111,7 +8117,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.token_storage"/>
-            <argument>58ec7d89513c93.67415802</argument>
+            <argument>58ecd215246dd3.81429637</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
@@ -8317,7 +8323,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.token_storage"/>
-            <argument>58ec7d89513c93.67415802</argument>
+            <argument>58ecd215246dd3.81429637</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
@@ -11417,7 +11423,7 @@
     </service>
     <service id="sylius.locale_provider" class="Sylius\Component\Locale\Provider\LocaleProvider">
       <argument type="service" id="sylius.repository.locale"/>
-      <argument>fr</argument>
+      <argument>fr_FR</argument>
     </service>
     <service id="sylius.locale_converter" class="Sylius\Component\Locale\Converter\LocaleConverter"/>
     <service id="sylius.listener.request_locale_setter" class="Sylius\Bundle\LocaleBundle\Listener\RequestLocaleSetter">
@@ -12477,7 +12483,7 @@
     <service id="sylius.resource_controller.flash_helper" class="Sylius\Bundle\ResourceBundle\Controller\FlashHelper" public="false">
       <argument type="service" id="session"/>
       <argument type="service" id="translator"/>
-      <argument>fr</argument>
+      <argument>fr_FR</argument>
     </service>
     <service id="sylius.resource_controller.event_dispatcher" class="Sylius\Bundle\ResourceBundle\Controller\EventDispatcher" public="false">
       <argument type="service" id="debug.event_dispatcher"/>
@@ -13362,9 +13368,9 @@
     </service>
     <service id="sylius.translation_locale_provider.immutable" class="Sylius\Component\Resource\Translation\Provider\ImmutableTranslationLocaleProvider">
       <argument type="collection">
-        <argument>fr</argument>
+        <argument>fr_FR</argument>
       </argument>
-      <argument>fr</argument>
+      <argument>fr_FR</argument>
     </service>
     <service id="sylius.translation.translatable_listener.doctrine.orm" class="Sylius\Bundle\ResourceBundle\EventListener\ORMTranslatableListener">
       <tag name="doctrine.event_subscriber" connection="default" priority="99"/>
@@ -16493,7 +16499,7 @@
               <argument key="repository" type="collection">
                 <argument key="method">createListQueryBuilder</argument>
                 <argument key="arguments" type="collection">
-                  <argument>fr</argument>
+                  <argument>fr_FR</argument>
                 </argument>
               </argument>
             </argument>
@@ -16755,7 +16761,7 @@
               <argument key="repository" type="collection">
                 <argument key="method">createQueryBuilderWithLocaleCode</argument>
                 <argument key="arguments" type="collection">
-                  <argument>fr</argument>
+                  <argument>fr_FR</argument>
                 </argument>
               </argument>
             </argument>
@@ -17204,7 +17210,7 @@
                 <argument key="method">createRootListQueryBuilder</argument>
                 <argument key="arguments" type="collection">
                   <argument type="collection">
-                    <argument>fr</argument>
+                    <argument>fr_FR</argument>
                   </argument>
                 </argument>
               </argument>
@@ -17273,7 +17279,7 @@
                 <argument key="method">createChildrenListQueryBuilder</argument>
                 <argument key="arguments" type="collection">
                   <argument type="collection">
-                    <argument>fr</argument>
+                    <argument>fr_FR</argument>
                   </argument>
                   <argument>expr:service('sylius.repository.taxon').findOneByCode($rootCode)</argument>
                 </argument>
@@ -17422,7 +17428,7 @@
               <argument key="repository" type="collection">
                 <argument key="method">createCommentedListQueryBuilder</argument>
                 <argument key="arguments" type="collection">
-                  <argument key="locale">fr</argument>
+                  <argument key="locale">fr_FR</argument>
                   <argument key="criteria">expr:service('request_stack').getCurrentRequest().get('criteria', [])</argument>
                 </argument>
               </argument>
@@ -17457,7 +17463,7 @@
               <argument key="repository" type="collection">
                 <argument key="method">createListQueryBuilder</argument>
                 <argument key="arguments" type="collection">
-                  <argument>fr</argument>
+                  <argument>fr_FR</argument>
                   <argument>expr:service('app.context.customer').getCustomer().getId()</argument>
                 </argument>
               </argument>
@@ -17539,7 +17545,7 @@
               <argument key="repository" type="collection">
                 <argument key="method">createListQueryBuilder</argument>
                 <argument key="arguments" type="collection">
-                  <argument key="locale">fr</argument>
+                  <argument key="locale">fr_FR</argument>
                   <argument key="onlyPublished">true</argument>
                   <argument key="criteria">expr:service('request_stack').getCurrentRequest().get('criteria', [])</argument>
                 </argument>
@@ -17582,7 +17588,7 @@
                 <argument key="method">createQueryBuilderByProductList</argument>
                 <argument key="arguments" type="collection">
                   <argument>$productListSlug</argument>
-                  <argument>fr</argument>
+                  <argument>fr_FR</argument>
                 </argument>
               </argument>
             </argument>
@@ -20725,7 +20731,7 @@
       <call method="setConfig">
         <argument>minimal</argument>
         <argument type="collection">
-          <argument key="language">fr</argument>
+          <argument key="language">fr_FR</argument>
           <argument key="toolbar" type="collection">
             <argument type="collection">
               <argument>Bold</argument>
@@ -20815,7 +20821,7 @@
           </argument>
           <argument key="extraPlugins">templates,div</argument>
           <argument key="templates">my_templates</argument>
-          <argument key="language">fr</argument>
+          <argument key="language">fr_FR</argument>
           <argument key="stylesSet">custom_styles</argument>
           <argument key="contentsCss" type="collection">
             <argument>assets/stylesheets/base.css</argument>

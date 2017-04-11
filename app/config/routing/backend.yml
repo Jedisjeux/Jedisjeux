@@ -68,8 +68,8 @@ app_backend_post:
 app_backend_redirection:
     resource: backend/redirection.yml
 
-sylius_backend_static_content:
-    resource: "backend/static_content.yml"
+#sylius_backend_static_content:
+#    resource: "backend/static_content.yml"
 
 app_backend_string_block:
     resource: backend/string_block.yml

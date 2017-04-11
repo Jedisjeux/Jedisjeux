@@ -887,6 +887,7 @@ class appDevDebugProjectContainer extends Container
             'sylius.security.password_encoder' => 'getSylius_Security_PasswordEncoderService',
             'sylius.security.password_updater' => 'getSylius_Security_PasswordUpdaterService',
             'sylius.security.user_login' => 'getSylius_Security_UserLoginService',
+            'sylius.setup.locale' => 'getSylius_Setup_LocaleService',
             'sylius.shop_user.pin_generator.password_reset' => 'getSylius_ShopUser_PinGenerator_PasswordResetService',
             'sylius.shop_user.pin_uniqueness_checker.password_reset' => 'getSylius_ShopUser_PinUniquenessChecker_PasswordResetService',
             'sylius.shop_user.reloader' => 'getSylius_ShopUser_ReloaderService',
@@ -3649,7 +3650,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getCache_SystemService()
     {
-        return $this->services['cache.system'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('vk4VlOcKNM', 0, 'Vf8gNdMTuqjhf8Vu7AF-Xh', (__DIR__.'/pools'), $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+        return $this->services['cache.system'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('vk4VlOcKNM', 0, 'mSAx1P1h9OTOq7lHVG7fHU', (__DIR__.'/pools'), $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE));
     }
 
     /**
@@ -3681,7 +3682,7 @@ class appDevDebugProjectContainer extends Container
 
         $d = new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinder($a, $b, ($this->targetDirs[3].'/app/Resources'));
 
-        return $this->services['cache_warmer'] = new \Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerAggregate(array(0 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplatePathsCacheWarmer($d, ${($_ = isset($this->services['templating.locator']) ? $this->services['templating.locator'] : $this->getTemplating_LocatorService()) && false ?: '_'}), 1 => new \Symfony\Bundle\AsseticBundle\CacheWarmer\AssetManagerCacheWarmer($this), 2 => $this->get('kernel.class_cache.cache_warmer'), 3 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TranslationsCacheWarmer($this->get('translator.default')), 4 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\ValidatorCacheWarmer($this->get('validator.builder'), (__DIR__.'/validation.php'), \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('WvUIk8LfIg', 0, 'Vf8gNdMTuqjhf8Vu7AF-Xh', (__DIR__.'/pools'), $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE))), 5 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\RouterCacheWarmer($this->get('cmf_routing.router')), 6 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\AnnotationsCacheWarmer(${($_ = isset($this->services['annotations.reader']) ? $this->services['annotations.reader'] : $this->getAnnotations_ReaderService()) && false ?: '_'}, (__DIR__.'/annotations.php'), ${($_ = isset($this->services['cache.annotations']) ? $this->services['cache.annotations'] : $this->getCache_AnnotationsService()) && false ?: '_'}), 7 => new \Symfony\Bundle\TwigBundle\CacheWarmer\TemplateCacheCacheWarmer($this, $d, array()), 8 => new \Symfony\Bundle\TwigBundle\CacheWarmer\TemplateCacheWarmer($this->get('twig'), new \Symfony\Bundle\TwigBundle\TemplateIterator($a, ($this->targetDirs[3].'/app'), array())), 9 => new \Symfony\Bridge\Doctrine\CacheWarmer\ProxyCacheWarmer($c), 10 => new \Doctrine\Bundle\PHPCRBundle\CacheWarmer\UniqueNodeTypeCacheWarmer($c), 11 => new \Symfony\Bridge\Doctrine\CacheWarmer\ProxyCacheWarmer($this->get('doctrine'))));
+        return $this->services['cache_warmer'] = new \Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerAggregate(array(0 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplatePathsCacheWarmer($d, ${($_ = isset($this->services['templating.locator']) ? $this->services['templating.locator'] : $this->getTemplating_LocatorService()) && false ?: '_'}), 1 => new \Symfony\Bundle\AsseticBundle\CacheWarmer\AssetManagerCacheWarmer($this), 2 => $this->get('kernel.class_cache.cache_warmer'), 3 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TranslationsCacheWarmer($this->get('translator.default')), 4 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\ValidatorCacheWarmer($this->get('validator.builder'), (__DIR__.'/validation.php'), \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('WvUIk8LfIg', 0, 'mSAx1P1h9OTOq7lHVG7fHU', (__DIR__.'/pools'), $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE))), 5 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\RouterCacheWarmer($this->get('cmf_routing.router')), 6 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\AnnotationsCacheWarmer(${($_ = isset($this->services['annotations.reader']) ? $this->services['annotations.reader'] : $this->getAnnotations_ReaderService()) && false ?: '_'}, (__DIR__.'/annotations.php'), ${($_ = isset($this->services['cache.annotations']) ? $this->services['cache.annotations'] : $this->getCache_AnnotationsService()) && false ?: '_'}), 7 => new \Symfony\Bundle\TwigBundle\CacheWarmer\TemplateCacheCacheWarmer($this, $d, array()), 8 => new \Symfony\Bundle\TwigBundle\CacheWarmer\TemplateCacheWarmer($this->get('twig'), new \Symfony\Bundle\TwigBundle\TemplateIterator($a, ($this->targetDirs[3].'/app'), array())), 9 => new \Symfony\Bridge\Doctrine\CacheWarmer\ProxyCacheWarmer($c), 10 => new \Doctrine\Bundle\PHPCRBundle\CacheWarmer\UniqueNodeTypeCacheWarmer($c), 11 => new \Symfony\Bridge\Doctrine\CacheWarmer\ProxyCacheWarmer($this->get('doctrine'))));
     }
 
     /**
@@ -4764,7 +4765,7 @@ class appDevDebugProjectContainer extends Container
     {
         if ($lazyLoad) {
 
-            return $this->services['doctrine.orm.default_entity_manager'] = DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0d0afe40b8a3d26d::staticProxyConstructor(
+            return $this->services['doctrine.orm.default_entity_manager'] = DoctrineORMEntityManager_000000004b511ba6000000000f6225f6877f40b66baaf9ca0d0afe40b8a3d26d::staticProxyConstructor(
                 function (&$wrappedInstance, \ProxyManager\Proxy\LazyLoadingInterface $proxy) {
                     $wrappedInstance = $this->getDoctrine_Orm_DefaultEntityManagerService(false);
 
@@ -6934,7 +6935,7 @@ class appDevDebugProjectContainer extends Container
     {
         if ($lazyLoad) {
 
-            return $this->services['fos_rest.serializer'] = FOSRestBundleSerializerJMSSerializerAdapter_0000000067dc5ce80000000078fadba4877f40b66baaf9ca0d0afe40b8a3d26d::staticProxyConstructor(
+            return $this->services['fos_rest.serializer'] = FOSRestBundleSerializerJMSSerializerAdapter_000000004b51165c000000000f6225f6877f40b66baaf9ca0d0afe40b8a3d26d::staticProxyConstructor(
                 function (&$wrappedInstance, \ProxyManager\Proxy\LazyLoadingInterface $proxy) {
                     $wrappedInstance = $this->getFosRest_SerializerService(false);
 
@@ -7443,9 +7444,9 @@ class appDevDebugProjectContainer extends Container
     {
         $this->services['ivory_ck_editor.config_manager'] = $instance = new \Ivory\CKEditorBundle\Model\ConfigManager();
 
-        $instance->setConfig('minimal', array('language' => 'fr', 'toolbar' => array(0 => array(0 => 'Bold', 1 => 'Italic'), 1 => array(0 => 'NumberedList', 1 => 'BulletedList', 2 => '-', 3 => 'Outdent', 4 => 'Indent'), 2 => array(0 => 'Link', 1 => 'Unlink'), 3 => array(0 => 'About'))));
+        $instance->setConfig('minimal', array('language' => 'fr_FR', 'toolbar' => array(0 => array(0 => 'Bold', 1 => 'Italic'), 1 => array(0 => 'NumberedList', 1 => 'BulletedList', 2 => '-', 3 => 'Outdent', 4 => 'Indent'), 2 => array(0 => 'Link', 1 => 'Unlink'), 3 => array(0 => 'About'))));
         $instance->setConfig('standard', array('toolbar' => array(0 => array(0 => 'Cut', 1 => 'Copy', 2 => 'Paste', 3 => 'PasteText', 4 => 'PasteFromWord', 5 => '-', 6 => 'Undo', 7 => 'Redo'), 1 => array(0 => 'Scayt'), 2 => array(0 => 'Link', 1 => 'Unlink', 2 => 'Anchor'), 3 => array(0 => 'Image', 1 => 'Table', 2 => 'HorizontalRule', 3 => 'SpecialChar'), 4 => array(0 => 'Maximize'), 5 => array(0 => 'Source'), 6 => '/', 7 => array(0 => 'Bold', 1 => 'Italic', 2 => 'Strike', 3 => '-', 4 => 'RemoveFormat'), 8 => array(0 => 'NumberedList', 1 => 'BulletedList', 2 => '-', 3 => 'Outdent', 4 => 'Indent', 5 => '-', 6 => 'Blockquote'), 9 => array(0 => 'Styles', 1 => 'Format', 2 => 'About'))));
-        $instance->setConfig('forum', array('protectedSource' => array(0 => '/<span[^>]*><\\/span>/g'), 'extraPlugins' => 'templates,div', 'templates' => 'my_templates', 'language' => 'fr', 'stylesSet' => 'custom_styles', 'contentsCss' => array(0 => 'assets/stylesheets/base.css'), 'toolbar' => array(0 => array(0 => 'Templates'), 1 => array(0 => 'Bold', 1 => 'Italic', 2 => 'Underline', 3 => 'Blockquote'), 2 => array(0 => 'NumberedList', 1 => 'BulletedList'), 3 => array(0 => 'Link', 1 => 'Unlink'), 4 => array(0 => 'Image'), 5 => array(0 => 'Styles', 1 => 'Format'), 6 => ';')));
+        $instance->setConfig('forum', array('protectedSource' => array(0 => '/<span[^>]*><\\/span>/g'), 'extraPlugins' => 'templates,div', 'templates' => 'my_templates', 'language' => 'fr_FR', 'stylesSet' => 'custom_styles', 'contentsCss' => array(0 => 'assets/stylesheets/base.css'), 'toolbar' => array(0 => array(0 => 'Templates'), 1 => array(0 => 'Bold', 1 => 'Italic', 2 => 'Underline', 3 => 'Blockquote'), 2 => array(0 => 'NumberedList', 1 => 'BulletedList'), 3 => array(0 => 'Link', 1 => 'Unlink'), 4 => array(0 => 'Image'), 5 => array(0 => 'Styles', 1 => 'Format'), 6 => ';')));
         $instance->setDefaultConfig('minimal');
 
         return $instance;
@@ -8583,7 +8584,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getLocaleListenerService()
     {
-        return $this->services['locale_listener'] = new \Symfony\Component\HttpKernel\EventListener\LocaleListener($this->get('request_stack'), 'fr', $this->get('cmf_routing.router', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+        return $this->services['locale_listener'] = new \Symfony\Component\HttpKernel\EventListener\LocaleListener($this->get('request_stack'), 'fr_FR', $this->get('cmf_routing.router', ContainerInterface::NULL_ON_INVALID_REFERENCE));
     }
 
     /**
@@ -9454,7 +9455,7 @@ class appDevDebugProjectContainer extends Container
         $a = $this->get('security.token_storage');
         $b = $this->get('monolog.logger.security', ContainerInterface::NULL_ON_INVALID_REFERENCE);
 
-        return $this->services['security.firewall.map.context.api'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => ${($_ = isset($this->services['security.channel_listener']) ? $this->services['security.channel_listener'] : $this->getSecurity_ChannelListenerService()) && false ?: '_'}, 1 => ${($_ = isset($this->services['security.context_listener.0']) ? $this->services['security.context_listener.0'] : $this->getSecurity_ContextListener_0Service()) && false ?: '_'}, 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($a, '58ec7d89513c93.67415802', $b, ${($_ = isset($this->services['security.authentication.manager']) ? $this->services['security.authentication.manager'] : $this->getSecurity_Authentication_ManagerService()) && false ?: '_'}), 3 => ${($_ = isset($this->services['security.access_listener']) ? $this->services['security.access_listener'] : $this->getSecurity_AccessListenerService()) && false ?: '_'}), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, ${($_ = isset($this->services['security.authentication.trust_resolver']) ? $this->services['security.authentication.trust_resolver'] : $this->getSecurity_Authentication_TrustResolverService()) && false ?: '_'}, ${($_ = isset($this->services['security.http_utils']) ? $this->services['security.http_utils'] : $this->getSecurity_HttpUtilsService()) && false ?: '_'}, 'api', $this->get('app.security.api_entry_point'), NULL, NULL, $b, false), new \Symfony\Bundle\SecurityBundle\Security\FirewallConfig('api', 'security.user_checker', 'security.request_matcher.e8252d3b68a0036d971de50fe3481213180e5b38fb939d716cb8ea184fe7d5a104a954c3', true, false, 'sylius.shop_user_provider.email_or_name_based', 'user', 'app.security.api_entry_point', NULL, NULL, array(0 => 'anonymous')));
+        return $this->services['security.firewall.map.context.api'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => ${($_ = isset($this->services['security.channel_listener']) ? $this->services['security.channel_listener'] : $this->getSecurity_ChannelListenerService()) && false ?: '_'}, 1 => ${($_ = isset($this->services['security.context_listener.0']) ? $this->services['security.context_listener.0'] : $this->getSecurity_ContextListener_0Service()) && false ?: '_'}, 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($a, '58ecd215246dd3.81429637', $b, ${($_ = isset($this->services['security.authentication.manager']) ? $this->services['security.authentication.manager'] : $this->getSecurity_Authentication_ManagerService()) && false ?: '_'}), 3 => ${($_ = isset($this->services['security.access_listener']) ? $this->services['security.access_listener'] : $this->getSecurity_AccessListenerService()) && false ?: '_'}), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, ${($_ = isset($this->services['security.authentication.trust_resolver']) ? $this->services['security.authentication.trust_resolver'] : $this->getSecurity_Authentication_TrustResolverService()) && false ?: '_'}, ${($_ = isset($this->services['security.http_utils']) ? $this->services['security.http_utils'] : $this->getSecurity_HttpUtilsService()) && false ?: '_'}, 'api', $this->get('app.security.api_entry_point'), NULL, NULL, $b, false), new \Symfony\Bundle\SecurityBundle\Security\FirewallConfig('api', 'security.user_checker', 'security.request_matcher.e8252d3b68a0036d971de50fe3481213180e5b38fb939d716cb8ea184fe7d5a104a954c3', true, false, 'sylius.shop_user_provider.email_or_name_based', 'user', 'app.security.api_entry_point', NULL, NULL, array(0 => 'anonymous')));
     }
 
     /**
@@ -9493,7 +9494,7 @@ class appDevDebugProjectContainer extends Container
         $m = new \Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener($d, $f, $j, $a, 'main', $k, $l, array('check_path' => 'sylius_shop_login_check', 'use_forward' => false, 'require_previous_session' => true, 'username_parameter' => '_username', 'password_parameter' => '_password', 'csrf_parameter' => '_csrf_token', 'csrf_token_id' => 'authenticate', 'post_only' => true), $c, $g, NULL);
         $m->setRememberMeServices($h);
 
-        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => ${($_ = isset($this->services['security.channel_listener']) ? $this->services['security.channel_listener'] : $this->getSecurity_ChannelListenerService()) && false ?: '_'}, 1 => ${($_ = isset($this->services['security.context_listener.0']) ? $this->services['security.context_listener.0'] : $this->getSecurity_ContextListener_0Service()) && false ?: '_'}, 2 => $i, 3 => $m, 4 => new \Symfony\Component\Security\Http\Firewall\RememberMeListener($d, $h, $f, $c, $g, true, $j), 5 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($d, '58ec7d89513c93.67415802', $c, $f), 6 => ${($_ = isset($this->services['security.access_listener']) ? $this->services['security.access_listener'] : $this->getSecurity_AccessListenerService()) && false ?: '_'}), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($d, ${($_ = isset($this->services['security.authentication.trust_resolver']) ? $this->services['security.authentication.trust_resolver'] : $this->getSecurity_Authentication_TrustResolverService()) && false ?: '_'}, $a, 'main', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($e, $a, 'sylius_shop_login', false), NULL, NULL, $c, false), new \Symfony\Bundle\SecurityBundle\Security\FirewallConfig('main', 'security.user_checker', 'security.request_matcher.b3056f0f803347e847d96183bd153ca130546888f46f3dba5936b2fe1f3c4a55cc4eac87', true, false, 'sylius.shop_user_provider.email_or_name_based', 'user', 'security.authentication.form_entry_point.main', NULL, NULL, array(0 => 'logout', 1 => 'form_login', 2 => 'remember_me', 3 => 'anonymous')));
+        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => ${($_ = isset($this->services['security.channel_listener']) ? $this->services['security.channel_listener'] : $this->getSecurity_ChannelListenerService()) && false ?: '_'}, 1 => ${($_ = isset($this->services['security.context_listener.0']) ? $this->services['security.context_listener.0'] : $this->getSecurity_ContextListener_0Service()) && false ?: '_'}, 2 => $i, 3 => $m, 4 => new \Symfony\Component\Security\Http\Firewall\RememberMeListener($d, $h, $f, $c, $g, true, $j), 5 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($d, '58ecd215246dd3.81429637', $c, $f), 6 => ${($_ = isset($this->services['security.access_listener']) ? $this->services['security.access_listener'] : $this->getSecurity_AccessListenerService()) && false ?: '_'}), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($d, ${($_ = isset($this->services['security.authentication.trust_resolver']) ? $this->services['security.authentication.trust_resolver'] : $this->getSecurity_Authentication_TrustResolverService()) && false ?: '_'}, $a, 'main', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($e, $a, 'sylius_shop_login', false), NULL, NULL, $c, false), new \Symfony\Bundle\SecurityBundle\Security\FirewallConfig('main', 'security.user_checker', 'security.request_matcher.b3056f0f803347e847d96183bd153ca130546888f46f3dba5936b2fe1f3c4a55cc4eac87', true, false, 'sylius.shop_user_provider.email_or_name_based', 'user', 'security.authentication.form_entry_point.main', NULL, NULL, array(0 => 'logout', 1 => 'form_login', 2 => 'remember_me', 3 => 'anonymous')));
     }
 
     /**
@@ -10391,7 +10392,7 @@ class appDevDebugProjectContainer extends Container
     {
         if ($lazyLoad) {
 
-            return $this->services['sylius.admin_oauth_user_provider.email_based'] = SyliusBundleUserBundleProviderEmailProvider_0000000067dc579e0000000078fadba4877f40b66baaf9ca0d0afe40b8a3d26d::staticProxyConstructor(
+            return $this->services['sylius.admin_oauth_user_provider.email_based'] = SyliusBundleUserBundleProviderEmailProvider_000000004b5112d0000000000f6225f6877f40b66baaf9ca0d0afe40b8a3d26d::staticProxyConstructor(
                 function (&$wrappedInstance, \ProxyManager\Proxy\LazyLoadingInterface $proxy) {
                     $wrappedInstance = $this->getSylius_AdminOauthUserProvider_EmailBasedService(false);
 
@@ -10419,7 +10420,7 @@ class appDevDebugProjectContainer extends Container
     {
         if ($lazyLoad) {
 
-            return $this->services['sylius.admin_oauth_user_provider.email_or_name_based'] = SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579c0000000078fadba4877f40b66baaf9ca0d0afe40b8a3d26d::staticProxyConstructor(
+            return $this->services['sylius.admin_oauth_user_provider.email_or_name_based'] = SyliusBundleUserBundleProviderUsernameOrEmailProvider_000000004b5112ce000000000f6225f6877f40b66baaf9ca0d0afe40b8a3d26d::staticProxyConstructor(
                 function (&$wrappedInstance, \ProxyManager\Proxy\LazyLoadingInterface $proxy) {
                     $wrappedInstance = $this->getSylius_AdminOauthUserProvider_EmailOrNameBasedService(false);
 
@@ -10447,7 +10448,7 @@ class appDevDebugProjectContainer extends Container
     {
         if ($lazyLoad) {
 
-            return $this->services['sylius.admin_oauth_user_provider.name_based'] = SyliusBundleUserBundleProviderUsernameProvider_0000000067dc579d0000000078fadba4877f40b66baaf9ca0d0afe40b8a3d26d::staticProxyConstructor(
+            return $this->services['sylius.admin_oauth_user_provider.name_based'] = SyliusBundleUserBundleProviderUsernameProvider_000000004b5112d1000000000f6225f6877f40b66baaf9ca0d0afe40b8a3d26d::staticProxyConstructor(
                 function (&$wrappedInstance, \ProxyManager\Proxy\LazyLoadingInterface $proxy) {
                     $wrappedInstance = $this->getSylius_AdminOauthUserProvider_NameBasedService(false);
 
@@ -12237,7 +12238,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSylius_Grid_ProviderService()
     {
-        return $this->services['sylius.grid.provider'] = new \Sylius\Component\Grid\Provider\ArrayGridProvider($this->get('sylius.grid.array_to_definition_converter'), array('app_backend_article' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\Article')), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('image' => array('type' => 'twig', 'label' => 'sylius.ui.image', 'path' => '.', 'options' => array('template' => 'backend/article/grid/field/image.html.twig'), 'enabled' => true), 'title' => array('type' => 'string', 'label' => 'sylius.ui.title', 'sortable' => 'title', 'enabled' => true, 'options' => array()), 'status' => array('type' => 'twig', 'label' => 'sylius.ui.status', 'options' => array('template' => 'backend/grid/field/state.html.twig', 'vars' => array('labels' => 'backend/article/label/state')), 'enabled' => true), 'createdAt' => array('type' => 'twig', 'label' => 'app.ui.created_at', 'sortable' => 'createdAt', 'options' => array('template' => 'backend/grid/field/date/medium.html.twig'), 'enabled' => true)), 'filters' => array('search' => array('type' => 'string', 'label' => 'sylius.ui.search', 'options' => array('fields' => array(0 => 'title')), 'enabled' => true)), 'actions' => array('main' => array('create' => array('type' => 'create', 'options' => array())), 'item' => array('update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array())))), 'app_backend_contact_request' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\ContactRequest')), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('createdAt' => array('type' => 'twig', 'label' => 'sylius.ui.created_at', 'sortable' => 'createdAt', 'options' => array('template' => 'backend/grid/field/date/medium.html.twig'), 'enabled' => true), 'fullName' => array('type' => 'twig', 'label' => 'sylius.ui.name', 'path' => 'fullName', 'options' => array('template' => 'backend/grid/field/string.html.twig'), 'enabled' => true), 'email' => array('type' => 'string', 'label' => 'sylius.ui.email', 'sortable' => 'email', 'enabled' => true, 'options' => array())), 'filters' => array('search' => array('type' => 'string', 'label' => 'sylius.ui.search', 'options' => array('fields' => array(0 => 'firstName', 1 => 'lastName')), 'enabled' => true)), 'actions' => array('item' => array('show' => array('type' => 'show', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array())))), 'sylius_backend_customer' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\Customer')), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('avatar' => array('type' => 'twig', 'label' => 'app.ui.avatar', 'path' => '.', 'options' => array('template' => 'backend/customer/grid/field/avatar.html.twig'), 'enabled' => true), 'email' => array('type' => 'string', 'label' => 'sylius.ui.email', 'sortable' => 'email', 'enabled' => true, 'options' => array()), 'createdAt' => array('type' => 'twig', 'label' => 'sylius.ui.registration_date', 'sortable' => 'createdAt', 'options' => array('template' => 'backend/grid/field/date/medium.html.twig'), 'enabled' => true)), 'filters' => array('search' => array('type' => 'string', 'label' => 'sylius.ui.search', 'options' => array('fields' => array(0 => 'email')), 'enabled' => true)), 'actions' => array('item' => array('update' => array('type' => 'update', 'options' => array())))), 'sylius_backend_customer_group' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'Sylius\\Component\\Customer\\Model\\CustomerGroup')), 'sorting' => array('name' => 'asc'), 'fields' => array('name' => array('type' => 'string', 'label' => 'sylius.ui.name', 'sortable' => 'name', 'enabled' => true, 'options' => array())), 'filters' => array('search' => array('type' => 'string', 'label' => 'sylius.ui.search', 'options' => array('fields' => array(0 => 'name')), 'enabled' => true)), 'actions' => array('main' => array('create' => array('type' => 'create', 'options' => array())), 'item' => array('update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array())))), 'app_backend_dealer' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\Dealer')), 'sorting' => array('name' => 'asc'), 'fields' => array('image' => array('type' => 'twig', 'label' => 'sylius.ui.image', 'path' => '.', 'options' => array('template' => 'backend/dealer/grid/field/image.html.twig'), 'enabled' => true), 'name' => array('type' => 'string', 'label' => 'sylius.ui.name', 'sortable' => 'name', 'enabled' => true, 'options' => array()), 'priceList' => array('type' => 'twig', 'label' => 'app.ui.price_list', 'path' => '.', 'options' => array('template' => 'backend/dealer/grid/field/priceList.html.twig'), 'enabled' => true), 'pubBanners' => array('type' => 'twig', 'label' => 'app.ui.pub_banners', 'path' => '.', 'options' => array('template' => 'backend/dealer/grid/field/pubBanners.html.twig'), 'enabled' => true)), 'filters' => array('search' => array('type' => 'string', 'label' => 'sylius.ui.search', 'options' => array('fields' => array(0 => 'name')), 'enabled' => true)), 'actions' => array('main' => array('create' => array('type' => 'create', 'options' => array())), 'item' => array('update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array())))), 'app_backend_dealer_price' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\DealerPrice')), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('createdAt' => array('type' => 'twig', 'label' => 'sylius.ui.created_at', 'sortable' => 'createdAt', 'options' => array('template' => 'backend/grid/field/date/medium.html.twig'), 'enabled' => true), 'dealer.name' => array('type' => 'string', 'label' => 'app.ui.dealer', 'enabled' => true, 'options' => array()), 'name' => array('type' => 'string', 'label' => 'sylius.ui.name', 'sortable' => 'name', 'enabled' => true, 'options' => array()), 'barcode' => array('type' => 'string', 'label' => 'app.ui.barcode', 'sortable' => 'barcode', 'enabled' => true, 'options' => array()), 'status' => array('type' => 'twig', 'label' => 'sylius.ui.status', 'options' => array('template' => 'backend/grid/field/state.html.twig', 'vars' => array('labels' => 'backend/dealer_price/label/state')), 'enabled' => true), 'price' => array('type' => 'twig', 'label' => 'sylius.ui.price', 'sortable' => 'price', 'options' => array('template' => 'backend/grid/field/money.html.twig'), 'enabled' => true)), 'filters' => array('search' => array('type' => 'string', 'label' => 'sylius.ui.search', 'options' => array('fields' => array(0 => 'name', 1 => 'barcode')), 'enabled' => true)), 'actions' => array('item' => array('update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array())))), 'app_backend_game_play' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\GamePlay', 'repository' => array('method' => 'createListQueryBuilder', 'arguments' => array(0 => 'fr')))), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('avatar' => array('type' => 'twig', 'label' => 'app.ui.avatar', 'path' => 'author', 'options' => array('template' => 'backend/customer/grid/field/avatar.html.twig'), 'enabled' => true), 'name' => array('type' => 'string', 'label' => 'sylius.ui.username', 'path' => 'author', 'enabled' => true, 'options' => array()), 'product' => array('type' => 'string', 'label' => 'sylius.ui.product', 'path' => 'product', 'enabled' => true, 'options' => array()), 'createdAt' => array('type' => 'twig', 'label' => 'sylius.ui.created_at', 'sortable' => NULL, 'options' => array('template' => 'backend/grid/field/date/medium.html.twig'), 'enabled' => true)), 'filters' => array('search' => array('type' => 'string', 'label' => 'sylius.ui.search', 'options' => array('fields' => array(0 => 'author.email', 1 => 'productTranslation.name')), 'enabled' => true)), 'actions' => array('item' => array('update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array())))), 'app_backend_not_found_page' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\NotFound')), 'sorting' => array('timestamp' => 'desc'), 'fields' => array('timestamp' => array('type' => 'twig', 'label' => 'sylius.ui.created_at', 'sortable' => NULL, 'options' => array('template' => 'backend/grid/field/date/medium.html.twig'), 'enabled' => true), 'path' => array('type' => 'string', 'label' => 'app.ui.path', 'sortable' => NULL, 'enabled' => true, 'options' => array()), 'referer' => array('type' => 'twig', 'label' => 'app.ui.referer', 'sortable' => NULL, 'options' => array('template' => 'backend/not_found_page/grid/field/referer.html.twig'), 'enabled' => true)), 'filters' => array('search' => array('type' => 'string', 'label' => 'sylius.ui.search', 'options' => array('fields' => array(0 => 'path', 1 => 'referer')), 'enabled' => true)), 'actions' => array()), 'app_backend_person' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\Person')), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('image' => array('type' => 'twig', 'label' => 'sylius.ui.image', 'path' => '.', 'options' => array('template' => 'backend/person/grid/field/image.html.twig'), 'enabled' => true), 'slug' => array('type' => 'twig', 'label' => 'sylius.ui.name', 'path' => '.', 'sortable' => 'slug', 'options' => array('template' => 'backend/grid/field/string.html.twig'), 'enabled' => true), 'createdAt' => array('type' => 'twig', 'label' => 'sylius.ui.created_at', 'sortable' => 'createdAt', 'options' => array('template' => 'backend/grid/field/date/medium.html.twig'), 'enabled' => true)), 'filters' => array('search' => array('type' => 'string', 'label' => 'sylius.ui.search', 'options' => array('fields' => array(0 => 'firstName', 1 => 'lastName')), 'enabled' => true)), 'actions' => array('main' => array('create' => array('type' => 'create', 'options' => array())), 'item' => array('update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array())))), 'app_backend_post' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\Post', 'repository' => array('method' => 'createListQueryBuilder', 'arguments' => array(0 => '$topicId')))), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('avatar' => array('type' => 'twig', 'label' => 'app.ui.avatar', 'path' => 'author', 'options' => array('template' => 'backend/customer/grid/field/avatar.html.twig'), 'enabled' => true), 'author.user.username' => array('type' => 'string', 'label' => 'sylius.ui.username', 'enabled' => true, 'options' => array()), 'topic.title' => array('type' => 'string', 'label' => 'app.ui.topic', 'enabled' => true, 'options' => array()), 'createdAt' => array('type' => 'twig', 'label' => 'sylius.ui.created_at', 'sortable' => 'createdAt', 'options' => array('template' => 'backend/grid/field/date/medium.html.twig'), 'enabled' => true)), 'actions' => array('item' => array('update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array()))), 'filters' => array()), 'sylius_backend_product' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\Product', 'repository' => array('method' => 'createQueryBuilderWithLocaleCode', 'arguments' => array(0 => 'fr')))), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('image' => array('type' => 'twig', 'label' => 'sylius.ui.image', 'path' => '.', 'options' => array('template' => 'backend/product/grid/field/image.html.twig'), 'enabled' => true), 'name' => array('type' => 'string', 'label' => 'sylius.ui.name', 'enabled' => true, 'options' => array()), 'createdAt' => array('type' => 'twig', 'label' => 'sylius.ui.created_at', 'sortable' => 'createdAt', 'options' => array('template' => 'backend/grid/field/date/medium.html.twig'), 'enabled' => true), 'status' => array('type' => 'twig', 'label' => 'sylius.ui.status', 'options' => array('template' => 'backend/grid/field/state.html.twig', 'vars' => array('labels' => 'backend/product/label/state')), 'enabled' => true)), 'filters' => array('search' => array('type' => 'string', 'label' => 'sylius.ui.search', 'options' => array('fields' => array(0 => 'code', 1 => 'translation.name')), 'enabled' => true)), 'actions' => array('main' => array('create' => array('type' => 'create_product', 'options' => array())), 'item' => array('manage_articles' => array('type' => 'manage_articles', 'options' => array()), 'manage_variants' => array('type' => 'manage_variants', 'options' => array()), 'update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array())))), 'sylius_backend_product_association_type' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'Sylius\\Component\\Product\\Model\\ProductAssociationType')), 'sorting' => array('code' => 'asc'), 'fields' => array('code' => array('type' => 'string', 'label' => 'sylius.ui.code', 'sortable' => NULL, 'enabled' => true, 'options' => array()), 'name' => array('type' => 'string', 'label' => 'sylius.ui.name', 'enabled' => true, 'options' => array())), 'filters' => array('code' => array('type' => 'string', 'label' => 'sylius.ui.code', 'enabled' => true, 'options' => array()), 'name' => array('type' => 'string', 'label' => 'sylius.ui.name', 'enabled' => true, 'options' => array())), 'actions' => array('main' => array('create' => array('type' => 'create', 'options' => array())), 'item' => array('update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array())))), 'app_backend_product_list' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\ProductList', 'repository' => array('method' => 'createListQueryBuilder'))), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('avatar' => array('type' => 'twig', 'path' => 'owner', 'label' => 'app.ui.avatar', 'options' => array('template' => 'backend/customer/grid/field/avatar.html.twig'), 'enabled' => true), 'owner' => array('type' => 'string', 'label' => 'sylius.ui.customer', 'enabled' => true, 'options' => array()), 'name' => array('type' => 'string', 'label' => 'sylius.ui.name', 'sortable' => NULL, 'enabled' => true, 'options' => array()), 'createdAt' => array('type' => 'twig', 'label' => 'sylius.ui.created_at', 'sortable' => NULL, 'options' => array('template' => 'backend/grid/field/date/medium.html.twig'), 'enabled' => true)), 'filters' => array('search' => array('type' => 'string', 'label' => 'sylius.ui.search', 'options' => array('fields' => array(0 => 'name', 1 => 'owner.email', 2 => 'user.username')), 'enabled' => true)), 'actions' => array('item' => array('update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array())))), 'sylius_backend_product_review' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\ProductReview')), 'sorting' => array('date' => 'desc'), 'fields' => array('date' => array('type' => 'datetime', 'label' => 'sylius.ui.date', 'path' => 'createdAt', 'sortable' => 'createdAt', 'options' => array('format' => 'd-m-Y H:i:s'), 'enabled' => true), 'title' => array('type' => 'string', 'label' => 'sylius.ui.title', 'sortable' => NULL, 'enabled' => true, 'options' => array()), 'rating' => array('type' => 'string', 'label' => 'sylius.ui.rating', 'sortable' => NULL, 'enabled' => true, 'options' => array()), 'reviewSubject' => array('type' => 'string', 'label' => 'sylius.ui.product', 'enabled' => true, 'options' => array()), 'author' => array('type' => 'string', 'label' => 'sylius.ui.customer', 'enabled' => true, 'options' => array())), 'filters' => array('title' => array('type' => 'string', 'label' => 'sylius.ui.title', 'enabled' => true, 'options' => array())), 'actions' => array('item' => array('update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array())))), 'sylius_backend_product_variant' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\ProductVariant', 'repository' => array('method' => 'createQueryBuilderByProductId', 'arguments' => array(0 => '$productId')))), 'sorting' => array('position' => 'asc'), 'fields' => array('name' => array('type' => 'string', 'label' => 'sylius.ui.name', 'enabled' => true, 'options' => array()), 'code' => array('type' => 'string', 'label' => 'sylius.ui.code', 'enabled' => true, 'options' => array()), 'position' => array('type' => 'twig', 'label' => 'sylius.ui.position', 'path' => '.', 'sortable' => NULL, 'options' => array('template' => 'backend/product_variant/grid/field/position.html.twig'), 'enabled' => true)), 'filters' => array('code' => array('type' => 'string', 'label' => 'sylius.ui.code', 'enabled' => true, 'options' => array()), 'name' => array('type' => 'string', 'label' => 'sylius.ui.name', 'options' => array('fields' => array(0 => 'name')), 'enabled' => true)), 'actions' => array('main' => array('update_positions' => array('type' => 'update_product_variant_positions', 'options' => array()), 'create' => array('type' => 'create', 'options' => array())), 'item' => array('update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array())))), 'app_backend_redirection' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\Redirection')), 'sorting' => array('source' => 'asc'), 'fields' => array('source' => array('type' => 'string', 'label' => 'app.ui.source', 'sortable' => NULL, 'enabled' => true, 'options' => array()), 'destination' => array('type' => 'string', 'label' => 'app.ui.destination', 'sortable' => NULL, 'enabled' => true, 'options' => array()), 'count' => array('type' => 'string', 'label' => 'app.ui.redirection_count', 'sortable' => NULL, 'enabled' => true, 'options' => array()), 'lastAccessed' => array('type' => 'twig', 'label' => 'app.ui.last_used_at', 'sortable' => NULL, 'options' => array('template' => 'backend/grid/field/date/medium.html.twig'), 'enabled' => true)), 'filters' => array('search' => array('type' => 'string', 'label' => 'sylius.ui.search', 'options' => array('fields' => array(0 => 'source', 1 => 'destination')), 'enabled' => true)), 'actions' => array('main' => array('create' => array('type' => 'create', 'options' => array())), 'item' => array('update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array())))), 'sylius_backend_root_taxon' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\Taxon', 'repository' => array('method' => 'createRootListQueryBuilder', 'arguments' => array(0 => array(0 => 'fr'))))), 'sorting' => array('code' => 'desc'), 'fields' => array('code' => array('type' => 'string', 'label' => 'sylius.ui.code', 'sortable' => NULL, 'enabled' => true, 'options' => array()), 'name' => array('type' => 'string', 'label' => 'sylius.ui.name', 'enabled' => true, 'options' => array())), 'filters' => array('search' => array('type' => 'string', 'label' => 'sylius.ui.search', 'options' => array('fields' => array(0 => 'code', 1 => 'translation.name')), 'enabled' => true)), 'actions' => array('main' => array('create' => array('type' => 'create', 'options' => array())), 'item' => array('taxons' => array('type' => 'list_taxons', 'options' => array()), 'update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array())))), 'sylius_backend_taxon_from_root' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\Taxon', 'repository' => array('method' => 'createChildrenListQueryBuilder', 'arguments' => array(0 => array(0 => 'fr'), 1 => 'expr:service(\'sylius.repository.taxon\').findOneByCode($rootCode)')))), 'fields' => array('code' => array('type' => 'string', 'label' => 'sylius.ui.code', 'enabled' => true, 'options' => array()), 'parent' => array('type' => 'string', 'label' => 'sylius.ui.parent', 'enabled' => true, 'options' => array()), 'name' => array('type' => 'string', 'label' => 'sylius.ui.name', 'enabled' => true, 'options' => array()), 'public' => array('type' => 'twig', 'label' => 'app.ui.public', 'path' => '.', 'options' => array('template' => 'backend/taxon/grid/field/public.html.twig'), 'enabled' => true)), 'filters' => array('search' => array('type' => 'string', 'label' => 'sylius.ui.search', 'options' => array('fields' => array(0 => 'code', 1 => 'translation.name')), 'enabled' => true)), 'actions' => array('main' => array('create' => array('type' => 'create', 'options' => array())), 'item' => array('update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array()))), 'sorting' => array()), 'app_backend_topic' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\Topic')), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('avatar' => array('type' => 'twig', 'label' => 'app.ui.avatar', 'path' => 'author', 'options' => array('template' => 'backend/customer/grid/field/avatar.html.twig'), 'enabled' => true), 'author.user.username' => array('type' => 'string', 'label' => 'sylius.ui.username', 'enabled' => true, 'options' => array()), 'title' => array('type' => 'string', 'label' => 'sylius.ui.title', 'sortable' => 'title', 'enabled' => true, 'options' => array()), 'createdAt' => array('type' => 'twig', 'label' => 'sylius.ui.created_at', 'sortable' => 'createdAt', 'options' => array('template' => 'backend/grid/field/date/medium.html.twig'), 'enabled' => true)), 'filters' => array('search' => array('type' => 'string', 'label' => 'sylius.ui.search', 'options' => array('fields' => array(0 => 'title')), 'enabled' => true)), 'actions' => array('item' => array('posts' => array('type' => 'list_posts', 'options' => array()), 'update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array())))), 'app_frontend_game_play' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\GamePlay', 'repository' => array('method' => 'createCommentedListQueryBuilder', 'arguments' => array('locale' => 'fr', 'criteria' => 'expr:service(\'request_stack\').getCurrentRequest().get(\'criteria\', [])')))), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('createdAt' => array('type' => 'twig', 'label' => 'sylius.ui.created_at', 'sortable' => NULL, 'enabled' => true, 'options' => array()), 'topic.postCount' => array('type' => 'twig', 'sortable' => NULL, 'enabled' => true, 'options' => array())), 'filters' => array(), 'actions' => array()), 'app_frontend_game_play_from_author' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\GamePlay', 'repository' => array('method' => 'createListQueryBuilder', 'arguments' => array(0 => 'fr', 1 => 'expr:service(\'app.context.customer\').getCustomer().getId()')))), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('createdAt' => array('type' => 'twig', 'label' => 'sylius.ui.created_at', 'sortable' => NULL, 'enabled' => true, 'options' => array())), 'filters' => array(), 'actions' => array()), 'app_frontend_person' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\Person', 'repository' => array('method' => 'createListQueryBuilder'))), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('createdAt' => array('type' => 'twig', 'label' => 'sylius.ui.created_at', 'sortable' => NULL, 'enabled' => true, 'options' => array())), 'filters' => array(), 'actions' => array()), 'app_frontend_person_from_taxon' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\Person', 'repository' => array('method' => 'createListQueryBuilder', 'arguments' => array(0 => 'expr:service(\'sylius.repository.taxon\').findOneByPermalink($permalink)')))), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('createdAt' => array('type' => 'twig', 'label' => 'sylius.ui.created_at', 'sortable' => NULL, 'enabled' => true, 'options' => array())), 'filters' => array(), 'actions' => array()), 'sylius_frontend_product' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\Product', 'repository' => array('method' => 'createListQueryBuilder', 'arguments' => array('locale' => 'fr', 'onlyPublished' => true, 'criteria' => 'expr:service(\'request_stack\').getCurrentRequest().get(\'criteria\', [])')))), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('createdAt' => array('type' => 'string', 'sortable' => NULL, 'enabled' => true, 'options' => array()), 'averageRating' => array('type' => 'string', 'sortable' => NULL, 'enabled' => true, 'options' => array()), 'variant.releasedAt' => array('path' => 'variant.releasedAt', 'type' => 'string', 'sortable' => NULL, 'enabled' => true, 'options' => array())), 'filters' => array(), 'actions' => array()), 'app_frontend_product_list_item' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\ProductListItem', 'repository' => array('method' => 'createQueryBuilderByProductList', 'arguments' => array(0 => '$productListSlug', 1 => 'fr')))), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('createdAt' => array('type' => 'twig', 'label' => 'sylius.ui.created_at', 'sortable' => NULL, 'enabled' => true, 'options' => array())), 'filters' => array(), 'actions' => array())));
+        return $this->services['sylius.grid.provider'] = new \Sylius\Component\Grid\Provider\ArrayGridProvider($this->get('sylius.grid.array_to_definition_converter'), array('app_backend_article' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\Article')), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('image' => array('type' => 'twig', 'label' => 'sylius.ui.image', 'path' => '.', 'options' => array('template' => 'backend/article/grid/field/image.html.twig'), 'enabled' => true), 'title' => array('type' => 'string', 'label' => 'sylius.ui.title', 'sortable' => 'title', 'enabled' => true, 'options' => array()), 'status' => array('type' => 'twig', 'label' => 'sylius.ui.status', 'options' => array('template' => 'backend/grid/field/state.html.twig', 'vars' => array('labels' => 'backend/article/label/state')), 'enabled' => true), 'createdAt' => array('type' => 'twig', 'label' => 'app.ui.created_at', 'sortable' => 'createdAt', 'options' => array('template' => 'backend/grid/field/date/medium.html.twig'), 'enabled' => true)), 'filters' => array('search' => array('type' => 'string', 'label' => 'sylius.ui.search', 'options' => array('fields' => array(0 => 'title')), 'enabled' => true)), 'actions' => array('main' => array('create' => array('type' => 'create', 'options' => array())), 'item' => array('update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array())))), 'app_backend_contact_request' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\ContactRequest')), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('createdAt' => array('type' => 'twig', 'label' => 'sylius.ui.created_at', 'sortable' => 'createdAt', 'options' => array('template' => 'backend/grid/field/date/medium.html.twig'), 'enabled' => true), 'fullName' => array('type' => 'twig', 'label' => 'sylius.ui.name', 'path' => 'fullName', 'options' => array('template' => 'backend/grid/field/string.html.twig'), 'enabled' => true), 'email' => array('type' => 'string', 'label' => 'sylius.ui.email', 'sortable' => 'email', 'enabled' => true, 'options' => array())), 'filters' => array('search' => array('type' => 'string', 'label' => 'sylius.ui.search', 'options' => array('fields' => array(0 => 'firstName', 1 => 'lastName')), 'enabled' => true)), 'actions' => array('item' => array('show' => array('type' => 'show', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array())))), 'sylius_backend_customer' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\Customer')), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('avatar' => array('type' => 'twig', 'label' => 'app.ui.avatar', 'path' => '.', 'options' => array('template' => 'backend/customer/grid/field/avatar.html.twig'), 'enabled' => true), 'email' => array('type' => 'string', 'label' => 'sylius.ui.email', 'sortable' => 'email', 'enabled' => true, 'options' => array()), 'createdAt' => array('type' => 'twig', 'label' => 'sylius.ui.registration_date', 'sortable' => 'createdAt', 'options' => array('template' => 'backend/grid/field/date/medium.html.twig'), 'enabled' => true)), 'filters' => array('search' => array('type' => 'string', 'label' => 'sylius.ui.search', 'options' => array('fields' => array(0 => 'email')), 'enabled' => true)), 'actions' => array('item' => array('update' => array('type' => 'update', 'options' => array())))), 'sylius_backend_customer_group' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'Sylius\\Component\\Customer\\Model\\CustomerGroup')), 'sorting' => array('name' => 'asc'), 'fields' => array('name' => array('type' => 'string', 'label' => 'sylius.ui.name', 'sortable' => 'name', 'enabled' => true, 'options' => array())), 'filters' => array('search' => array('type' => 'string', 'label' => 'sylius.ui.search', 'options' => array('fields' => array(0 => 'name')), 'enabled' => true)), 'actions' => array('main' => array('create' => array('type' => 'create', 'options' => array())), 'item' => array('update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array())))), 'app_backend_dealer' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\Dealer')), 'sorting' => array('name' => 'asc'), 'fields' => array('image' => array('type' => 'twig', 'label' => 'sylius.ui.image', 'path' => '.', 'options' => array('template' => 'backend/dealer/grid/field/image.html.twig'), 'enabled' => true), 'name' => array('type' => 'string', 'label' => 'sylius.ui.name', 'sortable' => 'name', 'enabled' => true, 'options' => array()), 'priceList' => array('type' => 'twig', 'label' => 'app.ui.price_list', 'path' => '.', 'options' => array('template' => 'backend/dealer/grid/field/priceList.html.twig'), 'enabled' => true), 'pubBanners' => array('type' => 'twig', 'label' => 'app.ui.pub_banners', 'path' => '.', 'options' => array('template' => 'backend/dealer/grid/field/pubBanners.html.twig'), 'enabled' => true)), 'filters' => array('search' => array('type' => 'string', 'label' => 'sylius.ui.search', 'options' => array('fields' => array(0 => 'name')), 'enabled' => true)), 'actions' => array('main' => array('create' => array('type' => 'create', 'options' => array())), 'item' => array('update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array())))), 'app_backend_dealer_price' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\DealerPrice')), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('createdAt' => array('type' => 'twig', 'label' => 'sylius.ui.created_at', 'sortable' => 'createdAt', 'options' => array('template' => 'backend/grid/field/date/medium.html.twig'), 'enabled' => true), 'dealer.name' => array('type' => 'string', 'label' => 'app.ui.dealer', 'enabled' => true, 'options' => array()), 'name' => array('type' => 'string', 'label' => 'sylius.ui.name', 'sortable' => 'name', 'enabled' => true, 'options' => array()), 'barcode' => array('type' => 'string', 'label' => 'app.ui.barcode', 'sortable' => 'barcode', 'enabled' => true, 'options' => array()), 'status' => array('type' => 'twig', 'label' => 'sylius.ui.status', 'options' => array('template' => 'backend/grid/field/state.html.twig', 'vars' => array('labels' => 'backend/dealer_price/label/state')), 'enabled' => true), 'price' => array('type' => 'twig', 'label' => 'sylius.ui.price', 'sortable' => 'price', 'options' => array('template' => 'backend/grid/field/money.html.twig'), 'enabled' => true)), 'filters' => array('search' => array('type' => 'string', 'label' => 'sylius.ui.search', 'options' => array('fields' => array(0 => 'name', 1 => 'barcode')), 'enabled' => true)), 'actions' => array('item' => array('update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array())))), 'app_backend_game_play' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\GamePlay', 'repository' => array('method' => 'createListQueryBuilder', 'arguments' => array(0 => 'fr_FR')))), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('avatar' => array('type' => 'twig', 'label' => 'app.ui.avatar', 'path' => 'author', 'options' => array('template' => 'backend/customer/grid/field/avatar.html.twig'), 'enabled' => true), 'name' => array('type' => 'string', 'label' => 'sylius.ui.username', 'path' => 'author', 'enabled' => true, 'options' => array()), 'product' => array('type' => 'string', 'label' => 'sylius.ui.product', 'path' => 'product', 'enabled' => true, 'options' => array()), 'createdAt' => array('type' => 'twig', 'label' => 'sylius.ui.created_at', 'sortable' => NULL, 'options' => array('template' => 'backend/grid/field/date/medium.html.twig'), 'enabled' => true)), 'filters' => array('search' => array('type' => 'string', 'label' => 'sylius.ui.search', 'options' => array('fields' => array(0 => 'author.email', 1 => 'productTranslation.name')), 'enabled' => true)), 'actions' => array('item' => array('update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array())))), 'app_backend_not_found_page' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\NotFound')), 'sorting' => array('timestamp' => 'desc'), 'fields' => array('timestamp' => array('type' => 'twig', 'label' => 'sylius.ui.created_at', 'sortable' => NULL, 'options' => array('template' => 'backend/grid/field/date/medium.html.twig'), 'enabled' => true), 'path' => array('type' => 'string', 'label' => 'app.ui.path', 'sortable' => NULL, 'enabled' => true, 'options' => array()), 'referer' => array('type' => 'twig', 'label' => 'app.ui.referer', 'sortable' => NULL, 'options' => array('template' => 'backend/not_found_page/grid/field/referer.html.twig'), 'enabled' => true)), 'filters' => array('search' => array('type' => 'string', 'label' => 'sylius.ui.search', 'options' => array('fields' => array(0 => 'path', 1 => 'referer')), 'enabled' => true)), 'actions' => array()), 'app_backend_person' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\Person')), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('image' => array('type' => 'twig', 'label' => 'sylius.ui.image', 'path' => '.', 'options' => array('template' => 'backend/person/grid/field/image.html.twig'), 'enabled' => true), 'slug' => array('type' => 'twig', 'label' => 'sylius.ui.name', 'path' => '.', 'sortable' => 'slug', 'options' => array('template' => 'backend/grid/field/string.html.twig'), 'enabled' => true), 'createdAt' => array('type' => 'twig', 'label' => 'sylius.ui.created_at', 'sortable' => 'createdAt', 'options' => array('template' => 'backend/grid/field/date/medium.html.twig'), 'enabled' => true)), 'filters' => array('search' => array('type' => 'string', 'label' => 'sylius.ui.search', 'options' => array('fields' => array(0 => 'firstName', 1 => 'lastName')), 'enabled' => true)), 'actions' => array('main' => array('create' => array('type' => 'create', 'options' => array())), 'item' => array('update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array())))), 'app_backend_post' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\Post', 'repository' => array('method' => 'createListQueryBuilder', 'arguments' => array(0 => '$topicId')))), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('avatar' => array('type' => 'twig', 'label' => 'app.ui.avatar', 'path' => 'author', 'options' => array('template' => 'backend/customer/grid/field/avatar.html.twig'), 'enabled' => true), 'author.user.username' => array('type' => 'string', 'label' => 'sylius.ui.username', 'enabled' => true, 'options' => array()), 'topic.title' => array('type' => 'string', 'label' => 'app.ui.topic', 'enabled' => true, 'options' => array()), 'createdAt' => array('type' => 'twig', 'label' => 'sylius.ui.created_at', 'sortable' => 'createdAt', 'options' => array('template' => 'backend/grid/field/date/medium.html.twig'), 'enabled' => true)), 'actions' => array('item' => array('update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array()))), 'filters' => array()), 'sylius_backend_product' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\Product', 'repository' => array('method' => 'createQueryBuilderWithLocaleCode', 'arguments' => array(0 => 'fr_FR')))), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('image' => array('type' => 'twig', 'label' => 'sylius.ui.image', 'path' => '.', 'options' => array('template' => 'backend/product/grid/field/image.html.twig'), 'enabled' => true), 'name' => array('type' => 'string', 'label' => 'sylius.ui.name', 'enabled' => true, 'options' => array()), 'createdAt' => array('type' => 'twig', 'label' => 'sylius.ui.created_at', 'sortable' => 'createdAt', 'options' => array('template' => 'backend/grid/field/date/medium.html.twig'), 'enabled' => true), 'status' => array('type' => 'twig', 'label' => 'sylius.ui.status', 'options' => array('template' => 'backend/grid/field/state.html.twig', 'vars' => array('labels' => 'backend/product/label/state')), 'enabled' => true)), 'filters' => array('search' => array('type' => 'string', 'label' => 'sylius.ui.search', 'options' => array('fields' => array(0 => 'code', 1 => 'translation.name')), 'enabled' => true)), 'actions' => array('main' => array('create' => array('type' => 'create_product', 'options' => array())), 'item' => array('manage_articles' => array('type' => 'manage_articles', 'options' => array()), 'manage_variants' => array('type' => 'manage_variants', 'options' => array()), 'update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array())))), 'sylius_backend_product_association_type' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'Sylius\\Component\\Product\\Model\\ProductAssociationType')), 'sorting' => array('code' => 'asc'), 'fields' => array('code' => array('type' => 'string', 'label' => 'sylius.ui.code', 'sortable' => NULL, 'enabled' => true, 'options' => array()), 'name' => array('type' => 'string', 'label' => 'sylius.ui.name', 'enabled' => true, 'options' => array())), 'filters' => array('code' => array('type' => 'string', 'label' => 'sylius.ui.code', 'enabled' => true, 'options' => array()), 'name' => array('type' => 'string', 'label' => 'sylius.ui.name', 'enabled' => true, 'options' => array())), 'actions' => array('main' => array('create' => array('type' => 'create', 'options' => array())), 'item' => array('update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array())))), 'app_backend_product_list' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\ProductList', 'repository' => array('method' => 'createListQueryBuilder'))), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('avatar' => array('type' => 'twig', 'path' => 'owner', 'label' => 'app.ui.avatar', 'options' => array('template' => 'backend/customer/grid/field/avatar.html.twig'), 'enabled' => true), 'owner' => array('type' => 'string', 'label' => 'sylius.ui.customer', 'enabled' => true, 'options' => array()), 'name' => array('type' => 'string', 'label' => 'sylius.ui.name', 'sortable' => NULL, 'enabled' => true, 'options' => array()), 'createdAt' => array('type' => 'twig', 'label' => 'sylius.ui.created_at', 'sortable' => NULL, 'options' => array('template' => 'backend/grid/field/date/medium.html.twig'), 'enabled' => true)), 'filters' => array('search' => array('type' => 'string', 'label' => 'sylius.ui.search', 'options' => array('fields' => array(0 => 'name', 1 => 'owner.email', 2 => 'user.username')), 'enabled' => true)), 'actions' => array('item' => array('update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array())))), 'sylius_backend_product_review' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\ProductReview')), 'sorting' => array('date' => 'desc'), 'fields' => array('date' => array('type' => 'datetime', 'label' => 'sylius.ui.date', 'path' => 'createdAt', 'sortable' => 'createdAt', 'options' => array('format' => 'd-m-Y H:i:s'), 'enabled' => true), 'title' => array('type' => 'string', 'label' => 'sylius.ui.title', 'sortable' => NULL, 'enabled' => true, 'options' => array()), 'rating' => array('type' => 'string', 'label' => 'sylius.ui.rating', 'sortable' => NULL, 'enabled' => true, 'options' => array()), 'reviewSubject' => array('type' => 'string', 'label' => 'sylius.ui.product', 'enabled' => true, 'options' => array()), 'author' => array('type' => 'string', 'label' => 'sylius.ui.customer', 'enabled' => true, 'options' => array())), 'filters' => array('title' => array('type' => 'string', 'label' => 'sylius.ui.title', 'enabled' => true, 'options' => array())), 'actions' => array('item' => array('update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array())))), 'sylius_backend_product_variant' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\ProductVariant', 'repository' => array('method' => 'createQueryBuilderByProductId', 'arguments' => array(0 => '$productId')))), 'sorting' => array('position' => 'asc'), 'fields' => array('name' => array('type' => 'string', 'label' => 'sylius.ui.name', 'enabled' => true, 'options' => array()), 'code' => array('type' => 'string', 'label' => 'sylius.ui.code', 'enabled' => true, 'options' => array()), 'position' => array('type' => 'twig', 'label' => 'sylius.ui.position', 'path' => '.', 'sortable' => NULL, 'options' => array('template' => 'backend/product_variant/grid/field/position.html.twig'), 'enabled' => true)), 'filters' => array('code' => array('type' => 'string', 'label' => 'sylius.ui.code', 'enabled' => true, 'options' => array()), 'name' => array('type' => 'string', 'label' => 'sylius.ui.name', 'options' => array('fields' => array(0 => 'name')), 'enabled' => true)), 'actions' => array('main' => array('update_positions' => array('type' => 'update_product_variant_positions', 'options' => array()), 'create' => array('type' => 'create', 'options' => array())), 'item' => array('update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array())))), 'app_backend_redirection' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\Redirection')), 'sorting' => array('source' => 'asc'), 'fields' => array('source' => array('type' => 'string', 'label' => 'app.ui.source', 'sortable' => NULL, 'enabled' => true, 'options' => array()), 'destination' => array('type' => 'string', 'label' => 'app.ui.destination', 'sortable' => NULL, 'enabled' => true, 'options' => array()), 'count' => array('type' => 'string', 'label' => 'app.ui.redirection_count', 'sortable' => NULL, 'enabled' => true, 'options' => array()), 'lastAccessed' => array('type' => 'twig', 'label' => 'app.ui.last_used_at', 'sortable' => NULL, 'options' => array('template' => 'backend/grid/field/date/medium.html.twig'), 'enabled' => true)), 'filters' => array('search' => array('type' => 'string', 'label' => 'sylius.ui.search', 'options' => array('fields' => array(0 => 'source', 1 => 'destination')), 'enabled' => true)), 'actions' => array('main' => array('create' => array('type' => 'create', 'options' => array())), 'item' => array('update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array())))), 'sylius_backend_root_taxon' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\Taxon', 'repository' => array('method' => 'createRootListQueryBuilder', 'arguments' => array(0 => array(0 => 'fr_FR'))))), 'sorting' => array('code' => 'desc'), 'fields' => array('code' => array('type' => 'string', 'label' => 'sylius.ui.code', 'sortable' => NULL, 'enabled' => true, 'options' => array()), 'name' => array('type' => 'string', 'label' => 'sylius.ui.name', 'enabled' => true, 'options' => array())), 'filters' => array('search' => array('type' => 'string', 'label' => 'sylius.ui.search', 'options' => array('fields' => array(0 => 'code', 1 => 'translation.name')), 'enabled' => true)), 'actions' => array('main' => array('create' => array('type' => 'create', 'options' => array())), 'item' => array('taxons' => array('type' => 'list_taxons', 'options' => array()), 'update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array())))), 'sylius_backend_taxon_from_root' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\Taxon', 'repository' => array('method' => 'createChildrenListQueryBuilder', 'arguments' => array(0 => array(0 => 'fr_FR'), 1 => 'expr:service(\'sylius.repository.taxon\').findOneByCode($rootCode)')))), 'fields' => array('code' => array('type' => 'string', 'label' => 'sylius.ui.code', 'enabled' => true, 'options' => array()), 'parent' => array('type' => 'string', 'label' => 'sylius.ui.parent', 'enabled' => true, 'options' => array()), 'name' => array('type' => 'string', 'label' => 'sylius.ui.name', 'enabled' => true, 'options' => array()), 'public' => array('type' => 'twig', 'label' => 'app.ui.public', 'path' => '.', 'options' => array('template' => 'backend/taxon/grid/field/public.html.twig'), 'enabled' => true)), 'filters' => array('search' => array('type' => 'string', 'label' => 'sylius.ui.search', 'options' => array('fields' => array(0 => 'code', 1 => 'translation.name')), 'enabled' => true)), 'actions' => array('main' => array('create' => array('type' => 'create', 'options' => array())), 'item' => array('update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array()))), 'sorting' => array()), 'app_backend_topic' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\Topic')), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('avatar' => array('type' => 'twig', 'label' => 'app.ui.avatar', 'path' => 'author', 'options' => array('template' => 'backend/customer/grid/field/avatar.html.twig'), 'enabled' => true), 'author.user.username' => array('type' => 'string', 'label' => 'sylius.ui.username', 'enabled' => true, 'options' => array()), 'title' => array('type' => 'string', 'label' => 'sylius.ui.title', 'sortable' => 'title', 'enabled' => true, 'options' => array()), 'createdAt' => array('type' => 'twig', 'label' => 'sylius.ui.created_at', 'sortable' => 'createdAt', 'options' => array('template' => 'backend/grid/field/date/medium.html.twig'), 'enabled' => true)), 'filters' => array('search' => array('type' => 'string', 'label' => 'sylius.ui.search', 'options' => array('fields' => array(0 => 'title')), 'enabled' => true)), 'actions' => array('item' => array('posts' => array('type' => 'list_posts', 'options' => array()), 'update' => array('type' => 'update', 'options' => array()), 'delete' => array('type' => 'delete', 'options' => array())))), 'app_frontend_game_play' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\GamePlay', 'repository' => array('method' => 'createCommentedListQueryBuilder', 'arguments' => array('locale' => 'fr_FR', 'criteria' => 'expr:service(\'request_stack\').getCurrentRequest().get(\'criteria\', [])')))), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('createdAt' => array('type' => 'twig', 'label' => 'sylius.ui.created_at', 'sortable' => NULL, 'enabled' => true, 'options' => array()), 'topic.postCount' => array('type' => 'twig', 'sortable' => NULL, 'enabled' => true, 'options' => array())), 'filters' => array(), 'actions' => array()), 'app_frontend_game_play_from_author' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\GamePlay', 'repository' => array('method' => 'createListQueryBuilder', 'arguments' => array(0 => 'fr_FR', 1 => 'expr:service(\'app.context.customer\').getCustomer().getId()')))), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('createdAt' => array('type' => 'twig', 'label' => 'sylius.ui.created_at', 'sortable' => NULL, 'enabled' => true, 'options' => array())), 'filters' => array(), 'actions' => array()), 'app_frontend_person' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\Person', 'repository' => array('method' => 'createListQueryBuilder'))), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('createdAt' => array('type' => 'twig', 'label' => 'sylius.ui.created_at', 'sortable' => NULL, 'enabled' => true, 'options' => array())), 'filters' => array(), 'actions' => array()), 'app_frontend_person_from_taxon' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\Person', 'repository' => array('method' => 'createListQueryBuilder', 'arguments' => array(0 => 'expr:service(\'sylius.repository.taxon\').findOneByPermalink($permalink)')))), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('createdAt' => array('type' => 'twig', 'label' => 'sylius.ui.created_at', 'sortable' => NULL, 'enabled' => true, 'options' => array())), 'filters' => array(), 'actions' => array()), 'sylius_frontend_product' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\Product', 'repository' => array('method' => 'createListQueryBuilder', 'arguments' => array('locale' => 'fr_FR', 'onlyPublished' => true, 'criteria' => 'expr:service(\'request_stack\').getCurrentRequest().get(\'criteria\', [])')))), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('createdAt' => array('type' => 'string', 'sortable' => NULL, 'enabled' => true, 'options' => array()), 'averageRating' => array('type' => 'string', 'sortable' => NULL, 'enabled' => true, 'options' => array()), 'variant.releasedAt' => array('path' => 'variant.releasedAt', 'type' => 'string', 'sortable' => NULL, 'enabled' => true, 'options' => array())), 'filters' => array(), 'actions' => array()), 'app_frontend_product_list_item' => array('driver' => array('name' => 'doctrine/orm', 'options' => array('class' => 'AppBundle\\Entity\\ProductListItem', 'repository' => array('method' => 'createQueryBuilderByProductList', 'arguments' => array(0 => '$productListSlug', 1 => 'fr_FR')))), 'sorting' => array('createdAt' => 'desc'), 'fields' => array('createdAt' => array('type' => 'twig', 'label' => 'sylius.ui.created_at', 'sortable' => NULL, 'enabled' => true, 'options' => array())), 'filters' => array(), 'actions' => array())));
     }
 
     /**
@@ -12562,7 +12563,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSylius_LocaleProviderService()
     {
-        return $this->services['sylius.locale_provider'] = new \Sylius\Component\Locale\Provider\LocaleProvider($this->get('sylius.repository.locale'), 'fr');
+        return $this->services['sylius.locale_provider'] = new \Sylius\Component\Locale\Provider\LocaleProvider($this->get('sylius.repository.locale'), 'fr_FR');
     }
 
     /**
@@ -12722,7 +12723,7 @@ class appDevDebugProjectContainer extends Container
     {
         if ($lazyLoad) {
 
-            return $this->services['sylius.repository.locale'] = SyliusBundleResourceBundleDoctrineORMEntityRepository_0000000067dc5ebd0000000078fadba4877f40b66baaf9ca0d0afe40b8a3d26d::staticProxyConstructor(
+            return $this->services['sylius.repository.locale'] = SyliusBundleResourceBundleDoctrineORMEntityRepository_000000004b511bf3000000000f6225f6877f40b66baaf9ca0d0afe40b8a3d26d::staticProxyConstructor(
                 function (&$wrappedInstance, \ProxyManager\Proxy\LazyLoadingInterface $proxy) {
                     $wrappedInstance = $this->getSylius_Repository_LocaleService(false);
 
@@ -13023,6 +13024,19 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'sylius.setup.locale' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \AppBundle\Installer\Setup\LocaleSetup A AppBundle\Installer\Setup\LocaleSetup instance
+     */
+    protected function getSylius_Setup_LocaleService()
+    {
+        return $this->services['sylius.setup.locale'] = new \AppBundle\Installer\Setup\LocaleSetup($this->get('sylius.repository.locale'), $this->get('sylius.factory.locale'), 'fr_FR');
+    }
+
+    /**
      * Gets the 'sylius.shop_user.pin_generator.password_reset' service.
      *
      * This service is shared.
@@ -13127,7 +13141,7 @@ class appDevDebugProjectContainer extends Container
     {
         if ($lazyLoad) {
 
-            return $this->services['sylius.shop_user_provider.email_based'] = SyliusBundleUserBundleProviderEmailProvider_0000000067dc57910000000078fadba4877f40b66baaf9ca0d0afe40b8a3d26d::staticProxyConstructor(
+            return $this->services['sylius.shop_user_provider.email_based'] = SyliusBundleUserBundleProviderEmailProvider_000000004b5112d5000000000f6225f6877f40b66baaf9ca0d0afe40b8a3d26d::staticProxyConstructor(
                 function (&$wrappedInstance, \ProxyManager\Proxy\LazyLoadingInterface $proxy) {
                     $wrappedInstance = $this->getSylius_ShopUserProvider_EmailBasedService(false);
 
@@ -13155,7 +13169,7 @@ class appDevDebugProjectContainer extends Container
     {
         if ($lazyLoad) {
 
-            return $this->services['sylius.shop_user_provider.email_or_name_based'] = SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579f0000000078fadba4877f40b66baaf9ca0d0afe40b8a3d26d::staticProxyConstructor(
+            return $this->services['sylius.shop_user_provider.email_or_name_based'] = SyliusBundleUserBundleProviderUsernameOrEmailProvider_000000004b5112d3000000000f6225f6877f40b66baaf9ca0d0afe40b8a3d26d::staticProxyConstructor(
                 function (&$wrappedInstance, \ProxyManager\Proxy\LazyLoadingInterface $proxy) {
                     $wrappedInstance = $this->getSylius_ShopUserProvider_EmailOrNameBasedService(false);
 
@@ -13183,7 +13197,7 @@ class appDevDebugProjectContainer extends Container
     {
         if ($lazyLoad) {
 
-            return $this->services['sylius.shop_user_provider.name_based'] = SyliusBundleUserBundleProviderUsernameProvider_0000000067dc57920000000078fadba4877f40b66baaf9ca0d0afe40b8a3d26d::staticProxyConstructor(
+            return $this->services['sylius.shop_user_provider.name_based'] = SyliusBundleUserBundleProviderUsernameProvider_000000004b5112d2000000000f6225f6877f40b66baaf9ca0d0afe40b8a3d26d::staticProxyConstructor(
                 function (&$wrappedInstance, \ProxyManager\Proxy\LazyLoadingInterface $proxy) {
                     $wrappedInstance = $this->getSylius_ShopUserProvider_NameBasedService(false);
 
@@ -13211,7 +13225,7 @@ class appDevDebugProjectContainer extends Container
     {
         if ($lazyLoad) {
 
-            return $this->services['sylius.templating.helper.grid'] = SyliusBundleGridBundleTemplatingHelperGridHelper_0000000067dc42320000000078fadba4877f40b66baaf9ca0d0afe40b8a3d26d::staticProxyConstructor(
+            return $this->services['sylius.templating.helper.grid'] = SyliusBundleGridBundleTemplatingHelperGridHelper_000000004b51070b000000000f6225f6877f40b66baaf9ca0d0afe40b8a3d26d::staticProxyConstructor(
                 function (&$wrappedInstance, \ProxyManager\Proxy\LazyLoadingInterface $proxy) {
                     $wrappedInstance = $this->getSylius_Templating_Helper_GridService(false);
 
@@ -13274,7 +13288,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSylius_TranslationLocaleProvider_ImmutableService()
     {
-        return $this->services['sylius.translation_locale_provider.immutable'] = new \Sylius\Component\Resource\Translation\Provider\ImmutableTranslationLocaleProvider(array(0 => 'fr'), 'fr');
+        return $this->services['sylius.translation_locale_provider.immutable'] = new \Sylius\Component\Resource\Translation\Provider\ImmutableTranslationLocaleProvider(array(0 => 'fr_FR'), 'fr_FR');
     }
 
     /**
@@ -13793,7 +13807,7 @@ class appDevDebugProjectContainer extends Container
         $this->services['translator.default'] = $instance = new \Symfony\Bundle\FrameworkBundle\Translation\Translator($this, new \Symfony\Component\Translation\MessageSelector(), array('translation.loader.php' => array(0 => 'php'), 'translation.loader.yml' => array(0 => 'yml'), 'translation.loader.xliff' => array(0 => 'xlf', 1 => 'xliff'), 'translation.loader.po' => array(0 => 'po'), 'translation.loader.mo' => array(0 => 'mo'), 'translation.loader.qt' => array(0 => 'ts'), 'translation.loader.csv' => array(0 => 'csv'), 'translation.loader.res' => array(0 => 'res'), 'translation.loader.dat' => array(0 => 'dat'), 'translation.loader.ini' => array(0 => 'ini'), 'translation.loader.json' => array(0 => 'json')), array('cache_dir' => (__DIR__.'/translations'), 'debug' => true, 'resource_files' => array('af' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.af.xlf'), 1 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.af.yml'), 2 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.af.yml'), 3 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.af.yml')), 'ar' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ar.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ar.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.ar.xlf'), 3 => ($this->targetDirs[3].'/vendor/white-october/pagerfanta-bundle/Resources/translations/pagerfanta.ar.xliff'), 4 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.ar.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.ar.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.ar.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.ar.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/validators.ar.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.ar.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.ar.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.ar.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/flashes.ar.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.ar.yml'), 14 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.ar.yml'), 15 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.ar.yml'), 16 => ($this->targetDirs[3].'/vendor/mopa/bootstrap-bundle/Mopa/Bundle/BootstrapBundle/Resources/translations/pagination.ar.yml')), 'az' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.az.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.az.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.az.xlf'), 3 => ($this->targetDirs[3].'/vendor/white-october/pagerfanta-bundle/Resources/translations/pagerfanta.az.xliff')), 'bg' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.bg.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.bg.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.bg.xlf'), 3 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.bg.yml'), 4 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/validators.bg.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.bg.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.bg.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.bg.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.bg.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.bg.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.bg.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.bg.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.bg.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.bg.yml')), 'ca' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ca.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ca.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.ca.xlf'), 3 => ($this->targetDirs[3].'/vendor/white-october/pagerfanta-bundle/Resources/translations/pagerfanta.ca.xliff'), 4 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.ca.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.ca.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.ca.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.ca.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.ca.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.ca.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.ca.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.ca.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.ca.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.ca.yml'), 14 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.ca.yml'), 15 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.ca.yml')), 'cs' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.cs.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.cs.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.cs.xlf'), 3 => ($this->targetDirs[3].'/vendor/white-october/pagerfanta-bundle/Resources/translations/pagerfanta.cs.xliff'), 4 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.cs.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/validators.cs.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.cs.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/validators.cs.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.cs.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.cs.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/validators.cs.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.cs.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.cs.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.cs.yml'), 14 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.cs.yml'), 15 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/validators.cs.yml'), 16 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/flashes.cs.yml'), 17 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.cs.yml'), 18 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/validators.cs.yml'), 19 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.cs.yml'), 20 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.cs.yml'), 21 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.cs.yml'), 22 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/validators.cs.yml')), 'cy' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.cy.xlf')), 'da' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.da.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.da.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.da.xlf'), 3 => ($this->targetDirs[3].'/vendor/white-october/pagerfanta-bundle/Resources/translations/pagerfanta.da.xliff'), 4 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.da.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.da.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/validators.da.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.da.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.da.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/validators.da.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.da.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.da.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.da.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.da.yml'), 14 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/flashes.da.yml'), 15 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.da.yml'), 16 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.da.yml'), 17 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.da.yml'), 18 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.da.yml'), 19 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/validators.da.yml')), 'de' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.de.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.de.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.de.xlf'), 3 => ($this->targetDirs[3].'/vendor/white-october/pagerfanta-bundle/Resources/translations/pagerfanta.de.xliff'), 4 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.de.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/validators.de.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.de.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/validators.de.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.de.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.de.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/validators.de.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/flashes.de.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.de.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.de.yml'), 14 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.de.yml'), 15 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.de.yml'), 16 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/validators.de.yml'), 17 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/flashes.de.yml'), 18 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.de.yml'), 19 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/validators.de.yml'), 20 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.de.yml'), 21 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.de.yml'), 22 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.de.yml'), 23 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/validators.de.yml'), 24 => ($this->targetDirs[3].'/vendor/sonata-project/block-bundle/Resources/translations/SonataBlockBundle.de.xliff'), 25 => ($this->targetDirs[3].'/vendor/mopa/bootstrap-bundle/Mopa/Bundle/BootstrapBundle/Resources/translations/pagination.de.yml')), 'el' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.el.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.el.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.el.xlf'), 3 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.el.yml'), 4 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.el.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.el.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.el.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.el.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.el.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.el.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.el.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/flashes.el.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.el.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.el.yml')), 'en' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.en.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.en.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.en.xlf'), 3 => ($this->targetDirs[3].'/vendor/white-october/pagerfanta-bundle/Resources/translations/pagerfanta.en.xliff'), 4 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.en.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/validators.en.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/flashes.en.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.en.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/validators.en.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/flashes.en.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.en.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/flashes.en.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.en.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/validators.en.yml'), 14 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/flashes.en.yml'), 15 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.en.yml'), 16 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.en.yml'), 17 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.en.yml'), 18 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/flashes.en.yml'), 19 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.en.yml'), 20 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/validators.en.yml'), 21 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/flashes.en.yml'), 22 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.en.yml'), 23 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/validators.en.yml'), 24 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.en.yml'), 25 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.en.yml'), 26 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.en.yml'), 27 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/validators.en.yml'), 28 => ($this->targetDirs[3].'/vendor/sonata-project/block-bundle/Resources/translations/SonataBlockBundle.en.xliff'), 29 => ($this->targetDirs[3].'/vendor/mopa/bootstrap-bundle/Mopa/Bundle/BootstrapBundle/Resources/translations/pagination.en.yml'), 30 => ($this->targetDirs[3].'/vendor/zenstruck/redirect-bundle/src/Resources/translations/validators.en.yml'), 31 => ($this->targetDirs[3].'/vendor/zenstruck/redirect-bundle/src/Resources/translations/ZenstruckRedirectBundle.en.yml')), 'es' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.es.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.es.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.es.xlf'), 3 => ($this->targetDirs[3].'/vendor/white-october/pagerfanta-bundle/Resources/translations/pagerfanta.es.xliff'), 4 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.es.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/validators.es.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/flashes.es.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.es.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/validators.es.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/flashes.es.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.es.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/flashes.es.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.es.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/validators.es.yml'), 14 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/flashes.es.yml'), 15 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.es.yml'), 16 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.es.yml'), 17 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.es.yml'), 18 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/flashes.es.yml'), 19 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.es.yml'), 20 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/validators.es.yml'), 21 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/flashes.es.yml'), 22 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.es.yml'), 23 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/validators.es.yml'), 24 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.es.yml'), 25 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.es.yml'), 26 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.es.yml'), 27 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/validators.es.yml'), 28 => ($this->targetDirs[3].'/vendor/mopa/bootstrap-bundle/Mopa/Bundle/BootstrapBundle/Resources/translations/pagination.es.yml')), 'et' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.et.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.et.xlf'), 2 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.et.yml'), 3 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.et.yml'), 4 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.et.yml')), 'eu' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.eu.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.eu.xlf')), 'fa' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.fa.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.fa.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.fa.xlf'), 3 => ($this->targetDirs[3].'/vendor/white-october/pagerfanta-bundle/Resources/translations/pagerfanta.fa.xliff'), 4 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.fa.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/validators.fa.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.fa.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/validators.fa.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.fa.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.fa.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/validators.fa.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/flashes.fa.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.fa.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.fa.yml'), 14 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.fa.yml'), 15 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.fa.yml'), 16 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/validators.fa.yml'), 17 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/flashes.fa.yml'), 18 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.fa.yml'), 19 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/validators.fa.yml'), 20 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.fa.yml'), 21 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.fa.yml'), 22 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.fa.yml'), 23 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/validators.fa.yml')), 'fi' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.fi.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.fi.xlf'), 2 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.fi.yml'), 3 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.fi.yml'), 4 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.fi.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/validators.fi.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.fi.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.fi.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.fi.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.fi.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.fi.yml')), 'fr' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.fr.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.fr.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.fr.xlf'), 3 => ($this->targetDirs[3].'/vendor/white-october/pagerfanta-bundle/Resources/translations/pagerfanta.fr.xliff'), 4 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.fr.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/validators.fr.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/flashes.fr.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.fr.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/validators.fr.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.fr.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.fr.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/validators.fr.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/flashes.fr.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.fr.yml'), 14 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.fr.yml'), 15 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.fr.yml'), 16 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.fr.yml'), 17 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/validators.fr.yml'), 18 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/flashes.fr.yml'), 19 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.fr.yml'), 20 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/validators.fr.yml'), 21 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.fr.yml'), 22 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.fr.yml'), 23 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.fr.yml'), 24 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/validators.fr.yml'), 25 => ($this->targetDirs[3].'/vendor/sonata-project/block-bundle/Resources/translations/SonataBlockBundle.fr.xliff'), 26 => ($this->targetDirs[3].'/vendor/mopa/bootstrap-bundle/Mopa/Bundle/BootstrapBundle/Resources/translations/pagination.fr.yml'), 27 => ($this->targetDirs[3].'/app/Resources/translations/flashes.fr.yml'), 28 => ($this->targetDirs[3].'/app/Resources/translations/messages.fr.yml'), 29 => ($this->targetDirs[3].'/app/Resources/translations/validators.fr.yml')), 'gl' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.gl.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.gl.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.gl.xlf')), 'he' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.he.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.he.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.he.xlf'), 3 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.he.yml'), 4 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.he.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.he.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.he.yml')), 'hr' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.hr.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.hr.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.hr.xlf'), 3 => ($this->targetDirs[3].'/vendor/white-october/pagerfanta-bundle/Resources/translations/pagerfanta.hr.xliff'), 4 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.hr.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/validators.hr.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.hr.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/validators.hr.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.hr.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.hr.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/validators.hr.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.hr.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.hr.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.hr.yml'), 14 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.hr.yml'), 15 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/validators.hr.yml'), 16 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/flashes.hr.yml'), 17 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.hr.yml'), 18 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.hr.yml'), 19 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.hr.yml'), 20 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.hr.yml'), 21 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/validators.hr.yml')), 'hu' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.hu.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.hu.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.hu.xlf'), 3 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.hu.yml'), 4 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/validators.hu.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.hu.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/validators.hu.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.hu.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.hu.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/validators.hu.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.hu.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.hu.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.hu.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.hu.yml'), 14 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/validators.hu.yml'), 15 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/flashes.hu.yml'), 16 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.hu.yml'), 17 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/validators.hu.yml'), 18 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.hu.yml'), 19 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.hu.yml'), 20 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.hu.yml'), 21 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/validators.hu.yml'), 22 => ($this->targetDirs[3].'/vendor/sonata-project/block-bundle/Resources/translations/SonataBlockBundle.hu.xliff')), 'hy' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.hy.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.hy.xlf')), 'id' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.id.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.id.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.id.xlf'), 3 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.id.yml'), 4 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.id.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.id.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.id.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/validators.id.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.id.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.id.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.id.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.id.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.id.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.id.yml'), 14 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.id.yml')), 'it' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.it.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.it.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.it.xlf'), 3 => ($this->targetDirs[3].'/vendor/white-october/pagerfanta-bundle/Resources/translations/pagerfanta.it.xliff'), 4 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.it.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/validators.it.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.it.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/validators.it.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.it.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.it.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/validators.it.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.it.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.it.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.it.yml'), 14 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.it.yml'), 15 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/validators.it.yml'), 16 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/flashes.it.yml'), 17 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.it.yml'), 18 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/validators.it.yml'), 19 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.it.yml'), 20 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.it.yml'), 21 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.it.yml'), 22 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/validators.it.yml'), 23 => ($this->targetDirs[3].'/vendor/sonata-project/block-bundle/Resources/translations/SonataBlockBundle.it.xliff'), 24 => ($this->targetDirs[3].'/vendor/mopa/bootstrap-bundle/Mopa/Bundle/BootstrapBundle/Resources/translations/pagination.it.yml')), 'ja' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ja.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ja.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.ja.xlf'), 3 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.ja.yml'), 4 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.ja.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.ja.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.ja.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.ja.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/flashes.ja.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.ja.yml'), 10 => ($this->targetDirs[3].'/vendor/mopa/bootstrap-bundle/Mopa/Bundle/BootstrapBundle/Resources/translations/pagination.ja.yml')), 'lb' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.lb.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.lb.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.lb.xlf')), 'lt' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.lt.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.lt.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.lt.xlf'), 3 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.lt.yml'), 4 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/validators.lt.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.lt.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/validators.lt.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.lt.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.lt.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/validators.lt.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/flashes.lt.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.lt.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.lt.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.lt.yml'), 14 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.lt.yml'), 15 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/validators.lt.yml'), 16 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/flashes.lt.yml'), 17 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.lt.yml'), 18 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/validators.lt.yml'), 19 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.lt.yml'), 20 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.lt.yml'), 21 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.lt.yml'), 22 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/validators.lt.yml'), 23 => ($this->targetDirs[3].'/vendor/mopa/bootstrap-bundle/Mopa/Bundle/BootstrapBundle/Resources/translations/pagination.lt.yml')), 'lv' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.lv.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.lv.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.lv.xlf')), 'mn' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.mn.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.mn.xlf')), 'nl' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.nl.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.nl.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.nl.xlf'), 3 => ($this->targetDirs[3].'/vendor/white-october/pagerfanta-bundle/Resources/translations/pagerfanta.nl.xliff'), 4 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.nl.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/validators.nl.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.nl.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/validators.nl.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.nl.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.nl.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/validators.nl.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/flashes.nl.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.nl.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.nl.yml'), 14 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.nl.yml'), 15 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.nl.yml'), 16 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/validators.nl.yml'), 17 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/flashes.nl.yml'), 18 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.nl.yml'), 19 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/validators.nl.yml'), 20 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.nl.yml'), 21 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.nl.yml'), 22 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.nl.yml'), 23 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/validators.nl.yml'), 24 => ($this->targetDirs[3].'/vendor/mopa/bootstrap-bundle/Mopa/Bundle/BootstrapBundle/Resources/translations/pagination.nl.yml')), 'nn' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.nn.xlf')), 'no' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.no.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.no.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.no.xlf'), 3 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.no.yml'), 4 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/validators.no.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.no.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/validators.no.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.no.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.no.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/validators.no.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.no.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.no.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.no.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.no.yml'), 14 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/flashes.no.yml'), 15 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.no.yml'), 16 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.no.yml'), 17 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.no.yml'), 18 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.no.yml'), 19 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/validators.no.yml')), 'pl' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.pl.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.pl.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.pl.xlf'), 3 => ($this->targetDirs[3].'/vendor/white-october/pagerfanta-bundle/Resources/translations/pagerfanta.pl.xliff'), 4 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.pl.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/validators.pl.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.pl.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/validators.pl.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.pl.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.pl.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/validators.pl.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.pl.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.pl.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.pl.yml'), 14 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.pl.yml'), 15 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/validators.pl.yml'), 16 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/flashes.pl.yml'), 17 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.pl.yml'), 18 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/validators.pl.yml'), 19 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.pl.yml'), 20 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.pl.yml'), 21 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.pl.yml'), 22 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/validators.pl.yml'), 23 => ($this->targetDirs[3].'/vendor/mopa/bootstrap-bundle/Mopa/Bundle/BootstrapBundle/Resources/translations/pagination.pl.yml')), 'pt' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.pt.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.pt.xlf'), 2 => ($this->targetDirs[3].'/vendor/white-october/pagerfanta-bundle/Resources/translations/pagerfanta.pt.xliff'), 3 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.pt.yml'), 4 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/validators.pt.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.pt.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/validators.pt.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.pt.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.pt.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/validators.pt.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/flashes.pt.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.pt.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.pt.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.pt.yml'), 14 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.pt.yml'), 15 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/validators.pt.yml'), 16 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/flashes.pt.yml'), 17 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.pt.yml'), 18 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/validators.pt.yml'), 19 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.pt.yml'), 20 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.pt.yml'), 21 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.pt.yml'), 22 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/validators.pt.yml'), 23 => ($this->targetDirs[3].'/vendor/mopa/bootstrap-bundle/Mopa/Bundle/BootstrapBundle/Resources/translations/pagination.pt.yml')), 'pt_BR' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.pt_BR.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.pt_BR.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.pt_BR.xlf'), 3 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.pt_BR.yml'), 4 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/validators.pt_BR.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.pt_BR.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/validators.pt_BR.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.pt_BR.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.pt_BR.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/validators.pt_BR.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.pt_BR.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.pt_BR.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.pt_BR.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.pt_BR.yml'), 14 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/validators.pt_BR.yml'), 15 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/flashes.pt_BR.yml'), 16 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.pt_BR.yml'), 17 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/validators.pt_BR.yml'), 18 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.pt_BR.yml'), 19 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.pt_BR.yml'), 20 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.pt_BR.yml'), 21 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/validators.pt_BR.yml')), 'ro' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ro.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ro.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.ro.xlf'), 3 => ($this->targetDirs[3].'/vendor/white-october/pagerfanta-bundle/Resources/translations/pagerfanta.ro.xliff'), 4 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.ro.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/validators.ro.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.ro.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/validators.ro.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.ro.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.ro.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/validators.ro.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.ro.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.ro.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.ro.yml'), 14 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.ro.yml'), 15 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/flashes.ro.yml'), 16 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.ro.yml'), 17 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.ro.yml'), 18 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.ro.yml'), 19 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.ro.yml'), 20 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/validators.ro.yml')), 'ru' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ru.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ru.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.ru.xlf'), 3 => ($this->targetDirs[3].'/vendor/white-october/pagerfanta-bundle/Resources/translations/pagerfanta.ru.xliff'), 4 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.ru.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/validators.ru.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.ru.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/validators.ru.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.ru.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.ru.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/validators.ru.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/flashes.ru.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.ru.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.ru.yml'), 14 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.ru.yml'), 15 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.ru.yml'), 16 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/validators.ru.yml'), 17 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/flashes.ru.yml'), 18 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.ru.yml'), 19 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/validators.ru.yml'), 20 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.ru.yml'), 21 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.ru.yml'), 22 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.ru.yml'), 23 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/validators.ru.yml'), 24 => ($this->targetDirs[3].'/vendor/mopa/bootstrap-bundle/Mopa/Bundle/BootstrapBundle/Resources/translations/pagination.ru.yml')), 'sk' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sk.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sk.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.sk.xlf'), 3 => ($this->targetDirs[3].'/vendor/white-october/pagerfanta-bundle/Resources/translations/pagerfanta.sk.xliff'), 4 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.sk.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/validators.sk.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.sk.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/validators.sk.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.sk.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.sk.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/validators.sk.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.sk.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.sk.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.sk.yml'), 14 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.sk.yml'), 15 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/validators.sk.yml'), 16 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/flashes.sk.yml'), 17 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.sk.yml'), 18 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/validators.sk.yml'), 19 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.sk.yml'), 20 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.sk.yml'), 21 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.sk.yml'), 22 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/validators.sk.yml'), 23 => ($this->targetDirs[3].'/vendor/mopa/bootstrap-bundle/Mopa/Bundle/BootstrapBundle/Resources/translations/pagination.sk.yml')), 'sl' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sl.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sl.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.sl.xlf'), 3 => ($this->targetDirs[3].'/vendor/white-october/pagerfanta-bundle/Resources/translations/pagerfanta.sl.xliff'), 4 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.sl.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/validators.sl.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.sl.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/validators.sl.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.sl.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.sl.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/validators.sl.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.sl.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.sl.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.sl.yml'), 14 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.sl.yml'), 15 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/validators.sl.yml'), 16 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/flashes.sl.yml'), 17 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.sl.yml'), 18 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/validators.sl.yml'), 19 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.sl.yml'), 20 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.sl.yml'), 21 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.sl.yml'), 22 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/validators.sl.yml'), 23 => ($this->targetDirs[3].'/vendor/mopa/bootstrap-bundle/Mopa/Bundle/BootstrapBundle/Resources/translations/pagination.sl.yml')), 'sq' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sq.xlf'), 1 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.sq.yml'), 2 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/validators.sq.yml'), 3 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.sq.yml'), 4 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/validators.sq.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.sq.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.sq.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/validators.sq.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.sq.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.sq.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.sq.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.sq.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/validators.sq.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/flashes.sq.yml'), 14 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.sq.yml'), 15 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/validators.sq.yml'), 16 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.sq.yml'), 17 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.sq.yml'), 18 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.sq.yml'), 19 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/validators.sq.yml')), 'sr_Cyrl' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sr_Cyrl.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sr_Cyrl.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.sr_Cyrl.xlf'), 3 => ($this->targetDirs[3].'/vendor/white-october/pagerfanta-bundle/Resources/translations/pagerfanta.sr_Cyrl.xliff')), 'sr_Latn' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sr_Latn.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sr_Latn.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.sr_Latn.xlf'), 3 => ($this->targetDirs[3].'/vendor/white-october/pagerfanta-bundle/Resources/translations/pagerfanta.sr_Latn.xliff')), 'sv' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sv.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sv.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.sv.xlf'), 3 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.sv.yml'), 4 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.sv.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.sv.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.sv.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/validators.sv.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.sv.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.sv.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.sv.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.sv.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.sv.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.sv.yml'), 14 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.sv.yml'), 15 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.sv.yml'), 16 => ($this->targetDirs[3].'/vendor/mopa/bootstrap-bundle/Mopa/Bundle/BootstrapBundle/Resources/translations/pagination.sv.yml')), 'th' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.th.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.th.xlf'), 2 => ($this->targetDirs[3].'/vendor/white-october/pagerfanta-bundle/Resources/translations/pagerfanta.th.xliff'), 3 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.th.yml'), 4 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/validators.th.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/flashes.th.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.th.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/validators.th.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.th.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.th.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/validators.th.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/flashes.th.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.th.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.th.yml'), 14 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.th.yml'), 15 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.th.yml'), 16 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/validators.th.yml'), 17 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/flashes.th.yml'), 18 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.th.yml'), 19 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/validators.th.yml'), 20 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.th.yml'), 21 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.th.yml'), 22 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.th.yml'), 23 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/validators.th.yml')), 'tr' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.tr.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.tr.xlf'), 2 => ($this->targetDirs[3].'/vendor/white-october/pagerfanta-bundle/Resources/translations/pagerfanta.tr.xliff'), 3 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.tr.yml'), 4 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/validators.tr.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.tr.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/validators.tr.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.tr.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.tr.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/validators.tr.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.tr.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.tr.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.tr.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.tr.yml'), 14 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/validators.tr.yml'), 15 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/flashes.tr.yml'), 16 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.tr.yml'), 17 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/validators.tr.yml'), 18 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.tr.yml'), 19 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.tr.yml'), 20 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.tr.yml'), 21 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/validators.tr.yml')), 'uk' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.uk.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.uk.xlf'), 2 => ($this->targetDirs[3].'/vendor/white-october/pagerfanta-bundle/Resources/translations/pagerfanta.uk.xliff'), 3 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.uk.yml'), 4 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/validators.uk.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.uk.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/validators.uk.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.uk.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.uk.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/validators.uk.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.uk.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.uk.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.uk.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.uk.yml'), 14 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/validators.uk.yml'), 15 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/flashes.uk.yml'), 16 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.uk.yml'), 17 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/validators.uk.yml'), 18 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.uk.yml'), 19 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.uk.yml'), 20 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.uk.yml'), 21 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/validators.uk.yml'), 22 => ($this->targetDirs[3].'/vendor/mopa/bootstrap-bundle/Mopa/Bundle/BootstrapBundle/Resources/translations/pagination.uk.yml')), 'vi' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.vi.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.vi.xlf'), 2 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.vi.yml'), 3 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.vi.yml'), 4 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.vi.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.vi.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.vi.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.vi.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.vi.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.vi.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.vi.yml')), 'zh_CN' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.zh_CN.xlf'), 1 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.zh_CN.xlf'), 2 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.zh_CN.xlf'), 3 => ($this->targetDirs[3].'/vendor/white-october/pagerfanta-bundle/Resources/translations/pagerfanta.zh_CN.xliff'), 4 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.zh_CN.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/validators.zh_CN.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.zh_CN.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/validators.zh_CN.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.zh_CN.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.zh_CN.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/validators.zh_CN.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.zh_CN.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.zh_CN.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.zh_CN.yml'), 14 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.zh_CN.yml'), 15 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/validators.zh_CN.yml'), 16 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/flashes.zh_CN.yml'), 17 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.zh_CN.yml'), 18 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/validators.zh_CN.yml'), 19 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.zh_CN.yml'), 20 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.zh_CN.yml'), 21 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.zh_CN.yml'), 22 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/validators.zh_CN.yml')), 'zh_TW' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.zh_TW.xlf'), 1 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.zh_TW.yml'), 2 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.zh_TW.yml')), 'pt_PT' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.pt_PT.xlf')), 'ua' => array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.ua.xlf')), 'oc' => array(0 => ($this->targetDirs[3].'/vendor/white-october/pagerfanta-bundle/Resources/translations/pagerfanta.oc.xliff')), 'be' => array(0 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.be.yml'), 1 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/validators.be.yml'), 2 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.be.yml'), 3 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/validators.be.yml'), 4 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.be.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.be.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.be.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.be.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.be.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.be.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/flashes.be.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.be.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.be.yml'), 13 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.be.yml'), 14 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.be.yml'), 15 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/validators.be.yml')), 'de_CH' => array(0 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.de_CH.yml'), 1 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.de_CH.yml'), 2 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/validators.de_CH.yml'), 3 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.de_CH.yml'), 4 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.de_CH.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/validators.de_CH.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.de_CH.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.de_CH.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.de_CH.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/review-bundle/Resources/translations/messages.de_CH.yml'), 10 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.de_CH.yml'), 11 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.de_CH.yml'), 12 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.de_CH.yml')), 'mk' => array(0 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.mk.yml'), 1 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.mk.yml'), 2 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.mk.yml'), 3 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.mk.yml'), 4 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/validators.mk.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.mk.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/validators.mk.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.mk.yml')), 'sr_CS' => array(0 => ($this->targetDirs[3].'/vendor/sylius/locale-bundle/Resources/translations/messages.sr_CS.yml'), 1 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.sr_CS.yml'), 2 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.sr_CS.yml'), 3 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.sr_CS.yml'), 4 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.sr_CS.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/mailer-bundle/Resources/translations/messages.sr_CS.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/flashes.sr_CS.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.sr_CS.yml'), 8 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.sr_CS.yml'), 9 => ($this->targetDirs[3].'/vendor/sylius/taxonomy-bundle/Resources/translations/messages.sr_CS.yml')), 'ko' => array(0 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.ko.yml'), 1 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.ko.yml'), 2 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.ko.yml'), 3 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.ko.yml'), 4 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.ko.yml')), 'sr' => array(0 => ($this->targetDirs[3].'/vendor/sylius/product-bundle/Resources/translations/messages.sr.yml'), 1 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.sr.yml'), 2 => ($this->targetDirs[3].'/vendor/sylius/user-bundle/Resources/translations/messages.sr.yml'), 3 => ($this->targetDirs[3].'/vendor/sylius/customer-bundle/Resources/translations/messages.sr.yml'), 4 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/flashes.sr.yml'), 5 => ($this->targetDirs[3].'/vendor/sylius/resource-bundle/Resources/translations/messages.sr.yml'), 6 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.sr.yml'), 7 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/validators.sr.yml')), 'ms' => array(0 => ($this->targetDirs[3].'/vendor/sylius/ui-bundle/Resources/translations/messages.ms.yml'), 1 => ($this->targetDirs[3].'/vendor/sylius/attribute-bundle/Resources/translations/messages.ms.yml')))), array());
 
         $instance->setConfigCacheFactory($this->get('config_cache_factory'));
-        $instance->setFallbackLocales(array(0 => 'fr'));
+        $instance->setFallbackLocales(array(0 => 'fr_FR', 1 => 'fr'));
 
         return $instance;
     }
@@ -14375,7 +14389,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getCache_AnnotationsService()
     {
-        return $this->services['cache.annotations'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('3xypzREBRL', 0, 'Vf8gNdMTuqjhf8Vu7AF-Xh', (__DIR__.'/pools'), $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+        return $this->services['cache.annotations'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('3xypzREBRL', 0, 'mSAx1P1h9OTOq7lHVG7fHU', (__DIR__.'/pools'), $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE));
     }
 
     /**
@@ -14854,7 +14868,7 @@ class appDevDebugProjectContainer extends Container
     {
         $a = ${($_ = isset($this->services['security.user_checker']) ? $this->services['security.user_checker'] : $this->getSecurity_UserCheckerService()) && false ?: '_'};
 
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('58ec7d89513c93.67415802'), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('sylius.shop_user_provider.email_or_name_based'), $a, 'main', $this->get('security.encoder_factory'), true), 2 => new \Symfony\Component\Security\Core\Authentication\Provider\RememberMeAuthenticationProvider($a, 'ThisTokenIsNotSoSecretChangeIt', 'main'), 3 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('58ec7d89513c93.67415802')), true);
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('58ecd215246dd3.81429637'), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('sylius.shop_user_provider.email_or_name_based'), $a, 'main', $this->get('security.encoder_factory'), true), 2 => new \Symfony\Component\Security\Core\Authentication\Provider\RememberMeAuthenticationProvider($a, 'ThisTokenIsNotSoSecretChangeIt', 'main'), 3 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('58ecd215246dd3.81429637')), true);
 
         $instance->setEventDispatcher($this->get('debug.event_dispatcher'));
 
@@ -15119,7 +15133,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSylius_ResourceController_FlashHelperService()
     {
-        return $this->services['sylius.resource_controller.flash_helper'] = new \Sylius\Bundle\ResourceBundle\Controller\FlashHelper($this->get('session'), $this->get('translator'), 'fr');
+        return $this->services['sylius.resource_controller.flash_helper'] = new \Sylius\Bundle\ResourceBundle\Controller\FlashHelper($this->get('session'), $this->get('translator'), 'fr_FR');
     }
 
     /**
@@ -15810,8 +15824,8 @@ class appDevDebugProjectContainer extends Container
             'google.analytics.tracking_id' => 'UA-XXXXX-1',
             'google.analytics.profile_id' => 'XXXXXXXX',
             'knp.doctrine_behaviors.blameable_subscriber.user_entity' => 'Sylius\\Component\\User\\Model\\User',
-            'locale' => 'fr',
-            'sylius.locale' => 'fr',
+            'locale' => 'fr_FR',
+            'sylius.locale' => 'fr_FR',
             'sylius.cache' => array(
                 'type' => 'file_system',
             ),
@@ -15827,7 +15841,7 @@ class appDevDebugProjectContainer extends Container
             'kernel.trusted_proxies' => array(
 
             ),
-            'kernel.default_locale' => 'fr',
+            'kernel.default_locale' => 'fr_FR',
             'templating.helper.code.file_link_format' => NULL,
             'debug.file_link_format' => NULL,
             'session.metadata.storage_key' => '_sf2_meta',
@@ -16875,7 +16889,7 @@ class appDevDebugProjectContainer extends Container
             'sylius.model.locale.class' => 'Sylius\\Component\\Locale\\Model\\Locale',
             'sylius.controller.locale.class' => 'Sylius\\Bundle\\ResourceBundle\\Controller\\ResourceController',
             'sylius.factory.locale.class' => 'Sylius\\Component\\Resource\\Factory\\Factory',
-            'sylius_locale.locale' => 'fr',
+            'sylius_locale.locale' => 'fr_FR',
             'sylius.repository.product_attribute.class' => 'Sylius\\Bundle\\AttributeBundle\\Doctrine\\ORM\\AttributeRepository',
             'sylius.repository.product_option.class' => 'Sylius\\Bundle\\ProductBundle\\Doctrine\\ORM\\ProductOptionRepository',
             'sylius_product.driver.doctrine/orm' => true,
@@ -18028,7 +18042,7 @@ class appDevDebugProjectContainer extends Container
                             'repository' => array(
                                 'method' => 'createListQueryBuilder',
                                 'arguments' => array(
-                                    0 => 'fr',
+                                    0 => 'fr_FR',
                                 ),
                             ),
                         ),
@@ -18318,7 +18332,7 @@ class appDevDebugProjectContainer extends Container
                             'repository' => array(
                                 'method' => 'createQueryBuilderWithLocaleCode',
                                 'arguments' => array(
-                                    0 => 'fr',
+                                    0 => 'fr_FR',
                                 ),
                             ),
                         ),
@@ -18841,7 +18855,7 @@ class appDevDebugProjectContainer extends Container
                                 'method' => 'createRootListQueryBuilder',
                                 'arguments' => array(
                                     0 => array(
-                                        0 => 'fr',
+                                        0 => 'fr_FR',
                                     ),
                                 ),
                             ),
@@ -18922,7 +18936,7 @@ class appDevDebugProjectContainer extends Container
                                 'method' => 'createChildrenListQueryBuilder',
                                 'arguments' => array(
                                     0 => array(
-                                        0 => 'fr',
+                                        0 => 'fr_FR',
                                     ),
                                     1 => 'expr:service(\'sylius.repository.taxon\').findOneByCode($rootCode)',
                                 ),
@@ -19095,7 +19109,7 @@ class appDevDebugProjectContainer extends Container
                             'repository' => array(
                                 'method' => 'createCommentedListQueryBuilder',
                                 'arguments' => array(
-                                    'locale' => 'fr',
+                                    'locale' => 'fr_FR',
                                     'criteria' => 'expr:service(\'request_stack\').getCurrentRequest().get(\'criteria\', [])',
                                 ),
                             ),
@@ -19138,7 +19152,7 @@ class appDevDebugProjectContainer extends Container
                             'repository' => array(
                                 'method' => 'createListQueryBuilder',
                                 'arguments' => array(
-                                    0 => 'fr',
+                                    0 => 'fr_FR',
                                     1 => 'expr:service(\'app.context.customer\').getCustomer().getId()',
                                 ),
                             ),
@@ -19238,7 +19252,7 @@ class appDevDebugProjectContainer extends Container
                             'repository' => array(
                                 'method' => 'createListQueryBuilder',
                                 'arguments' => array(
-                                    'locale' => 'fr',
+                                    'locale' => 'fr_FR',
                                     'onlyPublished' => true,
                                     'criteria' => 'expr:service(\'request_stack\').getCurrentRequest().get(\'criteria\', [])',
                                 ),
@@ -19291,7 +19305,7 @@ class appDevDebugProjectContainer extends Container
                                 'method' => 'createQueryBuilderByProductList',
                                 'arguments' => array(
                                     0 => '$productListSlug',
-                                    1 => 'fr',
+                                    1 => 'fr_FR',
                                 ),
                             ),
                         ),
@@ -20370,23 +20384,23 @@ class appDevDebugProjectContainer extends Container
     }
 }
 
-class SyliusBundleResourceBundleDoctrineORMEntityRepository_0000000067dc5ebd0000000078fadba4877f40b66baaf9ca0d0afe40b8a3d26d extends \Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository implements \ProxyManager\Proxy\VirtualProxyInterface
+class SyliusBundleResourceBundleDoctrineORMEntityRepository_000000004b511bf3000000000f6225f6877f40b66baaf9ca0d0afe40b8a3d26d extends \Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository implements \ProxyManager\Proxy\VirtualProxyInterface
 {
 
     /**
      * @var \Closure|null initializer responsible for generating the wrapped object
      */
-    private $valueHolder58ec7d91a04a3725077451 = null;
+    private $valueHolder58ecd21f7c4f0994656377 = null;
 
     /**
      * @var \Closure|null initializer responsible for generating the wrapped object
      */
-    private $initializer58ec7d91a04ec430429249 = null;
+    private $initializer58ecd21f7c532536019788 = null;
 
     /**
      * @var bool[] map of public properties of the parent class
      */
-    private static $publicProperties58ec7d91a03dd482943928 = array(
+    private static $publicProperties58ecd21f7c43c007239895 = array(
         
     );
 
@@ -20395,9 +20409,9 @@ class SyliusBundleResourceBundleDoctrineORMEntityRepository_0000000067dc5ebd0000
      */
     public function add(\Sylius\Component\Resource\Model\ResourceInterface $resource)
     {
-        $this->initializer58ec7d91a04ec430429249 && $this->initializer58ec7d91a04ec430429249->__invoke($this->valueHolder58ec7d91a04a3725077451, $this, 'add', array('resource' => $resource), $this->initializer58ec7d91a04ec430429249);
+        $this->initializer58ecd21f7c532536019788 && $this->initializer58ecd21f7c532536019788->__invoke($this->valueHolder58ecd21f7c4f0994656377, $this, 'add', array('resource' => $resource), $this->initializer58ecd21f7c532536019788);
 
-        return $this->valueHolder58ec7d91a04a3725077451->add($resource);
+        return $this->valueHolder58ecd21f7c4f0994656377->add($resource);
     }
 
     /**
@@ -20405,9 +20419,9 @@ class SyliusBundleResourceBundleDoctrineORMEntityRepository_0000000067dc5ebd0000
      */
     public function remove(\Sylius\Component\Resource\Model\ResourceInterface $resource)
     {
-        $this->initializer58ec7d91a04ec430429249 && $this->initializer58ec7d91a04ec430429249->__invoke($this->valueHolder58ec7d91a04a3725077451, $this, 'remove', array('resource' => $resource), $this->initializer58ec7d91a04ec430429249);
+        $this->initializer58ecd21f7c532536019788 && $this->initializer58ecd21f7c532536019788->__invoke($this->valueHolder58ecd21f7c4f0994656377, $this, 'remove', array('resource' => $resource), $this->initializer58ecd21f7c532536019788);
 
-        return $this->valueHolder58ec7d91a04a3725077451->remove($resource);
+        return $this->valueHolder58ecd21f7c4f0994656377->remove($resource);
     }
 
     /**
@@ -20415,9 +20429,9 @@ class SyliusBundleResourceBundleDoctrineORMEntityRepository_0000000067dc5ebd0000
      */
     public function createPaginator(array $criteria = array(), array $sorting = array())
     {
-        $this->initializer58ec7d91a04ec430429249 && $this->initializer58ec7d91a04ec430429249->__invoke($this->valueHolder58ec7d91a04a3725077451, $this, 'createPaginator', array('criteria' => $criteria, 'sorting' => $sorting), $this->initializer58ec7d91a04ec430429249);
+        $this->initializer58ecd21f7c532536019788 && $this->initializer58ecd21f7c532536019788->__invoke($this->valueHolder58ecd21f7c4f0994656377, $this, 'createPaginator', array('criteria' => $criteria, 'sorting' => $sorting), $this->initializer58ecd21f7c532536019788);
 
-        return $this->valueHolder58ec7d91a04a3725077451->createPaginator($criteria, $sorting);
+        return $this->valueHolder58ecd21f7c4f0994656377->createPaginator($criteria, $sorting);
     }
 
     /**
@@ -20425,9 +20439,9 @@ class SyliusBundleResourceBundleDoctrineORMEntityRepository_0000000067dc5ebd0000
      */
     public function createQueryBuilder($alias, $indexBy = null)
     {
-        $this->initializer58ec7d91a04ec430429249 && $this->initializer58ec7d91a04ec430429249->__invoke($this->valueHolder58ec7d91a04a3725077451, $this, 'createQueryBuilder', array('alias' => $alias, 'indexBy' => $indexBy), $this->initializer58ec7d91a04ec430429249);
+        $this->initializer58ecd21f7c532536019788 && $this->initializer58ecd21f7c532536019788->__invoke($this->valueHolder58ecd21f7c4f0994656377, $this, 'createQueryBuilder', array('alias' => $alias, 'indexBy' => $indexBy), $this->initializer58ecd21f7c532536019788);
 
-        return $this->valueHolder58ec7d91a04a3725077451->createQueryBuilder($alias, $indexBy);
+        return $this->valueHolder58ecd21f7c4f0994656377->createQueryBuilder($alias, $indexBy);
     }
 
     /**
@@ -20435,9 +20449,9 @@ class SyliusBundleResourceBundleDoctrineORMEntityRepository_0000000067dc5ebd0000
      */
     public function createResultSetMappingBuilder($alias)
     {
-        $this->initializer58ec7d91a04ec430429249 && $this->initializer58ec7d91a04ec430429249->__invoke($this->valueHolder58ec7d91a04a3725077451, $this, 'createResultSetMappingBuilder', array('alias' => $alias), $this->initializer58ec7d91a04ec430429249);
+        $this->initializer58ecd21f7c532536019788 && $this->initializer58ecd21f7c532536019788->__invoke($this->valueHolder58ecd21f7c4f0994656377, $this, 'createResultSetMappingBuilder', array('alias' => $alias), $this->initializer58ecd21f7c532536019788);
 
-        return $this->valueHolder58ec7d91a04a3725077451->createResultSetMappingBuilder($alias);
+        return $this->valueHolder58ecd21f7c4f0994656377->createResultSetMappingBuilder($alias);
     }
 
     /**
@@ -20445,9 +20459,9 @@ class SyliusBundleResourceBundleDoctrineORMEntityRepository_0000000067dc5ebd0000
      */
     public function createNamedQuery($queryName)
     {
-        $this->initializer58ec7d91a04ec430429249 && $this->initializer58ec7d91a04ec430429249->__invoke($this->valueHolder58ec7d91a04a3725077451, $this, 'createNamedQuery', array('queryName' => $queryName), $this->initializer58ec7d91a04ec430429249);
+        $this->initializer58ecd21f7c532536019788 && $this->initializer58ecd21f7c532536019788->__invoke($this->valueHolder58ecd21f7c4f0994656377, $this, 'createNamedQuery', array('queryName' => $queryName), $this->initializer58ecd21f7c532536019788);
 
-        return $this->valueHolder58ec7d91a04a3725077451->createNamedQuery($queryName);
+        return $this->valueHolder58ecd21f7c4f0994656377->createNamedQuery($queryName);
     }
 
     /**
@@ -20455,9 +20469,9 @@ class SyliusBundleResourceBundleDoctrineORMEntityRepository_0000000067dc5ebd0000
      */
     public function createNativeNamedQuery($queryName)
     {
-        $this->initializer58ec7d91a04ec430429249 && $this->initializer58ec7d91a04ec430429249->__invoke($this->valueHolder58ec7d91a04a3725077451, $this, 'createNativeNamedQuery', array('queryName' => $queryName), $this->initializer58ec7d91a04ec430429249);
+        $this->initializer58ecd21f7c532536019788 && $this->initializer58ecd21f7c532536019788->__invoke($this->valueHolder58ecd21f7c4f0994656377, $this, 'createNativeNamedQuery', array('queryName' => $queryName), $this->initializer58ecd21f7c532536019788);
 
-        return $this->valueHolder58ec7d91a04a3725077451->createNativeNamedQuery($queryName);
+        return $this->valueHolder58ecd21f7c4f0994656377->createNativeNamedQuery($queryName);
     }
 
     /**
@@ -20465,9 +20479,9 @@ class SyliusBundleResourceBundleDoctrineORMEntityRepository_0000000067dc5ebd0000
      */
     public function clear()
     {
-        $this->initializer58ec7d91a04ec430429249 && $this->initializer58ec7d91a04ec430429249->__invoke($this->valueHolder58ec7d91a04a3725077451, $this, 'clear', array(), $this->initializer58ec7d91a04ec430429249);
+        $this->initializer58ecd21f7c532536019788 && $this->initializer58ecd21f7c532536019788->__invoke($this->valueHolder58ecd21f7c4f0994656377, $this, 'clear', array(), $this->initializer58ecd21f7c532536019788);
 
-        return $this->valueHolder58ec7d91a04a3725077451->clear();
+        return $this->valueHolder58ecd21f7c4f0994656377->clear();
     }
 
     /**
@@ -20475,9 +20489,9 @@ class SyliusBundleResourceBundleDoctrineORMEntityRepository_0000000067dc5ebd0000
      */
     public function find($id, $lockMode = null, $lockVersion = null)
     {
-        $this->initializer58ec7d91a04ec430429249 && $this->initializer58ec7d91a04ec430429249->__invoke($this->valueHolder58ec7d91a04a3725077451, $this, 'find', array('id' => $id, 'lockMode' => $lockMode, 'lockVersion' => $lockVersion), $this->initializer58ec7d91a04ec430429249);
+        $this->initializer58ecd21f7c532536019788 && $this->initializer58ecd21f7c532536019788->__invoke($this->valueHolder58ecd21f7c4f0994656377, $this, 'find', array('id' => $id, 'lockMode' => $lockMode, 'lockVersion' => $lockVersion), $this->initializer58ecd21f7c532536019788);
 
-        return $this->valueHolder58ec7d91a04a3725077451->find($id, $lockMode, $lockVersion);
+        return $this->valueHolder58ecd21f7c4f0994656377->find($id, $lockMode, $lockVersion);
     }
 
     /**
@@ -20485,9 +20499,9 @@ class SyliusBundleResourceBundleDoctrineORMEntityRepository_0000000067dc5ebd0000
      */
     public function findAll()
     {
-        $this->initializer58ec7d91a04ec430429249 && $this->initializer58ec7d91a04ec430429249->__invoke($this->valueHolder58ec7d91a04a3725077451, $this, 'findAll', array(), $this->initializer58ec7d91a04ec430429249);
+        $this->initializer58ecd21f7c532536019788 && $this->initializer58ecd21f7c532536019788->__invoke($this->valueHolder58ecd21f7c4f0994656377, $this, 'findAll', array(), $this->initializer58ecd21f7c532536019788);
 
-        return $this->valueHolder58ec7d91a04a3725077451->findAll();
+        return $this->valueHolder58ecd21f7c4f0994656377->findAll();
     }
 
     /**
@@ -20495,9 +20509,9 @@ class SyliusBundleResourceBundleDoctrineORMEntityRepository_0000000067dc5ebd0000
      */
     public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
     {
-        $this->initializer58ec7d91a04ec430429249 && $this->initializer58ec7d91a04ec430429249->__invoke($this->valueHolder58ec7d91a04a3725077451, $this, 'findBy', array('criteria' => $criteria, 'orderBy' => $orderBy, 'limit' => $limit, 'offset' => $offset), $this->initializer58ec7d91a04ec430429249);
+        $this->initializer58ecd21f7c532536019788 && $this->initializer58ecd21f7c532536019788->__invoke($this->valueHolder58ecd21f7c4f0994656377, $this, 'findBy', array('criteria' => $criteria, 'orderBy' => $orderBy, 'limit' => $limit, 'offset' => $offset), $this->initializer58ecd21f7c532536019788);
 
-        return $this->valueHolder58ec7d91a04a3725077451->findBy($criteria, $orderBy, $limit, $offset);
+        return $this->valueHolder58ecd21f7c4f0994656377->findBy($criteria, $orderBy, $limit, $offset);
     }
 
     /**
@@ -20505,9 +20519,9 @@ class SyliusBundleResourceBundleDoctrineORMEntityRepository_0000000067dc5ebd0000
      */
     public function findOneBy(array $criteria, array $orderBy = null)
     {
-        $this->initializer58ec7d91a04ec430429249 && $this->initializer58ec7d91a04ec430429249->__invoke($this->valueHolder58ec7d91a04a3725077451, $this, 'findOneBy', array('criteria' => $criteria, 'orderBy' => $orderBy), $this->initializer58ec7d91a04ec430429249);
+        $this->initializer58ecd21f7c532536019788 && $this->initializer58ecd21f7c532536019788->__invoke($this->valueHolder58ecd21f7c4f0994656377, $this, 'findOneBy', array('criteria' => $criteria, 'orderBy' => $orderBy), $this->initializer58ecd21f7c532536019788);
 
-        return $this->valueHolder58ec7d91a04a3725077451->findOneBy($criteria, $orderBy);
+        return $this->valueHolder58ecd21f7c4f0994656377->findOneBy($criteria, $orderBy);
     }
 
     /**
@@ -20515,9 +20529,9 @@ class SyliusBundleResourceBundleDoctrineORMEntityRepository_0000000067dc5ebd0000
      */
     public function __call($method, $arguments)
     {
-        $this->initializer58ec7d91a04ec430429249 && $this->initializer58ec7d91a04ec430429249->__invoke($this->valueHolder58ec7d91a04a3725077451, $this, '__call', array('method' => $method, 'arguments' => $arguments), $this->initializer58ec7d91a04ec430429249);
+        $this->initializer58ecd21f7c532536019788 && $this->initializer58ecd21f7c532536019788->__invoke($this->valueHolder58ecd21f7c4f0994656377, $this, '__call', array('method' => $method, 'arguments' => $arguments), $this->initializer58ecd21f7c532536019788);
 
-        return $this->valueHolder58ec7d91a04a3725077451->__call($method, $arguments);
+        return $this->valueHolder58ecd21f7c4f0994656377->__call($method, $arguments);
     }
 
     /**
@@ -20525,9 +20539,9 @@ class SyliusBundleResourceBundleDoctrineORMEntityRepository_0000000067dc5ebd0000
      */
     public function getClassName()
     {
-        $this->initializer58ec7d91a04ec430429249 && $this->initializer58ec7d91a04ec430429249->__invoke($this->valueHolder58ec7d91a04a3725077451, $this, 'getClassName', array(), $this->initializer58ec7d91a04ec430429249);
+        $this->initializer58ecd21f7c532536019788 && $this->initializer58ecd21f7c532536019788->__invoke($this->valueHolder58ecd21f7c4f0994656377, $this, 'getClassName', array(), $this->initializer58ecd21f7c532536019788);
 
-        return $this->valueHolder58ec7d91a04a3725077451->getClassName();
+        return $this->valueHolder58ecd21f7c4f0994656377->getClassName();
     }
 
     /**
@@ -20535,9 +20549,9 @@ class SyliusBundleResourceBundleDoctrineORMEntityRepository_0000000067dc5ebd0000
      */
     public function matching(\Doctrine\Common\Collections\Criteria $criteria)
     {
-        $this->initializer58ec7d91a04ec430429249 && $this->initializer58ec7d91a04ec430429249->__invoke($this->valueHolder58ec7d91a04a3725077451, $this, 'matching', array('criteria' => $criteria), $this->initializer58ec7d91a04ec430429249);
+        $this->initializer58ecd21f7c532536019788 && $this->initializer58ecd21f7c532536019788->__invoke($this->valueHolder58ecd21f7c4f0994656377, $this, 'matching', array('criteria' => $criteria), $this->initializer58ecd21f7c532536019788);
 
-        return $this->valueHolder58ec7d91a04a3725077451->matching($criteria);
+        return $this->valueHolder58ecd21f7c4f0994656377->matching($criteria);
     }
 
     /**
@@ -20554,7 +20568,7 @@ class SyliusBundleResourceBundleDoctrineORMEntityRepository_0000000067dc5ebd0000
 
         unset($instance->_entityName, $instance->_em, $instance->_class);
 
-        $instance->initializer58ec7d91a04ec430429249 = $initializer;
+        $instance->initializer58ecd21f7c532536019788 = $initializer;
 
         return $instance;
     }
@@ -20566,14 +20580,14 @@ class SyliusBundleResourceBundleDoctrineORMEntityRepository_0000000067dc5ebd0000
     {
         static $reflection;
 
-        if (! $this->valueHolder58ec7d91a04a3725077451) {
+        if (! $this->valueHolder58ecd21f7c4f0994656377) {
             $reflection = $reflection ?: new \ReflectionClass('Sylius\\Bundle\\ResourceBundle\\Doctrine\\ORM\\EntityRepository');
-            $this->valueHolder58ec7d91a04a3725077451 = $reflection->newInstanceWithoutConstructor();
+            $this->valueHolder58ecd21f7c4f0994656377 = $reflection->newInstanceWithoutConstructor();
         unset($this->_entityName, $this->_em, $this->_class);
 
         }
 
-        $this->valueHolder58ec7d91a04a3725077451->__construct($em, $class);
+        $this->valueHolder58ecd21f7c4f0994656377->__construct($em, $class);
     }
 
     /**
@@ -20581,16 +20595,16 @@ class SyliusBundleResourceBundleDoctrineORMEntityRepository_0000000067dc5ebd0000
      */
     public function & __get($name)
     {
-        $this->initializer58ec7d91a04ec430429249 && $this->initializer58ec7d91a04ec430429249->__invoke($this->valueHolder58ec7d91a04a3725077451, $this, '__get', ['name' => $name], $this->initializer58ec7d91a04ec430429249);
+        $this->initializer58ecd21f7c532536019788 && $this->initializer58ecd21f7c532536019788->__invoke($this->valueHolder58ecd21f7c4f0994656377, $this, '__get', ['name' => $name], $this->initializer58ecd21f7c532536019788);
 
-        if (isset(self::$publicProperties58ec7d91a03dd482943928[$name])) {
-            return $this->valueHolder58ec7d91a04a3725077451->$name;
+        if (isset(self::$publicProperties58ecd21f7c43c007239895[$name])) {
+            return $this->valueHolder58ecd21f7c4f0994656377->$name;
         }
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91a04a3725077451;
+            $targetObject = $this->valueHolder58ecd21f7c4f0994656377;
 
             $backtrace = debug_backtrace(false);
             trigger_error('Undefined property: ' . get_parent_class($this) . '::$' . $name . ' in ' . $backtrace[0]['file'] . ' on line ' . $backtrace[0]['line'], \E_USER_NOTICE);
@@ -20598,7 +20612,7 @@ class SyliusBundleResourceBundleDoctrineORMEntityRepository_0000000067dc5ebd0000
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91a04a3725077451;
+        $targetObject = $this->valueHolder58ecd21f7c4f0994656377;
         $accessor = function & () use ($targetObject, $name) {
             return $targetObject->$name;
         };
@@ -20616,18 +20630,18 @@ class SyliusBundleResourceBundleDoctrineORMEntityRepository_0000000067dc5ebd0000
      */
     public function __set($name, $value)
     {
-        $this->initializer58ec7d91a04ec430429249 && $this->initializer58ec7d91a04ec430429249->__invoke($this->valueHolder58ec7d91a04a3725077451, $this, '__set', array('name' => $name, 'value' => $value), $this->initializer58ec7d91a04ec430429249);
+        $this->initializer58ecd21f7c532536019788 && $this->initializer58ecd21f7c532536019788->__invoke($this->valueHolder58ecd21f7c4f0994656377, $this, '__set', array('name' => $name, 'value' => $value), $this->initializer58ecd21f7c532536019788);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91a04a3725077451;
+            $targetObject = $this->valueHolder58ecd21f7c4f0994656377;
 
             return $targetObject->$name = $value;
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91a04a3725077451;
+        $targetObject = $this->valueHolder58ecd21f7c4f0994656377;
         $accessor = function & () use ($targetObject, $name, $value) {
             return $targetObject->$name = $value;
         };
@@ -20644,18 +20658,18 @@ class SyliusBundleResourceBundleDoctrineORMEntityRepository_0000000067dc5ebd0000
      */
     public function __isset($name)
     {
-        $this->initializer58ec7d91a04ec430429249 && $this->initializer58ec7d91a04ec430429249->__invoke($this->valueHolder58ec7d91a04a3725077451, $this, '__isset', array('name' => $name), $this->initializer58ec7d91a04ec430429249);
+        $this->initializer58ecd21f7c532536019788 && $this->initializer58ecd21f7c532536019788->__invoke($this->valueHolder58ecd21f7c4f0994656377, $this, '__isset', array('name' => $name), $this->initializer58ecd21f7c532536019788);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91a04a3725077451;
+            $targetObject = $this->valueHolder58ecd21f7c4f0994656377;
 
             return isset($targetObject->$name);
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91a04a3725077451;
+        $targetObject = $this->valueHolder58ecd21f7c4f0994656377;
         $accessor = function () use ($targetObject, $name) {
             return isset($targetObject->$name);
         };
@@ -20672,18 +20686,18 @@ class SyliusBundleResourceBundleDoctrineORMEntityRepository_0000000067dc5ebd0000
      */
     public function __unset($name)
     {
-        $this->initializer58ec7d91a04ec430429249 && $this->initializer58ec7d91a04ec430429249->__invoke($this->valueHolder58ec7d91a04a3725077451, $this, '__unset', array('name' => $name), $this->initializer58ec7d91a04ec430429249);
+        $this->initializer58ecd21f7c532536019788 && $this->initializer58ecd21f7c532536019788->__invoke($this->valueHolder58ecd21f7c4f0994656377, $this, '__unset', array('name' => $name), $this->initializer58ecd21f7c532536019788);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91a04a3725077451;
+            $targetObject = $this->valueHolder58ecd21f7c4f0994656377;
 
             unset($targetObject->$name);
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91a04a3725077451;
+        $targetObject = $this->valueHolder58ecd21f7c4f0994656377;
         $accessor = function () use ($targetObject, $name) {
             unset($targetObject->$name);
         };
@@ -20697,16 +20711,16 @@ class SyliusBundleResourceBundleDoctrineORMEntityRepository_0000000067dc5ebd0000
 
     public function __clone()
     {
-        $this->initializer58ec7d91a04ec430429249 && $this->initializer58ec7d91a04ec430429249->__invoke($this->valueHolder58ec7d91a04a3725077451, $this, '__clone', array(), $this->initializer58ec7d91a04ec430429249);
+        $this->initializer58ecd21f7c532536019788 && $this->initializer58ecd21f7c532536019788->__invoke($this->valueHolder58ecd21f7c4f0994656377, $this, '__clone', array(), $this->initializer58ecd21f7c532536019788);
 
-        $this->valueHolder58ec7d91a04a3725077451 = clone $this->valueHolder58ec7d91a04a3725077451;
+        $this->valueHolder58ecd21f7c4f0994656377 = clone $this->valueHolder58ecd21f7c4f0994656377;
     }
 
     public function __sleep()
     {
-        $this->initializer58ec7d91a04ec430429249 && $this->initializer58ec7d91a04ec430429249->__invoke($this->valueHolder58ec7d91a04a3725077451, $this, '__sleep', array(), $this->initializer58ec7d91a04ec430429249);
+        $this->initializer58ecd21f7c532536019788 && $this->initializer58ecd21f7c532536019788->__invoke($this->valueHolder58ecd21f7c4f0994656377, $this, '__sleep', array(), $this->initializer58ecd21f7c532536019788);
 
-        return array('valueHolder58ec7d91a04a3725077451');
+        return array('valueHolder58ecd21f7c4f0994656377');
     }
 
     public function __wakeup()
@@ -20719,7 +20733,7 @@ class SyliusBundleResourceBundleDoctrineORMEntityRepository_0000000067dc5ebd0000
      */
     public function setProxyInitializer(\Closure $initializer = null)
     {
-        $this->initializer58ec7d91a04ec430429249 = $initializer;
+        $this->initializer58ecd21f7c532536019788 = $initializer;
     }
 
     /**
@@ -20727,7 +20741,7 @@ class SyliusBundleResourceBundleDoctrineORMEntityRepository_0000000067dc5ebd0000
      */
     public function getProxyInitializer()
     {
-        return $this->initializer58ec7d91a04ec430429249;
+        return $this->initializer58ecd21f7c532536019788;
     }
 
     /**
@@ -20735,7 +20749,7 @@ class SyliusBundleResourceBundleDoctrineORMEntityRepository_0000000067dc5ebd0000
      */
     public function initializeProxy() : bool
     {
-        return $this->initializer58ec7d91a04ec430429249 && $this->initializer58ec7d91a04ec430429249->__invoke($this->valueHolder58ec7d91a04a3725077451, $this, 'initializeProxy', array(), $this->initializer58ec7d91a04ec430429249);
+        return $this->initializer58ecd21f7c532536019788 && $this->initializer58ecd21f7c532536019788->__invoke($this->valueHolder58ecd21f7c4f0994656377, $this, 'initializeProxy', array(), $this->initializer58ecd21f7c532536019788);
     }
 
     /**
@@ -20743,7 +20757,7 @@ class SyliusBundleResourceBundleDoctrineORMEntityRepository_0000000067dc5ebd0000
      */
     public function isProxyInitialized() : bool
     {
-        return null !== $this->valueHolder58ec7d91a04a3725077451;
+        return null !== $this->valueHolder58ecd21f7c4f0994656377;
     }
 
     /**
@@ -20751,29 +20765,29 @@ class SyliusBundleResourceBundleDoctrineORMEntityRepository_0000000067dc5ebd0000
      */
     public function getWrappedValueHolderValue()
     {
-        return $this->valueHolder58ec7d91a04a3725077451;
+        return $this->valueHolder58ecd21f7c4f0994656377;
     }
 
 
 }
 
-class SyliusBundleUserBundleProviderEmailProvider_0000000067dc57910000000078fadba4877f40b66baaf9ca0d0afe40b8a3d26d extends \Sylius\Bundle\UserBundle\Provider\EmailProvider implements \ProxyManager\Proxy\VirtualProxyInterface
+class SyliusBundleUserBundleProviderEmailProvider_000000004b5112d5000000000f6225f6877f40b66baaf9ca0d0afe40b8a3d26d extends \Sylius\Bundle\UserBundle\Provider\EmailProvider implements \ProxyManager\Proxy\VirtualProxyInterface
 {
 
     /**
      * @var \Closure|null initializer responsible for generating the wrapped object
      */
-    private $valueHolder58ec7d91ac190367330264 = null;
+    private $valueHolder58ecd21f881f7318141004 = null;
 
     /**
      * @var \Closure|null initializer responsible for generating the wrapped object
      */
-    private $initializer58ec7d91ac1d0472957443 = null;
+    private $initializer58ecd21f8823a295175397 = null;
 
     /**
      * @var bool[] map of public properties of the parent class
      */
-    private static $publicProperties58ec7d91ac0e8057030472 = array(
+    private static $publicProperties58ecd21f8814c589594060 = array(
         
     );
 
@@ -20782,9 +20796,9 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc57910000000078fadb
      */
     public function loadUserByUsername($username)
     {
-        $this->initializer58ec7d91ac1d0472957443 && $this->initializer58ec7d91ac1d0472957443->__invoke($this->valueHolder58ec7d91ac190367330264, $this, 'loadUserByUsername', array('username' => $username), $this->initializer58ec7d91ac1d0472957443);
+        $this->initializer58ecd21f8823a295175397 && $this->initializer58ecd21f8823a295175397->__invoke($this->valueHolder58ecd21f881f7318141004, $this, 'loadUserByUsername', array('username' => $username), $this->initializer58ecd21f8823a295175397);
 
-        return $this->valueHolder58ec7d91ac190367330264->loadUserByUsername($username);
+        return $this->valueHolder58ecd21f881f7318141004->loadUserByUsername($username);
     }
 
     /**
@@ -20792,9 +20806,9 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc57910000000078fadb
      */
     public function refreshUser(\Symfony\Component\Security\Core\User\UserInterface $user)
     {
-        $this->initializer58ec7d91ac1d0472957443 && $this->initializer58ec7d91ac1d0472957443->__invoke($this->valueHolder58ec7d91ac190367330264, $this, 'refreshUser', array('user' => $user), $this->initializer58ec7d91ac1d0472957443);
+        $this->initializer58ecd21f8823a295175397 && $this->initializer58ecd21f8823a295175397->__invoke($this->valueHolder58ecd21f881f7318141004, $this, 'refreshUser', array('user' => $user), $this->initializer58ecd21f8823a295175397);
 
-        return $this->valueHolder58ec7d91ac190367330264->refreshUser($user);
+        return $this->valueHolder58ecd21f881f7318141004->refreshUser($user);
     }
 
     /**
@@ -20802,9 +20816,9 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc57910000000078fadb
      */
     public function supportsClass($class)
     {
-        $this->initializer58ec7d91ac1d0472957443 && $this->initializer58ec7d91ac1d0472957443->__invoke($this->valueHolder58ec7d91ac190367330264, $this, 'supportsClass', array('class' => $class), $this->initializer58ec7d91ac1d0472957443);
+        $this->initializer58ecd21f8823a295175397 && $this->initializer58ecd21f8823a295175397->__invoke($this->valueHolder58ecd21f881f7318141004, $this, 'supportsClass', array('class' => $class), $this->initializer58ecd21f8823a295175397);
 
-        return $this->valueHolder58ec7d91ac190367330264->supportsClass($class);
+        return $this->valueHolder58ecd21f881f7318141004->supportsClass($class);
     }
 
     /**
@@ -20821,7 +20835,7 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc57910000000078fadb
 
         unset($instance->supportedUserClass, $instance->userRepository, $instance->canonicalizer);
 
-        $instance->initializer58ec7d91ac1d0472957443 = $initializer;
+        $instance->initializer58ecd21f8823a295175397 = $initializer;
 
         return $instance;
     }
@@ -20833,14 +20847,14 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc57910000000078fadb
     {
         static $reflection;
 
-        if (! $this->valueHolder58ec7d91ac190367330264) {
+        if (! $this->valueHolder58ecd21f881f7318141004) {
             $reflection = $reflection ?: new \ReflectionClass('Sylius\\Bundle\\UserBundle\\Provider\\EmailProvider');
-            $this->valueHolder58ec7d91ac190367330264 = $reflection->newInstanceWithoutConstructor();
+            $this->valueHolder58ecd21f881f7318141004 = $reflection->newInstanceWithoutConstructor();
         unset($this->supportedUserClass, $this->userRepository, $this->canonicalizer);
 
         }
 
-        $this->valueHolder58ec7d91ac190367330264->__construct($supportedUserClass, $userRepository, $canonicalizer);
+        $this->valueHolder58ecd21f881f7318141004->__construct($supportedUserClass, $userRepository, $canonicalizer);
     }
 
     /**
@@ -20848,16 +20862,16 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc57910000000078fadb
      */
     public function & __get($name)
     {
-        $this->initializer58ec7d91ac1d0472957443 && $this->initializer58ec7d91ac1d0472957443->__invoke($this->valueHolder58ec7d91ac190367330264, $this, '__get', ['name' => $name], $this->initializer58ec7d91ac1d0472957443);
+        $this->initializer58ecd21f8823a295175397 && $this->initializer58ecd21f8823a295175397->__invoke($this->valueHolder58ecd21f881f7318141004, $this, '__get', ['name' => $name], $this->initializer58ecd21f8823a295175397);
 
-        if (isset(self::$publicProperties58ec7d91ac0e8057030472[$name])) {
-            return $this->valueHolder58ec7d91ac190367330264->$name;
+        if (isset(self::$publicProperties58ecd21f8814c589594060[$name])) {
+            return $this->valueHolder58ecd21f881f7318141004->$name;
         }
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91ac190367330264;
+            $targetObject = $this->valueHolder58ecd21f881f7318141004;
 
             $backtrace = debug_backtrace(false);
             trigger_error('Undefined property: ' . get_parent_class($this) . '::$' . $name . ' in ' . $backtrace[0]['file'] . ' on line ' . $backtrace[0]['line'], \E_USER_NOTICE);
@@ -20865,7 +20879,7 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc57910000000078fadb
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91ac190367330264;
+        $targetObject = $this->valueHolder58ecd21f881f7318141004;
         $accessor = function & () use ($targetObject, $name) {
             return $targetObject->$name;
         };
@@ -20883,18 +20897,18 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc57910000000078fadb
      */
     public function __set($name, $value)
     {
-        $this->initializer58ec7d91ac1d0472957443 && $this->initializer58ec7d91ac1d0472957443->__invoke($this->valueHolder58ec7d91ac190367330264, $this, '__set', array('name' => $name, 'value' => $value), $this->initializer58ec7d91ac1d0472957443);
+        $this->initializer58ecd21f8823a295175397 && $this->initializer58ecd21f8823a295175397->__invoke($this->valueHolder58ecd21f881f7318141004, $this, '__set', array('name' => $name, 'value' => $value), $this->initializer58ecd21f8823a295175397);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91ac190367330264;
+            $targetObject = $this->valueHolder58ecd21f881f7318141004;
 
             return $targetObject->$name = $value;
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91ac190367330264;
+        $targetObject = $this->valueHolder58ecd21f881f7318141004;
         $accessor = function & () use ($targetObject, $name, $value) {
             return $targetObject->$name = $value;
         };
@@ -20911,18 +20925,18 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc57910000000078fadb
      */
     public function __isset($name)
     {
-        $this->initializer58ec7d91ac1d0472957443 && $this->initializer58ec7d91ac1d0472957443->__invoke($this->valueHolder58ec7d91ac190367330264, $this, '__isset', array('name' => $name), $this->initializer58ec7d91ac1d0472957443);
+        $this->initializer58ecd21f8823a295175397 && $this->initializer58ecd21f8823a295175397->__invoke($this->valueHolder58ecd21f881f7318141004, $this, '__isset', array('name' => $name), $this->initializer58ecd21f8823a295175397);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91ac190367330264;
+            $targetObject = $this->valueHolder58ecd21f881f7318141004;
 
             return isset($targetObject->$name);
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91ac190367330264;
+        $targetObject = $this->valueHolder58ecd21f881f7318141004;
         $accessor = function () use ($targetObject, $name) {
             return isset($targetObject->$name);
         };
@@ -20939,18 +20953,18 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc57910000000078fadb
      */
     public function __unset($name)
     {
-        $this->initializer58ec7d91ac1d0472957443 && $this->initializer58ec7d91ac1d0472957443->__invoke($this->valueHolder58ec7d91ac190367330264, $this, '__unset', array('name' => $name), $this->initializer58ec7d91ac1d0472957443);
+        $this->initializer58ecd21f8823a295175397 && $this->initializer58ecd21f8823a295175397->__invoke($this->valueHolder58ecd21f881f7318141004, $this, '__unset', array('name' => $name), $this->initializer58ecd21f8823a295175397);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91ac190367330264;
+            $targetObject = $this->valueHolder58ecd21f881f7318141004;
 
             unset($targetObject->$name);
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91ac190367330264;
+        $targetObject = $this->valueHolder58ecd21f881f7318141004;
         $accessor = function () use ($targetObject, $name) {
             unset($targetObject->$name);
         };
@@ -20964,16 +20978,16 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc57910000000078fadb
 
     public function __clone()
     {
-        $this->initializer58ec7d91ac1d0472957443 && $this->initializer58ec7d91ac1d0472957443->__invoke($this->valueHolder58ec7d91ac190367330264, $this, '__clone', array(), $this->initializer58ec7d91ac1d0472957443);
+        $this->initializer58ecd21f8823a295175397 && $this->initializer58ecd21f8823a295175397->__invoke($this->valueHolder58ecd21f881f7318141004, $this, '__clone', array(), $this->initializer58ecd21f8823a295175397);
 
-        $this->valueHolder58ec7d91ac190367330264 = clone $this->valueHolder58ec7d91ac190367330264;
+        $this->valueHolder58ecd21f881f7318141004 = clone $this->valueHolder58ecd21f881f7318141004;
     }
 
     public function __sleep()
     {
-        $this->initializer58ec7d91ac1d0472957443 && $this->initializer58ec7d91ac1d0472957443->__invoke($this->valueHolder58ec7d91ac190367330264, $this, '__sleep', array(), $this->initializer58ec7d91ac1d0472957443);
+        $this->initializer58ecd21f8823a295175397 && $this->initializer58ecd21f8823a295175397->__invoke($this->valueHolder58ecd21f881f7318141004, $this, '__sleep', array(), $this->initializer58ecd21f8823a295175397);
 
-        return array('valueHolder58ec7d91ac190367330264');
+        return array('valueHolder58ecd21f881f7318141004');
     }
 
     public function __wakeup()
@@ -20986,7 +21000,7 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc57910000000078fadb
      */
     public function setProxyInitializer(\Closure $initializer = null)
     {
-        $this->initializer58ec7d91ac1d0472957443 = $initializer;
+        $this->initializer58ecd21f8823a295175397 = $initializer;
     }
 
     /**
@@ -20994,7 +21008,7 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc57910000000078fadb
      */
     public function getProxyInitializer()
     {
-        return $this->initializer58ec7d91ac1d0472957443;
+        return $this->initializer58ecd21f8823a295175397;
     }
 
     /**
@@ -21002,7 +21016,7 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc57910000000078fadb
      */
     public function initializeProxy() : bool
     {
-        return $this->initializer58ec7d91ac1d0472957443 && $this->initializer58ec7d91ac1d0472957443->__invoke($this->valueHolder58ec7d91ac190367330264, $this, 'initializeProxy', array(), $this->initializer58ec7d91ac1d0472957443);
+        return $this->initializer58ecd21f8823a295175397 && $this->initializer58ecd21f8823a295175397->__invoke($this->valueHolder58ecd21f881f7318141004, $this, 'initializeProxy', array(), $this->initializer58ecd21f8823a295175397);
     }
 
     /**
@@ -21010,7 +21024,7 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc57910000000078fadb
      */
     public function isProxyInitialized() : bool
     {
-        return null !== $this->valueHolder58ec7d91ac190367330264;
+        return null !== $this->valueHolder58ecd21f881f7318141004;
     }
 
     /**
@@ -21018,29 +21032,29 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc57910000000078fadb
      */
     public function getWrappedValueHolderValue()
     {
-        return $this->valueHolder58ec7d91ac190367330264;
+        return $this->valueHolder58ecd21f881f7318141004;
     }
 
 
 }
 
-class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc57920000000078fadba4877f40b66baaf9ca0d0afe40b8a3d26d extends \Sylius\Bundle\UserBundle\Provider\UsernameProvider implements \ProxyManager\Proxy\VirtualProxyInterface
+class SyliusBundleUserBundleProviderUsernameProvider_000000004b5112d2000000000f6225f6877f40b66baaf9ca0d0afe40b8a3d26d extends \Sylius\Bundle\UserBundle\Provider\UsernameProvider implements \ProxyManager\Proxy\VirtualProxyInterface
 {
 
     /**
      * @var \Closure|null initializer responsible for generating the wrapped object
      */
-    private $valueHolder58ec7d91af73e263489261 = null;
+    private $valueHolder58ecd21f8b7c7180506978 = null;
 
     /**
      * @var \Closure|null initializer responsible for generating the wrapped object
      */
-    private $initializer58ec7d91af77f711970066 = null;
+    private $initializer58ecd21f8b809534984982 = null;
 
     /**
      * @var bool[] map of public properties of the parent class
      */
-    private static $publicProperties58ec7d91af699968844012 = array(
+    private static $publicProperties58ecd21f8b721523005414 = array(
         
     );
 
@@ -21049,9 +21063,9 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc57920000000078f
      */
     public function loadUserByUsername($username)
     {
-        $this->initializer58ec7d91af77f711970066 && $this->initializer58ec7d91af77f711970066->__invoke($this->valueHolder58ec7d91af73e263489261, $this, 'loadUserByUsername', array('username' => $username), $this->initializer58ec7d91af77f711970066);
+        $this->initializer58ecd21f8b809534984982 && $this->initializer58ecd21f8b809534984982->__invoke($this->valueHolder58ecd21f8b7c7180506978, $this, 'loadUserByUsername', array('username' => $username), $this->initializer58ecd21f8b809534984982);
 
-        return $this->valueHolder58ec7d91af73e263489261->loadUserByUsername($username);
+        return $this->valueHolder58ecd21f8b7c7180506978->loadUserByUsername($username);
     }
 
     /**
@@ -21059,9 +21073,9 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc57920000000078f
      */
     public function refreshUser(\Symfony\Component\Security\Core\User\UserInterface $user)
     {
-        $this->initializer58ec7d91af77f711970066 && $this->initializer58ec7d91af77f711970066->__invoke($this->valueHolder58ec7d91af73e263489261, $this, 'refreshUser', array('user' => $user), $this->initializer58ec7d91af77f711970066);
+        $this->initializer58ecd21f8b809534984982 && $this->initializer58ecd21f8b809534984982->__invoke($this->valueHolder58ecd21f8b7c7180506978, $this, 'refreshUser', array('user' => $user), $this->initializer58ecd21f8b809534984982);
 
-        return $this->valueHolder58ec7d91af73e263489261->refreshUser($user);
+        return $this->valueHolder58ecd21f8b7c7180506978->refreshUser($user);
     }
 
     /**
@@ -21069,9 +21083,9 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc57920000000078f
      */
     public function supportsClass($class)
     {
-        $this->initializer58ec7d91af77f711970066 && $this->initializer58ec7d91af77f711970066->__invoke($this->valueHolder58ec7d91af73e263489261, $this, 'supportsClass', array('class' => $class), $this->initializer58ec7d91af77f711970066);
+        $this->initializer58ecd21f8b809534984982 && $this->initializer58ecd21f8b809534984982->__invoke($this->valueHolder58ecd21f8b7c7180506978, $this, 'supportsClass', array('class' => $class), $this->initializer58ecd21f8b809534984982);
 
-        return $this->valueHolder58ec7d91af73e263489261->supportsClass($class);
+        return $this->valueHolder58ecd21f8b7c7180506978->supportsClass($class);
     }
 
     /**
@@ -21088,7 +21102,7 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc57920000000078f
 
         unset($instance->supportedUserClass, $instance->userRepository, $instance->canonicalizer);
 
-        $instance->initializer58ec7d91af77f711970066 = $initializer;
+        $instance->initializer58ecd21f8b809534984982 = $initializer;
 
         return $instance;
     }
@@ -21100,14 +21114,14 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc57920000000078f
     {
         static $reflection;
 
-        if (! $this->valueHolder58ec7d91af73e263489261) {
+        if (! $this->valueHolder58ecd21f8b7c7180506978) {
             $reflection = $reflection ?: new \ReflectionClass('Sylius\\Bundle\\UserBundle\\Provider\\UsernameProvider');
-            $this->valueHolder58ec7d91af73e263489261 = $reflection->newInstanceWithoutConstructor();
+            $this->valueHolder58ecd21f8b7c7180506978 = $reflection->newInstanceWithoutConstructor();
         unset($this->supportedUserClass, $this->userRepository, $this->canonicalizer);
 
         }
 
-        $this->valueHolder58ec7d91af73e263489261->__construct($supportedUserClass, $userRepository, $canonicalizer);
+        $this->valueHolder58ecd21f8b7c7180506978->__construct($supportedUserClass, $userRepository, $canonicalizer);
     }
 
     /**
@@ -21115,16 +21129,16 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc57920000000078f
      */
     public function & __get($name)
     {
-        $this->initializer58ec7d91af77f711970066 && $this->initializer58ec7d91af77f711970066->__invoke($this->valueHolder58ec7d91af73e263489261, $this, '__get', ['name' => $name], $this->initializer58ec7d91af77f711970066);
+        $this->initializer58ecd21f8b809534984982 && $this->initializer58ecd21f8b809534984982->__invoke($this->valueHolder58ecd21f8b7c7180506978, $this, '__get', ['name' => $name], $this->initializer58ecd21f8b809534984982);
 
-        if (isset(self::$publicProperties58ec7d91af699968844012[$name])) {
-            return $this->valueHolder58ec7d91af73e263489261->$name;
+        if (isset(self::$publicProperties58ecd21f8b721523005414[$name])) {
+            return $this->valueHolder58ecd21f8b7c7180506978->$name;
         }
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91af73e263489261;
+            $targetObject = $this->valueHolder58ecd21f8b7c7180506978;
 
             $backtrace = debug_backtrace(false);
             trigger_error('Undefined property: ' . get_parent_class($this) . '::$' . $name . ' in ' . $backtrace[0]['file'] . ' on line ' . $backtrace[0]['line'], \E_USER_NOTICE);
@@ -21132,7 +21146,7 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc57920000000078f
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91af73e263489261;
+        $targetObject = $this->valueHolder58ecd21f8b7c7180506978;
         $accessor = function & () use ($targetObject, $name) {
             return $targetObject->$name;
         };
@@ -21150,18 +21164,18 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc57920000000078f
      */
     public function __set($name, $value)
     {
-        $this->initializer58ec7d91af77f711970066 && $this->initializer58ec7d91af77f711970066->__invoke($this->valueHolder58ec7d91af73e263489261, $this, '__set', array('name' => $name, 'value' => $value), $this->initializer58ec7d91af77f711970066);
+        $this->initializer58ecd21f8b809534984982 && $this->initializer58ecd21f8b809534984982->__invoke($this->valueHolder58ecd21f8b7c7180506978, $this, '__set', array('name' => $name, 'value' => $value), $this->initializer58ecd21f8b809534984982);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91af73e263489261;
+            $targetObject = $this->valueHolder58ecd21f8b7c7180506978;
 
             return $targetObject->$name = $value;
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91af73e263489261;
+        $targetObject = $this->valueHolder58ecd21f8b7c7180506978;
         $accessor = function & () use ($targetObject, $name, $value) {
             return $targetObject->$name = $value;
         };
@@ -21178,18 +21192,18 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc57920000000078f
      */
     public function __isset($name)
     {
-        $this->initializer58ec7d91af77f711970066 && $this->initializer58ec7d91af77f711970066->__invoke($this->valueHolder58ec7d91af73e263489261, $this, '__isset', array('name' => $name), $this->initializer58ec7d91af77f711970066);
+        $this->initializer58ecd21f8b809534984982 && $this->initializer58ecd21f8b809534984982->__invoke($this->valueHolder58ecd21f8b7c7180506978, $this, '__isset', array('name' => $name), $this->initializer58ecd21f8b809534984982);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91af73e263489261;
+            $targetObject = $this->valueHolder58ecd21f8b7c7180506978;
 
             return isset($targetObject->$name);
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91af73e263489261;
+        $targetObject = $this->valueHolder58ecd21f8b7c7180506978;
         $accessor = function () use ($targetObject, $name) {
             return isset($targetObject->$name);
         };
@@ -21206,18 +21220,18 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc57920000000078f
      */
     public function __unset($name)
     {
-        $this->initializer58ec7d91af77f711970066 && $this->initializer58ec7d91af77f711970066->__invoke($this->valueHolder58ec7d91af73e263489261, $this, '__unset', array('name' => $name), $this->initializer58ec7d91af77f711970066);
+        $this->initializer58ecd21f8b809534984982 && $this->initializer58ecd21f8b809534984982->__invoke($this->valueHolder58ecd21f8b7c7180506978, $this, '__unset', array('name' => $name), $this->initializer58ecd21f8b809534984982);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91af73e263489261;
+            $targetObject = $this->valueHolder58ecd21f8b7c7180506978;
 
             unset($targetObject->$name);
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91af73e263489261;
+        $targetObject = $this->valueHolder58ecd21f8b7c7180506978;
         $accessor = function () use ($targetObject, $name) {
             unset($targetObject->$name);
         };
@@ -21231,16 +21245,16 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc57920000000078f
 
     public function __clone()
     {
-        $this->initializer58ec7d91af77f711970066 && $this->initializer58ec7d91af77f711970066->__invoke($this->valueHolder58ec7d91af73e263489261, $this, '__clone', array(), $this->initializer58ec7d91af77f711970066);
+        $this->initializer58ecd21f8b809534984982 && $this->initializer58ecd21f8b809534984982->__invoke($this->valueHolder58ecd21f8b7c7180506978, $this, '__clone', array(), $this->initializer58ecd21f8b809534984982);
 
-        $this->valueHolder58ec7d91af73e263489261 = clone $this->valueHolder58ec7d91af73e263489261;
+        $this->valueHolder58ecd21f8b7c7180506978 = clone $this->valueHolder58ecd21f8b7c7180506978;
     }
 
     public function __sleep()
     {
-        $this->initializer58ec7d91af77f711970066 && $this->initializer58ec7d91af77f711970066->__invoke($this->valueHolder58ec7d91af73e263489261, $this, '__sleep', array(), $this->initializer58ec7d91af77f711970066);
+        $this->initializer58ecd21f8b809534984982 && $this->initializer58ecd21f8b809534984982->__invoke($this->valueHolder58ecd21f8b7c7180506978, $this, '__sleep', array(), $this->initializer58ecd21f8b809534984982);
 
-        return array('valueHolder58ec7d91af73e263489261');
+        return array('valueHolder58ecd21f8b7c7180506978');
     }
 
     public function __wakeup()
@@ -21253,7 +21267,7 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc57920000000078f
      */
     public function setProxyInitializer(\Closure $initializer = null)
     {
-        $this->initializer58ec7d91af77f711970066 = $initializer;
+        $this->initializer58ecd21f8b809534984982 = $initializer;
     }
 
     /**
@@ -21261,7 +21275,7 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc57920000000078f
      */
     public function getProxyInitializer()
     {
-        return $this->initializer58ec7d91af77f711970066;
+        return $this->initializer58ecd21f8b809534984982;
     }
 
     /**
@@ -21269,7 +21283,7 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc57920000000078f
      */
     public function initializeProxy() : bool
     {
-        return $this->initializer58ec7d91af77f711970066 && $this->initializer58ec7d91af77f711970066->__invoke($this->valueHolder58ec7d91af73e263489261, $this, 'initializeProxy', array(), $this->initializer58ec7d91af77f711970066);
+        return $this->initializer58ecd21f8b809534984982 && $this->initializer58ecd21f8b809534984982->__invoke($this->valueHolder58ecd21f8b7c7180506978, $this, 'initializeProxy', array(), $this->initializer58ecd21f8b809534984982);
     }
 
     /**
@@ -21277,7 +21291,7 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc57920000000078f
      */
     public function isProxyInitialized() : bool
     {
-        return null !== $this->valueHolder58ec7d91af73e263489261;
+        return null !== $this->valueHolder58ecd21f8b7c7180506978;
     }
 
     /**
@@ -21285,29 +21299,29 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc57920000000078f
      */
     public function getWrappedValueHolderValue()
     {
-        return $this->valueHolder58ec7d91af73e263489261;
+        return $this->valueHolder58ecd21f8b7c7180506978;
     }
 
 
 }
 
-class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579f0000000078fadba4877f40b66baaf9ca0d0afe40b8a3d26d extends \Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider implements \ProxyManager\Proxy\VirtualProxyInterface
+class SyliusBundleUserBundleProviderUsernameOrEmailProvider_000000004b5112d3000000000f6225f6877f40b66baaf9ca0d0afe40b8a3d26d extends \Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider implements \ProxyManager\Proxy\VirtualProxyInterface
 {
 
     /**
      * @var \Closure|null initializer responsible for generating the wrapped object
      */
-    private $valueHolder58ec7d91b2d21427652186 = null;
+    private $valueHolder58ecd21f8ec23491057231 = null;
 
     /**
      * @var \Closure|null initializer responsible for generating the wrapped object
      */
-    private $initializer58ec7d91b2d62363978195 = null;
+    private $initializer58ecd21f8ec63067342662 = null;
 
     /**
      * @var bool[] map of public properties of the parent class
      */
-    private static $publicProperties58ec7d91b2c7b915283618 = array(
+    private static $publicProperties58ecd21f8eb84161066358 = array(
         
     );
 
@@ -21316,9 +21330,9 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579f0000
      */
     public function loadUserByUsername($username)
     {
-        $this->initializer58ec7d91b2d62363978195 && $this->initializer58ec7d91b2d62363978195->__invoke($this->valueHolder58ec7d91b2d21427652186, $this, 'loadUserByUsername', array('username' => $username), $this->initializer58ec7d91b2d62363978195);
+        $this->initializer58ecd21f8ec63067342662 && $this->initializer58ecd21f8ec63067342662->__invoke($this->valueHolder58ecd21f8ec23491057231, $this, 'loadUserByUsername', array('username' => $username), $this->initializer58ecd21f8ec63067342662);
 
-        return $this->valueHolder58ec7d91b2d21427652186->loadUserByUsername($username);
+        return $this->valueHolder58ecd21f8ec23491057231->loadUserByUsername($username);
     }
 
     /**
@@ -21326,9 +21340,9 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579f0000
      */
     public function refreshUser(\Symfony\Component\Security\Core\User\UserInterface $user)
     {
-        $this->initializer58ec7d91b2d62363978195 && $this->initializer58ec7d91b2d62363978195->__invoke($this->valueHolder58ec7d91b2d21427652186, $this, 'refreshUser', array('user' => $user), $this->initializer58ec7d91b2d62363978195);
+        $this->initializer58ecd21f8ec63067342662 && $this->initializer58ecd21f8ec63067342662->__invoke($this->valueHolder58ecd21f8ec23491057231, $this, 'refreshUser', array('user' => $user), $this->initializer58ecd21f8ec63067342662);
 
-        return $this->valueHolder58ec7d91b2d21427652186->refreshUser($user);
+        return $this->valueHolder58ecd21f8ec23491057231->refreshUser($user);
     }
 
     /**
@@ -21336,9 +21350,9 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579f0000
      */
     public function supportsClass($class)
     {
-        $this->initializer58ec7d91b2d62363978195 && $this->initializer58ec7d91b2d62363978195->__invoke($this->valueHolder58ec7d91b2d21427652186, $this, 'supportsClass', array('class' => $class), $this->initializer58ec7d91b2d62363978195);
+        $this->initializer58ecd21f8ec63067342662 && $this->initializer58ecd21f8ec63067342662->__invoke($this->valueHolder58ecd21f8ec23491057231, $this, 'supportsClass', array('class' => $class), $this->initializer58ecd21f8ec63067342662);
 
-        return $this->valueHolder58ec7d91b2d21427652186->supportsClass($class);
+        return $this->valueHolder58ecd21f8ec23491057231->supportsClass($class);
     }
 
     /**
@@ -21355,7 +21369,7 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579f0000
 
         unset($instance->supportedUserClass, $instance->userRepository, $instance->canonicalizer);
 
-        $instance->initializer58ec7d91b2d62363978195 = $initializer;
+        $instance->initializer58ecd21f8ec63067342662 = $initializer;
 
         return $instance;
     }
@@ -21367,14 +21381,14 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579f0000
     {
         static $reflection;
 
-        if (! $this->valueHolder58ec7d91b2d21427652186) {
+        if (! $this->valueHolder58ecd21f8ec23491057231) {
             $reflection = $reflection ?: new \ReflectionClass('Sylius\\Bundle\\UserBundle\\Provider\\UsernameOrEmailProvider');
-            $this->valueHolder58ec7d91b2d21427652186 = $reflection->newInstanceWithoutConstructor();
+            $this->valueHolder58ecd21f8ec23491057231 = $reflection->newInstanceWithoutConstructor();
         unset($this->supportedUserClass, $this->userRepository, $this->canonicalizer);
 
         }
 
-        $this->valueHolder58ec7d91b2d21427652186->__construct($supportedUserClass, $userRepository, $canonicalizer);
+        $this->valueHolder58ecd21f8ec23491057231->__construct($supportedUserClass, $userRepository, $canonicalizer);
     }
 
     /**
@@ -21382,16 +21396,16 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579f0000
      */
     public function & __get($name)
     {
-        $this->initializer58ec7d91b2d62363978195 && $this->initializer58ec7d91b2d62363978195->__invoke($this->valueHolder58ec7d91b2d21427652186, $this, '__get', ['name' => $name], $this->initializer58ec7d91b2d62363978195);
+        $this->initializer58ecd21f8ec63067342662 && $this->initializer58ecd21f8ec63067342662->__invoke($this->valueHolder58ecd21f8ec23491057231, $this, '__get', ['name' => $name], $this->initializer58ecd21f8ec63067342662);
 
-        if (isset(self::$publicProperties58ec7d91b2c7b915283618[$name])) {
-            return $this->valueHolder58ec7d91b2d21427652186->$name;
+        if (isset(self::$publicProperties58ecd21f8eb84161066358[$name])) {
+            return $this->valueHolder58ecd21f8ec23491057231->$name;
         }
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91b2d21427652186;
+            $targetObject = $this->valueHolder58ecd21f8ec23491057231;
 
             $backtrace = debug_backtrace(false);
             trigger_error('Undefined property: ' . get_parent_class($this) . '::$' . $name . ' in ' . $backtrace[0]['file'] . ' on line ' . $backtrace[0]['line'], \E_USER_NOTICE);
@@ -21399,7 +21413,7 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579f0000
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91b2d21427652186;
+        $targetObject = $this->valueHolder58ecd21f8ec23491057231;
         $accessor = function & () use ($targetObject, $name) {
             return $targetObject->$name;
         };
@@ -21417,18 +21431,18 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579f0000
      */
     public function __set($name, $value)
     {
-        $this->initializer58ec7d91b2d62363978195 && $this->initializer58ec7d91b2d62363978195->__invoke($this->valueHolder58ec7d91b2d21427652186, $this, '__set', array('name' => $name, 'value' => $value), $this->initializer58ec7d91b2d62363978195);
+        $this->initializer58ecd21f8ec63067342662 && $this->initializer58ecd21f8ec63067342662->__invoke($this->valueHolder58ecd21f8ec23491057231, $this, '__set', array('name' => $name, 'value' => $value), $this->initializer58ecd21f8ec63067342662);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91b2d21427652186;
+            $targetObject = $this->valueHolder58ecd21f8ec23491057231;
 
             return $targetObject->$name = $value;
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91b2d21427652186;
+        $targetObject = $this->valueHolder58ecd21f8ec23491057231;
         $accessor = function & () use ($targetObject, $name, $value) {
             return $targetObject->$name = $value;
         };
@@ -21445,18 +21459,18 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579f0000
      */
     public function __isset($name)
     {
-        $this->initializer58ec7d91b2d62363978195 && $this->initializer58ec7d91b2d62363978195->__invoke($this->valueHolder58ec7d91b2d21427652186, $this, '__isset', array('name' => $name), $this->initializer58ec7d91b2d62363978195);
+        $this->initializer58ecd21f8ec63067342662 && $this->initializer58ecd21f8ec63067342662->__invoke($this->valueHolder58ecd21f8ec23491057231, $this, '__isset', array('name' => $name), $this->initializer58ecd21f8ec63067342662);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91b2d21427652186;
+            $targetObject = $this->valueHolder58ecd21f8ec23491057231;
 
             return isset($targetObject->$name);
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91b2d21427652186;
+        $targetObject = $this->valueHolder58ecd21f8ec23491057231;
         $accessor = function () use ($targetObject, $name) {
             return isset($targetObject->$name);
         };
@@ -21473,18 +21487,18 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579f0000
      */
     public function __unset($name)
     {
-        $this->initializer58ec7d91b2d62363978195 && $this->initializer58ec7d91b2d62363978195->__invoke($this->valueHolder58ec7d91b2d21427652186, $this, '__unset', array('name' => $name), $this->initializer58ec7d91b2d62363978195);
+        $this->initializer58ecd21f8ec63067342662 && $this->initializer58ecd21f8ec63067342662->__invoke($this->valueHolder58ecd21f8ec23491057231, $this, '__unset', array('name' => $name), $this->initializer58ecd21f8ec63067342662);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91b2d21427652186;
+            $targetObject = $this->valueHolder58ecd21f8ec23491057231;
 
             unset($targetObject->$name);
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91b2d21427652186;
+        $targetObject = $this->valueHolder58ecd21f8ec23491057231;
         $accessor = function () use ($targetObject, $name) {
             unset($targetObject->$name);
         };
@@ -21498,16 +21512,16 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579f0000
 
     public function __clone()
     {
-        $this->initializer58ec7d91b2d62363978195 && $this->initializer58ec7d91b2d62363978195->__invoke($this->valueHolder58ec7d91b2d21427652186, $this, '__clone', array(), $this->initializer58ec7d91b2d62363978195);
+        $this->initializer58ecd21f8ec63067342662 && $this->initializer58ecd21f8ec63067342662->__invoke($this->valueHolder58ecd21f8ec23491057231, $this, '__clone', array(), $this->initializer58ecd21f8ec63067342662);
 
-        $this->valueHolder58ec7d91b2d21427652186 = clone $this->valueHolder58ec7d91b2d21427652186;
+        $this->valueHolder58ecd21f8ec23491057231 = clone $this->valueHolder58ecd21f8ec23491057231;
     }
 
     public function __sleep()
     {
-        $this->initializer58ec7d91b2d62363978195 && $this->initializer58ec7d91b2d62363978195->__invoke($this->valueHolder58ec7d91b2d21427652186, $this, '__sleep', array(), $this->initializer58ec7d91b2d62363978195);
+        $this->initializer58ecd21f8ec63067342662 && $this->initializer58ecd21f8ec63067342662->__invoke($this->valueHolder58ecd21f8ec23491057231, $this, '__sleep', array(), $this->initializer58ecd21f8ec63067342662);
 
-        return array('valueHolder58ec7d91b2d21427652186');
+        return array('valueHolder58ecd21f8ec23491057231');
     }
 
     public function __wakeup()
@@ -21520,7 +21534,7 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579f0000
      */
     public function setProxyInitializer(\Closure $initializer = null)
     {
-        $this->initializer58ec7d91b2d62363978195 = $initializer;
+        $this->initializer58ecd21f8ec63067342662 = $initializer;
     }
 
     /**
@@ -21528,7 +21542,7 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579f0000
      */
     public function getProxyInitializer()
     {
-        return $this->initializer58ec7d91b2d62363978195;
+        return $this->initializer58ecd21f8ec63067342662;
     }
 
     /**
@@ -21536,7 +21550,7 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579f0000
      */
     public function initializeProxy() : bool
     {
-        return $this->initializer58ec7d91b2d62363978195 && $this->initializer58ec7d91b2d62363978195->__invoke($this->valueHolder58ec7d91b2d21427652186, $this, 'initializeProxy', array(), $this->initializer58ec7d91b2d62363978195);
+        return $this->initializer58ecd21f8ec63067342662 && $this->initializer58ecd21f8ec63067342662->__invoke($this->valueHolder58ecd21f8ec23491057231, $this, 'initializeProxy', array(), $this->initializer58ecd21f8ec63067342662);
     }
 
     /**
@@ -21544,7 +21558,7 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579f0000
      */
     public function isProxyInitialized() : bool
     {
-        return null !== $this->valueHolder58ec7d91b2d21427652186;
+        return null !== $this->valueHolder58ecd21f8ec23491057231;
     }
 
     /**
@@ -21552,29 +21566,29 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579f0000
      */
     public function getWrappedValueHolderValue()
     {
-        return $this->valueHolder58ec7d91b2d21427652186;
+        return $this->valueHolder58ecd21f8ec23491057231;
     }
 
 
 }
 
-class SyliusBundleUserBundleProviderEmailProvider_0000000067dc579e0000000078fadba4877f40b66baaf9ca0d0afe40b8a3d26d extends \Sylius\Bundle\UserBundle\Provider\EmailProvider implements \ProxyManager\Proxy\VirtualProxyInterface
+class SyliusBundleUserBundleProviderEmailProvider_000000004b5112d0000000000f6225f6877f40b66baaf9ca0d0afe40b8a3d26d extends \Sylius\Bundle\UserBundle\Provider\EmailProvider implements \ProxyManager\Proxy\VirtualProxyInterface
 {
 
     /**
      * @var \Closure|null initializer responsible for generating the wrapped object
      */
-    private $valueHolder58ec7d91b629c812947474 = null;
+    private $valueHolder58ecd21f9205c341573271 = null;
 
     /**
      * @var \Closure|null initializer responsible for generating the wrapped object
      */
-    private $initializer58ec7d91b62dc335715970 = null;
+    private $initializer58ecd21f9209d803924503 = null;
 
     /**
      * @var bool[] map of public properties of the parent class
      */
-    private static $publicProperties58ec7d91b61f6065822287 = array(
+    private static $publicProperties58ecd21f91fa6932864039 = array(
         
     );
 
@@ -21583,9 +21597,9 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc579e0000000078fadb
      */
     public function loadUserByUsername($username)
     {
-        $this->initializer58ec7d91b62dc335715970 && $this->initializer58ec7d91b62dc335715970->__invoke($this->valueHolder58ec7d91b629c812947474, $this, 'loadUserByUsername', array('username' => $username), $this->initializer58ec7d91b62dc335715970);
+        $this->initializer58ecd21f9209d803924503 && $this->initializer58ecd21f9209d803924503->__invoke($this->valueHolder58ecd21f9205c341573271, $this, 'loadUserByUsername', array('username' => $username), $this->initializer58ecd21f9209d803924503);
 
-        return $this->valueHolder58ec7d91b629c812947474->loadUserByUsername($username);
+        return $this->valueHolder58ecd21f9205c341573271->loadUserByUsername($username);
     }
 
     /**
@@ -21593,9 +21607,9 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc579e0000000078fadb
      */
     public function refreshUser(\Symfony\Component\Security\Core\User\UserInterface $user)
     {
-        $this->initializer58ec7d91b62dc335715970 && $this->initializer58ec7d91b62dc335715970->__invoke($this->valueHolder58ec7d91b629c812947474, $this, 'refreshUser', array('user' => $user), $this->initializer58ec7d91b62dc335715970);
+        $this->initializer58ecd21f9209d803924503 && $this->initializer58ecd21f9209d803924503->__invoke($this->valueHolder58ecd21f9205c341573271, $this, 'refreshUser', array('user' => $user), $this->initializer58ecd21f9209d803924503);
 
-        return $this->valueHolder58ec7d91b629c812947474->refreshUser($user);
+        return $this->valueHolder58ecd21f9205c341573271->refreshUser($user);
     }
 
     /**
@@ -21603,9 +21617,9 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc579e0000000078fadb
      */
     public function supportsClass($class)
     {
-        $this->initializer58ec7d91b62dc335715970 && $this->initializer58ec7d91b62dc335715970->__invoke($this->valueHolder58ec7d91b629c812947474, $this, 'supportsClass', array('class' => $class), $this->initializer58ec7d91b62dc335715970);
+        $this->initializer58ecd21f9209d803924503 && $this->initializer58ecd21f9209d803924503->__invoke($this->valueHolder58ecd21f9205c341573271, $this, 'supportsClass', array('class' => $class), $this->initializer58ecd21f9209d803924503);
 
-        return $this->valueHolder58ec7d91b629c812947474->supportsClass($class);
+        return $this->valueHolder58ecd21f9205c341573271->supportsClass($class);
     }
 
     /**
@@ -21622,7 +21636,7 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc579e0000000078fadb
 
         unset($instance->supportedUserClass, $instance->userRepository, $instance->canonicalizer);
 
-        $instance->initializer58ec7d91b62dc335715970 = $initializer;
+        $instance->initializer58ecd21f9209d803924503 = $initializer;
 
         return $instance;
     }
@@ -21634,14 +21648,14 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc579e0000000078fadb
     {
         static $reflection;
 
-        if (! $this->valueHolder58ec7d91b629c812947474) {
+        if (! $this->valueHolder58ecd21f9205c341573271) {
             $reflection = $reflection ?: new \ReflectionClass('Sylius\\Bundle\\UserBundle\\Provider\\EmailProvider');
-            $this->valueHolder58ec7d91b629c812947474 = $reflection->newInstanceWithoutConstructor();
+            $this->valueHolder58ecd21f9205c341573271 = $reflection->newInstanceWithoutConstructor();
         unset($this->supportedUserClass, $this->userRepository, $this->canonicalizer);
 
         }
 
-        $this->valueHolder58ec7d91b629c812947474->__construct($supportedUserClass, $userRepository, $canonicalizer);
+        $this->valueHolder58ecd21f9205c341573271->__construct($supportedUserClass, $userRepository, $canonicalizer);
     }
 
     /**
@@ -21649,16 +21663,16 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc579e0000000078fadb
      */
     public function & __get($name)
     {
-        $this->initializer58ec7d91b62dc335715970 && $this->initializer58ec7d91b62dc335715970->__invoke($this->valueHolder58ec7d91b629c812947474, $this, '__get', ['name' => $name], $this->initializer58ec7d91b62dc335715970);
+        $this->initializer58ecd21f9209d803924503 && $this->initializer58ecd21f9209d803924503->__invoke($this->valueHolder58ecd21f9205c341573271, $this, '__get', ['name' => $name], $this->initializer58ecd21f9209d803924503);
 
-        if (isset(self::$publicProperties58ec7d91b61f6065822287[$name])) {
-            return $this->valueHolder58ec7d91b629c812947474->$name;
+        if (isset(self::$publicProperties58ecd21f91fa6932864039[$name])) {
+            return $this->valueHolder58ecd21f9205c341573271->$name;
         }
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91b629c812947474;
+            $targetObject = $this->valueHolder58ecd21f9205c341573271;
 
             $backtrace = debug_backtrace(false);
             trigger_error('Undefined property: ' . get_parent_class($this) . '::$' . $name . ' in ' . $backtrace[0]['file'] . ' on line ' . $backtrace[0]['line'], \E_USER_NOTICE);
@@ -21666,7 +21680,7 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc579e0000000078fadb
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91b629c812947474;
+        $targetObject = $this->valueHolder58ecd21f9205c341573271;
         $accessor = function & () use ($targetObject, $name) {
             return $targetObject->$name;
         };
@@ -21684,18 +21698,18 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc579e0000000078fadb
      */
     public function __set($name, $value)
     {
-        $this->initializer58ec7d91b62dc335715970 && $this->initializer58ec7d91b62dc335715970->__invoke($this->valueHolder58ec7d91b629c812947474, $this, '__set', array('name' => $name, 'value' => $value), $this->initializer58ec7d91b62dc335715970);
+        $this->initializer58ecd21f9209d803924503 && $this->initializer58ecd21f9209d803924503->__invoke($this->valueHolder58ecd21f9205c341573271, $this, '__set', array('name' => $name, 'value' => $value), $this->initializer58ecd21f9209d803924503);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91b629c812947474;
+            $targetObject = $this->valueHolder58ecd21f9205c341573271;
 
             return $targetObject->$name = $value;
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91b629c812947474;
+        $targetObject = $this->valueHolder58ecd21f9205c341573271;
         $accessor = function & () use ($targetObject, $name, $value) {
             return $targetObject->$name = $value;
         };
@@ -21712,18 +21726,18 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc579e0000000078fadb
      */
     public function __isset($name)
     {
-        $this->initializer58ec7d91b62dc335715970 && $this->initializer58ec7d91b62dc335715970->__invoke($this->valueHolder58ec7d91b629c812947474, $this, '__isset', array('name' => $name), $this->initializer58ec7d91b62dc335715970);
+        $this->initializer58ecd21f9209d803924503 && $this->initializer58ecd21f9209d803924503->__invoke($this->valueHolder58ecd21f9205c341573271, $this, '__isset', array('name' => $name), $this->initializer58ecd21f9209d803924503);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91b629c812947474;
+            $targetObject = $this->valueHolder58ecd21f9205c341573271;
 
             return isset($targetObject->$name);
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91b629c812947474;
+        $targetObject = $this->valueHolder58ecd21f9205c341573271;
         $accessor = function () use ($targetObject, $name) {
             return isset($targetObject->$name);
         };
@@ -21740,18 +21754,18 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc579e0000000078fadb
      */
     public function __unset($name)
     {
-        $this->initializer58ec7d91b62dc335715970 && $this->initializer58ec7d91b62dc335715970->__invoke($this->valueHolder58ec7d91b629c812947474, $this, '__unset', array('name' => $name), $this->initializer58ec7d91b62dc335715970);
+        $this->initializer58ecd21f9209d803924503 && $this->initializer58ecd21f9209d803924503->__invoke($this->valueHolder58ecd21f9205c341573271, $this, '__unset', array('name' => $name), $this->initializer58ecd21f9209d803924503);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91b629c812947474;
+            $targetObject = $this->valueHolder58ecd21f9205c341573271;
 
             unset($targetObject->$name);
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91b629c812947474;
+        $targetObject = $this->valueHolder58ecd21f9205c341573271;
         $accessor = function () use ($targetObject, $name) {
             unset($targetObject->$name);
         };
@@ -21765,16 +21779,16 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc579e0000000078fadb
 
     public function __clone()
     {
-        $this->initializer58ec7d91b62dc335715970 && $this->initializer58ec7d91b62dc335715970->__invoke($this->valueHolder58ec7d91b629c812947474, $this, '__clone', array(), $this->initializer58ec7d91b62dc335715970);
+        $this->initializer58ecd21f9209d803924503 && $this->initializer58ecd21f9209d803924503->__invoke($this->valueHolder58ecd21f9205c341573271, $this, '__clone', array(), $this->initializer58ecd21f9209d803924503);
 
-        $this->valueHolder58ec7d91b629c812947474 = clone $this->valueHolder58ec7d91b629c812947474;
+        $this->valueHolder58ecd21f9205c341573271 = clone $this->valueHolder58ecd21f9205c341573271;
     }
 
     public function __sleep()
     {
-        $this->initializer58ec7d91b62dc335715970 && $this->initializer58ec7d91b62dc335715970->__invoke($this->valueHolder58ec7d91b629c812947474, $this, '__sleep', array(), $this->initializer58ec7d91b62dc335715970);
+        $this->initializer58ecd21f9209d803924503 && $this->initializer58ecd21f9209d803924503->__invoke($this->valueHolder58ecd21f9205c341573271, $this, '__sleep', array(), $this->initializer58ecd21f9209d803924503);
 
-        return array('valueHolder58ec7d91b629c812947474');
+        return array('valueHolder58ecd21f9205c341573271');
     }
 
     public function __wakeup()
@@ -21787,7 +21801,7 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc579e0000000078fadb
      */
     public function setProxyInitializer(\Closure $initializer = null)
     {
-        $this->initializer58ec7d91b62dc335715970 = $initializer;
+        $this->initializer58ecd21f9209d803924503 = $initializer;
     }
 
     /**
@@ -21795,7 +21809,7 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc579e0000000078fadb
      */
     public function getProxyInitializer()
     {
-        return $this->initializer58ec7d91b62dc335715970;
+        return $this->initializer58ecd21f9209d803924503;
     }
 
     /**
@@ -21803,7 +21817,7 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc579e0000000078fadb
      */
     public function initializeProxy() : bool
     {
-        return $this->initializer58ec7d91b62dc335715970 && $this->initializer58ec7d91b62dc335715970->__invoke($this->valueHolder58ec7d91b629c812947474, $this, 'initializeProxy', array(), $this->initializer58ec7d91b62dc335715970);
+        return $this->initializer58ecd21f9209d803924503 && $this->initializer58ecd21f9209d803924503->__invoke($this->valueHolder58ecd21f9205c341573271, $this, 'initializeProxy', array(), $this->initializer58ecd21f9209d803924503);
     }
 
     /**
@@ -21811,7 +21825,7 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc579e0000000078fadb
      */
     public function isProxyInitialized() : bool
     {
-        return null !== $this->valueHolder58ec7d91b629c812947474;
+        return null !== $this->valueHolder58ecd21f9205c341573271;
     }
 
     /**
@@ -21819,29 +21833,29 @@ class SyliusBundleUserBundleProviderEmailProvider_0000000067dc579e0000000078fadb
      */
     public function getWrappedValueHolderValue()
     {
-        return $this->valueHolder58ec7d91b629c812947474;
+        return $this->valueHolder58ecd21f9205c341573271;
     }
 
 
 }
 
-class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc579d0000000078fadba4877f40b66baaf9ca0d0afe40b8a3d26d extends \Sylius\Bundle\UserBundle\Provider\UsernameProvider implements \ProxyManager\Proxy\VirtualProxyInterface
+class SyliusBundleUserBundleProviderUsernameProvider_000000004b5112d1000000000f6225f6877f40b66baaf9ca0d0afe40b8a3d26d extends \Sylius\Bundle\UserBundle\Provider\UsernameProvider implements \ProxyManager\Proxy\VirtualProxyInterface
 {
 
     /**
      * @var \Closure|null initializer responsible for generating the wrapped object
      */
-    private $valueHolder58ec7d91b9857544437225 = null;
+    private $valueHolder58ecd21f95485401005049 = null;
 
     /**
      * @var \Closure|null initializer responsible for generating the wrapped object
      */
-    private $initializer58ec7d91b9897250922344 = null;
+    private $initializer58ecd21f954c5120192051 = null;
 
     /**
      * @var bool[] map of public properties of the parent class
      */
-    private static $publicProperties58ec7d91b97b2884548004 = array(
+    private static $publicProperties58ecd21f953e5398880501 = array(
         
     );
 
@@ -21850,9 +21864,9 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc579d0000000078f
      */
     public function loadUserByUsername($username)
     {
-        $this->initializer58ec7d91b9897250922344 && $this->initializer58ec7d91b9897250922344->__invoke($this->valueHolder58ec7d91b9857544437225, $this, 'loadUserByUsername', array('username' => $username), $this->initializer58ec7d91b9897250922344);
+        $this->initializer58ecd21f954c5120192051 && $this->initializer58ecd21f954c5120192051->__invoke($this->valueHolder58ecd21f95485401005049, $this, 'loadUserByUsername', array('username' => $username), $this->initializer58ecd21f954c5120192051);
 
-        return $this->valueHolder58ec7d91b9857544437225->loadUserByUsername($username);
+        return $this->valueHolder58ecd21f95485401005049->loadUserByUsername($username);
     }
 
     /**
@@ -21860,9 +21874,9 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc579d0000000078f
      */
     public function refreshUser(\Symfony\Component\Security\Core\User\UserInterface $user)
     {
-        $this->initializer58ec7d91b9897250922344 && $this->initializer58ec7d91b9897250922344->__invoke($this->valueHolder58ec7d91b9857544437225, $this, 'refreshUser', array('user' => $user), $this->initializer58ec7d91b9897250922344);
+        $this->initializer58ecd21f954c5120192051 && $this->initializer58ecd21f954c5120192051->__invoke($this->valueHolder58ecd21f95485401005049, $this, 'refreshUser', array('user' => $user), $this->initializer58ecd21f954c5120192051);
 
-        return $this->valueHolder58ec7d91b9857544437225->refreshUser($user);
+        return $this->valueHolder58ecd21f95485401005049->refreshUser($user);
     }
 
     /**
@@ -21870,9 +21884,9 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc579d0000000078f
      */
     public function supportsClass($class)
     {
-        $this->initializer58ec7d91b9897250922344 && $this->initializer58ec7d91b9897250922344->__invoke($this->valueHolder58ec7d91b9857544437225, $this, 'supportsClass', array('class' => $class), $this->initializer58ec7d91b9897250922344);
+        $this->initializer58ecd21f954c5120192051 && $this->initializer58ecd21f954c5120192051->__invoke($this->valueHolder58ecd21f95485401005049, $this, 'supportsClass', array('class' => $class), $this->initializer58ecd21f954c5120192051);
 
-        return $this->valueHolder58ec7d91b9857544437225->supportsClass($class);
+        return $this->valueHolder58ecd21f95485401005049->supportsClass($class);
     }
 
     /**
@@ -21889,7 +21903,7 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc579d0000000078f
 
         unset($instance->supportedUserClass, $instance->userRepository, $instance->canonicalizer);
 
-        $instance->initializer58ec7d91b9897250922344 = $initializer;
+        $instance->initializer58ecd21f954c5120192051 = $initializer;
 
         return $instance;
     }
@@ -21901,14 +21915,14 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc579d0000000078f
     {
         static $reflection;
 
-        if (! $this->valueHolder58ec7d91b9857544437225) {
+        if (! $this->valueHolder58ecd21f95485401005049) {
             $reflection = $reflection ?: new \ReflectionClass('Sylius\\Bundle\\UserBundle\\Provider\\UsernameProvider');
-            $this->valueHolder58ec7d91b9857544437225 = $reflection->newInstanceWithoutConstructor();
+            $this->valueHolder58ecd21f95485401005049 = $reflection->newInstanceWithoutConstructor();
         unset($this->supportedUserClass, $this->userRepository, $this->canonicalizer);
 
         }
 
-        $this->valueHolder58ec7d91b9857544437225->__construct($supportedUserClass, $userRepository, $canonicalizer);
+        $this->valueHolder58ecd21f95485401005049->__construct($supportedUserClass, $userRepository, $canonicalizer);
     }
 
     /**
@@ -21916,16 +21930,16 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc579d0000000078f
      */
     public function & __get($name)
     {
-        $this->initializer58ec7d91b9897250922344 && $this->initializer58ec7d91b9897250922344->__invoke($this->valueHolder58ec7d91b9857544437225, $this, '__get', ['name' => $name], $this->initializer58ec7d91b9897250922344);
+        $this->initializer58ecd21f954c5120192051 && $this->initializer58ecd21f954c5120192051->__invoke($this->valueHolder58ecd21f95485401005049, $this, '__get', ['name' => $name], $this->initializer58ecd21f954c5120192051);
 
-        if (isset(self::$publicProperties58ec7d91b97b2884548004[$name])) {
-            return $this->valueHolder58ec7d91b9857544437225->$name;
+        if (isset(self::$publicProperties58ecd21f953e5398880501[$name])) {
+            return $this->valueHolder58ecd21f95485401005049->$name;
         }
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91b9857544437225;
+            $targetObject = $this->valueHolder58ecd21f95485401005049;
 
             $backtrace = debug_backtrace(false);
             trigger_error('Undefined property: ' . get_parent_class($this) . '::$' . $name . ' in ' . $backtrace[0]['file'] . ' on line ' . $backtrace[0]['line'], \E_USER_NOTICE);
@@ -21933,7 +21947,7 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc579d0000000078f
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91b9857544437225;
+        $targetObject = $this->valueHolder58ecd21f95485401005049;
         $accessor = function & () use ($targetObject, $name) {
             return $targetObject->$name;
         };
@@ -21951,18 +21965,18 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc579d0000000078f
      */
     public function __set($name, $value)
     {
-        $this->initializer58ec7d91b9897250922344 && $this->initializer58ec7d91b9897250922344->__invoke($this->valueHolder58ec7d91b9857544437225, $this, '__set', array('name' => $name, 'value' => $value), $this->initializer58ec7d91b9897250922344);
+        $this->initializer58ecd21f954c5120192051 && $this->initializer58ecd21f954c5120192051->__invoke($this->valueHolder58ecd21f95485401005049, $this, '__set', array('name' => $name, 'value' => $value), $this->initializer58ecd21f954c5120192051);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91b9857544437225;
+            $targetObject = $this->valueHolder58ecd21f95485401005049;
 
             return $targetObject->$name = $value;
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91b9857544437225;
+        $targetObject = $this->valueHolder58ecd21f95485401005049;
         $accessor = function & () use ($targetObject, $name, $value) {
             return $targetObject->$name = $value;
         };
@@ -21979,18 +21993,18 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc579d0000000078f
      */
     public function __isset($name)
     {
-        $this->initializer58ec7d91b9897250922344 && $this->initializer58ec7d91b9897250922344->__invoke($this->valueHolder58ec7d91b9857544437225, $this, '__isset', array('name' => $name), $this->initializer58ec7d91b9897250922344);
+        $this->initializer58ecd21f954c5120192051 && $this->initializer58ecd21f954c5120192051->__invoke($this->valueHolder58ecd21f95485401005049, $this, '__isset', array('name' => $name), $this->initializer58ecd21f954c5120192051);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91b9857544437225;
+            $targetObject = $this->valueHolder58ecd21f95485401005049;
 
             return isset($targetObject->$name);
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91b9857544437225;
+        $targetObject = $this->valueHolder58ecd21f95485401005049;
         $accessor = function () use ($targetObject, $name) {
             return isset($targetObject->$name);
         };
@@ -22007,18 +22021,18 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc579d0000000078f
      */
     public function __unset($name)
     {
-        $this->initializer58ec7d91b9897250922344 && $this->initializer58ec7d91b9897250922344->__invoke($this->valueHolder58ec7d91b9857544437225, $this, '__unset', array('name' => $name), $this->initializer58ec7d91b9897250922344);
+        $this->initializer58ecd21f954c5120192051 && $this->initializer58ecd21f954c5120192051->__invoke($this->valueHolder58ecd21f95485401005049, $this, '__unset', array('name' => $name), $this->initializer58ecd21f954c5120192051);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91b9857544437225;
+            $targetObject = $this->valueHolder58ecd21f95485401005049;
 
             unset($targetObject->$name);
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91b9857544437225;
+        $targetObject = $this->valueHolder58ecd21f95485401005049;
         $accessor = function () use ($targetObject, $name) {
             unset($targetObject->$name);
         };
@@ -22032,16 +22046,16 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc579d0000000078f
 
     public function __clone()
     {
-        $this->initializer58ec7d91b9897250922344 && $this->initializer58ec7d91b9897250922344->__invoke($this->valueHolder58ec7d91b9857544437225, $this, '__clone', array(), $this->initializer58ec7d91b9897250922344);
+        $this->initializer58ecd21f954c5120192051 && $this->initializer58ecd21f954c5120192051->__invoke($this->valueHolder58ecd21f95485401005049, $this, '__clone', array(), $this->initializer58ecd21f954c5120192051);
 
-        $this->valueHolder58ec7d91b9857544437225 = clone $this->valueHolder58ec7d91b9857544437225;
+        $this->valueHolder58ecd21f95485401005049 = clone $this->valueHolder58ecd21f95485401005049;
     }
 
     public function __sleep()
     {
-        $this->initializer58ec7d91b9897250922344 && $this->initializer58ec7d91b9897250922344->__invoke($this->valueHolder58ec7d91b9857544437225, $this, '__sleep', array(), $this->initializer58ec7d91b9897250922344);
+        $this->initializer58ecd21f954c5120192051 && $this->initializer58ecd21f954c5120192051->__invoke($this->valueHolder58ecd21f95485401005049, $this, '__sleep', array(), $this->initializer58ecd21f954c5120192051);
 
-        return array('valueHolder58ec7d91b9857544437225');
+        return array('valueHolder58ecd21f95485401005049');
     }
 
     public function __wakeup()
@@ -22054,7 +22068,7 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc579d0000000078f
      */
     public function setProxyInitializer(\Closure $initializer = null)
     {
-        $this->initializer58ec7d91b9897250922344 = $initializer;
+        $this->initializer58ecd21f954c5120192051 = $initializer;
     }
 
     /**
@@ -22062,7 +22076,7 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc579d0000000078f
      */
     public function getProxyInitializer()
     {
-        return $this->initializer58ec7d91b9897250922344;
+        return $this->initializer58ecd21f954c5120192051;
     }
 
     /**
@@ -22070,7 +22084,7 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc579d0000000078f
      */
     public function initializeProxy() : bool
     {
-        return $this->initializer58ec7d91b9897250922344 && $this->initializer58ec7d91b9897250922344->__invoke($this->valueHolder58ec7d91b9857544437225, $this, 'initializeProxy', array(), $this->initializer58ec7d91b9897250922344);
+        return $this->initializer58ecd21f954c5120192051 && $this->initializer58ecd21f954c5120192051->__invoke($this->valueHolder58ecd21f95485401005049, $this, 'initializeProxy', array(), $this->initializer58ecd21f954c5120192051);
     }
 
     /**
@@ -22078,7 +22092,7 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc579d0000000078f
      */
     public function isProxyInitialized() : bool
     {
-        return null !== $this->valueHolder58ec7d91b9857544437225;
+        return null !== $this->valueHolder58ecd21f95485401005049;
     }
 
     /**
@@ -22086,29 +22100,29 @@ class SyliusBundleUserBundleProviderUsernameProvider_0000000067dc579d0000000078f
      */
     public function getWrappedValueHolderValue()
     {
-        return $this->valueHolder58ec7d91b9857544437225;
+        return $this->valueHolder58ecd21f95485401005049;
     }
 
 
 }
 
-class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579c0000000078fadba4877f40b66baaf9ca0d0afe40b8a3d26d extends \Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider implements \ProxyManager\Proxy\VirtualProxyInterface
+class SyliusBundleUserBundleProviderUsernameOrEmailProvider_000000004b5112ce000000000f6225f6877f40b66baaf9ca0d0afe40b8a3d26d extends \Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider implements \ProxyManager\Proxy\VirtualProxyInterface
 {
 
     /**
      * @var \Closure|null initializer responsible for generating the wrapped object
      */
-    private $valueHolder58ec7d91bcdda256984105 = null;
+    private $valueHolder58ecd21f9881c821703172 = null;
 
     /**
      * @var \Closure|null initializer responsible for generating the wrapped object
      */
-    private $initializer58ec7d91bce1b826886954 = null;
+    private $initializer58ecd21f9885c294792752 = null;
 
     /**
      * @var bool[] map of public properties of the parent class
      */
-    private static $publicProperties58ec7d91bcd36184768943 = array(
+    private static $publicProperties58ecd21f9877c071888641 = array(
         
     );
 
@@ -22117,9 +22131,9 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579c0000
      */
     public function loadUserByUsername($username)
     {
-        $this->initializer58ec7d91bce1b826886954 && $this->initializer58ec7d91bce1b826886954->__invoke($this->valueHolder58ec7d91bcdda256984105, $this, 'loadUserByUsername', array('username' => $username), $this->initializer58ec7d91bce1b826886954);
+        $this->initializer58ecd21f9885c294792752 && $this->initializer58ecd21f9885c294792752->__invoke($this->valueHolder58ecd21f9881c821703172, $this, 'loadUserByUsername', array('username' => $username), $this->initializer58ecd21f9885c294792752);
 
-        return $this->valueHolder58ec7d91bcdda256984105->loadUserByUsername($username);
+        return $this->valueHolder58ecd21f9881c821703172->loadUserByUsername($username);
     }
 
     /**
@@ -22127,9 +22141,9 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579c0000
      */
     public function refreshUser(\Symfony\Component\Security\Core\User\UserInterface $user)
     {
-        $this->initializer58ec7d91bce1b826886954 && $this->initializer58ec7d91bce1b826886954->__invoke($this->valueHolder58ec7d91bcdda256984105, $this, 'refreshUser', array('user' => $user), $this->initializer58ec7d91bce1b826886954);
+        $this->initializer58ecd21f9885c294792752 && $this->initializer58ecd21f9885c294792752->__invoke($this->valueHolder58ecd21f9881c821703172, $this, 'refreshUser', array('user' => $user), $this->initializer58ecd21f9885c294792752);
 
-        return $this->valueHolder58ec7d91bcdda256984105->refreshUser($user);
+        return $this->valueHolder58ecd21f9881c821703172->refreshUser($user);
     }
 
     /**
@@ -22137,9 +22151,9 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579c0000
      */
     public function supportsClass($class)
     {
-        $this->initializer58ec7d91bce1b826886954 && $this->initializer58ec7d91bce1b826886954->__invoke($this->valueHolder58ec7d91bcdda256984105, $this, 'supportsClass', array('class' => $class), $this->initializer58ec7d91bce1b826886954);
+        $this->initializer58ecd21f9885c294792752 && $this->initializer58ecd21f9885c294792752->__invoke($this->valueHolder58ecd21f9881c821703172, $this, 'supportsClass', array('class' => $class), $this->initializer58ecd21f9885c294792752);
 
-        return $this->valueHolder58ec7d91bcdda256984105->supportsClass($class);
+        return $this->valueHolder58ecd21f9881c821703172->supportsClass($class);
     }
 
     /**
@@ -22156,7 +22170,7 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579c0000
 
         unset($instance->supportedUserClass, $instance->userRepository, $instance->canonicalizer);
 
-        $instance->initializer58ec7d91bce1b826886954 = $initializer;
+        $instance->initializer58ecd21f9885c294792752 = $initializer;
 
         return $instance;
     }
@@ -22168,14 +22182,14 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579c0000
     {
         static $reflection;
 
-        if (! $this->valueHolder58ec7d91bcdda256984105) {
+        if (! $this->valueHolder58ecd21f9881c821703172) {
             $reflection = $reflection ?: new \ReflectionClass('Sylius\\Bundle\\UserBundle\\Provider\\UsernameOrEmailProvider');
-            $this->valueHolder58ec7d91bcdda256984105 = $reflection->newInstanceWithoutConstructor();
+            $this->valueHolder58ecd21f9881c821703172 = $reflection->newInstanceWithoutConstructor();
         unset($this->supportedUserClass, $this->userRepository, $this->canonicalizer);
 
         }
 
-        $this->valueHolder58ec7d91bcdda256984105->__construct($supportedUserClass, $userRepository, $canonicalizer);
+        $this->valueHolder58ecd21f9881c821703172->__construct($supportedUserClass, $userRepository, $canonicalizer);
     }
 
     /**
@@ -22183,16 +22197,16 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579c0000
      */
     public function & __get($name)
     {
-        $this->initializer58ec7d91bce1b826886954 && $this->initializer58ec7d91bce1b826886954->__invoke($this->valueHolder58ec7d91bcdda256984105, $this, '__get', ['name' => $name], $this->initializer58ec7d91bce1b826886954);
+        $this->initializer58ecd21f9885c294792752 && $this->initializer58ecd21f9885c294792752->__invoke($this->valueHolder58ecd21f9881c821703172, $this, '__get', ['name' => $name], $this->initializer58ecd21f9885c294792752);
 
-        if (isset(self::$publicProperties58ec7d91bcd36184768943[$name])) {
-            return $this->valueHolder58ec7d91bcdda256984105->$name;
+        if (isset(self::$publicProperties58ecd21f9877c071888641[$name])) {
+            return $this->valueHolder58ecd21f9881c821703172->$name;
         }
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91bcdda256984105;
+            $targetObject = $this->valueHolder58ecd21f9881c821703172;
 
             $backtrace = debug_backtrace(false);
             trigger_error('Undefined property: ' . get_parent_class($this) . '::$' . $name . ' in ' . $backtrace[0]['file'] . ' on line ' . $backtrace[0]['line'], \E_USER_NOTICE);
@@ -22200,7 +22214,7 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579c0000
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91bcdda256984105;
+        $targetObject = $this->valueHolder58ecd21f9881c821703172;
         $accessor = function & () use ($targetObject, $name) {
             return $targetObject->$name;
         };
@@ -22218,18 +22232,18 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579c0000
      */
     public function __set($name, $value)
     {
-        $this->initializer58ec7d91bce1b826886954 && $this->initializer58ec7d91bce1b826886954->__invoke($this->valueHolder58ec7d91bcdda256984105, $this, '__set', array('name' => $name, 'value' => $value), $this->initializer58ec7d91bce1b826886954);
+        $this->initializer58ecd21f9885c294792752 && $this->initializer58ecd21f9885c294792752->__invoke($this->valueHolder58ecd21f9881c821703172, $this, '__set', array('name' => $name, 'value' => $value), $this->initializer58ecd21f9885c294792752);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91bcdda256984105;
+            $targetObject = $this->valueHolder58ecd21f9881c821703172;
 
             return $targetObject->$name = $value;
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91bcdda256984105;
+        $targetObject = $this->valueHolder58ecd21f9881c821703172;
         $accessor = function & () use ($targetObject, $name, $value) {
             return $targetObject->$name = $value;
         };
@@ -22246,18 +22260,18 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579c0000
      */
     public function __isset($name)
     {
-        $this->initializer58ec7d91bce1b826886954 && $this->initializer58ec7d91bce1b826886954->__invoke($this->valueHolder58ec7d91bcdda256984105, $this, '__isset', array('name' => $name), $this->initializer58ec7d91bce1b826886954);
+        $this->initializer58ecd21f9885c294792752 && $this->initializer58ecd21f9885c294792752->__invoke($this->valueHolder58ecd21f9881c821703172, $this, '__isset', array('name' => $name), $this->initializer58ecd21f9885c294792752);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91bcdda256984105;
+            $targetObject = $this->valueHolder58ecd21f9881c821703172;
 
             return isset($targetObject->$name);
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91bcdda256984105;
+        $targetObject = $this->valueHolder58ecd21f9881c821703172;
         $accessor = function () use ($targetObject, $name) {
             return isset($targetObject->$name);
         };
@@ -22274,18 +22288,18 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579c0000
      */
     public function __unset($name)
     {
-        $this->initializer58ec7d91bce1b826886954 && $this->initializer58ec7d91bce1b826886954->__invoke($this->valueHolder58ec7d91bcdda256984105, $this, '__unset', array('name' => $name), $this->initializer58ec7d91bce1b826886954);
+        $this->initializer58ecd21f9885c294792752 && $this->initializer58ecd21f9885c294792752->__invoke($this->valueHolder58ecd21f9881c821703172, $this, '__unset', array('name' => $name), $this->initializer58ecd21f9885c294792752);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91bcdda256984105;
+            $targetObject = $this->valueHolder58ecd21f9881c821703172;
 
             unset($targetObject->$name);
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91bcdda256984105;
+        $targetObject = $this->valueHolder58ecd21f9881c821703172;
         $accessor = function () use ($targetObject, $name) {
             unset($targetObject->$name);
         };
@@ -22299,16 +22313,16 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579c0000
 
     public function __clone()
     {
-        $this->initializer58ec7d91bce1b826886954 && $this->initializer58ec7d91bce1b826886954->__invoke($this->valueHolder58ec7d91bcdda256984105, $this, '__clone', array(), $this->initializer58ec7d91bce1b826886954);
+        $this->initializer58ecd21f9885c294792752 && $this->initializer58ecd21f9885c294792752->__invoke($this->valueHolder58ecd21f9881c821703172, $this, '__clone', array(), $this->initializer58ecd21f9885c294792752);
 
-        $this->valueHolder58ec7d91bcdda256984105 = clone $this->valueHolder58ec7d91bcdda256984105;
+        $this->valueHolder58ecd21f9881c821703172 = clone $this->valueHolder58ecd21f9881c821703172;
     }
 
     public function __sleep()
     {
-        $this->initializer58ec7d91bce1b826886954 && $this->initializer58ec7d91bce1b826886954->__invoke($this->valueHolder58ec7d91bcdda256984105, $this, '__sleep', array(), $this->initializer58ec7d91bce1b826886954);
+        $this->initializer58ecd21f9885c294792752 && $this->initializer58ecd21f9885c294792752->__invoke($this->valueHolder58ecd21f9881c821703172, $this, '__sleep', array(), $this->initializer58ecd21f9885c294792752);
 
-        return array('valueHolder58ec7d91bcdda256984105');
+        return array('valueHolder58ecd21f9881c821703172');
     }
 
     public function __wakeup()
@@ -22321,7 +22335,7 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579c0000
      */
     public function setProxyInitializer(\Closure $initializer = null)
     {
-        $this->initializer58ec7d91bce1b826886954 = $initializer;
+        $this->initializer58ecd21f9885c294792752 = $initializer;
     }
 
     /**
@@ -22329,7 +22343,7 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579c0000
      */
     public function getProxyInitializer()
     {
-        return $this->initializer58ec7d91bce1b826886954;
+        return $this->initializer58ecd21f9885c294792752;
     }
 
     /**
@@ -22337,7 +22351,7 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579c0000
      */
     public function initializeProxy() : bool
     {
-        return $this->initializer58ec7d91bce1b826886954 && $this->initializer58ec7d91bce1b826886954->__invoke($this->valueHolder58ec7d91bcdda256984105, $this, 'initializeProxy', array(), $this->initializer58ec7d91bce1b826886954);
+        return $this->initializer58ecd21f9885c294792752 && $this->initializer58ecd21f9885c294792752->__invoke($this->valueHolder58ecd21f9881c821703172, $this, 'initializeProxy', array(), $this->initializer58ecd21f9885c294792752);
     }
 
     /**
@@ -22345,7 +22359,7 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579c0000
      */
     public function isProxyInitialized() : bool
     {
-        return null !== $this->valueHolder58ec7d91bcdda256984105;
+        return null !== $this->valueHolder58ecd21f9881c821703172;
     }
 
     /**
@@ -22353,29 +22367,29 @@ class SyliusBundleUserBundleProviderUsernameOrEmailProvider_0000000067dc579c0000
      */
     public function getWrappedValueHolderValue()
     {
-        return $this->valueHolder58ec7d91bcdda256984105;
+        return $this->valueHolder58ecd21f9881c821703172;
     }
 
 
 }
 
-class SyliusBundleGridBundleTemplatingHelperGridHelper_0000000067dc42320000000078fadba4877f40b66baaf9ca0d0afe40b8a3d26d extends \Sylius\Bundle\GridBundle\Templating\Helper\GridHelper implements \ProxyManager\Proxy\VirtualProxyInterface
+class SyliusBundleGridBundleTemplatingHelperGridHelper_000000004b51070b000000000f6225f6877f40b66baaf9ca0d0afe40b8a3d26d extends \Sylius\Bundle\GridBundle\Templating\Helper\GridHelper implements \ProxyManager\Proxy\VirtualProxyInterface
 {
 
     /**
      * @var \Closure|null initializer responsible for generating the wrapped object
      */
-    private $valueHolder58ec7d91c0397650599968 = null;
+    private $valueHolder58ecd21f9bb6e271020641 = null;
 
     /**
      * @var \Closure|null initializer responsible for generating the wrapped object
      */
-    private $initializer58ec7d91c03d7600695029 = null;
+    private $initializer58ecd21f9bbad063036383 = null;
 
     /**
      * @var bool[] map of public properties of the parent class
      */
-    private static $publicProperties58ec7d91c02f3678376998 = array(
+    private static $publicProperties58ecd21f9bad1741988240 = array(
         
     );
 
@@ -22384,9 +22398,9 @@ class SyliusBundleGridBundleTemplatingHelperGridHelper_0000000067dc4232000000007
      */
     public function renderGrid(\Sylius\Component\Grid\View\GridView $gridView, $template = null)
     {
-        $this->initializer58ec7d91c03d7600695029 && $this->initializer58ec7d91c03d7600695029->__invoke($this->valueHolder58ec7d91c0397650599968, $this, 'renderGrid', array('gridView' => $gridView, 'template' => $template), $this->initializer58ec7d91c03d7600695029);
+        $this->initializer58ecd21f9bbad063036383 && $this->initializer58ecd21f9bbad063036383->__invoke($this->valueHolder58ecd21f9bb6e271020641, $this, 'renderGrid', array('gridView' => $gridView, 'template' => $template), $this->initializer58ecd21f9bbad063036383);
 
-        return $this->valueHolder58ec7d91c0397650599968->renderGrid($gridView, $template);
+        return $this->valueHolder58ecd21f9bb6e271020641->renderGrid($gridView, $template);
     }
 
     /**
@@ -22394,9 +22408,9 @@ class SyliusBundleGridBundleTemplatingHelperGridHelper_0000000067dc4232000000007
      */
     public function renderField(\Sylius\Component\Grid\View\GridView $gridView, \Sylius\Component\Grid\Definition\Field $field, $data)
     {
-        $this->initializer58ec7d91c03d7600695029 && $this->initializer58ec7d91c03d7600695029->__invoke($this->valueHolder58ec7d91c0397650599968, $this, 'renderField', array('gridView' => $gridView, 'field' => $field, 'data' => $data), $this->initializer58ec7d91c03d7600695029);
+        $this->initializer58ecd21f9bbad063036383 && $this->initializer58ecd21f9bbad063036383->__invoke($this->valueHolder58ecd21f9bb6e271020641, $this, 'renderField', array('gridView' => $gridView, 'field' => $field, 'data' => $data), $this->initializer58ecd21f9bbad063036383);
 
-        return $this->valueHolder58ec7d91c0397650599968->renderField($gridView, $field, $data);
+        return $this->valueHolder58ecd21f9bb6e271020641->renderField($gridView, $field, $data);
     }
 
     /**
@@ -22404,9 +22418,9 @@ class SyliusBundleGridBundleTemplatingHelperGridHelper_0000000067dc4232000000007
      */
     public function renderAction(\Sylius\Component\Grid\View\GridView $gridView, \Sylius\Component\Grid\Definition\Action $action, $data = null)
     {
-        $this->initializer58ec7d91c03d7600695029 && $this->initializer58ec7d91c03d7600695029->__invoke($this->valueHolder58ec7d91c0397650599968, $this, 'renderAction', array('gridView' => $gridView, 'action' => $action, 'data' => $data), $this->initializer58ec7d91c03d7600695029);
+        $this->initializer58ecd21f9bbad063036383 && $this->initializer58ecd21f9bbad063036383->__invoke($this->valueHolder58ecd21f9bb6e271020641, $this, 'renderAction', array('gridView' => $gridView, 'action' => $action, 'data' => $data), $this->initializer58ecd21f9bbad063036383);
 
-        return $this->valueHolder58ec7d91c0397650599968->renderAction($gridView, $action, $data);
+        return $this->valueHolder58ecd21f9bb6e271020641->renderAction($gridView, $action, $data);
     }
 
     /**
@@ -22414,9 +22428,9 @@ class SyliusBundleGridBundleTemplatingHelperGridHelper_0000000067dc4232000000007
      */
     public function renderFilter(\Sylius\Component\Grid\View\GridView $gridView, \Sylius\Component\Grid\Definition\Filter $filter)
     {
-        $this->initializer58ec7d91c03d7600695029 && $this->initializer58ec7d91c03d7600695029->__invoke($this->valueHolder58ec7d91c0397650599968, $this, 'renderFilter', array('gridView' => $gridView, 'filter' => $filter), $this->initializer58ec7d91c03d7600695029);
+        $this->initializer58ecd21f9bbad063036383 && $this->initializer58ecd21f9bbad063036383->__invoke($this->valueHolder58ecd21f9bb6e271020641, $this, 'renderFilter', array('gridView' => $gridView, 'filter' => $filter), $this->initializer58ecd21f9bbad063036383);
 
-        return $this->valueHolder58ec7d91c0397650599968->renderFilter($gridView, $filter);
+        return $this->valueHolder58ecd21f9bb6e271020641->renderFilter($gridView, $filter);
     }
 
     /**
@@ -22424,9 +22438,9 @@ class SyliusBundleGridBundleTemplatingHelperGridHelper_0000000067dc4232000000007
      */
     public function getName()
     {
-        $this->initializer58ec7d91c03d7600695029 && $this->initializer58ec7d91c03d7600695029->__invoke($this->valueHolder58ec7d91c0397650599968, $this, 'getName', array(), $this->initializer58ec7d91c03d7600695029);
+        $this->initializer58ecd21f9bbad063036383 && $this->initializer58ecd21f9bbad063036383->__invoke($this->valueHolder58ecd21f9bb6e271020641, $this, 'getName', array(), $this->initializer58ecd21f9bbad063036383);
 
-        return $this->valueHolder58ec7d91c0397650599968->getName();
+        return $this->valueHolder58ecd21f9bb6e271020641->getName();
     }
 
     /**
@@ -22434,9 +22448,9 @@ class SyliusBundleGridBundleTemplatingHelperGridHelper_0000000067dc4232000000007
      */
     public function setCharset($charset)
     {
-        $this->initializer58ec7d91c03d7600695029 && $this->initializer58ec7d91c03d7600695029->__invoke($this->valueHolder58ec7d91c0397650599968, $this, 'setCharset', array('charset' => $charset), $this->initializer58ec7d91c03d7600695029);
+        $this->initializer58ecd21f9bbad063036383 && $this->initializer58ecd21f9bbad063036383->__invoke($this->valueHolder58ecd21f9bb6e271020641, $this, 'setCharset', array('charset' => $charset), $this->initializer58ecd21f9bbad063036383);
 
-        return $this->valueHolder58ec7d91c0397650599968->setCharset($charset);
+        return $this->valueHolder58ecd21f9bb6e271020641->setCharset($charset);
     }
 
     /**
@@ -22444,9 +22458,9 @@ class SyliusBundleGridBundleTemplatingHelperGridHelper_0000000067dc4232000000007
      */
     public function getCharset()
     {
-        $this->initializer58ec7d91c03d7600695029 && $this->initializer58ec7d91c03d7600695029->__invoke($this->valueHolder58ec7d91c0397650599968, $this, 'getCharset', array(), $this->initializer58ec7d91c03d7600695029);
+        $this->initializer58ecd21f9bbad063036383 && $this->initializer58ecd21f9bbad063036383->__invoke($this->valueHolder58ecd21f9bb6e271020641, $this, 'getCharset', array(), $this->initializer58ecd21f9bbad063036383);
 
-        return $this->valueHolder58ec7d91c0397650599968->getCharset();
+        return $this->valueHolder58ecd21f9bb6e271020641->getCharset();
     }
 
     /**
@@ -22467,7 +22481,7 @@ class SyliusBundleGridBundleTemplatingHelperGridHelper_0000000067dc4232000000007
             unset($instance->gridRenderer);
         }, $instance, 'Sylius\\Bundle\\GridBundle\\Templating\\Helper\\GridHelper')->__invoke($instance);
 
-        $instance->initializer58ec7d91c03d7600695029 = $initializer;
+        $instance->initializer58ecd21f9bbad063036383 = $initializer;
 
         return $instance;
     }
@@ -22479,9 +22493,9 @@ class SyliusBundleGridBundleTemplatingHelperGridHelper_0000000067dc4232000000007
     {
         static $reflection;
 
-        if (! $this->valueHolder58ec7d91c0397650599968) {
+        if (! $this->valueHolder58ecd21f9bb6e271020641) {
             $reflection = $reflection ?: new \ReflectionClass('Sylius\\Bundle\\GridBundle\\Templating\\Helper\\GridHelper');
-            $this->valueHolder58ec7d91c0397650599968 = $reflection->newInstanceWithoutConstructor();
+            $this->valueHolder58ecd21f9bb6e271020641 = $reflection->newInstanceWithoutConstructor();
         unset($this->charset);
 
         \Closure::bind(function (\Sylius\Bundle\GridBundle\Templating\Helper\GridHelper $instance) {
@@ -22490,7 +22504,7 @@ class SyliusBundleGridBundleTemplatingHelperGridHelper_0000000067dc4232000000007
 
         }
 
-        $this->valueHolder58ec7d91c0397650599968->__construct($gridRenderer);
+        $this->valueHolder58ecd21f9bb6e271020641->__construct($gridRenderer);
     }
 
     /**
@@ -22498,16 +22512,16 @@ class SyliusBundleGridBundleTemplatingHelperGridHelper_0000000067dc4232000000007
      */
     public function & __get($name)
     {
-        $this->initializer58ec7d91c03d7600695029 && $this->initializer58ec7d91c03d7600695029->__invoke($this->valueHolder58ec7d91c0397650599968, $this, '__get', ['name' => $name], $this->initializer58ec7d91c03d7600695029);
+        $this->initializer58ecd21f9bbad063036383 && $this->initializer58ecd21f9bbad063036383->__invoke($this->valueHolder58ecd21f9bb6e271020641, $this, '__get', ['name' => $name], $this->initializer58ecd21f9bbad063036383);
 
-        if (isset(self::$publicProperties58ec7d91c02f3678376998[$name])) {
-            return $this->valueHolder58ec7d91c0397650599968->$name;
+        if (isset(self::$publicProperties58ecd21f9bad1741988240[$name])) {
+            return $this->valueHolder58ecd21f9bb6e271020641->$name;
         }
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91c0397650599968;
+            $targetObject = $this->valueHolder58ecd21f9bb6e271020641;
 
             $backtrace = debug_backtrace(false);
             trigger_error('Undefined property: ' . get_parent_class($this) . '::$' . $name . ' in ' . $backtrace[0]['file'] . ' on line ' . $backtrace[0]['line'], \E_USER_NOTICE);
@@ -22515,7 +22529,7 @@ class SyliusBundleGridBundleTemplatingHelperGridHelper_0000000067dc4232000000007
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91c0397650599968;
+        $targetObject = $this->valueHolder58ecd21f9bb6e271020641;
         $accessor = function & () use ($targetObject, $name) {
             return $targetObject->$name;
         };
@@ -22533,18 +22547,18 @@ class SyliusBundleGridBundleTemplatingHelperGridHelper_0000000067dc4232000000007
      */
     public function __set($name, $value)
     {
-        $this->initializer58ec7d91c03d7600695029 && $this->initializer58ec7d91c03d7600695029->__invoke($this->valueHolder58ec7d91c0397650599968, $this, '__set', array('name' => $name, 'value' => $value), $this->initializer58ec7d91c03d7600695029);
+        $this->initializer58ecd21f9bbad063036383 && $this->initializer58ecd21f9bbad063036383->__invoke($this->valueHolder58ecd21f9bb6e271020641, $this, '__set', array('name' => $name, 'value' => $value), $this->initializer58ecd21f9bbad063036383);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91c0397650599968;
+            $targetObject = $this->valueHolder58ecd21f9bb6e271020641;
 
             return $targetObject->$name = $value;
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91c0397650599968;
+        $targetObject = $this->valueHolder58ecd21f9bb6e271020641;
         $accessor = function & () use ($targetObject, $name, $value) {
             return $targetObject->$name = $value;
         };
@@ -22561,18 +22575,18 @@ class SyliusBundleGridBundleTemplatingHelperGridHelper_0000000067dc4232000000007
      */
     public function __isset($name)
     {
-        $this->initializer58ec7d91c03d7600695029 && $this->initializer58ec7d91c03d7600695029->__invoke($this->valueHolder58ec7d91c0397650599968, $this, '__isset', array('name' => $name), $this->initializer58ec7d91c03d7600695029);
+        $this->initializer58ecd21f9bbad063036383 && $this->initializer58ecd21f9bbad063036383->__invoke($this->valueHolder58ecd21f9bb6e271020641, $this, '__isset', array('name' => $name), $this->initializer58ecd21f9bbad063036383);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91c0397650599968;
+            $targetObject = $this->valueHolder58ecd21f9bb6e271020641;
 
             return isset($targetObject->$name);
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91c0397650599968;
+        $targetObject = $this->valueHolder58ecd21f9bb6e271020641;
         $accessor = function () use ($targetObject, $name) {
             return isset($targetObject->$name);
         };
@@ -22589,18 +22603,18 @@ class SyliusBundleGridBundleTemplatingHelperGridHelper_0000000067dc4232000000007
      */
     public function __unset($name)
     {
-        $this->initializer58ec7d91c03d7600695029 && $this->initializer58ec7d91c03d7600695029->__invoke($this->valueHolder58ec7d91c0397650599968, $this, '__unset', array('name' => $name), $this->initializer58ec7d91c03d7600695029);
+        $this->initializer58ecd21f9bbad063036383 && $this->initializer58ecd21f9bbad063036383->__invoke($this->valueHolder58ecd21f9bb6e271020641, $this, '__unset', array('name' => $name), $this->initializer58ecd21f9bbad063036383);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91c0397650599968;
+            $targetObject = $this->valueHolder58ecd21f9bb6e271020641;
 
             unset($targetObject->$name);
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91c0397650599968;
+        $targetObject = $this->valueHolder58ecd21f9bb6e271020641;
         $accessor = function () use ($targetObject, $name) {
             unset($targetObject->$name);
         };
@@ -22614,16 +22628,16 @@ class SyliusBundleGridBundleTemplatingHelperGridHelper_0000000067dc4232000000007
 
     public function __clone()
     {
-        $this->initializer58ec7d91c03d7600695029 && $this->initializer58ec7d91c03d7600695029->__invoke($this->valueHolder58ec7d91c0397650599968, $this, '__clone', array(), $this->initializer58ec7d91c03d7600695029);
+        $this->initializer58ecd21f9bbad063036383 && $this->initializer58ecd21f9bbad063036383->__invoke($this->valueHolder58ecd21f9bb6e271020641, $this, '__clone', array(), $this->initializer58ecd21f9bbad063036383);
 
-        $this->valueHolder58ec7d91c0397650599968 = clone $this->valueHolder58ec7d91c0397650599968;
+        $this->valueHolder58ecd21f9bb6e271020641 = clone $this->valueHolder58ecd21f9bb6e271020641;
     }
 
     public function __sleep()
     {
-        $this->initializer58ec7d91c03d7600695029 && $this->initializer58ec7d91c03d7600695029->__invoke($this->valueHolder58ec7d91c0397650599968, $this, '__sleep', array(), $this->initializer58ec7d91c03d7600695029);
+        $this->initializer58ecd21f9bbad063036383 && $this->initializer58ecd21f9bbad063036383->__invoke($this->valueHolder58ecd21f9bb6e271020641, $this, '__sleep', array(), $this->initializer58ecd21f9bbad063036383);
 
-        return array('valueHolder58ec7d91c0397650599968');
+        return array('valueHolder58ecd21f9bb6e271020641');
     }
 
     public function __wakeup()
@@ -22640,7 +22654,7 @@ class SyliusBundleGridBundleTemplatingHelperGridHelper_0000000067dc4232000000007
      */
     public function setProxyInitializer(\Closure $initializer = null)
     {
-        $this->initializer58ec7d91c03d7600695029 = $initializer;
+        $this->initializer58ecd21f9bbad063036383 = $initializer;
     }
 
     /**
@@ -22648,7 +22662,7 @@ class SyliusBundleGridBundleTemplatingHelperGridHelper_0000000067dc4232000000007
      */
     public function getProxyInitializer()
     {
-        return $this->initializer58ec7d91c03d7600695029;
+        return $this->initializer58ecd21f9bbad063036383;
     }
 
     /**
@@ -22656,7 +22670,7 @@ class SyliusBundleGridBundleTemplatingHelperGridHelper_0000000067dc4232000000007
      */
     public function initializeProxy() : bool
     {
-        return $this->initializer58ec7d91c03d7600695029 && $this->initializer58ec7d91c03d7600695029->__invoke($this->valueHolder58ec7d91c0397650599968, $this, 'initializeProxy', array(), $this->initializer58ec7d91c03d7600695029);
+        return $this->initializer58ecd21f9bbad063036383 && $this->initializer58ecd21f9bbad063036383->__invoke($this->valueHolder58ecd21f9bb6e271020641, $this, 'initializeProxy', array(), $this->initializer58ecd21f9bbad063036383);
     }
 
     /**
@@ -22664,7 +22678,7 @@ class SyliusBundleGridBundleTemplatingHelperGridHelper_0000000067dc4232000000007
      */
     public function isProxyInitialized() : bool
     {
-        return null !== $this->valueHolder58ec7d91c0397650599968;
+        return null !== $this->valueHolder58ecd21f9bb6e271020641;
     }
 
     /**
@@ -22672,29 +22686,29 @@ class SyliusBundleGridBundleTemplatingHelperGridHelper_0000000067dc4232000000007
      */
     public function getWrappedValueHolderValue()
     {
-        return $this->valueHolder58ec7d91c0397650599968;
+        return $this->valueHolder58ecd21f9bb6e271020641;
     }
 
 
 }
 
-class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0d0afe40b8a3d26d extends \Doctrine\ORM\EntityManager implements \ProxyManager\Proxy\VirtualProxyInterface
+class DoctrineORMEntityManager_000000004b511ba6000000000f6225f6877f40b66baaf9ca0d0afe40b8a3d26d extends \Doctrine\ORM\EntityManager implements \ProxyManager\Proxy\VirtualProxyInterface
 {
 
     /**
      * @var \Closure|null initializer responsible for generating the wrapped object
      */
-    private $valueHolder58ec7d91c5e33798976245 = null;
+    private $valueHolder58ecd21fa256d526442143 = null;
 
     /**
      * @var \Closure|null initializer responsible for generating the wrapped object
      */
-    private $initializer58ec7d91c5e75318427578 = null;
+    private $initializer58ecd21fa25af264651438 = null;
 
     /**
      * @var bool[] map of public properties of the parent class
      */
-    private static $publicProperties58ec7d91c5d65889447075 = array(
+    private static $publicProperties58ecd21fa24b7626732478 = array(
         
     );
 
@@ -22703,9 +22717,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function getConnection()
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'getConnection', array(), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'getConnection', array(), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->getConnection();
+        return $this->valueHolder58ecd21fa256d526442143->getConnection();
     }
 
     /**
@@ -22713,9 +22727,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function getMetadataFactory()
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'getMetadataFactory', array(), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'getMetadataFactory', array(), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->getMetadataFactory();
+        return $this->valueHolder58ecd21fa256d526442143->getMetadataFactory();
     }
 
     /**
@@ -22723,9 +22737,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function getExpressionBuilder()
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'getExpressionBuilder', array(), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'getExpressionBuilder', array(), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->getExpressionBuilder();
+        return $this->valueHolder58ecd21fa256d526442143->getExpressionBuilder();
     }
 
     /**
@@ -22733,9 +22747,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function beginTransaction()
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'beginTransaction', array(), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'beginTransaction', array(), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->beginTransaction();
+        return $this->valueHolder58ecd21fa256d526442143->beginTransaction();
     }
 
     /**
@@ -22743,9 +22757,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function getCache()
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'getCache', array(), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'getCache', array(), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->getCache();
+        return $this->valueHolder58ecd21fa256d526442143->getCache();
     }
 
     /**
@@ -22753,9 +22767,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function transactional($func)
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'transactional', array('func' => $func), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'transactional', array('func' => $func), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->transactional($func);
+        return $this->valueHolder58ecd21fa256d526442143->transactional($func);
     }
 
     /**
@@ -22763,9 +22777,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function commit()
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'commit', array(), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'commit', array(), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->commit();
+        return $this->valueHolder58ecd21fa256d526442143->commit();
     }
 
     /**
@@ -22773,9 +22787,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function rollback()
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'rollback', array(), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'rollback', array(), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->rollback();
+        return $this->valueHolder58ecd21fa256d526442143->rollback();
     }
 
     /**
@@ -22783,9 +22797,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function getClassMetadata($className)
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'getClassMetadata', array('className' => $className), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'getClassMetadata', array('className' => $className), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->getClassMetadata($className);
+        return $this->valueHolder58ecd21fa256d526442143->getClassMetadata($className);
     }
 
     /**
@@ -22793,9 +22807,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function createQuery($dql = '')
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'createQuery', array('dql' => $dql), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'createQuery', array('dql' => $dql), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->createQuery($dql);
+        return $this->valueHolder58ecd21fa256d526442143->createQuery($dql);
     }
 
     /**
@@ -22803,9 +22817,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function createNamedQuery($name)
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'createNamedQuery', array('name' => $name), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'createNamedQuery', array('name' => $name), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->createNamedQuery($name);
+        return $this->valueHolder58ecd21fa256d526442143->createNamedQuery($name);
     }
 
     /**
@@ -22813,9 +22827,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function createNativeQuery($sql, \Doctrine\ORM\Query\ResultSetMapping $rsm)
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'createNativeQuery', array('sql' => $sql, 'rsm' => $rsm), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'createNativeQuery', array('sql' => $sql, 'rsm' => $rsm), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->createNativeQuery($sql, $rsm);
+        return $this->valueHolder58ecd21fa256d526442143->createNativeQuery($sql, $rsm);
     }
 
     /**
@@ -22823,9 +22837,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function createNamedNativeQuery($name)
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'createNamedNativeQuery', array('name' => $name), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'createNamedNativeQuery', array('name' => $name), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->createNamedNativeQuery($name);
+        return $this->valueHolder58ecd21fa256d526442143->createNamedNativeQuery($name);
     }
 
     /**
@@ -22833,9 +22847,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function createQueryBuilder()
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'createQueryBuilder', array(), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'createQueryBuilder', array(), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->createQueryBuilder();
+        return $this->valueHolder58ecd21fa256d526442143->createQueryBuilder();
     }
 
     /**
@@ -22843,9 +22857,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function flush($entity = null)
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'flush', array('entity' => $entity), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'flush', array('entity' => $entity), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->flush($entity);
+        return $this->valueHolder58ecd21fa256d526442143->flush($entity);
     }
 
     /**
@@ -22853,9 +22867,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function find($entityName, $id, $lockMode = null, $lockVersion = null)
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'find', array('entityName' => $entityName, 'id' => $id, 'lockMode' => $lockMode, 'lockVersion' => $lockVersion), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'find', array('entityName' => $entityName, 'id' => $id, 'lockMode' => $lockMode, 'lockVersion' => $lockVersion), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->find($entityName, $id, $lockMode, $lockVersion);
+        return $this->valueHolder58ecd21fa256d526442143->find($entityName, $id, $lockMode, $lockVersion);
     }
 
     /**
@@ -22863,9 +22877,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function getReference($entityName, $id)
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'getReference', array('entityName' => $entityName, 'id' => $id), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'getReference', array('entityName' => $entityName, 'id' => $id), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->getReference($entityName, $id);
+        return $this->valueHolder58ecd21fa256d526442143->getReference($entityName, $id);
     }
 
     /**
@@ -22873,9 +22887,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function getPartialReference($entityName, $identifier)
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'getPartialReference', array('entityName' => $entityName, 'identifier' => $identifier), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'getPartialReference', array('entityName' => $entityName, 'identifier' => $identifier), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->getPartialReference($entityName, $identifier);
+        return $this->valueHolder58ecd21fa256d526442143->getPartialReference($entityName, $identifier);
     }
 
     /**
@@ -22883,9 +22897,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function clear($entityName = null)
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'clear', array('entityName' => $entityName), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'clear', array('entityName' => $entityName), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->clear($entityName);
+        return $this->valueHolder58ecd21fa256d526442143->clear($entityName);
     }
 
     /**
@@ -22893,9 +22907,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function close()
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'close', array(), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'close', array(), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->close();
+        return $this->valueHolder58ecd21fa256d526442143->close();
     }
 
     /**
@@ -22903,9 +22917,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function persist($entity)
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'persist', array('entity' => $entity), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'persist', array('entity' => $entity), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->persist($entity);
+        return $this->valueHolder58ecd21fa256d526442143->persist($entity);
     }
 
     /**
@@ -22913,9 +22927,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function remove($entity)
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'remove', array('entity' => $entity), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'remove', array('entity' => $entity), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->remove($entity);
+        return $this->valueHolder58ecd21fa256d526442143->remove($entity);
     }
 
     /**
@@ -22923,9 +22937,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function refresh($entity)
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'refresh', array('entity' => $entity), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'refresh', array('entity' => $entity), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->refresh($entity);
+        return $this->valueHolder58ecd21fa256d526442143->refresh($entity);
     }
 
     /**
@@ -22933,9 +22947,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function detach($entity)
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'detach', array('entity' => $entity), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'detach', array('entity' => $entity), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->detach($entity);
+        return $this->valueHolder58ecd21fa256d526442143->detach($entity);
     }
 
     /**
@@ -22943,9 +22957,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function merge($entity)
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'merge', array('entity' => $entity), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'merge', array('entity' => $entity), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->merge($entity);
+        return $this->valueHolder58ecd21fa256d526442143->merge($entity);
     }
 
     /**
@@ -22953,9 +22967,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function copy($entity, $deep = false)
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'copy', array('entity' => $entity, 'deep' => $deep), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'copy', array('entity' => $entity, 'deep' => $deep), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->copy($entity, $deep);
+        return $this->valueHolder58ecd21fa256d526442143->copy($entity, $deep);
     }
 
     /**
@@ -22963,9 +22977,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function lock($entity, $lockMode, $lockVersion = null)
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'lock', array('entity' => $entity, 'lockMode' => $lockMode, 'lockVersion' => $lockVersion), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'lock', array('entity' => $entity, 'lockMode' => $lockMode, 'lockVersion' => $lockVersion), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->lock($entity, $lockMode, $lockVersion);
+        return $this->valueHolder58ecd21fa256d526442143->lock($entity, $lockMode, $lockVersion);
     }
 
     /**
@@ -22973,9 +22987,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function getRepository($entityName)
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'getRepository', array('entityName' => $entityName), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'getRepository', array('entityName' => $entityName), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->getRepository($entityName);
+        return $this->valueHolder58ecd21fa256d526442143->getRepository($entityName);
     }
 
     /**
@@ -22983,9 +22997,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function contains($entity)
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'contains', array('entity' => $entity), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'contains', array('entity' => $entity), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->contains($entity);
+        return $this->valueHolder58ecd21fa256d526442143->contains($entity);
     }
 
     /**
@@ -22993,9 +23007,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function getEventManager()
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'getEventManager', array(), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'getEventManager', array(), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->getEventManager();
+        return $this->valueHolder58ecd21fa256d526442143->getEventManager();
     }
 
     /**
@@ -23003,9 +23017,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function getConfiguration()
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'getConfiguration', array(), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'getConfiguration', array(), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->getConfiguration();
+        return $this->valueHolder58ecd21fa256d526442143->getConfiguration();
     }
 
     /**
@@ -23013,9 +23027,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function isOpen()
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'isOpen', array(), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'isOpen', array(), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->isOpen();
+        return $this->valueHolder58ecd21fa256d526442143->isOpen();
     }
 
     /**
@@ -23023,9 +23037,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function getUnitOfWork()
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'getUnitOfWork', array(), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'getUnitOfWork', array(), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->getUnitOfWork();
+        return $this->valueHolder58ecd21fa256d526442143->getUnitOfWork();
     }
 
     /**
@@ -23033,9 +23047,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function getHydrator($hydrationMode)
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'getHydrator', array('hydrationMode' => $hydrationMode), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'getHydrator', array('hydrationMode' => $hydrationMode), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->getHydrator($hydrationMode);
+        return $this->valueHolder58ecd21fa256d526442143->getHydrator($hydrationMode);
     }
 
     /**
@@ -23043,9 +23057,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function newHydrator($hydrationMode)
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'newHydrator', array('hydrationMode' => $hydrationMode), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'newHydrator', array('hydrationMode' => $hydrationMode), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->newHydrator($hydrationMode);
+        return $this->valueHolder58ecd21fa256d526442143->newHydrator($hydrationMode);
     }
 
     /**
@@ -23053,9 +23067,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function getProxyFactory()
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'getProxyFactory', array(), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'getProxyFactory', array(), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->getProxyFactory();
+        return $this->valueHolder58ecd21fa256d526442143->getProxyFactory();
     }
 
     /**
@@ -23063,9 +23077,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function initializeObject($obj)
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'initializeObject', array('obj' => $obj), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'initializeObject', array('obj' => $obj), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->initializeObject($obj);
+        return $this->valueHolder58ecd21fa256d526442143->initializeObject($obj);
     }
 
     /**
@@ -23073,9 +23087,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function getFilters()
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'getFilters', array(), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'getFilters', array(), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->getFilters();
+        return $this->valueHolder58ecd21fa256d526442143->getFilters();
     }
 
     /**
@@ -23083,9 +23097,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function isFiltersStateClean()
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'isFiltersStateClean', array(), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'isFiltersStateClean', array(), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->isFiltersStateClean();
+        return $this->valueHolder58ecd21fa256d526442143->isFiltersStateClean();
     }
 
     /**
@@ -23093,9 +23107,9 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function hasFilters()
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'hasFilters', array(), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'hasFilters', array(), $this->initializer58ecd21fa25af264651438);
 
-        return $this->valueHolder58ec7d91c5e33798976245->hasFilters();
+        return $this->valueHolder58ecd21fa256d526442143->hasFilters();
     }
 
     /**
@@ -23114,7 +23128,7 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
             unset($instance->config, $instance->conn, $instance->metadataFactory, $instance->unitOfWork, $instance->eventManager, $instance->proxyFactory, $instance->repositoryFactory, $instance->expressionBuilder, $instance->closed, $instance->filterCollection, $instance->cache);
         }, $instance, 'Doctrine\\ORM\\EntityManager')->__invoke($instance);
 
-        $instance->initializer58ec7d91c5e75318427578 = $initializer;
+        $instance->initializer58ecd21fa25af264651438 = $initializer;
 
         return $instance;
     }
@@ -23126,16 +23140,16 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
     {
         static $reflection;
 
-        if (! $this->valueHolder58ec7d91c5e33798976245) {
+        if (! $this->valueHolder58ecd21fa256d526442143) {
             $reflection = $reflection ?: new \ReflectionClass('Doctrine\\ORM\\EntityManager');
-            $this->valueHolder58ec7d91c5e33798976245 = $reflection->newInstanceWithoutConstructor();
+            $this->valueHolder58ecd21fa256d526442143 = $reflection->newInstanceWithoutConstructor();
         \Closure::bind(function (\Doctrine\ORM\EntityManager $instance) {
             unset($instance->config, $instance->conn, $instance->metadataFactory, $instance->unitOfWork, $instance->eventManager, $instance->proxyFactory, $instance->repositoryFactory, $instance->expressionBuilder, $instance->closed, $instance->filterCollection, $instance->cache);
         }, $this, 'Doctrine\\ORM\\EntityManager')->__invoke($this);
 
         }
 
-        $this->valueHolder58ec7d91c5e33798976245->__construct($conn, $config, $eventManager);
+        $this->valueHolder58ecd21fa256d526442143->__construct($conn, $config, $eventManager);
     }
 
     /**
@@ -23143,16 +23157,16 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function & __get($name)
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, '__get', ['name' => $name], $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, '__get', ['name' => $name], $this->initializer58ecd21fa25af264651438);
 
-        if (isset(self::$publicProperties58ec7d91c5d65889447075[$name])) {
-            return $this->valueHolder58ec7d91c5e33798976245->$name;
+        if (isset(self::$publicProperties58ecd21fa24b7626732478[$name])) {
+            return $this->valueHolder58ecd21fa256d526442143->$name;
         }
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91c5e33798976245;
+            $targetObject = $this->valueHolder58ecd21fa256d526442143;
 
             $backtrace = debug_backtrace(false);
             trigger_error('Undefined property: ' . get_parent_class($this) . '::$' . $name . ' in ' . $backtrace[0]['file'] . ' on line ' . $backtrace[0]['line'], \E_USER_NOTICE);
@@ -23160,7 +23174,7 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91c5e33798976245;
+        $targetObject = $this->valueHolder58ecd21fa256d526442143;
         $accessor = function & () use ($targetObject, $name) {
             return $targetObject->$name;
         };
@@ -23178,18 +23192,18 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function __set($name, $value)
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, '__set', array('name' => $name, 'value' => $value), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, '__set', array('name' => $name, 'value' => $value), $this->initializer58ecd21fa25af264651438);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91c5e33798976245;
+            $targetObject = $this->valueHolder58ecd21fa256d526442143;
 
             return $targetObject->$name = $value;
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91c5e33798976245;
+        $targetObject = $this->valueHolder58ecd21fa256d526442143;
         $accessor = function & () use ($targetObject, $name, $value) {
             return $targetObject->$name = $value;
         };
@@ -23206,18 +23220,18 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function __isset($name)
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, '__isset', array('name' => $name), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, '__isset', array('name' => $name), $this->initializer58ecd21fa25af264651438);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91c5e33798976245;
+            $targetObject = $this->valueHolder58ecd21fa256d526442143;
 
             return isset($targetObject->$name);
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91c5e33798976245;
+        $targetObject = $this->valueHolder58ecd21fa256d526442143;
         $accessor = function () use ($targetObject, $name) {
             return isset($targetObject->$name);
         };
@@ -23234,18 +23248,18 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function __unset($name)
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, '__unset', array('name' => $name), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, '__unset', array('name' => $name), $this->initializer58ecd21fa25af264651438);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91c5e33798976245;
+            $targetObject = $this->valueHolder58ecd21fa256d526442143;
 
             unset($targetObject->$name);
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91c5e33798976245;
+        $targetObject = $this->valueHolder58ecd21fa256d526442143;
         $accessor = function () use ($targetObject, $name) {
             unset($targetObject->$name);
         };
@@ -23259,16 +23273,16 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
 
     public function __clone()
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, '__clone', array(), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, '__clone', array(), $this->initializer58ecd21fa25af264651438);
 
-        $this->valueHolder58ec7d91c5e33798976245 = clone $this->valueHolder58ec7d91c5e33798976245;
+        $this->valueHolder58ecd21fa256d526442143 = clone $this->valueHolder58ecd21fa256d526442143;
     }
 
     public function __sleep()
     {
-        $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, '__sleep', array(), $this->initializer58ec7d91c5e75318427578);
+        $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, '__sleep', array(), $this->initializer58ecd21fa25af264651438);
 
-        return array('valueHolder58ec7d91c5e33798976245');
+        return array('valueHolder58ecd21fa256d526442143');
     }
 
     public function __wakeup()
@@ -23283,7 +23297,7 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function setProxyInitializer(\Closure $initializer = null)
     {
-        $this->initializer58ec7d91c5e75318427578 = $initializer;
+        $this->initializer58ecd21fa25af264651438 = $initializer;
     }
 
     /**
@@ -23291,7 +23305,7 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function getProxyInitializer()
     {
-        return $this->initializer58ec7d91c5e75318427578;
+        return $this->initializer58ecd21fa25af264651438;
     }
 
     /**
@@ -23299,7 +23313,7 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function initializeProxy() : bool
     {
-        return $this->initializer58ec7d91c5e75318427578 && $this->initializer58ec7d91c5e75318427578->__invoke($this->valueHolder58ec7d91c5e33798976245, $this, 'initializeProxy', array(), $this->initializer58ec7d91c5e75318427578);
+        return $this->initializer58ecd21fa25af264651438 && $this->initializer58ecd21fa25af264651438->__invoke($this->valueHolder58ecd21fa256d526442143, $this, 'initializeProxy', array(), $this->initializer58ecd21fa25af264651438);
     }
 
     /**
@@ -23307,7 +23321,7 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function isProxyInitialized() : bool
     {
-        return null !== $this->valueHolder58ec7d91c5e33798976245;
+        return null !== $this->valueHolder58ecd21fa256d526442143;
     }
 
     /**
@@ -23315,29 +23329,29 @@ class DoctrineORMEntityManager_0000000067dc4f370000000078fadba4877f40b66baaf9ca0
      */
     public function getWrappedValueHolderValue()
     {
-        return $this->valueHolder58ec7d91c5e33798976245;
+        return $this->valueHolder58ecd21fa256d526442143;
     }
 
 
 }
 
-class FOSRestBundleSerializerJMSSerializerAdapter_0000000067dc5ce80000000078fadba4877f40b66baaf9ca0d0afe40b8a3d26d extends \FOS\RestBundle\Serializer\JMSSerializerAdapter implements \ProxyManager\Proxy\VirtualProxyInterface
+class FOSRestBundleSerializerJMSSerializerAdapter_000000004b51165c000000000f6225f6877f40b66baaf9ca0d0afe40b8a3d26d extends \FOS\RestBundle\Serializer\JMSSerializerAdapter implements \ProxyManager\Proxy\VirtualProxyInterface
 {
 
     /**
      * @var \Closure|null initializer responsible for generating the wrapped object
      */
-    private $valueHolder58ec7d91e0517259312391 = null;
+    private $valueHolder58ecd21fbb2e0805910993 = null;
 
     /**
      * @var \Closure|null initializer responsible for generating the wrapped object
      */
-    private $initializer58ec7d91e0559270173350 = null;
+    private $initializer58ecd21fbb31f132032801 = null;
 
     /**
      * @var bool[] map of public properties of the parent class
      */
-    private static $publicProperties58ec7d91e0472162626202 = array(
+    private static $publicProperties58ecd21fbb23f166762578 = array(
         
     );
 
@@ -23346,9 +23360,9 @@ class FOSRestBundleSerializerJMSSerializerAdapter_0000000067dc5ce80000000078fadb
      */
     public function serialize($data, $format, $context = null)
     {
-        $this->initializer58ec7d91e0559270173350 && $this->initializer58ec7d91e0559270173350->__invoke($this->valueHolder58ec7d91e0517259312391, $this, 'serialize', array('data' => $data, 'format' => $format, 'context' => $context), $this->initializer58ec7d91e0559270173350);
+        $this->initializer58ecd21fbb31f132032801 && $this->initializer58ecd21fbb31f132032801->__invoke($this->valueHolder58ecd21fbb2e0805910993, $this, 'serialize', array('data' => $data, 'format' => $format, 'context' => $context), $this->initializer58ecd21fbb31f132032801);
 
-        return $this->valueHolder58ec7d91e0517259312391->serialize($data, $format, $context);
+        return $this->valueHolder58ecd21fbb2e0805910993->serialize($data, $format, $context);
     }
 
     /**
@@ -23356,9 +23370,9 @@ class FOSRestBundleSerializerJMSSerializerAdapter_0000000067dc5ce80000000078fadb
      */
     public function deserialize($data, $type, $format, $context = null)
     {
-        $this->initializer58ec7d91e0559270173350 && $this->initializer58ec7d91e0559270173350->__invoke($this->valueHolder58ec7d91e0517259312391, $this, 'deserialize', array('data' => $data, 'type' => $type, 'format' => $format, 'context' => $context), $this->initializer58ec7d91e0559270173350);
+        $this->initializer58ecd21fbb31f132032801 && $this->initializer58ecd21fbb31f132032801->__invoke($this->valueHolder58ecd21fbb2e0805910993, $this, 'deserialize', array('data' => $data, 'type' => $type, 'format' => $format, 'context' => $context), $this->initializer58ecd21fbb31f132032801);
 
-        return $this->valueHolder58ec7d91e0517259312391->deserialize($data, $type, $format, $context);
+        return $this->valueHolder58ecd21fbb2e0805910993->deserialize($data, $type, $format, $context);
     }
 
     /**
@@ -23377,7 +23391,7 @@ class FOSRestBundleSerializerJMSSerializerAdapter_0000000067dc5ce80000000078fadb
             unset($instance->serializer);
         }, $instance, 'FOS\\RestBundle\\Serializer\\JMSSerializerAdapter')->__invoke($instance);
 
-        $instance->initializer58ec7d91e0559270173350 = $initializer;
+        $instance->initializer58ecd21fbb31f132032801 = $initializer;
 
         return $instance;
     }
@@ -23389,16 +23403,16 @@ class FOSRestBundleSerializerJMSSerializerAdapter_0000000067dc5ce80000000078fadb
     {
         static $reflection;
 
-        if (! $this->valueHolder58ec7d91e0517259312391) {
+        if (! $this->valueHolder58ecd21fbb2e0805910993) {
             $reflection = $reflection ?: new \ReflectionClass('FOS\\RestBundle\\Serializer\\JMSSerializerAdapter');
-            $this->valueHolder58ec7d91e0517259312391 = $reflection->newInstanceWithoutConstructor();
+            $this->valueHolder58ecd21fbb2e0805910993 = $reflection->newInstanceWithoutConstructor();
         \Closure::bind(function (\FOS\RestBundle\Serializer\JMSSerializerAdapter $instance) {
             unset($instance->serializer);
         }, $this, 'FOS\\RestBundle\\Serializer\\JMSSerializerAdapter')->__invoke($this);
 
         }
 
-        $this->valueHolder58ec7d91e0517259312391->__construct($serializer);
+        $this->valueHolder58ecd21fbb2e0805910993->__construct($serializer);
     }
 
     /**
@@ -23406,16 +23420,16 @@ class FOSRestBundleSerializerJMSSerializerAdapter_0000000067dc5ce80000000078fadb
      */
     public function & __get($name)
     {
-        $this->initializer58ec7d91e0559270173350 && $this->initializer58ec7d91e0559270173350->__invoke($this->valueHolder58ec7d91e0517259312391, $this, '__get', ['name' => $name], $this->initializer58ec7d91e0559270173350);
+        $this->initializer58ecd21fbb31f132032801 && $this->initializer58ecd21fbb31f132032801->__invoke($this->valueHolder58ecd21fbb2e0805910993, $this, '__get', ['name' => $name], $this->initializer58ecd21fbb31f132032801);
 
-        if (isset(self::$publicProperties58ec7d91e0472162626202[$name])) {
-            return $this->valueHolder58ec7d91e0517259312391->$name;
+        if (isset(self::$publicProperties58ecd21fbb23f166762578[$name])) {
+            return $this->valueHolder58ecd21fbb2e0805910993->$name;
         }
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91e0517259312391;
+            $targetObject = $this->valueHolder58ecd21fbb2e0805910993;
 
             $backtrace = debug_backtrace(false);
             trigger_error('Undefined property: ' . get_parent_class($this) . '::$' . $name . ' in ' . $backtrace[0]['file'] . ' on line ' . $backtrace[0]['line'], \E_USER_NOTICE);
@@ -23423,7 +23437,7 @@ class FOSRestBundleSerializerJMSSerializerAdapter_0000000067dc5ce80000000078fadb
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91e0517259312391;
+        $targetObject = $this->valueHolder58ecd21fbb2e0805910993;
         $accessor = function & () use ($targetObject, $name) {
             return $targetObject->$name;
         };
@@ -23441,18 +23455,18 @@ class FOSRestBundleSerializerJMSSerializerAdapter_0000000067dc5ce80000000078fadb
      */
     public function __set($name, $value)
     {
-        $this->initializer58ec7d91e0559270173350 && $this->initializer58ec7d91e0559270173350->__invoke($this->valueHolder58ec7d91e0517259312391, $this, '__set', array('name' => $name, 'value' => $value), $this->initializer58ec7d91e0559270173350);
+        $this->initializer58ecd21fbb31f132032801 && $this->initializer58ecd21fbb31f132032801->__invoke($this->valueHolder58ecd21fbb2e0805910993, $this, '__set', array('name' => $name, 'value' => $value), $this->initializer58ecd21fbb31f132032801);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91e0517259312391;
+            $targetObject = $this->valueHolder58ecd21fbb2e0805910993;
 
             return $targetObject->$name = $value;
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91e0517259312391;
+        $targetObject = $this->valueHolder58ecd21fbb2e0805910993;
         $accessor = function & () use ($targetObject, $name, $value) {
             return $targetObject->$name = $value;
         };
@@ -23469,18 +23483,18 @@ class FOSRestBundleSerializerJMSSerializerAdapter_0000000067dc5ce80000000078fadb
      */
     public function __isset($name)
     {
-        $this->initializer58ec7d91e0559270173350 && $this->initializer58ec7d91e0559270173350->__invoke($this->valueHolder58ec7d91e0517259312391, $this, '__isset', array('name' => $name), $this->initializer58ec7d91e0559270173350);
+        $this->initializer58ecd21fbb31f132032801 && $this->initializer58ecd21fbb31f132032801->__invoke($this->valueHolder58ecd21fbb2e0805910993, $this, '__isset', array('name' => $name), $this->initializer58ecd21fbb31f132032801);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91e0517259312391;
+            $targetObject = $this->valueHolder58ecd21fbb2e0805910993;
 
             return isset($targetObject->$name);
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91e0517259312391;
+        $targetObject = $this->valueHolder58ecd21fbb2e0805910993;
         $accessor = function () use ($targetObject, $name) {
             return isset($targetObject->$name);
         };
@@ -23497,18 +23511,18 @@ class FOSRestBundleSerializerJMSSerializerAdapter_0000000067dc5ce80000000078fadb
      */
     public function __unset($name)
     {
-        $this->initializer58ec7d91e0559270173350 && $this->initializer58ec7d91e0559270173350->__invoke($this->valueHolder58ec7d91e0517259312391, $this, '__unset', array('name' => $name), $this->initializer58ec7d91e0559270173350);
+        $this->initializer58ecd21fbb31f132032801 && $this->initializer58ecd21fbb31f132032801->__invoke($this->valueHolder58ecd21fbb2e0805910993, $this, '__unset', array('name' => $name), $this->initializer58ecd21fbb31f132032801);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58ec7d91e0517259312391;
+            $targetObject = $this->valueHolder58ecd21fbb2e0805910993;
 
             unset($targetObject->$name);
             return;
         }
 
-        $targetObject = $this->valueHolder58ec7d91e0517259312391;
+        $targetObject = $this->valueHolder58ecd21fbb2e0805910993;
         $accessor = function () use ($targetObject, $name) {
             unset($targetObject->$name);
         };
@@ -23522,16 +23536,16 @@ class FOSRestBundleSerializerJMSSerializerAdapter_0000000067dc5ce80000000078fadb
 
     public function __clone()
     {
-        $this->initializer58ec7d91e0559270173350 && $this->initializer58ec7d91e0559270173350->__invoke($this->valueHolder58ec7d91e0517259312391, $this, '__clone', array(), $this->initializer58ec7d91e0559270173350);
+        $this->initializer58ecd21fbb31f132032801 && $this->initializer58ecd21fbb31f132032801->__invoke($this->valueHolder58ecd21fbb2e0805910993, $this, '__clone', array(), $this->initializer58ecd21fbb31f132032801);
 
-        $this->valueHolder58ec7d91e0517259312391 = clone $this->valueHolder58ec7d91e0517259312391;
+        $this->valueHolder58ecd21fbb2e0805910993 = clone $this->valueHolder58ecd21fbb2e0805910993;
     }
 
     public function __sleep()
     {
-        $this->initializer58ec7d91e0559270173350 && $this->initializer58ec7d91e0559270173350->__invoke($this->valueHolder58ec7d91e0517259312391, $this, '__sleep', array(), $this->initializer58ec7d91e0559270173350);
+        $this->initializer58ecd21fbb31f132032801 && $this->initializer58ecd21fbb31f132032801->__invoke($this->valueHolder58ecd21fbb2e0805910993, $this, '__sleep', array(), $this->initializer58ecd21fbb31f132032801);
 
-        return array('valueHolder58ec7d91e0517259312391');
+        return array('valueHolder58ecd21fbb2e0805910993');
     }
 
     public function __wakeup()
@@ -23546,7 +23560,7 @@ class FOSRestBundleSerializerJMSSerializerAdapter_0000000067dc5ce80000000078fadb
      */
     public function setProxyInitializer(\Closure $initializer = null)
     {
-        $this->initializer58ec7d91e0559270173350 = $initializer;
+        $this->initializer58ecd21fbb31f132032801 = $initializer;
     }
 
     /**
@@ -23554,7 +23568,7 @@ class FOSRestBundleSerializerJMSSerializerAdapter_0000000067dc5ce80000000078fadb
      */
     public function getProxyInitializer()
     {
-        return $this->initializer58ec7d91e0559270173350;
+        return $this->initializer58ecd21fbb31f132032801;
     }
 
     /**
@@ -23562,7 +23576,7 @@ class FOSRestBundleSerializerJMSSerializerAdapter_0000000067dc5ce80000000078fadb
      */
     public function initializeProxy() : bool
     {
-        return $this->initializer58ec7d91e0559270173350 && $this->initializer58ec7d91e0559270173350->__invoke($this->valueHolder58ec7d91e0517259312391, $this, 'initializeProxy', array(), $this->initializer58ec7d91e0559270173350);
+        return $this->initializer58ecd21fbb31f132032801 && $this->initializer58ecd21fbb31f132032801->__invoke($this->valueHolder58ecd21fbb2e0805910993, $this, 'initializeProxy', array(), $this->initializer58ecd21fbb31f132032801);
     }
 
     /**
@@ -23570,7 +23584,7 @@ class FOSRestBundleSerializerJMSSerializerAdapter_0000000067dc5ce80000000078fadb
      */
     public function isProxyInitialized() : bool
     {
-        return null !== $this->valueHolder58ec7d91e0517259312391;
+        return null !== $this->valueHolder58ecd21fbb2e0805910993;
     }
 
     /**
@@ -23578,7 +23592,7 @@ class FOSRestBundleSerializerJMSSerializerAdapter_0000000067dc5ce80000000078fadb
      */
     public function getWrappedValueHolderValue()
     {
-        return $this->valueHolder58ec7d91e0517259312391;
+        return $this->valueHolder58ecd21fbb2e0805910993;
     }
 
 
