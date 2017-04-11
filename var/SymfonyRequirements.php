@@ -439,11 +439,13 @@ class SymfonyRequirements extends RequirementCollection
             'Change the permissions of either "<strong>app/logs/</strong>" or  "<strong>var/logs/</strong>" directory so that the web server can write into it.'
         );
 
-        $this->addPhpIniRequirement(
-            'date.timezone', true, false,
-            'date.timezone setting must be set',
-            'Set the "<strong>date.timezone</strong>" setting in php.ini<a href="#phpini">*</a> (like Europe/Paris).'
-        );
+        if (version_compare($installedPhpVersion, '7.0.0', '<')) {
+            $this->addPhpIniRequirement(
+                'date.timezone', true, false,
+                'date.timezone setting must be set',
+                'Set the "<strong>date.timezone</strong>" setting in php.ini<a href="#phpini">*</a> (like Europe/Paris).'
+            );
+        }
 
         if (false !== $requiredPhpVersion && version_compare($installedPhpVersion, $requiredPhpVersion, '>=')) {
             $timezones = array();
@@ -691,6 +693,21 @@ class SymfonyRequirements extends RequirementCollection
                 'Upgrade your <strong>intl</strong> extension with a newer ICU version (4+).'
             );
 
+            if (class_exists('Symfony\Component\Intl\Intl')) {
+                $this->addRecommendation(
+                    \Symfony\Component\Intl\Intl::getIcuDataVersion() <= \Symfony\Component\Intl\Intl::getIcuVersion(),
+                    sprintf('intl ICU version installed on your system is outdated (%s) and does not match the ICU data bundled with Symfony (%s)', \Symfony\Component\Intl\Intl::getIcuVersion(), \Symfony\Component\Intl\Intl::getIcuDataVersion()),
+                    'To get the latest internationalization data upgrade the ICU system package and the intl PHP extension.'
+                );
+                if (\Symfony\Component\Intl\Intl::getIcuDataVersion() <= \Symfony\Component\Intl\Intl::getIcuVersion()) {
+                    $this->addRecommendation(
+                        \Symfony\Component\Intl\Intl::getIcuDataVersion() === \Symfony\Component\Intl\Intl::getIcuVersion(),
+                        sprintf('intl ICU version installed on your system (%s) does not match the ICU data bundled with Symfony (%s)', \Symfony\Component\Intl\Intl::getIcuVersion(), \Symfony\Component\Intl\Intl::getIcuDataVersion()),
+                        'To avoid internationalization data inconsistencies upgrade the symfony/intl component.'
+                    );
+                }
+            }
+
             $this->addPhpIniRecommendation(
                 'intl.error_level',
                 create_function('$cfgValue', 'return (int) $cfgValue === 0;'),
@@ -763,7 +780,11 @@ class SymfonyRequirements extends RequirementCollection
     {
         $size = ini_get('realpath_cache_size');
         $size = trim($size);
-        $unit = strtolower(substr($size, -1, 1));
+        $unit = '';
+        if (!ctype_digit($size)) {
+            $unit = strtolower(substr($size, -1, 1));
+            $size = (int) substr($size, 0, -1);
+        }
         switch ($unit) {
             case 'g':
                 return $size * 1024 * 1024 * 1024;
