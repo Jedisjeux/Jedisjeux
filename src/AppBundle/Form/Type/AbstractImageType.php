@@ -11,7 +11,7 @@
 
 namespace AppBundle\Form\Type;
 
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,7 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class AbstractImageType extends AbstractResourceType
+class AbstractImageType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -38,8 +38,6 @@ class AbstractImageType extends AbstractResourceType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => $this->dataClass,
-            'validation_groups' => $this->validationGroups,
             'file_label' => 'sylius.ui.image',
         ]);
     }

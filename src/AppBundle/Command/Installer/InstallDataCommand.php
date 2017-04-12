@@ -43,8 +43,8 @@ EOT
             'app:root-taxons:load',
             'app:taxons-of-articles:load',
             'app:zones:load',
-            'app:string-blocks:load',
-            'app:pages:load',
+            //'app:string-blocks:load',
+            //'app:pages:load',
             'app:users:load',
             'app:products:load',
             'app:product-variants:recalculate-positions',
@@ -87,6 +87,6 @@ EOT
             'app:dealers-prices:import',
         ];
 
-        $this->runCommands($commands, $input, $output);
+        $this->runCommands($commands, $output);
     }
 }

@@ -123,11 +123,10 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
 
     /**
      * @param array $commands
-     * @param InputInterface $input
      * @param OutputInterface $output
      * @param bool $displayProgress
      */
-    protected function runCommands(array $commands, InputInterface $input, OutputInterface $output, $displayProgress = true)
+    protected function runCommands(array $commands, OutputInterface $output, $displayProgress = true)
     {
         if ($displayProgress) {
             $length = count($commands);

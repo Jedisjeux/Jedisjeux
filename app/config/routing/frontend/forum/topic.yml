@@ -51,7 +51,7 @@ app_frontend_topic_delete:
 
 app_frontend_topic_index_by_taxon:
     methods: [GET]
-    path: /topics/{permalink}
+    path: /topics/{slug}
     defaults:
         _controller: app.controller.topic:indexByTaxonAction
         _sylius:
@@ -61,4 +61,4 @@ app_frontend_topic_index_by_taxon:
                 createdAt: desc
             template: frontend/topic/index.html.twig
     requirements:
-        permalink: "[^?]+"
+        slug: "[^?]+"

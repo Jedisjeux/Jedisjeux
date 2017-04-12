@@ -147,7 +147,7 @@ EOM;
 
     public function calculateTopicCountByTaxon()
     {
-        $taxons = $this->getTaxonRepository()->findChildren(Taxon::CODE_FORUM);
+        $taxons = $this->getTaxonRepository()->findChildren(Taxon::CODE_FORUM, $this->getContainer()->getParameter('locale'));
 
         foreach ($taxons as $taxon) {
             $this->getTopicCountByTaxonUpdater()->update($taxon);

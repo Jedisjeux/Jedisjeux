@@ -158,7 +158,7 @@ class ProductContext extends DefaultContext
 
         foreach ($table->getHash() as $data) {
             /** @var TaxonInterface $parent */
-            $taxon = $this->getRepository('taxon')->findOneByPermalink($data['permalink']);
+            $taxon = $this->getRepository('taxon')->findOneBySlug($data['slug'], $this->getContainer()->getParameter('locale'));
             $product->addTaxon($taxon);
         }
 

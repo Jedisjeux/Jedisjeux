@@ -62,7 +62,7 @@
             {% set hiddenElements = key >= 5 %}
 
             <li{% if hiddenElements %} class="closed" style="display: none"{% endif %}>
-                <a href="{{ path(routeName, { 'permalink': taxon.permalink }) }}">
+                <a href="{{ path(routeName, { 'slug': taxon.slug }) }}">
                     {% if is_parent %}
                     <strong>
                         {% endif %}

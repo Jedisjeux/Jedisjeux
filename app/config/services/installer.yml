@@ -13,6 +13,11 @@ services:
         arguments:
             - "@filesystem"
 
+    sylius.commands_provider.database_setup:
+        class: AppBundle\Installer\Provider\DatabaseSetupCommandsProvider
+        arguments:
+            - "@doctrine"
+
     sylius.setup.locale:
         class: AppBundle\Installer\Setup\LocaleSetup
         arguments:

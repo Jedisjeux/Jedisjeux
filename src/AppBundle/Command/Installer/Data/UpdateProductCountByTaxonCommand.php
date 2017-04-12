@@ -64,7 +64,7 @@ EOT
      */
     protected function calculateProductCountByTaxonCode($rootCode)
     {
-        $taxons = $this->getTaxonRepository()->findChildren($rootCode);
+        $taxons = $this->getTaxonRepository()->findChildren($rootCode, $this->getContainer()->getParameter('locale'));
 
         foreach ($taxons as $taxon) {
             $this->getProductCountByTaxonUpdater()->update($taxon);

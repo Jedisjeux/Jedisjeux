@@ -36,7 +36,7 @@ class TopicContext extends DefaultContext
         foreach ($table->getHash() as $data) {
 
             /** @var TaxonInterface $mainTaxon */
-            $mainTaxon = $this->getRepository('taxon')->findOneByPermalink($data['main_taxon']);
+            $mainTaxon = $this->getRepository('taxon')->findOneBySlug($data['main_taxon'], $this->getContainer()->getParameter('locale'));
 
             if (null === $mainTaxon) {
                 throw new \InvalidArgumentException(

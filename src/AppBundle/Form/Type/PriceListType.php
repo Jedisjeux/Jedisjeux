@@ -11,7 +11,7 @@
 
 namespace AppBundle\Form\Type;
 
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class PriceListType extends AbstractResourceType
+class PriceListType extends AbstractType
 {
     /**
      * {@inheritdoc}

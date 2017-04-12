@@ -12,6 +12,7 @@
 namespace AppBundle\Form\Type\Customer;
 
 use Sylius\Bundle\CustomerBundle\Form\Type\CustomerType as BaseCustomerType;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -22,7 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class CustomerType extends BaseCustomerType
+class CustomerType extends AbstractResourceType
 {
     /**
      * @var EventSubscriberInterface
@@ -65,6 +66,14 @@ class CustomerType extends BaseCustomerType
 
         $builder
             ->addEventSubscriber($this->addUserFormSubscriber);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getParent()
+    {
+        return BaseCustomerType::class;
     }
 
     /**

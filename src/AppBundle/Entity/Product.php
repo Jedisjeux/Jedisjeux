@@ -242,22 +242,6 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
-     * @param null|string $slug
-     * @param bool $updateVariant
-     */
-    public function setSlug($slug = null, $updateVariant = true)
-    {
-        parent::setSlug($slug);
-
-        /** @var ProductVariant $firstVariant */
-        $firstVariant = $this->getFirstVariant();
-
-        if ($firstVariant and $updateVariant) {
-            $firstVariant->setSlug($slug);
-        }
-    }
-
-    /**
      * @return string
      */
     public function getStatus()

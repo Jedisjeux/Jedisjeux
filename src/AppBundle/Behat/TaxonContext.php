@@ -11,6 +11,7 @@ namespace AppBundle\Behat;
 use AppBundle\Entity\Taxon;
 use AppBundle\Repository\TaxonRepository;
 use Behat\Gherkin\Node\TableNode;
+use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
@@ -35,11 +36,11 @@ class TaxonContext extends DefaultContext
             $repository = $this->getRepository('taxon');
 
             /** @var TaxonInterface $parent */
-            $parent = $repository->findOneByPermalink($data['parent']);
+            $parent = $repository->findOneBySlug($data['parent'], $this->getContainer()->getParameter('locale'));
 
             if (null === $parent) {
                 throw new \InvalidArgumentException(
-                    sprintf('Taxon with permalink "%s" was not found.', $data['parent'])
+                    sprintf('Taxon with slug "%s" was not found.', $data['parent'])
                 );
             }
 
@@ -50,9 +51,19 @@ class TaxonContext extends DefaultContext
             $taxon->setPublic(isset($data['public']) ? (bool)$data['public'] : true);
 
             $parent->addChild($taxon);
+            $taxon->setSlug($this->getTaxonSlugGenerator()->generate($taxon->getName(), $parent->getId()));
+
             $manager->persist($taxon);
             $manager->flush();
         }
+    }
+
+    /**
+     * @return TaxonSlugGeneratorInterface|object
+     */
+    protected function getTaxonSlugGenerator()
+    {
+        return $this->getContainer()->get('sylius.generator.taxon_slug');
     }
 
     /**
@@ -72,6 +83,7 @@ class TaxonContext extends DefaultContext
             $taxon = $this->getFactory('taxon')->createNew();
             $taxon->setCode(isset($data['code']) ? $data['code'] : $this->faker->unique()->text(5));
             $taxon->setName(isset($data['name']) ? $data['name'] : $this->faker->name);
+            $taxon->setSlug($this->getTaxonSlugGenerator()->generate($taxon->getName()));
 
             $manager->persist($taxon);
             $manager->flush();

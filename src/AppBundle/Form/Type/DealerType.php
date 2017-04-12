@@ -16,7 +16,7 @@ use AppBundle\Entity\PubBanner;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManager;
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -27,7 +27,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class DealerType extends AbstractResourceType
+class DealerType extends AbstractType
 {
     /**
      * @var Collection|PubBanner[]
@@ -111,18 +111,6 @@ class DealerType extends AbstractResourceType
     public function setManager($manager)
     {
         $this->manager = $manager;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults([
-            'data_class' => $this->dataClass,
-            'validation_groups' => $this->validationGroups,
-            'cascade_validation' => true,
-        ]);
     }
 
     /**

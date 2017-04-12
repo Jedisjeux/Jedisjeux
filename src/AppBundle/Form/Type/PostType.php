@@ -11,6 +11,7 @@
 
 namespace AppBundle\Form\Type;
 
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -28,7 +29,7 @@ class PostType extends AbstractType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('body', 'ckeditor', array(
+            ->add('body', CKEditorType::class, array(
                 'label' => 'label.body',
             ));
     }

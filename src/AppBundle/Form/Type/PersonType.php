@@ -13,7 +13,7 @@ namespace AppBundle\Form\Type;
 
 use AppBundle\Entity\Taxon;
 use Doctrine\ORM\EntityRepository;
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class PersonType extends AbstractResourceType
+class PersonType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -73,18 +73,6 @@ class PersonType extends AbstractResourceType
             ])
 
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults([
-            'data_class' => $this->dataClass,
-            'validation_groups' => $this->validationGroups,
-            'cascade_validation' => true,
-        ]);
     }
 
     /**

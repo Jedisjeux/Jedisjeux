@@ -3,7 +3,7 @@ sylius_product:
         product:
             classes:
                 model: AppBundle\Entity\Product
-                factory: AppBundle\Factory\ProductFactory
+                #factory: AppBundle\Factory\ProductFactory
                 repository: AppBundle\Repository\ProductRepository
                 controller: AppBundle\Controller\ProductController
                 form: AppBundle\Form\Type\ProductType
@@ -13,10 +13,9 @@ sylius_product:
         product_variant:
             classes:
                 model: AppBundle\Entity\ProductVariant
-                factory: Sylius\Component\Product\Factory\ProductVariantFactory
-                repository: AppBundle\Repository\ProductVariantRepository
+                #factory: Sylius\Component\Product\Factory\ProductVariantFactory
                 controller: AppBundle\Controller\ProductVariantController
                 form: AppBundle\Form\Type\ProductVariantType
-            translation:
-                classes:
-                    model: AppBundle\Entity\ProductVariantTranslation
+#            translation:
+#                classes:
+#                    model: AppBundle\Entity\ProductVariantTranslation

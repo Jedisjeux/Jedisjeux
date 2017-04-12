@@ -13,6 +13,7 @@ namespace AppBundle\DependencyInjection\Compiler;
 
 use AppBundle\Doctrine\ORM\Driver;
 use AppBundle\EventListener\PasswordUpdaterListener;
+use AppBundle\EventListener\RequestLocaleSetter;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Parameter;
@@ -35,8 +36,8 @@ class ServicesPass implements CompilerPassInterface
 
         $container->setAlias('sylius.context.customer', 'app.context.customer');
 
-        $dataProviderDefinition = $container->getDefinition('sylius.grid_driver.doctrine.orm');
-        $dataProviderDefinition->setClass(Driver::class);
+        $requestLocaleSetterDefinition = $container->getDefinition('sylius.listener.request_locale_setter');
+        $requestLocaleSetterDefinition->setClass(RequestLocaleSetter::class);
     }
 
     /**
@@ -63,10 +64,6 @@ class ServicesPass implements CompilerPassInterface
         $gamePlayFactoryDefinition
             ->addMethodCall('setProductRepository', [new Reference('sylius.repository.product')])
             ->addMethodCall('setCustomerContext', [new Reference('app.context.customer')]);
-
-        $articleContentFactoryDefinition = $container->getDefinition('app.factory.article_content');
-        $articleContentFactoryDefinition
-            ->addMethodCall('setDocumentManager', [new Reference('app.manager.article_content')]);
 
         $articleFactoryDefinition = $container->getDefinition('app.factory.article');
         $articleFactoryDefinition

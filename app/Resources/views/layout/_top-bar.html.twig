@@ -30,7 +30,7 @@
         <!-- user starts -->
         <div class="tb-language dropdown pull-right">
             {% if app.user %}
-                {% set user = app.security.getToken().getUser() %}
+                {% set user = app.user %}
 
                 <a href="#" data-toggle="dropdown"><img src="{{ avatar(user) | imagine_filter('thumbnail') }} " class="avatar img-round" /> {{ user }} <i
                             class="fa fa-angle-down color"></i></a>

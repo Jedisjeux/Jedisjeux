@@ -13,7 +13,7 @@ namespace AppBundle\Form\Type;
 
 use AppBundle\Entity\Block;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class BlockType extends AbstractResourceType
+class BlockType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -63,18 +63,6 @@ class BlockType extends AbstractResourceType
                 'label' => 'sylius.ui.body',
                 'required' => false,
             ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults([
-            'data_class' => $this->dataClass,
-            'validation_groups' => $this->validationGroups,
-            'cascade_validation' => true,
-        ]);
     }
 
     /**

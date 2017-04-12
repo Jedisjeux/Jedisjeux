@@ -17,13 +17,6 @@ sylius_resource:
         app.article_review:
             classes:
                 model: AppBundle\Entity\ArticleReview
-        app.article_content:
-            driver: doctrine/phpcr-odm
-            classes:
-                model: AppBundle\Document\ArticleContent
-                factory: AppBundle\Factory\ArticleContentFactory
-                repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
-                form: AppBundle\Form\Type\ArticleContentType
         app.avatar:
             classes:
                 model: AppBundle\Entity\Avatar
@@ -36,13 +29,6 @@ sylius_resource:
             classes:
                 model: AppBundle\Entity\BlockImage
                 form: AppBundle\Form\Type\BlockImageType
-        app.blockquote_block:
-            driver: doctrine/phpcr-odm
-            classes:
-                model: AppBundle\Document\BlockquoteBlock
-                factory: AppBundle\Factory\BlockquoteFactory
-                repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
-                form: AppBundle\Form\Type\BlockquoteBlockType
         app.contact_request:
             classes:
                 model: AppBundle\Entity\ContactRequest
@@ -62,19 +48,6 @@ sylius_resource:
             classes:
                 model: AppBundle\Entity\DealerPrice
                 repository: AppBundle\Repository\DealerPriceRepository
-#        app.imagine_block:
-#            driver: doctrine/phpcr-odm
-#            classes:
-#                model: AppBundle\Document\ImagineBlock
-#                repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
-#                form: AppBundle\Form\Type\ImagineBlockType
-        app.left_image_block:
-            driver: doctrine/phpcr-odm
-            classes:
-                model: AppBundle\Document\LeftImageBlock
-                factory: AppBundle\Factory\SingleImageBlockFactory
-                repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
-                form: AppBundle\Form\Type\SingleImageBlock\LeftImageBlockType
         app.not_found_page:
             classes:
                 model: AppBundle\Entity\NotFound
@@ -112,20 +85,6 @@ sylius_resource:
             classes:
                 model: AppBundle\Entity\Redirection
                 form: AppBundle\Form\Type\RedirectionType
-        app.right_image_block:
-            driver: doctrine/phpcr-odm
-            classes:
-                model: AppBundle\Document\RightImageBlock
-                factory: AppBundle\Factory\SingleImageBlockFactory
-                repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
-                form: AppBundle\Form\Type\SingleImageBlock\RightImageBlockType
-        app.single_image_block:
-            driver: doctrine/phpcr-odm
-            classes:
-                model: AppBundle\Document\SingleImageBlock
-                factory: AppBundle\Factory\SingleImageBlockFactory
-                repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
-                form: AppBundle\Form\Type\SingleImageBlockType
         app.slide_show_block:
             classes:
                 model: AppBundle\Entity\SlideShowBlock
@@ -136,13 +95,6 @@ sylius_resource:
                 factory: AppBundle\Factory\StringBlockFactory
                 repository: AppBundle\Repository\StringBlockRepository
                 form: AppBundle\Form\Type\StringBlockType
-        app.top_image_block:
-            driver: doctrine/phpcr-odm
-            classes:
-                model: AppBundle\Document\TopImageBlock
-                factory: AppBundle\Factory\SingleImageBlockFactory
-                repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
-                form: AppBundle\Form\Type\SingleImageBlock\TopImageBlockType
         app.game_play:
             classes:
                 model: AppBundle\Entity\GamePlay
@@ -184,10 +136,3 @@ sylius_resource:
             classes:
                 model: AppBundle\Entity\ProductVariantImage
                 form: AppBundle\Form\Type\ProductVariantImageType
-        app.well_image_block:
-            driver: doctrine/phpcr-odm
-            classes:
-                model: AppBundle\Document\WellImageBlock
-                factory: AppBundle\Factory\SingleImageBlockFactory
-                repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
-                form: AppBundle\Form\Type\SingleImageBlock\WellImageBlockType
