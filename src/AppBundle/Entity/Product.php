@@ -288,7 +288,7 @@ class Product extends BaseProduct implements ReviewableInterface
      */
     public function getShortDescription()
     {
-        return $this->translate()->getShortDescription();
+        return $this->getTranslation()->getShortDescription();
     }
 
     /**
@@ -298,7 +298,7 @@ class Product extends BaseProduct implements ReviewableInterface
      */
     public function setShortDescription($shortDescription)
     {
-        $this->translate()->setShortDescription($shortDescription);
+        $this->getTranslation()->setShortDescription($shortDescription);
 
         return $this;
     }
@@ -905,5 +905,13 @@ class Product extends BaseProduct implements ReviewableInterface
     public function __toString()
     {
         return $this->getName();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function createTranslation()
+    {
+        return new ProductTranslation();
     }
 }

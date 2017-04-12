@@ -85,18 +85,6 @@ class Taxon extends BaseTaxon
     protected $productCount;
 
     /**
-     * {@inheritdoc}
-     */
-    public function setParent(TaxonInterface $parent = null)
-    {
-        if ($parent !== $this->parent) {
-            $this->setPermalink(null);
-        }
-
-        parent::setParent($parent);
-    }
-
-    /**
      * Taxon constructor.
      */
     public function __construct()
@@ -106,18 +94,6 @@ class Taxon extends BaseTaxon
         $this->topicCount = 0;
         $this->productCount = 0;
         $this->public = true;
-    }
-
-    /**
-     * @return string
-     *
-     * @JMS\VirtualProperty
-     * @JMS\SerializedName("permalink")
-     * @JMS\Groups({"Detailed"})
-     */
-    public function getPermalink()
-    {
-        return parent::getPermalink();
     }
 
     /**

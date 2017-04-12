@@ -1,23 +1,25 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: loic
- * Date: 04/03/2016
- * Time: 13:34
+
+/*
+ * This file is part of Jedisjeux project.
+ *
+ * (c) Jedisjeux
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AppBundle\Command\Installer\Data;
 
 use AppBundle\Entity\Product;
 use AppBundle\Entity\ProductVariant;
-use AppBundle\Entity\Taxon;
 use AppBundle\Repository\TaxonRepository;
 use AppBundle\TextFilter\Bbcode2Html;
-use AppBundle\Updater\ProductCountByTaxonUpdater;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
-use Sylius\Component\Association\Model\AssociationType;
 use Sylius\Component\Product\Factory\ProductFactory;
+use Sylius\Component\Product\Generator\SlugGeneratorInterface;
+use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -29,7 +31,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class LoadProductsCommand extends ContainerAwareCommand
 {
-    const BATCH_SIZE = 20;
+    const BATCH_SIZE = 1;
 
     /**
      * @inheritdoc
@@ -94,7 +96,7 @@ class LoadProductsCommand extends ContainerAwareCommand
 
     protected function createOrReplaceAssociationTypeCollection()
     {
-        /** @var AssociationType $assocationType */
+        /** @var ProductAssociationTypeInterface $assocationType */
         $assocationType = $this->getContainer()->get('sylius.repository.product_association_type')->findOneBy(['code' => 'collection']);
 
         if (null === $assocationType) {
@@ -111,11 +113,11 @@ class LoadProductsCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return AssociationType
+     * @return ProductAssociationTypeInterface
      */
     protected function createOrReplaceAssociationTypeExpansion()
     {
-        /** @var AssociationType $associationType */
+        /** @var ProductAssociationTypeInterface $associationType */
         $associationType = $this->getContainer()->get('sylius.repository.product_association_type')->findOneBy(['code' => 'expansion']);
 
         if (null === $associationType) {
@@ -221,7 +223,58 @@ class LoadProductsCommand extends ContainerAwareCommand
         $product->getFirstVariant()->setCode($data['code']);
         $product->getFirstVariant()->setName($data['name']);
 
+        $this->generateSlugForProduct($product);
+
         return $product;
+    }
+
+    /**
+     * @param Product $product
+     */
+    protected function generateSlugForProduct(Product $product)
+    {
+        $product->setSlug($this->getProductSlugGenerator()->generate($product->getName()));
+
+        while ($this->isSlugAlreadyUsedForAnotherProduct($product)) {
+            $slug = $product->getSlug();
+
+            $matches = null;
+
+            if (preg_match('/^(.*?)-(?P<number>\d+)$/', $slug, $matches)) {
+                $number = $matches['number'];
+                $number++;
+
+                $slug = preg_replace('/^(.*?)-(\d+)$/', "$1-$number", $slug);
+                $product->setSlug($slug);
+            } else {
+                $product->setSlug(sprintf('%s-1', $slug));
+            }
+        }
+    }
+
+    /**
+     * @param Product $product
+     *
+     * @return bool
+     */
+    protected function isSlugAlreadyUsedForAnotherProduct(Product $product)
+    {
+        /** @var Product $otherProduct */
+        $otherProduct = $this->getRepository()->findOneBySlug($product->getSlug());
+
+        if (null === $otherProduct) {
+            return false;
+        }
+
+        return $otherProduct->getCode() !== $product->getCode();
+    }
+
+    /**
+     * @return SlugGeneratorInterface|object
+     */
+    protected function getProductSlugGenerator()
+    {
+        return $this->getContainer()->get('sylius.generator.slug');
     }
 
     /**
@@ -256,11 +309,11 @@ class LoadProductsCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param AssociationType $associationType
+     * @param ProductAssociationTypeInterface $associationType
      *
      * @throws \Doctrine\DBAL\DBALException
      */
-    protected function insertProductsOfCollections(AssociationType $associationType)
+    protected function insertProductsOfCollections(ProductAssociationTypeInterface $associationType)
     {
         $query = <<<EOM
 insert into sylius_product_association(product_id, association_type_id, created_at)
@@ -285,7 +338,7 @@ EOM;
 insert into sylius_product_association_product(association_id, product_id)
 select association.id, associated.id
 from sylius_product_association association
-inner join sylius_association_type associationType
+inner join sylius_product_association_type associationType
   on associationType.id = association.association_type_id
 inner join sylius_product product
   on product.id = association.product_id
@@ -305,11 +358,11 @@ EOM;
     }
 
     /**
-     * @param AssociationType $assocationType
+     * @param ProductAssociationTypeInterface $assocationType
      *
      * @throws \Doctrine\DBAL\DBALException
      */
-    protected function insertProductsOfExpansions(AssociationType $assocationType)
+    protected function insertProductsOfExpansions(ProductAssociationTypeInterface $assocationType)
     {
         $query = <<<EOM
 insert into sylius_product_association(product_id, association_type_id, created_at)

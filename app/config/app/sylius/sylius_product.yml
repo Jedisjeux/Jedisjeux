@@ -17,6 +17,3 @@ sylius_product:
                 repository: AppBundle\Repository\ProductVariantRepository
                 controller: AppBundle\Controller\ProductVariantController
                 form: AppBundle\Form\Type\ProductVariantType
-        product_association_type:
-            classes:
-                repository: Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductAssociationTypeRepository

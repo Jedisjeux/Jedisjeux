@@ -2,11 +2,11 @@
 /web/behat/*
 /app/bootstrap.php.cache
 
-/app/cache/*
-!app/logs/.gitkeep
+/var/cache/*
+!var/logs/.gitkeep
 
-/app/logs/*
-!app/cache/.gitkeep
+/var/logs/*
+!var/cache/.gitkeep
 
 /app/config/parameters.yml
 /app/config/*.local.yml
