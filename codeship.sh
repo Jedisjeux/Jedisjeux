@@ -24,6 +24,6 @@ sed -i "s/fos_elastica\.host.*/fos_elastica\.host: 127.0.0.1/" app/config/parame
 sed -i'' 's/^memory_limit=.*/memory_limit = -1/g' ${HOME}/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
 # database creation
-php app/console doctrine:migrations:migrate --env=test -n
-php app/console cache:clear --no-warmup --env=test
-php app/console doctrine:phpcr:repository:init --env=test
+php bin/console doctrine:migrations:migrate --env=test -n
+php bin/console cache:clear --no-warmup --env=test
+php bin/console doctrine:phpcr:repository:init --env=test
