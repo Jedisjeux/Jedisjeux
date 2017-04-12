@@ -226,7 +226,8 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $name
+     * @param bool $updateVariant
      */
     public function setName($name, $updateVariant = true)
     {
@@ -237,6 +238,22 @@ class Product extends BaseProduct implements ReviewableInterface
 
         if ($firstVariant and $updateVariant) {
             $firstVariant->setName($name);
+        }
+    }
+
+    /**
+     * @param null|string $slug
+     * @param bool $updateVariant
+     */
+    public function setSlug($slug = null, $updateVariant = true)
+    {
+        parent::setSlug($slug);
+
+        /** @var ProductVariant $firstVariant */
+        $firstVariant = $this->getFirstVariant();
+
+        if ($firstVariant and $updateVariant) {
+            $firstVariant->setSlug($slug);
         }
     }
 

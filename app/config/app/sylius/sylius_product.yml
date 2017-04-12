@@ -17,3 +17,6 @@ sylius_product:
                 repository: AppBundle\Repository\ProductVariantRepository
                 controller: AppBundle\Controller\ProductVariantController
                 form: AppBundle\Form\Type\ProductVariantType
+            translation:
+                classes:
+                    model: AppBundle\Entity\ProductVariantTranslation

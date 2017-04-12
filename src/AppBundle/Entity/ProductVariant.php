@@ -29,14 +29,6 @@ class ProductVariant extends BaseProductVariant
     const RELEASED_AT_PRECISION_ON_YEAR = 'on-year';
 
     /**
-     * @var string
-     *
-     * @Gedmo\Slug(fields={"name"}, separator="-", unique=true)
-     * @ORM\Column(type="string")
-     */
-    private $slug;
-
-    /**
      * @var ArrayCollection|ProductVariantImage[]
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\ProductVariantImage", mappedBy="variant", cascade={"persist", "merge"})
@@ -71,14 +63,6 @@ class ProductVariant extends BaseProductVariant
     protected $oldHref;
 
     /**
-     * @var integer
-     *
-     * @Gedmo\SortablePosition
-     * @ORM\Column(name="position", type="integer")
-     */
-    private $position;
-
-    /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Person", inversedBy="designerProducts", cascade={"persist", "merge"})
@@ -89,13 +73,6 @@ class ProductVariant extends BaseProductVariant
      * )
      */
     protected $designers;
-
-    /**
-     * {@inheritdoc}
-     *
-     * @Gedmo\SortableGroup
-     */
-    protected $product;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -149,26 +126,6 @@ class ProductVariant extends BaseProductVariant
     public function setCode($code)
     {
         $this->code = $code;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
 
         return $this;
     }
