@@ -14,6 +14,7 @@ namespace AppBundle\Form\Type;
 use AppBundle\Entity\ProductVariant;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType as BaseProductVariantType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -23,7 +24,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class ProductVariantType extends BaseProductVariantType
+class ProductVariantType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -56,7 +57,7 @@ class ProductVariantType extends BaseProductVariantType
             ])
             ->add('images', CollectionType::class, array(
                 'label' => false,
-                'type' => 'app_product_variant_image',
+                'entry_type' => ProductVariantImageType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
@@ -83,6 +84,11 @@ class ProductVariantType extends BaseProductVariantType
                 'multiple' => true,
             ))
             ->remove('presentation');
+    }
+
+    public function getParent()
+    {
+        return BaseProductVariantType::class;
     }
 
     /**

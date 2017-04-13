@@ -11,8 +11,12 @@
 
 namespace AppBundle\Form\Type;
 
+use AppBundle\Entity\Product;
 use AppBundle\Entity\Taxon;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonAutocompleteChoiceType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,7 +25,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class ProductType extends AbstractResourceType
+class ProductType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -35,33 +39,33 @@ class ProductType extends AbstractResourceType
                 'required' => true,
                 'label' => 'label.name',
             ))
-            ->add('firstVariant', 'sylius_product_variant', [])
-            ->add('mainTaxon', 'sylius_taxon_choice', array(
+            ->add('firstVariant', ProductVariantType::class, [])
+            ->add('mainTaxon', TaxonAutocompleteChoiceType::class, array(
                 'label' => 'label.target_audience',
                 'placeholder' => 'label.choose_target_audience',
-                'root' => Taxon::CODE_TARGET_AUDIENCE,
+                //'root' => Taxon::CODE_TARGET_AUDIENCE,
                 'multiple' => false,
                 'required' => false,
             ))
-            ->add('mechanisms', 'sylius_taxon_choice', array(
+            ->add('mechanisms', TaxonAutocompleteChoiceType::class, array(
                 'label' => 'label.mechanisms',
                 'placeholder' => 'label.choose_mechanisms',
-                'root' => Taxon::CODE_MECHANISM,
+                //'root' => Taxon::CODE_MECHANISM,
                 'multiple' => true,
                 'required' => false,
             ))
-            ->add('themes', 'sylius_taxon_choice', array(
+            ->add('themes', TaxonAutocompleteChoiceType::class, array(
                 'label' => 'label.themes',
                 'placeholder' => 'label.choose_themes',
-                'root' => Taxon::CODE_THEME,
+                //'root' => Taxon::CODE_THEME,
                 'multiple' => true,
                 'required' => false,
             ))
-            ->add('shortDescription', 'ckeditor', array(
+            ->add('shortDescription', CKEditorType::class, array(
                 'required' => false,
                 'label' => 'label.short_description',
             ))
-            ->add('description', 'ckeditor', [
+            ->add('description', CKEditorType::class, [
                 'required' => false,
                 'label' => 'label.description',
             ])
@@ -86,18 +90,11 @@ class ProductType extends AbstractResourceType
             ))
             ->add('barcodes', CollectionType::class, array(
                 'label' => 'label.barcodes',
-                'type' => 'app_product_barcode',
+                'entry_type' => ProductBarcodeType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
                 'prototype' => true,
-                'widget_add_btn' => array('label' => "label.add_barcode"),
-                'show_legend' => false, // dont show another legend of subform
-                'options' => array( // options for collection fields
-                    'label_render' => false,
-                    'horizontal_input_wrapper_class' => "col-lg-8",
-                    'widget_remove_btn' => array('label' => "label.remove_this_barcode"),
-                )
             ))
             ->add('associations', ProductAssociationsType::class, [
                 'label' => false,
@@ -110,8 +107,7 @@ class ProductType extends AbstractResourceType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => $this->dataClass,
-            'validation_groups' => $this->validationGroups,
+            'data_class' => Product::class,
             'cascade_validation' => true,
         ]);
     }

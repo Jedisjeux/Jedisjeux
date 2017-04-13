@@ -14,6 +14,7 @@ use Behat\Gherkin\Node\TableNode;
 use Sylius\Component\Attribute\AttributeType\CheckboxAttributeType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
+use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
@@ -51,6 +52,7 @@ class ProductContext extends DefaultContext
             $product = $this->getFactory('product')->createWithVariant();
             $product->setCode($this->faker->unique()->postcode);
             $product->setName(isset($data['name']) ? $data['name'] : $this->faker->name);
+            $product->setSlug($this->getProductSlugGenerator()->generate($product->getName()));
             $product->setDescription(isset($data['description']) ? $data['description'] : $this->faker->realText());
             $product->setMainTaxon($mainTaxon);
             $product->setStatus(isset($data['status']) ? $data['status'] : Product::PUBLISHED);
@@ -59,6 +61,14 @@ class ProductContext extends DefaultContext
         }
 
         $manager->flush();
+    }
+
+    /**
+     * @return SlugGeneratorInterface|object
+     */
+    protected function getProductSlugGenerator()
+    {
+        return $this->getContainer()->get('sylius.generator.slug');
     }
 
     /**
