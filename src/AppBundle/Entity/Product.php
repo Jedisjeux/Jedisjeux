@@ -890,18 +890,6 @@ class Product extends BaseProduct implements ReviewableInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @JMS\VirtualProperty
-     * @JMS\SerializedName("createdAt")
-     * @JMS\Groups({"Detailed"})
-     */
-    public function getCreatedAt()
-    {
-        return parent::getCreatedAt();
-    }
-
-    /**
-     * {@inheritdoc}
      */
     public function __toString()
     {

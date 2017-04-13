@@ -1,6 +1,6 @@
 AppBundle\Entity\ProductTranslation:
     productTranslation1:
-        locale: 'fr'
+        locale: 'fr_FR'
         name: 'Puerto Rico'
         slug: 'puerto-rico'
         shortDescription: <paragraph(2)>
@@ -14,7 +14,7 @@ AppBundle\Entity\ProductVariant:
 
 AppBundle\Entity\Product:
     product1:
-        currentLocale: 'fr'
+        currentLocale: 'fr_FR'
         code: 'product_1'
         joueurMin: 2
         joueurMax: 5
