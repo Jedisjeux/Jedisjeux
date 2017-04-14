@@ -12,6 +12,7 @@
 namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -50,29 +51,29 @@ class GamePlayType extends AbstractType
                 'label' => 'label.player_count',
                 'required' => false,
             ])
-            ->add('images', 'collection', [
-                'type' => 'app_game_play_image',
+            ->add('images', CollectionType::class, [
+                'entry_type' => GamePlayImageType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
                 'prototype' => true,
                 'widget_add_btn' => ['label' => "label.add_image"],
                 'show_legend' => false, // dont show another legend of subform
-                'options' => [ // options for collection fields
+                'entry_options' => [ // options for collection fields
                     'label_render' => false,
                     'horizontal_input_wrapper_class' => "col-lg-8",
                     'widget_remove_btn' => ['label' => "label.remove_this_image"],
                 ]
             ])
-            ->add('players', 'collection', [
-                'type' => 'app_player',
+            ->add('players', CollectionType::class, [
+                'entry_type' => PlayerType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
                 'prototype' => true,
                 'widget_add_btn' => ['label' => "label.add_player"],
                 'show_legend' => false, // dont show another legend of subform
-                'options' => [ // options for collection fields
+                'entry_options' => [ // options for collection fields
                     'label_render' => false,
                     'horizontal_input_wrapper_class' => "col-lg-8",
                     'widget_remove_btn' => ['label' => "label.remove_this_player"],

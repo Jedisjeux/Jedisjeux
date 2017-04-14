@@ -14,6 +14,7 @@ Feature: View list of static contents
       | Nouveau logements quartier Mont-Gaillard |
     And I am logged in as user "admin@example.com" with password "password"
 
+  @todo
   Scenario: View list of static contents
     When I am on "/admin/static-contents/"
     Then I should see "Nouveau logements quartier Mont-Gaillard"

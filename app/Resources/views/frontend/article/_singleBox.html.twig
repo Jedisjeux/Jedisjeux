@@ -17,7 +17,7 @@
     </div>
     <div class="img-box-4-content">
         {% if icon %}
-            <a href="{{ path('app_frontend_article_index_by_taxon', {'permalink': article.mainTaxon.permalink} ) }}">
+            <a href="{{ path('app_frontend_article_index_by_taxon', {'slug': article.mainTaxon.slug} ) }}">
                 <i class="{{ icon }} bg-{{ color|default('color') }}"></i>
             </a>
         {% endif %}

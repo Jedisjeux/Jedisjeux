@@ -40,7 +40,7 @@
                     <div class="tab-pane fade in active" id="popular">
                         {% if taxon is defined %}
                             {{ render(url('sylius_partial_product_index_by_taxon', {
-                                'permalink': taxon.permalink,
+                                'slug': taxon.slug,
                                 'sorting': {
                                     'averageRating': 'desc'
                                 },
@@ -62,7 +62,7 @@
                     <div class="tab-pane fade" id="recent">
                         {% if taxon is defined %}
                             {{ render(url('sylius_partial_product_index_by_taxon', {
-                                'permalink': taxon.permalink,
+                                'slug': taxon.slug,
                                 'sorting': {
                                     'createdAt': 'desc'
                                 },

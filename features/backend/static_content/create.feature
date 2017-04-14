@@ -11,7 +11,7 @@ Feature: Create new static content
     And init doctrine phpcr repository
     And I am logged in as user "admin@example.com" with password "password"
 
-  @javascript
+  @javascript @todo
   Scenario: Create new static content
     Given I am on "/admin/static-contents/"
     And I follow "Créer"

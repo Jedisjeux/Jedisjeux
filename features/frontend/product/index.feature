@@ -17,10 +17,10 @@ Feature: View list of products
       | Palazzo   |
       | Louis XIV |
     And product "Palazzo" has following taxons:
-      | permalink           |
+      | slug                |
       | mecanismes/encheres |
     And product "Louis XIV" has following taxons:
-      | permalink           |
+      | slug                |
       | mecanismes/majorite |
 
   Scenario: View list of products

@@ -17,7 +17,7 @@
     {% if taxon is defined %}
         {% if taxon.parent and not taxon.parent.isRoot %}
             / <a
-                href="{{ path('app_frontend_person_index_by_taxon', {'permalink': taxon.parent.permalink}) }}">{{ taxon.parent }}</a>
+                href="{{ path('app_frontend_person_index_by_taxon', {'slug': taxon.parent.slug}) }}">{{ taxon.parent }}</a>
         {% endif %}
         / {{ taxon }}
     {% endif %}
