@@ -13,6 +13,8 @@ namespace AppBundle\Form\Type;
 
 use AppBundle\Entity\Taxon;
 use Doctrine\ORM\EntityRepository;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -37,7 +39,7 @@ class PersonType extends AbstractType
                 'label' => 'label.first_name',
                 'required' => false,
             ])
-            ->add('zone', 'entity', array(
+            ->add('zone', EntityType::class, array(
                 'label' => 'label.zone',
                 'class' => 'AppBundle:Taxon',
                 'group_by' => 'parent',
@@ -59,12 +61,12 @@ class PersonType extends AbstractType
                 'label' => 'label.website',
                 'required' => false,
             ])
-            ->add('description', 'ckeditor', [
+            ->add('description', CKEditorType::class, [
                 'label' => 'label.description',
                 'required' => false,
             ])
             ->add('images', CollectionType::class, [
-                'type' => PersonImageType::class,
+                'entry_type' => PersonImageType::class,
                 'label' => 'sylius.ui.images',
                 'allow_add' => true,
                 'allow_delete' => true,
