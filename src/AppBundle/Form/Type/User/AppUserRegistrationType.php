@@ -12,13 +12,15 @@
 namespace AppBundle\Form\Type\User;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class UserRegistrationType extends AbstractResourceType
+class AppUserRegistrationType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
@@ -29,8 +31,8 @@ class UserRegistrationType extends AbstractResourceType
             ->add('username', TextType::class, [
                 'label' => 'label.username',
             ])
-            ->add('plainPassword', 'repeated', [
-                'type' => 'password',
+            ->add('plainPassword', RepeatedType::class, [
+                'type' => PasswordType::class,
                 'first_options' => ['label' => 'sylius.form.user.password.label'],
                 'second_options' => ['label' => 'sylius.form.user.password.confirmation'],
                 'invalid_message' => 'sylius.user.plainPassword.mismatch',
@@ -43,6 +45,6 @@ class UserRegistrationType extends AbstractResourceType
      */
     public function getName()
     {
-        return 'sylius_shop_user_registration';
+        return 'sylius_app_user_registration';
     }
 }

@@ -57,3 +57,4 @@ sylius:
                 success: Votre mot de passe a été mis à jour avec succès !
     customer:
         update_profile: Votre profil a bien été mis à jour.
+        register: 'Merci pour votre inscription, vous allez recevoir un mail pour vérifier votre compte.'
