@@ -131,26 +131,6 @@ class ProductVariant extends BaseProductVariant
     }
 
     /**
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * @param string $slug
-     *
-     * @return $this
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
      * @return ProductVariantImage
      */
     public function getMainImage()
@@ -400,8 +380,8 @@ class ProductVariant extends BaseProductVariant
      */
     public function __toString()
     {
-        return $this->getName();
+        $name = $this->getTranslation()->getName();
+
+        return !empty($name) ? $name : "";
     }
-
-
 }

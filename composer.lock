@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0d992fe6d195bae664547be86cbb6a7f",
+    "content-hash": "03573fc039f203dacaf3d5db2ef3c534",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -5971,6 +5971,81 @@
                 "swiftmailer"
             ],
             "time": "2017-04-11T12:46:23+00:00"
+        },
+        {
+            "name": "sylius/money-bundle",
+            "version": "v1.0.0-beta.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sylius/SyliusMoneyBundle.git",
+                "reference": "c29dd99e3d665550f8945829e3922c703d21e2bb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Sylius/SyliusMoneyBundle/zipball/c29dd99e3d665550f8945829e3922c703d21e2bb",
+                "reference": "c29dd99e3d665550f8945829e3922c703d21e2bb",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6|^7.0",
+                "sylius/resource-bundle": "^1.0",
+                "symfony/framework-bundle": "^3.2",
+                "symfony/intl": "^3.2",
+                "symfony/templating": "^3.2",
+                "webmozart/assert": "^1.0"
+            },
+            "require-dev": {
+                "doctrine/orm": "^2.5",
+                "incenteev/composer-parameter-handler": "~2.0",
+                "phpspec/phpspec": "^3.2",
+                "phpunit/phpunit": "^5.6",
+                "polishsymfonycommunity/symfony-mocker-container": "^1.0",
+                "sylius/currency-bundle": "^1.0",
+                "symfony/browser-kit": "^3.2",
+                "symfony/form": "^3.2",
+                "twig/twig": "^1.28"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                },
+                "incenteev-parameters": {
+                    "file": "test/app/config/parameters.yml"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sylius\\Bundle\\MoneyBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sylius project",
+                    "homepage": "http://sylius.org"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "http://github.com/Sylius/Sylius/contributors"
+                },
+                {
+                    "name": "Paweł Jędrzejewski",
+                    "homepage": "http://pjedrzejewski.com"
+                }
+            ],
+            "description": "Currencies and money formatting engine bundle for Symfony2.",
+            "homepage": "http://sylius.org",
+            "keywords": [
+                "cash",
+                "currencies",
+                "currency",
+                "money"
+            ],
+            "time": "2017-02-20T12:41:15+00:00"
         },
         {
             "name": "sylius/product",

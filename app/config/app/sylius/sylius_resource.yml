@@ -48,6 +48,7 @@ sylius_resource:
             classes:
                 model: AppBundle\Entity\DealerPrice
                 repository: AppBundle\Repository\DealerPriceRepository
+                form: AppBundle\Form\Type\DealerPriceType
         app.not_found_page:
             classes:
                 model: AppBundle\Entity\NotFound

@@ -32,6 +32,7 @@ class AppKernel extends Kernel
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new Sylius\Bundle\AttributeBundle\SyliusAttributeBundle(),
             new Sylius\Bundle\TaxonomyBundle\SyliusTaxonomyBundle(),
+            new Sylius\Bundle\MoneyBundle\SyliusMoneyBundle(),
             new winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
 
             new Sonata\BlockBundle\SonataBlockBundle(),
