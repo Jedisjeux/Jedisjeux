@@ -11,10 +11,12 @@
 
 namespace AppBundle\Form\Type;
 
+use AppBundle\Entity\GamePlay;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -79,6 +81,16 @@ class GamePlayType extends AbstractType
                     'widget_remove_btn' => ['label' => "label.remove_this_player"],
                 ]
             ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => GamePlay::class,
+        ));
     }
 
     /**

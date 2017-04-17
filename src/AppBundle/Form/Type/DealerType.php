@@ -116,6 +116,16 @@ class DealerType extends AbstractType
     /**
      * {@inheritdoc}
      */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => Dealer::class,
+        ));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'app_dealer';
