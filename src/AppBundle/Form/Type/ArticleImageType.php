@@ -11,11 +11,26 @@
 
 namespace AppBundle\Form\Type;
 
+use AppBundle\Entity\ArticleImage;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
 class ArticleImageType extends AbstractImageType
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        parent::configureOptions($resolver);
+
+        $resolver->setDefaults(array(
+            'data_class' => ArticleImage::class,
+        ));
+    }
+
     /**
      * @return string
      */

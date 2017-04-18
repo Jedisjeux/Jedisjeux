@@ -124,7 +124,17 @@ class ArticleType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => Article::class,
+        ));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'app_article';
     }

@@ -86,6 +86,8 @@ class Article implements ResourceInterface, ReviewableInterface
      * @var ArticleImage
      *
      * @ORM\OneToOne(targetEntity="ArticleImage", cascade={"persist", "merge"})
+     *
+     * @Assert\Valid()
      */
     protected $mainImage;
 
@@ -166,6 +168,8 @@ class Article implements ResourceInterface, ReviewableInterface
      * @var Collection|Block[]
      *
      * @ORM\OneToMany(targetEntity="Block", mappedBy="article", cascade={"persist", "merge"})
+     *
+     * @Assert\Valid()
      */
     protected $blocks;
 

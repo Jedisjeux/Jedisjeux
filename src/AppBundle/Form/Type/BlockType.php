@@ -66,6 +66,16 @@ class BlockType extends AbstractType
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => Block::class,
+        ));
+    }
+
+    /**
      * @return string
      */
     public function getBlockPrefix()
