@@ -23,6 +23,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -60,6 +61,7 @@ class DealerType extends AbstractType
             ->add('priceList', PriceListType::class, [
                 'label' => false,
                 'required' => false,
+                'constraints' => [new Valid()],
             ])
             ->add('pubBanners', CollectionType::class, array(
                 'label' => false,
@@ -126,7 +128,7 @@ class DealerType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'app_dealer';
     }
