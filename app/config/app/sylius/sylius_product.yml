@@ -16,6 +16,7 @@ sylius_product:
                 #factory: Sylius\Component\Product\Factory\ProductVariantFactory
                 controller: AppBundle\Controller\ProductVariantController
                 form: AppBundle\Form\Type\ProductVariantType
+                repository: Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductVariantRepository
 #            translation:
 #                classes:
 #                    model: AppBundle\Entity\ProductVariantTranslation

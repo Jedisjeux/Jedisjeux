@@ -11,9 +11,9 @@
 
 namespace AppBundle\DependencyInjection\Compiler;
 
-use AppBundle\Doctrine\ORM\Driver;
 use AppBundle\EventListener\PasswordUpdaterListener;
 use AppBundle\EventListener\RequestLocaleSetter;
+use AppBundle\Factory\ProductFactory;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Parameter;
@@ -64,6 +64,9 @@ class ServicesPass implements CompilerPassInterface
         $gamePlayFactoryDefinition
             ->addMethodCall('setProductRepository', [new Reference('sylius.repository.product')])
             ->addMethodCall('setCustomerContext', [new Reference('app.context.customer')]);
+
+        $productFactoryDefinition = $container->getDefinition('sylius.custom_factory.product');
+        $productFactoryDefinition->setClass(ProductFactory::class);
 
         $articleFactoryDefinition = $container->getDefinition('app.factory.article');
         $articleFactoryDefinition
