@@ -15,6 +15,7 @@ use AppBundle\Entity\Product;
 use AppBundle\Entity\Taxon;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonAutocompleteChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -35,10 +36,6 @@ class ProductType extends AbstractType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('name', null, array(
-                'required' => true,
-                'label' => 'label.name',
-            ))
             ->add('firstVariant', ProductVariantType::class, [])
             ->add('mainTaxon', TaxonAutocompleteChoiceType::class, array(
                 'label' => 'label.target_audience',
@@ -61,13 +58,9 @@ class ProductType extends AbstractType
                 'multiple' => true,
                 'required' => false,
             ))
-            ->add('shortDescription', CKEditorType::class, array(
-                'required' => false,
-                'label' => 'label.short_description',
-            ))
-            ->add('description', CKEditorType::class, [
-                'required' => false,
-                'label' => 'label.description',
+            ->add('translations', ResourceTranslationsType::class, [
+                'entry_type' => ProductTranslationType::class,
+                'label' => 'sylius.form.product.translations',
             ])
             ->add('materiel', TextareaType::class, array(
                 'required' => false,
@@ -115,7 +108,7 @@ class ProductType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_product';
     }
