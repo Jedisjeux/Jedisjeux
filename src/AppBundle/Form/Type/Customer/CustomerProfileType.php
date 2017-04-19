@@ -51,6 +51,7 @@ class CustomerProfileType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
+            'validation_groups' => ['sylius'],
             'data_class' => Customer::class,
         ));
     }

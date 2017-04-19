@@ -11,6 +11,7 @@
 
 namespace AppBundle\Form\Type\Customer;
 
+use AppBundle\Entity\Customer;
 use Sylius\Bundle\CustomerBundle\Form\Type\CustomerType as BaseCustomerType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\AbstractType;
@@ -36,6 +37,17 @@ class CustomerType extends AbstractType
             ->remove('gender')
             ->add('firstName', HiddenType::class)
             ->add('lastName', HiddenType::class);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'validation_groups' => ['sylius'],
+            'data_class' => Customer::class,
+        ));
     }
 
     /**
