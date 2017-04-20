@@ -12,8 +12,10 @@
 namespace AppBundle\Form\Type;
 
 use AppBundle\Entity\Taxon;
+use Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonAutocompleteChoiceType;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
@@ -51,23 +53,6 @@ class TopicType extends AbstractType
             ))
             ->add('mainPost', PostType::class,  array(
                 'label' => false,
-            ))
-            ->add('mainTaxon', TaxonAutocompleteChoiceType::class, array(
-                'label' => 'label.category',
-                //'choice_label' => 'name',
-                //'root' => Taxon::CODE_FORUM,
-//                'filter' => function(Taxon $taxon) use ($onlyPublic) {
-//                    if ($onlyPublic) {
-//                        if (!$taxon->isPublic()) {
-//                            return false;
-//                        }
-//                    }
-//
-//                    return $taxon;
-//                },
-                'multiple' => false,
-                'placeholder' => 'Choisissez une catégorie',
-                'required' => false,
             ));
     }
 

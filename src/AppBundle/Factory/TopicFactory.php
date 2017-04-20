@@ -18,6 +18,7 @@ use AppBundle\Entity\Topic;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -130,6 +131,17 @@ class TopicFactory implements FactoryInterface
         $topic
             ->setTitle($article->getTitle())
             ->setAuthor($article->getAuthor());
+
+        return $topic;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createForTaxon(TaxonInterface $taxon)
+    {
+        $topic = $this->createNew();
+        $topic->setMainTaxon($taxon);
 
         return $topic;
     }
