@@ -53,6 +53,31 @@ class TopicType extends AbstractType
             ))
             ->add('mainPost', PostType::class,  array(
                 'label' => false,
+            ))
+            ->add('mainTaxon', EntityType::class, array(
+                'label' => 'label.category',
+                'class' => 'AppBundle:Taxon',
+                'group_by' => 'parent',
+                'query_builder' => function (EntityRepository $er) use ($onlyPublic) {
+                    $queryBuilder = $er->createQueryBuilder('o')
+                        ->join('o.root', 'rootTaxon')
+                        ->where('rootTaxon.code = :code')
+                        ->andWhere('o.parent IS NOT NULL')
+                        ->setParameter('code', Taxon::CODE_FORUM)
+                        ->orderBy('o.position');
+
+                    if ($onlyPublic) {
+                        $queryBuilder
+                            ->andWhere('o.public = :public')
+                            ->setParameter('public', 1);
+                    }
+
+                    return $queryBuilder;
+                },
+                'expanded' => false,
+                'multiple' => false,
+                'placeholder' => 'Choisissez une catégorie',
+                'required' => false,
             ));
     }
 
