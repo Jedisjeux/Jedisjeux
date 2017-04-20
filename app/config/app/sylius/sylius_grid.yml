@@ -41,6 +41,7 @@ sylius_grid:
             create_product: "backend/product/grid/action/createProduct.html.twig"
             manage_articles: "backend/product/grid/action/manageArticles.html.twig"
             manage_variants: "backend/product/grid/action/manageVariants.html.twig"
+            create_taxon_for_parent: "backend/taxon/grid/action/createForParent.html.twig"
             list_posts: "backend/topic/grid/action/posts.html.twig"
             list_taxons: "backend/taxon/grid/action/taxons.html.twig"
             update_product_variant_positions: "backend/product_variant/grid/action/updatePositions.html.twig"

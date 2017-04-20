@@ -20,9 +20,9 @@ Feature: Creates taxons
     Given I am on "/admin/taxons/"
     And I follow "Créer"
     And I fill in the following:
-      | Code | antique |
-      | Nom  | Antique |
-    And I select "Thèmes" from "Parent"
+      | Code | antique        |
+      | Nom  | Antique        |
+      | Slug | themes/antique |
     When I press "Créer"
     Then I should see "a bien été créée"
 
@@ -31,8 +31,20 @@ Feature: Creates taxons
     And I follow "Voir les sous-catégories"
     And I follow "Créer"
     And I fill in the following:
-      | Code | space-opera |
-      | Nom  | Space-Opéra |
-    And I select "Science-fiction" from "Parent"
+      | Code | space-opera        |
+      | Nom  | Space-Opéra        |
+      | Slug | themes/space-opera |
+    When I press "Créer"
+    Then I should see "a bien été créée"
+
+  @javascript
+  Scenario: Create a taxon with a parent
+    Given I am on "/admin/taxons/"
+    And I follow "Voir les sous-catégories"
+    And I follow "Créer"
+    And I fill in the following:
+      | Code | space-opera        |
+      | Nom  | Space-Opéra        |
+    And I wait "2" seconds until "$('#sylius_taxon_translations_fr_FR_slug').val().length > 0"
     When I press "Créer"
     Then I should see "a bien été créée"

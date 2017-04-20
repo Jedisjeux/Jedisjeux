@@ -8,8 +8,8 @@ sylius_backend_taxon_index:
             section: backend
             grid: sylius_backend_root_taxon
 
-sylius_backend_taxon_index_by_root:
-    path: /index-by-root/{rootCode}/
+sylius_backend_taxon_index_by_parent:
+    path: /children/{id}/
     methods: [GET]
     defaults:
         _controller: sylius.controller.taxon:indexAction
@@ -18,8 +18,25 @@ sylius_backend_taxon_index_by_root:
             section: backend
             grid: sylius_backend_taxon_from_root
 
+sylius_backend_taxon_create_for_parent:
+    path: /new/{id}
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.taxon:createAction
+        _sylius:
+            section: backend
+            template: 'backend/crud/create.html.twig'
+            redirect: sylius_backend_taxon_index
+            factory:
+                method: createForParent
+                arguments: ['expr:notFoundOnNull(service("sylius.repository.taxon").find($id))']
+            vars:
+                subheader: sylius.ui.manage_categorization_of_your_products
+                templates:
+                    form: "backend/taxon/_form.html.twig"
+
 sylius_backend_taxon_create:
-    path: /new
+    path: /roots/new
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.taxon:createAction
@@ -27,6 +44,9 @@ sylius_backend_taxon_create:
             section: backend
             template: backend/crud/create.html.twig
             redirect: sylius_backend_taxon_index
+            vars:
+                templates:
+                    form: backend/taxon/_form.html.twig
 
 sylius_backend_taxon_update:
     path: /{id}/edit
@@ -37,6 +57,9 @@ sylius_backend_taxon_update:
             section: backend
             template: backend/crud/update.html.twig
             redirect: sylius_backend_taxon_index
+            vars:
+                templates:
+                    form: backend/taxon/_form.html.twig
 
 sylius_backend_taxon_delete:
     path: /{id}

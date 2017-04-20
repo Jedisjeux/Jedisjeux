@@ -9,7 +9,7 @@ sylius_grid:
                         method: createChildrenListQueryBuilder
                         arguments:
                             - ['%locale%']
-                            - expr:service('sylius.repository.taxon').findOneByCode($rootCode)
+                            - expr:service('sylius.repository.taxon').findOneById($id)
             fields:
                 code:
                     type: string
@@ -35,8 +35,12 @@ sylius_grid:
                         fields: [code, translation.name]
             actions:
                 main:
-                    create:
-                        type: create
+                    create_for_parent:
+                        type: create_taxon_for_parent
+                        options:
+                            link:
+                                parameters:
+                                    id: $id
                 item:
                     update:
                         type: update

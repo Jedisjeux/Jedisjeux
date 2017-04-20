@@ -15,6 +15,7 @@ use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType as BaseTaxonType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -48,7 +49,7 @@ class TaxonType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_taxon';
     }
