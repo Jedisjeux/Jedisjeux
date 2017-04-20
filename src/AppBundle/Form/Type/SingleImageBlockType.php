@@ -48,7 +48,6 @@ class SingleImageBlockType extends AbstractResourceType
                     'label.on_the_left_side' => SingleImageBlock::POSITION_LEFT,
                     'label.on_the_right_side' => SingleImageBlock::POSITION_RIGHT,
                 ],
-                'choices_as_values' => true,
             ))
             ->add('class', null, array(
                 'label' => 'label.css_class',

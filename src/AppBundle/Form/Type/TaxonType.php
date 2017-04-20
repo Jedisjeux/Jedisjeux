@@ -37,7 +37,6 @@ class TaxonType extends AbstractType
                     'label.yes' => true,
                     'label.no' => false,
                 ),
-                'choices_as_values' => true,
             ));
     }
 

@@ -53,7 +53,6 @@ class ProductVariantType extends AbstractType
                     'label.month' => ProductVariant::RELEASED_AT_PRECISION_ON_MONTH,
                     'label.year' => ProductVariant::RELEASED_AT_PRECISION_ON_YEAR,
                 ),
-                'choices_as_values' => true,
             ])
             ->add('images', CollectionType::class, array(
                 'label' => false,

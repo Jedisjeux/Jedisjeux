@@ -43,7 +43,6 @@ class BlockType extends AbstractType
             ->add('imagePosition', ChoiceType::class, [
                 'label' => 'app.ui.image_position',
                 'required' => true,
-                'choices_as_values' => true,
                 'choices' => [
                     'app.ui.image_on_the_top_side' => Block::POSITION_TOP,
                     'app.ui.image_on_the_left_side' => Block::POSITION_LEFT,
@@ -54,7 +53,6 @@ class BlockType extends AbstractType
                 'label' => 'app.ui.style',
                 'placeholder' => 'app.ui.normal',
                 'required' => false,
-                'choices_as_values' => true,
                 'choices' => [
                     'app.ui.framed' => 'well'
                 ],
