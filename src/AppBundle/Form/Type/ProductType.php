@@ -13,10 +13,12 @@ namespace AppBundle\Form\Type;
 
 use AppBundle\Entity\Product;
 use AppBundle\Entity\Taxon;
+use Doctrine\ORM\EntityRepository;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonAutocompleteChoiceType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -37,24 +39,51 @@ class ProductType extends AbstractType
 
         $builder
             ->add('firstVariant', ProductVariantType::class, [])
-            ->add('mainTaxon', TaxonAutocompleteChoiceType::class, array(
+            ->add('mainTaxon', EntityType::class, array(
                 'label' => 'label.target_audience',
                 'placeholder' => 'label.choose_target_audience',
-                //'root' => Taxon::CODE_TARGET_AUDIENCE,
+                'class' => 'AppBundle:Taxon',
+                'group_by' => 'parent',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('o')
+                        ->join('o.root', 'rootTaxon')
+                        ->where('rootTaxon.code = :code')
+                        ->andWhere('o.parent IS NOT NULL')
+                        ->setParameter('code', Taxon::CODE_TARGET_AUDIENCE)
+                        ->orderBy('o.position');
+                },
                 'multiple' => false,
                 'required' => false,
             ))
-            ->add('mechanisms', TaxonAutocompleteChoiceType::class, array(
+            ->add('mechanisms', EntityType::class, array(
                 'label' => 'label.mechanisms',
                 'placeholder' => 'label.choose_mechanisms',
-                //'root' => Taxon::CODE_MECHANISM,
+                'class' => 'AppBundle:Taxon',
+                'group_by' => 'parent',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('o')
+                        ->join('o.root', 'rootTaxon')
+                        ->where('rootTaxon.code = :code')
+                        ->andWhere('o.parent IS NOT NULL')
+                        ->setParameter('code', Taxon::CODE_MECHANISM)
+                        ->orderBy('o.position');
+                },
                 'multiple' => true,
                 'required' => false,
             ))
-            ->add('themes', TaxonAutocompleteChoiceType::class, array(
+            ->add('themes', EntityType::class, array(
                 'label' => 'label.themes',
                 'placeholder' => 'label.choose_themes',
-                //'root' => Taxon::CODE_THEME,
+                'class' => 'AppBundle:Taxon',
+                'group_by' => 'parent',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('o')
+                        ->join('o.root', 'rootTaxon')
+                        ->where('rootTaxon.code = :code')
+                        ->andWhere('o.parent IS NOT NULL')
+                        ->setParameter('code', Taxon::CODE_THEME)
+                        ->orderBy('o.position');
+                },
                 'multiple' => true,
                 'required' => false,
             ))
