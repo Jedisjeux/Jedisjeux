@@ -66,4 +66,12 @@ class ProductReviewType extends ReviewType
 
         return $ratings;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_product_review';
+    }
 }

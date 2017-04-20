@@ -50,7 +50,7 @@ class StringBlockType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'app_string_block';
     }

@@ -46,19 +46,15 @@ class StaticContentType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function getName()
     {
-        $resolver->setDefaults([
-            'cascade_validation' => true,
-        ]);
-
-        parent::configureOptions($resolver);
+        return 'sylius_static_content';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_static_content';
     }
