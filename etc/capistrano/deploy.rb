@@ -1,5 +1,8 @@
 # config valid only for current version of Capistrano
-lock '3.4.0'
+lock '3.8.0'
+
+set :symfony_directory_structure, 3
+set :sensio_distribution_version, 5
 
 set :application, 'Jedisjeux'
 set :repo_url, 'git@bitbucket.org:jedisjeux/jdj.git'
@@ -21,11 +24,22 @@ set :deploy_to, '/home/jedisjeux/'
 # Default value for :pty is false
 set :pty, true
 
-set :linked_files, fetch(:linked_files, []).push(fetch(:app_config_path) + '/parameters.yml', fetch(:web_path) + '/robots.txt')
-set :linked_dirs, fetch(:linked_dirs, [fetch(:log_path)]).push(fetch(:web_path) + '/uploads', fetch(:web_path) + '/media')
+set :symfony_roles, :web
+set :symfony_default_flags, '--quiet --no-interaction'
+set :symfony_assets_flags, '--symlink'
+set :symfony_assetic_flags, ''
+set :symfony_cache_clear_flags, ''
+set :symfony_cache_warmup_flags, ''
+set :symfony_env, 'prod'
+set :symfony_parameters_upload, :ask
+set :symfony_parameters_path, 'app/config/'
 
-set :file_permission_paths, fetch(:file_permission_paths, []).push(fetch(:web_path) + '/uploads', fetch(:web_path) + '/media')
-set :file_permissions_users, fetch(:file_permissions_users, []).push('apache')
+append :linked_files, fetch(:app_config_path) + '/parameters.yml', fetch(:web_path) + '/robots.txt', fetch(:web_path) + '/.htaccess'
+append :linked_dirs, fetch(:web_path) + '/uploaded', fetch(:web_path) + '/uploads', fetch(:web_path) + '/media'
+
+append :file_permissions_paths, fetch(:web_path) + '/uploaded', fetch(:web_path) + '/uploads', fetch(:web_path) + '/media'
+append :file_permissions_users, 'apache'
+
 set :permission_method,   :acl
 set :use_set_permissions, true
 
@@ -58,5 +72,4 @@ namespace :deploy do
 end
 
 after 'deploy:updated', 'symfony:assets:install'
-after 'deploy:updated', 'symfony:assetic:dump'
 after 'deploy:updated', 'deploy:migrate'
