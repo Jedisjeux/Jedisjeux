@@ -45,7 +45,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
             return [
                 'doctrine:database:create',
                 'doctrine:schema:create',
-                //'doctrine:phpcr:repository:init',
+                'doctrine:phpcr:repository:init',
                 'cache:clear',
             ];
         }
