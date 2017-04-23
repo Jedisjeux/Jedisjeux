@@ -3,7 +3,11 @@ liip_imagine:
     loaders:
         default:
             filesystem:
-                data_root: "%kernel.root_dir%/../web/media/image"
+                data_root: "/home/jedisjeux/shared/web"
+    resolvers:
+       default:
+          web_path: ~
+
     filter_sets:
         cache: ~
         default:

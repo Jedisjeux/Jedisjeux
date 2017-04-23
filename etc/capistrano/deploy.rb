@@ -4,6 +4,32 @@ lock '3.8.0'
 set :symfony_directory_structure, 3
 set :sensio_distribution_version, 5
 
+# symfony-standard edition directories
+set :app_path, "app"
+set :web_path, "web"
+set :var_path, "var"
+set :bin_path, "bin"
+
+# The next 3 settings are lazily evaluated from the above values, so take care
+# when modifying them
+set :app_config_path, "app/config"
+set :log_path, "var/logs"
+set :cache_path, "var/cache"
+
+set :symfony_console_path, "bin/console"
+set :symfony_console_flags, "--no-debug"
+
+# Remove app_dev.php during deployment, other files in web/ can be specified here
+set :controllers_to_clear, ["app_*.php"]
+
+# asset management
+set :assets_install_path, "web"
+set :assets_install_flags,  '--symlink'
+
+# Share files/directories between releases
+set :linked_files, []
+set :linked_dirs, ["var/logs", "var/sessions", "web/uploads", "web/media"]
+
 set :application, 'Jedisjeux'
 set :repo_url, 'git@bitbucket.org:jedisjeux/jdj.git'
 
@@ -24,21 +50,11 @@ set :deploy_to, '/home/jedisjeux/'
 # Default value for :pty is false
 set :pty, true
 
-set :symfony_roles, :web
-set :symfony_default_flags, '--quiet --no-interaction'
-set :symfony_assets_flags, '--symlink'
-set :symfony_assetic_flags, ''
-set :symfony_cache_clear_flags, ''
-set :symfony_cache_warmup_flags, ''
-set :symfony_env, 'prod'
-set :symfony_parameters_upload, :ask
-set :symfony_parameters_path, 'app/config/'
-
 append :linked_files, fetch(:app_config_path) + '/parameters.yml', fetch(:web_path) + '/robots.txt', fetch(:web_path) + '/.htaccess'
 append :linked_dirs, fetch(:web_path) + '/uploaded', fetch(:web_path) + '/uploads', fetch(:web_path) + '/media'
 
-append :file_permissions_paths, fetch(:web_path) + '/uploaded', fetch(:web_path) + '/uploads', fetch(:web_path) + '/media'
 append :file_permissions_users, 'apache'
+set :file_permissions_paths, ["var", "web/uploads"]
 
 set :permission_method,   :acl
 set :use_set_permissions, true
