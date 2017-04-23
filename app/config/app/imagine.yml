@@ -1,9 +1,9 @@
 # @see http://symfony.com/doc/current/bundles/LiipImagineBundle/filters.html
 liip_imagine:
-    resolvers:
-       default:
-          web_path: ~
-
+    loaders:
+        default:
+            filesystem:
+                data_root: "%kernel.root_dir%/../web/media/image"
     filter_sets:
         cache: ~
         default:
