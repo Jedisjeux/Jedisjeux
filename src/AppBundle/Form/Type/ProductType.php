@@ -130,7 +130,7 @@ class ProductType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Product::class,
-            'cascade_validation' => true,
+            'validation_groups' => ['sylius']
         ]);
     }
 

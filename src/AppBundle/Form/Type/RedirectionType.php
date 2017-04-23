@@ -11,10 +11,12 @@
 
 namespace AppBundle\Form\Type;
 
+use AppBundle\Entity\Redirection;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -35,6 +37,17 @@ class RedirectionType extends AbstractType
             ->add('permanent', CheckboxType::class, [
                 'label' => 'app.ui.permanent',
             ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'data_class' => Redirection::class,
+            'validation_groups' => ['sylius']
+        ]);
     }
 
     /**
