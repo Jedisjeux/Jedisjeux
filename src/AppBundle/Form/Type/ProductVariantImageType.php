@@ -48,6 +48,8 @@ class ProductVariantImageType extends AbstractImageType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
+        parent::configureOptions($resolver);
+
         $resolver->setDefaults([
             'data_class' => ProductVariantImage::class,
             'validation_groups' => ['sylius']

@@ -46,7 +46,6 @@ class RedirectionType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Redirection::class,
-            'validation_groups' => ['sylius']
         ]);
     }
 

@@ -120,6 +120,8 @@ class DealerType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
+        parent::configureOptions($resolver);
+
         $resolver->setDefaults(array(
             'data_class' => Dealer::class,
         ));
