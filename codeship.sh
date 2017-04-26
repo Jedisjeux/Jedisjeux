@@ -9,8 +9,6 @@ sudo /etc/init.d/elasticsearch start
 # Install dependencies through Composer
 composer install --prefer-dist --no-interaction
 
-/home/rof/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-
 # mysql
 sed -i 's/database_host.*/database_host: 127.0.0.1/' app/config/parameters.yml
 sed -i "s/database_user.*/database_user: ${MYSQL_USER}/" app/config/parameters.yml
