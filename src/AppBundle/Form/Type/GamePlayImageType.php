@@ -10,8 +10,8 @@
  */
 
 namespace AppBundle\Form\Type;
-use Symfony\Component\Form\FormBuilderInterface;
 
+use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>

@@ -11,13 +11,13 @@
 
 namespace AppBundle\Form\Type;
 
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class PlayerType extends AbstractResourceType
+class PlayerType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder

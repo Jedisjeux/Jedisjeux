@@ -14,6 +14,7 @@ Feature: Edit static contents
       | Nouveau logements quartier Mont-Gaillard |
     And I am logged in as user "admin@example.com" with password "password"
 
+  @todo
   Scenario: Update a static content
     Given I am on "/admin/static-contents/"
     And I follow "Modifier"

@@ -13,10 +13,13 @@ namespace AppBundle\Form\Type\Customer;
 
 use AppBundle\Form\EventSubscriber\CustomerRegistrationFormSubscriber;
 use AppBundle\Form\EventSubscriber\UserRegistrationFormSubscriber;
+use AppBundle\Form\Type\User\AppUserRegistrationType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
@@ -46,11 +49,12 @@ class CustomerSimpleRegistrationType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options = [])
     {
         $builder
-            ->add('email', 'email', [
+            ->add('email', EmailType::class, [
                 'label' => 'sylius.form.customer.email',
             ])
-            ->add('user', 'sylius_shop_user_registration', [
+            ->add('user', AppUserRegistrationType::class, [
                 'label' => false,
+                'constraints' => [new Valid()],
             ])
             ->addEventSubscriber(new CustomerRegistrationFormSubscriber($this->customerRepository))
             ->setDataLocked(false)
@@ -72,7 +76,7 @@ class CustomerSimpleRegistrationType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_customer_simple_registration';
     }

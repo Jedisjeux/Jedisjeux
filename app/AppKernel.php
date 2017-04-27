@@ -6,14 +6,6 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 
 class AppKernel extends Kernel
 {
-    public function __construct($environment, $debug)
-    {
-        parent::__construct($environment, $debug);
-
-        date_default_timezone_set( 'Europe/Paris' );
-    }
-
-
     public function registerBundles()
     {
         $bundles = array(
@@ -32,7 +24,6 @@ class AppKernel extends Kernel
 
             new Sylius\Bundle\LocaleBundle\SyliusLocaleBundle(),
             new Sylius\Bundle\ProductBundle\SyliusProductBundle(),
-            new Sylius\Bundle\AssociationBundle\SyliusAssociationBundle(),
             new Sylius\Bundle\UiBundle\SyliusUiBundle(),
             new Sylius\Bundle\UserBundle\SyliusUserBundle(),
             new Sylius\Bundle\CustomerBundle\SyliusCustomerBundle(),
@@ -41,17 +32,15 @@ class AppKernel extends Kernel
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new Sylius\Bundle\AttributeBundle\SyliusAttributeBundle(),
             new Sylius\Bundle\TaxonomyBundle\SyliusTaxonomyBundle(),
+            new Sylius\Bundle\MoneyBundle\SyliusMoneyBundle(),
             new winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
 
             new Sonata\BlockBundle\SonataBlockBundle(),
 
             new Symfony\Cmf\Bundle\CoreBundle\CmfCoreBundle(),
             new Symfony\Cmf\Bundle\BlockBundle\CmfBlockBundle(),
-            new Symfony\Cmf\Bundle\ContentBundle\CmfContentBundle(),
-            new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
-            new Symfony\Cmf\Bundle\MenuBundle\CmfMenuBundle(),
             new Symfony\Cmf\Bundle\MediaBundle\CmfMediaBundle(),
-            new Sylius\Bundle\ContentBundle\SyliusContentBundle(),
+            new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
 
             new Sylius\Bundle\GridBundle\SyliusGridBundle(),
 
@@ -80,14 +69,18 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
         );
 
-        if (in_array($this->getEnvironment(), array('dev', 'test'))) {
+        if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
-            $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
         }
 
         return $bundles;
+    }
+
+    public function getRootDir()
+    {
+        return __DIR__;
     }
 
     /**
@@ -104,7 +97,7 @@ class AppKernel extends Kernel
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
+        $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
     }
 
     /**
@@ -116,7 +109,7 @@ class AppKernel extends Kernel
             return '/dev/shm/jdj/cache/'.$this->environment;
         }
 
-        return parent::getCacheDir();
+        return dirname(__DIR__).'/var/cache/'.$this->getEnvironment();
     }
 
     /**
@@ -128,7 +121,7 @@ class AppKernel extends Kernel
             return '/dev/shm/jdj/logs';
         }
 
-        return parent::getLogDir();
+        return dirname(__DIR__).'/var/logs';
     }
 
     /**

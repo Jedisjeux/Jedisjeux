@@ -13,6 +13,7 @@ use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\Customer\Model\Customer as BaseCustomer;
 use Sylius\Component\User\Model\UserAwareInterface;
 use Sylius\Component\User\Model\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -26,6 +27,8 @@ class Customer extends BaseCustomer implements ReviewerInterface, UserAwareInter
      * @var UserInterface
      *
      * @ORM\OneToOne(targetEntity="Sylius\Component\User\Model\UserInterface", mappedBy="customer", cascade={"persist"})
+     *
+     * @Assert\Valid()
      */
     private $user;
 

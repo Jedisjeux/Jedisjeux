@@ -36,7 +36,7 @@ class ArticleContext extends DefaultContext
 
         foreach ($table->getHash() as $data) {
             /** @var TaxonInterface $taxon */
-            $taxon = $this->getRepository('taxon')->findOneByPermalink($data['taxon']);
+            $taxon = $this->getRepository('taxon')->findOneBySlug($data['taxon'], $this->getContainer()->getParameter('locale'));
 
             /** @var CustomerInterface $author */
             $author = $this->getRepository('customer')->findOneBy(['email' => $data['author']]);

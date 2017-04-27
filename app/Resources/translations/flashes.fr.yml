@@ -49,6 +49,8 @@ sylius:
         update: La catégorie a bien été mise à jour.
         delete: La catégorie a bien été supprimée.
     user:
+        change_password: 'Votre mot de passe a été mis à jour avec succès !'
+        reset_password: 'Votre mot de passe a été réinitialisé avec succès !'
         password:
             reset:
                 token_expired: Le jeton de réinitialisation de mot de passe a expiré,
@@ -57,3 +59,4 @@ sylius:
                 success: Votre mot de passe a été mis à jour avec succès !
     customer:
         update_profile: Votre profil a bien été mis à jour.
+        register: 'Merci pour votre inscription, vous allez recevoir un mail pour vérifier votre compte.'

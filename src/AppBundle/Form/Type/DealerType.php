@@ -16,18 +16,19 @@ use AppBundle\Entity\PubBanner;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManager;
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class DealerType extends AbstractResourceType
+class DealerType extends AbstractType
 {
     /**
      * @var Collection|PubBanner[]
@@ -60,6 +61,7 @@ class DealerType extends AbstractResourceType
             ->add('priceList', PriceListType::class, [
                 'label' => false,
                 'required' => false,
+                'constraints' => [new Valid()],
             ])
             ->add('pubBanners', CollectionType::class, array(
                 'label' => false,
@@ -118,17 +120,17 @@ class DealerType extends AbstractResourceType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => $this->dataClass,
-            'validation_groups' => $this->validationGroups,
-            'cascade_validation' => true,
-        ]);
+        parent::configureOptions($resolver);
+
+        $resolver->setDefaults(array(
+            'data_class' => Dealer::class,
+        ));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'app_dealer';
     }

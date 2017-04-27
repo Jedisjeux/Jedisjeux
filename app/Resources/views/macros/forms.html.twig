@@ -1,5 +1,5 @@
 {% macro filter(placeholder) %}
-    {% render(controller('app.controller.form:filterAction', {'type': 'app_filter_query','placeholder': placeholder|default("Rechercher"), 'template': 'form/_filterForm.html.twig', 'criteria':app.request.get('criteria') })) %}
+    {{ render(controller('app.controller.form:filterAction', {'type': 'AppBundle\\Form\\Filter\\QueryFilterType', 'placeholder': placeholder|default("Rechercher"), 'template': 'form/_filterForm.html.twig', 'criteria':app.request.get('criteria') })) }}
 {% endmacro %}
 
 {% macro readonly(field, value, default_value) %}

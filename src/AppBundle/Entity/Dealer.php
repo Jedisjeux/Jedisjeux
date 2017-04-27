@@ -46,6 +46,9 @@ class Dealer implements ResourceInterface
      * @var DealerImage
      *
      * @ORM\OneToOne(targetEntity="DealerImage", cascade={"persist"})
+     *
+     * @Assert\Type(type="AppBundle\Entity\DealerImage")
+     * @Assert\Valid()
      */
     protected $image;
 
@@ -53,6 +56,9 @@ class Dealer implements ResourceInterface
      * @var PriceList
      *
      * @ORM\OneToOne(targetEntity="PriceList", mappedBy="dealer", cascade={"persist", "merge", "remove"})
+     *
+     * @Assert\Type(type="AppBundle\Entity\PriceList")
+     * @Assert\Valid()
      */
     protected $priceList;
 
@@ -152,7 +158,7 @@ class Dealer implements ResourceInterface
      *
      * @return $this
      */
-    public function setPriceList($priceList)
+    public function setPriceList(PriceList $priceList = null)
     {
         $priceList->setDealer($this);
         $this->priceList = $priceList;

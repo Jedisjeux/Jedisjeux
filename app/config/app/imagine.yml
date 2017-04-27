@@ -1,5 +1,11 @@
 # @see http://symfony.com/doc/current/bundles/LiipImagineBundle/filters.html
 liip_imagine:
+    loaders:
+        default:
+            filesystem:
+                data_root:
+                    assets: "/home/jedisjeux/current/web"
+                    uploads: "/home/jedisjeux/shared/web"
     resolvers:
        default:
           web_path: ~

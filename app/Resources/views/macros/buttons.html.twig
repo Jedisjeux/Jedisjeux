@@ -51,7 +51,7 @@
     {% endif %}
 {% endmacro %}
 
-{% macro delete(url, message, disabled) %}
+{% macro delete(url, message, disabled, resourceId = null) %}
     {% if disabled %}
         <span class="btn btn-danger disabled">
             <i class="glyphicon glyphicon-trash"></i><span>{{ message is empty ? 'label.delete'|trans : message }}</span>
@@ -62,6 +62,7 @@
             <button class="btn btn-danger btn-confirm" type="submit">
                 <i class="glyphicon glyphicon-trash"></i> <span>{{ message is empty ? 'label.delete'|trans : message }}</span>
             </button>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token(resourceId) }}" />
         </form>
     {% endif %}
 {% endmacro %}

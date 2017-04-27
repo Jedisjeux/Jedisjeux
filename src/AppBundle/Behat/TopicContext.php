@@ -13,9 +13,11 @@ namespace AppBundle\Behat;
 
 use AppBundle\Entity\Post;
 use AppBundle\Entity\Topic;
+use AppBundle\Repository\TaxonRepository;
 use Behat\Gherkin\Node\TableNode;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -36,7 +38,7 @@ class TopicContext extends DefaultContext
         foreach ($table->getHash() as $data) {
 
             /** @var TaxonInterface $mainTaxon */
-            $mainTaxon = $this->getRepository('taxon')->findOneByPermalink($data['main_taxon']);
+            $mainTaxon = $this->getRepository('taxon')->findOneBySlug($data['main_taxon'], $this->getContainer()->getParameter('locale'));
 
             if (null === $mainTaxon) {
                 throw new \InvalidArgumentException(
@@ -69,6 +71,29 @@ class TopicContext extends DefaultContext
             $manager->persist($topic);
             $manager->flush();
         }
+    }
+
+    /**
+     * @Then :topicTitle topic should be categorized under :taxonSlug taxon
+     */
+    public function topicShouldBeCategorizedUnderTaxon($topicTitle, $taxonSlug)
+    {
+        /** @var Topic $topic */
+        $topic = $this->findOneBy('topic', ['title' => $topicTitle], 'app');
+
+        /** @var TaxonRepository $taxonRepository */
+        $taxonRepository = $this->getRepository('taxon');
+
+        $taxon = $taxonRepository->findOneBySlug($taxonSlug, $this->getContainer()->getParameter('locale'));
+
+        if (null === $taxon) {
+            throw new \InvalidArgumentException(
+                sprintf('Taxon with slug "%s" was not found.', $taxonSlug)
+            );
+        }
+
+        Assert::notNull($topic->getMainTaxon(), 'topic has no category');
+        Assert::eq($taxon->getId(), $topic->getMainTaxon()->getId(), sprintf('topic is not categorized under %s taxon, actual: %s', $taxon->getSlug(), $topic->getMainTaxon()->getSlug()));
     }
 }
 

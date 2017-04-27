@@ -10,5 +10,4 @@ sylius_review:
                     model: AppBundle\Entity\ProductReview
                     repository: AppBundle\Repository\ProductReviewRepository
                     controller: AppBundle\Controller\ProductReviewController
-                    form:
-                        default: AppBundle\Form\Type\ProductReviewType
+                    form: AppBundle\Form\Type\ProductReviewType

@@ -94,14 +94,16 @@ class ArticleController extends ResourceController
 
     /**
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param string $slug
+     *
+     * @return Response
      */
-    public function indexByTaxonAction(Request $request, $permalink)
+    public function indexByTaxonAction(Request $request, $slug)
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $this->isGrantedOr403($configuration, ResourceActions::INDEX);
 
-        $taxon = $this->getTaxonRepository()->findOneByPermalink($permalink);
+        $taxon = $this->getTaxonRepository()->findOneBySlug($slug, $this->getParameter('locale'));
 
         if (null === $taxon) {
             throw new NotFoundHttpException('Requested taxon does not exist.');

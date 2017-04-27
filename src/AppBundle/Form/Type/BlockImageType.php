@@ -10,8 +10,11 @@
  */
 
 namespace AppBundle\Form\Type;
+
+use AppBundle\Entity\BlockImage;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -30,6 +33,18 @@ class BlockImageType extends AbstractImageType
                 'label' => 'app.ui.image_legend',
                 'required' => false,
             ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        parent::configureOptions($resolver);
+
+        $resolver->setDefaults(array(
+            'data_class' => BlockImage::class,
+        ));
     }
 
     /**

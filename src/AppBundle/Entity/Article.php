@@ -29,7 +29,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Entity
  * @ORM\Table(name="jdj_article", indexes={
- *      @ORM\Index(name="publish_start_date_idx", columns={"publishStartDate"}),
  *      @ORM\Index(name="publishable_idx", columns={"publishable"})
  * })
  */
@@ -87,6 +86,8 @@ class Article implements ResourceInterface, ReviewableInterface
      * @var ArticleImage
      *
      * @ORM\OneToOne(targetEntity="ArticleImage", cascade={"persist", "merge"})
+     *
+     * @Assert\Valid()
      */
     protected $mainImage;
 
@@ -167,6 +168,8 @@ class Article implements ResourceInterface, ReviewableInterface
      * @var Collection|Block[]
      *
      * @ORM\OneToMany(targetEntity="Block", mappedBy="article", cascade={"persist", "merge"})
+     *
+     * @Assert\Valid()
      */
     protected $blocks;
 

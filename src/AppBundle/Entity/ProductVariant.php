@@ -29,14 +29,6 @@ class ProductVariant extends BaseProductVariant
     const RELEASED_AT_PRECISION_ON_YEAR = 'on-year';
 
     /**
-     * @var string
-     *
-     * @Gedmo\Slug(fields={"name"}, separator="-", unique=true)
-     * @ORM\Column(type="string")
-     */
-    private $slug;
-
-    /**
      * @var ArrayCollection|ProductVariantImage[]
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\ProductVariantImage", mappedBy="variant", cascade={"persist", "merge"})
@@ -71,33 +63,25 @@ class ProductVariant extends BaseProductVariant
     protected $oldHref;
 
     /**
-     * @var integer
-     *
-     * @Gedmo\SortablePosition
-     * @ORM\Column(name="position", type="integer")
-     */
-    private $position;
-
-    /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Person", inversedBy="designerProducts", cascade={"persist", "merge"})
-     * @ORM\JoinTable(name="jdj_designer_product_variant")
+     * @ORM\JoinTable(
+     *      name="jdj_designer_product_variant",
+     *      joinColumns={@ORM\JoinColumn(name="productvariant_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id")}
+     * )
      */
     protected $designers;
-
-    /**
-     * {@inheritdoc}
-     *
-     * @Gedmo\SortableGroup
-     */
-    protected $product;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Person", inversedBy="artistProducts", cascade={"persist", "merge"})
-     * @ORM\JoinTable(name="jdj_artist_product_variant")
+     * @ORM\JoinTable(name="jdj_artist_product_variant",
+     *      joinColumns={@ORM\JoinColumn(name="productvariant_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id")}
+     * )
      */
     protected $artists;
 
@@ -105,7 +89,10 @@ class ProductVariant extends BaseProductVariant
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Person", inversedBy="publisherProducts", cascade={"persist", "merge"})
-     * @ORM\JoinTable(name="jdj_publisher_product_variant")
+     * @ORM\JoinTable(name="jdj_publisher_product_variant",
+     *      joinColumns={@ORM\JoinColumn(name="productvariant_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id")}
+     * )
      */
     protected $publishers;
 
@@ -139,46 +126,6 @@ class ProductVariant extends BaseProductVariant
     public function setCode($code)
     {
         $this->code = $code;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * @param string $slug
-     *
-     * @return $this
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
 
         return $this;
     }
@@ -433,8 +380,8 @@ class ProductVariant extends BaseProductVariant
      */
     public function __toString()
     {
-        return $this->getName();
+        $name = $this->getTranslation()->getName();
+
+        return !empty($name) ? $name : "";
     }
-
-
 }

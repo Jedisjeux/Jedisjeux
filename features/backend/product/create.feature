@@ -24,13 +24,16 @@ Feature: Creates products
     And I click on "Créer" dropdown
     And follow "Produit standard"
     And I fill in the following:
-      | Nom | Les Princes de Florence |
+      | Nom  | Les Princes de Florence |
+      | Slug | les-princes-de-florence |
     When I press "Créer"
     Then I should see "a bien été créé"
     And "Les Princes de Florence" product should exist
 
   Scenario: Create a product from BoardGameGeek
     Given I am on "/admin/products/bgg/new?bggPath=https://boardgamegeek.com/boardgame/3076/puerto-rico"
+    And I fill in the following:
+      | Slug | puerto-rico |
     When I press "Créer"
     Then I should see "a bien été créé"
     And "Puerto Rico" product should exist

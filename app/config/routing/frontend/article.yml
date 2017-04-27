@@ -19,7 +19,7 @@ app_frontend_article_index:
 
 app_frontend_article_index_by_taxon:
     methods: [GET]
-    path: /articles/{permalink}
+    path: /articles/{slug}
     defaults:
         _controller: app.controller.article:indexByTaxonAction
         _sylius:
@@ -31,7 +31,7 @@ app_frontend_article_index_by_taxon:
             criteria:
                 status: published
     requirements:
-        permalink: "[^?]+"
+        slug: "[^?]+"
 
 app_frontend_article_show:
     methods: [GET]

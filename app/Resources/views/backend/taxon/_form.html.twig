@@ -1,0 +1,8 @@
+<div class="content">
+    {{ form_row(form.code) }}
+    {{ form_row(form.parent) }}
+    {{ form_row(form.translations['fr_FR'].name) }}
+    {{ form_row(form.translations['fr_FR'].slug, {'attr': {'data-url': path('sylius_admin_ajax_generate_taxon_slug'), 'data-parent': app.request.attributes.get('id')}}) }}
+    {{ form_row(form.translations['fr_FR'].description) }}
+    {{ form_row(form.public) }}
+</div>

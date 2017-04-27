@@ -115,7 +115,7 @@ EOF
     protected function insertItems()
     {
         $query = <<<EOM
-INSERT INTO jdj_product_list_item (list_id, product_id, createdAt, updatedAt)
+INSERT INTO jdj_product_list_item (list_id, product_id, created_at, updated_at)
   SELECT
     list.id,
     product.id,

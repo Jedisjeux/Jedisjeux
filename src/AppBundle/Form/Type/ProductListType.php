@@ -11,14 +11,16 @@
 
 namespace AppBundle\Form\Type;
 
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use AppBundle\Entity\ProductList;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class ProductListType extends AbstractResourceType
+class ProductListType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -29,6 +31,16 @@ class ProductListType extends AbstractResourceType
             ->add('name', TextType::class, [
                 'label' => 'sylius.ui.name',
             ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => ProductList::class,
+        ));
     }
 
     /**

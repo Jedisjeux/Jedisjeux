@@ -7,7 +7,7 @@ sylius_grid:
                     class: "%app.model.person.class%"
                     repository:
                         method: createListQueryBuilder
-                        arguments: [expr:service('sylius.repository.taxon').findOneByPermalink($permalink)]
+                        arguments: [expr:service('sylius.repository.taxon').findOneBySlug($slug)]
             sorting:
                 createdAt: desc
             fields:

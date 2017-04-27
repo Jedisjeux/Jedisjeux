@@ -53,7 +53,9 @@ class Product extends BaseProduct implements ReviewableInterface
      * @var ArrayCollection|TaxonInterface[]
      *
      * @ORM\ManyToMany(targetEntity="Sylius\Component\Taxonomy\Model\TaxonInterface")
-     * @ORM\JoinTable("sylius_product_taxon")
+     * @ORM\JoinTable("sylius_product_taxon",
+     *      inverseJoinColumns={@ORM\JoinColumn(name="taxoninterface_id", referencedColumnName="id")}
+     * )
      */
     protected $taxons;
 
@@ -224,7 +226,8 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $name
+     * @param bool $updateVariant
      */
     public function setName($name, $updateVariant = true)
     {
@@ -286,7 +289,7 @@ class Product extends BaseProduct implements ReviewableInterface
      */
     public function getShortDescription()
     {
-        return $this->translate()->getShortDescription();
+        return $this->getTranslation()->getShortDescription();
     }
 
     /**
@@ -296,7 +299,7 @@ class Product extends BaseProduct implements ReviewableInterface
      */
     public function setShortDescription($shortDescription)
     {
-        $this->translate()->setShortDescription($shortDescription);
+        $this->getTranslation()->setShortDescription($shortDescription);
 
         return $this;
     }
@@ -887,21 +890,17 @@ class Product extends BaseProduct implements ReviewableInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @JMS\VirtualProperty
-     * @JMS\SerializedName("createdAt")
-     * @JMS\Groups({"Detailed"})
      */
-    public function getCreatedAt()
+    public function __toString()
     {
-        return parent::getCreatedAt();
+        return $this->getName();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function __toString()
+    protected function createTranslation()
     {
-        return $this->getName();
+        return new ProductTranslation();
     }
 }

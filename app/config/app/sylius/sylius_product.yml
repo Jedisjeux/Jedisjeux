@@ -1,22 +1,22 @@
 sylius_product:
-    driver: doctrine/orm # Configure the doctrine orm driver used in the documentation.
     resources:
         product:
             classes:
                 model: AppBundle\Entity\Product
-                factory: AppBundle\Factory\ProductFactory
+                #factory: AppBundle\Factory\ProductFactory
                 repository: AppBundle\Repository\ProductRepository
                 controller: AppBundle\Controller\ProductController
-                form:
-                    default: AppBundle\Form\Type\ProductType
+                form: AppBundle\Form\Type\ProductType
             translation:
-              classes:
-                  model: AppBundle\Entity\ProductTranslation
+                classes:
+                    model: AppBundle\Entity\ProductTranslation
         product_variant:
-              classes:
-                  model: AppBundle\Entity\ProductVariant
-                  factory: Sylius\Component\Product\Factory\ProductVariantFactory
-                  repository: AppBundle\Repository\ProductVariantRepository
-                  controller: AppBundle\Controller\ProductVariantController
-                  form:
-                      default: AppBundle\Form\Type\ProductVariantType
+            classes:
+                model: AppBundle\Entity\ProductVariant
+                #factory: Sylius\Component\Product\Factory\ProductVariantFactory
+                controller: AppBundle\Controller\ProductVariantController
+                form: AppBundle\Form\Type\ProductVariantType
+                repository: Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductVariantRepository
+#            translation:
+#                classes:
+#                    model: AppBundle\Entity\ProductVariantTranslation

@@ -42,7 +42,7 @@ class ProductReviewContext extends DefaultContext
             $product = $productRepository->findByName($data['product'], $this->getContainer()->getParameter('locale'))[0];
 
             /** @var ProductReview $productReview */
-            $productReview = $this->getFactory('productReview', 'sylius')->createNew();
+            $productReview = $this->getFactory('product_review', 'sylius')->createNew();
             $productReview->setTitle(isset($data['title']) ? $data['title'] : $this->faker->jobTitle);
             $productReview->setComment(isset($data['comment']) ? $data['comment'] : $this->faker->realText());
             $productReview->setReviewSubject($product);

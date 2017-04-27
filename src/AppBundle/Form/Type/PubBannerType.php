@@ -10,8 +10,11 @@
  */
 
 namespace AppBundle\Form\Type;
+
+use AppBundle\Entity\PubBanner;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -33,7 +36,20 @@ class PubBannerType extends AbstractImageType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        parent::configureOptions($resolver);
+
+        $resolver->setDefaults([
+            'data_class' => PubBanner::class,
+            'validation_groups' => ['sylius']
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'app_pub_banner';
     }

@@ -27,13 +27,13 @@
 
         {% include "frontend/game/show/nav-tab.html.twig" with {'jeu': product} %}
 
-        {% render(url('app_partial_dealer_price_index', {
+        {{ render(url('app_partial_dealer_price_index', {
             template: 'frontend/dealer_price/_index.html.twig',
             paginate: 4,
             criteria: {
                 'product': product.id
             }
-        })) %}
+        })) }}
 
         {% include "frontend/game/show/_variants.html.twig" %}
         {% include "frontend/game/show/_associations.html.twig" %}
@@ -45,9 +45,9 @@
     </div>
 
 
-    {#    {% render controller('JDJUserReviewBundle:JeuNote:new', { 'idJeu': jeu.id }) %}
+    {#    {{ render controller('JDJUserReviewBundle:JeuNote:new', { 'idJeu': jeu.id }) }}
         {% include "JDJJeuBundle:Jeu:partial/onglet.html.twig" with {'jeu': jeu, 'userReviews': userReviews} %}
-        {% render url('jeu_if_you_like_this_game', { 'id': jeu.id }) %}#}
+        {{ render url('jeu_if_you_like_this_game', { 'id': jeu.id }) }}#}
 
 
     {{ pageViews.render(product.id, 'product', path('sylius_product_show', {'slug' : product.slug})) }}

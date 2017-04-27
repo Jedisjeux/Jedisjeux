@@ -15,6 +15,7 @@ use AppBundle\Entity\Taxon;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -57,10 +58,11 @@ class LoadTaxonsOfArticlesCommand extends ContainerAwareCommand
 
     /**
      * @param array $data
+     * @param TaxonInterface $rootTaxon
      *
      * @return TaxonInterface
      */
-    protected function createOrReplaceTaxon(array $data, $rootTaxon)
+    protected function createOrReplaceTaxon(array $data, TaxonInterface $rootTaxon)
     {
         /** @var Taxon $taxon */
         $taxon = $this->getRepository()->findOneBy(['code' => $data['code']]);
@@ -74,8 +76,17 @@ class LoadTaxonsOfArticlesCommand extends ContainerAwareCommand
         $taxon->setName($data['name']);
         $taxon->setIconClass(isset($data['icon_class']) ? $data['icon_class'] : null);
         $taxon->setColor(isset($data['color']) ? $data['color'] : null);
+        $taxon->setSlug($this->getTaxonSlugGenerator()->generate($taxon->getName(), $rootTaxon->getId()));
 
         return $taxon;
+    }
+
+    /**
+     * @return TaxonSlugGeneratorInterface|object
+     */
+    protected function getTaxonSlugGenerator()
+    {
+        return $this->getContainer()->get('sylius.generator.taxon_slug');
     }
 
     /**

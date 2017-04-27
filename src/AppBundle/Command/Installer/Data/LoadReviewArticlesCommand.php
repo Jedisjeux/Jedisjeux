@@ -133,7 +133,7 @@ FROM jedisjeux.jdj_tests test
     ON product.id = productVariant.product_id
   INNER JOIN sylius_product_translation productTranslation
     ON productTranslation.translatable_id = product.id
-       AND locale = 'fr'
+       AND locale = 'fr_FR'
   LEFT JOIN jdj_topic topic
     ON topic.code = concat('topic-', test.topic_id)
   INNER JOIN sylius_customer customer

@@ -4,6 +4,4 @@ sylius_customer:
             classes:
                 model: AppBundle\Entity\Customer
                 repository: AppBundle\Repository\CustomerRepository
-                form:
-                    default: AppBundle\Form\Type\Customer\CustomerType
-                    profile: AppBundle\Form\Type\Customer\CustomerProfileType
+                form: AppBundle\Form\Type\Customer\CustomerType

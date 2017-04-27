@@ -11,13 +11,14 @@
 
 namespace AppBundle\Form\Type;
 
+use AppBundle\Document\StringBlock;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class StringBlockType extends AbstractResourceType
+class StringBlockType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -42,16 +43,14 @@ class StringBlockType extends AbstractResourceType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'cascade_validation' => true,
+            'data_class' => StringBlock::class,
         ]);
-
-        parent::configureOptions($resolver);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'app_string_block';
     }

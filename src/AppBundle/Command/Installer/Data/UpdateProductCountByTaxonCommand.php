@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of jdj.
+ * This file is part of Jedisjeux.
  *
- * (c) Mobizel
+ * (c) Loïc Frémont
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -64,7 +64,7 @@ EOT
      */
     protected function calculateProductCountByTaxonCode($rootCode)
     {
-        $taxons = $this->getTaxonRepository()->findChildrenByRootCode($rootCode);
+        $taxons = $this->getTaxonRepository()->findChildren($rootCode, $this->getContainer()->getParameter('locale'));
 
         foreach ($taxons as $taxon) {
             $this->getProductCountByTaxonUpdater()->update($taxon);

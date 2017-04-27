@@ -24,12 +24,52 @@ services:
         tags:
             - { name: 'form.type', alias: 'app_filter_article' }
 
+    app.form.type.article:
+        class: AppBundle\Form\Type\ArticleType
+        tags:
+            - { name: 'form.type', alias: 'app_article' }
+
+    sylius.form.type.app_user_registration:
+        class: AppBundle\Form\Type\User\AppUserRegistrationType
+        arguments:
+            - "%sylius.model.shop_user.class%"
+            - [sylius, sylius_user_registration]
+        tags:
+          - { name: form.type }
+
+    sylius.form.type.customer_simple_registration:
+        class: AppBundle\Form\Type\Customer\CustomerSimpleRegistrationType
+        arguments:
+            - "%sylius.model.customer.class%"
+            - [sylius, sylius_user_registration]
+            - "@sylius.repository.customer"
+        tags:
+          - { name: form.type, alias: sylius_customer_simple_registration }
+
+    app.form.type.dealer:
+        class: AppBundle\Form\Type\DealerType
+        tags:
+            - { name: 'form.type', alias: 'app_dealer' }
+
+    app.form.type.topic:
+        class: AppBundle\Form\Type\TopicType
+        tags:
+            - { name: 'form.type', alias: 'app_topic' }
+
     # <!-- Forms -->
     # TODO remove (in sylius.yml) !
     app.form.type.post:
         class: AppBundle\Form\Type\PostType
         tags:
           - { name: form.type, alias: app_post }
+
+    sylius.form.type.product_review:
+        class: AppBundle\Form\Type\ProductReviewType
+        arguments:
+            - "%sylius.model.product_review.class%"
+            - []
+        tags:
+          - { name: form.type, alias: sylius_product_review }
 
     sylius.form.type.product_review_rating:
         class: AppBundle\Form\Type\RatingType

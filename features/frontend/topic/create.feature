@@ -11,6 +11,9 @@ Feature: Topic creation
     Given there are root taxons:
       | code  | name  |
       | forum | Forum |
+    And there are taxons:
+      | name                | parent |
+      | La taverne des jeux | forum  |
     And I am logged in as user "kevin@example.com" with password "password"
 
   @javascript
@@ -22,6 +25,18 @@ Feature: Topic creation
     And I fill in wysiwyg field "app_topic_mainPost_body" with "Here is my awesome topic message."
     When I press "Créer"
     Then I should see "a bien été créé"
+
+  @javascript
+  Scenario: Create new topic for taxon
+    Given I am on "/topics/"
+    And I follow "La taverne des jeux"
+    And I follow "Nouveau sujet"
+    And I fill in the following:
+      | Titre | Zoo Topic |
+    And I fill in wysiwyg field "app_topic_mainPost_body" with "Here is my awesome topic message."
+    When I press "Créer"
+    Then I should see "a bien été créé"
+    And "Zoo Topic" topic should be categorized under "forum/la-taverne-des-jeux" taxon
 
   Scenario: Body is required
     Given I am on "/topics/"

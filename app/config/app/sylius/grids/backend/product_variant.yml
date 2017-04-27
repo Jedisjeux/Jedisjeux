@@ -7,7 +7,7 @@ sylius_grid:
                     class: "%sylius.model.product_variant.class%"
                     repository:
                         method: createQueryBuilderByProductId
-                        arguments: [$productId]
+                        arguments: ["%locale%", $productId]
             sorting:
                 position: asc
             fields:
@@ -39,8 +39,22 @@ sylius_grid:
                         type: update_product_variant_positions
                     create:
                         type: create
+                        options:
+                            link:
+                                parameters:
+                                    productId: $productId
                 item:
                     update:
                         type: update
+                        options:
+                            link:
+                                parameters:
+                                    id: resource.id
+                                    productId: $productId
                     delete:
                         type: delete
+                        options:
+                            link:
+                                parameters:
+                                    id: resource.id
+                                    productId: $productId

@@ -11,8 +11,10 @@
 
 namespace AppBundle\Form\Type\Customer;
 
+use AppBundle\Entity\Customer;
 use Sylius\Bundle\CustomerBundle\Form\Type\CustomerType as BaseCustomerType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -22,27 +24,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class CustomerType extends BaseCustomerType
+class CustomerType extends AbstractType
 {
-    /**
-     * @var EventSubscriberInterface
-     */
-    private $addUserFormSubscriber;
-
-    /**
-     * @param string $dataClass
-     * @param string[] $validationGroups
-     * @param EventSubscriberInterface $addUserFormSubscriber
-     */
-    public function __construct(
-        $dataClass,
-        array $validationGroups = [],
-        EventSubscriberInterface $addUserFormSubscriber
-    ) {
-        parent::__construct($dataClass, $validationGroups);
-        $this->addUserFormSubscriber = $addUserFormSubscriber;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -52,19 +35,8 @@ class CustomerType extends BaseCustomerType
 
         $builder
             ->remove('gender')
-            ->add('phoneNumber', TextType::class, [
-                'label' => 'sylius.ui.phone_number',
-                'required' => false,
-            ])
-            ->add('firstName', HiddenType::class, [
-                'data' => 'John',
-            ])
-            ->add('lastName', HiddenType::class, [
-                'data' => 'Doe',
-            ]);
-
-        $builder
-            ->addEventSubscriber($this->addUserFormSubscriber);
+            ->add('firstName', HiddenType::class)
+            ->add('lastName', HiddenType::class);
     }
 
     /**
@@ -72,10 +44,17 @@ class CustomerType extends BaseCustomerType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => $this->dataClass,
-            'validation_groups' => $this->validationGroups,
-            'cascade_validation' => true,
-        ]);
+        $resolver->setDefaults(array(
+            'validation_groups' => ['sylius'],
+            'data_class' => Customer::class,
+        ));
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getParent()
+    {
+        return BaseCustomerType::class;
     }
 }

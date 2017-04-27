@@ -113,7 +113,9 @@ class Person implements ResourceInterface
      * @var Collection
      *
      * @ORM\ManyToMany(targetEntity="Sylius\Component\Taxonomy\Model\TaxonInterface")
-     * @ORM\JoinTable("jdj_person_taxon")
+     * @ORM\JoinTable("jdj_person_taxon",
+     *      inverseJoinColumns={@ORM\JoinColumn(name="taxoninterface_id", referencedColumnName="id")}
+     * )
      */
     protected $taxons;
 

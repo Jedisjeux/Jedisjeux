@@ -1,6 +1,4 @@
 sylius_resource:
-#    translation:
-#        default_locale: %locale%
     drivers:
         - doctrine/orm
         - doctrine/phpcr-odm
@@ -11,85 +9,46 @@ sylius_resource:
                 factory: AppBundle\Factory\ArticleFactory
                 repository: AppBundle\Repository\ArticleRepository
                 controller: AppBundle\Controller\ArticleController
-                form:
-                    default: AppBundle\Form\Type\ArticleType
-                    view_count: AppBundle\Form\Type\ArticleViewCountType
+                form: AppBundle\Form\Type\ArticleType
         app.article_image:
             classes:
                 model: AppBundle\Entity\ArticleImage
-                form:
-                    default: AppBundle\Form\Type\ArticleImageType
+                form: AppBundle\Form\Type\ArticleImageType
         app.article_review:
             classes:
                 model: AppBundle\Entity\ArticleReview
-        app.article_content:
-            driver: doctrine/phpcr-odm
-            classes:
-                model: AppBundle\Document\ArticleContent
-                factory: AppBundle\Factory\ArticleContentFactory
-                repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
-                form:
-                    default: AppBundle\Form\Type\ArticleContentType
         app.avatar:
             classes:
                 model: AppBundle\Entity\Avatar
-                form:
-                    default: AppBundle\Form\Type\AvatarType
+                form: AppBundle\Form\Type\AvatarType
         app.block:
             classes:
                 model: AppBundle\Entity\Block
-                form:
-                    default: AppBundle\Form\Type\BlockType
+                form: AppBundle\Form\Type\BlockType
         app.block_image:
             classes:
                 model: AppBundle\Entity\BlockImage
-                form:
-                    default: AppBundle\Form\Type\BlockImageType
-        app.blockquote_block:
-            driver: doctrine/phpcr-odm
-            classes:
-                model: AppBundle\Document\BlockquoteBlock
-                factory: AppBundle\Factory\BlockquoteFactory
-                repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
-                form:
-                    default: AppBundle\Form\Type\BlockquoteBlockType
+                form: AppBundle\Form\Type\BlockImageType
         app.contact_request:
             classes:
                 model: AppBundle\Entity\ContactRequest
                 factory: AppBundle\Factory\ContactRequestFactory
                 repository: AppBundle\Repository\ContactRequestRepository
-                form:
-                    default: AppBundle\Form\Type\ContactRequestType
+                form: AppBundle\Form\Type\ContactRequestType
         app.dealer:
             classes:
                 model: AppBundle\Entity\Dealer
                 repository: AppBundle\Repository\DealerRepository
-                form:
-                    default: AppBundle\Form\Type\DealerType
+                form: AppBundle\Form\Type\DealerType
         app.dealer_image:
             classes:
                 model: AppBundle\Entity\DealerImage
-                form:
-                    default: AppBundle\Form\Type\DealerImageType
+                form: AppBundle\Form\Type\DealerImageType
         app.dealer_price:
             classes:
                 model: AppBundle\Entity\DealerPrice
                 repository: AppBundle\Repository\DealerPriceRepository
-        app.imagine_block:
-            driver: doctrine/phpcr-odm
-            classes:
-                model: AppBundle\Document\ImagineBlock
-                repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
-                form:
-                    default: AppBundle\Form\Type\ImagineBlockType
-        app.left_image_block:
-            driver: doctrine/phpcr-odm
-            classes:
-                model: AppBundle\Document\LeftImageBlock
-                factory: AppBundle\Factory\SingleImageBlockFactory
-                repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
-                form:
-                    default: AppBundle\Form\Type\SingleImageBlock\LeftImageBlockType
+                form: AppBundle\Form\Type\DealerPriceType
         app.not_found_page:
             classes:
                 model: AppBundle\Entity\NotFound
@@ -98,26 +57,22 @@ sylius_resource:
                 model: AppBundle\Entity\Person
                 repository: AppBundle\Repository\PersonRepository
                 controller: AppBundle\Controller\PersonController
-                form:
-                    default: AppBundle\Form\Type\PersonType
+                form: AppBundle\Form\Type\PersonType
         app.person_image:
             classes:
                 model: AppBundle\Entity\PersonImage
-                form:
-                    default: AppBundle\Form\Type\PersonImageType
+                form: AppBundle\Form\Type\PersonImageType
         app.product_barcode:
             classes:
                 model: AppBundle\Entity\ProductBarcode
-                form:
-                    default: AppBundle\Form\Type\ProductBarcodeType
+                form: AppBundle\Form\Type\ProductBarcodeType
         app.product_list:
             classes:
                 model: AppBundle\Entity\ProductList
                 factory: AppBundle\Factory\ProductListFactory
                 repository: AppBundle\Repository\ProductListRepository
                 controller: AppBundle\Controller\ProductListController
-                form:
-                    default: AppBundle\Form\Type\ProductListType
+                form: AppBundle\Form\Type\ProductListType
         app.product_list_item:
             classes:
                 model: AppBundle\Entity\ProductListItem
@@ -126,29 +81,11 @@ sylius_resource:
         app.pub_banner:
             classes:
                 model: AppBundle\Entity\PubBanner
-                form:
-                    default: AppBundle\Form\Type\PubBannerType
+                form: AppBundle\Form\Type\PubBannerType
         app.redirection:
             classes:
                 model: AppBundle\Entity\Redirection
-                form:
-                    default: AppBundle\Form\Type\RedirectionType
-        app.right_image_block:
-            driver: doctrine/phpcr-odm
-            classes:
-                model: AppBundle\Document\RightImageBlock
-                factory: AppBundle\Factory\SingleImageBlockFactory
-                repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
-                form:
-                    default: AppBundle\Form\Type\SingleImageBlock\RightImageBlockType
-        app.single_image_block:
-            driver: doctrine/phpcr-odm
-            classes:
-                model: AppBundle\Document\SingleImageBlock
-                factory: AppBundle\Factory\SingleImageBlockFactory
-                repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
-                form:
-                    default: AppBundle\Form\Type\SingleImageBlockType
+                form: AppBundle\Form\Type\RedirectionType
         app.slide_show_block:
             classes:
                 model: AppBundle\Entity\SlideShowBlock
@@ -158,38 +95,25 @@ sylius_resource:
                 model: AppBundle\Document\StringBlock
                 factory: AppBundle\Factory\StringBlockFactory
                 repository: AppBundle\Repository\StringBlockRepository
-                form:
-                    default: AppBundle\Form\Type\StringBlockType
-        app.top_image_block:
-            driver: doctrine/phpcr-odm
-            classes:
-                model: AppBundle\Document\TopImageBlock
-                factory: AppBundle\Factory\SingleImageBlockFactory
-                repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
-                form:
-                    default: AppBundle\Form\Type\SingleImageBlock\TopImageBlockType
+                form: AppBundle\Form\Type\StringBlockType
         app.game_play:
             classes:
                 model: AppBundle\Entity\GamePlay
                 factory: AppBundle\Factory\GamePlayFactory
                 repository: AppBundle\Repository\GamePlayRepository
-                form:
-                    default: AppBundle\Form\Type\GamePlayType
+                form: AppBundle\Form\Type\GamePlayType
         app.game_play_image:
             classes:
                 model: AppBundle\Entity\GamePlayImage
-                form:
-                    default: AppBundle\Form\Type\GamePlayImageType
+                form: AppBundle\Form\Type\GamePlayImageType
         app.player:
             classes:
                 model: AppBundle\Entity\Player
-                form:
-                    default: AppBundle\Form\Type\PlayerType
+                form: AppBundle\Form\Type\PlayerType
         app.price_list:
             classes:
                 model: AppBundle\Entity\PriceList
-                form:
-                    default: AppBundle\Form\Type\PriceListType
+                form: AppBundle\Form\Type\PriceListType
         app.notification:
             classes:
                 model: AppBundle\Entity\Notification
@@ -201,27 +125,15 @@ sylius_resource:
                 factory: AppBundle\Factory\TopicFactory
                 controller: AppBundle\Controller\TopicController
                 repository: AppBundle\Repository\TopicRepository
-                form:
-                    default: AppBundle\Form\Type\TopicType
-                    view_count: AppBundle\Form\Type\TopicViewCountType
+                form:  AppBundle\Form\Type\TopicType
         app.post:
             classes:
                 model: AppBundle\Entity\Post
                 factory: AppBundle\Factory\PostFactory
                 repository: AppBundle\Repository\PostRepository
                 controller: AppBundle\Controller\PostController
-                form:
-                    default: AppBundle\Form\Type\PostType
+                form: AppBundle\Form\Type\PostType
         app.product_variant_image:
             classes:
                 model: AppBundle\Entity\ProductVariantImage
-                form:
-                    default: AppBundle\Form\Type\ProductVariantImageType
-        app.well_image_block:
-            driver: doctrine/phpcr-odm
-            classes:
-                model: AppBundle\Document\WellImageBlock
-                factory: AppBundle\Factory\SingleImageBlockFactory
-                repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository
-                form:
-                    default: AppBundle\Form\Type\SingleImageBlock\WellImageBlockType
+                form: AppBundle\Form\Type\ProductVariantImageType

@@ -13,7 +13,7 @@ namespace AppBundle\Form\Type;
 
 use AppBundle\Entity\Block;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class BlockType extends AbstractResourceType
+class BlockType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -43,7 +43,6 @@ class BlockType extends AbstractResourceType
             ->add('imagePosition', ChoiceType::class, [
                 'label' => 'app.ui.image_position',
                 'required' => true,
-                'choices_as_values' => true,
                 'choices' => [
                     'app.ui.image_on_the_top_side' => Block::POSITION_TOP,
                     'app.ui.image_on_the_left_side' => Block::POSITION_LEFT,
@@ -54,7 +53,6 @@ class BlockType extends AbstractResourceType
                 'label' => 'app.ui.style',
                 'placeholder' => 'app.ui.normal',
                 'required' => false,
-                'choices_as_values' => true,
                 'choices' => [
                     'app.ui.framed' => 'well'
                 ],
@@ -70,11 +68,9 @@ class BlockType extends AbstractResourceType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => $this->dataClass,
-            'validation_groups' => $this->validationGroups,
-            'cascade_validation' => true,
-        ]);
+        $resolver->setDefaults(array(
+            'data_class' => Block::class,
+        ));
     }
 
     /**

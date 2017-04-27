@@ -1,5 +1,4 @@
 sylius_mailer:
-    driver: doctrine/orm
     sender:
         name: %email_name%
         address: %email_sender%

@@ -5,9 +5,14 @@ sylius_product_review_create:
         _controller: sylius.controller.product_review:createAction
         _sylius:
             template: 'frontend/product_review/create.html.twig'
+            form:
+                options:
+                    validation_groups: ['sylius', 'sylius_review']
             factory:
-                method: createForSubject
-                arguments: [$productId]
+                method: createForSubjectWithReviewer
+                arguments:
+                    - "expr:notFoundOnNull(service('sylius.repository.product').findOneById($productId))"
+                    - "expr:service('sylius.context.customer').getCustomer()"
             redirect:
                 route: sylius_product_show
                 parameters: { slug: resource.reviewSubject.slug }

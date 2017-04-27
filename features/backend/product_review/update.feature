@@ -17,7 +17,6 @@ Feature: Edit product reviews
       | Puerto Rico | kevin@example.com | Super jeu |
     And I am logged in as user "admin@example.com" with password "password"
 
-  @todo
   Scenario: Update a product review
     Given I am on "/admin/product-reviews/"
     And I follow "Modifier"

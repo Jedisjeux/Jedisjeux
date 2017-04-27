@@ -11,15 +11,18 @@
 
 namespace AppBundle\Form\Type\Customer;
 
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use AppBundle\Entity\Customer;
+use AppBundle\Form\Type\AvatarType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class CustomerProfileType extends AbstractResourceType
+class CustomerProfileType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -30,7 +33,7 @@ class CustomerProfileType extends AbstractResourceType
             ->add('email', EmailType::class, [
                 'label' => 'sylius.ui.email',
             ])
-            ->add('avatar', 'app_avatar', [
+            ->add('avatar', AvatarType::class, [
                 'label' => false,
                 'required' => false,
             ])
@@ -40,6 +43,17 @@ class CustomerProfileType extends AbstractResourceType
             ->add('lastName', HiddenType::class, [
                 'data' => 'Doe',
             ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'validation_groups' => ['sylius'],
+            'data_class' => Customer::class,
+        ));
     }
 
     /**

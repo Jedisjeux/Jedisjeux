@@ -44,7 +44,7 @@ class LoadPlayersOfGamePlaysCommand extends ContainerAwareCommand
     protected function insertPlayers()
     {
         $query = <<<EOM
-insert into jdj_player(gamePlay_id, name, score, customer_id)
+insert into jdj_player(game_play_id, name, score, customer_id)
 select      gamePlay.id,
             case
                 when user.customer_id is null then old.joueur

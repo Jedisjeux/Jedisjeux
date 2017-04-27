@@ -76,7 +76,7 @@
                                                     {% for mechanism in product.mechanisms %}{% if not first %},{% endif %}
                                                         {% set first = false %}
                                                         <a
-                                                        href="{{ path('sylius_product_index_by_taxon', { 'permalink': mechanism.permalink }) }}">{{ mechanism }}</a>{% endfor %}
+                                                        href="{{ path('sylius_product_index_by_taxon', { 'slug': mechanism.slug }) }}">{{ mechanism }}</a>{% endfor %}
                                                 {% endspaceless %}
                                             </p>
                                         </li>
@@ -94,7 +94,7 @@
                                                     {% for key, theme in product.themes %}{% if not first %},{% endif %}
                                                         {% set first = false %}
                                                         <a
-                                                        href="{{ path('sylius_product_index_by_taxon', { 'permalink': theme.permalink }) }}">{{ theme }}</a>{% endfor %}
+                                                        href="{{ path('sylius_product_index_by_taxon', { 'slug': theme.slug }) }}">{{ theme }}</a>{% endfor %}
                                                 {% endspaceless %}
                                             </p>
                                         </li>

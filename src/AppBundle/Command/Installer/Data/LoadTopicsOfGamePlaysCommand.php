@@ -142,7 +142,7 @@ EOM;
 UPDATE jdj_topic topic
   INNER JOIN jdj_post post
     ON post.topic_id = topic.id
-SET topic.postCount = (
+SET topic.post_count = (
   SELECT count(0)
   FROM jdj_post a
   WHERE a.topic_id = topic.id

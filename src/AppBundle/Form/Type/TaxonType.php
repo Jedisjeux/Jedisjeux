@@ -11,16 +11,17 @@
 
 namespace AppBundle\Form\Type;
 
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Bundle\TaxonomyBundle\Form\EventListener\BuildTaxonFormSubscriber;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType as BaseTaxonType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class TaxonType extends AbstractResourceType
+class TaxonType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -30,27 +31,24 @@ class TaxonType extends AbstractResourceType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('code', TextType::class, array(
-                'label' => 'label.code',
-            ))
-            ->add('name', TextType::class, array(
-                'label' => 'label.name',
-            ))
             ->add('public', ChoiceType::class, array(
                 'label' => 'label.public',
                 'choices'  => array(
                     'label.yes' => true,
                     'label.no' => false,
                 ),
-                'choices_as_values' => true,
-            ))
-            ->addEventSubscriber(new BuildTaxonFormSubscriber($builder->getFormFactory()));
+            ));
+    }
+
+    public function getParent()
+    {
+        return BaseTaxonType::class;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_taxon';
     }

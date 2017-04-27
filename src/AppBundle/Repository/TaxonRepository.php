@@ -121,20 +121,4 @@ class TaxonRepository extends BaseTaxonRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
-
-    /**
-     * @param string $slug
-     *
-     * @return TaxonInterface
-     */
-    public function findOneBySlug($slug)
-    {
-        return $this->createQueryBuilder('o')
-            ->addSelect('translation')
-            ->leftJoin('o.translations', 'translation')
-            ->where('translation.slug = :slug')
-            ->setParameter('slug', $slug)
-            ->getQuery()
-            ->getOneOrNullResult();
-    }
 }
