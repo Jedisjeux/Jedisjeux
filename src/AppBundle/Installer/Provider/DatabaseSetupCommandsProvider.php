@@ -118,11 +118,15 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
                 'doctrine:database:drop' => ['--force' => true],
                 'doctrine:database:create',
                 'doctrine:schema:create',
+                'doctrine:phpcr:repository:init',
             ];
         }
 
         if (!$this->isSchemaPresent()) {
-            return ['doctrine:schema:create'];
+            return [
+                'doctrine:schema:create',
+                'doctrine:phpcr:repository:init',
+            ];
         }
 
         $question = new ConfirmationQuestion('Seems like your database contains schema. Do you want to reset it? (y/N) ', false);
@@ -130,6 +134,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
             return [
                 'doctrine:schema:drop' => ['--force' => true],
                 'doctrine:schema:create',
+                'doctrine:phpcr:repository:init',
             ];
         }
 
