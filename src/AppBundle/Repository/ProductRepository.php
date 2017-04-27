@@ -248,6 +248,18 @@ class ProductRepository extends BaseProductRepository
     }
 
     /**
+     * {@inheritdoc}
+     */
+    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = [])
+    {
+        foreach ($sorting as $property => $order) {
+            if (!empty($order)) {
+                $queryBuilder->addOrderBy($this->getPropertyName($property), $order);
+            }
+        }
+    }
+
+    /**
      * Count products categorized under given taxon.
      *
      * @param TaxonInterface $taxon
