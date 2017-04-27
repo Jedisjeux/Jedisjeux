@@ -4,7 +4,7 @@
 phpenv local 7.0
 
 # php memory limit
-sed -i'' 's/^memory_limit=.*/memory_limit=2048M/g' ${HOME}/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+sed -i'' 's/^memory_limit=.*/memory_limit=-1/g' ${HOME}/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
 # Remove xdebug
 rm -f /home/rof/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
