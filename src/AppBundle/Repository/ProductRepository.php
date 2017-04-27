@@ -96,8 +96,9 @@ class ProductRepository extends BaseProductRepository
             ->leftJoin('o.translations', 'translation')
             ->leftJoin('o.options', 'option')
             ->leftJoin('o.variants', 'variant')
-            ->leftJoin('variant.images', 'image')
-            ->leftJoin('o.mainTaxon', 'mainTaxon');
+            ->leftJoin('variant.images', 'image', Join::WITH, 'image.main = :main')
+            ->leftJoin('o.mainTaxon', 'mainTaxon')
+            ->setParameter('main', true);
     }
 
     /**
