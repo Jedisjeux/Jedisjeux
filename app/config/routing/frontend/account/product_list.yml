@@ -9,3 +9,10 @@ app_frontend_account_product_list_index:
             filterable: true
             criteria:
                 owner: expr:service('app.context.customer').getCustomer()
+
+app_frontend_account_games_library:
+    methods: [GET]
+    path: /ma-ludotheque/
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    frontend/account/games_library/index.html.twig

@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+{% block headline %}
+    {{ 'app.ui.my_game_lists'|trans }}
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    {{ 'app.ui.my_game_lists'|trans }}
+{% endblock %}
+
+{% block body -%}
+    <div class="col-md-12">
+        <div class="container">
+            <div class="games-library bg-black">
+                <div class="content">
+                    {% spaceless %}
+                        <img src="http://www.jedisjeux.net/img/ludovirtuelle/_boturmbau.jpg"/>
+                        <img src="http://www.jedisjeux.net/img/ludovirtuelle/hawaii-2739-1333295349.png"/>
+                        <img src="http://www.jedisjeux.net/img/ludovirtuelle/ginkgopolis-2162-1383680692.jpg"/>
+                        <img src="http://www.jedisjeux.net/img/ludovirtuelle/_bo1080.jpg"/>
+                        <img src="http://www.jedisjeux.net/img/ludovirtuelle/_boleonardo.jpg"/>
+                        <img src="http://www.jedisjeux.net/img/ludovirtuelle/bo1929.jpg"/>
+                        <img src="http://www.jedisjeux.net/img/ludovirtuelle/_boleonardo.jpg"/>
+                        <img src="http://www.jedisjeux.net/img/ludovirtuelle/bo1929.jpg"/>
+
+                        <img src="http://www.jedisjeux.net/img/ludovirtuelle/bo773.jpg"/>
+                        <img src="http://www.jedisjeux.net/img/ludovirtuelle/bo1.jpg"/>
+                        <img src="http://www.jedisjeux.net/img/ludovirtuelle/_boelasund.jpg"/>
+                        <img src="http://www.jedisjeux.net/img/ludovirtuelle/bo740.jpg"/>
+                        <img src="http://www.jedisjeux.net/img/ludovirtuelle/bo748.jpg"/>
+                        <img src="http://www.jedisjeux.net/img/ludovirtuelle/bo2010.jpg"/>
+                    {% endspaceless %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

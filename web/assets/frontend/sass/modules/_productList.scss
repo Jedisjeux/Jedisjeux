@@ -8,3 +8,16 @@
   }
 }
 
+.games-library {
+  padding: 0 15px 15px 15px;
+
+  &.bg-black {
+    background: black!important;
+  }
+
+  img {
+    padding-top: 15px;
+    vertical-align: bottom;
+  }
+}
+
