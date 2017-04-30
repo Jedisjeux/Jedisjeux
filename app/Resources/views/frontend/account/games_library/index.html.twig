@@ -15,21 +15,12 @@
             <div class="games-library bg-black">
                 <div class="content">
                     {% spaceless %}
-                        <img src="http://www.jedisjeux.net/img/ludovirtuelle/_boturmbau.jpg"/>
-                        <img src="http://www.jedisjeux.net/img/ludovirtuelle/hawaii-2739-1333295349.png"/>
-                        <img src="http://www.jedisjeux.net/img/ludovirtuelle/ginkgopolis-2162-1383680692.jpg"/>
-                        <img src="http://www.jedisjeux.net/img/ludovirtuelle/_bo1080.jpg"/>
-                        <img src="http://www.jedisjeux.net/img/ludovirtuelle/_boleonardo.jpg"/>
-                        <img src="http://www.jedisjeux.net/img/ludovirtuelle/bo1929.jpg"/>
-                        <img src="http://www.jedisjeux.net/img/ludovirtuelle/_boleonardo.jpg"/>
-                        <img src="http://www.jedisjeux.net/img/ludovirtuelle/bo1929.jpg"/>
-
-                        <img src="http://www.jedisjeux.net/img/ludovirtuelle/bo773.jpg"/>
-                        <img src="http://www.jedisjeux.net/img/ludovirtuelle/bo1.jpg"/>
-                        <img src="http://www.jedisjeux.net/img/ludovirtuelle/_boelasund.jpg"/>
-                        <img src="http://www.jedisjeux.net/img/ludovirtuelle/bo740.jpg"/>
-                        <img src="http://www.jedisjeux.net/img/ludovirtuelle/bo748.jpg"/>
-                        <img src="http://www.jedisjeux.net/img/ludovirtuelle/bo2010.jpg"/>
+                        {% for product_list_item in product_list_items.data %}
+                            {% set box = product_list_item.product.firstVariant.box %}
+                            {% if box %}
+                                <img src="{{ box.image.webPath | imagine_filter('full') }}"/>
+                            {% endif %}
+                        {% endfor %}
                     {% endspaceless %}
                 </div>
             </div>

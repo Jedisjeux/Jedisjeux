@@ -39,28 +39,28 @@ class DownloadImageCommand extends ContainerAwareCommand
     {
         $this->output = $output;
 
-        /** @var EntityRepository $repository */
-        $repository = $this->getContainer()->get('app.repository.product_variant_image');
-        $queryBuilder = $repository->createQueryBuilder('o');
-        $this->downloadImages($queryBuilder);
+//        /** @var EntityRepository $repository */
+//        $repository = $this->getContainer()->get('app.repository.product_variant_image');
+//        $queryBuilder = $repository->createQueryBuilder('o');
+//        $this->downloadImages($queryBuilder);
+//
+//        /** @var EntityRepository $repository */
+//        $repository = $this->getContainer()->get('app.repository.game_play_image');
+//        $queryBuilder = $repository->createQueryBuilder('o');
+//        $this->downloadImages($queryBuilder);
+//
+//        /** @var EntityRepository $repository */
+//        $repository = $this->getContainer()->get('app.repository.person_image');
+//        $queryBuilder = $repository->createQueryBuilder('o');
+//        $this->downloadImages($queryBuilder);
+//
+//        /** @var EntityRepository $repository */
+//        $repository = $this->getContainer()->get('app.repository.article_image');
+//        $queryBuilder = $repository->createQueryBuilder('o');
+//        $this->downloadImages($queryBuilder);
 
         /** @var EntityRepository $repository */
-        $repository = $this->getContainer()->get('app.repository.game_play_image');
-        $queryBuilder = $repository->createQueryBuilder('o');
-        $this->downloadImages($queryBuilder);
-
-        /** @var EntityRepository $repository */
-        $repository = $this->getContainer()->get('app.repository.person_image');
-        $queryBuilder = $repository->createQueryBuilder('o');
-        $this->downloadImages($queryBuilder);
-
-        /** @var EntityRepository $repository */
-        $repository = $this->getContainer()->get('app.repository.article_image');
-        $queryBuilder = $repository->createQueryBuilder('o');
-        $this->downloadImages($queryBuilder);
-
-        /** @var EntityRepository $repository */
-        $repository = $this->getContainer()->get('app.repository.block_image');
+        $repository = $this->getContainer()->get('app.repository.product_box_image');
         $queryBuilder = $repository->createQueryBuilder('o');
         $this->downloadImages($queryBuilder);
     }
