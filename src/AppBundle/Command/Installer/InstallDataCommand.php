@@ -50,6 +50,7 @@ EOT
             'app:product-variants:recalculate-positions',
             'app:game-libraries:load',
             'app:product-lists:load',
+            'app:boxes-of-products:load',
             'app:people:load',
             'app:persons-of-products:load',
             'app:zones-of-people:load',
