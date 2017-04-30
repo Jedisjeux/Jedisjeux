@@ -1,0 +1,20 @@
+sylius_grid:
+    grids:
+        app_frontend_game_library:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%app.model.product_list_item.class%"
+                    repository:
+                        method: createQueryBuilderForGameLibrary
+                        arguments: ["expr:service('sylius.context.customer').getCustomer()", "%locale%"]
+            sorting:
+                box.height: desc
+            fields:
+                createdAt:
+                    type: twig
+                    label: sylius.ui.created_at
+                    sortable: ~
+                box.height:
+                    type: twig
+                    sortable: ~

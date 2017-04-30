@@ -7,3 +7,14 @@ app_frontend_account_product_list_item_index:
             template: "frontend/account/product_list_item/index.html.twig"
             grid: app_frontend_product_list_item
             paginate: 12
+
+app_frontend_account_games_library:
+    methods: [GET]
+    path: /ma-ludotheque/
+    defaults:
+        _controller: app.controller.product_list_item:indexAction
+        _sylius:
+            template: frontend/account/games_library/index.html.twig
+            section: frontend
+            paginate: 300
+            grid: app_frontend_game_library

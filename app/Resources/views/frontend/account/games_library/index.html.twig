@@ -1,0 +1,29 @@
+{% extends "base.html.twig" %}
+
+{% block headline %}
+    {{ 'app.ui.my_game_lists'|trans }}
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    {{ 'app.ui.my_game_lists'|trans }}
+{% endblock %}
+
+{% block body -%}
+    <div class="col-md-12">
+        <div class="container">
+            <div class="games-library bg-black">
+                <div class="content">
+                    {% spaceless %}
+                        {% for product_list_item in product_list_items.data %}
+                            {% set box = product_list_item.product.firstVariant.box %}
+                            {% if box %}
+                                <img src="{{ box.image.webPath | imagine_filter('full') }}"/>
+                            {% endif %}
+                        {% endfor %}
+                    {% endspaceless %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
