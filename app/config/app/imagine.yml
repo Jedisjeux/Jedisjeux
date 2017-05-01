@@ -3,14 +3,9 @@ liip_imagine:
     loaders:
         default:
             filesystem:
-                data_root:
-                    assets: "/home/jedisjeux/current/web"
-                    uploads: "/home/jedisjeux/shared/web"
-    resolvers:
-       default:
-          web_path: ~
-
+                data_root: "%kernel.root_dir%/../web"
     filter_sets:
+        # @see http://symfony.com/doc/current/bundles/LiipImagineBundle/filters.html
         cache: ~
         default:
         full:
