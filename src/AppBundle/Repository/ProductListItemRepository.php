@@ -13,6 +13,7 @@ namespace AppBundle\Repository;
 
 use AppBundle\Entity\Customer;
 use AppBundle\Entity\ProductList;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Customer\Model\CustomerInterface;
@@ -35,12 +36,17 @@ class ProductListItemRepository extends EntityRepository
         $queryBuilder
             ->addSelect('product')
             ->addSelect('translation')
+            ->addSelect('variant')
+            ->addSelect('image')
             ->join('o.product', 'product')
             ->leftJoin('product.translations', 'translation')
+            ->leftJoin('product.variants', 'variant', Join::WITH, 'variant.position = 0')
+            ->leftJoin('variant.images', 'image', Join::WITH, 'image.main = :main')
             ->innerJoin('o.list', 'list')
             ->andWhere('translation.locale = :locale')
             ->andWhere('list.slug = :productListSlug')
             ->setParameter('locale', $locale)
+            ->setParameter('main', true)
             ->setParameter('productListSlug', $productListSlug);
 
         return $queryBuilder;
