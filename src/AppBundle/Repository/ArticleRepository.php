@@ -28,7 +28,8 @@ class ArticleRepository extends EntityRepository
             ->leftJoin('topic.gamePlay', 'gamePlay')
             ->leftJoin('o.product', 'product')
             ->leftJoin('product.variants', 'productVariant')
-            ->leftJoin('product.translations', 'productTranslation');
+            ->leftJoin('product.translations', 'productTranslation')
+            ->groupBy('o.id');
 
         return $queryBuilder;
     }
