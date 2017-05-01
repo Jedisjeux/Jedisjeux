@@ -19,6 +19,7 @@ imports:
   - { resource: 'grids/backend/taxon_from_root.yml' }
   - { resource: 'grids/backend/topic.yml' }
 
+  - { resource: 'grids/frontend/game_library.yml' }
   - { resource: 'grids/frontend/game_play.yml' }
   - { resource: 'grids/frontend/game_play_from_author.yml' }
   - { resource: 'grids/frontend/person.yml' }

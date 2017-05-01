@@ -1,4 +1,4 @@
-# @see http://symfony.com/doc/current/bundles/LiipImagineBundle/filters.html
+# @see http://symfony.com/doc/current/bundles/LiipImagineBundle/index.html
 liip_imagine:
     loaders:
         default:

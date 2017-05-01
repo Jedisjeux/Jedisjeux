@@ -63,6 +63,13 @@ class ProductVariant extends BaseProductVariant
     protected $oldHref;
 
     /**
+     * @var ProductBox|null
+     *
+     * @ORM\OneToOne(targetEntity="ProductBox")
+     */
+    protected $box;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Person", inversedBy="designerProducts", cascade={"persist", "merge"})
@@ -269,6 +276,26 @@ class ProductVariant extends BaseProductVariant
     public function setPosition($position)
     {
         $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * @return ProductBox|null
+     */
+    public function getBox()
+    {
+        return $this->box;
+    }
+
+    /**
+     * @param ProductBox|null $box
+     *
+     * @return ProductVariant
+     */
+    public function setBox(ProductBox $box = null)
+    {
+        $this->box = $box;
 
         return $this;
     }

@@ -66,6 +66,12 @@ sylius_resource:
             classes:
                 model: AppBundle\Entity\ProductBarcode
                 form: AppBundle\Form\Type\ProductBarcodeType
+        app.product_box:
+            classes:
+                model: AppBundle\Entity\ProductBox
+        app.product_box_image:
+            classes:
+                model: AppBundle\Entity\ProductBoxImage
         app.product_list:
             classes:
                 model: AppBundle\Entity\ProductList
