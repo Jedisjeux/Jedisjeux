@@ -342,9 +342,9 @@ emails:
         subject: Bienvenue sur Jedisjeux
         content:  "Merci d'avoir créé un compte sur Jedisjeux"
     website_release:
-        subject: Nouveau Jedisjeux en ligne
+        subject: Nouveau Jedisjeux en ligne et changement de votre mot de passe
         content:
-            introduction: "L'équipe de Jedisjeux vient de sortir son nouveau site internet. Le changement de plateforme nécessite que <strong>vous réinitialisez votre mot de passe</strong>."
+            introduction: "L'équipe de Jedisjeux vient de sortir la nouvelle version de son site internet. Le changement de plateforme nécessite que <strong>vous réinitialisez votre mot de passe</strong>."
             reset_password: "<strong>Pour réinitialiser votre mot de passe cliquez <a href='%LINK%'>ici</a></strong>. <br/><br/> Si vous rencontrez un soucis, copier coller le lien suivant : %LINK%"
     contact_request:
         subject: Nouveau message de contact Jedisjeux

@@ -17,6 +17,7 @@
 !/bin/validate-package
 !/bin/validate-packages
 
+log/
 /var/cache/*
 !var/logs/.gitkeep
 
