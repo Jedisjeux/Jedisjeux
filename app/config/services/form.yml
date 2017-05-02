@@ -29,6 +29,19 @@ services:
         tags:
             - { name: 'form.type', alias: 'app_article' }
 
+    app.form.extension.type.customer:
+        class: AppBundle\Form\Extension\CustomerTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: AppBundle\Form\Type\Customer\CustomerType }
+
+    sylius.form.type.shop_user:
+        class: AppBundle\Form\Type\User\AppUserType
+        arguments:
+            - "%sylius.model.shop_user.class%"
+            - [sylius]
+        tags:
+          - { name: form.type }
+
     sylius.form.type.app_user_registration:
         class: AppBundle\Form\Type\User\AppUserRegistrationType
         arguments:

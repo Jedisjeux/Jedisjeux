@@ -12,8 +12,8 @@
 namespace AppBundle\Form\Extension;
 
 use AppBundle\Form\EventSubscriber\AddUserFormSubscriber;
+use AppBundle\Form\Type\Customer\CustomerType;
 use AppBundle\Form\Type\User\AppUserType;
-use Sylius\Bundle\CustomerBundle\Form\Type\CustomerType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 

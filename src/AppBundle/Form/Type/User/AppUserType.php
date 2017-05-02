@@ -12,6 +12,7 @@
 namespace AppBundle\Form\Type\User;
 
 use Sylius\Bundle\UserBundle\Form\Type\UserType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -28,7 +29,18 @@ class AppUserType extends UserType
 
         $builder
             ->remove('username')
-            ->remove('email');
+            ->remove('email')
+            ->add('roles', ChoiceType::class, [
+                'choices' => [
+                    'app.ui.redactor' => 'ROLE_REDACTOR',
+                    'app.ui.translator' => 'ROLE_TRANSLATOR',
+                    'app.ui.reviewer' => 'ROLE_REVIEWER',
+                    'app.ui.publisher' => 'ROLE_PUBLISHER',
+                    'app.ui.administrator' => 'ROLE_ADMIN',
+                ],
+                'expanded' => true,
+                'multiple' => true,
+            ]);
     }
 
     /**

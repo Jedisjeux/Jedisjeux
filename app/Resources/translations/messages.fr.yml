@@ -1,6 +1,7 @@
 app:
     ui:
         administration: Administration
+        administrator: Administrateur
         add_article: Créer un article
         add_review_article: Créer un test de jeu
         added_at: Date d'ajout
@@ -90,12 +91,15 @@ app:
         product_lists: Listes de jeu
         pub_banners: Bannières de pub
         public: Public
+        publisher: Publieur
         published_at: Publié le
+        redactor: Rédacteur
         redirections: Redirections
         redirection_count: Nombre de redirections
         referer: Référent
         request_placeholder: Recherche....
         results_of_your_query: Résultats de votre recherche
+        reviewer: Relecteur
         see_later: A regarder plus tard
         short_description: Description courte
         show_posts: Voir les messages
@@ -108,6 +112,7 @@ app:
         style: Style
         topic: Sujet
         topics: Sujets
+        translator: Traducteur
         url: Url
         utf8: Utf8
         view_details: Voir les détails
