@@ -7,6 +7,7 @@ imports:
     - { resource: services/form.yml }
     - { resource: services/installer.yml }
     - { resource: services/listener.yml }
+    - { resource: services/menu.yml }
     - { resource: services/notification.yml }
     - { resource: services/publication.yml }
     - { resource: services/security.yml }

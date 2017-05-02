@@ -73,6 +73,9 @@ security:
         - { path: ^/verify, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/mon-compte.*, role: ROLE_USER }
 
+        - { path: ^/admin/dashboard, role: ROLE_STAFF }
+        - { path: ^/admin/articles, role: ROLE_REDACTOR }
+        - { path: ^/admin/products, role: ROLE_REDACTOR }
         - { path: ^/admin/, role: ROLE_ADMIN }
 
         # create new entity

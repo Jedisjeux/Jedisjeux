@@ -16,6 +16,7 @@ app:
         box: Encart
         catalog: Catalogue
         choose_category: Choisir une catégorie
+        contact: Contact
         contact_request: Demande de contact
         contact_requests: Demandes de contact
         content: Contenu
@@ -80,6 +81,7 @@ app:
         normal: Normal
         not_found_pages: Pages non trouvées
         overview_of_your_website: Aperçu de votre site web
+        partnership: Partenariat
         path: Chemin
         person: Personne
         people: Personnes
