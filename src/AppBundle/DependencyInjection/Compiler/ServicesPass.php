@@ -14,6 +14,7 @@ namespace AppBundle\DependencyInjection\Compiler;
 use AppBundle\EventListener\PasswordUpdaterListener;
 use AppBundle\EventListener\RequestLocaleSetter;
 use AppBundle\Factory\ProductFactory;
+use AppBundle\Feed\FeedDumpService;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Parameter;
@@ -38,6 +39,9 @@ class ServicesPass implements CompilerPassInterface
 
         $requestLocaleSetterDefinition = $container->getDefinition('sylius.listener.request_locale_setter');
         $requestLocaleSetterDefinition->setClass(RequestLocaleSetter::class);
+
+        $feedDumpDefinition = $container->getDefinition('eko_feed.feed.dump');
+        $feedDumpDefinition->setClass(FeedDumpService::class);
     }
 
     /**

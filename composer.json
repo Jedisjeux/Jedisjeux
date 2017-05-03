@@ -62,7 +62,8 @@
     "google/apiclient": "^2.0",
     "zenstruck/redirect-bundle": "^3.0",
     "symfony-cmf/routing-bundle": "^2.0",
-    "sylius/money-bundle": "^1.0.0"
+    "sylius/money-bundle": "^1.0.0",
+    "eko/feedbundle": "^1.2"
   },
   "require-dev": {
     "behat/behat": "~3.0",

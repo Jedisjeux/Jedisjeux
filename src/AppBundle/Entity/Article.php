@@ -14,6 +14,7 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Eko\FeedBundle\Item\Writer\RoutedItemInterface;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -32,7 +33,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      @ORM\Index(name="publishable_idx", columns={"publishable"})
  * })
  */
-class Article implements ResourceInterface, ReviewableInterface
+class Article implements ResourceInterface, ReviewableInterface, RoutedItemInterface
 {
     use IdentifiableTrait;
     use Timestampable;
@@ -710,7 +711,8 @@ class Article implements ResourceInterface, ReviewableInterface
     /**
      * @return bool
      */
-    public function isReviewArticle() {
+    public function isReviewArticle()
+    {
         if (null === $this->getMainTaxon()) {
             return false;
         }
@@ -721,12 +723,63 @@ class Article implements ResourceInterface, ReviewableInterface
     /**
      * @return bool
      */
-    public function isReportArticle() {
+    public function isReportArticle()
+    {
         if (null === $this->getMainTaxon()) {
             return false;
         }
 
         return Taxon::CODE_REPORT_ARTICLE === $this->getMainTaxon()->getCode();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFeedItemTitle()
+    {
+        return $this->getTitle();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFeedItemDescription()
+    {
+        return $this->getShortDescription();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFeedItemPubDate()
+    {
+        return $this->getPublishStartDate();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFeedItemRouteName()
+    {
+        return 'app_frontend_article_show';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFeedItemRouteParameters()
+    {
+        return [
+            'slug' => $this->getSlug(),
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFeedItemUrlAnchor()
+    {
+        return '';
     }
 
     /**

@@ -11,7 +11,7 @@ $ docker-compose build
 $ docker-compose up -d
 $ docker exec -it $(docker-compose ps -q jdj_php) bash
 $ composer install
-$ php app/console doctrine:migrations:migrate
+$ php bin/console doctrine:migrations:migrate
 $ exit
 ```
 
@@ -61,7 +61,7 @@ Finally execute the Jedisjeux install command :
 
 ```bash
 $ docker exec -it $(docker-compose ps -q jdj_php) bash
-$ app/console app:install
+$ bin/console app:install
 ```
 
 And have a good coffee...
@@ -77,10 +77,10 @@ $ scp admin@jedisjeux.net:/home/admin/jedisjeux-export-tarifs.csv ./ludifolie.cs
 ```
 
 ```bash
-$ app/console app:dealer-prices:import philibert --filename=philibert.csv
-$ app/console app:dealer-prices:import ludifolie --filename=ludifolie.csv
-$ app/console app:dealer-prices:import ludomus --filename=ludomus.csv --remove-first-line=true
-$ app/console app:dealer-prices:import esprit-jeu --filename=esprit-jeu.csv
+$ bin/console app:dealer-prices:import philibert --filename=philibert.csv
+$ bin/console app:dealer-prices:import ludifolie --filename=ludifolie.csv
+$ bin/console app:dealer-prices:import ludomus --filename=ludomus.csv --remove-first-line=true
+$ bin/console app:dealer-prices:import esprit-jeu --filename=esprit-jeu.csv
 ```
 
 [Behat](http://behat.org) scenarios
@@ -107,10 +107,10 @@ $ bin/selenium-server-standalone -Dwebdriver.chrome.driver=$PWD/bin/chromedriver
 Then setup your test database:
 
 ```bash
-$ php app/console doctrine:database:create --env=test
-$ php app/console doctrine:schema:create --env=test
-$ php app/console cache:clear --no-warmup --env=test
-$ php app/console doctrine:phpcr:repository:init --env=test
+$ php bin/console doctrine:database:create --env=test
+$ php bin/console doctrine:schema:create --env=test
+$ php bin/console cache:clear --no-warmup --env=test
+$ php bin/console doctrine:phpcr:repository:init --env=test
 ```
 
 You can run Behat using the following commands:
