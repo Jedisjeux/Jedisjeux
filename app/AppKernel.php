@@ -60,6 +60,7 @@ class AppKernel extends Kernel
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
             new Zenstruck\RedirectBundle\ZenstruckRedirectBundle(),
+            new Eko\FeedBundle\EkoFeedBundle(),
 
             // TODO remove these bundles
             new Bmatzner\JQueryUIBundle\BmatznerJQueryUIBundle(),

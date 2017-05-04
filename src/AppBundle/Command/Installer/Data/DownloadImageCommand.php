@@ -27,6 +27,9 @@ class DownloadImageCommand extends ContainerAwareCommand
      */
     protected $output;
 
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this
@@ -34,6 +37,9 @@ class DownloadImageCommand extends ContainerAwareCommand
             ->setDescription('Download images');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->output = $output;
@@ -88,7 +94,7 @@ class DownloadImageCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return EntityManager
+     * @return EntityManager|object
      */
     protected function getManager()
     {
@@ -97,6 +103,7 @@ class DownloadImageCommand extends ContainerAwareCommand
 
     /**
      * @param AbstractImage $image
+     *
      * @return string
      */
     protected function getImageOriginalPath(AbstractImage $image, $directory = null)
