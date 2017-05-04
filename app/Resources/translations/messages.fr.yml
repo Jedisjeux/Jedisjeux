@@ -72,6 +72,7 @@ app:
         my_game_plays: Mes parties de jeu
         name: Nom
         new_article: Nouvel article
+        new_articles: Nouveaux articles
         new_dealer: Nouveau vendeur
         new_list: Nouvelle liste
         new_person: Nouvelle personne
@@ -143,6 +144,7 @@ sylius:
         manage_reviews_of_your_products: Gérer les avis de jeu
         manage_static_contents: Gérer les contenus statiques
         new_customer: Nouveau membre
+        new_customers: Nouveaux membres
         new_product: Nouveau jeu
         new_product_association_type: Nouveau type d'association de jeux
         no_label: Non

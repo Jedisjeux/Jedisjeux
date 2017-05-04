@@ -3,9 +3,9 @@ sylius_backend_customer:
         section: backend
         alias: sylius.customer
         templates: :backend/crud
+        except: ['show', 'delete']
         grid: sylius_backend_customer
         redirect: index
-        grid: sylius_backend_customer
         vars:
             all:
                 subheader: sylius.ui.manage_your_customers
@@ -14,3 +14,12 @@ sylius_backend_customer:
             index:
                 icon: users
     type: sylius.resource
+
+sylius_backend_customer_show:
+    path: /customers/{id}
+    defaults:
+        _controller: sylius.controller.customer:showAction
+        _sylius:
+            section: admin
+            template: backend/customer/show.html.twig
+            permission: true

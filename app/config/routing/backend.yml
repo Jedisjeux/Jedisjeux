@@ -7,6 +7,10 @@ app_backend_dashboard:
         _controller:  FrameworkBundle:Template:template
         template:     'backend/index.html.twig'
 
+app_backend_partial:
+    resource: "backend/partial.yml"
+    prefix: /_partial
+
 app_backend_ajax:
     resource: backend/ajax.yml
     prefix: /ajax
