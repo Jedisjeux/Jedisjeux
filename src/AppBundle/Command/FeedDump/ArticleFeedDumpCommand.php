@@ -11,8 +11,7 @@
 
 namespace AppBundle\Command\FeedDump;
 
-use AppBundle\Entity\Article;
-use AppBundle\Repository\ArticleRepository;
+use AppBundle\Feed\ArticleFeedDump;
 use Eko\FeedBundle\Service\FeedDumpService;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -44,51 +43,18 @@ EOT
     {
         $output->writeln(sprintf('<comment>%s</comment>', $this->getDescription()));
 
-        $filename = "jedisjeux.xml";
-        $articles = $this->findPublishedArticles();
-
-        $feedDumpService = $this->getFeedDumpService();
-        $feedDumpService
-            ->setName('article')
-            ->setFilename($filename)
-            ->setFormat('rss')
-            ->setItems($articles)
-            ->setRootDir($this->getContainer()->get('kernel')->getRootDir().'/../');
-
-        $feedDumpService->dump();
+        $articleFeedDump = $this->getArticleFeedDump();
+        $articleFeedDump->dump();
 
         $output->writeln('<comment>done!</comment>');
-        $output->writeln(sprintf('<info>Article feed has been dumped and located in "%s"</info>', $feedDumpService->getRootDir() . $filename));
+        $output->writeln(sprintf('<info>Article feed has been dumped and located in "%s"</info>', $articleFeedDump->getRootDir() . $articleFeedDump->getFileName()));
     }
 
     /**
-     * @return object|FeedDumpService
+     * @return object|ArticleFeedDump
      */
-    protected function getFeedDumpService()
+    protected function getArticleFeedDump()
     {
-        return $this->getContainer()->get('eko_feed.feed.dump');
-    }
-
-    /**
-     * @return object|ArticleRepository
-     */
-    protected function getRepository()
-    {
-        return $this->getContainer()->get('app.repository.article');
-    }
-
-    /**
-     * @return array
-     */
-    protected function findPublishedArticles()
-    {
-        $queryBuilder = $this->getRepository()->createQueryBuilder('o');
-        $queryBuilder
-            ->andWhere('o.status = :published')
-            ->orderBy('o.publishStartDate', 'desc')
-            ->setMaxResults(20)
-            ->setParameter('published', Article::STATUS_PUBLISHED);
-
-        return $queryBuilder->getQuery()->getResult();
+        return $this->getContainer()->get('app.feed.dump.article');
     }
 }

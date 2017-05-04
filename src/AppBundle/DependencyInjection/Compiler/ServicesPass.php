@@ -39,9 +39,6 @@ class ServicesPass implements CompilerPassInterface
 
         $requestLocaleSetterDefinition = $container->getDefinition('sylius.listener.request_locale_setter');
         $requestLocaleSetterDefinition->setClass(RequestLocaleSetter::class);
-
-        $feedDumpDefinition = $container->getDefinition('eko_feed.feed.dump');
-        $feedDumpDefinition->setClass(FeedDumpService::class);
     }
 
     /**

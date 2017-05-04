@@ -32,6 +32,7 @@ log/
 /build/
 /vendor/
 /composer.phar
+/web/jedisjeux.xml
 /web/uploads/img/*
 /web/uploads/avatar/*
 !/web/uploads/avatar/.gitkeep
