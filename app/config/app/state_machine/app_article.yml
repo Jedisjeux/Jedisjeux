@@ -33,3 +33,6 @@ winzou_state_machine:
                     on: "publish"
                     do: ["@app.publication_manager.article", "start"]
                     args: ["object"]
+                dump_feed:
+                    on: "publish"
+                    do: ["@app.feed.dump.article", "dump"]

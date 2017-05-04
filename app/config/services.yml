@@ -4,6 +4,7 @@ imports:
     - { resource: services/calculator.yml }
     - { resource: services/context.yml }
     - { resource: services/controller.yml }
+    - { resource: services/feed.yml }
     - { resource: services/form.yml }
     - { resource: services/installer.yml }
     - { resource: services/listener.yml }
