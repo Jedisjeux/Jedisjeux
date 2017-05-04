@@ -104,9 +104,6 @@ class LoadUsersCommand extends ContainerAwareCommand
 
             // administrators and publishers
             case 'Blue':
-                $roles[] = 'ROLE_ADMIN';
-                $roles[] = 'ROLE_PUBLISHER';
-                break;
             case 'cyril83':
                 $roles[] = 'ROLE_ADMIN';
                 $roles[] = 'ROLE_PUBLISHER';
@@ -114,7 +111,13 @@ class LoadUsersCommand extends ContainerAwareCommand
 
             // reviewers and redactors
             case 'allana':
+            case 'bgarz':
                 $roles[] = 'ROLE_REDACTOR';
+                $roles[] = 'ROLE_REVIEWER';
+                break;
+
+            // reviewers only
+            case 'sly078':
                 $roles[] = 'ROLE_REVIEWER';
                 break;
 
@@ -124,7 +127,7 @@ class LoadUsersCommand extends ContainerAwareCommand
             case 'Arthelius':
             case 'chris06':
             case 'Evens':
-            case 'sly078':
+            case 'nico':
             case 'vincelnx':
             case 'Wityender':
                 $roles[] = 'ROLE_REDACTOR';
