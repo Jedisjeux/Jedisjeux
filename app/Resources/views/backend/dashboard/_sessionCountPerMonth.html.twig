@@ -1,0 +1,29 @@
+{% import 'SyliusUiBundle:Macro:messages.html.twig' as messages %}
+{% import 'SyliusUiBundle:Macro:labels.html.twig' as labels %}
+
+<div class="ui segment">
+    <h3 class="ui dividing header">{{ 'app.ui.sessions_of_current_year'|trans }}</h3>
+
+    {% if sessions|length > 0 %}
+        <table class="ui stackable table" id="customers">
+            <thead>
+            <th>{{ 'sylius.ui.date'|trans }}</th>
+            <th>{{ 'app.ui.session_count'|trans }}</th>
+            </thead>
+            <tbody>
+            {% for session in sessions %}
+                <tr>
+                    <td>
+                        {{ session.date|date('M Y') }}
+                    </td>
+                    <td>
+                        {{ session.sessionCount }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        {{ messages.info('sylius.ui.no_results_to_display') }}
+    {% endif %}
+</div>

@@ -36,6 +36,21 @@ class SessionController extends Controller
     }
 
     /**
+     * @return Response
+     */
+    public function sessionCountPerMonthAction()
+    {
+        $startAt = new \DateTime('first day of January');
+        $endAt = new \DateTime('today');
+
+        $sessions = $this->getSessionService()->countSessionsPerMonth($startAt, $endAt);
+
+        return $this->render('backend/dashboard/_sessionCountPerMonth.html.twig', array(
+            'sessions' => $sessions,
+        ));
+    }
+
+    /**
      * @return object|SessionService
      */
     protected function getSessionService()

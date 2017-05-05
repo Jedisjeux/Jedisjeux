@@ -62,9 +62,6 @@ set :use_set_permissions, true
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
-# Bower
-set :bower_target_path, lambda { "#{release_path}/web/assets/frontend/" }
-
 set :keep_releases, 3
 
 namespace :deploy do
