@@ -14,6 +14,20 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 class ArticleRepository extends EntityRepository
 {
     /**
+     * @param int $count
+     *
+     * @return array
+     */
+    public function findLatest($count)
+    {
+        return $this->createQueryBuilder('o')
+            ->addOrderBy('o.createdAt', 'DESC')
+            ->setMaxResults($count)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * @return QueryBuilder
      */
     protected function getQueryBuilder()

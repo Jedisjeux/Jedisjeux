@@ -19,5 +19,30 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
  */
 class CustomerRepository extends EntityRepository
 {
-    
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        return (int)$this->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    /**
+     * @param int $count
+     *
+     * @return array
+     */
+    public function findLatest($count)
+    {
+        return $this->createQueryBuilder('o')
+            ->addSelect('user')
+            ->leftJoin('o.user', 'user')
+            ->addOrderBy('o.createdAt', 'DESC')
+            ->setMaxResults($count)
+            ->getQuery()
+            ->getResult();
+    }
 }
