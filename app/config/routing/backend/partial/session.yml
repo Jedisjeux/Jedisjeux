@@ -1,0 +1,5 @@
+app_backend_partial_session_count_per_day:
+    methods: [GET]
+    path: /count-per-day/
+    defaults:
+        _controller: AppBundle:Session:sessionCountPerDay

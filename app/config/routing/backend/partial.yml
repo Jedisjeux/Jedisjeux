@@ -5,3 +5,7 @@ app_backend_partial_article:
 sylius_backend_partial_customer:
     resource: partial/customer.yml
     prefix: /customers
+
+app_backend_partial_session:
+    resource: partial/session.yml
+    prefix: /sessions

@@ -12,6 +12,7 @@
 namespace AppBundle\Command;
 
 use AppBundle\Entity\Article;
+use AppBundle\GoogleAnalytics\SessionService;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use SM\Factory\Factory;
@@ -51,15 +52,28 @@ EOT
 
         $results = $analytics->data_ga->get(
             'ga:' . $this->getProfileId(),
-            '2005-01-01',
+            '7daysAgo',
             'today',
-            'ga:uniquePageviews',
+            'ga:sessions',
             [
-                'dimensions' => 'ga:pagePath',
-                'filters' => 'ga:pagePath==' . '/',
+                'dimensions' => 'ga:date',
             ]);
 
+        //var_dump($results->getRows());
+
+        $startAt = new \DateTime('first day of');
+        $endAt = new \DateTime('today');
+
+        $results = $this->getSessionService()->countSessionsPerDay($startAt, $endAt);
         var_dump($results);
+    }
+
+    /**
+     * @return object|SessionService
+     */
+    protected function getSessionService()
+    {
+        return $this->getContainer()->get('app.google_analytics.session');
     }
 
     /**
