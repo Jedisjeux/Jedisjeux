@@ -8,6 +8,7 @@ sylius_grid:
                     repository:
                         method: createQueryBuilderForGameLibrary
                         arguments: ["expr:service('sylius.context.customer').getCustomer()", "%locale%"]
+            limits: ~
             sorting:
                 box.height: desc
             fields:

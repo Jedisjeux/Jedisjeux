@@ -10,6 +10,7 @@ sylius_grid:
                         arguments:
                             locale: "%locale%"
                             criteria: "expr:service('request_stack').getCurrentRequest().get('criteria', [])"
+            limits: ~
             sorting:
                 createdAt: desc
             fields:

@@ -7,6 +7,7 @@ sylius_grid:
                     class: "%app.model.person.class%"
                     repository:
                         method: createListQueryBuilder
+            limits: ~
             sorting:
                 createdAt: desc
             fields:

@@ -8,6 +8,7 @@ sylius_grid:
                     repository:
                         method: createListQueryBuilder
                         arguments: ["%locale%", expr:service('app.context.customer').getCustomer().getId()]
+            limits: ~
             sorting:
                 createdAt: desc
             fields:
