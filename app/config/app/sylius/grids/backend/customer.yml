@@ -24,6 +24,18 @@ sylius_grid:
                     sortable: createdAt
                     options:
                         template: "backend/grid/field/date/medium.html.twig"
+                enabled:
+                    type: twig
+                    label: sylius.ui.enabled
+                    path: .
+                    options:
+                        template: "backend/customer/grid/field/enabled.html.twig"
+                verified:
+                    type: twig
+                    label: sylius.ui.verified
+                    path: .
+                    options:
+                        template: "backend/customer/grid/field/verified.html.twig"
             filters:
                 search:
                     type: string
@@ -32,5 +44,7 @@ sylius_grid:
                         fields: [email]
             actions:
                 item:
+                    show:
+                        type: show
                     update:
                         type: update
