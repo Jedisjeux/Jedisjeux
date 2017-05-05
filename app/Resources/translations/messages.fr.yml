@@ -106,6 +106,7 @@ app:
         see_later: A regarder plus tard
         session_count: Nombre de sessions
         sessions_of_current_month: Sessions du mois en cours
+        sessions_of_current_year: Sessions de l'année en cours
         short_description: Description courte
         show_posts: Voir les messages
         show_game_sheet: Voir la fiche de jeu

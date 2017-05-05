@@ -52,19 +52,19 @@ EOT
 
         $results = $analytics->data_ga->get(
             'ga:' . $this->getProfileId(),
-            '7daysAgo',
+            '2017-01-01',
             'today',
             'ga:sessions',
             [
-                'dimensions' => 'ga:date',
+                'dimensions' => 'ga:year,ga:month',
             ]);
 
         //var_dump($results->getRows());
 
-        $startAt = new \DateTime('first day of');
+        $startAt = new \DateTime('first day of January');
         $endAt = new \DateTime('today');
 
-        $results = $this->getSessionService()->countSessionsPerDay($startAt, $endAt);
+        $results = $this->getSessionService()->countSessionsPerMonth($startAt, $endAt);
         var_dump($results);
     }
 
