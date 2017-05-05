@@ -36,8 +36,8 @@ class ServicesPass implements CompilerPassInterface
 
         $container->setAlias('sylius.context.customer', 'app.context.customer');
 
-        $requestLocaleSetterDefinition = $container->getDefinition('sylius.listener.request_locale_setter');
-        $requestLocaleSetterDefinition->setClass(RequestLocaleSetter::class);
+        $contextLocaleCompositeDefinition = $container->getDefinition("sylius.context.locale.composite");
+        $contextLocaleCompositeDefinition->setDecoratedService(null);
     }
 
     /**
