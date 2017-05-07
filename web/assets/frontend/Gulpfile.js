@@ -70,6 +70,13 @@ var paths = {
         css_img: [
             bowerComponentsPath + 'fancybox/source/helpers/*.png'
         ],
+        css_images: [
+            bundlesPath + 'bmatznerjqueryui/css/base/images/*'
+        ],
+        css_images2: [
+            bowerComponentsPath + 'fancybox/source/*.png',
+            bowerComponentsPath + 'fancybox/source/*.gif'
+        ],
         font: [
             nodeModulesPath + 'font-awesome/fonts/**',
             bundlesPath + 'mopabootstrap/fonts/**'
@@ -123,6 +130,20 @@ gulp.task('shop-css-img', function() {
         ;
 });
 
+gulp.task('shop-css-images', function() {
+    return gulp.src(paths.shop.css_images)
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest(shopRootPath + 'css/images/'))
+        ;
+});
+
+gulp.task('shop-css-images2', function() {
+    return gulp.src(paths.shop.css_images2)
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest(shopRootPath + 'css/'))
+        ;
+});
+
 gulp.task('shop-font', function() {
   return gulp.src(paths.shop.font)
     .pipe(sourcemaps.write('./'))
@@ -138,8 +159,10 @@ gulp.task('shop-watch', function() {
     gulp.watch(paths.shop.css, ['shop-css']);
     gulp.watch(paths.shop.img, ['shop-img']);
     gulp.watch(paths.shop.img, ['shop-css-img']);
+    gulp.watch(paths.shop.img, ['shop-css-images']);
+    gulp.watch(paths.shop.img, ['shop-css-images2']);
     gulp.watch(paths.shop.font, ['shop-font']);
 });
 
-gulp.task('default', ['shop-js', 'shop-css', 'shop-img', 'shop-css-img', 'shop-font']);
+gulp.task('default', ['shop-js', 'shop-css', 'shop-img', 'shop-css-img', 'shop-css-images', 'shop-css-images2', 'shop-font']);
 gulp.task('watch', ['default', 'shop-watch']);

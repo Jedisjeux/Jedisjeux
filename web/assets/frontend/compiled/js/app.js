@@ -12237,15 +12237,6 @@ $(function () {
 
   });
 });
-$(function() {
-
-    if ($('#user-review').length > 0) {
-        $('html, body').animate({
-            scrollTop:$("#user-review").offset().top
-        }, 'fast');
-    }
-
-});
 $(document).ready(function () {
 
     /**
@@ -12597,6 +12588,15 @@ $(function () {
         form[0].reset();
         clearErrors(form);
         $("html, body").animate({scrollTop: 0}, "slow");
+    }
+
+});
+$(function() {
+
+    if ($('#user-review').length > 0) {
+        $('html, body').animate({
+            scrollTop:$("#user-review").offset().top
+        }, 'fast');
     }
 
 });
