@@ -41,6 +41,7 @@ app_frontend_post_index_by_topic:
         _sylius:
             section: frontend
             paginate: 10
+            filterable: true
             criteria:
                 topic: $topicId
             sorting:
