@@ -74,8 +74,11 @@ security:
         - { path: ^/mon-compte.*, role: ROLE_USER }
 
         - { path: ^/admin/dashboard, role: ROLE_STAFF }
-        - { path: ^/admin/articles, role: ROLE_REDACTOR }
-        - { path: ^/admin/products, role: ROLE_REDACTOR }
+        - { path: ^/admin/articles, role: ROLE_WORKFLOW }
+        - { path: ^/admin/products, role: ROLE_WORKFLOW }
+        - { path: ^/admin/product-variants, role: ROLE_WORKFLOW }
+        - { path: ^/admin/ajax/products, role: ROLE_WORKFLOW }
+        - { path: ^/admin/ajax/product-variants, role: ROLE_WORKFLOW }
         - { path: ^/admin/, role: ROLE_ADMIN }
 
         # create new entity

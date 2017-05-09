@@ -45,4 +45,18 @@ class CustomerRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * @return QueryBuilder
+     */
+    public function createListQueryBuilder()
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        $queryBuilder
+            ->addSelect('user')
+            ->join('o.user', 'user');
+
+        return $queryBuilder;
+    }
 }

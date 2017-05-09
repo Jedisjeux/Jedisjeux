@@ -5,6 +5,8 @@ sylius_grid:
                 name: doctrine/orm
                 options:
                     class: "%sylius.model.customer.class%"
+                    repository:
+                        method: createListQueryBuilder
             sorting:
                 createdAt: desc
             fields:
@@ -14,6 +16,11 @@ sylius_grid:
                     path: .
                     options:
                         template: "backend/customer/grid/field/avatar.html.twig"
+                username:
+                    type: string
+                    path: user.username
+                    label: sylius.ui.username
+                    sortable: user.username
                 email:
                     type: string
                     label: sylius.ui.email
@@ -41,7 +48,7 @@ sylius_grid:
                     type: string
                     label: sylius.ui.search
                     options:
-                        fields: [email]
+                        fields: [email, user.username]
             actions:
                 item:
                     show:

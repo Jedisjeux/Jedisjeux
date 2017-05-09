@@ -21,7 +21,7 @@
         <span>{{ app.user.username }}</span>
         <i class="dropdown icon"></i>
         <div class="menu">
-            <a href="#" id="sylius-logout-button" class="item">
+            <a href="{{ path('app_frontend_logout') }}" id="sylius-logout-button" class="item">
                 <i class="sign out icon"></i>
                 {{ 'app.ui.logout'|trans }}
             </a>

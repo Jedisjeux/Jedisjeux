@@ -8,6 +8,7 @@ Feature: Update article status
     Given there are users:
       | email                  | role            | password |
       | admin@example.com      | ROLE_ADMIN      | password |
+      | redactor@example.com   | ROLE_REDACTOR   | password |
       | translator@example.com | ROLE_TRANSLATOR | password |
       | reviewer@example.com   | ROLE_REVIEWER   | password |
       | publisher@example.com  | ROLE_PUBLISHER  | password |
@@ -18,12 +19,12 @@ Feature: Update article status
       | code    | name       | parent   |
       | news    | Actualités | articles |
       | reviews | Critiques  | articles |
-    And I am logged in as user "admin@example.com" with password "password"
 
-  Scenario: Ask for review
-    Given there are articles:
-      | taxon               | title                        | status | author            |
-      | articles/actualites | King of New York : Power Up! | new    | admin@example.com |
+  Scenario: Ask for review as a redactor
+    Given I am logged in as user "redactor@example.com" with password "password"
+    And there are articles:
+      | taxon               | title                        | status | author               |
+      | articles/actualites | King of New York : Power Up! | new    | redactor@example.com |
     And I am on "/admin/articles/"
     And I follow "Modifier"
     When I press "Demander une relecture"
@@ -31,10 +32,11 @@ Feature: Update article status
     And "King of New York : Power Up!" article should have "pending_review" status
     And there is a notification to "reviewer@example.com" for "King of New York : Power Up!" article
 
-  Scenario: Ask for publication
-    Given there are articles:
-      | taxon               | title                        | status         | author            |
-      | articles/actualites | King of New York : Power Up! | pending_review | admin@example.com |
+  Scenario: Ask for publication as a reviewer
+    Given I am logged in as user "reviewer@example.com" with password "password"
+    And there are articles:
+      | taxon               | title                        | status         | author               |
+      | articles/actualites | King of New York : Power Up! | pending_review | redactor@example.com |
     And I am on "/admin/articles/"
     And I follow "Modifier"
     When I press "Demander la publication"
@@ -42,10 +44,11 @@ Feature: Update article status
     And "King of New York : Power Up!" article should have "pending_publication" status
     And there is a notification to "publisher@example.com" for "King of New York : Power Up!" article
 
-  Scenario: Publish
-    Given there are articles:
-      | taxon               | title                        | status              | author            |
-      | articles/actualites | King of New York : Power Up! | pending_publication | admin@example.com |
+  Scenario: Publish as a publisher
+    Given I am logged in as user "publisher@example.com" with password "password"
+    And there are articles:
+      | taxon               | title                        | status              | author               |
+      | articles/actualites | King of New York : Power Up! | pending_publication | redactor@example.com |
     And I am on "/admin/articles/"
     And I follow "Modifier"
     When I press "Publier"

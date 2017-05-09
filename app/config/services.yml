@@ -6,6 +6,7 @@ imports:
     - { resource: services/controller.yml }
     - { resource: services/feed.yml }
     - { resource: services/form.yml }
+    - { resource: services/guard.yml }
     - { resource: services/installer.yml }
     - { resource: services/listener.yml }
     - { resource: services/menu.yml }
