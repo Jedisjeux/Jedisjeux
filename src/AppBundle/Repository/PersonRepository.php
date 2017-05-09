@@ -49,6 +49,19 @@ class PersonRepository extends EntityRepository
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function findByNamePart($phrase)
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.slug LIKE :name')
+            ->setParameter('name', '%'.$phrase.'%')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    /**
      * @inheritdoc
      */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = array())
