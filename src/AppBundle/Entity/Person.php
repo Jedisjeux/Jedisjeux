@@ -531,7 +531,7 @@ class Person implements ResourceInterface
      *
      * @JMS\VirtualProperty
      * @JMS\SerializedName("full_name")
-     * @JMS\Groups({"Default", "Detailed"})
+     * @JMS\Groups({"Default", "Detailed", "Autocomplete"})
      */
     public function getFullName()
     {

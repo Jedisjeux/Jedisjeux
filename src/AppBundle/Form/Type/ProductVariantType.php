@@ -61,25 +61,19 @@ class ProductVariantType extends AbstractType
                 'allow_delete' => true,
                 'by_reference' => false,
             ))
-            ->add('designers', EntityType::class, array(
+            ->add('designers', PersonAutocompleteChoiceType::class, array(
                 'label' => 'label.designers',
-                'class' => 'AppBundle:Person',
                 'required' => false,
-                'expanded' => false,
                 'multiple' => true,
             ))
-            ->add('artists', EntityType::class, array(
+            ->add('artists', PersonAutocompleteChoiceType::class, array(
                 'label' => 'label.artists',
-                'class' => 'AppBundle:Person',
                 'required' => false,
-                'expanded' => false,
                 'multiple' => true,
             ))
-            ->add('publishers', EntityType::class, array(
+            ->add('publishers', PersonAutocompleteChoiceType::class, array(
                 'label' => 'label.publishers',
-                'class' => 'AppBundle:Person',
                 'required' => false,
-                'expanded' => false,
                 'multiple' => true,
             ))
             ->remove('presentation');

@@ -1,3 +1,7 @@
+app_admin_ajax_person:
+    resource: ajax/person.yml
+    prefix: /people
+
 sylius_admin_ajax_product:
     resource: ajax/product.yml
     prefix: /products
