@@ -12,6 +12,7 @@ parameters:
     mailer_password:   ~
     mailer_port:       2525
     mailer_auth:       cram-md5
+    mailer_encryption: ssl
 
     secret:            ThisTokenIsNotSoSecretChangeIt
 

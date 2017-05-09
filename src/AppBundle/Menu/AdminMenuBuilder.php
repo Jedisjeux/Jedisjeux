@@ -72,10 +72,12 @@ final class AdminMenuBuilder
             ->addChild('catalog')
             ->setLabel('app.ui.catalog');
 
-        $catalog
-            ->addChild('backend_taxon', ['route' => 'sylius_backend_taxon_index'])
-            ->setLabel('sylius.ui.taxons')
-            ->setLabelAttribute('icon', 'folder');
+        if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
+            $catalog
+                ->addChild('backend_taxon', ['route' => 'sylius_backend_taxon_index'])
+                ->setLabel('sylius.ui.taxons')
+                ->setLabelAttribute('icon', 'folder');
+        }
 
 
         $catalog
@@ -263,8 +265,7 @@ final class AdminMenuBuilder
     {
         $configuration = $menu
             ->addChild('configuration')
-            ->setLabel('sylius.ui.configuration')
-        ;
+            ->setLabel('sylius.ui.configuration');
 
         $configuration->addChild('backend_redirection', ['route' => 'app_backend_redirection_index'])
             ->setLabel('app.ui.redirections')
