@@ -53,16 +53,19 @@ class LoadGamePlaysCommand extends ContainerAwareCommand
     protected function getGamePlays()
     {
         $query = <<<EOM
-select concat('game-play-', old.partie_id) as code,
-       product.id as product_id,
-       old.date as createdAt,
-       customer.id as customer_id,
-       customer.email as email
-from jedisjeux.jdj_parties old
-  inner join sylius_customer customer
-    on customer.code = concat('user-', old.user_id)
-  inner join sylius_product product
-      on product.code = concat('game-', old.game_id)
+SELECT
+  concat('game-play-', old.partie_id) AS code,
+  product.id                          AS product_id,
+  old.date                            AS createdAt,
+  customer.id                         AS customer_id,
+  customer.email                      AS email
+FROM jedisjeux.jdj_parties old
+  INNER JOIN sylius_customer customer
+    ON customer.code = concat('user-', old.user_id)
+  INNER JOIN sylius_product_variant variant
+    ON variant.code = concat('game-', old.game_id)
+  INNER JOIN sylius_product product
+    ON product.id = variant.product_id
 EOM;
 
         return $this->getDatabaseConnection()->fetchAll($query);
