@@ -78,8 +78,8 @@ class ArticleRepository extends EntityRepository
         $queryBuilder
             ->addSelect('taxon')
             ->addSelect('taxonTranslation')
-            ->innerJoin('o.mainTaxon', 'taxon')
-            ->innerJoin('taxon.translations', 'taxonTranslation');
+            ->leftJoin('o.mainTaxon', 'taxon')
+            ->leftJoin('taxon.translations', 'taxonTranslation');
 
         if (isset($criteria['query'])) {
             $queryBuilder
@@ -139,8 +139,8 @@ class ArticleRepository extends EntityRepository
         $queryBuilder
             ->addSelect('taxon')
             ->addSelect('taxonTranslation')
-            ->innerJoin('o.mainTaxon', 'taxon')
-            ->innerJoin('taxon.translations', 'taxonTranslation')
+            ->leftJoin('o.mainTaxon', 'taxon')
+            ->leftJoin('taxon.translations', 'taxonTranslation')
             ->andWhere($queryBuilder->expr()->orX(
                 'taxon = :taxon',
                 ':left < taxon.left AND taxon.right < :right'
