@@ -87,21 +87,25 @@ class LoadReviewsOfProductsCommand extends ContainerAwareCommand
     protected function getReviews()
     {
         $query = <<<EOM
-select      customer.email,
-            customer.id as customer_id,
-            product.id as product_id,
-            old.note as rating,
-            old.date,
-            old.accroche as title,
-            case
-                when old.avis <> '' then old.avis
-                else null
-            end as comment
-from        jedisjeux.jdj_avis old
-inner join  sylius_product product
-                on product.code = concat('game-', old.game_id)
-inner join  sylius_customer customer
-                on customer.code = concat('user-', old.user_id)
+SELECT
+  customer.email,
+  customer.id  AS customer_id,
+  product.id   AS product_id,
+  old.note     AS rating,
+  old.date,
+  old.accroche AS title,
+  CASE
+  WHEN old.avis <> ''
+    THEN old.avis
+  ELSE NULL
+  END          AS comment
+FROM jedisjeux.jdj_avis old
+  INNER JOIN sylius_product_variant variant
+    ON variant.code = concat('game-', old.game_id)
+  INNER JOIN sylius_product product
+    ON product.id = variant.product_id
+  INNER JOIN sylius_customer customer
+    ON customer.code = concat('user-', old.user_id)
 EOM;
 
         return $this->getDatabaseConnection()->fetchAll($query);
