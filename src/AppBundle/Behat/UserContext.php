@@ -88,6 +88,7 @@ class UserContext extends DefaultContext
         $user->setLocked(isset($data['locked']) ? (bool)$data['locked'] : false);
         $user->addRole(isset($data['role']) ? $data['role'] : 'ROLE_USER');
 
+        $user->setEmailVerificationToken(isset($data['email_verification_token']) ? $data['email_verification_token'] : null);
         $user->setPasswordResetToken(isset($data['confirmation_token']) ? $data['confirmation_token'] : null);
 
         if (isset($data['confirmation_token'])) {
