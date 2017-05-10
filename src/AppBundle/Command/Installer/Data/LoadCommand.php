@@ -99,6 +99,10 @@ abstract class LoadCommand extends ContainerAwareCommand implements LoadCommandI
     {
         $entityReflection = new \ReflectionClass($entity);
         foreach ($data as $key => $value) {
+            if (empty($value) or "null" === $value) {
+                $value = null;
+            }
+
             if ($entityReflection->hasProperty($key)) {
                 $property = $entityReflection->getProperty($key);
                 $property->setAccessible(true);

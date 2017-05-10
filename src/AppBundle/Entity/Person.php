@@ -41,9 +41,7 @@ class Person implements ResourceInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=50)
-     *
-     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=50, nullable=true)
      *
      * @JMS\Expose
      * @JMS\Groups({"Default", "Detailed"})
