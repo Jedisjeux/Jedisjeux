@@ -7,7 +7,8 @@ sylius_grid:
                     class: "%app.model.person.class%"
                     repository:
                         method: createListQueryBuilder
-                        arguments: [expr:service('sylius.repository.taxon').findOneBySlug($slug)]
+                        arguments:
+                            taxon: "expr:service('sylius.repository.taxon').findOneBySlug($slug, '%locale%')"
             limits: ~
             sorting:
                 createdAt: desc

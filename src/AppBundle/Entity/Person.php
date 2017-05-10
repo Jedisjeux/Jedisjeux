@@ -535,10 +535,11 @@ class Person implements ResourceInterface
      */
     public function getFullName()
     {
-        /**
-         * firstname is not mandatory, thus we trim concatenation
-         */
-        return trim($this->getFirstName() . ' ' . $this->getLastName());
+        if (null === $this->getFirstName()) {
+            return $this->getLastName();
+        }
+
+        return $this->getFirstName() . ' ' . $this->getLastName();
     }
 
     /**
