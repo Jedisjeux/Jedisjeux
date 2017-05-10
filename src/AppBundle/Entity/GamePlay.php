@@ -271,7 +271,7 @@ class GamePlay implements ResourceInterface
      */
     public function removeImage(GamePlayImage $image)
     {
-        $this->images->remove($image);
+        $this->images->removeElement($image);
 
         return $this;
     }

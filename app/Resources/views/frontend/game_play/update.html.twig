@@ -12,7 +12,7 @@
     / Modifier la partie
 {% endblock %}
 {% block container %}
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
     <input type="hidden" name="_method" value="PUT"/>
     {% include 'frontend/game_play/_form.html.twig' %}
     <br />

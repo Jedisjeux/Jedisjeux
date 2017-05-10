@@ -102,6 +102,10 @@ class ServicesPass implements CompilerPassInterface
         $articleFormTypeDefinition
             ->addMethodCall('setManager', [new Reference('doctrine.orm.entity_manager')]);
 
+        $gamePlayFormTypeDefinition = $container->getDefinition('app.form.type.game_play');
+        $gamePlayFormTypeDefinition
+            ->addMethodCall('setManager', [new Reference('doctrine.orm.entity_manager')]);
+
         $topicFormTypeDefinition = $container->getDefinition('app.form.type.topic');
         $topicFormTypeDefinition
             ->addMethodCall('setAuthorizationChecker', [new Reference('security.authorization_checker')]);
