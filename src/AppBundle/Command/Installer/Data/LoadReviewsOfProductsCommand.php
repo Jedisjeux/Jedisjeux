@@ -69,6 +69,7 @@ class LoadReviewsOfProductsCommand extends ContainerAwareCommand
             $productReview = $this->getFactory()->createNew();
         }
 
+        $productReview->setCode($data['code']);
         $productReview->setTitle($data['title']);
         $productReview->setAuthor($customer);
         $productReview->setReviewSubject($product);
@@ -88,17 +89,18 @@ class LoadReviewsOfProductsCommand extends ContainerAwareCommand
     {
         $query = <<<EOM
 SELECT
+  concat('product-review-', old.id) AS code,
   customer.email,
-  customer.id  AS customer_id,
-  product.id   AS product_id,
-  old.note     AS rating,
+  customer.id                       AS customer_id,
+  product.id                        AS product_id,
+  old.note                          AS rating,
   old.date,
-  old.accroche AS title,
+  old.accroche                      AS title,
   CASE
   WHEN old.avis <> ''
     THEN old.avis
   ELSE NULL
-  END          AS comment
+  END                               AS comment
 FROM jedisjeux.jdj_avis old
   INNER JOIN sylius_product_variant variant
     ON variant.code = concat('game-', old.game_id)

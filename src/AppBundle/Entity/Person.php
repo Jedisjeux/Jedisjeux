@@ -29,6 +29,13 @@ class Person implements ResourceInterface
     /**
      * @var string
      *
+     * @ORM\Column(type="string", unique=true, nullable=true)
+     */
+    protected $code;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=50)
      *
      * @Assert\NotBlank()
@@ -148,6 +155,27 @@ class Person implements ResourceInterface
         $this->publisherProducts = new ArrayCollection();
         $this->images = new ArrayCollection();
         $this->taxons = new ArrayCollection();
+        $this->code = uniqid('person_');
+    }
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param string $code
+     *
+     * @return $this
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
     }
 
     /**

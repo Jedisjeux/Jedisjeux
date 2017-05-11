@@ -37,6 +37,7 @@ class LoadPeopleCommand extends LoadCommand
         $query = <<<EOM
 SELECT
   old.id,
+  concat('person-', old.id) as code,
   CASE
   WHEN old.nom_famille = ''
     THEN old.nom
