@@ -19,6 +19,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Product\Factory\ProductFactory;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
+use Sylius\Component\Product\Model\ProductAssociationInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Factory\Factory;
@@ -55,24 +56,24 @@ class LoadProductsCommand extends ContainerAwareCommand
         $associationTypeCollection = $this->createOrReplaceAssociationTypeCollection();
         $associationTypeExpansion = $this->createOrReplaceAssociationTypeExpansion();
 
-        $i = 0;
-
-        foreach ($this->getRows() as $data) {
-            $output->writeln(sprintf("Loading <comment>%s</comment> product", $data['name']));
-
-            $product = $this->createOrReplaceProduct($data);
-            $this->getManager()->persist($product);
-
-            if (($i % self::BATCH_SIZE) === 0) {
-                $this->getManager()->flush(); // Executes all updates.
-                $this->getManager()->clear(); // Detaches all objects from Doctrine!
-            }
-
-            ++$i;
-        }
-
-        $this->getManager()->flush();
-        $this->getManager()->clear();
+//        $i = 0;
+//
+//        foreach ($this->getRows() as $data) {
+//            $output->writeln(sprintf("Loading <comment>%s</comment> product", $data['name']));
+//
+//            $product = $this->createOrReplaceProduct($data);
+//            $this->getManager()->persist($product);
+//
+//            if (($i % self::BATCH_SIZE) === 0) {
+//                $this->getManager()->flush(); // Executes all updates.
+//                $this->getManager()->clear(); // Detaches all objects from Doctrine!
+//            }
+//
+//            ++$i;
+//        }
+//
+//        $this->getManager()->flush();
+//        $this->getManager()->clear();
 
         foreach ($this->getChildren() as $data) {
             $output->writeln(sprintf("Loading <comment>%s</comment> child for product <comment>%s</comment>",
@@ -93,11 +94,10 @@ class LoadProductsCommand extends ContainerAwareCommand
             } else {
                 $product = $this->createOrReplaceProduct($data);
 
-                $this->createOrReplaceProductAssociations($product, $familyProduct, $associationTypeCollection, $associationTypeExpansion);
+                $this->createOrReplaceProductAssociations($data['difference_type'], $product, $familyProduct, $associationTypeCollection, $associationTypeExpansion);
             }
 
             $this->getManager()->flush();
-            $this->getManager()->clear();
         }
 
         //$this->deleteProductAssociations();
@@ -108,19 +108,19 @@ class LoadProductsCommand extends ContainerAwareCommand
     protected function createOrReplaceAssociationTypeCollection()
     {
         /** @var ProductAssociationTypeInterface $assocationType */
-        $assocationType = $this->getContainer()->get('sylius.repository.product_association_type')->findOneBy(['code' => 'collection']);
+        $associationType = $this->getContainer()->get('sylius.repository.product_association_type')->findOneBy(['code' => 'collection']);
 
-        if (null === $assocationType) {
-            $assocationType = $this->getContainer()->get('sylius.factory.product_association_type')->createNew();
+        if (null === $associationType) {
+            $associationType = $this->getContainer()->get('sylius.factory.product_association_type')->createNew();
         }
 
-        $assocationType->setCode('collection');
-        $assocationType->setName('Dans la même série');
+        $associationType->setCode('collection');
+        $associationType->setName('Dans la même série');
 
-        $this->getManager()->persist($assocationType);
+        $this->getManager()->persist($associationType);
         $this->getManager()->flush(); // Save changes in database.
 
-        return $assocationType;
+        return $associationType;
     }
 
     /**
@@ -441,18 +441,66 @@ EOM;
 
         $this->getManager()->persist($product);
         $this->getManager()->flush();
-        $this->getManager()->clear();
     }
 
     /**
+     * @param string $differenceType
      * @param ProductInterface $product
      * @param ProductInterface $familyProduct
      * @param ProductAssociationTypeInterface $associationTypeCollection
      * @param ProductAssociationTypeInterface $associationTypeExpansion
      */
-    protected function createOrReplaceProductAssociations(ProductInterface $product, ProductInterface $familyProduct, ProductAssociationTypeInterface $associationTypeCollection, ProductAssociationTypeInterface $associationTypeExpansion)
+    protected function createOrReplaceProductAssociations(
+        $differenceType,
+        ProductInterface $product,
+        ProductInterface $familyProduct,
+        ProductAssociationTypeInterface $associationTypeCollection,
+        ProductAssociationTypeInterface $associationTypeExpansion)
     {
+        if ('extension' === $differenceType) {
+            $association = $this->getProductAssociationByTypeCode($familyProduct, 'expansion');
+            $association->setOwner($familyProduct);
+            $association->addAssociatedProduct($product);
 
+            $this->getManager()->persist($association);
+            $this->getManager()->flush();
+        }
+    }
+
+    /**
+     * @param ProductInterface $product
+     * @param string $productAssociationTypeCode
+     *
+     * @return ProductAssociationInterface
+     */
+    protected function getProductAssociationByTypeCode(ProductInterface $product, $productAssociationTypeCode)
+    {
+        foreach ($product->getAssociations() as $association) {
+            if ($association->getType()->getCode() === $productAssociationTypeCode) {
+                return $association;
+            }
+        }
+
+        $associationType = $this->getAssociationTypeByCode($productAssociationTypeCode);
+
+        /** @var ProductAssociationInterface $productAssociation */
+        $productAssociation = $this->getProductAssociationFactory()->createNew();
+        $productAssociation->setType($associationType);
+
+        return $productAssociation;
+    }
+
+    /**
+     * @param string $code
+     *
+     * @return ProductAssociationTypeInterface
+     */
+    protected function getAssociationTypeByCode($code)
+    {
+        /** @var ProductAssociationTypeInterface $associationType */
+        $associationType = $this->getContainer()->get('sylius.repository.product_association_type')->findOneBy(['code' => $code]);
+
+        return $associationType;
     }
 
     /**
@@ -552,6 +600,14 @@ EOM;
     protected function getProductVariantFactory()
     {
         return $this->getContainer()->get('sylius.factory.product_variant');
+    }
+
+    /**
+     * @return Factory|object
+     */
+    protected function getProductAssociationFactory()
+    {
+        return $this->getContainer()->get('sylius.factory.product_association');
     }
 
     /**
