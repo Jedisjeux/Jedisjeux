@@ -19,7 +19,9 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Product\Factory\ProductFactory;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
+use Sylius\Component\Product\Model\ProductAssociationInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -73,43 +75,54 @@ class LoadProductsCommand extends ContainerAwareCommand
         $this->getManager()->flush();
         $this->getManager()->clear();
 
-        foreach ($this->getVariants() as $data) {
-            $output->writeln(sprintf("Loading <comment>%s</comment> variant for product <comment>%s</comment>",
+        foreach ($this->getChildren() as $data) {
+            $output->writeln(sprintf("Loading <comment>%s</comment> child for product <comment>%s</comment>",
                 $data['name'],
-                $data['parent_code']
+                $data['family_code']
             ));
 
-            /** @var Product $product */
-            $product = $this->getRepository()->findOneBy(['code' => $data['parent_code']]);
+            /** @var Product $familyProduct */
+            $familyProduct = $this->getRepository()->findOneBy(['code' => $data['family_code']]);
 
-            if (null === $product) {
-                throw new NotFoundHttpException(sprintf('Product with code %s was not found.', $data['parent_code']));
+            if (null === $familyProduct) {
+                throw new NotFoundHttpException(sprintf('Product with code %s was not found.', $data['family_code']));
             }
 
-            $this->createOrReplaceProductVariant($product, $data);
+            // if name of the product is identical to his parent, we can surely create a variant
+            if ($data['name'] === $familyProduct->getName()) {
+                $this->createOrReplaceProductVariant($familyProduct, $data);
+            } else {
+                $product = $this->createOrReplaceProduct($data);
+
+                $this->createOrReplaceProductAssociations($data['difference_type'], $product, $familyProduct);
+                $this->getManager()->persist($product);
+            }
+
+            $this->getManager()->flush();
+            $this->getManager()->clear();
         }
 
-        $this->deleteProductAssociations();
-        $this->insertProductsOfCollections($associationTypeCollection);
-        $this->insertProductsOfExpansions($associationTypeExpansion);
+        //$this->deleteProductAssociations();
+        //$this->insertProductsOfCollections($associationTypeCollection);
+        //$this->insertProductsOfExpansions($associationTypeExpansion);
     }
 
     protected function createOrReplaceAssociationTypeCollection()
     {
         /** @var ProductAssociationTypeInterface $assocationType */
-        $assocationType = $this->getContainer()->get('sylius.repository.product_association_type')->findOneBy(['code' => 'collection']);
+        $associationType = $this->getContainer()->get('sylius.repository.product_association_type')->findOneBy(['code' => 'collection']);
 
-        if (null === $assocationType) {
-            $assocationType = $this->getContainer()->get('sylius.factory.product_association_type')->createNew();
+        if (null === $associationType) {
+            $associationType = $this->getContainer()->get('sylius.factory.product_association_type')->createNew();
         }
 
-        $assocationType->setCode('collection');
-        $assocationType->setName('Dans la même série');
+        $associationType->setCode('collection');
+        $associationType->setName('Dans la même série');
 
-        $this->getManager()->persist($assocationType);
+        $this->getManager()->persist($associationType);
         $this->getManager()->flush(); // Save changes in database.
 
-        return $assocationType;
+        return $associationType;
     }
 
     /**
@@ -430,7 +443,60 @@ EOM;
 
         $this->getManager()->persist($product);
         $this->getManager()->flush();
-        $this->getManager()->clear();
+    }
+
+    /**
+     * @param string $differenceType
+     * @param ProductInterface $product
+     * @param ProductInterface $familyProduct
+     */
+    protected function createOrReplaceProductAssociations(
+        $differenceType,
+        ProductInterface $product,
+        ProductInterface $familyProduct
+    )
+    {
+        if ('extension' === $differenceType) {
+            $association = $this->getProductAssociationByTypeCode($familyProduct, 'expansion');
+            $association->addAssociatedProduct($product);
+        }
+    }
+
+    /**
+     * @param ProductInterface $product
+     * @param string $productAssociationTypeCode
+     *
+     * @return ProductAssociationInterface
+     */
+    protected function getProductAssociationByTypeCode(ProductInterface $product, $productAssociationTypeCode)
+    {
+        foreach ($product->getAssociations() as $association) {
+            if ($association->getType()->getCode() === $productAssociationTypeCode) {
+                return $association;
+            }
+        }
+
+        $associationType = $this->getAssociationTypeByCode($productAssociationTypeCode);
+
+        /** @var ProductAssociationInterface $productAssociation */
+        $productAssociation = $this->getProductAssociationFactory()->createNew();
+        $productAssociation->setType($associationType);
+        $product->addAssociation($productAssociation);
+
+        return $productAssociation;
+    }
+
+    /**
+     * @param string $code
+     *
+     * @return ProductAssociationTypeInterface
+     */
+    protected function getAssociationTypeByCode($code)
+    {
+        /** @var ProductAssociationTypeInterface $associationType */
+        $associationType = $this->getContainer()->get('sylius.repository.product_association_type')->findOneBy(['code' => $code]);
+
+        return $associationType;
     }
 
     /**
@@ -440,43 +506,8 @@ EOM;
     {
         $query = <<<EOM
 SELECT
-  concat('game-', old.id) AS code,
-  old.nom                 AS name,
-  old.min                 AS joueurMin,
-  old.max                 AS joueurMax,
-  old.age_min             AS ageMin,
-  old.intro               AS shortDescription,
-  old.presentation        AS description,
-  old.duree               AS durationMin,
-  old.duree               AS durationMax,
-  old.materiel            AS materiel,
-  old.valid               AS status,
-  old.date                AS createdAt,
-  old.date                AS updatedAt,
-  CASE WHEN old.date_sortie IS NULL AND old.annee IS NOT NULL
-    THEN concat(old.annee, '-01-01')
-  ELSE old.date_sortie
-  END                     AS releasedAt,
-  old.precis_sortie       AS releasedAtPrecision,
-  old.href                AS href
-FROM jedisjeux.jdj_game old
-WHERE old.valid > 0
-      AND (old.id_pere IS NULL OR old.id = old.id_famille OR type_diff IN ('extension', 'collection'))
-      AND old.nom <> ""
-EOM;
-
-        return $this->getManager()->getConnection()->fetchAll($query);
-    }
-
-    /**
-     * @return array
-     */
-    private function getVariants()
-    {
-        $query = <<<EOM
-SELECT
+  concat('game-', old.id_famille) AS family_code,
   concat('game-', old.id)         AS code,
-  concat('game-', old.id_famille) AS parent_code,
   old.nom                         AS name,
   old.min                         AS joueurMin,
   old.max                         AS joueurMax,
@@ -497,11 +528,46 @@ SELECT
   old.href                        AS href
 FROM jedisjeux.jdj_game old
 WHERE old.valid > 0
-      AND old.id_pere IS NOT NULL
-      AND old.id <> old.id_famille
-      AND old.nom <> ""
-      AND type_diff IN ('regle', 'materiel')
+      AND old.id = old.id_famille
+ORDER BY old.id_famille
+EOM;
 
+        return $this->getManager()->getConnection()->fetchAll($query);
+    }
+
+    /**
+     * @return array
+     */
+    private function getChildren()
+    {
+        $query = <<<EOM
+
+SELECT
+  concat('game-', old.id_famille) AS family_code,
+  concat('game-', old.id)         AS code,
+  old.type_diff                   AS difference_type,
+  old.nom                         AS name,
+  old.min                         AS joueurMin,
+  old.max                         AS joueurMax,
+  old.age_min                     AS ageMin,
+  old.intro                       AS shortDescription,
+  old.presentation                AS description,
+  old.duree                       AS durationMin,
+  old.duree                       AS durationMax,
+  old.materiel                    AS materiel,
+  old.valid                       AS status,
+  old.date                        AS createdAt,
+  old.date                        AS updatedAt,
+  CASE WHEN old.date_sortie IS NULL AND old.annee IS NOT NULL
+    THEN concat(old.annee, '-01-01')
+  ELSE old.date_sortie
+  END                             AS releasedAt,
+  old.precis_sortie               AS releasedAtPrecision,
+  old.href                        AS href
+FROM jedisjeux.jdj_game old
+WHERE old.valid > 0
+      AND old.id <> old.id_famille
+ORDER BY old.id_famille
 EOM;
 
         return $this->getManager()->getConnection()->fetchAll($query);
@@ -530,6 +596,14 @@ EOM;
     protected function getProductVariantFactory()
     {
         return $this->getContainer()->get('sylius.factory.product_variant');
+    }
+
+    /**
+     * @return Factory|object
+     */
+    protected function getProductAssociationFactory()
+    {
+        return $this->getContainer()->get('sylius.factory.product_association');
     }
 
     /**
