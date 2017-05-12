@@ -56,24 +56,24 @@ class LoadProductsCommand extends ContainerAwareCommand
         $associationTypeCollection = $this->createOrReplaceAssociationTypeCollection();
         $associationTypeExpansion = $this->createOrReplaceAssociationTypeExpansion();
 
-//        $i = 0;
-//
-//        foreach ($this->getRows() as $data) {
-//            $output->writeln(sprintf("Loading <comment>%s</comment> product", $data['name']));
-//
-//            $product = $this->createOrReplaceProduct($data);
-//            $this->getManager()->persist($product);
-//
-//            if (($i % self::BATCH_SIZE) === 0) {
-//                $this->getManager()->flush(); // Executes all updates.
-//                $this->getManager()->clear(); // Detaches all objects from Doctrine!
-//            }
-//
-//            ++$i;
-//        }
-//
-//        $this->getManager()->flush();
-//        $this->getManager()->clear();
+        $i = 0;
+
+        foreach ($this->getRows() as $data) {
+            $output->writeln(sprintf("Loading <comment>%s</comment> product", $data['name']));
+
+            $product = $this->createOrReplaceProduct($data);
+            $this->getManager()->persist($product);
+
+            if (($i % self::BATCH_SIZE) === 0) {
+                $this->getManager()->flush(); // Executes all updates.
+                $this->getManager()->clear(); // Detaches all objects from Doctrine!
+            }
+
+            ++$i;
+        }
+
+        $this->getManager()->flush();
+        $this->getManager()->clear();
 
         foreach ($this->getChildren() as $data) {
             $output->writeln(sprintf("Loading <comment>%s</comment> child for product <comment>%s</comment>",
@@ -94,10 +94,12 @@ class LoadProductsCommand extends ContainerAwareCommand
             } else {
                 $product = $this->createOrReplaceProduct($data);
 
-                $this->createOrReplaceProductAssociations($data['difference_type'], $product, $familyProduct, $associationTypeCollection, $associationTypeExpansion);
+                $this->createOrReplaceProductAssociations($data['difference_type'], $product, $familyProduct);
+                $this->getManager()->persist($product);
             }
 
             $this->getManager()->flush();
+            $this->getManager()->clear();
         }
 
         //$this->deleteProductAssociations();
@@ -447,23 +449,16 @@ EOM;
      * @param string $differenceType
      * @param ProductInterface $product
      * @param ProductInterface $familyProduct
-     * @param ProductAssociationTypeInterface $associationTypeCollection
-     * @param ProductAssociationTypeInterface $associationTypeExpansion
      */
     protected function createOrReplaceProductAssociations(
         $differenceType,
         ProductInterface $product,
-        ProductInterface $familyProduct,
-        ProductAssociationTypeInterface $associationTypeCollection,
-        ProductAssociationTypeInterface $associationTypeExpansion)
+        ProductInterface $familyProduct
+    )
     {
         if ('extension' === $differenceType) {
             $association = $this->getProductAssociationByTypeCode($familyProduct, 'expansion');
-            $association->setOwner($familyProduct);
             $association->addAssociatedProduct($product);
-
-            $this->getManager()->persist($association);
-            $this->getManager()->flush();
         }
     }
 
@@ -486,6 +481,7 @@ EOM;
         /** @var ProductAssociationInterface $productAssociation */
         $productAssociation = $this->getProductAssociationFactory()->createNew();
         $productAssociation->setType($associationType);
+        $product->addAssociation($productAssociation);
 
         return $productAssociation;
     }
