@@ -9,18 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace AppBundle\Updater;
-
-use AppBundle\Entity\Topic;
+namespace AppBundle;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class PostCountByTopicUpdater
+class ProductAssociationTypes
 {
-    public function update(Topic $topic)
-    {
-        $postCount = $topic->getPosts()->count();
-        $topic->setPostCount($postCount);
-    }
+    const COLLECTION = 'collection';
+
+    const EXPANSION = 'expansion';
 }

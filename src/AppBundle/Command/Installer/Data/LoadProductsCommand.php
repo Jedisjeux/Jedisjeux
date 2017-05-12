@@ -13,8 +13,11 @@ namespace AppBundle\Command\Installer\Data;
 
 use AppBundle\Entity\Product;
 use AppBundle\Entity\ProductVariant;
+use AppBundle\ProductAssociationTypes;
 use AppBundle\Repository\TaxonRepository;
 use AppBundle\TextFilter\Bbcode2Html;
+use AppBundle\Updater\AddProductAssociationOwnerToProductUpdater;
+use AppBundle\Updater\AddProductToAssociatedProductsUpdater;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Product\Factory\ProductFactory;
@@ -53,8 +56,8 @@ class LoadProductsCommand extends ContainerAwareCommand
         $this->output = $output;
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
 
-        $associationTypeCollection = $this->createOrReplaceAssociationTypeCollection();
-        $associationTypeExpansion = $this->createOrReplaceAssociationTypeExpansion();
+        $this->createOrReplaceAssociationTypeCollection();
+        $this->createOrReplaceAssociationTypeExpansion();
 
         $i = 0;
 
@@ -109,20 +112,18 @@ class LoadProductsCommand extends ContainerAwareCommand
 
     protected function createOrReplaceAssociationTypeCollection()
     {
-        /** @var ProductAssociationTypeInterface $assocationType */
-        $associationType = $this->getContainer()->get('sylius.repository.product_association_type')->findOneBy(['code' => 'collection']);
+        /** @var ProductAssociationTypeInterface $associationType */
+        $associationType = $this->getContainer()->get('sylius.repository.product_association_type')->findOneBy(['code' => ProductAssociationTypes::COLLECTION]);
 
         if (null === $associationType) {
             $associationType = $this->getContainer()->get('sylius.factory.product_association_type')->createNew();
         }
 
-        $associationType->setCode('collection');
+        $associationType->setCode(ProductAssociationTypes::COLLECTION);
         $associationType->setName('Dans la même série');
 
         $this->getManager()->persist($associationType);
         $this->getManager()->flush(); // Save changes in database.
-
-        return $associationType;
     }
 
     /**
@@ -131,19 +132,17 @@ class LoadProductsCommand extends ContainerAwareCommand
     protected function createOrReplaceAssociationTypeExpansion()
     {
         /** @var ProductAssociationTypeInterface $associationType */
-        $associationType = $this->getContainer()->get('sylius.repository.product_association_type')->findOneBy(['code' => 'expansion']);
+        $associationType = $this->getContainer()->get('sylius.repository.product_association_type')->findOneBy(['code' => ProductAssociationTypes::EXPANSION]);
 
         if (null === $associationType) {
             $associationType = $this->getContainer()->get('sylius.factory.product_association_type')->createNew();
         }
 
-        $associationType->setCode('expansion');
+        $associationType->setCode(ProductAssociationTypes::EXPANSION);
         $associationType->setName('Extensions');
 
         $this->getManager()->persist($associationType);
         $this->getManager()->flush(); // Save changes in database.
-
-        return $associationType;
     }
 
     /**
@@ -457,8 +456,14 @@ EOM;
     )
     {
         if ('extension' === $differenceType) {
-            $association = $this->getProductAssociationByTypeCode($familyProduct, 'expansion');
+            $association = $this->getProductAssociationByTypeCode($familyProduct, ProductAssociationTypes::EXPANSION);
             $association->addAssociatedProduct($product);
+        } else {
+            $association = $this->getProductAssociationByTypeCode($familyProduct, ProductAssociationTypes::COLLECTION);
+            $association->addAssociatedProduct($product);
+
+            $this->getAddProductAssociationOwnerToProductUpdater()->update($association, $product);
+            $this->getAddProductToAssociatedProductsUpdater()->update($product, $association);
         }
     }
 
@@ -572,6 +577,22 @@ EOM;
 
         return $this->getManager()->getConnection()->fetchAll($query);
 
+    }
+
+    /**
+     * @return object|AddProductToAssociatedProductsUpdater
+     */
+    protected function getAddProductToAssociatedProductsUpdater()
+    {
+        return $this->getContainer()->get('app.updater.add_product_to_associated_products');
+    }
+
+    /**
+     * @return object|AddProductAssociationOwnerToProductUpdater
+     */
+    protected function getAddProductAssociationOwnerToProductUpdater()
+    {
+        return $this->getContainer()->get('app.updater.add_product_association_owner_to_product');
     }
 
     /**
