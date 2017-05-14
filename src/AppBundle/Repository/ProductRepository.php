@@ -103,16 +103,25 @@ class ProductRepository extends BaseProductRepository
 
     /**
      * @param string $slug
+     * @param bool $showUnpublished
      *
      * @return ProductInterface|null
      */
-    public function findOneBySlug($slug)
+    public function findOneBySlug($slug, $showUnpublished = true)
     {
-        return $this->createQueryBuilder('o')
+        $queryBuilder =  $this->createQueryBuilder('o')
             ->leftJoin('o.translations', 'translation')
             ->andWhere('o.enabled = true')
             ->andWhere('translation.slug = :slug')
-            ->setParameter('slug', $slug)
+            ->setParameter('slug', $slug);
+
+        if (false === $showUnpublished) {
+            $queryBuilder
+                ->andWhere('o.status = :published')
+                ->setParameter('published', Product::PUBLISHED);
+        }
+
+        return $queryBuilder
             ->getQuery()
             ->getOneOrNullResult();
     }

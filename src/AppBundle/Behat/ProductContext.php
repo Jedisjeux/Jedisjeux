@@ -64,6 +64,16 @@ class ProductContext extends DefaultContext
     }
 
     /**
+     * @When I am on :productSlug product page
+     *
+     * @param string $productSlug
+     */
+    public function iAmOnProductPage($productSlug)
+    {
+        $this->visitPath(sprintf('/jeu-de-societe/%s', $productSlug));
+    }
+
+    /**
      * @return SlugGeneratorInterface|object
      */
     protected function getProductSlugGenerator()
