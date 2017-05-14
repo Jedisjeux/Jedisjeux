@@ -857,6 +857,16 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
+     * @return Article[]|Collection
+     */
+    public function getPublishedArticles()
+    {
+        return $this->articles->filter(function (Article $article) {
+            return Article::STATUS_PUBLISHED === $article->getStatus();
+        });
+    }
+
+    /**
      * @return GamePlay[]|Collection
      */
     public function getGamePlays()
