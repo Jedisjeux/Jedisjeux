@@ -41,6 +41,6 @@ app_frontend_article_show:
         _controller: app.controller.article:showWithTaxonsAction
         _sylius:
             repository:
-                method: findOneBy
-                arguments: [slug: $slug]
+                method: findOneBySlug
+                arguments: [$slug, expr:service('security.authorization_checker').isGranted('ROLE_STAFF')]
             template: frontend/article/show.html.twig

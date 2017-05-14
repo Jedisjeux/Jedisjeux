@@ -64,6 +64,19 @@ class ArticleContext extends DefaultContext
     }
 
     /**
+     * @When I am on :articleTitle article page
+     *
+     * @param string $articleTitle
+     */
+    public function iAmOnArticlePage($articleTitle)
+    {
+        /** @var Article $article */
+        $article = $this->findOneBy('article', ['title' => $articleTitle], 'app');
+
+        $this->visitPath(sprintf('/article/%s', $article->getSlug()));
+    }
+
+    /**
      * @Then :articleTitle article should have :statusName status
      *
      * @param string $articleTitle

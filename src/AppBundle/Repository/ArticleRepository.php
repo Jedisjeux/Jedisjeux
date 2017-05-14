@@ -14,6 +14,29 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 class ArticleRepository extends EntityRepository
 {
     /**
+     * @param string $slug
+     * @param bool $showUnpublished
+     *
+     * @return null|Article
+     */
+    public function findOneBySlug($slug, $showUnpublished = true)
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        $queryBuilder
+            ->andWhere('o.slug = :slug')
+            ->setParameter('slug', $slug);
+
+        if (false === $showUnpublished) {
+            $queryBuilder
+                ->andWhere('o.status = :published')
+                ->setParameter('published', Article::STATUS_PUBLISHED);
+        }
+
+        return $queryBuilder->getQuery()->getOneOrNullResult();
+    }
+
+    /**
      * @param int $count
      *
      * @return array

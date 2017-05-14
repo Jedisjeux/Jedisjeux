@@ -20,5 +20,30 @@ Feature: View articles
 
   Scenario: View an article
     Given I am on "/articles/"
-    When I follow "Critique de Vroom Vroom"
-    Then I should see "Critique de Vroom Vroom"
+    When I am on "Critique de Vroom Vroom" article page
+    Then the response status code should be 200
+
+  Scenario: Cannot access to an article with new status
+    Given there are articles:
+      | taxon               | title       | author            | status |
+      | articles/actualites | New article | kevin@example.com | new    |
+    When I am on "New article" article page
+    Then the response status code should be 404
+
+  Scenario: Cannot access to an article with pending review status
+    Given there are articles:
+      | taxon               | title                  | author            | status         |
+      | articles/actualites | Pending review article | kevin@example.com | pending_review |
+    When I am on "Pending review article" article page
+    Then the response status code should be 404
+
+  Scenario: Can access to an article with new status as a staff user
+    Given there are articles:
+      | taxon               | title       | author            | status |
+      | articles/actualites | New article | kevin@example.com | new    |
+    And there are users:
+      | email             | role       | password |
+      | staff@example.com | ROLE_STAFF | password |
+    And I am logged in as user "staff@example.com" with password "password"
+    When I am on "New article" article page
+    Then the response status code should be 200
