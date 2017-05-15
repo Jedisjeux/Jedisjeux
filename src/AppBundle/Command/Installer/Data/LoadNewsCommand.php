@@ -114,7 +114,10 @@ SELECT
     THEN topic.id
   ELSE NULL END                                                  AS topic_id,
   old.nb_clicks                                                  AS view_count,
-  old.valid                                                      AS publishable,
+  CASE old.valid
+  WHEN 1
+    THEN 1
+  ELSE 0 END                                                     AS publishable,
   CASE old.valid
   WHEN 1
     THEN 'published'
