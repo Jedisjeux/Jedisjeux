@@ -104,10 +104,6 @@ class LoadProductsCommand extends ContainerAwareCommand
             $this->getManager()->flush();
             $this->getManager()->clear();
         }
-
-        //$this->deleteProductAssociations();
-        //$this->insertProductsOfCollections($associationTypeCollection);
-        //$this->insertProductsOfExpansions($associationTypeExpansion);
     }
 
     protected function createOrReplaceAssociationTypeCollection()
@@ -306,108 +302,6 @@ class LoadProductsCommand extends ContainerAwareCommand
         }
 
         return null;
-    }
-
-    protected function deleteProductAssociations()
-    {
-        /** @var EntityRepository $repository */
-        $repository = $this->getContainer()->get('sylius.repository.product_association');
-
-        $queryBuilder = $repository->createQueryBuilder('o');
-        $queryBuilder
-            ->delete();
-
-        $queryBuilder->getQuery()->execute();
-    }
-
-    /**
-     * @param ProductAssociationTypeInterface $associationType
-     *
-     * @throws \Doctrine\DBAL\DBALException
-     */
-    protected function insertProductsOfCollections(ProductAssociationTypeInterface $associationType)
-    {
-        $query = <<<EOM
-insert into sylius_product_association(product_id, association_type_id, created_at)
-select      product.id,
-  :association_type_id,
-  now()
-from        sylius_product product
-  inner join jedisjeux.jdj_game old
-    on concat('game-', old.id) = product.code  
-where  (old.id_pere is null or type_diff = 'collection')
-and exists (
-    select 0
-    from  jedisjeux.jdj_game a
-    where a.id_famille = old.id_famille
-    and   a.type_diff = 'collection'
-)
-EOM;
-
-        $this->getManager()->getConnection()->executeQuery($query, ['association_type_id' => $associationType->getId()]);
-
-        $query = <<<EOM
-insert into sylius_product_association_product(association_id, product_id)
-select association.id, associated.id
-from sylius_product_association association
-inner join sylius_product_association_type associationType
-  on associationType.id = association.association_type_id
-inner join sylius_product product
-  on product.id = association.product_id
-inner join jedisjeux.jdj_game old
-  on concat('game-', old.id) = product.code
-inner join jedisjeux.jdj_game oldAssociated
-  on oldAssociated.id_famille = old.id_famille
-inner join sylius_product associated
-  on associated.code = concat('game-', oldAssociated.id)
-where associationType.id = :association_type_id
-and (oldAssociated.id_pere is null or oldAssociated.type_diff = 'collection')
-and old.id <> oldAssociated.id
-EOM;
-
-        $this->getManager()->getConnection()->executeQuery($query, ['association_type_id' => $associationType->getId()]);
-
-    }
-
-    /**
-     * @param ProductAssociationTypeInterface $assocationType
-     *
-     * @throws \Doctrine\DBAL\DBALException
-     */
-    protected function insertProductsOfExpansions(ProductAssociationTypeInterface $assocationType)
-    {
-        $query = <<<EOM
-insert into sylius_product_association(product_id, association_type_id, created_at)
-SELECT DISTINCT
-  parent.product_id,
-  :association_type_id,
-  now()
-FROM jedisjeux.jdj_game old
-  INNER JOIN sylius_product_variant parent
-    ON parent.code = concat('game-', old.id_pere)
-WHERE type_diff = 'extension'
-EOM;
-
-        $this->getManager()->getConnection()->executeQuery($query, ['association_type_id' => $assocationType->getId()]);
-
-        $query = <<<EOM
-insert into sylius_product_association_product(association_id, product_id)
-SELECT
-  association.id,
-  associatedVariant.product_id
-FROM sylius_product_association association
-  INNER JOIN sylius_product_variant baseVariant
-    ON baseVariant.product_id = association.product_id
-  INNER JOIN jedisjeux.jdj_game old
-    ON concat('game-', old.id_pere) = baseVariant.code
-       AND old.type_diff = 'extension'
-  INNER JOIN sylius_product_variant associatedVariant
-    on associatedVariant.code = concat('game-', old.id)
-WHERE association.association_type_id = :association_type_id
-EOM;
-
-        $this->getManager()->getConnection()->executeQuery($query, ['association_type_id' => $assocationType->getId()]);
-
     }
 
     /**
