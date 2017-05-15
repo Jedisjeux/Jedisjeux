@@ -17,6 +17,8 @@ sylius_resource:
         app.article_review:
             classes:
                 model: AppBundle\Entity\ArticleReview
+                repository: AppBundle\Repository\ArticleReviewRepository
+                form: AppBundle\Form\Type\ArticleReviewType
         app.avatar:
             classes:
                 model: AppBundle\Entity\Avatar

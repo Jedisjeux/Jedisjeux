@@ -1,0 +1,8 @@
+{% set article = article_review.reviewSubject %}
+
+<h4 class="ui top attached styled header">
+    {{ 'app.ui.article'|trans }}
+</h4>
+<div class="ui attached segment">
+    <a href="{{ path('app_backend_article_update', {'id': article.id}) }}" class="header sylius-product-name">{{ article.title }}</a>
+</div>

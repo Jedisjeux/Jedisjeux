@@ -46,3 +46,6 @@ sylius_grid:
                         type: update
                     delete:
                         type: delete
+                subitem:
+                    manage_reviews:
+                        type: manage_article_reviews

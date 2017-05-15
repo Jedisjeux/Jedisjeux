@@ -1,5 +1,6 @@
 imports:
   - { resource: 'grids/backend/article.yml' }
+  - { resource: 'grids/backend/article_review.yml' }
   - { resource: 'grids/backend/contact_request.yml' }
   - { resource: 'grids/backend/customer.yml' }
   - { resource: 'grids/backend/customer_group.yml' }
@@ -41,6 +42,7 @@ sylius_grid:
 
             create_product: "backend/product/grid/action/createProduct.html.twig"
             manage_articles: "backend/product/grid/action/manageArticles.html.twig"
+            manage_article_reviews: "backend/article/grid/action/manageReviews.html.twig"
             manage_variants: "backend/product/grid/action/manageVariants.html.twig"
             create_taxon_for_parent: "backend/taxon/grid/action/createForParent.html.twig"
             list_posts: "backend/topic/grid/action/posts.html.twig"

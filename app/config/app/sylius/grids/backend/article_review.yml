@@ -1,0 +1,49 @@
+sylius_grid:
+    grids:
+        app_backend_article_review:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%app.model.article_review.class%"
+                    repository:
+                        method: createQueryBuilderByArticleId
+                        arguments: [$articleId]
+            sorting:
+                createdAt: asc
+            fields:
+                createdAt:
+                    type: twig
+                    label: sylius.ui.created_at
+                    sortable: createdAt
+                    options:
+                        template: "backend/grid/field/date/medium.html.twig"
+                author:
+                    type: string
+                    label: sylius.ui.customer
+                rating:
+                    type: string
+                    label: sylius.ui.rating
+                    sortable: ~
+            actions:
+                main:
+                    create:
+                        type: create
+                        options:
+                            link:
+                                parameters:
+                                    articleId: $articleId
+                item:
+                    update:
+                        type: update
+                        options:
+                            link:
+                                parameters:
+                                    id: resource.id
+                                    articleId: $articleId
+                    delete:
+                        type: delete
+                        options:
+                            link:
+                                parameters:
+                                    id: resource.id
+                                    articleId: $articleId

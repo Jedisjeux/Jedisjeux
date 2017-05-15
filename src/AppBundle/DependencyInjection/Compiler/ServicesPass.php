@@ -15,8 +15,10 @@ use AppBundle\EventListener\PasswordUpdaterListener;
 use AppBundle\EventListener\RequestLocaleSetter;
 use AppBundle\Factory\ProductFactory;
 use AppBundle\Feed\FeedDumpService;
+use Sylius\Component\Review\Factory\ReviewFactory;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
 
@@ -87,6 +89,15 @@ class ServicesPass implements CompilerPassInterface
         $productListFactoryDefinition
             ->addArgument(new Reference('app.context.customer'))
             ->addArgument(new Reference('translator.default'));
+
+
+        $subject = "article";
+
+        $factory = $container->findDefinition('app.factory.'.$subject.'_review');
+        $reviewFactoryDefinition = new Definition(ReviewFactory::class);
+
+        $reviewFactory = $container->setDefinition(sprintf('app.factory.'.$subject.'_review'), $reviewFactoryDefinition);
+        $reviewFactory->addArgument($factory);
     }
 
     /**

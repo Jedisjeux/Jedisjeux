@@ -29,6 +29,14 @@ services:
         tags:
             - { name: 'form.type', alias: 'app_article' }
 
+    app.form.type.article_review:
+        class: AppBundle\Form\Type\ArticleReviewType
+        arguments:
+            - "%app.model.article_review.class%"
+            - [sylius]
+        tags:
+            - { name: 'form.type', alias: 'app_article_review' }
+
     app.form.type.game_play:
         class: AppBundle\Form\Type\GamePlayType
         tags:

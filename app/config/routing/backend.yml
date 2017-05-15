@@ -23,6 +23,9 @@ app_admin_person:
 app_backend_article:
     resource: backend/article.yml
 
+app_backend_article_review:
+    resource: backend/article_review.yml
+
 app_admin_contact_request:
     resource: backend/contact_request.yml
 
