@@ -29,14 +29,14 @@ class AddProductAssociationOwnerToProductUpdater extends AbstractProductAssociat
     }
 
     /**
-     * @param ProductAssociationInterface $association
+     * @param ProductAssociationInterface $productAssociation
      * @param ProductInterface $product
      */
-    protected function addProductAssociationOwnerToProduct(ProductAssociationInterface $association, ProductInterface $product)
+    protected function addProductAssociationOwnerToProduct(ProductAssociationInterface $productAssociation, ProductInterface $product)
     {
-        $associationType = $association->getType();
+        $associationType = $productAssociation->getType();
 
         $association = $this->getProductAssociationByType($product, $associationType);
-        $association->addAssociatedProduct($association->getOwner());
+        $association->addAssociatedProduct($productAssociation->getOwner());
     }
 }

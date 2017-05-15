@@ -37,6 +37,10 @@ class AddProductToAssociatedProductsUpdater extends AbstractProductAssociationUp
         $associationType = $association->getType();
 
         foreach ($association->getAssociatedProducts() as $currentProduct) {
+            if ($product->getId() === $currentProduct->getId()) {
+                continue;
+            }
+
             $association = $this->getProductAssociationByType($currentProduct, $associationType);
             $association->addAssociatedProduct($product);
         }
