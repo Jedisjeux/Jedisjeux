@@ -7,6 +7,7 @@ use AppBundle\Entity\Person;
 use AppBundle\Entity\Product;
 use AppBundle\Entity\Topic;
 use Elastica\Query\QueryString;
+use Elastica\Query;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use Pagerfanta\Pagerfanta;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -23,7 +24,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
  */
 class SearchController extends Controller
 {
-
     /**
      * @param Request $request
      * @return Response|RedirectResponse
@@ -32,7 +32,11 @@ class SearchController extends Controller
     {
         $term = $request->get("query");
 
-        $paginator = $this->findByQuery($this->getQueryStringByTerm($term));
+        $query = $this->createFindByTermQuery($term);
+
+        /** @var TransformedFinder $finder */
+        $finder = $this->get('fos_elastica.finder.jedisjeux');
+        $paginator = $finder->findPaginated(Query::create($query));
         $paginator->setMaxPerPage(16);
         $paginator->setCurrentPage($request->get('page', 1));
 
@@ -49,6 +53,44 @@ class SearchController extends Controller
     }
 
     /**
+     * @param string $term
+     *
+     * @return Query
+     */
+    protected function createFindByTermQuery($term)
+    {
+        $boolQuery = new Query\BoolQuery();
+
+        $queryString = $this->getQueryStringByTerm($term);
+        $boolQuery->addMust($queryString);
+        $this->excludeUnpublishedStatuses($boolQuery);
+
+        return new Query($boolQuery);
+    }
+
+    /**
+     * @param Query\BoolQuery $boolQuery
+     */
+    protected function excludeUnpublishedStatuses(Query\BoolQuery $boolQuery)
+    {
+        $newStatus = new Query\Term();
+        $newStatus->setTerm('status', 'new');
+        $boolQuery->addMustNot($newStatus);
+
+        $pendingTranslationStatus = new Query\Term();
+        $pendingTranslationStatus->setTerm('status', 'pending_translation');
+        $boolQuery->addMustNot($pendingTranslationStatus);
+
+        $pendingReviewStatus = new Query\Term();
+        $pendingReviewStatus->setTerm('status', 'pending_review');
+        $boolQuery->addMustNot($pendingReviewStatus);
+
+        $pendingPublicationStatus = new Query\Term();
+        $pendingPublicationStatus->setTerm('status', 'pending_publication');
+        $boolQuery->addMustNot($pendingPublicationStatus);
+    }
+
+    /**
      * @param Request $request
      * @return JsonResponse
      */
@@ -56,7 +98,12 @@ class SearchController extends Controller
     {
         $term = $request->get("term", "");
 
-        $paginator = $this->findByQuery($this->getQueryStringByTerm($term));
+        $query = $this->createFindByTermQuery($term);
+
+        /** @var TransformedFinder $finder */
+        $finder = $this->get('fos_elastica.finder.jedisjeux');
+        $paginator = $finder->findPaginated(Query::create($query));
+
         $paginator->setMaxPerPage(5);
         $paginator->setCurrentPage($request->get('page', 1));
 
@@ -193,21 +240,6 @@ class SearchController extends Controller
         }
 
         return $types;
-    }
-
-    /**
-     * @param $query
-     * @return Pagerfanta
-     */
-    private function findByQuery($query)
-    {
-        /** @var TransformedFinder $finder */
-        $finder = $this->container->get('fos_elastica.finder.jedisjeux');
-
-        /** @var Pagerfanta $userPaginator */
-        $paginator = $finder->findPaginated($query);
-        return $paginator;
-
     }
 
     /**
