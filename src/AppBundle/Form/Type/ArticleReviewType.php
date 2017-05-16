@@ -13,6 +13,7 @@ namespace AppBundle\Form\Type;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sylius\Bundle\ReviewBundle\Form\Type\ReviewType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -28,9 +29,12 @@ class ArticleReviewType extends ReviewType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        parent::buildForm($builder, $options);
+
         $builder
-            ->add('rating', HiddenType::class, [
-                'label' => 'label.rate',
+            ->add('title', HiddenType::class, [
+                'label' => 'sylius.form.review.title',
+                'data' => 'Awesome Title',
             ])
             ->add('comment', CKEditorType::class, [
                 'label' => 'sylius.ui.comment',
@@ -43,6 +47,8 @@ class ArticleReviewType extends ReviewType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
+        parent::configureOptions($resolver);
+
         $resolver->setDefaults([
             'rating_steps' => 10,
             'validation_groups' => $this->validationGroups,
