@@ -56,6 +56,7 @@ app:
         internal_name: Nom interne
         introduction: Introduction
         last_used_at: Dernière utilisation
+        lifetime_rating: Note de la durée de vie
         list_reviews: Liste des avis
         logout: Déconnection
         main_image: Image principale
@@ -72,6 +73,7 @@ app:
         manage_redirections: Gérer les redirections
         manage_string_blocks: Gérer les blocs de chaîne
         manage_topics: Gérer les sujets
+        material_rating: Note du matériel
         my_game_lists: Mes listes de jeu
         my_game_plays: Mes parties de jeu
         name: Nom
@@ -101,6 +103,7 @@ app:
         public: Public
         publisher: Publieur
         published_at: Publié le
+        ratings: Notes
         redactor: Rédacteur
         redirections: Redirections
         redirection_count: Nombre de redirections
@@ -108,6 +111,7 @@ app:
         request_placeholder: Recherche....
         results_of_your_query: Résultats de votre recherche
         reviewer: Relecteur
+        rules_rating: Note des règles
         see_later: A regarder plus tard
         select_people: Sélectionner les personnes
         session_count: Nombre de sessions

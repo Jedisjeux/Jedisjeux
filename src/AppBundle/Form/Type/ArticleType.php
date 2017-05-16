@@ -85,8 +85,42 @@ class ArticleType extends AbstractType
                 'allow_delete' => true,
                 'by_reference' => false,
             ])
+            ->add('materialRating', ChoiceType::class, [
+                'required' => false,
+                'label' => 'app.ui.material_rating',
+                'choices' => $this->getRatingChoiceValues(),
+            ])
+            ->add('rulesRating', ChoiceType::class, [
+                'required' => false,
+                'label' => 'app.ui.rules_rating',
+                'choices' => $this->getRatingChoiceValues(),
+            ])
+            ->add('lifetimeRating', ChoiceType::class, [
+                'required' => false,
+                'label' => 'app.ui.lifetime_rating',
+                'choices' => $this->getRatingChoiceValues(),
+            ])
             ->addEventListener(FormEvents::POST_SET_DATA, array($this, 'onPostSetData'))
             ->addEventListener(FormEvents::POST_SUBMIT, array($this, 'onPostSubmit'));
+    }
+
+    /**
+     * @return array
+     */
+    protected function getRatingChoiceValues()
+    {
+        return [
+            '1/10 - Injouable' => 0.5,
+            '2/10 - Très mauvais' => 1,
+            '3/10 - Mauvais' => 1.5,
+            '4/10 - Bof' => 2,
+            '5/10 - Moyen' => 2.5,
+            '6/10 - Pas mal' => 3,
+            '7/10 - Bon' => 3.5,
+            '8/10 - Très bon' => 4,
+            '9/10 - Excellent' => 4.5,
+            '10/10 - Mythique' => 5,
+        ];
     }
 
     /**
