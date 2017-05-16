@@ -33,6 +33,22 @@ class LoadPlayersOfGamePlaysCommand extends ContainerAwareCommand
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
         $this->deletePlayers();
         $this->insertPlayers();
+        $this->updatePlayerCount();
+    }
+
+    protected function updatePlayerCount()
+    {
+        $query = <<<EOM
+update jdj_game_play gamePlay
+set player_count = (
+    SELECT count(0) AS player_count
+         FROM jdj_player player
+         WHERE player.game_play_id = gamePlay.id
+       )
+EOM;
+
+        $this->getManager()->getConnection()->executeQuery($query);
+
     }
 
     protected function deletePlayers()

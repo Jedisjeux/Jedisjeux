@@ -110,6 +110,7 @@ class ArticleType extends AbstractType
     protected function getRatingChoiceValues()
     {
         return [
+            'Choisissez une note' => 0,
             '1/10 - Injouable' => 0.5,
             '2/10 - Très mauvais' => 1,
             '3/10 - Mauvais' => 1.5,
