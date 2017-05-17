@@ -69,6 +69,7 @@ class ArticleType extends AbstractType
             ])
             ->add('shortDescription', CKEditorType::class, [
                 'label' => 'app.ui.short_description',
+                'config_name' => 'article',
                 'required' => false,
             ])
             ->add('mainTaxon', TaxonAutocompleteChoiceType::class, array(

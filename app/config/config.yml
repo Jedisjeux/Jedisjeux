@@ -46,6 +46,8 @@ twig:
     strict_variables: "%kernel.debug%"
     globals:
         ga_tracking: "%google.analytics.tracking_id%"
+    form_themes:
+        - "::form/ckeditor_widget.html.twig"
 
 mopa_bootstrap:
     form:
