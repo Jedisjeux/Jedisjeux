@@ -59,6 +59,7 @@ class BlockType extends AbstractType
             ])
             ->add('body', CKEditorType::class, [
                 'label' => 'sylius.ui.body',
+                'config_name' => 'article',
                 'required' => false,
             ]);
     }

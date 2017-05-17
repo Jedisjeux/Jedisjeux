@@ -31,6 +31,7 @@ class PostType extends AbstractType
         $builder
             ->add('body', CKEditorType::class, array(
                 'label' => 'label.body',
+                'config_name' => 'forum',
             ));
     }
 

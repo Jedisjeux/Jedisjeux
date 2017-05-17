@@ -225,6 +225,7 @@ FROM jedisjeux.jdj_article_text AS block
     ON imageElements.img_id = image.img_id
        AND imageElements.elem_type = 'article'
        AND imageElements.elem_id = block.article_id
+       -- Where oldArticle.titre = 'Colt Express du Far-West au futur'
 ORDER BY block.ordre
 EOM;
 

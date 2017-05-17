@@ -84,6 +84,12 @@ class Bbcode2Html
 
     protected function emptyTagsReplacement($body)
     {
+        $body = str_replace("<p></p>", "", $body);
+        $body = str_replace("</li></p><p><li>", "</li><li>", $body);
+        $body = str_replace("</ul><p></li>", "</ul></li>", $body);
+        $body = str_replace("</ul><p></li>", "</ul></li>", $body);
+        $body = str_replace("</strong></p><ul", "</strong><ul", $body);
+
         return $body;
     }
 
@@ -409,7 +415,7 @@ EOM;
     {
         $patterns = [
             '/\[list:[mou]?:?(.*?)\]/ms' => "</p><ul class=\"list-6\">",
-            '/\[\/list:[mou]?:?(.*?)\]/ms' => "</ul>",
+            '/\[\/list:[mou]?:?(.*?)\]/ms' => "</ul><p>",
             '/\[\*:[mou]?:?(.*?)\]/ms' => "<li>",
             '/\[\/\*:[mou]?:?(.*?)\]/ms' => "</li>",
         ];
