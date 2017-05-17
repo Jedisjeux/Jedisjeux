@@ -161,6 +161,7 @@ sylius:
         new_product: Nouveau jeu
         new_product_association_type: Nouveau type d'association de jeux
         no_label: Non
+        not_equal: Différent de
         out_of_stock: Rupture
         pending_publication: Prêt à publier
         pending_review: En relecture
