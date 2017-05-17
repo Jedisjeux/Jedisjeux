@@ -70,6 +70,7 @@ class Bbcode2Html
         $body = $this->underlineReplacement($body);
         $body = $this->centerReplacement($body);
         $body = $this->listReplacement($body);
+        $body = $this->emailReplacement($body);
         $body = $this->videoReplacement($body);
         $body = $this->emptyTagsReplacement($body);
 
@@ -366,6 +367,19 @@ EOM;
     {
         $pattern = '/\[u:(.*?)\](?P<label>.*?)\[\/u:(.*?)\]/ms';
         $replacement = "<strong>$2</strong>";
+        $body = preg_replace($pattern, $replacement, $body);
+
+        return $body;
+    }
+    /**
+     * @param string $body
+     *
+     * @return string
+     */
+    protected function emailReplacement($body)
+    {
+        $pattern = '/\[email:(.*?)\](?P<label>.*?)\[\/email:(.*?)\]/ms';
+        $replacement = "<a href=\"mailto:$2\">$2</a>";
         $body = preg_replace($pattern, $replacement, $body);
 
         return $body;
