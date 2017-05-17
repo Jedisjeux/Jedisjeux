@@ -60,7 +60,8 @@ class ProductReviewRepository extends EntityRepository
      */
     public function createFilterPaginator($criteria = [], $sorting = [])
     {
-        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder = $this->getQueryBuilder()
+            ->groupBy('o.id');
 
         if (isset($criteria['person'])) {
             $queryBuilder
