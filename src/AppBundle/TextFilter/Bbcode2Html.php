@@ -371,6 +371,7 @@ EOM;
 
         return $body;
     }
+
     /**
      * @param string $body
      *
@@ -406,16 +407,16 @@ EOM;
      */
     protected function listReplacement($body)
     {
-        $pattern = '/\[list:(.*?)\](?P<label>.*?)\[\/list:(.*?)\]/ms';
-        $replacement = '</p><ul class="list-6">$2</ul><p>';
-        $body = preg_replace($pattern, $replacement, $body);
+        $patterns = [
+            '/\[list:[mou]?:?(.*?)\]/ms' => "</p><ul class=\"list-6\">",
+            '/\[\/list:[mou]?:?(.*?)\]/ms' => "</ul>",
+            '/\[\*:[mou]?:?(.*?)\]/ms' => "<li>",
+            '/\[\/\*:[mou]?:?(.*?)\]/ms' => "</li>",
+        ];
 
-
-        $pattern = '/\[\*:(.*?)\](?P<label>.*?)\[\/\*:(.*?)\]/ms';
-        $replacement = "<li>$2</li>";
-        $body = preg_replace($pattern, $replacement, $body);
-
-        $body = str_replace("</li></p><p>", "</li>", $body);
+        foreach ($patterns as $pattern => $replacement) {
+            $body = preg_replace($pattern, $replacement, $body);
+        }
 
         return $body;
     }
