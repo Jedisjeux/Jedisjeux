@@ -17,9 +17,11 @@ use AppBundle\Entity\Taxon;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonAutocompleteChoiceType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -71,12 +73,21 @@ class ArticleType extends AbstractType
                 'label' => 'app.ui.short_description',
                 'required' => false,
             ])
-            ->add('mainTaxon', TaxonAutocompleteChoiceType::class, array(
+            ->add('mainTaxon', EntityType::class, array(
                 'label' => 'sylius.ui.category',
-                'placeholder' => 'app.ui.choose_category',
-                #'root' => Taxon::CODE_ARTICLE,
+                'placeholder' => '---',
+                'class' => 'AppBundle:Taxon',
+                'group_by' => 'parent',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('o')
+                        ->join('o.root', 'rootTaxon')
+                        ->where('rootTaxon.code = :code')
+                        ->andWhere('o.parent IS NOT NULL')
+                        ->setParameter('code', Taxon::CODE_ARTICLE)
+                        ->orderBy('o.position');
+                },
                 'multiple' => false,
-                'required' => true,
+                'required' => false,
             ))
             ->add('blocks', CollectionType::class, [
                 'label' => false,
