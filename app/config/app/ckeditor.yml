@@ -13,7 +13,7 @@ ivory_ck_editor:
             language: %locale%
             stylesSet: custom_styles  # Chargement des styles personnalisables
             contentsCss:  ['assets/frontend/compiled/css/style.css']
-            toolbar: [ [ 'Bold','Italic','Underline', 'Blockquote' ], [ 'NumberedList','BulletedList' ], [ 'Link','Unlink' ], [ 'Image' ], [ 'Smiley' ]; ]
+            toolbar: [ [ 'Bold','Italic','Underline', 'Blockquote' ], [ 'NumberedList','BulletedList' ], [ 'Link','Unlink' ], [ 'Image' ], [ 'Smiley' ], [ 'Source' ]; ]
         article:
             protectedSource: ['/<span[^>]*><\/span>/g']
             extraPlugins: 'templates,div,iframe'

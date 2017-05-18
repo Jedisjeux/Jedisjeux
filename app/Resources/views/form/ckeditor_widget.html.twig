@@ -2,5 +2,5 @@
 
 {% block ckeditor_widget_extra %}
     CKEDITOR.dtd.$removeEmpty['span'] = false;
-    CKEDITOR.config.extraAllowedContent = 'span(*); div(*); img(*); h4; ul(*); iframe(*)';
+    CKEDITOR.config.extraAllowedContent = 'span(*); div[*]{*}(*); img(*); h4; ul(*); iframe(*)';
 {% endblock %}
