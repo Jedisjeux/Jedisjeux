@@ -9,20 +9,14 @@ y{% macro blogCommentItem(game_review) %}
         <a href="#"><i class="fa fa-calendar"></i> &nbsp; {{ game_review.createdAt|date('d/m/Y') }}</a> &nbsp;
         <!-- Author -->
         <a href="#"><i class="fa fa-user"></i> &nbsp; {{ user }}</a> &nbsp;
-        <a href="#">
-            <i class="fa fa-thumbs-up"></i>
-            <span data-user-review="2" class="nbLikes">0{#{{ game_review.nbLikes }}#}</span>
-        </a>
-        &nbsp;
-        <a href="#">
-            <i class="fa fa-thumbs-down"></i>
-            <span data-user-review="2" class="nbDislikes">0{#{{ game_review.nbDislikes }}#}</span>
-        </a>
     {% endset %}
 
     <div class="pull-right">
-        <div class="rating yellow" data-readonly="true" data-rate-value="{{ game_review.rating/2 }}" data-step-size="0.5"></div>
+        <div class="rating yellow" data-readonly="true" data-rate-value="{{ game_review.rating/2 }}"
+             data-step-size="0.5"></div>
     </div>
 
-    {{ item.blogCommentItem(imagePath, user.username, 'thumbnail', 'img-responsive img-round', '#', game_review.title, meta, game_review.comment) }}
+    <div class="blog-comments">
+        {{ item.blogCommentItem(imagePath, user.username, 'thumbnail', 'img-responsive img-round', '#', game_review.title, meta, game_review.comment) }}
+    </div>
 {% endmacro %}

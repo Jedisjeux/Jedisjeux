@@ -33,6 +33,14 @@ sylius_product_review_update:
     options:
         expose: true
 
+sylius_frontend_product_review:
+    resource: |
+        alias: sylius.product_review
+        section: frontend
+        templates: :frontend/product_review
+        only: ['show']
+    type: sylius.resource
+
 sylius_product_rating_create:
     path: /rating/new
     methods: [GET, POST]
