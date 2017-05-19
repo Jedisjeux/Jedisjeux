@@ -84,7 +84,7 @@ class CreateTopicForArticleSubscriber implements EventSubscriberInterface
             $this->manager->persist($topic);
         }
 
-        $post->setTopic($topic);
+        $topic->addPost($post);
         $topic->addFollower($post->getAuthor());
     }
 }
