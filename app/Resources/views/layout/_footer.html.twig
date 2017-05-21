@@ -3,13 +3,13 @@
     <div class="container">
         <!-- Footer Content -->
         <!-- Paragraph -->
-        <p class="pull-left">Copyright &copy; {{ "now"|date('Y') }} - <a href="#">Jedisjeux.net</a></p>
+        <p class="pull-left">Copyright &copy; 2005-{{ "now"|date('Y') }} - <a href="#">Jedisjeux.net</a></p>
         <ul class="list-inline pull-right">
             <!-- List -->
             <li><a href="{{ path('app_homepage') }}">Accueil</a>
             <li>
-            <li><a href="{{ path('sylius_frontend_static_content_show', {'id': 'mentions-legales'}) }}">Mentions légales</a></li>
-            <li><a href="#">A propos</a></li>
+            {#<li><a href="{{ path('sylius_frontend_static_content_show', {'id': 'mentions-legales'}) }}">Mentions légales</a></li>#}
+            {#<li><a href="#">A propos</a></li>#}
             <li><a href="{{ path('app_frontend_contact_request_create') }}">{{ 'label.contact'|trans }}</a></li>
         </ul>
         <!-- Clearfix -->

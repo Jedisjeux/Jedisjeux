@@ -20,7 +20,7 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
  * @author Loïc Frémont <loic@mobizel.com>
  *
  * @ORM\Entity
- * @ORM\Table(name="Taxon")
+ * @ORM\Table(name="sylius_taxon")
  */
 class Taxon extends BaseTaxon
 {
@@ -32,6 +32,7 @@ class Taxon extends BaseTaxon
     const CODE_PREVIEWS = 'previews';
     const CODE_REPORT_ARTICLE = 'report-articles';
     const CODE_REVIEW_ARTICLE = 'review-articles';
+    const CODE_VIDEO = 'videos';
 
     // taxons of forum
     const CODE_FORUM = 'forum';
@@ -84,18 +85,6 @@ class Taxon extends BaseTaxon
     protected $productCount;
 
     /**
-     * {@inheritdoc}
-     */
-    public function setParent(TaxonInterface $parent = null)
-    {
-        if ($parent !== $this->parent) {
-            $this->setPermalink(null);
-        }
-
-        parent::setParent($parent);
-    }
-
-    /**
      * Taxon constructor.
      */
     public function __construct()
@@ -111,20 +100,8 @@ class Taxon extends BaseTaxon
      * @return string
      *
      * @JMS\VirtualProperty
-     * @JMS\SerializedName("permalink")
-     * @JMS\Groups({"Details"})
-     */
-    public function getPermalink()
-    {
-        return parent::getPermalink();
-    }
-
-    /**
-     * @return string
-     *
-     * @JMS\VirtualProperty
      * @JMS\SerializedName("name")
-     * @JMS\Groups({"Details"})
+     * @JMS\Groups({"Detailed"})
      */
     public function getName()
     {

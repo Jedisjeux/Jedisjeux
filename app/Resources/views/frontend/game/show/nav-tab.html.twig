@@ -3,9 +3,9 @@
     <!-- Nav tabs -->
     <ul class="nav nav-tabs">
         <li class="active"><a href="#resume" data-toggle="tab">Résumé</a></li>
-        <li><a href="#articles" data-toggle="tab">Articles <span class="color">({{ product.articles | length }})</span></a></li>
+        <li><a href="#articles" data-toggle="tab">Articles <span class="color">({{ product.publishedArticles | length }})</span></a></li>
         <li><a href="#critiques" data-toggle="tab">Avis <span class="color">({{ product.commentedReviews | length }})</span></a></li>
-        <li><a href="#forum" data-toggle="tab">Forum</a></li>
+        <li><a href="#gamePlays" data-toggle="tab">{{ 'app.ui.game_plays'|trans }} <span class="color">({{ product.gamePlays | length }})</span></a></li>
     </ul>
     <!-- Tab content -->
     <div class="tab-content">
@@ -32,16 +32,16 @@
             })) }}
 
         </div>
-        <div class="tab-pane fade" id="forum">
-            {{ render(url('app_partial_topic_index', {
+        <div class="tab-pane fade" id="gamePlays">
+            {{ render(url('app_partial_game_play_index', {
                 'criteria': {
                     'product': jeu.id
                 },
                 'sorting': {
                     'createdAt': 'desc'
                 },
-                'paginate': 5,
-                'template': 'frontend/topic/_index.html.twig'
+                'paginate': 9,
+                'template': 'frontend/game/show/_gamePlays.html.twig'
             })) }}
         </div>
         <div class="clearfix"></div>

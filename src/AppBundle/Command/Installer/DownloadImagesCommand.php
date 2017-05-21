@@ -47,6 +47,6 @@ EOT
             'app:images:download',
         ];
 
-        $this->runCommands($commands, $input, $output);
+        $this->runCommands($commands, $output);
     }
 }

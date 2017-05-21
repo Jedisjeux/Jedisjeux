@@ -10,9 +10,7 @@ namespace AppBundle\TextFilter;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityRepository;
-use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Product\Model\ProductInterface;
-
+use Sylius\Component\Product\Model\ProductVariantInterface;
 
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
@@ -47,15 +45,21 @@ class Bbcode2Html
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getFilteredBody()
     {
         $body = $this->body;
+
+        if (null === $body) {
+            return null;
+        }
+
         $body = $this->nl2p($body);
         $body = $this->emoticonReplacement($body);
         $body = $this->colorReplacement($body);
         $body = $this->sizeReplacement($body);
+        $body = $this->blockReplacement($body);
         $body = $this->quoteReplacement($body);
         $body = $this->imageReplacement($body);
         $body = $this->imageWithIdReplacement($body);
@@ -66,6 +70,8 @@ class Bbcode2Html
         $body = $this->underlineReplacement($body);
         $body = $this->centerReplacement($body);
         $body = $this->listReplacement($body);
+        $body = $this->emailReplacement($body);
+        $body = $this->videoReplacement($body);
         $body = $this->emptyTagsReplacement($body);
 
         return $body;
@@ -78,11 +84,18 @@ class Bbcode2Html
 
     protected function emptyTagsReplacement($body)
     {
+        $body = str_replace("<p></p>", "", $body);
+        $body = str_replace("</li></p><p><li>", "</li><li>", $body);
+        $body = str_replace("</ul><p></li>", "</ul></li>", $body);
+        $body = str_replace("</ul><p></li>", "</ul></li>", $body);
+        $body = str_replace("</strong></p><ul", "</strong><ul", $body);
+
         return $body;
     }
 
     /**
      * @param string $body
+     *
      * @return string
      */
     protected function emoticonReplacement($body)
@@ -90,16 +103,21 @@ class Bbcode2Html
         $pattern = '/\<img src\=\"\{SMILIES_PATH\}\/icon_(.*?)\.gif\" alt\=\"(?P<alt>.*?)\" title\=\"(.*?)\" \/\>/ms';
         $replacement = "$2";
         $body = preg_replace($pattern, $replacement, $body);
+
         $body = str_replace(':mrgreen:', 'xD', $body);
         $body = str_replace(':wink:', ';)', $body);
         $body = str_replace(':lol:', ':)', $body);
-        $body = str_replace(':light:', '', $body);
+
+        // star wars emoticons
+        $pattern = '/<img src="{SMILIES_PATH}\/(.*?)\.gif" alt="(:light:|:dark:|:boba:|:d2:)" title="(.*?)" \/>/ms';
+        $body = preg_replace($pattern, '', $body);
 
         return $body;
     }
 
     /**
      * @param string $body
+     *
      * @return string
      */
     protected function quoteReplacement($body)
@@ -149,6 +167,7 @@ EOM;
 
     /**
      * @param string $body
+     *
      * @return string
      */
     protected function imageReplacement($body)
@@ -171,7 +190,7 @@ EOM;
         $pattern = '/\[image\=?(?P<properties>.*?):(.*?)\\](?P<id>.*?)\[\/image:(.*?)\\]/ms';
         preg_match_all($pattern, $body, $matches);
 
-        $replacement = "<div class=\"IMAGE-CLASS-$3\"><img src=\"$1-IMAGE-REPLACEMENT-$3\" class=\"img-responsive\" /></div>";
+        $replacement = "<div class=\"clearfix\"></div><div class=\"IMAGE-CLASS-$3\"><img src=\"$1-IMAGE-REPLACEMENT-$3\" class=\"img-responsive\" /></div>";
         $body = preg_replace($pattern, $replacement, $body);
 
         foreach ($matches['id'] as $key => $id) {
@@ -183,7 +202,7 @@ EOM;
             $position = isset($data[1]) ? $data[1] : null;
 
             if ('left' === $position) {
-                $body = str_replace(sprintf('IMAGE-CLASS-%s', $id), 'pull-left col-md-6 no-padding-left', $body); 
+                $body = str_replace(sprintf('IMAGE-CLASS-%s', $id), 'pull-left col-md-6 no-padding-left', $body);
             } elseif ('right' === $position) {
                 $body = str_replace(sprintf('IMAGE-CLASS-%s', $id), 'pull-right col-md-6 no-padding-right', $body);
             } else {
@@ -231,7 +250,7 @@ EOM;
                 continue;
             }
 
-            $body = str_replace(sprintf('--%s--', $id), $productVariant->getProduct()->getId(), $body);
+            $body = str_replace(sprintf('--%s--', $id), $productVariant->getProduct()->getCode(), $body);
         }
 
         return $body;
@@ -239,6 +258,7 @@ EOM;
 
     /**
      * @param string $body
+     *
      * @return string
      */
     protected function colorReplacement($body)
@@ -252,6 +272,25 @@ EOM;
 
     /**
      * @param string $body
+     *
+     * @return string
+     */
+    protected function blockReplacement($body)
+    {
+        $pattern = '/\[bleft:(.*?)\](?P<text>.*?)\[\/bleft:(.*?)\]/ms';
+        $replacement = "<div class=\"clearfix\"></div><div style=\"margin-right: 10px\" class=\"pull-left\">$2</div>";
+        $body = preg_replace($pattern, $replacement, $body);
+
+        $pattern = '/\[bright:(.*?)\](?P<text>.*?)\[\/bright:(.*?)\]/ms';
+        $replacement = "<div class=\"clearfix\"></div><div style=\"margin-left: 10px\" class=\"pull-right\">$2</div>";
+        $body = preg_replace($pattern, $replacement, $body);
+
+        return $body;
+    }
+
+    /**
+     * @param string $body
+     *
      * @return string
      */
     protected function sizeReplacement($body)
@@ -265,12 +304,33 @@ EOM;
 
     /**
      * @param string $body
+     *
+     * @return string
+     */
+    protected function videoReplacement($body)
+    {
+        $pattern = '/\[flv=(.*?):(.*?)\](?P<text>.*?)\[\/flv:(.*?)\]/ms';
+        $replacement = "<iframe style=\"max-width: 100%\" width=\"800\" height=\"450\" src=\"$3\" frameborder=\"0\" allowfullscreen=\"\"></iframe>";
+        $body = preg_replace($pattern, $replacement, $body);
+
+        $pattern = '/\[flv=(.*?)\](?P<text>.*?)\[\/flv\]/ms';
+        $replacement = "<iframe style=\"max-width: 100%\" width=\"800\" height=\"450\" src=\"$2\" frameborder=\"0\" allowfullscreen=\"\"></iframe>";
+        $body = preg_replace($pattern, $replacement, $body);
+
+        $body = str_replace('autoplay=1', 'autoplay=0', $body);
+
+        return $body;
+    }
+
+    /**
+     * @param string $body
+     *
      * @return string
      */
     protected function urlReplacement($body)
     {
-        $pattern = '/\[url=(?P<path>.*?)\](?P<label>.*?)\[\/url:(.*?)\]/ms';
-        $replacement = "<a href=\"$1\" target='_blank'>$2</a>";
+        $pattern = '/\[url=(?P<path>.*?):(.*?)\](?P<label>.*?)\[\/url:(.*?)\]/ms';
+        $replacement = "<a href=\"$1\" target='_blank'>$3</a>";
         $body = preg_replace($pattern, $replacement, $body);
 
         return $body;
@@ -278,6 +338,7 @@ EOM;
 
     /**
      * @param string $body
+     *
      * @return string
      */
     protected function boldReplacement($body)
@@ -291,6 +352,7 @@ EOM;
 
     /**
      * @param string $body
+     *
      * @return string
      */
     protected function italicReplacement($body)
@@ -304,6 +366,7 @@ EOM;
 
     /**
      * @param string $body
+     *
      * @return string
      */
     protected function underlineReplacement($body)
@@ -317,6 +380,21 @@ EOM;
 
     /**
      * @param string $body
+     *
+     * @return string
+     */
+    protected function emailReplacement($body)
+    {
+        $pattern = '/\[email:(.*?)\](?P<label>.*?)\[\/email:(.*?)\]/ms';
+        $replacement = "<a href=\"mailto:$2\">$2</a>";
+        $body = preg_replace($pattern, $replacement, $body);
+
+        return $body;
+    }
+
+    /**
+     * @param string $body
+     *
      * @return string
      */
     protected function centerReplacement($body)
@@ -330,20 +408,21 @@ EOM;
 
     /**
      * @param string $body
+     *
      * @return string
      */
     protected function listReplacement($body)
     {
-        $pattern = '/\[list:(.*?)\](?P<label>.*?)\[\/list:(.*?)\]/ms';
-        $replacement = '</p><ul class="list-6">$2</ul><p>';
-        $body = preg_replace($pattern, $replacement, $body);
+        $patterns = [
+            '/\[list:[mou]?:?(.*?)\]/ms' => "</p><ul class=\"list-6\">",
+            '/\[\/list:[mou]?:?(.*?)\]/ms' => "</ul><p>",
+            '/\[\*:[mou]?:?(.*?)\]/ms' => "<li>",
+            '/\[\/\*:[mou]?:?(.*?)\]/ms' => "</li>",
+        ];
 
-
-        $pattern = '/\[\*:(.*?)\](?P<label>.*?)\[\/\*:(.*?)\]/ms';
-        $replacement = "<li>$2</li>";
-        $body = preg_replace($pattern, $replacement, $body);
-
-        $body = str_replace("</li></p><p>", "</li>", $body);
+        foreach ($patterns as $pattern => $replacement) {
+            $body = preg_replace($pattern, $replacement, $body);
+        }
 
         return $body;
     }

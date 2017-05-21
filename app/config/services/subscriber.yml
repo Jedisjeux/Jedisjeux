@@ -8,10 +8,33 @@ services:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
+    app.subscriber.create_topic_for_article:
+        class: AppBundle\EventSubscriber\CreateTopicForArticleSubscriber
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@app.repository.topic"
+            - "@app.factory.topic"
+        tags:
+            - { name: kernel.event_subscriber, priority: -1 }
+
+    app.subscriber.create_topic_for_game_play:
+        class: AppBundle\EventSubscriber\CreateTopicForGamePlaySubscriber
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@app.repository.topic"
+            - "@app.factory.topic"
+        tags:
+            - { name: kernel.event_subscriber, priority: -1 }
+
     app.subscriber.add_topic_follower:
         class: AppBundle\EventSubscriber\AddTopicFollowerSubscriber
         arguments:
             - "@app.context.customer"
+        tags:
+            - { name: kernel.event_subscriber }
+
+    app.subscriber.update_topic_updated_at:
+        class: AppBundle\EventSubscriber\UpdateTopicUpdatedAtSubscriber
         tags:
             - { name: kernel.event_subscriber }
 
@@ -41,30 +64,30 @@ services:
     app.subscriber.calculate_topic_count_by_taxon:
         class: AppBundle\EventSubscriber\CalculateTopicCountByTaxonSubscriber
         arguments:
-            - @app.updater.topic_count_by_taxon
+            - "@app.updater.topic_count_by_taxon"
         tags:
             - { name: kernel.event_subscriber }
 
     app.subscriber.calculate_post_count_by_topic:
         class: AppBundle\EventSubscriber\CalculatePostCountByTopicSubscriber
         arguments:
-            - @app.updater.post_count_by_topic
+            - "@app.updater.post_count_by_topic"
         tags:
             - { name: kernel.event_subscriber }
 
     app.subscriber.calculate_product_count_by_taxon:
         class: AppBundle\EventSubscriber\CalculateProductCountByTaxonSubscriber
         arguments:
-            - @app.updater.product_count_by_taxon
+            - "@app.updater.product_count_by_taxon"
         tags:
             - { name: kernel.event_subscriber }
 
-    app.subscriber.article_document_reference:
-        class: AppBundle\EventSubscriber\ArticleDocumentReferenceSubscriber
+    app.subscriber.calculate_product_count_by_person:
+        class: AppBundle\EventSubscriber\CalculateProductCountByPersonSubscriber
         arguments:
-            [ "@doctrine_phpcr" ]
+            - "@app.updater.product_count_by_person"
         tags:
-            - { name: doctrine.event_subscriber }
+            - { name: kernel.event_subscriber }
 
     app.subscriber.load_customer_element_object:
         class: AppBundle\EventSubscriber\CustomerListElementReferenceSubscriber

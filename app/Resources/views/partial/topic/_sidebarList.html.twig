@@ -11,7 +11,7 @@
             &nbsp; {{ topic.createdAt|localizeddate('medium', 'none') }}
             &nbsp;
             <!-- Comments -->
-        {% set commentCount = topic.posts|length %}
+        {% set commentCount = topic.postCount %}
             <i class="fa fa-comments"></i> &nbsp; {{ commentCount }} <span
                 class="hidden-xs"></span> &nbsp;
         {% endset %}

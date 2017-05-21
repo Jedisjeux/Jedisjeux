@@ -2,9 +2,10 @@
     <h3 class="ui dividing header">{{ 'sylius.ui.details'|trans }}</h3>
     <div class="ui two column stackable grid">
         <div class="column">
-            <div class="ui segment">
-                {{ form_row(form.name) }}
-                {{ form_row(form.shortDescription) }}
+            <div class="ui content segment">
+                {{ form_row(form.translations['fr_FR'].name) }}
+                {{ form_row(form.translations['fr_FR'].slug, {'attr': {'data-url': path('sylius_admin_ajax_generate_product_slug')}}) }}
+                {{ form_row(form.translations['fr_FR'].shortDescription) }}
             </div>
         </div>
         <div class="column">
@@ -14,6 +15,10 @@
         </div>
     </div>
     <div class="ui segment">
-        {{ form_row(form.description) }}
+        {{ form_row(form.translations['fr_FR'].description) }}
     </div>
+</div>
+
+<div style="display: none">
+    {{ form_row(form.firstVariant.name) }}
 </div>

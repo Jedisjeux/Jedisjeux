@@ -1,16 +1,48 @@
 sylius_product_review_create:
-    path: /products/{productId}/reviews/new
+    path: /reviews/new
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.product_review:createAction
         _sylius:
             template: 'frontend/product_review/create.html.twig'
+            form:
+                options:
+                    validation_groups: ['sylius', 'sylius_review']
             factory:
-                method: createForSubject
-                arguments: [$productId]
+                method: createForSubjectWithReviewer
+                arguments:
+                    - "expr:notFoundOnNull(service('sylius.repository.product').findOneById($productId))"
+                    - "expr:service('sylius.context.customer').getCustomer()"
+            redirect:
+                route: sylius_product_show
+                parameters: { slug: resource.reviewSubject.slug }
+            
+sylius_product_review_update:
+    path: /reviews/{id}/update
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.product_review:updateAction
+        _sylius:
+            template: 'frontend/product_review/update.html.twig'
+            repository:
+                method: findOneBy
+                arguments: [{id: $id, author: expr:service('app.context.customer').getCustomer()}]
+            redirect:
+                route: sylius_product_show
+                parameters: { slug: resource.reviewSubject.slug }
+    options:
+        expose: true
+
+sylius_frontend_product_review:
+    resource: |
+        alias: sylius.product_review
+        section: frontend
+        templates: :frontend/product_review
+        only: ['show']
+    type: sylius.resource
 
 sylius_product_rating_create:
-    path: /products/{productId}/rating/new
+    path: /rating/new
     methods: [GET, POST]
     defaults:
         _format: json
@@ -19,13 +51,15 @@ sylius_product_rating_create:
             template: 'frontend/product_review/rating/_form.html.twig'
             form: sylius_product_review_rating
             factory:
-                method: createForSubject
-                arguments: [$productId]
+                method: createForSubjectWithReviewer
+                arguments:
+                    - "expr:notFoundOnNull(service('sylius.repository.product').findOneById($productId))"
+                    - "expr:service('sylius.context.customer').getCustomer()"
     options:
         expose: true
 
 sylius_product_rating_update:
-    path: /products/{productId}/rating/edit
+    path: /rating/edit
     methods: [GET, PUT, PATCH]
     defaults:
         _controller: sylius.controller.product_review:updateAction

@@ -1,7 +1,9 @@
 imports:
-    - { resource: sylius.yml }
-    - { resource: elastica.yml }
-    - { resource: cmf.yml }
-    - { resource: imagine.yml }
     - { resource: ckeditor.yml }
+    - { resource: cmf.yml }
+    - { resource: elastica.yml }
+    - { resource: feed.yml }
+    - { resource: imagine.yml }
+    - { resource: redirect.yml }
     - { resource: state_machine.yml}
+    - { resource: sylius.yml }

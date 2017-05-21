@@ -12,9 +12,15 @@ Feature: Creates people
 
   Scenario: Create a person
     Given I am on "/admin/people/"
-    And I follow "Nouvelle personne"
+    And I follow "Créer"
     And I fill in the following:
       | Prénom | Reiner |
       | Nom    | Knizia |
     When I press "Créer"
     Then I should see "a bien été créé"
+
+  Scenario: Cannot create empty person
+    Given I am on "/admin/people/"
+    And I follow "Créer"
+    When I press "Créer"
+    Then I should see "Cette valeur ne doit pas être vide."

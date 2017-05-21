@@ -11,14 +11,15 @@
 
 namespace AppBundle\Form\Type;
 
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class AbstractImageType extends AbstractResourceType
+class AbstractImageType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -27,7 +28,17 @@ class AbstractImageType extends AbstractResourceType
     {
         $builder
             ->add('file', FileType::class, [
-                'label' => 'label.file',
+                'label' => $options['file_label'],
             ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'file_label' => 'sylius.ui.image',
+        ]);
     }
 }

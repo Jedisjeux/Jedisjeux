@@ -10,6 +10,7 @@
  */
 
 namespace AppBundle\Updater;
+
 use AppBundle\Entity\Topic;
 
 /**

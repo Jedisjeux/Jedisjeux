@@ -68,7 +68,7 @@ class TaxonController extends ResourceController
             return null;
         }
 
-        $current = $this->getRepository()->findOneBySlug($currentSlug);
+        $current = $this->getRepository()->findOneBySlug($currentSlug, $this->getParameter('locale'));
 
         if (!isset($current)) {
             throw new NotFoundHttpException('Requested current taxon does not exist.');

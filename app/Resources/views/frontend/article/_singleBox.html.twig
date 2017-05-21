@@ -1,3 +1,4 @@
+{% set article = article is defined ? article : resource %}
 {% set color = null %}
 {% set icon = null %}
 
@@ -8,18 +9,19 @@
 
 <div class="img-box-4-item">
     <div class="img-container">
-        <a href="{{ path('app_frontend_article_show', {'name': article.name} ) }}"><img
-                    src="{{ article.imagePath|imagine_filter('cmf_full') }}" alt=""
-                    class="img-responsive"></a>
-
+        {% if article.mainImage %}
+            <a href="{{ path('app_frontend_article_show', {'slug': article.slug} ) }}"><img
+                        src="{{ article.mainImage.webPath|imagine_filter('full') }}" alt=""
+                        class="img-responsive"></a>
+        {% endif %}
     </div>
     <div class="img-box-4-content">
         {% if icon %}
-            <a href="{{ path('app_frontend_article_index_by_taxon', {'permalink': article.mainTaxon.permalink} ) }}">
+            <a href="{{ path('app_frontend_article_index_by_taxon', {'slug': article.mainTaxon.slug} ) }}">
                 <i class="{{ icon }} bg-{{ color|default('color') }}"></i>
             </a>
         {% endif %}
-        <h4><a href="{{ path('app_frontend_article_show', {'name': article.name} ) }}">{{ article }}</a></h4>
+        <h4><a href="{{ path('app_frontend_article_show', {'slug': article.slug} ) }}">{{ article }}</a></h4>
         <div class="bor bg-{{ color|default('color') }}"></div>
         <p>Publié le {{ article.publishStartDate|localizeddate('short', 'none') }}</p>
 

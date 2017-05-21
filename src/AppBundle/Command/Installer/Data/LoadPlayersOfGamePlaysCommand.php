@@ -33,6 +33,22 @@ class LoadPlayersOfGamePlaysCommand extends ContainerAwareCommand
         $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
         $this->deletePlayers();
         $this->insertPlayers();
+        $this->updatePlayerCount();
+    }
+
+    protected function updatePlayerCount()
+    {
+        $query = <<<EOM
+update jdj_game_play gamePlay
+set player_count = (
+    SELECT count(0) AS player_count
+         FROM jdj_player player
+         WHERE player.game_play_id = gamePlay.id
+       )
+EOM;
+
+        $this->getManager()->getConnection()->executeQuery($query);
+
     }
 
     protected function deletePlayers()
@@ -44,7 +60,7 @@ class LoadPlayersOfGamePlaysCommand extends ContainerAwareCommand
     protected function insertPlayers()
     {
         $query = <<<EOM
-insert into jdj_player(gamePlay_id, name, score, customer_id)
+insert into jdj_player(game_play_id, name, score, customer_id)
 select      gamePlay.id,
             case
                 when user.customer_id is null then old.joueur

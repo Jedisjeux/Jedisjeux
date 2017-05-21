@@ -4,7 +4,7 @@
     {% set product = product_review.reviewSubject %}
     {% set user = product_review.author.user %}
     <li>
-        <a href="#{#{{ path('app_product_review_show', {'id': product_review.id, 'productSlug': product.slug}) }}#}">
+        <a href="{{ path('sylius_frontend_product_review_show', {'id': product_review.id, 'productId': product.id}) }}">
             <!-- Item image -->
             <img src="{{ avatar(user) | imagine_filter('thumbnail') }}" alt="" class="img-responsive img-round"/>
 

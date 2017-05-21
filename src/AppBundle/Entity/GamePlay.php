@@ -34,9 +34,9 @@ class GamePlay implements ResourceInterface
     protected $code;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
      */
     protected $duration;
 
@@ -57,7 +57,7 @@ class GamePlay implements ResourceInterface
     /**
      * @var ProductInterface
      *
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface")
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface", inversedBy="gamePlays")
      * @ORM\JoinColumn(nullable=false)
      */
     protected $product;
@@ -271,7 +271,7 @@ class GamePlay implements ResourceInterface
      */
     public function removeImage(GamePlayImage $image)
     {
-        $this->images->remove($image);
+        $this->images->removeElement($image);
 
         return $this;
     }

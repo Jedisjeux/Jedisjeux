@@ -4,10 +4,12 @@ sylius_api_product_review_rating_create:
     defaults:
         _controller: sylius.controller.product_review:createAction
         _sylius:
-            form: sylius_product_review_rating
+            form: AppBundle\Form\Type\RatingType
             factory:
-                method: createForSubject
-                arguments: [$productId]
+                method: createForSubjectWithReviewer
+                arguments:
+                    - "expr:notFoundOnNull(service('sylius.repository.product').findOneById($productId))"
+                    - "expr:service('sylius.context.customer').getCustomer()"
 
 sylius_api_product_review_rating_update:
     path: /products/{productId}/ratings/
@@ -15,4 +17,7 @@ sylius_api_product_review_rating_update:
     defaults:
         _controller: sylius.controller.product_review:updateAction
         _sylius:
-            form: sylius_product_review_rating
+            form: AppBundle\Form\Type\RatingType
+            repository:
+                method: findOneBy
+                arguments: [{reviewSubject: $productId, author: expr:service('app.context.customer').getCustomer()}]

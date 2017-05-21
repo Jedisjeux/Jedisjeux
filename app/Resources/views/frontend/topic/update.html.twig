@@ -14,7 +14,7 @@
 {% block body -%}
     {{ form_start(form) }}
     <input type="hidden" name="_method" value="PUT"/>
-    {{ form_widget(form) }}
+    {% include 'frontend/topic/_form.html.twig' %}
     {{ action.update() }}
     {{ form_end(form) }}
 {% endblock %}

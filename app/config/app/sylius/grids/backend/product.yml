@@ -42,11 +42,14 @@ sylius_grid:
             actions:
                 main:
                     create:
-                        type: create
+                        type: create_product
                 item:
-                    manage_variants:
-                        type: manage_variants
                     update:
                         type: update
                     delete:
                         type: delete
+                subitem:
+                    manage_articles:
+                        type: manage_articles
+                    manage_variants:
+                        type: manage_variants

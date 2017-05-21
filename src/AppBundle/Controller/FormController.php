@@ -51,10 +51,6 @@ class FormController extends Controller
                 if (array_key_exists($name, $criteria)) {
                     $value = $criteria[$name];
 
-                    if ($child->getConfig()->getType()->getName() == 'checkbox') {
-                        $value = true;
-                    }
-
                     $child->setData($value);
                 }
             }

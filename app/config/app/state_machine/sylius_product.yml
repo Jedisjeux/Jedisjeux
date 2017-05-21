@@ -28,6 +28,15 @@ winzou_state_machine:
                 from: [pending_publication]
                 to: published
         callbacks:
+            guard:
+                guard_on_ask_for_publication:
+                    on: "ask_for_publication"
+                    do: ["@app.guard.article", "canAskForPublication"]
+                    args: []
+                guard_on_publish:
+                    on: "publish"
+                    do: ["@app.guard.article", "canPublish"]
+                    args: []
             after:
                 notify_translators:
                     on: "ask_for_translation"

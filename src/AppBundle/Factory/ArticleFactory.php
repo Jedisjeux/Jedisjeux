@@ -11,11 +11,8 @@
 
 namespace AppBundle\Factory;
 
-use AppBundle\Document\BlockquoteBlock;
-use AppBundle\Document\LeftImageBlock;
-use AppBundle\Document\RightImageBlock;
-use AppBundle\Document\WellImageBlock;
 use AppBundle\Entity\Article;
+use AppBundle\Entity\Block;
 use Doctrine\ORM\EntityRepository;
 use Faker\Factory;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
@@ -33,11 +30,6 @@ class ArticleFactory implements FactoryInterface
     private $className;
 
     /**
-     * @var ArticleContentFactory
-     */
-    protected $articleContentFactory;
-
-    /**
      * @var EntityRepository
      */
     protected $productRepository;
@@ -50,22 +42,7 @@ class ArticleFactory implements FactoryInterface
     /**
      * @var FactoryInterface
      */
-    protected $leftImageBlockFactory;
-
-    /**
-     * @var FactoryInterface
-     */
-    protected $rightImageBlockFactory;
-
-    /**
-     * @var FactoryInterface
-     */
-    protected $wellImageBlockFactory;
-
-    /**
-     * @var FactoryInterface
-     */
-    protected $blockquoteBlockFactory;
+    protected $blockFactory;
 
     /**
      * @param string $className
@@ -82,8 +59,6 @@ class ArticleFactory implements FactoryInterface
     {
         /** @var Article $article */
         $article = new $this->className;
-        $articleContent = $this->articleContentFactory->createNew();
-        $article->setDocument($articleContent);
         $article->setAuthor($this->customerContext->getCustomer());
 
         return $article;
@@ -112,46 +87,40 @@ class ArticleFactory implements FactoryInterface
         $faker = Factory::create();
         $article = $this->createForProduct($product);
 
-        $articleContent = $article->getDocument();
-        $articleContent->setTitle(sprintf('Critique de %s', (string)$product));
+        $article->setTitle(sprintf('Critique de %s', (string)$product));
 
-        /** @var BlockquoteBlock $introductionBlock */
-        $introductionBlock = $this->blockquoteBlockFactory->createNew();
-        $introductionBlock->setBody(sprintf('<p>%s</p>', $faker->realText()));
+        /** @var Block $materialBlock */
+        $materialBlock = $this->blockFactory->createNew();
+        $materialBlock
+            ->setTitle('Matériel')
+            ->setImagePosition(Block::POSITION_LEFT);
+        $article->addBlock($materialBlock);
 
-        /** @var LeftImageBlock $materialBlock */
-        $materialBlock = $this->leftImageBlockFactory->createWithFakeBody();
-        $materialBlock->setTitle('Matériel');
+        /** @var Block $rulesBlock */
+        $rulesBlock = $this->blockFactory->createNew();
+        $rulesBlock
+            ->setTitle('Règles')
+            ->setImagePosition(Block::POSITION_LEFT);
+        $article->addBlock($rulesBlock);
 
-        /** @var RightImageBlock $rulesBlock */
-        $rulesBlock = $this->rightImageBlockFactory->createWithFakeBody();
-        $rulesBlock->setTitle('Règles');
+        /** @var Block $lifetimeBlock */
+        $lifetimeBlock = $this->blockFactory->createNew();
+        $lifetimeBlock
+            ->setTitle('Durée de vie')
+            ->setImagePosition(Block::POSITION_TOP);
+        $article->addBlock($lifetimeBlock);
 
-        /** @var LeftImageBlock $lifetimeBlock */
-        $lifetimeBlock = $this->leftImageBlockFactory->createWithFakeBody();
-        $lifetimeBlock->setTitle('Durée de vie');
-
-        /** @var WellImageBlock $adviceBlock */
-        $adviceBlock = $this->wellImageBlockFactory->createWithFakeBody();
-        $adviceBlock->setTitle('Les conseils de jedisjeux');
-
-        $articleContent->addChild($introductionBlock);
-        $articleContent->addChild($materialBlock);
-        $articleContent->addChild($rulesBlock);
-        $articleContent->addChild($lifetimeBlock);
-        $articleContent->addChild($adviceBlock);
+        /** @var Block $adviceBlock */
+        $adviceBlock = $this->blockFactory->createNew();
+        $adviceBlock
+            ->setTitle('Les conseils de jedisjeux')
+            ->setImagePosition(Block::POSITION_TOP)
+            ->setClass('well');
+        $article->addBlock($adviceBlock);
 
         // TODO set review-article taxon
 
         return $article;
-    }
-
-    /**
-     * @param ArticleContentFactory $articleContentFactory
-     */
-    public function setArticleContentFactory($articleContentFactory)
-    {
-        $this->articleContentFactory = $articleContentFactory;
     }
 
     /**
@@ -171,34 +140,10 @@ class ArticleFactory implements FactoryInterface
     }
 
     /**
-     * @param FactoryInterface $leftImageBlockFactory
+     * @param FactoryInterface $blockFactory
      */
-    public function setLeftImageBlockFactory($leftImageBlockFactory)
+    public function setBlockFactory(FactoryInterface $blockFactory)
     {
-        $this->leftImageBlockFactory = $leftImageBlockFactory;
-    }
-
-    /**
-     * @param FactoryInterface $rightImageBlockFactory
-     */
-    public function setRightImageBlockFactory($rightImageBlockFactory)
-    {
-        $this->rightImageBlockFactory = $rightImageBlockFactory;
-    }
-
-    /**
-     * @param FactoryInterface $wellImageBlockFactory
-     */
-    public function setWellImageBlockFactory($wellImageBlockFactory)
-    {
-        $this->wellImageBlockFactory = $wellImageBlockFactory;
-    }
-
-    /**
-     * @param FactoryInterface $blockquoteBlockFactory
-     */
-    public function setBlockquoteBlockFactory($blockquoteBlockFactory)
-    {
-        $this->blockquoteBlockFactory = $blockquoteBlockFactory;
+        $this->blockFactory = $blockFactory;
     }
 }

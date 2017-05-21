@@ -11,7 +11,9 @@
 
 namespace AppBundle\Form\Type;
 
+use AppBundle\Entity\ProductVariantImage;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -42,9 +44,22 @@ class ProductVariantImageType extends AbstractImageType
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        parent::configureOptions($resolver);
+
+        $resolver->setDefaults([
+            'data_class' => ProductVariantImage::class,
+            'validation_groups' => ['sylius']
+        ]);
+    }
+
+    /**
      * @return string
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'app_product_variant_image';
     }

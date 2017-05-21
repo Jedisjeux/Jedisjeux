@@ -11,11 +11,11 @@
             <h5><i class="{{ rootTaxon.iconClass|default('fa fa-folder') }} color"></i>&nbsp; {{ rootTaxon }}</h5>
             <!-- Widgets Content -->
             <div class="widget-content categories">
-                {% render(url('sylius_partial_taxon_index_by_code', {
+                {{  render(url('sylius_partial_taxon_index_by_code', {
                     'code': rootTaxon.code,
                     'currentSlug': taxon is defined ? taxon.slug : null,
                     'template': 'frontend/game/_taxonList.html.twig'
-                })) %}
+                })) }}
             </div>
         </div>
     {% endfor %}
@@ -40,7 +40,7 @@
                     <div class="tab-pane fade in active" id="popular">
                         {% if taxon is defined %}
                             {{ render(url('sylius_partial_product_index_by_taxon', {
-                                'permalink': taxon.permalink,
+                                'slug': taxon.slug,
                                 'sorting': {
                                     'averageRating': 'desc'
                                 },
@@ -62,7 +62,7 @@
                     <div class="tab-pane fade" id="recent">
                         {% if taxon is defined %}
                             {{ render(url('sylius_partial_product_index_by_taxon', {
-                                'permalink': taxon.permalink,
+                                'slug': taxon.slug,
                                 'sorting': {
                                     'createdAt': 'desc'
                                 },

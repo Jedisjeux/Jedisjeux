@@ -33,7 +33,7 @@ class BlockquoteBlockType extends AbstractResourceType
                 'label' => 'label.body',
             ])
             ->add('_type', HiddenType::class, [
-                'data' => 'blockquote',
+                'data' => 'blockquote_block',
                 'label' => 'app.ui.introduction',
                 'mapped' => false,
             ]);

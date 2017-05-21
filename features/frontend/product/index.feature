@@ -17,10 +17,10 @@ Feature: View list of products
       | Palazzo   |
       | Louis XIV |
     And product "Palazzo" has following taxons:
-      | permalink           |
+      | slug                |
       | mecanismes/encheres |
     And product "Louis XIV" has following taxons:
-      | permalink           |
+      | slug                |
       | mecanismes/majorite |
 
   Scenario: View list of products
@@ -33,3 +33,10 @@ Feature: View list of products
     When I follow "Enchères"
     Then I should see "Palazzo"
     But I should not see "Louis XIV"
+
+  Scenario: Sorting products
+    Given I am on "/jeux-de-societe/"
+    When I follow "Date de création"
+    Then I should see "Palazzo"
+    When I follow "Note"
+    Then I should see "Palazzo"

@@ -14,6 +14,43 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 class ArticleRepository extends EntityRepository
 {
     /**
+     * @param string $slug
+     * @param bool $showUnpublished
+     *
+     * @return null|Article
+     */
+    public function findOneBySlug($slug, $showUnpublished = true)
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        $queryBuilder
+            ->andWhere('o.slug = :slug')
+            ->setParameter('slug', $slug);
+
+        if (false === $showUnpublished) {
+            $queryBuilder
+                ->andWhere('o.status = :published')
+                ->setParameter('published', Article::STATUS_PUBLISHED);
+        }
+
+        return $queryBuilder->getQuery()->getOneOrNullResult();
+    }
+
+    /**
+     * @param int $count
+     *
+     * @return array
+     */
+    public function findLatest($count)
+    {
+        return $this->createQueryBuilder('o')
+            ->addOrderBy('o.createdAt', 'DESC')
+            ->setMaxResults($count)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * @return QueryBuilder
      */
     protected function getQueryBuilder()
@@ -21,10 +58,15 @@ class ArticleRepository extends EntityRepository
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder
             ->select('o, topic, product, productVariant, productTranslation')
+            ->addSelect('gamePlay')
+            ->addSelect('mainImage')
+            ->leftJoin('o.mainImage', 'mainImage')
             ->leftJoin('o.topic', 'topic')
+            ->leftJoin('topic.gamePlay', 'gamePlay')
             ->leftJoin('o.product', 'product')
             ->leftJoin('product.variants', 'productVariant')
-            ->leftJoin('product.translations', 'productTranslation');
+            ->leftJoin('product.translations', 'productTranslation')
+            ->groupBy('o.id');
 
         return $queryBuilder;
     }
@@ -57,8 +99,10 @@ class ArticleRepository extends EntityRepository
     {
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
-            ->innerJoin('o.mainTaxon', 'taxon')
-            ->innerJoin('taxon.translations', 'taxonTranslation');
+            ->addSelect('taxon')
+            ->addSelect('taxonTranslation')
+            ->leftJoin('o.mainTaxon', 'taxon')
+            ->leftJoin('taxon.translations', 'taxonTranslation');
 
         if (isset($criteria['query'])) {
             $queryBuilder
@@ -108,15 +152,18 @@ class ArticleRepository extends EntityRepository
      * @param TaxonInterface $taxon
      * @param array|null $criteria
      * @param array|null $sorting
-     * @param bool $publishable
+     * @param string $status
      *
      * @return Pagerfanta
      */
-    public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = null, array $sorting = null, $publishable = true)
+    public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = null, array $sorting = null, $status = Article::STATUS_PUBLISHED)
     {
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
-            ->innerJoin('o.mainTaxon', 'taxon')
+            ->addSelect('taxon')
+            ->addSelect('taxonTranslation')
+            ->leftJoin('o.mainTaxon', 'taxon')
+            ->leftJoin('taxon.translations', 'taxonTranslation')
             ->andWhere($queryBuilder->expr()->orX(
                 'taxon = :taxon',
                 ':left < taxon.left AND taxon.right < :right'
@@ -125,10 +172,10 @@ class ArticleRepository extends EntityRepository
             ->setParameter('left', $taxon->getLeft())
             ->setParameter('right', $taxon->getRight());
 
-        if ($publishable) {
+        if (null !== $status) {
             $queryBuilder
-                ->andWhere($queryBuilder->expr()->eq($this->getPropertyName('publishable'), ':publishable'))
-                ->setParameter('publishable', 1);
+                ->andWhere($queryBuilder->expr()->eq($this->getPropertyName('status'), ':status'))
+                ->setParameter('status', $status);
         }
 
         $this->applyCriteria($queryBuilder, (array)$criteria);

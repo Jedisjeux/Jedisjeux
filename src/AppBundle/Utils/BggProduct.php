@@ -44,7 +44,7 @@ class BggProduct
      */
     public function getReleasedAtYear()
     {
-        return (string)$this->boardGame->yearpublished;
+        return $this->boardGame->yearpublished;
     }
 
     /**

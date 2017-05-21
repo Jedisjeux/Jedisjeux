@@ -55,6 +55,10 @@ class CalculatePostCountByTopicSubscriber implements EventSubscriberInterface
         /** @var Post $post */
         $post = $event->getSubject();
 
+        if (null === $topic = $post->getTopic()) {
+            return;
+        }
+
         $this->updater->update($post->getTopic());
     }
 }

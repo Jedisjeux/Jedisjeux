@@ -8,6 +8,9 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Article;
+use AppBundle\Entity\GamePlay;
+use AppBundle\Entity\Topic;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
@@ -32,12 +35,16 @@ class TopicRepository extends EntityRepository
             ->addSelect('article')
             ->addSelect('gamePlay')
             ->addSelect('mainTaxon')
+            ->addSelect('product')
+            ->addSelect('productTranslation')
             ->join('o.author', 'customer')
             ->join('customer.user', 'user')
             ->leftJoin('customer.avatar', 'avatar')
             ->leftJoin('o.article', 'article')
             ->leftJoin('o.gamePlay', 'gamePlay')
-            ->leftJoin('o.mainTaxon', 'mainTaxon');
+            ->leftJoin('o.mainTaxon', 'mainTaxon')
+            ->leftJoin('gamePlay.product', 'product')
+            ->leftJoin('product.translations', 'productTranslation');
     }
 
     /**
@@ -56,20 +63,6 @@ class TopicRepository extends EntityRepository
         }
 
         parent::applyCriteria($queryBuilder, $criteria);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = [])
-    {
-        if (isset($sorting['postCount'])) {
-            $queryBuilder
-                ->addOrderBy('o.postCount', $sorting['postCount']);
-            unset($sorting['postCount']);
-        }
-
-        parent::applySorting($queryBuilder, $sorting);
     }
 
     /**
@@ -120,7 +113,7 @@ class TopicRepository extends EntityRepository
                 $sorting = [];
             }
 
-            $sorting['createdAt'] = 'desc';
+            $sorting['updatedAt'] = 'desc';
         }
 
         $this->applyCriteria($queryBuilder, (array)$criteria);
@@ -186,5 +179,37 @@ class TopicRepository extends EntityRepository
             ->setParameter('right', $taxon->getRight());
 
         return $queryBuilder->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @param GamePlay $gamePlay
+     *
+     * @return Topic|null
+     */
+    public function findOneByGamePlay(GamePlay $gamePlay)
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder
+            ->join('o.gamePlay', 'gamePlay')
+            ->where('gamePlay = :gamePlay')
+            ->setParameter('gamePlay', $gamePlay);
+
+        return $queryBuilder->getQuery()->getOneOrNullResult();
+    }
+
+    /**
+     * @param Article $article
+     *
+     * @return Topic|null
+     */
+    public function findOneByArticle(Article $article)
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder
+            ->join('o.article', 'article')
+            ->where('article = :article')
+            ->setParameter('article', $article);
+
+        return $queryBuilder->getQuery()->getOneOrNullResult();
     }
 }

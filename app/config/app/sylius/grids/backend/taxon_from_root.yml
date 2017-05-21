@@ -1,0 +1,48 @@
+sylius_grid:
+    grids:
+        sylius_backend_taxon_from_root:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.taxon.class%"
+                    repository:
+                        method: createChildrenListQueryBuilder
+                        arguments:
+                            - ['%locale%']
+                            - expr:service('sylius.repository.taxon').findOneById($id)
+            fields:
+                code:
+                    type: string
+                    label: sylius.ui.code
+                parent:
+                    type: string
+                    label: sylius.ui.parent
+                name:
+                    type: string
+                    label: sylius.ui.name
+                public:
+                    type: twig
+                    label: app.ui.public
+                    path: .
+                    options:
+                        template: "backend/taxon/grid/field/public.html.twig"
+
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    options:
+                        fields: [code, translation.name]
+            actions:
+                main:
+                    create_for_parent:
+                        type: create_taxon_for_parent
+                        options:
+                            link:
+                                parameters:
+                                    id: $id
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete

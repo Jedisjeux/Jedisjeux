@@ -6,4 +6,26 @@
 
 {% block content %}
     {{ headers.default('sylius.ui.dashboard'|trans, 'home', 'app.ui.overview_of_your_website'|trans) }}
+
+    {% if is_granted('ROLE_ADMIN') %}
+        {% include 'backend/dashboard/_menu.html.twig' %}
+
+        <div class="ui two column stackable grid">
+            <div class="column">
+                {{ render(url('app_backend_partial_session_count_per_day')) }}
+            </div>
+            <div class="column">
+                {{ render(url('app_backend_partial_session_count_per_month')) }}
+            </div>
+        </div>
+
+        <div class="ui two column stackable grid">
+            <div class="column">
+                {{ render(url('sylius_backend_partial_customer_latest', {'count': 5, 'template': 'backend/dashboard/_customers.html.twig'})) }}
+            </div>
+            <div class="column">
+                {{ render(url('app_backend_partial_article_latest', {'count': 5, 'template': 'backend/dashboard/_articles.html.twig'})) }}
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}

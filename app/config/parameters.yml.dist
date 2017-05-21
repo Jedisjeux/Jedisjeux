@@ -1,10 +1,10 @@
 parameters:
     database_driver:   pdo_mysql
-    database_host:     192.168.99.100
+    database_host:     jdj.dev
     database_port:     ~
     database_name:     jdj
     database_user:     root
-    database_password: root
+    database_password: vagrant
 
     mailer_transport:  smtp
     mailer_host:       192.168.99.100
@@ -12,13 +12,14 @@ parameters:
     mailer_password:   ~
     mailer_port:       2525
     mailer_auth:       cram-md5
+    mailer_encryption: null
 
     secret:            ThisTokenIsNotSoSecretChangeIt
 
     router.request_context.host: jdj.dev
     router.request_context.scheme: http
 
-    fos_elastica.host: 192.168.99.100
+    fos_elastica.host: jdj.dev
     fos_elastica.port: 9200
 
     google.analytics.tracking_id: UA-XXXXX-1

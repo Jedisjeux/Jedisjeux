@@ -99,7 +99,10 @@ EOT
                 ->setDealer($dealer)
                 ->setActive($data['priceList']['active'])
                 ->setPath($data['priceList']['path'])
-                ->setHeaders($data['priceList']['headers']);
+                ->setHeaders($data['priceList']['headers'])
+                ->setDelimiter($data['priceList']['delimiter'] ?? ';')
+                ->setUtf8($data['priceList']['utf8'] ?? true);
+
 
             $dealer->setPriceList($priceList);
         }
@@ -120,20 +123,38 @@ EOT
             [
                 'code' => 'blue-glaucus',
                 'name' => 'Blue Glaucus',
+                'image' => 'http://www.blueglaucus.com/img/themes/normal/blue_glaucus.png',
+                'priceList' => [
+                    'active' => true,
+                    'path' => 'http://www.blueglaucus.com/files/csv_divers/jeudisjeux.csv',
+                    'headers' => false,
+                ],
             ],
             [
                 'code' => 'esprit-jeu',
                 'name' => 'Esprit Jeu',
                 'image' => __DIR__ . '/../../../../../web/assets/frontend/img/Logo-Esprit-Jeu-HD.png',
+                'priceList' => [
+                    'active' => true,
+                    'path' => 'http://www.espritjeu.com/dhtml/fluxComparateur.php?w=2&c=016ab62aea63a0eaa98ce3aebee5ed39&t=csv',
+                    'headers' => true,
+                ],
             ],
             [
                 'code' => 'fungames',
                 'name' => 'Fungames',
+                'image' => 'http://www.fungamesnet.fr/img/fungamesnet-logo-1488007203.jpg',
             ],
             [
                 'code' => 'ludifolie',
                 'name' => 'Ludifolie',
                 'image' => 'http://www.ludifolie.com/images/logo-400x200.jpg',
+                'priceList' => [
+                    'active' => true,
+                    'path' => 'http://www.ludifolie.com/jedisjeux-export-tarifs.csv',
+                    'headers' => false,
+                    'utf8' => false,
+                ],
             ],
             [
                 'code' => 'ludibay',
@@ -144,6 +165,12 @@ EOT
                 'code' => 'ludomus',
                 'name' => 'Ludomus',
                 'image' => 'https://geodorthophonie.files.wordpress.com/2015/09/ludomus.jpg',
+                'priceList' => [
+                    'active' => true,
+                    'path' => 'http://www.ludomus.com/export/jedisjeux-export-tarif.csv',
+                    'headers' => true,
+                    'utf8' => false,
+                ],
             ],
             [
                 'code' => 'philibert',
@@ -151,20 +178,27 @@ EOT
                 'image' => 'http://ulule.me/presales/0/6/6/9660/philibert_jpg_640x860_q85.jpg',
                 'priceList' => [
                     'active' => true,
-                    'path' => 'philibert.csv',
+                    'path' => 'http://www.philibertnet.com/modules/ukoo_fluxjedisjeux/export.csv',
                     'headers' => false,
                 ],
             ],
             [
-                'code' => 'sur-la-route-du-jeu',
-                'name' => 'Sur La Route Du Jeu',
+                'code' => 'jeux-en-boite',
+                'name' => 'Jeux en boite',
+                'image' => 'http://www.jeuxenboite.be/presta/img/logo.jpg',
+                'priceList' => [
+                    'active' => true,
+                    'path' => 'http://www.jeuxenboite.be/presta/jedisjeux-export-tarifs.csv',
+                    'headers' => false,
+                    'delimiter' => ',',
+                    'utf8' => false,
+                ],
             ],
-
         ];
     }
 
     /**
-     * @return Factory
+     * @return Factory|object
      */
     protected function getFactory()
     {
@@ -172,7 +206,7 @@ EOT
     }
 
     /**
-     * @return EntityManager
+     * @return EntityManager|object
      */
     protected function getManager()
     {
@@ -180,7 +214,7 @@ EOT
     }
 
     /**
-     * @return EntityRepository
+     * @return EntityRepository|object
      */
     protected function getRepository()
     {

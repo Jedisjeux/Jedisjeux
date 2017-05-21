@@ -13,12 +13,15 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 use Sylius\Component\Product\Model\Product as BaseProduct;
+use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -50,7 +53,9 @@ class Product extends BaseProduct implements ReviewableInterface
      * @var ArrayCollection|TaxonInterface[]
      *
      * @ORM\ManyToMany(targetEntity="Sylius\Component\Taxonomy\Model\TaxonInterface")
-     * @ORM\JoinTable("sylius_product_taxon")
+     * @ORM\JoinTable("sylius_product_taxon",
+     *      inverseJoinColumns={@ORM\JoinColumn(name="taxoninterface_id", referencedColumnName="id")}
+     * )
      */
     protected $taxons;
 
@@ -68,7 +73,11 @@ class Product extends BaseProduct implements ReviewableInterface
      *
      * @JMS\Expose
      * @JMS\SerializedName("min_age")
-     * @JMS\Groups({"Details"})
+     * @JMS\Groups({"Detailed"})
+     *
+     * @Assert\Range(
+     *      min = 0
+     * )
      */
     protected $ageMin;
 
@@ -79,7 +88,11 @@ class Product extends BaseProduct implements ReviewableInterface
      *
      * @JMS\Expose
      * @JMS\SerializedName("min_player_count")
-     * @JMS\Groups({"Details"})
+     * @JMS\Groups({"Detailed"})
+     *
+     * @Assert\Range(
+     *      min = 1
+     * )
      */
     protected $joueurMin;
 
@@ -90,7 +103,11 @@ class Product extends BaseProduct implements ReviewableInterface
      *
      * @JMS\Expose
      * @JMS\SerializedName("max_player_count")
-     * @JMS\Groups({"Details"})
+     * @JMS\Groups({"Detailed"})
+     *
+     * @Assert\Range(
+     *      min = 1
+     * )
      */
     protected $joueurMax;
 
@@ -101,7 +118,11 @@ class Product extends BaseProduct implements ReviewableInterface
      *
      * @JMS\Expose
      * @JMS\SerializedName("min_duration")
-     * @JMS\Groups({"Details"})
+     * @JMS\Groups({"Detailed"})
+     *
+     * @Assert\Range(
+     *      min = 1
+     * )
      */
     protected $durationMin;
 
@@ -112,7 +133,11 @@ class Product extends BaseProduct implements ReviewableInterface
      *
      * @JMS\Expose
      * @JMS\SerializedName("max_duration")
-     * @JMS\Groups({"Details"})
+     * @JMS\Groups({"Detailed"})
+     *
+     * @Assert\Range(
+     *      min = 1
+     * )
      */
     protected $durationMax;
 
@@ -171,6 +196,13 @@ class Product extends BaseProduct implements ReviewableInterface
     protected $articles;
 
     /**
+     * @var Collection|GamePlay[]
+     *
+     * @ORM\OneToMany(targetEntity="GamePlay", mappedBy="product")
+     */
+    protected $gamePlays;
+
+    /**
      * @var Collection|ProductList[]
      *
      * @ORM\OneToMany(targetEntity="ProductListItem", mappedBy="product")
@@ -189,20 +221,22 @@ class Product extends BaseProduct implements ReviewableInterface
         $this->reviews = new ArrayCollection();
         $this->articles = new ArrayCollection();
         $this->listItems = new ArrayCollection();
+        $this->gamePlays = new ArrayCollection();
         $this->code = uniqid('product_');
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $name
+     * @param bool $updateVariant
      */
-    public function setName($name)
+    public function setName($name, $updateVariant = true)
     {
         parent::setName($name);
 
         /** @var ProductVariant $firstVariant */
         $firstVariant = $this->getFirstVariant();
 
-        if ($firstVariant) {
+        if ($firstVariant and $updateVariant) {
             $firstVariant->setName($name);
         }
     }
@@ -251,11 +285,11 @@ class Product extends BaseProduct implements ReviewableInterface
      * @return string
      *
      * @JMS\VirtualProperty
-     * @JMS\Groups({"Details"})
+     * @JMS\Groups({"Detailed"})
      */
     public function getShortDescription()
     {
-        return $this->translate()->getShortDescription();
+        return $this->getTranslation()->getShortDescription();
     }
 
     /**
@@ -265,7 +299,7 @@ class Product extends BaseProduct implements ReviewableInterface
      */
     public function setShortDescription($shortDescription)
     {
-        $this->translate()->setShortDescription($shortDescription);
+        $this->getTranslation()->setShortDescription($shortDescription);
 
         return $this;
     }
@@ -275,7 +309,7 @@ class Product extends BaseProduct implements ReviewableInterface
      *
      * @JMS\VirtualProperty
      * @JMS\SerializedName("image")
-     * @JMS\Groups({"Details"})
+     * @JMS\Groups({"Detailed"})
      */
     public function getMainImage()
     {
@@ -307,7 +341,26 @@ class Product extends BaseProduct implements ReviewableInterface
             return null;
         }
 
-        return $this->variants->first();
+        // todo remove after sylius update (variants will be sorted by position)
+        $sort = Criteria::create();
+        $sort->orderBy(Array(
+            'position' => Criteria::ASC
+        ));
+
+        return $this->variants->matching($sort)->first();
+    }
+
+    public function setFirstVariant(ProductVariantInterface $variant)
+    {
+        $firstVariant = $this->getFirstVariant();
+
+        if (null !== $firstVariant) {
+            $firstVariant = $variant;
+        } else {
+            $this->addVariant($variant);
+        }
+
+        return $this;
     }
 
     /**
@@ -626,7 +679,7 @@ class Product extends BaseProduct implements ReviewableInterface
      * @return ArrayCollection
      *
      * @JMS\VirtualProperty
-     * @JMS\Groups({"Details"})
+     * @JMS\Groups({"Detailed"})
      * @JMS\Type("ArrayCollection<AppBundle\Entity\Taxon>")
      */
     public function getMechanisms()
@@ -658,7 +711,7 @@ class Product extends BaseProduct implements ReviewableInterface
      * @return ArrayCollection
      *
      * @JMS\VirtualProperty
-     * @JMS\Groups({"Details"})
+     * @JMS\Groups({"Detailed"})
      * @JMS\Type("ArrayCollection<AppBundle\Entity\Taxon>")
      */
     public function getThemes()
@@ -804,11 +857,29 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
+     * @return Article[]|Collection
+     */
+    public function getPublishedArticles()
+    {
+        return $this->articles->filter(function (Article $article) {
+            return Article::STATUS_PUBLISHED === $article->getStatus();
+        });
+    }
+
+    /**
+     * @return GamePlay[]|Collection
+     */
+    public function getGamePlays()
+    {
+        return $this->gamePlays;
+    }
+
+    /**
      * {@inheritdoc}
      *
      * @JMS\VirtualProperty
      * @JMS\SerializedName("name")
-     * @JMS\Groups({"Details"})
+     * @JMS\Groups({"Default"})
      */
     public function getName()
     {
@@ -820,7 +891,7 @@ class Product extends BaseProduct implements ReviewableInterface
      *
      * @JMS\VirtualProperty
      * @JMS\SerializedName("slug")
-     * @JMS\Groups({"Details"})
+     * @JMS\Groups({"Default"})
      */
     public function getSlug()
     {
@@ -829,21 +900,17 @@ class Product extends BaseProduct implements ReviewableInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @JMS\VirtualProperty
-     * @JMS\SerializedName("createdAt")
-     * @JMS\Groups({"Details"})
      */
-    public function getCreatedAt()
+    public function __toString()
     {
-        return parent::getCreatedAt();
+        return $this->getName();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function __toString()
+    protected function createTranslation()
     {
-        return $this->getName();
+        return new ProductTranslation();
     }
 }

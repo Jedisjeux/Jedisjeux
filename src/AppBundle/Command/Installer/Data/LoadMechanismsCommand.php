@@ -14,6 +14,7 @@ namespace AppBundle\Command\Installer\Data;
 use AppBundle\Entity\Taxon;
 use AppBundle\Repository\TaxonRepository;
 use Doctrine\ORM\EntityManager;
+use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -65,6 +66,7 @@ class LoadMechanismsCommand extends ContainerAwareCommand
     /**
      * @param array $data
      * @param TaxonInterface $parentTaxon
+     *
      * @return TaxonInterface
      */
     protected function createOrReplaceTaxon(array $data, TaxonInterface $parentTaxon)
@@ -80,15 +82,24 @@ class LoadMechanismsCommand extends ContainerAwareCommand
             $taxon->setFallbackLocale($locale);
         }
 
-        $taxon->setCode('mechanism-'.$data['id']);
+        $taxon->setCode('mechanism-' . $data['id']);
         $taxon->setName($data['name']);
         $taxon->setDescription(isset($data['description']) ? $data['description'] : null);
 
         //$taxon->setParent($taxonomy->getRoot());
         $parentTaxon->addChild($taxon);
 
-        return $taxon;
+        $taxon->setSlug($this->getTaxonSlugGenerator()->generate($taxon->getName(), $parentTaxon->getId()));
 
+        return $taxon;
+    }
+
+    /**
+     * @return TaxonSlugGeneratorInterface|object
+     */
+    protected function getTaxonSlugGenerator()
+    {
+        return $this->getContainer()->get('sylius.generator.taxon_slug');
     }
 
     /**
@@ -99,7 +110,7 @@ class LoadMechanismsCommand extends ContainerAwareCommand
         return $this->getContainer()->get('kernel')->getRootDir() . '/Resources/initialData/mechanisms.yml';
     }
 
-   /**
+    /**
      * Parse YAML File
      *
      * @return mixed
@@ -107,11 +118,12 @@ class LoadMechanismsCommand extends ContainerAwareCommand
     public function getRows()
     {
         $yaml = new Parser();
+
         return $yaml->parse(file_get_contents($this->getYAMLFileName()));
     }
 
     /**
-     * @return Factory
+     * @return Factory|object
      */
     public function getFactory()
     {
@@ -119,7 +131,7 @@ class LoadMechanismsCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return TaxonRepository
+     * @return TaxonRepository|object
      */
     public function getRepository()
     {
@@ -127,7 +139,7 @@ class LoadMechanismsCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return EntityManager
+     * @return EntityManager|object
      */
     public function getManager()
     {

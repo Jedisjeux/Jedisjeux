@@ -1,0 +1,43 @@
+sylius_grid:
+    grids:
+        app_backend_product_list:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%app.model.product_list.class%"
+                    repository:
+                        method: createListQueryBuilder
+            sorting:
+                createdAt: desc
+            fields:
+                avatar:
+                    type: twig
+                    path: owner
+                    label: app.ui.avatar
+                    options:
+                        template: "backend/customer/grid/field/avatar.html.twig"
+                owner:
+                    type: string
+                    label: sylius.ui.customer
+                name:
+                    type: string
+                    label: sylius.ui.name
+                    sortable: ~
+                createdAt:
+                    type: twig
+                    label: sylius.ui.created_at
+                    sortable: ~
+                    options:
+                        template: "backend/grid/field/date/medium.html.twig"
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    options:
+                        fields: [name, owner.email, user.username]
+            actions:
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete

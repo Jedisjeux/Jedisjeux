@@ -37,7 +37,7 @@ class PersonImage extends AbstractImage
      *
      * @ORM\Column(type="boolean", name="is_main")
      */
-    protected $main;
+    protected $main = false;
 
     /**
      * @return Person

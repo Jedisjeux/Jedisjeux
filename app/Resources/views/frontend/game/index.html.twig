@@ -35,18 +35,17 @@
 
                 Trier
                 par {{ sorting('sylius_product_index', 'sylius.ui.created_at'|trans, 'createdAt', 'desc', icon, currentOrder) }},
-                par {{ sorting('sylius_product_index', 'label.rate'|trans, 'averageRating', 'desc') }},
-                {{ sorting('sylius_product_index', 'sylius.ui.name'|trans, 'translation.name', 'asc') }}
+                par {{ sorting('sylius_product_index', 'label.rate'|trans, 'averageRating', 'desc') }}
             </div>
 
             <div class="clearfix"></div>
 
-            {% include "frontend/game/index/list-4.html.twig" %}
+            {% include "frontend/game/index/list-4.html.twig" with {'products': products.data} %}
 
 
             <div class="pagination-wrapper">
                 <div class="pagination-bottom">
-                    {{ pagination(products) }}
+                    {{ pagination(products.data) }}
                 </div>
             </div>
 

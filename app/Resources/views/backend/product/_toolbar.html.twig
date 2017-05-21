@@ -1,0 +1,13 @@
+<div class="ui right floated buttons">
+    <a class="ui labeled icon button"
+       target="_blank"
+       href="{{ path('sylius_product_show', {'slug': product.slug}) }}">
+        <i class="icon search"></i>
+        {{ 'app.ui.preview'|trans }}
+    </a>
+
+    {{ render(url('sylius_partial_product_status_show', {
+        'id': product.id,
+        'template': 'backend/product/button/_status.html.twig'
+    })) }}
+</div>

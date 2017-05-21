@@ -1,7 +1,7 @@
 {% extends "::base.html.twig" %}
 
-{% from 'macros/posts.html.twig' import blogCommentItem %}
 {% import 'macros/items.html.twig' as item %}
+{% import 'macros/buttons.html.twig' as button %}
 
 {% set topic = game_play.topic %}
 
@@ -10,15 +10,25 @@
 {% endblock %}
 
 {% block breadcrumb_content %}
-    <a href="{{ path('sylius_product_index') }}">Jeux</a>
-    / <a href="{{ path('sylius_product_show', {'slug': game_play.product.slug}) }}">{{ game_play.product }}</a>
-    / Parties
+    <a href="{{ path('app_frontend_game_play_index') }}">{{ 'app.ui.game_plays'|trans }}</a>
+    / {{ game_play.product }}
 {% endblock %}
 
 {% block container %}
     <div class="col-md-8">
-        {{ item.blogAuthor(game_play.author, null, game_play.createdAt) }}
 
+        {% if app.user and app.user.customer.id == game_play.author.id %}
+            <div class="pull-right">
+                <a title="Modifier la partie" class="btn btn-default"
+                   href="{{ path('app_frontend_game_play_update', {'id' : game_play.id, 'productSlug': game_play.product.slug}) }}">
+                    <span class="fa fa-pencil">
+                    </span>
+                </a>
+            </div>
+
+        {% endif %}
+
+        {{ item.blogAuthor(game_play.author, null, game_play.createdAt) }}
         {% include "frontend/game_play/show/_header.html.twig" %}
 
         {% if topic %}
@@ -30,10 +40,16 @@
 
             <div class="blog-comments">
                 {% for post in topic.posts %}
-                    {{ blogCommentItem(post) }}
+                    {% include 'frontend/post/show/_content.html.twig' with {
+                    'editPath': path('app_frontend_game_play_post_update', {'id': post.id, 'gamePlayId': game_play.id})
+                    } %}
                 {% endfor %}
             </div>
         {% endif %}
+
+        <h5><i class="fa fa-users color"></i> Participer</h5>
+        {{ button.btn(path('app_frontend_game_play_post_create', {'gamePlayId' : game_play.id}), 'Commenter la partie', null, 'plus-sign', 'btn-color btn-lg') }}
+        <hr/>
     </div>
     <div class="col-md-4">
         {% include "frontend/game_play/show/_sidebar.html.twig" %}

@@ -1,0 +1,8 @@
+eko_feed:
+    feeds:
+        article:
+            title:       'Jedisjeux - Actualités'
+            description: 'Les dernières actualités ludiques'
+            link:        'http://www.jedisjeux.net'
+            encoding:    'utf-8'
+            author:      'Jedisjeux' # Only required for Atom feeds

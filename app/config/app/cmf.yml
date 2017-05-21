@@ -21,11 +21,6 @@ sonata_block:
     blocks:
         sonata.block.service.text: ~
 
-#cmf_create:
-#    persistence:
-#        phpcr:
-#            image: false
-
 cmf_routing:
     chain:
         routers_by_id:
@@ -41,13 +36,24 @@ cmf_block:
     persistence:
         phpcr:
             block_basepath: /cms/content
-cmf_content:
-    persistence:
-        phpcr:
-            content_basepath: /cms/pages
-    default_template: SyliusWebBundle:Frontend/StaticContent:show.html.twig
+#cmf_content:
+#    persistence:
+#        phpcr:
+#            content_basepath: /cms/pages
+#    default_template: SyliusWebBundle:Frontend/StaticContent:show.html.twig
 
 cmf_media:
+    use_imagine: true
+    imagine_filters:
+        upload_thumbnail:   image_upload_thumbnail
+    extra_filters:
+        - cmf_full
+        - cmf_thumbnail
+        - cmf_thumbnail_S
+        - cmf_block_medium
+        - cmf_magazine_item
+        - cmf_magazine_item_wide
+        - cmf_block
     persistence:
         phpcr:
             enabled: true

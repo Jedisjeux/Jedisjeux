@@ -18,6 +18,7 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
@@ -43,6 +44,9 @@ class Topic implements ResourceInterface
      * @var string
      *
      * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank()
+     *
      * @JMS\Expose
      */
     protected $title;
@@ -60,6 +64,8 @@ class Topic implements ResourceInterface
      *
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Post", inversedBy="parent", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
+     *
+     * @Assert\Valid()
      */
     protected $mainPost;
 
@@ -110,7 +116,9 @@ class Topic implements ResourceInterface
      * @var ArrayCollection|CustomerInterface[]
      *
      * @ORM\ManyToMany(targetEntity="Sylius\Component\Customer\Model\CustomerInterface")
-     * @ORM\JoinTable(name="jdj_topic_follower")
+     * @ORM\JoinTable(name="jdj_topic_follower",
+     *      inverseJoinColumns={@ORM\JoinColumn(name="customerinterface_id", referencedColumnName="id")}
+     * )
      */
     protected $followers;
 

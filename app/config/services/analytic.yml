@@ -18,5 +18,11 @@ services:
     app.google_analytics.page_views:
         class: AppBundle\GoogleAnalytics\PageViewsService
         arguments:
-            - @app.google_analytics.client
-            - %google.analytics.profile_id%
+            - "@app.google_analytics.client"
+            - "%google.analytics.profile_id%"
+
+    app.google_analytics.session:
+        class: AppBundle\GoogleAnalytics\SessionService
+        arguments:
+            - "@app.google_analytics.client"
+            - "%google.analytics.profile_id%"

@@ -11,9 +11,11 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Document\ArticleContent;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Eko\FeedBundle\Item\Writer\RoutedItemInterface;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -21,17 +23,17 @@ use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  *
  * @ORM\Entity
  * @ORM\Table(name="jdj_article", indexes={
- *      @ORM\Index(name="publish_start_date_idx", columns={"publishStartDate"}),
  *      @ORM\Index(name="publishable_idx", columns={"publishable"})
  * })
  */
-class Article implements ResourceInterface, ReviewableInterface
+class Article implements ResourceInterface, ReviewableInterface, RoutedItemInterface
 {
     use IdentifiableTrait;
     use Timestampable;
@@ -54,26 +56,16 @@ class Article implements ResourceInterface, ReviewableInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string", unique=true)
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(type="string", unique=true, nullable=true)
      */
-    protected $documentId;
-
-    /**
-     * @var ArticleContent
-     */
-    protected $document;
+    protected $slug;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string")
-     */
-    protected $name;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      */
     protected $title;
 
@@ -83,6 +75,22 @@ class Article implements ResourceInterface, ReviewableInterface
      * @ORM\Column(type="datetime", nullable=true)
      */
     protected $publishStartDate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $shortDescription;
+
+    /**
+     * @var ArticleImage
+     *
+     * @ORM\OneToOne(targetEntity="ArticleImage", cascade={"persist", "merge"})
+     *
+     * @Assert\Valid()
+     */
+    protected $mainImage;
 
     /**
      * @var TaxonInterface
@@ -109,6 +117,7 @@ class Article implements ResourceInterface, ReviewableInterface
      * @var string
      *
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      */
     protected $status;
 
@@ -123,8 +132,16 @@ class Article implements ResourceInterface, ReviewableInterface
      * @var int
      *
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank()
      */
     protected $viewCount = 0;
+
+    /**
+     * @var SlideShowBlock|null
+     *
+     * @ORM\OneToOne(targetEntity="SlideShowBlock", cascade={"persist", "merge"})
+     */
+    protected $slideShowBlock;
 
     /**
      * @var ProductInterface
@@ -147,6 +164,15 @@ class Article implements ResourceInterface, ReviewableInterface
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
     protected $topic;
+
+    /**
+     * @var Collection|Block[]
+     *
+     * @ORM\OneToMany(targetEntity="Block", mappedBy="article", cascade={"persist", "merge"})
+     *
+     * @Assert\Valid()
+     */
+    protected $blocks;
 
     /**
      * @var ArrayCollection|ArticleReview[]
@@ -189,6 +215,7 @@ class Article implements ResourceInterface, ReviewableInterface
     public function __construct()
     {
         $this->publishable = false;
+        $this->blocks = new ArrayCollection();
         $this->reviews = new ArrayCollection();
         $this->status = self::STATUS_NEW;
     }
@@ -214,21 +241,29 @@ class Article implements ResourceInterface, ReviewableInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getName()
     {
-        return $this->name;
+        return $this->getTitle();
     }
 
     /**
-     * @param string $name
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
      *
      * @return $this
      */
-    public function setName($name)
+    public function setSlug(string $slug)
     {
-        $this->name = $name;
+        $this->slug = $slug;
 
         return $this;
     }
@@ -254,41 +289,21 @@ class Article implements ResourceInterface, ReviewableInterface
     }
 
     /**
-     * @return string
+     * @return SlideShowBlock|null
      */
-    public function getDocumentId()
+    public function getSlideShowBlock()
     {
-        return $this->documentId;
+        return $this->slideShowBlock;
     }
 
     /**
-     * @param string $documentId
+     * @param SlideShowBlock|null $slideShowBlock
      *
      * @return $this
      */
-    public function setDocumentId($documentId)
+    public function setSlideShowBlock($slideShowBlock)
     {
-        $this->documentId = $documentId;
-
-        return $this;
-    }
-
-    /**
-     * @return ArticleContent
-     */
-    public function getDocument()
-    {
-        return $this->document;
-    }
-
-    /**
-     * @param ArticleContent $document
-     *
-     * @return $this
-     */
-    public function setDocument($document)
-    {
-        $this->document = $document;
+        $this->slideShowBlock = $slideShowBlock;
 
         return $this;
     }
@@ -349,6 +364,51 @@ class Article implements ResourceInterface, ReviewableInterface
     public function setTopic($topic)
     {
         $this->topic = $topic;
+
+        return $this;
+    }
+
+    /**
+     * @return Block[]|Collection
+     */
+    public function getBlocks()
+    {
+        return $this->blocks;
+    }
+
+    /**
+     * @param Block $block
+     *
+     * @return bool
+     */
+    public function hasBlock(Block $block)
+    {
+        return $this->blocks->contains($block);
+    }
+
+    /**
+     * @param Block $block
+     *
+     * @return $this
+     */
+    public function addBlock(Block $block)
+    {
+        if (!$this->hasBlock($block)) {
+            $block->setArticle($this);
+            $this->blocks->add($block);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Block $block
+     *
+     * @return $this
+     */
+    public function removeBlock(Block $block)
+    {
+        $this->blocks->removeElement($block);
 
         return $this;
     }
@@ -529,6 +589,26 @@ class Article implements ResourceInterface, ReviewableInterface
     }
 
     /**
+     * @return string
+     */
+    public function getShortDescription()
+    {
+        return $this->shortDescription;
+    }
+
+    /**
+     * @param string $shortDescription
+     *
+     * @return Article
+     */
+    public function setShortDescription($shortDescription)
+    {
+        $this->shortDescription = $shortDescription;
+
+        return $this;
+    }
+
+    /**
      * @return boolean
      */
     public function isPublishable()
@@ -589,6 +669,26 @@ class Article implements ResourceInterface, ReviewableInterface
     }
 
     /**
+     * @return ArticleImage
+     */
+    public function getMainImage()
+    {
+        return $this->mainImage;
+    }
+
+    /**
+     * @param ArticleImage $mainImage
+     *
+     * @return $this
+     */
+    public function setMainImage($mainImage)
+    {
+        $this->mainImage = $mainImage;
+
+        return $this;
+    }
+
+    /**
      * @return TaxonInterface
      */
     public function getMainTaxon()
@@ -611,7 +711,8 @@ class Article implements ResourceInterface, ReviewableInterface
     /**
      * @return bool
      */
-    public function isReviewArticle() {
+    public function isReviewArticle()
+    {
         if (null === $this->getMainTaxon()) {
             return false;
         }
@@ -622,12 +723,63 @@ class Article implements ResourceInterface, ReviewableInterface
     /**
      * @return bool
      */
-    public function isReportArticle() {
+    public function isReportArticle()
+    {
         if (null === $this->getMainTaxon()) {
             return false;
         }
 
         return Taxon::CODE_REPORT_ARTICLE === $this->getMainTaxon()->getCode();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFeedItemTitle()
+    {
+        return $this->getTitle();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFeedItemDescription()
+    {
+        return $this->getShortDescription();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFeedItemPubDate()
+    {
+        return $this->getPublishStartDate();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFeedItemRouteName()
+    {
+        return 'app_frontend_article_show';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFeedItemRouteParameters()
+    {
+        return [
+            'slug' => $this->getSlug(),
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFeedItemUrlAnchor()
+    {
+        return '';
     }
 
     /**

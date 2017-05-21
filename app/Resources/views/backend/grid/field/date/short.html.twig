@@ -1,1 +1,3 @@
-{{ data|localizeddate('short', 'none') }}
+{% if data %}
+    {{ data|localizeddate('short', 'none') }}
+{% endif %}

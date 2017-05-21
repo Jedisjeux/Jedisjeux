@@ -17,8 +17,12 @@ Feature: List taxons
       | themes | Fantastique     |
     And I am logged in as user "admin@example.com" with password "password"
 
-  Scenario: List taxons
+  Scenario: List root taxons
     Given I am on "/admin/taxons/"
-    When I follow "Thèmes"
+    Then I should see "Thèmes"
+
+  Scenario: List children taxons
+    Given I am on "/admin/taxons/"
+    When I follow "Voir les sous-catégories"
     Then I should see "Science-fiction"
     And I should see "Fantastique"

@@ -7,6 +7,7 @@ use AppBundle\Entity\Person;
 use AppBundle\Entity\Product;
 use AppBundle\Entity\Topic;
 use Elastica\Query\QueryString;
+use Elastica\Query;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use Pagerfanta\Pagerfanta;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -23,7 +24,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
  */
 class SearchController extends Controller
 {
-
     /**
      * @param Request $request
      * @return Response|RedirectResponse
@@ -32,7 +32,11 @@ class SearchController extends Controller
     {
         $term = $request->get("query");
 
-        $paginator = $this->findByQuery($this->getQueryStringByTerm($term));
+        $query = $this->createFindByTermQuery($term);
+
+        /** @var TransformedFinder $finder */
+        $finder = $this->get('fos_elastica.finder.jedisjeux');
+        $paginator = $finder->findPaginated(Query::create($query));
         $paginator->setMaxPerPage(16);
         $paginator->setCurrentPage($request->get('page', 1));
 
@@ -42,10 +46,48 @@ class SearchController extends Controller
 
         $types = $this->getTypesOfResults($paginator);
 
-        return $this->render('JDJSearchBundle:Search:searchResults.html.twig', array(
+        return $this->render('frontend/search/index.html.twig', array(
             'results' => $paginator,
             'types' => $types,
         ));
+    }
+
+    /**
+     * @param string $term
+     *
+     * @return Query
+     */
+    protected function createFindByTermQuery($term)
+    {
+        $boolQuery = new Query\BoolQuery();
+
+        $queryString = $this->getQueryStringByTerm($term);
+        $boolQuery->addMust($queryString);
+        $this->excludeUnpublishedStatuses($boolQuery);
+
+        return new Query($boolQuery);
+    }
+
+    /**
+     * @param Query\BoolQuery $boolQuery
+     */
+    protected function excludeUnpublishedStatuses(Query\BoolQuery $boolQuery)
+    {
+        $newStatus = new Query\Term();
+        $newStatus->setTerm('status', 'new');
+        $boolQuery->addMustNot($newStatus);
+
+        $pendingTranslationStatus = new Query\Term();
+        $pendingTranslationStatus->setTerm('status', 'pending_translation');
+        $boolQuery->addMustNot($pendingTranslationStatus);
+
+        $pendingReviewStatus = new Query\Term();
+        $pendingReviewStatus->setTerm('status', 'pending_review');
+        $boolQuery->addMustNot($pendingReviewStatus);
+
+        $pendingPublicationStatus = new Query\Term();
+        $pendingPublicationStatus->setTerm('status', 'pending_publication');
+        $boolQuery->addMustNot($pendingPublicationStatus);
     }
 
     /**
@@ -56,7 +98,12 @@ class SearchController extends Controller
     {
         $term = $request->get("term", "");
 
-        $paginator = $this->findByQuery($this->getQueryStringByTerm($term));
+        $query = $this->createFindByTermQuery($term);
+
+        /** @var TransformedFinder $finder */
+        $finder = $this->get('fos_elastica.finder.jedisjeux');
+        $paginator = $finder->findPaginated(Query::create($query));
+
         $paginator->setMaxPerPage(5);
         $paginator->setCurrentPage($request->get('page', 1));
 
@@ -93,11 +140,11 @@ class SearchController extends Controller
                     'value' => $entity->getTitle(),
                     'label' => $entity->getTitle(),
                     'image' =>  (null === $entity->getAuthor()->getAvatar()) ? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : $this->get('liip_imagine.cache.manager')->getBrowserPath($entity->getAuthor()->getAvatar()->getWebPath(), 'thumbnail'),
-                    'href' => $entity->getGamePlay() ? $this->generateUrl('app_game_play_show', array(
+                    'href' => $entity->getGamePlay() ? $this->generateUrl('app_frontend_game_play_show', array(
                             'productSlug' => $entity->getGamePlay()->getProduct()->getSlug(),
                             'id' => $entity->getGamePlay()->getId(),
                         )
-                    ) : $this->generateUrl('app_post_index_by_topic', array(
+                    ) : $this->generateUrl('app_frontend_post_index_by_topic', array(
                             'topicId' => $entity->getId(),
                         )
                     ),
@@ -118,7 +165,7 @@ class SearchController extends Controller
                     'value' => (string)$entity,
                     'label' => (string)$entity,
                     'image' => (null === $entity->getMainImage()) ? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : $this->get('liip_imagine.cache.manager')->getBrowserPath($entity->getMainImage()->getWebPath(), 'thumbnail'),
-                    'href' => $this->generateUrl('app_person_show', array(
+                    'href' => $this->generateUrl('app_frontend_person_show', array(
                             'slug' => $entity->getSlug(),
                         )
                     ),
@@ -129,9 +176,9 @@ class SearchController extends Controller
                 $result = array(
                     'value' => (string)$entity,
                     'label' => (string)$entity,
-                    'image' => (null === $entity->getDocument()->getMainImage()) ? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : $this->get('liip_imagine.cache.manager')->getBrowserPath($entity->getDocument()->getMainImage()->getImage()->getId(), 'cmf_thumbnail'),
+                    'image' => (null === $entity->getMainImage()) ? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : $this->get('liip_imagine.cache.manager')->getBrowserPath($entity->getMainImage()->getWebPath(), 'cmf_thumbnail'),
                     'href' => $this->generateUrl('app_frontend_article_show', array(
-                            'name' => $entity->getName(),
+                            'slug' => $entity->getSlug(),
                         )
                     ),
                 );
@@ -162,6 +209,7 @@ class SearchController extends Controller
             'username',
             'title',
             'name',
+            'variants',
         ));
 
         return $searchQuery;
@@ -176,30 +224,22 @@ class SearchController extends Controller
         $types = array();
         foreach ($results as $result) {
             if ($result instanceof ProductInterface) {
-                $types[] = "jeu";
+                $types[] = "game";
             } elseif ($result instanceof Person) {
-                $types[] = "personne";
-            } elseif ($result instanceof User) {
+                $types[] = "person";
+            } elseif ($result instanceof UserInterface) {
                 $types[] = "user";
+            } elseif ($result instanceof Article) {
+                $types[] = "article";
+            } elseif ($result instanceof Topic) {
+                $types[] = "topic";
+            } else {
+                $types[] = "";
             }
 
         }
+
         return $types;
-    }
-
-    /**
-     * @param $query
-     * @return Pagerfanta
-     */
-    private function findByQuery($query)
-    {
-        /** @var TransformedFinder $finder */
-        $finder = $this->container->get('fos_elastica.finder.jedisjeux');
-
-        /** @var Pagerfanta $userPaginator */
-        $paginator = $finder->findPaginated($query);
-        return $paginator;
-
     }
 
     /**

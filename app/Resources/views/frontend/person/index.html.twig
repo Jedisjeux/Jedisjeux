@@ -12,12 +12,12 @@
 {% endblock %}
 
 {% block breadcrumb_content %}
-    <a href="{{ path('app_person_index') }}">Ludographies</a>
+    <a href="{{ path('app_frontend_person_index') }}">Ludographies</a>
     {#TODO macro to handle recursivity#}
     {% if taxon is defined %}
         {% if taxon.parent and not taxon.parent.isRoot %}
             / <a
-                href="{{ path('app_person_index_by_taxon', {'permalink': taxon.parent.permalink}) }}">{{ taxon.parent }}</a>
+                href="{{ path('app_frontend_person_index_by_taxon', {'slug': taxon.parent.slug}) }}">{{ taxon.parent }}</a>
         {% endif %}
         / {{ taxon }}
     {% endif %}
@@ -27,8 +27,8 @@
     <div class="col-md-9">
 
         <div class="container">
-            {% include 'frontend/person/partial/_list.html.twig' %}
-            {{ pagination(people) }}
+            {% include 'frontend/person/partial/_list.html.twig' with {'people': people.data} %}
+            {{ pagination(people.data) }}
         </div>
 
     </div>

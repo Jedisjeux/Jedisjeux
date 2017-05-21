@@ -33,7 +33,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class ImportDealerPricesCommand extends ContainerAwareCommand
 {
-    const BATCH_SIZE = 20;
+    const BATCH_SIZE = 1;
 
     /**
      * @var InputInterface
@@ -65,7 +65,9 @@ class ImportDealerPricesCommand extends ContainerAwareCommand
             ->setName('app:dealer-prices:import')
             ->addArgument('dealer', InputArgument::REQUIRED, 'dealer')
             ->addOption('filename', null, InputOption::VALUE_REQUIRED, 'filename to import')
-            ->addOption('remove-first-line', null, InputOption::VALUE_REQUIRED, false)
+            ->addOption('remove-first-line', null, InputOption::VALUE_REQUIRED, null, false)
+            ->addOption('delimiter', null, InputOption::VALUE_REQUIRED, null, ';')
+            ->addOption('utf8', null, InputOption::VALUE_REQUIRED, null, true)
             ->setDescription('Import prices from a dealer')
             ->setHelp(<<<EOT
 The <info>%command.name%</info> command import prices from a dealer.
@@ -227,7 +229,14 @@ EOT
                 continue;
             }
 
-            $rowData = str_getcsv($row, ';');
+            $rowData = str_getcsv($row, $this->input->getOption('delimiter'));
+            $rowData = array_map('trim', $rowData);
+
+            if (!$this->input->getOption('utf8')) {
+                $rowData = array_map('utf8_encode', $rowData);
+            }
+
+            $error = false;
 
             switch ($rowData[3]) {
                 case 'Dispo':
@@ -236,15 +245,21 @@ EOT
                     $status = DealerPrice::STATUS_AVAILABLE;
                     break;
                 case 'En cours de réappro':
+                case 'Rupture':
                 case 'indisponible':
                     $status = DealerPrice::STATUS_OUT_OF_STOCK;
                     break;
-                case 'précommande':
+                case 'Pr?commande':
                 case preg_replace('/[^a-z]/', '', $rowData[3]) === 'prcommande':
-                $status = DealerPrice::STATUS_OUT_OF_STOCK;
+                    $status = DealerPrice::STATUS_PRE_ORDER;
                     break;
                 default:
-                    throw new \Exception(sprintf('Status with code %s does not exist', $rowData[3]));
+                    $this->output->writeln(sprintf('<error>Status with code %s does not exist on %s</error>', $rowData[3], $rowData[0]));
+                    $error = true;
+            }
+
+            if ($error) {
+                continue;
             }
 
             $data[] = [
@@ -317,7 +332,7 @@ EOT
     }
 
     /**
-     * @return TransformedFinder
+     * @return TransformedFinder|object
      */
     protected function getProductFinder()
     {
@@ -325,7 +340,7 @@ EOT
     }
 
     /**
-     * @return ProductRepository
+     * @return ProductRepository|object
      */
     protected function getProductRepository()
     {
@@ -333,7 +348,7 @@ EOT
     }
 
     /**
-     * @return EntityRepository
+     * @return EntityRepository|object
      */
     protected function getDealerRepository()
     {
@@ -341,7 +356,7 @@ EOT
     }
 
     /**
-     * @return Factory
+     * @return Factory|object
      */
     protected function getFactory()
     {
@@ -349,7 +364,7 @@ EOT
     }
 
     /**
-     * @return EntityRepository
+     * @return EntityRepository|object
      */
     protected function getRepository()
     {
@@ -357,7 +372,7 @@ EOT
     }
 
     /**
-     * @return EntityManager
+     * @return EntityManager|object
      */
     protected function getManager()
     {

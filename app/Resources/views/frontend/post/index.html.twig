@@ -12,7 +12,7 @@
     {{ parent() }}
     <a href="{{ path('app_frontend_topic_index') }}">Forum</a> /
     {% if topic.mainTaxon %}
-        <a href="{{ path('app_frontend_topic_index_by_taxon', { 'permalink': topic.mainTaxon.slug }) }}">{{ topic.mainTaxon }}</a> /
+        <a href="{{ path('app_frontend_topic_index_by_taxon', { 'slug': topic.mainTaxon.slug }) }}">{{ topic.mainTaxon }}</a> /
     {% endif %}
     {{ topic }}
 {% endblock %}
@@ -41,7 +41,11 @@
 
             {{ pagination(posts) }}
 
-            {{ pageViews.render(topic.id, 'topic', path('app_post_index_by_topic', {'topicId' : topic.id})) }}
+            <h5><i class="fa fa-users color"></i> Participer</h5>
+            {{ button.btn(path('app_frontend_post_create_by_topic', {'topicId' : topic.id}), 'Répondre au sujet', null, 'plus-sign', 'btn-color btn-lg') }}
+            <hr/>
+
+            {{ pageViews.render(topic.id, 'topic', path('app_frontend_post_index_by_topic', {'topicId' : topic.id})) }}
         </div>
 
     </div>

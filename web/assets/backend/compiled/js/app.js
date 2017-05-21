@@ -31,19 +31,68 @@ if(n.debug("Changing setting",t,o),e.isPlainObject(t))e.extend(!0,f,t);else{if(o
  * file that was distributed with this source code.
  */
 
+(function($) {
+  $(document).ready(function() {
+    $('#sidebar').addClass('visible');
+    $('#sidebar').first().sidebar('attach events', '#sidebar-toggle', 'toggle');
+    $('#sidebar').first().sidebar('setting', { dimPage: false });
+
+    $('.ui.checkbox').checkbox();
+    $('.ui.accordion').accordion();
+    $('.ui.menu .dropdown').dropdown({action: 'hide'});
+    $('.ui.inline.dropdown').dropdown();
+    $('.link.ui.dropdown').dropdown({action: 'hide'});
+    $('.button.ui.dropdown').dropdown({action: 'hide'});
+    $('.ui.fluid.search.selection.ui.dropdown').dropdown();
+    $('.menu .item').tab();
+    $('.card .image').dimmer({on: 'hover'});
+    $('.ui.rating').rating('disable');
+
+    $('form.loadable button').on('click', function() {
+      return $(this).closest('form').addClass('loading');
+    });
+    $('.loadable.button').on('click', function() {
+      return $(this).addClass('loading');
+    });
+    $('.message .close').on('click', function() {
+      return $(this).closest('.message').transition('fade');
+    });
+
+    $('[data-requires-confirmation]').requireConfirmation();
+    $('[data-toggles]').toggleElement();
+
+    $('.special.cards .image').dimmer({
+      on: 'hover'
+    });
+
+    $('[data-form-type="collection"]').CollectionForm();
+
+  });
+})(jQuery);
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 (function ( $ ) {
+    'use strict';
+
     $.fn.extend({
         apiLogin: function (apiSettings) {
             var element = $(this);
             var apiSettings = apiSettings;
             var passwordField = element.find('input[type=\'password\']');
             var emailField = element.find('input[type=\'email\']');
+            var csrfTokenField = element.find('input[type=\'hidden\']');
             var signInButton = element.find('.button');
             var validationField = element.find('.red.label');
-            validationField.hide();
 
             signInButton.api({
-                action: apiSettings.action,
                 method: apiSettings.method,
                 dataType: apiSettings.dataType || 'json',
                 throttle: apiSettings.throttle || 0,
@@ -54,6 +103,7 @@ if(n.debug("Changing setting",t,o),e.isPlainObject(t))e.extend(!0,f,t);else{if(o
                         _username: emailField.val(),
                         _password: passwordField.val()
                     };
+                    settings.data[csrfTokenField.attr('name')] = csrfTokenField.val();
 
                     return settings;
                 },
@@ -68,7 +118,7 @@ if(n.debug("Changing setting",t,o),e.isPlainObject(t))e.extend(!0,f,t);else{if(o
                 },
 
                 onFailure: function (response) {
-                    validationField.show();
+                    validationField.removeClass('hidden');
                     validationField.html(response.message);
                 }
             });
@@ -87,6 +137,8 @@ if(n.debug("Changing setting",t,o),e.isPlainObject(t))e.extend(!0,f,t);else{if(o
  */
 
 (function ( $ ) {
+    'use strict';
+
     $.fn.extend({
         apiToggle: function (apiSettings, toggleableElement, isHidden) {
             var element = $(this);
@@ -99,7 +151,6 @@ if(n.debug("Changing setting",t,o),e.isPlainObject(t))e.extend(!0,f,t);else{if(o
             }
 
             element.api({
-                action: apiSettings.action,
                 method: apiSettings.method,
                 dataType: apiSettings.dataType || 'json',
                 throttle: apiSettings.throttle || 0,
@@ -121,120 +172,89 @@ if(n.debug("Changing setting",t,o),e.isPlainObject(t))e.extend(!0,f,t);else{if(o
     });
 })( jQuery );
 
-(function($) {
-  $.fn.extend({
-    toggleElement: function() {
-      return this.each(function() {
-        $(this).on('change', function(event) {
-          event.preventDefault();
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-          var toggleElement = $(this);
-          var targetElement = $('#' + toggleElement.data('toggles'));
+(function ( $ ) {
+    'use strict';
 
-          if (toggleElement.is(':checked')) {
-            targetElement.show();
-          } else {
-            targetElement.hide();
-          }
+    $.fn.extend({
+        autoComplete: function () {
+                $(this).each(function () {
+                    var element = $(this);
+                    var criteriaName = $(this).data('criteria-name');
+                    var choiceName = $(this).data('choice-name');
+                    var choiceValue = $(this).data('choice-value');
+                    var autocompleteValue = $(this).find('input.autocomplete').val();
+                    var loadForEditUrl = $(this).data('load-edit-url');
+
+                    element.dropdown({
+                        delay: {
+                            search: 250
+                        },
+                        forceSelection: false,
+                        apiSettings: {
+                            dataType: 'JSON',
+                            cache: false,
+                            beforeSend: function(settings) {
+                                settings.data[criteriaName] = settings.urlData.query;
+
+                                return settings;
+                            },
+                            onResponse: function (response) {
+                                var choiceName = element.data('choice-name');
+                                var choiceValue = element.data('choice-value');
+                                var myResults = [];
+                                $.each(response, function (index, item) {
+                                    myResults.push({
+                                        name: item[choiceName],
+                                        value: item[choiceValue]
+                                    });
+                                });
+
+                                return {
+                                    success: true,
+                                    results: myResults
+                                };
+                            }
+                        }
+                    });
+
+                    if (0 < autocompleteValue.split(',').length) {
+                        var menuElement = element.find('div.menu');
+
+                        menuElement.api({
+                            on: 'now',
+                            method: 'GET',
+                            url: loadForEditUrl,
+                            beforeSend: function (settings) {
+                                settings.data[choiceValue] = autocompleteValue.split(',');
+
+                                return settings;
+                            },
+                            onSuccess: function (response) {
+                                $.each(response, function (index, item) {
+                                    menuElement.append(
+                                        $('<div class="item" data-value="'+item[choiceValue]+'">'+item[choiceName]+'</div>')
+                                    );
+                                });
+                            }
+                        });
+                    }
+
+                    window.setTimeout(function () {
+                        element.dropdown('set selected', element.find('input.autocomplete').val().split(','));
+                    }, 5000);
+                });
+            }
         });
-
-        return $(this).trigger('change');
-      });
-    }
-  });
-
-  $.fn.extend({
-    requireConfirmation: function() {
-      return this.each(function() {
-        return $(this).on('click', function(event) {
-          event.preventDefault();
-
-          var actionButton = $(this);
-
-          if (actionButton.is('a')) {
-            $('#confirmation-button').attr('href', actionButton.attr('href'));
-          }
-          if (actionButton.is('button')) {
-            $('#confirmation-button').on('click', function(event) {
-              event.preventDefault();
-
-              return actionButton.closest('form').submit();
-            });
-          }
-
-          return $('#confirmation-modal').modal('show');
-        });
-      });
-    }
-  });
-
-  $(document).ready(function() {
-    $('#sidebar')
-        .first()
-        .sidebar('attach events', '#sidebar-toggle', 'show')
-    ;
-
-    $('.ui.checkbox').checkbox();
-    $('.ui.accordion').accordion();
-    $('.ui.menu .dropdown').dropdown({action: 'hide'});
-    $('.ui.inline.dropdown').dropdown();
-    $('.link.ui.dropdown').dropdown({action: 'hide'});
-    $('.button.ui.dropdown').dropdown({action: 'hide'});
-    $('.ui.fluid.search.selection.ui.dropdown').dropdown();
-    $('.menu .item').tab();
-    $('.card .image').dimmer({on: 'hover'});
-    $('.ui.rating').rating('disable');
-    $('.cart.button')
-        .popup({
-            popup: $('.cart.popup'),
-            on: 'click',
-        })
-    ;
-
-    $('form.loadable button').on('click', function() {
-      return $(this).closest('form').addClass('loading');
-    });
-    $('.loadable.button').on('click', function() {
-      return $(this).addClass('loading');
-    });
-    $('.message .close').on('click', function() {
-      return $(this).closest('.message').transition('fade');
-    });
-
-    $('[data-requires-confirmation]').requireConfirmation();
-    $('[data-toggles]').toggleElement();
-
-    $('.special.cards .image').dimmer({
-      on: 'hover'
-    });
-
-    var email = $('#sylius_checkout_address_customer_email');
-    email.apiToggle({
-      action: 'user check',
-      dataType: 'json',
-      method: 'GET',
-      throttle: 1500,
-
-      beforeSend: function (settings) {
-        settings.data = {
-          email: email.val()
-        };
-
-        return settings;
-      },
-
-      successTest: function (response) {
-        return email.val() === response.username;
-      }
-    }, $('#sylius-api-login-form'));
-
-    $('#sylius-api-login').apiLogin({
-      action: 'login check',
-      method: 'POST',
-      throttle: 500
-    });
-  });
-})(jQuery);
+})( jQuery );
 
 /*
  * This file is part of the Sylius package.
@@ -287,6 +307,11 @@ if(n.debug("Changing setting",t,o),e.isPlainObject(t))e.extend(!0,f,t);else{if(o
             '[data-form-prototype="update"]',
             $.proxy(this.updatePrototype, this)
         );
+
+        $(document).on('collection-form-add', function(e, addedElement) {
+            $(addedElement).find('[data-form-type="collection"]').CollectionForm();
+            $(document).trigger('dom-node-inserted', [$(addedElement)]);
+        });
     }
     CollectionForm.prototype = {
         constructor : CollectionForm,
@@ -397,18 +422,6 @@ if(n.debug("Changing setting",t,o),e.isPlainObject(t))e.extend(!0,f,t);else{if(o
 
     $.fn.CollectionForm.Constructor = CollectionForm;
 
-    /*
-     * Apply to standard CollectionForm elements
-     */
-
-    $(document).on('collection-form-add', function(e, addedElement) {
-        $(addedElement).find('[data-form-type="collection"]').CollectionForm();
-        $(document).trigger('dom-node-inserted', [$(addedElement)]);
-    });
-
-    $(document).ready(function () {
-        $('[data-form-type="collection"]').CollectionForm();
-    });
 }(jQuery);
 
 /*
@@ -420,71 +433,24 @@ if(n.debug("Changing setting",t,o),e.isPlainObject(t))e.extend(!0,f,t);else{if(o
  * file that was distributed with this source code.
  */
 
-(function ( $ ) {
-    'use strict';
-
-    $(document).ready(function() {
-        $('.ui.fluid.search.selection.dropdown').dropdown({
-            delay: {
-                search: 250,
-            },
-            apiSettings: {
-                action: 'get taxons',
-                dataType: 'JSON',
-                cache: false,
-                data: { 
-                    criteria: { name: { type: 'contains', value: '' } }
-                },
-                beforeSend: function(settings) {
-                    settings.data.criteria.name.value = settings.urlData.query;
-                    return settings;
-                },
-                onResponse: function (response) {
-                    var myResults = [];
-                    $.each(response._embedded.items, function (index, item) {
-                        myResults.push({
-                            name: item.name,
-                            value: item.id
-                        });
-                    });
-                    return {
-                        success: true,
-                        results: myResults
-                    };
-                }
-            }
-        })
-    })
-})( jQuery );
-
-/*
- * This file is part of the Sylius package.
- *
- * (c) Paweł Jędrzejewski
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 (function ($) {
     'use strict';
 
-    $('table thead th.sortable').on('click', function () {
-        window.location = $(this).find('a').attr('href');
-    })
-}) (jQuery);
+    $.fn.extend({
+        productAttributes: function () {
+            setAttributeChoiceListener();
 
-/*
- * This file is part of the Sylius package.
- *
- * (c) Paweł Jędrzejewski
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+            $(this).dropdown({
+                onRemove: function(removedValue, removedText, $removedChoice) {
+                    modifyAttributesListOnSelectorElementDelete(removedValue);
+                },
+                forceSelection: false
+            });
 
-(function ($) {
-    'use strict';
+            controlAttributesList();
+            modifySelectorOnAttributesListElementDelete();
+        }
+    });
 
     function addAttributesNumber(number) {
         var currentIndex = parseInt(getNextIndex());
@@ -498,12 +464,12 @@ if(n.debug("Changing setting",t,o),e.isPlainObject(t))e.extend(!0,f,t);else{if(o
     function controlAttributesList() {
         $('#attributesContainer .attribute').each(function() {
             var value = $(this).attr('data-id');
-            $('[name="sylius_product_attribute_choice"]').dropdown('set selected', value);
+            $('#sylius_product_attribute_choice').dropdown('set selected', value);
         });
     }
 
     function modifyAttributesListOnSelectorElementDelete(removedValue) {
-        $('#attributesContainer > .attribute[data-id="'+removedValue+'"]').remove();
+        $('#attributesContainer .attribute[data-id="'+removedValue+'"]').remove();
     }
 
     function modifySelectorOnAttributesListElementDelete() {
@@ -511,7 +477,7 @@ if(n.debug("Changing setting",t,o),e.isPlainObject(t))e.extend(!0,f,t);else{if(o
             var attributeId = $(this).parents('.attribute').attr('data-id');
 
             $('div#attributeChoice > .ui.dropdown.search').dropdown('remove selected', attributeId);
-            $(this).parent().remove();
+            modifyAttributesListOnSelectorElementDelete(attributeId)
         });
     }
 
@@ -526,46 +492,192 @@ if(n.debug("Changing setting",t,o),e.isPlainObject(t))e.extend(!0,f,t);else{if(o
     }
 
     function setAttributeChoiceListener() {
-        $('#attributeChoice button').on('click', function(event) {
-            var $attributesContainer = $('#attributesContainer');
+        var $attributeChoice = $('#attributeChoice');
+        $attributeChoice.find('button').on('click', function(event) {
             event.preventDefault();
 
+            var $attributeChoiceSelect = $attributeChoice.find('select');
             var data = '';
-            $(this).parent().find('select').val().forEach(function(item) {
-                data += 'sylius_product_attribute_choice[]=' + item + "&";
-            });
+            var $newAttributes = $attributeChoiceSelect.val();
+
+            if (null != $newAttributes) {
+                $attributeChoiceSelect.val().forEach(function(item) {
+                    if (!isInTheAttributesContainer(item)) {
+                        data += $attributeChoiceSelect.prop('name') + '=' + item + "&";
+                    }
+                });
+            }
             data += "count=" + getNextIndex();
 
             $.ajax({
                 type: 'GET',
                 url: $(this).parent().attr('data-action'),
                 data: data,
-                dataType: 'html'
-            }).done(function(data) {
-                var finalData = modifyAttributeForms($(data));
-                $attributesContainer.append(finalData);
+                dataType: 'html',
+                error: function() {
+                    $('form').removeClass('loading');
+                },
+                success: function(data) {
+                    var finalData = modifyAttributeForms($(data));
 
-                $('[name="sylius_product_attribute_choice"]').val('')
+                    $(finalData).each(function() {
+                        var localeCode = $(this).find('input[type="hidden"]').last().val();
+                        $('#attributesContainer > div[data-tab="'+localeCode+'"]').append(this);
+                    });
 
-                addAttributesNumber($.grep($(finalData), function (a) { return $(a).hasClass('attribute'); }).length);
-                modifySelectorOnAttributesListElementDelete();
+                    $('#sylius_product_attribute_choice').val('');
 
-                $('form').removeClass('loading');
+                    addAttributesNumber($.grep($(finalData), function (a) { return $(a).hasClass('attribute'); }).length);
+                    modifySelectorOnAttributesListElementDelete();
+
+                    $('form').removeClass('loading');
+                }
             });
         });
     }
 
-    $(document).ready(function() {
-        setAttributeChoiceListener();
-        controlAttributesList();
-
-        $('div#attributeChoice > .ui.dropdown.search').dropdown({
-            onRemove: function(removedValue, removedText, $removedChoice) {
-                modifyAttributesListOnSelectorElementDelete(removedValue);
+    function isInTheAttributesContainer(attributeId) {
+        var result = false;
+        $('#attributesContainer .attribute').each(function() {
+            var dataId = $(this).attr('data-id');
+            if (dataId === attributeId) {
+                result = true;
             }
         });
 
-        modifySelectorOnAttributesListElementDelete();
+        return result;
+    }
+})( jQuery );
+
+(function ($) {
+    'use strict';
+
+    var methods = {
+        init: function(options) {
+            var settings = $.extend({
+              'prototypePrefix': false,
+              'containerSelector': false
+            }, options);
+
+            return this.each(function() {
+                show($(this), false);
+                $(this).change(function() {
+                    show($(this), true);
+                });
+
+                function show(element, replace) {
+                    var selectedValue = element.val();
+                    var prototypePrefix = element.attr('id');
+                    if (false != settings.prototypePrefix) {
+                        prototypePrefix = settings.prototypePrefix;
+                    }
+
+                    var prototypeElement = $('#' + prototypePrefix + '_' + selectedValue);
+                    var container;
+
+                    if (settings.containerSelector) {
+                        container = $(settings.containerSelector);
+                    } else {
+                        container = $(prototypeElement.data('container'));
+                    }
+
+                    if (!container.length) {
+                        return;
+                    }
+
+                    if (!prototypeElement.length) {
+                        container.empty();
+                        return;
+                    }
+
+                    if (replace || !container.html().trim()) {
+                        container.html(prototypeElement.data('prototype'));
+                    }
+                }
+            });
+        }
+    };
+
+    $.fn.handlePrototypes = function(method) {
+        if (methods[method]) {
+            return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
+        } else if (typeof method === 'object' || !method) {
+            return methods.init.apply(this, arguments);
+        } else {
+            $.error( 'Method ' +  method + ' does not exist on jQuery.handlePrototypes' );
+        }
+    };
+})(jQuery);
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+(function ( $ ) {
+    'use strict';
+
+    $.fn.extend({
+        requireConfirmation: function() {
+            return this.each(function() {
+                return $(this).on('click', function(event) {
+                    event.preventDefault();
+
+                    var actionButton = $(this);
+
+                    if (actionButton.is('a')) {
+                        $('#confirmation-button').attr('href', actionButton.attr('href'));
+                    }
+                    if (actionButton.is('button')) {
+                        $('#confirmation-button').on('click', function(event) {
+                            event.preventDefault();
+
+                            return actionButton.closest('form').submit();
+                        });
+                    }
+
+                    return $('#confirmation-modal').modal('show');
+                });
+            });
+        }
+    });
+})( jQuery );
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+(function ( $ ) {
+    'use strict';
+
+    $.fn.extend({
+        toggleElement: function() {
+            return this.each(function() {
+                $(this).on('change', function(event) {
+                    event.preventDefault();
+
+                    var toggleElement = $(this);
+                    var targetElement = $('#' + toggleElement.data('toggles'));
+
+                    if (toggleElement.is(':checked')) {
+                        targetElement.show();
+                    } else {
+                        targetElement.hide();
+                    }
+                });
+
+                return $(this).trigger('change');
+            });
+        }
     });
 })( jQuery );
 
@@ -6150,6 +6262,25 @@ S2.define('jquery.select2',[
   return select2;
 }));
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+(function($) {
+    $(document).ready(function () {
+        $('.sylius-autocomplete').autoComplete();
+        $('.product-select.ui.fluid.multiple.search.selection.dropdown').productAutoComplete();
+        $('.sylius-update-product-variants').moveProductVariant($('.sylius-product-variant-position'));
+        $(document).productSlugGenerator();
+        $(document).taxonSlugGenerator();
+    });
+})(jQuery);
+
 $(function () {
   "use strict";
 
@@ -6407,3 +6538,275 @@ $(function () {
   }
 
 });
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+(function ( $ ) {
+    'use strict';
+
+    $.fn.extend({
+        moveProductVariant: function (positionInput) {
+            var productVariantIds = [];
+            var element = $(this);
+
+            element.api({
+                method: 'PUT',
+                beforeSend: function (settings) {
+                    settings.data = {
+                        productVariants: productVariantIds,
+                        _csrf_token: element.data('csrf-token')
+                    };
+
+                    return settings;
+                },
+                onSuccess: function (response) {
+                    location.reload();
+                }
+            });
+
+            positionInput.on('input', function () {
+                var id = $(this).data('id');
+                var rowToEdit = productVariantIds.filter(function (productVariant){
+                    return productVariant.id == id;
+                });
+
+                if(rowToEdit.length == 0) {
+                    productVariantIds.push({
+                        id: $(this).data('id'),
+                        position: $(this).val()
+                    });
+                } else {
+                    rowToEdit[0].position = $(this).val();
+                }
+            });
+        }
+    });
+})(jQuery);
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+(function ( $ ) {
+    'use strict';
+
+    $.fn.extend({
+        productAutoComplete: function () {
+            $(this).each(function() {
+                $(this).dropdown('set selected', $(this).find('input[name*="[associations]"]').val().split(','));
+            });
+
+            $(this).dropdown({
+                delay: {
+                    search: 250,
+                },
+                forceSelection: false,
+                apiSettings: {
+                    dataType: 'JSON',
+                    cache: false,
+                    data: {
+                        criteria: { search: { type: 'contains', value: '' } }
+                    },
+                    beforeSend: function(settings) {
+                        settings.data.criteria.search.value = settings.urlData.query;
+
+                        return settings;
+                    },
+                    onResponse: function (response) {
+                        var myResults = [];
+                        $.each(response._embedded.items, function (index, item) {
+                            myResults.push({
+                                name: item.name,
+                                value: item.code
+                            });
+                        });
+
+                        return {
+                            success: true,
+                            results: myResults
+                        };
+                    }
+                },
+                onAdd: function(addedValue, addedText, $addedChoice) {
+                    var inputAssociation = $addedChoice.parents('.product-select').find('input[name*="[associations]"]');
+                    var associatedProductCodes = 0 < inputAssociation.val().length ? inputAssociation.val().split(',') : [];
+
+                    associatedProductCodes.push(addedValue);
+                    $.unique(associatedProductCodes.sort());
+
+                    inputAssociation.attr('value', associatedProductCodes.join());
+                },
+                onRemove: function(removedValue, removedText, $removedChoice) {
+                    var inputAssociation = $removedChoice.parents('.product-select').find('input[name*="[associations]"]');
+                    var associatedProductCodes = 0 < inputAssociation.val().length ? inputAssociation.val().split(',') : [];
+
+                    associatedProductCodes.splice($.inArray(removedValue, associatedProductCodes), 1);
+
+                    inputAssociation.attr('value', associatedProductCodes.join());
+                }
+            });
+        }
+    });
+
+})( jQuery );
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+(function ($) {
+    'use strict';
+
+    $.fn.extend({
+        productSlugGenerator: function () {
+            var timeout;
+
+            $('[name*="sylius_product[translations]"][name*="[name]"]').on('input', function() {
+                clearTimeout(timeout);
+                var element = $(this);
+
+                timeout = setTimeout(function() {
+                    updateSlug(element);
+                }, 1000);
+            });
+
+            $('.toggle-product-slug-modification').on('click', function(e) {
+                e.preventDefault();
+                toggleSlugModification($(this), $(this).siblings('input'));
+            });
+
+            function updateSlug(element) {
+                var slugInput = element.parents('.content').find('[name*="[slug]"]');
+                var loadableParent = slugInput.parents('.field.loadable');
+
+                if ('readonly' == slugInput.attr('readonly')) {
+                    return;
+                }
+
+                loadableParent.addClass('loading');
+
+                $.ajax({
+                    type: "GET",
+                    url: slugInput.attr('data-url'),
+                    data: { name: element.val() },
+                    dataType: "json",
+                    accept: "application/json",
+                    success: function(data) {
+                        slugInput.val(data.slug);
+                        if (slugInput.parents('.field').hasClass('error')) {
+                            slugInput.parents('.field').removeClass('error');
+                            slugInput.parents('.field').find('.sylius-validation-error').remove();
+                        }
+                        loadableParent.removeClass('loading');
+                    }
+                });
+            }
+
+            function toggleSlugModification(button, slugInput) {
+                if (slugInput.attr('readonly')) {
+                    slugInput.removeAttr('readonly');
+                    button.html('<i class="unlock icon"></i>');
+                } else {
+                    slugInput.attr('readonly', 'readonly');
+                    button.html('<i class="lock icon"></i>');
+                }
+            }
+        }
+    });
+})(jQuery);
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+(function ($) {
+    'use strict';
+
+    $.fn.extend({
+        taxonSlugGenerator: function () {
+            var timeout;
+
+            $('[name*="sylius_taxon[translations]"][name*="[name]"]').on('input', function() {
+                clearTimeout(timeout);
+                var element = $(this);
+
+                timeout = setTimeout(function() {
+                    updateSlug(element);
+                }, 1000);
+            });
+
+            $('.toggle-taxon-slug-modification').on('click', function(e) {
+                e.preventDefault();
+                toggleSlugModification($(this), $(this).siblings('input'));
+            });
+
+            function updateSlug(element) {
+                var slugInput = element.parents('.content').find('[name*="[slug]"]');
+                var loadableParent = slugInput.parents('.field.loadable');
+
+                if ('readonly' == slugInput.attr('readonly')) {
+                    return;
+                }
+
+                loadableParent.addClass('loading');
+
+                var data;
+                if ('' != slugInput.attr('data-parent') && undefined != slugInput.attr('data-parent')) {
+                    data = { name: element.val(), parentId: slugInput.attr('data-parent') };
+                } else if ($('#sylius_taxon_parent').length > 0 && $('#sylius_taxon_parent').is(':visible') && '' != $('#sylius_taxon_parent').val()) {
+                    data = { name: element.val(), parentId: $('#sylius_taxon_parent').val() };
+                } else {
+                    data = { name: element.val() };
+                }
+
+                $.ajax({
+                    type: "GET",
+                    url: slugInput.attr('data-url'),
+                    data: data,
+                    dataType: "json",
+                    accept: "application/json",
+                    success: function(data) {
+                        slugInput.val(data.slug);
+                        if (slugInput.parents('.field').hasClass('error')) {
+                            slugInput.parents('.field').removeClass('error');
+                            slugInput.parents('.field').find('.sylius-validation-error').remove();
+                        }
+                        loadableParent.removeClass('loading');
+                    }
+                });
+            }
+
+            function toggleSlugModification(button, slugInput) {
+                if (slugInput.attr('readonly')) {
+                    slugInput.removeAttr('readonly');
+                    button.html('<i class="unlock icon"></i>');
+                } else {
+                    slugInput.attr('readonly', 'readonly');
+                    button.html('<i class="lock icon"></i>');
+                }
+            }
+        }
+    });
+
+})(jQuery);

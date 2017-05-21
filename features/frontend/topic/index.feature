@@ -25,9 +25,17 @@ Feature: View list of topics
     Then I should see "Retour de Cannes jour par jour"
     And I should see "Jeux avec handicap"
 
-  @todo
   Scenario: View list of topics under a taxon
     Given I am on "/topics/"
     When I follow "Moi je dis jeux"
     Then I should see "Jeux avec handicap"
-    But I should not see "Retour de Cannes jour par jour"
+
+  Scenario: Does not allow indexing private topics
+    Given there are taxons:
+      | code     | name                | parent | public |
+      | tatooine | Tatooine la Cantina | forum  | 0      |
+    And there are topics:
+      | title                        | main_taxon                | author            |
+      | Topic in Tatooine la Cantina | forum/tatooine-la-cantina | kevin@example.com |
+    When I am on "/topics/"
+    Then I should not see "Topic in Tatooine la Cantina"

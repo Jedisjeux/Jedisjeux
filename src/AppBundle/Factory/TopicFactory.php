@@ -11,12 +11,14 @@
 
 namespace AppBundle\Factory;
 
+use AppBundle\Entity\Article;
 use AppBundle\Entity\GamePlay;
 use AppBundle\Entity\Post;
 use AppBundle\Entity\Topic;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -92,19 +94,12 @@ class TopicFactory implements FactoryInterface
     }
 
     /**
-     * @param int $gamePlayId
+     * @param GamePlay $gamePlay
      *
      * @return Topic
      */
-    public function createForGamePlay($gamePlayId)
+    public function createForGamePlay(GamePlay $gamePlay)
     {
-        /** @var GamePlay $gamePlay */
-        $gamePlay = $this->gamePlayRepository->find($gamePlayId);
-
-        if (null === $gamePlay) {
-            throw new \InvalidArgumentException(sprintf('Requested gameplay does not exist with id "%s".', $gamePlayId));
-        }
-
         /** @var Topic $topic */
         $topic = $this->createNew();
         $topic->setMainPost(null); // topic for game play has no main post
@@ -113,8 +108,40 @@ class TopicFactory implements FactoryInterface
             ->setTopic($topic);
 
         $topic
-            ->setTitle("Partie de ".(string)$gamePlay->getProduct())
+            ->setTitle("Partie de ".(string) $gamePlay->getProduct())
             ->setAuthor($gamePlay->getAuthor());
+
+        return $topic;
+    }
+
+    /**
+     * @param Article $article
+     *
+     * @return Topic
+     */
+    public function createForArticle(Article $article)
+    {
+        /** @var Topic $topic */
+        $topic = $this->createNew();
+        $topic->setMainPost(null); // topic for article has no main post
+
+        $article
+            ->setTopic($topic);
+
+        $topic
+            ->setTitle($article->getTitle())
+            ->setAuthor($article->getAuthor());
+
+        return $topic;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createForTaxon(TaxonInterface $taxon)
+    {
+        $topic = $this->createNew();
+        $topic->setMainTaxon($taxon);
 
         return $topic;
     }

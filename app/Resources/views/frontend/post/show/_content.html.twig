@@ -1,0 +1,49 @@
+{% import 'macros/items.html.twig' as item %}
+{% from 'macros/users.html.twig' import avatar %}
+{% import 'macros/buttons.html.twig' as button %}
+
+{% set editPath = editPath|default(path('app_frontend_post_update', {'id': post.id})) %}
+{% set removePath = removePath|default(path('app_frontend_post_delete', {'id': post.id})) %}
+
+{% set user = post.author.user %}
+{% set isAuthor = app.user and app.user.id == user.id %}
+{% set imagePath = avatar(user) %}
+{% set isTopic = post.parent ? true : false %}
+
+{% set meta %}
+    {% if isAuthor %}
+        <div class="btn-group pull-right">
+            <a class="btn btn-default" title="{{ 'label.edit'|trans }}" href="{{ editPath }}">
+                <span class="fa fa-pencil"></span>
+            </a>
+            {% if isTopic and post.parent.posts|length == 0 or not isTopic %}
+                <form action="{{ removePath }}" name="form" method="post" style="display: inline;">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button class="btn btn-default btn-confirm" type="submit" title="{{ 'label.delete'|trans }}">
+                        <i class="fa fa-remove"></i>
+                    </button>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token(post.id) }}" />
+                </form>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    <!-- Date -->
+    <a href="#"><i class="fa fa-calendar"></i> &nbsp; {{ post.createdAt|date('d/m/Y H\\hi') }}</a>
+    &nbsp;
+    <!-- Author -->
+    <a href="#"><i class="fa fa-user"></i> &nbsp; {{ user.customer.user }}</a>
+    &nbsp;
+    {#<a href="#">#}
+        {#<i class="fa fa-thumbs-up"></i>#}
+        {#<span data-post-id="{{ post.id }}" class="nbLikes">0</span>#}
+    {#</a>#}
+    {#&nbsp;#}
+    {#<a href="#">#}
+        {#<i class="fa fa-thumbs-down"></i>#}
+        {#<span data-post-id="{{ post.id }}" class="nbDislikes">0</span>#}
+    {#</a>#}
+    &nbsp;
+{% endset %}
+
+{{ item.blogCommentItem(imagePath, user.username, 'thumbnail', 'img-responsive img-round', null, null, meta, post.body) }}

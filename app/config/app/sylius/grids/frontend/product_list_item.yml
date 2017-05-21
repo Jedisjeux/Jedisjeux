@@ -8,6 +8,7 @@ sylius_grid:
                     repository:
                         method: createQueryBuilderByProductList
                         arguments: [$productListSlug, "%locale%"]
+            limits: ~
             sorting:
                 createdAt: desc
             fields:

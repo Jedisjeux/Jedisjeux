@@ -20,3 +20,21 @@ services:
         class: AppBundle\Updater\ProductCountByTaxonUpdater
         arguments:
             - "@app.calculator.product_count_by_taxon"
+
+    app.updater.product_count_by_person:
+        class: AppBundle\Updater\ProductCountByPersonUpdater
+        arguments:
+            - "@app.calculator.product_count_by_person"
+
+    app.updater.base_product_association:
+        abstract: true
+        arguments:
+            - "@sylius.factory.product_association"
+
+    app.updater.add_product_association_owner_to_product:
+        class: AppBundle\Updater\AddProductAssociationOwnerToProductUpdater
+        parent: app.updater.base_product_association
+
+    app.updater.add_product_to_associated_products:
+        class: AppBundle\Updater\AddProductToAssociatedProductsUpdater
+        parent: app.updater.base_product_association

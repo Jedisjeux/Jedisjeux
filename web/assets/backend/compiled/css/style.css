@@ -499,13 +499,18 @@
   padding: 1em; }
 
 #sidebar {
-  font-size: 1.1em; }
+  font-size: 1.1em;
+  padding-bottom: 30px; }
 
 #logo {
   margin-bottom: 1em; }
 
 body.pushable .pusher {
   background-color: #f9fAfb; }
+
+.ui.visible.left.sidebar ~ .fixed.menu,
+.ui.visible.left.sidebar ~ .pusher {
+  padding-right: 260px; }
 
 body.centered {
   background-color: #f9fAfb; }
@@ -552,6 +557,27 @@ th a:visited {
   background-color: #f9fAfb;
   font-size: 0.9em;
   padding-bottom: 7px; }
+
+.ui.input input[readonly] {
+  color: #aaa; }
+
+.field.loading.transition {
+  top: auto;
+  left: auto; }
+
+.ui.floated.dividing.empty {
+  top: 100%;
+  bottom: auto;
+  padding: 0;
+  margin: 0; }
+
+.ui.left.floated.dividing.empty ~ .ui.dropdown > .menu {
+  right: auto;
+  left: 0; }
+
+.ui.right.floated.dividing.empty ~ .ui.dropdown > .menu {
+  right: 0;
+  left: auto; }
 
 .select2-search__field {
   border: none; }

@@ -11,14 +11,12 @@
 
 namespace AppBundle\Command\Installer\Data;
 
-use AppBundle\Entity\Country;
 use AppBundle\Entity\Taxon;
 use AppBundle\Repository\TaxonRepository;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
-use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -102,8 +100,18 @@ class LoadZonesCommand extends ContainerAwareCommand
 
         $parentTaxon->addChild($taxon);
 
+        $taxon->setSlug($this->getTaxonSlugGenerator()->generate($taxon->getName(), $parentTaxon->getId()));
+
         return $taxon;
 
+    }
+
+    /**
+     * @return TaxonSlugGeneratorInterface|object
+     */
+    protected function getTaxonSlugGenerator()
+    {
+        return $this->getContainer()->get('sylius.generator.taxon_slug');
     }
 
     /**

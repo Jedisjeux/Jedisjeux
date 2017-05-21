@@ -10,6 +10,6 @@
     {% endset %}
     {% set body %}{% endset %}
 
-    {{ item.magazineItemOne(game.mainImage ? game.mainImage.webPath : 'assets/frontend/img/avatar_2x.png', game.name, 'magazine_item', 'img-responsive', path('app_game_play_show', {'productSlug': game_play.product.slug, 'id': game_play.id}), game.name, body, meta) }}
+    {{ item.magazineItemOne(game.mainImage ? game.mainImage.webPath : 'assets/frontend/img/avatar_2x.png', game.name, 'magazine_item', 'img-responsive', path('app_frontend_game_play_show', {'productSlug': game_play.product.slug, 'id': game_play.id}), game.name, body, meta) }}
 
 {% endmacro %}

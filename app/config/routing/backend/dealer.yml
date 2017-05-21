@@ -8,6 +8,8 @@ app_backend_dealer:
         vars:
             all:
                 subheader: app.ui.manage_dealers
+                templates:
+                    form: backend/dealer/_form.html.twig
             index:
                 icon: building
     type: sylius.resource

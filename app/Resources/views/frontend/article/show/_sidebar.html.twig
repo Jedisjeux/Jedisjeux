@@ -1,0 +1,166 @@
+{% from 'macros/users.html.twig' import avatar %}
+{% import 'macros/buttons.html.twig' as button %}
+
+<!-- Sidebar -->
+<div class="sidebar">
+
+    {% if article.isReviewArticle %}
+
+        <div class="s-widget">
+            <h5>Note</h5>
+            <div class="widget-content">
+                <div class="icon-box-1 text-center">
+                    <div class="container">
+                        <div class="row well">
+                            <div class="col-md-12">
+                                <div class="col-md-3 col-sm-3">
+                                    <!-- Icon Box One Item -->
+                                    <div class="icon-box-1-item">
+                                        <!-- Icon Box One Icon -->
+                                        <a href="#"><i class="fa fa-star yellow"></i></a>
+                                        <!-- Icon Box One Headeing -->
+                                        <strong>{{ article.averageRating|round(1) }}/10</strong>
+                                    </div>
+                                </div>
+                                <div class="col-md-9 col-md-9">
+                                    <div class="row">
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                <div class="col-md-8 text-left">
+                                                    <!-- Item title -->
+                                                    <i class="fa fa-list"></i> <span>Matériel</span>
+                                                </div>
+                                                <div class="col-md-4 text-right">
+                                                    <div class="rating-container">
+                                                        <div class="rating yellow" data-readonly="true"
+                                                             data-rate-value="{{ article.materialRating }}"
+                                                             data-step-size="0.5"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="col-md-8 text-left">
+                                                    <!-- Item title -->
+                                                    <i class="fa fa-book"></i> <span>Règles</span>
+                                                </div>
+                                                <div class="col-md-4 text-right">
+                                                    <div class="rating-container">
+                                                        <div class="rating yellow" data-readonly="true"
+                                                             data-rate-value="{{ article.rulesRating }}"
+                                                             data-step-size="0.5"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="col-md-8 text-left">
+                                                    <!-- Item title -->
+                                                    <i class="fa fa-calendar"></i> <span>Durée de vie</span>
+                                                </div>
+                                                <div class="col-md-4 text-right">
+                                                    <div class="rating-container">
+                                                        <div class="rating yellow" data-readonly="true"
+                                                             data-rate-value="{{ article.lifetimeRating }}"
+                                                             data-step-size="0.5"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+        <hr>
+
+        <!-- Nav tab widget - popular, recent and comments -->
+        <div class="s-widget">
+            <h5><i class="fa fa-comments color"></i> Critiques</h5>
+            <div class="widget-content">
+                <ul class="list-unstyled">
+                    {% for review in article.reviews %}
+                        {% set author = review.author %}
+                        <li>
+                            <div class="col-md-6">
+                                <!-- Item image -->
+                                <img src="{{ avatar(author.user) | imagine_filter('thumbnail') }}" alt=""
+                                     class="img-responsive img-round"/>
+
+                            </div>
+                            <div class="col-md-6">
+                                <!-- Item title -->
+                                <span>{{ author }}</span><br/>
+
+                                <div class="rating-container">
+                                    <div class="rating yellow" data-readonly="true"
+                                         data-rate-value="{{ review.rating/2 }}" data-step-size="0.5"></div>
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+    {% endif %}
+
+    <!-- Nav tab widget - popular, recent and comments -->
+    <div class="s-widget">
+        <h5><i class="fa fa-book color"></i> A lire aussi...</h5>
+
+        <div class="widget-content tabs">
+            <div class="nav-tabs-two">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#recent" data-toggle="tab">Récents</a></li>
+                    <li><a href="#popular" data-toggle="tab">Populaires</a></li>
+                </ul>
+                <!-- Tab content -->
+                <div class="tab-content">
+                    <!-- Recent posts -->
+                    <div class="tab-pane fade in active" id="recent">
+                        {{ render(url('app_partial_article_index', {
+                            'criteria': {
+                                'status': 'published',
+                                'mainTaxon': article.mainTaxon ? article.mainTaxon.id : null
+                            },
+                            'sorting': {
+                                'publishStartDate': 'desc'
+                            },
+                            'paginate': 5,
+                            'template': 'frontend/article/_sidebarList.html.twig'
+                        })) }}
+                    </div>
+                    <!-- Popular posts -->
+                    <div class="tab-pane fade" id="popular">
+                        {{ render(url('app_partial_article_index', {
+                            'criteria': {
+                                'status': 'published',
+                                'mainTaxon': article.mainTaxon ? article.mainTaxon.id : null
+                            },
+                            'sorting': {
+                                'topic.postCount': 'desc'
+                            },
+                            'paginate': 5,
+                            'template': 'frontend/article/_sidebarList.html.twig'
+                        })) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'frontend/pub_banner/_sidebarWidget.html.twig' %}
+
+</div>

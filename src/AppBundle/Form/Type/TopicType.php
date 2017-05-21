@@ -12,17 +12,18 @@
 namespace AppBundle\Form\Type;
 
 use AppBundle\Entity\Taxon;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonAutocompleteChoiceType;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class TopicType extends AbstractResourceType
+class TopicType extends AbstractType
 {
     /**
      * @var AuthorizationChecker
@@ -44,36 +45,33 @@ class TopicType extends AbstractResourceType
     {
         parent::buildForm($builder, $options);
 
+        $onlyPublic = $this->authorizationChecker->isGranted('ROLE_STAFF') ? false : true;
+
         $builder
             ->add('title', null, array(
                 'label' => 'label.title',
             ))
-            ->add('mainPost', 'app_post',  array(
+            ->add('mainPost', PostType::class,  array(
                 'label' => false,
             ))
-            ->add('mainTaxon', 'entity', array(
+            ->add('mainTaxon', EntityType::class, array(
                 'label' => 'label.category',
                 'class' => 'AppBundle:Taxon',
-                'choice_label' => 'name',
-                'query_builder' => function (EntityRepository $er) {
-                    $queryBuilder = $er->createQueryBuilder('o');
-                    $queryBuilder
+                'group_by' => 'parent',
+                'query_builder' => function (EntityRepository $er) use ($onlyPublic) {
+                    $queryBuilder = $er->createQueryBuilder('o')
                         ->join('o.root', 'rootTaxon')
                         ->where('rootTaxon.code = :code')
                         ->andWhere('o.parent IS NOT NULL')
                         ->setParameter('code', Taxon::CODE_FORUM)
-
-                        ->orderBy('o.left');
-
-                    $onlyPublic = $this->authorizationChecker->isGranted('ROLE_STAFF') ? false : true;
+                        ->orderBy('o.position');
 
                     if ($onlyPublic) {
                         $queryBuilder
                             ->andWhere('o.public = :public')
-                            ->setParameter('public', true);
-
+                            ->setParameter('public', 1);
                     }
-                    
+
                     return $queryBuilder;
                 },
                 'expanded' => false,
@@ -84,21 +82,9 @@ class TopicType extends AbstractResourceType
     }
 
     /**
-     * @param OptionsResolver $resolver
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        parent::configureOptions($resolver);
-
-        $resolver->setDefaults([
-            'cascade_validation' => true,
-        ]);
-    }
-
-    /**
      * @inheritdoc
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'app_topic';
     }

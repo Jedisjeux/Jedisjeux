@@ -11,11 +11,12 @@
 
 namespace AppBundle\Command;
 
+use AppBundle\Command\Installer\CommandExecutor;
 use AppBundle\Entity\Dealer;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
-use Sylius\Bundle\InstallerBundle\Command\CommandExecutor;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Debug\Exception\ContextErrorException;
 use Symfony\Component\Process\Exception\RuntimeException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -25,6 +26,11 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class ImportDealersPricesCommand extends ContainerAwareCommand
 {
+    /**
+     * @var OutputInterface
+     */
+    protected $output;
+
     /**
      * @var CommandExecutor
      */
@@ -76,21 +82,33 @@ EOT
         $dealers = $this->getDealers();
 
         foreach ($dealers as $step => $dealer) {
+            $output->writeln(sprintf('<comment>Step %d of %d.</comment> <info>%s</info>', $step + 1, count($dealers), $dealer->getCode()));
+
             if ($dealer->hasPriceList() and $dealer->getPriceList()->isActive()) {
+                $output->writeln(sprintf('Import prices for <info>%s</info>.', $dealer->getName()));
+
                 try {
-                    $output->writeln(sprintf('<comment>Step %d of %d.</comment> <info>%s</info>', $step + 1, count($dealers), $dealer->getCode()));
                     $this->commandExecutor->runCommand('app:dealer-prices:import', [
                         'dealer' => $dealer->getCode(),
                         '--filename' => $dealer->getPriceList()->getPath(),
                         '--remove-first-line' => $dealer->getPriceList()->hasHeaders(),
+                        '--delimiter' => $dealer->getPriceList()->getDelimiter(),
+                        '--utf8' => $dealer->getPriceList()->isUtf8(),
                     ], $output);
                     $output->writeln('');
                 } catch (RuntimeException $exception) {
                     $this->isErrored = true;
 
                     continue;
+                } catch (ContextErrorException $exception) {
+                    $output->writeln(sprintf('<errror>%s</errror>', $exception->getMessage()));
+                    $this->isErrored = true;
+
+                    continue;
                 }
             } else {
+                $output->writeln(sprintf('Remove prices for <info>%s</info>.', $dealer->getName()));
+
                 $this->removeDealerPricesFromDealer($dealer);
             }
         }
@@ -121,7 +139,7 @@ EOT
     }
 
     /**
-     * @return EntityRepository
+     * @return EntityRepository|object
      */
     protected function getDealerRepository()
     {
@@ -129,7 +147,7 @@ EOT
     }
 
     /**
-     * @return EntityManager
+     * @return EntityManager|object
      */
     protected function getManager()
     {

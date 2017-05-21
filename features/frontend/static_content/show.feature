@@ -8,6 +8,7 @@ Feature: As a visitor
       | name             | title            | body                                                   |
       | mentions-legales | Mentions légales | <h2>Fiche d'identitité de l'association Jedisjeux</h2> |
 
+  @todo
   Scenario: See as static content page
     When I am on "/pages/mentions-legales"
-    Then I should see "Fiche d'identitité de l'association Jedisjeux"
+    Then I should see "Fiche d'identitité de l'association Jedisjeux"G

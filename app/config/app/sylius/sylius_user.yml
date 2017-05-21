@@ -5,8 +5,6 @@ sylius_user:
                 classes:
                     model: AppBundle\Entity\User
                     repository: AppBundle\Repository\UserRepository
-                    form:
-                        registration: AppBundle\Form\Type\User\UserRegistrationType
         admin_oauth:
             user:
                 classes:

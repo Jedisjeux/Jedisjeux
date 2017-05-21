@@ -24,7 +24,7 @@ sylius_partial_product_status_show:
 
 sylius_partial_product_index_by_taxon:
     methods: [GET]
-    path: /products/{permalink}
+    path: /products/{slug}
     defaults:
         _controller: sylius.controller.product:indexByTaxonAction
         _sylius:
@@ -34,5 +34,5 @@ sylius_partial_product_index_by_taxon:
             template: $template
             paginate: $paginate
     requirements:
-        permalink: "[^?]+"
+        slug: "[^?]+"
         template: "[^?]+"

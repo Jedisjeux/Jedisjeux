@@ -18,6 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\Question;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -73,30 +74,20 @@ EOT
     protected function interact(InputInterface $input, OutputInterface $output)
     {
         if (!$input->getArgument('email')) {
-            $email = $this->getHelper('dialog')->askAndValidate(
+            $email = $this->getHelper('question')->ask(
+                $input,
                 $output,
-                'Please enter an email:',
-                function($email) {
-                    if (empty($email)) {
-                        throw new \Exception('Email can not be empty');
-                    }
-                    return $email;
-                }
+                new Question('Please enter an email:')
             );
 
             $input->setArgument('email', $email);
         }
 
         if (!$input->getArgument('password')) {
-            $password = $this->getHelper('dialog')->askHiddenResponseAndValidate(
+            $password = $this->getHelper('question')->ask(
+                $input,
                 $output,
-                'Please choose a password:',
-                function($password) {
-                    if (empty($password)) {
-                        throw new \Exception('Password can not be empty');
-                    }
-                    return $password;
-                }
+                (new Question('Please choose a password:'))->setHidden(true)
             );
 
             $input->setArgument('password', $password);

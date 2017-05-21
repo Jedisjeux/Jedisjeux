@@ -11,6 +11,8 @@
 
 namespace AppBundle\Factory;
 
+use AppBundle\Entity\Article;
+use AppBundle\Entity\GamePlay;
 use AppBundle\Entity\Post;
 use AppBundle\Entity\Topic;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
@@ -62,25 +64,49 @@ class PostFactory implements FactoryInterface
     }
 
     /**
-     * @param int $topicId
-     * @param EntityRepository $topicRepository
+     * @param Topic $topic
      *
      * @return Post
      */
-    public function createForTopic($topicId, EntityRepository $topicRepository)
+    public function createForTopic($topic)
     {
         /** @var Post $post */
         $post =  $this->createNew();
 
-        /** @var Topic $topic */
-        $topic = $topicRepository->find($topicId);
-
-        if (null === $topic) {
-            throw new NotFoundHttpException(sprintf('Topic with id %s not found', $topicId));
-        }
-
         $post
             ->setTopic($topic);
+
+        return $post;
+    }
+
+    /**
+     * @param GamePlay $gamePlay
+     *
+     * @return Post
+     */
+    public function createForGamePlay(GamePlay $gamePlay)
+    {
+        /** @var Post $post */
+        $post =  $this->createNew();
+
+        $post
+            ->setGamePlay($gamePlay);
+
+        return $post;
+    }
+
+    /**
+     * @param Article $article
+     *
+     * @return Post
+     */
+    public function createForArticle(Article $article)
+    {
+        /** @var Post $post */
+        $post =  $this->createNew();
+
+        $post
+            ->setArticle($article);
 
         return $post;
     }

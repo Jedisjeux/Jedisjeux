@@ -1,7 +1,7 @@
 app:
     resource: "@AppBundle/Controller/"
-    type:     annotation
-    prefix:   /
+    type: annotation
+    prefix: /
 
 # TODO remove this route when no route in backend controllers is used anymore
 # use admin route instead
@@ -26,10 +26,6 @@ app_api:
 partial:
     resource: "routing/partial.yml"
     prefix: /_partial
-
-sylius_taxonomy:
-    resource: @SyliusTaxonomyBundle/Resources/config/routing.yml
-    prefix: /taxonomy
 
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"

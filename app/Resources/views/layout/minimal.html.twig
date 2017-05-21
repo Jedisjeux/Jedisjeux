@@ -15,6 +15,10 @@
 
         {% include "layout/_flashes.html.twig" %}
 
+        {% block container %}
+
+        {% endblock container %}
+
         <div class="card card-container">
 
             {% block card_container_content %}
@@ -22,6 +26,8 @@
 
         </div>
         <!-- /card-container -->
+
+
     </div>
     <!-- /container -->
 {% endblock outer %}

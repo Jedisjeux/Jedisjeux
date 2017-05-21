@@ -13,7 +13,7 @@ services:
         public: false
         arguments:
             - "@user.manager"
-            - %kernel.cache_dir%/security/nonces
+            - "%kernel.cache_dir%/security/nonces"
             - "@security.user_checker"
 
     wsse.security.authentication.listener:

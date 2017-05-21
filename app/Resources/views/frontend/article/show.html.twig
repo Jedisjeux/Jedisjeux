@@ -1,43 +1,63 @@
 {% extends "base.html.twig" %}
 
-{% from 'macros/posts.html.twig' import blogCommentItem as postComment %}
 {% import 'macros/items.html.twig' as item %}
 {% from 'macros/game_reviews.html.twig' import blogCommentItem as reviewComment %}
 {% import 'macros/pageViews.html.twig' as pageViews %}
+{% import 'macros/buttons.html.twig' as button %}
 
 {% set topic = article.topic %}
 
 {% block body_class %}article{% endblock %}
 
 {% block headline %}
-    {{ article.document.title }}
+    {{ article.title }}
 {% endblock %}
 
 {% block breadcrumb_content %}
     <a href="{{ path('app_frontend_article_index') }}">Articles</a> /
     {% if article.mainTaxon %}
-        <a href="{{ path('app_frontend_article_index_by_taxon', {'permalink': article.mainTaxon.permalink}) }}">{{ article.mainTaxon }}</a> /
+        <a href="{{ path('app_frontend_article_index_by_taxon', {'slug': article.mainTaxon.slug}) }}">{{ article.mainTaxon }}</a> /
     {% endif %}
-    {{ article.document.title }}
+    {{ article.title }}
 {% endblock %}
 
 {% block body -%}
     <div class="col-md-8">
 
+        {{ render(url('app_partial_article_status_show', {
+            'id': article.id,
+            'template': 'frontend/article/_status.html.twig'
+        })) }}
+
         {% if article.author %}
-            {{ item.blogAuthor(article.author, null, article.document.publishStartDate) }}
+            {{ item.blogAuthor(article.author, null, article.publishStartDate) }}
+        {% endif %}
+
+        {% if article.shortDescription %}
+            <div class="quote-one">
+                <div class="row">
+                    <!-- Quote One Item -->
+                    <div class="quote-one-item">
+                        <span class="color">“</span>
+                        <div class="quote-one-right">
+                            <div class="block-body">
+                                {{ article.shortDescription|raw }}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        {% endif %}
+
+        {% if article.slideShowBlock %}
+            {% include 'frontend/block/show/_slideshow.html.twig' with {'slideShowBlock': article.slideShowBlock } %}
         {% endif %}
 
         {% set blockImageCount = 0 %}
 
-        {% for block in article.document.children %}
-
-            {% if 'mainImage' != block.name %}
-                {{ sonata_block_render({
-                    'name': block.id
-                }) }}
-            {% endif %}
-
+        {% for block in article.blocks %}
+            {% include 'frontend/block/show/_content.html.twig' %}
         {% endfor %}
 
         {% if article.reviews|length > 0 %}
@@ -63,15 +83,20 @@
 
             <div class="blog-comments">
                 {% for post in topic.posts %}
-                    {{ postComment(post) }}
+                    {% include 'frontend/post/show/_content.html.twig' with {
+                    'editPath': path('app_frontend_article_post_update', {'id': post.id, 'articleSlug': article.slug})
+                    } %}
                 {% endfor %}
             </div>
         {% endif %}
 
-        {{ pageViews.render(article.id, 'article', path('app_frontend_article_show', {'name' : article.name})) }}
+        <h5><i class="fa fa-users color"></i> Participer</h5>
+        {{ button.btn(path('app_frontend_article_post_create', {'articleSlug' : article.slug}), 'Commenter l\'article', null, 'plus-sign', 'btn-color btn-lg') }}
+        <hr/>
 
+        {{ pageViews.render(article.id, 'article', path('app_frontend_article_show', {'slug' : article.slug})) }}
     </div>
     <div class="col-md-4">
-        {% include "frontend/article/_sidebarShow.html.twig" %}
+        {% include "frontend/article/show/_sidebar.html.twig" %}
     </div>
 {% endblock %}

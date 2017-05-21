@@ -1,0 +1,60 @@
+sylius_grid:
+    grids:
+        sylius_backend_product_variant:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.product_variant.class%"
+                    repository:
+                        method: createQueryBuilderByProductId
+                        arguments: ["%locale%", $productId]
+            sorting:
+                position: asc
+            fields:
+                name:
+                    type: string
+                    label: sylius.ui.name
+                code:
+                    type: string
+                    label: sylius.ui.code
+                position:
+                    type: twig
+                    label: sylius.ui.position
+                    path: .
+                    sortable: ~
+                    options:
+                        template: "backend/product_variant/grid/field/position.html.twig"
+            filters:
+                code:
+                    type: string
+                    label: sylius.ui.code
+                name:
+                    type: string
+                    label: sylius.ui.name
+                    options:
+                        fields: [name]
+            actions:
+                main:
+                    update_positions:
+                        type: update_product_variant_positions
+                    create:
+                        type: create
+                        options:
+                            link:
+                                parameters:
+                                    productId: $productId
+                item:
+                    update:
+                        type: update
+                        options:
+                            link:
+                                parameters:
+                                    id: resource.id
+                                    productId: $productId
+                    delete:
+                        type: delete
+                        options:
+                            link:
+                                parameters:
+                                    id: resource.id
+                                    productId: $productId

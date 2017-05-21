@@ -1,0 +1,27 @@
+sylius_grid:
+    grids:
+        sylius_frontend_product:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.product.class%"
+                    repository:
+                        method: createListQueryBuilder
+                        arguments:
+                            locale: "%locale%"
+                            onlyPublished: true
+                            criteria: "expr:service('request_stack').getCurrentRequest().get('criteria', [])"
+            limits: ~
+            sorting:
+                createdAt: desc
+            fields:
+                createdAt:
+                    type: string
+                    sortable: ~
+                averageRating:
+                    type: string
+                    sortable: ~
+                variant.releasedAt:
+                    path: variant.releasedAt
+                    type: string
+                    sortable: ~

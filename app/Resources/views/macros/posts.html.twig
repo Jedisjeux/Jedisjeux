@@ -10,8 +10,8 @@
 
     {% set meta %}
         {% if isAuthor %}
-            {% set editPath = isTopic ? path('app_frontend_topic_update', { 'id': post.parent.id }) : path('app_post_update', { 'id': post.id }) %}
-            {% set removePath = isTopic ? path('app_frontend_topic_delete', {'id': post.parent.id}) : path('app_post_delete', {'id': post.id}) %}
+            {% set editPath = isTopic ? path('app_frontend_topic_update', { 'id': post.parent.id }) : path('app_frontend_post_update', { 'id': post.id }) %}
+            {% set removePath = isTopic ? path('app_frontend_topic_delete', {'id': post.parent.id}) : path('app_frontend_post_delete', {'id': post.id}) %}
             <div class="btn-group pull-right">
                 <a class="btn btn-default" title="{{ 'label.edit'|trans }}" href="{{ editPath }}">
                     <span class="fa fa-pencil"></span>
@@ -22,6 +22,7 @@
                         <button class="btn btn-default btn-confirm" type="submit" title="{{ 'label.delete'|trans }}">
                             <i class="fa fa-remove"></i>
                         </button>
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token(post.id) }}" />
                     </form>
                 {% endif %}
             </div>
@@ -33,15 +34,15 @@
         <!-- Author -->
         <a href="#"><i class="fa fa-user"></i> &nbsp; {{ user.customer.user }}</a>
         &nbsp;
-        <a href="#">
-            <i class="fa fa-thumbs-up"></i>
-            <span data-post-id="{{ post.id }}" class="nbLikes">0</span>
-        </a>
-        &nbsp;
-        <a href="#">
-            <i class="fa fa-thumbs-down"></i>
-            <span data-post-id="{{ post.id }}" class="nbDislikes">0</span>
-        </a>
+        {#<a href="#">#}
+            {#<i class="fa fa-thumbs-up"></i>#}
+            {#<span data-post-id="{{ post.id }}" class="nbLikes">0</span>#}
+        {#</a>#}
+        {#&nbsp;#}
+        {#<a href="#">#}
+            {#<i class="fa fa-thumbs-down"></i>#}
+            {#<span data-post-id="{{ post.id }}" class="nbDislikes">0</span>#}
+        {#</a>#}
         &nbsp;
     {% endset %}
 

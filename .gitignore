@@ -2,11 +2,27 @@
 /web/behat/*
 /app/bootstrap.php.cache
 
-/app/cache/*
-!app/logs/.gitkeep
+/bin/*
+!/bin/build-package
+!/bin/build-packages
+!/bin/clean-package
+!/bin/clean-packages
+!/bin/console
+!/bin/fix-coding-standards
+!/bin/install-package
+!/bin/install-packages
+!/bin/symfony_requirements
+!/bin/test-package
+!/bin/test-packages
+!/bin/validate-package
+!/bin/validate-packages
 
-/app/logs/*
-!app/cache/.gitkeep
+log/
+/var/cache/*
+!var/logs/.gitkeep
+
+/var/logs/*
+!var/cache/.gitkeep
 
 /app/config/parameters.yml
 /app/config/*.local.yml
@@ -15,8 +31,8 @@
 
 /build/
 /vendor/
-/bin/
 /composer.phar
+/web/jedisjeux.xml
 /web/uploads/img/*
 /web/uploads/avatar/*
 !/web/uploads/avatar/.gitkeep
@@ -33,4 +49,3 @@
 *.DS_Store
 *.sass-cache
 *~
-*.csv

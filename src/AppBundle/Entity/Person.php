@@ -7,26 +7,38 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Person
  *
- * @ORM\Entity(repositoryClass="AppBundle\Repository\PersonRepository")
+ * @ORM\Entity
  * @ORM\Table(name="jdj_person", indexes={@ORM\Index(name="search_idx", columns={"slug"})})
  *
  * @JMS\ExclusionPolicy("all")
  */
 class Person implements ResourceInterface
 {
-    use IdentifiableTrait;
+    use IdentifiableTrait,
+        Timestampable;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=50, nullable=false)
+     * @ORM\Column(type="string", unique=true, nullable=true)
+     */
+    protected $code;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=50)
+     *
+     * @Assert\NotBlank()
      *
      * @JMS\Expose
      * @JMS\Groups({"Default", "Detailed"})
@@ -36,7 +48,7 @@ class Person implements ResourceInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=50, nullable=false)
+     * @ORM\Column(type="string", length=50, nullable=true)
      *
      * @JMS\Expose
      * @JMS\Groups({"Default", "Detailed"})
@@ -75,6 +87,27 @@ class Person implements ResourceInterface
     private $slug;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer")
+     */
+    protected $productCountAsDesigner = 0;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer")
+     */
+    protected $productCountAsArtist = 0;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer")
+     */
+    protected $productCountAsPublisher = 0;
+
+    /**
      * @var PersonImage[]|Collection
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\PersonImage", mappedBy="person", cascade={"persist", "merge"})
@@ -85,7 +118,9 @@ class Person implements ResourceInterface
      * @var Collection
      *
      * @ORM\ManyToMany(targetEntity="Sylius\Component\Taxonomy\Model\TaxonInterface")
-     * @ORM\JoinTable("jdj_person_taxon")
+     * @ORM\JoinTable("jdj_person_taxon",
+     *      inverseJoinColumns={@ORM\JoinColumn(name="taxoninterface_id", referencedColumnName="id")}
+     * )
      */
     protected $taxons;
 
@@ -120,6 +155,37 @@ class Person implements ResourceInterface
         $this->publisherProducts = new ArrayCollection();
         $this->images = new ArrayCollection();
         $this->taxons = new ArrayCollection();
+        $this->code = uniqid('person_');
+    }
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param string $code
+     *
+     * @return $this
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * @return PersonImage
+     *
+     * @deprecated
+     */
+    public function getMainImage()
+    {
+        return $this->getFirstImage();
     }
 
     /**
@@ -129,15 +195,11 @@ class Person implements ResourceInterface
      * @JMS\SerializedName("image")
      * @JMS\Groups({"Default", "Detailed"})
      */
-    public function getMainImage()
+    public function getFirstImage()
     {
-        foreach ($this->images as $image) {
-            if ($image->isMain()) {
-                return $image;
-            }
-        }
+        $firstImage = $this->images->first();
 
-        return null;
+        return false !== $firstImage ? $firstImage : null;
     }
 
     /**
@@ -309,6 +371,66 @@ class Person implements ResourceInterface
     }
 
     /**
+     * @return int
+     */
+    public function getProductCountAsDesigner(): int
+    {
+        return $this->productCountAsDesigner;
+    }
+
+    /**
+     * @param int $productCountAsDesigner
+     *
+     * @return $this
+     */
+    public function setProductCountAsDesigner($productCountAsDesigner)
+    {
+        $this->productCountAsDesigner = $productCountAsDesigner;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getProductCountAsArtist(): int
+    {
+        return $this->productCountAsArtist;
+    }
+
+    /**
+     * @param int $productCountAsArtist
+     *
+     * @return $this
+     */
+    public function setProductCountAsArtist($productCountAsArtist)
+    {
+        $this->productCountAsArtist = $productCountAsArtist;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getProductCountAsPublisher(): int
+    {
+        return $this->productCountAsPublisher;
+    }
+
+    /**
+     * @param int $productCountAsPublisher
+     *
+     * @return $this
+     */
+    public function setProductCountAsPublisher($productCountAsPublisher)
+    {
+        $this->productCountAsPublisher = $productCountAsPublisher;
+
+        return $this;
+    }
+
+    /**
      * @return PersonImage[]|Collection
      */
     public function getImages()
@@ -317,13 +439,38 @@ class Person implements ResourceInterface
     }
 
     /**
-     * @param PersonImage[]|Collection $images
+     * @param PersonImage $image
+     *
+     * @return bool
+     */
+    public function hasImage(PersonImage $image)
+    {
+        return $this->images->contains($image);
+    }
+
+    /**
+     * @param PersonImage $image
      *
      * @return $this
      */
-    public function setImages($images)
+    public function addImage(PersonImage $image)
     {
-        $this->images = $images;
+        if (!$this->hasImage($image)) {
+            $image->setPerson($this);
+            $this->images->add($image);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param PersonImage $image
+     *
+     * @return $this
+     */
+    public function removeImage(PersonImage $image)
+    {
+        $this->images->removeElement($image);
 
         return $this;
     }
@@ -345,7 +492,7 @@ class Person implements ResourceInterface
     }
 
     /**
-     * @return ArrayCollection
+     * @return TaxonInterface
      */
     public function getZone()
     {
@@ -354,13 +501,53 @@ class Person implements ResourceInterface
     }
 
     /**
-     * @param Collection $taxons
+     * @param TaxonInterface $zone
      *
      * @return $this
      */
-    public function setTaxons($taxons)
+    public function setZone(TaxonInterface $zone)
     {
-        $this->taxons = $taxons;
+        if ($this->getZone()) {
+            $this->removeTaxon($this->getZone());
+        }
+
+        $this->addTaxon($zone);
+
+        return $this;
+    }
+
+    /**
+     * @param TaxonInterface $taxon
+     *
+     * @return bool
+     */
+    public function hasTaxon(TaxonInterface $taxon)
+    {
+        return $this->taxons->contains($taxon);
+    }
+
+    /**
+     * @param TaxonInterface $taxon
+     *
+     * @return $this
+     */
+    public function addTaxon(TaxonInterface $taxon)
+    {
+        if (!$this->hasTaxon($taxon)) {
+            $this->taxons->add($taxon);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param TaxonInterface $taxon
+     *
+     * @return $this
+     */
+    public function removeTaxon(TaxonInterface $taxon)
+    {
+        $this->taxons->removeElement($taxon);
 
         return $this;
     }
@@ -370,14 +557,15 @@ class Person implements ResourceInterface
      *
      * @JMS\VirtualProperty
      * @JMS\SerializedName("full_name")
-     * @JMS\Groups({"Default", "Detailed"})
+     * @JMS\Groups({"Default", "Detailed", "Autocomplete"})
      */
     public function getFullName()
     {
-        /**
-         * firstname is not mandatory, thus we trim concatenation
-         */
-        return trim($this->getFirstName() . ' ' . $this->getLastName());
+        if (null === $this->getFirstName()) {
+            return $this->getLastName();
+        }
+
+        return $this->getFirstName() . ' ' . $this->getLastName();
     }
 
     /**

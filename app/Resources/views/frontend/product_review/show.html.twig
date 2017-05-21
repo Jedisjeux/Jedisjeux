@@ -1,0 +1,18 @@
+{% extends "::base.html.twig" %}
+
+{% from 'macros/game_reviews.html.twig' import blogCommentItem %}
+{% set product = resource.reviewSubject %}
+
+{% block headline %}
+    {{ product }}
+{% endblock headline %}
+
+{% block breadcrumb_content %}
+    <a href="{{ path('sylius_product_index') }}">{{ 'sylius.ui.products'|trans }}</a>
+    / <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}">{{ product }}</a>
+    / {{ 'sylius.ui.product_reviews'|trans }}
+{% endblock %}
+
+{% block container %}
+    {{ blogCommentItem(product_review) }}
+{% endblock %}

@@ -1,0 +1,1 @@
+* :doc:`/user-guide/games/index`

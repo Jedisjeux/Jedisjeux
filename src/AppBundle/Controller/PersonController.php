@@ -54,15 +54,15 @@ class PersonController extends ResourceController
 
     /**
      * @param Request $request
-     * @param $permalink
+     * @param string $slug
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexByTaxonAction(Request $request, $permalink)
+    public function indexByTaxonAction(Request $request, $slug)
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $this->isGrantedOr403($configuration, ResourceActions::INDEX);
 
-        $taxon = $this->get('sylius.repository.taxon')->findOneByPermalink($permalink);
+        $taxon = $this->get('sylius.repository.taxon')->findOneBySlug($slug, $this->getParameter('locale'));
         if (!isset($taxon)) {
             throw new NotFoundHttpException('Requested taxon does not exist.');
         }
@@ -72,10 +72,7 @@ class PersonController extends ResourceController
         /** @var PersonRepository $repository */
         $repository = $this->repository;
 
-        $resources = $repository
-            ->createByTaxonPaginator($taxon, $request->get('criteria', $configuration->getCriteria()), $request->get('sorting', $configuration->getSorting()))
-            ->setMaxPerPage($configuration->getPaginationMaxPerPage())
-            ->setCurrentPage($request->get('page', 1));
+        $resources = $this->resourcesCollectionProvider->get($configuration, $this->repository);
 
         $view = View::create($resources);
 

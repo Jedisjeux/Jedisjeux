@@ -1,7 +1,7 @@
 {% macro image(product, filter) %}
     {% set filter = filter|default('thumbnail') %}
 
-    {% set imageSrc = asset('assets/frontend/img/product-placeholder.png') | imagine_filter(filter) %}
+    {% set imageSrc = asset('assets/frontend/img/product-placeholder.png'| imagine_filter(filter)) %}
 
     {% if (product.mainImage) %}
         {% set imageSrc = product.mainImage.webPath | imagine_filter(filter) %}

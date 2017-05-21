@@ -1,0 +1,17 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+#    service_name:
+#        class: AppBundle\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+    app.guard.article:
+        class: AppBundle\Guard\ArticleGuard
+        arguments: ["@security.authorization_checker"]
+
+    app.guard.product:
+        class: AppBundle\Guard\ProductGuard
+        arguments: ["@security.authorization_checker"]

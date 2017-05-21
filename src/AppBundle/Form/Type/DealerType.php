@@ -16,17 +16,19 @@ use AppBundle\Entity\PubBanner;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManager;
-use Sonata\CoreBundle\Form\Type\CollectionType;
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class DealerType extends AbstractResourceType
+class DealerType extends AbstractType
 {
     /**
      * @var Collection|PubBanner[]
@@ -52,28 +54,22 @@ class DealerType extends AbstractResourceType
             ->add('name', TextType::class, [
                 'label' => 'label.name',
             ])
-            ->add('image', 'app_dealer_image', [
-                'label' => 'label.image',
+            ->add('image', DealerImageType::class, [
+                'label' => false,
                 'required' => false,
             ])
-            ->add('priceList', 'app_price_list', [
-                'label' => 'label.price_list',
+            ->add('priceList', PriceListType::class, [
+                'label' => false,
                 'required' => false,
+                'constraints' => [new Valid()],
             ])
-            ->add('pubBanners', 'collection', array(
-                'label' => 'label.pub_banners',
-                'type' => 'app_pub_banner',
+            ->add('pubBanners', CollectionType::class, array(
+                'label' => false,
+                'entry_type' => PubBannerType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'prototype' => true,
-                'widget_add_btn' => array('label' => "label.add_image"),
-                'show_legend' => false, // dont show another legend of subform
-                'options' => array( // options for collection fields
-                    'label_render' => false,
-                    'horizontal_input_wrapper_class' => "col-lg-8",
-                    'widget_remove_btn' => array('label' => "label.remove_this_image"),
-                )
+
             ))
             ->addEventListener(FormEvents::POST_SET_DATA, array($this, 'onPostSetData'))
             ->addEventListener(FormEvents::POST_SUBMIT, array($this, 'onPostSubmit'));
@@ -106,7 +102,7 @@ class DealerType extends AbstractResourceType
         foreach ($this->originalPubBanners as $pubBanner) {
             if (false === $dealer->getPubBanners()->contains($pubBanner)) {
                 $dealer->removePubBanner($pubBanner);
-                $this->manager->persist($pubBanner);
+                $this->manager->remove($pubBanner);
             }
         }
     }
@@ -122,7 +118,19 @@ class DealerType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        parent::configureOptions($resolver);
+
+        $resolver->setDefaults(array(
+            'data_class' => Dealer::class,
+        ));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'app_dealer';
     }

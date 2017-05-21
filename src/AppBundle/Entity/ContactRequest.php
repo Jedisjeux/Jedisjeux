@@ -67,7 +67,7 @@ class ContactRequest implements ResourceInterface
     /**
      * @param string $firstName
      *
-     * @return ContactRequest
+     * @return $this
      */
     public function setFirstName($firstName)
     {
@@ -87,7 +87,7 @@ class ContactRequest implements ResourceInterface
     /**
      * @param string $lastName
      *
-     * @return ContactRequest
+     * @return $this
      */
     public function setLastName($lastName)
     {
@@ -115,7 +115,7 @@ class ContactRequest implements ResourceInterface
     /**
      * @param string $email
      *
-     * @return ContactRequest
+     * @return $this
      */
     public function setEmail($email)
     {
@@ -135,7 +135,7 @@ class ContactRequest implements ResourceInterface
     /**
      * @param string $body
      *
-     * @return ContactRequest
+     * @return $this
      */
     public function setBody($body)
     {

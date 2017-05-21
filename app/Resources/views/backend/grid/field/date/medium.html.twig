@@ -1,1 +1,3 @@
-{{ data|localizeddate('medium', 'none') }}
+{% if data %}
+    {{ data|localizeddate('medium', 'none') }}
+{% endif %}

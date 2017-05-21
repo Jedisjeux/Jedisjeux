@@ -1,17 +1,5 @@
 <!-- Sidebar -->
 <div class="sidebar">
-
-    <div class="s-widget">
-        <h5><i class="fa fa-users color"></i> Participer</h5>
-        <!-- Widgets Content -->
-        <div class="widget-content search">
-            {{ button.btn(path('app_post_create_by_topic', {'topicId' : topic.id}), 'Répondre au sujet', null, 'plus-sign', 'btn-color btn-lg') }}
-        </div>
-    </div>
-
-    <hr/>
-
     {% include 'frontend/topic/sidebar/_categoriesWidget.html.twig' %}
     {% include 'frontend/topic/sidebar/_navTabWidget.html.twig' %}
-
 </div>

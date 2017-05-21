@@ -1,10 +1,11 @@
-# @see http://symfony.com/doc/current/bundles/LiipImagineBundle/filters.html
+# @see http://symfony.com/doc/current/bundles/LiipImagineBundle/index.html
 liip_imagine:
-    resolvers:
-       default:
-          web_path: ~
-
+    loaders:
+        default:
+            filesystem:
+                data_root: "%kernel.root_dir%/../web"
     filter_sets:
+        # @see http://symfony.com/doc/current/bundles/LiipImagineBundle/filters.html
         cache: ~
         default:
         full:

@@ -20,7 +20,7 @@
                 <td>
                     <div class="ui buttons">
                         {{ button.edit(path('app_backend_string_block_update', { 'id': string_block.id } )) }}
-                        {{ button.delete(path('app_backend_string_block_delete', { 'id': string_block.id } )) }}
+                        {{ button.delete(path('app_backend_string_block_delete', { 'id': string_block.id } ), null, 'sylius.ui.delete'|trans, string_block.id) }}
                     </div>
                 </td>
             </tr>

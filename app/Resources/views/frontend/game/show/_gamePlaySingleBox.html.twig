@@ -1,0 +1,49 @@
+{% from "macros/games.html.twig" import playerCount, image, releasedAt %}
+{% import "macro/avatar.html.twig" as avatars %}
+
+{% set product = game_play.product %}
+{% set gamePlayHref = path('app_frontend_game_play_show', {'id': game_play.id,'productSlug': product.slug}) %}
+{% set author = game_play.author %}
+
+<!-- Image Box #4 Item -->
+<div class="img-box-4-item portfolio">
+    <!-- Image -->
+    <div class="img-container">
+        <div class="element">
+            {{ avatars.render(author, 'thumbnail_XL', product, 'img-round', gamePlayHref) }}
+        </div>
+    </div>
+
+    {% if product.mainTaxon %}
+        {% set color = product.mainTaxon.color %}
+        {% set icon = product.mainTaxon.iconClass %}
+    {% endif %}
+
+    <!-- Image Box #4 Content -->
+    <div class="img-box-4-content">
+        <!-- Icon -->
+        <a href="#">
+            {% if color is defined %}
+                <i style="z-index: 10;" class="{{ icon }} bg-{{ color }}"></i>
+            {% endif %}
+        </a>
+        <!-- Heading -->
+        <h4><a href="{{ gamePlayHref }}">{{ author }}</a></h4>
+        <!-- Border -->
+
+        <div class="bor bg-{{ color|default('black') }}"></div>
+        <!-- Paragraph -->
+        <p>
+            {{ 'label.played_at'|trans|lower }} {{ game_play.playedAt|localizeddate('medium', 'none') }}<br/>
+            {% if game_play.playerCount > 0 %}
+                à {{ game_play.playerCount }} joueur{% if game_play.playerCount > 1 %}s{% endif %}<br/>
+            {% endif %}
+        </p>
+        <div class="magazine-meta">
+            <i class="fa fa-calendar"></i> {{ game_play.createdAt()|localizeddate('short', 'none') }}
+            {% if game_play.topic %}
+                - <i class="fa fa-comments"></i> {{ game_play.topic.postCount }}
+            {% endif %}
+        </div>
+    </div>
+</div>

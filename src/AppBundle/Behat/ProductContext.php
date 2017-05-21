@@ -14,8 +14,10 @@ use Behat\Gherkin\Node\TableNode;
 use Sylius\Component\Attribute\AttributeType\CheckboxAttributeType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
+use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -50,14 +52,49 @@ class ProductContext extends DefaultContext
             $product = $this->getFactory('product')->createWithVariant();
             $product->setCode($this->faker->unique()->postcode);
             $product->setName(isset($data['name']) ? $data['name'] : $this->faker->name);
+            $product->setSlug($this->getProductSlugGenerator()->generate($product->getName()));
             $product->setDescription(isset($data['description']) ? $data['description'] : $this->faker->realText());
             $product->setMainTaxon($mainTaxon);
-            $product->setStatus(Product::PUBLISHED);
+            $product->setStatus(isset($data['status']) ? $data['status'] : Product::PUBLISHED);
 
             $manager->persist($product);
         }
 
         $manager->flush();
+    }
+
+    /**
+     * @When I am on :productSlug product page
+     *
+     * @param string $productSlug
+     */
+    public function iAmOnProductPage($productSlug)
+    {
+        $this->visitPath(sprintf('/jeu-de-societe/%s', $productSlug));
+    }
+
+    /**
+     * @return SlugGeneratorInterface|object
+     */
+    protected function getProductSlugGenerator()
+    {
+        return $this->getContainer()->get('sylius.generator.slug');
+    }
+
+    /**
+     * @Then :productName product should exist
+     *
+     * @param string $productName
+     */
+    public function productWithFollowingNameShouldExist($productName)
+    {
+        /** @var ProductRepository $repository */
+        $repository = $this->getRepository('product');
+
+        /** @var ProductInterface $product */
+        $products = $repository->findByName($productName, $this->getContainer()->getParameter('locale'));
+
+        Assert::notEq(0, count($products), sprintf("%s product should exist but it does not", $productName));
     }
 
     /**
@@ -141,7 +178,7 @@ class ProductContext extends DefaultContext
 
         foreach ($table->getHash() as $data) {
             /** @var TaxonInterface $parent */
-            $taxon = $this->getRepository('taxon')->findOneByPermalink($data['permalink']);
+            $taxon = $this->getRepository('taxon')->findOneBySlug($data['slug'], $this->getContainer()->getParameter('locale'));
             $product->addTaxon($taxon);
         }
 

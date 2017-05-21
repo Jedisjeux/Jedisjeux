@@ -15,7 +15,7 @@ Feature: Post creation
       | code | name            | parent |
       | 666  | Moi je dis jeux | forum  |
     And there are topics:
-      | title              | main_taxon            | author            |
+      | name               | main_taxon            | author            |
       | Jeux avec handicap | forum/moi-je-dis-jeux | kevin@example.com |
     And I am logged in as user "kevin@example.com" with password "password"
 

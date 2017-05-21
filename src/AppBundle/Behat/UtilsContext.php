@@ -40,6 +40,21 @@ class UtilsContext extends DefaultContext
     }
 
     /**
+     * @When /^I press confirm button$/
+     */
+    public function iPressConfirmButton()
+    {
+        $id = 'confirmation-button';
+        $button = $this->getSession()->getPage()->findById($id);
+
+        if (null === $button) {
+            throw new ElementNotFoundException($this->getSession(), 'div', 'id', $id);
+        }
+
+        $button->press();
+    }
+
+    /**
      * @When /^I wait "([^""]*)" seconds$/
      *
      * @param integer $time
@@ -97,6 +112,7 @@ class UtilsContext extends DefaultContext
      *
      * @param $button
      * @param $element
+     *
      * @throws ElementNotFoundException
      */
     public function IPressButtonOnElement($button, $element)
@@ -115,10 +131,36 @@ class UtilsContext extends DefaultContext
     }
 
     /**
+     * @When I click on :label dropdown
+     *
+     * @param string $label
+     *
+     * @throws ExpectationException
+     */
+    public function IClickOnDropdown($label)
+    {
+        $label = $this->fixStepArgument($label);
+
+        /** @var NodeElement[] $texts */
+        $texts = $this->getSession()->getPage()->find('css', '.labeled.dropdown .text');
+
+        if (null === $texts) {
+            throw new ExpectationException('Could not find a dropdown with label: ' . $label, $this->getSession());
+        }
+
+        foreach ($texts as $text) {
+            if ($label === $text->getHtml()) {
+                $text->click();
+            }
+        }
+    }
+
+    /**
      * @When /^(?:|I )follow "(?P<link>(?:[^"]|\\")*)" on "([^"]*)"$/
      *
      * @param $link
      * @param $element
+     *
      * @throws ElementNotFoundException
      */
     public function IFollowLinkOnElement($link, $element)
@@ -140,6 +182,7 @@ class UtilsContext extends DefaultContext
      * @When /^(?:|I )should see "([^"]*)" element$/
      *
      * @param $element
+     *
      * @throws ElementHtmlException
      */
     public function IShouldSeeElement($element)
@@ -156,6 +199,7 @@ class UtilsContext extends DefaultContext
      * @When /^(?:|I )should not see "([^"]*)" element$/
      *
      * @param $element
+     *
      * @throws ElementHtmlException
      */
     public function IShouldNotSeeElement($element)
@@ -176,6 +220,7 @@ class UtilsContext extends DefaultContext
      * @When /^(?:|I )should have value "([^"]*)" on "([^"]*)" element$/
      *
      * @param $element
+     *
      * @throws ElementHtmlException
      */
     public function IShoudHaveValueOnElement($value, $element)
@@ -193,6 +238,7 @@ class UtilsContext extends DefaultContext
      * @When /^(?:|I )should not have value "([^"]*)" on "([^"]*)" element$/
      *
      * @param $element
+     *
      * @throws ElementHtmlException
      */
     public function IShoudNotHaveValueOnElement($value, $element)
@@ -245,6 +291,7 @@ class UtilsContext extends DefaultContext
      *
      * @param $optionValue
      * @param $select
+     *
      * @throws ElementHtmlException
      */
     public function IShoudHaveOptionSelectedOnElement($optionValue, $select)
@@ -274,7 +321,8 @@ class UtilsContext extends DefaultContext
     /**
      * @Then /^I fill in wysiwyg field "([^"]*)" with "([^"]*)"$/
      */
-    public function iFillInWysiwygOnFieldWith($element, $value) {
+    public function iFillInWysiwygOnFieldWith($element, $value)
+    {
         $element = $this->fixStepArgument($element);
         $page = $this->getSession()->getPage();
         $field = $page->findField($element);

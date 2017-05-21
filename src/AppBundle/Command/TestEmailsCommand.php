@@ -12,6 +12,7 @@
 namespace AppBundle\Command;
 
 use AppBundle\Emails;
+use AppBundle\Entity\Customer;
 use Sylius\Bundle\UserBundle\Mailer\Emails as SyliusEmails;
 use Faker\Factory as FakerFactory;
 use Faker\Generator;
@@ -81,28 +82,30 @@ EOT
     protected function sendResetPasswordTokenEmail()
     {
         $user = $this->createCustomer()->getUser();
-        $user->setConfirmationToken($this->faker->creditCardNumber);
+        $user->setPasswordResetToken($this->faker->creditCardNumber);
         $this->getEventDispatcher()->dispatch(UserEvents::REQUEST_RESET_PASSWORD_TOKEN, new GenericEvent($user));
     }
 
     protected function sendWebsiteReleaseEmail()
     {
         $customer = $this->createCustomer();
-        $customer->getUser()->setConfirmationToken($this->faker->creditCardNumber);
+        $customer->getUser()->setPasswordResetToken($this->faker->creditCardNumber);
         $this->getEmailSender()->send(Emails::WEBSITE_RELEASE, [$customer->getEmail()], [
             'customer' => $customer,
         ]);
     }
 
     /**
-     * @return CustomerInterface
+     * @return Customer
      */
     protected function createCustomer()
     {
         /** @var UserInterface $user */
-        $user = $this->getContainer()->get('sylius.factory.user')->createNew();
+        $user = $this->getContainer()->get('sylius.factory.shop_user')->createNew();
+        $user->setUsername($this->faker->userName);
+        $user->setPlainPassword($this->faker->password());
 
-        /** @var CustomerInterface $customer */
+        /** @var Customer $customer */
         $customer = $this->getContainer()->get('sylius.factory.customer')->createNew();
         $customer->setUser($user);
 

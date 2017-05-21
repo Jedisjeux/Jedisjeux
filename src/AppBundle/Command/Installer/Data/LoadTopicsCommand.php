@@ -138,7 +138,7 @@ FROM jedisjeux.phpbb3_topics old
     ON customer.code = concat('user-', old.topic_poster)
   INNER JOIN jedisjeux.phpbb3_forums forum
     ON forum.forum_id = old.forum_id
-  INNER JOIN Taxon taxon
+  INNER JOIN sylius_taxon taxon
     ON taxon.code = concat('forum-', old.forum_id)
 EOM;
 
@@ -147,7 +147,7 @@ EOM;
 
     public function calculateTopicCountByTaxon()
     {
-        $taxons = $this->getTaxonRepository()->findChildrenByRootCode(Taxon::CODE_FORUM);
+        $taxons = $this->getTaxonRepository()->findChildren(Taxon::CODE_FORUM, $this->getContainer()->getParameter('locale'));
 
         foreach ($taxons as $taxon) {
             $this->getTopicCountByTaxonUpdater()->update($taxon);
@@ -163,7 +163,7 @@ EOM;
 update jdj_topic topic
     inner join jdj_post post
     on post.topic_id = topic.id
-set topic.postCount = (
+set topic.post_count = (
     select count(0)
   from jdj_post a
     where a.topic_id = topic.id

@@ -18,7 +18,7 @@
             {% set indexPath = indexPath|default('app_frontend_game_play_index') %}
 
             Trier
-            par {{ sorting(indexPath, 'label.created_at'|trans, 'createdAt', 'desc', icon, currentOrder) }}
+            par {{ sorting(indexPath, 'sylius.ui.created_at'|trans, 'createdAt', 'desc', icon, currentOrder) }}
         </div>
 
         <div class="clearfix"></div>

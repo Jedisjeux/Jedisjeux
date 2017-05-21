@@ -17,9 +17,18 @@ winzou_state_machine:
                 from: [pending_review]
                 to: pending_publication
             publish:
-                from: [pending_review]
+                from: [pending_publication]
                 to: published
         callbacks:
+            guard:
+                guard_on_ask_for_publication:
+                    on: "ask_for_publication"
+                    do: ["@app.guard.article", "canAskForPublication"]
+                    args: []
+                guard_on_publish:
+                    on: "publish"
+                    do: ["@app.guard.article", "canPublish"]
+                    args: []
             after:
                 notify_reviewers:
                     on: "ask_for_review"
@@ -29,3 +38,10 @@ winzou_state_machine:
                     on: "ask_for_publication"
                     do: ["@app.notification_manager.article", "notifyPublishers"]
                     args: ["object"]
+                start:
+                    on: "publish"
+                    do: ["@app.publication_manager.article", "start"]
+                    args: ["object"]
+                dump_feed:
+                    on: "publish"
+                    do: ["@app.feed.dump.article", "dump"]

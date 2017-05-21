@@ -11,11 +11,19 @@ app:
         create: Le vendeur a bien été créé.
         update: Le vendeur a bien été mis à jour.
         delete: Le vendeur a bien été supprimé.
+    game_play:
+        create: La partie de jeu a bien été créée.
+        update: La partie de jeu a bien été mise à jour.
+        delete: La partie de jeu a bien été supprimée.
+    person:
+        create: La personne a bien été créée.
+        update: La personne a bien été mise à jour.
+        delete: La personne a bien été supprimée.
     post:
         create: Le message a bien été créé.
         update: Le message a bien été mis à jour.
         delete: Le message a bien été supprimé.
-    static_content:
+    string_block:
         create: Le bloc de chaîne a bien été créé.
         update: Le bloc de chaîne a bien été mis à jour.
         delete: Le bloc de chaîne a bien été supprimé.
@@ -28,6 +36,10 @@ sylius:
         create: Le jeu a bien été créé.
         update: Le jeu a bien été mis à jour.
         delete: Le jeu a bien été supprimé.
+    product_review:
+        create: L'avis a bien été créé.
+        update: L'avis a bien été mis à jour.
+        delete: L'avis a bien été supprimé.
     static_content:
         create: Le contenu statique a bien été créé.
         update: Le contenu statique a bien été mis à jour.
@@ -37,6 +49,8 @@ sylius:
         update: La catégorie a bien été mise à jour.
         delete: La catégorie a bien été supprimée.
     user:
+        change_password: 'Votre mot de passe a été mis à jour avec succès !'
+        reset_password: 'Votre mot de passe a été réinitialisé avec succès !'
         password:
             reset:
                 token_expired: Le jeton de réinitialisation de mot de passe a expiré,
@@ -45,3 +59,4 @@ sylius:
                 success: Votre mot de passe a été mis à jour avec succès !
     customer:
         update_profile: Votre profil a bien été mis à jour.
+        register: 'Merci pour votre inscription, vous allez recevoir un mail pour vérifier votre compte.'

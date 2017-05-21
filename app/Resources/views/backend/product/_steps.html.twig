@@ -1,0 +1,32 @@
+<div class="ui steps">
+    <div class="{% if product.status == constant('STATUS_NEW', product)%}active{% endif %} step">
+        <i class="inbox blue icon"></i>
+        <div class="content">
+            <div class="title">{{ 'sylius.ui.new'|trans }}</div>
+        </div>
+    </div>
+    <div class="{% if product.status == constant('PENDING_TRANSLATION', product)%}active{% endif %} step">
+        <i class="translate yellow icon"></i>
+        <div class="content">
+            <div class="title">{{ 'sylius.ui.pending_translation'|trans }}</div>
+        </div>
+    </div>
+    <div class="{% if product.status == constant('PENDING_REVIEW', product)%}active{% endif %} step">
+        <i class="book yellow icon"></i>
+        <div class="content">
+            <div class="title">{{ 'sylius.ui.pending_review'|trans }}</div>
+        </div>
+    </div>
+    <div class="{% if product.status == constant('PENDING_PUBLICATION', product)%}active{% endif %} step">
+        <i class="thumbs up orange icon"></i>
+        <div class="content">
+            <div class="title">{{ 'sylius.ui.pending_publication'|trans }}</div>
+        </div>
+    </div>
+    <div class="{% if product.status == constant('PUBLISHED', product)%}active{% endif %} step">
+        <i class="checkmark green icon"></i>
+        <div class="content">
+            <div class="title">{{ 'label.published'|trans }}</div>
+        </div>
+    </div>
+</div>

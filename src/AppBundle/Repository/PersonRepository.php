@@ -8,6 +8,7 @@
 
 namespace AppBundle\Repository;
 
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
@@ -18,6 +19,48 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
  */
 class PersonRepository extends EntityRepository
 {
+    public function createListQueryBuilder(TaxonInterface $taxon = null)
+    {
+        $queryBuilder = $this->createQueryBuilder('o')
+            ->addSelect('image')
+            ->leftJoin('o.images', 'image', Join::WITH, 'image.main = 1')
+            ->groupBy('o.id');
+
+        $queryBuilder->addSelect($queryBuilder->expr()->sum(
+                "o.productCountAsDesigner",
+                "o.productCountAsPublisher",
+                "o.productCountAsArtist") .
+        " as HIDDEN gameCount");
+        $queryBuilder->addOrderBy("gameCount", 'desc');
+
+        if ($taxon) {
+            $queryBuilder
+                ->innerJoin('o.taxons', 'taxon')
+                ->andWhere($queryBuilder->expr()->orX(
+                    'taxon = :taxon',
+                    ':left < taxon.left AND taxon.right < :right'
+                ))
+                ->setParameter('taxon', $taxon)
+                ->setParameter('left', $taxon->getLeft())
+                ->setParameter('right', $taxon->getRight());
+        }
+
+        return $queryBuilder;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findByNamePart($phrase)
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.slug LIKE :name')
+            ->setParameter('name', '%'.$phrase.'%')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     /**
      * @inheritdoc
      */
@@ -26,7 +69,7 @@ class PersonRepository extends EntityRepository
         if (isset($criteria['query'])) {
             $queryBuilder
                 ->andWhere('o.slug like :query')
-                ->setParameter('query', '%'.$criteria['query'].'%');
+                ->setParameter('query', '%' . $criteria['query'] . '%');
 
             unset($criteria['query']);
         }
@@ -65,9 +108,9 @@ class PersonRepository extends EntityRepository
     {
         if (isset($sorting['gameCount'])) {
             $queryBuilder->addSelect($queryBuilder->expr()->sum(
-                    "SIZE(o.designerProducts)",
-                    "SIZE(o.publisherProducts)",
-                    "SIZE(o.artistProducts)").
+                    "o.productCountAsDesigner",
+                    "o.productCountAsPublisher",
+                    "o.productCountAsArtist") .
                 " as HIDDEN gameCount");
             $queryBuilder->addOrderBy("gameCount", $sorting['gameCount']);
             unset($sorting['gameCount']);

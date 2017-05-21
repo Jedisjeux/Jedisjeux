@@ -3,12 +3,14 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
  *
  * Should be used inside entity, that needs to have an id.
+ *
+ * @JMS\ExclusionPolicy("all")
  */
 trait IdentifiableTrait
 {
@@ -19,7 +21,8 @@ trait IdentifiableTrait
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      *
-     * @Expose
+     * @JMS\Expose
+     * @JMS\Groups({"Default", "Detailed", "Autocomplete"})
      */
     protected $id;
 

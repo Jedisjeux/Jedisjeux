@@ -5,6 +5,8 @@ sylius_grid:
                 name: doctrine/orm
                 options:
                     class: "%sylius.model.customer.class%"
+                    repository:
+                        method: createListQueryBuilder
             sorting:
                 createdAt: desc
             fields:
@@ -14,23 +16,42 @@ sylius_grid:
                     path: .
                     options:
                         template: "backend/customer/grid/field/avatar.html.twig"
+                username:
+                    type: string
+                    path: user.username
+                    label: sylius.ui.username
+                    sortable: user.username
                 email:
                     type: string
                     label: sylius.ui.email
                     sortable: email
                 createdAt:
                     type: twig
-                    label: sylius.ui.created_at
+                    label: sylius.ui.registration_date
                     sortable: createdAt
                     options:
                         template: "backend/grid/field/date/medium.html.twig"
+                enabled:
+                    type: twig
+                    label: sylius.ui.enabled
+                    path: .
+                    options:
+                        template: "backend/customer/grid/field/enabled.html.twig"
+                verified:
+                    type: twig
+                    label: sylius.ui.verified
+                    path: .
+                    options:
+                        template: "backend/customer/grid/field/verified.html.twig"
             filters:
                 search:
                     type: string
                     label: sylius.ui.search
                     options:
-                        fields: [email]
+                        fields: [email, user.username]
             actions:
                 item:
+                    show:
+                        type: show
                     update:
                         type: update

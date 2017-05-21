@@ -11,6 +11,7 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as JMS;
 use Sylius\Component\Product\Model\ProductVariant as BaseProductVariant;
 
 /**
@@ -18,6 +19,8 @@ use Sylius\Component\Product\Model\ProductVariant as BaseProductVariant;
  *
  * @ORM\Entity
  * @ORM\Table(name="sylius_product_variant")
+ *
+ * @JMS\ExclusionPolicy("all")
  */
 class ProductVariant extends BaseProductVariant
 {
@@ -26,17 +29,11 @@ class ProductVariant extends BaseProductVariant
     const RELEASED_AT_PRECISION_ON_YEAR = 'on-year';
 
     /**
-     * @var string
-     *
-     * @Gedmo\Slug(fields={"name"}, separator="-", unique=true)
-     * @ORM\Column(type="string")
-     */
-    private $slug;
-
-    /**
      * @var ArrayCollection|ProductVariantImage[]
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\ProductVariantImage", mappedBy="variant", cascade={"persist", "merge"})
+     *
+     * @JMS\Groups({"Detailed"})
      */
     protected $images;
 
@@ -44,6 +41,8 @@ class ProductVariant extends BaseProductVariant
      * @var \DateTime
      *
      * @ORM\Column(type="date", nullable=true)
+     *
+     * @JMS\Groups({"Detailed"})
      */
     protected $releasedAt;
 
@@ -51,14 +50,34 @@ class ProductVariant extends BaseProductVariant
      * @var string
      *
      * @ORM\Column(type="string", nullable=true)
+     *
+     * @JMS\Groups({"Detailed"})
      */
     protected $releasedAtPrecision;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $oldHref;
+
+    /**
+     * @var ProductBox|null
+     *
+     * @ORM\OneToOne(targetEntity="ProductBox")
+     */
+    protected $box;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Person", inversedBy="designerProducts", cascade={"persist", "merge"})
-     * @ORM\JoinTable(name="jdj_designer_product_variant")
+     * @ORM\JoinTable(
+     *      name="jdj_designer_product_variant",
+     *      joinColumns={@ORM\JoinColumn(name="productvariant_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id")}
+     * )
      */
     protected $designers;
 
@@ -66,7 +85,10 @@ class ProductVariant extends BaseProductVariant
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Person", inversedBy="artistProducts", cascade={"persist", "merge"})
-     * @ORM\JoinTable(name="jdj_artist_product_variant")
+     * @ORM\JoinTable(name="jdj_artist_product_variant",
+     *      joinColumns={@ORM\JoinColumn(name="productvariant_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id")}
+     * )
      */
     protected $artists;
 
@@ -74,7 +96,10 @@ class ProductVariant extends BaseProductVariant
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Person", inversedBy="publisherProducts", cascade={"persist", "merge"})
-     * @ORM\JoinTable(name="jdj_publisher_product_variant")
+     * @ORM\JoinTable(name="jdj_publisher_product_variant",
+     *      joinColumns={@ORM\JoinColumn(name="productvariant_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id")}
+     * )
      */
     protected $publishers;
 
@@ -108,46 +133,6 @@ class ProductVariant extends BaseProductVariant
     public function setCode($code)
     {
         $this->code = $code;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * @param string $slug
-     *
-     * @return $this
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
 
         return $this;
     }
@@ -256,6 +241,66 @@ class ProductVariant extends BaseProductVariant
     }
 
     /**
+     * @return string
+     */
+    public function getOldHref()
+    {
+        return $this->oldHref;
+    }
+
+    /**
+     * @param string $oldHref
+     *
+     * @return $this
+     */
+    public function setOldHref($oldHref)
+    {
+        $this->oldHref = $oldHref;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @param mixed $position
+     *
+     * @return $this
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * @return ProductBox|null
+     */
+    public function getBox()
+    {
+        return $this->box;
+    }
+
+    /**
+     * @param ProductBox|null $box
+     *
+     * @return ProductVariant
+     */
+    public function setBox(ProductBox $box = null)
+    {
+        $this->box = $box;
+
+        return $this;
+    }
+
+    /**
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getDesigners()
@@ -355,5 +400,15 @@ class ProductVariant extends BaseProductVariant
         $this->publishers->removeElement($publisher);
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        $name = $this->getTranslation()->getName();
+
+        return !empty($name) ? $name : "";
     }
 }

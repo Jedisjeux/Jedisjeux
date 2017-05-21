@@ -14,6 +14,7 @@ namespace AppBundle\Form\Type;
 use AppBundle\Entity\ProductVariant;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType as BaseProductVariantType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -23,7 +24,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class ProductVariantType extends BaseProductVariantType
+class ProductVariantType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -41,6 +42,8 @@ class ProductVariantType extends BaseProductVariantType
             ->add('releasedAt', DateType::class, [
                 'label' => 'label.release_date',
                 'required' => false,
+                'years' => range(1902, date('Y') + 2),
+
             ])
             ->add('releasedAtPrecision', ChoiceType::class, [
                 'label' => 'label.release_date_precision',
@@ -50,44 +53,35 @@ class ProductVariantType extends BaseProductVariantType
                     'label.month' => ProductVariant::RELEASED_AT_PRECISION_ON_MONTH,
                     'label.year' => ProductVariant::RELEASED_AT_PRECISION_ON_YEAR,
                 ),
-                'choices_as_values' => true,
             ])
             ->add('images', CollectionType::class, array(
-                'type' => 'app_product_variant_image',
+                'label' => false,
+                'entry_type' => ProductVariantImageType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'prototype' => true,
-                'widget_add_btn' => array('label' => "label.add_image"),
-                'show_legend' => false, // dont show another legend of subform
-                'options' => array( // options for collection fields
-                    'label_render' => false,
-                    'horizontal_input_wrapper_class' => "col-lg-8",
-                    'widget_remove_btn' => array('label' => "label.remove_this_image"),
-                )
             ))
-            ->add('designers', EntityType::class, array(
+            ->add('designers', PersonAutocompleteChoiceType::class, array(
                 'label' => 'label.designers',
-                'class' => 'AppBundle:Person',
                 'required' => false,
-                'expanded' => false,
                 'multiple' => true,
             ))
-            ->add('artists', EntityType::class, array(
+            ->add('artists', PersonAutocompleteChoiceType::class, array(
                 'label' => 'label.artists',
-                'class' => 'AppBundle:Person',
                 'required' => false,
-                'expanded' => false,
                 'multiple' => true,
             ))
-            ->add('publishers', EntityType::class, array(
+            ->add('publishers', PersonAutocompleteChoiceType::class, array(
                 'label' => 'label.publishers',
-                'class' => 'AppBundle:Person',
                 'required' => false,
-                'expanded' => false,
                 'multiple' => true,
             ))
             ->remove('presentation');
+    }
+
+    public function getParent()
+    {
+        return BaseProductVariantType::class;
     }
 
     /**

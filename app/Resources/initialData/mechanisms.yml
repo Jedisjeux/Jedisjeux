@@ -36,7 +36,8 @@
 -
   id: 6
   name: Parcours
-  description: <p>Type de jeu où les joueurs ont un chemin défini à parcourir pour gagner, il peut s'agir d'un jeu de course ou d'un jeu de l'oie repensé et amélioré. Ex: Talisman, Formule 1, Jack Bananas, Jamaica...</p>
+  description: |
+    <p>Type de jeu où les joueurs ont un chemin défini à parcourir pour gagner, il peut s'agir d'un jeu de course ou d'un jeu de l'oie repensé et amélioré. Ex: Talisman, Formule 1, Jack Bananas, Jamaica...</p>
   slug: parcours
 -
   id: 7
@@ -61,7 +62,8 @@
 -
   id: 10
   name: Mémoire
-  description: <p>Comme son nom l'indique, un jeu de mémoire utilise la capacité de mémorisation des joueurs. Le célèbre mémory en est un exemple parlant, mais d'autres jeux utilisent la mémoire sans tout axer la-dessus. Exemples : Crôa!, Ovo, Shadows over Camelot, Divinare, Time's up...</p>
+  description: |
+    <p>Comme son nom l'indique, un jeu de mémoire utilise la capacité de mémorisation des joueurs. Le célèbre mémory en est un exemple parlant, mais d'autres jeux utilisent la mémoire sans tout axer la-dessus. Exemples : Crôa!, Ovo, Shadows over Camelot, Divinare, Time's up...</p>
   slug: memoire
 -
   id: 11
@@ -90,7 +92,8 @@
 -
   id: 14
   name: Déduction
-  description: <p>Un jeu de déduction est un jeu de société dans lequel un joueur doit découvrir, selon des règles établies, un ou plusieurs éléments cachés (par un adversaire ou par le jeu lui-même). Ex: Dixit, Sherlock Holmes - Détective Conseil, Time's up, MasterMind, Intrigues à Venise, Cluedo, Compatibility...</p>
+  description: |
+    <p>Un jeu de déduction est un jeu de société dans lequel un joueur doit découvrir, selon des règles établies, un ou plusieurs éléments cachés (par un adversaire ou par le jeu lui-même). Ex: Dixit, Sherlock Holmes - Détective Conseil, Time's up, MasterMind, Intrigues à Venise, Cluedo, Compatibility...</p>
   slug: deduction
 -
   id: 16
@@ -117,7 +120,8 @@
 -
   id: 20
   name: Simultané
-  description: <p>Ce terme signifie simplement qu' une plusieurs phases importante(s) du jeu se déroulent simultanément, autrement dit, que tous les joueurs agissent en même temps et non à tour de rôle comme il est d'usage traditionnellement. Ex : Galaxy Trucker, Jungle speed, Contrario, 7 wonders...</p>
+  description: |
+    <p>Ce terme signifie simplement qu' une plusieurs phases importante(s) du jeu se déroulent simultanément, autrement dit, que tous les joueurs agissent en même temps et non à tour de rôle comme il est d'usage traditionnellement. Ex : Galaxy Trucker, Jungle speed, Contrario, 7 wonders...</p>
   slug: simultane
 -
   id: 21
@@ -127,12 +131,14 @@
 -
   id: 22
   name: Question
-  description: <p>Dans cette catégorie sont regroupés les jeux où l'on doit répondre à des questions. Le trivial pursuit est un exemple très célèbre : il s'agit de question de culture générale, mais il peut également s'agir de jeux avec des questions absurdes (burger quizz), personnelles (privacy) ou des énigmes à résoudre (mystères à l'abbaye, Black Stories...).</p>
+  description: |
+    <p>Dans cette catégorie sont regroupés les jeux où l'on doit répondre à des questions. Le trivial pursuit est un exemple très célèbre : il s'agit de question de culture générale, mais il peut également s'agir de jeux avec des questions absurdes (burger quizz), personnelles (privacy) ou des énigmes à résoudre (mystères à l'abbaye, Black Stories...).</p>
   slug: question
 -
   id: 23
   name: Défausse
-  description: <p>Un jeu de défausse est généralement un jeu de carte où vous devez vous débarrasser de vos cartes pour gagner. Ex: Uno, Cardline, Gang of four...</p>
+  description: |
+    <p>Un jeu de défausse est généralement un jeu de carte où vous devez vous débarrasser de vos cartes pour gagner. Ex: Uno, Cardline, Gang of four...</p>
   slug: defausse
 -
   id: 24
@@ -193,7 +199,8 @@
 -
   id: 35
   name: Draft
-  description: <p>C’est le fait de constituer son jeu à partir d’une base tirée aléatoirement. Par exemple : chaque joueur a une main de cartes, chaque joueur en sélectionne une qu’il va souhaiter garder et fait passer le reste des cartes. On recommence jusqu’à constitution de la main de départ.</p>
+  description: |
+    <p>C’est le fait de constituer son jeu à partir d’une base tirée aléatoirement. Par exemple : chaque joueur a une main de cartes, chaque joueur en sélectionne une qu’il va souhaiter garder et fait passer le reste des cartes. On recommence jusqu’à constitution de la main de départ.</p>
   slug: draft
 -
   id: 36

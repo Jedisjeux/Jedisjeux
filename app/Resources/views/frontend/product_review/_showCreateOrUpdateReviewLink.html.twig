@@ -1,0 +1,10 @@
+{% if resource is null %}
+    {% set path = path('sylius_product_review_create', { 'productId': app.request.get('productId') } ) %}
+{% else %}
+    {% set path = path('sylius_product_review_update', { 'productId': app.request.get('productId'), 'id': resource.id } ) %}
+{% endif %}
+
+<a href="{{ path }}" id="productReviewButton"
+   class="btn btn-default" title="Donnez votre avis">
+    <span class="fa fa-star"></span> Votre avis
+</a>

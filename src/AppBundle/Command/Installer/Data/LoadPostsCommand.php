@@ -101,7 +101,8 @@ class LoadPostsCommand extends ContainerAwareCommand
             ->setTopic($topic)
             ->setAuthor($author)
             ->setBody($body)
-            ->setCreatedAt(new \DateTime($data['createdAt']));
+            ->setCreatedAt(new \DateTime($data['createdAt']))
+            ->setArticle($topic->getArticle());
 
         return $post;
     }
@@ -140,17 +141,17 @@ update jdj_topic topic
 (
   SELECT
     topic_id,
-    count(0) AS post_count
+    count(0) AS topic_post_count
   FROM jdj_post post
   GROUP BY post.topic_id
 ) as a on a.topic_id = topic.id
-    set topic.postCount = post_count;
+    set topic.post_count = topic_post_count;
 EOF
 );
     }
 
     /**
-     * @return Bbcode2Html
+     * @return Bbcode2Html|object
      */
     protected function getBbcode2Html()
     {
@@ -158,7 +159,7 @@ EOF
     }
 
     /**
-     * @return PostFactory
+     * @return PostFactory|object
      */
     protected function getFactory()
     {
@@ -166,7 +167,7 @@ EOF
     }
 
     /**
-     * @return EntityRepository
+     * @return EntityRepository|object
      */
     protected function getCustomerRepository()
     {
@@ -174,7 +175,7 @@ EOF
     }
 
     /**
-     * @return EntityRepository
+     * @return EntityRepository|object
      */
     protected function getTopicRepository()
     {
@@ -182,7 +183,7 @@ EOF
     }
 
     /**
-     * @return PostRepository
+     * @return PostRepository|object
      */
     protected function getRepository()
     {
@@ -190,7 +191,7 @@ EOF
     }
 
     /**
-     * @return EntityManager
+     * @return EntityManager|object
      */
     protected function getManager()
     {

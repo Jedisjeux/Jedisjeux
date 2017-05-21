@@ -4,20 +4,24 @@ sylius_backend_product_variant:
         section: backend
         templates: :backend/product_variant
         redirect: index
-        only: [update, delete]
+        only: [delete]
     type: sylius.resource
 
 sylius_backend_product_variant_index:
     methods: [GET]
-    path: /products/{productId}/variants
+    path: /products/{productId}/variants/
     defaults:
         _controller: sylius.controller.product_variant:indexAction
         _sylius:
-            criteria:
-                product: $productId
-            sorting:
-                createdAt: desc
-            template: backend/product_variant/index.html.twig
+            template: backend/crud/index.html.twig
+            grid: sylius_backend_product_variant
+            section: backend
+            vars:
+                route:
+                    parameters:
+                        productId: $productId
+                icon: cubes
+                subheader: sylius.ui.manage_variants
 
 sylius_backend_product_variant_create:
     methods: [GET, POST]
@@ -25,8 +29,41 @@ sylius_backend_product_variant_create:
     defaults:
         _controller: sylius.controller.product_variant:createAction
         _sylius:
+            section: backend
             factory:
                 method: createForProduct
                 arguments:
                   - expr:service('sylius.repository.product').find($productId)
-            template: backend/product_variant/create.html.twig
+            template: backend/crud/create.html.twig
+            redirect:
+                route: sylius_backend_product_variant_index
+                parameters: { productId: $productId }
+            vars:
+                route:
+                    parameters:
+                        productId: $productId
+                templates:
+                    form: "backend/product_variant/_form.html.twig"
+                    breadcrumb: "backend/product_variant/update/_breadcrumb.html.twig"
+
+sylius_backend_product_variant_update:
+    path: /products/{productId}/variants/{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.product_variant:updateAction
+        _sylius:
+            template: "backend/crud/update.html.twig"
+            grid: sylius_backend_product_variant
+            section: backend
+            redirect:
+                route: sylius_backend_product_variant_index
+                parameters: { productId: $productId }
+            vars:
+                route:
+                    parameters:
+                        id: $id
+                        productId: $productId
+                templates:
+                    form: "backend/product_variant/_form.html.twig"
+                    breadcrumb: "backend/product_variant/update/_breadcrumb.html.twig"
+            permission: true

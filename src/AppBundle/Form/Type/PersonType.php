@@ -13,13 +13,17 @@ namespace AppBundle\Form\Type;
 
 use AppBundle\Entity\Taxon;
 use Doctrine\ORM\EntityRepository;
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class PersonType extends AbstractResourceType
+class PersonType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -28,10 +32,6 @@ class PersonType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('mainImage', 'app_person_image', [
-                'label' => 'label.image',
-                'required' => false,
-            ])
             ->add('lastName', null, [
                 'label' => 'label.last_name',
             ])
@@ -39,7 +39,7 @@ class PersonType extends AbstractResourceType
                 'label' => 'label.first_name',
                 'required' => false,
             ])
-            ->add('zone', 'entity', array(
+            ->add('zone', EntityType::class, array(
                 'label' => 'label.zone',
                 'class' => 'AppBundle:Taxon',
                 'group_by' => 'parent',
@@ -61,10 +61,19 @@ class PersonType extends AbstractResourceType
                 'label' => 'label.website',
                 'required' => false,
             ])
-            ->add('description', 'ckeditor', [
+            ->add('description', CKEditorType::class, [
                 'label' => 'label.description',
                 'required' => false,
             ])
+            ->add('images', CollectionType::class, [
+                'entry_type' => PersonImageType::class,
+                'label' => 'sylius.ui.images',
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'required' => false,
+            ])
+
         ;
     }
 

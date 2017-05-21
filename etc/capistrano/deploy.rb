@@ -1,5 +1,34 @@
 # config valid only for current version of Capistrano
-lock '3.4.0'
+lock '3.8.0'
+
+set :symfony_directory_structure, 3
+set :sensio_distribution_version, 5
+
+# symfony-standard edition directories
+set :app_path, "app"
+set :web_path, "web"
+set :var_path, "var"
+set :bin_path, "bin"
+
+# The next 3 settings are lazily evaluated from the above values, so take care
+# when modifying them
+set :app_config_path, "app/config"
+set :log_path, "var/logs"
+set :cache_path, "var/cache"
+
+set :symfony_console_path, "bin/console"
+set :symfony_console_flags, "--no-debug"
+
+# Remove app_dev.php during deployment, other files in web/ can be specified here
+set :controllers_to_clear, ["app_*.php"]
+
+# asset management
+set :assets_install_path, "web"
+set :assets_install_flags,  '--symlink'
+
+# Share files/directories between releases
+set :linked_files, []
+set :linked_dirs, ["var/logs", "var/sessions", "web/uploads", "web/media"]
 
 set :application, 'Jedisjeux'
 set :repo_url, 'git@bitbucket.org:jedisjeux/jdj.git'
@@ -21,19 +50,17 @@ set :deploy_to, '/home/jedisjeux/'
 # Default value for :pty is false
 set :pty, true
 
-set :linked_files, fetch(:linked_files, []).push(fetch(:app_config_path) + '/parameters.yml', fetch(:web_path) + '/robots.txt')
-set :linked_dirs, fetch(:linked_dirs, [fetch(:log_path)]).push(fetch(:web_path) + '/uploads', fetch(:web_path) + '/media')
+append :linked_files, fetch(:app_config_path) + '/parameters.yml', fetch(:web_path) + '/robots.txt', fetch(:web_path) + '/.htaccess'
+append :linked_dirs, fetch(:web_path) + '/uploaded', fetch(:web_path) + '/uploads', fetch(:web_path) + '/media'
 
-set :file_permission_paths, fetch(:file_permission_paths, []).push(fetch(:web_path) + '/uploads', fetch(:web_path) + '/media')
-set :file_permissions_users, fetch(:file_permissions_users, []).push('apache')
+append :file_permissions_users, 'apache'
+set :file_permissions_paths, ["var", "web/uploads"]
+
 set :permission_method,   :acl
 set :use_set_permissions, true
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
-
-# Bower
-set :bower_target_path, lambda { "#{release_path}/web/assets/frontend/" }
 
 set :keep_releases, 3
 
@@ -53,10 +80,9 @@ end
 namespace :deploy do
   task :migrate do
     invoke 'symfony:console', 'doctrine:migrations:migrate', '--no-interaction', 'db'
-    invoke 'symfony:console', 'fos:elastica:populate'
+    # invoke 'symfony:console', 'fos:elastica:populate'
   end
 end
 
 after 'deploy:updated', 'symfony:assets:install'
-after 'deploy:updated', 'symfony:assetic:dump'
 after 'deploy:updated', 'deploy:migrate'

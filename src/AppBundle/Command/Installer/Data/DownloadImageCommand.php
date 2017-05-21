@@ -27,14 +27,19 @@ class DownloadImageCommand extends ContainerAwareCommand
      */
     protected $output;
 
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this
             ->setName('app:images:download')
-            ->setDescription('Download images')
-        ;
+            ->setDescription('Download images');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->output = $output;
@@ -53,21 +58,40 @@ class DownloadImageCommand extends ContainerAwareCommand
         $repository = $this->getContainer()->get('app.repository.person_image');
         $queryBuilder = $repository->createQueryBuilder('o');
         $this->downloadImages($queryBuilder);
+
+        /** @var EntityRepository $repository */
+        $repository = $this->getContainer()->get('app.repository.article_image');
+        $queryBuilder = $repository->createQueryBuilder('o');
+        $this->downloadImages($queryBuilder);
+
+        /** @var EntityRepository $repository */
+        $repository = $this->getContainer()->get('app.repository.block_image');
+        $queryBuilder = $repository->createQueryBuilder('o');
+        $this->downloadImages($queryBuilder);
+
+        /** @var EntityRepository $repository */
+        $repository = $this->getContainer()->get('app.repository.product_box_image');
+        $queryBuilder = $repository->createQueryBuilder('o');
+        $this->downloadImages($queryBuilder, 'ludovirtuelle');
     }
 
     /**
      * @param QueryBuilder $queryBuilder
+     * @param null|string $directory
      */
-    protected function downloadImages(QueryBuilder $queryBuilder)
+    protected function downloadImages(QueryBuilder $queryBuilder, $directory = null)
     {
         foreach ($queryBuilder->getQuery()->iterate() as $row) {
             /** @var AbstractImage $image */
             $image = $row[0];
 
-            if (!file_exists($image->getAbsolutePath())) {
-                $this->output->writeln('Downloading image <comment>'.$this->getImageOriginalPath($image).'</comment>');
-                $this->downloadImage($image);
+            if (file_exists($image->getAbsolutePath())) {
+                continue;
             }
+
+            $this->output->writeln('Downloading image <comment>' . $this->getImageOriginalPath($image, $directory) . '</comment>');
+            $this->downloadImage($image, $directory);
+
 
             $this->getManager()->detach($image);
             $this->getManager()->clear();
@@ -75,7 +99,7 @@ class DownloadImageCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return EntityManager
+     * @return EntityManager|object
      */
     protected function getManager()
     {
@@ -84,18 +108,24 @@ class DownloadImageCommand extends ContainerAwareCommand
 
     /**
      * @param AbstractImage $image
+     *
      * @return string
      */
-    protected function getImageOriginalPath(AbstractImage $image)
+    protected function getImageOriginalPath(AbstractImage $image, $directory = null)
     {
-        return "http://www.jedisjeux.net/img/800/".$image->getPath();
+        if (null === $directory) {
+            $directory = "800";
+        }
+
+        return "http://www.jedisjeux.net/img/" . $directory . "/" . $image->getPath();
     }
 
     /**
      * @param AbstractImage $image
+     * @param null|string $directory
      */
-    protected function downloadImage(AbstractImage $image)
+    protected function downloadImage(AbstractImage $image, $directory = null)
     {
-        file_put_contents($image->getAbsolutePath(), file_get_contents($this->getImageOriginalPath($image)));
+        file_put_contents($image->getAbsolutePath(), file_get_contents($this->getImageOriginalPath($image, $directory)));
     }
 }

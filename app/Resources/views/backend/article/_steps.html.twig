@@ -1,0 +1,26 @@
+<div class="ui steps">
+    <div class="{% if article.status == constant('AppBundle\\Entity\\Article::STATUS_NEW')%}active{% endif %} step">
+        <i class="inbox blue icon"></i>
+        <div class="content">
+            <div class="title">{{ 'sylius.ui.new'|trans }}</div>
+        </div>
+    </div>
+    <div class="{% if article.status == constant('AppBundle\\Entity\\Article::STATUS_PENDING_REVIEW')%}active{% endif %} step">
+        <i class="book yellow icon"></i>
+        <div class="content">
+            <div class="title">{{ 'sylius.ui.pending_review'|trans }}</div>
+        </div>
+    </div>
+    <div class="{% if article.status == constant('AppBundle\\Entity\\Article::STATUS_PENDING_PUBLICATION')%}active{% endif %} step">
+        <i class="thumbs up orange icon"></i>
+        <div class="content">
+            <div class="title">{{ 'sylius.ui.pending_publication'|trans }}</div>
+        </div>
+    </div>
+    <div class="{% if article.status == constant('AppBundle\\Entity\\Article::STATUS_PUBLISHED')%}active{% endif %} step">
+        <i class="checkmark green icon"></i>
+        <div class="content">
+            <div class="title">{{ 'label.published'|trans }}</div>
+        </div>
+    </div>
+</div>

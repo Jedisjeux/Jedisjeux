@@ -11,13 +11,15 @@
 
 namespace AppBundle\Form\Type;
 
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use AppBundle\Entity\Player;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class PlayerType extends AbstractResourceType
+class PlayerType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -43,9 +45,21 @@ class PlayerType extends AbstractResourceType
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        parent::configureOptions($resolver);
+
+        $resolver->setDefaults(array(
+            'data_class' => Player::class,
+        ));
+    }
+
+    /**
      * @return string
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'app_player';
     }

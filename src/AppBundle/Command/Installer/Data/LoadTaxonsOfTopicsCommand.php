@@ -15,6 +15,7 @@ use AppBundle\Entity\Taxon;
 use AppBundle\Repository\TaxonRepository;
 use Doctrine\ORM\EntityManager;
 use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -82,10 +83,21 @@ class LoadTaxonsOfTopicsCommand extends ContainerAwareCommand
             $rootTaxon->addChild($taxon);
         }
 
+        $taxon->setSlug($this->getTaxonSlugGenerator()->generate($taxon->getName(), $rootTaxon->getId()));
+
         $this->getManager()->persist($taxon);
         $this->getManager()->flush();
 
+
         return $taxon;
+    }
+
+    /**
+     * @return TaxonSlugGeneratorInterface|object
+     */
+    protected function getTaxonSlugGenerator()
+    {
+        return $this->getContainer()->get('sylius.generator.taxon_slug');
     }
 
     protected function findParentTaxonCode($left, $right)
@@ -105,10 +117,10 @@ EOM;
     protected function updatePrivateTaxons()
     {
         $this->getManager()->getConnection()->executeQuery(<<<EOF
-        update Taxon taxon
+        update sylius_taxon taxon
   INNER JOIN sylius_taxon_translation translation
     ON translation.translatable_id = taxon.id
-  LEFT JOIN Taxon child
+  LEFT JOIN sylius_taxon child
     ON child.tree_left >= taxon.tree_left
        AND child.tree_right <= taxon.tree_right
        AND child.tree_root = taxon.tree_root

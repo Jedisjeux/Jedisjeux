@@ -2,6 +2,10 @@
 
 {% block title %}Jedisjeux | {% endblock %}
 
+{% block metatags %}
+    {% include '_favicon.html.twig' %}
+{% endblock %}
+
 {% block stylesheets %}
     {% include 'SyliusUiBundle::_stylesheets.html.twig' with {'path': 'assets/backend/compiled/css/style.css'} %}
 {% endblock %}
@@ -17,7 +21,7 @@
         <span>{{ app.user.username }}</span>
         <i class="dropdown icon"></i>
         <div class="menu">
-            <a href="#" id="sylius-logout-button" class="item">
+            <a href="{{ path('app_frontend_logout') }}" id="sylius-logout-button" class="item">
                 <i class="sign out icon"></i>
                 {{ 'app.ui.logout'|trans }}
             </a>
@@ -26,8 +30,8 @@
 {% endblock %}
 
 {% block sidebar %}
-    <a class="item" href="#"><b>Jedisjeux</b></a>
-    {% include 'backend/layout/_menu.html.twig' %}
+    <a class="item" href="{{ path('app_backend_dashboard') }}"><b>Jedisjeux</b></a>
+    {{ knp_menu_render('app.admin.main', {'template': 'SyliusUiBundle:Menu:sidebar.html.twig'}) }}
 {% endblock %}
 
 {% block footer %}
@@ -35,6 +39,8 @@
 {% endblock %}
 
 {% block javascripts %}
+    {% include 'backend/modal/_createFromBoardGameGeek.html.twig' %}
+
     {% include 'SyliusUiBundle::_javascripts.html.twig' with {'path': 'assets/backend/compiled/js/app.js'} %}
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>

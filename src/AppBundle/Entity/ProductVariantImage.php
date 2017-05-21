@@ -9,6 +9,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 
 /**
@@ -16,6 +17,8 @@ use Sylius\Component\Product\Model\ProductVariantInterface;
  *
  * @ORM\Entity
  * @ORM\Table(name="sylius_product_variant_image")
+ *
+ * @JMS\ExclusionPolicy("all")
  */
 class ProductVariantImage extends AbstractImage
 {

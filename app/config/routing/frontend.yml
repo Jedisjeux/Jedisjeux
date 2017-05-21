@@ -28,12 +28,13 @@ app_frontend_product_list_item:
 
 sylius_product_review:
     resource: "frontend/product_review.yml"
+    prefix: /products/{productId}
 
-sylius_static_content:
-    resource: "frontend/static_content.yml"
+app_search:
+    resource: "frontend/search.yml"
 
-app_customer_list:
-    resource: "frontend/customer_list.yml"
+#sylius_static_content:
+#    resource: "frontend/static_content.yml"
 
 sylius_security:
     resource: "frontend/security.yml"

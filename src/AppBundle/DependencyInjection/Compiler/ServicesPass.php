@@ -11,8 +11,14 @@
 
 namespace AppBundle\DependencyInjection\Compiler;
 
+use AppBundle\EventListener\PasswordUpdaterListener;
+use AppBundle\EventListener\RequestLocaleSetter;
+use AppBundle\Factory\ProductFactory;
+use AppBundle\Feed\FeedDumpService;
+use Sylius\Component\Review\Factory\ReviewFactory;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
 
@@ -28,9 +34,12 @@ class ServicesPass implements CompilerPassInterface
     {
         $this->processFactories($container);
         $this->processFormTypes($container);
-        $this->processControllers($container);
+        $this->processListeners($container);
 
         $container->setAlias('sylius.context.customer', 'app.context.customer');
+
+        $contextLocaleCompositeDefinition = $container->getDefinition("sylius.context.locale.composite");
+        $contextLocaleCompositeDefinition->setDecoratedService(null);
     }
 
     /**
@@ -58,19 +67,14 @@ class ServicesPass implements CompilerPassInterface
             ->addMethodCall('setProductRepository', [new Reference('sylius.repository.product')])
             ->addMethodCall('setCustomerContext', [new Reference('app.context.customer')]);
 
-        $articleContentFactoryDefinition = $container->getDefinition('app.factory.article_content');
-        $articleContentFactoryDefinition
-            ->addMethodCall('setDocumentManager', [new Reference('app.manager.article_content')]);
+        $productFactoryDefinition = $container->getDefinition('sylius.custom_factory.product');
+        $productFactoryDefinition->setClass(ProductFactory::class);
 
         $articleFactoryDefinition = $container->getDefinition('app.factory.article');
         $articleFactoryDefinition
-            ->addMethodCall('setArticleContentFactory', [new Reference('app.factory.article_content')])
             ->addMethodCall('setProductRepository', [new Reference('sylius.repository.product')])
             ->addMethodCall('setCustomerContext', [new Reference('app.context.customer')])
-            ->addMethodCall('setLeftImageBlockFactory', [new Reference('app.factory.left_image_block')])
-            ->addMethodCall('setRightImageBlockFactory', [new Reference('app.factory.right_image_block')])
-            ->addMethodCall('setWellImageBlockFactory', [new Reference('app.factory.well_image_block')])
-            ->addMethodCall('setBlockquoteBlockFactory', [new Reference('app.factory.blockquote_block')]);
+            ->addMethodCall('setBlockFactory', [new Reference('app.factory.block')]);
 
         $contactRequestFactoryDefinition = $container->getDefinition('app.factory.contact_request');
         $contactRequestFactoryDefinition
@@ -85,6 +89,15 @@ class ServicesPass implements CompilerPassInterface
         $productListFactoryDefinition
             ->addArgument(new Reference('app.context.customer'))
             ->addArgument(new Reference('translator.default'));
+
+
+        $subject = "article";
+
+        $factory = $container->findDefinition('app.factory.'.$subject.'_review');
+        $reviewFactoryDefinition = new Definition(ReviewFactory::class);
+
+        $reviewFactory = $container->setDefinition(sprintf('app.factory.'.$subject.'_review'), $reviewFactoryDefinition);
+        $reviewFactory->addArgument($factory);
     }
 
     /**
@@ -96,6 +109,14 @@ class ServicesPass implements CompilerPassInterface
         $dealerFormTypeDefinition
             ->addMethodCall('setManager', [new Reference('app.manager.dealer')]);
 
+        $articleFormTypeDefinition = $container->getDefinition('app.form.type.article');
+        $articleFormTypeDefinition
+            ->addMethodCall('setManager', [new Reference('doctrine.orm.entity_manager')]);
+
+        $gamePlayFormTypeDefinition = $container->getDefinition('app.form.type.game_play');
+        $gamePlayFormTypeDefinition
+            ->addMethodCall('setManager', [new Reference('doctrine.orm.entity_manager')]);
+
         $topicFormTypeDefinition = $container->getDefinition('app.form.type.topic');
         $topicFormTypeDefinition
             ->addMethodCall('setAuthorizationChecker', [new Reference('security.authorization_checker')]);
@@ -104,10 +125,14 @@ class ServicesPass implements CompilerPassInterface
     /**
      * @param ContainerBuilder $container
      */
-    protected function processControllers(ContainerBuilder $container)
+    private function processListeners(ContainerBuilder $container)
     {
-        $resourcesCollectionProviderDefinition = $container->getDefinition('sylius.resource_controller.resources_collection_provider');
-        $resourcesCollectionProviderDefinition
-            ->setClass('AppBundle\Controller\ResourcesCollectionProvider');
+        $listenerPasswordUpdaterDefinition = $container->getDefinition('sylius.listener.password_updater');
+        $listenerPasswordUpdaterDefinition
+            ->setClass(PasswordUpdaterListener::class);
+        $listenerPasswordUpdaterDefinition->addTag('kernel.event_listener', [
+            'event' => 'sylius.customer.pre_update',
+            'method' => 'customerUpdateEvent'
+        ]);
     }
 }

@@ -95,11 +95,42 @@ class LoadUsersCommand extends ContainerAwareCommand
 
         $roles = array('ROLE_USER');
         switch($user->getUsername()) {
+            // administrators only
             case 'loic_425':
+            case 'jedisjeux':
+            case 'kevetoile':
                 $roles[] = 'ROLE_ADMIN';
                 break;
-            case 'jedisjeux':
+
+            // administrators and publishers
+            case 'Blue':
+            case 'cyril83':
                 $roles[] = 'ROLE_ADMIN';
+                $roles[] = 'ROLE_PUBLISHER';
+                break;
+
+            // reviewers and redactors
+            case 'allana':
+            case 'bgarz':
+                $roles[] = 'ROLE_REDACTOR';
+                $roles[] = 'ROLE_REVIEWER';
+                break;
+
+            // reviewers only
+            case 'sly078':
+                $roles[] = 'ROLE_REVIEWER';
+                break;
+
+            // redactors only
+            case 'Le Zeptien':
+            case 'Krissou':
+            case 'Arthelius':
+            case 'chris06':
+            case 'Evens':
+            case 'nico':
+            case 'vincelnx':
+            case 'Wityender':
+                $roles[] = 'ROLE_REDACTOR';
                 break;
         }
 

@@ -13,6 +13,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -44,6 +45,20 @@ class PriceList implements ResourceInterface
      * @ORM\Column(type="boolean")
      */
     protected $headers = false;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $delimiter = ';';
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean", name="is_utf8")
+     */
+    protected $utf8 = true;
 
     /**
      * @var boolean
@@ -108,6 +123,46 @@ class PriceList implements ResourceInterface
     public function setHeaders($headers)
     {
         $this->headers = $headers;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDelimiter()
+    {
+        return $this->delimiter;
+    }
+
+    /**
+     * @param string $delimiter
+     *
+     * @return $this
+     */
+    public function setDelimiter($delimiter)
+    {
+        $this->delimiter = $delimiter;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isUtf8()
+    {
+        return $this->utf8;
+    }
+
+    /**
+     * @param bool $utf8
+     *
+     * @return $this
+     */
+    public function setUtf8($utf8)
+    {
+        $this->utf8 = $utf8;
 
         return $this;
     }

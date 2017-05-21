@@ -10,9 +10,9 @@
                     <!-- Image Box #5 Image -->
                     <div class="img-box-5-img">
                         <!-- Image -->
-                        {% set imagePath = person.mainImage ? person.mainImage.webPath : asset('assets/frontend/img/avatar_2x.png') %}
-                        <a href="{{ imagePath | imagine_filter('default') }}" rel="person" class="fancybox"><img
-                                    src="{{ imagePath | imagine_filter('default') }}" alt=""
+                        {% set imagePath = person.mainImage ? person.mainImage.webPath | imagine_filter('default') : asset('assets/frontend/img/product-placeholder.png' | imagine_filter('default')) %}
+                        <a href="{{ imagePath }}" rel="person" class="fancybox"><img
+                                    src="{{ imagePath }}" alt=""
                                     class="img-responsive img-thumbnail"/></a>
 
                     </div>
