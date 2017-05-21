@@ -2,17 +2,12 @@
 
 Welcome to Jedisjeux Project base on Symfony 2
 
-Quick Installation
-------------------
+Quick Installation with vagrant
+-------------------------------
 
 ```bash
-$ cd etc/docker
-$ docker-compose build
-$ docker-compose up -d
-$ docker exec -it $(docker-compose ps -q jdj_php) bash
-$ composer install
-$ php bin/console doctrine:migrations:migrate
-$ exit
+$ cd etc/vagrant
+$ vagrant up
 ```
 
 Import Jedisjeux production data
@@ -21,66 +16,9 @@ Import Jedisjeux production data
 Ask administrator the admin password or ask him a sql backup file :
 
 ```bash
-$ scp admin@jedisjeux.net:/srv/d_jedisjeux/www/sav/dmp_jdj_1.sql.gz ./
-$ gzip -d dmp_jdj_1.sql.gz
-```
-
-Then create a new empty database called jedisjeux and import backup file
-
-```bash
-$ apt-get install mysql-client
-$ mysql -h jdj_mysql -u root -proot
-$ create database jedisjeux;
-$ exit;
-$ mysql -h jdj_mysql -u root -proot jedisjeux < dmp_jdj_1.sql
-```
-
-```bash
-create or replace view jdj_v_article_view_count as
-select element_id as id, sum(count_click) as view_count
-  from jdj_clicks
-where from_id = 'articles'
-group by element_id;
-
-create or replace view jdj_v_news_view_count as
-  select element_id as id, sum(count_click) as view_count
-  from jdj_clicks
-  where from_id = 'news'
-  group by element_id;
-
-create or replace view jdj_v_review_article_view_count as
-  select element_id as id, sum(count_click) as view_count
-  from jdj_clicks
-  where from_id = 'tests'
-  group by element_id;
-
-```
-
-
-Finally execute the Jedisjeux install command :
-
-```bash
-$ docker exec -it $(docker-compose ps -q jdj_php) bash
-$ bin/console app:install
-```
-
-And have a good coffee...
-
-Import Prices of Dealers
-------------------------
-
-```bash
-$ scp admin@jedisjeux.net:/home/admin/export.csv ./philibert.csv
-$ scp admin@jedisjeux.net:/home/admin/ludomus/jedisjeux-export-tarif.csv ./ludomus.csv
-$ scp admin@jedisjeux.net:/home/admin/espritJeu.csv ./esprit-jeu.csv
-$ scp admin@jedisjeux.net:/home/admin/jedisjeux-export-tarifs.csv ./ludifolie.csv
-```
-
-```bash
-$ bin/console app:dealer-prices:import philibert --filename=philibert.csv
-$ bin/console app:dealer-prices:import ludifolie --filename=ludifolie.csv
-$ bin/console app:dealer-prices:import ludomus --filename=ludomus.csv --remove-first-line=true
-$ bin/console app:dealer-prices:import esprit-jeu --filename=esprit-jeu.csv
+$ scp jedisjeux@jedisjeux.net:/home/jedisjeux/shared/backup/dump_jdj_1.sql.gz ./
+$ gzip -d dump_jdj_1.sql.gz
+$ mysql -u root -pvagrant jdj_dev < dump_jdj_1.sql
 ```
 
 [Behat](http://behat.org) scenarios
