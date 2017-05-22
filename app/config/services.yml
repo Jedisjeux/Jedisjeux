@@ -5,6 +5,7 @@ imports:
     - { resource: services/context.yml }
     - { resource: services/controller.yml }
     - { resource: services/feed.yml }
+    - { resource: services/filter.yml }
     - { resource: services/form.yml }
     - { resource: services/guard.yml }
     - { resource: services/installer.yml }

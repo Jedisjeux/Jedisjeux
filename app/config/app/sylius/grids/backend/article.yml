@@ -40,6 +40,14 @@ sylius_grid:
                     label: sylius.ui.search
                     options:
                         fields: [title]
+                status:
+                    type: status
+                    form_options:
+                        statuses:
+                            sylius.ui.new: new
+                            sylius.ui.pending_review: pending_review
+                            sylius.ui.pending_publication: pending_publication
+                            sylius.ui.published: published
             actions:
                 main:
                     create:
