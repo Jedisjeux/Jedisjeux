@@ -1,0 +1,4 @@
+sylius_grid:
+    grids:
+        app_backend_article_for_product:
+            extends: app_backend_article
