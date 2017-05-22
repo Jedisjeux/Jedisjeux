@@ -5,6 +5,9 @@ sylius_grid:
                 name: doctrine/orm
                 options:
                     class: "%app.model.article.class%"
+                    repository:
+                        method: createListQueryBuilder
+                        arguments: [$productId]
             sorting:
                 createdAt: desc
             fields:

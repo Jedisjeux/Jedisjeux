@@ -51,6 +51,25 @@ class ArticleRepository extends EntityRepository
     }
 
     /**
+     * @param null|int $productId
+     *
+     * @return QueryBuilder
+     */
+    public function createListQueryBuilder($productId = null)
+    {
+        $queryBuilder = $this->createQueryBuilder('o')
+            ->leftJoin('o.product', 'product');
+
+        if (null !== $productId) {
+            $queryBuilder
+                ->andWhere('product = :productId')
+                ->setParameter('productId', $productId);
+        }
+
+        return $queryBuilder;
+    }
+
+    /**
      * @return QueryBuilder
      */
     protected function getQueryBuilder()
