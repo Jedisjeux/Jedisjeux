@@ -4,6 +4,7 @@
     <i class="newspaper icon"></i>
     <span class="text">{{ 'app.ui.manage_articles'|trans }}</span>
     <div class="menu">
+        <a class="item" href="{{ path('app_backend_article_per_product_index', { productId: data.id }) }}"><i class="list icon"></i> {{ 'app.ui.list_articles'|trans }}</a>
         <a class="item" href="{{ path('app_backend_article_create_for_product', { productId: data.id }) }}"><i class="plus icon"></i> {{ 'app.ui.add_article'|trans }}</a>
         <a class="item" href="{{ path('app_backend_article_create_for_product_review', { productId: data.id }) }}"><i class="plus icon"></i> {{ 'app.ui.add_review_article'|trans }}</a>
     </div>
