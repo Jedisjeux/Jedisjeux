@@ -1,0 +1,8 @@
+services:
+    app.grid.filter.status:
+        class: AppBundle\Grid\Filter\StatusFilter
+        tags:
+            -
+                name: sylius.grid_filter
+                type: status
+                form-type: AppBundle\Form\Filter\StatusFilterType
