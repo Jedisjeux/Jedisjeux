@@ -11,14 +11,14 @@
 
 namespace AppBundle\Form\Type;
 
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-abstract class AbstractViewCountType extends AbstractResourceType
+abstract class AbstractViewCountType extends AbstractType
 {
     /**
      * {@inheritdoc}

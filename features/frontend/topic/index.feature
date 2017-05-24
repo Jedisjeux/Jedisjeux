@@ -39,3 +39,12 @@ Feature: View list of topics
       | Topic in Tatooine la Cantina | forum/tatooine-la-cantina | kevin@example.com |
     When I am on "/topics/"
     Then I should not see "Topic in Tatooine la Cantina"
+
+  Scenario: Sorting topics
+    Given I am on "/topics/"
+    When I follow "Date de mise à jour"
+    Then the response status code should be 200
+    When I follow "Date de création"
+    Then the response status code should be 200
+    When I follow "Les plus commentés"
+    Then the response status code should be 200
