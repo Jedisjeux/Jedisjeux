@@ -4,4 +4,4 @@ app_api_topic_view_count_update:
     defaults:
         _controller: app.controller.topic:updateAction
         _sylius:
-            form: app_topic_view_count
+            form: AppBundle\Form\Type\TopicViewCountType
