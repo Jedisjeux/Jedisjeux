@@ -28,7 +28,7 @@
             </div>
 
             <div class="col-md-6 col-sm-6">
-                <h4 class="mag-head"><i class="fa fa-star color"></i> Top Articles</h4>
+                <h4 class="mag-head"><a href="{{ path('app_frontend_article_index', {'sorting': {'viewCount': 'desc'}}) }}"><i class="fa fa-star color"></i> Top Articles</a></h4>
 
                 <!-- TODO publishedAt -->
                 {{ render(url('app_partial_article_index', {
