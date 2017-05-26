@@ -12,8 +12,11 @@
 namespace AppBundle\Form\Type\User;
 
 use Sylius\Bundle\UserBundle\Form\Type\UserType;
+use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -38,9 +41,22 @@ class AppUserType extends UserType
                     'app.ui.publisher' => 'ROLE_PUBLISHER',
                     'app.ui.administrator' => 'ROLE_ADMIN',
                 ],
+                'by_reference' => false,
                 'expanded' => true,
                 'multiple' => true,
-            ]);
+            ])
+            ->addEventListener(FormEvents::POST_SUBMIT, array($this, 'onPostSubmit'));
+    }
+
+    /**
+     * @param FormEvent $event
+     */
+    public function onPostSubmit(FormEvent $event)
+    {
+        /** @var UserInterface $user */
+        $user = $event->getData();
+
+        $user->addRole(UserInterface::DEFAULT_ROLE);
     }
 
     /**
