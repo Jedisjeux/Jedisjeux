@@ -4,4 +4,22 @@
     {{ form_row(form.mainTaxon) }}
     {{ form_row(form.mainImage) }}
     {{ form_row(form.shortDescription) }}
+    <div class="field">
+        {{- form_label(form.product) -}}
+        <div class="sylius-autocomplete ui fluid search selection dropdown"
+             data-url="{{ path('sylius_admin_ajax_product_by_name_phrase') }}"
+             data-choice-name="name"
+             data-choice-value="code"
+             data-criteria-name="phrase">
+            {{ form_widget(form.product, {'attr': {'class' : 'autocomplete'}}) }}
+            <i class="dropdown icon"></i>
+            <div class="default text">{{'sylius.ui.select_products'|trans}}</div>
+            <div class="menu">
+                {% if article.product %}
+                    <div class="item" data-value="{{ article.product.code }}">{{ article.product.name }}</div>
+                {% endif %}
+            </div>
+        </div>
+        {{ form_errors(form.product) }}
+    </div>
 </div>
