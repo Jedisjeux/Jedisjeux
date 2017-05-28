@@ -19,6 +19,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductAutocompleteChoiceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonAutocompleteChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -89,6 +90,10 @@ class ArticleType extends AbstractType
                 'multiple' => false,
                 'required' => false,
             ))
+            ->add('product', ProductAutocompleteChoiceType::class, [
+                'label' => 'sylius.ui.product',
+                'required' => false,
+            ])
             ->add('blocks', CollectionType::class, [
                 'label' => false,
                 'entry_type' => BlockType::class,
