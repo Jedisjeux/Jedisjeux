@@ -1,14 +1,14 @@
 Articles
 ========
 
-Editions de jeux
-----------------
-
-On distingue 4 types d’éditions :
+Rédaction d'articles
+--------------------
 
 .. toctree::
     :hidden:
 
+    simple
     game-review
+    blocks
 
 .. include:: /user-guide/articles/map.rst.inc
