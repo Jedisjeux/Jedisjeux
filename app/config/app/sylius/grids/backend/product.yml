@@ -17,15 +17,19 @@ sylius_grid:
                     path: .
                     options:
                         template: "backend/product/grid/field/image.html.twig"
+                code:
+                    type: string
+                    label: sylius.ui.code
+                    sortable: ~
                 name:
                     type: string
                     label: sylius.ui.name
                 createdAt:
                     type: twig
                     label: sylius.ui.created_at
-                    sortable: createdAt
+                    sortable: ~
                     options:
-                        template: "backend/grid/field/date/medium.html.twig"
+                        template: "backend/grid/field/date/short.html.twig"
                 status:
                     type: twig
                     label: sylius.ui.status
