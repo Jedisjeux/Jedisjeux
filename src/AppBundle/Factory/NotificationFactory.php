@@ -91,7 +91,7 @@ class NotificationFactory implements FactoryInterface
         } elseif (null !== $gamePlay = $topic->getGamePlay()) {
             $targetPath = $this->router->generate('app_frontend_game_play_show', ['productSlug' => $gamePlay->getProduct()->getSlug(), 'id' => $gamePlay->getId()]);
         } else {
-            $page = $this->calculateTopicNbPages($post);
+            $page = $this->calculateTopicNbPages($topic);
             $page = $page > 1 ? $page : null;
             $targetPath = $this->router->generate('app_frontend_post_index_by_topic', ['topicId' => $post->getTopic()->getId(), 'page' => $page]);
         }
