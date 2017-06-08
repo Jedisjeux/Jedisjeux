@@ -14,6 +14,7 @@ namespace AppBundle\Factory;
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Notification;
 use AppBundle\Entity\Post;
+use AppBundle\Entity\Topic;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
@@ -90,9 +91,10 @@ class NotificationFactory implements FactoryInterface
         } elseif (null !== $gamePlay = $topic->getGamePlay()) {
             $targetPath = $this->router->generate('app_frontend_game_play_show', ['productSlug' => $gamePlay->getProduct()->getSlug(), 'id' => $gamePlay->getId()]);
         } else {
-            $targetPath = $this->router->generate('app_frontend_post_index_by_topic', ['topicId' => $post->getTopic()->getId()]);
+            $page = $this->calculateTopicNbPages($post);
+            $page = $page > 1 ? $page : null;
+            $targetPath = $this->router->generate('app_frontend_post_index_by_topic', ['topicId' => $post->getTopic()->getId(), 'page' => $page]);
         }
-
 
         /** TODO only set topic and move target and message in a post notification manager */
         $notification
@@ -104,6 +106,16 @@ class NotificationFactory implements FactoryInterface
             ]));
 
         return $notification;
+    }
+
+    /**
+     * @param Topic $topic
+     *
+     * @return int
+     */
+    protected function calculateTopicNbPages(Topic $topic)
+    {
+        return (int) ceil ($topic->getPostCount() / 10);
     }
 
     /**
