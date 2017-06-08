@@ -4,7 +4,7 @@ sylius_admin_product:
         section: admin
         templates: :backend/crud
         only: [update, delete]
-        redirect: index
+        redirect: update
         vars:
             all:
                 subheader: sylius.ui.manage_products
