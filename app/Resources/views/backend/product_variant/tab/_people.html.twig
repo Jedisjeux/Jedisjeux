@@ -1,33 +1,60 @@
 <div class="ui tab" data-tab="people">
     <h3 class="ui dividing header">{{ 'app.ui.people'|trans }}</h3>
-    <div class="form-group">
-        {{ form_label(form.designers) }}
-        <div class="col-sm-9">
-            <select name="sylius_product_variant[designers][]" class="peopleAutocomplete form-control" multiple>
+
+    <div class="field">
+        {{- form_label(form.designers) -}}
+        <div class="sylius-autocomplete ui fluid multiple search selection dropdown"
+             data-url="{{ path('app_admin_ajax_person_by_name_phrase') }}"
+             data-choice-name="full_name"
+             data-choice-value="id"
+             data-criteria-name="phrase">
+            {{ form_widget(form.designers, {'attr': {'class' : 'autocomplete'}}) }}
+            <i class="dropdown icon"></i>
+            <div class="default text">{{'app.ui.select_people'|trans}}</div>
+            <div class="menu">
                 {% for person in product_variant.designers %}
-                    <option value="{{ person.id }}" selected="selected">{{ person }}</option>
+                    <div class="item" data-value="{{ person.id }}">{{ person }}</div>
                 {% endfor %}
-            </select>
+            </div>
         </div>
+        {{ form_errors(form.designers) }}
     </div>
-    <div class="form-group">
-        {{ form_label(form.artists) }}
-        <div class="col-sm-9">
-            <select name="sylius_product_variant[artists][]" class="peopleAutocomplete form-control" multiple>
+
+    <div class="field">
+        {{- form_label(form.artists) -}}
+        <div class="sylius-autocomplete ui fluid multiple search selection dropdown"
+             data-url="{{ path('app_admin_ajax_person_by_name_phrase') }}"
+             data-choice-name="full_name"
+             data-choice-value="id"
+             data-criteria-name="phrase">
+            {{ form_widget(form.artists, {'attr': {'class' : 'autocomplete'}}) }}
+            <i class="dropdown icon"></i>
+            <div class="default text">{{'app.ui.select_people'|trans}}</div>
+            <div class="menu">
                 {% for person in product_variant.artists %}
-                    <option value="{{ person.id }}" selected="selected">{{ person }}</option>
+                    <div class="item" data-value="{{ person.id }}">{{ person }}</div>
                 {% endfor %}
-            </select>
+            </div>
         </div>
+        {{ form_errors(form.artists) }}
     </div>
-    <div class="form-group">
-        {{ form_label(form.publishers) }}
-        <div class="col-sm-9">
-            <select name="sylius_product_variant[publishers][]" class="peopleAutocomplete form-control" multiple>
+
+    <div class="field">
+        {{- form_label(form.publishers) -}}
+        <div class="sylius-autocomplete ui fluid multiple search selection dropdown"
+             data-url="{{ path('app_admin_ajax_person_by_name_phrase') }}"
+             data-choice-name="full_name"
+             data-choice-value="id"
+             data-criteria-name="phrase">
+            {{ form_widget(form.publishers, {'attr': {'class' : 'autocomplete'}}) }}
+            <i class="dropdown icon"></i>
+            <div class="default text">{{'app.ui.select_people'|trans}}</div>
+            <div class="menu">
                 {% for person in product_variant.publishers %}
-                    <option value="{{ person.id }}" selected="selected">{{ person }}</option>
+                    <div class="item" data-value="{{ person.id }}">{{ person }}</div>
                 {% endfor %}
-            </select>
+            </div>
         </div>
+        {{ form_errors(form.publishers) }}
     </div>
 </div>

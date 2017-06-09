@@ -36,8 +36,8 @@ sylius_backend_product_variant_create:
                   - expr:service('sylius.repository.product').find($productId)
             template: backend/crud/create.html.twig
             redirect:
-                route: sylius_backend_product_variant_index
-                parameters: { productId: $productId }
+                route: sylius_backend_product_variant_update
+                parameters: { productId: $productId, id: resource.id }
             vars:
                 route:
                     parameters:

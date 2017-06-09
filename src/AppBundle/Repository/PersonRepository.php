@@ -19,6 +19,11 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
  */
 class PersonRepository extends EntityRepository
 {
+    /**
+     * @param TaxonInterface|null $taxon
+     *
+     * @return QueryBuilder
+     */
     public function createListQueryBuilder(TaxonInterface $taxon = null)
     {
         $queryBuilder = $this->createQueryBuilder('o')
@@ -53,8 +58,13 @@ class PersonRepository extends EntityRepository
      */
     public function findByNamePart($phrase)
     {
-        return $this->createQueryBuilder('o')
-            ->andWhere('o.slug LIKE :name')
+        $queryBuilder =  $this->createQueryBuilder('o');
+
+        return $queryBuilder
+            ->orWhere(
+                "concat(o.firstName, ' ', o.lastName) LIKE :name",
+                'o.lastName like :name'
+            )
             ->setParameter('name', '%'.$phrase.'%')
             ->getQuery()
             ->getResult()
