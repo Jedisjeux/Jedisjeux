@@ -12,12 +12,6 @@ $(function () {
         type: 'PATCH',
         success: function () {
           window.location.replace($a.attr('data-target'));
-        },
-        error: function (xhr) {
-          if (xhr.status == 403) {
-            //handle error
-            window.location.replace(Routing.generate('fos_user_security_login'));
-          }
         }
       });
     }
