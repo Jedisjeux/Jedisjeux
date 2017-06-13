@@ -72,14 +72,13 @@ class DownloadImageCommand extends ContainerAwareCommand
         /** @var EntityRepository $repository */
         $repository = $this->getContainer()->get('app.repository.product_box_image');
         $queryBuilder = $repository->createQueryBuilder('o');
-        $this->downloadImages($queryBuilder, 'ludovirtuelle');
+        $this->downloadImages($queryBuilder);
     }
 
     /**
      * @param QueryBuilder $queryBuilder
-     * @param null|string $directory
      */
-    protected function downloadImages(QueryBuilder $queryBuilder, $directory = null)
+    protected function downloadImages(QueryBuilder $queryBuilder)
     {
         foreach ($queryBuilder->getQuery()->iterate() as $row) {
             /** @var AbstractImage $image */
@@ -89,8 +88,8 @@ class DownloadImageCommand extends ContainerAwareCommand
                 continue;
             }
 
-            $this->output->writeln('Downloading image <comment>' . $this->getImageOriginalPath($image, $directory) . '</comment>');
-            $this->downloadImage($image, $directory);
+            $this->output->writeln('Downloading image <comment>' . $this->getImageOriginalPath($image) . '</comment>');
+            $this->downloadImage($image);
 
 
             $this->getManager()->detach($image);
@@ -111,21 +110,16 @@ class DownloadImageCommand extends ContainerAwareCommand
      *
      * @return string
      */
-    protected function getImageOriginalPath(AbstractImage $image, $directory = null)
+    protected function getImageOriginalPath(AbstractImage $image)
     {
-        if (null === $directory) {
-            $directory = "800";
-        }
-
-        return "http://www.jedisjeux.net/img/" . $directory . "/" . $image->getPath();
+        return "http://www.jedisjeux.net/media/cache/resolve/full/" . $image->getWebPath();
     }
 
     /**
      * @param AbstractImage $image
-     * @param null|string $directory
      */
-    protected function downloadImage(AbstractImage $image, $directory = null)
+    protected function downloadImage(AbstractImage $image)
     {
-        file_put_contents($image->getAbsolutePath(), file_get_contents($this->getImageOriginalPath($image, $directory)));
+        file_put_contents($image->getAbsolutePath(), file_get_contents($this->getImageOriginalPath($image)));
     }
 }

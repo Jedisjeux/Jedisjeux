@@ -44,6 +44,8 @@ services:
             - "@app.context.customer"
             - "@app.factory.notification"
             - "@app.manager.notification"
+            - "@app.repository.notification"
+            - "@translator.default"
         tags:
             - { name: kernel.event_subscriber }
 

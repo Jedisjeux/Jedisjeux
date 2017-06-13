@@ -131,6 +131,7 @@ app:
         topics: Sujets
         translator: Traducteur
         url: Url
+        username_or_email: Nom d'utilisateur ou email
         utf8: Utf8
         view_details: Voir les détails
         wishes: Envies
@@ -349,7 +350,8 @@ text:
           ask_for_translation: Le jeu <strong>%PRODUCT_NAME%</strong> a besoin d'une traduction.
           ask_for_review: Le jeu <strong>%PRODUCT_NAME%</strong> a besoin d'une relecture.
           ask_for_publication: Le jeu <strong>%PRODUCT_NAME%</strong> est prêt à valider.
-      topic_reply: %USERNAME% a répondu au sujet %TOPIC_NAME%.
+      topic_reply: <strong>%USERNAME%</strong> a répondu au sujet %TOPIC_NAME%.
+      topic_replies: <strong>%USERNAMES%</strong> ont répondu au sujet %TOPIC_NAME%.
 
 emails:
     ending: Cordialement,

@@ -9,14 +9,16 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
 use Symfony\Component\Validator\Constraints as Assert;
-
 
 /**
  * Class Avatar
  *
  * @ORM\Entity
  * @ORM\Table(name="jdj_customer_avatar")
+ *
+ * @JMS\ExclusionPolicy("all")
  */
 class Avatar extends AbstractImage
 {

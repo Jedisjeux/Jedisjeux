@@ -18,7 +18,7 @@ Feature: Game-play comment creation
 
   @javascript
   Scenario: Create new comment
-    Given I am on "/mon-compte/parties"
+    Given I am on "/parties/"
     And I follow "Lewis & Clark"
     And I follow "Commenter la partie"
     And I fill in wysiwyg field "app_post_body" with "Here is my awesome comment."

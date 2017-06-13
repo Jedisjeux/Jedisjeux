@@ -23,14 +23,14 @@ Feature: Remove article comment
     And I am logged in as user "kevin@example.com" with password "password"
 
   Scenario: Remove my comment
-    Given I am on "/articles"
+    Given I am on "/articles/"
     And I follow "Critique de Vroom Vroom"
     When I press "Supprimer"
     Then I should see "a bien été supprimé"
 
   @javascript
   Scenario: Remove my comment with modal
-    Given I am on "/articles"
+    Given I am on "/articles/"
     And I follow "Critique de Vroom Vroom"
     When I press "Supprimer"
     And I wait until modal is visible

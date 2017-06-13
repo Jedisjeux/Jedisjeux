@@ -81,10 +81,13 @@ class NotificationFactory implements FactoryInterface
      */
     public function createForPost(Post $post, CustomerInterface $customer)
     {
+        $topic = $post->getTopic();
+
         /** @var Notification $notification */
         $notification = $this->createForCustomer($customer);
-
-        $topic = $post->getTopic();
+        $notification
+            ->addAuthor($post->getAuthor())
+            ->setTopic($topic);
 
         if (null !== $article = $topic->getArticle()) {
             $targetPath = $this->router->generate('app_frontend_article_show', ['slug' => $article->getSlug()]);
@@ -96,14 +99,8 @@ class NotificationFactory implements FactoryInterface
             $targetPath = $this->router->generate('app_frontend_post_index_by_topic', ['topicId' => $post->getTopic()->getId(), 'page' => $page]);
         }
 
-        /** TODO only set topic and move target and message in a post notification manager */
         $notification
-            ->setTopic($post->getTopic())
-            ->setTarget($targetPath)
-            ->setMessage($this->translator->trans('text.notification.topic_reply', [
-                '%USERNAME%' => $post->getAuthor(),
-                '%TOPIC_NAME%' => $post->getTopic()->getTitle(),
-            ]));
+            ->setTarget($targetPath);
 
         return $notification;
     }

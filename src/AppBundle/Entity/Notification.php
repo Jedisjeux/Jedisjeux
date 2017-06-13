@@ -8,6 +8,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
@@ -31,10 +33,25 @@ class Notification implements ResourceInterface
         Timestampable;
 
     /**
+     * @var CustomerInterface[]|Collection
+     *
+     * @ORM\ManyToMany(
+     *      targetEntity="Sylius\Component\Customer\Model\CustomerInterface"
+     * )
+     * @ORM\JoinTable(
+     *     name="jdj_notification_author",
+     *     inverseJoinColumns={@ORM\JoinColumn(name="author_id", referencedColumnName="id")}
+     * )
+     *
+     * @Expose
+     */
+    protected $authors;
+
+    /**
      * @var CustomerInterface
      *
      * @ORM\ManyToOne(
-     *      targetEntity="Sylius\Component\Customer\Model\CustomerInterface"
+     *      targetEntity="Sylius\Component\Customer\Model\CustomerInterface",
      * )
      * @ORM\JoinColumn(nullable=false)
      */
@@ -91,6 +108,51 @@ class Notification implements ResourceInterface
     public function __construct()
     {
         $this->read = false;
+        $this->authors = new ArrayCollection();
+    }
+
+    /**
+     * @return CustomerInterface[]|Collection
+     */
+    public function getAuthors()
+    {
+        return $this->authors;
+    }
+
+    /**
+     * @param CustomerInterface $author
+     *
+     * @return bool
+     */
+    public function hasAuthor(CustomerInterface $author)
+    {
+        return $this->authors->contains($author);
+    }
+
+    /**
+     * @param CustomerInterface $author
+     *
+     * @return $this
+     */
+    public function addAuthor(CustomerInterface $author)
+    {
+        if (!$this->hasAuthor($author)) {
+            $this->authors->add($author);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param CustomerInterface $author
+     *
+     * @return $this
+     */
+    public function removeAuthor(CustomerInterface $author)
+    {
+        $this->authors->removeElement($author);
+
+        return $this;
     }
 
     /**

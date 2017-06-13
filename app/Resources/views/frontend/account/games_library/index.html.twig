@@ -18,7 +18,9 @@
                         {% for product_list_item in product_list_items.data %}
                             {% set box = product_list_item.product.firstVariant.box %}
                             {% if box %}
-                                <img src="{{ box.image.webPath | imagine_filter('full') }}"/>
+                                <a href="{{ path('sylius_product_show', { 'slug': product_list_item.product.slug }) }}">
+                                    <img src="{{ box.image.webPath | imagine_filter('full') }}"/>
+                                </a>
                             {% endif %}
                         {% endfor %}
                     {% endspaceless %}

@@ -21,14 +21,14 @@ Feature: Remove game play comment
     And I am logged in as user "kevin@example.com" with password "password"
 
   Scenario: Remove my comment
-    Given I am on "/mon-compte/parties"
+    Given I am on "/parties/"
     And I follow "Lewis & Clark"
     When I press "Supprimer"
     Then I should see "a bien été supprimé"
 
   @javascript
   Scenario: Remove my comment with modal
-    Given I am on "/mon-compte/parties"
+    Given I am on "/parties/"
     And I follow "Lewis & Clark"
     When I press "Supprimer"
     And I wait until modal is visible
