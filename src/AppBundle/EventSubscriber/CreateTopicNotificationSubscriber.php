@@ -105,6 +105,7 @@ class CreateTopicNotificationSubscriber implements EventSubscriberInterface
             $notification = $this->repository->findOneBy([
                 'recipient' => $follower,
                 'topic' => $topic,
+                'read' => 0,
             ]);
 
             if (null === $notification) {
