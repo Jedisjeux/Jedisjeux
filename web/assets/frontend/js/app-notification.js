@@ -28,6 +28,10 @@ $(function () {
           $('.notificationA', $item).attr('data-target', entity.target);
           $('.notificationContainer', $notificationBlock).append($item);
 
+          if (entity.authors.length > 0 && typeof entity.authors[0].avatar !== 'undefined') {
+            $('.notificationA img', $item).attr('src', entity.authors[0].avatar.thumbnail);
+          }
+
           $('.notificationA', $item).click(function (event) {
             event.preventDefault();
             readNotification($(this));

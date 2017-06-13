@@ -9,6 +9,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
 use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\Customer\Model\Customer as BaseCustomer;
 use Sylius\Component\User\Model\UserAwareInterface;
@@ -20,6 +21,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Entity
  * @ORM\Table(name="sylius_customer")
+ *
+ * @JMS\ExclusionPolicy("all")
  */
 class Customer extends BaseCustomer implements ReviewerInterface, UserAwareInterface
 {
@@ -36,6 +39,7 @@ class Customer extends BaseCustomer implements ReviewerInterface, UserAwareInter
      * @var Avatar
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Avatar" , cascade={"persist"})
+     * @JMS\Expose
      */
     private $avatar;
 

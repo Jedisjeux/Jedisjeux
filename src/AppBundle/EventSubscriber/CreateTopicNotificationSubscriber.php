@@ -12,13 +12,16 @@
 namespace AppBundle\EventSubscriber;
 
 use AppBundle\AppEvents;
+use AppBundle\Entity\Notification;
 use AppBundle\Entity\Post;
 use AppBundle\Factory\NotificationFactory;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\Translation\Translator;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -41,17 +44,31 @@ class CreateTopicNotificationSubscriber implements EventSubscriberInterface
     protected $manager;
 
     /**
+     * @var EntityRepository
+     */
+    protected $repository;
+
+    /**
+     * @var Translator
+     */
+    protected $translator;
+
+    /**
      * CreateTopicNotificationSubscriber constructor.
      *
      * @param CustomerContextInterface $customerContext
      * @param NotificationFactory $factory
      * @param ObjectManager $manager
+     * @param EntityRepository $repository
+     * @param Translator $translator
      */
-    public function __construct(CustomerContextInterface $customerContext, NotificationFactory $factory, ObjectManager $manager)
+    public function __construct(CustomerContextInterface $customerContext, NotificationFactory $factory, ObjectManager $manager, EntityRepository $repository, Translator $translator)
     {
         $this->customerContext = $customerContext;
         $this->factory = $factory;
         $this->manager = $manager;
+        $this->repository = $repository;
+        $this->translator = $translator;
     }
 
     /**
@@ -84,8 +101,30 @@ class CreateTopicNotificationSubscriber implements EventSubscriberInterface
                 continue;
             }
 
-            $notification = $this->factory->createForPost($post, $follower);
-            $this->manager->persist($notification);
+            /** @var Notification $notification */
+            $notification = $this->repository->findOneBy([
+                'recipient' => $follower,
+                'topic' => $topic,
+            ]);
+
+            if (null === $notification) {
+                $notification = $this->factory->createForPost($post, $follower);
+                $this->manager->persist($notification);
+            }
+
+            $notification->addAuthor($post->getAuthor());
+
+            if (count($notification->getAuthors()) > 1) {
+                $notification->setMessage($this->translator->trans('text.notification.topic_replies', [
+                    '%USERNAMES%' => implode(', ', $notification->getAuthors()->toArray()),
+                    '%TOPIC_NAME%' => $post->getTopic()->getTitle(),
+                ]));
+            } else {
+                $notification->setMessage($this->translator->trans('text.notification.topic_reply', [
+                    '%USERNAME%' => $notification->getAuthors()->first(),
+                    '%TOPIC_NAME%' => $post->getTopic()->getTitle(),
+                ]));
+            }
         }
 
         $this->manager->flush();
