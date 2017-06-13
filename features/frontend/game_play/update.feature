@@ -17,7 +17,7 @@ Feature: Edit game-plays
     And I am logged in as user "kevin@example.com" with password "password"
 
   Scenario: Update my game play
-    Given I am on "/mon-compte/parties"
+    Given I am on "/mon-compte/parties/"
     And I follow "Lewis & Clark"
     And I follow "Modifier la partie"
     When I press "Mettre à jour"

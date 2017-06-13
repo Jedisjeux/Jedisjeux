@@ -21,7 +21,7 @@ Feature: Edit game play comment
     And I am logged in as user "kevin@example.com" with password "password"
 
   Scenario: Update my comment
-    Given I am on "/mon-compte/parties"
+    Given I am on "/parties/"
     And I follow "Lewis & Clark"
     And I follow "Modifier"
     When I press "Mettre à jour"
