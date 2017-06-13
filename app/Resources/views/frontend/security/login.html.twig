@@ -33,13 +33,13 @@
 
         <div class="row">
             <div class="col-md-12">
-                {{ form_widget(form._username, {attr: {'placeholder': 'label.username_or_email'|trans}}) }}
+                {{ form_widget(form._username, {attr: {'placeholder': 'app.ui.username_or_email'}}) }}
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
 
-                {{ form_widget(form._password, {attr: {'placeholder': 'sylius.form.user.password.label'|trans}}) }}
+                {{ form_widget(form._password, {attr: {'placeholder': 'sylius.form.login.password'}}) }}
             </div>
         </div>
         <div class="row">
@@ -54,11 +54,12 @@
         <div id="remember" class="checkbox">
             <label>
                 <input type="checkbox" id="remember_me" name="_remember_me"
-                       value="on"> {{ 'label.remember_me'|trans }}
+                       value="on"> {{ 'sylius.form.login.remember_me'|trans }}
             </label>
         </div>
 
-        {{ form_rest(form) }}
+        <input type="hidden" name="_csrf_shop_security_token" value="{{ csrf_token('shop_authenticate') }}">
+        {{ form_rest(form, {'render_rest': false}) }}
 
         <button class="btn btn-lg btn-primary btn-block btn-signin"
                 type="submit"

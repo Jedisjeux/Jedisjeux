@@ -46,13 +46,17 @@ security:
             anonymous: true
             pattern: /.*
             form_login:
+                success_handler: sylius.authentication.success_handler
+                failure_handler: sylius.authentication.failure_handler
                 provider: sylius_user_provider
                 login_path: sylius_shop_login
                 check_path: sylius_shop_login_check
                 failure_path: sylius_shop_login
-                default_target_path: /
+                default_target_path: app_homepage
                 use_forward:  false
-                use_referer: true
+                csrf_token_generator: security.csrf.token_manager
+                csrf_parameter: _csrf_shop_security_token
+                csrf_token_id: shop_authenticate
             remember_me:
                 secret: "%secret%"
                 name: APP_FRONTEND_REMEMBER_ME
@@ -67,7 +71,7 @@ security:
         - { path: "^/_partial.*", role: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }
         - { path: "^/_partial.*", role: ROLE_NO_ACCESS }
 
-        - { path: ^/login.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/verify, role: IS_AUTHENTICATED_ANONYMOUSLY }
