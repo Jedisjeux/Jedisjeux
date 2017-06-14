@@ -92,6 +92,13 @@ class Topic implements ResourceInterface
     protected $viewCount = 0;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $lastPostCreatedAt;
+
+    /**
      * @var Taxon
      *
      * @ORM\ManyToOne(targetEntity="Sylius\Component\Taxonomy\Model\TaxonInterface")
@@ -208,6 +215,26 @@ class Topic implements ResourceInterface
     public function setViewCount($viewCount)
     {
         $this->viewCount = $viewCount;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getLastPostCreatedAt()
+    {
+        return $this->lastPostCreatedAt;
+    }
+
+    /**
+     * @param \DateTime $lastPostCreatedAt
+     *
+     * @return $this
+     */
+    public function setLastPostCreatedAt(\DateTime $lastPostCreatedAt)
+    {
+        $this->lastPostCreatedAt = $lastPostCreatedAt;
 
         return $this;
     }

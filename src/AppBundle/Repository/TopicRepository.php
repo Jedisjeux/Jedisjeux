@@ -113,7 +113,7 @@ class TopicRepository extends EntityRepository
                 $sorting = [];
             }
 
-            $sorting['updatedAt'] = 'desc';
+            $sorting['lastPostCreatedAt'] = 'desc';
         }
 
         $this->applyCriteria($queryBuilder, (array)$criteria);

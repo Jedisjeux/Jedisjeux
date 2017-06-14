@@ -46,7 +46,7 @@
                 {% set routeParams =  app.request.get('_route_params') %}
 
                 Trier
-                par {{ sorting(routeName, 'sylius.ui.last_update'|trans, 'updatedAt', 'desc', icon, currentOrder, routeParams) }},
+                par {{ sorting(routeName, 'sylius.ui.last_update'|trans, 'lastPostCreatedAt', 'desc', icon, currentOrder, routeParams) }},
                 par {{ sorting(routeName, 'sylius.ui.creation_date'|trans, 'createdAt', 'desc', null, null, routeParams) }},
                 {{ sorting(routeName, 'label.most_commented'|trans, 'postCount', 'desc', null, null, routeParams) }}
             </div>
