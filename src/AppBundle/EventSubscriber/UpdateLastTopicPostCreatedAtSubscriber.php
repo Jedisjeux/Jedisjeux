@@ -19,7 +19,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class UpdateTopicUpdatedAtSubscriber implements EventSubscriberInterface
+class UpdateLastTopicPostCreatedAtSubscriber implements EventSubscriberInterface
 {
     /**
      * {@inheritdoc}
@@ -43,6 +43,6 @@ class UpdateTopicUpdatedAtSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $topic->setUpdatedAt(new \DateTime());
+        $topic->setLastPostCreatedAt(new \DateTime());
     }
 }
