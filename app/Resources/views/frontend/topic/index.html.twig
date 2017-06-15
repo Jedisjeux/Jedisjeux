@@ -5,6 +5,7 @@
 {% import 'macros/buttons.html.twig' as button %}
 {% from 'macros/topics.html.twig' import getPath %}
 {% from 'macros/sorting.html.twig' import sorting %}
+{% from 'macros/items.html.twig' import blockquoteOne %}
 
 {% block headline %}
     {% if taxon is defined %}
@@ -14,46 +15,44 @@
     {% endif %}
 {% endblock %}
 
-{% block subtitle %}
-    {% if taxon is defined %}
-        {{ taxon.description }}
-    {% endif %}
-{% endblock %}
-
 {% block breadcrumb_content %}
     {{ parent() }}
-    <a href="{{ path('app_frontend_topic_index') }}">Forum</a>
     {% if taxon is defined %}
-        / {{ taxon }}
+        {% include 'frontend/topic/_breadcrumb.html.twig' %}
     {% endif %}
 {% endblock %}
 
 {% block body -%}
     <div class="col-md-8">
 
-            <div class="pull-right sorting">
-                {% set sorting = app.request.get('sorting') %}
+        {% if taxon.description %}
+            <p class="well">{{ taxon.description|raw }}</p>
+        {% endif %}
 
-                {% set icon = false %}
-                {% set currentOrder = null %}
+        <div class="pull-right sorting">
+            {% set sorting = app.request.get('sorting') %}
 
-                {% if null == sorting %}
-                    {% set icon = true %}
-                    {% set currentOrder = 'desc' %}
-                {% endif %}
+            {% set icon = false %}
+            {% set currentOrder = null %}
 
-                {% set routeName =  app.request.get('_route') %}
-                {% set routeParams =  app.request.get('_route_params') %}
+            {% if null == sorting %}
+                {% set icon = true %}
+                {% set currentOrder = 'desc' %}
+            {% endif %}
 
-                Trier
-                par {{ sorting(routeName, 'sylius.ui.last_update'|trans, 'lastPostCreatedAt', 'desc', icon, currentOrder, routeParams) }},
-                par {{ sorting(routeName, 'sylius.ui.creation_date'|trans, 'createdAt', 'desc', null, null, routeParams) }},
-                {{ sorting(routeName, 'label.most_commented'|trans, 'postCount', 'desc', null, null, routeParams) }}
-            </div>
+            {% set routeName =  app.request.get('_route') %}
+            {% set routeParams =  app.request.get('_route_params') %}
 
-            <div class="clearfix"></div>
+            Trier
+            par {{ sorting(routeName, 'sylius.ui.last_update'|trans, 'lastPostCreatedAt', 'desc', icon, currentOrder, routeParams) }}
+            ,
+            par {{ sorting(routeName, 'sylius.ui.creation_date'|trans, 'createdAt', 'desc', null, null, routeParams) }},
+            {{ sorting(routeName, 'label.most_commented'|trans, 'postCount', 'desc', null, null, routeParams) }}
+        </div>
 
-            {% include 'frontend/topic/_index.html.twig' %}
+        <div class="clearfix"></div>
+
+        {% include 'frontend/topic/_index.html.twig' %}
 
 
         {% block Pagination %}
