@@ -25,7 +25,7 @@
 {% block body -%}
     <div class="col-md-8">
 
-        {% if taxon.description %}
+        {% if taxon is defined and taxon.description %}
             <p class="well">{{ taxon.description|raw }}</p>
         {% endif %}
 
