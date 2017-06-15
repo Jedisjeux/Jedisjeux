@@ -1,6 +1,10 @@
 app_homepage:
     resource: "frontend/homepage.yml"
 
+app_frontend_partial:
+    resource: "frontend/partial.yml"
+    prefix: /_partial
+
 app_article:
     resource: "frontend/article.yml"
 
