@@ -11,7 +11,7 @@
 
 {% block subtitle_container %}
     {% if product.averageRating %}
-        &nbsp;&nbsp;<span class="fa fa-star yellow"></span> {{ product.averageRating|round(1) }} <small>/10</small>
+        &nbsp;&nbsp;<span class="fa fa-star yellow"></span> {{ product.averageRating|round(1) }} <small>/10</small> <small>({{ product.ratings | length }} {{ 'app.ui.ratings'|trans|lower }})</small>
     {% endif %}
 {% endblock %}
 
