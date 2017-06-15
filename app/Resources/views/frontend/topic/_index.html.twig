@@ -7,7 +7,11 @@
 
     {% set user = topic.author.user %}
     {% set imagePath = avatar(user) %}
+    {% set lastTopicPage = (topic.posts|length / 10)|round(0, 'ceil') %}
+    {% set lastTopicPage = lastTopicPage > 1 ? lastTopicPage : null %}
     {% set linkUrl = getPath(topic) %}
+    {% set lastLinkPath = getPath(topic, lastTopicPage) %}
+
 
     {% set meta %}
         <div class="magazine-meta">
@@ -47,6 +51,14 @@
                     {% endif %}
                 </h5>
                 {{ meta|raw }}
+                {% set lastPost = topic.lastPost %}
+                {% if lastPost %}
+                    <p>
+                        <a href="{{ lastLinkPath }}"><i class="fa fa-comment"></i> Dernier message de
+                            <strong>{{ lastPost.author }}</strong>
+                            le {{ lastPost.createdAt|localizeddate('medium', 'short') }}</a>
+                    </p>
+                {% endif %}
             </div>
             <div class="clearfix"></div>
         </div>
