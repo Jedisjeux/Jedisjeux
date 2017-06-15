@@ -38,6 +38,11 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
+    app.subscriber.update_last_topic_post:
+        class: AppBundle\EventSubscriber\UpdateLastTopicPostSubscriber
+        tags:
+            - { name: kernel.event_subscriber }
+
     app.subscriber.create_topic_notification:
         class: AppBundle\EventSubscriber\CreateTopicNotificationSubscriber
         arguments:
