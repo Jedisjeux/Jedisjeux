@@ -52,7 +52,13 @@
                 </h5>
                 {{ meta|raw }}
                 {% set lastPost = topic.lastPost %}
-                <p><a href="{{ lastLinkPath }}"><i class="fa fa-comment"></i> Dernier message de <strong>{{ lastPost.author }}</strong> le {{ lastPost.createdAt|localizeddate('medium', 'short') }}</a></p>
+                {% if lastPost %}
+                    <p>
+                        <a href="{{ lastLinkPath }}"><i class="fa fa-comment"></i> Dernier message de
+                            <strong>{{ lastPost.author }}</strong>
+                            le {{ lastPost.createdAt|localizeddate('medium', 'short') }}</a>
+                    </p>
+                {% endif %}
             </div>
             <div class="clearfix"></div>
         </div>
