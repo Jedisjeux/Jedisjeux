@@ -750,11 +750,21 @@ class Product extends BaseProduct implements ReviewableInterface
     /**
      * @param ReviewInterface $review
      *
+     * @return bool
+     */
+    public function hasReview(ReviewInterface $review)
+    {
+        return $this->reviews->contains($review);
+    }
+
+    /**
+     * @param ReviewInterface $review
+     *
      * @return $this
      */
     public function addReview(ReviewInterface $review)
     {
-        if (!$this->reviews->contains($review)) {
+        if (!$this->hasReview($review)) {
             $this->reviews->add($review);
         }
 

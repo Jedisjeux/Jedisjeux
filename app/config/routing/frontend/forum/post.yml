@@ -63,4 +63,4 @@ app_frontend_post_create_by_topic:
             template: frontend/post/create.html.twig
             redirect:
                 route: app_frontend_post_index_by_topic
-                parameters: { topicId: $topicId }
+                parameters: { topicId: $topicId, page: resource.topic.lastPageNumber }
