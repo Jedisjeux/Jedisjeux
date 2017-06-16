@@ -7,11 +7,9 @@
 
     {% set user = topic.author.user %}
     {% set imagePath = avatar(user) %}
-    {% set lastTopicPage = (topic.posts|length / 10)|round(0, 'ceil') %}
-    {% set lastTopicPage = lastTopicPage > 1 ? lastTopicPage : null %}
+    {% set lastTopicPage = topic.lastPageNumber %}
     {% set linkUrl = getPath(topic) %}
     {% set lastLinkPath = getPath(topic, lastTopicPage) %}
-
 
     {% set meta %}
         <div class="magazine-meta">
