@@ -467,6 +467,22 @@ class Topic implements ResourceInterface
     }
 
     /**
+     * @param bool $nullForFirstPage
+     *
+     * @return int
+     */
+    public function getLastPageNumber($nullForFirstPage = true)
+    {
+        $pageNumber = (int) ceil($this->postCount / 10);
+
+        if ($nullForFirstPage) {
+            return $pageNumber > 1 ? $pageNumber : null;
+        }
+
+        return $pageNumber;
+    }
+
+    /**
      * @return string
      */
     public function __toString()
