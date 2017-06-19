@@ -41,7 +41,7 @@ class ProductCountByPersonUpdater
     {
         $productCountAsDesigner = $this->calculator->calculateAsDesigner($person);
         $productCountAsArtist = $this->calculator->calculateAsArtist($person);
-        $productCountAsPublisher = $this->calculator->calculateAsArtist($person);
+        $productCountAsPublisher = $this->calculator->calculateAsPublisher($person);
 
         $person
             ->setProductCountAsDesigner($productCountAsDesigner)
