@@ -75,6 +75,6 @@ class ArticleReviewType extends ReviewType
      */
     public function getBlockPrefix()
     {
-        return 'app_article_review';
+        return 'sylius_article_review';
     }
 }

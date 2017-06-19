@@ -25,20 +25,6 @@ use Sylius\Component\Review\Model\ReviewInterface;
 class ArticleReview extends Review
 {
     /**
-     * @var Article
-     *
-     * @ORM\ManyToOne(targetEntity="Article", inversedBy="reviews")
-     */
-    protected $reviewSubject;
-
-    /**
-     * @var ReviewerInterface
-     *
-     * @ORM\ManyToOne(targetEntity="Customer")
-     */
-    protected $author;
-
-    /**
      * ProductReview constructor.
      */
     public function __construct()

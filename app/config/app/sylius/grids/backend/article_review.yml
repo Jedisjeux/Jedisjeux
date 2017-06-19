@@ -1,10 +1,10 @@
 sylius_grid:
     grids:
-        app_backend_article_review:
+        sylius_backend_article_review:
             driver:
                 name: doctrine/orm
                 options:
-                    class: "%app.model.article_review.class%"
+                    class: "%sylius.model.article_review.class%"
                     repository:
                         method: createQueryBuilderByArticleId
                         arguments: [$articleId]

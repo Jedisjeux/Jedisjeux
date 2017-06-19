@@ -14,11 +14,6 @@ sylius_resource:
             classes:
                 model: AppBundle\Entity\ArticleImage
                 form: AppBundle\Form\Type\ArticleImageType
-        app.article_review:
-            classes:
-                model: AppBundle\Entity\ArticleReview
-                repository: AppBundle\Repository\ArticleReviewRepository
-                form: AppBundle\Form\Type\ArticleReviewType
         app.avatar:
             classes:
                 model: AppBundle\Entity\Avatar

@@ -91,13 +91,13 @@ class ServicesPass implements CompilerPassInterface
             ->addArgument(new Reference('translator.default'));
 
 
-        $subject = "article";
-
-        $factory = $container->findDefinition('app.factory.'.$subject.'_review');
-        $reviewFactoryDefinition = new Definition(ReviewFactory::class);
-
-        $reviewFactory = $container->setDefinition(sprintf('app.factory.'.$subject.'_review'), $reviewFactoryDefinition);
-        $reviewFactory->addArgument($factory);
+//        $subject = "article";
+//
+//        $factory = $container->findDefinition('sylius.factory.'.$subject.'_review');
+//        $reviewFactoryDefinition = new Definition(ReviewFactory::class);
+//
+//        $reviewFactory = $container->setDefinition(sprintf('sylius.factory.'.$subject.'_review'), $reviewFactoryDefinition);
+//        $reviewFactory->addArgument($factory);
     }
 
     /**
