@@ -4,7 +4,7 @@
     <i class="star icon"></i>
     <span class="text">{{ 'sylius.ui.manage_reviews'|trans }}</span>
     <div class="menu">
-        <a class="item" href="{{ path('app_backend_article_review_index', { articleId: data.id }) }}"><i class="list icon"></i> {{ 'app.ui.list_reviews'|trans }}</a>
-        <a class="item" href="{{ path('app_backend_article_review_create', { articleId: data.id }) }}"><i class="plus icon"></i> {{ 'sylius.ui.add'|trans }}</a>
+        <a class="item" href="{{ path('sylius_backend_article_review_index', { articleId: data.id }) }}"><i class="list icon"></i> {{ 'app.ui.list_reviews'|trans }}</a>
+        <a class="item" href="{{ path('sylius_backend_article_review_create', { articleId: data.id }) }}"><i class="plus icon"></i> {{ 'sylius.ui.add'|trans }}</a>
     </div>
 </div>
