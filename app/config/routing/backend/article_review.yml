@@ -1,20 +1,20 @@
-app_backend_article_review:
+sylius_backend_article_review:
     resource: |
-        alias: app.article_review
+        alias: sylius.article_review
         section: backend
         templates: :backend/article_review
         redirect: index
         only: [delete]
     type: sylius.resource
 
-app_backend_article_review_index:
+sylius_backend_article_review_index:
     methods: [GET]
     path: /articles/{articleId}/reviews/
     defaults:
-        _controller: app.controller.article_review:indexAction
+        _controller: sylius.controller.article_review:indexAction
         _sylius:
             template: backend/crud/index.html.twig
-            grid: app_backend_article_review
+            grid: sylius_backend_article_review
             section: backend
             vars:
                 route:
@@ -23,11 +23,11 @@ app_backend_article_review_index:
                 icon: cubes
                 subheader: sylius.ui.manage_variants
 
-app_backend_article_review_create:
+sylius_backend_article_review_create:
     methods: [GET, POST]
     path: /articles/{articleId}/reviews/new
     defaults:
-        _controller: app.controller.article_review:createAction
+        _controller: sylius.controller.article_review:createAction
         _sylius:
             section: backend
             factory:
@@ -37,7 +37,7 @@ app_backend_article_review_create:
                   - expr:service('sylius.context.customer').getCustomer()
             template: backend/crud/create.html.twig
             redirect:
-                route: app_backend_article_review_index
+                route: sylius_backend_article_review_index
                 parameters: { articleId: $articleId }
             vars:
                 route:
@@ -47,17 +47,17 @@ app_backend_article_review_create:
                     form: "backend/article_review/_form.html.twig"
                     breadcrumb: "backend/article_review/update/_breadcrumb.html.twig"
 
-app_backend_article_review_update:
+sylius_backend_article_review_update:
     path: /articles/{articleId}/reviews/{id}/edit
     methods: [GET, PUT]
     defaults:
-        _controller: app.controller.article_review:updateAction
+        _controller: sylius.controller.article_review:updateAction
         _sylius:
             template: "backend/crud/update.html.twig"
-            grid: app_backend_article_review
+            grid: sylius_backend_article_review
             section: backend
             redirect:
-                route: app_backend_article_review_index
+                route: sylius_backend_article_review_index
                 parameters: { articleId: $articleId }
             vars:
                 route:

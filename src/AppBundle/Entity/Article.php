@@ -166,6 +166,11 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
     protected $topic;
 
     /**
+     * @var ArrayCollection
+     */
+    protected $reviews;
+
+    /**
      * @var Collection|Block[]
      *
      * @ORM\OneToMany(targetEntity="Block", mappedBy="article", cascade={"persist", "merge"})
@@ -173,13 +178,6 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
      * @Assert\Valid()
      */
     protected $blocks;
-
-    /**
-     * @var ArrayCollection|ArticleReview[]
-     *
-     * @ORM\OneToMany(targetEntity="ArticleReview", mappedBy="reviewSubject")
-     */
-    protected $reviews;
 
     /**
      * @var float

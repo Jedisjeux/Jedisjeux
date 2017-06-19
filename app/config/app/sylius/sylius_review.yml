@@ -11,3 +11,13 @@ sylius_review:
                     repository: AppBundle\Repository\ProductReviewRepository
                     controller: AppBundle\Controller\ProductReviewController
                     form: AppBundle\Form\Type\ProductReviewType
+        article:
+            subject: AppBundle\Entity\Article
+            reviewer:
+                classes:
+                    model: AppBundle\Entity\Customer
+            review:
+                classes:
+                    model: AppBundle\Entity\ArticleReview
+                    repository: AppBundle\Repository\ArticleReviewRepository
+                    form: AppBundle\Form\Type\ArticleReviewType

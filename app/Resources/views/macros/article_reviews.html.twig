@@ -1,0 +1,22 @@
+y{% macro blogCommentItem(article_review) %}
+    {% import 'macros/items.html.twig' as item %}
+    {% from 'macros/users.html.twig' import avatar %}
+    {% set game = article_review.reviewSubject %}
+    {% set user = article_review.author.user %}
+    {% set imagePath = avatar(user) %}
+    {% set meta %}
+        <!-- Date -->
+        <a href="#"><i class="fa fa-calendar"></i> &nbsp; {{ article_review.createdAt|date('d/m/Y') }}</a> &nbsp;
+        <!-- Author -->
+        <a href="#"><i class="fa fa-user"></i> &nbsp; {{ user }}</a> &nbsp;
+    {% endset %}
+
+    <div class="pull-right">
+        <div class="rating yellow" data-readonly="true" data-rate-value="{{ article_review.rating/2 }}"
+             data-step-size="0.5"></div>
+    </div>
+
+    <div class="blog-comments">
+        {{ item.blogCommentItem(imagePath, user.username, 'thumbnail', 'img-responsive img-round', '#', null, meta, article_review.comment) }}
+    </div>
+{% endmacro %}
