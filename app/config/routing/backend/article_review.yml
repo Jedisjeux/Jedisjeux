@@ -21,7 +21,7 @@ sylius_backend_article_review_index:
                     parameters:
                         articleId: $articleId
                 icon: cubes
-                subheader: sylius.ui.manage_variants
+                subheader: sylius.ui.manage_article_reviews
 
 sylius_backend_article_review_create:
     methods: [GET, POST]

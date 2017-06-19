@@ -1,6 +1,6 @@
 <div class="ui fluid card" id="customer">
     <div class="content">
-        <a href="{{ path('sylius_backend_customer_show', {'id': customer.id}) }}" class="header sylius-customer-name">{{ customer.fullName }}</a>
+        <a href="{{ path('sylius_backend_customer_show', {'id': customer.id}) }}" class="header sylius-customer-name">{{ customer }}</a>
         <div class="meta">
             <span class="date">{{ 'sylius.ui.customer_since'|trans }} {{ customer.createdAt|localizeddate('medium', 'none') }}.</span>
         </div>
