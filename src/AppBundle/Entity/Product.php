@@ -210,6 +210,13 @@ class Product extends BaseProduct implements ReviewableInterface
     protected $listItems;
 
     /**
+     * @var Collection|Notification[]
+     *
+     * @ORM\OneToMany(targetEntity="Notification", mappedBy="product", cascade={"remove"})
+     */
+    protected $notifications;
+
+    /**
      * Product constructor.
      */
     public function __construct()
@@ -222,6 +229,7 @@ class Product extends BaseProduct implements ReviewableInterface
         $this->articles = new ArrayCollection();
         $this->listItems = new ArrayCollection();
         $this->gamePlays = new ArrayCollection();
+        $this->notifications = new ArrayCollection();
         $this->code = uniqid('product_');
     }
 
