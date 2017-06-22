@@ -31,7 +31,7 @@ class ProductVariant extends BaseProductVariant
     /**
      * @var ArrayCollection|ProductVariantImage[]
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\ProductVariantImage", mappedBy="variant", cascade={"persist", "merge"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\ProductVariantImage", mappedBy="variant", cascade={"persist", "merge", "remove"})
      *
      * @JMS\Groups({"Detailed"})
      */

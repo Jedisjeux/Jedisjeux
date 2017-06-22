@@ -91,7 +91,7 @@ class Notification implements ResourceInterface
     /**
      * @var ProductInterface
      *
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface")
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface", inversedBy="notifications")
      */
     protected $product;
 
