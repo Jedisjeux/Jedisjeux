@@ -67,7 +67,8 @@ class LoadRedirectionsForImagesCommand extends AbstractLoadRedirectionsCommand
     protected function getImages()
     {
         $query = <<<EOM
-SELECT
+SELECT 
+  DISTINCT
   concat('/img/800/', old.img_nom) AS source,
   concat('/media/cache/resolve/full/uploads/img/', old.img_nom)                                               AS destination
 FROM jedisjeux.jdj_images old
