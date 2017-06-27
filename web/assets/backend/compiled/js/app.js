@@ -6278,6 +6278,11 @@ S2.define('jquery.select2',[
         $('.sylius-update-product-variants').moveProductVariant($('.sylius-product-variant-position'));
         $(document).productSlugGenerator();
         $(document).taxonSlugGenerator();
+
+
+      $(document).on('dom-node-inserted', function(addedElement) {
+          $('.ui.checkbox').checkbox();
+        });
     });
 })(jQuery);
 
