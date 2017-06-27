@@ -16,7 +16,7 @@
         $(document).taxonSlugGenerator();
 
 
-      $(document).on('dom-node-inserted', function(addedElement) {
+        $(document).on('dom-node-inserted', function(addedElement) {
           $('.ui.checkbox').checkbox();
         });
     });
