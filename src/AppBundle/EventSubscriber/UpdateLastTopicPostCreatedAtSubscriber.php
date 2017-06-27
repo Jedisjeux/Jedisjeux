@@ -13,6 +13,7 @@ namespace AppBundle\EventSubscriber;
 
 use AppBundle\AppEvents;
 use AppBundle\Entity\Post;
+use AppBundle\Entity\Topic;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -27,8 +28,20 @@ class UpdateLastTopicPostCreatedAtSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
+            AppEvents::TOPIC_PRE_CREATE => 'onTopicCreate',
             AppEvents::POST_PRE_CREATE => 'onPostCreate',
         );
+    }
+
+    /**
+     * @param GenericEvent $event
+     */
+    public function onTopicCreate(GenericEvent $event)
+    {
+        /** @var Topic $topic */
+        $topic = $event->getSubject();
+
+        $topic->setLastPostCreatedAt(new \DateTime());
     }
 
     /**
