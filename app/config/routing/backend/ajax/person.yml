@@ -9,3 +9,9 @@ app_admin_ajax_person_by_name_phrase:
                 method: findByNamePart
                 arguments:
                     phrase: $phrase
+
+app_admin_ajax_person_create:
+    path: /
+    methods: [POST]
+    defaults:
+        _controller: app.controller.person:createAction

@@ -20,9 +20,6 @@
           $('.ui.checkbox').checkbox();
         });
 
-        $('#sylius_product_firstVariant_designers, #sylius_product_firstVariant_artists').parent().dropdown({
-          allowAdditions: true,
-          hideAdditions: false
-        })
+        $('.person-autocomplete').personAutoComplete();
     });
 })(jQuery);
