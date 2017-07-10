@@ -14,6 +14,7 @@ parameters:
         type: file_system
     email_sender: no-reply@jedisjeux.net
     email_name: Contact Jedisjeux
+    email_contact: jedisjeux@jedisjeux.net
 
 framework:
     #esi:             ~
