@@ -29,11 +29,20 @@ class SendContactEmailSubscriber implements EventSubscriberInterface
     protected $sender;
 
     /**
-     * @param SenderInterface $sender
+     * @var string
      */
-    public function __construct(SenderInterface $sender)
+    protected $contactEmail;
+
+    /**
+     * SendContactEmailSubscriber constructor.
+     *
+     * @param SenderInterface $sender
+     * @param string $contactEmail
+     */
+    public function __construct(SenderInterface $sender, $contactEmail)
     {
         $this->sender = $sender;
+        $this->contactEmail = $contactEmail;
     }
 
     /**
@@ -54,10 +63,7 @@ class SendContactEmailSubscriber implements EventSubscriberInterface
         /** @var ContactRequest $contactRequest */
         $contactRequest = $event->getSubject();
 
-        /**
-         * TODO send email at jedisjeux@jedisjeux.net and a copy to customer ?
-         */
-        $this->sender->send(Emails::CONTACT_REQUEST, array($contactRequest->getEmail()), array(
+        $this->sender->send(Emails::CONTACT_REQUEST, array($this->contactEmail), array(
             'contact_request' => $contactRequest,
         ));
     }
