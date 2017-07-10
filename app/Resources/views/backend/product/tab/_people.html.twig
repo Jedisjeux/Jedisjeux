@@ -25,6 +25,7 @@
         {{- form_label(form.firstVariant.artists) -}}
         <div class="sylius-autocomplete ui fluid multiple search selection dropdown"
              data-url="{{ path('app_admin_ajax_person_by_name_phrase') }}"
+             data-create-url="{{ path('app_admin_ajax_person_create') }}"
              data-choice-name="full_name"
              data-choice-value="id"
              data-criteria-name="phrase">
@@ -44,6 +45,7 @@
         {{- form_label(form.firstVariant.publishers) -}}
         <div class="sylius-autocomplete ui fluid multiple search selection dropdown"
              data-url="{{ path('app_admin_ajax_person_by_name_phrase') }}"
+             data-create-url="{{ path('app_admin_ajax_person_create') }}"
              data-choice-name="full_name"
              data-choice-value="id"
              data-criteria-name="phrase">

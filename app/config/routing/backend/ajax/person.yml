@@ -1,3 +1,11 @@
+app_admin_ajax_person:
+    resource: |
+        section: admin_ajax
+        alias: app.person
+        path: "/"
+        only: [create]
+    type: sylius.resource_api
+
 app_admin_ajax_person_by_name_phrase:
     path: /search
     methods: [GET]
@@ -10,8 +18,3 @@ app_admin_ajax_person_by_name_phrase:
                 arguments:
                     phrase: $phrase
 
-app_admin_ajax_person_create:
-    path: /
-    methods: [POST]
-    defaults:
-        _controller: app.controller.person:createAction

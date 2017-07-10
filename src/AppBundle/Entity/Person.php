@@ -30,6 +30,9 @@ class Person implements ResourceInterface
      * @var string
      *
      * @ORM\Column(type="string", unique=true, nullable=true)
+     *
+     * @JMS\Expose
+     * @JMS\Groups({"Default"})
      */
     protected $code;
 

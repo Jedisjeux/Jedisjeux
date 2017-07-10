@@ -15,7 +15,7 @@
                         var lastName = getLastNameByConcatenatedNames(addedText);
                         var firstName = getFirstNameByConcatenatedNames(addedText);
 
-                        postPerson($addedChoice, createUrl, lastName, firstName);
+                        postPerson($element, addedText, createUrl, lastName, firstName);
 
                         console.log(firstName);
                         console.log(lastName);
@@ -25,7 +25,11 @@
         }
     });
 
-    function postPerson($addedChoice, url, lastName, firstName) {
+    function postPerson($element, addedText, url, lastName, firstName) {
+
+        var $autoCompleteInput = $element.find('input.autocomplete');
+        var values = $autoCompleteInput.val().split(',');
+
         $.ajax({
             type: "POST",
             url: url,
@@ -36,7 +40,8 @@
             dataType: "json",
             accept: "application/json",
             success: function (data) {
-
+                values.push(data.id);
+                $autoCompleteInput.val(values.join(','));
             }
         });
     }
