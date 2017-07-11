@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3577261baf1d213bf1c336f16fe26e1a",
+    "content-hash": "e72de3a1a2af3e8f5b17bf729b38537d",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2707,6 +2707,64 @@
                 "parameters management"
             ],
             "time": "2015-11-10T17:04:01+00:00"
+        },
+        {
+            "name": "incenteev/hashed-asset-bundle",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Incenteev/hashed-asset-bundle.git",
+                "reference": "3149cca83e71dc3e530f94ca5efca26bc928567f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Incenteev/hashed-asset-bundle/zipball/3149cca83e71dc3e530f94ca5efca26bc928567f",
+                "reference": "3149cca83e71dc3e530f94ca5efca26bc928567f",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0",
+                "symfony/asset": "^3.2",
+                "symfony/cache": "^3.2",
+                "symfony/config": "^3.2",
+                "symfony/dependency-injection": "^3.2",
+                "symfony/finder": "^3.2",
+                "symfony/framework-bundle": "^3.2",
+                "symfony/http-kernel": "^3.2"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "^3.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Incenteev\\HashedAssetBundle\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christophe Coevoet",
+                    "email": "stof@notk.org"
+                }
+            ],
+            "description": "Apply an asset version based on a hash of the asset for symfony/asset",
+            "keywords": [
+                "assets",
+                "bundle",
+                "cache-busting",
+                "symfony",
+                "symfony-bundle"
+            ],
+            "time": "2017-06-09T11:59:45+00:00"
         },
         {
             "name": "infinite-networks/form-bundle",
