@@ -6289,6 +6289,13 @@ S2.define('jquery.select2',[
         }
     });
 
+    /**
+     * @param {jQuery} $element
+     * @param {string} addedText
+     * @param {string} url
+     * @param {string} lastName
+     * @param {string} firstName
+     */
     function postPerson($element, addedText, url, lastName, firstName) {
 
         var $autoCompleteInput = $element.find('input.autocomplete');
@@ -6311,9 +6318,9 @@ S2.define('jquery.select2',[
     }
 
     /**
-     * @param names
+     * @param {string} names
      *
-     * @return string
+     * @return {string}
      */
     function getLastNameByConcatenatedNames(names) {
         var nameParts = names.split(' ');
@@ -6329,9 +6336,9 @@ S2.define('jquery.select2',[
     }
 
     /**
-     * @param names
+     * @param {string} names
      *
-     * @return string|null
+     * @return {string|null}
      */
     function getFirstNameByConcatenatedNames(names) {
         var lastName = getLastNameByConcatenatedNames(names);
