@@ -25,6 +25,13 @@
         }
     });
 
+    /**
+     * @param {jQuery} $element
+     * @param {string} addedText
+     * @param {string} url
+     * @param {string} lastName
+     * @param {string} firstName
+     */
     function postPerson($element, addedText, url, lastName, firstName) {
 
         var $autoCompleteInput = $element.find('input.autocomplete');
@@ -47,9 +54,9 @@
     }
 
     /**
-     * @param names
+     * @param {string} names
      *
-     * @return string
+     * @return {string}
      */
     function getLastNameByConcatenatedNames(names) {
         var nameParts = names.split(' ');
@@ -65,9 +72,9 @@
     }
 
     /**
-     * @param names
+     * @param {string} names
      *
-     * @return string|null
+     * @return {string|null}
      */
     function getFirstNameByConcatenatedNames(names) {
         var lastName = getLastNameByConcatenatedNames(names);
