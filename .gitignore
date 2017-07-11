@@ -2,6 +2,12 @@
 /web/behat/*
 /app/bootstrap.php.cache
 
+/app/config/parameters.yml
+/app/config/*.local.yml
+
+/var/*
+!/var/.gitkeep
+
 /bin/*
 !/bin/build-package
 !/bin/build-packages
@@ -18,14 +24,6 @@
 !/bin/validate-packages
 
 log/
-/var/cache/*
-!var/logs/.gitkeep
-
-/var/logs/*
-!var/cache/.gitkeep
-
-/app/config/parameters.yml
-/app/config/*.local.yml
 
 /app/Resources/credentials/
 

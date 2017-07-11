@@ -19,5 +19,7 @@
         $(document).on('dom-node-inserted', function(addedElement) {
           $('.ui.checkbox').checkbox();
         });
+
+        $('.person-autocomplete').personAutoComplete();
     });
 })(jQuery);

@@ -37,8 +37,7 @@ framework:
     fragments:       ~
     http_method_override: true
     assets:
-        version: 'v1.1'
-        version_format: '%%s?version=%%s'
+        version_strategy: incenteev_hashed_asset.strategy
 
 # Twig Configuration
 twig:
