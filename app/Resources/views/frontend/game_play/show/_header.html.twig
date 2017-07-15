@@ -48,7 +48,7 @@
                                                 <span class="fa fa-child white"></span>
                                             </p>
                                             <p class="game-attribute">
-                                                Ã  partir de {{ product.ageMin }} ans
+                                                à partir de {{ product.ageMin }} ans
                                             </p>
                                         </li>
                                     {% endif %}
@@ -56,7 +56,7 @@
                                     {% if product.durationMin %}
                                         <li>
                                             <p class="pull-left bg-color square-2 rounded-2">
-                                                <span class="fa clock-o color"></span>
+                                                <span class="fa fa-clock-o white"></span>
                                             </p>
                                             <p class="game-attribute">
                                                 {{ duration(product) }}
@@ -71,7 +71,7 @@
                                             </p>
                                             <p class="game-attribute">
                                                 {% spaceless %}
-                                                    MÃ©canismes :
+                                                    Mécanismes :
                                                     {% set first = true %}
                                                     {% for mechanism in product.mechanisms %}{% if not first %},{% endif %}
                                                         {% set first = false %}
@@ -89,7 +89,7 @@
                                             </p>
                                             <p class="game-attribute">
                                                 {% spaceless %}
-                                                    ThÃ¨mes :
+                                                    Thèmes :
                                                     {% set first = true %}
                                                     {% for key, theme in product.themes %}{% if not first %},{% endif %}
                                                         {% set first = false %}
@@ -141,7 +141,7 @@
                                                 <span class="fa fa-calendar white"></span>
                                             </p>
                                             <p class="game-attribute">
-                                                JouÃ© le {{ game_play.playedAt|localizeddate('long', 'none') }}
+                                                Joué le {{ game_play.playedAt|localizeddate('long', 'none') }}
                                             </p>
 
                                         </li>
@@ -175,6 +175,3 @@
         </div>
     </div>
 </div>
-
-
-
