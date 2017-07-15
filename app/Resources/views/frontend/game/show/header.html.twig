@@ -54,7 +54,7 @@
                                                 <span class="fa fa-child white"></span>
                                             </p>
                                             <p class="game-attribute">
-                                                Ã  partir de {{ jeu.ageMin }} ans
+                                                à partir de {{ jeu.ageMin }} ans
                                             </p>
                                         </li>
                                     {% endif %}
@@ -62,7 +62,7 @@
                                     {% if jeu.durationMin %}
                                         <li>
                                             <p class="pull-left bg-color square-2 rounded-2">
-                                                <span class="fa clock-o color"></span>
+                                                <span class="fa fa-clock-o white"></span>
                                             </p>
                                             <p class="game-attribute">
                                                 {{ duration(jeu) }}
@@ -77,7 +77,7 @@
                                             </p>
                                             <p class="game-attribute">
                                                 {% spaceless %}
-                                                    MÃ©canismes :
+                                                    Mécanismes :
                                                     {% set first = true %}
                                                     {% for mechanism in jeu.mechanisms %}{% if not first %},{% endif %}
                                                         {% set first = false %}
@@ -95,7 +95,7 @@
                                             </p>
                                             <p class="game-attribute">
                                                 {% spaceless %}
-                                                    ThÃ¨mes :
+                                                    Thèmes :
                                                     {% set first = true %}
                                                     {% for key, theme in jeu.themes %}{% if not first %},{% endif %}
                                                         {% set first = false %}
