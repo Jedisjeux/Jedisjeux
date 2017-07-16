@@ -48,7 +48,7 @@
                                                 <span class="fa fa-child white"></span>
                                             </p>
                                             <p class="game-attribute">
-                                                à partir de {{ product.ageMin }} ans
+                                                Ã  partir de {{ product.ageMin }} ans
                                             </p>
                                         </li>
                                     {% endif %}
@@ -71,7 +71,7 @@
                                             </p>
                                             <p class="game-attribute">
                                                 {% spaceless %}
-                                                    Mécanismes :
+                                                    MÃ©canismes :
                                                     {% set first = true %}
                                                     {% for mechanism in product.mechanisms %}{% if not first %},{% endif %}
                                                         {% set first = false %}
@@ -89,7 +89,7 @@
                                             </p>
                                             <p class="game-attribute">
                                                 {% spaceless %}
-                                                    Thèmes :
+                                                    ThÃ¨mes :
                                                     {% set first = true %}
                                                     {% for key, theme in product.themes %}{% if not first %},{% endif %}
                                                         {% set first = false %}
@@ -141,7 +141,7 @@
                                                 <span class="fa fa-calendar white"></span>
                                             </p>
                                             <p class="game-attribute">
-                                                Joué le {{ game_play.playedAt|localizeddate('long', 'none') }}
+                                                Jouï¿½ le {{ game_play.playedAt|localizeddate('long', 'none') }}
                                             </p>
 
                                         </li>
