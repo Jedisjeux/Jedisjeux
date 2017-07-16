@@ -128,6 +128,7 @@ app:
         topics: Sujets
         translator: Traducteur
         url: Url
+        user: Membre
         username_or_email: Nom d'utilisateur ou email
         utf8: Utf8
         view_details: Voir les détails
