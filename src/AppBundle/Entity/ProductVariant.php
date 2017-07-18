@@ -65,7 +65,7 @@ class ProductVariant extends BaseProductVariant
     /**
      * @var ProductBox|null
      *
-     * @ORM\OneToOne(targetEntity="ProductBox")
+     * @ORM\OneToOne(targetEntity="ProductBox", inversedBy="productVariant")
      */
     protected $box;
 

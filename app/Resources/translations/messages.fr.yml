@@ -33,6 +33,7 @@ app:
         edit_game_play: Modifier la partie de jeu
         edit_person: Modifier la personne
         edit_post: Modifier le message
+        edit_product_box: Modifier la boite de jeu
         edit_product_list: Modifier la liste de jeu
         edit_redirection: Modifier la redirection
         edit_string_block: Modifer le bloc de chaîne
@@ -46,6 +47,7 @@ app:
         game_library: Ludothèque
         game_plays: Parties de jeu
         game_play_details: Informations de la partie
+        height: Hauteur
         image_legend: Légende de l'image
         image_on_the_left_side: Image à gauche
         image_on_the_right_side: Image à droite
@@ -68,6 +70,7 @@ app:
         manage_not_found_pages: Gérer les pages non trouvées
         manage_people: Gérer les personnes
         manage_posts: Gérer les messages
+        manage_product_boxes: Gérer les boites de jeu
         manage_product_lists: Gérer les listes de jeu
         manage_redirections: Gérer les redirections
         manage_string_blocks: Gérer les blocs de chaîne
@@ -81,6 +84,7 @@ app:
         new_dealer: Nouveau vendeur
         new_list: Nouvelle liste
         new_person: Nouvelle personne
+        new_product_box: Nouvelle boite de jeu
         new_redirection: Nouvelle redirection
         new_post: Nouveau message
         new_string_block: Nouveau bloc de chaîne
@@ -96,6 +100,7 @@ app:
         preview: Aperçu
         prices: Tarifs
         price_list: Liste de prix
+        product_boxes: Boites de jeu
         product_lists: Listes de jeu
         pub_banners: Bannières de pub
         public: Public

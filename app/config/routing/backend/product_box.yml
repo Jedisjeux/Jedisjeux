@@ -1,0 +1,14 @@
+app_backend_product_box:
+    resource: |
+        alias: app.product_box
+        section: backend
+        templates: :backend/crud
+        except: ['show']
+        redirect: update
+        grid: app_backend_product_box
+        vars:
+            all:
+                subheader: app.ui.manage_product_boxes
+            index:
+                icon: dropbox
+    type: sylius.resource

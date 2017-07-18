@@ -66,6 +66,7 @@ sylius_resource:
         app.product_box:
             classes:
                 model: AppBundle\Entity\ProductBox
+                form: AppBundle\Form\Type\ProductBoxType
         app.product_box_image:
             classes:
                 model: AppBundle\Entity\ProductBoxImage
