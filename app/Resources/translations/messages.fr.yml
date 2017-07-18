@@ -129,6 +129,7 @@ app:
         translator: Traducteur
         url: Url
         user: Membre
+        user_guide: Guide utilisateur
         username_or_email: Nom d'utilisateur ou email
         utf8: Utf8
         view_details: Voir les détails
