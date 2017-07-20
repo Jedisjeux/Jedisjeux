@@ -20,8 +20,10 @@ sylius_grid:
                     path: productVariant.product
                 height:
                     label: app.ui.height
-                    type: string
+                    type: twig
                     sortable: ~
+                    options:
+                        template: "backend/product_box/grid/field/height.html.twig"
                 createdAt:
                     type: twig
                     label: sylius.ui.created_at
