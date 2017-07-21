@@ -1,4 +1,4 @@
 {% from 'macros/images.html.twig' import image %}
-{% if (data.image) %}
-    {{ image(data.image.webPath, 'full', data.productVariant, 'ui image') }}
+{% if (data.productVariant.mainImage) %}
+    {{ image(data.productVariant.mainImage.webPath, 'thumbnail', data.productVariant, 'ui circular image') }}
 {% endif %}

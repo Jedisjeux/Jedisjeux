@@ -28,6 +28,9 @@ class ProductBoxType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('image', ProductBoxImageType::class, [
+                'label' => false,
+            ])
             ->add('height', NumberType::class, [
                 'label' => 'app.ui.height',
             ]);
