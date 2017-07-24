@@ -1,0 +1,30 @@
+{% set definition = resources.definition %}
+
+{% set path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+
+<div class="col-md-12">
+    <div class="container">
+        <div class="well">
+            <form class="form-horizontal">
+                {% for filter in definition.filters %}
+                    {% if filter.name != 'search' %}
+                        {{ sylius_grid_render_filter(resources, filter) }}
+                    {% endif %}
+                {% endfor %}
+
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <button class="btn btn-primary">
+                            <span class="fa fa-search"></span>
+                            {{ 'sylius.ui.search'|trans }}
+                        </button>
+                        <a href="{{ path }}" class="btn btn-default">
+                            <span class="fa fa-remove"></span>
+                            {{ 'sylius.ui.clear_filters'|trans }}
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

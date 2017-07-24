@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace AppBundle\Form\Type\Filter;
+namespace AppBundle\Form\Filter;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -27,7 +27,10 @@ class PlayerCountFilterType extends AbstractType
     {
         $builder->add(
             'value',
-            IntegerType::class
+            IntegerType::class,
+            [
+                'label' => 'app.ui.player_count',
+            ]
         );
     }
 }

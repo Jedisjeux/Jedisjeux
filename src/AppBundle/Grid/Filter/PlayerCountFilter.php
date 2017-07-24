@@ -24,6 +24,10 @@ class PlayerCountFilter implements FilterInterface
      */
     public function apply(DataSourceInterface $dataSource, $name, $data, array $options = [])
     {
+        if (empty($data['value'])) {
+            return;
+        }
+
         $dataSource->restrict($dataSource->getExpressionBuilder()->lessThanOrEqual('product.joueurMin', $data['value']));
         $dataSource->restrict($dataSource->getExpressionBuilder()->greaterThanOrEqual('product.joueurMax', $data['value']));
     }
