@@ -19,3 +19,7 @@ sylius_grid:
                 box.height:
                     type: twig
                     sortable: ~
+            filters:
+                playerCount:
+                    type: player_count
+

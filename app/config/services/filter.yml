@@ -1,4 +1,11 @@
 services:
+    app.grid.filter.player_count:
+        class: AppBundle\Grid\Filter\PlayerCountFilter
+        tags:
+            -
+                name: sylius.grid_filter
+                type: player_count
+                form-type: AppBundle\Form\Filter\PlayerCountFilterType
     app.grid.filter.status:
         class: AppBundle\Grid\Filter\StatusFilter
         tags:
