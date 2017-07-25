@@ -5,6 +5,7 @@ app:
         add_article: Créer un article
         add_review_article: Créer un test de jeu
         added_at: Date d'ajout
+        age: Âge
         article: Article
         articles: Articles
         article_details: Détails de l'article

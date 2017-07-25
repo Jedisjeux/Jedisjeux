@@ -57,5 +57,7 @@ sylius_grid:
             entity: "@SyliusUi/Grid/Filter/entity.html.twig"
             money: "@SyliusUi/Grid/Filter/money.html.twig"
             exists: "@SyliusUi/Grid/Filter/exists.html.twig"
+
+            age: 'frontend/grid/filter/age.html.twig'
             status: "backend/grid/filter/status.html.twig"
             player_count: 'frontend/grid/filter/playerCount.html.twig'

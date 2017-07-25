@@ -1,4 +1,11 @@
 services:
+    app.grid.filter.age:
+        class: AppBundle\Grid\Filter\AgeFilter
+        tags:
+            -
+                name: sylius.grid_filter
+                type: age
+                form-type: AppBundle\Form\Filter\AgeFilterType
     app.grid.filter.player_count:
         class: AppBundle\Grid\Filter\PlayerCountFilter
         tags:
@@ -10,6 +17,6 @@ services:
         class: AppBundle\Grid\Filter\StatusFilter
         tags:
             -
-                name: sylius.grid_filter
+                name: sylius.grid_filters
                 type: status
                 form-type: AppBundle\Form\Filter\StatusFilterType

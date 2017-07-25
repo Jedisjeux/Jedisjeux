@@ -22,3 +22,5 @@ sylius_grid:
             filters:
                 playerCount:
                     type: player_count
+                age:
+                    type: age
