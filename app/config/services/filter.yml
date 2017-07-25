@@ -24,6 +24,6 @@ services:
         class: AppBundle\Grid\Filter\StatusFilter
         tags:
             -
-                name: sylius.grid_filters
+                name: sylius.grid_filter
                 type: status
                 form-type: AppBundle\Form\Filter\StatusFilterType
