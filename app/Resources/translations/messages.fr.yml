@@ -28,6 +28,7 @@ app:
         dealer_prices: Tarifs des vendeurs
         delimiter: Separateur
         destination: Destination
+        duration: Durée
         edit_article: Modifier l'article
         edit_dealer: Modifier le vendeur
         edit_dealer_price: Modifier le tarif du vendeur

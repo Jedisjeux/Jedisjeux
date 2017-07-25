@@ -6,6 +6,13 @@ services:
                 name: sylius.grid_filter
                 type: age
                 form-type: AppBundle\Form\Filter\AgeFilterType
+    app.grid.filter.duration:
+        class: AppBundle\Grid\Filter\DurationFilter
+        tags:
+            -
+                name: sylius.grid_filter
+                type: duration
+                form-type: AppBundle\Form\Filter\DurationFilterType
     app.grid.filter.player_count:
         class: AppBundle\Grid\Filter\PlayerCountFilter
         tags:

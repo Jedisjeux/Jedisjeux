@@ -24,3 +24,5 @@ sylius_grid:
                     type: player_count
                 age:
                     type: age
+                duration:
+                    type: duration

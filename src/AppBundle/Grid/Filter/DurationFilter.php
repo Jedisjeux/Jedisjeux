@@ -17,7 +17,7 @@ use Sylius\Component\Grid\Filtering\FilterInterface;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class AgeFilter implements FilterInterface
+class DurationFilter implements FilterInterface
 {
     /**
      * {@inheritdoc}
@@ -28,6 +28,6 @@ class AgeFilter implements FilterInterface
             return;
         }
 
-        $dataSource->restrict($dataSource->getExpressionBuilder()->lessThanOrEqual('product.ageMin', $data['value']));
+        $dataSource->restrict($dataSource->getExpressionBuilder()->lessThanOrEqual('product.durationMin', $data['value']));
     }
 }

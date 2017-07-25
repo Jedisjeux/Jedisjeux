@@ -59,5 +59,6 @@ sylius_grid:
             exists: "@SyliusUi/Grid/Filter/exists.html.twig"
 
             age: 'frontend/grid/filter/age.html.twig'
+            duration: 'frontend/grid/filter/duration.html.twig'
             status: "backend/grid/filter/status.html.twig"
             player_count: 'frontend/grid/filter/playerCount.html.twig'
