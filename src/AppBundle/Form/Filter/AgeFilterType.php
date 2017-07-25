@@ -30,6 +30,9 @@ class AgeFilterType extends AbstractType
             IntegerType::class,
             [
                 'label' => 'app.ui.age',
+                'attr' => [
+                    'placeholder' => 'Pouvant être joué à (en année)',
+                ],
             ]
         );
     }

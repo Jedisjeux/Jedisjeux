@@ -30,6 +30,9 @@ class DurationFilterType extends AbstractType
             IntegerType::class,
             [
                 'label' => 'app.ui.duration',
+                'attr' => [
+                    'placeholder' => 'Durée inférieure à (en minute)',
+                ],
             ]
         );
     }
