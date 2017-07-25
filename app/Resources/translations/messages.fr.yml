@@ -81,6 +81,7 @@ app:
         my_game_library: Ma ludothèque
         my_game_lists: Mes listes de jeu
         my_game_plays: Mes parties de jeu
+        my_virtual_game_library: Ma ludothèque virtuelle
         name: Nom
         new_article: Nouvel article
         new_articles: Nouveaux articles
