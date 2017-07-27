@@ -85,6 +85,7 @@ EOT
 
         $box->getImage()->setPath($data['path']);
         $box->setHeight($data['height']);
+        $box->setCreatedAt($data['created_at']);
 
         return $box;
     }
@@ -99,7 +100,8 @@ SELECT
   variant.id       AS variant_id,
   variantTranslation.name     as variant_name,
   oldImage.img_nom AS path,
-  oldImage.img_height as height
+  oldImage.img_height as height,
+  oldImage.img_date as created_at
 FROM jedisjeux.jdj_images_elements oldImageElement
   INNER JOIN jedisjeux.jdj_images oldImage
     ON oldImage.img_id = oldImageElement.img_id

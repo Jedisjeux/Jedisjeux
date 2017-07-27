@@ -1,31 +1,15 @@
 {% extends "base.html.twig" %}
 
 {% block headline %}
-    {{ 'app.ui.my_game_lists'|trans }}
+    {{ 'app.ui.my_game_library'|trans }}
 {% endblock %}
 
 {% block breadcrumb_content %}
     {{ parent() }}
-    {{ 'app.ui.my_game_lists'|trans }}
+    {{ 'app.ui.my_game_library'|trans }}
 {% endblock %}
 
 {% block body -%}
-    <div class="col-md-12">
-        <div class="container">
-            <div class="games-library bg-black">
-                <div class="content">
-                    {% spaceless %}
-                        {% for product_list_item in product_list_items.data %}
-                            {% set box = product_list_item.product.firstVariant.box %}
-                            {% if box %}
-                                <a href="{{ path('sylius_product_show', { 'slug': product_list_item.product.slug }) }}">
-                                    <img src="{{ box.image.webPath | imagine_filter('full') }}"/>
-                                </a>
-                            {% endif %}
-                        {% endfor %}
-                    {% endspaceless %}
-                </div>
-            </div>
-        </div>
-    </div>
+    {% include 'frontend/account/games_library/index/_filters.html.twig' %}
+    {% include 'frontend/account/games_library/index/_content.html.twig' %}
 {% endblock %}
