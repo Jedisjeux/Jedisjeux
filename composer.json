@@ -77,7 +77,7 @@
     "se/selenium-server-standalone": " ^2.52",
     "friends-of-behat/performance-extension": "^1.0",
     "phpspec/phpspec": "^3.1",
-    "lbaey/chromedriver": "dev-master",
+    "lbaey/chromedriver": "^1.0",
     "lakion/api-test-case": "^1.1"
   },
   "scripts": {
