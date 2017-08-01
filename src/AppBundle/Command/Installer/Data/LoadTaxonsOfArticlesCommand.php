@@ -76,7 +76,7 @@ class LoadTaxonsOfArticlesCommand extends ContainerAwareCommand
         $taxon->setName($data['name']);
         $taxon->setIconClass(isset($data['icon_class']) ? $data['icon_class'] : null);
         $taxon->setColor(isset($data['color']) ? $data['color'] : null);
-        $taxon->setSlug($this->getTaxonSlugGenerator()->generate($taxon->getName(), $rootTaxon->getId()));
+        $taxon->setSlug($this->getTaxonSlugGenerator()->generate($taxon));
 
         return $taxon;
     }
