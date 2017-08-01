@@ -89,7 +89,7 @@ class LoadMechanismsCommand extends ContainerAwareCommand
         //$taxon->setParent($taxonomy->getRoot());
         $parentTaxon->addChild($taxon);
 
-        $taxon->setSlug($this->getTaxonSlugGenerator()->generate($taxon->getName(), $parentTaxon->getId()));
+        $taxon->setSlug($this->getTaxonSlugGenerator()->generate($taxon));
 
         return $taxon;
     }
