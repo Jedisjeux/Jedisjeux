@@ -36,7 +36,7 @@ app_frontend_topic_index:
             paginate: 10
             sortable: true
             sorting:
-                createdAt: desc
+                lastPostCreatedAt: desc
             template: frontend/topic/index.html.twig
 
 app_frontend_topic_update:
@@ -73,7 +73,7 @@ app_frontend_topic_index_by_taxon:
             paginate: 10
             sortable: true
             sorting:
-                createdAt: desc
+                lastPostCreatedAt: desc
             template: frontend/topic/index.html.twig
     requirements:
         slug: "[^?]+"
