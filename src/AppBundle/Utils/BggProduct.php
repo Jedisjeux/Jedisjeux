@@ -115,9 +115,46 @@ class BggProduct
         return strip_tags($description);
     }
 
-    public function getMateriel()
+    /**
+     * @return array
+     */
+    public function getDesigners()
     {
+        $designers = array();
 
+        foreach ($this->boardGame->boardgamedesigner as $row) {
+            $designers[] = (string)$row;
+        }
+
+        return $designers;
+    }
+
+    /**
+     * @return array
+     */
+    public function getArtists()
+    {
+        $artists = array();
+
+        foreach ($this->boardGame->boardgameartist as $row) {
+            $artists[] = (string)$row;
+        }
+
+        return $artists;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPublishers()
+    {
+        $publishers = array();
+
+        foreach ($this->boardGame->boardgamepublisher as $row) {
+            $publishers[] = (string)$row;
+        }
+
+        return $publishers;
     }
 
     /**

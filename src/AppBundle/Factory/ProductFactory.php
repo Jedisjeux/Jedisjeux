@@ -11,10 +11,12 @@
 
 namespace AppBundle\Factory;
 
+use AppBundle\Entity\Person;
 use AppBundle\Entity\Product;
 use AppBundle\Entity\ProductVariant;
 use AppBundle\Utils\BggProduct;
-use AppBundle\Utils\ProductFromBggPath;
+use Doctrine\ORM\EntityRepository;
+use Gedmo\Sluggable\Util\Urlizer;
 use Sylius\Component\Product\Factory\ProductFactory as BaseProductFactory;
 
 /**
@@ -22,6 +24,19 @@ use Sylius\Component\Product\Factory\ProductFactory as BaseProductFactory;
  */
 class ProductFactory extends BaseProductFactory
 {
+    /**
+     * @var EntityRepository
+     */
+    protected $personRepository;
+
+    /**
+     * @param EntityRepository $personRepository
+     */
+    public function setPersonRepository(EntityRepository $personRepository)
+    {
+        $this->personRepository = $personRepository;
+    }
+
     /**
      * @param string $bggPath
      *
@@ -54,6 +69,59 @@ class ProductFactory extends BaseProductFactory
         $product->setJoueurMin($bggProduct->getNbJoueursMin());
         $product->setJoueurMax($bggProduct->getNbJoueursMax());
 
+        foreach ($bggProduct->getDesigners() as $fullName) {
+            $designer = $this->getPersonByFullName($fullName);
+
+            if (null === $designer) {
+                continue;
+            }
+
+            $product->getFirstVariant()
+                ->addDesigner($designer);
+        }
+
+        foreach ($bggProduct->getArtists() as $fullName) {
+            $artist = $this->getPersonByFullName($fullName);
+
+            if (null === $artist) {
+                continue;
+            }
+
+            $product->getFirstVariant()
+                ->addArtist($artist);
+        }
+
+        foreach ($bggProduct->getPublishers() as $fullName) {
+            $publisher = $this->getPersonByFullName($fullName);
+
+            if (null === $publisher) {
+                continue;
+            }
+
+            $product->getFirstVariant()
+                ->addPublisher($publisher);
+        }
+
         return $product;
+    }
+
+    /**
+     * @param string $fullName
+     *
+     * @return Person
+     */
+    protected function getPersonByFullName($fullName)
+    {
+        $fullName = strtolower($fullName);
+        $slug = Urlizer::urlize($fullName, '-');
+
+        /** @var Person $person */
+        $person = $this->personRepository->findOneBy(['slug' => $slug]);
+
+        if (null === $person) {
+            return null;
+        }
+
+        return $person;
     }
 }
