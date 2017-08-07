@@ -19,6 +19,7 @@ use AppBundle\Utils\BggProduct;
 use Doctrine\ORM\EntityRepository;
 use Gedmo\Sluggable\Util\Urlizer;
 use Sylius\Component\Product\Factory\ProductFactory as BaseProductFactory;
+use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
@@ -37,6 +38,11 @@ class ProductFactory extends BaseProductFactory
     protected $productVariantImageFactory;
 
     /**
+     * @var SlugGeneratorInterface
+     */
+    protected $slugGenerator;
+
+    /**
      * @param EntityRepository $personRepository
      */
     public function setPersonRepository(EntityRepository $personRepository)
@@ -47,9 +53,17 @@ class ProductFactory extends BaseProductFactory
     /**
      * @param FactoryInterface $productVariantImageFactory
      */
-    public function setProductVariantImageFactory($productVariantImageFactory)
+    public function setProductVariantImageFactory(FactoryInterface $productVariantImageFactory)
     {
         $this->productVariantImageFactory = $productVariantImageFactory;
+    }
+
+    /**
+     * @param SlugGeneratorInterface $slugGenerator
+     */
+    public function setSlugGenerator(SlugGeneratorInterface $slugGenerator)
+    {
+        $this->slugGenerator = $slugGenerator;
     }
 
     /**
@@ -65,6 +79,7 @@ class ProductFactory extends BaseProductFactory
         $bggProduct = new BggProduct($bggPath);
 
         $product->setName($bggProduct->getName());
+        $product->setSlug($this->slugGenerator->generate($product->getName()));
         $product->setDescription($bggProduct->getDescription());
 
         if (null !== $releasedAtYear = $bggProduct->getReleasedAtYear()) {
@@ -76,7 +91,6 @@ class ProductFactory extends BaseProductFactory
                     ->setReleasedAtPrecision(ProductVariant::RELEASED_AT_PRECISION_ON_YEAR);
             }
         }
-
 
         $product->setAgeMin($bggProduct->getAge());
         $product->setDurationMin($bggProduct->getDurationMin());
