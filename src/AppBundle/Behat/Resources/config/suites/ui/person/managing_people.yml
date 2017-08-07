@@ -1,0 +1,7 @@
+default:
+    suites:
+        ui_managing_people:
+            contexts_services:
+                - app.behat.context.ui.backend.managing_people
+            filters:
+                tags: "@managing_people && @ui"
