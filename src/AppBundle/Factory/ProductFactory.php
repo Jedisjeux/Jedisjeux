@@ -14,10 +14,13 @@ namespace AppBundle\Factory;
 use AppBundle\Entity\Person;
 use AppBundle\Entity\Product;
 use AppBundle\Entity\ProductVariant;
+use AppBundle\Entity\ProductVariantImage;
 use AppBundle\Utils\BggProduct;
 use Doctrine\ORM\EntityRepository;
 use Gedmo\Sluggable\Util\Urlizer;
 use Sylius\Component\Product\Factory\ProductFactory as BaseProductFactory;
+use Sylius\Component\Product\Generator\SlugGeneratorInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -30,11 +33,37 @@ class ProductFactory extends BaseProductFactory
     protected $personRepository;
 
     /**
+     * @var FactoryInterface
+     */
+    protected $productVariantImageFactory;
+
+    /**
+     * @var SlugGeneratorInterface
+     */
+    protected $slugGenerator;
+
+    /**
      * @param EntityRepository $personRepository
      */
     public function setPersonRepository(EntityRepository $personRepository)
     {
         $this->personRepository = $personRepository;
+    }
+
+    /**
+     * @param FactoryInterface $productVariantImageFactory
+     */
+    public function setProductVariantImageFactory(FactoryInterface $productVariantImageFactory)
+    {
+        $this->productVariantImageFactory = $productVariantImageFactory;
+    }
+
+    /**
+     * @param SlugGeneratorInterface $slugGenerator
+     */
+    public function setSlugGenerator(SlugGeneratorInterface $slugGenerator)
+    {
+        $this->slugGenerator = $slugGenerator;
     }
 
     /**
@@ -50,6 +79,7 @@ class ProductFactory extends BaseProductFactory
         $bggProduct = new BggProduct($bggPath);
 
         $product->setName($bggProduct->getName());
+        $product->setSlug($this->slugGenerator->generate($product->getName()));
         $product->setDescription($bggProduct->getDescription());
 
         if (null !== $releasedAtYear = $bggProduct->getReleasedAtYear()) {
@@ -62,10 +92,9 @@ class ProductFactory extends BaseProductFactory
             }
         }
 
-
         $product->setAgeMin($bggProduct->getAge());
-        $product->setDurationMin($bggProduct->getDuration());
-        $product->setDurationMax($bggProduct->getDuration());
+        $product->setDurationMin($bggProduct->getDurationMin());
+        $product->setDurationMax($bggProduct->getDurationMax());
         $product->setJoueurMin($bggProduct->getNbJoueursMin());
         $product->setJoueurMax($bggProduct->getNbJoueursMax());
 
@@ -101,6 +130,14 @@ class ProductFactory extends BaseProductFactory
             $product->getFirstVariant()
                 ->addPublisher($publisher);
         }
+
+        /** @var ProductVariantImage $mainImage */
+        $mainImage = $this->productVariantImageFactory->createNew();
+        $mainImage->setMain(true);
+        $mainImage->setPath(basename($bggProduct->getImagePath()));
+        file_put_contents($mainImage->getAbsolutePath(), file_get_contents($bggProduct->getImagePath()));
+
+        $product->getFirstVariant()->addImage($mainImage);
 
         return $product;
     }
