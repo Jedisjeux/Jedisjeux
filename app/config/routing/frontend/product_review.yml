@@ -37,8 +37,8 @@ sylius_frontend_product_review:
     resource: |
         alias: sylius.product_review
         section: frontend
-        templates: :frontend/product_review
         only: ['show']
+        templates: :frontend/product_review
     type: sylius.resource
 
 sylius_product_rating_create:

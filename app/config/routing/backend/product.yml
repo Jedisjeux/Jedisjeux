@@ -2,7 +2,6 @@ sylius_admin_product:
     resource: |
         alias: sylius.product
         section: admin
-        templates: :backend/crud
         only: [update, delete]
         redirect: update
         vars:
@@ -16,6 +15,7 @@ sylius_admin_product:
                 templates:
                     form: backend/product/_form.html.twig
                     toolbar: backend/product/_toolbar.html.twig
+        templates: :backend/crud
     type: sylius.resource
 
 sylius_admin_product_create:

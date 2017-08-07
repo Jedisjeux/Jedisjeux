@@ -2,7 +2,6 @@ app_backend_redirection:
     resource: |
         alias: app.redirection
         section: backend
-        templates: :backend/crud
         except: ['show']
         redirect: index
         grid: app_backend_redirection
@@ -11,4 +10,5 @@ app_backend_redirection:
                 subheader: app.ui.manage_redirections
             index:
                 icon: exchange
+        templates: :backend/crud
     type: sylius.resource

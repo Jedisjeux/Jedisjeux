@@ -2,7 +2,6 @@ app_backend_article:
     resource: |
         alias: app.article
         section: backend
-        templates: :backend/crud
         redirect: update
         grid: app_backend_article
         except: ['show']
@@ -17,6 +16,7 @@ app_backend_article:
                 templates:
                     form: backend/article/_form.html.twig
                     toolbar: backend/article/_toolbar.html.twig
+        templates: :backend/crud
     type: sylius.resource
 
 app_backend_article_per_product_index:

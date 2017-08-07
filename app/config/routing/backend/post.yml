@@ -2,7 +2,6 @@ app_backend_post:
     resource: |
         alias: app.post
         section: backend
-        templates: :backend/crud
         except: ['create', 'show']
         grid: app_backend_post
         redirect: index
@@ -13,4 +12,5 @@ app_backend_post:
                     form: backend/post/_form.html.twig
             index:
                 icon: comments
+        templates: :backend/crud
     type: sylius.resource
