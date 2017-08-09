@@ -65,7 +65,7 @@ sylius_admin_product_index:
                       route: sylius_admin_product_create
 
 sylius_admin_product_from_bgg_new:
-    methods: [GET]
+    methods: [GET, POST]
     path: /products/bgg/new
     defaults:
         _controller: sylius.controller.product:createAction
@@ -76,6 +76,10 @@ sylius_admin_product_from_bgg_new:
                 method: createFromBgg
                 arguments: [$bggPath]
             vars:
+                route:
+                    name: sylius_admin_product_from_bgg_new
+                    parameters:
+                        bggPath: $bggPath
                 templates:
                     form: backend/product/_form.html.twig
     requirements:

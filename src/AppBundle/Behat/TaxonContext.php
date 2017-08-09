@@ -51,7 +51,7 @@ class TaxonContext extends DefaultContext
             $taxon->setPublic(isset($data['public']) ? (bool)$data['public'] : true);
 
             $parent->addChild($taxon);
-            $taxon->setSlug($this->getTaxonSlugGenerator()->generate($taxon->getName(), $parent->getId()));
+            $taxon->setSlug($this->getTaxonSlugGenerator()->generate($taxon));
 
             $manager->persist($taxon);
             $manager->flush();
@@ -83,7 +83,7 @@ class TaxonContext extends DefaultContext
             $taxon = $this->getFactory('taxon')->createNew();
             $taxon->setCode(isset($data['code']) ? $data['code'] : $this->faker->unique()->text(5));
             $taxon->setName(isset($data['name']) ? $data['name'] : $this->faker->name);
-            $taxon->setSlug($this->getTaxonSlugGenerator()->generate($taxon->getName()));
+            $taxon->setSlug($this->getTaxonSlugGenerator()->generate($taxon));
 
             $manager->persist($taxon);
             $manager->flush();

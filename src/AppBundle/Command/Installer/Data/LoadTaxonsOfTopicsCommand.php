@@ -83,7 +83,7 @@ class LoadTaxonsOfTopicsCommand extends ContainerAwareCommand
             $rootTaxon->addChild($taxon);
         }
 
-        $taxon->setSlug($this->getTaxonSlugGenerator()->generate($taxon->getName(), $rootTaxon->getId()));
+        $taxon->setSlug($this->getTaxonSlugGenerator()->generate($taxon));
 
         $this->getManager()->persist($taxon);
         $this->getManager()->flush();

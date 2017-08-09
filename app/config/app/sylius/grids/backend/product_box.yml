@@ -1,0 +1,47 @@
+sylius_grid:
+    grids:
+        app_backend_product_box:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%app.model.product_box.class%"
+            sorting:
+                createdAt: desc
+            fields:
+                image:
+                    label: sylius.ui.image
+                    type: twig
+                    path: .
+                    options:
+                        template: "backend/product_box/grid/field/image.html.twig"
+                product:
+                    label: sylius.ui.product
+                    type: string
+                    path: productVariant.product
+                height:
+                    label: app.ui.height
+                    type: twig
+                    sortable: ~
+                    options:
+                        template: "backend/product_box/grid/field/height.html.twig"
+                createdAt:
+                    type: twig
+                    label: sylius.ui.created_at
+                    sortable: ~
+                    options:
+                        template: "backend/grid/field/date/medium.html.twig"
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    options:
+                        fields: [height]
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete

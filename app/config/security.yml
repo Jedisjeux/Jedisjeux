@@ -54,6 +54,7 @@ security:
                 failure_path: sylius_shop_login
                 default_target_path: app_homepage
                 use_forward:  false
+                #use_referer: true
                 csrf_token_generator: security.csrf.token_manager
                 csrf_parameter: _csrf_shop_security_token
                 csrf_token_id: shop_authenticate

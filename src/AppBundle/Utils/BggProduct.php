@@ -42,50 +42,54 @@ class BggProduct
     /**
      * @return string
      */
+    public function getImagePath()
+    {
+        return (string)$this->boardGame->image;
+    }
+
+    /**
+     * @return string
+     */
     public function getReleasedAtYear()
     {
         return $this->boardGame->yearpublished;
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function getAuteurs()
-    {
-        return $this->getPeople($this->boardGame->boardgamedesigner);
-    }
-
-    /**
-     * @return array
-     */
-    public function getIllustrateurs()
-    {
-        return $this->getPeople($this->boardGame->boardgameartist);
-    }
-
-    /**
-     * @return array
-     */
-    public function getEditeurs()
-    {
-        return $this->getPeople($this->boardGame->boardgamepublisher);
-    }
-
-    public function getDuration()
+    public function getDurationMin()
     {
         return (string)$this->boardGame->minplaytime;
     }
 
+    /**
+     * @return string
+     */
+    public function getDurationMax()
+    {
+        return (string)$this->boardGame->maxplaytime;
+    }
+
+    /**
+     * @return string
+     */
     public function getAge()
     {
         return (string)$this->boardGame->age;
     }
 
+    /**
+     * @return string
+     */
     public function getNbJoueursMin()
     {
         return (string)$this->boardGame->minplayers;
     }
 
+    /**
+     * @return string
+     */
     public function getNbJoueursMax()
     {
         return (string)$this->boardGame->maxplayers;
@@ -115,9 +119,28 @@ class BggProduct
         return strip_tags($description);
     }
 
-    public function getMateriel()
+    /**
+     * @return array
+     */
+    public function getDesigners()
     {
+        return $this->getPeopleByNode($this->boardGame->boardgamedesigner);
+    }
 
+    /**
+     * @return array
+     */
+    public function getArtists()
+    {
+        return $this->getPeopleByNode($this->boardGame->boardgameartist);
+    }
+
+    /**
+     * @return array
+     */
+    public function getPublishers()
+    {
+        return $this->getPeopleByNode($this->boardGame->boardgamepublisher);
     }
 
     /**
@@ -125,9 +148,9 @@ class BggProduct
      *
      * @return array
      */
-    protected function getPeople($peopleNode)
+    protected function getPeopleByNode($peopleNode)
     {
-        $people = array();
+        $people = [];
 
         foreach ($peopleNode as $row) {
             $people[] = (string)$row;
@@ -136,9 +159,14 @@ class BggProduct
         return $people;
     }
 
+    /**
+     * @param string $url
+     *
+     * @return string
+     */
     protected function getApiUrl($url)
     {
         preg_match('/\/(?P<gameId>\d+)/', $url, $matches);
-        return self::API_BASE_URL.$matches['gameId'];
+        return self::API_BASE_URL . $matches['gameId'];
     }
 }

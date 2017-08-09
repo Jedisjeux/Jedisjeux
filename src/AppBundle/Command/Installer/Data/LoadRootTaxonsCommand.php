@@ -72,7 +72,7 @@ class LoadRootTaxonsCommand extends ContainerAwareCommand
         $rootTaxon->setCode($data['code']);
         $rootTaxon->setName($data['name']);
         $rootTaxon->setIconClass(isset($data['icon_class']) ? $data['icon_class'] : null);
-        $rootTaxon->setSlug($this->getTaxonSlugGenerator()->generate($rootTaxon->getName()));
+        $rootTaxon->setSlug($this->getTaxonSlugGenerator()->generate($rootTaxon));
 
         return $rootTaxon;
     }

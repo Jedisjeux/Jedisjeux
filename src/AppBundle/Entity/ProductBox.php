@@ -12,6 +12,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
@@ -22,7 +23,14 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  */
 class ProductBox implements ResourceInterface
 {
-    use IdentifiableTrait;
+    use IdentifiableTrait, Timestampable;
+
+    /**
+     * @var ProductVariant|null
+     *
+     * @ORM\OneToOne(targetEntity="ProductVariant", mappedBy="box")
+     */
+    protected $productVariant;
 
     /**
      * @var ProductBoxImage|null
@@ -74,6 +82,25 @@ class ProductBox implements ResourceInterface
     public function setHeight($height)
     {
         $this->height = $height;
+
+        return $this;
+    }
+
+    /**
+     * @return ProductVariant|null
+     */
+    public function getProductVariant()
+    {
+        return $this->productVariant;
+    }
+
+    /**
+     * @param ProductVariant|null $productVariant
+     * @return ProductBox
+     */
+    public function setProductVariant(ProductVariant $productVariant = null)
+    {
+        $this->productVariant = $productVariant;
 
         return $this;
     }

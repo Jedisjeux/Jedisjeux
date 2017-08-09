@@ -2,7 +2,7 @@
 # @see http://docs.sylius.org/en/latest/bundles/SyliusResourceBundle/routing.html
 
 app_backend_dashboard:
-    path: /dashboard
+    path: /
     defaults:
         _controller:  FrameworkBundle:Template:template
         template:     'backend/index.html.twig'
@@ -50,6 +50,9 @@ sylius_backend_product_association_type:
 
 app_backend_product_list:
     resource: backend/product_list.yml
+
+app_backend_product_box:
+    resource: backend/product_box.yml
 
 sylius_backend_product_review:
     resource: backend/product_review.yml
