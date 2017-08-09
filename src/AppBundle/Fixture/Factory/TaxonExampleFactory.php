@@ -93,7 +93,7 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
 
             $taxon->setName($options['name']);
             $taxon->setDescription($options['description']);
-            $taxon->setSlug($options['slug'] ?: $this->taxonSlugGenerator->generate($taxon->getName()));
+            $taxon->setSlug($options['slug'] ?: $this->taxonSlugGenerator->generate($taxon, $localeCode));
         }
 
         foreach ($options['children'] as $childOptions) {

@@ -39,6 +39,7 @@ class AppUserFixture extends AbstractResourceFixture
                 ->scalarNode('password')->cannotBeEmpty()->end()
                 ->scalarNode('first_name')->cannotBeEmpty()->end()
                 ->scalarNode('last_name')->cannotBeEmpty()->end()
+                ->scalarNode('avatar')->cannotBeEmpty()->end()
                 ->arrayNode('roles')->prototype('scalar')->end()->end()
         ;
     }

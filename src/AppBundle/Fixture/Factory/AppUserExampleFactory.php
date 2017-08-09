@@ -11,6 +11,8 @@
 
 namespace AppBundle\Fixture\Factory;
 
+use AppBundle\Entity\Avatar;
+use AppBundle\Entity\Customer;
 use AppBundle\Entity\User;
 use AppBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Customer\Model\CustomerInterface;
@@ -35,6 +37,11 @@ class AppUserExampleFactory extends AbstractExampleFactory implements ExampleFac
     private $customerFactory;
 
     /**
+     * @var FactoryInterface
+     */
+    private $avatarFactory;
+
+    /**
      * @var \Faker\Generator
      */
     private $faker;
@@ -49,11 +56,13 @@ class AppUserExampleFactory extends AbstractExampleFactory implements ExampleFac
      *
      * @param FactoryInterface $userFactory
      * @param FactoryInterface $customerFactory
+     * @param FactoryInterface $avatarFactory
      */
-    public function __construct(FactoryInterface $userFactory, FactoryInterface $customerFactory)
+    public function __construct(FactoryInterface $userFactory, FactoryInterface $customerFactory, FactoryInterface $avatarFactory)
     {
         $this->userFactory = $userFactory;
         $this->customerFactory = $customerFactory;
+        $this->avatarFactory = $avatarFactory;
 
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver = new OptionsResolver();
@@ -68,11 +77,12 @@ class AppUserExampleFactory extends AbstractExampleFactory implements ExampleFac
     {
         $options = $this->optionsResolver->resolve($options);
 
-        /** @var CustomerInterface $customer */
+        /** @var Customer $customer */
         $customer = $this->customerFactory->createNew();
         $customer->setEmail($options['email']);
         $customer->setFirstName($options['first_name']);
         $customer->setLastName($options['last_name']);
+        $this->createAvatar($customer, $options);
 
         /** @var User $user */
         $user = $this->userFactory->createNew();
@@ -88,6 +98,23 @@ class AppUserExampleFactory extends AbstractExampleFactory implements ExampleFac
         $user->setCustomer($customer);
 
         return $user;
+    }
+
+    /**
+     * @param Customer $customer
+     * @param array $options
+     */
+    private function createAvatar(Customer $customer, array $options)
+    {
+        $imagePath = $options['avatar'];
+
+        /** @var Avatar $avatar */
+        $avatar = $this->avatarFactory->createNew();
+        $avatar->setPath(basename($imagePath));
+
+        file_put_contents($avatar->getAbsolutePath(), file_get_contents($imagePath));
+
+        $customer->setAvatar($avatar);
     }
 
     /**
@@ -113,6 +140,9 @@ class AppUserExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setDefault('password', 'password123')
             ->setDefault('roles', [])
             ->setAllowedTypes('roles', 'array')
+            ->setDefault('avatar', function (Options $options) {
+                return $this->faker->image(null, 640, 480, 'people');
+            })
         ;
     }
 }

@@ -12,6 +12,7 @@ services:
        arguments:
           - "@sylius.factory.shop_user"
           - "@sylius.factory.customer"
+          - "@app.factory.avatar"
 
     app.fixture.example_factory.block:
        class: AppBundle\Fixture\Factory\BlockExampleFactory

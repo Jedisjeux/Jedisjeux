@@ -29,8 +29,16 @@ sylius_fixtures:
                             -
                                 email: "blue@example.com"
                                 username: "Blue"
-                                password: "password"
+                                password: "admin"
                                 enabled: true
+                                avatar: "app/Resources/fixtures/blue.jpg"
+                                roles: ["ROLE_ADMIN"]
+                            -
+                                email: "loic_425@example.com"
+                                username: "loic_425"
+                                password: "admin"
+                                enabled: true
+                                avatar: "app/Resources/fixtures/loic_425.jpg"
                                 roles: ["ROLE_ADMIN"]
                 taxon:
                     options:
@@ -78,7 +86,7 @@ sylius_fixtures:
                                     - "app/Resources/fixtures/wolfgang-kramer.jpg"
                 article:
                     options:
-                        random: 20
+                        random: 50
                         custom:
                             -
                                 title: "Le Jedisjeux nouveau est arrivé "
