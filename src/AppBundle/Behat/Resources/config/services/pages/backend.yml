@@ -11,8 +11,22 @@ services:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
+      app.behat.page.backend.crud.index:
+          class: AppBundle\Behat\Page\Backend\Crud\IndexPage
+          parent: app.behat.symfony_page
+          abstract: true
+          public: false
+          arguments:
+              - "@app.behat.table_accessor"
+
       app.behat.page.backend.crud.create:
           class: AppBundle\Behat\Page\Backend\Crud\CreatePage
+          parent: app.behat.symfony_page
+          abstract: true
+          public: false
+
+      app.behat.page.backend.crud.update:
+          class: AppBundle\Behat\Page\Backend\Crud\UpdatePage
           parent: app.behat.symfony_page
           abstract: true
           public: false

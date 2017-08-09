@@ -1,0 +1,62 @@
+app:
+    article:
+        create: Article has been successfully created.
+        update: Article has been successfully updated.
+        delete: L'article a bien été supprimé.
+    contact_request:
+        create: Votre message a bien été envoyé.
+        update: Le message has been successfully updated.
+        delete: Le message a bien été supprimé.
+    dealer:
+        create: Le vendeur has been successfully created.
+        update: Le vendeur has been successfully updated.
+        delete: Le vendeur a bien été supprimé.
+    game_play:
+        create: La partie de jeu has been successfully created.
+        update: La partie de jeu has been successfully updated.
+        delete: La partie de jeu a bien été supprimée.
+    person:
+        create: Person has been successfully created.
+        update: Person has been successfully updated.
+        delete: Person has been successfully deleted.
+    post:
+        create: Le message has been successfully created.
+        update: Le message has been successfully updated.
+        delete: Le message a bien été supprimé.
+    string_block:
+        create: Le bloc de chaîne has been successfully created.
+        update: Le bloc de chaîne has been successfully updated.
+        delete: Le bloc de chaîne a bien été supprimé.
+    topic:
+        create: Le sujet has been successfully created.
+        update: Le sujet has been successfully updated.
+        delete: Le sujet a bien été supprimé.
+sylius:
+    product:
+        create: Le jeu has been successfully created.
+        update: Le jeu has been successfully updated.
+        delete: Le jeu a bien été supprimé.
+    product_review:
+        create: L'avis has been successfully created.
+        update: L'avis has been successfully updated.
+        delete: L'avis a bien été supprimé.
+    static_content:
+        create: Le contenu statique has been successfully created.
+        update: Le contenu statique has been successfully updated.
+        delete: Le contenu statique a bien été supprimé.
+    taxon:
+        create: La catégorie has been successfully created.
+        update: La catégorie has been successfully updated.
+        delete: La catégorie a bien été supprimée.
+    user:
+        change_password: 'Votre mot de passe a été mis à jour avec succès !'
+        reset_password: 'Votre mot de passe a été réinitialisé avec succès !'
+        password:
+            reset:
+                token_expired: Le jeton de réinitialisation de mot de passe a expiré,
+                requested: Si l'email que vous avez spécifié existe dans notre système, vous recevrez un message avec les instructions pour réinitialiser votre mot de passe.
+            change:
+                success: Votre mot de passe a été mis à jour avec succès !
+    customer:
+        update_profile: Votre profil a bien été mis à jour.
+        register: 'Merci pour votre inscription, vous allez recevoir un mail pour vérifier votre compte.'

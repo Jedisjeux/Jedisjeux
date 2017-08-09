@@ -1,0 +1,103 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_fixtures:
+    suites:
+        default:
+            listeners:
+                orm_purger: ~
+                logger: ~
+
+            fixtures:
+                app_user:
+                    options:
+                        random: 20
+                        custom:
+                            -
+                                email: "customer@example.com"
+                                first_name: "Harry"
+                                last_name: "Cover"
+                                password: "password"
+                                enabled: true
+                            -
+                                email: "admin@example.com"
+                                first_name: "John"
+                                last_name: "Doe"
+                                password: "admin"
+                                enabled: true
+                                roles: ["ROLE_ADMIN"]
+                            -
+                                email: "blue@example.com"
+                                username: "Blue"
+                                password: "password"
+                                enabled: true
+                                roles: ["ROLE_ADMIN"]
+                taxon:
+                    options:
+                        custom:
+                            -
+                                code: "forum"
+                                name: "Forum"
+                            -
+                                code: "themes"
+                                name: "Thèmes"
+                            -
+                                code: "mechanisms"
+                                name: "Mécanismes"
+                            -
+                                code: "target-audience"
+                                name: "Cibles"
+                            -
+                                code: "zones"
+                                name: "Zones"
+                            -
+                                code: "articles"
+                                name: "Catégories"
+                person:
+                    options:
+                        random: 20
+                        custom:
+                            -
+                                first_name: "Reiner"
+                                last_name: "Knizia"
+                                website: "http://www.knizia.de"
+                                images:
+                                    - "app/Resources/fixtures/reiner-knizia.jpg"
+                                    - "app/Resources/fixtures/reiner-knizia-2.jpg"
+                                    - "app/Resources/fixtures/reiner-knizia-5.jpg"
+                                description: |
+                                    Reiner Knizia est l'auteur le plus prolifique de jeux de société.
+                                    Il sort chaque année de nombreux jeux dont beaucoup de rééditions avec souvent quelques changements de thèmes.
+                                    Il est l'auteur de nombreux succés tels que Euphrat &amp; Tigris, Modern Art, Râ, Camelot.
+                                    Malgré son succès, Knizia n'a été consacré que très tard dans sa carrière : pour Keltis en 2008, une évolution d'un autre de ses succès, les citées perdues.
+                                    Sa spécialité est le mécanisme de "l'enchère". Certains diront même que tout ses jeux comportent au moins un soupçon d'enchère.
+                            -
+                                first_name: "Wolfgang"
+                                last_name: "Kramer"
+                                images:
+                                    - "app/Resources/fixtures/wolfgang-kramer.jpg"
+                article:
+                    options:
+                        random: 20
+                        custom:
+                            -
+                                title: "Le Jedisjeux nouveau est arrivé "
+                                status: "published"
+                                publish_start_date: "now"
+                                main_image: "app/Resources/fixtures/jedisjeux-nouveau.png"
+                                author: "blue@example.com"
+                                blocks:
+                                    -
+                                        body: |
+                                            <p>Ça y est, le nouveau Jedisjeux est là.</p>
+                                            <p>Attention où vous mettez vos doigts, ce n'est pas encore tout à fait sec. Enfin, on a&nbsp;fait bien attention à mettre de la peinture qui ne täche pas.</p>
+                                            <p>Première chose, il faut changer votre mot de passe. Pour ça, rien de plus simple, il suffit cliquer sur le lien «&nbsp;<a href="http://www.jedisjeux.net/forgotten-password" target="_self">vous avez oublié votre mot de passe</a>&nbsp;».</p>
+                                            <p>Si ça ne se passe pas bien, n’hésitez pas à le signaler par mail en suivant le lien <a href="http://www.jedisjeux.net/contact">contact </a>du site.</p>
+                                            <p>Il manque encore des petites choses par ci par là, ne vous inquiétez pas, ça va revenir, ce nouveau site nous permettra de vous proposer&nbsp;plein de nouvelles choses qui étaient trop difficiles à réaliser avec l'ancienne version.</p>
+                                            <p>N'hésitez pas à commenter, tester, remonter les bugs, demander des évolutions.</p>
+                                            <p>Bravo à Loïc pour avoir su gérer cette nouvelle version.</p>
+                                            <p>Il ne nous reste plus qu'à roder tout ça&nbsp;: )</p>
+                                        image: "app/Resources/fixtures/jedisjeux-nouveau.png"
+                topic:
+                    options:
+                        random: 20

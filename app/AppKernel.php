@@ -33,6 +33,8 @@ class AppKernel extends Kernel
             new Sylius\Bundle\AttributeBundle\SyliusAttributeBundle(),
             new Sylius\Bundle\TaxonomyBundle\SyliusTaxonomyBundle(),
             new Sylius\Bundle\MoneyBundle\SyliusMoneyBundle(),
+            new Sylius\Bundle\FixturesBundle\SyliusFixturesBundle(),
+            new Sylius\Bundle\GridBundle\SyliusGridBundle(),
             new winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
 
             new Sonata\BlockBundle\SonataBlockBundle(),
@@ -41,8 +43,6 @@ class AppKernel extends Kernel
             new Symfony\Cmf\Bundle\BlockBundle\CmfBlockBundle(),
             new Symfony\Cmf\Bundle\MediaBundle\CmfMediaBundle(),
             new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
-
-            new Sylius\Bundle\GridBundle\SyliusGridBundle(),
 
             new FOS\RestBundle\FOSRestBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),

@@ -18,13 +18,43 @@ services:
         public: false
         factory: __behat__.mink:getSession
 
+    app.behat.cookie_setter:
+        class: AppBundle\Behat\Service\Setter\CookieSetter
+        public: false
+        arguments:
+            - "@mink.default_session"
+            - "%__behat__.mink.parameters%"
+
     app.behat.admin_security:
         class: AppBundle\Behat\Service\SecurityService
         public: false
         arguments:
             - "@__symfony__.session"
             - "@app.behat.cookie_setter"
-            - "admin"
+            - "user"
+
+    app.behat.table_accessor:
+        class: AppBundle\Behat\Service\Accessor\TableAccessor
+        public: false
+
+    app.behat.notification_accessor:
+        class: AppBundle\Behat\Service\Accessor\NotificationAccessor
+        public: false
+        arguments:
+            - "@mink.default_session"
+
+    app.behat.notification_checker:
+        class: AppBundle\Behat\Service\NotificationChecker
+        public: false
+        arguments:
+            - "@app.behat.notification_accessor"
+
+    app.behat.current_page_resolver:
+        class: AppBundle\Behat\Service\Resolver\CurrentPageResolver
+        public: false
+        arguments:
+            - "@mink.default_session"
+            - "@__symfony__.router"
 
     app.behat.shared_storage:
         class: AppBundle\Behat\Service\SharedStorage

@@ -33,10 +33,10 @@ class PersonType extends AbstractType
     {
         $builder
             ->add('lastName', null, [
-                'label' => 'label.last_name',
+                'label' => 'sylius.ui.last_name',
             ])
             ->add('firstName', null, [
-                'label' => 'label.first_name',
+                'label' => 'sylius.ui.first_name',
                 'required' => false,
             ])
             ->add('zone', EntityType::class, array(
