@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @author Corentin Nicole <corentin@mobizel.com>
+ * @author Loïc Frémont <lc.fremont@gmail.com>
  */
 class BlockExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {

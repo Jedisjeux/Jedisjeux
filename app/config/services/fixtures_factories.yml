@@ -20,6 +20,12 @@ services:
           - "@app.factory.block"
           - "@app.factory.block_image"
 
+    app.fixture.example_factory.notification:
+       class: AppBundle\Fixture\Factory\NotificationExampleFactory
+       arguments:
+          - "@app.factory.notification"
+          - "@sylius.repository.customer"
+
     app.fixture.example_factory.person:
        class: AppBundle\Fixture\Factory\PersonExampleFactory
        arguments:

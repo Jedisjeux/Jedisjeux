@@ -23,6 +23,14 @@ services:
         tags:
             - { name: sylius_fixtures.fixture }
 
+    app.fixture.notification:
+        class: AppBundle\Fixture\NotificationFixture
+        arguments:
+            - "@app.manager.notification"
+            - "@app.fixture.example_factory.notification"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
     app.fixture.person:
         class: AppBundle\Fixture\PersonFixture
         arguments:

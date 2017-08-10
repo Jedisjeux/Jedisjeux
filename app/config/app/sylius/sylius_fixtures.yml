@@ -123,3 +123,6 @@ sylius_fixtures:
                                 short_description: |
                                     <p>Le gouverneur de l'île de Puerto Rico reste à choisir.</p>
                                     <p>Celui des joueurs qui aura démontré les richesses de son quartier deviendra Gouverneur de Puerto Rico.</p>
+                notification:
+                    options:
+                        random: 40

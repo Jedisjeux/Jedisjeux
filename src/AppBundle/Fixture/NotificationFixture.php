@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the Sylius package.
+ * This file is part of Jedisjeux.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Loïc Frémont
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -14,16 +14,16 @@ namespace AppBundle\Fixture;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 /**
- * @author Loïc Frémont <lc.fremont@gmail.com>
+ * @author Loïc Frémont <loic@mobizel.com>
  */
-class BlockFixture extends AbstractResourceFixture
+class NotificationFixture extends AbstractResourceFixture
 {
     /**
      * {@inheritdoc}
      */
     public function getName()
     {
-        return 'block';
+        return 'notification';
     }
 
     /**
@@ -33,9 +33,11 @@ class BlockFixture extends AbstractResourceFixture
     {
         $resourceNode
             ->children()
-                ->scalarNode('title')->cannotBeEmpty()->end()
-                ->scalarNode('body')->cannotBeEmpty()->end()
-                ->scalarNode('image')->cannotBeEmpty()->end()
+                ->booleanNode('read')->end()
+                ->scalarNode('message')->cannotBeEmpty()->end()
+                ->scalarNode('target')->cannotBeEmpty()->end()
+                ->scalarNode('recipient')->cannotBeEmpty()->end()
+                ->arrayNode('authors')->prototype('scalar')->end()->end()
         ;
     }
 }

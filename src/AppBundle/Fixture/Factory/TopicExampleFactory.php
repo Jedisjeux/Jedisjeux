@@ -11,20 +11,16 @@
 
 namespace AppBundle\Fixture\Factory;
 
-use AppBundle\Entity\Person;
-use AppBundle\Entity\PersonImage;
-use AppBundle\Entity\ProductVariantImage;
 use AppBundle\Entity\Topic;
 use AppBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @author Corentin Nicole <corentin@mobizel.com>
+ * @author Loïc Frémont <lc.fremont@gmail.com>
  */
 class TopicExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
