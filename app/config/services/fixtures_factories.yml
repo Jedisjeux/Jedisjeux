@@ -26,6 +26,13 @@ services:
           - "@app.factory.person"
           - "@app.factory.person_image"
 
+    app.fixture.example_factory.product:
+       class: AppBundle\Fixture\Factory\ProductExampleFactory
+       arguments:
+          - "@sylius.factory.product"
+          - "@app.factory.product_variant_image"
+          - "@sylius.generator.slug"
+
     app.fixture.example_factory.taxon:
        class: AppBundle\Fixture\Factory\TaxonExampleFactory
        arguments:

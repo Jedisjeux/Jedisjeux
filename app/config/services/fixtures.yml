@@ -31,6 +31,14 @@ services:
         tags:
             - { name: sylius_fixtures.fixture }
 
+    app.fixture.product:
+        class: AppBundle\Fixture\ProductFixture
+        arguments:
+            - "@sylius.manager.product"
+            - "@app.fixture.example_factory.product"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
     app.fixture.taxon:
         class: AppBundle\Fixture\TaxonFixture
         arguments:

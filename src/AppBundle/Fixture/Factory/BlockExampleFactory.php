@@ -101,7 +101,7 @@ class BlockExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $resolver
             ->setDefault('title', null)
             ->setDefault('body', function (Options $options) {
-                return "<p>" . implode("</p><p>", $this->faker->paragraphs()) . '</p>';;
+                return "<p>" . implode("</p><p>", $this->faker->paragraphs()) . '</p>';
             })
             ->setDefault('image', function (Options $options) {
                 return $this->faker->image();

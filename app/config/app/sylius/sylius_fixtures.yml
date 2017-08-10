@@ -31,14 +31,14 @@ sylius_fixtures:
                                 username: "Blue"
                                 password: "admin"
                                 enabled: true
-                                avatar: "app/Resources/fixtures/blue.jpg"
+                                avatar: "app/Resources/fixtures/avatars/blue.jpg"
                                 roles: ["ROLE_ADMIN"]
                             -
                                 email: "loic_425@example.com"
                                 username: "loic_425"
                                 password: "admin"
                                 enabled: true
-                                avatar: "app/Resources/fixtures/loic_425.jpg"
+                                avatar: "app/Resources/fixtures/avatars/loic_425.jpg"
                                 roles: ["ROLE_ADMIN"]
                 taxon:
                     options:
@@ -70,9 +70,9 @@ sylius_fixtures:
                                 last_name: "Knizia"
                                 website: "http://www.knizia.de"
                                 images:
-                                    - "app/Resources/fixtures/reiner-knizia.jpg"
-                                    - "app/Resources/fixtures/reiner-knizia-2.jpg"
-                                    - "app/Resources/fixtures/reiner-knizia-5.jpg"
+                                    - "app/Resources/fixtures/people/reiner-knizia.jpg"
+                                    - "app/Resources/fixtures/people/reiner-knizia-2.jpg"
+                                    - "app/Resources/fixtures/people/reiner-knizia-5.jpg"
                                 description: |
                                     Reiner Knizia est l'auteur le plus prolifique de jeux de société.
                                     Il sort chaque année de nombreux jeux dont beaucoup de rééditions avec souvent quelques changements de thèmes.
@@ -83,7 +83,7 @@ sylius_fixtures:
                                 first_name: "Wolfgang"
                                 last_name: "Kramer"
                                 images:
-                                    - "app/Resources/fixtures/wolfgang-kramer.jpg"
+                                    - "app/Resources/fixtures/people/wolfgang-kramer.jpg"
                 article:
                     options:
                         random: 50
@@ -109,3 +109,17 @@ sylius_fixtures:
                 topic:
                     options:
                         random: 20
+                product:
+                    options:
+                        random: 20
+                        custom:
+                            -
+                                name: "Puerto Rico"
+                                min_player_count: 2
+                                max_player_count: 5
+                                min_age: 12
+                                images:
+                                    - "app/Resources/fixtures/products/covers/puerto-rico.jpg"
+                                short_description: |
+                                    <p>Le gouverneur de l'île de Puerto Rico reste à choisir.</p>
+                                    <p>Celui des joueurs qui aura démontré les richesses de son quartier deviendra Gouverneur de Puerto Rico.</p>
