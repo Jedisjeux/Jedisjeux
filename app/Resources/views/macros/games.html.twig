@@ -35,7 +35,7 @@
         {% endif %}
 
         {{ product_variant.releasedAt|localizeddate(date_format, 'none', null, null, format) }}
-    {% elseif constant('AppBundle\\Entity\\ProductVariant::RELEASED_AT_PRECISION_ON_MONTH') == product_variant.releasedAtPrecision %}
+    {% elseif constant('AppBundle\\Entity\\ProductVariant::RELEASED_AT_PRECISION_ON_YEAR') == product_variant.releasedAtPrecision %}
         {{ product_variant.releasedAt|date('Y') }}
     {% endif %}
 
