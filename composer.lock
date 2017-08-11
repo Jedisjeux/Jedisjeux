@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "bb620c171c07f686ac431535ddb3a74f",
+    "content-hash": "18984704e39c608a9c286d1835cfcbb6",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2002,16 +2002,16 @@
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
-            "version": "1.6.1",
+            "version": "1.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSJsRoutingBundle.git",
-                "reference": "f91e6520c38e3b0d927149cd6df08646476b38a8"
+                "reference": "11424b43c3bcb020a60caa6d6f97acdd125c34ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/f91e6520c38e3b0d927149cd6df08646476b38a8",
-                "reference": "f91e6520c38e3b0d927149cd6df08646476b38a8",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/11424b43c3bcb020a60caa6d6f97acdd125c34ca",
+                "reference": "11424b43c3bcb020a60caa6d6f97acdd125c34ca",
                 "shasum": ""
             },
             "require": {
@@ -2057,7 +2057,7 @@
                 "javascript",
                 "routing"
             ],
-            "time": "2017-08-09T10:32:33+00:00"
+            "time": "2017-08-10T12:17:19+00:00"
         },
         {
             "name": "friendsofsymfony/rest-bundle",
