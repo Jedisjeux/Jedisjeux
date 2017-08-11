@@ -1,0 +1,64 @@
+services:
+    app.fixture.article:
+        class: AppBundle\Fixture\ArticleFixture
+        arguments:
+            - "@app.manager.article"
+            - "@app.fixture.example_factory.article"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
+    app.fixture.app_user:
+        class: AppBundle\Fixture\AppUserFixture
+        arguments:
+            - "@sylius.manager.shop_user"
+            - "@app.fixture.example_factory.app_user"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
+    app.fixture.block:
+        class: AppBundle\Fixture\BlockFixture
+        arguments:
+            - "@app.manager.block"
+            - "@app.fixture.example_factory.block"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
+    app.fixture.notification:
+        class: AppBundle\Fixture\NotificationFixture
+        arguments:
+            - "@app.manager.notification"
+            - "@app.fixture.example_factory.notification"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
+    app.fixture.person:
+        class: AppBundle\Fixture\PersonFixture
+        arguments:
+            - "@app.manager.person"
+            - "@app.fixture.example_factory.person"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
+    app.fixture.product:
+        class: AppBundle\Fixture\ProductFixture
+        arguments:
+            - "@sylius.manager.product"
+            - "@app.fixture.example_factory.product"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
+    app.fixture.taxon:
+        class: AppBundle\Fixture\TaxonFixture
+        arguments:
+            - "@sylius.manager.taxon"
+            - "@app.fixture.example_factory.taxon"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
+    app.fixture.topic:
+        class: AppBundle\Fixture\TopicFixture
+        arguments:
+            - "@app.manager.topic"
+            - "@app.fixture.example_factory.topic"
+        tags:
+            - { name: sylius_fixtures.fixture }

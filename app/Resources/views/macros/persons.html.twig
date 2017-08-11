@@ -3,8 +3,8 @@
 
     {% set imageSrc = asset('assets/frontend/img/product-placeholder.png'| imagine_filter(filter)) %}
 
-    {% if (person.mainImage) %}
-        {% set imageSrc = person.mainImage.webPath | imagine_filter(filter) %}
+    {% if (person.firstImage) %}
+        {% set imageSrc = person.firstImage.webPath | imagine_filter(filter) %}
     {% endif %}
 
     {{ imageSrc }}

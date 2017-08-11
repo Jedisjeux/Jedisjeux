@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5b214f8944bf3829b9b09a52593d68ea",
+    "content-hash": "bb620c171c07f686ac431535ddb3a74f",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2002,27 +2002,28 @@
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
-            "version": "1.6.0",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSJsRoutingBundle.git",
-                "reference": "2f52d924692647db02bbcb27c159fef03bf000c9"
+                "reference": "f91e6520c38e3b0d927149cd6df08646476b38a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/2f52d924692647db02bbcb27c159fef03bf000c9",
-                "reference": "2f52d924692647db02bbcb27c159fef03bf000c9",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/f91e6520c38e3b0d927149cd6df08646476b38a8",
+                "reference": "f91e6520c38e3b0d927149cd6df08646476b38a8",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2",
-                "symfony/console": "~2.0|3.*",
-                "symfony/framework-bundle": "~2.0|3.*",
-                "symfony/serializer": "~2.0|3.*",
+                "symfony/console": "~2.3|3.*",
+                "symfony/framework-bundle": "~2.3|3.*",
+                "symfony/serializer": "~2.3|3.*",
                 "willdurand/jsonp-callback-validator": "~1.0"
             },
             "require-dev": {
-                "symfony/expression-language": "~2.4|3.*"
+                "symfony/expression-language": "~2.4|3.*",
+                "symfony/phpunit-bridge": "^3.3"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -2056,7 +2057,7 @@
                 "javascript",
                 "routing"
             ],
-            "time": "2015-10-28T15:08:39+00:00"
+            "time": "2017-08-09T10:32:33+00:00"
         },
         {
             "name": "friendsofsymfony/rest-bundle",
@@ -2346,16 +2347,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.17",
+            "version": "v0.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/google/google-api-php-client-services.git",
-                "reference": "04d29c4b679249bd0ed62e5891203478072c8a09"
+                "reference": "018f3288dc686345bd6d82deea81b6f56171bfc0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/google/google-api-php-client-services/zipball/04d29c4b679249bd0ed62e5891203478072c8a09",
-                "reference": "04d29c4b679249bd0ed62e5891203478072c8a09",
+                "url": "https://api.github.com/repos/google/google-api-php-client-services/zipball/018f3288dc686345bd6d82deea81b6f56171bfc0",
+                "reference": "018f3288dc686345bd6d82deea81b6f56171bfc0",
                 "shasum": ""
             },
             "require": {
@@ -2379,7 +2380,7 @@
             "keywords": [
                 "google"
             ],
-            "time": "2017-07-30T00:20:54+00:00"
+            "time": "2017-08-06T00:19:44+00:00"
         },
         {
             "name": "google/auth",
@@ -5118,16 +5119,16 @@
         },
         {
             "name": "sensiolabs/security-checker",
-            "version": "v4.1.1",
+            "version": "v4.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/security-checker.git",
-                "reference": "cf61ce9d9706ba35e60a894fe6f3584c6d0e5c9f"
+                "reference": "7d60f01b9a56dfd152796877d009b1a0578d6ef4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/cf61ce9d9706ba35e60a894fe6f3584c6d0e5c9f",
-                "reference": "cf61ce9d9706ba35e60a894fe6f3584c6d0e5c9f",
+                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/7d60f01b9a56dfd152796877d009b1a0578d6ef4",
+                "reference": "7d60f01b9a56dfd152796877d009b1a0578d6ef4",
                 "shasum": ""
             },
             "require": {
@@ -5159,7 +5160,7 @@
                 }
             ],
             "description": "A security checker for your composer.lock",
-            "time": "2017-07-28T18:31:05+00:00"
+            "time": "2017-08-03T12:24:05+00:00"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -5910,6 +5911,86 @@
                 "groups"
             ],
             "time": "2017-07-20T04:06:10+00:00"
+        },
+        {
+            "name": "sylius/fixtures-bundle",
+            "version": "v1.0.0-beta.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sylius/SyliusFixturesBundle.git",
+                "reference": "2ff3febb116179b24eb9cfb89483d0123ec76bb5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Sylius/SyliusFixturesBundle/zipball/2ff3febb116179b24eb9cfb89483d0123ec76bb5",
+                "reference": "2ff3febb116179b24eb9cfb89483d0123ec76bb5",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/data-fixtures": "^1.2",
+                "monolog/monolog": "^1.8",
+                "php": "^5.6|^7.0",
+                "symfony/framework-bundle": "^3.2",
+                "symfony/monolog-bridge": "^3.2",
+                "webmozart/assert": "^1.0",
+                "zendframework/zend-stdlib": "^3.0"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "~1.3",
+                "doctrine/orm": "^2.5",
+                "incenteev/composer-parameter-handler": "~2.0",
+                "matthiasnoback/symfony-config-test": "^2.0",
+                "matthiasnoback/symfony-dependency-injection-test": "^1.0",
+                "phpspec/phpspec": "^3.2",
+                "phpunit/phpunit": "^5.6",
+                "polishsymfonycommunity/symfony-mocker-container": "^1.0",
+                "symfony/browser-kit": "^3.2",
+                "symfony/security-csrf": "^3.2",
+                "symfony/templating": "^3.2",
+                "symfony/translation": "^3.2",
+                "symfony/twig-bundle": "^3.2",
+                "twig/twig": "^1.28"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                },
+                "incenteev-parameters": {
+                    "file": "test/app/config/parameters.yml"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sylius\\Bundle\\FixturesBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sylius project",
+                    "homepage": "http://sylius.org"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "http://github.com/Sylius/Sylius/contributors"
+                },
+                {
+                    "name": "Kamil Kokot",
+                    "homepage": "http://kamil.kokot.me"
+                }
+            ],
+            "description": "Configurable fixtures for Symfony2 applications.",
+            "homepage": "http://sylius.org",
+            "keywords": [
+                "fixtures",
+                "sylius",
+                "symfony"
+            ],
+            "time": "2017-05-18T13:38:27+00:00"
         },
         {
             "name": "sylius/grid",
@@ -8708,7 +8789,7 @@
             ],
             "authors": [
                 {
-                    "name": "William Durand",
+                    "name": "William DURAND",
                     "email": "william.durand1@gmail.com"
                 }
             ],
@@ -10053,6 +10134,103 @@
             "time": "2016-01-20T18:29:02+00:00"
         },
         {
+            "name": "friends-of-behat/context-service-extension",
+            "version": "v0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfBehat/ContextServiceExtension.git",
+                "reference": "c63bfeb6a5c4b1cf2b88914d7a06a3a95dc9650e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfBehat/ContextServiceExtension/zipball/c63bfeb6a5c4b1cf2b88914d7a06a3a95dc9650e",
+                "reference": "c63bfeb6a5c4b1cf2b88914d7a06a3a95dc9650e",
+                "shasum": ""
+            },
+            "require": {
+                "behat/behat": "^3.1",
+                "php": "^5.6|^7.0",
+                "symfony/dependency-injection": "^2.8|^3.0"
+            },
+            "require-dev": {
+                "friends-of-behat/cross-container-extension": "^0.1.3",
+                "friends-of-behat/test-context": "^0.3",
+                "phpspec/phpspec": "^3.1"
+            },
+            "suggest": {
+                "friends-of-behat/cross-container-extension": "^0.1",
+                "ocramius/proxy-manager": "^1.0|^2.0",
+                "symfony/proxy-manager-bridge": "^2.8|^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "FriendsOfBehat\\ContextServiceExtension\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kamil Kokot",
+                    "email": "kamil@kokot.me",
+                    "homepage": "http://kamil.kokot.me"
+                }
+            ],
+            "description": "Allows to declare and use contexts services in scenario scoped container.",
+            "time": "2016-11-03T15:23:17+00:00"
+        },
+        {
+            "name": "friends-of-behat/cross-container-extension",
+            "version": "v0.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfBehat/CrossContainerExtension.git",
+                "reference": "d40f5c722efe9d94c531b8ac207f13f5937fbcf2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfBehat/CrossContainerExtension/zipball/d40f5c722efe9d94c531b8ac207f13f5937fbcf2",
+                "reference": "d40f5c722efe9d94c531b8ac207f13f5937fbcf2",
+                "shasum": ""
+            },
+            "require": {
+                "behat/behat": "^3.1",
+                "php": "^5.6|^7.0",
+                "symfony/dependency-injection": "^2.8|^3.0"
+            },
+            "require-dev": {
+                "friends-of-behat/test-context": "^0.3",
+                "phpspec/phpspec": "^3.1",
+                "phpunit/phpunit": "^5.6",
+                "symfony/http-kernel": "^2.8|^3.0"
+            },
+            "suggest": {
+                "symfony/http-kernel": "^2.8|^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "FriendsOfBehat\\CrossContainerExtension\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kamil Kokot",
+                    "email": "kamil@kokot.me",
+                    "homepage": "http://kamil.kokot.me"
+                }
+            ],
+            "description": "Makes possible to inject services and parameters from other containers.",
+            "time": "2017-02-16T20:49:33+00:00"
+        },
+        {
             "name": "friends-of-behat/performance-extension",
             "version": "v1.0.2",
             "source": {
@@ -10092,6 +10270,144 @@
             ],
             "description": "Accelerates Behat using features available only for newer PHP versions.",
             "time": "2017-07-10T20:23:25+00:00"
+        },
+        {
+            "name": "friends-of-behat/service-container-extension",
+            "version": "v0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfBehat/ServiceContainerExtension.git",
+                "reference": "203d0f30a3d17d47e7bb1a6842c8266911f30e45"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfBehat/ServiceContainerExtension/zipball/203d0f30a3d17d47e7bb1a6842c8266911f30e45",
+                "reference": "203d0f30a3d17d47e7bb1a6842c8266911f30e45",
+                "shasum": ""
+            },
+            "require": {
+                "behat/behat": "^3.1",
+                "php": "^5.6|^7.0"
+            },
+            "require-dev": {
+                "friends-of-behat/cross-container-extension": "^0.1",
+                "friends-of-behat/test-context": "^0.3",
+                "symfony/process": "^2.7|^3.0"
+            },
+            "suggest": {
+                "friends-of-behat/cross-container-extension": "^0.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "FriendsOfBehat\\ServiceContainerExtension\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kamil Kokot",
+                    "email": "kamil@kokot.me",
+                    "homepage": "http://kamil.kokot.me"
+                }
+            ],
+            "description": "Allows to declare own services inside Behat container without writing an extension.",
+            "time": "2016-11-03T09:47:50+00:00"
+        },
+        {
+            "name": "friends-of-behat/symfony-extension",
+            "version": "v0.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfBehat/SymfonyExtension.git",
+                "reference": "293d02deb525015b13eeedc7c76982f0a87eb4a1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfBehat/SymfonyExtension/zipball/293d02deb525015b13eeedc7c76982f0a87eb4a1",
+                "reference": "293d02deb525015b13eeedc7c76982f0a87eb4a1",
+                "shasum": ""
+            },
+            "require": {
+                "behat/behat": "^3.1",
+                "php": "^5.6|^7.0",
+                "symfony/http-kernel": "^2.7|^3.0"
+            },
+            "require-dev": {
+                "behat/mink": "^1.7",
+                "behat/mink-browserkit-driver": "^1.3",
+                "behat/mink-extension": "^2.2",
+                "friends-of-behat/cross-container-extension": "^0.1",
+                "friends-of-behat/test-context": "^0.3",
+                "symfony/framework-bundle": "^2.7|^3.0"
+            },
+            "suggest": {
+                "behat/mink-browserkit-driver": "^1.3",
+                "friends-of-behat/cross-container-extension": "^0.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "FriendsOfBehat\\SymfonyExtension\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kamil Kokot",
+                    "email": "kamil@kokot.me",
+                    "homepage": "http://kamil.kokot.me"
+                }
+            ],
+            "description": "Integrates Behat with Symfony (both 2 and 3).",
+            "time": "2016-11-03T13:38:02+00:00"
+        },
+        {
+            "name": "friends-of-behat/variadic-extension",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfBehat/VariadicExtension.git",
+                "reference": "d85fcc04318938f5af8799c73b16c9ec3fc8d40e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfBehat/VariadicExtension/zipball/d85fcc04318938f5af8799c73b16c9ec3fc8d40e",
+                "reference": "d85fcc04318938f5af8799c73b16c9ec3fc8d40e",
+                "shasum": ""
+            },
+            "require": {
+                "behat/behat": "^3.1",
+                "php": "^5.6|^7.0",
+                "symfony/dependency-injection": "~2.5||~3.0"
+            },
+            "require-dev": {
+                "friends-of-behat/test-context": "^0.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "FriendsOfBehat\\VariadicExtension\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Łukasz Chruściel",
+                    "email": "lchrusciel@gmail.com"
+                }
+            ],
+            "description": "Variadic support for behat context arguments",
+            "time": "2016-08-25T22:34:32+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -10602,22 +10918,22 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "3.2.0",
+            "version": "3.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "46f7e8bb075036c92695b15a1ddb6971c751e585"
+                "reference": "4aada1f93c72c35e22fb1383b47fee43b8f1d157"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/46f7e8bb075036c92695b15a1ddb6971c751e585",
-                "reference": "46f7e8bb075036c92695b15a1ddb6971c751e585",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/4aada1f93c72c35e22fb1383b47fee43b8f1d157",
+                "reference": "4aada1f93c72c35e22fb1383b47fee43b8f1d157",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.5",
                 "phpdocumentor/reflection-common": "^1.0@dev",
-                "phpdocumentor/type-resolver": "^0.4.0",
+                "phpdocumentor/type-resolver": "^0.3.0",
                 "webmozart/assert": "^1.0"
             },
             "require-dev": {
@@ -10643,20 +10959,20 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "time": "2017-07-15T11:38:20+00:00"
+            "time": "2017-08-08T06:39:58+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",
-            "version": "0.4.0",
+            "version": "0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "9c977708995954784726e25d0cd1dddf4e65b0f7"
+                "reference": "fb3933512008d8162b3cdf9e18dba9309b7c3773"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/9c977708995954784726e25d0cd1dddf4e65b0f7",
-                "reference": "9c977708995954784726e25d0cd1dddf4e65b0f7",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/fb3933512008d8162b3cdf9e18dba9309b7c3773",
+                "reference": "fb3933512008d8162b3cdf9e18dba9309b7c3773",
                 "shasum": ""
             },
             "require": {
@@ -10690,7 +11006,7 @@
                     "email": "me@mikevanriel.com"
                 }
             ],
-            "time": "2017-07-14T14:27:02+00:00"
+            "time": "2017-06-03T08:32:36+00:00"
         },
         {
             "name": "phpspec/php-diff",
@@ -10732,16 +11048,16 @@
         },
         {
             "name": "phpspec/phpspec",
-            "version": "3.4.1",
+            "version": "3.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "36fd7822e2b3120047dd307bd50486af3c4bef5d"
+                "reference": "4f42719d8d7a26063b9aa79a0f83ed56c79618f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/36fd7822e2b3120047dd307bd50486af3c4bef5d",
-                "reference": "36fd7822e2b3120047dd307bd50486af3c4bef5d",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/4f42719d8d7a26063b9aa79a0f83ed56c79618f4",
+                "reference": "4f42719d8d7a26063b9aa79a0f83ed56c79618f4",
                 "shasum": ""
             },
             "require": {
@@ -10810,7 +11126,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2017-07-29T17:21:48+00:00"
+            "time": "2017-08-05T20:07:26+00:00"
         },
         {
             "name": "phpspec/prophecy",
@@ -11077,29 +11393,29 @@
         },
         {
             "name": "phpunit/php-token-stream",
-            "version": "1.4.11",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-token-stream.git",
-                "reference": "e03f8f67534427a787e21a385a67ec3ca6978ea7"
+                "reference": "ecb0b2cdaa0add708fe6f329ef65ae0c5225130b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/e03f8f67534427a787e21a385a67ec3ca6978ea7",
-                "reference": "e03f8f67534427a787e21a385a67ec3ca6978ea7",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/ecb0b2cdaa0add708fe6f329ef65ae0c5225130b",
+                "reference": "ecb0b2cdaa0add708fe6f329ef65ae0c5225130b",
                 "shasum": ""
             },
             "require": {
                 "ext-tokenizer": "*",
-                "php": ">=5.3.3"
+                "php": "^7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.2"
+                "phpunit/phpunit": "^6.2.4"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.4-dev"
+                    "dev-master": "2.0-dev"
                 }
             },
             "autoload": {
@@ -11122,7 +11438,7 @@
             "keywords": [
                 "tokenizer"
             ],
-            "time": "2017-02-27T10:12:30+00:00"
+            "time": "2017-08-03T14:17:41+00:00"
         },
         {
             "name": "phpunit/phpunit",
