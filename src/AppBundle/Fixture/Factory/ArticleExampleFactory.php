@@ -92,7 +92,7 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
         $article = $this->articleFactory->createNew();
         $article->setTitle($options['title']);
         // TODO use normalizer
-        $article->setPublishStartDate(($options['publish_start_date']) instanceof \DateTime ? $options['publish_start_date'] : new \DateTime($options['publish_start_date']));
+        $article->setPublishStartDate($options['publish_start_date']);
         $article->setStatus($options['status']);
         $article->setAuthor($options['author']);
 
@@ -143,6 +143,13 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
             })
             ->setDefault('publish_start_date', function (Options $options) {
                 return $this->faker->dateTimeBetween('2 months ago', 'yesterday');
+            })
+            ->setNormalizer('publish_start_date', function (Options $options, $createdAt) {
+                if (!is_string($createdAt)) {
+                    return $createdAt;
+                }
+
+                return new \DateTime($createdAt);
             })
             ->setDefault('status', function (Options $options) {
                 return $this->faker->randomElement([

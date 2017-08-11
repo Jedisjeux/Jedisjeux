@@ -37,7 +37,12 @@ class ProductFixture extends AbstractResourceFixture
                 ->scalarNode('short_description')->cannotBeEmpty()->end()
                 ->scalarNode('min_player_count')->cannotBeEmpty()->end()
                 ->scalarNode('max_player_count')->cannotBeEmpty()->end()
+                ->scalarNode('min_duration')->cannotBeEmpty()->end()
+                ->scalarNode('max_duration')->cannotBeEmpty()->end()
                 ->scalarNode('min_age')->cannotBeEmpty()->end()
+                ->scalarNode('released_at')->cannotBeEmpty()->end()
+                ->scalarNode('released_at_precision')->cannotBeEmpty()->end()
+                ->scalarNode('created_at')->cannotBeEmpty()->end()
                 ->arrayNode('images')->prototype('scalar')->end()->end()
         ;
     }

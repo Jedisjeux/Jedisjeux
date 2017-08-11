@@ -12,6 +12,7 @@
 namespace AppBundle\Fixture\Factory;
 
 use AppBundle\Entity\Product;
+use AppBundle\Entity\ProductVariant;
 use AppBundle\Entity\ProductVariantImage;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
@@ -83,11 +84,18 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         $product->setSlug($this->slugGenerator->generate($options['name']));
         $product->setJoueurMin($options['min_player_count']);
         $product->setJoueurMax($options['max_player_count']);
+        $product->setDurationMin($options['min_duration']);
+        $product->setDurationMax($options['max_duration']);
         $product->setAgeMin($options['min_age']);
         $product->setShortDescription($options['short_description']);
         $product->setDescription($options['description']);
         $product->setMateriel($options['material']);
         $product->setStatus(Product::PUBLISHED);
+        $product->setReleasedAt($options['released_at']);
+        $product->setCreatedAt($options['created_at']);
+
+        $firstVariant = $product->getFirstVariant();
+        $firstVariant->setReleasedAtPrecision($options['released_at_precision']);
 
         $this->createImages($product, $options);
 
@@ -137,6 +145,12 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setDefault('min_age', function (Options $options) {
                 return $this->faker->numberBetween(3, 12);
             })
+            ->setDefault('min_duration', function (Options $options) {
+                return $this->faker->randomElement([30, 45, 60, 90, 180]);
+            })
+            ->setDefault('max_duration', function (Options $options) {
+                return $this->faker->randomElement([30, 45, 60, 90, 180]);
+            })
             ->setDefault('short_description', function (Options $options) {
                 return "<p>" . implode("</p><p>", $this->faker->paragraphs(2)) . '</p>';
             })
@@ -157,6 +171,36 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             })
             ->setDefault('images', function (Options $options) {
                 return [$this->faker->image()];
-            });
+            })
+            ->setDefault('released_at', function (Options $options) {
+                return $this->faker->dateTimeBetween('-1 year', 'yesterday');
+            })
+            ->setAllowedTypes('released_at', ['null', 'string', \DateTimeInterface::class])
+            ->setNormalizer('released_at', function (Options $options, $releasedAt) {
+                if (!is_string($releasedAt)) {
+                    return $releasedAt;
+                }
+
+                return new \DateTime($releasedAt);
+            })
+            ->setDefault('released_at_precision', function (Options $options) {
+                return $this->faker->randomElement([
+                    ProductVariant::RELEASED_AT_PRECISION_ON_DAY,
+                    ProductVariant::RELEASED_AT_PRECISION_ON_MONTH,
+                    ProductVariant::RELEASED_AT_PRECISION_ON_YEAR,
+                ]);
+            })
+            ->setDefault('created_at', function (Options $options) {
+                return $this->faker->dateTimeBetween('-1 year', 'yesterday');
+            } )
+            ->setAllowedTypes('created_at', ['null', 'string', \DateTimeInterface::class])
+            ->setNormalizer('created_at', function (Options $options, $createdAt) {
+                if (!is_string($createdAt)) {
+                    return $createdAt;
+                }
+
+                return new \DateTime($createdAt);
+            })
+        ;
     }
 }
