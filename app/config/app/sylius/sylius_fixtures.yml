@@ -119,14 +119,6 @@ sylius_fixtures:
                                 image: "app/Resources/fixtures/jedisjeux-nouveau.png"
                                 image_position: "top"
 
-                topic:
-                    options:
-                        random: 20
-
-                post:
-                    options:
-                        random: 50
-
                 product:
                     options:
                         random: 20
@@ -194,6 +186,14 @@ sylius_fixtures:
                 game_play:
                     options:
                         random: 40
+
+                topic:
+                    options:
+                        random: 20
+
+                post:
+                    options:
+                        random: 50
 
                 notification:
                     options:

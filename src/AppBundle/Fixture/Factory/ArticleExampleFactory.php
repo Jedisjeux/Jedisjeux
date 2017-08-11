@@ -117,7 +117,7 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
     {
         $resolver
             ->setDefault('title', function (Options $options) {
-                return $this->faker->words(3, true);
+                return ucfirst($this->faker->words(3, true));
             })
 
             ->setDefault('code', function (Options $options) {
