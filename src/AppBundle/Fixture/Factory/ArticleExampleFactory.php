@@ -15,6 +15,7 @@ use AppBundle\Entity\Article;
 use AppBundle\Entity\ArticleImage;
 use AppBundle\Entity\Block;
 use AppBundle\Fixture\OptionsResolver\LazyOption;
+use AppBundle\Formatter\StringInflector;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -38,11 +39,6 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
     private $articleImageFactory;
 
     /**
-     * @var ExampleFactoryInterface
-     */
-    private $articleFixtureFactory;
-
-    /**
      * @var RepositoryInterface
      */
     private $customerRepository;
@@ -60,19 +56,16 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
     /**
      * @param FactoryInterface $articleFactory
      * @param FactoryInterface $articleImageFactory
-     * @param ExampleFactoryInterface $articleFixtureFactory
      * @param RepositoryInterface $customerRepository
      */
     public function __construct(
         FactoryInterface $articleFactory,
         FactoryInterface $articleImageFactory,
-        ExampleFactoryInterface $articleFixtureFactory,
         RepositoryInterface $customerRepository
     )
     {
         $this->articleFactory = $articleFactory;
         $this->articleImageFactory = $articleImageFactory;
-        $this->articleFixtureFactory = $articleFixtureFactory;
         $this->customerRepository = $customerRepository;
 
         $this->faker = \Faker\Factory::create('fr_FR');
@@ -90,14 +83,13 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
 
         /** @var Article $article */
         $article = $this->articleFactory->createNew();
+        $article->setCode($options['code']);
         $article->setTitle($options['title']);
-        // TODO use normalizer
         $article->setPublishStartDate($options['publish_start_date']);
         $article->setStatus($options['status']);
         $article->setAuthor($options['author']);
 
         $this->createImage($article, $options);
-        $this->createBlocks($article, $options);
 
         return $article;
     }
@@ -119,20 +111,6 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
     }
 
     /**
-     * @param Article $article
-     * @param array $options
-     */
-    protected function createBlocks(Article $article, array $options)
-    {
-        foreach ($options['blocks'] as $blockOptions) {
-            /** @var Block $block */
-            $block = $this->articleFixtureFactory->create($blockOptions);
-
-            $article->addBlock($block);
-        }
-    }
-
-    /**
      * {@inheritdoc}
      */
     protected function configureOptions(OptionsResolver $resolver)
@@ -141,6 +119,11 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setDefault('title', function (Options $options) {
                 return $this->faker->words(3, true);
             })
+
+            ->setDefault('code', function (Options $options) {
+                return StringInflector::nameToCode($options['title']);
+            })
+
             ->setDefault('publish_start_date', function (Options $options) {
                 return $this->faker->dateTimeBetween('2 months ago', 'yesterday');
             })
@@ -151,6 +134,7 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
 
                 return new \DateTime($createdAt);
             })
+
             ->setDefault('status', function (Options $options) {
                 return $this->faker->randomElement([
                     Article::STATUS_NEW,
@@ -158,13 +142,13 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
                     Article::STATUS_PENDING_PUBLICATION,
                     Article::STATUS_PUBLISHED]);
             })
+
             ->setDefault('main_image', function (Options $options) {
                 return $this->faker->image();
             })
+
             ->setDefault('author', LazyOption::randomOne($this->customerRepository))
             ->setAllowedTypes('author', ['null', 'string', CustomerInterface::class])
-            ->setNormalizer('author', LazyOption::findOneBy($this->customerRepository, 'email'))
-            ->setDefault('blocks', [])
-            ->setAllowedTypes('blocks', 'array');
+            ->setNormalizer('author', LazyOption::findOneBy($this->customerRepository, 'email'));
     }
 }

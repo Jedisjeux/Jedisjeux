@@ -33,9 +33,11 @@ class BlockFixture extends AbstractResourceFixture
     {
         $resourceNode
             ->children()
+                ->scalarNode('article')->cannotBeEmpty()->end()
                 ->scalarNode('title')->cannotBeEmpty()->end()
                 ->scalarNode('body')->cannotBeEmpty()->end()
                 ->scalarNode('image')->cannotBeEmpty()->end()
+                ->scalarNode('image_position')->cannotBeEmpty()->end()
         ;
     }
 }

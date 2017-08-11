@@ -4,7 +4,6 @@ services:
         arguments:
             - "@app.factory.article"
             - "@app.factory.article_image"
-            - "@app.fixture.example_factory.block"
             - "@sylius.repository.customer"
 
     app.fixture.example_factory.app_user:
@@ -19,6 +18,7 @@ services:
         arguments:
             - "@app.factory.block"
             - "@app.factory.block_image"
+            - "@app.repository.article"
 
     app.fixture.example_factory.game_play:
         class: AppBundle\Fixture\Factory\GamePlayExampleFactory
