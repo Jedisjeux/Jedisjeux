@@ -84,6 +84,12 @@ sylius_fixtures:
                                 last_name: "Kramer"
                                 images:
                                     - "app/Resources/fixtures/people/wolfgang-kramer.jpg"
+                            -
+                                first_name: null
+                                last_name: "Hans im Glück"
+                            -
+                                first_name: "Doris"
+                                last_name: "Matthäus"
                 article:
                     options:
                         random: 50
@@ -133,6 +139,12 @@ sylius_fixtures:
                                 min_age: 12
                                 min_duration: 90
                                 max_duration: 90
+                                designers:
+                                    - "reiner-knizia"
+                                artists:
+                                    - "doris-matthaus"
+                                publishers:
+                                    - "hans-im-gluck"
                                 images:
                                     - "app/Resources/fixtures/products/covers/tigre-euphrate.jpg"
                                 short_description: |

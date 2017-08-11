@@ -33,7 +33,7 @@ class PersonFixture extends AbstractResourceFixture
     {
         $resourceNode
             ->children()
-                ->scalarNode('first_name')->cannotBeEmpty()->end()
+                ->scalarNode('first_name')->end()
                 ->scalarNode('last_name')->cannotBeEmpty()->end()
                 ->scalarNode('website')->cannotBeEmpty()->end()
                 ->scalarNode('description')->cannotBeEmpty()->end()

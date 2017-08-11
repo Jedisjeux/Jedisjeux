@@ -14,9 +14,11 @@ namespace AppBundle\Fixture\Factory;
 use AppBundle\Entity\Product;
 use AppBundle\Entity\ProductVariant;
 use AppBundle\Entity\ProductVariantImage;
+use AppBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -36,6 +38,11 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     private $productVariantImageFactory;
 
     /**
+     * @var RepositoryInterface
+     */
+    protected $personRepository;
+
+    /**
      * @var SlugGeneratorInterface
      */
     private $slugGenerator;
@@ -53,16 +60,19 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     /**
      * @param ProductFactoryInterface $productFactory
      * @param FactoryInterface $productVariantImageFactory
+     * @param RepositoryInterface $personRepository
      * @param SlugGeneratorInterface $slugGenerator
      */
     public function __construct(
         ProductFactoryInterface $productFactory,
         FactoryInterface $productVariantImageFactory,
+        RepositoryInterface $personRepository,
         SlugGeneratorInterface $slugGenerator
     )
     {
         $this->productFactory = $productFactory;
         $this->productVariantImageFactory = $productVariantImageFactory;
+        $this->personRepository = $personRepository;
         $this->slugGenerator = $slugGenerator;
 
         $this->faker = \Faker\Factory::create('fr_FR');
@@ -96,6 +106,18 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
 
         $firstVariant = $product->getFirstVariant();
         $firstVariant->setReleasedAtPrecision($options['released_at_precision']);
+
+        foreach ($options['designers'] as $designer) {
+            $firstVariant->addDesigner($designer);
+        }
+
+        foreach ($options['artists'] as $artist) {
+            $firstVariant->addArtist($artist);
+        }
+
+        foreach ($options['publishers'] as $publisher) {
+            $firstVariant->addPublisher($publisher);
+        }
 
         $this->createImages($product, $options);
 
@@ -136,27 +158,35 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setDefault('name', function (Options $options) {
                 return ucfirst($this->faker->words(3, true));
             })
+
             ->setDefault('min_player_count', function (Options $options) {
                 return $this->faker->numberBetween(2, 3);
             })
+
             ->setDefault('max_player_count', function (Options $options) {
                 return $this->faker->numberBetween(4, 8);
             })
+
             ->setDefault('min_age', function (Options $options) {
                 return $this->faker->numberBetween(3, 12);
             })
+
             ->setDefault('min_duration', function (Options $options) {
                 return $this->faker->randomElement([30, 45, 60, 90, 180]);
             })
+
             ->setDefault('max_duration', function (Options $options) {
                 return $this->faker->randomElement([30, 45, 60, 90, 180]);
             })
+
             ->setDefault('short_description', function (Options $options) {
                 return "<p>" . implode("</p><p>", $this->faker->paragraphs(2)) . '</p>';
             })
+
             ->setDefault('description', function (Options $options) {
                 return "<p>" . implode("</p><p>", $this->faker->paragraphs(5)) . '</p>';
             })
+
             ->setDefault('material', function (Options $options) {
 
                 $itemCount = $this->faker->numberBetween(5, 10);
@@ -172,6 +202,19 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setDefault('images', function (Options $options) {
                 return [$this->faker->image()];
             })
+
+            ->setDefault('designers', LazyOption::randomOnes($this->personRepository, 2))
+            ->setAllowedTypes('designers', 'array')
+            ->setNormalizer('designers', LazyOption::findBy($this->personRepository, 'slug'))
+
+            ->setDefault('artists', LazyOption::randomOnes($this->personRepository, 2))
+            ->setAllowedTypes('artists', 'array')
+            ->setNormalizer('artists', LazyOption::findBy($this->personRepository, 'slug'))
+
+            ->setDefault('publishers', LazyOption::randomOnes($this->personRepository, 2))
+            ->setAllowedTypes('publishers', 'array')
+            ->setNormalizer('publishers', LazyOption::findBy($this->personRepository, 'slug'))
+
             ->setDefault('released_at', function (Options $options) {
                 return $this->faker->dateTimeBetween('-1 year', 'yesterday');
             })
@@ -183,6 +226,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
 
                 return new \DateTime($releasedAt);
             })
+
             ->setDefault('released_at_precision', function (Options $options) {
                 return $this->faker->randomElement([
                     ProductVariant::RELEASED_AT_PRECISION_ON_DAY,
@@ -190,6 +234,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
                     ProductVariant::RELEASED_AT_PRECISION_ON_YEAR,
                 ]);
             })
+
             ->setDefault('created_at', function (Options $options) {
                 return $this->faker->dateTimeBetween('-1 year', 'yesterday');
             } )

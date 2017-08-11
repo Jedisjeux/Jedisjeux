@@ -44,6 +44,9 @@ class ProductFixture extends AbstractResourceFixture
                 ->scalarNode('released_at_precision')->cannotBeEmpty()->end()
                 ->scalarNode('created_at')->cannotBeEmpty()->end()
                 ->arrayNode('images')->prototype('scalar')->end()->end()
+                ->arrayNode('designers')->prototype('scalar')->end()->end()
+                ->arrayNode('artists')->prototype('scalar')->end()->end()
+                ->arrayNode('publishers')->prototype('scalar')->end()->end()
         ;
     }
 }
