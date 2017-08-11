@@ -39,6 +39,13 @@ services:
             - "@app.factory.person"
             - "@app.factory.person_image"
 
+    app.fixture.example_factory.post:
+        class: AppBundle\Fixture\Factory\PostExampleFactory
+        arguments:
+            - "@app.factory.post"
+            - "@app.repository.topic"
+            - "@sylius.repository.customer"
+
     app.fixture.example_factory.product:
         class: AppBundle\Fixture\Factory\ProductExampleFactory
         arguments:

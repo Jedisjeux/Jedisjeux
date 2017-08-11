@@ -47,6 +47,14 @@ services:
         tags:
             - { name: sylius_fixtures.fixture }
 
+    app.fixture.post:
+        class: AppBundle\Fixture\PostFixture
+        arguments:
+            - "@app.manager.post"
+            - "@app.fixture.example_factory.post"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
     app.fixture.product:
         class: AppBundle\Fixture\ProductFixture
         arguments:

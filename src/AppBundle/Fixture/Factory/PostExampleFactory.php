@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the Sylius package.
+ * This file is part of Jedisjeux.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Loïc Frémont
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,9 +11,9 @@
 
 namespace AppBundle\Fixture\Factory;
 
+use AppBundle\Entity\Post;
 use AppBundle\Entity\Topic;
 use AppBundle\Fixture\OptionsResolver\LazyOption;
-use AppBundle\Formatter\StringInflector;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -21,14 +21,19 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @author Loïc Frémont <lc.fremont@gmail.com>
+ * @author Loïc Frémont <loic@mobizel.com>
  */
-class TopicExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
+class PostExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
      * @var FactoryInterface
      */
-    private $topicFactory;
+    private $postFactory;
+
+    /**
+     * @var RepositoryInterface
+     */
+    private $topicRepository;
 
     /**
      * @var RepositoryInterface
@@ -46,15 +51,20 @@ class TopicExampleFactory extends AbstractExampleFactory implements ExampleFacto
     private $optionsResolver;
 
     /**
-     * @param FactoryInterface $personFactory
+     * PostExampleFactory constructor.
+     *
+     * @param FactoryInterface $postFactory
+     * @param RepositoryInterface $topicRepository
      * @param RepositoryInterface $customerRepository
      */
     public function __construct(
-        FactoryInterface $personFactory,
+        FactoryInterface $postFactory,
+        RepositoryInterface $topicRepository,
         RepositoryInterface $customerRepository
     )
     {
-        $this->topicFactory = $personFactory;
+        $this->postFactory = $postFactory;
+        $this->topicRepository = $topicRepository;
         $this->customerRepository = $customerRepository;
 
         $this->faker = \Faker\Factory::create('fr_FR');
@@ -70,20 +80,13 @@ class TopicExampleFactory extends AbstractExampleFactory implements ExampleFacto
     {
         $options = $this->optionsResolver->resolve($options);
 
-        /** @var Topic $topic */
-        $topic = $this->topicFactory->createNew();
-        $topic->setCode($options['code']);
-        $topic->setTitle($options['title']);
-        $topic->setAuthor($options['author']);
-        $topic->setCreatedAt($options['created_at']);;
-        $topic->getMainPost()
-            ->setBody($options['body'])
-            ->setAuthor($topic->getAuthor())
-            ->setCreatedAt($topic->getCreatedAt());
-        $topic->setLastPostCreatedAt($topic->getCreatedAt());
-        $topic->setLastPost($topic->getMainPost());
+        /** @var Post $post */
+        $post = $this->postFactory->createNew();
+        $post->setBody($options['body']);
+        $post->setTopic($options['topic']);
+        $post->setAuthor($options['author']);
 
-        return $topic;
+        return $post;
     }
 
     /**
@@ -92,24 +95,16 @@ class TopicExampleFactory extends AbstractExampleFactory implements ExampleFacto
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefault('title', function (Options $options) {
-                return ucfirst($this->faker->words(3, true));
-            })
-
-            ->setDefault('code', function (Options $options) {
-                return StringInflector::nameToCode($options['title']);
-            })
-
             ->setDefault('body', function (Options $options) {
                 return "<p>" . implode("</p><p>", $this->faker->paragraphs(5)) . '</p>';
             })
 
+            ->setDefault('topic', LazyOption::randomOne($this->topicRepository))
+            ->setAllowedTypes('topic', ['null', 'string', Topic::class])
+            ->setNormalizer('topic', LazyOption::findOneBy($this->topicRepository, 'code'))
+
             ->setDefault('author', LazyOption::randomOne($this->customerRepository))
             ->setAllowedTypes('author', ['null', 'string', CustomerInterface::class])
-            ->setNormalizer('author', LazyOption::findOneBy($this->customerRepository, 'email'))
-
-            ->setDefault('created_at', function (Options $options) {
-                return $this->faker->dateTimeBetween('2 months ago', 'today');
-            });
+            ->setNormalizer('author', LazyOption::findOneBy($this->customerRepository, 'email'));
     }
 }

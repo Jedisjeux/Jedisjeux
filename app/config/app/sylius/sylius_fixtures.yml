@@ -122,6 +122,11 @@ sylius_fixtures:
                 topic:
                     options:
                         random: 20
+
+                post:
+                    options:
+                        random: 50
+
                 product:
                     options:
                         random: 20
