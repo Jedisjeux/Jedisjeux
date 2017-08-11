@@ -47,6 +47,14 @@ services:
         tags:
             - { name: sylius_fixtures.fixture }
 
+    app.fixture.product_review:
+        class: AppBundle\Fixture\ProductReviewFixture
+        arguments:
+            - "@sylius.manager.product_review"
+            - "@app.fixture.example_factory.product_review"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
     app.fixture.taxon:
         class: AppBundle\Fixture\TaxonFixture
         arguments:

@@ -1,54 +1,61 @@
 services:
     app.fixture.example_factory.article:
-       class: AppBundle\Fixture\Factory\ArticleExampleFactory
-       arguments:
-          - "@app.factory.article"
-          - "@app.factory.article_image"
-          - "@app.fixture.example_factory.block"
-          - "@sylius.repository.customer"
+        class: AppBundle\Fixture\Factory\ArticleExampleFactory
+        arguments:
+            - "@app.factory.article"
+            - "@app.factory.article_image"
+            - "@app.fixture.example_factory.block"
+            - "@sylius.repository.customer"
 
     app.fixture.example_factory.app_user:
-       class: AppBundle\Fixture\Factory\AppUserExampleFactory
-       arguments:
-          - "@sylius.factory.shop_user"
-          - "@sylius.factory.customer"
-          - "@app.factory.avatar"
+        class: AppBundle\Fixture\Factory\AppUserExampleFactory
+        arguments:
+            - "@sylius.factory.shop_user"
+            - "@sylius.factory.customer"
+            - "@app.factory.avatar"
 
     app.fixture.example_factory.block:
-       class: AppBundle\Fixture\Factory\BlockExampleFactory
-       arguments:
-          - "@app.factory.block"
-          - "@app.factory.block_image"
+        class: AppBundle\Fixture\Factory\BlockExampleFactory
+        arguments:
+            - "@app.factory.block"
+            - "@app.factory.block_image"
 
     app.fixture.example_factory.notification:
-       class: AppBundle\Fixture\Factory\NotificationExampleFactory
-       arguments:
-          - "@app.factory.notification"
-          - "@sylius.repository.customer"
+        class: AppBundle\Fixture\Factory\NotificationExampleFactory
+        arguments:
+            - "@app.factory.notification"
+            - "@sylius.repository.customer"
 
     app.fixture.example_factory.person:
-       class: AppBundle\Fixture\Factory\PersonExampleFactory
-       arguments:
-          - "@app.factory.person"
-          - "@app.factory.person_image"
+        class: AppBundle\Fixture\Factory\PersonExampleFactory
+        arguments:
+            - "@app.factory.person"
+            - "@app.factory.person_image"
 
     app.fixture.example_factory.product:
-       class: AppBundle\Fixture\Factory\ProductExampleFactory
-       arguments:
-          - "@sylius.factory.product"
-          - "@app.factory.product_variant_image"
-          - "@app.repository.person"
-          - "@sylius.generator.slug"
+        class: AppBundle\Fixture\Factory\ProductExampleFactory
+        arguments:
+            - "@sylius.factory.product"
+            - "@app.factory.product_variant_image"
+            - "@app.repository.person"
+            - "@sylius.generator.slug"
+
+    app.fixture.example_factory.product_review:
+        class: AppBundle\Fixture\Factory\ProductReviewExampleFactory
+        arguments:
+            - "@sylius.factory.product_review"
+            - "@sylius.repository.product"
+            - "@sylius.repository.customer"
 
     app.fixture.example_factory.taxon:
-       class: AppBundle\Fixture\Factory\TaxonExampleFactory
-       arguments:
-          - "@sylius.factory.taxon"
-          - "@sylius.repository.taxon"
-          - "@sylius.generator.taxon_slug"
+        class: AppBundle\Fixture\Factory\TaxonExampleFactory
+        arguments:
+            - "@sylius.factory.taxon"
+            - "@sylius.repository.taxon"
+            - "@sylius.generator.taxon_slug"
 
     app.fixture.example_factory.topic:
-       class: AppBundle\Fixture\Factory\TopicExampleFactory
-       arguments:
-          - "@app.factory.topic"
-          - "@sylius.repository.customer"
+        class: AppBundle\Fixture\Factory\TopicExampleFactory
+        arguments:
+            - "@app.factory.topic"
+            - "@sylius.repository.customer"
