@@ -20,6 +20,13 @@ services:
             - "@app.factory.block"
             - "@app.factory.block_image"
 
+    app.fixture.example_factory.game_play:
+        class: AppBundle\Fixture\Factory\GamePlayExampleFactory
+        arguments:
+            - "@app.factory.game_play"
+            - "@sylius.repository.customer"
+            - "@sylius.repository.product"
+
     app.fixture.example_factory.notification:
         class: AppBundle\Fixture\Factory\NotificationExampleFactory
         arguments:

@@ -23,6 +23,14 @@ services:
         tags:
             - { name: sylius_fixtures.fixture }
 
+    app.fixture.game_play:
+        class: AppBundle\Fixture\GamePlayFixture
+        arguments:
+            - "@app.manager.game_play"
+            - "@app.fixture.example_factory.game_play"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
     app.fixture.notification:
         class: AppBundle\Fixture\NotificationFixture
         arguments:

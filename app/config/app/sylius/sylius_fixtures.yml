@@ -179,6 +179,10 @@ sylius_fixtures:
                     options:
                         random: 40
 
+                game_play:
+                    options:
+                        random: 40
+
                 notification:
                     options:
                         random: 40
