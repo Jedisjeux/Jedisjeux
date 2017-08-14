@@ -6,6 +6,7 @@ Feature: Deleting a topic
 
     Background:
         Given there is customer with email "kevin@example.com"
+        And there is customer with email "blue@example.com"
         And there is topic with title "Les parties jouées la veille" written by "kevin@example.com"
         And there is topic with title "Liste des jeux à ajouter" written by "kevin@example.com"
         And I am logged in as an administrator
@@ -13,6 +14,14 @@ Feature: Deleting a topic
     @ui
     Scenario: Deleting a topic
         Given I want to browse topics
+        When I delete topic with title "Les parties jouées la veille"
+        Then I should be notified that it has been successfully deleted
+        And there should not be "Les parties jouées la veille" topic anymore
+
+    @ui @todo
+    Scenario: Deleting a topic with posts
+        Given customer "blue@example.com" has answered the "Les parties jouées la veille" topic
+        And I want to browse topics
         When I delete topic with title "Les parties jouées la veille"
         Then I should be notified that it has been successfully deleted
         And there should not be "Les parties jouées la veille" topic anymore

@@ -10,6 +10,7 @@ default:
                 - app.behat.context.setup.admin_security
                 - app.behat.context.setup.customer
                 - app.behat.context.setup.topic
+                - app.behat.context.setup.post
 
                 - app.behat.context.ui.backend.managing_topics
                 - app.behat.context.ui.backend.notification
