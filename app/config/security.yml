@@ -86,7 +86,7 @@ security:
         - { path: ^/admin/ajax/products, role: ROLE_WORKFLOW }
         - { path: ^/admin/ajax/product-variants, role: ROLE_WORKFLOW }
         - { path: ^/admin/ajax/people, role: ROLE_WORKFLOW }
-        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/admin/*, role: ROLE_ADMIN }
 
         # create new entity
         - { path: /new$, role: ROLE_USER }
