@@ -2,7 +2,7 @@
 # @see http://docs.sylius.org/en/latest/bundles/SyliusResourceBundle/routing.html
 
 app_backend_dashboard:
-    path: /
+    path: /dashboard
     defaults:
         _controller:  FrameworkBundle:Template:template
         template:     'backend/index.html.twig'
