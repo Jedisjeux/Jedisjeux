@@ -15,6 +15,13 @@ services:
             tags:
                 - { name: fob.context_service }
 
+        app.behat.context.transform.topic:
+            class: AppBundle\Behat\Context\Transform\TopicContext
+            arguments:
+                - "@__symfony__.app.repository.topic"
+            tags:
+                - { name: fob.context_service }
+
         app.behat.context.transform.shared_storage:
             class: AppBundle\Behat\Context\Transform\SharedStorageContext
             arguments:

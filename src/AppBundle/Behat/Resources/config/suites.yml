@@ -1,2 +1,3 @@
 imports:
     - suites/ui/person/managing_people.yml
+    - suites/ui/topic/managing_topics.yml

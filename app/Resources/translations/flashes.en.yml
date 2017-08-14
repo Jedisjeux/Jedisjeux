@@ -30,24 +30,24 @@ app:
     topic:
         create: Le sujet has been successfully created.
         update: Le sujet has been successfully updated.
-        delete: Le sujet a bien été supprimé.
+        delete: Le sujet has been successfully deleted.
 sylius:
     product:
         create: Le jeu has been successfully created.
         update: Le jeu has been successfully updated.
-        delete: Le jeu a bien été supprimé.
+        delete: Le jeu has been successfully deleted.
     product_review:
         create: L'avis has been successfully created.
         update: L'avis has been successfully updated.
-        delete: L'avis a bien été supprimé.
+        delete: L'avis has been successfully deleted.
     static_content:
         create: Le contenu statique has been successfully created.
         update: Le contenu statique has been successfully updated.
-        delete: Le contenu statique a bien été supprimé.
+        delete: Le contenu statique has been successfully deleted.
     taxon:
         create: La catégorie has been successfully created.
         update: La catégorie has been successfully updated.
-        delete: La catégorie a bien été supprimée.
+        delete: La catégorie has been successfully deleted.
     user:
         change_password: 'Votre mot de passe a été mis à jour avec succès !'
         reset_password: 'Votre mot de passe a été réinitialisé avec succès !'
