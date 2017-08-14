@@ -4,6 +4,7 @@ default:
             contexts_services:
                 - app.behat.context.hook.doctrine_orm
 
+                - app.behat.context.transform.customer
                 - app.behat.context.transform.topic
 
                 - app.behat.context.setup.admin_security

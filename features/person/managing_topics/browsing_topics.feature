@@ -6,9 +6,9 @@ Feature: Browsing topics
 
     Background:
         Given there is customer with email "kevin@example.com"
-        And there is topic with title "Les parties jouées la veille" written by author with email "kevin@example.com"
-        And there is topic with title "Liste des jeux à ajouter" written by author with email "kevin@example.com"
-        And there is topic with title "Vos nouvelles acquisitions ludiques" written by author with email "kevin@example.com"
+        And there is topic with title "Les parties jouées la veille" written by "kevin@example.com"
+        And there is topic with title "Liste des jeux à ajouter" written by "kevin@example.com"
+        And there is topic with title "Vos nouvelles acquisitions ludiques" written by "kevin@example.com"
         And I am logged in as an administrator
 
     @ui

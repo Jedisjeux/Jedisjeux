@@ -16,6 +16,7 @@ use AppBundle\Entity\Topic;
 use AppBundle\Fixture\Factory\ExampleFactoryInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Customer\Model\CustomerInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -45,17 +46,17 @@ class TopicContext implements Context
     }
 
     /**
-     * @Given there is topic with title :title written by author with email :customerEmail
+     * @Given there is topic with title :title written by :customer
      *
      * @param string $title
-     * @param string $customerEmail
+     * @param CustomerInterface $customer
      */
-    public function thereIsTopicWithTitleFromAuthorWithEmail($title, $customerEmail)
+    public function thereIsTopicWithTitleWrittenByCustomer($title, CustomerInterface $customer)
     {
         /** @var Topic $topic */
         $topic = $this->topicFactory->create([
             'title' => $title,
-            'author' => $customerEmail,
+            'author' => $customer,
         ]);
 
         $this->topicRepository->add($topic);
