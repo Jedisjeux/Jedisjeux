@@ -93,15 +93,19 @@ class NotificationExampleFactory extends AbstractExampleFactory implements Examp
                 return $this->faker->boolean(10);
             })
             ->setAllowedTypes('read', ['bool'])
+
             ->setDefault('message', function (Options $options) {
                 return $this->faker->sentence();
             })
+
             ->setDefault('target', function (Options $options) {
                 return $this->faker->url;
             })
+
             ->setDefault('recipient', LazyOption::randomOne($this->customerRepository))
             ->setAllowedTypes('recipient', ['null', 'string', CustomerInterface::class])
             ->setNormalizer('recipient', LazyOption::findOneBy($this->customerRepository, 'email'))
+
             ->setDefault('authors', LazyOption::randomOnes($this->customerRepository, 3))
             ->setAllowedTypes('authors', 'array')
             ->setNormalizer('authors', LazyOption::findBy($this->customerRepository, 'email'));

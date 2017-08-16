@@ -55,6 +55,7 @@ class Post implements ResourceInterface
      * @var Topic
      *
      * @ORM\ManyToOne(targetEntity="Topic", inversedBy="posts")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     protected $topic;
 

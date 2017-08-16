@@ -18,10 +18,53 @@ services:
             tags:
                 - { name: fob.context_service }
 
+        app.behat.context.setup.customer:
+            class: AppBundle\Behat\Context\Setup\CustomerContext
+            arguments:
+                - "@__symfony__.app.fixture.example_factory.app_user"
+                - "@__symfony__.sylius.repository.customer"
+            tags:
+                - { name: fob.context_service }
+
+        app.behat.context.setup.game_play:
+            class: AppBundle\Behat\Context\Setup\GamePlayContext
+            arguments:
+                - "@__symfony__.app.fixture.example_factory.game_play"
+                - "@__symfony__.app.fixture.example_factory.topic"
+                - "@__symfony__.app.fixture.example_factory.post"
+                - "@__symfony__.app.repository.game_play"
+                - "@__symfony__.app.repository.topic"
+            tags:
+                - { name: fob.context_service }
+
         app.behat.context.setup.person:
             class: AppBundle\Behat\Context\Setup\PersonContext
             arguments:
                 - "@__symfony__.app.fixture.example_factory.person"
                 - "@__symfony__.app.repository.person"
+            tags:
+                - { name: fob.context_service }
+
+        app.behat.context.setup.post:
+            class: AppBundle\Behat\Context\Setup\PostContext
+            arguments:
+                - "@__symfony__.app.fixture.example_factory.post"
+                - "@__symfony__.app.repository.post"
+            tags:
+                - { name: fob.context_service }
+
+        app.behat.context.setup.product:
+            class: AppBundle\Behat\Context\Setup\ProductContext
+            arguments:
+                - "@__symfony__.app.fixture.example_factory.product"
+                - "@__symfony__.sylius.repository.product"
+            tags:
+                - { name: fob.context_service }
+
+        app.behat.context.setup.topic:
+            class: AppBundle\Behat\Context\Setup\TopicContext
+            arguments:
+                - "@__symfony__.app.fixture.example_factory.topic"
+                - "@__symfony__.app.repository.topic"
             tags:
                 - { name: fob.context_service }

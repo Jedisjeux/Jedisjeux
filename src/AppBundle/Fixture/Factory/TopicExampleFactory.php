@@ -11,8 +11,11 @@
 
 namespace AppBundle\Fixture\Factory;
 
+use AppBundle\Entity\Article;
+use AppBundle\Entity\GamePlay;
 use AppBundle\Entity\Topic;
 use AppBundle\Fixture\OptionsResolver\LazyOption;
+use AppBundle\Formatter\StringInflector;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -35,6 +38,16 @@ class TopicExampleFactory extends AbstractExampleFactory implements ExampleFacto
     private $customerRepository;
 
     /**
+     * @var RepositoryInterface
+     */
+    private $articleRepository;
+
+    /**
+     * @var RepositoryInterface
+     */
+    private $gamePlayRepository;
+
+    /**
      * @var \Faker\Generator
      */
     private $faker;
@@ -47,14 +60,20 @@ class TopicExampleFactory extends AbstractExampleFactory implements ExampleFacto
     /**
      * @param FactoryInterface $personFactory
      * @param RepositoryInterface $customerRepository
+     * @param RepositoryInterface $articleRepository
+     * @param RepositoryInterface $gamePlayRepository
      */
     public function __construct(
         FactoryInterface $personFactory,
-        RepositoryInterface $customerRepository
+        RepositoryInterface $customerRepository,
+        RepositoryInterface $articleRepository,
+        RepositoryInterface $gamePlayRepository
     )
     {
         $this->topicFactory = $personFactory;
         $this->customerRepository = $customerRepository;
+        $this->articleRepository = $articleRepository;
+        $this->gamePlayRepository = $gamePlayRepository;
 
         $this->faker = \Faker\Factory::create('fr_FR');
         $this->optionsResolver = new OptionsResolver();
@@ -71,6 +90,7 @@ class TopicExampleFactory extends AbstractExampleFactory implements ExampleFacto
 
         /** @var Topic $topic */
         $topic = $this->topicFactory->createNew();
+        $topic->setCode($options['code']);
         $topic->setTitle($options['title']);
         $topic->setAuthor($options['author']);
         $topic->setCreatedAt($options['created_at']);;
@@ -79,7 +99,16 @@ class TopicExampleFactory extends AbstractExampleFactory implements ExampleFacto
             ->setAuthor($topic->getAuthor())
             ->setCreatedAt($topic->getCreatedAt());
         $topic->setLastPostCreatedAt($topic->getCreatedAt());
-        $topic->setLastPost($topic->getMainPost());
+
+        if ($options['article']) {
+            /** @var Article $article */
+            $article = $options['article'];
+            $article->setTopic($topic);
+        } elseif ($options['game_play']) {
+            /** @var GamePlay $gamePlay */
+            $gamePlay = $options['game_play'];
+            $gamePlay->setTopic($topic);
+        }
 
         return $topic;
     }
@@ -93,14 +122,29 @@ class TopicExampleFactory extends AbstractExampleFactory implements ExampleFacto
             ->setDefault('title', function (Options $options) {
                 return ucfirst($this->faker->words(3, true));
             })
+
+            ->setDefault('code', function (Options $options) {
+                return StringInflector::nameToCode($options['title']);
+            })
+
             ->setDefault('body', function (Options $options) {
                 return "<p>" . implode("</p><p>", $this->faker->paragraphs(5)) . '</p>';
             })
+
             ->setDefault('author', LazyOption::randomOne($this->customerRepository))
             ->setAllowedTypes('author', ['null', 'string', CustomerInterface::class])
             ->setNormalizer('author', LazyOption::findOneBy($this->customerRepository, 'email'))
+
             ->setDefault('created_at', function (Options $options) {
                 return $this->faker->dateTimeBetween('2 months ago', 'today');
-            });
+            })
+
+            ->setDefault('article', LazyOption::randomOneOrNull($this->articleRepository, 50))
+            ->setAllowedTypes('article', ['null', 'string', Article::class])
+            ->setNormalizer('article', LazyOption::findOneBy($this->articleRepository, 'code'))
+
+            ->setDefault('game_play', LazyOption::randomOneOrNull($this->gamePlayRepository, 50))
+            ->setAllowedTypes('game_play', ['null', 'string', GamePlay::class])
+            ->setNormalizer('game_play', LazyOption::findOneBy($this->gamePlayRepository, 'code'));
     }
 }

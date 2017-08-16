@@ -23,6 +23,14 @@ services:
         tags:
             - { name: sylius_fixtures.fixture }
 
+    app.fixture.game_play:
+        class: AppBundle\Fixture\GamePlayFixture
+        arguments:
+            - "@app.manager.game_play"
+            - "@app.fixture.example_factory.game_play"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
     app.fixture.notification:
         class: AppBundle\Fixture\NotificationFixture
         arguments:
@@ -39,11 +47,27 @@ services:
         tags:
             - { name: sylius_fixtures.fixture }
 
+    app.fixture.post:
+        class: AppBundle\Fixture\PostFixture
+        arguments:
+            - "@app.manager.post"
+            - "@app.fixture.example_factory.post"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
     app.fixture.product:
         class: AppBundle\Fixture\ProductFixture
         arguments:
             - "@sylius.manager.product"
             - "@app.fixture.example_factory.product"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
+    app.fixture.product_review:
+        class: AppBundle\Fixture\ProductReviewFixture
+        arguments:
+            - "@sylius.manager.product_review"
+            - "@app.fixture.example_factory.product_review"
         tags:
             - { name: sylius_fixtures.fixture }
 

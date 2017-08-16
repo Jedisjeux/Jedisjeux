@@ -38,7 +38,6 @@ class ArticleFixture extends AbstractResourceFixture
                 ->scalarNode('publish_start_date')->cannotBeEmpty()->end()
                 ->scalarNode('main_image')->cannotBeEmpty()->end()
                 ->scalarNode('author')->cannotBeEmpty()->end()
-                ->variableNode('blocks')->cannotBeEmpty()->defaultValue([])->end()
         ;
     }
 }

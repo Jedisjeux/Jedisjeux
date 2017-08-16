@@ -4,7 +4,7 @@ app_backend_topic:
         section: backend
         templates: :backend/crud
         except: ['show']
-        redirect: index
+        redirect: update
         grid: app_backend_topic
         vars:
             all:

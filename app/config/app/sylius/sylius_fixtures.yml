@@ -95,26 +95,30 @@ sylius_fixtures:
                         random: 50
                         custom:
                             -
-                                title: "Le Jedisjeux nouveau est arrivé "
+                                title: "Le Jedisjeux nouveau est arrivé"
                                 status: "published"
                                 publish_start_date: "now"
                                 main_image: "app/Resources/fixtures/jedisjeux-nouveau.png"
                                 author: "blue@example.com"
-                                blocks:
-                                    -
-                                        body: |
-                                            <p>Ça y est, le nouveau Jedisjeux est là.</p>
-                                            <p>Attention où vous mettez vos doigts, ce n'est pas encore tout à fait sec. Enfin, on a&nbsp;fait bien attention à mettre de la peinture qui ne täche pas.</p>
-                                            <p>Première chose, il faut changer votre mot de passe. Pour ça, rien de plus simple, il suffit cliquer sur le lien «&nbsp;<a href="http://www.jedisjeux.net/forgotten-password" target="_self">vous avez oublié votre mot de passe</a>&nbsp;».</p>
-                                            <p>Si ça ne se passe pas bien, n’hésitez pas à le signaler par mail en suivant le lien <a href="http://www.jedisjeux.net/contact">contact </a>du site.</p>
-                                            <p>Il manque encore des petites choses par ci par là, ne vous inquiétez pas, ça va revenir, ce nouveau site nous permettra de vous proposer&nbsp;plein de nouvelles choses qui étaient trop difficiles à réaliser avec l'ancienne version.</p>
-                                            <p>N'hésitez pas à commenter, tester, remonter les bugs, demander des évolutions.</p>
-                                            <p>Bravo à Loïc pour avoir su gérer cette nouvelle version.</p>
-                                            <p>Il ne nous reste plus qu'à roder tout ça&nbsp;: )</p>
-                                        image: "app/Resources/fixtures/jedisjeux-nouveau.png"
-                topic:
+
+                block:
                     options:
-                        random: 20
+                        random: 80
+                        custom:
+                            -
+                                article: Le_Jedisjeux_nouveau_est_arrivé
+                                body: |
+                                    <p>Ça y est, le nouveau Jedisjeux est là.</p>
+                                    <p>Attention où vous mettez vos doigts, ce n'est pas encore tout à fait sec. Enfin, on a&nbsp;fait bien attention à mettre de la peinture qui ne täche pas.</p>
+                                    <p>Première chose, il faut changer votre mot de passe. Pour ça, rien de plus simple, il suffit cliquer sur le lien «&nbsp;<a href="http://www.jedisjeux.net/forgotten-password" target="_self">vous avez oublié votre mot de passe</a>&nbsp;».</p>
+                                    <p>Si ça ne se passe pas bien, n’hésitez pas à le signaler par mail en suivant le lien <a href="http://www.jedisjeux.net/contact">contact </a>du site.</p>
+                                    <p>Il manque encore des petites choses par ci par là, ne vous inquiétez pas, ça va revenir, ce nouveau site nous permettra de vous proposer&nbsp;plein de nouvelles choses qui étaient trop difficiles à réaliser avec l'ancienne version.</p>
+                                    <p>N'hésitez pas à commenter, tester, remonter les bugs, demander des évolutions.</p>
+                                    <p>Bravo à Loïc pour avoir su gérer cette nouvelle version.</p>
+                                    <p>Il ne nous reste plus qu'à roder tout ça&nbsp;: )</p>
+                                image: "app/Resources/fixtures/jedisjeux-nouveau.png"
+                                image_position: "top"
+
                 product:
                     options:
                         random: 20
@@ -174,6 +178,22 @@ sylius_fixtures:
                                 short_description: |
                                     <p>La reine Himiko a confié une mission prestigieuse à tous ses bâtisseurs : faire de la capitale de Yamataï la perle du royaume.</p>
                                 created_at: "now"
+
+                product_review:
+                    options:
+                        random: 40
+
+                game_play:
+                    options:
+                        random: 40
+
+                topic:
+                    options:
+                        random: 20
+
+                post:
+                    options:
+                        random: 50
 
                 notification:
                     options:
