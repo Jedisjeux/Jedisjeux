@@ -198,3 +198,7 @@ sylius_fixtures:
                 notification:
                     options:
                         random: 40
+
+                dealer:
+                    options:
+                        random: 20

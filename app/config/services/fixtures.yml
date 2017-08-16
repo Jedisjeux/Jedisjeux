@@ -23,6 +23,14 @@ services:
         tags:
             - { name: sylius_fixtures.fixture }
 
+    app.fixture.dealer:
+        class: AppBundle\Fixture\DealerFixture
+        arguments:
+            - "@app.manager.dealer"
+            - "@app.fixture.example_factory.dealer"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
     app.fixture.game_play:
         class: AppBundle\Fixture\GamePlayFixture
         arguments:

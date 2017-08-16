@@ -63,6 +63,7 @@ class Post implements ResourceInterface
      * @var GamePlay
      *
      * @ORM\ManyToOne(targetEntity="GamePlay")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     protected $gamePlay;
 
@@ -70,6 +71,7 @@ class Post implements ResourceInterface
      * @var Article
      *
      * @ORM\ManyToOne(targetEntity="Article")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     protected $article;
 

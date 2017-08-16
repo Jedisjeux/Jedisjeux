@@ -20,6 +20,12 @@ services:
             - "@app.factory.block_image"
             - "@app.repository.article"
 
+    app.fixture.example_factory.dealer:
+        class: AppBundle\Fixture\Factory\DealerExampleFactory
+        arguments:
+            - "@app.factory.dealer"
+            - "@app.factory.dealer_image"
+
     app.fixture.example_factory.game_play:
         class: AppBundle\Fixture\Factory\GamePlayExampleFactory
         arguments:
