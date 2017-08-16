@@ -11,10 +11,9 @@
 
 namespace AppBundle\Behat\Context\Transform;
 
-use AppBundle\Entity\Person;
 use AppBundle\Entity\Topic;
 use Behat\Behat\Context\Context;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -23,16 +22,16 @@ use Webmozart\Assert\Assert;
 final class TopicContext implements Context
 {
     /**
-     * @var EntityRepository
+     * @var RepositoryInterface
      */
     private $topicRepository;
 
     /**
      * PersonContext constructor.
      *
-     * @param EntityRepository $topicRepository
+     * @param RepositoryInterface $topicRepository
      */
-    public function __construct(EntityRepository $topicRepository)
+    public function __construct(RepositoryInterface $topicRepository)
     {
         $this->topicRepository = $topicRepository;
     }
@@ -42,6 +41,7 @@ final class TopicContext implements Context
      * @Transform :topic
      *
      * @param string $title
+     *
      * @return Topic
      */
     public function getTopicByTitle($title)

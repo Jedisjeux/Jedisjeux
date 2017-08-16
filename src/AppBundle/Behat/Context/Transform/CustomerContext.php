@@ -12,8 +12,8 @@
 namespace AppBundle\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -22,16 +22,16 @@ use Webmozart\Assert\Assert;
 final class CustomerContext implements Context
 {
     /**
-     * @var EntityRepository
+     * @var RepositoryInterface
      */
     private $customerRepository;
 
     /**
      * PersonContext constructor.
      *
-     * @param EntityRepository $topicRepository
+     * @param RepositoryInterface $topicRepository
      */
-    public function __construct(EntityRepository $topicRepository)
+    public function __construct(RepositoryInterface $topicRepository)
     {
         $this->customerRepository = $topicRepository;
     }
