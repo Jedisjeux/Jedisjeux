@@ -4,7 +4,7 @@ app_backend_game_play:
         section: backend
         templates: :backend/crud
         except: ['show', 'create']
-        redirect: index
+        redirect: update
         grid: app_backend_game_play
         vars:
             all:

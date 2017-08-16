@@ -11,8 +11,6 @@
 
 namespace AppBundle\Behat\Context\Transform;
 
-use AppBundle\Entity\Person;
-use AppBundle\Entity\Topic;
 use Behat\Behat\Context\Context;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Customer\Model\CustomerInterface;
