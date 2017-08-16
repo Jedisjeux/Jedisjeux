@@ -44,6 +44,7 @@ class CustomerContext implements Context
         $this->customerFactory = $customerFactory;
         $this->customerRepository = $customerRepository;
     }
+
     /**
      * @Given there is customer with email :email
      *

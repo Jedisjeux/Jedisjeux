@@ -26,6 +26,14 @@ services:
             tags:
                 - { name: fob.context_service }
 
+        app.behat.context.setup.dealer:
+            class: AppBundle\Behat\Context\Setup\DealerContext
+            arguments:
+                - "@__symfony__.app.fixture.example_factory.dealer"
+                - "@__symfony__.app.repository.dealer"
+            tags:
+                - { name: fob.context_service }
+
         app.behat.context.setup.game_play:
             class: AppBundle\Behat\Context\Setup\GamePlayContext
             arguments:

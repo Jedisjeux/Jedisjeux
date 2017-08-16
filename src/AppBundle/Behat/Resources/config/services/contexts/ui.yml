@@ -8,6 +8,16 @@ services:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
+      app.behat.context.ui.backend.managing_dealers:
+          class: AppBundle\Behat\Context\Ui\Backend\ManagingDealersContext
+          arguments:
+              - "@app.behat.page.backend.dealer.index"
+              - "@app.behat.page.backend.dealer.create"
+              - "@app.behat.page.backend.dealer.update"
+              - "@app.behat.current_page_resolver"
+          tags:
+              - { name: fob.context_service }
+
       app.behat.context.ui.backend.managing_game_plays:
           class: AppBundle\Behat\Context\Ui\Backend\ManagingGamePlaysContext
           arguments:

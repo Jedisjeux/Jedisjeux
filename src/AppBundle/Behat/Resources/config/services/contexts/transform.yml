@@ -15,6 +15,13 @@ services:
             tags:
                 - { name: fob.context_service }
 
+        app.behat.context.transform.dealer:
+            class: AppBundle\Behat\Context\Transform\DealerContext
+            arguments:
+                - "@__symfony__.app.repository.dealer"
+            tags:
+                - { name: fob.context_service }
+
         app.behat.context.transform.person:
             class: AppBundle\Behat\Context\Transform\PersonContext
             arguments:

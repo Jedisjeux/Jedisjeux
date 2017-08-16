@@ -14,7 +14,7 @@ namespace AppBundle\Behat\Page\Backend\Person;
 use AppBundle\Behat\Page\Backend\Crud\UpdatePage as BaseUpdatePage;
 
 /**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
+ * @author Loïc Frémont <loic@mobizel.com>
  */
 class UpdatePage extends BaseUpdatePage
 {
