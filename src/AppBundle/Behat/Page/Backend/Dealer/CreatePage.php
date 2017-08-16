@@ -19,6 +19,14 @@ use AppBundle\Behat\Page\Backend\Crud\CreatePage as BaseCreatePage;
 class CreatePage extends BaseCreatePage
 {
     /**
+     * @param string $code
+     */
+    public function specifyCode($code)
+    {
+        $this->getElement('code')->setValue($code);
+    }
+
+    /**
      * @param string $name
      */
     public function specifyName($name)
@@ -32,6 +40,7 @@ class CreatePage extends BaseCreatePage
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
+            'code' => '#app_dealer_code',
             'name' => '#app_dealer_name',
         ]);
     }
