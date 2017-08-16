@@ -18,7 +18,7 @@ Feature: Deleting a topic
         Then I should be notified that it has been successfully deleted
         And there should not be "Les parties jouées la veille" topic anymore
 
-    @ui @todo
+    @ui
     Scenario: Deleting a topic with posts
         Given customer "blue@example.com" has answered the "Les parties jouées la veille" topic
         And I want to browse topics
