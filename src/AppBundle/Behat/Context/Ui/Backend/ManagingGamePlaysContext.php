@@ -123,8 +123,8 @@ class ManagingGamePlaysContext implements Context
         $productName = $product->getName();
 
         $this->indexPage->deleteResourceOnPage([
-            'Username' => $username,
-            'Product' => $productName,
+            'name' => $username,
+            'product' => $productName,
         ]);
     }
 

@@ -12,7 +12,7 @@ Feature: Deleting a game play
         And there is game play of "Puerto Rico" played by "blue@example.com"
         And I am logged in as an administrator
 
-    @ui @todo
+    @ui
     Scenario: Deleting a game play
         Given I want to browse game plays
         When I delete game play of "Puerto Rico" played by "kevin@example.com"
