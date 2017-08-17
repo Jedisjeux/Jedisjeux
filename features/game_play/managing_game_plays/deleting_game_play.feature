@@ -17,6 +17,7 @@ Feature: Deleting a game play
         Given I want to browse game plays
         When I delete game play of "Puerto Rico" played by "kevin@example.com"
         Then I should be notified that it has been successfully deleted
+        And there should not be game play of "Puerto Rico" played by "kevin@example.com" anymore
 
     @ui
     Scenario: Deleting a game play with comments
@@ -25,3 +26,4 @@ Feature: Deleting a game play
         And I want to browse game plays
         When I delete game play of "Dream Factory" played by "kevin@example.com"
         Then I should be notified that it has been successfully deleted
+        And there should not be game play of "Dream Factory" played by "kevin@example.com" anymore

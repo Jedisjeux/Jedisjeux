@@ -137,30 +137,23 @@ class ManagingGamePlaysContext implements Context
     }
 
     /**
-     * @Then the game play :topic should appear in the website
-     * @Then I should see the game play :topic in the list
+     * @Then the game play of :product played by :customer should appear in the website
+     * @Then I should see the game play of :product played by :customer in the list
      */
-    public function theGamePlayShould(Topic $topic)
+    public function theGamePlayShould(ProductInterface $product, Customer $customer)
     {
         $this->indexPage->open();
 
-        Assert::true($this->indexPage->isSingleResourceOnPage(['title' => $topic->getTitle()]));
-    }
-
-    /**
-     * @Then this topic with title :title should appear in the website
-     */
-    public function thisTopicWithTitleShouldAppearInTheWebsite($title)
-    {
-        $this->indexPage->open();
-
-        Assert::true($this->indexPage->isSingleResourceOnPage(['title' => $title]));
+        Assert::true($this->indexPage->isSingleResourceOnPage([
+            'name' => $customer->getUser()->getUsername(),
+            'product' => $product->getName(),
+        ]));
     }
 
     /**
      * @Then this game play should be played at :playedAt
      */
-    public function thisGamePlayBodyShouldBe($playedAt)
+    public function thisGamePlayShouldBePlayedAt($playedAt)
     {
         $this->assertElementValue('played_at', $playedAt);
     }
@@ -174,11 +167,14 @@ class ManagingGamePlaysContext implements Context
     }
 
     /**
-     * @Then there should not be :title topic anymore
+     * @Then there should not be game play of :product played by :customer anymore
      */
-    public function thereShouldBeNoGamePlayAnymore($title)
+    public function thereShouldBeNoGamePlayWitAnymore(ProductInterface $product, Customer $customer)
     {
-        Assert::false($this->indexPage->isSingleResourceOnPage(['title' => $title]));
+        Assert::false($this->indexPage->isSingleResourceOnPage([
+            'name' => $customer->getUser()->getUsername(),
+            'product' => $product->getName(),
+        ]));
     }
 
     /**
