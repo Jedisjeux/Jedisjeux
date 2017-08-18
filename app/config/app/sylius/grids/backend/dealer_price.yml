@@ -14,7 +14,7 @@ sylius_grid:
                     sortable: createdAt
                     options:
                         template: "backend/grid/field/date/medium.html.twig"
-                dealer.name:
+                dealer:
                     type: string
                     label: app.ui.dealer
                 name:

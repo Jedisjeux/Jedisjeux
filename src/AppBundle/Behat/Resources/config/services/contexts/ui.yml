@@ -18,6 +18,15 @@ services:
           tags:
               - { name: fob.context_service }
 
+      app.behat.context.ui.backend.managing_dealer_prices:
+          class: AppBundle\Behat\Context\Ui\Backend\ManagingDealerPricesContext
+          arguments:
+              - "@app.behat.page.backend.dealer_price.index"
+              - "@app.behat.page.backend.dealer_price.update"
+              - "@app.behat.current_page_resolver"
+          tags:
+              - { name: fob.context_service }
+
       app.behat.context.ui.backend.managing_game_plays:
           class: AppBundle\Behat\Context\Ui\Backend\ManagingGamePlaysContext
           arguments:

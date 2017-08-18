@@ -1,0 +1,18 @@
+default:
+    suites:
+        ui_managing_dealer_prices:
+            contexts_services:
+                - app.behat.context.hook.doctrine_orm
+
+                - app.behat.context.transform.dealer
+                - app.behat.context.transform.product
+
+                - app.behat.context.setup.admin_security
+                - app.behat.context.setup.dealer
+                - app.behat.context.setup.dealer_price
+                - app.behat.context.setup.product
+
+                - app.behat.context.ui.backend.managing_dealer_prices
+                - app.behat.context.ui.backend.notification
+            filters:
+                tags: "@managing_dealer_prices && @ui"
