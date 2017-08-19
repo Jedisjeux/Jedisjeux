@@ -46,15 +46,16 @@ class DealerPriceContext implements Context
     }
 
     /**
-     * @Given the dealer :dealer sold :product product priced at :price
+     * @Given the dealer :dealer sold :product product on :url page
      */
-    public function thereIsDealerPrice(Dealer $dealer, ProductInterface $product, $price)
+    public function thereIsDealerPriceOnThisPage(Dealer $dealer, ProductInterface $product, $url)
     {
         /** @var DealerPrice $dealerPrice */
         $dealerPrice = $this->dealerPriceFactory->create([
+            'name' => $product->getName(),
             'dealer' => $dealer,
             'product' => $product,
-            'price' => $price,
+            'url' => $url,
         ]);
 
         $this->dealerPriceRepository->add($dealerPrice);

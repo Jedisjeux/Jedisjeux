@@ -113,13 +113,13 @@ class ManagingDealerPricesContext implements Context
     }
 
     /**
-     * @Then I should see the price :price in the list
+     * @Then I should see the url :url in the list
      */
-    public function thePriceShould($price)
+    public function theUrlShould($url)
     {
         $this->indexPage->open();
 
-        Assert::true($this->indexPage->isSingleResourceOnPage(['price' => $price]));
+        Assert::true($this->indexPage->isSingleResourceOnPage(['url' => $url]));
     }
 
     /**
