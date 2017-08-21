@@ -1,4 +1,5 @@
 imports:
+    - suites/ui/article/managing_articles.yml
     - suites/ui/dealer/managing_dealers.yml
     - suites/ui/dealer_price/managing_dealer_prices.yml
     - suites/ui/game_play/managing_game_plays.yml
