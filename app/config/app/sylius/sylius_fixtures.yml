@@ -202,3 +202,7 @@ sylius_fixtures:
                 dealer:
                     options:
                         random: 20
+
+                dealer_price:
+                    options:
+                        random: 50

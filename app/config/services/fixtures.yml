@@ -31,6 +31,14 @@ services:
         tags:
             - { name: sylius_fixtures.fixture }
 
+    app.fixture.dealer_price:
+        class: AppBundle\Fixture\DealerPriceFixture
+        arguments:
+            - "@app.manager.dealer_price"
+            - "@app.fixture.example_factory.dealer_price"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
     app.fixture.game_play:
         class: AppBundle\Fixture\GamePlayFixture
         arguments:

@@ -26,6 +26,13 @@ services:
             - "@app.factory.dealer"
             - "@app.factory.dealer_image"
 
+    app.fixture.example_factory.dealer_price:
+        class: AppBundle\Fixture\Factory\DealerPriceExampleFactory
+        arguments:
+            - "@app.factory.dealer_price"
+            - "@sylius.repository.product"
+            - "@app.repository.dealer"
+
     app.fixture.example_factory.game_play:
         class: AppBundle\Fixture\Factory\GamePlayExampleFactory
         arguments:
