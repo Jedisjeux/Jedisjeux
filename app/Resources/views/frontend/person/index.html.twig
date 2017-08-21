@@ -1,9 +1,7 @@
 {% extends "base.html.twig" %}
 {% from 'macros/misc.html.twig' import pagination %}
 
-{% block headline %}
-    Les ludographies
-{% endblock %}
+{% set pageTitle = 'Les ludographies' %}
 
 {% block subtitle %}
     {% if taxon is defined %}

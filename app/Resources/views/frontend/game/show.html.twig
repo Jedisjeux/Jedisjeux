@@ -5,9 +5,7 @@
  {#TODO REMOVE #}
 {% set jeu = product is defined ? product : jeu %}
 
-{% block headline %}
-    {{ product }}
-{% endblock headline %}
+{% set pageTitle = product %}
 
 {% block subtitle_container %}
     {% if product.averageRating %}

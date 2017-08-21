@@ -94,6 +94,7 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
             $taxon->setName($options['name']);
             $taxon->setDescription($options['description']);
             $taxon->setSlug($options['slug'] ?: $this->taxonSlugGenerator->generate($taxon, $localeCode));
+            $taxon->setPublic($options['public']);
         }
 
         foreach ($options['children'] as $childOptions) {
@@ -112,15 +113,24 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
             ->setDefault('name', function (Options $options) {
                 return $this->faker->words(3, true);
             })
+
             ->setDefault('code', function (Options $options) {
                 return StringInflector::nameToCode($options['name']);
             })
+
             ->setDefault('slug', null)
+
             ->setDefault('description', function (Options $options) {
                 return $this->faker->paragraph;
             })
+
+            ->setDefault('public', function (Options $options) {
+                return $this->faker->boolean(90);
+            })
+            ->setAllowedTypes('public', 'bool')
+
             ->setDefault('children', [])
-            ->setAllowedTypes('children', ['array'])
+            ->setAllowedTypes('children', 'array')
         ;
     }
 

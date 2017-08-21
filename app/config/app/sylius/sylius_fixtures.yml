@@ -46,6 +46,13 @@ sylius_fixtures:
                             -
                                 code: "forum"
                                 name: "Forum"
+                                children:
+                                    -
+                                      name: "La taverne du joueur"
+                                      public: true
+                                    -
+                                      name: "Tatooïne : La Cantina"
+                                      public: false
                             -
                                 code: "themes"
                                 name: "Thèmes"

@@ -7,13 +7,13 @@
 {% from 'macros/sorting.html.twig' import sorting %}
 {% from 'macros/items.html.twig' import blockquoteOne %}
 
-{% block headline %}
+{% set pageTitle %}
     {% if taxon is defined %}
         {{ taxon }}
     {% else %}
         Forum
     {% endif %}
-{% endblock %}
+{% endset %}
 
 {% block breadcrumb_content %}
     {{ parent() }}

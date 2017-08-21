@@ -65,7 +65,7 @@
 
                         {% block headline_container %}
                             <div class="block-heading-two">
-                                <h2><span>{% block headline %}Titre de la page{% endblock headline %}</span>
+                                <h2><span>{% block headline %}{{ pageTitle }}{% endblock headline %}</span>
                                     {% block subtitle_container %}
                                         <span class="text-small">
                                     {% block subtitle %}{#Something can go here#}{% endblock subtitle %}
