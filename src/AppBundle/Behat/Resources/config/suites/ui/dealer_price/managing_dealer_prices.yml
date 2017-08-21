@@ -5,6 +5,7 @@ default:
                 - app.behat.context.hook.doctrine_orm
 
                 - app.behat.context.transform.dealer
+                - app.behat.context.transform.dealer_price
                 - app.behat.context.transform.product
 
                 - app.behat.context.setup.admin_security

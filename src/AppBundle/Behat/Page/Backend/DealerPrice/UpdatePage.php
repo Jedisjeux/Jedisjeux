@@ -19,12 +19,20 @@ use AppBundle\Behat\Page\Backend\Crud\UpdatePage as BaseUpdatePage;
 class UpdatePage extends BaseUpdatePage
 {
     /**
+     * @param string $name
+     */
+    public function changeName($name)
+    {
+        $this->getElement('name')->setValue($name);
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-
+            'name' => '#app_dealer_price_name',
         ]);
     }
 }

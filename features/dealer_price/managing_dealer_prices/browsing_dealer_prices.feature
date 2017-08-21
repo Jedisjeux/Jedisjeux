@@ -8,12 +8,12 @@ Feature: Browsing dealer prices
         Given there is dealer "Philibert"
         And there is product "Puerto Rico"
         And there is product "Modern Art"
-        And the dealer "Philibert" sold "Puerto Rico" product priced at "3250"
-        And the dealer "Philibert" sold "Modern Art" product priced at "2450"
+        And the dealer "Philibert" sold "Puerto Rico" product on "http://www.example.com/puerto-rico" page
+        And the dealer "Philibert" sold "Modern Art" product on "http://www.example.com/modern-art" page
         And I am logged in as an administrator
 
     @ui
     Scenario: Browsing dealer prices in website
         When I want to browse dealer prices
         Then there should be 2 dealer prices in the list
-        And I should see the price "€32.50" in the list
+        And I should see the url "http://www.example.com/puerto-rico" in the list

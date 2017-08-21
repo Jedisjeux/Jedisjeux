@@ -15,6 +15,7 @@ use AppBundle\Behat\Page\Backend\DealerPrice\IndexPage;
 use AppBundle\Behat\Page\Backend\DealerPrice\UpdatePage;
 use AppBundle\Behat\Service\Resolver\CurrentPageResolverInterface;
 use AppBundle\Entity\Dealer;
+use AppBundle\Entity\DealerPrice;
 use AppBundle\Entity\Topic;
 use Behat\Behat\Context\Context;
 use Webmozart\Assert\Assert;
@@ -65,27 +66,19 @@ class ManagingDealerPricesContext implements Context
     }
 
     /**
-     * @Given I want to edit :topic topic
+     * @Given I want to edit dealer price with page :dealerPrice
      */
-    public function iWantToEditTheTopic(Topic $dealerPrice)
+    public function iWantToEditDealerPrice(DealerPrice $dealerPrice)
     {
         $this->updatePage->open(['id' => $dealerPrice->getId()]);
     }
 
     /**
-     * @When I change its title as :title
+     * @When I change its name as :name
      */
-    public function iChangeItsTitleAs($title)
+    public function iChangeItsNameAs($name)
     {
-        $this->updatePage->changeTitle($title);
-    }
-
-    /**
-     * @When I change its body as :body
-     */
-    public function iChangeItsLastNameAs($body)
-    {
-        $this->updatePage->changeBody($body);
+        $this->updatePage->changeName($name);
     }
 
     /**
@@ -97,11 +90,11 @@ class ManagingDealerPricesContext implements Context
     }
 
     /**
-     * @When I delete topic with title :title
+     * @When I delete dealer price with page :url
      */
-    public function iDeleteTopicWithTitle($title)
+    public function iDeleteDealerPriceWithUrl($url)
     {
-        $this->indexPage->deleteResourceOnPage(['title' => $title]);
+        $this->indexPage->deleteResourceOnPage(['url' => $url]);
     }
 
     /**
@@ -123,13 +116,13 @@ class ManagingDealerPricesContext implements Context
     }
 
     /**
-     * @Then this topic with title :title should appear in the website
+     * @Then this dealer price with name :name should appear in the website
      */
-    public function thisDealerPriceWithTitleShouldAppearInTheWebsite($title)
+    public function thisDealerPriceWithNameShouldAppearInTheWebsite($name)
     {
         $this->indexPage->open();
 
-        Assert::true($this->indexPage->isSingleResourceOnPage(['title' => $title]));
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $name]));
     }
 
     /**
@@ -141,11 +134,11 @@ class ManagingDealerPricesContext implements Context
     }
 
     /**
-     * @Then there should not be :title topic anymore
+     * @Then there should not be dealer price with page :url anymore
      */
-    public function thereShouldBeNoDealerPriceAnymore($title)
+    public function thereShouldBeNoDealerPriceWithPageAnymore($url)
     {
-        Assert::false($this->indexPage->isSingleResourceOnPage(['title' => $title]));
+        Assert::false($this->indexPage->isSingleResourceOnPage(['url' => $url]));
     }
 
     /**
