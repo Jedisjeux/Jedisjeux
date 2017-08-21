@@ -11,7 +11,7 @@ Feature: Browsing people
         And I am logged in as an administrator
 
     @ui
-    Scenario: Browsing customers in store
+    Scenario: Browsing people in website
         When I want to browse people
         Then there should be 3 people in the list
         And I should see the person "Reiner Knizia" in the list

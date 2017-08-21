@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the Sylius package.
+ * This file is part of Jedisjeux.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Loïc Frémont
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -13,25 +13,25 @@ namespace AppBundle\Behat\Context\Transform;
 
 use AppBundle\Entity\Person;
 use Behat\Behat\Context\Context;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
 /**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Loïc Frémont <loic@mobizel.com>
  */
 final class PersonContext implements Context
 {
     /**
-     * @var EntityRepository
+     * @var RepositoryInterface
      */
     private $personRepository;
 
     /**
      * PersonContext constructor.
      *
-     * @param EntityRepository $personRepository
+     * @param RepositoryInterface $personRepository
      */
-    public function __construct(EntityRepository $personRepository)
+    public function __construct(RepositoryInterface $personRepository)
     {
         $this->personRepository = $personRepository;
     }

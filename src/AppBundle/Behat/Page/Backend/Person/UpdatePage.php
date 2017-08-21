@@ -14,7 +14,7 @@ namespace AppBundle\Behat\Page\Backend\Person;
 use AppBundle\Behat\Page\Backend\Crud\UpdatePage as BaseUpdatePage;
 
 /**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
+ * @author Loïc Frémont <loic@mobizel.com>
  */
 class UpdatePage extends BaseUpdatePage
 {
@@ -40,8 +40,8 @@ class UpdatePage extends BaseUpdatePage
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'first_name' => '#person_fisrtName',
-            'last_name' => '#person_lastName',
+            'first_name' => '#app_person_firstName',
+            'last_name' => '#app_person_lastName',
         ]);
     }
 }

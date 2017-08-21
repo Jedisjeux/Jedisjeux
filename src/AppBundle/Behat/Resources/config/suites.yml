@@ -1,2 +1,6 @@
 imports:
+    - suites/ui/dealer/managing_dealers.yml
+    - suites/ui/dealer_price/managing_dealer_prices.yml
+    - suites/ui/game_play/managing_game_plays.yml
     - suites/ui/person/managing_people.yml
+    - suites/ui/topic/managing_topics.yml

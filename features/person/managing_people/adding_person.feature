@@ -8,7 +8,7 @@ Feature: Adding a new person
     Given I am logged in as an administrator
 
   @ui
-  Scenario: Adding a new person with firstName and LastName
+  Scenario: Adding a new person with first name and last name
     Given I want to create a new person
     When I specify his first name as "Reiner"
     And I specify his last name as "Knizia"

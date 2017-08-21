@@ -15,6 +15,7 @@ use AppBundle\Entity\Product;
 use AppBundle\Entity\ProductVariant;
 use AppBundle\Entity\ProductVariantImage;
 use AppBundle\Fixture\OptionsResolver\LazyOption;
+use AppBundle\Formatter\StringInflector;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -90,6 +91,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
 
         /** @var Product $product */
         $product = $this->productFactory->createWithVariant();
+        $product->setCode($options['code']);
         $product->setName($options['name']);
         $product->setSlug($this->slugGenerator->generate($options['name']));
         $product->setJoueurMin($options['min_player_count']);
@@ -157,6 +159,10 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         $resolver
             ->setDefault('name', function (Options $options) {
                 return ucfirst($this->faker->words(3, true));
+            })
+
+            ->setDefault('code', function (Options $options) {
+                return StringInflector::nameToCode($options['name']);
             })
 
             ->setDefault('min_player_count', function (Options $options) {

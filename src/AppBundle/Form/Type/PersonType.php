@@ -80,7 +80,7 @@ class PersonType extends AbstractType
     /**
      * @return string
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'app_person';
     }

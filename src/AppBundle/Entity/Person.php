@@ -113,7 +113,7 @@ class Person implements ResourceInterface
     /**
      * @var PersonImage[]|Collection
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\PersonImage", mappedBy="person", cascade={"persist", "merge"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\PersonImage", mappedBy="person", cascade={"persist", "merge", "remove"})
      */
     protected $images;
 
