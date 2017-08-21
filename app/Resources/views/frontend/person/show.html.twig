@@ -1,8 +1,6 @@
 {% extends "base.html.twig" %}
 
-{% block headline %}
-    {{ person }}
-{% endblock %}
+{% set pageTitle = person %}
 
 {% block breadcrumb_content %}
     <a href="{{ path('app_frontend_person_index') }}">Ludographies</a>

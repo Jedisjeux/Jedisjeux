@@ -9,9 +9,7 @@
 
 {% block body_class %}article{% endblock %}
 
-{% block headline %}
-    {{ article.title }}
-{% endblock %}
+{% set pageTitle = article.title %}
 
 {% block breadcrumb_content %}
     <a href="{{ path('app_frontend_article_index') }}">Articles</a> /

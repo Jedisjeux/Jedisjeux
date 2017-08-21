@@ -2,9 +2,7 @@
 {% from 'macros/misc.html.twig' import pagination %}
 {% from 'macros/sorting.html.twig' import sorting %}
 
-{% block headline %}
-    Jeux
-{% endblock %}
+{% set pageTitle = 'sylius.ui.products'|trans %}
 
 {% block subtitle %}
     {% if taxon is defined %}
