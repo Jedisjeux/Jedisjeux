@@ -14,6 +14,7 @@ namespace AppBundle\Behat\Context\Ui\Backend;
 use AppBundle\Behat\Page\Backend\Article\IndexPage;
 use AppBundle\Behat\Page\Backend\Article\UpdatePage;
 use AppBundle\Behat\Page\Backend\Article\CreatePage;
+use AppBundle\Behat\Page\UnexpectedPageException;
 use AppBundle\Behat\Service\Resolver\CurrentPageResolverInterface;
 use AppBundle\Entity\Article;
 use Behat\Behat\Context\Context;
@@ -135,7 +136,7 @@ class ManagingArticlesContext implements Context
      */
     public function iShouldBeNotifiedThatTitleIsRequired()
     {
-        Assert::same($this->createPage->getValidationMessage('title'),'This value should not be blank.');
+        Assert::same($this->createPage->getValidationMessage('title'), 'This value should not be blank.');
     }
 
     /**
@@ -143,7 +144,7 @@ class ManagingArticlesContext implements Context
      */
     public function iShouldSeeArticlesInTheList($number)
     {
-        Assert::same($this->indexPage->countItems(), (int) $number);
+        Assert::same($this->indexPage->countItems(), (int)$number);
     }
 
     /**
@@ -183,5 +184,20 @@ class ManagingArticlesContext implements Context
     public function thereShouldBeNoAnymore($title)
     {
         Assert::false($this->indexPage->isSingleResourceOnPage(['title' => $title]));
+    }
+
+    /**
+     * @Then I should not be able to browse articles
+     */
+    public function iShouldNotBeAbleToBrowseArticles()
+    {
+        try {
+            $this->indexPage->open();
+
+        } catch (UnexpectedPageException $exception) {
+            // nothing else to do
+        }
+
+        Assert::false($this->indexPage->isOpen());
     }
 }
