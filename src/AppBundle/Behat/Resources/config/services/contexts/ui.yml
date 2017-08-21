@@ -67,6 +67,16 @@ services:
           tags:
               - { name: fob.context_service }
 
+      app.behat.context.ui.backend.managing_redirections:
+          class: AppBundle\Behat\Context\Ui\Backend\ManagingRedirectionsContext
+          arguments:
+              - "@app.behat.page.backend.redirection.index"
+              - "@app.behat.page.backend.redirection.create"
+              - "@app.behat.page.backend.redirection.update"
+              - "@app.behat.current_page_resolver"
+          tags:
+              - { name: fob.context_service }
+
       app.behat.context.ui.backend.managing_topics:
           class: AppBundle\Behat\Context\Ui\Backend\ManagingTopicsContext
           arguments:

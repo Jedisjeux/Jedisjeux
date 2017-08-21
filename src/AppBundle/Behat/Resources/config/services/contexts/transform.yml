@@ -50,6 +50,13 @@ services:
             tags:
                 - { name: fob.context_service }
 
+        app.behat.context.transform.redirection:
+            class: AppBundle\Behat\Context\Transform\RedirectionContext
+            arguments:
+                - "@__symfony__.app.repository.redirection"
+            tags:
+                - { name: fob.context_service }
+
         app.behat.context.transform.topic:
             class: AppBundle\Behat\Context\Transform\TopicContext
             arguments:

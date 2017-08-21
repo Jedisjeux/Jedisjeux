@@ -85,6 +85,14 @@ services:
             tags:
                 - { name: fob.context_service }
 
+        app.behat.context.setup.redirection:
+            class: AppBundle\Behat\Context\Setup\RedirectionContext
+            arguments:
+                - "@__symfony__.app.fixture.example_factory.redirection"
+                - "@__symfony__.app.repository.redirection"
+            tags:
+                - { name: fob.context_service }
+
         app.behat.context.setup.topic:
             class: AppBundle\Behat\Context\Setup\TopicContext
             arguments:

@@ -213,3 +213,7 @@ sylius_fixtures:
                 dealer_price:
                     options:
                         random: 50
+
+                redirection:
+                    options:
+                        random: 20

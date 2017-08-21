@@ -1,0 +1,15 @@
+default:
+    suites:
+        ui_managing_redirections:
+            contexts_services:
+                - app.behat.context.hook.doctrine_orm
+
+                - app.behat.context.transform.redirection
+
+                - app.behat.context.setup.admin_security
+                - app.behat.context.setup.redirection
+
+                - app.behat.context.ui.backend.managing_redirections
+                - app.behat.context.ui.backend.notification
+            filters:
+                tags: "@managing_redirections && @ui"
