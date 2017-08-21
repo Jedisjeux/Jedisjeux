@@ -196,6 +196,21 @@ class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then I should not be able to add product
+     */
+    public function iShouldNotBeAbleToAddProduct()
+    {
+        try {
+            $this->createPage->open();
+
+        } catch (UnexpectedPageException $exception) {
+            // nothing else to do
+        }
+
+        Assert::false($this->indexPage->isOpen());
+    }
+
+    /**
      * @Then I should not be able to browse products
      */
     public function iShouldNotBeAbleToBrowseProducts()
