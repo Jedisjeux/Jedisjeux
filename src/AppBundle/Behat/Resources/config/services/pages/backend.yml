@@ -4,6 +4,7 @@ imports:
     - { resource: backend/dealer_price.yml }
     - { resource: backend/game_play.yml }
     - { resource: backend/person.yml }
+    - { resource: backend/product.yml }
     - { resource: backend/topic.yml }
 
 # Learn more about services, parameters and containers at
