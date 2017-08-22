@@ -64,7 +64,7 @@ class ManagingProductReviewsContext implements Context
     }
 
     /**
-     * @Given I want to edit :product_review topic
+     * @Given I want to edit :productReview product review
      */
     public function iWantToEditTheProductReview(ProductReview $productReview)
     {

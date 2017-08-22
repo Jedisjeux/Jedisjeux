@@ -40,7 +40,7 @@ class UpdatePage extends BaseUpdatePage
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'name' => '#sylius_product_review_title',
+            'title' => '#sylius_product_review_title',
             'comment' => '#sylius_product_review_comment',
         ]);
     }
