@@ -88,7 +88,7 @@ services:
                 - { name: fob.context_service }
 
         app.behat.context.setup.product_review:
-            class: AppBundle\Behat\Context\Setup\ProductContext
+            class: AppBundle\Behat\Context\Setup\ProductReviewContext
             arguments:
                 - "@app.behat.shared_storage"
                 - "@__symfony__.app.fixture.example_factory.product_review"
