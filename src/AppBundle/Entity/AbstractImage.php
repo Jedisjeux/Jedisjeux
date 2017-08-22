@@ -35,6 +35,7 @@ abstract class AbstractImage implements ResourceInterface
      * @var UploadedFile
      *
      * @Assert\File(maxSize="6000000")
+     * @Assert\Image
      */
     private $file;
 

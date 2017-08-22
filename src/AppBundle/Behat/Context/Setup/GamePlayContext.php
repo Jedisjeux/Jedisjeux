@@ -11,6 +11,7 @@
 
 namespace AppBundle\Behat\Context\Setup;
 
+use AppBundle\Behat\Service\SharedStorageInterface;
 use AppBundle\Entity\GamePlay;
 use AppBundle\Entity\Post;
 use AppBundle\Entity\Topic;
@@ -25,6 +26,11 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class GamePlayContext implements Context
 {
+    /**
+     * @var SharedStorageInterface
+     */
+    private $sharedStorage;
+
     /**
      * @var ExampleFactoryInterface
      */
@@ -51,8 +57,7 @@ class GamePlayContext implements Context
     protected $topicRepository;
 
     /**
-     * PersonContext constructor.
-     *
+     * @param SharedStorageInterface $sharedStorage
      * @param ExampleFactoryInterface $gamePlayFactory
      * @param ExampleFactoryInterface $topicFactory
      * @param ExampleFactoryInterface $postFactory
@@ -60,6 +65,7 @@ class GamePlayContext implements Context
      * @param RepositoryInterface $topicRepository
      */
     public function __construct(
+        SharedStorageInterface $sharedStorage,
         ExampleFactoryInterface $gamePlayFactory,
         ExampleFactoryInterface $topicFactory,
         ExampleFactoryInterface $postFactory,
@@ -67,6 +73,7 @@ class GamePlayContext implements Context
         RepositoryInterface $topicRepository
     )
     {
+        $this->sharedStorage = $sharedStorage;
         $this->gamePlayFactory = $gamePlayFactory;
         $this->topicFactory = $topicFactory;
         $this->postFactory = $postFactory;
@@ -75,12 +82,12 @@ class GamePlayContext implements Context
     }
 
     /**
-     * @Given there is game play of :product played by :customer
+     * @Given /^(this product) has one game play from (customer "[^"]+")$/
      *
      * @param ProductInterface $product
      * @param CustomerInterface $customer
      */
-    public function thereIsGamePlayOfProductPlayedByCustomer(ProductInterface $product, CustomerInterface $customer)
+    public function productHasAGamePlay(ProductInterface $product, CustomerInterface $customer)
     {
         /** @var GamePlay $gamePlay */
         $gamePlay = $this->gamePlayFactory->create([
@@ -92,13 +99,13 @@ class GamePlayContext implements Context
     }
 
     /**
-     * @Given there is game play of :product played by :customer with :postCount comments
+     * @Given /^(this product) has one game play from (customer "[^"]+") with (\d+) comments$/
      *
      * @param ProductInterface $product
      * @param CustomerInterface $customer
      * @param int $postCount
      */
-    public function thereIsGamePlayOfProductPlayedByCustomerWithComments(ProductInterface $product, CustomerInterface $customer, $postCount)
+    public function thisProductHasAGamePlayWithComments(ProductInterface $product, CustomerInterface $customer, $postCount)
     {
         /** @var GamePlay $gamePlay */
         $gamePlay = $this->gamePlayFactory->create([
@@ -117,6 +124,10 @@ class GamePlayContext implements Context
         $this->gamePlayRepository->add($topic);
     }
 
+    /**
+     * @param Topic $topic
+     * @param int $amount
+     */
     private function createPostsForTopic(Topic $topic, $amount)
     {
         for ($i = 0 ; $i < $amount ; $i++) {

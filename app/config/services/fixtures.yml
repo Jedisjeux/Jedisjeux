@@ -87,6 +87,14 @@ services:
         tags:
             - { name: sylius_fixtures.fixture }
 
+    app.fixture.redirection:
+        class: AppBundle\Fixture\RedirectionFixture
+        arguments:
+            - "@app.manager.redirection"
+            - "@app.fixture.example_factory.redirection"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
     app.fixture.taxon:
         class: AppBundle\Fixture\TaxonFixture
         arguments:

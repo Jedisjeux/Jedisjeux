@@ -8,8 +8,8 @@ Feature: Deleting a game play
         Given there is customer with email "kevin@example.com"
         And there is customer with email "blue@example.com"
         And there is product "Puerto Rico"
-        And there is game play of "Puerto Rico" played by "kevin@example.com"
-        And there is game play of "Puerto Rico" played by "blue@example.com"
+        And this product has one game play from customer "kevin@example.com"
+        And this product has one game play from customer "blue@example.com"
         And I am logged in as an administrator
 
     @ui
@@ -22,7 +22,7 @@ Feature: Deleting a game play
     @ui
     Scenario: Deleting a game play with comments
         Given there is product "Dream Factory"
-        And there is game play of "Dream Factory" played by "kevin@example.com" with 2 comments
+        And this product has one game play from customer "kevin@example.com" with 2 comments
         And I want to browse game plays
         When I delete game play of "Dream Factory" played by "kevin@example.com"
         Then I should be notified that it has been successfully deleted

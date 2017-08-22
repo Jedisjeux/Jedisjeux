@@ -15,6 +15,7 @@ use AppBundle\Behat\Service\SecurityServiceInterface;
 use AppBundle\Behat\Service\SharedStorageInterface;
 use AppBundle\Fixture\Factory\ExampleFactoryInterface;
 use Behat\Behat\Context\Context;
+use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Webmozart\Assert\Assert;
 
@@ -66,6 +67,7 @@ final class AdminSecurityContext implements Context
      */
     public function iAmLoggedInAsAnAdministrator()
     {
+        /** @var UserInterface $user */
         $user = $this->userFactory->create(['email' => 'admin@example.com', 'password' => 'admin', 'roles' => ['ROLE_ADMIN']]);
         $this->userRepository->add($user);
 
@@ -85,5 +87,33 @@ final class AdminSecurityContext implements Context
         $this->securityService->logIn($user);
 
         $this->sharedStorage->set('administrator', $user);
+    }
+
+    /**
+     * @Given I am logged in as a redactor
+     */
+    public function iAmLoggedInAsARedactor()
+    {
+        /** @var UserInterface $user */
+        $user = $this->userFactory->create(['email' => 'redactor@example.com', 'password' => 'password123', 'roles' => ['ROLE_REDACTOR']]);
+        $this->userRepository->add($user);
+
+        $this->securityService->logIn($user);
+
+        $this->sharedStorage->set('redactor', $user);
+    }
+
+    /**
+     * @Given I am logged in as a staff user
+     */
+    public function iAmLoggedInAsAStaffUser()
+    {
+        /** @var UserInterface $user */
+        $user = $this->userFactory->create(['email' => 'staff-user@example.com', 'password' => 'password123', 'roles' => ['ROLE_STAFF']]);
+        $this->userRepository->add($user);
+
+        $this->securityService->logIn($user);
+
+        $this->sharedStorage->set('staff', $user);
     }
 }

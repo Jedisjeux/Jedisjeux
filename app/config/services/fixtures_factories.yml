@@ -74,6 +74,11 @@ services:
             - "@sylius.repository.product"
             - "@sylius.repository.customer"
 
+    app.fixture.example_factory.redirection:
+        class: AppBundle\Fixture\Factory\RedirectionExampleFactory
+        arguments:
+            - "@app.factory.redirection"
+
     app.fixture.example_factory.taxon:
         class: AppBundle\Fixture\Factory\TaxonExampleFactory
         arguments:

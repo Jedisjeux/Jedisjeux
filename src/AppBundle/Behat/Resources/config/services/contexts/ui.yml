@@ -8,6 +8,16 @@ services:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
+      app.behat.context.ui.backend.managing_articles:
+          class: AppBundle\Behat\Context\Ui\Backend\ManagingArticlesContext
+          arguments:
+              - "@app.behat.page.backend.article.index"
+              - "@app.behat.page.backend.article.create"
+              - "@app.behat.page.backend.article.update"
+              - "@app.behat.current_page_resolver"
+          tags:
+              - { name: fob.context_service }
+
       app.behat.context.ui.backend.managing_dealers:
           class: AppBundle\Behat\Context\Ui\Backend\ManagingDealersContext
           arguments:
@@ -43,6 +53,26 @@ services:
               - "@app.behat.page.backend.person.index"
               - "@app.behat.page.backend.person.create"
               - "@app.behat.page.backend.person.update"
+              - "@app.behat.current_page_resolver"
+          tags:
+              - { name: fob.context_service }
+
+      app.behat.context.ui.backend.managing_products:
+          class: AppBundle\Behat\Context\Ui\Backend\ManagingProductsContext
+          arguments:
+              - "@app.behat.page.backend.product.index"
+              - "@app.behat.page.backend.product.create"
+              - "@app.behat.page.backend.product.update"
+              - "@app.behat.current_page_resolver"
+          tags:
+              - { name: fob.context_service }
+
+      app.behat.context.ui.backend.managing_redirections:
+          class: AppBundle\Behat\Context\Ui\Backend\ManagingRedirectionsContext
+          arguments:
+              - "@app.behat.page.backend.redirection.index"
+              - "@app.behat.page.backend.redirection.create"
+              - "@app.behat.page.backend.redirection.update"
               - "@app.behat.current_page_resolver"
           tags:
               - { name: fob.context_service }
