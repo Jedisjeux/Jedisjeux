@@ -58,11 +58,11 @@ class RedirectionExampleFactory extends AbstractExampleFactory implements Exampl
     {
         $resolver
             ->setDefault('source', function (Options $options) {
-                return $this->faker->unique()->url;
+                return "/" . $this->faker->unique()->slug();
             })
 
             ->setDefault('destination', function (Options $options) {
-                return $this->faker->url;
+                return "/" . $this->faker->slug();
             })
 
             ->setDefault('permanent', function (Options $options) {

@@ -5,7 +5,6 @@
     <div class="ui two column stackable grid">
         <div class="column">
             <div class="ui content segment">
-                {{ dump(locale) }}
                 {{ form_row(form.translations[locale].name) }}
                 {{ form_row(form.translations[locale].slug, {'attr': {'data-url': path('sylius_admin_ajax_generate_product_slug')}}) }}
                 {{ form_row(form.translations[locale].shortDescription) }}
