@@ -11,7 +11,7 @@
 
 namespace AppBundle\Behat\Context\Setup;
 
-use AppBundle\Entity\Person;
+use AppBundle\Behat\Service\SharedStorageInterface;
 use AppBundle\Entity\Topic;
 use AppBundle\Fixture\Factory\ExampleFactoryInterface;
 use Behat\Behat\Context\Context;
@@ -24,6 +24,11 @@ use Sylius\Component\Customer\Model\CustomerInterface;
 class TopicContext implements Context
 {
     /**
+     * @var SharedStorageInterface
+     */
+    protected $sharedStorage;
+
+    /**
      * @var ExampleFactoryInterface
      */
     protected $topicFactory;
@@ -34,16 +39,21 @@ class TopicContext implements Context
     protected $topicRepository;
 
     /**
-     * PersonContext constructor.
-     *
+     * @param SharedStorageInterface $sharedStorage
      * @param ExampleFactoryInterface $topicFactory
      * @param EntityRepository $topicRepository
      */
-    public function __construct(ExampleFactoryInterface $topicFactory, EntityRepository $topicRepository)
+    public function __construct(
+        SharedStorageInterface $sharedStorage,
+        ExampleFactoryInterface $topicFactory,
+        EntityRepository $topicRepository
+    )
     {
+        $this->sharedStorage = $sharedStorage;
         $this->topicFactory = $topicFactory;
         $this->topicRepository = $topicRepository;
     }
+
 
     /**
      * @Given there is topic with title :title written by :customer
@@ -60,5 +70,6 @@ class TopicContext implements Context
         ]);
 
         $this->topicRepository->add($topic);
+        $this->sharedStorage->set('topic', $topic);
     }
 }

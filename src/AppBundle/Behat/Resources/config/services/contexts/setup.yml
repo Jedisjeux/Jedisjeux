@@ -73,6 +73,7 @@ services:
         app.behat.context.setup.post:
             class: AppBundle\Behat\Context\Setup\PostContext
             arguments:
+                - "@app.behat.shared_storage"
                 - "@__symfony__.app.fixture.example_factory.post"
                 - "@__symfony__.app.repository.post"
             tags:
@@ -107,6 +108,7 @@ services:
         app.behat.context.setup.topic:
             class: AppBundle\Behat\Context\Setup\TopicContext
             arguments:
+                - "@app.behat.shared_storage"
                 - "@__symfony__.app.fixture.example_factory.topic"
                 - "@__symfony__.app.repository.topic"
             tags:

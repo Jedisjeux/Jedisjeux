@@ -11,7 +11,7 @@
 
 namespace AppBundle\Behat\Context\Setup;
 
-use AppBundle\Entity\Person;
+use AppBundle\Behat\Service\SharedStorageInterface;
 use AppBundle\Entity\Post;
 use AppBundle\Entity\Topic;
 use AppBundle\Fixture\Factory\ExampleFactoryInterface;
@@ -25,6 +25,11 @@ use Sylius\Component\Customer\Model\CustomerInterface;
 class PostContext implements Context
 {
     /**
+     * @var SharedStorageInterface
+     */
+    protected $sharedStorage;
+
+    /**
      * @var ExampleFactoryInterface
      */
     protected $postFactory;
@@ -35,24 +40,24 @@ class PostContext implements Context
     protected $postRepository;
 
     /**
-     * PersonContext constructor.
-     *
+     * @param SharedStorageInterface $sharedStorage
      * @param ExampleFactoryInterface $postFactory
      * @param EntityRepository $postRepository
      */
-    public function __construct(ExampleFactoryInterface $postFactory, EntityRepository $postRepository)
+    public function __construct(SharedStorageInterface $sharedStorage, ExampleFactoryInterface $postFactory, EntityRepository $postRepository)
     {
+        $this->sharedStorage = $sharedStorage;
         $this->postFactory = $postFactory;
         $this->postRepository = $postRepository;
     }
 
     /**
-     * @Given customer :customer has answered the :topic topic
+     * @Given /^(this topic) has(?:| also) a post added by (customer "[^"]+")$/
      *
-     * @param CustomerInterface $customer
      * @param Topic $topic
+     * @param CustomerInterface $customer
      */
-    public function CustomerHasAnsweredTheTopic(CustomerInterface $customer, Topic $topic)
+    public function topicHasAPostAddedByCustomer(Topic $topic, CustomerInterface $customer)
     {
         /** @var Post $post */
         $post = $this->postFactory->create([
