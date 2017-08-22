@@ -7,6 +7,7 @@ default:
                 - app.behat.context.transform.dealer
                 - app.behat.context.transform.dealer_price
                 - app.behat.context.transform.product
+                - app.behat.context.transform.shared_storage
 
                 - app.behat.context.setup.admin_security
                 - app.behat.context.setup.dealer

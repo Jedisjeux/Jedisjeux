@@ -53,6 +53,7 @@ services:
         app.behat.context.setup.game_play:
             class: AppBundle\Behat\Context\Setup\GamePlayContext
             arguments:
+                - "@app.behat.shared_storage"
                 - "@__symfony__.app.fixture.example_factory.game_play"
                 - "@__symfony__.app.fixture.example_factory.topic"
                 - "@__symfony__.app.fixture.example_factory.post"
@@ -80,6 +81,7 @@ services:
         app.behat.context.setup.product:
             class: AppBundle\Behat\Context\Setup\ProductContext
             arguments:
+                - "@app.behat.shared_storage"
                 - "@__symfony__.app.fixture.example_factory.product"
                 - "@__symfony__.sylius.repository.product"
             tags:
