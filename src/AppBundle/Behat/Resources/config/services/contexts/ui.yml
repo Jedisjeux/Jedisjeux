@@ -57,6 +57,15 @@ services:
           tags:
               - { name: fob.context_service }
 
+      app.behat.context.ui.backend.managing_posts:
+          class: AppBundle\Behat\Context\Ui\Backend\ManagingPostsContext
+          arguments:
+              - "@app.behat.page.backend.post.index"
+              - "@app.behat.page.backend.post.update"
+              - "@app.behat.current_page_resolver"
+          tags:
+              - { name: fob.context_service }
+
       app.behat.context.ui.backend.managing_products:
           class: AppBundle\Behat\Context\Ui\Backend\ManagingProductsContext
           arguments:

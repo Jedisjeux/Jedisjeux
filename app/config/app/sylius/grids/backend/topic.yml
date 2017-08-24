@@ -14,7 +14,7 @@ sylius_grid:
                     path: author
                     options:
                         template: "backend/customer/grid/field/avatar.html.twig"
-                author.user.username:
+                author:
                     type: string
                     label: sylius.ui.username
                 title:

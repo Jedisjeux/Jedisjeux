@@ -66,5 +66,6 @@ class PostContext implements Context
         ]);
 
         $this->postRepository->add($post);
+        $this->sharedStorage->set('post', $post);
     }
 }

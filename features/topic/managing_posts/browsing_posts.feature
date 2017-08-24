@@ -12,9 +12,9 @@ Feature: Browsing posts
         And this topic has also a post added by customer "kevin@example.com"
         And I am logged in as an administrator
 
-    @todo
+    @ui
     Scenario: Browsing posts in website
         When I want to browse posts
         Then there should be 2 posts in the list
-        And I should see the post added by "blue@example.com" in the list
-        And I should see the post added by "kevin@example.com" in the list
+        And I should see the post added by customer "blue@example.com" on topic "Les parties jouées la veille" in the list
+        And I should see the post added by customer "kevin@example.com" on topic "Les parties jouées la veille" in the list
