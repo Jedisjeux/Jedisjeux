@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace AppBundle\Behat\Page\Backend\ProductReview;
+namespace AppBundle\Behat\Page\Backend\Post;
 
 use AppBundle\Behat\Page\Backend\Crud\UpdatePage as BaseUpdatePage;
 
@@ -19,19 +19,11 @@ use AppBundle\Behat\Page\Backend\Crud\UpdatePage as BaseUpdatePage;
 class UpdatePage extends BaseUpdatePage
 {
     /**
-     * @param string $title
+     * @param string $body
      */
-    public function changeTitle($title)
+    public function changeBody($body)
     {
-        $this->getElement('title')->setValue($title);
-    }
-
-    /**
-     * @param string $comment
-     */
-    public function changeComment($comment)
-    {
-        $this->getElement('comment')->setValue($comment);
+        $this->getElement('body')->setValue($body);
     }
 
     /**
@@ -40,8 +32,7 @@ class UpdatePage extends BaseUpdatePage
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'title' => '#sylius_product_review_title',
-            'comment' => '#sylius_product_review_comment',
+            'body' => '#app_post_body',
         ]);
     }
 }

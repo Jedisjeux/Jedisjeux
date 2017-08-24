@@ -64,7 +64,7 @@ class ManagingProductReviewsContext implements Context
     }
 
     /**
-     * @Given I want to edit :product_review topic
+     * @Given I want to edit :productReview product review
      */
     public function iWantToEditTheProductReview(ProductReview $productReview)
     {
@@ -80,11 +80,11 @@ class ManagingProductReviewsContext implements Context
     }
 
     /**
-     * @When I change its body as :body
+     * @When I change its comment as :comment
      */
-    public function iChangeItsLastNameAs($body)
+    public function iChangeItsLastNameAs($comment)
     {
-        $this->updatePage->changeBody($body);
+        $this->updatePage->changeComment($comment);
     }
 
     /**
@@ -96,10 +96,11 @@ class ManagingProductReviewsContext implements Context
     }
 
     /**
-     * @When I delete topic with title :title
+     * @When I delete the :title product review
      */
     public function iDeleteProductReviewWithTitle($title)
     {
+        $this->iWantToBrowseProductReviews();
         $this->indexPage->deleteResourceOnPage(['title' => $title]);
     }
 
@@ -112,14 +113,11 @@ class ManagingProductReviewsContext implements Context
     }
 
     /**
-     * @Then the topic :product_review should appear in the website
-     * @Then I should see the topic :product_review in the list
+     * @Then I should (also) see the product review :title in the list
      */
-    public function theProductReviewShould(ProductReview $productReview)
+    public function iShouldSeeTheProductReviewTitleInTheList($title)
     {
-        $this->indexPage->open();
-
-        Assert::true($this->indexPage->isSingleResourceOnPage(['title' => $productReview->getTitle()]));
+        Assert::true($this->indexPage->isSingleResourceOnPage(['title' => $title]));
     }
 
     /**
@@ -127,8 +125,7 @@ class ManagingProductReviewsContext implements Context
      */
     public function thisProductReviewWithTitleShouldAppearInTheWebsite($title)
     {
-        $this->indexPage->open();
-
+        $this->iWantToBrowseProductReviews();
         Assert::true($this->indexPage->isSingleResourceOnPage(['title' => $title]));
     }
 
@@ -145,6 +142,7 @@ class ManagingProductReviewsContext implements Context
      */
     public function thereShouldBeNoProductReviewAnymore($title)
     {
+        $this->iWantToBrowseProductReviews();
         Assert::false($this->indexPage->isSingleResourceOnPage(['title' => $title]));
     }
 

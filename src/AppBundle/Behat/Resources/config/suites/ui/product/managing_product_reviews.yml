@@ -1,0 +1,20 @@
+default:
+    suites:
+        ui_managing_product_reviews:
+            contexts_services:
+                - app.behat.context.hook.doctrine_orm
+
+                - app.behat.context.transform.customer
+                - app.behat.context.transform.product
+                - app.behat.context.transform.product_review
+                - app.behat.context.transform.shared_storage
+
+                - app.behat.context.setup.admin_security
+                - app.behat.context.setup.customer
+                - app.behat.context.setup.product
+                - app.behat.context.setup.product_review
+
+                - app.behat.context.ui.backend.managing_product_reviews
+                - app.behat.context.ui.backend.notification
+            filters:
+                tags: "@managing_product_reviews && @ui"

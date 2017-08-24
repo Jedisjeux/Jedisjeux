@@ -8,14 +8,14 @@ services:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
-      app.behat.page.backend.product_review.index:
-          class: AppBundle\Behat\Page\Backend\ProductReview\IndexPage
+      app.behat.page.backend.post.index:
+          class: AppBundle\Behat\Page\Backend\Post\IndexPage
           parent: app.behat.page.backend.crud.index
           public: false
-          arguments: ["sylius_backend_product_review_index"]
+          arguments: ["app_backend_post_index"]
 
-      app.behat.page.backend.product_review.update:
-          class: AppBundle\Behat\Page\Backend\ProductReview\UpdatePage
+      app.behat.page.backend.post.update:
+          class: AppBundle\Behat\Page\Backend\Post\UpdatePage
           parent: app.behat.page.backend.crud.update
           public: false
-          arguments: ["sylius_backend_product_review_update"]
+          arguments: ["app_backend_post_update"]
