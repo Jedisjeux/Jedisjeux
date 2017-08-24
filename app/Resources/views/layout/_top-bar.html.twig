@@ -46,15 +46,15 @@
         </div>
         <!-- user ends -->
 
-        <!-- administration starts -->
-        {% if is_granted('ROLE_STAFF') %}
+        <!-- dashboard starts -->
+        {% if is_granted('ROLE_DASHBOARD') %}
             <div class="tb-language pull-right">
                 <a href="{{ path('app_backend_dashboard') }}">
                     <span class="glyphicon glyphicon-cog"></span>
                     Administration</a>
             </div>
         {% endif %}
-        <!-- administration ends -->
+        <!-- dashboard ends -->
 
         <!-- Search section for responsive design -->
         <div class="tb-search pull-left">

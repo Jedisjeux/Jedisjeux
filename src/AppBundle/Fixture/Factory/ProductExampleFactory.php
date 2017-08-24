@@ -102,7 +102,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         $product->setShortDescription($options['short_description']);
         $product->setDescription($options['description']);
         $product->setMateriel($options['material']);
-        $product->setStatus(Product::PUBLISHED);
+        $product->setStatus($options['status']);
         $product->setReleasedAt($options['released_at']);
         $product->setCreatedAt($options['created_at']);
 
@@ -163,6 +163,16 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
 
             ->setDefault('code', function (Options $options) {
                 return StringInflector::nameToCode($options['name']);
+            })
+
+            ->setDefault('status', function (Options $options) {
+                return $this->faker->randomElement([
+                    Product::STATUS_NEW,
+                    Product::PENDING_TRANSLATION,
+                    Product::PENDING_REVIEW,
+                    Product::PENDING_PUBLICATION,
+                    Product::PUBLISHED,
+                ]);
             })
 
             ->setDefault('min_player_count', function (Options $options) {

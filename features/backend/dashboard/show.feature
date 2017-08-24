@@ -14,9 +14,17 @@ Feature: View backend dashboard
 
   Scenario: Staff user can access admin dashboard
     Given there are users:
-      | email                | role          | password |
+      | email             | role       | password |
       | staff@example.com | ROLE_STAFF | password |
     And I am logged in as user "staff@example.com" with password "password"
+    When I am on "/admin/"
+    Then the response status code should be 200
+
+  Scenario: User with product role can access admin dashboard
+    Given there are users:
+      | email                    | role         | password |
+      | product-manager@example.com | ROLE_PRODUCT_MANAGER | password |
+    And I am logged in as user "product-manager@example.com" with password "password"
     When I am on "/admin/"
     Then the response status code should be 200
 

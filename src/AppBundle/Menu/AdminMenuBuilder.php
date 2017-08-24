@@ -47,13 +47,17 @@ final class AdminMenuBuilder
     {
         $menu = $this->factory->createItem('root');
 
-        $this->addCatalogSubMenu($menu);
+        if ($this->authorizationChecker->isGranted('ROLE_PRODUCT_MANAGER')) {
+            $this->addCatalogSubMenu($menu);
+        }
 
         if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
             $this->addCustomersSubMenu($menu);
         }
 
-        $this->addContentSubMenu($menu);
+        if ($this->authorizationChecker->isGranted('ROLE_ARTICLE_MANAGER')) {
+            $this->addContentSubMenu($menu);
+        }
 
         if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
             $this->addForumSubMenu($menu);
