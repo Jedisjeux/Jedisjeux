@@ -116,4 +116,32 @@ final class AdminSecurityContext implements Context
 
         $this->sharedStorage->set('staff', $user);
     }
+
+    /**
+     * @Given I am logged in as a product manager
+     */
+    public function iAmLoggedInAsAProductManager()
+    {
+        /** @var UserInterface $user */
+        $user = $this->userFactory->create(['email' => 'product-manager@example.com', 'password' => 'password123', 'roles' => ['ROLE_PRODUCT_MANAGER']]);
+        $this->userRepository->add($user);
+
+        $this->securityService->logIn($user);
+
+        $this->sharedStorage->set('product_manager', $user);
+    }
+
+    /**
+     * @Given I am logged in as an article manager
+     */
+    public function iAmLoggedInAsAnArticleManager()
+    {
+        /** @var UserInterface $user */
+        $user = $this->userFactory->create(['email' => 'article-manager@example.com', 'password' => 'password123', 'roles' => ['ROLE_ARTICLE_MANAGER']]);
+        $this->userRepository->add($user);
+
+        $this->securityService->logIn($user);
+
+        $this->sharedStorage->set('article_manager', $user);
+    }
 }

@@ -40,6 +40,16 @@ sylius_fixtures:
                                 enabled: true
                                 avatar: "app/Resources/fixtures/avatars/loic_425.jpg"
                                 roles: ["ROLE_ADMIN"]
+                            -
+                                email: "product-manager@example.com"
+                                password: "password"
+                                enabled: true
+                                roles: ["ROLE_PRODUCT_MANAGER"]
+                            -
+                                email: "article-manager@example.com"
+                                password: "password"
+                                enabled: true
+                                roles: ["ROLE_ARTICLE_MANAGER"]
                 taxon:
                     options:
                         custom:
@@ -132,6 +142,7 @@ sylius_fixtures:
                         custom:
                             -
                                 name: "Puerto Rico"
+                                status: "published"
                                 min_player_count: 2
                                 max_player_count: 5
                                 min_duration: 90
@@ -145,6 +156,7 @@ sylius_fixtures:
                                 created_at: "now"
                             -
                                 name: "Tigre & Euphrate"
+                                status: "published"
                                 min_player_count: 2
                                 max_player_count: 4
                                 min_age: 12
@@ -163,6 +175,7 @@ sylius_fixtures:
                                 created_at: "now"
                             -
                                 name: "Shogun"
+                                status: "published"
                                 min_player_count: 3
                                 max_player_count: 5
                                 min_age: 12
@@ -173,6 +186,7 @@ sylius_fixtures:
                                 created_at: "now"
                             -
                                 name: "Yamataï"
+                                status: "published"
                                 min_player_count: 2
                                 max_player_count: 4
                                 min_duration: 40
