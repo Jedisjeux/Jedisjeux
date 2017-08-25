@@ -35,11 +35,17 @@ class AppUserType extends UserType
             ->remove('email')
             ->add('roles', ChoiceType::class, [
                 'choices' => [
-                    'app.ui.redactor' => 'ROLE_REDACTOR',
-                    'app.ui.translator' => 'ROLE_TRANSLATOR',
-                    'app.ui.reviewer' => 'ROLE_REVIEWER',
-                    'app.ui.publisher' => 'ROLE_PUBLISHER',
-                    'app.ui.administrator' => 'ROLE_ADMIN',
+                    'app.ui.contributors' => [
+                        'app.ui.product_manager' => 'ROLE_PRODUCT_MANAGER',
+                        'app.ui.article_manager' => 'ROLE_ARTICLE_MANAGER',
+                    ],
+                    'app.ui.staff' => [
+                        'app.ui.redactor' => 'ROLE_REDACTOR',
+                        'app.ui.translator' => 'ROLE_TRANSLATOR',
+                        'app.ui.reviewer' => 'ROLE_REVIEWER',
+                        'app.ui.publisher' => 'ROLE_PUBLISHER',
+                        'app.ui.administrator' => 'ROLE_ADMIN',
+                    ]
                 ],
                 'by_reference' => false,
                 'expanded' => true,

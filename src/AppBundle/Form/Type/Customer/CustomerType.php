@@ -57,4 +57,12 @@ class CustomerType extends AbstractType
     {
         return BaseCustomerType::class;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'app_customer';
+    }
 }

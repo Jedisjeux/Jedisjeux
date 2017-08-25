@@ -7,6 +7,7 @@ app:
         added_at: Date d'ajout
         age: Âge
         article: Article
+        article_manager: Gestionnaire d'articles
         articles: Articles
         article_details: Détails de l'article
         article_settings: Configuration de l'article
@@ -21,6 +22,7 @@ app:
         contact_request: Demande de contact
         contact_requests: Demandes de contact
         content: Contenu
+        contributors: Contributeurs
         created_at: Créé le
         created_at_female: Créée le
         dealer: Vendeur
@@ -107,6 +109,7 @@ app:
         price_list: Liste de prix
         product_boxes: Boites de jeu
         product_lists: Listes de jeu
+        product_manager: Gestionnaire de jeux
         pub_banners: Bannières de pub
         public: Public
         publisher: Publieur
@@ -132,6 +135,7 @@ app:
         submit: Envoyer
         slide_show: Carousel
         source: Source
+        staff: Staff
         string_blocks: Blocs de chaîne
         style: Style
         topic: Sujet
