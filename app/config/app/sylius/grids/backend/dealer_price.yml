@@ -6,25 +6,20 @@ sylius_grid:
                 options:
                     class: "%app.model.dealer_price.class%"
             sorting:
-                createdAt: desc
+                url: desc
             fields:
-                createdAt:
-                    type: twig
-                    label: sylius.ui.created_at
-                    sortable: createdAt
-                    options:
-                        template: "backend/grid/field/date/medium.html.twig"
-                dealer.name:
-                    type: string
-                    label: app.ui.dealer
                 name:
                     type: string
                     label: sylius.ui.name
                     sortable: name
-                barcode:
+                url:
                     type: string
-                    label: app.ui.barcode
-                    sortable: barcode
+                    label: app.ui.path
+                    sortable: ~
+                dealer:
+                    type: string
+                    label: app.ui.dealer
+
                 status:
                     type: twig
                     label: sylius.ui.status
@@ -32,12 +27,6 @@ sylius_grid:
                         template: "backend/grid/field/state.html.twig"
                         vars:
                             labels: "backend/dealer_price/label/state"
-                price:
-                    type: twig
-                    label: sylius.ui.price
-                    sortable: price
-                    options:
-                        template: "backend/grid/field/money.html.twig"
             filters:
                 search:
                     type: string

@@ -7,8 +7,12 @@ security:
 #        FOS\UserBundle\Model\UserInterface: sha512
 
     role_hierarchy:
+        ROLE_DASHBOARD:          ROLE_USER
+        ROLE_PRODUCT_MANAGER:    ROLE_DASHBOARD
+        ROLE_ARTICLE_MANAGER:    ROLE_DASHBOARD
+
         # Jedisjeux Team
-        ROLE_STAFF:              ROLE_USER
+        ROLE_STAFF:              ROLE_PRODUCT_MANAGER, ROLE_ARTICLE_MANAGER
 
         # Workflow rédaction
         ROLE_WORKFLOW:           ROLE_STAFF
@@ -19,21 +23,8 @@ security:
         ROLE_PUBLISHER:          ROLE_WORKFLOW
         ROLE_ADMIN_WORKFLOW:     ROLE_REDACTOR, ROLE_TRANSLATOR, ROLE_TRANSLATOR, ROLE_QUALITY, ROLE_REVIEWER, ROLE_PUBLISHER
 
-        # Communication
-        ROLE_PRESS_MANAGER:      ROLE_STAFF
-
-        #Forum
-        ROLE_MODERATOR:          ROLE_STAFF
-
-        # Association
-        ROLE_ASSOCIATION:        ROLE_STAFF
-        ROLE_OFFICE:             ROLE_ASSOCIATION
-        ROLE_SECRETARY:          ROLE_OFFICE
-        ROLE_TREASURER:          ROLE_OFFICE
-        ROLE_PRESIDENT:          ROLE_OFFICE
-
         # Admin
-        ROLE_ADMIN:              ROLE_ADMIN_WORKFLOW, ROLE_MODERATOR, ROLE_OFFICE
+        ROLE_ADMIN:              ROLE_ADMIN_WORKFLOW
 
     firewalls:
         api:
@@ -78,14 +69,14 @@ security:
         - { path: ^/verify, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/mon-compte.*, role: ROLE_USER }
 
-        - { path: ^/admin/dashboard, role: ROLE_STAFF }
-        - { path: ^/admin/articles, role: ROLE_WORKFLOW }
-        - { path: ^/admin/people, role: ROLE_WORKFLOW }
-        - { path: ^/admin/products, role: ROLE_WORKFLOW }
-        - { path: ^/admin/product-variants, role: ROLE_WORKFLOW }
-        - { path: ^/admin/ajax/products, role: ROLE_WORKFLOW }
-        - { path: ^/admin/ajax/product-variants, role: ROLE_WORKFLOW }
-        - { path: ^/admin/ajax/people, role: ROLE_WORKFLOW }
+        - { path: ^/admin/$, roles: [ROLE_DASHBOARD] }
+        - { path: ^/admin/articles, role: ROLE_ARTICLE_MANAGER }
+        - { path: ^/admin/people, role: ROLE_PRODUCT_MANAGER }
+        - { path: ^/admin/products, role: ROLE_PRODUCT_MANAGER }
+        - { path: ^/admin/product-variants, role: ROLE_PRODUCT_MANAGER }
+        - { path: ^/admin/ajax/products, role: ROLE_PRODUCT_MANAGER }
+        - { path: ^/admin/ajax/product-variants, role: ROLE_PRODUCT_MANAGER }
+        - { path: ^/admin/ajax/people, role: ROLE_PRODUCT_MANAGER }
         - { path: ^/admin/, role: ROLE_ADMIN }
 
         # create new entity

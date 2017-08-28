@@ -4,9 +4,7 @@
 {% import 'macros/buttons.html.twig' as button %}
 {% import 'macros/pageViews.html.twig' as pageViews %}
 
-{% block headline %}
-    {{ topic }}
-{% endblock %}
+{% set pageTitle = topic %}
 
 {% block breadcrumb_content %}
     {{ parent() }}

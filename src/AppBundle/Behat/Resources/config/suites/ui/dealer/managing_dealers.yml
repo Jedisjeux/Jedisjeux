@@ -1,0 +1,16 @@
+default:
+    suites:
+        ui_managing_dealers:
+            contexts_services:
+                - app.behat.context.hook.doctrine_orm
+
+                - app.behat.context.transform.dealer
+                - app.behat.context.transform.shared_storage
+
+                - app.behat.context.setup.admin_security
+                - app.behat.context.setup.dealer
+
+                - app.behat.context.ui.backend.managing_dealers
+                - app.behat.context.ui.backend.notification
+            filters:
+                tags: "@managing_dealers && @ui"

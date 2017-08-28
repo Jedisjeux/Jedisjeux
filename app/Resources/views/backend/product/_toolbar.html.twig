@@ -1,10 +1,12 @@
 <div class="ui right floated buttons">
-    <a class="ui labeled icon button"
-       target="_blank"
-       href="{{ path('sylius_product_show', {'slug': product.slug}) }}">
-        <i class="icon search"></i>
-        {{ 'app.ui.preview'|trans }}
-    </a>
+    {% if product.slug %}
+        <a class="ui labeled icon button"
+           target="_blank"
+           href="{{ path('sylius_product_show', {'slug': product.slug}) }}">
+            <i class="icon search"></i>
+            {{ 'app.ui.preview'|trans }}
+        </a>
+    {% endif %}
 
     {{ render(url('sylius_partial_product_status_show', {
         'id': product.id,

@@ -6,6 +6,8 @@ imports:
     - { resource: services/controller.yml }
     - { resource: services/feed.yml }
     - { resource: services/filter.yml }
+    - { resource: services/fixtures.yml }
+    - { resource: services/fixtures_factories.yml }
     - { resource: services/form.yml }
     - { resource: services/guard.yml }
     - { resource: services/installer.yml }

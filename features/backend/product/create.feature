@@ -19,30 +19,6 @@ Feature: Creates products
       | themes | Science-fiction |
       | themes | Fantastique     |
 
-  Scenario: Create a product as an administrator
-    Given I am logged in as user "admin@example.com" with password "password"
-    And I am on "/admin/products/"
-    And I click on "Créer" dropdown
-    And follow "Produit standard"
-    And I fill in the following:
-      | Nom  | Les Princes de Florence |
-      | Slug | les-princes-de-florence |
-    When I press "Créer"
-    Then I should see "a bien été créé"
-    And "Les Princes de Florence" product should exist
-
-  Scenario: Create a product as a redactor
-    Given I am logged in as user "redactor@example.com" with password "password"
-    And I am on "/admin/products/"
-    And I click on "Créer" dropdown
-    And follow "Produit standard"
-    And I fill in the following:
-      | Nom  | Les Princes de Florence |
-      | Slug | les-princes-de-florence |
-    When I press "Créer"
-    Then I should see "a bien été créé"
-    And "Les Princes de Florence" product should exist
-
   Scenario: Create a product from BoardGameGeek as an administrator
     Given I am logged in as user "admin@example.com" with password "password"
     And I am on "/admin/products/bgg/new?bggPath=https://boardgamegeek.com/boardgame/3076/puerto-rico"

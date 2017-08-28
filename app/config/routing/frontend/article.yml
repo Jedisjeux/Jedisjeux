@@ -42,5 +42,5 @@ app_frontend_article_show:
         _sylius:
             repository:
                 method: findOneBySlug
-                arguments: [$slug, expr:service('security.authorization_checker').isGranted('ROLE_STAFF')]
+                arguments: [$slug, expr:service('security.authorization_checker').isGranted('ROLE_ARTICLE_MANAGER')]
             template: frontend/article/show.html.twig

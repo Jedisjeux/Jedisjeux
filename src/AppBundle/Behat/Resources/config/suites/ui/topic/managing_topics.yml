@@ -1,0 +1,19 @@
+default:
+    suites:
+        ui_managing_topics:
+            contexts_services:
+                - app.behat.context.hook.doctrine_orm
+
+                - app.behat.context.transform.customer
+                - app.behat.context.transform.shared_storage
+                - app.behat.context.transform.topic
+
+                - app.behat.context.setup.admin_security
+                - app.behat.context.setup.customer
+                - app.behat.context.setup.topic
+                - app.behat.context.setup.post
+
+                - app.behat.context.ui.backend.managing_topics
+                - app.behat.context.ui.backend.notification
+            filters:
+                tags: "@managing_topics && @ui"

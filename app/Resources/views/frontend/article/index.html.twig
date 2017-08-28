@@ -3,9 +3,7 @@
 {% from 'macros/misc.html.twig' import pagination %}
 {% from 'macros/sorting.html.twig' import sorting %}
 
-{% block headline %}
-    {{ 'title.articles'|trans }}
-{% endblock headline %}
+{% set pageTitle = 'app.ui.articles'|trans %}
 
 {% block breadcrumb_content %}
     {{ parent() }}

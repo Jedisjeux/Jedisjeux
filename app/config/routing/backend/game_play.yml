@@ -3,7 +3,7 @@ app_backend_game_play:
         alias: app.game_play
         section: backend
         except: ['show', 'create']
-        redirect: index
+        redirect: update
         grid: app_backend_game_play
         vars:
             all:

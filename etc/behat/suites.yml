@@ -3,9 +3,10 @@ imports:
     - suites/ui/article.yml
     - suites/ui/contact_request.yml
     - suites/ui/customer.yml
-    - suites/ui/error.yml
+    - suites/ui/dashboard.yml
     - suites/ui/dealer.yml
     - suites/ui/dealer_price.yml
+    - suites/ui/error.yml
     - suites/ui/game_play.yml
     - suites/ui/homepage.yml
     - suites/ui/post.yml

@@ -3,7 +3,7 @@ app_backend_topic:
         alias: app.topic
         section: backend
         except: ['show']
-        redirect: index
+        redirect: update
         grid: app_backend_topic
         vars:
             all:

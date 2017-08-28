@@ -1,0 +1,15 @@
+default:
+    suites:
+        ui_managing_people:
+            contexts_services:
+                - app.behat.context.hook.doctrine_orm
+
+                - app.behat.context.transform.person
+
+                - app.behat.context.setup.admin_security
+                - app.behat.context.setup.person
+
+                - app.behat.context.ui.backend.managing_people
+                - app.behat.context.ui.backend.notification
+            filters:
+                tags: "@managing_people && @ui"

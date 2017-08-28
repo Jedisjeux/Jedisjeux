@@ -188,7 +188,6 @@
     {% else %}
         {{ form_row(form, {'label': false}) }}
     {% endif %}
-
 {% endblock %}
 
 {% macro single_image_left(form) %}
@@ -237,14 +236,22 @@
 
 {% macro single_image_top(form) -%}
     {{ form_row(form.title) }}
-    {{ form_row(form.imagePosition) }}
-    {% set image = form.image %}
+    {% set image = form.image.vars.data %}
 
-    {% if image.vars.data and image.vars.data.webPath %}
-        <img class="ui image" src="{{ image.vars.data.webPath | imagine_filter('magazine_item') }}"/>
+    {% if image and image.webPath %}
+        <div class="ui stackable grid">
+        <div class="four wide column">
+            <img class="ui image" src="{{ image.webPath | imagine_filter('magazine_item') }}"/>
+        </div>
+        <div class="twelve wide column">
     {% endif %}
+    {{ form_row(form.imagePosition) }}
     {{ form_row(form.image.file) }}
     {{ form_row(form.image.label) }}
+    {% if image and image.webPath %}
+        </div>
+        </div>
+    {% endif %}
     {{ form_row(form.body) }}
     {{ form_row(form.class) }}
 {%- endmacro %}
@@ -309,4 +316,20 @@
         </div>
         </div>
     {% endif %}
+{% endblock %}
+
+{% block _app_customer_user_roles_widget %}
+    {% set roles = [] %}
+    {% for child in form %}
+        {% set roles = roles|merge({(child.vars.value): child}) %}
+    {% endfor %}
+
+    {% for choiceGroup in form.vars.choices %}
+        <div class="ui segment">
+            <h5 class="ui dividing header">{{ choiceGroup.label|trans }}</h5>
+            {% for choice in choiceGroup.choices %}
+                {{ form_row(roles[choice.value]) }}
+            {% endfor %}
+        </div>
+    {% endfor %}
 {% endblock %}

@@ -154,7 +154,7 @@ class GamePlayType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'app_game_play';
     }

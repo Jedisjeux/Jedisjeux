@@ -1,0 +1,112 @@
+services:
+    app.fixture.article:
+        class: AppBundle\Fixture\ArticleFixture
+        arguments:
+            - "@app.manager.article"
+            - "@app.fixture.example_factory.article"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
+    app.fixture.app_user:
+        class: AppBundle\Fixture\AppUserFixture
+        arguments:
+            - "@sylius.manager.shop_user"
+            - "@app.fixture.example_factory.app_user"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
+    app.fixture.block:
+        class: AppBundle\Fixture\BlockFixture
+        arguments:
+            - "@app.manager.block"
+            - "@app.fixture.example_factory.block"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
+    app.fixture.dealer:
+        class: AppBundle\Fixture\DealerFixture
+        arguments:
+            - "@app.manager.dealer"
+            - "@app.fixture.example_factory.dealer"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
+    app.fixture.dealer_price:
+        class: AppBundle\Fixture\DealerPriceFixture
+        arguments:
+            - "@app.manager.dealer_price"
+            - "@app.fixture.example_factory.dealer_price"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
+    app.fixture.game_play:
+        class: AppBundle\Fixture\GamePlayFixture
+        arguments:
+            - "@app.manager.game_play"
+            - "@app.fixture.example_factory.game_play"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
+    app.fixture.notification:
+        class: AppBundle\Fixture\NotificationFixture
+        arguments:
+            - "@app.manager.notification"
+            - "@app.fixture.example_factory.notification"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
+    app.fixture.person:
+        class: AppBundle\Fixture\PersonFixture
+        arguments:
+            - "@app.manager.person"
+            - "@app.fixture.example_factory.person"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
+    app.fixture.post:
+        class: AppBundle\Fixture\PostFixture
+        arguments:
+            - "@app.manager.post"
+            - "@app.fixture.example_factory.post"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
+    app.fixture.product:
+        class: AppBundle\Fixture\ProductFixture
+        arguments:
+            - "@sylius.manager.product"
+            - "@app.fixture.example_factory.product"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
+    app.fixture.product_review:
+        class: AppBundle\Fixture\ProductReviewFixture
+        arguments:
+            - "@sylius.manager.product_review"
+            - "@app.fixture.example_factory.product_review"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
+    app.fixture.redirection:
+        class: AppBundle\Fixture\RedirectionFixture
+        arguments:
+            - "@app.manager.redirection"
+            - "@app.fixture.example_factory.redirection"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
+    app.fixture.taxon:
+        class: AppBundle\Fixture\TaxonFixture
+        arguments:
+            - "@sylius.manager.taxon"
+            - "@app.fixture.example_factory.taxon"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
+    app.fixture.topic:
+        class: AppBundle\Fixture\TopicFixture
+        arguments:
+            - "@app.manager.topic"
+            - "@app.fixture.example_factory.topic"
+        tags:
+            - { name: sylius_fixtures.fixture }

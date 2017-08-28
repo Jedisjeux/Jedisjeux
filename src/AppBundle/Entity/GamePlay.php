@@ -14,6 +14,7 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -82,6 +83,8 @@ class GamePlay implements ResourceInterface
      * @var ArrayCollection|GamePlayImage[]
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\GamePlayImage", mappedBy="gamePlay", cascade={"persist", "merge", "remove"})
+     *
+     * @Assert\Valid()
      */
     protected $images;
 

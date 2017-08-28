@@ -2,13 +2,5 @@
 
 {% include 'backend/product/_steps.html.twig' %}
 
-<div class="ui stackable grid">
-    <div class="three wide column">
-        {% include 'backend/product/_menu.html.twig' %}
-    </div>
-    <div class="thirteen wide column">
-        <div class="ui segment">
-            {% include 'backend/product/_tabs.html.twig' %}
-        </div>
-    </div>
-</div>
+{% set menu = knp_menu_get('app.backend.product_form', [], {'product': product}) %}
+{{ knp_menu_render(menu, {'template': 'backend/product/_menu.html.twig', 'form': form, 'product': product}) }}
