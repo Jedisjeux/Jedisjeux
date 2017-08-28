@@ -99,13 +99,6 @@ class Topic implements ResourceInterface
     protected $lastPostCreatedAt;
 
     /**
-     * @var Post
-     *
-     * @ORM\ManyToOne(targetEntity="Post")
-     */
-    protected $lastPost;
-
-    /**
      * @var Taxon
      *
      * @ORM\ManyToOne(targetEntity="Sylius\Component\Taxonomy\Model\TaxonInterface")
@@ -251,19 +244,9 @@ class Topic implements ResourceInterface
      */
     public function getLastPost()
     {
-        return $this->lastPost;
-    }
+        $lastPost = $this->posts->last();
 
-    /**
-     * @param Post $lastPost
-     *
-     * @return $this
-     */
-    public function setLastPost(Post $lastPost)
-    {
-        $this->lastPost = $lastPost;
-
-        return $this;
+        return $lastPost ?: null;
     }
 
     /**
