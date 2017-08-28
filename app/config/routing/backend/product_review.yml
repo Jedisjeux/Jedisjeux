@@ -2,7 +2,6 @@ sylius_backend_product_review:
     resource: |
         alias: sylius.product_review
         section: backend
-        templates: :backend/crud
         except: ['show', 'create']
         redirect: update
         grid: sylius_backend_product_review
@@ -13,4 +12,5 @@ sylius_backend_product_review:
                     form: backend/product_review/_form.html.twig
             index:
                 icon: star
+        templates: :backend/crud
     type: sylius.resource

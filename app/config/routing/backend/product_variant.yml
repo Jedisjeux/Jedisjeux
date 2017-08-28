@@ -2,9 +2,9 @@ sylius_backend_product_variant:
     resource: |
         alias: sylius.product_variant
         section: backend
-        templates: :backend/product_variant
         redirect: index
         only: [delete]
+        templates: :backend/product_variant
     type: sylius.resource
 
 sylius_backend_product_variant_index:

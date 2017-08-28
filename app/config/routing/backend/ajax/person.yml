@@ -2,7 +2,6 @@ app_admin_ajax_person:
     resource: |
         section: admin_ajax
         alias: app.person
-        path: "/"
         only: [create]
     type: sylius.resource_api
 

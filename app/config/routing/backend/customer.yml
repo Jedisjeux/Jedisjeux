@@ -2,7 +2,6 @@ sylius_backend_customer:
     resource: |
         section: backend
         alias: sylius.customer
-        templates: :backend/crud
         except: ['show', 'delete']
         grid: sylius_backend_customer
         redirect: index
@@ -13,6 +12,7 @@ sylius_backend_customer:
                     form: backend/customer/_form.html.twig
             index:
                 icon: users
+        templates: :backend/crud
     type: sylius.resource
 
 sylius_backend_customer_show:

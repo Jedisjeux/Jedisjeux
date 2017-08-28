@@ -2,7 +2,6 @@ app_backend_topic:
     resource: |
         alias: app.topic
         section: backend
-        templates: :backend/crud
         except: ['show']
         redirect: update
         grid: app_backend_topic
@@ -13,4 +12,5 @@ app_backend_topic:
                     form: backend/topic/_form.html.twig
             index:
                 icon: comment
+        templates: :backend/crud
     type: sylius.resource

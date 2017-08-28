@@ -2,7 +2,6 @@ sylius_backend_customer_group:
     resource: |
         alias: sylius.customer_group
         section: backend
-        templates: :backend/crud
         except: ['show']
         grid: sylius_backend_customer_group
         redirect: index
@@ -12,4 +11,5 @@ sylius_backend_customer_group:
                 subheader: sylius.ui.manage_customer_groups
             index:
                 icon: archive
+        templates: :backend/crud
     type: sylius.resource

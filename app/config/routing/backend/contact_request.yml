@@ -2,7 +2,6 @@ app_backend_contact_request:
     resource: |
         alias: app.contact_request
         section: backend
-        templates: :backend/crud
         only: ['index', 'delete']
         redirect: index
         grid: app_backend_contact_request
@@ -11,6 +10,7 @@ app_backend_contact_request:
                 subheader: app.ui.manage_contact_requests
             index:
                 icon: mail
+        templates: :backend/crud
     type: sylius.resource
 
 app_backend_contact_request_show:

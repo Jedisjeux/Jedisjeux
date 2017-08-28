@@ -2,7 +2,6 @@ app_backend_product_box:
     resource: |
         alias: app.product_box
         section: backend
-        templates: :backend/crud
         except: ['show']
         redirect: update
         grid: app_backend_product_box
@@ -11,4 +10,5 @@ app_backend_product_box:
                 subheader: app.ui.manage_product_boxes
             index:
                 icon: dropbox
+        templates: :backend/crud
     type: sylius.resource

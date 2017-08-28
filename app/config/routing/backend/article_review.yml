@@ -2,9 +2,9 @@ sylius_backend_article_review:
     resource: |
         alias: sylius.article_review
         section: backend
-        templates: :backend/article_review
         redirect: index
         only: [delete]
+        templates: :backend/article_review
     type: sylius.resource
 
 sylius_backend_article_review_index:

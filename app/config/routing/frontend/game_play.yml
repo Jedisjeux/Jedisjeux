@@ -56,10 +56,10 @@ app_frontend_game_play_index:
 app_frontend_game_play:
     resource: |
         alias: app.game_play
-        path: /parties
+        path: parties
         section: frontend
-        templates: :frontend/game_play
         redirect: index
         only: [delete]
+        templates: :frontend/game_play
     type: sylius.resource
 
