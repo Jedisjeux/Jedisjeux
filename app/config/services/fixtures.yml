@@ -79,6 +79,14 @@ services:
         tags:
             - { name: sylius_fixtures.fixture }
 
+    app.fixture.product_list:
+        class: AppBundle\Fixture\ProductListFixture
+        arguments:
+            - "@app.manager.product_list"
+            - "@app.fixture.example_factory.product_list"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
     app.fixture.product_review:
         class: AppBundle\Fixture\ProductReviewFixture
         arguments:
