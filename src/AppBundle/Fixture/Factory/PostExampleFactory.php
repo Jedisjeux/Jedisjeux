@@ -76,22 +76,6 @@ class PostExampleFactory extends AbstractExampleFactory implements ExampleFactor
     /**
      * {@inheritdoc}
      */
-    public function create(array $options = [])
-    {
-        $options = $this->optionsResolver->resolve($options);
-
-        /** @var Post $post */
-        $post = $this->postFactory->createNew();
-        $post->setBody($options['body']);
-        $post->setTopic($options['topic']);
-        $post->setAuthor($options['author']);
-
-        return $post;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver
@@ -105,6 +89,35 @@ class PostExampleFactory extends AbstractExampleFactory implements ExampleFactor
 
             ->setDefault('author', LazyOption::randomOne($this->customerRepository))
             ->setAllowedTypes('author', ['null', 'string', CustomerInterface::class])
-            ->setNormalizer('author', LazyOption::findOneBy($this->customerRepository, 'email'));
+            ->setNormalizer('author', LazyOption::findOneBy($this->customerRepository, 'email'))
+
+            ->setDefault('created_at', function (Options $options) {
+                return $this->faker->dateTimeBetween('-1 year', 'yesterday');
+            } )
+            ->setAllowedTypes('created_at', ['null', 'string', \DateTimeInterface::class])
+            ->setNormalizer('created_at', function (Options $options, $createdAt) {
+                if (!is_string($createdAt)) {
+                    return $createdAt;
+                }
+
+                return new \DateTime($createdAt);
+            });
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function create(array $options = [])
+    {
+        $options = $this->optionsResolver->resolve($options);
+
+        /** @var Post $post */
+        $post = $this->postFactory->createNew();
+        $post->setBody($options['body']);
+        $post->setTopic($options['topic']);
+        $post->setAuthor($options['author']);
+        $post->setCreatedAt($options['created_at']);
+
+        return $post;
     }
 }

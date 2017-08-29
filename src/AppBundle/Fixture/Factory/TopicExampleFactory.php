@@ -136,7 +136,15 @@ class TopicExampleFactory extends AbstractExampleFactory implements ExampleFacto
             ->setNormalizer('author', LazyOption::findOneBy($this->customerRepository, 'email'))
 
             ->setDefault('created_at', function (Options $options) {
-                return $this->faker->dateTimeBetween('2 months ago', 'today');
+                return $this->faker->dateTimeBetween('-1 year', 'yesterday');
+            } )
+            ->setAllowedTypes('created_at', ['null', 'string', \DateTimeInterface::class])
+            ->setNormalizer('created_at', function (Options $options, $createdAt) {
+                if (!is_string($createdAt)) {
+                    return $createdAt;
+                }
+
+                return new \DateTime($createdAt);
             })
 
             ->setDefault('article', LazyOption::randomOneOrNull($this->articleRepository, 50))
