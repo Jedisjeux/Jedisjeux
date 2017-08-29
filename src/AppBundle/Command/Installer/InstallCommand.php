@@ -50,9 +50,9 @@ EOT
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('<info>Installing Jedisjeux...</info>');
-        $output->writeln('');
+        $output->writeln($this->getSyliusLogo());
 
-        $this->ensureDirectoryExistsAndIsWritable(self::APP_CACHE, $output);
+        $this->ensureDirectoryExistsAndIsWritable($this->getContainer()->getParameter('kernel.cache_dir'), $output);
 
         $errored = false;
         foreach ($this->commands as $step => $command) {
@@ -81,5 +81,24 @@ EOT
         }
 
         return '<info>Jedisjeux has been successfully installed.</info>';
+    }
+
+    private function getSyliusLogo()
+    {
+        return '
+        
+   $$$$$\                 $$\ $$\                                             
+   \__$$ |                $$ |\__|                                            
+      $$ | $$$$$$\   $$$$$$$ |$$\  $$$$$$$\ $$\  $$$$$$\  $$\   $$\ $$\   $$\ 
+      $$ |$$  __$$\ $$  __$$ |$$ |$$  _____|\__|$$  __$$\ $$ |  $$ |\$$\ $$  |
+$$\   $$ |$$$$$$$$ |$$ /  $$ |$$ |\$$$$$$\  $$\ $$$$$$$$ |$$ |  $$ | \$$$$  / 
+$$ |  $$ |$$   ____|$$ |  $$ |$$ | \____$$\ $$ |$$   ____|$$ |  $$ | $$  $$<  
+\$$$$$$  |\$$$$$$$\ \$$$$$$$ |$$ |$$$$$$$  |$$ |\$$$$$$$\ \$$$$$$  |$$  /\$$\ 
+ \______/  \_______| \_______|\__|\_______/ $$ | \_______| \______/ \__/  \__|
+                                      $$\   $$ |                              
+                                      \$$$$$$  |                              
+                                       \______/                               
+
+        ';
     }
 }
