@@ -11,8 +11,8 @@
 
 namespace AppBundle\Behat\Context\Setup;
 
-use AppBundle\Entity\Person;
-use AppBundle\Entity\Topic;
+use AppBundle\Behat\Service\SharedStorageInterface;
+use AppBundle\Entity\User;
 use AppBundle\Fixture\Factory\ExampleFactoryInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
@@ -24,9 +24,14 @@ use Sylius\Component\Customer\Model\CustomerInterface;
 class CustomerContext implements Context
 {
     /**
+     * @var SharedStorageInterface
+     */
+    protected $sharedStorage;
+
+    /**
      * @var ExampleFactoryInterface
      */
-    protected $customerFactory;
+    protected $appUserFactory;
 
     /**
      * @var EntityRepository
@@ -36,12 +41,17 @@ class CustomerContext implements Context
     /**
      * CustomerContext constructor.
      *
-     * @param ExampleFactoryInterface $customerFactory
+     * @param SharedStorageInterface $sharedStorage
+     * @param ExampleFactoryInterface $appUserFactory
      * @param EntityRepository $customerRepository
      */
-    public function __construct(ExampleFactoryInterface $customerFactory, EntityRepository $customerRepository)
+    public function __construct(
+        SharedStorageInterface $sharedStorage,
+        ExampleFactoryInterface $appUserFactory,
+        EntityRepository $customerRepository)
     {
-        $this->customerFactory = $customerFactory;
+        $this->sharedStorage = $sharedStorage;
+        $this->appUserFactory = $appUserFactory;
         $this->customerRepository = $customerRepository;
     }
 
@@ -52,11 +62,13 @@ class CustomerContext implements Context
      */
     public function thereIsCustomerWithEmail($email)
     {
-        /** @var CustomerInterface $customer */
-        $customer = $this->customerFactory->create([
+        /** @var User $user */
+        $user = $this->appUserFactory->create([
             'email' => $email,
         ]);
 
-        $this->customerRepository->add($customer);
+        $this->customerRepository->add($user);
+        $this->sharedStorage->set('user', $user);
+        $this->sharedStorage->set('customer', $user->getCustomer());
     }
 }

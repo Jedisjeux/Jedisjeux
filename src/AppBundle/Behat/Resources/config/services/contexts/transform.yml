@@ -50,6 +50,13 @@ services:
             tags:
                 - { name: fob.context_service }
 
+        app.behat.context.transform.product_list:
+            class: AppBundle\Behat\Context\Transform\ProductListContext
+            arguments:
+                - "@__symfony__.app.repository.product_list"
+            tags:
+                - { name: fob.context_service }
+
         app.behat.context.transform.product_review:
             class: AppBundle\Behat\Context\Transform\ProductReviewContext
             arguments:

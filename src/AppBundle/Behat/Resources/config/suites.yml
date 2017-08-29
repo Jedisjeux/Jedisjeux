@@ -5,6 +5,7 @@ imports:
     - suites/ui/person/managing_people.yml
     - suites/ui/product/managing_game_plays.yml
     - suites/ui/product/managing_products.yml
+    - suites/ui/product/managing_product_lists.yml
     - suites/ui/product/managing_product_reviews.yml
     - suites/ui/redirection/managing_redirections.yml
     - suites/ui/topic/managing_topics.yml
