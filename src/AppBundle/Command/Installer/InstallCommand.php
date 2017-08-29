@@ -50,7 +50,7 @@ EOT
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('<info>Installing Jedisjeux...</info>');
-        $output->writeln($this->getSyliusLogo());
+        $output->writeln($this->getLogo());
 
         $this->ensureDirectoryExistsAndIsWritable($this->getContainer()->getParameter('kernel.cache_dir'), $output);
 
@@ -83,7 +83,10 @@ EOT
         return '<info>Jedisjeux has been successfully installed.</info>';
     }
 
-    private function getSyliusLogo()
+    /**
+     * @return string
+     */
+    private function getLogo()
     {
         return '
         
