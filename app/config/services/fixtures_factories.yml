@@ -67,6 +67,12 @@ services:
             - "@app.repository.person"
             - "@sylius.generator.slug"
 
+    app.fixture.example_factory.product_list:
+        class: AppBundle\Fixture\Factory\ProductListExampleFactory
+        arguments:
+            - "@app.factory.product_list"
+            - "@sylius.repository.customer"
+
     app.fixture.example_factory.product_review:
         class: AppBundle\Fixture\Factory\ProductReviewExampleFactory
         arguments:
