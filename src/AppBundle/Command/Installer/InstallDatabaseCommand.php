@@ -32,11 +32,13 @@ EOT
     {
         $output->writeln(sprintf('Creating Jedisjeux database for environment <info>%s</info>.', $this->getEnvironment()));
 
-        $commands = $this->get('sylius.commands_provider.database_setup')->getCommands($input, $output, $this->getHelper('question'));
+        $commands = $this
+            ->get('sylius.commands_provider.database_setup')
+            ->getCommands($input, $output, $this->getHelper('question'));
 
         $this->runCommands($commands, $output);
         $output->writeln('');
 
-        $this->commandExecutor->runCommand('app:install:data', [], $output);
+        $this->commandExecutor->runCommand('app:install:sample-data', [], $output);
     }
 }
