@@ -11,30 +11,19 @@ var uglify = require('gulp-uglify');
 var uglifycss = require('gulp-uglifycss');
 var argv = require('yargs').argv;
 
-var rootPath = argv.rootPath || '../';
+var rootPath = argv.rootPath;
 var adminRootPath = rootPath + 'backend/compiled/';
 var vendorPath = argv.vendorPath || '';
-var vendorUiPath = '' === vendorPath ? '../../../vendor/sylius/ui-bundle/' : vendorPath + 'sylius/ui-bundle/';
+var vendorUiPath = vendorPath + 'sylius/ui-bundle/';
 var nodeModulesPath = argv.nodeModulesPath;
-var bowerComponentsPath = rootPath + 'backend/bower_components/';
 
 var paths = {
     admin: {
         js: [
-            // TODO include all sylius js from ui bundle
             nodeModulesPath + 'jquery/dist/jquery.min.js',
+            nodeModulesPath + 'jquery-ui-dist/jquery-ui.min.js',
             nodeModulesPath + 'semantic-ui-css/semantic.min.js',
-            nodeModulesPath + 'select2/dist/js/select2.full.js',
-            vendorUiPath + 'Resources/private/js/app.js',
-            vendorUiPath + 'Resources/private/js/sylius-api-login.js',
-            vendorUiPath + 'Resources/private/js/sylius-api-toggle.js',
-            vendorUiPath + 'Resources/private/js/sylius-auto-complete.js',
-            vendorUiPath + 'Resources/private/js/sylius-form-collection.js',
-            vendorUiPath + 'Resources/private/js/sylius-product-attributes.js',
-            vendorUiPath + 'Resources/private/js/sylius-prototype-handler.js',
-            vendorUiPath + 'Resources/private/js/sylius-require-confirmation.js',
-            vendorUiPath + 'Resources/private/js/sylius-toggle.js',
-            bowerComponentsPath + 'select2/dist/js/select2.js',
+            vendorUiPath + 'Resources/private/js/**.js',
             'js/**'
         ],
         sass: [
@@ -43,8 +32,8 @@ var paths = {
         ],
         css: [
             nodeModulesPath + 'semantic-ui-css/semantic.min.css',
-            nodeModulesPath + 'select2/dist/css/select2.min.css',
-            bowerComponentsPath + 'select2/dist/css/select2.css',
+            //nodeModulesPath + 'select2/dist/css/select2.min.css',
+            //bowerComponentsPath + 'select2/dist/css/select2.css',
             vendorUiPath + 'Resources/private/css/**',
             'css/**'
         ],
