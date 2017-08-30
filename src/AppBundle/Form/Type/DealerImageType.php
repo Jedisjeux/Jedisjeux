@@ -34,7 +34,7 @@ class DealerImageType extends AbstractImageType
     /**
      * @return string
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'app_dealer_image';
     }

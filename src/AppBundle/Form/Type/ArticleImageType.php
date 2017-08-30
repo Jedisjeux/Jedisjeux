@@ -34,7 +34,7 @@ class ArticleImageType extends AbstractImageType
     /**
      * @return string
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'app_article_image';
     }

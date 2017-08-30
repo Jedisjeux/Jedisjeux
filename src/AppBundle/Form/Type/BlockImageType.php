@@ -50,7 +50,7 @@ class BlockImageType extends AbstractImageType
     /**
      * @return string
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'app_block_image';
     }
