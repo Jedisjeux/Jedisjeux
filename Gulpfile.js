@@ -29,4 +29,10 @@ gulp.task('shop', function() {
     ;
 });
 
+gulp.task('shop-watch', function() {
+    gulp.src('web/assets/frontend/Gulpfile.js', { read: false })
+        .pipe(chug({ args: config, tasks: 'watch' }))
+    ;
+});
+
 gulp.task('default', ['admin', 'shop']);

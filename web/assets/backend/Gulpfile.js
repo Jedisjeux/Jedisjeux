@@ -11,10 +11,10 @@ var uglify = require('gulp-uglify');
 var uglifycss = require('gulp-uglifycss');
 var argv = require('yargs').argv;
 
-var rootPath = argv.rootPath;
+var rootPath = typeof argv.rootPath === 'undefined' ? '../' : argv.rootPath;
 var adminRootPath = rootPath + 'backend/compiled/';
 var vendorPath = argv.vendorPath || '';
-var vendorUiPath = vendorPath + 'sylius/ui-bundle/';
+var vendorUiPath = '' === vendorPath ? '../../../vendor/sylius/ui-bundle/' : vendorPath + 'sylius/ui-bundle/';
 var nodeModulesPath = argv.nodeModulesPath;
 
 var paths = {
