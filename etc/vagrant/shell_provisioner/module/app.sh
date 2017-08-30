@@ -4,7 +4,7 @@ cd /var/www/jdj
 
 composer install --optimize-autoloader
 
-#php app/console app:install --no-interaction
-#npm rebuild node-sass
-#npm install
-#./node_modules/.bin/gulp
+php bin/console app:install --no-interaction
+yarn install
+# TODO remove admin argument
+yarn run gulp admin

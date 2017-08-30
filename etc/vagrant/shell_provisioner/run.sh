@@ -19,6 +19,7 @@ DEPENDENCIES=(
     mysql
     apache
     node
+    yarn
     elasticsearch
 )
 
