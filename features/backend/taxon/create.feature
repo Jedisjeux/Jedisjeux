@@ -37,7 +37,7 @@ Feature: Creates taxons
     When I press "Créer"
     Then I should see "a bien été créée"
 
-  @javascript
+  @javascript @todo
   Scenario: Create a taxon with a parent
     Given I am on "/admin/taxons/"
     And I follow "Voir les sous-catégories"
