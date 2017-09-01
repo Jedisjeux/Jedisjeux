@@ -2,6 +2,7 @@
 
 code=0
 commands=(
+    validate-composer
     validate-doctrine-schema
     test-phpspec
     test-phpunit
