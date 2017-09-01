@@ -17,9 +17,21 @@ gulp.task('admin', function() {
     ;
 });
 
+gulp.task('admin-watch', function() {
+    gulp.src('web/assets/backend/Gulpfile.js', { read: false })
+        .pipe(chug({ args: config, tasks: 'watch' }))
+    ;
+});
+
 gulp.task('shop', function() {
     gulp.src('web/assets/frontend/Gulpfile.js', { read: false })
         .pipe(chug({ args: config }))
+    ;
+});
+
+gulp.task('shop-watch', function() {
+    gulp.src('web/assets/frontend/Gulpfile.js', { read: false })
+        .pipe(chug({ args: config, tasks: 'watch' }))
     ;
 });
 
