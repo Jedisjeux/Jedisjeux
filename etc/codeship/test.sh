@@ -2,8 +2,10 @@
 
 code=0
 commands=(
+    validate-doctrine-schema
     test-phpspec
     test-phpunit
+    test-fixtures
     test-behat-without-javascript
     test-behat-with-javascript
     test-new-behat-without-javascript
