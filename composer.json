@@ -1,10 +1,11 @@
 {
   "name": "jedisjeux/jedisjeux",
+  "description": "Boardgames website, based on Symfony framework.",
   "license": "MIT",
   "type": "project",
   "autoload": {
     "psr-4": {
-      "": "src/"
+      "AppBundle\\": "src/AppBundle/"
     },
     "classmap": [
       "app/AppKernel.php",
