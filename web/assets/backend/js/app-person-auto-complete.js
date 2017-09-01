@@ -16,9 +16,6 @@
                         var firstName = getFirstNameByConcatenatedNames(addedText);
 
                         postPerson($element, addedText, createUrl, lastName, firstName);
-
-                        console.log(firstName);
-                        console.log(lastName);
                     }
                 });
             });

@@ -183,11 +183,31 @@
     {% set imagePosition = form.imagePosition.vars.data %}
     {% set type = 'single_image_' ~ imagePosition %}
 
-    {% if attribute(blocks, type) is defined %}
-        {{ attribute(blocks, type, [form]) }}
-    {% else %}
-        {{ form_row(form, {'label': false}) }}
-    {% endif %}
+    <div class="ui segment">
+        <div class="ui one column grid">
+            <div class="row">
+                <div class="column">
+                    <div class="ui right floated buttons">
+                        <a class="ui labeled icon button app-move-up" href="#">
+                            <i class="icon arrow up"></i>
+                            {{ 'app.ui.move_up'|trans }}
+                        </a>
+                        <a class="ui labeled icon button app-move-down" href="#">
+                            <i class="icon arrow down"></i>
+                            {{ 'app.ui.move_down'|trans }}
+                        </a>
+                        <div style="clear: left"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if attribute(blocks, type) is defined %}
+            {{ attribute(blocks, type, [form]) }}
+        {% else %}
+            {{ form_row(form, {'label': false}) }}
+        {% endif %}
+    </div>
 {% endblock %}
 
 {% macro single_image_left(form) %}
@@ -211,6 +231,7 @@
     </div>
 
     {{ form_row(form.imagePosition) }}
+    {{ form_row(form.position) }}
 {% endmacro %}
 
 {% macro single_image_right(form) %}
@@ -232,6 +253,7 @@
             {{ form_row(form.image.label) }}
         </div>
     </div>
+    {{ form_row(form.position) }}
 {% endmacro %}
 
 {% macro single_image_top(form) -%}
@@ -254,6 +276,7 @@
     {% endif %}
     {{ form_row(form.body) }}
     {{ form_row(form.class) }}
+    {{ form_row(form.position) }}
 {%- endmacro %}
 
 {% block app_product_variant_image_widget %}

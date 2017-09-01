@@ -80,6 +80,8 @@ app:
         manage_string_blocks: Gérer les blocs de chaîne
         manage_topics: Gérer les sujets
         material_rating: Note du matériel
+        move_up: Monter
+        move_down: Descendre
         my_game_library: Ma ludothèque
         my_game_lists: Mes listes de jeu
         my_game_plays: Mes parties de jeu

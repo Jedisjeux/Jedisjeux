@@ -174,6 +174,7 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
      * @var Collection|Block[]
      *
      * @ORM\OneToMany(targetEntity="Block", mappedBy="article", cascade={"persist", "merge"})
+     * @ORM\OrderBy({"position" = "ASC"})
      *
      * @Assert\Valid()
      */
