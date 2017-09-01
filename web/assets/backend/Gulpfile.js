@@ -21,7 +21,6 @@ var paths = {
     admin: {
         js: [
             nodeModulesPath + 'jquery/dist/jquery.min.js',
-            nodeModulesPath + 'jquery-ui-dist/jquery-ui.min.js',
             nodeModulesPath + 'semantic-ui-css/semantic.min.js',
             vendorUiPath + 'Resources/private/js/**.js',
             'js/**'
@@ -32,8 +31,6 @@ var paths = {
         ],
         css: [
             nodeModulesPath + 'semantic-ui-css/semantic.min.css',
-            //nodeModulesPath + 'select2/dist/css/select2.min.css',
-            //bowerComponentsPath + 'select2/dist/css/select2.css',
             vendorUiPath + 'Resources/private/css/**',
             'css/**'
         ],

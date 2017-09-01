@@ -17,6 +17,7 @@
         $(document).productSlugGenerator();
         $(document).taxonSlugGenerator();
 
+        $(document).moveBlocks();
 
         $(document).on('dom-node-inserted', function(addedElement) {
           $('.ui.checkbox').checkbox();
