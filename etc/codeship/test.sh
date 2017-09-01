@@ -5,6 +5,7 @@ commands=(
     test-phpspec
     test-phpunit
     test-behat-without-javascript
+    test-new-behat-without-javascript
 )
 
 for command in ${commands[@]}; do
