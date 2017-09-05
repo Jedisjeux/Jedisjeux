@@ -17,8 +17,8 @@ Feature: Game-play comment creation
     And I am logged in as user "kevin@example.com" with password "password"
 
   @javascript
-  Scenario: Create new comment
-    Given I am on "/parties/"
+  Scenario: Create new game play comment
+    Given I am on "/mon-compte/parties/"
     And I follow "Lewis & Clark"
     And I follow "Commenter la partie"
     And I fill in wysiwyg field "app_post_body" with "Here is my awesome comment."
