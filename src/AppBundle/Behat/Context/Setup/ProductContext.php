@@ -61,6 +61,7 @@ class ProductContext implements Context
         /** @var Product $product */
         $product = $this->productFactory->create([
             'name' => $name,
+            'status' => Product::PUBLISHED,
         ]);
 
         $this->productRepository->add($product);

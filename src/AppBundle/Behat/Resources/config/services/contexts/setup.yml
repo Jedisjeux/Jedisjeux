@@ -115,6 +115,15 @@ services:
             tags:
                 - { name: fob.context_service }
 
+        app.behat.context.setup.taxon:
+            class: AppBundle\Behat\Context\Setup\TaxonContext
+            arguments:
+                - "@app.behat.shared_storage"
+                - "@__symfony__.app.fixture.example_factory.taxon"
+                - "@__symfony__.sylius.repository.taxon"
+            tags:
+                - { name: fob.context_service }
+
         app.behat.context.setup.topic:
             class: AppBundle\Behat\Context\Setup\TopicContext
             arguments:

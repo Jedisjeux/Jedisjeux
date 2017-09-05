@@ -1,0 +1,18 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        ui_viewing_products:
+            contexts_services:
+                - app.behat.context.hook.doctrine_orm
+
+                - app.behat.context.transform.product
+                - app.behat.context.transform.shared_storage
+
+                - app.behat.context.setup.product
+                - app.behat.context.setup.taxon
+
+                - app.behat.context.ui.frontend.product
+            filters:
+                tags: "@viewing_products && @ui"

@@ -126,3 +126,12 @@ services:
             - "@app.behat.notification_checker"
         tags:
             - { name: fob.context_service }
+
+    app.behat.context.ui.frontend.product:
+        class: AppBundle\Behat\Context\Ui\Frontend\ProductContext
+        arguments:
+            - "@app.behat.page.frontend.product.show"
+            - "@app.behat.page.frontend.product.index"
+        tags:
+            - { name: fob.context_service }
+
