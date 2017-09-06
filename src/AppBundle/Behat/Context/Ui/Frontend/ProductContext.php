@@ -11,9 +11,11 @@
 
 namespace AppBundle\Behat\Context\Ui\Frontend;
 
+use AppBundle\Behat\Page\Frontend\Product\IndexByTaxonPage;
 use AppBundle\Behat\Page\Frontend\Product\IndexPage;
 use AppBundle\Behat\Page\Frontend\Product\ShowPage;
 use Behat\Behat\Context\Context;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -32,15 +34,20 @@ class ProductContext implements Context
     private $indexPage;
 
     /**
-     * ProductContext constructor.
-     *
+     * @var IndexByTaxonPage
+     */
+    private $indexByTaxonPage;
+
+    /**
      * @param ShowPage $showPage
      * @param IndexPage $indexPage
+     * @param IndexByTaxonPage $indexByTaxonPage
      */
-    public function __construct(ShowPage $showPage, IndexPage $indexPage)
+    public function __construct(ShowPage $showPage, IndexPage $indexPage, IndexByTaxonPage $indexByTaxonPage)
     {
         $this->showPage = $showPage;
         $this->indexPage = $indexPage;
+        $this->indexByTaxonPage = $indexByTaxonPage;
     }
 
     /**
@@ -52,10 +59,26 @@ class ProductContext implements Context
     }
 
     /**
+     * @When /^I browse products from (taxon "([^"]+)")$/
+     */
+    public function iCheckListOfProductsForTaxon(TaxonInterface $taxon)
+    {
+        $this->indexByTaxonPage->open(['slug' => $taxon->getSlug()]);
+    }
+
+    /**
      * @Then I should see the product :productName
      */
     public function iShouldSeeProduct($productName)
     {
         Assert::true($this->indexPage->isProductOnList($productName));
+    }
+
+    /**
+     * @Then I should not see the product :productName
+     */
+    public function iShouldNotSeeProduct($productName)
+    {
+        Assert::false($this->indexPage->isProductOnList($productName));
     }
 }

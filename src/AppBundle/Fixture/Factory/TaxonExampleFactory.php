@@ -52,18 +52,26 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
     private $optionsResolver;
 
     /**
+     * @var string
+     */
+    private $localeCode;
+
+    /**
      * @param FactoryInterface $taxonFactory
      * @param TaxonRepositoryInterface $taxonRepository
      * @param TaxonSlugGeneratorInterface $taxonSlugGenerator
+     * @param string $localeCode
      */
     public function __construct(
         FactoryInterface $taxonFactory,
         TaxonRepositoryInterface $taxonRepository,
-        TaxonSlugGeneratorInterface $taxonSlugGenerator
+        TaxonSlugGeneratorInterface $taxonSlugGenerator,
+        $localeCode
     ) {
         $this->taxonFactory = $taxonFactory;
         $this->taxonRepository = $taxonRepository;
         $this->taxonSlugGenerator = $taxonSlugGenerator;
+        $this->localeCode = $localeCode;
 
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver = new OptionsResolver();
@@ -87,15 +95,13 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
 
         $taxon->setCode($options['code']);
 
-        foreach ($this->getLocales() as $localeCode) {
-            $taxon->setCurrentLocale($localeCode);
-            $taxon->setFallbackLocale($localeCode);
+        $taxon->setCurrentLocale($this->localeCode);
+        $taxon->setFallbackLocale($this->localeCode);
 
-            $taxon->setName($options['name']);
-            $taxon->setDescription($options['description']);
-            $taxon->setSlug($options['slug'] ?: $this->taxonSlugGenerator->generate($taxon, $localeCode));
-            $taxon->setPublic($options['public']);
-        }
+        $taxon->setName($options['name']);
+        $taxon->setDescription($options['description']);
+        $taxon->setSlug($options['slug'] ?: $this->taxonSlugGenerator->generate($taxon, $this->localeCode));
+        $taxon->setPublic($options['public']);
 
         foreach ($options['children'] as $childOptions) {
             $taxon->addChild($this->create($childOptions));
@@ -132,15 +138,5 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
             ->setDefault('children', [])
             ->setAllowedTypes('children', 'array')
         ;
-    }
-
-    /**
-     * @return array
-     */
-    private function getLocales()
-    {
-        return [
-            'fr_FR',
-        ];
     }
 }

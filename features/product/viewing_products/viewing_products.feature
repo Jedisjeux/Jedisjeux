@@ -2,7 +2,7 @@
 Feature: Viewing products
     In order to see products
     As a Visitor
-    I want to be able to browse products list
+    I want to be able to browse products
 
     Background:
         Given there is taxon with code "mechanisms"
@@ -10,7 +10,7 @@ Feature: Viewing products
         And there is taxon with code "target-audience"
 
     @ui
-    Scenario: Viewing products list
+    Scenario: Viewing products
         Given there is product "Puerto Rico"
         And there is product "Modern Art"
         When I want to browse products

@@ -132,6 +132,7 @@ services:
         arguments:
             - "@app.behat.page.frontend.product.show"
             - "@app.behat.page.frontend.product.index"
+            - "@app.behat.page.frontend.product.index_by_taxon"
         tags:
             - { name: fob.context_service }
 

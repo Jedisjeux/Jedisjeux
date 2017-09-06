@@ -86,6 +86,7 @@ services:
                 - "@app.behat.shared_storage"
                 - "@__symfony__.app.fixture.example_factory.product"
                 - "@__symfony__.sylius.repository.product"
+                - "@__symfony__.doctrine.orm.entity_manager"
             tags:
                 - { name: fob.context_service }
 
@@ -121,6 +122,7 @@ services:
                 - "@app.behat.shared_storage"
                 - "@__symfony__.app.fixture.example_factory.taxon"
                 - "@__symfony__.sylius.repository.taxon"
+                - "@__symfony__.doctrine.orm.entity_manager"
             tags:
                 - { name: fob.context_service }
 
