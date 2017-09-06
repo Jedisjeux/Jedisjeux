@@ -5,9 +5,7 @@ Feature: Viewing products
     I want to be able to browse products
 
     Background:
-        Given there is taxon with code "mechanisms"
-        And there is taxon with code "themes"
-        And there is taxon with code "target-audience"
+        Given there are default taxonomies for products
 
     @ui
     Scenario: Viewing products

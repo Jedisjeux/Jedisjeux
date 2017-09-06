@@ -89,4 +89,13 @@ class ProductContext implements Context
         $product->addMechanism($mechanism);
         $this->manager->flush($mechanism);
     }
+
+    /**
+     * @Given /^(this product) has ("[^"]+" theme)$/
+     */
+    public function ProductHasTheme(Product $product, TaxonInterface $theme)
+    {
+        $product->addTheme($theme);
+        $this->manager->flush($theme);
+    }
 }

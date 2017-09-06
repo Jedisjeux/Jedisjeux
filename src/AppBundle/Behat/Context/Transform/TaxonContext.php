@@ -34,13 +34,7 @@ final class TaxonContext implements Context
     }
 
     /**
-     * @Transform /^classified as "([^"]+)"$/
-     * @Transform /^belongs to "([^"]+)"$/
-     * @Transform /^"([^"]+)" taxon$/
-     * @Transform /^"([^"]+)" mechanism$/
-     * @Transform /^"([^"]+)" as a parent taxon$/
-     * @Transform /^"([^"]+)" parent taxon$/
-     * @Transform /^parent taxon to "([^"]+)"$/
+     * @Transform /^"([^"]+)" (taxon|mechanism|theme)$/
      * @Transform /^taxon with "([^"]+)" name/
      * @Transform /^taxon "([^"]+)"$/
      * @Transform :taxon

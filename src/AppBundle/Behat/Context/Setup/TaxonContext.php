@@ -81,16 +81,16 @@ class TaxonContext implements Context
     }
 
     /**
-     * @Given /^there are mechanisms "([^"]+)" and "([^"]+)"$/
+     * @Given /^there are (mechanisms|themes) "([^"]+)" and "([^"]+)"$/
      */
-    public function thereAreMechanismsAnd($firstTaxonName, $secondTaxonName)
+    public function thereAreTaxonsAnd($taxonCode, $firstTaxonName, $secondTaxonName)
     {
         /** @var TaxonInterface $firstTaxon */
         $firstTaxon = $this->taxonFactory->create(['name' => $firstTaxonName]);
         /** @var TaxonInterface $secondTaxon */
         $secondTaxon = $this->taxonFactory->create(['name' => $secondTaxonName]);
 
-        $taxon = $this->sharedStorage->get(sprintf('taxonomy_%s', Taxon::CODE_MECHANISM));
+        $taxon = $this->sharedStorage->get(sprintf('taxonomy_%s', $taxonCode));
 
         $taxon->addChild($firstTaxon);
         $taxon->addChild($secondTaxon);

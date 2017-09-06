@@ -7,7 +7,7 @@ Feature: Viewing products from a specific mechanism
     Background:
         Given there are default taxonomies for products
         And there are mechanisms "Auction" and "Area Control"
-         And there is product "Modern Art"
+        And there is product "Modern Art"
         And this product has "Auction" mechanism
         And there is product "El Grande"
         And this product has "Area Control" mechanism
