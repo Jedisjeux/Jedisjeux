@@ -82,6 +82,23 @@ class ProductContext implements Context
     }
 
     /**
+     * @Given there is product :name with :status status
+     *
+     * @param string $name
+     */
+    public function ProductHasNameWithStatus($name, $status)
+    {
+        /** @var Product $product */
+        $product = $this->productFactory->create([
+            'name' => $name,
+            'status' => str_replace(' ', '_', $status),
+        ]);
+
+        $this->productRepository->add($product);
+        $this->sharedStorage->set('product', $product);
+    }
+
+    /**
      * @Given /^(this product) has ("[^"]+" mechanism)$/
      */
     public function ProductHasMechanism(Product $product, TaxonInterface $mechanism)

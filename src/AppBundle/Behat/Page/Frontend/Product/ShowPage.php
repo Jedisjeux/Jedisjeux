@@ -25,4 +25,22 @@ class ShowPage extends SymfonyPage
     {
         return 'sylius_product_show';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return $this->getElement('name')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements()
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'name' => 'h2 span',
+        ]);
+    }
 }

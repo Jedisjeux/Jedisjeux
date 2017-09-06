@@ -14,7 +14,9 @@ namespace AppBundle\Behat\Context\Ui\Frontend;
 use AppBundle\Behat\Page\Frontend\Product\IndexByTaxonPage;
 use AppBundle\Behat\Page\Frontend\Product\IndexPage;
 use AppBundle\Behat\Page\Frontend\Product\ShowPage;
+use AppBundle\Behat\Page\UnexpectedPageException;
 use Behat\Behat\Context\Context;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
@@ -67,6 +69,14 @@ class ProductContext implements Context
     }
 
     /**
+     * @When /^I check (this product)'s details$/
+     */
+    public function iOpenProductPage(ProductInterface $product)
+    {
+        $this->showPage->open(['slug' => $product->getSlug()]);
+    }
+
+    /**
      * @Then I should see the product :productName
      */
     public function iShouldSeeProduct($productName)
@@ -80,5 +90,43 @@ class ProductContext implements Context
     public function iShouldNotSeeProduct($productName)
     {
         Assert::false($this->indexPage->isProductOnList($productName));
+    }
+
+    /**
+     * @Then I should see the product name :name
+     */
+    public function iShouldSeeProductName($name)
+    {
+        Assert::same($this->showPage->getName(), $name);
+    }
+
+    /**
+     * @Then /^I should be able to see (this product)'s details$/
+     */
+    public function iShouldBeAbleToSeeDashboard(ProductInterface $product)
+    {
+        try {
+            $this->iOpenProductPage($product);
+
+        } catch (UnexpectedPageException $exception) {
+            // nothing else to do
+        }
+
+        Assert::true($this->showPage->isOpen(['slug' => $product->getSlug()]));
+    }
+
+    /**
+     * @Then /^I should not be able to see (this product)'s details$/
+     */
+    public function iShouldNotBeAbleToSeeDashboard(ProductInterface $product)
+    {
+        try {
+            $this->iOpenProductPage($product);
+
+        } catch (UnexpectedPageException $exception) {
+            // nothing else to do
+        }
+
+        Assert::false($this->showPage->isOpen(['slug' => $product->getSlug()]));
     }
 }
