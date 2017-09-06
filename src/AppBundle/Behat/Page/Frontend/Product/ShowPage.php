@@ -47,6 +47,16 @@ class ShowPage extends SymfonyPage
     /**
      * {@inheritdoc}
      */
+    public function getThemes()
+    {
+        $mechanismsParagraph = $this->getElement('themes');
+
+        return $mechanismsParagraph->findAll('css', 'a');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [

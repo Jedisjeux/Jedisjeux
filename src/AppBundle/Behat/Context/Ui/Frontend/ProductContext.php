@@ -121,6 +121,25 @@ class ProductContext implements Context
     }
 
     /**
+     * @Then I should see the theme name :name
+     */
+    public function iShouldSeeThemeName($name)
+    {
+        $themes = $this->getProductThemes();
+
+        $found = false;
+
+        foreach ($themes as $theme) {
+            if ($name === $theme->getText()) {
+                $found = true;
+                break;
+            }
+        }
+
+        Assert::true($found);
+    }
+
+    /**
      * @Then /^I should be able to see (this product)'s details$/
      */
     public function iShouldBeAbleToSeeDashboard(ProductInterface $product)
@@ -161,5 +180,18 @@ class ProductContext implements Context
         Assert::notNull($mechanisms, 'The product has no mechanisms.');
 
         return $mechanisms;
+    }
+
+    /**
+     * @return NodeElement[]
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function getProductThemes()
+    {
+        $themes = $this->showPage->getThemes();
+        Assert::notNull($themes, 'The product has no themes.');
+
+        return $themes;
     }
 }

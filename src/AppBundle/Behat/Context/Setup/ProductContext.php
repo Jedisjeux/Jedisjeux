@@ -110,6 +110,7 @@ class ProductContext implements Context
 
     /**
      * @Given /^(this product) has ("[^"]+" theme)$/
+     * @Given /^(this product) also has ("[^"]+" theme)$/
      */
     public function ProductHasTheme(Product $product, TaxonInterface $theme)
     {
