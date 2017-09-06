@@ -12,6 +12,7 @@
 namespace AppBundle\Behat\Context\Setup;
 
 use AppBundle\Behat\Service\SharedStorageInterface;
+use AppBundle\Entity\Taxon;
 use AppBundle\Fixture\Factory\ExampleFactoryInterface;
 use Behat\Behat\Context\Context;
 use Doctrine\ORM\EntityManager;
@@ -60,26 +61,36 @@ class TaxonContext implements Context
     }
 
     /**
-     * @Given /^there is taxon with code "([^"]+)"$/
+     * @Given there are default taxonomies for products
      */
-    public function thereIsTaxonWithCode($code)
+    public function thereAreDefaultTaxonomiesForProducts()
     {
-        /** @var TaxonInterface $taxon */
-        $taxon = $this->taxonFactory->create(['code' => $code]);
-        $this->taxonRepository->add($taxon);
+        $taxonCodes = [
+            Taxon::CODE_MECHANISM,
+            Taxon::CODE_THEME,
+            Taxon::CODE_TARGET_AUDIENCE
+        ];
 
-        $this->sharedStorage->set('taxon', $taxon);
+        foreach ($taxonCodes as $code) {
+            /** @var TaxonInterface $taxon */
+            $taxon = $this->taxonFactory->create(['code' => $code]);
+            $this->taxonRepository->add($taxon);
+
+            $this->sharedStorage->set('taxonomy_mechanism', $taxon);
+        }
     }
 
     /**
-     * @Given /^(this taxon) has children taxon "([^"]+)" and "([^"]+)"$/
+     * @Given /^there are mechanisms "([^"]+)" and "([^"]+)"$/
      */
-    public function thisTaxonHasChildrenTaxonAnd(TaxonInterface $taxon, $firstTaxonName, $secondTaxonName)
+    public function thereAreMechanismsAnd($firstTaxonName, $secondTaxonName)
     {
         /** @var TaxonInterface $firstTaxon */
         $firstTaxon = $this->taxonFactory->create(['name' => $firstTaxonName]);
         /** @var TaxonInterface $secondTaxon */
         $secondTaxon = $this->taxonFactory->create(['name' => $secondTaxonName]);
+
+        $taxon = $this->sharedStorage->get('taxonomy_mechanism');
 
         $taxon->addChild($firstTaxon);
         $taxon->addChild($secondTaxon);
