@@ -76,7 +76,7 @@ class TaxonContext implements Context
             $taxon = $this->taxonFactory->create(['code' => $code]);
             $this->taxonRepository->add($taxon);
 
-            $this->sharedStorage->set('taxonomy_mechanism', $taxon);
+            $this->sharedStorage->set(sprintf('taxonomy_%s', $code), $taxon);
         }
     }
 
@@ -90,7 +90,7 @@ class TaxonContext implements Context
         /** @var TaxonInterface $secondTaxon */
         $secondTaxon = $this->taxonFactory->create(['name' => $secondTaxonName]);
 
-        $taxon = $this->sharedStorage->get('taxonomy_mechanism');
+        $taxon = $this->sharedStorage->get(sprintf('taxonomy_%s', Taxon::CODE_MECHANISM));
 
         $taxon->addChild($firstTaxon);
         $taxon->addChild($secondTaxon);
