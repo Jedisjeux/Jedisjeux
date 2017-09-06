@@ -27,7 +27,7 @@ class ShowPage extends SymfonyPage
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
     public function getName()
     {
@@ -37,10 +37,22 @@ class ShowPage extends SymfonyPage
     /**
      * {@inheritdoc}
      */
+    public function getMechanisms()
+    {
+        $mechanismsParagraph = $this->getElement('mechanisms');
+
+        return $mechanismsParagraph->findAll('css', 'a');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
             'name' => 'h2 span',
+            'mechanisms' => '#product-mechanisms',
+            'themes' => '#product-themes',
         ]);
     }
 }

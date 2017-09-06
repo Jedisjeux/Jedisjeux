@@ -100,11 +100,12 @@ class ProductContext implements Context
 
     /**
      * @Given /^(this product) has ("[^"]+" mechanism)$/
+     * @Given /^(this product) also has ("[^"]+" mechanism)$/
      */
     public function ProductHasMechanism(Product $product, TaxonInterface $mechanism)
     {
         $product->addMechanism($mechanism);
-        $this->manager->flush($mechanism);
+        $this->manager->flush($product);
     }
 
     /**
@@ -113,6 +114,6 @@ class ProductContext implements Context
     public function ProductHasTheme(Product $product, TaxonInterface $theme)
     {
         $product->addTheme($theme);
-        $this->manager->flush($theme);
+        $this->manager->flush($product);
     }
 }

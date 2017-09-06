@@ -16,6 +16,7 @@ use AppBundle\Behat\Page\Frontend\Product\IndexPage;
 use AppBundle\Behat\Page\Frontend\Product\ShowPage;
 use AppBundle\Behat\Page\UnexpectedPageException;
 use Behat\Behat\Context\Context;
+use Behat\Mink\Element\NodeElement;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
@@ -101,6 +102,25 @@ class ProductContext implements Context
     }
 
     /**
+     * @Then I should see the mechanism name :name
+     */
+    public function iShouldSeeMechanismName($name)
+    {
+        $mechanisms = $this->getProductMechanisms();
+
+        $found = false;
+
+        foreach ($mechanisms as $mechanism) {
+            if ($name === $mechanism->getText()) {
+                $found = true;
+                break;
+            }
+        }
+
+        Assert::true($found);
+    }
+
+    /**
      * @Then /^I should be able to see (this product)'s details$/
      */
     public function iShouldBeAbleToSeeDashboard(ProductInterface $product)
@@ -128,5 +148,18 @@ class ProductContext implements Context
         }
 
         Assert::false($this->showPage->isOpen(['slug' => $product->getSlug()]));
+    }
+
+    /**
+     * @return NodeElement[]
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function getProductMechanisms()
+    {
+        $mechanisms = $this->showPage->getMechanisms();
+        Assert::notNull($mechanisms, 'The product has no mechanisms.');
+
+        return $mechanisms;
     }
 }
