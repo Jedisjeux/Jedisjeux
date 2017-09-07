@@ -68,7 +68,25 @@ class TaxonContext implements Context
         $taxonCodes = [
             Taxon::CODE_MECHANISM,
             Taxon::CODE_THEME,
-            Taxon::CODE_TARGET_AUDIENCE
+            Taxon::CODE_TARGET_AUDIENCE,
+        ];
+
+        foreach ($taxonCodes as $code) {
+            /** @var TaxonInterface $taxon */
+            $taxon = $this->taxonFactory->create(['code' => $code]);
+            $this->taxonRepository->add($taxon);
+
+            $this->sharedStorage->set(sprintf('taxonomy_%s', $code), $taxon);
+        }
+    }
+
+    /**
+     * @Given there are default taxonomies for people
+     */
+    public function thereAreDefaultTaxonomiesForPeople()
+    {
+        $taxonCodes = [
+            Taxon::CODE_ZONE,
         ];
 
         foreach ($taxonCodes as $code) {

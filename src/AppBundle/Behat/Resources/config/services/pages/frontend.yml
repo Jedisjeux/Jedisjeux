@@ -1,2 +1,3 @@
 imports:
+    - { resource: frontend/person.yml }
     - { resource: frontend/product.yml }
