@@ -12,6 +12,8 @@
 namespace AppBundle\Behat\Context\Ui\Frontend;
 
 use AppBundle\Behat\Page\Frontend\Person\IndexPage;
+use AppBundle\Behat\Page\Frontend\Person\ShowPage;
+use AppBundle\Entity\Person;
 use Behat\Behat\Context\Context;
 use Webmozart\Assert\Assert;
 
@@ -21,15 +23,22 @@ use Webmozart\Assert\Assert;
 class PersonContext implements Context
 {
     /**
+     * @var ShowPage
+     */
+    private $showPage;
+
+    /**
      * @var IndexPage
      */
     private $indexPage;
 
     /**
+     * @param ShowPage $showPage
      * @param IndexPage $indexPage
      */
-    public function __construct(IndexPage $indexPage)
+    public function __construct(ShowPage $showPage, IndexPage $indexPage)
     {
+        $this->showPage = $showPage;
         $this->indexPage = $indexPage;
     }
 
@@ -39,6 +48,14 @@ class PersonContext implements Context
     public function iWantToBrowsePeople()
     {
         $this->indexPage->open();
+    }
+
+    /**
+     * @When /^I check (this person)'s details$/
+     */
+    public function iOpenPersonPage(Person $person)
+    {
+        $this->showPage->open(['slug' => $person->getSlug()]);
     }
 
     /**
@@ -55,5 +72,13 @@ class PersonContext implements Context
     public function iShouldNotSeePerson($fullName)
     {
         Assert::false($this->indexPage->isPersonOnList($fullName));
+    }
+
+    /**
+     * @Then I should see the person name :name
+     */
+    public function iShouldSeePersonName($name)
+    {
+        Assert::same($this->showPage->getName(), $name);
     }
 }

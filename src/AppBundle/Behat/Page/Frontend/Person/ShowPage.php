@@ -16,23 +16,31 @@ use AppBundle\Behat\Page\SymfonyPage;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class IndexPage extends SymfonyPage
+class ShowPage extends SymfonyPage
 {
     /**
      * {@inheritdoc}
      */
     public function getRouteName()
     {
-        return 'app_frontend_person_index';
+        return 'app_frontend_person_show';
     }
 
     /**
-     * @param string $fullName
-     *
-     * @return bool
+     * @return string
      */
-    public function isPersonOnList($fullName)
+    public function getName()
     {
-        return null !== $this->getDocument()->find('css', sprintf('#people-list h4:contains("%s")', $fullName));
+        return $this->getElement('name')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements()
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'name' => 'h2 span',
+        ]);
     }
 }

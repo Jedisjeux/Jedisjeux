@@ -139,6 +139,7 @@ services:
     app.behat.context.ui.frontend.person:
         class: AppBundle\Behat\Context\Ui\Frontend\PersonContext
         arguments:
+            - "@app.behat.page.frontend.person.show"
             - "@app.behat.page.frontend.person.index"
         tags:
             - { name: fob.context_service }

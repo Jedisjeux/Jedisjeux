@@ -66,6 +66,7 @@ services:
         app.behat.context.setup.person:
             class: AppBundle\Behat\Context\Setup\PersonContext
             arguments:
+                - "@app.behat.shared_storage"
                 - "@__symfony__.app.fixture.example_factory.person"
                 - "@__symfony__.app.repository.person"
             tags:

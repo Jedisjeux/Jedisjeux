@@ -12,3 +12,8 @@ services:
           class: AppBundle\Behat\Page\Frontend\Person\IndexPage
           parent: app.behat.symfony_page
           public: false
+
+      app.behat.page.frontend.person.show:
+          class: AppBundle\Behat\Page\Frontend\Person\ShowPage
+          parent: app.behat.symfony_page
+          public: false
