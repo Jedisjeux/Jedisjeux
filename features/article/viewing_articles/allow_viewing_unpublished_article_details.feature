@@ -16,15 +16,15 @@ Feature: Allow viewing unpublished article details
 
   @ui
   Scenario: Viewing details of a article with pending translation status
-    When there is article "Awesome article" with "pending translation" status
+    When there is article "Awesome article" written by "kevin@example.com" with "pending translation" status
     Then I should be able to see this article's details
 
   @ui
   Scenario: Viewing details of a article with pending review status
-    When there is article "Awesome article with "pending review" status
+    When there is article "Awesome article" written by "kevin@example.com" with "pending review" status
     Then I should be able to see this article's details
 
   @ui
   Scenario: Viewing details of a article with pending publication status
-    When there is article "Awesome article" with "pending publication" status
+    When there is article "Awesome article" written by "kevin@example.com" with "pending publication" status
     Then I should be able to see this article's details
