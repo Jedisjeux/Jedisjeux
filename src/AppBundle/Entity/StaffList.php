@@ -13,33 +13,47 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
+ *
+ * @ORM\Entity
+ * @ORM\Table("jdj_staff_list")
  */
 class StaffList implements ResourceInterface
 {
-    use IdentifiableTrait;
+    use IdentifiableTrait,
+        Timestampable;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string")
      */
     protected $name;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="text", nullable=true)
      */
     protected $description;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(type="datetime", nullable=true)
      */
     protected $startAt;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(type="datetime", nullable=true)
      */
     protected $endAt;
 
