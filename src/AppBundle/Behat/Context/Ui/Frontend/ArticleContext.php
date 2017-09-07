@@ -12,6 +12,8 @@
 namespace AppBundle\Behat\Context\Ui\Frontend;
 
 use AppBundle\Behat\Page\Frontend\Article\IndexPage;
+use AppBundle\Behat\Page\Frontend\Article\ShowPage;
+use AppBundle\Entity\Article;
 use Behat\Behat\Context\Context;
 use Webmozart\Assert\Assert;
 
@@ -21,15 +23,22 @@ use Webmozart\Assert\Assert;
 class ArticleContext implements Context
 {
     /**
+     * @var ShowPage
+     */
+    private $showPage;
+
+    /**
      * @var IndexPage
      */
     private $indexPage;
 
     /**
+     * @param ShowPage $showPage
      * @param IndexPage $indexPage
      */
-    public function __construct(IndexPage $indexPage)
+    public function __construct(ShowPage $showPage, IndexPage $indexPage)
     {
+        $this->showPage = $showPage;
         $this->indexPage = $indexPage;
     }
 
@@ -39,6 +48,14 @@ class ArticleContext implements Context
     public function iWantToBrowseArticles()
     {
         $this->indexPage->open();
+    }
+
+    /**
+     * @When /^I check (this article)'s details$/
+     */
+    public function iOpenPersonPage(Article $article)
+    {
+        $this->showPage->open(['slug' => $article->getSlug()]);
     }
 
     /**
@@ -55,5 +72,13 @@ class ArticleContext implements Context
     public function iShouldNotSeeArticle($title)
     {
         Assert::false($this->indexPage->isArticleOnList($title));
+    }
+
+    /**
+     * @Then I should see the article title :title
+     */
+    public function iShouldSeePersonName($title)
+    {
+        Assert::same($this->showPage->getTitle(), $title);
     }
 }

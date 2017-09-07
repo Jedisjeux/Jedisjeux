@@ -130,6 +130,7 @@ services:
     app.behat.context.ui.frontend.article:
         class: AppBundle\Behat\Context\Ui\Frontend\ArticleContext
         arguments:
+            - "@app.behat.page.frontend.article.show"
             - "@app.behat.page.frontend.article.index"
         tags:
             - { name: fob.context_service }
