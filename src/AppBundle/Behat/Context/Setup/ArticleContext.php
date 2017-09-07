@@ -58,13 +58,31 @@ class ArticleContext implements Context
      *
      * @param string $title
      */
-    public function thereIsArticle($title, CustomerInterface $customer)
+    public function thereIsArticleWrittenByCustomer($title, CustomerInterface $customer)
     {
         /** @var Article $article */
         $article = $this->articleFactory->create([
             'title' => $title,
             'author' => $customer,
             'status' => Article::STATUS_PUBLISHED,
+        ]);
+
+        $this->articleRepository->add($article);
+        $this->sharedStorage->set('article', $article);
+    }
+
+    /**
+     * @Given there is article :title written by :customer with :status status
+     *
+     * @param string $title
+     */
+    public function thereIsArticleWrittenByCustomerWithStatus($title, CustomerInterface $customer, $status)
+    {
+        /** @var Article $article */
+        $article = $this->articleFactory->create([
+            'title' => $title,
+            'author' => $customer,
+            'status' => $status,
         ]);
 
         $this->articleRepository->add($article);

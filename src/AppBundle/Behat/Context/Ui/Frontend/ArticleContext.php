@@ -13,6 +13,7 @@ namespace AppBundle\Behat\Context\Ui\Frontend;
 
 use AppBundle\Behat\Page\Frontend\Article\IndexPage;
 use AppBundle\Behat\Page\Frontend\Article\ShowPage;
+use AppBundle\Behat\Page\UnexpectedPageException;
 use AppBundle\Entity\Article;
 use Behat\Behat\Context\Context;
 use Webmozart\Assert\Assert;
@@ -53,7 +54,7 @@ class ArticleContext implements Context
     /**
      * @When /^I check (this article)'s details$/
      */
-    public function iOpenPersonPage(Article $article)
+    public function iOpenArticlePage(Article $article)
     {
         $this->showPage->open(['slug' => $article->getSlug()]);
     }
@@ -80,5 +81,35 @@ class ArticleContext implements Context
     public function iShouldSeePersonName($title)
     {
         Assert::same($this->showPage->getTitle(), $title);
+    }
+
+    /**
+     * @Then /^I should be able to see (this article)'s details$/
+     */
+    public function iShouldBeAbleToSeeArticleDetails(Article $article)
+    {
+        try {
+            $this->iOpenArticlePage($article);
+
+        } catch (UnexpectedPageException $exception) {
+            // nothing else to do
+        }
+
+        Assert::true($this->showPage->isOpen(['slug' => $article->getSlug()]));
+    }
+
+    /**
+     * @Then /^I should not be able to see (this article)'s details$/
+     */
+    public function iShouldNotBeAbleToSeeArticleDetails(Article $article)
+    {
+        try {
+            $this->iOpenArticlePage($article);
+
+        } catch (UnexpectedPageException $exception) {
+            // nothing else to do
+        }
+
+        Assert::false($this->showPage->isOpen(['slug' => $article->getSlug()]));
     }
 }
