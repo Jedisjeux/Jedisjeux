@@ -71,13 +71,7 @@ class TaxonContext implements Context
             Taxon::CODE_TARGET_AUDIENCE,
         ];
 
-        foreach ($taxonCodes as $code) {
-            /** @var TaxonInterface $taxon */
-            $taxon = $this->taxonFactory->create(['code' => $code]);
-            $this->taxonRepository->add($taxon);
-
-            $this->sharedStorage->set(sprintf('taxonomy_%s', $code), $taxon);
-        }
+        $this->createDefaultTaxonomies($taxonCodes);
     }
 
     /**
@@ -89,13 +83,19 @@ class TaxonContext implements Context
             Taxon::CODE_ZONE,
         ];
 
-        foreach ($taxonCodes as $code) {
-            /** @var TaxonInterface $taxon */
-            $taxon = $this->taxonFactory->create(['code' => $code]);
-            $this->taxonRepository->add($taxon);
+        $this->createDefaultTaxonomies($taxonCodes);
+    }
 
-            $this->sharedStorage->set(sprintf('taxonomy_%s', $code), $taxon);
-        }
+    /**
+     * @Given there are default taxonomies for articles
+     */
+    public function thereAreDefaultTaxonomiesForArticles()
+    {
+        $taxonCodes = [
+            Taxon::CODE_ARTICLE,
+        ];
+
+        $this->createDefaultTaxonomies($taxonCodes);
     }
 
     /**
@@ -114,5 +114,19 @@ class TaxonContext implements Context
         $taxon->addChild($secondTaxon);
 
         $this->manager->flush($taxon);
+    }
+
+    /**
+     * @param array $codes
+     */
+    protected function createDefaultTaxonomies(array $codes)
+    {
+        foreach ($codes as $code) {
+            /** @var TaxonInterface $taxon */
+            $taxon = $this->taxonFactory->create(['code' => $code]);
+            $this->taxonRepository->add($taxon);
+
+            $this->sharedStorage->set(sprintf('taxonomy_%s', $code), $taxon);
+        }
     }
 }

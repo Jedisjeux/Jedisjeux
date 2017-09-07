@@ -55,6 +55,7 @@ class ArticleContext implements Context
         $article = $this->articleFactory->create([
             'title' => $title,
             'author' => $customer,
+            'status' => Article::STATUS_PUBLISHED,
         ]);
 
         $this->articleRepository->add($article);

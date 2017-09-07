@@ -1,6 +1,7 @@
 imports:
     - suites/ui/admin/dashboard.yml
     - suites/ui/article/managing_articles.yml
+    - suites/ui/article/viewing_articles.yml
     - suites/ui/dealer/managing_dealers.yml
     - suites/ui/dealer/managing_dealer_prices.yml
     - suites/ui/person/managing_people.yml
