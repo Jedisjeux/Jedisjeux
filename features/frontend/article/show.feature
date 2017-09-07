@@ -18,11 +18,6 @@ Feature: View articles
       | taxon               | title                   | author            |
       | articles/actualites | Critique de Vroom Vroom | kevin@example.com |
 
-  Scenario: View an article
-    Given I am on "/articles/"
-    When I am on "Critique de Vroom Vroom" article page
-    Then the response status code should be 200
-
   Scenario: Cannot access to an article with new status
     Given there are articles:
       | taxon               | title       | author            | status |
