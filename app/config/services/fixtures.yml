@@ -103,6 +103,14 @@ services:
         tags:
             - { name: sylius_fixtures.fixture }
 
+    app.fixture.staff_list:
+        class: AppBundle\Fixture\StaffListFixture
+        arguments:
+            - "@app.manager.staff_list"
+            - "@app.fixture.example_factory.staff_list"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
     app.fixture.taxon:
         class: AppBundle\Fixture\TaxonFixture
         arguments:

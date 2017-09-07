@@ -115,6 +115,15 @@ services:
             tags:
                 - { name: fob.context_service }
 
+        app.behat.context.setup.staff_list:
+            class: AppBundle\Behat\Context\Setup\StaffListContext
+            arguments:
+                - "@app.behat.shared_storage"
+                - "@__symfony__.app.fixture.example_factory.staff_list"
+                - "@__symfony__.app.repository.staff_list"
+            tags:
+                - { name: fob.context_service }
+
         app.behat.context.setup.topic:
             class: AppBundle\Behat\Context\Setup\TopicContext
             arguments:

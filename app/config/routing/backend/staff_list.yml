@@ -1,0 +1,14 @@
+app_backend_staff_list:
+    resource: |
+        alias: app.staff_list
+        section: backend
+        except: ['show']
+        templates: :backend/crud
+        redirect: update
+        grid: app_backend_staff_list
+        vars:
+            all:
+                subheader: app.ui.manage_staff_lists
+            index:
+                icon: list
+    type: sylius.resource

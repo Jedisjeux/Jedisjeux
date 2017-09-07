@@ -71,6 +71,13 @@ services:
             tags:
                 - { name: fob.context_service }
 
+        app.behat.context.transform.staff_list:
+            class: AppBundle\Behat\Context\Transform\StaffListContext
+            arguments:
+                - "@__symfony__.app.repository.staff_list"
+            tags:
+                - { name: fob.context_service }
+
         app.behat.context.transform.topic:
             class: AppBundle\Behat\Context\Transform\TopicContext
             arguments:

@@ -8,5 +8,6 @@ imports:
     - suites/ui/product/managing_product_lists.yml
     - suites/ui/product/managing_product_reviews.yml
     - suites/ui/redirection/managing_redirections.yml
+    - suites/ui/staff_list/managing_staff_lists.yml
     - suites/ui/topic/managing_topics.yml
     - suites/ui/topic/managing_posts.yml

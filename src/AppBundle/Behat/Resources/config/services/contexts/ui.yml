@@ -104,6 +104,14 @@ services:
           tags:
               - { name: fob.context_service }
 
+      app.behat.context.ui.backend.managing_staff_lists:
+          class: AppBundle\Behat\Context\Ui\Backend\ManagingStaffListsContext
+          arguments:
+              - "@app.behat.page.backend.staff_list.index"
+              - "@app.behat.page.backend.staff_list.create"
+          tags:
+              - { name: fob.context_service }
+
       app.behat.context.ui.backend.managing_topics:
           class: AppBundle\Behat\Context\Ui\Backend\ManagingTopicsContext
           arguments:

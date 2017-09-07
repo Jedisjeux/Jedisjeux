@@ -235,3 +235,7 @@ sylius_fixtures:
                 redirection:
                     options:
                         random: 20
+
+                staff_list:
+                    options:
+                        random: 5

@@ -85,6 +85,11 @@ services:
         arguments:
             - "@app.factory.redirection"
 
+    app.fixture.example_factory.staff_list:
+        class: AppBundle\Fixture\Factory\StaffListExampleFactory
+        arguments:
+            - "@app.factory.staff_list"
+
     app.fixture.example_factory.taxon:
         class: AppBundle\Fixture\Factory\TaxonExampleFactory
         arguments:

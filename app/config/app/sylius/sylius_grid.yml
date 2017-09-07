@@ -19,6 +19,7 @@ imports:
   - { resource: 'grids/backend/product_variant.yml' }
   - { resource: 'grids/backend/redirection.yml' }
   - { resource: 'grids/backend/root_taxon.yml' }
+  - { resource: 'grids/backend/staff_list.yml' }
   - { resource: 'grids/backend/taxon_from_root.yml' }
   - { resource: 'grids/backend/topic.yml' }
 

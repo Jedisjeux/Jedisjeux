@@ -9,6 +9,7 @@ imports:
     - { resource: backend/product_list.yml }
     - { resource: backend/product_review.yml }
     - { resource: backend/redirection.yml }
+    - { resource: backend/staff_list.yml }
     - { resource: backend/topic.yml }
 
 # Learn more about services, parameters and containers at

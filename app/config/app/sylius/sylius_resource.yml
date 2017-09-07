@@ -123,6 +123,10 @@ sylius_resource:
                 model: AppBundle\Entity\Notification
                 factory: AppBundle\Factory\NotificationFactory
                 controller: AppBundle\Controller\NotificationController
+        app.staff_list:
+            classes:
+                model: AppBundle\Entity\StaffList
+                form: AppBundle\Form\Type\StaffListType
         app.topic:
             classes:
                 model: AppBundle\Entity\Topic

@@ -40,6 +40,7 @@ app:
         edit_product_box: Modifier la boite de jeu
         edit_product_list: Modifier la liste de jeu
         edit_redirection: Modifier la redirection
+        edit_staff_list: Modifier la liste Staff
         edit_string_block: Modifer le bloc de chaîne
         edit_topic: Modifier le sujet
         errors: Erreurs
@@ -95,6 +96,7 @@ app:
         new_product_box: Nouvelle boite de jeu
         new_redirection: Nouvelle redirection
         new_post: Nouveau message
+        new_staff_list: Nouvelle Liste Staff
         new_string_block: Nouveau bloc de chaîne
         normal: Normal
         not_found_pages: Pages non trouvées
@@ -138,6 +140,7 @@ app:
         slide_show: Carousel
         source: Source
         staff: Staff
+        staff_lists: Listes Staff
         string_blocks: Blocs de chaîne
         style: Style
         topic: Sujet

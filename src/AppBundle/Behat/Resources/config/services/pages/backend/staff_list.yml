@@ -1,0 +1,21 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+#    service_name:
+#        class: AppBundle\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+      app.behat.page.backend.staff_list.create:
+          class: AppBundle\Behat\Page\Backend\StaffList\CreatePage
+          parent: app.behat.page.backend.crud.create
+          public: false
+          arguments: ["app_backend_staff_list_create"]
+
+      app.behat.page.backend.staff_list.index:
+          class: AppBundle\Behat\Page\Backend\StaffList\IndexPage
+          parent: app.behat.page.backend.crud.index
+          public: false
+          arguments: ["app_backend_staff_list_index"]
