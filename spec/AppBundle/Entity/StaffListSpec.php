@@ -3,6 +3,7 @@
 namespace spec\AppBundle\Entity;
 
 use AppBundle\Entity\StaffList;
+use AppBundle\Entity\StaffListItem;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -65,19 +66,19 @@ class StaffListSpec extends ObjectBehavior
 
     function its_products_is_collection()
     {
-        $this->getProducts()->shouldHaveType(ArrayCollection::class);
+        $this->getItems()->shouldHaveType(ArrayCollection::class);
     }
 
-    function it_can_add_products(ProductInterface $product)
+    function it_can_add_items(StaffListItem $item)
     {
-        $this->addProduct($product);
-        $this->hasProduct($product)->shouldReturn(true);
+        $this->addItem($item);
+        $this->hasItem($item)->shouldReturn(true);
     }
 
-    function it_can_remove_products(ProductInterface $product)
+    function it_can_remove_items(StaffListItem $item)
     {
-        $this->addProduct($product);
-        $this->removeProduct($product);
-        $this->hasProduct($product)->shouldReturn(false);
+        $this->addItem($item);
+        $this->removeItem($item);
+        $this->hasItem($item)->shouldReturn(false);
     }
 }

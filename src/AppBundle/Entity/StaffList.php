@@ -77,16 +77,16 @@ class StaffList implements ResourceInterface
     protected $endAt;
 
     /**
-     * @var Collection|ProductInterface[]
+     * @var Collection|StaffListItem[]
      */
-    protected $products;
+    protected $items;
 
     /**
      * StaffList constructor.
      */
     public function __construct()
     {
-        $this->products = new ArrayCollection();
+        $this->items = new ArrayCollection();
         $this->code = uniqid('staff_list_');
     }
 
@@ -213,43 +213,43 @@ class StaffList implements ResourceInterface
     /**
      * @return Collection|ProductInterface[]
      */
-    public function getProducts()
+    public function getItems()
     {
-        return $this->products;
+        return $this->items;
     }
 
     /**
-     * @param ProductInterface $product
+     * @param StaffListItem $item
      *
      * @return bool
      */
-    public function hasProduct(ProductInterface $product)
+    public function hasItem(StaffListItem $item)
     {
-        return $this->products->contains($product);
+        return $this->items->contains($item);
     }
 
     /**
-     * @param ProductInterface $product
+     * @param StaffListItem $item
      *
      * @return $this
      */
-    public function addProduct(ProductInterface $product)
+    public function addItem(StaffListItem $item)
     {
-        if (!$this->hasProduct($product)) {
-            $this->products->add($product);
+        if (!$this->hasItem($item)) {
+            $this->items->add($item);
         }
 
         return $this;
     }
 
     /**
-     * @param ProductInterface $product
+     * @param StaffListItem $item
      *
      * @return $this
      */
-    public function removeProduct(ProductInterface $product)
+    public function removeItem(StaffListItem $item)
     {
-        $this->products->removeElement($product);
+        $this->items->removeElement($item);
 
         return $this;
     }
