@@ -14,6 +14,8 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as JMS;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -33,8 +35,25 @@ class StaffList implements ResourceInterface
      * @var string
      *
      * @ORM\Column(type="string")
+     * @JMS\Expose
+     * @JMS\Groups({"Default"})
+     */
+    protected $code;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
      */
     protected $name;
+
+    /**
+     * @var string
+     *
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(type="string", unique=true)
+     */
+    protected $slug;
 
     /**
      * @var string
@@ -68,6 +87,27 @@ class StaffList implements ResourceInterface
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->code = uniqid('staff_list_');
+    }
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param string $code
+     *
+     * @return StaffList
+     */
+    public function setCode(string $code)
+    {
+        $this->code = $code;
+
+        return $this;
     }
 
     /**
@@ -86,6 +126,26 @@ class StaffList implements ResourceInterface
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     *
+     * @return StaffList
+     */
+    public function setSlug(string $slug)
+    {
+        $this->slug = $slug;
 
         return $this;
     }

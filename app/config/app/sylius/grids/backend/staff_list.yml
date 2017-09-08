@@ -6,12 +6,24 @@ sylius_grid:
                 options:
                     class: "%app.model.staff_list.class%"
             sorting:
-                name: asc
+                startAt: desc
             fields:
                 name:
                     type: string
                     label: sylius.ui.name
-                    sortable: name
+                    sortable: ~
+                startAt:
+                    type: datetime
+                    label: sylius.ui.start_date
+                    sortable: ~
+                    options:
+                        format: d M Y
+                endAt:
+                    type: datetime
+                    label: sylius.ui.end_date
+                    sortable: ~
+                    options:
+                        format: d M Y
             filters:
                 search:
                     type: string

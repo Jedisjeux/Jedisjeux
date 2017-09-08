@@ -21,11 +21,25 @@ class StaffListSpec extends ObjectBehavior
         $this->shouldImplement(ResourceInterface::class);
     }
 
+    function it_sets_code()
+    {
+        $this->setCode('staff_list');
+
+        $this->getCode()->shouldReturn('staff_list');
+    }
+
     function it_sets_name()
     {
         $this->setName('Awesome name');
 
         $this->getName()->shouldReturn('Awesome name');
+    }
+
+    function it_sets_slug()
+    {
+        $this->setSlug('awesome-name');
+
+        $this->getSlug()->shouldReturn('awesome-name');
     }
 
     function it_sets_description()

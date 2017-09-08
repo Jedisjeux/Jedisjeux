@@ -239,3 +239,6 @@ sylius_fixtures:
                 staff_list:
                     options:
                         random: 5
+                        custom:
+                            -
+                                name: Essen 2017

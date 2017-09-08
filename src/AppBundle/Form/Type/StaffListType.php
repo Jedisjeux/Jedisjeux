@@ -14,6 +14,7 @@ namespace AppBundle\Form\Type;
 use AppBundle\Entity\StaffList;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -36,6 +37,19 @@ class StaffListType extends AbstractType
             ])
             ->add('description', CKEditorType::class, [
                 'label' => 'sylius.ui.description',
+                'required' => false,
+            ])
+            ->add('start_at', DatePickerType::class, [
+                'label' => 'sylius.ui.start_date',
+                'widget' => 'single_text',
+                'format' => 'dd/MM/yyyy',
+                'required' => false,
+            ])
+            ->add('end_at', DatePickerType::class, [
+                'label' => 'sylius.ui.end_date',
+                'widget' => 'single_text',
+                'format' => 'dd/MM/yyyy',
+                'required' => false,
             ]);
     }
 

@@ -57,16 +57,34 @@ class StaffListExampleFactory extends AbstractExampleFactory implements ExampleF
     {
         $resolver
             ->setDefault('name', function (Options $options) {
-                return $this->faker->unique()->words(3, true);
+                return ucfirst($this->faker->unique()->words(3, true));
             })
 
             ->setDefault('description', function (Options $options) {
-                return $this->faker->unique()->text();
+                return "<p>" . implode("</p><p>", $this->faker->paragraphs(5)) . '</p>';
             })
 
-            ->setDefault('start_at', null)
+            ->setDefault('start_at', function (Options $options) {
+                return $this->faker->dateTimeBetween('2 months ago', 'yesterday');
+            })
+            ->setNormalizer('start_at', function (Options $options, $createdAt) {
+                if (!is_string($createdAt)) {
+                    return $createdAt;
+                }
 
-            ->setDefault('end_at', null)
+                return new \DateTime($createdAt);
+            })
+
+            ->setDefault('end_at', function (Options $options) {
+                return $this->faker->dateTimeBetween('tomorrow', '2 months');
+            })
+            ->setNormalizer('end_at', function (Options $options, $endAt) {
+                if (!is_string($endAt)) {
+                    return $endAt;
+                }
+
+                return new \DateTime($endAt);
+            })
         ;
     }
 

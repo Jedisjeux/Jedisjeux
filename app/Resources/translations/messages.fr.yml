@@ -72,6 +72,7 @@ app:
         manage_dealers: Gérer les vendeurs
         manage_dealer_prices: Gérer les tarifs des vendeurs
         manage_game_plays: Gérer les parties de jeu
+        manage_staff_lists: Gérer les listes Staff
         manage_not_found_pages: Gérer les pages non trouvées
         manage_people: Gérer les personnes
         manage_posts: Gérer les messages
