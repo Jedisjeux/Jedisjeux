@@ -20,7 +20,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  * @author Loïc Frémont <loic@mobizel.com>
  * 
  * @ORM\Entity
- * @ORM\Table("jdj_staff_list_product")
+ * @ORM\Table("jdj_staff_list_item")
  */
 class StaffListItem implements ResourceInterface
 {
