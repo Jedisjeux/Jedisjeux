@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace AppBundle\Behat\Page\Backend\StaffList;
+namespace AppBundle\Behat\Page\Backend\FestivalList;
 
 use AppBundle\Behat\Page\Backend\Crud\IndexPage as BaseIndexPage;
 

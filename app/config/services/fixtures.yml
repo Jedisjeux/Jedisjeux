@@ -39,6 +39,22 @@ services:
         tags:
             - { name: sylius_fixtures.fixture }
 
+    app.fixture.festival_list:
+        class: AppBundle\Fixture\FestivalListFixture
+        arguments:
+            - "@app.manager.festival_list"
+            - "@app.fixture.example_factory.festival_list"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
+    app.fixture.festival_list_item:
+        class: AppBundle\Fixture\FestivalListItemFixture
+        arguments:
+            - "@app.manager.festival_list_item"
+            - "@app.fixture.example_factory.festival_list_item"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
     app.fixture.game_play:
         class: AppBundle\Fixture\GamePlayFixture
         arguments:
@@ -100,14 +116,6 @@ services:
         arguments:
             - "@app.manager.redirection"
             - "@app.fixture.example_factory.redirection"
-        tags:
-            - { name: sylius_fixtures.fixture }
-
-    app.fixture.staff_list:
-        class: AppBundle\Fixture\StaffListFixture
-        arguments:
-            - "@app.manager.staff_list"
-            - "@app.fixture.example_factory.staff_list"
         tags:
             - { name: sylius_fixtures.fixture }
 

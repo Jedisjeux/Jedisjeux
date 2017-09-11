@@ -34,16 +34,17 @@ app:
         edit_article: Modifier l'article
         edit_dealer: Modifier le vendeur
         edit_dealer_price: Modifier le tarif du vendeur
+        edit_festival_list: Modifier la liste de festival
         edit_game_play: Modifier la partie de jeu
         edit_person: Modifier la personne
         edit_post: Modifier le message
         edit_product_box: Modifier la boite de jeu
         edit_product_list: Modifier la liste de jeu
         edit_redirection: Modifier la redirection
-        edit_staff_list: Modifier la liste Staff
         edit_string_block: Modifer le bloc de chaîne
         edit_topic: Modifier le sujet
         errors: Erreurs
+        festival_lists: Listes de festival
         forum: Forum
         framed: Encadré
         from_board_game_geek: À partir de BoardGameGeek
@@ -71,8 +72,8 @@ app:
         manage_contact_requests: Gérer les demandes de contact
         manage_dealers: Gérer les vendeurs
         manage_dealer_prices: Gérer les tarifs des vendeurs
+        manage_festival_lists: Gérer les listes de festival
         manage_game_plays: Gérer les parties de jeu
-        manage_staff_lists: Gérer les listes Staff
         manage_not_found_pages: Gérer les pages non trouvées
         manage_people: Gérer les personnes
         manage_posts: Gérer les messages
@@ -82,6 +83,7 @@ app:
         manage_string_blocks: Gérer les blocs de chaîne
         manage_topics: Gérer les sujets
         material_rating: Note du matériel
+        moderation: Modération
         move_up: Monter
         move_down: Descendre
         my_game_library: Ma ludothèque
@@ -92,12 +94,12 @@ app:
         new_article: Nouvel article
         new_articles: Nouveaux articles
         new_dealer: Nouveau vendeur
+        new_festival_list: Nouvelle Liste de festival
         new_list: Nouvelle liste
         new_person: Nouvelle personne
         new_product_box: Nouvelle boite de jeu
         new_redirection: Nouvelle redirection
         new_post: Nouveau message
-        new_staff_list: Nouvelle Liste Staff
         new_string_block: Nouveau bloc de chaîne
         normal: Normal
         not_found_pages: Pages non trouvées
@@ -141,7 +143,6 @@ app:
         slide_show: Carousel
         source: Source
         staff: Staff
-        staff_lists: Listes Staff
         string_blocks: Blocs de chaîne
         style: Style
         topic: Sujet

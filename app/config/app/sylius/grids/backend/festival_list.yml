@@ -1,10 +1,10 @@
 sylius_grid:
     grids:
-        app_backend_staff_list:
+        app_backend_festival_list:
             driver:
                 name: doctrine/orm
                 options:
-                    class: "%app.model.staff_list.class%"
+                    class: "%app.model.festival_list.class%"
             sorting:
                 startAt: desc
             fields:

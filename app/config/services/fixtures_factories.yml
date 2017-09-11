@@ -33,6 +33,18 @@ services:
             - "@sylius.repository.product"
             - "@app.repository.dealer"
 
+    app.fixture.example_factory.festival_list:
+        class: AppBundle\Fixture\Factory\FestivalListExampleFactory
+        arguments:
+            - "@app.factory.festival_list"
+
+    app.fixture.example_factory.festival_list_item:
+        class: AppBundle\Fixture\Factory\FestivalListItemExampleFactory
+        arguments:
+            - "@app.factory.festival_list_item"
+            - "@sylius.repository.product"
+            - "@app.repository.festival_list"
+
     app.fixture.example_factory.game_play:
         class: AppBundle\Fixture\Factory\GamePlayExampleFactory
         arguments:
@@ -84,11 +96,6 @@ services:
         class: AppBundle\Fixture\Factory\RedirectionExampleFactory
         arguments:
             - "@app.factory.redirection"
-
-    app.fixture.example_factory.staff_list:
-        class: AppBundle\Fixture\Factory\StaffListExampleFactory
-        arguments:
-            - "@app.factory.staff_list"
 
     app.fixture.example_factory.taxon:
         class: AppBundle\Fixture\Factory\TaxonExampleFactory

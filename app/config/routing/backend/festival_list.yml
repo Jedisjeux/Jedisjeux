@@ -1,14 +1,14 @@
-app_backend_staff_list:
+app_backend_festival_list:
     resource: |
-        alias: app.staff_list
+        alias: app.festival_list
         section: backend
         except: ['show']
         templates: :backend/crud
         redirect: update
-        grid: app_backend_staff_list
+        grid: app_backend_festival_list
         vars:
             all:
-                subheader: app.ui.manage_staff_lists
+                subheader: app.ui.manage_festival_lists
             index:
                 icon: list
     type: sylius.resource

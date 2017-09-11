@@ -71,10 +71,10 @@ services:
             tags:
                 - { name: fob.context_service }
 
-        app.behat.context.transform.staff_list:
-            class: AppBundle\Behat\Context\Transform\StaffListContext
+        app.behat.context.transform.festival_list:
+            class: AppBundle\Behat\Context\Transform\FestivalListContext
             arguments:
-                - "@__symfony__.app.repository.staff_list"
+                - "@__symfony__.app.repository.festival_list"
             tags:
                 - { name: fob.context_service }
 

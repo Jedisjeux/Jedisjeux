@@ -11,16 +11,16 @@
 
 namespace AppBundle\Behat\Context\Ui\Backend;
 
-use AppBundle\Behat\Page\Backend\StaffList\CreatePage;
-use AppBundle\Behat\Page\Backend\StaffList\IndexPage;
-use AppBundle\Entity\StaffList;
+use AppBundle\Behat\Page\Backend\FestivalList\CreatePage;
+use AppBundle\Behat\Page\Backend\FestivalList\IndexPage;
+use AppBundle\Entity\FestivalList;
 use Behat\Behat\Context\Context;
 use Webmozart\Assert\Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class ManagingStaffListsContext implements Context
+class ManagingFestivalListsContext implements Context
 {
     /**
      * @var IndexPage
@@ -43,9 +43,9 @@ class ManagingStaffListsContext implements Context
     }
 
     /**
-     * @Given I want to create a new staff list
+     * @Given I want to create a new festival list
      */
-    public function iWantToCreateANewStaffList()
+    public function iWantToCreateANewFestivalList()
     {
         $this->createPage->open();
     }
@@ -96,13 +96,13 @@ class ManagingStaffListsContext implements Context
     }
 
     /**
-     * @Then the staff list :staffList should appear in the website
-     * @Then I should see the staff list :staffList in the list
+     * @Then the festival list :festivalList should appear in the website
+     * @Then I should see the festival list :festivalList in the list
      */
-    public function theStaffListShould(StaffList $staffList)
+    public function theFestivalListShould(FestivalList $festivalList)
     {
         $this->indexPage->open();
 
-        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $staffList->getName()]));
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $festivalList->getName()]));
     }
 }

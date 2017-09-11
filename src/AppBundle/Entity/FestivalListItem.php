@@ -20,17 +20,17 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  * @author Loïc Frémont <loic@mobizel.com>
  * 
  * @ORM\Entity
- * @ORM\Table("jdj_staff_list_item")
+ * @ORM\Table("jdj_festival_list_item")
  */
-class StaffListItem implements ResourceInterface
+class FestivalListItem implements ResourceInterface
 {
     use IdentifiableTrait,
         Timestampable;
 
     /**
-     * @var StaffList
+     * @var FestivalList
      *
-     * @ORM\ManyToOne(targetEntity="StaffList")
+     * @ORM\ManyToOne(targetEntity="FestivalList")
      */
     protected $list;
 
@@ -42,7 +42,7 @@ class StaffListItem implements ResourceInterface
     protected $product;
 
     /**
-     * @return StaffList
+     * @return FestivalList
      */
     public function getList()
     {
@@ -50,11 +50,11 @@ class StaffListItem implements ResourceInterface
     }
 
     /**
-     * @param StaffList $list
+     * @param FestivalList $list
      *
-     * @return StaffListItem
+     * @return FestivalListItem
      */
-    public function setList(StaffList $list)
+    public function setList(FestivalList $list)
     {
         $this->list = $list;
 
@@ -72,7 +72,7 @@ class StaffListItem implements ResourceInterface
     /**
      * @param ProductInterface $product
      *
-     * @return StaffListItem
+     * @return FestivalListItem
      */
     public function setProduct(ProductInterface $product)
     {

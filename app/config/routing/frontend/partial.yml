@@ -1,5 +1,6 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+app_frontend_partial_festival_list:
+    resource: "partial/festival_list.yml"
+    prefix: /festival-lists
 
 sylius_frontend_partial_taxon:
     resource: "partial/taxon.yml"

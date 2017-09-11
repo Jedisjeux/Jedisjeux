@@ -10,7 +10,8 @@
  */
 
 namespace AppBundle\Fixture\Factory;
-use AppBundle\Entity\StaffList;
+use AppBundle\Entity\FestivalList;
+use AppBundle\Formatter\StringInflector;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,12 +19,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class StaffListExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
+class FestivalListExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
      * @var FactoryInterface
      */
-    private $staffListFactory;
+    private $festivalListFactory;
 
     /**
      * @var \Faker\Generator
@@ -38,11 +39,11 @@ class StaffListExampleFactory extends AbstractExampleFactory implements ExampleF
     /**
      * RedirectionExampleFactory constructor.
      *
-     * @param FactoryInterface $staffListFactory
+     * @param FactoryInterface $festivalListFactory
      */
-    public function __construct(FactoryInterface $staffListFactory)
+    public function __construct(FactoryInterface $festivalListFactory)
     {
-        $this->staffListFactory = $staffListFactory;
+        $this->festivalListFactory = $festivalListFactory;
 
         $this->faker = \Faker\Factory::create('fr_FR');
         $this->optionsResolver = new OptionsResolver();
@@ -58,6 +59,10 @@ class StaffListExampleFactory extends AbstractExampleFactory implements ExampleF
         $resolver
             ->setDefault('name', function (Options $options) {
                 return ucfirst($this->faker->unique()->words(3, true));
+            })
+
+            ->setDefault('code', function (Options $options) {
+                return StringInflector::nameToCode($options['name']);
             })
 
             ->setDefault('description', function (Options $options) {
@@ -95,13 +100,13 @@ class StaffListExampleFactory extends AbstractExampleFactory implements ExampleF
     {
         $options = $this->optionsResolver->resolve($options);
 
-        /** @var StaffList $redirection */
-        $redirection = $this->staffListFactory->createNew();
-        $redirection->setName($options['name']);
-        $redirection->setDescription($options['description']);
-        $redirection->setStartAt($options['start_at']);
-        $redirection->setEndAt($options['end_at']);
+        /** @var FestivalList $festivalList */
+        $festivalList = $this->festivalListFactory->createNew();
+        $festivalList->setName($options['name']);
+        $festivalList->setDescription($options['description']);
+        $festivalList->setStartAt($options['start_at']);
+        $festivalList->setEndAt($options['end_at']);
 
-        return $redirection;
+        return $festivalList;
     }
 }

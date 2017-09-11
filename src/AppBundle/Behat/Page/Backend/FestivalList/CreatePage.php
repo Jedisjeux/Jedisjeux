@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace AppBundle\Behat\Page\Backend\StaffList;
+namespace AppBundle\Behat\Page\Backend\FestivalList;
 
 use AppBundle\Behat\Page\Backend\Crud\CreatePage as BaseCreatePage;
 
@@ -56,10 +56,10 @@ class CreatePage extends BaseCreatePage
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'name' => '#app_staff_list_name',
-            'description' => '#app_staff_list_description',
-            'start_at' => '#app_staff_list_start_at',
-            'end_at' => '#app_staff_list_end_at',
+            'name' => '#app_festival_list_name',
+            'description' => '#app_festival_list_description',
+            'start_at' => '#app_festival_list_start_at',
+            'end_at' => '#app_festival_list_end_at',
         ]);
     }
 }

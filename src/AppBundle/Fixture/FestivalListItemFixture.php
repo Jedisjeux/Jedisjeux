@@ -16,14 +16,14 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class StaffListFixture extends AbstractResourceFixture
+class FestivalListItemFixture extends AbstractResourceFixture
 {
     /**
      * {@inheritdoc}
      */
     public function getName()
     {
-        return 'staff_list';
+        return 'festival_list_item';
     }
 
     /**
@@ -33,10 +33,9 @@ class StaffListFixture extends AbstractResourceFixture
     {
         $resourceNode
             ->children()
-                ->scalarNode('name')->cannotBeEmpty()->end()
-                ->scalarNode('description')->end()
-                ->scalarNode('start_at')->end()
-                ->scalarNode('end_at')->end()
+                ->scalarNode('product')->cannotBeEmpty()->end()
+                ->scalarNode('list')->cannotBeEmpty()->end()
+                ->scalarNode('created_at')->end()
         ;
     }
 }

@@ -19,35 +19,35 @@ use Webmozart\Assert\Assert;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class StaffListContext implements Context
+class FestivalListContext implements Context
 {
     /**
      * @var RepositoryInterface
      */
-    private $staffListRepository;
+    private $festivalListRepository;
 
     /**
      * PersonContext constructor.
      *
-     * @param RepositoryInterface $staffListRepository
+     * @param RepositoryInterface $festivalListRepository
      */
-    public function __construct(RepositoryInterface $staffListRepository)
+    public function __construct(RepositoryInterface $festivalListRepository)
     {
-        $this->staffListRepository = $staffListRepository;
+        $this->festivalListRepository = $festivalListRepository;
     }
 
     /**
-     * @Transform /^staff list "([^"]+)"$/
-     * @Transform :staffList
+     * @Transform /^festival list "([^"]+)"$/
+     * @Transform :festivalList
      *
      * @param string $name
      *
      * @return Dealer
      */
-    public function getStaffListByName($name)
+    public function getFestivalListByName($name)
     {
         /** @var Dealer $dealer */
-        $dealer = $this->staffListRepository->findOneBy(['name' => $name]);
+        $dealer = $this->festivalListRepository->findOneBy(['name' => $name]);
 
         Assert::notNull(
             $dealer,

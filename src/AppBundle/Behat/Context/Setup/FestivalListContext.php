@@ -13,7 +13,7 @@ namespace AppBundle\Behat\Context\Setup;
 
 use AppBundle\Behat\Service\SharedStorageInterface;
 use AppBundle\Entity\Dealer;
-use AppBundle\Entity\StaffList;
+use AppBundle\Entity\FestivalList;
 use AppBundle\Fixture\Factory\ExampleFactoryInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -21,7 +21,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class StaffListContext implements Context
+class FestivalListContext implements Context
 {
     /**
      * @var SharedStorageInterface
@@ -31,37 +31,37 @@ class StaffListContext implements Context
     /**
      * @var ExampleFactoryInterface
      */
-    private $staffListFactory;
+    private $festivalListFactory;
 
     /**
      * @var RepositoryInterface
      */
-    private $staffListRepository;
+    private $festivalListRepository;
 
     /**
      * @param $sharedStorage
-     * @param ExampleFactoryInterface $staffListFactory
-     * @param RepositoryInterface $staffListRepository
+     * @param ExampleFactoryInterface $festivalListFactory
+     * @param RepositoryInterface $festivalListRepository
      */
-    public function __construct($sharedStorage, ExampleFactoryInterface $staffListFactory, RepositoryInterface $staffListRepository)
+    public function __construct($sharedStorage, ExampleFactoryInterface $festivalListFactory, RepositoryInterface $festivalListRepository)
     {
         $this->sharedStorage = $sharedStorage;
-        $this->staffListFactory = $staffListFactory;
-        $this->staffListRepository = $staffListRepository;
+        $this->festivalListFactory = $festivalListFactory;
+        $this->festivalListRepository = $festivalListRepository;
     }
 
     /**
-     * @Given there is staff list :name
+     * @Given there is festival list :name
      *
      * @param string $name
      */
-    public function thereIsStaffList($name)
+    public function thereIsFestivalList($name)
     {
-        /** @var StaffList $staffList */
-        $staffList = $this->staffListFactory->create([
+        /** @var FestivalList $festivalList */
+        $festivalList = $this->festivalListFactory->create([
             'name' => $name,
         ]);
 
-        $this->staffListRepository->add($staffList);
+        $this->festivalListRepository->add($festivalList);
     }
 }

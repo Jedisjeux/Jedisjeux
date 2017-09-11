@@ -2,19 +2,19 @@
 
 namespace spec\AppBundle\Entity;
 
-use AppBundle\Entity\StaffList;
-use AppBundle\Entity\StaffListItem;
+use AppBundle\Entity\FestivalList;
+use AppBundle\Entity\FestivalListItem;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-class StaffListSpec extends ObjectBehavior
+class FestivalListSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType(StaffList::class);
+        $this->shouldHaveType(FestivalList::class);
     }
 
     function it_implements_resource_interface()
@@ -69,13 +69,13 @@ class StaffListSpec extends ObjectBehavior
         $this->getItems()->shouldHaveType(ArrayCollection::class);
     }
 
-    function it_can_add_items(StaffListItem $item)
+    function it_can_add_items(FestivalListItem $item)
     {
         $this->addItem($item);
         $this->hasItem($item)->shouldReturn(true);
     }
 
-    function it_can_remove_items(StaffListItem $item)
+    function it_can_remove_items(FestivalListItem $item)
     {
         $this->addItem($item);
         $this->removeItem($item);

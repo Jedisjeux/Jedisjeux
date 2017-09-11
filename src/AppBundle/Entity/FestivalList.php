@@ -24,9 +24,9 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  * @author Loïc Frémont <loic@mobizel.com>
  *
  * @ORM\Entity
- * @ORM\Table("jdj_staff_list")
+ * @ORM\Table("jdj_festival_list")
  */
-class StaffList implements ResourceInterface
+class FestivalList implements ResourceInterface
 {
     use IdentifiableTrait,
         Timestampable;
@@ -77,17 +77,17 @@ class StaffList implements ResourceInterface
     protected $endAt;
 
     /**
-     * @var Collection|StaffListItem[]
+     * @var Collection|FestivalListItem[]
      */
     protected $items;
 
     /**
-     * StaffList constructor.
+     * FestivalList constructor.
      */
     public function __construct()
     {
         $this->items = new ArrayCollection();
-        $this->code = uniqid('staff_list_');
+        $this->code = uniqid('festival_list_');
     }
 
     /**
@@ -101,7 +101,7 @@ class StaffList implements ResourceInterface
     /**
      * @param string $code
      *
-     * @return StaffList
+     * @return FestivalList
      */
     public function setCode(string $code)
     {
@@ -141,7 +141,7 @@ class StaffList implements ResourceInterface
     /**
      * @param string $slug
      *
-     * @return StaffList
+     * @return FestivalList
      */
     public function setSlug(string $slug)
     {
@@ -219,21 +219,21 @@ class StaffList implements ResourceInterface
     }
 
     /**
-     * @param StaffListItem $item
+     * @param FestivalListItem $item
      *
      * @return bool
      */
-    public function hasItem(StaffListItem $item)
+    public function hasItem(FestivalListItem $item)
     {
         return $this->items->contains($item);
     }
 
     /**
-     * @param StaffListItem $item
+     * @param FestivalListItem $item
      *
      * @return $this
      */
-    public function addItem(StaffListItem $item)
+    public function addItem(FestivalListItem $item)
     {
         if (!$this->hasItem($item)) {
             $this->items->add($item);
@@ -243,11 +243,11 @@ class StaffList implements ResourceInterface
     }
 
     /**
-     * @param StaffListItem $item
+     * @param FestivalListItem $item
      *
      * @return $this
      */
-    public function removeItem(StaffListItem $item)
+    public function removeItem(FestivalListItem $item)
     {
         $this->items->removeElement($item);
 

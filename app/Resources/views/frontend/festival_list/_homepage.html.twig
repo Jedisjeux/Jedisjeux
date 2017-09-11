@@ -1,0 +1,17 @@
+{% for festival_list in resources %}
+    <div class="container">
+
+        <h4 class="mag-head"><a href="{{ path('app_frontend_game_play_index') }}"><i
+                        class="fa fa-play color"></i> {{ festival_list.name }}</a></h4>
+        <div class="row">
+            <div class="col-md-5 col-sm-6 text-center">
+                <a href="#"><img src="/img/rev-slider/mockup1.png" alt="" class="img-responsive"></a>
+            </div>
+            <div class="col-md-7 col-sm-6">
+                <p>{{ festival_list.description|striptags }}</p>
+                <br>
+            </div>
+        </div>
+    </div>
+    <hr />
+{% endfor %}

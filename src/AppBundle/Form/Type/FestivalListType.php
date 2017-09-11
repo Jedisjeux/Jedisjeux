@@ -11,7 +11,7 @@
 
 namespace AppBundle\Form\Type;
 
-use AppBundle\Entity\StaffList;
+use AppBundle\Entity\FestivalList;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class StaffListType extends AbstractType
+class FestivalListType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -61,7 +61,7 @@ class StaffListType extends AbstractType
         parent::configureOptions($resolver);
 
         $resolver->setDefaults(array(
-            'data_class' => StaffList::class,
+            'data_class' => FestivalList::class,
         ));
     }
 
@@ -70,6 +70,6 @@ class StaffListType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'app_staff_list';
+        return 'app_festival_list';
     }
 }

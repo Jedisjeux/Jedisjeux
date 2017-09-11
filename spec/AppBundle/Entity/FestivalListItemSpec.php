@@ -2,18 +2,18 @@
 
 namespace spec\AppBundle\Entity;
 
-use AppBundle\Entity\StaffList;
-use AppBundle\Entity\StaffListItem;
+use AppBundle\Entity\FestivalList;
+use AppBundle\Entity\FestivalListItem;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-class StaffListItemSpec extends ObjectBehavior
+class FestivalListItemSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType(StaffListItem::class);
+        $this->shouldHaveType(FestivalListItem::class);
     }
 
     function it_implements_resource_interface()
@@ -21,7 +21,7 @@ class StaffListItemSpec extends ObjectBehavior
         $this->shouldImplement(ResourceInterface::class);
     }
 
-    function its_list_is_mutable(StaffList $list)
+    function its_list_is_mutable(FestivalList $list)
     {
         $this->setList($list);
         $this->getList()->shouldReturn($list);

@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block headline %}
+    {{ render(url('app_frontend_partial_festival_list_show_by_slug', {
+        'slug': app.request.get('festivalListSlug'),
+        'template': 'frontend/festival_list/_headline.html.twig'
+    })) }}
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    {{ render(url('app_frontend_partial_festival_list_show_by_slug', {
+        'slug': app.request.get('festivalListSlug'),
+        'template': 'frontend/festival_list/_breadcrumb.html.twig'
+    })) }}
+{% endblock %}
+
+{% block body -%}
+    {% include 'frontend/festival_list_item/index/_content.html.twig' %}
+{% endblock %}

@@ -1,0 +1,20 @@
+sylius_grid:
+    grids:
+        app_frontend_festival_list_item:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%app.model.festival_list_item.class%"
+                    repository:
+                        method: createListQueryBuilderByList
+                        arguments:
+                            - "expr:notFoundOnNull(service('app.repository.festival_list').findOneBySlug($festivalListSlug))"
+                            - "%locale%"
+            limits: ~
+            sorting:
+                createdAt: desc
+            fields:
+                createdAt:
+                    type: twig
+                    label: sylius.ui.created_at
+                    sortable: ~
