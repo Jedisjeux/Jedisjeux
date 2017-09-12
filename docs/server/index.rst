@@ -23,6 +23,7 @@ Edit php.ini and change these parameters.
 
 .. code-block:: bash
 
+    date.timezone = Europe/Paris
     memory_limit = 2048M
     upload_max_filesize = 10M
     post_max_size = 20M
