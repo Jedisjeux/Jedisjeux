@@ -3,6 +3,7 @@
 code=0
 commands=(
     validate-composer
+    validate-behat-features
     validate-doctrine-schema
     test-phpspec
     test-phpunit

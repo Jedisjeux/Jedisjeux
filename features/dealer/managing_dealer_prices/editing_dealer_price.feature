@@ -19,4 +19,3 @@ Feature: Editing a dealer price
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this dealer price with name "Puerto Ricoche" should appear in the website
-
