@@ -6,6 +6,10 @@ sylius_backend_partial_customer:
     resource: partial/customer.yml
     prefix: /customers
 
+app_backend_partial_festival_list:
+    resource: partial/festival_list.yml
+    prefix: /festival-lists
+
 app_backend_partial_session:
     resource: partial/session.yml
     prefix: /sessions

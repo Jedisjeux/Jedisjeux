@@ -1,0 +1,7 @@
+{% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
+
+<div class="column">
+    {{ headers.default(festival_list.name, configuration.vars.icon|default('list'), configuration.vars.subheader|default('app.ui.manage_festival_lists')|trans) }}
+
+    {% include configuration.vars.templates.breadcrumb|default('backend/festival_list_item/index/_breadcrumb.html.twig') %}
+</div>

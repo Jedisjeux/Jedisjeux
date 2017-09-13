@@ -1,0 +1,48 @@
+sylius_grid:
+    grids:
+        app_backend_festival_list_item:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%app.model.festival_list_item.class%"
+                    repository:
+                        method: createListQueryBuilderByList
+                        arguments:
+                            - "expr:notFoundOnNull(service('app.repository.festival_list').find($festivalListId))"
+                            - "%locale%"
+            limits: ~
+            sorting:
+                createdAt: desc
+            fields:
+                createdAt:
+                    type: datetime
+                    label: sylius.ui.created_at
+                    options:
+                        format: d M Y
+                    sortable: ~
+                product:
+                    type: string
+                    sortable: ~
+            actions:
+                main:
+                    create:
+                        type: create
+                        options:
+                            link:
+                                parameters:
+                                    festivalListId: $festivalListId
+                item:
+                    update:
+                        type: update
+                        options:
+                            link:
+                                parameters:
+                                    id: resource.id
+                                    festivalListId: $festivalListId
+                    delete:
+                        type: delete
+                        options:
+                            link:
+                                parameters:
+                                    id: resource.id
+                                    festivalListId: $festivalListId

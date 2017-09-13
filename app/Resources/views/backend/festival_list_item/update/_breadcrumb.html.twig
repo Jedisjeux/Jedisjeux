@@ -1,0 +1,13 @@
+{% import 'backend/macro/breadcrumb.html.twig' as breadcrumb %}
+
+{% set breadcrumbs = [
+        { label: 'sylius.ui.administration'|trans, url: path('app_backend_dashboard') },
+        { label: 'app.ui.festival_lists'|trans, url: path('app_backend_festival_list_index') },
+        { label: app.request.attributes.get('festivalListId') },
+        { label: (metadata.applicationName~'.ui.'~metadata.pluralName)|trans, url: path(configuration.getRouteName('index'), configuration.vars.route.parameters|default({})) },
+        { label: resource.code|default(resource.id) },
+        { label: 'sylius.ui.edit'|trans }
+    ]
+%}
+
+{{ breadcrumb.crumble(breadcrumbs) }}

@@ -35,6 +35,7 @@ app:
         edit_dealer: Modifier le vendeur
         edit_dealer_price: Modifier le tarif du vendeur
         edit_festival_list: Modifier la liste de festival
+        edit_festival_list_item: Modifier l'item de liste de festival
         edit_game_play: Modifier la partie de jeu
         edit_person: Modifier la personne
         edit_post: Modifier le message
@@ -45,6 +46,7 @@ app:
         edit_topic: Modifier le sujet
         errors: Erreurs
         festival_lists: Listes de festival
+        festival_list_items: Items de liste de festival
         forum: Forum
         framed: Encadré
         from_board_game_geek: À partir de BoardGameGeek
@@ -73,6 +75,7 @@ app:
         manage_dealers: Gérer les vendeurs
         manage_dealer_prices: Gérer les tarifs des vendeurs
         manage_festival_lists: Gérer les listes de festival
+        manage_festival_list_items: Géreer les items de liste de festival
         manage_game_plays: Gérer les parties de jeu
         manage_not_found_pages: Gérer les pages non trouvées
         manage_people: Gérer les personnes
@@ -95,6 +98,7 @@ app:
         new_articles: Nouveaux articles
         new_dealer: Nouveau vendeur
         new_festival_list: Nouvelle Liste de festival
+        new_festival_list_item: Nouvel item de festival de liste
         new_list: Nouvelle liste
         new_person: Nouvelle personne
         new_product_box: Nouvelle boite de jeu

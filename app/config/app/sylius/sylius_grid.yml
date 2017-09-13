@@ -8,6 +8,7 @@ imports:
     - { resource: 'grids/backend/dealer.yml' }
     - { resource: 'grids/backend/dealer_price.yml' }
     - { resource: 'grids/backend/festival_list.yml' }
+    - { resource: 'grids/backend/festival_list_item.yml' }
     - { resource: 'grids/backend/game_play.yml' }
     - { resource: 'grids/backend/not_found_page.yml' }
     - { resource: 'grids/backend/person.yml' }

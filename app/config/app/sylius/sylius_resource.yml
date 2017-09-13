@@ -54,7 +54,9 @@ sylius_resource:
         app.festival_list_item:
             classes:
                 model: AppBundle\Entity\FestivalListItem
+                factory: AppBundle\Factory\FestivalListItemFactory
                 repository: AppBundle\Repository\FestivalListItemRepository
+                form: AppBundle\Form\Type\FestivalListItemType
         app.not_found_page:
             classes:
                 model: AppBundle\Entity\NotFound
