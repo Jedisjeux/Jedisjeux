@@ -1,0 +1,265 @@
+{% extends '@SyliusUi/Form/theme.html.twig' %}
+
+{% macro polycollection_item(form, allow_delete, button_delete_label, index) %}
+    {% spaceless %}
+        <div data-form-polycollection="item" data-form-polycollection-index="{{ index }}">
+            {{ form_widget(form) }}
+            {% if allow_delete %}
+                <a href="#" data-form-polycollection="delete" class="ui red labeled icon button"
+                   style="margin-bottom: 1em;">
+                    <i class="trash icon"></i>
+                    {{ button_delete_label|trans }}
+                </a>
+            {% endif %}
+        </div>
+    {% endspaceless %}
+{% endmacro %}
+
+{% block infinite_form_polycollection_row -%}
+    {% set polycollectionForm = form %}
+
+    <div data-form-type="polycollection" data-form-polycollection="add"
+         href="#" {{ block('widget_container_attributes') }}>
+
+        <div data-form-polycollection="list">
+            {% for child in polycollectionForm %}
+                {{ _self.polycollection_item(child, allow_delete, button_delete_label|default('sylius.ui.delete'), loop.index0) }}
+            {% endfor %}
+        </div>
+
+        <div class="polycollection">
+            <div class="ui labeled icon bottom right floating dropdown button primary link">
+                <i class="plus icon"></i>
+                <span class="text">{{ 'sylius.ui.add'|trans }}</span>
+                <div class="menu">
+                    <div class="header">
+                        <i class="cube icon"></i>
+                        {{ 'sylius.ui.type'|trans }}
+                    </div>
+                    <div class="divider"></div>
+                    {% for key, prototype in prototypes %}
+                        {% set form = prototype %}
+                        <a class="item" data-form-polycollection="add" href="#"
+                           data-prototype="{{ _self.polycollection_item(form, allow_delete, button_delete_label|default('sylius.ui.delete')) | escape }}">
+                            {{ form._type.vars.label|trans }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{%- endblock %}
+
+{% block app_datetime_picker_widget %}
+    {% spaceless %}
+        <div class="ui calendar app-date-time-picker">
+            <div class="ui input left icon">
+                <i class="calendar icon"></i>
+                {{ block('form_widget') }}
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock %}
+
+{% block app_date_picker_widget %}
+    {% spaceless %}
+        <div class="ui calendar app-date-picker">
+            <div class="ui input left icon">
+                <i class="calendar icon"></i>
+                {{ block('form_widget') }}
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock %}
+
+{% block time_widget %}
+    <div class="two fields">
+        <div class="field">
+            {{- form_widget(form.hour) -}}
+        </div>
+        <div class="field">
+            {{- form_widget(form.minute) -}}
+        </div>
+    </div>
+{% endblock %}
+
+{% block single_image_block_widget %}
+    {% import _self as blocks %}
+
+    {% set imagePosition = form.imagePosition.vars.data %}
+    {% set type = 'single_image_' ~ imagePosition %}
+
+    <div class="ui segment">
+        <div class="ui one column grid">
+            <div class="row">
+                <div class="column">
+                    <div class="ui right floated buttons">
+                        <a class="ui labeled icon button app-move-up" href="#">
+                            <i class="icon arrow up"></i>
+                            {{ 'app.ui.move_up'|trans }}
+                        </a>
+                        <a class="ui labeled icon button app-move-down" href="#">
+                            <i class="icon arrow down"></i>
+                            {{ 'app.ui.move_down'|trans }}
+                        </a>
+                        <div style="clear: left"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if attribute(blocks, type) is defined %}
+            {{ attribute(blocks, type, [form]) }}
+        {% else %}
+            {{ form_row(form, {'label': false}) }}
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% macro single_image_left(form) %}
+    <div class="ui stackable grid">
+        <div class="six wide column">
+            {{ form_row(form.imagePosition) }}
+
+            {% set image = form.image %}
+
+            {% if image.vars.data and image.vars.data.webPath %}
+                <img class="ui fluid image" src="{{ image.vars.data.webPath | imagine_filter('magazine_item') }}"/>
+            {% endif %}
+
+            {{ form_row(form.image.file) }}
+            {{ form_row(form.image.label) }}
+        </div>
+        <div class="ten wide column">
+            {{ form_row(form.title) }}
+            {{ form_row(form.body) }}{{ form_row(form.class) }}
+        </div>
+    </div>
+
+    {{ form_row(form.imagePosition) }}
+    {{ form_row(form.position) }}
+{% endmacro %}
+
+{% macro single_image_right(form) %}
+    <div class="ui stackable grid">
+        <div class="ten wide column">
+            {{ form_row(form.title) }}
+            {{ form_row(form.body) }}
+            {{ form_row(form.class) }}
+        </div>
+        <div class="six wide column">
+            {{ form_row(form.imagePosition) }}
+
+            {% set image = form.image %}
+
+            {% if image.vars.data and image.vars.data.webPath %}
+                <img class="ui fluid image" src="{{ image.vars.data.webPath | imagine_filter('magazine_item') }}"/>
+            {% endif %}
+            {{ form_row(form.image.file) }}
+            {{ form_row(form.image.label) }}
+        </div>
+    </div>
+    {{ form_row(form.position) }}
+{% endmacro %}
+
+{% macro single_image_top(form) -%}
+    {{ form_row(form.title) }}
+    {% set image = form.image.vars.data %}
+
+    {% if image and image.webPath %}
+        <div class="ui stackable grid">
+        <div class="four wide column">
+            <img class="ui image" src="{{ image.webPath | imagine_filter('magazine_item') }}"/>
+        </div>
+        <div class="twelve wide column">
+    {% endif %}
+    {{ form_row(form.imagePosition) }}
+    {{ form_row(form.image.file) }}
+    {{ form_row(form.image.label) }}
+    {% if image and image.webPath %}
+        </div>
+        </div>
+    {% endif %}
+    {{ form_row(form.body) }}
+    {{ form_row(form.class) }}
+    {{ form_row(form.position) }}
+{%- endmacro %}
+
+{% block app_product_variant_image_widget %}
+    {% import 'macros/images.html.twig' as images %}
+
+    {% set image = form.vars.value %}
+
+    {% if image %}
+        <div class="ui stackable grid">
+        <div class="three wide column">
+            {{ images.render(image.webPath, null, null, 'ui thumbnail image') }}
+        </div>
+        <div class="thirteen wide column">
+    {% endif %}
+    {{ form_row(form.file) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.main) }}
+    {{ form_row(form.material) }}
+    {% if image %}
+        </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block app_article_image_widget %}
+    {% import 'macros/images.html.twig' as images %}
+
+    {% set image = form.vars.value %}
+
+    {% if image and image.webPath %}
+        <div class="ui stackable grid">
+        <div class="three wide column">
+            {{ images.render(image.webPath, null, null, 'ui thumbnail image') }}
+        </div>
+        <div class="thirteen wide column">
+    {% endif %}
+    {{ form_row(form.file) }}
+    {% if image and image.webPath %}
+        </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block app_product_box_image_widget %}
+    {% import 'macros/images.html.twig' as images %}
+
+    {% set image = form.vars.value %}
+
+    {% if image and image.webPath %}
+        <div class="ui stackable grid">
+        <div class="three wide column">
+            <div class="ui small image">
+                {{ images.render(image.webPath) }}
+            </div>
+        </div>
+        <div class="thirteen wide column">
+    {% endif %}
+    {{ form_row(form.file) }}
+    {% if image and image.webPath %}
+        </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block _app_customer_user_roles_widget %}
+    {% set roles = [] %}
+    {% for child in form %}
+        {% set roles = roles|merge({(child.vars.value): child}) %}
+    {% endfor %}
+
+    {% for choiceGroup in form.vars.choices %}
+        <div class="ui segment">
+            <h5 class="ui dividing header">{{ choiceGroup.label|trans }}</h5>
+            {% for choice in choiceGroup.choices %}
+                {{ form_row(roles[choice.value]) }}
+            {% endfor %}
+        </div>
+    {% endfor %}
+{% endblock %}
