@@ -17,4 +17,3 @@ Feature: Editing a product
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this product list with name "Awesome games" should appear in the website
-

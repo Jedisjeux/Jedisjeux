@@ -15,4 +15,3 @@ Feature: Editing a product
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this product with name "Modern Art" should appear in the website
-

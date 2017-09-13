@@ -18,4 +18,3 @@ Feature: Editing a article
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this article with title "Star Wars" should appear in the website
-

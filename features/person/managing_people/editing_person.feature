@@ -16,4 +16,3 @@ Feature: Editing a person
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this person with name "Martin Wallace" should appear in the website
-

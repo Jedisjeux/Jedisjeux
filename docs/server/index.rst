@@ -1,13 +1,41 @@
-Installation
-============
+Production settings
+===================
 
-Configuration d'Apache
-----------------------
+PHP settings
+------------
+
+Jedisjeux requires php 7.1.
+
+For available list of packages you can read `php71_packages`_.
+
+.. code-block:: bash
+
+    $ sudo yum install mod_php71w php71w-cli php71w-intl php71w-pdo php71w-xml php71w-gd php71w-mysql
+
+
+In order to know pathname of php.ini, you can use this following command.
+
+.. code-block:: bash
+
+    $ php --ini
+
+Edit php.ini and change these parameters.
+
+.. code-block:: bash
+
+    date.timezone = Europe/Paris
+    memory_limit = 2048M
+    upload_max_filesize = 10M
+    post_max_size = 20M
+
+
+Apache settings
+---------------
 
 Virtual host
 ~~~~~~~~~~~~
 
-For more details, you can read `virtualHostsTutorial`_
+For more details, you can read `virtualHostsTutorial`_.
 
 .. code-block:: bash
 
@@ -66,3 +94,4 @@ Ensure access
 
 
 .. _virtualHostsTutorial: https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-hosts-on-centos-7
+.. _php71_packages: https://webtatic.com/packages/php71/
