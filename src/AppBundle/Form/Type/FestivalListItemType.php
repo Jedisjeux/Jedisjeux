@@ -15,6 +15,7 @@ use AppBundle\Entity\FestivalList;
 use AppBundle\Entity\FestivalListItem;
 use AppBundle\Entity\Product;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductAutocompleteChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -35,8 +36,8 @@ class FestivalListItemType extends AbstractType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('product', EntityType::class, [
-                'class' => Product::class,
+            ->add('product', ProductAutocompleteChoiceType::class, [
+                'label' => 'sylius.ui.product',
             ]);
     }
 

@@ -25,3 +25,14 @@ sylius_admin_ajax_product_by_name_phrase:
                 arguments:
                     phrase: $phrase
                     locale: '%locale%'
+
+sylius_admin_ajax_product_by_code:
+    path: /code
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            serialization_groups: [Autocomplete]
+            repository:
+                method: findBy
+                arguments: [code: $code]

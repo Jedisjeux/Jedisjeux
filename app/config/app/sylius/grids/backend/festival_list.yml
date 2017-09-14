@@ -39,3 +39,6 @@ sylius_grid:
                         type: update
                     delete:
                         type: delete
+                subitem:
+                    items:
+                        type: manage_festival_list_items

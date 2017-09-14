@@ -2,6 +2,9 @@ app:
     user:
         username:
             unique: Ce nom d'utilisateur est déjà utilisé.
+    festival_list_item:
+        product:
+            unique: Ce jeu est déjà utilisé dans cette liste.
 
 zenstruck_redirect:
     source:

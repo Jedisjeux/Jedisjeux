@@ -1,0 +1,10 @@
+{% import 'SyliusUiBundle:Macro:buttons.html.twig' as buttons %}
+
+<div class="ui floating labeled icon dropdown button link">
+    <i class="cube icon"></i>
+    <span class="text">{{ 'sylius.ui.manage_products'|trans }}</span>
+    <div class="menu">
+        <a class="item" href="{{ path('app_backend_festival_list_item_index', { festivalListId: data.id }) }}"><i class="list icon"></i> {{ 'app.ui.list_games'|trans }}</a>
+        <a class="item" href="{{ path('app_backend_festival_list_item_index', { festivalListId: data.id }) }}"><i class="plus icon"></i> {{ 'sylius.ui.add'|trans }}</a>
+    </div>
+</div>

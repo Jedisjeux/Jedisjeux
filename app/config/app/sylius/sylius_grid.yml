@@ -48,6 +48,7 @@ sylius_grid:
             create_product: "backend/product/grid/action/createProduct.html.twig"
             manage_articles: "backend/product/grid/action/manageArticles.html.twig"
             manage_article_reviews: "backend/article/grid/action/manageReviews.html.twig"
+            manage_festival_list_items: "backend/festival_list/grid/action/manageFestivalListItems.html.twig"
             manage_variants: "backend/product/grid/action/manageVariants.html.twig"
             create_taxon_for_parent: "backend/taxon/grid/action/createForParent.html.twig"
             list_posts: "backend/topic/grid/action/posts.html.twig"

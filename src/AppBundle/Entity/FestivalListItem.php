@@ -15,12 +15,19 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  * 
  * @ORM\Entity
  * @ORM\Table("jdj_festival_list_item")
+ *
+ * @UniqueEntity(
+ *     fields={"list", "product"},
+ *     errorPath="product",
+ *     message="app.festival_list_item.product.unique"
+ * )
  */
 class FestivalListItem implements ResourceInterface
 {
