@@ -131,6 +131,7 @@ app:
         redirections: Redirections
         redirection_count: Nombre de redirections
         referer: Référent
+        release_date: Date de sortie
         request_placeholder: Recherche....
         results_of_your_query: Résultats de votre recherche
         reviewer: Relecteur

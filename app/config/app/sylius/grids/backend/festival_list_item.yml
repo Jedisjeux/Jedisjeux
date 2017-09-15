@@ -14,14 +14,28 @@ sylius_grid:
             sorting:
                 createdAt: desc
             fields:
+                image:
+                    type: twig
+                    label: sylius.ui.image
+                    path: .
+                    options:
+                        template: "backend/festival_list_item/grid/field/image.html.twig"
+                product:
+                    type: string
+                    label: sylius.ui.product
+                    sortable: ~
+                releasedAt:
+                    type: datetime
+                    label: app.ui.release_date
+                    path: product.firstVariant.releasedAt
+                    options:
+                        format: d M Y
+                    sortable: ~
                 createdAt:
                     type: datetime
                     label: sylius.ui.created_at
                     options:
                         format: d M Y
-                    sortable: ~
-                product:
-                    type: string
                     sortable: ~
             actions:
                 main:
