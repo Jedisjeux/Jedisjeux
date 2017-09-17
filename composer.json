@@ -85,7 +85,8 @@
     "friends-of-behat/variadic-extension": "^0.1",
     "phpspec/phpspec": "^3.1",
     "lbaey/chromedriver": "^1.0",
-    "lakion/api-test-case": "^1.1"
+    "lakion/api-test-case": "^1.1",
+    "malukenho/kawaii-gherkin": "^0.1.3"
   },
   "scripts": {
     "symfony-scripts": [

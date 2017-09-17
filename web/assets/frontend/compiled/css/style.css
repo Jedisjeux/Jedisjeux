@@ -21008,14 +21008,19 @@ body.error {
   background: black; }
   body.error:after {
     content: "";
-    background: black url("../img/error.jpg") no-repeat fixed center;
-    opacity: 0.3;
+    background: black url("../img/death-star.jpg") no-repeat fixed center;
+    opacity: 0.5;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
     position: absolute;
     z-index: -1; }
+  body.error h1 {
+    font-size: 52px;
+    color: #00b3ee; }
+    body.error h1 small {
+      color: white; }
   body.error .outer {
     background: transparent; }
 

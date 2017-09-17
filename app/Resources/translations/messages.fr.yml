@@ -1,5 +1,6 @@
 app:
     ui:
+        access_denied: Accès non autorisé
         administration: Administration
         administrator: Administrateur
         add_article: Créer un article
@@ -359,8 +360,10 @@ label:
 text:
   confirmation: Souhaitez-vous supprimer cet élément ?
   error:
+      403: "<p>Vous n'avez pas les droits pour accéder à cette page : \"ahhhhhh !!!\"</p>"
       404: "<p>Dans le néant on ne vous entend pas crier : \"ahhhhhh !!!\"</p>"
       500: "<p>Quelque chose est cassée. Merci de nous envoyer un email et écrivez ce que vous faisiez avant de rencontrer cette erreur. Nous corrigerons aussi vite que possible. Désolé pour la gêne occasionnée.</p>"
+      503: "<p>Nous faisons actuellement une opération de maintenance, nous revenons très vite...</p>"
   notification:
       article:
           ask_for_review: L'article <strong>%ARTICLE_NAME%</strong> a besoin d'une relecture.

@@ -15,4 +15,3 @@ Feature: Editing a dealer
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this dealer with name "Esprit Jeu" should appear in the website
-
