@@ -21,7 +21,7 @@ class AppBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         parent::build($container);
 
@@ -31,7 +31,7 @@ class AppBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    public function getSupportedDrivers()
+    public function getSupportedDrivers(): array
     {
         return array(
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,

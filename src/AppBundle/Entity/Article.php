@@ -242,7 +242,7 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->getTitle();
     }
@@ -413,58 +413,46 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
     }
 
     /**
-     * @return ArticleReview[]|ArrayCollection
+     * @return ArticleReview[]|Collection
      */
-    public function getReviews()
+    public function getReviews(): Collection
     {
         return $this->reviews;
     }
 
     /**
      * @param ReviewInterface $review
-     *
-     * @return $this
      */
-    public function addReview(ReviewInterface $review)
+    public function addReview(ReviewInterface $review): void
     {
         if (!$this->reviews->contains($review)) {
             $review->setReviewSubject($this);
             $this->reviews->add($review);
         }
-
-        return $this;
     }
 
     /**
      * @param ReviewInterface $review
-     *
-     * @return $this
      */
-    public function removeReview(ReviewInterface $review)
+    public function removeReview(ReviewInterface $review): void
     {
         $this->reviews->remove($review);
-
-        return $this;
     }
 
     /**
-     * @return float
+     * {@inheritdoc}
      */
-    public function getAverageRating()
+    public function getAverageRating(): ?float
     {
         return $this->averageRating;
     }
 
     /**
-     * @param float $averageRating
-     *
-     * @return $this
+     * {@inheritdoc}
      */
-    public function setAverageRating($averageRating)
+    public function setAverageRating(float $averageRating): void
     {
         $this->averageRating = $averageRating;
-
-        return $this;
     }
 
     /**
