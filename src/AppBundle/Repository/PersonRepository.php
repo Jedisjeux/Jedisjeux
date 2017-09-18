@@ -74,7 +74,7 @@ class PersonRepository extends EntityRepository
     /**
      * @inheritdoc
      */
-    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = array())
+    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = array()): void
     {
         if (isset($criteria['query'])) {
             $queryBuilder
@@ -114,7 +114,7 @@ class PersonRepository extends EntityRepository
     /**
      * @inheritdoc
      */
-    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = array())
+    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = array()): void
     {
         if (isset($sorting['gameCount'])) {
             $queryBuilder->addSelect($queryBuilder->expr()->sum(
