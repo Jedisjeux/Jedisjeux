@@ -1,5 +1,6 @@
 {% from 'macros/sorting.html.twig' import sorting %}
 {% import 'SyliusUiBundle:Macro:buttons.html.twig' as button %}
+{% import 'SyliusUiBundle:Macro:messages.html.twig' as messages %}
 
 {% set defaultSorting = app.request.get('sorting') ? false : true %}
 {% set defaultOrder = 'asc' %}
