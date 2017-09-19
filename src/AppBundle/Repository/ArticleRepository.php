@@ -93,7 +93,7 @@ class ArticleRepository extends EntityRepository
     /**
      * {@inheritdoc}
      */
-    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = [])
+    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = []): void
     {
         if (isset($criteria['publishStartDateFrom'])) {
             $queryBuilder

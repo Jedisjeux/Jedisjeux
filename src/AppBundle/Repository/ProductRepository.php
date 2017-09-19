@@ -260,7 +260,7 @@ class ProductRepository extends BaseProductRepository
     /**
      * {@inheritdoc}
      */
-    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = [])
+    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = []): void
     {
         foreach ($sorting as $property => $order) {
             if (!empty($order)) {
@@ -311,16 +311,5 @@ class ProductRepository extends BaseProductRepository
             ->setParameter('published', Product::PUBLISHED);
 
         return $queryBuilder->getQuery()->getSingleScalarResult();
-    }
-
-    /**
-     * @param QueryBuilder $queryBuilder
-     *
-     * @return Pagerfanta
-     */
-    protected function getPaginator(QueryBuilder $queryBuilder)
-    {
-        // Use output walkers option in DoctrineORMAdapter should be false as it affects performance greatly (see #3775)
-        return new Pagerfanta(new DoctrineORMAdapter($queryBuilder, false, false));
     }
 }

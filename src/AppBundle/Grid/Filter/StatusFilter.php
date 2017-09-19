@@ -23,13 +23,13 @@ class StatusFilter implements FilterInterface
     /**
      * {@inheritdoc}
      */
-    public function apply(DataSourceInterface $dataSource, $name, $data, array $options = array())
+    public function apply(DataSourceInterface $dataSource, string $name, $data, array $options = array()): void
     {
         // Your filtering logic. DataSource is kind of query builder.
         // $data['category'] contains the submitted value!
 
         if (empty($data['status'])) {
-            return null;
+            return;
         }
 
         $dataSource->restrict($dataSource->getExpressionBuilder()->equals('status', $data['status']));

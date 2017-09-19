@@ -1,3 +1,5 @@
+{% import _self as self %}
+
 {% macro updateStateButton(article, transition, icon, color) %}
     {% import 'SyliusUiBundle:Macro:buttons.html.twig' as buttons %}
 
@@ -21,15 +23,15 @@
 
             <div class="pull-right control-group">
                 {% if state_machine.can('ask_for_review') %}
-                    {{ _self.updateStateButton(article, 'ask_for_review', 'book') }}
+                    {{ self.updateStateButton(article, 'ask_for_review', 'book') }}
                 {% endif %}
 
                 {% if state_machine.can('ask_for_publication') %}
-                    {{ _self.updateStateButton(article, 'ask_for_publication', 'check') }}
+                    {{ self.updateStateButton(article, 'ask_for_publication', 'check') }}
                 {% endif %}
 
                 {% if state_machine.can('publish') %}
-                    {{ _self.updateStateButton(article, 'publish', 'upload', 'green') }}
+                    {{ self.updateStateButton(article, 'publish', 'upload', 'green') }}
                 {% endif %}
 
             </div>

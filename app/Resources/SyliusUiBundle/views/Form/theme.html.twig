@@ -78,12 +78,13 @@
 
 {% block collection_widget -%}
     {% from 'SyliusResourceBundle:Macros:notification.html.twig' import error %}
+    {% import _self as self %}
     {% set attr = attr|merge({'class': attr.class|default ~ ' controls collection-widget'}) %}
 
     {% spaceless %}
         <div data-form-type="collection" {{ block('widget_container_attributes') }}
                 {% if prototype is defined and allow_add %}
-                    data-prototype='{{ _self.collection_item(prototype, allow_delete, button_delete_label, '__name__')|e }}'
+                    data-prototype='{{ self.collection_item(prototype, allow_delete, button_delete_label, '__name__')|e }}'
                 {%- endif -%}
         >
             {{ error(form.vars.errors) }}
@@ -91,13 +92,13 @@
             {% if prototypes|default is iterable %}
                 {% for key, subPrototype in prototypes %}
                     <input type="hidden" data-form-prototype="{{ key }}"
-                           value="{{ _self.collection_item(subPrototype, allow_delete, button_delete_label, '__name__')|e }}"/>
+                           value="{{ self.collection_item(subPrototype, allow_delete, button_delete_label, '__name__')|e }}"/>
                 {% endfor %}
             {% endif %}
 
             <div data-form-collection="list">
                 {% for child in form %}
-                    {{ _self.collection_item(child, allow_delete, button_delete_label, loop.index0) }}
+                    {{ self.collection_item(child, allow_delete, button_delete_label, loop.index0) }}
                 {% endfor %}
             </div>
 
@@ -142,6 +143,7 @@
 {% endmacro %}
 
 {% block infinite_form_polycollection_row -%}
+    {% import _self as self %}
     {% set polycollectionForm = form %}
 
     <div data-form-type="polycollection" data-form-polycollection="add"
@@ -149,7 +151,7 @@
 
         <div data-form-polycollection="list">
             {% for child in polycollectionForm %}
-                {{ _self.polycollection_item(child, allow_delete, button_delete_label|default('sylius.ui.delete'), loop.index0) }}
+                {{ self.polycollection_item(child, allow_delete, button_delete_label|default('sylius.ui.delete'), loop.index0) }}
             {% endfor %}
         </div>
 
@@ -166,7 +168,7 @@
                     {% for key, prototype in prototypes %}
                         {% set form = prototype %}
                         <a class="item" data-form-polycollection="add" href="#"
-                           data-prototype="{{ _self.polycollection_item(form, allow_delete, button_delete_label|default('sylius.ui.delete')) | escape }}">
+                           data-prototype="{{ self.polycollection_item(form, allow_delete, button_delete_label|default('sylius.ui.delete')) | escape }}">
                             {{ form._type.vars.label|trans }}
                         </a>
                     {% endfor %}
@@ -178,10 +180,8 @@
 {%- endblock %}
 
 {% block single_image_block_widget %}
-    {% import _self as blocks %}
-
+    {% import _self as self %}
     {% set imagePosition = form.imagePosition.vars.data %}
-    {% set type = 'single_image_' ~ imagePosition %}
 
     <div class="ui segment">
         <div class="ui one column grid">
@@ -202,8 +202,12 @@
             </div>
         </div>
 
-        {% if attribute(blocks, type) is defined %}
-            {{ attribute(blocks, type, [form]) }}
+        {% if 'left' == imagePosition %}
+            {{ self.single_image_left(form) }}
+        {% elseif 'right' == imagePosition %}
+            {{ self.single_image_right(form) }}
+        {% elseif 'top' == imagePosition %}
+            {{ self.single_image_top(form) }}
         {% else %}
             {{ form_row(form, {'label': false}) }}
         {% endif %}
