@@ -1,6 +1,10 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius_frontend_partial_product:
+    resource: "partial/product.yml"
+    prefix: /products
+
 sylius_frontend_partial_taxon:
     resource: "partial/taxon.yml"
     prefix: /taxons

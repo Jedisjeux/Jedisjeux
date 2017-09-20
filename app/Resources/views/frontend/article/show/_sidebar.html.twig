@@ -4,6 +4,10 @@
 <!-- Sidebar -->
 <div class="sidebar">
 
+    {% if article.product %}
+        {% include 'frontend/game/_sidebarBox.html.twig' with { 'product': article.product } %}
+    {% endif %}
+
     {% if article.isReviewArticle %}
 
         <div class="s-widget">
