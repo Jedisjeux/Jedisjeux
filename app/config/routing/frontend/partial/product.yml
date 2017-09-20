@@ -1,0 +1,7 @@
+sylius_backend_partial_product_show:
+    path: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:showAction
+        _sylius:
+            template: $template
