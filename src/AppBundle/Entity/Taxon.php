@@ -103,7 +103,7 @@ class Taxon extends BaseTaxon
      * @JMS\SerializedName("name")
      * @JMS\Groups({"Detailed"})
      */
-    public function getName()
+    public function getName(): ?string
     {
         return parent::getName();
     }

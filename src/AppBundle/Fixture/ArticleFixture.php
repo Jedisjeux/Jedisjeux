@@ -21,7 +21,7 @@ class ArticleFixture extends AbstractResourceFixture
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'article';
     }

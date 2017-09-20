@@ -8,8 +8,8 @@
 
 namespace AppBundle\Repository;
 
-use Sylius\Bundle\ApiBundle\Model\UserInterface;
 use Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository as BaseUserRepository;
+use Sylius\Component\User\Model\UserInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -19,7 +19,7 @@ class UserRepository extends BaseUserRepository
     /**
      * {@inheritdoc}
      */
-    public function findOneByEmail($email)
+    public function findOneByEmail(string $email): ?UserInterface
     {
         $queryBuilder = $this->createQueryBuilder('o');
 

@@ -93,7 +93,7 @@ class Customer extends BaseCustomer implements ReviewerInterface, UserAwareInter
     /**
      * @return UserInterface
      */
-    public function getUser()
+    public function getUser(): ?UserInterface
     {
         return $this->user;
     }
@@ -103,7 +103,7 @@ class Customer extends BaseCustomer implements ReviewerInterface, UserAwareInter
      *
      * @return Customer
      */
-    public function setUser(UserInterface $user = null)
+    public function setUser(?UserInterface $user)
     {
         if ($this->user !== $user) {
             $this->user = $user;
@@ -124,7 +124,7 @@ class Customer extends BaseCustomer implements ReviewerInterface, UserAwareInter
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         if (null === $user = $this->user) {
             return parent::__toString();

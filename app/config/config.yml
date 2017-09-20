@@ -124,10 +124,3 @@ services:
         class: Twig_Extensions_Extension_Text
         tags:
           - { name: twig.extension }
-
-jms_serializer:
-    metadata:
-        directories:
-            app:
-                namespace_prefix: "AppBundle"
-                path: "@AppBundle/Resources/config/serializer"

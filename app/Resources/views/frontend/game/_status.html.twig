@@ -1,3 +1,5 @@
+{% import _self as self %}
+
 {% macro updateStateButton(product, transition, icon, color) %}
     {% import 'macros/buttons.html.twig' as buttons %}
 
@@ -15,23 +17,23 @@
 
             <div class="pull-right control-group">
                 {% if state_machine.can('ask_for_translation') %}
-                    {{ _self.updateStateButton(product, 'ask_for_translation', 'flag', 'warning') }}
+                    {{ self.updateStateButton(product, 'ask_for_translation', 'flag', 'warning') }}
                 {% endif %}
 
                 {% if state_machine.can('ask_for_review') %}
-                    {{ _self.updateStateButton(product, 'ask_for_review', 'book', 'warning') }}
+                    {{ self.updateStateButton(product, 'ask_for_review', 'book', 'warning') }}
                 {% endif %}
 
                 {% if state_machine.can('ask_for_translation_changes') %}
-                    {{ _self.updateStateButton(product, 'ask_for_translation_changes', 'remove', 'danger') }}
+                    {{ self.updateStateButton(product, 'ask_for_translation_changes', 'remove', 'danger') }}
                 {% endif %}
 
                 {% if state_machine.can('ask_for_publication') %}
-                    {{ _self.updateStateButton(product, 'ask_for_publication', 'ok', 'success') }}
+                    {{ self.updateStateButton(product, 'ask_for_publication', 'ok', 'success') }}
                 {% endif %}
 
                 {% if state_machine.can('publish') %}
-                    {{ _self.updateStateButton(product, 'publish', 'upload', 'success') }}
+                    {{ self.updateStateButton(product, 'publish', 'upload', 'success') }}
                 {% endif %}
 
             </div>
