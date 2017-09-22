@@ -1,0 +1,13 @@
+app:
+    user:
+        username:
+            unique: Ce nom d'utilisateur est déjà utilisé.
+    product:
+        player_count:
+            min_value_is_greater_than_max_value: Min value is greater than max value.
+
+zenstruck_redirect:
+    source:
+        blank: Cette valeur ne doit pas être vide.
+    destination:
+        blank: Cette valeur ne doit pas être vide.

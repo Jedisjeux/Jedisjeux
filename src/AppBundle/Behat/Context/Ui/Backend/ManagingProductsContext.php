@@ -108,6 +108,24 @@ class ManagingProductsContext implements Context
     }
 
     /**
+     * @When /^I specify (?:their|his) min player count as "([^"]*)"$/
+     * @When I do not specify its min player count
+     */
+    public function iSpecifyItsMinPlayerCountAs($minPlayerCount = null)
+    {
+        $this->createPage->specifyMinPlayerCount($minPlayerCount);
+    }
+
+    /**
+     * @When /^I specify (?:their|his) max player count as "([^"]*)"$/
+     * @When I do not specify its max player count
+     */
+    public function iSpecifyItsMaxPlayerCountAs($maxPlayerCount = null)
+    {
+        $this->createPage->specifyMaxPlayerCount($maxPlayerCount);
+    }
+
+    /**
      * @When I change its name as :name
      */
     public function iChangeItsNameAs($name)

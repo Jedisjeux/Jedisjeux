@@ -11,6 +11,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Validator\Constraints as CustomAssert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
@@ -29,6 +30,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Entity
  * @ORM\Table(name="sylius_product")
+ *
+ * @CustomAssert\MaxPlayerCountGreaterThanOrEqualMinPlayer
  *
  * @JMS\ExclusionPolicy("all")
  */
