@@ -15,6 +15,8 @@ use Symfony\Component\Validator\Constraint;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
+ *
+ * @Annotation
  */
 class MaxPlayerCountGreaterThanOrEqualMinPlayer extends Constraint
 {
