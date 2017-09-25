@@ -9,7 +9,7 @@ services:
     app.fixture.example_factory.app_user:
         class: AppBundle\Fixture\Factory\AppUserExampleFactory
         arguments:
-            - "@sylius.factory.shop_user"
+            - "@sylius.factory.app_user"
             - "@sylius.factory.customer"
             - "@app.factory.avatar"
 

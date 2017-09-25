@@ -1,7 +1,7 @@
 security:
     providers:
         sylius_user_provider:
-            id: sylius.shop_user_provider.email_or_name_based
+            id: sylius.app_user_provider.email_or_name_based
     encoders:
         Sylius\Component\User\Model\UserInterface: sha512
 #        FOS\UserBundle\Model\UserInterface: sha512

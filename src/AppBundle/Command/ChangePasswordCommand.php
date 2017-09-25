@@ -105,18 +105,18 @@ EOT
     }
 
     /**
-     * @return ObjectManager
+     * @return ObjectManager|object
      */
     protected function getEntityManager()
     {
-        return $this->getContainer()->get('sylius.manager.shop_user');
+        return $this->getContainer()->get('sylius.manager.app_user');
     }
 
     /**
-     * @return UserRepositoryInterface
+     * @return UserRepositoryInterface|object
      */
     protected function getUserRepository()
     {
-        return $this->getContainer()->get('sylius.repository.shop_user');
+        return $this->getContainer()->get('sylius.repository.app_user');
     }
 }

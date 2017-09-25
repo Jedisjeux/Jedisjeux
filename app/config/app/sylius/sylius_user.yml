@@ -1,6 +1,6 @@
 sylius_user:
     resources:
-        shop:
+        app:
             user:
                 classes:
                     model: AppBundle\Entity\User

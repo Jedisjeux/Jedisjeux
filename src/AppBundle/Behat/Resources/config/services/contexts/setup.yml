@@ -22,7 +22,7 @@ services:
                 - "@app.behat.shared_storage"
                 - "@app.behat.admin_security"
                 - "@__symfony__.app.fixture.example_factory.app_user"
-                - "@__symfony__.sylius.repository.shop_user"
+                - "@__symfony__.sylius.repository.app_user"
             tags:
                 - { name: fob.context_service }
 

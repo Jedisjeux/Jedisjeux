@@ -101,7 +101,7 @@ EOT
     protected function createCustomer()
     {
         /** @var UserInterface $user */
-        $user = $this->getContainer()->get('sylius.factory.shop_user')->createNew();
+        $user = $this->getContainer()->get('sylius.factory.app_user')->createNew();
         $user->setUsername($this->faker->userName);
         $user->setPlainPassword($this->faker->password());
 
