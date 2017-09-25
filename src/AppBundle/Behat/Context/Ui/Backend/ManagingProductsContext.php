@@ -108,6 +108,24 @@ class ManagingProductsContext implements Context
     }
 
     /**
+     * @When /^I specify (?:their|his) min player count as "([^"]*)"$/
+     * @When I do not specify its min player count
+     */
+    public function iSpecifyItsMinPlayerCountAs($minPlayerCount = null)
+    {
+        $this->createPage->specifyMinPlayerCount($minPlayerCount);
+    }
+
+    /**
+     * @When /^I specify (?:their|his) max player count as "([^"]*)"$/
+     * @When I do not specify its max player count
+     */
+    public function iSpecifyItsMaxPlayerCountAs($maxPlayerCount = null)
+    {
+        $this->createPage->specifyMaxPlayerCount($maxPlayerCount);
+    }
+
+    /**
      * @When I change its name as :name
      */
     public function iChangeItsNameAs($name)
@@ -145,7 +163,31 @@ class ManagingProductsContext implements Context
      */
     public function iShouldBeNotifiedThatNameIsRequired()
     {
-        Assert::same($this->createPage->getValidationMessage('name'), 'This value should not be blank.');
+        Assert::same($this->createPage->getValidationMessage('name'), 'Please enter product name.');
+    }
+
+    /**
+     * @Then I should be notified that min player count value should not be greater than max value
+     */
+    public function iShouldBeNotifiedThatMinPlayerCountValueShouldNotBeGreaterThenMaxValueIsRequired()
+    {
+        Assert::same($this->createPage->getValidationMessage('min_player_count'),'Min value should not be greater than max value.');
+    }
+
+    /**
+     * @Then I should be notified that min player count value should be one or more
+     */
+    public function iShouldBeNotifiedThatMinPlayerCountValueShouldBeOneOrMore()
+    {
+        Assert::same($this->createPage->getValidationMessage('min_player_count'),'This value should be 1 or more.');
+    }
+
+    /**
+     * @Then I should be notified that max player count value should be one or more
+     */
+    public function iShouldBeNotifiedThatMaxPlayerCountValueShouldBeOneOrMore()
+    {
+        Assert::same($this->createPage->getValidationMessage('max_player_count'),'This value should be 1 or more.');
     }
 
     /**

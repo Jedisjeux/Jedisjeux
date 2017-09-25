@@ -35,6 +35,22 @@ class CreatePage extends BaseCreatePage
     }
 
     /**
+     * @param string $minPlayerCount
+     */
+    public function specifyMinPlayerCount($minPlayerCount)
+    {
+        $this->getElement('min_player_count')->setValue($minPlayerCount);
+    }
+
+    /**
+     * @param string $maxPlayerCount
+     */
+    public function specifyMaxPlayerCount($maxPlayerCount)
+    {
+        $this->getElement('max_player_count')->setValue($maxPlayerCount);
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getDefinedElements()
@@ -42,6 +58,8 @@ class CreatePage extends BaseCreatePage
         return array_merge(parent::getDefinedElements(), [
             'name' => '#sylius_product_translations_en_US_name',
             'slug' => '#sylius_product_translations_en_US_slug',
+            'min_player_count' => '#sylius_product_joueurMin',
+            'max_player_count' => '#sylius_product_joueurMax',
         ]);
     }
 }
