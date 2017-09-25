@@ -1,0 +1,7 @@
+app:
+    user:
+        username:
+            unique: This username is already used.
+    product:
+        player_count:
+            min_value_should_not_be_greater_than_max_value: Min value should not be greater than max value.

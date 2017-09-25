@@ -88,7 +88,7 @@ class DealerPriceExampleFactory extends AbstractExampleFactory implements Exampl
             })
 
             ->setDefault('url', function (Options $options) {
-                return ucfirst($this->faker->url);
+                return ucfirst($this->faker->unique()->url);
             })
 
             ->setDefault('barcode', null)

@@ -11,12 +11,14 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Validator\Constraints as CustomAssert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 use Sylius\Component\Product\Model\Product as BaseProduct;
+use Sylius\Component\Product\Model\ProductTranslationInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
@@ -28,6 +30,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Entity
  * @ORM\Table(name="sylius_product")
+ *
+ * @CustomAssert\MaxPlayerCountGreaterThanOrEqualMinPlayer(groups={"sylius"})
  *
  * @JMS\ExclusionPolicy("all")
  */
@@ -76,7 +80,8 @@ class Product extends BaseProduct implements ReviewableInterface
      * @JMS\Groups({"Detailed"})
      *
      * @Assert\Range(
-     *      min = 0
+     *      min = 0,
+     *      groups={"sylius"}
      * )
      */
     protected $ageMin;
@@ -91,7 +96,8 @@ class Product extends BaseProduct implements ReviewableInterface
      * @JMS\Groups({"Detailed"})
      *
      * @Assert\Range(
-     *      min = 1
+     *      min = 1,
+     *      groups={"sylius"}
      * )
      */
     protected $joueurMin;
@@ -106,7 +112,8 @@ class Product extends BaseProduct implements ReviewableInterface
      * @JMS\Groups({"Detailed"})
      *
      * @Assert\Range(
-     *      min = 1
+     *      min = 1,
+     *      groups={"sylius"}
      * )
      */
     protected $joueurMax;
@@ -121,7 +128,8 @@ class Product extends BaseProduct implements ReviewableInterface
      * @JMS\Groups({"Detailed"})
      *
      * @Assert\Range(
-     *      min = 1
+     *      min = 1,
+     *      groups={"sylius"}
      * )
      */
     protected $durationMin;
@@ -136,7 +144,8 @@ class Product extends BaseProduct implements ReviewableInterface
      * @JMS\Groups({"Detailed"})
      *
      * @Assert\Range(
-     *      min = 1
+     *      min = 1,
+     *      groups={"sylius"}
      * )
      */
     protected $durationMax;
@@ -237,7 +246,7 @@ class Product extends BaseProduct implements ReviewableInterface
      * @param string $name
      * @param bool $updateVariant
      */
-    public function setName($name, $updateVariant = true)
+    public function setName(?string $name, $updateVariant = true): void
     {
         parent::setName($name);
 
@@ -265,26 +274,6 @@ class Product extends BaseProduct implements ReviewableInterface
     public function setStatus($status)
     {
         $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCode()
-    {
-        return $this->code;
-    }
-
-    /**
-     * @param string $code
-     *
-     * @return $this
-     */
-    public function setCode($code)
-    {
-        $this->code = $code;
 
         return $this;
     }
@@ -748,9 +737,9 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
-    public function getReviews()
+    public function getReviews(): Collection
     {
         return $this->reviews;
     }
@@ -767,28 +756,20 @@ class Product extends BaseProduct implements ReviewableInterface
 
     /**
      * @param ReviewInterface $review
-     *
-     * @return $this
      */
-    public function addReview(ReviewInterface $review)
+    public function addReview(ReviewInterface $review): void
     {
         if (!$this->hasReview($review)) {
             $this->reviews->add($review);
         }
-
-        return $this;
     }
 
     /**
      * @param ReviewInterface $review
-     *
-     * @return $this
      */
-    public function removeReview(ReviewInterface $review)
+    public function removeReview(ReviewInterface $review): void
     {
         $this->reviews->remove($review);
-
-        return $this;
     }
 
     /**
@@ -814,21 +795,17 @@ class Product extends BaseProduct implements ReviewableInterface
     /**
      * @return float
      */
-    public function getAverageRating()
+    public function getAverageRating(): ?float
     {
         return $this->averageRating;
     }
 
     /**
      * @param float $averageRating
-     *
-     * @return $this
      */
-    public function setAverageRating($averageRating)
+    public function setAverageRating(float $averageRating): void
     {
         $this->averageRating = $averageRating;
-
-        return $this;
     }
 
     /**
@@ -899,7 +876,7 @@ class Product extends BaseProduct implements ReviewableInterface
      * @JMS\SerializedName("name")
      * @JMS\Groups({"Default"})
      */
-    public function getName()
+    public function getName(): ?string
     {
         return parent::getName();
     }
@@ -911,7 +888,7 @@ class Product extends BaseProduct implements ReviewableInterface
      * @JMS\SerializedName("slug")
      * @JMS\Groups({"Default"})
      */
-    public function getSlug()
+    public function getSlug(): ?string
     {
         return parent::getSlug();
     }
@@ -919,7 +896,7 @@ class Product extends BaseProduct implements ReviewableInterface
     /**
      * {@inheritdoc}
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getName();
     }
@@ -927,7 +904,7 @@ class Product extends BaseProduct implements ReviewableInterface
     /**
      * {@inheritdoc}
      */
-    protected function createTranslation()
+    protected function createTranslation(): ProductTranslationInterface
     {
         return new ProductTranslation();
     }

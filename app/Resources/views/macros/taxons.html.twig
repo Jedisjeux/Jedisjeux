@@ -1,5 +1,6 @@
 {% macro list(taxons) %}
     {% import 'macros/alerts.html.twig' as alerts %}
+    {% import _self as self %}
 
     {% if taxons|length > 0 %}
         <table class="table">
@@ -12,7 +13,7 @@
             </tr>
             </thead>
             <tbody>
-            {{ _self.tree(taxons) }}
+            {{ self.tree(taxons) }}
             </tbody>
         </table>
     {% else %}

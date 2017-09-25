@@ -63,8 +63,11 @@ class SendContactEmailSubscriber implements EventSubscriberInterface
         /** @var ContactRequest $contactRequest */
         $contactRequest = $event->getSubject();
 
-        $this->sender->send(Emails::CONTACT_REQUEST, array($this->contactEmail), array(
-            'contact_request' => $contactRequest,
-        ));
+        $this->sender->send(Emails::CONTACT_REQUEST,
+            [$this->contactEmail],
+            ['contact_request' => $contactRequest],
+            [],
+            [$contactRequest->getEmail()]
+        );
     }
 }

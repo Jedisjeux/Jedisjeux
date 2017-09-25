@@ -118,26 +118,6 @@ class ProductVariant extends BaseProductVariant
     }
 
     /**
-     * @return string
-     */
-    public function getCode()
-    {
-        return $this->code;
-    }
-
-    /**
-     * @param string $code
-     *
-     * @return $this
-     */
-    public function setCode($code)
-    {
-        $this->code = $code;
-
-        return $this;
-    }
-
-    /**
      * @return ProductVariantImage
      */
     public function getMainImage()
@@ -256,26 +236,6 @@ class ProductVariant extends BaseProductVariant
     public function setOldHref($oldHref)
     {
         $this->oldHref = $oldHref;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPosition()
-    {
-        return $this->position;
-    }
-
-    /**
-     * @param mixed $position
-     *
-     * @return $this
-     */
-    public function setPosition($position)
-    {
-        $this->position = $position;
 
         return $this;
     }

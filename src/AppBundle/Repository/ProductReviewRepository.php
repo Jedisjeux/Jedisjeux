@@ -33,7 +33,7 @@ class ProductReviewRepository extends EntityRepository
     /**
      * {@inheritdoc}
      */
-    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = [])
+    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = []): void
     {
         if (isset($criteria['hasComment']) and $criteria['hasComment'] !== '') {
             if ($criteria['hasComment']) {
