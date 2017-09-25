@@ -5,9 +5,3 @@ app:
     product:
         player_count:
             min_value_should_not_be_greater_than_max_value: Min value should not be greater than max value.
-
-zenstruck_redirect:
-    source:
-        blank: This value cannot be blank.
-    destination:
-        blank: This value cannot be blank.

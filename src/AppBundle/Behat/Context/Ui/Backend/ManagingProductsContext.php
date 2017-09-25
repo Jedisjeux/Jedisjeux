@@ -163,7 +163,7 @@ class ManagingProductsContext implements Context
      */
     public function iShouldBeNotifiedThatNameIsRequired()
     {
-        Assert::same($this->createPage->getValidationMessage('name'), 'This value should not be blank.');
+        Assert::same($this->createPage->getValidationMessage('name'), 'Please enter product name.');
     }
 
     /**
