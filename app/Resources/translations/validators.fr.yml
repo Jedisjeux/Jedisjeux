@@ -2,6 +2,9 @@ app:
     user:
         username:
             unique: Ce nom d'utilisateur est déjà utilisé.
+    product:
+        player_count:
+            min_value_should_not_be_greater_than_max_value: La valeur min ne devrait pas être inférieure à la valeur max.
 
 zenstruck_redirect:
     source:
