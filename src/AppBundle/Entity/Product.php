@@ -31,7 +31,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ORM\Table(name="sylius_product")
  *
- * @CustomAssert\MaxPlayerCountGreaterThanOrEqualMinPlayer
+ * @CustomAssert\MaxPlayerCountGreaterThanOrEqualMinPlayer(groups={"sylius"})
  *
  * @JMS\ExclusionPolicy("all")
  */
@@ -80,7 +80,8 @@ class Product extends BaseProduct implements ReviewableInterface
      * @JMS\Groups({"Detailed"})
      *
      * @Assert\Range(
-     *      min = 0
+     *      min = 0,
+     *      groups={"sylius"}
      * )
      */
     protected $ageMin;
@@ -95,7 +96,8 @@ class Product extends BaseProduct implements ReviewableInterface
      * @JMS\Groups({"Detailed"})
      *
      * @Assert\Range(
-     *      min = 1
+     *      min = 1,
+     *      groups={"sylius"}
      * )
      */
     protected $joueurMin;
@@ -110,7 +112,8 @@ class Product extends BaseProduct implements ReviewableInterface
      * @JMS\Groups({"Detailed"})
      *
      * @Assert\Range(
-     *      min = 1
+     *      min = 1,
+     *      groups={"sylius"}
      * )
      */
     protected $joueurMax;
@@ -125,7 +128,8 @@ class Product extends BaseProduct implements ReviewableInterface
      * @JMS\Groups({"Detailed"})
      *
      * @Assert\Range(
-     *      min = 1
+     *      min = 1,
+     *      groups={"sylius"}
      * )
      */
     protected $durationMin;
@@ -140,7 +144,8 @@ class Product extends BaseProduct implements ReviewableInterface
      * @JMS\Groups({"Detailed"})
      *
      * @Assert\Range(
-     *      min = 1
+     *      min = 1,
+     *      groups={"sylius"}
      * )
      */
     protected $durationMax;

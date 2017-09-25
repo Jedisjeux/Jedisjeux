@@ -167,6 +167,30 @@ class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then I should be notified that min player count value should not be greater than max value
+     */
+    public function iShouldBeNotifiedThatMinPlayerCountValueShouldNotBeGreaterThenMaxValueIsRequired()
+    {
+        Assert::same($this->createPage->getValidationMessage('min_player_count'),'Min value should not be greater than max value.');
+    }
+
+    /**
+     * @Then I should be notified that min player count value should be one or more
+     */
+    public function iShouldBeNotifiedThatMinPlayerCountValueShouldBeOneOrMore()
+    {
+        Assert::same($this->createPage->getValidationMessage('min_player_count'),'This value should be 1 or more.');
+    }
+
+    /**
+     * @Then I should be notified that max player count value should be one or more
+     */
+    public function iShouldBeNotifiedThatMaxPlayerCountValueShouldBeOneOrMore()
+    {
+        Assert::same($this->createPage->getValidationMessage('max_player_count'),'This value should be 1 or more.');
+    }
+
+    /**
      * @Then /^there should be (\d+) products in the list$/
      */
     public function iShouldSeeProductsInTheList($number)

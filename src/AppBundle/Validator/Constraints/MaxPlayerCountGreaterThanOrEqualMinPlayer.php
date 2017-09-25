@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class MaxPlayerCountGreaterThanOrEqualMinPlayer extends Constraint
 {
-    public $message = 'app.product.player_count.min_value_is_greater_than_max_value';
+    public $message = 'app.product.player_count.min_value_should_not_be_greater_than_max_value';
 
     /**
      * {@inheritdoc}

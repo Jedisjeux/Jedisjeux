@@ -148,14 +148,6 @@ class ManagingDealersContext implements Context
     }
 
     /**
-     * @Then I should be notified that min value should not be greater than max value
-     */
-    public function iShouldBeNotifiedThatMinValueShouldNotBeGreaterThenMaxValueIsRequired()
-    {
-        Assert::same($this->createPage->getValidationMessage('name'),'Min value is greater than max value.');
-    }
-
-    /**
      * @Then /^there should be (\d+) dealers in the list$/
      */
     public function iShouldSeeDealersInTheList($number)
