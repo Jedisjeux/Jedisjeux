@@ -19,8 +19,8 @@ services:
     sylius.listener.user_registration:
         class: AppBundle\EventListener\UserRegistrationListener
         arguments:
-            - "@sylius.manager.shop_user"
-            - "@sylius.shop_user.token_generator.email_verification"
+            - "@sylius.manager.app_user"
+            - "@sylius.app_user.token_generator.email_verification"
             - "@event_dispatcher"
         tags:
             - { name: kernel.event_listener, event: sylius.customer.post_register, method: sendVerificationEmail }
