@@ -16,4 +16,3 @@ Feature: Viewing product's themes
         When I check this product's details
         Then I should see the theme name "Renaissance"
         And I should see the theme name "History"
-

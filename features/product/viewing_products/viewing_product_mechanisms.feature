@@ -16,4 +16,3 @@ Feature: Viewing product's mechanisms
         When I check this product's details
         Then I should see the mechanism name "Auction"
         And I should see the mechanism name "Area control"
-
