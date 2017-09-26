@@ -1,7 +1,46 @@
-sylius_backend_partial_product_show:
+sylius_partial_product_index:
+    methods: [GET]
+    path: /
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            repository:
+                method: createFilterPaginator
+                arguments: [$criteria, $sorting]
+            template: $template
+            paginate: $paginate
+    requirements:
+        template: "[^?]+"
+
+sylius_partial_product_status_show:
+    methods: [GET]
+    path: /{id}/statuses/
+    defaults:
+        _controller: sylius.controller.product:showStatusAction
+        _sylius:
+            template: $template
+    requirements:
+        template: "[^?]+"
+
+sylius_frontend_partial_product_show:
     path: /{id}
     methods: [GET]
     defaults:
         _controller: sylius.controller.product:showAction
         _sylius:
             template: $template
+
+sylius_frontend_partial_product_index_by_taxon:
+    methods: [GET]
+    path: /taxons/{slug}
+    defaults:
+        _controller: sylius.controller.product:indexByTaxonAction
+        _sylius:
+            repository:
+                method: createByTaxonPaginator
+                arguments: [$criteria, $sorting]
+            template: $template
+            paginate: $paginate
+    requirements:
+        slug: "[^?]+"
+        template: "[^?]+"

@@ -1,12 +1,16 @@
 imports:
+    - suites/ui/admin/dashboard.yml
     - suites/ui/article/managing_articles.yml
+    - suites/ui/article/viewing_articles.yml
     - suites/ui/dealer/managing_dealers.yml
     - suites/ui/dealer/managing_dealer_prices.yml
     - suites/ui/person/managing_people.yml
+    - suites/ui/person/viewing_people.yml
     - suites/ui/product/managing_game_plays.yml
     - suites/ui/product/managing_products.yml
     - suites/ui/product/managing_product_lists.yml
     - suites/ui/product/managing_product_reviews.yml
+    - suites/ui/product/viewing_products.yml
     - suites/ui/redirection/managing_redirections.yml
     - suites/ui/topic/managing_topics.yml
     - suites/ui/topic/managing_posts.yml

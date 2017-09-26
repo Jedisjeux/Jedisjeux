@@ -39,7 +39,7 @@
                     <!-- Popular posts -->
                     <div class="tab-pane fade in active" id="popular">
                         {% if taxon is defined %}
-                            {{ render(url('sylius_partial_product_index_by_taxon', {
+                            {{ render(url('sylius_frontend_partial_product_index_by_taxon', {
                                 'slug': taxon.slug,
                                 'sorting': {
                                     'averageRating': 'desc'
@@ -61,7 +61,7 @@
                     <!-- Recent posts -->
                     <div class="tab-pane fade" id="recent">
                         {% if taxon is defined %}
-                            {{ render(url('sylius_partial_product_index_by_taxon', {
+                            {{ render(url('sylius_frontend_partial_product_index_by_taxon', {
                                 'slug': taxon.slug,
                                 'sorting': {
                                     'createdAt': 'desc'

@@ -91,6 +91,7 @@ services:
             - "@sylius.factory.taxon"
             - "@sylius.repository.taxon"
             - "@sylius.generator.taxon_slug"
+            - "%locale%"
 
     app.fixture.example_factory.topic:
         class: AppBundle\Fixture\Factory\TopicExampleFactory
