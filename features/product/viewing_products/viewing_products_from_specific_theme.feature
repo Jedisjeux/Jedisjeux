@@ -1,8 +1,8 @@
 @viewing_products
-Feature: Viewing products from a specific mechanism
+Feature: Viewing products from a specific theme
     In order to browse products that interest me most
     As a Visitor
-    I want to be able to view products from a specific mechanism
+    I want to be able to view products from a specific theme
 
     Background:
         Given there are default taxonomies for products

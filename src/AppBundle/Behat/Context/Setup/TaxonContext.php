@@ -103,15 +103,11 @@ class TaxonContext implements Context
      */
     public function thereAreTaxonsAnd($taxonCode, $firstTaxonName, $secondTaxonName)
     {
-        /** @var TaxonInterface $firstTaxon */
-        $firstTaxon = $this->taxonFactory->create(['name' => $firstTaxonName]);
-        /** @var TaxonInterface $secondTaxon */
-        $secondTaxon = $this->taxonFactory->create(['name' => $secondTaxonName]);
-
+        /** @var TaxonInterface $taxon */
         $taxon = $this->sharedStorage->get(sprintf('taxonomy_%s', $taxonCode));
 
-        $taxon->addChild($firstTaxon);
-        $taxon->addChild($secondTaxon);
+        $this->taxonFactory->create(['name' => $firstTaxonName, 'parent' => $taxon]);
+        $this->taxonFactory->create(['name' => $secondTaxonName, 'parent' => $taxon]);
 
         $this->manager->flush($taxon);
     }
@@ -123,7 +119,7 @@ class TaxonContext implements Context
     {
         foreach ($codes as $code) {
             /** @var TaxonInterface $taxon */
-            $taxon = $this->taxonFactory->create(['code' => $code]);
+            $taxon = $this->taxonFactory->create(['code' => $code, 'slug' => $code]);
             $this->taxonRepository->add($taxon);
 
             $this->sharedStorage->set(sprintf('taxonomy_%s', $code), $taxon);

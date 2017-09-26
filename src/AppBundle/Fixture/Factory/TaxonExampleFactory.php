@@ -12,11 +12,13 @@
 namespace AppBundle\Fixture\Factory;
 
 use AppBundle\Entity\Taxon;
+use AppBundle\Fixture\OptionsResolver\LazyOption;
 use AppBundle\Formatter\StringInflector;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -67,7 +69,8 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
         TaxonRepositoryInterface $taxonRepository,
         TaxonSlugGeneratorInterface $taxonSlugGenerator,
         $localeCode
-    ) {
+    )
+    {
         $this->taxonFactory = $taxonFactory;
         $this->taxonRepository = $taxonRepository;
         $this->taxonSlugGenerator = $taxonSlugGenerator;
@@ -100,12 +103,15 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
 
         $taxon->setName($options['name']);
         $taxon->setDescription($options['description']);
-        $taxon->setSlug($options['slug'] ?: $this->taxonSlugGenerator->generate($taxon, $this->localeCode));
         $taxon->setPublic($options['public']);
+
+        $taxon->setParent($options['parent']);
 
         foreach ($options['children'] as $childOptions) {
             $taxon->addChild($this->create($childOptions));
         }
+
+        $taxon->setSlug($options['slug'] ?: $this->taxonSlugGenerator->generate($taxon, $this->localeCode));
 
         return $taxon;
     }
@@ -135,8 +141,11 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
             })
             ->setAllowedTypes('public', 'bool')
 
+            ->setDefault('parent', null)
+            ->setAllowedTypes('parent', ['null', 'string', TaxonInterface::class])
+            ->setNormalizer('parent', LazyOption::findOneBy($this->taxonRepository, 'code'))
+
             ->setDefault('children', [])
-            ->setAllowedTypes('children', 'array')
-        ;
+            ->setAllowedTypes('children', 'array');
     }
 }
