@@ -111,7 +111,7 @@ class UserContext extends DefaultContext
      */
     protected function getUserFactory()
     {
-        return $this->getContainer()->get('sylius.factory.shop_user');
+        return $this->getContainer()->get('sylius.factory.app_user');
     }
 
     /**

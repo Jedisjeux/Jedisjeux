@@ -33,15 +33,16 @@
             {% set routeParams =  app.request.get('_route_params') %}
 
             Trier
-            par {{ sorting(routeName, 'label.published_at'|trans, 'publishStartDate', 'desc', icon, currentOrder, routeParams) }}
-            ,
+            par {{ sorting(routeName, 'label.published_at'|trans, 'publishStartDate', 'desc', icon, currentOrder, routeParams) }},
             {{ sorting(routeName, 'label.most_viewed'|trans, 'viewCount', 'desc', null, null, routeParams) }},
             {{ sorting(routeName, 'label.most_commented'|trans, 'topic.postCount', 'desc', null, null, routeParams) }}
         </div>
 
         <div class="clearfix"></div>
 
-        {% include 'frontend/article/index/_list-4.html.twig' %}
+        <div id="article-list">
+            {% include 'frontend/article/index/_list-4.html.twig' %}
+        </div>
 
         {{ pagination(articles) }}
 

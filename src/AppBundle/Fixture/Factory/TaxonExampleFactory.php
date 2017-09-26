@@ -12,11 +12,13 @@
 namespace AppBundle\Fixture\Factory;
 
 use AppBundle\Entity\Taxon;
+use AppBundle\Fixture\OptionsResolver\LazyOption;
 use AppBundle\Formatter\StringInflector;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -52,18 +54,27 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
     private $optionsResolver;
 
     /**
+     * @var string
+     */
+    private $localeCode;
+
+    /**
      * @param FactoryInterface $taxonFactory
      * @param TaxonRepositoryInterface $taxonRepository
      * @param TaxonSlugGeneratorInterface $taxonSlugGenerator
+     * @param string $localeCode
      */
     public function __construct(
         FactoryInterface $taxonFactory,
         TaxonRepositoryInterface $taxonRepository,
-        TaxonSlugGeneratorInterface $taxonSlugGenerator
-    ) {
+        TaxonSlugGeneratorInterface $taxonSlugGenerator,
+        $localeCode
+    )
+    {
         $this->taxonFactory = $taxonFactory;
         $this->taxonRepository = $taxonRepository;
         $this->taxonSlugGenerator = $taxonSlugGenerator;
+        $this->localeCode = $localeCode;
 
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver = new OptionsResolver();
@@ -87,19 +98,20 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
 
         $taxon->setCode($options['code']);
 
-        foreach ($this->getLocales() as $localeCode) {
-            $taxon->setCurrentLocale($localeCode);
-            $taxon->setFallbackLocale($localeCode);
+        $taxon->setCurrentLocale($this->localeCode);
+        $taxon->setFallbackLocale($this->localeCode);
 
-            $taxon->setName($options['name']);
-            $taxon->setDescription($options['description']);
-            $taxon->setSlug($options['slug'] ?: $this->taxonSlugGenerator->generate($taxon, $localeCode));
-            $taxon->setPublic($options['public']);
-        }
+        $taxon->setName($options['name']);
+        $taxon->setDescription($options['description']);
+        $taxon->setPublic($options['public']);
+
+        $taxon->setParent($options['parent']);
 
         foreach ($options['children'] as $childOptions) {
             $taxon->addChild($this->create($childOptions));
         }
+
+        $taxon->setSlug($options['slug'] ?: $this->taxonSlugGenerator->generate($taxon, $this->localeCode));
 
         return $taxon;
     }
@@ -129,18 +141,11 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
             })
             ->setAllowedTypes('public', 'bool')
 
-            ->setDefault('children', [])
-            ->setAllowedTypes('children', 'array')
-        ;
-    }
+            ->setDefault('parent', null)
+            ->setAllowedTypes('parent', ['null', 'string', TaxonInterface::class])
+            ->setNormalizer('parent', LazyOption::findOneBy($this->taxonRepository, 'code'))
 
-    /**
-     * @return array
-     */
-    private function getLocales()
-    {
-        return [
-            'fr_FR',
-        ];
+            ->setDefault('children', [])
+            ->setAllowedTypes('children', 'array');
     }
 }

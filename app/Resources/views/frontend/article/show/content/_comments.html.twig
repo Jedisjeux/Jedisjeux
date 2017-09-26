@@ -1,0 +1,23 @@
+{% import 'macros/buttons.html.twig' as button %}
+
+<div id="comments">
+    {% if topic %}
+        <div class="block-heading-two">
+            <h3><span>Commentaires</span>
+                <small>({{ topic.posts|length }})</small>
+            </h3>
+        </div>
+
+        <div class="blog-comments">
+            {% for post in topic.posts %}
+                {% include 'frontend/post/show/_content.html.twig' with {
+                'editPath': path('app_frontend_article_post_update', {'id': post.id, 'articleSlug': article.slug})
+                } %}
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+<h5><i class="fa fa-users color"></i> Participer</h5>
+{{ button.btn(path('app_frontend_article_post_create', {'articleSlug' : article.slug}), 'Commenter l\'article', null, 'plus-sign', 'btn-color btn-lg') }}
+<hr/>

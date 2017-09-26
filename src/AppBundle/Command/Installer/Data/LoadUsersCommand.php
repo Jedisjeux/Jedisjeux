@@ -185,7 +185,7 @@ EOM;
      */
     protected function getUserFactory()
     {
-        return $this->getContainer()->get('sylius.factory.shop_user');
+        return $this->getContainer()->get('sylius.factory.app_user');
     }
 
     /**
@@ -201,7 +201,7 @@ EOM;
      */
     protected function getUserRepository()
     {
-        return $this->getContainer()->get('sylius.repository.shop_user');
+        return $this->getContainer()->get('sylius.repository.app_user');
     }
 
     /**

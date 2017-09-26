@@ -9,7 +9,7 @@ services:
     app.fixture.example_factory.app_user:
         class: AppBundle\Fixture\Factory\AppUserExampleFactory
         arguments:
-            - "@sylius.factory.shop_user"
+            - "@sylius.factory.app_user"
             - "@sylius.factory.customer"
             - "@app.factory.avatar"
 
@@ -91,6 +91,7 @@ services:
             - "@sylius.factory.taxon"
             - "@sylius.repository.taxon"
             - "@sylius.generator.taxon_slug"
+            - "%locale%"
 
     app.fixture.example_factory.topic:
         class: AppBundle\Fixture\Factory\TopicExampleFactory
