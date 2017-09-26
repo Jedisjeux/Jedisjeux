@@ -85,6 +85,7 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
         $article = $this->articleFactory->createNew();
         $article->setCode($options['code']);
         $article->setTitle($options['title']);
+        $article->setShortDescription($options['short_description']);
         $article->setPublishStartDate($options['publish_start_date']);
         $article->setStatus($options['status']);
         $article->setAuthor($options['author']);
@@ -122,6 +123,10 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
 
             ->setDefault('code', function (Options $options) {
                 return StringInflector::nameToCode($options['title']);
+            })
+
+            ->setDefault('short_description', function (Options $options) {
+                return "<p>" . implode("</p><p>", $this->faker->paragraphs(2)) . '</p>';
             })
 
             ->setDefault('publish_start_date', function (Options $options) {

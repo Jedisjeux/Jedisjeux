@@ -19,6 +19,8 @@ app:
         box: Encart
         catalog: Catalogue
         choose_category: Choisir une catégorie
+        comment: Commentaire
+        comments: Commentaires
         contact: Contact
         contact_request: Demande de contact
         contact_requests: Demandes de contact

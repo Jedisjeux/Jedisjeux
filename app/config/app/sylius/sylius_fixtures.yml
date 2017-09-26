@@ -113,6 +113,7 @@ sylius_fixtures:
                         custom:
                             -
                                 title: "Le Jedisjeux nouveau est arrivé"
+                                short_description: null
                                 status: "published"
                                 publish_start_date: "now"
                                 main_image: "app/Resources/fixtures/jedisjeux-nouveau.png"

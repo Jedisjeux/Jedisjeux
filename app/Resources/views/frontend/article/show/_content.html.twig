@@ -1,76 +1,11 @@
-{% import 'macros/items.html.twig' as item %}
-{% from 'macros/article_reviews.html.twig' import blogCommentItem as reviewComment %}
 {% import 'macros/pageViews.html.twig' as pageViews %}
-{% import 'macros/buttons.html.twig' as button %}
 
-{{ render(url('app_partial_article_status_show', {
-    'id': article.id,
-    'template': 'frontend/article/_status.html.twig'
-})) }}
-
-{% if article.author %}
-    {{ item.blogAuthor(article.author, null, article.publishStartDate) }}
-{% endif %}
-
-{% if article.shortDescription %}
-    <div class="quote-one">
-        <div class="row">
-            <!-- Quote One Item -->
-            <div class="quote-one-item">
-                <span class="color">“</span>
-                <div class="quote-one-right">
-                    <div class="block-body">
-                        {{ article.shortDescription|raw }}
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-{% endif %}
-
-{% if article.slideShowBlock %}
-    {% include 'frontend/block/show/_slideshow.html.twig' with {'slideShowBlock': article.slideShowBlock } %}
-{% endif %}
-
-{% set blockImageCount = 0 %}
-
-{% for block in article.blocks %}
-    {% include 'frontend/block/show/_content.html.twig' %}
-{% endfor %}
-
-{% if article.reviews|length > 0 %}
-    <div class="block-heading-two">
-        <h3><span>Avis de la rédaction</span>
-        </h3>
-    </div>
-
-    <div class="blog-comments">
-        {% for review in article.reviews %}
-            {{ reviewComment(review) }}
-        {% endfor %}
-    </div>
-{% endif %}
-
-
-{% if topic %}
-    <div class="block-heading-two">
-        <h3><span>Commentaires</span>
-            <small>({{ topic.posts|length }})</small>
-        </h3>
-    </div>
-
-    <div class="blog-comments">
-        {% for post in topic.posts %}
-            {% include 'frontend/post/show/_content.html.twig' with {
-            'editPath': path('app_frontend_article_post_update', {'id': post.id, 'articleSlug': article.slug})
-            } %}
-        {% endfor %}
-    </div>
-{% endif %}
-
-<h5><i class="fa fa-users color"></i> Participer</h5>
-{{ button.btn(path('app_frontend_article_post_create', {'articleSlug' : article.slug}), 'Commenter l\'article', null, 'plus-sign', 'btn-color btn-lg') }}
-<hr/>
+{% include 'frontend/article/show/content/_status.html.twig' %}
+{% include 'frontend/article/show/content/_author.html.twig' %}
+{% include 'frontend/article/show/content/_description.html.twig' %}
+{% include 'frontend/article/show/content/_slideshow.html.twig' %}
+{% include 'frontend/article/show/content/_blocks.html.twig' %}
+{% include 'frontend/article/show/content/_reviews.html.twig' %}
+{% include 'frontend/article/show/content/_comments.html.twig' %}
 
 {{ pageViews.render(article.id, 'article', path('app_frontend_article_show', {'slug' : article.slug})) }}
