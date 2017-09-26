@@ -52,6 +52,12 @@ services:
             - "@app.factory.person"
             - "@app.factory.person_image"
 
+    app.fixture.example_factory.player:
+        class: AppBundle\Fixture\Factory\PlayerExampleFactory
+        arguments:
+            - "@app.factory.player"
+            - "@app.repository.game_play"
+
     app.fixture.example_factory.post:
         class: AppBundle\Fixture\Factory\PostExampleFactory
         arguments:

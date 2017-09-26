@@ -63,6 +63,14 @@ services:
         tags:
             - { name: sylius_fixtures.fixture }
 
+    app.fixture.player:
+        class: AppBundle\Fixture\PlayerFixture
+        arguments:
+            - "@app.manager.player"
+            - "@app.fixture.example_factory.player"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
     app.fixture.post:
         class: AppBundle\Fixture\PostFixture
         arguments:
