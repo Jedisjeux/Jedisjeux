@@ -1,0 +1,14 @@
+{% from 'macros/article_reviews.html.twig' import blogCommentItem as reviewComment %}
+
+{% if article.reviews|length > 0 %}
+    <div class="block-heading-two">
+        <h3><span>Avis de la rédaction</span>
+        </h3>
+    </div>
+
+    <div class="blog-comments">
+        {% for review in article.reviews %}
+            {{ reviewComment(review) }}
+        {% endfor %}
+    </div>
+{% endif %}

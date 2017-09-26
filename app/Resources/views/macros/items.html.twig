@@ -112,6 +112,9 @@
                     <small>
                         le {{ createdAt|localizeddate('full', 'none') }} {{ 'label.at'|trans|lower }} {{ createdAt|localizeddate('none', 'short') }}</small>
                 </a></h5>
+            {% if body %}
+                {{ body|raw }}
+            {% endif %}
         </div>
         <div class="clearfix"></div>
     </div>
