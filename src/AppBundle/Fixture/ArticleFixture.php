@@ -21,7 +21,7 @@ class ArticleFixture extends AbstractResourceFixture
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'article';
     }
@@ -34,6 +34,7 @@ class ArticleFixture extends AbstractResourceFixture
         $resourceNode
             ->children()
                 ->scalarNode('title')->cannotBeEmpty()->end()
+                ->scalarNode('short_description')->end()
                 ->scalarNode('status')->cannotBeEmpty()->end()
                 ->scalarNode('publish_start_date')->cannotBeEmpty()->end()
                 ->scalarNode('main_image')->cannotBeEmpty()->end()

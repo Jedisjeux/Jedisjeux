@@ -13,7 +13,7 @@ services:
         arguments:
             - "@app.factory.notification"
             - "@doctrine.orm.entity_manager"
-            - "@sylius.repository.shop_user"
+            - "@sylius.repository.app_user"
             - "@router"
             - "@translator"
 
@@ -22,6 +22,6 @@ services:
         arguments:
             - "@app.factory.notification"
             - "@doctrine.orm.entity_manager"
-            - "@sylius.repository.shop_user"
+            - "@sylius.repository.app_user"
             - "@router"
             - "@translator"

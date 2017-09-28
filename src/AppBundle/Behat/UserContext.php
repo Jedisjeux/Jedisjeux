@@ -68,8 +68,6 @@ class UserContext extends DefaultContext
         $this->populateUser($user, $data);
         $this->populateCustomer($customer, $data);
 
-        $this->getContainer()->get('sylius.listener.password_updater')->updateUserPassword($user);
-
         return $user;
     }
 
@@ -109,15 +107,15 @@ class UserContext extends DefaultContext
     }
 
     /**
-     * @return FactoryInterface
+     * @return FactoryInterface|object
      */
     protected function getUserFactory()
     {
-        return $this->getContainer()->get('sylius.factory.shop_user');
+        return $this->getContainer()->get('sylius.factory.app_user');
     }
 
     /**
-     * @return FactoryInterface
+     * @return FactoryInterface|object
      */
     protected function getCustomerFactory()
     {
@@ -125,7 +123,7 @@ class UserContext extends DefaultContext
     }
 
     /**
-     * @return Canonicalizer
+     * @return Canonicalizer|object
      */
     protected function getCanonicalizer()
     {

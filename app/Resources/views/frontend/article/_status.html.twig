@@ -1,3 +1,5 @@
+{% import _self as self %}
+
 {% macro updateStateButton(article, transition, icon, color) %}
     {% import 'macros/buttons.html.twig' as buttons %}
 
@@ -15,15 +17,15 @@
 
             <div class="pull-right control-group">
                 {% if state_machine.can('ask_for_review') %}
-                    {{ _self.updateStateButton(article, 'ask_for_review', 'book', 'warning') }}
+                    {{ self.updateStateButton(article, 'ask_for_review', 'book', 'warning') }}
                 {% endif %}
 
                 {% if state_machine.can('ask_for_publication') %}
-                    {{ _self.updateStateButton(article, 'ask_for_publication', 'ok', 'success') }}
+                    {{ self.updateStateButton(article, 'ask_for_publication', 'ok', 'success') }}
                 {% endif %}
 
                 {% if state_machine.can('publish') %}
-                    {{ _self.updateStateButton(article, 'publish', 'upload', 'success') }}
+                    {{ self.updateStateButton(article, 'publish', 'upload', 'success') }}
                 {% endif %}
 
             </div>

@@ -5,8 +5,8 @@ body.error {
 
   &:after {
     content: "";
-    background: black url("../img/error.jpg") no-repeat fixed center;
-    opacity: 0.3;
+    background: black url("../img/death-star.jpg") no-repeat fixed center;
+    opacity: 0.5;
     top: 0;
     left: 0;
     bottom: 0;
@@ -15,7 +15,14 @@ body.error {
     z-index: -1;
   }
 
+  h1 {
+    font-size: 52px;
+    color: #00b3ee;
 
+    small {
+      color: white;
+    }
+  }
 
   .outer {
     background: transparent;

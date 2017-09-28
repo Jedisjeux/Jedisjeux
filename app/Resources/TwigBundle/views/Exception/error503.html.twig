@@ -1,0 +1,8 @@
+{% extends 'TwigBundle:Exception:error.html.twig' %}
+
+{% block outer %}
+    <div class="container">
+        <h1>Jedisjeux <small>est en maintenance</small></h1>
+        {{ 'text.error.503'|trans|raw }}
+    </div>
+{% endblock %}

@@ -9,7 +9,7 @@ services:
     app.fixture.example_factory.app_user:
         class: AppBundle\Fixture\Factory\AppUserExampleFactory
         arguments:
-            - "@sylius.factory.shop_user"
+            - "@sylius.factory.app_user"
             - "@sylius.factory.customer"
             - "@app.factory.avatar"
 
@@ -52,6 +52,12 @@ services:
             - "@sylius.repository.customer"
             - "@sylius.repository.product"
 
+    app.fixture.example_factory.game_play_image:
+        class: AppBundle\Fixture\Factory\GamePlayImageExampleFactory
+        arguments:
+            - "@app.factory.game_play_image"
+            - "@app.repository.game_play"
+
     app.fixture.example_factory.notification:
         class: AppBundle\Fixture\Factory\NotificationExampleFactory
         arguments:
@@ -63,6 +69,12 @@ services:
         arguments:
             - "@app.factory.person"
             - "@app.factory.person_image"
+
+    app.fixture.example_factory.player:
+        class: AppBundle\Fixture\Factory\PlayerExampleFactory
+        arguments:
+            - "@app.factory.player"
+            - "@app.repository.game_play"
 
     app.fixture.example_factory.post:
         class: AppBundle\Fixture\Factory\PostExampleFactory
@@ -103,6 +115,7 @@ services:
             - "@sylius.factory.taxon"
             - "@sylius.repository.taxon"
             - "@sylius.generator.taxon_slug"
+            - "%locale%"
 
     app.fixture.example_factory.topic:
         class: AppBundle\Fixture\Factory\TopicExampleFactory

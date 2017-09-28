@@ -10,7 +10,7 @@ services:
     app.fixture.app_user:
         class: AppBundle\Fixture\AppUserFixture
         arguments:
-            - "@sylius.manager.shop_user"
+            - "@sylius.manager.app_user"
             - "@app.fixture.example_factory.app_user"
         tags:
             - { name: sylius_fixtures.fixture }
@@ -63,6 +63,14 @@ services:
         tags:
             - { name: sylius_fixtures.fixture }
 
+    app.fixture.game_play_image:
+        class: AppBundle\Fixture\GamePlayImageFixture
+        arguments:
+            - "@app.manager.game_play_image"
+            - "@app.fixture.example_factory.game_play_image"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
     app.fixture.notification:
         class: AppBundle\Fixture\NotificationFixture
         arguments:
@@ -76,6 +84,14 @@ services:
         arguments:
             - "@app.manager.person"
             - "@app.fixture.example_factory.person"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
+    app.fixture.player:
+        class: AppBundle\Fixture\PlayerFixture
+        arguments:
+            - "@app.manager.player"
+            - "@app.fixture.example_factory.player"
         tags:
             - { name: sylius_fixtures.fixture }
 

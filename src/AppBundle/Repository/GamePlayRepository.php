@@ -113,7 +113,7 @@ class GamePlayRepository extends EntityRepository
      * @param QueryBuilder $queryBuilder
      * @param array $criteria
      */
-    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = [])
+    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = []): void
     {
         if (array_key_exists('hasTopic', $criteria)) {
             if ($criteria['hasTopic']) {

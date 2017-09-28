@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Set php version through phpenv. 5.3, 5.4 and 5.5 available
-phpenv local 7.0
+phpenv local 7.1
 
 # php memory limit
 sed -i'' 's/^memory_limit = .*/memory_limit = -1/g' ${HOME}/.phpenv/versions/$(phpenv version-name)/etc/php.ini

@@ -2,6 +2,10 @@ app_frontend_partial_festival_list:
     resource: "partial/festival_list.yml"
     prefix: /festival-lists
 
+sylius_frontend_partial_product:
+    resource: "partial/product.yml"
+    prefix: /products
+
 sylius_frontend_partial_taxon:
     resource: "partial/taxon.yml"
     prefix: /taxons
