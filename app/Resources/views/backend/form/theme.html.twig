@@ -89,7 +89,7 @@
 {% endblock %}
 
 {% block single_image_block_widget %}
-    {% import _self as blocks %}
+    {% import _self as self %}
 
     {% set imagePosition = form.imagePosition.vars.data %}
     {% set type = 'single_image_' ~ imagePosition %}
@@ -113,8 +113,12 @@
             </div>
         </div>
 
-        {% if attribute(blocks, type) is defined %}
-            {{ attribute(blocks, type, [form]) }}
+        {% if 'left' == imagePosition %}
+            {{ self.single_image_left(form) }}
+        {% elseif 'right' == imagePosition %}
+            {{ self.single_image_right(form) }}
+        {% elseif 'top' == imagePosition %}
+            {{ self.single_image_top(form) }}
         {% else %}
             {{ form_row(form, {'label': false}) }}
         {% endif %}
