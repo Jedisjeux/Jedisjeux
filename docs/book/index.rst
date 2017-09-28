@@ -1,0 +1,18 @@
+The Book
+========
+
+Here you will find all the concepts used in Jedisjeux.
+The Books helps to understand how Jedisjeux works.
+
+Architecture
+------------
+
+The key to understanding principles of Sylius internal organization. Here you will learn about the Resource layer,
+state machines, events and general non e-commerce concepts adopted in the platform, like E-mails or Fixtures.
+
+.. toctree::
+    :hidden:
+
+    architecture/index
+
+.. include:: /book/architecture/map.rst.inc
