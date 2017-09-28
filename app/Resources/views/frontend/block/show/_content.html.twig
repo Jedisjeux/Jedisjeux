@@ -10,9 +10,13 @@
             <div class="img-box-4-item">
                 <!-- Image -->
                 {% if image is not null %}
-                    <a class="fancybox" rel="article" href="{{ image.webPath | imagine_filter('full') }}">
-                        {{ images.render(image.webPath, 'full', image.label, 'img-responsive') }}
-                    </a>
+                    {% if image.linkUrl %}
+                        {{ images.image(image.webPath, 'full', image.label, 'img-responsive', image.linkUrl) }}
+                    {% else %}
+                        <a class="fancybox" rel="article" href="{{ image.webPath | imagine_filter('full') }}">
+                            {{ images.render(image.webPath, 'full', image.label, 'img-responsive') }}
+                        </a>
+                    {% endif %}
                 {% else %}
                     <img class="img-responsive"
                          src="https://placeholdit.imgix.net/~text?txtsize=150&txt=Image...&w=1600&h=900"
