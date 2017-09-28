@@ -13,6 +13,19 @@ Jedisjeux Documentation
     Framework. If you're not familiar with Symfony, please start with
     reading the `Quick Tour`_ from the Symfony documentation.
 
+The Book
+--------
+
+Here you will find all the concepts used in the Jedisjeux platform.
+:doc:`The Book </book/index>` helps to understand how Jedisjeux works.
+
+.. toctree::
+    :hidden:
+
+    book/index
+
+.. include:: /book/map.rst.inc
+
 The User Guide
 --------------
 
