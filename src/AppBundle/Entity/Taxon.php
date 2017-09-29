@@ -100,8 +100,18 @@ class Taxon extends BaseTaxon
      * @return string
      *
      * @JMS\VirtualProperty
-     * @JMS\SerializedName("name")
-     * @JMS\Groups({"Detailed"})
+     * @JMS\Groups({"Default", "Autocomplete"})
+     */
+    public function getCode(): ?string
+    {
+        return parent::getCode();
+    }
+
+    /**
+     * @return string
+     *
+     * @JMS\VirtualProperty
+     * @JMS\Groups({"Detailed", "Autocomplete"})
      */
     public function getName(): ?string
     {
