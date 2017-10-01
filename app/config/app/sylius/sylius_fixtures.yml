@@ -213,6 +213,14 @@ sylius_fixtures:
                     options:
                         random: 40
 
+                game_play_image:
+                    options:
+                        random: 80
+
+                player:
+                    options:
+                        random: 80
+
                 topic:
                     options:
                         random: 20

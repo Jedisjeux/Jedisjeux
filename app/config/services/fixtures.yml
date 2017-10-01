@@ -47,6 +47,14 @@ services:
         tags:
             - { name: sylius_fixtures.fixture }
 
+    app.fixture.game_play_image:
+        class: AppBundle\Fixture\GamePlayImageFixture
+        arguments:
+            - "@app.manager.game_play_image"
+            - "@app.fixture.example_factory.game_play_image"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
     app.fixture.notification:
         class: AppBundle\Fixture\NotificationFixture
         arguments:
@@ -60,6 +68,14 @@ services:
         arguments:
             - "@app.manager.person"
             - "@app.fixture.example_factory.person"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
+    app.fixture.player:
+        class: AppBundle\Fixture\PlayerFixture
+        arguments:
+            - "@app.manager.player"
+            - "@app.fixture.example_factory.player"
         tags:
             - { name: sylius_fixtures.fixture }
 
