@@ -1,4 +1,4 @@
-![Jedisjeux](http://www.jedisjeux.net/img/design/logos/logo2010light2.png)
+![Jedisjeux](http://www.jedisjeux.net/media/cache/logo/assets/frontend/img/logo.png)
 
 Welcome to Jedisjeux Project base on Symfony 2
 
