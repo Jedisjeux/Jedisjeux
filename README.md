@@ -2,23 +2,17 @@
 
 Welcome to Jedisjeux Project base on Symfony 2
 
+Documentation
+-------------
+
+Documentation is available at [docs.jedisjeux.net](http://docs.jedisjeux.net).
+
 Quick Installation with vagrant
 -------------------------------
 
 ```bash
 $ cd etc/vagrant
 $ vagrant up
-```
-
-Import Jedisjeux production data
---------------------------------
-
-Ask administrator the admin password or ask him a sql backup file :
-
-```bash
-$ scp jedisjeux@jedisjeux.net:/home/jedisjeux/shared/backup/dump_jdj_1.sql.gz ./
-$ gzip -d dump_jdj_1.sql.gz
-$ mysql -u root -pvagrant jdj_dev < dump_jdj_1.sql
 ```
 
 [Behat](http://behat.org) scenarios
@@ -56,3 +50,20 @@ You can run Behat using the following commands:
 ```bash
 $ bin/behat
 ```
+
+Bug Tracking
+------------
+
+If you want to report a bug or suggest an idea, please use [GitHub issues](https://github.com/Jedisjeux/Jedisjeux/issues).
+
+
+MIT License
+-----------
+
+Jedisjeux is completely free and released under the [MIT License](https://github.com/Jedisjeux/Jedisjeux/blob/master/LICENSE).
+
+Authors
+-------
+
+Jedisjeux was originally created by Loïc Frémont.
+See the list of [contributors from our community](https://github.com/Jedisjeux/Jedisjeux/contributors).
