@@ -1,5 +1,8 @@
 {
   "dependencies": {
+    "bootstrap-sass": "^3.3.7",
+    "bootstrap-star-rating": "^4.0.2",
+    "font-awesome": "^4.7.0",
     "jquery": "^2.2.0",
     "jquery-ui-dist": "^1.12.1",
     "semantic-ui-css": "^2.2.0"
