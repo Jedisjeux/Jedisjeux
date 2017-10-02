@@ -21,13 +21,31 @@ var paths = {
     app: {
         js: [
             nodeModulesPath + 'jquery/dist/jquery.min.js',
-            nodeModulesPath + 'semantic-ui-css/semantic.min.js',
+            bundlesPath + 'bmatznerjqueryui/js/minified/jquery-ui.min.js',
+            bundlesPath + 'mopabootstrap/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js',
+            bundlesPath + 'mopabootstrap/bootstrap-sass/assets/javascripts/bootstrap/*.js',
+            bundlesPath + 'mopabootstrap/js/mopabootstrap-collection.js',
+            bundlesPath + 'mopabootstrap/js/mopabootstrap-subnav.js',
+            nodeModulesPath + 'moment/min/moment.min.js',
+            nodeModulesPath + 'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
+            nodeModulesPath + 'jquery-fancybox/lib/jquery.mousewheel-3.0.6.pack.js',
+            nodeModulesPath + 'jquery-fancybox/source/js/jquery.fancybox.pack.js',
+            nodeModulesPath + 'jquery-fancybox/source/helpers/jquery.fancybox-buttons.js',
+            nodeModulesPath + 'jquery-fancybox/source/helpers/jquery.fancybox-media.js',
+            nodeModulesPath + 'jquery-fancybox/source/helpers/jquery.fancybox-thumbs.js',
+            nodeModulesPath + 'magnific-popup/dist/jquery.magnific-popup.min.js',
+            nodeModulesPath + 'bootstrap-switch/dist/js/bootstrap-switch.min.js',
+            nodeModulesPath + 'owl.carousel/dist/owl.carousel.js',
+            nodeModulesPath + 'select2/dist/js/select2.js',
             'js/**'
         ],
         sass: [
             'scss/**'
         ],
         css: [
+            nodeModulesPath + 'jquery-fancybox/source/jquery.fancybox.css',
+            nodeModulesPath + 'jquery-fancybox/source/helpers/jquery.fancybox-buttons.css',
+            nodeModulesPath + 'jquery-fancybox/source/helpers/jquery.fancybox-thumbs.css',
             'css/**'
         ],
         img: [
@@ -50,6 +68,9 @@ gulp.task('app-js', function () {
 });
 
 gulp.task('app-css', function() {
+    gulp.src([nodeModulesPath+'jquery-fancybox/source/img/*']).pipe(gulp.dest(appRootPath + 'css/'));
+    gulp.src([nodeModulesPath+'jquery-fancybox/source/helpers/*.png']).pipe(gulp.dest(appRootPath + 'css/'));
+
     var cssStream = gulp.src(paths.app.css)
         .pipe(concat('css-files.css'))
     ;
