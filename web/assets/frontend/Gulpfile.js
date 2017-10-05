@@ -37,6 +37,7 @@ var paths = {
             nodeModulesPath + 'bootstrap-switch/dist/js/bootstrap-switch.min.js',
             nodeModulesPath + 'owl.carousel/dist/owl.carousel.js',
             nodeModulesPath + 'select2/dist/js/select2.js',
+            nodeModulesPath + 'rater-jquery/rater.js',
             'js/**'
         ],
         sass: [
