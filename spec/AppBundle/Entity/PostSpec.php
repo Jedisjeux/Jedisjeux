@@ -20,7 +20,7 @@ class PostSpec extends ObjectBehavior
         $this->shouldImplement(ResourceInterface::class);
     }
 
-    function it_sets_body()
+    function its_body_is_mutable()
     {
         $this->setBody('<p>Subject body</p>');
 
