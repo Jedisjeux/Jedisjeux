@@ -422,10 +422,20 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
 
     /**
      * @param ReviewInterface $review
+     *
+     * @return bool
+     */
+    public function hasReview(ReviewInterface $review): bool
+    {
+        return $this->reviews->contains($review);
+    }
+
+    /**
+     * @param ReviewInterface $review
      */
     public function addReview(ReviewInterface $review): void
     {
-        if (!$this->reviews->contains($review)) {
+        if (!$this->hasReview($review)) {
             $review->setReviewSubject($this);
             $this->reviews->add($review);
         }
@@ -436,7 +446,7 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
      */
     public function removeReview(ReviewInterface $review): void
     {
-        $this->reviews->remove($review);
+        $this->reviews->removeElement($review);
     }
 
     /**

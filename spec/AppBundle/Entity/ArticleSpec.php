@@ -4,7 +4,10 @@ namespace spec\AppBundle\Entity;
 
 use AppBundle\Entity\Article;
 use AppBundle\Entity\ArticleImage;
+use AppBundle\Entity\ArticleReview;
+use AppBundle\Entity\Block;
 use AppBundle\Entity\Topic;
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -103,5 +106,41 @@ class ArticleSpec extends ObjectBehavior
     {
         $this->setTopic($topic);
         $this->getTopic()->shouldReturn($topic);
+    }
+
+    function it_initializes_blocks_collection_by_default(): void
+    {
+        $this->getBlocks()->shouldHaveType(Collection::class);
+    }
+
+    function it_adds_block(Block $block)
+    {
+        $this->addBlock($block);
+        $this->hasBlock($block)->shouldReturn(true);
+    }
+
+    function it_removes_block(Block $block)
+    {
+        $this->addBlock($block);
+        $this->removeBlock($block);
+        $this->hasBlock($block)->shouldReturn(false);
+    }
+
+    function it_initializes_reviews_collection_by_default(): void
+    {
+        $this->getReviews()->shouldHaveType(Collection::class);
+    }
+
+    function it_adds_review(ArticleReview $review)
+    {
+        $this->addReview($review);
+        $this->hasReview($review)->shouldReturn(true);
+    }
+
+    function it_removes_review(ArticleReview $rev)
+    {
+        $this->addReview($rev);
+        $this->removeReview($rev);
+        $this->hasReview($rev)->shouldReturn(false);
     }
 }
