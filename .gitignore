@@ -38,6 +38,7 @@ log/
 /web/media/*
 **/bower_components/*
 **/node_modules/*
+**/compiled/*
 /web/js/
 /web/css/
 /behat.yml
