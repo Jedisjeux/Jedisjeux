@@ -35,4 +35,4 @@ gulp.task('app-watch', function() {
     ;
 });
 
-gulp.task('default', ['admin', 'shop']);
+gulp.task('default', ['admin', 'app']);
