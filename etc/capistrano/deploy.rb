@@ -31,7 +31,7 @@ set :linked_files, ["web/jedisjeux.xml"]
 set :linked_dirs, ["var/logs", "var/sessions", "web/uploads", "web/media"]
 
 set :application, 'Jedisjeux'
-set :repo_url, 'git@bitbucket.org:jedisjeux/jdj.git'
+set :repo_url, 'https://github.com/Jedisjeux/Jedisjeux.git'
 
 # Default branch is :master
 ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -82,6 +82,13 @@ namespace :deploy do
     invoke 'symfony:console', 'doctrine:migrations:migrate', '--no-interaction', 'db'
     # invoke 'symfony:console', 'fos:elastica:populate'
   end
+end
+
+after 'deploy:updated', :build_assets do
+    on roles(:web) do
+        puts "Build assets"
+        execute "cd #{release_path} && yarn install && yarn run gulp"
+    end
 end
 
 after 'deploy:updated', 'symfony:assets:install'
