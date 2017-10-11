@@ -44,6 +44,7 @@ var paths = {
             'scss/**'
         ],
         css: [
+            bundlesPath + 'bmatznerjqueryui/css/smoothness/jquery-ui.css',
             nodeModulesPath + 'jquery-fancybox/source/jquery.fancybox.css',
             nodeModulesPath + 'jquery-fancybox/source/helpers/jquery.fancybox-buttons.css',
             nodeModulesPath + 'jquery-fancybox/source/helpers/jquery.fancybox-thumbs.css',
@@ -71,6 +72,7 @@ gulp.task('app-js', function () {
 gulp.task('app-css', function() {
     gulp.src([nodeModulesPath+'jquery-fancybox/source/img/*']).pipe(gulp.dest(appRootPath + 'css/'));
     gulp.src([nodeModulesPath+'jquery-fancybox/source/helpers/*.png']).pipe(gulp.dest(appRootPath + 'css/'));
+    gulp.src([bundlesPath + 'bmatznerjqueryui/css/base/images/*']).pipe(gulp.dest(appRootPath + 'css/images/'));
 
     var cssStream = gulp.src(paths.app.css)
         .pipe(concat('css-files.css'))

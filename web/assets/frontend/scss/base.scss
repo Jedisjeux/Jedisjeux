@@ -18,6 +18,15 @@ $icon-font-path: "../../compiled/fonts/bootstrap/";
 // Font-awesome
 @import "../../../../node_modules/font-awesome/scss/font-awesome";
 
+// Bootstrap-datetimepicker
+@import "../../../../node_modules/eonasdan-bootstrap-datetimepicker/src/sass/bootstrap-datetimepicker";
+
+// Owl-Carousel
+@import "../../../../node_modules/owl.carousel/src/scss/owl.carousel";
+
+// Select2
+@import "../../../../node_modules/select2/src/scss/core";
+
 @import "mixins/ellipsis";
 
 @import "modules/style";

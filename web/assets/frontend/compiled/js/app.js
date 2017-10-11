@@ -12799,6 +12799,456 @@ S2.define('jquery.select2',[
 
 }(jQuery, window));
 
+(function ($) {
+  'use strict';
+
+  $(document).ready(function () {
+    $('.entity').each(function () {
+      var $entity = $(this);
+
+      var code = $entity.html();
+      var entityName = $entity.data('entity');
+
+      switch (entityName) {
+        case 'game':
+          showGame($entity, code);
+          break;
+      }
+    });
+
+    /**
+     * @param $entity
+     * @param code
+     */
+    function showGame($entity, code) {
+      $.get(Routing.generate('sylius_api_product_show', {'code': code}), function (product) {
+        $entity.html(
+          $('<div>').addClass('img-box-5')
+            .append($('<div>').addClass('container')
+              .append($('<div>').addClass('img-box-5-item')
+                .append($('<div>').addClass('row')
+                  .append($('<div>').addClass('col-md-4')
+                    .append($('<div>').addClass('img-box-5-img')
+                      .append(
+                        $('<a>').attr('href', Routing.generate('sylius_product_show', {'slug': product.slug})).append(
+                          $('<img>')
+                            .addClass('img-responsive img-thumbnail')
+                            .attr('src', product.image.default)
+                        )
+                      )
+                    )
+                  )
+                  .append($('<div>').addClass('col-md-8')
+                    .append($('<div>').addClass('img-box-5-content').append($('<div>').addClass('container')
+                        .append($('<div>').addClass('row')
+                          .append($('<h4>')
+                            .html(product.name)
+                          )
+                        )
+                        .append($('<div>').addClass('row')
+                          .append(getShortDescriptionContainer(product))
+                        )
+                      ).append(
+                      $('<div>').addClass('container')
+                        .append($('<div>').addClass('row')
+                          .append($('<ul>').addClass('list-unstyled')
+                            .append($('<li>')
+                              .append($('<p>').addClass('pull-left bg-color square-2 rounded-2').append(
+                                $('<span>').addClass('fa fa-user white')
+                                )
+                              ).append($('<p>').addClass('game-attribute')
+                                .html(product.min_player_count + ' à ' + product.max_player_count + ' joueurs')
+                              )
+                            )
+                            .append($('<li>')
+                              .append($('<p>').addClass('pull-left bg-color square-2 rounded-2').append(
+                                $('<span>').addClass('fa fa-child white')
+                                )
+                              ).append($('<p>').addClass('game-attribute')
+                                .html('à partir de ' + product.min_age + ' ans')
+                              )
+                            )
+                            .append(getDurationContainer(product))
+                            .append(getMechanismsContainer(product))
+                            .append(getThemesContainer(product))
+                          )
+                        )
+                      )
+                    )
+                  )
+                )
+              )
+            ))
+          .append(
+            $('<div>')
+              .addClass('clearfix')
+          );
+
+
+      });
+    }
+  });
+
+  /**
+   * @param product
+   * @returns {*}
+   */
+  function getDurationContainer(product) {
+    if (typeof product.min_duration === 'undefined') {
+      return $('<span>');
+    }
+
+    return $('<li>')
+      .append(
+        $('<p>').addClass('pull-left bg-color square-2 rounded-2')
+          .append(
+            $('<span>')
+              .addClass('fa fa-clock-o white')
+          )
+      )
+      .append(
+        $('<p>').addClass('game-attribute')
+          .html(product.min_duration + ' minutes')
+      )
+  }
+
+  function getShortDescriptionContainer(product) {
+    if (typeof product.short_description === 'undefined') {
+      return $('<span>');
+    }
+
+
+    return $('<div>').addClass('quote-one')
+      .append($('<div>').addClass('row')
+        .append($('<div>').addClass('quote-one-item')
+          .append($('<span>').addClass('color').html('“'))
+          .append($('<div>').addClass('quote-one-right')
+            .append($('<div>').addClass('content hcodeeContent').html(product.short_description))
+            .append(
+              $('<div>').addClass('show-more')
+                .append($('<a>').attr('href', '#').html('Lire la suite...'))
+            )
+          )
+        ));
+  }
+
+  /**
+   * @param product
+   * @returns {*}
+   */
+  function getMechanismsContainer(product) {
+    if (product.mechanisms.length === 0) {
+      return $('<span>');
+    }
+
+    var $paragraph = $('<p>').addClass('game-attribute');
+    var first = true;
+
+    $.each(product.mechanisms, function () {
+
+      if (false === first) {
+        $paragraph.append(
+          $('<span>').html(', ')
+        );
+      }
+
+      $paragraph.append(
+        $('<a>').attr('href', Routing.generate('sylius_product_index_by_taxon', {'permalink': this.permalink}))
+          .html(this.name)
+      );
+
+      first = false;
+
+    });
+
+    return $('<li>')
+      .append(
+        $('<p>').addClass('pull-left bg-color square-2 rounded-2')
+          .append(
+            $('<span>')
+              .addClass('fa fa-cog white')
+          )
+      )
+      .append($paragraph);
+  }
+
+  /**
+   * @param product
+   * @returns {*}
+   */
+  function getThemesContainer(product) {
+    if (product.themes.length === 0) {
+      return $('<span>');
+    }
+
+    var $paragraph = $('<p>').addClass('game-attribute');
+    var first = true;
+
+    $.each(product.themes, function () {
+
+      if (false === first) {
+        $paragraph.append(
+          $('<span>').html(', ')
+        );
+      }
+
+      $paragraph.append(
+        $('<a>').attr('href', Routing.generate('sylius_product_index_by_taxon', {'permalink': this.permalink}))
+          .html(this.name)
+      );
+
+      first = false;
+
+    });
+
+    return $('<li>')
+      .append(
+        $('<p>').addClass('pull-left bg-color square-2 rounded-2')
+          .append(
+            $('<span>')
+              .addClass('fa fa-picture-o white')
+          )
+      )
+      .append($paragraph);
+  }
+
+})(jQuery);
+$(function () {
+
+  var title = document.title;
+  var $notificationBlock = $('#notificationBlock');
+
+  if ($notificationBlock.length > 0) {
+
+    var $notificationItemClone = $('.notificationItem', $notificationBlock).clone();
+
+    function readNotification($a) {
+      $.ajax({
+        url: Routing.generate('app_api_notification_read', {'id': $a.attr('data-id')}),
+        type: 'PATCH',
+        success: function () {
+          window.location.replace($a.attr('data-target'));
+        }
+      });
+    }
+
+    function refresh() {
+      $.get(Routing.generate('app_api_notification_index'), function (response) {
+        $('.notificationItem', $notificationBlock).remove();
+
+        $.each(response, function (index, entity) {
+          var $item = $notificationItemClone.clone();
+
+          $('.notificationMessage', $item).html(entity.message);
+          $('.notificationA', $item).attr('data-id', entity.id);
+          $('.notificationA', $item).attr('data-target', entity.target);
+          $('.notificationContainer', $notificationBlock).append($item);
+
+          if (entity.authors.length > 0 && typeof entity.authors[0].avatar !== 'undefined') {
+            $('.notificationA img', $item).attr('src', entity.authors[0].avatar.thumbnail);
+          }
+
+          $('.notificationA', $item).click(function (event) {
+            event.preventDefault();
+            readNotification($(this));
+          });
+        });
+
+        if (response.length > 0) {
+          $('.badge').show().html(response.length);
+        } else {
+          $('.badge').hide();
+        }
+
+        updateTitleWithNotificationCount(title, response.length);
+      });
+
+      setTimeout(refresh, 10000);
+    }
+
+    function updateTitleWithNotificationCount(title, notificationCount) {
+      if (notificationCount === 0) {
+        document.title = title;
+        return;
+      }
+
+      // this regex will test if the document title already has a notification count in it, e.g. (1) My Document
+      if (/\([\d]+\)/.test(title)) {
+        // we will split the title after the first bracket
+        title = title.split(') ');
+        // get the first part of the splitted string and save it - this will be the count of the unseen notifications in our document string
+        var notifications = title[0].substring(1);
+
+        // only proceed when the notification count is difference to our ajax request
+        if (notifications === 0) {
+          return;
+        } else {
+          // else update the title with the new notification count
+          document.title = '(' + notificationCount + ') ' + title[1];
+        }
+      }
+      // when the current document title does not contain any notification count, just update it
+      else {
+        document.title = '(' + notificationCount + ') ' + title;
+      }
+    }
+
+
+    refresh();
+  }
+});
+/* ************************ */
+/* Theme name  : Brave      */
+/* Author name : Ashok      */
+/* ************************ */
+
+/* ****************** */
+/* Tooltips & Popover */
+/* ****************** */
+
+$(".b-tooltip").tooltip();
+
+$(".b-popover").popover();
+
+/* ****************** */
+/* Switchs */
+/* ****************** */
+
+$(".switch").bootstrapSwitch();
+
+$(".b-popover").popover();
+
+/* ************** */
+/* Magnific Popup */
+/* ************** */
+
+$(document).ready(function() {
+  $('.lightbox').magnificPopup({type:'image'});
+});
+
+/* *************** */
+/* Custom Dropdown */
+/* *************** */
+
+$(document).ready(function(){
+	var hidden = true;
+	$(".b-dropdown").click(function(e){
+		e.preventDefault();
+		if (hidden){
+           $(this).next('.b-dropdown-block').slideToggle(400, function(){hidden = false;});
+      }
+	}); 
+	$('html').click(function() {
+        if (!hidden) {
+            $('.b-dropdown-block').slideUp();
+            hidden=true;
+        }
+   });
+   $('.b-dropdown-block').click(function(event) {
+        event.stopPropagation();
+   }); 
+});
+
+/* ************ */
+/* Owl Carousel */
+/* ************ */
+
+$(document).ready(function() {
+	/* Owl carousel */
+	$(".owl-carousel").owlCarousel({
+		slideSpeed : 500,
+		rewindSpeed : 1000,
+		mouseDrag : true,
+		stopOnHover : true
+	});
+	/* Own navigation */
+	$(".owl-nav-prev").click(function(){
+		$(this).parent().next(".owl-carousel").trigger('owl.prev');
+	});
+	$(".owl-nav-next").click(function(){
+		$(this).parent().next(".owl-carousel").trigger('owl.next');
+	});
+});
+
+/* ************* */
+/* Scroll to top */
+/* ************* */
+
+$(document).ready(function() {
+	$(window).scroll(function(){
+		if ($(this).scrollTop() > 200) {
+			$('.totop').fadeIn();
+		} else {
+			$('.totop').fadeOut();
+		}
+	});
+	$(".totop a").click(function(e) {
+		e.preventDefault();
+		$("html, body").animate({ scrollTop: 0 }, "slow");
+		return false;
+	});
+});
+
+/* *************** */
+/* Navigation menu */
+/* *************** */
+
+$(document).ready(function(){
+
+
+	$.fn.menumaker = function(options) {
+      
+    var cssmenu = $(this), settings = $.extend({
+        title: "Menu",
+        format: "dropdown",
+        sticky: false
+      }, options);
+
+      return this.each(function() {
+		
+		cssmenu.prepend('<div id="menu-button">' + settings.title + '</div>');
+		$(this).find("#menu-button").on('click', function(){
+		  $(this).toggleClass('menu-opened');
+		  var mainmenu = $(this).next('ul');
+		  if (mainmenu.hasClass('open')) { 
+			mainmenu.slideUp().removeClass('open');
+		  }
+		  else {
+			mainmenu.slideDown().addClass('open');
+			if (settings.format === "dropdown") {
+			  mainmenu.find('ul').slideDown();
+			}
+		  }
+		});
+		
+		cssmenu.find('li ul').parent().addClass('has-sub');
+
+		multiTg = function() {
+		  cssmenu.find(".has-sub").prepend('<span class="submenu-button"></span>');
+		  cssmenu.find('.submenu-button').on('click', function() {
+			$(this).toggleClass('submenu-opened');
+			if ($(this).siblings('ul').hasClass('open')) {
+			  $(this).siblings('ul').removeClass('open').slideUp();
+			}
+			else {
+			  $(this).siblings('ul').addClass('open').slideDown();
+			}
+		  });
+		};
+
+		if (settings.format === 'multitoggle') multiTg();
+		else cssmenu.addClass('dropdown');
+		
+		
+      });
+	};
+
+	$(".navy").menumaker({
+		title: "Menu",
+		format: "multitoggle"
+	});
+});
+
 /*
  * This file is part of the Sylius package.
  *
@@ -13519,453 +13969,4 @@ $(function() {
         }
     });
 
-});
-(function ($) {
-  'use strict';
-
-  $(document).ready(function () {
-    $('.entity').each(function () {
-      var $entity = $(this);
-
-      var code = $entity.html();
-      var entityName = $entity.data('entity');
-
-      switch (entityName) {
-        case 'game':
-          showGame($entity, code);
-          break;
-      }
-    });
-
-    /**
-     * @param $entity
-     * @param code
-     */
-    function showGame($entity, code) {
-      $.get(Routing.generate('sylius_api_product_show', {'code': code}), function (product) {
-        $entity.html(
-          $('<div>').addClass('img-box-5')
-            .append($('<div>').addClass('container')
-              .append($('<div>').addClass('img-box-5-item')
-                .append($('<div>').addClass('row')
-                  .append($('<div>').addClass('col-md-4')
-                    .append($('<div>').addClass('img-box-5-img')
-                      .append(
-                        $('<a>').attr('href', Routing.generate('sylius_product_show', {'slug': product.slug})).append(
-                          $('<img>')
-                            .addClass('img-responsive img-thumbnail')
-                            .attr('src', product.image.default)
-                        )
-                      )
-                    )
-                  )
-                  .append($('<div>').addClass('col-md-8')
-                    .append($('<div>').addClass('img-box-5-content').append($('<div>').addClass('container')
-                        .append($('<div>').addClass('row')
-                          .append($('<h4>')
-                            .html(product.name)
-                          )
-                        )
-                        .append($('<div>').addClass('row')
-                          .append(getShortDescriptionContainer(product))
-                        )
-                      ).append(
-                      $('<div>').addClass('container')
-                        .append($('<div>').addClass('row')
-                          .append($('<ul>').addClass('list-unstyled')
-                            .append($('<li>')
-                              .append($('<p>').addClass('pull-left bg-color square-2 rounded-2').append(
-                                $('<span>').addClass('fa fa-user white')
-                                )
-                              ).append($('<p>').addClass('game-attribute')
-                                .html(product.min_player_count + ' à ' + product.max_player_count + ' joueurs')
-                              )
-                            )
-                            .append($('<li>')
-                              .append($('<p>').addClass('pull-left bg-color square-2 rounded-2').append(
-                                $('<span>').addClass('fa fa-child white')
-                                )
-                              ).append($('<p>').addClass('game-attribute')
-                                .html('à partir de ' + product.min_age + ' ans')
-                              )
-                            )
-                            .append(getDurationContainer(product))
-                            .append(getMechanismsContainer(product))
-                            .append(getThemesContainer(product))
-                          )
-                        )
-                      )
-                    )
-                  )
-                )
-              )
-            ))
-          .append(
-            $('<div>')
-              .addClass('clearfix')
-          );
-
-
-      });
-    }
-  });
-
-  /**
-   * @param product
-   * @returns {*}
-   */
-  function getDurationContainer(product) {
-    if (typeof product.min_duration === 'undefined') {
-      return $('<span>');
-    }
-
-    return $('<li>')
-      .append(
-        $('<p>').addClass('pull-left bg-color square-2 rounded-2')
-          .append(
-            $('<span>')
-              .addClass('fa fa-clock-o white')
-          )
-      )
-      .append(
-        $('<p>').addClass('game-attribute')
-          .html(product.min_duration + ' minutes')
-      )
-  }
-
-  function getShortDescriptionContainer(product) {
-    if (typeof product.short_description === 'undefined') {
-      return $('<span>');
-    }
-
-
-    return $('<div>').addClass('quote-one')
-      .append($('<div>').addClass('row')
-        .append($('<div>').addClass('quote-one-item')
-          .append($('<span>').addClass('color').html('“'))
-          .append($('<div>').addClass('quote-one-right')
-            .append($('<div>').addClass('content hcodeeContent').html(product.short_description))
-            .append(
-              $('<div>').addClass('show-more')
-                .append($('<a>').attr('href', '#').html('Lire la suite...'))
-            )
-          )
-        ));
-  }
-
-  /**
-   * @param product
-   * @returns {*}
-   */
-  function getMechanismsContainer(product) {
-    if (product.mechanisms.length === 0) {
-      return $('<span>');
-    }
-
-    var $paragraph = $('<p>').addClass('game-attribute');
-    var first = true;
-
-    $.each(product.mechanisms, function () {
-
-      if (false === first) {
-        $paragraph.append(
-          $('<span>').html(', ')
-        );
-      }
-
-      $paragraph.append(
-        $('<a>').attr('href', Routing.generate('sylius_product_index_by_taxon', {'permalink': this.permalink}))
-          .html(this.name)
-      );
-
-      first = false;
-
-    });
-
-    return $('<li>')
-      .append(
-        $('<p>').addClass('pull-left bg-color square-2 rounded-2')
-          .append(
-            $('<span>')
-              .addClass('fa fa-cog white')
-          )
-      )
-      .append($paragraph);
-  }
-
-  /**
-   * @param product
-   * @returns {*}
-   */
-  function getThemesContainer(product) {
-    if (product.themes.length === 0) {
-      return $('<span>');
-    }
-
-    var $paragraph = $('<p>').addClass('game-attribute');
-    var first = true;
-
-    $.each(product.themes, function () {
-
-      if (false === first) {
-        $paragraph.append(
-          $('<span>').html(', ')
-        );
-      }
-
-      $paragraph.append(
-        $('<a>').attr('href', Routing.generate('sylius_product_index_by_taxon', {'permalink': this.permalink}))
-          .html(this.name)
-      );
-
-      first = false;
-
-    });
-
-    return $('<li>')
-      .append(
-        $('<p>').addClass('pull-left bg-color square-2 rounded-2')
-          .append(
-            $('<span>')
-              .addClass('fa fa-picture-o white')
-          )
-      )
-      .append($paragraph);
-  }
-
-})(jQuery);
-$(function () {
-
-  var title = document.title;
-  var $notificationBlock = $('#notificationBlock');
-
-  if ($notificationBlock.length > 0) {
-
-    var $notificationItemClone = $('.notificationItem', $notificationBlock).clone();
-
-    function readNotification($a) {
-      $.ajax({
-        url: Routing.generate('app_api_notification_read', {'id': $a.attr('data-id')}),
-        type: 'PATCH',
-        success: function () {
-          window.location.replace($a.attr('data-target'));
-        }
-      });
-    }
-
-    function refresh() {
-      $.get(Routing.generate('app_api_notification_index'), function (response) {
-        $('.notificationItem', $notificationBlock).remove();
-
-        $.each(response, function (index, entity) {
-          var $item = $notificationItemClone.clone();
-
-          $('.notificationMessage', $item).html(entity.message);
-          $('.notificationA', $item).attr('data-id', entity.id);
-          $('.notificationA', $item).attr('data-target', entity.target);
-          $('.notificationContainer', $notificationBlock).append($item);
-
-          if (entity.authors.length > 0 && typeof entity.authors[0].avatar !== 'undefined') {
-            $('.notificationA img', $item).attr('src', entity.authors[0].avatar.thumbnail);
-          }
-
-          $('.notificationA', $item).click(function (event) {
-            event.preventDefault();
-            readNotification($(this));
-          });
-        });
-
-        if (response.length > 0) {
-          $('.badge').show().html(response.length);
-        } else {
-          $('.badge').hide();
-        }
-
-        updateTitleWithNotificationCount(title, response.length);
-      });
-
-      setTimeout(refresh, 10000);
-    }
-
-    function updateTitleWithNotificationCount(title, notificationCount) {
-      if (notificationCount === 0) {
-        document.title = title;
-        return;
-      }
-
-      // this regex will test if the document title already has a notification count in it, e.g. (1) My Document
-      if (/\([\d]+\)/.test(title)) {
-        // we will split the title after the first bracket
-        title = title.split(') ');
-        // get the first part of the splitted string and save it - this will be the count of the unseen notifications in our document string
-        var notifications = title[0].substring(1);
-
-        // only proceed when the notification count is difference to our ajax request
-        if (notifications === 0) {
-          return;
-        } else {
-          // else update the title with the new notification count
-          document.title = '(' + notificationCount + ') ' + title[1];
-        }
-      }
-      // when the current document title does not contain any notification count, just update it
-      else {
-        document.title = '(' + notificationCount + ') ' + title;
-      }
-    }
-
-
-    refresh();
-  }
-});
-/* ************************ */
-/* Theme name  : Brave      */
-/* Author name : Ashok      */
-/* ************************ */
-
-/* ****************** */
-/* Tooltips & Popover */
-/* ****************** */
-
-$(".b-tooltip").tooltip();
-
-$(".b-popover").popover();
-
-/* ****************** */
-/* Switchs */
-/* ****************** */
-
-$(".switch").bootstrapSwitch();
-
-$(".b-popover").popover();
-
-/* ************** */
-/* Magnific Popup */
-/* ************** */
-
-$(document).ready(function() {
-  $('.lightbox').magnificPopup({type:'image'});
-});
-
-/* *************** */
-/* Custom Dropdown */
-/* *************** */
-
-$(document).ready(function(){
-	var hidden = true;
-	$(".b-dropdown").click(function(e){
-		e.preventDefault();
-		if (hidden){
-           $(this).next('.b-dropdown-block').slideToggle(400, function(){hidden = false;});
-      }
-	}); 
-	$('html').click(function() {
-        if (!hidden) {
-            $('.b-dropdown-block').slideUp();
-            hidden=true;
-        }
-   });
-   $('.b-dropdown-block').click(function(event) {
-        event.stopPropagation();
-   }); 
-});
-
-/* ************ */
-/* Owl Carousel */
-/* ************ */
-
-$(document).ready(function() {
-	/* Owl carousel */
-	$(".owl-carousel").owlCarousel({
-		slideSpeed : 500,
-		rewindSpeed : 1000,
-		mouseDrag : true,
-		stopOnHover : true
-	});
-	/* Own navigation */
-	$(".owl-nav-prev").click(function(){
-		$(this).parent().next(".owl-carousel").trigger('owl.prev');
-	});
-	$(".owl-nav-next").click(function(){
-		$(this).parent().next(".owl-carousel").trigger('owl.next');
-	});
-});
-
-/* ************* */
-/* Scroll to top */
-/* ************* */
-
-$(document).ready(function() {
-	$(window).scroll(function(){
-		if ($(this).scrollTop() > 200) {
-			$('.totop').fadeIn();
-		} else {
-			$('.totop').fadeOut();
-		}
-	});
-	$(".totop a").click(function(e) {
-		e.preventDefault();
-		$("html, body").animate({ scrollTop: 0 }, "slow");
-		return false;
-	});
-});
-
-/* *************** */
-/* Navigation menu */
-/* *************** */
-
-$(document).ready(function(){
-
-
-	$.fn.menumaker = function(options) {
-      
-    var cssmenu = $(this), settings = $.extend({
-        title: "Menu",
-        format: "dropdown",
-        sticky: false
-      }, options);
-
-      return this.each(function() {
-		
-		cssmenu.prepend('<div id="menu-button">' + settings.title + '</div>');
-		$(this).find("#menu-button").on('click', function(){
-		  $(this).toggleClass('menu-opened');
-		  var mainmenu = $(this).next('ul');
-		  if (mainmenu.hasClass('open')) { 
-			mainmenu.slideUp().removeClass('open');
-		  }
-		  else {
-			mainmenu.slideDown().addClass('open');
-			if (settings.format === "dropdown") {
-			  mainmenu.find('ul').slideDown();
-			}
-		  }
-		});
-		
-		cssmenu.find('li ul').parent().addClass('has-sub');
-
-		multiTg = function() {
-		  cssmenu.find(".has-sub").prepend('<span class="submenu-button"></span>');
-		  cssmenu.find('.submenu-button').on('click', function() {
-			$(this).toggleClass('submenu-opened');
-			if ($(this).siblings('ul').hasClass('open')) {
-			  $(this).siblings('ul').removeClass('open').slideUp();
-			}
-			else {
-			  $(this).siblings('ul').addClass('open').slideDown();
-			}
-		  });
-		};
-
-		if (settings.format === 'multitoggle') multiTg();
-		else cssmenu.addClass('dropdown');
-		
-		
-      });
-	};
-
-	$(".navy").menumaker({
-		title: "Menu",
-		format: "multitoggle"
-	});
 });
