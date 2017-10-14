@@ -1,7 +1,17 @@
 {
   "dependencies": {
+    "bootstrap-sass": "^3.3.7",
+    "bootstrap-switch": "^3.3.4",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.47",
+    "font-awesome": "^4.7.0",
     "jquery": "^2.2.0",
+    "jquery-fancybox": "^3.1.0",
     "jquery-ui-dist": "^1.12.1",
+    "magnific-popup": "^1.1.0",
+    "moment": "^2.18.1",
+    "owl.carousel": "^2.2.0",
+    "rater-jquery": "^1.0.0",
+    "select2": "^4.0.4",
     "semantic-ui-css": "^2.2.0"
   },
   "devDependencies": {

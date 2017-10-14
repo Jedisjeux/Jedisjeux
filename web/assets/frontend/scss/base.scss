@@ -4,7 +4,7 @@ $icon-font-path: "../../compiled/fonts/bootstrap/";
 // Bootstrap overrides, such as the asset-url(..) function.
 @import "../../../bundles/mopabootstrap/sass/bootstrap_and_overrides";
 
-@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "../../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 // The Paginator less for MopaBootstrapBundle
 @import "../../../bundles/mopabootstrap/sass/paginator";
@@ -16,7 +16,16 @@ $icon-font-path: "../../compiled/fonts/bootstrap/";
 @import "../../../bundles/mopabootstrap/sass/form_flow.scss";
 
 // Font-awesome
-@import "../node_modules/font-awesome/scss/font-awesome";
+@import "../../../../node_modules/font-awesome/scss/font-awesome";
+
+// Bootstrap-datetimepicker
+@import "../../../../node_modules/eonasdan-bootstrap-datetimepicker/src/sass/bootstrap-datetimepicker";
+
+// Owl-Carousel
+@import "../../../../node_modules/owl.carousel/src/scss/owl.carousel";
+
+// Select2
+@import "../../../../node_modules/select2/src/scss/core";
 
 @import "mixins/ellipsis";
 

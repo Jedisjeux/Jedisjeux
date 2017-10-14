@@ -23,16 +23,16 @@ gulp.task('admin-watch', function() {
     ;
 });
 
-gulp.task('shop', function() {
+gulp.task('app', function() {
     gulp.src('web/assets/frontend/Gulpfile.js', { read: false })
         .pipe(chug({ args: config }))
     ;
 });
 
-gulp.task('shop-watch', function() {
+gulp.task('app-watch', function() {
     gulp.src('web/assets/frontend/Gulpfile.js', { read: false })
         .pipe(chug({ args: config, tasks: 'watch' }))
     ;
 });
 
-gulp.task('default', ['admin', 'shop']);
+gulp.task('default', ['admin', 'app']);
