@@ -4,7 +4,7 @@ Jedisjeux Documentation
 .. image:: /_images/logo.png
    :alt:   Jedisjeux Welcome Page
 
-`Jedisjeux`_ is a boardgame website PHP, based on
+`Jedisjeux`_ is a PHP boardgame website, based on
 `Symfony Framework`_ and `Sylius`_.
 
 .. note::

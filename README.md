@@ -7,13 +7,20 @@ Documentation
 
 Documentation is available at [docs.jedisjeux.net](http://docs.jedisjeux.net).
 
-Quick Installation with vagrant
--------------------------------
+Installation
+------------
+
+You need [composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx) to install PHP packages and [yarn](https://yarnpkg.com/lang/en/docs/install/) to install JS packages.
 
 ```bash
-$ cd etc/vagrant
-$ vagrant up
+$ php bin/console app:install
+$ yarn install && yarn run gulp
+$ php bin/console server:start
 ```
+
+Then open `http://localhost:8000/` in your web browser to enjoy Jedisjeux website in a development environment.
+
+Alternatively, you can use [Vagrant](https://github.com/Jedisjeux/Jedisjeux/tree/master/etc/vagrant) for your initial setup.
 
 [Behat](http://behat.org) scenarios
 -----------------------------------
