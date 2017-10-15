@@ -10,5 +10,7 @@ that you need to notice.
 
     architecture
     fixtures
+    grids
+    routing
 
 .. include:: /book/architecture/map.rst.inc
