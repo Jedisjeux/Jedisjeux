@@ -1,6 +1,6 @@
 ![Jedisjeux](http://www.jedisjeux.net/media/cache/logo/assets/frontend/img/logo.png)
 
-Welcome to Jedisjeux Project base on Symfony 2
+[Jedisjeux](http://www.jedisjeux.net) is a PHP boardgame website, based on [Symfony Framework](http://symfony.com/) and [Sylius](http://sylius.org/).
 
 Documentation
 -------------
