@@ -1,6 +1,6 @@
 <h1 align="center">
     <a href="http://www.jedisjeux.net" target="_blank">
-        <img src="http://www.jedisjeux.net/media/cache/logo/assets/frontend/img/logo.png" />
+        <img src="http://www.jedisjeux.net/media/cache/resolve/full/assets/frontend/img/logo.png" />
     </a>
     <br />
     <a href="http://travis-ci.org/Jedisjeux/Jedisjeux" title="Build status" target="_blank">
@@ -10,8 +10,6 @@
         <img src="https://img.shields.io/scrutinizer/g/Jedisjeux/Jedisjeux.svg" />
     </a>    
 </h1>
-
-![Jedisjeux](http://www.jedisjeux.net/media/cache/logo/assets/frontend/img/logo.png)
 
 [Jedisjeux](http://www.jedisjeux.net) is a PHP boardgame website, based on [Symfony Framework](http://symfony.com/) and [Sylius](http://sylius.org/).
 
