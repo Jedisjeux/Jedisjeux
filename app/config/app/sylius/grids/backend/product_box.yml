@@ -26,7 +26,7 @@ sylius_grid:
                         template: "backend/product_box/grid/field/height.html.twig"
                 createdAt:
                     type: twig
-                    label: sylius.ui.created_at
+                    label: sylius.ui.creation_date
                     sortable: ~
                     options:
                         template: "backend/grid/field/date/medium.html.twig"

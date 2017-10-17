@@ -23,7 +23,7 @@ sylius_grid:
                         template: "backend/grid/field/string.html.twig"
                 createdAt:
                     type: twig
-                    label: sylius.ui.created_at
+                    label: sylius.ui.creation_date
                     sortable: createdAt
                     options:
                         template: "backend/grid/field/date/medium.html.twig"
