@@ -31,7 +31,7 @@ php bin/console doctrine:phpcr:repository:init --env=test
 
 # Install Yarn globally
 apt-key adv --fetch-keys http://dl.yarnpkg.com/debian/pubkey.gpg
-echo \"deb http://dl.yarnpkg.com/debian/ stable main\" | sudo tee /etc/apt/sources.list.d/yarn.list
+echo \"deb http://dl.yarnpkg.com/debian/ stable main\" | tee /etc/apt/sources.list.d/yarn.list
 apt-get update -qq
 apt-get install -y -qq yarn=0.21.3-1
 
