@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "30891d30a2674b7cbb91e483e8645e30",
+    "content-hash": "45b40a38de88a311f0ffc165a9a04d2b",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -6527,16 +6527,16 @@
         },
         {
             "name": "sylius/product",
-            "version": "v1.0.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/Product.git",
-                "reference": "15b874b00f4260f886c271bb767825044664c6bc"
+                "reference": "c444be810ce6ff16fa662eeef123dc035402e0ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/Product/zipball/15b874b00f4260f886c271bb767825044664c6bc",
-                "reference": "15b874b00f4260f886c271bb767825044664c6bc",
+                "url": "https://api.github.com/repos/Sylius/Product/zipball/c444be810ce6ff16fa662eeef123dc035402e0ed",
+                "reference": "c444be810ce6ff16fa662eeef123dc035402e0ed",
                 "shasum": ""
             },
             "require": {
@@ -6556,7 +6556,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.1-dev"
                 }
             },
             "autoload": {
@@ -6593,7 +6593,7 @@
                 "shop",
                 "variants"
             ],
-            "time": "2017-09-13T09:49:35+00:00"
+            "time": "2017-10-11T09:28:18+00:00"
         },
         {
             "name": "sylius/product-bundle",
