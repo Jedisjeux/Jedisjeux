@@ -10,7 +10,7 @@ sylius_grid:
             fields:
                 timestamp:
                     type: twig
-                    label: sylius.ui.created_at
+                    label: sylius.ui.creation_date
                     sortable: ~
                     options:
                         template: "backend/grid/field/date/medium.html.twig"
@@ -32,4 +32,4 @@ sylius_grid:
                         fields: [path, referer]
                 timestamp:
                     type: date
-                    label: sylius.ui.created_at
+                    label: sylius.ui.creation_date
