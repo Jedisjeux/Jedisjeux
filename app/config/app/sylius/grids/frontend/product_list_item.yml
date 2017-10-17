@@ -14,5 +14,4 @@ sylius_grid:
             fields:
                 createdAt:
                     type: twig
-                    label: sylius.ui.created_at
                     sortable: ~
