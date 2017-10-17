@@ -10,17 +10,9 @@ sylius_api_product:
     resource: |
         section: api
         alias: sylius.product
-        only: [index]
+        only: [index, show]
+        grid: sylius_api_product
+        identifier: code
+        criteria:
+            code: $code
     type: sylius.resource_api
-
-sylius_api_product_show:
-    methods: [GET]
-    path: /products/{code}
-    defaults:
-        _controller: sylius.controller.product:showAction
-        _sylius:
-            repository:
-                method: findOneByCode
-                arguments:
-                    - $code
-            serialization_groups: [Detailed, Default]
