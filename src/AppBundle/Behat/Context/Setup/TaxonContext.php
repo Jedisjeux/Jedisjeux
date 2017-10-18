@@ -99,6 +99,18 @@ class TaxonContext implements Context
     }
 
     /**
+     * @Given there are default taxonomies for topics
+     */
+    public function thereAreDefaultTaxonomiesForTopics()
+    {
+        $taxonCodes = [
+            Taxon::CODE_FORUM,
+        ];
+
+        $this->createDefaultTaxonomies($taxonCodes);
+    }
+
+    /**
      * @Given /^there are (mechanisms|themes) "([^"]+)" and "([^"]+)"$/
      */
     public function thereAreTaxonsAnd($taxonCode, $firstTaxonName, $secondTaxonName)

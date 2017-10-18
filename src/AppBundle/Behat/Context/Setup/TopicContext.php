@@ -12,6 +12,7 @@
 namespace AppBundle\Behat\Context\Setup;
 
 use AppBundle\Behat\Service\SharedStorageInterface;
+use AppBundle\Entity\Article;
 use AppBundle\Entity\Topic;
 use AppBundle\Fixture\Factory\ExampleFactoryInterface;
 use Behat\Behat\Context\Context;
