@@ -12,3 +12,8 @@ services:
           class: AppBundle\Behat\Page\Frontend\Topic\IndexPage
           parent: app.behat.symfony_page
           public: false
+
+      app.behat.page.frontend.topic.index_by_taxon:
+          class: AppBundle\Behat\Page\Frontend\Topic\IndexByTaxonPage
+          parent: app.behat.symfony_page
+          public: false
