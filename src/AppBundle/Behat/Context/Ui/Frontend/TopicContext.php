@@ -11,8 +11,10 @@
 
 namespace AppBundle\Behat\Context\Ui\Frontend;
 
+use AppBundle\Behat\Page\Frontend\Topic\IndexByTaxonPage;
 use AppBundle\Behat\Page\Frontend\Topic\IndexPage;
 use Behat\Behat\Context\Context;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -26,11 +28,18 @@ class TopicContext implements Context
     private $indexPage;
 
     /**
-     * @param IndexPage $indexPage
+     * @var IndexByTaxonPage
      */
-    public function __construct(IndexPage $indexPage)
+    private $indexByTaxonPage;
+
+    /**
+     * @param IndexPage $indexPage
+     * @param IndexByTaxonPage $indexByTaxonPage
+     */
+    public function __construct(IndexPage $indexPage, IndexByTaxonPage $indexByTaxonPage)
     {
         $this->indexPage = $indexPage;
+        $this->indexByTaxonPage = $indexByTaxonPage;
     }
 
     /**
@@ -39,6 +48,14 @@ class TopicContext implements Context
     public function iWantToBrowseTopics()
     {
         $this->indexPage->open();
+    }
+
+    /**
+     * @When /^I want to browse topics from (taxon "([^"]+)")$/
+     */
+    public function iWantToBrowseTopicsFromTaxon(TaxonInterface $taxon)
+    {
+        $this->indexByTaxonPage->open(['slug' => $taxon->getSlug()]);
     }
 
     /**
