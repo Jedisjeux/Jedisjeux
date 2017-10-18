@@ -6,8 +6,8 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../../../bash/application.
 print_header "Activating memcached extension" "Jedisjeux"
 run_command "echo \"extension = memcached.so\" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini" || exit $?
 
-print_header "Installing chromium" "Jedisjeux"
-run_command "sudo apt-get install -y chromium-browser"
+print_header "Starting chrome headless" "Jedisjeux"
+run_command "google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &"
 
 print_header "Installing elasticsearch" "Jedisjeux"
 run_command "curl -O https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.3.deb && sudo dpkg -i --force-confnew elasticsearch-1.7.3.deb && sudo service elasticsearch restart"

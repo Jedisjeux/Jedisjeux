@@ -12,6 +12,7 @@ commands=(
     test-phpunit
     test-fixtures
     test-behat-without-javascript
+    test-behat-with-javascript
     test-new-behat-without-javascript
 )
 

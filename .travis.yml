@@ -9,14 +9,7 @@ env:
         - JEDISJEUX_BUILD_DIR=etc/build
 
 addons:
-    apt:
-        sources:
-            - google-chrome
-        packages:
-            - google-chrome-stable
-
-services:
-    - mysql
+    chrome: stable
 
 matrix:
     include:
@@ -28,6 +21,7 @@ matrix:
                 - TRAVIS_NODE_VERSION="7.5"
             services:
                 - memcached
+                - mysql
         -
             sudo: false
             php: 7.1
