@@ -14,3 +14,4 @@ imports:
     - suites/ui/redirection/managing_redirections.yml
     - suites/ui/topic/managing_topics.yml
     - suites/ui/topic/managing_posts.yml
+    - suites/ui/topic/viewing_topics.yml
