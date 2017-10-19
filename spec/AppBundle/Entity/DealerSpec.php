@@ -4,6 +4,9 @@ namespace spec\AppBundle\Entity;
 
 use AppBundle\Entity\Dealer;
 use AppBundle\Entity\DealerImage;
+use AppBundle\Entity\PriceList;
+use AppBundle\Entity\PubBanner;
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -22,8 +25,8 @@ class DealerSpec extends ObjectBehavior
 
     function its_code_is_mutable()
     {
-        $this->setCode("DEALER1");
-        $this->getCode()->shouldReturn("DEALER1");
+        $this->setCode("philibert");
+        $this->getCode()->shouldReturn("philibert");
     }
 
     function it_has_no_name_by_default()
@@ -46,5 +49,27 @@ class DealerSpec extends ObjectBehavior
     {
         $this->setImage($image);
         $this->getImage()->shouldReturn($image);
+    }
+
+    function it_has_no_price_list_by_default()
+    {
+        $this->getPriceList()->shouldReturn(null);
+    }
+
+    function its_price_list_is_mutable(PriceList $priceList)
+    {
+        $this->setPriceList($priceList);
+        $this->getPriceList()->shouldReturn($priceList);
+    }
+
+    function it_initializes_pub_banners_collection_by_default(): void
+    {
+        $this->getPubBanners()->shouldHaveType(Collection::class);
+    }
+
+    function it_adds_pub_banner(PubBanner $pubBanner)
+    {
+        $this->addPubBanner($pubBanner);
+        $this->hasPubBanner($pubBanner)->shouldReturn(true);
     }
 }
