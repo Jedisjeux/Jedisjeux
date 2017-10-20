@@ -20,16 +20,6 @@ Feature: View list of topics
             | Retour de Cannes jour par jour | forum/reglons-ca      | kevin@example.com |
             | Jeux avec handicap             | forum/moi-je-dis-jeux | kevin@example.com |
 
-    Scenario: View list of topics
-        When I am on "/topics/"
-        Then I should see "Retour de Cannes jour par jour"
-        And I should see "Jeux avec handicap"
-
-    Scenario: View list of topics under a taxon
-        Given I am on "/topics/"
-        When I follow "Moi je dis jeux"
-        Then I should see "Jeux avec handicap"
-
     Scenario: Does not allow indexing private topics
         Given there are taxons:
             | code     | name                | parent | public |

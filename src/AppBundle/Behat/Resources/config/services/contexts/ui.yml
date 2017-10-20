@@ -152,3 +152,10 @@ services:
         tags:
             - { name: fob.context_service }
 
+    app.behat.context.ui.frontend.topic:
+        class: AppBundle\Behat\Context\Ui\Frontend\TopicContext
+        arguments:
+            - "@app.behat.page.frontend.topic.index"
+            - "@app.behat.page.frontend.topic.index_by_taxon"
+        tags:
+            - { name: fob.context_service }

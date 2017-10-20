@@ -5,9 +5,8 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../../../../bash/common.li
 run_behat() {
     local code=0
 
-    run_command "cp behat.yml.dist behat.yml" || code=$?
-    run_command "sed -i 's/etc\/behat/src\/AppBundle\/Behat\/Resources\/config/' behat.yml" || code=$?
-    run_command "sed -i 's/#//' app/config/config_test.yml" || code=$?
+    run_command "cp etc/travis/suites/application/assets/old-behat.yml behat.yml" || code=$?
+    run_command "sed -i 's/en_US/fr_FR/' app/config/config_test.yml" || code=$?
 
     print_header "Testing (Behat - brand new, regular scenarios; ~@javascript && ~@todo && ~@cli)" "Jedisjeux"
     run_command "bin/behat --strict --no-interaction -vvv -f progress --tags=\"~@javascript && ~@todo && ~@cli\"" || code=$?
