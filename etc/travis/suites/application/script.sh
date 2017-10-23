@@ -4,7 +4,7 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../../../bash/common.lib.s
 
 code=0
 commands=(
-    update-behat-with-old-config
+    test-old-behat-without-javascript
     test-behat-with-javascript
 )
 
