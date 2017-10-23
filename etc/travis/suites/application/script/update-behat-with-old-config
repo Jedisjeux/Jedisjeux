@@ -4,3 +4,4 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../../../../bash/common.li
 
 run_command "cp etc/travis/suites/application/assets/old-behat.yml behat.yml" || code=$?
 run_command "sed -i 's/en_US/fr_FR/' app/config/config_test.yml" || code=$?
+run_command "bin/console cache:clear --no-warmup --env=test" || code=$?
