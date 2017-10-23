@@ -4,15 +4,7 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../../../bash/common.lib.s
 
 code=0
 commands=(
-    validate-composer
-    validate-behat-features
-    validate-doctrine-schema
-    validate-twig
-    test-phpspec
-    test-phpunit
-    test-fixtures
-    test-behat-without-javascript
-    test-old-behat-without-javascript
+    update-behat-with-old-config
     test-behat-with-javascript
 )
 

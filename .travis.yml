@@ -1,5 +1,4 @@
-dist: trusty
-sudo: required
+dist: precise
 
 language: php
 
@@ -7,9 +6,6 @@ env:
     global:
         - JEDISJEUX_CACHE_DIR=$HOME/.jedisjeux-cache
         - JEDISJEUX_BUILD_DIR=etc/build
-
-addons:
-    chrome: stable
 
 matrix:
     include:
