@@ -1,4 +1,4 @@
-dist: precise
+dist: trusty
 
 language: php
 
@@ -23,6 +23,7 @@ matrix:
             php: 7.1
             env: JEDISJEUX_SUITE="docs packages"
             addons:
+                chrome: stable
                 apt:
                     packages:
                         - parallel
