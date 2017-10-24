@@ -21,6 +21,7 @@ Feature: Game-play comment creation
         Given I am on "/mon-compte/parties/"
         And I follow "Lewis & Clark"
         And I follow "Commenter la partie"
+        And I wait "5" seconds
         And I fill in wysiwyg field "app_post_body" with "Here is my awesome comment."
         When I press "Créer"
         Then I should see "a bien été créé"

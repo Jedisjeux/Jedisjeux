@@ -32,6 +32,7 @@ Feature: Remove article comment
     Scenario: Remove my comment with modal
         Given I am on "/articles/"
         And I follow "Critique de Vroom Vroom"
+        And I wait "5" seconds
         When I press "Supprimer"
         And I wait until modal is visible
         And I follow "Supprimer"

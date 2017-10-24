@@ -34,6 +34,7 @@ Feature: Remove posts
     Scenario: Remove a post with modal
         Given I am on "/topics/"
         And I follow "Retour de Cannes jour par jour"
+        And I wait "5" seconds
         When I press "Supprimer"
         And I wait until modal is visible
         And I follow "Supprimer"

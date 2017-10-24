@@ -1,4 +1,4 @@
-dist: trusty
+dist: precise
 
 language: php
 
@@ -17,13 +17,11 @@ matrix:
                 - TRAVIS_NODE_VERSION="7.5"
             services:
                 - memcached
-                - mysql
         -
             sudo: false
             php: 7.1
             env: JEDISJEUX_SUITE="docs packages"
             addons:
-                chrome: stable
                 apt:
                     packages:
                         - parallel
