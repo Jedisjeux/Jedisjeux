@@ -22,4 +22,5 @@ Feature: Create product reviews
         And I wait "5" seconds
         And I fill in wysiwyg field "sylius_product_review_comment" with "Here is my awesome review."
         When I press "Créer"
+        And I wait "5" seconds
         Then I should see "a bien été créé"
