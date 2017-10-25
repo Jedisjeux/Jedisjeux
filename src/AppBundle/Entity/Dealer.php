@@ -177,11 +177,21 @@ class Dealer implements ResourceInterface
     /**
      * @param PubBanner $pubBanner
      *
+     * @return bool
+     */
+    public function hasPubBanner(PubBanner $pubBanner):bool
+    {
+        return $this->pubBanners->contains($pubBanner);
+    }
+
+    /**
+     * @param PubBanner $pubBanner
+     *
      * @return $this
      */
-    public function addPubBanner($pubBanner)
+    public function addPubBanner(PubBanner $pubBanner)
     {
-        if (!$this->pubBanners->contains($pubBanner)) {
+        if (!$this->hasPubBanner($pubBanner)) {
             $pubBanner->setDealer($this);
             $this->pubBanners->add($pubBanner);
         }
@@ -194,7 +204,7 @@ class Dealer implements ResourceInterface
      *
      * @return $this
      */
-    public function removePubBanner($pubBanner)
+    public function removePubBanner(PubBanner $pubBanner)
     {
         $this->pubBanners->removeElement($pubBanner);
 

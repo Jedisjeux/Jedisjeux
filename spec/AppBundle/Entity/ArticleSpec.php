@@ -108,7 +108,7 @@ class ArticleSpec extends ObjectBehavior
         $this->getTopic()->shouldReturn($topic);
     }
 
-    function it_initializes_blocks_collection_by_default(): void
+    function it_initializes_blocks_collection_by_default()
     {
         $this->getBlocks()->shouldHaveType(Collection::class);
     }
