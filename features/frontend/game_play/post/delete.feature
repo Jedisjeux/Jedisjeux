@@ -25,13 +25,3 @@ Feature: Remove game play comment
         And I follow "Lewis & Clark"
         When I press "Supprimer"
         Then I should see "a bien été supprimé"
-
-    @javascript
-    Scenario: Remove my comment with modal
-        Given I am on "/parties/"
-        And I follow "Lewis & Clark"
-        And I wait "5" seconds
-        When I press "Supprimer"
-        And I wait until modal is visible
-        And I follow "Supprimer"
-        Then I should see "a bien été supprimé"

@@ -29,13 +29,3 @@ Feature: Remove posts
         And I follow "Retour de Cannes jour par jour"
         When I press "Supprimer"
         Then I should see "a bien été supprimé"
-
-    @javascript
-    Scenario: Remove a post with modal
-        Given I am on "/topics/"
-        And I follow "Retour de Cannes jour par jour"
-        And I wait "5" seconds
-        When I press "Supprimer"
-        And I wait until modal is visible
-        And I follow "Supprimer"
-        Then I should see "a bien été supprimé"
