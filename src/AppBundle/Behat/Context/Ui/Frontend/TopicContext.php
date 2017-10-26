@@ -11,6 +11,7 @@
 
 namespace AppBundle\Behat\Context\Ui\Frontend;
 
+use AppBundle\Behat\Page\Frontend\Topic\CreatePage;
 use AppBundle\Behat\Page\Frontend\Topic\IndexByTaxonPage;
 use AppBundle\Behat\Page\Frontend\Topic\IndexPage;
 use Behat\Behat\Context\Context;
@@ -33,13 +34,23 @@ class TopicContext implements Context
     private $indexByTaxonPage;
 
     /**
+     * @var CreatePage
+     */
+    private $createPage;
+
+    /**
      * @param IndexPage $indexPage
      * @param IndexByTaxonPage $indexByTaxonPage
+     * @param CreatePage $createPage
      */
-    public function __construct(IndexPage $indexPage, IndexByTaxonPage $indexByTaxonPage)
-    {
+    public function __construct(
+        IndexPage $indexPage,
+        IndexByTaxonPage $indexByTaxonPage,
+        CreatePage $createPage
+    ) {
         $this->indexPage = $indexPage;
         $this->indexByTaxonPage = $indexByTaxonPage;
+        $this->createPage = $createPage;
     }
 
     /**
@@ -56,6 +67,31 @@ class TopicContext implements Context
     public function iWantToBrowseTopicsFromTaxon(TaxonInterface $taxon)
     {
         $this->indexByTaxonPage->open(['slug' => $taxon->getSlug()]);
+    }
+
+    /**
+     * @Given I want to add topic
+     */
+    public function iWantToAddTopic()
+    {
+        $this->createPage->open();
+    }
+
+    /**
+     * @When I leave a comment :comment, titled :title
+     */
+    public function iLeaveACommentTitled($comment = null, $title = null)
+    {
+        $this->createPage->setTitle($title);
+        $this->createPage->setComment($comment);
+    }
+
+    /**
+     * @When I add it
+     */
+    public function iAddIt()
+    {
+        $this->createPage->submit();
     }
 
     /**

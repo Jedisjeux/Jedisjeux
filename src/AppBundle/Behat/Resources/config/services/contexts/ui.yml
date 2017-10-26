@@ -157,5 +157,6 @@ services:
         arguments:
             - "@app.behat.page.frontend.topic.index"
             - "@app.behat.page.frontend.topic.index_by_taxon"
+            - "@app.behat.page.frontend.topic.create"
         tags:
             - { name: fob.context_service }
