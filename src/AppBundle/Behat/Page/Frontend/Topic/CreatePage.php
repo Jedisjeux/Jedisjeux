@@ -41,7 +41,7 @@ class CreatePage extends SymfonyPage
 
     public function submit()
     {
-        $this->getDocument()->pressButton('Add');
+        $this->getDocument()->pressButton('Create');
     }
 
     /**

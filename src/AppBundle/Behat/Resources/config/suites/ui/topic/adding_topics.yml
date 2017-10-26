@@ -18,5 +18,6 @@ default:
                 - app.behat.context.setup.taxon
 
                 - app.behat.context.ui.frontend.topic
+                - app.behat.context.ui.frontend.notification
             filters:
                 tags: "@adding_topics && @ui"
