@@ -68,12 +68,17 @@ class TopicContext implements Context
 
     /**
      * @Given there is topic with title :title written by :customer
+     * @Given I wrote a topic with title :title
      *
      * @param string $title
-     * @param CustomerInterface $customer
+     * @param CustomerInterface|null $customer
      */
-    public function thereIsTopicWithTitleWrittenByCustomer($title, CustomerInterface $customer)
+    public function thereIsTopicWithTitleWrittenByCustomer($title, CustomerInterface $customer = null)
     {
+        if (null === $customer) {
+            $customer = $this->sharedStorage->get('customer');
+        }
+
         /** @var Topic $topic */
         $topic = $this->topicFactory->create([
             'title' => $title,
