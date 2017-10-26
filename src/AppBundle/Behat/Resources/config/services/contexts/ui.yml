@@ -135,6 +135,13 @@ services:
         tags:
             - { name: fob.context_service }
 
+    app.behat.context.ui.frontend.notification:
+        class: AppBundle\Behat\Context\Ui\Frontend\NotificationContext
+        arguments:
+            - "@app.behat.notification_checker"
+        tags:
+            - { name: fob.context_service }
+
     app.behat.context.ui.frontend.product:
         class: AppBundle\Behat\Context\Ui\Frontend\ProductContext
         arguments:
@@ -157,5 +164,6 @@ services:
         arguments:
             - "@app.behat.page.frontend.topic.index"
             - "@app.behat.page.frontend.topic.index_by_taxon"
+            - "@app.behat.page.frontend.topic.create"
         tags:
             - { name: fob.context_service }

@@ -17,3 +17,8 @@ services:
           class: AppBundle\Behat\Page\Frontend\Topic\IndexByTaxonPage
           parent: app.behat.symfony_page
           public: false
+
+      app.behat.page.frontend.topic.create:
+          class: AppBundle\Behat\Page\Frontend\Topic\CreatePage
+          parent: app.behat.symfony_page
+          public: false

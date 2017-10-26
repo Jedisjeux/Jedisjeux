@@ -63,6 +63,20 @@ final class AdminSecurityContext implements Context
     }
 
     /**
+     * @Given I am logged in as a customer
+     */
+    public function iAmLoggedInAsACustomer()
+    {
+        /** @var UserInterface $user */
+        $user = $this->userFactory->create(['email' => 'customer@example.com', 'password' => 'password', 'roles' => ['ROLE_USER']]);
+        $this->userRepository->add($user);
+
+        $this->securityService->logIn($user);
+
+        $this->sharedStorage->set('customer', $user);
+    }
+
+    /**
      * @Given I am logged in as an administrator
      */
     public function iAmLoggedInAsAnAdministrator()
