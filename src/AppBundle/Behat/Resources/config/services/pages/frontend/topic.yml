@@ -22,3 +22,8 @@ services:
           class: AppBundle\Behat\Page\Frontend\Topic\CreatePage
           parent: app.behat.symfony_page
           public: false
+
+      app.behat.page.frontend.topic.update:
+          class: AppBundle\Behat\Page\Frontend\Topic\UpdatePage
+          parent: app.behat.symfony_page
+          public: false

@@ -13,6 +13,7 @@ namespace AppBundle\Behat\Context\Setup;
 
 use AppBundle\Behat\Service\SecurityServiceInterface;
 use AppBundle\Behat\Service\SharedStorageInterface;
+use AppBundle\Entity\User;
 use AppBundle\Fixture\Factory\ExampleFactoryInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Component\User\Model\UserInterface;
@@ -67,13 +68,13 @@ final class AdminSecurityContext implements Context
      */
     public function iAmLoggedInAsACustomer()
     {
-        /** @var UserInterface $user */
+        /** @var User $user */
         $user = $this->userFactory->create(['email' => 'customer@example.com', 'password' => 'password', 'roles' => ['ROLE_USER']]);
         $this->userRepository->add($user);
 
         $this->securityService->logIn($user);
 
-        $this->sharedStorage->set('customer', $user);
+        $this->sharedStorage->set('customer', $user->getCustomer());
     }
 
     /**

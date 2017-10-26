@@ -13,6 +13,7 @@ imports:
     - suites/ui/product/viewing_products.yml
     - suites/ui/redirection/managing_redirections.yml
     - suites/ui/topic/adding_topics.yml
+    - suites/ui/topic/editing_topics.yml
     - suites/ui/topic/managing_topics.yml
     - suites/ui/topic/managing_posts.yml
     - suites/ui/topic/viewing_topics.yml
