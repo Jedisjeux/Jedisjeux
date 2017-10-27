@@ -13,12 +13,14 @@ Feature: Create product reviews
             | Puerto Rico |
         And I am logged in as user "kevin@example.com" with password "password"
 
-    @javascript
+    @javascript @todo
     Scenario: Create a product review
         Given I am on "/jeu-de-societe/puerto-rico"
         And I follow "Votre avis"
         And I fill in the following:
             | Titre | Superbe jeu |
+        And I wait "5" seconds
         And I fill in wysiwyg field "sylius_product_review_comment" with "Here is my awesome review."
         When I press "Créer"
+        And I wait "5" seconds
         Then I should see "a bien été créé"

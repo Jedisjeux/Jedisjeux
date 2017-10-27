@@ -117,6 +117,9 @@
     "incenteev-parameters": {
       "file": "app/config/parameters.yml"
     },
+    "lbaey/chromedriver": {
+      "chromedriver-version": "2.33"
+    },
     "branch-alias": null
   },
   "minimum-stability": "dev",

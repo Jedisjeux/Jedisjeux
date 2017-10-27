@@ -24,6 +24,7 @@ Feature: Article comment creation
         Given I am on "/articles/"
         And I follow "Critique de Vroom Vroom"
         And I follow "Commenter l'article"
+        And I wait "5" seconds
         And I fill in wysiwyg field "app_post_body" with "Here is my awesome comment."
         When I press "Créer"
         Then I should see "a bien été créé"

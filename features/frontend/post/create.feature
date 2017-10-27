@@ -24,6 +24,7 @@ Feature: Post creation
         Given I am on "/topics/"
         And I follow "Lire le sujet"
         And I follow "Répondre au sujet"
+        And I wait "5" seconds
         And I fill in wysiwyg field "app_post_body" with "Here is my awesome topic response message."
         When I press "Créer"
         Then I should see "a bien été créé"

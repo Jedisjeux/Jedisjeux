@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "45b40a38de88a311f0ffc165a9a04d2b",
+    "content-hash": "02460a75442745737fac0d6239e3dea7",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -5864,12 +5864,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusCustomerBundle.git",
-                "reference": "0880974eae7241823c9000796abf5569f4f955fb"
+                "reference": "8a20eaf0b8ee73c8ca05290c8276140ac2df23c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusCustomerBundle/zipball/0880974eae7241823c9000796abf5569f4f955fb",
-                "reference": "0880974eae7241823c9000796abf5569f4f955fb",
+                "url": "https://api.github.com/repos/Sylius/SyliusCustomerBundle/zipball/8a20eaf0b8ee73c8ca05290c8276140ac2df23c7",
+                "reference": "8a20eaf0b8ee73c8ca05290c8276140ac2df23c7",
                 "shasum": ""
             },
             "require": {
@@ -5938,7 +5938,7 @@
                 "customer",
                 "groups"
             ],
-            "time": "2017-10-10T08:15:25+00:00"
+            "time": "2017-10-17T12:27:03+00:00"
         },
         {
             "name": "sylius/fixtures-bundle",
@@ -6531,12 +6531,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/Product.git",
-                "reference": "c444be810ce6ff16fa662eeef123dc035402e0ed"
+                "reference": "f1e9eeb54dd73b511dc9b01cab413d0970f56f22"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/Product/zipball/c444be810ce6ff16fa662eeef123dc035402e0ed",
-                "reference": "c444be810ce6ff16fa662eeef123dc035402e0ed",
+                "url": "https://api.github.com/repos/Sylius/Product/zipball/f1e9eeb54dd73b511dc9b01cab413d0970f56f22",
+                "reference": "f1e9eeb54dd73b511dc9b01cab413d0970f56f22",
                 "shasum": ""
             },
             "require": {
@@ -6593,7 +6593,7 @@
                 "shop",
                 "variants"
             ],
-            "time": "2017-10-11T09:28:18+00:00"
+            "time": "2017-10-18T13:06:50+00:00"
         },
         {
             "name": "sylius/product-bundle",
@@ -6601,12 +6601,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusProductBundle.git",
-                "reference": "cc22a737c62dd672e966c29cb87a64e7effccd0a"
+                "reference": "ecdce031c4948d3cbf81fd0f9aadd52c046dd718"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusProductBundle/zipball/cc22a737c62dd672e966c29cb87a64e7effccd0a",
-                "reference": "cc22a737c62dd672e966c29cb87a64e7effccd0a",
+                "url": "https://api.github.com/repos/Sylius/SyliusProductBundle/zipball/ecdce031c4948d3cbf81fd0f9aadd52c046dd718",
+                "reference": "ecdce031c4948d3cbf81fd0f9aadd52c046dd718",
                 "shasum": ""
             },
             "require": {
@@ -6666,7 +6666,7 @@
                 "products",
                 "shop"
             ],
-            "time": "2017-10-11T14:31:48+00:00"
+            "time": "2017-10-19T09:39:34+00:00"
         },
         {
             "name": "sylius/registry",
@@ -6805,12 +6805,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusResourceBundle.git",
-                "reference": "84e3aed373df7247e9deb4b1740be42c102c753d"
+                "reference": "ac4666562a4d092078fab789efa619a0f77fbcfb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusResourceBundle/zipball/84e3aed373df7247e9deb4b1740be42c102c753d",
-                "reference": "84e3aed373df7247e9deb4b1740be42c102c753d",
+                "url": "https://api.github.com/repos/Sylius/SyliusResourceBundle/zipball/ac4666562a4d092078fab789efa619a0f77fbcfb",
+                "reference": "ac4666562a4d092078fab789efa619a0f77fbcfb",
                 "shasum": ""
             },
             "require": {
@@ -6895,7 +6895,7 @@
                 "storage",
                 "sylius"
             ],
-            "time": "2017-10-09T12:02:32+00:00"
+            "time": "2017-10-17T08:00:52+00:00"
         },
         {
             "name": "sylius/review",
@@ -6976,12 +6976,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusReviewBundle.git",
-                "reference": "4455267b5e36b8e391f92cd8544a1520291ed062"
+                "reference": "be74e436c096e50c870310e66401064fabf71cbe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusReviewBundle/zipball/4455267b5e36b8e391f92cd8544a1520291ed062",
-                "reference": "4455267b5e36b8e391f92cd8544a1520291ed062",
+                "url": "https://api.github.com/repos/Sylius/SyliusReviewBundle/zipball/be74e436c096e50c870310e66401064fabf71cbe",
+                "reference": "be74e436c096e50c870310e66401064fabf71cbe",
                 "shasum": ""
             },
             "require": {
@@ -7058,7 +7058,7 @@
                 "sylius",
                 "webshop"
             ],
-            "time": "2017-10-11T08:41:23+00:00"
+            "time": "2017-10-19T09:39:34+00:00"
         },
         {
             "name": "sylius/taxonomy",
@@ -7204,12 +7204,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusUiBundle.git",
-                "reference": "1fcec73447ffe02b7609c001a109609e6fe7b56d"
+                "reference": "3db06875545d9600953f72fa1f4de5f413d418d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusUiBundle/zipball/1fcec73447ffe02b7609c001a109609e6fe7b56d",
-                "reference": "1fcec73447ffe02b7609c001a109609e6fe7b56d",
+                "url": "https://api.github.com/repos/Sylius/SyliusUiBundle/zipball/3db06875545d9600953f72fa1f4de5f413d418d1",
+                "reference": "3db06875545d9600953f72fa1f4de5f413d418d1",
                 "shasum": ""
             },
             "require": {
@@ -7266,7 +7266,7 @@
                 "user interface",
                 "webshop"
             ],
-            "time": "2017-10-10T08:15:25+00:00"
+            "time": "2017-10-19T09:39:34+00:00"
         },
         {
             "name": "sylius/user",
@@ -7348,12 +7348,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusUserBundle.git",
-                "reference": "63ef8ef9f16ba1b2074fd800615d6cfadf4c6655"
+                "reference": "d88e666b5a44310e0e39f23049be0560e98d6038"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusUserBundle/zipball/63ef8ef9f16ba1b2074fd800615d6cfadf4c6655",
-                "reference": "63ef8ef9f16ba1b2074fd800615d6cfadf4c6655",
+                "url": "https://api.github.com/repos/Sylius/SyliusUserBundle/zipball/d88e666b5a44310e0e39f23049be0560e98d6038",
+                "reference": "d88e666b5a44310e0e39f23049be0560e98d6038",
                 "shasum": ""
             },
             "require": {
@@ -7431,7 +7431,7 @@
                 "registration",
                 "user"
             ],
-            "time": "2017-10-10T08:15:25+00:00"
+            "time": "2017-10-17T08:34:24+00:00"
         },
         {
             "name": "symfony-cmf/block-bundle",
@@ -7499,16 +7499,16 @@
         },
         {
             "name": "symfony-cmf/core-bundle",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony-cmf/core-bundle.git",
-                "reference": "f48a63ebdcfa510c58e8b5628fd9857aa9f75e55"
+                "reference": "cfc5f7b0396157800074946e10e58a32f1f0ab71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony-cmf/core-bundle/zipball/f48a63ebdcfa510c58e8b5628fd9857aa9f75e55",
-                "reference": "f48a63ebdcfa510c58e8b5628fd9857aa9f75e55",
+                "url": "https://api.github.com/repos/symfony-cmf/core-bundle/zipball/cfc5f7b0396157800074946e10e58a32f1f0ab71",
+                "reference": "cfc5f7b0396157800074946e10e58a32f1f0ab71",
                 "shasum": ""
             },
             "require": {
@@ -7559,7 +7559,7 @@
             "keywords": [
                 "Symfony CMF"
             ],
-            "time": "2017-02-27T08:19:17+00:00"
+            "time": "2017-10-11T11:49:19+00:00"
         },
         {
             "name": "symfony-cmf/media-bundle",
@@ -8284,16 +8284,16 @@
         },
         {
             "name": "symfony/swiftmailer-bundle",
-            "version": "v2.6.3",
+            "version": "v2.6.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/swiftmailer-bundle.git",
-                "reference": "11555c338f3c367b0a1bd2f024a53aa813f4ce00"
+                "reference": "c4808f5169efc05567be983909d00f00521c53ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/swiftmailer-bundle/zipball/11555c338f3c367b0a1bd2f024a53aa813f4ce00",
-                "reference": "11555c338f3c367b0a1bd2f024a53aa813f4ce00",
+                "url": "https://api.github.com/repos/symfony/swiftmailer-bundle/zipball/c4808f5169efc05567be983909d00f00521c53ec",
+                "reference": "c4808f5169efc05567be983909d00f00521c53ec",
                 "shasum": ""
             },
             "require": {
@@ -8339,7 +8339,7 @@
             ],
             "description": "Symfony SwiftmailerBundle",
             "homepage": "http://symfony.com",
-            "time": "2017-07-22T07:18:13+00:00"
+            "time": "2017-10-19T01:06:41+00:00"
         },
         {
             "name": "symfony/symfony",
@@ -10856,37 +10856,40 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.6.1",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "8e6e04167378abf1ddb4d3522d8755c5fd90d102"
+                "reference": "3b8a3a99ba1f6a3952ac2747d989303cbd6b7a3e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/8e6e04167378abf1ddb4d3522d8755c5fd90d102",
-                "reference": "8e6e04167378abf1ddb4d3522d8755c5fd90d102",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/3b8a3a99ba1f6a3952ac2747d989303cbd6b7a3e",
+                "reference": "3b8a3a99ba1f6a3952ac2747d989303cbd6b7a3e",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4.0"
+                "php": "^5.6 || ^7.0"
             },
             "require-dev": {
-                "doctrine/collections": "1.*",
-                "phpunit/phpunit": "~4.1"
+                "doctrine/collections": "^1.0",
+                "doctrine/common": "^2.6",
+                "phpunit/phpunit": "^4.1"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
                     "DeepCopy\\": "src/DeepCopy/"
-                }
+                },
+                "files": [
+                    "src/DeepCopy/deep_copy.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "Create deep copies (clones) of your objects",
-            "homepage": "https://github.com/myclabs/DeepCopy",
             "keywords": [
                 "clone",
                 "copy",
@@ -10894,7 +10897,7 @@
                 "object",
                 "object graph"
             ],
-            "time": "2017-04-12T18:52:22+00:00"
+            "time": "2017-10-19T19:58:43+00:00"
         },
         {
             "name": "nelmio/alice",

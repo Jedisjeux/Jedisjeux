@@ -22,12 +22,13 @@ Feature: Add a product to list
             | Louis XIV |
         And I am logged in as user "kevin@example.com" with password "password"
 
-    @javascript
+    @javascript @todo
     Scenario: Add product to game library
         Given I am on "/jeux-de-societe/"
         And I follow "Louis XIV"
+        And I wait "5" seconds
         And I press "Ajouter à"
-        And I wait "1" seconds
+        And I wait "5" seconds
         When I select the "Ludothèque" radio button
-        And I wait "1" seconds
+        And I wait "5" seconds
         Then I should see "Le jeu a bien été ajouté à votre liste"
