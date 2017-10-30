@@ -20,5 +20,5 @@ Feature: Edit game-plays
         Given I am on "/mon-compte/parties/"
         And I follow "Lewis & Clark"
         And I follow "Modifier la partie"
-        When I press "Mettre à jour"
+        When I press "Enregistrer les modifications"
         Then I should see "a bien été mise à jour"

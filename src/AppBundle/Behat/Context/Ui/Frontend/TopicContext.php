@@ -14,6 +14,8 @@ namespace AppBundle\Behat\Context\Ui\Frontend;
 use AppBundle\Behat\Page\Frontend\Topic\CreatePage;
 use AppBundle\Behat\Page\Frontend\Topic\IndexByTaxonPage;
 use AppBundle\Behat\Page\Frontend\Topic\IndexPage;
+use AppBundle\Behat\Page\Frontend\Topic\UpdatePage;
+use AppBundle\Entity\Topic;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
@@ -39,18 +41,26 @@ class TopicContext implements Context
     private $createPage;
 
     /**
+     * @var UpdatePage
+     */
+    private $updatePage;
+
+    /**
      * @param IndexPage $indexPage
      * @param IndexByTaxonPage $indexByTaxonPage
      * @param CreatePage $createPage
+     * @param UpdatePage $updatePage
      */
     public function __construct(
         IndexPage $indexPage,
         IndexByTaxonPage $indexByTaxonPage,
-        CreatePage $createPage
+        CreatePage $createPage,
+        UpdatePage $updatePage
     ) {
         $this->indexPage = $indexPage;
         $this->indexByTaxonPage = $indexByTaxonPage;
         $this->createPage = $createPage;
+        $this->updatePage = $updatePage;
     }
 
     /**
@@ -78,6 +88,14 @@ class TopicContext implements Context
     }
 
     /**
+     * @Given /^I want to change (this topic)$/
+     */
+    public function iWantToChangeTopic(Topic $topic)
+    {
+        $this->updatePage->open(['id' => $topic->getId()]);
+    }
+
+    /**
      * @When I leave a comment :comment, titled :title
      */
     public function iLeaveACommentTitled($comment = null, $title = null)
@@ -87,11 +105,27 @@ class TopicContext implements Context
     }
 
     /**
+     * @When I change my comment as :comment
+     */
+    public function iChangeMyCommentAs($comment)
+    {
+        $this->updatePage->setComment($comment);
+    }
+
+    /**
      * @When I add it
      */
     public function iAddIt()
     {
         $this->createPage->submit();
+    }
+
+    /**
+     * @When I save my changes
+     */
+    public function iSaveMyChanges()
+    {
+        $this->updatePage->submit();
     }
 
     /**

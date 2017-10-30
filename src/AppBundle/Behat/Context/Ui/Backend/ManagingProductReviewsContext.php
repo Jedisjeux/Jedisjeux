@@ -82,7 +82,7 @@ class ManagingProductReviewsContext implements Context
     /**
      * @When I change its comment as :comment
      */
-    public function iChangeItsLastNameAs($comment)
+    public function iChangeItsCommentAs($comment)
     {
         $this->updatePage->changeComment($comment);
     }
