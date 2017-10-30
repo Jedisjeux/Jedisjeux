@@ -20,5 +20,5 @@ Feature: Edit product reviews
     Scenario: Update a product review
         Given I am on "/jeu-de-societe/puerto-rico"
         And I follow "Votre avis"
-        When I press "Mettre à jour"
+        When I press "Enregistrer les modifications"
         Then I should see "a bien été mis à jour"

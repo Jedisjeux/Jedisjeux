@@ -27,5 +27,5 @@ Feature: Edit Post
         Given I am on "/topics/"
         And I follow "Lire le sujet"
         And I follow "Modifier"
-        When I press "Mettre à jour"
+        When I press "Enregistrer les modifications"
         Then I should see "a bien été mis à jour"

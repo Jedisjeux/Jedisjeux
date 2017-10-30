@@ -24,5 +24,5 @@ Feature: Edit game play comment
         Given I am on "/parties/"
         And I follow "Lewis & Clark"
         And I follow "Modifier"
-        When I press "Mettre à jour"
+        When I press "Enregistrer les modifications"
         Then I should see "a bien été mis à jour"

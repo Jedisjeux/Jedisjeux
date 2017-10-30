@@ -26,5 +26,5 @@ Feature: Edit article comment
         Given I am on "/articles/"
         And I follow "Critique de Vroom Vroom"
         And I follow "Modifier"
-        When I press "Mettre à jour"
+        When I press "Enregistrer les modifications"
         Then I should see "a bien été mis à jour"
