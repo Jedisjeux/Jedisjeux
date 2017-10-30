@@ -2,7 +2,6 @@
 
 namespace spec\AppBundle\Entity;
 
-use AppBundle\Entity\GamePlay;
 use AppBundle\Entity\Product;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
