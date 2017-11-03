@@ -135,6 +135,14 @@ services:
         tags:
             - { name: fob.context_service }
 
+    app.behat.context.ui.frontend.contact:
+        class: AppBundle\Behat\Context\Ui\Frontend\ContactContext
+        arguments:
+            - "@app.behat.page.frontend.contact"
+            - "@app.behat.notification_checker"
+        tags:
+            - { name: fob.context_service }
+
     app.behat.context.ui.frontend.notification:
         class: AppBundle\Behat\Context\Ui\Frontend\NotificationContext
         arguments:

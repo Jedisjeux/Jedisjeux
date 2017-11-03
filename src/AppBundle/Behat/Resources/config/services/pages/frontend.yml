@@ -1,5 +1,6 @@
 imports:
     - { resource: frontend/article.yml }
+    - { resource: frontend/contact.yml }
     - { resource: frontend/person.yml }
     - { resource: frontend/product.yml }
     - { resource: frontend/topic.yml }
