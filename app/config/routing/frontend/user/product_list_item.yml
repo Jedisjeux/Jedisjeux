@@ -1,0 +1,10 @@
+app_frontend_user_games_library:
+    methods: [GET]
+    path: /ludotheque
+    defaults:
+        _controller: app.controller.product_list_item:indexAction
+        _sylius:
+            template: frontend/user/games_library/index.html.twig
+            section: frontend
+            paginate: 300
+            grid: app_frontend_user_game_library

@@ -1,0 +1,2 @@
+app_frontend_user_product_list_item:
+    resource: "user/product_list_item.yml"
