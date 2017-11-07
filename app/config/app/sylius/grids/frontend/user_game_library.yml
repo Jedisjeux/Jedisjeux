@@ -8,4 +8,4 @@ sylius_grid:
                     class: "%app.model.product_list_item.class%"
                     repository:
                         method: createQueryBuilderForGameLibrary
-                        arguments: ["expr:service('sylius.repository.app_user').findOneByUsername($userName).getCustomer()", "%locale%"]
+                        arguments: ["expr:service('sylius.repository.customer').findOneByUsername($username).getCustomer()", "%locale%"]
