@@ -36,7 +36,7 @@ sylius_product_review:
 
 app_frontend_user:
     resource: "frontend/user.yml"
-    prefix: /utilisateurs/{userName}
+    prefix: /utilisateurs/{username}
 
 app_search:
     resource: "frontend/search.yml"
