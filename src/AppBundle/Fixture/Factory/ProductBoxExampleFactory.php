@@ -13,6 +13,7 @@ namespace AppBundle\Fixture\Factory;
 
 use AppBundle\Entity\ProductBox;
 use AppBundle\Entity\ProductBoxImage;
+use AppBundle\Entity\ProductVariant;
 use AppBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -98,7 +99,10 @@ class ProductBoxExampleFactory extends AbstractExampleFactory implements Example
         /** @var ProductBox $productBox */
         $productBox = $this->postFactory->createNew();
         $productBox->setHeight($options['height']);
-        $productBox->setProductVariant($options['product_variant']);
+
+        /** @var ProductVariant $variant */
+        $variant = $options['product_variant'];
+        $variant->setBox($productBox);
 
         $this->createImage($productBox, $options);
 
