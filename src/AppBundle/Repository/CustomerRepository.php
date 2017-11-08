@@ -13,6 +13,7 @@ namespace AppBundle\Repository;
 
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Customer\Model\CustomerInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -28,6 +29,27 @@ class CustomerRepository extends EntityRepository
             ->select('COUNT(o.id)')
             ->getQuery()
             ->getSingleScalarResult();
+    }
+
+    /**
+     * @param string $username
+     *
+     * @return null|CustomerInterface
+     */
+    public function findOneByUsername(string $username): ?CustomerInterface
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        $queryBuilder
+            ->addSelect('user')
+            ->join('o.user', 'user')
+            ->where('user.username = :username')
+            ->setParameter('username', $username);
+
+        return $queryBuilder
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
     }
 
     /**
