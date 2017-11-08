@@ -9,3 +9,6 @@ sylius_grid:
                     repository:
                         method: createQueryBuilderForGameLibrary
                         arguments: ["expr:service('sylius.repository.customer').findOneByUsername($username)", "%locale%"]
+            limits: ~
+            sorting:
+                box.height: desc
