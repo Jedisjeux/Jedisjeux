@@ -203,7 +203,13 @@ sylius_fixtures:
 
                 product_box:
                     options:
-                        random: 20
+                        custom:
+                            -
+                                product_variant: "Tigre_&_Euphrate"
+                                image: "app/Resources/fixtures/boxes/euphrat-tigris.jpg"
+                            -
+                                product_variant: "Puerto_Rico"
+                                image: "app/Resources/fixtures/boxes/puerto-rico.jpg"
 
                 product_list:
                     options:
