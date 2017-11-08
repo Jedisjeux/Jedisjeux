@@ -79,11 +79,20 @@ services:
             - "@app.repository.person"
             - "@sylius.generator.slug"
 
+    app.fixture.example_factory.product_box:
+        class: AppBundle\Fixture\Factory\ProductBoxExampleFactory
+        arguments:
+            - "@app.factory.product_box"
+            - "@app.factory.product_box_image"
+            - "@sylius.repository.product_variant"
+
     app.fixture.example_factory.product_list:
         class: AppBundle\Fixture\Factory\ProductListExampleFactory
         arguments:
             - "@app.factory.product_list"
+            - "@app.factory.product_list_item"
             - "@sylius.repository.customer"
+            - "@sylius.repository.product"
 
     app.fixture.example_factory.product_review:
         class: AppBundle\Fixture\Factory\ProductReviewExampleFactory

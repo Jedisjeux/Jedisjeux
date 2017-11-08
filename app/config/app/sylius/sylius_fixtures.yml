@@ -201,8 +201,29 @@ sylius_fixtures:
                                     <p>La reine Himiko a confié une mission prestigieuse à tous ses bâtisseurs : faire de la capitale de Yamataï la perle du royaume.</p>
                                 created_at: "now"
 
+                product_box:
+                    options:
+                        custom:
+                            -
+                                product_variant: "Tigre_&_Euphrate"
+                                image: "app/Resources/fixtures/boxes/euphrat-tigris.jpg"
+                            -
+                                product_variant: "Puerto_Rico"
+                                image: "app/Resources/fixtures/boxes/puerto-rico.jpg"
+                            -
+                                product_variant: "Shogun"
+                                image: "app/Resources/fixtures/boxes/shogun.jpg"
+
                 product_list:
                     options:
+                        custom:
+                            -
+                                code: "game_library"
+                                owner: "loic_425@example.com"
+
+                            -
+                                code: "game_library"
+                                owner: "blue@example.com"
                         random: 40
 
                 product_review:

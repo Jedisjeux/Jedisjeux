@@ -107,6 +107,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         $product->setCreatedAt($options['created_at']);
 
         $firstVariant = $product->getFirstVariant();
+        $firstVariant->setCode($product->getCode());
         $firstVariant->setReleasedAtPrecision($options['released_at_precision']);
 
         foreach ($options['designers'] as $designer) {
