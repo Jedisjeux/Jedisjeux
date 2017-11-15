@@ -96,182 +96,147 @@ class Block implements ResourceInterface
     protected $slideShowBlock;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
     /**
-     * @param string $code
-     *
-     * @return $this
+     * @param string|null $code
      */
-    public function setCode($code)
+    public function setCode(?string $code): void
     {
         $this->code = $code;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->title;
     }
 
     /**
      * @param string $title
-     *
-     * @return Block
      */
-    public function setTitle($title)
+    public function setTitle(?string $title): void
     {
         $this->title = $title;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBody()
+    public function getBody(): ?string
     {
         return $this->body;
     }
 
     /**
-     * @param string $body
-     *
-     * @return Block
+     * @param string|null $body
      */
-    public function setBody($body)
+    public function setBody(?string $body): void
     {
         $this->body = $body;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getImagePosition()
+    public function getImagePosition(): ?string
     {
         return $this->imagePosition;
     }
 
     /**
-     * @param string $imagePosition
-     *
-     * @return $this
+     * @param string|null $imagePosition
      */
-    public function setImagePosition($imagePosition)
+    public function setImagePosition(?string $imagePosition): void
     {
         $this->imagePosition = $imagePosition;
 
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClass()
+    public function getClass(): ?string
     {
         return $this->class;
     }
 
     /**
-     * @param string $class
-     *
-     * @return Block
+     * @param string|null $class
      */
-    public function setClass($class)
+    public function setClass(?string $class): void
     {
         $this->class = $class;
-
-        return $this;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getPosition()
+    public function getPosition(): ?int
     {
         return $this->position;
     }
 
     /**
-     * @param int $position
-     *
-     * @return Block
+     * @param int|null $position
      */
-    public function setPosition($position)
+    public function setPosition(?int $position): void
     {
         $this->position = $position;
-
-        return $this;
     }
 
     /**
-     * @return BlockImage
+     * @return BlockImage|null
      */
-    public function getImage()
+    public function getImage(): ?BlockImage
     {
         return $this->image;
     }
 
     /**
-     * @param BlockImage $image
-     *
-     * @return Block
+     * @param BlockImage|null $image
      */
-    public function setImage($image)
+    public function setImage(?BlockImage $image): void
     {
         $this->image = $image;
-
-        return $this;
     }
 
     /**
-     * @return Article
+     * @return Article|null
      */
-    public function getArticle()
+    public function getArticle(): ?Article
     {
         return $this->article;
     }
 
     /**
-     * @param Article $article
-     *
-     * @return Block
+     * @param Article|null $article
      */
-    public function setArticle($article)
+    public function setArticle(?Article$article): void
     {
         $this->article = $article;
-
-        return $this;
     }
 
     /**
-     * @return SlideShowBlock
+     * @return SlideShowBlock|null
      */
-    public function getSlideShowBlock(): SlideShowBlock
+    public function getSlideShowBlock(): ?SlideShowBlock
     {
         return $this->slideShowBlock;
     }
 
     /**
-     * @param SlideShowBlock $slideShowBlock
-     *
-     * @return $this
+     * @param SlideShowBlock|null $slideShowBlock
      */
-    public function setSlideShowBlock($slideShowBlock)
+    public function setSlideShowBlock(?SlideShowBlock $slideShowBlock): void
     {
         $this->slideShowBlock = $slideShowBlock;
-
-        return $this;
     }
 }
