@@ -49,13 +49,12 @@ class ArticleContext extends DefaultContext
 
             /** @var Article $article */
             $article = $this->getFactory('article', 'app')->createNew();
-            $article
-                ->setCode(isset($data['code']) ? $data['code'] : $this->faker->postcode)
-                ->setTitle(isset($data['title']) ? $data['title'] : $this->faker->text(20))
-                ->setPublishable(true)
-                ->setStatus(isset($data['status']) ? $data['status'] : Article::STATUS_PUBLISHED)
-                ->setMainTaxon($taxon)
-                ->setAuthor($author);
+            $article->setCode(isset($data['code']) ? $data['code'] : $this->faker->postcode);
+            $article->setTitle(isset($data['title']) ? $data['title'] : $this->faker->text(20));
+            $article->setPublishable(true);
+            $article->setStatus(isset($data['status']) ? $data['status'] : Article::STATUS_PUBLISHED);
+            $article->setMainTaxon($taxon);
+            $article->setAuthor($author);
 
             $manager->persist($article);
         }
