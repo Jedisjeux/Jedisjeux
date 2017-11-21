@@ -6,6 +6,7 @@ Feature: Browsing articles
 
     Background:
         Given there is customer with email "author@example.com"
+        And there are default taxonomies for articles
         And there is article "Le Jedisjeux nouveau est arrivé" written by "author@example.com"
         And there is article "Critique de Vikings Gone Wild" written by "author@example.com"
         And there is article "Critique de Mafiozoo" written by "author@example.com"
