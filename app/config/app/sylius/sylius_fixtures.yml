@@ -78,6 +78,16 @@ sylius_fixtures:
                             -
                                 code: "articles"
                                 name: "Catégories"
+                                children:
+                                    -
+                                        code: "news"
+                                        name: "Actualités"
+                                    -
+                                        code: "review-articles"
+                                        name: "Critiques"
+                                    -
+                                        code: "in-the-boxes"
+                                        name: "C'est dans la boîte"
                 person:
                     options:
                         random: 20

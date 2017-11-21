@@ -5,6 +5,7 @@ services:
             - "@app.factory.article"
             - "@app.factory.article_image"
             - "@sylius.repository.customer"
+            - "@sylius.repository.taxon"
 
     app.fixture.example_factory.app_user:
         class: AppBundle\Fixture\Factory\AppUserExampleFactory
