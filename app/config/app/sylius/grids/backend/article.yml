@@ -21,6 +21,10 @@ sylius_grid:
                     type: string
                     label: sylius.ui.title
                     sortable: title
+                category:
+                    type: string
+                    label: sylius.ui.category
+                    path: mainTaxon
                 status:
                     type: twig
                     label: sylius.ui.status
