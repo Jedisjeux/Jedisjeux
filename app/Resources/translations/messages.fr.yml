@@ -113,6 +113,7 @@ app:
         player_count: Nombre de joueurs
         posts: Messages
         preview: Aperçu
+        previews: Previews
         prices: Tarifs
         price_list: Liste de prix
         product_boxes: Boites de jeu
@@ -128,6 +129,7 @@ app:
         redirection_count: Nombre de redirections
         referer: Référent
         registered_at: Inscrit le
+        report_articles: Reportages
         request_placeholder: Recherche....
         results_of_your_query: Résultats de votre recherche
         reviewer: Relecteur
@@ -158,6 +160,7 @@ app:
         utf8: Utf8
         view_details: Voir les détails
         wishes: Envies
+        videos: Vidéos
         view_website: Voir le site
 sylius:
     form:
