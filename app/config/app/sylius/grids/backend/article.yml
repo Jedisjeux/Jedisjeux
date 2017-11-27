@@ -47,11 +47,24 @@ sylius_grid:
                 status:
                     type: status
                     form_options:
+                        label: sylius.ui.status
                         statuses:
                             sylius.ui.new: new
                             sylius.ui.pending_review: pending_review
                             sylius.ui.pending_publication: pending_publication
                             sylius.ui.published: published
+                mainTaxon:
+                    type: taxon
+                    form_options:
+                        label: sylius.ui.category
+                        taxons:
+                            app.ui.news: news
+                            app.ui.review_articles: review-articles
+                            app.ui.previews: previews
+                            app.ui.in_the_boxes: in-the-boxes
+                            app.ui.report_articles: report-articles
+                            app.ui.interviews: interviews
+                            app.ui.videos: videos
             actions:
                 main:
                     create:

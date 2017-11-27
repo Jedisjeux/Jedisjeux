@@ -61,7 +61,9 @@ app:
         image_on_the_top_side: Image en haut
         image_position: Position de l'image
         internal_name: Nom interne
+        interviews: Interviews
         introduction: Introduction
+        in_the_boxes: C'est dans la boîte
         last_used_at: Dernière utilisation
         lifetime_rating: Note de la durée de vie
         list_articles: Liste des articles
@@ -99,6 +101,7 @@ app:
         new_redirection: Nouvelle redirection
         new_post: Nouveau message
         new_string_block: Nouveau bloc de chaîne
+        news: Actualités
         normal: Normal
         not_found_pages: Pages non trouvées
         overview_of_your_website: Aperçu de votre site web
@@ -110,6 +113,7 @@ app:
         player_count: Nombre de joueurs
         posts: Messages
         preview: Aperçu
+        previews: Previews
         prices: Tarifs
         price_list: Liste de prix
         product_boxes: Boites de jeu
@@ -125,9 +129,11 @@ app:
         redirection_count: Nombre de redirections
         referer: Référent
         registered_at: Inscrit le
+        report_articles: Reportages
         request_placeholder: Recherche....
         results_of_your_query: Résultats de votre recherche
         reviewer: Relecteur
+        review_articles: Tests de jeu
         rules_rating: Note des règles
         see_later: A regarder plus tard
         select_people: Sélectionner les personnes
@@ -154,6 +160,7 @@ app:
         utf8: Utf8
         view_details: Voir les détails
         wishes: Envies
+        videos: Vidéos
         view_website: Voir le site
 sylius:
     form:
