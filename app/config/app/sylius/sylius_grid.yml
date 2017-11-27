@@ -65,3 +65,4 @@ sylius_grid:
             duration: 'frontend/grid/filter/duration.html.twig'
             status: "backend/grid/filter/status.html.twig"
             player_count: 'frontend/grid/filter/playerCount.html.twig'
+            taxon: "backend/grid/filter/taxon.html.twig"

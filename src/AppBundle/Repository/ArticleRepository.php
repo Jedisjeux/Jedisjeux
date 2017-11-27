@@ -58,7 +58,8 @@ class ArticleRepository extends EntityRepository
     public function createListQueryBuilder($productId = null)
     {
         $queryBuilder = $this->createQueryBuilder('o')
-            ->leftJoin('o.product', 'product');
+            ->leftJoin('o.product', 'product')
+            ->leftJoin('o.mainTaxon', 'mainTaxon');
 
         if (null !== $productId) {
             $queryBuilder
