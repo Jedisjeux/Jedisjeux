@@ -1,4 +1,6 @@
-<div class="content">
+{% set locale =  app.request.locale %}
+
+<div class="content" data-locale="{{ locale }}">
     {{ form_row(form.code) }}
     {{ form_row(form.parent) }}
     {{ form_row(form.translations['fr_FR'].name) }}
