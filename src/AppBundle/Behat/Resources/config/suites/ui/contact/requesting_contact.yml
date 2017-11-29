@@ -1,0 +1,13 @@
+default:
+    suites:
+        ui_customer_requesting_contact:
+            contexts_services:
+                - app.behat.context.hook.doctrine_orm
+
+                - app.behat.context.transform.shared_storage
+
+                - app.behat.context.setup.admin_security
+
+                - app.behat.context.ui.frontend.contact
+            filters:
+                tags: "@requesting_contact && @ui"

@@ -13,6 +13,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
@@ -26,7 +27,7 @@ class ProductBox implements ResourceInterface
     use IdentifiableTrait, Timestampable;
 
     /**
-     * @var ProductVariant|null
+     * @var ProductVariantInterface|null
      *
      * @ORM\OneToOne(targetEntity="ProductVariant", mappedBy="box")
      */
@@ -87,7 +88,7 @@ class ProductBox implements ResourceInterface
     }
 
     /**
-     * @return ProductVariant|null
+     * @return ProductVariantInterface|null
      */
     public function getProductVariant()
     {
@@ -95,10 +96,10 @@ class ProductBox implements ResourceInterface
     }
 
     /**
-     * @param ProductVariant|null $productVariant
+     * @param ProductVariantInterface|null $productVariant
      * @return ProductBox
      */
-    public function setProductVariant(ProductVariant $productVariant = null)
+    public function setProductVariant(ProductVariantInterface $productVariant = null)
     {
         $this->productVariant = $productVariant;
 

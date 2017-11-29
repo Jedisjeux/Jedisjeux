@@ -47,7 +47,7 @@ class ContactRequestType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'app_contact_request';
     }

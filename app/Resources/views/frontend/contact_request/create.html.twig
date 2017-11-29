@@ -18,7 +18,7 @@
             <button type="submit"
                     class="btn btn-primary">
                 <span class="glyphicon glyphicon-ok"></span>
-                {{ 'label.send'|trans }}
+                {{ 'sylius.ui.send'|trans }}
             </button>
             {{ action.cancelButton() }}
         </div>
@@ -30,8 +30,4 @@
         <p>Jedisjeux</p>
         {{ sonata_block_render({'name': '/cms/content/head-office'}, {'template': 'frontend/content/block/block_content.html.twig'}) }}
     </div>
-
-
-
-
 {% endblock container %}

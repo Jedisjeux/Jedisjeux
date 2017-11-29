@@ -152,6 +152,21 @@ services:
         tags:
             - { name: fob.context_service }
 
+    app.behat.context.ui.frontend.contact:
+        class: AppBundle\Behat\Context\Ui\Frontend\ContactContext
+        arguments:
+            - "@app.behat.page.frontend.contact"
+            - "@app.behat.notification_checker"
+        tags:
+            - { name: fob.context_service }
+
+    app.behat.context.ui.frontend.notification:
+        class: AppBundle\Behat\Context\Ui\Frontend\NotificationContext
+        arguments:
+            - "@app.behat.notification_checker"
+        tags:
+            - { name: fob.context_service }
+
     app.behat.context.ui.frontend.product:
         class: AppBundle\Behat\Context\Ui\Frontend\ProductContext
         arguments:
@@ -169,3 +184,12 @@ services:
         tags:
             - { name: fob.context_service }
 
+    app.behat.context.ui.frontend.topic:
+        class: AppBundle\Behat\Context\Ui\Frontend\TopicContext
+        arguments:
+            - "@app.behat.page.frontend.topic.index"
+            - "@app.behat.page.frontend.topic.index_by_taxon"
+            - "@app.behat.page.frontend.topic.create"
+            - "@app.behat.page.frontend.topic.update"
+        tags:
+            - { name: fob.context_service }

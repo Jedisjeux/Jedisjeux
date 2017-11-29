@@ -99,12 +99,38 @@ class TaxonContext implements Context
     }
 
     /**
+     * @Given there are default taxonomies for topics
+     */
+    public function thereAreDefaultTaxonomiesForTopics()
+    {
+        $taxonCodes = [
+            Taxon::CODE_FORUM,
+        ];
+
+        $this->createDefaultTaxonomies($taxonCodes);
+    }
+
+    /**
      * @Given /^there are (mechanisms|themes) "([^"]+)" and "([^"]+)"$/
      */
     public function thereAreTaxonsAnd($taxonCode, $firstTaxonName, $secondTaxonName)
     {
         /** @var TaxonInterface $taxon */
         $taxon = $this->sharedStorage->get(sprintf('taxonomy_%s', $taxonCode));
+
+        $this->taxonFactory->create(['name' => $firstTaxonName, 'parent' => $taxon]);
+        $this->taxonFactory->create(['name' => $secondTaxonName, 'parent' => $taxon]);
+
+        $this->manager->flush($taxon);
+    }
+
+    /**
+     * @Given /^there are topic categories "([^"]+)" and "([^"]+)"$/
+     */
+    public function thereAreTopicCategoriesAnd($firstTaxonName, $secondTaxonName)
+    {
+        /** @var TaxonInterface $taxon */
+        $taxon = $this->sharedStorage->get('taxonomy_forum');
 
         $this->taxonFactory->create(['name' => $firstTaxonName, 'parent' => $taxon]);
         $this->taxonFactory->create(['name' => $secondTaxonName, 'parent' => $taxon]);

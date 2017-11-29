@@ -1,4 +1,6 @@
 imports:
+    - { resource: 'grids/api/product.yml' }
+
     - { resource: 'grids/backend/article.yml' }
     - { resource: 'grids/backend/article_for_product.yml' }
     - { resource: 'grids/backend/article_review.yml' }
@@ -32,6 +34,7 @@ imports:
     - { resource: 'grids/frontend/person_from_taxon.yml' }
     - { resource: 'grids/frontend/product.yml' }
     - { resource: 'grids/frontend/product_list_item.yml' }
+    - { resource: 'grids/frontend/user_game_library.yml' }
 
 sylius_grid:
     templates:
@@ -66,3 +69,4 @@ sylius_grid:
             duration: 'frontend/grid/filter/duration.html.twig'
             status: "backend/grid/filter/status.html.twig"
             player_count: 'frontend/grid/filter/playerCount.html.twig'
+            taxon: "backend/grid/filter/taxon.html.twig"

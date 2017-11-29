@@ -111,6 +111,14 @@ services:
         tags:
             - { name: sylius_fixtures.fixture }
 
+    app.fixture.product_box:
+        class: AppBundle\Fixture\ProductBoxFixture
+        arguments:
+            - "@app.manager.product_box"
+            - "@app.fixture.example_factory.product_box"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
     app.fixture.product_list:
         class: AppBundle\Fixture\ProductListFixture
         arguments:

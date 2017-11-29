@@ -424,11 +424,21 @@ class Product extends BaseProduct implements ReviewableInterface
     /**
      * @param TaxonInterface $taxon
      *
+     * @return bool
+     */
+    public function hasTaxon(TaxonInterface $taxon): bool
+    {
+        return $this->taxons->contains($taxon);
+    }
+
+    /**
+     * @param TaxonInterface $taxon
+     *
      * @return $this
      */
     public function addTaxon(TaxonInterface $taxon)
     {
-        if (!$this->taxons->contains($taxon)) {
+        if (!$this->hasTaxon($taxon)) {
             $this->taxons->add($taxon);
         }
 
@@ -769,7 +779,7 @@ class Product extends BaseProduct implements ReviewableInterface
      */
     public function removeReview(ReviewInterface $review): void
     {
-        $this->reviews->remove($review);
+        $this->reviews->removeElement($review);
     }
 
     /**

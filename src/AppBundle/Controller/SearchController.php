@@ -156,7 +156,9 @@ class SearchController extends Controller
                     'value' => $entity->getUsername(),
                     'label' => $entity->getUsername(),
                     'image' => (null === $entity->getCustomer()->getAvatar()) ? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : $this->get('liip_imagine.cache.manager')->getBrowserPath($entity->getCustomer()->getAvatar()->getWebPath(), 'thumbnail'),
-                    'href' => "#",
+                    'href' => $this->generateUrl('sylius_frontend_user_show', [
+                        'username' => $entity->getUsernameCanonical()
+                    ]),
                 );
             }
 

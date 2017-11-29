@@ -1,0 +1,14 @@
+sylius_grid:
+    grids:
+        app_frontend_user_game_library:
+            extends: app_frontend_game_library
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%app.model.product_list_item.class%"
+                    repository:
+                        method: createQueryBuilderForGameLibrary
+                        arguments: ["expr:service('sylius.repository.customer').findOneByUsername($username)", "%locale%"]
+            limits: ~
+            sorting:
+                box.height: desc

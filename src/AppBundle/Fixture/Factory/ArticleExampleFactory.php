@@ -20,6 +20,8 @@ use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -44,6 +46,11 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
     private $customerRepository;
 
     /**
+     * @var TaxonRepositoryInterface
+     */
+    private $taxonRepository;
+
+    /**
      * @var \Faker\Generator
      */
     private $faker;
@@ -57,16 +64,19 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
      * @param FactoryInterface $articleFactory
      * @param FactoryInterface $articleImageFactory
      * @param RepositoryInterface $customerRepository
+     * @param TaxonRepositoryInterface $taxonRepository
      */
     public function __construct(
         FactoryInterface $articleFactory,
         FactoryInterface $articleImageFactory,
-        RepositoryInterface $customerRepository
+        RepositoryInterface $customerRepository,
+        TaxonRepositoryInterface $taxonRepository
     )
     {
         $this->articleFactory = $articleFactory;
         $this->articleImageFactory = $articleImageFactory;
         $this->customerRepository = $customerRepository;
+        $this->taxonRepository = $taxonRepository;
 
         $this->faker = \Faker\Factory::create('fr_FR');
         $this->optionsResolver = new OptionsResolver();
@@ -89,6 +99,7 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
         $article->setPublishStartDate($options['publish_start_date']);
         $article->setStatus($options['status']);
         $article->setAuthor($options['author']);
+        $article->setMainTaxon($options['main_taxon']);
 
         $this->createImage($article, $options);
 
@@ -154,6 +165,10 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
 
             ->setDefault('author', LazyOption::randomOne($this->customerRepository))
             ->setAllowedTypes('author', ['null', 'string', CustomerInterface::class])
-            ->setNormalizer('author', LazyOption::findOneBy($this->customerRepository, 'email'));
+            ->setNormalizer('author', LazyOption::findOneBy($this->customerRepository, 'email'))
+
+            ->setDefault('main_taxon', LazyOption::randomOne($this->taxonRepository))
+            ->setAllowedTypes('main_taxon', ['null', 'string', TaxonInterface::class])
+            ->setNormalizer('main_taxon', LazyOption::findOneBy($this->taxonRepository, 'code'));
     }
 }

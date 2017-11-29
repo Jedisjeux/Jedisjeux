@@ -255,11 +255,21 @@ class GamePlay implements ResourceInterface
     /**
      * @param GamePlayImage $image
      *
+     * @return bool
+     */
+    public function hasImage(GamePlayImage $image):bool
+    {
+        return $this->images->contains($image);
+    }
+
+    /**
+     * @param GamePlayImage $image
+     *
      * @return $this
      */
     public function addImage(GamePlayImage $image)
     {
-        if (!$this->images->contains($image)) {
+        if (!$this->hasImage($image)) {
             $image->setGamePlay($this);
             $this->images->add($image);
         }
@@ -290,11 +300,21 @@ class GamePlay implements ResourceInterface
     /**
      * @param Player $player
      *
+     * @return bool
+     */
+    public function hasPlayer(Player $player):bool
+    {
+        return $this->players->contains($player);
+    }
+
+    /**
+     * @param Player $player
+     *
      * @return $this
      */
     public function addPlayer(Player $player)
     {
-        if (!$this->players->contains($player)) {
+        if (!$this->hasPlayer($player)) {
             $player->setGamePlay($this);
             $this->players->add($player);
         }
@@ -309,7 +329,7 @@ class GamePlay implements ResourceInterface
      */
     public function removePlayer(Player $player)
     {
-        $this->players->remove($player);
+        $this->players->removeElement($player);
 
         return $this;
     }

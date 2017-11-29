@@ -13,6 +13,7 @@ namespace AppBundle\Fixture\Factory;
 
 use AppBundle\Entity\Product;
 use AppBundle\Entity\ProductList;
+use AppBundle\Entity\ProductListItem;
 use AppBundle\Entity\ProductVariant;
 use AppBundle\Entity\ProductVariantImage;
 use AppBundle\Fixture\OptionsResolver\LazyOption;
@@ -36,9 +37,19 @@ class ProductListExampleFactory extends AbstractExampleFactory implements Exampl
     private $productListFactory;
 
     /**
+     * @var FactoryInterface
+     */
+    private $productListItemFactory;
+
+    /**
      * @var RepositoryInterface
      */
     protected $customerRepository;
+
+    /**
+     * @var RepositoryInterface
+     */
+    private $productRepository;
 
     /**
      * @var \Faker\Generator
@@ -52,15 +63,21 @@ class ProductListExampleFactory extends AbstractExampleFactory implements Exampl
 
     /**
      * @param FactoryInterface $productListFactory
+     * @param FactoryInterface $productListItemFactory
      * @param RepositoryInterface $customerRepository
+     * @param RepositoryInterface $productRepository
      */
     public function __construct(
         FactoryInterface $productListFactory,
-        RepositoryInterface $customerRepository
+        FactoryInterface $productListItemFactory,
+        RepositoryInterface $customerRepository,
+        RepositoryInterface $productRepository
     )
     {
         $this->productListFactory = $productListFactory;
+        $this->productListItemFactory = $productListItemFactory;
         $this->customerRepository = $customerRepository;
+        $this->productRepository = $productRepository;
 
         $this->faker = \Faker\Factory::create('fr_FR');
         $this->optionsResolver = new OptionsResolver();
@@ -88,7 +105,10 @@ class ProductListExampleFactory extends AbstractExampleFactory implements Exampl
 
             ->setDefault('owner', LazyOption::randomOne($this->customerRepository))
             ->setAllowedTypes('owner', ['null', 'string', CustomerInterface::class])
-            ->setNormalizer('owner', LazyOption::findOneBy($this->customerRepository, 'email'));
+            ->setNormalizer('owner', LazyOption::findOneBy($this->customerRepository, 'email'))
+
+            ->setDefault('products', LazyOption::randomOnes($this->productRepository, 10))
+        ;
     }
 
     /**
@@ -104,6 +124,18 @@ class ProductListExampleFactory extends AbstractExampleFactory implements Exampl
         $productList->setCode($options['code']);
         $productList->setOwner($options['owner']);
 
+        $this->createItems($productList, $options['products']);
+
         return $productList;
+    }
+
+    public function createItems(ProductList $list, array $products)
+    {
+        foreach ($products as $product) {
+            /** @var ProductListItem $item */
+            $item = $this->productListItemFactory->createNew();
+            $item->setProduct($product);
+            $list->addItem($item);
+        }
     }
 }

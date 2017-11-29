@@ -1,0 +1,14 @@
+sylius_frontend_user_show:
+    methods: [GET]
+    path: ""
+    defaults:
+        _controller: sylius.controller.customer:showAction
+        _sylius:
+            repository:
+                method: findOneByUsername
+                arguments:
+                    - $username
+            template: frontend/user/show.html.twig
+
+app_frontend_user_product_list_item:
+    resource: "user/product_list_item.yml"

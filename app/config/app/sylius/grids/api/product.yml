@@ -1,0 +1,16 @@
+sylius_grid:
+    grids:
+        sylius_api_product:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.product.class%"
+                    repository:
+                        method: createListQueryBuilder
+                        arguments: ["%locale%"]
+            sorting:
+                name: asc
+            fields:
+                name:
+                    type: string
+                    sortable: translation.name

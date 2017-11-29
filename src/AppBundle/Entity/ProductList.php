@@ -174,6 +174,7 @@ class ProductList implements ResourceInterface
     public function addItem(ProductListItem $item)
     {
         if (!$this->hasItem($item)) {
+            $item->setList($this);
             $this->items->add($item);
         }
 

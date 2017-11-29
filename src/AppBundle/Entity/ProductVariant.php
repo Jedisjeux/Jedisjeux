@@ -148,13 +148,11 @@ class ProductVariant extends BaseProductVariant
     /**
      * @param ProductVariantImage $image
      *
-     * @return $this
+     * @return bool
      */
-    public function removeImage(ProductVariantImage $image)
+    public function hasImage(ProductVariantImage $image):bool
     {
-        $this->images->remove($image);
-
-        return $this;
+        return $this->images->contains($image);
     }
 
     /**
@@ -164,10 +162,22 @@ class ProductVariant extends BaseProductVariant
      */
     public function addImage(ProductVariantImage $image)
     {
-        if (!$this->images->contains($image)) {
+        if (!$this->hasImage($image)) {
             $image->setVariant($this);
             $this->images->add($image);
         }
+
+        return $this;
+    }
+
+    /**
+     * @param ProductVariantImage $image
+     *
+     * @return $this
+     */
+    public function removeImage(ProductVariantImage $image)
+    {
+        $this->images->removeElement($image);
 
         return $this;
     }
@@ -271,11 +281,21 @@ class ProductVariant extends BaseProductVariant
     /**
      * @param Person $designer
      *
+     * @return bool
+     */
+    public function hasDesigner(Person $designer):bool
+    {
+        return $this->designers->contains($designer);
+    }
+
+    /**
+     * @param Person $designer
+     *
      * @return $this
      */
-    public function addDesigner($designer)
+    public function addDesigner(Person $designer)
     {
-        if (!$this->designers->contains($designer)) {
+        if (!$this->hasDesigner($designer)) {
             $this->designers->add($designer);
         }
 
@@ -305,11 +325,21 @@ class ProductVariant extends BaseProductVariant
     /**
      * @param Person $artist
      *
+     * @return bool
+     */
+    public function hasArtist(Person $artist):bool
+    {
+        return $this->artists->contains($artist);
+    }
+
+    /**
+     * @param Person $artist
+     *
      * @return $this
      */
     public function addArtist($artist)
     {
-        if (!$this->artists->contains($artist)) {
+        if (!$this->hasArtist($artist)) {
             $this->artists->add($artist);
         }
 
@@ -334,6 +364,16 @@ class ProductVariant extends BaseProductVariant
     public function getPublishers()
     {
         return $this->publishers;
+    }
+
+    /**
+     * @param Person $publisher
+     *
+     * @return bool
+     */
+    public function hasPublisher(Person $publisher):bool
+    {
+        return $this->publishers->contains($publisher);
     }
 
     /**
