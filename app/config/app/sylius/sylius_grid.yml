@@ -27,6 +27,7 @@ imports:
   - { resource: 'grids/frontend/game_library.yml' }
   - { resource: 'grids/frontend/game_play.yml' }
   - { resource: 'grids/frontend/game_play_from_author.yml' }
+  - { resource: 'grids/frontend/most_played.yml' }
   - { resource: 'grids/frontend/person.yml' }
   - { resource: 'grids/frontend/person_from_taxon.yml' }
   - { resource: 'grids/frontend/product.yml' }
