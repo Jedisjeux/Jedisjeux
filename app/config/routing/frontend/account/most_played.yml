@@ -1,0 +1,9 @@
+sylius_frontend_most_played:
+    methods: [GET]
+    path: /mes-jeux-les-plus-joues/
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            template: frontend/account/most_played/index.html.twig
+            paginate: 12
+            grid: sylius_frontend_most_played
