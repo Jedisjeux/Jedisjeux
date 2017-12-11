@@ -71,6 +71,13 @@ services:
             tags:
                 - { name: fob.context_service }
 
+        app.behat.context.transform.festival_list:
+            class: AppBundle\Behat\Context\Transform\FestivalListContext
+            arguments:
+                - "@__symfony__.app.repository.festival_list"
+            tags:
+                - { name: fob.context_service }
+
         app.behat.context.transform.taxon:
             class: AppBundle\Behat\Context\Transform\TaxonContext
             arguments:

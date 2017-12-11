@@ -5,6 +5,12 @@
 
 {% block container %}
     <br/>
+
+    {{ render(url('app_frontend_partial_festival_list_latest', {
+        'template': 'frontend/festival_list/_homepage.html.twig',
+        'count': 1,
+    })) }}
+
     <div class="col-md-8">
 
         {% include "layout/_flashes.html.twig" %}
@@ -46,7 +52,6 @@
             </div>
 
         </div>
-
 
         <h4 class="mag-head"><a href="{{ path('sylius_product_index') }}"><i class="fa fa-puzzle-piece color"></i> Derniers jeux ajoutés</a></h4>
 

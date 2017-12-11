@@ -275,3 +275,14 @@ sylius_fixtures:
                 redirection:
                     options:
                         random: 20
+
+                festival_list:
+                    options:
+                        random: 5
+                        custom:
+                            -
+                                name: Essen 2017
+
+                festival_list_item:
+                    options:
+                        random: 100

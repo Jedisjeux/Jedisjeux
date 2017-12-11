@@ -2157,6 +2157,10 @@ scss-tokenizer@^0.2.3:
     js-base64 "^2.1.8"
     source-map "^0.4.2"
 
+semantic-ui-calendar@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/semantic-ui-calendar/-/semantic-ui-calendar-0.0.8.tgz#ae16504e4d8016cac5ba9a00ad8ccd4a430de3ef"
+
 select2@^4.0.4:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/select2/-/select2-4.0.4.tgz#a18a628785f98d13999971ae95d8d7e57268076b"

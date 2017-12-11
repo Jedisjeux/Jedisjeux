@@ -34,6 +34,18 @@ services:
             - "@sylius.repository.product"
             - "@app.repository.dealer"
 
+    app.fixture.example_factory.festival_list:
+        class: AppBundle\Fixture\Factory\FestivalListExampleFactory
+        arguments:
+            - "@app.factory.festival_list"
+
+    app.fixture.example_factory.festival_list_item:
+        class: AppBundle\Fixture\Factory\FestivalListItemExampleFactory
+        arguments:
+            - "@app.factory.festival_list_item"
+            - "@sylius.repository.product"
+            - "@app.repository.festival_list"
+
     app.fixture.example_factory.game_play:
         class: AppBundle\Fixture\Factory\GamePlayExampleFactory
         arguments:

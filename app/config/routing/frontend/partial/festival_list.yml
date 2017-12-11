@@ -1,0 +1,25 @@
+app_frontend_partial_festival_list_show_by_slug:
+    path: /by-slug/{slug}
+    methods: [GET]
+    defaults:
+        _controller: app.controller.festival_list:showAction
+        _sylius:
+            template: $template
+            repository:
+                method: findOneBySlug
+                arguments:
+                    - $slug
+    requirements:
+        slug: .+
+
+app_frontend_partial_festival_list_latest:
+    path: /latest/{count}
+    methods: [GET]
+    defaults:
+        _controller: app.controller.festival_list:indexAction
+        _sylius:
+            template: $template
+            repository:
+                method: findLatest
+                arguments:
+                    - $count

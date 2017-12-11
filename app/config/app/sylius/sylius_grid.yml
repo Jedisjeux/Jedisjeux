@@ -1,38 +1,41 @@
 imports:
-  - { resource: 'grids/api/product.yml' }
+    - { resource: 'grids/api/product.yml' }
 
-  - { resource: 'grids/backend/article.yml' }
-  - { resource: 'grids/backend/article_for_product.yml' }
-  - { resource: 'grids/backend/article_review.yml' }
-  - { resource: 'grids/backend/contact_request.yml' }
-  - { resource: 'grids/backend/customer.yml' }
-  - { resource: 'grids/backend/customer_group.yml' }
-  - { resource: 'grids/backend/dealer.yml' }
-  - { resource: 'grids/backend/dealer_price.yml' }
-  - { resource: 'grids/backend/game_play.yml' }
-  - { resource: 'grids/backend/not_found_page.yml' }
-  - { resource: 'grids/backend/person.yml' }
-  - { resource: 'grids/backend/post.yml' }
-  - { resource: 'grids/backend/product.yml' }
-  - { resource: 'grids/backend/product_association_type.yml' }
-  - { resource: 'grids/backend/product_list.yml' }
-  - { resource: 'grids/backend/product_box.yml' }
-  - { resource: 'grids/backend/product_review.yml' }
-  - { resource: 'grids/backend/product_variant.yml' }
-  - { resource: 'grids/backend/redirection.yml' }
-  - { resource: 'grids/backend/root_taxon.yml' }
-  - { resource: 'grids/backend/taxon_from_root.yml' }
-  - { resource: 'grids/backend/topic.yml' }
+    - { resource: 'grids/backend/article.yml' }
+    - { resource: 'grids/backend/article_for_product.yml' }
+    - { resource: 'grids/backend/article_review.yml' }
+    - { resource: 'grids/backend/contact_request.yml' }
+    - { resource: 'grids/backend/customer.yml' }
+    - { resource: 'grids/backend/customer_group.yml' }
+    - { resource: 'grids/backend/dealer.yml' }
+    - { resource: 'grids/backend/dealer_price.yml' }
+    - { resource: 'grids/backend/festival_list.yml' }
+    - { resource: 'grids/backend/festival_list_item.yml' }
+    - { resource: 'grids/backend/game_play.yml' }
+    - { resource: 'grids/backend/not_found_page.yml' }
+    - { resource: 'grids/backend/person.yml' }
+    - { resource: 'grids/backend/post.yml' }
+    - { resource: 'grids/backend/product.yml' }
+    - { resource: 'grids/backend/product_association_type.yml' }
+    - { resource: 'grids/backend/product_list.yml' }
+    - { resource: 'grids/backend/product_box.yml' }
+    - { resource: 'grids/backend/product_review.yml' }
+    - { resource: 'grids/backend/product_variant.yml' }
+    - { resource: 'grids/backend/redirection.yml' }
+    - { resource: 'grids/backend/root_taxon.yml' }
+    - { resource: 'grids/backend/taxon_from_root.yml' }
+    - { resource: 'grids/backend/topic.yml' }
 
-  - { resource: 'grids/frontend/game_library.yml' }
-  - { resource: 'grids/frontend/game_play.yml' }
-  - { resource: 'grids/frontend/game_play_from_author.yml' }
-  - { resource: 'grids/frontend/most_played.yml' }
-  - { resource: 'grids/frontend/person.yml' }
-  - { resource: 'grids/frontend/person_from_taxon.yml' }
-  - { resource: 'grids/frontend/product.yml' }
-  - { resource: 'grids/frontend/product_list_item.yml' }
-  - { resource: 'grids/frontend/user_game_library.yml' }
+    - { resource: 'grids/frontend/festival_list_item.yml' }
+    - { resource: 'grids/frontend/game_library.yml' }
+    - { resource: 'grids/frontend/game_play.yml' }
+    - { resource: 'grids/frontend/game_play_from_author.yml' }
+    - { resource: 'grids/frontend/most_played.yml' }
+    - { resource: 'grids/frontend/person.yml' }
+    - { resource: 'grids/frontend/person_from_taxon.yml' }
+    - { resource: 'grids/frontend/product.yml' }
+    - { resource: 'grids/frontend/product_list_item.yml' }
+    - { resource: 'grids/frontend/user_game_library.yml' }
 
 sylius_grid:
     templates:
@@ -49,6 +52,7 @@ sylius_grid:
             create_product: "backend/product/grid/action/createProduct.html.twig"
             manage_articles: "backend/product/grid/action/manageArticles.html.twig"
             manage_article_reviews: "backend/article/grid/action/manageReviews.html.twig"
+            manage_festival_list_items: "backend/festival_list/grid/action/manageFestivalListItems.html.twig"
             manage_variants: "backend/product/grid/action/manageVariants.html.twig"
             create_taxon_for_parent: "backend/taxon/grid/action/createForParent.html.twig"
             list_posts: "backend/topic/grid/action/posts.html.twig"
