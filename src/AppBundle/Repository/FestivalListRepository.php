@@ -25,9 +25,19 @@ class FestivalListRepository extends EntityRepository
      */
     public function findLatest($count)
     {
-        return $this->createQueryBuilder('o')
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        $queryBuilder
+            ->andWhere($queryBuilder->expr()->gte(':today', 'o.startAt'))
+            ->andWhere($queryBuilder->expr()->orX(
+                $queryBuilder->expr()->lt(':today', 'o.endAt'),
+                $queryBuilder->expr()->isNull('o.endAt')
+            ))
             ->addOrderBy('o.createdAt', 'DESC')
             ->setMaxResults($count)
+            ->setParameter('today', (new \DateTime('today'))->format('Y-m-d'));
+
+        return $queryBuilder
             ->getQuery()
             ->getResult();
     }

@@ -77,6 +77,13 @@ class FestivalList implements ResourceInterface
     protected $endAt;
 
     /**
+     * @var FestivalListImage|null
+     *
+     * @ORM\ManyToOne(targetEntity="FestivalListImage", cascade={"persist"})
+     */
+    protected $image;
+
+    /**
      * @var Collection|FestivalListItem[]
      */
     protected $items;
@@ -208,6 +215,22 @@ class FestivalList implements ResourceInterface
         $this->endAt = $endAt;
 
         return $this;
+    }
+
+    /**
+     * @return FestivalListImage|null
+     */
+    public function getImage(): ?FestivalListImage
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param FestivalListImage|null $image
+     */
+    public function setImage(?FestivalListImage $image): void
+    {
+        $this->image = $image;
     }
 
     /**

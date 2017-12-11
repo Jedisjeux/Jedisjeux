@@ -35,6 +35,10 @@ class FestivalListType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'sylius.ui.name',
             ])
+            ->add('image', FestivalListImageType::class, [
+                'label' => false,
+                'file_label' => 'sylius.ui.image',
+            ])
             ->add('description', CKEditorType::class, [
                 'label' => 'sylius.ui.description',
                 'required' => false,

@@ -3,6 +3,7 @@
 namespace spec\AppBundle\Entity;
 
 use AppBundle\Entity\FestivalList;
+use AppBundle\Entity\FestivalListImage;
 use AppBundle\Entity\FestivalListItem;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
@@ -62,6 +63,17 @@ class FestivalListSpec extends ObjectBehavior
         $this->setEndAt($endAt);
 
         $this->getEndAt()->shouldReturn($endAt);
+    }
+
+    function it_has_no_image_by_default()
+    {
+        $this->getImage()->shouldReturn(null);
+    }
+
+    function its_image_is_mutable(FestivalListImage $image)
+    {
+        $this->setImage($image);
+        $this->getImage()->shouldReturn($image);
     }
 
     function its_products_is_collection()
