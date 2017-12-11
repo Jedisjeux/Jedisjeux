@@ -1,0 +1,24 @@
+sylius_grid:
+    grids:
+        sylius_frontend_most_played:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.product.class%"
+                    repository:
+                        method: createListOfMostPlayedQueryBuilder
+                        arguments:
+                            locale: "%locale%"
+                            author: "expr:service('sylius.context.customer').getCustomer()"
+            limits: ~
+            fields:
+                createdAt:
+                    type: string
+                    sortable: ~
+                averageRating:
+                    type: string
+                    sortable: ~
+                variant.releasedAt:
+                    path: variant.releasedAt
+                    type: string
+                    sortable: ~
