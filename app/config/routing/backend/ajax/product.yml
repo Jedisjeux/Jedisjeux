@@ -19,7 +19,7 @@ sylius_admin_ajax_product_by_name_phrase:
     defaults:
         _controller: sylius.controller.product:indexAction
         _sylius:
-            serialization_groups: [Default]
+            serialization_groups: [Autocomplete]
             repository:
                 method: findByNamePart
                 arguments:

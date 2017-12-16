@@ -18,7 +18,9 @@ use Sylius\Component\Product\Model\ProductTranslation as BaseProductTranslation;
  * @author Loïc Frémont <loic@mobizel.com>
  *
  * @ORM\Entity
- * @ORM\Table(name="sylius_product_translation")
+ * @ORM\Table(name="sylius_product_translation", indexes={
+ *      @ORM\Index(name="name_idx", columns={"name"})
+ * })
  */
 class ProductTranslation extends BaseProductTranslation
 {

@@ -894,8 +894,18 @@ class Product extends BaseProduct implements ReviewableInterface
      * {@inheritdoc}
      *
      * @JMS\VirtualProperty
-     * @JMS\SerializedName("name")
-     * @JMS\Groups({"Default"})
+     * @JMS\Groups({"Default", "Autocomplete"})
+     */
+    public function getCode(): ?string
+    {
+        return parent::getCode();
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @JMS\VirtualProperty
+     * @JMS\Groups({"Default", "Autocomplete"})
      */
     public function getName(): ?string
     {
@@ -906,7 +916,6 @@ class Product extends BaseProduct implements ReviewableInterface
      * {@inheritdoc}
      *
      * @JMS\VirtualProperty
-     * @JMS\SerializedName("slug")
      * @JMS\Groups({"Default"})
      */
     public function getSlug(): ?string
