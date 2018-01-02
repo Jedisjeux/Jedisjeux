@@ -51,47 +51,39 @@ class Customer extends BaseCustomer implements ReviewerInterface, UserAwareInter
     private $code;
 
     /**
-     * @return Avatar
+     * @return Avatar|null
      */
-    public function getAvatar()
+    public function getAvatar(): ?Avatar
     {
         return $this->avatar;
     }
 
     /**
      * @param Avatar $avatar
-     *
-     * @return $this
      */
-    public function setAvatar($avatar)
+    public function setAvatar(?Avatar $avatar): void
     {
         $this->avatar = $avatar;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
     /**
-     * @param string $code
-     *
-     * @return $this
+     * @param string|null $code
      */
-    public function setCode($code)
+    public function setCode(?string $code): void
     {
         $this->code = $code;
-
-        return $this;
     }
 
     /**
-     * @return UserInterface
+     * @return UserInterface|null
      */
     public function getUser(): ?UserInterface
     {
@@ -99,11 +91,9 @@ class Customer extends BaseCustomer implements ReviewerInterface, UserAwareInter
     }
 
     /**
-     * @param UserInterface $user
-     *
-     * @return Customer
+     * @param UserInterface|null $user
      */
-    public function setUser(?UserInterface $user)
+    public function setUser(?UserInterface $user): void
     {
         if ($this->user !== $user) {
             $this->user = $user;
@@ -114,7 +104,7 @@ class Customer extends BaseCustomer implements ReviewerInterface, UserAwareInter
     /**
      * @param User|null $user
      */
-    protected function assignCustomer($user = null)
+    protected function assignCustomer(?User $user): void
     {
         if (null !== $user) {
             $user->setCustomer($this);
