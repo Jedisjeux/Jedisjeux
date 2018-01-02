@@ -87,7 +87,7 @@ end
 after 'deploy:updated', :build_assets do
     on roles(:web) do
         puts "Build assets"
-        execute "cd #{release_path} && yarn install && yarn run gulp"
+        execute "cd #{release_path} && yarn install && GULP_ENV=prod yarn run gulp"
     end
 end
 
