@@ -106,148 +106,121 @@ class GamePlay implements ResourceInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
     /**
-     * @param string $code
-     * @return $this
+     * @param string|null $code
      */
-    public function setCode($code)
+    public function setCode(?string $code): void
     {
         $this->code = $code;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDuration()
-    {
-        return $this->duration;
-    }
-
-    /**
-     * @param string $duration
-     *
-     * @return $this
-     */
-    public function setDuration($duration)
-    {
-        $this->duration = $duration;
-
-        return $this;
     }
 
     /**
      * @return int
      */
-    public function getPlayerCount()
+    public function getDuration(): ?int
+    {
+        return $this->duration;
+    }
+
+    /**
+     * @param int|null $duration
+     */
+    public function setDuration(?int $duration): void
+    {
+        $this->duration = $duration;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getPlayerCount(): ?int
     {
         return $this->playerCount;
     }
 
     /**
-     * @param int $playerCount
-     *
-     * @return $this
+     * @param int|null $playerCount
      */
-    public function setPlayerCount($playerCount)
+    public function setPlayerCount(?int $playerCount): void
     {
         $this->playerCount = $playerCount;
-
-        return $this;
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
-    public function getPlayedAt()
+    public function getPlayedAt(): ?\DateTime
     {
         return $this->playedAt;
     }
 
     /**
-     * @param \DateTime $playedAt
-     *
-     * @return $this
+     * @param \DateTime|null $playedAt
      */
-    public function setPlayedAt($playedAt)
+    public function setPlayedAt(?\DateTime $playedAt): void
     {
         $this->playedAt = $playedAt;
-
-        return $this;
     }
 
     /**
-     * @return ProductInterface
+     * @return ProductInterface|null
      */
-    public function getProduct()
+    public function getProduct(): ?ProductInterface
     {
         return $this->product;
     }
 
     /**
-     * @param ProductInterface $product
-     *
-     * @return $this
+     * @param ProductInterface|null $product
      */
-    public function setProduct($product)
+    public function setProduct(?ProductInterface $product): void
     {
         $this->product = $product;
-
-        return $this;
     }
 
     /**
-     * @return CustomerInterface
+     * @return CustomerInterface|null
      */
-    public function getAuthor()
+    public function getAuthor(): ?CustomerInterface
     {
         return $this->author;
     }
 
     /**
-     * @param CustomerInterface $author
-     *
-     * @return $this
+     * @param CustomerInterface|null $author
      */
-    public function setAuthor($author)
+    public function setAuthor(?CustomerInterface $author): void
     {
         $this->author = $author;
-
-        return $this;
     }
 
     /**
-     * @return Topic
+     * @return Topic|null
      */
-    public function getTopic()
+    public function getTopic(): ?Topic
     {
         return $this->topic;
     }
 
     /**
-     * @param Topic $topic
-     *
-     * @return $this
+     * @param Topic|null $topic
      */
-    public function setTopic($topic)
+    public function setTopic(?Topic $topic): void
     {
         $this->topic = $topic;
-
-        return $this;
     }
 
     /**
      * @return GamePlayImage[]|ArrayCollection
      */
-    public function getImages()
+    public function getImages(): ?ArrayCollection
     {
         return $this->images;
     }
@@ -257,42 +230,34 @@ class GamePlay implements ResourceInterface
      *
      * @return bool
      */
-    public function hasImage(GamePlayImage $image):bool
+    public function hasImage(GamePlayImage $image): bool
     {
         return $this->images->contains($image);
     }
 
     /**
      * @param GamePlayImage $image
-     *
-     * @return $this
      */
-    public function addImage(GamePlayImage $image)
+    public function addImage(GamePlayImage $image): void
     {
         if (!$this->hasImage($image)) {
             $image->setGamePlay($this);
             $this->images->add($image);
         }
-
-        return $this;
     }
 
     /**
      * @param GamePlayImage $image
-     *
-     * @return $this
      */
-    public function removeImage(GamePlayImage $image)
+    public function removeImage(GamePlayImage $image): void
     {
         $this->images->removeElement($image);
-
-        return $this;
     }
 
     /**
      * @return Player[]|ArrayCollection
      */
-    public function getPlayers()
+    public function getPlayers(): ?ArrayCollection
     {
         return $this->players;
     }
@@ -302,35 +267,27 @@ class GamePlay implements ResourceInterface
      *
      * @return bool
      */
-    public function hasPlayer(Player $player):bool
+    public function hasPlayer(Player $player): bool
     {
         return $this->players->contains($player);
     }
 
     /**
      * @param Player $player
-     *
-     * @return $this
      */
-    public function addPlayer(Player $player)
+    public function addPlayer(Player $player): void
     {
         if (!$this->hasPlayer($player)) {
             $player->setGamePlay($this);
             $this->players->add($player);
         }
-
-        return $this;
     }
 
     /**
      * @param Player $player
-     *
-     * @return $this
      */
-    public function removePlayer(Player $player)
+    public function removePlayer(Player $player): void
     {
         $this->players->removeElement($player);
-
-        return $this;
     }
 }
