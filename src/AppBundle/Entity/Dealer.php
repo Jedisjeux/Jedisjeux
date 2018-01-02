@@ -12,6 +12,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -151,9 +152,9 @@ class Dealer implements ResourceInterface
     }
 
     /**
-     * @return PubBanner[]|ArrayCollection
+     * @return PubBanner[]|Collection
      */
-    public function getPubBanners(): ?ArrayCollection
+    public function getPubBanners(): Collection
     {
         return $this->pubBanners;
     }

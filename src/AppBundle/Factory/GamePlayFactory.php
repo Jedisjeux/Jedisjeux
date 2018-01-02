@@ -76,9 +76,8 @@ class GamePlayFactory implements FactoryInterface
         /** @var GamePlay $gamePlay */
         $gamePlay = $this->createNew();
 
-        $gamePlay
-            ->setProduct($product)
-            ->setAuthor($this->customerContext->getCustomer());
+        $gamePlay->setProduct($product);
+        $gamePlay->setAuthor($this->customerContext->getCustomer());
 
         return $gamePlay;
     }
