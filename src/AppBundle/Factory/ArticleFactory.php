@@ -91,31 +91,27 @@ class ArticleFactory implements FactoryInterface
 
         /** @var Block $materialBlock */
         $materialBlock = $this->blockFactory->createNew();
-        $materialBlock
-            ->setTitle('Matériel')
-            ->setImagePosition(Block::POSITION_LEFT);
+        $materialBlock->setTitle('Matériel');
+        $materialBlock->setImagePosition(Block::POSITION_LEFT);
         $article->addBlock($materialBlock);
 
         /** @var Block $rulesBlock */
         $rulesBlock = $this->blockFactory->createNew();
-        $rulesBlock
-            ->setTitle('Règles')
-            ->setImagePosition(Block::POSITION_LEFT);
+        $rulesBlock->setTitle('Règles');
+        $rulesBlock->setImagePosition(Block::POSITION_LEFT);
         $article->addBlock($rulesBlock);
 
         /** @var Block $lifetimeBlock */
         $lifetimeBlock = $this->blockFactory->createNew();
-        $lifetimeBlock
-            ->setTitle('Durée de vie')
-            ->setImagePosition(Block::POSITION_TOP);
+        $lifetimeBlock->setTitle('Durée de vie');
+        $lifetimeBlock->setImagePosition(Block::POSITION_TOP);
         $article->addBlock($lifetimeBlock);
 
         /** @var Block $adviceBlock */
         $adviceBlock = $this->blockFactory->createNew();
-        $adviceBlock
-            ->setTitle('Les conseils de jedisjeux')
-            ->setImagePosition(Block::POSITION_TOP)
-            ->setClass('well');
+        $adviceBlock->setTitle('Les conseils de jedisjeux');
+        $adviceBlock->setImagePosition(Block::POSITION_TOP);
+        $adviceBlock->setClass('well');
         $article->addBlock($adviceBlock);
 
         // TODO set review-article taxon
