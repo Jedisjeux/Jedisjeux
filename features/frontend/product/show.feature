@@ -50,7 +50,7 @@ Feature: View a product
         Given I am on "/jeux-de-societe/"
         And I follow "Louis XIV"
         When I follow "Articles" on ".nav-tabs"
-        And I wait "2" seconds
+        And I wait "5" seconds
         Then I should see "Aucun article"
 
     @javascript
@@ -58,5 +58,5 @@ Feature: View a product
         Given I am on "/jeux-de-societe/"
         And I follow "Louis XIV"
         When I follow "Avis" on ".nav-tabs"
-        And I wait "2" seconds
+        And I wait "5" seconds
         Then I should see "Aucun avis"
