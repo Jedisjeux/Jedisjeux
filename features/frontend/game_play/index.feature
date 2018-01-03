@@ -33,6 +33,7 @@ Feature: List game-plays
             | product                 | author            |
             | Les princes de Florence | kevin@example.com |
         And I am on homepage
+        And I wait "5" seconds
         And I follow "kevin"
         And I wait "5" seconds until "$('.dropdown-menu').is('visible')"
         When I follow "Mes parties"
