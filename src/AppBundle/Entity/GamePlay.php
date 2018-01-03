@@ -256,9 +256,9 @@ class GamePlay implements ResourceInterface
     }
 
     /**
-     * @return Player[]|ArrayCollection
+     * @return Player[]|Collection
      */
-    public function getPlayers(): ?ArrayCollection
+    public function getPlayers(): ?Collection
     {
         return $this->players;
     }
