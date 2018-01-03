@@ -1,4 +1,6 @@
-imports: ["behat.yml.dist"]
+imports:
+    - etc/behat/profiles.yml
+    - etc/behat/suites.yml
 
 default:
     extensions:

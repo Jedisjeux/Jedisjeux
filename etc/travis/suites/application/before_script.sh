@@ -21,4 +21,4 @@ run_command "bin/console doctrine:migrations:migrate --no-interaction --env=test
 
 print_header "Setting the web assets up" "Jedisjeux"
 run_command "bin/console assets:install --env=test --no-debug -vvv" || exit $?
-run_command "yarn run gulp admin" || exit $?
+run_command "yarn run gulp" || exit $?

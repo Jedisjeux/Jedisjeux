@@ -13,7 +13,7 @@ Feature: Create product reviews
             | Puerto Rico |
         And I am logged in as user "kevin@example.com" with password "password"
 
-    @javascript
+    @javascript @todo
     Scenario: Create a product review
         Given I am on "/jeu-de-societe/puerto-rico"
         And I follow "Votre avis"
