@@ -15,7 +15,9 @@ commands=(
     test-phpunit
     test-fixtures
     test-behat-without-javascript
-    test-old-behat-without-javascript
+    update-behat-with-old-config
+    test-behat-without-javascript
+    test-old-behat-with-javascript
 )
 
 for command in ${commands[@]}; do

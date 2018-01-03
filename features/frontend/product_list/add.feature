@@ -22,7 +22,7 @@ Feature: Add a product to list
             | Louis XIV |
         And I am logged in as user "kevin@example.com" with password "password"
 
-    @javascript
+    @javascript @todo
     Scenario: Add product to game library
         Given I am on "/jeux-de-societe/"
         And I follow "Louis XIV"

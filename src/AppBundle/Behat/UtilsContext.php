@@ -36,7 +36,7 @@ class UtilsContext extends DefaultContext
      */
     public function waitUntilModalIsVisible()
     {
-        $this->getSession()->wait(2000, "$('.reveal-modal.open').is('visible')");
+        $this->getSession()->wait(5000, "$('.reveal-modal.open').is('visible')");
     }
 
     /**
