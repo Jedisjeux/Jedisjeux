@@ -40,62 +40,50 @@ class PersonImage extends AbstractImage
     protected $main = false;
 
     /**
-     * @return Person
+     * @return Person|null
      */
-    public function getPerson()
+    public function getPerson(): ?Person
     {
         return $this->person;
     }
 
     /**
-     * @param Person $person
-     *
-     * @return $this
+     * @param Person|null $person
      */
-    public function setPerson($person)
+    public function setPerson(?Person $person): void
     {
         $this->person = $person;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
     /**
-     * @param string $description
-     *
-     * @return $this
+     * @param string|null $description
      */
-    public function setDescription($description)
+    public function setDescription(?string $description): void
     {
         $this->description = $description;
-
-        return $this;
     }
 
     /**
      * @return boolean
      */
-    public function isMain()
+    public function isMain(): bool
     {
         return $this->main;
     }
 
     /**
      * @param boolean $main
-     *
-     * @return $this
      */
-    public function setMain($main)
+    public function setMain(bool $main): void
     {
         $this->main = $main;
-
-        return $this;
     }
 }
