@@ -34,7 +34,7 @@ Feature: List game-plays
             | Les princes de Florence | kevin@example.com |
         And I am on homepage
         And I follow "kevin"
-        And I wait "2" seconds until "$('.dropdown-menu').is('visible')"
+        And I wait "5" seconds until "$('.dropdown-menu').is('visible')"
         When I follow "Mes parties"
         Then I should see "Les princes de Florence"
 
