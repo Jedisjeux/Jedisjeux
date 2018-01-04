@@ -48,10 +48,9 @@ class PostContext extends DefaultContext
 
             /** @var Post $post */
             $post = $this->getFactory('post', 'app')->createNew();
-            $post
-                ->setTopic($topic)
-                ->setAuthor($author)
-                ->setBody(isset($data['body']) ? $data['body'] : $this->faker->realText());
+            $post->setTopic($topic);
+            $post->setAuthor($author);
+            $post->setBody(isset($data['body']) ? $data['body'] : $this->faker->realText());
 
             $manager->persist($post);
             $manager->flush();
@@ -98,10 +97,9 @@ class PostContext extends DefaultContext
 
             /** @var Post $post */
             $post = $postFactory->createForGamePlay($gamePlay);
-            $post
-                ->setTopic($topic)
-                ->setAuthor($author)
-                ->setBody(isset($data['body']) ? $data['body'] : $this->faker->realText());
+            $post->setTopic($topic);
+            $post->setAuthor($author);
+            $post->setBody(isset($data['body']) ? $data['body'] : $this->faker->realText());
 
             $manager->persist($post);
             $manager->flush();
@@ -135,10 +133,9 @@ class PostContext extends DefaultContext
 
             /** @var Post $post */
             $post = $postFactory->createForArticle($article);
-            $post
-                ->setTopic($topic)
-                ->setAuthor($author)
-                ->setBody(isset($data['body']) ? $data['body'] : $this->faker->realText());
+            $post->setTopic($topic);
+            $post->setAuthor($author);
+            $post->setBody(isset($data['body']) ? $data['body'] : $this->faker->realText());
 
             $manager->persist($post);
             $manager->flush();
