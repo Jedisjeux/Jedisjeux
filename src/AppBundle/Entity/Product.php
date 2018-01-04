@@ -259,46 +259,38 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getStatus()
+    public function getStatus(): ?string
     {
         return $this->status;
     }
 
     /**
-     * @param string $status
-     *
-     * @return $this
+     * @param string|null $status
      */
-    public function setStatus($status)
+    public function setStatus(?string $status): void
     {
         $this->status = $status;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      *
      * @JMS\VirtualProperty
      * @JMS\Groups({"Detailed"})
      */
-    public function getShortDescription()
+    public function getShortDescription(): ?string
     {
         return $this->getTranslation()->getShortDescription();
     }
 
     /**
-     * @param string $shortDescription
-     *
-     * @return $this
+     * @param string|null $shortDescription
      */
-    public function setShortDescription($shortDescription)
+    public function setShortDescription(?string $shortDescription): void
     {
         $this->getTranslation()->setShortDescription($shortDescription);
-
-        return $this;
     }
 
     /**
@@ -322,17 +314,17 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
-     * @return ArrayCollection|ProductVariantImage[]
+     * @return Collection|ProductVariantImage[]
      */
-    public function getImages()
+    public function getImages(): Collection
     {
         return $this->getFirstVariant()->getImages();
     }
 
     /**
-     * @return ProductVariant|null
+     * @return ProductVariantInterface|null
      */
-    public function getFirstVariant()
+    public function getFirstVariant(): ?ProductVariantInterface
     {
         if ($this->variants->isEmpty()) {
             return null;
@@ -347,7 +339,10 @@ class Product extends BaseProduct implements ReviewableInterface
         return $this->variants->matching($sort)->first();
     }
 
-    public function setFirstVariant(ProductVariantInterface $variant)
+    /**
+     * @param ProductVariantInterface $variant
+     */
+    public function setFirstVariant(ProductVariantInterface $variant): void
     {
         $firstVariant = $this->getFirstVariant();
 
@@ -356,8 +351,6 @@ class Product extends BaseProduct implements ReviewableInterface
         } else {
             $this->addVariant($variant);
         }
-
-        return $this;
     }
 
     /**
@@ -369,9 +362,9 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
-     * @return ArrayCollection|ProductVariantImage[]
+     * @return Collection|ProductVariantImage[]
      */
-    public function getImagesOfAllVariants()
+    public function getImagesOfAllVariants(): Collection
     {
         $collection = new ArrayCollection();
 
@@ -388,27 +381,23 @@ class Product extends BaseProduct implements ReviewableInterface
     /**
      * @return \DateTime|null
      */
-    public function getReleasedAt()
+    public function getReleasedAt(): ?\DateTime
     {
         return $this->getFirstVariant()->getReleasedAt();
     }
 
     /**
-     * @param \DateTime $releasedAt
-     *
-     * @return $this
+     * @param \DateTime|null $releasedAt
      */
-    public function setReleasedAt($releasedAt)
+    public function setReleasedAt(?\DateTime $releasedAt): void
     {
         $this->getFirstVariant()->setReleasedAt($releasedAt);
-
-        return $this;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getTaxons($taxonomy = null)
+    public function getTaxons($taxonomy = null): Collection
     {
         if (null !== $taxonomy) {
             return $this->taxons->filter(function (TaxonInterface $taxon) use ($taxonomy) {
@@ -433,234 +422,186 @@ class Product extends BaseProduct implements ReviewableInterface
 
     /**
      * @param TaxonInterface $taxon
-     *
-     * @return $this
      */
-    public function addTaxon(TaxonInterface $taxon)
+    public function addTaxon(TaxonInterface $taxon): void
     {
         if (!$this->hasTaxon($taxon)) {
             $this->taxons->add($taxon);
         }
-
-        return $this;
     }
 
     /**
      * @param TaxonInterface $taxon
-     *
-     * @return $this
      */
-    public function removeTaxon(TaxonInterface $taxon)
+    public function removeTaxon(TaxonInterface $taxon): void
     {
         $this->taxons->removeElement($taxon);
-
-        return $this;
     }
 
     /**
-     * @return TaxonInterface|Taxon
+     * @return TaxonInterface|Taxon|null
      */
-    public function getMainTaxon()
+    public function getMainTaxon(): ?TaxonInterface
     {
         return $this->mainTaxon;
     }
 
     /**
-     * @param TaxonInterface $mainTaxon
-     *
-     * @return $this
+     * @param TaxonInterface|null $mainTaxon
      */
-    public function setMainTaxon($mainTaxon)
+    public function setMainTaxon(?TaxonInterface $mainTaxon): void
     {
         $this->mainTaxon = $mainTaxon;
-
-        return $this;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getAgeMin()
+    public function getAgeMin(): ?int
     {
         return $this->ageMin;
     }
 
     /**
-     * @param int $ageMin
-     *
-     * @return $this
+     * @param int|null $ageMin
      */
-    public function setAgeMin($ageMin)
+    public function setAgeMin(?int $ageMin): void
     {
         $this->ageMin = $ageMin;
-
-        return $this;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getJoueurMin()
+    public function getJoueurMin(): ?int
     {
         return $this->joueurMin;
     }
 
     /**
-     * @param int $joueurMin
-     *
-     * @return $this
+     * @param int|null $joueurMin
      */
-    public function setJoueurMin($joueurMin)
+    public function setJoueurMin(?int $joueurMin): void
     {
         $this->joueurMin = $joueurMin;
-
-        return $this;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getJoueurMax()
+    public function getJoueurMax(): ?int
     {
         return $this->joueurMax;
     }
 
     /**
-     * @param int $joueurMax
-     *
-     * @return $this
+     * @param int|null $joueurMax
      */
-    public function setJoueurMax($joueurMax)
+    public function setJoueurMax(?int $joueurMax): void
     {
         $this->joueurMax = $joueurMax;
-
-        return $this;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getDurationMin()
+    public function getDurationMin(): ?int
     {
         return $this->durationMin;
     }
 
     /**
-     * @param int $durationMin
-     *
-     * @return $this
+     * @param int|null $durationMin
      */
-    public function setDurationMin($durationMin)
+    public function setDurationMin(?int $durationMin): void
     {
         $this->durationMin = $durationMin;
-
-        return $this;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getDurationMax()
+    public function getDurationMax(): ?int
     {
         return $this->durationMax;
     }
 
     /**
-     * @param int $durationMax
-     *
-     * @return $this
+     * @param int|null $durationMax
      */
-    public function setDurationMax($durationMax)
+    public function setDurationMax(?int $durationMax): void
     {
         $this->durationMax = $durationMax;
-
-        return $this;
     }
 
     /**
      * @return boolean
      */
-    public function isDurationByPlayer()
+    public function isDurationByPlayer(): bool
     {
         return $this->durationByPlayer;
     }
 
     /**
      * @param boolean $durationByPlayer
-     *
-     * @return $this
      */
-    public function setDurationByPlayer($durationByPlayer)
+    public function setDurationByPlayer(bool $durationByPlayer): void
     {
         $this->durationByPlayer = $durationByPlayer;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMateriel()
+    public function getMateriel(): ?string
     {
         return $this->materiel;
     }
 
     /**
-     * @param string $materiel
-     *
-     * @return $this
+     * @param string|null $materiel
      */
-    public function setMateriel($materiel)
+    public function setMateriel(?string $materiel): void
     {
         $this->materiel = $materiel;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBut()
+    public function getBut(): ?string
     {
         return $this->but;
     }
 
     /**
-     * @param string $but
-     *
-     * @return $this
+     * @param string|null $but
      */
-    public function setBut($but)
+    public function setBut($but): void
     {
         $this->but = $but;
-
-        return $this;
     }
 
     /**
      * @return int
      */
-    public function getViewCount()
+    public function getViewCount(): int
     {
         return $this->viewCount;
     }
 
     /**
      * @param int $viewCount
-     *
-     * @return Product
      */
-    public function setViewCount($viewCount)
+    public function setViewCount(int $viewCount): void
     {
         $this->viewCount = $viewCount;
-
-        return $this;
     }
 
     /**
      * @return Collection|Person[]
      */
-    public function getDesigners()
+    public function getDesigners(): Collection
     {
         return $this->getFirstVariant()->getDesigners();
     }
@@ -669,7 +610,7 @@ class Product extends BaseProduct implements ReviewableInterface
     /**
      * @return Collection|Person[]
      */
-    public function getArtists()
+    public function getArtists(): Collection
     {
         return $this->getFirstVariant()->getArtists();
     }
@@ -677,7 +618,7 @@ class Product extends BaseProduct implements ReviewableInterface
     /**
      * @return Collection|Person[]
      */
-    public function getPublishers()
+    public function getPublishers(): Collection
     {
         return $this->getFirstVariant()->getPublishers();
     }
@@ -689,61 +630,53 @@ class Product extends BaseProduct implements ReviewableInterface
      * @JMS\Groups({"Detailed"})
      * @JMS\Type("ArrayCollection<AppBundle\Entity\Taxon>")
      */
-    public function getMechanisms()
+    public function getMechanisms(): Collection
     {
         return $this->getTaxons('mechanisms');
     }
 
     /**
      * @param TaxonInterface $mechanism
-     *
-     * @return $this
      */
-    public function addMechanism(TaxonInterface $mechanism)
+    public function addMechanism(TaxonInterface $mechanism): void
     {
-        return $this->addTaxon($mechanism);
+        $this->addTaxon($mechanism);
     }
 
     /**
      * @param TaxonInterface $mechanism
-     *
-     * @return $this
      */
-    public function removeMechanism(TaxonInterface $mechanism)
+    public function removeMechanism(TaxonInterface $mechanism): void
     {
-        return $this->removeTaxon($mechanism);
+        $this->removeTaxon($mechanism);
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      *
      * @JMS\VirtualProperty
      * @JMS\Groups({"Detailed"})
      * @JMS\Type("ArrayCollection<AppBundle\Entity\Taxon>")
      */
-    public function getThemes()
+    public function getThemes(): Collection
     {
         return $this->getTaxons('themes');
     }
 
     /**
      * @param TaxonInterface $theme
-     *
-     * @return $this
      */
-    public function addTheme(TaxonInterface $theme)
+    public function addTheme(TaxonInterface $theme): void
     {
-        return $this->addTaxon($theme);
+        $this->addTaxon($theme);
     }
 
     /**
      * @param TaxonInterface $theme
-     *
-     * @return $this
      */
-    public function removeTheme(TaxonInterface $theme)
+    public function removeTheme(TaxonInterface $theme): void
     {
-        return $this->removeTaxon($theme);
+        $this->removeTaxon($theme);
     }
 
     /**
@@ -759,7 +692,7 @@ class Product extends BaseProduct implements ReviewableInterface
      *
      * @return bool
      */
-    public function hasReview(ReviewInterface $review)
+    public function hasReview(ReviewInterface $review): bool
     {
         return $this->reviews->contains($review);
     }
@@ -785,7 +718,7 @@ class Product extends BaseProduct implements ReviewableInterface
     /**
      * @return Collection|ReviewInterface[]
      */
-    public function getRatings()
+    public function getRatings(): Collection
     {
         return $this->reviews->filter(function (ReviewInterface $review) {
             return null === $review->getComment();
@@ -795,7 +728,7 @@ class Product extends BaseProduct implements ReviewableInterface
     /**
      * @return Collection|ReviewInterface[]
      */
-    public function getCommentedReviews()
+    public function getCommentedReviews(): Collection
     {
         return $this->reviews->filter(function (ReviewInterface $review) {
             return null !== $review->getComment();
@@ -819,44 +752,36 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
-     * @return ProductBarcode[]|ArrayCollection
+     * @return ProductBarcode[]|Collection
      */
-    public function getBarcodes()
+    public function getBarcodes(): Collection
     {
         return $this->barcodes;
     }
 
     /**
      * @param ProductBarcode $barcode
-     *
-     * @return $this
      */
-    public function addBarcode($barcode)
+    public function addBarcode($barcode): void
     {
         if (!$this->barcodes->contains($barcode)) {
             $barcode->setProduct($this);
             $this->barcodes->add($barcode);
         }
-
-        return $this;
     }
 
     /**
      * @param ProductBarcode $barcode
-     *
-     * @return $this
      */
-    public function removeBarcode($barcode)
+    public function removeBarcode($barcode): void
     {
         $this->barcodes->remove($barcode);
-
-        return $this;
     }
 
     /**
      * @return Article[]|Collection
      */
-    public function getArticles()
+    public function getArticles(): Collection
     {
         return $this->articles;
     }
@@ -864,7 +789,7 @@ class Product extends BaseProduct implements ReviewableInterface
     /**
      * @return Article[]|Collection
      */
-    public function getPublishedArticles()
+    public function getPublishedArticles(): Collection
     {
         return $this->articles->filter(function (Article $article) {
             return Article::STATUS_PUBLISHED === $article->getStatus();
@@ -874,7 +799,7 @@ class Product extends BaseProduct implements ReviewableInterface
     /**
      * @return GamePlay[]|Collection
      */
-    public function getGamePlays()
+    public function getGamePlays(): Collection
     {
         return $this->gamePlays;
     }
