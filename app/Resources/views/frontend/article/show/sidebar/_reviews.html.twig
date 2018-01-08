@@ -1,0 +1,32 @@
+{% from 'macros/users.html.twig' import avatar %}
+
+<div class="s-widget">
+    <h5><i class="fa fa-comments color"></i> Critiques</h5>
+    <div class="widget-content">
+        <ul class="list-unstyled">
+            {% for review in article.reviews %}
+                {% set author = review.author %}
+                <li>
+                    <div class="col-md-6">
+                        <!-- Item image -->
+                        <img src="{{ avatar(author.user) | imagine_filter('thumbnail') }}" alt=""
+                             class="img-responsive img-round"/>
+
+                    </div>
+                    <div class="col-md-6">
+                        <!-- Item title -->
+                        <span>{{ author }}</span><br/>
+
+                        <div class="rating-container">
+                            <div class="rating yellow" data-readonly="true"
+                                 data-rate-value="{{ review.rating/2 }}" data-step-size="0.5"></div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+</div>
