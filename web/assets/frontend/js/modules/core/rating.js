@@ -62,7 +62,7 @@ $(function () {
     });
 
     function updateProductReviewButtonPath(productId, resourceId) {
-        $('#productReviewButton').attr('href', Routing.generate('sylius_product_review_update', {
+        $('#productReviewButton').attr('href', Routing.generate('sylius_frontend_product_review_update', {
             'productId': productId, 'id': resourceId
         }));
     }

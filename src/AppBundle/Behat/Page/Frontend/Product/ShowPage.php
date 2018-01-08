@@ -23,7 +23,7 @@ class ShowPage extends SymfonyPage
      */
     public function getRouteName()
     {
-        return 'sylius_product_show';
+        return 'sylius_frontend_product_show';
     }
 
     /**

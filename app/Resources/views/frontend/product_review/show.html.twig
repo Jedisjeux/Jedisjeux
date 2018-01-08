@@ -8,8 +8,8 @@
 {% endblock headline %}
 
 {% block breadcrumb_content %}
-    <a href="{{ path('sylius_product_index') }}">{{ 'sylius.ui.products'|trans }}</a>
-    / <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}">{{ product }}</a>
+    <a href="{{ path('sylius_frontend_product_index') }}">{{ 'sylius.ui.products'|trans }}</a>
+    / <a href="{{ path('sylius_frontend_product_show', {'slug': product.slug}) }}">{{ product }}</a>
     / {{ 'sylius.ui.product_reviews'|trans }}
 {% endblock %}
 

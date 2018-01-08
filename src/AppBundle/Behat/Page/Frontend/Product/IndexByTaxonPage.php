@@ -21,6 +21,6 @@ class IndexByTaxonPage extends IndexPage
      */
     public function getRouteName()
     {
-        return 'sylius_product_index_by_taxon';
+        return 'sylius_frontend_product_index_by_taxon';
     }
 }

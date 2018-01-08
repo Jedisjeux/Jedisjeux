@@ -53,7 +53,7 @@
 
         </div>
 
-        <h4 class="mag-head"><a href="{{ path('sylius_product_index') }}"><i class="fa fa-puzzle-piece color"></i> Derniers jeux ajoutés</a></h4>
+        <h4 class="mag-head"><a href="{{ path('sylius_frontend_product_index') }}"><i class="fa fa-puzzle-piece color"></i> Derniers jeux ajoutés</a></h4>
 
         {{ render(url('sylius_partial_product_index', {
             'paginate': 3,
@@ -92,7 +92,7 @@
         <div class="sidebar">
 
             <div class="s-widget">
-                <h5><i class="fa fa-calendar color"></i> <a href="{{ path('sylius_product_release_index') }}">Sorties de jeux</a></h5>
+                <h5><i class="fa fa-calendar color"></i> <a href="{{ path('sylius_frontend_product_release_index') }}">Sorties de jeux</a></h5>
 
                 <div class="widget-content">
 

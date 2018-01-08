@@ -82,7 +82,7 @@
                                                     {% for mechanism in jeu.mechanisms %}{% if not first %},{% endif %}
                                                         {% set first = false %}
                                                         <a
-                                                        href="{{ path('sylius_product_index_by_taxon', { 'slug': mechanism.slug }) }}">{{ mechanism }}</a>{% endfor %}
+                                                        href="{{ path('sylius_frontend_product_index_by_taxon', { 'slug': mechanism.slug }) }}">{{ mechanism }}</a>{% endfor %}
                                                 {% endspaceless %}
                                             </p>
                                         </li>
@@ -100,7 +100,7 @@
                                                     {% for key, theme in jeu.themes %}{% if not first %},{% endif %}
                                                         {% set first = false %}
                                                         <a
-                                                        href="{{ path('sylius_product_index_by_taxon', { 'slug': theme.slug }) }}">{{ theme }}</a>{% endfor %}
+                                                        href="{{ path('sylius_frontend_product_index_by_taxon', { 'slug': theme.slug }) }}">{{ theme }}</a>{% endfor %}
                                                 {% endspaceless %}
                                             </p>
                                         </li>

@@ -23,7 +23,7 @@ class IndexPage extends SymfonyPage
      */
     public function getRouteName()
     {
-        return 'sylius_product_index';
+        return 'sylius_frontend_product_index';
     }
 
     /**

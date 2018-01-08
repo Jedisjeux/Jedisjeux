@@ -1,4 +1,4 @@
-{% set popularUrl = path('sylius_product_index_by_person', {
+{% set popularUrl = path('sylius_frontend_product_index_by_person', {
 'slug': person.slug,
 'sorting': {
 'averageRating': 'desc'
@@ -28,7 +28,7 @@
 </div>
 
 
-{% set recentUrl = path('sylius_product_index_by_person', {
+{% set recentUrl = path('sylius_frontend_product_index_by_person', {
 'slug': person.slug,
 'sorting': {
 'variant.releasedAt': 'desc'
