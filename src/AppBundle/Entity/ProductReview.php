@@ -52,7 +52,7 @@ class ProductReview extends Review
     /**
      * @param string|null $code
      */
-    public function setCode($code): void
+    public function setCode(?string $code): void
     {
         $this->code = $code;
     }
