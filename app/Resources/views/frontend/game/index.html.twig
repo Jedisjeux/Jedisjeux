@@ -32,8 +32,8 @@
                 {% endif %}
 
                 Trier
-                par {{ sorting('sylius_product_index', 'sylius.ui.creation_date'|trans, 'createdAt', 'desc', icon, currentOrder) }},
-                par {{ sorting('sylius_product_index', 'label.rate'|trans, 'averageRating', 'desc') }}
+                par {{ sorting('sylius_frontend_product_index', 'sylius.ui.creation_date'|trans, 'createdAt', 'desc', icon, currentOrder) }},
+                par {{ sorting('sylius_frontend_product_index', 'label.rate'|trans, 'averageRating', 'desc') }}
             </div>
 
             <div class="clearfix"></div>

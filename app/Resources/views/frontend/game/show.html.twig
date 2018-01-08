@@ -14,7 +14,7 @@
 {% endblock %}
 
 {% block breadcrumb_content %}
-    <a href="{{ path('sylius_product_index') }}">{{ 'sylius.ui.products'|trans }}</a>
+    <a href="{{ path('sylius_frontend_product_index') }}">{{ 'sylius.ui.products'|trans }}</a>
     / {{ product }}
 {% endblock %}
 
@@ -48,6 +48,6 @@
         {{ render url('jeu_if_you_like_this_game', { 'id': jeu.id }) }}#}
 
 
-    {{ pageViews.render(product.id, 'product', path('sylius_product_show', {'slug' : product.slug})) }}
+    {{ pageViews.render(product.id, 'product', path('sylius_frontend_product_show', {'slug' : product.slug})) }}
 
 {% endblock container %}

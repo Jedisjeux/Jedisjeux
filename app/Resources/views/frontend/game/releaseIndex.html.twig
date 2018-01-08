@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body -%}
-    {% set currentMonthUrl = path('sylius_product_index', {
+    {% set currentMonthUrl = path('sylius_frontend_product_index', {
     'criteria': {
     'releasedAtFrom': "first_day_of_the_month",
     'releasedAtTo': "last_day_of_the_month"
@@ -42,7 +42,7 @@
 
             <hr/>
 
-            {% set previousMonthUrl = path('sylius_product_index', {
+            {% set previousMonthUrl = path('sylius_frontend_product_index', {
             'criteria': {
             'releasedAtTo': "last_day_of_previous_month"
             },
@@ -75,7 +75,7 @@
 
             <hr/>
 
-            {% set nextMonthUrl = path('sylius_product_index', {
+            {% set nextMonthUrl = path('sylius_frontend_product_index', {
             'criteria': {
             'releasedAtFrom': "first_day_of_next_month"
             },

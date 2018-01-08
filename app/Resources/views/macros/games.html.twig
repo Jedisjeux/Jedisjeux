@@ -72,7 +72,7 @@
         </div>
     {% endset %}
 
-    {{ item.magazineItemOne(game.mainImage ? game.mainImage.webPath : 'assets/frontend/img/avatar_2x.png', game.name, filter, 'img-responsive', path('sylius_product_show', {'slug': game.slug}), game.name, body, meta) }}
+    {{ item.magazineItemOne(game.mainImage ? game.mainImage.webPath : 'assets/frontend/img/avatar_2x.png', game.name, filter, 'img-responsive', path('sylius_frontend_product_show', {'slug': game.slug}), game.name, body, meta) }}
 
 {% endmacro %}
 
@@ -83,6 +83,6 @@
         <i class="fa fa-calendar"></i> {{ product.createdAt|localizeddate('long', 'none') }}
     {% endset %}
 
-    {{ item.magazineListItem(product.mainImage ? product.mainImage.webPath : 'assets/frontend/img/avatar_2x.png', product.name, 'thumbnail', 'img-responsive', path('sylius_product_show', {'slug': product.slug}), product.name, meta) }}
+    {{ item.magazineListItem(product.mainImage ? product.mainImage.webPath : 'assets/frontend/img/avatar_2x.png', product.name, 'thumbnail', 'img-responsive', path('sylius_frontend_product_show', {'slug': product.slug}), product.name, meta) }}
 
 {% endmacro %}

@@ -2,7 +2,7 @@
     {% if product.slug %}
         <a class="ui labeled icon button"
            target="_blank"
-           href="{{ path('sylius_product_show', {'slug': product.slug}) }}">
+           href="{{ path('sylius_frontend_product_show', {'slug': product.slug}) }}">
             <i class="icon search"></i>
             {{ 'app.ui.preview'|trans }}
         </a>

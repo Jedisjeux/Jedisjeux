@@ -1,4 +1,4 @@
-sylius_product_review_create:
+sylius_frontend_product_review_create:
     path: /reviews/new
     methods: [GET, POST]
     defaults:
@@ -14,10 +14,10 @@ sylius_product_review_create:
                     - "expr:notFoundOnNull(service('sylius.repository.product').findOneById($productId))"
                     - "expr:service('sylius.context.customer').getCustomer()"
             redirect:
-                route: sylius_product_show
+                route: sylius_frontend_product_show
                 parameters: { slug: resource.reviewSubject.slug }
             
-sylius_product_review_update:
+sylius_frontend_product_review_update:
     path: /reviews/{id}/update
     methods: [GET, PUT]
     defaults:
@@ -28,7 +28,7 @@ sylius_product_review_update:
                 method: findOneBy
                 arguments: [{id: $id, author: expr:service('app.context.customer').getCustomer()}]
             redirect:
-                route: sylius_product_show
+                route: sylius_frontend_product_show
                 parameters: { slug: resource.reviewSubject.slug }
     options:
         expose: true
@@ -41,7 +41,7 @@ sylius_frontend_product_review:
         templates: :frontend/product_review
     type: sylius.resource
 
-sylius_product_rating_create:
+sylius_frontend_product_rating_create:
     path: /rating/new
     methods: [GET, POST]
     defaults:
@@ -58,7 +58,7 @@ sylius_product_rating_create:
     options:
         expose: true
 
-sylius_product_rating_update:
+sylius_frontend_product_rating_update:
     path: /rating/edit
     methods: [GET, PUT, PATCH]
     defaults:
