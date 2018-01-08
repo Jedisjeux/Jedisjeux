@@ -42,22 +42,18 @@ class ProductReview extends Review
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
     /**
-     * @param string $code
-     *
-     * @return $this
+     * @param string|null $code
      */
-    public function setCode($code)
+    public function setCode($code): void
     {
         $this->code = $code;
-
-        return $this;
     }
 }
