@@ -33,9 +33,6 @@ class SlideShowBlock implements ResourceInterface
      */
     protected $blocks;
 
-    /**
-     * SlideShowBlock constructor.
-     */
     public function __construct()
     {
         $this->blocks = new ArrayCollection();
@@ -44,7 +41,7 @@ class SlideShowBlock implements ResourceInterface
     /**
      * @return Block[]|Collection
      */
-    public function getBlocks()
+    public function getBlocks(): Collection
     {
         return $this->blocks;
     }
@@ -54,35 +51,27 @@ class SlideShowBlock implements ResourceInterface
      *
      * @return bool
      */
-    public function hasBlock(Block $block)
+    public function hasBlock(Block $block): bool
     {
         return $this->blocks->contains($block);
     }
 
     /**
      * @param Block $block
-     *
-     * @return $this
      */
-    public function addBlock(Block $block)
+    public function addBlock(Block $block): void
     {
         if (!$this->hasBlock($block)) {
             $block->setSlideShowBlock($this);
             $this->blocks->add($block);
         }
-
-        return $this;
     }
 
     /**
      * @param Block $block
-     *
-     * @return $this
      */
-    public function removeBlock(Block $block)
+    public function removeBlock(Block $block): void
     {
         $this->blocks->removeElement($block);
-
-        return $this;
     }
 }
