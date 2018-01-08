@@ -36,42 +36,34 @@ class PubBanner extends AbstractImage
     protected $dealer;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTargetUrl()
+    public function getTargetUrl(): ?string
     {
         return $this->targetUrl;
     }
 
     /**
-     * @param string $targetUrl
-     *
-     * @return $this
+     * @param string|null $targetUrl
      */
-    public function setTargetUrl($targetUrl)
+    public function setTargetUrl(?string $targetUrl): void
     {
         $this->targetUrl = $targetUrl;
-
-        return $this;
     }
 
     /**
-     * @return Dealer
+     * @return Dealer|null
      */
-    public function getDealer()
+    public function getDealer(): ?Dealer
     {
         return $this->dealer;
     }
 
     /**
-     * @param Dealer $dealer
-     *
-     * @return $this
+     * @param Dealer|null $dealer
      */
-    public function setDealer($dealer)
+    public function setDealer(?Dealer $dealer): void
     {
         $this->dealer = $dealer;
-
-        return $this;
     }
 }
