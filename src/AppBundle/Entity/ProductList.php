@@ -89,61 +89,57 @@ class ProductList implements ResourceInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
     /**
-     * @param string $code
-     *
-     * @return $this
+     * @param string|null $code
      */
-    public function setCode($code)
+    public function setCode(?string $code): void
     {
         $this->code = $code;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSlug()
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
+     * @param string|null $name
      */
-    public function setName($name)
+    public function setName(?string $name): void
     {
         $this->name = $name;
     }
 
     /**
-     * @return CustomerInterface
+     * @return CustomerInterface|null
      */
-    public function getOwner()
+    public function getOwner(): ?CustomerInterface
     {
         return $this->owner;
     }
 
     /**
-     * @param CustomerInterface $owner
+     * @param CustomerInterface|null $owner
      */
-    public function setOwner(CustomerInterface $owner = null)
+    public function setOwner(?CustomerInterface $owner): void
     {
         $this->owner = $owner;
     }
@@ -151,7 +147,7 @@ class ProductList implements ResourceInterface
     /**
      * @return Collection|ProductInterface[]
      */
-    public function getItems()
+    public function getItems(): ?Collection
     {
         return $this->items;
     }
@@ -161,42 +157,34 @@ class ProductList implements ResourceInterface
      *
      * @return bool
      */
-    public function hasItem(ProductListItem $item)
+    public function hasItem(ProductListItem $item): bool
     {
         return $this->items->contains($item);
     }
 
     /**
      * @param ProductListItem $item
-     *
-     * @return $this
      */
-    public function addItem(ProductListItem $item)
+    public function addItem(ProductListItem $item): void
     {
         if (!$this->hasItem($item)) {
             $item->setList($this);
             $this->items->add($item);
         }
-
-        return $this;
     }
 
     /**
      * @param ProductListItem $item
-     *
-     * @return $this
      */
-    public function removeItem(ProductListItem $item)
+    public function removeItem(ProductListItem $item): void
     {
         $this->items->removeElement($item);
-
-        return $this;
     }
 
     /**
      * @return ProductInterface|null
      */
-    public function getLastProduct()
+    public function getLastProduct(): ?ProductInterface
     {
         /** @var ProductListItem $lastItem */
         $lastItem = $this->items->last();
@@ -207,7 +195,7 @@ class ProductList implements ResourceInterface
     /**
      * {@inheritdoc}
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getName();
     }
