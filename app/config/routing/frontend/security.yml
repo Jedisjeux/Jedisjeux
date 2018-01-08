@@ -1,4 +1,4 @@
-sylius_shop_login:
+sylius_frontend_login:
     path: /login
     methods: [GET]
     defaults:
@@ -6,7 +6,7 @@ sylius_shop_login:
         _sylius:
             template: frontend/security/login.html.twig
 
-sylius_shop_login_check:
+sylius_frontend_login_check:
     path: /login-check
     defaults:
         _controller: sylius.controller.user_security:checkAction
@@ -34,18 +34,18 @@ sylius_user_request_password_reset_token:
         _controller: sylius.controller.app_user:requestPasswordResetTokenAction
         _sylius:
             template: frontend/account/requestPasswordReset.html.twig
-            redirect: sylius_shop_login
+            redirect: sylius_frontend_login
 
-sylius_shop_password_reset:
+sylius_frontend_password_reset:
     path: /forgotten-password/{token}
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.app_user:resetPasswordAction
         _sylius:
             template: frontend/account/resetPassword.html.twig
-            redirect: sylius_shop_login
+            redirect: sylius_frontend_login
 
-sylius_shop_user_check_action:
+sylius_frontend_user_check_action:
     path: /user-check
     methods: [GET]
     defaults:
@@ -58,13 +58,13 @@ sylius_shop_user_check_action:
                     email: $email
             serialization_groups: [Secured]
 
-sylius_shop_user_request_verification_token:
+sylius_frontend_user_request_verification_token:
     path: /verify
     methods: [POST]
     defaults:
         _controller: sylius.controller.app_user:requestVerificationTokenAction
 
-sylius_shop_user_verification:
+sylius_frontend_user_verification:
     path: /verify/{token}
     methods: [GET]
     defaults:
