@@ -46,7 +46,6 @@ var paths = {
         css: [
             'css/magnific-popup.css',
             bundlesPath + 'bmatznerjqueryui/css/smoothness/jquery-ui.css',
-            nodeModulesPath + 'jquery-fancybox/source/jquery.fancybox.css',
             nodeModulesPath + 'jquery-fancybox/source/helpers/jquery.fancybox-buttons.css',
             nodeModulesPath + 'jquery-fancybox/source/helpers/jquery.fancybox-thumbs.css'
         ],
