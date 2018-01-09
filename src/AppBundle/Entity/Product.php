@@ -240,6 +240,7 @@ class Product extends BaseProduct implements ReviewableInterface
         $this->listItems = new ArrayCollection();
         $this->gamePlays = new ArrayCollection();
         $this->notifications = new ArrayCollection();
+        $this->barcodes = new ArrayCollection();
         $this->code = uniqid('product_');
     }
 
