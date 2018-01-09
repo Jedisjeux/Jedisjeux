@@ -24,5 +24,7 @@
         });
 
         $('.person-autocomplete').personAutoComplete();
+        $('.app-date-picker').datePicker();
+        $('.app-date-time-picker').dateTimePicker();
     });
 })(jQuery);

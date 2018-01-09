@@ -40,9 +40,9 @@ security:
                 success_handler: sylius.authentication.success_handler
                 failure_handler: sylius.authentication.failure_handler
                 provider: sylius_user_provider
-                login_path: sylius_shop_login
-                check_path: sylius_shop_login_check
-                failure_path: sylius_shop_login
+                login_path: sylius_frontend_login
+                check_path: sylius_frontend_login_check
+                failure_path: sylius_frontend_login
                 default_target_path: app_homepage
                 use_forward:  false
                 #use_referer: true

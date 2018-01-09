@@ -1,7 +1,7 @@
 {% from "macros/games.html.twig" import playerCount, image, releasedAt %}
 
 {% set product = product is defined ? product : resource %}
-{% set productHref = path('sylius_product_show', {'slug': product.slug}) %}
+{% set productHref = path('sylius_frontend_product_show', {'slug': product.slug}) %}
 
 <!-- Image Box #4 Item -->
 <div class="img-box-4-item portfolio">

@@ -1,0 +1,46 @@
+{% set definition = resources.definition %}
+
+{% set path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+
+<div class="col-md-12">
+    <div class="container">
+        <div class="panel-group" id="accordion-alt1">
+            <!-- Panel. Use "panel-XXX" class for different colors. Replace "XXX" with color. -->
+            <div class="panel panel-white">
+                <!-- Panel heading -->
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion-alt1" href="#collapseOne-alt1" aria-expanded="true" class="accordion-toggle">
+                            {{ 'sylius.ui.filters'|trans }}
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne-alt1" class="panel-collapse collapse in" aria-expanded="true">
+                    <!-- Panel body -->
+                    <div class="panel-body">
+                        <form class="form-horizontal">
+                            {% for filter in definition.filters %}
+                                <div class="col-md-4">
+                                    {{ sylius_grid_render_filter(resources, filter) }}
+                                </div>
+                            {% endfor %}
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-1 col-sm-12">
+                                    <button class="btn btn-primary">
+                                        <span class="fa fa-search"></span>
+                                        {{ 'sylius.ui.search'|trans }}
+                                    </button>
+                                    <a href="{{ path }}" class="btn btn-default">
+                                        <span class="fa fa-remove"></span>
+                                        {{ 'sylius.ui.clear_filters'|trans }}
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

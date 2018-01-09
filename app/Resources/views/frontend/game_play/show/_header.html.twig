@@ -14,7 +14,7 @@
                     <div class="img-box-5-img">
                         <!-- Image -->
                         {% if product.mainImage %}
-                            <a href="{{ path('sylius_product_show', { 'slug': product.slug }) }}" rel="product"
+                            <a href="{{ path('sylius_frontend_product_show', { 'slug': product.slug }) }}" rel="product"
                                title="{{ 'app.ui.show_game_sheet'|trans }}"><img
                                         src="{{ product.mainImage.webPath | imagine_filter('default') }}"
                                         alt="" class="img-responsive img-thumbnail"/></a>
@@ -28,7 +28,7 @@
 
                         <div class="container">
                             <div class="row">
-                                <h4>{{ 'app.ui.game_details'|trans }} <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}"><small class="color">({{ product }})</small></a></h4>
+                                <h4>{{ 'app.ui.game_details'|trans }} <a href="{{ path('sylius_frontend_product_show', {'slug': product.slug}) }}"><small class="color">({{ product }})</small></a></h4>
 
                                 <ul class="list-unstyled">
                                     {% if product.joueurMin or product.joueurMax %}
@@ -76,7 +76,7 @@
                                                     {% for mechanism in product.mechanisms %}{% if not first %},{% endif %}
                                                         {% set first = false %}
                                                         <a
-                                                        href="{{ path('sylius_product_index_by_taxon', { 'slug': mechanism.slug }) }}">{{ mechanism }}</a>{% endfor %}
+                                                        href="{{ path('sylius_frontend_product_index_by_taxon', { 'slug': mechanism.slug }) }}">{{ mechanism }}</a>{% endfor %}
                                                 {% endspaceless %}
                                             </p>
                                         </li>
@@ -94,7 +94,7 @@
                                                     {% for key, theme in product.themes %}{% if not first %},{% endif %}
                                                         {% set first = false %}
                                                         <a
-                                                        href="{{ path('sylius_product_index_by_taxon', { 'slug': theme.slug }) }}">{{ theme }}</a>{% endfor %}
+                                                        href="{{ path('sylius_frontend_product_index_by_taxon', { 'slug': theme.slug }) }}">{{ theme }}</a>{% endfor %}
                                                 {% endspaceless %}
                                             </p>
                                         </li>

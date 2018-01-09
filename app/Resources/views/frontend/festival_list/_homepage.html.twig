@@ -1,0 +1,24 @@
+{% import 'macros/images.html.twig' as images %}
+
+{% for festival_list in resources %}
+    {% set path = path('app_frontend_festival_list_item_index', {'festivalListSlug': festival_list.slug}) %}
+    <div class="container">
+
+        <h4 class="mag-head"><a href="{{ path }}"><i
+                        class="fa fa-play color"></i> {{ festival_list.name }}</a></h4>
+        <div class="row">
+            <div class="col-md-5 col-sm-6 text-center">
+                <a href="{{ path }}">
+                    {% if festival_list.image %}
+                        {{ images.render(festival_list.image.webPath, 'full', festival_list.name, 'img-responsive') }}
+                    {% endif %}
+                </a>
+            </div>
+            <div class="col-md-7 col-sm-6">
+                <p>{{ festival_list.description|striptags|raw }}</p>
+                <br>
+            </div>
+        </div>
+    </div>
+    <hr/>
+{% endfor %}

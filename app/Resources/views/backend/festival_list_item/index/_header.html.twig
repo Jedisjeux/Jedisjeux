@@ -1,0 +1,5 @@
+{{ render(url('app_backend_partial_festival_list_show', {
+    'id': app.request.attributes.get('festivalListId'),
+    'template': 'backend/festival_list_item/index/_festivalListHeader.html.twig',
+    'vars': configuration.vars
+})) }}

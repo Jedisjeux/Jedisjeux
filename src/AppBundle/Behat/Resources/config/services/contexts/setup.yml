@@ -128,6 +128,15 @@ services:
             tags:
                 - { name: fob.context_service }
 
+        app.behat.context.setup.festival_list:
+            class: AppBundle\Behat\Context\Setup\FestivalListContext
+            arguments:
+                - "@app.behat.shared_storage"
+                - "@__symfony__.app.fixture.example_factory.festival_list"
+                - "@__symfony__.app.repository.festival_list"
+            tags:
+                - { name: fob.context_service }
+
         app.behat.context.setup.topic:
             class: AppBundle\Behat\Context\Setup\TopicContext
             arguments:

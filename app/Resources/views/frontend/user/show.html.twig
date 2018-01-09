@@ -1,0 +1,34 @@
+{% extends "base.html.twig" %}
+
+{% import 'macro/avatar.html.twig' as avatars %}
+
+{% block headline %}
+    {{ 'sylius.ui.user_details'|trans }}
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    {{ customer }}
+{% endblock %}
+
+{% block body -%}
+    {% set user = customer.user %}
+
+    <div class="shopping-account">
+        <div class="row">
+            <div class="col-md-2 col-sm-4 col-xs-4">
+                <!-- Image -->
+                {{ avatars.render(customer, 'thumbnail_XL', customer, 'img-round img-thumbnail') }}
+            </div>
+            <div class="col-md-10 col-sm-8 col-xs-8">
+                <!-- Your Name / Heading -->
+                <h4>{{ customer }}</h4>
+                <span><i class="fa fa-calendar"></i>&nbsp; {{ 'app.ui.registered_at'|trans }} {{ user.createdAt|localizeddate('medium', 'none') }}</span>
+                <br>
+                <a href="{{ path('app_frontend_user_games_library', {'username': user.usernameCanonical}) }}">
+                    <span><i class="fa fa-cubes color"></i>&nbsp; {{ 'app.ui.game_library'|trans }}</span>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

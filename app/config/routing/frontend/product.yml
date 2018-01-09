@@ -6,7 +6,7 @@ sylius_product:
         redirect: index
     type: sylius.resource
 
-sylius_product_index:
+sylius_frontend_product_index:
     methods: [GET]
     path: /jeux-de-societe/
     defaults:
@@ -16,14 +16,14 @@ sylius_product_index:
             grid: sylius_frontend_product
             template: frontend/game/index.html.twig
 
-sylius_product_release_index:
+sylius_frontend_product_release_index:
     methods: [GET]
     path: /jeux-de-societe/les-sorties
     defaults:
         _controller: FrameworkBundle:Template:template
         template:    frontend/game/releaseIndex.html.twig
 
-sylius_product_index_by_person:
+sylius_frontend_product_index_by_person:
     methods: [GET]
     path: /jeux-de-societe/personnes/{slug}
     defaults:
@@ -35,7 +35,7 @@ sylius_product_index_by_person:
             sorting:
                 createdAt: desc
 
-sylius_product_index_by_taxon:
+sylius_frontend_product_index_by_taxon:
     methods: [GET]
     path: /jeux-de-societe/{slug}
     defaults:
@@ -51,7 +51,7 @@ sylius_product_index_by_taxon:
     options:
       expose: true
 
-sylius_product_show:
+sylius_frontend_product_show:
     methods: [GET]
     path: /jeu-de-societe/{slug}
     defaults:

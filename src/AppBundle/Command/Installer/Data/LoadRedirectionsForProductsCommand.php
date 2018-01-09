@@ -100,7 +100,7 @@ class LoadRedirectionsForProductsCommand extends AbstractLoadRedirectionsCommand
             $redirection = $this->getFactory()->createNew();
         }
 
-        $destination = $this->getRooter()->generate('sylius_product_show', ['slug' => $productVariant->getProduct()->getSlug()]);
+        $destination = $this->getRooter()->generate('sylius_frontend_product_show', ['slug' => $productVariant->getProduct()->getSlug()]);
 
         $redirection->setSource($oldHref);
         $redirection->setDestination($destination);

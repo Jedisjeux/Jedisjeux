@@ -78,6 +78,16 @@ sylius_fixtures:
                             -
                                 code: "articles"
                                 name: "Catégories"
+                                children:
+                                    -
+                                        code: "news"
+                                        name: "Actualités"
+                                    -
+                                        code: "review-articles"
+                                        name: "Critiques"
+                                    -
+                                        code: "in-the-boxes"
+                                        name: "C'est dans la boîte"
                 person:
                     options:
                         random: 20
@@ -206,13 +216,13 @@ sylius_fixtures:
                         custom:
                             -
                                 product_variant: "Tigre_&_Euphrate"
-                                image: "app/Resources/fixtures/boxes/euphrat-tigris.jpg"
+                                image: "app/Resources/fixtures/boxes/box-euphrat-tigris.jpg"
                             -
                                 product_variant: "Puerto_Rico"
-                                image: "app/Resources/fixtures/boxes/puerto-rico.jpg"
+                                image: "app/Resources/fixtures/boxes/box-puerto-rico.jpg"
                             -
                                 product_variant: "Shogun"
-                                image: "app/Resources/fixtures/boxes/shogun.jpg"
+                                image: "app/Resources/fixtures/boxes/box-shogun.jpg"
 
                 product_list:
                     options:
@@ -265,3 +275,14 @@ sylius_fixtures:
                 redirection:
                     options:
                         random: 20
+
+                festival_list:
+                    options:
+                        random: 5
+                        custom:
+                            -
+                                name: Essen 2017
+
+                festival_list_item:
+                    options:
+                        random: 100

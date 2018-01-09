@@ -52,7 +52,7 @@
                 <td><a href="{{ dealer_price.url }}" target="_blank">{{ dealer_price.name }}</a></td>
                 <td>
                     {% if dealer_price.product %}
-                        <a href="{{ path('sylius_product_show', {'slug': dealer_price.product.slug }) }}">{{ dealer_price.product }}</a>
+                        <a href="{{ path('sylius_frontend_product_show', {'slug': dealer_price.product.slug }) }}">{{ dealer_price.product }}</a>
                     {% endif %}
                 </td>
                 <td>{{ dealer_price.barcode }}</td>

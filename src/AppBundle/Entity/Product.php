@@ -17,6 +17,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Product\Model\Product as BaseProduct;
 use Sylius\Component\Product\Model\ProductTranslationInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
@@ -805,11 +806,31 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
+     * @return Collection|ReviewInterface[]
+     */
+    public function getGamePlaysByAuthor(CustomerInterface $author)
+    {
+        return $this->gamePlays->filter(function (GamePlay $gamePlay) use ($author) {
+            return $author === $gamePlay->getAuthor();
+        });
+    }
+
+    /**
      * {@inheritdoc}
      *
      * @JMS\VirtualProperty
-     * @JMS\SerializedName("name")
-     * @JMS\Groups({"Default"})
+     * @JMS\Groups({"Default", "Autocomplete"})
+     */
+    public function getCode(): ?string
+    {
+        return parent::getCode();
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @JMS\VirtualProperty
+     * @JMS\Groups({"Default", "Autocomplete"})
      */
     public function getName(): ?string
     {
@@ -820,7 +841,6 @@ class Product extends BaseProduct implements ReviewableInterface
      * {@inheritdoc}
      *
      * @JMS\VirtualProperty
-     * @JMS\SerializedName("slug")
      * @JMS\Groups({"Default"})
      */
     public function getSlug(): ?string

@@ -35,6 +35,13 @@ sylius_backend_customer:
 sylius_backend_customer_group:
     resource: backend/customer_group.yml
 
+app_backend_festival_list:
+    resource: backend/festival_list.yml
+
+app_backend_festival_list_item:
+    resource: backend/festival_list_item.yml
+    prefix: festival-lists/{festivalListId}/items
+
 sylius_admin_taxon:
     resource: backend/taxon.yml
     prefix: /taxons

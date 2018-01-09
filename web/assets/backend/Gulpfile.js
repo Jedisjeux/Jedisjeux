@@ -22,6 +22,7 @@ var paths = {
         js: [
             nodeModulesPath + 'jquery/dist/jquery.min.js',
             nodeModulesPath + 'semantic-ui-css/semantic.min.js',
+            nodeModulesPath + 'semantic-ui-calendar/dist/calendar.js',
             vendorUiPath + 'Resources/private/js/**.js',
             'js/**'
         ],
@@ -31,6 +32,7 @@ var paths = {
         ],
         css: [
             nodeModulesPath + 'semantic-ui-css/semantic.min.css',
+            nodeModulesPath + 'semantic-ui-calendar/dist/calendar.css',
             vendorUiPath + 'Resources/private/css/**',
             'css/**'
         ],

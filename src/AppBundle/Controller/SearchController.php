@@ -116,7 +116,7 @@ class SearchController extends Controller
                     'value' => $entity->getName(),
                     'label' => $entity->getName(),
                     'image' => (null === $entity->getMainImage()) ? null : $this->get('liip_imagine.cache.manager')->getBrowserPath($entity->getMainImage()->getWebPath(), 'thumbnail'),
-                    'href' => $this->generateUrl('sylius_product_show', array(
+                    'href' => $this->generateUrl('sylius_frontend_product_show', array(
                             'slug' => $entity->getSlug(),
                         )
                     ),
@@ -128,7 +128,7 @@ class SearchController extends Controller
                     'value' => $entity->getName(),
                     'label' => $entity->getName(),
                     'image' =>  "//ssl.gstatic.com/accounts/ui/avatar_2x.png",
-                    'href' => $this->generateUrl('sylius_product_index_by_taxon', array(
+                    'href' => $this->generateUrl('sylius_frontend_product_index_by_taxon', array(
                             'permalink' => $entity->getPermalink(),
                         )
                     ),
@@ -156,7 +156,9 @@ class SearchController extends Controller
                     'value' => $entity->getUsername(),
                     'label' => $entity->getUsername(),
                     'image' => (null === $entity->getCustomer()->getAvatar()) ? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : $this->get('liip_imagine.cache.manager')->getBrowserPath($entity->getCustomer()->getAvatar()->getWebPath(), 'thumbnail'),
-                    'href' => "#",
+                    'href' => $this->generateUrl('sylius_frontend_user_show', [
+                        'username' => $entity->getUsernameCanonical()
+                    ]),
                 );
             }
 
@@ -251,14 +253,14 @@ class SearchController extends Controller
         $current = $paginator->getIterator()->current();
 
         if ($current instanceof ProductInterface) {
-            return $this->redirect($this->generateUrl('sylius_product_show', array(
+            return $this->redirect($this->generateUrl('sylius_frontend_product_show', array(
                     'slug' => $current->getSlug(),
                 )
             ));
         }
 
         if ($current instanceof TaxonInterface) {
-            return $this->redirect($this->generateUrl('sylius_product_index_by_taxon', array(
+            return $this->redirect($this->generateUrl('sylius_frontend_product_index_by_taxon', array(
                     'permalink' => $current->getPermalink(),
                 )
             ));

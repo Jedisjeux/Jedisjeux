@@ -115,7 +115,7 @@ class ProductNotificationManager
     {
         foreach ($users as $user) {
             $notification = $this->factory->createForProduct($product, $user->getCustomer());
-            $notification->setTarget($this->router->generate('sylius_product_show', [
+            $notification->setTarget($this->router->generate('sylius_frontend_product_show', [
                 'slug' => $product->getSlug()
             ]));
             $notification->setMessage($message);

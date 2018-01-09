@@ -5,6 +5,7 @@ services:
             - "@app.factory.article"
             - "@app.factory.article_image"
             - "@sylius.repository.customer"
+            - "@sylius.repository.taxon"
 
     app.fixture.example_factory.app_user:
         class: AppBundle\Fixture\Factory\AppUserExampleFactory
@@ -32,6 +33,18 @@ services:
             - "@app.factory.dealer_price"
             - "@sylius.repository.product"
             - "@app.repository.dealer"
+
+    app.fixture.example_factory.festival_list:
+        class: AppBundle\Fixture\Factory\FestivalListExampleFactory
+        arguments:
+            - "@app.factory.festival_list"
+
+    app.fixture.example_factory.festival_list_item:
+        class: AppBundle\Fixture\Factory\FestivalListItemExampleFactory
+        arguments:
+            - "@app.factory.festival_list_item"
+            - "@sylius.repository.product"
+            - "@app.repository.festival_list"
 
     app.fixture.example_factory.game_play:
         class: AppBundle\Fixture\Factory\GamePlayExampleFactory

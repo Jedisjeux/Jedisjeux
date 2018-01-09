@@ -1,0 +1,52 @@
+{% from "macros/games.html.twig" import playerCount, image, releasedAt %}
+
+{% set product = product is defined ? product : resource %}
+{% set productHref = path('sylius_frontend_product_show', {'slug': product.slug}) %}
+
+<!-- Image Box #4 Item -->
+<div class="img-box-4-item portfolio">
+    <!-- Image -->
+    <div class="img-container">
+        <a href="{{ productHref }}">
+            <div class="element">
+                <div class="image-style-one">
+
+                    <img src="{{ image(product, 'image_box_4') }}" alt="{{ product }}"
+                         class="img-responsive"/>
+                    <div class="image-hover">
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    {% if product.mainTaxon %}
+        {% set color = product.mainTaxon.color %}
+        {% set icon = product.mainTaxon.iconClass %}
+    {% endif %}
+
+    <!-- Image Box #4 Content -->
+    <div class="img-box-4-content">
+        <!-- Icon -->
+        <a href="#">
+            {% if color is defined %}
+                <i style="z-index: 10;" class="{{ icon }} bg-{{ color }}"></i>
+            {% endif %}
+        </a>
+        <!-- Heading -->
+        <h4><a href="{{ productHref }}">{{ product }}</a></h4>
+        <!-- Border -->
+
+        <div class="bor bg-{{ color|default('black') }}"></div>
+        <!-- Paragraph -->
+        <p>
+            {{ playerCount(product) }}<br/>
+            à partir de {{ product.ageMin }} ans<br/>
+            {% if product.releasedAt %}
+                {{ 'label.release'|trans }} : {{ releasedAt(product.firstVariant, 'long') }}
+            {% endif %}
+        </p>
+        {% set gamePlayCount = product.gamePlaysByAuthor(app.user.getCustomer()) | length %}
+        <p><strong>{{ gamePlayCount }} partie{% if gamePlayCount > 1 %}s{% endif %}</strong></p>
+    </div>
+</div>

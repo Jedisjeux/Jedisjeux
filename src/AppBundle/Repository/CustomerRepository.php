@@ -43,13 +43,12 @@ class CustomerRepository extends EntityRepository
         $queryBuilder
             ->addSelect('user')
             ->join('o.user', 'user')
-            ->where('user.username = :username')
+            ->where('user.usernameCanonical = :username')
             ->setParameter('username', $username);
 
         return $queryBuilder
             ->getQuery()
-            ->getOneOrNullResult()
-            ;
+            ->getOneOrNullResult();
     }
 
     /**

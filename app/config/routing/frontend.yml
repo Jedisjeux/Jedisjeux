@@ -15,6 +15,9 @@ app_account:
 app_contact_request:
     resource: "frontend/contact_request.yml"
 
+app_festival_list_item:
+    resource: "frontend/festival_list_item.yml"
+
 app_forum:
     resource: "frontend/forum.yml"
 
@@ -30,7 +33,7 @@ sylius_product:
 app_frontend_product_list_item:
     resource: "frontend/product_list_item.yml"
 
-sylius_product_review:
+sylius_frontend_product_review:
     resource: "frontend/product_review.yml"
     prefix: /products/{productId}
 

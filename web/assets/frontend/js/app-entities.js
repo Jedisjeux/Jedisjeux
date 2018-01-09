@@ -29,7 +29,7 @@
                   .append($('<div>').addClass('col-md-4')
                     .append($('<div>').addClass('img-box-5-img')
                       .append(
-                        $('<a>').attr('href', Routing.generate('sylius_product_show', {'slug': product.slug})).append(
+                        $('<a>').attr('href', Routing.generate('sylius_frontend_product_show', {'slug': product.slug})).append(
                           $('<img>')
                             .addClass('img-responsive img-thumbnail')
                             .attr('src', product.image.default)
@@ -152,7 +152,7 @@
       }
 
       $paragraph.append(
-        $('<a>').attr('href', Routing.generate('sylius_product_index_by_taxon', {'permalink': this.permalink}))
+        $('<a>').attr('href', Routing.generate('sylius_frontend_product_index_by_taxon', {'permalink': this.permalink}))
           .html(this.name)
       );
 
@@ -192,7 +192,7 @@
       }
 
       $paragraph.append(
-        $('<a>').attr('href', Routing.generate('sylius_product_index_by_taxon', {'permalink': this.permalink}))
+        $('<a>').attr('href', Routing.generate('sylius_frontend_product_index_by_taxon', {'permalink': this.permalink}))
           .html(this.name)
       );
 

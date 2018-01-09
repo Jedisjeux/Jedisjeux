@@ -51,17 +51,16 @@ final class AdminMenuBuilder
             $this->addCatalogSubMenu($menu);
         }
 
-        if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
-            $this->addCustomersSubMenu($menu);
-        }
-
         if ($this->authorizationChecker->isGranted('ROLE_ARTICLE_MANAGER')) {
             $this->addContentSubMenu($menu);
         }
 
+        // TODO add moderator role
         if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
-            $this->addForumSubMenu($menu);
-            $this->addPartnershipSubMenu($menu);
+            $this->addModerationMenu($menu);
+        }
+
+        if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
             $this->addContactSubMenu($menu);
             $this->addErrorsSubMenu($menu);
             $this->addConfigurationSubMenu($menu);
@@ -104,43 +103,43 @@ final class AdminMenuBuilder
         return $catalog;
     }
 
-    /**
-     * @param ItemInterface $menu
-     *
-     * @return ItemInterface
-     */
-    private function addCustomersSubMenu(ItemInterface $menu)
+    private function addModerationMenu(ItemInterface $menu)
     {
-        $customers = $menu
-            ->addChild('customers')
-            ->setLabel('sylius.ui.customer');
+        $moderation = $menu
+            ->addChild('moderation')
+            ->setLabel('app.ui.moderation');
 
-        $customers
+        $moderation
             ->addChild('backend_customer', ['route' => 'sylius_backend_customer_index'])
             ->setLabel('sylius.ui.customers')
             ->setLabelAttribute('icon', 'users');
 
-        $customers
-            ->addChild('backend_customer_group', ['route' => 'sylius_backend_customer_group_index'])
-            ->setLabel('sylius.ui.groups')
-            ->setLabelAttribute('icon', 'archive');
-
-        $customers
+        $moderation
             ->addChild('backend_product_review', ['route' => 'sylius_backend_product_review_index'])
             ->setLabel('sylius.ui.product_reviews')
             ->setLabelAttribute('icon', 'star');
 
-        $customers
+        $moderation
             ->addChild('backend_game_play', ['route' => 'app_backend_game_play_index'])
             ->setLabel('app.ui.game_plays')
             ->setLabelAttribute('icon', 'play');
 
-        $customers
+        $moderation
             ->addChild('backend_product_list', ['route' => 'app_backend_product_list_index'])
             ->setLabel('app.ui.product_lists')
             ->setLabelAttribute('icon', 'list');
 
-        return $customers;
+        $moderation
+            ->addChild('backend_topic', ['route' => 'app_backend_topic_index'])
+            ->setLabel('app.ui.topics')
+            ->setLabelAttribute('icon', 'comment');
+
+        $moderation
+            ->addChild('backend_post', ['route' => 'app_backend_post_index'])
+            ->setLabel('app.ui.posts')
+            ->setLabelAttribute('icon', 'comments');
+
+        return $moderation;
     }
 
     /**
@@ -159,6 +158,11 @@ final class AdminMenuBuilder
             ->setLabel('app.ui.articles')
             ->setLabelAttribute('icon', 'newspaper');
 
+        $content
+            ->addChild('backend_festival_list', ['route' => 'app_backend_festival_list_index'])
+            ->setLabel('app.ui.festival_lists')
+            ->setLabelAttribute('icon', 'list');
+
 //        $content
 //            ->addChild('backend_static_content', ['route' => 'sylius_backend_static_content_index'])
 //            ->setLabel('sylius.ui.static_contents')
@@ -172,54 +176,6 @@ final class AdminMenuBuilder
         }
 
         return $content;
-    }
-
-    /**
-     * @param ItemInterface $menu
-     *
-     * @return ItemInterface
-     */
-    private function addForumSubMenu(ItemInterface $menu)
-    {
-        $forum = $menu
-            ->addChild('forum')
-            ->setLabel('app.ui.forum');
-
-        $forum
-            ->addChild('backend_topic', ['route' => 'app_backend_topic_index'])
-            ->setLabel('app.ui.topics')
-            ->setLabelAttribute('icon', 'comment');
-
-        $forum
-            ->addChild('backend_post', ['route' => 'app_backend_post_index'])
-            ->setLabel('app.ui.posts')
-            ->setLabelAttribute('icon', 'comments');
-
-        return $forum;
-    }
-
-    /**
-     * @param ItemInterface $menu
-     *
-     * @return ItemInterface
-     */
-    private function addPartnershipSubMenu(ItemInterface $menu)
-    {
-        $partnership = $menu
-            ->addChild('partnership')
-            ->setLabel('app.ui.partnership');
-
-        $partnership
-            ->addChild('backend_dealer', ['route' => 'app_backend_dealer_index'])
-            ->setLabel('app.ui.dealers')
-            ->setLabelAttribute('icon', 'building');
-
-        $partnership
-            ->addChild('backend_dealer_price', ['route' => 'app_backend_dealer_price_index'])
-            ->setLabel('app.ui.prices')
-            ->setLabelAttribute('icon', 'euro');
-
-        return $partnership;
     }
 
     /**
@@ -271,9 +227,24 @@ final class AdminMenuBuilder
             ->addChild('configuration')
             ->setLabel('sylius.ui.configuration');
 
+        $configuration
+            ->addChild('backend_dealer', ['route' => 'app_backend_dealer_index'])
+            ->setLabel('app.ui.dealers')
+            ->setLabelAttribute('icon', 'building');
+
+        $configuration
+            ->addChild('backend_dealer_price', ['route' => 'app_backend_dealer_price_index'])
+            ->setLabel('app.ui.prices')
+            ->setLabelAttribute('icon', 'euro');
+
         $configuration->addChild('backend_redirection', ['route' => 'app_backend_redirection_index'])
             ->setLabel('app.ui.redirections')
             ->setLabelAttribute('icon', 'exchange');
+
+        $configuration
+            ->addChild('backend_customer_group', ['route' => 'sylius_backend_customer_group_index'])
+            ->setLabel('sylius.ui.groups')
+            ->setLabelAttribute('icon', 'archive');
 
         return $configuration;
     }

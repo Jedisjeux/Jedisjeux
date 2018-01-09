@@ -40,6 +40,9 @@ sylius_frontend_account_change_password:
 app_account_game_play:
     resource: "account/game_play.yml"
 
+app_account_most_played:
+    resource: "account/most_played.yml"
+
 app_account_product_list:
     resource: "account/product_list.yml"
 

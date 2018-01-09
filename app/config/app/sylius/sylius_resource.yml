@@ -46,6 +46,17 @@ sylius_resource:
                 model: AppBundle\Entity\DealerPrice
                 repository: AppBundle\Repository\DealerPriceRepository
                 form: AppBundle\Form\Type\DealerPriceType
+        app.festival_list:
+            classes:
+                model: AppBundle\Entity\FestivalList
+                repository: AppBundle\Repository\FestivalListRepository
+                form: AppBundle\Form\Type\FestivalListType
+        app.festival_list_item:
+            classes:
+                model: AppBundle\Entity\FestivalListItem
+                factory: AppBundle\Factory\FestivalListItemFactory
+                repository: AppBundle\Repository\FestivalListItemRepository
+                form: AppBundle\Form\Type\FestivalListItemType
         app.not_found_page:
             classes:
                 model: AppBundle\Entity\NotFound
