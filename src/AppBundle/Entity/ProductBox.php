@@ -50,59 +50,48 @@ class ProductBox implements ResourceInterface
     /**
      * @return ProductBoxImage|null
      */
-    public function getImage()
+    public function getImage(): ?ProductBoxImage
     {
         return $this->image;
     }
 
     /**
      * @param ProductBoxImage|null $image
-     *
-     * @return ProductBox
      */
-    public function setImage(ProductBoxImage $image = null)
+    public function setImage(?ProductBoxImage $image): void
     {
         $this->image = $image;
-
-        return $this;
     }
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getHeight()
+    public function getHeight(): ?float
     {
         return $this->height;
     }
 
     /**
-     * @param float $height
-     *
-     * @return ProductBox
+     * @param float|null $height
      */
-    public function setHeight($height)
+    public function setHeight(?float $height): void
     {
         $this->height = $height;
-
-        return $this;
     }
 
     /**
      * @return ProductVariantInterface|null
      */
-    public function getProductVariant()
+    public function getProductVariant(): ?ProductVariantInterface
     {
         return $this->productVariant;
     }
 
     /**
      * @param ProductVariantInterface|null $productVariant
-     * @return ProductBox
      */
-    public function setProductVariant(ProductVariantInterface $productVariant = null)
+    public function setProductVariant(?ProductVariantInterface $productVariant): void
     {
         $this->productVariant = $productVariant;
-
-        return $this;
     }
 }

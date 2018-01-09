@@ -105,142 +105,114 @@ class Post implements ResourceInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
     /**
-     * @param string $code
-     *
-     * @return Post
+     * @param string|null $code
      */
-    public function setCode($code)
+    public function setCode(?string $code): void
     {
         $this->code = $code;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBody()
+    public function getBody(): ? string
     {
         return $this->body;
     }
 
     /**
-     * @param string $body
-     *
-     * @return $this
+     * @param string|null $body
      */
-    public function setBody($body)
+    public function setBody(?string $body): void
     {
         $this->body = $body;
-
-        return $this;
     }
 
     /**
-     * @return Topic
+     * @return Topic|null
      */
-    public function getParent()
+    public function getParent(): ?Topic
     {
         return $this->parent;
     }
 
     /**
-     * @param Topic $parent
-     *
-     * @return $this
+     * @param Topic|null $parent
      */
-    public function setParent($parent)
+    public function setParent(?Topic $parent): void
     {
         $this->parent = $parent;
-
-        return $this;
     }
 
     /**
-     * @return Topic
+     * @return Topic|null
      */
-    public function getTopic()
+    public function getTopic(): ?Topic
     {
         return $this->topic;
     }
 
     /**
-     * @param Topic $topic
-     *
-     * @return $this
+     * @param Topic|null $topic
      */
-    public function setTopic($topic)
+    public function setTopic(?Topic $topic): void
     {
         $this->topic = $topic;
-
-        return $this;
     }
 
     /**
-     * @return GamePlay
+     * @return GamePlay|null
      */
-    public function getGamePlay()
+    public function getGamePlay(): ?GamePlay
     {
         return $this->gamePlay;
     }
 
     /**
-     * @param GamePlay $gamePlay
-     *
-     * @return $this
+     * @param GamePlay|null $gamePlay
      */
-    public function setGamePlay($gamePlay)
+    public function setGamePlay(?GamePlay $gamePlay): void
     {
         $this->gamePlay = $gamePlay;
-
-        return $this;
     }
 
     /**
-     * @return Article
+     * @return Article|null
      */
-    public function getArticle()
+    public function getArticle(): ?Article
     {
         return $this->article;
     }
 
     /**
-     * @param Article $article
-     *
-     * @return Post
+     * @param Article|null $article
      */
-    public function setArticle(Article $article = null)
+    public function setArticle(?Article $article): void
     {
         $this->article = $article;
-
-        return $this;
     }
 
     /**
-     * @return CustomerInterface
+     * @return CustomerInterface|null
      */
-    public function getAuthor()
+    public function getAuthor(): ?CustomerInterface
     {
         return $this->author;
     }
 
     /**
-     * @param CustomerInterface $author
-     *
-     * @return $this
+     * @param CustomerInterface|null $author
      */
-    public function setAuthor($author)
+    public function setAuthor(?CustomerInterface $author): void
     {
         $this->author = $author;
-
-        return $this;
     }
 }

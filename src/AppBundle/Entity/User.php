@@ -39,34 +39,31 @@ class User extends BaseUser
     protected $customer;
 
     /**
-     * @return CustomerInterface
+     * @return CustomerInterface|null
      */
-    public function getCustomer()
+    public function getCustomer(): ?CustomerInterface
     {
         return $this->customer;
     }
 
     /**
-     * @param CustomerInterface $customer
-     *
-     * @return $this
+     * @param CustomerInterface|null $customer
      */
-    public function setCustomer($customer)
+    public function setCustomer(?CustomerInterface $customer): void
     {
         $this->customer = $customer;
-
-        return $this;
     }
 
     /**
-     * {@inheritdoc}
+     * @return string|null
      */
     public function getEmail(): ?string
     {
         return $this->customer->getEmail();
     }
+
     /**
-     * {@inheritdoc}
+     * @param string|null $email
      */
     public function setEmail(?string $email): void
     {
@@ -74,7 +71,7 @@ class User extends BaseUser
     }
 
     /**
-     * {@inheritdoc}
+     * @return string|null
      */
     public function getEmailCanonical(): ?string
     {
@@ -82,7 +79,7 @@ class User extends BaseUser
     }
 
     /**
-     * {@inheritdoc}
+     * @param string|null $emailCanonical
      */
     public function setEmailCanonical(?string $emailCanonical): void
     {

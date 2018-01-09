@@ -108,7 +108,7 @@ abstract class AbstractImage implements ResourceInterface
      *
      * @return string
      */
-    protected function getUploadDir()
+    protected function getUploadDir(): string
     {
         return 'uploads/img';
     }

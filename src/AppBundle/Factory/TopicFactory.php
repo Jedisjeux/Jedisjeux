@@ -107,9 +107,8 @@ class TopicFactory implements FactoryInterface
         $gamePlay
             ->setTopic($topic);
 
-        $topic
-            ->setTitle("Partie de ".(string) $gamePlay->getProduct())
-            ->setAuthor($gamePlay->getAuthor());
+        $topic->setTitle("Partie de ".(string) $gamePlay->getProduct());
+        $topic->setAuthor($gamePlay->getAuthor());
 
         return $topic;
     }
@@ -128,9 +127,8 @@ class TopicFactory implements FactoryInterface
         $article
             ->setTopic($topic);
 
-        $topic
-            ->setTitle($article->getTitle())
-            ->setAuthor($article->getAuthor());
+        $topic->setTitle($article->getTitle());
+        $topic->setAuthor($article->getAuthor());
 
         return $topic;
     }

@@ -57,90 +57,74 @@ class ContactRequest implements ResourceInterface
     protected $body;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFirstName()
+    public function getFirstName(): ?string
     {
         return $this->firstName;
     }
 
     /**
-     * @param string $firstName
-     *
-     * @return $this
+     * @param string|null $firstName
      */
-    public function setFirstName($firstName)
+    public function setFirstName(?string $firstName): void
     {
         $this->firstName = $firstName;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getLastName()
+    public function getLastName(): ?string
     {
         return $this->lastName;
     }
 
     /**
-     * @param string $lastName
-     *
-     * @return $this
+     * @param string|null $lastName
      */
-    public function setLastName($lastName)
+    public function setLastName(?string $lastName): void
     {
         $this->lastName = $lastName;
-
-        return $this;
     }
 
     /**
      * @return string
      */
-    public function getFullName()
+    public function getFullName(): string
     {
         return $this->getFirstName() . ' ' . $this->getLastName();
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
     /**
-     * @param string $email
-     *
-     * @return $this
+     * @param string|null $email
      */
-    public function setEmail($email)
+    public function setEmail(?string $email): void
     {
         $this->email = $email;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBody()
+    public function getBody(): ?string
     {
         return $this->body;
     }
 
     /**
-     * @param string $body
-     *
-     * @return $this
+     * @param string|null $body
      */
-    public function setBody($body)
+    public function setBody(?string $body): void
     {
         $this->body = $body;
-
-        return $this;
     }
 }

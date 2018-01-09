@@ -27,8 +27,8 @@ class ProductBoxSpec extends ObjectBehavior
 
     function its_height_is_mutable()
     {
-        $this->setHeight(42);
-        $this->getHeight()->shouldReturn(42);
+        $this->setHeight(42.0);
+        $this->getHeight()->shouldReturn(42.0);
     }
 
     function it_has_no_image_by_default()

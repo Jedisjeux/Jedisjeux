@@ -162,23 +162,19 @@ class Person implements ResourceInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
     /**
-     * @param string $code
-     *
-     * @return $this
+     * @param string|null $code
      */
-    public function setCode($code)
+    public function setCode(?string $code): void
     {
         $this->code = $code;
-
-        return $this;
     }
 
     /**
@@ -198,7 +194,7 @@ class Person implements ResourceInterface
      * @JMS\SerializedName("image")
      * @JMS\Groups({"Default", "Detailed"})
      */
-    public function getFirstImage()
+    public function getFirstImage(): ?PersonImage
     {
         $firstImage = $this->images->first();
 
@@ -206,169 +202,105 @@ class Person implements ResourceInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getLastName()
+    public function getLastName(): ?string
     {
         return $this->lastName;
     }
 
     /**
-     * @param string $lastName
-     *
-     * @return $this
+     * @param string|null $lastName
      */
-    public function setLastName($lastName)
+    public function setLastName(?string $lastName): void
     {
         $this->lastName = $lastName;
-
-        return $this;
     }
 
     /**
      * @return ProductInterface[]|Collection
      */
-    public function getPublisherProducts()
+    public function getPublisherProducts(): Collection
     {
         return $this->publisherProducts;
     }
 
     /**
-     * @param ProductInterface[]|Collection $publisherProducts
-     *
-     * @return $this
+     * @return string|null
      */
-    public function setPublisherProducts($publisherProducts)
-    {
-        $this->publisherProducts = $publisherProducts;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFirstName()
+    public function getFirstName(): ?string
     {
         return $this->firstName;
     }
 
     /**
-     * @param string $firstName
-     *
-     * @return $this
+     * @param string|null $firstName
      */
-    public function setFirstName($firstName)
+    public function setFirstName(?string $firstName): void
     {
         $this->firstName = $firstName;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getWebsite()
+    public function getWebsite(): ?string
     {
         return $this->website;
     }
 
     /**
-     * @param string $website
-     *
-     * @return $this
+     * @param string|null $website
      */
-    public function setWebsite($website)
+    public function setWebsite(?string $website): void
     {
         $this->website = $website;
-
-        return $this;
     }
 
     /**
      * @return ProductInterface[]|Collection
      */
-    public function getDesignerProducts()
+    public function getDesignerProducts(): Collection
     {
         return $this->designerProducts;
     }
 
     /**
-     * @param ProductInterface[]|Collection $designerProducts
-     *
-     * @return $this
-     */
-    public function setDesignerProducts($designerProducts)
-    {
-        $this->designerProducts = $designerProducts;
-
-        return $this;
-    }
-
-    /**
      * @return ProductInterface[]|Collection
      */
-    public function getArtistProducts()
+    public function getArtistProducts(): Collection
     {
         return $this->artistProducts;
     }
 
     /**
-     * @param ProductInterface[]|Collection $artistProducts
-     *
-     * @return $this
+     * @param string|null $description
      */
-    public function setArtistProducts($artistProducts)
-    {
-        $this->artistProducts = $artistProducts;
-
-        return $this;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return $this
-     */
-    public function setDescription($description)
+    public function setDescription(?string $description): void
     {
         $this->description = $description;
-
-        return $this;
     }
 
     /**
-     * Get description
-     *
-     * @return string 
+     * @return string|null
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
     /**
-     * Set slug
-     *
-     * @param string $slug
-     *
-     * @return $this
+     * @param string|null $slug
      */
-    public function setSlug($slug)
+    public function setSlug(?string $slug): void
     {
         $this->slug = $slug;
-
-        return $this;
     }
 
     /**
-     * Get slug
-     *
-     * @return string 
+     * @return string|null
      */
-    public function getSlug()
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
@@ -383,14 +315,10 @@ class Person implements ResourceInterface
 
     /**
      * @param int $productCountAsDesigner
-     *
-     * @return $this
      */
-    public function setProductCountAsDesigner($productCountAsDesigner)
+    public function setProductCountAsDesigner(int $productCountAsDesigner): void
     {
         $this->productCountAsDesigner = $productCountAsDesigner;
-
-        return $this;
     }
 
     /**
@@ -403,14 +331,10 @@ class Person implements ResourceInterface
 
     /**
      * @param int $productCountAsArtist
-     *
-     * @return $this
      */
-    public function setProductCountAsArtist($productCountAsArtist)
+    public function setProductCountAsArtist(int $productCountAsArtist): void
     {
         $this->productCountAsArtist = $productCountAsArtist;
-
-        return $this;
     }
 
     /**
@@ -423,20 +347,16 @@ class Person implements ResourceInterface
 
     /**
      * @param int $productCountAsPublisher
-     *
-     * @return $this
      */
-    public function setProductCountAsPublisher($productCountAsPublisher)
+    public function setProductCountAsPublisher(int $productCountAsPublisher): void
     {
         $this->productCountAsPublisher = $productCountAsPublisher;
-
-        return $this;
     }
 
     /**
      * @return PersonImage[]|Collection
      */
-    public function getImages()
+    public function getImages(): Collection
     {
         return $this->images;
     }
@@ -446,36 +366,28 @@ class Person implements ResourceInterface
      *
      * @return bool
      */
-    public function hasImage(PersonImage $image)
+    public function hasImage(PersonImage $image): bool
     {
         return $this->images->contains($image);
     }
 
     /**
      * @param PersonImage $image
-     *
-     * @return $this
      */
-    public function addImage(PersonImage $image)
+    public function addImage(PersonImage $image): void
     {
         if (!$this->hasImage($image)) {
             $image->setPerson($this);
             $this->images->add($image);
         }
-
-        return $this;
     }
 
     /**
      * @param PersonImage $image
-     *
-     * @return $this
      */
-    public function removeImage(PersonImage $image)
+    public function removeImage(PersonImage $image): void
     {
         $this->images->removeElement($image);
-
-        return $this;
     }
 
     /**
@@ -483,7 +395,7 @@ class Person implements ResourceInterface
      *
      * @return Collection|\Sylius\Component\Taxonomy\Model\TaxonInterface[]
      */
-    public function getTaxons($rootTaxon = null)
+    public function getTaxons($rootTaxon = null): Collection
     {
         if (null !== $rootTaxon) {
             return $this->taxons->filter(function (TaxonInterface $taxon) use ($rootTaxon) {
@@ -495,28 +407,25 @@ class Person implements ResourceInterface
     }
 
     /**
-     * @return TaxonInterface
+     * @return TaxonInterface|null
      */
-    public function getZone()
+    public function getZone(): ?TaxonInterface
     {
         $zones = $this->getTaxons('zones');
+
         return $zones->count() > 0 ? $zones->first() : null;
     }
 
     /**
      * @param TaxonInterface $zone
-     *
-     * @return $this
      */
-    public function setZone(TaxonInterface $zone)
+    public function setZone(TaxonInterface $zone): void
     {
         if ($this->getZone()) {
             $this->removeTaxon($this->getZone());
         }
 
         $this->addTaxon($zone);
-
-        return $this;
     }
 
     /**
@@ -524,35 +433,27 @@ class Person implements ResourceInterface
      *
      * @return bool
      */
-    public function hasTaxon(TaxonInterface $taxon)
+    public function hasTaxon(TaxonInterface $taxon): bool
     {
         return $this->taxons->contains($taxon);
     }
 
     /**
      * @param TaxonInterface $taxon
-     *
-     * @return $this
      */
-    public function addTaxon(TaxonInterface $taxon)
+    public function addTaxon(TaxonInterface $taxon): void
     {
         if (!$this->hasTaxon($taxon)) {
             $this->taxons->add($taxon);
         }
-
-        return $this;
     }
 
     /**
      * @param TaxonInterface $taxon
-     *
-     * @return $this
      */
-    public function removeTaxon(TaxonInterface $taxon)
+    public function removeTaxon(TaxonInterface $taxon): void
     {
         $this->taxons->removeElement($taxon);
-
-        return $this;
     }
 
     /**
@@ -562,7 +463,7 @@ class Person implements ResourceInterface
      * @JMS\SerializedName("full_name")
      * @JMS\Groups({"Default", "Detailed", "Autocomplete"})
      */
-    public function getFullName()
+    public function getFullName(): string
     {
         if (null === $this->getFirstName()) {
             return $this->getLastName();
@@ -576,7 +477,7 @@ class Person implements ResourceInterface
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getFullName();
     }

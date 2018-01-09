@@ -102,9 +102,10 @@ class ArticleNotificationManager
     {
         foreach ($users as $user) {
             $notification = $this->factory->createForArticle($article, $user->getCustomer());
-            $notification
-                ->setTarget($this->router->generate('app_frontend_article_show', ['slug' => $article->getSlug()]))
-                ->setMessage($message);
+            $notification->setTarget($this->router->generate('app_frontend_article_show', [
+                'slug' => $article->getSlug()
+            ]));
+            $notification->setMessage($message);
 
             $this->manager->persist($notification);
         }

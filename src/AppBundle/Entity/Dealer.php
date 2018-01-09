@@ -12,6 +12,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -78,98 +79,82 @@ class Dealer implements ResourceInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
     /**
-     * @param string $code
-     *
-     * @return $this
+     * @param string|null $code
      */
-    public function setCode($code)
+    public function setCode(?string $code): void
     {
         $this->code = $code;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
-     *
-     * @return $this
+     * @param string|null $name
      */
-    public function setName($name)
+    public function setName(?string $name): void
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
-     * @return DealerImage
+     * @return DealerImage|null
      */
-    public function getImage()
+    public function getImage(): ?DealerImage
     {
         return $this->image;
     }
 
     /**
      * @param DealerImage $image
-     *
-     * @return $this
      */
-    public function setImage($image)
+    public function setImage(?DealerImage $image): void
     {
         $this->image = $image;
-
-        return $this;
     }
 
     /**
      * @return bool
      */
-    public function hasPriceList()
+    public function hasPriceList(): bool
     {
         return null !== $this->priceList;
     }
 
     /**
-     * @return PriceList
+     * @return PriceList|null
      */
-    public function getPriceList()
+    public function getPriceList(): ?PriceList
     {
         return $this->priceList;
     }
 
     /**
-     * @param PriceList $priceList
-     *
-     * @return $this
+     * @param PriceList|null $priceList
      */
-    public function setPriceList(PriceList $priceList = null)
+    public function setPriceList(?PriceList $priceList): void
     {
         $priceList->setDealer($this);
         $this->priceList = $priceList;
-
-        return $this;
     }
 
     /**
-     * @return PubBanner[]|ArrayCollection
+     * @return PubBanner[]|Collection
      */
-    public function getPubBanners()
+    public function getPubBanners(): Collection
     {
         return $this->pubBanners;
     }
@@ -179,42 +164,34 @@ class Dealer implements ResourceInterface
      *
      * @return bool
      */
-    public function hasPubBanner(PubBanner $pubBanner):bool
+    public function hasPubBanner(PubBanner $pubBanner): bool
     {
         return $this->pubBanners->contains($pubBanner);
     }
 
     /**
      * @param PubBanner $pubBanner
-     *
-     * @return $this
      */
-    public function addPubBanner(PubBanner $pubBanner)
+    public function addPubBanner(PubBanner $pubBanner): void
     {
         if (!$this->hasPubBanner($pubBanner)) {
             $pubBanner->setDealer($this);
             $this->pubBanners->add($pubBanner);
         }
-
-        return $this;
     }
 
     /**
      * @param PubBanner $pubBanner
-     *
-     * @return $this
      */
-    public function removePubBanner(PubBanner $pubBanner)
+    public function removePubBanner(PubBanner $pubBanner): void
     {
         $this->pubBanners->removeElement($pubBanner);
-
-        return $this;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getName();
     }

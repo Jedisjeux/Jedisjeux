@@ -33,42 +33,34 @@ class GamePlayImage extends AbstractImage
     protected $description;
 
     /**
-     * @return GamePlay
+     * @return GamePlay|null
      */
-    public function getGamePlay()
+    public function getGamePlay(): ?GamePlay
     {
         return $this->gamePlay;
     }
 
     /**
-     * @param GamePlay $gamePlay
-     *
-     * @return $this
+     * @param GamePlay|null $gamePlay
      */
-    public function setGamePlay($gamePlay)
+    public function setGamePlay(?GamePlay $gamePlay): void
     {
         $this->gamePlay = $gamePlay;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
     /**
-     * @param string $description
-     *
-     * @return $this
+     * @param string|null $description
      */
-    public function setDescription($description)
+    public function setDescription(?string $description): void
     {
         $this->description = $description;
-
-        return $this;
     }
 }

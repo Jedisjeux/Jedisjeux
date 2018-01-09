@@ -62,80 +62,66 @@ class ProductVariantImage extends AbstractImage
     }
 
     /**
-     * {@inheritdoc}
+     * @return ProductVariantInterface|null
      */
-    public function getVariant()
+    public function getVariant(): ?ProductVariantInterface
     {
         return $this->variant;
     }
 
     /**
-     * {@inheritdoc}
+     * @param ProductVariantInterface|null $variant
      */
-    public function setVariant(ProductVariantInterface $variant = null)
+    public function setVariant(?ProductVariantInterface $variant): void
     {
         $this->variant = $variant;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
     /**
-     * @param string $description
-     *
-     * @return $this
+     * @param string|null $description
      */
-    public function setDescription($description)
+    public function setDescription(?string $description): void
     {
         $this->description = $description;
-
-        return $this;
     }
 
     /**
      * @return boolean
      */
-    public function isMain()
+    public function isMain(): bool
     {
         return $this->main;
     }
 
     /**
      * @param boolean $main
-     *
-     * @return $this
      */
-    public function setMain($main)
+    public function setMain(bool $main): void
     {
         $this->main = $main;
-
-        return $this;
     }
 
     /**
      * @return boolean
      */
-    public function isMaterial()
+    public function isMaterial(): bool
     {
         return $this->material;
     }
 
     /**
      * @param boolean $material
-     *
-     * @return $this
      */
-    public function setMaterial($material)
+    public function setMaterial($material): void
     {
         $this->material = $material;
-
-        return $this;
     }
 }

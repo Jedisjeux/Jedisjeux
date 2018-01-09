@@ -114,7 +114,7 @@ class Notification implements ResourceInterface
     /**
      * @return CustomerInterface[]|Collection
      */
-    public function getAuthors()
+    public function getAuthors(): Collection
     {
         return $this->authors;
     }
@@ -124,174 +124,138 @@ class Notification implements ResourceInterface
      *
      * @return bool
      */
-    public function hasAuthor(CustomerInterface $author)
+    public function hasAuthor(CustomerInterface $author): bool
     {
         return $this->authors->contains($author);
     }
 
     /**
      * @param CustomerInterface $author
-     *
-     * @return $this
      */
-    public function addAuthor(CustomerInterface $author)
+    public function addAuthor(CustomerInterface $author): void
     {
         if (!$this->hasAuthor($author)) {
             $this->authors->add($author);
         }
-
-        return $this;
     }
 
     /**
      * @param CustomerInterface $author
-     *
-     * @return $this
      */
-    public function removeAuthor(CustomerInterface $author)
+    public function removeAuthor(CustomerInterface $author): void
     {
         $this->authors->removeElement($author);
-
-        return $this;
     }
 
     /**
-     * @return CustomerInterface
+     * @return CustomerInterface|null
      */
-    public function getRecipient()
+    public function getRecipient(): ?CustomerInterface
     {
         return $this->recipient;
     }
 
     /**
-     * @param CustomerInterface $recipient
-     *
-     * @return $this
+     * @param CustomerInterface|null $recipient
      */
-    public function setRecipient($recipient)
+    public function setRecipient(?CustomerInterface $recipient): void
     {
         $this->recipient = $recipient;
-
-        return $this;
     }
 
     /**
      * @return boolean
      */
-    public function isRead()
+    public function isRead(): bool
     {
         return $this->read;
     }
 
     /**
      * @param boolean $read
-     *
-     * @return $this
      */
-    public function setRead($read)
+    public function setRead(bool $read): void
     {
         $this->read = $read;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMessage()
+    public function getMessage(): ?string
     {
         return $this->message;
     }
 
     /**
-     * @param string $message
-     *
-     * @return $this
+     * @param string|null $message
      */
-    public function setMessage($message)
+    public function setMessage(?string $message): void
     {
         $this->message = $message;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTarget()
+    public function getTarget(): ?string
     {
         return $this->target;
     }
 
     /**
-     * @param string $target
-     *
-     * @return $this
+     * @param string|null $target
      */
-    public function setTarget($target)
+    public function setTarget(?string $target): void
     {
         $this->target = $target;
-
-        return $this;
     }
 
     /**
-     * @return Topic
+     * @return Topic|null
      */
-    public function getTopic()
+    public function getTopic(): ?Topic
     {
         return $this->topic;
     }
 
     /**
-     * @param Topic $topic
-     *
-     * @return $this
+     * @param Topic|null $topic
      */
-    public function setTopic($topic)
+    public function setTopic(?Topic $topic): void
     {
         $this->topic = $topic;
-
-        return $this;
     }
 
     /**
-     * @return ProductInterface
+     * @return ProductInterface|null
      */
-    public function getProduct()
+    public function getProduct(): ?ProductInterface
     {
         return $this->product;
     }
 
     /**
-     * @param ProductInterface $product
-     *
-     * @return Notification
+     * @param ProductInterface|null $product
      */
-    public function setProduct($product)
+    public function setProduct(?ProductInterface $product): void
     {
         $this->product = $product;
-
-        return $this;
     }
 
     /**
-     * @return Article
+     * @return Article|null
      */
-    public function getArticle()
+    public function getArticle(): ?Article
     {
         return $this->article;
     }
 
     /**
-     * @param Article $article
-     *
-     * @return Notification
+     * @param Article|null $article
      */
-    public function setArticle($article)
+    public function setArticle(?Article $article): void
     {
         $this->article = $article;
-
-        return $this;
     }
 }

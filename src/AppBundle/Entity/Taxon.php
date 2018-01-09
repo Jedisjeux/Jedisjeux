@@ -119,69 +119,57 @@ class Taxon extends BaseTaxon
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getIconClass()
+    public function getIconClass(): ?string
     {
         return $this->iconClass;
     }
 
     /**
-     * @param string $iconClass
-     *
-     * @return $this
+     * @param string|null $iconClass
      */
-    public function setIconClass($iconClass)
+    public function setIconClass(?string $iconClass): void
     {
         $this->iconClass = $iconClass;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getColor()
+    public function getColor(): ?string
     {
         return $this->color;
     }
 
     /**
-     * @param string $color
-     *
-     * @return $this
+     * @param string|null $color
      */
-    public function setColor($color)
+    public function setColor(?string $color): void
     {
         $this->color = $color;
-
-        return $this;
     }
 
     /**
      * @return boolean
      */
-    public function isPublic()
+    public function isPublic(): bool
     {
         return $this->public;
     }
 
     /**
      * @param boolean $public
-     *
-     * @return Taxon
      */
-    public function setPublic($public)
+    public function setPublic(bool $public): void
     {
         $this->public = $public;
-
-        return $this;
     }
 
     /**
      * @return int
      */
-    public function getTopicCount()
+    public function getTopicCount(): int
     {
         return $this->topicCount;
     }
@@ -189,28 +177,24 @@ class Taxon extends BaseTaxon
     /**
      * @param int $topicCount
      */
-    public function setTopicCount($topicCount)
+    public function setTopicCount(int $topicCount): void
     {
         $this->topicCount = $topicCount;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getProductCount()
+    public function getProductCount(): int
     {
         return $this->productCount;
     }
 
     /**
-     * @param mixed $productCount
-     *
-     * @return $this
+     * @param int $productCount
      */
-    public function setProductCount($productCount)
+    public function setProductCount(int $productCount): void
     {
         $this->productCount = $productCount;
-
-        return $this;
     }
 }
