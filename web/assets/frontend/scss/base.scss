@@ -27,6 +27,9 @@ $icon-font-path: "../../compiled/fonts/bootstrap/";
 // Select2
 @import "../../../../node_modules/select2/src/scss/core";
 
+// jquery fancybox
+@import "../../../../node_modules/jquery-fancybox/source/scss/jquery.fancybox";
+
 @import "mixins/ellipsis";
 
 @import "modules/style";
