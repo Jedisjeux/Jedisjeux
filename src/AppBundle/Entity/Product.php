@@ -324,7 +324,7 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
-     * @return ProductVariantInterface|null
+     * @return ProductVariantInterface|ProductVariant|null
      */
     public function getFirstVariant(): ?ProductVariantInterface
     {

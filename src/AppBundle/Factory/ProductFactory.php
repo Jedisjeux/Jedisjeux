@@ -86,9 +86,10 @@ class ProductFactory extends BaseProductFactory
             $releasedAt = \DateTime::createFromFormat('Y-m-d', $releasedAtYear . '-01-01');
 
             if (false !== $releasedAt) {
-                $product->getFirstVariant()
-                    ->setReleasedAt($releasedAt)
-                    ->setReleasedAtPrecision(ProductVariant::RELEASED_AT_PRECISION_ON_YEAR);
+                $firstVariant = $product->getFirstVariant();
+
+                $firstVariant->setReleasedAt($releasedAt);
+                $firstVariant->setReleasedAtPrecision(ProductVariant::RELEASED_AT_PRECISION_ON_YEAR);
             }
         }
 

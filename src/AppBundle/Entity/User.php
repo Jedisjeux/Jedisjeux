@@ -39,17 +39,17 @@ class User extends BaseUser
     protected $customer;
 
     /**
-     * @return CustomerInterface
+     * @return CustomerInterface|null
      */
-    public function getCustomer(): CustomerInterface
+    public function getCustomer(): ?CustomerInterface
     {
         return $this->customer;
     }
 
     /**
-     * @param CustomerInterface $customer
+     * @param CustomerInterface|null $customer
      */
-    public function setCustomer(CustomerInterface $customer): void
+    public function setCustomer(?CustomerInterface $customer): void
     {
         $this->customer = $customer;
     }
