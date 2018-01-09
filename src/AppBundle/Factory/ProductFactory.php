@@ -93,11 +93,11 @@ class ProductFactory extends BaseProductFactory
             }
         }
 
-        $product->setAgeMin($bggProduct->getAge());
-        $product->setDurationMin($bggProduct->getDurationMin());
-        $product->setDurationMax($bggProduct->getDurationMax());
-        $product->setJoueurMin($bggProduct->getNbJoueursMin());
-        $product->setJoueurMax($bggProduct->getNbJoueursMax());
+        $product->setMinAge($bggProduct->getAge());
+        $product->setMinDuration($bggProduct->getMinDuration());
+        $product->setMaxDuration($bggProduct->getMaxDuration());
+        $product->setMinPlayerCount($bggProduct->getNbJoueursMin());
+        $product->setMaxPlayerCount($bggProduct->getNbJoueursMax());
 
         foreach ($bggProduct->getDesigners() as $fullName) {
             $designer = $this->getPersonByFullName($fullName);

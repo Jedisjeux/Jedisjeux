@@ -31,7 +31,7 @@
                                 <h4>{{ 'app.ui.game_details'|trans }} <a href="{{ path('sylius_frontend_product_show', {'slug': product.slug}) }}"><small class="color">({{ product }})</small></a></h4>
 
                                 <ul class="list-unstyled">
-                                    {% if product.joueurMin or product.joueurMax %}
+                                    {% if product.minPlayerCount or product.maxPlayerCount %}
                                         <li>
                                             <p class="pull-left bg-color square-2 rounded-2">
                                                 <span class="fa fa-user white"></span>
@@ -42,18 +42,18 @@
                                         </li>
                                     {% endif %}
 
-                                    {% if product.ageMin %}
+                                    {% if product.minAge %}
                                         <li>
                                             <p class="pull-left bg-color square-2 rounded-2">
                                                 <span class="fa fa-child white"></span>
                                             </p>
                                             <p class="game-attribute">
-                                                à partir de {{ product.ageMin }} ans
+                                                à partir de {{ product.minAge }} ans
                                             </p>
                                         </li>
                                     {% endif %}
 
-                                    {% if product.durationMin %}
+                                    {% if product.minDuration %}
                                         <li>
                                             <p class="pull-left bg-color square-2 rounded-2">
                                                 <span class="fa fa-clock-o white"></span>

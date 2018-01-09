@@ -21,7 +21,7 @@
                     <div class="bor bg-lblue"></div>
                     <p>
                         {{ playerCount(product) }}<br/>
-                        à partir de {{ product.ageMin }} ans<br/>
+                        à partir de {{ product.minAge }} ans<br/>
                         {% if product.releasedAt %}
                             {{ 'label.release'|trans }} : {{ releasedAt(product.firstVariant, 'long') }}
                         {% endif %}

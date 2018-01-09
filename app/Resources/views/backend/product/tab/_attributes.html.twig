@@ -1,7 +1,7 @@
 <div class="ui tab" data-tab="attributes">
     <h3 class="ui dividing header">{{ 'sylius.ui.attributes'|trans }}</h3>
 
-    {{ form_row(form.ageMin) }}
+    {{ form_row(form.minAge) }}
 
     <h4 class="ui dividing header">{{ 'label.release_date'|trans }}</h4>
     <div class="two fields">
@@ -11,13 +11,13 @@
 
     <h4 class="ui dividing header">{{ 'label.player_count'|trans }}</h4>
     <div class="two fields">
-        {{ form_row(form.joueurMin) }}
-        {{ form_row(form.joueurMax) }}
+        {{ form_row(form.minPlayerCount) }}
+        {{ form_row(form.maxPlayerCount) }}
     </div>
 
     <h4 class="ui dividing header">{{ 'label.duration'|trans }}</h4>
     <div class="two fields">
-        {{ form_row(form.durationMin) }}
-        {{ form_row(form.durationMax) }}
+        {{ form_row(form.minDuration) }}
+        {{ form_row(form.maxDuration) }}
     </div>
 </div>

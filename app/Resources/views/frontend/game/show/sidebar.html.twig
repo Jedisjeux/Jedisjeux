@@ -54,14 +54,14 @@
     {% include "frontend/game/show/sidebar/user-review.html.twig" with {'jeu': jeu} only %}
 
     <!-- Material list -->
-    {% if jeu.materiel %}
+    {% if jeu.boxContent %}
         <div class="s-widget">
             <!-- Heading -->
             <h5><i class="fa fa-list color"></i> Matériel</h5>
             <!-- Widgets Content -->
             <div class="widget-content gallery">
                 <ul class="list-6">
-                    {% for row in jeu.materiel|split("\n") %}
+                    {% for row in jeu.boxContent|split("\n") %}
                         <li>{{ row }}</li>
                     {% endfor %}
                 </ul>

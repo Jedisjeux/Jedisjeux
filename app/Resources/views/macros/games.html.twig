@@ -11,12 +11,12 @@
 {% endmacro %}
 
 {% macro playerCount(jeu) %}
-    {% if jeu.joueurMin == jeu.joueurMax %}
-        à {{ jeu.joueurMin }} joueur{% if jeu.joueurMin>1 %}s{% endif %} exclusivement
-    {% elseif not jeu.joueurMax %}
-        à partir de {{ jeu.joueurMin }} joueur{% if jeu.joueurMin>1 %}s{% endif %}
+    {% if jeu.minPlayerCount == jeu.maxPlayerCount %}
+        à {{ jeu.minPlayerCount }} joueur{% if jeu.minPlayerCount>1 %}s{% endif %} exclusivement
+    {% elseif not jeu.maxPlayerCount %}
+        à partir de {{ jeu.minPlayerCount }} joueur{% if jeu.minPlayerCount>1 %}s{% endif %}
     {% else %}
-        {{ jeu.joueurMin }} à {{ jeu.joueurMax }} joueurs
+        {{ jeu.minPlayerCount }} à {{ jeu.maxPlayerCount }} joueurs
     {% endif %}
 {% endmacro %}
 
@@ -42,12 +42,12 @@
 {% endmacro %}
 
 {% macro duration(game) %}{% spaceless %}
-    {% if game.durationMin %}
-        {{ game.durationMin }}
-        {% if game.durationMin != game.durationMax %}
-            - {{ game.durationMax }}
+    {% if game.minDuration %}
+        {{ game.minDuration }}
+        {% if game.minDuration != game.maxDuration %}
+            - {{ game.maxDuration }}
         {% endif %}
-        minute{% if game.durationMin > 1 %}s{% endif %}{% if game.durationByPlayer %} {{ 'label.per_player'|trans|lower }}{% endif %}
+        minute{% if game.minDuration > 1 %}s{% endif %}{% if game.durationByPlayer %} {{ 'label.per_player'|trans|lower }}{% endif %}
     {% endif %}
 {% endspaceless %}{% endmacro %}
 

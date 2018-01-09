@@ -85,7 +85,7 @@ class Product extends BaseProduct implements ReviewableInterface
      *      groups={"sylius"}
      * )
      */
-    protected $ageMin;
+    protected $minAge;
 
     /**
      * @var integer
@@ -101,7 +101,7 @@ class Product extends BaseProduct implements ReviewableInterface
      *      groups={"sylius"}
      * )
      */
-    protected $joueurMin;
+    protected $minPlayerCount;
 
     /**
      * @var integer
@@ -117,7 +117,7 @@ class Product extends BaseProduct implements ReviewableInterface
      *      groups={"sylius"}
      * )
      */
-    protected $joueurMax;
+    protected $maxPlayerCount;
 
     /**
      * @var integer
@@ -133,7 +133,7 @@ class Product extends BaseProduct implements ReviewableInterface
      *      groups={"sylius"}
      * )
      */
-    protected $durationMin;
+    protected $minDuration;
 
     /**
      * @var integer
@@ -149,7 +149,7 @@ class Product extends BaseProduct implements ReviewableInterface
      *      groups={"sylius"}
      * )
      */
-    protected $durationMax;
+    protected $maxDuration;
 
     /**
      * @var boolean
@@ -163,14 +163,7 @@ class Product extends BaseProduct implements ReviewableInterface
      *
      * @ORM\Column(type="text", nullable=true)
      */
-    protected $materiel;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $but;
+    protected $boxContent;
 
     /**
      * @var int
@@ -459,81 +452,81 @@ class Product extends BaseProduct implements ReviewableInterface
     /**
      * @return int|null
      */
-    public function getAgeMin(): ?int
+    public function getMinAge(): ?int
     {
-        return $this->ageMin;
+        return $this->minAge;
     }
 
     /**
-     * @param int|null $ageMin
+     * @param int|null $minAge
      */
-    public function setAgeMin(?int $ageMin): void
+    public function setMinAge(?int $minAge): void
     {
-        $this->ageMin = $ageMin;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getJoueurMin(): ?int
-    {
-        return $this->joueurMin;
-    }
-
-    /**
-     * @param int|null $joueurMin
-     */
-    public function setJoueurMin(?int $joueurMin): void
-    {
-        $this->joueurMin = $joueurMin;
+        $this->minAge = $minAge;
     }
 
     /**
      * @return int|null
      */
-    public function getJoueurMax(): ?int
+    public function getMinPlayerCount(): ?int
     {
-        return $this->joueurMax;
+        return $this->minPlayerCount;
     }
 
     /**
-     * @param int|null $joueurMax
+     * @param int|null $minPlayerCount
      */
-    public function setJoueurMax(?int $joueurMax): void
+    public function setMinPlayerCount(?int $minPlayerCount): void
     {
-        $this->joueurMax = $joueurMax;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getDurationMin(): ?int
-    {
-        return $this->durationMin;
-    }
-
-    /**
-     * @param int|null $durationMin
-     */
-    public function setDurationMin(?int $durationMin): void
-    {
-        $this->durationMin = $durationMin;
+        $this->minPlayerCount = $minPlayerCount;
     }
 
     /**
      * @return int|null
      */
-    public function getDurationMax(): ?int
+    public function getMaxPlayerCount(): ?int
     {
-        return $this->durationMax;
+        return $this->maxPlayerCount;
     }
 
     /**
-     * @param int|null $durationMax
+     * @param int|null $maxPlayerCount
      */
-    public function setDurationMax(?int $durationMax): void
+    public function setMaxPlayerCount(?int $maxPlayerCount): void
     {
-        $this->durationMax = $durationMax;
+        $this->maxPlayerCount = $maxPlayerCount;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getMinDuration(): ?int
+    {
+        return $this->minDuration;
+    }
+
+    /**
+     * @param int|null $minDuration
+     */
+    public function setMinDuration(?int $minDuration): void
+    {
+        $this->minDuration = $minDuration;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getMaxDuration(): ?int
+    {
+        return $this->maxDuration;
+    }
+
+    /**
+     * @param int|null $maxDuration
+     */
+    public function setMaxDuration(?int $maxDuration): void
+    {
+        $this->maxDuration = $maxDuration;
     }
 
     /**
@@ -555,33 +548,17 @@ class Product extends BaseProduct implements ReviewableInterface
     /**
      * @return string|null
      */
-    public function getMateriel(): ?string
+    public function getBoxContent(): ?string
     {
-        return $this->materiel;
+        return $this->boxContent;
     }
 
     /**
-     * @param string|null $materiel
+     * @param string|null $boxContent
      */
-    public function setMateriel(?string $materiel): void
+    public function setBoxContent(?string $boxContent): void
     {
-        $this->materiel = $materiel;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getBut(): ?string
-    {
-        return $this->but;
-    }
-
-    /**
-     * @param string|null $but
-     */
-    public function setBut($but): void
-    {
-        $this->but = $but;
+        $this->boxContent = $boxContent;
     }
 
     /**

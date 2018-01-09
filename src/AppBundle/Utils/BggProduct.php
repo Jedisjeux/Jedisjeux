@@ -58,7 +58,7 @@ class BggProduct
     /**
      * @return string
      */
-    public function getDurationMin()
+    public function getMinDuration()
     {
         return (string)$this->boardGame->minplaytime;
     }
@@ -66,7 +66,7 @@ class BggProduct
     /**
      * @return string
      */
-    public function getDurationMax()
+    public function getMaxDuration()
     {
         return (string)$this->boardGame->maxplaytime;
     }

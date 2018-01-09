@@ -58,8 +58,8 @@ class CreatePage extends BaseCreatePage
         return array_merge(parent::getDefinedElements(), [
             'name' => '#sylius_product_translations_en_US_name',
             'slug' => '#sylius_product_translations_en_US_slug',
-            'min_player_count' => '#sylius_product_joueurMin',
-            'max_player_count' => '#sylius_product_joueurMax',
+            'min_player_count' => '#sylius_product_minPlayerCount',
+            'max_player_count' => '#sylius_product_maxPlayerCount',
         ]);
     }
 }
