@@ -169,10 +169,10 @@ class LoadProductsCommand extends ContainerAwareCommand
             ->setBody($description)
             ->getFilteredBody();
 
-        $data['joueurMin'] = !empty($data['joueurMin']) ? $data['joueurMin'] : null;
-        $data['joueurMax'] = !empty($data['joueurMax']) ? $data['joueurMax'] : null;
-        $data['ageMin'] = !empty($data['ageMin']) ? $data['ageMin'] : null;
-        $data['materiel'] = !empty($data['materiel']) ? trim($data['materiel']) : null;
+        $data['minPlayerCount'] = !empty($data['minPlayerCount']) ? $data['minPlayerCount'] : null;
+        $data['maxPlayerCount'] = !empty($data['maxPlayerCount']) ? $data['maxPlayerCount'] : null;
+        $data['minAge'] = !empty($data['minAge']) ? $data['minAge'] : null;
+        $data['boxContent'] = !empty($data['boxContent']) ? trim($data['boxContent']) : null;
         $data['createdAt'] = \DateTime::createFromFormat('Y-m-d H:i:s', $data['createdAt']);
         $data['updatedAt'] = \DateTime::createFromFormat('Y-m-d H:i:s', $data['updatedAt']);
         $product->getFirstVariant()->setOldHref(!empty($data['href']) ? $data['href'] : null);
@@ -222,10 +222,10 @@ class LoadProductsCommand extends ContainerAwareCommand
         $product
             ->setCode($data['code'])
             ->setShortDescription(trim($shortDescription))
-            ->setAgeMin($data['ageMin'])
-            ->setJoueurMin($data['joueurMin'])
-            ->setJoueurMax($data['joueurMax'])
-            ->setMateriel($data['materiel'])
+            ->setMinAge($data['minAge'])
+            ->setMinPlayerCount($data['minPlayerCount'])
+            ->setMaxPlayerCount($data['maxPlayerCount'])
+            ->setBoxContent($data['boxContent'])
             ->setStatus($data['status']);
 
         $product->getFirstVariant()->setCode($data['code']);
@@ -408,14 +408,14 @@ SELECT
   concat('game-', old.id_famille) AS family_code,
   concat('game-', old.id)         AS code,
   old.nom                         AS name,
-  old.min                         AS joueurMin,
-  old.max                         AS joueurMax,
-  old.age_min                     AS ageMin,
+  old.min                         AS minPlayerCount,
+  old.max                         AS maxPlayerCount,
+  old.age_min                     AS minAge,
   old.intro                       AS shortDescription,
   old.presentation                AS description,
-  old.duree                       AS durationMin,
-  old.duree                       AS durationMax,
-  old.materiel                    AS materiel,
+  old.duree                       AS minDuration,
+  old.duree                       AS maxDuration,
+  old.materiel                    AS boxContent,
   old.valid                       AS status,
   old.date                        AS createdAt,
   old.date                        AS updatedAt,
@@ -446,14 +446,14 @@ SELECT
   concat('game-', old.id)         AS code,
   old.type_diff                   AS difference_type,
   old.nom                         AS name,
-  old.min                         AS joueurMin,
-  old.max                         AS joueurMax,
-  old.age_min                     AS ageMin,
+  old.min                         AS minPlayerCount,
+  old.max                         AS maxPlayerCount,
+  old.age_min                     AS minAge,
   old.intro                       AS shortDescription,
   old.presentation                AS description,
-  old.duree                       AS durationMin,
-  old.duree                       AS durationMax,
-  old.materiel                    AS materiel,
+  old.duree                       AS minDuration,
+  old.duree                       AS maxDuration,
+  old.materiel                    AS boxContent,
   old.valid                       AS status,
   old.date                        AS createdAt,
   old.date                        AS updatedAt,

@@ -28,6 +28,6 @@ class DurationFilter implements FilterInterface
             return;
         }
 
-        $dataSource->restrict($dataSource->getExpressionBuilder()->lessThanOrEqual('product.durationMin', $data['value']));
+        $dataSource->restrict($dataSource->getExpressionBuilder()->lessThanOrEqual('product.minDuration', $data['value']));
     }
 }

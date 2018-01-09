@@ -91,23 +91,23 @@ class ProductType extends AbstractType
                 'entry_type' => ProductTranslationType::class,
                 'label' => 'sylius.form.product.translations',
             ])
-            ->add('materiel', TextareaType::class, array(
+            ->add('boxContent', TextareaType::class, array(
                 'required' => false,
                 'label' => 'label.material',
             ))
-            ->add('ageMin', null, array(
+            ->add('minAge', null, array(
                 'label' => 'label.age_min',
             ))
-            ->add('durationMin', null, array(
+            ->add('minDuration', null, array(
                 'label' => 'label.min',
             ))
-            ->add('durationMax', null, array(
+            ->add('maxDuration', null, array(
                 'label' => 'label.max',
             ))
-            ->add('joueurMin', null, array(
+            ->add('minPlayerCount', null, array(
                 'label' => 'label.min',
             ))
-            ->add('joueurMax', null, array(
+            ->add('maxPlayerCount', null, array(
                 'label' => 'label.max',
             ))
             ->add('barcodes', CollectionType::class, array(

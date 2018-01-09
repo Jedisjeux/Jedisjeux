@@ -16,8 +16,8 @@ AppBundle\Entity\Product:
     product1:
         currentLocale: 'en_US'
         code: 'product_1'
-        joueurMin: 2
-        joueurMax: 5
-        ageMin: 12
+        minPlayerCount: 2
+        maxPlayerCount: 5
+        minAge: 12
         translations:
             - "@productTranslation1"

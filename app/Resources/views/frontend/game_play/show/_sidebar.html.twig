@@ -93,14 +93,14 @@
     </div>
 
     <!-- Material list -->
-    {% if product.materiel %}
+    {% if product.boxContent %}
         <div class="s-widget">
             <!-- Heading -->
             <h5><i class="fa fa-list color"></i> Matériel</h5>
             <!-- Widgets Content -->
             <div class="widget-content gallery">
                 <ul class="list-6">
-                    {% for row in product.materiel|split("\n") %}
+                    {% for row in product.boxContent|split("\n") %}
                         <li>{{ row }}</li>
                     {% endfor %}
                 </ul>

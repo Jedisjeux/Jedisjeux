@@ -28,7 +28,7 @@ class PlayerCountFilter implements FilterInterface
             return;
         }
 
-        $dataSource->restrict($dataSource->getExpressionBuilder()->lessThanOrEqual('product.joueurMin', $data['value']));
-        $dataSource->restrict($dataSource->getExpressionBuilder()->greaterThanOrEqual('product.joueurMax', $data['value']));
+        $dataSource->restrict($dataSource->getExpressionBuilder()->lessThanOrEqual('product.minPlayerCount', $data['value']));
+        $dataSource->restrict($dataSource->getExpressionBuilder()->greaterThanOrEqual('product.maxPlayerCount', $data['value']));
     }
 }

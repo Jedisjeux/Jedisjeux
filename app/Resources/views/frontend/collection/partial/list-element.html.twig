@@ -53,11 +53,11 @@
                     </div>
                     <div class="row">
                         <ul class="list-6">
-                            {% if jeu.ageMin %}
-                                <li>à partir de {{ jeu.ageMin }} ans</li>
+                            {% if jeu.minAge %}
+                                <li>à partir de {{ jeu.minAge }} ans</li>
                             {% endif %}
 
-                            {% if jeu.joueurMin or jeu.joueurMax %}
+                            {% if jeu.minPlayerCount or jeu.maxPlayerCount %}
                                 <li>{{ joueurCount(jeu) }}</li>
                             {% endif %}
 

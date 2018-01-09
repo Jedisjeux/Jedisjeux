@@ -28,6 +28,6 @@ class AgeFilter implements FilterInterface
             return;
         }
 
-        $dataSource->restrict($dataSource->getExpressionBuilder()->lessThanOrEqual('product.ageMin', $data['value']));
+        $dataSource->restrict($dataSource->getExpressionBuilder()->lessThanOrEqual('product.minAge', $data['value']));
     }
 }

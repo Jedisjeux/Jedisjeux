@@ -30,17 +30,17 @@ class MaxPlayerCountGreaterThanOrEqualMinPlayerValidator extends ConstraintValid
             throw new ValidatorException(sprintf("product should be an instance of %s", Product::class));
         }
 
-        if (null === $product->getJoueurMin()) {
+        if (null === $product->getMinPlayerCount()) {
             return;
         }
 
-        if (null === $product->getJoueurMax()) {
+        if (null === $product->getMaxPlayerCount()) {
             return;
         }
 
-        if ($product->getJoueurMin() > $product->getJoueurMax()) {
+        if ($product->getMinPlayerCount() > $product->getMaxPlayerCount()) {
             $this->context->buildViolation($constraint->message)
-                ->atPath('joueurMin')
+                ->atPath('minPlayerCount')
                 ->addViolation();
         }
     }

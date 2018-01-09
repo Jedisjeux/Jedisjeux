@@ -57,57 +57,57 @@ class ProductSpec extends ObjectBehavior
 
     function it_has_no_min_age_by_default()
     {
-        $this->getAgeMin()->shouldReturn(null);
+        $this->getMinAge()->shouldReturn(null);
     }
 
     function its_min_age_is_mutable()
     {
-        $this->setAgeMin(7);
-        $this->getAgeMin()->shouldReturn(7);
+        $this->setMinAge(7);
+        $this->getMinAge()->shouldReturn(7);
     }
 
     function it_has_no_min_player_count_by_default()
     {
-        $this->getJoueurMin()->shouldReturn(null);
+        $this->getMinPlayerCount()->shouldReturn(null);
     }
 
     function its_min_player_count_is_mutable()
     {
-        $this->setJoueurMin(2);
-        $this->getJoueurMin()->shouldReturn(2);
+        $this->setMinPlayerCount(2);
+        $this->getMinPlayerCount()->shouldReturn(2);
     }
 
     function it_has_no_max_player_count_by_default()
     {
-        $this->getJoueurMax()->shouldReturn(null);
+        $this->getMaxPlayerCount()->shouldReturn(null);
     }
 
     function its_max_player_count_is_mutable()
     {
-        $this->setJoueurMax(4);
-        $this->getJoueurMax()->shouldReturn(4);
+        $this->setMaxPlayerCount(4);
+        $this->getMaxPlayerCount()->shouldReturn(4);
     }
 
     function it_has_no_min_duration_by_default()
     {
-        $this->getDurationMin()->shouldReturn(null);
+        $this->getMinDuration()->shouldReturn(null);
     }
 
     function its_min_duration_is_mutable()
     {
-        $this->setDurationMin(30);
-        $this->getDurationMin()->shouldReturn(30);
+        $this->setMinDuration(30);
+        $this->getMinDuration()->shouldReturn(30);
     }
 
     function it_has_no_max_duration_by_default()
     {
-        $this->getDurationMax()->shouldReturn(null);
+        $this->getMaxDuration()->shouldReturn(null);
     }
 
     function its_max_duration_is_mutable()
     {
-        $this->setDurationMax(180);
-        $this->getDurationMax()->shouldReturn(180);
+        $this->setMaxDuration(180);
+        $this->getMaxDuration()->shouldReturn(180);
     }
 
     function its_duration_is_not_by_player_by_default()
@@ -121,15 +121,15 @@ class ProductSpec extends ObjectBehavior
         $this->isDurationByPlayer(true);
     }
 
-    function it_has_no_materiel_by_default()
+    function it_has_no_box_content_by_default()
     {
-        $this->getMateriel()->shouldReturn(null);
+        $this->getBoxContent()->shouldReturn(null);
     }
 
-    function its_materiel_is_mutable()
+    function its_box_content_is_mutable()
     {
-        $this->setMateriel("rulebook, meeples");
-        $this->getMateriel()->shouldReturn("rulebook, meeples");
+        $this->setBoxContent("rulebook, meeples");
+        $this->getBoxContent()->shouldReturn("rulebook, meeples");
     }
 
     function it_has_no_goal_by_default()

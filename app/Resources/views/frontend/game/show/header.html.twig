@@ -37,7 +37,7 @@
                         <div class="container">
                             <div class="row">
                                 <ul class="list-unstyled">
-                                    {% if jeu.joueurMin or jeu.joueurMax %}
+                                    {% if jeu.minPlayerCount or jeu.maxPlayerCount %}
                                         <li>
                                             <p class="pull-left bg-color square-2 rounded-2">
                                                 <span class="fa fa-user white"></span>
@@ -48,18 +48,18 @@
                                         </li>
                                     {% endif %}
 
-                                    {% if jeu.ageMin %}
+                                    {% if jeu.minAge %}
                                         <li>
                                             <p class="pull-left bg-color square-2 rounded-2">
                                                 <span class="fa fa-child white"></span>
                                             </p>
                                             <p class="game-attribute">
-                                                à partir de {{ jeu.ageMin }} ans
+                                                à partir de {{ jeu.minAge }} ans
                                             </p>
                                         </li>
                                     {% endif %}
 
-                                    {% if jeu.durationMin %}
+                                    {% if jeu.minDuration %}
                                         <li>
                                             <p class="pull-left bg-color square-2 rounded-2">
                                                 <span class="fa fa-clock-o white"></span>
