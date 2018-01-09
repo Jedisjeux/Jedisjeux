@@ -94,11 +94,12 @@ class TopicExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $topic->setTitle($options['title']);
         $topic->setAuthor($options['author']);
         $topic->setCreatedAt($options['created_at']);
-        $topic->getMainPost()
-            ->setBody($options['body'])
-            ->setAuthor($topic->getAuthor())
-            ->setCreatedAt($topic->getCreatedAt());
         $topic->setLastPostCreatedAt($topic->getCreatedAt());
+
+        $mainPost = $topic->getMainPost();
+        $mainPost->setBody($options['body']);
+        $mainPost->setAuthor($topic->getAuthor());
+        $mainPost->setCreatedAt($topic->getCreatedAt());
 
         if ($options['article']) {
             /** @var Article $article */

@@ -68,122 +68,98 @@ class PriceList implements ResourceInterface
     protected $active = false;
 
     /**
-     * @return Dealer
+     * @return Dealer|null
      */
-    public function getDealer()
+    public function getDealer(): ?Dealer
     {
         return $this->dealer;
     }
 
     /**
-     * @param Dealer $dealer
-     *
-     * @return $this
+     * @param Dealer|null $dealer
      */
-    public function setDealer($dealer)
+    public function setDealer(?Dealer $dealer): void
     {
         $this->dealer = $dealer;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPath()
+    public function getPath(): ?string
     {
         return $this->path;
     }
 
     /**
-     * @param string $path
-     *
-     * @return $this
+     * @param string|null $path
      */
-    public function setPath($path)
+    public function setPath(?string $path): void
     {
         $this->path = $path;
-
-        return $this;
     }
 
     /**
      * @return boolean
      */
-    public function hasHeaders()
+    public function hasHeaders(): bool
     {
         return $this->headers;
     }
 
     /**
      * @param boolean $headers
-     *
-     * @return $this
      */
-    public function setHeaders($headers)
+    public function setHeaders(bool $headers): void
     {
         $this->headers = $headers;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDelimiter()
+    public function getDelimiter(): ?string
     {
         return $this->delimiter;
     }
 
     /**
-     * @param string $delimiter
-     *
-     * @return $this
+     * @param string|null $delimiter
      */
-    public function setDelimiter($delimiter)
+    public function setDelimiter(?string $delimiter): void
     {
         $this->delimiter = $delimiter;
-
-        return $this;
     }
 
     /**
      * @return bool
      */
-    public function isUtf8()
+    public function isUtf8(): bool
     {
         return $this->utf8;
     }
 
     /**
      * @param bool $utf8
-     *
-     * @return $this
      */
-    public function setUtf8($utf8)
+    public function setUtf8(bool $utf8): void
     {
         $this->utf8 = $utf8;
-
-        return $this;
     }
 
     /**
      * @return boolean
      */
-    public function isActive()
+    public function isActive(): bool
     {
         return $this->active;
     }
 
     /**
      * @param boolean $active
-     *
-     * @return $this
      */
-    public function setActive($active)
+    public function setActive(bool $active): void
     {
         $this->active = $active;
-
-        return $this;
     }
 }

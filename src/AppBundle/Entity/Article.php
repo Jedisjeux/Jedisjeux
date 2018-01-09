@@ -222,21 +222,17 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
     /**
      * @return string
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
     /**
-     * @param string $code
-     *
-     * @return $this
+     * @param string|null $code
      */
-    public function setCode($code)
+    public function setCode(?string $code): void
     {
         $this->code = $code;
-
-        return $this;
     }
 
     /**
@@ -250,127 +246,103 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
     /**
      * @return string
      */
-    public function getSlug()
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
 
     /**
-     * @param string $slug
-     *
-     * @return $this
+     * @param string|null $slug
      */
-    public function setSlug(string $slug)
+    public function setSlug(?string $slug) :void
     {
         $this->slug = $slug;
-
-        return $this;
     }
 
     /**
      * @return string
      */
-    public function getStatus()
+    public function getStatus(): ?string
     {
         return $this->status;
     }
 
     /**
-     * @param string $status
-     *
-     * @return $this
+     * @param string|null $status
      */
-    public function setStatus($status)
+    public function setStatus(?string $status): void
     {
         $this->status = $status;
-
-        return $this;
     }
 
     /**
      * @return SlideShowBlock|null
      */
-    public function getSlideShowBlock()
+    public function getSlideShowBlock(): ?SlideShowBlock
     {
         return $this->slideShowBlock;
     }
 
     /**
      * @param SlideShowBlock|null $slideShowBlock
-     *
-     * @return $this
      */
-    public function setSlideShowBlock($slideShowBlock)
+    public function setSlideShowBlock(?SlideShowBlock $slideShowBlock): void
     {
         $this->slideShowBlock = $slideShowBlock;
-
-        return $this;
     }
 
     /**
      * @return ProductInterface
      */
-    public function getProduct()
+    public function getProduct(): ?ProductInterface
     {
         return $this->product;
     }
 
     /**
-     * @param ProductInterface $product
-     *
-     * @return $this
+     * @param ProductInterface|null $product
      */
-    public function setProduct($product)
+    public function setProduct(?ProductInterface $product): void
     {
         $this->product = $product;
-
-        return $this;
     }
 
     /**
-     * @return CustomerInterface
+     * @return CustomerInterface|null
      */
-    public function getAuthor()
+    public function getAuthor(): ?CustomerInterface
     {
         return $this->author;
     }
 
     /**
      * @param CustomerInterface $author
-     *
-     * @return $this
      */
-    public function setAuthor($author)
+    public function setAuthor(?CustomerInterface $author): void
     {
         $this->author = $author;
-
-        return $this;
     }
 
     /**
-     * @return Topic
+     * @return Topic|null
      */
-    public function getTopic()
+    public function getTopic(): ?Topic
     {
         return $this->topic;
     }
 
     /**
-     * @param Topic $topic
-     *
-     * @return $this
+     * @param Topic|null $topic
      */
-    public function setTopic($topic)
+    public function setTopic(?Topic $topic): void
     {
         $this->topic = $topic;
-
-        return $this;
     }
 
     /**
      * @return Block[]|Collection
      */
-    public function getBlocks()
+    public function getBlocks(): Collection
     {
         return $this->blocks;
     }
@@ -380,36 +352,28 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
      *
      * @return bool
      */
-    public function hasBlock(Block $block)
+    public function hasBlock(Block $block): bool
     {
         return $this->blocks->contains($block);
     }
 
     /**
      * @param Block $block
-     *
-     * @return $this
      */
-    public function addBlock(Block $block)
+    public function addBlock(Block $block): void
     {
         if (!$this->hasBlock($block)) {
             $block->setArticle($this);
             $this->blocks->add($block);
         }
-
-        return $this;
     }
 
     /**
      * @param Block $block
-     *
-     * @return $this
      */
-    public function removeBlock(Block $block)
+    public function removeBlock(Block $block): void
     {
         $this->blocks->removeElement($block);
-
-        return $this;
     }
 
     /**
@@ -466,249 +430,201 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
     }
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getMaterialRating()
+    public function getMaterialRating(): ?float
     {
         return $this->materialRating;
     }
 
     /**
      * @param float $materialRating
-     *
-     * @return $this
      */
-    public function setMaterialRating($materialRating)
+    public function setMaterialRating(float $materialRating): void
     {
         $this->materialRating = $materialRating;
-
-        return $this;
     }
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getRulesRating()
+    public function getRulesRating(): ?float
     {
         return $this->rulesRating;
     }
 
     /**
      * @param float $rulesRating
-     *
-     * @return $this
      */
-    public function setRulesRating($rulesRating)
+    public function setRulesRating(float $rulesRating): void
     {
         $this->rulesRating = $rulesRating;
-
-        return $this;
     }
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getLifetimeRating()
+    public function getLifetimeRating(): ?float
     {
         return $this->lifetimeRating;
     }
 
     /**
      * @param float $lifetimeRating
-     *
-     * @return $this
      */
-    public function setLifetimeRating($lifetimeRating)
+    public function setLifetimeRating(float $lifetimeRating): void
     {
         $this->lifetimeRating = $lifetimeRating;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->title;
     }
 
     /**
-     * @param string $title
-     *
-     * @return $this
+     * @param string|null $title
      */
-    public function setTitle($title)
+    public function setTitle(?string $title): void
     {
         $this->title = $title;
-
-        return $this;
     }
 
     /**
      * @return \DateTime|null
      */
-    public function getPublishStartDate()
+    public function getPublishStartDate(): ?\DateTime
     {
         return $this->publishStartDate;
     }
 
     /**
      * @param \DateTime|null $publishStartDate
-     *
-     * @return $this
      */
-    public function setPublishStartDate($publishStartDate)
+    public function setPublishStartDate(?\DateTime $publishStartDate): void
     {
         $this->publishStartDate = $publishStartDate;
-
-        return $this;
     }
 
     /**
      * @return \DateTime|null
      */
-    public function getPublishEndDate()
+    public function getPublishEndDate(): ?\DateTime
     {
         return $this->publishEndDate;
     }
 
     /**
      * @param \DateTime|null $publishEndDate
-     *
-     * @return $this
      */
-    public function setPublishEndDate($publishEndDate)
+    public function setPublishEndDate(?\DateTime $publishEndDate): void
     {
         $this->publishEndDate = $publishEndDate;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShortDescription()
+    public function getShortDescription(): ?string
     {
         return $this->shortDescription;
     }
 
     /**
-     * @param string $shortDescription
-     *
-     * @return Article
+     * @param string|null $shortDescription
      */
-    public function setShortDescription($shortDescription)
+    public function setShortDescription(?string $shortDescription): void
     {
         $this->shortDescription = $shortDescription;
-
-        return $this;
     }
 
     /**
      * @return boolean
      */
-    public function isPublishable()
+    public function isPublishable(): bool
     {
         return $this->publishable;
     }
 
     /**
      * @param boolean $publishable
-     *
-     * @return $this
      */
-    public function setPublishable($publishable)
+    public function setPublishable(bool $publishable): void
     {
         $this->publishable = $publishable;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getImagePath()
+    public function getImagePath(): ?string
     {
         return $this->imagePath;
     }
 
     /**
-     * @param string $imagePath
-     *
-     * @return $this
+     * @param string|null $imagePath
      */
-    public function setImagePath($imagePath)
+    public function setImagePath(?string $imagePath): void
     {
         $this->imagePath = $imagePath;
-
-        return $this;
     }
 
     /**
      * @return int
      */
-    public function getViewCount()
+    public function getViewCount(): int
     {
         return $this->viewCount;
     }
 
     /**
      * @param int $viewCount
-     *
-     * @return $this
      */
-    public function setViewCount($viewCount)
+    public function setViewCount(int $viewCount): void
     {
         $this->viewCount = $viewCount;
-
-        return $this;
     }
 
     /**
-     * @return ArticleImage
+     * @return ArticleImage|null
      */
-    public function getMainImage()
+    public function getMainImage(): ?ArticleImage
     {
         return $this->mainImage;
     }
 
     /**
-     * @param ArticleImage $mainImage
-     *
-     * @return $this
+     * @param ArticleImage|null $mainImage
      */
-    public function setMainImage($mainImage)
+    public function setMainImage(?ArticleImage $mainImage): void
     {
         $this->mainImage = $mainImage;
-
-        return $this;
     }
 
     /**
-     * @return TaxonInterface
+     * @return TaxonInterface|null
      */
-    public function getMainTaxon()
+    public function getMainTaxon(): ?TaxonInterface
     {
         return $this->mainTaxon;
     }
 
     /**
-     * @param TaxonInterface $mainTaxon
-     *
-     * @return $this
+     * @param TaxonInterface|null $mainTaxon
      */
-    public function setMainTaxon($mainTaxon)
+    public function setMainTaxon(?TaxonInterface $mainTaxon): void
     {
         $this->mainTaxon = $mainTaxon;
-
-        return $this;
     }
 
     /**
      * @return bool
      */
-    public function isReviewArticle()
+    public function isReviewArticle(): bool
     {
         if (null === $this->getMainTaxon()) {
             return false;
@@ -720,7 +636,7 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
     /**
      * @return bool
      */
-    public function isReportArticle()
+    public function isReportArticle(): bool
     {
         if (null === $this->getMainTaxon()) {
             return false;
@@ -782,7 +698,7 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
     /**
      * {@inheritdoc}
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getTitle();
     }

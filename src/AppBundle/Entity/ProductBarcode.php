@@ -40,42 +40,34 @@ class ProductBarcode implements ResourceInterface
     protected $code;
 
     /**
-     * @return Product|ProductInterface
+     * @return Product|ProductInterface|null
      */
-    public function getProduct()
+    public function getProduct(): ?ProductInterface
     {
         return $this->product;
     }
 
     /**
-     * @param Product|ProductInterface $product
-     *
-     * @return $this
+     * @param Product|ProductInterface|null $product
      */
-    public function setProduct($product)
+    public function setProduct(?ProductInterface $product): void
     {
         $this->product = $product;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
     /**
-     * @param string $code
-     *
-     * @return $this
+     * @param string|null $code
      */
-    public function setCode($code)
+    public function setCode(?string $code): void
     {
         $this->code = $code;
-
-        return $this;
     }
 }

@@ -32,21 +32,18 @@ class ProductTranslation extends BaseProductTranslation
     protected $shortDescription;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShortDescription()
+    public function getShortDescription(): ?string
     {
         return $this->shortDescription;
     }
 
     /**
-     * @param string $shortDescription
-     * @return $this
+     * @param string|null $shortDescription
      */
-    public function setShortDescription($shortDescription)
+    public function setShortDescription(?string $shortDescription): void
     {
         $this->shortDescription = $shortDescription;
-
-        return $this;
     }
 }

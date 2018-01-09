@@ -9,6 +9,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
@@ -118,9 +119,9 @@ class ProductVariant extends BaseProductVariant
     }
 
     /**
-     * @return ProductVariantImage
+     * @return ProductVariantImage|null
      */
-    public function getMainImage()
+    public function getMainImage(): ?ProductVariantImage
     {
         foreach ($this->images as $image) {
             if ($image->isMain()) {
@@ -132,9 +133,9 @@ class ProductVariant extends BaseProductVariant
     }
 
     /**
-     * @return ProductVariantImage
+     * @return ProductVariantImage|null
      */
-    public function getMaterialImage()
+    public function getMaterialImage(): ?ProductVariantImage
     {
         foreach ($this->images as $image) {
             if ($image->isMaterial()) {
@@ -150,130 +151,106 @@ class ProductVariant extends BaseProductVariant
      *
      * @return bool
      */
-    public function hasImage(ProductVariantImage $image):bool
+    public function hasImage(ProductVariantImage $image): bool
     {
         return $this->images->contains($image);
     }
 
     /**
      * @param ProductVariantImage $image
-     *
-     * @return $this
      */
-    public function addImage(ProductVariantImage $image)
+    public function addImage(ProductVariantImage $image): void
     {
         if (!$this->hasImage($image)) {
             $image->setVariant($this);
             $this->images->add($image);
         }
-
-        return $this;
     }
 
     /**
      * @param ProductVariantImage $image
-     *
-     * @return $this
      */
-    public function removeImage(ProductVariantImage $image)
+    public function removeImage(ProductVariantImage $image): void
     {
         $this->images->removeElement($image);
-
-        return $this;
     }
 
     /**
-     * @return ArrayCollection|ProductVariantImage[]
+     * @return Collection|ProductVariantImage[]
      */
-    public function getImages()
+    public function getImages(): ?Collection
     {
         return $this->images;
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
-    public function getReleasedAt()
+    public function getReleasedAt(): ?\DateTime
     {
         return $this->releasedAt;
     }
 
     /**
-     * @param \DateTime $releasedAt
-     *
-     * @return $this
+     * @param \DateTime|null $releasedAt
      */
-    public function setReleasedAt($releasedAt)
+    public function setReleasedAt(?\DateTime $releasedAt): void
     {
         $this->releasedAt = $releasedAt;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getReleasedAtPrecision()
+    public function getReleasedAtPrecision(): ?string
     {
         return $this->releasedAtPrecision;
     }
 
     /**
-     * @param string $releasedAtPrecision
-     *
-     * @return $this
+     * @param string|null $releasedAtPrecision
      */
-    public function setReleasedAtPrecision($releasedAtPrecision)
+    public function setReleasedAtPrecision(?string $releasedAtPrecision): void
     {
         $this->releasedAtPrecision = $releasedAtPrecision;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getOldHref()
+    public function getOldHref(): ?string
     {
         return $this->oldHref;
     }
 
     /**
-     * @param string $oldHref
-     *
-     * @return $this
+     * @param string|null $oldHref
      */
-    public function setOldHref($oldHref)
+    public function setOldHref(?string $oldHref): void
     {
         $this->oldHref = $oldHref;
-
-        return $this;
     }
 
     /**
      * @return ProductBox|null
      */
-    public function getBox()
+    public function getBox(): ?ProductBox
     {
         return $this->box;
     }
 
     /**
      * @param ProductBox|null $box
-     *
-     * @return ProductVariant
      */
-    public function setBox(ProductBox $box = null)
+    public function setBox(?ProductBox $box): void
     {
         $this->box = $box;
-
-        return $this;
     }
 
     /**
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection|Person[]
      */
-    public function getDesigners()
+    public function getDesigners(): Collection
     {
         return $this->designers;
     }
@@ -283,41 +260,33 @@ class ProductVariant extends BaseProductVariant
      *
      * @return bool
      */
-    public function hasDesigner(Person $designer):bool
+    public function hasDesigner(Person $designer): bool
     {
         return $this->designers->contains($designer);
     }
 
     /**
      * @param Person $designer
-     *
-     * @return $this
      */
-    public function addDesigner(Person $designer)
+    public function addDesigner(Person $designer): void
     {
         if (!$this->hasDesigner($designer)) {
             $this->designers->add($designer);
         }
-
-        return $this;
     }
 
     /**
      * @param Person $designer
-     *
-     * @return $this
      */
-    public function removeDesigner($designer)
+    public function removeDesigner(Person $designer): void
     {
         $this->designers->removeElement($designer);
-
-        return $this;
     }
 
     /**
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection|Person[]
      */
-    public function getArtists()
+    public function getArtists(): Collection
     {
         return $this->artists;
     }
@@ -327,41 +296,33 @@ class ProductVariant extends BaseProductVariant
      *
      * @return bool
      */
-    public function hasArtist(Person $artist):bool
+    public function hasArtist(Person $artist): bool
     {
         return $this->artists->contains($artist);
     }
 
     /**
      * @param Person $artist
-     *
-     * @return $this
      */
-    public function addArtist($artist)
+    public function addArtist(Person $artist): void
     {
         if (!$this->hasArtist($artist)) {
             $this->artists->add($artist);
         }
-
-        return $this;
     }
 
     /**
      * @param Person $artist
-     *
-     * @return $this
      */
-    public function removeArtist($artist)
+    public function removeArtist(Person $artist): void
     {
         $this->artists->removeElement($artist);
-
-        return $this;
     }
 
     /**
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection|Person[]
      */
-    public function getPublishers()
+    public function getPublishers(): Collection
     {
         return $this->publishers;
     }
@@ -371,41 +332,33 @@ class ProductVariant extends BaseProductVariant
      *
      * @return bool
      */
-    public function hasPublisher(Person $publisher):bool
+    public function hasPublisher(Person $publisher): bool
     {
         return $this->publishers->contains($publisher);
     }
 
     /**
      * @param Person $publisher
-     *
-     * @return $this
      */
-    public function addPublisher($publisher)
+    public function addPublisher(Person $publisher): void
     {
         if (!$this->publishers->contains($publisher)) {
             $this->publishers->add($publisher);
         }
-
-        return $this;
     }
 
     /**
      * @param Person $publisher
-     *
-     * @return $this
      */
-    public function removePublisher($publisher)
+    public function removePublisher(Person $publisher): void
     {
         $this->publishers->removeElement($publisher);
-
-        return $this;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function __toString()
+    public function __toString(): string
     {
         $name = $this->getTranslation()->getName();
 

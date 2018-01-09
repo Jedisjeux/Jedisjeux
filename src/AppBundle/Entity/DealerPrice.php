@@ -80,143 +80,115 @@ class DealerPrice implements ResourceInterface
     protected $status;
 
     /**
-     * @return Dealer
+     * @return Dealer|null
      */
-    public function getDealer()
+    public function getDealer(): ?Dealer
     {
         return $this->dealer;
     }
 
     /**
-     * @param Dealer $dealer
-     *
-     * @return $this
+     * @param Dealer|null $dealer
      */
-    public function setDealer($dealer)
+    public function setDealer(?Dealer $dealer): void
     {
         $this->dealer = $dealer;
-
-        return $this;
     }
 
     /**
-     * @return Product
+     * @return Product|null
      */
-    public function getProduct()
+    public function getProduct(): ?Product
     {
         return $this->product;
     }
 
     /**
-     * @param Product $product
-     *
-     * @return $this
+     * @param Product|null $product
      */
-    public function setProduct($product)
+    public function setProduct(?Product $product): void
     {
         $this->product = $product;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getUrl()
+    public function getUrl(): ?string
     {
         return $this->url;
     }
 
     /**
-     * @param string $url
-     *
-     * @return $this
+     * @param string|null $url
      */
-    public function setUrl($url)
+    public function setUrl(?string $url): void
     {
         $this->url = $url;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
-     *
-     * @return $this
+     * @param string|null $name
      */
-    public function setName($name)
+    public function setName(?string $name): void
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getPrice()
+    public function getPrice(): ?int
     {
         return $this->price;
     }
 
     /**
-     * @param int $price
-     *
-     * @return $this
+     * @param int|null $price
      */
-    public function setPrice($price)
+    public function setPrice(?int $price): void
     {
         $this->price = $price;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBarcode()
+    public function getBarcode(): ?string
     {
         return $this->barcode;
     }
 
     /**
-     * @param string $barcode
-     *
-     * @return $this
+     * @param string|null $barcode
      */
-    public function setBarcode($barcode)
+    public function setBarcode(?string $barcode): void
     {
         $this->barcode = $barcode;
-
-        return $this;
     }
 
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getStatus()
+    public function getStatus(): ?string
     {
         return $this->status;
     }
 
     /**
-     * @param string $status
-     *
-     * @return $this
+     * @param string|null $status
      */
-    public function setStatus($status)
+    public function setStatus(?string $status): void
     {
         $this->status = $status;
-
-        return $this;
     }
 }

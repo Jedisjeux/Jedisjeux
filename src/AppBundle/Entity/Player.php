@@ -52,29 +52,25 @@ class Player implements ResourceInterface
     protected $gamePlay;
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getScore()
+    public function getScore(): ?float
     {
         return $this->score;
     }
 
     /**
-     * @param float $score
-     *
-     * @return $this
+     * @param float|null $score
      */
-    public function setScore($score)
+    public function setScore(?float $score): void
     {
         $this->score = $score;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName()
+    public function getName(): ?string
     {
         if ($this->getCustomer()) {
             return $this->getCustomer()->getUser()->getUsername();
@@ -84,54 +80,42 @@ class Player implements ResourceInterface
     }
 
     /**
-     * @param string $name
-     *
-     * @return $this
+     * @param string|null $name
      */
-    public function setName($name)
+    public function setName(?string $name): void
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
-     * @return CustomerInterface
+     * @return Customer|CustomerInterface|null
      */
-    public function getCustomer()
+    public function getCustomer(): ?CustomerInterface
     {
         return $this->customer;
     }
 
     /**
-     * @param CustomerInterface $customer
-     *
-     * @return $this
+     * @param CustomerInterface|null $customer
      */
-    public function setCustomer($customer)
+    public function setCustomer(?CustomerInterface $customer): void
     {
         $this->customer = $customer;
-
-        return $this;
     }
 
     /**
-     * @return GamePlay
+     * @return GamePlay|null
      */
-    public function getGamePlay()
+    public function getGamePlay(): ?GamePlay
     {
         return $this->gamePlay;
     }
 
     /**
-     * @param GamePlay $gamePlay
-     *
-     * @return $this
+     * @param GamePlay|null $gamePlay
      */
-    public function setGamePlay($gamePlay)
+    public function setGamePlay(?GamePlay $gamePlay): void
     {
         $this->gamePlay = $gamePlay;
-
-        return $this;
     }
 }

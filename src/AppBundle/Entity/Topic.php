@@ -12,6 +12,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
@@ -140,109 +141,89 @@ class Topic implements ResourceInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
     /**
-     * @param string $code
-     *
-     * @return $this
+     * @param string|null $code
      */
-    public function setCode($code)
+    public function setCode(?string $code): void
     {
         $this->code = $code;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->title;
     }
 
     /**
-     * @param string $title
-     *
-     * @return $this
+     * @param string|null $title
      */
-    public function setTitle($title)
+    public function setTitle(?string $title): void
     {
         $this->title = $title;
-
-        return $this;
     }
 
     /**
      * @return int
      */
-    public function getPostCount()
+    public function getPostCount(): int
     {
         return $this->postCount;
     }
 
     /**
      * @param int $postCount
-     *
-     * @return $this
      */
-    public function setPostCount($postCount)
+    public function setPostCount(int $postCount): void
     {
         $this->postCount = $postCount;
-
-        return $this;
     }
 
     /**
      * @return int
      */
-    public function getViewCount()
+    public function getViewCount(): int
     {
         return $this->viewCount;
     }
 
     /**
      * @param int $viewCount
-     *
-     * @return $this
      */
-    public function setViewCount($viewCount)
+    public function setViewCount(int $viewCount): void
     {
         $this->viewCount = $viewCount;
-
-        return $this;
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
-    public function getLastPostCreatedAt()
+    public function getLastPostCreatedAt(): ?\DateTime
     {
         return $this->lastPostCreatedAt;
     }
 
     /**
-     * @param \DateTime $lastPostCreatedAt
-     *
-     * @return $this
+     * @param \DateTime|null $lastPostCreatedAt
      */
-    public function setLastPostCreatedAt(\DateTime $lastPostCreatedAt)
+    public function setLastPostCreatedAt(?\DateTime $lastPostCreatedAt): void
     {
         $this->lastPostCreatedAt = $lastPostCreatedAt;
-
-        return $this;
     }
 
     /**
-     * @return Post
+     * @return Post|null
      */
-    public function getLastPost()
+    public function getLastPost(): ?Post
     {
         $lastPost = $this->posts->last();
 
@@ -250,90 +231,62 @@ class Topic implements ResourceInterface
     }
 
     /**
-     * @return CustomerInterface
+     * @return CustomerInterface|null
      */
-    public function getAuthor()
+    public function getAuthor(): ?CustomerInterface
     {
         return $this->author;
     }
 
     /**
-     * @param CustomerInterface $author
-     *
-     * @return $this
+     * @param CustomerInterface|null $author
      */
-    public function setAuthor($author)
+    public function setAuthor(?CustomerInterface $author): void
     {
         $this->author = $author;
-
-        return $this;
     }
 
     /**
-     * @return Post
+     * @return Post|null
      */
-    public function getMainPost()
+    public function getMainPost(): ?Post
     {
         return $this->mainPost;
     }
 
     /**
-     * @param Post $mainPost
-     *
-     * @return $this
+     * @param Post|null $mainPost
      */
-    public function setMainPost($mainPost)
+    public function setMainPost(?Post $mainPost): void
     {
         $this->mainPost = $mainPost;
-
-        return $this;
     }
 
     /**
-     * @return ArrayCollection
+     * @return Post[]|Collection
      */
-    public function getPosts()
+    public function getPosts(): Collection
     {
         return $this->posts;
     }
 
     /**
-     * @param ArrayCollection $posts
-     *
-     * @return $this
+     * @param Post $post
      */
-    public function setPosts($posts)
-    {
-        $this->posts = $posts;
-
-        return $this;
-    }
-
-    /**
-     * @param $post
-     *
-     * @return $this
-     */
-    public function addPost(Post $post)
+    public function addPost(Post $post): void
     {
         if (!$this->hasPost($post)) {
             $post->setTopic($this);
             $this->posts->add($post);
         }
-
-        return $this;
     }
 
     /**
      * @param Post $post
-     *
-     * @return $this
      */
-    public function removePost(Post $post)
+    public function removePost(Post $post): void
     {
         $this->posts->removeElement($post);
-
-        return $this;
     }
 
     /**
@@ -341,102 +294,83 @@ class Topic implements ResourceInterface
      *
      * @return bool
      */
-    public function hasPost(Post $post) {
+    public function hasPost(Post $post): bool
+    {
         return $this->posts->contains($post);
     }
 
     /**
-     * @return Taxon|TaxonInterface
+     * @return Taxon|TaxonInterface|null
      */
-    public function getMainTaxon()
+    public function getMainTaxon(): ?TaxonInterface
     {
         return $this->mainTaxon;
     }
 
     /**
-     * @param TaxonInterface $mainTaxon
-     *
-     * @return $this
+     * @param TaxonInterface|null $mainTaxon
      */
-    public function setMainTaxon($mainTaxon)
+    public function setMainTaxon(?TaxonInterface $mainTaxon): void
     {
         $this->mainTaxon = $mainTaxon;
-
-        return $this;
     }
 
     /**
-     * @return GamePlay
+     * @return GamePlay|null
      */
-    public function getGamePlay()
+    public function getGamePlay(): ?GamePlay
     {
         return $this->gamePlay;
     }
 
     /**
-     * @param GamePlay $gamePlay
-     *
-     * @return $this
+     * @param GamePlay|null $gamePlay
      */
-    public function setGamePlay($gamePlay)
+    public function setGamePlay(?GamePlay $gamePlay): void
     {
         $this->gamePlay = $gamePlay;
-
-        return $this;
     }
 
     /**
-     * @return Article
+     * @return Article|null
      */
-    public function getArticle()
+    public function getArticle(): ?Article
     {
         return $this->article;
     }
 
     /**
-     * @param Article $article
-     *
-     * @return $this
+     * @param Article|null $article
      */
-    public function setArticle($article)
+    public function setArticle(?Article $article): void
     {
         $this->article = $article;
-
-        return $this;
     }
 
     /**
-     * @return ArrayCollection|\Sylius\Component\Customer\Model\CustomerInterface[]
+     * @return Collection|CustomerInterface[]
      */
-    public function getFollowers()
+    public function getFollowers(): Collection
     {
         return $this->followers;
     }
 
     /**
      * @param CustomerInterface $follower
-     *
-     * @return $this
      */
-    public function addFollower(CustomerInterface $follower)
+    public function addFollower(CustomerInterface $follower): void
     {
         if (!$this->hasFollower($follower)) {
             $this->followers->add($follower);
         }
-
-        return $this;
     }
 
     /**
      * @param CustomerInterface $follower
-     *
-     * @return $this
      */
-    public function removeFollower(CustomerInterface $follower)
+    public function removeFollower(CustomerInterface $follower): void
     {
         $this->followers->removeElement($follower);
-
-        return $this;
     }
 
     /**
@@ -444,7 +378,7 @@ class Topic implements ResourceInterface
      *
      * @return bool
      */
-    public function hasFollower(CustomerInterface $follower)
+    public function hasFollower(CustomerInterface $follower): bool
     {
         return $this->followers->contains($follower);
     }
@@ -452,9 +386,9 @@ class Topic implements ResourceInterface
     /**
      * @param bool $nullForFirstPage
      *
-     * @return int
+     * @return int|null
      */
-    public function getLastPageNumber($nullForFirstPage = true)
+    public function getLastPageNumber($nullForFirstPage = true): ?int
     {
         $pageNumber = (int) ceil($this->postCount / 10);
 
@@ -468,7 +402,7 @@ class Topic implements ResourceInterface
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getTitle();
     }

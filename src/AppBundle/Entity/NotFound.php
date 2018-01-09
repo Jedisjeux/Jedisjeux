@@ -24,6 +24,8 @@ use Zenstruck\RedirectBundle\Model\NotFound as BaseNotFound;
 class NotFound extends BaseNotFound implements ResourceInterface
 {
     /**
+     * @var int
+     *
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -31,9 +33,9 @@ class NotFound extends BaseNotFound implements ResourceInterface
     private $id;
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }

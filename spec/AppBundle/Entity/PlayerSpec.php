@@ -27,8 +27,8 @@ class PlayerSpec extends ObjectBehavior
 
     function its_score_is_mutable()
     {
-        $this->setScore(666);
-        $this->getScore()->shouldReturn(666);
+        $this->setScore(666.0);
+        $this->getScore()->shouldReturn(666.0);
     }
 
     function it_has_no_name_by_default()

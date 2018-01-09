@@ -33,9 +33,8 @@ class DealerContext extends DefaultContext
         foreach ($table->getHash() as $data) {
             /** @var Dealer $dealer */
             $dealer = $this->getFactory('dealer', 'app')->createNew();
-            $dealer
-                ->setCode(isset($data['code']) ? $data['code'] : $this->faker->postcode)
-                ->setName(isset($data['name']) ? $data['name'] : $this->faker->name);
+            $dealer->setCode(isset($data['code']) ? $data['code'] : $this->faker->postcode);
+            $dealer->setName(isset($data['name']) ? $data['name'] : $this->faker->name);
 
             $manager->persist($dealer);
         }

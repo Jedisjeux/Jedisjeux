@@ -42,42 +42,34 @@ class ProductListItem implements ResourceInterface
     protected $product;
 
     /**
-     * @return ProductList
+     * @return ProductList|null
      */
-    public function getList()
+    public function getList(): ?ProductList
     {
         return $this->list;
     }
 
     /**
-     * @param ProductList $list
-     *
-     * @return $this
+     * @param ProductList|null $list
      */
-    public function setList(ProductList $list = null)
+    public function setList(?ProductList $list): void
     {
         $this->list = $list;
-
-        return $this;
     }
 
     /**
-     * @return ProductInterface
+     * @return ProductInterface|null
      */
-    public function getProduct()
+    public function getProduct(): ?ProductInterface
     {
         return $this->product;
     }
 
     /**
-     * @param ProductInterface $product
-     *
-     * @return $this
+     * @param ProductInterface|null $product
      */
-    public function setProduct(ProductInterface $product = null)
+    public function setProduct(?ProductInterface $product): void
     {
         $this->product = $product;
-
-        return $this;
     }
 }

@@ -62,11 +62,10 @@ class TopicContext extends DefaultContext
 
             /** @var Topic $topic */
             $topic = $this->getFactory('topic', 'app')->createNew();
-            $topic
-                ->setMainPost($mainPost)
-                ->setTitle(isset($data['title']) ? $data['title'] : $this->faker->text(20))
-                ->setMainTaxon($mainTaxon)
-                ->setAuthor($author);
+            $topic->setMainPost($mainPost);
+            $topic->setTitle(isset($data['title']) ? $data['title'] : $this->faker->text(20));
+            $topic->setMainTaxon($mainTaxon);
+            $topic->setAuthor($author);
 
             $manager->persist($topic);
             $manager->flush();

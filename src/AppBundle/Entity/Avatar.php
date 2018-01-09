@@ -27,7 +27,7 @@ class Avatar extends AbstractImage
      *
      * @return string
      */
-    protected function getUploadDir()
+    protected function getUploadDir(): string
     {
         return 'uploads/avatar';
     }
