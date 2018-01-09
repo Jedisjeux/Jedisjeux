@@ -132,17 +132,6 @@ class ProductSpec extends ObjectBehavior
         $this->getBoxContent()->shouldReturn("rulebook, meeples");
     }
 
-    function it_has_no_goal_by_default()
-    {
-        $this->getBut()->shouldReturn(null);
-    }
-
-    function its_goal_is_mutable()
-    {
-        $this->setBut("You have to conquer the world");
-        $this->getBut()->shouldReturn("You have to conquer the world");
-    }
-
     function it_has_zero_view_count_by_default()
     {
         $this->getViewCount()->shouldReturn(0);
