@@ -1,5 +1,14 @@
 ## Change Log
 
+### v1.0.1 (2018/01/12)
+- [#76](https://github.com/Jedisjeux/Jedisjeux/pull/76) rename some product properties (@loic425)
+- [#77](https://github.com/Jedisjeux/Jedisjeux/pull/77) fix jquery fancybox css (@loic425)
+- [#45](https://github.com/Jedisjeux/Jedisjeux/pull/45) Use typehints on entities (@loic425)
+- [#75](https://github.com/Jedisjeux/Jedisjeux/pull/75) split article sidebar templates (@loic425)
+- [#74](https://github.com/Jedisjeux/Jedisjeux/pull/74) rename sylius shop routes (@loic425)
+- [#73](https://github.com/Jedisjeux/Jedisjeux/pull/73) Feature/rename sylius product routes (@loic425)
+- [#68](https://github.com/Jedisjeux/Jedisjeux/pull/68) prepare 1.0.0 release (@loic425)
+
 ### v1.0.0 (2018/01/02)
 - [#62](https://github.com/jedisjeux/jedisjeux/pull/62) [assets] compile assets with prod env (@loic425)
 - [#58](https://github.com/jedisjeux/jedisjeux/pull/58) fix product autocomplete (@loic425)
