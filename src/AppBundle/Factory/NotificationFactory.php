@@ -85,9 +85,8 @@ class NotificationFactory implements FactoryInterface
 
         /** @var Notification $notification */
         $notification = $this->createForCustomer($customer);
-        $notification
-            ->addAuthor($post->getAuthor())
-            ->setTopic($topic);
+        $notification->addAuthor($post->getAuthor());
+        $notification->setTopic($topic);
 
         if (null !== $article = $topic->getArticle()) {
             $targetPath = $this->router->generate('app_frontend_article_show', ['slug' => $article->getSlug()]);
@@ -125,8 +124,7 @@ class NotificationFactory implements FactoryInterface
     {
         /** @var Notification $notification */
         $notification = $this->createForCustomer($customer);
-        $notification
-            ->setProduct($product);
+        $notification->setProduct($product);
 
         return $notification;
     }
@@ -141,8 +139,7 @@ class NotificationFactory implements FactoryInterface
     {
         /** @var Notification $notification */
         $notification = $this->createForCustomer($customer);
-        $notification
-            ->setArticle($article);
+        $notification->setArticle($article);
 
         return $notification;
     }
