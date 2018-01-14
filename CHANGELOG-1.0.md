@@ -1,5 +1,8 @@
 ## Change Log
 
+### v1.0.2 (2018/01/14)
+- [#79](https://github.com/Jedisjeux/Jedisjeux/pull/79) Fix/product count by person updater (@loic425)
+
 ### v1.0.1 (2018/01/12)
 - [#76](https://github.com/Jedisjeux/Jedisjeux/pull/76) rename some product properties (@loic425)
 - [#77](https://github.com/Jedisjeux/Jedisjeux/pull/77) fix jquery fancybox css (@loic425)
