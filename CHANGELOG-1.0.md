@@ -1,5 +1,8 @@
 ## Change Log
 
+### v1.0.3 (2018/01/15)
+- [#81](https://github.com/Jedisjeux/Jedisjeux/pull/81) fix notification factory (@loic425)
+
 ### v1.0.2 (2018/01/14)
 - [#79](https://github.com/Jedisjeux/Jedisjeux/pull/79) Fix/product count by person updater (@loic425)
 
