@@ -9,3 +9,6 @@ run_command "echo \"extension = memcached.so\" >> ~/.phpenv/versions/$(phpenv ve
 print_header "Installing elasticsearch" "Jedisjeux"
 run_command "curl -O https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.3.deb && sudo dpkg -i --force-confnew elasticsearch-1.7.3.deb && sudo service elasticsearch restart"
 run_command "sleep 10"
+
+print_header "Updating Composer" "Jedisjeux"
+run_command "composer self-update --preview"
