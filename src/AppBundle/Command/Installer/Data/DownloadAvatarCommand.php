@@ -69,10 +69,11 @@ class DownloadAvatarCommand extends ContainerAwareCommand
 
     /**
      * @param Avatar $avatar
+     *
      * @return string
      */
-    public function getAvatarOriginalPath(Avatar $avatar)
+    public function getAvatarOriginalPath(Avatar $avatar): string
     {
-        return "http://www.jedisjeux.net/phpbb3/download/file.php?avatar=".$avatar->getPath();
+        return "http://www.jedisjeux.net/media/cache/resolve/full/" . $avatar->getWebPath();
     }
 } 
