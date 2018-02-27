@@ -16,7 +16,7 @@ Feature: Game-play creation
     @javascript
     Scenario: Create new game-play
         Given I am on "/jeu-de-societe/lewis-clark"
-        And I follow "Nouvelle partie"
+        And I follow "Enregistrer une partie"
         When I fill in the following:
             | Joué le | 2016-04-01 |
         And I press "Créer"
