@@ -138,6 +138,7 @@ app:
         redirections: Redirections
         redirection_count: Nombre de redirections
         referer: Référent
+        register_a_game_play: Enregistrer une partie
         registered_at: Inscrit le
         report_articles: Reportages
         release_date: Date de sortie

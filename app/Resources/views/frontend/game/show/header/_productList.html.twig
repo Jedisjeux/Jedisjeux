@@ -42,8 +42,8 @@
         </li>
     </ul>
     {{ render(url('sylius_partial_product_review_show_create_or_update_link', {'productId': product.id})) }}
-    <a class="btn btn-default" title="Nouvelle partie"
+    <a class="btn btn-default" title="{{ 'app.ui.register_a_game_play'|trans }}"
        href="{{ path('app_frontend_game_play_create', { 'productSlug': jeu.slug  } ) }}">
-        <span class="fa fa-table"></span> Nouvelle partie
+        <span class="fa fa-table"></span> {{ 'app.ui.register_a_game_play'|trans }}
     </a>
 </div>
