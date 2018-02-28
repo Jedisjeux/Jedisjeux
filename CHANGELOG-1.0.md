@@ -1,5 +1,11 @@
 ## Change Log
 
+### v1.0.4 (2018/02/28)
+- [#88](https://github.com/jedisjeux/jedisjeux/pull/88) Feature/prevent online game plays (@loic425)
+- [#86](https://github.com/jedisjeux/jedisjeux/pull/86) fix download avatars command (@loic425)
+- [#84](https://github.com/jedisjeux/jedisjeux/pull/84) add link to github (@loic425)
+- [#83](https://github.com/jedisjeux/jedisjeux/pull/83) [Travis] validate composer security (@loic425)
+
 ### v1.0.3 (2018/01/15)
 - [#81](https://github.com/Jedisjeux/Jedisjeux/pull/81) fix notification factory (@loic425)
 
