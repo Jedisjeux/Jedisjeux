@@ -78,7 +78,7 @@ class Product extends BaseProduct implements ReviewableInterface
      *
      * @JMS\Expose
      * @JMS\SerializedName("min_age")
-     * @JMS\Groups({"Detailed"})
+     * @JMS\Groups({"Default", "Detailed"})
      *
      * @Assert\Range(
      *      min = 0,
@@ -94,7 +94,7 @@ class Product extends BaseProduct implements ReviewableInterface
      *
      * @JMS\Expose
      * @JMS\SerializedName("min_player_count")
-     * @JMS\Groups({"Detailed"})
+     * @JMS\Groups({"Default", "Detailed"})
      *
      * @Assert\Range(
      *      min = 1,
@@ -110,7 +110,7 @@ class Product extends BaseProduct implements ReviewableInterface
      *
      * @JMS\Expose
      * @JMS\SerializedName("max_player_count")
-     * @JMS\Groups({"Detailed"})
+     * @JMS\Groups({"Default", "Detailed"})
      *
      * @Assert\Range(
      *      min = 1,
@@ -126,7 +126,7 @@ class Product extends BaseProduct implements ReviewableInterface
      *
      * @JMS\Expose
      * @JMS\SerializedName("min_duration")
-     * @JMS\Groups({"Detailed"})
+     * @JMS\Groups({"Default", "Detailed"})
      *
      * @Assert\Range(
      *      min = 1,
@@ -142,7 +142,7 @@ class Product extends BaseProduct implements ReviewableInterface
      *
      * @JMS\Expose
      * @JMS\SerializedName("max_duration")
-     * @JMS\Groups({"Detailed"})
+     * @JMS\Groups({"Default", "Detailed"})
      *
      * @Assert\Range(
      *      min = 1,
@@ -293,7 +293,7 @@ class Product extends BaseProduct implements ReviewableInterface
      *
      * @JMS\VirtualProperty
      * @JMS\SerializedName("image")
-     * @JMS\Groups({"Detailed"})
+     * @JMS\Groups({"Default", "Detailed"})
      */
     public function getMainImage()
     {
