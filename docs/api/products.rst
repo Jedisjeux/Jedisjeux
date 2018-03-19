@@ -68,16 +68,16 @@ Exemplary Response
       "total": 22,
       "_links": {
         "self": {
-          "href": "\/app_test.php\/api\/products\/?page=1&limit=10"
+          "href": "\/api\/products\/?page=1&limit=10"
         },
         "first": {
-          "href": "\/app_test.php\/api\/products\/?page=1&limit=10"
+          "href": "\/api\/products\/?page=1&limit=10"
         },
         "last": {
-          "href": "\/app_test.php\/api\/products\/?page=3&limit=10"
+          "href": "\/api\/products\/?page=3&limit=10"
         },
         "next": {
-          "href": "\/app_test.php\/api\/products\/?page=2&limit=10"
+          "href": "\/api\/products\/?page=2&limit=10"
         }
       },
       "_embedded": {
@@ -87,7 +87,7 @@ Exemplary Response
             "id": 215,
             "code": "PRODUCT_10",
             "options": [
-
+              
             ],
             "slug": "product-10",
             "min_age": 12,
@@ -99,7 +99,7 @@ Exemplary Response
             "id": 216,
             "code": "PRODUCT_11",
             "options": [
-
+              
             ],
             "slug": "product-11",
             "min_age": 3,
@@ -111,7 +111,7 @@ Exemplary Response
             "id": 217,
             "code": "PRODUCT_12",
             "options": [
-
+              
             ],
             "slug": "product-12",
             "min_age": 9,
@@ -123,7 +123,7 @@ Exemplary Response
             "id": 218,
             "code": "PRODUCT_13",
             "options": [
-
+              
             ],
             "slug": "product-13",
             "min_age": 11,
@@ -135,7 +135,7 @@ Exemplary Response
             "id": 219,
             "code": "PRODUCT_14",
             "options": [
-
+              
             ],
             "slug": "product-14",
             "min_age": 3,
@@ -147,7 +147,7 @@ Exemplary Response
             "id": 220,
             "code": "PRODUCT_15",
             "options": [
-
+              
             ],
             "slug": "product-15",
             "min_age": 12,
@@ -159,7 +159,7 @@ Exemplary Response
             "id": 221,
             "code": "PRODUCT_16",
             "options": [
-
+              
             ],
             "slug": "product-16",
             "min_age": 5,
@@ -171,7 +171,7 @@ Exemplary Response
             "id": 222,
             "code": "PRODUCT_17",
             "options": [
-
+              
             ],
             "slug": "product-17",
             "min_age": 9,
@@ -183,7 +183,7 @@ Exemplary Response
             "id": 223,
             "code": "PRODUCT_18",
             "options": [
-
+              
             ],
             "slug": "product-18",
             "min_age": 10,
@@ -195,7 +195,7 @@ Exemplary Response
             "id": 224,
             "code": "PRODUCT_19",
             "options": [
-
+              
             ],
             "slug": "product-19",
             "min_age": 8,
