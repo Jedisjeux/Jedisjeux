@@ -1,0 +1,16 @@
+AppBundle\Entity\ProductVariant:
+    productVariant{4..22}:
+        code: 'product_<current()>'
+        product: "@product<current()>"
+
+AppBundle\Entity\Product:
+    product{4..22}:
+         fallbackLocale: en_US
+         currentLocale: en_US
+         code: PRODUCT_<current()>
+         slug: product-<current()>
+         name: Product <current()>
+         status: 'published'
+         minAge: <numberBetween(3, 12)>
+         minPlayerCount: <numberBetween(2, 3)>
+         maxPlayerCount: <numberBetween(4, 8)>

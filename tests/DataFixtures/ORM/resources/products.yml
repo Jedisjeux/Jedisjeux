@@ -6,11 +6,31 @@ AppBundle\Entity\ProductTranslation:
         shortDescription: <paragraph(2)>
         description: <paragraph(5)>
         translatable: "@product1"
+    productTranslation2:
+        locale: 'en_US'
+        name: 'Tigre & Euphrate'
+        slug: 'tigre-euphrate'
+        shortDescription: <paragraph(2)>
+        description: <paragraph(5)>
+        translatable: "@product2"
+    productTranslation3:
+        locale: 'en_US'
+        name: 'Shogun'
+        slug: 'shogun'
+        shortDescription: <paragraph(2)>
+        description: <paragraph(5)>
+        translatable: "@product3"
 
 AppBundle\Entity\ProductVariant:
-    productVariant:
+    productVariant1:
         code: 'product_1'
         product: "@product1"
+    productVariant2:
+        code: 'product_2'
+        product: "@product2"
+    productVariant3:
+        code: 'product_3'
+        product: "@product3"
 
 AppBundle\Entity\Product:
     product1:
@@ -19,5 +39,24 @@ AppBundle\Entity\Product:
         minPlayerCount: 2
         maxPlayerCount: 5
         minAge: 12
+        status: 'published'
         translations:
             - "@productTranslation1"
+    product2:
+        currentLocale: 'en_US'
+        code: 'product_2'
+        minPlayerCount: 2
+        maxPlayerCount: 4
+        minAge: 12
+        status: 'published'
+        translations:
+            - "@productTranslation2"
+    product3:
+        currentLocale: 'en_US'
+        code: 'product_3'
+        minPlayerCount: 3
+        maxPlayerCount: 5
+        minAge: 12
+        status: 'published'
+        translations:
+            - "@productTranslation3"
