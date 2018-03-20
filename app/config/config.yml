@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: "@SyliusProductBundle/Resources/config/app/config.yml" }
     - { resource: app/main.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
