@@ -29,7 +29,8 @@
                 "slug": "@string@",
                 "min_age": @integer@,
                 "min_player_count": @integer@,
-                "max_player_count": @integer@
+                "max_player_count": @integer@,
+                "average_rating": @integer@
             },
             {
                 "name": "@string@",
@@ -41,7 +42,8 @@
                 "slug": "@string@",
                 "min_age": @integer@,
                 "min_player_count": @integer@,
-                "max_player_count": @integer@
+                "max_player_count": @integer@,
+                "average_rating": @integer@
             },
             {
                 "name": "@string@",
@@ -53,7 +55,8 @@
                 "slug": "@string@",
                 "min_age": @integer@,
                 "min_player_count": @integer@,
-                "max_player_count": @integer@
+                "max_player_count": @integer@,
+                "average_rating": @integer@
             },
             {
                 "name": "@string@",
@@ -65,7 +68,8 @@
                 "slug": "@string@",
                 "min_age": @integer@,
                 "min_player_count": @integer@,
-                "max_player_count": @integer@
+                "max_player_count": @integer@,
+                "average_rating": @integer@
             },
             {
                 "name": "@string@",
@@ -77,7 +81,8 @@
                 "slug": "@string@",
                 "min_age": @integer@,
                 "min_player_count": @integer@,
-                "max_player_count": @integer@
+                "max_player_count": @integer@,
+                "average_rating": @integer@
             },
             {
                 "name": "@string@",
@@ -89,7 +94,8 @@
                 "slug": "@string@",
                 "min_age": @integer@,
                 "min_player_count": @integer@,
-                "max_player_count": @integer@
+                "max_player_count": @integer@,
+                "average_rating": @integer@
             },
             {
                 "name": "@string@",
@@ -101,7 +107,8 @@
                 "slug": "@string@",
                 "min_age": @integer@,
                 "min_player_count": @integer@,
-                "max_player_count": @integer@
+                "max_player_count": @integer@,
+                "average_rating": @integer@
             },
             {
                 "name": "@string@",
@@ -113,7 +120,8 @@
                 "slug": "@string@",
                 "min_age": @integer@,
                 "min_player_count": @integer@,
-                "max_player_count": @integer@
+                "max_player_count": @integer@,
+                "average_rating": @integer@
             },
             {
                 "name": "@string@",
@@ -125,7 +133,8 @@
                 "slug": "@string@",
                 "min_age": @integer@,
                 "min_player_count": @integer@,
-                "max_player_count": @integer@
+                "max_player_count": @integer@,
+                "average_rating": @integer@
             },
             {
                 "name": "@string@",
@@ -137,7 +146,8 @@
                 "slug": "@string@",
                 "min_age": @integer@,
                 "min_player_count": @integer@,
-                "max_player_count": @integer@
+                "max_player_count": @integer@,
+                "average_rating": @integer@
             }
         ]
     }
