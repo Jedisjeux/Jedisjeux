@@ -21,17 +21,6 @@ use Sylius\Component\Customer\Model\CustomerInterface;
 class CustomerRepository extends EntityRepository
 {
     /**
-     * @return int
-     */
-    public function count()
-    {
-        return (int)$this->createQueryBuilder('o')
-            ->select('COUNT(o.id)')
-            ->getQuery()
-            ->getSingleScalarResult();
-    }
-
-    /**
      * @param string $username
      *
      * @return null|CustomerInterface
