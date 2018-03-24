@@ -62,6 +62,7 @@ class AppKernel extends Kernel
             new Zenstruck\RedirectBundle\ZenstruckRedirectBundle(),
             new Eko\FeedBundle\EkoFeedBundle(),
             new Incenteev\HashedAssetBundle\IncenteevHashedAssetBundle(),
+            new Nelmio\CorsBundle\NelmioCorsBundle(),
 
             // TODO remove these bundles
             new Bmatzner\JQueryUIBundle\BmatznerJQueryUIBundle(),

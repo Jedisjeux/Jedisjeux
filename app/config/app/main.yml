@@ -1,6 +1,7 @@
 imports:
     - { resource: ckeditor.yml }
     - { resource: cmf.yml }
+    - { resource: cors.yml }
     - { resource: elastica.yml }
     - { resource: feed.yml }
     - { resource: imagine.yml }
