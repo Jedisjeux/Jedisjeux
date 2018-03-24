@@ -1,5 +1,16 @@
 ## Change Log
 
+### v1.0.5 2018/03/24
+- [#98](https://github.com/Jedisjeux/Jedisjeux/pull/98) use smaller images for article list (@loic425)
+- [#97](https://github.com/Jedisjeux/Jedisjeux/pull/97) [API] add cors configuration (@loic425)
+- [#96](https://github.com/Jedisjeux/Jedisjeux/pull/96) install sylius 1.1.0 (@loic425)
+- [#95](https://github.com/Jedisjeux/Jedisjeux/pull/95) [Products][Api] expose average rating (@loic425)
+- [#94](https://github.com/Jedisjeux/Jedisjeux/pull/94) [travis] validate yarn packages (@loic425)
+- [#91](https://github.com/Jedisjeux/Jedisjeux/pull/91) [api][Products] improve api products (@loic425)
+- [#93](https://github.com/Jedisjeux/Jedisjeux/pull/93) 1.0 (@loic425)
+- [#92](https://github.com/Jedisjeux/Jedisjeux/pull/92) upgrade jquery (@loic425)
+- [#90](https://github.com/Jedisjeux/Jedisjeux/pull/90) [Products][Api] expose new properties (@loic425)
+
 ### v1.0.4 (2018/02/28)
 - [#88](https://github.com/jedisjeux/jedisjeux/pull/88) Feature/prevent online game plays (@loic425)
 - [#86](https://github.com/jedisjeux/jedisjeux/pull/86) fix download avatars command (@loic425)
