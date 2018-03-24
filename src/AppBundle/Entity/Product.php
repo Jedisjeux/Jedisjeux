@@ -188,6 +188,9 @@ class Product extends BaseProduct implements ReviewableInterface
      * @var float
      *
      * @ORM\Column(type="float")
+     *
+     * @JMS\Expose
+     * @JMS\Groups({"Default", "Detailed"})
      */
     protected $averageRating = 0;
 

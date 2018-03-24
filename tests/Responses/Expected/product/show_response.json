@@ -2,15 +2,9 @@
     "id": @integer@,
     "code": "product_1",
     "attributes": [],
-    "variants": @array@,
     "options": [],
     "associations": [],
     "translations": @array@,
-    "translations_cache": @array@,
-    "current_locale": "en_US",
-    "fallback_locale": "en_US",
-    "created_at": "@string@.isDateTime()",
-    "updated_at": "@string@.isDateTime()",
     "short_description": "@string@",
     "mechanisms": [],
     "themes": [],
@@ -19,5 +13,5 @@
     "min_age": 12,
     "min_player_count": 2,
     "max_player_count": 5,
-    "enabled": true
+    "average_rating": @integer@
 }

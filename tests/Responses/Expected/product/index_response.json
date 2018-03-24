@@ -1,0 +1,154 @@
+{
+    "page": 1,
+    "limit": 10,
+    "pages": 3,
+    "total": 22,
+    "_links": {
+        "self": {
+            "href": "\/api\/products\/?page=1&limit=10"
+        },
+        "first": {
+            "href": "\/api\/products\/?page=1&limit=10"
+        },
+        "last": {
+            "href": "\/api\/products\/?page=3&limit=10"
+        },
+        "next": {
+            "href": "\/api\/products\/?page=2&limit=10"
+        }
+    },
+    "_embedded": {
+        "items": [
+            {
+                "name": "@string@",
+                "id": @integer@,
+                "code": "@string@",
+                "options": [
+
+                ],
+                "slug": "@string@",
+                "min_age": @integer@,
+                "min_player_count": @integer@,
+                "max_player_count": @integer@,
+                "average_rating": @integer@
+            },
+            {
+                "name": "@string@",
+                "id": @integer@,
+                "code": "@string@",
+                "options": [
+
+                ],
+                "slug": "@string@",
+                "min_age": @integer@,
+                "min_player_count": @integer@,
+                "max_player_count": @integer@,
+                "average_rating": @integer@
+            },
+            {
+                "name": "@string@",
+                "id": @integer@,
+                "code": "@string@",
+                "options": [
+
+                ],
+                "slug": "@string@",
+                "min_age": @integer@,
+                "min_player_count": @integer@,
+                "max_player_count": @integer@,
+                "average_rating": @integer@
+            },
+            {
+                "name": "@string@",
+                "id": @integer@,
+                "code": "@string@",
+                "options": [
+
+                ],
+                "slug": "@string@",
+                "min_age": @integer@,
+                "min_player_count": @integer@,
+                "max_player_count": @integer@,
+                "average_rating": @integer@
+            },
+            {
+                "name": "@string@",
+                "id": @integer@,
+                "code": "@string@",
+                "options": [
+
+                ],
+                "slug": "@string@",
+                "min_age": @integer@,
+                "min_player_count": @integer@,
+                "max_player_count": @integer@,
+                "average_rating": @integer@
+            },
+            {
+                "name": "@string@",
+                "id": @integer@,
+                "code": "@string@",
+                "options": [
+
+                ],
+                "slug": "@string@",
+                "min_age": @integer@,
+                "min_player_count": @integer@,
+                "max_player_count": @integer@,
+                "average_rating": @integer@
+            },
+            {
+                "name": "@string@",
+                "id": @integer@,
+                "code": "@string@",
+                "options": [
+
+                ],
+                "slug": "@string@",
+                "min_age": @integer@,
+                "min_player_count": @integer@,
+                "max_player_count": @integer@,
+                "average_rating": @integer@
+            },
+            {
+                "name": "@string@",
+                "id": @integer@,
+                "code": "@string@",
+                "options": [
+
+                ],
+                "slug": "@string@",
+                "min_age": @integer@,
+                "min_player_count": @integer@,
+                "max_player_count": @integer@,
+                "average_rating": @integer@
+            },
+            {
+                "name": "@string@",
+                "id": @integer@,
+                "code": "@string@",
+                "options": [
+
+                ],
+                "slug": "@string@",
+                "min_age": @integer@,
+                "min_player_count": @integer@,
+                "max_player_count": @integer@,
+                "average_rating": @integer@
+            },
+            {
+                "name": "@string@",
+                "id": @integer@,
+                "code": "@string@",
+                "options": [
+
+                ],
+                "slug": "@string@",
+                "min_age": @integer@,
+                "min_player_count": @integer@,
+                "max_player_count": @integer@,
+                "average_rating": @integer@
+            }
+        ]
+    }
+}
