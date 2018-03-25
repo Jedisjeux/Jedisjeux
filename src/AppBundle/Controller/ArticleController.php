@@ -15,7 +15,6 @@ use AppBundle\Entity\Article;
 use AppBundle\Entity\Taxon;
 use AppBundle\Repository\ArticleRepository;
 use AppBundle\Repository\TaxonRepository;
-use Doctrine\ORM\EntityRepository;
 use FOS\RestBundle\View\View;
 use SM\Factory\Factory;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;

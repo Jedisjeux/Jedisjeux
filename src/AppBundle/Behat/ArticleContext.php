@@ -11,7 +11,6 @@
 
 namespace AppBundle\Behat;
 
-use AppBundle\Document\ArticleContent;
 use AppBundle\Entity\Article;
 use Behat\Gherkin\Node\TableNode;
 use Sylius\Component\Customer\Model\CustomerInterface;

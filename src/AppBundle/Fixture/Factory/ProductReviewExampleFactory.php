@@ -12,7 +12,6 @@
 namespace AppBundle\Fixture\Factory;
 
 use AppBundle\Fixture\OptionsResolver\LazyOption;
-use SM\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Review\Factory\ReviewFactoryInterface;
 use Sylius\Component\Review\Model\ReviewInterface;

@@ -13,7 +13,6 @@ namespace AppBundle\Form\Type;
 
 use AppBundle\Entity\Taxon;
 use Doctrine\ORM\EntityRepository;
-use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonAutocompleteChoiceType;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;

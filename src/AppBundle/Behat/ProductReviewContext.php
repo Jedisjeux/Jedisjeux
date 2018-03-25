@@ -15,7 +15,6 @@ use AppBundle\Entity\ProductReview;
 use AppBundle\Repository\ProductRepository;
 use Behat\Gherkin\Node\TableNode;
 use Sylius\Component\Customer\Model\CustomerInterface;
-use Sylius\Component\Product\Model\ProductInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>

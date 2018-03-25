@@ -14,10 +14,7 @@ namespace AppBundle\Fixture\Factory;
 use AppBundle\Entity\Avatar;
 use AppBundle\Entity\Customer;
 use AppBundle\Entity\User;
-use AppBundle\Fixture\OptionsResolver\LazyOption;
-use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
