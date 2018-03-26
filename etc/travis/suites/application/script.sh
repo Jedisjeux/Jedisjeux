@@ -11,6 +11,7 @@ commands=(
     validate-twig
     validate-yarn-packages
     test-phpspec
+    test-phpstan
     test-phpunit
     test-fixtures
     test-behat-without-javascript
