@@ -75,7 +75,7 @@ class TopicController extends ResourceController
         /** @var Taxon $taxon */
         $taxon = $this->getTaxonRepository()->findOneBySlug($slug, $this->getParameter('locale'));
 
-        if (!isset($taxon)) {
+        if (null === $taxon) {
             throw new NotFoundHttpException('Requested taxon does not exist.'.$slug);
         }
 
