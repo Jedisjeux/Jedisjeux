@@ -91,8 +91,3 @@ services:
             - "@app.updater.product_count_by_person"
         tags:
             - { name: kernel.event_subscriber }
-
-    app.subscriber.load_customer_element_object:
-        class: AppBundle\EventSubscriber\CustomerListElementReferenceSubscriber
-        tags:
-            - { name: doctrine.event_subscriber, connection: default }
