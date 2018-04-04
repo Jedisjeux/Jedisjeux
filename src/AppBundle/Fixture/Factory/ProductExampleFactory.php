@@ -44,6 +44,11 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     protected $personRepository;
 
     /**
+     * @var RepositoryInterface
+     */
+    protected $taxonRepository;
+
+    /**
      * @var SlugGeneratorInterface
      */
     private $slugGenerator;
@@ -62,18 +67,21 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
      * @param ProductFactoryInterface $productFactory
      * @param FactoryInterface $productVariantImageFactory
      * @param RepositoryInterface $personRepository
+     * @param RepositoryInterface $taxonRepository
      * @param SlugGeneratorInterface $slugGenerator
      */
     public function __construct(
         ProductFactoryInterface $productFactory,
         FactoryInterface $productVariantImageFactory,
         RepositoryInterface $personRepository,
+        RepositoryInterface $taxonRepository,
         SlugGeneratorInterface $slugGenerator
     )
     {
         $this->productFactory = $productFactory;
         $this->productVariantImageFactory = $productVariantImageFactory;
         $this->personRepository = $personRepository;
+        $this->taxonRepository = $taxonRepository;
         $this->slugGenerator = $slugGenerator;
 
         $this->faker = \Faker\Factory::create('fr_FR');
@@ -120,6 +128,14 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
 
         foreach ($options['publishers'] as $publisher) {
             $firstVariant->addPublisher($publisher);
+        }
+
+        foreach ($options['mechanisms'] as $mechanism) {
+            $product->addMechanism($mechanism);
+        }
+
+        foreach ($options['themes'] as $theme) {
+            $product->addTheme($theme);
         }
 
         $this->createImages($product, $options);
@@ -231,6 +247,14 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setDefault('publishers', LazyOption::randomOnes($this->personRepository, 2))
             ->setAllowedTypes('publishers', 'array')
             ->setNormalizer('publishers', LazyOption::findBy($this->personRepository, 'slug'))
+
+            ->setDefault('mechanisms', LazyOption::randomOnes($this->taxonRepository, 2))
+            ->setAllowedTypes('mechanisms', 'array')
+            ->setNormalizer('mechanisms', LazyOption::findBy($this->taxonRepository, 'code'))
+
+            ->setDefault('themes', LazyOption::randomOnes($this->taxonRepository, 2))
+            ->setAllowedTypes('themes', 'array')
+            ->setNormalizer('themes', LazyOption::findBy($this->taxonRepository, 'code'))
 
             ->setDefault('released_at', function (Options $options) {
                 return $this->faker->dateTimeBetween('-1 year', 'yesterday');
