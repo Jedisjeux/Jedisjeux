@@ -12,7 +12,6 @@
 namespace AppBundle\EventSubscriber;
 
 use AppBundle\AppEvents;
-use AppBundle\Calculator\TopicCountByTaxonCalculator;
 use AppBundle\Entity\Topic;
 use AppBundle\Updater\TopicCountByTaxonUpdater;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

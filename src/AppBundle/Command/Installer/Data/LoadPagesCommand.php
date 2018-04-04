@@ -8,14 +8,9 @@
 
 namespace AppBundle\Command\Installer\Data;
 
-use Doctrine\ODM\PHPCR\Document\Generic;
-use Doctrine\ODM\PHPCR\DocumentManager;
-use Sylius\Bundle\ContentBundle\Doctrine\ODM\PHPCR\StaticContentRepository;
-use Sylius\Bundle\ContentBundle\Document\StaticContent;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class LoadPagesCommand extends ContainerAwareCommand
 {
@@ -41,74 +36,10 @@ class LoadPagesCommand extends ContainerAwareCommand
     {
         $this->output = $output;
         $output->writeln("<comment>Load pages</comment>");
-
-        foreach ($this->getPages() as $data) {
-            $page = $this->createOrReplacePage($data);
-            $this->getManager()->persist($page);
-            $this->getManager()->flush();
-        }
+        // TODO create pages with sylius cms plugin
+        $this->getPages();
     }
 
-    /**
-     * @param array $data
-     * @return StaticContent
-     */
-    protected function createOrReplacePage(array $data)
-    {
-        $page = $this->findPage($data['name']);
-
-        if (null === $page) {
-            /** @var StaticContent $page */
-            $page = $this->getContainer()->get('sylius.factory.static_content')->createNew();
-            $page
-                ->setParentDocument($this->getParent());
-        }
-
-        $page->setName($data['name']);
-        $page->setTitle($data['title']);
-        $page->setBody($data['body']);
-        $page->setPublishable(false);
-
-        return $page;
-    }
-
-    /**
-     * @param string $id
-     * @return StaticContent
-     */
-    protected function findPage($id)
-    {
-        /** @var StaticContent $page */
-        $page = $this
-            ->getRepository()
-            ->findOneBy(['name' => $id]);
-
-        return $page;
-    }
-
-    /**
-     * @return Generic|object
-     */
-    protected function getParent()
-    {
-        return $this->getManager()->find(null, '/cms/pages');
-    }
-
-    /**
-     * @return StaticContentRepository|object
-     */
-    public function getRepository()
-    {
-        return $this->getContainer()->get('sylius.repository.static_content');
-    }
-
-    /**
-     * @return DocumentManager
-     */
-    public function getManager()
-    {
-        return $this->getContainer()->get('sylius.manager.static_content');
-    }
 
     protected function getPages()
     {

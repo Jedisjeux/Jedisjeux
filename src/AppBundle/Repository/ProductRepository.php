@@ -12,7 +12,6 @@ use AppBundle\Entity\Product;
 use AppBundle\Utils\DateCalculator;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Customer\Model\CustomerInterface;

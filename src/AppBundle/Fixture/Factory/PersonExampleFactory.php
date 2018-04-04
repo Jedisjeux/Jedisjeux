@@ -13,9 +13,7 @@ namespace AppBundle\Fixture\Factory;
 
 use AppBundle\Entity\Person;
 use AppBundle\Entity\PersonImage;
-use AppBundle\Entity\ProductVariantImage;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

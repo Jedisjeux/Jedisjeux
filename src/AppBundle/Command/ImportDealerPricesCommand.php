@@ -238,6 +238,8 @@ EOT
 
             $error = false;
 
+            $status = null;
+
             switch ($rowData[3]) {
                 case 'Dispo':
                 case 'Disponible':

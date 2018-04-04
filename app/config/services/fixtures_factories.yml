@@ -90,6 +90,7 @@ services:
             - "@sylius.factory.product"
             - "@app.factory.product_variant_image"
             - "@app.repository.person"
+            - "@sylius.repository.taxon"
             - "@sylius.generator.slug"
 
     app.fixture.example_factory.product_box:
@@ -134,3 +135,4 @@ services:
             - "@sylius.repository.customer"
             - "@app.repository.article"
             - "@app.repository.game_play"
+            - "@sylius.repository.taxon"

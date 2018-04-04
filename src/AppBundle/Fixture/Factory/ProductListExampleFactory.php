@@ -11,16 +11,10 @@
 
 namespace AppBundle\Fixture\Factory;
 
-use AppBundle\Entity\Product;
 use AppBundle\Entity\ProductList;
 use AppBundle\Entity\ProductListItem;
-use AppBundle\Entity\ProductVariant;
-use AppBundle\Entity\ProductVariantImage;
 use AppBundle\Fixture\OptionsResolver\LazyOption;
-use AppBundle\Formatter\StringInflector;
 use Sylius\Component\Customer\Model\CustomerInterface;
-use Sylius\Component\Product\Factory\ProductFactoryInterface;
-use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;

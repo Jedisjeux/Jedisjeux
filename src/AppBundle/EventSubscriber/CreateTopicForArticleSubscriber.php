@@ -16,7 +16,6 @@ use AppBundle\Entity\Post;
 use AppBundle\Factory\TopicFactory;
 use AppBundle\Repository\TopicRepository;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\ORM\EntityRepository;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 

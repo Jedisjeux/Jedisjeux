@@ -37,8 +37,6 @@ default:
 
         FriendsOfBehat\CrossContainerExtension: ~
 
-        FriendsOfBehat\PerformanceExtension: ~
-
         FriendsOfBehat\VariadicExtension: ~
 
     gherkin:
