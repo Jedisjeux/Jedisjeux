@@ -134,3 +134,4 @@ services:
             - "@sylius.repository.customer"
             - "@app.repository.article"
             - "@app.repository.game_play"
+            - "@sylius.repository.taxon"

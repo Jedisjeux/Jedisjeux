@@ -34,6 +34,7 @@ class TopicFixture extends AbstractResourceFixture
         $resourceNode
             ->children()
             ->scalarNode('title')->cannotBeEmpty()->end()
+            ->scalarNode('main_taxon')->cannotBeEmpty()->end()
             ->scalarNode('article')->cannotBeEmpty()->end()
             ->scalarNode('game_play')->cannotBeEmpty()->end()
         ;
