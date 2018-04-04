@@ -54,16 +54,6 @@ sylius_fixtures:
                     options:
                         custom:
                             -
-                                code: "forum"
-                                name: "Forum"
-                                children:
-                                    -
-                                      name: "La taverne du joueur"
-                                      public: true
-                                    -
-                                      name: "Tatooïne : La Cantina"
-                                      public: false
-                            -
                                 code: "themes"
                                 name: "Thèmes"
                             -
@@ -252,9 +242,9 @@ sylius_fixtures:
                     options:
                         random: 80
 
-                topic:
+                forum_topic:
                     options:
-                        random: 20
+                        amount: 20
 
                 post:
                     options:

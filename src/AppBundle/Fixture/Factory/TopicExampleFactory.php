@@ -19,6 +19,7 @@ use AppBundle\Formatter\StringInflector;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -48,6 +49,11 @@ class TopicExampleFactory extends AbstractExampleFactory implements ExampleFacto
     private $gamePlayRepository;
 
     /**
+     * @var RepositoryInterface
+     */
+    private $taxonRepository;
+
+    /**
      * @var \Faker\Generator
      */
     private $faker;
@@ -62,18 +68,21 @@ class TopicExampleFactory extends AbstractExampleFactory implements ExampleFacto
      * @param RepositoryInterface $customerRepository
      * @param RepositoryInterface $articleRepository
      * @param RepositoryInterface $gamePlayRepository
+     * @param RepositoryInterface $taxonRepository
      */
     public function __construct(
         FactoryInterface $personFactory,
         RepositoryInterface $customerRepository,
         RepositoryInterface $articleRepository,
-        RepositoryInterface $gamePlayRepository
+        RepositoryInterface $gamePlayRepository,
+        RepositoryInterface $taxonRepository
     )
     {
         $this->topicFactory = $personFactory;
         $this->customerRepository = $customerRepository;
         $this->articleRepository = $articleRepository;
         $this->gamePlayRepository = $gamePlayRepository;
+        $this->taxonRepository = $taxonRepository;
 
         $this->faker = \Faker\Factory::create('fr_FR');
         $this->optionsResolver = new OptionsResolver();
@@ -93,6 +102,7 @@ class TopicExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $topic->setCode($options['code']);
         $topic->setTitle($options['title']);
         $topic->setAuthor($options['author']);
+        $topic->setMainTaxon($options['main_taxon']);
         $topic->setCreatedAt($options['created_at']);
         $topic->setLastPostCreatedAt($topic->getCreatedAt());
 
@@ -147,6 +157,10 @@ class TopicExampleFactory extends AbstractExampleFactory implements ExampleFacto
 
                 return new \DateTime($createdAt);
             })
+
+            ->setDefault('main_taxon', LazyOption::randomOneOrNull($this->taxonRepository, 50))
+            ->setAllowedTypes('main_taxon', ['null', 'string', TaxonInterface::class])
+            ->setNormalizer('main_taxon', LazyOption::findOneBy($this->taxonRepository, 'code'))
 
             ->setDefault('article', LazyOption::randomOneOrNull($this->articleRepository, 50))
             ->setAllowedTypes('article', ['null', 'string', Article::class])

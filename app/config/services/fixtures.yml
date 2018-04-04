@@ -55,6 +55,14 @@ services:
         tags:
             - { name: sylius_fixtures.fixture }
 
+    app.fixture.forum_topic:
+        class: AppBundle\Fixture\ForumTopicFixture
+        arguments:
+            - "@app.fixture.taxon"
+            - "@app.fixture.topic"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
     app.fixture.game_play:
         class: AppBundle\Fixture\GamePlayFixture
         arguments:
