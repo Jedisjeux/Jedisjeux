@@ -54,12 +54,6 @@ sylius_fixtures:
                     options:
                         custom:
                             -
-                                code: "themes"
-                                name: "Thèmes"
-                            -
-                                code: "mechanisms"
-                                name: "Mécanismes"
-                            -
                                 code: "target-audience"
                                 name: "Cibles"
                             -
@@ -137,9 +131,12 @@ sylius_fixtures:
                                 image: "app/Resources/fixtures/jedisjeux-nouveau.png"
                                 image_position: "top"
 
+                game_product:
+                    options:
+                        amount: 20
+
                 product:
                     options:
-                        random: 20
                         custom:
                             -
                                 name: "Puerto Rico"
