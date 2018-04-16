@@ -13,7 +13,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class DownloadImageCommand extends ContainerAwareCommand
 {
-    const DEFAULT_IMAGE_ORIGINAL_PATH = 'http://www.jedisjeux.net/media/cache/resolve/full/uploads/img/';
+    const DEFAULT_IMAGE_ORIGINAL_PATH = 'https://www.jedisjeux.net/media/cache/resolve/full/uploads/img/';
 
     /**
      * @var InputInterface
@@ -96,7 +96,6 @@ class DownloadImageCommand extends ContainerAwareCommand
                 continue;
             }
 
-            $this->output->writeln('Downloading image <comment>' . $this->getImageOriginalPath($image) . '</comment>');
             $this->downloadImage($image);
 
 
@@ -128,10 +127,15 @@ class DownloadImageCommand extends ContainerAwareCommand
      */
     protected function downloadImage(AbstractImage $image)
     {
-        if (!is_file($this->getImageOriginalPath($image))) {
+        $copyFrom = $this->getImageOriginalPath($image);
+        $copyTo = $image->getAbsolutePath();
+
+        if (file_exists($copyTo)) {
             return;
         }
 
-        file_put_contents($image->getAbsolutePath(), file_get_contents($this->getImageOriginalPath($image)));
+        $this->output->writeln(sprintf('Downloading image from <info>%s</info> to <info>%s</info>', $copyFrom, $copyTo));
+
+        file_put_contents($copyTo, file_get_contents($this->getImageOriginalPath($image)));
     }
 }
