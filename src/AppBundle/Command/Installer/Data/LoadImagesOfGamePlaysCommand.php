@@ -37,15 +37,22 @@ class LoadImagesOfGamePlaysCommand extends ContainerAwareCommand
 
     protected function deleteGamePlaysImages()
     {
-        $queryBuiler = $this->getManager()->createQuery('delete from AppBundle:GamePlayImage');
-        $queryBuiler->execute();
+        $query = <<<EOM
+DELETE image
+FROM jdj_game_play gamePlay
+  INNER JOIN jedisjeux.jdj_parties old
+    ON concat('game-play-', old.partie_id) = gamePlay.code
+  INNER JOIN jdj_game_play_image image
+    ON image.game_play_id = gamePlay.id;
+EOM;
+        $this->getDatabaseConnection()->executeQuery($query);
     }
 
     protected function insertGamePlaysImages()
     {
         $query = <<<EOM
-insert into jdj_game_play_image(id, gamePlay_id, path, description)
-select    old.img_id, gamePlay.id as gamePlay_id, img_nom as path, ie.legende as description
+insert into jdj_game_play_image(id, game_play_id, path, description)
+select    old.img_id, gamePlay.id as game_play_id, img_nom as path, ie.legende as description
 from        jedisjeux.jdj_images old
   inner join  jedisjeux.jdj_images_elements ie
     on ie.img_id = old.img_id

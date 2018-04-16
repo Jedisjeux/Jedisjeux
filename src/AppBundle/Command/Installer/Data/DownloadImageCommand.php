@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: loic_425
- * Date: 03/03/15
- * Time: 19:34
- */
 
 namespace AppBundle\Command\Installer\Data;
 
@@ -12,16 +6,20 @@ use AppBundle\Entity\AbstractImage;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
-use JDJ\CoreBundle\Entity\Image;
-use JDJ\CoreBundle\Service\ImageImportService;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class DownloadImageCommand extends ContainerAwareCommand
 {
+    const DEFAULT_IMAGE_ORIGINAL_PATH = 'http://www.jedisjeux.net/media/cache/resolve/full/uploads/img/';
+
+    /**
+     * @var InputInterface
+     */
+    protected $input;
+
     /**
      * @var OutputInterface
      */
@@ -30,11 +28,23 @@ class DownloadImageCommand extends ContainerAwareCommand
     /**
      * {@inheritdoc}
      */
+    protected function initialize(InputInterface $input, OutputInterface $output)
+    {
+        parent::initialize($input, $output);
+
+        $this->input = $input;
+        $this->output = $output;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this
             ->setName('app:images:download')
-            ->setDescription('Download images');
+            ->setDescription('Download images')
+            ->addOption('image-original-path', null, InputOption::VALUE_REQUIRED, null, self::DEFAULT_IMAGE_ORIGINAL_PATH);
     }
 
     /**
@@ -42,8 +52,6 @@ class DownloadImageCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->output = $output;
-
         /** @var EntityRepository $repository */
         $repository = $this->getContainer()->get('app.repository.product_variant_image');
         $queryBuilder = $repository->createQueryBuilder('o');
@@ -112,7 +120,7 @@ class DownloadImageCommand extends ContainerAwareCommand
      */
     protected function getImageOriginalPath(AbstractImage $image)
     {
-        return "http://www.jedisjeux.net/media/cache/resolve/full/" . $image->getWebPath();
+        return $this->input->getOption('image-original-path') . $image->getPath();
     }
 
     /**
@@ -120,6 +128,10 @@ class DownloadImageCommand extends ContainerAwareCommand
      */
     protected function downloadImage(AbstractImage $image)
     {
+        if (!is_file($this->getImageOriginalPath($image))) {
+            return;
+        }
+
         file_put_contents($image->getAbsolutePath(), file_get_contents($this->getImageOriginalPath($image)));
     }
 }
