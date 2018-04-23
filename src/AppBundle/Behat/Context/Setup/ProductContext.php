@@ -75,6 +75,8 @@ class ProductContext implements Context
         $product = $this->productFactory->create([
             'name' => $name,
             'status' => Product::PUBLISHED,
+            'mechanisms' => [],
+            'themes' => [],
         ]);
 
         $this->productRepository->add($product);
@@ -92,6 +94,8 @@ class ProductContext implements Context
         $product = $this->productFactory->create([
             'name' => $name,
             'status' => str_replace(' ', '_', $status),
+            'mechanisms' => [],
+            'themes' => [],
         ]);
 
         $this->productRepository->add($product);
