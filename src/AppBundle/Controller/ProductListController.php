@@ -16,6 +16,7 @@ use AppBundle\Entity\ProductListItem;
 use AppBundle\Factory\ProductListFactory;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,7 +50,7 @@ class ProductListController extends ResourceController
             $this->manager->persist($list);
         }
 
-
+        /** @var ProductInterface $product */
         $product = $this->get('sylius.repository.product')->find($productId);
 
         if (null === $product) {
@@ -58,9 +59,8 @@ class ProductListController extends ResourceController
 
         /** @var ProductListItem $item */
         $item = $this->get('app.factory.product_list_item')->createNew();
-        $item
-            ->setProduct($product)
-            ->setList($list);
+        $item->setProduct($product);
+        $item->setList($list);
 
         $list->addItem($item);
         $this->manager->flush();
@@ -103,6 +103,7 @@ class ProductListController extends ResourceController
             throw new NotFoundHttpException();
         }
 
+        /** @var ProductListItem $item */
         $item = $this->get('app.repository.product_list_item')->findOneBy(['product' => $product, 'list' => $list]);
 
         if (null === $item) {
