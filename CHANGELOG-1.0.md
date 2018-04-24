@@ -1,6 +1,17 @@
 ## Change Log
 
-### v1.0.5 2018/03/24
+### v1.0.6 (2018/04/23)
+- [#113](https://github.com/jedisjeux/jedisjeux/pull/113) [ProductList] fix adding or removing a product to a list (@loic425)
+- [#110](https://github.com/jedisjeux/jedisjeux/pull/110) [Scripts] fix download image command (@loic425)
+- [#109](https://github.com/jedisjeux/jedisjeux/pull/109) [Scripts] add image origin path on download image command (@loic425)
+- [#107](https://github.com/jedisjeux/jedisjeux/pull/107) [Fixtures] add game product fixture (@loic425)
+- [#106](https://github.com/jedisjeux/jedisjeux/pull/106) [Fixtures] add forum topic fixture (@loic425)
+- [#105](https://github.com/jedisjeux/jedisjeux/pull/105) [Behat] Remove performance extension (@loic425)
+- [#102](https://github.com/jedisjeux/jedisjeux/pull/102) [Travis] test phpstan (@loic425)
+- [#101](https://github.com/jedisjeux/jedisjeux/pull/101) [DX] remove some unused use statements (@loic425)
+
+
+### v1.0.5 (2018/03/24)
 - [#98](https://github.com/Jedisjeux/Jedisjeux/pull/98) use smaller images for article list (@loic425)
 - [#97](https://github.com/Jedisjeux/Jedisjeux/pull/97) [API] add cors configuration (@loic425)
 - [#96](https://github.com/Jedisjeux/Jedisjeux/pull/96) install sylius 1.1.0 (@loic425)
