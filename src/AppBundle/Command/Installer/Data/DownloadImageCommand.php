@@ -83,7 +83,7 @@ class DownloadImageCommand extends ContainerAwareCommand
         }
 
         if (!isset($repositories[$entityOption])) {
-            throw new InvalidOptionException(sprintf('Entity with name %s was not found', $entity));
+            throw new InvalidOptionException(sprintf('Entity with name %s was not found', $entityOption));
         }
 
         return [$entityOption => $repositories[$entityOption]];
@@ -112,7 +112,6 @@ class DownloadImageCommand extends ContainerAwareCommand
             }
 
             $this->downloadImage($image);
-
 
             $this->getManager()->detach($image);
             $this->getManager()->clear();
