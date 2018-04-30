@@ -5,7 +5,7 @@
         <li class="active"><a href="#resume" data-toggle="tab">Résumé</a></li>
         <li><a href="#articles" data-toggle="tab">Articles <span class="color">({{ product.publishedArticles | length }})</span></a></li>
         <li><a href="#critiques" data-toggle="tab">Avis <span class="color">({{ product.commentedReviews | length }})</span></a></li>
-        <li><a href="#gamePlays" data-toggle="tab">{{ 'app.ui.game_plays'|trans }} <span class="color">({{ product.gamePlays | length }})</span></a></li>
+        <li><a href="#gamePlays" data-toggle="tab">{{ 'app.ui.game_plays'|trans }} <span class="color">({{ product.gamePlaysWithTopic | length }})</span></a></li>
     </ul>
     <!-- Tab content -->
     <div class="tab-content">
