@@ -13,10 +13,8 @@ namespace AppBundle\Fixture\Factory;
 
 use AppBundle\Entity\Article;
 use AppBundle\Entity\ArticleImage;
-use AppBundle\Entity\Block;
 use AppBundle\Fixture\OptionsResolver\LazyOption;
 use AppBundle\Formatter\StringInflector;
-use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
