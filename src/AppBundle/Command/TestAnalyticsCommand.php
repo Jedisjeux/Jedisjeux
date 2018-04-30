@@ -11,12 +11,7 @@
 
 namespace AppBundle\Command;
 
-use AppBundle\Entity\Article;
 use AppBundle\GoogleAnalytics\SessionService;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityRepository;
-use SM\Factory\Factory;
-use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
