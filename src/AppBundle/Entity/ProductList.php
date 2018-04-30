@@ -20,6 +20,7 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -59,6 +60,9 @@ class ProductList implements ResourceInterface
      * @var string
      *
      * @ORM\Column(type="string", nullable=true)
+     *
+     * @Assert\NotBlank()
+     *
      * @JMS\Expose
      * @JMS\Groups({"Default"})
      */
