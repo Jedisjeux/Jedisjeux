@@ -55,6 +55,7 @@
 {% endmacro %}
 
 {% macro sidebarList(taxons, routeName, currentTaxon, itemCountProperty) %}
+    {% import _self as self %}
     <ul class="list-6">
         {% set hiddenElements = false %}
         {% for key, taxon in taxons %}
@@ -76,7 +77,7 @@
                     {% endif %}
                 </a>
                 {% if (taxon.children|length > 0) %}
-                    {{ _self.sidebarList(taxon.children, routeName, currentTaxon, itemCountProperty) }}
+                    {{ self.sidebarList(taxon.children, routeName, currentTaxon, itemCountProperty) }}
                 {% endif %}
             </li>
 
