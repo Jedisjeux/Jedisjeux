@@ -41,7 +41,7 @@ class SearchController extends Controller
         $paginator->setCurrentPage($request->get('page', 1));
 
         if ($paginator->getNbResults() === 1) {
-            return $this->redirectToTheUniqueResult($paginator);
+            $this->redirectToTheUniqueResult($paginator);
         }
 
         $types = $this->getTypesOfResults($paginator);
@@ -246,9 +246,10 @@ class SearchController extends Controller
 
     /**
      * @param Pagerfanta $paginator
-     * @return RedirectResponse
+     *
+     * @return RedirectResponse|null
      */
-    private function redirectToTheUniqueResult(Pagerfanta $paginator)
+    private function redirectToTheUniqueResult(Pagerfanta $paginator): ?RedirectResponse
     {
         $current = $paginator->getIterator()->current();
 
@@ -267,11 +268,19 @@ class SearchController extends Controller
         }
 
         if ($current instanceof Person) {
-            return $this->redirect($this->generateUrl('personne_show', array(
-                    'id' => $current->getId(),
+            return $this->redirect($this->generateUrl('app_frontend_person_show', array(
                     'slug' => $current->getSlug(),
                 )
             ));
         }
+
+        if ($current instanceof Topic) {
+            return $this->redirect($this->generateUrl('app_frontend_post_index_by_topic', array(
+                    'topicId' => $current->getId(),
+                )
+            ));
+        }
+
+        return null;
     }
-} 
+}

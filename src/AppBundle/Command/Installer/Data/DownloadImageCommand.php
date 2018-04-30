@@ -7,13 +7,15 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Exception\CommandNotFoundException;
+use Symfony\Component\Console\Exception\InvalidOptionException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class DownloadImageCommand extends ContainerAwareCommand
 {
-    const DEFAULT_IMAGE_ORIGINAL_PATH = 'https://www.jedisjeux.net/media/cache/resolve/full/uploads/img/';
+    const DEFAULT_IMAGE_ORIGINAL_PATH = 'https://www.jedisjeux.net/uploads/img/';
 
     /**
      * @var InputInterface
@@ -44,7 +46,8 @@ class DownloadImageCommand extends ContainerAwareCommand
         $this
             ->setName('app:images:download')
             ->setDescription('Download images')
-            ->addOption('image-original-path', null, InputOption::VALUE_REQUIRED, null, self::DEFAULT_IMAGE_ORIGINAL_PATH);
+            ->addOption('image-original-path', null, InputOption::VALUE_REQUIRED, null, self::DEFAULT_IMAGE_ORIGINAL_PATH)
+            ->addOption('entity', null, InputOption::VALUE_REQUIRED);
     }
 
     /**
@@ -52,33 +55,45 @@ class DownloadImageCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        /** @var EntityRepository $repository */
-        $repository = $this->getContainer()->get('app.repository.product_variant_image');
-        $queryBuilder = $repository->createQueryBuilder('o');
-        $this->downloadImages($queryBuilder);
+        $repositories = $this->getRepositories();
 
-        /** @var EntityRepository $repository */
-        $repository = $this->getContainer()->get('app.repository.game_play_image');
-        $queryBuilder = $repository->createQueryBuilder('o');
-        $this->downloadImages($queryBuilder);
+        foreach ($repositories as $key => $repository) {
+            $this->downloadImagesFromRepository($repository);
+        }
+    }
 
-        /** @var EntityRepository $repository */
-        $repository = $this->getContainer()->get('app.repository.person_image');
-        $queryBuilder = $repository->createQueryBuilder('o');
-        $this->downloadImages($queryBuilder);
+    /**
+     * @return EntityRepository[]
+     */
+    protected function getRepositories()
+    {
+        $repositories = [
+            'product_variant_image' => $this->getContainer()->get('app.repository.product_variant_image'),
+            'game_play_image' => $this->getContainer()->get('app.repository.game_play_image'),
+            'person_image' => $this->getContainer()->get('app.repository.person_image'),
+            'article_image' => $this->getContainer()->get('app.repository.article_image'),
+            'block_image' => $this->getContainer()->get('app.repository.block_image'),
+            'product_box_image' => $this->getContainer()->get('app.repository.product_box_image'),
+        ];
 
-        /** @var EntityRepository $repository */
-        $repository = $this->getContainer()->get('app.repository.article_image');
-        $queryBuilder = $repository->createQueryBuilder('o');
-        $this->downloadImages($queryBuilder);
+        $entityOption = $this->input->getOption('entity');
 
-        /** @var EntityRepository $repository */
-        $repository = $this->getContainer()->get('app.repository.block_image');
-        $queryBuilder = $repository->createQueryBuilder('o');
-        $this->downloadImages($queryBuilder);
+        if (null === $entityOption) {
+            return $repositories;
+        }
 
-        /** @var EntityRepository $repository */
-        $repository = $this->getContainer()->get('app.repository.product_box_image');
+        if (!isset($repositories[$entityOption])) {
+            throw new InvalidOptionException(sprintf('Entity with name %s was not found', $entityOption));
+        }
+
+        return [$entityOption => $repositories[$entityOption]];
+    }
+
+    /**
+     * @param EntityRepository $repository
+     */
+    protected function  downloadImagesFromRepository(EntityRepository $repository): void
+    {
         $queryBuilder = $repository->createQueryBuilder('o');
         $this->downloadImages($queryBuilder);
     }
@@ -86,7 +101,7 @@ class DownloadImageCommand extends ContainerAwareCommand
     /**
      * @param QueryBuilder $queryBuilder
      */
-    protected function downloadImages(QueryBuilder $queryBuilder)
+    protected function downloadImages(QueryBuilder $queryBuilder): void
     {
         foreach ($queryBuilder->getQuery()->iterate() as $row) {
             /** @var AbstractImage $image */
@@ -97,7 +112,6 @@ class DownloadImageCommand extends ContainerAwareCommand
             }
 
             $this->downloadImage($image);
-
 
             $this->getManager()->detach($image);
             $this->getManager()->clear();
