@@ -64,11 +64,6 @@ class AppKernel extends Kernel
             new Incenteev\HashedAssetBundle\IncenteevHashedAssetBundle(),
             new Nelmio\CorsBundle\NelmioCorsBundle(),
 
-            // TODO remove these bundles
-            new Bmatzner\JQueryUIBundle\BmatznerJQueryUIBundle(),
-            new Bmatzner\JQueryBundle\BmatznerJQueryBundle(),
-            new Bmatzner\FontAwesomeBundle\BmatznerFontAwesomeBundle(),
-
             new AppBundle\AppBundle(),
         );
 
