@@ -69,7 +69,7 @@ class ProductContext implements Context
      *
      * @param string $name
      */
-    public function ProductHasName($name)
+    public function productHasName($name)
     {
         /** @var Product $product */
         $product = $this->productFactory->create([
@@ -88,7 +88,7 @@ class ProductContext implements Context
      *
      * @param string $name
      */
-    public function ProductHasNameWithStatus($name, $status)
+    public function productHasNameWithStatus($name, $status)
     {
         /** @var Product $product */
         $product = $this->productFactory->create([
@@ -106,7 +106,7 @@ class ProductContext implements Context
      * @Given /^(this product) has ("[^"]+" mechanism)$/
      * @Given /^(this product) also has ("[^"]+" mechanism)$/
      */
-    public function ProductHasMechanism(Product $product, TaxonInterface $mechanism)
+    public function productHasMechanism(Product $product, TaxonInterface $mechanism)
     {
         $product->addMechanism($mechanism);
         $this->manager->flush($product);
@@ -116,7 +116,7 @@ class ProductContext implements Context
      * @Given /^(this product) has ("[^"]+" theme)$/
      * @Given /^(this product) also has ("[^"]+" theme)$/
      */
-    public function ProductHasTheme(Product $product, TaxonInterface $theme)
+    public function productHasTheme(Product $product, TaxonInterface $theme)
     {
         $product->addTheme($theme);
         $this->manager->flush($product);
