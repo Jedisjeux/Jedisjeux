@@ -21,7 +21,7 @@ var paths = {
     app: {
         js: [
             nodeModulesPath + 'jquery/dist/jquery.min.js',
-            bundlesPath + 'bmatznerjqueryui/js/minified/jquery-ui.min.js',
+            nodeModulesPath + 'jquery-ui-dist/jquery-ui.min.js',
             bundlesPath + 'mopabootstrap/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js',
             bundlesPath + 'mopabootstrap/bootstrap-sass/assets/javascripts/bootstrap/*.js',
             bundlesPath + 'mopabootstrap/js/mopabootstrap-collection.js',
@@ -45,7 +45,7 @@ var paths = {
         ],
         css: [
             'css/magnific-popup.css',
-            bundlesPath + 'bmatznerjqueryui/css/smoothness/jquery-ui.css',
+            nodeModulesPath + 'jquery-ui-dist/jquery-ui.min.css',
             nodeModulesPath + 'jquery-fancybox/source/helpers/jquery.fancybox-buttons.css',
             nodeModulesPath + 'jquery-fancybox/source/helpers/jquery.fancybox-thumbs.css'
         ],
