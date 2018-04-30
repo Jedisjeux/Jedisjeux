@@ -1,5 +1,11 @@
 ## Change Log
 
+### v1.0.7 (2018/04/30)
+- [#122](https://github.com/jedisjeux/jedisjeux/pull/122) [ProductList] adding not blank assertion on product list name (@loic425)
+- [#121](https://github.com/jedisjeux/jedisjeux/pull/121) [Search] Fix searching results when there is an unique user result (@loic425)
+- [#116](https://github.com/jedisjeux/jedisjeux/pull/116) [Command] add entity option to download image command (@loic425)
+- [#114](https://github.com/jedisjeux/jedisjeux/pull/114) fix behat tests (@loic425)
+
 ### v1.0.6 (2018/04/23)
 - [#113](https://github.com/jedisjeux/jedisjeux/pull/113) [ProductList] fix adding or removing a product to a list (@loic425)
 - [#110](https://github.com/jedisjeux/jedisjeux/pull/110) [Scripts] fix download image command (@loic425)
@@ -9,7 +15,6 @@
 - [#105](https://github.com/jedisjeux/jedisjeux/pull/105) [Behat] Remove performance extension (@loic425)
 - [#102](https://github.com/jedisjeux/jedisjeux/pull/102) [Travis] test phpstan (@loic425)
 - [#101](https://github.com/jedisjeux/jedisjeux/pull/101) [DX] remove some unused use statements (@loic425)
-
 
 ### v1.0.5 (2018/03/24)
 - [#98](https://github.com/Jedisjeux/Jedisjeux/pull/98) use smaller images for article list (@loic425)
