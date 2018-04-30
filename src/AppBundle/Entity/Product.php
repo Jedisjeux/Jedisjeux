@@ -787,6 +787,16 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
+     * @return GamePlay[]|Collection
+     */
+    public function getGamePlaysWithTopic(): Collection
+    {
+        return $this->gamePlays->filter(function (GamePlay $gamePlay) {
+            return null !== $gamePlay->getTopic();
+        });
+    }
+
+    /**
      * @return Collection|ReviewInterface[]
      */
     public function getGamePlaysByAuthor(CustomerInterface $author)
