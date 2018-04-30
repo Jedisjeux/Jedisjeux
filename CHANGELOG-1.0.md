@@ -1,5 +1,11 @@
 ## Change Log
 
+### v1.0.8 (2018/04/30)
+- [#126](https://github.com/Jedisjeux/Jedisjeux/pull/126) fix autocomplete position (@loic425)
+- [#127](https://github.com/Jedisjeux/Jedisjeux/pull/127) fix game play count on gamesheet (@loic425)
+- [#125](https://github.com/Jedisjeux/Jedisjeux/pull/125) [DX] remove some unused (@loic425)
+- [#124](https://github.com/Jedisjeux/Jedisjeux/pull/124) fix setup product context method names (@loic425)
+
 ### v1.0.7 (2018/04/30)
 - [#122](https://github.com/jedisjeux/jedisjeux/pull/122) [ProductList] adding not blank assertion on product list name (@loic425)
 - [#121](https://github.com/jedisjeux/jedisjeux/pull/121) [Search] Fix searching results when there is an unique user result (@loic425)
