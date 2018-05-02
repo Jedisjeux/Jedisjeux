@@ -46,6 +46,8 @@ $icon-font-path: "../../compiled/fonts/bootstrap/";
 @import "parts/grid";
 @import "parts/forms";
 
+@import "components/owl-carousel";
+
 @import "modules/login";
 @import "modules/collection";
 @import "modules/loading";

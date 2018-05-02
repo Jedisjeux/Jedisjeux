@@ -31,6 +31,8 @@
         {{ item.blogAuthor(game_play.author, null, game_play.createdAt) }}
         {% include "frontend/game_play/show/_header.html.twig" %}
 
+        {% include "frontend/game_play/show/_images.html.twig" %}
+
         {% if topic %}
             <div class="block-heading-two">
                 <h3><span>Commentaires</span>
