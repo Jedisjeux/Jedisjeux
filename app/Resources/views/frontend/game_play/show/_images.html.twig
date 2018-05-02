@@ -17,15 +17,18 @@
             </div>
         {% endfor %}
     </div>
-    <div class="row img-carousel-thumbs">
-    {% for image in game_play.images %}
-        {% if loop.index0 != 0 and loop.index0%6 == 0 %}
-            </div>
-            <div class="row img-carousel-thumbs">
-        {% endif %}
-        <a href="#" class="col-md-2">
-            {{ images.render(image.webPath, 'full', image.gamePlay.product, 'img-responsive') }}
-        </a>
-    {% endfor %}
+    <div class="hidden-sm hidden-xs img-carousel-thumbs">
+        <div class="row">
+            {% for image in game_play.images %}
+            {% if loop.index0 != 0 and loop.index0%6 == 0 %}
+        </div>
+        <div class="row">
+            {% endif %}
+            <a href="#" class="col-md-2">
+                {{ images.render(image.webPath, 'full', image.gamePlay.product, 'img-responsive') }}
+            </a>
+            {% endfor %}
+        </div>
     </div>
+
 {% endif %}
