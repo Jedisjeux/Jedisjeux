@@ -3,6 +3,7 @@
 namespace spec\AppBundle\Entity;
 
 use AppBundle\Entity\Dealer;
+use AppBundle\Entity\DealerContact;
 use AppBundle\Entity\DealerImage;
 use AppBundle\Entity\PriceList;
 use AppBundle\Entity\PubBanner;
@@ -71,5 +72,36 @@ class DealerSpec extends ObjectBehavior
     {
         $this->addPubBanner($pubBanner);
         $this->hasPubBanner($pubBanner)->shouldReturn(true);
+    }
+
+    function it_removes_pub_banner(PubBanner $pubBanner)
+    {
+        $this->addPubBanner($pubBanner);
+
+        $pubBanner->setDealer(null)->shouldBeCalled();
+
+        $this->removePubBanner($pubBanner);
+        $this->hasPubBanner($pubBanner)->shouldReturn(false);
+    }
+
+    function it_initializes_contacts_collection_by_default(): void
+    {
+        $this->getContacts()->shouldHaveType(Collection::class);
+    }
+
+    function it_adds_contact(DealerContact $contact)
+    {
+        $this->addContact($contact);
+        $this->hasContact($contact)->shouldReturn(true);
+    }
+
+    function it_removes_contact(DealerContact $contact)
+    {
+        $this->addContact($contact);
+
+        $contact->setDealer(null)->shouldBeCalled();
+
+        $this->removeContact($contact);
+        $this->hasContact($contact)->shouldReturn(false);
     }
 }

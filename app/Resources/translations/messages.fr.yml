@@ -24,6 +24,7 @@ app:
         contact: Contact
         contact_request: Demande de contact
         contact_requests: Demandes de contact
+        contacts: Contacts
         content: Contenu
         contributors: Contributeurs
         created_at: Créé le

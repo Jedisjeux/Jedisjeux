@@ -12,16 +12,10 @@
 namespace AppBundle\Form\Type;
 
 use AppBundle\Entity\Dealer;
-use AppBundle\Entity\PubBanner;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Valid;
 
@@ -30,16 +24,6 @@ use Symfony\Component\Validator\Constraints\Valid;
  */
 class DealerType extends AbstractType
 {
-    /**
-     * @var Collection|PubBanner[]
-     */
-    protected $originalPubBanners;
-
-    /**
-     * @var EntityManager
-     */
-    protected $manager;
-
     /**
      * {@inheritdoc}
      */
@@ -71,48 +55,14 @@ class DealerType extends AbstractType
                 'by_reference' => false,
 
             ))
-            ->addEventListener(FormEvents::POST_SET_DATA, array($this, 'onPostSetData'))
-            ->addEventListener(FormEvents::POST_SUBMIT, array($this, 'onPostSubmit'));
-    }
+            ->add('contacts', CollectionType::class, array(
+                'label' => false,
+                'entry_type' => DealerContactType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
 
-    /**
-     * @param FormEvent $event
-     */
-    public function onPostSetData(FormEvent $event)
-    {
-        /** @var Dealer $dealer */
-        $dealer = $event->getData();
-
-        $this->originalPubBanners = new ArrayCollection();
-
-        foreach($dealer->getPubBanners() as $pubBanner) {
-            $this->originalPubBanners->add($pubBanner);
-        }
-    }
-
-    /**
-     * @param FormEvent $event
-     */
-    public function onPostSubmit(FormEvent $event)
-    {
-        /** @var Dealer $dealer */
-        $dealer = $event->getData();
-
-        // remove pub banners not present in submit form
-        foreach ($this->originalPubBanners as $pubBanner) {
-            if (false === $dealer->getPubBanners()->contains($pubBanner)) {
-                $dealer->removePubBanner($pubBanner);
-                $this->manager->remove($pubBanner);
-            }
-        }
-    }
-
-    /**
-     * @param EntityManager $manager
-     */
-    public function setManager($manager)
-    {
-        $this->manager = $manager;
+            ));
     }
 
     /**

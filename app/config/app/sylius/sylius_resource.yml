@@ -37,6 +37,10 @@ sylius_resource:
                 model: AppBundle\Entity\Dealer
                 repository: AppBundle\Repository\DealerRepository
                 form: AppBundle\Form\Type\DealerType
+        app.dealer_contact:
+            classes:
+                model: AppBundle\Entity\DealerContact
+                form: AppBundle\Form\Type\DealerContactType
         app.dealer_image:
             classes:
                 model: AppBundle\Entity\DealerImage

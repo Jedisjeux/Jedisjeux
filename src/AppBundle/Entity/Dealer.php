@@ -66,15 +66,23 @@ class Dealer implements ResourceInterface
     /**
      * @var ArrayCollection|PubBanner[]
      *
-     * @ORM\OneToMany(targetEntity="PubBanner", mappedBy="dealer", cascade={"persist", "merge", "remove"})
+     * @ORM\OneToMany(targetEntity="PubBanner", mappedBy="dealer", orphanRemoval=true, cascade={"persist", "merge", "remove"})
      */
     protected $pubBanners;
+
+    /**
+     * @var Collection|DealerContact[]
+     *
+     * @ORM\OneToMany(targetEntity="DealerContact", mappedBy="dealer", orphanRemoval=true, cascade={"persist", "merge", "remove"})
+     */
+    protected $contacts;
 
     /**
      * Dealer constructor.
      */
     public function __construct()
     {
+        $this->contacts = new ArrayCollection();
         $this->pubBanners = new ArrayCollection();
     }
 
@@ -186,6 +194,45 @@ class Dealer implements ResourceInterface
     public function removePubBanner(PubBanner $pubBanner): void
     {
         $this->pubBanners->removeElement($pubBanner);
+        $pubBanner->setDealer(null);
+    }
+
+    /**
+     * @return DealerContact[]|Collection
+     */
+    public function getContacts(): Collection
+    {
+        return $this->contacts;
+    }
+
+    /**
+     * @param DealerContact $contact
+     *
+     * @return bool
+     */
+    public function hasContact(DealerContact $contact): bool
+    {
+        return $this->contacts->contains($contact);
+    }
+
+    /**
+     * @param DealerContact $contact
+     */
+    public function addContact(DealerContact $contact): void
+    {
+        if (!$this->hasContact($contact)) {
+            $contact->setDealer($this);
+            $this->contacts->add($contact);
+        }
+    }
+
+    /**
+     * @param DealerContact $contact
+     */
+    public function removeContact(DealerContact $contact): void
+    {
+        $this->contacts->removeElement($contact);
+        $contact->setDealer(null);
     }
 
     /**
