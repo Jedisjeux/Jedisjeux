@@ -43,24 +43,6 @@
         </div>
     {% endif %}
 
-    {% if game_play.images|length > 0 %}
-        <!-- Gallery Widget -->
-        <div class="s-widget">
-            <!-- Heading -->
-            <h5><i class="fa fa-camera color"></i> Photos</h5>
-            <!-- Widgets Content -->
-            <div class="widget-content gallery">
-                {% for image in game_play.images %}
-                    <a href="{{ image.webPath | imagine_filter('default') }}" rel="jeu" class="fancybox"
-                       title="{{ image.description }}">
-                        <img src="{{ image.webPath | imagine_filter('thumbnail_S') }}" alt=""
-                             class="img-responsive img-thumbnail"/>
-                    </a>
-                {% endfor %}
-            </div>
-        </div>
-    {% endif %}
-
     <div class="s-widget">
         <!-- Heading -->
         <h5><i class="fa fa-bookmark color"></i> Édition</h5>
