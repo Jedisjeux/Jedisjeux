@@ -109,10 +109,6 @@ class ServicesPass implements CompilerPassInterface
      */
     protected function processFormTypes(ContainerBuilder $container)
     {
-        $dealerFormTypeDefinition = $container->getDefinition('app.form.type.dealer');
-        $dealerFormTypeDefinition
-            ->addMethodCall('setManager', [new Reference('app.manager.dealer')]);
-
         $articleFormTypeDefinition = $container->getDefinition('app.form.type.article');
         $articleFormTypeDefinition
             ->addMethodCall('setManager', [new Reference('doctrine.orm.entity_manager')]);
