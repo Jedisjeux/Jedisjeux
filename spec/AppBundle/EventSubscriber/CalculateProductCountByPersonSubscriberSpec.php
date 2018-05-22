@@ -7,9 +7,7 @@ use AppBundle\Entity\Product;
 use AppBundle\EventSubscriber\CalculateProductCountByPersonSubscriber;
 use AppBundle\Updater\ProductCountByPersonUpdater;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 class CalculateProductCountByPersonSubscriberSpec extends ObjectBehavior
