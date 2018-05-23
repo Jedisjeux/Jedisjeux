@@ -49,4 +49,24 @@ class CreateTopicForArticleSubscriberSpec extends ObjectBehavior
 
         $this->onCreate($event);
     }
+
+    function it_does_not_create_new_topic_for_article_if_exist(
+        GenericEvent $event,
+        Post $post,
+        Topic $topic,
+        Article $article,
+        TopicRepository $topicRepository,
+        TopicFactory $topicFactory,
+        CustomerInterface $author
+    ): void
+    {
+        $event->getSubject()->willReturn($post);
+        $post->getArticle()->willReturn($article);
+        $topicRepository->findOneByArticle($article)->willReturn($topic);
+        $post->getAuthor()->willReturn($author);
+
+        $topicFactory->createForArticle($article)->shouldNotBeCalled();
+
+        $this->onCreate($event);
+    }
 }
