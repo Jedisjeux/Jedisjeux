@@ -2,17 +2,14 @@
 
 namespace spec\AppBundle\EventSubscriber;
 
-use AppBundle\Entity\Article;
 use AppBundle\Entity\GamePlay;
 use AppBundle\Entity\Post;
 use AppBundle\Entity\Topic;
-use AppBundle\EventSubscriber\CreateTopicForArticleSubscriber;
 use AppBundle\EventSubscriber\CreateTopicForGamePlaySubscriber;
 use AppBundle\Factory\TopicFactory;
 use AppBundle\Repository\TopicRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
