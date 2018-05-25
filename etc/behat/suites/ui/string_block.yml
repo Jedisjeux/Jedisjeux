@@ -3,7 +3,6 @@ default:
         ui_string_block:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
-                - AppBundle\Behat\ApiContext
                 - AppBundle\Behat\UtilsContext
                 - AppBundle\Behat\UserContext
                 - AppBundle\Behat\PhpcrContext
