@@ -41,19 +41,16 @@ class CalculateProductCountByTaxonSubscriberSpec extends ObjectBehavior
     function it_updates_for_each_taxon(
         GenericEvent $event,
         ProductCountByTaxonUpdater $updater,
-        Product $product
+        Product $product,
+        Taxon $taxon1,
+        Taxon $taxon2
     ): void {
-        $taxons = new ArrayCollection();
-
-        $taxon1 = new Taxon();
-        $taxons->add($taxon1);
-
-        $taxon2 = new Taxon();
-        $taxons->add($taxon2);
-
         $event->getSubject()->willReturn($product);
         $product->getMainTaxon()->willReturn(null);
-        $product->getTaxons()->willReturn($taxons);
+        $product->getTaxons()->willReturn(new ArrayCollection([
+            $taxon1->getWrappedObject(),
+            $taxon2->getWrappedObject(),
+        ]));
 
         $updater->update($taxon1)->shouldBeCalled();
         $updater->update($taxon2)->shouldBeCalled();

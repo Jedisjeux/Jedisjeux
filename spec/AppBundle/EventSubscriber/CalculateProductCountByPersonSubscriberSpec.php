@@ -25,18 +25,15 @@ class CalculateProductCountByPersonSubscriberSpec extends ObjectBehavior
     function it_updates_for_each_designer(
         GenericEvent $event,
         ProductCountByPersonUpdater $updater,
-        Product $product
+        Product $product,
+        Person $designer1,
+        Person $designer2
     ): void {
-        $designers = new ArrayCollection();
-
-        $designer1 = new Person;
-        $designers->add($designer1);
-
-        $designer2 = new Person;
-        $designers->add($designer2);
-
         $event->getSubject()->willReturn($product);
-        $product->getDesigners()->willReturn($designers);
+        $product->getDesigners()->willReturn(new ArrayCollection([
+            $designer1->getWrappedObject(),
+            $designer2->getWrappedObject(),
+        ]));
         $product->getArtists()->willReturn(new ArrayCollection());
         $product->getPublishers()->willReturn(new ArrayCollection());
 
@@ -49,19 +46,16 @@ class CalculateProductCountByPersonSubscriberSpec extends ObjectBehavior
     function it_updates_for_each_artist(
         GenericEvent $event,
         ProductCountByPersonUpdater $updater,
-        Product $product
+        Product $product,
+        Person $artist1,
+        Person $artist2
     ): void {
-        $artists = new ArrayCollection();
-
-        $artist1 = new Person;
-        $artists->add($artist1);
-
-        $artist2 = new Person;
-        $artists->add($artist2);
-
         $event->getSubject()->willReturn($product);
         $product->getDesigners()->willReturn(new ArrayCollection());
-        $product->getArtists()->willReturn($artists);
+        $product->getArtists()->willReturn(new ArrayCollection([
+            $artist1->getWrappedObject(),
+            $artist2->getWrappedObject(),
+        ]));
         $product->getPublishers()->willReturn(new ArrayCollection());
 
         $updater->update($artist1)->shouldBeCalled();
@@ -73,20 +67,17 @@ class CalculateProductCountByPersonSubscriberSpec extends ObjectBehavior
     function it_updates_for_each_publisher(
         GenericEvent $event,
         ProductCountByPersonUpdater $updater,
-        Product $product
+        Product $product,
+        Person $publisher1,
+        Person $publisher2
     ): void {
-        $publishers = new ArrayCollection();
-
-        $publisher1 = new Person;
-        $publishers->add($publisher1);
-
-        $publisher2 = new Person;
-        $publishers->add($publisher2);
-
         $event->getSubject()->willReturn($product);
         $product->getDesigners()->willReturn(new ArrayCollection());
         $product->getArtists()->willReturn(new ArrayCollection());
-        $product->getPublishers()->willReturn($publishers);
+        $product->getPublishers()->willReturn(new ArrayCollection([
+            $publisher1->getWrappedObject(),
+            $publisher2->getWrappedObject(),
+        ]));
 
         $updater->update($publisher1)->shouldBeCalled();
         $updater->update($publisher2)->shouldBeCalled();

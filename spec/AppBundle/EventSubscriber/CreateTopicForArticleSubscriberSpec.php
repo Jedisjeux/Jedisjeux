@@ -10,7 +10,6 @@ use AppBundle\Factory\TopicFactory;
 use AppBundle\Repository\TopicRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
