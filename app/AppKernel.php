@@ -63,6 +63,8 @@ class AppKernel extends Kernel
             new Eko\FeedBundle\EkoFeedBundle(),
             new Incenteev\HashedAssetBundle\IncenteevHashedAssetBundle(),
             new Nelmio\CorsBundle\NelmioCorsBundle(),
+            new Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle(),
+            new Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle(),
 
             new AppBundle\AppBundle(),
         );
