@@ -45,7 +45,7 @@ Feature: View a product
         When I am on "new-game" product page
         Then the response status code should be 200
 
-    @javascript
+    @javascript @todo
     Scenario: View Articles tab
         Given I am on "/jeux-de-societe/"
         And I follow "Louis XIV"
@@ -54,7 +54,7 @@ Feature: View a product
         And I wait "5" seconds
         Then I should see "Aucun article"
 
-    @javascript
+    @javascript @todo
     Scenario: View Avis tab
         Given I am on "/jeux-de-societe/"
         And I follow "Louis XIV"
