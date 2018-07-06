@@ -26,7 +26,7 @@ class BlockquoteBlockType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options = [])
+    public function buildForm(FormBuilderInterface $builder, array $options = []): void
     {
         $builder
             ->add('body', CKEditorType::class, [
@@ -50,7 +50,7 @@ class BlockquoteBlockType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);
 
