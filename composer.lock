@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e179d7b9445b357b69b6da2790dd52d0",
+    "content-hash": "c74a052ece85e14e0d7f90fe4f962c52",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -12141,6 +12141,54 @@
             ],
             "description": "Symfony Framework extensions and rules for PHPStan",
             "time": "2018-06-21T12:00:50+00:00"
+        },
+        {
+            "name": "phpstan/phpstan-webmozart-assert",
+            "version": "0.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpstan/phpstan-webmozart-assert.git",
+                "reference": "5954bb88827ae8e4b45ee5db4f430c1ced69818a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpstan/phpstan-webmozart-assert/zipball/5954bb88827ae8e4b45ee5db4f430c1ced69818a",
+                "reference": "5954bb88827ae8e4b45ee5db4f430c1ced69818a",
+                "shasum": ""
+            },
+            "require": {
+                "nikic/php-parser": "^4.0",
+                "php": "~7.1",
+                "phpstan/phpstan": "^0.10"
+            },
+            "require-dev": {
+                "consistence/coding-standard": "^3.0.1",
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4",
+                "jakub-onderka/php-parallel-lint": "^1.0",
+                "phing/phing": "^2.16.0",
+                "phpstan/phpstan-phpunit": "^0.10",
+                "phpstan/phpstan-strict-rules": "^0.10",
+                "phpunit/phpunit": "^7.1.3",
+                "slevomat/coding-standard": "^4.5.2",
+                "webmozart/assert": "^1.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.10-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PHPStan\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHPStan webmozart/assert extension",
+            "time": "2018-06-23T17:24:59+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
