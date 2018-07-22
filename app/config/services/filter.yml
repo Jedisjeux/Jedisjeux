@@ -1,4 +1,11 @@
 services:
+    app_elastic_search.filter.pager:
+        class: AppBundle\Filter\Widget\Pager
+        tags:
+            -
+                name: ongr_filter_manager.filter
+                type: app_elastic_search.custom_pager
+
     app.grid.filter.age:
         class: AppBundle\Grid\Filter\AgeFilter
         tags:

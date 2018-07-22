@@ -8,7 +8,7 @@ CONFIG_PATH='/vagrant/shell_provisioner/config'
 GUEST_IP='10.0.0.200'
 
 #Config
-APP_DOMAIN='jdj.dev'
+APP_DOMAIN='jdj.local'
 APP_DBNAME='jdj'
 
 # Adding an entry here executes the corresponding .sh file in MODULE_PATH

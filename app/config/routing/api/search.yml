@@ -1,5 +1,12 @@
+#app_api_search_autocomplete:
+#    methods: [GET]
+#    path: /search/autocomplete/
+#    defaults:
+#        _controller: app.controller.search:autoCompleteAction
+
 app_api_search_autocomplete:
-    methods: [GET]
     path: /search/autocomplete/
+    methods: [GET]
     defaults:
-        _controller: app.controller.search:autoCompleteAction
+        _controller: app.controller.elastic_search
+        _format: json

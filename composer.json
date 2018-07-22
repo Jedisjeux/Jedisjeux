@@ -65,7 +65,10 @@
     "symfony-cmf/routing-bundle": "^2.0",
     "eko/feedbundle": "^1.2",
     "ruflin/elastica": "^3.2",
-    "nelmio/cors-bundle": "^1.5"
+    "nelmio/cors-bundle": "^1.5",
+    "ongr/elasticsearch-bundle": "^5.0",
+    "ongr/elasticsearch-dsl": "^5.0",
+    "ongr/filter-manager-bundle": "^2.1"
   },
   "require-dev": {
     "behat/behat": "^3.2",

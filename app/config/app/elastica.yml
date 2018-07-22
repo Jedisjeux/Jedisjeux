@@ -8,14 +8,14 @@ fos_elastica:
               index:
                   analysis:
                       analyzer:
+                          custom_analyzer:
+                              type: custom
+                              tokenizer: standard
+                              filter   : [standard, lowercase, asciifolding, custom_filter]
                           custom_search_analyzer:
                               type: custom
                               tokenizer: standard
                               filter   : [standard, lowercase, asciifolding]
-                          custom_index_analyzer:
-                              type: custom
-                              tokenizer: standard
-                              filter   : [standard, lowercase, asciifolding, custom_filter]
                       filter:
                           custom_filter:
                               type: edgeNGram
@@ -23,10 +23,10 @@ fos_elastica:
                               min_gram: 1
                               max_gram: 20
 
-          types:
+          mappings:
               article:
-                  mappings:
-                      title: { search_analyzer: custom_search_analyzer, index_analyzer: custom_index_analyzer, type: string }
+                  properties:
+                      title: { search_analyzer: custom_search_analyzer, analyzer: custom_analyzer, type: text }
                       status: ~
                   persistence:
                       driver: orm
@@ -34,17 +34,17 @@ fos_elastica:
                       provider: ~
                       finder: ~
               user:
-                  mappings:
-                      username: { search_analyzer: custom_search_analyzer, index_analyzer: custom_index_analyzer, type: string }
+                  properties:
+                      username: { search_analyzer: custom_search_analyzer, analyzer: custom_analyzer, type: text }
                   persistence:
                       driver: orm
                       model: %sylius.model.app_user.class%
                       provider: ~
                       finder: ~
               product:
-                  mappings:
+                  properties:
                       name: ~
-                      slug: { search_analyzer: custom_search_analyzer, index_analyzer: custom_index_analyzer, type: string }
+                      slug: { search_analyzer: custom_search_analyzer, analyzer: custom_analyzer, type: text }
                       status: ~
                       variants: ~
                   persistence:
@@ -53,27 +53,27 @@ fos_elastica:
                       provider: ~
                       finder: ~
               person:
-                  mappings:
+                  properties:
                       firstName: ~
                       lastName: ~
-                      slug: { search_analyzer: custom_search_analyzer, index_analyzer: custom_index_analyzer, type: string }
+                      slug: { search_analyzer: custom_search_analyzer, analyzer: custom_analyzer, type: text }
                   persistence:
                       driver: orm
                       model: AppBundle\Entity\Person
                       provider: ~
                       finder: ~
               taxon:
-                  mappings:
+                  properties:
                       name: ~
-                      slug: { search_analyzer: custom_search_analyzer, index_analyzer: custom_index_analyzer, type: string }
+                      slug: { search_analyzer: custom_search_analyzer, analyzer: custom_analyzer, type: text }
                   persistence:
                       driver: orm
                       model: AppBundle\Entity\Taxon
                       provider: ~
                       finder: ~
               topic:
-                  mappings:
-                      title: { search_analyzer: custom_search_analyzer, index_analyzer: custom_index_analyzer, type: string }
+                  properties:
+                      title: { search_analyzer: custom_search_analyzer, analyzer: custom_analyzer, type: text }
                   persistence:
                       driver: orm
                       model: AppBundle\Entity\Topic

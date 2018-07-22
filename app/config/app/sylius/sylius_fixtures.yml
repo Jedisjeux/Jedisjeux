@@ -153,6 +153,17 @@ sylius_fixtures:
                                     <p>Celui des joueurs qui aura démontré les richesses de son quartier deviendra Gouverneur de Puerto Rico.</p>
                                 created_at: "now"
                             -
+                                name: "Râ"
+                                status: "published"
+                                min_player_count: 2
+                                max_player_count: 5
+                                min_duration: 90
+                                max_duration: 90
+                                min_age: 12
+                                images:
+                                    - "app/Resources/fixtures/products/covers/ra.jpg"
+                                created_at: "now"
+                            -
                                 name: "Tigre & Euphrate"
                                 status: "published"
                                 min_player_count: 2

@@ -5,4 +5,3 @@ app_frontend_search_index:
         _controller: app.controller.search:searchQueryAction
         _sylius:
             template: frontend/search/index.html.twig
-

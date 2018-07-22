@@ -65,6 +65,8 @@ class AppKernel extends Kernel
             new Nelmio\CorsBundle\NelmioCorsBundle(),
             new Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle(),
             new Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle(),
+            new ONGR\ElasticsearchBundle\ONGRElasticsearchBundle(),
+            new ONGR\FilterManagerBundle\ONGRFilterManagerBundle(),
 
             new AppBundle\AppBundle(),
         );

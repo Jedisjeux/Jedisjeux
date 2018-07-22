@@ -1,0 +1,42 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+#    service_name:
+#        class: AppBundle\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+    app_elastic_search.factory.article:
+        class: AppBundle\Factory\Document\ArticleDocumentFactory
+        arguments:
+            - AppBundle\Document\AppDocument
+            - AppBundle\Document\ArticleDocument
+            - "@app_elastic_search.factory.image"
+
+    app_elastic_search.factory.list_view:
+        class: AppBundle\Factory\View\ListViewFactory
+        arguments:
+            - AppBundle\Controller\AppView
+            - AppBundle\Controller\ImageView
+
+    app_elastic_search.factory.product:
+        class: AppBundle\Factory\Document\ProductDocumentFactory
+        arguments:
+            - AppBundle\Document\AppDocument
+            - AppBundle\Document\ProductDocument
+            - "@app_elastic_search.factory.image"
+
+    app_elastic_search.factory.image:
+        class: AppBundle\Factory\Document\ImageDocumentFactory
+        arguments:
+            - AppBundle\Document\ImageDocument
+            - "@liip_imagine.cache.manager"
+
+    app_elastic_search.factory.topic:
+        class: AppBundle\Factory\Document\TopicDocumentFactory
+        arguments:
+            - AppBundle\Document\AppDocument
+            - AppBundle\Document\TopicDocument
+            - "@app_elastic_search.factory.image"

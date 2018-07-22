@@ -1,0 +1,47 @@
+ongr_elasticsearch:
+    analysis:
+        analyzer:
+            keywordAnalyzer:
+                type: custom
+                tokenizer: keyword
+                filter: [lowercase]
+            incrementalAnalyzer:
+                type: custom
+                tokenizer: standard
+                filter:
+                    - lowercase
+                    - asciifolding
+                    - incremental_filter
+        filter:
+            incremental_filter:
+                type: edge_ngram
+                min_gram: 1
+                max_gram: 100
+    managers:
+        default:
+            index:
+                index_name: jedisjeux
+                hosts:
+                    - 127.0.0.1:9200
+            mappings:
+                - AppBundle
+
+ongr_filter_manager:
+    managers:
+        search_list: # <- Filter manager name
+            filters:
+                - paginator
+                - search
+            repository: es.manager.default.app # <- Document repository service to execute queries on
+    filters:
+        paginator:
+            type: app_elastic_search.custom_pager
+            document_field: ~
+            request_field: page
+            options:
+                limit: 9
+                max_pages: 20
+        search:
+            type: match
+            request_field: 'term'
+            document_field: name

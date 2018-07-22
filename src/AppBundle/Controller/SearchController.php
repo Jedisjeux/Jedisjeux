@@ -8,7 +8,10 @@ use AppBundle\Entity\Product;
 use AppBundle\Entity\Topic;
 use Elastica\Query\QueryString;
 use Elastica\Query;
+use Elasticsearch\ClientBuilder;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
+use ONGR\ElasticsearchDSL\Query\MatchAllQuery;
+use ONGR\ElasticsearchDSL\Search;
 use Pagerfanta\Pagerfanta;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
@@ -26,9 +29,35 @@ class SearchController extends Controller
 {
     /**
      * @param Request $request
+     *
      * @return Response|RedirectResponse
      */
     public function searchQueryAction(Request $request)
+    {
+        $client = ClientBuilder::create()->build(); //elasticsearch-php client
+
+        $matchAll = new MatchAllQuery();
+
+        $search = new Search();
+        $search->addQuery($matchAll);
+
+        $params = [
+            'index' => 'jedisjeux',
+            'body' => $search->toArray(),
+        ];
+
+        $results = $client->search($params);
+
+        dump($results);
+        die();
+    }
+
+
+    /**
+     * @param Request $request
+     * @return Response|RedirectResponse
+     */
+    public function oldSearchQueryAction(Request $request)
     {
         $term = $request->get("query");
 

@@ -231,7 +231,7 @@ class Topic implements ResourceInterface
     }
 
     /**
-     * @return CustomerInterface|null
+     * @return CustomerInterface|Customer|null
      */
     public function getAuthor(): ?CustomerInterface
     {
