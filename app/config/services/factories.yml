@@ -20,6 +20,8 @@ services:
         arguments:
             - AppBundle\Controller\AppView
             - AppBundle\Controller\ImageView
+            - AppBundle\Controller\PersonView
+            - AppBundle\Controller\ProductView
 
     app_elastic_search.factory.person:
         class: AppBundle\Factory\Document\PersonDocumentFactory

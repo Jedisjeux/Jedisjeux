@@ -35,4 +35,14 @@ class AppView
      * @var ImageView|null
      */
     public $image;
+
+    /**
+     * @var PersonView|null
+     */
+    public $person;
+
+    /**
+     * @var ProductView|null
+     */
+    public $product;
 }

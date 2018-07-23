@@ -21,6 +21,7 @@ use ONGR\ElasticsearchBundle\Annotation as ElasticSearch;
 class AppDocument
 {
     public const TYPE_ARTICLE = 'article';
+    public const TYPE_PERSON = 'person';
     public const TYPE_PRODUCT = 'product';
     public const TYPE_TOPIC = 'topic';
 

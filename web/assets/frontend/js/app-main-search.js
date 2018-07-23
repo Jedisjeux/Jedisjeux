@@ -11,7 +11,8 @@ $(function() {
                     items.push({
                         "value": item.type,
                         "label": item.name,
-                        "image": item.image ? item.image.path : null
+                        "image": item.image ? item.image.path : null,
+                        "href": getUrl(item)
                     });
                 });
 
@@ -30,6 +31,17 @@ $(function() {
             return false;
         }
     });
+
+    function getUrl(item) {
+        switch (item.type) {
+            case 'person':
+                return "/ludographie/" + item.person.slug;
+            case 'product':
+                return "/jeu-de-societe/" + item.product.slug;
+            default:
+                return '';
+        }
+    }
 
     // $( ".mainSearch" ).select2({
     //     theme: "bootstrap",

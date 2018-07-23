@@ -14,8 +14,12 @@ namespace AppBundle\Factory\View;
 use AppBundle\Controller\AppView;
 use AppBundle\Controller\ImageView;
 use AppBundle\Controller\ListView;
+use AppBundle\Controller\PersonView;
+use AppBundle\Controller\ProductView;
 use AppBundle\Document\AppDocument;
 use AppBundle\Document\ImageDocument;
+use AppBundle\Document\PersonDocument;
+use AppBundle\Document\ProductDocument;
 use ONGR\FilterManagerBundle\Search\SearchResponse;
 
 /**
@@ -34,13 +38,31 @@ class ListViewFactory
     private $imageViewClass;
 
     /**
+     * @var string
+     */
+    private $personViewClass;
+
+    /**
+     * @var string
+     */
+    private $productViewClass;
+
+    /**
      * @param string $appViewClass
      * @param string $imageViewClass
+     * @param string $personViewClass
+     * @param string $productViewClass
      */
-    public function __construct(string $appViewClass, string $imageViewClass)
-    {
+    public function __construct(
+        string $appViewClass,
+        string $imageViewClass,
+        string $personViewClass,
+        string $productViewClass
+    ) {
         $this->appViewClass = $appViewClass;
         $this->imageViewClass = $imageViewClass;
+        $this->personViewClass = $personViewClass;
+        $this->productViewClass = $productViewClass;
     }
 
     /**
@@ -82,9 +104,22 @@ class ListViewFactory
             $appView->image = $this->getImageView($document->getImage());
         }
 
+        if (null !== $document->getPerson()) {
+            $appView->person = $this->getPersonView($document->getPerson());
+        }
+
+        if (null !== $document->getProduct()) {
+            $appView->product = $this->getProductView($document->getProduct());
+        }
+
         return $appView;
     }
 
+    /**
+     * @param ImageDocument $image
+     *
+     * @return ImageView
+     */
     private function getImageView(ImageDocument $image): ImageView
     {
         /** @var ImageView $imageView */
@@ -92,5 +127,33 @@ class ListViewFactory
         $imageView->path = $image->getPath();
 
         return $imageView;
+    }
+
+    /**
+     * @param PersonDocument $personDocument
+     *
+     * @return PersonView
+     */
+    private function getPersonView(PersonDocument $personDocument): PersonView
+    {
+        /** @var PersonView $personView */
+        $personView = new $this->personViewClass();
+        $personView->slug = $personDocument->getSlug();
+
+        return $personView;
+    }
+
+    /**
+     * @param PersonDocument $productDocument
+     *
+     * @return PersonView
+     */
+    private function getProductView(ProductDocument $productDocument): ProductView
+    {
+        /** @var ProductView $productView */
+        $productView = new $this->productViewClass();
+        $productView->slug = $productDocument->getSlug();
+
+        return $productView;
     }
 }

@@ -64,13 +64,14 @@ class PersonDocumentFactory
     {
         /** @var AppDocument $appDocument */
         $appDocument = new $this->appDocumentClass();
-        $appDocument->setType(AppDocument::TYPE_ARTICLE);
+        $appDocument->setType(AppDocument::TYPE_PERSON);
         $appDocument->setName($person->getFullName());
         $appDocument->setCreatedAt($person->getCreatedAt());
 
         /** @var PersonDocument $personDocument */
         $personDocument = new $this->personDocumentClass();
         $personDocument->setId($person->getId());
+        $personDocument->setSlug($person->getSlug());
 
         if (null !== $mainImage = $person->getFirstImage()) {
             $imageDocument = $this->imageDocumentFactory->create($mainImage);
