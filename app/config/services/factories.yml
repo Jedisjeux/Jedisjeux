@@ -21,6 +21,13 @@ services:
             - AppBundle\Controller\AppView
             - AppBundle\Controller\ImageView
 
+    app_elastic_search.factory.person:
+        class: AppBundle\Factory\Document\PersonDocumentFactory
+        arguments:
+            - AppBundle\Document\AppDocument
+            - AppBundle\Document\PersonDocument
+            - "@app_elastic_search.factory.image"
+
     app_elastic_search.factory.product:
         class: AppBundle\Factory\Document\ProductDocumentFactory
         arguments:

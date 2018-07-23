@@ -11,10 +11,12 @@ services:
     AppBundle\Command\Document\ResetIndexCommand:
         arguments:
             - "@app.repository.article"
+            - "@app.repository.person"
             - "@sylius.repository.product"
             - "@app.repository.topic"
             - "@es.manager.default"
             - "@app_elastic_search.factory.article"
+            - "@app_elastic_search.factory.person"
             - "@app_elastic_search.factory.product"
             - "@app_elastic_search.factory.topic"
         tags:

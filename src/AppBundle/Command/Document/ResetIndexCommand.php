@@ -15,6 +15,7 @@ namespace AppBundle\Command\Document;
 
 use AppBundle\Entity\Topic;
 use AppBundle\Factory\Document\ArticleDocumentFactory;
+use AppBundle\Factory\Document\PersonDocumentFactory;
 use AppBundle\Factory\Document\ProductDocumentFactory;
 use AppBundle\Factory\Document\TopicDocumentFactory;
 use ONGR\ElasticsearchBundle\Service\Manager;
@@ -30,6 +31,11 @@ final class ResetIndexCommand extends Command
      * @var RepositoryInterface
      */
     private $articleRepository;
+
+    /**
+     * @var RepositoryInterface
+     */
+    private $personRepository;
 
     /**
      * @var RepositoryInterface
@@ -52,6 +58,11 @@ final class ResetIndexCommand extends Command
     private $articleDocumentFactory;
 
     /**
+     * @var PersonDocumentFactory
+     */
+    private $personDocumentFactory;
+
+    /**
      * @var ProductDocumentFactory
      */
     private $productDocumentFactory;
@@ -63,27 +74,35 @@ final class ResetIndexCommand extends Command
 
     /**
      * @param RepositoryInterface $articleRepository
+     * @param RepositoryInterface $personRepository
      * @param RepositoryInterface $productRepository
      * @param RepositoryInterface $topicRepository
      * @param Manager $manager
      * @param ArticleDocumentFactory $articleDocumentFactory
+     * @param PersonDocumentFactory $personDocumentFactory
      * @param ProductDocumentFactory $productDocumentFactory
      * @param TopicDocumentFactory $topicDocumentFactory
      */
     public function __construct(
         RepositoryInterface $articleRepository,
+        RepositoryInterface $personRepository,
         RepositoryInterface $productRepository,
         RepositoryInterface $topicRepository,
         Manager $manager,
         ArticleDocumentFactory $articleDocumentFactory,
+        PersonDocumentFactory $personDocumentFactory,
         ProductDocumentFactory $productDocumentFactory,
         TopicDocumentFactory $topicDocumentFactory
     ) {
         $this->articleRepository = $articleRepository;
+        $this->personRepository = $personRepository;
         $this->productRepository = $productRepository;
         $this->topicRepository = $topicRepository;
+
         $this->elasticsearchManager = $manager;
+
         $this->articleDocumentFactory = $articleDocumentFactory;
+        $this->personDocumentFactory = $personDocumentFactory;
         $this->productDocumentFactory = $productDocumentFactory;
         $this->topicDocumentFactory = $topicDocumentFactory;
 
@@ -123,6 +142,14 @@ final class ResetIndexCommand extends Command
                 $this->articleDocumentFactory,
                 'Article',
                 'articles'
+            );
+
+            $this->resetItemsIndexes(
+                $output,
+                $this->personRepository,
+                $this->personDocumentFactory,
+                'Person',
+                'people'
             );
 
             $this->resetItemsIndexes(

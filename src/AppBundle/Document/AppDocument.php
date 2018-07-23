@@ -81,6 +81,13 @@ class AppDocument
     private $article;
 
     /**
+     * @var PersonDocument|null
+     *
+     * @ElasticSearch\Embedded(class="AppBundle:PersonDocument")
+     */
+    private $person;
+
+    /**
      * @return string
      */
     public function getType(): string
@@ -190,5 +197,21 @@ class AppDocument
     public function setArticle(?ArticleDocument $article): void
     {
         $this->article = $article;
+    }
+
+    /**
+     * @return PersonDocument|null
+     */
+    public function getPerson(): ?PersonDocument
+    {
+        return $this->person;
+    }
+
+    /**
+     * @param PersonDocument|null $person
+     */
+    public function setPerson(?PersonDocument $person): void
+    {
+        $this->person = $person;
     }
 }
