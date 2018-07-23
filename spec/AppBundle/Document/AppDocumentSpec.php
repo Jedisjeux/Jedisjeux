@@ -5,6 +5,7 @@ namespace spec\AppBundle\Document;
 use AppBundle\Document\AppDocument;
 use AppBundle\Document\ArticleDocument;
 use AppBundle\Document\ImageDocument;
+use AppBundle\Document\PersonDocument;
 use AppBundle\Document\ProductDocument;
 use AppBundle\Document\TopicDocument;
 use PhpSpec\ObjectBehavior;
@@ -57,5 +58,11 @@ class AppDocumentSpec extends ObjectBehavior
     {
         $this->setArticle($article);
         $this->getArticle()->shouldReturn($article);
+    }
+
+    function its_person_is_mutable(PersonDocument $person): void
+    {
+        $this->setPerson($person);
+        $this->getPerson()->shouldReturn($person);
     }
 }
