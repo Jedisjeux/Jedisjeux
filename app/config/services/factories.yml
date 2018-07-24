@@ -19,9 +19,11 @@ services:
         class: AppBundle\Factory\View\ListViewFactory
         arguments:
             - AppBundle\Controller\AppView
+            - AppBundle\Controller\ArticleView
             - AppBundle\Controller\ImageView
             - AppBundle\Controller\PersonView
             - AppBundle\Controller\ProductView
+            - AppBundle\Controller\TopicView
 
     app_elastic_search.factory.person:
         class: AppBundle\Factory\Document\PersonDocumentFactory

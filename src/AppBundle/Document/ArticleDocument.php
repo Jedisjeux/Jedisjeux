@@ -28,6 +28,13 @@ class ArticleDocument
     private $id;
 
     /**
+     * @var string
+     *
+     * @ElasticSearch\Property(type="keyword")
+     */
+    private $slug;
+
+    /**
      * @return int
      */
     public function getId(): int
@@ -41,5 +48,21 @@ class ArticleDocument
     public function setId(int $id): void
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     */
+    public function setSlug(string $slug)
+    {
+        $this->slug = $slug;
     }
 }

@@ -32,6 +32,11 @@ class AppView
     public $createdAt;
 
     /**
+     * @var ArticleView|null
+     */
+    public $article;
+
+    /**
      * @var ImageView|null
      */
     public $image;
@@ -45,4 +50,9 @@ class AppView
      * @var ProductView|null
      */
     public $product;
+
+    /**
+     * @var TopicView|null
+     */
+    public $topic;
 }

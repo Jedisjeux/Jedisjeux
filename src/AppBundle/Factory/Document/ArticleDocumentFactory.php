@@ -69,6 +69,7 @@ class ArticleDocumentFactory
         /** @var ArticleDocument $articleDocument */
         $articleDocument = new $this->articleDocumentClass();
         $articleDocument->setId($article->getId());
+        $articleDocument->setSlug($article->getSlug());
 
         if (null !== $mainImage = $article->getMainImage()) {
             $imageDocument = $this->imageDocumentFactory->create($mainImage);

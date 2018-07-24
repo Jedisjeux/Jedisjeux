@@ -34,10 +34,14 @@ $(function() {
 
     function getUrl(item) {
         switch (item.type) {
+            case 'article':
+                return "/article/" + item.article.slug;
             case 'person':
                 return "/ludographie/" + item.person.slug;
             case 'product':
                 return "/jeu-de-societe/" + item.product.slug;
+            case 'topic':
+                return "/topics/" + item.topic.id + '/posts/';
             default:
                 return '';
         }
