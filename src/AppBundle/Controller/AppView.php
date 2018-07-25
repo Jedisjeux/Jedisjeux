@@ -24,6 +24,11 @@ class AppView
     /**
      * @var string
      */
+    public $code;
+
+    /**
+     * @var string
+     */
     public $name;
 
     /**

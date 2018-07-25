@@ -19,6 +19,7 @@ use AppBundle\Document\PersonDocument;
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Person;
 use AppBundle\Entity\Topic;
+use Ramsey\Uuid\Uuid;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -59,11 +60,14 @@ class PersonDocumentFactory
      * @param Person $person
      *
      * @return AppDocument
+     *
+     * @throws \Exception
      */
     public function create(Person $person): AppDocument
     {
         /** @var AppDocument $appDocument */
         $appDocument = new $this->appDocumentClass();
+        $appDocument->setUuid(Uuid::uuid4()->toString());
         $appDocument->setType(AppDocument::TYPE_PERSON);
         $appDocument->setName($person->getFullName());
         $appDocument->setCreatedAt($person->getCreatedAt());

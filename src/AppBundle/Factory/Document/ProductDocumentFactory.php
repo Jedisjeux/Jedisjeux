@@ -16,6 +16,7 @@ namespace AppBundle\Factory\Document;
 use AppBundle\Document\AppDocument;
 use AppBundle\Document\ProductDocument;
 use AppBundle\Entity\Product;
+use Ramsey\Uuid\Uuid;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -56,12 +57,16 @@ class ProductDocumentFactory
      * @param Product $product
      *
      * @return AppDocument
+     *
+     * @throws \Exception
      */
     public function create(Product $product): AppDocument
     {
         /** @var AppDocument $appDocument */
         $appDocument = new $this->appDocumentClass();
+        $appDocument->setUuid(Uuid::uuid4()->toString());
         $appDocument->setType(AppDocument::TYPE_PRODUCT);
+        $appDocument->setCode($product->getCode());
         $appDocument->setName($product->getName());
         $appDocument->setCreatedAt($product->getCreatedAt());
 

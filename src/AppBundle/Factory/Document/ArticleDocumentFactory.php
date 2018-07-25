@@ -17,6 +17,7 @@ use AppBundle\Document\AppDocument;
 use AppBundle\Document\ArticleDocument;
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Topic;
+use Ramsey\Uuid\Uuid;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -57,12 +58,16 @@ class ArticleDocumentFactory
      * @param Article $article
      *
      * @return AppDocument
+     *
+     * @throws \Exception
      */
     public function create(Article $article): AppDocument
     {
         /** @var AppDocument $appDocument */
         $appDocument = new $this->appDocumentClass();
+        $appDocument->setUuid(Uuid::uuid4()->toString());
         $appDocument->setType(AppDocument::TYPE_ARTICLE);
+        $appDocument->setCode($article->getCode());
         $appDocument->setName($article->getTitle());
         $appDocument->setCreatedAt($article->getCreatedAt());
 

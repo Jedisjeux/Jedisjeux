@@ -62,6 +62,7 @@ class TopicDocumentFactory
         /** @var AppDocument $appDocument */
         $appDocument = new $this->appDocumentClass();
         $appDocument->setType(AppDocument::TYPE_TOPIC);
+        $appDocument->setCode($topic->getCode());
         $appDocument->setName($topic->getTitle());
         $appDocument->setCreatedAt($topic->getCreatedAt());
 

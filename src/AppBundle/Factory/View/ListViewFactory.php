@@ -116,6 +116,7 @@ class ListViewFactory
     {
         /** @var AppView $appView */
         $appView = new $this->appViewClass();
+        $appView->code = $document->getCode();
         $appView->type = $document->getType();
         $appView->name = $document->getName();
         $appView->createdAt = $document->getCreatedAt();

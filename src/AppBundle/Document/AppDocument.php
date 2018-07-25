@@ -28,9 +28,23 @@ class AppDocument
     /**
      * @var string
      *
+     * @ElasticSearch\Id()
+     */
+    protected $uuid;
+
+    /**
+     * @var string
+     *
      * @ElasticSearch\Property(type="keyword")
      */
     private $type;
+
+    /**
+     * @var string
+     *
+     * @ElasticSearch\Property(type="keyword")
+     */
+    private $code;
 
     /**
      * @var string
@@ -91,6 +105,22 @@ class AppDocument
     /**
      * @return string
      */
+    public function getUuid(): string
+    {
+        return $this->uuid;
+    }
+
+    /**
+     * @param string $uuid
+     */
+    public function setUuid(string $uuid): void
+    {
+        $this->uuid = $uuid;
+    }
+
+    /**
+     * @return string
+     */
     public function getType(): string
     {
         return $this->type;
@@ -102,6 +132,22 @@ class AppDocument
     public function setType(string $type): void
     {
         $this->type = $type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCode(): string
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param string $code
+     */
+    public function setCode(string $code): void
+    {
+        $this->code = $code;
     }
 
     /**

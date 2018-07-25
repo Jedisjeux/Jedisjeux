@@ -67,6 +67,8 @@ class AppKernel extends Kernel
             new Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle(),
             new ONGR\ElasticsearchBundle\ONGRElasticsearchBundle(),
             new ONGR\FilterManagerBundle\ONGRFilterManagerBundle(),
+            new SimpleBus\SymfonyBridge\SimpleBusCommandBusBundle(),
+            new SimpleBus\SymfonyBridge\SimpleBusEventBusBundle(),
 
             new AppBundle\AppBundle(),
         );

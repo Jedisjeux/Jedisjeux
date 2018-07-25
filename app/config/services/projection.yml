@@ -1,0 +1,10 @@
+services:
+    app.projector.product:
+        class: AppBundle\Projection\ProductProjector
+        arguments:
+            - "@es.manager.default"
+            - "@app_elastic_search.factory.product"
+        tags:
+            - { name: "event_subscriber", subscribes_to: AppBundle\Event\ProductCreated, method: "handleProductCreated" }
+            - { name: "event_subscriber", subscribes_to: AppBundle\Event\ProductUpdated, method: "handleProductUpdated" }
+            - { name: "event_subscriber", subscribes_to: AppBundle\Event\ProductDeleted, method: "handleProductDeleted" }
