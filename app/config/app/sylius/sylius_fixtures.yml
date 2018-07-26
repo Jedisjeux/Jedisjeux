@@ -9,47 +9,47 @@ sylius_fixtures:
                 logger: ~
 
             fixtures:
-                app_user:
-                    options:
-                        random: 20
-                        custom:
-                            -
-                                email: "customer@example.com"
-                                first_name: "Harry"
-                                last_name: "Cover"
-                                password: "password"
-                                enabled: true
-                            -
-                                email: "admin@example.com"
-                                first_name: "John"
-                                last_name: "Doe"
-                                password: "admin"
-                                enabled: true
-                                roles: ["ROLE_ADMIN"]
-                            -
-                                email: "blue@example.com"
-                                username: "Blue"
-                                password: "admin"
-                                enabled: true
-                                avatar: "app/Resources/fixtures/avatars/blue.jpg"
-                                roles: ["ROLE_ADMIN"]
-                            -
-                                email: "loic_425@example.com"
-                                username: "loic_425"
-                                password: "admin"
-                                enabled: true
-                                avatar: "app/Resources/fixtures/avatars/loic_425.jpg"
-                                roles: ["ROLE_ADMIN"]
-                            -
-                                email: "product-manager@example.com"
-                                password: "password"
-                                enabled: true
-                                roles: ["ROLE_PRODUCT_MANAGER"]
-                            -
-                                email: "article-manager@example.com"
-                                password: "password"
-                                enabled: true
-                                roles: ["ROLE_ARTICLE_MANAGER"]
+#                app_user:
+#                    options:
+#                        random: 20
+#                        custom:
+#                            -
+#                                email: "customer@example.com"
+#                                first_name: "Harry"
+#                                last_name: "Cover"
+#                                password: "password"
+#                                enabled: true
+#                            -
+#                                email: "admin@example.com"
+#                                first_name: "John"
+#                                last_name: "Doe"
+#                                password: "admin"
+#                                enabled: true
+#                                roles: ["ROLE_ADMIN"]
+#                            -
+#                                email: "blue@example.com"
+#                                username: "Blue"
+#                                password: "admin"
+#                                enabled: true
+#                                avatar: "app/Resources/fixtures/avatars/blue.jpg"
+#                                roles: ["ROLE_ADMIN"]
+#                            -
+#                                email: "loic_425@example.com"
+#                                username: "loic_425"
+#                                password: "admin"
+#                                enabled: true
+#                                avatar: "app/Resources/fixtures/avatars/loic_425.jpg"
+#                                roles: ["ROLE_ADMIN"]
+#                            -
+#                                email: "product-manager@example.com"
+#                                password: "password"
+#                                enabled: true
+#                                roles: ["ROLE_PRODUCT_MANAGER"]
+#                            -
+#                                email: "article-manager@example.com"
+#                                password: "password"
+#                                enabled: true
+#                                roles: ["ROLE_ARTICLE_MANAGER"]
                 taxon:
                     options:
                         custom:
@@ -101,186 +101,186 @@ sylius_fixtures:
                             -
                                 first_name: "Doris"
                                 last_name: "Matthäus"
-                article:
-                    options:
-                        random: 50
-                        custom:
-                            -
-                                title: "Le Jedisjeux nouveau est arrivé"
-                                short_description: null
-                                status: "published"
-                                publish_start_date: "now"
-                                main_image: "app/Resources/fixtures/jedisjeux-nouveau.png"
-                                author: "blue@example.com"
-
-                block:
-                    options:
-                        random: 80
-                        custom:
-                            -
-                                article: Le_Jedisjeux_nouveau_est_arrivé
-                                body: |
-                                    <p>Ça y est, le nouveau Jedisjeux est là.</p>
-                                    <p>Attention où vous mettez vos doigts, ce n'est pas encore tout à fait sec. Enfin, on a&nbsp;fait bien attention à mettre de la peinture qui ne täche pas.</p>
-                                    <p>Première chose, il faut changer votre mot de passe. Pour ça, rien de plus simple, il suffit cliquer sur le lien «&nbsp;<a href="http://www.jedisjeux.net/forgotten-password" target="_self">vous avez oublié votre mot de passe</a>&nbsp;».</p>
-                                    <p>Si ça ne se passe pas bien, n’hésitez pas à le signaler par mail en suivant le lien <a href="http://www.jedisjeux.net/contact">contact </a>du site.</p>
-                                    <p>Il manque encore des petites choses par ci par là, ne vous inquiétez pas, ça va revenir, ce nouveau site nous permettra de vous proposer&nbsp;plein de nouvelles choses qui étaient trop difficiles à réaliser avec l'ancienne version.</p>
-                                    <p>N'hésitez pas à commenter, tester, remonter les bugs, demander des évolutions.</p>
-                                    <p>Bravo à Loïc pour avoir su gérer cette nouvelle version.</p>
-                                    <p>Il ne nous reste plus qu'à roder tout ça&nbsp;: )</p>
-                                image: "app/Resources/fixtures/jedisjeux-nouveau.png"
-                                image_position: "top"
-
-                game_product:
-                    options:
-                        amount: 20
-
-                product:
-                    options:
-                        custom:
-                            -
-                                name: "Puerto Rico"
-                                status: "published"
-                                min_player_count: 2
-                                max_player_count: 5
-                                min_duration: 90
-                                max_duration: 90
-                                min_age: 12
-                                images:
-                                    - "app/Resources/fixtures/products/covers/puerto-rico.jpg"
-                                short_description: |
-                                    <p>Le gouverneur de l'île de Puerto Rico reste à choisir.</p>
-                                    <p>Celui des joueurs qui aura démontré les richesses de son quartier deviendra Gouverneur de Puerto Rico.</p>
-                                created_at: "now"
-                            -
-                                name: "Râ"
-                                status: "published"
-                                min_player_count: 2
-                                max_player_count: 5
-                                min_duration: 90
-                                max_duration: 90
-                                min_age: 12
-                                images:
-                                    - "app/Resources/fixtures/products/covers/ra.jpg"
-                                created_at: "now"
-                            -
-                                name: "Tigre & Euphrate"
-                                status: "published"
-                                min_player_count: 2
-                                max_player_count: 4
-                                min_age: 12
-                                min_duration: 90
-                                max_duration: 90
-                                designers:
-                                    - "reiner-knizia"
-                                artists:
-                                    - "doris-matthaus"
-                                publishers:
-                                    - "hans-im-gluck"
-                                images:
-                                    - "app/Resources/fixtures/products/covers/tigre-euphrate.jpg"
-                                short_description: |
-                                    <p>Faites prospérer des villes, des fermes, des temples. Érigez, en l'honneur des dieux, des monuments imprenables. Mais sur la route du pouvoir suprême, bien des conflits armés vous opposeront à vos voisins !</p>
-                                created_at: "now"
-                            -
-                                name: "Shogun"
-                                status: "published"
-                                min_player_count: 3
-                                max_player_count: 5
-                                min_age: 12
-                                images:
-                                    - "app/Resources/fixtures/products/covers/shogun.jpg"
-                                short_description: |
-                                    <p>Shogun est une version légèrement modifiée du jeu Wallenstein, sorti en 2002 chez le même éditeur. Le thème a changé mais les mécanismes sont quasi similaires à quelques points de règles près.</p>
-                                created_at: "now"
-                            -
-                                name: "Yamataï"
-                                status: "published"
-                                min_player_count: 2
-                                max_player_count: 4
-                                min_duration: 40
-                                max_duration: 40
-                                min_age: 13
-                                released_at: "first day of March 2017"
-                                released_at_precision: "on-month"
-                                images:
-                                    - "app/Resources/fixtures/products/covers/yamatai.jpg"
-                                short_description: |
-                                    <p>La reine Himiko a confié une mission prestigieuse à tous ses bâtisseurs : faire de la capitale de Yamataï la perle du royaume.</p>
-                                created_at: "now"
-
-                product_box:
-                    options:
-                        custom:
-                            -
-                                product_variant: "Tigre_&_Euphrate"
-                                image: "app/Resources/fixtures/boxes/box-euphrat-tigris.jpg"
-                            -
-                                product_variant: "Puerto_Rico"
-                                image: "app/Resources/fixtures/boxes/box-puerto-rico.jpg"
-                            -
-                                product_variant: "Shogun"
-                                image: "app/Resources/fixtures/boxes/box-shogun.jpg"
-
-                product_list:
-                    options:
-                        custom:
-                            -
-                                code: "game_library"
-                                owner: "loic_425@example.com"
-
-                            -
-                                code: "game_library"
-                                owner: "blue@example.com"
-                        random: 40
-
-                product_review:
-                    options:
-                        random: 40
-
-                game_play:
-                    options:
-                        random: 40
-
-                game_play_image:
-                    options:
-                        random: 80
-
-                player:
-                    options:
-                        random: 80
-
-                forum_topic:
-                    options:
-                        amount: 20
-
-                post:
-                    options:
-                        random: 50
-
-                notification:
-                    options:
-                        random: 40
-
-                dealer:
-                    options:
-                        random: 20
-
-                dealer_price:
-                    options:
-                        random: 50
-
-                redirection:
-                    options:
-                        random: 20
-
-                festival_list:
-                    options:
-                        random: 5
-                        custom:
-                            -
-                                name: Essen 2017
-
-                festival_list_item:
-                    options:
-                        random: 100
+#                article:
+#                    options:
+#                        random: 50
+#                        custom:
+#                            -
+#                                title: "Le Jedisjeux nouveau est arrivé"
+#                                short_description: null
+#                                status: "published"
+#                                publish_start_date: "now"
+#                                main_image: "app/Resources/fixtures/jedisjeux-nouveau.png"
+#                                author: "blue@example.com"
+#
+#                block:
+#                    options:
+#                        random: 80
+#                        custom:
+#                            -
+#                                article: Le_Jedisjeux_nouveau_est_arrivé
+#                                body: |
+#                                    <p>Ça y est, le nouveau Jedisjeux est là.</p>
+#                                    <p>Attention où vous mettez vos doigts, ce n'est pas encore tout à fait sec. Enfin, on a&nbsp;fait bien attention à mettre de la peinture qui ne täche pas.</p>
+#                                    <p>Première chose, il faut changer votre mot de passe. Pour ça, rien de plus simple, il suffit cliquer sur le lien «&nbsp;<a href="http://www.jedisjeux.net/forgotten-password" target="_self">vous avez oublié votre mot de passe</a>&nbsp;».</p>
+#                                    <p>Si ça ne se passe pas bien, n’hésitez pas à le signaler par mail en suivant le lien <a href="http://www.jedisjeux.net/contact">contact </a>du site.</p>
+#                                    <p>Il manque encore des petites choses par ci par là, ne vous inquiétez pas, ça va revenir, ce nouveau site nous permettra de vous proposer&nbsp;plein de nouvelles choses qui étaient trop difficiles à réaliser avec l'ancienne version.</p>
+#                                    <p>N'hésitez pas à commenter, tester, remonter les bugs, demander des évolutions.</p>
+#                                    <p>Bravo à Loïc pour avoir su gérer cette nouvelle version.</p>
+#                                    <p>Il ne nous reste plus qu'à roder tout ça&nbsp;: )</p>
+#                                image: "app/Resources/fixtures/jedisjeux-nouveau.png"
+#                                image_position: "top"
+#
+#                game_product:
+#                    options:
+#                        amount: 20
+#
+#                product:
+#                    options:
+#                        custom:
+#                            -
+#                                name: "Puerto Rico"
+#                                status: "published"
+#                                min_player_count: 2
+#                                max_player_count: 5
+#                                min_duration: 90
+#                                max_duration: 90
+#                                min_age: 12
+#                                images:
+#                                    - "app/Resources/fixtures/products/covers/puerto-rico.jpg"
+#                                short_description: |
+#                                    <p>Le gouverneur de l'île de Puerto Rico reste à choisir.</p>
+#                                    <p>Celui des joueurs qui aura démontré les richesses de son quartier deviendra Gouverneur de Puerto Rico.</p>
+#                                created_at: "now"
+#                            -
+#                                name: "Râ"
+#                                status: "published"
+#                                min_player_count: 2
+#                                max_player_count: 5
+#                                min_duration: 90
+#                                max_duration: 90
+#                                min_age: 12
+#                                images:
+#                                    - "app/Resources/fixtures/products/covers/ra.jpg"
+#                                created_at: "now"
+#                            -
+#                                name: "Tigre & Euphrate"
+#                                status: "published"
+#                                min_player_count: 2
+#                                max_player_count: 4
+#                                min_age: 12
+#                                min_duration: 90
+#                                max_duration: 90
+#                                designers:
+#                                    - "reiner-knizia"
+#                                artists:
+#                                    - "doris-matthaus"
+#                                publishers:
+#                                    - "hans-im-gluck"
+#                                images:
+#                                    - "app/Resources/fixtures/products/covers/tigre-euphrate.jpg"
+#                                short_description: |
+#                                    <p>Faites prospérer des villes, des fermes, des temples. Érigez, en l'honneur des dieux, des monuments imprenables. Mais sur la route du pouvoir suprême, bien des conflits armés vous opposeront à vos voisins !</p>
+#                                created_at: "now"
+#                            -
+#                                name: "Shogun"
+#                                status: "published"
+#                                min_player_count: 3
+#                                max_player_count: 5
+#                                min_age: 12
+#                                images:
+#                                    - "app/Resources/fixtures/products/covers/shogun.jpg"
+#                                short_description: |
+#                                    <p>Shogun est une version légèrement modifiée du jeu Wallenstein, sorti en 2002 chez le même éditeur. Le thème a changé mais les mécanismes sont quasi similaires à quelques points de règles près.</p>
+#                                created_at: "now"
+#                            -
+#                                name: "Yamataï"
+#                                status: "published"
+#                                min_player_count: 2
+#                                max_player_count: 4
+#                                min_duration: 40
+#                                max_duration: 40
+#                                min_age: 13
+#                                released_at: "first day of March 2017"
+#                                released_at_precision: "on-month"
+#                                images:
+#                                    - "app/Resources/fixtures/products/covers/yamatai.jpg"
+#                                short_description: |
+#                                    <p>La reine Himiko a confié une mission prestigieuse à tous ses bâtisseurs : faire de la capitale de Yamataï la perle du royaume.</p>
+#                                created_at: "now"
+#
+#                product_box:
+#                    options:
+#                        custom:
+#                            -
+#                                product_variant: "Tigre_&_Euphrate"
+#                                image: "app/Resources/fixtures/boxes/box-euphrat-tigris.jpg"
+#                            -
+#                                product_variant: "Puerto_Rico"
+#                                image: "app/Resources/fixtures/boxes/box-puerto-rico.jpg"
+#                            -
+#                                product_variant: "Shogun"
+#                                image: "app/Resources/fixtures/boxes/box-shogun.jpg"
+#
+#                product_list:
+#                    options:
+#                        custom:
+#                            -
+#                                code: "game_library"
+#                                owner: "loic_425@example.com"
+#
+#                            -
+#                                code: "game_library"
+#                                owner: "blue@example.com"
+#                        random: 40
+#
+#                product_review:
+#                    options:
+#                        random: 40
+#
+#                game_play:
+#                    options:
+#                        random: 40
+#
+#                game_play_image:
+#                    options:
+#                        random: 80
+#
+#                player:
+#                    options:
+#                        random: 80
+#
+#                forum_topic:
+#                    options:
+#                        amount: 20
+#
+#                post:
+#                    options:
+#                        random: 50
+#
+#                notification:
+#                    options:
+#                        random: 40
+#
+#                dealer:
+#                    options:
+#                        random: 20
+#
+#                dealer_price:
+#                    options:
+#                        random: 50
+#
+#                redirection:
+#                    options:
+#                        random: 20
+#
+#                festival_list:
+#                    options:
+#                        random: 5
+#                        custom:
+#                            -
+#                                name: Essen 2017
+#
+#                festival_list_item:
+#                    options:
+#                        random: 100

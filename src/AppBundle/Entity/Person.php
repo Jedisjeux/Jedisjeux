@@ -29,7 +29,7 @@ class Person implements ResourceInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string", unique=true, nullable=true)
+     * @ORM\Column(type="string", unique=true)
      *
      * @JMS\Expose
      * @JMS\Groups({"Default"})

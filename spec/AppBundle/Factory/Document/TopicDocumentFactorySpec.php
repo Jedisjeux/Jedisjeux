@@ -29,6 +29,7 @@ class TopicDocumentFactorySpec extends ObjectBehavior
     function it_creates_document_from_topic(Topic $topic, Customer $author): void
     {
         $topic->getId()->willReturn(1);
+        $topic->getCode()->willReturn("XYZ");
         $topic->getTitle()->willReturn("New message");
         $topic->getCreatedAt()->willReturn(new \DateTime());
         $topic->getAuthor()->willReturn($author);

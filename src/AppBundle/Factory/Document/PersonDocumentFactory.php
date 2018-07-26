@@ -69,6 +69,7 @@ class PersonDocumentFactory
         $appDocument = new $this->appDocumentClass();
         $appDocument->setUuid(Uuid::uuid4()->toString());
         $appDocument->setType(AppDocument::TYPE_PERSON);
+        $appDocument->setCode($person->getCode());
         $appDocument->setName($person->getFullName());
         $appDocument->setCreatedAt($person->getCreatedAt());
 

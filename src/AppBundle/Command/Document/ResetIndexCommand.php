@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace AppBundle\Command\Document;
 
+use AppBundle\Entity\Article;
+use AppBundle\Entity\Person;
+use AppBundle\Entity\Product;
 use AppBundle\Entity\Topic;
 use AppBundle\Factory\Document\ArticleDocumentFactory;
 use AppBundle\Factory\Document\PersonDocumentFactory;
@@ -177,7 +180,7 @@ final class ResetIndexCommand extends Command
     /**
      * @param OutputInterface $output
      * @param RepositoryInterface $repository
-     * @param ArticleDocumentFactory|ProductDocumentFactory|TopicDocumentFactory $factory
+     * @param ArticleDocumentFactory|PersonDocumentFactory|ProductDocumentFactory|TopicDocumentFactory $factory
      * @param string $itemName
      * @param string $itemPluralName
      *
@@ -187,7 +190,7 @@ final class ResetIndexCommand extends Command
     {
         $itemDocumentsCreated = 0;
 
-        /** @var Topic[] $items */
+        /** @var Article[]|Person[]|Product[]|Topic[] $items */
         $items = $repository->findAll();
 
         $output->writeln(sprintf('Loading %d %s into ElasticSearch', count($items), $itemPluralName));
