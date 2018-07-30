@@ -1,9 +1,3 @@
-#app_api_search_autocomplete:
-#    methods: [GET]
-#    path: /search/autocomplete/
-#    defaults:
-#        _controller: app.controller.search:autoCompleteAction
-
 app_api_search_autocomplete:
     path: /search/autocomplete/
     methods: [GET]

@@ -49,7 +49,7 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
     /**
      * @var string
      *
-     * @ORM\Column(type="string", unique=true, nullable=true)
+     * @ORM\Column(type="string", unique=true)
      */
     protected $code;
 
@@ -214,6 +214,7 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
     public function __construct()
     {
         $this->publishable = false;
+        $this->code = uniqid('article_');
         $this->blocks = new ArrayCollection();
         $this->reviews = new ArrayCollection();
         $this->status = self::STATUS_NEW;

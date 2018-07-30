@@ -1,7 +1,0 @@
-app_frontend_search_index:
-    methods: [GET]
-    path: /recherche/
-    defaults:
-        _controller: app.controller.search:searchQueryAction
-        _sylius:
-            template: frontend/search/index.html.twig
