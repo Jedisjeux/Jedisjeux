@@ -46,7 +46,6 @@ class AppKernel extends Kernel
 
             new FOS\RestBundle\FOSRestBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
-            new FOS\ElasticaBundle\FOSElasticaBundle(),
 
             new Doctrine\Bundle\PHPCRBundle\DoctrinePHPCRBundle(),
             new Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
@@ -65,6 +64,10 @@ class AppKernel extends Kernel
             new Nelmio\CorsBundle\NelmioCorsBundle(),
             new Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle(),
             new Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle(),
+            new ONGR\ElasticsearchBundle\ONGRElasticsearchBundle(),
+            new ONGR\FilterManagerBundle\ONGRFilterManagerBundle(),
+            new SimpleBus\SymfonyBridge\SimpleBusCommandBusBundle(),
+            new SimpleBus\SymfonyBridge\SimpleBusEventBusBundle(),
 
             new AppBundle\AppBundle(),
         );

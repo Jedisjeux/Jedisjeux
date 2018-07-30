@@ -13,6 +13,7 @@ namespace AppBundle\Fixture\Factory;
 
 use AppBundle\Entity\Person;
 use AppBundle\Entity\PersonImage;
+use AppBundle\Formatter\StringInflector;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -69,6 +70,7 @@ class PersonExampleFactory extends AbstractExampleFactory implements ExampleFact
 
         /** @var Person $person */
         $person = $this->personFactory->createNew();
+        $person->setCode($options['code']);
         $person->setFirstName($options['first_name']);
         $person->setLastName($options['last_name']);
         $person->setWebsite($options['website']);
@@ -113,15 +115,23 @@ class PersonExampleFactory extends AbstractExampleFactory implements ExampleFact
             ->setDefault('first_name', function (Options $options) {
                 return $this->faker->firstName;
             })
+
             ->setDefault('last_name', function (Options $options) {
                 return $this->faker->lastName;
             })
+
+            ->setDefault('code', function (Options $options) {
+                return StringInflector::nameToCode($options['first_name']. ' '. $options['last_name']);
+            })
+
             ->setDefault('website', function (Options $options) {
                 return $this->faker->url;
             })
+
             ->setDefault('description', function (Options $options) {
                 return $this->faker->paragraphs(3, true);
             })
+
             ->setDefault('images', function (Options $options) {
                 return [$this->faker->image(null, 640, 480, 'people')];
             })

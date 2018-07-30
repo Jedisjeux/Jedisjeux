@@ -41,9 +41,6 @@ app_frontend_user:
     resource: "frontend/user.yml"
     prefix: /utilisateurs/{username}
 
-app_search:
-    resource: "frontend/search.yml"
-
 #sylius_static_content:
 #    resource: "frontend/static_content.yml"
 

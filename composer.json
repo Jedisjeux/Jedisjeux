@@ -18,7 +18,7 @@
     }
   },
   "require": {
-    "php": "^5.5.9|^7.0",
+    "php": "^7.1",
     "symfony/symfony": "3.4.*",
     "doctrine/orm": "^2.4.8",
     "doctrine/doctrine-bundle": "~1.4",
@@ -54,7 +54,6 @@
     "liip/imagine-bundle": "^1.6",
     "jms/translation-bundle": "^1.4.1",
     "jms/di-extra-bundle": "^1.8",
-    "friendsofsymfony/elastica-bundle": "^4.0",
     "twbs/bootstrap-sass": "^3.3",
     "mopa/bootstrap-bundle": "^3.1",
     "egeloen/ckeditor-bundle": "^4.0",
@@ -65,7 +64,12 @@
     "symfony-cmf/routing-bundle": "^2.0",
     "eko/feedbundle": "^1.2",
     "ruflin/elastica": "^3.2",
-    "nelmio/cors-bundle": "^1.5"
+    "nelmio/cors-bundle": "^1.5",
+    "ongr/elasticsearch-bundle": "^5.0",
+    "ongr/elasticsearch-dsl": "^5.0",
+    "ongr/filter-manager-bundle": "^2.1",
+    "simple-bus/symfony-bridge": "^5.1",
+    "ramsey/uuid": "^3.8"
   },
   "require-dev": {
     "behat/behat": "^3.2",

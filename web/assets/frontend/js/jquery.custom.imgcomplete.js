@@ -1,6 +1,7 @@
 $.widget( "custom.imgcomplete", $.ui.autocomplete, {
     _renderItem: function( ul, item ) {
         return $( "<li>" )
+            .css('clear', 'both')
             .append( $('<a>')
                 .attr("href", item.href)
                 .append($('<img>')
@@ -10,9 +11,6 @@ $.widget( "custom.imgcomplete", $.ui.autocomplete, {
                 )
                 .append($('<span>')
                     .html(item.label)
-                )
-                .append($('<div>')
-                    .addClass('clearfix')
                 )
             )
             .appendTo( ul );

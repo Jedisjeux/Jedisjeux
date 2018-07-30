@@ -1,0 +1,40 @@
+services:
+    app.projector.article:
+        class: AppBundle\Projection\ArticleProjector
+        arguments:
+            - "@es.manager.default"
+            - "@app_elastic_search.factory.article"
+        tags:
+            - { name: "event_subscriber", subscribes_to: AppBundle\Event\ArticleCreated, method: "handleArticleCreated" }
+            - { name: "event_subscriber", subscribes_to: AppBundle\Event\ArticleUpdated, method: "handleArticleUpdated" }
+            - { name: "event_subscriber", subscribes_to: AppBundle\Event\ArticleDeleted, method: "handleArticleDeleted" }
+
+    app.projector.person:
+        class: AppBundle\Projection\PersonProjector
+        arguments:
+            - "@es.manager.default"
+            - "@app_elastic_search.factory.person"
+        tags:
+            - { name: "event_subscriber", subscribes_to: AppBundle\Event\PersonCreated, method: "handlePersonCreated" }
+            - { name: "event_subscriber", subscribes_to: AppBundle\Event\PersonUpdated, method: "handlePersonUpdated" }
+            - { name: "event_subscriber", subscribes_to: AppBundle\Event\PersonDeleted, method: "handlePersonDeleted" }
+
+    app.projector.product:
+        class: AppBundle\Projection\ProductProjector
+        arguments:
+            - "@es.manager.default"
+            - "@app_elastic_search.factory.product"
+        tags:
+            - { name: "event_subscriber", subscribes_to: AppBundle\Event\ProductCreated, method: "handleProductCreated" }
+            - { name: "event_subscriber", subscribes_to: AppBundle\Event\ProductUpdated, method: "handleProductUpdated" }
+            - { name: "event_subscriber", subscribes_to: AppBundle\Event\ProductDeleted, method: "handleProductDeleted" }
+
+    app.projector.person:
+        class: AppBundle\Projection\TopicProjector
+        arguments:
+            - "@es.manager.default"
+            - "@app_elastic_search.factory.topic"
+        tags:
+            - { name: "event_subscriber", subscribes_to: AppBundle\Event\TopicCreated, method: "handleTopicCreated" }
+            - { name: "event_subscriber", subscribes_to: AppBundle\Event\TopicUpdated, method: "handleTopicUpdated" }
+            - { name: "event_subscriber", subscribes_to: AppBundle\Event\TopicDeleted, method: "handleTopicDeleted" }

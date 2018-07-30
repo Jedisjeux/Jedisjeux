@@ -11,6 +11,7 @@
 
 namespace AppBundle\Command;
 
+use AppBundle\Document\AppDocument;
 use AppBundle\Entity\Product;
 use AppBundle\Entity\Dealer;
 use AppBundle\Entity\DealerPrice;
@@ -20,6 +21,8 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Elastica\Query;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
+use ONGR\ElasticsearchBundle\Service\Manager;
+use ONGR\ElasticsearchBundle\Service\Repository;
 use Pagerfanta\Pagerfanta;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -191,14 +194,13 @@ EOT
 
         $price = $this->formatPrice($data['price']);
 
-        $dealerPrice
-            ->setDealer($dealer)
-            ->setUrl($data['url'])
-            ->setName(preg_replace('/[[:^print:]]/', '', $data['product_name']))
-            ->setPrice($price)
-            ->setBarcode($data['barcode'])
-            ->setStatus($data['status'])
-            ->setUpdatedAt(new \DateTime()); // ensure doctrine will update data when no data has changed
+        $dealerPrice->setDealer($dealer);
+        $dealerPrice->setUrl($data['url']);
+        $dealerPrice->setName(preg_replace('/[[:^print:]]/', '', $data['product_name']));
+        $dealerPrice->setPrice($price);
+        $dealerPrice->setBarcode($data['barcode']);
+        $dealerPrice->setStatus($data['status']);
+        $dealerPrice->setUpdatedAt(new \DateTime()); // ensure doctrine will update data when no data has changed
 
         return $dealerPrice;
     }
@@ -293,31 +295,7 @@ EOT
         $slug = Transliterator::transliterate($data['product_name']);
         $product = $this->getProductRepository()->findOneBySlug($slug);
 
-        if (null !== $product) {
-            return $product;
-        }
-
-        $finder = $this->getProductFinder();
-
-        $searchQuery = new Query\QueryString();
-        $searchQuery->setParam('query', $slug);
-
-        $searchQuery->setDefaultOperator('AND');
-
-        // execute a request of type "fields", with all theses following columns
-        $searchQuery->setParam('fields', array(
-            'slug',
-            'name',
-        ));
-
-        /** @var Pagerfanta $userPaginator */
-        $paginator = $finder->findPaginated($searchQuery);
-
-        if (1 === $paginator->getNbResults()) {
-            return $paginator->getIterator()->current();
-        }
-
-        return null;
+        return $product;
     }
 
     /**
@@ -331,14 +309,6 @@ EOT
             'dealer' => $dealer,
             'today' => (new \DateTime('today'))->format('Y-m-d H:i:s'),
         ]);
-    }
-
-    /**
-     * @return TransformedFinder|object
-     */
-    protected function getProductFinder()
-    {
-        return $this->getContainer()->get('fos_elastica.finder.jedisjeux.product');
     }
 
     /**
