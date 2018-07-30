@@ -18,3 +18,13 @@ services:
             - { name: "event_subscriber", subscribes_to: AppBundle\Event\ProductCreated, method: "handleProductCreated" }
             - { name: "event_subscriber", subscribes_to: AppBundle\Event\ProductUpdated, method: "handleProductUpdated" }
             - { name: "event_subscriber", subscribes_to: AppBundle\Event\ProductDeleted, method: "handleProductDeleted" }
+
+    app.projector.person:
+        class: AppBundle\Projection\TopicProjector
+        arguments:
+            - "@es.manager.default"
+            - "@app_elastic_search.factory.topic"
+        tags:
+            - { name: "event_subscriber", subscribes_to: AppBundle\Event\TopicCreated, method: "handleTopicCreated" }
+            - { name: "event_subscriber", subscribes_to: AppBundle\Event\TopicUpdated, method: "handleTopicUpdated" }
+            - { name: "event_subscriber", subscribes_to: AppBundle\Event\TopicDeleted, method: "handleTopicDeleted" }
