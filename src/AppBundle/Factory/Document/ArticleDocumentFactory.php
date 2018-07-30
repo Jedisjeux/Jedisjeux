@@ -76,7 +76,9 @@ class ArticleDocumentFactory
         $articleDocument->setId($article->getId());
         $articleDocument->setSlug($article->getSlug());
 
-        if (null !== $mainImage = $article->getMainImage()) {
+        $mainImage = $article->getMainImage();
+
+        if (null !== $mainImage && null !== $mainImage->getPath()) {
             $imageDocument = $this->imageDocumentFactory->create($mainImage);
             $appDocument->setImage($imageDocument);
         }
