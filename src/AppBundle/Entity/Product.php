@@ -298,17 +298,25 @@ class Product extends BaseProduct implements ReviewableInterface
      * @JMS\SerializedName("image")
      * @JMS\Groups({"Default", "Detailed"})
      */
-    public function getMainImage()
+    public function getMainImage(): ?ProductVariantImage
     {
-        return $this->getFirstVariant()->getMainImage();
+        if (null === $firstVariant = $this->getFirstVariant()) {
+            return null;
+        }
+
+        return $firstVariant->getMainImage();
     }
 
     /**
      * @return ProductVariantImage
      */
-    public function getMaterialImage()
+    public function getMaterialImage(): ?ProductVariantImage
     {
-        return $this->getFirstVariant()->getMaterialImage();
+        if (null === $firstVariant = $this->getFirstVariant()) {
+            return null;
+        }
+
+        return $firstVariant->getMaterialImage();
     }
 
     /**
