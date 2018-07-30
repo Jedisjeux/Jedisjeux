@@ -1,4 +1,14 @@
 services:
+    app.projector.article:
+        class: AppBundle\Projection\ArticleProjector
+        arguments:
+            - "@es.manager.default"
+            - "@app_elastic_search.factory.article"
+        tags:
+            - { name: "event_subscriber", subscribes_to: AppBundle\Event\ArticleCreated, method: "handleArticleCreated" }
+            - { name: "event_subscriber", subscribes_to: AppBundle\Event\ArticleUpdated, method: "handleArticleUpdated" }
+            - { name: "event_subscriber", subscribes_to: AppBundle\Event\ArticleDeleted, method: "handleArticleDeleted" }
+
     app.projector.person:
         class: AppBundle\Projection\PersonProjector
         arguments:

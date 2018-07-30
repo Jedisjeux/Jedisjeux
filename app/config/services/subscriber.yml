@@ -8,6 +8,13 @@ services:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
+    app.subscriber.article_publisher:
+        class: AppBundle\EventSubscriber\ArticlePublisherSubscriber
+        arguments:
+            - "@event_bus"
+        tags:
+            - { name: doctrine.event_subscriber, priority: -1024 }
+
     app.subscriber.person_publisher:
         class: AppBundle\EventSubscriber\PersonPublisherSubscriber
         arguments:
