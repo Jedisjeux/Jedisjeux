@@ -62,8 +62,7 @@ class AppKernel extends Kernel
             new Eko\FeedBundle\EkoFeedBundle(),
             new Incenteev\HashedAssetBundle\IncenteevHashedAssetBundle(),
             new Nelmio\CorsBundle\NelmioCorsBundle(),
-            new Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle(),
-            new Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle(),
+
             new ONGR\ElasticsearchBundle\ONGRElasticsearchBundle(),
             new ONGR\FilterManagerBundle\ONGRFilterManagerBundle(),
             new SimpleBus\SymfonyBridge\SimpleBusCommandBusBundle(),
@@ -80,6 +79,8 @@ class AppKernel extends Kernel
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
+            $bundles[] = new Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle();
+            $bundles[] = new Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle();
         }
 
         return $bundles;
