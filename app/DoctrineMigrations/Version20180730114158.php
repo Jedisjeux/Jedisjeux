@@ -15,7 +15,7 @@ class Version20180730114158 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('UPDATE jdj_article set code = ? WHERE code is null', [uniqid('article_')]);
+        $this->addSql('UPDATE jdj_article set code = concat(?, id) WHERE code is null', [uniqid('article_')]);
         $this->addSql('ALTER TABLE jdj_article CHANGE code code VARCHAR(255) NOT NULL');
     }
 
