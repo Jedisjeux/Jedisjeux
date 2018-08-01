@@ -37,7 +37,7 @@ class Topic implements ResourceInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true, unique=true)
+     * @ORM\Column(type="string", unique=true)
      */
     protected $code;
 
@@ -135,6 +135,7 @@ class Topic implements ResourceInterface
      */
     public function __construct()
     {
+        $this->code = uniqid('topic_');
         $this->posts = new ArrayCollection();
         $this->followers = new ArrayCollection();
         $this->postCount = 0;
