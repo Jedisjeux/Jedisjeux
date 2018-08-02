@@ -16,6 +16,7 @@ namespace AppBundle\Factory\Document;
 use AppBundle\Document\AppDocument;
 use AppBundle\Document\TopicDocument;
 use AppBundle\Entity\Topic;
+use Ramsey\Uuid\Uuid;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -56,11 +57,14 @@ class TopicDocumentFactory
      * @param Topic $topic
      *
      * @return AppDocument
+     *
+     * @throws \Exception
      */
     public function create(Topic $topic): AppDocument
     {
         /** @var AppDocument $appDocument */
         $appDocument = new $this->appDocumentClass();
+        $appDocument->setUuid(Uuid::uuid4()->toString());
         $appDocument->setType(AppDocument::TYPE_TOPIC);
         $appDocument->setCode($topic->getCode());
         $appDocument->setName($topic->getTitle());
