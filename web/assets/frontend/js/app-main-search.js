@@ -63,7 +63,7 @@ $(function() {
                     items.push({
                         "id": item.type,
                         "text": item.name,
-                        "image": item.image ? item.image.path : null,
+                        "image": item.image ? item.image.path : "//ssl.gstatic.com/accounts/ui/avatar_2x.png",
                         "href": getUrl(item)
                     });
                 });
