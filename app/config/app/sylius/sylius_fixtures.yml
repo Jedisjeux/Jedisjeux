@@ -59,13 +59,6 @@ sylius_fixtures:
                             -
                                 code: "zones"
                                 name: "Zones"
-                            -
-                                code: "articles"
-                                name: "Catégories"
-                                children:
-                                    -
-                                        code: "in-the-boxes"
-                                        name: "C'est dans la boîte"
                 person:
                     options:
                         random: 10
@@ -99,11 +92,12 @@ sylius_fixtures:
                 news_article:
                     options:
                         amount: 10
-
                 review_article:
                     options:
                         amount: 10
-
+                in_the_box_article:
+                    options:
+                        amount: 5
                 article:
                     options:
                         custom:

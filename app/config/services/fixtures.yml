@@ -87,6 +87,14 @@ services:
         tags:
             - { name: sylius_fixtures.fixture }
 
+    app.fixture.in_the_box_article:
+        class: AppBundle\Fixture\InTheBoxArticleFixture
+        arguments:
+        - "@app.fixture.taxon"
+        - "@app.fixture.article"
+        tags:
+        - { name: sylius_fixtures.fixture }
+
     app.fixture.news_article:
         class: AppBundle\Fixture\NewsArticleFixture
         arguments:
