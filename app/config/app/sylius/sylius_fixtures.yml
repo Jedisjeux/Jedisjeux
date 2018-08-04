@@ -11,7 +11,7 @@ sylius_fixtures:
             fixtures:
                 app_user:
                     options:
-                        random: 20
+                        random: 10
                         custom:
                             -
                                 email: "customer@example.com"
@@ -64,17 +64,11 @@ sylius_fixtures:
                                 name: "Catégories"
                                 children:
                                     -
-                                        code: "news"
-                                        name: "Actualités"
-                                    -
-                                        code: "review-articles"
-                                        name: "Critiques"
-                                    -
                                         code: "in-the-boxes"
                                         name: "C'est dans la boîte"
                 person:
                     options:
-                        random: 20
+                        random: 10
                         custom:
                             -
                                 first_name: "Reiner"
@@ -101,9 +95,17 @@ sylius_fixtures:
                             -
                                 first_name: "Doris"
                                 last_name: "Matthäus"
+
+                news_article:
+                    options:
+                        amount: 10
+
+                review_article:
+                    options:
+                        amount: 10
+
                 article:
                     options:
-                        random: 50
                         custom:
                             -
                                 title: "Le Jedisjeux nouveau est arrivé"
@@ -115,7 +117,7 @@ sylius_fixtures:
 
                 block:
                     options:
-                        random: 80
+                        random: 40
                         custom:
                             -
                                 article: Le_Jedisjeux_nouveau_est_arrivé
@@ -133,7 +135,7 @@ sylius_fixtures:
 
                 game_product:
                     options:
-                        amount: 20
+                        amount: 10
 
                 product:
                     options:
@@ -232,31 +234,31 @@ sylius_fixtures:
                             -
                                 code: "game_library"
                                 owner: "blue@example.com"
-                        random: 40
+                        random: 20
 
                 product_review:
                     options:
-                        random: 40
+                        random: 20
 
                 game_play:
                     options:
-                        random: 40
+                        random: 20
 
                 game_play_image:
                     options:
-                        random: 80
+                        random: 40
 
                 player:
                     options:
-                        random: 80
+                        random: 40
 
                 forum_topic:
                     options:
-                        amount: 20
+                        amount: 10
 
                 post:
                     options:
-                        random: 50
+                        random: 20
 
                 notification:
                     options:
@@ -264,15 +266,15 @@ sylius_fixtures:
 
                 dealer:
                     options:
-                        random: 20
+                        random: 10
 
                 dealer_price:
                     options:
-                        random: 50
+                        random: 20
 
                 redirection:
                     options:
-                        random: 20
+                        random: 10
 
                 festival_list:
                     options:
@@ -283,4 +285,4 @@ sylius_fixtures:
 
                 festival_list_item:
                     options:
-                        random: 100
+                        random: 40

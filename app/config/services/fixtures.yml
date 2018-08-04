@@ -87,6 +87,14 @@ services:
         tags:
             - { name: sylius_fixtures.fixture }
 
+    app.fixture.news_article:
+        class: AppBundle\Fixture\NewsArticleFixture
+        arguments:
+        - "@app.fixture.taxon"
+        - "@app.fixture.article"
+        tags:
+        - { name: sylius_fixtures.fixture }
+
     app.fixture.notification:
         class: AppBundle\Fixture\NotificationFixture
         arguments:
@@ -158,6 +166,14 @@ services:
             - "@app.fixture.example_factory.redirection"
         tags:
             - { name: sylius_fixtures.fixture }
+
+    app.fixture.review_article:
+        class: AppBundle\Fixture\ReviewArticleFixture
+        arguments:
+        - "@app.fixture.taxon"
+        - "@app.fixture.article"
+        tags:
+        - { name: sylius_fixtures.fixture }
 
     app.fixture.taxon:
         class: AppBundle\Fixture\TaxonFixture
