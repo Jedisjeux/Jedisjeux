@@ -15,7 +15,7 @@ use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class GameProductFixture extends AbstractFixture
+class ReviewArticleFixture extends AbstractFixture
 {
     /**
      * @var AbstractResourceFixture
@@ -25,7 +25,7 @@ class GameProductFixture extends AbstractFixture
     /**
      * @var AbstractResourceFixture
      */
-    private $productFixture;
+    private $articleFixture;
 
     /**
      * @var OptionsResolver
@@ -39,12 +39,12 @@ class GameProductFixture extends AbstractFixture
 
     /**
      * @param $taxonFixture
-     * @param AbstractResourceFixture $productFixture
+     * @param AbstractResourceFixture $articleFixture
      */
-    public function __construct($taxonFixture, AbstractResourceFixture $productFixture)
+    public function __construct($taxonFixture, AbstractResourceFixture $articleFixture)
     {
         $this->taxonFixture = $taxonFixture;
-        $this->productFixture = $productFixture;
+        $this->articleFixture = $articleFixture;
 
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver =
@@ -59,7 +59,7 @@ class GameProductFixture extends AbstractFixture
      */
     public function getName(): string
     {
-        return 'game_product';
+        return 'review_article';
     }
 
     /**
@@ -69,55 +69,28 @@ class GameProductFixture extends AbstractFixture
     {
         $options = $this->optionsResolver->resolve($options);
 
-        $themes = [
-            'theme1' => [
-                'code' => 'theme1',
-                'name' => 'Western',
-            ],
-            'theme2' => [
-                'code' => 'theme2',
-                'name' => 'Medieval',
-            ]
-        ];
-
-        $mechanisms = [
-            'mechanism1' => [
-                'code' => 'mechanism1',
-                'name' => 'Card Drafting',
-            ],
-            'mechanism2' => [
-                'code' => 'mechanism2',
-                'name' => 'Tile Placement',
-            ]
-        ];
-
         $this->taxonFixture->load(['custom' => [
             [
-                'code' => 'themes',
-                'name' => 'Themes',
-                'children' => $themes,
-            ],
-            [
-                'code' => 'mechanisms',
-                'name' => 'Mechanisms',
-                'children' => $mechanisms,
-            ],
-            [
-                'code' => 'target-audience',
-                'name' => 'Target audiences',
+                'code' => 'articles',
+                'name' => 'Categories',
+                'children' => [
+                    [
+                        'code' => 'review-articles',
+                        'name' => 'Reviews',
+                    ],
+                ],
             ],
         ]]);
 
-        $products = [];
+        $articles = [];
 
         for ($i = 0; $i < $options['amount']; ++$i) {
-            $products[] = [
-                'mechanisms' => [$this->faker->randomKey($mechanisms)],
-                'themes' => [$this->faker->randomKey($themes)],
+            $articles[] = [
+                'main_taxon' => 'news',
             ];
         }
 
-        $this->productFixture->load(['custom' => $products]);
+        $this->articleFixture->load(['custom' => $articles]);
     }
 
     /**
