@@ -6,6 +6,14 @@ services:
             - "@app.factory.article_image"
             - "@sylius.repository.customer"
             - "@sylius.repository.taxon"
+            - "@sylius.repository.product"
+
+    app.fixture.example_factory.article_review:
+        class: AppBundle\Fixture\Factory\ArticleReviewExampleFactory
+        arguments:
+        - "@sylius.factory.article_review"
+        - "@app.repository.article"
+        - "@sylius.repository.customer"
 
     app.fixture.example_factory.app_user:
         class: AppBundle\Fixture\Factory\AppUserExampleFactory

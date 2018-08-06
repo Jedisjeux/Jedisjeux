@@ -22,6 +22,11 @@ class ReviewArticleFixture extends AbstractFixture
      */
     private $taxonFixture;
 
+    /***
+     * @var AbstractResourceFixture
+     */
+    private $reviewFixture;
+
     /**
      * @var AbstractResourceFixture
      */
@@ -38,12 +43,17 @@ class ReviewArticleFixture extends AbstractFixture
     private $faker;
 
     /**
-     * @param $taxonFixture
+     * @param AbstractResourceFixture $taxonFixture
+     * @param AbstractResourceFixture $reviewFixture
      * @param AbstractResourceFixture $articleFixture
      */
-    public function __construct($taxonFixture, AbstractResourceFixture $articleFixture)
-    {
+    public function __construct(
+        AbstractResourceFixture $taxonFixture,
+        AbstractResourceFixture $reviewFixture,
+        AbstractResourceFixture $articleFixture
+    ){
         $this->taxonFixture = $taxonFixture;
+        $this->reviewFixture = $reviewFixture;
         $this->articleFixture = $articleFixture;
 
         $this->faker = \Faker\Factory::create();
@@ -83,14 +93,27 @@ class ReviewArticleFixture extends AbstractFixture
         ]]);
 
         $articles = [];
+        $articlesCodes = [];
 
         for ($i = 0; $i < $options['amount']; ++$i) {
+            $articleCode = sprintf('review_article_%s', $i);
+            $articlesCodes[] = $articleCode;
+
             $articles[] = [
+                'code' => $articleCode,
                 'main_taxon' => 'news',
             ];
         }
 
         $this->articleFixture->load(['custom' => $articles]);
+
+        foreach($articlesCodes as $articleCode) {
+            $this->reviewFixture->load(['custom' => [
+                [
+                    'article' => $articleCode,
+                ],
+            ]]);
+        }
     }
 
     /**

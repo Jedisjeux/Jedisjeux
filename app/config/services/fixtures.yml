@@ -7,6 +7,14 @@ services:
         tags:
             - { name: sylius_fixtures.fixture }
 
+    app.fixture.article_review:
+        class: AppBundle\Fixture\ArticleReviewFixture
+        arguments:
+        - "@sylius.manager.article_review"
+        - "@app.fixture.example_factory.article_review"
+        tags:
+        - { name: sylius_fixtures.fixture }
+
     app.fixture.app_user:
         class: AppBundle\Fixture\AppUserFixture
         arguments:
@@ -179,6 +187,7 @@ services:
         class: AppBundle\Fixture\ReviewArticleFixture
         arguments:
         - "@app.fixture.taxon"
+        - "@app.fixture.article_review"
         - "@app.fixture.article"
         tags:
         - { name: sylius_fixtures.fixture }

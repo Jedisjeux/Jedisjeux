@@ -16,6 +16,7 @@ use AppBundle\Entity\ArticleImage;
 use AppBundle\Fixture\OptionsResolver\LazyOption;
 use AppBundle\Formatter\StringInflector;
 use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
@@ -49,6 +50,11 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
     private $taxonRepository;
 
     /**
+     * @var RepositoryInterface
+     */
+    private $productRepository;
+
+    /**
      * @var \Faker\Generator
      */
     private $faker;
@@ -63,18 +69,21 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
      * @param FactoryInterface $articleImageFactory
      * @param RepositoryInterface $customerRepository
      * @param TaxonRepositoryInterface $taxonRepository
+     * @param RepositoryInterface $productRepository
      */
     public function __construct(
         FactoryInterface $articleFactory,
         FactoryInterface $articleImageFactory,
         RepositoryInterface $customerRepository,
-        TaxonRepositoryInterface $taxonRepository
+        TaxonRepositoryInterface $taxonRepository,
+        RepositoryInterface $productRepository
     )
     {
         $this->articleFactory = $articleFactory;
         $this->articleImageFactory = $articleImageFactory;
         $this->customerRepository = $customerRepository;
         $this->taxonRepository = $taxonRepository;
+        $this->productRepository = $productRepository;
 
         $this->faker = \Faker\Factory::create('fr_FR');
         $this->optionsResolver = new OptionsResolver();
@@ -98,6 +107,7 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
         $article->setStatus($options['status']);
         $article->setAuthor($options['author']);
         $article->setMainTaxon($options['main_taxon']);
+        $article->setProduct($options['product']);
 
         $this->createImage($article, $options);
 
@@ -167,6 +177,11 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
 
             ->setDefault('main_taxon', LazyOption::randomOne($this->taxonRepository))
             ->setAllowedTypes('main_taxon', ['null', 'string', TaxonInterface::class])
-            ->setNormalizer('main_taxon', LazyOption::findOneBy($this->taxonRepository, 'code'));
+            ->setNormalizer('main_taxon', LazyOption::findOneBy($this->taxonRepository, 'code'))
+
+            ->setDefault('product', LazyOption::randomOneOrNull($this->productRepository, 50))
+            ->setAllowedTypes('product', ['null', 'string', ProductInterface::class])
+            ->setNormalizer('product', LazyOption::findOneBy($this->productRepository, 'code'))
+            ;
     }
 }
