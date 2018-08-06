@@ -40,6 +40,7 @@ class ArticleFixture extends AbstractResourceFixture
                 ->scalarNode('main_taxon')->cannotBeEmpty()->end()
                 ->scalarNode('main_image')->cannotBeEmpty()->end()
                 ->scalarNode('author')->cannotBeEmpty()->end()
+                ->scalarNode('product')->cannotBeEmpty()->end()
         ;
     }
 }
