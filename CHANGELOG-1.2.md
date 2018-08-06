@@ -1,5 +1,10 @@
 ## Change Log
 
+### v1.2.3 (YYYY/MM/DD)
+- [#152](https://github.com/jedisjeux/jedisjeux/pull/152) Improve article fixtures add security fixes (@loic425)
+- [#150](https://github.com/jedisjeux/jedisjeux/pull/150) fix topic document factory (@loic425)
+- [#149](https://github.com/jedisjeux/jedisjeux/pull/149) fix creating topic with code null (@loic425)
+
 ### v1.2.2 (2018/07/30)
 - [#147](https://github.com/Jedisjeux/Jedisjeux/pull/147) Upgrading elastic search (@loic425)
 - [#146](https://github.com/Jedisjeux/Jedisjeux/pull/146) increase phpstan level (@loic425)
