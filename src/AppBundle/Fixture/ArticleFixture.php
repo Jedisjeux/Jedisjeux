@@ -41,6 +41,9 @@ class ArticleFixture extends AbstractResourceFixture
                 ->scalarNode('main_image')->cannotBeEmpty()->end()
                 ->scalarNode('author')->cannotBeEmpty()->end()
                 ->scalarNode('product')->cannotBeEmpty()->end()
+                ->scalarNode('material_rating')->cannotBeEmpty()->end()
+                ->scalarNode('rules_rating')->cannotBeEmpty()->end()
+                ->scalarNode('lifetime_rating')->cannotBeEmpty()->end()
         ;
     }
 }
