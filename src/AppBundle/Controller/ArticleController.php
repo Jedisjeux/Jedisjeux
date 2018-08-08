@@ -108,16 +108,7 @@ class ArticleController extends ResourceController
             throw new NotFoundHttpException('Requested taxon does not exist.');
         }
 
-        /** @var ArticleRepository $repository */
-        $repository = $this->repository;
-
-        $onlyPublic = !$this->getAuthorizationChecker()->isGranted('ROLE_STAFF');
-
-        $resources = $repository
-            ->createByTaxonPaginator($taxon, $request->get('criteria', $configuration->getCriteria()), $request->get('sorting', $configuration->getSorting()), $onlyPublic)
-            ->setMaxPerPage($configuration->getPaginationMaxPerPage())
-            ->setCurrentPage($request->get('page', 1));
-
+        $resources = $this->resourcesCollectionProvider->get($configuration, $this->repository);
         $view = View::create($resources);
 
         if ($configuration->isHtmlRequest()) {

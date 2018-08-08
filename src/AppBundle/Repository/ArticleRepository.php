@@ -79,10 +79,11 @@ class ArticleRepository extends EntityRepository
 
     /**
      * @param string $localeCode
+     * @param string|null $taxonSlug
      *
      * @return QueryBuilder
      */
-    public function createFrontendListQueryBuilder(string $localeCode): QueryBuilder
+    public function createFrontendListQueryBuilder(string $localeCode, string $taxonSlug = null): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('o');
 
@@ -96,6 +97,12 @@ class ArticleRepository extends EntityRepository
             ->leftJoin('mainTaxon.translations', 'taxonTranslation', Join::WITH, 'taxonTranslation.locale = :localeCode')
             ->setParameter('localeCode', $localeCode)
             ->setParameter('status', Article::STATUS_PUBLISHED);
+
+        if (null !== $taxonSlug) {
+            $queryBuilder
+                ->andWhere('taxonTranslation.slug = :taxonSlug')
+                ->setParameter('taxonSlug', $taxonSlug);
+        }
 
         return $queryBuilder;
     }
