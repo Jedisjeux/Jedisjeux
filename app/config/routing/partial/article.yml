@@ -6,10 +6,7 @@ app_partial_article_index:
         _sylius:
             template: $template
             paginate: $paginate
-            sortable: true
-            repository:
-                method: createFilterPaginator
-                arguments: [$criteria, $sorting]
+            grid: app_frontend_article
     requirements:
         template: "[^?]+"
 

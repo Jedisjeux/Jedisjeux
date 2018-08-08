@@ -1,5 +1,7 @@
 {% from 'macros/users.html.twig' import avatar %}
 
+{% set articles = articles.data is defined ? articles.data : articles %}
+
 <ul>
     {% for article in articles %}
         {% set meta %}
