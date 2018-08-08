@@ -6,8 +6,8 @@ sylius_grid:
                 options:
                     class: "%app.model.article.class%"
                     repository:
-                        method: createListQueryBuilder
-                        arguments: ["%locale%", $productId]
+                        method: createFrontendListQueryBuilder
+                        arguments: ["%locale%"]
             limits: ~
             sorting:
                 publishStartDate: desc

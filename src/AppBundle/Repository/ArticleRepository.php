@@ -54,11 +54,10 @@ class ArticleRepository extends EntityRepository
     /**
      * @param string $localeCode
      * @param null|int $productId
-     * @param string $status
      *
      * @return QueryBuilder
      */
-    public function createListQueryBuilder(string $localeCode, $productId, $status = Article::STATUS_PUBLISHED)
+    public function createListQueryBuilder(string $localeCode, $productId): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('mainImage')
@@ -75,11 +74,28 @@ class ArticleRepository extends EntityRepository
                 ->setParameter('productId', $productId);
         }
 
-        if (null !== $status) {
-            $queryBuilder
-                ->andWhere($queryBuilder->expr()->eq($this->getPropertyName('status'), ':status'))
-                ->setParameter('status', $status);
-        }
+        return $queryBuilder;
+    }
+
+    /**
+     * @param string $localeCode
+     *
+     * @return QueryBuilder
+     */
+    public function createFrontendListQueryBuilder(string $localeCode): QueryBuilder
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        $queryBuilder
+            ->addSelect('mainImage')
+            ->addSelect('mainTaxon')
+            ->addSelect('taxonTranslation')
+            ->andWhere($queryBuilder->expr()->eq($this->getPropertyName('status'), ':status'))
+            ->leftJoin('o.mainImage', 'mainImage')
+            ->leftJoin('o.mainTaxon', 'mainTaxon')
+            ->leftJoin('mainTaxon.translations', 'taxonTranslation', Join::WITH, 'taxonTranslation.locale = :localeCode')
+            ->setParameter('localeCode', $localeCode)
+            ->setParameter('status', Article::STATUS_PUBLISHED);
 
         return $queryBuilder;
     }
