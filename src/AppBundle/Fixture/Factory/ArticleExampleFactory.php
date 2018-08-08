@@ -108,6 +108,9 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
         $article->setAuthor($options['author']);
         $article->setMainTaxon($options['main_taxon']);
         $article->setProduct($options['product']);
+        $article->setMaterialRating($options['material_rating']);
+        $article->setRulesRating($options['rules_rating']);
+        $article->setLifetimeRating($options['lifetime_rating']);
 
         $this->createImage($article, $options);
 
@@ -182,6 +185,15 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setDefault('product', LazyOption::randomOneOrNull($this->productRepository, 50))
             ->setAllowedTypes('product', ['null', 'string', ProductInterface::class])
             ->setNormalizer('product', LazyOption::findOneBy($this->productRepository, 'code'))
+
+            ->setDefault('material_rating', 0)
+            ->setAllowedTypes('material_rating', ['int', 'float'])
+
+            ->setDefault('rules_rating', 0)
+            ->setAllowedTypes('rules_rating', ['int', 'float'])
+
+            ->setDefault('lifetime_rating', 0)
+            ->setAllowedTypes('lifetime_rating', ['int', 'float'])
             ;
     }
 }
