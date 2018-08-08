@@ -1,0 +1,27 @@
+sylius_grid:
+    grids:
+        app_frontend_article:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%app.model.article.class%"
+                    repository:
+                        method: createFrontendListQueryBuilder
+                        arguments: ["%locale%"]
+            limits: ~
+            sorting:
+                publishStartDate: desc
+            fields:
+                title:
+                    type: string
+                    label: sylius.ui.title
+                    sortable: ~
+                viewCount:
+                    type: int
+                    sortable: ~
+                topic.postCount:
+                    type: int
+                    path: topic.postCount
+                publishStartDate:
+                    type: date
+                    sortable: ~

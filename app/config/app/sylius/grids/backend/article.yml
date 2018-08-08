@@ -7,7 +7,7 @@ sylius_grid:
                     class: "%app.model.article.class%"
                     repository:
                         method: createListQueryBuilder
-                        arguments: [$productId]
+                        arguments: ["%locale%", $productId]
             sorting:
                 createdAt: desc
             fields:

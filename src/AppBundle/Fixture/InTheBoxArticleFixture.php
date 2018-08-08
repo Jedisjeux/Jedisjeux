@@ -86,7 +86,7 @@ class InTheBoxArticleFixture extends AbstractFixture
 
         for ($i = 0; $i < $options['amount']; ++$i) {
             $articles[] = [
-                'main_taxon' => 'news',
+                'main_taxon' => 'in-the-boxes',
             ];
         }
 

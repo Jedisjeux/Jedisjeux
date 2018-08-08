@@ -101,7 +101,7 @@ class ReviewArticleFixture extends AbstractFixture
 
             $articles[] = [
                 'code' => $articleCode,
-                'main_taxon' => 'news',
+                'main_taxon' => 'review-articles',
                 'material_rating' => $this->faker->numberBetween(1, 5),
                 'rules_rating' => $this->faker->numberBetween(1, 5),
                 'lifetime_rating' => $this->faker->numberBetween(1, 5),
