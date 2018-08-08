@@ -77,6 +77,8 @@ class NewsArticleFixture extends AbstractFixture
                     [
                         'code' => 'news',
                         'name' => 'News',
+                        'icon_class' => 'fa fa-newspaper-o bg-purple',
+                        'color' => 'purple',
                     ],
                 ],
             ],

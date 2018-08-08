@@ -102,6 +102,8 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $taxon->setName($options['name']);
         $taxon->setDescription($options['description']);
         $taxon->setPublic($options['public']);
+        $taxon->setIconClass($options['icon_class']);
+        $taxon->setColor($options['color']);
 
         $taxon->setParent($options['parent']);
 
@@ -138,6 +140,10 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
                 return $this->faker->boolean(90);
             })
             ->setAllowedTypes('public', 'bool')
+
+            ->setDefault('icon_class', null)
+
+            ->setDefault('color', null)
 
             ->setDefault('parent', null)
             ->setAllowedTypes('parent', ['null', 'string', TaxonInterface::class])
