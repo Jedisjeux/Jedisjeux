@@ -7,12 +7,9 @@ app_frontend_article_index:
     defaults:
         _controller: app.controller.article:indexWithTaxonsAction
         _sylius:
+            grid: app_frontend_article
             paginate: 16
-            repository:
-                method: createFilterPaginator
-                arguments:
-                  - $criteria
-                  - $sorting
+
             template: frontend/article/index.html.twig
             sorting:
                 publishStartDate: desc

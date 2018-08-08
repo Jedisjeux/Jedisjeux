@@ -3,6 +3,7 @@
 namespace AppBundle\Repository;
 
 use AppBundle\Entity\Article;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
@@ -51,20 +52,33 @@ class ArticleRepository extends EntityRepository
     }
 
     /**
+     * @param string $localeCode
      * @param null|int $productId
+     * @param string $status
      *
      * @return QueryBuilder
      */
-    public function createListQueryBuilder($productId = null)
+    public function createListQueryBuilder(string $localeCode, $productId, $status = Article::STATUS_PUBLISHED)
     {
         $queryBuilder = $this->createQueryBuilder('o')
-            ->leftJoin('o.product', 'product')
-            ->leftJoin('o.mainTaxon', 'mainTaxon');
+            ->addSelect('mainImage')
+            ->addSelect('mainTaxon')
+            ->addSelect('taxonTranslation')
+            ->leftJoin('o.mainImage', 'mainImage')
+            ->leftJoin('o.mainTaxon', 'mainTaxon')
+            ->leftJoin('mainTaxon.translations', 'taxonTranslation', Join::WITH, 'taxonTranslation.locale = :localeCode')
+            ->setParameter('localeCode', $localeCode);
 
         if (null !== $productId) {
             $queryBuilder
-                ->andWhere('product = :productId')
+                ->andWhere('o.product = :productId')
                 ->setParameter('productId', $productId);
+        }
+
+        if (null !== $status) {
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->eq($this->getPropertyName('status'), ':status'))
+                ->setParameter('status', $status);
         }
 
         return $queryBuilder;
