@@ -233,7 +233,14 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
                 return implode("\n", $materialList);
             })
             ->setDefault('images', function (Options $options) {
-                return [$this->faker->image()];
+
+                $image = $this->faker->image();
+
+                if (!$image) {
+                    return [];
+                }
+
+                return [$image];
             })
 
             ->setDefault('designers', LazyOption::randomOnes($this->personRepository, 2))

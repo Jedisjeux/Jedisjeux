@@ -133,7 +133,13 @@ class PersonExampleFactory extends AbstractExampleFactory implements ExampleFact
             })
 
             ->setDefault('images', function (Options $options) {
-                return [$this->faker->image(null, 640, 480, 'people')];
+                $image = $this->faker->image(null, 640, 480, 'people');
+
+                if (!$image) {
+                    return [];
+                }
+
+                return [$image];
             })
             ->setAllowedTypes('images', 'array');
     }
