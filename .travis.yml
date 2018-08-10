@@ -7,13 +7,14 @@ env:
         - JEDISJEUX_CACHE_DIR=$HOME/.jedisjeux-cache
         - JEDISJEUX_BUILD_DIR=etc/build
 
+services:
+    - elasticsearch
+
 jdk:
     - oraclejdk8
 
 addons:
     apt:
-        sources:
-            - elasticsearch-6.x
         packages:
             - elasticsearch
             - oracle-java8-set-default
