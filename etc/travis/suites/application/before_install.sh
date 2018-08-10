@@ -7,7 +7,7 @@ print_header "Activating memcached extension" "Jedisjeux"
 run_command "echo \"extension = memcached.so\" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini" || exit $?
 
 print_header "Installing elasticsearch" "Jedisjeux"
-run_command "curl -O https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.3.deb && sudo dpkg -i --force-confnew elasticsearch-1.7.3.deb && sudo service elasticsearch restart"
+run_command "curl -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.1.1.deb && sudo dpkg -i --force-confnew elasticsearch-5.1.1.deb && sudo service elasticsearch restart"
 run_command "sleep 10"
 
 print_header "Updating Composer" "Jedisjeux"
