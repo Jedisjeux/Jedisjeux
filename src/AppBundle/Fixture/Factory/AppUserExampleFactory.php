@@ -79,7 +79,10 @@ class AppUserExampleFactory extends AbstractExampleFactory implements ExampleFac
         $customer->setEmail($options['email']);
         $customer->setFirstName($options['first_name']);
         $customer->setLastName($options['last_name']);
-        $this->createAvatar($customer, $options);
+
+        if (null !== $options['avatar']) {
+            $this->createAvatar($customer, $options);
+        }
 
         /** @var User $user */
         $user = $this->userFactory->createNew();
@@ -138,7 +141,13 @@ class AppUserExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setDefault('roles', [])
             ->setAllowedTypes('roles', 'array')
             ->setDefault('avatar', function (Options $options) {
-                return $this->faker->image(null, 640, 480, 'people');
+                $image = $this->faker->image(null, 640, 480, 'people');
+
+                if (!$image) {
+                    return 'https://picsum.photos/640/480/?random';
+                }
+
+                return $image;
             })
         ;
     }

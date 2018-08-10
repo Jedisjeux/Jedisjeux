@@ -71,7 +71,13 @@ class GamePlayImageExampleFactory extends AbstractExampleFactory implements Exam
     {
         $resolver
             ->setDefault('image', function (Options $options) {
-                return $this->faker->image();
+                $image = $this->faker->image();
+
+                if (!$image) {
+                    return 'https://picsum.photos/640/480/?random';
+                }
+
+                return $image;
             })
 
             ->setDefault('description', function (Options $options) {

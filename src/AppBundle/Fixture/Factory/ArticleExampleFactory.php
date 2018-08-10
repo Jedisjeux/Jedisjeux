@@ -112,7 +112,9 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
         $article->setRulesRating($options['rules_rating']);
         $article->setLifetimeRating($options['lifetime_rating']);
 
-        $this->createImage($article, $options);
+        if (null !== $options['main_image']) {
+            $this->createImage($article, $options);
+        }
 
         return $article;
     }
@@ -171,7 +173,13 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
             })
 
             ->setDefault('main_image', function (Options $options) {
-                return $this->faker->image();
+                $image = $this->faker->image();
+
+                if (!$image) {
+                    return 'https://picsum.photos/640/480/?random';
+                }
+
+                return $image;
             })
 
             ->setDefault('author', LazyOption::randomOne($this->customerRepository))
