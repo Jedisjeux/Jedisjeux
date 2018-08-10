@@ -144,7 +144,7 @@ class AppUserExampleFactory extends AbstractExampleFactory implements ExampleFac
                 $image = $this->faker->image(null, 640, 480, 'people');
 
                 if (!$image) {
-                    return null;
+                    return 'https://picsum.photos/640/480/?random';
                 }
 
                 return $image;

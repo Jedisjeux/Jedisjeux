@@ -85,7 +85,9 @@ class BlockExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $block->setImagePosition($options['image_position']);
         $block->setArticle($options['article']);
 
-        $this->createImage($block, $options);
+        if (null !== $options['image']) {
+            $this->createImage($block, $options);
+        }
 
         return $block;
     }
@@ -119,7 +121,13 @@ class BlockExampleFactory extends AbstractExampleFactory implements ExampleFacto
             })
 
             ->setDefault('image', function (Options $options) {
-                return $this->faker->image();
+                $image = $this->faker->image();
+
+                if (!$image) {
+                    return 'https://picsum.photos/640/480/?random';
+                }
+
+                return $image;
             })
 
             ->setDefault('image_position', function (Options $options) {

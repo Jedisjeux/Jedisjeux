@@ -176,7 +176,7 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
                 $image = $this->faker->image();
 
                 if (!$image) {
-                    return null;
+                    return 'https://picsum.photos/640/480/?random';
                 }
 
                 return $image;

@@ -72,7 +72,9 @@ class DealerExampleFactory extends AbstractExampleFactory implements ExampleFact
         $dealer->setCode($options['code']);
         $dealer->setName($options['name']);
 
-        $this->createImage($dealer, $options);
+        if (null !== $options['image']) {
+            $this->createImage($dealer, $options);
+        }
 
         return $dealer;
     }
@@ -108,7 +110,13 @@ class DealerExampleFactory extends AbstractExampleFactory implements ExampleFact
             })
 
             ->setDefault('image', function (Options $options) {
-                return $this->faker->image();
+                $image = $this->faker->image();
+
+                if (!$image) {
+                    return 'https://picsum.photos/640/480/?random';
+                }
+
+                return $image;
             });
     }
 }
