@@ -7,18 +7,6 @@ env:
         - JEDISJEUX_CACHE_DIR=$HOME/.jedisjeux-cache
         - JEDISJEUX_BUILD_DIR=etc/build
 
-services:
-    - elasticsearch
-
-jdk:
-    - oraclejdk9
-
-addons:
-    apt:
-        packages:
-            - elasticsearch
-            - oracle-java8-set-default
-
 matrix:
     include:
         -
@@ -29,6 +17,14 @@ matrix:
                 - TRAVIS_NODE_VERSION="7.5"
             services:
                 - memcached
+                - elasticsearch
+            addons:
+                apt:
+                    sources:
+                        - elasticsearch-5.x
+                    packages:
+                        - elasticsearch
+                        - oracle-java9-set-default
         -
             sudo: false
             php: 7.1
