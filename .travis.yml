@@ -11,7 +11,7 @@ services:
     - elasticsearch
 
 jdk:
-    - oraclejdk8
+    - oraclejdk9
 
 addons:
     apt:
