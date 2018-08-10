@@ -60,6 +60,7 @@ app:
         game_plays: Parties de jeu
         game_play_details: Informations de la partie
         height: Hauteur
+        icon_class: Classe de l'icône
         image_legend: Légende de l'image
         image_on_the_left_side: Image à gauche
         image_on_the_right_side: Image à droite

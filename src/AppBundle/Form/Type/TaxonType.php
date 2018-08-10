@@ -11,11 +11,10 @@
 
 namespace AppBundle\Form\Type;
 
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType as BaseTaxonType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -37,6 +36,14 @@ class TaxonType extends AbstractType
                     'label.yes' => true,
                     'label.no' => false,
                 ),
+            ))
+            ->add('iconClass', TextType::class, array(
+                'label' => 'app.ui.icon_class',
+                'required' => false,
+            ))
+            ->add('color', TextType::class, array(
+                'label' => 'sylius.ui.color',
+                'required' => false,
             ));
     }
 
