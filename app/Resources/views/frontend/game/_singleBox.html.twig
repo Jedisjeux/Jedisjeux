@@ -2,6 +2,8 @@
 
 {% set product = product is defined ? product : resource %}
 {% set productHref = path('sylius_frontend_product_show', {'slug': product.slug}) %}
+{% set color = null %}
+{% set icon = null %}
 
 <!-- Image Box #4 Item -->
 <div class="img-box-4-item portfolio">
@@ -28,11 +30,11 @@
     <!-- Image Box #4 Content -->
     <div class="img-box-4-content">
         <!-- Icon -->
-        <a href="#">
-            {% if color is defined %}
-                <i style="z-index: 10;" class="{{ icon }} bg-{{ color }}"></i>
-            {% endif %}
-        </a>
+        {% if icon is not null and product.mainTaxon is not null %}
+            <a href="{{ path('sylius_frontend_product_index_by_taxon', {'slug': product.mainTaxon.slug}) }}">
+                <i style="z-index: 10;" class="{{ icon }} bg-{{ color|default('color') }}"></i>
+            </a>
+        {% endif %}
         <!-- Heading -->
         <h4><a href="{{ productHref }}">{{ product }}</a></h4>
         <!-- Border -->
