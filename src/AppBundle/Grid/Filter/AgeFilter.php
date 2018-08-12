@@ -24,10 +24,10 @@ class AgeFilter implements FilterInterface
      */
     public function apply(DataSourceInterface $dataSource, string $name, $data, array $options = []): void
     {
-        if (empty($data['value'])) {
+        if (empty($data['value']) || empty($data['product_alias'])) {
             return;
         }
 
-        $dataSource->restrict($dataSource->getExpressionBuilder()->lessThanOrEqual('product.minAge', $data['value']));
+        $dataSource->restrict($dataSource->getExpressionBuilder()->lessThanOrEqual($data['product_alias'] . '.minAge', $data['value']));
     }
 }

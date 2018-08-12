@@ -25,3 +25,10 @@ sylius_grid:
                     path: variant.releasedAt
                     type: string
                     sortable: ~
+            filters:
+                playerCount:
+                    type: player_count
+                age:
+                    type: age
+                duration:
+                    type: duration
