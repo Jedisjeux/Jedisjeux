@@ -7,7 +7,9 @@ sylius_grid:
                     class: "%app.model.article.class%"
                     repository:
                         method: createFrontendListQueryBuilder
-                        arguments: ["%locale%"]
+                        arguments:
+                            locale: "%locale%"
+                            taxonSlug: $slug
             limits: ~
             sorting:
                 publishStartDate: desc

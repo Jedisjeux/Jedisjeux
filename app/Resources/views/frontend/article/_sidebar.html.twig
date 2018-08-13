@@ -1,5 +1,7 @@
 {% from 'macros/taxons.html.twig' import sidebarList %}
 
+{% set partial_article_index = taxon is defined ? 'app_partial_article_index_by_taxon' : 'app_partial_article_index' %}
+
 <!-- Sidebar -->
 <div class="sidebar">
     {% for rootTaxon in rootTaxons %}
@@ -33,11 +35,8 @@
                 <div class="tab-content">
                     <!-- Popular posts -->
                     <div class="tab-pane fade in active" id="popular">
-                        {{ render(url('app_partial_article_index', {
-                            'criteria': {
-                                'status': 'published',
-                                'mainTaxon': taxon is defined ? taxon.id : null
-                            },
+                        {{ render(url(partial_article_index, {
+                            'slug': taxon is defined ? taxon.slug : null,
                             'sorting': {
                                 'topic.postCount': 'desc'
                             },
@@ -47,11 +46,8 @@
                     </div>
                     <!-- Recent posts -->
                     <div class="tab-pane fade" id="recent">
-                        {{ render(url('app_partial_article_index', {
-                            'criteria': {
-                                'status': 'published',
-                                'mainTaxon': taxon is defined ? taxon.id : null
-                            },
+                        {{ render(url(partial_article_index, {
+                            'slug': taxon is defined ? taxon.slug : null,
                             'sorting': {
                                 'publishStartDate': 'desc'
                             },
