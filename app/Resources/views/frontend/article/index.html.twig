@@ -4,7 +4,6 @@
 {% from 'macros/sorting.html.twig' import sorting %}
 
 {% set pageTitle = 'app.ui.articles'|trans %}
-{% set articles = articles.data is defined ? articles.data : articles %}
 
 {% block breadcrumb_content %}
     {{ parent() }}
@@ -42,10 +41,10 @@
         <div class="clearfix"></div>
 
         <div id="article-list">
-            {% include 'frontend/article/index/_list-4.html.twig' %}
+            {% include 'frontend/article/index/_list-4.html.twig' with { 'articles': articles.data } only %}
         </div>
 
-        {{ pagination(articles) }}
+        {{ pagination(articles.data) }}
 
     </div>
     <div class="col-md-3">
