@@ -18,7 +18,9 @@
     <!-- Magazine item one starts -->
     <div class="magazine-item mag-1">
         <!-- Image -->
-        {{ image(imagePath, imageFilter, imageLabel, imageClass, linkUrl) }}
+        {% if (imagePath) %}
+            {{ image(imagePath, imageFilter, imageLabel, imageClass, linkUrl) }}
+        {% endif %}
         <!-- Heading -->
         <h4><a href="{{ linkUrl }}">{{ title }}</a></h4>
         <!-- Meta -->

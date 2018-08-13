@@ -10,7 +10,7 @@
 
     {% set imageFilter = imageFilter|default('magazine_item_wide') %}
 
-    {{ item.magazineItemOne(article.mainImage ? article.mainImage.webPath : null, article.title, imageFilter, 'img-responsive', path('app_frontend_article_show', {'slug': article.slug}), article.title, body, meta) }}
+    {{ item.magazineItemOne(article.mainImage ? article.mainImage.webPath : '/assets/frontend/img/placeholder.png', article.title, imageFilter, 'img-responsive', path('app_frontend_article_show', {'slug': article.slug}), article.title, body, meta) }}
 
 {% endmacro %}
 
