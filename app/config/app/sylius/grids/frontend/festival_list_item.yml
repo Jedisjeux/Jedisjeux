@@ -23,11 +23,17 @@ sylius_grid:
                     type: player_count
                     form_options:
                         product_alias: product
-                age:
-                    type: age
+                minAge:
+                    type: less_than_or_equal
+                    options:
+                        field: product.minAge
                     form_options:
-                        product_alias: product
-                duration:
-                    type: duration
+                        label: 'app.ui.age'
+                        placeholder: 'Pouvant être joué à (en année)'
+                minDuration:
+                    type: less_than_or_equal
+                    options:
+                        field: product.minDuration
                     form_options:
-                        product_alias: product
+                        label: 'app.ui.duration'
+                        placeholder: 'Durée inférieure à (en minute)'
