@@ -5,28 +5,20 @@ services:
             -
                 name: ongr_filter_manager.filter
                 type: app_elastic_search.custom_pager
-
-    app.grid.filter.age:
-        class: AppBundle\Grid\Filter\AgeFilter
+    app.grid.filter.between_two_fields:
+        class: AppBundle\Grid\Filter\BetweenTwoFieldsFilter
         tags:
             -
                 name: sylius.grid_filter
-                type: age
-                form_type: AppBundle\Form\Filter\AgeFilterType
-    app.grid.filter.duration:
-        class: AppBundle\Grid\Filter\DurationFilter
+                type: between_two_fields
+                form_type: AppBundle\Form\Filter\IntegerFilterType
+    app.grid.filter.less_than_or_equal:
+        class: AppBundle\Grid\Filter\LessThanOrEqualFilter
         tags:
             -
                 name: sylius.grid_filter
-                type: duration
-                form_type: AppBundle\Form\Filter\DurationFilterType
-    app.grid.filter.player_count:
-        class: AppBundle\Grid\Filter\PlayerCountFilter
-        tags:
-            -
-                name: sylius.grid_filter
-                type: player_count
-                form_type: AppBundle\Form\Filter\PlayerCountFilterType
+                type: less_than_or_equal
+                form_type: AppBundle\Form\Filter\IntegerFilterType
     app.grid.filter.status:
         class: AppBundle\Grid\Filter\StatusFilter
         tags:

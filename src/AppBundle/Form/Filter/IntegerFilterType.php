@@ -1,7 +1,6 @@
 <?php
-
-/**
- * This file is part of Jedisjeux
+/*
+ * This file is part of Jedisjeux.
  *
  * (c) Loïc Frémont
  *
@@ -12,15 +11,11 @@
 namespace AppBundle\Form\Filter;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
-class PlayerCountFilterType extends AbstractType
+class IntegerFilterType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -32,14 +27,10 @@ class PlayerCountFilterType extends AbstractType
                 'value',
                 IntegerType::class,
                 [
-                    'label' => 'app.ui.player_count',
-                ]
-            )->add(
-                'product_alias',
-                HiddenType::class,
-                [
-                    'mapped' => false,
-                    'empty_data' => $options['product_alias'],
+                    'label' => $options['label'],
+                    'attr' => [
+                        'placeholder' => $options['placeholder'],
+                    ],
                 ]
             );
     }
@@ -50,7 +41,8 @@ class PlayerCountFilterType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'product_alias' => 'o',
+            'label' => 'sylius.ui.value',
+            'placeholder' => null,
         ]);
     }
 }

@@ -27,8 +27,20 @@ sylius_grid:
                     sortable: ~
             filters:
                 playerCount:
-                    type: player_count
-                age:
-                    type: age
-                duration:
-                    type: duration
+                    type: between_two_fields
+                    options:
+                        fields:
+                            first: minPlayerCount
+                            second: maxPlayerCount
+                    form_options:
+                        label: 'app.ui.player_count'
+                minAge:
+                    type: less_than_or_equal
+                    form_options:
+                        label: 'app.ui.age'
+                        placeholder: 'Pouvant être joué à (en année)'
+                minDuration:
+                    type: less_than_or_equal
+                    form_options:
+                        label: 'app.ui.duration'
+                        placeholder: 'Durée inférieure à (en minute)'
