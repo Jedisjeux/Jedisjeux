@@ -11,6 +11,7 @@
 
 namespace AppBundle\Fixture;
 
+use AppBundle\Entity\Taxon;
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -91,20 +92,48 @@ class GameProductFixture extends AbstractFixture
             ]
         ];
 
+        $targetAudiences = [
+            Taxon::CODE_CHILD => [
+                'code' => Taxon::CODE_CHILD,
+                'name' => 'Child',
+                'icon_class' => 'fa fa-child',
+                'color' => 'lblue',
+            ],
+            Taxon::CODE_BEGINNER => [
+                'code' => Taxon::CODE_BEGINNER,
+                'name' => 'Beginner',
+                'icon_class' => 'fa fa-user',
+                'color' => 'green',
+            ],
+            Taxon::CODE_ADVANCED_USER => [
+                'code' => Taxon::CODE_ADVANCED_USER,
+                'name' => 'Advanced user',
+                'icon_class' => 'fa fa-user-plus',
+                'color' => 'purple',
+            ],
+            Taxon::CODE_EXPERT => [
+                'code' => Taxon::CODE_EXPERT,
+                'name' => 'Expert',
+                'icon_class' => 'fa fa-star',
+                'color' => 'red',
+            ],
+        ];
+
         $this->taxonFixture->load(['custom' => [
             [
-                'code' => 'themes',
+                'code' => Taxon::CODE_THEME,
                 'name' => 'Themes',
                 'children' => $themes,
             ],
             [
-                'code' => 'mechanisms',
+                'code' => Taxon::CODE_MECHANISM,
                 'name' => 'Mechanisms',
                 'children' => $mechanisms,
             ],
             [
-                'code' => 'target-audience',
+                'code' => Taxon::CODE_TARGET_AUDIENCE,
                 'name' => 'Target audiences',
+                'children' => $targetAudiences,
             ],
         ]]);
 
@@ -114,6 +143,7 @@ class GameProductFixture extends AbstractFixture
             $products[] = [
                 'mechanisms' => [$this->faker->randomKey($mechanisms)],
                 'themes' => [$this->faker->randomKey($themes)],
+                'main_taxon' => $this->faker->randomKey($targetAudiences),
             ];
         }
 

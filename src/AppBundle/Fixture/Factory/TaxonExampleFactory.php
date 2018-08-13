@@ -139,6 +139,9 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
             })
             ->setAllowedTypes('public', 'bool')
 
+            ->setDefault('icon_class', null)
+            ->setDefault('color', null)
+
             ->setDefault('parent', null)
             ->setAllowedTypes('parent', ['null', 'string', TaxonInterface::class])
             ->setNormalizer('parent', LazyOption::findOneBy($this->taxonRepository, 'code'))

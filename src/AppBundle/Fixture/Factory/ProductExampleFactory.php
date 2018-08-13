@@ -113,6 +113,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         $product->setStatus($options['status']);
         $product->setReleasedAt($options['released_at']);
         $product->setCreatedAt($options['created_at']);
+        $product->setMainTaxon($options['main_taxon']);
 
         $firstVariant = $product->getFirstVariant();
         $firstVariant->setCode($product->getCode());
@@ -242,6 +243,10 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
 
                 return [$image];
             })
+
+            ->setDefault('main_taxon', null)
+            ->setAllowedTypes('main_taxon', ['null', 'string'])
+            ->setNormalizer('main_taxon', LazyOption::findOneBy($this->taxonRepository, 'code'))
 
             ->setDefault('designers', LazyOption::randomOnes($this->personRepository, 2))
             ->setAllowedTypes('designers', 'array')
