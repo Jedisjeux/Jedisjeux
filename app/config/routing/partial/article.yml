@@ -10,6 +10,16 @@ app_partial_article_index:
     requirements:
         template: "[^?]+"
 
+app_partial_article_status_show:
+    methods: [GET]
+    path: /articles/{id}/status
+    defaults:
+        _controller: app.controller.article:showStatusAction
+        _sylius:
+            template: $template
+    requirements:
+        template: "[^?]+"
+
 app_partial_article_index_by_taxon:
     methods: [GET]
     path: /articles/{slug}
@@ -20,13 +30,3 @@ app_partial_article_index_by_taxon:
             template: $template
     requirements:
         slug: "[^?]+"
-
-app_partial_article_status_show:
-    methods: [GET]
-    path: /articles/{id}/status
-    defaults:
-        _controller: app.controller.article:showStatusAction
-        _sylius:
-            template: $template
-    requirements:
-        template: "[^?]+"
