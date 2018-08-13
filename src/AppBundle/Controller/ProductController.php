@@ -71,13 +71,7 @@ class ProductController extends ResourceController
             throw new NotFoundHttpException('Requested taxon does not exist.');
         }
 
-        /** @var ProductRepository $repository */
-        $repository = $this->repository;
-
-        $resources = $repository
-            ->createByTaxonPaginator($taxon, $request->get('criteria', $configuration->getCriteria()), $request->get('sorting', $configuration->getSorting()))
-            ->setMaxPerPage($configuration->getPaginationMaxPerPage())
-            ->setCurrentPage($request->get('page', 1));
+        $resources = $this->resourcesCollectionProvider->get($configuration, $this->repository);
 
         $view = View::create($resources);
 

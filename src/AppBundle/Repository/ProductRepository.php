@@ -27,10 +27,11 @@ class ProductRepository extends BaseProductRepository
      * @param $localeCode
      * @param bool $onlyPublished
      * @param array $criteria
+     * @param TaxonInterface|null $taxon
      *
      * @return QueryBuilder
      */
-    public function createListQueryBuilder($localeCode, $onlyPublished=true, array $criteria = [])
+    public function createListQueryBuilder($localeCode, $onlyPublished=true, array $criteria = [], TaxonInterface $taxon = null)
     {
         $queryBuilder = $this->createQueryBuilder('o');
 
@@ -51,6 +52,20 @@ class ProductRepository extends BaseProductRepository
             $queryBuilder
                 ->andWhere('o.status = :published')
                 ->setParameter('published', Product::PUBLISHED);
+        }
+
+        if (null !== $taxon) {
+            $queryBuilder
+                ->innerJoin('o.taxons', 'taxon')
+                ->andWhere($queryBuilder->expr()->orX(
+                    'taxon = :taxon',
+                    'o.mainTaxon = :taxon',
+                    ':left < taxon.left AND taxon.right < :right'
+                ))
+                ->addGroupBy('o.id')
+                ->setParameter('taxon', $taxon)
+                ->setParameter('left', $taxon->getLeft())
+                ->setParameter('right', $taxon->getRight());
         }
 
         if (!empty($criteria['releasedAtFrom'])) {
