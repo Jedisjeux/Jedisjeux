@@ -55,7 +55,8 @@ class ProductRepository extends BaseProductRepository
 
         if (null !== $taxon) {
             $queryBuilder
-                ->innerJoin('o.taxons', 'taxon')
+                ->distinct()
+                ->leftJoin('o.taxons', 'taxon')
                 ->andWhere($queryBuilder->expr()->orX(
                     'taxon = :taxon',
                     'o.mainTaxon = :taxon',
@@ -82,6 +83,7 @@ class ProductRepository extends BaseProductRepository
 
         if (!empty($criteria['person'])) {
             $queryBuilder
+                ->distinct()
                 ->leftJoin('variant.designers', 'designer')
                 ->leftJoin('variant.artists', 'artist')
                 ->leftJoin('variant.publishers', 'publisher')
@@ -213,26 +215,28 @@ class ProductRepository extends BaseProductRepository
      *
      * @param TaxonInterface $taxon
      *
-     * @return Pagerfanta
+     * @return int
      */
-    public function countByTaxon(TaxonInterface $taxon)
+    public function countByTaxon(TaxonInterface $taxon): int
     {
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder
-            ->select('count(o)')
+            ->select('count(distinct o)')
             ->leftJoin('o.mainTaxon', 'mainTaxon')
             ->leftJoin('o.taxons', 'taxon')
+            ->andWhere($queryBuilder->expr()->eq($this->getPropertyName('status'), ':published'))
             ->andWhere($queryBuilder->expr()->orX(
                 'mainTaxon = :taxon',
                 ':left < mainTaxon.left AND mainTaxon.right < :right',
                 'taxon = :taxon',
                 ':left < taxon.left AND taxon.right < :right'
             ))
+            ->setParameter('published', Product::PUBLISHED)
             ->setParameter('taxon', $taxon)
             ->setParameter('left', $taxon->getLeft())
             ->setParameter('right', $taxon->getRight());
 
-        return $queryBuilder->getQuery()->getSingleScalarResult();
+        return (int) $queryBuilder->getQuery()->getSingleScalarResult();
     }
 
     /**
