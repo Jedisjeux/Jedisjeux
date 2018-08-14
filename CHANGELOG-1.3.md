@@ -1,5 +1,9 @@
 ## Change Log
 
+### v1.3.1 (2018/08/14)
+- [#169](https://github.com/Jedisjeux/Jedisjeux/pull/169) [Fixtures] get random images from directory (@loic425)
+- [#168](https://github.com/Jedisjeux/Jedisjeux/pull/168) fix show filters on product list from taxon (@loic425)
+
 ### v1.3.0 (2018/08/13)
 - [#166](https://github.com/Jedisjeux/Jedisjeux/pull/166) fix macro items (@loic425)
 - [#157](https://github.com/Jedisjeux/Jedisjeux/pull/157) use article grid on frontend including partials (@loic425)
