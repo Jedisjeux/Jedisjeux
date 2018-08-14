@@ -58,13 +58,15 @@ class ProductRepository extends BaseProductRepository
                 ->distinct()
                 ->leftJoin('o.taxons', 'taxon')
                 ->andWhere($queryBuilder->expr()->orX(
+                    'mainTaxon = :taxon',
+                    ':left < mainTaxon.left AND mainTaxon.right < :right AND mainTaxon.root = :root',
                     'taxon = :taxon',
-                    'o.mainTaxon = :taxon',
-                    ':left < taxon.left AND taxon.right < :right'
+                    ':left < taxon.left AND taxon.right < :right AND taxon.root = :root'
                 ))
                 ->setParameter('taxon', $taxon)
                 ->setParameter('left', $taxon->getLeft())
-                ->setParameter('right', $taxon->getRight());
+                ->setParameter('right', $taxon->getRight())
+                ->setParameter('root', $taxon->getRoot());
         }
 
         if (!empty($criteria['releasedAtFrom'])) {
@@ -227,14 +229,15 @@ class ProductRepository extends BaseProductRepository
             ->andWhere($queryBuilder->expr()->eq($this->getPropertyName('status'), ':published'))
             ->andWhere($queryBuilder->expr()->orX(
                 'mainTaxon = :taxon',
-                ':left < mainTaxon.left AND mainTaxon.right < :right',
+                ':left < mainTaxon.left AND mainTaxon.right < :right AND mainTaxon.root = :root',
                 'taxon = :taxon',
-                ':left < taxon.left AND taxon.right < :right'
+                ':left < taxon.left AND taxon.right < :right AND taxon.root = :root'
             ))
             ->setParameter('published', Product::PUBLISHED)
             ->setParameter('taxon', $taxon)
             ->setParameter('left', $taxon->getLeft())
-            ->setParameter('right', $taxon->getRight());
+            ->setParameter('right', $taxon->getRight())
+            ->setParameter('root', $taxon->getRoot());
 
         return (int) $queryBuilder->getQuery()->getSingleScalarResult();
     }

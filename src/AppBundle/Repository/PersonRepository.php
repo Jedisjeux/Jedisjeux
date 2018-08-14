@@ -43,11 +43,12 @@ class PersonRepository extends EntityRepository
                 ->innerJoin('o.taxons', 'taxon')
                 ->andWhere($queryBuilder->expr()->orX(
                     'taxon = :taxon',
-                    ':left < taxon.left AND taxon.right < :right'
+                    ':left < taxon.left AND taxon.right < :right AND taxon.root = :root'
                 ))
                 ->setParameter('taxon', $taxon)
                 ->setParameter('left', $taxon->getLeft())
-                ->setParameter('right', $taxon->getRight());
+                ->setParameter('right', $taxon->getRight())
+                ->setParameter('root', $taxon->getRoot());
         }
 
         return $queryBuilder;
@@ -145,11 +146,12 @@ class PersonRepository extends EntityRepository
             ->innerJoin('o.taxons', 'taxon')
             ->andWhere($queryBuilder->expr()->orX(
                 'taxon = :taxon',
-                ':left < taxon.left AND taxon.right < :right'
+                ':left < taxon.left AND taxon.right < :right AND taxon.root = :root'
             ))
             ->setParameter('taxon', $taxon)
             ->setParameter('left', $taxon->getLeft())
-            ->setParameter('right', $taxon->getRight());
+            ->setParameter('right', $taxon->getRight())
+            ->setParameter('root', $taxon->getRoot());
 
         $this->applyCriteria($queryBuilder, $criteria);
         $this->applySorting($queryBuilder, $sorting);
