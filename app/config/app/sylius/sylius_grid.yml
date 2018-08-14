@@ -35,6 +35,7 @@ imports:
     - { resource: 'grids/frontend/person.yml' }
     - { resource: 'grids/frontend/person_from_taxon.yml' }
     - { resource: 'grids/frontend/product.yml' }
+    - { resource: 'grids/frontend/product_from_taxon.yml' }
     - { resource: 'grids/frontend/product_list_item.yml' }
     - { resource: 'grids/frontend/user_game_library.yml' }
 

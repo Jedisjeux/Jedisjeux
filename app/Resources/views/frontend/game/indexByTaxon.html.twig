@@ -18,13 +18,16 @@
 {% endblock %}
 
 {% block body -%}
-    <div class="col-md-9">
 
+    {% if taxon.description %}
+        {{ blockquoteOne(taxon.description) }}
+    {% endif %}
+
+    {% include 'frontend/grid/_filters.html.twig' %}
+    <div class="col-md-9">
         <div class="container">
 
-            {% if taxon.description %}
-                {{ blockquoteOne(taxon.description) }}
-            {% endif %}
+
 
             <div class="pull-right sorting">
                 {% set sorting = app.request.get('sorting') %}
@@ -41,15 +44,13 @@
                 par {{ sorting('sylius_frontend_product_index_by_taxon', 'label.created_at'|trans, 'createdAt', 'desc', icon, currentOrder, {'slug': taxon.slug}) }}
                 ,
                 par {{ sorting('sylius_frontend_product_index_by_taxon', 'label.rate'|trans, 'averageRating', 'desc', null, null, {'slug': taxon.slug}) }}
-                ,
-                {{ sorting('sylius_frontend_product_index_by_taxon', 'label.name'|trans, 'translation.name', 'asc', null, null, {'slug': taxon.slug} ) }}
             </div>
 
-            {% include "frontend/game/index/list-4.html.twig" %}
+            {% include "frontend/game/index/list-4.html.twig" with {'products': products.data} %}
 
             <div class="pagination-wrapper">
                 <div class="pagination-bottom">
-                    {{ pagination(products) }}
+                    {{ pagination(products.data) }}
                 </div>
             </div>
 

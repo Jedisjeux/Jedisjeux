@@ -41,11 +41,9 @@ sylius_frontend_product_index_by_taxon:
     defaults:
         _controller: sylius.controller.product:indexByTaxonAction
         _sylius:
+            grid: sylius_frontend_product_from_taxon
             paginate: 16
             template: frontend/game/indexByTaxon.html.twig
-            sortable: true
-            sorting:
-                createdAt: desc
     requirements:
         slug: "[^?]+"
     options:
