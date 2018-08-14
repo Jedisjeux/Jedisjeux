@@ -12,3 +12,4 @@ sylius_grid:
                             onlyPublished: true
                             criteria: "expr:service('request_stack').getCurrentRequest().get('criteria', [])"
                             taxon: "expr:service('sylius.repository.taxon').findOneBySlug($slug, '%locale%')"
+            limits: ~

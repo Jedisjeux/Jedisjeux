@@ -1,6 +1,8 @@
 {% from 'macros/users.html.twig' import avatar %}
 {% from 'macros/topics.html.twig' import getPath %}
 
+{% set products = products.data is defined ? products.data : products %}
+
 <ul>
     {% for product in products %}
         {% set imagePath = product.mainImage ? product.mainImage.webPath : 'assets/frontend/img/avatar_2x.png' %}
