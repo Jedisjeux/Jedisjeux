@@ -70,15 +70,9 @@ class GamePlayImageExampleFactory extends AbstractExampleFactory implements Exam
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefault('image', function (Options $options) {
-                $image = $this->faker->image();
-
-                if (!$image) {
-                    return 'https://picsum.photos/640/480/?random';
-                }
-
-                return $image;
-            })
+            ->setDefault('image', LazyOption::randomOneImage(
+                __DIR__ . '/../../../../app/Resources/fixtures/game_plays'
+            ))
 
             ->setDefault('description', function (Options $options) {
                 return $this->faker->sentence();

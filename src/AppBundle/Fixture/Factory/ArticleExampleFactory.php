@@ -172,15 +172,9 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
                     Article::STATUS_PUBLISHED]);
             })
 
-            ->setDefault('main_image', function (Options $options) {
-                $image = $this->faker->image();
-
-                if (!$image) {
-                    return 'https://picsum.photos/640/480/?random';
-                }
-
-                return $image;
-            })
+            ->setDefault('main_image', LazyOption::randomOneImage(
+                __DIR__ . '/../../../../app/Resources/fixtures/articles'
+            ))
 
             ->setDefault('author', LazyOption::randomOne($this->customerRepository))
             ->setAllowedTypes('author', ['null', 'string', CustomerInterface::class])

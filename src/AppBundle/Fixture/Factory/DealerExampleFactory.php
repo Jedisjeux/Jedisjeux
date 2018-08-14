@@ -13,6 +13,7 @@ namespace AppBundle\Fixture\Factory;
 
 use AppBundle\Entity\Dealer;
 use AppBundle\Entity\DealerImage;
+use AppBundle\Fixture\OptionsResolver\LazyOption;
 use AppBundle\Formatter\StringInflector;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -109,14 +110,8 @@ class DealerExampleFactory extends AbstractExampleFactory implements ExampleFact
                 return StringInflector::nameToCode($options['name']);
             })
 
-            ->setDefault('image', function (Options $options) {
-                $image = $this->faker->image();
-
-                if (!$image) {
-                    return 'https://picsum.photos/640/480/?random';
-                }
-
-                return $image;
-            });
+            ->setDefault('image', LazyOption::randomOneImageOrNull(
+                __DIR__ . '/../../../../app/Resources/fixtures/dealers', 80
+            ));
     }
 }

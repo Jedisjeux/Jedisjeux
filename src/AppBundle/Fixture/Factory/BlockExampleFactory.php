@@ -120,15 +120,9 @@ class BlockExampleFactory extends AbstractExampleFactory implements ExampleFacto
                 return "<p>" . implode("</p><p>", $this->faker->paragraphs(5)) . '</p>';
             })
 
-            ->setDefault('image', function (Options $options) {
-                $image = $this->faker->image();
-
-                if (!$image) {
-                    return 'https://picsum.photos/640/480/?random';
-                }
-
-                return $image;
-            })
+            ->setDefault('image', LazyOption::randomOneImage(
+                __DIR__ . '/../../../../app/Resources/fixtures/blocks'
+            ))
 
             ->setDefault('image_position', function (Options $options) {
                 return $this->faker->randomElement([Block::POSITION_TOP, Block::POSITION_LEFT, Block::POSITION_RIGHT]);

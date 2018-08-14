@@ -13,6 +13,8 @@ namespace AppBundle\Fixture\OptionsResolver;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\OptionsResolver\Options;
 use Webmozart\Assert\Assert;
 
@@ -56,6 +58,26 @@ final class LazyOption
         };
     }
 
+    public static function randomOneImage(string $directory)
+    {
+        return function (Options $options) use ($directory) {
+            $finder = new Finder();
+            $files = $finder->files()->in($directory);
+            $images = [];
+
+            /** @var File $file */
+
+            foreach ($files as $sourcePathName) {
+                $file = new File($sourcePathName);
+                $images[] = $file->getPathname();
+            }
+
+            Assert::notEmpty($images);
+
+            return $images[array_rand($images)];
+        };
+    }
+
     /**
      * @param RepositoryInterface $repository
      * @param int $chanceOfRandomOne
@@ -76,6 +98,34 @@ final class LazyOption
             }
 
             return 0 === count($objects) ? null : $objects[array_rand($objects)];
+        };
+    }
+
+    /**
+     * @param string $directory
+     * @param int $chanceOfRandomOne
+     *
+     * @return \Closure
+     */
+    public static function randomOneImageOrNull(string $directory, int $chanceOfRandomOne)
+    {
+        return function (Options $options) use ($directory, $chanceOfRandomOne) {
+            if (mt_rand(1, 100) > $chanceOfRandomOne) {
+                return null;
+            }
+
+            $finder = new Finder();
+            $files = $finder->files()->in($directory);
+            $images = [];
+
+            /** @var File $file */
+
+            foreach ($files as $sourcePathName) {
+                $file = new File($sourcePathName);
+                $images[] = $file->getPathname();
+            }
+
+            return 0 === count($images) ? null : $images[array_rand($images)];
         };
     }
 
@@ -104,6 +154,33 @@ final class LazyOption
             }
 
             return $selectedObjects;
+        };
+    }
+
+    public static function randomOnesImage(string $directory, int $amount)
+    {
+        return function (Options $options) use ($directory, $amount) {
+            $finder = new Finder();
+            $files = $finder->files()->in($directory);
+            $images = [];
+
+            /** @var File $file */
+
+            foreach ($files as $sourcePathName) {
+                $file = new File($sourcePathName);
+                $images[] = $file->getPathname();
+            }
+
+            $selectedImages = [];
+            for (; $amount > 0 && count($images) > 0; --$amount) {
+                $randomKey = array_rand($images);
+
+                $selectedImages[] = $images[$randomKey];
+
+                unset($images[$randomKey]);
+            }
+
+            return $selectedImages;
         };
     }
 
