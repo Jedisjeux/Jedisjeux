@@ -13,6 +13,7 @@ namespace AppBundle\Fixture\Factory;
 
 use AppBundle\Entity\Person;
 use AppBundle\Entity\PersonImage;
+use AppBundle\Fixture\OptionsResolver\LazyOption;
 use AppBundle\Formatter\StringInflector;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -132,15 +133,9 @@ class PersonExampleFactory extends AbstractExampleFactory implements ExampleFact
                 return $this->faker->paragraphs(3, true);
             })
 
-            ->setDefault('images', function (Options $options) {
-                $image = $this->faker->image(null, 640, 480, 'people');
-
-                if (!$image) {
-                    return [];
-                }
-
-                return [$image];
-            })
+            ->setDefault('images', LazyOption::randomOnesImage(
+                __DIR__ . '/../../../../app/Resources/fixtures/people', 2
+            ))
             ->setAllowedTypes('images', 'array');
     }
 }

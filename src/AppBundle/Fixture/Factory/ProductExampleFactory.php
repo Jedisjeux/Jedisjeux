@@ -233,16 +233,10 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
 
                 return implode("\n", $materialList);
             })
-            ->setDefault('images', function (Options $options) {
 
-                $image = $this->faker->image();
-
-                if (!$image) {
-                    return [];
-                }
-
-                return [$image];
-            })
+            ->setDefault('images', LazyOption::randomOnesImage(
+                __DIR__ . '/../../../../app/Resources/fixtures/products/covers', 1
+            ))
 
             ->setDefault('main_taxon', null)
             ->setAllowedTypes('main_taxon', ['null', 'string'])

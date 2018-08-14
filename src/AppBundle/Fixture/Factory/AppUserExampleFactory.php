@@ -14,6 +14,7 @@ namespace AppBundle\Fixture\Factory;
 use AppBundle\Entity\Avatar;
 use AppBundle\Entity\Customer;
 use AppBundle\Entity\User;
+use AppBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -126,29 +127,30 @@ class AppUserExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setDefault('username', function (Options $options) {
                 return $this->faker->userName;
             })
+
             ->setDefault('email', function (Options $options) {
                 return $this->faker->email;
             })
+
             ->setDefault('first_name', function (Options $options) {
                 return $this->faker->firstName;
             })
+
             ->setDefault('last_name', function (Options $options) {
                 return $this->faker->lastName;
             })
+
             ->setDefault('enabled', true)
             ->setAllowedTypes('enabled', 'bool')
+
             ->setDefault('password', 'password123')
+
             ->setDefault('roles', [])
             ->setAllowedTypes('roles', 'array')
-            ->setDefault('avatar', function (Options $options) {
-                $image = $this->faker->image(null, 640, 480, 'people');
 
-                if (!$image) {
-                    return 'https://picsum.photos/640/480/?random';
-                }
-
-                return $image;
-            })
+            ->setDefault('avatar', LazyOption::randomOneImageOrNull(
+                __DIR__ . '/../../../../app/Resources/fixtures/avatars', 50
+            ))
         ;
     }
 }
