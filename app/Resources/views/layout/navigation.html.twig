@@ -4,37 +4,35 @@
             <ul>
                 <!-- Main menu -->
                 <li>
-                    <a href="{{ path('app_homepage') }}">{{ 'label.home'|trans }}</a>
-                </li>
-
-                <li><a href="{{ path('app_frontend_article_index') }}">Articles</a></li>
-
-                <li><a href="{{ path('sylius_frontend_product_index') }}">{{ 'label.games'|trans }}</a>
+                    <a href="{{ path('app_frontend_article_index') }}">Articles</a>
                     <ul>
-                        <li><a href="{{ path('sylius_frontend_product_index') }}">Liste complète</a></li>
-                        <li><a href="{{ path('sylius_frontend_product_release_index') }}">Les sorties</a></li>
-                        <li><a href="{{ path('app_frontend_game_play_index') }}">Les parties</a></li>
+                        {{  render(url('sylius_partial_taxon_index_by_code', {
+                            'code': constant('AppBundle\\Entity\\Taxon::CODE_ARTICLE'),
+                            'template': 'frontend/article/_taxonMenu.html.twig'
+                        })) }}
+                    </ul></li>
+
+                <li>
+                    <a href="{{ path('sylius_frontend_product_index') }}">{{ 'label.games'|trans }}</a>
+                    <ul>
+                        {{  render(url('sylius_partial_taxon_index_by_code', {
+                            'code': constant('AppBundle\\Entity\\Taxon::CODE_TARGET_AUDIENCE'),
+                            'template': 'frontend/game/_taxonMenu.html.twig'
+                        })) }}
                     </ul>
                 </li>
+
+                <li><a href="{{ path('sylius_frontend_product_release_index') }}">Les sorties</a></li>
+
+                <li><a href="{{ path('app_frontend_game_play_index') }}">Les parties</a></li>
 
                 <li>
                     <a href="{{ path('app_frontend_person_index') }}">Ludographie</a>
                 </li>
 
-                {#<li>#}
-                {#<a href="#">Ludotheque</a>#}
-                {#</li>#}
-
                 <li>
                     <a href="{{ path('app_frontend_topic_index') }}">Forum</a>
                 </li>
-
-                {#<li>#}
-                {#<a href="about-us-one.html">A Propos</a>#}
-                {#</li>#}
-                {#<li>#}
-                {#<a href="contact-us-one.html">Contactez-Nous</a>#}
-                {#</li>#}
             </ul>
         </div>
     </div>
