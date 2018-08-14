@@ -52,9 +52,6 @@ sylius_admin_product_index:
         _controller: sylius.controller.product:indexAction
         _sylius:
             section: admin
-            repository:
-                method: createFilterPaginator
-                arguments: [$criteria, $sorting, false, null]
             template: backend/crud/index.html.twig
             grid: sylius_backend_product
             vars:

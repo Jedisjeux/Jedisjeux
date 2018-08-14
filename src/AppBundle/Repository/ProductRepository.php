@@ -44,7 +44,6 @@ class ProductRepository extends BaseProductRepository
             ->leftJoin('o.variants', 'variant', Join::WITH, 'variant.position = 0')
             ->leftJoin('variant.images', 'image', Join::WITH, 'image.main = :main')
             ->leftJoin('o.mainTaxon', 'mainTaxon')
-            ->addGroupBy('o.id')
             ->setParameter('localeCode', $localeCode)
             ->setParameter('main', true);
 
@@ -62,7 +61,6 @@ class ProductRepository extends BaseProductRepository
                     'o.mainTaxon = :taxon',
                     ':left < taxon.left AND taxon.right < :right'
                 ))
-                ->addGroupBy('o.id')
                 ->setParameter('taxon', $taxon)
                 ->setParameter('left', $taxon->getLeft())
                 ->setParameter('right', $taxon->getRight());
@@ -80,6 +78,19 @@ class ProductRepository extends BaseProductRepository
             $queryBuilder
                 ->andWhere($queryBuilder->expr()->lte('variant.releasedAt', ':releasedAtTo'))
                 ->setParameter('releasedAtTo', $dateCalculator->getDay($criteria['releasedAtTo']));
+        }
+
+        if (!empty($criteria['person'])) {
+            $queryBuilder
+                ->leftJoin('variant.designers', 'designer')
+                ->leftJoin('variant.artists', 'artist')
+                ->leftJoin('variant.publishers', 'publisher')
+                ->andWhere($queryBuilder->expr()->orX(
+                    'designer = :person',
+                    'artist = :person',
+                    'publisher = :person'
+                ))
+                ->setParameter('person', $criteria['person']);
         }
 
         return $queryBuilder;
@@ -184,111 +195,6 @@ class ProductRepository extends BaseProductRepository
             ->getOneOrNullResult();
     }
 
-    /**
-     * Create paginator for products categorized under given taxon.
-     *
-     * @param TaxonInterface $taxon
-     * @param array $criteria
-     * @param array $sorting
-     *
-     * @return Pagerfanta
-     */
-    public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = [], array $sorting = [])
-    {
-        $queryBuilder = $this->getQueryBuilder();
-        $queryBuilder
-            ->innerJoin('o.taxons', 'taxon')
-            ->andWhere($queryBuilder->expr()->orX(
-                'taxon = :taxon',
-                'o.mainTaxon = :taxon',
-                ':left < taxon.left AND taxon.right < :right'
-            ))
-            ->addGroupBy('o.id')
-            ->setParameter('taxon', $taxon)
-            ->setParameter('left', $taxon->getLeft())
-            ->setParameter('right', $taxon->getRight());
-
-        $this->applyCriteria($queryBuilder, $criteria);
-        $this->applySorting($queryBuilder, $sorting);
-
-        return $this->getPaginator($queryBuilder);
-    }
-
-    /**
-     * Create filter paginator.
-     *
-     * @param array $criteria
-     * @param array $sorting
-     * @param bool $deleted
-     * @param null|string $status
-     *
-     * @return Pagerfanta
-     */
-    public function createFilterPaginator($criteria = [], $sorting = [], $deleted = false, $status = Product::PUBLISHED)
-    {
-        $queryBuilder = $this->getQueryBuilder();
-        $queryBuilder
-            ->addGroupBy('o.id');
-
-        if (!empty($criteria['name'])) {
-            $queryBuilder
-                ->andWhere('translation.name LIKE :name')
-                ->setParameter('name', '%' . $criteria['name'] . '%');
-        }
-
-        $status = (null === $status and !empty($criteria['status'])) ? $criteria['status'] : $status;
-
-        if (null !== $status) {
-            $queryBuilder
-                ->andWhere($queryBuilder->expr()->eq($this->getPropertyName('status'), ':status'))
-                ->setParameter('status', $status);
-        }
-
-        if (!empty($criteria['query'])) {
-            $queryBuilder
-                ->andWhere('translation.name LIKE :query')
-                ->setParameter('query', '%' . $criteria['query'] . '%');
-        }
-
-        if (!empty($criteria['releasedAtFrom'])) {
-            $dateCalculator = new DateCalculator();
-            $queryBuilder
-                ->andWhere($queryBuilder->expr()->gte('variant.releasedAt', ':releasedAtFrom'))
-                ->setParameter('releasedAtFrom', $dateCalculator->getDay($criteria['releasedAtFrom']));
-        }
-
-        if (!empty($criteria['releasedAtTo'])) {
-            $dateCalculator = new DateCalculator();
-            $queryBuilder
-                ->andWhere($queryBuilder->expr()->lte('variant.releasedAt', ':releasedAtTo'))
-                ->setParameter('releasedAtTo', $dateCalculator->getDay($criteria['releasedAtTo']));
-        }
-
-        if (!empty($criteria['person'])) {
-            $queryBuilder
-                ->leftJoin('variant.designers', 'designer')
-                ->leftJoin('variant.artists', 'artist')
-                ->leftJoin('variant.publishers', 'publisher')
-                ->andWhere($queryBuilder->expr()->orX(
-                    'designer = :person',
-                    'artist = :person',
-                    'publisher = :person'
-                ))
-                ->setParameter('person', $criteria['person']);
-        }
-
-        if (empty($sorting)) {
-            if (!is_array($sorting)) {
-                $sorting = [];
-            }
-
-            $sorting['createdAt'] = 'desc';
-        }
-
-        $this->applySorting($queryBuilder, $sorting);
-
-        return $this->getPaginator($queryBuilder);
-    }
 
     /**
      * {@inheritdoc}
