@@ -1,6 +1,11 @@
 ## Change Log
 
 ### v1.3.1 (2018/08/14)
+- [#174](https://github.com/Jedisjeux/Jedisjeux/pull/174) Use taxon root on repositories (@loic425)
+- [#173](https://github.com/Jedisjeux/Jedisjeux/pull/173) [Product] add distinct when needed on product repository (@loic425)
+- [#171](https://github.com/Jedisjeux/Jedisjeux/pull/171) [Product] Fix product list on partial (@loic425)
+- [#172](https://github.com/Jedisjeux/Jedisjeux/pull/172) [Bug] Remove useless group by on product repository (@loic425)
+- [#170](https://github.com/Jedisjeux/Jedisjeux/pull/170) prepare 1.3.1 release (@loic425)
 - [#169](https://github.com/Jedisjeux/Jedisjeux/pull/169) [Fixtures] get random images from directory (@loic425)
 - [#168](https://github.com/Jedisjeux/Jedisjeux/pull/168) fix show filters on product list from taxon (@loic425)
 
