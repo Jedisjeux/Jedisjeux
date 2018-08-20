@@ -16,6 +16,7 @@ app:
         barcode: Code-barres
         barcodes: Code-barres
         blocks: Blocs
+        boardgames: Jeux de société
         box: Encart
         catalog: Catalogue
         choose_category: Choisir une catégorie
