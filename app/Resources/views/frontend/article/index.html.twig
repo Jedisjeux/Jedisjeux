@@ -23,68 +23,16 @@
                     <!-- Articles start -->
                     <!-- ============================================================================== -->
                     <br>
-                    <h2>Style 1</h2>
                     <div class="row">
-                        <div class="col-sm-4">
-                            {% include 'frontend/article/index/_imageBox.html.twig' with {
-                                'title': '[JdJMovies] Pulsar 2849',
-                                'image': '/assets/frontend/images/portfolio-1.jpg'
-                            } %}
-                        </div>
-                        <div class="col-sm-4">
-                            {% include 'frontend/article/index/_imageBox.html.twig' with {
-                                'title': 'Critique de Jurassik Snack',
-                                'image': '/assets/frontend/images/portfolio-2.jpg'
-                            } %}
-                        </div>
-                        <div class="col-sm-4">
-                            {% include 'frontend/article/index/_imageBox.html.twig' with {
-                                'title': '[JdJMovies] SteamRollers',
-                                'image': '/assets/frontend/images/portfolio-3.jpg'
-                            } %}
-                        </div>
+                        {% for article in articles.data %}
+                        {% if loop.index0 > 0 and loop.index0%3 == 0 %}
                     </div>
-                    <br>
                     <div class="row">
+                        {% endif %}
                         <div class="col-sm-4">
-                            {% include 'frontend/article/index/_imageBox.html.twig' with {
-                                'title': 'Jouez à 7 Wonders en ligne !',
-                                'image': '/assets/frontend/images/portfolio-4.jpg'
-                            } %}
+                            {% include 'frontend/article/index/_imageBox.html.twig' %}
                         </div>
-                        <div class="col-sm-4">
-                            {% include 'frontend/article/index/_imageBox.html.twig' with {
-                                'title': 'JdJMovies] Pulsar 2849',
-                                'image': '/assets/frontend/images/portfolio-5.jpg'
-                            } %}
-                        </div>
-                        <div class="col-sm-4">
-                            {% include 'frontend/article/index/_imageBox.html.twig' with {
-                                'title': 'JdJMovies] Pulsar 2849',
-                                'image': '/assets/frontend/images/portfolio-6.jpg'
-                            } %}
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-sm-4">
-                            {% include 'frontend/article/index/_imageBox.html.twig' with {
-                                'title': 'Jouez à 7 Wonders en ligne !',
-                                'image': '/assets/frontend/images/portfolio-7.jpg'
-                            } %}
-                        </div>
-                        <div class="col-sm-4">
-                            {% include 'frontend/article/index/_imageBox.html.twig' with {
-                                'title': 'JdJMovies] Pulsar 2849',
-                                'image': '/assets/frontend/images/portfolio-8.jpg'
-                            } %}
-                        </div>
-                        <div class="col-sm-4">
-                            {% include 'frontend/article/index/_imageBox.html.twig' with {
-                                'title': 'JdJMovies] Pulsar 2849',
-                                'image': '/assets/frontend/images/portfolio-9.jpg'
-                            } %}
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
                 <!-- main end -->

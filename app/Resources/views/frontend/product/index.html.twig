@@ -27,10 +27,7 @@
                             <div class="row grid-space-10">
                                 {% for product in products.data %}
                                     <div class="col-lg-3 col-md-6">
-                                        {% include 'frontend/product/index/_imageBox.html.twig' with {
-                                            'title': 'Kero',
-                                            'image': '/assets/frontend/images/product-1.jpg'
-                                        } %}
+                                        {% include 'frontend/product/index/_imageBox.html.twig' %}
                                     </div>
                                 {% endfor %}
                             </div>
