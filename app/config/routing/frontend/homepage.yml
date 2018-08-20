@@ -3,4 +3,4 @@ app_homepage:
     methods: [GET]
     defaults:
         _controller: FrameworkBundle:Template:template
-        template: 'default/index.html.twig'
+        template: 'frontend/homepage/index.html.twig'

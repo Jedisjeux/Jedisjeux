@@ -1,0 +1,26 @@
+/* 10 Full Page
+----------------------------------------------------------------------------- */
+#fp-nav ul li {
+  .fp-tooltip {
+    background-color: $white;
+    color: #454545;
+    padding: 0 15px;
+    @include border-radius(4px);
+    top: -4px;
+    overflow: visible;
+  }
+  .fp-tooltip.right {
+    right: 30px;
+  }
+  .fp-tooltip:after {
+    content: "\f0da";
+    font-family: "FontAwesome";
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    font-size: 30px;
+    line-height: 20px;
+    margin-top: -9px;
+    color: $white;
+  }
+}
