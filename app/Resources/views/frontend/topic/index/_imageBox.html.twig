@@ -1,0 +1,27 @@
+<div class="image-box style-3 mb-20 {% if dark|default(false) %}dark-bg{% else %}shadow bordered light-gray-bg{% endif %}">
+    <div class="row grid-space-0">
+        <div class="col-lg-2 pv-20">
+            <div class="overlay-container">
+                <img src="{{ avatar }}" alt="">
+                <div class="overlay-to-top">
+                    <p class="small margin-clear"><em>Some info <br> Lorem ipsum dolor sit</em></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-10">
+            <div class="body">
+                <div class="hidden-lg-down"></div>
+                <h3>{{ title }}</h3>
+                <p class="small mb-10"><i class="fa fa-calendar-o pr-1"></i> Dec, 2017 <i
+                            class="pl-10 pr-1 fa fa-tag"></i> {{ mainTaxon }}</p>
+                <div class="separator-2"></div>
+                <p class="margin-clear">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Aliquam atque ipsam nihialal. Lorem ipsum dolor sit amet, consectetur
+                    adipisicing elit. Nam laudantium, provident culpa saepe.</p>
+                <br>
+                <a href="topic-details.html" class="btn {% if dark|default(false) %}btn-gray-transparent btn-animated{% else %}btn-default btn-sm{% endif %} margin-clear">Read More<i
+                            class="fa fa-arrow-right pl-10"></i></a>
+            </div>
+        </div>
+    </div>
+</div>

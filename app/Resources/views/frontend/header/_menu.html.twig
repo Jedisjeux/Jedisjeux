@@ -7,7 +7,7 @@
     </li>
     <!-- mega-menu end -->
     <li class="nav-item dropdown ">
-        <a href="blog-large-image-right-sidebar.html" class="nav-link dropdown-toggle" id="seventh-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Articles</a>
+        <a href="{{ path('app_frontend_article_index') }}" class="nav-link dropdown-toggle" id="seventh-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Articles</a>
         <ul class="dropdown-menu" aria-labelledby="seventh-dropdown">
             <li ><a href="article-listing-2col.html">News</a></li>
             <li ><a href="article-listing-2col.html">Tests de jeu</a></li>
@@ -15,7 +15,7 @@
         </ul>
     </li>
     <li class="nav-item dropdown ">
-        <a href="{{ render(url('sylius_frontend_product_index')) }}" class="nav-link dropdown-toggle" id="sixth-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Jeux</a>
+        <a href="{{ path('sylius_frontend_product_index') }}" class="nav-link dropdown-toggle" id="sixth-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Jeux</a>
         <ul class="dropdown-menu" aria-labelledby="sixth-dropdown">
             <li ><a href="index-shop.html">Shop Home 1</a></li>
             <li ><a href="index-shop-2.html">Shop Home 2</a></li>
@@ -35,7 +35,7 @@
         <a href="person-listing-grid-4-col.html" class="nav-link">Ludographie</a>
     </li>
     <li class="nav-item mega-menu mega-menu--wide">
-        <a href="topic-listing.html" class="nav-link">Forum</a>
+        <a href="{{ path('app_frontend_topic_index') }}" class="nav-link">Forum</a>
     </li>
 </ul>
 <!-- main-menu end -->
