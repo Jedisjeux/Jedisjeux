@@ -10,6 +10,14 @@
     {% endspaceless %}
 {% endmacro %}
 
+{% macro show_taxons(taxons) %}
+    {% spaceless %}
+        {% for taxon in taxons %}
+            {% if not loop.first %}, {% endif %}<a href="#">{{ taxon }}</a>
+        {% endfor %}
+    {% endspaceless %}
+{% endmacro %}
+
 <h4 class="space-top">Specifications</h4>
 <hr>
 <dl class="row">
@@ -19,10 +27,14 @@
     <dd class="col-sm-9">à partir de {{ product.minAge }} ans</dd>
     <dt class="col-sm-3 text-sm-right">Durée</dt>
     <dd class="col-sm-9">{{ duration(product) }}</dd>
-    <dt class="col-sm-3 text-sm-right">Mécanismes</dt>
-    <dd class="col-sm-9">Majorité, Rapidité, Dés, Stop ou encore</dd>
-    <dt class="col-sm-3 text-sm-right">Thèmes</dt>
-    <dd class="col-sm-9">SteamPunk</dd>
+    {% if product.mechanisms|length > 0 %}
+        <dt class="col-sm-3 text-sm-right">Mécanismes</dt>
+        <dd class="col-sm-9">{{ self.show_taxons(product.mechanisms) }}</dd>
+    {% endif %}
+    {% if product.mechanisms|length > 0 %}
+        <dt class="col-sm-3 text-sm-right">Thèmes</dt>
+        <dd class="col-sm-9">{{ self.show_taxons(product.themes) }}</dd>
+    {% endif %}
     <dt class="col-sm-3 text-sm-right">Date de sortie</dt>
     <dd class="col-sm-9">{{ releasedAt(product.firstVariant) }}</dd>
     <dt class="col-sm-3 text-sm-right">Auteur(s)</dt>
