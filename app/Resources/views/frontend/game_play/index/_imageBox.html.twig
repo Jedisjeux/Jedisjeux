@@ -2,6 +2,7 @@
 
 {% set product = game_play.product %}
 {% set topic = game_play.topic %}
+{% set gamePlayPath = path('app_frontend_game_play_show', { 'id': game_play.id, 'productSlug': product.slug }) %}
 
 <div class="image-box style-2 mb-20 bordered light-gray-bg">
     <div class="overlay-container overlay-visible">
@@ -21,6 +22,6 @@
         {% if topic is not null and topic.mainPost is not null %}
             <p>{{ (topic.mainPost.body|striptags)[:250] }}...</p>
         {% endif %}
-        <a href="game-play-details.html" class="btn btn-default btn-sm rgin-clear">Read More<i class="fa fa-arrow-right pl-10"></i></a>
+        <a href="{{ gamePlayPath }}" class="btn btn-default btn-sm rgin-clear">Read More<i class="fa fa-arrow-right pl-10"></i></a>
     </div>
 </div>
