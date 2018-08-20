@@ -44,22 +44,13 @@
                     <!-- Image Boxes start -->
                     <!-- ============================================================================== -->
                     <br>
-                    {% include 'frontend/topic/index/_imageBox.html.twig' with {
-                        'avatar': '/assets/frontend/images/avatar-1.jpg',
-                        'title': 'Partie de Uchronia',
-                        'mainTaxon': 'Parties de jeu'
-                    } %}
-                    {% include 'frontend/topic/index/_imageBox.html.twig' with {
-                        'avatar': '/assets/frontend/images/avatar-3.jpg',
-                        'title': 'Le topic sur les parties jouées la veille',
-                        'mainTaxon': 'La taverne du joueur'
-                    } %}
-                    {% include 'frontend/topic/index/_imageBox.html.twig' with {
-                        'avatar': '/assets/frontend/images/avatar-2.jpg',
-                        'title': '[ExP] Eminent Domain Microcosme',
-                        'mainTaxon': 'La demande aux responsables communication',
-                        'dark': true
-                    } %}
+                    {% for topic in topics %}
+                        {% include 'frontend/topic/index/_imageBox.html.twig' with {
+                            'avatar': '/assets/frontend/images/avatar-1.jpg',
+                            'title': 'Partie de Uchronia',
+                            'mainTaxon': 'Parties de jeu'
+                        } %}
+                    {% endfor %}
                 </div>
                 <!-- main end -->
 

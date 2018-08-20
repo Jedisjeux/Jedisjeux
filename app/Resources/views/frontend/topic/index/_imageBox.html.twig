@@ -1,8 +1,15 @@
+{% import 'macro/image.html.twig' as images %}
+
+{% set mainTaxon = topic.mainTaxon %}
+{% set dark = mainTaxon is not null and not mainTaxon.public ? true : false %}
+
 <div class="image-box style-3 mb-20 {% if dark|default(false) %}dark-bg{% else %}shadow bordered light-gray-bg{% endif %}">
     <div class="row grid-space-0">
         <div class="col-lg-2 pv-20">
             <div class="overlay-container">
-                <img src="{{ avatar }}" alt="">
+                {% if topic.author.avatar %}
+                    {{ images.render(topic.author.avatar.webPath, 'magazine_item') }}
+                {% endif %}
                 <div class="overlay-to-top">
                     <p class="small margin-clear"><em>Some info <br> Lorem ipsum dolor sit</em></p>
                 </div>
@@ -11,13 +18,11 @@
         <div class="col-lg-10">
             <div class="body">
                 <div class="hidden-lg-down"></div>
-                <h3>{{ title }}</h3>
-                <p class="small mb-10"><i class="fa fa-calendar-o pr-1"></i> Dec, 2017 <i
+                <h3>{{ topic.title }}</h3>
+                <p class="small mb-10"><i class="fa fa-calendar-o pr-1"></i> {{ topic.createdAt|localizeddate('medium', 'none') }} <i
                             class="pl-10 pr-1 fa fa-tag"></i> {{ mainTaxon }}</p>
                 <div class="separator-2"></div>
-                <p class="margin-clear">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Aliquam atque ipsam nihialal. Lorem ipsum dolor sit amet, consectetur
-                    adipisicing elit. Nam laudantium, provident culpa saepe.</p>
+                <p class="margin-clear">{{ (topic.mainPost.body|striptags)[:500] }}...</p>
                 <br>
                 <a href="topic-details.html" class="btn {% if dark|default(false) %}btn-gray-transparent btn-animated{% else %}btn-default btn-sm{% endif %} margin-clear">Read More<i
                             class="fa fa-arrow-right pl-10"></i></a>
