@@ -1,0 +1,98 @@
+{% extends 'frontend/layout.html.twig' %}
+
+{% block content %}
+    {% include 'frontend/article/index/_breadcrumb.html.twig' %}
+
+    <!-- main-container start -->
+    <!-- ================ -->
+    <section class="main-container">
+
+        <div class="container">
+            <div class="row">
+
+                <!-- main start -->
+                <!-- ================ -->
+                <div class="main col-md-12">
+
+                    <!-- page-title start -->
+                    <!-- ================ -->
+                    <h1 class="page-title">Articles</h1>
+                    <div class="separator-2"></div>
+                    <!-- page-title end -->
+
+                    <!-- Articles start -->
+                    <!-- ============================================================================== -->
+                    <br>
+                    <h2>Style 1</h2>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            {% include 'frontend/article/index/_imageBox.html.twig' with {
+                                'title': '[JdJMovies] Pulsar 2849',
+                                'image': '/assets/frontend/images/portfolio-1.jpg'
+                            } %}
+                        </div>
+                        <div class="col-sm-4">
+                            {% include 'frontend/article/index/_imageBox.html.twig' with {
+                                'title': 'Critique de Jurassik Snack',
+                                'image': '/assets/frontend/images/portfolio-2.jpg'
+                            } %}
+                        </div>
+                        <div class="col-sm-4">
+                            {% include 'frontend/article/index/_imageBox.html.twig' with {
+                                'title': '[JdJMovies] SteamRollers',
+                                'image': '/assets/frontend/images/portfolio-3.jpg'
+                            } %}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            {% include 'frontend/article/index/_imageBox.html.twig' with {
+                                'title': 'Jouez à 7 Wonders en ligne !',
+                                'image': '/assets/frontend/images/portfolio-4.jpg'
+                            } %}
+                        </div>
+                        <div class="col-sm-4">
+                            {% include 'frontend/article/index/_imageBox.html.twig' with {
+                                'title': 'JdJMovies] Pulsar 2849',
+                                'image': '/assets/frontend/images/portfolio-5.jpg'
+                            } %}
+                        </div>
+                        <div class="col-sm-4">
+                            {% include 'frontend/article/index/_imageBox.html.twig' with {
+                                'title': 'JdJMovies] Pulsar 2849',
+                                'image': '/assets/frontend/images/portfolio-6.jpg'
+                            } %}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            {% include 'frontend/article/index/_imageBox.html.twig' with {
+                                'title': 'Jouez à 7 Wonders en ligne !',
+                                'image': '/assets/frontend/images/portfolio-7.jpg'
+                            } %}
+                        </div>
+                        <div class="col-sm-4">
+                            {% include 'frontend/article/index/_imageBox.html.twig' with {
+                                'title': 'JdJMovies] Pulsar 2849',
+                                'image': '/assets/frontend/images/portfolio-8.jpg'
+                            } %}
+                        </div>
+                        <div class="col-sm-4">
+                            {% include 'frontend/article/index/_imageBox.html.twig' with {
+                                'title': 'JdJMovies] Pulsar 2849',
+                                'image': '/assets/frontend/images/portfolio-9.jpg'
+                            } %}
+                        </div>
+                    </div>
+                </div>
+                <!-- main end -->
+
+            </div>
+        </div>
+    </section>
+    <!-- main-container end -->
+
+    {% include 'frontend/article/index/_footerTop.html.twig' %}
+{% endblock content %}
