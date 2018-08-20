@@ -14,7 +14,7 @@ sylius_frontend_product_index:
         _sylius:
             paginate: 16
             grid: sylius_frontend_product
-            template: frontend/game/index.html.twig
+            template: frontend/product/index.html.twig
 
 sylius_frontend_product_release_index:
     methods: [GET]

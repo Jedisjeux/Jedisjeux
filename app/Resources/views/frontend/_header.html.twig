@@ -1,102 +1,6 @@
 <!-- header-container start -->
 <div class="header-container">
-    <!-- header-top start -->
-    <!-- classes:  -->
-    <!-- "dark": dark version of header top e.g. class="header-top dark" -->
-    <!-- "colored": colored version of header top e.g. class="header-top colored" -->
-    <!-- ================ -->
-    <div class="header-top dark">
-        <div class="container">
-            <div class="row">
-                <div class="col-3 col-sm-6 col-lg-9">
-                    <!-- header-top-first start -->
-                    <!-- ================ -->
-                    <div class="header-top-first clearfix">
-                        <ul class="social-links circle small clearfix hidden-sm-down">
-                            <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li class="skype"><a href="#"><i class="fa fa-skype"></i></a></li>
-                            <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            <li class="googleplus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            <li class="youtube"><a href="#"><i class="fa fa-youtube-play"></i></a></li>
-                            <li class="flickr"><a href="#"><i class="fa fa-flickr"></i></a></li>
-                            <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li class="pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                        </ul>
-                        <div class="social-links hidden-md-up circle small">
-                            <div class="btn-group dropdown">
-                                <button id="header-top-drop-1" type="button" class="btn dropdown-toggle dropdown-toggle--no-caret" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-share-alt"></i></button>
-                                <ul class="dropdown-menu dropdown-animation" aria-labelledby="header-top-drop-1">
-                                    <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li class="skype"><a href="#"><i class="fa fa-skype"></i></a></li>
-                                    <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                    <li class="googleplus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                    <li class="youtube"><a href="#"><i class="fa fa-youtube-play"></i></a></li>
-                                    <li class="flickr"><a href="#"><i class="fa fa-flickr"></i></a></li>
-                                    <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li class="pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <ul class="list-inline hidden-md-down">
-                            <li class="list-inline-item"><i class="fa fa-map-marker pr-1 pl-2"></i>One Infinity Loop Av, Tk 123456</li>
-                            <li class="list-inline-item"><i class="fa fa-phone pr-1 pl-2"></i>+12 123 123 123</li>
-                            <li class="list-inline-item"><i class="fa fa-envelope-o pr-1 pl-2"></i> theproject@mail.com</li>
-                        </ul>
-                    </div>
-                    <!-- header-top-first end -->
-                </div>
-                <div class="col-9 col-sm-6 col-lg-3">
-
-                    <!-- header-top-second start -->
-                    <!-- ================ -->
-                    <div id="header-top-second"  class="clearfix">
-
-                        <!-- header top dropdowns start -->
-                        <!-- ================ -->
-                        <div class="header-top-dropdown text-right">
-                            <div class="btn-group">
-                                <a href="page-signup.html" class="btn btn-default btn-sm"><i class="fa fa-user pr-2"></i> Sign Up</a>
-                            </div>
-                            <div class="btn-group">
-                                <button id="header-top-drop-2" type="button" class="btn dropdown-toggle btn-default btn-sm dropdown-toggle--no-caret" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-lock pr-2"></i> Login</button>
-                                <ul class="dropdown-menu dropdown-menu-right dropdown-animation" aria-labelledby="header-top-drop-2">
-                                    <li>
-                                        <form class="login-form margin-clear">
-                                            <div class="form-group has-feedback">
-                                                <label class="control-label">Username</label>
-                                                <input type="text" class="form-control" placeholder="">
-                                                <i class="fa fa-user form-control-feedback"></i>
-                                            </div>
-                                            <div class="form-group has-feedback">
-                                                <label class="control-label">Password</label>
-                                                <input type="password" class="form-control" placeholder="">
-                                                <i class="fa fa-lock form-control-feedback"></i>
-                                            </div>
-                                            <button type="submit" class="btn btn-gray btn-sm">Log In</button>
-                                            <span class="pl-1 pr-1">or</span>
-                                            <button type="submit" class="btn btn-default btn-sm">Sing Up</button>
-                                            <ul>
-                                                <li><a href="#">Forgot your password?</a></li>
-                                            </ul>
-                                            <span class="text-center">Login with</span>
-                                            <ul class="social-links circle small colored clearfix">
-                                                <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                                <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                                <li class="googleplus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                            </ul>
-                                        </form>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!--  header top dropdowns end -->
-                    </div>
-                    <!-- header-top-second end -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- header-top end -->
+    {% include 'frontend/header/_top.html.twig' %}
 
     <!-- header start -->
     <!-- classes:  -->
@@ -116,7 +20,7 @@
 
                         <!-- logo -->
                         <div id="logo" class="logo">
-                            <a href="index.html"><img id="logo_img" src="assets/frontend/images/logo_light_blue.png" alt="Jedisjeux"></a>
+                            <a href="index.html"><img id="logo_img" src="/assets/frontend/images/logo_light_blue.png" alt="Jedisjeux"></a>
                         </div>
 
                         <!-- name-and-slogan -->
@@ -145,7 +49,7 @@
 
                                     <!-- logo -->
                                     <div id="logo-mobile" class="logo">
-                                        <a href="index.html"><img id="logo-img-mobile" src="assets/frontend/images/logo_light_blue.png" alt="Jedisjeux"></a>
+                                        <a href="index.html"><img id="logo-img-mobile" src="/assets/frontend/images/logo_light_blue.png" alt="Jedisjeux"></a>
                                     </div>
 
                                     <!-- name-and-slogan -->
@@ -219,47 +123,7 @@
                                 </button>
 
                                 <div class="collapse navbar-collapse" id="navbar-collapse-1">
-                                    <!-- main-menu -->
-                                    <ul class="navbar-nav ml-xl-auto">
-
-                                        <!-- mega-menu start -->
-                                        <li class="nav-item active mega-menu mega-menu--wide">
-                                            <a href="index.html" class="nav-link" id="first-dropdown">Accueil</a>
-                                        </li>
-                                        <!-- mega-menu end -->
-                                        <li class="nav-item dropdown ">
-                                            <a href="blog-large-image-right-sidebar.html" class="nav-link dropdown-toggle" id="seventh-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Articles</a>
-                                            <ul class="dropdown-menu" aria-labelledby="seventh-dropdown">
-                                                <li ><a href="article-listing-2col.html">News</a></li>
-                                                <li ><a href="article-listing-2col.html">Tests de jeu</a></li>
-                                                <li ><a href="article-listing-2col.html">Vidéos</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="nav-item dropdown ">
-                                            <a href="index-shop.html" class="nav-link dropdown-toggle" id="sixth-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Jeux</a>
-                                            <ul class="dropdown-menu" aria-labelledby="sixth-dropdown">
-                                                <li ><a href="index-shop.html">Shop Home 1</a></li>
-                                                <li ><a href="index-shop-2.html">Shop Home 2</a></li>
-                                                <li ><a href="shop-listing-4col.html">Grid - 4 Columns</a></li>
-                                                <li ><a href="shop-listing-3col.html">Grid - 3 Columns</a></li>
-                                                <li ><a href="shop-listing-2col.html">Grid - 2 Columns</a></li>
-                                                <li ><a href="shop-listing-sidebar.html">Grid - With Sidebar</a></li>
-                                                <li ><a href="shop-listing-list.html">List</a></li>
-                                                <li ><a href="shop-product.html">Product Page</a></li>
-                                                <li ><a href="shop-product-2.html">Product Page 2 <span class="badge">v1.3</span></a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="nav-item mega-menu mega-menu--wide">
-                                            <a href="game-play-listing.html" class="nav-link">Parties</a>
-                                        </li>
-                                        <li class="nav-item mega-menu mega-menu--wide">
-                                            <a href="person-listing-grid-4-col.html" class="nav-link">Ludographie</a>
-                                        </li>
-                                        <li class="nav-item mega-menu mega-menu--wide">
-                                            <a href="topic-listing.html" class="nav-link">Forum</a>
-                                        </li>
-                                    </ul>
-                                    <!-- main-menu end -->
+                                    {#{% include 'frontend/header/_menu.html.twig' %}#}
                                 </div>
                             </nav>
                         </div>
