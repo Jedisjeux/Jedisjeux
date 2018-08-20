@@ -58,6 +58,6 @@ sylius_frontend_product_show:
             repository:
                 method: findOneBySlug
                 arguments: [$slug, expr:service('security.authorization_checker').isGranted('ROLE_PRODUCT_MANAGER')]
-            template: frontend/game/show.html.twig
+            template: frontend/product/show.html.twig
     options:
       expose: true

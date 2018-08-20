@@ -1,8 +1,15 @@
+{% import 'macro/image.html.twig' as images %}
+{% from 'macro/product.html.twig' import releasedAt, duration, playerCount %}
+
+{% set productPath = path('sylius_frontend_product_show', { 'slug': product.slug } ) %}
+
 <div class="listing-item white-bg bordered mb-20">
     <div class="overlay-container">
-        <img src="{{ image }}" alt="">
+        {% if product.mainImage is not null %}
+            {{ images.render(product.mainImage.webPath, 'full', product.name) }}
+        {% endif %}
         <span class="badge">40% OFF</span>
-        <a class="overlay-link popup-img-single" href="/assets/frontend/images/product-7.jpg"><i class="fa fa-search-plus"></i></a>
+        <a class="overlay-link" href="{{ productPath }}"><i class="fa fa-search-plus"></i></a>
         <div class="overlay-to-top links">
                             <span class="small">
                               <a href="#" class="btn-sm-link"><i class="fa fa-heart-o pr-10"></i>Add to Wishlist</a>
@@ -11,15 +18,15 @@
         </div>
     </div>
     <div class="body">
-        <h3><a href="shop-product.html">{{ title }}</a></h3>
+        <h3><a href="{{ productPath }}">{{ product.name }}</a></h3>
         <ul class="list-icons small">
-            <li><i class="fa fa-user"></i> à 2 joueurs exclusivement</li>
-            <li><i class="fa fa-child"></i> A partir de 8 ans</li>
-            <li><i class="fa fa-clock-o"></i> 30 minutes</li>
-            <li><i class="fa fa-calendar-o"></i> Sortie : juin 2018</li>
+            <li><i class="fa fa-user"></i> {{ playerCount(product) }}</li>
+            <li><i class="fa fa-child"></i> A partir de {{ product.minAge }} ans</li>
+            <li><i class="fa fa-clock-o"></i> {{ duration(product) }}</li>
+            <li><i class="fa fa-calendar-o"></i> Sortie : {{ releasedAt(product.firstVariant) }}</li>
         </ul>
         <div class="elements-list clearfix">
-            <a class="pull-right margin-clear" href="shop-product.html">Read More<i class="pl-1 fa fa-angle-double-right"></i></a>
+            <a class="pull-right margin-clear" href="{{ productPath }}">Read More<i class="pl-1 fa fa-angle-double-right"></i></a>
         </div>
     </div>
 </div>

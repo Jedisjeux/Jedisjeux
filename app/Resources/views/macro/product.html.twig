@@ -1,0 +1,40 @@
+{% macro playerCount(product) %}
+    {% if product.minPlayerCount == product.maxPlayerCount %}
+        à {{ product.minPlayerCount }} joueur{% if product.minPlayerCount>1 %}s{% endif %} exclusivement
+    {% elseif not product.maxPlayerCount %}
+        à partir de {{ product.minPlayerCount }} joueur{% if product.minPlayerCount>1 %}s{% endif %}
+    {% else %}
+        {{ product.minPlayerCount }} à {{ product.maxPlayerCount }} joueurs
+    {% endif %}
+{% endmacro %}
+
+{% macro releasedAt(product_variant, date_format) %}
+    {% set date_format = date_format|default('medium') %}
+
+    {% if constant('AppBundle\\Entity\\ProductVariant::RELEASED_AT_PRECISION_ON_DAY') == product_variant.releasedAtPrecision %}
+        {{ product_variant.releasedAt|localizeddate(date_format, 'none') }}
+    {% elseif constant('AppBundle\\Entity\\ProductVariant::RELEASED_AT_PRECISION_ON_MONTH') == product_variant.releasedAtPrecision %}
+        {% set format = null %}
+
+        {% if 'medium' == date_format %}
+            {% set format = 'MMM Y' %}
+        {% elseif 'long' == date_format %}
+            {% set format = 'MMMM Y' %}
+        {% endif %}
+
+        {{ product_variant.releasedAt|localizeddate(date_format, 'none', null, null, format) }}
+    {% elseif constant('AppBundle\\Entity\\ProductVariant::RELEASED_AT_PRECISION_ON_YEAR') == product_variant.releasedAtPrecision %}
+        {{ product_variant.releasedAt|date('Y') }}
+    {% endif %}
+
+{% endmacro %}
+
+{% macro duration(product) %}{% spaceless %}
+    {% if product.minDuration %}
+        {{ product.minDuration }}
+        {% if product.minDuration != product.maxDuration %}
+            - {{ product.maxDuration }}
+        {% endif %}
+        minute{% if product.minDuration > 1 %}s{% endif %}{% if product.durationByPlayer %} {{ 'label.per_player'|trans|lower }}{% endif %}
+    {% endif %}
+{% endspaceless %}{% endmacro %}
