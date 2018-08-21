@@ -1,0 +1,24 @@
+<h4 class="space-top">Specifications</h4>
+<hr>
+<dl class="row">
+    {% if person.productCountAsDesigner > 0 %}
+        <dt class="col-sm-3 text-sm-right">{{ 'app.ui.designer'|trans }}</dt>
+        <dd class="col-sm-9">{{ person.productCountAsDesigner }} {{ 'app.ui.games'|trans }}</dd>
+    {% endif %}
+    {% if person.productCountAsArtist > 0 %}
+        <dt class="col-sm-3 text-sm-right">{{ 'app.ui.artist'|trans }}</dt>
+        <dd class="col-sm-9">{{ person.productCountAsArtist }} {{ 'app.ui.games'|trans }}</dd>
+    {% endif %}
+    {% if person.productCountAsPublisher > 0 %}
+        <dt class="col-sm-3 text-sm-right">{{ 'app.ui.editor'|trans }}</dt>
+        <dd class="col-sm-9">{{ person.productCountAsPublisher }} {{ 'app.ui.games'|trans }}</dd>
+    {% endif %}
+    {% if person.zone is not null %}
+        <dt class="col-sm-3 text-sm-right">Zone géographique</dt>
+        <dd class="col-sm-9">{{ person.zone }}</dd>
+    {% endif %}
+    {% if person.website is not null %}
+        <dt class="col-sm-3 text-sm-right">Site web</dt>
+        <dd class="col-sm-9"><a href="{{ person.website }}" target="_blank">{{ person.website }}</a></dd>
+    {% endif %}
+</dl>

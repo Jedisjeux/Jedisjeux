@@ -1,0 +1,19 @@
+{% import 'macro/image.html.twig' as images %}
+
+<div class="slick-carousel content-slider-with-thumbs mb-20">
+    {% for image in person.images %}
+        {{ images.render(image.webPath, 'medium_width_fixed', person) }}
+        <a href="{{ image.webPath | imagine_filter('medium_width_fixed') }}" class="slick-carousel--popup-img overlay-link" title="image title"><i class="fa fa-plus"></i></a>
+    {% endfor %}
+</div>
+{% if person.images|length > 1 %}
+<div class="content-slider-thumbs-container">
+    <div class="slick-carousel content-slider-thumbs">
+        {% for image in person.images %}
+            <div class="slick-nav-thumb">
+                {{ images.render(image.webPath, 'medium_width_fixed', person) }}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}

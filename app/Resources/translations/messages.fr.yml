@@ -12,6 +12,7 @@ app:
         articles: Articles
         article_details: Détails de l'article
         article_settings: Configuration de l'article
+        artist: Illustrateur
         avatar: Avatar
         barcode: Code-barres
         barcodes: Code-barres
@@ -34,6 +35,7 @@ app:
         dealers: Vendeurs
         dealer_prices: Tarifs des vendeurs
         delimiter: Separateur
+        designer: Auteur
         destination: Destination
         duration: Durée
         edit_article: Modifier l'article
@@ -49,6 +51,7 @@ app:
         edit_redirection: Modifier la redirection
         edit_string_block: Modifer le bloc de chaîne
         edit_topic: Modifier le sujet
+        editor: Editeur
         errors: Erreurs
         festival_lists: Listes de festival
         festival_list_items: Items de liste de festival
@@ -78,6 +81,7 @@ app:
         list_games: Liste des jeux
         list_reviews: Liste des avis
         logout: Déconnection
+        ludographies: Ludographies
         main_image: Image principale
         manage_articles: Gérer les articles
         manage_article_reviews: Gérer les Avis d'article
