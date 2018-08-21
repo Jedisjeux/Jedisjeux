@@ -3,19 +3,15 @@
 {% import _self as self %}
 
 {% macro show_people(people) %}
-    {% spaceless %}
-        {% for person in people %}
-            {% if not loop.first %}, {% endif %}<a href="#">{{ person }}</a>
-        {% endfor %}
-    {% endspaceless %}
+    {% for person in people %}{% spaceless %}
+        {% if not loop.first %}, {% endif %}<a href="#">{{ person }}</a>
+    {% endspaceless %}{% endfor %}
 {% endmacro %}
 
 {% macro show_taxons(taxons) %}
-    {% spaceless %}
-        {% for taxon in taxons %}
-            {% if not loop.first %}, {% endif %}<a href="#">{{ taxon }}</a>
-        {% endfor %}
-    {% endspaceless %}
+    {% for taxon in taxons %}{% spaceless %}
+        {% if not loop.first %}, {% endif %}<a href="#">{{ taxon }}</a>
+    {% endspaceless %}{% endfor %}
 {% endmacro %}
 
 <h4 class="space-top">Specifications</h4>
