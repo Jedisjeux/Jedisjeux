@@ -1,5 +1,7 @@
 {% import 'macro/image.html.twig' as images %}
 
+{% set articlePath = path('app_frontend_article_show', { 'slug': article.slug }) %}
+
 <div class="image-box style-2 mb-20 bordered light-gray-bg">
     <div class="overlay-container overlay-visible">
         {% if article.mainImage is not null %}
@@ -19,6 +21,6 @@
         {% if article.firstBlock is not null %}
             <p>{{ (article.firstBlock.body|striptags)[:150] }}...</p>
         {% endif %}
-        <a href="#" class="btn btn-default btn-sm rgin-clear">Read More<i class="fa fa-arrow-right pl-10"></i></a>
+        <a href="{{ articlePath }}" class="btn btn-default btn-sm rgin-clear">Read More<i class="fa fa-arrow-right pl-10"></i></a>
     </div>
 </div>
