@@ -378,16 +378,6 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
     }
 
     /**
-     * @return Block|null
-     */
-    public function getFirstBlock(): ?Block
-    {
-        $block = $this->blocks->first();
-
-        return $block ? $block : null;
-    }
-
-    /**
      * @return ArticleReview[]|Collection
      */
     public function getReviews(): Collection

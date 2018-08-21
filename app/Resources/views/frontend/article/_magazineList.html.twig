@@ -20,8 +20,8 @@
                 <i class="fa fa-calendar-o pr-1"></i> {{ article.publishStartDate|localizeddate('medium', 'none') }}
                 <i class="pl-10 pr-1 fa fa-tag"></i> {{ article.mainTaxon }}
             </p>
-            {% if article.firstBlock is not null %}
-                <p>{{ (article.firstBlock.body|striptags)[:150] }}...</p>
+            {% if article.shortDescription is not null %}
+                <p>{{ (article.shortDescription|striptags)[:150] }}...</p>
             {% endif %}
             <a href="{{ articlePath }}" class="btn btn-default btn-sm rgin-clear">Read More<i class="fa fa-arrow-right pl-10"></i></a>
         </div>

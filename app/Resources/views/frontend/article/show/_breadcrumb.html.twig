@@ -8,7 +8,7 @@
             {% if article.mainTaxon is not null %}
                 <li class="breadcrumb-item"><a class="link-dark" href="{{ path('app_frontend_article_index_by_taxon', { 'slug': article.mainTaxon.slug }) }}">{{ article.mainTaxon }}</a></li>
             {% endif %}
-            <li class="breadcrumb-item active">Critique de Jurassik Snack</li>
+            <li class="breadcrumb-item active">{{ article.title }}</li>
         </ol>
     </div>
 </div>

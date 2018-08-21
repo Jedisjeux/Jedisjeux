@@ -1,5 +1,7 @@
 {% extends 'frontend/layout.html.twig' %}
 
+{% import 'macro/image.html.twig' as images %}
+
 {% block content %}
     {% include 'frontend/article/show/_breadcrumb.html.twig' %}
 
@@ -16,7 +18,7 @@
 
                     <!-- page-title start -->
                     <!-- ================ -->
-                    <h1 class="page-title">Critique de Jurassik Snack</h1>
+                    <h1 class="page-title">{{ article.title }}</h1>
                     <!-- page-title end -->
 
                     <!-- blogpost start -->
@@ -25,31 +27,23 @@
                         <header>
                             <div class="post-info mb-4">
                     <span class="post-date">
-                      <i class="fa fa-calendar-o pr-1"></i>
-                      <span class="day">12</span>
-                      <span class="month">May 2017</span>
+                      <i class="fa fa-calendar-o pr-1"></i> {{ article.publishStartDate|localizeddate('medium', 'none') }}
                     </span>
                                 <span class="submitted"><i class="fa fa-user pr-1 pl-1"></i> by <a href="#">bgarz</a></span>
-                                <span class="comments"><i class="fa fa-comments-o pl-1 pr-1"></i> <a href="#">22 comments</a></span>
+                                <span class="comments"><i class="fa fa-comments-o pl-1 pr-1"></i> <a href="#">{{ article.topic is not null ? article.topic.postCount : 0 }} comments</a></span>
                             </div>
                         </header>
                         <div class="blogpost-content">
 
                             <div class="overlay-container">
-                                <img src="/assets/frontend/images/article-1-wide.jpg" alt="">
-                                <a class="overlay-link popup-img" href="/assets/frontend/images/article-1.jpg"><i class="fa fa-search-plus"></i></a>
+                                {% if article.mainImage is not null %}
+                                    {{ images.render(article.mainImage.webPath, 'full', article.title) }}
+                                    <a class="overlay-link popup-img" href="{{ article.mainImage.webPath | imagine_filter(filter|default('full')) }}"><i class="fa fa-search-plus"></i></a>
+                                {% endif %}
                             </div>
 
                             <big>
-                                <p>
-                                    Après les beaux poissons colorés de Little Big Fish, l'éditeur françaisThe Flying Games, avec à sa tête David Perez, nous propose de jouer aujourd'hui avec des diplodocus et des T.Rex dans Jurassik Snack (oui on aime les jeux de mots chez l'éditeur...) qui est la réédition de Guerre et Bêêêh ! l'un des premiers jeux de Bruno Cathala.
-                                </p>
-                                <p>
-                                    Avec Camille Chaussy aux pinceaux le jeu a pris de la couleur et avec la présence dans la boite des 12 figurines miniatures de dinosaures, nul doute que Jurassik Snack peut se positionner comme un vrai succès d'estime auprès d'un public familial comme ça a été le cas lors du dernier festival international des jeux à Cannes où les tables ont affiché complet pendant trois jours.
-                                </p>
-                                <p>
-                                    Pour vous faire une idée précise, je vous propose donc une présentation complète de ce jeu à deux joueurs.
-                                </p>
+                                {{ article.shortDescription|raw }}
                             </big>
 
                             <h3>Matériel</h3>
