@@ -20,7 +20,7 @@
                 <i class="pl-10 pr-1 fa fa-user"></i> {{ game_play.playerCount }} joueurs</p>
             {% endif %}
         {% if topic is not null and topic.mainPost is not null %}
-            <p>{{ (topic.mainPost.body|striptags)[:250] }}...</p>
+            <p>{{ (topic.mainPost.body|striptags)[:150] }}...</p>
         {% endif %}
         <a href="{{ gamePlayPath }}" class="btn btn-default btn-sm rgin-clear">Read More<i class="fa fa-arrow-right pl-10"></i></a>
     </div>
