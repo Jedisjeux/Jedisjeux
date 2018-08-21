@@ -1,33 +1,31 @@
+{% set activeMenu = metadata is defined ? metadata.name : 'home' %}
+
 <!-- main-menu -->
 <ul class="navbar-nav ml-xl-auto">
-
     <!-- mega-menu start -->
-    <li class="nav-item active mega-menu mega-menu--wide">
+    <li class="nav-item {% if 'home' == activeMenu %}active {% endif %}mega-menu mega-menu--wide">
         <a href="{{ path('app_homepage') }}" class="nav-link" id="first-dropdown">Accueil</a>
     </li>
     <!-- mega-menu end -->
-    <li class="nav-item dropdown ">
+    <li class="nav-item {% if 'article' == activeMenu %}active {% endif %}dropdown ">
         <a href="{{ path('app_frontend_article_index') }}" class="nav-link dropdown-toggle" id="seventh-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Articles</a>
         <ul class="dropdown-menu" aria-labelledby="seventh-dropdown">
             <li ><a href="{{ path('app_frontend_article_index') }}">Tous</a></li>
-            <li ><a href="article-listing-2col.html">News</a></li>
-            <li ><a href="article-listing-2col.html">Tests de jeu</a></li>
-            <li ><a href="article-listing-2col.html">Vidéos</a></li>
         </ul>
     </li>
-    <li class="nav-item dropdown ">
+    <li class="nav-item {% if 'product' == activeMenu %}active {% endif %}dropdown ">
         <a href="{{ path('sylius_frontend_product_index') }}" class="nav-link dropdown-toggle" id="sixth-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Jeux</a>
         <ul class="dropdown-menu" aria-labelledby="sixth-dropdown">
             <li ><a href="{{ path('sylius_frontend_product_index') }}">Tous</a></li>
         </ul>
     </li>
-    <li class="nav-item mega-menu mega-menu--wide">
+    <li class="nav-item {% if 'game_play' == activeMenu %}active {% endif %}mega-menu mega-menu--wide">
         <a href="{{ path('app_frontend_game_play_index') }}" class="nav-link">Parties</a>
     </li>
-    <li class="nav-item mega-menu mega-menu--wide">
+    <li class="nav-item {% if 'person' == activeMenu %}active {% endif %}mega-menu mega-menu--wide">
         <a href="{{ path('app_frontend_person_index') }}" class="nav-link">Ludographie</a>
     </li>
-    <li class="nav-item mega-menu mega-menu--wide">
+    <li class="nav-item {% if 'topic' == activeMenu %}active {% endif %}mega-menu mega-menu--wide">
         <a href="{{ path('app_frontend_topic_index') }}" class="nav-link">Forum</a>
     </li>
 </ul>
