@@ -4,62 +4,16 @@
     <div class="container">
         <h3 class="title">Dernières parties jouées</h3>
         <div class="separator-2"></div>
-        <div class="row grid-space-10">
-            <div class="col-sm-4">
-                <div class="image-box style-2 mb-20 bordered light-gray-bg">
-                    <div class="overlay-container overlay-visible">
-                        <img src="/assets/frontend/images/portfolio-4.jpg" alt="">
-                        <div class="overlay-bottom text-left">
-                            <p class="lead margin-clear">7 Wonders</p>
-                        </div>
-                    </div>
-                    <div class="body">
-                        <p class="small mb-10 text-muted"><i class="fa fa-calendar-o pr-1"></i> Joué le 13 août 2018 <i
-                                    class="pl-10 pr-1 fa fa-user"></i> à 4 joueurs</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam atque ipsam nihil, adipisci
-                            rem minus? Voluptatem distinctio laborum porro aspernatur.</p>
-                        <a href="#" class="btn btn-default btn-sm rgin-clear">Read More<i
-                                    class="fa fa-arrow-right pl-10"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="image-box style-2 mb-20 bordered light-gray-bg">
-                    <div class="overlay-container overlay-visible">
-                        <img src="/assets/frontend/images/portfolio-5.jpg" alt="">
-                        <div class="overlay-bottom text-left">
-                            <p class="lead margin-clear">Kero</p>
-                        </div>
-                    </div>
-                    <div class="body">
-                        <p class="small mb-10 text-muted"><i class="fa fa-calendar-o pr-1"></i> Joué le 13 août 2018 <i
-                                    class="pl-10 pr-1 fa fa-user"></i> à 4 joueurs</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam atque ipsam nihil, adipisci
-                            rem minus? Voluptatem distinctio laborum porro aspernatur.</p>
-                        <a href="#" class="btn btn-default btn-sm rgin-clear">Read More<i
-                                    class="fa fa-arrow-right pl-10"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="image-box style-2 mb-20 bordered light-gray-bg">
-                    <div class="overlay-container overlay-visible">
-                        <img src="/assets/frontend/images/portfolio-6.jpg" alt="">
-                        <div class="overlay-bottom text-left">
-                            <p class="lead margin-clear">The 7th Continent</p>
-                        </div>
-                    </div>
-                    <div class="body">
-                        <p class="small mb-10 text-muted"><i class="fa fa-calendar-o pr-1"></i> Joué le 13 août 2018 <i
-                                    class="pl-10 pr-1 fa fa-user"></i> à 4 joueurs</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam atque ipsam nihil, adipisci
-                            rem minus? Voluptatem distinctio laborum porro aspernatur.</p>
-                        <a href="#" class="btn btn-default btn-sm rgin-clear">Read More<i
-                                    class="fa fa-arrow-right pl-10"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {{ render(url('app_partial_game_play_index', {
+            'paginate': 3,
+            'template': 'frontend/game_play/grid/_threeColumns.html.twig',
+            'criteria': {
+                'hasTopic': 1
+            },
+            'sorting': {
+                'createdAt': 'desc'
+            }
+        })) }}
     </div>
 </section>
 <!-- section end -->
