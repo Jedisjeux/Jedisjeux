@@ -1,5 +1,7 @@
 {% extends 'frontend/layout.html.twig' %}
 
+{% from 'macro/misc.html.twig' import pagination %}
+
 {% block content %}
     {% include 'frontend/person/index/_banner.html.twig' %}
 
@@ -18,6 +20,11 @@
                             </div>
                         {% endfor %}
                     </div>
+
+                    <!-- pagination start -->
+                    {{ pagination(people.data) }}
+                    <!-- pagination end -->
+
                 </div>
                 <!-- main end -->
             </div>

@@ -20,6 +20,7 @@ use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -152,10 +153,16 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     {
         $first = true;
 
+        $filesystem = new Filesystem();
+        $dir = __DIR__ . '/../../../../web/uploads/img';
+
         foreach ($options['images'] as $imagePath) {
+            $basename = basename($imagePath);
+            $filesystem->copy($imagePath, $dir . '/' . $basename);
+
             /** @var ProductVariantImage $image */
             $image = $this->productVariantImageFactory->createNew();
-            $image->setPath(basename($imagePath));
+            $image->setPath($basename);
 
             if ($first) {
                 $image->setMain(true);

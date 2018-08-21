@@ -1,10 +1,10 @@
 {% import 'macro/image.html.twig' as images %}
 
+{% set imagePath =  person.mainImage is not null ? person.mainImage.webPath : '/assets/frontend/images/placeholder.png' %}
+
 <div class="image-box style-2 mb-20 shadow-2 bordered light-gray-bg text-center">
     <div class="overlay-container">
-        {% if person.mainImage is not null %}
-            {{ images.render(person.mainImage.webPath, 'full', person) }}
-        {% endif %}
+        {{ images.render(imagePath, 'medium_width_fixed', person) }}
         <div class="overlay-to-top">
             <p class="small margin-clear"><em>App development <br> Lorem ipsum dolor sit</em></p>
         </div>

@@ -99,6 +99,10 @@ liip_imagine:
             filters:
                 auto_rotate: ~
                 relative_resize: { heighten: 80 }
+        medium_width_fixed:
+            filters:
+                auto_rotate: ~
+                relative_resize: { widen: 500 }
         logo:
             quality: 100
             filters:
