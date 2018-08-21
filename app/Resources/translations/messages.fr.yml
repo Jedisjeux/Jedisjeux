@@ -176,6 +176,7 @@ app:
         translator: Traducteur
         url: Url
         user: Membre
+        users: Utilisateurs
         user_guide: Guide utilisateur
         username_or_email: Nom d'utilisateur ou email
         utf8: Utf8

@@ -240,4 +240,20 @@ class ArticleRepository extends EntityRepository
 
         return $this->getPaginator($queryBuilder);
     }
+
+    /**
+     * @return int
+     *
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function findNbResults()
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder
+            ->select($queryBuilder->expr()->count('o'))
+            ->where($queryBuilder->expr()->eq($this->getPropertyName('status'), ':status'))
+            ->setParameter('status', Article::STATUS_PUBLISHED);
+        return $queryBuilder->getQuery()->getSingleScalarResult();
+    }
 }

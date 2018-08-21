@@ -8,6 +8,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Repository\ArticleRepository;
 use AppBundle\Repository\PersonRepository;
 use AppBundle\Repository\ProductRepository;
 use AppBundle\Repository\ProductReviewRepository;
@@ -31,12 +32,21 @@ class CounterController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('partial/counter/_index.html.twig', array(
+        return $this->render('frontend/homepage/index/_counters.html.twig', array(
+            'articleCount' => $this->getArticleRepository()->findNbResults(),
             'productCount' => $this->getProductRepository()->findNbResults(),
             'personCount' => $this->getPersonRepository()->findNbResults(),
             'userCount' => $this->getUserRepository()->findNbResults(),
-            'productReviewCount' => $this->getProductReviewRepository()->findNbResults(),
+            'ratingCount' => $this->getProductRepository()->findNbResults(),
         ));
+    }
+
+    /**
+     * @return ArticleRepository
+     */
+    protected function getArticleRepository()
+    {
+        return $this->get('app.repository.article');
     }
 
     /**
