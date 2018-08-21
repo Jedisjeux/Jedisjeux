@@ -142,6 +142,7 @@ app:
         publisher: Publieur
         published_at: Publié le
         ratings: Notes
+        recent_articles: Articles récents
         redactor: Rédacteur
         redirections: Redirections
         redirection_count: Nombre de redirections
