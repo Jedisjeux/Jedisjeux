@@ -29,7 +29,7 @@
     {% endif %}
 
     <div class="overlay-container {% if positionClass is not null %}col-sm-5 {{ positionClass }}{% endif %}">
-        {{ images.render(image.webPath, 'medium_width_fixed',image.label) }}
+        {{ images.render(image.webPath, 'full',image.label) }}
         <a class="overlay-link popup-img" href="{{ image.webPath | imagine_filter(filter|default('full')) }}"><i class="fa fa-search-plus"></i></a>
         <p><em>{{ image.label }}</em></p>
     </div>
