@@ -1,0 +1,25 @@
+{% macro render_comments(topic) %}
+    {% import 'macro/image.html.twig' as images %}
+
+    {% for post in topic.posts %}
+        {% set avatar = post.author.avatar %}
+        {% set avatarPath = avatar is not null ? avatar.webPath : '/assets/frontend/images/avatar-placeholder.png' %}
+
+        <!-- comment start -->
+        <div class="comment clearfix">
+            <div class="comment-avatar">
+                {{ images.render(avatarPath, 'thumbnail', topic.author, 'rounded-circle') }}
+            </div>
+            <header>
+                <div class="comment-meta pv-20">By <a href="#">{{ post.author }}</a> | {{ post.createdAt|localizeddate('medium', 'short') }}</div>
+            </header>
+            <div class="comment-content">
+                <div class="comment-body clearfix">
+                    {{ post.body|raw }}
+                    <a href="#" class="btn-sm-link link-dark pull-right"><i class="fa fa-reply"></i> Reply</a>
+                </div>
+            </div>
+        </div>
+        <!-- comment end -->
+    {% endfor %}
+{% endmacro %}
