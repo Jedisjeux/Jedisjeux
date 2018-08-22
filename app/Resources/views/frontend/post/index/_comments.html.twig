@@ -1,60 +1,30 @@
+{% import 'macro/image.html.twig' as images %}
+
 <!-- comments start -->
 <!-- ================ -->
 <div id="comments" class="comments">
-    <h2 class="title">There are 4683 comments</h2>
+    <h2 class="title">There are {{ topic.postCount }} comments</h2>
 
-    <!-- comment start -->
-    <div class="comment clearfix">
-        <div class="comment-avatar">
-            <img class="rounded-circle" src="/assets/frontend/images/avatar.jpg" alt="avatar">
-        </div>
-        <header>
-            <div class="comment-meta pv-20">By <a href="#">loic_425</a> | 6 août 2007 à 12:31</div>
-        </header>
-        <div class="comment-content">
-            <div class="comment-body clearfix">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </p>
-                <a href="blog-post.html" class="btn-sm-link link-dark pull-right"><i class="fa fa-reply"></i> Reply</a>
-            </div>
-        </div>
+    {% for post in posts %}
+        {% set avatarPath = post.author.avatar is not null ? post.author.webPath : '/assets/frontend/images/avatar-placeholder.png' %}
 
         <!-- comment start -->
         <div class="comment clearfix">
             <div class="comment-avatar">
-                <img class="rounded-circle" src="/assets/frontend/images/avatar.jpg" alt="avatar">
+                {{ images.render(avatarPath, 'thumbnail', topic.author, 'rounded-circle') }}
             </div>
             <header>
-                <div class="comment-meta pv-20">By <a href="#">loic_425</a> | 6 août 2007 à 12:31</div>
+                <div class="comment-meta pv-20">By <a href="#">{{ post.author }}</a> | {{ post.createdAt|localizeddate('medium', 'short') }}</div>
             </header>
             <div class="comment-content">
                 <div class="comment-body clearfix">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </p>
-                    <a href="blog-post.html" class="btn-sm-link link-dark pull-right"><i class="fa fa-reply"></i> Reply</a>
+                    {{ post.body|raw }}
+                    <a href="#" class="btn-sm-link link-dark pull-right"><i class="fa fa-reply"></i> Reply</a>
                 </div>
             </div>
         </div>
         <!-- comment end -->
-
-    </div>
-    <!-- comment end -->
-
-    <!-- comment start -->
-    <div class="comment clearfix">
-        <div class="comment-avatar">
-            <img class="rounded-circle" src="/assets/frontend/images/avatar.jpg" alt="avatar">
-        </div>
-        <header>
-            <div class="comment-meta pv-20">By <a href="#">loic_425</a> | 6 août 2007 à 12:31</div>
-        </header>
-        <div class="comment-content">
-            <div class="comment-body clearfix">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </p>
-                <a href="blog-post.html" class="btn-sm-link link-dark pull-right"><i class="fa fa-reply"></i> Reply</a>
-            </div>
-        </div>
-    </div>
-    <!-- comment end -->
-
+    {% endfor %}
 </div>
 <!-- comments end -->
 
