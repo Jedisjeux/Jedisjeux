@@ -2,14 +2,13 @@
 
 {% set mainTaxon = topic.mainTaxon %}
 {% set dark = mainTaxon is not null and not mainTaxon.public ? true : false %}
+{% set avatarPath = topic.author.avatar is not null ? topic.author.avatar.webPath : '/assets/frontend/images/avatar-placeholder.png'  %}
 
 <div class="image-box style-3 mb-20 {% if dark|default(false) %}dark-bg{% else %}shadow bordered light-gray-bg{% endif %}">
     <div class="row grid-space-0">
         <div class="col-lg-2 pv-20">
-            <div class="overlay-container">
-                {% if topic.author.avatar %}
-                    {{ images.render(topic.author.avatar.webPath, 'magazine_item') }}
-                {% endif %}
+            <div class="overlay-container d-flex justify-content-center">
+                {{ images.render(avatarPath, 'thumbnail_XL', topic.author, 'rounded-circle') }}
                 <div class="overlay-to-top">
                     <p class="small margin-clear"><em>Some info <br> Lorem ipsum dolor sit</em></p>
                 </div>

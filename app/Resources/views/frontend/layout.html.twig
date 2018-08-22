@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Jedisjeux | Image Boxes</title>
+    <title>{{ pageTitle|default('')}} {% if pageTitle is defined %} - {% endif %}{% block title %}Jedisjeux - et les autres jours aussi{% endblock title %}</title>
     <meta name="description" content="Jedisjeux a Bootstrap-based, Responsive HTML5 Template">
     <meta name="author" content="author">
 
