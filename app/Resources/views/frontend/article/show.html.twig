@@ -1,6 +1,39 @@
 {% extends 'frontend/layout.html.twig' %}
 
+{% import _self as self %}
 {% import 'macro/image.html.twig' as images %}
+
+{% macro show_block(block) %}
+    {% import _self as self %}
+
+    {% if block.title is not null %}
+        <h3>{{ block.title }}</h3>
+        <div class="separator-2"></div>
+    {% endif %}
+    {% if block.image is not null %}
+        {{ self.show_block_image(block.image, block.imagePosition) }}
+    {% endif %}
+    {{ block.body|raw }}
+    <div class="clearfix"></div>
+{% endmacro %}
+
+{% macro show_block_image(image, position) %}
+    {% import 'macro/image.html.twig' as images %}
+
+    {% set positionClass = null %}
+
+    {% if position is constant('AppBundle\\Entity\\Block::POSITION_LEFT') %}
+        {% set positionClass = 'pull-left' %}
+    {% elseif position is constant('AppBundle\\Entity\\Block::POSITION_RIGHT') %}
+        {% set positionClass = 'pull-right' %}
+    {% endif %}
+
+    <div class="overlay-container {% if positionClass is not null %}col-sm-5 {{ positionClass }}{% endif %}">
+        {{ images.render(image.webPath, 'medium_width_fixed',image.label) }}
+        <a class="overlay-link popup-img" href="{{ image.webPath | imagine_filter(filter|default('full')) }}"><i class="fa fa-search-plus"></i></a>
+        <p><em>{{ image.label }}</em></p>
+    </div>
+{% endmacro %}
 
 {% block content %}
     {% include 'frontend/article/show/_breadcrumb.html.twig' %}
@@ -26,9 +59,9 @@
                     <article class="blogpost full">
                         <header>
                             <div class="post-info mb-4">
-                    <span class="post-date">
-                      <i class="fa fa-calendar-o pr-1"></i> {{ article.publishStartDate|localizeddate('medium', 'none') }}
-                    </span>
+                                <span class="post-date">
+                                  <i class="fa fa-calendar-o pr-1"></i> {{ article.publishStartDate|localizeddate('medium', 'none') }}
+                                </span>
                                 <span class="submitted"><i class="fa fa-user pr-1 pl-1"></i> by <a href="#">bgarz</a></span>
                                 <span class="comments"><i class="fa fa-comments-o pl-1 pr-1"></i> <a href="#">{{ article.topic is not null ? article.topic.postCount : 0 }} comments</a></span>
                             </div>
@@ -46,48 +79,9 @@
                                 {{ article.shortDescription|raw }}
                             </big>
 
-                            <h3>Matériel</h3>
-                            <div class="separator-2"></div>
-                            <div class="col-sm-5 pull-left">
-                                <img class="media-content" src="https://www.jedisjeux.net/media/cache/full/uploads/img/5b54988a69a097.94587671.JPG" />
-                            </div>
-                            <p>Mauris dolor sapien, <a href="#">malesuada at interdum ut</a>, hendrerit eget lorem. Nunc interdum mi neque, et  sollicitudin purus fermentum ut. Suspendisse faucibus nibh odio, a vehicula eros pharetra in. Maecenas  ullamcorper commodo rutrum. In iaculis lectus vel augue eleifend dignissim. Aenean viverra semper sollicitudin.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis ullam nemo itaque excepturi suscipit unde repudiandae nesciunt ad voluptates minima recusandae illum exercitationem, neque, ut totam ratione. Consequuntur consequatur ad nesciunt nulla voluptate voluptates qui natus labore facilis dolore odit vero ea sint inventore tenetur et eligendi nobis fugit veniam quod possimus, quasi, voluptatem. Cupiditate?</p>
-                            <ol>
-                                <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, laboriosam tempore, veniam repudiandae dolor aperiam, iste porro amet odio eius earum tempora? Ex nobis suscipit, nam in eius, deserunt nihil.</li>
-                                <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis odit est quae amet iure quia reiciendis maxime eos blanditiis tenetur voluptates, ab, obcaecati eaque accusamus dolorem a beatae mollitia quod?</li>
-                                <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam aperiam vel cum quisquam enim reprehenderit sunt cupiditate ullam, id quidem perspiciatis dolore molestiae iure odio. Dolore fuga voluptate, deleniti placeat.</li>
-                                <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo, eaque. Totam nisi ducimus dolor ab obcaecati temporibus asperiores, ad dignissimos dolorum unde fuga quae voluptates beatae quasi voluptatum culpa dolore?</li>
-                            </ol>
-                            <blockquote>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                            </blockquote>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus incidunt, beatae rem omnis distinctio, dolor, praesentium impedit quisquam nobis pariatur nulla expedita aliquid repellendus laudantium. A illum sint corrupti eligendi quae ab, facilis eos quas! Velit earum facere ex maxime.</p>
-                            <h3>Règles du jeu</h3>
-                            <div class="separator-2"></div>
-                            <div class="col-sm-5 pull-right">
-                                <img class="media-content" src="https://www.jedisjeux.net/media/cache/full/uploads/img/5b5498bd6c7000.39850832.JPG" />
-                            </div>
-                            <p>
-                                Règles du jeu
-                                Dans Jurassik Snack le joueur pour l'emporter doit réussir à manger plus de feuilles que l'adversaire en s'aidant de son équipe de Diplos. Il peut aussi réussir à éliminer tous les Diplos adverses en s'aidant des T.Rex.
-                            </p>
-                            <p>
-                                La règle du jeu fait 4 pages dont trois pour expliquer les règles (bien illustrées) et la dernière qui reprend tous les effets des jetons Herbe.
-                            </p>
-                            <div class="clearfix"></div>
-
-                            <h3>Durée de vie</h3>
-                            <div class="separator-2"></div>
-                            <div class="col-sm-5 pull-left">
-                                <img class="media-content" src="https://www.jedisjeux.net/media/cache/full/uploads/img/5b5498bd72acc7.11644623.JPG" />
-                            </div>
-                            <p>
-                                Le placement aléatoire des jetons et les multiples dispositions des plateaux Prairie permettront un bon renouvellement des parties. Le temps de 15 minutes indiqué sur la boite n'est pas usurpé et les parties pourront donc s'enchainer rapidement ce qui permettra à Jurassik Snack de sortir assez facilement de sa ludothèque.
-                            </p>
-                            <p>
-                                Comme tous les jeux avec tirage de tuiles, ou révélation de jetons comme ici, il y a bien sûr une part d'aléatoire dans le jeu. Pour les spécialistes du contrôle en tout genre passez votre chemin. Pour ceux qui cherchent un jeu rapide, malin, jouable entre adultes ou avec des enfants vous êtes au bon endroit !
-                            </p>
+                            {% for block in article.blocks %}
+                                {{ self.show_block(block) }}
+                            {% endfor %}
                         </div>
                         <footer class="clearfix">
                             <div class="tags pull-left"><i class="fa fa-tags pr-1"></i> <a href="#">tag 1</a>, <a href="#">tag 2</a>, <a href="#">long tag 3</a></div>

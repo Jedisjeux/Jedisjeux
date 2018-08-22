@@ -102,6 +102,7 @@ class BlockExampleFactory extends AbstractExampleFactory implements ExampleFacto
         /** @var BlockImage $blockImage */
         $blockImage = $this->blockImageFactory->createNew();
         $blockImage->setPath(basename($imagePath));
+        $blockImage->setLabel($options['image_label']);
 
         file_put_contents($blockImage->getAbsolutePath(), file_get_contents($imagePath));
 
@@ -126,6 +127,10 @@ class BlockExampleFactory extends AbstractExampleFactory implements ExampleFacto
 
             ->setDefault('image_position', function (Options $options) {
                 return $this->faker->randomElement([Block::POSITION_TOP, Block::POSITION_LEFT, Block::POSITION_RIGHT]);
+            })
+
+            ->setDefault('image_label', function (Options $options) {
+                return $this->faker->sentence();
             })
 
             ->setDefault('article', LazyOption::randomOne($this->articleRepository))
