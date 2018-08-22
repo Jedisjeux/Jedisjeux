@@ -62,7 +62,7 @@
                                 <span class="post-date">
                                   <i class="fa fa-calendar-o pr-1"></i> {{ article.publishStartDate|localizeddate('medium', 'none') }}
                                 </span>
-                                <span class="submitted"><i class="fa fa-user pr-1 pl-1"></i> by <a href="#">bgarz</a></span>
+                                <span class="submitted"><i class="fa fa-user pr-1 pl-1"></i> by <a href="#">{{ article.author }}</a></span>
                                 <span class="comments"><i class="fa fa-comments-o pl-1 pr-1"></i> <a href="#">{{ article.topic is not null ? article.topic.postCount : 0 }} comments</a></span>
                             </div>
                         </header>

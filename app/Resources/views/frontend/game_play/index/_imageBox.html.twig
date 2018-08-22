@@ -22,6 +22,6 @@
         {% if topic is not null and topic.mainPost is not null %}
             <p>{{ (topic.mainPost.body|striptags)[:150] }}...</p>
         {% endif %}
-        <a href="{{ gamePlayPath }}" class="btn btn-default btn-sm rgin-clear">Read More<i class="fa fa-arrow-right pl-10"></i></a>
+        <a href="{{ gamePlayPath }}" class="btn btn-default btn-sm rgin-clear">{{ 'app.ui.read_more'|trans }}<i class="fa fa-arrow-right pl-10"></i></a>
     </div>
 </div>
