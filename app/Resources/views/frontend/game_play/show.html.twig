@@ -16,8 +16,8 @@
 
                     <!-- page-title start -->
                     <!-- ================ -->
-                    <h1 class="page-title text-center">Terraforming Mars</h1>
-                    <p class="large text-center">le 27 juillet 2018 | par Le Zeptien
+                    <h1 class="page-title text-center">{{ game_play.product }}</h1>
+                    <p class="large text-center">{{ game_play.createdAt|localizeddate('medium', 'none') }} | par {{ game_play.author }}
                     <div class="separator with-icon"><i class="fa fa-play-circle bordered"></i></div>
                     <!-- page-title end -->
 
@@ -52,39 +52,7 @@
                             </div>
                         </div>
                         <div class="col-lg-8 col-xl-7 pv-30">
-                            <h4 class="space-top">Specifications de la partie</h4>
-                            <hr>
-                            <dl class="row">
-                                <dt class="col-sm-3 text-sm-right">Nombre de joueurs</dt>
-                                <dd class="col-sm-9">4</dd>
-                                <dt class="col-sm-3 text-sm-right">Date</dt>
-                                <dd class="col-sm-9">27 juillet 2018</dd>
-                                <dt class="col-sm-3 text-sm-right">Durée</dt>
-                                <dd class="col-sm-9">2h40</dd>
-                            </dl>
-                            <h4 class="space-top">Specifications du jeu</h4>
-                            <hr>
-                            <dl class="row">
-                                <dt class="col-sm-3 text-sm-right">Nombre de joueurs</dt>
-                                <dd class="col-sm-9">2 joueurs exclusivement</dd>
-                                <dt class="col-sm-3 text-sm-right">Âge</dt>
-                                <dd class="col-sm-9">à partir de 8 ans</dd>
-                                <dt class="col-sm-3 text-sm-right">Durée</dt>
-                                <dd class="col-sm-9">30 minutes</dd>
-                                <dt class="col-sm-3 text-sm-right">Mécanismes</dt>
-                                <dd class="col-sm-9">Majorité, Rapidité, Dés, Stop ou encore</dd>
-                                <dt class="col-sm-3 text-sm-right">Thèmes</dt>
-                                <dd class="col-sm-9">SteamPunk</dd>
-                                <dt class="col-sm-3 text-sm-right">Date de sortie</dt>
-                                <dd class="col-sm-9">juin 2018</dd>
-                                <dt class="col-sm-3 text-sm-right">Auteur(s)</dt>
-                                <dd class="col-sm-9">Prospero Hall</dd>
-                                <dt class="col-sm-3 text-sm-right">Illustrateur(s)</dt>
-                                <dd class="col-sm-9">Pierô</dd>
-                                <dt class="col-sm-3 text-sm-right">Editeur(s)</dt>
-                                <dd class="col-sm-9">Hurrican</dd>
-                            </dl>
-                            <hr>
+                            {% include 'frontend/game_play/show/_specifications.html.twig' %}
                         </div>
                     </div>
                 </div>
