@@ -1,0 +1,30 @@
+{% import 'macro/image.html.twig' as images  %}
+
+<!-- photos section start -->
+<!-- ================ -->
+<section class="pv-30">
+    <div class="container">
+        <div class="col-lg-8">
+            <h3>Photos</h3>
+            <div class="separator-2"></div>
+            <div class="slick-carousel content-slider-with-thumbs mb-20">
+                {% for image in game_play.images %}
+                    <div class="overlay-container overlay-visible">
+                        {{ images.render(image.webPath, 'full', image.description) }}
+                        <a href="{{ image.webPath | imagine_filter(filter|default('full')) }}" class="slick-carousel--popup-img overlay-link" title="image title"><i class="fa fa-plus"></i></a>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="content-slider-thumbs-container">
+                <div class="slick-carousel content-slider-thumbs">
+                    {% for image in game_play.images %}
+                        <div class="slick-nav-thumb">
+                            {{ images.render(image.webPath, 'magazine_item', image.description) }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- photos section end -->
