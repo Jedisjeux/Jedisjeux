@@ -1,0 +1,5 @@
+{%- macro duration(game_play) -%}
+    {% set duration = "today"|date_modify("+" ~ game_play.duration ~ "minute" ) %}
+
+    {{ duration|date('G') }} h {{ duration|date('i') }}
+{%- endmacro -%}

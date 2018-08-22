@@ -1,4 +1,4 @@
-{% set duration = "today"|date_modify("+" ~ game_play.duration ~ "minute" ) %}
+{% from 'macro/game_play.html.twig' import duration %}
 
 <dl class="row">
     <dt class="col-sm-3 text-sm-right">{{ 'app.ui.player_count'|trans }}</dt>
@@ -6,5 +6,5 @@
     <dt class="col-sm-3 text-sm-right">{{ 'sylius.ui.date'|trans }}</dt>
     <dd class="col-sm-9">{{ game_play.playedAt|localizeddate('medium', 'none') }}</dd>
     <dt class="col-sm-3 text-sm-right">{{ 'app.ui.duration'|trans }}</dt>
-    <dd class="col-sm-9">{{ duration|date('G') }} h {{ duration|date('i') }}</dd>
+    <dd class="col-sm-9">{{ duration(game_play) }}</dd>
 </dl>
