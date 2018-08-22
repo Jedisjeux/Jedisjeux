@@ -1,0 +1,73 @@
+{% extends 'frontend/layout.html.twig' %}
+
+{% block content %}
+    {% include 'frontend/post/index/_breadcrumb.html.twig' %}
+
+    <!-- main-container start -->
+    <!-- ================ -->
+    <section class="main-container">
+
+        <div class="container">
+            <div class="row">
+
+                <!-- main start -->
+                <!-- ================ -->
+                <div class="main col-lg-8">
+
+                    <!-- page-title start -->
+                    <!-- ================ -->
+                    <h1 class="page-title">Les parties jouées la veille</h1>
+                    <!-- page-title end -->
+
+                    <!-- blogpost start -->
+                    <!-- ================ -->
+                    <article class="blogpost full">
+                        <header>
+                            <div class="post-info mb-4">
+                    <span class="post-date">
+                      <i class="fa fa-calendar-o pr-1"></i>
+                      <span class="day">6</span>
+                      <span class="month">août 2007</span>
+                    </span>
+                                <span class="submitted"><i class="fa fa-user pr-1 pl-1"></i> by <a href="#">loic_425</a></span>
+                                <span class="comments"><i class="fa fa-comments-o pl-1 pr-1"></i> <a href="#">4683 comments</a></span>
+                            </div>
+                        </header>
+                        <div class="blogpost-content">
+                            <p>
+                                Sur l'idée de Zeptien de reprendre ici le fameux "Hier j'ai joué à" de trictrac, notons ici les dernières parties effectuées.
+                            </p>
+                            <p>
+                                Ne citons pas simplement les jeux joués, mais une impression rapide de la partie et du jeu.
+                            </p>
+                            <p>
+                                "Allez je déclare la 1ere olympiade des jeux ouverts, enfin je ne sais pas, enfin peut-être..."
+                            </p>
+                        </div>
+                        <footer class="clearfix">
+                            <div class="tags pull-left"><i class="fa fa-tags pr-1"></i> <a href="#">tag 1</a>, <a href="#">tag 2</a>, <a href="#">long tag 3</a></div>
+                            <div class="link pull-right">
+                                <ul class="social-links circle small colored clearfix margin-clear text-right animated-effect-1">
+                                    <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li class="googleplus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                </ul>
+                            </div>
+                        </footer>
+                    </article>
+                    <!-- blogpost end -->
+
+                    {% include 'frontend/post/index/_comments.html.twig' %}
+
+                </div>
+                <!-- main end -->
+
+                {% include 'frontend/post/index/_sidebar.html.twig' %}
+
+            </div>
+        </div>
+    </section>
+    <!-- main-container end -->
+
+    {% include 'frontend/post/index/_footerTop.html.twig' %}
+{% endblock content %}
