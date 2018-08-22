@@ -52,7 +52,12 @@
                             </div>
                         </div>
                         <div class="col-lg-8 col-xl-7 pv-30">
+                            <h4 class="space-top">Specifications de la partie</h4>
+                            <hr>
                             {% include 'frontend/game_play/show/_specifications.html.twig' %}
+                            <h4 class="space-top">Specifications du jeu</h4>
+                            <hr>
+                            {% include 'frontend/product/show/_specifications.html.twig' with { 'product' : game_play.product } %}
                         </div>
                     </div>
                 </div>

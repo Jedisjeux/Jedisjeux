@@ -4,31 +4,29 @@
 
 {% macro show_people(people) %}
     {% for person in people %}{% spaceless %}
-        {% if not loop.first %}, {% endif %}<a href="#">{{ person }}</a>
+        {% if not loop.first %}, {% endif %}<a href="{{ path('sylius_frontend_product_index_by_person', { 'slug': person.slug } ) }}">{{ person }}</a>
     {% endspaceless %}{% endfor %}
 {% endmacro %}
 
 {% macro show_taxons(taxons) %}
     {% for taxon in taxons %}{% spaceless %}
-        {% if not loop.first %}, {% endif %}<a href="#">{{ taxon }}</a>
+        {% if not loop.first %}, {% endif %}<a href="{{ path('sylius_frontend_product_index_by_taxon', { 'slug': taxon.slug } ) }}">{{ taxon }}</a>
     {% endspaceless %}{% endfor %}
 {% endmacro %}
 
-<h4 class="space-top">Specifications</h4>
-<hr>
 <dl class="row">
-    <dt class="col-sm-3 text-sm-right">Nombre de joueurs</dt>
+    <dt class="col-sm-3 text-sm-right">{{ 'app.ui.player_count'|trans }}</dt>
     <dd class="col-sm-9">{{ playerCount(product) }}</dd>
-    <dt class="col-sm-3 text-sm-right">Âge</dt>
+    <dt class="col-sm-3 text-sm-right">{{ 'app.ui.age'|trans }}</dt>
     <dd class="col-sm-9">à partir de {{ product.minAge }} ans</dd>
-    <dt class="col-sm-3 text-sm-right">Durée</dt>
+    <dt class="col-sm-3 text-sm-right">{{ 'app.ui.duration'|trans|trans }}</dt>
     <dd class="col-sm-9">{{ duration(product) }}</dd>
     {% if product.mechanisms|length > 0 %}
-        <dt class="col-sm-3 text-sm-right">Mécanismes</dt>
+        <dt class="col-sm-3 text-sm-right">{{ 'app.ui.mechanisms'|trans }}</dt>
         <dd class="col-sm-9">{{ self.show_taxons(product.mechanisms) }}</dd>
     {% endif %}
     {% if product.mechanisms|length > 0 %}
-        <dt class="col-sm-3 text-sm-right">Thèmes</dt>
+        <dt class="col-sm-3 text-sm-right">{{ 'app.ui.themes'|trans }}</dt>
         <dd class="col-sm-9">{{ self.show_taxons(product.themes) }}</dd>
     {% endif %}
     <dt class="col-sm-3 text-sm-right">Date de sortie</dt>

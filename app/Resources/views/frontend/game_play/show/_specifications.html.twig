@@ -1,35 +1,10 @@
 {% set duration = "today"|date_modify("+" ~ game_play.duration ~ "minute" ) %}
 
-<h4 class="space-top">Specifications de la partie</h4>
-<hr>
 <dl class="row">
-    <dt class="col-sm-3 text-sm-right">Nombre de joueurs</dt>
+    <dt class="col-sm-3 text-sm-right">{{ 'app.ui.player_count'|trans }}</dt>
     <dd class="col-sm-9">{{ game_play.playerCount }}</dd>
     <dt class="col-sm-3 text-sm-right">{{ 'sylius.ui.date'|trans }}</dt>
     <dd class="col-sm-9">{{ game_play.playedAt|localizeddate('medium', 'none') }}</dd>
     <dt class="col-sm-3 text-sm-right">{{ 'app.ui.duration'|trans }}</dt>
     <dd class="col-sm-9">{{ duration|date('G') }} h {{ duration|date('i') }}</dd>
 </dl>
-<h4 class="space-top">Specifications du jeu</h4>
-<hr>
-<dl class="row">
-    <dt class="col-sm-3 text-sm-right">Nombre de joueurs</dt>
-    <dd class="col-sm-9">2 joueurs exclusivement</dd>
-    <dt class="col-sm-3 text-sm-right">Âge</dt>
-    <dd class="col-sm-9">à partir de 8 ans</dd>
-    <dt class="col-sm-3 text-sm-right">Durée</dt>
-    <dd class="col-sm-9">30 minutes</dd>
-    <dt class="col-sm-3 text-sm-right">Mécanismes</dt>
-    <dd class="col-sm-9">Majorité, Rapidité, Dés, Stop ou encore</dd>
-    <dt class="col-sm-3 text-sm-right">Thèmes</dt>
-    <dd class="col-sm-9">SteamPunk</dd>
-    <dt class="col-sm-3 text-sm-right">Date de sortie</dt>
-    <dd class="col-sm-9">juin 2018</dd>
-    <dt class="col-sm-3 text-sm-right">Auteur(s)</dt>
-    <dd class="col-sm-9">Prospero Hall</dd>
-    <dt class="col-sm-3 text-sm-right">Illustrateur(s)</dt>
-    <dd class="col-sm-9">Pierô</dd>
-    <dt class="col-sm-3 text-sm-right">Editeur(s)</dt>
-    <dd class="col-sm-9">Hurrican</dd>
-</dl>
-<hr>

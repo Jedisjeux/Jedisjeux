@@ -100,6 +100,7 @@ app:
         manage_string_blocks: Gérer les blocs de chaîne
         manage_topics: Gérer les sujets
         material_rating: Note du matériel
+        mechanisms: Mécanismes
         moderation: Modération
         move_up: Monter
         move_down: Descendre
@@ -172,6 +173,7 @@ app:
         staff: Staff
         string_blocks: Blocs de chaîne
         style: Style
+        themes: Thèmes
         topic: Sujet
         topics: Sujets
         translator: Traducteur
@@ -251,7 +253,8 @@ label:
   add_slide: Ajouter un slide
   additional_address_info: Complément d'adresse
   address: Adresse
-  age_min: Age min
+  age: Âge
+  age_min: Âge min
   amount: Montant
   artists: Illustrateurs
   ask_for_publication: Demander la publication
