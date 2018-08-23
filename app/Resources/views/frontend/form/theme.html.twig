@@ -5,8 +5,10 @@
         {{ block('fieldset_form_row') }}
     {%- else -%}
         <div class="form-group row{% if (not compound or force_error|default(false)) and not valid %} is-invalid{% endif %} {% if icon_class is defined %} has-feedback{% endif %}">
-            {{- form_label(form) -}}
-            <div class="{{ block('form_group_class') }}">
+            {% if label %}
+                {{- form_label(form) -}}
+            {% endif %}
+            <div class="{% if label %}{{ block('form_group_class') }}{% endif %}">
                 {{- form_widget(form) -}}
                 {% if icon_class is defined %}
                     <i class="{{ icon_class|default('') }} form-control-feedback pr-4"></i>
@@ -20,6 +22,55 @@
             {##}</div>
     {%- endif -%}
 {%- endblock form_row %}
+
+{% block collection_widget -%}
+    {% from 'SyliusResourceBundle:Macros:notification.html.twig' import error %}
+    {% import _self as self %}
+    {% set attr = attr|merge({'class': attr.class|default ~ ' controls collection-widget'}) %}
+
+    {% spaceless %}
+        <div data-form-type="collection" {{ block('widget_container_attributes') }}
+                {% if prototype is defined and allow_add %}
+                    data-prototype='{{ self.collection_item(prototype, allow_delete, button_delete_label, '__name__')|e }}'
+                {%- endif -%}
+        >
+            {{ error(form.vars.errors) }}
+
+            {% if prototypes|default is iterable %}
+                {% for key, subPrototype in prototypes %}
+                    <input type="hidden" data-form-prototype="{{ key }}" value="{{ self.collection_item(subPrototype, allow_delete, button_delete_label, '__name__')|e }}" />
+                {% endfor %}
+            {% endif %}
+
+            <div data-form-collection="list">
+                {% for child in form %}
+                    {{ self.collection_item(child, allow_delete, button_delete_label, loop.index0) }}
+                {% endfor %}
+            </div>
+
+            {% if prototype is defined and allow_add %}
+                <a href="#" class="btn btn-default" data-form-collection="add">
+                    <i class="fa fa-plus-square"></i>
+                    {{ button_add_label|trans }}
+                </a>
+            {% endif %}
+        </div>
+    {% endspaceless %}
+{%- endblock collection_widget %}
+
+{% macro collection_item(form, allow_delete, button_delete_label, index) %}
+    {% spaceless %}
+        <div data-form-collection="item" data-form-collection-index="{{ index }}">
+            {{ form_widget(form) }}
+            {% if allow_delete %}
+                <a href="#" data-form-collection="delete" class="btn btn-danger" style="margin-bottom: 1em;">
+                    <i class="fa fa-trash"></i>
+                    {{ button_delete_label|trans }}
+                </a>
+            {% endif %}
+        </div>
+    {% endspaceless %}
+{% endmacro %}
 
 {% block _app_game_play_duration_row %}
     {% set icon_class= 'fa fa-clock-o' %}

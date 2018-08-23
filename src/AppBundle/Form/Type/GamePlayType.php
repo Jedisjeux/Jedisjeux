@@ -67,10 +67,11 @@ class GamePlayType extends AbstractType
                 'required' => false,
             ])
             ->add('playerCount', null, [
-                'label' => 'label.player_count',
+                'label' => 'app.ui.player_count',
                 'required' => false,
             ])
             ->add('images', CollectionType::class, [
+                'label' => 'sylius.ui.images',
                 'entry_type' => GamePlayImageType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
@@ -85,6 +86,7 @@ class GamePlayType extends AbstractType
                 ]
             ])
             ->add('players', CollectionType::class, [
+                'label' => 'app.ui.players',
                 'entry_type' => PlayerType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
