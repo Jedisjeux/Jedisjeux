@@ -43,17 +43,6 @@ cmf_block:
 #    default_template: SyliusWebBundle:Frontend/StaticContent:show.html.twig
 
 cmf_media:
-    use_imagine: true
-    imagine_filters:
-        upload_thumbnail:   image_upload_thumbnail
-    extra_filters:
-        - cmf_full
-        - cmf_thumbnail
-        - cmf_thumbnail_S
-        - cmf_block_medium
-        - cmf_magazine_item
-        - cmf_magazine_item_wide
-        - cmf_block
     persistence:
         phpcr:
             enabled: true
