@@ -14,6 +14,7 @@ var argv = require('yargs').argv;
 var rootPath = typeof argv.rootPath === 'undefined' ? '../' : argv.rootPath;
 var appRootPath = rootPath + 'frontend/compiled/';
 var vendorPath = argv.vendorPath || '';
+var vendorUiPath = '' === vendorPath ? '../../../vendor/sylius/ui-bundle/' : vendorPath + 'sylius/ui-bundle/';
 var nodeModulesPath = argv.nodeModulesPath;
 var bundlesPath = rootPath + '../bundles/';
 
@@ -22,6 +23,15 @@ var paths = {
         js: [
             nodeModulesPath + 'jquery/dist/jquery.min.js',
             nodeModulesPath + 'jquery-ui-dist/jquery-ui.min.js',
+            nodeModulesPath + 'bootstrap/dist/js/bootstrap.bundle.js',
+            vendorUiPath + 'Resources/private/js/sylius-form-collection.js',
+            'plugins/isotope/imagesloaded.pkgd.min.js',
+            'plugins/isotope/isotope.pkgd.min.js',
+            'plugins/magnific-popup/jquery.magnific-popup.min.js',
+            'plugins/waypoints/jquery.waypoints.min.js',
+            'plugins/waypoints/sticky.min.js',
+            'plugins/countTo/jquery.countTo.js',
+            'plugins/slick/slick.min.js',
             'js/**'
         ],
         sass: [
