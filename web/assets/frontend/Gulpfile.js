@@ -25,12 +25,14 @@ var paths = {
             'js/**'
         ],
         sass: [
-            'sass/**'
+            // 'sass/**'
         ],
         css: [
-            nodeModulesPath + 'bootstrap/dist/bootstrap.css',
+            nodeModulesPath + 'bootstrap/dist/css/bootstrap.css',
             nodeModulesPath + 'font-awesome/css/font-awesome.css',
-            nodeModulesPath + 'magnific-popup/dist/jquery.magnific-popup.css'
+            'plugins/magnific-popup/magnific-popup.css',
+            'css/animations.css',
+            'plugins/slick/slick.css'
         ],
         img: [
             'img/**'
