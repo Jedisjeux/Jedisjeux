@@ -8,7 +8,7 @@ app_frontend_article_index:
         _controller: app.controller.article:indexWithTaxonsAction
         _sylius:
             grid: app_frontend_article
-            paginate: 16
+            paginate: 12
 
             template: frontend/article/index.html.twig
             sorting:
@@ -21,7 +21,7 @@ app_frontend_article_index_by_taxon:
         _controller: app.controller.article:indexByTaxonAction
         _sylius:
             grid: app_frontend_article
-            paginate: 16
+            paginate: 12
             template: frontend/article/index.html.twig
     requirements:
         slug: "[^?]+"
