@@ -57,21 +57,14 @@ class GamePlayType extends AbstractType
                 'label' => 'label.played_at',
                 'required' => false,
                 'widget' => 'single_text',
-                'widget_addon_append' => [
-                    'icon' => 'calendar'
-                ],
                 'html5' => false,
                 'attr' => [
                     'class' => 'date',
                 ]
             ])
-            ->add('duration', DurationType::class, [
+            ->add('duration', IntegerType::class, [
                 'label' => 'label.duration',
                 'required' => false,
-                'widget_addon_append' => [
-                    'icon' => 'time'
-                ],
-                'help_label' => '(en minutes)',
             ])
             ->add('playerCount', null, [
                 'label' => 'label.player_count',

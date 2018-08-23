@@ -1,11 +1,35 @@
 {% extends 'bootstrap_4_horizontal_layout.html.twig' %}
 
-{% block duration_row %}
-    <form-group class="has-feedback row">
-        <div class="col-md-12">
-            {{- form_row(form) -}}
-            <i class="fa fa-user form-control-feedback pr-4"></i>
-        </div>
+{% block form_row -%}
+    {%- if expanded is defined and expanded -%}
+        {{ block('fieldset_form_row') }}
+    {%- else -%}
+        <div class="form-group row{% if (not compound or force_error|default(false)) and not valid %} is-invalid{% endif %} {% if icon_class is defined %} has-feedback{% endif %}">
+            {{- form_label(form) -}}
+            <div class="{{ block('form_group_class') }}">
+                {{- form_widget(form) -}}
+                {% if icon_class is defined %}
+                    <i class="{{ icon_class|default('') }} form-control-feedback pr-4"></i>
+                {% endif %}
+                {% if help_label is defined %}
+                <small class="form-text text-muted">
+                    {{ help_label }}
+                </small>
+                {% endif %}
+            </div>
+            {##}</div>
+    {%- endif -%}
+{%- endblock form_row %}
 
-    </form-group>
+{% block _app_game_play_duration_row %}
+    {% set icon_class= 'fa fa-clock-o' %}
+    {% set help_label = 'app.ui.type_duration_in_minute'|trans  %}
+
+    {{- block('form_row') -}}
+{% endblock %}
+
+{% block _app_game_play_playedAt_row %}
+    {% set icon_class= 'fa fa-calendar' %}
+
+    {{- block('form_row') -}}
 {% endblock %}

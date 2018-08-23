@@ -177,6 +177,7 @@ app:
         topic: Sujet
         topics: Sujets
         translator: Traducteur
+        type_duration_in_minute: Saisir la durée en minute.
         url: Url
         user: Membre
         users: Utilisateurs
