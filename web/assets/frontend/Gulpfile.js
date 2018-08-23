@@ -35,7 +35,9 @@ var paths = {
             'js/**'
         ],
         sass: [
-            // 'sass/**'
+            'sass/style.scss',
+            'sass/typography-default.scss',
+            'sass/skins/light_blue.scss'
         ],
         css: [
             nodeModulesPath + 'bootstrap/dist/css/bootstrap.css',
