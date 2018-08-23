@@ -1,0 +1,51 @@
+{% macro create(cancel_url) %}
+
+    {% import _self as action %}
+
+    <div class="pull-right">
+        {{ action.createButton() }}
+        {{ action.cancelButton(cancel_url) }}
+    </div>
+{% endmacro %}
+
+{% macro update(cancel_url) %}
+
+    {% import _self as action %}
+
+    <div class="pull-right">
+        {{ action.updateButton() }}
+        {{ action.cancelButton(cancel_url) }}
+    </div>
+{% endmacro %}
+
+{% macro createButton() %}
+    <button type="submit"
+            class="btn btn-default">
+        <span class="fa fa-check"></span>
+        {{ 'sylius.ui.create'|trans }}
+    </button>
+{% endmacro %}
+
+{% macro updateButton() %}
+    <button type="submit"
+            class="btn btn-primary">
+        <span class="fa fa-save"></span>
+        {{ 'sylius.ui.save_changes'|trans }}
+    </button>
+{% endmacro %}
+
+{% macro cancelButton(cancel_url) %}
+    <a href="{{ cancel_url|default(app.request.headers.get('referer')) }}"
+       class="btn btn-danger">
+        <span class="fa fa-remove"></span>
+        {{ 'sylius.ui.cancel'|trans }}
+    </a>
+{% endmacro %}
+
+{% macro search() %}
+    <button type="submit"
+            class="fa fa-default">
+        <i class="fa fa-search"></i>
+        {{ 'sylius.ui.search'|trans }}
+    </button>
+{% endmacro %}
