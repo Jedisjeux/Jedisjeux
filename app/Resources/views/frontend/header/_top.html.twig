@@ -1,3 +1,5 @@
+{% import 'macro/image.html.twig' as images %}
+
 <!-- header-top start -->
 <!-- classes:  -->
 <!-- "dark": dark version of header top e.g. class="header-top dark" -->
@@ -43,39 +45,29 @@
                     <!-- ================ -->
                     <div class="header-top-dropdown text-right">
                         <div class="btn-group">
-                            <a href="page-signup.html" class="btn btn-default btn-sm"><i class="fa fa-user pr-2"></i> Sign Up</a>
+                            <a href="{{ path('app_frontend_register') }}" class="btn btn-default btn-sm"><i class="fa fa-user pr-2"></i> Sign Up</a>
                         </div>
-                        <div class="btn-group">
-                            <button id="header-top-drop-2" type="button" class="btn dropdown-toggle btn-default btn-sm dropdown-toggle--no-caret" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-lock pr-2"></i> Login</button>
-                            <ul class="dropdown-menu dropdown-menu-right dropdown-animation" aria-labelledby="header-top-drop-2">
-                                <li>
-                                    <form class="login-form margin-clear">
-                                        <div class="form-group has-feedback">
-                                            <label class="control-label">Username</label>
-                                            <input type="text" class="form-control" placeholder="">
-                                            <i class="fa fa-user form-control-feedback"></i>
-                                        </div>
-                                        <div class="form-group has-feedback">
-                                            <label class="control-label">Password</label>
-                                            <input type="password" class="form-control" placeholder="">
-                                            <i class="fa fa-lock form-control-feedback"></i>
-                                        </div>
-                                        <button type="submit" class="btn btn-gray btn-sm">Log In</button>
-                                        <span class="pl-1 pr-1">or</span>
-                                        <button type="submit" class="btn btn-default btn-sm">Sing Up</button>
-                                        <ul>
-                                            <li><a href="#">Forgot your password?</a></li>
-                                        </ul>
-                                        <span class="text-center">Login with</span>
-                                        <ul class="social-links circle small colored clearfix">
-                                            <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                            <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                            <li class="googleplus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                        </ul>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
+                        {% if app.user is null %}
+                            <div class="btn-group">
+                                <button id="header-top-drop-2" type="button" class="btn dropdown-toggle btn-default btn-sm dropdown-toggle--no-caret" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-lock pr-2"></i> Login</button>
+                                <ul class="dropdown-menu dropdown-menu-right dropdown-animation" aria-labelledby="header-top-drop-2">
+                                    <li>
+                                        {% include 'frontend/header/top/_loginForm.html.twig' %}
+                                    </li>
+                                </ul>
+                            </div>
+                        {% else %}
+
+                            <div class="btn-group">
+                                {% set customer = app.user.customer %}
+                                {% set avatarPath = customer.avatar is not null ? customer.avatar.webPath : '/assets/frontend/templates/images/avatar-placeholder.png' %}
+                                <a href="{{ path('sylius_frontend_account_dashboard') }}" class="btn btn-default btn-sm">
+                                    {#{{ images.render(avatarPath, 'thumbnail', customer, 'avatar rounded-circle') }}#}
+
+                                    Mon compte
+                                </a>
+                            </div>
+                        {% endif %}
                     </div>
                     <!--  header top dropdowns end -->
                 </div>

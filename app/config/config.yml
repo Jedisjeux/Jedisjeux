@@ -47,6 +47,7 @@ twig:
     globals:
         ga_tracking: "%google.analytics.tracking_id%"
     form_themes:
+        - '::frontend/form/theme.html.twig'
         - "::form/ckeditor_widget.html.twig"
 
 mopa_bootstrap:

@@ -65,7 +65,7 @@ class GamePlayType extends AbstractType
                     'class' => 'date',
                 ]
             ])
-            ->add('duration', IntegerType::class, [
+            ->add('duration', DurationType::class, [
                 'label' => 'label.duration',
                 'required' => false,
                 'widget_addon_append' => [

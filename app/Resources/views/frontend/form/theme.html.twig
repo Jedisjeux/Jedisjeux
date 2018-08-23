@@ -1,0 +1,11 @@
+{% extends 'bootstrap_4_horizontal_layout.html.twig' %}
+
+{% block duration_row %}
+    <form-group class="has-feedback row">
+        <div class="col-md-12">
+            {{- form_row(form) -}}
+            <i class="fa fa-user form-control-feedback pr-4"></i>
+        </div>
+
+    </form-group>
+{% endblock %}
