@@ -33,6 +33,6 @@ class IndexPage extends SymfonyPage
      */
     public function isProductOnList($productName)
     {
-        return null !== $this->getDocument()->find('css', sprintf('.jeu-list h4:contains("%s")', $productName));
+        return null !== $this->getDocument()->find('css', sprintf('#product-list h3:contains("%s")', $productName));
     }
 }

@@ -23,11 +23,11 @@
     <dd class="col-sm-9">{{ duration(product) }}</dd>
     {% if product.mechanisms|length > 0 %}
         <dt class="col-sm-3 text-sm-right">{{ 'app.ui.mechanisms'|trans }}</dt>
-        <dd class="col-sm-9">{{ self.show_taxons(product.mechanisms) }}</dd>
+        <dd id="#product-mechanisms" class="col-sm-9">{{ self.show_taxons(product.mechanisms) }}</dd>
     {% endif %}
-    {% if product.mechanisms|length > 0 %}
+    {% if product.themes|length > 0 %}
         <dt class="col-sm-3 text-sm-right">{{ 'app.ui.themes'|trans }}</dt>
-        <dd class="col-sm-9">{{ self.show_taxons(product.themes) }}</dd>
+        <dd id="#product-themes" class="col-sm-9">{{ self.show_taxons(product.themes) }}</dd>
     {% endif %}
     <dt class="col-sm-3 text-sm-right">Date de sortie</dt>
     <dd class="col-sm-9">{{ releasedAt(product.firstVariant) }}</dd>
