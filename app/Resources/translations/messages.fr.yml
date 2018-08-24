@@ -169,6 +169,7 @@ app:
         show_posts: Voir les messages
         show_game_sheet: Voir la fiche de jeu
         show_sub_categories: Voir les sous-catégories
+        specifications: Spécifications
         submit: Envoyer
         slide_show: Carousel
         source: Source
