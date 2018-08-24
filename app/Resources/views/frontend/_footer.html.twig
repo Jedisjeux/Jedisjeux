@@ -1,3 +1,5 @@
+{% import 'macro/social_links.html.twig' as social_links %}
+
 <!-- footer start (Add "dark" class to #footer in order to enable dark footer) -->
 <!-- ================ -->
 <footer id="footer" class="clearfix ">
@@ -148,9 +150,7 @@
                             <div class="separator-2"></div>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium odio voluptatem necessitatibus illo vel dolorum soluta.</p>
                             <ul class="social-links circle animated-effect-1">
-                                <li class="facebook"><a href="https://www.facebook.com/jedisjeux"><i class="fa fa-facebook"></i></a></li>
-                                <li class="twitter"><a href="https://twitter.com/jedisjeux"><i class="fa fa-twitter"></i></a></li>
-                                <li class="github"><a href="https://github.com/Jedisjeux/Jedisjeux"><i class="fa fa-github"></i></a></li>
+                                {{ social_links.list() }}
                             </ul>
                             <div class="separator-2"></div>
                             <ul class="list-icons">
