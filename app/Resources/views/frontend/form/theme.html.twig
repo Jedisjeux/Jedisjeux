@@ -19,9 +19,21 @@
                 </small>
                 {% endif %}
             </div>
-            {##}</div>
+        </div>
     {%- endif -%}
 {%- endblock form_row %}
+
+{% block email_row %}
+    {% set icon_class= 'fa fa-envelope' %}
+
+    {{- block('form_row') -}}
+{% endblock %}
+
+{% block textarea_row %}
+    {% set icon_class = 'fa fa-pencil' %}
+
+    {{- block('form_row') -}}
+{% endblock %}
 
 {% block collection_widget -%}
     {% from 'SyliusResourceBundle:Macros:notification.html.twig' import error %}
@@ -81,6 +93,18 @@
 
 {% block _app_game_play_playedAt_row %}
     {% set icon_class= 'fa fa-calendar' %}
+
+    {{- block('form_row') -}}
+{% endblock %}
+
+{% block _app_contact_request_firstName_row %}
+    {% set icon_class= 'fa fa-user' %}
+
+    {{- block('form_row') -}}
+{% endblock %}
+
+{% block _app_contact_request_lastName_row %}
+    {% set icon_class= 'fa fa-user' %}
 
     {{- block('form_row') -}}
 {% endblock %}

@@ -31,7 +31,7 @@ class ContactRequestType extends AbstractType
 
         $builder
             ->add('firstName', TextType::class, [
-                'label' => 'label.first_name',
+                'label' => 'sylius.ui.first_name',
             ])
             ->add('lastName', TextType::class, [
                 'label' => 'label.last_name',
@@ -40,7 +40,10 @@ class ContactRequestType extends AbstractType
                 'label' => 'label.email',
             ])
             ->add('body', TextareaType::class, [
-                'label' => 'label.body',
+                'label' => 'sylius.ui.message',
+                'attr' => [
+                    'rows' => 6,
+                ]
             ]);
     }
 
