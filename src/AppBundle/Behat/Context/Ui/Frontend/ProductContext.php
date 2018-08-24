@@ -140,9 +140,28 @@ class ProductContext implements Context
     }
 
     /**
+     * @Then I should see the designer name :name
+     */
+    public function iShouldSeeDesignerName($name)
+    {
+        $designers = $this->getProductDesigners();
+
+        $found = false;
+
+        foreach ($designers as $designer) {
+            if ($name === $designer->getText()) {
+                $found = true;
+                break;
+            }
+        }
+
+        Assert::true($found);
+    }
+
+    /**
      * @Then /^I should be able to see (this product)'s details$/
      */
-    public function iShouldBeAbleToSeeDashboard(ProductInterface $product)
+    public function iShouldBeAbleToSeeProductDetails(ProductInterface $product)
     {
         try {
             $this->iOpenProductPage($product);
@@ -157,7 +176,7 @@ class ProductContext implements Context
     /**
      * @Then /^I should not be able to see (this product)'s details$/
      */
-    public function iShouldNotBeAbleToSeeDashboard(ProductInterface $product)
+    public function iShouldNotBeAbleToSeeProductDetails(ProductInterface $product)
     {
         try {
             $this->iOpenProductPage($product);
@@ -173,6 +192,7 @@ class ProductContext implements Context
      * @return NodeElement[]
      *
      * @throws \InvalidArgumentException
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
      */
     private function getProductMechanisms()
     {
@@ -186,6 +206,7 @@ class ProductContext implements Context
      * @return NodeElement[]
      *
      * @throws \InvalidArgumentException
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
      */
     private function getProductThemes()
     {
@@ -193,5 +214,19 @@ class ProductContext implements Context
         Assert::notNull($themes, 'The product has no themes.');
 
         return $themes;
+    }
+
+    /**
+     * @return NodeElement[]
+     *
+     * @throws \InvalidArgumentException
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     */
+    private function getProductDesigners()
+    {
+        $designers = $this->showPage->getDesigners();
+        Assert::notNull($designers, 'The product has no designers.');
+
+        return $designers;
     }
 }

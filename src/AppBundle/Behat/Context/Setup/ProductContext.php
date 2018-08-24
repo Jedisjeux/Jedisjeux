@@ -12,6 +12,7 @@
 namespace AppBundle\Behat\Context\Setup;
 
 use AppBundle\Behat\Service\SharedStorageInterface;
+use AppBundle\Entity\Person;
 use AppBundle\Entity\Product;
 use AppBundle\Fixture\Factory\ExampleFactoryInterface;
 use Behat\Behat\Context\Context;
@@ -119,6 +120,16 @@ class ProductContext implements Context
     public function productHasTheme(Product $product, TaxonInterface $theme)
     {
         $product->addTheme($theme);
+        $this->manager->flush($product);
+    }
+
+    /**
+     * @Given /^(this product) is designed by ("[^"]+" person)$/
+     * @Given /^(this product) is also designed by ("[^"]+" person)$/
+     */
+    public function productHasDesigner(Product $product, Person $person)
+    {
+        $product->getFirstVariant()->addDesigner($person);
         $this->manager->flush($product);
     }
 }

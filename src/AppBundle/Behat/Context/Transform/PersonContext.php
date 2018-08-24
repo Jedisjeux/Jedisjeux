@@ -38,6 +38,7 @@ final class PersonContext implements Context
 
     /**
      * @Transform /^person "([^"]+)"$/
+     * @Transform /^"([^"]+)" person$/
      * @Transform :person
      *
      * @return Person
