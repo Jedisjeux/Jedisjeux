@@ -9,11 +9,11 @@ Feature: Viewing product's designers
 
     @ui
     Scenario: Viewing a detailed page with product's designers
-        Given there is person with first name "Doris" and last name "Matthäus"
-        And there is person with first name "Franz" and last name "Vohwinkel"
+        Given there is person with first name "Reiner" and last name "Knizia"
+        And there is person with first name "Wolfgang" and last name "Kramer"
         And there is product "Modern Art"
-        And this product is designed by "Doris Matthäus" person
-        And this product is also designed by "Franz Vohwinkel" person
+        And this product is designed by "Reiner Knizia" person
+        And this product is also designed by "Wolfgang Kramer" person
         When I check this product's details
-        Then I should see the designer name "Doris Matthäus"
-        And I should see the designer name "Franz Vohwinkel"
+        Then I should see the designer name "Reiner Knizia"
+        And I should see the designer name "Wolfgang Kramer"

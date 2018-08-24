@@ -132,4 +132,14 @@ class ProductContext implements Context
         $product->getFirstVariant()->addDesigner($person);
         $this->manager->flush($product);
     }
+
+    /**
+     * @Given /^(this product) is drawn by ("[^"]+" person)$/
+     * @Given /^(this product) is also drawn by ("[^"]+" person)$/
+     */
+    public function productHasArtist(Product $product, Person $person)
+    {
+        $product->getFirstVariant()->addArtist($person);
+        $this->manager->flush($product);
+    }
 }

@@ -159,6 +159,25 @@ class ProductContext implements Context
     }
 
     /**
+     * @Then I should see the artist name :name
+     */
+    public function iShouldSeeArtistName($name)
+    {
+        $artists = $this->getProductPublishers();
+
+        $found = false;
+
+        foreach ($artists as $artist) {
+            if ($name === $artist->getText()) {
+                $found = true;
+                break;
+            }
+        }
+
+        Assert::true($found);
+    }
+
+    /**
      * @Then /^I should be able to see (this product)'s details$/
      */
     public function iShouldBeAbleToSeeProductDetails(ProductInterface $product)
@@ -228,5 +247,33 @@ class ProductContext implements Context
         Assert::notNull($designers, 'The product has no designers.');
 
         return $designers;
+    }
+
+    /**
+     * @return NodeElement[]
+     *
+     * @throws \InvalidArgumentException
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     */
+    private function getProductArtists()
+    {
+        $artists = $this->showPage->getArtists();
+        Assert::notNull($artists, 'The product has no artists.');
+
+        return $artists;
+    }
+
+    /**
+     * @return NodeElement[]
+     *
+     * @throws \InvalidArgumentException
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     */
+    private function getProductPublishers()
+    {
+        $publishers = $this->showPage->getPublishers();
+        Assert::notNull($publishers, 'The product has no publishers.');
+
+        return $publishers;
     }
 }
