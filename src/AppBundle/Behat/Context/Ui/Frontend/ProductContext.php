@@ -163,6 +163,25 @@ class ProductContext implements Context
      */
     public function iShouldSeeArtistName($name)
     {
+        $artists = $this->getProductArtists();
+
+        $found = false;
+
+        foreach ($artists as $artist) {
+            if ($name === $artist->getText()) {
+                $found = true;
+                break;
+            }
+        }
+
+        Assert::true($found);
+    }
+
+    /**
+     * @Then I should see the publisher name :name
+     */
+    public function iShouldSeePublisherName($name)
+    {
         $artists = $this->getProductPublishers();
 
         $found = false;

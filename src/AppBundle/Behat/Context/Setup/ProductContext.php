@@ -142,4 +142,14 @@ class ProductContext implements Context
         $product->getFirstVariant()->addArtist($person);
         $this->manager->flush($product);
     }
+
+    /**
+     * @Given /^(this product) is published by ("[^"]+" person)$/
+     * @Given /^(this product) is also published by ("[^"]+" person)$/
+     */
+    public function productHasPublisher(Product $product, Person $person)
+    {
+        $product->getFirstVariant()->addPublisher($person);
+        $this->manager->flush($product);
+    }
 }
