@@ -78,6 +78,9 @@ class ProductContext implements Context
             'status' => Product::PUBLISHED,
             'mechanisms' => [],
             'themes' => [],
+            'designers' => [],
+            'artists' => [],
+            'publishers' => [],
         ]);
 
         $this->productRepository->add($product);
@@ -97,6 +100,9 @@ class ProductContext implements Context
             'status' => str_replace(' ', '_', $status),
             'mechanisms' => [],
             'themes' => [],
+            'designers' => [],
+            'artists' => [],
+            'publishers' => [],
         ]);
 
         $this->productRepository->add($product);

@@ -11,10 +11,12 @@
 
 namespace AppBundle\Behat\Context\Ui\Frontend;
 
+use AppBundle\Behat\Page\Frontend\Product\IndexByPersonPage;
 use AppBundle\Behat\Page\Frontend\Product\IndexByTaxonPage;
 use AppBundle\Behat\Page\Frontend\Product\IndexPage;
 use AppBundle\Behat\Page\Frontend\Product\ShowPage;
 use AppBundle\Behat\Page\UnexpectedPageException;
+use AppBundle\Entity\Person;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\NodeElement;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -42,15 +44,26 @@ class ProductContext implements Context
     private $indexByTaxonPage;
 
     /**
+     * @var IndexByPersonPage
+     */
+    private $indexByPersonPage;
+
+    /**
      * @param ShowPage $showPage
      * @param IndexPage $indexPage
      * @param IndexByTaxonPage $indexByTaxonPage
+     * @param IndexByPersonPage $indexByPersonPage
      */
-    public function __construct(ShowPage $showPage, IndexPage $indexPage, IndexByTaxonPage $indexByTaxonPage)
-    {
+    public function __construct(
+        ShowPage $showPage,
+        IndexPage $indexPage,
+        IndexByTaxonPage $indexByTaxonPage,
+        IndexByPersonPage $indexByPersonPage
+    ) {
         $this->showPage = $showPage;
         $this->indexPage = $indexPage;
         $this->indexByTaxonPage = $indexByTaxonPage;
+        $this->indexByPersonPage = $indexByPersonPage;
     }
 
     /**
@@ -67,6 +80,14 @@ class ProductContext implements Context
     public function iCheckListOfProductsForTaxon(TaxonInterface $taxon)
     {
         $this->indexByTaxonPage->open(['slug' => $taxon->getSlug()]);
+    }
+
+    /**
+     * @When /^I browse products from (person "([^"]+)")$/
+     */
+    public function iCheckListOfProductsForPerson(Person $person)
+    {
+        $this->indexByPersonPage->open(['slug' => $person->getSlug()]);
     }
 
     /**
