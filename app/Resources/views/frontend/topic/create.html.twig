@@ -2,7 +2,7 @@
 
 {% import 'macro/actions.html.twig' as action %}
 
-{% set pageTitle = 'app.ui.new_game_play'| trans %}
+{% set pageTitle = 'app.ui.new_topic'| trans %}
 
 {% block content %}
     <!-- main-container start -->
@@ -22,7 +22,7 @@
                     <div class="separator-2"></div>
                     <!-- page-title end -->
                     {{ form_start(form) }}
-                    {% include 'frontend/game_play/_form.html.twig' %}
+                    {% include 'frontend/topic/_form.html.twig' %}
                     {{ action.create() }}
                     {{ form_end(form) }}
                 </div>

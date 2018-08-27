@@ -33,6 +33,6 @@ class IndexPage extends SymfonyPage
      */
     public function isTopicOnList($title)
     {
-        return null !== $this->getDocument()->find('css', sprintf('#topic-list h5:contains("%s")', $title));
+        return null !== $this->getDocument()->find('css', sprintf('#topic-list h3:contains("%s")', $title));
     }
 }

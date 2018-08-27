@@ -1,10 +1,10 @@
-{% extends 'frontend/layout.html.twig' %}
+{% extends "frontend/layout.html.twig" %}
 
 {% import 'macro/actions.html.twig' as action %}
 
-{% set pageTitle = 'app.ui.new_game_play'| trans %}
+{% set pageTitle = 'app.ui.edit_topic'|trans %}
 
-{% block content %}
+{% block content -%}
     <!-- main-container start -->
     <!-- ================ -->
     <section class="main-container">
@@ -22,8 +22,9 @@
                     <div class="separator-2"></div>
                     <!-- page-title end -->
                     {{ form_start(form) }}
-                    {% include 'frontend/game_play/_form.html.twig' %}
-                    {{ action.create() }}
+                    <input type="hidden" name="_method" value="PUT"/>
+                    {% include 'frontend/topic/_form.html.twig' %}
+                    {{ action.update() }}
                     {{ form_end(form) }}
                 </div>
             </div>

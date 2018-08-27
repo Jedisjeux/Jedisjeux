@@ -121,6 +121,7 @@ app:
         new_redirection: Nouvelle redirection
         new_post: Nouveau message
         new_string_block: Nouveau bloc de chaîne
+        new_topic: Nouveau sujet
         news: Actualités
         normal: Normal
         not_found_pages: Pages non trouvées
