@@ -107,17 +107,7 @@ class ProductController extends ResourceController
             throw new NotFoundHttpException('Requested person does not exist.');
         }
 
-        /** @var ProductRepository $repository */
-        $repository = $this->repository;
-
-        $criteria = array_merge($request->get('criteria', $configuration->getCriteria()), [
-            'person' => $person,
-        ]);
-
-        $resources = $repository
-            ->createFilterPaginator($criteria, $request->get('sorting', $configuration->getSorting()))
-            ->setMaxPerPage($configuration->getPaginationMaxPerPage())
-            ->setCurrentPage($request->get('page', 1));
+        $resources = $this->resourcesCollectionProvider->get($configuration, $this->repository);
 
         $view = View::create($resources);
 

@@ -174,6 +174,7 @@ services:
             - "@app.behat.page.frontend.product.show"
             - "@app.behat.page.frontend.product.index"
             - "@app.behat.page.frontend.product.index_by_taxon"
+            - "@app.behat.page.frontend.product.index_by_person"
         tags:
             - { name: fob.context_service }
 
