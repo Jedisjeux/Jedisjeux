@@ -36,14 +36,14 @@
                                 <div class="form-group has-feedback row">
                                     <label for="inputUserName" class="col-md-3 text-md-right control-label col-form-label">User Name</label>
                                     <div class="col-md-8">
-                                        <input type="text" name="_username" class="form-control" id="inputUserName" placeholder="User Name" required>
+                                        {{ form_widget(form._username, {attr: {'placeholder': 'app.ui.username_or_email'}}) }}
                                         <i class="fa fa-user form-control-feedback pr-4"></i>
                                     </div>
                                 </div>
                                 <div class="form-group has-feedback row">
                                     <label for="inputPassword" class="col-md-3 text-md-right control-label col-form-label">Password</label>
                                     <div class="col-md-8">
-                                        <input type="password" name="_password" class="form-control" id="inputPassword" placeholder="Password" required>
+                                        {{ form_widget(form._password, {attr: {'placeholder': 'sylius.form.login.password'}}) }}
                                         <i class="fa fa-lock form-control-feedback pr-4"></i>
                                     </div>
                                 </div>
