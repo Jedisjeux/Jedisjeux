@@ -125,6 +125,20 @@ class TaxonContext implements Context
     }
 
     /**
+     * @Given /^there are article categories "([^"]+)" and "([^"]+)"$/
+     */
+    public function thereAreArticleCategoriesAnd($firstTaxonName, $secondTaxonName)
+    {
+        /** @var TaxonInterface $taxon */
+        $taxon = $this->sharedStorage->get('taxonomy_articles');
+
+        $this->taxonFactory->create(['name' => $firstTaxonName, 'parent' => $taxon]);
+        $this->taxonFactory->create(['name' => $secondTaxonName, 'parent' => $taxon]);
+
+        $this->manager->flush($taxon);
+    }
+
+    /**
      * @Given /^there are topic categories "([^"]+)" and "([^"]+)"$/
      */
     public function thereAreTopicCategoriesAnd($firstTaxonName, $secondTaxonName)
