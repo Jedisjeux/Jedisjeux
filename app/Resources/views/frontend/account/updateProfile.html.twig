@@ -1,0 +1,38 @@
+{% extends 'frontend/layout.html.twig' %}
+
+{% set pageTitle %}
+    Informations personnelles
+{% endset %}
+
+{% block content %}
+    <!-- main-container start -->
+    <!-- ================ -->
+    <section class="main-container">
+
+        <div class="container">
+            <div class="row">
+
+                <!-- main start -->
+                <!-- ================ -->
+                <div class="main col-md-12">
+
+                    <!-- page-title start -->
+                    <!-- ================ -->
+                    <h1 class="page-title">{{ pageTitle }}</h1>
+                    <div class="separator-2"></div>
+
+                    <div class="row">
+                        <div class="col-md-9 col-sm-8 col-md-push-3 col-sm-push-4">
+                            {% include 'frontend/account/profile/_form.html.twig' %}
+                        </div>
+                        <div class="col-md-3 col-sm-4 col-md-pull-9 col-sm-pull-8">
+                            {% include 'frontend/account/_sidebar.html.twig' with {'active': 'profile'} %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock content %}
