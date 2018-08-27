@@ -1,0 +1,16 @@
+sylius_grid:
+    grids:
+        sylius_frontend_product_from_person:
+            extends: sylius_frontend_product
+            driver:
+                name: doctrine/orm
+                options:
+                    repository:
+                        method: createListQueryBuilder
+                        arguments:
+                            locale: "%locale%"
+                            onlyPublished: true
+                            criteria: "expr:service('request_stack').getCurrentRequest().get('criteria', [])"
+                            taxon: null
+                            person: "expr:service('app.repository.person').findOneBySlug($slug)"
+            limits: ~
