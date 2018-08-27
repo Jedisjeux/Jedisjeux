@@ -50,13 +50,13 @@
                                 <div class="form-group row">
                                     <div class="ml-md-auto col-md-9">
                                         <div class="checkbox form-check">
-                                            <input class="form-check-input" type="checkbox">
-                                            <label class="form-check-label">
-                                                Remember me.
+                                            <input class="form-check-input" type="checkbox" id="remember-me">
+                                            <label class="form-check-label" for="remember-me">
+                                                {{ 'sylius.form.login.remember_me'|trans }}
                                             </label>
                                         </div>
                                         <input type="hidden" name="_csrf_shop_security_token" value="{{ csrf_token('shop_authenticate') }}">
-                                        <button type="submit" class="btn btn-group btn-default btn-animated">Log In <i class="fa fa-user"></i></button>
+                                        <button type="submit" class="btn btn-group btn-default btn-animated">{{ 'sylius.ui.login'|trans }} <i class="fa fa-user"></i></button>
                                         <ul class="space-top">
                                             <li><a href="#">Forgot your password?</a></li>
                                         </ul>
@@ -70,7 +70,7 @@
                                 </div>
                             </form>
                         </div>
-                        <p class="text-center space-top">Don't have an account yet? <a href="page-signup.html">Sing up</a> now.</p>
+                        <p class="text-center space-top">Don't have an account yet? <a href="{{ path('app_frontend_register') }}">Sing up</a> now.</p>
                     </div>
                     <!-- main end -->
                 </div>
