@@ -136,7 +136,7 @@ class ProductContext implements Context
     public function productHasDesigner(Product $product, Person $person)
     {
         $product->getFirstVariant()->addDesigner($person);
-        $this->manager->flush($product);
+        $this->manager->flush($product->getFirstVariant());
     }
 
     /**
@@ -146,7 +146,7 @@ class ProductContext implements Context
     public function productHasArtist(Product $product, Person $person)
     {
         $product->getFirstVariant()->addArtist($person);
-        $this->manager->flush($product);
+        $this->manager->flush($product->getFirstVariant());
     }
 
     /**
@@ -156,6 +156,6 @@ class ProductContext implements Context
     public function productHasPublisher(Product $product, Person $person)
     {
         $product->getFirstVariant()->addPublisher($person);
-        $this->manager->flush($product);
+        $this->manager->flush($product->getFirstVariant());
     }
 }
