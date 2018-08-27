@@ -8,6 +8,7 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Person;
 use AppBundle\Entity\Product;
 use AppBundle\Utils\DateCalculator;
 use Doctrine\ORM\Query\Expr\Join;
@@ -31,8 +32,13 @@ class ProductRepository extends BaseProductRepository
      *
      * @return QueryBuilder
      */
-    public function createListQueryBuilder($localeCode, $onlyPublished=true, array $criteria = [], TaxonInterface $taxon = null)
-    {
+    public function createListQueryBuilder(
+        $localeCode,
+        $onlyPublished=true,
+        array $criteria = [],
+        TaxonInterface $taxon = null,
+        Person $person = null
+    ) {
         $queryBuilder = $this->createQueryBuilder('o');
 
         $queryBuilder
@@ -81,6 +87,10 @@ class ProductRepository extends BaseProductRepository
             $queryBuilder
                 ->andWhere($queryBuilder->expr()->lte('variant.releasedAt', ':releasedAtTo'))
                 ->setParameter('releasedAtTo', $dateCalculator->getDay($criteria['releasedAtTo']));
+        }
+
+        if (null !== $person) {
+            $criteria['person'] = $person;
         }
 
         if (!empty($criteria['person'])) {

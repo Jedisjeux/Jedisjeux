@@ -1,5 +1,8 @@
 ## Change Log
 
+### v1.3.2 (2018/08/17)
+- [#177](https://github.com/Jedisjeux/Jedisjeux/pull/177) fix last arrivals on homepage (@loic425)
+
 ### v1.3.1 (2018/08/14)
 - [#174](https://github.com/Jedisjeux/Jedisjeux/pull/174) Use taxon root on repositories (@loic425)
 - [#173](https://github.com/Jedisjeux/Jedisjeux/pull/173) [Product] add distinct when needed on product repository (@loic425)

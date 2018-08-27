@@ -29,11 +29,9 @@ sylius_frontend_product_index_by_person:
     defaults:
         _controller: sylius.controller.product:indexByPersonAction
         _sylius:
+            grid: sylius_frontend_product_from_person
             paginate: 16
             template: frontend/game/indexByPerson.html.twig
-            sortable: true
-            sorting:
-                createdAt: desc
 
 sylius_frontend_product_index_by_taxon:
     methods: [GET]
