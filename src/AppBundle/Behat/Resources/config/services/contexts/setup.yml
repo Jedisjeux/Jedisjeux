@@ -14,6 +14,7 @@ services:
                 - "@app.behat.shared_storage"
                 - "@__symfony__.app.fixture.example_factory.article"
                 - "@__symfony__.app.repository.article"
+                - "@__symfony__.doctrine.orm.entity_manager"
             tags:
                 - { name: fob.context_service }
 

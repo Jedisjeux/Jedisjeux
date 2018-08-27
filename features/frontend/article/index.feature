@@ -21,17 +21,6 @@ Feature: View list of articles
             | articles/actualites | King of New York : Power Up! | kevin@example.com |
             | articles/critiques  | Critique de Vroom Vroom      | kevin@example.com |
 
-    Scenario: View list of articles
-        When I am on "/articles/"
-        Then I should see "Critique de Vroom Vroom"
-        And I should see "King of New York : Power Up!"
-
-    Scenario: View list of articles under a taxon
-        Given I am on "/articles/"
-        When I follow "Actualités"
-        Then I should see "King of New York : Power Up!"
-        But I should not see "Critique de Vroom Vroom"
-
     Scenario: Sorting articles
         Given I am on "/articles/"
         When I follow "Publié le"

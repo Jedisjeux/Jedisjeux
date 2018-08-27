@@ -13,6 +13,11 @@ services:
           parent: app.behat.symfony_page
           public: false
 
+      app.behat.page.frontend.article.index_by_taxon:
+          class: AppBundle\Behat\Page\Frontend\Article\IndexByTaxonPage
+          parent: app.behat.symfony_page
+          public: false
+
       app.behat.page.frontend.article.show:
           class: AppBundle\Behat\Page\Frontend\Article\ShowPage
           parent: app.behat.symfony_page
