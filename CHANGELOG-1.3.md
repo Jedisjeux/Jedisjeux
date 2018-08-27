@@ -1,5 +1,9 @@
 ## Change Log
 
+### v1.3.3 (2018/08/27)
+- [#181](https://github.com/Jedisjeux/Jedisjeux/pull/181) Fix viewing products from specific person (@loic425)
+- [#180](https://github.com/Jedisjeux/Jedisjeux/pull/180) refactor viewing articles from specific category behat feature (@loic425)
+
 ### v1.3.2 (2018/08/17)
 - [#177](https://github.com/Jedisjeux/Jedisjeux/pull/177) fix last arrivals on homepage (@loic425)
 
