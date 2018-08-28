@@ -25,7 +25,7 @@ class ResetPasswordPage extends SymfonyPage
      */
     public function checkValidationMessageFor($element, $message)
     {
-        $errorLabel = $this->getElement($element)->getParent()->find('css', '.sylius-validation-error');
+        $errorLabel = $this->getElement($element)->getParent()->find('css', '.help-');
 
         if (null === $errorLabel) {
             throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
