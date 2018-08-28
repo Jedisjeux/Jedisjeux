@@ -49,7 +49,6 @@ sylius:
         update: La catégorie has been successfully updated.
         delete: La catégorie has been successfully deleted.
     user:
-        change_password: 'Votre mot de passe a été mis à jour avec succès !'
         reset_password: 'Votre mot de passe a été réinitialisé avec succès !'
         password:
             reset:
