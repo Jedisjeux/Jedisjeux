@@ -64,6 +64,17 @@ final class AdminSecurityContext implements Context
     }
 
     /**
+     * @Given I am logged in as :email
+     */
+    public function iAmLoggedInAs($email)
+    {
+        $user = $this->userRepository->findOneByEmail($email);
+        Assert::notNull($user);
+
+        $this->securityService->logIn($user);
+    }
+
+    /**
      * @Given I am logged in as a customer
      */
     public function iAmLoggedInAsACustomer()

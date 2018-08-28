@@ -144,6 +144,17 @@ services:
         tags:
             - { name: fob.context_service }
 
+    app.behat.context.ui.frontend.account:
+        class: AppBundle\Behat\Context\Ui\Frontend\AccountContext
+        arguments:
+            - "@app.behat.page.frontend.account.dashboard"
+            - "@app.behat.page.frontend.account.profile_update"
+            - "@app.behat.page.frontend.account.change_password"
+            - "@app.behat.page.frontend.account.login"
+            - "@app.behat.notification_checker"
+        tags:
+            - { name: fob.context_service }
+
     app.behat.context.ui.frontend.article:
         class: AppBundle\Behat\Context\Ui\Frontend\ArticleContext
         arguments:
@@ -160,6 +171,17 @@ services:
             - "@app.behat.notification_checker"
         tags:
             - { name: fob.context_service }
+
+    app.behat.context.ui.frontend.login:
+        class: AppBundle\Behat\Context\Ui\Frontend\LoginContext
+        arguments:
+        - "@app.behat.page.frontend.home"
+        - "@app.behat.page.frontend.account.login"
+        - "@app.behat.page.frontend.account.register"
+        - "@app.behat.page.frontend.account.reset_password"
+        - "@app.behat.notification_checker"
+        tags:
+        - { name: fob.context_service }
 
     app.behat.context.ui.frontend.notification:
         class: AppBundle\Behat\Context\Ui\Frontend\NotificationContext
@@ -183,6 +205,20 @@ services:
         arguments:
             - "@app.behat.page.frontend.person.show"
             - "@app.behat.page.frontend.person.index"
+        tags:
+            - { name: fob.context_service }
+
+    app.behat.context.ui.frontend.registration:
+        class: AppBundle\Behat\Context\Ui\Frontend\RegistrationContext
+        arguments:
+            - "@app.behat.shared_storage"
+            - "@app.behat.page.frontend.account.dashboard"
+            - "@app.behat.page.frontend.home"
+            - "@app.behat.page.frontend.account.login"
+            - "@app.behat.page.frontend.account.register"
+            - "@app.behat.page.frontend.account.verify"
+            - "@app.behat.page.frontend.account.profile_update"
+            - "@app.behat.notification_checker"
         tags:
             - { name: fob.context_service }
 
