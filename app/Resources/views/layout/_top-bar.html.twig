@@ -40,7 +40,7 @@
                     <li><a href="{{ path('app_frontend_account_product_list_index') }}">{{ 'app.ui.my_game_lists'|trans }}</a></li>
                     <li><a href="{{ path('app_frontend_account_games_library') }}">{{ 'app.ui.my_virtual_game_library'|trans }}</a></li>
                     <li><a href="{{ path('app_frontend_account_game_play_index') }}">{{ 'app.ui.my_game_plays'|trans }}</a></li>
-                    <li><a href="{{ path('app_frontend_logout') }}">{{ 'sylius.ui.logout'|trans }}</a></li>
+                    <li><a class="app-logout-button" href="{{ path('app_frontend_logout') }}">{{ 'sylius.ui.logout'|trans }}</a></li>
                 </ul>
             {% endif %}
         </div>
