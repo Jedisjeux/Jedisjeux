@@ -49,7 +49,6 @@ sylius:
         update: La catégorie has been successfully updated.
         delete: La catégorie has been successfully deleted.
     user:
-        change_password: 'Votre mot de passe a été mis à jour avec succès !'
         reset_password: 'Votre mot de passe a été réinitialisé avec succès !'
         password:
             reset:
@@ -58,5 +57,4 @@ sylius:
             change:
                 success: Votre mot de passe a été mis à jour avec succès !
     customer:
-        update_profile: Votre profil a bien été mis à jour.
-        register: 'Merci pour votre inscription, vous allez recevoir un mail pour vérifier votre compte.'
+        update_profile: Your profile has been successfully updated.
