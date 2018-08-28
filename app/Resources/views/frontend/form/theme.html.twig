@@ -1,5 +1,13 @@
 {% extends 'bootstrap_4_horizontal_layout.html.twig' %}
 
+{% block form_label_class -%}
+col-sm-3
+{%- endblock form_label_class %}
+
+{% block form_group_class -%}
+col-sm-9
+{%- endblock form_group_class %}
+
 {% block form_row -%}
     {%- if expanded is defined and expanded -%}
         {{ block('fieldset_form_row') }}
@@ -22,6 +30,12 @@
         </div>
     {%- endif -%}
 {%- endblock form_row %}
+
+{% block password_row %}
+    {% set icon_class= 'fa fa-lock' %}
+
+    {{- block('form_row') -}}
+{% endblock %}
 
 {% block email_row %}
     {% set icon_class= 'fa fa-envelope' %}
@@ -104,6 +118,12 @@
 {% endblock %}
 
 {% block _app_contact_request_lastName_row %}
+    {% set icon_class= 'fa fa-user' %}
+
+    {{- block('form_row') -}}
+{% endblock %}
+
+{% block _sylius_customer_simple_registration_user_username_row %}
     {% set icon_class= 'fa fa-user' %}
 
     {{- block('form_row') -}}
