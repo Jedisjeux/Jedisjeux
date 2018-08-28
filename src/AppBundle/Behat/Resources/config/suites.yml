@@ -11,6 +11,7 @@ imports:
     - suites/ui/festival_list/managing_festival_lists.yml
     - suites/ui/person/managing_people.yml
     - suites/ui/person/viewing_people.yml
+    - suites/ui/product/adding_game_plays.yml
     - suites/ui/product/managing_game_plays.yml
     - suites/ui/product/managing_products.yml
     - suites/ui/product/managing_product_lists.yml

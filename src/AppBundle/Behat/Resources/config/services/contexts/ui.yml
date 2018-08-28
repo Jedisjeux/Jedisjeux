@@ -128,15 +128,6 @@ services:
       tags:
           - { name: fob.context_service }
 
-    app.behat.context.ui.backend.managing_topics:
-      class: AppBundle\Behat\Context\Ui\Backend\ManagingTopicsContext
-      arguments:
-          - "@app.behat.page.backend.topic.index"
-          - "@app.behat.page.backend.topic.update"
-          - "@app.behat.current_page_resolver"
-      tags:
-          - { name: fob.context_service }
-
     app.behat.context.ui.backend.notification:
         class: AppBundle\Behat\Context\Ui\Backend\NotificationContext
         arguments:
@@ -169,6 +160,11 @@ services:
         arguments:
             - "@app.behat.page.frontend.contact"
             - "@app.behat.notification_checker"
+        tags:
+            - { name: fob.context_service }
+
+    app.behat.context.ui.frontend.game_play:
+        class: AppBundle\Behat\Context\Ui\Frontend\GamePlayContext
         tags:
             - { name: fob.context_service }
 
