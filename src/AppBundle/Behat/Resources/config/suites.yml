@@ -1,4 +1,5 @@
 imports:
+    - suites/ui/account/login.yml
     - suites/ui/admin/dashboard.yml
     - suites/ui/article/managing_articles.yml
     - suites/ui/article/viewing_articles.yml
