@@ -261,8 +261,6 @@ class RegistrationContext implements Context
         $this->registerPage->specifyEmail($email);
         $this->registerPage->specifyPassword($password);
         $this->registerPage->verifyPassword($password);
-        $this->registerPage->specifyFirstName('Carrot');
-        $this->registerPage->specifyLastName('Ironfoundersson');
         $this->registerPage->register();
     }
 

@@ -37,7 +37,7 @@ class RegisterPage extends SymfonyPage
         $errorLabel = $this
             ->getElement(StringInflector::nameToCode($element))
             ->getParent()
-            ->find('css', '.sylius-validation-error')
+            ->find('css', '.help-')
         ;
 
         if (null === $errorLabel) {
@@ -71,14 +71,6 @@ class RegisterPage extends SymfonyPage
     /**
      * {@inheritdoc}
      */
-    public function specifyPhoneNumber($phoneNumber)
-    {
-        $this->getDocument()->fillField('Phone number', $phoneNumber);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function verifyPassword($password)
     {
         $this->getDocument()->fillField('Verification', $password);
@@ -95,12 +87,10 @@ class RegisterPage extends SymfonyPage
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'email' => '#sylius_customer_registration_email',
-            'first_name' => '#sylius_customer_registration_firstName',
-            'last_name' => '#sylius_customer_registration_lastName',
-            'password_verification' => '#sylius_customer_registration_user_plainPassword_second',
-            'password' => '#sylius_customer_registration_user_plainPassword_first',
-            'phone_number' => '#sylius_customer_registration_phoneNumber',
+            'email' => '#sylius_customer_simple_registration_email',
+            'username' => '#sylius_customer_simple_registration_user_username',
+            'password_verification' => '#sylius_customer_simple_registration_user_plainPassword_second',
+            'password' => '#sylius_customer_simple_registration_user_plainPassword_first',
         ]);
     }
 }
