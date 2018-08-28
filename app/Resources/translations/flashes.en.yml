@@ -57,4 +57,4 @@ sylius:
             change:
                 success: Votre mot de passe a été mis à jour avec succès !
     customer:
-        update_profile: Votre profil a bien été mis à jour.
+        update_profile: Your profile has been successfully updated.
