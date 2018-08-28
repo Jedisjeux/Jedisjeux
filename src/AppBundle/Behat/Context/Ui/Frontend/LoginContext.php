@@ -150,8 +150,6 @@ final class LoginContext implements Context
         $this->registerPage->specifyEmail($email);
         $this->registerPage->specifyPassword($password);
         $this->registerPage->verifyPassword($password);
-        $this->registerPage->specifyFirstName('Carrot');
-        $this->registerPage->specifyLastName('Ironfoundersson');
         $this->registerPage->register();
     }
 
@@ -177,7 +175,7 @@ final class LoginContext implements Context
      */
     public function iShouldBeNotifiedAboutBadCredentials()
     {
-        Assert::true($this->loginPage->hasValidationErrorWith('Error Invalid credentials.'));
+        Assert::true($this->loginPage->hasValidationErrorWith('Invalid credentials.'));
     }
 
     /**
@@ -185,7 +183,7 @@ final class LoginContext implements Context
      */
     public function iShouldBeNotifiedAboutDisabledAccount()
     {
-        Assert::true($this->loginPage->hasValidationErrorWith('Error Account is disabled.'));
+        Assert::true($this->loginPage->hasValidationErrorWith('Account is disabled.'));
     }
 
     /**

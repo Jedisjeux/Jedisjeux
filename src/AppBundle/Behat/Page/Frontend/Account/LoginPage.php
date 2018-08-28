@@ -64,7 +64,7 @@ class LoginPage extends SymfonyPage
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'validation_error' => '.message.negative',
+            'validation_error' => '.alert.alert-danger',
         ]);
     }
 }
