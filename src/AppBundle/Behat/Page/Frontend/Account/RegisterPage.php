@@ -63,22 +63,6 @@ class RegisterPage extends SymfonyPage
     /**
      * {@inheritdoc}
      */
-    public function specifyFirstName($firstName)
-    {
-        $this->getDocument()->fillField('First name', $firstName);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyLastName($lastName)
-    {
-        $this->getDocument()->fillField('Last name', $lastName);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function specifyPassword($password)
     {
         $this->getDocument()->fillField('Password', $password);

@@ -197,6 +197,20 @@ services:
         tags:
             - { name: fob.context_service }
 
+    app.behat.context.ui.frontend.registration:
+        class: AppBundle\Behat\Context\Ui\Frontend\RegistrationContext
+        arguments:
+            - "@app.behat.shared_storage"
+            - "@app.behat.page.frontend.account.dashboard"
+            - "@app.behat.page.frontend.home"
+            - "@app.behat.page.frontend.account.login"
+            - "@app.behat.page.frontend.account.register"
+            - "@app.behat.page.frontend.account.verify"
+            - "@app.behat.page.frontend.account.profile_update"
+            - "@app.behat.notification_checker"
+        tags:
+            - { name: fob.context_service }
+
     app.behat.context.ui.frontend.topic:
         class: AppBundle\Behat\Context\Ui\Frontend\TopicContext
         arguments:

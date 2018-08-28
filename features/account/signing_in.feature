@@ -2,7 +2,7 @@
 Feature: Signing in to the store
     In order to view my account
     As a Visitor
-    I want to be able to log in to the store
+    I want to be able to log in to the website
 
     Background:
         Given there is a user "ted@example.com" identified by "bear"
@@ -14,4 +14,3 @@ Feature: Signing in to the store
         And I specify the password as "bear"
         And I log in
         Then I should be logged in
-    
