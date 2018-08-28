@@ -33,20 +33,10 @@
                                         {{ form_errors(form) }}
                                     </div>
                                 </div>
-                                <div class="form-group has-feedback row">
-                                    <label for="inputUserName" class="col-md-3 text-md-right control-label col-form-label">User Name</label>
-                                    <div class="col-md-8">
-                                        {{ form_widget(form._username, {attr: {'placeholder': 'app.ui.username_or_email'}}) }}
-                                        <i class="fa fa-user form-control-feedback pr-4"></i>
-                                    </div>
-                                </div>
-                                <div class="form-group has-feedback row">
-                                    <label for="inputPassword" class="col-md-3 text-md-right control-label col-form-label">Password</label>
-                                    <div class="col-md-8">
-                                        {{ form_widget(form._password, {attr: {'placeholder': 'sylius.form.login.password'}}) }}
-                                        <i class="fa fa-lock form-control-feedback pr-4"></i>
-                                    </div>
-                                </div>
+
+                                {{ form_row(form._username, {attr: {'placeholder': 'app.ui.username_or_email'}}) }}
+                                {{ form_row(form._password, {attr: {'placeholder': 'sylius.form.login.password'}}) }}
+
                                 <div class="form-group row">
                                     <div class="ml-md-auto col-md-9">
                                         <div class="checkbox form-check">
@@ -56,7 +46,8 @@
                                             </label>
                                         </div>
                                         <input type="hidden" name="_csrf_shop_security_token" value="{{ csrf_token('shop_authenticate') }}">
-                                        <button type="submit" class="btn btn-group btn-default btn-animated">{{ 'sylius.ui.login'|trans }} <i class="fa fa-user"></i></button>
+                                        {{ form_rest(form, {'render_rest': false}) }}
+                                        <button id="_login" type="submit" class="btn btn-group btn-default btn-animated">{{ 'sylius.ui.login_button'|trans }} <i class="fa fa-user"></i></button>
                                         <ul class="space-top">
                                             <li><a href="#">Forgot your password?</a></li>
                                         </ul>

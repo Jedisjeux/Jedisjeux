@@ -27,7 +27,7 @@ class LoginPage extends SymfonyPage
 
     public function logIn()
     {
-        $this->getDocument()->pressButton('Login');
+        $this->getDocument()->pressButton('_login');
     }
 
     /**
@@ -37,7 +37,7 @@ class LoginPage extends SymfonyPage
      */
     public function specifyPassword(string $password)
     {
-        $this->getDocument()->fillField('_password', $password);
+        $this->getElement('password')->setValue($password);
     }
 
     /**
@@ -47,7 +47,7 @@ class LoginPage extends SymfonyPage
      */
     public function specifyUsername(string $username)
     {
-        $this->getDocument()->fillField('_username', $username);
+        $this->getElement('username')->setValue($username);
     }
 
     /**
@@ -64,6 +64,8 @@ class LoginPage extends SymfonyPage
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
+            'username' => '#_username',
+            'password' => '#_password',
             'validation_error' => '.alert.alert-danger',
         ]);
     }

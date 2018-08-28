@@ -128,3 +128,15 @@ col-sm-9
 
     {{- block('form_row') -}}
 {% endblock %}
+
+{% block __username_row %}
+    {% set icon_class= 'fa fa-user' %}
+
+    {{- block('form_row') -}}
+{% endblock %}
+
+{% block __password_row %}
+    {% set icon_class= 'fa fa-lock' %}
+
+    {{- block('form_row') -}}
+{% endblock %}
