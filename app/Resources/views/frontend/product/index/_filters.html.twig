@@ -1,4 +1,9 @@
+{% import '@SyliusUi/Macro/sorting.html.twig' as sorting %}
+
+{% set definition = resources.definition %}
+{% set path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
 {% set criteria = app.request.get('criteria') %}
+{% set sorting = app.request.get('sorting') %}
 
 <!-- section start -->
 <!-- ================ -->
@@ -21,40 +26,13 @@
                         <option>Desc</option>
                     </select>
                 </div>
+                {% for filter in definition.filters %}
+                    {{ sylius_grid_render_filter(resources, filter) }}
+                {% endfor %}
                 <div class="form-group ml-1">
-                    <label>Nb Joueurs</label>
-                    <input name="criteria[playerCount][value]"
-                           value="{{ criteria is not null ? criteria.playerCount.value : '' }}"
-                           type="number"
-                           class="form-control">
-                </div>
-                <div class="form-group ml-1">
-                    <label>Âge (min)</label>
-                    <input name="criteria[minAge][value]"
-                           value="{{ criteria is not null ? criteria.minAge.value : '' }}"
-                           type="number"
-                           class="form-control">
-                </div>
-                <div class="form-group ml-1">
-                    <label>Durée (min/max)</label>
-                    <input type="number" class="form-control">
-                </div>
-                <div class="form-group ml-1">
-                    <label class="invisible">Durée (max)</label>
-                    <input type="number" class="form-control">
-                </div>
-                <div class="form-group ml-1">
-                    <label>Categorie</label>
-                    <select class="form-control">
-                        <option selected="selected">Toutes</option>
-                        <option>Enfants</option>
-                        <option>Débutants</option>
-                        <option>Joueurs avancés</option>
-                        <option>Experts</option>
-                    </select>
-                </div>
-                <div class="form-group ml-1">
-                    <button type="submit" class="btn btn-default">Submit</button>
+                    <button type="submit" class="btn btn-default">
+                        <span class="fa fa-search"></span>
+                        {{ 'sylius.ui.search'|trans }}</button>
                 </div>
             </form>
         </div>
