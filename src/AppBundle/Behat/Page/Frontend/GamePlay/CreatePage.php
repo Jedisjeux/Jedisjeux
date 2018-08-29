@@ -24,12 +24,34 @@ class CreatePage extends SymfonyPage
     }
 
     /**
-     * @param string|null $title
+     * @param string|null $playingDate
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
      */
-    public function setPlayingDate(?string $playingDate)
+    public function specifyPlayingDate(?string $playingDate)
     {
         $playedAt = new \DateTime($playingDate);
-        $this->getElement('played_at')->setValue($playedAt->format('d-m-Y'));
+        $this->getElement('played_at')->setValue($playedAt->format('Y-m-d'));
+    }
+
+    /**
+     * @param int|null $duration
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     */
+    public function specifyDuration(?int $duration)
+    {
+        $this->getElement('duration')->setValue($duration);
+    }
+
+    /**
+     * @param int|null $playerCount
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     */
+    public function specifyPlayerCount(?int $playerCount)
+    {
+        $this->getElement('player_count')->setValue($playerCount);
     }
 
     public function submit()
@@ -43,7 +65,9 @@ class CreatePage extends SymfonyPage
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
+            'duration' => '#app_game_play_duration',
             'played_at' => '#app_game_play_playedAt',
+            'player_count' => '#app_game_play_playerCount',
         ]);
     }
 }

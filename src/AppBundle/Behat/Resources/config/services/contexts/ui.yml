@@ -165,6 +165,10 @@ services:
 
     app.behat.context.ui.frontend.game_play:
         class: AppBundle\Behat\Context\Ui\Frontend\GamePlayContext
+        arguments:
+            - "@app.behat.page.frontend.game_play.index"
+            - "@app.behat.page.frontend.game_play.create"
+            - "@app.behat.page.frontend.game_play.update"
         tags:
             - { name: fob.context_service }
 
