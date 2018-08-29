@@ -23,7 +23,7 @@ class IndexPage extends SymfonyPage
      */
     public function getRouteName()
     {
-        return 'app_frontend_topic_index';
+        return 'app_frontend_game_play_index';
     }
 
     /**
@@ -31,8 +31,8 @@ class IndexPage extends SymfonyPage
      *
      * @return bool
      */
-    public function isTopicOnList($title)
+    public function isProductOnList($title)
     {
-        return null !== $this->getDocument()->find('css', sprintf('#topic-list h3:contains("%s")', $title));
+        return null !== $this->getDocument()->find('css', sprintf('#game-play-list .lead:contains("%s")', $title));
     }
 }

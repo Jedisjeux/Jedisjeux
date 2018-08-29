@@ -17,6 +17,7 @@ use AppBundle\Behat\Page\Frontend\GamePlay\UpdatePage;
 use AppBundle\Entity\GamePlay;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Product\Model\ProductInterface;
+use Webmozart\Assert\Assert;
 
 class GamePlayContext implements Context
 {
@@ -64,6 +65,14 @@ class GamePlayContext implements Context
             'id' => $gamePlay->getId(),
             'productSlug' => $gamePlay->getProduct()->getSlug(),
         ]);
+    }
+
+    /**
+     * @When I want to browse game plays
+     */
+    public function iWantToBrowseGamePlays()
+    {
+        $this->indexPage->open();
     }
 
     /**
@@ -123,5 +132,21 @@ class GamePlayContext implements Context
     public function iSaveMyChanges()
     {
         $this->updatePage->submit();
+    }
+
+    /**
+     * @Then I should see the game play from product :productName
+     */
+    public function iShouldSeeGamePlayFromProduct($productName)
+    {
+        Assert::true($this->indexPage->isProductOnList($productName));
+    }
+
+    /**
+     * @Then I should not see the game play from product :productName
+     */
+    public function iShouldNotSeeGamePlayFromProduct($productName)
+    {
+        Assert::false($this->indexPage->isProductOnList($productName));
     }
 }
