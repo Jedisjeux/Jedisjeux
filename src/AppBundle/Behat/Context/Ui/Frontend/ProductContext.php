@@ -100,6 +100,7 @@ class ProductContext implements Context
 
     /**
      * @Then I should see the product :productName
+     * @Then I should see a product with name :productName
      */
     public function iShouldSeeProduct($productName)
     {
@@ -120,6 +121,22 @@ class ProductContext implements Context
     public function iShouldSeeProductName($name)
     {
         Assert::same($this->showPage->getName(), $name);
+    }
+
+    /**
+     * @Then I should see :numberOfProducts products in the list
+     */
+    public function iShouldSeeProductsInTheList($numberOfProducts)
+    {
+        Assert::same($this->indexPage->countProductsItems(), (int) $numberOfProducts);
+    }
+
+    /**
+     * @Then the first product on the list should have name :name
+     */
+    public function theFirstProductOnTheListShouldHaveName($name)
+    {
+        Assert::same($this->indexPage->getFirstProductNameFromList(), $name);
     }
 
     /**
@@ -245,6 +262,16 @@ class ProductContext implements Context
         }
 
         Assert::false($this->showPage->isOpen(['slug' => $product->getSlug()]));
+    }
+
+    /**
+     * @When /^I view (oldest|newest) products$/
+     */
+    public function iViewSortedProducts($sortDirection)
+    {
+        $sorting = ['createdAt' => 'oldest' === $sortDirection ? 'asc' : 'desc'];
+
+        $this->indexPage->open(['sorting' => $sorting]);
     }
 
     /**

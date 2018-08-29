@@ -67,14 +67,16 @@ class ProductContext implements Context
 
     /**
      * @Given there is product :name
+     * @Given there is a product :name, created at :date
      *
      * @param string $name
      */
-    public function productHasName($name)
+    public function productHasName($name, $date = 'now')
     {
         /** @var Product $product */
         $product = $this->productFactory->create([
             'name' => $name,
+            'created_at' => $date,
             'status' => Product::PUBLISHED,
             'mechanisms' => [],
             'themes' => [],
