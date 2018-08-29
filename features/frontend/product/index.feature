@@ -23,17 +23,6 @@ Feature: View list of products
             | slug                |
             | mecanismes/majorite |
 
-    Scenario: View list of products
-        When I am on "/jeux-de-societe/"
-        Then I should see "Palazzo"
-        And I should see "Louis XIV"
-
-    Scenario: View list of products under a taxon
-        Given I am on "/jeux-de-societe/"
-        When I follow "Enchères"
-        Then I should see "Palazzo"
-        But I should not see "Louis XIV"
-
     Scenario: Sorting products
         Given I am on "/jeux-de-societe/"
         When I follow "Date de création"
