@@ -7,20 +7,6 @@
         <!-- filters start -->
         <div class="sorting-filters text-center mb-20 d-flex justify-content-center">
             <form class="form-inline">
-                <div class="form-group">
-                    <label>Trié par</label>
-                    <select class="form-control">
-                        <option selected="selected">Date</option>
-                        <option>Note</option>
-                    </select>
-                </div>
-                <div class="form-group ml-1">
-                    <label>Order</label>
-                    <select class="form-control">
-                        <option selected="selected">Asc</option>
-                        <option>Desc</option>
-                    </select>
-                </div>
                 {% for filter in definition.filters %}
                     {{ sylius_grid_render_filter(resources, filter) }}
                 {% endfor %}

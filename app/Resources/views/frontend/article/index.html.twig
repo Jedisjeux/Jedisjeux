@@ -21,6 +21,7 @@
                     <!-- Articles start -->
                     <!-- ============================================================================== -->
                     <br>
+                    {% include 'frontend/article/index/_sorting.html.twig' %}
                     <div class="row">
                         {% for article in articles.data %}
                         {% if loop.index0 > 0 and loop.index0%3 == 0 %}
