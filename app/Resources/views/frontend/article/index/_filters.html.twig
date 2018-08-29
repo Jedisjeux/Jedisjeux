@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <!-- filters start -->
         <div class="sorting-filters text-center mb-20 d-flex justify-content-center">
-            <form class="form-inline" method="get">
+            <form class="form-inline">
                 <div class="form-group">
                     <label>Trié par</label>
                     <select class="form-control">
@@ -25,9 +25,7 @@
                     {{ sylius_grid_render_filter(resources, filter) }}
                 {% endfor %}
                 <div class="form-group ml-1">
-                    <button type="submit" class="btn btn-default">
-                        <span class="fa fa-search"></span>
-                        {{ 'sylius.ui.search'|trans }}</button>
+                    <a href="#" class="btn btn-default">Submit</a>
                 </div>
             </form>
         </div>

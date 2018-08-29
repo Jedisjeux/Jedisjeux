@@ -73,3 +73,8 @@ sylius_grid:
             less_than_or_equal: 'grid/filter/less_than_or_equal.html.twig'
             status: "backend/grid/filter/status.html.twig"
             taxon: "backend/grid/filter/taxon.html.twig"
+
+            # frontend filters
+            frontend_between_two_fields: 'frontend/grid/filter/between_two_fields.html.twig'
+            frontend_less_than_or_equal: "frontend/grid/filter/less_than_or_equal.html.twig"
+            frontend_taxon: "frontend/grid/filter/taxon.html.twig"
