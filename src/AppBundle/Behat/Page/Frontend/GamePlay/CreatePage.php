@@ -28,7 +28,7 @@ class CreatePage extends SymfonyPage
      *
      * @throws \Behat\Mink\Exception\ElementNotFoundException
      */
-    public function specifyPlayingDate(?string $playingDate)
+    public function setPlayedAt(?string $playingDate)
     {
         $playedAt = new \DateTime($playingDate);
         $this->getElement('played_at')->setValue($playedAt->format('Y-m-d'));
@@ -39,7 +39,7 @@ class CreatePage extends SymfonyPage
      *
      * @throws \Behat\Mink\Exception\ElementNotFoundException
      */
-    public function specifyDuration(?int $duration)
+    public function setDuration(?int $duration)
     {
         $this->getElement('duration')->setValue($duration);
     }
@@ -49,7 +49,7 @@ class CreatePage extends SymfonyPage
      *
      * @throws \Behat\Mink\Exception\ElementNotFoundException
      */
-    public function specifyPlayerCount(?int $playerCount)
+    public function setPlayerCount(?int $playerCount)
     {
         $this->getElement('player_count')->setValue($playerCount);
     }

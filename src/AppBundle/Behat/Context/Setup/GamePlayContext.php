@@ -83,12 +83,17 @@ class GamePlayContext implements Context
 
     /**
      * @Given /^(this product) has one game play from (customer "[^"]+")$/
+     * @Given /^(this product) has one game play written by me$/
      *
      * @param ProductInterface $product
      * @param CustomerInterface $customer
      */
-    public function productHasAGamePlay(ProductInterface $product, CustomerInterface $customer)
+    public function productHasAGamePlay(ProductInterface $product, CustomerInterface $customer = null)
     {
+        if (null === $customer) {
+            $customer = $this->sharedStorage->get('customer');
+        }
+
         /** @var GamePlay $gamePlay */
         $gamePlay = $this->gamePlayFactory->create([
             'product' => $product,
@@ -96,6 +101,7 @@ class GamePlayContext implements Context
         ]);
 
         $this->gamePlayRepository->add($gamePlay);
+        $this->sharedStorage->set('game_play', $gamePlay);
     }
 
     /**
@@ -122,6 +128,7 @@ class GamePlayContext implements Context
 
         $this->createPostsForTopic($topic, $postCount);
         $this->gamePlayRepository->add($topic);
+        $this->sharedStorage->set('game_play', $gamePlay);
     }
 
     /**

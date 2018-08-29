@@ -14,6 +14,7 @@ namespace AppBundle\Behat\Context\Ui\Frontend;
 use AppBundle\Behat\Page\Frontend\GamePlay\CreatePage;
 use AppBundle\Behat\Page\Frontend\GamePlay\IndexPage;
 use AppBundle\Behat\Page\Frontend\GamePlay\UpdatePage;
+use AppBundle\Entity\GamePlay;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Product\Model\ProductInterface;
 
@@ -55,12 +56,23 @@ class GamePlayContext implements Context
     }
 
     /**
+     * @Given /^I want to edit (this game play)$/
+     */
+    public function iWantToEditGamePlay(GamePlay $gamePlay)
+    {
+        $this->updatePage->open([
+            'id' => $gamePlay->getId(),
+            'productSlug' => $gamePlay->getProduct()->getSlug(),
+        ]);
+    }
+
+    /**
      * @When /^I specify its playing date as "([^"]*)"$/
      * @When I do not specify its playing date
      */
     public function iSpecifyItsPlayingDateAs(string $playedAt = null)
     {
-        $this->createPage->specifyPlayingDate($playedAt);
+        $this->createPage->setPlayedAt($playedAt);
     }
 
     /**
@@ -69,7 +81,7 @@ class GamePlayContext implements Context
      */
     public function iSpecifyItsDurationAs(int $duration = null)
     {
-        $this->createPage->specifyDuration($duration);
+        $this->createPage->setDuration($duration);
     }
 
     /**
@@ -78,7 +90,23 @@ class GamePlayContext implements Context
      */
     public function iSpecifyItsPlayerCountAs(int $playerCount = null)
     {
-        $this->createPage->specifyPlayerCOunt($playerCount);
+        $this->createPage->setPlayerCount($playerCount);
+    }
+
+    /**
+     * @When I change its duration as :playedAt
+     */
+    public function iChangeItsDurationAtAs($duration)
+    {
+        $this->updatePage->setDuration($duration);
+    }
+
+    /**
+     * @When I change its player count as :playerCount
+     */
+    public function iChangeItsPlayerCountAs($playerCount)
+    {
+        $this->updatePage->setPlayerCount($playerCount);
     }
 
     /**
@@ -87,5 +115,13 @@ class GamePlayContext implements Context
     public function iAddIt()
     {
         $this->createPage->submit();
+    }
+
+    /**
+     * @When I save my changes
+     */
+    public function iSaveMyChanges()
+    {
+        $this->updatePage->submit();
     }
 }

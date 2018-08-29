@@ -20,23 +20,38 @@ class UpdatePage extends SymfonyPage
      */
     public function getRouteName()
     {
-        return 'app_frontend_topic_update';
+        return 'app_frontend_game_play_update';
     }
 
     /**
-     * @param string|null $title
+     * @param string|null $playingDate
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
      */
-    public function setTitle(?string $title)
+    public function setPlayedAt(?string $playingDate)
     {
-        $this->getElement('title')->setValue($title);
+        $playedAt = new \DateTime($playingDate);
+        $this->getElement('played_at')->setValue($playedAt->format('Y-m-d'));
     }
 
     /**
-     * @param string|null $comment
+     * @param int|null $duration
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
      */
-    public function setComment(?string $comment)
+    public function setDuration(?int $duration)
     {
-        $this->getElement('comment')->setValue($comment);
+        $this->getElement('duration')->setValue($duration);
+    }
+
+    /**
+     * @param int|null $playerCount
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     */
+    public function setPlayerCount(?int $playerCount)
+    {
+        $this->getElement('player_count')->setValue($playerCount);
     }
 
     public function submit()
@@ -50,8 +65,9 @@ class UpdatePage extends SymfonyPage
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'comment' => '#app_topic_mainPost_body',
-            'title' => '#app_topic_title',
+            'duration' => '#app_game_play_duration',
+            'played_at' => '#app_game_play_playedAt',
+            'player_count' => '#app_game_play_playerCount',
         ]);
     }
 }
