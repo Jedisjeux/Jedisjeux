@@ -1,10 +1,12 @@
+{% set criteria = app.request.get('criteria') %}
+
 <!-- section start -->
 <!-- ================ -->
 <div class="dark-translucent-bg section">
     <div class="container-fluid">
         <!-- filters start -->
         <div class="sorting-filters text-center mb-20 d-flex justify-content-center">
-            <form class="form-inline">
+            <form class="form-inline" method="get">
                 <div class="form-group">
                     <label>Trié par</label>
                     <select class="form-control">
@@ -21,11 +23,17 @@
                 </div>
                 <div class="form-group ml-1">
                     <label>Nb Joueurs</label>
-                    <input type="number" class="form-control">
+                    <input name="criteria[playerCount][value]"
+                           value="{{ criteria is not null ? criteria.playerCount.value : '' }}"
+                           type="number"
+                           class="form-control">
                 </div>
                 <div class="form-group ml-1">
                     <label>Âge (min)</label>
-                    <input type="number" class="form-control">
+                    <input name="criteria[minAge][value]"
+                           value="{{ criteria is not null ? criteria.minAge.value : '' }}"
+                           type="number"
+                           class="form-control">
                 </div>
                 <div class="form-group ml-1">
                     <label>Durée (min/max)</label>
@@ -46,7 +54,7 @@
                     </select>
                 </div>
                 <div class="form-group ml-1">
-                    <a href="#" class="btn btn-default">Submit</a>
+                    <button type="submit" class="btn btn-default">Submit</button>
                 </div>
             </form>
         </div>
