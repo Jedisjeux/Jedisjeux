@@ -25,4 +25,16 @@ class IndexPage extends SymfonyPage
     {
         return 'app_frontend_post_index_by_topic';
     }
+
+    /**
+     * @return int
+     */
+    public function countItems(): int
+    {
+        $postList = $this->getDocument()->find('css', '#comments');
+
+        $posts = $postList->findAll('css', '.form-group');
+
+        return count($posts);
+    }
 }

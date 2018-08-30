@@ -1,8 +1,8 @@
 @adding_topic_posts
 Feature: Replying to topics
-    In order to reply to topics
+    In order to avoid making mistakes when adding posts
     As a Visitor
-    I want to be able to adding posts
+    I want to be prevented from adding it without specifying required fields
 
     Background:
         Given there are default taxonomies for topics
@@ -11,8 +11,9 @@ Feature: Replying to topics
         And I am logged in as a customer
 
     @ui
-    Scenario: Replying to a topic
+    Scenario: Trying to add a new topic post without comment
         Given I want to reply to this topic
-        When I leave a comment "Great topic for every boardgame players."
-        And I add it
-        Then I should be notified that it has been successfully created
+        When I do not leave any comment
+        And I try to add it
+        Then I should be notified that the comment is required
+        And this post should not be added

@@ -201,6 +201,7 @@ services:
     app.behat.context.ui.frontend.post:
         class: AppBundle\Behat\Context\Ui\Frontend\PostContext
         arguments:
+            - "@app.behat.shared_storage"
             - "@app.behat.page.frontend.post.index"
             - "@app.behat.page.frontend.post.create"
             - "@app.behat.page.frontend.post.update"
