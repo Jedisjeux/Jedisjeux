@@ -3,7 +3,7 @@
 
 default:
     suites:
-        ui_replying_to_topics:
+        ui_adding_topic_posts:
             contexts_services:
                 - app.behat.context.hook.doctrine_orm
 
@@ -19,4 +19,4 @@ default:
                 - app.behat.context.ui.frontend.notification
                 - app.behat.context.ui.frontend.post
             filters:
-                tags: "@replying_to_topics && @ui"
+                tags: "@adding_topic_posts && @ui"

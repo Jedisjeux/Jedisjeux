@@ -1,4 +1,4 @@
-@replying_to_topics
+@adding_topic_posts
 Feature: Replying to topics
     In order to reply to topics
     As a Visitor
