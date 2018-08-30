@@ -4,6 +4,7 @@ imports:
     - { resource: frontend/contact.yml }
     - { resource: frontend/game_play.yml }
     - { resource: frontend/person.yml }
+    - { resource: frontend/post.yml }
     - { resource: frontend/product.yml }
     - { resource: frontend/topic.yml }
 

@@ -24,4 +24,5 @@ imports:
     - suites/ui/topic/editing_topics.yml
     - suites/ui/topic/managing_topics.yml
     - suites/ui/topic/managing_posts.yml
+    - suites/ui/topic/replying_to_topics.yml
     - suites/ui/topic/viewing_topics.yml

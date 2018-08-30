@@ -19,16 +19,6 @@ Feature: Post creation
             | Jeux avec handicap | forum/moi-je-dis-jeux | kevin@example.com |
         And I am logged in as user "kevin@example.com" with password "password"
 
-    @javascript
-    Scenario: Create new post
-        Given I am on "/topics/"
-        And I follow "Lire le sujet"
-        And I follow "Répondre au sujet"
-        And I wait "5" seconds
-        And I fill in wysiwyg field "app_post_body" with "Here is my awesome topic response message."
-        When I press "Créer"
-        Then I should see "a bien été créé"
-
     Scenario: Body is required
         Given I am on "/topics/"
         And I follow "Lire le sujet"

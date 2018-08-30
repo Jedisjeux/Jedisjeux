@@ -1,0 +1,36 @@
+{% extends 'frontend/layout.html.twig' %}
+
+{% import 'macro/actions.html.twig' as action %}
+
+{% set pageTitle = 'app.ui.new_post'| trans %}
+
+{% block content %}
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+    {% include 'frontend/post/create/_breadcrumb.html.twig' %}
+
+    <!-- main-container start -->
+    <!-- ================ -->
+    <section class="main-container">
+
+        <div class="container">
+            <div class="row">
+
+                <!-- main start -->
+                <!-- ================ -->
+                <div class="main col-md-12">
+
+                    <!-- page-title start -->
+                    <!-- ================ -->
+                    <h1 class="page-title">{{ pageTitle }}</h1>
+                    <div class="separator-2"></div>
+                    <!-- page-title end -->
+                    {{ form_start(form) }}
+                    {% include 'frontend/post/_form.html.twig' %}
+                    {{ action.create() }}
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
