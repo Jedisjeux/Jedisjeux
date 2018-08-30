@@ -77,6 +77,19 @@ class PostContext implements Context
     }
 
     /**
+     * @When /^I want to remove (this post)$/
+     */
+    public function iWantToRemovePost(Post $post)
+    {
+        $this->indexPage->open(['topicId' => $post->getTopic()->getId()]);
+
+        $button = $this->indexPage->getRemoveButtonFromPostWithComment($post->getBody());
+        Assert::notNull($button, 'Remove button was not found for this post');
+
+        $button->press();
+    }
+
+    /**
      * @When I leave a comment :comment
      * @When I do not leave any comment
      */

@@ -7,6 +7,15 @@
 
         <!-- comment start -->
         <div class="comment clearfix">
+            {% if app.user and post.author.id == app.user.customer.id %}
+                <form class="form-inline text-right" action="{{ path('app_frontend_post_delete', { 'id': post.id }) }}" name="form" method="post">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button class="btn btn-default btn-confirm" type="submit" title="{{ 'label.delete'|trans }}">
+                        <i class="fa fa-remove"></i>
+                    </button>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token(post.id) }}" />
+                </form>
+            {% endif %}
             <div class="comment-avatar">
                 {{ images.render(avatarPath, 'thumbnail', topic.author, 'rounded-circle') }}
             </div>
