@@ -69,6 +69,16 @@ class ArticleContext implements Context
     }
 
     /**
+     * @When /^I view (oldest|newest) articles$/
+     */
+    public function iViewSortedArticles($sortDirection)
+    {
+        $sorting = ['publishStartDate' => 'oldest' === $sortDirection ? 'asc' : 'desc'];
+
+        $this->indexPage->open(['sorting' => $sorting]);
+    }
+
+    /**
      * @When /^I check (this article)'s details$/
      */
     public function iOpenArticlePage(Article $article)
@@ -93,9 +103,25 @@ class ArticleContext implements Context
     }
 
     /**
+     * @Then I should see :numberOfArticles articles in the list
+     */
+    public function iShouldSeeArticlesInTheList($numberOfArticles)
+    {
+        Assert::same($this->indexPage->countArticlesItems(), (int) $numberOfArticles);
+    }
+
+    /**
+     * @Then the first article on the list should have title :title
+     */
+    public function theFirstArticleOnTheListShouldHaveTitle($title)
+    {
+        Assert::same($this->indexPage->getFirstArticleTitleFromList(), $title);
+    }
+
+    /**
      * @Then I should see the article title :title
      */
-    public function iShouldSeePersonName($title)
+    public function iShouldSeeArticleTitle($title)
     {
         Assert::same($this->showPage->getTitle(), $title);
     }
