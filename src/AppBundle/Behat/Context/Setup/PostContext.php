@@ -53,12 +53,17 @@ class PostContext implements Context
 
     /**
      * @Given /^(this topic) has(?:| also) a post added by (customer "[^"]+")$/
+     * @Given /^I wrote a post to (this topic)$/
      *
      * @param Topic $topic
      * @param CustomerInterface $customer
      */
-    public function topicHasAPostAddedByCustomer(Topic $topic, CustomerInterface $customer)
+    public function topicHasAPostAddedByCustomer(Topic $topic, CustomerInterface $customer = null)
     {
+        if (null === $customer) {
+            $customer = $this->sharedStorage->get('customer');
+        }
+
         /** @var Post $post */
         $post = $this->postFactory->create([
             'topic' => $topic,

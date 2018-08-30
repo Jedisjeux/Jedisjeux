@@ -5,7 +5,7 @@ Feature: Deleting product reviews
     I want to be able to delete a product review
 
     Background:
-        Given there is customer with email "kevin@example.com"
+        Given there is a customer with email "kevin@example.com"
         And there is product "Puerto Rico"
         And this product has a review titled "Awesome" and rated 5 added by customer "kevin@example.com"
         And I am logged in as an administrator

@@ -5,9 +5,9 @@ Feature: Editing a topic
     I want to be able to edit the topic
 
     Background:
-        Given there is customer with email "kevin@example.com"
-        And there is topic with title "Les parties jouées la veille" written by "kevin@example.com"
-        And there is topic with title "Liste des jeux à ajouter" written by "kevin@example.com"
+        Given there is a customer with email "kevin@example.com"
+        And there is a topic with title "Les parties jouées la veille" written by "kevin@example.com"
+        And there is a topic with title "Liste des jeux à ajouter" written by "kevin@example.com"
         And I am logged in as an administrator
 
     @ui

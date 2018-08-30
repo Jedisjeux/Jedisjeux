@@ -22,6 +22,7 @@ imports:
     - suites/ui/redirection/managing_redirections.yml
     - suites/ui/topic/adding_topic_posts.yml
     - suites/ui/topic/adding_topics.yml
+    - suites/ui/topic/editing_topic_posts.yml
     - suites/ui/topic/editing_topics.yml
     - suites/ui/topic/managing_topics.yml
     - suites/ui/topic/managing_posts.yml

@@ -15,6 +15,7 @@ use AppBundle\Behat\Page\Frontend\Post\CreatePage;
 use AppBundle\Behat\Page\Frontend\Post\IndexPage;
 use AppBundle\Behat\Page\Frontend\Post\UpdatePage;
 use AppBundle\Behat\Service\SharedStorage;
+use AppBundle\Entity\Post;
 use AppBundle\Entity\Topic;
 use Behat\Behat\Context\Context;
 use Webmozart\Assert\Assert;
@@ -68,6 +69,14 @@ class PostContext implements Context
     }
 
     /**
+     * @Given /^I want to change (this post)$/
+     */
+    public function iWantToChangePost(Post $post)
+    {
+        $this->updatePage->open(['id' => $post->getId()]);
+    }
+
+    /**
      * @When I leave a comment :comment
      * @When I do not leave any comment
      */
@@ -77,12 +86,28 @@ class PostContext implements Context
     }
 
     /**
+     * @When I change my comment as :comment
+     */
+    public function iChangeMyCommentAs($comment)
+    {
+        $this->updatePage->setComment($comment);
+    }
+
+    /**
      * @When I add it
      * @When I try to add it
      */
     public function iAddIt()
     {
         $this->createPage->submit();
+    }
+
+    /**
+     * @When I save my changes
+     */
+    public function iSaveMyChanges()
+    {
+        $this->updatePage->submit();
     }
 
     /**

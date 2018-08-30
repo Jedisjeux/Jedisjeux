@@ -6,7 +6,7 @@ Feature: Sorting listed articles
 
     Background:
         Given there are default taxonomies for articles
-        And there is customer with email "kevin@example.com"
+        And there is a customer with email "kevin@example.com"
         And there is an article "New millennium!" written by "kevin@example.com", published at "first day of January 2000"
         And there is an article "New year!" written by "kevin@example.com", published at "first day of January 2005"
 
