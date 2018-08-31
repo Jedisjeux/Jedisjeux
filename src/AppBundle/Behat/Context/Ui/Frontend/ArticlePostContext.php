@@ -10,11 +10,13 @@
 
 namespace AppBundle\Behat\Context\Ui\Frontend;
 
+use AppBundle\Behat\Page\Frontend\Article as ArticlePage;
 use AppBundle\Behat\Page\Frontend\Post\CreateForArticlePage;
 use AppBundle\Behat\Page\Frontend\Post\UpdateForArticlePage;
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Post;
 use Behat\Behat\Context\Context;
+use Webmozart\Assert\Assert;
 
 class ArticlePostContext implements Context
 {
@@ -29,13 +31,23 @@ class ArticlePostContext implements Context
     private $updatePage;
 
     /**
+     * @var ArticlePage\ShowPage
+     */
+    private $articleShowPage;
+
+    /**
      * @param CreateForArticlePage $createPage
      * @param UpdateForArticlePage $updatePage
+     * @param ArticlePage\ShowPage $articleShowPage
      */
-    public function __construct(CreateForArticlePage $createPage, UpdateForArticlePage $updatePage)
-    {
+    public function __construct(
+        CreateForArticlePage $createPage,
+        UpdateForArticlePage $updatePage,
+        ArticlePage\ShowPage $articleShowPage
+    ) {
         $this->createPage = $createPage;
         $this->updatePage = $updatePage;
+        $this->articleShowPage = $articleShowPage;
     }
 
     /**
@@ -55,6 +67,19 @@ class ArticlePostContext implements Context
             'id' => $post->getId(),
             'articleSlug' => $post->getTopic()->getArticle()->getSlug(),
         ]);
+    }
+
+    /**
+     * @When /^I want to remove (this comment)$/
+     */
+    public function iWantToRemovePost(Post $post)
+    {
+        $this->articleShowPage->open(['slug' => $post->getTopic()->getArticle()->getSlug()]);
+
+        $button = $this->articleShowPage->getRemoveButtonFromPostWithComment($post->getBody());
+        Assert::notNull($button, 'Remove button was not found for this comment');
+
+        $button->press();
     }
 
     /**

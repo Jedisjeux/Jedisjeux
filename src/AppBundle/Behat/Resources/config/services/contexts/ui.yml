@@ -160,6 +160,7 @@ services:
         arguments:
             - "@app.behat.page.frontend.post.create_for_article"
             - "@app.behat.page.frontend.post.update_for_article"
+            - "@app.behat.page.frontend.article.show"
         tags:
             - { name: fob.context_service }
 

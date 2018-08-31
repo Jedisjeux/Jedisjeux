@@ -6,6 +6,7 @@ imports:
     - suites/ui/article/adding_article_comments.yml
     - suites/ui/article/editing_article_comments.yml
     - suites/ui/article/managing_articles.yml
+    - suites/ui/article/removing_article_comments.yml
     - suites/ui/article/viewing_articles.yml
     - suites/ui/contact/requesting_contact.yml
     - suites/ui/dealer/managing_dealers.yml
