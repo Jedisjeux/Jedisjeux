@@ -181,6 +181,15 @@ services:
         tags:
             - { name: fob.context_service }
 
+    app.behat.context.ui.frontend.game_play_post:
+        class: AppBundle\Behat\Context\Ui\Frontend\GamePlayPostContext
+        arguments:
+        - "@app.behat.page.frontend.post.create_for_game_play"
+        - "@app.behat.page.frontend.post.update_for_game_play"
+        - "@app.behat.page.frontend.game_play.show"
+        tags:
+        - { name: fob.context_service }
+
     app.behat.context.ui.frontend.login:
         class: AppBundle\Behat\Context\Ui\Frontend\LoginContext
         arguments:

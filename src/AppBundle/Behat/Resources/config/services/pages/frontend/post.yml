@@ -23,6 +23,11 @@ services:
           parent: app.behat.symfony_page
           public: false
 
+      app.behat.page.frontend.post.create_for_game_play:
+          class: AppBundle\Behat\Page\Frontend\Post\CreateForGamePlayPage
+          parent: app.behat.symfony_page
+          public: false
+
       app.behat.page.frontend.post.update:
           class: AppBundle\Behat\Page\Frontend\Post\UpdatePage
           parent: app.behat.symfony_page
@@ -30,5 +35,10 @@ services:
 
       app.behat.page.frontend.post.update_for_article:
           class: AppBundle\Behat\Page\Frontend\Post\UpdateForArticlePage
+          parent: app.behat.symfony_page
+          public: false
+
+      app.behat.page.frontend.post.update_for_game_play:
+          class: AppBundle\Behat\Page\Frontend\Post\UpdateForGamePlayPage
           parent: app.behat.symfony_page
           public: false

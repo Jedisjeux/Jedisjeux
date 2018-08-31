@@ -22,3 +22,8 @@ services:
           class: AppBundle\Behat\Page\Frontend\GamePlay\UpdatePage
           parent: app.behat.symfony_page
           public: false
+
+      app.behat.page.frontend.game_play.show:
+          class: AppBundle\Behat\Page\Frontend\GamePlay\ShowPage
+          parent: app.behat.symfony_page
+          public: false

@@ -13,6 +13,7 @@ namespace AppBundle\Behat\Context\Setup;
 
 use AppBundle\Behat\Service\SharedStorageInterface;
 use AppBundle\Entity\Article;
+use AppBundle\Entity\GamePlay;
 use AppBundle\Entity\Post;
 use AppBundle\Entity\Topic;
 use AppBundle\Fixture\Factory\ExampleFactoryInterface;
@@ -112,6 +113,38 @@ class PostContext implements Context
             /** @var Topic $topic */
             $topic = $this->topicFactory->create([
                 'article' => $article,
+            ]);
+
+            $this->topicRepository->add($topic);
+        }
+
+        /** @var Post $post */
+        $post = $this->postFactory->create([
+            'topic' => $topic,
+            'author' => $customer,
+        ]);
+
+        $this->postRepository->add($post);
+        $this->sharedStorage->set('comment', $post);
+    }
+
+    /**
+     * @Given /^(this game play) has(?:| also) a comment added by (customer "[^"]+")$/
+     * @Given /^I leaved a comment on (this game play)$/
+     *
+     * @param GamePlay $gamePlay
+     * @param CustomerInterface $customer
+     */
+    public function gamePlayHasACommentAddedByCustomer(GamePlay $gamePlay, CustomerInterface $customer = null)
+    {
+        if (null === $customer) {
+            $customer = $this->sharedStorage->get('customer');
+        }
+
+        if (null === $topic = $gamePlay->getTopic()) {
+            /** @var Topic $topic */
+            $topic = $this->topicFactory->create([
+                'game_play' => $gamePlay,
             ]);
 
             $this->topicRepository->add($topic);
