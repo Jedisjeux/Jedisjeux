@@ -1,4 +1,4 @@
-app_post:
+app_frontend_post:
     resource: |
         alias: app.post
         section: frontend

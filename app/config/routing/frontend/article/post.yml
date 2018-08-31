@@ -9,7 +9,7 @@ app_frontend_article_post_create:
                 method: createForArticle
                 arguments:
                     - expr:service('app.repository.article').findOneBySlug($articleSlug)
-            template: frontend/article/post/create.html.twig
+            template: frontend/post/createForArticle.html.twig
             redirect:
                 route: app_frontend_article_show
                 parameters: { slug: $articleSlug }
@@ -27,4 +27,4 @@ app_frontend_article_post_update:
             redirect:
                 route: app_frontend_article_show
                 parameters: { slug: $articleSlug }
-            template: frontend/article/post/update.html.twig
+            template: frontend/post/updateForArticle.html.twig

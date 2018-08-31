@@ -155,6 +155,14 @@ services:
         tags:
             - { name: fob.context_service }
 
+    app.behat.context.ui.frontend.article_post:
+        class: AppBundle\Behat\Context\Ui\Frontend\ArticlePostContext
+        arguments:
+            - "@app.behat.page.frontend.post.create_for_article"
+            - "@app.behat.page.frontend.post.update_for_article"
+        tags:
+            - { name: fob.context_service }
+
     app.behat.context.ui.frontend.contact:
         class: AppBundle\Behat\Context\Ui\Frontend\ContactContext
         arguments:

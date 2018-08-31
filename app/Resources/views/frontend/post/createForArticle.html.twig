@@ -1,13 +1,14 @@
 {% extends "frontend/layout.html.twig" %}
-
 {% import 'macro/actions.html.twig' as action %}
 
-{% set pageTitle = 'app.ui.edit_post'|trans %}
+{% set pageTitle %}
+    {{ 'app.ui.your_comment'|trans }}
+{% endset %}
 
 {% block content -%}
     {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
-    {% include 'frontend/post/update/_breadcrumb.html.twig' %}
+    {% include 'frontend/post/createForArticle/_breadcrumb.html.twig' %}
 
     <!-- main-container start -->
     <!-- ================ -->
@@ -26,9 +27,8 @@
                     <div class="separator-2"></div>
                     <!-- page-title end -->
                     {{ form_start(form) }}
-                    <input type="hidden" name="_method" value="PUT"/>
                     {% include 'frontend/post/_form.html.twig' %}
-                    {{ action.update() }}
+                    {{ action.create() }}
                     {{ form_end(form) }}
                 </div>
             </div>

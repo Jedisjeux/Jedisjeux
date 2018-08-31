@@ -88,7 +88,9 @@ services:
             arguments:
                 - "@app.behat.shared_storage"
                 - "@__symfony__.app.fixture.example_factory.post"
+                - "@__symfony__.app.fixture.example_factory.topic"
                 - "@__symfony__.app.repository.post"
+                - "@__symfony__.app.repository.topic"
             tags:
                 - { name: fob.context_service }
 

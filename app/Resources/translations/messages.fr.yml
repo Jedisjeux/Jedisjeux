@@ -192,6 +192,7 @@ app:
         wishes: Envies
         videos: Vidéos
         view_website: Voir le site
+        your_comment: Votre commentaire
 sylius:
     form:
         product_association_type:
