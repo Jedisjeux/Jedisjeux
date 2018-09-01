@@ -113,6 +113,14 @@ class TopicContext implements Context
     }
 
     /**
+     * @When I specify its title as :title
+     */
+    public function iSpecifyTitle($title = null)
+    {
+        $this->createPage->setTitle($title);
+    }
+
+    /**
      * @When I leave a comment :comment, titled :title
      */
     public function iLeaveACommentTitled($comment = null, $title = null)
@@ -123,14 +131,16 @@ class TopicContext implements Context
 
     /**
      * @When I change my comment as :comment
+     * @When I do not leave any comment
      */
-    public function iChangeMyCommentAs($comment)
+    public function iChangeMyCommentAs($comment = null)
     {
         $this->updatePage->setComment($comment);
     }
 
     /**
      * @When I add it
+     * @When I try to add it
      */
     public function iAddIt()
     {
@@ -167,5 +177,23 @@ class TopicContext implements Context
     public function iShouldSeeTopicTitle($title)
     {
         Assert::same($this->showPage->getTitle(), $title);
+    }
+
+    /**
+     * @Then I should be notified that the :elementName is required
+     */
+    public function iShouldBeNotifiedThatCommentIsRequired($elementName)
+    {
+        Assert::true($this->createPage->checkValidationMessageFor($elementName, 'This value should not be blank.'));
+    }
+
+    /**
+     * @Then this topic should not be added
+     */
+    public function thisTopicShouldNotBeAdded()
+    {
+        $this->indexPage->open();
+
+        Assert::same($this->indexPage->countItems(), 0);
     }
 }

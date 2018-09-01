@@ -27,6 +27,16 @@ class IndexPage extends SymfonyPage
     }
 
     /**
+     * @return int
+     */
+    public function countItems(): int
+    {
+        $topics = $this->getDocument()->findAll('css', '#topic-list .image-box');
+
+        return count($topics);
+    }
+
+    /**
      * @param string $title
      *
      * @return bool
