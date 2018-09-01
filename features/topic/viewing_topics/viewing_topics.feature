@@ -7,6 +7,7 @@ Feature: Viewing topics
     Background:
         Given there are default taxonomies for topics
         And there is a customer with email "kevin@example.com"
+        And there is a game
 
     @ui
     Scenario: Viewing topics

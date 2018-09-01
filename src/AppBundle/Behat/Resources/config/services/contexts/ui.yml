@@ -257,5 +257,6 @@ services:
             - "@app.behat.page.frontend.topic.index_by_taxon"
             - "@app.behat.page.frontend.topic.create"
             - "@app.behat.page.frontend.topic.update"
+            - "@app.behat.page.frontend.topic.show"
         tags:
             - { name: fob.context_service }

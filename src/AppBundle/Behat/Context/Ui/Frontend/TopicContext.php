@@ -14,6 +14,7 @@ namespace AppBundle\Behat\Context\Ui\Frontend;
 use AppBundle\Behat\Page\Frontend\Topic\CreatePage;
 use AppBundle\Behat\Page\Frontend\Topic\IndexByTaxonPage;
 use AppBundle\Behat\Page\Frontend\Topic\IndexPage;
+use AppBundle\Behat\Page\Frontend\Topic\ShowPage;
 use AppBundle\Behat\Page\Frontend\Topic\UpdatePage;
 use AppBundle\Entity\Topic;
 use Behat\Behat\Context\Context;
@@ -46,21 +47,29 @@ class TopicContext implements Context
     private $updatePage;
 
     /**
+     * @var ShowPage
+     */
+    private $showPage;
+
+    /**
      * @param IndexPage $indexPage
      * @param IndexByTaxonPage $indexByTaxonPage
      * @param CreatePage $createPage
      * @param UpdatePage $updatePage
+     * @param ShowPage $showPage
      */
     public function __construct(
         IndexPage $indexPage,
         IndexByTaxonPage $indexByTaxonPage,
         CreatePage $createPage,
-        UpdatePage $updatePage
+        UpdatePage $updatePage,
+        ShowPage $showPage
     ) {
         $this->indexPage = $indexPage;
         $this->indexByTaxonPage = $indexByTaxonPage;
         $this->createPage = $createPage;
         $this->updatePage = $updatePage;
+        $this->showPage = $showPage;
     }
 
     /**
@@ -93,6 +102,14 @@ class TopicContext implements Context
     public function iWantToChangeTopic(Topic $topic)
     {
         $this->updatePage->open(['id' => $topic->getId()]);
+    }
+
+    /**
+     * @When /^I check (this topic)'s details$/
+     */
+    public function iOpenTopicPage(Topic $topic)
+    {
+        $this->showPage->open(['topicId' => $topic->getId()]);
     }
 
     /**
@@ -142,5 +159,13 @@ class TopicContext implements Context
     public function iShouldNotSeeTopic($title)
     {
         Assert::false($this->indexPage->isTopicOnList($title));
+    }
+
+    /**
+     * @Then I should see the topic title :title
+     */
+    public function iShouldSeeTopicTitle($title)
+    {
+        Assert::same($this->showPage->getTitle(), $title);
     }
 }
