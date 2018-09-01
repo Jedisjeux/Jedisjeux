@@ -87,6 +87,10 @@ class PostExampleFactory extends AbstractExampleFactory implements ExampleFactor
             ->setAllowedTypes('topic', ['null', 'string', Topic::class])
             ->setNormalizer('topic', LazyOption::findOneBy($this->topicRepository, 'code'))
 
+            ->setDefault('game_play', null)
+
+            ->setDefault('article', null)
+
             ->setDefault('author', LazyOption::randomOne($this->customerRepository))
             ->setAllowedTypes('author', ['null', 'string', CustomerInterface::class])
             ->setNormalizer('author', LazyOption::findOneBy($this->customerRepository, 'email'))
@@ -115,6 +119,8 @@ class PostExampleFactory extends AbstractExampleFactory implements ExampleFactor
         $post = $this->postFactory->createNew();
         $post->setBody($options['body']);
         $post->setTopic($options['topic']);
+        $post->setGamePlay($options['game_play']);
+        $post->setArticle($options['article']);
         $post->setAuthor($options['author']);
         $post->setCreatedAt($options['created_at']);
 

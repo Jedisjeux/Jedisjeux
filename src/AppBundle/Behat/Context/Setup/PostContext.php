@@ -120,6 +120,7 @@ class PostContext implements Context
 
         /** @var Post $post */
         $post = $this->postFactory->create([
+            'article' => $article,
             'topic' => $topic,
             'author' => $customer,
         ]);
@@ -152,6 +153,7 @@ class PostContext implements Context
 
         /** @var Post $post */
         $post = $this->postFactory->create([
+            'game_play' => $gamePlay,
             'topic' => $topic,
             'author' => $customer,
         ]);
