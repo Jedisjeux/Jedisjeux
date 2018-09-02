@@ -14,18 +14,23 @@ sylius_grid:
             sorting:
                 lastPostCreatedAt: desc
             fields:
-                lastPostCreatedAt:
-                    type: date
-                    sortable: ~
                 createdAt:
                     type: date
+                    path: lastPostCreatedAt
                     sortable: ~
                 postCount:
                     type: string
                     sortable: ~
             filters:
-                search:
-                    type: string
-                    label: sylius.ui.search
-                    options:
-                        fields: [title]
+                mainTaxon:
+                    type: frontend_taxon
+                    form_options:
+                        label: sylius.ui.category
+                        taxons:
+                            app.ui.news: news
+                            app.ui.review_articles: review-articles
+                            app.ui.previews: previews
+                            app.ui.in_the_boxes: in-the-boxes
+                            app.ui.report_articles: report-articles
+                            app.ui.interviews: interviews
+                            app.ui.videos: videos
