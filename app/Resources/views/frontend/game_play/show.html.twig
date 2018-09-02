@@ -14,9 +14,18 @@
                 <!-- ================ -->
                 <div class="main col-12">
 
+                    {% if app.user and app.user.customer.id == game_play.author.id %}
+                        <div class="text-right">
+                            <a title="{{ 'app.ui.edit_game_play'|trans }}" class="btn btn-default"
+                               href="{{ path('app_frontend_game_play_update', {'id' : game_play.id, 'productSlug': game_play.product.slug}) }}">
+                                <span class="fa fa-pencil"></span>
+                            </a>
+                        </div>
+                    {% endif %}
+
                     <!-- page-title start -->
                     <!-- ================ -->
-                    <h1 class="page-title text-center">{{ game_play.product }}</h1>
+                    <h1 class="clearfix page-title text-center">{{ game_play.product }}</h1>
                     <p class="large text-center">{{ game_play.createdAt|localizeddate('medium', 'none') }} | par {{ game_play.author }}
                     <div class="separator with-icon"><i class="fa fa-play-circle bordered"></i></div>
                     <!-- page-title end -->

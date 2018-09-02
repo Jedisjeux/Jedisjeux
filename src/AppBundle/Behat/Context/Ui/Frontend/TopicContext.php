@@ -14,6 +14,7 @@ namespace AppBundle\Behat\Context\Ui\Frontend;
 use AppBundle\Behat\Page\Frontend\Topic\CreatePage;
 use AppBundle\Behat\Page\Frontend\Topic\IndexByTaxonPage;
 use AppBundle\Behat\Page\Frontend\Topic\IndexPage;
+use AppBundle\Behat\Page\Frontend\Topic\ShowPage;
 use AppBundle\Behat\Page\Frontend\Topic\UpdatePage;
 use AppBundle\Entity\Topic;
 use Behat\Behat\Context\Context;
@@ -46,21 +47,29 @@ class TopicContext implements Context
     private $updatePage;
 
     /**
+     * @var ShowPage
+     */
+    private $showPage;
+
+    /**
      * @param IndexPage $indexPage
      * @param IndexByTaxonPage $indexByTaxonPage
      * @param CreatePage $createPage
      * @param UpdatePage $updatePage
+     * @param ShowPage $showPage
      */
     public function __construct(
         IndexPage $indexPage,
         IndexByTaxonPage $indexByTaxonPage,
         CreatePage $createPage,
-        UpdatePage $updatePage
+        UpdatePage $updatePage,
+        ShowPage $showPage
     ) {
         $this->indexPage = $indexPage;
         $this->indexByTaxonPage = $indexByTaxonPage;
         $this->createPage = $createPage;
         $this->updatePage = $updatePage;
+        $this->showPage = $showPage;
     }
 
     /**
@@ -96,6 +105,22 @@ class TopicContext implements Context
     }
 
     /**
+     * @When /^I check (this topic)'s details$/
+     */
+    public function iOpenTopicPage(Topic $topic)
+    {
+        $this->showPage->open(['topicId' => $topic->getId()]);
+    }
+
+    /**
+     * @When I specify its title as :title
+     */
+    public function iSpecifyTitle($title = null)
+    {
+        $this->createPage->setTitle($title);
+    }
+
+    /**
      * @When I leave a comment :comment, titled :title
      */
     public function iLeaveACommentTitled($comment = null, $title = null)
@@ -106,14 +131,16 @@ class TopicContext implements Context
 
     /**
      * @When I change my comment as :comment
+     * @When I do not leave any comment
      */
-    public function iChangeMyCommentAs($comment)
+    public function iChangeMyCommentAs($comment = null)
     {
         $this->updatePage->setComment($comment);
     }
 
     /**
      * @When I add it
+     * @When I try to add it
      */
     public function iAddIt()
     {
@@ -142,5 +169,31 @@ class TopicContext implements Context
     public function iShouldNotSeeTopic($title)
     {
         Assert::false($this->indexPage->isTopicOnList($title));
+    }
+
+    /**
+     * @Then I should see the topic title :title
+     */
+    public function iShouldSeeTopicTitle($title)
+    {
+        Assert::same($this->showPage->getTitle(), $title);
+    }
+
+    /**
+     * @Then I should be notified that the :elementName is required
+     */
+    public function iShouldBeNotifiedThatCommentIsRequired($elementName)
+    {
+        Assert::true($this->createPage->checkValidationMessageFor($elementName, 'This value should not be blank.'));
+    }
+
+    /**
+     * @Then this topic should not be added
+     */
+    public function thisTopicShouldNotBeAdded()
+    {
+        $this->indexPage->open();
+
+        Assert::same($this->indexPage->countItems(), 0);
     }
 }

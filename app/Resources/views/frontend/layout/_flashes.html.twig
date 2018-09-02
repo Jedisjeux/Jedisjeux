@@ -1,0 +1,22 @@
+<div id="flashes">
+    {% if app.session is not null and app.session.started %}
+        {% for type in ['success', 'error', 'info', 'warning'] %}
+            {% for flash in app.session.flashbag.get(type) %}
+                {% if 'error' == type %}
+                    {% set result = 'negative' %}
+                    {% set icon = 'remove' %}
+                {% endif %}
+                <div class="alert alert-{{ type }} {{ result|default('positive') }} sylius-flash-message">
+                    <button type="button" data-dismiss="alert" class="close" aria-hidden="true">&times;</button>
+                    <p>
+                        {% if flash is iterable %}
+                            {{ flash.message|trans(flash.parameters, 'flashes') }}
+                        {% else %}
+                            {{ flash|trans({}, 'flashes') }}
+                        {% endif %}
+                    </p>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+</div>

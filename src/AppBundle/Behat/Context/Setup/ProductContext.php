@@ -12,6 +12,7 @@
 namespace AppBundle\Behat\Context\Setup;
 
 use AppBundle\Behat\Service\SharedStorageInterface;
+use AppBundle\Entity\Person;
 use AppBundle\Entity\Product;
 use AppBundle\Fixture\Factory\ExampleFactoryInterface;
 use Behat\Behat\Context\Context;
@@ -66,17 +67,22 @@ class ProductContext implements Context
 
     /**
      * @Given there is product :name
+     * @Given there is a product :name, created at :date
      *
      * @param string $name
      */
-    public function productHasName($name)
+    public function productHasName($name, $date = 'now')
     {
         /** @var Product $product */
         $product = $this->productFactory->create([
             'name' => $name,
+            'created_at' => $date,
             'status' => Product::PUBLISHED,
             'mechanisms' => [],
             'themes' => [],
+            'designers' => [],
+            'artists' => [],
+            'publishers' => [],
         ]);
 
         $this->productRepository->add($product);
@@ -96,6 +102,9 @@ class ProductContext implements Context
             'status' => str_replace(' ', '_', $status),
             'mechanisms' => [],
             'themes' => [],
+            'designers' => [],
+            'artists' => [],
+            'publishers' => [],
         ]);
 
         $this->productRepository->add($product);
@@ -120,5 +129,35 @@ class ProductContext implements Context
     {
         $product->addTheme($theme);
         $this->manager->flush($product);
+    }
+
+    /**
+     * @Given /^(this product) is designed by ("[^"]+" person)$/
+     * @Given /^(this product) is also designed by ("[^"]+" person)$/
+     */
+    public function productHasDesigner(Product $product, Person $person)
+    {
+        $product->getFirstVariant()->addDesigner($person);
+        $this->manager->flush($product->getFirstVariant());
+    }
+
+    /**
+     * @Given /^(this product) is drawn by ("[^"]+" person)$/
+     * @Given /^(this product) is also drawn by ("[^"]+" person)$/
+     */
+    public function productHasArtist(Product $product, Person $person)
+    {
+        $product->getFirstVariant()->addArtist($person);
+        $this->manager->flush($product->getFirstVariant());
+    }
+
+    /**
+     * @Given /^(this product) is published by ("[^"]+" person)$/
+     * @Given /^(this product) is also published by ("[^"]+" person)$/
+     */
+    public function productHasPublisher(Product $product, Person $person)
+    {
+        $product->getFirstVariant()->addPublisher($person);
+        $this->manager->flush($product->getFirstVariant());
     }
 }

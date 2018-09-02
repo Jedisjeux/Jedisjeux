@@ -11,11 +11,13 @@
 
 namespace AppBundle\Behat\Context\Ui\Frontend;
 
+use AppBundle\Behat\Page\Frontend\Article\IndexByTaxonPage;
 use AppBundle\Behat\Page\Frontend\Article\IndexPage;
 use AppBundle\Behat\Page\Frontend\Article\ShowPage;
 use AppBundle\Behat\Page\UnexpectedPageException;
 use AppBundle\Entity\Article;
 use Behat\Behat\Context\Context;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -34,13 +36,20 @@ class ArticleContext implements Context
     private $indexPage;
 
     /**
+     * @var IndexByTaxonPage
+     */
+    private $indexByTaxonPage;
+
+    /**
      * @param ShowPage $showPage
      * @param IndexPage $indexPage
+     * @param IndexByTaxonPage $indexByTaxonPage
      */
-    public function __construct(ShowPage $showPage, IndexPage $indexPage)
+    public function __construct(ShowPage $showPage, IndexPage $indexPage, IndexByTaxonPage $indexByTaxonPage)
     {
         $this->showPage = $showPage;
         $this->indexPage = $indexPage;
+        $this->indexByTaxonPage = $indexByTaxonPage;
     }
 
     /**
@@ -49,6 +58,24 @@ class ArticleContext implements Context
     public function iWantToBrowseArticles()
     {
         $this->indexPage->open();
+    }
+
+    /**
+     * @When /^I browse articles from (category "([^"]+)")$/
+     */
+    public function iCheckListOfArticlesFromCategory(TaxonInterface $taxon)
+    {
+        $this->indexByTaxonPage->open(['slug' => $taxon->getSlug()]);
+    }
+
+    /**
+     * @When /^I view (oldest|newest) articles$/
+     */
+    public function iViewSortedArticles($sortDirection)
+    {
+        $sorting = ['publishStartDate' => 'oldest' === $sortDirection ? 'asc' : 'desc'];
+
+        $this->indexPage->open(['sorting' => $sorting]);
     }
 
     /**
@@ -76,9 +103,25 @@ class ArticleContext implements Context
     }
 
     /**
+     * @Then I should see :numberOfArticles articles in the list
+     */
+    public function iShouldSeeArticlesInTheList($numberOfArticles)
+    {
+        Assert::same($this->indexPage->countArticlesItems(), (int) $numberOfArticles);
+    }
+
+    /**
+     * @Then the first article on the list should have title :title
+     */
+    public function theFirstArticleOnTheListShouldHaveTitle($title)
+    {
+        Assert::same($this->indexPage->getFirstArticleTitleFromList(), $title);
+    }
+
+    /**
      * @Then I should see the article title :title
      */
-    public function iShouldSeePersonName($title)
+    public function iShouldSeeArticleTitle($title)
     {
         Assert::same($this->showPage->getTitle(), $title);
     }

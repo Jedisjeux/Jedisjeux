@@ -1,0 +1,21 @@
+{% set definition = resources.definition %}
+
+<!-- section start -->
+<!-- ================ -->
+<div class="dark-translucent-bg section">
+    <div class="container-fluid">
+        <!-- filters start -->
+        <div class="sorting-filters text-center mb-20 d-flex justify-content-center">
+            <form class="form-inline">
+                {% for filter in definition.filters %}
+                    {{ sylius_grid_render_filter(resources, filter) }}
+                {% endfor %}
+                <div class="form-group ml-1">
+                    <a href="#" class="btn btn-default">Submit</a>
+                </div>
+            </form>
+        </div>
+        <!-- filters end -->
+    </div>
+</div>
+<!-- section end -->

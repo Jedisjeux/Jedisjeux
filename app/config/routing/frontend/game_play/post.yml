@@ -9,7 +9,7 @@ app_frontend_game_play_post_create:
                 method: createForGamePlay
                 arguments:
                     - expr:service('app.repository.game_play').find($gamePlayId)
-            template: frontend/game_play/post/create.html.twig
+            template: frontend/post/createForGamePlay.html.twig
             redirect:
                 route: app_frontend_game_play_show
                 parameters: { id: $gamePlayId, productSlug: resource.gamePlay.product.slug }
@@ -27,4 +27,4 @@ app_frontend_game_play_post_update:
             redirect:
                 route: app_frontend_game_play_show
                 parameters: { id: $gamePlayId, productSlug: resource.gamePlay.product.slug }
-            template: frontend/game_play/post/update.html.twig
+            template: frontend/post/updateForGamePlay.html.twig

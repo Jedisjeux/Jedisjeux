@@ -90,7 +90,8 @@
     "phpstan/phpstan-shim": "^0.10",
     "phpstan/phpstan-doctrine": "^0.10",
     "phpstan/phpstan-symfony": "^0.10",
-    "phpstan/phpstan-webmozart-assert": "^0.10"
+    "phpstan/phpstan-webmozart-assert": "^0.10",
+    "lakion/mink-debug-extension": "^1.2"
   },
   "scripts": {
     "symfony-scripts": [

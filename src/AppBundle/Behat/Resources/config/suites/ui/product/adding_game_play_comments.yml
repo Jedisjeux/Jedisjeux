@@ -1,0 +1,22 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        ui_adding_game_play_comments:
+            contexts_services:
+                - app.behat.context.hook.doctrine_orm
+
+                - app.behat.context.transform.customer
+                - app.behat.context.transform.shared_storage
+
+                - app.behat.context.setup.admin_security
+                - app.behat.context.setup.customer
+                - app.behat.context.setup.game_play
+                - app.behat.context.setup.product
+                - app.behat.context.setup.taxon
+
+                - app.behat.context.ui.frontend.game_play_post
+                - app.behat.context.ui.frontend.notification
+            filters:
+                tags: "@adding_game_play_comments && @ui"

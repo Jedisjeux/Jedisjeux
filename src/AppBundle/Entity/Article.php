@@ -338,6 +338,10 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
     public function setTopic(?Topic $topic): void
     {
         $this->topic = $topic;
+
+        if ($this !== $topic->getArticle()) {
+            $topic->setArticle($this);
+        }
     }
 
     /**

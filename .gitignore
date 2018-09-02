@@ -44,6 +44,9 @@ log/
 /behat.yml
 /etc/docker/variables.env
 
+/etc/build/*
+!/etc/build/.gitkeep
+
 .idea
 *.DS_Store
 *.sass-cache

@@ -5,6 +5,8 @@
     <dd class="col-sm-9">{{ game_play.playerCount }}</dd>
     <dt class="col-sm-3 text-sm-right">{{ 'sylius.ui.date'|trans }}</dt>
     <dd class="col-sm-9">{{ game_play.playedAt|localizeddate('medium', 'none') }}</dd>
-    <dt class="col-sm-3 text-sm-right">{{ 'app.ui.duration'|trans }}</dt>
-    <dd class="col-sm-9">{{ duration(game_play) }}</dd>
+    {% if game_play.duration is not null %}
+        <dt class="col-sm-3 text-sm-right">{{ 'app.ui.duration'|trans }}</dt>
+        <dd class="col-sm-9">{{ duration(game_play) }}</dd>
+    {% endif %}
 </dl>

@@ -1,0 +1,33 @@
+{% extends "frontend/layout.html.twig" %}
+
+{% import 'macro/actions.html.twig' as action %}
+
+{% set pageTitle = 'app.ui.edit_topic'|trans %}
+
+{% block content -%}
+    <!-- main-container start -->
+    <!-- ================ -->
+    <section class="main-container">
+
+        <div class="container">
+            <div class="row">
+
+                <!-- main start -->
+                <!-- ================ -->
+                <div class="main col-md-12">
+
+                    <!-- page-title start -->
+                    <!-- ================ -->
+                    <h1 class="page-title">{{ pageTitle }}</h1>
+                    <div class="separator-2"></div>
+                    <!-- page-title end -->
+                    {{ form_start(form) }}
+                    <input type="hidden" name="_method" value="PUT"/>
+                    {% include 'frontend/topic/_form.html.twig' %}
+                    {{ action.update() }}
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

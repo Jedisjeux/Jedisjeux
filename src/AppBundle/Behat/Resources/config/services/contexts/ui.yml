@@ -128,18 +128,20 @@ services:
       tags:
           - { name: fob.context_service }
 
-    app.behat.context.ui.backend.managing_topics:
-      class: AppBundle\Behat\Context\Ui\Backend\ManagingTopicsContext
-      arguments:
-          - "@app.behat.page.backend.topic.index"
-          - "@app.behat.page.backend.topic.update"
-          - "@app.behat.current_page_resolver"
-      tags:
-          - { name: fob.context_service }
-
     app.behat.context.ui.backend.notification:
         class: AppBundle\Behat\Context\Ui\Backend\NotificationContext
         arguments:
+            - "@app.behat.notification_checker"
+        tags:
+            - { name: fob.context_service }
+
+    app.behat.context.ui.frontend.account:
+        class: AppBundle\Behat\Context\Ui\Frontend\AccountContext
+        arguments:
+            - "@app.behat.page.frontend.account.dashboard"
+            - "@app.behat.page.frontend.account.profile_update"
+            - "@app.behat.page.frontend.account.change_password"
+            - "@app.behat.page.frontend.account.login"
             - "@app.behat.notification_checker"
         tags:
             - { name: fob.context_service }
@@ -149,6 +151,16 @@ services:
         arguments:
             - "@app.behat.page.frontend.article.show"
             - "@app.behat.page.frontend.article.index"
+            - "@app.behat.page.frontend.article.index_by_taxon"
+        tags:
+            - { name: fob.context_service }
+
+    app.behat.context.ui.frontend.article_post:
+        class: AppBundle\Behat\Context\Ui\Frontend\ArticlePostContext
+        arguments:
+            - "@app.behat.page.frontend.post.create_for_article"
+            - "@app.behat.page.frontend.post.update_for_article"
+            - "@app.behat.page.frontend.article.show"
         tags:
             - { name: fob.context_service }
 
@@ -160,19 +172,39 @@ services:
         tags:
             - { name: fob.context_service }
 
+    app.behat.context.ui.frontend.game_play:
+        class: AppBundle\Behat\Context\Ui\Frontend\GamePlayContext
+        arguments:
+            - "@app.behat.page.frontend.game_play.index"
+            - "@app.behat.page.frontend.game_play.create"
+            - "@app.behat.page.frontend.game_play.update"
+        tags:
+            - { name: fob.context_service }
+
+    app.behat.context.ui.frontend.game_play_post:
+        class: AppBundle\Behat\Context\Ui\Frontend\GamePlayPostContext
+        arguments:
+        - "@app.behat.page.frontend.post.create_for_game_play"
+        - "@app.behat.page.frontend.post.update_for_game_play"
+        - "@app.behat.page.frontend.game_play.show"
+        tags:
+        - { name: fob.context_service }
+
+    app.behat.context.ui.frontend.login:
+        class: AppBundle\Behat\Context\Ui\Frontend\LoginContext
+        arguments:
+        - "@app.behat.page.frontend.home"
+        - "@app.behat.page.frontend.account.login"
+        - "@app.behat.page.frontend.account.register"
+        - "@app.behat.page.frontend.account.reset_password"
+        - "@app.behat.notification_checker"
+        tags:
+        - { name: fob.context_service }
+
     app.behat.context.ui.frontend.notification:
         class: AppBundle\Behat\Context\Ui\Frontend\NotificationContext
         arguments:
             - "@app.behat.notification_checker"
-        tags:
-            - { name: fob.context_service }
-
-    app.behat.context.ui.frontend.product:
-        class: AppBundle\Behat\Context\Ui\Frontend\ProductContext
-        arguments:
-            - "@app.behat.page.frontend.product.show"
-            - "@app.behat.page.frontend.product.index"
-            - "@app.behat.page.frontend.product.index_by_taxon"
         tags:
             - { name: fob.context_service }
 
@@ -184,6 +216,40 @@ services:
         tags:
             - { name: fob.context_service }
 
+    app.behat.context.ui.frontend.post:
+        class: AppBundle\Behat\Context\Ui\Frontend\PostContext
+        arguments:
+            - "@app.behat.shared_storage"
+            - "@app.behat.page.frontend.post.index"
+            - "@app.behat.page.frontend.post.create"
+            - "@app.behat.page.frontend.post.update"
+        tags:
+            - { name: fob.context_service }
+
+    app.behat.context.ui.frontend.product:
+        class: AppBundle\Behat\Context\Ui\Frontend\ProductContext
+        arguments:
+            - "@app.behat.page.frontend.product.show"
+            - "@app.behat.page.frontend.product.index"
+            - "@app.behat.page.frontend.product.index_by_taxon"
+            - "@app.behat.page.frontend.product.index_by_person"
+        tags:
+            - { name: fob.context_service }
+
+    app.behat.context.ui.frontend.registration:
+        class: AppBundle\Behat\Context\Ui\Frontend\RegistrationContext
+        arguments:
+            - "@app.behat.shared_storage"
+            - "@app.behat.page.frontend.account.dashboard"
+            - "@app.behat.page.frontend.home"
+            - "@app.behat.page.frontend.account.login"
+            - "@app.behat.page.frontend.account.register"
+            - "@app.behat.page.frontend.account.verify"
+            - "@app.behat.page.frontend.account.profile_update"
+            - "@app.behat.notification_checker"
+        tags:
+            - { name: fob.context_service }
+
     app.behat.context.ui.frontend.topic:
         class: AppBundle\Behat\Context\Ui\Frontend\TopicContext
         arguments:
@@ -191,5 +257,6 @@ services:
             - "@app.behat.page.frontend.topic.index_by_taxon"
             - "@app.behat.page.frontend.topic.create"
             - "@app.behat.page.frontend.topic.update"
+            - "@app.behat.page.frontend.topic.show"
         tags:
             - { name: fob.context_service }

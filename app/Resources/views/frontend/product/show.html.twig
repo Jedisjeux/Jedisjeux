@@ -60,8 +60,8 @@
                                     <div class="slick-carousel content-slider-with-thumbs mb-20">
                                         {% for image in product.getImagesOfAllVariants %}
                                             <div class="overlay-container overlay-visible">
-                                                {{ images.render(product.mainImage.webPath, 'full', product.name) }}
-                                                <a href="/assets/frontend/images/product-1.jpg"
+                                                {{ images.render(image.webPath, 'full', product.name) }}
+                                                <a href="{{ image.webPath | imagine_filter('full') }}"
                                                    class="slick-carousel--popup-img overlay-link" title="image title"><i
                                                             class="fa fa-plus"></i></a>
                                             </div>
@@ -72,7 +72,7 @@
                                             <div class="slick-carousel content-slider-thumbs">
                                                 {% for image in product.getImagesOfAllVariants %}
                                                     <div class="slick-nav-thumb">
-                                                        {{ images.render(product.mainImage.webPath, 'full', product.name) }}
+                                                        {{ images.render(image.webPath, 'full', product.name) }}
                                                     </div>
                                                 {% endfor %}
                                             </div>
@@ -98,14 +98,14 @@
                     </span>
                                 <a href="#" class="wishlist"><i class="fa fa-plus pl-10 pr-1"></i>Ajouter à</a>
                                 <a href="#" class="wishlist"><i class="fa fa-star-o pl-10 pr-1"></i>Votre avis</a>
-                                <a href="#" class="wishlist"><i class="fa fa-table pl-10 pr-1"></i>Enregistrer une
+                                <a href="{{ path('app_frontend_game_play_create', { 'productSlug': product.slug } ) }}" class="wishlist"><i class="fa fa-table pl-10 pr-1"></i>Enregistrer une
                                     partie</a>
                             </div>
                         </div>
                         <div class="col-lg-8 col-xl-7 pv-30">
-                            <h2 class="mt-4">Description</h2>
+                            <h2 class="mt-4">{{ 'sylius.ui.description'|trans }}</h2>
                             {{ product.description|raw }}
-                            <h4 class="space-top">Specifications</h4>
+                            <h4 class="space-top">{{ 'app.ui.specifications'|trans }}</h4>
                             <hr>
                             {% include 'frontend/product/show/_specifications.html.twig' %}
                             <hr>

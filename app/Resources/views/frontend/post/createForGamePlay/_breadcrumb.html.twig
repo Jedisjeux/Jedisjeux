@@ -1,0 +1,15 @@
+{% set product = post.gamePlay.product %}
+
+<!-- breadcrumb start -->
+<!-- ================ -->
+<div class="breadcrumb-container">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><i class="fa fa-home pr-2"></i><a class="link-dark" href="{{ path('app_homepage') }}">{{ 'sylius.ui.home'|trans }}</a></li>
+            <li class="breadcrumb-item"><a class="link-dark" href="{{ path('app_frontend_game_play_index') }}">{{ 'app.ui.game_plays'|trans }}</a></li>
+            <li class="breadcrumb-item active"><a class="link-dark" href="{{ path('app_frontend_game_play_show', { 'id': post.gamePlay.id, 'productSlug': product.slug } ) }}">{{ product.name }}</a></li>
+            <li class="breadcrumb-item active">{{ 'app.ui.edit_post'|trans }}</li>
+        </ol>
+    </div>
+</div>
+<!-- breadcrumb end -->

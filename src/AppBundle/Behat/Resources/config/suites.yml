@@ -1,6 +1,12 @@
 imports:
+    - suites/ui/account/customer.yml
+    - suites/ui/account/login.yml
+    - suites/ui/account/registration.yml
     - suites/ui/admin/dashboard.yml
+    - suites/ui/article/adding_article_comments.yml
+    - suites/ui/article/editing_article_comments.yml
     - suites/ui/article/managing_articles.yml
+    - suites/ui/article/removing_article_comments.yml
     - suites/ui/article/viewing_articles.yml
     - suites/ui/contact/requesting_contact.yml
     - suites/ui/dealer/managing_dealers.yml
@@ -8,14 +14,23 @@ imports:
     - suites/ui/festival_list/managing_festival_lists.yml
     - suites/ui/person/managing_people.yml
     - suites/ui/person/viewing_people.yml
+    - suites/ui/product/adding_game_play_comments.yml
+    - suites/ui/product/adding_game_plays.yml
+    - suites/ui/product/editing_game_play_comments.yml
+    - suites/ui/product/editing_game_plays.yml
     - suites/ui/product/managing_game_plays.yml
     - suites/ui/product/managing_products.yml
     - suites/ui/product/managing_product_lists.yml
     - suites/ui/product/managing_product_reviews.yml
+    - suites/ui/product/removing_game_play_comments.yml
+    - suites/ui/product/viewing_game_plays.yml
     - suites/ui/product/viewing_products.yml
     - suites/ui/redirection/managing_redirections.yml
+    - suites/ui/topic/adding_topic_posts.yml
     - suites/ui/topic/adding_topics.yml
+    - suites/ui/topic/editing_topic_posts.yml
     - suites/ui/topic/editing_topics.yml
     - suites/ui/topic/managing_topics.yml
     - suites/ui/topic/managing_posts.yml
+    - suites/ui/topic/removing_topic_posts.yml
     - suites/ui/topic/viewing_topics.yml

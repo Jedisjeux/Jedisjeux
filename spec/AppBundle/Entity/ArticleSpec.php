@@ -104,6 +104,10 @@ class ArticleSpec extends ObjectBehavior
 
     function its_topic_is_mutable(Topic $topic)
     {
+        $topic->getArticle()->willReturn(null);
+
+        $topic->setArticle($this)->shouldBeCalled();
+
         $this->setTopic($topic);
         $this->getTopic()->shouldReturn($topic);
     }

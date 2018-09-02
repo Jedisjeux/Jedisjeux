@@ -216,6 +216,10 @@ class GamePlay implements ResourceInterface
     public function setTopic(?Topic $topic): void
     {
         $this->topic = $topic;
+
+        if ($this !== $topic->getGamePlay()) {
+            $topic->setGamePlay($this);
+        }
     }
 
     /**

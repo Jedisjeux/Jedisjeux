@@ -6,7 +6,7 @@ Feature: Viewing a article details
 
     Background:
         Given there are default taxonomies for articles
-        And there is customer with email "kevin@example.com"
+        And there is a customer with email "kevin@example.com"
 
     @ui
     Scenario: Viewing a detailed page with article's title

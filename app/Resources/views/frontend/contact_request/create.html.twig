@@ -1,0 +1,44 @@
+{% extends 'frontend/layout.html.twig' %}
+
+{% set pageTitle = 'sylius.ui.contact_us'|trans %}
+
+{% block content %}
+    {% include 'frontend/contact_request/create/_banner.html.twig' %}
+
+    <!-- main-container start -->
+    <!-- ================ -->
+    <section class="main-container">
+
+        <div class="container">
+            <div class="row">
+
+                <!-- main start -->
+                <!-- ================ -->
+                <div class="main col-12 space-bottom">
+                    <h2 class="title">Drop Us a Line</h2>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet quisquam.</p>
+                            <div class="contact-form">
+                                {{ form_start(form, {'attr': {'class': 'margin-clear'}}) }}
+                                {{ form_widget(form) }}
+                                <button type="submit"
+                                        class="submit-button btn btn-lg btn-default">
+                                    {{ 'sylius.ui.send'|trans }}
+                                </button>
+                                {{ form_end(form) }}
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div id="map-canvas"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- main end -->
+            </div>
+        </div>
+    </section>
+    <!-- main-container end -->
+
+    {% include 'frontend/contact_request/create/_footerTop.html.twig' %}
+{% endblock content %}

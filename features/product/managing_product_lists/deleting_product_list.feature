@@ -5,7 +5,7 @@ Feature: Deleting product lists
     I want to be able to delete a product list
 
     Background:
-        Given there is customer with email "kevin@example.com"
+        Given there is a customer with email "kevin@example.com"
         And this customer has a product list "My favorite games"
         And this customer has a product list "My game library"
         And I am logged in as an administrator

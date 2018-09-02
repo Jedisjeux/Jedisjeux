@@ -1,0 +1,103 @@
+{% extends "frontend/layout.html.twig" %}
+
+{% import 'macro/avatar.html.twig' as avatar %}
+{% import 'macros/buttons.html.twig' as buttons %}
+
+{% set pageTitle %}
+    {{ 'sylius.ui.my_account'|trans }}
+{% endset %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    {{ 'sylius.ui.my_account'|trans }}
+{% endblock %}
+
+{% block content -%}
+    <!-- main-container start -->
+    <!-- ================ -->
+    <section class="main-container">
+
+        <div class="container">
+            <div class="row">
+
+                <!-- main start -->
+                <!-- ================ -->
+                <div class="main col-md-12">
+
+                    <!-- page-title start -->
+                    <!-- ================ -->
+                    <h1 class="page-title">{{ pageTitle }}</h1>
+                    <div class="separator-2"></div>
+                    <!-- page-title end -->
+
+                    <div id="customer-information" class="row">
+                        <div class="col-md-9 col-sm-8 col-md-push-3 col-sm-push-4">
+                            <div class="row">
+                                <div class="col-md-2 col-sm-3 col-xs-4">
+                                    <!-- Image -->
+                                    {{ avatar.render(customer, 'thumbnail_XL', customer.user, 'rounded-circle') }}
+                                </div>
+                                <div class="col-md-10 col-sm-9 col-xs-8">
+                                    <!-- Your Name / Heading -->
+                                    <h4>{{ customer.user }}</h4>
+                                    <!-- Email Address -->
+                                    <span><i class="fa fa-envelope color"></i>&nbsp; {{ customer.email }}</span>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="btn-group">
+                                        {{ buttons.btn(path('sylius_frontend_account_profile_update'), 'sylius.ui.edit', null, 'pencil') }}
+                                        {{ buttons.btn(path('sylius_frontend_account_change_password'), 'sylius.ui.change_password', null, 'lock') }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+
+                                    <div class="icon-box-1 text-center">
+                                        <!-- Container -->
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-3 col-sm-6">
+                                                    <!-- Icon Box One Item -->
+                                                    <div class="icon-box-1-item">
+                                                        <!-- Icon Box One Icon -->
+                                                        <a href="{{ path('app_frontend_account_product_list_index') }}"><i class="fa fa-list black"></i></a>
+                                                        <!-- Icon Box One Headeing -->
+                                                        <h4><a href="{{ path('app_frontend_account_product_list_index') }}">{{ 'app.ui.my_game_lists'|trans }}</a></h4>
+                                                        <!-- Icon Box One Paragraph -->
+                                                        <p>Gérer votre ludothèque, vos envies et autres listes.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 col-sm-6">
+                                                    <!-- Icon Box One Item -->
+                                                    <div class="icon-box-1-item">
+                                                        <a href="{{ path('app_frontend_account_game_play_index') }}"><i class="fa fa-play lblue"></i></a>
+                                                        <h4><a href="{{ path('app_frontend_account_game_play_index') }}">{{ 'app.ui.my_game_plays'|trans }}</a></h4>
+                                                        <p>Gérer vos parties de jeu.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-4 col-md-pull-9 col-sm-pull-8">
+                            {% include 'frontend/account/_sidebar.html.twig' %}
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+{% endblock content %}

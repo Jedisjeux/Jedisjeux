@@ -27,12 +27,34 @@ class IndexPage extends SymfonyPage
     }
 
     /**
+     * @return int
+     */
+    public function countProductsItems()
+    {
+        $productsList = $this->getDocument()->find('css', '#product-list');
+
+        $products = $productsList->findAll('css', '.listing-item');
+
+        return count($products);
+    }
+
+    /**
+     * @return string
+     */
+    public function getFirstProductNameFromList()
+    {
+        $productsList = $this->getDocument()->find('css', '#product-list');
+
+        return $productsList->find('css', '.listing-item:first-child h3')->getText();
+    }
+
+    /**
      * @param string $productName
      *
      * @return bool
      */
     public function isProductOnList($productName)
     {
-        return null !== $this->getDocument()->find('css', sprintf('.jeu-list h4:contains("%s")', $productName));
+        return null !== $this->getDocument()->find('css', sprintf('#product-list h3:contains("%s")', $productName));
     }
 }

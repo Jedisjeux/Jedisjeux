@@ -1,4 +1,5 @@
 {% import 'macro/image.html.twig' as images %}
+{% import 'macro/social_links.html.twig' as social_links %}
 
 <!-- header-top start -->
 <!-- classes:  -->
@@ -13,19 +14,13 @@
                 <!-- ================ -->
                 <div class="header-top-first clearfix">
                     <ul class="social-links circle small clearfix hidden-sm-down">
-                        <li class="twitter"><a href="https://twitter.com/jedisjeux"><i class="fa fa-twitter"></i></a></li>
-                        <li class="youtube"><a href="https://www.youtube.com/user/jedisjeux"><i class="fa fa-youtube-play"></i></a></li>
-                        <li class="facebook"><a href="https://www.facebook.com/jedisjeux"><i class="fa fa-facebook"></i></a></li>
-                        <li class="github"><a href="https://github.com/Jedisjeux/Jedisjeux"><i class="fa fa-github"></i></a></li>
+                        {{ social_links.list() }}
                     </ul>
                     <div class="social-links hidden-md-up circle small">
                         <div class="btn-group dropdown">
                             <button id="header-top-drop-1" type="button" class="btn dropdown-toggle dropdown-toggle--no-caret" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-share-alt"></i></button>
                             <ul class="dropdown-menu dropdown-animation" aria-labelledby="header-top-drop-1">
-                                <li class="twitter"><a href="https://twitter.com/jedisjeux"><i class="fa fa-twitter"></i></a></li>
-                                <li class="youtube"><a href="https://www.youtube.com/user/jedisjeux"><i class="fa fa-youtube-play"></i></a></li>
-                                <li class="facebook"><a href="https://www.facebook.com/jedisjeux"><i class="fa fa-facebook"></i></a></li>
-                                <li class="github"><a href="https://github.com/Jedisjeux/Jedisjeux"><i class="fa fa-github"></i></a></li>
+                                {{ social_links.list() }}
                             </ul>
                         </div>
                     </div>
@@ -61,11 +56,24 @@
                             <div class="btn-group">
                                 {% set customer = app.user.customer %}
                                 {% set avatarPath = customer.avatar is not null ? customer.avatar.webPath : '/assets/frontend/templates/images/avatar-placeholder.png' %}
-                                <a href="{{ path('sylius_frontend_account_dashboard') }}" class="btn btn-default btn-sm">
-                                    {#{{ images.render(avatarPath, 'thumbnail', customer, 'avatar rounded-circle') }}#}
 
-                                    Mon compte
-                                </a>
+                                {#{{ images.render(avatarPath, 'thumbnail', customer, 'avatar rounded-circle') }}#}
+                                <button id="header-top-drop-3" type="button" class="btn dropdown-toggle btn-default btn-sm dropdown-toggle--no-caret" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-lock pr-2"></i> {{ app.user }}</button>
+
+                                <ul class="dropdown-menu dropdownd .-menu-right dropdown-animation" aria-labelledby="header-top-drop-3">
+                                    <li>
+                                        <a href="{{ path('sylius_frontend_account_dashboard') }}">
+                                           <i class="fa fa-lock"></i>
+                                           {{ 'sylius.ui.my_account'|trans }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="app-logout-button" href="{{ path('app_frontend_logout') }}">
+                                            <i class="fa fa-sign-out"></i>
+                                            {{ 'sylius.ui.logout'|trans }}
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         {% endif %}
                     </div>

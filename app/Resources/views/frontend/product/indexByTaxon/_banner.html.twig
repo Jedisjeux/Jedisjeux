@@ -1,0 +1,19 @@
+<!-- header-container end -->
+<!-- banner start -->
+<!-- ================ -->
+<div class="banner dark-translucent-bg padding-bottom-clear" style="background-position: 50% 32%;">
+    {% include 'frontend/product/indexByTaxon/_breadcrumb.html.twig' %}
+    <div class="container">"
+        <div class="row justify-content-lg-center">
+            <div class="col-lg-8 text-center pv-20">
+                <h2 class="title object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">{{ taxon.name }}</h2>
+                <div class="separator object-non-visible mt-10" data-animation-effect="fadeIn" data-effect-delay="100"></div>
+                <div class="text-center object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">
+                    {{ taxon.description|raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include 'frontend/product/index/_filters.html.twig' %}
+</div>
+<!-- banner end -->

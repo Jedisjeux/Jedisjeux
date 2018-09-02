@@ -15,8 +15,10 @@ use AppBundle\Behat\Service\SharedStorageInterface;
 use AppBundle\Entity\Article;
 use AppBundle\Fixture\Factory\ExampleFactoryInterface;
 use Behat\Behat\Context\Context;
+use Doctrine\ORM\EntityManager;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -39,32 +41,42 @@ class ArticleContext implements Context
     private $articleRepository;
 
     /**
+     * @var EntityManager
+     */
+    protected $manager;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param ExampleFactoryInterface $articleFactory
      * @param RepositoryInterface $articleRepository
+     * @param EntityManager $manager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ExampleFactoryInterface $articleFactory,
-        RepositoryInterface $articleRepository)
-    {
+        RepositoryInterface $articleRepository,
+        EntityManager $manager
+    ) {
         $this->sharedStorage = $sharedStorage;
         $this->articleFactory = $articleFactory;
         $this->articleRepository = $articleRepository;
+        $this->manager = $manager;
     }
 
     /**
      * @Given there is article :title written by :customer
+     * @Given there is an article :title written by :customer, published at :date
      *
      * @param string $title
      */
-    public function thereIsArticleWrittenByCustomer($title, CustomerInterface $customer)
+    public function thereIsArticleWrittenByCustomer($title, CustomerInterface $customer, $date = 'now')
     {
         /** @var Article $article */
         $article = $this->articleFactory->create([
             'title' => $title,
             'author' => $customer,
             'status' => Article::STATUS_PUBLISHED,
+            'publish_start_date' => $date,
         ]);
 
         $this->articleRepository->add($article);
@@ -87,5 +99,15 @@ class ArticleContext implements Context
 
         $this->articleRepository->add($article);
         $this->sharedStorage->set('article', $article);
+    }
+
+    /**
+     * @Given /^(this article) has ("[^"]+" category)$/
+     * @Given /^(this article) also has ("[^"]+" category)$/
+     */
+    public function articleHasCategory(Article $article, TaxonInterface $category)
+    {
+        $article->setMainTaxon($category);
+        $this->manager->flush($article);
     }
 }

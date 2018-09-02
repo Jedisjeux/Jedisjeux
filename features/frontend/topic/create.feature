@@ -27,11 +27,3 @@ Feature: Topic creation
         When I press "Créer"
         Then I should see "a bien été créé"
         And "Zoo Topic" topic should be categorized under "forum/la-taverne-des-jeux" taxon
-
-    Scenario: Body is required
-        Given I am on "/topics/"
-        And I follow "Nouveau sujet"
-        And I fill in the following:
-            | Titre | Zoo Topic |
-        When I press "Créer"
-        Then I should see "Cette valeur ne doit pas être vide"

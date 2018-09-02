@@ -1,0 +1,32 @@
+{% if resources.data.nbResults > 0 %}
+
+    {% set definition = resources.definition %}
+
+    {% set route = app.request.attributes.get('_route') %}
+    {% set route_parameters = app.request.attributes.get('_route_params') %}
+
+    {% set criteria = app.request.query.get('criteria', {}) %}
+
+    {% set default_path = path(route, route_parameters|merge({'criteria': criteria})) %}
+    {% set oldest_first_path = path(route, route_parameters|merge({'sorting': {'publishStartDate': 'asc'}, 'criteria': criteria})) %}
+    {% set newest_first_path = path(route, route_parameters|merge({'sorting': {'publishStartDate': 'desc'}, 'criteria': criteria})) %}
+
+    {% if app.request.query.get('sorting') is empty %}
+        {% set current_sorting_label = 'sylius.ui.newest_first'|trans|lower %}
+    {% elseif app.request.query.get('sorting').publishStartDate is defined and app.request.query.get('sorting').publishStartDate == 'desc'%}
+        {% set current_sorting_label = 'sylius.ui.newest_first'|trans|lower %}
+    {% elseif app.request.query.get('sorting').publishStartDate is defined and app.request.query.get('sorting').publishStartDate == 'asc'%}
+        {% set current_sorting_label = 'sylius.ui.oldest_first'|trans|lower %}
+    {% endif %}
+
+
+    <div class="dropdown text-right">
+        <button type="button" class="btn btn-default-transparent dropdown-toggle" data-toggle="dropdown">
+            {{ 'sylius.ui.sort'|trans }} {{ current_sorting_label }}
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="{{ newest_first_path }}">{{ 'sylius.ui.newest_first'|trans }}</a>
+            <a class="dropdown-item" href="{{ oldest_first_path }}">{{ 'sylius.ui.oldest_first'|trans }}</a>
+        </div>
+    </div>
+{% endif %}

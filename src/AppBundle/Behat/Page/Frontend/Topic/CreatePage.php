@@ -12,6 +12,7 @@
 namespace AppBundle\Behat\Page\Frontend\Topic;
 
 use AppBundle\Behat\Page\SymfonyPage;
+use Behat\Mink\Exception\ElementNotFoundException;
 
 class CreatePage extends SymfonyPage
 {
@@ -25,6 +26,8 @@ class CreatePage extends SymfonyPage
 
     /**
      * @param string|null $title
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
      */
     public function setTitle(?string $title)
     {
@@ -33,6 +36,8 @@ class CreatePage extends SymfonyPage
 
     /**
      * @param string|null $comment
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
      */
     public function setComment(?string $comment)
     {
@@ -42,6 +47,22 @@ class CreatePage extends SymfonyPage
     public function submit()
     {
         $this->getDocument()->pressButton('Create');
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @throws ElementNotFoundException
+     */
+    public function checkValidationMessageFor($element, $message)
+    {
+        $errorLabel = $this->getElement($element)->getParent()->getParent()->find('css', '.form-error-message');
+
+        if (null === $errorLabel) {
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.form-error-message');
+        }
+
+        return $message === $errorLabel->getText();
     }
 
     /**

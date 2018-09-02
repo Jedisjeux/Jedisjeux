@@ -35,6 +35,7 @@ imports:
     - { resource: 'grids/frontend/person.yml' }
     - { resource: 'grids/frontend/person_from_taxon.yml' }
     - { resource: 'grids/frontend/product.yml' }
+    - { resource: 'grids/frontend/product_from_person.yml' }
     - { resource: 'grids/frontend/product_from_taxon.yml' }
     - { resource: 'grids/frontend/product_list_item.yml' }
     - { resource: 'grids/frontend/user_game_library.yml' }
@@ -68,7 +69,12 @@ sylius_grid:
             money: "@SyliusUi/Grid/Filter/money.html.twig"
             exists: "@SyliusUi/Grid/Filter/exists.html.twig"
 
-            between_two_fields: 'frontend/grid/filter/between_two_fields.html.twig'
-            less_than_or_equal: 'frontend/grid/filter/less_than_or_equal.html.twig'
+            between_two_fields: 'grid/filter/between_two_fields.html.twig'
+            less_than_or_equal: 'grid/filter/less_than_or_equal.html.twig'
             status: "backend/grid/filter/status.html.twig"
             taxon: "backend/grid/filter/taxon.html.twig"
+
+            # frontend filters
+            frontend_between_two_fields: 'frontend/grid/filter/between_two_fields.html.twig'
+            frontend_less_than_or_equal: "frontend/grid/filter/less_than_or_equal.html.twig"
+            frontend_taxon: "frontend/grid/filter/taxon.html.twig"

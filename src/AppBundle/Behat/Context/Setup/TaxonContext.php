@@ -118,6 +118,20 @@ class TaxonContext implements Context
         /** @var TaxonInterface $taxon */
         $taxon = $this->sharedStorage->get(sprintf('taxonomy_%s', $taxonCode));
 
+        $this->taxonFactory->create(['name' => $firstTaxonName, 'parent' => $taxon, 'public' => true]);
+        $this->taxonFactory->create(['name' => $secondTaxonName, 'parent' => $taxon, 'public' => true]);
+
+        $this->manager->flush($taxon);
+    }
+
+    /**
+     * @Given /^there are article categories "([^"]+)" and "([^"]+)"$/
+     */
+    public function thereAreArticleCategoriesAnd($firstTaxonName, $secondTaxonName)
+    {
+        /** @var TaxonInterface $taxon */
+        $taxon = $this->sharedStorage->get('taxonomy_articles');
+
         $this->taxonFactory->create(['name' => $firstTaxonName, 'parent' => $taxon]);
         $this->taxonFactory->create(['name' => $secondTaxonName, 'parent' => $taxon]);
 
@@ -132,8 +146,8 @@ class TaxonContext implements Context
         /** @var TaxonInterface $taxon */
         $taxon = $this->sharedStorage->get('taxonomy_forum');
 
-        $this->taxonFactory->create(['name' => $firstTaxonName, 'parent' => $taxon]);
-        $this->taxonFactory->create(['name' => $secondTaxonName, 'parent' => $taxon]);
+        $this->taxonFactory->create(['name' => $firstTaxonName, 'parent' => $taxon, 'public' => true]);
+        $this->taxonFactory->create(['name' => $secondTaxonName, 'parent' => $taxon, 'public' => true]);
 
         $this->manager->flush($taxon);
     }
@@ -145,7 +159,7 @@ class TaxonContext implements Context
     {
         foreach ($codes as $code) {
             /** @var TaxonInterface $taxon */
-            $taxon = $this->taxonFactory->create(['code' => $code, 'slug' => $code]);
+            $taxon = $this->taxonFactory->create(['code' => $code, 'slug' => $code, 'public' => true]);
             $this->taxonRepository->add($taxon);
 
             $this->sharedStorage->set(sprintf('taxonomy_%s', $code), $taxon);

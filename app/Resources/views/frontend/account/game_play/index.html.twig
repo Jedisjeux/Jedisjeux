@@ -1,0 +1,19 @@
+{% extends "frontend/layout.html.twig" %}
+
+{% set pageTitle %}
+    {{ 'app.ui.my_game_plays'|trans }}
+{% endset %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    {{ 'app.ui.my_game_plays'|trans }}
+{% endblock %}
+
+{% block content -%}
+    <div class="col-md-12">
+        <div class="container">
+            {% include 'frontend/game_play/index/_content.html.twig' with {'indexPath': 'app_frontend_account_game_play_index'} %}
+        </div>
+
+    </div>
+{% endblock %}

@@ -28,16 +28,20 @@ class ShowPage extends SymfonyPage
 
     /**
      * @return string
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->getElement('name')->getText();
     }
 
     /**
-     * {@inheritdoc}
+     * @return \Behat\Mink\Element\NodeElement[]
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
      */
-    public function getMechanisms()
+    public function getMechanisms(): array
     {
         $mechanismsParagraph = $this->getElement('mechanisms');
 
@@ -45,13 +49,51 @@ class ShowPage extends SymfonyPage
     }
 
     /**
-     * {@inheritdoc}
+     * @return array
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
      */
-    public function getThemes()
+    public function getThemes(): array
     {
-        $mechanismsParagraph = $this->getElement('themes');
+        $mechanisms = $this->getElement('themes');
 
-        return $mechanismsParagraph->findAll('css', 'a');
+        return $mechanisms->findAll('css', 'a');
+    }
+
+    /**
+     * @return array
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     */
+    public function getDesigners(): array
+    {
+        $designers = $this->getElement('designers');
+
+        return $designers->findAll('css', 'a');
+    }
+
+    /**
+     * @return array
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     */
+    public function getArtists(): array
+    {
+        $artists = $this->getElement('artists');
+
+        return $artists->findAll('css', 'a');
+    }
+
+    /**
+     * @return array
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     */
+    public function getPublishers(): array
+    {
+        $publishers = $this->getElement('publishers');
+
+        return $publishers->findAll('css', 'a');
     }
 
     /**
@@ -60,9 +102,12 @@ class ShowPage extends SymfonyPage
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'name' => 'h2 span',
+            'name' => 'h1.page-title',
             'mechanisms' => '#product-mechanisms',
             'themes' => '#product-themes',
+            'designers' => '#product-designers',
+            'artists' => '#product-artists',
+            'publishers' => '#product-publishers',
         ]);
     }
 }

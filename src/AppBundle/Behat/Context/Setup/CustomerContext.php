@@ -56,7 +56,7 @@ class CustomerContext implements Context
     }
 
     /**
-     * @Given there is customer with email :email
+     * @Given there is a customer with email :email
      *
      * @param string $email
      */
