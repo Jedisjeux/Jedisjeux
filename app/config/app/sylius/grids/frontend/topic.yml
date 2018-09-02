@@ -12,7 +12,7 @@ sylius_grid:
                             showPrivate: "expr:service('security.authorization_checker').isGranted('ROLE_STAFF')"
             limits: ~
             sorting:
-                lastPostCreatedAt: desc
+                createdAt: desc
             fields:
                 createdAt:
                     type: date
