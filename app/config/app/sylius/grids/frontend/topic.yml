@@ -1,0 +1,31 @@
+sylius_grid:
+    grids:
+        app_frontend_topic:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%app.model.topic.class%"
+                    repository:
+                        method: createFrontendListQueryBuilder
+                        arguments:
+                            localeCode: "%locale%"
+                            showPrivate: "expr:service('security.authorization_checker').isGranted('ROLE_STAFF')"
+            limits: ~
+            sorting:
+                lastPostCreatedAt: desc
+            fields:
+                lastPostCreatedAt:
+                    type: date
+                    sortable: ~
+                createdAt:
+                    type: date
+                    sortable: ~
+                postCount:
+                    type: string
+                    sortable: ~
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    options:
+                        fields: [title]

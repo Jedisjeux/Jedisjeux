@@ -30,13 +30,8 @@ app_frontend_topic_index:
     defaults:
         _controller: app.controller.topic:indexWithTaxonsAction
         _sylius:
-            repository:
-                method: createFilterPaginator
-                arguments: [$criteria, $sorting, expr:service('security.authorization_checker').isGranted('ROLE_STAFF')]
+            grid: app_frontend_topic
             paginate: 10
-            sortable: true
-            sorting:
-                lastPostCreatedAt: desc
             template: frontend/topic/index.html.twig
 
 app_frontend_topic_update:
@@ -70,10 +65,8 @@ app_frontend_topic_index_by_taxon:
     defaults:
         _controller: app.controller.topic:indexByTaxonAction
         _sylius:
+            grid: app_frontend_topic_from_taxon
             paginate: 10
-            sortable: true
-            sorting:
-                lastPostCreatedAt: desc
             template: frontend/topic/index.html.twig
     requirements:
         slug: "[^?]+"

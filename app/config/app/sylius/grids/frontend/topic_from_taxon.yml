@@ -1,0 +1,15 @@
+sylius_grid:
+    grids:
+        app_frontend_topic_from_taxon:
+            extends: app_frontend_topic
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%app.model.topic.class%"
+                    repository:
+                        method: createFrontendListQueryBuilder
+                        arguments:
+                            localeCode: "%locale%"
+                            showPrivate: "expr:service('security.authorization_checker').isGranted('ROLE_STAFF')"
+                            taxon: "expr:service('sylius.repository.taxon').findOneBySlug($slug, '%locale%')"
+            limits: ~

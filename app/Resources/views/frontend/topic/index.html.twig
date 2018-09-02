@@ -46,7 +46,7 @@
                     <!-- Image Boxes start -->
                     <!-- ============================================================================== -->
                     <br>
-                    {% for topic in topics %}
+                    {% for topic in topics.data %}
                         {% include 'frontend/topic/index/_imageBox.html.twig' with {
                             'avatar': '/assets/frontend/images/avatar-1.jpg',
                             'title': 'Partie de Uchronia',

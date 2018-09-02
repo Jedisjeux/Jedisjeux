@@ -11,7 +11,9 @@ namespace AppBundle\Repository;
 use AppBundle\Entity\Article;
 use AppBundle\Entity\GamePlay;
 use AppBundle\Entity\Topic;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
+use Elastica\Query;
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
@@ -63,6 +65,62 @@ class TopicRepository extends EntityRepository
         }
 
         parent::applyCriteria($queryBuilder, $criteria);
+    }
+
+    /**
+     * @param string $localeCode
+     * @param bool $showPrivate
+     * @param TaxonInterface|null $taxon
+     *
+     * @return QueryBuilder
+     */
+    public function createFrontendListQueryBuilder(
+        string $localeCode,
+        bool $showPrivate = false,
+        TaxonInterface $taxon = null
+    ): QueryBuilder {
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        $queryBuilder
+            ->addSelect('mainPost')
+            ->addSelect('mainTaxon')
+            ->addSelect('gamePlay')
+            ->addSelect('article')
+            ->addSelect('mainTaxonTranslation')
+            ->addSelect('customer')
+            ->addSelect('avatar')
+            ->addSelect('user')
+            ->innerJoin('o.mainPost', 'mainPost')
+            ->leftJoin('o.mainTaxon', 'mainTaxon')
+            ->leftJoin('mainTaxon.translations', 'mainTaxonTranslation', Join::WITH, 'mainTaxonTranslation.locale = :localeCode')
+            ->leftJoin('o.gamePlay', 'gamePlay')
+            ->leftJoin('o.article', 'article')
+            ->join('o.author', 'customer')
+            ->leftJoin('customer.avatar', 'avatar')
+            ->join('customer.user', 'user')
+            ->setParameter('localeCode', $localeCode)
+        ;
+
+        if (!$showPrivate) {
+            $queryBuilder
+                ->andWhere('o.mainTaxon is null or mainTaxon.public = :public')
+                ->setParameter('public', true);
+        }
+
+        if (null !== $taxon) {
+            $queryBuilder
+                ->distinct()
+                ->andWhere($queryBuilder->expr()->orX(
+                    'mainTaxon = :taxon',
+                    ':left < mainTaxon.left AND mainTaxon.right < :right AND mainTaxon.root = :root'
+                ))
+                ->setParameter('taxon', $taxon)
+                ->setParameter('left', $taxon->getLeft())
+                ->setParameter('right', $taxon->getRight())
+                ->setParameter('root', $taxon->getRoot());
+        }
+
+        return $queryBuilder;
     }
 
     /**
