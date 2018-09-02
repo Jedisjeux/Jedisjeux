@@ -21,11 +21,7 @@
                     <!-- ============================================================================== -->
                     <br>
                     {% for topic in topics.data %}
-                        {% include 'frontend/topic/index/_imageBox.html.twig' with {
-                            'avatar': '/assets/frontend/images/avatar-1.jpg',
-                            'title': 'Partie de Uchronia',
-                            'mainTaxon': 'Parties de jeu'
-                        } %}
+                        {% include 'frontend/topic/index/_imageBox.html.twig' %}
                     {% endfor %}
                 </div>
                 <!-- main end -->

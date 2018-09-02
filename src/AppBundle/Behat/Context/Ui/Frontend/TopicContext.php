@@ -89,6 +89,16 @@ class TopicContext implements Context
     }
 
     /**
+     * @When /^I view (oldest|newest) topics$/
+     */
+    public function iViewSortedTopics($sortDirection)
+    {
+        $sorting = ['createdAt' => 'oldest' === $sortDirection ? 'asc' : 'desc'];
+
+        $this->indexPage->open(['sorting' => $sorting]);
+    }
+
+    /**
      * @Given I want to add topic
      */
     public function iWantToAddTopic()
@@ -195,5 +205,21 @@ class TopicContext implements Context
         $this->indexPage->open();
 
         Assert::same($this->indexPage->countItems(), 0);
+    }
+
+    /**
+     * @Then I should see :numberOfTopics topics in the list
+     */
+    public function iShouldSeeProductsInTheList($numberOfTopics)
+    {
+        Assert::same($this->indexPage->countItems(), (int) $numberOfTopics);
+    }
+
+    /**
+     * @Then the first topic on the list should be :title
+     */
+    public function theFirstTopicOnTheListShouldBe($title)
+    {
+        Assert::same($this->indexPage->getFirstTopicTitleFromList(), $title);
     }
 }
