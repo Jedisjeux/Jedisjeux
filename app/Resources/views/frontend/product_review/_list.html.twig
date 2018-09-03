@@ -1,27 +1,9 @@
-{% import 'macro/image.html.twig' as images %}
+{% import 'macro/messages.html.twig' as messages %}
 
-{% for product_review in product_reviews %}
-    {% set avatarPath = product_review.author.avatar is not null ? product_review.author.avatar.webPath : '/assets/frontend/images/avatar-placeholder.png'  %}
-
-    <!-- comment start -->
-    <div class="comment clearfix">
-        <div class="comment-avatar">
-            {{ images.render(avatarPath, 'thumbnail', "avatar", 'rounded-circle') }}
-        </div>
-        <header>
-            <h3>{{ product_review.title }}</h3>
-            <div class="comment-meta"><i class="fa fa-star text-default"></i> <i
-                        class="fa fa-star text-default"></i> <i
-                        class="fa fa-star text-default"></i> <i
-                        class="fa fa-star text-default"></i> <i class="fa fa-star"></i> |
-                {{ product_review.createdAt|localizeddate('medium', 'none') }}
-            </div>
-        </header>
-        <div class="comment-content">
-            <div class="comment-body clearfix">
-                {{ product_review.comment|raw }}
-            </div>
-        </div>
-    </div>
-    <!-- comment end -->
-{% endfor %}
+{% if product_reviews|length > 0 %}
+    {% for product_review in product_reviews %}
+        {% include 'frontend/product_review/_single.html.twig' %}
+    {% endfor %}
+{% else %}
+    {{ messages.info('sylius.ui.there_are_no_reviews') }}
+{% endif %}

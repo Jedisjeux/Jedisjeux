@@ -1,7 +1,7 @@
 {% macro rating(value) %}
-    <i class="fa fa-star {% if value >= 2 %}text-default{% endif %}"></i>
-    <i class="fa fa-star {% if value >= 4 %}text-default{% endif %}"></i>
-    <i class="fa fa-star {% if value >= 6 %}text-default{% endif %}"></i>
-    <i class="fa fa-star {% if value >= 8 %}text-default{% endif %}"></i>
-    <i class="fa fa-star {% if value >= 10 %}text-default{% endif %}"></i>
+    <i class="fa fa-star{% if value >= 1 %} text-default{% endif %}{% if value == 1 %} fa-star-half-empty{% endif %}"></i>
+    <i class="fa fa-star{% if value >= 3 %} text-default{% endif %}{% if value == 3 %} fa-star-half-empty{% endif %}"></i>
+    <i class="fa fa-star{% if value >= 5 %} text-default{% endif %}{% if value == 5 %} fa-star-half-empty{% endif %}"></i>
+    <i class="fa fa-star{% if value >= 7 %} text-default{% endif %}{% if value == 7 %} fa-star-half-empty{% endif %}"></i>
+    <i class="fa fa-star{% if value >= 9 %} text-default{% endif %}{% if value == 9 %} fa-star-half-empty{% endif %}"></i>
 {% endmacro %}
