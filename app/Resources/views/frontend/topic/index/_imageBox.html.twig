@@ -23,7 +23,7 @@
                 <div class="separator-2"></div>
                 <p class="margin-clear">{{ (topic.mainPost.body|striptags)[:500] }}...</p>
                 <br>
-                <a href="{{ path('app_frontend_post_index_by_topic', { 'topicId': topic.id } ) }}" class="btn {% if dark|default(false) %}btn-gray-transparent btn-animated{% else %}btn-default btn-sm{% endif %} margin-clear">{{ 'app.ui.read_more'|trans }}<i
+                <a href="{{ path('app_frontend_post_index_by_topic', { 'topicId': topic.id } ) }}" class="btn {% if dark|default(false) %}btn-gray-transparent btn-animated{% else %}btn-default btn-sm{% endif %} margin-clear">{{ 'sylius.ui.view_more'|trans }}<i
                             class="fa fa-arrow-right pl-10"></i></a>
             </div>
         </div>

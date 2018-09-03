@@ -148,7 +148,6 @@ app:
         publisher: Publieur
         published_at: Publié le
         ratings: Notes
-        read_more: "Lire la suite"
         recent_articles: Articles récents
         redactor: Rédacteur
         redirections: Redirections
