@@ -53,12 +53,17 @@ class ProductReviewContext implements Context
 
     /**
      * @Given /^(this product) has one review from (customer "[^"]+")$/
+     * @Given /^I wrote a review on (this product)$/
      *
      * @param ProductInterface $product
      * @param CustomerInterface $customer
      */
-    public function productHasAReview(ProductInterface $product, CustomerInterface $customer)
+    public function productHasAReview(ProductInterface $product, CustomerInterface $customer = null)
     {
+        if (null === $customer) {
+            $customer = $this->sharedStorage->get('customer');
+        }
+
         /** @var ReviewInterface $review */
         $review = $this->productReviewFactory->create([
             'product' => $product,
