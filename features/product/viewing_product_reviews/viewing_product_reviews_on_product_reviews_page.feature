@@ -12,9 +12,9 @@ Feature: Viewing product reviews on product's reviews page
         And this product has a review titled "Great book" and rated 5 added by customer "h.p.lovecraft@arkham.com"
         And this product has also a review titled "Scary and dark" and rated 4 added by customer "robert.e.howard@conan.com"
         And this product has also a review titled "Too gloomy" and rated 3 added by customer "jrr.tolkien@middle-earth.com"
-        And I am logged in as customer
+        And I am logged in as a customer
 
-    @ui @todo
+    @ui
     Scenario: Viewing all accepted product reviews on product's reviews page
         When I check this product's reviews
         Then I should see 3 product reviews in the list
@@ -26,8 +26,8 @@ Feature: Viewing product reviews on product's reviews page
         Then I should see 3 product reviews in the list
         But I should not see review titled "Classic" in the list
 
-    @ui @todo
+    @ui
     Scenario: Viewing no review message if there are no reviews
-        Given the store has a product "Lux perpetua"
+        Given there is a product "Lux perpetua"
         When I check this product's reviews
         Then I should be notified that there are no reviews

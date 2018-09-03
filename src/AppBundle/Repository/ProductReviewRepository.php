@@ -11,6 +11,7 @@ namespace AppBundle\Repository;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
 /**
@@ -36,6 +37,24 @@ class ProductReviewRepository extends EntityRepository
             ->getQuery()
             ->getResult()
             ;
+    }
+
+    /**
+     * @param string $localeCode
+     * @param ProductInterface $product
+     *
+     * @return QueryBuilder
+     */
+    public function createListForProductQueryBuilder(string $localeCode, ProductInterface $product): QueryBuilder
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        $queryBuilder
+            ->andWhere($queryBuilder->expr()->eq('o.reviewSubject', ':product'))
+            ->setParameter('product', $product)
+        ;
+
+        return $queryBuilder;
     }
 
     /**

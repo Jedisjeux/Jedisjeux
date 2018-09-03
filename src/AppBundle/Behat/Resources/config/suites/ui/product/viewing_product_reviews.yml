@@ -15,5 +15,6 @@ default:
 
                 - app.behat.context.ui.frontend.notification
                 - app.behat.context.ui.frontend.product
+                - app.behat.context.ui.frontend.product_review
             filters:
                 tags: "@viewing_product_reviews && @ui"

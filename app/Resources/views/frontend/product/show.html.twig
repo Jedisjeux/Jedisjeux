@@ -85,7 +85,7 @@
                       <i class="fa fa-star"></i>
                     </span>
                                 <a href="#" class="wishlist"><i class="fa fa-plus pl-10 pr-1"></i>Ajouter à</a>
-                                <a href="{{ path('sylius_frontend_product_review_create', { 'productId': product.id }) }}" class="wishlist"><i class="fa fa-star-o pl-10 pr-1"></i>Votre avis</a>
+                                <a href="{{ path('sylius_frontend_product_review_create', { 'slug': product.slug }) }}" class="wishlist"><i class="fa fa-star-o pl-10 pr-1"></i>Votre avis</a>
                                 <a href="{{ path('app_frontend_game_play_create', { 'productSlug': product.slug } ) }}" class="wishlist"><i class="fa fa-table pl-10 pr-1"></i>Enregistrer une
                                     partie</a>
                             </div>

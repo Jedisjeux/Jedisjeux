@@ -1,0 +1,47 @@
+{% extends "frontend/layout.html.twig" %}
+
+{% from 'macro/pagination.html.twig' import simple as pagination %}
+
+{% set pageTitle %}
+    {{ 'sylius.ui.reviews'|trans }}
+{% endset %}
+
+{% block content %}
+<!-- main-container start -->
+<!-- ================ -->
+<section class="main-container">
+
+    <div class="container">
+        <div class="row">
+
+            <!-- main start -->
+            <!-- ================ -->
+            <div class="main col-md-12">
+
+                <!-- page-title start -->
+                <!-- ================ -->
+                <h1 class="page-title">{{ pageTitle }}</h1>
+                <div class="separator-2"></div>
+                <!-- page-title end -->
+
+                <div class="row">
+                    <div class="col-md-3">
+                        {{
+                            render(url('sylius_frontend_partial_product_show_by_slug', {
+                                'slug': app.request.attributes.get('slug'),
+                                'template': 'frontend/product/_box.html.twig'
+                            }))
+                        }}
+                    </div>
+                    <div class="col-md-9" id="product-reviews">
+                        {% include 'frontend/product_review/_list.html.twig' with {'product_reviews': product_reviews.data} %}</div>
+                        <!-- pagination start -->
+                        {{ pagination(product_reviews.data) }}
+                        <!-- pagination end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

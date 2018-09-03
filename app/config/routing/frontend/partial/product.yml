@@ -20,12 +20,16 @@ sylius_partial_product_status_show:
     requirements:
         template: "[^?]+"
 
-sylius_frontend_partial_product_show:
-    path: /{id}
+sylius_frontend_partial_product_show_by_slug:
+    path: /{slug}
     methods: [GET]
     defaults:
         _controller: sylius.controller.product:showAction
         _sylius:
+            repository:
+                method: findOneBySlug
+                arguments:
+                    - $slug
             template: $template
 
 sylius_frontend_partial_product_index_by_taxon:

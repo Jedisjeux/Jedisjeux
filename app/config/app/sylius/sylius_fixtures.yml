@@ -198,7 +198,7 @@ sylius_fixtures:
                         random: 20
                 product_review:
                     options:
-                        random: 20
+                        random: 80
                 game_play:
                     options:
                         random: 20

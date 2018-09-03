@@ -1,0 +1,57 @@
+<?php
+
+/**
+ * This file is part of Jedisjeux
+ *
+ * (c) Loïc Frémont
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace AppBundle\Behat\Page\Frontend\ProductReview;
+
+use AppBundle\Behat\Page\SymfonyPage;
+
+class IndexPage extends SymfonyPage
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function getRouteName()
+    {
+        return 'sylius_frontend_product_review_index';
+    }
+
+    /**
+     * @return int
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     */
+    public function countReviews(): int
+    {
+        return count($this->getElement('reviews')->findAll('css', '.comment'));
+    }
+
+    /**
+     * @return bool
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     */
+    public function hasNoReviewsMessage(): bool
+    {
+        $reviewsContainerText = $this->getElement('reviews')->getText();
+
+        return false !== strpos($reviewsContainerText, 'There are no reviews');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements()
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'reviews' => '#product-reviews',
+        ]);
+    }
+}
