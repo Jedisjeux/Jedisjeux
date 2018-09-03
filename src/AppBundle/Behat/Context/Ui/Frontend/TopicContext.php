@@ -11,6 +11,7 @@
 
 namespace AppBundle\Behat\Context\Ui\Frontend;
 
+use AppBundle\Behat\Page\Frontend\Topic\CreateForTaxonPage;
 use AppBundle\Behat\Page\Frontend\Topic\CreatePage;
 use AppBundle\Behat\Page\Frontend\Topic\IndexByTaxonPage;
 use AppBundle\Behat\Page\Frontend\Topic\IndexPage;
@@ -42,6 +43,11 @@ class TopicContext implements Context
     private $createPage;
 
     /**
+     * @var CreateForTaxonPage
+     */
+    private $createForTaxonPage;
+
+    /**
      * @var UpdatePage
      */
     private $updatePage;
@@ -55,6 +61,7 @@ class TopicContext implements Context
      * @param IndexPage $indexPage
      * @param IndexByTaxonPage $indexByTaxonPage
      * @param CreatePage $createPage
+     * @param CreateForTaxonPage $createForTaxonPage
      * @param UpdatePage $updatePage
      * @param ShowPage $showPage
      */
@@ -62,12 +69,14 @@ class TopicContext implements Context
         IndexPage $indexPage,
         IndexByTaxonPage $indexByTaxonPage,
         CreatePage $createPage,
+        CreateForTaxonPage $createForTaxonPage,
         UpdatePage $updatePage,
         ShowPage $showPage
     ) {
         $this->indexPage = $indexPage;
         $this->indexByTaxonPage = $indexByTaxonPage;
         $this->createPage = $createPage;
+        $this->createForTaxonPage = $createForTaxonPage;
         $this->updatePage = $updatePage;
         $this->showPage = $showPage;
     }
@@ -104,6 +113,14 @@ class TopicContext implements Context
     public function iWantToAddTopic()
     {
         $this->createPage->open();
+    }
+
+    /**
+     * @Given /^I want to add topic on ("([^"]+)" category)$/
+     */
+    public function iWantToAddTopicOnCategory(TaxonInterface $taxon)
+    {
+        $this->createForTaxonPage->open(['taxonId' => $taxon->getId()]);
     }
 
     /**

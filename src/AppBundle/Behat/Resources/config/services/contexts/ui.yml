@@ -264,6 +264,7 @@ services:
             - "@app.behat.page.frontend.topic.index"
             - "@app.behat.page.frontend.topic.index_by_taxon"
             - "@app.behat.page.frontend.topic.create"
+            - "@app.behat.page.frontend.topic.create_for_taxon"
             - "@app.behat.page.frontend.topic.update"
             - "@app.behat.page.frontend.topic.show"
         tags:

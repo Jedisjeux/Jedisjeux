@@ -23,6 +23,11 @@ services:
           parent: app.behat.symfony_page
           public: false
 
+      app.behat.page.frontend.topic.create_for_taxon:
+          class: AppBundle\Behat\Page\Frontend\Topic\CreateForTaxonPage
+          parent: app.behat.symfony_page
+          public: false
+
       app.behat.page.frontend.topic.update:
           class: AppBundle\Behat\Page\Frontend\Topic\UpdatePage
           parent: app.behat.symfony_page
