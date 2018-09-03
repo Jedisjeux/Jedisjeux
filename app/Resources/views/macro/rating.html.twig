@@ -1,0 +1,7 @@
+{% macro rating(value) %}
+    <i class="fa fa-star {% if value >= 2 %}text-default{% endif %}"></i>
+    <i class="fa fa-star {% if value >= 4 %}text-default{% endif %}"></i>
+    <i class="fa fa-star {% if value >= 6 %}text-default{% endif %}"></i>
+    <i class="fa fa-star {% if value >= 8 %}text-default{% endif %}"></i>
+    <i class="fa fa-star {% if value >= 10 %}text-default{% endif %}"></i>
+{% endmacro %}
