@@ -96,9 +96,14 @@ class ShowPage extends SymfonyPage
         return $publishers->findAll('css', 'a');
     }
 
-    public function countReviews()
+    public function countReviews(): int
     {
         return count($this->getElement('reviews')->findAll('css', '.comment'));
+    }
+
+    public function countArticles(): int
+    {
+        return count($this->getElement('articles')->findAll('css', '.comment'));
     }
 
     /**
@@ -114,11 +119,24 @@ class ShowPage extends SymfonyPage
     }
 
     /**
+     * @param string $title
+     *
+     * @return bool
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     */
+    public function hasArticleTitled(string $title): bool
+    {
+        return null !== $this->getElement('articles')->find('css', sprintf('.comment:contains("%s")', $title));
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
+            'articles' => '#articles .comments',
             'artists' => '#product-artists',
             'designers' => '#product-designers',
             'mechanisms' => '#product-mechanisms',
