@@ -236,6 +236,14 @@ services:
         tags:
             - { name: fob.context_service }
 
+    app.behat.context.ui.frontend.product_review:
+        class: AppBundle\Behat\Context\Ui\Frontend\ProductReviewContext
+        arguments:
+            - "@app.behat.page.frontend.product_review.create"
+            - "@app.behat.page.frontend.product_review.update"
+        tags:
+            - { name: fob.context_service }
+
     app.behat.context.ui.frontend.registration:
         class: AppBundle\Behat\Context\Ui\Frontend\RegistrationContext
         arguments:
@@ -256,6 +264,7 @@ services:
             - "@app.behat.page.frontend.topic.index"
             - "@app.behat.page.frontend.topic.index_by_taxon"
             - "@app.behat.page.frontend.topic.create"
+            - "@app.behat.page.frontend.topic.create_for_taxon"
             - "@app.behat.page.frontend.topic.update"
             - "@app.behat.page.frontend.topic.show"
         tags:

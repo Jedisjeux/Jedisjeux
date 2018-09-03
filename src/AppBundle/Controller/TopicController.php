@@ -81,13 +81,7 @@ class TopicController extends ResourceController
 
         $this->taxonIsGrantedOr403($taxon);
 
-        /** @var TopicRepository $repository */
-        $repository = $this->repository;
-
-        $resources = $repository
-            ->createByTaxonPaginator($taxon, $request->get('criteria', $configuration->getCriteria()), $request->get('sorting', $configuration->getSorting()))
-            ->setMaxPerPage($configuration->getPaginationMaxPerPage())
-            ->setCurrentPage($request->get('page', 1));
+        $resources = $this->resourcesCollectionProvider->get($configuration, $this->repository);
 
         $view = View::create($resources);
 

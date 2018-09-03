@@ -11,6 +11,7 @@
 
 namespace AppBundle\Behat\Context\Ui\Frontend;
 
+use AppBundle\Behat\Page\Frontend\Topic\CreateForTaxonPage;
 use AppBundle\Behat\Page\Frontend\Topic\CreatePage;
 use AppBundle\Behat\Page\Frontend\Topic\IndexByTaxonPage;
 use AppBundle\Behat\Page\Frontend\Topic\IndexPage;
@@ -42,6 +43,11 @@ class TopicContext implements Context
     private $createPage;
 
     /**
+     * @var CreateForTaxonPage
+     */
+    private $createForTaxonPage;
+
+    /**
      * @var UpdatePage
      */
     private $updatePage;
@@ -55,6 +61,7 @@ class TopicContext implements Context
      * @param IndexPage $indexPage
      * @param IndexByTaxonPage $indexByTaxonPage
      * @param CreatePage $createPage
+     * @param CreateForTaxonPage $createForTaxonPage
      * @param UpdatePage $updatePage
      * @param ShowPage $showPage
      */
@@ -62,12 +69,14 @@ class TopicContext implements Context
         IndexPage $indexPage,
         IndexByTaxonPage $indexByTaxonPage,
         CreatePage $createPage,
+        CreateForTaxonPage $createForTaxonPage,
         UpdatePage $updatePage,
         ShowPage $showPage
     ) {
         $this->indexPage = $indexPage;
         $this->indexByTaxonPage = $indexByTaxonPage;
         $this->createPage = $createPage;
+        $this->createForTaxonPage = $createForTaxonPage;
         $this->updatePage = $updatePage;
         $this->showPage = $showPage;
     }
@@ -89,11 +98,29 @@ class TopicContext implements Context
     }
 
     /**
+     * @When /^I view (oldest|newest) topics$/
+     */
+    public function iViewSortedTopics($sortDirection)
+    {
+        $sorting = ['createdAt' => 'oldest' === $sortDirection ? 'asc' : 'desc'];
+
+        $this->indexPage->open(['sorting' => $sorting]);
+    }
+
+    /**
      * @Given I want to add topic
      */
     public function iWantToAddTopic()
     {
         $this->createPage->open();
+    }
+
+    /**
+     * @Given /^I want to add topic on ("([^"]+)" category)$/
+     */
+    public function iWantToAddTopicOnCategory(TaxonInterface $taxon)
+    {
+        $this->createForTaxonPage->open(['taxonId' => $taxon->getId()]);
     }
 
     /**
@@ -195,5 +222,21 @@ class TopicContext implements Context
         $this->indexPage->open();
 
         Assert::same($this->indexPage->countItems(), 0);
+    }
+
+    /**
+     * @Then I should see :numberOfTopics topics in the list
+     */
+    public function iShouldSeeProductsInTheList($numberOfTopics)
+    {
+        Assert::same($this->indexPage->countItems(), (int) $numberOfTopics);
+    }
+
+    /**
+     * @Then the first topic on the list should be :title
+     */
+    public function theFirstTopicOnTheListShouldBe($title)
+    {
+        Assert::same($this->indexPage->getFirstTopicTitleFromList(), $title);
     }
 }

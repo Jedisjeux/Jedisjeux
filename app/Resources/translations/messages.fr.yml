@@ -76,6 +76,7 @@ app:
         introduction: Introduction
         in_the_boxes: C'est dans la boîte
         last_used_at: Dernière utilisation
+        less_commented_first: Moins commentés en premier
         lifetime_rating: Note de la durée de vie
         list_articles: Liste des articles
         list_games: Liste des jeux
@@ -102,6 +103,7 @@ app:
         material_rating: Note du matériel
         mechanisms: Mécanismes
         moderation: Modération
+        most_commented_first: Plus commentés en premier
         move_up: Monter
         move_down: Descendre
         my_game_library: Ma ludothèque

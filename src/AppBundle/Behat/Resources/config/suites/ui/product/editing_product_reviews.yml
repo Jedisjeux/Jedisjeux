@@ -1,6 +1,6 @@
 default:
     suites:
-        ui_adding_game_plays:
+        ui_editing_product_reviews:
             contexts_services:
                 - app.behat.context.hook.doctrine_orm
 
@@ -9,8 +9,9 @@ default:
 
                 - app.behat.context.setup.admin_security
                 - app.behat.context.setup.product
+                - app.behat.context.setup.product_review
 
-                - app.behat.context.ui.frontend.game_play
                 - app.behat.context.ui.frontend.notification
+                - app.behat.context.ui.frontend.product_review
             filters:
-                tags: "@adding_game_plays && @ui"
+                tags: "@editing_product_reviews && @ui"

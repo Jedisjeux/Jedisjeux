@@ -37,6 +37,16 @@ class IndexPage extends SymfonyPage
     }
 
     /**
+     * @return string
+     */
+    public function getFirstTopicTitleFromList()
+    {
+        $topicsList = $this->getDocument()->find('css', '#topic-list');
+
+        return $topicsList->find('css', '.row:first-child h3')->getText();
+    }
+
+    /**
      * @param string $title
      *
      * @return bool

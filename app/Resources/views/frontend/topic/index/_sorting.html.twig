@@ -1,0 +1,40 @@
+{% if resources.data.nbResults > 0 %}
+
+    {% set definition = resources.definition %}
+
+    {% set route = app.request.attributes.get('_route') %}
+    {% set route_parameters = app.request.attributes.get('_route_params') %}
+
+    {% set criteria = app.request.query.get('criteria', {}) %}
+
+    {% set default_path = path(route, route_parameters|merge({'criteria': criteria})) %}
+    {% set oldest_first_path = path(route, route_parameters|merge({'sorting': {'createdAt': 'asc'}, 'criteria': criteria})) %}
+    {% set newest_first_path = path(route, route_parameters|merge({'sorting': {'createdAt': 'desc'}, 'criteria': criteria})) %}
+    {% set most_commented_first_path = path(route, route_parameters|merge({'sorting': {'postCount': 'desc'}, 'criteria': criteria})) %}
+    {% set less_commented_first_path = path(route, route_parameters|merge({'sorting': {'postCount': 'asc'}, 'criteria': criteria})) %}
+
+    {% if app.request.query.get('sorting') is empty %}
+        {% set current_sorting_label = 'sylius.ui.newest_first'|trans|lower %}
+    {% elseif app.request.query.get('sorting').createdAt is defined and app.request.query.get('sorting').createdAt == 'desc'%}
+        {% set current_sorting_label = 'sylius.ui.newest_first'|trans|lower %}
+    {% elseif app.request.query.get('sorting').createdAt is defined and app.request.query.get('sorting').createdAt == 'asc'%}
+        {% set current_sorting_label = 'sylius.ui.oldest_first'|trans|lower %}
+    {% elseif app.request.query.get('sorting').postCount is defined and app.request.query.get('sorting').postCount == 'desc'%}
+        {% set current_sorting_label = 'app.ui.most_commented_first'|trans|lower %}
+    {% elseif app.request.query.get('sorting').postCount is defined and app.request.query.get('sorting').postCount == 'asc'%}
+        {% set current_sorting_label = 'app.ui.less_commented_first'|trans|lower %}
+    {% endif %}
+
+
+    <div class="dropdown text-right">
+        <button type="button" class="btn btn-default-transparent dropdown-toggle" data-toggle="dropdown">
+            {{ 'sylius.ui.sort'|trans }} {{ current_sorting_label }}
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="{{ newest_first_path }}">{{ 'sylius.ui.newest_first'|trans }}</a>
+            <a class="dropdown-item" href="{{ oldest_first_path }}">{{ 'sylius.ui.oldest_first'|trans }}</a>
+            <a class="dropdown-item" href="{{ most_commented_first_path }}">{{ 'app.ui.most_commented_first'|trans }}</a>
+            <a class="dropdown-item" href="{{ less_commented_first_path }}">{{ 'app.ui.less_commented_first'|trans }}</a>
+        </div>
+    </div>
+{% endif %}
