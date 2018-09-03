@@ -6,7 +6,7 @@ Feature: Adding product review as a customer
 
     Background:
         Given I am logged in as a customer
-        And there is product "Puerto Rico"
+        And there is a product "Puerto Rico"
         And I wrote a review on this product
 
     @ui @javascript @todo

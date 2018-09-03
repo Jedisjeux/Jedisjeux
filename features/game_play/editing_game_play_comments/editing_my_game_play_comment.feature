@@ -5,7 +5,7 @@ Feature: Editing my article comment as a customer
     I want to be able to edit this comment
 
     Background:
-        Given there is product "Puerto Rico"
+        Given there is a product "Puerto Rico"
         And there is a customer with email "kevin@example.com"
         And this product has one game play from customer "kevin@example.com"
         And I am logged in as a customer

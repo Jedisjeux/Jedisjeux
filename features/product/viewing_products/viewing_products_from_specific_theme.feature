@@ -7,9 +7,9 @@ Feature: Viewing products from a specific theme
     Background:
         Given there are default taxonomies for products
         And there are themes "Renaissance" and "Medieval"
-        And there is product "El Grande"
+        And there is a product "El Grande"
         And this product has "Renaissance" theme
-        And there is product "Caylus"
+        And there is a product "Caylus"
         And this product has "Medieval" theme
 
     @ui

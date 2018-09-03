@@ -26,6 +26,7 @@ imports:
     - suites/ui/product/managing_product_reviews.yml
     - suites/ui/product/removing_game_play_comments.yml
     - suites/ui/product/viewing_game_plays.yml
+    - suites/ui/product/viewing_product_reviews.yml
     - suites/ui/product/viewing_products.yml
     - suites/ui/redirection/managing_redirections.yml
     - suites/ui/topic/adding_topic_posts.yml

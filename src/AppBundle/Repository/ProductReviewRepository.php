@@ -19,6 +19,26 @@ use Sylius\Component\Review\Model\ReviewInterface;
 class ProductReviewRepository extends EntityRepository
 {
     /**
+     * @param $productId
+     * @param int $count
+     *
+     * @return array
+     */
+    public function findLatestByProductId($productId, int $count): array
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.reviewSubject = :productId')
+            ->andWhere('o.status = :status')
+            ->setParameter('productId', $productId)
+            ->setParameter('status', ReviewInterface::STATUS_ACCEPTED)
+            ->addOrderBy('o.createdAt', 'DESC')
+            ->setMaxResults($count)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    /**
      * @return QueryBuilder
      */
     protected function getQueryBuilder()

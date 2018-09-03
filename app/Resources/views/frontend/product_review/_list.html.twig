@@ -1,0 +1,26 @@
+{% for product_review in product_reviews %}
+    <!-- comment start -->
+    <div class="comment clearfix">
+        <div class="comment-avatar">
+            <img class="rounded-circle" src="/assets/frontend/images/avatar.jpg"
+                 alt="avatar">
+        </div>
+        <header>
+            <h3>{{ product_review.title }}</h3>
+            <div class="comment-meta"><i class="fa fa-star text-default"></i> <i
+                        class="fa fa-star text-default"></i> <i
+                        class="fa fa-star text-default"></i> <i
+                        class="fa fa-star text-default"></i> <i class="fa fa-star"></i> |
+                Today, 12:31
+            </div>
+        </header>
+        <div class="comment-content">
+            <div class="comment-body clearfix">
+                {{ product_review.comment|raw }}
+                <a href="blog-post.html" class="btn-sm-link link-dark pull-right"><i
+                            class="fa fa-reply"></i> Reply</a>
+            </div>
+        </div>
+    </div>
+    <!-- comment end -->
+{% endfor %}

@@ -6,8 +6,8 @@ Feature: Deleting a dealer price
 
     Background:
         Given there is dealer "Philibert"
-        And there is product "Puerto Rico"
-        And there is product "Modern Art"
+        And there is a product "Puerto Rico"
+        And there is a product "Modern Art"
         And the dealer "Philibert" sold "Puerto Rico" product on "http://www.example.com/puerto-rico" page
         And the dealer "Philibert" sold "Modern Art" product on "http://www.example.com/modern-art" page
         And I am logged in as an administrator

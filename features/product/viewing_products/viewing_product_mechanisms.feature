@@ -10,7 +10,7 @@ Feature: Viewing product's mechanisms
     @ui
     Scenario: Viewing a detailed page with product's mechanisms
         Given there are mechanisms "Auction" and "Area control"
-        And there is product "Modern Art"
+        And there is a product "Modern Art"
         And this product has "Auction" mechanism
         And this product also has "Area control" mechanism
         When I check this product's details

@@ -275,6 +275,35 @@ class ProductContext implements Context
     }
 
     /**
+     * @Then I should see :count product reviews
+     */
+    public function iShouldSeeProductReviews($count)
+    {
+        Assert::same($this->showPage->countReviews(), (int) $count);
+    }
+
+    /**
+     * @Then I should see reviews titled :firstReview, :secondReview and :thirdReview
+     */
+    public function iShouldSeeReviewsTitled(...$reviews)
+    {
+        foreach ($reviews as $review) {
+            Assert::true(
+                $this->showPage->hasReviewTitled($review),
+                sprintf('Product should have review titled "%s" but it does not.', $review)
+            );
+        }
+    }
+
+    /**
+     * @Then I should not see review titled :title
+     */
+    public function iShouldNotSeeReviewTitled($title)
+    {
+        Assert::false($this->showPage->hasReviewTitled($title));
+    }
+
+    /**
      * @return NodeElement[]
      *
      * @throws \InvalidArgumentException

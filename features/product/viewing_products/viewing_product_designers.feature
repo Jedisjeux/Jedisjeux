@@ -11,7 +11,7 @@ Feature: Viewing product's designers
     Scenario: Viewing a detailed page with product's designers
         Given there is person with first name "Reiner" and last name "Knizia"
         And there is person with first name "Wolfgang" and last name "Kramer"
-        And there is product "Modern Art"
+        And there is a product "Modern Art"
         And this product is designed by "Reiner Knizia" person
         And this product is also designed by "Wolfgang Kramer" person
         When I check this product's details
