@@ -1,0 +1,102 @@
+{% import 'macro/image.html.twig' as images %}
+
+<!-- main-container start -->
+<!-- ================ -->
+<section class="main-container">
+
+    <div class="container">
+        <div class="row">
+
+            <!-- main start -->
+            <!-- ================ -->
+            <div class="main col-12">
+
+                <!-- page-title start -->
+                <!-- ================ -->
+                <h1 class="page-title text-center">{{ product.name }}</h1>
+                <div class="text-center">
+                    <big>
+                        {{ product.shortDescription|raw }}
+                    </big>
+                </div>
+                <div class="separator with-icon">
+                    <i class="fa fa-shopping-bag bordered"></i>
+                </div>
+                <!-- page-title end -->
+
+                <div class="row">
+                    <div class="col-lg-4 col-xl-5">
+                        <!-- pills start -->
+                        <!-- ================ -->
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-pills">
+                            <li class="nav-item"><a class="nav-link active" href="#pill-1" data-toggle="tab"
+                                                    title="/assets/frontend/images"><i
+                                            class="fa fa-camera pr-1"></i> Photo</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#pill-2" data-toggle="tab" title="video"><i
+                                            class="fa fa-video-camera pr-1"></i> Video</a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content clear-style">
+                            <div class="tab-pane active" id="pill-1">
+                                <div class="slick-carousel content-slider-with-thumbs mb-20">
+                                    {% for image in product.getImagesOfAllVariants %}
+                                        <div class="overlay-container overlay-visible">
+                                            {{ images.render(image.webPath, 'full', product.name) }}
+                                            <a href="{{ image.webPath | imagine_filter('full') }}"
+                                               class="slick-carousel--popup-img overlay-link" title="image title"><i
+                                                        class="fa fa-plus"></i></a>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                {% if product.getImagesOfAllVariants|length > 1 %}
+                                    <div class="content-slider-thumbs-container">
+                                        <div class="slick-carousel content-slider-thumbs">
+                                            {% for image in product.getImagesOfAllVariants %}
+                                                <div class="slick-nav-thumb">
+                                                    {{ images.render(image.webPath, 'full', product.name) }}
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="tab-pane" id="pill-2">
+                                <div class="overlay-container">
+                                    <img src="/assets/frontend/images/page-about-2.jpg" alt="">
+                                    <a class="overlay-link" href="#"><i class="fa fa-link"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- pills end -->
+                        <hr class="mb-10">
+                        <div class="clearfix mb-20">
+                    <span>
+                      <i class="fa fa-star text-default"></i>
+                      <i class="fa fa-star text-default"></i>
+                      <i class="fa fa-star text-default"></i>
+                      <i class="fa fa-star text-default"></i>
+                      <i class="fa fa-star"></i>
+                    </span>
+                            <a href="#" class="wishlist"><i class="fa fa-plus pl-10 pr-1"></i>Ajouter à</a>
+                            <a href="{{ path('sylius_frontend_product_review_create', { 'slug': product.slug }) }}" class="wishlist"><i class="fa fa-star-o pl-10 pr-1"></i>Votre avis</a>
+                            <a href="{{ path('app_frontend_game_play_create', { 'productSlug': product.slug } ) }}" class="wishlist"><i class="fa fa-table pl-10 pr-1"></i>Enregistrer une
+                                partie</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-xl-7 pv-30">
+                        <h2 class="mt-4">{{ 'sylius.ui.description'|trans }}</h2>
+                        {{ product.description|raw }}
+                        <h4 class="space-top">{{ 'app.ui.specifications'|trans }}</h4>
+                        <hr>
+                        {% include 'frontend/product/show/_specifications.html.twig' %}
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <!-- main end -->
+
+        </div>
+    </div>
+</section>
+<!-- main-container end -->
