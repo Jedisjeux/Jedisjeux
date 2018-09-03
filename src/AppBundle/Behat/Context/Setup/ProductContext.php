@@ -90,7 +90,7 @@ class ProductContext implements Context
     }
 
     /**
-     * @Given there is product :name with :status status
+     * @Given there is a product :name with :status status
      *
      * @param string $name
      */
