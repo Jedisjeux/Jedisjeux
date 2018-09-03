@@ -15,5 +15,5 @@ Feature: Viewing product's publishers
         And this product is published by "Reiner Knizia" person
         And this product is also published by "Wolfgang Kramer" person
         When I check this product's details
-        Then I should see the designer name "Reiner Knizia"
-        And I should see the designer name "Wolfgang Kramer"
+        Then I should see the publisher name "Reiner Knizia"
+        And I should see the publisher name "Wolfgang Kramer"

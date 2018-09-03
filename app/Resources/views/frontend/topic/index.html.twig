@@ -4,33 +4,7 @@
 
 {% block content %}
 
-    <!-- banner start -->
-    <!-- ================ -->
-    <div class="banner border-clear light-translucent-bg"
-         style="background-image:url('images/shop-banner.jpg');background-position: 50% 32%;">
-        {% include 'frontend/topic/index/_breadcrumb.html.twig' %}
-        <div class="container">
-            <div class="row justify-content-lg-center">
-                <div class="col-lg-8 text-center pv-20">
-                    <h2 class="title object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">Topics
-                        <strong>La Taverne du joueur</strong></h2>
-                    <div class="separator object-non-visible mt-10" data-animation-effect="fadeIn"
-                         data-effect-delay="100"></div>
-                    <p class="text-center object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">
-                        Discussions de jeux, parties, acquisitions...</p>
-                </div>
-            </div>
-        </div>
-        <!-- section start -->
-        <!-- ================ -->
-        <div class="light-translucent-bg section">
-            <div class="container-fluid">
-                {% include 'frontend/topic/index/_filters.html.twig' %}
-            </div>
-        </div>
-        <!-- section end -->
-    </div>
-    <!-- banner end -->
+    {% include 'frontend/topic/index/_banner.html.twig' %}
 
     <!-- main-container start -->
     <!-- ================ -->
@@ -42,16 +16,12 @@
                 <!-- main start -->
                 <!-- ================ -->
                 <div id="topic-list" class="main col-md-12">
-
+                    {% include 'frontend/topic/index/_sorting.html.twig' %}
                     <!-- Image Boxes start -->
                     <!-- ============================================================================== -->
                     <br>
-                    {% for topic in topics %}
-                        {% include 'frontend/topic/index/_imageBox.html.twig' with {
-                            'avatar': '/assets/frontend/images/avatar-1.jpg',
-                            'title': 'Partie de Uchronia',
-                            'mainTaxon': 'Parties de jeu'
-                        } %}
+                    {% for topic in topics.data %}
+                        {% include 'frontend/topic/index/_imageBox.html.twig' %}
                     {% endfor %}
                 </div>
                 <!-- main end -->

@@ -153,6 +153,21 @@ class TaxonContext implements Context
     }
 
     /**
+     * @Given /^there is a (private|public) topic category "([^"]+)"$/
+     */
+    public function thereArePrivateOrPublicTopicCategory($visibility, $name)
+    {
+        /** @var TaxonInterface $taxon */
+        $taxon = $this->sharedStorage->get('taxonomy_forum');
+
+        $public = 'public' === $visibility;
+
+        $this->taxonFactory->create(['name' => $name, 'parent' => $taxon, 'public' => $public]);
+
+        $this->manager->flush($taxon);
+    }
+
+    /**
      * @param array $codes
      */
     protected function createDefaultTaxonomies(array $codes)

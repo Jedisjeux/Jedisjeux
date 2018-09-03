@@ -2,40 +2,6 @@
 
 {% block content %}
     {% include 'frontend/game_play/index/_banner.html.twig' %}
-
-    <!-- main-container start -->
-    <!-- ================ -->
-    <section class="main-container">
-
-        <div class="container">
-            <div class="row">
-
-                <!-- main start -->
-                <!-- ================ -->
-                <div id="game-play-list" class="main col-md-12">
-
-                    <!-- Parties de jeu start -->
-                    <!-- ============================================================================== -->
-                    <br>
-                    <div class="row">
-                        {% for game_play in game_plays.data %}
-                            {% if loop.index0 > 0 and loop.index0%3 == 0 %}
-                    </div>
-                    <br>
-                    <div class="row">
-                            {% endif %}
-                        <div class="col-sm-4">
-                            {% include 'frontend/game_play/index/_imageBox.html.twig' %}
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-                <!-- main end -->
-
-            </div>
-        </div>
-    </section>
-    <!-- main-container end -->
-
+    {% include 'frontend/game_play/index/_content.html.twig' %}
     {% include 'frontend/game_play/index/_footerTop.html.twig' %}
 {% endblock content %}

@@ -33,6 +33,8 @@ class UpdatePage extends SymfonyPage
 
     /**
      * @param string|null $comment
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
      */
     public function setComment(?string $comment)
     {

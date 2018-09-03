@@ -1,0 +1,36 @@
+sylius_grid:
+    grids:
+        app_frontend_topic:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%app.model.topic.class%"
+                    repository:
+                        method: createFrontendListQueryBuilder
+                        arguments:
+                            localeCode: "%locale%"
+                            showPrivate: "expr:service('security.authorization_checker').isGranted('ROLE_STAFF')"
+            limits: ~
+            sorting:
+                createdAt: desc
+            fields:
+                createdAt:
+                    type: date
+                    path: lastPostCreatedAt
+                    sortable: ~
+                postCount:
+                    type: string
+                    sortable: ~
+            filters:
+                mainTaxon:
+                    type: frontend_taxon
+                    form_options:
+                        label: sylius.ui.category
+                        taxons:
+                            app.ui.news: news
+                            app.ui.review_articles: review-articles
+                            app.ui.previews: previews
+                            app.ui.in_the_boxes: in-the-boxes
+                            app.ui.report_articles: report-articles
+                            app.ui.interviews: interviews
+                            app.ui.videos: videos

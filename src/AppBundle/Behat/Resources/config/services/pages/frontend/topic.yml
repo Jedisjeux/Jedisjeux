@@ -27,3 +27,8 @@ services:
           class: AppBundle\Behat\Page\Frontend\Topic\UpdatePage
           parent: app.behat.symfony_page
           public: false
+
+      app.behat.page.frontend.topic.show:
+          class: AppBundle\Behat\Page\Frontend\Topic\ShowPage
+          parent: app.behat.symfony_page
+          public: false
