@@ -8,7 +8,12 @@ services:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
-      app.behat.page.frontend.product_review.update:
-          class: AppBundle\Behat\Page\Frontend\ProductReview\UpdatePage
-          parent: app.behat.symfony_page
-          public: false
+    app.behat.page.frontend.product_review.create:
+        class: AppBundle\Behat\Page\Frontend\ProductReview\CreatePage
+        parent: app.behat.symfony_page
+        public: false
+
+    app.behat.page.frontend.product_review.update:
+        class: AppBundle\Behat\Page\Frontend\ProductReview\UpdatePage
+        parent: app.behat.symfony_page
+        public: false

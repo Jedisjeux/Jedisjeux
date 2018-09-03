@@ -4,19 +4,7 @@
 
 {% block content %}
 
-    <!-- breadcrumb start -->
-    <!-- ================ -->
-    <div class="breadcrumb-container">
-        <div class="container">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><i class="fa fa-home pr-2"></i><a class="link-dark"
-                                                                              href="index.html">{{ 'sylius.ui.home' | trans }}</a></li>
-                <li class="breadcrumb-item"><a class="link-dark" href="{{ path('sylius_frontend_product_index' ) }}">{{ 'app.ui.boardgames' | trans }}</a></li>
-                <li class="breadcrumb-item active">{{ product.name }}</li>
-            </ol>
-        </div>
-    </div>
-    <!-- breadcrumb end -->
+    {% include 'frontend/product/show/_breadcrumb.html.twig' %}
 
     <!-- main-container start -->
     <!-- ================ -->
@@ -97,7 +85,7 @@
                       <i class="fa fa-star"></i>
                     </span>
                                 <a href="#" class="wishlist"><i class="fa fa-plus pl-10 pr-1"></i>Ajouter à</a>
-                                <a href="#" class="wishlist"><i class="fa fa-star-o pl-10 pr-1"></i>Votre avis</a>
+                                <a href="{{ path('sylius_frontend_product_review_create', { 'productId': product.id }) }}" class="wishlist"><i class="fa fa-star-o pl-10 pr-1"></i>Votre avis</a>
                                 <a href="{{ path('app_frontend_game_play_create', { 'productSlug': product.slug } ) }}" class="wishlist"><i class="fa fa-table pl-10 pr-1"></i>Enregistrer une
                                     partie</a>
                             </div>

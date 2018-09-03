@@ -239,6 +239,7 @@ services:
     app.behat.context.ui.frontend.product_review:
         class: AppBundle\Behat\Context\Ui\Frontend\ProductReviewContext
         arguments:
+            - "@app.behat.page.frontend.product_review.create"
             - "@app.behat.page.frontend.product_review.update"
         tags:
             - { name: fob.context_service }
