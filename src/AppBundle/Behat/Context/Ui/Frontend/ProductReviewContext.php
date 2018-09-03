@@ -53,7 +53,7 @@ class ProductReviewContext implements Context
     public function iWantToReviewAProduct(ProductInterface $product)
     {
         $this->createPage->open([
-            'productId' => $product->getId(),
+            'slug' => $product->getSlug(),
         ]);
     }
 
@@ -64,7 +64,7 @@ class ProductReviewContext implements Context
     {
         $this->updatePage->open([
             'id' => $productReview->getId(),
-            'productId' => $productReview->getReviewSubject()->getId(),
+            'slug' => $productReview->getReviewSubject()->getSlug(),
         ]);
     }
 
