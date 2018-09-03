@@ -1,9 +1,12 @@
+{% import 'macro/image.html.twig' as images %}
+
 {% for product_review in product_reviews %}
+    {% set avatarPath = product_review.author.avatar is not null ? product_review.author.avatar.webPath : '/assets/frontend/images/avatar-placeholder.png'  %}
+
     <!-- comment start -->
     <div class="comment clearfix">
         <div class="comment-avatar">
-            <img class="rounded-circle" src="/assets/frontend/images/avatar.jpg"
-                 alt="avatar">
+            {{ images.render(avatarPath, 'thumbnail', "avatar", 'rounded-circle') }}
         </div>
         <header>
             <h3>{{ product_review.title }}</h3>
@@ -11,14 +14,12 @@
                         class="fa fa-star text-default"></i> <i
                         class="fa fa-star text-default"></i> <i
                         class="fa fa-star text-default"></i> <i class="fa fa-star"></i> |
-                Today, 12:31
+                {{ product_review.createdAt|localizeddate('medium', 'none') }}
             </div>
         </header>
         <div class="comment-content">
             <div class="comment-body clearfix">
                 {{ product_review.comment|raw }}
-                <a href="blog-post.html" class="btn-sm-link link-dark pull-right"><i
-                            class="fa fa-reply"></i> Reply</a>
             </div>
         </div>
     </div>
