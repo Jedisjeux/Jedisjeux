@@ -21,6 +21,6 @@
         {% if article.shortDescription is not null %}
             <p>{{ (article.shortDescription|striptags)[:150] }}...</p>
         {% endif %}
-        <a href="{{ articlePath }}" class="btn btn-default btn-sm rgin-clear">{{ 'app.ui.read_more'|trans }}<i class="fa fa-arrow-right pl-10"></i></a>
+        <a href="{{ articlePath }}" class="btn btn-default btn-sm rgin-clear">{{ 'sylius.ui.view_more'|trans }}<i class="fa fa-arrow-right pl-10"></i></a>
     </div>
 </div>

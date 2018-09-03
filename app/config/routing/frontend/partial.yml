@@ -6,6 +6,10 @@ sylius_frontend_partial_product:
     resource: "partial/product.yml"
     prefix: /products
 
+sylius_frontend_partial_product_review:
+    resource: "partial/product_review.yml"
+    prefix: /products/{productId}/reviews
+
 sylius_frontend_partial_taxon:
     resource: "partial/taxon.yml"
     prefix: /taxons

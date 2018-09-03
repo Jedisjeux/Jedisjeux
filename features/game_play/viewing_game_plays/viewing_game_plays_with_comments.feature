@@ -6,11 +6,11 @@ Feature: Viewing game plays with comments
 
     Background:
         Given there is a customer with email "kevin@example.com"
-        And there is product "Puerto Rico"
+        And there is a product "Puerto Rico"
         And this product has one game play from customer "kevin@example.com" with 2 comments
-        And there is product "Modern Art"
+        And there is a product "Modern Art"
         And this product has one game play from customer "kevin@example.com" with 2 comments
-        And there is product "Euphrat & Tigris"
+        And there is a product "Euphrat & Tigris"
         And this product has one game play from customer "kevin@example.com"
 
     @ui

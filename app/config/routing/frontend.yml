@@ -35,7 +35,7 @@ app_frontend_product_list_item:
 
 sylius_frontend_product_review:
     resource: "frontend/product_review.yml"
-    prefix: /products/{productId}
+    prefix: /products/{slug}/reviews
 
 app_frontend_user:
     resource: "frontend/user.yml"

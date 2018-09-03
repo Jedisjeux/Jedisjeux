@@ -11,7 +11,7 @@ Feature: Viewing product's artists
     Scenario: Viewing a detailed page with product's artists
         Given there is person with first name "Doris" and last name "Matthäus"
         And there is person with first name "Franz" and last name "Vohwinkel"
-        And there is product "Modern Art"
+        And there is a product "Modern Art"
         And this product is drawn by "Doris Matthäus" person
         And this product is also drawn by "Franz Vohwinkel" person
         When I check this product's details

@@ -1,0 +1,19 @@
+sylius_grid:
+    grids:
+        sylius_frontend_product_review:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.product_review.class%"
+                    repository:
+                        method: createListForProductQueryBuilder
+                        arguments:
+                            locale: "%locale%"
+                            product: "expr:notFoundOnNull(service('sylius.repository.product').findOneBySlug($slug))"
+            limits: ~
+            sorting:
+                createdAt: desc
+            fields:
+                createdAt:
+                    type: string
+                    sortable: ~

@@ -10,7 +10,7 @@ Feature: Viewing product's themes
     @ui
     Scenario: Viewing a detailed page with product's themes
         Given there are themes "Renaissance" and "History"
-        And there is product "El grande"
+        And there is a product "El grande"
         And this product has "Renaissance" theme
         And this product also has "History" theme
         When I check this product's details

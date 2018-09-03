@@ -5,7 +5,7 @@ Feature: Editing a product
     I want to be able to edit the product
 
     Background:
-        Given there is product "Puerto Rico"
+        Given there is a product "Puerto Rico"
         And I am logged in as an administrator
 
     @ui

@@ -1,0 +1,22 @@
+{% macro default(message, icon, type, header) %}
+    <div class="alert alert-icon alert-{{ type|default('') }}" role="alert">
+        <i class="fa fa-{{ icon }}"></i>
+        <h3>{{ header|trans }}</h3>
+        {{ message|trans }}
+    </div>
+{% endmacro %}
+
+{% macro info(message) %}
+    {% import _self as messages %}
+    {{ messages.default(message, 'info-circle', 'info', 'sylius.ui.info') }}
+{% endmacro %}
+
+{% macro success(message) %}
+    {% import _self as messages %}
+    {{ messages.default(message, 'check', 'success', 'sylius.ui.success') }}
+{% endmacro %}
+
+{% macro error(message) %}
+    {% import _self as messages %}
+    {{ messages.default(message, 'times', 'negative', 'sylius.ui.error') }}
+{% endmacro %}

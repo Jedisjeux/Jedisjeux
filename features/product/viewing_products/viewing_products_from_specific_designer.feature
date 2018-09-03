@@ -7,9 +7,9 @@ Feature: Viewing products from a specific designer
     Background:
         Given there is person with first name "Martin" and last name "Wallace"
         And there is person with first name "Wolfgang" and last name "Kramer"
-        And there is product "Modern Art"
+        And there is a product "Modern Art"
         And this product is designed by "Martin Wallace" person
-        And there is product "El Grande"
+        And there is a product "El Grande"
         And this product is designed by "Wolfgang Kramer" person
 
     @ui

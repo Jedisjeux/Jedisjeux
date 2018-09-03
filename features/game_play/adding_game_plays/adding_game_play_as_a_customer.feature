@@ -6,7 +6,7 @@ Feature: Adding game play as a customer
 
     Background:
         Given I am logged in as a customer
-        And there is product "Puerto Rico"
+        And there is a product "Puerto Rico"
 
     @ui
     Scenario: Adding game play with minimal information

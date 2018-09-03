@@ -7,7 +7,7 @@ Feature: Editing a game play
     Background:
         Given there is a customer with email "kevin@example.com"
         And there is a customer with email "blue@example.com"
-        And there is product "Puerto Rico"
+        And there is a product "Puerto Rico"
         And this product has one game play from customer "kevin@example.com"
         And this product has one game play from customer "blue@example.com"
         And I am logged in as an administrator

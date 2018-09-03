@@ -5,9 +5,9 @@ Feature: Browsing products
     I want to browse products
 
     Background:
-        Given there is product "Puerto Rico"
-        And there is product "Modern Art"
-        And there is product "Age of Steam"
+        Given there is a product "Puerto Rico"
+        And there is a product "Modern Art"
+        And there is a product "Age of Steam"
 
     @ui
     Scenario: Browsing products in website as an administrator

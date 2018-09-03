@@ -3,13 +3,20 @@
 namespace AppBundle\Behat\Context\Ui\Frontend;
 
 use AppBundle\Behat\Page\Frontend\ProductReview\CreatePage;
+use AppBundle\Behat\Page\Frontend\ProductReview\IndexPage;
 use AppBundle\Behat\Page\Frontend\ProductReview\UpdatePage;
 use AppBundle\Entity\ProductReview;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Product\Model\ProductInterface;
+use Webmozart\Assert\Assert;
 
 class ProductReviewContext implements Context
 {
+    /**
+     * @var IndexPage
+     */
+    private $indexPage;
+
     /**
      * @var CreatePage
      */
@@ -21,13 +28,23 @@ class ProductReviewContext implements Context
     private $updatePage;
 
     /**
+     * @param IndexPage $indexPage
      * @param CreatePage $createPage
      * @param UpdatePage $updatePage
      */
-    public function __construct(CreatePage $createPage, UpdatePage $updatePage)
+    public function __construct(IndexPage $indexPage, CreatePage $createPage, UpdatePage $updatePage)
     {
+        $this->indexPage = $indexPage;
         $this->createPage = $createPage;
         $this->updatePage = $updatePage;
+    }
+
+    /**
+     * @When /^I check (this product)'s reviews$/
+     */
+    public function iCheckThisProductReviews(ProductInterface $product)
+    {
+        $this->indexPage->open(['slug' => $product->getSlug()]);
     }
 
     /**
@@ -36,7 +53,7 @@ class ProductReviewContext implements Context
     public function iWantToReviewAProduct(ProductInterface $product)
     {
         $this->createPage->open([
-            'productId' => $product->getId(),
+            'slug' => $product->getSlug(),
         ]);
     }
 
@@ -47,7 +64,7 @@ class ProductReviewContext implements Context
     {
         $this->updatePage->open([
             'id' => $productReview->getId(),
-            'productId' => $productReview->getReviewSubject()->getId(),
+            'slug' => $productReview->getReviewSubject()->getSlug(),
         ]);
     }
 
@@ -99,5 +116,21 @@ class ProductReviewContext implements Context
     public function iSaveMyChanges()
     {
         $this->updatePage->submit();
+    }
+
+    /**
+     * @Then /^I should see (\d+) product reviews in the list$/
+     */
+    public function iShouldSeeNumberOfProductReviewsInTheList($count)
+    {
+        Assert::same($this->indexPage->countReviews(), (int) $count);
+    }
+
+    /**
+     * @Then /^I should be notified that there are no reviews$/
+     */
+    public function iShouldBeNotifiedThatThereAreNoReviews()
+    {
+        Assert::true($this->indexPage->hasNoReviewsMessage());
     }
 }

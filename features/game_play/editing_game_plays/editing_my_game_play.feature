@@ -6,7 +6,7 @@ Feature: Editing game play as a customer
 
     Background:
         Given I am logged in as a customer
-        And there is product "Puerto Rico"
+        And there is a product "Puerto Rico"
         And this product has one game play written by me
 
     @ui

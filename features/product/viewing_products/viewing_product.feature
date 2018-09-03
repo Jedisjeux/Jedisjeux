@@ -6,6 +6,6 @@ Feature: Viewing a product details
 
     @ui
     Scenario: Viewing a detailed page with product's name
-        Given there is product "Puerto Rico"
+        Given there is a product "Puerto Rico"
         When I check this product's details
         Then I should see the product name "Puerto Rico"

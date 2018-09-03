@@ -1,0 +1,45 @@
+<!-- comments start -->
+<div class="comments margin-clear space-top">
+    {{ render(url('sylius_frontend_partial_product_review_latest', {'productId': product.id, 'template': 'frontend/product_review/_list.html.twig'})) }}
+
+    <a href="{{ path('sylius_frontend_product_review_index', {'slug': product.slug}) }}"
+       class="btn btn-transparent btn-sm rgin-clear">{{ 'sylius.ui.view_more'|trans }}
+        <i class="fa fa-arrow-right pl-10"></i>
+    </a>
+</div>
+<!-- comments end -->
+
+<!-- comments form start -->
+<div class="comments-form">
+    <h2 class="title">Add your Review</h2>
+    <form>
+        <div class="form-group has-feedback">
+            <label for="name4">Name</label>
+            <input type="text" class="form-control" id="name4" placeholder="" required>
+            <i class="fa fa-user form-control-feedback"></i>
+        </div>
+        <div class="form-group has-feedback">
+            <label for="subject4">Subject</label>
+            <input type="text" class="form-control" id="subject4" placeholder="" required>
+            <i class="fa fa-pencil form-control-feedback"></i>
+        </div>
+        <div class="form-group">
+            <label>Rating</label>
+            <select class="form-control" id="review">
+                <option value="five">5</option>
+                <option value="four">4</option>
+                <option value="three">3</option>
+                <option value="two">2</option>
+                <option value="one">1</option>
+            </select>
+        </div>
+        <div class="form-group has-feedback">
+            <label for="message4">Message</label>
+            <textarea class="form-control" rows="8" id="message4" placeholder=""
+                      required></textarea>
+            <i class="fa fa-envelope-o form-control-feedback"></i>
+        </div>
+        <input type="submit" value="Submit" class="btn btn-default">
+    </form>
+</div>
+<!-- comments form end -->

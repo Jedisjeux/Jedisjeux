@@ -1,5 +1,14 @@
+sylius_frontend_product_review_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_review:indexAction
+        _sylius:
+            template: 'frontend/product_review/index.html.twig'
+            grid: sylius_frontend_product_review
+
 sylius_frontend_product_review_create:
-    path: /reviews/new
+    path: /new
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.product_review:createAction
@@ -18,7 +27,7 @@ sylius_frontend_product_review_create:
                 parameters: { slug: resource.reviewSubject.slug }
             
 sylius_frontend_product_review_update:
-    path: /reviews/{id}/update
+    path: /{id}/update
     methods: [GET, PUT]
     defaults:
         _controller: sylius.controller.product_review:updateAction
@@ -32,14 +41,6 @@ sylius_frontend_product_review_update:
                 parameters: { slug: resource.reviewSubject.slug }
     options:
         expose: true
-
-sylius_frontend_product_review:
-    resource: |
-        alias: sylius.product_review
-        section: frontend
-        only: ['show']
-        templates: :frontend/product_review
-    type: sylius.resource
 
 sylius_frontend_product_rating_create:
     path: /rating/new

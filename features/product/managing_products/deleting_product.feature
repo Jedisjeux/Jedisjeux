@@ -5,8 +5,8 @@ Feature: Deleting a product
     I want to be able to delete products
 
     Background:
-        Given there is product "Puerto Rico"
-        And there is product "Modern Art"
+        Given there is a product "Puerto Rico"
+        And there is a product "Modern Art"
         And I am logged in as an administrator
 
     @ui

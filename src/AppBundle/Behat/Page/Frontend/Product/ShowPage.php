@@ -96,18 +96,36 @@ class ShowPage extends SymfonyPage
         return $publishers->findAll('css', 'a');
     }
 
+    public function countReviews()
+    {
+        return count($this->getElement('reviews')->findAll('css', '.comment'));
+    }
+
+    /**
+     * @param string $title
+     *
+     * @return bool
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     */
+    public function hasReviewTitled(string $title): bool
+    {
+        return null !== $this->getElement('reviews')->find('css', sprintf('.comment:contains("%s")', $title));
+    }
+
     /**
      * {@inheritdoc}
      */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'name' => 'h1.page-title',
-            'mechanisms' => '#product-mechanisms',
-            'themes' => '#product-themes',
-            'designers' => '#product-designers',
             'artists' => '#product-artists',
+            'designers' => '#product-designers',
+            'mechanisms' => '#product-mechanisms',
+            'name' => 'h1.page-title',
             'publishers' => '#product-publishers',
+            'reviews' => '#reviews .comments',
+            'themes' => '#product-themes',
         ]);
     }
 }

@@ -11,6 +11,7 @@ namespace AppBundle\Repository;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
 /**
@@ -18,6 +19,44 @@ use Sylius\Component\Review\Model\ReviewInterface;
  */
 class ProductReviewRepository extends EntityRepository
 {
+    /**
+     * @param $productId
+     * @param int $count
+     *
+     * @return array
+     */
+    public function findLatestByProductId($productId, int $count): array
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.reviewSubject = :productId')
+            ->andWhere('o.status = :status')
+            ->setParameter('productId', $productId)
+            ->setParameter('status', ReviewInterface::STATUS_ACCEPTED)
+            ->addOrderBy('o.createdAt', 'DESC')
+            ->setMaxResults($count)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    /**
+     * @param string $localeCode
+     * @param ProductInterface $product
+     *
+     * @return QueryBuilder
+     */
+    public function createListForProductQueryBuilder(string $localeCode, ProductInterface $product): QueryBuilder
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        $queryBuilder
+            ->andWhere($queryBuilder->expr()->eq('o.reviewSubject', ':product'))
+            ->setParameter('product', $product)
+        ;
+
+        return $queryBuilder;
+    }
+
     /**
      * @return QueryBuilder
      */

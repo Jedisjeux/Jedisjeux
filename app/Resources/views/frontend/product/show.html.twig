@@ -85,7 +85,7 @@
                       <i class="fa fa-star"></i>
                     </span>
                                 <a href="#" class="wishlist"><i class="fa fa-plus pl-10 pr-1"></i>Ajouter à</a>
-                                <a href="{{ path('sylius_frontend_product_review_create', { 'productId': product.id }) }}" class="wishlist"><i class="fa fa-star-o pl-10 pr-1"></i>Votre avis</a>
+                                <a href="{{ path('sylius_frontend_product_review_create', { 'slug': product.slug }) }}" class="wishlist"><i class="fa fa-star-o pl-10 pr-1"></i>Votre avis</a>
                                 <a href="{{ path('app_frontend_game_play_create', { 'productSlug': product.slug } ) }}" class="wishlist"><i class="fa fa-table pl-10 pr-1"></i>Enregistrer une
                                     partie</a>
                             </div>
@@ -107,226 +107,7 @@
     </section>
     <!-- main-container end -->
 
-    <!-- section start -->
-    <!-- ================ -->
-    <section class="pv-30 light-gray-bg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs style-4" role="tablist">
-                        <li class="nav-item"><a class="nav-link active" href="#reviews" role="tab" data-toggle="tab"><i
-                                        class="fa fa-star pr-1"></i>(3) Avis</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#articles" role="tab" data-toggle="tab"><i
-                                        class="fa fa-star pr-1"></i>(2) Articles</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#h2tab4" role="tab" data-toggle="tab"><i
-                                        class="fa fa-star pr-1"></i>(22) Parties</a></li>
-                    </ul>
-                    <!-- Tab panes -->
-                    <div class="tab-content padding-top-clear padding-bottom-clear">
-                        <div class="tab-pane active" id="reviews">
-                            {% include 'frontend/product/show/_reviews.html.twig' %}
-                        </div>
-                        <div class="tab-pane" id="articles">
-                            {% include 'frontend/product/show/_articles.html.twig' %}
-                        </div>
-                    </div>
-                </div>
-
-                <!-- sidebar start -->
-                <!-- ================ -->
-                <aside class="col-lg-4 col-xl-3 ml-xl-auto">
-                    <div class="sidebar">
-                        <div class="block clearfix">
-                            <h3 class="title">Dans la même série</h3>
-                            <div class="separator-2"></div>
-                            <div class="media margin-clear">
-                                <div class="d-flex pr-2">
-                                    <div class="overlay-container">
-                                        <img class="media-object" src="/assets/frontend/images/product-5.jpg"
-                                             alt="blog-thumb">
-                                        <a href="shop-product.html" class="overlay-link small"><i
-                                                    class="fa fa-link"></i></a>
-                                    </div>
-                                </div>
-                                <div class="media-body">
-                                    <h6 class="media-heading"><a href="shop-product.html">Gùgōng</a></h6>
-                                    <p class="margin-clear">
-                                        <i class="fa fa-star text-default"></i>
-                                        <i class="fa fa-star text-default"></i>
-                                        <i class="fa fa-star text-default"></i>
-                                        <i class="fa fa-star text-default"></i>
-                                        <i class="fa fa-star text-default"></i>
-                                    </p>
-                                    <p class="comment-meta">2 à 5 joueurs <br>à partir de 8 ans</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="media margin-clear">
-                                <div class="d-flex pr-2">
-                                    <div class="overlay-container">
-                                        <img class="media-object" src="/assets/frontend/images/product-6.jpg"
-                                             alt="blog-thumb">
-                                        <a href="shop-product.html" class="overlay-link small"><i
-                                                    class="fa fa-link"></i></a>
-                                    </div>
-                                </div>
-                                <div class="media-body">
-                                    <h6 class="media-heading"><a href="shop-product.html">Puerto Rico</a></h6>
-                                    <p class="margin-clear">
-                                        <i class="fa fa-star text-default"></i>
-                                        <i class="fa fa-star text-default"></i>
-                                        <i class="fa fa-star text-default"></i>
-                                        <i class="fa fa-star text-default"></i>
-                                        <i class="fa fa-star"></i>
-                                    </p>
-                                    <p class="comment-meta">2 à 5 joueurs <br>à partir de 8 ans</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="media margin-clear">
-                                <div class="d-flex pr-2">
-                                    <div class="overlay-container">
-                                        <img class="media-object" src="/assets/frontend/images/product-7.jpg"
-                                             alt="blog-thumb">
-                                        <a href="shop-product.html" class="overlay-link small"><i
-                                                    class="fa fa-link"></i></a>
-                                    </div>
-                                </div>
-                                <div class="media-body">
-                                    <h6 class="media-heading"><a href="shop-product.html">Râ</a></h6>
-                                    <p class="margin-clear">
-                                        <i class="fa fa-star text-default"></i>
-                                        <i class="fa fa-star text-default"></i>
-                                        <i class="fa fa-star text-default"></i>
-                                        <i class="fa fa-star text-default"></i>
-                                        <i class="fa fa-star"></i>
-                                    </p>
-                                    <p class="comment-meta">2 à 5 joueurs <br>à partir de 8 ans</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="media margin-clear">
-                                <div class="d-flex pr-2">
-                                    <div class="overlay-container">
-                                        <img class="media-object" src="/assets/frontend/images/product-8.jpg"
-                                             alt="blog-thumb">
-                                        <a href="shop-product.html" class="overlay-link small"><i
-                                                    class="fa fa-link"></i></a>
-                                    </div>
-                                </div>
-                                <div class="media-body">
-                                    <h6 class="media-heading"><a href="shop-product.html">Shogun</a></h6>
-                                    <p class="margin-clear">
-                                        <i class="fa fa-star text-default"></i>
-                                        <i class="fa fa-star text-default"></i>
-                                        <i class="fa fa-star text-default"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </p>
-                                    <p class="comment-meta">2 à 5 joueurs <br>à partir de 8 ans</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="block clearfix">
-                            <h3 class="title">Extensions</h3>
-                            <div class="separator-2"></div>
-                            <div class="media margin-clear">
-                                <div class="d-flex pr-2">
-                                    <div class="overlay-container">
-                                        <img class="media-object" src="/assets/frontend/images/product-5.jpg"
-                                             alt="blog-thumb">
-                                        <a href="shop-product.html" class="overlay-link small"><i
-                                                    class="fa fa-link"></i></a>
-                                    </div>
-                                </div>
-                                <div class="media-body">
-                                    <h6 class="media-heading"><a href="shop-product.html">Gùgōng</a></h6>
-                                    <p class="margin-clear">
-                                        <i class="fa fa-star text-default"></i>
-                                        <i class="fa fa-star text-default"></i>
-                                        <i class="fa fa-star text-default"></i>
-                                        <i class="fa fa-star text-default"></i>
-                                        <i class="fa fa-star text-default"></i>
-                                    </p>
-                                    <p class="comment-meta">2 à 5 joueurs <br>à partir de 8 ans</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="media margin-clear">
-                                <div class="d-flex pr-2">
-                                    <div class="overlay-container">
-                                        <img class="media-object" src="/assets/frontend/images/product-6.jpg"
-                                             alt="blog-thumb">
-                                        <a href="shop-product.html" class="overlay-link small"><i
-                                                    class="fa fa-link"></i></a>
-                                    </div>
-                                </div>
-                                <div class="media-body">
-                                    <h6 class="media-heading"><a href="shop-product.html">Puerto Rico</a></h6>
-                                    <p class="margin-clear">
-                                        <i class="fa fa-star text-default"></i>
-                                        <i class="fa fa-star text-default"></i>
-                                        <i class="fa fa-star text-default"></i>
-                                        <i class="fa fa-star text-default"></i>
-                                        <i class="fa fa-star"></i>
-                                    </p>
-                                    <p class="comment-meta">2 à 5 joueurs <br>à partir de 8 ans</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="media margin-clear">
-                                <div class="d-flex pr-2">
-                                    <div class="overlay-container">
-                                        <img class="media-object" src="/assets/frontend/images/product-7.jpg"
-                                             alt="blog-thumb">
-                                        <a href="shop-product.html" class="overlay-link small"><i
-                                                    class="fa fa-link"></i></a>
-                                    </div>
-                                </div>
-                                <div class="media-body">
-                                    <h6 class="media-heading"><a href="shop-product.html">Râ</a></h6>
-                                    <p class="margin-clear">
-                                        <i class="fa fa-star text-default"></i>
-                                        <i class="fa fa-star text-default"></i>
-                                        <i class="fa fa-star text-default"></i>
-                                        <i class="fa fa-star text-default"></i>
-                                        <i class="fa fa-star"></i>
-                                    </p>
-                                    <p class="comment-meta">2 à 5 joueurs <br>à partir de 8 ans</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="media margin-clear">
-                                <div class="d-flex pr-2">
-                                    <div class="overlay-container">
-                                        <img class="media-object" src="/assets/frontend/images/product-8.jpg"
-                                             alt="blog-thumb">
-                                        <a href="shop-product.html" class="overlay-link small"><i
-                                                    class="fa fa-link"></i></a>
-                                    </div>
-                                </div>
-                                <div class="media-body">
-                                    <h6 class="media-heading"><a href="shop-product.html">Shogun</a></h6>
-                                    <p class="margin-clear">
-                                        <i class="fa fa-star text-default"></i>
-                                        <i class="fa fa-star text-default"></i>
-                                        <i class="fa fa-star text-default"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </p>
-                                    <p class="comment-meta">2 à 5 joueurs <br>à partir de 8 ans</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </aside>
-                <!-- sidebar end -->
-
-            </div>
-        </div>
-    </section>
-    <!-- section end -->
+    {% include 'frontend/product/show/_tabs.html.twig' %}
 
     <!-- section start -->
     <!-- ================ -->
@@ -341,7 +122,7 @@
                         <h3>Premium &amp; Guaranteed Quality</h3>
                         <div class="separator clearfix"></div>
                         <p>Voluptatem ad provident non repudiandae beatae cupiditate.</p>
-                        <a href="page-services.html" class="link-dark">{{ 'app.ui.read_more'|trans }}<i
+                        <a href="page-services.html" class="link-dark">{{ 'sylius.ui.view_more'|trans }}<i
                                     class="pl-1 fa fa-angle-double-right"></i></a>
                     </div>
                 </div>
@@ -352,7 +133,7 @@
                         <h3>Secure &amp; Safe Payment</h3>
                         <div class="separator clearfix"></div>
                         <p>Iure sequi unde hic. Sapiente quaerat sequi inventore.</p>
-                        <a href="page-services.html" class="link-dark">{{ 'app.ui.read_more'|trans }}<i
+                        <a href="page-services.html" class="link-dark">{{ 'sylius.ui.view_more'|trans }}<i
                                     class="pl-1 fa fa-angle-double-right"></i></a>
                     </div>
                 </div>
@@ -364,7 +145,7 @@
                         <h3 class="pl-10 pr-10">Free &amp; Fast Shipping</h3>
                         <div class="separator clearfix"></div>
                         <p>Inventore dolores aut laboriosam cum consequuntur.</p>
-                        <a href="page-services.html" class="link-dark">{{ 'app.ui.read_more'|trans }}<i
+                        <a href="page-services.html" class="link-dark">{{ 'sylius.ui.view_more'|trans }}<i
                                     class="pl-1 fa fa-angle-double-right"></i></a>
                     </div>
                 </div>
@@ -375,7 +156,7 @@
                         <h3>Unt loremcu doloriem</h3>
                         <div class="separator clearfix"></div>
                         <p>Inventore dolores aut laboriosam cum consequuntur.</p>
-                        <a href="page-services.html" class="link-dark">{{ 'app.ui.read_more'|trans }}<i
+                        <a href="page-services.html" class="link-dark">{{ 'sylius.ui.view_more'|trans }}<i
                                     class="pl-1 fa fa-angle-double-right"></i></a>
                     </div>
                 </div>
