@@ -1,8 +1,6 @@
 {
   "dependencies": {
     "bootstrap": "^4.0.0",
-    "bootstrap-sass": "^3.3.7",
-    "bootstrap-switch": "^3.3.4",
     "eonasdan-bootstrap-datetimepicker": "^4.17.47",
     "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
