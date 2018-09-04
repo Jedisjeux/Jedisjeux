@@ -119,11 +119,10 @@ class ManagingGamePlaysContext implements Context
      */
     public function iDeleteGamePlayWithTitle(ProductInterface $product, Customer $customer)
     {
-        $username = $customer->getUser()->getUsername();
         $productName = $product->getName();
 
         $this->indexPage->deleteResourceOnPage([
-            'name' => $username,
+            'name' => (string) $customer,
             'product' => $productName,
         ]);
     }
@@ -145,7 +144,7 @@ class ManagingGamePlaysContext implements Context
         $this->indexPage->open();
 
         Assert::true($this->indexPage->isSingleResourceOnPage([
-            'name' => $customer->getUser()->getUsername(),
+            'name' => (string) $customer,
             'product' => $product->getName(),
         ]));
     }
@@ -172,7 +171,7 @@ class ManagingGamePlaysContext implements Context
     public function thereShouldBeNoGamePlayWitAnymore(ProductInterface $product, Customer $customer)
     {
         Assert::false($this->indexPage->isSingleResourceOnPage([
-            'name' => $customer->getUser()->getUsername(),
+            'name' => (string) $customer,
             'product' => $product->getName(),
         ]));
     }
