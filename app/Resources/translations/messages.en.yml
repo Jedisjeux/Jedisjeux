@@ -1,3 +1,4 @@
 app:
     ui:
         there_are_no_articles: There are no articles.
+        there_are_no_game_plays: There are no game plays.

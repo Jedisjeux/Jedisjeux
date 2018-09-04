@@ -6,7 +6,7 @@ sylius_grid:
                 options:
                     class: "%app.model.game_play.class%"
                     repository:
-                        method: createCommentedListQueryBuilder
+                        method: createFrontendListQueryBuilder
                         arguments:
                             locale: "%locale%"
                             criteria: "expr:service('request_stack').getCurrentRequest().get('criteria', [])"

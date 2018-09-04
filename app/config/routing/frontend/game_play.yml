@@ -56,7 +56,7 @@ app_frontend_game_play_index_by_product:
     methods: [GET]
     path: /jeu-de-societe/{productSlug}/parties/
     defaults:
-        _controller: app.controller.article:indexAction
+        _controller: app.controller.game_play:indexAction
         _sylius:
             template: frontend/game_play/index.html.twig
             grid: app_frontend_game_play

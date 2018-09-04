@@ -12,7 +12,7 @@ default:
             screenshot: true
 
         Behat\MinkExtension:
-            base_url: http://jdj.dev/app_test.php/
+            base_url: http://jdj.local/app_test.php/
             default_session: symfony
             javascript_session: chrome
             sessions:

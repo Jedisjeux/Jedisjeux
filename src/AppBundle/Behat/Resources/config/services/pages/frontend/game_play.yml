@@ -13,6 +13,11 @@ services:
           parent: app.behat.symfony_page
           public: false
 
+      app.behat.page.frontend.game_play.index_by_product:
+          class: AppBundle\Behat\Page\Frontend\GamePlay\IndexByProductPage
+          parent: app.behat.symfony_page
+          public: false
+
       app.behat.page.frontend.game_play.create:
           class: AppBundle\Behat\Page\Frontend\GamePlay\CreatePage
           parent: app.behat.symfony_page
