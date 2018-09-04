@@ -291,6 +291,14 @@ class ProductContext implements Context
     }
 
     /**
+     * @Then I should see :count game plays
+     */
+    public function iShouldSeeGamePlays($count)
+    {
+        Assert::same($this->showPage->countGamePlays(), (int) $count);
+    }
+
+    /**
      * @Then I should see reviews titled :firstReview, :secondReview and :thirdReview
      */
     public function iShouldSeeReviewsTitled(...$reviews)
@@ -330,6 +338,27 @@ class ProductContext implements Context
     public function iShouldNotSeeArticleTitled($title)
     {
         Assert::false($this->showPage->hasArticleTitled($title));
+    }
+
+    /**
+     * @Then I should see game plays on products :firstProduct, :secondProduct and :thirdProduct
+     */
+    public function iShouldSeeGamePlaysOnProduct(...$products)
+    {
+        foreach ($products as $product) {
+            Assert::true(
+                $this->showPage->hasGamePlayOnProduct($product),
+                sprintf('Game play should have product titled "%s" but it does not.', $product)
+            );
+        }
+    }
+
+    /**
+     * @Then I should not see game play on product :name
+     */
+    public function iShouldNotSeeGamePlayOnProduct($name)
+    {
+        Assert::false($this->showPage->hasGamePlayOnProduct($name));
     }
 
     /**

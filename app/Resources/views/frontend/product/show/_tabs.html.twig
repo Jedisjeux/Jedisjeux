@@ -5,7 +5,7 @@
                         class="fa fa-star pr-1"></i>({{ product.commentedReviews|length }}) {{ 'sylius.ui.reviews'|trans }}</a></li>
         <li class="nav-item"><a class="nav-link" href="#articles" role="tab" data-toggle="tab"><i
                         class="fa fa-star pr-1"></i>({{ product.publishedArticles|length }}) {{ 'app.ui.articles'|trans }}</a></li>
-        <li class="nav-item"><a class="nav-link" href="#h2tab4" role="tab" data-toggle="tab"><i
+        <li class="nav-item"><a class="nav-link" href="#game-plays" role="tab" data-toggle="tab"><i
                         class="fa fa-star pr-1"></i>({{ product.gamePlaysWithTopic|length }}) {{ 'app.ui.game_plays'|trans }}</a></li>
     </ul>
     <!-- Tab panes -->
@@ -15,6 +15,9 @@
         </div>
         <div class="tab-pane" id="articles">
             {% include 'frontend/product/show/tabs/_articles.html.twig' %}
+        </div>
+        <div class="tab-pane" id="game-plays">
+            {% include 'frontend/product/show/tabs/_gamePlays.html.twig' %}
         </div>
     </div>
 </div>

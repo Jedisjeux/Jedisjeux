@@ -106,6 +106,11 @@ class ShowPage extends SymfonyPage
         return count($this->getElement('articles')->findAll('css', '.image-box'));
     }
 
+    public function countGamePlays(): int
+    {
+        return count($this->getElement('game_plays')->findAll('css', '.image-box'));
+    }
+
     /**
      * @param string $title
      *
@@ -131,6 +136,18 @@ class ShowPage extends SymfonyPage
     }
 
     /**
+     * @param string $name
+     *
+     * @return bool
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     */
+    public function hasGamePlayOnProduct(string $name): bool
+    {
+        return null !== $this->getElement('game_plays')->find('css', sprintf('.image-box .lead:contains("%s")', $name));
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getDefinedElements()
@@ -139,6 +156,7 @@ class ShowPage extends SymfonyPage
             'articles' => '#articles',
             'artists' => '#product-artists',
             'designers' => '#product-designers',
+            'game_plays' => '#game-plays',
             'mechanisms' => '#product-mechanisms',
             'name' => 'h1.page-title',
             'publishers' => '#product-publishers',

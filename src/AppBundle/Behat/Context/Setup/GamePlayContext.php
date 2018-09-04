@@ -82,8 +82,9 @@ class GamePlayContext implements Context
     }
 
     /**
-     * @Given /^(this product) has one game play from (customer "[^"]+")$/
-     * @Given /^(this product) has one game play written by me$/
+     * @Given /^(this product) has(?:| also) one game play from (customer "[^"]+")$/
+     * @Given /^(this product) has(?:| also) a game play added by (customer "[^"]+")(?:|, created (\d+) days ago)$/
+     * @Given /^(this product) has(?:| also) one game play written by me$/
      *
      * @param ProductInterface $product
      * @param CustomerInterface $customer
