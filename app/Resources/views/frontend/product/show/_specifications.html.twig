@@ -31,10 +31,16 @@
     {% endif %}
     <dt class="col-sm-3 text-sm-right">Date de sortie</dt>
     <dd class="col-sm-9">{{ releasedAt(product.firstVariant) }}</dd>
-    <dt class="col-sm-3 text-sm-right">Auteur(s)</dt>
-    <dd id="product-designers" class="col-sm-9">{{ self.show_people(product.designers) }}</dd>
-    <dt class="col-sm-3 text-sm-right">Illustrateur(s)</dt>
-    <dd id="product-artists" class="col-sm-9">{{ self.show_people(product.artists) }}</dd>
-    <dt class="col-sm-3 text-sm-right">Editeur(s)</dt>
-    <dd id="product-publishers" class="col-sm-9">{{ self.show_people(product.publishers) }}</dd>
+    {% if product.designers|length > 0 %}
+        <dt class="col-sm-3 text-sm-right">Auteur(s)</dt>
+        <dd id="product-designers" class="col-sm-9">{{ self.show_people(product.designers) }}</dd>
+    {% endif %}
+    {% if product.artists|length > 0 %}
+        <dt class="col-sm-3 text-sm-right">Illustrateur(s)</dt>
+        <dd id="product-artists" class="col-sm-9">{{ self.show_people(product.artists) }}</dd>
+    {% endif %}
+    {% if product.publishers|length > 0 %}
+        <dt class="col-sm-3 text-sm-right">Editeur(s)</dt>
+        <dd id="product-publishers" class="col-sm-9">{{ self.show_people(product.publishers) }}</dd>
+    {% endif %}
 </dl>
