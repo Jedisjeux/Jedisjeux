@@ -6,7 +6,6 @@ Feature: Adding article comments
 
     Background:
         Given there are default taxonomies for articles
-        And there is a customer with email "kevin@example.com"
         And there is an article "Latest game plays" written by "kevin@example.com"
         And I am a logged in customer
 

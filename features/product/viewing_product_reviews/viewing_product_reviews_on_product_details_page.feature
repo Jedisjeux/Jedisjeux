@@ -6,10 +6,6 @@ Feature: Viewing product reviews on product's details page
 
     Background:
         Given there is a product "Necronomicon"
-        And there is a customer with email "h.p.lovecraft@arkham.com"
-        And there is a customer with email "robert.e.howard@conan.com"
-        And there is a customer with email "jrr.tolkien@middle-earth.com"
-        And there is a customer with email "sir.terry@pratchett.com"
         And this product has a review titled "Great book" and rated 5 added by customer "h.p.lovecraft@arkham.com", created 3 days ago
         And this product has also a review titled "Scary and dark" and rated 4 added by customer "robert.e.howard@conan.com"
         And this product has also a review titled "Too gloomy" and rated 3 added by customer "jrr.tolkien@middle-earth.com"

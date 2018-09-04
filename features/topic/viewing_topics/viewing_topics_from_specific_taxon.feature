@@ -7,7 +7,6 @@ Feature: Viewing topics from specific taxon
     Background:
         Given there are default taxonomies for topics
         And there are topic categories "Tatoïne" and "Playing Games"
-        And there is a customer with email "kevin@example.com"
         And there is a topic with title "Awesome topic" written by "kevin@example.com"
         And this topic belongs to "Playing Games" category
         And there is a topic with title "Bad topic" written by "kevin@example.com"

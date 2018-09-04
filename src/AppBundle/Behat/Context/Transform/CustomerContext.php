@@ -13,6 +13,7 @@ namespace AppBundle\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
@@ -27,13 +28,20 @@ final class CustomerContext implements Context
     private $customerRepository;
 
     /**
+     * @var FactoryInterface
+     */
+    private $customerFactory;
+
+    /**
      * PersonContext constructor.
      *
      * @param RepositoryInterface $topicRepository
+     * @param FactoryInterface $customerFactory
      */
-    public function __construct(RepositoryInterface $topicRepository)
+    public function __construct(RepositoryInterface $topicRepository, FactoryInterface $customerFactory)
     {
         $this->customerRepository = $topicRepository;
+        $this->customerFactory = $customerFactory;
     }
 
     /**
@@ -44,15 +52,18 @@ final class CustomerContext implements Context
      *
      * @return CustomerInterface
      */
-    public function getCustomerByEmail($email)
+    public function getOrCreateCustomerByEmail($email)
     {
         /** @var CustomerInterface $customer */
         $customer = $this->customerRepository->findOneBy(['email' => $email]);
 
-        Assert::notNull(
-            $customer,
-            sprintf('Customer with email "%s" does not exist', $email)
-        );
+        if (null === $customer) {
+            /** @var CustomerInterface $customer */
+            $customer = $this->customerFactory->createNew();
+            $customer->setEmail($email);
+
+            $this->customerRepository->add($customer);
+        }
 
         return $customer;
     }

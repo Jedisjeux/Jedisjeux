@@ -5,8 +5,7 @@ Feature: Editing a product
     I want to be able to edit the product review
 
     Background:
-        Given there is a customer with email "kevin@example.com"
-        And there is a product "Puerto Rico"
+        Given there is a product "Puerto Rico"
         And this product has a review titled "Awesome" and rated 5 added by customer "kevin@example.com"
         And I am a logged in administrator
 

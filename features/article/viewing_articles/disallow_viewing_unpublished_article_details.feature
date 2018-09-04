@@ -6,7 +6,6 @@ Feature: Disallow viewing unpublished product details
 
     Background:
         Given there are default taxonomies for articles
-        And there is a customer with email "kevin@example.com"
 
     @ui
     Scenario: Trying to view details of a article with new status

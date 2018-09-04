@@ -5,9 +5,7 @@ Feature: Editing a game play
     I want to be able to edit the game play
 
     Background:
-        Given there is a customer with email "kevin@example.com"
-        And there is a customer with email "blue@example.com"
-        And there is a product "Puerto Rico"
+        Given there is a product "Puerto Rico"
         And this product has one game play from customer "kevin@example.com"
         And this product has one game play from customer "blue@example.com"
         And I am a logged in administrator

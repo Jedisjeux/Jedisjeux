@@ -7,7 +7,6 @@ Feature: Viewing articles from a specific category
     Background:
         Given there are default taxonomies for articles
         And there are article categories "News" and "Reviews"
-        And there is a customer with email "kevin@example.com"
         And there is an article "Puerto Rico has been released" written by "kevin@example.com"
         And this article has "News" category
         And there is an article "Review of Puerto Rico" written by "kevin@example.com"

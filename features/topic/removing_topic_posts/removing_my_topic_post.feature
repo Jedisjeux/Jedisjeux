@@ -6,7 +6,6 @@ Feature: Removing my post as a customer
 
     Background:
         Given there are default taxonomies for topics
-        And there is a customer with email "kevin@example.com"
         And there is a topic with title "Awesome topic" written by "kevin@example.com"
         And I am a logged in customer
         And I wrote a post to this topic

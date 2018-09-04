@@ -6,7 +6,6 @@ Feature: Editing my article comment as a customer
 
     Background:
         Given there is a product "Puerto Rico"
-        And there is a customer with email "kevin@example.com"
         And this product has one game play from customer "kevin@example.com"
         And I am a logged in customer
         And I leaved a comment on this game play

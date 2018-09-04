@@ -19,6 +19,7 @@ services:
             class: AppBundle\Behat\Context\Transform\CustomerContext
             arguments:
                 - "@__symfony__.sylius.repository.customer"
+                - "@__symfony__.sylius.factory.customer"
             tags:
                 - { name: fob.context_service }
 

@@ -6,7 +6,6 @@ Feature: Sorting listed topics
 
     Background:
         Given there are default taxonomies for topics
-        And there is a customer with email "kevin@example.com"
         And there is a topic with title "Oldest topic" written by "kevin@example.com", created at "first day of January 2000"
         Given there is a topic with title "Newest topic" written by "kevin@example.com", created at "first day of January 2005"
 

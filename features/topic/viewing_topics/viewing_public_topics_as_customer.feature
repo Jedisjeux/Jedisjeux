@@ -8,7 +8,6 @@ Feature: Viewing public topics
         Given there are default taxonomies for topics
         And there is a public topic category "Public"
         And there is a private topic category "Private"
-        And there is a customer with email "kevin@example.com"
         And there is a topic with title "Public topic" written by "kevin@example.com"
         And this topic belongs to "Public" category
         And there is a topic with title "Private topic" written by "kevin@example.com"

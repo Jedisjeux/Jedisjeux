@@ -6,7 +6,6 @@ Feature: Viewing a topic details
 
     Background:
         Given there are default taxonomies for topics
-        And there is a customer with email "kevin@example.com"
 
     @ui
     Scenario: Viewing a detailed page with topic's title

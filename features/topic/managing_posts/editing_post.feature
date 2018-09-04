@@ -5,9 +5,7 @@ Feature: Editing a post
     I want to be able to edit the post
 
     Background:
-        Given there is a customer with email "kevin@example.com"
-        And there is a customer with email "blue@example.com"
-        And there is a topic with title "Les parties jouées la veille" written by "kevin@example.com"
+        Given there is a topic with title "Les parties jouées la veille" written by "kevin@example.com"
         And this topic has a post added by customer "blue@example.com"
         And I am a logged in administrator
 

@@ -6,7 +6,6 @@ Feature: Allow viewing unpublished article details
 
     Background:
         Given there are default taxonomies for articles
-        And there is a customer with email "kevin@example.com"
         And I am a logged in article manager
 
     @ui
