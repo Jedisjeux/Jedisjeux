@@ -11,12 +11,14 @@
 
 namespace AppBundle\Behat\Context\Ui\Frontend;
 
+use AppBundle\Behat\Page\Frontend\Article\IndexByProductPage;
 use AppBundle\Behat\Page\Frontend\Article\IndexByTaxonPage;
 use AppBundle\Behat\Page\Frontend\Article\IndexPage;
 use AppBundle\Behat\Page\Frontend\Article\ShowPage;
 use AppBundle\Behat\Page\UnexpectedPageException;
 use AppBundle\Entity\Article;
 use Behat\Behat\Context\Context;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
@@ -41,15 +43,26 @@ class ArticleContext implements Context
     private $indexByTaxonPage;
 
     /**
+     * @var IndexByProductPage
+     */
+    private $indexByProductPage;
+
+    /**
      * @param ShowPage $showPage
      * @param IndexPage $indexPage
      * @param IndexByTaxonPage $indexByTaxonPage
+     * @param IndexByProductPage $indexByProductPage
      */
-    public function __construct(ShowPage $showPage, IndexPage $indexPage, IndexByTaxonPage $indexByTaxonPage)
-    {
+    public function __construct(
+        ShowPage $showPage,
+        IndexPage $indexPage,
+        IndexByTaxonPage $indexByTaxonPage,
+        IndexByProductPage $indexByProductPage
+    ) {
         $this->showPage = $showPage;
         $this->indexPage = $indexPage;
         $this->indexByTaxonPage = $indexByTaxonPage;
+        $this->indexByProductPage = $indexByProductPage;
     }
 
     /**
@@ -66,6 +79,14 @@ class ArticleContext implements Context
     public function iCheckListOfArticlesFromCategory(TaxonInterface $taxon)
     {
         $this->indexByTaxonPage->open(['slug' => $taxon->getSlug()]);
+    }
+
+    /**
+     * @When /^I check (this product)'s articles$/
+     */
+    public function iCheckThisProductArticles(ProductInterface $product)
+    {
+        $this->indexByProductPage->open(['productSlug' => $product->getSlug()]);
     }
 
     /**
@@ -154,5 +175,13 @@ class ArticleContext implements Context
         }
 
         Assert::false($this->showPage->isOpen(['slug' => $article->getSlug()]));
+    }
+
+    /**
+     * @Then /^I should be notified that there are no articles$/
+     */
+    public function iShouldBeNotifiedThatThereAreNoReviews()
+    {
+        Assert::true($this->indexPage->hasNoArticlesMessage());
     }
 }

@@ -7,7 +7,7 @@ default:
                 - app.behat.context.transform.product
                 - app.behat.context.transform.shared_storage
 
-                - app.behat.context.setup.admin_security
+                - app.behat.context.setup.security
                 - app.behat.context.setup.product
                 - app.behat.context.setup.product_review
 

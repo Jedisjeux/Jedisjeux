@@ -10,6 +10,7 @@ sylius_grid:
                         arguments:
                             locale: "%locale%"
                             taxonSlug: $slug
+                            productSlug: $productSlug
             limits: ~
             sorting:
                 publishStartDate: desc

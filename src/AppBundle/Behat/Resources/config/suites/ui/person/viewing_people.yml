@@ -10,7 +10,7 @@ default:
                 - app.behat.context.transform.person
                 - app.behat.context.transform.shared_storage
 
-                - app.behat.context.setup.admin_security
+                - app.behat.context.setup.security
                 - app.behat.context.setup.person
                 - app.behat.context.setup.taxon
 

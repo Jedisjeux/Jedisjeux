@@ -5,12 +5,10 @@ Feature: Deleting a game play
     I want to be able to delete game plays
 
     Background:
-        Given there is a customer with email "kevin@example.com"
-        And there is a customer with email "blue@example.com"
-        And there is a product "Puerto Rico"
+        Given there is a product "Puerto Rico"
         And this product has one game play from customer "kevin@example.com"
         And this product has one game play from customer "blue@example.com"
-        And I am logged in as an administrator
+        And I am a logged in administrator
 
     @ui
     Scenario: Deleting a game play

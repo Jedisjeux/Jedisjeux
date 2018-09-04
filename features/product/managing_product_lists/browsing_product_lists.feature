@@ -8,7 +8,7 @@ Feature: Browsing product lists
         Given there is a customer with email "kevin@example.com"
         And this customer has a product list "My favorite games"
         And this customer has a product list "My game library"
-        And I am logged in as an administrator
+        And I am a logged in administrator
 
     @ui
     Scenario: Browsing product lists in website

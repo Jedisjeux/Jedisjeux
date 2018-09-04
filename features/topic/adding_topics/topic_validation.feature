@@ -6,7 +6,7 @@ Feature: Topics validation
 
     Background:
         Given there are default taxonomies for topics
-        And I am logged in as a customer
+        And I am a logged in customer
 
     @ui
     Scenario: Trying to add a new topic without comment

@@ -40,7 +40,7 @@ class TopicRepository extends EntityRepository
             ->addSelect('product')
             ->addSelect('productTranslation')
             ->join('o.author', 'customer')
-            ->join('customer.user', 'user')
+            ->leftJoin('customer.user', 'user')
             ->leftJoin('customer.avatar', 'avatar')
             ->leftJoin('o.article', 'article')
             ->leftJoin('o.gamePlay', 'gamePlay')
@@ -97,7 +97,7 @@ class TopicRepository extends EntityRepository
             ->leftJoin('o.article', 'article')
             ->join('o.author', 'customer')
             ->leftJoin('customer.avatar', 'avatar')
-            ->join('customer.user', 'user')
+            ->leftJoin('customer.user', 'user')
             ->setParameter('localeCode', $localeCode)
         ;
 

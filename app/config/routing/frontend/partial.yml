@@ -1,3 +1,7 @@
+sylius_frontend_partial_article:
+    resource: "partial/article.yml"
+    prefix: /articles
+
 app_frontend_partial_festival_list:
     resource: "partial/festival_list.yml"
     prefix: /festival-lists

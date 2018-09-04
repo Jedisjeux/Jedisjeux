@@ -10,7 +10,7 @@ Feature: Deleting a dealer price
         And there is a product "Modern Art"
         And the dealer "Philibert" sold "Puerto Rico" product on "http://www.example.com/puerto-rico" page
         And the dealer "Philibert" sold "Modern Art" product on "http://www.example.com/modern-art" page
-        And I am logged in as an administrator
+        And I am a logged in administrator
 
     @ui
     Scenario: Deleting a dealer price

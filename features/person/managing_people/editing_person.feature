@@ -6,7 +6,7 @@ Feature: Editing a person
 
     Background:
         Given there is person with first name "Reiner" and last name "Knizia"
-        And I am logged in as an administrator
+        And I am a logged in administrator
 
     @ui
     Scenario: Changing first name and last name of an existing person

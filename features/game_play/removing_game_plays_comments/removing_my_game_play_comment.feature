@@ -6,9 +6,8 @@ Feature: Removing my comment on an article
 
     Background:
         Given there is a product "Puerto Rico"
-        And there is a customer with email "kevin@example.com"
         And this product has one game play from customer "kevin@example.com"
-        And I am logged in as a customer
+        And I am a logged in customer
         And I leaved a comment on this game play
 
     @ui

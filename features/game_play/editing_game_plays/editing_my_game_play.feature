@@ -5,7 +5,7 @@ Feature: Editing game play as a customer
     I want to be able to edit game play
 
     Background:
-        Given I am logged in as a customer
+        Given I am a logged in customer
         And there is a product "Puerto Rico"
         And this product has one game play written by me
 

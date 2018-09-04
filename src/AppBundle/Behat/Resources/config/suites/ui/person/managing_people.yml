@@ -6,7 +6,7 @@ default:
 
                 - app.behat.context.transform.person
 
-                - app.behat.context.setup.admin_security
+                - app.behat.context.setup.security
                 - app.behat.context.setup.person
 
                 - app.behat.context.ui.backend.managing_people

@@ -5,7 +5,7 @@ Feature: Allow viewing unpublished product details
     I am able to view a product which is not published
 
     Background:
-        Given I am logged in as a product manager
+        Given I am a logged in product manager
 
     @ui
     Scenario: Viewing details of a product with new status

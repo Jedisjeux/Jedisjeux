@@ -6,7 +6,7 @@ Feature: Adding topic as a customer
 
     Background:
         Given there are default taxonomies for topics
-        And I am logged in as a customer
+        And I am a logged in customer
 
     @ui
     Scenario: Adding topic as a customer

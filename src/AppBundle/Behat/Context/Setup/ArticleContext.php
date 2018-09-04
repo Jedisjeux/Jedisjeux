@@ -17,6 +17,7 @@ use AppBundle\Fixture\Factory\ExampleFactoryInterface;
 use Behat\Behat\Context\Context;
 use Doctrine\ORM\EntityManager;
 use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
@@ -64,7 +65,7 @@ class ArticleContext implements Context
     }
 
     /**
-     * @Given there is article :title written by :customer
+     * @Given there is an article :title written by :customer
      * @Given there is an article :title written by :customer, published at :date
      *
      * @param string $title
@@ -84,7 +85,7 @@ class ArticleContext implements Context
     }
 
     /**
-     * @Given there is article :title written by :customer with :status status
+     * @Given there is an article :title written by :customer with :status status
      *
      * @param string $title
      */
@@ -95,7 +96,34 @@ class ArticleContext implements Context
             'title' => $title,
             'author' => $customer,
             'status' => $status,
+            'product' => null,
         ]);
+
+        $this->articleRepository->add($article);
+        $this->sharedStorage->set('article', $article);
+    }
+
+    /**
+     * @Given /^(this product) has(?:| also) an article titled "([^"]+)" written by (customer "[^"]+")(?:|, published (\d+) days ago)$/
+     */
+    public function productHasArticleWrittenByCustomerWithStatus(
+        ProductInterface $product,
+        string $title,
+        CustomerInterface $customer,
+        $daysSincePublication = null
+    ) {
+        /** @var Article $article */
+        $article = $this->articleFactory->create([
+            'product' => $product,
+            'title' => $title,
+            'author' => $customer,
+            'status' => Article::STATUS_PUBLISHED,
+            'publish_start_date' => 'now',
+        ]);
+
+        if (null !== $daysSincePublication) {
+            $article->setPublishStartDate(new \DateTime('-'.$daysSincePublication.' days'));
+        }
 
         $this->articleRepository->add($article);
         $this->sharedStorage->set('article', $article);

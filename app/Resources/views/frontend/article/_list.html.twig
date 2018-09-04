@@ -1,0 +1,17 @@
+{% import 'macro/messages.html.twig' as messages %}
+
+{% if articles|length > 0 %}
+    <div class="row">
+    {% for article in articles %}
+        {% if loop.index0 > 0 and loop.index0%3 == 0 %}
+            </div>
+            <div class="row">
+        {% endif %}
+        <div class="col-sm-4">
+            {% include 'frontend/article/index/_imageBox.html.twig' %}
+        </div>
+    {% endfor %}
+    </div>
+{% else %}
+    {{ messages.info('app.ui.there_are_no_articles') }}
+{% endif %}

@@ -5,7 +5,7 @@ Feature: Dealers validation
     I want to be prevented from adding it without specifying required fields
 
     Background:
-        Given I am logged in as an administrator
+        Given I am a logged in administrator
 
     @ui
     Scenario: Trying to add a new dealer without name

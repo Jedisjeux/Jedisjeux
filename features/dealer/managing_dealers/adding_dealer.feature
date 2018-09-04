@@ -5,7 +5,7 @@ Feature: Adding a new dealer
     I want to add a new dealer to the website
 
     Background:
-        Given I am logged in as an administrator
+        Given I am a logged in administrator
 
     @ui
     Scenario: Adding a new dealer with code and name

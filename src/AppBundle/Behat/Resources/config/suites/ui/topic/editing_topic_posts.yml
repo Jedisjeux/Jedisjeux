@@ -11,7 +11,7 @@ default:
                 - app.behat.context.transform.topic
                 - app.behat.context.transform.shared_storage
 
-                - app.behat.context.setup.admin_security
+                - app.behat.context.setup.security
                 - app.behat.context.setup.customer
                 - app.behat.context.setup.post
                 - app.behat.context.setup.taxon

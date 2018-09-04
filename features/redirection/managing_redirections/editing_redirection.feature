@@ -6,7 +6,7 @@ Feature: Editing a redirection
 
     Background:
         Given there is redirection "/url-source-1"
-        And I am logged in as an administrator
+        And I am a logged in administrator
 
     @ui
     Scenario: Changing source of an existing redirection

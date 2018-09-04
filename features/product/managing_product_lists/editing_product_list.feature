@@ -8,7 +8,7 @@ Feature: Editing a product
         Given there is a customer with email "kevin@example.com"
         And this customer has a product list "My favorite games"
         And this customer has a product list "My game library"
-        And I am logged in as an administrator
+        And I am a logged in administrator
 
     @ui
     Scenario: Renaming an existing product list

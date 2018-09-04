@@ -7,7 +7,7 @@ Feature: Deleting a redirection
     Background:
         Given there is redirection "/url-source-1"
         And there is redirection "/url-source-2"
-        And I am logged in as an administrator
+        And I am a logged in administrator
 
     @ui
     Scenario: Deleting a redirection

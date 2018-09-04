@@ -6,13 +6,10 @@ Feature: Viewing product reviews on product's reviews page
 
     Background:
         Given there is a product "Necronomicon"
-        And there is a customer with email "h.p.lovecraft@arkham.com"
-        And there is a customer with email "robert.e.howard@conan.com"
-        And there is a customer with email "jrr.tolkien@middle-earth.com"
         And this product has a review titled "Great book" and rated 5 added by customer "h.p.lovecraft@arkham.com"
         And this product has also a review titled "Scary and dark" and rated 4 added by customer "robert.e.howard@conan.com"
         And this product has also a review titled "Too gloomy" and rated 3 added by customer "jrr.tolkien@middle-earth.com"
-        And I am logged in as a customer
+        And I am a logged in customer
 
     @ui
     Scenario: Viewing all accepted product reviews on product's reviews page

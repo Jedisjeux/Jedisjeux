@@ -7,7 +7,7 @@ Feature: Deleting a dealer
     Background:
         Given there is dealer "Philibert"
         And there is dealer "Esprit Jeu"
-        And I am logged in as an administrator
+        And I am a logged in administrator
 
     @ui
     Scenario: Deleting a dealer

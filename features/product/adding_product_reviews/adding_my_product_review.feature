@@ -5,7 +5,7 @@ Feature: Adding product review as a customer
     I want to be able to add my product review
 
     Background:
-        Given I am logged in as a customer
+        Given I am a logged in customer
         And there is a product "Puerto Rico"
         And I wrote a review on this product
 

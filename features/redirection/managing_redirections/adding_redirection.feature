@@ -5,7 +5,7 @@ Feature: Adding a new redirection
     I want to add a new redirection to the website
 
     Background:
-        Given I am logged in as an administrator
+        Given I am a logged in administrator
 
     @ui
     Scenario: Adding a new redirection with source and destination
