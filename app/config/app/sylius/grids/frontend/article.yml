@@ -10,7 +10,7 @@ sylius_grid:
                         arguments:
                             locale: "%locale%"
                             taxonSlug: $slug
-                            criteria: "expr:service('request_stack').getCurrentRequest().get('criteria', [])"
+                            productSlug: $productSlug
             limits: ~
             sorting:
                 publishStartDate: desc

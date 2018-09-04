@@ -100,10 +100,11 @@ class ArticleRepository extends EntityRepository
     /**
      * @param string $localeCode
      * @param string|null $taxonSlug
+     * @param string|null $productSlug
      *
      * @return QueryBuilder
      */
-    public function createFrontendListQueryBuilder(string $localeCode, string $taxonSlug = null, array $criteria = []): QueryBuilder
+    public function createFrontendListQueryBuilder(string $localeCode, string $taxonSlug = null, string $productSlug = null): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('o');
 
@@ -124,12 +125,12 @@ class ArticleRepository extends EntityRepository
                 ->setParameter('taxonSlug', $taxonSlug);
         }
 
-        if (!empty($criteria['productSlug'])) {
+        if (null !== $productSlug) {
             $queryBuilder
                 ->innerJoin('o.product', 'product')
                 ->innerJoin('product.translations', 'productTranslation')
                 ->andWhere('productTranslation.slug = :productSlug')
-                ->setParameter('productSlug', $criteria['productSlug']);
+                ->setParameter('productSlug', $productSlug);
         }
 
         return $queryBuilder;

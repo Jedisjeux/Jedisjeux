@@ -1,9 +1,6 @@
 imports:
     - { resource: config.yml }
 
-parameters:
-    locale: en_US
-
 framework:
     router:
         resource: "%kernel.root_dir%/config/routing_dev.yml"
@@ -34,7 +31,7 @@ monolog:
 
 doctrine:
     dbal:
-        dbname:   "%database_name%_test"
+        dbname:   "%database_name%_dev"
 
 #swiftmailer:
 #    delivery_address: me@example.com

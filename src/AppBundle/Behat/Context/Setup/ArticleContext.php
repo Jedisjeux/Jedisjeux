@@ -96,6 +96,7 @@ class ArticleContext implements Context
             'title' => $title,
             'author' => $customer,
             'status' => $status,
+            'product' => null,
         ]);
 
         $this->articleRepository->add($article);
