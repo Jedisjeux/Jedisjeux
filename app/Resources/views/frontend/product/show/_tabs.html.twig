@@ -2,11 +2,11 @@
     <!-- Nav tabs -->
     <ul class="nav nav-tabs style-4" role="tablist">
         <li class="nav-item"><a class="nav-link active" href="#reviews" role="tab" data-toggle="tab"><i
-                        class="fa fa-star pr-1"></i>(3) Avis</a></li>
+                        class="fa fa-star pr-1"></i>({{ product.commentedReviews|length }}) {{ 'sylius.ui.reviews'|trans }}</a></li>
         <li class="nav-item"><a class="nav-link" href="#articles" role="tab" data-toggle="tab"><i
-                        class="fa fa-star pr-1"></i>(2) Articles</a></li>
+                        class="fa fa-star pr-1"></i>({{ product.publishedArticles|length }}) {{ 'app.ui.articles'|trans }}</a></li>
         <li class="nav-item"><a class="nav-link" href="#h2tab4" role="tab" data-toggle="tab"><i
-                        class="fa fa-star pr-1"></i>(22) Parties</a></li>
+                        class="fa fa-star pr-1"></i>({{ product.gamePlaysWithTopic|length }}) {{ 'app.ui.game_plays'|trans }}</a></li>
     </ul>
     <!-- Tab panes -->
     <div class="tab-content padding-top-clear padding-bottom-clear">
