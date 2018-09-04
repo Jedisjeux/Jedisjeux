@@ -10,6 +10,6 @@ Feature: Viewing a article details
 
     @ui
     Scenario: Viewing a detailed page with article's title
-        Given there is article "Awesome article" written by "kevin@example.com"
+        Given there is an article "Awesome article" written by "kevin@example.com"
         When I check this article's details
         Then I should see the article title "Awesome article"
