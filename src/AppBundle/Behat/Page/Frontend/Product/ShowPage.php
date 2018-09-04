@@ -136,15 +136,15 @@ class ShowPage extends SymfonyPage
     }
 
     /**
-     * @param string $name
+     * @param string $email
      *
      * @return bool
      *
      * @throws \Behat\Mink\Exception\ElementNotFoundException
      */
-    public function hasGamePlayOnProduct(string $name): bool
+    public function hasGamePlayAddedByCustomerEmail(string $email): bool
     {
-        return null !== $this->getElement('game_plays')->find('css', sprintf('.image-box .lead:contains("%s")', $name));
+        return null !== $this->getElement('game_plays')->find('css', sprintf('.image-box .author:contains("%s")', $email));
     }
 
     /**

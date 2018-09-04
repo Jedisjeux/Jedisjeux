@@ -41,7 +41,6 @@ app_frontend_game_play_show:
             template: frontend/game_play/show.html.twig
             section: frontend
 
-
 app_frontend_game_play_index:
     methods: [GET]
     path: /parties/
@@ -52,6 +51,16 @@ app_frontend_game_play_index:
             section: frontend
             paginate: 12
             grid: app_frontend_game_play
+
+app_frontend_game_play_index_by_product:
+    methods: [GET]
+    path: /jeu-de-societe/{productSlug}/parties/
+    defaults:
+        _controller: app.controller.article:indexAction
+        _sylius:
+            template: frontend/game_play/index.html.twig
+            grid: app_frontend_game_play
+            paginate: 12
 
 app_frontend_game_play:
     resource: |

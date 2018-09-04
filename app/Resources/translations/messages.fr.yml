@@ -180,6 +180,7 @@ app:
         style: Style
         themes: Thèmes
         there_are_no_articles: Il n'y a aucun article.
+        there_are_no_game_plays: Il n'y a aucun article.
         topic: Sujet
         topics: Sujets
         translator: Traducteur

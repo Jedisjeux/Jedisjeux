@@ -15,10 +15,10 @@
     </div>
     <div class="body">
         <p class="small mb-10 text-muted">
-            <i class="fa fa-calendar-o pr-1"></i> Joué le {{ game_play.playedAt|localizeddate('medium', 'none') }}
-            {% if game_play.playerCount is not null %}
-                <i class="pl-10 pr-1 fa fa-user"></i> {{ game_play.playerCount }} joueurs</p>
-            {% endif %}
+            <i class="fa fa-calendar-o pr-1"></i> {{ game_play.createdAt|localizeddate('medium', 'none') }}
+            <i class="pl-10 pr-1 fa fa-user"></i> <span class="author">{{ game_play.author }}</span>
+        </p>
+
         {% if topic is not null and topic.mainPost is not null %}
             <p>{{ (topic.mainPost.body|striptags)[:150] }}...</p>
         {% endif %}

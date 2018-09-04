@@ -18,6 +18,24 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 class GamePlayRepository extends EntityRepository
 {
     /**
+     * @param $productId
+     * @param int $count
+     *
+     * @return array
+     */
+    public function findLatestByProductId($productId, int $count): array
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.product = :productId')
+            ->setParameter('productId', $productId)
+            ->addOrderBy('o.createdAt', 'DESC')
+            ->setMaxResults($count)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    /**
      * @return QueryBuilder
      */
     protected function getQueryBuilder()

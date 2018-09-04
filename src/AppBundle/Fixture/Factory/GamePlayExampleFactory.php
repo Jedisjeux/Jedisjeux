@@ -113,6 +113,18 @@ class GamePlayExampleFactory extends AbstractExampleFactory implements ExampleFa
                 return new \DateTime($playedAt);
             })
 
+            ->setDefault('created_at', function (Options $options) {
+                return $this->faker->dateTimeBetween('-1 year', 'yesterday');
+            } )
+            ->setAllowedTypes('created_at', ['null', 'string', \DateTimeInterface::class])
+            ->setNormalizer('created_at', function (Options $options, $createdAt) {
+                if (!is_string($createdAt)) {
+                    return $createdAt;
+                }
+
+                return new \DateTime($createdAt);
+            })
+
             ->setDefault('product', LazyOption::randomOne($this->productRepository))
             ->setAllowedTypes('product', ['null', 'string', ProductInterface::class])
             ->setNormalizer('product', LazyOption::findOneBy($this->productRepository, 'code'))

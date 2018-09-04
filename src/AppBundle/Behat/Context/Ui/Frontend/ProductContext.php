@@ -341,24 +341,24 @@ class ProductContext implements Context
     }
 
     /**
-     * @Then I should see game plays on products :firstProduct, :secondProduct and :thirdProduct
+     * @Then I should see game plays added by customers :firstCustomer, :secondCustomer and :thirdCustomer
      */
-    public function iShouldSeeGamePlaysOnProduct(...$products)
+    public function iShouldSeeGamePlaysAddedByCustomer(...$customers)
     {
-        foreach ($products as $product) {
+        foreach ($customers as $customer) {
             Assert::true(
-                $this->showPage->hasGamePlayOnProduct($product),
-                sprintf('Game play should have product titled "%s" but it does not.', $product)
+                $this->showPage->hasGamePlayAddedByCustomerEmail($customer),
+                sprintf('Game play should have customer with email "%s" but it does not.', $customer)
             );
         }
     }
 
     /**
-     * @Then I should not see game play on product :name
+     * @Then I should not see game play added by customer :email
      */
-    public function iShouldNotSeeGamePlayOnProduct($name)
+    public function iShouldNotSeeGamePlayAddedByCustomerProduct($email)
     {
-        Assert::false($this->showPage->hasGamePlayOnProduct($name));
+        Assert::false($this->showPage->hasGamePlayAddedByCustomerEmail($email));
     }
 
     /**

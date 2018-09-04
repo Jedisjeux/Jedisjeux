@@ -89,7 +89,7 @@ class GamePlayContext implements Context
      * @param ProductInterface $product
      * @param CustomerInterface $customer
      */
-    public function productHasAGamePlay(ProductInterface $product, CustomerInterface $customer = null)
+    public function productHasAGamePlay(ProductInterface $product, CustomerInterface $customer = null, $daysSinceCreation = null)
     {
         if (null === $customer) {
             $customer = $this->sharedStorage->get('customer');
@@ -99,7 +99,12 @@ class GamePlayContext implements Context
         $gamePlay = $this->gamePlayFactory->create([
             'product' => $product,
             'author' => $customer,
+            'created_at' => 'now',
         ]);
+
+        if (null !== $daysSinceCreation) {
+            $gamePlay->setCreatedAt(new \DateTime('-'.$daysSinceCreation.' days'));
+        }
 
         $this->gamePlayRepository->add($gamePlay);
         $this->sharedStorage->set('game_play', $gamePlay);
@@ -118,6 +123,7 @@ class GamePlayContext implements Context
         $gamePlay = $this->gamePlayFactory->create([
             'product' => $product,
             'author' => $customer,
+            'created_at' => 'now',
         ]);
 
         $this->gamePlayRepository->add($gamePlay);

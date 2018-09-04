@@ -12,18 +12,7 @@
                 <!-- Parties de jeu start -->
                 <!-- ============================================================================== -->
                 <br>
-                <div class="row">
-                    {% for game_play in game_plays.data %}
-                    {% if loop.index0 > 0 and loop.index0%3 == 0 %}
-                </div>
-                <br>
-                <div class="row">
-                    {% endif %}
-                    <div class="col-sm-4">
-                        {% include 'frontend/game_play/index/_imageBox.html.twig' %}
-                    </div>
-                    {% endfor %}
-                </div>
+                {% include 'frontend/game_play/_list.html.twig' with { 'game_plays': game_plays.data } %}
             </div>
             <!-- main end -->
 
