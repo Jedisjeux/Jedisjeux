@@ -1,0 +1,13 @@
+app_frontend_partial_product_article_latest:
+    path: /latest/{count}
+    methods: [GET]
+    defaults:
+        _controller: app.controller.article:indexAction
+        _sylius:
+            template: $template
+            repository:
+                method: findLatestByProductId
+                arguments:
+                - $productId
+                - '!!int $count'
+        count: 3

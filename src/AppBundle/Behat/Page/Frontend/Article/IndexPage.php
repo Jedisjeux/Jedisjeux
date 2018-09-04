@@ -57,4 +57,26 @@ class IndexPage extends SymfonyPage
     {
         return null !== $this->getDocument()->find('css', sprintf('#article-list .lead:contains("%s")', $title));
     }
+
+    /**
+     * @return bool
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     */
+    public function hasNoArticlesMessage(): bool
+    {
+        $articlesContainerText = $this->getElement('articles')->getText();
+
+        return false !== strpos($articlesContainerText, 'There are no articles');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements()
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'articles' => '#article-list',
+        ]);
+    }
 }

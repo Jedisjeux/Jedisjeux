@@ -319,7 +319,7 @@ class ProductContext implements Context
         foreach ($articles as $article) {
             Assert::true(
                 $this->showPage->hasArticleTitled($article),
-                sprintf('Product should have article titled "%s" but it does not.', $article)
+                sprintf('Article should have article titled "%s" but it does not.', $article)
             );
         }
     }

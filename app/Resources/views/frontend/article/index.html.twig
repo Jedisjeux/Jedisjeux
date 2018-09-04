@@ -22,17 +22,7 @@
                     <!-- ============================================================================== -->
                     <br>
                     {% include 'frontend/article/index/_sorting.html.twig' %}
-                    <div class="row">
-                        {% for article in articles.data %}
-                        {% if loop.index0 > 0 and loop.index0%3 == 0 %}
-                    </div>
-                    <div class="row">
-                        {% endif %}
-                        <div class="col-sm-4">
-                            {% include 'frontend/article/index/_imageBox.html.twig' %}
-                        </div>
-                        {% endfor %}
-                    </div>
+                    {% include 'frontend/article/_list.html.twig' with { 'articles' : articles.data } %}
 
                     <!-- pagination start -->
                     {{ pagination(articles.data) }}

@@ -15,6 +15,26 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 class ArticleRepository extends EntityRepository
 {
     /**
+     * @param $productId
+     * @param int $count
+     *
+     * @return array
+     */
+    public function findLatestByProductId($productId, int $count): array
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.product = :productId')
+            ->andWhere('o.status = :status')
+            ->setParameter('productId', $productId)
+            ->setParameter('status', Article::STATUS_PUBLISHED)
+            ->addOrderBy('o.publishStartDate', 'DESC')
+            ->setMaxResults($count)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    /**
      * @param string $slug
      * @param bool $showUnpublished
      *
@@ -83,7 +103,7 @@ class ArticleRepository extends EntityRepository
      *
      * @return QueryBuilder
      */
-    public function createFrontendListQueryBuilder(string $localeCode, string $taxonSlug = null): QueryBuilder
+    public function createFrontendListQueryBuilder(string $localeCode, string $taxonSlug = null, array $criteria = []): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('o');
 
@@ -102,6 +122,14 @@ class ArticleRepository extends EntityRepository
             $queryBuilder
                 ->andWhere('taxonTranslation.slug = :taxonSlug')
                 ->setParameter('taxonSlug', $taxonSlug);
+        }
+
+        if (!empty($criteria['productSlug'])) {
+            $queryBuilder
+                ->innerJoin('o.product', 'product')
+                ->innerJoin('product.translations', 'productTranslation')
+                ->andWhere('productTranslation.slug = :productSlug')
+                ->setParameter('productSlug', $criteria['productSlug']);
         }
 
         return $queryBuilder;

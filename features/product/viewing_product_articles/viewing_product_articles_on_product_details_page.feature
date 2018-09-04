@@ -13,7 +13,7 @@ Feature: Viewing product reviews on product's details page
         And this product has also an article titled "Classic" written by customer "sir.terry@pratchett.com"
         And I am a logged in customer
 
-    @ui @todo
+    @ui
     Scenario: Viewing last 3 articles on product's details page
         When I check this product's details
         Then I should see 3 articles

@@ -117,6 +117,7 @@ class ArticleContext implements Context
             'title' => $title,
             'author' => $customer,
             'status' => Article::STATUS_PUBLISHED,
+            'publish_start_date' => 'now',
         ]);
 
         if (null !== $daysSincePublication) {

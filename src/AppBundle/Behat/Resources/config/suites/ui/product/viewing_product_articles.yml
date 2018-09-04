@@ -14,6 +14,7 @@ default:
                 - app.behat.context.setup.product
                 - app.behat.context.setup.taxon
 
+                - app.behat.context.ui.frontend.article
                 - app.behat.context.ui.frontend.notification
                 - app.behat.context.ui.frontend.product
             filters:

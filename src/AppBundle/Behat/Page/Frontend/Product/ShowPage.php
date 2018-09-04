@@ -103,7 +103,7 @@ class ShowPage extends SymfonyPage
 
     public function countArticles(): int
     {
-        return count($this->getElement('articles')->findAll('css', '.comment'));
+        return count($this->getElement('articles')->findAll('css', '.image-box'));
     }
 
     /**
@@ -127,7 +127,7 @@ class ShowPage extends SymfonyPage
      */
     public function hasArticleTitled(string $title): bool
     {
-        return null !== $this->getElement('articles')->find('css', sprintf('.comment:contains("%s")', $title));
+        return null !== $this->getElement('articles')->find('css', sprintf('.image-box .lead:contains("%s")', $title));
     }
 
     /**
@@ -136,7 +136,7 @@ class ShowPage extends SymfonyPage
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'articles' => '#articles .comments',
+            'articles' => '#articles',
             'artists' => '#product-artists',
             'designers' => '#product-designers',
             'mechanisms' => '#product-mechanisms',
