@@ -7,7 +7,7 @@ Feature: Adding topic from a specific category as a customer
     Background:
         Given there are default taxonomies for topics
         And there is a public topic category "Games"
-        And I am logged in as a customer
+        And I am a logged in customer
 
     @ui
     Scenario: Adding topic from a specific category as a customer

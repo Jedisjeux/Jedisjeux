@@ -6,7 +6,7 @@ Feature: Editing a product
 
     Background:
         Given there is a product "Puerto Rico"
-        And I am logged in as an administrator
+        And I am a logged in administrator
 
     @ui
     Scenario: Renaming an existing product

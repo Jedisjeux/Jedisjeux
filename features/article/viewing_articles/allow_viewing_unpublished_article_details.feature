@@ -7,7 +7,7 @@ Feature: Allow viewing unpublished article details
     Background:
         Given there are default taxonomies for articles
         And there is a customer with email "kevin@example.com"
-        And I am logged in as an article manager
+        And I am a logged in article manager
 
     @ui
     Scenario: Viewing details of a article with new status

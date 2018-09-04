@@ -9,7 +9,7 @@ Feature: Browsing topics
         And there is a topic with title "Les parties jouées la veille" written by "kevin@example.com"
         And there is a topic with title "Liste des jeux à ajouter" written by "kevin@example.com"
         And there is a topic with title "Vos nouvelles acquisitions ludiques" written by "kevin@example.com"
-        And I am logged in as an administrator
+        And I am a logged in administrator
 
     @ui
     Scenario: Browsing topics in website

@@ -8,7 +8,7 @@ Feature: Replying to topics
         Given there are default taxonomies for topics
         And there is a customer with email "kevin@example.com"
         And there is a topic with title "Awesome topic" written by "kevin@example.com"
-        And I am logged in as a customer
+        And I am a logged in customer
 
     @ui
     Scenario: Replying to a topic

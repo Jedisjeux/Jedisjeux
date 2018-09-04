@@ -7,7 +7,7 @@ Feature: Deleting a product
     Background:
         Given there is a product "Puerto Rico"
         And there is a product "Modern Art"
-        And I am logged in as an administrator
+        And I am a logged in administrator
 
     @ui
     Scenario: Deleting a product

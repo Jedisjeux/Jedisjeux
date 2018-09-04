@@ -8,7 +8,7 @@ Feature: Removing my comment on an article
         Given there are default taxonomies for topics
         And there is a customer with email "kevin@example.com"
         And there is an article "Latest game plays" written by "kevin@example.com"
-        And I am logged in as a customer
+        And I am a logged in customer
         And I leaved a comment on this article
 
     @ui

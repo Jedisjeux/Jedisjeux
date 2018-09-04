@@ -7,7 +7,7 @@ Feature: Deleting a person
     Background:
         Given there is person with first name "Reiner" and last name "Knizia"
         And there is person with first name "Martin" and last name "Wallace"
-        And I am logged in as an administrator
+        And I am a logged in administrator
 
     @ui
     Scenario: Deleting a person

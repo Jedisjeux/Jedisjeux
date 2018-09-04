@@ -10,7 +10,7 @@ Feature: Browsing product reviews
         And there is a product "Puerto Rico"
         And this product has a review titled "Awesome" and rated 5 added by customer "kevin@example.com"
         And this product has also a review titled "Bad" and rated 1 added by customer "blue@example.com"
-        And I am logged in as an administrator
+        And I am a logged in administrator
 
     @ui
     Scenario: Browsing product reviews in website

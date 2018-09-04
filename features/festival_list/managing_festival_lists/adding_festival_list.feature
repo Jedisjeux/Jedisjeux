@@ -5,7 +5,7 @@ Feature: Adding a new festival list
     I want to add a new festival list to the website
 
     Background:
-        Given I am logged in as an administrator
+        Given I am a logged in administrator
 
     @ui
     Scenario: Adding a new festival list with name

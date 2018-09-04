@@ -6,7 +6,7 @@ Feature: Adding a new article
 
     @ui
     Scenario: Adding a new article with title as an administrator
-        Given I am logged in as an administrator
+        Given I am a logged in administrator
         And I want to create a new article
         When I specify his title as "Le Jedisjeux nouveau est arrivé"
         When I add it
@@ -15,7 +15,7 @@ Feature: Adding a new article
 
     @ui
     Scenario: Adding a new article with title as a redactor
-        Given I am logged in as a redactor
+        Given I am a logged in redactor
         And I want to create a new article
         When I specify his title as "Le Jedisjeux nouveau est arrivé"
         When I add it

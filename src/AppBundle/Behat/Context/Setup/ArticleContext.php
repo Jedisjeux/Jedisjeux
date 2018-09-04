@@ -103,8 +103,7 @@ class ArticleContext implements Context
     }
 
     /**
-     * @Given (this product) has (also) an article titled :title written by customer :customer
-     * @Given (this product) has (also) an article titled :title written by customer :customer, published (\d+) days ago
+     * @Given /^(this product) has(?:| also) an article titled "([^"]+)" written by (customer "[^"]+")(?:|, published (\d+) days ago)$/
      */
     public function productHasArticleWrittenByCustomerWithStatus(
         ProductInterface $product,

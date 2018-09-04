@@ -10,7 +10,7 @@ Feature: Browsing posts
         And there is a topic with title "Les parties jouées la veille" written by "kevin@example.com"
         And this topic has a post added by customer "blue@example.com"
         And this topic has also a post added by customer "kevin@example.com"
-        And I am logged in as an administrator
+        And I am a logged in administrator
 
     @ui
     Scenario: Browsing posts in website

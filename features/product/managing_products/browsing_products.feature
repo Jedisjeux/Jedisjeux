@@ -11,33 +11,33 @@ Feature: Browsing products
 
     @ui
     Scenario: Browsing products in website as an administrator
-        When I am logged in as an administrator
+        When I am a logged in administrator
         And I want to browse products
         Then there should be 3 products in the list
         And I should see the product "Puerto Rico" in the list
 
     @ui
     Scenario: Browsing products in website as a redactor
-        When I am logged in as a redactor
+        When I am a logged in redactor
         And I want to browse products
         Then there should be 3 products in the list
         And I should see the product "Puerto Rico" in the list
 
     @ui
     Scenario: Browsing products in website as a staff user
-        When I am logged in as a staff user
+        When I am a logged in staff user
         And I want to browse products
         Then there should be 3 products in the list
         And I should see the product "Puerto Rico" in the list
 
     @ui
     Scenario: Browsing products in website as a product manager
-        When I am logged in as a product manager
+        When I am a logged in product manager
         And I want to browse products
         Then there should be 3 products in the list
         And I should see the product "Puerto Rico" in the list
 
     @ui
     Scenario: Trying to browse products as a article manager
-        When I am logged in as an article manager
+        When I am a logged in article manager
         Then I should not be able to browse products

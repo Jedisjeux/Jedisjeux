@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the Sylius package.
+ * This file is part of Jedisjeux.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Loïc Frémont
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -23,7 +23,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class AdminSecurityContext implements Context
+final class SecurityContext implements Context
 {
     /**
      * @var SharedStorageInterface
@@ -75,7 +75,7 @@ final class AdminSecurityContext implements Context
     }
 
     /**
-     * @Given I am logged in as a customer
+     * @Given I am a logged in customer
      */
     public function iAmLoggedInAsACustomer()
     {
@@ -89,7 +89,7 @@ final class AdminSecurityContext implements Context
     }
 
     /**
-     * @Given I am logged in as an administrator
+     * @Given I am a logged in administrator
      */
     public function iAmLoggedInAsAnAdministrator()
     {
@@ -116,7 +116,7 @@ final class AdminSecurityContext implements Context
     }
 
     /**
-     * @Given I am logged in as a redactor
+     * @Given I am a logged in redactor
      */
     public function iAmLoggedInAsARedactor()
     {
@@ -130,7 +130,7 @@ final class AdminSecurityContext implements Context
     }
 
     /**
-     * @Given I am logged in as a staff user
+     * @Given I am a logged in staff user
      */
     public function iAmLoggedInAsAStaffUser()
     {
@@ -144,7 +144,7 @@ final class AdminSecurityContext implements Context
     }
 
     /**
-     * @Given I am logged in as a product manager
+     * @Given I am a logged in product manager
      */
     public function iAmLoggedInAsAProductManager()
     {
@@ -158,7 +158,7 @@ final class AdminSecurityContext implements Context
     }
 
     /**
-     * @Given I am logged in as an article manager
+     * @Given I am a logged in article manager
      */
     public function iAmLoggedInAsAnArticleManager()
     {

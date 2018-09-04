@@ -13,33 +13,33 @@ Feature: Browsing articles
 
     @ui
     Scenario: Browsing articles in website as administrator
-        Given I am logged in as an administrator
+        Given I am a logged in administrator
         When I want to browse articles
         Then there should be 3 articles in the list
         And I should see the article "Le Jedisjeux nouveau est arrivé" in the list
 
     @ui
     Scenario: Browsing articles in website as a redactor
-        Given I am logged in as a redactor
+        Given I am a logged in redactor
         When I want to browse articles
         Then there should be 3 articles in the list
         And I should see the article "Le Jedisjeux nouveau est arrivé" in the list
 
     @ui
     Scenario: Browsing articles in website as a staff user
-        Given I am logged in as a staff user
+        Given I am a logged in staff user
         When I want to browse articles
         Then there should be 3 articles in the list
         And I should see the article "Le Jedisjeux nouveau est arrivé" in the list
 
     @ui
     Scenario: Browsing articles in website as an article manager
-        Given I am logged in as an article manager
+        Given I am a logged in article manager
         When I want to browse articles
         Then there should be 3 articles in the list
         And I should see the article "Le Jedisjeux nouveau est arrivé" in the list
 
     @ui
     Scenario: Trying to browse articles in website as a product manager
-        When I am logged in as a product manager
+        When I am a logged in product manager
         Then I should not be able to browse articles

@@ -6,7 +6,7 @@ Feature: Adding a new product
 
     @ui
     Scenario: Adding a new product with name and slug as an administrator
-        Given I am logged in as an administrator
+        Given I am a logged in administrator
         And I want to create a new product
         And I specify his name as "Puerto Rico"
         And I specify his slug as "puerto-rico"
@@ -16,7 +16,7 @@ Feature: Adding a new product
 
     @ui
     Scenario: Adding a new product with name and slug as a redactor
-        Given I am logged in as a redactor
+        Given I am a logged in redactor
         And I want to create a new product
         And I specify his name as "Puerto Rico"
         And I specify his slug as "puerto-rico"
@@ -26,5 +26,5 @@ Feature: Adding a new product
 
     @ui
     Scenario: Trying to add a new product as a staff user
-        When I am logged in as a staff user
+        When I am a logged in staff user
         Then I should not be able to add product

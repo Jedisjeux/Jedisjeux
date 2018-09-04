@@ -14,7 +14,7 @@ Feature: Viewing product reviews on product's details page
         And this product has also a review titled "Scary and dark" and rated 4 added by customer "robert.e.howard@conan.com"
         And this product has also a review titled "Too gloomy" and rated 3 added by customer "jrr.tolkien@middle-earth.com"
         And this product has also a review titled "Classic" and rated 5 added by customer "sir.terry@pratchett.com"
-        And I am logged in as a customer
+        And I am a logged in customer
 
     @ui
     Scenario: Viewing last 3 product reviews on product's details page

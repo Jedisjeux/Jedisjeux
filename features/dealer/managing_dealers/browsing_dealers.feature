@@ -8,7 +8,7 @@ Feature: Browsing dealers
         Given there is dealer "Philibert"
         And there is dealer "Esprit Jeu"
         And there is dealer "Ludifolie"
-        And I am logged in as an administrator
+        And I am a logged in administrator
 
     @ui
     Scenario: Browsing dealers in website

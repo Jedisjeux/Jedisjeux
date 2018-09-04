@@ -6,7 +6,7 @@ Feature: Editing a dealer
 
     Background:
         Given there is dealer "Philibert"
-        And I am logged in as an administrator
+        And I am a logged in administrator
 
     @ui
     Scenario: Renaming an existing dealer

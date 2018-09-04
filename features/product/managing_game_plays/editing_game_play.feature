@@ -10,7 +10,7 @@ Feature: Editing a game play
         And there is a product "Puerto Rico"
         And this product has one game play from customer "kevin@example.com"
         And this product has one game play from customer "blue@example.com"
-        And I am logged in as an administrator
+        And I am a logged in administrator
 
     @ui
     Scenario: Changing played at of an existing game play

@@ -8,7 +8,7 @@ Feature: Browsing redirections
         Given there is redirection "http://www.example.com/url-1"
         And there is redirection "http://www.example.com/url-2"
         And there is redirection "http://www.example.com/url-3"
-        And I am logged in as an administrator
+        And I am a logged in administrator
 
     @ui
     Scenario: Browsing redirections in website

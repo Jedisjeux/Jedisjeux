@@ -6,7 +6,7 @@ Feature: Editing my topic as a customer
 
     Background:
         Given there are default taxonomies for topics
-        And I am logged in as a customer
+        And I am a logged in customer
         And I wrote a topic with title "Les parties jouées la veille"
 
     @ui

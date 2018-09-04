@@ -5,7 +5,7 @@ Feature: Adding game play as a customer
     I want to be able to add game play
 
     Background:
-        Given I am logged in as a customer
+        Given I am a logged in customer
         And there is a product "Puerto Rico"
 
     @ui
