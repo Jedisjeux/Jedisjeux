@@ -82,13 +82,14 @@ class GamePlayContext implements Context
     }
 
     /**
-     * @Given /^(this product) has one game play from (customer "[^"]+")$/
-     * @Given /^(this product) has one game play written by me$/
+     * @Given /^(this product) has(?:| also) one game play from (customer "[^"]+")$/
+     * @Given /^(this product) has(?:| also) a game play added by (customer "[^"]+")(?:|, created (\d+) days ago)$/
+     * @Given /^(this product) has(?:| also) one game play written by me$/
      *
      * @param ProductInterface $product
      * @param CustomerInterface $customer
      */
-    public function productHasAGamePlay(ProductInterface $product, CustomerInterface $customer = null)
+    public function productHasAGamePlay(ProductInterface $product, CustomerInterface $customer = null, $daysSinceCreation = null)
     {
         if (null === $customer) {
             $customer = $this->sharedStorage->get('customer');
@@ -98,7 +99,12 @@ class GamePlayContext implements Context
         $gamePlay = $this->gamePlayFactory->create([
             'product' => $product,
             'author' => $customer,
+            'created_at' => 'now',
         ]);
+
+        if (null !== $daysSinceCreation) {
+            $gamePlay->setCreatedAt(new \DateTime('-'.$daysSinceCreation.' days'));
+        }
 
         $this->gamePlayRepository->add($gamePlay);
         $this->sharedStorage->set('game_play', $gamePlay);
@@ -106,18 +112,24 @@ class GamePlayContext implements Context
 
     /**
      * @Given /^(this product) has one game play from (customer "[^"]+") with (\d+) comments$/
+     * @Given /^(this product) has(?:| also) a game play added by (customer "[^"]+") with (\d+) comments(?:|, created (\d+) days ago)$/
      *
      * @param ProductInterface $product
      * @param CustomerInterface $customer
      * @param int $postCount
      */
-    public function thisProductHasAGamePlayWithComments(ProductInterface $product, CustomerInterface $customer, $postCount)
+    public function thisProductHasAGamePlayWithComments(ProductInterface $product, CustomerInterface $customer, $postCount, $daysSinceCreation = null)
     {
         /** @var GamePlay $gamePlay */
         $gamePlay = $this->gamePlayFactory->create([
             'product' => $product,
             'author' => $customer,
+            'created_at' => 'now',
         ]);
+
+        if (null !== $daysSinceCreation) {
+            $gamePlay->setCreatedAt(new \DateTime('-'.$daysSinceCreation.' days'));
+        }
 
         $this->gamePlayRepository->add($gamePlay);
 

@@ -12,6 +12,7 @@
 namespace AppBundle\Behat\Context\Ui\Frontend;
 
 use AppBundle\Behat\Page\Frontend\GamePlay\CreatePage;
+use AppBundle\Behat\Page\Frontend\GamePlay\IndexByProductPage;
 use AppBundle\Behat\Page\Frontend\GamePlay\IndexPage;
 use AppBundle\Behat\Page\Frontend\GamePlay\UpdatePage;
 use AppBundle\Entity\GamePlay;
@@ -27,6 +28,11 @@ class GamePlayContext implements Context
     private $indexPage;
 
     /**
+     * @var IndexByProductPage
+     */
+    private $indexByProductPage;
+
+    /**
      * @var CreatePage
      */
     private $createPage;
@@ -38,12 +44,18 @@ class GamePlayContext implements Context
 
     /**
      * @param IndexPage $indexPage
+     * @param IndexByProductPage $indexByProductPage
      * @param CreatePage $createPage
      * @param UpdatePage $updatePage
      */
-    public function __construct(IndexPage $indexPage, CreatePage $createPage, UpdatePage $updatePage)
-    {
+    public function __construct(
+        IndexPage $indexPage,
+        IndexByProductPage $indexByProductPage,
+        CreatePage $createPage,
+        UpdatePage $updatePage
+    ) {
         $this->indexPage = $indexPage;
+        $this->indexByProductPage = $indexByProductPage;
         $this->createPage = $createPage;
         $this->updatePage = $updatePage;
     }
@@ -73,6 +85,14 @@ class GamePlayContext implements Context
     public function iWantToBrowseGamePlays()
     {
         $this->indexPage->open();
+    }
+
+    /**
+     * @When /^I check (this product)'s game plays$/
+     */
+    public function iCheckThisProductGamePlays(ProductInterface $product)
+    {
+        $this->indexByProductPage->open(['productSlug' => $product->getSlug()]);
     }
 
     /**
@@ -148,5 +168,21 @@ class GamePlayContext implements Context
     public function iShouldNotSeeGamePlayFromProduct($productName)
     {
         Assert::false($this->indexPage->isProductOnList($productName));
+    }
+
+    /**
+     * @Then I should see :numberOfGamePlays game plays in the list
+     */
+    public function iShouldSeeArticlesInTheList($numberOfGamePlays)
+    {
+        Assert::same($this->indexPage->countGamePlays(), (int) $numberOfGamePlays);
+    }
+
+    /**
+     * @Then /^I should be notified that there are no game plays$/
+     */
+    public function iShouldBeNotifiedThatThereAreNoReviews()
+    {
+        Assert::true($this->indexPage->hasNoGamePlaysMessage());
     }
 }

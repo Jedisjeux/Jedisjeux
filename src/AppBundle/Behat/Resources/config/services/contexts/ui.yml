@@ -177,6 +177,7 @@ services:
         class: AppBundle\Behat\Context\Ui\Frontend\GamePlayContext
         arguments:
             - "@app.behat.page.frontend.game_play.index"
+            - "@app.behat.page.frontend.game_play.index_by_product"
             - "@app.behat.page.frontend.game_play.create"
             - "@app.behat.page.frontend.game_play.update"
         tags:

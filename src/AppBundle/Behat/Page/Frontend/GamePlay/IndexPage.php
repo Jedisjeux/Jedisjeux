@@ -35,4 +35,38 @@ class IndexPage extends SymfonyPage
     {
         return null !== $this->getDocument()->find('css', sprintf('#game-play-list .lead:contains("%s")', $title));
     }
+
+    /**
+     * @return int
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     */
+    public function countGamePlays(): int
+    {
+        $gamePlays = $this->getElement('game_plays')->findAll('css', '.image-box');
+
+        return count($gamePlays);
+    }
+
+    /**
+     * @return bool
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     */
+    public function hasNoGamePlaysMessage(): bool
+    {
+        $gamePlaysContainerText = $this->getElement('game_plays')->getText();
+
+        return false !== strpos($gamePlaysContainerText, 'There are no game plays');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements()
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'game_plays' => '#game-play-list',
+        ]);
+    }
 }

@@ -18,6 +18,26 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 class GamePlayRepository extends EntityRepository
 {
     /**
+     * @param $productId
+     * @param int $count
+     *
+     * @return array
+     */
+    public function findLatestByProductId($productId, int $count): array
+    {
+        return $this->createQueryBuilder('o')
+            // with comments only
+            ->innerJoin('o.topic', 'topic')
+            ->andWhere('o.product = :productId')
+            ->setParameter('productId', $productId)
+            ->addOrderBy('o.createdAt', 'DESC')
+            ->setMaxResults($count)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    /**
      * @return QueryBuilder
      */
     protected function getQueryBuilder()
@@ -79,7 +99,7 @@ class GamePlayRepository extends EntityRepository
      *
      * @return QueryBuilder
      */
-    public function createCommentedListQueryBuilder($locale, array $criteria = [])
+    public function createFrontendListQueryBuilder($locale, array $criteria = [], string $productSlug = null)
     {
         $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('product')
@@ -92,7 +112,8 @@ class GamePlayRepository extends EntityRepository
             ->join('product.variants', 'variant', Join::WITH, 'variant.position = 0')
             ->join('product.translations', 'productTranslation')
             ->leftJoin('variant.images', 'image', Join::WITH, 'image.main = :main')
-            ->join('o.topic', 'topic')
+            // topic with comments
+            ->innerJoin('o.topic', 'topic')
             ->leftJoin('topic.article', 'article')
             ->andWhere('productTranslation.locale = :locale')
             ->groupBy('o.id')
@@ -103,6 +124,12 @@ class GamePlayRepository extends EntityRepository
             $queryBuilder
                 ->andWhere('product = :product')
                 ->setParameter('product', $criteria['product']);
+        }
+
+        if (null !== $productSlug) {
+            $queryBuilder
+                ->andWhere('productTranslation.slug = :productSlug')
+                ->setParameter('productSlug', $productSlug);
         }
 
         return $queryBuilder;

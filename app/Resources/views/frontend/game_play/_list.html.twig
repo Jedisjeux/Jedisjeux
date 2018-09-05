@@ -1,0 +1,17 @@
+{% import 'macro/messages.html.twig' as messages %}
+
+{% if game_plays|length > 0 %}
+    <div class="row">
+    {% for game_play in game_plays %}
+        {% if loop.index0 > 0 and loop.index0%3 == 0 %}
+            </div>
+            <div class="row">
+        {% endif %}
+        <div class="col-sm-4">
+            {% include 'frontend/game_play/index/_imageBox.html.twig' %}
+        </div>
+    {% endfor %}
+    </div>
+{% else %}
+    {{ messages.info('app.ui.there_are_no_game_plays') }}
+{% endif %}
