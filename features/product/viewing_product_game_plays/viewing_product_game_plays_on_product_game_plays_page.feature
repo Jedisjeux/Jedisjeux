@@ -6,9 +6,9 @@ Feature: Viewing product game plays on product's game plays page
 
     Background:
         Given there is a product "Necronomicon"
-        And this product has also a game play added by customer "h.p.lovecraft@arkham.com"
-        And this product has also a game play added by customer "robert.e.howard@conan.com"
-        And this product has also a game play added by customer "jrr.tolkien@middle-earth.com"
+        And this product has a game play added by customer "h.p.lovecraft@arkham.com" with 2 comments
+        And this product has also a game play added by customer "robert.e.howard@conan.com" with 3 comments
+        And this product has also a game play added by customer "jrr.tolkien@middle-earth.com" with 2 comments
         And I am a logged in customer
 
     @ui

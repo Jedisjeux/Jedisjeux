@@ -112,12 +112,13 @@ class GamePlayContext implements Context
 
     /**
      * @Given /^(this product) has one game play from (customer "[^"]+") with (\d+) comments$/
+     * @Given /^(this product) has(?:| also) a game play added by (customer "[^"]+") with (\d+) comments(?:|, created (\d+) days ago)$/
      *
      * @param ProductInterface $product
      * @param CustomerInterface $customer
      * @param int $postCount
      */
-    public function thisProductHasAGamePlayWithComments(ProductInterface $product, CustomerInterface $customer, $postCount)
+    public function thisProductHasAGamePlayWithComments(ProductInterface $product, CustomerInterface $customer, $postCount, $daysSinceCreation = null)
     {
         /** @var GamePlay $gamePlay */
         $gamePlay = $this->gamePlayFactory->create([
@@ -125,6 +126,10 @@ class GamePlayContext implements Context
             'author' => $customer,
             'created_at' => 'now',
         ]);
+
+        if (null !== $daysSinceCreation) {
+            $gamePlay->setCreatedAt(new \DateTime('-'.$daysSinceCreation.' days'));
+        }
 
         $this->gamePlayRepository->add($gamePlay);
 

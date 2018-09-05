@@ -6,10 +6,10 @@ Feature: Viewing product game plays on product's details page
 
     Background:
         Given there is a product "Puerto Rico"
-        And this product has a game play added by customer "h.p.lovecraft@arkham.com", created 3 days ago
-        And this product has also a game play added by customer "robert.e.howard@conan.com"
-        And this product has also a game play added by customer "jrr.tolkien@middle-earth.com"
-        And this product has also a game play added by customer "sir.terry@pratchett.com"
+        And this product has a game play added by customer "h.p.lovecraft@arkham.com" with 2 comments, created 3 days ago
+        And this product has also a game play added by customer "robert.e.howard@conan.com" with 3 comments
+        And this product has also a game play added by customer "jrr.tolkien@middle-earth.com" with 2 comments
+        And this product has also a game play added by customer "sir.terry@pratchett.com" with 4 comments
         And I am a logged in customer
 
     @ui
