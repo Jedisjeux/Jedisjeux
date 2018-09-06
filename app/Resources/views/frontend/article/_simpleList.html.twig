@@ -1,0 +1,30 @@
+{% import 'macro/messages.html.twig' as messages %}
+{% import 'macro/image.html.twig' as images %}
+
+{% set articles = articles.data is defined ? articles.data : articles  %}
+
+{% if articles|length > 0 %}
+    {% for article in articles %}
+        {% set articlePath = path('app_frontend_article_show', { 'slug': article.slug }) %}
+
+        <div class="media margin-clear">
+            <div class="d-flex pr-2">
+                <div class="overlay-container">
+                    {% if article.mainImage is not null %}
+                        {{ images.render(article.mainImage.webPath, 'magazine_item_wide', article.title) }}
+                    {% endif %}
+                    <a href="{{ articlePath }}" class="overlay-link small"><i class="fa fa-link"></i></a>
+                </div>
+            </div>
+            <div class="media-body">
+                <h6 class="media-heading"><a href="{{ articlePath }}">{{ article.title }}</a></h6>
+                <p class="small margin-clear"><i class="fa fa-calendar pr-2"></i>{{ article.publishStartDate|localizeddate('medium', 'none') }}</p>
+            </div>
+        </div>
+        {% if not loop.last %}
+            <hr>
+        {% endif %}
+    {% endfor %}
+{% else %}
+    {{ messages.info('app.ui.there_are_no_articles') }}
+{% endif %}
