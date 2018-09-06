@@ -40,58 +40,15 @@
                     </div>
                     <div class="col-lg-3">
                         <div class="footer-content">
-                            <h2 class="title">Portfolio Gallery</h2>
+                            <h2 class="title">{{ 'app.ui.game_play_images'|trans }}</h2>
                             <div class="separator-2"></div>
-                            <div class="row grid-space-10">
-                                <div class="col-4 col-lg-6">
-                                    <div class="overlay-container mb-10">
-                                        <img src="/assets/frontend/images/gallery-1.jpg" alt="">
-                                        <a href="portfolio-item.html" class="overlay-link small">
-                                            <i class="fa fa-link"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-4 col-lg-6">
-                                    <div class="overlay-container mb-10">
-                                        <img src="/assets/frontend/images/gallery-2.jpg" alt="">
-                                        <a href="portfolio-item.html" class="overlay-link small">
-                                            <i class="fa fa-link"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-4 col-lg-6">
-                                    <div class="overlay-container mb-10">
-                                        <img src="/assets/frontend/images/gallery-3.jpg" alt="">
-                                        <a href="portfolio-item.html" class="overlay-link small">
-                                            <i class="fa fa-link"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-4 col-lg-6">
-                                    <div class="overlay-container mb-10">
-                                        <img src="/assets/frontend/images/gallery-4.jpg" alt="">
-                                        <a href="portfolio-item.html" class="overlay-link small">
-                                            <i class="fa fa-link"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-4 col-lg-6">
-                                    <div class="overlay-container mb-10">
-                                        <img src="/assets/frontend/images/gallery-5.jpg" alt="">
-                                        <a href="portfolio-item.html" class="overlay-link small">
-                                            <i class="fa fa-link"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-4 col-lg-6">
-                                    <div class="overlay-container mb-10">
-                                        <img src="/assets/frontend/images/gallery-6.jpg" alt="">
-                                        <a href="portfolio-item.html" class="overlay-link small">
-                                            <i class="fa fa-link"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                            {{ render(url('app_frontend_partial_game_play_image_index', {
+                                'template': 'frontend/game_play_image/_simpleList.html.twig',
+                                'paginate': 6,
+                                'sorting': {
+                                    'createdAt': 'desc'
+                                }} ))
+                            }}
                             <div class="text-right space-top">
                                 <a href="portfolio-grid-2-3-col.html" class="link-dark"><i class="fa fa-plus-circle pl-1 pr-1"></i>More</a>
                             </div>

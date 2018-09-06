@@ -63,6 +63,7 @@ app:
         game_library: Ludothèque
         game_plays: Parties de jeu
         game_play_details: Informations de la partie
+        game_play_images: Photos de partie
         games: Jeux
         height: Hauteur
         icon_class: Classe de l'icône

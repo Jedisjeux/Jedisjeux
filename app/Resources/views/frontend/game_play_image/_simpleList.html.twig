@@ -1,0 +1,19 @@
+{% import 'macro/image.html.twig' as images %}
+
+<div class="row grid-space-10">
+    {% for image in game_play_images.data %}
+        {% set gamePlayPath = path('app_frontend_game_play_show', {
+            'productSlug': image.gamePlay.product.slug,
+            'id': image.gamePlay.id
+        } ) %}
+
+        <div class="col-4 col-lg-6">
+            <div class="overlay-container mb-10">
+                {{ images.render(image.webPath, 'magazine_item', 'image') }}
+                <a href="{{ gamePlayPath }}" class="overlay-link small">
+                    <i class="fa fa-link"></i>
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+</div>

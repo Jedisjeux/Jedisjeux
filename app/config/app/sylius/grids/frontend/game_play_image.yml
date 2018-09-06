@@ -1,0 +1,14 @@
+sylius_grid:
+    grids:
+        app_frontend_game_play_image:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%app.model.game_play_image.class%"
+            limits: ~
+            sorting:
+                createdAt: desc
+            fields:
+                createdAt:
+                    type: twig
+                    sortable: ~
