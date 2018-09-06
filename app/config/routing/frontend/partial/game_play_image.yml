@@ -1,0 +1,11 @@
+app_frontend_partial_game_play_image_index:
+    methods: [GET]
+    path: /
+    defaults:
+        _controller: app.controller.game_play_image:indexAction
+        _sylius:
+            template: $template
+            paginate: $paginate
+            grid: app_frontend_game_play_image
+    requirements:
+        template: "[^?]+"

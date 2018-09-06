@@ -27,118 +27,28 @@
                     </div>
                     <div class="col-lg-3">
                         <div class="footer-content">
-                            <h2 class="title">Latest From Blog</h2>
+                            <h2 class="title">{{ 'app.ui.latest_articles'|trans }}</h2>
                             <div class="separator-2"></div>
-                            <div class="media margin-clear">
-                                <div class="d-flex pr-2">
-                                    <div class="overlay-container">
-                                        <img class="media-object" src="/assets/frontend/images/blog-thumb-1.jpg" alt="blog-thumb">
-                                        <a href="blog-post.html" class="overlay-link small"><i class="fa fa-link"></i></a>
-                                    </div>
-                                </div>
-                                <div class="media-body">
-                                    <h6 class="media-heading"><a href="blog-post.html">Lorem ipsum dolor sit amet...</a></h6>
-                                    <p class="small margin-clear"><i class="fa fa-calendar pr-2"></i>Mar 23, 2017</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="media margin-clear">
-                                <div class="d-flex pr-2">
-                                    <div class="overlay-container">
-                                        <img class="media-object" src="/assets/frontend/images/blog-thumb-2.jpg" alt="blog-thumb">
-                                        <a href="blog-post.html" class="overlay-link small"><i class="fa fa-link"></i></a>
-                                    </div>
-                                </div>
-                                <div class="media-body">
-                                    <h6 class="media-heading"><a href="blog-post.html">Lorem ipsum dolor sit amet...</a></h6>
-                                    <p class="small margin-clear"><i class="fa fa-calendar pr-2"></i>Mar 22, 2017</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="media margin-clear">
-                                <div class="d-flex pr-2">
-                                    <div class="overlay-container">
-                                        <img class="media-object" src="/assets/frontend/images/blog-thumb-3.jpg" alt="blog-thumb">
-                                        <a href="blog-post.html" class="overlay-link small"><i class="fa fa-link"></i></a>
-                                    </div>
-                                </div>
-                                <div class="media-body">
-                                    <h6 class="media-heading"><a href="blog-post.html">Lorem ipsum dolor sit amet...</a></h6>
-                                    <p class="small margin-clear"><i class="fa fa-calendar pr-2"></i>Mar 21, 2017</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="media margin-clear">
-                                <div class="d-flex pr-2">
-                                    <div class="overlay-container">
-                                        <img class="media-object" src="/assets/frontend/images/blog-thumb-4.jpg" alt="blog-thumb">
-                                        <a href="blog-post.html" class="overlay-link small"><i class="fa fa-link"></i></a>
-                                    </div>
-                                </div>
-                                <div class="media-body">
-                                    <h6 class="media-heading"><a href="blog-post.html">Lorem ipsum dolor sit amet...</a></h6>
-                                    <p class="small margin-clear"><i class="fa fa-calendar pr-2"></i>Mar 21, 2017</p>
-                                </div>
-                            </div>
-                            <div class="text-right space-top">
-                                <a href="blog-large-image-right-sidebar.html" class="link-dark"><i class="fa fa-plus-circle pl-1 pr-1"></i>More</a>
-                            </div>
+                            {{ render(url('app_partial_article_index', {
+                                'template': 'frontend/article/_simpleList.html.twig',
+                                'paginate': 5,
+                                'sorting': {
+                                    'publishStartDate': 'desc'
+                                }} ))
+                            }}
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="footer-content">
-                            <h2 class="title">Portfolio Gallery</h2>
+                            <h2 class="title">{{ 'app.ui.game_play_images'|trans }}</h2>
                             <div class="separator-2"></div>
-                            <div class="row grid-space-10">
-                                <div class="col-4 col-lg-6">
-                                    <div class="overlay-container mb-10">
-                                        <img src="/assets/frontend/images/gallery-1.jpg" alt="">
-                                        <a href="portfolio-item.html" class="overlay-link small">
-                                            <i class="fa fa-link"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-4 col-lg-6">
-                                    <div class="overlay-container mb-10">
-                                        <img src="/assets/frontend/images/gallery-2.jpg" alt="">
-                                        <a href="portfolio-item.html" class="overlay-link small">
-                                            <i class="fa fa-link"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-4 col-lg-6">
-                                    <div class="overlay-container mb-10">
-                                        <img src="/assets/frontend/images/gallery-3.jpg" alt="">
-                                        <a href="portfolio-item.html" class="overlay-link small">
-                                            <i class="fa fa-link"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-4 col-lg-6">
-                                    <div class="overlay-container mb-10">
-                                        <img src="/assets/frontend/images/gallery-4.jpg" alt="">
-                                        <a href="portfolio-item.html" class="overlay-link small">
-                                            <i class="fa fa-link"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-4 col-lg-6">
-                                    <div class="overlay-container mb-10">
-                                        <img src="/assets/frontend/images/gallery-5.jpg" alt="">
-                                        <a href="portfolio-item.html" class="overlay-link small">
-                                            <i class="fa fa-link"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-4 col-lg-6">
-                                    <div class="overlay-container mb-10">
-                                        <img src="/assets/frontend/images/gallery-6.jpg" alt="">
-                                        <a href="portfolio-item.html" class="overlay-link small">
-                                            <i class="fa fa-link"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                            {{ render(url('app_frontend_partial_game_play_image_index', {
+                                'template': 'frontend/game_play_image/_simpleList.html.twig',
+                                'paginate': 6,
+                                'sorting': {
+                                    'createdAt': 'desc'
+                                }} ))
+                            }}
                             <div class="text-right space-top">
                                 <a href="portfolio-grid-2-3-col.html" class="link-dark"><i class="fa fa-plus-circle pl-1 pr-1"></i>More</a>
                             </div>

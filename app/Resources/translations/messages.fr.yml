@@ -63,6 +63,7 @@ app:
         game_library: Ludothèque
         game_plays: Parties de jeu
         game_play_details: Informations de la partie
+        game_play_images: Photos de partie
         games: Jeux
         height: Hauteur
         icon_class: Classe de l'icône
@@ -76,6 +77,7 @@ app:
         introduction: Introduction
         in_the_boxes: C'est dans la boîte
         last_used_at: Dernière utilisation
+        latest_articles: Derniers articles
         less_commented_first: Moins commentés en premier
         lifetime_rating: Note de la durée de vie
         list_articles: Liste des articles

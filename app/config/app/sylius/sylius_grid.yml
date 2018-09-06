@@ -30,6 +30,7 @@ imports:
     - { resource: 'grids/frontend/festival_list_item.yml' }
     - { resource: 'grids/frontend/game_library.yml' }
     - { resource: 'grids/frontend/game_play.yml' }
+    - { resource: 'grids/frontend/game_play_image.yml' }
     - { resource: 'grids/frontend/game_play_from_author.yml' }
     - { resource: 'grids/frontend/most_played.yml' }
     - { resource: 'grids/frontend/person.yml' }
