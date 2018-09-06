@@ -1,0 +1,39 @@
+{% extends 'frontend/layout.html.twig' %}
+
+{% from 'macro/pagination.html.twig' import simple as pagination %}
+
+{% set pageTitle = 'app.ui.articles'| trans %}
+
+{% block content %}
+    {% include 'frontend/article/indexByTaxon/_banner.html.twig' %}
+
+    <!-- main-container start -->
+    <!-- ================ -->
+    <section class="main-container">
+
+        <div class="container">
+            <div class="row">
+
+                <!-- main start -->
+                <!-- ================ -->
+                <div id="article-list" class="main col-md-12">
+
+                    <!-- Articles start -->
+                    <!-- ============================================================================== -->
+                    <br>
+                    {% include 'frontend/article/index/_sorting.html.twig' %}
+                    {% include 'frontend/article/_list.html.twig' with { 'articles' : articles.data } %}
+
+                    <!-- pagination start -->
+                    {{ pagination(articles.data) }}
+                    <!-- pagination end -->
+                </div>
+                <!-- main end -->
+
+            </div>
+        </div>
+    </section>
+    <!-- main-container end -->
+
+    {% include 'frontend/article/index/_footerTop.html.twig' %}
+{% endblock content %}
