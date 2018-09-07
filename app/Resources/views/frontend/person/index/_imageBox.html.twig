@@ -3,17 +3,15 @@
 {% set personPath = path('app_frontend_person_show', { 'slug': person.slug }) %}
 {% set imagePath =  person.mainImage is not null ? person.mainImage.webPath : '/assets/frontend/images/placeholder.png' %}
 
-<div class="image-box style-2 mb-20 shadow-2 bordered light-gray-bg text-center">
-    <div class="overlay-container">
-        {{ images.render(imagePath, 'medium_width_fixed', person) }}
-        <div class="overlay-to-top">
-            <p class="small margin-clear"><em>App development <br> Lorem ipsum dolor sit</em></p>
+<div class="image-box style-2 mb-20 bordered light-gray-bg">
+    <div class="overlay-container overlay-visible">
+        {{ images.render(imagePath, 'magazine_item', person) }}
+        <div class="overlay-bottom text-left">
+            <p class="lead margin-clear">{{ person }}</p>
         </div>
     </div>
     <div class="body">
-        <h3>{{ person }}</h3>
-        <div class="separator"></div>
-        <p>
+        <p class="small mb-10 text-muted">
             {% if person.productCountAsDesigner > 0 %}
                 Auteur de {{ person.productCountAsDesigner }} jeux<br>
             {% endif %}
@@ -24,6 +22,6 @@
                 Éditeur de {{ person.productCountAsPublisher }} jeux<br>
             {% endif %}
         </p>
-        <a href="{{ personPath }}" class="btn btn-default-transparent btn-animation btn-animation--slide-horizontal margin-clear">{{ 'sylius.ui.view_more'|trans }}<i class="fa fa-arrow-right pl-10"></i></a>
+        <a href="{{ personPath }}" class="btn btn-default btn-sm rgin-clear">{{ 'sylius.ui.view_more'|trans }}<i class="fa fa-arrow-right pl-10"></i></a>
     </div>
 </div>
