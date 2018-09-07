@@ -308,9 +308,6 @@ label:
   duration: Durée
   duration_min: Durée min
   duration_max: Durée max
-  games: Jeux
-  headers: Entêtes
-  hello: Bonjour
   edit: Modifier
   edit_dealer: Modifier un vendeur
   edit_post: Modifier un message
@@ -319,6 +316,8 @@ label:
   file: Fichier
   first_name: Prénom
   games: Jeux
+  headers: Entêtes
+  hello: Bonjour
   home: Accueil
   image: Image
   image_position: Position de l'image

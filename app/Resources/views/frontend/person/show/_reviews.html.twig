@@ -2,6 +2,13 @@
 <div class="separator-2"></div>
 <!-- comments start -->
 <div class="comments margin-clear space-top">
+    {{ render(url('sylius_frontend_partial_person_review_latest', {'personId': person.id, 'template': 'frontend/product_review/_list.html.twig'})) }}
+
+    {#<a href="{{ path('sylius_frontend_product_review_index', {'slug': product.slug}) }}"#}
+       {#class="btn btn-transparent btn-sm rgin-clear">{{ 'sylius.ui.view_more'|trans }}#}
+        {#<i class="fa fa-arrow-right pl-10"></i>#}
+    {#</a>#}
+
     <!-- comment start -->
     <div class="comment clearfix">
         <div class="comment-avatar">

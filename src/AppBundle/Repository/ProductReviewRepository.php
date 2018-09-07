@@ -40,6 +40,36 @@ class ProductReviewRepository extends EntityRepository
     }
 
     /**
+     * @param $personId
+     * @param int $count
+     *
+     * @return array
+     */
+    public function findLatestByPersonId($personId, int $count): array
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        return $queryBuilder
+            ->join('o.reviewSubject', 'product')
+            ->leftJoin('product.designers', 'designer')
+            ->leftJoin('product.artists', 'artist')
+            ->leftJoin('product.publishers', 'publisher')
+            ->andWhere($queryBuilder->expr()->orX(
+                'designer = :personId',
+                'artist = :personId',
+                'publisher = :personId'
+            ))
+            ->andWhere('o.status = :status')
+            ->setParameter('personId', $personId)
+            ->setParameter('status', ReviewInterface::STATUS_ACCEPTED)
+            ->addOrderBy('o.createdAt', 'DESC')
+            ->setMaxResults($count)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    /**
      * @param string $localeCode
      * @param ProductInterface $product
      *
