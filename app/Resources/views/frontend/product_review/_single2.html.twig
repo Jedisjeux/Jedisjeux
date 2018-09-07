@@ -1,0 +1,25 @@
+{% import 'macro/image.html.twig' as images %}
+{% from 'macro/rating.html.twig' import rating %}
+
+{% set imagePath = product_review.reviewSubject.mainImage is not null ? product_review.reviewSubject.mainImage.webPath : '/assets/frontend/images/placeholder.png'  %}
+
+<!-- comment start -->
+<div class="comment clearfix">
+    <div class="comment-avatar">
+        {{ images.render(imagePath, 'small_width_fixed', product_review.reviewSubject.name) }}
+    </div>
+    <header>
+        <h3>{{ product_review.reviewSubject }}</h3>
+        <h4>{{ product_review.title }}</h4>
+        <div class="comment-meta">
+            {{ rating(product_review.rating) }} |
+            {{ product_review.createdAt|localizeddate('medium', 'none') }}
+        </div>
+    </header>
+    <div class="comment-content">
+        <div class="comment-body clearfix">
+            {{ product_review.comment|raw }}
+        </div>
+    </div>
+</div>
+<!-- comment end -->
