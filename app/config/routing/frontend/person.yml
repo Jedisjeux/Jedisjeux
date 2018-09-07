@@ -15,7 +15,7 @@ app_frontend_person_index_by_taxon:
     defaults:
         _controller: app.controller.person:indexByTaxonAction
         _sylius:
-            template: frontend/person/index.html.twig
+            template: frontend/person/indexByZone.html.twig
             section: frontend
             grid: app_frontend_person_from_taxon
             paginate: 16
