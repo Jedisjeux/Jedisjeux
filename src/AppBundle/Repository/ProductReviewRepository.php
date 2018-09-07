@@ -50,6 +50,7 @@ class ProductReviewRepository extends EntityRepository
         $queryBuilder = $this->createQueryBuilder('o');
 
         return $queryBuilder
+            ->distinct()
             ->join('o.reviewSubject', 'product')
             ->leftJoin('product.variants', 'variant')
             ->leftJoin('variant.designers', 'designer')
