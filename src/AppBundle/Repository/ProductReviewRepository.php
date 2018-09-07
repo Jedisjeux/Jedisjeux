@@ -51,9 +51,10 @@ class ProductReviewRepository extends EntityRepository
 
         return $queryBuilder
             ->join('o.reviewSubject', 'product')
-            ->leftJoin('product.designers', 'designer')
-            ->leftJoin('product.artists', 'artist')
-            ->leftJoin('product.publishers', 'publisher')
+            ->leftJoin('product.variants', 'variant')
+            ->leftJoin('variant.designers', 'designer')
+            ->leftJoin('variant.artists', 'artist')
+            ->leftJoin('variant.publishers', 'publisher')
             ->andWhere($queryBuilder->expr()->orX(
                 'designer = :personId',
                 'artist = :personId',
