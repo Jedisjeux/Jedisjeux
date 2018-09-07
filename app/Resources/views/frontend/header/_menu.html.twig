@@ -11,12 +11,20 @@
         <a href="{{ path('app_frontend_article_index') }}" class="nav-link dropdown-toggle" id="seventh-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Articles</a>
         <ul class="dropdown-menu" aria-labelledby="seventh-dropdown">
             <li ><a href="{{ path('app_frontend_article_index') }}">Tous</a></li>
+            {{  render(url('sylius_partial_taxon_index_by_code', {
+                'code': constant('AppBundle\\Entity\\Taxon::CODE_ARTICLE'),
+                'template': 'frontend/taxon/_listForArticles.html.twig'
+            })) }}
         </ul>
     </li>
     <li class="nav-item {% if 'product' == activeMenu %}active {% endif %}dropdown ">
         <a href="{{ path('sylius_frontend_product_index') }}" class="nav-link dropdown-toggle" id="sixth-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Jeux</a>
         <ul class="dropdown-menu" aria-labelledby="sixth-dropdown">
             <li ><a href="{{ path('sylius_frontend_product_index') }}">Tous</a></li>
+            {{  render(url('sylius_partial_taxon_index_by_code', {
+                'code': constant('AppBundle\\Entity\\Taxon::CODE_TARGET_AUDIENCE'),
+                'template': 'frontend/taxon/_listForProducts.html.twig'
+            })) }}
         </ul>
     </li>
     <li class="nav-item {% if 'game_play' == activeMenu %}active {% endif %}mega-menu mega-menu--wide">
