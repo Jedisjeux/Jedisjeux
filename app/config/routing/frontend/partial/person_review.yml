@@ -1,0 +1,13 @@
+sylius_frontend_partial_person_review_latest:
+    path: /latest-by-person/{count}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_review:indexAction
+        _sylius:
+            template: $template
+            repository:
+                method: findLatestByPersonId
+                arguments:
+                - $personId
+                - '!!int $count'
+        count: 3

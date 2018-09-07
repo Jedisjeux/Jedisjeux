@@ -14,6 +14,10 @@ app_frontend_partial_game_play_image:
     resource: 'partial/game_play_image.yml'
     prefix: /game-play-images
 
+sylius_frontend_partial_person_review:
+    resource: "partial/person_review.yml"
+    prefix: /people/{personId}/reviews
+
 sylius_frontend_partial_product:
     resource: "partial/product.yml"
     prefix: /products

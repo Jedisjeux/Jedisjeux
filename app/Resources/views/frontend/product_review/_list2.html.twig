@@ -1,0 +1,9 @@
+{% import 'macro/messages.html.twig' as messages %}
+
+{% if product_reviews|length > 0 %}
+    {% for product_review in product_reviews %}
+        {% include 'frontend/product_review/_single2.html.twig' %}
+    {% endfor %}
+{% else %}
+    {{ messages.info('sylius.ui.there_are_no_reviews') }}
+{% endif %}
