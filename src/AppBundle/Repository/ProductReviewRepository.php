@@ -27,9 +27,12 @@ class ProductReviewRepository extends EntityRepository
      */
     public function findLatestByProductId($productId, int $count): array
     {
-        return $this->createQueryBuilder('o')
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        return $queryBuilder
             ->andWhere('o.reviewSubject = :productId')
             ->andWhere('o.status = :status')
+            ->andWhere($queryBuilder->expr()->isNotNull('o.comment'))
             ->setParameter('productId', $productId)
             ->setParameter('status', ReviewInterface::STATUS_ACCEPTED)
             ->addOrderBy('o.createdAt', 'DESC')
@@ -62,6 +65,7 @@ class ProductReviewRepository extends EntityRepository
                 'publisher = :personId'
             ))
             ->andWhere('o.status = :status')
+            ->andWhere($queryBuilder->expr()->isNotNull('o.comment'))
             ->setParameter('personId', $personId)
             ->setParameter('status', ReviewInterface::STATUS_ACCEPTED)
             ->addOrderBy('o.createdAt', 'DESC')
