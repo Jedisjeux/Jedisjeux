@@ -56,17 +56,15 @@
                     </div>
                     <div class="col-lg-3">
                         <div class="footer-content">
-                            <h2 class="title">Find Us</h2>
+                            <h2 class="title">{{ 'sylius.ui.contact_us'|trans }}</h2>
                             <div class="separator-2"></div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium odio voluptatem necessitatibus illo vel dolorum soluta.</p>
                             <ul class="social-links circle animated-effect-1">
                                 {{ social_links.list() }}
                             </ul>
                             <div class="separator-2"></div>
-                            {{ sonata_block_render({'name': '/cms/content/head-office'}, {'template': 'frontend/content/block/block_content.html.twig'}) }}
                             <ul class="list-icons">
-                                <li><i class="fa fa-map-marker pr-2 text-default"></i> One infinity loop, 54100</li>
-                                <li><a href="mailto:jedisjeux@jedisjeux.net"><i class="fa fa-envelope-o pr-2"></i>jedisjeux@jedisjeux.net</a></li>
+                                <li><i class="fa fa-map-marker pr-2 text-default"></i> {{ sonata_block_render({'name': '/cms/content/head-office'}, {'template': 'frontend/content/block/simple.html.twig'}) }}</li>
+                                <li><a href="{{ path('app_frontend_contact_request_create') }}"><i class="fa fa-envelope-o pr-2"></i>{{ 'sylius.ui.contact_us'|trans }}</a></li>
                             </ul>
                         </div>
                     </div>

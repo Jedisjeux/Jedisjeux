@@ -25,7 +25,12 @@
                         </div>
                     </div>
                     <ul class="list-inline hidden-md-down">
-                        <li class="list-inline-item"><i class="fa fa-envelope-o pr-1 pl-2"></i> jedisjeux@jedisjeux.net</li>
+                        <li class="list-inline-item">
+                            <a href="{{ path('app_frontend_contact_request_create') }}">
+                                <i class="fa fa-envelope-o pr-1 pl-2"></i>
+                                {{ 'sylius.ui.contact_us'|trans }}
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <!-- header-top-first end -->
@@ -40,11 +45,11 @@
                     <!-- ================ -->
                     <div class="header-top-dropdown text-right">
                         <div class="btn-group">
-                            <a href="{{ path('app_frontend_register') }}" class="btn btn-default btn-sm"><i class="fa fa-user pr-2"></i> Sign Up</a>
+                            <a href="{{ path('app_frontend_register') }}" class="btn btn-default btn-sm"><i class="fa fa-user pr-2"></i> {{ 'sylius.ui.register'|trans }}</a>
                         </div>
                         {% if app.user is null %}
                             <div class="btn-group">
-                                <button id="header-top-drop-2" type="button" class="btn dropdown-toggle btn-default btn-sm dropdown-toggle--no-caret" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-lock pr-2"></i> Login</button>
+                                <button id="header-top-drop-2" type="button" class="btn dropdown-toggle btn-default btn-sm dropdown-toggle--no-caret" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-lock pr-2"></i> {{ 'sylius.ui.login'|trans }}</button>
                                 <ul class="dropdown-menu dropdown-menu-right dropdown-animation" aria-labelledby="header-top-drop-2">
                                     <li>
                                         {% include 'frontend/header/top/_loginForm.html.twig' %}
