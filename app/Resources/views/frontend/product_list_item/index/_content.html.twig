@@ -28,7 +28,7 @@
             <div class="row">
                 {% endif %}
                 <div class="col-md-3 col-sm-6">
-                    {% include "frontend/product/index/_imageBox.html.twig" with {'product': product_list_item.product} %}
+                    {% include "frontend/product/_single.html.twig" with {'product': product_list_item.product} %}
                 </div>
                 {% endfor %}
             </div>

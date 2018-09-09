@@ -9,6 +9,7 @@
         {% if product.mainImage is not null %}
             {{ images.render(product.mainImage.webPath, 'magazine_item_wide', product.name) }}
         {% endif %}
+        <a class="overlay-link" href="{{ gamePlayPath }}"><i class="fa fa-link"></i></a>
         <div class="overlay-bottom text-left">
             <p class="lead margin-clear">{{ product.name }}</p>
         </div>
