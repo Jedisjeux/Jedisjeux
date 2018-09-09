@@ -1,0 +1,30 @@
+{% import 'macro/image.html.twig' as images %}
+{% from 'macro/product.html.twig' import releasedAt, duration, playerCount %}
+{% from 'macro/rating.html.twig' import rating %}
+
+{% for product in products.data %}
+    {% set productPath = path('sylius_frontend_product_show', { 'slug': product.slug } ) %}
+
+    <div class="media margin-clear">
+        <div class="d-flex pr-2">
+            <div class="overlay-container">
+                {% if product.mainImage is not null %}
+                    {{ images.render(product.mainImage.webPath, 'medium_width_fixed', product.name, 'media-object') }}
+                {% endif %}
+                <a href="{{ productPath }}" class="overlay-link small"><i class="fa fa-link"></i></a>
+            </div>
+        </div>
+        <div class="media-body">
+            <h6 class="media-heading"><a href="{{ productPath }}">{{ product.name }}</a></h6>
+            {% if product.averageRating > 0 %}
+                <p class="margin-clear">
+                    {{ rating(product.averageRating) }}
+                </p>
+            {% endif %}
+            <p class="comment-meta">{{ playerCount(product) }}<br>à partir de {{ product.minAge }} ans</p>
+        </div>
+    </div>
+    {% if not loop.last %}
+        <hr>
+    {% endif %}
+{% endfor %}

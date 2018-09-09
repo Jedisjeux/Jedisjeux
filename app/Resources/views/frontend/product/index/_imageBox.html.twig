@@ -12,7 +12,7 @@
         <div class="overlay-to-top links">
                             <span class="small">
                               <a href="#" class="btn-sm-link"><i class="fa fa-heart-o pr-10"></i>Add to Wishlist</a>
-                              <a href="#" class="btn-sm-link"><i class="fa fa-link pr-1"></i>View Details</a>
+                              <a href="{{ productPath }}" class="btn-sm-link"><i class="fa fa-link pr-1"></i>{{ 'sylius.ui.view_product_details'|trans({'%product%': product.name|lower})}}</a>
                             </span>
         </div>
     </div>
