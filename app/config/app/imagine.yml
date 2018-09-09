@@ -60,7 +60,7 @@ liip_imagine:
             quality: 100
             filters:
                 auto_rotate: ~
-                relative_resize: { widen: 200 }
+                relative_resize: { widen: 120 }
         pub_banner:
             quality: 100
             filters:
