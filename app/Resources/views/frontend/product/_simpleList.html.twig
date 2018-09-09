@@ -2,7 +2,9 @@
 {% from 'macro/product.html.twig' import releasedAt, duration, playerCount %}
 {% from 'macro/rating.html.twig' import rating %}
 
-{% for product in products.data %}
+{% set products = products.data is defined ? products.data : products %}
+
+{% for product in products %}
     {% set productPath = path('sylius_frontend_product_show', { 'slug': product.slug } ) %}
 
     <div class="media margin-clear">
