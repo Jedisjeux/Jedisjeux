@@ -67,14 +67,6 @@
                             </div>
                         </header>
                         <div class="blogpost-content">
-
-                            <div class="overlay-container">
-                                {% if article.mainImage is not null %}
-                                    {{ images.render(article.mainImage.webPath, 'full', article.title) }}
-                                    <a class="overlay-link popup-img" href="{{ article.mainImage.webPath | imagine_filter(filter|default('full')) }}"><i class="fa fa-search-plus"></i></a>
-                                {% endif %}
-                            </div>
-
                             <big>
                                 {{ article.shortDescription|raw }}
                             </big>

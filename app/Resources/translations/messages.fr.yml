@@ -17,9 +17,11 @@ app:
         barcode: Code-barres
         barcodes: Code-barres
         blocks: Blocs
+        boardgame: Jeu de société
         boardgames: Jeux de société
         box: Encart
         catalog: Catalogue
+        categories: Catégories
         choose_category: Choisir une catégorie
         comment: Commentaire
         comments: Commentaires
@@ -78,6 +80,10 @@ app:
         in_the_boxes: C'est dans la boîte
         last_used_at: Dernière utilisation
         latest_articles: Derniers articles
+        latest_in_the_boxes: Derniers c'est dans la boîte
+        latest_news: Dernières actualités
+        latest_reviews: Dernières critiques
+        latest_videos: Dernières vidéos
         less_commented_first: Moins commentés en premier
         lifetime_rating: Note de la durée de vie
         list_articles: Liste des articles
@@ -105,6 +111,7 @@ app:
         material_rating: Note du matériel
         mechanisms: Mécanismes
         moderation: Modération
+        more: Plus
         most_commented_first: Plus commentés en premier
         move_up: Monter
         move_down: Descendre
