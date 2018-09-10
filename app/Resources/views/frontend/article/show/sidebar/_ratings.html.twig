@@ -1,0 +1,20 @@
+{% from 'macro/rating.html.twig' import rating %}
+
+<div class="block clearfix">
+    <div class="feature-box text-center object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+        <span class="icon default-bg circle"><i class="fa fa-star"></i></span>
+        <h3>{{ article.averageRating|round(1) }}/10</h3>
+        <div class="separator clearfix"></div>
+
+        <div class="text-left">
+            <span class="pull-right">{{ rating(article.materialRating) }}</span>
+            <h4 class="media-heading">Matériel</h4>
+
+            <span class="pull-right">{{ rating(article.rulesRating) }}</span>
+            <h4 class="media-heading">Règles</h4>
+
+            <span class="pull-right">{{ rating(article.lifetimeRating) }}</span>
+            <h4 class="media-heading">Durée de vie</h4>
+        </div>
+    </div>
+</div>
