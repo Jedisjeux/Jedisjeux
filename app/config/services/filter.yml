@@ -19,6 +19,13 @@ services:
                 name: sylius.grid_filter
                 type: frontend_between_two_fields
                 form_type: AppBundle\Form\Filter\IntegerFilterType
+    app.grid.filter.frontend_greater_than_or_equal:
+        class: AppBundle\Grid\Filter\GreaterThanOrEqualFilter
+        tags:
+            -
+                name: sylius.grid_filter
+                type: frontend_greater_than_or_equal
+                form_type: AppBundle\Form\Filter\IntegerFilterType
     app.grid.filter.less_than_or_equal:
         class: AppBundle\Grid\Filter\LessThanOrEqualFilter
         tags:
