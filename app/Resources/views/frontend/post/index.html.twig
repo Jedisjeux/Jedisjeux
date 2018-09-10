@@ -9,52 +9,8 @@
 
         <div class="container">
             <div class="row">
-
-                <!-- main start -->
-                <!-- ================ -->
-                <div class="main col-lg-8">
-
-                    <!-- page-title start -->
-                    <!-- ================ -->
-                    <h1 class="page-title">{{ topic.title }}</h1>
-                    <!-- page-title end -->
-
-                    <!-- blogpost start -->
-                    <!-- ================ -->
-                    <article class="blogpost full">
-                        <header>
-                            <div class="post-info mb-4">
-                    <span class="post-date">
-                        <i class="fa fa-calendar-o pr-1"></i>
-                        {{ topic.createdAt|localizeddate('medium', 'none') }}
-                    </span>
-                                <span class="submitted"><i class="fa fa-user pr-1 pl-1"></i> by <a href="#">{{ topic.author }}</a></span>
-                                <span class="comments"><i class="fa fa-comments-o pl-1 pr-1"></i> <a href="#">{{ topic.postCount }} comments</a></span>
-                            </div>
-                        </header>
-                        <div class="blogpost-content">
-                            {{ topic.mainPost.body|raw }}
-                        </div>
-                        <footer class="clearfix">
-                            <div class="tags pull-left"><i class="fa fa-tags pr-1"></i> <a href="#">{{ topic.mainTaxon }}</a></div>
-                            <div class="link pull-right">
-                                <ul class="social-links circle small colored clearfix margin-clear text-right animated-effect-1">
-                                    <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li class="googleplus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                    <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                </ul>
-                            </div>
-                        </footer>
-                    </article>
-                    <!-- blogpost end -->
-
-                    {% include 'frontend/post/index/_comments.html.twig' %}
-
-                </div>
-                <!-- main end -->
-
+                {% include 'frontend/post/index/_main.html.twig' %}
                 {% include 'frontend/post/index/_sidebar.html.twig' %}
-
             </div>
         </div>
     </section>
