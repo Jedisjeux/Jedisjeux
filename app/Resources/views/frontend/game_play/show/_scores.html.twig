@@ -1,0 +1,37 @@
+{% import 'macro/image.html.twig' as images %}
+
+{% if game_play.players|length > 0 %}
+    <!-- scores section start -->
+    <!-- ================ -->
+    <section class="pv-30">
+        <div class="container">
+            <div class="col-lg-8">
+                <h3>Scores</h3>
+                <div class="separator-2"></div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>{{ 'sylius.ui.name'|trans }}</th>
+                            <th>{{ 'app.ui.score'|trans }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for player in game_play.players %}
+                            {% set customer = player.customer %}
+                            {% set avatarPath = customer is not null and customer.avatar is not null ? customer.avatar.webPath : '/assets/frontend/images/avatar-placeholder.png'  %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ player.name }}</td>
+                                <td>{{ player.score }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- scores section end -->
+{% endif %}

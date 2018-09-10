@@ -63,9 +63,11 @@ app:
         game: Jeu
         game_details: Informations du jeu
         game_library: Ludothèque
+        game_specifications: Spécifications du jeu
         game_plays: Parties de jeu
         game_play_details: Informations de la partie
         game_play_images: Photos de partie
+        game_play_specifications: Spécifications de la partie
         games: Jeux
         height: Hauteur
         icon_class: Classe de l'icône
@@ -171,6 +173,7 @@ app:
         reviewer: Relecteur
         review_articles: Tests de jeu
         rules_rating: Note des règles
+        score: Score
         see_later: A regarder plus tard
         select_people: Sélectionner les personnes
         session_count: Nombre de sessions
