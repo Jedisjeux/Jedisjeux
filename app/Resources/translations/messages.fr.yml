@@ -7,6 +7,7 @@ app:
         add_review_article: Créer un test de jeu
         added_at: Date d'ajout
         age: Âge
+        age_in_year: Âge en année
         article: Article
         article_manager: Gestionnaire d'articles
         articles: Articles
@@ -40,6 +41,7 @@ app:
         designer: Auteur
         destination: Destination
         duration: Durée
+        duration_in_minute: Durée en minute
         edit_article: Modifier l'article
         edit_dealer: Modifier le vendeur
         edit_dealer_price: Modifier le tarif du vendeur
@@ -112,7 +114,9 @@ app:
         manage_string_blocks: Gérer les blocs de chaîne
         manage_topics: Gérer les sujets
         material_rating: Note du matériel
+        max_duration: Durée max
         mechanisms: Mécanismes
+        min_duration: Durée min
         moderation: Modération
         more: Plus
         most_commented_first: Plus commentés en premier

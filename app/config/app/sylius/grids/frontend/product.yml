@@ -38,9 +38,16 @@ sylius_grid:
                     type: frontend_less_than_or_equal
                     form_options:
                         label: 'app.ui.age'
-                        placeholder: 'Pouvant être joué à (en année)'
+                        placeholder: 'app.ui.age_in_year'
                 minDuration:
-                    type: frontend_less_than_or_equal
+                    type: frontend_greater_than_or_equal
                     form_options:
-                        label: 'app.ui.duration'
-                        placeholder: 'Durée inférieure à (en minute)'
+                        label: 'app.ui.min_duration'
+                        placeholder: 'app.ui.duration_in_minute'
+                maxDuration:
+                    type: frontend_less_than_or_equal
+                    options:
+                        field: o.minDuration
+                    form_options:
+                        label: 'app.ui.max_duration'
+                        placeholder: 'app.ui.duration_in_minute'

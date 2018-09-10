@@ -8,15 +8,15 @@
             <div class="separator clearfix"></div>
             <div class="text-left">
                 {% if article.materialRating > 0 %}
-                    <span class="pull-right">{{ rating(article.materialRating) }}</span>
+                    <span class="pull-right">{{ rating(article.materialRating*2) }}</span>
                     <h4 class="media-heading">Matériel</h4>
                 {% endif %}
                 {% if article.rulesRating > 0 %}
-                    <span class="pull-right">{{ rating(article.rulesRating) }}</span>
+                    <span class="pull-right">{{ rating(article.rulesRating*2) }}</span>
                     <h4 class="media-heading">Règles</h4>
                 {% endif %}
                 {% if article.lifetimeRating > 0 %}
-                    <span class="pull-right">{{ rating(article.lifetimeRating) }}</span>
+                    <span class="pull-right">{{ rating(article.lifetimeRating*2) }}</span>
                     <h4 class="media-heading">Durée de vie</h4>
                 {% endif %}
             </div>
