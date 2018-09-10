@@ -1,0 +1,7 @@
+{% for child in taxons %}
+    <li class="nav-item">
+        <a class="nav-link{% if current is not null and current.slug == child.slug %} active{% endif %}"
+           href="{{ path('app_frontend_topic_index_by_taxon', { 'slug': child.slug }) }}">{{ child.name }}
+        </a>
+    </li>
+{% endfor %}

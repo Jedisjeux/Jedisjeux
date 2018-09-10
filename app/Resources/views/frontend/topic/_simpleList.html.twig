@@ -1,0 +1,29 @@
+{% import 'macro/image.html.twig' as images %}
+
+{% set topics = topics.data is defined ? topics.data : topics %}
+
+{% for topic in topics %}
+    {% set avatarPath = topic.author.avatar is not null ? topic.author.avatar.webPath : '/assets/frontend/images/avatar-placeholder.png'  %}
+    {% set topicPath = path('app_frontend_post_index_by_topic', { 'topicId': topic.id }) %}
+
+    <div class="media margin-clear">
+        <div class="d-flex pr-2">
+            <div class="overlay-container">
+                {{ images.render(avatarPath, 'thumbnail', topic.author, 'rounded-circle media-object') }}
+                <a href="{{ topicPath }}" class="overlay-link small"><i class="fa fa-link"></i></a>
+            </div>
+        </div>
+        <div class="media-body">
+            <h6 class="media-heading"><a href="{{ topicPath }}">{{ topic.title }}</a></h6>
+            <p class="small mb-10 text-muted">
+                <i class="fa fa-calendar pr-1"></i> {{ topic.createdAt|localizeddate('short', 'none') }}
+                {% if topic.mainTaxon %}
+                    <i class="pl-10 pr-1 fa fa-tag"></i>{{ topic.mainTaxon.name }}
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    {% if not loop.last %}
+        <hr>
+    {% endif %}
+{% endfor %}
