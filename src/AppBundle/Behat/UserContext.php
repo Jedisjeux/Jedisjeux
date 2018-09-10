@@ -31,7 +31,7 @@ class UserContext extends DefaultContext
         $this->visitPath("/login");
         $this->fillField("Nom d'utilisateur ou email", $username);
         $this->fillField('Mot de passe', $password);
-        $this->pressButton('Connexion');
+        $this->pressButton('_login');
     }
 
     /**
