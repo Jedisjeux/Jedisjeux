@@ -34,6 +34,7 @@ sylius_grid:
                             second: maxPlayerCount
                     form_options:
                         label: 'app.ui.player_count'
+                        placeholder: 'app.ui.player_count'
                 minAge:
                     type: frontend_less_than_or_equal
                     form_options:

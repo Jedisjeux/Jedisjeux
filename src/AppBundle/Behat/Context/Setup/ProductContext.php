@@ -83,6 +83,8 @@ class ProductContext implements Context
             'designers' => [],
             'artists' => [],
             'publishers' => [],
+            'min_duration' => null,
+            'max_duration' => null,
         ]);
 
         $this->productRepository->add($product);
@@ -149,6 +151,15 @@ class ProductContext implements Context
     {
         $product->getFirstVariant()->addArtist($person);
         $this->manager->flush($product->getFirstVariant());
+    }
+
+    /**
+     * @Given /^(this product) takes (\d+) minutes$/
+     */
+    public function productTakesMinutes(Product $product, int $minDuration)
+    {
+        $product->setMinDuration($minDuration);
+        $this->manager->flush($product);
     }
 
     /**

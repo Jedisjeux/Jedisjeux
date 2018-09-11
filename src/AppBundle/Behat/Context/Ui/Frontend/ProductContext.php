@@ -275,6 +275,26 @@ class ProductContext implements Context
     }
 
     /**
+     * @When /^I view products with duration up to (\d+) minutes$/
+     */
+    public function iViewFilteredProductsWithDurationUpToMinutes(int $minutes)
+    {
+        $criteria = ['minDuration' => ['value' => $minutes]];
+
+        $this->indexPage->open(['criteria' => $criteria]);
+    }
+
+    /**
+     * @When /^I view products with duration less than (\d+) minutes$/
+     */
+    public function iViewFilteredProductsWithDurationLessThanMinutes(int $minutes)
+    {
+        $criteria = ['maxDuration' => ['value' => $minutes]];
+
+        $this->indexPage->open(['criteria' => $criteria]);
+    }
+
+    /**
      * @Then I should see :count product reviews
      */
     public function iShouldSeeProductReviews($count)
