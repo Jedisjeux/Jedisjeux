@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        ui_viewing_articles_on_homepage:
+            contexts_services:
+                - app.behat.context.hook.doctrine_orm
+
+                - app.behat.context.transform.customer
+
+                - app.behat.context.setup.article
+                - app.behat.context.setup.taxon
+
+                - app.behat.context.ui.frontend.homepage
+            filters:
+                tags: "@viewing_articles_on_homepage && @ui"

@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace AppBundle\Behat\Page\Frontend;
 
 use Behat\Mink\Element\NodeElement;
-use Behat\Mink\Exception\UnsupportedDriverActionException;
 use AppBundle\Behat\Page\SymfonyPage;
 
 class HomePage extends SymfonyPage
@@ -28,110 +27,44 @@ class HomePage extends SymfonyPage
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
-    public function getContents()
+    public function getContents(): string
     {
         return $this->getDocument()->getContent();
     }
 
     /**
-     * {@inheritdoc}
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
      */
-    public function logOut()
+    public function logOut(): void
     {
         $this->getElement('logout_button')->click();
     }
 
     /**
-     * {@inheritdoc}
+     * @return bool
      */
-    public function hasLogoutButton()
+    public function hasLogoutButton(): bool
     {
         return $this->hasElement('logout_button');
     }
 
     /**
-     * {@inheritdoc}
+     * @return array
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
      */
-    public function getFullName()
-    {
-        return $this->getElement('full_name')->getText();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getActiveCurrency()
-    {
-        return $this->getElement('currency_selector')->find('css', '.sylius-active-currency')->getText();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAvailableCurrencies()
+    public function getLatestArticlesTitles(): array
     {
         return array_map(
             function (NodeElement $element) {
                 return $element->getText();
             },
-            $this->getElement('currency_selector')->findAll('css', '.sylius-available-currency')
-        );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function switchCurrency($currencyCode)
-    {
-        try {
-            $this->getElement('currency_selector')->click(); // Needed for javascript scenarios
-        } catch (UnsupportedDriverActionException $exception) {
-        }
-
-        $this->getElement('currency_selector')->clickLink($currencyCode);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getActiveLocale()
-    {
-        return $this->getElement('locale_selector')->find('css', '.sylius-active-locale')->getText();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAvailableLocales()
-    {
-        return array_map(
-            function (NodeElement $element) {
-                return $element->getText();
-            },
-            $this->getElement('locale_selector')->findAll('css', '.sylius-available-locale')
-        );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function switchLocale($localeCode)
-    {
-        $this->getElement('locale_selector')->clickLink($localeCode);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getLatestProductsNames()
-    {
-        return array_map(
-            function (NodeElement $element) {
-                return $element->getText();
-            },
-            $this->getDocument()->findAll('css', '.sylius-product-name')
+            array_merge(
+                $this->getElement('latest_articles')->findAll('css', '.lead'),
+                $this->getElement('latest_articles')->findAll('css', 'h6')
+            )
         );
     }
 
@@ -141,10 +74,8 @@ class HomePage extends SymfonyPage
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'currency_selector' => '#sylius-currency-selector',
-            'locale_selector' => '#sylius-locale-selector',
+            'latest_articles' => '#latest-articles',
             'logout_button' => '.app-logout-button',
-            'full_name' => '.right.menu .item',
         ]);
     }
 }

@@ -66,7 +66,9 @@ class ArticleContext implements Context
 
     /**
      * @Given there is an article :title written by :customer
+     * @Given there is also an article :title written by :customer
      * @Given there is an article :title written by :customer, published at :date
+     * @Given there is also an article :title written by :customer, published at :date
      *
      * @param string $title
      */
