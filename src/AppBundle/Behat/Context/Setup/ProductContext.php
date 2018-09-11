@@ -154,6 +154,16 @@ class ProductContext implements Context
     }
 
     /**
+     * @Given /^(this product) is published by ("[^"]+" person)$/
+     * @Given /^(this product) is also published by ("[^"]+" person)$/
+     */
+    public function productHasPublisher(Product $product, Person $person)
+    {
+        $product->getFirstVariant()->addPublisher($person);
+        $this->manager->flush($product->getFirstVariant());
+    }
+
+    /**
      * @Given /^(this product) takes (\d+) minutes$/
      */
     public function productTakesMinutes(Product $product, int $minDuration)
@@ -163,12 +173,31 @@ class ProductContext implements Context
     }
 
     /**
-     * @Given /^(this product) is published by ("[^"]+" person)$/
-     * @Given /^(this product) is also published by ("[^"]+" person)$/
+     * @Given /^(this product) can be played from (\d+) years$/
      */
-    public function productHasPublisher(Product $product, Person $person)
+    public function productCanBePlayedFromAge(Product $product, int $minAge)
     {
-        $product->getFirstVariant()->addPublisher($person);
-        $this->manager->flush($product->getFirstVariant());
+        $product->setMinAge($minAge);
+        $this->manager->flush($product);
+    }
+
+    /**
+     * @Given /^(this product) can be played from (\d+) to (\d+) players$/
+     */
+    public function productCanBePlayedFromToPlayers(Product $product, int $minPlayerCount, int $maxPlayerCount)
+    {
+        $product->setMinPlayerCount($minPlayerCount);
+        $product->setMaxPlayerCount($maxPlayerCount);
+        $this->manager->flush($product);
+    }
+
+    /**
+     * @Given /^(this product) can only be played with (\d+) players$/
+     */
+    public function productCanOnlyBePlayedWithPlayerCount(Product $product, int $playerCount)
+    {
+        $product->setMinPlayerCount($playerCount);
+        $product->setMaxPlayerCount($playerCount);
+        $this->manager->flush($product);
     }
 }

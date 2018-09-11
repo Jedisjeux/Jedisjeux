@@ -295,6 +295,26 @@ class ProductContext implements Context
     }
 
     /**
+     * @When /^I view products with age up to (\d+) years$/
+     */
+    public function iViewFilteredProductsWithAgeUpToYears(int $years)
+    {
+        $criteria = ['minAge' => ['value' => $years]];
+
+        $this->indexPage->open(['criteria' => $criteria]);
+    }
+
+    /**
+     * @When /^I view products which can be played with (\d+) players$/
+     */
+    public function iViewFilteredProductsByPlayerCount(int $playerCount)
+    {
+        $criteria = ['playerCount' => ['value' => $playerCount]];
+
+        $this->indexPage->open(['criteria' => $criteria]);
+    }
+
+    /**
      * @Then I should see :count product reviews
      */
     public function iShouldSeeProductReviews($count)
