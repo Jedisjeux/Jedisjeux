@@ -1,0 +1,13 @@
+<!-- breadcrumb start -->
+<!-- ================ -->
+<div class="breadcrumb-container">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><i class="fa fa-home pr-2"></i><a class="link-dark" href="{{ path('app_homepage') }}">{{ 'sylius.ui.home'|trans }}</a></li>
+            <li class="breadcrumb-item"><a class="link-dark" href="{{ path('sylius_frontend_account_dashboard') }}">{{ 'sylius.ui.my_account'|trans }}</a></li>
+            <li class="breadcrumb-item"><a class="link-dark" href="{{ path('app_frontend_account_product_list_index') }}">{{ 'app.ui.my_game_lists'|trans }}</a></li>
+            <li class="breadcrumb-item active">{{ pageTitle }}</li>
+        </ol>
+    </div>
+</div>
+<!-- breadcrumb end -->

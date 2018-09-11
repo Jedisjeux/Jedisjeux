@@ -11,5 +11,7 @@
 {% endblock %}
 
 {% block content -%}
+    {% include 'frontend/account/product_list_item/index/_banner.html.twig' %}
+
     {% include 'frontend/product_list_item/index/_content.html.twig' with {'indexPath': 'app_frontend_account_product_list_item_index'} %}
 {% endblock %}

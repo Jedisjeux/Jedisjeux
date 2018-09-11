@@ -80,6 +80,7 @@ class ProductList implements ResourceInterface
      * @var Collection
      *
      * @ORM\OneToMany(targetEntity="ProductListItem", mappedBy="list", cascade={"all"})
+     * @ORM\OrderBy({"createdAt" = "ASC"})
      */
     protected $items;
 
