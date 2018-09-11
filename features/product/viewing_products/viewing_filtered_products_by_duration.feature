@@ -1,8 +1,8 @@
 @viewing_products
-Feature: Filtering listed products
+Feature: Filtering listed products by duration
     In order to search products matching my needs
     As a Customer
-    I want to be able to filter products
+    I want to be able to filter products by duration
 
     Background:
         Given there is a product "Shogun"
