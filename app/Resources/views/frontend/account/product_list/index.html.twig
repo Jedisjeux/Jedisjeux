@@ -1,5 +1,7 @@
 {% extends 'frontend/layout.html.twig' %}
 
+{% from 'macro/pagination.html.twig' import simple as pagination %}
+
 {% set pageTitle %}
     {{ 'app.ui.my_game_lists'|trans }}
 {% endset %}
@@ -24,9 +26,10 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="container">
-    {% include 'frontend/product_list/index/_content.html.twig' with {'targetPath': 'app_frontend_account_product_list_item_index'} %}
-                        </div>
+                        {% include 'frontend/product_list/index/_content.html.twig' with {'targetPath': 'app_frontend_account_product_list_item_index'} %}
+                        <!-- pagination start -->
+                        {{ pagination(product_lists) }}
+                        <!-- pagination end -->
                     </div>
                 </div>
             </div>

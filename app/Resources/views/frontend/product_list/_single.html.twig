@@ -1,0 +1,38 @@
+{% import 'macro/image.html.twig' as images %}
+{% from 'macro/product.html.twig' import releasedAt, duration, playerCount %}
+
+{% set lastProduct = product_list.lastProduct %}
+{% set productListPath = path(targetPath|default('app_frontend_product_list_item_index'), {'productListSlug': product_list.slug}) %}
+
+<div class="image-box style-2 mb-20 bordered light-gray-bg">
+    <div class="overlay-container overlay-visible">
+        {% if lastProduct and lastProduct.mainImage %}
+            {{ images.render(lastProduct.mainImage.webPath, 'magazine_item_wide', product_list.name) }}
+            <a href="{{ productListPath }}" class="overlay-link"><i class="fa fa-link"></i></a>
+        {% endif %}
+        <div class="overlay-bottom text-left">
+            <p class="lead margin-clear">{{ product_list.name }}</p>
+        </div>
+    </div>
+    <div class="body">
+        <p class="small mb-10 text-muted">
+            <i class="fa fa-calendar-o pr-1"></i> {{ product_list.createdAt|localizeddate('medium', 'none') }}
+            <i class="pl-10 pr-1 fa fa-cubes"></i> {{ product_list.items|length }} {{ 'app.ui.games'|trans }}
+        </p>
+        <a href="{{ productListPath }}" class="btn btn-default btn-sm margin-clear">{{ 'sylius.ui.view_more'|trans }}<i class="fa fa-arrow-right pl-10"></i></a>
+    </div>
+</div>
+
+
+{#<!-- Image Box #3 Item -->#}
+{#<div class="img-box-3-item product-list-item">#}
+    {#<div class="img-box-3-icon bg-{{ color }}">#}
+        {#{% if lastProduct and lastProduct.mainImage %}#}
+            {#<a href="{{ productListPath }}">#}
+                {#{{ image(lastProduct.mainImage.webPath, 'thumbnail_XL', lastProduct.name, 'img-round') }}#}
+            {#</a>#}
+        {#{% endif %}#}
+    {#</div>#}
+    {#<h4><a href="{{ productListPath }}">{{ product_list.name }}</a></h4>#}
+    {#<div class="bor bg-{{ color }}"></div>#}
+{#</div>#}
