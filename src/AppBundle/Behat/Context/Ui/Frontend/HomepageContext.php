@@ -32,8 +32,9 @@ class HomepageContext implements Context
 
     /**
      * @When I check latest articles
+     * @When I check most popular articles
      */
-    public function iCheckLatestArticles()
+    public function iCheckArticles()
     {
         $this->homePage->open();
     }
@@ -60,5 +61,29 @@ class HomepageContext implements Context
     public function iShouldNotSeeTheArticleInTheLatestArticlesList($title)
     {
         Assert::false(in_array($title, $this->homePage->getLatestArticlesTitles()));
+    }
+
+    /**
+     * @Then I should see :numberOfArticles articles in the most popular articles list
+     */
+    public function iShouldSeeArticlesInTheMostPopularArticlesList($numberOfArticles)
+    {
+        Assert::same(count($this->homePage->getMostPopularArticlesTitles()), (int) $numberOfArticles);
+    }
+
+    /**
+     * @Then I should see the article :title in the most popular articles list
+     */
+    public function iShouldSeeTheArticleInTheMostPopularArticlesList($title)
+    {
+        Assert::true(in_array($title, $this->homePage->getMostPopularArticlesTitles()));
+    }
+
+    /**
+     * @Then I should not see the article :title in the most popular articles list
+     */
+    public function iShouldNotSeeTheArticleInTheMostPopularArticlesList($title)
+    {
+        Assert::false(in_array($title, $this->homePage->getMostPopularArticlesTitles()));
     }
 }

@@ -140,4 +140,13 @@ class ArticleContext implements Context
         $article->setMainTaxon($category);
         $this->manager->flush($article);
     }
+
+    /**
+     * @Given /^(this article) has been viewed (\d+) times$/
+     */
+    public function articleHasViewCount(Article $article, int $viewCount)
+    {
+        $article->setViewCount($viewCount);
+        $this->manager->flush($article);
+    }
 }

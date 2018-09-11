@@ -69,6 +69,24 @@ class HomePage extends SymfonyPage
     }
 
     /**
+     * @return array
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     */
+    public function getMostPopularArticlesTitles(): array
+    {
+        return array_map(
+            function (NodeElement $element) {
+                return $element->getText();
+            },
+            array_merge(
+                $this->getElement('most_popular_articles')->findAll('css', '.lead'),
+                $this->getElement('most_popular_articles')->findAll('css', 'h6')
+            )
+        );
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getDefinedElements()
@@ -76,6 +94,7 @@ class HomePage extends SymfonyPage
         return array_merge(parent::getDefinedElements(), [
             'latest_articles' => '#latest-articles',
             'logout_button' => '.app-logout-button',
+            'most_popular_articles' => '#most-popular-articles',
         ]);
     }
 }
