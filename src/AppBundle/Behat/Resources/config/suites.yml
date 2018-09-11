@@ -12,6 +12,7 @@ imports:
     - suites/ui/dealer/managing_dealers.yml
     - suites/ui/dealer/managing_dealer_prices.yml
     - suites/ui/festival_list/managing_festival_lists.yml
+    - suites/ui/homepage/viewing_articles.yml
     - suites/ui/person/managing_people.yml
     - suites/ui/person/viewing_people.yml
     - suites/ui/product/adding_game_play_comments.yml

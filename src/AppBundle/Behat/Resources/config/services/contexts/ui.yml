@@ -121,12 +121,12 @@ services:
             - { name: fob.context_service }
 
     app.behat.context.ui.backend.managing_festival_lists:
-      class: AppBundle\Behat\Context\Ui\Backend\ManagingFestivalListsContext
-      arguments:
-          - "@app.behat.page.backend.festival_list.index"
-          - "@app.behat.page.backend.festival_list.create"
-      tags:
-          - { name: fob.context_service }
+        class: AppBundle\Behat\Context\Ui\Backend\ManagingFestivalListsContext
+        arguments:
+            - "@app.behat.page.backend.festival_list.index"
+            - "@app.behat.page.backend.festival_list.create"
+        tags:
+            - { name: fob.context_service }
 
     app.behat.context.ui.backend.notification:
         class: AppBundle\Behat\Context\Ui\Backend\NotificationContext
@@ -186,22 +186,29 @@ services:
     app.behat.context.ui.frontend.game_play_post:
         class: AppBundle\Behat\Context\Ui\Frontend\GamePlayPostContext
         arguments:
-        - "@app.behat.page.frontend.post.create_for_game_play"
-        - "@app.behat.page.frontend.post.update_for_game_play"
-        - "@app.behat.page.frontend.game_play.show"
+            - "@app.behat.page.frontend.post.create_for_game_play"
+            - "@app.behat.page.frontend.post.update_for_game_play"
+            - "@app.behat.page.frontend.game_play.show"
         tags:
-        - { name: fob.context_service }
+            - { name: fob.context_service }
+
+    app.behat.context.ui.frontend.homepage:
+        class: AppBundle\Behat\Context\Ui\Frontend\HomepageContext
+        arguments:
+            - "@app.behat.page.frontend.home"
+        tags:
+            - { name: fob.context_service }
 
     app.behat.context.ui.frontend.login:
         class: AppBundle\Behat\Context\Ui\Frontend\LoginContext
         arguments:
-        - "@app.behat.page.frontend.home"
-        - "@app.behat.page.frontend.account.login"
-        - "@app.behat.page.frontend.account.register"
-        - "@app.behat.page.frontend.account.reset_password"
-        - "@app.behat.notification_checker"
+            - "@app.behat.page.frontend.home"
+            - "@app.behat.page.frontend.account.login"
+            - "@app.behat.page.frontend.account.register"
+            - "@app.behat.page.frontend.account.reset_password"
+            - "@app.behat.notification_checker"
         tags:
-        - { name: fob.context_service }
+            - { name: fob.context_service }
 
     app.behat.context.ui.frontend.notification:
         class: AppBundle\Behat\Context\Ui\Frontend\NotificationContext
