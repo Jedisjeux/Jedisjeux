@@ -7,33 +7,28 @@
 {% endset %}
 
 {% block content %}
-<!-- main-container start -->
-<!-- ================ -->
-<section class="main-container">
+    {% include 'frontend/account/product_list/index/_banner.html.twig' %}
 
-    <div class="container">
-        <div class="row">
+    <!-- main-container start -->
+    <!-- ================ -->
+    <section class="main-container">
 
-            <!-- main start -->
-            <!-- ================ -->
-            <div class="main col-md-12">
+        <div class="container">
+            <div class="row">
 
-                <!-- page-title start -->
+                <!-- main start -->
                 <!-- ================ -->
-                <h1 class="page-title">{{ pageTitle }}</h1>
-                <div class="separator-2"></div>
-                <!-- page-title end -->
-
-                <div class="row">
-                    <div class="col-md-12">
-                        {% include 'frontend/product_list/index/_content.html.twig' with {'targetPath': 'app_frontend_account_product_list_item_index'} %}
-                        <!-- pagination start -->
-                        {{ pagination(product_lists) }}
-                        <!-- pagination end -->
+                <div class="main col-md-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            {% include 'frontend/product_list/index/_content.html.twig' with {'targetPath': 'app_frontend_account_product_list_item_index'} %}
+                            <!-- pagination start -->
+                            {{ pagination(product_lists) }}
+                            <!-- pagination end -->
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 {% endblock content %}
