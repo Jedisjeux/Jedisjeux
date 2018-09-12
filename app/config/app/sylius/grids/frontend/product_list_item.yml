@@ -15,3 +15,34 @@ sylius_grid:
                 createdAt:
                     type: twig
                     sortable: ~
+            filters:
+                playerCount:
+                    type: frontend_between_two_fields
+                    options:
+                        fields:
+                            first: product.minPlayerCount
+                            second: product.maxPlayerCount
+                    form_options:
+                        label: 'app.ui.player_count'
+                        placeholder: 'app.ui.player_count'
+                minAge:
+                    type: frontend_less_than_or_equal
+                    options:
+                        field: product.minAge
+                    form_options:
+                        label: 'app.ui.age'
+                        placeholder: 'app.ui.age_in_year'
+                minDuration:
+                    type: frontend_greater_than_or_equal
+                    options:
+                        field: product.minDuration
+                    form_options:
+                        label: 'app.ui.min_duration'
+                        placeholder: 'app.ui.duration_in_minute'
+                maxDuration:
+                    type: frontend_less_than_or_equal
+                    options:
+                        field: product.minDuration
+                    form_options:
+                        label: 'app.ui.max_duration'
+                        placeholder: 'app.ui.duration_in_minute'
