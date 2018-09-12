@@ -1,45 +1,19 @@
+{% set definition = resources.definition %}
+
 <!-- section start -->
 <!-- ================ -->
 <div class="light-translucent-bg section">
     <div class="container-fluid">
         <!-- filters start -->
         <div class="sorting-filters text-center mb-20 d-flex justify-content-center">
-            <form class="form-inline">
-                <div class="form-group">
-                    <label>Sort by</label>
-                    <select class="form-control">
-                        <option selected="selected">Date</option>
-                        <option>Price</option>
-                        <option>Model</option>
-                    </select>
-                </div>
+            <form class="form-inline" method="get">
+                {% for filter in definition.filters %}
+                    {{ sylius_grid_render_filter(resources, filter) }}
+                {% endfor %}
                 <div class="form-group ml-1">
-                    <label>Order</label>
-                    <select class="form-control">
-                        <option selected="selected">Asc</option>
-                        <option>Desc</option>
-                    </select>
-                </div>
-                <div class="form-group ml-1">
-                    <label>Type</label>
-                    <select class="form-control">
-                        <option selected="selected">Tous</option>
-                        <option>Auteur</option>
-                        <option>Illustrateur</option>
-                        <option>Editeur</option>
-                    </select>
-                </div>
-                <div class="form-group ml-1">
-                    <label>Zone géographique</label>
-                    <select class="form-control">
-                        <option selected="selected">Toutes</option>
-                        <option>Europe</option>
-                        <option>Amérique</option>
-                        <option>Asie</option>
-                    </select>
-                </div>
-                <div class="form-group ml-1">
-                    <a href="#" class="btn btn-default">Submit</a>
+                    <button type="submit" class="btn btn-default">
+                        <span class="fa fa-search"></span>
+                        {{ 'sylius.ui.search'|trans }}</button>
                 </div>
             </form>
         </div>

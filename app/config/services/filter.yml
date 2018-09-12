@@ -40,6 +40,13 @@ services:
                 name: sylius.grid_filter
                 type: frontend_less_than_or_equal
                 form_type: AppBundle\Form\Filter\IntegerFilterType
+    app.grid.filter.frontend_person_role:
+        class: AppBundle\Grid\Filter\PersonRoleFilter
+        tags:
+            -
+                name: sylius.grid_filter
+                type: frontend_person_role
+                form_type: AppBundle\Form\Filter\PersonRoleFilterType
     app.grid.filter.status:
         class: AppBundle\Grid\Filter\StatusFilter
         tags:

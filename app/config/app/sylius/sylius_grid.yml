@@ -82,4 +82,5 @@ sylius_grid:
             frontend_between_two_fields: 'frontend/grid/filter/between_two_fields.html.twig'
             frontend_greater_than_or_equal: "frontend/grid/filter/greater_than_or_equal.html.twig"
             frontend_less_than_or_equal: "frontend/grid/filter/less_than_or_equal.html.twig"
+            frontend_person_role: "frontend/grid/filter/person_role.html.twig"
             frontend_taxon: "frontend/grid/filter/taxon.html.twig"

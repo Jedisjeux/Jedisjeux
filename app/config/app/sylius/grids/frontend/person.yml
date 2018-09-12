@@ -14,3 +14,17 @@ sylius_grid:
                 createdAt:
                     type: twig
                     sortable: ~
+            filters:
+                roles:
+                    type: frontend_person_role
+                    form_options:
+                        placeholder: sylius.ui.all
+                mainTaxon:
+                    type: frontend_taxon
+                    form_options:
+                        label: sylius.ui.category
+                        placeholder: app.ui.all_female
+                        taxons:
+                            Europe: europe
+                            Amérique: amerique
+                            Asie: asie

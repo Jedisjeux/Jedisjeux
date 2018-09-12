@@ -19,16 +19,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class TaxonFilterType extends AbstractType
+class PersonRoleFilterType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('mainTaxon', ChoiceType::class, [
-            'label' => false,
-            'choices' => $options['taxons'],
+        $builder->add('value', ChoiceType::class, [
+            'label' => 'sylius.ui.type',
+            'choices' => $options['roles'],
             'placeholder' => $options['placeholder'],
         ]);
     }
@@ -40,9 +40,14 @@ class TaxonFilterType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'taxons' => [],
+                'roles' => [
+                    'app.ui.designers' => 'designers',
+                    'app.ui.artists' => 'artists',
+                    'app.ui.editors' => 'publishers',
+                ],
                 'placeholder' => '---',
             ])
-            ->setAllowedTypes('taxons', ['array']);
+            ->setAllowedTypes('roles', ['array'])
+        ;
     }
 }

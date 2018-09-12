@@ -8,12 +8,14 @@ app:
         added_at: Date d'ajout
         age: Âge
         age_in_year: Âge en année
+        all_female: Toutes
         article: Article
         article_manager: Gestionnaire d'articles
         articles: Articles
         article_details: Détails de l'article
         article_settings: Configuration de l'article
         artist: Illustrateur
+        artists: Illustrateurs
         avatar: Avatar
         barcode: Code-barres
         barcodes: Code-barres
@@ -39,6 +41,7 @@ app:
         dealer_prices: Tarifs des vendeurs
         delimiter: Separateur
         designer: Auteur
+        designers: Auteurs
         destination: Destination
         duration: Durée
         duration_in_minute: Durée en minute
@@ -56,6 +59,7 @@ app:
         edit_string_block: Modifer le bloc de chaîne
         edit_topic: Modifier le sujet
         editor: Editeur
+        editors: Editeurs
         errors: Erreurs
         festival_lists: Listes de festival
         festival_list_items: Items de liste de festival
