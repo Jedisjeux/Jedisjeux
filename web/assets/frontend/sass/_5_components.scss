@@ -892,6 +892,12 @@ ul.pager .page-item .page-link {
   display: inline-block;
   @include border-radius(100%);
 }
+.pagination .page-item:first-child .page-link,
+.pagination .page-item:last-child .page-link {
+  width: auto;
+  padding: 0 20px;
+  @include border-radius(20px);
+}
 ul.pagination .page-item .page-link:hover,
 ul.pagination .page-item .page-link:focus {
   background-color: transparent;
