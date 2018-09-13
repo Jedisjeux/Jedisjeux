@@ -125,6 +125,12 @@ class GamePlayRepository extends EntityRepository
                 ->setParameter('product', $criteria['product']);
         }
 
+        // game play with comments by default
+        if (!isset($criteria['topic'])) {
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->isNotNull('topic.id'));
+        }
+
         if (null !== $productSlug) {
             $queryBuilder
                 ->andWhere('productTranslation.slug = :productSlug')

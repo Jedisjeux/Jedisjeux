@@ -32,6 +32,10 @@ class CommentFilter implements FilterInterface
             return;
         }
 
+        if ('all' === $data['value']) {
+            return;
+        }
+
         if ('with' === $data['value']) {
             $dataSource->restrict($dataSource->getExpressionBuilder()->isNotNull('topic'));
         } else {

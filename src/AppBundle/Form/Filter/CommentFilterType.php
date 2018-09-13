@@ -29,23 +29,11 @@ class CommentFilterType extends AbstractType
         $builder->add('value', ChoiceType::class, [
             'label' => 'sylius.ui.type',
             'choices' => [
+                'sylius.ui.all' => 'all',
                 'app.ui.with' => 'with',
                 'app.ui.without' => 'without',
             ],
-            'placeholder' => $options['placeholder'],
+            'empty_data' => 'with',
         ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver
-            ->setDefaults([
-                'placeholder' => 'sylius.ui.all',
-            ])
-            ->setAllowedTypes('placeholder', ['null', 'string'])
-        ;
     }
 }
