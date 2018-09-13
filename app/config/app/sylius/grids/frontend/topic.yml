@@ -26,11 +26,4 @@ sylius_grid:
                     type: frontend_taxon
                     form_options:
                         label: sylius.ui.category
-                        taxons:
-                            app.ui.news: news
-                            app.ui.review_articles: review-articles
-                            app.ui.previews: previews
-                            app.ui.in_the_boxes: in-the-boxes
-                            app.ui.report_articles: report-articles
-                            app.ui.interviews: interviews
-                            app.ui.videos: videos
+                        taxon_code: forum

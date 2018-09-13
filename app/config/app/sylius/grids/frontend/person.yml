@@ -6,7 +6,9 @@ sylius_grid:
                 options:
                     class: "%app.model.person.class%"
                     repository:
-                        method: createListQueryBuilder
+                        method: createFrontendListQueryBuilder
+                        arguments:
+                            criteria: "expr:service('request_stack').getCurrentRequest().get('criteria', [])"
             limits: ~
             sorting:
                 createdAt: desc
@@ -19,12 +21,11 @@ sylius_grid:
                     type: frontend_person_role
                     form_options:
                         placeholder: sylius.ui.all
-                mainTaxon:
+                zone:
                     type: frontend_taxon
+                    options:
+                        field: taxon
                     form_options:
                         label: sylius.ui.category
                         placeholder: app.ui.all_female
-                        taxons:
-                            Europe: europe
-                            Amérique: amerique
-                            Asie: asie
+                        taxon_code: zones

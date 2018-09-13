@@ -11,6 +11,8 @@
 
 namespace AppBundle\Form\Filter;
 
+use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,10 +28,28 @@ class TaxonFilterType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('mainTaxon', ChoiceType::class, [
+        $builder->add('mainTaxon', EntityType::class, [
             'label' => false,
-            'choices' => $options['taxons'],
             'placeholder' => $options['placeholder'],
+            'class' => 'AppBundle:Taxon',
+            'group_by' => 'parent',
+            'choice_label' => 'name',
+            'query_builder' => function (EntityRepository $entityRepository) use ($options) {
+                $queryBuilder = $entityRepository->createQueryBuilder('o');
+                $queryBuilder->orderBy('o.left');
+
+                if (null !== $options['taxon_code']) {
+                    $queryBuilder
+                        ->join('o.root', 'rootTaxon')
+                        ->where('rootTaxon.code = :code')
+                        ->andWhere('o.parent IS NOT NULL')
+                        ->setParameter('code', $options['taxon_code']);
+                }
+
+                return $queryBuilder;
+            },
+            'expanded' => false,
+
         ]);
     }
 
@@ -41,8 +61,11 @@ class TaxonFilterType extends AbstractType
         $resolver
             ->setDefaults([
                 'taxons' => [],
+                'taxon_code' => null,
                 'placeholder' => '---',
             ])
-            ->setAllowedTypes('taxons', ['array']);
+            ->setAllowedTypes('taxons', ['array'])
+            ->setAllowedTypes('placeholder', ['null', 'string'])
+            ->setAllowedTypes('taxon_code', ['null', 'string']);
     }
 }

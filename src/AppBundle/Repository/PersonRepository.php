@@ -55,6 +55,47 @@ class PersonRepository extends EntityRepository
     }
 
     /**
+     * @param TaxonInterface|null $taxon
+     *
+     * @return QueryBuilder
+     */
+    public function createFrontendListQueryBuilder(array $criteria = [], TaxonInterface $taxon = null)
+    {
+        $queryBuilder = $this->createQueryBuilder('o')
+            ->addSelect('image')
+            ->leftJoin('o.images', 'image', Join::WITH, 'image.main = 1')
+            ->groupBy('o.id');
+
+        $queryBuilder->addSelect($queryBuilder->expr()->sum(
+                "o.productCountAsDesigner",
+                "o.productCountAsPublisher",
+                "o.productCountAsArtist") .
+            " as HIDDEN gameCount");
+        $queryBuilder->addOrderBy("gameCount", 'desc');
+
+        // for taxon grid filter
+        if (isset($criteria['zone']) && !empty($criteria['zone']['mainTaxon'])) {
+            $queryBuilder
+                ->innerJoin('o.taxons', 'taxon');
+        }
+
+        if ($taxon) {
+            $queryBuilder
+                ->innerJoin('o.taxons', 'taxon')
+                ->andWhere($queryBuilder->expr()->orX(
+                    'taxon = :taxon',
+                    ':left < taxon.left AND taxon.right < :right AND taxon.root = :root'
+                ))
+                ->setParameter('taxon', $taxon)
+                ->setParameter('left', $taxon->getLeft())
+                ->setParameter('right', $taxon->getRight())
+                ->setParameter('root', $taxon->getRoot());
+        }
+
+        return $queryBuilder;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function findByNamePart($phrase)
