@@ -5,6 +5,13 @@ services:
             -
                 name: ongr_filter_manager.filter
                 type: app_elastic_search.custom_pager
+    app.grid.filter.frontend_comment:
+        class: AppBundle\Grid\Filter\CommentFilter
+        tags:
+        -
+            name: sylius.grid_filter
+            type: frontend_comment
+            form_type: AppBundle\Form\Filter\CommentFilterType
     app.grid.filter.between_two_fields:
         class: AppBundle\Grid\Filter\BetweenTwoFieldsFilter
         tags:
