@@ -4,11 +4,13 @@
 <!-- ================ -->
 <aside class="col-lg-4 col-xl-3 ml-xl-auto">
     <div class="sidebar">
-        {% include 'frontend/article/show/sidebar/_ratings.html.twig' %}
-        {% include 'frontend/article/show/sidebar/_product.html.twig' %}
-        {% include 'frontend/article/show/sidebar/_categories.html.twig' %}
-        {% include 'frontend/pub_banner/_sidebar.html.twig' %}
-        {% include 'frontend/article/show/sidebar/_latestArticles.html.twig' %}
+        <div class="block clearfix">
+            {% include 'frontend/article/show/sidebar/_ratings.html.twig' %}
+            {% include 'frontend/article/show/sidebar/_product.html.twig' %}
+            {% include 'frontend/article/show/sidebar/_categories.html.twig' %}
+            {% include 'frontend/pub_banner/_sidebar.html.twig' %}
+            {% include 'frontend/article/show/sidebar/_latestArticles.html.twig' %}
+        </div>
     </div>
 </aside>
 <!-- sidebar end -->
