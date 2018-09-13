@@ -68,12 +68,14 @@ class DownloadImageCommand extends ContainerAwareCommand
     protected function getRepositories()
     {
         $repositories = [
-            'product_variant_image' => $this->getContainer()->get('app.repository.product_variant_image'),
-            'game_play_image' => $this->getContainer()->get('app.repository.game_play_image'),
-            'person_image' => $this->getContainer()->get('app.repository.person_image'),
             'article_image' => $this->getContainer()->get('app.repository.article_image'),
             'block_image' => $this->getContainer()->get('app.repository.block_image'),
+            'dealer_image' => $this->getContainer()->get('app.repository.dealer_image'),
+            'game_play_image' => $this->getContainer()->get('app.repository.game_play_image'),
+            'person_image' => $this->getContainer()->get('app.repository.person_image'),
             'product_box_image' => $this->getContainer()->get('app.repository.product_box_image'),
+            'product_variant_image' => $this->getContainer()->get('app.repository.product_variant_image'),
+            'pub_banner' => $this->getContainer()->get('app.repository.pub_banner'),
         ];
 
         $entityOption = $this->input->getOption('entity');
