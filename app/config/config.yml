@@ -117,12 +117,16 @@ swiftmailer:
     spool:     { type: memory }
 
 services:
+    twig.extension.array:
+        class: Twig_Extensions_Extension_Array
+        tags:
+            - { name: twig.extension }
     twig.extension.intl:
         class: Twig_Extensions_Extension_Intl
         tags:
-          - { name: twig.extension }
+            - { name: twig.extension }
 
     twig.extension.text:
         class: Twig_Extensions_Extension_Text
         tags:
-          - { name: twig.extension }
+            - { name: twig.extension }
