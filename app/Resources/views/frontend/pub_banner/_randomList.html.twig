@@ -1,0 +1,20 @@
+{% set pub_banners = pub_banners|shuffle %}
+
+<div id="pub-banner-sidebar" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators top">
+        {% for pub_banner in pub_banners %}
+            <li data-target="#pub-banner-sidebar" data-slide-to="{{ loop.index0 }}"{% if loop.first %} class="active"{% endif %}></li>
+        {% endfor %}
+    </ol>
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        {% for pub_banner in pub_banners %}
+            <div class="carousel-item{% if loop.first %} active{% endif %}">
+                <a href="{{ pub_banner.targetUrl }}" target="_blank">
+                    <img class="img-responsive" src="{{ pub_banner.webPath|imagine_filter('pub_banner') }}" alt="{{ pub_banner.dealer }}"/>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>

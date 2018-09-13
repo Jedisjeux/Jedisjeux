@@ -21,6 +21,3 @@ app_partial_blockquote_block:
 
 app_partial_dealer_price:
     resource: 'partial/dealer_price.yml'
-
-app_partial_pub_banner:
-    resource: 'partial/pub_banner.yml'

@@ -2,6 +2,7 @@
 <!-- ================ -->
 <aside class="col-lg-4 col-xl-3 ml-xl-auto">
     <div class="sidebar">
+        {% include 'frontend/pub_banner/_sidebar.html.twig' %}
         {% for association in product.associations %}
             <div class="block clearfix">
                 <h3 class="title">{{ association.type }}</h3>

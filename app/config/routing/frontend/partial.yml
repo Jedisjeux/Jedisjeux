@@ -26,6 +26,10 @@ sylius_frontend_partial_product_review:
     resource: "partial/product_review.yml"
     prefix: /products/{productId}/reviews
 
+app_partial_pub_banner:
+    resource: 'partial/pub_banner.yml'
+    prefix: /pub-banners
+
 sylius_frontend_partial_taxon:
     resource: "partial/taxon.yml"
     prefix: /taxons
