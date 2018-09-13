@@ -1,0 +1,13 @@
+default:
+    suites:
+        ui_viewing_products_on_homepage:
+            contexts_services:
+                - app.behat.context.hook.doctrine_orm
+
+                - app.behat.context.transform.shared_storage
+
+                - app.behat.context.setup.product
+
+                - app.behat.context.ui.frontend.homepage
+            filters:
+                tags: "@viewing_products_on_homepage && @ui"

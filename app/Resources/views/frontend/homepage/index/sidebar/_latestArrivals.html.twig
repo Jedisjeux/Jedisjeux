@@ -1,70 +1,14 @@
 <h3 class="title">Sorties de Jeux</h3>
 <div class="separator-2"></div>
-<div id="carousel-sidebar" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators top">
-        <li data-target="#carousel-sidebar" data-slide-to="0" class="active"></li>
-        <li data-target="#carousel-sidebar" data-slide-to="1"></li>
-        <li data-target="#carousel-sidebar" data-slide-to="2"></li>
-    </ol>
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-        <div class="carousel-item active">
-            <div class="image-box style-2 mb-20 bordered light-gray-bg">
-                <div class="overlay-container overlay-visible">
-                    <img src="/assets/frontend/images/portfolio-1.jpg" alt="">
-                    <div class="overlay-bottom text-left">
-                        <p class="lead margin-clear">Pulsar 2849</p>
-                    </div>
-                </div>
-                <div class="body">
-                    <p class="small mb-10 text-muted"><i class="fa fa-calendar-o pr-1"></i> Sortie : Juin 2018 <i class="pl-10 pr-1 fa fa-tag"></i> Débutants</p>
-                    <ul class="list-icons small">
-                        <li><i class="fa fa-user"></i> à 2 joueurs exclusivement</li>
-                        <li><i class="fa fa-child"></i> A partir de 8 ans</li>
-                        <li><i class="fa fa-clock-o"></i> 30 minutes</li>
-                    </ul>
-                    <a href="#" class="btn btn-default btn-sm margin-clear">{{ 'sylius.ui.view_more'|trans }}<i class="fa fa-arrow-right pl-10"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <div class="image-box style-2 mb-20 bordered light-gray-bg">
-                <div class="overlay-container overlay-visible">
-                    <img src="/assets/frontend/images/portfolio-2.jpg" alt="">
-                    <div class="overlay-bottom text-left">
-                        <p class="lead margin-clear">Jurassik Snack</p>
-                    </div>
-                </div>
-                <div class="body">
-                    <p class="small mb-10 text-muted"><i class="fa fa-calendar-o pr-1"></i> Sortie : Juin 2018 <i class="pl-10 pr-1 fa fa-tag"></i> Débutants</p>
-                    <ul class="list-icons small">
-                        <li><i class="fa fa-user"></i> à 2 joueurs exclusivement</li>
-                        <li><i class="fa fa-child"></i> A partir de 8 ans</li>
-                        <li><i class="fa fa-clock-o"></i> 30 minutes</li>
-                    </ul>
-                    <a href="#" class="btn btn-default btn-sm margin-clear">{{ 'sylius.ui.view_more'|trans }}<i class="fa fa-arrow-right pl-10"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <div class="image-box style-2 mb-20 bordered light-gray-bg">
-                <div class="overlay-container overlay-visible">
-                    <img src="/assets/frontend/images/portfolio-3.jpg" alt="">
-                    <div class="overlay-bottom text-left">
-                        <p class="lead margin-clear">SteamRollers</p>
-                    </div>
-                </div>
-                <div class="body">
-                    <p class="small mb-10 text-muted"><i class="fa fa-calendar-o pr-1"></i> Sortie : Juin 2018 <i class="pl-10 pr-1 fa fa-tag"></i> Débutants</p>
-                    <ul class="list-icons small">
-                        <li><i class="fa fa-user"></i> à 2 joueurs exclusivement</li>
-                        <li><i class="fa fa-child"></i> A partir de 8 ans</li>
-                        <li><i class="fa fa-clock-o"></i> 30 minutes</li>
-                    </ul>
-                    <a href="#" class="btn btn-default btn-sm margin-clear">{{ 'sylius.ui.view_more'|trans }}<i class="fa fa-arrow-right pl-10"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
+{{ render(url('sylius_partial_product_index', {
+    'paginate': 5,
+    'template': 'frontend/product/_latestArrivalsSlider.html.twig',
+    'criteria': {
+        'status': 'PUBLISHED',
+        'releasedAtTo': "now"|date("Y-m-d")
+    },
+    'sorting': {
+        'variant.releasedAt': 'desc'
+    }
+})) }}

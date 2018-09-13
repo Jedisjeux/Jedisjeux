@@ -1,0 +1,44 @@
+{% import 'macro/image.html.twig' as images %}
+{% from 'macro/product.html.twig' import releasedAt, duration, playerCount %}
+
+<div id="latest-arrivals" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators top">
+        {% for product in products.data %}
+            <li data-target="#latest-arrivals" data-slide-to="{{ loop.index0 }}"{% if loop.first %} class="active"{% endif %}></li>
+        {% endfor %}
+    </ol>
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        {% for product in products.data %}
+            {% set productPath = path('sylius_frontend_product_show', { 'slug': product.slug } ) %}
+
+            <div class="carousel-item{% if loop.first %} active{% endif %}">
+                <div class="image-box style-2 mb-20 bordered light-gray-bg">
+                    <div class="overlay-container overlay-visible">
+                        {% if product.mainImage is not null %}
+                            {{ images.render(product.mainImage.webPath, 'magazine_item_wide', product.name) }}
+                            <a class="overlay-link" href="{{ productPath }}"><i class="fa fa-link"></i></a>
+                        {% endif %}
+                        <div class="overlay-bottom text-left">
+                            <p class="lead margin-clear">{{ product.name }}</p>
+                        </div>
+                    </div>
+                    <div class="body">
+                        <p class="small mb-10 text-muted">
+                            <i class="fa fa-calendar-o pr-1"></i> Sortie : {{ releasedAt(product.firstVariant) }}
+                            {% if product.mainTaxon is not null %}
+                                <i class="pl-10 pr-1 fa fa-tag"></i> {{ product.mainTaxon.name }}</p>
+                            {% endif %}
+                        <ul class="list-icons small">
+                            <li><i class="fa fa-user"></i> {{ playerCount(product) }}</li>
+                            <li><i class="fa fa-child"></i> A partir de {{ product.minAge }} ans</li>
+                            <li><i class="fa fa-clock-o"></i> {{ duration(product) }}</li>
+                        </ul>
+                        <a href="{{ productPath }}" class="btn btn-default btn-sm margin-clear">{{ 'sylius.ui.view_more'|trans }}<i class="fa fa-arrow-right pl-10"></i></a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
