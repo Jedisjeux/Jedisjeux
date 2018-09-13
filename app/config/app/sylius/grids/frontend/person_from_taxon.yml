@@ -1,18 +1,14 @@
 sylius_grid:
     grids:
         app_frontend_person_from_taxon:
+            extends: app_frontend_person
             driver:
                 name: doctrine/orm
                 options:
                     class: "%app.model.person.class%"
                     repository:
-                        method: createListQueryBuilder
+                        method: createFrontendListQueryBuilder
                         arguments:
+                            criteria: "expr:service('request_stack').getCurrentRequest().get('criteria', [])"
                             taxon: "expr:service('sylius.repository.taxon').findOneBySlug($slug, '%locale%')"
             limits: ~
-            sorting:
-                createdAt: desc
-            fields:
-                createdAt:
-                    type: twig
-                    sortable: ~

@@ -11,8 +11,11 @@
 
 namespace AppBundle\Grid\Filter;
 
+use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Grid\Data\DataSourceInterface;
 use Sylius\Component\Grid\Filtering\FilterInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Webmozart\Assert\Assert;
 
 
 /**
@@ -20,6 +23,20 @@ use Sylius\Component\Grid\Filtering\FilterInterface;
  */
 class TaxonFilter implements FilterInterface
 {
+    /**
+     * @var EntityRepository
+     */
+    private $taxonRepository;
+
+    /**
+     * TaxonFilter constructor.
+     * @param EntityRepository $taxonRepository
+     */
+    public function __construct(EntityRepository $taxonRepository)
+    {
+        $this->taxonRepository = $taxonRepository;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -32,6 +49,31 @@ class TaxonFilter implements FilterInterface
             return;
         }
 
-        $dataSource->restrict($dataSource->getExpressionBuilder()->equals('mainTaxon.code', $data['mainTaxon']));
+        /** @var TaxonInterface $taxon */
+        $taxon = $this->taxonRepository->find($data['mainTaxon']);
+        Assert::notNull($taxon);
+
+        $field = (string) $this->getOption($options, 'field', $name);
+
+        $dataSource->restrict(
+            $dataSource->getExpressionBuilder()->andX(
+                $dataSource->getExpressionBuilder()->greaterThanOrEqual(sprintf('%s.left', $field), $taxon->getLeft()),
+                $dataSource->getExpressionBuilder()->lessThanOrEqual(sprintf('%s.right', $field), $taxon->getRight()),
+                $dataSource->getExpressionBuilder()->equals(sprintf('%s.root', $field), $taxon->getRoot())
+            )
+
+        );
+    }
+
+    /**
+     * @param array $options
+     * @param string $name
+     * @param mixed $default
+     *
+     * @return mixed
+     */
+    private function getOption(array $options, string $name, $default)
+    {
+        return $options[$name] ?? $default;
     }
 }

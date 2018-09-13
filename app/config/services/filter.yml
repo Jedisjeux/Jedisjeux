@@ -56,6 +56,8 @@ services:
                 form_type: AppBundle\Form\Filter\StatusFilterType
     app.grid.filter.taxon:
         class: AppBundle\Grid\Filter\TaxonFilter
+        arguments:
+            - '@sylius.repository.taxon'
         tags:
             -
                 name: sylius.grid_filter
@@ -63,6 +65,8 @@ services:
                 form_type: AppBundle\Form\Filter\TaxonFilterType
     app.grid.filter.frontend_taxon:
         class: AppBundle\Grid\Filter\TaxonFilter
+        arguments:
+            - '@sylius.repository.taxon'
         tags:
             -
                 name: sylius.grid_filter
