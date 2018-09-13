@@ -19,7 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class CommentFilterType extends AbstractType
+class ImageFilterType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -27,13 +27,12 @@ class CommentFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('value', ChoiceType::class, [
-            'label' => 'app.ui.comments',
+            'label' => 'app.ui.photos',
             'choices' => [
-                'sylius.ui.all' => 'all',
                 'app.ui.with' => 'with',
                 'app.ui.without' => 'without',
             ],
-            'empty_data' => 'with',
+            'placeholder' => 'sylius.ui.all',
         ]);
     }
 }

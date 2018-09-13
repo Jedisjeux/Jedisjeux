@@ -8,6 +8,9 @@ services:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
+    app.updater.image_count_by_game_play:
+        class: AppBundle\Updater\ImageCountByGamePlayUpdater
+
     app.updater.topic_count_by_taxon:
         class: AppBundle\Updater\TopicCountByTaxonUpdater
         arguments:

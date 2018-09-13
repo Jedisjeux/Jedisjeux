@@ -111,6 +111,12 @@ class GamePlaySpec extends ObjectBehavior
         $this->hasImage($image)->shouldReturn(false);
     }
 
+    function its_image_count_is_mutable(): void
+    {
+        $this->setImageCount(2);
+        $this->getImageCount()->shouldReturn(2);
+    }
+
     function it_initializes_players_collection_by_default()
     {
         $this->getPlayers()->shouldHaveType(Collection::class);
