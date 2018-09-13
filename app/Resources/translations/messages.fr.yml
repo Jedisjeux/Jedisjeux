@@ -214,6 +214,8 @@ app:
         utf8: Utf8
         view_details: Voir les détails
         wishes: Envies
+        with: Avec
+        without: Sans
         videos: Vidéos
         view_website: Voir le site
         your_comment: Votre commentaire

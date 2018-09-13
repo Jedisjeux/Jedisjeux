@@ -112,8 +112,7 @@ class GamePlayRepository extends EntityRepository
             ->join('product.variants', 'variant', Join::WITH, 'variant.position = 0')
             ->join('product.translations', 'productTranslation')
             ->leftJoin('variant.images', 'image', Join::WITH, 'image.main = :main')
-            // topic with comments
-            ->innerJoin('o.topic', 'topic')
+            ->leftJoin('o.topic', 'topic')
             ->leftJoin('topic.article', 'article')
             ->andWhere('productTranslation.locale = :locale')
             ->groupBy('o.id')
@@ -124,6 +123,12 @@ class GamePlayRepository extends EntityRepository
             $queryBuilder
                 ->andWhere('product = :product')
                 ->setParameter('product', $criteria['product']);
+        }
+
+        // game play with comments by default
+        if (!isset($criteria['topic'])) {
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->isNotNull('topic.id'));
         }
 
         if (null !== $productSlug) {

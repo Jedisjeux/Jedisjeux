@@ -21,3 +21,6 @@ sylius_grid:
                 topic.postCount:
                     type: twig
                     sortable: ~
+            filters:
+                topic:
+                    type: frontend_comment
