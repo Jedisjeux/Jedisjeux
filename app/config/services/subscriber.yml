@@ -92,6 +92,13 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
+    app.subscriber.calculate_image_count_by_game_play:
+        class: AppBundle\EventSubscriber\CalculateImageCountByGamePlaySubscriber
+        arguments:
+            - "@app.updater.image_count_by_game_play"
+        tags:
+            - { name: doctrine.event_subscriber }
+
     app.subscriber.calculate_topic_count_by_taxon:
         class: AppBundle\EventSubscriber\CalculateTopicCountByTaxonSubscriber
         arguments:

@@ -90,6 +90,13 @@ class GamePlay implements ResourceInterface
     protected $images;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     */
+    private $imageCount = 0;
+
+    /**
      * @var ArrayCollection|Player[]
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Player", mappedBy="gamePlay", cascade={"persist", "merge", "remove"})
@@ -257,6 +264,22 @@ class GamePlay implements ResourceInterface
     public function removeImage(GamePlayImage $image): void
     {
         $this->images->removeElement($image);
+    }
+
+    /**
+     * @return int
+     */
+    public function getImageCount(): int
+    {
+        return $this->imageCount;
+    }
+
+    /**
+     * @param int $imageCount
+     */
+    public function setImageCount(int $imageCount): void
+    {
+        $this->imageCount = $imageCount;
     }
 
     /**

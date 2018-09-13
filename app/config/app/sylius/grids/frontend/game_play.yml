@@ -24,3 +24,5 @@ sylius_grid:
             filters:
                 topic:
                     type: frontend_comment
+                imageCount:
+                    type: frontend_image

@@ -153,6 +153,7 @@ app:
         person: Personne
         people: Personnes
         permanent: Permanent
+        photos: Photos
         player_count: Nombre de joueurs
         players: Joueurs
         posts: Messages
