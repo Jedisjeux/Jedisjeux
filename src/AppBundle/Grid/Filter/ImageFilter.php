@@ -28,11 +28,11 @@ class ImageFilter implements FilterInterface
         // Your filtering logic. DataSource is kind of query builder.
         // $data['value'] contains the submitted value!
 
-        if (empty($data['value'])) {
+        if (empty($data)) {
             return;
         }
 
-        if ('with' === $data['value']) {
+        if ('with' === $data) {
             $dataSource->restrict($dataSource->getExpressionBuilder()->greaterThan('imageCount', 0));
         } else {
             $dataSource->restrict($dataSource->getExpressionBuilder()->equals('imageCount', 0));

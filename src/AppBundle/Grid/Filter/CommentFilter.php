@@ -28,18 +28,26 @@ class CommentFilter implements FilterInterface
         // Your filtering logic. DataSource is kind of query builder.
         // $data['value'] contains the submitted value!
 
-        if (empty($data['value'])) {
+        if (empty($data)) {
             return;
         }
 
-        if ('all' === $data['value']) {
+        if ('all' === $data) {
             return;
         }
 
-        if ('with' === $data['value']) {
+        if ('with' === $data) {
             $dataSource->restrict($dataSource->getExpressionBuilder()->isNotNull('topic'));
         } else {
             $dataSource->restrict($dataSource->getExpressionBuilder()->isNull('topic'));
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix(): string
+    {
+        return 'app_comment_filter';
     }
 }

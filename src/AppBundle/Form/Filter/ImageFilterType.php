@@ -24,15 +24,25 @@ class ImageFilterType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function configureOptions(OptionsResolver $resolver): void
     {
-        $builder->add('value', ChoiceType::class, [
-            'label' => 'app.ui.photos',
-            'choices' => [
-                'app.ui.with' => 'with',
-                'app.ui.without' => 'without',
-            ],
-            'placeholder' => 'sylius.ui.all',
-        ]);
+        $resolver
+            ->setDefaults([
+                'label' => 'app.ui.photos',
+                'choices' => [
+                    'app.ui.with' => 'with',
+                    'app.ui.without' => 'without',
+                ],
+                'placeholder' => 'sylius.ui.all',
+            ])
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getParent()
+    {
+        return ChoiceType::class;
     }
 }
