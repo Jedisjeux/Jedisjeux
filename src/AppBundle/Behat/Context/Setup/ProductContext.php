@@ -92,6 +92,32 @@ class ProductContext implements Context
     }
 
     /**
+     * @Given there is a product :name, released :date
+     * @Given there is also a product :name, released :date
+     *
+     * @param string $name
+     */
+    public function productHasNameAndReleaseDate($name, $date = 'now')
+    {
+        /** @var Product $product */
+        $product = $this->productFactory->create([
+            'name' => $name,
+            'released_at' => $date,
+            'status' => Product::PUBLISHED,
+            'mechanisms' => [],
+            'themes' => [],
+            'designers' => [],
+            'artists' => [],
+            'publishers' => [],
+            'min_duration' => null,
+            'max_duration' => null,
+        ]);
+
+        $this->productRepository->add($product);
+        $this->sharedStorage->set('product', $product);
+    }
+
+    /**
      * @Given there is a product :name with :status status
      *
      * @param string $name
