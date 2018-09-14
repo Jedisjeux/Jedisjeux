@@ -11,18 +11,18 @@
             <p class="lead margin-clear">{{ person }}</p>
         </div>
     </div>
-    <div class="body">
-        <p class="small mb-10 text-muted">
+    <div class="body text-center">
+        <ul class="list-icons mb-10 small">
             {% if person.productCountAsDesigner > 0 %}
-                Auteur de {{ person.productCountAsDesigner }} jeux<br>
+                <li><i class="fa fa-cogs"></i> Auteur de {{ person.productCountAsDesigner }} jeux</li>
             {% endif %}
             {% if person.productCountAsArtist > 0 %}
-                Illustrateur de {{ person.productCountAsArtist }} jeux<br>
+                <li><i class="fa fa-paint-brush"></i> Illustrateur de {{ person.productCountAsArtist }} jeux</li>
             {% endif %}
             {% if person.productCountAsPublisher > 0 %}
-                Éditeur de {{ person.productCountAsPublisher }} jeux<br>
+                <li><i class="fa fa-upload"></i> Éditeur de {{ person.productCountAsPublisher }} jeux</li>
             {% endif %}
-        </p>
+        </ul>
         <a href="{{ personPath }}" class="btn btn-default btn-sm margin-clear">{{ 'sylius.ui.view_more'|trans }}<i class="fa fa-arrow-right pl-10"></i></a>
     </div>
 </div>
