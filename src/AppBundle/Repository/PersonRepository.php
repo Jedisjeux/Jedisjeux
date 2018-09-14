@@ -193,32 +193,39 @@ class PersonRepository extends EntityRepository
      */
     private function filteringOnPersonRoleIfNecessary(QueryBuilder $queryBuilder, array $criteria, array $sorting)
     {
-        // TODO find a better way to do that
-        if (
-            isset($criteria['role']['value'])
-            && !empty($criteria['role']['value'])
-            && (0 === count($sorting) || isset($sorting['productCount']))
-        ) {
-            $role = $criteria['role']['value'];
+        $role = $criteria['role']['value'] ?? null;
+        $sortingByProductCount = 0 === count($sorting) || isset($sorting['productCount']);
+
+        if (null !== $role && $sortingByProductCount) {
             $order = $sorting['productCount'] ?? 'desc';
-            $sort = null;
+            $sort = $this->getProductCountPropertyNameByRole($role);
 
-            switch($role) {
-                case 'designers':
-                    $sort = 'o.productCountAsDesigner';
-                    break;
-                case 'artists':
-                    $sort = 'o.productCountAsArtist';
-                    break;
-                case 'publishers':
-                    $sort = 'o.productCountAsPublisher';
-                    break;
+            // cannot apply another product count property to apply sorting
+            if (null === $sort) {
+                return;
             }
 
-            if (null !== $sort) {
-                $queryBuilder->orderBy('o.productCountAsPublisher', $order);
-                unset($sorting['productCount']);
-            }
+            $queryBuilder->orderBy($sort, $order);
+            unset($sorting['productCount']);
         }
+    }
+
+    /**
+     * @param string $role
+     *
+     * @return null|string
+     */
+    private function getProductCountPropertyNameByRole(string $role): ?string
+    {
+        switch ($role) {
+            case 'designers':
+                return 'o.productCountAsDesigner';
+            case 'artists':
+                return 'o.productCountAsArtist';
+            case 'publishers':
+                return 'o.productCountAsPublisher';
+        }
+
+        return null;
     }
 }
