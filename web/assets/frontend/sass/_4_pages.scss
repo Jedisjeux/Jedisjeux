@@ -539,6 +539,18 @@
   }
 }
 
+/* Games library Page
+---------------------------------- */
+.games-library {
+  background: $black;
+  padding: 5px;
+  border: 10px solid $gray-dark;
+}
+
+.games-library img {
+  display: inline;
+}
+
 /* Pages Misc
 ---------------------------------- */
 .icons-page i {

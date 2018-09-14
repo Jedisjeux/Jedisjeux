@@ -1,0 +1,33 @@
+<!-- main-container start -->
+<!-- ================ -->
+<section class="main-container">
+    <div class="container">
+        <div class="row">
+
+            <!-- main start -->
+            <!-- ================ -->
+            <div id="article-list" class="main col-md-12">
+                <div class="games-library bg-black">
+                    <div class="content">
+                        {% spaceless %}
+                            {% for product_list_item in product_list_items.data %}
+                                {% set box = product_list_item.product.firstVariant.box %}
+                                <a href="{{ path('sylius_frontend_product_show', { 'slug': product_list_item.product.slug }) }}">
+                                    {% if box %}
+                                        <img src="{{ box.image.webPath | imagine_filter('full') }}"
+                                             alt="{{ product_list_item.product }}"/>
+                                    {% else %}
+                                        <img src="{{ asset('assets/frontend/images/placeholder.png'| imagine_filter('thumbnail')) }}"
+                                             alt="{{ product_list_item.product }}"/>
+                                    {% endif %}
+                                </a>
+                            {% endfor %}
+                        {% endspaceless %}
+                    </div>
+                </div>
+            </div>
+            <!-- main end -->
+        </div>
+    </div>
+</section>
+<!-- main-container end -->
