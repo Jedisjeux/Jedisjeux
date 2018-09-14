@@ -175,6 +175,7 @@ sylius_fixtures:
                         random: 40
                 product_box:
                     options:
+                        random: 40
                         custom:
                             -
                                 product_variant: "Tigre_&_Euphrate"

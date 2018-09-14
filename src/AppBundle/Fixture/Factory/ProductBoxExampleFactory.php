@@ -84,8 +84,8 @@ class ProductBoxExampleFactory extends AbstractExampleFactory implements Example
             ->setAllowedTypes('product_variant', ['null', 'string', ProductVariantInterface::class])
             ->setNormalizer('product_variant', LazyOption::findOneBy($this->productVariantRepository, 'code'))
 
-            ->setDefault('image', LazyOption::randomOneImageOrNull(
-                __DIR__ . '/../../../../app/Resources/fixtures/boxes', 80
+            ->setDefault('image', LazyOption::randomOneImage(
+                __DIR__ . '/../../../../app/Resources/fixtures/boxes'
             ));
     }
 
