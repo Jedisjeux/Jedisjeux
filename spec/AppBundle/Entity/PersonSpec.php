@@ -70,6 +70,17 @@ class PersonSpec extends ObjectBehavior
         $this->getDescription()->shouldReturn("I am your father");
     }
 
+    function it_initializes_product_count_to_zero_by_default()
+    {
+        $this->getProductCount()->shouldReturn(0);
+    }
+
+    function its_product_count_is_mutable()
+    {
+        $this->setProductCount(666);
+        $this->getProductCount()->shouldReturn(666);
+    }
+
     function it_initializes_images_collection_by_default()
     {
         $this->getImages()->shouldHaveType(Collection::class);
