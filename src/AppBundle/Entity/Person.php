@@ -94,6 +94,13 @@ class Person implements ResourceInterface
      *
      * @ORM\Column(type="integer")
      */
+    protected $productCount = 0;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer")
+     */
     protected $productCountAsDesigner = 0;
 
     /**
@@ -303,6 +310,22 @@ class Person implements ResourceInterface
     public function getSlug(): ?string
     {
         return $this->slug;
+    }
+
+    /**
+     * @return int
+     */
+    public function getProductCount(): int
+    {
+        return $this->productCount;
+    }
+
+    /**
+     * @param int $productCount
+     */
+    public function setProductCount(int $productCount): void
+    {
+        $this->productCount = $productCount;
     }
 
     /**

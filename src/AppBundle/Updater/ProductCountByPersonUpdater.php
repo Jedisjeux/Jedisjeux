@@ -46,5 +46,7 @@ class ProductCountByPersonUpdater
         $person->setProductCountAsDesigner($productCountAsDesigner);
         $person->setProductCountAsArtist($productCountAsArtist);
         $person->setProductCountAsPublisher($productCountAsPublisher);
+
+        $person->setProductCount($productCountAsDesigner + $productCountAsArtist + $productCountAsPublisher);
     }
 }

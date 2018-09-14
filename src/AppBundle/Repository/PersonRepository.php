@@ -28,15 +28,8 @@ class PersonRepository extends EntityRepository
     {
         $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('image')
-            ->leftJoin('o.images', 'image', Join::WITH, 'image.main = 1')
-            ->groupBy('o.id');
+            ->leftJoin('o.images', 'image', Join::WITH, 'image.main = 1');
 
-        $queryBuilder->addSelect($queryBuilder->expr()->sum(
-                "o.productCountAsDesigner",
-                "o.productCountAsPublisher",
-                "o.productCountAsArtist") .
-        " as HIDDEN gameCount");
-        $queryBuilder->addOrderBy("gameCount", 'desc');
 
         if ($taxon) {
             $queryBuilder
@@ -55,29 +48,26 @@ class PersonRepository extends EntityRepository
     }
 
     /**
+     * @param array $criteria
+     * @param array $sorting
      * @param TaxonInterface|null $taxon
      *
      * @return QueryBuilder
      */
-    public function createFrontendListQueryBuilder(array $criteria = [], TaxonInterface $taxon = null)
+    public function createFrontendListQueryBuilder(array $criteria = [], array $sorting = [], TaxonInterface $taxon = null)
     {
         $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('image')
-            ->leftJoin('o.images', 'image', Join::WITH, 'image.main = 1')
-            ->groupBy('o.id');
+            ->leftJoin('o.images', 'image', Join::WITH, 'image.main = 1');
 
-        $queryBuilder->addSelect($queryBuilder->expr()->sum(
-                "o.productCountAsDesigner",
-                "o.productCountAsPublisher",
-                "o.productCountAsArtist") .
-            " as HIDDEN gameCount");
-        $queryBuilder->addOrderBy("gameCount", 'desc');
 
         // for taxon grid filter
         if (isset($criteria['zone']) && !empty($criteria['zone']['mainTaxon'])) {
             $queryBuilder
                 ->innerJoin('o.taxons', 'taxon');
         }
+
+        $this->sortingOnProductCountIfNecessary($queryBuilder, $criteria, $sorting);
 
         if ($taxon) {
             $queryBuilder
@@ -154,24 +144,6 @@ class PersonRepository extends EntityRepository
     }
 
     /**
-     * @inheritdoc
-     */
-    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = array()): void
-    {
-        if (isset($sorting['gameCount'])) {
-            $queryBuilder->addSelect($queryBuilder->expr()->sum(
-                    "o.productCountAsDesigner",
-                    "o.productCountAsPublisher",
-                    "o.productCountAsArtist") .
-                " as HIDDEN gameCount");
-            $queryBuilder->addOrderBy("gameCount", $sorting['gameCount']);
-            unset($sorting['gameCount']);
-        }
-
-        parent::applySorting($queryBuilder, $sorting);
-    }
-
-    /**
      * Create paginator for products categorized under given taxon.
      *
      * @param TaxonInterface $taxon
@@ -212,5 +184,48 @@ class PersonRepository extends EntityRepository
         $queryBuilder
             ->select($queryBuilder->expr()->count('o'));
         return $queryBuilder->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @param QueryBuilder $queryBuilder
+     * @param array $criteria
+     * @param array $sorting
+     */
+    private function sortingOnProductCountIfNecessary(QueryBuilder $queryBuilder, array $criteria, array $sorting)
+    {
+        $role = $criteria['role'] ?? null;
+        $sortingByProductCount = 0 === count($sorting) || isset($sorting['productCount']);
+
+        if (null !== $role && $sortingByProductCount) {
+            $order = $sorting['productCount'] ?? 'desc';
+            $sort = $this->getProductCountPropertyNameByRole($role);
+
+            // cannot apply another product count property to apply sorting
+            if (null === $sort) {
+                return;
+            }
+
+            $queryBuilder->orderBy($sort, $order);
+            unset($sorting['productCount']);
+        }
+    }
+
+    /**
+     * @param string $role
+     *
+     * @return null|string
+     */
+    private function getProductCountPropertyNameByRole(string $role): ?string
+    {
+        switch ($role) {
+            case 'designers':
+                return 'o.productCountAsDesigner';
+            case 'artists':
+                return 'o.productCountAsArtist';
+            case 'publishers':
+                return 'o.productCountAsPublisher';
+        }
+
+        return null;
     }
 }

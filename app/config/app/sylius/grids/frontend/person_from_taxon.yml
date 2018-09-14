@@ -10,5 +10,6 @@ sylius_grid:
                         method: createFrontendListQueryBuilder
                         arguments:
                             criteria: "expr:service('request_stack').getCurrentRequest().get('criteria', [])"
+                            sorting: "expr:service('request_stack').getCurrentRequest().get('sorting', [])"
                             taxon: "expr:service('sylius.repository.taxon').findOneBySlug($slug, '%locale%')"
             limits: ~

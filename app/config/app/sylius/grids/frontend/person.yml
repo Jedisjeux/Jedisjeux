@@ -9,15 +9,16 @@ sylius_grid:
                         method: createFrontendListQueryBuilder
                         arguments:
                             criteria: "expr:service('request_stack').getCurrentRequest().get('criteria', [])"
+                            sorting: "expr:service('request_stack').getCurrentRequest().get('sorting', [])"
             limits: ~
             sorting:
-                createdAt: desc
+                productCount: desc
             fields:
-                createdAt:
-                    type: twig
+                productCount:
+                    type: string
                     sortable: ~
             filters:
-                roles:
+                role:
                     type: frontend_person_role
                     form_options:
                         placeholder: sylius.ui.all

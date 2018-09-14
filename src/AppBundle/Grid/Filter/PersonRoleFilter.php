@@ -21,13 +21,13 @@ class PersonRoleFilter implements FilterInterface
      */
     public function apply(DataSourceInterface $dataSource, string $name, $data, array $options = []): void
     {
-        if (empty($data['value'])) {
+        if (empty($data)) {
             return;
         }
 
         $field = null;
 
-        switch($data['value']) {
+        switch($data) {
             case 'designers':
                 $field = 'productCountAsDesigner';
                 break;

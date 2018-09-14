@@ -24,30 +24,26 @@ class PersonRoleFilterType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $builder->add('value', ChoiceType::class, [
-            'label' => 'sylius.ui.type',
-            'choices' => $options['roles'],
-            'placeholder' => $options['placeholder'],
-        ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults([
-                'roles' => [
+                'label' => 'sylius.ui.type',
+                'choices' => [
                     'app.ui.designers' => 'designers',
                     'app.ui.artists' => 'artists',
                     'app.ui.editors' => 'publishers',
                 ],
                 'placeholder' => '---',
             ])
-            ->setAllowedTypes('roles', ['array'])
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getParent()
+    {
+        return ChoiceType::class;
     }
 }

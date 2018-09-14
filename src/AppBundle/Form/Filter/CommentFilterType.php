@@ -24,16 +24,26 @@ class CommentFilterType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function configureOptions(OptionsResolver $resolver): void
     {
-        $builder->add('value', ChoiceType::class, [
-            'label' => 'app.ui.comments',
-            'choices' => [
-                'sylius.ui.all' => 'all',
-                'app.ui.with' => 'with',
-                'app.ui.without' => 'without',
-            ],
-            'empty_data' => 'with',
-        ]);
+        $resolver
+            ->setDefaults([
+                'label' => 'app.ui.comments',
+                'choices' => [
+                    'sylius.ui.all' => 'all',
+                    'app.ui.with' => 'with',
+                    'app.ui.without' => 'without',
+                ],
+                'empty_data' => 'with',
+            ])
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getParent()
+    {
+        return ChoiceType::class;
     }
 }
