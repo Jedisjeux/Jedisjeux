@@ -67,7 +67,7 @@ class PersonRepository extends EntityRepository
                 ->innerJoin('o.taxons', 'taxon');
         }
 
-        $this->filteringOnPersonRoleIfNecessary($queryBuilder, $criteria, $sorting);
+        $this->sortingOnProductCountIfNecessary($queryBuilder, $criteria, $sorting);
 
         if ($taxon) {
             $queryBuilder
@@ -191,9 +191,9 @@ class PersonRepository extends EntityRepository
      * @param array $criteria
      * @param array $sorting
      */
-    private function filteringOnPersonRoleIfNecessary(QueryBuilder $queryBuilder, array $criteria, array $sorting)
+    private function sortingOnProductCountIfNecessary(QueryBuilder $queryBuilder, array $criteria, array $sorting)
     {
-        $role = $criteria['role']['value'] ?? null;
+        $role = $criteria['role'] ?? null;
         $sortingByProductCount = 0 === count($sorting) || isset($sorting['productCount']);
 
         if (null !== $role && $sortingByProductCount) {
