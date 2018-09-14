@@ -20,9 +20,11 @@
                     <div class="panel-body">
                         <form class="form-horizontal">
                             {% for filter in definition.filters %}
-                                <div class="col-md-4">
-                                    {{ sylius_grid_render_filter(resources, filter) }}
-                                </div>
+                                {% if filter.name != 'search' %}
+                                    <div class="col-md-4">
+                                        {{ sylius_grid_render_filter(resources, filter) }}
+                                    </div>
+                                {% endif %}
                             {% endfor %}
 
                             <div class="form-group">

@@ -14,12 +14,15 @@
                 <!-- Search Form -->
                 <div class="head-search pull-right">
 
-                    <form role="form" action="#">
+                    <form method="get" role="form" action="{{ path('sylius_frontend_product_index') }}">
                         <!-- Input Group -->
                         <div class="input-group">
-
-                            <select class="mainSearch form-control">
-                            </select>
+                            {% set criteria = app.request.get('criteria', []) %}
+                            <input type="text"{% if criteria['search'] is defined %}value="{{ criteria['search']['value'] }}"{% endif %} name="criteria[search][value]" class="form-control"
+                                   placeholder="Recherche...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-color" type="submit">Rechercher</button>
+                            </span>
                         </div>
                     </form>
                 </div>
