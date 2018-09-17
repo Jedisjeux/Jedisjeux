@@ -1,11 +1,11 @@
 $(function () {
 
   var title = document.title;
-  var $notificationBlock = $('#notificationBlock');
+  var $notificationBlock = $('.notificationBlock');
 
   if ($notificationBlock.length > 0) {
 
-    var $notificationItemClone = $('.notificationItem', $notificationBlock).clone();
+    var $notificationItemClone = $('.notificationItem', $notificationBlock).first().clone();
 
     function readNotification($a) {
       $.ajax({

@@ -1,6 +1,6 @@
-<div class="btn-group" id="notificationBlock">
-    <button type="button" class="btn dropdown-toggle dropdown-toggle--no-caret" id="header-drop-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell-o"></i><span class="badge-count default-bg" style="display: none;"></span></button>
-    <ul class="dropdown-menu dropdown-menu-right cart dropdown-animation notificationContainer" aria-labelledby="header-drop-2">
+<div class="btn-group notificationBlock">
+    <button type="button" class="btn dropdown-toggle dropdown-toggle--no-caret" id="{{ id|default('header-drop-2') }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell-o"></i><span class="badge-count default-bg" style="display: none;"></span></button>
+    <ul class="dropdown-menu dropdown-menu-right cart dropdown-animation notificationContainer" aria-labelledby="{{ id|default('header-drop-2') }}">
         <!-- Item 1 -->
         <li class="notificationItem">
             <div class="media margin-clear">
