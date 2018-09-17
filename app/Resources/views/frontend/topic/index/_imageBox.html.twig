@@ -21,7 +21,7 @@
                 <p class="small mb-10"><i class="fa fa-calendar-o pr-1"></i> {{ topic.createdAt|localizeddate('medium', 'none') }} <i
                             class="pl-10 pr-1 fa fa-tag"></i> {{ mainTaxon }}</p>
                 <div class="separator-2"></div>
-                <p class="margin-clear">{{ (topic.mainPost.body|striptags)[:500] }}...</p>
+                <p class="margin-clear">{{ topic.mainPost.body|truncate(500, true, '...')|striptags|raw }}...</p>
                 <br>
                 <a href="{{ path('app_frontend_post_index_by_topic', { 'topicId': topic.id } ) }}" class="btn {% if dark|default(false) %}btn-gray-transparent btn-animated{% else %}btn-default btn-sm{% endif %} margin-clear">{{ 'sylius.ui.view_more'|trans }}<i
                             class="fa fa-arrow-right pl-10"></i></a>

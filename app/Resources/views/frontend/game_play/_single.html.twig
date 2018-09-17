@@ -21,7 +21,7 @@
         </p>
 
         {% if topic is not null and topic.mainPost is not null %}
-            <p>{{ (topic.mainPost.body|striptags)[:150] }}...</p>
+            <p>{{ topic.mainPost.body|truncate(150, true, '...')|striptags|raw }}...</p>
         {% endif %}
         <a href="{{ gamePlayPath }}" class="btn btn-default btn-sm margin-clear">{{ 'sylius.ui.view_more'|trans }}<i class="fa fa-arrow-right pl-10"></i></a>
     </div>
