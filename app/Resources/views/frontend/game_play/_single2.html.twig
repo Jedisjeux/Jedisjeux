@@ -1,0 +1,35 @@
+{% import 'macro/image.html.twig' as images %}
+
+{% set product = game_play.product %}
+{% set topic = game_play.topic %}
+{% set gamePlayPath = path('app_frontend_game_play_show', { 'id': game_play.id, 'productSlug': product.slug }) %}
+{% set avatarPath = game_play.author.avatar is not null ? game_play.author.avatar.webPath : '/assets/frontend/images/avatar-placeholder.png'  %}
+
+<div class="image-box style-3 mb-20 shadow bordered light-gray-bg">
+    <div class="row grid-space-0">
+        <div class="col-lg-2 pv-20">
+            <div class="overlay-container d-flex justify-content-center">
+                {{ images.render(avatarPath, 'thumbnail_XL', topic.author, 'rounded-circle') }}
+                <div class="overlay-to-top">
+                    <p class="small margin-clear"><em>Some info <br> Lorem ipsum dolor sit</em></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-10">
+            <div class="body">
+                <div class="hidden-lg-down"></div>
+                <h3>{{ topic.title }}</h3>
+                <p class="small mb-10">
+                    <i class="fa fa-calendar-o pr-1"></i> {{ game_play.createdAt|localizeddate('medium', 'none') }}
+                </p>
+                <div class="separator-2"></div>
+                {% if topic is not null %}
+                 <p class="margin-clear">{{ topic.mainPost.body|truncate(250, true)|striptags|raw }}</p>
+                {% endif %}
+                <br>
+                <a href="{{ gamePlayPath }}" class="btn btn-default btn-sm margin-clear">{{ 'sylius.ui.view_more'|trans }}<i
+                            class="fa fa-arrow-right pl-10"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
