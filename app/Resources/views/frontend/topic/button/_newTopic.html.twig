@@ -1,0 +1,10 @@
+{% if taxon is defined %}
+    {% set topicCreatePath = path('app_frontend_topic_create_for_taxon', {'taxonId': taxon.id}) %}
+{% else %}
+    {% set topicCreatePath = path('app_frontend_topic_create') %}
+{% endif %}
+
+<a href="{{ topicCreatePath }}" class="btn btn-default btn-lg">
+    <i class="fa fa-plus"></i>
+    {{ 'app.ui.new_topic'|trans }}
+</a>
