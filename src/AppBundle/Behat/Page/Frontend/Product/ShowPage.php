@@ -144,7 +144,7 @@ class ShowPage extends SymfonyPage
      */
     public function hasGamePlayAddedByCustomerEmail(string $email): bool
     {
-        return null !== $this->getElement('game_plays')->find('css', sprintf('.image-box .author:contains("%s")', $email));
+        return null !== $this->getElement('game_plays')->find('css', sprintf('.image-box h3:contains("%s")', $email));
     }
 
     /**
