@@ -21,7 +21,7 @@
                 <i class="pl-10 pr-1 fa fa-tag"></i> {{ article.mainTaxon }}
             </p>
             {% if article.shortDescription is not null %}
-                <p>{{ article.shortDescription|truncate(150, true, '...')|striptags|raw }}</p>
+                <p>{{ article.shortDescription|truncate(150, true)|striptags|raw }}</p>
             {% endif %}
             <a href="{{ articlePath }}" class="btn btn-default btn-sm margin-clear">{{ 'sylius.ui.view_more'|trans }}<i class="fa fa-arrow-right pl-10"></i></a>
         </div>
