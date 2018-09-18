@@ -10,33 +10,31 @@
     <div class="main-container dark-translucent-bg" style="background-image:url('/assets/frontend/images/shop-banner-2.jpg');">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-auto">
-                    <!-- main start -->
-                    <!-- ================ -->
-                    <div class="main object-non-visible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">
-                        <div class="form-block p-30 light-gray-bg border-clear">
-                            <h2 class="title">{{ pageTitle }}</h2>
+                <!-- main start -->
+                <!-- ================ -->
+                <div class="main object-non-visible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">
+                    <div class="form-block p-30 light-gray-bg border-clear">
+                        <h2 class="title">{{ pageTitle }}</h2>
 
-                            {{ form_errors(form) }}
+                        {{ form_errors(form) }}
 
-                            <form action="{{ path('app_frontend_register') }}?" method="post" class="form-horizontal">
-                                {{ form_row(form.email, {attr: {'placeholder': 'sylius.ui.email'|trans}}) }}
-                                {{ form_row(form.user.username, {attr: {'placeholder': 'sylius.ui.username'|trans}}) }}
-                                {{ form_row(form.user.plainPassword.first, {attr: {'placeholder': 'sylius.ui.password'|trans}}) }}
-                                {{ form_row(form.user.plainPassword.second, {attr: {'placeholder': 'sylius.ui.repeat_new_password'|trans}}) }}
+                        <form action="{{ path('app_frontend_register') }}?" method="post" class="form-horizontal">
+                            {{ form_row(form.email, {attr: {'placeholder': 'sylius.ui.email'|trans}}) }}
+                            {{ form_row(form.user.username, {attr: {'placeholder': 'sylius.ui.username'|trans}}) }}
+                            {{ form_row(form.user.plainPassword.first, {attr: {'placeholder': 'sylius.ui.password'|trans}}) }}
+                            {{ form_row(form.user.plainPassword.second, {attr: {'placeholder': 'sylius.ui.repeat_new_password'|trans}}) }}
 
-                                {{ form_rest(form) }}
+                            {{ form_rest(form) }}
 
-                                <div class="form-group row">
-                                    <div class="ml-md-auto col-md-9">
-                                        <button type="submit" class="btn btn-group btn-default btn-animated">{{ 'sylius.ui.create_an_account'|trans }} <i class="fa fa-check"></i></button>
-                                    </div>
+                            <div class="form-group row">
+                                <div class="ml-md-auto col-md-9">
+                                    <button type="submit" class="btn btn-group btn-default btn-animated">{{ 'sylius.ui.create_an_account'|trans }} <i class="fa fa-check"></i></button>
                                 </div>
-                            </form>
-                        </div>
+                            </div>
+                        </form>
                     </div>
-                    <!-- main end -->
                 </div>
+                <!-- main end -->
             </div>
         </div>
     </div>
