@@ -1,3 +1,5 @@
+{% set criteria = app.request.get('criteria', []) %}
+
 <!-- header-container start -->
 <div class="header-container">
     {% include 'frontend/header/_top.html.twig' %}
@@ -65,9 +67,13 @@
                                         <button type="button" class="btn dropdown-toggle dropdown-toggle--no-caret" id="header-drop-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-search"></i></button>
                                         <ul class="dropdown-menu dropdown-menu-right dropdown-animation" aria-labelledby="header-drop-3">
                                             <li>
-                                                <form role="search" class="search-box margin-clear">
+                                                <form role="search" class="search-box margin-clear" action="{{ path('sylius_frontend_product_index') }}">
                                                     <div class="form-group has-feedback">
-                                                        <input type="text" class="form-control" placeholder="Search">
+                                                        <input type="text"
+                                                               {% if criteria['search'] is defined %}value="{{ criteria['search']['value'] }}"{% endif %}
+                                                               name="criteria[search][value]"
+                                                               class="form-control"
+                                                               placeholder="{{ 'sylius.ui.search'|trans }}">
                                                         <i class="fa fa-search form-control-feedback"></i>
                                                     </div>
                                                 </form>
@@ -101,9 +107,13 @@
                             <button type="button" class="btn dropdown-toggle dropdown-toggle--no-caret" id="header-drop-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-search"></i></button>
                             <ul class="dropdown-menu dropdown-menu-right dropdown-animation" aria-labelledby="header-drop-1">
                                 <li>
-                                    <form role="search" class="search-box margin-clear">
+                                    <form role="search" class="search-box margin-clear" action="{{ path('sylius_frontend_product_index') }}">
                                         <div class="form-group has-feedback">
-                                            <input type="text" class="form-control" placeholder="Search">
+                                            <input type="text"
+                                                   {% if criteria['search'] is defined %}value="{{ criteria['search']['value'] }}"{% endif %}
+                                                   name="criteria[search][value]"
+                                                   class="form-control"
+                                                   placeholder="{{ 'sylius.ui.search'|trans }}">
                                             <i class="fa fa-search form-control-feedback"></i>
                                         </div>
                                     </form>

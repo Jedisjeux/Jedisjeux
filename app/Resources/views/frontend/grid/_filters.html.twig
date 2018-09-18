@@ -8,7 +8,9 @@
         <div class="sorting-filters text-center mb-20 d-flex justify-content-center">
             <form class="form-inline" method="get">
                 {% for filter in definition.filters %}
-                    {{ sylius_grid_render_filter(resources, filter) }}
+                    {% if 'search' != filter.name %}
+                        {{ sylius_grid_render_filter(resources, filter) }}
+                    {% endif %}
                 {% endfor %}
                 <div class="form-group ml-1">
                     <button type="submit" class="btn btn-default">
