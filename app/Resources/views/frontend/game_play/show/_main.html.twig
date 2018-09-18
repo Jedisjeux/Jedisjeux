@@ -31,7 +31,7 @@
                     <div class="col-lg-4 col-xl-5 pv-20">
                         <div class="overlay-container overlay-visible">
                             {{ images.render(game_play.product.mainImage.webPath, 'full', game_play.product.name) }}
-                            <a href="{{ game_play.product.mainImage.webPath | imagine_filter('full') }}" class="slick-carousel--popup-img overlay-link" title="image title"><i class="fa fa-plus"></i></a>
+                            <a href="{{ path('sylius_frontend_product_show', { 'slug': game_play.product.slug } ) }}" class="slick-carousel--popup-img overlay-link" title="image title"><i class="fa fa-link"></i></a>
                         </div>
                         <div class="clearfix mb-20">
                         </div>

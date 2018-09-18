@@ -1,0 +1,9 @@
+{% import 'macro/messages.html.twig' as messages %}
+
+{% if game_plays|length > 0 %}
+    {% for game_play in game_plays %}
+        {% include 'frontend/game_play/_single2.html.twig' %}
+    {% endfor %}
+{% else %}
+    {{ messages.info('app.ui.there_are_no_game_plays') }}
+{% endif %}

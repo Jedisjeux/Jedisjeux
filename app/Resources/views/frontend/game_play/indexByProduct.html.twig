@@ -1,0 +1,45 @@
+{% extends "frontend/layout.html.twig" %}
+
+{% from 'macro/pagination.html.twig' import simple as pagination %}
+
+{% set pageTitle %}
+    {{ 'app.ui.game_plays'|trans }}
+{% endset %}
+
+{% block content %}
+    {% include 'frontend/game_play/indexByProduct/_banner.html.twig' %}
+
+    <!-- main-container start -->
+    <!-- ================ -->
+    <section class="main-container">
+
+        <div class="container">
+            <div class="row">
+
+                <!-- main start -->
+                <!-- ================ -->
+                <div class="main col-md-12">
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            {{
+                                render(url('sylius_frontend_partial_product_show_by_slug', {
+                                    'slug': app.request.attributes.get('productSlug'),
+                                    'template': 'frontend/product/_box.html.twig'
+                                }))
+                            }}
+                        </div>
+                        <div class="col-md-9" id="game-play-list">
+                            {% include 'frontend/game_play/_list2.html.twig' with {'game_plays': game_plays.data} %}</div>
+                            <!-- pagination start -->
+                            {{ pagination(game_plays.data) }}
+                            <!-- pagination end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'frontend/footer/_top.html.twig' %}
+{% endblock content %}

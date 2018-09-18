@@ -1,5 +1,10 @@
 <!-- articles start -->
 <div class="margin-clear space-top">
-    {{ render(url('app_frontend_partial_product_game_play_latest', {'productId': product.id, 'template': 'frontend/game_play/_list.html.twig'})) }}
+    {{ render(url('app_frontend_partial_product_game_play_latest', {'productId': product.id, 'template': 'frontend/game_play/_list2.html.twig'})) }}
+
+    <a href="{{ path('app_frontend_game_play_index_by_product', {'productSlug': product.slug}) }}"
+       class="btn btn-transparent btn-sm margin-clear">{{ 'sylius.ui.view_more'|trans }}
+        <i class="fa fa-arrow-right pl-10"></i>
+    </a>
 </div>
 <!-- articles end -->
