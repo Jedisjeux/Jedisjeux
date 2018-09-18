@@ -14,7 +14,7 @@ namespace AppBundle\Factory;
 use AppBundle\Entity\ProductList;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Symfony\Component\Translation\Translator;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -32,14 +32,14 @@ class ProductListFactory implements FactoryInterface
     protected $customerContext;
 
     /**
-     * @var Translator
+     * @var TranslatorInterface
      */
     protected $translator;
 
     /**
      * @param string $className
      */
-    public function __construct($className, CustomerContextInterface $customerContext, Translator $translator)
+    public function __construct($className, CustomerContextInterface $customerContext, TranslatorInterface $translator)
     {
         $this->className = $className;
         $this->customerContext = $customerContext;
@@ -68,9 +68,8 @@ class ProductListFactory implements FactoryInterface
     {
         $productList = $this->createNew();
 
-        $productList
-            ->setCode($code)
-            ->setName($this->translator->trans('app.ui.'.$code));
+        $productList->setCode($code);
+        $productList->setName($this->translator->trans('app.ui.'.$code));
 
         return $productList;
     }
