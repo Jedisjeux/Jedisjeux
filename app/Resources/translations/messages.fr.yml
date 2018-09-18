@@ -169,6 +169,7 @@ app:
         publisher: Publieur
         published_at: Publié le
         ratings: Notes
+        react_on_this_article: Réagir à cet article
         recent_articles: Articles récents
         redactor: Rédacteur
         redirections: Redirections
@@ -218,6 +219,9 @@ app:
         with: Avec
         without: Sans
         videos: Vidéos
+        view_more_articles: Voir plus d'articles
+        view_more_game_plays: Voir plus de parties de jeu
+        view_more_reviews: Voir plus d'avis
         view_website: Voir le site
         your_comment: Votre commentaire
 sylius:
