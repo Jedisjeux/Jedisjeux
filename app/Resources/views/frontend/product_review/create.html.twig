@@ -7,37 +7,46 @@
 {% endset %}
 
 {% block content %}
-<!-- main-container start -->
-<!-- ================ -->
-<section class="main-container">
+    <!-- main-container start -->
+    <!-- ================ -->
+    <section class="main-container">
 
-    <div class="container">
-        <div class="row">
+        <div class="container">
+            <div class="row">
 
-            <!-- main start -->
-            <!-- ================ -->
-            <div class="main col-md-12">
-
-                <!-- page-title start -->
+                <!-- main start -->
                 <!-- ================ -->
-                <h1 class="page-title">{{ pageTitle }}</h1>
-                <div class="separator-2"></div>
-                <!-- page-title end -->
+                <div class="main col-md-12">
 
-                {{ form_start(form) }}
+                    <!-- page-title start -->
+                    <!-- ================ -->
+                    <h1 class="page-title">{{ pageTitle }}</h1>
+                    <div class="separator-2"></div>
+                    <!-- page-title end -->
 
-                {% include 'frontend/product_review/_form.html.twig' %}
+                    <div class="row">
+                        <div class="col-md-3">
+                            {{ render(url('sylius_frontend_partial_product_show_by_slug', {
+                                'slug': app.request.attributes.get('slug'),
+                                'template': 'frontend/product/_box.html.twig' })) }}
+                        </div>
+                        <div class="col-md-9">
 
-                <div class="pull-right">
-                    {{ actions.create() }}
+                            {{ form_start(form) }}
+
+                            {% include 'frontend/product_review/_form.html.twig' %}
+
+                            <div class="pull-right">
+                                {{ actions.create() }}
+                            </div>
+
+                            <div class="clearfix"></div>
+
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
                 </div>
-
-                <div class="clearfix"></div>
-
-                {{ form_end(form) }}
-
             </div>
         </div>
-    </div>
-</section>
+    </section>
 {% endblock content %}

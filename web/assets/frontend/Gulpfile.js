@@ -24,6 +24,7 @@ var paths = {
             nodeModulesPath + 'jquery/dist/jquery.min.js',
             nodeModulesPath + 'jquery-ui-dist/jquery-ui.min.js',
             nodeModulesPath + 'bootstrap/dist/js/bootstrap.bundle.js',
+            nodeModulesPath + 'rater-jquery/rater.js',
             vendorUiPath + 'Resources/private/js/sylius-form-collection.js',
             'plugins/isotope/imagesloaded.pkgd.min.js',
             'plugins/isotope/isotope.pkgd.min.js',

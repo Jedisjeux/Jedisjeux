@@ -1,0 +1,9 @@
+{% if resource is null %}
+    {% set path = path('sylius_frontend_product_review_create', { 'slug': app.request.get('productSlug') } ) %}
+{% else %}
+    {% set path = path('sylius_frontend_product_review_update', { 'slug': app.request.get('productSlug'), 'id': resource.id } ) %}
+{% endif %}
+
+<a id="productReviewButton" href="{{ path }}" class="wishlist">
+    <i class="fa fa-star-o pl-10 pr-1"></i>Votre avis
+</a>
