@@ -38,7 +38,7 @@
     </article>
     <!-- blogpost end -->
 
-    {{ buttons.btn(path('app_frontend_post_create_by_topic', {'topicId' : topic.id}), 'Répondre au sujet', null, 'plus', 'btn-default btn-lg') }}
+    {{ buttons.btn(path('app_frontend_post_create_by_topic', {'topicId' : topic.id}), 'Répondre au sujet', null, 'reply', 'btn-default btn-lg') }}
     {% include 'frontend/post/index/_comments.html.twig' %}
 
 </div>
