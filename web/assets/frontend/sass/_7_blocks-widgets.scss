@@ -12,6 +12,9 @@
 }
 #logo-footer {
   margin-bottom: 20px;
+  &.logo-font {
+    font-size: 26px;
+  }
 }
 .site-slogan {
   color: $gray;
