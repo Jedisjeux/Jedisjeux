@@ -7,6 +7,8 @@
 {% endset %}
 
 {% block content %}
+    {% include 'frontend/product_review/create/_breadcrumb.html.twig' %}
+
     <!-- main-container start -->
     <!-- ================ -->
     <section class="main-container">
@@ -31,6 +33,8 @@
                                 'template': 'frontend/product/_box.html.twig' })) }}
                         </div>
                         <div class="col-md-9">
+
+                            {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
                             {{ form_start(form) }}
 
