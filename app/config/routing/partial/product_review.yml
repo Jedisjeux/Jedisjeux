@@ -36,7 +36,7 @@ sylius_partial_product_rating_show:
                 arguments: [{reviewSubject: $productId, author: expr:service('app.context.customer').getCustomer()}]
 
 sylius_partial_product_review_show_create_or_update_link:
-    path: /products/{productId}/show-create-or-update-link
+    path: /products/{productSlug}/show-create-or-update-link
     methods: [GET]
     defaults:
         _controller: sylius.controller.product_review:showRatingAction
@@ -44,4 +44,4 @@ sylius_partial_product_review_show_create_or_update_link:
             template: 'frontend/product_review/_showCreateOrUpdateReviewLink.html.twig'
             repository:
                 method: findOneBy
-                arguments: [{reviewSubject: $productId, author: expr:service('app.context.customer').getCustomer()}]
+                arguments: [{reviewSubject: expr:service('sylius.repository.product').findOneBySlug($productSlug), author: expr:service('app.context.customer').getCustomer()}]
