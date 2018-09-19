@@ -3149,3 +3149,24 @@ fieldset[disabled] .form-control {
 @-o-keyframes blink{
   50% { opacity:0; }
 }
+
+/*Rating (rater.js)
+---------------------------------- */
+
+.rating-container {
+  display: inline-block;
+}
+
+.form-group {
+  .rating {
+    &.md {
+      line-height: 28px;
+    }
+  }
+}
+
+.rating {
+  &.md {
+    font-size: 28px;
+  }
+}

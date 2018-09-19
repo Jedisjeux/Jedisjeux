@@ -7,46 +7,50 @@
 {% endset %}
 
 {% block content %}
-<!-- main-container start -->
-<!-- ================ -->
-<section class="main-container">
+    {% include 'frontend/product_review/update/_breadcrumb.html.twig' %}
 
-    <div class="container">
-        <div class="row">
+    <!-- main-container start -->
+    <!-- ================ -->
+    <section class="main-container">
 
-            <!-- main start -->
-            <!-- ================ -->
-            <div class="main col-md-12">
+        <div class="container">
+            <div class="row">
 
-                <!-- page-title start -->
+                <!-- main start -->
                 <!-- ================ -->
-                <h1 class="page-title">{{ pageTitle }}</h1>
-                <div class="separator-2"></div>
-                <!-- page-title end -->
+                <div class="main col-md-12">
 
-                <div class="row">
-                    <div class="col-md-3">
-                        {{ render(url('sylius_frontend_partial_product_show_by_slug', {
-                            'slug': app.request.attributes.get('slug'),
-                            'template': 'frontend/product/_box.html.twig' })) }}
-                    </div>
-                    <div class="col-md-9">
-                        {{ form_start(form) }}
-                        <input type="hidden" name="_method" value="PUT"/>
+                    <!-- page-title start -->
+                    <!-- ================ -->
+                    <h1 class="page-title">{{ pageTitle }}</h1>
+                    <div class="separator-2"></div>
+                    <!-- page-title end -->
 
-                        {% include 'frontend/product_review/_form.html.twig' %}
-
-                        <div class="pull-right">
-                            {{ actions.update() }}
+                    <div class="row">
+                        <div class="col-md-3">
+                            {{ render(url('sylius_frontend_partial_product_show_by_slug', {
+                                'slug': app.request.attributes.get('slug'),
+                                'template': 'frontend/product/_box.html.twig' })) }}
                         </div>
+                        <div class="col-md-9">
+                            {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
-                        <div class="clearfix"></div>
+                            {{ form_start(form) }}
+                            <input type="hidden" name="_method" value="PUT"/>
 
-                        {{ form_end(form) }}
+                            {% include 'frontend/product_review/_form.html.twig' %}
+
+                            <div class="pull-right">
+                                {{ actions.update() }}
+                            </div>
+
+                            <div class="clearfix"></div>
+
+                            {{ form_end(form) }}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 {% endblock content %}
