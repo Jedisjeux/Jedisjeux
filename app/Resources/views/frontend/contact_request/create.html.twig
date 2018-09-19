@@ -1,5 +1,6 @@
 {% extends 'frontend/layout.html.twig' %}
 
+{% import 'macro/social_links.html.twig' as social_links %}
 {% set pageTitle = 'sylius.ui.contact_us'|trans %}
 
 {% block content %}
@@ -14,27 +15,38 @@
 
                 <!-- main start -->
                 <!-- ================ -->
-                <div class="main col-12 space-bottom">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="contact-form">
-                                {% form_theme form 'frontend/form/vertical.html.twig' %}
+                <div class="main col-8 space-bottom">
+                    <div class="contact-form">
+                        {% form_theme form 'frontend/form/vertical.html.twig' %}
 
-                                {{ form_start(form, {'attr': {'class': 'margin-clear'}}) }}
-                                {{ form_widget(form) }}
-                                <button type="submit"
-                                        class="submit-button btn btn-lg btn-default">
-                                    {{ 'sylius.ui.send'|trans }}
-                                </button>
-                                {{ form_end(form) }}
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div id="map-canvas"></div>
-                        </div>
+                        {{ form_start(form, {'attr': {'class': 'margin-clear'}}) }}
+                        {{ form_widget(form) }}
+                        <button type="submit"
+                                class="submit-button btn btn-lg btn-default">
+                            {{ 'sylius.ui.send'|trans }}
+                        </button>
+                        {{ form_end(form) }}
                     </div>
                 </div>
                 <!-- main end -->
+
+                <!-- sidebar start -->
+                <!-- ================ -->
+                <aside class="col-lg-3 ml-xl-auto">
+                    <div class="sidebar">
+                        <div class="side vertical-divider-left">
+                            <h3 class="title logo-font"><span class="text-default">Jedisjeux</span></h3>
+                            <div class="separator-2 mt-20"></div>
+                            <ul class="list">
+                                <li><i class="fa fa-home pr-10"></i>{{ sonata_block_render({'name': '/cms/content/head-office'}, {'template': 'frontend/content/block/block_content.html.twig'}) }}</span></li>
+                            </ul>
+                            <ul class="social-links circle small margin-clear clearfix animated-effect-1">
+                                {{ social_links.list() }}
+                            </ul>
+                        </div>
+                    </div>
+                </aside>
+                <!-- sidebar end -->
             </div>
         </div>
     </section>
