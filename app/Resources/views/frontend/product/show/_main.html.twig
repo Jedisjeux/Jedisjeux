@@ -1,4 +1,5 @@
 {% import 'macro/image.html.twig' as images %}
+{% from 'macro/rating.html.twig' import rating %}
 
 <!-- main-container start -->
 <!-- ================ -->
@@ -14,6 +15,11 @@
                 <!-- page-title start -->
                 <!-- ================ -->
                 <h1 class="page-title text-center">{{ product.name }}</h1>
+                {% if product.averageRating > 0 %}
+                <div class="text-center">
+                    <big> {{ rating(product.averageRating) }} {{ product.averageRating|round(1) }}</big> <small>/10</small> <small>({{ product.ratings | length }} {{ 'app.ui.ratings'|trans|lower }})</small>
+                </div>
+                {% endif %}
                 <div class="text-center">
                     <big>
                         {{ product.shortDescription|raw }}
@@ -69,15 +75,11 @@
                             </div>
                         </div>
                         <!-- pills end -->
-                        <hr class="mb-10">
                         <div class="clearfix mb-20">
-                    <span>
-                      <i class="fa fa-star text-default"></i>
-                      <i class="fa fa-star text-default"></i>
-                      <i class="fa fa-star text-default"></i>
-                      <i class="fa fa-star text-default"></i>
-                      <i class="fa fa-star"></i>
-                    </span>
+                            <strong>{{ 'app.ui.your_rating'|trans }}</strong>
+                            {{ render(url('sylius_partial_product_rating_show', { 'productId': product.id })) }}
+
+                            <hr class="mb-10">
                             <a href="#"
                                class="wishlist"
                                data-toggle="dropdown"
