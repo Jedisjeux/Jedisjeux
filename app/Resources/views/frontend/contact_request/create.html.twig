@@ -15,11 +15,11 @@
                 <!-- main start -->
                 <!-- ================ -->
                 <div class="main col-12 space-bottom">
-                    <h2 class="title">Drop Us a Line</h2>
                     <div class="row">
                         <div class="col-lg-6">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet quisquam.</p>
                             <div class="contact-form">
+                                {% form_theme form 'frontend/form/vertical.html.twig' %}
+
                                 {{ form_start(form, {'attr': {'class': 'margin-clear'}}) }}
                                 {{ form_widget(form) }}
                                 <button type="submit"

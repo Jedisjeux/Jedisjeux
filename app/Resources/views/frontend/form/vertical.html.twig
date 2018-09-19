@@ -1,0 +1,50 @@
+{% extends 'bootstrap_4_layout.html.twig' %}
+
+{% block form_row -%}
+    {%- if compound is defined and compound -%}
+        {%- set element = 'fieldset' -%}
+    {%- endif -%}
+    <{{ element|default('div') }} class="form-group{% if icon_class is defined %} has-feedback{% endif %}">
+    {{- form_label(form) -}}
+    {{- form_widget(form) -}}
+    {% if icon_class is defined %}
+        <i class="{{ icon_class|default('') }} form-control-feedback pr-4"></i>
+    {% endif %}
+    </{{ element|default('div') }}>
+{%- endblock form_row %}
+
+{% block password_row %}
+    {% set icon_class= 'fa fa-lock' %}
+
+    {{- block('form_row') -}}
+{% endblock %}
+
+{% block email_row %}
+    {% set icon_class= 'fa fa-envelope' %}
+
+    {{- block('form_row') -}}
+{% endblock %}
+
+{% block textarea_row %}
+    {% set icon_class = 'fa fa-pencil' %}
+
+    {{- block('form_row') -}}
+{% endblock %}
+
+{% block _app_contact_request_firstName_row %}
+    {% set icon_class= 'fa fa-user' %}
+
+    {{- block('form_row') -}}
+{% endblock %}
+
+{% block _app_contact_request_lastName_row %}
+    {% set icon_class= 'fa fa-user' %}
+
+    {{- block('form_row') -}}
+{% endblock %}
+
+{% block _sylius_customer_simple_registration_user_username_row %}
+    {% set icon_class= 'fa fa-user' %}
+
+    {{- block('form_row') -}}
+{% endblock %}

@@ -9,10 +9,11 @@
             <div class="col-lg-8 text-center pv-20">
                 <h1 class="page-title text-center">{{ pageTitle }}</h1>
                 <div class="separator"></div>
-                <p class="lead text-center">It would be great to hear from you! Just drop us a line and ask for anything with which you think we could be helpful. We are looking forward to hearing from you!</p>
+                <p class="lead text-center">{{ 'sylius.ui.use_the_contact_form_below_to_send_us_a_message'|trans }}</p>
                 <ul class="list-inline mb-20 text-center">
-                    <li class="list-inline-item"><i class="text-default fa fa-map-marker pr-2"></i>One infinity loop, 54100</li>
-                    <li class="list-inline-item"><a href="mailto:youremail@domain.com" class="link-dark"><i class="text-default fa fa-envelope-o pl-10 pr-2"></i>jedisjeux@jedisjeux.net</a></li>
+                    <li class="list-inline-item">
+                        <i class="text-default fa fa-map-marker pr-2"></i>{{ sonata_block_render({'name': '/cms/content/head-office'}, {'template': 'frontend/content/block/block_content.html.twig'}) }}
+                    </li>
                 </ul>
                 <div class="separator"></div>
                 <ul class="social-links circle animated-effect-1 margin-clear text-center space-bottom">
