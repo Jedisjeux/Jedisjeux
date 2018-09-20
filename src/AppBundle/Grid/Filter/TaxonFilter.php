@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Grid\Data\DataSourceInterface;
 use Sylius\Component\Grid\Filtering\FilterInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 
@@ -24,17 +25,23 @@ use Webmozart\Assert\Assert;
 class TaxonFilter implements FilterInterface
 {
     /**
-     * @var EntityRepository
+     * @var TaxonRepositoryInterface
      */
     private $taxonRepository;
 
     /**
-     * TaxonFilter constructor.
-     * @param EntityRepository $taxonRepository
+     * @var string
      */
-    public function __construct(EntityRepository $taxonRepository)
+    private $locale;
+
+    /**
+     * @param TaxonRepositoryInterface $taxonRepository
+     * @param string $locale
+     */
+    public function __construct(TaxonRepositoryInterface $taxonRepository, string $locale)
     {
         $this->taxonRepository = $taxonRepository;
+        $this->locale = $locale;
     }
 
     /**
@@ -50,7 +57,7 @@ class TaxonFilter implements FilterInterface
         }
 
         /** @var TaxonInterface $taxon */
-        $taxon = $this->taxonRepository->find($data['mainTaxon']);
+        $taxon = $this->taxonRepository->findOneBySlug($data['mainTaxon'], $this->locale);
         Assert::notNull($taxon);
 
         $field = (string) $this->getOption($options, 'field', $name);
