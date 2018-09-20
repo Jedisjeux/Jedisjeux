@@ -63,13 +63,32 @@
                                 {% set avatarPath = customer.avatar is not null ? customer.avatar.webPath : '/assets/frontend/templates/images/avatar-placeholder.png' %}
 
                                 {#{{ images.render(avatarPath, 'thumbnail', customer, 'avatar rounded-circle') }}#}
-                                <button id="header-top-drop-3" type="button" class="btn dropdown-toggle btn-default btn-sm dropdown-toggle--no-caret" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-lock pr-2"></i> {{ app.user }}</button>
+                                <a href="#" id="header-top-drop-3" type="button" class="button-avatar dropdown-toggle dropdown-toggle--no-caret" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ images.render(avatarPath, 'thumbnail', customer, 'avatar rounded-circle') }}
+                                    {{ app.user }}
+                                </a>
 
-                                <ul class="dropdown-menu dropdownd .-menu-right dropdown-animation" aria-labelledby="header-top-drop-3">
+                                <ul class="dropdown-menu dropdown-menu-right dropdown-animation" aria-labelledby="header-top-drop-3">
                                     <li>
                                         <a href="{{ path('sylius_frontend_account_dashboard') }}">
                                            <i class="fa fa-lock"></i>
                                            {{ 'sylius.ui.my_account'|trans }}
+                                        </a>
+                                    </li>
+                                    <li><a href="{{ path('app_frontend_account_product_list_index') }}">
+                                            <i class="fa fa-list"></i>
+                                            {{ 'app.ui.my_game_lists'|trans }}
+                                        </a></li>
+                                    <li>
+                                        <a href="{{ path('app_frontend_account_games_library') }}">
+                                            <i class="fa fa-th"></i>
+                                            {{ 'app.ui.my_virtual_game_library'|trans }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('app_frontend_account_game_play_index') }}">
+                                            <i class="fa fa-play"></i>
+                                            {{ 'app.ui.my_game_plays'|trans }}
                                         </a>
                                     </li>
                                     <li>
