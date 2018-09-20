@@ -38,6 +38,8 @@ app_frontend_article_index_by_taxon:
             template: frontend/article/indexByTaxon.html.twig
     requirements:
         slug: "[^?]+"
+    options:
+        expose: true
 
 app_frontend_article_show:
     methods: [GET]

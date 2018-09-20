@@ -48,6 +48,7 @@ class TaxonFilterType extends AbstractType
             'placeholder' => $options['placeholder'],
             'class' => 'AppBundle:Taxon',
             'group_by' => 'parent',
+            'choice_value' => 'slug',
             'choice_label' => 'name',
             'query_builder' => function (EntityRepository $entityRepository) use ($options, $onlyPublic) {
                 $queryBuilder = $entityRepository->createQueryBuilder('o');
