@@ -43,6 +43,7 @@ app:
         designer: Auteur
         designers: Auteurs
         destination: Destination
+        do_not_have_an_account_yet: Pas encore de compte ?
         duration: Durée
         duration_in_minute: Durée en minute
         edit_article: Modifier l'article

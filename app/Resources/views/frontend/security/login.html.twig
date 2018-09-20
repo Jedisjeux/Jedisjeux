@@ -50,17 +50,11 @@
                                     <ul class="space-top">
                                         <li><a href="{{ path('sylius_user_request_password_reset_token') }}">{{ 'sylius.ui.forgot_password'|trans }}</a></li>
                                     </ul>
-                                    <span class="text-center text-muted">Login with</span>
-                                    <ul class="social-links colored circle clearfix">
-                                        <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li class="googleplus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                    </ul>
                                 </div>
                             </div>
                         </form>
                     </div>
-                    <p class="text-center space-top">Don't have an account yet? <a href="{{ path('app_frontend_register') }}">Sing up</a> now.</p>
+                    <p class="text-center space-top">{{ 'app.ui.do_not_have_an_account_yet'|trans }} <a href="{{ path('app_frontend_register') }}">{{ 'sylius.ui.register'|trans }}</a></p>
                 </div>
                 <!-- main end -->
             </div>
