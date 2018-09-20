@@ -1,1 +1,4 @@
-{% include 'frontend/grid/_filters.html.twig' %}
+<div id="topic-filters" data-taxon="{{ app.request.get('slug') }}">
+    {% include 'frontend/grid/_filters.html.twig' %}
+</div>
+

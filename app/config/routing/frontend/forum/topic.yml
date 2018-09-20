@@ -70,3 +70,5 @@ app_frontend_topic_index_by_taxon:
             template: frontend/topic/index.html.twig
     requirements:
         slug: "[^?]+"
+    options:
+        expose: true
