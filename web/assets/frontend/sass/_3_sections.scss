@@ -16,6 +16,18 @@
   &.colored a:hover {
     text-decoration: none;
   }
+  &.colored {
+    .btn-avatar.btn-link,
+    .btn-avatar.btn-link:hover {
+      color: $white;
+    }
+  }
+  .avatar {
+    display: inline;
+    width: 30px;
+    height: 30px;
+    color: transparent;
+  }
 }
 
 /* Medium desktop devices and tablets */
