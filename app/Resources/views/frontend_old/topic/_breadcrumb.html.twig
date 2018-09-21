@@ -1,6 +1,0 @@
-{% set ancestors = taxon.ancestors|reverse %}
-
-{% for parent in ancestors %}
-    <a href="{{ path('app_frontend_topic_index_by_taxon', {'slug': parent.slug}) }}">{{ parent.name }}</a> /
-{% endfor %}
-{{ taxon.name }}

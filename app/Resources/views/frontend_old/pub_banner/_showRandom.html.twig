@@ -1,9 +1,0 @@
-{% set pub_banner_count = pub_banners|length %}
-{% set key = random(pub_banner_count-1) %}
-{% set pub_banner = pub_banner_count > 0 ? pub_banners[key] : null %}
-
-{% if pub_banner %}
-    <a href="{{ pub_banner.targetUrl }}" target="_blank">
-        <img class="img-responsive" src="{{ pub_banner.webPath|imagine_filter('pub_banner') }}" alt="{{ pub_banner.dealer }}"/>
-    </a>
-{% endif %}

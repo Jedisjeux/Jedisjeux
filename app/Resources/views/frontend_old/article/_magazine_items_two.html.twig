@@ -1,8 +1,0 @@
-{% from 'macros/images.html.twig' import image %}
-{% from 'macros/articles.html.twig' import magazineItemTwo %}
-
-{% set articles = articles.data is defined ? articles.data : articles %}
-
-{% for article in articles %}
-    {{ magazineItemTwo(article) }}
-{% endfor %}
