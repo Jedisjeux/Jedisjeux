@@ -1,0 +1,10 @@
+app_frontend_game_play_image_index:
+    methods: [GET]
+    path: /images/parties/
+    defaults:
+        _controller: app.controller.game_play_image:indexAction
+        _sylius:
+            template: frontend/game_play_image/index.html.twig
+            section: frontend
+            paginate: 12
+            grid: app_frontend_game_play_image

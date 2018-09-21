@@ -1,0 +1,11 @@
+{% extends 'frontend/layout.html.twig' %}
+
+{% set pageTitle %}
+    {{ 'app.ui.game_play_images'|trans }}
+{% endset %}
+
+{% block content %}
+    {% include 'frontend/game_play_image/index/_banner.html.twig' %}
+    {% include 'frontend/game_play_image/index/_main.html.twig' %}
+    {% include 'frontend/footer/_top.html.twig' %}
+{% endblock content %}

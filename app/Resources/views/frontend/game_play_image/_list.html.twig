@@ -1,0 +1,31 @@
+{% import 'macro/image.html.twig' as images %}
+
+<div class="row grid-space-10">
+    {% for image in game_play_images %}
+        {% set game_play = image.gamePlay %}
+
+        {% set gamePlayPath = path('app_frontend_game_play_show', {
+            'productSlug': game_play.product.slug,
+            'id': game_play.id
+        } ) %}
+
+        <div class="col-4">
+            <div class="image-box style-2 mb-20 bordered light-gray-bg">
+                <div class="overlay-container">
+                    {{ images.render(image.webPath, 'magazine_item', 'image') }}
+                    <a href="{{ gamePlayPath }}" class="overlay-link small">
+                        <i class="fa fa-link"></i>
+                    </a>
+                </div>
+                <div class="body text-center">
+                    <h3><a href="{{ gamePlayPath }}">{{ game_play.product.name }}</a></h3>
+                    <p class="small mb-10 text-muted">
+                        <i class="fa fa-calendar-o pr-1"></i> {{ game_play.createdAt|localizeddate('medium', 'none') }}
+                        <i class="pl-10 pr-1 fa fa-user"></i> <span class="author">{{ game_play.author }}</span>
+                    </p>
+                    <a href="{{ gamePlayPath }}" class="btn btn-default btn-sm margin-clear">{{ 'sylius.ui.view_more'|trans }}<i class="fa fa-arrow-right pl-10"></i></a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>

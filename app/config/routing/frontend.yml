@@ -24,6 +24,9 @@ app_forum:
 app_game_play:
     resource: "frontend/game_play.yml"
 
+app_game_play_image:
+    resource: "frontend/game_play_image.yml"
+
 app_person:
     resource: "frontend/person.yml"
 
