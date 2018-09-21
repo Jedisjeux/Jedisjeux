@@ -3,7 +3,8 @@
 <!-- comments start -->
 <!-- ================ -->
 <div id="comments" class="comments">
-    <h2 class="title">There are {{ article.topic is not null ? article.topic.postCount : 0 }} comments</h2>
+    {% set postCount = article.topic is not null ? article.topic.postCount : 0 %}
+    <h2 class="title">{% transchoice postCount %}app.ui.comment.choice{% endtranschoice %}</h2>
     {% if article.topic is not null %}
         {{ render_comments(article.topic) }}
     {% endif %}

@@ -28,6 +28,7 @@ app:
         choose_category: Choisir une catégorie
         comment: Commentaire
         comments: Commentaires
+        comment.choice: "{0} Il n'y a aucun commentaire |{1} Il y a 1 commentaire |] 1, Inf] Il y a %count% commentaires"
         contact: Contact
         contact_request: Demande de contact
         contact_requests: Demandes de contact

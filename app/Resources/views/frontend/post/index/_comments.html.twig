@@ -4,7 +4,7 @@
 <!-- comments start -->
 <!-- ================ -->
 <div id="comments" class="comments">
-    <h2 class="title">There are {{ topic.postCount }} comments</h2>
+    <h2 class="title">{% transchoice topic.postCount %}app.ui.comment.choice{% endtranschoice %}</h2>
     {{ render_comments(topic) }}
 </div>
 <!-- comments end -->
