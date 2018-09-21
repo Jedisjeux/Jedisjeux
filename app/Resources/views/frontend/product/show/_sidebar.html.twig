@@ -3,6 +3,14 @@
 <aside class="col-lg-4 col-xl-3 ml-xl-auto">
     <div class="sidebar">
         {% include 'frontend/pub_banner/_sidebar.html.twig' %}
+
+        {{ render(url('app_partial_dealer_price_index', {
+            template: 'frontend/dealer_price/_list.html.twig',
+            paginate: 4,
+            criteria: {
+                'product': product.id
+            }
+        })) }}
     </div>
 </aside>
 <!-- sidebar end -->
