@@ -14,10 +14,10 @@
                 <!-- Parties de jeu start -->
                 <!-- ============================================================================== -->
                 <br>
-                {% include 'frontend/game_play/_list.html.twig' with { 'game_plays': game_plays.data } %}
+                {% include 'frontend/game_play_image/_list.html.twig' with { 'game_play_images': game_play_images.data } %}
 
                 <!-- pagination start -->
-                {{ pagination(game_plays.data) }}
+                {{ pagination(game_play_images.data) }}
                 <!-- pagination end -->
             </div>
             <!-- main end -->
