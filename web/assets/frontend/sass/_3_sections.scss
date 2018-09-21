@@ -16,8 +16,11 @@
   &.colored a:hover {
     text-decoration: none;
   }
-  &.colored a.button-avatar {
-    color: transparent;
+  &.colored {
+    .btn-avatar.btn-link,
+    .btn-avatar.btn-link:hover {
+      color: $white;
+    }
   }
   .avatar {
     display: inline;

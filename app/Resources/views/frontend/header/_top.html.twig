@@ -44,10 +44,11 @@
                     <!-- header top dropdowns start -->
                     <!-- ================ -->
                     <div class="header-top-dropdown text-right">
-                        <div class="btn-group">
-                            <a href="{{ path('app_frontend_register') }}" class="btn btn-default btn-sm"><i class="fa fa-user pr-2"></i> {{ 'sylius.ui.register'|trans }}</a>
-                        </div>
                         {% if app.user is null %}
+                            <div class="btn-group">
+                                <a href="{{ path('app_frontend_register') }}" class="btn btn-default btn-sm"><i class="fa fa-user pr-2"></i> {{ 'sylius.ui.register'|trans }}</a>
+                            </div>
+
                             <div class="btn-group">
                                 <button id="header-top-drop-2" type="button" class="btn dropdown-toggle btn-default btn-sm dropdown-toggle--no-caret" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-lock pr-2"></i> {{ 'sylius.ui.login'|trans }}</button>
                                 <ul class="dropdown-menu dropdown-menu-right dropdown-animation" aria-labelledby="header-top-drop-2">
@@ -58,15 +59,27 @@
                             </div>
                         {% else %}
 
+                            <!-- dashboard start -->
+                            <!-- ================ -->
+                            {% if is_granted('ROLE_DASHBOARD') %}
+                                <div class="btn-group ">
+                                    <a href="{{ path('app_backend_dashboard') }}" class="d-none d-md-block btn btn-link btn-sm">
+                                        <i class="fa fa-cog"></i>
+                                        {{ 'sylius.ui.administration'|trans }}
+                                    </a>
+                                </div>
+                            {% endif %}
+                            <!-- dashboard end -->
+
                             <div class="btn-group">
                                 {% set customer = app.user.customer %}
                                 {% set avatarPath = customer.avatar is not null ? customer.avatar.webPath : '/assets/frontend/templates/images/avatar-placeholder.png' %}
 
-                                {#{{ images.render(avatarPath, 'thumbnail', customer, 'avatar rounded-circle') }}#}
-                                <a href="#" id="header-top-drop-3" type="button" class="button-avatar dropdown-toggle dropdown-toggle--no-caret" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                <button type="button" class="btn btn-link btn-avatar btn-sm dropdown-toggle dropdown-toggle--no-caret" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{ images.render(avatarPath, 'thumbnail', customer, 'avatar rounded-circle') }}
                                     {{ app.user }}
-                                </a>
+                                </button>
 
                                 <ul class="dropdown-menu dropdown-menu-right dropdown-animation" aria-labelledby="header-top-drop-3">
                                     <li>
