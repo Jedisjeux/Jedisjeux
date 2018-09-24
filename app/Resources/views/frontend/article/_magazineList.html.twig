@@ -11,6 +11,7 @@
             {% if article.mainImage is not null %}
                 {{ images.render(article.mainImage.webPath, 'magazine_item_wide', article) }}
             {% endif %}
+            <a href="{{ articlePath }}" class="overlay-link"><i class="fa fa-link"></i></a>
             <div class="overlay-bottom text-left">
                 <p class="lead margin-clear">{{ article.title }}</p>
             </div>
