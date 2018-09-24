@@ -175,6 +175,7 @@ app:
         published_at: Publié le
         ratings: Notes
         react_on_this_article: Réagir à cet article
+        react_on_this_game_play: Réagir à cette partie de jeu
         recent_articles: Articles récents
         redactor: Rédacteur
         redirections: Redirections
