@@ -21,10 +21,10 @@ sylius_grid:
                 averageRating:
                     type: string
                     sortable: ~
-                variant.releasedAt:
+                releasedAt:
                     path: variant.releasedAt
                     type: string
-                    sortable: ~
+                    sortable: variant.releasedAt
             filters:
                 search:
                     type: string
