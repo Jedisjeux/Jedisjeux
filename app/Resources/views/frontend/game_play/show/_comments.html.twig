@@ -1,4 +1,5 @@
 {% from 'macro/topic.html.twig' import render_comments %}
+{% import 'macro/buttons.html.twig' as buttons %}
 
 <!-- section start -->
 <!-- ================ -->
@@ -6,6 +7,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
+                {{ buttons.btn(path('app_frontend_game_play_post_create', {'gamePlayId' : game_play.id}), 'app.ui.react_on_this_game_play', null, 'reply', 'btn-default btn-lg') }}
+
                 <!-- comments start -->
                 <!-- ================ -->
                 <div id="comments" class="comments">
