@@ -3,6 +3,23 @@
 <!-- main start -->
 <!-- ================ -->
 <div class="main col-lg-8">
+    {% if app.user and topic.author.id == app.user.customer.id %}
+        <div class="float-right mb-10">
+            <div class="btn-group">
+                <a class="btn btn-default" href="{{ path('app_frontend_topic_update', { 'id': topic.id }) }}"><i class="fa fa-pencil"></i></a>
+            </div>
+
+            <div class="btn-group">
+                <form class="form-inline" action="{{ path('app_frontend_topic_delete', { 'id': topic.id }) }}" name="form" method="post">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button class="btn btn-danger btn-confirm" type="submit" title="{{ 'label.delete'|trans }}">
+                        <i class="fa fa-remove"></i>
+                    </button>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token(topic.id) }}" />
+                </form>
+            </div>
+        </div>
+    {% endif %}
 
     <!-- page-title start -->
     <!-- ================ -->
