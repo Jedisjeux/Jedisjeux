@@ -19,6 +19,7 @@
         <div class="body">
             <p class="small mb-10 text-muted">
                 <i class="fa fa-calendar-o pr-1"></i> {{ article.publishStartDate|localizeddate('medium', 'none') }}
+                <i class="pl-10 fa fa-eye pr-1"></i> {{ article.viewCount }}
                 <i class="pl-10 pr-1 fa fa-tag"></i> {{ article.mainTaxon }}
             </p>
             {% if article.shortDescription is not null %}
