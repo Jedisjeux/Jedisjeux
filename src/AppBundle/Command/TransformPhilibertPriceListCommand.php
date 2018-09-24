@@ -15,9 +15,25 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Filesystem\Filesystem;
 
 class TransformPhilibertPriceListCommand extends Command
 {
+    const TMP_FILENAME = '/tmp/philibert.csv';
+
+    /**
+     * @var Filesystem
+     */
+    private $fileSystem;
+
+    protected function initialize(InputInterface $input, OutputInterface $output)
+    {
+        parent::initialize($input, $output);
+
+        $this->fileSystem = new Filesystem();
+    }
+
+
     /**
      * {@inheritdoc}
      */
@@ -39,17 +55,44 @@ EOT
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln(sprintf('<comment>%s</comment>', $this->getDescription()));
+        $this->removeTmpFile();
         $this->transformData($input);
         $output->writeln('<info>Price list transformed successfully.</info>');
     }
 
+    private function removeTmpFile()
+    {
+        $this->fileSystem->remove(static::TMP_FILENAME);
+    }
+
+    /**
+     * @param InputInterface $input
+     */
     private function transformData(InputInterface $input)
     {
         $filename = $input->getArgument('filename');
 
         foreach (file($filename) as $key => $row) {
-            var_dump($row);
-            exit;
+            $rowData = str_getcsv($row, ';');
+
+            if (
+                isset($rowData[1])
+                && isset($rowData[2])
+                && isset($rowData[5])
+                && isset($rowData[7])
+                && isset($rowData[8])
+            ) {
+                $data = [
+                    $rowData[1],
+                    $rowData[2],
+                    $rowData[5],
+                    $rowData[7],
+                    $rowData[8],
+                ];
+
+                file_put_contents(static::TMP_FILENAME, implode(',', $data) . "\n", FILE_APPEND);
+            }
+
         }
     }
 }
