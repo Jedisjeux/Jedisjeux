@@ -8,13 +8,21 @@
         <!-- comment start -->
         <div class="comment clearfix">
             {% if app.user and post.author.id == app.user.customer.id %}
-                <form class="form-inline text-right" action="{{ path('app_frontend_post_delete', { 'id': post.id }) }}" name="form" method="post">
-                    <input type="hidden" name="_method" value="DELETE">
-                    <button class="btn btn-default btn-confirm" type="submit" title="{{ 'label.delete'|trans }}">
-                        <i class="fa fa-remove"></i>
-                    </button>
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token(post.id) }}" />
-                </form>
+                <div class="float-right mb-10">
+                    <div class="btn-group">
+                        <a class="btn btn-default" href="{{ path('app_frontend_post_update', { 'id': post.id }) }}"><i class="fa fa-pencil"></i></a>
+                    </div>
+
+                    <div class="btn-group">
+                        <form class="form-inline" action="{{ path('app_frontend_post_delete', { 'id': post.id }) }}" name="form" method="post">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button class="btn btn-danger btn-confirm" type="submit" title="{{ 'label.delete'|trans }}">
+                                <i class="fa fa-remove"></i>
+                            </button>
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token(post.id) }}" />
+                        </form>
+                    </div>
+                </div>
             {% endif %}
             <div class="comment-avatar">
                 {{ images.render(avatarPath, 'thumbnail', topic.author, 'rounded-circle') }}
