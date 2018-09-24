@@ -102,6 +102,7 @@ app:
         list_reviews: Liste des avis
         logout: Déconnection
         ludographies: Ludographies
+        ludography: Ludographie
         main_image: Image principale
         manage_articles: Gérer les articles
         manage_article_reviews: Gérer les Avis d'article
