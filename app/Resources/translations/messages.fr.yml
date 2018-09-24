@@ -147,9 +147,11 @@ app:
         new_post: Nouveau message
         new_string_block: Nouveau bloc de chaîne
         new_topic: Nouveau sujet
+        newest_release_first: Sorti plus récemment en premier
         news: Actualités
         normal: Normal
         not_found_pages: Pages non trouvées
+        oldest_release_first: Sorti plus récemment en dernier
         overview_of_your_website: Aperçu de votre site web
         partnership: Partenariat
         path: Chemin
@@ -209,6 +211,7 @@ app:
         there_are_no_game_plays: Il n'y a aucun article.
         topic: Sujet
         topics: Sujets
+        top_rated_first: Mieux noté en premier
         translator: Traducteur
         type_duration_in_minute: Saisir la durée en minute.
         url: Url

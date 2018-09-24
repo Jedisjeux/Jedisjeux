@@ -10,6 +10,9 @@
     {% set default_path = path(route, route_parameters|merge({'criteria': criteria})) %}
     {% set oldest_first_path = path(route, route_parameters|merge({'sorting': {'createdAt': 'asc'}, 'criteria': criteria})) %}
     {% set newest_first_path = path(route, route_parameters|merge({'sorting': {'createdAt': 'desc'}, 'criteria': criteria})) %}
+    {% set top_rated_first_path = path(route, route_parameters|merge({'sorting': {'averageRating': 'desc'}, 'criteria': criteria})) %}
+    {% set newest_release_first_path = path(route, route_parameters|merge({'sorting': {'releasedAt': 'desc'}, 'criteria': criteria})) %}
+    {% set oldest_release_first_path = path(route, route_parameters|merge({'sorting': {'releasedAt': 'asc'}, 'criteria': criteria})) %}
 
     {% if app.request.query.get('sorting') is empty %}
         {% set current_sorting_label = 'sylius.ui.newest_first'|trans|lower %}
@@ -17,8 +20,13 @@
         {% set current_sorting_label = 'sylius.ui.newest_first'|trans|lower %}
     {% elseif app.request.query.get('sorting').createdAt is defined and app.request.query.get('sorting').createdAt == 'asc'%}
         {% set current_sorting_label = 'sylius.ui.oldest_first'|trans|lower %}
+    {% elseif app.request.query.get('sorting').averageRating is defined and app.request.query.get('sorting').averageRating == 'desc'%}
+        {% set current_sorting_label = 'app.ui.top_rated_first'|trans|lower %}
+    {% elseif app.request.query.get('sorting').releasedAt is defined and app.request.query.get('sorting').releasedAt == 'desc'%}
+        {% set current_sorting_label = 'app.ui.newest_release_first'|trans|lower %}
+    {% elseif app.request.query.get('sorting').releasedAt is defined and app.request.query.get('sorting').releasedAt == 'asc'%}
+        {% set current_sorting_label = 'app.ui.oldest_release_first'|trans|lower %}
     {% endif %}
-
 
     <div class="dropdown text-right">
         <button type="button" class="btn btn-default-transparent dropdown-toggle" data-toggle="dropdown">
@@ -27,6 +35,9 @@
         <div class="dropdown-menu">
             <a class="dropdown-item" href="{{ newest_first_path }}">{{ 'sylius.ui.newest_first'|trans }}</a>
             <a class="dropdown-item" href="{{ oldest_first_path }}">{{ 'sylius.ui.oldest_first'|trans }}</a>
+            <a class="dropdown-item" href="{{ top_rated_first_path }}">{{ 'app.ui.top_rated_first'|trans }}</a>
+            <a class="dropdown-item" href="{{ newest_release_first_path }}">{{ 'app.ui.newest_release_first'|trans }}</a>
+            <a class="dropdown-item" href="{{ oldest_release_first_path }}">{{ 'app.ui.oldest_release_first'|trans }}</a>
         </div>
     </div>
 {% endif %}

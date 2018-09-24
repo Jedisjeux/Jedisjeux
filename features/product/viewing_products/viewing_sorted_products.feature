@@ -4,12 +4,10 @@ Feature: Sorting listed products
     As a Customer
     I want to be able to sort products
 
-    Background:
-        Given there is a product "Puerto Rico", created at "first day of January 2000"
-        And there is a product "Modern Art", created at "first day of January 2005"
-
     @ui
     Scenario: Sorting products by their dates with descending order
+        Given there is a product "Puerto Rico", created at "first day of January 2000"
+        And there is a product "Modern Art", created at "first day of January 2005"
         When I view newest products
         Then I should see 2 products in the list
         And I should see a product with name "Puerto Rico"
@@ -17,7 +15,27 @@ Feature: Sorting listed products
 
     @ui
     Scenario: Sorting products by their dates with ascending order
+        Given there is a product "Puerto Rico", created at "first day of January 2000"
+        And there is a product "Modern Art", created at "first day of January 2005"
         When I view oldest products
+        Then I should see 2 products in the list
+        And I should see a product with name "Modern Art"
+        But the first product on the list should have name "Puerto Rico"
+
+    @ui
+    Scenario: Sorting products by their release dates with descending order
+        Given there is a product "Puerto Rico", released "10 years ago"
+        And there is a product "Modern Art", released "5 years ago"
+        When I view newest release products
+        Then I should see 2 products in the list
+        And I should see a product with name "Puerto Rico"
+        But the first product on the list should have name "Modern Art"
+
+    @ui
+    Scenario: Sorting products by their release dates with ascending order
+        Given there is a product "Puerto Rico", released "10 years ago"
+        And there is a product "Modern Art", released "5 years ago"
+        When I view oldest release products
         Then I should see 2 products in the list
         And I should see a product with name "Modern Art"
         But the first product on the list should have name "Puerto Rico"

@@ -275,6 +275,16 @@ class ProductContext implements Context
     }
 
     /**
+     * @When /^I view (oldest|newest) release products$/
+     */
+    public function iViewSortedProductReleases($sortDirection)
+    {
+        $sorting = ['releasedAt' => 'oldest' === $sortDirection ? 'asc' : 'desc'];
+
+        $this->indexPage->open(['sorting' => $sorting]);
+    }
+
+    /**
      * @When /^I view products with duration up to (\d+) minutes$/
      */
     public function iViewFilteredProductsWithDurationUpToMinutes(int $minutes)
