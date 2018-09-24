@@ -101,10 +101,11 @@ class ArticleRepository extends EntityRepository
      * @param string $localeCode
      * @param string|null $taxonSlug
      * @param string|null $productSlug
+     * @param array $criteria
      *
      * @return QueryBuilder
      */
-    public function createFrontendListQueryBuilder(string $localeCode, string $taxonSlug = null, string $productSlug = null): QueryBuilder
+    public function createFrontendListQueryBuilder(string $localeCode, string $taxonSlug = null, string $productSlug = null, array $criteria = []): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('o');
 
@@ -131,6 +132,12 @@ class ArticleRepository extends EntityRepository
                 ->innerJoin('product.translations', 'productTranslation')
                 ->andWhere('productTranslation.slug = :productSlug')
                 ->setParameter('productSlug', $productSlug);
+        }
+
+        if (isset($criteria['publishStartDateFrom'])) {
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->gte($this->getPropertyName('publishStartDate'), ':publishStartDateFrom'))
+                ->setParameter('publishStartDateFrom', $criteria['publishStartDateFrom']);
         }
 
         return $queryBuilder;

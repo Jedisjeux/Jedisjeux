@@ -29,3 +29,16 @@ Feature: Viewing a most popular article list
         And I should see the article "New Puerto Rico Video" in the most popular articles list
         And I should see the article "New Modern Art Video" in the most popular articles list
         But I should not see the article "Old Video" in the most popular articles list
+
+    @ui
+    Scenario: Do not viewing popular articles published older than 2 months ago
+        Given there is an article "Too old article" written by "henry@example.com", published "3 months ago"
+        And this article has been viewed 36000 times
+        When I check most popular articles
+        Then I should see 5 articles in the most popular articles list
+        And I should see the article "Shogun Review" in the most popular articles list
+        And I should see the article "Essen 2018" in the most popular articles list
+        And I should see the article "New Patchwork Video" in the most popular articles list
+        And I should see the article "New Puerto Rico Video" in the most popular articles list
+        And I should see the article "New Modern Art Video" in the most popular articles list
+        But I should not see the article "Too old article" in the most popular articles list
