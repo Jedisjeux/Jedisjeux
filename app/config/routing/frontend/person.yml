@@ -8,6 +8,8 @@ app_frontend_person_index:
         section: frontend
         grid: app_frontend_person
         paginate: 16
+    options:
+        expose: true
 
 app_frontend_person_index_by_taxon:
     methods: [GET]
@@ -21,6 +23,8 @@ app_frontend_person_index_by_taxon:
             paginate: 16
     requirements:
         slug: "[^?]+"
+    options:
+        expose: true
 
 app_frontend_person_show:
     methods: [GET]
