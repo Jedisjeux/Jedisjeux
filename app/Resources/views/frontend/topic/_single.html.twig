@@ -1,8 +1,10 @@
 {% import 'macro/image.html.twig' as images %}
+{% from 'macro/topic.html.twig' import getPath %}
 
 {% set mainTaxon = topic.mainTaxon %}
 {% set dark = mainTaxon is not null and not mainTaxon.public ? true : false %}
 {% set avatarPath = topic.author.avatar is not null ? topic.author.avatar.webPath : '/assets/frontend/images/avatar-placeholder.png'  %}
+{
 
 <div class="image-box style-3 mb-20 {% if dark|default(false) %}dark-bg{% else %}shadow bordered light-gray-bg{% endif %}">
     <div class="row grid-space-0">
@@ -17,13 +19,13 @@
         <div class="col-lg-10">
             <div class="body">
                 <div class="hidden-lg-down"></div>
-                <h3>{{ topic.title }}</h3>
+                <h3><a href="{{ getPath(topic) }}">{{ topic.title }}</a></h3>
                 <p class="small mb-10"><i class="fa fa-calendar-o pr-1"></i> {{ topic.createdAt|localizeddate('medium', 'none') }} <i
                             class="pl-10 pr-1 fa fa-tag"></i> {{ mainTaxon }}</p>
                 <div class="separator-2"></div>
                 <p class="margin-clear">{{ topic.mainPost.body|truncate(500, true)|striptags|raw }}</p>
                 <br>
-                <a href="{{ path('app_frontend_post_index_by_topic', { 'topicId': topic.id } ) }}" class="btn {% if dark|default(false) %}btn-gray-transparent btn-animated{% else %}btn-default btn-sm{% endif %} margin-clear">{{ 'sylius.ui.view_more'|trans }}<i
+                <a href="{{ getPath(topic) }}" class="btn {% if dark|default(false) %}btn-gray-transparent btn-animated{% else %}btn-default btn-sm{% endif %} margin-clear">{{ 'sylius.ui.view_more'|trans }}<i
                             class="fa fa-arrow-right pl-10"></i></a>
             </div>
         </div>

@@ -1,10 +1,11 @@
 {% import 'macro/image.html.twig' as images %}
+{% from 'macro/topic.html.twig' import getPath %}
 
 {% set topics = topics.data is defined ? topics.data : topics %}
 
 {% for topic in topics %}
     {% set avatarPath = topic.author.avatar is not null ? topic.author.avatar.webPath : '/assets/frontend/images/avatar-placeholder.png'  %}
-    {% set topicPath = path('app_frontend_post_index_by_topic', { 'topicId': topic.id }) %}
+    {% set topicPath = getPath(topic) %}
 
     <div class="media margin-clear">
         <div class="d-flex pr-2">
