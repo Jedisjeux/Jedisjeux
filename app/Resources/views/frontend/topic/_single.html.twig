@@ -4,6 +4,9 @@
 {% set mainTaxon = topic.mainTaxon %}
 {% set dark = mainTaxon is not null and not mainTaxon.public ? true : false %}
 {% set avatarPath = topic.author.avatar is not null ? topic.author.avatar.webPath : '/assets/frontend/images/avatar-placeholder.png'  %}
+{% set lastTopicPage = topic.lastPageNumber %}
+{% set lastLinkPath = getPath(topic, lastTopicPage) %}
+{% set lastPost = topic.lastPost %}
 
 <div class="image-box style-3 mb-20 {% if dark|default(false) %}dark-bg{% else %}shadow bordered light-gray-bg{% endif %}">
     <div class="row grid-space-0">
@@ -19,9 +22,20 @@
             <div class="body">
                 <div class="hidden-lg-down"></div>
                 <h3><a href="{{ getPath(topic) }}">{{ topic.title }}</a></h3>
-                <p class="small mb-10"><i class="fa fa-calendar-o pr-1"></i> {{ topic.createdAt|localizeddate('medium', 'none') }} <i
-                            class="pl-10 pr-1 fa fa-tag"></i> {{ mainTaxon }}</p>
+                <p class="small mb-10">
+                    <i class="fa fa-calendar-o pr-1"></i> {{ topic.createdAt|localizeddate('medium', 'none') }}
+                    <i class="pl-10 pr-1 fa fa-tag"></i> {{ mainTaxon }}
+                    <i class="pl-10 pr-1 fa fa-comments"></i> {{ topic.postCount }}
+                </p>
                 <div class="separator-2"></div>
+                {% if lastPost %}
+                    <p>
+                        <a href="{{ lastLinkPath }}">
+                            <i class="pl-10 pr-1 fa fa-comment"></i> {{ 'app.ui.last_message_of'|trans({'%username%': lastPost.author})|raw }}
+                            le {{ lastPost.createdAt|localizeddate('medium', 'short') }}
+                        </a>
+                    </p>
+                {% endif %}
                 <p class="margin-clear">{{ topic.mainPost.body|truncate(500, true)|striptags|raw }}</p>
                 <br>
                 <a href="{{ getPath(topic) }}" class="btn {% if dark|default(false) %}btn-gray-transparent btn-animated{% else %}btn-default btn-sm{% endif %} margin-clear">{{ 'sylius.ui.view_more'|trans }}<i

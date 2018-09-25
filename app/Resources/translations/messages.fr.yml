@@ -88,6 +88,7 @@ app:
         interviews: Interviews
         introduction: Introduction
         in_the_boxes: C'est dans la boîte
+        last_message_of: 'Dernier message de <strong>%username%</strong>'
         last_used_at: Dernière utilisation
         latest_articles: Derniers articles
         latest_in_the_boxes: Derniers c'est dans la boîte
