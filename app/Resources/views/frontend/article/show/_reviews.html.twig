@@ -1,0 +1,33 @@
+{% import 'macro/image.html.twig' as images %}
+{% from 'macro/rating.html.twig' import rating %}
+
+{% if article.reviews|length > 0 %}
+
+    <h3>Avis de la rédaction</h3>
+    <div class="separator-2"></div>
+
+    <div class="blog-comments">
+        {% for review in article.reviews %}
+            {% set avatarPath = review.author.avatar is not null ? review.author.avatar.webPath : '/assets/frontend/images/avatar-placeholder.png'  %}
+
+            <!-- comment start -->
+            <div class="comment clearfix">
+                <div class="comment-avatar">
+                    {{ images.render(avatarPath, 'thumbnail', "avatar", 'rounded-circle') }}
+                </div>
+                <header>
+                    <h3>{{ review.title }}</h3>
+                    <div class="comment-meta">
+                        {{ rating(review.rating) }}
+                    </div>
+                </header>
+                <div class="comment-content">
+                    <div class="comment-body clearfix">
+                        {{ review.comment|raw }}
+                    </div>
+                </div>
+            </div>
+            <!-- comment end -->
+        {% endfor %}
+    </div>
+{% endif %}
