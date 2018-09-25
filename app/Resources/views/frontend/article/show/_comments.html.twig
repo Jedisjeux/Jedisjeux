@@ -6,7 +6,7 @@
     {% set postCount = article.topic is not null ? article.topic.postCount : 0 %}
     <h2 class="title">{% transchoice postCount %}app.ui.comment.choice{% endtranschoice %}</h2>
     {% if article.topic is not null %}
-        {{ render_comments(article.topic) }}
+        {{ render_comments(article.topic, article.topic.posts) }}
     {% endif %}
 </div>
 <!-- comments end -->

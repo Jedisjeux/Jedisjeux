@@ -1,4 +1,5 @@
 {% import 'macro/buttons.html.twig' as buttons %}
+{% from 'macro/pagination.html.twig' import simple as pagination %}
 
 <!-- main start -->
 <!-- ================ -->
@@ -57,6 +58,10 @@
 
     {{ buttons.btn(path('app_frontend_post_create_by_topic', {'topicId' : topic.id}), 'Répondre au sujet', null, 'reply', 'btn-default btn-lg') }}
     {% include 'frontend/post/index/_comments.html.twig' %}
+
+    <!-- pagination start -->
+    {{ pagination(posts) }}
+    <!-- pagination end -->
 
 </div>
 <!-- main end -->
