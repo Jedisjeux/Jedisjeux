@@ -90,6 +90,9 @@
                 </article>
                 <!-- blogpost end -->
 
+
+                {% include 'frontend/article/show/_reviews.html.twig' %}
+
                 {{ buttons.btn(path('app_frontend_article_post_create', {'articleSlug' : article.slug}), 'app.ui.react_on_this_article', null, 'reply', 'btn-default btn-lg') }}
 
                 {% include 'frontend/article/show/_comments.html.twig' %}
