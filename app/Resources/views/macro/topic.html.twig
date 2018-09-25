@@ -1,7 +1,7 @@
-{% macro render_comments(topic) %}
+{% macro render_comments(topic, posts) %}
     {% import 'macro/image.html.twig' as images %}
 
-    {% for post in topic.posts %}
+    {% for post in posts %}
         {% set avatar = post.author.avatar %}
         {% set avatarPath = avatar is not null ? avatar.webPath : '/assets/frontend/images/avatar-placeholder.png' %}
 

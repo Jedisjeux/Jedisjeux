@@ -15,7 +15,7 @@
                     {% set postCount = game_play.topic ? game_play.topic.postCount : 0 %}
                     <h2 class="title">{% transchoice postCount %}app.ui.comment.choice{% endtranschoice %}</h2>
                     {% if game_play.topic is not null %}
-                        {{ render_comments(game_play.topic) }}
+                        {{ render_comments(game_play.topic, game_play.topic.posts) }}
                     {% endif %}
                 </div>
                 <!-- comments end -->
