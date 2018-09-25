@@ -17,7 +17,7 @@ sylius_grid:
                 createdAt:
                     type: date
                     path: lastPostCreatedAt
-                    sortable: ~
+                    sortable: lastPostCreatedAt
                 postCount:
                     type: string
                     sortable: ~
