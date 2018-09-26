@@ -69,6 +69,7 @@ class TopicContext implements Context
     /**
      * @Given there is a topic with title :title written by :customer
      * @Given there is a topic with title :title written by :customer, created at :date
+     * @Given there is a topic with title :title written by :customer, created :date
      * @Given I wrote a topic with title :title
      *
      * @param string $title

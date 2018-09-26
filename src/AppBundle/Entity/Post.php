@@ -166,6 +166,10 @@ class Post implements ResourceInterface
     public function setTopic(?Topic $topic): void
     {
         $this->topic = $topic;
+
+        if (null !== $topic && !$topic->hasPost($this)) {
+            $topic->addPost($this);
+        }
     }
 
     /**
