@@ -33,6 +33,11 @@ services:
         parent: app.behat.symfony_page
         public: false
 
+    app.behat.page.frontend.account.request_password_reset:
+        class: AppBundle\Behat\Page\Frontend\Account\RequestPasswordResetPage
+        parent: app.behat.symfony_page
+        public: false
+
     app.behat.page.frontend.account.reset_password:
         class: AppBundle\Behat\Page\Frontend\Account\ResetPasswordPage
         parent: app.behat.symfony_page

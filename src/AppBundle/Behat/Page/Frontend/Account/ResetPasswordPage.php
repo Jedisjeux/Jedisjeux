@@ -20,26 +20,10 @@ class ResetPasswordPage extends SymfonyPage
 {
     /**
      * {@inheritdoc}
-     *
-     * @throws ElementNotFoundException
-     */
-    public function checkValidationMessageFor($element, $message)
-    {
-        $errorLabel = $this->getElement($element)->getParent()->getParent()->find('css', '.form-error-message');
-
-        if (null === $errorLabel) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
-        }
-
-        return $message === $errorLabel->getText();
-    }
-
-    /**
-     * {@inheritdoc}
      */
     public function getRouteName()
     {
-        return 'sylius_user_request_password_reset_token';
+        return 'sylius_frontend_password_reset';
     }
 
     public function reset()
@@ -48,11 +32,19 @@ class ResetPasswordPage extends SymfonyPage
     }
 
     /**
-     * @param string $email
+     * @param string $password
      */
-    public function specifyEmail($email)
+    public function specifyNewPassword(string $password)
     {
-        $this->getDocument()->fillField('Email', $email);
+        $this->getElement('password')->setValue($password);
+    }
+
+    /**
+     * @param string $password
+     */
+    public function specifyConfirmPassword($password)
+    {
+        $this->getElement('confirm_password')->setValue($password);
     }
 
     /**
@@ -61,7 +53,8 @@ class ResetPasswordPage extends SymfonyPage
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'email' => '#sylius_user_request_password_reset_email',
+            'password' => '#sylius_user_reset_password_password_first',
+            'confirm_password' => '#sylius_user_reset_password_password_second',
         ]);
     }
 }
