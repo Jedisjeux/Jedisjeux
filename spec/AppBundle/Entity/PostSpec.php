@@ -35,6 +35,10 @@ class PostSpec extends ObjectBehavior
 
     function its_topic_is_mutable(Topic $topic)
     {
+        $topic->hasPost($this)->willReturn(false);
+
+        $topic->addPost($this)->shouldBeCalled();
+
         $this->setTopic($topic);
         $this->getTopic()->shouldReturn($topic);
     }
