@@ -12,10 +12,11 @@ default:
                 - app.behat.context.transform.customer
                 - app.behat.context.transform.shared_storage
 
-                - app.behat.context.setup.security
-                - app.behat.context.setup.topic
                 - app.behat.context.setup.customer
+                - app.behat.context.setup.security
                 - app.behat.context.setup.taxon
+                - app.behat.context.setup.topic
+                - app.behat.context.setup.post
 
                 - app.behat.context.ui.frontend.topic
             filters:

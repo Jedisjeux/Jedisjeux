@@ -277,8 +277,8 @@ class Topic implements ResourceInterface
     public function addPost(Post $post): void
     {
         if (!$this->hasPost($post)) {
-            $post->setTopic($this);
             $this->posts->add($post);
+            $post->setTopic($this);
         }
     }
 

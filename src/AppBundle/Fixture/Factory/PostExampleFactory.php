@@ -118,11 +118,15 @@ class PostExampleFactory extends AbstractExampleFactory implements ExampleFactor
         /** @var Post $post */
         $post = $this->postFactory->createNew();
         $post->setBody($options['body']);
-        $post->setTopic($options['topic']);
         $post->setGamePlay($options['game_play']);
         $post->setArticle($options['article']);
+        $post->setTopic($options['topic']);
         $post->setAuthor($options['author']);
         $post->setCreatedAt($options['created_at']);
+
+        /** @var Topic $topic */
+        $topic = $post->getTopic();
+        $topic->setLastPostCreatedAt($topic->getLastPost()->getCreatedAt());
 
         return $post;
     }
