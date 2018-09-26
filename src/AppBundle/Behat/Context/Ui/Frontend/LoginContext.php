@@ -13,11 +13,14 @@ declare(strict_types=1);
 
 namespace AppBundle\Behat\Context\Ui\Frontend;
 
+use AppBundle\Behat\Page\Frontend\Account\ResetPasswordPage;
+use AppBundle\Behat\Service\SharedStorage;
+use AppBundle\Behat\Service\SharedStorageInterface;
 use Behat\Behat\Context\Context;
 use AppBundle\Behat\NotificationType;
 use AppBundle\Behat\Page\Frontend\Account\LoginPage;
 use AppBundle\Behat\Page\Frontend\Account\RegisterPage;
-use AppBundle\Behat\Page\Frontend\Account\ResetPasswordPage;
+use AppBundle\Behat\Page\Frontend\Account\RequestPasswordResetPage;
 use AppBundle\Behat\Page\Frontend\HomePage;
 use AppBundle\Behat\Service\NotificationCheckerInterface;
 use Webmozart\Assert\Assert;
@@ -40,6 +43,11 @@ final class LoginContext implements Context
     private $registerPage;
 
     /**
+     * @var RequestPasswordResetPage
+     */
+    private $requestPasswordResetPage;
+
+    /**
      * @var ResetPasswordPage
      */
     private $resetPasswordPage;
@@ -50,24 +58,35 @@ final class LoginContext implements Context
     private $notificationChecker;
 
     /**
+     * @var SharedStorageInterface
+     */
+    private $sharedStorage;
+
+    /**
      * @param HomePage $homePage
      * @param LoginPage $loginPage
      * @param RegisterPage $registerPage
+     * @param RequestPasswordResetPage $requestPasswordResetPage
      * @param ResetPasswordPage $resetPasswordPage
      * @param NotificationCheckerInterface $notificationChecker
+     * @param SharedStorageInterface $sharedStorage
      */
     public function __construct(
         HomePage $homePage,
         LoginPage $loginPage,
         RegisterPage $registerPage,
+        RequestPasswordResetPage $requestPasswordResetPage,
         ResetPasswordPage $resetPasswordPage,
-        NotificationCheckerInterface $notificationChecker
+        NotificationCheckerInterface $notificationChecker,
+        SharedStorageInterface $sharedStorage
     ) {
         $this->homePage = $homePage;
         $this->loginPage = $loginPage;
         $this->registerPage = $registerPage;
+        $this->requestPasswordResetPage = $requestPasswordResetPage;
         $this->resetPasswordPage = $resetPasswordPage;
         $this->notificationChecker = $notificationChecker;
+        $this->sharedStorage = $sharedStorage;
     }
 
     /**
@@ -83,7 +102,15 @@ final class LoginContext implements Context
      */
     public function iWantToResetPassword()
     {
-        $this->resetPasswordPage->open();
+        $this->requestPasswordResetPage->open();
+    }
+
+    /**
+     * @When I follow link on my email to reset my password
+     */
+    public function iFollowLinkOnMyEmailToResetPassword()
+    {
+        $this->resetPasswordPage->open(['token' => $this->sharedStorage->get('password_reset_token')]);
     }
 
     /**
@@ -100,7 +127,7 @@ final class LoginContext implements Context
      */
     public function iSpecifyTheEmail($email = null)
     {
-        $this->resetPasswordPage->specifyEmail($email);
+        $this->requestPasswordResetPage->specifyEmail($email);
     }
 
     /**
@@ -110,6 +137,24 @@ final class LoginContext implements Context
     public function iSpecifyThePasswordAs($password = null)
     {
         $this->loginPage->specifyPassword($password);
+    }
+
+    /**
+     * @When I specify my new password as :password
+     * @When I do not specify my new password
+     */
+    public function iSpecifyMyNewPassword(string $password = null)
+    {
+        $this->resetPasswordPage->specifyNewPassword($password);
+    }
+
+    /**
+     * @When I confirm my new password as :password
+     * @When I do not confirm my new password
+     */
+    public function iConfirmMyNewPassword(string $password = null)
+    {
+        $this->resetPasswordPage->specifyConfirmPassword($password);
     }
 
     /**
@@ -127,7 +172,15 @@ final class LoginContext implements Context
      */
     public function iResetIt()
     {
-        $this->resetPasswordPage->reset();
+        $this->requestPasswordResetPage->reset();
+    }
+
+    /**
+     * @When I save my changes
+     */
+    public function iSaveMyChanges()
+    {
+        $this->requestPasswordResetPage->reset();
     }
 
     /**
@@ -199,7 +252,7 @@ final class LoginContext implements Context
      */
     public function iShouldBeNotifiedThatElementIsRequired($elementName)
     {
-        Assert::true($this->resetPasswordPage->checkValidationMessageFor($elementName, sprintf('Please enter your %s.', $elementName)));
+        Assert::true($this->requestPasswordResetPage->checkValidationMessageFor($elementName, sprintf('Please enter your %s.', $elementName)));
     }
 
     /**
@@ -214,5 +267,13 @@ final class LoginContext implements Context
         $this->loginPage->logIn();
 
         $this->iShouldBeLoggedIn();
+    }
+
+    /**
+     * @Then I should be notified that my password has been successfully reset
+     */
+    public function iShouldBeNotifiedThatMyPasswordHasBeenSuccessfullyReset()
+    {
+        $this->notificationChecker->checkNotification('has been reset successfully!', NotificationType::success());
     }
 }

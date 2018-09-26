@@ -205,8 +205,10 @@ services:
             - "@app.behat.page.frontend.home"
             - "@app.behat.page.frontend.account.login"
             - "@app.behat.page.frontend.account.register"
+            - "@app.behat.page.frontend.account.request_password_reset"
             - "@app.behat.page.frontend.account.reset_password"
             - "@app.behat.notification_checker"
+            - "@app.behat.shared_storage"
         tags:
             - { name: fob.context_service }
 
@@ -277,5 +279,13 @@ services:
             - "@app.behat.page.frontend.topic.create_for_taxon"
             - "@app.behat.page.frontend.topic.update"
             - "@app.behat.page.frontend.topic.show"
+        tags:
+            - { name: fob.context_service }
+
+    app.behat.context.ui.email:
+        class: AppBundle\Behat\Context\Ui\EmailContext
+        arguments:
+            - "@app.behat.shared_storage"
+            - "@app.behat.email_checker"
         tags:
             - { name: fob.context_service }

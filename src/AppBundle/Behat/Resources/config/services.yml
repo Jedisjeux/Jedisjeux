@@ -33,6 +33,11 @@ services:
             - "@app.behat.cookie_setter"
             - "user"
 
+    app.behat.email_checker:
+        class: AppBundle\Behat\Service\EmailChecker
+        arguments:
+            - "%__symfony__.kernel.cache_dir%/spool"
+
     app.behat.table_accessor:
         class: AppBundle\Behat\Service\Accessor\TableAccessor
         public: false
