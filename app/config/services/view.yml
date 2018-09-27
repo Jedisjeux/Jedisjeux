@@ -18,3 +18,14 @@ services:
             - "@translator"
         tags:
             - { name: 'pagerfanta.view', alias: 'semantic_ui_translated' }
+
+    pagerfanta.view.frontend:
+        class: AppBundle\View\FrontendView
+
+    pagerfanta.view.frontend_translated:
+        class: AppBundle\View\FrontendTranslatedView
+        arguments:
+            - "@pagerfanta.view.frontend"
+            - "@translator"
+        tags:
+            - { name: 'pagerfanta.view', alias: 'frontend_translated' }
