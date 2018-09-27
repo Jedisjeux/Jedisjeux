@@ -2,18 +2,20 @@
 {% from 'macro/rating.html.twig' import rating %}
 
 {% set imagePath = product_review.reviewSubject.mainImage is not null ? product_review.reviewSubject.mainImage.webPath : '/assets/frontend/images/placeholder.png'  %}
+{% set productPath = path('sylius_frontend_product_show', { 'slug': product_review.reviewSubject.slug }) %}
 
 <!-- comment start -->
 <div class="comment clearfix">
     <div class="comment-avatar">
-        {{ images.render(imagePath, 'small_width_fixed', product_review.reviewSubject.name) }}
+        <a href="{{ productPath }}">{{ images.render(imagePath, 'small_width_fixed', product_review.reviewSubject.name) }}</a>
     </div>
     <header>
-        <h3>{{ product_review.reviewSubject }}</h3>
+        <h3><a href="{{ productPath }}">{{ product_review.reviewSubject }}</a></h3>
         <h4>{{ product_review.title }}</h4>
         <div class="comment-meta">
             {{ rating(product_review.rating) }} |
-            {{ product_review.createdAt|localizeddate('medium', 'none') }}
+            {{ product_review.createdAt|localizeddate('medium', 'none') }} |
+            {{ product_review.author }}
         </div>
     </header>
     <div class="comment-content">
