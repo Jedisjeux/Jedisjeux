@@ -22,12 +22,12 @@ class FrontendTranslatedView extends TwitterBootstrap4TranslatedView
 {
     protected function buildPreviousMessage($text)
     {
-        return '<i class="fa fa-angle-left"><span class="sr-only">Previous</span></i>';
+        return sprintf('<i class="fa fa-angle-left"><span class="sr-only">%s</span></i>', $text);
     }
 
     protected function buildNextMessage($text)
     {
-        return '<i class="fa fa-angle-right"><span class="sr-only">Next</span></i>';
+        return sprintf('<i class="fa fa-angle-right"><span class="sr-only">%s</span></i>', $text);
     }
 
     /**
