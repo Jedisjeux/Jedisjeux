@@ -4,7 +4,9 @@
     {% for image in person.images %}
         <div class="overlay-container overlay-visible">
             {{ images.render(image.webPath, 'default', person) }}
-            <a href="{{ image.webPath | imagine_filter('default') }}" class="slick-carousel--popup-img overlay-link" title="image title"><i class="fa fa-plus"></i></a>
+            <a href="{{ image.webPath | imagine_filter('default') }}"
+               class="slick-carousel--popup-img overlay-link"
+               title="{{ image.description }}"><i class="fa fa-plus"></i></a>
         </div>
     {% endfor %}
 </div>
