@@ -2,7 +2,7 @@ ivory_ck_editor:
     default_config: minimal
     configs:
         minimal:
-            language: %locale%
+            language: '%locale%'
             toolbar: basic
         standard:
             toolbar: standard
@@ -10,7 +10,7 @@ ivory_ck_editor:
             protectedSource: ['/<span[^>]*><\/span>/g']
             extraPlugins: 'templates,div,iframe,smiley'
             templates:    "my_templates"
-            language: %locale%
+            language: '%locale%'
             stylesSet: custom_styles  # Chargement des styles personnalisables
             contentsCss:  ['assets/frontend/compiled/css/style.css']
             toolbar: [ [ 'Bold','Italic','Underline', 'Blockquote' ], [ 'NumberedList','BulletedList' ], [ 'Link','Unlink' ], [ 'Image' ], [ 'Smiley' ], [ 'Source' ]; ]
@@ -18,7 +18,7 @@ ivory_ck_editor:
             protectedSource: ['/<span[^>]*><\/span>/g']
             extraPlugins: 'templates,div,iframe'
             templates:    "my_templates"
-            language: %locale%
+            language: '%locale%'
             stylesSet: custom_styles  # Chargement des styles personnalisables
             contentsCss:  ['assets/frontend/compiled/css/style.css']
             toolbar: [ [ 'Bold','Italic','Underline', 'Blockquote' ], [ 'NumberedList','BulletedList' ], [ 'Link','Unlink' ], [ 'Image' ], [ 'Styles', 'Format' ], [ 'Iframe' ], [ 'Source' ]; ]

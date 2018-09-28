@@ -1,7 +1,7 @@
 sylius_mailer:
     sender:
-        name: %email_name%
-        address: %email_sender%
+        name: '%email_name%'
+        address: '%email_sender%'
     emails:
         reset_password_token:
             subject: sylius.emails.user.password_reset.subject

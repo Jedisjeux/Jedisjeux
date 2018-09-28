@@ -77,7 +77,7 @@ services:
             - [sylius, sylius_user_registration]
             - "@sylius.repository.customer"
         tags:
-          - { name: form.type, alias: sylius_customer_simple_registration }
+            - { name: form.type, alias: sylius_customer_simple_registration }
 
     app.form.type.dealer:
         class: AppBundle\Form\Type\DealerType
@@ -125,15 +125,6 @@ services:
             - []
         tags:
           - { name: form.type, alias: sylius_product_view_count }
-
-    sylius.form.type.customer_simple_registration:
-        class: AppBundle\Form\Type\Customer\CustomerSimpleRegistrationType
-        arguments:
-            - "%sylius.model.customer.class%"
-            - [sylius, sylius_user_registration]
-            - "@sylius.repository.customer"
-        tags:
-          - { name: form.type, alias: sylius_customer_simple_registration }
 
     sylius.form.type.sylius_product_associations:
         class: AppBundle\Form\Type\ProductAssociationsType
