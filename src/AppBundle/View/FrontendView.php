@@ -17,6 +17,6 @@ class FrontendView extends TwitterBootstrap4View
 {
     protected function getDefaultProximity()
     {
-        return 2;
+        return 1;
     }
 }

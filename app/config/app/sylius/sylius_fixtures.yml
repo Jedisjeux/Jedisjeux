@@ -58,7 +58,7 @@ sylius_fixtures:
                                 name: "Zones"
                 person:
                     options:
-                        random: 10
+                        random: 100
                         custom:
                             -
                                 first_name: "Reiner"
