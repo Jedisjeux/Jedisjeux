@@ -869,7 +869,7 @@ ul.pagination .page-item {
   // RTL support.
   // The following mixin depends on the $text-direction variable in style.scss file OR in rtl_style.scss file.
   // RTL related mixins are located in mixins/_rtl.scss file.
-  @include ltr-to-rtl-compact(margin, 0, 10px, 0, 0);
+  @include ltr-to-rtl-compact(margin, 0, 5px, 0, 0);
   border-bottom: none;
   display: inline-block;
   @include border-radius(0px);
@@ -883,10 +883,10 @@ ul.pagination .page-item .page-link,
 ul.pager .page-item .page-link {
   text-align: center;
   padding: 0;
-  height: 40px;
-  width: 40px;
+  height: 35px;
+  width: 35px;
   border: 1px solid $gray;
-  line-height: 39px;
+  line-height: 34px;
   background-color: $gray;
   color: $white;
   display: inline-block;
