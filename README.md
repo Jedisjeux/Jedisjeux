@@ -32,6 +32,8 @@ $ php bin/console server:start
 Then open `http://localhost:8000/` in your web browser to enjoy Jedisjeux website in a development environment.
 
 Alternatively, you can use [Vagrant](https://github.com/Jedisjeux/Jedisjeux/tree/master/etc/vagrant) for your initial setup.
+you can also [use our Docker setup](https://github.com/Jedisjeux/Docker/tree/master).
+
 
 [Behat](http://behat.org) scenarios
 -----------------------------------
