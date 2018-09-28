@@ -29,7 +29,7 @@ services:
             - { name: "event_subscriber", subscribes_to: AppBundle\Event\ProductUpdated, method: "handleProductUpdated" }
             - { name: "event_subscriber", subscribes_to: AppBundle\Event\ProductDeleted, method: "handleProductDeleted" }
 
-    app.projector.person:
+    app.projector.topic:
         class: AppBundle\Projection\TopicProjector
         arguments:
             - "@es.manager.default"

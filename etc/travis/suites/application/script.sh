@@ -9,6 +9,7 @@ commands=(
     validate-behat-features
     validate-doctrine-schema
     validate-twig
+    validate-yaml-files
     validate-yarn-packages
     test-phpspec
     test-phpstan

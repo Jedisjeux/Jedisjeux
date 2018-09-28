@@ -13,8 +13,8 @@ doctrine_phpcr:
 
 doctrine_cache:
     providers:
-        phpcr_meta: %sylius.cache%
-        phpcr_nodes: %sylius.cache%
+        phpcr_meta: '%sylius.cache%'
+        phpcr_nodes: '%sylius.cache%'
 
 sonata_block:
     default_contexts: [cms]
