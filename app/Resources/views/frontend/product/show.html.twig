@@ -1,33 +1,9 @@
 {% extends 'frontend/layout.html.twig' %}
 
 {% block content %}
-
     {% include 'frontend/product/show/_breadcrumb.html.twig' %}
     {% include 'frontend/product/show/_main.html.twig' %}
-
-    <!-- section start -->
-    <!-- ================ -->
-    <section class="pv-30 light-gray-bg">
-        <div class="container">
-            <div class="row">
-                {% include 'frontend/product/show/_tabs.html.twig' %}
-                {% include 'frontend/product/show/_sidebar.html.twig' %}
-            </div>
-        </div>
-    </section>
-    <!-- section end -->
-
-    <section class="pv-30">
-        <div class="container">
-            {% for association in product.associations %}
-                <div class="row">
-                    <h3 class="title">{{ association.type }}</h3>
-                    <div class="separator-2"></div>
-                    {% include 'frontend/product/_list.html.twig' with {'products': association.associatedProducts} %}
-                </div>
-            {% endfor %}
-        </div>
-    </section>
-
+    {% include 'frontend/product/show/_content.html.twig' %}
+    {% include 'frontend/product/show/_associations.html.twig' %}
     {% include 'frontend/product/show/_footerTop.html.twig' %}
 {% endblock content %}
