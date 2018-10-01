@@ -1,5 +1,6 @@
 {% macro render_comments(topic, posts) %}
     {% import 'macro/image.html.twig' as images %}
+    {% import _self as self %}
 
     {% for post in posts %}
         {% set avatar = post.author.avatar %}
@@ -10,7 +11,7 @@
             {% if app.user and post.author.id == app.user.customer.id %}
                 <div class="float-right mb-10">
                     <div class="btn-group">
-                        <a class="btn btn-default" href="{{ path('app_frontend_post_update', { 'id': post.id }) }}"><i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-default" href="{{ self.getUpdatePath(topic, post) }}"><i class="fa fa-pencil"></i></a>
                     </div>
 
                     <div class="btn-group">
@@ -51,4 +52,16 @@
     {% endif %}
 
     {{ linkUrl }}
+{% endspaceless %}{% endmacro %}
+
+{% macro getUpdatePath(topic, post) %}{% spaceless %}
+    {% if topic.article is not null %}
+        {% set updatePath = path('app_frontend_article_post_update', { 'id': post.id, 'articleSlug': topic.article.slug }) %}
+    {% elseif topic.gamePlay is not null %}
+        {% set updatePath = path('app_frontend_game_play_post_update', { 'id': post.id, 'gamePlayId': topic.gamePlay.id }) %}
+    {% else %}
+        {% set updatePath = path('app_frontend_post_update', { 'id': post.id }) %}
+    {% endif %}
+
+    {{ updatePath }}
 {% endspaceless %}{% endmacro %}
