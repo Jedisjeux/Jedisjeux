@@ -1,5 +1,9 @@
 ## Change Log
 
+### v2.0.2 (2018/10/01)
+- [#278](https://github.com/Jedisjeux/Jedisjeux/pull/278) Fix/recaptcha on contact form (@loic425)
+- [#277](https://github.com/Jedisjeux/Jedisjeux/pull/277) Fix/rating count (@loic425)
+
 ### v2.0.1 (2018/09/28)
 - [#273](https://github.com/Jedisjeux/Jedisjeux/pull/273) update github templates (@loic425)
 - [#272](https://github.com/Jedisjeux/Jedisjeux/pull/272) remove codeship configuration (@loic425)
