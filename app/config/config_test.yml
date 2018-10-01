@@ -22,6 +22,9 @@ doctrine:
     dbal:
         dbname:   "%database_name%_test"
 
+ewz_recaptcha:
+    enabled: false
+
 swiftmailer:
     disable_delivery: true
     logging: true

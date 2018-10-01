@@ -69,7 +69,8 @@
     "ongr/elasticsearch-dsl": "^5.0",
     "ongr/filter-manager-bundle": "^2.1",
     "simple-bus/symfony-bridge": "^5.1",
-    "ramsey/uuid": "^3.8"
+    "ramsey/uuid": "^3.8",
+    "excelwebzone/recaptcha-bundle": "^1.5"
   },
   "require-dev": {
     "behat/behat": "^3.2",
