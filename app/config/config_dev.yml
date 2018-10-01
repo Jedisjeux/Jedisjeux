@@ -33,6 +33,9 @@ doctrine:
     dbal:
         dbname:   "%database_name%_dev"
 
+ewz_recaptcha:
+    enabled: false
+
 #swiftmailer:
 #    delivery_address: me@example.com
 

@@ -16,12 +16,19 @@ parameters:
 
     secret:            ThisTokenIsNotSoSecretChangeIt
 
+    # router
     router.request_context.host: jdj.local
     router.request_context.scheme: http
 
+    # elastic search
     fos_elastica.host: jdj.local
     fos_elastica.port: 9200
 
+    # google analytics
     google.analytics.tracking_id: UA-XXXXX-1
     google.analytics.profile_id: XXXXXXXX
     google.analytics.private_key_file: %kernel.root_dir%/Resources/credentials/client_secret.json
+
+    # recaptcha
+    recaptcha.public_key: enter_your_public_key
+    recaptcha.private_key: enter_your_private_key

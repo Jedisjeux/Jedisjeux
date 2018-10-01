@@ -1,4 +1,5 @@
 imports:
+    - { resource: captcha.yml }
     - { resource: ckeditor.yml }
     - { resource: cmf.yml }
     - { resource: cors.yml }

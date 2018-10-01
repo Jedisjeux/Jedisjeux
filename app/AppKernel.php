@@ -67,6 +67,7 @@ class AppKernel extends Kernel
             new ONGR\FilterManagerBundle\ONGRFilterManagerBundle(),
             new SimpleBus\SymfonyBridge\SimpleBusCommandBusBundle(),
             new SimpleBus\SymfonyBridge\SimpleBusEventBusBundle(),
+            new EWZ\Bundle\RecaptchaBundle\EWZRecaptchaBundle(),
 
             new AppBundle\AppBundle(),
         );

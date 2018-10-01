@@ -12,6 +12,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use EWZ\Bundle\RecaptchaBundle\Validator\Constraints as Recaptcha;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -26,6 +27,11 @@ class ContactRequest implements ResourceInterface
 {
     use IdentifiableTrait,
         Timestampable;
+
+    /**
+     * @Recaptcha\IsTrue
+     */
+    public $recaptcha;
 
     /**
      * @var string
