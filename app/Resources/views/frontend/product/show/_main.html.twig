@@ -17,7 +17,7 @@
                 <h1 class="page-title text-center">{{ product.name }}</h1>
                 {% if product.averageRating > 0 %}
                 <div class="text-center">
-                    <big> {{ rating(product.averageRating) }} {{ product.averageRating|round(1) }}</big> <small>/10</small> <small>({{ product.ratings | length }} {{ 'app.ui.ratings'|trans|lower }})</small>
+                    <big> {{ rating(product.averageRating) }} {{ product.averageRating|round(1) }}</big> <small>/10</small> <small>({{ product.reviews | length }} {{ 'app.ui.ratings'|trans|lower }})</small>
                 </div>
                 {% endif %}
                 <div class="text-center">
