@@ -31,15 +31,9 @@ class PlayerType extends AbstractType
             ->add('name', null, array(
                 'label' => 'label.name',
                 'required' => false,
-                'widget_addon_append' => array(
-                    'icon' => 'user'
-                ),
             ))
             ->add('score', null, array(
                 'label' => 'label.score',
-                'widget_addon_append' => array(
-                    'text' => 'point(s)'
-                ),
             ))
         ;
     }
