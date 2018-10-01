@@ -78,13 +78,6 @@ class GamePlayType extends AbstractType
                 'allow_delete' => true,
                 'by_reference' => false,
                 'prototype' => true,
-                'widget_add_btn' => ['label' => "label.add_image"],
-                'show_legend' => false, // dont show another legend of subform
-                'entry_options' => [ // options for collection fields
-                    'label_render' => false,
-                    'horizontal_input_wrapper_class' => "col-lg-8",
-                    'widget_remove_btn' => ['label' => "label.remove_this_image"],
-                ]
             ])
             ->add('players', CollectionType::class, [
                 'label' => 'app.ui.players',
@@ -93,13 +86,6 @@ class GamePlayType extends AbstractType
                 'allow_delete' => true,
                 'by_reference' => false,
                 'prototype' => true,
-                'widget_add_btn' => ['label' => "label.add_player"],
-                'show_legend' => false, // dont show another legend of subform
-                'entry_options' => [ // options for collection fields
-                    'label_render' => false,
-                    'horizontal_input_wrapper_class' => "col-lg-8",
-                    'widget_remove_btn' => ['label' => "label.remove_this_player"],
-                ]
             ])
             ->addEventListener(FormEvents::POST_SET_DATA, array($this, 'onPostSetData'))
             ->addEventListener(FormEvents::POST_SUBMIT, array($this, 'onPostSubmit'));

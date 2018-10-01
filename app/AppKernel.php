@@ -54,7 +54,6 @@ class AppKernel extends Kernel
 
             new Infinite\FormBundle\InfiniteFormBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),

@@ -55,7 +55,6 @@
     "jms/translation-bundle": "^1.4.1",
     "jms/di-extra-bundle": "^1.8",
     "twbs/bootstrap-sass": "^3.3",
-    "mopa/bootstrap-bundle": "^3.1",
     "egeloen/ckeditor-bundle": "^4.0",
     "fzaninotto/Faker": "^1.5",
     "infinite-networks/form-bundle": "^1.0",
@@ -100,7 +99,6 @@
       "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
       "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
       "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-      "Mopa\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrapSass",
       "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
       "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
     ],
