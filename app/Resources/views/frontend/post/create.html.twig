@@ -25,6 +25,9 @@
                     <h1 class="page-title">{{ pageTitle }}</h1>
                     <div class="separator-2"></div>
                     <!-- page-title end -->
+
+                    {% form_theme form 'frontend/form/horizontal.html.twig' %}
+
                     {{ form_start(form) }}
                     {% include 'frontend/post/_form.html.twig' %}
                     {{ action.create() }}

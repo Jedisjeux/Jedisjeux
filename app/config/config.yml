@@ -47,7 +47,6 @@ twig:
     globals:
         ga_tracking: "%google.analytics.tracking_id%"
     form_themes:
-        - '::frontend/form/horizontal.html.twig'
         - "::form/ckeditor_widget.html.twig"
 
 # Doctrine Configuration
