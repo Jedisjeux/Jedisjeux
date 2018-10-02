@@ -1,5 +1,12 @@
 ## Change Log
 
+### v2.0.3 (2018/10/02)
+- [#287](https://github.com/Jedisjeux/Jedisjeux/pull/287) remove not used anymore partial directory (@loic425)
+- [#285](https://github.com/Jedisjeux/Jedisjeux/pull/285) [TopicExampleFactory] remove main post on article and game play topics (@loic425)
+- [#283](https://github.com/Jedisjeux/Jedisjeux/pull/283) fix post update redirection (@loic425)
+- [#282](https://github.com/Jedisjeux/Jedisjeux/pull/282) fix checkbox labels (@loic425)
+- [#281](https://github.com/Jedisjeux/Jedisjeux/pull/281) remove useless mopa bootstrap bundle (@loic425)
+
 ### v2.0.2 (2018/10/01)
 - [#278](https://github.com/Jedisjeux/Jedisjeux/pull/278) Fix/recaptcha on contact form (@loic425)
 - [#277](https://github.com/Jedisjeux/Jedisjeux/pull/277) Fix/rating count (@loic425)
