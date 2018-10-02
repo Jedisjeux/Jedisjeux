@@ -1,5 +1,7 @@
 {% import 'macro/image.html.twig' as images %}
 
+{% set productPath = path('sylius_frontend_product_show', { 'slug': game_play.product.slug } ) %}
+
 <!-- main-container start -->
 <!-- ================ -->
 <section class="main-container">
@@ -29,9 +31,16 @@
 
                 <div class="row">
                     <div class="col-lg-4 col-xl-5 pv-20">
-                        <div class="overlay-container overlay-visible">
+                        <div class="overlay-container">
                             {{ images.render(game_play.product.mainImage.webPath, 'full', game_play.product.name) }}
-                            <a href="{{ path('sylius_frontend_product_show', { 'slug': game_play.product.slug } ) }}" class="slick-carousel--popup-img overlay-link" title="image title"><i class="fa fa-link"></i></a>
+                            <a class="overlay-link" href="{{ productPath }}"><i class="fa fa-link"></i></a>
+                            <div class="overlay-to-top links">
+                                <span class="small">
+                                  <a href="{{ productPath }}" class="btn-sm-link">
+                                      <i class="fa fa-link pr-1"></i>{{ 'sylius.ui.view_product_details'|trans({'%product%': game_play.product.name|lower})}}
+                                  </a>
+                                </span>
+                            </div>
                         </div>
                         <div class="clearfix mb-20">
                         </div>
