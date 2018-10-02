@@ -23,8 +23,8 @@
                     <i class="fa fa-calendar-o pr-1"></i> {{ game_play.createdAt|localizeddate('medium', 'none') }}
                 </p>
                 <div class="separator-2"></div>
-                {% if topic is not null %}
-                 <p class="margin-clear">{{ topic.mainPost.body|truncate(250, true)|striptags|raw }}</p>
+                {% if topic is not null and topic.firstPost is not null %}
+                    <p class="margin-clear">{{ topic.firstPost.body|truncate(250, true)|striptags|raw }}</p>
                 {% endif %}
                 <br>
                 <a href="{{ gamePlayPath }}" class="btn btn-default btn-sm margin-clear">{{ 'sylius.ui.view_more'|trans }}<i

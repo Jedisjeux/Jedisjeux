@@ -18,7 +18,6 @@ use AppBundle\Factory\TopicFactory;
 use AppBundle\Fixture\OptionsResolver\LazyOption;
 use AppBundle\Formatter\StringInflector;
 use Sylius\Component\Customer\Model\CustomerInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\OptionsResolver\Options;
