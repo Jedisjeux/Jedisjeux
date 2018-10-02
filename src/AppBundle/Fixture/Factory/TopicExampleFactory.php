@@ -105,10 +105,6 @@ class TopicExampleFactory extends AbstractExampleFactory implements ExampleFacto
             $topic = $this->topicFactory->createForGamePlay($options['game_play']);
         } else {
             $topic = $this->topicFactory->createNew();
-            $mainPost = $topic->getMainPost();
-            $mainPost->setBody($options['body']);
-            $mainPost->setAuthor($topic->getAuthor());
-            $mainPost->setCreatedAt($topic->getCreatedAt());
         }
 
         $topic->setCode($options['code']);
@@ -117,6 +113,12 @@ class TopicExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $topic->setMainTaxon($options['main_taxon']);
         $topic->setCreatedAt($options['created_at']);
         $topic->setLastPostCreatedAt($topic->getCreatedAt());
+
+        if (null !== $mainPost = $topic->getMainPost()) {
+            $mainPost->setBody($options['body']);
+            $mainPost->setAuthor($topic->getAuthor());
+            $mainPost->setCreatedAt($topic->getCreatedAt());
+        }
 
         return $topic;
     }
