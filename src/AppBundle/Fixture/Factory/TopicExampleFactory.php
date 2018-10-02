@@ -14,10 +14,10 @@ namespace AppBundle\Fixture\Factory;
 use AppBundle\Entity\Article;
 use AppBundle\Entity\GamePlay;
 use AppBundle\Entity\Topic;
+use AppBundle\Factory\TopicFactory;
 use AppBundle\Fixture\OptionsResolver\LazyOption;
 use AppBundle\Formatter\StringInflector;
 use Sylius\Component\Customer\Model\CustomerInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -29,7 +29,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class TopicExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
-     * @var FactoryInterface
+     * @var TopicFactory
      */
     private $topicFactory;
 
@@ -64,21 +64,21 @@ class TopicExampleFactory extends AbstractExampleFactory implements ExampleFacto
     private $optionsResolver;
 
     /**
-     * @param FactoryInterface $personFactory
+     * @param TopicFactory $topicFactory
      * @param RepositoryInterface $customerRepository
      * @param RepositoryInterface $articleRepository
      * @param RepositoryInterface $gamePlayRepository
      * @param RepositoryInterface $taxonRepository
      */
     public function __construct(
-        FactoryInterface $personFactory,
+        TopicFactory $topicFactory,
         RepositoryInterface $customerRepository,
         RepositoryInterface $articleRepository,
         RepositoryInterface $gamePlayRepository,
         RepositoryInterface $taxonRepository
     )
     {
-        $this->topicFactory = $personFactory;
+        $this->topicFactory = $topicFactory;
         $this->customerRepository = $customerRepository;
         $this->articleRepository = $articleRepository;
         $this->gamePlayRepository = $gamePlayRepository;
@@ -98,7 +98,14 @@ class TopicExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $options = $this->optionsResolver->resolve($options);
 
         /** @var Topic $topic */
-        $topic = $this->topicFactory->createNew();
+        if ($options['article']) {
+            $topic = $this->topicFactory->createForArticle($options['article']);
+        } elseif ($options['game_play']) {
+            $topic = $this->topicFactory->createForGamePlay($options['game_play']);
+        } else {
+            $topic = $this->topicFactory->createNew();
+        }
+
         $topic->setCode($options['code']);
         $topic->setTitle($options['title']);
         $topic->setAuthor($options['author']);
@@ -106,19 +113,10 @@ class TopicExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $topic->setCreatedAt($options['created_at']);
         $topic->setLastPostCreatedAt($topic->getCreatedAt());
 
-        $mainPost = $topic->getMainPost();
-        $mainPost->setBody($options['body']);
-        $mainPost->setAuthor($topic->getAuthor());
-        $mainPost->setCreatedAt($topic->getCreatedAt());
-
-        if ($options['article']) {
-            /** @var Article $article */
-            $article = $options['article'];
-            $article->setTopic($topic);
-        } elseif ($options['game_play']) {
-            /** @var GamePlay $gamePlay */
-            $gamePlay = $options['game_play'];
-            $gamePlay->setTopic($topic);
+        if (null !== $mainPost = $topic->getMainPost()) {
+            $mainPost->setBody($options['body']);
+            $mainPost->setAuthor($topic->getAuthor());
+            $mainPost->setCreatedAt($topic->getCreatedAt());
         }
 
         return $topic;

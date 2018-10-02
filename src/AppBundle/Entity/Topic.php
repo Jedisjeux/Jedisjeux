@@ -224,6 +224,16 @@ class Topic implements ResourceInterface
     /**
      * @return Post|null
      */
+    public function getFirstPost(): ?Post
+    {
+        $firstPost = $this->posts->first();
+
+        return $firstPost ?: null;
+    }
+
+    /**
+     * @return Post|null
+     */
     public function getLastPost(): ?Post
     {
         $lastPost = $this->posts->last();
