@@ -54,12 +54,12 @@ class AppKernel extends Kernel
 
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
-            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
             new Zenstruck\RedirectBundle\ZenstruckRedirectBundle(),
             new Eko\FeedBundle\EkoFeedBundle(),
             new Incenteev\HashedAssetBundle\IncenteevHashedAssetBundle(),
             new Nelmio\CorsBundle\NelmioCorsBundle(),
+            new FOS\CKEditorBundle\FOSCKEditorBundle(),
 
             new ONGR\ElasticsearchBundle\ONGRElasticsearchBundle(),
             new ONGR\FilterManagerBundle\ONGRFilterManagerBundle(),
