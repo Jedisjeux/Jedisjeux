@@ -32,19 +32,38 @@ class ResetPasswordPage extends SymfonyPage
     }
 
     /**
-     * @param string $password
+     * @param string|null $password
      */
-    public function specifyNewPassword(string $password)
+    public function specifyNewPassword(?string $password)
     {
         $this->getElement('password')->setValue($password);
     }
 
     /**
-     * @param string $password
+     * @param string|null $password
      */
-    public function specifyConfirmPassword($password)
+    public function specifyConfirmPassword(?string $password)
     {
         $this->getElement('confirm_password')->setValue($password);
+    }
+
+    /**
+     * @param string $element
+     * @param string $message
+     *
+     * @return bool
+     *
+     * @throws ElementNotFoundException
+     */
+    public function checkValidationMessageFor(string $element, string $message): bool
+    {
+        $errorLabel = $this->getElement($element)->getParent()->getParent()->find('css', '.form-error-message');
+
+        if (null === $errorLabel) {
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.form-error-message');
+        }
+
+        return $message === $errorLabel->getText();
     }
 
     /**

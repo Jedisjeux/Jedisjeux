@@ -28,7 +28,7 @@ class RequestPasswordResetPage extends SymfonyPage
         $errorLabel = $this->getElement($element)->getParent()->getParent()->find('css', '.form-error-message');
 
         if (null === $errorLabel) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.form-error-message');
         }
 
         return $message === $errorLabel->getText();

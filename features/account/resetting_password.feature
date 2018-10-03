@@ -21,5 +21,5 @@ Feature: Resetting a password
         When I follow link on my email to reset my password
         And I specify my new password as "newp@ssw0rd"
         And I confirm my new password as "newp@ssw0rd"
-        And I save my changes
+        And I reset it
         Then I should be notified that my password has been successfully reset
