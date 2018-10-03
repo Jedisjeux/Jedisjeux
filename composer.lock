@@ -1929,21 +1929,22 @@
         },
         {
             "name": "eko/feedbundle",
-            "version": "1.2.8",
+            "version": "1.2.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/eko/FeedBundle.git",
-                "reference": "2d2c8eb09f4ff4eb2c482315d18fa5173bd273eb"
+                "reference": "d4e626616d9ccf6527212d3bdda15f9af3838e4f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/eko/FeedBundle/zipball/2d2c8eb09f4ff4eb2c482315d18fa5173bd273eb",
-                "reference": "2d2c8eb09f4ff4eb2c482315d18fa5173bd273eb",
+                "url": "https://api.github.com/repos/eko/FeedBundle/zipball/d4e626616d9ccf6527212d3bdda15f9af3838e4f",
+                "reference": "d4e626616d9ccf6527212d3bdda15f9af3838e4f",
                 "shasum": ""
             },
             "require": {
                 "php": "^5.4|^7.0",
-                "symfony/framework-bundle": "^2.5|^3.0",
+                "symfony/framework-bundle": "^2.5|^3.0|^4.0",
+                "symfony/translation": "^2.5|^3.0|^4.0",
                 "zendframework/zend-feed": ">=2.0",
                 "zendframework/zend-http": ">=2.0",
                 "zendframework/zend-servicemanager": ">=2.0"
@@ -1956,11 +1957,6 @@
                 "doctrine/orm": "~2.2,>=2.2.3|~2.5"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Eko\\FeedBundle\\": ""
@@ -1984,7 +1980,7 @@
                 "feed",
                 "rss"
             ],
-            "time": "2016-04-20T19:56:02+00:00"
+            "time": "2018-09-14T19:08:49+00:00"
         },
         {
             "name": "elasticsearch/elasticsearch",
