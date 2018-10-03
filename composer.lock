@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5d1fe46de33ab8716a850cb348e5f4a9",
+    "content-hash": "7704586346875088e15986854ffac0c8",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -3118,62 +3118,6 @@
                 "symfony-bundle"
             ],
             "time": "2018-02-21T11:15:54+00:00"
-        },
-        {
-            "name": "infinite-networks/form-bundle",
-            "version": "1.0.11",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/infinite-networks/InfiniteFormBundle.git",
-                "reference": "9e156c4c548aa0118adc22fabf7be23e340dd458"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/infinite-networks/InfiniteFormBundle/zipball/9e156c4c548aa0118adc22fabf7be23e340dd458",
-                "reference": "9e156c4c548aa0118adc22fabf7be23e340dd458",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/common": "~2.3",
-                "php": ">=5.3.2",
-                "symfony/form": "^2.3 || ^3.0",
-                "symfony/framework-bundle": "^2.3 || ^3.0"
-            },
-            "conflict": {
-                "twig/twig": "<1.12"
-            },
-            "require-dev": {
-                "components/jquery": "~3.1",
-                "components/qunit": "~1.11",
-                "doctrine/doctrine-bundle": "~1.2",
-                "doctrine/orm": "~2.3",
-                "robloach/component-installer": "^0.2",
-                "symfony/phpunit-bridge": "^2.7",
-                "symfony/symfony": "^2.3.5 || ^3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Infinite\\FormBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Tim Nagel",
-                    "email": "t.nagel@infinite.net.au"
-                }
-            ],
-            "description": "A collection of useful form types and extensions for Symfony2",
-            "time": "2017-05-12T05:01:21+00:00"
         },
         {
             "name": "jackalope/jackalope",
