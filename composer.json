@@ -21,9 +21,9 @@
     "php": "^7.1",
     "symfony/symfony": "3.4.*",
     "doctrine/orm": "^2.4.8",
-    "doctrine/doctrine-bundle": "~1.4",
-    "doctrine/doctrine-fixtures-bundle": " ^2.2",
-    "doctrine/doctrine-migrations-bundle": "^1.1",
+    "doctrine/doctrine-bundle": "^1.6",
+    "doctrine/doctrine-fixtures-bundle": "^2.3",
+    "doctrine/doctrine-migrations-bundle": "^1.2",
     "knplabs/doctrine-behaviors": "~1.1",
     "symfony/assetic-bundle": "~2.3",
     "symfony/swiftmailer-bundle": "~2.3",
@@ -110,7 +110,11 @@
     ]
   },
   "config": {
-    "bin-dir": "bin"
+    "bin-dir": "bin",
+    "preferred-install": {
+      "*": "dist"
+    },
+    "sort-packages": true
   },
   "extra": {
     "symfony-app-dir": "app",
