@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d7b4f9c264b91fa1520d0ff29bbf0b13",
+    "content-hash": "5d1fe46de33ab8716a850cb348e5f4a9",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -8091,33 +8091,40 @@
         },
         {
             "name": "symfony-cmf/block-bundle",
-            "version": "2.0.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony-cmf/block-bundle.git",
-                "reference": "8d2c0e335ba016e2fdfd8c47041f8d6bc02e8c96"
+                "reference": "8bc1b9d0f132e6c84283168749b5f4adcecdfe94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony-cmf/block-bundle/zipball/8d2c0e335ba016e2fdfd8c47041f8d6bc02e8c96",
-                "reference": "8d2c0e335ba016e2fdfd8c47041f8d6bc02e8c96",
+                "url": "https://api.github.com/repos/symfony-cmf/block-bundle/zipball/8bc1b9d0f132e6c84283168749b5f4adcecdfe94",
+                "reference": "8bc1b9d0f132e6c84283168749b5f4adcecdfe94",
                 "shasum": ""
             },
             "require": {
-                "doctrine/phpcr-bundle": "^1.0",
-                "doctrine/phpcr-odm": "^1.4.2",
-                "php": "^5.6|^7.0",
-                "sonata-project/block-bundle": "^3.3",
+                "doctrine/phpcr-bundle": "^1.3 || ^2.0",
+                "doctrine/phpcr-odm": "^1.4.2 || ^2.0",
+                "php": "^7.1",
+                "sonata-project/block-bundle": "^3.11",
                 "symfony-cmf/core-bundle": "^2.0",
-                "symfony/framework-bundle": "^2.8|^3.0"
+                "symfony/framework-bundle": "^2.8 || ^3.3 || ^4.0"
+            },
+            "conflict": {
+                "sonata/cache": "<1.1.1"
             },
             "require-dev": {
-                "sonata-project/cache-bundle": "^2.1.3,<2.3",
+                "sonata-project/cache-bundle": "^2.4",
                 "sonata-project/core-bundle": "^3.0",
-                "symfony-cmf/menu-bundle": "^2.0",
-                "symfony-cmf/testing": "^2.0",
-                "symfony/phpunit-bridge": "^3.2",
-                "twig/twig": "^1.14.2|^2.0"
+                "symfony-cmf/menu-bundle": "^2.1",
+                "symfony-cmf/testing": "^2.1.8",
+                "symfony/asset": "^2.8 || ^3.3 || ^4.0",
+                "symfony/phpunit-bridge": "^3.3 || ^4.0",
+                "symfony/security-bundle": "^2.8 || ^3.3 || ^4.0",
+                "symfony/templating": "^2.8 || ^3.3 || ^4.0",
+                "symfony/twig-bundle": "^2.8 || ^3.3 || ^4.0",
+                "twig/twig": "^1.14.2 || ^2.0"
             },
             "suggest": {
                 "eko/feedbundle": "When using the RssBlock",
@@ -8126,7 +8133,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "2.1-dev"
                 }
             },
             "autoload": {
@@ -8151,48 +8158,55 @@
                 "block",
                 "content fragments"
             ],
-            "time": "2017-02-27T14:42:59+00:00"
+            "time": "2018-08-18T07:23:32+00:00"
         },
         {
             "name": "symfony-cmf/core-bundle",
-            "version": "2.0.1",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony-cmf/core-bundle.git",
-                "reference": "cfc5f7b0396157800074946e10e58a32f1f0ab71"
+                "reference": "434932a0f925b38fb5e14160b8e4c4dbb7d862fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony-cmf/core-bundle/zipball/cfc5f7b0396157800074946e10e58a32f1f0ab71",
-                "reference": "cfc5f7b0396157800074946e10e58a32f1f0ab71",
+                "url": "https://api.github.com/repos/symfony-cmf/core-bundle/zipball/434932a0f925b38fb5e14160b8e4c4dbb7d862fd",
+                "reference": "434932a0f925b38fb5e14160b8e4c4dbb7d862fd",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.6|^7.0",
-                "symfony/framework-bundle": "^2.8|^3.0"
+                "php": "^7.1",
+                "symfony/framework-bundle": "^2.8 || ^3.3 || ^4.0",
+                "symfony/security-core": "^2.8 || ^3.3 || ^4.0"
             },
             "require-dev": {
                 "doctrine/dbal": "2.5.*",
-                "doctrine/phpcr-odm": "^1.0",
+                "doctrine/phpcr-odm": "^1.4|^2.0 ",
                 "mockery/mockery": "^0.9.4",
-                "symfony-cmf/routing-bundle": "^2.0",
-                "symfony-cmf/testing": "^2.0",
-                "symfony/phpunit-bridge": "^3.2",
-                "symfony/security-bundle": "^2.8|^3.0"
+                "symfony-cmf/routing-bundle": "^2.1.0",
+                "symfony-cmf/testing": "^2.1.8",
+                "symfony/asset": "^2.8 || ^3.3 || ^4.0",
+                "symfony/browser-kit": "^2.8 || ^3.3 || ^4.0",
+                "symfony/form": "^2.8 || ^3.3 || ^4.0",
+                "symfony/phpunit-bridge": "^3.3 || ^4.0",
+                "symfony/security-bundle": "^2.8 || ^3.3 || ^4.0",
+                "symfony/templating": "^2.8 || ^3.3 || ^4.0",
+                "symfony/translation": "^2.8 || ^3.3 || ^4.0",
+                "symfony/validator": "^2.8 || ^3.3 || ^4.0"
             },
             "suggest": {
                 "doctrine/phpcr-bundle": "To be able to use the CMF twig extension (^1.0)",
                 "doctrine/phpcr-odm": "To be able to use the CMF twig extension (^1.0)",
-                "symfony-cmf/routing": "To be able to use the CMF twig extension functions cmf_prev_linkable/cmf_next_linkable (^2.0)",
-                "symfony-cmf/routing-bundle": "To be able to enable the publish_workflow_listener (^2.0)",
+                "symfony-cmf/routing": "To be able to use the CMF twig extension functions cmf_prev_linkable/cmf_next_linkable (^2.1)",
+                "symfony-cmf/routing-bundle": "To be able to enable the publish_workflow_listener (^2.1)",
                 "symfony-cmf/sonata-admin-integration-bundle": "To provide an admin interface for the PHPCR ODM documents.",
-                "symfony/security-bundle": "To be able to use the publish workflow system (^2.1)",
-                "symfony/twig-bundle": "To get access to the CMF twig extension (^2.1)"
+                "symfony/security-bundle": "To be able to use the publish workflow system (^2.8 || ^3.3 || ^4.0)",
+                "symfony/twig-bundle": "To get access to the CMF twig extension (^2.8 || ^3.3 || ^4.0)"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "2.1-dev"
                 }
             },
             "autoload": {
@@ -8215,7 +8229,7 @@
             "keywords": [
                 "Symfony CMF"
             ],
-            "time": "2017-10-11T11:49:19+00:00"
+            "time": "2018-08-11T03:41:37+00:00"
         },
         {
             "name": "symfony-cmf/media-bundle",
@@ -8285,31 +8299,30 @@
         },
         {
             "name": "symfony-cmf/routing",
-            "version": "2.0.3",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony-cmf/Routing.git",
-                "reference": "215da2d995f6877f76859e7815b24413c469f6c2"
+                "reference": "7370dfb0ef9803d9d84f74d023c9f0f66eb13125"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony-cmf/Routing/zipball/215da2d995f6877f76859e7815b24413c469f6c2",
-                "reference": "215da2d995f6877f76859e7815b24413c469f6c2",
+                "url": "https://api.github.com/repos/symfony-cmf/Routing/zipball/7370dfb0ef9803d9d84f74d023c9f0f66eb13125",
+                "reference": "7370dfb0ef9803d9d84f74d023c9f0f66eb13125",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.6.0|^7.0",
+                "php": "^7.1",
                 "psr/log": "^1.0",
-                "symfony/http-kernel": "^2.8|^3.0",
-                "symfony/routing": "^2.8|^3.0"
+                "symfony/http-kernel": "^2.8 || ^3.3 || ^4.0",
+                "symfony/routing": "^2.8 || ^3.3 || ^4.0"
             },
             "require-dev": {
-                "friendsofsymfony/jsrouting-bundle": "^1.1",
-                "symfony-cmf/testing": "^2.0",
-                "symfony/config": "^2.8|^3.0",
-                "symfony/dependency-injection": "^2.8|^3.0",
-                "symfony/event-dispatcher": "^2.8|^3.0",
-                "symfony/phpunit-bridge": "^3.2"
+                "symfony-cmf/testing": "^2.1.0",
+                "symfony/config": "^2.8 || ^3.3 || ^4.0",
+                "symfony/dependency-injection": "^2.8 || ^3.3 || ^4.0",
+                "symfony/event-dispatcher": "^2.8 || ^3.3 || ^4.0",
+                "symfony/phpunit-bridge": "^3.3 || ^4.0"
             },
             "suggest": {
                 "symfony/event-dispatcher": "DynamicRouter can optionally trigger an event at the start of matching. Minimal version (~2.1)"
@@ -8317,7 +8330,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "2.1-dev"
                 }
             },
             "autoload": {
@@ -8341,39 +8354,41 @@
                 "database",
                 "routing"
             ],
-            "time": "2017-12-07T14:05:09+00:00"
+            "time": "2018-06-14T06:42:21+00:00"
         },
         {
             "name": "symfony-cmf/routing-bundle",
-            "version": "2.0.3",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony-cmf/routing-bundle.git",
-                "reference": "ebc63f97f47f7c21ce3c61c38538522eaae428ab"
+                "reference": "9200b91d2985f9634f2a64536279aee6a1e1a0d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony-cmf/routing-bundle/zipball/ebc63f97f47f7c21ce3c61c38538522eaae428ab",
-                "reference": "ebc63f97f47f7c21ce3c61c38538522eaae428ab",
+                "url": "https://api.github.com/repos/symfony-cmf/routing-bundle/zipball/9200b91d2985f9634f2a64536279aee6a1e1a0d8",
+                "reference": "9200b91d2985f9634f2a64536279aee6a1e1a0d8",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.6|^7.0",
-                "symfony-cmf/routing": "^2.0",
-                "symfony/framework-bundle": "^2.8|^3.0",
-                "symfony/twig-bundle": "^2.8|^3.0"
+                "php": "^7.1",
+                "symfony-cmf/routing": "^2.1.0",
+                "symfony/framework-bundle": "^2.8 || ^3.3 || ^4.0",
+                "twig/twig": "^1.35 || ^2.4.4"
             },
             "conflict": {
-                "doctrine/phpcr-odm": "<1.4"
+                "doctrine/phpcr-odm": "<1.4",
+                "phpunit/phpunit": "<5.7"
             },
             "require-dev": {
                 "doctrine/data-fixtures": "^1.0.0",
                 "doctrine/orm": "^2.5",
-                "doctrine/phpcr-odm": "^1.4",
-                "matthiasnoback/symfony-config-test": "^1.3.1",
-                "matthiasnoback/symfony-dependency-injection-test": "~0.6",
-                "symfony-cmf/testing": "^2.0",
-                "symfony/phpunit-bridge": "^3.2"
+                "doctrine/phpcr-odm": "^1.4|^2.0",
+                "matthiasnoback/symfony-config-test": "^2.2",
+                "matthiasnoback/symfony-dependency-injection-test": "^1.0",
+                "symfony-cmf/testing": "^2.1.0",
+                "symfony/phpunit-bridge": "^3.3 || ^4.0",
+                "symfony/validator": "^2.8 || ^3.3 || ^4.0"
             },
             "suggest": {
                 "doctrine/orm": "To enable support for the ORM entities (^2.5)",
@@ -8383,7 +8398,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "2.1-dev"
                 }
             },
             "autoload": {
@@ -8407,7 +8422,7 @@
                 "database",
                 "routing"
             ],
-            "time": "2018-01-22T07:32:57+00:00"
+            "time": "2018-09-24T06:49:35+00:00"
         },
         {
             "name": "symfony/assetic-bundle",
@@ -10343,33 +10358,35 @@
         },
         {
             "name": "zenstruck/redirect-bundle",
-            "version": "v3.0.3",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kbond/ZenstruckRedirectBundle.git",
-                "reference": "04c307bc64f69735d494016a6d313d9bd347c5a4"
+                "reference": "9ee73a74bf8b4da5268f868cd2b04c9ee7892c29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kbond/ZenstruckRedirectBundle/zipball/04c307bc64f69735d494016a6d313d9bd347c5a4",
-                "reference": "04c307bc64f69735d494016a6d313d9bd347c5a4",
+                "url": "https://api.github.com/repos/kbond/ZenstruckRedirectBundle/zipball/9ee73a74bf8b4da5268f868cd2b04c9ee7892c29",
+                "reference": "9ee73a74bf8b4da5268f868cd2b04c9ee7892c29",
                 "shasum": ""
             },
             "require": {
                 "doctrine/doctrine-bundle": "~1.3",
                 "doctrine/orm": "~2.4",
-                "symfony/dependency-injection": "~2.3|~3.0",
-                "symfony/doctrine-bridge": "~2.3|~3.0",
-                "symfony/framework-bundle": "^2.3.25|~3.0"
+                "php": "^5.6|^7.0",
+                "symfony/dependency-injection": "~2.8|~3.0|~4.0",
+                "symfony/doctrine-bridge": "~2.8|~3.0|~4.0",
+                "symfony/framework-bundle": "^2.8|~3.0|~4.0"
             },
             "require-dev": {
-                "matthiasnoback/symfony-dependency-injection-test": "^0.7.4",
-                "phpunit/phpunit": "^4.8.16",
-                "symfony/browser-kit": "~2.3|~3.0",
-                "symfony/console": "~2.3|~3.0",
-                "symfony/finder": "~2.3|~3.0",
-                "symfony/form": "~2.3|~3.0",
-                "symfony/validator": "~2.3|~3.0"
+                "matthiasnoback/symfony-dependency-injection-test": "^1.2",
+                "phpunit/phpunit": "~5.7",
+                "symfony/browser-kit": "~2.8|~3.0|~4.0",
+                "symfony/console": "~2.8|~3.0|~4.0",
+                "symfony/css-selector": "~2.8|~3.0|~4.0",
+                "symfony/finder": "~2.8|~3.0|~4.0",
+                "symfony/form": "^2.8.8|~3.0|~4.0",
+                "symfony/validator": "~2.8|~3.0|~4.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -10397,7 +10414,7 @@
             "keywords": [
                 "redirect"
             ],
-            "time": "2017-01-27T11:49:07+00:00"
+            "time": "2018-08-02T17:11:24+00:00"
         }
     ],
     "packages-dev": [
