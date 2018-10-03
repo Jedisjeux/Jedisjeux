@@ -25,9 +25,9 @@ class ProductReviewSpec extends ObjectBehavior
         $this->getCode()->shouldNotBeNull();
     }
 
-    function its_title_is_empty_by_default()
+    function its_title_is_null_by_default()
     {
-        $this->getTitle()->shouldReturn("");
+        $this->getTitle()->shouldReturn(null);
     }
 
     function its_status_is_accepted_by_default()

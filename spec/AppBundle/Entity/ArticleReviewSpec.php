@@ -20,13 +20,13 @@ class ArticleReviewSpec extends ObjectBehavior
         $this->shouldBeAnInstanceOf(Review::class);
     }
 
-    function its_status_should_be_accepted_by_default()
+    function its_status_is_accepted_by_default()
     {
         $this->getStatus()->shouldBeEqualTo(ReviewInterface::STATUS_ACCEPTED);
     }
 
-    function its_title_should_be_empty_by_default()
+    function its_title_is_null_by_default()
     {
-        $this->getTitle()->shouldBeEqualTo("");
+        $this->getTitle()->shouldReturn(null);
     }
 }
