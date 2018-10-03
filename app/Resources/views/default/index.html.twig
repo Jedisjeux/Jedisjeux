@@ -23,7 +23,7 @@
 
                 <h4 class="mag-head"><a href="{{ path('app_frontend_article_index') }}"><i class="fa fa-cloud color"></i> Articles Récents</a></h4>
                 <!-- TODO publishedAt -->
-                {{ render(url('app_partial_article_index', {
+                {{ render(url('app_frontend_partial_article_index', {
                     'template': 'frontend/article/_magazine_items_one_and_list_items.html.twig',
                     'paginate': 5,
                     'sorting': {
@@ -37,7 +37,7 @@
                 <h4 class="mag-head"><a href="{{ path('app_frontend_article_index', {'sorting': {'viewCount': 'desc'}}) }}"><i class="fa fa-star color"></i> Top Articles</a></h4>
 
                 <!-- TODO publishedAt -->
-                {{ render(url('app_partial_article_index', {
+                {{ render(url('app_frontend_partial_article_index', {
                     'template': 'frontend/article/_magazine_items_one_and_list_items_image_less.html.twig',
                     'paginate': 5,
                     'criteria': {

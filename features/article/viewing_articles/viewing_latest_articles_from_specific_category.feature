@@ -1,8 +1,8 @@
 @viewing_articles
-Feature: Viewing articles from a specific category
+Feature: Viewing latest articles from a specific category
     In order to browse articles that interest me most
     As a Visitor
-    I want to be able to view articles from a specific category
+    I want to be able to view latest articles from a specific category
 
     Background:
         Given there are default taxonomies for articles
@@ -13,7 +13,9 @@ Feature: Viewing articles from a specific category
         And this article has "Reviews" category
 
     @ui
-    Scenario: Viewing articles from a specific category
-        When I browse articles from category "News"
+    Scenario: Viewing latest articles from a specific category
+        Given there is an article "Great news" written by "kevin@example.com"
+        And this article has "News" category
+        When I check this article's details
         Then I should see the article "Puerto Rico has been released"
         But I should not see the article "Review of Puerto Rico"

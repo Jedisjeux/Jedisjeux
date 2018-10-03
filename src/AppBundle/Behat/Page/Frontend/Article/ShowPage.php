@@ -63,6 +63,16 @@ class ShowPage extends SymfonyPage
     }
 
     /**
+     * @param string $title
+     *
+     * @return bool
+     */
+    public function isArticleOnList($title)
+    {
+        return null !== $this->getDocument()->find('css', sprintf('#latest-articles h6:contains("%s")', $title));
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getDefinedElements()

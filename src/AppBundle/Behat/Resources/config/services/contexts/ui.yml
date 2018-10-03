@@ -153,6 +153,7 @@ services:
             - "@app.behat.page.frontend.article.index"
             - "@app.behat.page.frontend.article.index_by_taxon"
             - "@app.behat.page.frontend.article.index_by_product"
+            - "@app.behat.current_page_resolver"
         tags:
             - { name: fob.context_service }
 
