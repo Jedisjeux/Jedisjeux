@@ -31,11 +31,11 @@ class LoginPage extends SymfonyPage
     }
 
     /**
-     * @param string $password
+     * @param string|null $password
      *
      * @throws \Behat\Mink\Exception\ElementNotFoundException
      */
-    public function specifyPassword(string $password)
+    public function specifyPassword(?string $password)
     {
         $this->getElement('password')->setValue($password);
     }

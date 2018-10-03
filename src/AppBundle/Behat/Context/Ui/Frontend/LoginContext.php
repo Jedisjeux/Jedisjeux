@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace AppBundle\Behat\Context\Ui\Frontend;
 
 use AppBundle\Behat\Page\Frontend\Account\ResetPasswordPage;
+use AppBundle\Behat\Service\Resolver\CurrentPageResolverInterface;
 use AppBundle\Behat\Service\SharedStorage;
 use AppBundle\Behat\Service\SharedStorageInterface;
 use Behat\Behat\Context\Context;
@@ -23,6 +24,7 @@ use AppBundle\Behat\Page\Frontend\Account\RegisterPage;
 use AppBundle\Behat\Page\Frontend\Account\RequestPasswordResetPage;
 use AppBundle\Behat\Page\Frontend\HomePage;
 use AppBundle\Behat\Service\NotificationCheckerInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Webmozart\Assert\Assert;
 
 final class LoginContext implements Context
@@ -58,9 +60,9 @@ final class LoginContext implements Context
     private $notificationChecker;
 
     /**
-     * @var SharedStorageInterface
+     * @var CurrentPageResolverInterface
      */
-    private $sharedStorage;
+    private $currentPageResolver;
 
     /**
      * @param HomePage $homePage
@@ -69,7 +71,7 @@ final class LoginContext implements Context
      * @param RequestPasswordResetPage $requestPasswordResetPage
      * @param ResetPasswordPage $resetPasswordPage
      * @param NotificationCheckerInterface $notificationChecker
-     * @param SharedStorageInterface $sharedStorage
+     * @param CurrentPageResolverInterface $currentPageResolver
      */
     public function __construct(
         HomePage $homePage,
@@ -78,7 +80,7 @@ final class LoginContext implements Context
         RequestPasswordResetPage $requestPasswordResetPage,
         ResetPasswordPage $resetPasswordPage,
         NotificationCheckerInterface $notificationChecker,
-        SharedStorageInterface $sharedStorage
+        CurrentPageResolverInterface $currentPageResolver
     ) {
         $this->homePage = $homePage;
         $this->loginPage = $loginPage;
@@ -86,7 +88,7 @@ final class LoginContext implements Context
         $this->requestPasswordResetPage = $requestPasswordResetPage;
         $this->resetPasswordPage = $resetPasswordPage;
         $this->notificationChecker = $notificationChecker;
-        $this->sharedStorage = $sharedStorage;
+        $this->currentPageResolver = $currentPageResolver;
     }
 
     /**
@@ -106,11 +108,11 @@ final class LoginContext implements Context
     }
 
     /**
-     * @When I follow link on my email to reset my password
+     * @When /^I follow link on my email to reset (my) password$/
      */
-    public function iFollowLinkOnMyEmailToResetPassword()
+    public function iFollowLinkOnMyEmailToResetPassword(UserInterface $user)
     {
-        $this->resetPasswordPage->open(['token' => $this->sharedStorage->get('password_reset_token')]);
+        $this->resetPasswordPage->open(['token' => $user->getPasswordResetToken()]);
     }
 
     /**
@@ -172,15 +174,10 @@ final class LoginContext implements Context
      */
     public function iResetIt()
     {
-        $this->requestPasswordResetPage->reset();
-    }
+        /** @var RequestPasswordResetPage|ResetPasswordPage $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->requestPasswordResetPage, $this->resetPasswordPage]);
 
-    /**
-     * @When I save my changes
-     */
-    public function iSaveMyChanges()
-    {
-        $this->requestPasswordResetPage->reset();
+        $currentPage->reset();
     }
 
     /**
@@ -275,5 +272,27 @@ final class LoginContext implements Context
     public function iShouldBeNotifiedThatMyPasswordHasBeenSuccessfullyReset()
     {
         $this->notificationChecker->checkNotification('has been reset successfully!', NotificationType::success());
+    }
+
+    /**
+     * @Then I should be notified that the entered passwords do not match
+     */
+    public function iShouldBeNotifiedThatTheEnteredPasswordsDoNotMatch()
+    {
+        Assert::true($this->resetPasswordPage->checkValidationMessageFor(
+            'password',
+            'The entered passwords don\'t match'
+        ));
+    }
+
+    /**
+     * @Then I should be notified that the password should be at least 4 characters long
+     */
+    public function iShouldBeNotifiedThatThePasswordShouldBeAtLeastCharactersLong()
+    {
+        Assert::true($this->resetPasswordPage->checkValidationMessageFor(
+            'password',
+            'Password must be at least 4 characters long.'
+        ));
     }
 }
