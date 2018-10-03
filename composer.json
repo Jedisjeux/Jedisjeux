@@ -54,7 +54,7 @@
     "jms/translation-bundle": "^1.4.1",
     "jms/di-extra-bundle": "^1.8",
     "twbs/bootstrap-sass": "^3.3",
-    "egeloen/ckeditor-bundle": "^4.0",
+    "egeloen/ckeditor-bundle": "^6.0",
     "fzaninotto/Faker": "^1.5",
     "google/apiclient": "^2.0",
     "zenstruck/redirect-bundle": "^3.1",
