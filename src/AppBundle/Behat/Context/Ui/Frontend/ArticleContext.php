@@ -16,6 +16,7 @@ use AppBundle\Behat\Page\Frontend\Article\IndexByTaxonPage;
 use AppBundle\Behat\Page\Frontend\Article\IndexPage;
 use AppBundle\Behat\Page\Frontend\Article\ShowPage;
 use AppBundle\Behat\Page\UnexpectedPageException;
+use AppBundle\Behat\Service\Resolver\CurrentPageResolverInterface;
 use AppBundle\Entity\Article;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -48,21 +49,29 @@ class ArticleContext implements Context
     private $indexByProductPage;
 
     /**
+     * @var CurrentPageResolverInterface
+     */
+    private $currentPageResolver;
+
+    /**
      * @param ShowPage $showPage
      * @param IndexPage $indexPage
      * @param IndexByTaxonPage $indexByTaxonPage
      * @param IndexByProductPage $indexByProductPage
+     * @param CurrentPageResolverInterface $currentPageResolver
      */
     public function __construct(
         ShowPage $showPage,
         IndexPage $indexPage,
         IndexByTaxonPage $indexByTaxonPage,
-        IndexByProductPage $indexByProductPage
+        IndexByProductPage $indexByProductPage,
+        CurrentPageResolverInterface $currentPageResolver
     ) {
         $this->showPage = $showPage;
         $this->indexPage = $indexPage;
         $this->indexByTaxonPage = $indexByTaxonPage;
         $this->indexByProductPage = $indexByProductPage;
+        $this->currentPageResolver = $currentPageResolver;
     }
 
     /**
@@ -112,7 +121,10 @@ class ArticleContext implements Context
      */
     public function iShouldSeeArticle($title)
     {
-        Assert::true($this->indexPage->isArticleOnList($title));
+        /** @var IndexPage|ShowPage|IndexByTaxonPage $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->indexPage, $this->showPage, $this->indexByTaxonPage]);
+
+        Assert::true($currentPage->isArticleOnList($title));
     }
 
     /**

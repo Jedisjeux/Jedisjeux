@@ -10,9 +10,6 @@ app_partial_topic:
 sylius_partial_taxon:
     resource: 'partial/taxon.yml'
 
-app_partial_article:
-    resource: 'partial/article.yml'
-
 app_partial_single_image_block:
     resource: 'partial/single_image_block.yml'
 

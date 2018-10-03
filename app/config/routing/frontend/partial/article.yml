@@ -11,3 +11,36 @@ app_frontend_partial_product_article_latest:
                 - $productId
                 - '!!int $count'
         count: 3
+
+app_frontend_partial_article_index:
+    methods: [GET]
+    path: /
+    defaults:
+        _controller: app.controller.article:indexAction
+        _sylius:
+            template: $template
+            paginate: $paginate
+            grid: app_frontend_article
+    requirements:
+        template: "[^?]+"
+
+app_frontend_partial_article_status_show:
+    methods: [GET]
+    path: /{id}/status
+    defaults:
+        _controller: app.controller.article:showStatusAction
+        _sylius:
+            template: $template
+    requirements:
+        template: "[^?]+"
+
+app_frontend_partial_article_index_by_taxon:
+    methods: [GET]
+    path: /{slug}
+    defaults:
+        _controller: app.controller.article:indexByTaxonAction
+        _sylius:
+            grid: app_frontend_article
+            template: $template
+    requirements:
+        slug: "[^?]+"

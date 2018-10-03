@@ -20,7 +20,7 @@
                         <div class="footer-content">
                             <h2 class="title">{{ 'app.ui.latest_articles'|trans }}</h2>
                             <div class="separator-2"></div>
-                            {{ render(url('app_partial_article_index', {
+                            {{ render(url('app_frontend_partial_article_index', {
                                 'template': 'frontend/article/_simpleList.html.twig',
                                 'paginate': 4,
                                 'sorting': {
