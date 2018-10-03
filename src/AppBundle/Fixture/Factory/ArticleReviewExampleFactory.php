@@ -80,7 +80,6 @@ class ArticleReviewExampleFactory extends AbstractExampleFactory implements Exam
             $options['article'],
             $options['author']
         );
-        $articleReview->setTitle($options['title']);
         $articleReview->setComment($options['comment']);
         $articleReview->setRating($options['rating']);
         $options['article']->addReview($articleReview);
@@ -94,10 +93,6 @@ class ArticleReviewExampleFactory extends AbstractExampleFactory implements Exam
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefault('title', function (Options $options) {
-                return $this->faker->words(3, true);
-            })
-
             ->setDefault('rating', function (Options $options) {
                 return $this->faker->numberBetween(1, 5);
             })

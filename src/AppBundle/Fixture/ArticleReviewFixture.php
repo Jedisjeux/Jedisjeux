@@ -30,7 +30,6 @@ class ArticleReviewFixture extends AbstractResourceFixture
     {
         $resourceNode
             ->children()
-            ->scalarNode('title')->cannotBeEmpty()->end()
             ->scalarNode('rating')->cannotBeEmpty()->end()
             ->scalarNode('comment')->cannotBeEmpty()->end()
             ->scalarNode('author')->cannotBeEmpty()->end()
