@@ -14,7 +14,7 @@ namespace AppBundle\Form\Type;
 use AppBundle\Entity\FestivalList;
 use AppBundle\Entity\FestivalListItem;
 use AppBundle\Entity\Product;
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAutocompleteChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "415f6b20ba1f22c66a10beeb9faec198",
+    "content-hash": "7b2387c66f84a97fa96797c2a67620b0",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1698,117 +1698,6 @@
             "time": "2018-06-14T14:45:07+00:00"
         },
         {
-            "name": "egeloen/ckeditor-bundle",
-            "version": "4.0.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/egeloen/IvoryCKEditorBundle.git",
-                "reference": "c974b85b79ca9186809eb8625e53544b388b0411"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/egeloen/IvoryCKEditorBundle/zipball/c974b85b79ca9186809eb8625e53544b388b0411",
-                "reference": "c974b85b79ca9186809eb8625e53544b388b0411",
-                "shasum": ""
-            },
-            "require": {
-                "egeloen/json-builder": "^1.0|^2.0",
-                "php": ">=5.3.3",
-                "symfony/dependency-injection": "^2.2|^3.0",
-                "symfony/form": "^2.2|^3.0",
-                "symfony/framework-bundle": "^2.2|^3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.0|^5.0",
-                "symfony/phpunit-bridge": "^2.7|^3.0",
-                "symfony/yaml": "^2.0.5|^3.0",
-                "twig/twig": "^1.12"
-            },
-            "suggest": {
-                "egeloen/form-extra-bundle": "Allows to load CKEditor asynchronously",
-                "twig/twig": "Allows to use Twig templates"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Ivory\\CKEditorBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Eric GELOEN",
-                    "email": "geloen.eric@gmail.com"
-                }
-            ],
-            "description": "Provides a CKEditor integration for your Symfony2 Project.",
-            "keywords": [
-                "CKEditor"
-            ],
-            "time": "2016-10-28T16:59:01+00:00"
-        },
-        {
-            "name": "egeloen/json-builder",
-            "version": "2.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/egeloen/ivory-json-builder.git",
-                "reference": "c6afb2c53ac1070144d5d3330d5f86567b132d23"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/egeloen/ivory-json-builder/zipball/c6afb2c53ac1070144d5d3330d5f86567b132d23",
-                "reference": "c6afb2c53ac1070144d5d3330d5f86567b132d23",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "php": ">=5.3.0",
-                "symfony/property-access": "~2.2|~3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0",
-                "satooshi/php-coveralls": "~0.6",
-                "symfony/phpunit-bridge": "~2.7|~3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Ivory\\JsonBuilder\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Eric GELOEN",
-                    "email": "geloen.eric@gmail.com"
-                }
-            ],
-            "description": "JSON builder with escaping control for PHP 5.3+",
-            "keywords": [
-                "Escape",
-                "builder",
-                "json"
-            ],
-            "time": "2015-12-06T13:20:24+00:00"
-        },
-        {
             "name": "eightpoints/guzzle-bundle",
             "version": "v4.6.0",
             "target-dir": "EightPoints/Bundle/GuzzleBundle",
@@ -1929,21 +1818,22 @@
         },
         {
             "name": "eko/feedbundle",
-            "version": "1.2.8",
+            "version": "1.2.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/eko/FeedBundle.git",
-                "reference": "2d2c8eb09f4ff4eb2c482315d18fa5173bd273eb"
+                "reference": "d4e626616d9ccf6527212d3bdda15f9af3838e4f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/eko/FeedBundle/zipball/2d2c8eb09f4ff4eb2c482315d18fa5173bd273eb",
-                "reference": "2d2c8eb09f4ff4eb2c482315d18fa5173bd273eb",
+                "url": "https://api.github.com/repos/eko/FeedBundle/zipball/d4e626616d9ccf6527212d3bdda15f9af3838e4f",
+                "reference": "d4e626616d9ccf6527212d3bdda15f9af3838e4f",
                 "shasum": ""
             },
             "require": {
                 "php": "^5.4|^7.0",
-                "symfony/framework-bundle": "^2.5|^3.0",
+                "symfony/framework-bundle": "^2.5|^3.0|^4.0",
+                "symfony/translation": "^2.5|^3.0|^4.0",
                 "zendframework/zend-feed": ">=2.0",
                 "zendframework/zend-http": ">=2.0",
                 "zendframework/zend-servicemanager": ">=2.0"
@@ -1956,11 +1846,6 @@
                 "doctrine/orm": "~2.2,>=2.2.3|~2.5"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Eko\\FeedBundle\\": ""
@@ -1984,7 +1869,7 @@
                 "feed",
                 "rss"
             ],
-            "time": "2016-04-20T19:56:02+00:00"
+            "time": "2018-09-14T19:08:49+00:00"
         },
         {
             "name": "elasticsearch/elasticsearch",
@@ -2194,6 +2079,86 @@
             "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
             "homepage": "https://github.com/firebase/php-jwt",
             "time": "2017-06-27T22:17:23+00:00"
+        },
+        {
+            "name": "friendsofsymfony/ckeditor-bundle",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfSymfony/FOSCKEditorBundle.git",
+                "reference": "8f021fd3f2728f2b4286fdd7ca5f7e4d24c3c828"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSCKEditorBundle/zipball/8f021fd3f2728f2b4286fdd7ca5f7e4d24c3c828",
+                "reference": "8f021fd3f2728f2b4286fdd7ca5f7e4d24c3c828",
+                "shasum": ""
+            },
+            "require": {
+                "ext-zip": "*",
+                "php": "^5.6 || ^7.0",
+                "symfony/config": "^2.7 || ^3.0 || ^4.0",
+                "symfony/dependency-injection": "^2.7 || ^3.0 || ^4.0",
+                "symfony/expression-language": "^2.7 || ^3.0 || ^4.0",
+                "symfony/form": "^2.7 || ^3.0 || ^4.0",
+                "symfony/framework-bundle": "^2.7 || ^3.0 || ^4.0",
+                "symfony/http-foundation": "^2.7 || ^3.0 || ^4.0",
+                "symfony/http-kernel": "^2.7 || ^3.0 || ^4.0",
+                "symfony/options-resolver": "^2.7 || ^3.0 || ^4.0",
+                "symfony/property-access": "^2.7 || ^3.0 || ^4.0",
+                "symfony/routing": "^2.7 || ^3.0 || ^4.0"
+            },
+            "conflict": {
+                "sebastian/environment": "<1.3.4",
+                "sebastian/exporter": "<2.0.0"
+            },
+            "require-dev": {
+                "composer/composer": "^1.0",
+                "friendsofphp/php-cs-fixer": "^2.0",
+                "matthiasnoback/symfony-dependency-injection-test": "^1.0 || ^2.0",
+                "phpunit/phpunit": "^5.0 || ^6.0",
+                "sensio/distribution-bundle": "^3.0.12 || ^4.0 || ^5.0",
+                "symfony/asset": "^2.7 || ^3.0 || ^4.0",
+                "symfony/console": "^2.7 || ^3.0 || ^4.0",
+                "symfony/phpunit-bridge": "^4.0",
+                "symfony/templating": "^2.7 || ^3.0 || ^4.0",
+                "symfony/twig-bridge": "^2.7 || ^3.0 || ^4.0",
+                "symfony/yaml": "^2.7 || ^3.0 || ^4.0",
+                "twig/twig": "^1.34 || ^2.0"
+            },
+            "suggest": {
+                "egeloen/form-extra-bundle": "Allows to load CKEditor asynchronously"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "FOS\\CKEditorBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eric GELOEN",
+                    "email": "geloen.eric@gmail.com"
+                },
+                {
+                    "name": "FriendsOfSymfony Community",
+                    "homepage": "https://github.com/FriendsOfSymfony/FOSCKEditorBundle/graphs/contributors"
+                }
+            ],
+            "description": "Provides a CKEditor integration for your Symfony project.",
+            "keywords": [
+                "CKEditor"
+            ],
+            "time": "2018-05-25T18:07:58+00:00"
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
@@ -3122,62 +3087,6 @@
                 "symfony-bundle"
             ],
             "time": "2018-02-21T11:15:54+00:00"
-        },
-        {
-            "name": "infinite-networks/form-bundle",
-            "version": "1.0.11",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/infinite-networks/InfiniteFormBundle.git",
-                "reference": "9e156c4c548aa0118adc22fabf7be23e340dd458"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/infinite-networks/InfiniteFormBundle/zipball/9e156c4c548aa0118adc22fabf7be23e340dd458",
-                "reference": "9e156c4c548aa0118adc22fabf7be23e340dd458",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/common": "~2.3",
-                "php": ">=5.3.2",
-                "symfony/form": "^2.3 || ^3.0",
-                "symfony/framework-bundle": "^2.3 || ^3.0"
-            },
-            "conflict": {
-                "twig/twig": "<1.12"
-            },
-            "require-dev": {
-                "components/jquery": "~3.1",
-                "components/qunit": "~1.11",
-                "doctrine/doctrine-bundle": "~1.2",
-                "doctrine/orm": "~2.3",
-                "robloach/component-installer": "^0.2",
-                "symfony/phpunit-bridge": "^2.7",
-                "symfony/symfony": "^2.3.5 || ^3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Infinite\\FormBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Tim Nagel",
-                    "email": "t.nagel@infinite.net.au"
-                }
-            ],
-            "description": "A collection of useful form types and extensions for Symfony2",
-            "time": "2017-05-12T05:01:21+00:00"
         },
         {
             "name": "jackalope/jackalope",
@@ -8095,33 +8004,40 @@
         },
         {
             "name": "symfony-cmf/block-bundle",
-            "version": "2.0.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony-cmf/block-bundle.git",
-                "reference": "8d2c0e335ba016e2fdfd8c47041f8d6bc02e8c96"
+                "reference": "8bc1b9d0f132e6c84283168749b5f4adcecdfe94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony-cmf/block-bundle/zipball/8d2c0e335ba016e2fdfd8c47041f8d6bc02e8c96",
-                "reference": "8d2c0e335ba016e2fdfd8c47041f8d6bc02e8c96",
+                "url": "https://api.github.com/repos/symfony-cmf/block-bundle/zipball/8bc1b9d0f132e6c84283168749b5f4adcecdfe94",
+                "reference": "8bc1b9d0f132e6c84283168749b5f4adcecdfe94",
                 "shasum": ""
             },
             "require": {
-                "doctrine/phpcr-bundle": "^1.0",
-                "doctrine/phpcr-odm": "^1.4.2",
-                "php": "^5.6|^7.0",
-                "sonata-project/block-bundle": "^3.3",
+                "doctrine/phpcr-bundle": "^1.3 || ^2.0",
+                "doctrine/phpcr-odm": "^1.4.2 || ^2.0",
+                "php": "^7.1",
+                "sonata-project/block-bundle": "^3.11",
                 "symfony-cmf/core-bundle": "^2.0",
-                "symfony/framework-bundle": "^2.8|^3.0"
+                "symfony/framework-bundle": "^2.8 || ^3.3 || ^4.0"
+            },
+            "conflict": {
+                "sonata/cache": "<1.1.1"
             },
             "require-dev": {
-                "sonata-project/cache-bundle": "^2.1.3,<2.3",
+                "sonata-project/cache-bundle": "^2.4",
                 "sonata-project/core-bundle": "^3.0",
-                "symfony-cmf/menu-bundle": "^2.0",
-                "symfony-cmf/testing": "^2.0",
-                "symfony/phpunit-bridge": "^3.2",
-                "twig/twig": "^1.14.2|^2.0"
+                "symfony-cmf/menu-bundle": "^2.1",
+                "symfony-cmf/testing": "^2.1.8",
+                "symfony/asset": "^2.8 || ^3.3 || ^4.0",
+                "symfony/phpunit-bridge": "^3.3 || ^4.0",
+                "symfony/security-bundle": "^2.8 || ^3.3 || ^4.0",
+                "symfony/templating": "^2.8 || ^3.3 || ^4.0",
+                "symfony/twig-bundle": "^2.8 || ^3.3 || ^4.0",
+                "twig/twig": "^1.14.2 || ^2.0"
             },
             "suggest": {
                 "eko/feedbundle": "When using the RssBlock",
@@ -8130,7 +8046,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "2.1-dev"
                 }
             },
             "autoload": {
@@ -8155,48 +8071,55 @@
                 "block",
                 "content fragments"
             ],
-            "time": "2017-02-27T14:42:59+00:00"
+            "time": "2018-08-18T07:23:32+00:00"
         },
         {
             "name": "symfony-cmf/core-bundle",
-            "version": "2.0.1",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony-cmf/core-bundle.git",
-                "reference": "cfc5f7b0396157800074946e10e58a32f1f0ab71"
+                "reference": "434932a0f925b38fb5e14160b8e4c4dbb7d862fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony-cmf/core-bundle/zipball/cfc5f7b0396157800074946e10e58a32f1f0ab71",
-                "reference": "cfc5f7b0396157800074946e10e58a32f1f0ab71",
+                "url": "https://api.github.com/repos/symfony-cmf/core-bundle/zipball/434932a0f925b38fb5e14160b8e4c4dbb7d862fd",
+                "reference": "434932a0f925b38fb5e14160b8e4c4dbb7d862fd",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.6|^7.0",
-                "symfony/framework-bundle": "^2.8|^3.0"
+                "php": "^7.1",
+                "symfony/framework-bundle": "^2.8 || ^3.3 || ^4.0",
+                "symfony/security-core": "^2.8 || ^3.3 || ^4.0"
             },
             "require-dev": {
                 "doctrine/dbal": "2.5.*",
-                "doctrine/phpcr-odm": "^1.0",
+                "doctrine/phpcr-odm": "^1.4|^2.0 ",
                 "mockery/mockery": "^0.9.4",
-                "symfony-cmf/routing-bundle": "^2.0",
-                "symfony-cmf/testing": "^2.0",
-                "symfony/phpunit-bridge": "^3.2",
-                "symfony/security-bundle": "^2.8|^3.0"
+                "symfony-cmf/routing-bundle": "^2.1.0",
+                "symfony-cmf/testing": "^2.1.8",
+                "symfony/asset": "^2.8 || ^3.3 || ^4.0",
+                "symfony/browser-kit": "^2.8 || ^3.3 || ^4.0",
+                "symfony/form": "^2.8 || ^3.3 || ^4.0",
+                "symfony/phpunit-bridge": "^3.3 || ^4.0",
+                "symfony/security-bundle": "^2.8 || ^3.3 || ^4.0",
+                "symfony/templating": "^2.8 || ^3.3 || ^4.0",
+                "symfony/translation": "^2.8 || ^3.3 || ^4.0",
+                "symfony/validator": "^2.8 || ^3.3 || ^4.0"
             },
             "suggest": {
                 "doctrine/phpcr-bundle": "To be able to use the CMF twig extension (^1.0)",
                 "doctrine/phpcr-odm": "To be able to use the CMF twig extension (^1.0)",
-                "symfony-cmf/routing": "To be able to use the CMF twig extension functions cmf_prev_linkable/cmf_next_linkable (^2.0)",
-                "symfony-cmf/routing-bundle": "To be able to enable the publish_workflow_listener (^2.0)",
+                "symfony-cmf/routing": "To be able to use the CMF twig extension functions cmf_prev_linkable/cmf_next_linkable (^2.1)",
+                "symfony-cmf/routing-bundle": "To be able to enable the publish_workflow_listener (^2.1)",
                 "symfony-cmf/sonata-admin-integration-bundle": "To provide an admin interface for the PHPCR ODM documents.",
-                "symfony/security-bundle": "To be able to use the publish workflow system (^2.1)",
-                "symfony/twig-bundle": "To get access to the CMF twig extension (^2.1)"
+                "symfony/security-bundle": "To be able to use the publish workflow system (^2.8 || ^3.3 || ^4.0)",
+                "symfony/twig-bundle": "To get access to the CMF twig extension (^2.8 || ^3.3 || ^4.0)"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "2.1-dev"
                 }
             },
             "autoload": {
@@ -8219,7 +8142,7 @@
             "keywords": [
                 "Symfony CMF"
             ],
-            "time": "2017-10-11T11:49:19+00:00"
+            "time": "2018-08-11T03:41:37+00:00"
         },
         {
             "name": "symfony-cmf/media-bundle",
@@ -8289,31 +8212,30 @@
         },
         {
             "name": "symfony-cmf/routing",
-            "version": "2.0.3",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony-cmf/Routing.git",
-                "reference": "215da2d995f6877f76859e7815b24413c469f6c2"
+                "reference": "7370dfb0ef9803d9d84f74d023c9f0f66eb13125"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony-cmf/Routing/zipball/215da2d995f6877f76859e7815b24413c469f6c2",
-                "reference": "215da2d995f6877f76859e7815b24413c469f6c2",
+                "url": "https://api.github.com/repos/symfony-cmf/Routing/zipball/7370dfb0ef9803d9d84f74d023c9f0f66eb13125",
+                "reference": "7370dfb0ef9803d9d84f74d023c9f0f66eb13125",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.6.0|^7.0",
+                "php": "^7.1",
                 "psr/log": "^1.0",
-                "symfony/http-kernel": "^2.8|^3.0",
-                "symfony/routing": "^2.8|^3.0"
+                "symfony/http-kernel": "^2.8 || ^3.3 || ^4.0",
+                "symfony/routing": "^2.8 || ^3.3 || ^4.0"
             },
             "require-dev": {
-                "friendsofsymfony/jsrouting-bundle": "^1.1",
-                "symfony-cmf/testing": "^2.0",
-                "symfony/config": "^2.8|^3.0",
-                "symfony/dependency-injection": "^2.8|^3.0",
-                "symfony/event-dispatcher": "^2.8|^3.0",
-                "symfony/phpunit-bridge": "^3.2"
+                "symfony-cmf/testing": "^2.1.0",
+                "symfony/config": "^2.8 || ^3.3 || ^4.0",
+                "symfony/dependency-injection": "^2.8 || ^3.3 || ^4.0",
+                "symfony/event-dispatcher": "^2.8 || ^3.3 || ^4.0",
+                "symfony/phpunit-bridge": "^3.3 || ^4.0"
             },
             "suggest": {
                 "symfony/event-dispatcher": "DynamicRouter can optionally trigger an event at the start of matching. Minimal version (~2.1)"
@@ -8321,7 +8243,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "2.1-dev"
                 }
             },
             "autoload": {
@@ -8345,39 +8267,41 @@
                 "database",
                 "routing"
             ],
-            "time": "2017-12-07T14:05:09+00:00"
+            "time": "2018-06-14T06:42:21+00:00"
         },
         {
             "name": "symfony-cmf/routing-bundle",
-            "version": "2.0.3",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony-cmf/routing-bundle.git",
-                "reference": "ebc63f97f47f7c21ce3c61c38538522eaae428ab"
+                "reference": "9200b91d2985f9634f2a64536279aee6a1e1a0d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony-cmf/routing-bundle/zipball/ebc63f97f47f7c21ce3c61c38538522eaae428ab",
-                "reference": "ebc63f97f47f7c21ce3c61c38538522eaae428ab",
+                "url": "https://api.github.com/repos/symfony-cmf/routing-bundle/zipball/9200b91d2985f9634f2a64536279aee6a1e1a0d8",
+                "reference": "9200b91d2985f9634f2a64536279aee6a1e1a0d8",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.6|^7.0",
-                "symfony-cmf/routing": "^2.0",
-                "symfony/framework-bundle": "^2.8|^3.0",
-                "symfony/twig-bundle": "^2.8|^3.0"
+                "php": "^7.1",
+                "symfony-cmf/routing": "^2.1.0",
+                "symfony/framework-bundle": "^2.8 || ^3.3 || ^4.0",
+                "twig/twig": "^1.35 || ^2.4.4"
             },
             "conflict": {
-                "doctrine/phpcr-odm": "<1.4"
+                "doctrine/phpcr-odm": "<1.4",
+                "phpunit/phpunit": "<5.7"
             },
             "require-dev": {
                 "doctrine/data-fixtures": "^1.0.0",
                 "doctrine/orm": "^2.5",
-                "doctrine/phpcr-odm": "^1.4",
-                "matthiasnoback/symfony-config-test": "^1.3.1",
-                "matthiasnoback/symfony-dependency-injection-test": "~0.6",
-                "symfony-cmf/testing": "^2.0",
-                "symfony/phpunit-bridge": "^3.2"
+                "doctrine/phpcr-odm": "^1.4|^2.0",
+                "matthiasnoback/symfony-config-test": "^2.2",
+                "matthiasnoback/symfony-dependency-injection-test": "^1.0",
+                "symfony-cmf/testing": "^2.1.0",
+                "symfony/phpunit-bridge": "^3.3 || ^4.0",
+                "symfony/validator": "^2.8 || ^3.3 || ^4.0"
             },
             "suggest": {
                 "doctrine/orm": "To enable support for the ORM entities (^2.5)",
@@ -8387,7 +8311,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "2.1-dev"
                 }
             },
             "autoload": {
@@ -8411,7 +8335,7 @@
                 "database",
                 "routing"
             ],
-            "time": "2018-01-22T07:32:57+00:00"
+            "time": "2018-09-24T06:49:35+00:00"
         },
         {
             "name": "symfony/assetic-bundle",
@@ -10347,33 +10271,35 @@
         },
         {
             "name": "zenstruck/redirect-bundle",
-            "version": "v3.0.3",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kbond/ZenstruckRedirectBundle.git",
-                "reference": "04c307bc64f69735d494016a6d313d9bd347c5a4"
+                "reference": "9ee73a74bf8b4da5268f868cd2b04c9ee7892c29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kbond/ZenstruckRedirectBundle/zipball/04c307bc64f69735d494016a6d313d9bd347c5a4",
-                "reference": "04c307bc64f69735d494016a6d313d9bd347c5a4",
+                "url": "https://api.github.com/repos/kbond/ZenstruckRedirectBundle/zipball/9ee73a74bf8b4da5268f868cd2b04c9ee7892c29",
+                "reference": "9ee73a74bf8b4da5268f868cd2b04c9ee7892c29",
                 "shasum": ""
             },
             "require": {
                 "doctrine/doctrine-bundle": "~1.3",
                 "doctrine/orm": "~2.4",
-                "symfony/dependency-injection": "~2.3|~3.0",
-                "symfony/doctrine-bridge": "~2.3|~3.0",
-                "symfony/framework-bundle": "^2.3.25|~3.0"
+                "php": "^5.6|^7.0",
+                "symfony/dependency-injection": "~2.8|~3.0|~4.0",
+                "symfony/doctrine-bridge": "~2.8|~3.0|~4.0",
+                "symfony/framework-bundle": "^2.8|~3.0|~4.0"
             },
             "require-dev": {
-                "matthiasnoback/symfony-dependency-injection-test": "^0.7.4",
-                "phpunit/phpunit": "^4.8.16",
-                "symfony/browser-kit": "~2.3|~3.0",
-                "symfony/console": "~2.3|~3.0",
-                "symfony/finder": "~2.3|~3.0",
-                "symfony/form": "~2.3|~3.0",
-                "symfony/validator": "~2.3|~3.0"
+                "matthiasnoback/symfony-dependency-injection-test": "^1.2",
+                "phpunit/phpunit": "~5.7",
+                "symfony/browser-kit": "~2.8|~3.0|~4.0",
+                "symfony/console": "~2.8|~3.0|~4.0",
+                "symfony/css-selector": "~2.8|~3.0|~4.0",
+                "symfony/finder": "~2.8|~3.0|~4.0",
+                "symfony/form": "^2.8.8|~3.0|~4.0",
+                "symfony/validator": "~2.8|~3.0|~4.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -10401,7 +10327,7 @@
             "keywords": [
                 "redirect"
             ],
-            "time": "2017-01-27T11:49:07+00:00"
+            "time": "2018-08-02T17:11:24+00:00"
         }
     ],
     "packages-dev": [
@@ -11396,16 +11322,16 @@
         },
         {
             "name": "lakion/api-test-case",
-            "version": "v3.1.1",
+            "version": "v3.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Lakion/ApiTestCase.git",
-                "reference": "81e61fbb0796ff06b194b58f0641166700d94fe5"
+                "reference": "e67c087ca5d3f3a0e18ef3c702a425c518b54acc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Lakion/ApiTestCase/zipball/81e61fbb0796ff06b194b58f0641166700d94fe5",
-                "reference": "81e61fbb0796ff06b194b58f0641166700d94fe5",
+                "url": "https://api.github.com/repos/Lakion/ApiTestCase/zipball/e67c087ca5d3f3a0e18ef3c702a425c518b54acc",
+                "reference": "e67c087ca5d3f3a0e18ef3c702a425c518b54acc",
                 "shasum": ""
             },
             "require": {
@@ -11424,7 +11350,7 @@
                 "theofidry/alice-data-fixtures": "^1.0"
             },
             "conflict": {
-                "symfony/dependency-injection": "^4.1"
+                "symfony/dependency-injection": "4.1.0"
             },
             "require-dev": {
                 "symfony/serializer": "^3.4|^4.0"
@@ -11473,7 +11399,7 @@
                 "symfony",
                 "xml"
             ],
-            "time": "2018-06-01T14:01:36+00:00"
+            "time": "2018-08-20T14:26:27+00:00"
         },
         {
             "name": "lakion/mink-debug-extension",
@@ -11534,58 +11460,6 @@
                 "logging"
             ],
             "time": "2016-10-27T15:30:36+00:00"
-        },
-        {
-            "name": "malukenho/kawaii-gherkin",
-            "version": "0.1.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/malukenho/kawaii-gherkin.git",
-                "reference": "eb70f7bf017e597b611cb85e2238d7dc94315eb6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/malukenho/kawaii-gherkin/zipball/eb70f7bf017e597b611cb85e2238d7dc94315eb6",
-                "reference": "eb70f7bf017e597b611cb85e2238d7dc94315eb6",
-                "shasum": ""
-            },
-            "require": {
-                "behat/gherkin": "^4.4",
-                "php": "~5.5|^7.0",
-                "sebastian/diff": "~1.2",
-                "symfony/console": "~2.0|^3.0",
-                "symfony/finder": "~2.0|^3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.0"
-            },
-            "bin": [
-                "bin/kawaii"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "KawaiiGherkin\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jefersson Nathan",
-                    "email": "malukenho@phpse.net"
-                }
-            ],
-            "description": "A small library to check and fix annoying gherkin code style",
-            "homepage": "https://github.com/malukenho/kawaii-gherkin",
-            "keywords": [
-                "Code style",
-                "code standard",
-                "gherkin"
-            ],
-            "time": "2016-03-31T11:32:46+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -14115,7 +13989,8 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.1"
+        "php": "^7.1",
+        "ext-zip": "*"
     },
     "platform-dev": []
 }

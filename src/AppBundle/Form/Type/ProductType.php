@@ -14,7 +14,7 @@ namespace AppBundle\Form\Type;
 use AppBundle\Entity\Product;
 use AppBundle\Entity\Taxon;
 use Doctrine\ORM\EntityRepository;
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonAutocompleteChoiceType;
