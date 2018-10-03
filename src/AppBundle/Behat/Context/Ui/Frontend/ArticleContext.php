@@ -121,8 +121,8 @@ class ArticleContext implements Context
      */
     public function iShouldSeeArticle($title)
     {
-        /** @var IndexPage|ShowPage $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->indexPage, $this->showPage]);
+        /** @var IndexPage|ShowPage|IndexByTaxonPage $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->indexPage, $this->showPage, $this->indexByTaxonPage]);
 
         Assert::true($currentPage->isArticleOnList($title));
     }
