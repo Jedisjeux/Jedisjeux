@@ -30,7 +30,6 @@ class ArticleReview extends Review
     public function __construct()
     {
         parent::__construct();
-        $this->title = '';
         $this->status = ReviewInterface::STATUS_ACCEPTED;
     }
 }

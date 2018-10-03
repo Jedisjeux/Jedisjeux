@@ -79,4 +79,5 @@ app_backend_article_update_state:
             state_machine:
                 graph: app_article
                 transition: $transition
+            csrf_protection: false
             redirect: referer
