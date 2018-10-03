@@ -1,5 +1,9 @@
 ## Change Log
 
+### v2.0.4 (2018/10/03)
+- [#289](https://github.com/Jedisjeux/Jedisjeux/pull/289) fix viewing latest articles from a specific category (@loic425)
+- [#284](https://github.com/Jedisjeux/Jedisjeux/pull/284) fix remember me (@loic425)
+
 ### v2.0.3 (2018/10/02)
 - [#287](https://github.com/Jedisjeux/Jedisjeux/pull/287) remove not used anymore partial directory (@loic425)
 - [#285](https://github.com/Jedisjeux/Jedisjeux/pull/285) [TopicExampleFactory] remove main post on article and game play topics (@loic425)
