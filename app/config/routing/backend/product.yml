@@ -43,6 +43,7 @@ sylius_admin_product_update_state:
             state_machine:
                 graph: sylius_product
                 transition: $transition
+            csrf_protection: false
             redirect: referer
 
 sylius_admin_product_index:
