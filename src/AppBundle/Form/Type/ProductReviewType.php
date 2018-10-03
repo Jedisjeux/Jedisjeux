@@ -11,7 +11,7 @@
 
 namespace AppBundle\Form\Type;
 
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sylius\Bundle\ReviewBundle\Form\Type\ReviewType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
