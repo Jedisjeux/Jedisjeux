@@ -228,7 +228,7 @@ class UtilsContext extends DefaultContext
         $element = $this->fixStepArgument($element);
         $nodeElement = $this->assertSession()->elementExists('css', $element);
 
-        if (false === $nodeElement->hasAttribute('value') or $value !== $nodeElement->getAttribute('value')) {
+        if (false === $nodeElement->hasAttribute('value') || $value !== $nodeElement->getAttribute('value')) {
             $message = sprintf('"%s" element has value "%s" but it should have value "%s"', $element, $nodeElement->getAttribute('value'), $value);
             throw new ElementHtmlException($message, $this->getSession(), $nodeElement);
         }

@@ -17,39 +17,4 @@
             <p>{{ status(dealer_price) }}</p>
     {% endfor %}
 
-    {#<div class="block-heading-two">#}
-        {#<h3><span>Chez nos partenaires</span></h3>#}
-    {#</div>#}
-
-    {#<div class="row">#}
-        {#<div class="img-box-7 text-center">#}
-            {#<!-- Container -->#}
-            {#<div class="container">#}
-                {#<div class="row">#}
-                    {#{% for dealer_price in dealer_prices %}#}
-                        {#{% set dealer = dealer_price.dealer %}#}
-                        {#<div class="col-md-3 col-sm-6">#}
-                            {#<!-- Image Box #7 Item -->#}
-                            {#<div class="img-box-7-item">#}
-                                {#<div class="dealer-image-container vertical-center">#}
-                                    {#{% if dealer.image %}#}
-                                        {#{{ image(dealer.image.webPath, 'small_height_fixed', dealer.name, 'img-responsive', dealer_price.url, '_blank') }}#}
-                                    {#{% else %}#}
-                                        {#<img class="img-responsive"#}
-                                             {#src="https://placeholdit.imgix.net/~text?txtsize=150&txt={{ dealer.name }}&w=1280&h=700"#}
-                                             {#alt="{{ dealer.name }}"/>#}
-                                    {#{% endif %}#}
-                                {#</div>#}
-                                {#<h4>#}
-                                    {#<a href="{{ dealer_price.url }}">{{ (dealer_price.price/100)|localizedcurrency('EUR') }}</a>#}
-                                {#</h4>#}
-                                {#<p>{{ status(dealer_price) }}</p>#}
-                            {#</div>#}
-                        {#</div>#}
-                    {#{% endfor %}#}
-                {#</div>#}
-            {#</div>#}
-        {#</div>#}
-
-    {#</div>#}
 {% endif %}
