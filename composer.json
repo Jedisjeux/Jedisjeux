@@ -36,7 +36,7 @@
     "incenteev/hashed-asset-bundle": "^1.0",
     "jms/translation-bundle": "^1.4.1",
     "knplabs/doctrine-behaviors": "~1.1",
-    "liip/imagine-bundle": "^1.6",
+    "liip/imagine-bundle": "^2.1",
     "nelmio/cors-bundle": "^1.5",
     "ongr/elasticsearch-bundle": "^5.0",
     "ongr/elasticsearch-dsl": "^5.0",
