@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1eeb291af3d3dc00cac23f6a064314b8",
+    "content-hash": "f3e9e370b76141543410b3e8ec3804d6",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -3346,73 +3346,6 @@
             "time": "2018-06-19T13:39:25+00:00"
         },
         {
-            "name": "jms/translation-bundle",
-            "version": "1.4.3",
-            "target-dir": "JMS/TranslationBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/schmittjoh/JMSTranslationBundle.git",
-                "reference": "64c2a7d1ad4e61987bc79fbfb59067fc9460dc21"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/JMSTranslationBundle/zipball/64c2a7d1ad4e61987bc79fbfb59067fc9460dc21",
-                "reference": "64c2a7d1ad4e61987bc79fbfb59067fc9460dc21",
-                "shasum": ""
-            },
-            "require": {
-                "nikic/php-parser": "^1.4 || ^2.0 || ^3.0 || ^4.0",
-                "php": "^5.3.3 || ^7.0",
-                "symfony/console": "^2.3 || ^3.0 || ^4.0",
-                "symfony/framework-bundle": "^2.3 || ^3.0 || ^4.0",
-                "symfony/validator": "^2.3 || ^3.0 || ^4.0",
-                "twig/twig": "^1.27 || ^2.0"
-            },
-            "require-dev": {
-                "matthiasnoback/symfony-dependency-injection-test": "^1.2",
-                "nyholm/nsa": "^1.0.1",
-                "phpunit/phpunit": "^4.8 || ^5.0",
-                "psr/log": "^1.0",
-                "sensio/framework-extra-bundle": "^2.3 || ^3.0 || ^4.0",
-                "symfony/expression-language": "^2.6 || ^3.0 || ^4.0",
-                "symfony/symfony": "^2.3 || ^3.0 || ^4.0"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.4-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "JMS\\TranslationBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Johannes M. Schmitt",
-                    "email": "schmittjoh@gmail.com"
-                }
-            ],
-            "description": "Puts the Symfony Translation Component on steroids",
-            "homepage": "http://jmsyst.com/bundles/JMSTranslationBundle",
-            "keywords": [
-                "extract",
-                "extraction",
-                "i18n",
-                "interface",
-                "multilanguage",
-                "translation",
-                "ui",
-                "webinterface"
-            ],
-            "time": "2018-06-28T05:04:47+00:00"
-        },
-        {
             "name": "knplabs/doctrine-behaviors",
             "version": "1.5.0",
             "source": {
@@ -4393,50 +4326,6 @@
             "time": "2018-04-15T16:55:05+00:00"
         },
         {
-            "name": "phpstan/phpstan-shim",
-            "version": "0.10.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpstan/phpstan-shim.git",
-                "reference": "1b12b7b684201385c1bd4bdb8e50ff062b33bb5c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-shim/zipball/1b12b7b684201385c1bd4bdb8e50ff062b33bb5c",
-                "reference": "1b12b7b684201385c1bd4bdb8e50ff062b33bb5c",
-                "shasum": ""
-            },
-            "require": {
-                "php": "~7.1"
-            },
-            "replace": {
-                "nikic/php-parser": "^4.0.2",
-                "phpstan/phpdoc-parser": "^0.3",
-                "phpstan/phpstan": "self.version"
-            },
-            "bin": [
-                "phpstan",
-                "phpstan.phar"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.10-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "bootstrap.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "PHPStan Phar distribution",
-            "time": "2018-08-12T16:21:59+00:00"
-        },
-        {
             "name": "psr/cache",
             "version": "1.0.1",
             "source": {
@@ -4806,63 +4695,6 @@
                 "uuid"
             ],
             "time": "2018-07-19T23:38:55+00:00"
-        },
-        {
-            "name": "ruflin/elastica",
-            "version": "3.2.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ruflin/Elastica.git",
-                "reference": "02bf2fbb8ad6b679869af145eed89436a1c50229"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ruflin/Elastica/zipball/02bf2fbb8ad6b679869af145eed89436a1c50229",
-                "reference": "02bf2fbb8ad6b679869af145eed89436a1c50229",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0",
-                "psr/log": "~1.0"
-            },
-            "require-dev": {
-                "aws/aws-sdk-php": "~3.0",
-                "guzzlehttp/guzzle": "~6.0"
-            },
-            "suggest": {
-                "aws/aws-sdk-php": "Allow using IAM authentication with Amazon ElasticSearch Service",
-                "egeloen/http-adapter": "Allow using httpadapter transport",
-                "guzzlehttp/guzzle": "Allow using guzzle 6 as the http transport (Requires php 5.5)",
-                "monolog/monolog": "Logging request"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.2.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Elastica\\": "lib/Elastica/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Ruflin",
-                    "homepage": "http://ruflin.com/"
-                }
-            ],
-            "description": "Elasticsearch Client",
-            "homepage": "http://elastica.io/",
-            "keywords": [
-                "client",
-                "search"
-            ],
-            "time": "2016-09-23T10:24:25+00:00"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -8395,59 +8227,6 @@
             "time": "2018-10-03T12:03:55+00:00"
         },
         {
-            "name": "twbs/bootstrap-sass",
-            "version": "v3.3.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/twbs/bootstrap-sass.git",
-                "reference": "5d6b2ebba0c2a5885ce2f0e01e9218db3d3b5e47"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap-sass/zipball/5d6b2ebba0c2a5885ce2f0e01e9218db3d3b5e47",
-                "reference": "5d6b2ebba0c2a5885ce2f0e01e9218db3d3b5e47",
-                "shasum": ""
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.3.x-dev"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mark Otto"
-                },
-                {
-                    "name": "Thomas McDonald"
-                },
-                {
-                    "name": "Tristan Harward"
-                },
-                {
-                    "name": "Peter Gumeson"
-                },
-                {
-                    "name": "Gleb Mazovetskiy"
-                },
-                {
-                    "name": "Jacob Thornton"
-                }
-            ],
-            "description": "bootstrap-sass is a Sass-powered version of Bootstrap 3, ready to drop right into your Sass powered applications.",
-            "homepage": "http://github.com/twbs/bootstrap-sass",
-            "keywords": [
-                "bootstrap",
-                "css",
-                "sass"
-            ],
-            "time": "2016-07-25T19:58:53+00:00"
-        },
-        {
             "name": "twig/extensions",
             "version": "v1.5.2",
             "source": {
@@ -11358,6 +11137,50 @@
             ],
             "description": "Doctrine extensions for PHPStan",
             "time": "2018-05-28T20:08:30+00:00"
+        },
+        {
+            "name": "phpstan/phpstan-shim",
+            "version": "0.10.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpstan/phpstan-shim.git",
+                "reference": "1b12b7b684201385c1bd4bdb8e50ff062b33bb5c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpstan/phpstan-shim/zipball/1b12b7b684201385c1bd4bdb8e50ff062b33bb5c",
+                "reference": "1b12b7b684201385c1bd4bdb8e50ff062b33bb5c",
+                "shasum": ""
+            },
+            "require": {
+                "php": "~7.1"
+            },
+            "replace": {
+                "nikic/php-parser": "^4.0.2",
+                "phpstan/phpdoc-parser": "^0.3",
+                "phpstan/phpstan": "self.version"
+            },
+            "bin": [
+                "phpstan",
+                "phpstan.phar"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.10-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHPStan Phar distribution",
+            "time": "2018-08-12T16:21:59+00:00"
         },
         {
             "name": "phpstan/phpstan-symfony",
