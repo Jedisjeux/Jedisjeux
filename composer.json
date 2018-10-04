@@ -34,7 +34,6 @@
     "guzzlehttp/guzzle": "^6.2",
     "incenteev/composer-parameter-handler": "~2.0",
     "incenteev/hashed-asset-bundle": "^1.0",
-    "jms/di-extra-bundle": "^1.8",
     "jms/translation-bundle": "^1.4.1",
     "knplabs/doctrine-behaviors": "~1.1",
     "liip/imagine-bundle": "^1.6",
