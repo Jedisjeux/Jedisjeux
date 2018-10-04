@@ -45,8 +45,9 @@
     "ramsey/uuid": "^3.8",
     "ruflin/elastica": "^3.2",
     "sensio/distribution-bundle": "^5.0",
-    "sensio/framework-extra-bundle": "^3.0.2",
+    "sensio/framework-extra-bundle": "^5.1",
     "simple-bus/symfony-bridge": "^5.1",
+    "sylius-labs/sensio-distribution-bundle": "^6.0",
     "sylius/customer-bundle": "^1.2",
     "sylius/fixtures-bundle": "^1.2",
     "sylius/grid-bundle": "^1.2",
@@ -61,13 +62,15 @@
     "sylius/user-bundle": "^1.2",
     "symfony-cmf/block-bundle": "^2.1",
     "symfony-cmf/routing-bundle": "^2.1",
-    "symfony/monolog-bundle": "~2.4",
-    "symfony/swiftmailer-bundle": "~2.3",
+    "symfony/monolog-bundle": "^3.3",
+    "symfony/swiftmailer-bundle": "^3.0",
     "symfony/symfony": "3.4.*",
     "twbs/bootstrap-sass": "^3.3",
     "winzou/state-machine-bundle": "^0.3",
     "zenstruck/redirect-bundle": "^3.1"
   },
+
+
   "require-dev": {
     "behat/behat": "^3.2",
     "behat/mink-extension": "^2.2",
