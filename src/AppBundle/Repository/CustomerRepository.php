@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux project.
+ * This file is part of Jedisjeux
  *
- * (c) Jedisjeux
+ * (c) Loïc Frémont
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.

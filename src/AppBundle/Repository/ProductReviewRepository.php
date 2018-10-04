@@ -1,9 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: loic_425
- * Date: 17/03/2016
- * Time: 00:28
+
+/*
+ * This file is part of Jedisjeux
+ *
+ * (c) Loïc Frémont
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AppBundle\Repository;
@@ -110,7 +113,7 @@ class ProductReviewRepository extends EntityRepository
      */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = []): void
     {
-        if (isset($criteria['hasComment']) and $criteria['hasComment'] !== '') {
+        if (isset($criteria['hasComment']) && $criteria['hasComment'] !== '') {
             if ($criteria['hasComment']) {
                 $queryBuilder
                     ->andWhere('o.comment is not null');
