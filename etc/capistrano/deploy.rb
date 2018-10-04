@@ -80,7 +80,7 @@ end
 namespace :deploy do
   task :migrate do
     invoke 'symfony:console', 'doctrine:migrations:migrate', '--no-interaction', 'db'
-    invoke 'symfony:console', 'ckeditor:install'
+    invoke 'symfony:console', 'ckeditor:install --clear=drop'
   end
 end
 
