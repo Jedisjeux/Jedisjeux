@@ -24,7 +24,7 @@
     "doctrine/doctrine-fixtures-bundle": "^2.3",
     "doctrine/doctrine-migrations-bundle": "^1.2",
     "doctrine/orm": "^2.4.8",
-    "eightpoints/guzzle-bundle": "^4.5",
+    "eightpoints/guzzle-bundle": "^7.3",
     "eko/feedbundle": "^1.2",
     "excelwebzone/recaptcha-bundle": "^1.5",
     "friendsofsymfony/ckeditor-bundle": "^1.1",
