@@ -84,11 +84,6 @@ class ServicesPass implements CompilerPassInterface
         $contactRequestFactoryDefinition
             ->addMethodCall('setCustomerContext', [new Reference('app.context.customer')]);
 
-        $stringBlockFactoryDefinition = $container->getDefinition('app.factory.string_block');
-        $stringBlockFactoryDefinition
-            ->addArgument(new Reference('doctrine_phpcr.odm.document_manager'))
-            ->addArgument(new Parameter('cmf_block.persistence.phpcr.block_basepath'));
-
         $productListFactoryDefinition = $container->getDefinition('app.factory.product_list');
         $productListFactoryDefinition
             ->addArgument(new Reference('app.context.customer'))
