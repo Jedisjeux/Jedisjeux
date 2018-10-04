@@ -37,14 +37,14 @@ class AppKernel extends Kernel
 
             new Sonata\BlockBundle\SonataBlockBundle(),
 
-            new Symfony\Cmf\Bundle\CoreBundle\CmfCoreBundle(),
-            new Symfony\Cmf\Bundle\BlockBundle\CmfBlockBundle(),
-            new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
+            // new Symfony\Cmf\Bundle\CoreBundle\CmfCoreBundle(),
+            // new Symfony\Cmf\Bundle\BlockBundle\CmfBlockBundle(),
+            // new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
 
             new FOS\RestBundle\FOSRestBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
 
-            new Doctrine\Bundle\PHPCRBundle\DoctrinePHPCRBundle(),
+            // new Doctrine\Bundle\PHPCRBundle\DoctrinePHPCRBundle(),
             new Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),

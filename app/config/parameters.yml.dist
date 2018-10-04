@@ -27,7 +27,7 @@ parameters:
     # google analytics
     google.analytics.tracking_id: UA-XXXXX-1
     google.analytics.profile_id: XXXXXXXX
-    google.analytics.private_key_file: %kernel.root_dir%/Resources/credentials/client_secret.json
+    google.analytics.private_key_file: Resources/credentials/client_secret.json
 
     # recaptcha
     recaptcha.public_key: enter_your_public_key

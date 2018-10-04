@@ -108,13 +108,6 @@ sylius_resource:
         app.slide_show_block:
             classes:
                 model: AppBundle\Entity\SlideShowBlock
-        app.string_block:
-            driver: doctrine/phpcr-odm
-            classes:
-                model: AppBundle\Document\StringBlock
-                factory: AppBundle\Factory\StringBlockFactory
-                repository: AppBundle\Repository\StringBlockRepository
-                form: AppBundle\Form\Type\StringBlockType
         app.game_play:
             classes:
                 model: AppBundle\Entity\GamePlay
