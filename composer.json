@@ -28,7 +28,7 @@
     "eko/feedbundle": "^1.2",
     "excelwebzone/recaptcha-bundle": "^1.5",
     "friendsofsymfony/ckeditor-bundle": "^1.1",
-    "friendsofsymfony/jsrouting-bundle": "^1.6.2",
+    "friendsofsymfony/jsrouting-bundle": "^2.2",
     "fzaninotto/Faker": "^1.5",
     "google/apiclient": "^2.0",
     "guzzlehttp/guzzle": "^6.2",
