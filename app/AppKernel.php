@@ -59,8 +59,6 @@ class AppKernel extends Kernel
             new Nelmio\CorsBundle\NelmioCorsBundle(),
             new FOS\CKEditorBundle\FOSCKEditorBundle(),
 
-            new ONGR\ElasticsearchBundle\ONGRElasticsearchBundle(),
-            new ONGR\FilterManagerBundle\ONGRFilterManagerBundle(),
             new SimpleBus\SymfonyBridge\SimpleBusCommandBusBundle(),
             new SimpleBus\SymfonyBridge\SimpleBusEventBusBundle(),
             new EWZ\Bundle\RecaptchaBundle\EWZRecaptchaBundle(),
