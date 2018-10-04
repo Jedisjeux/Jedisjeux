@@ -61,7 +61,6 @@
     "sylius/user-bundle": "^1.2",
     "symfony-cmf/block-bundle": "^2.1",
     "symfony-cmf/routing-bundle": "^2.1",
-    "symfony/assetic-bundle": "~2.3",
     "symfony/monolog-bundle": "~2.4",
     "symfony/swiftmailer-bundle": "~2.3",
     "symfony/symfony": "3.4.*",
