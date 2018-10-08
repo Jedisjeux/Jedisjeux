@@ -11,7 +11,9 @@ services:
     app.guard.article:
         class: AppBundle\Guard\ArticleGuard
         arguments: ["@security.authorization_checker"]
+        public: true
 
     app.guard.product:
         class: AppBundle\Guard\ProductGuard
         arguments: ["@security.authorization_checker"]
+        public: true
