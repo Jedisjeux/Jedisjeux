@@ -4,7 +4,6 @@ default:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - AppBundle\Behat\UtilsContext
-                - AppBundle\Behat\PhpcrContext
                 - AppBundle\Behat\UserContext
                 - AppBundle\Behat\TaxonContext
                 - AppBundle\Behat\PostContext

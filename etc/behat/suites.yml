@@ -17,6 +17,5 @@ imports:
     - suites/ui/product_variant.yml
     - suites/ui/redirection.yml
     - suites/ui/security.yml
-    - suites/ui/static_content.yml
     - suites/ui/taxon.yml
     - suites/ui/topic.yml
