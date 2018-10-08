@@ -163,18 +163,6 @@ final class AdminMenuBuilder
             ->setLabel('app.ui.festival_lists')
             ->setLabelAttribute('icon', 'list');
 
-//        $content
-//            ->addChild('backend_static_content', ['route' => 'sylius_backend_static_content_index'])
-//            ->setLabel('sylius.ui.static_contents')
-//            ->setLabelAttribute('icon', 'file');
-
-        if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
-            $content
-                ->addChild('backend_string_block', ['route' => 'app_backend_string_block_index'])
-                ->setLabel('app.ui.string_blocks')
-                ->setLabelAttribute('icon', 'font layout');
-        }
-
         return $content;
     }
 

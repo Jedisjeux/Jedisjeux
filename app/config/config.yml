@@ -46,6 +46,8 @@ twig:
     strict_variables: "%kernel.debug%"
     globals:
         ga_tracking: "%google.analytics.tracking_id%"
+        head_office: '16 rue DOM François Plaine 35137 Bédée'
+        jedisjeux_description: 'Jedisjeux est une association qui rassemble des bénévoles passionnés par les jeux de société. Vous y trouverez des actualités, des critiques, des reportages, des interviews, un forum de discussion, une grande base de données ainsi qu’un calendrier avec les principales dates de sortie des jeux.'
     form_themes:
         - "::form/ckeditor_widget.html.twig"
 
