@@ -100,7 +100,7 @@ EOT
                     $this->isErrored = true;
 
                     continue;
-                } catch (ContextErrorException $exception) {
+                } catch (\Exception $exception) {
                     $output->writeln(sprintf('<errror>%s</errror>', $exception->getMessage()));
                     $this->isErrored = true;
 

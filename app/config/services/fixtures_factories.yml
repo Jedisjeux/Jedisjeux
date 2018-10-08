@@ -7,13 +7,15 @@ services:
             - "@sylius.repository.customer"
             - "@sylius.repository.taxon"
             - "@sylius.repository.product"
+        public: true
 
     app.fixture.example_factory.article_review:
         class: AppBundle\Fixture\Factory\ArticleReviewExampleFactory
         arguments:
-        - "@sylius.factory.article_review"
-        - "@app.repository.article"
-        - "@sylius.repository.customer"
+            - "@sylius.factory.article_review"
+            - "@app.repository.article"
+            - "@sylius.repository.customer"
+        public: true
 
     app.fixture.example_factory.app_user:
         class: AppBundle\Fixture\Factory\AppUserExampleFactory
@@ -21,6 +23,7 @@ services:
             - "@sylius.factory.app_user"
             - "@sylius.factory.customer"
             - "@app.factory.avatar"
+        public: true
 
     app.fixture.example_factory.block:
         class: AppBundle\Fixture\Factory\BlockExampleFactory
@@ -28,12 +31,14 @@ services:
             - "@app.factory.block"
             - "@app.factory.block_image"
             - "@app.repository.article"
+        public: true
 
     app.fixture.example_factory.dealer:
         class: AppBundle\Fixture\Factory\DealerExampleFactory
         arguments:
             - "@app.factory.dealer"
             - "@app.factory.dealer_image"
+        public: true
 
     app.fixture.example_factory.dealer_price:
         class: AppBundle\Fixture\Factory\DealerPriceExampleFactory
@@ -41,6 +46,7 @@ services:
             - "@app.factory.dealer_price"
             - "@sylius.repository.product"
             - "@app.repository.dealer"
+        public: true
 
     app.fixture.example_factory.festival_list:
         class: AppBundle\Fixture\Factory\FestivalListExampleFactory
@@ -53,6 +59,7 @@ services:
             - "@app.factory.festival_list_item"
             - "@sylius.repository.product"
             - "@app.repository.festival_list"
+        public: true
 
     app.fixture.example_factory.game_play:
         class: AppBundle\Fixture\Factory\GamePlayExampleFactory
@@ -60,12 +67,14 @@ services:
             - "@app.factory.game_play"
             - "@sylius.repository.customer"
             - "@sylius.repository.product"
+        public: true
 
     app.fixture.example_factory.game_play_image:
         class: AppBundle\Fixture\Factory\GamePlayImageExampleFactory
         arguments:
             - "@app.factory.game_play_image"
             - "@app.repository.game_play"
+        public: true
 
     app.fixture.example_factory.notification:
         class: AppBundle\Fixture\Factory\NotificationExampleFactory
@@ -78,12 +87,14 @@ services:
         arguments:
             - "@app.factory.person"
             - "@app.factory.person_image"
+        public: true
 
     app.fixture.example_factory.player:
         class: AppBundle\Fixture\Factory\PlayerExampleFactory
         arguments:
             - "@app.factory.player"
             - "@app.repository.game_play"
+        public: true
 
     app.fixture.example_factory.post:
         class: AppBundle\Fixture\Factory\PostExampleFactory
@@ -91,6 +102,7 @@ services:
             - "@app.factory.post"
             - "@app.repository.topic"
             - "@sylius.repository.customer"
+        public: true
 
     app.fixture.example_factory.product:
         class: AppBundle\Fixture\Factory\ProductExampleFactory
@@ -100,6 +112,8 @@ services:
             - "@app.repository.person"
             - "@sylius.repository.taxon"
             - "@sylius.generator.slug"
+        public: true
+
 
     app.fixture.example_factory.product_box:
         class: AppBundle\Fixture\Factory\ProductBoxExampleFactory
@@ -107,6 +121,7 @@ services:
             - "@app.factory.product_box"
             - "@app.factory.product_box_image"
             - "@sylius.repository.product_variant"
+        public: true
 
     app.fixture.example_factory.product_list:
         class: AppBundle\Fixture\Factory\ProductListExampleFactory
@@ -115,6 +130,7 @@ services:
             - "@app.factory.product_list_item"
             - "@sylius.repository.customer"
             - "@sylius.repository.product"
+        public: true
 
     app.fixture.example_factory.product_review:
         class: AppBundle\Fixture\Factory\ProductReviewExampleFactory
@@ -122,11 +138,13 @@ services:
             - "@sylius.factory.product_review"
             - "@sylius.repository.product"
             - "@sylius.repository.customer"
+        public: true
 
     app.fixture.example_factory.redirection:
         class: AppBundle\Fixture\Factory\RedirectionExampleFactory
         arguments:
             - "@app.factory.redirection"
+        public: true
 
     app.fixture.example_factory.taxon:
         class: AppBundle\Fixture\Factory\TaxonExampleFactory
@@ -135,6 +153,7 @@ services:
             - "@sylius.repository.taxon"
             - "@sylius.generator.taxon_slug"
             - "%locale%"
+        public: true
 
     app.fixture.example_factory.topic:
         class: AppBundle\Fixture\Factory\TopicExampleFactory
@@ -144,3 +163,4 @@ services:
             - "@app.repository.article"
             - "@app.repository.game_play"
             - "@sylius.repository.taxon"
+        public: true

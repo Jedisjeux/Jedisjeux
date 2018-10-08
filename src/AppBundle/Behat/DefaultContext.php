@@ -9,7 +9,6 @@
 namespace AppBundle\Behat;
 
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
-use Doctrine\Bundle\PHPCRBundle\Command\WorkspacePurgeCommand;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
@@ -52,24 +51,10 @@ class DefaultContext extends AbstractDefaultContext
         $stmt->execute();
         $purger = new ORMPurger($this->getService('doctrine.orm.entity_manager'));
         $purger->purge();
-        $this->purgePhpcrDatabase();
         $stmt = $em
             ->getConnection()
             ->prepare('SET foreign_key_checks = 1;');
         $stmt->execute();
-    }
-
-    public function purgePhpcrDatabase()
-    {
-        $commandName = 'doctrine:phpcr:workspace:purge';
-
-        $this->application = new Application($this->getKernel());
-        $this->application->add(new WorkspacePurgeCommand());
-
-        $this->command = $this->application->find($commandName);
-        $this->tester = new CommandTester($this->command);
-
-        $this->tester->execute(['command' => $commandName, '--force' => true]);
     }
 
     /**
