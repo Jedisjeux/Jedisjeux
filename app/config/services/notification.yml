@@ -16,6 +16,7 @@ services:
             - "@sylius.repository.app_user"
             - "@router"
             - "@translator"
+        public: true
 
     app.notification_manager.product:
         class: AppBundle\NotificationManager\ProductNotificationManager
@@ -25,3 +26,4 @@ services:
             - "@sylius.repository.app_user"
             - "@router"
             - "@translator"
+        public: true
