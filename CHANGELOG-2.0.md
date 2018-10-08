@@ -1,5 +1,16 @@
 ## Change Log
 
+### v2.0.5 (2018/10/08 15:10 +00:00)
+- [#299](https://github.com/Jedisjeux/Jedisjeux/pull/299) remove cmf templates (@loic425)
+- [#297](https://github.com/Jedisjeux/Jedisjeux/pull/297) Symfony 4 (@loic425)
+- [#298](https://github.com/Jedisjeux/Jedisjeux/pull/298) Improve code (@loic425)
+- [#296](https://github.com/Jedisjeux/Jedisjeux/pull/296) update dependencies again (@loic425)
+- [#295](https://github.com/Jedisjeux/Jedisjeux/pull/295) Remove assetic bundle (@loic425)
+- [#294](https://github.com/Jedisjeux/Jedisjeux/pull/294) remove cmf media bundle (@loic425)
+- [#293](https://github.com/Jedisjeux/Jedisjeux/pull/293) Prepare Symfony 4 dependencies (@loic425)
+- [#292](https://github.com/Jedisjeux/Jedisjeux/pull/292) Sylius 1.2 (@loic425)
+- [#291](https://github.com/Jedisjeux/Jedisjeux/pull/291) [Behat] add scenarios on resetting password feature (@loic425)
+
 ### v2.0.4 (2018/10/03)
 - [#289](https://github.com/Jedisjeux/Jedisjeux/pull/289) fix viewing latest articles from a specific category (@loic425)
 - [#284](https://github.com/Jedisjeux/Jedisjeux/pull/284) fix remember me (@loic425)
