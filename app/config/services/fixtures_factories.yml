@@ -52,6 +52,7 @@ services:
         class: AppBundle\Fixture\Factory\FestivalListExampleFactory
         arguments:
             - "@app.factory.festival_list"
+        public: true
 
     app.fixture.example_factory.festival_list_item:
         class: AppBundle\Fixture\Factory\FestivalListItemExampleFactory
@@ -81,6 +82,7 @@ services:
         arguments:
             - "@app.factory.notification"
             - "@sylius.repository.customer"
+        public: true
 
     app.fixture.example_factory.person:
         class: AppBundle\Fixture\Factory\PersonExampleFactory
