@@ -11,7 +11,6 @@
 
 namespace AppBundle\Command;
 
-use AppBundle\Document\AppDocument;
 use AppBundle\Entity\Product;
 use AppBundle\Entity\Dealer;
 use AppBundle\Entity\DealerPrice;
@@ -19,11 +18,6 @@ use AppBundle\Repository\ProductRepository;
 use Behat\Transliterator\Transliterator;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
-use Elastica\Query;
-use FOS\ElasticaBundle\Finder\TransformedFinder;
-use ONGR\ElasticsearchBundle\Service\Manager;
-use ONGR\ElasticsearchBundle\Service\Repository;
-use Pagerfanta\Pagerfanta;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;

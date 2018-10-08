@@ -25,11 +25,14 @@ if (!getenv("APP_NAME_APP_DEV_PERMITTED")
 
 /** @var \Composer\Autoload\ClassLoader $loader */
 $loader = require __DIR__.'/../app/autoload.php';
+
 Debug::enable();
 
-$kernel = new AppKernel('test', false);
-$kernel->loadClassCache();
+$kernel = new AppKernel('test', true);
+
 $request = Request::createFromGlobals();
+
 $response = $kernel->handle($request);
 $response->send();
+
 $kernel->terminate($request, $response);

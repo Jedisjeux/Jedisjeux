@@ -4,7 +4,6 @@ security:
             id: sylius.app_user_provider.email_or_name_based
     encoders:
         Sylius\Component\User\Model\UserInterface: sha512
-#        FOS\UserBundle\Model\UserInterface: sha512
 
     role_hierarchy:
         ROLE_DASHBOARD:          ROLE_USER
@@ -29,6 +28,7 @@ security:
     firewalls:
         api:
             pattern: ^/api/
+            provider: sylius_user_provider
             anonymous: true
             entry_point: app.security.api_entry_point
             context: user
@@ -36,6 +36,7 @@ security:
         main:
             anonymous: true
             pattern: /.*
+            provider: sylius_user_provider
             form_login:
                 success_handler: sylius.authentication.success_handler
                 failure_handler: sylius.authentication.failure_handler
