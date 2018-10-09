@@ -1,9 +1,11 @@
 ## Change Log
 
-### v2.0.5 (2018/10/08 15:10 +00:00)
+### v2.0.5 (2018/10/09)
+- [#302](https://github.com/Jedisjeux/Jedisjeux/pull/302) fix imagine directory (@loic425)
+- [#301](https://github.com/Jedisjeux/Jedisjeux/pull/301) fix ckeditor install (@loic425)
 - [#299](https://github.com/Jedisjeux/Jedisjeux/pull/299) remove cmf templates (@loic425)
-- [#297](https://github.com/Jedisjeux/Jedisjeux/pull/297) Symfony 4 (@loic425)
 - [#298](https://github.com/Jedisjeux/Jedisjeux/pull/298) Improve code (@loic425)
+- [#297](https://github.com/Jedisjeux/Jedisjeux/pull/297) Symfony 4 (@loic425)
 - [#296](https://github.com/Jedisjeux/Jedisjeux/pull/296) update dependencies again (@loic425)
 - [#295](https://github.com/Jedisjeux/Jedisjeux/pull/295) Remove assetic bundle (@loic425)
 - [#294](https://github.com/Jedisjeux/Jedisjeux/pull/294) remove cmf media bundle (@loic425)
