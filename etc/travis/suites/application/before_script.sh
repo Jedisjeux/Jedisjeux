@@ -15,6 +15,5 @@ run_command "bin/console cache:warmup --env=test --no-debug -vvv" || exit $?
 run_command "bin/console doctrine:migrations:migrate --no-interaction --env=test --no-debug -vvv" || exit $?
 
 print_header "Setting the web assets up" "Jedisjeux"
-run_command "bin/console ckeditor:install --clear=drop --env=test --no-debug -vvv" || exit $?
 run_command "bin/console assets:install web --env=test --no-debug -vvv" || exit $?
 run_command "yarn install && yarn run gulp" || exit $?
