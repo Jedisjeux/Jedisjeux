@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Migrations;
+namespace DoctrineMigrations;
 
 use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20170511090209 extends AbstractMigration
+class Version20170510125805 extends AbstractMigration
 {
     /**
      * @param Schema $schema
@@ -18,8 +18,7 @@ class Version20170511090209 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE sylius_product_review ADD code VARCHAR(255) DEFAULT NULL');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_C7056A9977153098 ON sylius_product_review (code)');
+        $this->addSql('ALTER TABLE jdj_person CHANGE first_name first_name VARCHAR(50) DEFAULT NULL');
     }
 
     /**
@@ -30,7 +29,6 @@ class Version20170511090209 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('DROP INDEX UNIQ_C7056A9977153098 ON sylius_product_review');
-        $this->addSql('ALTER TABLE sylius_product_review DROP code');
+        $this->addSql('ALTER TABLE jdj_person CHANGE first_name first_name VARCHAR(50) NOT NULL COLLATE utf8_unicode_ci');
     }
 }
