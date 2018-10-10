@@ -20,7 +20,7 @@ app_frontend_register:
     defaults:
         _controller: sylius.controller.customer:createAction
         _sylius:
-            form: AppBundle\Form\Type\Customer\CustomerSimpleRegistrationType
+            form: App\Form\Type\Customer\CustomerSimpleRegistrationType
             event: register
             template: frontend/register.html.twig
             redirect:

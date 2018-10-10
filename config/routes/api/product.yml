@@ -4,7 +4,7 @@ sylius_api_product_view_count_update:
     defaults:
         _controller: sylius.controller.product:updateAction
         _sylius:
-            form: AppBundle\Form\Type\ProductViewCountType
+            form: App\Form\Type\ProductViewCountType
 
 sylius_api_product:
     resource: |

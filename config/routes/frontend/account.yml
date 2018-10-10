@@ -17,7 +17,7 @@ sylius_frontend_account_profile_update:
         _controller: sylius.controller.customer:updateAction
         _sylius:
             template: "frontend/account/updateProfile.html.twig"
-            form: AppBundle\Form\Type\Customer\CustomerProfileType
+            form: App\Form\Type\Customer\CustomerProfileType
             repository:
                 method: find
                 arguments:

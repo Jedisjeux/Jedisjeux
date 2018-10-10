@@ -4,7 +4,7 @@ app_api_article_view_count_update:
     defaults:
         _controller: app.controller.article:updateAction
         _sylius:
-            form: AppBundle\Form\Type\ArticleViewCountType
+            form: App\Form\Type\ArticleViewCountType
 
 app_api_article_create:
     methods: [POST]
