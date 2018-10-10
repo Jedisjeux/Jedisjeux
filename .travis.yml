@@ -44,6 +44,9 @@ cache:
         - $JEDISJEUX_CACHE_DIR
 
 before_install:
+    - mv .env.test.dist .env.test
+    - set -a && source .env.test && set +a
+
     - etc/travis/run-suite before_install "${JEDISJEUX_SUITE}"
 
 install:
