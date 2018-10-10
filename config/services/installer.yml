@@ -1,0 +1,29 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+#    service_name:
+#        class: App\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+    sylius.installer.checker.command_directory:
+        class: App\Installer\Checker\CommandDirectoryChecker
+        arguments:
+            - "@filesystem"
+        public: true
+
+    sylius.commands_provider.database_setup:
+        class: App\Installer\Provider\DatabaseSetupCommandsProvider
+        arguments:
+            - "@doctrine"
+        public: true
+
+    sylius.setup.locale:
+        class: App\Installer\Setup\LocaleSetup
+        arguments:
+            - "@sylius.repository.locale"
+            - "@sylius.factory.locale"
+            - "%locale%"
+        public: true

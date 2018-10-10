@@ -17,7 +17,7 @@
     <!-- Styles -->
 
     <!-- Favicon -->
-    {% include '_favicon.html.twig' %}
+    {% include '../../../templates/_favicon.html.twig' %}
 </head>
 
 <!-- Add class "boxed" along with body for boxed layout. -->
@@ -25,8 +25,8 @@
 <!-- Add "img-x" (1 to 5) for background images. -->
 <body class="{% block body_class %}magazine{% endblock %}">
 
-{% include 'layout/_analytics.html.twig' %}
-{% include 'layout/loading.html.twig' %}
+{% include '../../../templates/layout' %}
+{% include '../../../templates/layout' %}
 
 <!-- Outer Starts -->
 <div class="outer">
@@ -34,12 +34,12 @@
     {% block outer %}
 
         <!-- Top bar starts -->
-        {% include "layout/_top-bar.html.twig" %}
+        {% include "../../../templates/layout" %}
 
         <!-- Top bar ends -->
 
         <!-- Header One Starts -->
-        {% include "layout/_header-1.html.twig" %}
+        {% include "../../../templates/layout" %}
 
         <!-- Header one ends -->
 
@@ -48,8 +48,8 @@
                 <div class="row">
                     <div class="col-md-12">
 
-                        {% include "layout/_flashes.html.twig" %}
-                        {% include "layout/_notify.html.twig" %}
+                        {% include "../../../templates/layout" %}
+                        {% include "../../../templates/layout" %}
 
                         <div class="pull-right">
                             {% block breadcrumb_container %}
@@ -142,17 +142,17 @@
         </div>
 
         {# Confirmation modal #}
-        {% include '_confirm_modal.html.twig' %}
+        {% include '../../../templates/_confirm_modal.html.twig' %}
 
         <!-- Foot Starts -->
 
-        {% include "layout/_foot.html.twig" %}
+        {% include "../../../templates/layout" %}
 
         <!-- Foot Ends -->
 
         <!-- Footer Starts -->
 
-        {% include "layout/_footer.html.twig" %}
+        {% include "../../../templates/layout" %}
 
         <!-- Footer Ends -->
 

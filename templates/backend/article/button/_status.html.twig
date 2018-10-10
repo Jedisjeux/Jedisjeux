@@ -1,0 +1,40 @@
+{% import _self as self %}
+
+{% macro updateStateButton(article, transition, icon, color) %}
+    {% import 'SyliusUiBundle:Macro:buttons.html.twig' as buttons %}
+
+    <form style="display: inline-block" action="{{ path('app_backend_article_update_state', {
+        'id': article.id,
+        'transition': transition
+    }) }}" method="post">
+        <input type="hidden" name="_method" value="PATCH">
+        <button class="ui {{ color|default('') }} labeled icon button" type="submit">
+            <i class="icon {{ icon }}"></i> {{ ('label.'~transition)|trans }}
+        </button>
+    </form>
+
+{% endmacro %}
+
+{% if is_granted('ROLE_WORKFLOW') %}
+
+    {% if(article.status != constant('App\\Entity\\Article::STATUS_PUBLISHED')) %}
+        <div class="alert alert-warning changeStatusContainer" role="alert">
+            <span class="fa fa-exclamation-triangle"></span>
+
+            <div class="pull-right control-group">
+                {% if state_machine.can('ask_for_review') %}
+                    {{ self.updateStateButton(article, 'ask_for_review', 'book') }}
+                {% endif %}
+
+                {% if state_machine.can('ask_for_publication') %}
+                    {{ self.updateStateButton(article, 'ask_for_publication', 'check') }}
+                {% endif %}
+
+                {% if state_machine.can('publish') %}
+                    {{ self.updateStateButton(article, 'publish', 'upload', 'green') }}
+                {% endif %}
+
+            </div>
+        </div>
+    {% endif %}
+{% endif %}

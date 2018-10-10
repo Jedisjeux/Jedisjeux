@@ -1,9 +1,0 @@
-sylius_taxonomy:
-    driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
-    resources:
-        taxon:
-            classes:
-                model: AppBundle\Entity\Taxon
-                repository: AppBundle\Repository\TaxonRepository
-                controller: AppBundle\Controller\TaxonController
-                form: AppBundle\Form\Type\TaxonType

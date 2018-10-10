@@ -1,0 +1,21 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+#    service_name:
+#        class: App\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+      app.behat.page.backend.topic.index:
+          class: App\Behat\Page\Backend\Topic\IndexPage
+          parent: app.behat.page.backend.crud.index
+          public: false
+          arguments: ["app_backend_topic_index"]
+
+      app.behat.page.backend.topic.update:
+          class: App\Behat\Page\Backend\Topic\UpdatePage
+          parent: app.behat.page.backend.crud.update
+          public: false
+          arguments: ["app_backend_topic_update"]

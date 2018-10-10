@@ -5,12 +5,8 @@
   "type": "project",
   "autoload": {
     "psr-4": {
-      "AppBundle\\": "src/AppBundle/"
-    },
-    "classmap": [
-      "app/AppKernel.php",
-      "app/AppCache.php"
-    ]
+      "App\\": "src/"
+    }
   },
   "autoload-dev": {
     "psr-4": {
@@ -19,7 +15,7 @@
   },
   "require": {
     "php": "^7.1",
-    "ext-zip": "*",
+    "ext-zip": "^1.13",
     "doctrine/doctrine-bundle": "^1.6",
     "doctrine/doctrine-fixtures-bundle": "^2.3",
     "doctrine/doctrine-migrations-bundle": "^1.2",
@@ -54,9 +50,11 @@
     "sylius/taxonomy-bundle": "^1.2",
     "sylius/ui-bundle": "^1.2",
     "sylius/user-bundle": "^1.2",
+    "symfony/flex": "^1.1",
     "symfony/monolog-bundle": "^3.3",
     "symfony/swiftmailer-bundle": "^3.0",
-    "symfony/symfony": "^4.1.1",
+    "symfony/twig-bundle": "^4.1",
+    "twig/extensions": "^1.5",
     "winzou/state-machine-bundle": "^0.3",
     "zenstruck/redirect-bundle": "^3.1"
   },
@@ -81,6 +79,9 @@
     "phpstan/phpstan-webmozart-assert": "^0.10",
     "se/selenium-server-standalone": " ^2.52"
   },
+  "conflict": {
+    "symfony/symfony": "*"
+  },
   "scripts": {
     "symfony-scripts": [
       "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
@@ -97,7 +98,12 @@
     ],
     "post-update-cmd": [
       "@symfony-scripts"
-    ]
+    ],
+    "auto-scripts": {
+      "cache:clear": "symfony-cmd",
+      "assets:install %PUBLIC_DIR%": "symfony-cmd",
+      "security-checker security:check": "script"
+    }
   },
   "config": {
     "bin-dir": "bin",

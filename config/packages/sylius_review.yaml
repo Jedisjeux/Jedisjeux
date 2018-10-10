@@ -1,0 +1,23 @@
+sylius_review:
+    resources:
+        product:
+            subject: App\Entity\Product
+            reviewer:
+                classes:
+                    model: App\Entity\Customer
+            review:
+                classes:
+                    model: App\Entity\ProductReview
+                    repository: App\Repository\ProductReviewRepository
+                    controller: App\Controller\ProductReviewController
+                    form: App\Form\Type\ProductReviewType
+        article:
+            subject: App\Entity\Article
+            reviewer:
+                classes:
+                    model: App\Entity\Customer
+            review:
+                classes:
+                    model: App\Entity\ArticleReview
+                    repository: App\Repository\ArticleReviewRepository
+                    form: App\Form\Type\ArticleReviewType

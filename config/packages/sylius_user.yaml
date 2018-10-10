@@ -1,0 +1,13 @@
+sylius_user:
+    resources:
+        app:
+            user:
+                classes:
+                    model: App\Entity\User
+                    repository: App\Repository\UserRepository
+        admin_oauth:
+            user:
+                classes:
+                    model: Sylius\Component\User\Model\UserOAuth
+                    interface: Sylius\Component\User\Model\UserOAuthInterface
+                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController

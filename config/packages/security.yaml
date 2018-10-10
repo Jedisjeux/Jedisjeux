@@ -1,0 +1,93 @@
+security:
+    providers:
+        sylius_user_provider:
+            id: sylius.app_user_provider.email_or_name_based
+    encoders:
+        Sylius\Component\User\Model\UserInterface: sha512
+
+    role_hierarchy:
+        ROLE_DASHBOARD:          ROLE_USER
+        ROLE_PRODUCT_MANAGER:    ROLE_DASHBOARD
+        ROLE_ARTICLE_MANAGER:    ROLE_DASHBOARD
+
+        # Jedisjeux Team
+        ROLE_STAFF:              ROLE_PRODUCT_MANAGER, ROLE_ARTICLE_MANAGER
+
+        # Workflow rédaction
+        ROLE_WORKFLOW:           ROLE_STAFF
+        ROLE_REDACTOR:           ROLE_WORKFLOW
+        ROLE_TRANSLATOR:         ROLE_WORKFLOW
+        ROLE_QUALITY:            ROLE_WORKFLOW
+        ROLE_REVIEWER:           ROLE_WORKFLOW
+        ROLE_PUBLISHER:          ROLE_WORKFLOW
+        ROLE_ADMIN_WORKFLOW:     ROLE_REDACTOR, ROLE_TRANSLATOR, ROLE_TRANSLATOR, ROLE_QUALITY, ROLE_REVIEWER, ROLE_PUBLISHER
+
+        # Admin
+        ROLE_ADMIN:              ROLE_ADMIN_WORKFLOW
+
+    firewalls:
+        api:
+            pattern: ^/api/
+            provider: sylius_user_provider
+            anonymous: true
+            entry_point: app.security.api_entry_point
+            context: user
+
+        main:
+            anonymous: true
+            pattern: /.*
+            provider: sylius_user_provider
+            form_login:
+                success_handler: sylius.authentication.success_handler
+                failure_handler: sylius.authentication.failure_handler
+                provider: sylius_user_provider
+                login_path: sylius_frontend_login
+                check_path: sylius_frontend_login_check
+                failure_path: sylius_frontend_login
+                default_target_path: app_homepage
+                use_forward:  false
+                #use_referer: true
+                csrf_token_generator: security.csrf.token_manager
+                csrf_parameter: _csrf_shop_security_token
+                csrf_token_id: shop_authenticate
+            remember_me:
+                secret: "%env(APP_SECRET)%"
+                name: APP_FRONTEND_REMEMBER_ME
+                lifetime: 31536000
+                remember_me_parameter: _remember_me
+            logout:
+               path: app_frontend_logout
+               target: app_homepage
+            context: user
+
+    access_control:
+        - { path: "^/_partial.*", role: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }
+        - { path: "^/_partial.*", role: ROLE_NO_ACCESS }
+
+        - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/verify, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/mon-compte.*, role: ROLE_USER }
+
+        - { path: ^/admin/$, roles: [ROLE_DASHBOARD] }
+        - { path: ^/admin/articles, role: ROLE_ARTICLE_MANAGER }
+        - { path: ^/admin/people, role: ROLE_PRODUCT_MANAGER }
+        - { path: ^/admin/products, role: ROLE_PRODUCT_MANAGER }
+        - { path: ^/admin/product-variants, role: ROLE_PRODUCT_MANAGER }
+        - { path: ^/admin/ajax/products, role: ROLE_PRODUCT_MANAGER }
+        - { path: ^/admin/ajax/product-variants, role: ROLE_PRODUCT_MANAGER }
+        - { path: ^/admin/ajax/people, role: ROLE_PRODUCT_MANAGER }
+        - { path: ^/admin/, role: ROLE_ADMIN }
+
+        # create new entity
+        - { path: /new$, role: ROLE_USER }
+        # update existing entity
+        - { path: /edit$, role: ROLE_USER }
+        # rate a product
+        - { path: ^/api/products/\d+/ratings/, role: ROLE_USER}
+        # add/remove a product to/from a list
+        - { path: ^/api/product-lists/.+/products/\d+, role: ROLE_USER}
+        #like it
+        - { path: ^/user-review/\d+/like, role: ROLE_USER }
+        - { path: ^/api/notifications, role: ROLE_USER}

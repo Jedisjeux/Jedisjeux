@@ -1,0 +1,34 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+#    service_name:
+#        class: App\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+      app.behat.page.frontend.game_play.index:
+          class: App\Behat\Page\Frontend\GamePlay\IndexPage
+          parent: app.behat.symfony_page
+          public: false
+
+      app.behat.page.frontend.game_play.index_by_product:
+          class: App\Behat\Page\Frontend\GamePlay\IndexByProductPage
+          parent: app.behat.symfony_page
+          public: false
+
+      app.behat.page.frontend.game_play.create:
+          class: App\Behat\Page\Frontend\GamePlay\CreatePage
+          parent: app.behat.symfony_page
+          public: false
+
+      app.behat.page.frontend.game_play.update:
+          class: App\Behat\Page\Frontend\GamePlay\UpdatePage
+          parent: app.behat.symfony_page
+          public: false
+
+      app.behat.page.frontend.game_play.show:
+          class: App\Behat\Page\Frontend\GamePlay\ShowPage
+          parent: app.behat.symfony_page
+          public: false

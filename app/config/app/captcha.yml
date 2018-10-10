@@ -1,4 +1,0 @@
-ewz_recaptcha:
-    public_key:  "%recaptcha.public_key%"
-    private_key: "%recaptcha.private_key%"
-    locale_key:  "%locale%"

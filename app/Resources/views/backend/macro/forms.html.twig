@@ -1,3 +1,0 @@
-{% macro filter(placeholder, template) %}
-    {{ render(controller('app.controller.form:filterAction', {'type': 'AppBundle\\Form\\Filter\\QueryFilterType', 'placeholder': placeholder|default('app.ui.request_placeholder'|trans), 'template': template|default('backend/form/_filterForm.html.twig'), 'criteria':app.request.get('criteria') })) }}
-{% endmacro %}

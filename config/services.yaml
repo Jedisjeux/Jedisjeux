@@ -1,0 +1,50 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: 'fr_FR'
+    google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
+    email_contact: jedisjeux@jedisjeux.net
+    email_name: Contact Jedisjeux
+    email_sender: no-reply@jedisjeux.net
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: false     # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: false       # Allows optimizing the container by removing unused services; this also means
+                            # fetching services directly from the container via $container->get() won't work.
+                            # The best practice is to be explicit about your dependencies anyway.
+
+    command_handlers:
+        namespace: App\Command\
+        resource: '../src/Command/*'
+        tags: [command_handler]
+
+imports:
+    - { resource: services/analytic.yml }
+    - { resource: services/block.yml }
+    - { resource: services/calculator.yml }
+    - { resource: services/context.yml }
+    - { resource: services/controller.yml }
+    - { resource: services/feed.yml }
+    - { resource: services/filter.yml }
+    - { resource: services/fixtures.yml }
+    - { resource: services/fixtures_factories.yml }
+    - { resource: services/form.yml }
+    - { resource: services/guard.yml }
+    - { resource: services/installer.yml }
+    - { resource: services/listener.yml }
+    - { resource: services/menu.yml }
+    - { resource: services/notification.yml }
+    - { resource: services/publication.yml }
+    - { resource: services/security.yml }
+    - { resource: services/serializer.yml }
+    - { resource: services/subscriber.yml }
+    - { resource: services/text_filter.yml }
+    - { resource: services/updater.yml }
+    - { resource: services/validator.yml }
+    - { resource: services/view.yml }
