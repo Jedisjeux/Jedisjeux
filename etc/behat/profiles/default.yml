@@ -12,7 +12,7 @@ default:
             javascript_session: chrome
             sessions:
                 symfony:
-                    symfony: ~
+                    symfony2: ~
                 chrome:
                     selenium2:
                         browser: chrome
@@ -26,12 +26,10 @@ default:
                                     - "start-maximized"
                                     - "no-sandbox"
 
-        FriendsOfBehat\SymfonyExtension:
+        Behat\Symfony2Extension:
             kernel:
-                bootstrap: 'features/bootstrap/bootstrap.php'
                 path: src/Kernel.php
-                class: 'App\Kernel'
-                debug: true
+                class: App\Kernel
 
     gherkin:
         filters:
