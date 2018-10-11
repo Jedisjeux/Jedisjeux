@@ -10,7 +10,7 @@ app_backend_contact_request:
                 subheader: app.ui.manage_contact_requests
             index:
                 icon: mail
-        templates: :backend/crud
+        templates: backend/crud
     type: sylius.resource
 
 app_backend_contact_request_show:

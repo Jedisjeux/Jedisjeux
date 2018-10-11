@@ -2,7 +2,7 @@ app_backend_dealer:
     resource: |
         alias: app.dealer
         section: backend
-        templates: :backend/crud
+        templates: backend/crud
         redirect: update
         grid: app_backend_dealer
         vars:

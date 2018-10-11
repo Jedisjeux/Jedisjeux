@@ -16,7 +16,7 @@ app_backend_article:
                 templates:
                     form: backend/article/_form.html.twig
                     toolbar: backend/article/_toolbar.html.twig
-        templates: :backend/crud
+        templates: backend/crud
     type: sylius.resource
 
 app_backend_article_per_product_index:

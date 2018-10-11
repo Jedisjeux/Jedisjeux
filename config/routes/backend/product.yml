@@ -15,7 +15,7 @@ sylius_admin_product:
                 templates:
                     form: backend/product/_form.html.twig
                     toolbar: backend/product/_toolbar.html.twig
-        templates: :backend/crud
+        templates: backend/crud
     type: sylius.resource
 
 sylius_admin_product_create:

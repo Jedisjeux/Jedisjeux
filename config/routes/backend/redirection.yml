@@ -10,5 +10,5 @@ app_backend_redirection:
                 subheader: app.ui.manage_redirections
             index:
                 icon: exchange
-        templates: :backend/crud
+        templates: backend/crud
     type: sylius.resource

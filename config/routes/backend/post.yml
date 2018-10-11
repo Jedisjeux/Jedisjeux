@@ -12,5 +12,5 @@ app_backend_post:
                     form: backend/post/_form.html.twig
             index:
                 icon: comments
-        templates: :backend/crud
+        templates: backend/crud
     type: sylius.resource

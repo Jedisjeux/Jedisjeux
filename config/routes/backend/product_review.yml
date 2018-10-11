@@ -12,5 +12,5 @@ sylius_backend_product_review:
                     form: backend/product_review/_form.html.twig
             index:
                 icon: star
-        templates: :backend/crud
+        templates: backend/crud
     type: sylius.resource

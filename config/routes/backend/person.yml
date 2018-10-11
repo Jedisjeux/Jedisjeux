@@ -2,7 +2,7 @@ admin_person:
     resource: |
         alias: app.person
         section: backend
-        templates: :backend/crud
+        templates: backend/crud
         redirect: index
         grid: app_backend_person
         vars:

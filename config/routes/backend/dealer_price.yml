@@ -2,7 +2,7 @@ app_backend_dealer_price:
     resource: |
         alias: app.dealer_price
         section: backend
-        templates: :backend/crud
+        templates: backend/crud
         redirect: index
         grid: app_backend_dealer_price
         vars:

@@ -23,6 +23,19 @@ services:
         resource: '../src/Command/*'
         tags: [command_handler]
 
+    app.templating.helper.currency:
+        class: App\Templating\Helper\CurrencyHelper
+        lazy: true
+        tags:
+            - { name: templating.helper, alias: "sylius_currency" }
+
+    app.twig.extension.currency:
+        class: App\Twig\CurrencyExtension
+        arguments:
+            - "@app.templating.helper.currency"
+        tags:
+            - { name: twig.extension }
+
 imports:
     - { resource: services/analytic.yml }
     - { resource: services/block.yml }

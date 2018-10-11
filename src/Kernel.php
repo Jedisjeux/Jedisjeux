@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\DependencyInjection\Compiler\RemoveSyliusThemeFilesystemLoaderPass;
 use App\DependencyInjection\Compiler\ServicesPass;
 use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
@@ -62,6 +63,8 @@ class Kernel extends BaseKernel
      */
     protected function build(ContainerBuilder $container): void
     {
+        parent::build($container);
+
         $container->addCompilerPass(new ServicesPass());
     }
 
@@ -72,7 +75,7 @@ class Kernel extends BaseKernel
     {
         $container->addResource(new FileResource($this->getProjectDir().'/config/bundles.php'));
         // Feel free to remove the "container.autowiring.strict_mode" parameter
-        // if you are using symfony/dependency-injection 4.0+ as it's the default behavior
+        // if you are using symfony/dependency-injection 4.0+ as it's the default bbundlesehavior
         $container->setParameter('container.autowiring.strict_mode', true);
         $container->setParameter('container.dumper.inline_class_loader', true);
         $confDir = $this->getProjectDir().'/config';

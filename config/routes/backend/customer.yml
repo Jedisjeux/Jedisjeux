@@ -12,7 +12,7 @@ sylius_backend_customer:
                     form: backend/customer/_form.html.twig
             index:
                 icon: users
-        templates: :backend/crud
+        templates: backend/crud
     type: sylius.resource
 
 sylius_backend_customer_show:

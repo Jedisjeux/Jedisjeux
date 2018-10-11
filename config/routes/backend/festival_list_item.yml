@@ -11,7 +11,7 @@ app_backend_festival_list_item:
                 subheader: app.ui.manage_festival_list_items
             index:
                 icon: list
-        templates: :backend/crud
+        templates: backend/crud
     type: sylius.resource
 
 app_backend_festival_list_item_index:

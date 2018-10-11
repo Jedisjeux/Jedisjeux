@@ -3,7 +3,7 @@ app_backend_festival_list:
         alias: app.festival_list
         section: backend
         except: ['show']
-        templates: :backend/crud
+        templates: backend/crud
         redirect: update
         grid: app_backend_festival_list
         vars:

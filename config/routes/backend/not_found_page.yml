@@ -10,5 +10,5 @@ app_backend_not_found_page:
                 subheader: app.ui.manage_not_found_pages
             index:
                 icon: warning sign
-        templates: :backend/crud
+        templates: backend/crud
     type: sylius.resource

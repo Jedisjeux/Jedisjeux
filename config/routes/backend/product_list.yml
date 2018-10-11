@@ -10,5 +10,5 @@ app_backend_product_list:
                 subheader: app.ui.manage_product_lists
             index:
                 icon: list
-        templates: :backend/crud
+        templates: backend/crud
     type: sylius.resource

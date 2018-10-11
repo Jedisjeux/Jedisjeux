@@ -11,5 +11,5 @@ sylius_backend_customer_group:
                 subheader: sylius.ui.manage_customer_groups
             index:
                 icon: archive
-        templates: :backend/crud
+        templates: backend/crud
     type: sylius.resource

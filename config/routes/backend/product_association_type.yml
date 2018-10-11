@@ -12,5 +12,5 @@ sylius_backend_product_association_type:
                     form: backend/product_association_type/_form.html.twig
             index:
                 icon: tasks
-        templates: :backend/crud
+        templates: backend/crud
     type: sylius.resource

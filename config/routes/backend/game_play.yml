@@ -10,5 +10,5 @@ app_backend_game_play:
                 subheader: app.ui.manage_game_plays
             index:
                 icon: play
-        templates: :backend/crud
+        templates: backend/crud
     type: sylius.resource
