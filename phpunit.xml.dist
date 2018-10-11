@@ -5,7 +5,7 @@
          xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.8/phpunit.xsd"
          backupGlobals="false"
          colors="true"
-         bootstrap="app/autoload.php"
+         bootstrap="vendor/autoload.php"
 >
     <testsuites>
         <testsuite name="Project Test Suite">
@@ -14,12 +14,12 @@
     </testsuites>
 
     <php>
-        <server name="KERNEL_CLASS" value="AppKernel" />
+        <server name="KERNEL_CLASS" value="App\Kernel" />
         <server name="IS_DOCTRINE_ORM_SUPPORTED" value="true" />
         <server name="ESCAPE_JSON" value="true" />
 
         <!-- ###+ symfony/framework-bundle ### -->
-        <env name="APP_ENV" value="dev"/>
+        <env name="APP_ENV" value="test"/>
         <env name="APP_SECRET" value="dfde959bae07827f68290d70eca8aff9"/>
         <!-- env name="TRUSTED_PROXIES" value="127.0.0.1,127.0.0.2" -->
         <!-- env name="TRUSTED_HOSTS" value="localhost,example.com" -->
@@ -29,7 +29,7 @@
         <!-- Format described at http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html#connecting-using-a-url -->
         <!-- For an SQLite database, use: "sqlite:///%kernel.project_dir%/var/data.db" -->
         <!-- Configure your db driver and server_version in config/packages/doctrine.yaml -->
-        <env name="DATABASE_URL" value="mysql://db_user:db_password@127.0.0.1:3306/db_name"/>
+        <env name="DATABASE_URL" value="mysql://root@127.0.0.1:3306/jdj_%kernel.environment%"/>
         <!-- ###- doctrine/doctrine-bundle ### -->
 
         <!-- ###+ google/recaptcha ### -->
@@ -44,6 +44,12 @@
         <env name="GOOGLE_CLIENT_ID" value=""/>
         <env name="GOOGLE_CLIENT_SECRET" value=""/>
         <!-- ###- google/apiclient ### -->
+
+        <!-- ###+ google/analytics ### -->
+        <env name="GOOGLE_ANALYTICS_TRACKING_ID" value="UA-XXXXX-1"/>
+        <env name="GOOGLE_ANALYTICS_PROFILE_ID" value="XXXXXXXX"/>
+        <env name="GOOGLE_ANALYTICS_PRIVATE_KEY_FILE" value="Resources/credentials/client_secret.json"/>
+        <!-- ###- google/analytics ### -->
 
         <!-- ###+ nelmio/cors-bundle ### -->
         <env name="CORS_ALLOW_ORIGIN" value="^https?://localhost(:[0-9]+)?$"/>
