@@ -46,7 +46,7 @@ class DownloadImageCommand extends ContainerAwareCommand
         $this
             ->setName('app:images:download')
             ->setDescription('Download images')
-            ->addOption('image-original-path', null, InputOption::VALUE_REQUIRED, null, self::DEFAULT_IMAGE_ORIGINAL_PATH)
+            ->addOption('image-original-path', null, InputOption::VALUE_REQUIRED, 'Image source path', self::DEFAULT_IMAGE_ORIGINAL_PATH)
             ->addOption('entity', null, InputOption::VALUE_REQUIRED);
     }
 
