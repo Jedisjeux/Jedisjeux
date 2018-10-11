@@ -55,7 +55,7 @@ app_frontend_post_create_by_topic:
         _controller: app.controller.post:createAction
         _sylius:
             section: frontend
-            form: AppBundle\Form\Type\PostType
+            form: App\Form\Type\PostType
             factory:
                 method: createForTopic
                 arguments:

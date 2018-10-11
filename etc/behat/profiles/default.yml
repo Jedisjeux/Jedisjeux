@@ -12,7 +12,7 @@ default:
             javascript_session: chrome
             sessions:
                 symfony:
-                    symfony2: ~
+                    symfony: ~
                 chrome:
                     selenium2:
                         browser: chrome
