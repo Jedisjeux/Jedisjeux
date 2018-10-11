@@ -1,0 +1,9 @@
+{% extends 'frontend/layout.html.twig' %}
+
+{% set pageTitle %}
+    Jedisjeux <small>est en maintenance</small>
+{% endset %}
+
+{% block content %}
+    {% include 'frontend/error/_banner.html.twig' with { 'description': 'text.error.503' } %}
+{% endblock %}

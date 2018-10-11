@@ -62,6 +62,7 @@ app:
         edit_topic: Modifier le sujet
         editor: Editeur
         editors: Editeurs
+        error: Erreur
         errors: Erreurs
         festival_lists: Listes de festival
         festival_list_items: Items de liste de festival
