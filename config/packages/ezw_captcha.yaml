@@ -1,2 +1,4 @@
 ewz_recaptcha:
-    enabled: false
+    public_key:  '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
+    private_key: '%env(GOOGLE_RECAPTCHA_SECRET)%'
+    locale_key:  "%locale%"

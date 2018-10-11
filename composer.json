@@ -5,7 +5,8 @@
   "type": "project",
   "autoload": {
     "psr-4": {
-      "App\\": "src/"
+      "App\\": "src/",
+      "DoctrineMigrations\\": "src/Migrations"
     }
   },
   "autoload-dev": {

@@ -3,11 +3,11 @@ default:
         ui_article:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
-                - AppBundle\Behat\UtilsContext
-                - AppBundle\Behat\UserContext
-                - AppBundle\Behat\TaxonContext
-                - AppBundle\Behat\PostContext
-                - AppBundle\Behat\ArticleContext
-                - AppBundle\Behat\NotificationContext
+                - App\Behat\UtilsContext
+                - App\Behat\UserContext
+                - App\Behat\TaxonContext
+                - App\Behat\PostContext
+                - App\Behat\ArticleContext
+                - App\Behat\NotificationContext
             filters:
                 tags: "@article && @ui"

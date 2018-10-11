@@ -3,8 +3,8 @@ default:
         ui_redirection:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
-                - AppBundle\Behat\UtilsContext
-                - AppBundle\Behat\UserContext
-                - AppBundle\Behat\RedirectionContext
+                - App\Behat\UtilsContext
+                - App\Behat\UserContext
+                - App\Behat\RedirectionContext
             filters:
                 tags: "@redirection && @ui"

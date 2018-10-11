@@ -5,9 +5,6 @@ namespace App\Command\Installer;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
 class InstallAssetsCommand extends AbstractInstallCommand
 {
     /**
@@ -41,7 +38,6 @@ EOT
 
         $commands = [
             'assets:install',
-            'assetic:dump',
         ];
 
         $this->runCommands($commands, $output);

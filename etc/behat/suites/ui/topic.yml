@@ -3,9 +3,9 @@ default:
         ui_topic:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
-                - AppBundle\Behat\UtilsContext
-                - AppBundle\Behat\UserContext
-                - AppBundle\Behat\TopicContext
-                - AppBundle\Behat\TaxonContext
+                - App\Behat\UtilsContext
+                - App\Behat\UserContext
+                - App\Behat\TopicContext
+                - App\Behat\TaxonContext
             filters:
                 tags: "@topic && @ui"

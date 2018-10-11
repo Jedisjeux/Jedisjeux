@@ -3,9 +3,9 @@ default:
         ui_product_variant:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
-                - AppBundle\Behat\UtilsContext
-                - AppBundle\Behat\UserContext
-                - AppBundle\Behat\TaxonContext
-                - AppBundle\Behat\ProductContext
+                - App\Behat\UtilsContext
+                - App\Behat\UserContext
+                - App\Behat\TaxonContext
+                - App\Behat\ProductContext
             filters:
                 tags: "@productVariant && @ui"

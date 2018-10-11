@@ -3,6 +3,6 @@ default:
         ui_error:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
-                - AppBundle\Behat\UtilsContext
+                - App\Behat\UtilsContext
             filters:
                 tags: "@error && @ui"
