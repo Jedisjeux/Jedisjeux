@@ -26,7 +26,12 @@ default:
                                     - "start-maximized"
                                     - "no-sandbox"
 
-        Behat\Symfony2Extension: ~
+        FriendsOfBehat\SymfonyExtension:
+            kernel:
+                bootstrap: 'features/bootstrap/bootstrap.php'
+                path: src/Kernel.php
+                class: 'App\Kernel'
+                debug: true
 
     gherkin:
         filters:
