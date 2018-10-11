@@ -1,0 +1,10 @@
+{% extends 'frontend/layout.html.twig' %}
+
+{% set pageTitle %}
+    {{ 'title.error'|trans }}
+{% endset %}
+
+{% block content %}
+    {% include 'frontend/error/_banner.html.twig' with { 'description': 'text.error.500' } %}
+{% endblock %}
+

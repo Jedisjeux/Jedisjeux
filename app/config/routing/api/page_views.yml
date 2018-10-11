@@ -1,7 +1,0 @@
-app_api_page_views_show:
-    methods: [GET]
-    path: /page-views{pagePath}
-    defaults:
-        _controller: AppBundle:PageViews:show
-    requirements:
-        pagePath: "[^?]+"

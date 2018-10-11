@@ -3,7 +3,7 @@ default:
         ui_account:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
-                - AppBundle\Behat\UtilsContext
-                - AppBundle\Behat\UserContext
+                - App\Behat\UtilsContext
+                - App\Behat\UserContext
             filters:
                 tags: "@account && @ui"

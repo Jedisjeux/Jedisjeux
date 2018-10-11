@@ -1,0 +1,151 @@
+sylius_resource:
+    drivers:
+        - doctrine/orm
+        - doctrine/phpcr-odm
+    resources:
+        app.article:
+            classes:
+                model: App\Entity\Article
+                factory: App\Factory\ArticleFactory
+                repository: App\Repository\ArticleRepository
+                controller: App\Controller\ArticleController
+                form: App\Form\Type\ArticleType
+        app.article_image:
+            classes:
+                model: App\Entity\ArticleImage
+                form: App\Form\Type\ArticleImageType
+        app.avatar:
+            classes:
+                model: App\Entity\Avatar
+                form: App\Form\Type\AvatarType
+        app.block:
+            classes:
+                model: App\Entity\Block
+                form: App\Form\Type\BlockType
+        app.block_image:
+            classes:
+                model: App\Entity\BlockImage
+                form: App\Form\Type\BlockImageType
+        app.contact_request:
+            classes:
+                model: App\Entity\ContactRequest
+                factory: App\Factory\ContactRequestFactory
+                repository: App\Repository\ContactRequestRepository
+                form: App\Form\Type\ContactRequestType
+        app.dealer:
+            classes:
+                model: App\Entity\Dealer
+                repository: App\Repository\DealerRepository
+                form: App\Form\Type\DealerType
+        app.dealer_contact:
+            classes:
+                model: App\Entity\DealerContact
+                form: App\Form\Type\DealerContactType
+        app.dealer_image:
+            classes:
+                model: App\Entity\DealerImage
+                form: App\Form\Type\DealerImageType
+        app.dealer_price:
+            classes:
+                model: App\Entity\DealerPrice
+                repository: App\Repository\DealerPriceRepository
+                form: App\Form\Type\DealerPriceType
+        app.festival_list:
+            classes:
+                model: App\Entity\FestivalList
+                repository: App\Repository\FestivalListRepository
+                form: App\Form\Type\FestivalListType
+        app.festival_list_item:
+            classes:
+                model: App\Entity\FestivalListItem
+                factory: App\Factory\FestivalListItemFactory
+                repository: App\Repository\FestivalListItemRepository
+                form: App\Form\Type\FestivalListItemType
+        app.not_found_page:
+            classes:
+                model: App\Entity\NotFound
+        app.person:
+            classes:
+                model: App\Entity\Person
+                repository: App\Repository\PersonRepository
+                controller: App\Controller\PersonController
+                form: App\Form\Type\PersonType
+        app.person_image:
+            classes:
+                model: App\Entity\PersonImage
+                form: App\Form\Type\PersonImageType
+        app.product_barcode:
+            classes:
+                model: App\Entity\ProductBarcode
+                form: App\Form\Type\ProductBarcodeType
+        app.product_box:
+            classes:
+                model: App\Entity\ProductBox
+                form: App\Form\Type\ProductBoxType
+        app.product_box_image:
+            classes:
+                model: App\Entity\ProductBoxImage
+        app.product_list:
+            classes:
+                model: App\Entity\ProductList
+                factory: App\Factory\ProductListFactory
+                repository: App\Repository\ProductListRepository
+                controller: App\Controller\ProductListController
+                form: App\Form\Type\ProductListType
+        app.product_list_item:
+            classes:
+                model: App\Entity\ProductListItem
+                repository: App\Repository\ProductListItemRepository
+                controller: App\Controller\ProductListItemController
+        app.pub_banner:
+            classes:
+                model: App\Entity\PubBanner
+                form: App\Form\Type\PubBannerType
+        app.redirection:
+            classes:
+                model: App\Entity\Redirection
+                form: App\Form\Type\RedirectionType
+        app.slide_show_block:
+            classes:
+                model: App\Entity\SlideShowBlock
+        app.game_play:
+            classes:
+                model: App\Entity\GamePlay
+                factory: App\Factory\GamePlayFactory
+                repository: App\Repository\GamePlayRepository
+                form: App\Form\Type\GamePlayType
+        app.game_play_image:
+            classes:
+                model: App\Entity\GamePlayImage
+                form: App\Form\Type\GamePlayImageType
+        app.player:
+            classes:
+                model: App\Entity\Player
+                form: App\Form\Type\PlayerType
+        app.price_list:
+            classes:
+                model: App\Entity\PriceList
+                form: App\Form\Type\PriceListType
+        app.notification:
+            classes:
+                model: App\Entity\Notification
+                factory: App\Factory\NotificationFactory
+                controller: App\Controller\NotificationController
+        app.topic:
+            classes:
+                model: App\Entity\Topic
+                factory: App\Factory\TopicFactory
+                controller: App\Controller\TopicController
+                repository: App\Repository\TopicRepository
+                form:  App\Form\Type\TopicType
+        app.post:
+            classes:
+                model: App\Entity\Post
+                factory: App\Factory\PostFactory
+                repository: App\Repository\PostRepository
+                controller: App\Controller\PostController
+                form: App\Form\Type\PostType
+        app.product_variant_image:
+            classes:
+                model: App\Entity\ProductVariantImage
+                form: App\Form\Type\ProductVariantImageType

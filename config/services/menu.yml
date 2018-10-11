@@ -1,0 +1,16 @@
+services:
+    app.menu_builder:
+        class: App\Menu\AdminMenuBuilder
+        arguments: ["@knp_menu.factory", "@security.authorization_checker"]
+
+    app.admin_menu:
+        class: Knp\Menu\MenuItem # the service definition requires setting the class
+        factory: ["@app.menu_builder", createMenu]
+        tags:
+            - { name: knp_menu.menu, alias: app.admin.main } # The alias is what is used to retrieve the menu
+
+    app.backend.menu_builder.product_form:
+        class: App\Menu\ProductMenuBuilder
+        arguments: ["@knp_menu.factory"]
+        tags:
+            - { name: knp_menu.menu_builder, method: createMenu, alias: app.backend.product_form }

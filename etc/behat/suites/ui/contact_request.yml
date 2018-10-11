@@ -3,8 +3,8 @@ default:
         ui_contact_request:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
-                - AppBundle\Behat\UtilsContext
-                - AppBundle\Behat\UserContext
-                - AppBundle\Behat\ContactRequestContext
+                - App\Behat\UtilsContext
+                - App\Behat\UserContext
+                - App\Behat\ContactRequestContext
             filters:
                 tags: "@contactRequest && @ui"

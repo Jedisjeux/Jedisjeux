@@ -1,0 +1,14 @@
+app_backend_product_list:
+    resource: |
+        alias: app.product_list
+        section: backend
+        except: ['show', 'create']
+        redirect: update
+        grid: app_backend_product_list
+        vars:
+            all:
+                subheader: app.ui.manage_product_lists
+            index:
+                icon: list
+        templates: backend/crud
+    type: sylius.resource

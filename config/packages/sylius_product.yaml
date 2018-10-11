@@ -1,0 +1,22 @@
+sylius_product:
+    resources:
+        product:
+            classes:
+                model: App\Entity\Product
+                #factory: App\Factory\ProductFactory
+                repository: App\Repository\ProductRepository
+                controller: App\Controller\ProductController
+                form: App\Form\Type\ProductType
+            translation:
+                classes:
+                    model: App\Entity\ProductTranslation
+        product_variant:
+            classes:
+                model: App\Entity\ProductVariant
+                #factory: Sylius\Component\Product\Factory\ProductVariantFactory
+                controller: App\Controller\ProductVariantController
+                form: App\Form\Type\ProductVariantType
+                repository: Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductVariantRepository
+#            translation:
+#                classes:
+#                    model: App\Entity\ProductVariantTranslation

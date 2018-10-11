@@ -3,9 +3,9 @@ default:
         ui_dealer_price:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
-                - AppBundle\Behat\UtilsContext
-                - AppBundle\Behat\UserContext
-                - AppBundle\Behat\DealerContext
-                - AppBundle\Behat\DealerPriceContext
+                - App\Behat\UtilsContext
+                - App\Behat\UserContext
+                - App\Behat\DealerContext
+                - App\Behat\DealerPriceContext
             filters:
                 tags: "@dealerPrice && @ui"

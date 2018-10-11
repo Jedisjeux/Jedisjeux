@@ -13,6 +13,7 @@ commands=(
     test-phpspec
     test-phpstan
     test-phpunit
+    test-installer
     test-fixtures
     test-behat-without-javascript
     update-behat-with-old-config

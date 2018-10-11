@@ -1,0 +1,110 @@
+{% import _self as self %}
+{% import 'macro/buttons.html.twig' as buttons %}
+{% import 'macro/image.html.twig' as images %}
+
+{% macro show_block(block) %}
+    {% import _self as self %}
+
+    {% if block.title is not null %}
+        <h3>{{ block.title }}</h3>
+        <div class="separator-2"></div>
+    {% endif %}
+    {% if block.image is not null %}
+        {{ self.show_block_image(block.image, block.imagePosition) }}
+    {% endif %}
+    {{ block.body|raw }}
+    <div class="clearfix"></div>
+{% endmacro %}
+
+{% macro show_block_image(image, position) %}
+    {% import 'macro/image.html.twig' as images %}
+
+    {% set positionClass = null %}
+
+    {% if position is constant('App\\Entity\\Block::POSITION_LEFT') %}
+        {% set positionClass = 'pull-left' %}
+    {% elseif position is constant('App\\Entity\\Block::POSITION_RIGHT') %}
+        {% set positionClass = 'pull-right' %}
+    {% endif %}
+
+    <div class="overlay-container {% if positionClass is not null %}col-sm-5 {{ positionClass }}{% endif %}">
+        {{ images.render(image.webPath, 'full',image.label) }}
+        <a class="overlay-link popup-img"
+           href="{{ image.webPath | imagine_filter(filter|default('full')) }}"
+           title="{{ image.label }}"><i class="fa fa-search-plus"></i></a>
+        <p><em>{{ image.label }}</em></p>
+    </div>
+{% endmacro %}
+
+<!-- main-container start -->
+<!-- ================ -->
+<section class="main-container">
+
+    <div class="container">
+        <div class="row">
+
+            <!-- main start -->
+            <!-- ================ -->
+            <div class="main col-lg-8">
+
+                <!-- page-title start -->
+                <!-- ================ -->
+                <h1 class="page-title">{{ article.title }}</h1>
+                <!-- page-title end -->
+
+                <!-- blogpost start -->
+                <!-- ================ -->
+                <article class="blogpost full">
+                    <header>
+                        <div class="post-info mb-4">
+                                <span class="post-date">
+                                  <i class="fa fa-calendar-o pr-1"></i> {{ article.publishStartDate|localizeddate('medium', 'none') }}
+                                </span>
+                            <span class="submitted"><i class="fa fa-user pr-1 pl-1"></i> by <a href="#">{{ article.author }}</a></span>
+                            <span class="comments"><i class="fa fa-comments-o pl-1 pr-1"></i> <a href="#">{{ article.topic is not null ? article.topic.postCount : 0 }} comments</a></span>
+                        </div>
+                    </header>
+                    <div class="blogpost-content">
+                        <big>
+                            {{ article.shortDescription|raw }}
+                        </big>
+
+                        {% for block in article.blocks %}
+                            {{ self.show_block(block) }}
+                        {% endfor %}
+                    </div>
+                    <footer class="clearfix">
+                        {% if article.mainTaxon is not null %}
+                            <div class="tags pull-left">
+                                <i class="fa fa-tags pr-1"></i>
+                                <a href="{{ path('app_frontend_article_index_by_taxon', { 'slug': article.mainTaxon.slug }) }}">{{ article.mainTaxon.name }}
+                                </a>
+                            </div>
+                        {% endif %}
+                        {#<div class="link pull-right">#}
+                            {#<ul class="social-links circle small colored clearfix margin-clear text-right animated-effect-1">#}
+                                {#<li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>#}
+                                {#<li class="googleplus"><a href="#"><i class="fa fa-google-plus"></i></a></li>#}
+                                {#<li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>#}
+                            {#</ul>#}
+                        {#</div>#}
+                    </footer>
+                </article>
+                <!-- blogpost end -->
+
+
+                {% include 'frontend/article/show/_reviews.html.twig' %}
+
+                {{ buttons.btn(path('app_frontend_article_post_create', {'articleSlug' : article.slug}), 'app.ui.react_on_this_article', null, 'reply', 'btn-default btn-lg') }}
+
+                {% include 'frontend/article/show/_comments.html.twig' %}
+
+            </div>
+            <!-- main end -->
+
+            {% include 'frontend/article/show/_sidebar.html.twig' %}
+
+        </div>
+    </div>
+</section>
+<!-- main-container end -->

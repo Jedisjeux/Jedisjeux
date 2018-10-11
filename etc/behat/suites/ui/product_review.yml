@@ -3,9 +3,9 @@ default:
         ui_product_review:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
-                - AppBundle\Behat\UtilsContext
-                - AppBundle\Behat\UserContext
-                - AppBundle\Behat\ProductContext
-                - AppBundle\Behat\ProductReviewContext
+                - App\Behat\UtilsContext
+                - App\Behat\UserContext
+                - App\Behat\ProductContext
+                - App\Behat\ProductReviewContext
             filters:
                 tags: "@productReview && @ui"

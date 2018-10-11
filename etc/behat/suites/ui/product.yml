@@ -3,10 +3,10 @@ default:
         ui_product:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
-                - AppBundle\Behat\UtilsContext
-                - AppBundle\Behat\UserContext
-                - AppBundle\Behat\TaxonContext
-                - AppBundle\Behat\ProductContext
-                - AppBundle\Behat\NotificationContext
+                - App\Behat\UtilsContext
+                - App\Behat\UserContext
+                - App\Behat\TaxonContext
+                - App\Behat\ProductContext
+                - App\Behat\NotificationContext
             filters:
                 tags: "@product && @ui"

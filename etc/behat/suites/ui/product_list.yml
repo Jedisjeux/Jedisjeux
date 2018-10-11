@@ -3,10 +3,10 @@ default:
         ui_product_list:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
-                - AppBundle\Behat\UtilsContext
-                - AppBundle\Behat\UserContext
-                - AppBundle\Behat\TaxonContext
-                - AppBundle\Behat\ProductContext
-                - AppBundle\Behat\ProductListContext
+                - App\Behat\UtilsContext
+                - App\Behat\UserContext
+                - App\Behat\TaxonContext
+                - App\Behat\ProductContext
+                - App\Behat\ProductListContext
             filters:
                 tags: "@productList && @ui"

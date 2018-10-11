@@ -1,4 +1,4 @@
-AppBundle\Entity\User:
+App\Entity\User:
     user_{Oliver, Roy, Thea}:
         plainPassword: '123pa$$word'
         roles: [ROLE_USER]
@@ -7,7 +7,7 @@ AppBundle\Entity\User:
         username: <current()>
         usernameCanonical: <current()>
 
-AppBundle\Entity\Customer:
+App\Entity\Customer:
     customer_{Oliver, Roy, Thea, Barry, Joe}:
         firstName: <current()>
         lastName: Doe

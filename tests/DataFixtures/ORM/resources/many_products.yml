@@ -1,9 +1,9 @@
-AppBundle\Entity\ProductVariant:
+App\Entity\ProductVariant:
     productVariant{4..22}:
         code: 'product_<current()>'
         product: "@product<current()>"
 
-AppBundle\Entity\Product:
+App\Entity\Product:
     product{4..22}:
          fallbackLocale: en_US
          currentLocale: en_US

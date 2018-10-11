@@ -1,0 +1,53 @@
+<?php
+
+/*
+ * This file is part of Jedisjeux.
+ *
+ * (c) Loïc Frémont
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace App\Grid\Filter;
+
+use Sylius\Component\Grid\Data\DataSourceInterface;
+use Sylius\Component\Grid\Filtering\FilterInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+/**
+ * @author Loïc Frémont <loic@mobizel.com>
+ */
+class CommentFilter implements FilterInterface
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function apply(DataSourceInterface $dataSource, string $name, $data, array $options = array()): void
+    {
+        // Your filtering logic. DataSource is kind of query builder.
+        // $data['value'] contains the submitted value!
+
+        if (empty($data)) {
+            return;
+        }
+
+        if ('all' === $data) {
+            return;
+        }
+
+        if ('with' === $data) {
+            $dataSource->restrict($dataSource->getExpressionBuilder()->isNotNull('topic'));
+        } else {
+            $dataSource->restrict($dataSource->getExpressionBuilder()->isNull('topic'));
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix(): string
+    {
+        return 'app_comment_filter';
+    }
+}

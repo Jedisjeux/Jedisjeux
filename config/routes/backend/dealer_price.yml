@@ -1,0 +1,13 @@
+app_backend_dealer_price:
+    resource: |
+        alias: app.dealer_price
+        section: backend
+        templates: backend/crud
+        redirect: index
+        grid: app_backend_dealer_price
+        vars:
+            all:
+                subheader: app.ui.manage_dealer_prices
+            index:
+                icon: euro
+    type: sylius.resource

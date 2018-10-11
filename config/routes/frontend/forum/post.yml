@@ -1,0 +1,66 @@
+app_frontend_post:
+    resource: |
+        alias: app.post
+        section: frontend
+        only: ['index', 'create']
+        templates: :frontend/post
+    type: sylius.resource
+
+app_frontend_post_update:
+    methods: [GET, PUT]
+    path: /posts/{id}/edit
+    defaults:
+        _controller: app.controller.post:updateAction
+        _sylius:
+            section: frontend
+            repository:
+                method: findOneBy
+                arguments: [{id: $id, author: expr:service('app.context.customer').getCustomer()}]
+            redirect:
+                route: app_frontend_post_index_by_topic
+                parameters: { topicId: resource.topic.id }
+            template: frontend/post/update.html.twig
+
+app_frontend_post_delete:
+    methods: [DELETE]
+    path: /posts/{id}
+    defaults:
+        _controller: app.controller.post:deleteAction
+        _sylius:
+            section: frontend
+            repository:
+                method: findOneBy
+                arguments: [{id: $id, author: expr:service('app.context.customer').getCustomer()}]
+            redirect: referer
+
+app_frontend_post_index_by_topic:
+    methods: [GET]
+    path: /topics/{topicId}/posts/
+    defaults:
+        _controller: app.controller.post:indexByTopicAction
+        _sylius:
+            section: frontend
+            paginate: 10
+            filterable: true
+            criteria:
+                topic: $topicId
+            sorting:
+                createdAt: asc
+            template: frontend/post/index.html.twig
+
+app_frontend_post_create_by_topic:
+    methods: [GET, POST]
+    path: /topics/{topicId}/posts/new
+    defaults:
+        _controller: app.controller.post:createAction
+        _sylius:
+            section: frontend
+            form: App\Form\Type\PostType
+            factory:
+                method: createForTopic
+                arguments:
+                    - expr:service('app.repository.topic').find($topicId)
+            template: frontend/post/create.html.twig
+            redirect:
+                route: app_frontend_post_index_by_topic
+                parameters: { topicId: $topicId, page: resource.topic.lastPageNumber }

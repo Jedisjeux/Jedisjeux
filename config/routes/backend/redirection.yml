@@ -1,0 +1,14 @@
+app_backend_redirection:
+    resource: |
+        alias: app.redirection
+        section: backend
+        except: ['show']
+        redirect: index
+        grid: app_backend_redirection
+        vars:
+            all:
+                subheader: app.ui.manage_redirections
+            index:
+                icon: exchange
+        templates: backend/crud
+    type: sylius.resource

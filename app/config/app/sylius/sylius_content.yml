@@ -1,9 +1,0 @@
-sylius_content:
-    driver: doctrine/phpcr-odm
-    resources:
-        static_content:
-            classes:
-                repository: AppBundle\Repository\StaticContentRepository
-                form:
-                    default: AppBundle\Form\Type\StaticContentType
-                    choice: Sylius\Bundle\ContentBundle\Form\Type\StaticContentChoiceType

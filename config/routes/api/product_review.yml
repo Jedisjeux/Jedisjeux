@@ -1,0 +1,23 @@
+sylius_api_product_review_rating_create:
+    path: /products/{productId}/ratings/
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.product_review:createAction
+        _sylius:
+            form: App\Form\Type\RatingType
+            factory:
+                method: createForSubjectWithReviewer
+                arguments:
+                    - "expr:notFoundOnNull(service('sylius.repository.product').findOneById($productId))"
+                    - "expr:service('sylius.context.customer').getCustomer()"
+
+sylius_api_product_review_rating_update:
+    path: /products/{productId}/ratings/
+    methods: [PUT, PATCH]
+    defaults:
+        _controller: sylius.controller.product_review:updateAction
+        _sylius:
+            form: App\Form\Type\RatingType
+            repository:
+                method: findOneBy
+                arguments: [{reviewSubject: $productId, author: expr:service('app.context.customer').getCustomer()}]

@@ -1,0 +1,39 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+#    service_name:
+#        class: App\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+      app.behat.page.frontend.topic.index:
+          class: App\Behat\Page\Frontend\Topic\IndexPage
+          parent: app.behat.symfony_page
+          public: false
+
+      app.behat.page.frontend.topic.index_by_taxon:
+          class: App\Behat\Page\Frontend\Topic\IndexByTaxonPage
+          parent: app.behat.symfony_page
+          public: false
+
+      app.behat.page.frontend.topic.create:
+          class: App\Behat\Page\Frontend\Topic\CreatePage
+          parent: app.behat.symfony_page
+          public: false
+
+      app.behat.page.frontend.topic.create_for_taxon:
+          class: App\Behat\Page\Frontend\Topic\CreateForTaxonPage
+          parent: app.behat.symfony_page
+          public: false
+
+      app.behat.page.frontend.topic.update:
+          class: App\Behat\Page\Frontend\Topic\UpdatePage
+          parent: app.behat.symfony_page
+          public: false
+
+      app.behat.page.frontend.topic.show:
+          class: App\Behat\Page\Frontend\Topic\ShowPage
+          parent: app.behat.symfony_page
+          public: false

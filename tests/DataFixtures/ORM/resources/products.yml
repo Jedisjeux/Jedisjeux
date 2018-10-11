@@ -1,4 +1,4 @@
-AppBundle\Entity\ProductTranslation:
+App\Entity\ProductTranslation:
     productTranslation1:
         locale: 'en_US'
         name: 'Puerto Rico'
@@ -21,7 +21,7 @@ AppBundle\Entity\ProductTranslation:
         description: <paragraph(5)>
         translatable: "@product3"
 
-AppBundle\Entity\ProductVariant:
+App\Entity\ProductVariant:
     productVariant1:
         code: 'product_1'
         product: "@product1"
@@ -32,7 +32,7 @@ AppBundle\Entity\ProductVariant:
         code: 'product_3'
         product: "@product3"
 
-AppBundle\Entity\Product:
+App\Entity\Product:
     product1:
         currentLocale: 'en_US'
         code: 'product_1'

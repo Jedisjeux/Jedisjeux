@@ -3,10 +3,10 @@ default:
         ui_post:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
-                - AppBundle\Behat\UtilsContext
-                - AppBundle\Behat\UserContext
-                - AppBundle\Behat\TopicContext
-                - AppBundle\Behat\TaxonContext
-                - AppBundle\Behat\PostContext
+                - App\Behat\UtilsContext
+                - App\Behat\UserContext
+                - App\Behat\TopicContext
+                - App\Behat\TaxonContext
+                - App\Behat\PostContext
             filters:
                 tags: "@post && @ui"

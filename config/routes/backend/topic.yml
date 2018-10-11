@@ -1,0 +1,16 @@
+app_backend_topic:
+    resource: |
+        alias: app.topic
+        section: backend
+        except: ['show']
+        redirect: update
+        grid: app_backend_topic
+        vars:
+            all:
+                subheader: app.ui.manage_topics
+                templates:
+                    form: backend/topic/_form.html.twig
+            index:
+                icon: comment
+        templates: backend/crud
+    type: sylius.resource

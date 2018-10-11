@@ -1,0 +1,7 @@
+sylius_customer:
+    resources:
+        customer:
+            classes:
+                model: App\Entity\Customer
+                repository: App\Repository\CustomerRepository
+                form: App\Form\Type\Customer\CustomerType

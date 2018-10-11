@@ -1,7 +1,0 @@
-app_api_topic_view_count_update:
-    methods: [PUT, PATCH]
-    path: /topics/{id}/view-count
-    defaults:
-        _controller: app.controller.topic:updateAction
-        _sylius:
-            form: AppBundle\Form\Type\TopicViewCountType

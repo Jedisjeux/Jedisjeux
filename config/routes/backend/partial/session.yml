@@ -1,0 +1,11 @@
+app_backend_partial_session_count_per_day:
+    methods: [GET]
+    path: /count-per-day/
+    defaults:
+        _controller: App\Controller\SessionController::sessionCountPerDay
+
+app_backend_partial_session_count_per_month:
+    methods: [GET]
+    path: /count-per-month/
+    defaults:
+        _controller: App\Controller\SessionController::sessionCountPerMonth

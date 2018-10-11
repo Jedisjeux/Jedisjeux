@@ -1,0 +1,9 @@
+{% extends 'frontend/layout.html.twig' %}
+
+{% set pageTitle %}
+    {{ 'app.ui.access_denied'|trans }}
+{% endset %}
+
+{% block content %}
+    {% include 'frontend/error/_banner.html.twig' with { 'description': 'text.error.403' } %}
+{% endblock %}

@@ -1,0 +1,27 @@
+app:
+    resource: '../src/Controller/'
+    type: annotation
+    prefix: /
+
+frontend:
+    resource: "routes/frontend.yml"
+
+app_backend:
+    resource: "routes/backend.yml"
+    prefix: /admin
+
+app_api:
+    resource: "routes/api.yml"
+    prefix: /api
+    defaults:
+        _format: json
+
+partial:
+    resource: "routes/partial.yml"
+    prefix: /_partial
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.yaml"

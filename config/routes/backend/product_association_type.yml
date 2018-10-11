@@ -1,0 +1,16 @@
+sylius_backend_product_association_type:
+    resource: |
+        alias: sylius.product_association_type
+        section: backend
+        except: ['show']
+        redirect: update
+        grid: sylius_backend_product_association_type
+        vars:
+            all:
+                subheader: sylius.ui.manage_association_types_of_your_products
+                templates:
+                    form: backend/product_association_type/_form.html.twig
+            index:
+                icon: tasks
+        templates: backend/crud
+    type: sylius.resource
