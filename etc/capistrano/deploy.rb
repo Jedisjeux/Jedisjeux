@@ -1,19 +1,18 @@
 # config valid only for current version of Capistrano
-lock '3.8.0'
+lock '3.11.0'
 
 set :symfony_directory_structure, 3
 set :sensio_distribution_version, 5
 
 # symfony-standard edition directories
-set :app_path, "app"
-set :web_path, "web"
+set :config_path, "config"
+set :web_path, "public"
 set :var_path, "var"
 set :bin_path, "bin"
 
 # The next 3 settings are lazily evaluated from the above values, so take care
 # when modifying them
-set :app_config_path, "app/config"
-set :log_path, "var/logs"
+set :log_path, "var/log"
 set :cache_path, "var/cache"
 
 set :symfony_console_path, "bin/console"
@@ -23,12 +22,12 @@ set :symfony_console_flags, "--no-debug"
 set :controllers_to_clear, ["app_*.php"]
 
 # asset management
-set :assets_install_path, "web"
+set :assets_install_path, "public"
 set :assets_install_flags,  '--symlink'
 
 # Share files/directories between releases
 set :linked_files, ["web/jedisjeux.xml"]
-set :linked_dirs, ["var/logs", "var/sessions", "web/uploads", "web/media"]
+set :linked_dirs, ["var/log", "var/sessions", "public/uploads", "public/media"]
 
 set :application, 'Jedisjeux'
 set :repo_url, 'https://github.com/Jedisjeux/Jedisjeux.git'
@@ -50,17 +49,23 @@ set :deploy_to, '/home/jedisjeux/'
 # Default value for :pty is false
 set :pty, true
 
-append :linked_files, fetch(:app_config_path) + '/parameters.yml', fetch(:web_path) + '/robots.txt', fetch(:web_path) + '/.htaccess'
-append :linked_dirs, fetch(:web_path) + '/uploaded', fetch(:web_path) + '/uploads', fetch(:web_path) + '/media'
+append :linked_files, fetch(:web_path) + '/robots.txt'
+append :linked_dirs, fetch(:web_path) + '/uploads', fetch(:web_path) + '/media'
 
-append :file_permissions_users, 'apache'
-set :file_permissions_paths, ["var", "web/uploads"]
+set :file_permissions_paths, ["var", "public/uploads"]
+set :file_permissions_users, ["jedisjeux"]
 
 set :permission_method,   :acl
 set :use_set_permissions, true
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
+
+# Add extra environment variables:
+# set :default_env, {
+#  'APP_ENV' => 'prod',
+#  'APP_SECRET' => 'foobar'
+# }
 
 set :keep_releases, 3
 
@@ -82,6 +87,8 @@ namespace :deploy do
     invoke 'symfony:console', 'doctrine:migrations:migrate', '--no-interaction', 'db'
   end
 end
+
+before "deploy:updated", "deploy:set_permissions:acl"
 
 after 'deploy:updated', :build_assets do
     on roles(:web) do
