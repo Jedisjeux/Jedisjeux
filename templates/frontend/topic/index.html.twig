@@ -1,5 +1,7 @@
 {% extends 'frontend/layout.html.twig' %}
 
+{% from 'macro/pagination.html.twig' import simple as pagination %}
+
 {% set pageTitle = 'app.ui.forum'| trans %}
 
 {% block content %}
@@ -24,6 +26,10 @@
                     {% for topic in topics.data %}
                         {% include 'frontend/topic/_single.html.twig' %}
                     {% endfor %}
+
+                    <!-- pagination start -->
+                    {{ pagination(topics.data) }}
+                    <!-- pagination end -->
                 </div>
                 <!-- main end -->
 

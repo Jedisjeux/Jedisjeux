@@ -11,7 +11,7 @@
             <div class="overlay-container d-flex justify-content-center">
                 {{ images.render(avatarPath, 'thumbnail_XL', topic.author, 'rounded-circle') }}
                 <div class="overlay-to-top">
-                    <p class="small margin-clear"><em>Some info <br> Lorem ipsum dolor sit</em></p>
+                    <p class="small margin-clear"><em>{{ game_play.author }}</em></p>
                 </div>
             </div>
         </div>
@@ -27,8 +27,9 @@
                     <p class="margin-clear">{{ topic.firstPost.body|truncate(250, true)|striptags|raw }}</p>
                 {% endif %}
                 <br>
-                <a href="{{ gamePlayPath }}" class="btn btn-default btn-sm margin-clear">{{ 'sylius.ui.view_more'|trans }}<i
-                            class="fa fa-arrow-right pl-10"></i></a>
+                <a href="{{ gamePlayPath }}"
+                   class="btn btn-default btn-sm margin-clear">{{ 'sylius.ui.view_more'|trans }}<i class="fa fa-arrow-right pl-10"></i>
+                </a>
             </div>
         </div>
     </div>
