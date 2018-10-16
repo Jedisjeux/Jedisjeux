@@ -36,7 +36,9 @@
                         </a>
                     </p>
                 {% endif %}
-                <p class="margin-clear">{{ topic.mainPost.body|truncate(500, true)|striptags|raw }}</p>
+                {% if topic.mainPost is not null %}
+                    <p class="margin-clear">{{ topic.mainPost.body|truncate(500, true)|striptags|raw }}</p>
+                {% endif %}
                 <br>
                 <a href="{{ getPath(topic) }}" class="btn {% if dark|default(false) %}btn-gray-transparent btn-animated{% else %}btn-default btn-sm{% endif %} margin-clear">{{ 'sylius.ui.view_more'|trans }}<i
                             class="fa fa-arrow-right pl-10"></i></a>
