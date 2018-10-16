@@ -1,7 +1,3 @@
-/web/bundles/
-/web/behat/*
-/app/bootstrap.php.cache
-
 /app/config/parameters.yml
 /app/config/*.local.yml
 
