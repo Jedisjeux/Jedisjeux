@@ -86,26 +86,18 @@
     "symfony/symfony": "*"
   },
   "scripts": {
-    "symfony-scripts": [
-      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-      "FOS\\CKEditorBundle\\Composer\\CKEditorScriptHandler::install",
-      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
-    ],
-    "post-install-cmd": [
-      "@symfony-scripts"
-    ],
-    "post-update-cmd": [
-      "@symfony-scripts"
-    ],
     "auto-scripts": {
       "cache:clear": "symfony-cmd",
+      "ckeditor:install --clear=drop": "symfony-cmd",
       "assets:install %PUBLIC_DIR%": "symfony-cmd",
       "security-checker security:check": "script"
-    }
+    },
+    "post-install-cmd": [
+      "@auto-scripts"
+    ],
+    "post-update-cmd": [
+      "@auto-scripts"
+    ]
   },
   "config": {
     "bin-dir": "bin",

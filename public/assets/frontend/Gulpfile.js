@@ -26,11 +26,13 @@ var paths = {
             nodeModulesPath + 'bootstrap/dist/js/bootstrap.bundle.js',
             nodeModulesPath + 'rater-jquery/rater.js',
             vendorUiPath + 'Resources/private/js/sylius-form-collection.js',
+            'plugins/bootstrap-notify/bootstrap-notify.js',
             'plugins/isotope/imagesloaded.pkgd.min.js',
             'plugins/isotope/isotope.pkgd.min.js',
             'plugins/magnific-popup/jquery.magnific-popup.min.js',
             'plugins/waypoints/jquery.waypoints.min.js',
             'plugins/waypoints/sticky.min.js',
+            'plugins/countdown/jquery.countdown.js',
             'plugins/countTo/jquery.countTo.js',
             'plugins/slick/slick.min.js',
             'js/**'
