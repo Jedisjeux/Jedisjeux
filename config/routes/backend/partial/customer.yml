@@ -5,7 +5,7 @@ sylius_backend_partial_customer_latest:
     path: /latest/{count}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.customer:indexAction
+        _controller: sylius.controller.customer::indexAction
         _sylius:
             repository:
                 method: findLatest

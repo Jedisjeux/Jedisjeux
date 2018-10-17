@@ -2,7 +2,7 @@ app_api_article_view_count_update:
     methods: [PUT, PATCH]
     path: /articles/{id}/view-count
     defaults:
-        _controller: app.controller.article:updateAction
+        _controller: app.controller.article::updateAction
         _sylius:
             form: App\Form\Type\ArticleViewCountType
 
@@ -10,7 +10,7 @@ app_api_article_create:
     methods: [POST]
     path: /articles/
     defaults:
-        _controller: app.controller.article:createAction
+        _controller: app.controller.article::createAction
         _sylius:
             factory:
                 #TODO createWithFakeData

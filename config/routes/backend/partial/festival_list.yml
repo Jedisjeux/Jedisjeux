@@ -2,7 +2,7 @@ app_backend_partial_festival_list_show:
     path: /{id}
     methods: [GET]
     defaults:
-        _controller: app.controller.festival_list:showAction
+        _controller: app.controller.festival_list::showAction
         _sylius:
             template: $template
             vars: $vars

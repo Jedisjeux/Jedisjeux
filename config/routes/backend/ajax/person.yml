@@ -9,7 +9,7 @@ app_admin_ajax_person_by_name_phrase:
     path: /search
     methods: [GET]
     defaults:
-        _controller: app.controller.person:indexAction
+        _controller: app.controller.person::indexAction
         _sylius:
             serialization_groups: [Autocomplete]
             repository:

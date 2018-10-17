@@ -2,7 +2,7 @@ app_frontend_topic_create:
     methods: [GET, POST]
     path: /topics/new
     defaults:
-        _controller: app.controller.topic:createAction
+        _controller: app.controller.topic::createAction
         _sylius:
             template: frontend/topic/create.html.twig
             redirect:
@@ -13,7 +13,7 @@ app_frontend_topic_create_for_taxon:
      methods: [GET, POST]
      path: /topics/{taxonId}/new
      defaults:
-         _controller: app.controller.topic:createAction
+         _controller: app.controller.topic::createAction
          _sylius:
             template: frontend/topic/create.html.twig
             factory:
@@ -28,7 +28,7 @@ app_frontend_topic_index:
     methods: [GET]
     path: /topics/
     defaults:
-        _controller: app.controller.topic:indexWithTaxonsAction
+        _controller: app.controller.topic::indexWithTaxonsAction
         _sylius:
             grid: app_frontend_topic
             paginate: 10
@@ -38,7 +38,7 @@ app_frontend_topic_update:
     methods: [GET, PUT]
     path: /topics/{id}/edit
     defaults:
-        _controller: app.controller.topic:updateAction
+        _controller: app.controller.topic::updateAction
         _sylius:
             repository:
                 method: findOneBy
