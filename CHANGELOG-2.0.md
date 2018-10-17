@@ -1,5 +1,13 @@
 ## Change Log
 
+### v2.0.6 (2018/10/17)
+- [#309](https://github.com/Jedisjeux/Jedisjeux/pull/309) fix notify (@loic425)
+- [#308](https://github.com/Jedisjeux/Jedisjeux/pull/308) fix js errors (@loic425)
+- [#307](https://github.com/Jedisjeux/Jedisjeux/pull/307) fix capistrano config for symfony 4 (@loic425)
+- [#306](https://github.com/Jedisjeux/Jedisjeux/pull/306) some quick fixes (@loic425)
+- [#305](https://github.com/Jedisjeux/Jedisjeux/pull/305) init flex and directory structure (@loic425)
+- [#304](https://github.com/Jedisjeux/Jedisjeux/pull/304) fix sylius context customer (@loic425)
+
 ### v2.0.5 (2018/10/09)
 - [#302](https://github.com/Jedisjeux/Jedisjeux/pull/302) fix imagine directory (@loic425)
 - [#301](https://github.com/Jedisjeux/Jedisjeux/pull/301) fix ckeditor install (@loic425)
