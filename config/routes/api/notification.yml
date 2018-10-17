@@ -14,7 +14,7 @@ app_api_notification_index:
     methods: [GET]
     path: /notifications/
     defaults:
-        _controller: app.controller.notification:indexAction
+        _controller: app.controller.notification::indexAction
         _sylius:
             repository:
                 method: findBy

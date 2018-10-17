@@ -2,7 +2,7 @@ sylius_api_product_review_rating_create:
     path: /products/{productId}/ratings/
     methods: [POST]
     defaults:
-        _controller: sylius.controller.product_review:createAction
+        _controller: sylius.controller.product_review::createAction
         _sylius:
             form: App\Form\Type\RatingType
             factory:
@@ -15,7 +15,7 @@ sylius_api_product_review_rating_update:
     path: /products/{productId}/ratings/
     methods: [PUT, PATCH]
     defaults:
-        _controller: sylius.controller.product_review:updateAction
+        _controller: sylius.controller.product_review::updateAction
         _sylius:
             form: App\Form\Type\RatingType
             repository:

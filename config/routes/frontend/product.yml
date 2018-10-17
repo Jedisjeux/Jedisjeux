@@ -10,7 +10,7 @@ sylius_frontend_product_index:
     methods: [GET]
     path: /jeux-de-societe/
     defaults:
-        _controller: sylius.controller.product:indexWithTaxonsAction
+        _controller: sylius.controller.product::indexWithTaxonsAction
         _sylius:
             paginate: 16
             grid: sylius_frontend_product
@@ -27,7 +27,7 @@ sylius_frontend_product_index_by_person:
     methods: [GET]
     path: /jeux-de-societe/personnes/{slug}
     defaults:
-        _controller: sylius.controller.product:indexByPersonAction
+        _controller: sylius.controller.product::indexByPersonAction
         _sylius:
             grid: sylius_frontend_product_from_person
             paginate: 16
@@ -37,7 +37,7 @@ sylius_frontend_product_index_by_taxon:
     methods: [GET]
     path: /jeux-de-societe/{slug}
     defaults:
-        _controller: sylius.controller.product:indexByTaxonAction
+        _controller: sylius.controller.product::indexByTaxonAction
         _sylius:
             grid: sylius_frontend_product_from_taxon
             paginate: 16
@@ -51,7 +51,7 @@ sylius_frontend_product_show:
     methods: [GET]
     path: /jeu-de-societe/{slug}
     defaults:
-        _controller: sylius.controller.product:showAction
+        _controller: sylius.controller.product::showAction
         _sylius:
             repository:
                 method: findOneBySlug

@@ -23,7 +23,7 @@ app_backend_article_per_product_index:
     methods: [GET]
     path: /products/{productId}/articles/
     defaults:
-        _controller: app.controller.article:indexAction
+        _controller: app.controller.article::indexAction
         _sylius:
             section: backend
             template: backend/crud/index.html.twig
@@ -33,7 +33,7 @@ app_backend_article_create_for_product:
     methods: [GET, POST]
     path: /articles/products/{productId}/new
     defaults:
-        _controller: app.controller.article:createAction
+        _controller: app.controller.article::createAction
         _sylius:
             section: backend
             factory:
@@ -53,7 +53,7 @@ app_backend_article_create_for_product_review:
     methods: [GET, POST]
     path: /articles/reviews/{productId}/new
     defaults:
-        _controller: app.controller.article:createAction
+        _controller: app.controller.article::createAction
         _sylius:
             section: backend
             factory:
