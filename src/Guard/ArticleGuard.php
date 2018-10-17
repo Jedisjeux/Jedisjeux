@@ -11,7 +11,7 @@
 
 namespace App\Guard;
 
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -19,16 +19,16 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 class ArticleGuard
 {
     /**
-     * @var AuthorizationChecker
+     * @var AuthorizationCheckerInterface
      */
     protected $authorizationChecker;
 
     /**
      * ArticleGuard constructor.
      *
-     * @param AuthorizationChecker $authorizationChecker
+     * @param AuthorizationCheckerInterface $authorizationChecker
      */
-    public function __construct(AuthorizationChecker $authorizationChecker)
+    public function __construct(AuthorizationCheckerInterface $authorizationChecker)
     {
         $this->authorizationChecker = $authorizationChecker;
     }
