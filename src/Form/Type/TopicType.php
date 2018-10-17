@@ -17,7 +17,7 @@ use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -25,14 +25,14 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 class TopicType extends AbstractType
 {
     /**
-     * @var AuthorizationChecker
+     * @var AuthorizationCheckerInterface
      */
     protected $authorizationChecker;
 
     /**
      * @param CustomerContextInterface $authorizationChecker
      */
-    public function setAuthorizationChecker($authorizationChecker)
+    public function setAuthorizationChecker(AuthorizationCheckerInterface $authorizationChecker)
     {
         $this->authorizationChecker = $authorizationChecker;
     }
