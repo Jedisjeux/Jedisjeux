@@ -10,7 +10,7 @@ sylius_admin_user_index:
     methods: [GET]
     path: /users/
     defaults:
-      _controller: sylius.controller.user:indexAction
+      _controller: sylius.controller.user::indexAction
       _sylius:
         template: backend/user/index.html.twig
         filterable: true

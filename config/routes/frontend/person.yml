@@ -2,7 +2,7 @@ app_frontend_person_index:
     methods: [GET]
     path: /ludographies/
     defaults:
-      _controller: app.controller.person:indexWithTaxonsAction
+      _controller: app.controller.person::indexWithTaxonsAction
       _sylius:
         template: frontend/person/index.html.twig
         section: frontend
@@ -15,7 +15,7 @@ app_frontend_person_index_by_taxon:
     methods: [GET]
     path: /ludographies/{slug}
     defaults:
-        _controller: app.controller.person:indexByTaxonAction
+        _controller: app.controller.person::indexByTaxonAction
         _sylius:
             template: frontend/person/indexByZone.html.twig
             section: frontend
@@ -30,6 +30,6 @@ app_frontend_person_show:
     methods: [GET]
     path: /ludographie/{slug}
     defaults:
-      _controller: app.controller.person:showAction
+      _controller: app.controller.person::showAction
       _sylius:
         template: frontend/person/show.html.twig

@@ -2,7 +2,7 @@ app_backend_partial_article_latest:
     path: /latest/{count}
     methods: [GET]
     defaults:
-        _controller: app.controller.article:indexAction
+        _controller: app.controller.article::indexAction
         _sylius:
             repository:
                 method: findLatest

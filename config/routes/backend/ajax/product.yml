@@ -8,7 +8,7 @@ sylius_admin_ajax_product_index:
     path: /
     methods: [GET]
     defaults:
-        _controller: sylius.controller.product:indexAction
+        _controller: sylius.controller.product::indexAction
         _sylius:
             grid: sylius_backend_product
             serialization_groups: [Default]
@@ -17,7 +17,7 @@ sylius_admin_ajax_product_by_name_phrase:
     path: /search
     methods: [GET]
     defaults:
-        _controller: sylius.controller.product:indexAction
+        _controller: sylius.controller.product::indexAction
         _sylius:
             serialization_groups: [Autocomplete]
             repository:
@@ -30,7 +30,7 @@ sylius_admin_ajax_product_by_code:
     path: /code
     methods: [GET]
     defaults:
-        _controller: sylius.controller.product:indexAction
+        _controller: sylius.controller.product::indexAction
         _sylius:
             serialization_groups: [Autocomplete]
             repository:

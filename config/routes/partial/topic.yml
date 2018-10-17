@@ -2,7 +2,7 @@ app_partial_topic_index:
     methods: [GET]
     path: /topics/
     defaults:
-        _controller: app.controller.topic:indexAction
+        _controller: app.controller.topic::indexAction
         _sylius:
             repository:
                 method: createFilterPaginator

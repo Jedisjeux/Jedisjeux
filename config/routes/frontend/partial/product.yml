@@ -2,7 +2,7 @@ sylius_partial_product_index:
     methods: [GET]
     path: /
     defaults:
-        _controller: sylius.controller.product:indexAction
+        _controller: sylius.controller.product::indexAction
         _sylius:
             grid: sylius_frontend_product
             template: $template
@@ -14,7 +14,7 @@ sylius_partial_product_status_show:
     methods: [GET]
     path: /{id}/statuses/
     defaults:
-        _controller: sylius.controller.product:showStatusAction
+        _controller: sylius.controller.product::showStatusAction
         _sylius:
             template: $template
     requirements:
@@ -24,7 +24,7 @@ sylius_frontend_partial_product_show_by_slug:
     path: /{slug}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.product:showAction
+        _controller: sylius.controller.product::showAction
         _sylius:
             repository:
                 method: findOneBySlug
@@ -36,7 +36,7 @@ sylius_frontend_partial_product_index_by_taxon:
     methods: [GET]
     path: /taxons/{slug}
     defaults:
-        _controller: sylius.controller.product:indexByTaxonAction
+        _controller: sylius.controller.product::indexByTaxonAction
         _sylius:
             grid: sylius_frontend_product_from_taxon
             template: $template
