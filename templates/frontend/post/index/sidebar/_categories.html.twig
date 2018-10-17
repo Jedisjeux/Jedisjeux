@@ -4,7 +4,7 @@
 <div class="separator-2"></div>
 <nav>
     <ul class="nav flex-column">
-        {{  render(url('sylius_partial_taxon_index_by_code', {
+        {{  render(url('sylius_frontend_partial_taxon_index_by_code', {
             'code': constant('App\\Entity\\Taxon::CODE_FORUM'),
             'currentSlug': currentTaxon is not null ? currentTaxon.slug : null,
             'template': 'frontend/taxon/_navListForTopics.html.twig'

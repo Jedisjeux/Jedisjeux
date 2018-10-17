@@ -9,7 +9,7 @@ app_api_product_list_index:
     methods: [GET]
     path: product-lists/
     defaults:
-        _controller: app.controller.product_list:indexAction
+        _controller: app.controller.product_list::indexAction
         _sylius:
             filterable: true
             repository:
@@ -22,7 +22,7 @@ app_api_product_list_by_product:
     methods: [GET]
     path: product-lists/products/{productId}
     defaults:
-        _controller: app.controller.product_list:indexAction
+        _controller: app.controller.product_list::indexAction
         _sylius:
             filterable: true
             repository:
@@ -36,7 +36,7 @@ app_api_product_list_add_product:
     methods: [POST]
     path: /product-lists/{code}/products/{productId}
     defaults:
-        _controller: app.controller.product_list:addProductAction
+        _controller: app.controller.product_list::addProductAction
         _sylius:
             repository:
                 method: findOneBy
@@ -48,7 +48,7 @@ app_api_product_list_remove_product:
     methods: [DELETE]
     path: /product-lists/{code}/products/{productId}
     defaults:
-        _controller: app.controller.product_list:removeProductAction
+        _controller: app.controller.product_list::removeProductAction
         _sylius:
             repository:
                 method: findOneBy

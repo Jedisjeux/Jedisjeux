@@ -5,7 +5,7 @@ app_frontend_article_index:
     methods: [GET]
     path: /articles/
     defaults:
-        _controller: app.controller.article:indexWithTaxonsAction
+        _controller: app.controller.article::indexWithTaxonsAction
         _sylius:
             grid: app_frontend_article
             paginate: 12
@@ -18,7 +18,7 @@ app_frontend_article_index_by_product:
     methods: [GET]
     path: /jeu-de-societe/{productSlug}/articles/
     defaults:
-        _controller: app.controller.article:indexWithTaxonsAction
+        _controller: app.controller.article::indexWithTaxonsAction
         _sylius:
             grid: app_frontend_article
             paginate: 12
@@ -31,7 +31,7 @@ app_frontend_article_index_by_taxon:
     methods: [GET]
     path: /articles/{slug}
     defaults:
-        _controller: app.controller.article:indexByTaxonAction
+        _controller: app.controller.article::indexByTaxonAction
         _sylius:
             grid: app_frontend_article
             paginate: 12
@@ -45,7 +45,7 @@ app_frontend_article_show:
     methods: [GET]
     path: /article/{slug}
     defaults:
-        _controller: app.controller.article:showWithTaxonsAction
+        _controller: app.controller.article::showWithTaxonsAction
         _sylius:
             repository:
                 method: findOneBySlug

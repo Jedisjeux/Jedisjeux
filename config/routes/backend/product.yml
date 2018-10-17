@@ -22,7 +22,7 @@ sylius_admin_product_create:
     methods: [GET, POST]
     path: /products/new
     defaults:
-        _controller: sylius.controller.product:createAction
+        _controller: sylius.controller.product::createAction
         _sylius:
             section: admin
             redirect: sylius_admin_product_update
@@ -37,7 +37,7 @@ sylius_admin_product_update_state:
     methods: [PATCH]
     path: /products/{id}/status/{transition}
     defaults:
-        _controller: sylius.controller.product:applyStateMachineTransitionAction
+        _controller: sylius.controller.product::applyStateMachineTransitionAction
         _sylius:
             section: admin
             state_machine:
@@ -50,7 +50,7 @@ sylius_admin_product_index:
     methods: [GET]
     path: /products/
     defaults:
-        _controller: sylius.controller.product:indexAction
+        _controller: sylius.controller.product::indexAction
         _sylius:
             section: admin
             template: backend/crud/index.html.twig
@@ -66,7 +66,7 @@ sylius_admin_product_from_bgg_new:
     methods: [GET, POST]
     path: /products/bgg/new
     defaults:
-        _controller: sylius.controller.product:createAction
+        _controller: sylius.controller.product::createAction
         _sylius:
             section: admin
             template: backend/crud/create.html.twig

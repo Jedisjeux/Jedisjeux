@@ -2,7 +2,7 @@ app_partial_game_play_index:
     methods: [GET]
     path: /game-plays/
     defaults:
-        _controller: app.controller.game_play:indexAction
+        _controller: app.controller.game_play::indexAction
         _sylius:
             grid: app_frontend_game_play
             template: $template

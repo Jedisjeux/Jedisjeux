@@ -12,3 +12,16 @@ sylius_frontend_partial_taxon_show_by_slug:
                     - "expr:service('sylius.context.locale').getLocaleCode()"
     requirements:
         slug: .+
+
+sylius_frontend_partial_taxon_index_by_code:
+    path: /{code}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.taxon::indexByCodeAction
+        _sylius:
+            template: $template
+            repository:
+                method: findChildrenAsTreeByRootCode
+                arguments: [$code, expr:service('security.authorization_checker').isGranted('ROLE_STAFF')]
+    requirements:
+        template: "[^?]+"

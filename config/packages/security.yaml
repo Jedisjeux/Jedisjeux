@@ -1,3 +1,7 @@
+parameters:
+    app.security.api_regex: "^/api"
+    app.security.app_regex: "^/(?!api/.*|api$|media/.*)[^/]++"
+
 security:
     providers:
         sylius_user_provider:
@@ -27,7 +31,7 @@ security:
 
     firewalls:
         api:
-            pattern: ^/api/
+            pattern: "%app.security.api_regex%/.*"
             provider: sylius_user_provider
             anonymous: true
             entry_point: app.security.api_entry_point
@@ -35,7 +39,7 @@ security:
 
         main:
             anonymous: true
-            pattern: /.*
+            pattern: "%app.security.app_regex%"
             provider: sylius_user_provider
             form_login:
                 success_handler: sylius.authentication.success_handler
@@ -60,9 +64,13 @@ security:
                target: app_homepage
             context: user
 
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
     access_control:
-        - { path: "^/_partial.*", role: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }
-        - { path: "^/_partial.*", role: ROLE_NO_ACCESS }
+        - { path: "%app.security.app_regex%/_partial", role: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }
+        - { path: "%app.security.app_regex%/_partial", role: ROLE_NO_ACCESS }
 
         - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }

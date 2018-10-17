@@ -6,7 +6,7 @@
                 <li>
                     <a href="{{ path('app_frontend_article_index') }}">Articles</a>
                     <ul>
-                        {{  render(url('sylius_partial_taxon_index_by_code', {
+                        {{  render(url('sylius_frontend_partial_taxon_index_by_code', {
                             'code': constant('App\\Entity\\Taxon::CODE_ARTICLE'),
                             'template': 'frontend/article/_taxonMenu.html.twig'
                         })) }}
@@ -15,7 +15,7 @@
                 <li>
                     <a href="{{ path('sylius_frontend_product_index') }}">{{ 'label.games'|trans }}</a>
                     <ul>
-                        {{  render(url('sylius_partial_taxon_index_by_code', {
+                        {{  render(url('sylius_frontend_partial_taxon_index_by_code', {
                             'code': constant('App\\Entity\\Taxon::CODE_TARGET_AUDIENCE'),
                             'template': 'frontend/game/_taxonMenu.html.twig'
                         })) }}

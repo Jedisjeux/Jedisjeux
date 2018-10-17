@@ -2,7 +2,7 @@ app_frontend_article_post_create:
     methods: [GET, POST]
     path: /article/{articleSlug}/posts/new
     defaults:
-        _controller: app.controller.post:createAction
+        _controller: app.controller.post::createAction
         _sylius:
             section: frontend
             factory:
@@ -18,7 +18,7 @@ app_frontend_article_post_update:
     methods: [GET, PUT]
     path: /article/{articleSlug}/posts/{id}/edit
     defaults:
-        _controller: app.controller.post:updateAction
+        _controller: app.controller.post::updateAction
         _sylius:
             section: frontend
             repository:

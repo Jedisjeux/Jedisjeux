@@ -12,7 +12,7 @@ sylius_backend_taxon_index_by_parent:
     path: /children/{id}/
     methods: [GET]
     defaults:
-        _controller: sylius.controller.taxon:indexAction
+        _controller: sylius.controller.taxon::indexAction
         _sylius:
             template: backend/crud/index.html.twig
             section: backend
@@ -22,7 +22,7 @@ sylius_backend_taxon_create_for_parent:
     path: /new/{id}
     methods: [GET, POST]
     defaults:
-        _controller: sylius.controller.taxon:createAction
+        _controller: sylius.controller.taxon::createAction
         _sylius:
             section: backend
             template: 'backend/crud/create.html.twig'
@@ -39,7 +39,7 @@ sylius_backend_taxon_create:
     path: /roots/new
     methods: [GET, POST]
     defaults:
-        _controller: sylius.controller.taxon:createAction
+        _controller: sylius.controller.taxon::createAction
         _sylius:
             section: backend
             template: backend/crud/create.html.twig
@@ -52,7 +52,7 @@ sylius_backend_taxon_update:
     path: /{id}/edit
     methods: [GET, PUT]
     defaults:
-        _controller: sylius.controller.taxon:updateAction
+        _controller: sylius.controller.taxon::updateAction
         _sylius:
             section: backend
             template: backend/crud/update.html.twig
@@ -65,7 +65,7 @@ sylius_backend_taxon_delete:
     path: /{id}
     methods: [DELETE]
     defaults:
-        _controller: sylius.controller.taxon:deleteAction
+        _controller: sylius.controller.taxon::deleteAction
         _sylius:
             redirect: sylius_backend_taxon_index
 

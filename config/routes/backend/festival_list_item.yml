@@ -18,7 +18,7 @@ app_backend_festival_list_item_index:
     path: /
     methods: [GET]
     defaults:
-        _controller: app.controller.festival_list_item:indexAction
+        _controller: app.controller.festival_list_item::indexAction
         _sylius:
             template: "backend/festival_list_item/index.html.twig"
             grid: app_backend_festival_list_item
@@ -36,7 +36,7 @@ app_backend_festival_list_item_create:
     path: /new
     methods: [GET, POST]
     defaults:
-        _controller: app.controller.festival_list_item:createAction
+        _controller: app.controller.festival_list_item::createAction
         _sylius:
             factory:
                 method: createForList
@@ -60,7 +60,7 @@ app_backend_festival_list_item_update:
     path: /{id}/edit
     methods: [GET, PUT]
     defaults:
-        _controller: app.controller.festival_list_item:updateAction
+        _controller: app.controller.festival_list_item::updateAction
         _sylius:
             template: "backend/crud/update.html.twig"
             grid: app_backend_festival_list_item
