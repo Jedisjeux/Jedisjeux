@@ -2,7 +2,7 @@ sylius_partial_product_review_index:
     methods: [GET]
     path: /product-reviews/
     defaults:
-        _controller: sylius.controller.product_review:indexAction
+        _controller: sylius.controller.product_review::indexAction
         _sylius:
             repository:
                 method: createFilterPaginator
@@ -16,7 +16,7 @@ sylius_partial_product_review_create:
     path: /products/{productId}/reviews/new
     methods: [GET]
     defaults:
-        _controller: sylius.controller.product_review:createAction
+        _controller: sylius.controller.product_review::createAction
         _sylius:
             template: 'frontend/product_review/_form.html.twig'
             factory:
@@ -28,7 +28,7 @@ sylius_partial_product_rating_show:
     path: /products/{productId}/rating/show
     methods: [GET]
     defaults:
-        _controller: sylius.controller.product_review:showRatingAction
+        _controller: sylius.controller.product_review::showRatingAction
         _sylius:
             template: 'frontend/product_review/rating/_show.html.twig'
             repository:
@@ -39,7 +39,7 @@ sylius_partial_product_review_show_create_or_update_link:
     path: /products/{productSlug}/show-create-or-update-link
     methods: [GET]
     defaults:
-        _controller: sylius.controller.product_review:showRatingAction
+        _controller: sylius.controller.product_review::showRatingAction
         _sylius:
             template: 'frontend/product_review/_showCreateOrUpdateReviewLink.html.twig'
             repository:
