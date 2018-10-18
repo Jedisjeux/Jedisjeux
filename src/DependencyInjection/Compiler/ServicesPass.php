@@ -13,6 +13,7 @@ namespace App\DependencyInjection\Compiler;
 
 use App\EventListener\PasswordUpdaterListener;
 use App\Factory\ProductFactory;
+use App\Security\Authorization\AuthorizationChecker;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
@@ -32,6 +33,9 @@ class ServicesPass implements CompilerPassInterface
 
         $contextLocaleCompositeDefinition = $container->getDefinition("sylius.context.locale.composite");
         $contextLocaleCompositeDefinition->setDecoratedService(null);
+
+        $authorizationCheckerDefinition = $container->getDefinition('security.authorization_checker');
+        $authorizationCheckerDefinition->setClass(AuthorizationChecker::class);
     }
 
     /**
