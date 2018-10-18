@@ -1,5 +1,10 @@
 ## Change Log
 
+### v2.0.7 (2018/10/18)
+- [#313](https://github.com/Jedisjeux/Jedisjeux/pull/313) add a workaround on authorization checker (@loic425)
+- [#312](https://github.com/Jedisjeux/Jedisjeux/pull/312) Referencing controllers with two colons (@loic425)
+- [#311](https://github.com/Jedisjeux/Jedisjeux/pull/311) fix page views (@loic425)
+
 ### v2.0.6 (2018/10/17)
 - [#309](https://github.com/Jedisjeux/Jedisjeux/pull/309) fix notify (@loic425)
 - [#308](https://github.com/Jedisjeux/Jedisjeux/pull/308) fix js errors (@loic425)
