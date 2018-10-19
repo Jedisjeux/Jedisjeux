@@ -1,0 +1,9 @@
+default:
+    suites:
+        ui_viewing_errors:
+            contexts_services:
+                - app.behat.context.hook.doctrine_orm
+
+                - app.behat.context.ui.frontend.error
+            filters:
+                tags: "@viewing_errors && @ui"

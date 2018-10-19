@@ -1,5 +1,6 @@
 app:
     ui:
         do_not_have_an_account_yet: Don't have an account yet?
+        not_found_page: Not found page
         there_are_no_articles: There are no articles.
         there_are_no_game_plays: There are no game plays.

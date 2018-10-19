@@ -2,6 +2,7 @@ imports:
     - { resource: frontend/account.yml }
     - { resource: frontend/article.yml }
     - { resource: frontend/contact.yml }
+    - { resource: frontend/error.yml }
     - { resource: frontend/game_play.yml }
     - { resource: frontend/person.yml }
     - { resource: frontend/post.yml }

@@ -152,6 +152,7 @@ app:
         newest_release_first: Sorti plus récemment en premier
         news: Actualités
         normal: Normal
+        not_found_page: Page introuvable
         not_found_pages: Pages non trouvées
         oldest_release_first: Sorti plus récemment en dernier
         overview_of_your_website: Aperçu de votre site web
