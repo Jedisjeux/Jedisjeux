@@ -1,3 +1,0 @@
-imports:
-    - { resource: "state_machine/app_article.yml" }
-    - { resource: "state_machine/sylius_product.yml" }
