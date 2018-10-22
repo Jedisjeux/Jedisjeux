@@ -5,7 +5,7 @@ liip_imagine:
             filesystem:
                 data_root:
                     - "%kernel.project_dir%/public"
-                    # - "/home/jedisjeux/shared/public"
+                    - "/home/jedisjeux/shared/public"
     filter_sets:
         # @see http://symfony.com/doc/current/bundles/LiipImagineBundle/filters.html
         cache: ~
