@@ -1,0 +1,17 @@
+winzou_state_machine:
+    app_article:
+        class: "%app.model.product_box.class%"
+        property_path: status
+        graph: app_product_box
+        state_machine_class: "%sylius.state_machine.class%"
+        states:
+            new: ~
+            accepted: ~
+            rejected: ~
+        transitions:
+            accept:
+                from: [new]
+                to: accepted
+            reject:
+                from: [new]
+                to: rejected

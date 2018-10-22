@@ -54,5 +54,29 @@ sylius_grid:
                 item:
                     update:
                         type: update
+                    accept:
+                        type: apply_transition
+                        label: sylius.ui.accept
+                        icon: checkmark
+                        options:
+                            link:
+                                route: app_backend_product_box_accept
+                                parameters:
+                                    id: resource.id
+                            class: green
+                            transition: accept
+                            graph: app_product_box
+                    reject:
+                        type: apply_transition
+                        label: sylius.ui.reject
+                        icon: remove
+                        options:
+                            link:
+                                route: app_backend_product_box_reject
+                                parameters:
+                                    id: resource.id
+                            class: yellow
+                            transition: reject
+                            graph: app_product_box
                     delete:
                         type: delete
