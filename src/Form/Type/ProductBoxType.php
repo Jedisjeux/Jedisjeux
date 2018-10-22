@@ -12,6 +12,7 @@
 namespace App\Form\Type;
 
 use App\Entity\ProductBox;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductAutocompleteChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -28,11 +29,14 @@ class ProductBoxType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('product', ProductAutocompleteChoiceType::class, [
+                'label' => 'app.ui.game',
+            ])
             ->add('image', ProductBoxImageType::class, [
                 'label' => false,
             ])
-            ->add('height', NumberType::class, [
-                'label' => 'app.ui.height',
+            ->add('realHeight', NumberType::class, [
+                'label' => 'app.ui.height_in_millimeter',
             ]);
     }
 

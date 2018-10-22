@@ -15,10 +15,10 @@ sylius_grid:
                     options:
                         template: "backend/product_box/grid/field/image.html.twig"
                 product:
-                    label: sylius.ui.product
+                    label: app.ui.game
                     type: string
-                    path: productVariant.product
-                height:
+                    path: product
+                realHeight:
                     label: app.ui.height
                     type: twig
                     sortable: ~
@@ -30,12 +30,6 @@ sylius_grid:
                     sortable: ~
                     options:
                         template: "backend/grid/field/date/medium.html.twig"
-            filters:
-                search:
-                    type: string
-                    label: sylius.ui.search
-                    options:
-                        fields: [height]
             actions:
                 main:
                     create:

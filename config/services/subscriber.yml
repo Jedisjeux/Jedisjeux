@@ -38,6 +38,15 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
+    app.subscriber.create_product_box_thumbnail:
+        class: App\EventSubscriber\CreateProductBoxThumbnailSubscriber
+        arguments:
+            - "@liip_imagine.data.manager"
+            - "@liip_imagine.filter.manager"
+            - "@liip_imagine.cache.manager"
+        tags:
+            - { name: doctrine.event_subscriber }
+
     app.subscriber.create_topic_notification:
         class: App\EventSubscriber\CreateTopicNotificationSubscriber
         arguments:

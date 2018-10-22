@@ -9,6 +9,6 @@ app_backend_product_box:
             all:
                 subheader: app.ui.manage_product_boxes
             index:
-                icon: dropbox
+                icon: th
         templates: backend/crud
     type: sylius.resource

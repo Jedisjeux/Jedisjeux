@@ -76,17 +76,24 @@ class ProductBoxExampleFactory extends AbstractExampleFactory implements Example
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefault('height', function (Options $options) {
-                return $this->faker->numberBetween(20, 100);
-            })
-
             ->setDefault('product_variant', LazyOption::randomOne($this->productVariantRepository))
             ->setAllowedTypes('product_variant', ['null', 'string', ProductVariantInterface::class])
             ->setNormalizer('product_variant', LazyOption::findOneBy($this->productVariantRepository, 'code'))
 
             ->setDefault('image', LazyOption::randomOneImage(
                 __DIR__ . '/../../../tests/Resources/fixtures/boxes'
-            ));
+            ))
+
+            ->setDefault('height', function (Options $options) {
+                $imageSize = getimagesize(realpath($options['image']));
+                $height = $imageSize[1];
+
+                return $height;
+            })
+
+            ->setDefault('real_height', function (Options $options) {
+                return (int) round($options['height'] / ProductBox::RATIO);
+            });
     }
 
     /**
@@ -98,11 +105,14 @@ class ProductBoxExampleFactory extends AbstractExampleFactory implements Example
 
         /** @var ProductBox $productBox */
         $productBox = $this->postFactory->createNew();
+        $productBox->setRealHeight($options['real_height']);
         $productBox->setHeight($options['height']);
+
 
         /** @var ProductVariant $variant */
         $variant = $options['product_variant'];
         $variant->setBox($productBox);
+        $productBox->setProduct($variant->getProduct());
 
         $this->createImage($productBox, $options);
 

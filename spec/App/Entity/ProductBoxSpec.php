@@ -6,6 +6,7 @@ use App\Entity\ProductBox;
 use App\Entity\ProductBoxImage;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Product\Model\ProductVariantInterface;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 class ProductBoxSpec extends ObjectBehavior
@@ -27,8 +28,21 @@ class ProductBoxSpec extends ObjectBehavior
 
     function its_height_is_mutable()
     {
-        $this->setHeight(42.0);
-        $this->getHeight()->shouldReturn(42.0);
+        $this->setHeight(42);
+        $this->getHeight()->shouldReturn(42);
+    }
+
+    function it_has_no_real_height_by_default()
+    {
+        $this->getRealHeight()->shouldReturn(null);
+    }
+
+    function its_real_height_is_mutable()
+    {
+        $this->setRealHeight(420);
+        $this->getRealHeight()->shouldReturn(420);
+
+        $this->getHeight()->shouldReturn(271);
     }
 
     function it_has_no_image_by_default()
@@ -40,6 +54,17 @@ class ProductBoxSpec extends ObjectBehavior
     {
         $this->setImage($image);
         $this->getImage()->shouldReturn($image);
+    }
+
+    function it_has_no_product_by_default()
+    {
+        $this->getProduct()->shouldReturn(null);
+    }
+
+    function its_product_is_mutable(ProductInterface $product)
+    {
+        $this->setProduct($product);
+        $this->getProduct()->shouldReturn($product);
     }
 
     function it_has_no_product_variant_by_default()

@@ -79,6 +79,7 @@ app:
         game_play_specifications: Spécifications de la partie
         games: Jeux
         height: Hauteur
+        height_in_millimeter: Hauteur en millimètre
         icon_class: Classe de l'icône
         image_legend: Légende de l'image
         image_on_the_left_side: Image à gauche

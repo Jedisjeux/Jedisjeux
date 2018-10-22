@@ -13,6 +13,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
@@ -26,26 +27,42 @@ class ProductBox implements ResourceInterface
 {
     use IdentifiableTrait, Timestampable;
 
+    const RATIO = 0.645;
+
+    /**
+     * @var ProductInterface|null
+     *
+     * @ORM\ManyToOne(targetEntity="Product")
+     */
+    private $product;
+
     /**
      * @var ProductVariantInterface|null
      *
      * @ORM\OneToOne(targetEntity="ProductVariant", mappedBy="box")
      */
-    protected $productVariant;
+    private $productVariant;
 
     /**
      * @var ProductBoxImage|null
      *
      * @ORM\OneToOne(targetEntity="ProductBoxImage", cascade={"persist"})
      */
-    protected $image;
+    private $image;
 
     /**
-     * @var float
+     * @var integer
      *
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="integer")
      */
-    protected $height;
+    private $height;
+
+    /**
+     * @var integer|null
+     *
+     * @ORM\Column(type="integer")
+     */
+    private $realHeight;
 
     /**
      * @return ProductBoxImage|null
@@ -64,19 +81,58 @@ class ProductBox implements ResourceInterface
     }
 
     /**
-     * @return float|null
+     * @return int|null
      */
-    public function getHeight(): ?float
+    public function getHeight(): ?int
     {
         return $this->height;
     }
 
     /**
-     * @param float|null $height
+     * @param int|null $height
      */
-    public function setHeight(?float $height): void
+    public function setHeight(?int $height): void
     {
         $this->height = $height;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getRealHeight(): ?int
+    {
+        return $this->realHeight;
+    }
+
+    /**
+     * @param int|null $realHeight
+     */
+    public function setRealHeight(?int $realHeight): void
+    {
+        $this->realHeight = $realHeight;
+
+        if (null === $realHeight) {
+            $this->setHeight(null);
+        } else {
+            $height = round($realHeight * static::RATIO);
+            $this->setHeight($height);
+        }
+    }
+
+    /**
+     * @return null|ProductInterface
+     */
+    public function getProduct(): ?ProductInterface
+    {
+        return $this->product;
+    }
+
+    /**
+     * @param null|ProductInterface $product
+     */
+    public function setProduct(?ProductInterface $product): void
+    {
+        $this->product = $product;
     }
 
     /**
