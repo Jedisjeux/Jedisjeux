@@ -5,6 +5,9 @@ sylius_grid:
                 name: doctrine/orm
                 options:
                     class: "%app.model.product_box.class%"
+                    repository:
+                        method: createListQueryBuilder
+                        arguments: ["%locale%"]
             sorting:
                 createdAt: desc
             fields:
@@ -24,12 +27,26 @@ sylius_grid:
                     sortable: ~
                     options:
                         template: "backend/product_box/grid/field/height.html.twig"
+                status:
+                    type: twig
+                    label: sylius.ui.status
+                    sortable: ~
+                    options:
+                        template: "@SyliusUi/Grid/Field/state.html.twig"
+                        vars:
+                            labels: "backend/product_box/label/status"
                 createdAt:
                     type: twig
                     label: sylius.ui.creation_date
                     sortable: ~
                     options:
                         template: "backend/grid/field/date/medium.html.twig"
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    options:
+                        fields: [productTranslation.name]
             actions:
                 main:
                     create:

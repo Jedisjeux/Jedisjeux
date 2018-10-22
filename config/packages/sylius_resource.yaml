@@ -82,6 +82,7 @@ sylius_resource:
             classes:
                 model: App\Entity\ProductBox
                 form: App\Form\Type\ProductBoxType
+                repository: App\Repository\ProductBoxRepository
         app.product_box_image:
             classes:
                 model: App\Entity\ProductBoxImage

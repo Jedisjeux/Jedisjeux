@@ -21,6 +21,23 @@ class ProductBoxSpec extends ObjectBehavior
         $this->shouldImplement(ResourceInterface::class);
     }
 
+    function it_is_new_by_default()
+    {
+        $this->getStatus()->shouldReturn(ProductBox::STATUS_NEW);
+    }
+
+    function it_can_be_accepted()
+    {
+        $this->setStatus(ProductBox::STATUS_ACCEPTED);
+        $this->getStatus()->shouldReturn(ProductBox::STATUS_ACCEPTED);
+    }
+
+    function it_can_be_rejected()
+    {
+        $this->setStatus(ProductBox::STATUS_REJECTED);
+        $this->getStatus()->shouldReturn(ProductBox::STATUS_REJECTED);
+    }
+
     function it_has_no_height_by_default()
     {
         $this->getHeight()->shouldReturn(null);

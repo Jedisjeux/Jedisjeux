@@ -93,6 +93,10 @@ class ProductBoxExampleFactory extends AbstractExampleFactory implements Example
 
             ->setDefault('real_height', function (Options $options) {
                 return (int) round($options['height'] / ProductBox::RATIO);
+            })
+
+            ->setDefault('status', function (Options $options) {
+                return $this->faker->randomElement([ProductBox::STATUS_NEW, ProductBox::STATUS_ACCEPTED, ProductBox::STATUS_REJECTED]);
             });
     }
 
@@ -107,7 +111,7 @@ class ProductBoxExampleFactory extends AbstractExampleFactory implements Example
         $productBox = $this->postFactory->createNew();
         $productBox->setRealHeight($options['real_height']);
         $productBox->setHeight($options['height']);
-
+        $productBox->setStatus($options['status']);
 
         /** @var ProductVariant $variant */
         $variant = $options['product_variant'];

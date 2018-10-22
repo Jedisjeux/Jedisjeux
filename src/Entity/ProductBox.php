@@ -29,6 +29,17 @@ class ProductBox implements ResourceInterface
 
     const RATIO = 0.645;
 
+    const STATUS_NEW = 'new';
+    const STATUS_ACCEPTED = 'accepted';
+    const STATUS_REJECTED = 'rejected';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    private $status;
+
     /**
      * @var ProductInterface|null
      *
@@ -63,6 +74,27 @@ class ProductBox implements ResourceInterface
      * @ORM\Column(type="integer")
      */
     private $realHeight;
+    
+    public function __construct()
+    {
+        $this->status = static::STATUS_NEW;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     */
+    public function setStatus(string $status): void
+    {
+        $this->status = $status;
+    }
 
     /**
      * @return ProductBoxImage|null
