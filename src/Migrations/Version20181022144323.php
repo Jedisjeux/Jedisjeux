@@ -16,7 +16,7 @@ final class Version20181022144323 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE jdj_product_box ADD status VARCHAR(255) NULL');
-        $this->addSql("UPDATE jdj_product_box SET status = 'new' where status is null");
+        $this->addSql("UPDATE jdj_product_box SET status = 'accepted' where status is null");
         $this->addSql('ALTER TABLE jdj_product_box CHANGE status status VARCHAR(255) NOT NULL');
     }
 

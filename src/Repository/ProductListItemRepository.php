@@ -12,6 +12,7 @@
 namespace App\Repository;
 
 use App\Entity\Customer;
+use App\Entity\ProductBox;
 use App\Entity\ProductList;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
@@ -72,12 +73,13 @@ class ProductListItemRepository extends EntityRepository
             ->leftJoin('product.translations', 'translation')
             ->innerJoin('o.list', 'list')
             ->leftJoin('product.variants', 'variant')
-            ->leftJoin('variant.box', 'box')
+            ->leftJoin('variant.box', 'box', Join::WITH, 'box.status = :status')
             ->leftJoin('box.image', 'boxImage')
             ->andWhere('translation.locale = :locale')
             ->andWhere('list.owner = :owner')
             ->andWhere('list.code = :code')
             ->groupBy('product.id')
+            ->setParameter('status', ProductBox::STATUS_ACCEPTED)
             ->setParameter('locale', $locale)
             ->setParameter('owner', $customer)
             ->setParameter('code', ProductList::CODE_GAME_LIBRARY);
