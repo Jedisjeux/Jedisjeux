@@ -200,6 +200,14 @@ services:
         tags:
             - { name: fob.context_service }
 
+    app.behat.context.ui.frontend.error:
+        class: App\Behat\Context\Ui\Frontend\ErrorContext
+        arguments:
+            - "@app.behat.page.frontend.error"
+            - "@app.behat.page.frontend.home"
+        tags:
+            - { name: fob.context_service }
+
     app.behat.context.ui.frontend.login:
         class: App\Behat\Context\Ui\Frontend\LoginContext
         arguments:
