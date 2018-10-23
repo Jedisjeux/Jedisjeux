@@ -79,6 +79,7 @@
     "phpstan/phpstan-webmozart-assert": "^0.10",
     "phpunit/phpunit": "^7.4",
     "se/selenium-server-standalone": " ^2.52",
+    "symfony/var-dumper": "^4.1",
     "symfony/web-profiler-bundle": "^4.1",
     "symfony/web-server-bundle": "^4.1"
   },
