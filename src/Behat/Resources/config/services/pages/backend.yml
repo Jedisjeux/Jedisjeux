@@ -1,5 +1,6 @@
 imports:
     - { resource: backend/article.yml }
+    - { resource: backend/customer.yml }
     - { resource: backend/dashboard.yml }
     - { resource: backend/dealer.yml }
     - { resource: backend/dealer_price.yml }
