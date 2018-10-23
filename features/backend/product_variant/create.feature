@@ -26,11 +26,3 @@ Feature: Creates product variants
             | Nom | Die fürsten von Florenz |
         When I press "Créer"
         Then I should see "a bien été créé"
-
-    @todo
-    Scenario: Cannot create empty product variant
-        Given I am on "/admin/products/"
-        And I click on "Gérer les variantes" dropdown
-        And I follow "Créer"
-        When I press "Créer"
-        Then I should see "Cette valeur ne doit pas être vide."
