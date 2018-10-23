@@ -45,3 +45,8 @@ Feature: Products validation
         And I try to add it
         Then I should be notified that max player count value should be one or more
         And this product should not be added
+
+    @ui
+    Scenario: Trying to add a new product as a staff user
+        When I am a logged in staff user
+        Then I should not be able to add product
