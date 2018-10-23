@@ -87,6 +87,7 @@ services:
         arguments:
             - "@app.behat.page.backend.product.index"
             - "@app.behat.page.backend.product.create"
+            - "@app.behat.page.backend.product.create_from_bgg"
             - "@app.behat.page.backend.product.update"
             - "@app.behat.current_page_resolver"
         tags:

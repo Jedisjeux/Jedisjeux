@@ -36,6 +36,11 @@ class ManagingProductsContext implements Context
     private $createPage;
 
     /**
+     * @var CreatePage
+     */
+    private $createFromBggPage;
+
+    /**
      * @var UpdatePage
      */
     private $updatePage;
@@ -50,26 +55,38 @@ class ManagingProductsContext implements Context
      *
      * @param IndexPage $indexPage
      * @param CreatePage $createPage
+     * @param CreatePage $createFromBggPage
      * @param UpdatePage $updatePage
      * @param CurrentPageResolverInterface $currentPageResolver
      */
     public function __construct(
         IndexPage $indexPage,
         CreatePage $createPage,
+        CreatePage $createFromBggPage,
         UpdatePage $updatePage,
         CurrentPageResolverInterface $currentPageResolver)
     {
         $this->indexPage = $indexPage;
         $this->createPage = $createPage;
+        $this->createFromBggPage = $createFromBggPage;
         $this->updatePage = $updatePage;
         $this->currentPageResolver = $currentPageResolver;
     }
 
     /**
      * @Given I want to create a new product
+     * @Given I want to create a new product via bgg url :bggPath
      */
-    public function iWantToCreateANewProduct()
+    public function iWantToCreateANewProduct(string $bggPath = null)
     {
+        if (null !== $bggPath) {
+            $this->createFromBggPage->open([
+                'bggPath' => $bggPath
+            ]);
+
+            return;
+        }
+
         $this->createPage->open();
     }
 
