@@ -12,6 +12,7 @@
 namespace App\Behat\Context\Setup;
 
 use App\Behat\Service\SharedStorageInterface;
+use App\Entity\Customer;
 use App\Entity\User;
 use App\Fixture\Factory\ExampleFactoryInterface;
 use Behat\Behat\Context\Context;
@@ -56,7 +57,7 @@ class CustomerContext implements Context
     }
 
     /**
-     * @Given there is a customer with email :email
+     * @Given there is (also )a customer with email :email
      *
      * @param string $email
      */
