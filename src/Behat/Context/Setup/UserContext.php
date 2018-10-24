@@ -76,6 +76,31 @@ final class UserContext implements Context
     }
 
     /**
+     * @Given /^there is a (reviewer|translator|publisher) "([^"]*)"$/
+     */
+    public function thereIsAReviewer($role, $email, $password = 'sylius')
+    {
+        /** @var UserInterface $user */
+        $user = $this->userFactory->create([
+            'email' => $email,
+            'password' => $password,
+            'enabled' => true,
+        ]);
+
+        if ('reviewer' === $role) {
+            $user->addRole('ROLE_REVIEWER');
+        } elseif ('translator' === $role) {
+            $user->addRole('ROLE_TRANSLATOR');
+        } elseif ('publisher' === $role) {
+            $user->addRole('ROLE_PUBLISHER');
+        }
+
+        $this->sharedStorage->set('user', $user);
+
+        $this->userRepository->add($user);
+    }
+
+    /**
      * @Given the account of :email was deleted
      * @Given my account :email was deleted
      */

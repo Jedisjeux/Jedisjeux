@@ -16,6 +16,9 @@ app:
         article_settings: Configuration de l'article
         artist: Illustrateur
         artists: Illustrateurs
+        ask_for_publication: Demander la publication
+        ask_for_review: Demander une relecture
+        ask_for_translation: Demander une traduction
         avatar: Avatar
         barcode: Code-barres
         barcodes: Code-barres
@@ -174,6 +177,7 @@ app:
         product_manager: Gestionnaire de jeux
         pub_banners: Bannières de pub
         public: Public
+        publish: Publier
         publisher: Publieur
         published_at: Publié le
         ratings: Notes
@@ -306,9 +310,6 @@ label:
   age_min: Âge min
   amount: Montant
   artists: Illustrateurs
-  ask_for_publication: Demander la publication
-  ask_for_review: Demander une relecture
-  ask_for_translation: Demander une traduction
   ask_for_translation_changes: Demander des modifs de trad
   at: À
   attributes: Attributs
@@ -400,7 +401,6 @@ label:
   price: Prix
   price_list: Liste de prix
   public: Public
-  publish: Publier
   publishable: Publiable
   published: Publié
   published_at: Publié le

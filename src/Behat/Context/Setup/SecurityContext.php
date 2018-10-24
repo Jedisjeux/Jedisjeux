@@ -99,6 +99,7 @@ final class SecurityContext implements Context
 
         $this->securityService->logIn($user);
 
+        $this->sharedStorage->set('customer', $user->getCustomer());
         $this->sharedStorage->set('administrator', $user);
     }
 
@@ -112,6 +113,7 @@ final class SecurityContext implements Context
 
         $this->securityService->logIn($user);
 
+        $this->sharedStorage->set('customer', $user->getCustomer());
         $this->sharedStorage->set('administrator', $user);
     }
 
@@ -120,13 +122,44 @@ final class SecurityContext implements Context
      */
     public function iAmLoggedInAsARedactor()
     {
-        /** @var UserInterface $user */
+        /** @var User $user */
         $user = $this->userFactory->create(['email' => 'redactor@example.com', 'password' => 'password123', 'roles' => ['ROLE_REDACTOR']]);
         $this->userRepository->add($user);
 
         $this->securityService->logIn($user);
 
+        $this->sharedStorage->set('customer', $user->getCustomer());
         $this->sharedStorage->set('redactor', $user);
+    }
+
+    /**
+     * @Given I am a logged in reviewer
+     */
+    public function iAmLoggedInAsAReviewer()
+    {
+        /** @var User $user */
+        $user = $this->userFactory->create(['email' => 'reviewer@example.com', 'password' => 'password123', 'roles' => ['ROLE_REVIEWER']]);
+        $this->userRepository->add($user);
+
+        $this->securityService->logIn($user);
+
+        $this->sharedStorage->set('customer', $user->getCustomer());
+        $this->sharedStorage->set('reviewer', $user);
+    }
+
+    /**
+     * @Given I am a logged in publisher
+     */
+    public function iAmLoggedInAsAPublisher()
+    {
+        /** @var User $user */
+        $user = $this->userFactory->create(['email' => 'publisher@example.com', 'password' => 'password123', 'roles' => ['ROLE_PUBLISHER']]);
+        $this->userRepository->add($user);
+
+        $this->securityService->logIn($user);
+
+        $this->sharedStorage->set('customer', $user->getCustomer());
+        $this->sharedStorage->set('publisher', $user);
     }
 
     /**
@@ -140,6 +173,7 @@ final class SecurityContext implements Context
 
         $this->securityService->logIn($user);
 
+        $this->sharedStorage->set('customer', $user->getCustomer());
         $this->sharedStorage->set('staff', $user);
     }
 
@@ -154,6 +188,7 @@ final class SecurityContext implements Context
 
         $this->securityService->logIn($user);
 
+        $this->sharedStorage->set('customer', $user->getCustomer());
         $this->sharedStorage->set('product_manager', $user);
     }
 
@@ -168,6 +203,7 @@ final class SecurityContext implements Context
 
         $this->securityService->logIn($user);
 
+        $this->sharedStorage->set('customer', $user->getCustomer());
         $this->sharedStorage->set('article_manager', $user);
     }
 }
