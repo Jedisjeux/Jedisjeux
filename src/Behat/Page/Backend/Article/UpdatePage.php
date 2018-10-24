@@ -11,11 +11,14 @@
 
 namespace App\Behat\Page\Backend\Article;
 
+use App\Behat\Behaviour\WorkflowActions;
 use App\Behat\Page\Backend\Crud\UpdatePage as BaseUpdatePage;
 use Behat\Mink\Exception\ElementNotFoundException;
 
 class UpdatePage extends BaseUpdatePage
 {
+    use WorkflowActions;
+
     /**
      * @param string $title
      *
@@ -24,21 +27,6 @@ class UpdatePage extends BaseUpdatePage
     public function changeTitle($title)
     {
         $this->getElement('title')->setValue($title);
-    }
-
-    public function askForReview(): void
-    {
-        $this->getDocument()->pressButton('Ask for review');
-    }
-
-    public function askForPublication(): void
-    {
-        $this->getDocument()->pressButton('Ask for publication');
-    }
-
-    public function publish(): void
-    {
-        $this->getDocument()->pressButton('Publish');
     }
 
     /**

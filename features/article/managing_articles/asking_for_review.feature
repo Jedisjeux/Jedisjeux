@@ -12,7 +12,7 @@ Feature: Asking for review
         And I wrote an article "King of New York : Power Up!" with "new" status
 
     @ui
-    Scenario: Asking for review as a redactor
+    Scenario: Asking for an article review as a redactor
         Given I want to edit "King of New York : Power Up!" article
         When I ask for a review
         Then I should be notified that it has been successfully edited
