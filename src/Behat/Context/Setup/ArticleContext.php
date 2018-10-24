@@ -108,6 +108,25 @@ class ArticleContext implements Context
     }
 
     /**
+     * @Given I wrote an article :title with :status status
+     *
+     * @param string $title
+     */
+    public function iWroteAnArticleWithStatus($title, $status)
+    {
+        /** @var Article $article */
+        $article = $this->articleFactory->create([
+            'title' => $title,
+            'author' => $this->sharedStorage->get('customer'),
+            'status' => $status,
+            'product' => null,
+        ]);
+
+        $this->articleRepository->add($article);
+        $this->sharedStorage->set('article', $article);
+    }
+
+    /**
      * @Given /^(this product) has(?:| also) an article titled "([^"]+)" written by (customer "[^"]+")(?:|, published (\d+) days ago)$/
      */
     public function productHasArticleWrittenByCustomerWithStatus(

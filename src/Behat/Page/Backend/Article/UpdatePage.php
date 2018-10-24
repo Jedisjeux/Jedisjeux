@@ -12,18 +12,33 @@
 namespace App\Behat\Page\Backend\Article;
 
 use App\Behat\Page\Backend\Crud\UpdatePage as BaseUpdatePage;
+use Behat\Mink\Exception\ElementNotFoundException;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
 class UpdatePage extends BaseUpdatePage
 {
     /**
      * @param string $title
+     *
+     * @throws ElementNotFoundException
      */
     public function changeTitle($title)
     {
         $this->getElement('title')->setValue($title);
+    }
+
+    public function askForReview(): void
+    {
+        $this->getDocument()->pressButton('Ask for review');
+    }
+
+    public function askForPublication(): void
+    {
+        $this->getDocument()->pressButton('Ask for publication');
+    }
+
+    public function publish(): void
+    {
+        $this->getDocument()->pressButton('Publish');
     }
 
     /**

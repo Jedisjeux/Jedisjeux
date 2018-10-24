@@ -308,3 +308,10 @@ services:
             - "@app.behat.email_checker"
         tags:
             - { name: fob.context_service }
+
+    app.behat.context.ui.notification:
+        class: App\Behat\Context\Ui\NotificationContext
+        arguments:
+            - "@__symfony__.app.repository.notification"
+        tags:
+            - { name: fob.context_service }

@@ -132,6 +132,29 @@ class ManagingArticlesContext implements Context
     }
 
     /**
+     * @When I ask for a review
+     */
+    public function iAskForReview()
+    {
+        $this->updatePage->askForReview();
+    }
+
+    /**
+     * @When I ask for a publication
+     */
+    public function iAskForPublication()
+    {
+        $this->updatePage->askForPublication();
+    }
+    /**
+     * @When I publish it
+     */
+    public function iPublishIt()
+    {
+        $this->updatePage->publish();
+    }
+
+    /**
      * @Then I should be notified that the title is required
      */
     public function iShouldBeNotifiedThatTitleIsRequired()
@@ -199,5 +222,17 @@ class ManagingArticlesContext implements Context
         }
 
         Assert::false($this->indexPage->isOpen());
+    }
+
+    /**
+     * @Then this article with title :title should have :status status
+     */
+    public function thisArticleWithTitleShouldHaveStatus($title, $status)
+    {
+        $this->indexPage->open();
+
+        $status = str_replace(' ', '_', strtolower($status));
+
+        Assert::true($this->indexPage->isSingleResourceOnPage(['title' => $title, 'status' => $status]));
     }
 }
