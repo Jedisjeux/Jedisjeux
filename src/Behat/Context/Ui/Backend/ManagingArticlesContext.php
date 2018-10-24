@@ -146,6 +146,7 @@ class ManagingArticlesContext implements Context
     {
         $this->updatePage->askForPublication();
     }
+
     /**
      * @When I publish it
      */

@@ -12,7 +12,7 @@ Feature: Asking for publication
         And I am a logged in reviewer
 
     @ui
-    Scenario: Asking for publication as a reviewer
+    Scenario: Asking for an article publication as a reviewer
         Given I want to edit "King of New York : Power Up!" article
         When I ask for a publication
         Then I should be notified that it has been successfully edited

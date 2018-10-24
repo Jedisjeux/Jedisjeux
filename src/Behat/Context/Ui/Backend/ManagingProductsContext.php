@@ -176,6 +176,38 @@ class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I ask for a translation
+     */
+    public function iAskForTranslation()
+    {
+        $this->updatePage->askForTranslation();
+    }
+
+    /**
+     * @When I ask for a review
+     */
+    public function iAskForReview()
+    {
+        $this->updatePage->askForReview();
+    }
+
+    /**
+     * @When I ask for a publication
+     */
+    public function iAskForPublication()
+    {
+        $this->updatePage->askForPublication();
+    }
+
+    /**
+     * @When I publish it
+     */
+    public function iPublishIt()
+    {
+        $this->updatePage->publish();
+    }
+
+    /**
      * @Then I should be notified that the name is required
      */
     public function iShouldBeNotifiedThatNameIsRequired()
@@ -244,6 +276,19 @@ class ManagingProductsContext implements Context
         $this->indexPage->open();
 
         Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $name]));
+    }
+
+
+    /**
+     * @Then this product with name :name should have :status status
+     */
+    public function thisProductWithNameShouldHaveStatus($name, $status)
+    {
+        $this->indexPage->open();
+
+        $status = str_replace(' ', '_', strtolower($status));
+
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $name, 'status' => $status]));
     }
 
     /**

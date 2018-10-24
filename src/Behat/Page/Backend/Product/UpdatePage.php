@@ -11,15 +11,21 @@
 
 namespace App\Behat\Page\Backend\Product;
 
+use App\Behat\Behaviour\WorkflowActions;
 use App\Behat\Page\Backend\Crud\UpdatePage as BaseUpdatePage;
+use Behat\Mink\Exception\ElementNotFoundException;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
 class UpdatePage extends BaseUpdatePage
 {
+    use WorkflowActions;
+
     /**
      * @param string $name
+     *
+     * @throws ElementNotFoundException
      */
     public function changeName($name)
     {
