@@ -4,7 +4,7 @@ Feature: Publishing product
     As a publisher
     I need to be able to publish a product
 
-    Background:l
+    Background:
         Given there is a product "Puerto Rico" with "pending_publication" status
         And I am a logged in publisher
 
