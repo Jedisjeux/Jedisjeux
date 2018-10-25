@@ -5,6 +5,9 @@ sylius_grid:
                 name: doctrine/orm
                 options:
                     class: "%app.model.game_play_image.class%"
+                    repository:
+                        method: createListQueryBuilder
+                        arguments: ["%locale%"]
             limits: ~
             sorting:
                 createdAt: desc

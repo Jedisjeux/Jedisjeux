@@ -117,6 +117,7 @@ sylius_resource:
         app.game_play_image:
             classes:
                 model: App\Entity\GamePlayImage
+                repository: App\Repository\GamePlayImageRepository
                 form: App\Form\Type\GamePlayImageType
         app.player:
             classes:

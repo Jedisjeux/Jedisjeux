@@ -6,10 +6,10 @@ sylius_grid:
                 options:
                     class: "%sylius.model.product_review.class%"
                     repository:
-                        method: createListForProductQueryBuilder
+                        method: createListForProductSlugQueryBuilder
                         arguments:
                             locale: "%locale%"
-                            product: "expr:notFoundOnNull(service('sylius.repository.product').findOneBySlug($slug))"
+                            productSlug: $slug
             limits: ~
             sorting:
                 createdAt: desc

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "20164d4cebb39dd4095fa4e0fab8b229",
+    "content-hash": "bf829cd65b84c3383459eed0d51642e1",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -4854,6 +4854,45 @@
                 "mailer"
             ],
             "time": "2018-09-11T07:12:52+00:00"
+        },
+        {
+            "name": "sylius-labs/association-hydrator",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SyliusLabs/AssociationHydrator.git",
+                "reference": "8e63c70ccca4c2b2945e284c4e85348cb2afa176"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SyliusLabs/AssociationHydrator/zipball/8e63c70ccca4c2b2945e284c4e85348cb2afa176",
+                "reference": "8e63c70ccca4c2b2945e284c4e85348cb2afa176",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/orm": "^2.4",
+                "php": "^7.1",
+                "symfony/property-access": "^3.4|^4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SyliusLabs\\AssociationHydrator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kamil Kokot",
+                    "email": "kamil@kokot.me",
+                    "homepage": "http://kamil.kokot.me"
+                }
+            ],
+            "description": "Doctrine ORM hydration performance optimization made easier.",
+            "time": "2018-02-13T13:55:38+00:00"
         },
         {
             "name": "sylius-labs/sensio-distribution-bundle",
