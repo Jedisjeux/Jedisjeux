@@ -85,6 +85,6 @@ class ArticleContext extends DefaultContext
         /** @var Article $article */
         $article = $this->findOneBy('article', ['title' => $articleTitle], 'app');
 
-        Assert::eq($status, $article->getStatus(), sprintf("%s article has %s status but it should have %s status", $article->getTitle(), $article->getStatus(), $status));
+        Assert::eq($status, $article->getStatus(), sprintf('%s article has %s status but it should have %s status', $article->getTitle(), $article->getStatus(), $status));
     }
 }

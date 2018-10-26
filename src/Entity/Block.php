@@ -65,7 +65,7 @@ class Block implements ResourceInterface
     protected $class;
 
     /**
-     * @var integer
+     * @var int
      *
      * @Gedmo\SortablePosition
      * @ORM\column(type="integer")
@@ -157,7 +157,6 @@ class Block implements ResourceInterface
     public function setImagePosition(?string $imagePosition): void
     {
         $this->imagePosition = $imagePosition;
-
     }
 
     /**
@@ -219,7 +218,7 @@ class Block implements ResourceInterface
     /**
      * @param Article|null $article
      */
-    public function setArticle(?Article$article): void
+    public function setArticle(?Article $article): void
     {
         $this->article = $article;
     }

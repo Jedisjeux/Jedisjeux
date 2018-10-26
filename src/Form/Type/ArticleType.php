@@ -72,7 +72,7 @@ class ArticleType extends AbstractType
                 'label' => 'app.ui.short_description',
                 'required' => false,
             ])
-            ->add('mainTaxon', EntityType::class, array(
+            ->add('mainTaxon', EntityType::class, [
                 'label' => 'sylius.ui.category',
                 'placeholder' => '---',
                 'class' => 'App:Taxon',
@@ -87,7 +87,7 @@ class ArticleType extends AbstractType
                 },
                 'multiple' => false,
                 'required' => false,
-            ))
+            ])
             ->add('product', ProductAutocompleteChoiceType::class, [
                 'label' => 'sylius.ui.product',
                 'required' => false,
@@ -114,8 +114,8 @@ class ArticleType extends AbstractType
                 'label' => 'app.ui.lifetime_rating',
                 'choices' => $this->getRatingChoiceValues(),
             ])
-            ->addEventListener(FormEvents::POST_SET_DATA, array($this, 'onPostSetData'))
-            ->addEventListener(FormEvents::POST_SUBMIT, array($this, 'onPostSubmit'));
+            ->addEventListener(FormEvents::POST_SET_DATA, [$this, 'onPostSetData'])
+            ->addEventListener(FormEvents::POST_SUBMIT, [$this, 'onPostSubmit']);
     }
 
     /**
@@ -148,7 +148,7 @@ class ArticleType extends AbstractType
 
         $this->originalBlocks = new ArrayCollection();
 
-        foreach($article->getBlocks() as $block) {
+        foreach ($article->getBlocks() as $block) {
             $this->originalBlocks->add($block);
         }
     }
@@ -175,9 +175,9 @@ class ArticleType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => Article::class,
-        ));
+        ]);
     }
 
     /**

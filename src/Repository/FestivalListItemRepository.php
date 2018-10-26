@@ -11,13 +11,10 @@
 
 namespace App\Repository;
 
-use App\Entity\Customer;
 use App\Entity\FestivalList;
-use App\Entity\ProductList;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Customer\Model\CustomerInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -26,7 +23,7 @@ class FestivalListItemRepository extends EntityRepository
 {
     /**
      * @param FestivalList $list
-     * @param string $locale
+     * @param string       $locale
      *
      * @return QueryBuilder
      */

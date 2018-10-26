@@ -11,7 +11,6 @@
 
 namespace App\Behat\Behaviour;
 
-
 use Behat\Mink\Element\DocumentElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 

@@ -53,7 +53,7 @@ class ContactRequestFactory implements FactoryInterface
     public function createNew()
     {
         /** @var ContactRequest $contactRequest */
-        $contactRequest = new $this->className;
+        $contactRequest = new $this->className();
 
         /** @var CustomerInterface $customer */
         $customer = $this->customerContext->getCustomer();
@@ -64,5 +64,4 @@ class ContactRequestFactory implements FactoryInterface
 
         return $contactRequest;
     }
-
 }

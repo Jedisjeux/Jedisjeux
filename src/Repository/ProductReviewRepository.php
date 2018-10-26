@@ -15,7 +15,6 @@ use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Customer\Model\CustomerInterface;
-use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
 /**
@@ -80,8 +79,8 @@ class ProductReviewRepository extends EntityRepository
     }
 
     /**
-     * @param string $locale
-     * @param string $productSlug
+     * @param string                 $locale
+     * @param string                 $productSlug
      * @param null|CustomerInterface $author
      *
      * @return null|ReviewInterface
@@ -147,7 +146,7 @@ class ProductReviewRepository extends EntityRepository
      */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = []): void
     {
-        if (isset($criteria['hasComment']) && $criteria['hasComment'] !== '') {
+        if (isset($criteria['hasComment']) && '' !== $criteria['hasComment']) {
             if ($criteria['hasComment']) {
                 $queryBuilder
                     ->andWhere('o.comment is not null');
@@ -157,7 +156,6 @@ class ProductReviewRepository extends EntityRepository
             }
             unset($criteria['hasComment']);
         }
-
 
         parent::applyCriteria($queryBuilder, $criteria);
     }
@@ -198,7 +196,7 @@ class ProductReviewRepository extends EntityRepository
             $sorting['updatedAt'] = 'desc';
         }
 
-        $this->applyCriteria($queryBuilder, (array)$criteria);
+        $this->applyCriteria($queryBuilder, (array) $criteria);
         $this->applySorting($queryBuilder, $sorting);
 
         return $this->getPaginator($queryBuilder);
@@ -217,7 +215,7 @@ class ProductReviewRepository extends EntityRepository
             ->select($queryBuilder->expr()->count('o'))
             ->where($queryBuilder->expr()->eq($this->getPropertyName('status'), ':status'))
             ->setParameter('status', ReviewInterface::STATUS_ACCEPTED);
+
         return $queryBuilder->getQuery()->getSingleScalarResult();
     }
-
 }

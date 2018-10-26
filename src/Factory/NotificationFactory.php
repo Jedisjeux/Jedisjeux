@@ -55,7 +55,7 @@ class NotificationFactory implements FactoryInterface
     public function createNew()
     {
         /** @var Notification $notification */
-        $notification = new $this->className;
+        $notification = new $this->className();
 
         return $notification;
     }
@@ -74,7 +74,7 @@ class NotificationFactory implements FactoryInterface
     }
 
     /**
-     * @param Post $post
+     * @param Post              $post
      * @param CustomerInterface $customer
      *
      * @return Notification
@@ -111,11 +111,11 @@ class NotificationFactory implements FactoryInterface
      */
     protected function calculateTopicNbPages(Topic $topic)
     {
-        return (int) ceil ($topic->getPostCount() / 10);
+        return (int) ceil($topic->getPostCount() / 10);
     }
 
     /**
-     * @param ProductInterface $product
+     * @param ProductInterface  $product
      * @param CustomerInterface $customer
      *
      * @return Notification
@@ -130,7 +130,7 @@ class NotificationFactory implements FactoryInterface
     }
 
     /**
-     * @param Article $article
+     * @param Article           $article
      * @param CustomerInterface $customer
      *
      * @return Notification

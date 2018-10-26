@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: loic
  * Date: 07/03/2016
- * Time: 17:03
+ * Time: 17:03.
  */
 
 namespace App\Entity;
@@ -11,7 +11,6 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
 use Sylius\Component\Product\Model\ProductVariant as BaseProductVariant;
 
@@ -362,6 +361,6 @@ class ProductVariant extends BaseProductVariant
     {
         $name = $this->getTranslation()->getName();
 
-        return !empty($name) ? $name : "";
+        return !empty($name) ? $name : '';
     }
 }

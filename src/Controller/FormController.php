@@ -21,29 +21,29 @@ class FormController extends Controller
 {
     /**
      * @param Request $request
-     * @param string $type
-     * @param string $placeholder
-     * @param string $template
+     * @param string  $type
+     * @param string  $placeholder
+     * @param string  $template
+     * @param null    $criteria
      *
-     * @param null $criteria
      * @return Response
      */
     public function showAction(Request $request, $type, $placeholder, $template, $criteria = null)
     {
-        return $this->render($template, array(
+        return $this->render($template, [
             'form' => $this->createForm($type)->createView(),
-            'placeholder' => $placeholder
-        ));
+            'placeholder' => $placeholder,
+        ]);
     }
 
     /**
      * Render filter form.
      *
-     * @param string $type
-     * @param string $placeholder
-     * @param string $template
-     *
+     * @param string     $type
+     * @param string     $placeholder
+     * @param string     $template
      * @param null|array $criteria
+     *
      * @return Response
      */
     public function filterAction($type, $placeholder, $template = 'backend/form/_filterForm.html.twig', array $criteria = null)
@@ -62,9 +62,9 @@ class FormController extends Controller
             }
         }
 
-        return $this->render($template, array(
+        return $this->render($template, [
             'form' => $form->createView(),
-            'placeholder' => $placeholder
-        ));
+            'placeholder' => $placeholder,
+        ]);
     }
 }

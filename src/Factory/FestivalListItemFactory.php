@@ -38,7 +38,7 @@ class FestivalListItemFactory implements FactoryInterface
      */
     public function createNew()
     {
-        return new $this->className;
+        return new $this->className();
     }
 
     /**

@@ -52,13 +52,13 @@ class GamePlayFactory implements FactoryInterface
     public function createNew()
     {
         /** @var GamePlay $gamePlay */
-        $gamePlay = new $this->className;
+        $gamePlay = new $this->className();
 
         return $gamePlay;
     }
 
     /**
-     * Create new game-play for a product
+     * Create new game-play for a product.
      *
      * @param string $locale
      * @param string $productSlug

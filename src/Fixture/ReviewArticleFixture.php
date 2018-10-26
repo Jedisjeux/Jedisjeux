@@ -51,7 +51,7 @@ class ReviewArticleFixture extends AbstractFixture
         AbstractResourceFixture $taxonFixture,
         AbstractResourceFixture $reviewFixture,
         AbstractResourceFixture $articleFixture
-    ){
+    ) {
         $this->taxonFixture = $taxonFixture;
         $this->reviewFixture = $reviewFixture;
         $this->articleFixture = $articleFixture;
@@ -110,7 +110,7 @@ class ReviewArticleFixture extends AbstractFixture
 
         $this->articleFixture->load(['custom' => $articles]);
 
-        foreach($articlesCodes as $articleCode) {
+        foreach ($articlesCodes as $articleCode) {
             $this->reviewFixture->load(['custom' => [
                 [
                     'article' => $articleCode,

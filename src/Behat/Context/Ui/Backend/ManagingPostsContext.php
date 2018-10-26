@@ -42,8 +42,8 @@ class ManagingPostsContext implements Context
     private $currentPageResolver;
 
     /**
-     * @param IndexPage $indexPage
-     * @param UpdatePage $updatePage
+     * @param IndexPage                    $indexPage
+     * @param UpdatePage                   $updatePage
      * @param CurrentPageResolverInterface $currentPageResolver
      */
     public function __construct(

@@ -33,7 +33,7 @@ class PersonContext implements Context
     private $indexPage;
 
     /**
-     * @param ShowPage $showPage
+     * @param ShowPage  $showPage
      * @param IndexPage $indexPage
      */
     public function __construct(ShowPage $showPage, IndexPage $indexPage)

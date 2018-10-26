@@ -42,7 +42,7 @@ class TaxonController extends ResourceController
 
         if ($configuration->isHtmlRequest()) {
             $view
-                ->setTemplate($configuration->getTemplate(ResourceActions::INDEX . '.html'))
+                ->setTemplate($configuration->getTemplate(ResourceActions::INDEX.'.html'))
                 ->setTemplateVar($this->metadata->getPluralName())
                 ->setData([
                     'configuration' => $configuration,

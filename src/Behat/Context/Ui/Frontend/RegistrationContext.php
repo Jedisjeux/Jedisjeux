@@ -70,13 +70,13 @@ class RegistrationContext implements Context
     private $notificationChecker;
 
     /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param DashboardPage $dashboardPage
-     * @param HomePage $homePage
-     * @param LoginPage $loginPage
-     * @param RegisterPage $registerPage
-     * @param VerificationPage $verificationPage
-     * @param ProfileUpdatePage $profileUpdatePage
+     * @param SharedStorageInterface       $sharedStorage
+     * @param DashboardPage                $dashboardPage
+     * @param HomePage                     $homePage
+     * @param LoginPage                    $loginPage
+     * @param RegisterPage                 $registerPage
+     * @param VerificationPage             $verificationPage
+     * @param ProfileUpdatePage            $profileUpdatePage
      * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(

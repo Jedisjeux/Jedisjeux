@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of Jedisjeux project
+ * This file is part of Jedisjeux project.
  *
  * (c) Loïc Frémont
  *
@@ -59,7 +59,7 @@ class DealerPrice implements ResourceInterface
     protected $name;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer")
      */
@@ -174,7 +174,6 @@ class DealerPrice implements ResourceInterface
     {
         $this->barcode = $barcode;
     }
-
 
     /**
      * @return string|null

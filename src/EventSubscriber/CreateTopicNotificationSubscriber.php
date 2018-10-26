@@ -57,10 +57,10 @@ class CreateTopicNotificationSubscriber implements EventSubscriberInterface
      * CreateTopicNotificationSubscriber constructor.
      *
      * @param CustomerContextInterface $customerContext
-     * @param NotificationFactory $factory
-     * @param ObjectManager $manager
-     * @param EntityRepository $repository
-     * @param Translator $translator
+     * @param NotificationFactory      $factory
+     * @param ObjectManager            $manager
+     * @param EntityRepository         $repository
+     * @param Translator               $translator
      */
     public function __construct(CustomerContextInterface $customerContext, NotificationFactory $factory, ObjectManager $manager, EntityRepository $repository, Translator $translator)
     {
@@ -76,9 +76,9 @@ class CreateTopicNotificationSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             AppEvents::POST_POST_CREATE => 'onPostCreate',
-        );
+        ];
     }
 
     /**
@@ -94,7 +94,7 @@ class CreateTopicNotificationSubscriber implements EventSubscriberInterface
         }
 
         foreach ($topic->getFollowers() as $follower) {
-            /**
+            /*
              * Don't notify the current customer
              */
             if ($follower === $this->getCustomer()) {

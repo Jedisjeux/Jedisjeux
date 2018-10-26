@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of Jedisjeux
+ * This file is part of Jedisjeux.
  *
  * (c) Loïc Frémont
  *
@@ -39,13 +39,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Product extends BaseProduct implements ReviewableInterface
 {
     /**
-     * status constants
+     * status constants.
      */
-    const STATUS_NEW = "new";
-    const PENDING_TRANSLATION = "pending_translation";
-    const PENDING_REVIEW = "pending_review";
-    const PENDING_PUBLICATION = "pending_publication";
-    const PUBLISHED = "published";
+    const STATUS_NEW = 'new';
+    const PENDING_TRANSLATION = 'pending_translation';
+    const PENDING_REVIEW = 'pending_review';
+    const PENDING_PUBLICATION = 'pending_publication';
+    const PUBLISHED = 'published';
 
     /**
      * @var string
@@ -72,7 +72,7 @@ class Product extends BaseProduct implements ReviewableInterface
     protected $mainTaxon;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
      *
@@ -88,7 +88,7 @@ class Product extends BaseProduct implements ReviewableInterface
     protected $minAge;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
      *
@@ -104,7 +104,7 @@ class Product extends BaseProduct implements ReviewableInterface
     protected $minPlayerCount;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
      *
@@ -120,7 +120,7 @@ class Product extends BaseProduct implements ReviewableInterface
     protected $maxPlayerCount;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
      *
@@ -136,7 +136,7 @@ class Product extends BaseProduct implements ReviewableInterface
     protected $minDuration;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
      *
@@ -152,7 +152,7 @@ class Product extends BaseProduct implements ReviewableInterface
     protected $maxDuration;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(type="boolean")
      */
@@ -242,7 +242,7 @@ class Product extends BaseProduct implements ReviewableInterface
 
     /**
      * @param string $name
-     * @param bool $updateVariant
+     * @param bool   $updateVariant
      */
     public function setName(?string $name, $updateVariant = true): void
     {
@@ -338,9 +338,9 @@ class Product extends BaseProduct implements ReviewableInterface
 
         // todo remove after sylius update (variants will be sorted by position)
         $sort = Criteria::create();
-        $sort->orderBy(Array(
-            'position' => Criteria::ASC
-        ));
+        $sort->orderBy([
+            'position' => Criteria::ASC,
+        ]);
 
         return $this->variants->matching($sort)->first();
     }
@@ -376,7 +376,7 @@ class Product extends BaseProduct implements ReviewableInterface
 
         /** @var ProductVariant $variant */
         foreach ($this->variants as $variant) {
-            foreach($variant->getImages() as $image) {
+            foreach ($variant->getImages() as $image) {
                 $collection->add($image);
             }
         }
@@ -412,7 +412,7 @@ class Product extends BaseProduct implements ReviewableInterface
         }
 
         return $this->taxons->filter(function (TaxonInterface $taxon) use ($taxonomy) {
-            return $taxonomy !== 'forum';
+            return 'forum' !== $taxonomy;
         });
     }
 
@@ -541,7 +541,7 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isDurationByPlayer(): bool
     {
@@ -549,7 +549,7 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
-     * @param boolean $durationByPlayer
+     * @param bool $durationByPlayer
      */
     public function setDurationByPlayer(bool $durationByPlayer): void
     {
@@ -595,7 +595,6 @@ class Product extends BaseProduct implements ReviewableInterface
     {
         return $this->getFirstVariant()->getDesigners();
     }
-
 
     /**
      * @return Collection|Person[]

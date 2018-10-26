@@ -38,9 +38,9 @@ class ProductListItemType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => ProductListItem::class,
-        ));
+        ]);
     }
 
     /**

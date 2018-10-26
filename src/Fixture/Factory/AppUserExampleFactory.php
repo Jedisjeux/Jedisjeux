@@ -92,7 +92,7 @@ class AppUserExampleFactory extends AbstractExampleFactory implements ExampleFac
         $user->setEnabled($options['enabled']);
         $user->addRole('ROLE_USER');
 
-        foreach($options['roles'] as $role) {
+        foreach ($options['roles'] as $role) {
             $user->addRole($role);
         }
 
@@ -103,7 +103,7 @@ class AppUserExampleFactory extends AbstractExampleFactory implements ExampleFac
 
     /**
      * @param Customer $customer
-     * @param array $options
+     * @param array    $options
      */
     private function createAvatar(Customer $customer, array $options)
     {
@@ -149,7 +149,7 @@ class AppUserExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setAllowedTypes('roles', 'array')
 
             ->setDefault('avatar', LazyOption::randomOneImageOrNull(
-                __DIR__ . '/../../../tests/Resources/fixtures/avatars', 50
+                __DIR__.'/../../../tests/Resources/fixtures/avatars', 50
             ))
         ;
     }

@@ -57,18 +57,17 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
     private $localeCode;
 
     /**
-     * @param FactoryInterface $taxonFactory
-     * @param TaxonRepositoryInterface $taxonRepository
+     * @param FactoryInterface            $taxonFactory
+     * @param TaxonRepositoryInterface    $taxonRepository
      * @param TaxonSlugGeneratorInterface $taxonSlugGenerator
-     * @param string $localeCode
+     * @param string                      $localeCode
      */
     public function __construct(
         FactoryInterface $taxonFactory,
         TaxonRepositoryInterface $taxonRepository,
         TaxonSlugGeneratorInterface $taxonSlugGenerator,
         $localeCode
-    )
-    {
+    ) {
         $this->taxonFactory = $taxonFactory;
         $this->taxonRepository = $taxonRepository;
         $this->taxonSlugGenerator = $taxonSlugGenerator;

@@ -65,11 +65,11 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
     private $optionsResolver;
 
     /**
-     * @param FactoryInterface $articleFactory
-     * @param FactoryInterface $articleImageFactory
-     * @param RepositoryInterface $customerRepository
+     * @param FactoryInterface         $articleFactory
+     * @param FactoryInterface         $articleImageFactory
+     * @param RepositoryInterface      $customerRepository
      * @param TaxonRepositoryInterface $taxonRepository
-     * @param RepositoryInterface $productRepository
+     * @param RepositoryInterface      $productRepository
      */
     public function __construct(
         FactoryInterface $articleFactory,
@@ -77,8 +77,7 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
         RepositoryInterface $customerRepository,
         TaxonRepositoryInterface $taxonRepository,
         RepositoryInterface $productRepository
-    )
-    {
+    ) {
         $this->articleFactory = $articleFactory;
         $this->articleImageFactory = $articleImageFactory;
         $this->customerRepository = $customerRepository;
@@ -121,7 +120,7 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
 
     /**
      * @param Article $article
-     * @param array $options
+     * @param array   $options
      */
     private function createImage(Article $article, array $options)
     {
@@ -150,7 +149,7 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
             })
 
             ->setDefault('short_description', function (Options $options) {
-                return "<p>" . implode("</p><p>", $this->faker->paragraphs(2)) . '</p>';
+                return '<p>'.implode('</p><p>', $this->faker->paragraphs(2)).'</p>';
             })
 
             ->setDefault('publish_start_date', function (Options $options) {
@@ -169,11 +168,11 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
                     Article::STATUS_NEW,
                     Article::STATUS_PENDING_REVIEW,
                     Article::STATUS_PENDING_PUBLICATION,
-                    Article::STATUS_PUBLISHED]);
+                    Article::STATUS_PUBLISHED, ]);
             })
 
             ->setDefault('main_image', LazyOption::randomOneImage(
-                __DIR__ . '/../../../tests/Resources/fixtures'
+                __DIR__.'/../../../tests/Resources/fixtures'
             ))
 
             ->setDefault('author', LazyOption::randomOne($this->customerRepository))

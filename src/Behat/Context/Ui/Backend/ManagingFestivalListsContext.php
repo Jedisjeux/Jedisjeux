@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of Jedisjeux
+ * This file is part of Jedisjeux.
  *
  * (c) Loïc Frémont
  *
@@ -33,7 +33,7 @@ class ManagingFestivalListsContext implements Context
     private $createPage;
 
     /**
-     * @param IndexPage $indexPage
+     * @param IndexPage  $indexPage
      * @param CreatePage $createPage
      */
     public function __construct(IndexPage $indexPage, CreatePage $createPage)

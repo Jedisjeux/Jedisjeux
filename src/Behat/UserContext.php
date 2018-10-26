@@ -28,7 +28,7 @@ class UserContext extends DefaultContext
      */
     public function iAmLoggedInUserWithPassword($username, $password)
     {
-        $this->visitPath("/login");
+        $this->visitPath('/login');
         $this->fillField("Nom d'utilisateur ou email", $username);
         $this->fillField('Mot de passe', $password);
         $this->pressButton('_login');
@@ -46,7 +46,6 @@ class UserContext extends DefaultContext
         $manager = $this->getEntityManager();
 
         foreach ($table->getHash() as $data) {
-
             $user = $this->createUserByData($data);
             $manager->persist($user);
         }
@@ -56,6 +55,7 @@ class UserContext extends DefaultContext
 
     /**
      * @param array $data
+     *
      * @return UserInterface
      */
     protected function createUserByData(array $data)
@@ -73,7 +73,7 @@ class UserContext extends DefaultContext
 
     /**
      * @param UserInterface $user
-     * @param array $data
+     * @param array         $data
      */
     protected function populateUser(UserInterface $user, array $data)
     {
@@ -82,8 +82,8 @@ class UserContext extends DefaultContext
         $user->setPlainPassword(isset($data['password']) ? trim($data['password']) : $this->faker->password());
         $user->setEmail(isset($data['email']) ? trim($data['email']) : $this->faker->email);
         $user->setEmailCanonical($this->getCanonicalizer()->canonicalize($user->getEmail()));
-        $user->setEnabled(isset($data['enabled']) ? (bool)$data['enabled'] : true);
-        $user->setLocked(isset($data['locked']) ? (bool)$data['locked'] : false);
+        $user->setEnabled(isset($data['enabled']) ? (bool) $data['enabled'] : true);
+        $user->setLocked(isset($data['locked']) ? (bool) $data['locked'] : false);
         $user->addRole(isset($data['role']) ? $data['role'] : 'ROLE_USER');
 
         $user->setEmailVerificationToken(isset($data['email_verification_token']) ? $data['email_verification_token'] : null);
@@ -96,7 +96,7 @@ class UserContext extends DefaultContext
 
     /**
      * @param CustomerInterface $customer
-     * @param array $data
+     * @param array             $data
      */
     protected function populateCustomer(CustomerInterface $customer, array $data)
     {

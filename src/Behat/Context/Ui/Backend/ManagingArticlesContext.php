@@ -48,9 +48,9 @@ class ManagingArticlesContext implements Context
     /**
      * ManagingPeopleContext constructor.
      *
-     * @param IndexPage $indexPage
-     * @param CreatePage $createPage
-     * @param UpdatePage $updatePage
+     * @param IndexPage                    $indexPage
+     * @param CreatePage                   $createPage
+     * @param UpdatePage                   $updatePage
      * @param CurrentPageResolverInterface $currentPageResolver
      */
     public function __construct(
@@ -168,7 +168,7 @@ class ManagingArticlesContext implements Context
      */
     public function iShouldSeeArticlesInTheList($number)
     {
-        Assert::same($this->indexPage->countItems(), (int)$number);
+        Assert::same($this->indexPage->countItems(), (int) $number);
     }
 
     /**
@@ -217,7 +217,6 @@ class ManagingArticlesContext implements Context
     {
         try {
             $this->indexPage->open();
-
         } catch (UnexpectedPageException $exception) {
             // nothing else to do
         }

@@ -53,7 +53,7 @@ class DealerPriceExampleFactory extends AbstractExampleFactory implements Exampl
     /**
      * DealerPriceExampleFactory constructor.
      *
-     * @param FactoryInterface $dealerPriceFactory
+     * @param FactoryInterface    $dealerPriceFactory
      * @param RepositoryInterface $productRepository
      * @param RepositoryInterface $dealerRepository
      */
@@ -61,8 +61,7 @@ class DealerPriceExampleFactory extends AbstractExampleFactory implements Exampl
         FactoryInterface $dealerPriceFactory,
         RepositoryInterface $productRepository,
         RepositoryInterface $dealerRepository
-    )
-    {
+    ) {
         $this->dealerPriceFactory = $dealerPriceFactory;
         $this->productRepository = $productRepository;
         $this->dealerRepository = $dealerRepository;

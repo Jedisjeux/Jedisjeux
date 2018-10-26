@@ -45,13 +45,13 @@ class AppUserType extends UserType
                         'app.ui.reviewer' => 'ROLE_REVIEWER',
                         'app.ui.publisher' => 'ROLE_PUBLISHER',
                         'app.ui.administrator' => 'ROLE_ADMIN',
-                    ]
+                    ],
                 ],
                 'by_reference' => false,
                 'expanded' => true,
                 'multiple' => true,
             ])
-            ->addEventListener(FormEvents::POST_SUBMIT, array($this, 'onPostSubmit'));
+            ->addEventListener(FormEvents::POST_SUBMIT, [$this, 'onPostSubmit']);
     }
 
     /**

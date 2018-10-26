@@ -66,10 +66,10 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
 
     /**
      * @param ProductFactoryInterface $productFactory
-     * @param FactoryInterface $productVariantImageFactory
-     * @param RepositoryInterface $personRepository
-     * @param RepositoryInterface $taxonRepository
-     * @param SlugGeneratorInterface $slugGenerator
+     * @param FactoryInterface        $productVariantImageFactory
+     * @param RepositoryInterface     $personRepository
+     * @param RepositoryInterface     $taxonRepository
+     * @param SlugGeneratorInterface  $slugGenerator
      */
     public function __construct(
         ProductFactoryInterface $productFactory,
@@ -77,8 +77,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         RepositoryInterface $personRepository,
         RepositoryInterface $taxonRepository,
         SlugGeneratorInterface $slugGenerator
-    )
-    {
+    ) {
         $this->productFactory = $productFactory;
         $this->productVariantImageFactory = $productVariantImageFactory;
         $this->personRepository = $personRepository;
@@ -147,18 +146,18 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
 
     /**
      * @param Product $product
-     * @param array $options
+     * @param array   $options
      */
     private function createImages(Product $product, array $options)
     {
         $first = true;
 
         $filesystem = new Filesystem();
-        $dir = __DIR__ . '/../../../web/uploads/img';
+        $dir = __DIR__.'/../../../web/uploads/img';
 
         foreach ($options['images'] as $imagePath) {
             $basename = basename($imagePath);
-            $filesystem->copy($imagePath, $dir . '/' . $basename);
+            $filesystem->copy($imagePath, $dir.'/'.$basename);
 
             /** @var ProductVariantImage $image */
             $image = $this->productVariantImageFactory->createNew();
@@ -221,20 +220,19 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             })
 
             ->setDefault('short_description', function (Options $options) {
-                return "<p>" . implode("</p><p>", $this->faker->paragraphs(2)) . '</p>';
+                return '<p>'.implode('</p><p>', $this->faker->paragraphs(2)).'</p>';
             })
 
             ->setDefault('description', function (Options $options) {
-                return "<p>" . implode("</p><p>", $this->faker->paragraphs(5)) . '</p>';
+                return '<p>'.implode('</p><p>', $this->faker->paragraphs(5)).'</p>';
             })
 
             ->setDefault('material', function (Options $options) {
-
                 $itemCount = $this->faker->numberBetween(5, 10);
 
                 $materialList = [];
 
-                for($i = 0 ; $i < $itemCount ; $i++) {
+                for ($i = 0; $i < $itemCount; ++$i) {
                     $materialList[] = $this->faker->words(3, true);
                 }
 
@@ -242,7 +240,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             })
 
             ->setDefault('images', LazyOption::randomOnesImage(
-                __DIR__ . '/../../../tests/Resources/fixtures/products/covers', 1
+                __DIR__.'/../../../tests/Resources/fixtures/products/covers', 1
             ))
 
             ->setDefault('main_taxon', null)
@@ -291,7 +289,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
 
             ->setDefault('created_at', function (Options $options) {
                 return $this->faker->dateTimeBetween('-1 year', 'yesterday');
-            } )
+            })
             ->setAllowedTypes('created_at', ['null', 'string', \DateTimeInterface::class])
             ->setNormalizer('created_at', function (Options $options, $createdAt) {
                 if (!is_string($createdAt)) {

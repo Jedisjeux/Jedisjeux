@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: loic
  * Date: 29/06/2016
- * Time: 13:46
+ * Time: 13:46.
  */
 
 namespace App\Utils;
@@ -36,7 +36,7 @@ class BggProduct
      */
     public function getName()
     {
-        return (string)$this->boardGame->name;
+        return (string) $this->boardGame->name;
     }
 
     /**
@@ -44,7 +44,7 @@ class BggProduct
      */
     public function getImagePath()
     {
-        return (string)$this->boardGame->image;
+        return (string) $this->boardGame->image;
     }
 
     /**
@@ -60,7 +60,7 @@ class BggProduct
      */
     public function getMinDuration()
     {
-        return (string)$this->boardGame->minplaytime;
+        return (string) $this->boardGame->minplaytime;
     }
 
     /**
@@ -68,7 +68,7 @@ class BggProduct
      */
     public function getMaxDuration()
     {
-        return (string)$this->boardGame->maxplaytime;
+        return (string) $this->boardGame->maxplaytime;
     }
 
     /**
@@ -76,7 +76,7 @@ class BggProduct
      */
     public function getAge()
     {
-        return (string)$this->boardGame->age;
+        return (string) $this->boardGame->age;
     }
 
     /**
@@ -84,7 +84,7 @@ class BggProduct
      */
     public function getNbJoueursMin()
     {
-        return (string)$this->boardGame->minplayers;
+        return (string) $this->boardGame->minplayers;
     }
 
     /**
@@ -92,7 +92,7 @@ class BggProduct
      */
     public function getNbJoueursMax()
     {
-        return (string)$this->boardGame->maxplayers;
+        return (string) $this->boardGame->maxplayers;
     }
 
     /**
@@ -100,10 +100,10 @@ class BggProduct
      */
     public function getMecanismes()
     {
-        $mechanisms = array();
+        $mechanisms = [];
 
         foreach ($this->boardGame->boardgamemechanic as $row) {
-            $mechanisms[] = (string)$row;
+            $mechanisms[] = (string) $row;
         }
 
         return $mechanisms;
@@ -114,7 +114,7 @@ class BggProduct
      */
     public function getDescription()
     {
-        $description = preg_replace("/\<br\s*\/?\>/i", "\n", (string)$this->boardGame->description);
+        $description = preg_replace("/\<br\s*\/?\>/i", "\n", (string) $this->boardGame->description);
 
         return strip_tags($description);
     }
@@ -153,7 +153,7 @@ class BggProduct
         $people = [];
 
         foreach ($peopleNode as $row) {
-            $people[] = (string)$row;
+            $people[] = (string) $row;
         }
 
         return $people;
@@ -167,6 +167,7 @@ class BggProduct
     protected function getApiUrl($url)
     {
         preg_match('/\/(?P<gameId>\d+)/', $url, $matches);
-        return self::API_BASE_URL . $matches['gameId'];
+
+        return self::API_BASE_URL.$matches['gameId'];
     }
 }

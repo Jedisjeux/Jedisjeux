@@ -42,9 +42,9 @@ class CalculatePostCountByTopicSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             AppEvents::POST_PRE_CREATE => 'onPostCreate',
-        );
+        ];
     }
 
     /**

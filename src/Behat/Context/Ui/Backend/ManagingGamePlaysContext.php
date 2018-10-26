@@ -15,7 +15,6 @@ use App\Behat\Page\Backend\GamePlay\IndexPage;
 use App\Behat\Page\Backend\GamePlay\UpdatePage;
 use App\Behat\Service\Resolver\CurrentPageResolverInterface;
 use App\Entity\Customer;
-use App\Entity\Topic;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -50,9 +49,9 @@ class ManagingGamePlaysContext implements Context
     /**
      * ManagingPeopleContext constructor.
      *
-     * @param IndexPage $indexPage
-     * @param UpdatePage $updatePage
-     * @param RepositoryInterface $gamePlayRepository
+     * @param IndexPage                    $indexPage
+     * @param UpdatePage                   $updatePage
+     * @param RepositoryInterface          $gamePlayRepository
      * @param CurrentPageResolverInterface $currentPageResolver
      */
     public function __construct(
@@ -85,7 +84,7 @@ class ManagingGamePlaysContext implements Context
             'author' => $customer,
         ]);
 
-        Assert::notNull($gamePlay, sprintf("Game play of %s played by %s was not found", $product->getName(), $customer->getEmail()));
+        Assert::notNull($gamePlay, sprintf('Game play of %s played by %s was not found', $product->getName(), $customer->getEmail()));
 
         $this->updatePage->open(['id' => $gamePlay->getId()]);
     }

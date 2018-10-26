@@ -16,7 +16,6 @@ use App\Repository\PersonRepository;
 use App\Repository\ProductRepository;
 use App\Repository\ProductReviewRepository;
 use App\Repository\UserRepository;
-use Doctrine\ORM\EntityRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,13 +32,13 @@ class CounterController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('frontend/homepage/index/_counters.html.twig', array(
+        return $this->render('frontend/homepage/index/_counters.html.twig', [
             'articleCount' => $this->getArticleRepository()->findNbResults(),
             'productCount' => $this->getProductRepository()->findNbResults(),
             'personCount' => $this->getPersonRepository()->findNbResults(),
             'userCount' => $this->getUserRepository()->findNbResults(),
             'ratingCount' => $this->getProductRepository()->findNbResults(),
-        ));
+        ]);
     }
 
     /**

@@ -46,7 +46,7 @@ class ProductReviewContext extends DefaultContext
             $productReview->setComment(isset($data['comment']) ? $data['comment'] : $this->faker->realText());
             $productReview->setReviewSubject($product);
             $productReview->setAuthor($author);
-            $productReview->setRating(isset($data['rating']) ? (int)$data['rating'] : $this->faker->numberBetween(1, 10));
+            $productReview->setRating(isset($data['rating']) ? (int) $data['rating'] : $this->faker->numberBetween(1, 10));
 
             $manager->persist($productReview);
         }

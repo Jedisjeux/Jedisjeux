@@ -17,8 +17,7 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\ExpectationException;
 
 /**
- * Class UtilsContext
- * @package App\Behat
+ * Class UtilsContext.
  */
 class UtilsContext extends DefaultContext
 {
@@ -57,7 +56,7 @@ class UtilsContext extends DefaultContext
     /**
      * @When /^I wait "([^""]*)" seconds$/
      *
-     * @param integer $time
+     * @param int $time
      */
     public function waitTime($time)
     {
@@ -67,7 +66,7 @@ class UtilsContext extends DefaultContext
     /**
      * @When /^I wait "([^""]*)" seconds until "([^""]*)"$/
      *
-     * @param integer $time time in milliseconds
+     * @param int    $time      time in milliseconds
      * @param string $condition JS condition
      */
     public function waitTimeUntilCondition($time, $condition)
@@ -78,14 +77,14 @@ class UtilsContext extends DefaultContext
     /**
      * @When /^I attach file "([^""]*)" to "([^""]*)"$/
      *
-     * @param string $path path to file
+     * @param string $path    path to file
      * @param string $locator input id, name or label
      *
      * @throws \Behat\Mink\Exception\ElementNotFoundException
      */
     public function attachFile($path, $locator)
     {
-        $path = realpath($this->getContainer()->getParameter('kernel.root_dir') . "/../" . $path);
+        $path = realpath($this->getContainer()->getParameter('kernel.root_dir').'/../'.$path);
         $page = $this->getSession()->getPage();
         $page->attachFileToField($locator, $path);
     }
@@ -94,7 +93,6 @@ class UtilsContext extends DefaultContext
      * @param string $radioLabel
      *
      * @throws ElementNotFoundException
-     * @return void
      * @Given /^I select the "([^"]*)" radio button$/
      */
     public function iSelectTheRadioButton($radioLabel)
@@ -124,7 +122,7 @@ class UtilsContext extends DefaultContext
         $nodeElement = $page->find('css', $element);
 
         if (null === $nodeElement) {
-            throw new \LogicException('Could not find the element with css "' . $element . '"');
+            throw new \LogicException('Could not find the element with css "'.$element.'"');
         }
 
         $nodeElement->pressButton($button);
@@ -145,7 +143,7 @@ class UtilsContext extends DefaultContext
         $texts = $this->getSession()->getPage()->find('css', '.labeled.dropdown .text');
 
         if (null === $texts) {
-            throw new ExpectationException('Could not find a dropdown with label: ' . $label, $this->getSession());
+            throw new ExpectationException('Could not find a dropdown with label: '.$label, $this->getSession());
         }
 
         foreach ($texts as $text) {
@@ -172,7 +170,7 @@ class UtilsContext extends DefaultContext
         $nodeElement = $page->find('css', $element);
 
         if (null === $nodeElement) {
-            throw new \LogicException('Could not find the element with css "' . $element . '"');
+            throw new \LogicException('Could not find the element with css "'.$element.'"');
         }
 
         $nodeElement->clickLink($link);
@@ -307,7 +305,7 @@ class UtilsContext extends DefaultContext
         /** @var NodeElement $option */
         foreach ($options as $option) {
             if ($optionValue === $option->getHtml()) {
-                if ('selected' !== $option->getAttribute('selected') and "" !== $option->getAttribute('value')) {
+                if ('selected' !== $option->getAttribute('selected') and '' !== $option->getAttribute('value')) {
                     $message = sprintf('"%s" option from "%s" is not selected but it should', $optionValue, $selectName);
                     throw new ElementHtmlException($message, $this->getSession(), $select);
                 }
@@ -328,14 +326,13 @@ class UtilsContext extends DefaultContext
         $field = $page->findField($element);
 
         if (empty($field)) {
-            throw new ExpectationException('Could not find WYSIWYG with locator: ' . $element, $this->getSession());
+            throw new ExpectationException('Could not find WYSIWYG with locator: '.$element, $this->getSession());
         }
-
 
         $fieldId = $field->getAttribute('id');
 
         if (empty($fieldId)) {
-            throw new ExpectationException('Could not find an id for field with locator: ' . $element, $this->getSession());
+            throw new ExpectationException('Could not find an id for field with locator: '.$element, $this->getSession());
         }
 
         $this->getSession()->executeScript("CKEDITOR.instances[\"$fieldId\"].setData(\"$value\");");

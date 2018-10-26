@@ -51,7 +51,6 @@ class DashboardContext implements Context
     {
         try {
             $this->dashboardPage->open();
-
         } catch (UnexpectedPageException $exception) {
             // nothing else to do
         }

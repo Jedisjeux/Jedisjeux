@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: loic
  * Date: 29/03/2016
- * Time: 17:04
+ * Time: 17:04.
  */
 
 namespace App\Entity;
@@ -33,7 +33,7 @@ class PersonImage extends AbstractImage
     protected $description;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(type="boolean", name="is_main")
      */
@@ -72,7 +72,7 @@ class PersonImage extends AbstractImage
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isMain(): bool
     {
@@ -80,7 +80,7 @@ class PersonImage extends AbstractImage
     }
 
     /**
-     * @param boolean $main
+     * @param bool $main
      */
     public function setMain(bool $main): void
     {

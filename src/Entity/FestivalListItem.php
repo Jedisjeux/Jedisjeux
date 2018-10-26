@@ -19,7 +19,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- * 
+ *
  * @ORM\Entity
  * @ORM\Table("jdj_festival_list_item")
  *

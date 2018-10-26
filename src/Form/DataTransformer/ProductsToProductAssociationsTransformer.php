@@ -28,17 +28,17 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
     /**
      * @var FactoryInterface
      */
-    protected $productAssociationFactory;
+    private $productAssociationFactory;
 
     /**
      * @var ProductRepositoryInterface
      */
-    protected $productRepository;
+    private $productRepository;
 
     /**
      * @var RepositoryInterface
      */
-    protected $productAssociationTypeRepository;
+    private $productAssociationTypeRepository;
 
     /**
      * @var Collection
@@ -46,9 +46,9 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
     private $productAssociations;
 
     /**
-     * @param FactoryInterface $productAssociationFactory
+     * @param FactoryInterface           $productAssociationFactory
      * @param ProductRepositoryInterface $productRepository
-     * @param RepositoryInterface $productAssociationTypeRepository
+     * @param RepositoryInterface        $productAssociationTypeRepository
      */
     public function __construct(
         FactoryInterface $productAssociationFactory,
@@ -157,7 +157,7 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
 
     /**
      * @param ProductAssociationInterface $productAssociation
-     * @param string $productCodes
+     * @param string                      $productCodes
      */
     private function setAssociatedProductsByProductCodes(ProductAssociationInterface $productAssociation, $productCodes)
     {

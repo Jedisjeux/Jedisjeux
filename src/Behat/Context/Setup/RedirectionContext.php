@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of Jedisjeux
+ * This file is part of Jedisjeux.
  *
  * (c) Loïc Frémont
  *
@@ -11,7 +11,6 @@
 
 namespace App\Behat\Context\Setup;
 
-use App\Entity\Dealer;
 use App\Entity\Redirection;
 use App\Fixture\Factory\ExampleFactoryInterface;
 use Behat\Behat\Context\Context;
@@ -36,7 +35,7 @@ class RedirectionContext implements Context
      * RedirectionContext constructor.
      *
      * @param ExampleFactoryInterface $redirectionFactory
-     * @param RepositoryInterface $redirectionRepository
+     * @param RepositoryInterface     $redirectionRepository
      */
     public function __construct(ExampleFactoryInterface $redirectionFactory, RepositoryInterface $redirectionRepository)
     {

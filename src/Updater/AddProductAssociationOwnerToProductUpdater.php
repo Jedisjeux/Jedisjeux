@@ -21,7 +21,7 @@ class AddProductAssociationOwnerToProductUpdater extends AbstractProductAssociat
 {
     /**
      * @param ProductAssociationInterface $association
-     * @param ProductInterface $product
+     * @param ProductInterface            $product
      */
     public function update(ProductAssociationInterface $association, ProductInterface $product)
     {
@@ -30,7 +30,7 @@ class AddProductAssociationOwnerToProductUpdater extends AbstractProductAssociat
 
     /**
      * @param ProductAssociationInterface $productAssociation
-     * @param ProductInterface $product
+     * @param ProductInterface            $product
      */
     protected function addProductAssociationOwnerToProduct(ProductAssociationInterface $productAssociation, ProductInterface $product)
     {

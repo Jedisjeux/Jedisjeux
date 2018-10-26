@@ -30,7 +30,7 @@ class CustomerContext implements CustomerContextInterface
     private $authorizationChecker;
 
     /**
-     * @param TokenStorageInterface $tokenStorage
+     * @param TokenStorageInterface         $tokenStorage
      * @param AuthorizationCheckerInterface $authorizationChecker
      */
     public function __construct(TokenStorageInterface $tokenStorage, AuthorizationCheckerInterface $authorizationChecker)

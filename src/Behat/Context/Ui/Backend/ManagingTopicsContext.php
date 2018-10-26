@@ -11,11 +11,8 @@
 
 namespace App\Behat\Context\Ui\Backend;
 
-use App\Behat\Page\Backend\Crud\IndexPageInterface;
-use App\Behat\Page\Backend\Crud\UpdatePageInterface;
 use App\Behat\Page\Backend\Topic\IndexPage;
 use App\Behat\Page\Backend\Topic\UpdatePage;
-use App\Behat\Page\SymfonyPageInterface;
 use App\Behat\Service\Resolver\CurrentPageResolverInterface;
 use App\Entity\Topic;
 use Behat\Behat\Context\Context;
@@ -44,8 +41,8 @@ class ManagingTopicsContext implements Context
     /**
      * ManagingPeopleContext constructor.
      *
-     * @param IndexPage $indexPage
-     * @param UpdatePage $updatePage
+     * @param IndexPage                    $indexPage
+     * @param UpdatePage                   $updatePage
      * @param CurrentPageResolverInterface $currentPageResolver
      */
     public function __construct(

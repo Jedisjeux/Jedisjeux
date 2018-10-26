@@ -31,7 +31,6 @@ class StaticContentContext extends DefaultContext
         $manager = $this->getDocumentManager();
 
         foreach ($table->getHash() as $data) {
-
             /** @var StaticContent $staticContent */
             $staticContent = $this->getFactory('static_content', 'sylius')->createNew();
             $staticContent->setName(isset($data['name']) ? $data['name'] : $this->faker->slug);

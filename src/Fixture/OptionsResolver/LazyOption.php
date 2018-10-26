@@ -65,7 +65,7 @@ final class LazyOption
             $files = $finder->files()->in($directory);
             $images = [];
 
-            /** @var File $file */
+            /* @var File $file */
 
             foreach ($files as $sourcePathName) {
                 $file = new File($sourcePathName);
@@ -80,7 +80,7 @@ final class LazyOption
 
     /**
      * @param RepositoryInterface $repository
-     * @param int $chanceOfRandomOne
+     * @param int                 $chanceOfRandomOne
      *
      * @return \Closure
      */
@@ -103,7 +103,7 @@ final class LazyOption
 
     /**
      * @param string $directory
-     * @param int $chanceOfRandomOne
+     * @param int    $chanceOfRandomOne
      *
      * @return \Closure
      */
@@ -118,7 +118,7 @@ final class LazyOption
             $files = $finder->files()->in($directory);
             $images = [];
 
-            /** @var File $file */
+            /* @var File $file */
 
             foreach ($files as $sourcePathName) {
                 $file = new File($sourcePathName);
@@ -131,7 +131,7 @@ final class LazyOption
 
     /**
      * @param RepositoryInterface $repository
-     * @param int $amount
+     * @param int                 $amount
      *
      * @return \Closure
      */
@@ -164,7 +164,7 @@ final class LazyOption
             $files = $finder->files()->in($directory);
             $images = [];
 
-            /** @var File $file */
+            /* @var File $file */
 
             foreach ($files as $sourcePathName) {
                 $file = new File($sourcePathName);
@@ -198,7 +198,7 @@ final class LazyOption
 
     /**
      * @param RepositoryInterface $repository
-     * @param string $field
+     * @param string              $field
      *
      * @return \Closure
      */
@@ -226,7 +226,7 @@ final class LazyOption
 
     /**
      * @param RepositoryInterface $repository
-     * @param string $field
+     * @param string              $field
      *
      * @return \Closure
      */

@@ -13,7 +13,6 @@ namespace App\Form\Type;
 
 use App\Entity\ProductVariant;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType as BaseProductVariantType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -28,7 +27,7 @@ class ProductVariantType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -43,39 +42,38 @@ class ProductVariantType extends AbstractType
                 'label' => 'label.release_date',
                 'required' => false,
                 'years' => range(1902, date('Y') + 2),
-
             ])
             ->add('releasedAtPrecision', ChoiceType::class, [
                 'label' => 'label.release_date_precision',
                 'required' => true,
-                'choices'  => array(
+                'choices' => [
                     'label.day' => ProductVariant::RELEASED_AT_PRECISION_ON_DAY,
                     'label.month' => ProductVariant::RELEASED_AT_PRECISION_ON_MONTH,
                     'label.year' => ProductVariant::RELEASED_AT_PRECISION_ON_YEAR,
-                ),
+                ],
             ])
-            ->add('images', CollectionType::class, array(
+            ->add('images', CollectionType::class, [
                 'label' => false,
                 'entry_type' => ProductVariantImageType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-            ))
-            ->add('designers', PersonAutocompleteChoiceType::class, array(
+            ])
+            ->add('designers', PersonAutocompleteChoiceType::class, [
                 'label' => 'label.designers',
                 'required' => false,
                 'multiple' => true,
-            ))
-            ->add('artists', PersonAutocompleteChoiceType::class, array(
+            ])
+            ->add('artists', PersonAutocompleteChoiceType::class, [
                 'label' => 'label.artists',
                 'required' => false,
                 'multiple' => true,
-            ))
-            ->add('publishers', PersonAutocompleteChoiceType::class, array(
+            ])
+            ->add('publishers', PersonAutocompleteChoiceType::class, [
                 'label' => 'label.publishers',
                 'required' => false,
                 'multiple' => true,
-            ))
+            ])
             ->remove('presentation');
     }
 

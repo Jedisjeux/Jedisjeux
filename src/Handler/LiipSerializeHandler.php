@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of Jedisjeux
+ * This file is part of Jedisjeux.
  *
  * (c) Loïc Frémont
  *
@@ -31,7 +31,7 @@ class LiipSerializeHandler implements SubscribingHandlerInterface
      *
      * @param CacheManager $manager
      */
-    function __construct(CacheManager $manager)
+    public function __construct(CacheManager $manager)
     {
         $this->manager = $manager;
     }
@@ -41,20 +41,20 @@ class LiipSerializeHandler implements SubscribingHandlerInterface
      */
     public static function getSubscribingMethods()
     {
-        return array(
-            array(
+        return [
+            [
                 'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
                 'format' => 'json',
                 'type' => 'LiipSerializer',
                 'method' => 'serializeLiipSerializerTojson',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
      * @param VisitorInterface $visitor
-     * @param array $imageData
-     * @param array $type
+     * @param array            $imageData
+     * @param array            $type
      *
      * @return string
      */

@@ -41,7 +41,6 @@ EOT
     {
         $output->writeln(sprintf('Downloading Jedisjeux images and avatars for environment <info>%s</info>.', $this->getEnvironment()));
 
-
         $commands = [
             'app:avatars:download',
             'app:images:download',

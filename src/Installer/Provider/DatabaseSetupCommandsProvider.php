@@ -65,7 +65,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
 
         try {
             $schemaManager = $this->getSchemaManager();
-            
+
             return in_array($databaseName, $schemaManager->listDatabases());
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
@@ -82,9 +82,9 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     }
 
     /**
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
-     * @param QuestionHelper $questionHelper
+     * @param QuestionHelper  $questionHelper
      *
      * @return array
      */
@@ -98,9 +98,9 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     }
 
     /**
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
-     * @param QuestionHelper $questionHelper
+     * @param QuestionHelper  $questionHelper
      *
      * @return array
      */

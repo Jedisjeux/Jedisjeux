@@ -52,7 +52,7 @@ class ProductListFactory implements FactoryInterface
     public function createNew()
     {
         /** @var ProductList $productList */
-        $productList = new $this->className;
+        $productList = new $this->className();
         $productList
             ->setOwner($this->customerContext->getCustomer());
 

@@ -53,7 +53,7 @@ class PostExampleFactory extends AbstractExampleFactory implements ExampleFactor
     /**
      * PostExampleFactory constructor.
      *
-     * @param FactoryInterface $postFactory
+     * @param FactoryInterface    $postFactory
      * @param RepositoryInterface $topicRepository
      * @param RepositoryInterface $customerRepository
      */
@@ -61,8 +61,7 @@ class PostExampleFactory extends AbstractExampleFactory implements ExampleFactor
         FactoryInterface $postFactory,
         RepositoryInterface $topicRepository,
         RepositoryInterface $customerRepository
-    )
-    {
+    ) {
         $this->postFactory = $postFactory;
         $this->topicRepository = $topicRepository;
         $this->customerRepository = $customerRepository;
@@ -80,7 +79,7 @@ class PostExampleFactory extends AbstractExampleFactory implements ExampleFactor
     {
         $resolver
             ->setDefault('body', function (Options $options) {
-                return "<p>" . implode("</p><p>", $this->faker->paragraphs(5)) . '</p>';
+                return '<p>'.implode('</p><p>', $this->faker->paragraphs(5)).'</p>';
             })
 
             ->setDefault('topic', LazyOption::randomOne($this->topicRepository))
@@ -97,7 +96,7 @@ class PostExampleFactory extends AbstractExampleFactory implements ExampleFactor
 
             ->setDefault('created_at', function (Options $options) {
                 return $this->faker->dateTimeBetween('-1 year', 'yesterday');
-            } )
+            })
             ->setAllowedTypes('created_at', ['null', 'string', \DateTimeInterface::class])
             ->setNormalizer('created_at', function (Options $options, $createdAt) {
                 if (!is_string($createdAt)) {

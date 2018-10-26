@@ -22,25 +22,25 @@ class ProductVariantImageType extends AbstractImageType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('description', null, array(
+            ->add('description', null, [
                 'required' => false,
                 'label' => 'label.description',
-            ))
-            ->add('main', null, array(
+            ])
+            ->add('main', null, [
                 'required' => false,
                 'label' => 'label.main',
-            ))
-            ->add('material', null, array(
+            ])
+            ->add('material', null, [
                 'required' => false,
                 'label' => 'label.material',
-            ));
+            ]);
     }
 
     /**
@@ -52,7 +52,7 @@ class ProductVariantImageType extends AbstractImageType
 
         $resolver->setDefaults([
             'data_class' => ProductVariantImage::class,
-            'validation_groups' => ['sylius']
+            'validation_groups' => ['sylius'],
         ]);
     }
 

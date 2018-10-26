@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of Jedisjeux
+ * This file is part of Jedisjeux.
  *
  * (c) Loïc Frémont
  *
@@ -14,7 +14,6 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 use Sylius\Component\Taxonomy\Model\Taxon as BaseTaxon;
-use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -64,21 +63,21 @@ class Taxon extends BaseTaxon
     protected $color;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(type="boolean")
      */
     protected $public;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer")
      */
     protected $topicCount;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer")
      */
@@ -151,7 +150,7 @@ class Taxon extends BaseTaxon
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isPublic(): bool
     {
@@ -159,7 +158,7 @@ class Taxon extends BaseTaxon
     }
 
     /**
-     * @param boolean $public
+     * @param bool $public
      */
     public function setPublic(bool $public): void
     {

@@ -14,8 +14,6 @@ namespace App\EventSubscriber;
 use App\Entity\Product;
 use App\Event\ProductEvents;
 use App\Updater\ProductCountByPersonUpdater;
-use App\Updater\ProductCountByTaxonUpdater;
-use App\Updater\TopicCountByTaxonUpdater;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -44,10 +42,10 @@ class CalculateProductCountByPersonSubscriber implements EventSubscriberInterfac
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             ProductEvents::PRE_CREATE => 'onProductCreate',
             ProductEvents::PRE_UPDATE => 'onProductUpdate',
-        );
+        ];
     }
 
     /**
@@ -58,15 +56,15 @@ class CalculateProductCountByPersonSubscriber implements EventSubscriberInterfac
         /** @var Product $product */
         $product = $event->getSubject();
 
-        foreach($product->getDesigners() as $designer) {
+        foreach ($product->getDesigners() as $designer) {
             $this->updater->update($designer);
         }
 
-        foreach($product->getArtists() as $artist) {
+        foreach ($product->getArtists() as $artist) {
             $this->updater->update($artist);
         }
 
-        foreach($product->getPublishers() as $publisher) {
+        foreach ($product->getPublishers() as $publisher) {
             $this->updater->update($publisher);
         }
     }

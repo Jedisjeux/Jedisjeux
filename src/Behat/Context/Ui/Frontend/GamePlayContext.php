@@ -43,10 +43,10 @@ class GamePlayContext implements Context
     private $updatePage;
 
     /**
-     * @param IndexPage $indexPage
+     * @param IndexPage          $indexPage
      * @param IndexByProductPage $indexByProductPage
-     * @param CreatePage $createPage
-     * @param UpdatePage $updatePage
+     * @param CreatePage         $createPage
+     * @param UpdatePage         $updatePage
      */
     public function __construct(
         IndexPage $indexPage,

@@ -31,7 +31,7 @@ class ErrorContext implements Context
 
     /**
      * @param ErrorPage $errorPage
-     * @param HomePage $homePage
+     * @param HomePage  $homePage
      */
     public function __construct(ErrorPage $errorPage, HomePage $homePage)
     {

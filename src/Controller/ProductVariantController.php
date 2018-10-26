@@ -34,7 +34,7 @@ class ProductVariantController extends ResourceController
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
         $productVariantsToUpdate = $request->get('productVariants');
 
-        if ($configuration->getParameters()->get('csrf_protection', true) &&  !$this->isCsrfTokenValid('update-product-variant-position', $request->request->get('_csrf_token'))) {
+        if ($configuration->getParameters()->get('csrf_protection', true) && !$this->isCsrfTokenValid('update-product-variant-position', $request->request->get('_csrf_token'))) {
             throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
         }
 

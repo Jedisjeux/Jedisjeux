@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: loic
  * Date: 03/09/2015
- * Time: 10:58
+ * Time: 10:58.
  */
 
 namespace App\Utils;
@@ -15,11 +15,12 @@ class DateCalculator
 {
     /**
      * @param string $string
+     *
      * @return \DateTime
      */
     public function getDay($string)
     {
-        switch($string) {
+        switch ($string) {
             case 'today':
                 $date = new \DateTime();
                 break;
@@ -69,9 +70,9 @@ class DateCalculator
     {
         $date = new \DateTime();
         $date
-            ->setDate((int)$date->format('Y'), (int)$date->format('m'), 1)
+            ->setDate((int) $date->format('Y'), (int) $date->format('m'), 1)
             ->setTime(0, 0);
-        
+
         return $date;
     }
 
@@ -81,10 +82,10 @@ class DateCalculator
     public function getFirstDayOfNextMonth()
     {
         $firstDayOfTheMonth = $this->getFirstDayOfTheMonth();
-        $date = clone($firstDayOfTheMonth);
+        $date = clone $firstDayOfTheMonth;
         $date
             ->add(new \DateInterval('P1M'));
-        
+
         return $date;
     }
 
@@ -94,10 +95,10 @@ class DateCalculator
     public function getFirstDayOfPreviousMonth()
     {
         $firstDayOfTheMonth = $this->getFirstDayOfTheMonth();
-        $date = clone($firstDayOfTheMonth);
+        $date = clone $firstDayOfTheMonth;
         $date
             ->sub(new \DateInterval('P1M'));
-        
+
         return $date;
     }
 
@@ -107,11 +108,11 @@ class DateCalculator
     public function getFirstDayOfTheYear()
     {
         $firstDayOfTheMonth = $this->getFirstDayOfTheMonth();
-        $date = clone($firstDayOfTheMonth);
-        $nbMonthsToSubstract = (int)$firstDayOfTheMonth->format('m') - 1;
+        $date = clone $firstDayOfTheMonth;
+        $nbMonthsToSubstract = (int) $firstDayOfTheMonth->format('m') - 1;
         $date
-            ->sub(new \DateInterval('P'. $nbMonthsToSubstract .'M'));
-        
+            ->sub(new \DateInterval('P'.$nbMonthsToSubstract.'M'));
+
         return $date;
     }
 
@@ -121,10 +122,10 @@ class DateCalculator
     public function getLastDayOfTheMonth()
     {
         $firstDayOfTheMonth = $this->getFirstDayOfNextMonth();
-        $date = clone($firstDayOfTheMonth);
+        $date = clone $firstDayOfTheMonth;
         $date
             ->sub(new \DateInterval('P1D'));
-        
+
         return $date;
     }
 
@@ -134,7 +135,7 @@ class DateCalculator
     public function getLastDayOfPreviousMonth()
     {
         $firstDayOfTheMonth = $this->getFirstDayOfTheMonth();
-        $date = clone($firstDayOfTheMonth);
+        $date = clone $firstDayOfTheMonth;
         $date
             ->sub(new \DateInterval('P1D'));
 
@@ -151,13 +152,13 @@ class DateCalculator
         $dayOfWeek = (int) $date->format('w');
 
         if ($dayOfWeek > 0) {
-            $nbDayToSubstract = (int)$date->format('w') - 1;
+            $nbDayToSubstract = (int) $date->format('w') - 1;
         } else {
             // back from sunday to previous monday
             $nbDayToSubstract = 6;
         }
-        $date->sub(new \DateInterval('P' . $nbDayToSubstract . 'D'));
-        
+        $date->sub(new \DateInterval('P'.$nbDayToSubstract.'D'));
+
         return $date;
     }
 
@@ -167,18 +168,18 @@ class DateCalculator
     public function getLastDayOfTheWeek()
     {
         $firstDayOfTheWeek = $this->getFirstDayOfTheWeek();
-        $date = clone($firstDayOfTheWeek);
+        $date = clone $firstDayOfTheWeek;
         $date->add(new \DateInterval('P6D'));
-        
+
         return $date;
     }
 
     public function getFirstDayOfNextWeek()
     {
         $firstDayOfTheWeek = $this->getFirstDayOfTheWeek();
-        $date = clone($firstDayOfTheWeek);
+        $date = clone $firstDayOfTheWeek;
         $date->add(new \DateInterval('P7D'));
-        
+
         return $date;
     }
 
@@ -191,19 +192,20 @@ class DateCalculator
         $date = new \DateTime();
         $date
             ->setTime(0, 0);
-        
+
         return $date;
     }
 
     /**
      * @return \DateTime
      */
-    public function getFirstSecondOfTomorrow() {
+    public function getFirstSecondOfTomorrow()
+    {
         $firstSecondOfToday = $this->getFirstSecondOfToday();
-        $date = clone($firstSecondOfToday);
+        $date = clone $firstSecondOfToday;
         $date
             ->add(new \DateInterval('P1D'));
-        
+
         return $date;
     }
 }

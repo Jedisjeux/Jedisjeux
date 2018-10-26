@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: loic
  * Date: 07/04/2016
- * Time: 17:42
+ * Time: 17:42.
  */
 
 namespace App\Command\Installer;
@@ -38,7 +38,6 @@ EOT
     {
         $output->writeln(sprintf('Loading Jedisjeux data for environment <info>%s</info>.', $this->getEnvironment()));
 
-        
         $commands = [
             'app:root-taxons:load',
             'app:taxons-of-articles:load',

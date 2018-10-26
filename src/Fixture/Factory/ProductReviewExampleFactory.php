@@ -50,8 +50,8 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
 
     /**
      * @param ReviewFactoryInterface $productReviewFactory
-     * @param RepositoryInterface $productRepository
-     * @param RepositoryInterface $customerRepository
+     * @param RepositoryInterface    $productRepository
+     * @param RepositoryInterface    $customerRepository
      */
     public function __construct(
         ReviewFactoryInterface $productReviewFactory,

@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: loic
  * Date: 24/03/16
- * Time: 08:37
+ * Time: 08:37.
  */
 
 namespace App\Command\Installer\Data;
@@ -26,11 +26,11 @@ class LoadImagesOfGamePlaysCommand extends ContainerAwareCommand
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
+        $output->writeln(sprintf('<comment>%s</comment>', $this->getDescription()));
         $this->deleteGamePlaysImages();
         $this->insertGamePlaysImages();
     }

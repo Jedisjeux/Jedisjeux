@@ -44,5 +44,3 @@ class ContactRequestContext extends DefaultContext
         $manager->flush();
     }
 }
-
-

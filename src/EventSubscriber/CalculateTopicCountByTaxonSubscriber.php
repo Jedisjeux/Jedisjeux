@@ -42,9 +42,9 @@ class CalculateTopicCountByTaxonSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             AppEvents::TOPIC_PRE_CREATE => 'onTopicCreate',
-        );
+        ];
     }
 
     /**

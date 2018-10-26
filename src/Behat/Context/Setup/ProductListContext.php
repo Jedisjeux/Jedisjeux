@@ -39,16 +39,15 @@ class ProductListContext implements Context
     protected $productListRepository;
 
     /**
-     * @param SharedStorageInterface $sharedStorage
+     * @param SharedStorageInterface  $sharedStorage
      * @param ExampleFactoryInterface $productListFactory
-     * @param RepositoryInterface $productListRepository
+     * @param RepositoryInterface     $productListRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ExampleFactoryInterface $productListFactory,
         RepositoryInterface $productListRepository
-    )
-    {
+    ) {
         $this->sharedStorage = $sharedStorage;
         $this->productListFactory = $productListFactory;
         $this->productListRepository = $productListRepository;

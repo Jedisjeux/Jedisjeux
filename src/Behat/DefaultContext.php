@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: loic_425
  * Date: 25/09/15
- * Time: 00:46
+ * Time: 00:46.
  */
 
 namespace App\Behat;
@@ -58,7 +58,7 @@ class DefaultContext extends AbstractDefaultContext
     }
 
     /**
-     * @param string $resourceName
+     * @param string      $resourceName
      * @param null|string $applicationName
      *
      * @return FactoryInterface
@@ -74,8 +74,8 @@ class DefaultContext extends AbstractDefaultContext
     }
 
     /**
-     * @param string $type
-     * @param array $criteria
+     * @param string      $type
+     * @param array       $criteria
      * @param null|string $applicationName
      *
      * @return object
@@ -99,7 +99,7 @@ class DefaultContext extends AbstractDefaultContext
     }
 
     /**
-     * @param string $resourceName
+     * @param string      $resourceName
      * @param null|string $applicationName
      *
      * @return RepositoryInterface

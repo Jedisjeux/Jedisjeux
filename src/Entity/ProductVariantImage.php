@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: loic
  * Date: 07/03/2016
- * Time: 18:07
+ * Time: 18:07.
  */
 
 namespace App\Entity;
@@ -39,14 +39,14 @@ class ProductVariantImage extends AbstractImage
     protected $description;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(type="boolean", name="is_main")
      */
     protected $main;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(type="boolean", name="is_material")
      */
@@ -94,7 +94,7 @@ class ProductVariantImage extends AbstractImage
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isMain(): bool
     {
@@ -102,7 +102,7 @@ class ProductVariantImage extends AbstractImage
     }
 
     /**
-     * @param boolean $main
+     * @param bool $main
      */
     public function setMain(bool $main): void
     {
@@ -110,7 +110,7 @@ class ProductVariantImage extends AbstractImage
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isMaterial(): bool
     {
@@ -118,7 +118,7 @@ class ProductVariantImage extends AbstractImage
     }
 
     /**
-     * @param boolean $material
+     * @param bool $material
      */
     public function setMaterial($material): void
     {

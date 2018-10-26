@@ -42,9 +42,9 @@ class CreateTopicForGamePlaySubscriber implements EventSubscriberInterface
     /**
      * CreateTopicForGamePlaySubscriber constructor.
      *
-     * @param ObjectManager $manager
+     * @param ObjectManager   $manager
      * @param TopicRepository $topicRepository
-     * @param TopicFactory $topicFactory
+     * @param TopicFactory    $topicFactory
      */
     public function __construct(ObjectManager $manager, TopicRepository $topicRepository, TopicFactory $topicFactory)
     {
@@ -58,9 +58,9 @@ class CreateTopicForGamePlaySubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             AppEvents::POST_PRE_CREATE => 'onCreate',
-        );
+        ];
     }
 
     /**

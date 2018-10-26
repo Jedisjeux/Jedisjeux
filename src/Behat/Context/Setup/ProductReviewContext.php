@@ -40,9 +40,9 @@ class ProductReviewContext implements Context
     protected $productReviewRepository;
 
     /**
-     * @param SharedStorageInterface $sharedStorage
+     * @param SharedStorageInterface  $sharedStorage
      * @param ExampleFactoryInterface $productReviewFactory
-     * @param RepositoryInterface $productReviewRepository
+     * @param RepositoryInterface     $productReviewRepository
      */
     public function __construct(SharedStorageInterface $sharedStorage, ExampleFactoryInterface $productReviewFactory, RepositoryInterface $productReviewRepository)
     {
@@ -55,7 +55,7 @@ class ProductReviewContext implements Context
      * @Given /^(this product) has one review from (customer "[^"]+")$/
      * @Given /^I wrote a review on (this product)$/
      *
-     * @param ProductInterface $product
+     * @param ProductInterface  $product
      * @param CustomerInterface $customer
      */
     public function productHasAReview(ProductInterface $product, CustomerInterface $customer = null)

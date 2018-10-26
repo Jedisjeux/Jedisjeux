@@ -27,7 +27,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class LoadTaxonsOfArticlesCommand extends ContainerAwareCommand
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function configure()
     {
@@ -37,17 +37,17 @@ class LoadTaxonsOfArticlesCommand extends ContainerAwareCommand
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
+        $output->writeln(sprintf('<comment>%s</comment>', $this->getDescription()));
 
         /** @var TaxonInterface $rootTaxon */
         $rootTaxon = $this->getRepository()->findOneBy(['code' => Taxon::CODE_ARTICLE]);
 
         foreach ($this->getRootTaxons() as $data) {
-            $output->writeln(sprintf("Loading <comment>%s</comment> taxon", $data['name']));
+            $output->writeln(sprintf('Loading <comment>%s</comment> taxon', $data['name']));
 
             $taxon = $this->createOrReplaceTaxon($data, $rootTaxon);
             $this->getManager()->persist($taxon);
@@ -57,7 +57,7 @@ class LoadTaxonsOfArticlesCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param array $data
+     * @param array          $data
      * @param TaxonInterface $rootTaxon
      *
      * @return TaxonInterface

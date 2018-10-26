@@ -47,10 +47,10 @@ class TaxonContext implements Context
     /**
      * TaxonContext constructor.
      *
-     * @param SharedStorageInterface $sharedStorage
+     * @param SharedStorageInterface  $sharedStorage
      * @param ExampleFactoryInterface $taxonFactory
-     * @param RepositoryInterface $taxonRepository
-     * @param EntityManager $manager
+     * @param RepositoryInterface     $taxonRepository
+     * @param EntityManager           $manager
      */
     public function __construct(SharedStorageInterface $sharedStorage, ExampleFactoryInterface $taxonFactory, RepositoryInterface $taxonRepository, EntityManager $manager)
     {

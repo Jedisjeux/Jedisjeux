@@ -12,7 +12,6 @@
 namespace App\Controller;
 
 use App\Entity\Taxon;
-use App\Repository\TopicRepository;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use App\Repository\TaxonRepository;
@@ -28,6 +27,7 @@ class TopicController extends ResourceController
 {
     /**
      * @param Request $request
+     *
      * @return Response
      */
     public function indexWithTaxonsAction(Request $request)
@@ -37,7 +37,7 @@ class TopicController extends ResourceController
         $this->isGrantedOr403($configuration, ResourceActions::INDEX);
 
         /** @var TaxonInterface $rootTaxon */
-        $rootTaxon = $this->getTaxonRepository()->findOneBy(array('code' => Taxon::CODE_FORUM));
+        $rootTaxon = $this->getTaxonRepository()->findOneBy(['code' => Taxon::CODE_FORUM]);
 
         $resources = $this->resourcesCollectionProvider->get($configuration, $this->repository);
 
@@ -61,7 +61,8 @@ class TopicController extends ResourceController
 
     /**
      * @param Request $request
-     * @param string $slug
+     * @param string  $slug
+     *
      * @return Response
      */
     public function indexByTaxonAction(Request $request, $slug)
@@ -71,7 +72,7 @@ class TopicController extends ResourceController
         $this->isGrantedOr403($configuration, ResourceActions::INDEX);
 
         /** @var TaxonInterface $rootTaxon */
-        $rootTaxon = $this->getTaxonRepository()->findOneBy(array('code' => Taxon::CODE_FORUM));
+        $rootTaxon = $this->getTaxonRepository()->findOneBy(['code' => Taxon::CODE_FORUM]);
         /** @var Taxon $taxon */
         $taxon = $this->getTaxonRepository()->findOneBySlug($slug, $this->getParameter('locale'));
 

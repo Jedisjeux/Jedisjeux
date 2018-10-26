@@ -62,7 +62,7 @@ class DealerPriceRepository extends EntityRepository
                     $this->getPropertyName('name like :query'),
                     $this->getPropertyName('dealer.name like :query')
                 ))
-                ->setParameter('query', '%' . $criteria['query'] . '%');
+                ->setParameter('query', '%'.$criteria['query'].'%');
 
             unset($criteria['query']);
         }
@@ -76,7 +76,7 @@ class DealerPriceRepository extends EntityRepository
             $sorting['id'] = 'desc';
         }
 
-        $this->applyCriteria($queryBuilder, (array)$criteria);
+        $this->applyCriteria($queryBuilder, (array) $criteria);
         $this->applySorting($queryBuilder, $sorting);
 
         return $this->getPaginator($queryBuilder);

@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: loic
  * Date: 11/03/2016
- * Time: 15:35
+ * Time: 15:35.
  */
 
 namespace App\Behat;
@@ -31,7 +31,6 @@ class TaxonContext extends DefaultContext
         $manager = $this->getEntityManager();
 
         foreach ($table->getHash() as $data) {
-
             /** @var TaxonRepository $repository */
             $repository = $this->getRepository('taxon');
 
@@ -48,7 +47,7 @@ class TaxonContext extends DefaultContext
             $taxon = $this->getFactory('taxon')->createNew();
             $taxon->setCode(isset($data['code']) ? $data['code'] : $this->faker->unique()->text(5));
             $taxon->setName(isset($data['name']) ? $data['name'] : $this->faker->name);
-            $taxon->setPublic(isset($data['public']) ? (bool)$data['public'] : true);
+            $taxon->setPublic(isset($data['public']) ? (bool) $data['public'] : true);
 
             $parent->addChild($taxon);
             $taxon->setSlug($this->getTaxonSlugGenerator()->generate($taxon));
@@ -78,7 +77,6 @@ class TaxonContext extends DefaultContext
         $manager = $this->getEntityManager();
 
         foreach ($table->getHash() as $data) {
-
             /** @var TaxonInterface $taxon */
             $taxon = $this->getFactory('taxon')->createNew();
             $taxon->setCode(isset($data['code']) ? $data['code'] : $this->faker->unique()->text(5));

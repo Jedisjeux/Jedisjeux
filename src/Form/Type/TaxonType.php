@@ -30,21 +30,21 @@ class TaxonType extends AbstractType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('public', ChoiceType::class, array(
+            ->add('public', ChoiceType::class, [
                 'label' => 'label.public',
-                'choices'  => array(
+                'choices' => [
                     'label.yes' => true,
                     'label.no' => false,
-                ),
-            ))
-            ->add('iconClass', TextType::class, array(
+                ],
+            ])
+            ->add('iconClass', TextType::class, [
                 'label' => 'app.ui.icon_class',
                 'required' => false,
-            ))
-            ->add('color', TextType::class, array(
+            ])
+            ->add('color', TextType::class, [
                 'label' => 'sylius.ui.color',
                 'required' => false,
-            ));
+            ]);
     }
 
     public function getParent()

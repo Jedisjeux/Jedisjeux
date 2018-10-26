@@ -49,9 +49,9 @@ class ProductContext implements Context
     private $indexByPersonPage;
 
     /**
-     * @param ShowPage $showPage
-     * @param IndexPage $indexPage
-     * @param IndexByTaxonPage $indexByTaxonPage
+     * @param ShowPage          $showPage
+     * @param IndexPage         $indexPage
+     * @param IndexByTaxonPage  $indexByTaxonPage
      * @param IndexByPersonPage $indexByPersonPage
      */
     public function __construct(
@@ -241,7 +241,6 @@ class ProductContext implements Context
     {
         try {
             $this->iOpenProductPage($product);
-
         } catch (UnexpectedPageException $exception) {
             // nothing else to do
         }
@@ -256,7 +255,6 @@ class ProductContext implements Context
     {
         try {
             $this->iOpenProductPage($product);
-
         } catch (UnexpectedPageException $exception) {
             // nothing else to do
         }

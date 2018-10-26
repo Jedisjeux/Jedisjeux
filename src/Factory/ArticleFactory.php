@@ -58,7 +58,7 @@ class ArticleFactory implements FactoryInterface
     public function createNew()
     {
         /** @var Article $article */
-        $article = new $this->className;
+        $article = new $this->className();
         $article->setAuthor($this->customerContext->getCustomer());
 
         return $article;
@@ -87,7 +87,7 @@ class ArticleFactory implements FactoryInterface
         $faker = Factory::create();
         $article = $this->createForProduct($product);
 
-        $article->setTitle(sprintf('Critique de %s', (string)$product));
+        $article->setTitle(sprintf('Critique de %s', (string) $product));
 
         /** @var Block $materialBlock */
         $materialBlock = $this->blockFactory->createNew();

@@ -23,6 +23,7 @@ class PersonController extends ResourceController
 {
     /**
      * @param Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexWithTaxonsAction(Request $request)
@@ -30,7 +31,7 @@ class PersonController extends ResourceController
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $this->isGrantedOr403($configuration, ResourceActions::INDEX);
 
-        $rootTaxon = $this->getTaxonRepository()->findOneBy(array('code' => array('zones')));
+        $rootTaxon = $this->getTaxonRepository()->findOneBy(['code' => ['zones']]);
 
         $resources = $this->resourcesCollectionProvider->get($configuration, $this->repository);
 
@@ -54,7 +55,8 @@ class PersonController extends ResourceController
 
     /**
      * @param Request $request
-     * @param string $slug
+     * @param string  $slug
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexByTaxonAction(Request $request, $slug)
@@ -67,7 +69,7 @@ class PersonController extends ResourceController
             throw new NotFoundHttpException('Requested taxon does not exist.');
         }
 
-        $rootTaxon = $this->getTaxonRepository()->findOneBy(array('code' => array('zones')));
+        $rootTaxon = $this->getTaxonRepository()->findOneBy(['code' => ['zones']]);
 
         /** @var PersonRepository $repository */
         $repository = $this->repository;

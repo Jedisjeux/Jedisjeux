@@ -57,12 +57,12 @@ class GamePlayContext implements Context
     protected $topicRepository;
 
     /**
-     * @param SharedStorageInterface $sharedStorage
+     * @param SharedStorageInterface  $sharedStorage
      * @param ExampleFactoryInterface $gamePlayFactory
      * @param ExampleFactoryInterface $topicFactory
      * @param ExampleFactoryInterface $postFactory
-     * @param RepositoryInterface $gamePlayRepository
-     * @param RepositoryInterface $topicRepository
+     * @param RepositoryInterface     $gamePlayRepository
+     * @param RepositoryInterface     $topicRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -71,8 +71,7 @@ class GamePlayContext implements Context
         ExampleFactoryInterface $postFactory,
         RepositoryInterface $gamePlayRepository,
         RepositoryInterface $topicRepository
-    )
-    {
+    ) {
         $this->sharedStorage = $sharedStorage;
         $this->gamePlayFactory = $gamePlayFactory;
         $this->topicFactory = $topicFactory;
@@ -86,7 +85,7 @@ class GamePlayContext implements Context
      * @Given /^(this product) has(?:| also) a game play added by (customer "[^"]+")(?:|, created (\d+) days ago)$/
      * @Given /^(this product) has(?:| also) one game play written by me$/
      *
-     * @param ProductInterface $product
+     * @param ProductInterface  $product
      * @param CustomerInterface $customer
      */
     public function productHasAGamePlay(ProductInterface $product, CustomerInterface $customer = null, $daysSinceCreation = null)
@@ -114,9 +113,9 @@ class GamePlayContext implements Context
      * @Given /^(this product) has one game play from (customer "[^"]+") with (\d+) comments$/
      * @Given /^(this product) has(?:| also) a game play added by (customer "[^"]+") with (\d+) comments(?:|, created (\d+) days ago)$/
      *
-     * @param ProductInterface $product
+     * @param ProductInterface  $product
      * @param CustomerInterface $customer
-     * @param int $postCount
+     * @param int               $postCount
      */
     public function thisProductHasAGamePlayWithComments(ProductInterface $product, CustomerInterface $customer, $postCount, $daysSinceCreation = null)
     {
@@ -145,11 +144,11 @@ class GamePlayContext implements Context
 
     /**
      * @param Topic $topic
-     * @param int $amount
+     * @param int   $amount
      */
     private function createPostsForTopic(Topic $topic, $amount)
     {
-        for ($i = 0 ; $i < $amount ; $i++) {
+        for ($i = 0; $i < $amount; ++$i) {
             /** @var Post $post */
             $post = $this->postFactory->create([
                 'topic' => $topic,

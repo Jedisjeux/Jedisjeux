@@ -64,7 +64,7 @@ class TopicExampleFactory extends AbstractExampleFactory implements ExampleFacto
     private $optionsResolver;
 
     /**
-     * @param TopicFactory $topicFactory
+     * @param TopicFactory        $topicFactory
      * @param RepositoryInterface $customerRepository
      * @param RepositoryInterface $articleRepository
      * @param RepositoryInterface $gamePlayRepository
@@ -76,8 +76,7 @@ class TopicExampleFactory extends AbstractExampleFactory implements ExampleFacto
         RepositoryInterface $articleRepository,
         RepositoryInterface $gamePlayRepository,
         RepositoryInterface $taxonRepository
-    )
-    {
+    ) {
         $this->topicFactory = $topicFactory;
         $this->customerRepository = $customerRepository;
         $this->articleRepository = $articleRepository;
@@ -97,7 +96,7 @@ class TopicExampleFactory extends AbstractExampleFactory implements ExampleFacto
     {
         $options = $this->optionsResolver->resolve($options);
 
-        /** @var Topic $topic */
+        /* @var Topic $topic */
         if ($options['article']) {
             $topic = $this->topicFactory->createForArticle($options['article']);
         } elseif ($options['game_play']) {
@@ -137,7 +136,7 @@ class TopicExampleFactory extends AbstractExampleFactory implements ExampleFacto
             })
 
             ->setDefault('body', function (Options $options) {
-                return "<p>" . implode("</p><p>", $this->faker->paragraphs(5)) . '</p>';
+                return '<p>'.implode('</p><p>', $this->faker->paragraphs(5)).'</p>';
             })
 
             ->setDefault('author', LazyOption::randomOne($this->customerRepository))
@@ -146,7 +145,7 @@ class TopicExampleFactory extends AbstractExampleFactory implements ExampleFacto
 
             ->setDefault('created_at', function (Options $options) {
                 return $this->faker->dateTimeBetween('-1 year', 'yesterday');
-            } )
+            })
             ->setAllowedTypes('created_at', ['null', 'string', \DateTimeInterface::class])
             ->setNormalizer('created_at', function (Options $options, $createdAt) {
                 if (!is_string($createdAt)) {

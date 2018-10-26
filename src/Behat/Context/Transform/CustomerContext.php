@@ -15,7 +15,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Webmozart\Assert\Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -36,7 +35,7 @@ final class CustomerContext implements Context
      * PersonContext constructor.
      *
      * @param RepositoryInterface $topicRepository
-     * @param FactoryInterface $customerFactory
+     * @param FactoryInterface    $customerFactory
      */
     public function __construct(RepositoryInterface $topicRepository, FactoryInterface $customerFactory)
     {

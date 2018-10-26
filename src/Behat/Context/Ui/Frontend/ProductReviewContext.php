@@ -28,7 +28,7 @@ class ProductReviewContext implements Context
     private $updatePage;
 
     /**
-     * @param IndexPage $indexPage
+     * @param IndexPage  $indexPage
      * @param CreatePage $createPage
      * @param UpdatePage $updatePage
      */
