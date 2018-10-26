@@ -79,11 +79,20 @@ class ProductReviewRepository extends EntityRepository
             ;
     }
 
+    /**
+     * @param string $locale
+     * @param string $productSlug
+     * @param null|CustomerInterface $author
+     *
+     * @return null|ReviewInterface
+     *
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
     public function findOneByProductSlugAndAuthor(
         string $locale,
         string $productSlug,
-        CustomerInterface $author
-    ) {
+        ?CustomerInterface $author
+    ): ?ReviewInterface {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.reviewSubject', 'product')
             ->innerJoin('product.translations', 'translation', 'WITH', 'translation.locale = :locale')
@@ -112,8 +121,8 @@ class ProductReviewRepository extends EntityRepository
             ->addSelect('translation')
             ->join('o.reviewSubject', 'product')
             ->join('product.translations', 'translation')
-            ->andWhere('translation.locale', ':locale')
-            ->andWhere('translation.slug', ':slug')
+            ->andWhere('translation.locale = :locale')
+            ->andWhere('translation.slug = :slug')
             ->setParameter('locale', $localeCode)
             ->setParameter('slug', $productSlug)
         ;
