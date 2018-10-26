@@ -494,6 +494,9 @@
     "swiftmailer/swiftmailer": {
         "version": "v6.1.3"
     },
+    "sylius-labs/association-hydrator": {
+        "version": "v1.1.0"
+    },
     "sylius-labs/sensio-distribution-bundle": {
         "version": "v6.0.1"
     },

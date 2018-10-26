@@ -60,14 +60,15 @@ class GamePlayFactory implements FactoryInterface
     /**
      * Create new game-play for a product
      *
+     * @param string $locale
      * @param string $productSlug
      *
      * @return GamePlay
      */
-    public function createForProduct($productSlug)
+    public function createForProduct(string $locale, string $productSlug)
     {
         /** @var ProductInterface $product */
-        $product = $this->productRepository->findOneBySlug($productSlug);
+        $product = $this->productRepository->findOneBySlug($locale, $productSlug);
 
         if (null === $product) {
             throw new \InvalidArgumentException(sprintf('Requested product does not exist with slug "%s".', $productSlug));

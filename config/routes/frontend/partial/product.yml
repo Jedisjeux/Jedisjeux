@@ -29,6 +29,7 @@ sylius_frontend_partial_product_show_by_slug:
             repository:
                 method: findOneBySlug
                 arguments:
+                    - "expr:service('sylius.context.locale').getLocaleCode()"
                     - $slug
             template: $template
 

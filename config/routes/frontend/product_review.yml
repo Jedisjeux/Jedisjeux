@@ -20,7 +20,7 @@ sylius_frontend_product_review_create:
             factory:
                 method: createForSubjectWithReviewer
                 arguments:
-                    - "expr:notFoundOnNull(service('sylius.repository.product').findOneBySlug($slug))"
+                    - "expr:notFoundOnNull(service('sylius.repository.product').findOneBySlug(service('sylius.context.locale').getLocaleCode(), $slug))"
                     - "expr:service('sylius.context.customer').getCustomer()"
             redirect:
                 route: sylius_frontend_product_show
@@ -54,7 +54,7 @@ sylius_frontend_product_rating_create:
             factory:
                 method: createForSubjectWithReviewer
                 arguments:
-                    - "expr:notFoundOnNull(service('sylius.repository.product').findOneBySlug($slug))"
+                    - "expr:notFoundOnNull(service('sylius.repository.product').findOneBySlug(service('sylius.context.locale').getLocaleCode(), $slug))"
                     - "expr:service('sylius.context.customer').getCustomer()"
     options:
         expose: true

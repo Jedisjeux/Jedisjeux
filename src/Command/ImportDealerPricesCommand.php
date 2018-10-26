@@ -287,7 +287,7 @@ EOT
         }
 
         $slug = Transliterator::transliterate($data['product_name']);
-        $product = $this->getProductRepository()->findOneBySlug($slug);
+        $product = $this->getProductRepository()->findOneBySlug($this->getContainer()->getParameter('locale'), $slug);
 
         return $product;
     }
