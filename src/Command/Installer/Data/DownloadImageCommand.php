@@ -7,7 +7,6 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Exception\CommandNotFoundException;
 use Symfony\Component\Console\Exception\InvalidOptionException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -94,7 +93,7 @@ class DownloadImageCommand extends ContainerAwareCommand
     /**
      * @param EntityRepository $repository
      */
-    protected function  downloadImagesFromRepository(EntityRepository $repository): void
+    protected function downloadImagesFromRepository(EntityRepository $repository): void
     {
         $queryBuilder = $repository->createQueryBuilder('o');
         $this->downloadImages($queryBuilder);
@@ -135,7 +134,7 @@ class DownloadImageCommand extends ContainerAwareCommand
      */
     protected function getImageOriginalPath(AbstractImage $image)
     {
-        return $this->input->getOption('image-original-path') . $image->getPath();
+        return $this->input->getOption('image-original-path').$image->getPath();
     }
 
     /**

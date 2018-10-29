@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of Jedisjeux
+ * This file is part of Jedisjeux.
  *
  * (c) Loïc Frémont
  *
@@ -37,7 +37,7 @@ class SendContactEmailSubscriber implements EventSubscriberInterface
      * SendContactEmailSubscriber constructor.
      *
      * @param SenderInterface $sender
-     * @param string $contactEmail
+     * @param string          $contactEmail
      */
     public function __construct(SenderInterface $sender, $contactEmail)
     {
@@ -50,9 +50,9 @@ class SendContactEmailSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             ContactRequestEvents::POST_CREATE => 'onPostCreate',
-        );
+        ];
     }
 
     /**

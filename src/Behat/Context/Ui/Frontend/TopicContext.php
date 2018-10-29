@@ -58,12 +58,12 @@ class TopicContext implements Context
     private $showPage;
 
     /**
-     * @param IndexPage $indexPage
-     * @param IndexByTaxonPage $indexByTaxonPage
-     * @param CreatePage $createPage
+     * @param IndexPage          $indexPage
+     * @param IndexByTaxonPage   $indexByTaxonPage
+     * @param CreatePage         $createPage
      * @param CreateForTaxonPage $createForTaxonPage
-     * @param UpdatePage $updatePage
-     * @param ShowPage $showPage
+     * @param UpdatePage         $updatePage
+     * @param ShowPage           $showPage
      */
     public function __construct(
         IndexPage $indexPage,

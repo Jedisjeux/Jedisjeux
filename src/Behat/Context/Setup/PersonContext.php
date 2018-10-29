@@ -38,9 +38,9 @@ class PersonContext implements Context
     protected $personRepository;
 
     /**
-     * @param SharedStorageInterface $sharedStorage
+     * @param SharedStorageInterface  $sharedStorage
      * @param ExampleFactoryInterface $personFactory
-     * @param EntityRepository $personRepository
+     * @param EntityRepository        $personRepository
      */
     public function __construct(SharedStorageInterface $sharedStorage, ExampleFactoryInterface $personFactory, EntityRepository $personRepository)
     {

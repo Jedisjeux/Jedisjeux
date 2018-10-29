@@ -41,8 +41,8 @@ final class UserRegistrationListener
     private $eventDispatcher;
 
     /**
-     * @param ObjectManager $userManager
-     * @param GeneratorInterface $tokenGenerator
+     * @param ObjectManager            $userManager
+     * @param GeneratorInterface       $tokenGenerator
      * @param EventDispatcherInterface $eventDispatcher
      */
     public function __construct(

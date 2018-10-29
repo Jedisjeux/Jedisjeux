@@ -31,7 +31,7 @@ class ServicesPass implements CompilerPassInterface
 
         $container->setAlias('sylius.context.customer', 'app.context.customer')->setPublic(true);
 
-        $contextLocaleCompositeDefinition = $container->getDefinition("sylius.context.locale.composite");
+        $contextLocaleCompositeDefinition = $container->getDefinition('sylius.context.locale.composite');
         $contextLocaleCompositeDefinition->setDecoratedService(null);
 
         $authorizationCheckerDefinition = $container->getDefinition('security.authorization_checker');
@@ -114,7 +114,7 @@ class ServicesPass implements CompilerPassInterface
             ->setClass(PasswordUpdaterListener::class);
         $listenerPasswordUpdaterDefinition->addTag('kernel.event_listener', [
             'event' => 'sylius.customer.pre_update',
-            'method' => 'customerUpdateEvent'
+            'method' => 'customerUpdateEvent',
         ]);
     }
 }

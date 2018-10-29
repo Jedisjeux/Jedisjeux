@@ -83,7 +83,7 @@ class ProductFactory extends BaseProductFactory
         $product->setDescription($bggProduct->getDescription());
 
         if (null !== $releasedAtYear = $bggProduct->getReleasedAtYear()) {
-            $releasedAt = \DateTime::createFromFormat('Y-m-d', $releasedAtYear . '-01-01');
+            $releasedAt = \DateTime::createFromFormat('Y-m-d', $releasedAtYear.'-01-01');
 
             if (false !== $releasedAt) {
                 $firstVariant = $product->getFirstVariant();

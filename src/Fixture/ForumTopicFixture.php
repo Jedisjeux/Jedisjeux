@@ -44,8 +44,7 @@ class ForumTopicFixture extends AbstractFixture
     public function __construct(
         AbstractResourceFixture $taxonFixture,
         AbstractResourceFixture $topicFixture
-    )
-    {
+    ) {
         $this->taxonFixture = $taxonFixture;
         $this->topicFixture = $topicFixture;
 
@@ -82,7 +81,7 @@ class ForumTopicFixture extends AbstractFixture
                 'code' => 'forum2',
                 'name' => 'Tatooïne : La Cantina',
                 'public' => false,
-            ]
+            ],
         ];
 
         $this->taxonFixture->load(['custom' => [
@@ -90,7 +89,7 @@ class ForumTopicFixture extends AbstractFixture
                 'code' => 'forum',
                 'name' => 'Forum',
                 'children' => $categories,
-            ]
+            ],
         ]]);
 
         $topics = [];

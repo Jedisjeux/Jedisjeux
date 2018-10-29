@@ -33,7 +33,6 @@ class PersonRepository extends EntityRepository
             ->addSelect('image')
             ->leftJoin('o.images', 'image', Join::WITH, 'image.main = 1');
 
-
         if ($taxon) {
             $queryBuilder
                 ->innerJoin('o.taxons', 'taxon')
@@ -51,8 +50,8 @@ class PersonRepository extends EntityRepository
     }
 
     /**
-     * @param array $criteria
-     * @param array $sorting
+     * @param array               $criteria
+     * @param array               $sorting
      * @param TaxonInterface|null $taxon
      *
      * @return QueryBuilder
@@ -62,7 +61,6 @@ class PersonRepository extends EntityRepository
         $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('image')
             ->leftJoin('o.images', 'image', Join::WITH, 'image.main = 1');
-
 
         // for taxon grid filter
         if (isset($criteria['zone']) && !empty($criteria['zone']['mainTaxon'])) {
@@ -93,7 +91,7 @@ class PersonRepository extends EntityRepository
      */
     public function findByNamePart($phrase)
     {
-        $queryBuilder =  $this->createQueryBuilder('o');
+        $queryBuilder = $this->createQueryBuilder('o');
 
         return $queryBuilder
             ->orWhere(
@@ -107,14 +105,14 @@ class PersonRepository extends EntityRepository
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = array()): void
+    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = []): void
     {
         if (isset($criteria['query'])) {
             $queryBuilder
                 ->andWhere('o.slug like :query')
-                ->setParameter('query', '%' . $criteria['query'] . '%');
+                ->setParameter('query', '%'.$criteria['query'].'%');
 
             unset($criteria['query']);
         }
@@ -140,7 +138,7 @@ class PersonRepository extends EntityRepository
             $sorting['id'] = 'asc';
         }
 
-        $this->applyCriteria($queryBuilder, (array)$criteria);
+        $this->applyCriteria($queryBuilder, (array) $criteria);
         $this->applySorting($queryBuilder, $sorting);
 
         return $this->getPaginator($queryBuilder);
@@ -150,8 +148,8 @@ class PersonRepository extends EntityRepository
      * Create paginator for products categorized under given taxon.
      *
      * @param TaxonInterface $taxon
-     * @param array $criteria
-     * @param array $sorting
+     * @param array          $criteria
+     * @param array          $sorting
      *
      * @return Pagerfanta
      */
@@ -186,13 +184,14 @@ class PersonRepository extends EntityRepository
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder
             ->select($queryBuilder->expr()->count('o'));
+
         return $queryBuilder->getQuery()->getSingleScalarResult();
     }
 
     /**
      * @param QueryBuilder $queryBuilder
-     * @param array $criteria
-     * @param array $sorting
+     * @param array        $criteria
+     * @param array        $sorting
      */
     private function sortingOnProductCountIfNecessary(QueryBuilder $queryBuilder, array $criteria, array $sorting)
     {

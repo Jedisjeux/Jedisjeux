@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: loic
  * Date: 17/01/16
- * Time: 17:32
+ * Time: 17:32.
  */
 
 namespace App\Command\Installer\Data;
@@ -20,7 +20,7 @@ class LoadPagesCommand extends ContainerAwareCommand
     protected $output;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function configure()
     {
@@ -30,21 +30,20 @@ class LoadPagesCommand extends ContainerAwareCommand
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->output = $output;
-        $output->writeln("<comment>Load pages</comment>");
+        $output->writeln('<comment>Load pages</comment>');
         // TODO create pages with sylius cms plugin
         $this->getPages();
     }
 
-
     protected function getPages()
     {
-        return array(
-            array(
+        return [
+            [
                 'name' => 'mentions-legales',
                 'title' => 'Mentions légales',
                 'body' => '
@@ -195,7 +194,7 @@ et stocke des informations que vous avez saisies durant votre visite :
 	<li>dans la section Cookies, sélectionnez la valeur appropriée : "Interdire à tous les sites de stocker des données".</li>
 </ul>
                 ',
-            ),
-        );
+            ],
+        ];
     }
 }

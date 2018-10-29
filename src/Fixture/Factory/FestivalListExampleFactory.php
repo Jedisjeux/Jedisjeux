@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of Jedisjeux
+ * This file is part of Jedisjeux.
  *
  * (c) Loïc Frémont
  *
@@ -10,6 +10,7 @@
  */
 
 namespace App\Fixture\Factory;
+
 use App\Entity\FestivalList;
 use App\Formatter\StringInflector;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -66,7 +67,7 @@ class FestivalListExampleFactory extends AbstractExampleFactory implements Examp
             })
 
             ->setDefault('description', function (Options $options) {
-                return "<p>" . implode("</p><p>", $this->faker->paragraphs(5)) . '</p>';
+                return '<p>'.implode('</p><p>', $this->faker->paragraphs(5)).'</p>';
             })
 
             ->setDefault('start_at', function (Options $options) {

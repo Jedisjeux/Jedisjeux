@@ -27,7 +27,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class LoadTaxonsOfTopicsCommand extends ContainerAwareCommand
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function configure()
     {
@@ -37,16 +37,16 @@ class LoadTaxonsOfTopicsCommand extends ContainerAwareCommand
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
+        $output->writeln(sprintf('<comment>%s</comment>', $this->getDescription()));
 
         $rootTaxon = $this->getRootTaxon();
 
         foreach ($this->getTaxons() as $data) {
-            $output->writeln(sprintf("Load <info>%s</info> taxon", $data['name']));
+            $output->writeln(sprintf('Load <info>%s</info> taxon', $data['name']));
             $this->createOrReplaceTaxon($data, $rootTaxon);
         }
 
@@ -55,7 +55,7 @@ class LoadTaxonsOfTopicsCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param array $data
+     * @param array          $data
      * @param TaxonInterface $rootTaxon
      *
      * @return TaxonInterface
@@ -88,7 +88,6 @@ class LoadTaxonsOfTopicsCommand extends ContainerAwareCommand
         $this->getManager()->persist($taxon);
         $this->getManager()->flush();
 
-
         return $taxon;
     }
 
@@ -111,6 +110,7 @@ and old.left_id
 order by old.left_id desc
 limit 1
 EOM;
+
         return $this->getManager()->getConnection()->fetchColumn($query, [$left, $right]);
     }
 
@@ -159,7 +159,7 @@ EOM;
     {
         return $this->getContainer()
             ->get('sylius.repository.taxon')
-            ->findOneBy(array('code' => Taxon::CODE_FORUM));
+            ->findOneBy(['code' => Taxon::CODE_FORUM]);
     }
 
     /**

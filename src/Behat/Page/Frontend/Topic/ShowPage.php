@@ -25,5 +25,4 @@ class ShowPage extends PostPage\IndexPage
             'title' => 'h1.page-title',
         ]);
     }
-
 }

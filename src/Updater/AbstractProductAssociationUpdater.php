@@ -37,7 +37,7 @@ class AbstractProductAssociationUpdater
     }
 
     /**
-     * @param ProductInterface $product
+     * @param ProductInterface                $product
      * @param ProductAssociationTypeInterface $associationType
      *
      * @return ProductAssociationInterface

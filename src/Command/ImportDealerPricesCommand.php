@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of Jedisjeux
+ * This file is part of Jedisjeux.
  *
  * (c) Loïc Frémont
  *
@@ -129,7 +129,7 @@ EOT
                 $this->getManager()->persist($dealerPrice);
             }
 
-            if (($i % self::BATCH_SIZE) === 0) {
+            if (0 === ($i % self::BATCH_SIZE)) {
                 $this->getManager()->flush(); // Executes all updates.
                 $this->getManager()->clear(); // Detaches all objects from Doctrine!
 
@@ -164,7 +164,7 @@ EOT
     }
 
     /**
-     * @param array $data
+     * @param array  $data
      * @param Dealer $dealer
      *
      * @return DealerPrice
@@ -221,7 +221,7 @@ EOT
         $data = [];
 
         foreach (file($filename) as $key => $row) {
-            if ($this->input->getOption('remove-first-line') and $key === 0) {
+            if ($this->input->getOption('remove-first-line') and 0 === $key) {
                 continue;
             }
 
@@ -248,7 +248,7 @@ EOT
                     $status = DealerPrice::STATUS_OUT_OF_STOCK;
                     break;
                 case 'Pr?commande':
-                case preg_replace('/[^a-z]/', '', $rowData[3]) === 'prcommande':
+                case 'prcommande' === preg_replace('/[^a-z]/', '', $rowData[3]):
                     $status = DealerPrice::STATUS_PRE_ORDER;
                     break;
                 default:
@@ -293,7 +293,7 @@ EOT
     }
 
     /**
-     * @return integer nbRows deleted
+     * @return int nbRows deleted
      */
     protected function removeOutOfCatalogDealerPrices(Dealer $dealer)
     {

@@ -16,7 +16,7 @@ class Version20170619111723 extends AbstractMigration
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE jdj_article_review DROP FOREIGN KEY FK_4764CDD675AE1D8A');
         $this->addSql('ALTER TABLE jdj_article_review DROP FOREIGN KEY FK_4764CDD6F675F31B');
@@ -33,7 +33,7 @@ class Version20170619111723 extends AbstractMigration
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE jdj_article_review DROP FOREIGN KEY FK_4764CDD67294869C');
         $this->addSql('ALTER TABLE jdj_article_review DROP FOREIGN KEY FK_4764CDD6F675F31B');

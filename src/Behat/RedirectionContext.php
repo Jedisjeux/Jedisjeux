@@ -11,7 +11,6 @@
 
 namespace App\Behat;
 
-use App\Entity\Dealer;
 use App\Entity\Redirection;
 use Behat\Gherkin\Node\TableNode;
 

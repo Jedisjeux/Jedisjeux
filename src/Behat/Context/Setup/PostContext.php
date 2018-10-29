@@ -17,7 +17,6 @@ use App\Entity\GamePlay;
 use App\Entity\Post;
 use App\Entity\Topic;
 use App\Fixture\Factory\ExampleFactoryInterface;
-use App\Fixture\Factory\TopicExampleFactory;
 use Behat\Behat\Context\Context;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Customer\Model\CustomerInterface;
@@ -53,11 +52,11 @@ class PostContext implements Context
     protected $topicRepository;
 
     /**
-     * @param SharedStorageInterface $sharedStorage
+     * @param SharedStorageInterface  $sharedStorage
      * @param ExampleFactoryInterface $postFactory
      * @param ExampleFactoryInterface $topicFactory
-     * @param EntityRepository $postRepository
-     * @param EntityRepository $topicRepository
+     * @param EntityRepository        $postRepository
+     * @param EntityRepository        $topicRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -99,7 +98,7 @@ class PostContext implements Context
      * @Given /^(this article) has(?:| also) a comment added by (customer "[^"]+")$/
      * @Given /^I leaved a comment on (this article)$/
      *
-     * @param Article $article
+     * @param Article           $article
      * @param CustomerInterface $customer
      */
     public function articleHasACommentAddedByCustomer(Article $article, CustomerInterface $customer = null)
@@ -132,7 +131,7 @@ class PostContext implements Context
      * @Given /^(this game play) has(?:| also) a comment added by (customer "[^"]+")$/
      * @Given /^I leaved a comment on (this game play)$/
      *
-     * @param GamePlay $gamePlay
+     * @param GamePlay          $gamePlay
      * @param CustomerInterface $customer
      */
     public function gamePlayHasACommentAddedByCustomer(GamePlay $gamePlay, CustomerInterface $customer = null)

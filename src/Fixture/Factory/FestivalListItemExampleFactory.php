@@ -51,7 +51,7 @@ class FestivalListItemExampleFactory extends AbstractExampleFactory implements E
     private $optionsResolver;
 
     /**
-     * @param FactoryInterface $festivalListItemFactory
+     * @param FactoryInterface    $festivalListItemFactory
      * @param RepositoryInterface $productRepository
      * @param RepositoryInterface $festivalListRepository
      */
@@ -59,8 +59,7 @@ class FestivalListItemExampleFactory extends AbstractExampleFactory implements E
         FactoryInterface $festivalListItemFactory,
         RepositoryInterface $productRepository,
         RepositoryInterface $festivalListRepository
-    )
-    {
+    ) {
         $this->festivalListItemFactory = $festivalListItemFactory;
         $this->productRepository = $productRepository;
         $this->festivalListRepository = $festivalListRepository;

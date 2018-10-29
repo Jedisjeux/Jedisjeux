@@ -31,14 +31,13 @@ class ProductTranslationType extends AbstractType
         $builder
             ->add('shortDescription', CKEditorType::class, [
                'required' => false,
-                'label' => 'app.ui.short_description'
+                'label' => 'app.ui.short_description',
             ])
             ->add('description', CKEditorType::class, [
                 'required' => false,
-                'label' => 'sylius.ui.description'
+                'label' => 'sylius.ui.description',
             ]);
     }
-
 
     /**
      * {@inheritdoc}

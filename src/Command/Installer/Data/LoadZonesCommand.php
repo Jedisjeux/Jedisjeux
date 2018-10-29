@@ -33,7 +33,7 @@ class LoadZonesCommand extends ContainerAwareCommand
     protected $output;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function configure()
     {
@@ -43,25 +43,25 @@ class LoadZonesCommand extends ContainerAwareCommand
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->output = $output;
-        $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
+        $output->writeln(sprintf('<comment>%s</comment>', $this->getDescription()));
 
         $rootTaxon = $this->getRootTaxon();
         $this->addTaxons($this->getRows(), $rootTaxon);
     }
 
     /**
-     * @param array $taxons
+     * @param array          $taxons
      * @param TaxonInterface $parentTaxon
      */
     protected function addTaxons(array $taxons, TaxonInterface $parentTaxon)
     {
         foreach ($taxons as $data) {
-            $this->output->writeln(sprintf("Loading <info>%s</info> zone", $data['name']));
+            $this->output->writeln(sprintf('Loading <info>%s</info> zone', $data['name']));
             $taxon = $this->createOrReplaceTaxon($data, $parentTaxon);
             $this->getManager()->persist($taxon);
             $this->getManager()->flush();
@@ -70,11 +70,10 @@ class LoadZonesCommand extends ContainerAwareCommand
                 $this->addTaxons($data['children'], $taxon);
             }
         }
-
     }
 
     /**
-     * @param array $data
+     * @param array          $data
      * @param TaxonInterface $parentTaxon
      *
      * @return TaxonInterface
@@ -103,7 +102,6 @@ class LoadZonesCommand extends ContainerAwareCommand
         $taxon->setSlug($this->getTaxonSlugGenerator()->generate($taxon));
 
         return $taxon;
-
     }
 
     /**
@@ -121,17 +119,18 @@ class LoadZonesCommand extends ContainerAwareCommand
     {
         return $this->getContainer()
             ->get('sylius.repository.taxon')
-            ->findOneBy(array('code' => Taxon::CODE_ZONE));
+            ->findOneBy(['code' => Taxon::CODE_ZONE]);
     }
 
     /**
-     * Parse YAML File
+     * Parse YAML File.
      *
      * @return mixed
      */
     public function getRows()
     {
         $yaml = new Parser();
+
         return $yaml->parse(file_get_contents($this->getYAMLFileName()));
     }
 
@@ -140,7 +139,7 @@ class LoadZonesCommand extends ContainerAwareCommand
      */
     public function getYAMLFileName()
     {
-        return $this->getContainer()->get('kernel')->getRootDir() . '/Resources/initialData/zones.yml';
+        return $this->getContainer()->get('kernel')->getRootDir().'/Resources/initialData/zones.yml';
     }
 
     /**
@@ -166,5 +165,4 @@ class LoadZonesCommand extends ContainerAwareCommand
     {
         return $this->getContainer()->get('sylius.manager.taxon');
     }
-
 }

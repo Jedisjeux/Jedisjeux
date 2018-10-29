@@ -35,7 +35,7 @@ class ProductListRepository extends EntityRepository
 
     /**
      * @param int|CustomerInterface $owner
-     * @param int|ProductInterface $product
+     * @param int|ProductInterface  $product
      *
      * @return array
      */

@@ -34,7 +34,6 @@ class GamePlayContext extends DefaultContext
         $manager = $this->getEntityManager();
 
         foreach ($table->getHash() as $data) {
-
             /** @var ProductRepository $productRepository */
             $productRepository = $this->getRepository('product');
             $product = $productRepository->findByName($data['product'], $this->getContainer()->getParameter('locale'))[0];

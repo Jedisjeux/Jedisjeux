@@ -11,9 +11,7 @@
 
 namespace App\Form\Type;
 
-use App\Entity\GamePlayImage;
 use App\Entity\ProductBoxImage;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -28,9 +26,9 @@ class ProductBoxImageType extends AbstractImageType
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => ProductBoxImage::class,
-        ));
+        ]);
     }
 
     /**

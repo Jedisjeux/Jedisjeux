@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of Jedisjeux
+ * This file is part of Jedisjeux.
  *
  * (c) Loïc Frémont
  *
@@ -42,7 +42,7 @@ class PubBannerType extends AbstractImageType
 
         $resolver->setDefaults([
             'data_class' => PubBanner::class,
-            'validation_groups' => ['sylius']
+            'validation_groups' => ['sylius'],
         ]);
     }
 

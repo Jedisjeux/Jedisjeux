@@ -15,7 +15,7 @@ use JMS\Serializer\Annotation as JMS;
 trait IdentifiableTrait
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -36,6 +36,7 @@ trait IdentifiableTrait
 
     /**
      * @param int $id
+     *
      * @return $this
      */
     public function setId($id)

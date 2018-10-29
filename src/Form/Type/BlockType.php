@@ -55,7 +55,7 @@ class BlockType extends AbstractType
                 'placeholder' => 'app.ui.normal',
                 'required' => false,
                 'choices' => [
-                    'app.ui.framed' => 'well'
+                    'app.ui.framed' => 'well',
                 ],
             ])
             ->add('body', CKEditorType::class, [
@@ -67,7 +67,7 @@ class BlockType extends AbstractType
                 'required' => false,
                 'attr' => [
                     'class' => 'position',
-                ]
+                ],
             ]);
     }
 
@@ -76,9 +76,9 @@ class BlockType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => Block::class,
-        ));
+        ]);
     }
 
     /**

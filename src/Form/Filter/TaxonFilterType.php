@@ -71,7 +71,6 @@ class TaxonFilterType extends AbstractType
                 return $queryBuilder;
             },
             'expanded' => false,
-
         ]);
     }
 

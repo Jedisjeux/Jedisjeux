@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of Jedisjeux
+ * This file is part of Jedisjeux.
  *
  * (c) Loïc Frémont
  *
@@ -82,7 +82,7 @@ class DealerExampleFactory extends AbstractExampleFactory implements ExampleFact
 
     /**
      * @param Dealer $dealer
-     * @param array $options
+     * @param array  $options
      */
     private function createImage(Dealer $dealer, array $options)
     {
@@ -111,7 +111,7 @@ class DealerExampleFactory extends AbstractExampleFactory implements ExampleFact
             })
 
             ->setDefault('image', LazyOption::randomOneImageOrNull(
-                __DIR__ . '/../../../tests/Resources/fixtures/dealers', 80
+                __DIR__.'/../../../tests/Resources/fixtures/dealers', 80
             ));
     }
 }

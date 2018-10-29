@@ -23,18 +23,18 @@ class PlayerType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, array(
+            ->add('name', null, [
                 'label' => 'label.name',
                 'required' => false,
-            ))
-            ->add('score', null, array(
+            ])
+            ->add('score', null, [
                 'label' => 'label.score',
-            ))
+            ])
         ;
     }
 
@@ -45,9 +45,9 @@ class PlayerType extends AbstractType
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => Player::class,
-        ));
+        ]);
     }
 
     /**

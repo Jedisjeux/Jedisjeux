@@ -11,9 +11,6 @@
 
 namespace App\Behat\Page\Frontend\Topic;
 
-use App\Behat\Page\SymfonyPage;
-use Behat\Mink\Exception\ElementNotFoundException;
-
 class CreateForTaxonPage extends CreatePage
 {
     /**

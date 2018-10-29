@@ -41,21 +41,20 @@ EOT
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
+        $output->writeln(sprintf('<comment>%s</comment>', $this->getDescription()));
 
         $this->calculateImageCountByGamePlays();
 
-        $output->writeln(sprintf("<info>%s</info>", "Image count by game play have been successfully updated."));
+        $output->writeln(sprintf('<info>%s</info>', 'Image count by game play have been successfully updated.'));
     }
 
     protected function calculateImageCountByGamePlays()
     {
         foreach ($this->createQueryBuilder()->getQuery()->iterate() as $row) {
-
             /** @var GamePlay $gamePlay */
             $gamePlay = $row[0];
 

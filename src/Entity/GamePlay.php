@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: loic
  * Date: 18/03/2016
- * Time: 13:25
+ * Time: 13:25.
  */
 
 namespace App\Entity;
@@ -36,14 +36,14 @@ class GamePlay implements ResourceInterface
     protected $code;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
      */
     protected $duration;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer", nullable=true)
      */

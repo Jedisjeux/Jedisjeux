@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\DependencyInjection\Compiler\RemoveSyliusThemeFilesystemLoaderPass;
 use App\DependencyInjection\Compiler\ServicesPass;
 use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
@@ -55,6 +54,7 @@ class Kernel extends BaseKernel
         if (in_array($this->getEnvironment(), ['test', 'test_cached'], true)) {
             return MockerContainer::class;
         }
+
         return parent::getContainerBaseClass();
     }
 

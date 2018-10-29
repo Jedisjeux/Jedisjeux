@@ -13,7 +13,6 @@ namespace App\Grid\Filter;
 
 use Sylius\Component\Grid\Data\DataSourceInterface;
 use Sylius\Component\Grid\Filtering\FilterInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -23,7 +22,7 @@ class CommentFilter implements FilterInterface
     /**
      * {@inheritdoc}
      */
-    public function apply(DataSourceInterface $dataSource, string $name, $data, array $options = array()): void
+    public function apply(DataSourceInterface $dataSource, string $name, $data, array $options = []): void
     {
         // Your filtering logic. DataSource is kind of query builder.
         // $data['value'] contains the submitted value!

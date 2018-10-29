@@ -14,7 +14,7 @@ class LoadStringBlocksCommand extends ContainerAwareCommand
     protected $output;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function configure()
     {
@@ -24,15 +24,15 @@ class LoadStringBlocksCommand extends ContainerAwareCommand
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->output = $output;
-        $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
+        $output->writeln(sprintf('<comment>%s</comment>', $this->getDescription()));
 
         foreach ($this->getBlocks() as $data) {
-            $output->writeln(sprintf("Loading <info>%s</info> string block", $data['name']));
+            $output->writeln(sprintf('Loading <info>%s</info> string block', $data['name']));
         }
     }
 
@@ -41,21 +41,21 @@ class LoadStringBlocksCommand extends ContainerAwareCommand
      */
     protected function getBlocks()
     {
-        return array(
-            array(
+        return [
+            [
                 'name' => 'about',
                 'body' => '
 <p>Jedisjeux est une association qui rassemble des bénévoles passionnés par les jeux de société. Vous y trouverez des actualités, des critiques, des reportages, des interviews, un forum de discussion, une grande base de données ainsi qu’un calendrier avec les principales dates de sortie des jeux.</p>
                 ',
-            ),
-            array(
+            ],
+            [
                 'name' => 'head-office',
                 'body' => '
     <p class="add">
         16 rue DOM François Plaine<br>
         35137 Bédée</p>
     ',
-            ),
-        );
+            ],
+        ];
     }
 }

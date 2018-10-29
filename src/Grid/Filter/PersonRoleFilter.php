@@ -27,7 +27,7 @@ class PersonRoleFilter implements FilterInterface
 
         $field = null;
 
-        switch($data) {
+        switch ($data) {
             case 'designers':
                 $field = 'productCountAsDesigner';
                 break;

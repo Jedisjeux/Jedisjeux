@@ -27,7 +27,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class LoadRootTaxonsCommand extends ContainerAwareCommand
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function configure()
     {
@@ -37,21 +37,21 @@ class LoadRootTaxonsCommand extends ContainerAwareCommand
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
+        $output->writeln(sprintf('<comment>%s</comment>', $this->getDescription()));
 
         foreach ($this->getRootTaxons() as $data) {
-            $output->writeln(sprintf("Loading <comment>%s</comment> root taxon", $data['name']));
+            $output->writeln(sprintf('Loading <comment>%s</comment> root taxon', $data['name']));
 
             $rootTaxon = $this->createOrReplaceRootTaxon($data);
             $this->getManager()->persist($rootTaxon);
         }
 
         $this->getManager()->flush();
-        $output->writeln(sprintf("<info>%s root taxons successfully loaded</info>", count($this->getRootTaxons())));
+        $output->writeln(sprintf('<info>%s root taxons successfully loaded</info>', count($this->getRootTaxons())));
     }
 
     /**

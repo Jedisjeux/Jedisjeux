@@ -31,7 +31,7 @@ class PostController extends ResourceController
         $this->isGrantedOr403($configuration, ResourceActions::INDEX);
 
         /** @var TaxonTranslationInterface $rootTaxon */
-        $rootTaxon = $this->getTaxonRepository()->findOneBy(array('code' => Taxon::CODE_FORUM));
+        $rootTaxon = $this->getTaxonRepository()->findOneBy(['code' => Taxon::CODE_FORUM]);
 
         $criteria = $configuration->getCriteria();
         /** @var Topic $topic */

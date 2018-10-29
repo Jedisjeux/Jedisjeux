@@ -30,9 +30,9 @@ class GreaterThanOrEqualFilter implements FilterInterface
     }
 
     /**
-     * @param array $options
+     * @param array  $options
      * @param string $name
-     * @param mixed $default
+     * @param mixed  $default
      *
      * @return mixed
      */

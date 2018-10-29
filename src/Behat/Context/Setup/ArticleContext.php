@@ -47,10 +47,10 @@ class ArticleContext implements Context
     protected $manager;
 
     /**
-     * @param SharedStorageInterface $sharedStorage
+     * @param SharedStorageInterface  $sharedStorage
      * @param ExampleFactoryInterface $articleFactory
-     * @param RepositoryInterface $articleRepository
-     * @param EntityManager $manager
+     * @param RepositoryInterface     $articleRepository
+     * @param EntityManager           $manager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,

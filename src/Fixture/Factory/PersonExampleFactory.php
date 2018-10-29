@@ -51,8 +51,7 @@ class PersonExampleFactory extends AbstractExampleFactory implements ExampleFact
     public function __construct(
         FactoryInterface $personFactory,
         FactoryInterface $personImageFactory
-    )
-    {
+    ) {
         $this->personFactory = $personFactory;
         $this->personImageFactory = $personImageFactory;
 
@@ -84,12 +83,12 @@ class PersonExampleFactory extends AbstractExampleFactory implements ExampleFact
 
     /**
      * @param Person $person
-     * @param array $options
+     * @param array  $options
      */
     private function createImages(Person $person, array $options)
     {
         $first = true;
-        
+
         foreach ($options['images'] as $imagePath) {
             /** @var PersonImage $personImage */
             $personImage = $this->personImageFactory->createNew();
@@ -98,9 +97,9 @@ class PersonExampleFactory extends AbstractExampleFactory implements ExampleFact
             if ($first) {
                 $personImage->setMain(true);
             }
-            
+
             $first = false;
-            
+
             file_put_contents($personImage->getAbsolutePath(), file_get_contents($imagePath));
 
             $person->addImage($personImage);
@@ -122,7 +121,7 @@ class PersonExampleFactory extends AbstractExampleFactory implements ExampleFact
             })
 
             ->setDefault('code', function (Options $options) {
-                return StringInflector::nameToCode($options['first_name']. ' '. $options['last_name']);
+                return StringInflector::nameToCode($options['first_name'].' '.$options['last_name']);
             })
 
             ->setDefault('website', function (Options $options) {
@@ -134,7 +133,7 @@ class PersonExampleFactory extends AbstractExampleFactory implements ExampleFact
             })
 
             ->setDefault('images', LazyOption::randomOnesImage(
-                __DIR__ . '/../../../tests/Resources/fixtures/people', 2
+                __DIR__.'/../../../tests/Resources/fixtures/people', 2
             ))
             ->setAllowedTypes('images', 'array');
     }

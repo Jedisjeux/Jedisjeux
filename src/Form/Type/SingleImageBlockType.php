@@ -27,17 +27,17 @@ class SingleImageBlockType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options = array())
+    public function buildForm(FormBuilderInterface $builder, array $options = [])
     {
         $builder
-            ->add('title', null, array(
-                'label' => 'label.title'
-            ))
+            ->add('title', null, [
+                'label' => 'label.title',
+            ])
             ->add('name', HiddenType::class)
-            ->add('body', CKEditorType::class, array(
+            ->add('body', CKEditorType::class, [
                 'label' => 'label.body',
-            ))
-            ->add('imagePosition', ChoiceType::class, array(
+            ])
+            ->add('imagePosition', ChoiceType::class, [
                 'label' => 'label.image_position',
                 'required' => false,
                 'choices' => [
@@ -45,11 +45,11 @@ class SingleImageBlockType extends AbstractResourceType
                     'label.on_the_left_side' => Block::POSITION_LEFT,
                     'label.on_the_right_side' => Block::POSITION_RIGHT,
                 ],
-            ))
-            ->add('class', null, array(
+            ])
+            ->add('class', null, [
                 'label' => 'label.css_class',
                 'required' => false,
-            ))
+            ])
             ->add('imagineBlock', 'app_imagine_block', [
                 'label' => 'sylius.ui.image',
             ])

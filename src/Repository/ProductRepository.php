@@ -18,7 +18,6 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
-use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -36,7 +35,7 @@ class ProductRepository extends BaseProductRepository
     private $associationHydrator;
 
     /**
-     * @param EntityManager $entityManager
+     * @param EntityManager         $entityManager
      * @param Mapping\ClassMetadata $class
      */
     public function __construct(EntityManager $entityManager, Mapping\ClassMetadata $class)
@@ -48,15 +47,15 @@ class ProductRepository extends BaseProductRepository
 
     /**
      * @param $localeCode
-     * @param bool $onlyPublished
-     * @param array $criteria
+     * @param bool                $onlyPublished
+     * @param array               $criteria
      * @param TaxonInterface|null $taxon
      *
      * @return QueryBuilder
      */
     public function createListQueryBuilder(
         $localeCode,
-        $onlyPublished=true,
+        $onlyPublished = true,
         array $criteria = [],
         TaxonInterface $taxon = null,
         Person $person = null
@@ -132,7 +131,6 @@ class ProductRepository extends BaseProductRepository
         return $queryBuilder;
     }
 
-
     public function createListOfMostPlayedQueryBuilder($localeCode, CustomerInterface $author)
     {
         $queryBuilder = $this->createListQueryBuilder($localeCode);
@@ -184,7 +182,7 @@ class ProductRepository extends BaseProductRepository
     /**
      * @param string $locale
      * @param string $slug
-     * @param bool $showUnpublished
+     * @param bool   $showUnpublished
      *
      * @return ProductInterface|null
      *
@@ -192,7 +190,7 @@ class ProductRepository extends BaseProductRepository
      */
     public function findOneBySlug(string $locale, string $slug, $showUnpublished = true)
     {
-        $queryBuilder =  $this->createQueryBuilder('o')
+        $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('translation')
             ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
             ->andWhere('o.enabled = true')
@@ -245,7 +243,6 @@ class ProductRepository extends BaseProductRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
-
 
     /**
      * {@inheritdoc}

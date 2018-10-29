@@ -291,9 +291,9 @@ abstract class AbstractDefaultContext extends RawMinkContext implements Context,
     }
 
     /**
-     * @param string  $route
-     * @param array   $parameters
-     * @param bool $absolute
+     * @param string $route
+     * @param array  $parameters
+     * @param bool   $absolute
      *
      * @return string
      */
@@ -372,7 +372,7 @@ abstract class AbstractDefaultContext extends RawMinkContext implements Context,
 
     /**
      * @param NodeElement $table
-     * @param string $columnName
+     * @param string      $columnName
      *
      * @return int
      *
@@ -401,7 +401,7 @@ abstract class AbstractDefaultContext extends RawMinkContext implements Context,
 
     /**
      * @param NodeElement $table
-     * @param array $fields
+     * @param array       $fields
      *
      * @return NodeElement|null
      *
@@ -420,8 +420,8 @@ abstract class AbstractDefaultContext extends RawMinkContext implements Context,
 
     /**
      * @param NodeElement $table
-     * @param array $fields
-     * @param bool $onlyFirstOccurrence
+     * @param array       $fields
+     * @param bool        $onlyFirstOccurrence
      *
      * @return NodeElement[]
      *
@@ -480,7 +480,7 @@ abstract class AbstractDefaultContext extends RawMinkContext implements Context,
 
     /**
      * @param NodeElement $table
-     * @param string[] $fields
+     * @param string[]    $fields
      *
      * @return string[]
      *
@@ -500,8 +500,8 @@ abstract class AbstractDefaultContext extends RawMinkContext implements Context,
 
     /**
      * @param callable $callback
-     * @param int $limit
-     * @param int $delay In milliseconds
+     * @param int      $limit
+     * @param int      $delay    In milliseconds
      *
      * @return mixed
      *
@@ -527,7 +527,7 @@ abstract class AbstractDefaultContext extends RawMinkContext implements Context,
      *
      * @return string
      *
-     * @throws \InvalidArgumentException If name is not found in country code registry.
+     * @throws \InvalidArgumentException if name is not found in country code registry
      */
     protected function getCountryCodeByEnglishCountryName($name)
     {
@@ -548,7 +548,7 @@ abstract class AbstractDefaultContext extends RawMinkContext implements Context,
      *
      * @return string
      *
-     * @throws \InvalidArgumentException If name is not found in locale code registry.
+     * @throws \InvalidArgumentException if name is not found in locale code registry
      */
     protected function getLocaleCodeByEnglishLocaleName($name)
     {

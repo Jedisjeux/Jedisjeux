@@ -44,7 +44,7 @@ class ContactRequestType extends AbstractType
                 'label' => 'sylius.ui.message',
                 'attr' => [
                     'rows' => 6,
-                ]
+                ],
             ])
             ->add('recaptcha', EWZRecaptchaType::class, [
                 'label' => false,

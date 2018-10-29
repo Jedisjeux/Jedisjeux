@@ -26,7 +26,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 abstract class AbstractImage implements ResourceInterface
 {
-    Use IdentifiableTrait,
+    use IdentifiableTrait,
         Timestampable;
 
     /**
@@ -52,6 +52,7 @@ abstract class AbstractImage implements ResourceInterface
 
     /**
      * @param mixed $path
+     *
      * @return $this
      */
     public function setPath($path)
@@ -71,6 +72,7 @@ abstract class AbstractImage implements ResourceInterface
 
     /**
      * @param UploadedFile $file
+     *
      * @return $this
      */
     public function setFile($file)
@@ -87,7 +89,7 @@ abstract class AbstractImage implements ResourceInterface
     }
 
     /**
-     * return the public url to the path
+     * return the public url to the path.
      *
      * @return null|string
      */
@@ -97,7 +99,7 @@ abstract class AbstractImage implements ResourceInterface
     }
 
     /**
-     * get the absolute path to the upload directory
+     * get the absolute path to the upload directory.
      *
      * @return string
      */
@@ -107,7 +109,7 @@ abstract class AbstractImage implements ResourceInterface
     }
 
     /**
-     * The path to the  path files
+     * The path to the  path files.
      *
      * @return string
      */
@@ -117,7 +119,7 @@ abstract class AbstractImage implements ResourceInterface
     }
 
     /**
-     * This function uploads the file to the server
+     * This function uploads the file to the server.
      *
      * @ORM\PrePersist
      * @ORM\PreUpdate
@@ -129,7 +131,7 @@ abstract class AbstractImage implements ResourceInterface
             return;
         }
 
-        $hash = uniqid("", true);
+        $hash = uniqid('', true);
         $extension = $this->file->getClientOriginalExtension();
         $newFilename = $hash.'.'.$extension;
 
@@ -148,13 +150,13 @@ abstract class AbstractImage implements ResourceInterface
      */
     public function getDefaultSerialize()
     {
-        if ($this->getWebPath() === null) {
+        if (null === $this->getWebPath()) {
             return null;
         }
 
         return [
             'filename' => $this->getWebPath(),
-            'filter' => 'default'
+            'filter' => 'default',
         ];
     }
 
@@ -166,13 +168,13 @@ abstract class AbstractImage implements ResourceInterface
      */
     public function getThumbnailSerialize()
     {
-        if ($this->getWebPath() === null) {
+        if (null === $this->getWebPath()) {
             return null;
         }
 
         return [
             'filename' => $this->getWebPath(),
-            'filter' => 'thumbnail'
+            'filter' => 'thumbnail',
         ];
     }
 
@@ -184,13 +186,13 @@ abstract class AbstractImage implements ResourceInterface
      */
     public function getMagazineItemSerialize()
     {
-        if ($this->getWebPath() === null) {
+        if (null === $this->getWebPath()) {
             return null;
         }
 
         return [
             'filename' => $this->getWebPath(),
-            'filter' => 'magazine_item'
+            'filter' => 'magazine_item',
         ];
     }
 }

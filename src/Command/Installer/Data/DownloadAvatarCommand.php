@@ -3,15 +3,13 @@
  * Created by PhpStorm.
  * User: loic_425
  * Date: 03/03/15
- * Time: 19:34
+ * Time: 19:34.
  */
 
 namespace App\Command\Installer\Data;
 
-use App\Entity\AbstractImage;
 use App\Entity\Avatar;
 use Doctrine\ORM\EntityRepository;
-use JDJ\UserBundle\Service\AvatarImportService;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -31,7 +29,7 @@ class DownloadAvatarCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln("<comment>" . $this->getDescription() . "</comment>");
+        $output->writeln('<comment>'.$this->getDescription().'</comment>');
 
         $repository = $this->getRepository();
 
@@ -40,13 +38,13 @@ class DownloadAvatarCommand extends ContainerAwareCommand
             $avatar = $row[0];
 
             if (!file_exists($avatar->getAbsolutePath())) {
-                $output->writeln("Downloading avatar <info>".$this->getAvatarOriginalPath($avatar)."</info>");
+                $output->writeln('Downloading avatar <info>'.$this->getAvatarOriginalPath($avatar).'</info>');
 
                 try {
                     $this
                         ->downloadAvatar($avatar);
-                } catch(\Exception $e) {
-                    $output->writeln(sprintf("<error>%s</error>", $e->getMessage()));
+                } catch (\Exception $e) {
+                    $output->writeln(sprintf('<error>%s</error>', $e->getMessage()));
                 }
             }
         }
@@ -55,7 +53,8 @@ class DownloadAvatarCommand extends ContainerAwareCommand
     /**
      * @return EntityRepository $repository
      */
-    protected function getRepository() {
+    protected function getRepository()
+    {
         return $this->getContainer()->get('app.repository.avatar');
     }
 
@@ -74,6 +73,6 @@ class DownloadAvatarCommand extends ContainerAwareCommand
      */
     public function getAvatarOriginalPath(Avatar $avatar): string
     {
-        return "http://www.jedisjeux.net/media/cache/resolve/full/" . $avatar->getWebPath();
+        return 'http://www.jedisjeux.net/media/cache/resolve/full/'.$avatar->getWebPath();
     }
-} 
+}

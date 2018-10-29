@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 class ImagineBlockCollectionType extends BaseImagineBlockType
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -35,7 +35,7 @@ class ImagineBlockCollectionType extends BaseImagineBlockType
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getName()
     {

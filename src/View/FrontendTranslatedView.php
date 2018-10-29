@@ -14,7 +14,7 @@ namespace App\View;
 use WhiteOctober\PagerfantaBundle\View\TwitterBootstrap4TranslatedView;
 
 /**
- * SemanticUiTranslatedView
+ * SemanticUiTranslatedView.
  *
  * This view renders the semantic ui view with the text translated.
  */

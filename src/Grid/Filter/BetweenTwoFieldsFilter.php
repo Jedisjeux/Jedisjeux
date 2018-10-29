@@ -35,7 +35,7 @@ class BetweenTwoFieldsFilter implements FilterInterface
 
     /**
      * @param string $name
-     * @param array $options
+     * @param array  $options
      *
      * @return string
      */

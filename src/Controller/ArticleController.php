@@ -13,7 +13,6 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Taxon;
-use App\Repository\ArticleRepository;
 use App\Repository\TaxonRepository;
 use FOS\RestBundle\View\View;
 use SM\Factory\Factory;
@@ -29,9 +28,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
  */
 class ArticleController extends ResourceController
 {
-
     /**
      * @param Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showWithTaxonsAction(Request $request)
@@ -47,7 +46,7 @@ class ArticleController extends ResourceController
 
         if ($configuration->isHtmlRequest()) {
             $view
-                ->setTemplate($configuration->getTemplate(ResourceActions::SHOW . '.html'))
+                ->setTemplate($configuration->getTemplate(ResourceActions::SHOW.'.html'))
                 ->setTemplateVar($this->metadata->getName())
                 ->setData([
                     'rootTaxons' => $this->getRootTaxons(),
@@ -64,6 +63,7 @@ class ArticleController extends ResourceController
 
     /**
      * @param Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexWithTaxonsAction(Request $request)
@@ -93,7 +93,7 @@ class ArticleController extends ResourceController
 
     /**
      * @param Request $request
-     * @param string $slug
+     * @param string  $slug
      *
      * @return Response
      */
@@ -147,7 +147,7 @@ class ArticleController extends ResourceController
 
         if ($configuration->isHtmlRequest()) {
             $view
-                ->setTemplate($configuration->getTemplate(ResourceActions::SHOW . '.html'))
+                ->setTemplate($configuration->getTemplate(ResourceActions::SHOW.'.html'))
                 ->setTemplateVar($this->metadata->getName())
                 ->setData([
                     'configuration' => $configuration,

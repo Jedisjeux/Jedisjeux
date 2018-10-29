@@ -96,7 +96,7 @@ EOT
 
     /**
      * @param UserInterface $user
-     * @param string $password
+     * @param string        $password
      */
     protected function changePassword(UserInterface $user, $password)
     {

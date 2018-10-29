@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: loic
  * Date: 14/03/2016
- * Time: 11:14
+ * Time: 11:14.
  */
 
 namespace App\Behat;
@@ -36,7 +36,6 @@ class ProductContext extends DefaultContext
         $manager = $this->getEntityManager();
 
         foreach ($table->getHash() as $data) {
-
             /** @var TaxonInterface $mainTaxon */
             $mainTaxon = null;
 
@@ -94,7 +93,7 @@ class ProductContext extends DefaultContext
         /** @var ProductInterface $product */
         $products = $repository->findByName($productName, $this->getContainer()->getParameter('locale'));
 
-        Assert::notEq(0, count($products), sprintf("%s product should exist but it does not", $productName));
+        Assert::notEq(0, count($products), sprintf('%s product should exist but it does not', $productName));
     }
 
     /**
@@ -107,7 +106,7 @@ class ProductContext extends DefaultContext
 
         foreach ($table->getHash() as $data) {
             /**
-             * @var AttributeInterface $productAttribute
+             * @var AttributeInterface
              * @var AttributeValueInterface $attributeValue
              */
             $productAttribute = $this->findOneByName('product_attribute', trim($data['name']));

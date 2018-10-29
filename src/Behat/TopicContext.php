@@ -36,7 +36,6 @@ class TopicContext extends DefaultContext
         $manager = $this->getEntityManager();
 
         foreach ($table->getHash() as $data) {
-
             /** @var TaxonInterface $mainTaxon */
             $mainTaxon = $this->getRepository('taxon')->findOneBySlug($data['main_taxon'], $this->getContainer()->getParameter('locale'));
 
@@ -95,4 +94,3 @@ class TopicContext extends DefaultContext
         Assert::eq($taxon->getId(), $topic->getMainTaxon()->getId(), sprintf('topic is not categorized under %s taxon, actual: %s', $taxon->getSlug(), $topic->getMainTaxon()->getSlug()));
     }
 }
-

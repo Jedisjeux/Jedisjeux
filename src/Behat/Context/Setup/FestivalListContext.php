@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of Jedisjeux
+ * This file is part of Jedisjeux.
  *
  * (c) Loïc Frémont
  *
@@ -12,7 +12,6 @@
 namespace App\Behat\Context\Setup;
 
 use App\Behat\Service\SharedStorageInterface;
-use App\Entity\Dealer;
 use App\Entity\FestivalList;
 use App\Fixture\Factory\ExampleFactoryInterface;
 use Behat\Behat\Context\Context;
@@ -41,7 +40,7 @@ class FestivalListContext implements Context
     /**
      * @param $sharedStorage
      * @param ExampleFactoryInterface $festivalListFactory
-     * @param RepositoryInterface $festivalListRepository
+     * @param RepositoryInterface     $festivalListRepository
      */
     public function __construct($sharedStorage, ExampleFactoryInterface $festivalListFactory, RepositoryInterface $festivalListRepository)
     {

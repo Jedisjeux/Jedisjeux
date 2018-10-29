@@ -11,7 +11,6 @@
 
 namespace App\Form\Type\SingleImageBlock;
 
-use App\Document\SingleImageBlock;
 use App\Form\Type\SingleImageBlockType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -24,7 +23,7 @@ class LeftImageBlockType extends SingleImageBlockType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options = array())
+    public function buildForm(FormBuilderInterface $builder, array $options = [])
     {
         parent::buildForm($builder, $options);
 

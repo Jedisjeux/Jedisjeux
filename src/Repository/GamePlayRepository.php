@@ -53,11 +53,10 @@ class GamePlayRepository extends EntityRepository
             ->leftJoin('variant.images', 'image')
             ->leftJoin('o.topic', 'topic')
             ->leftJoin('topic.article', 'article');
-
     }
 
     /**
-     * @param string $locale
+     * @param string      $locale
      * @param string|null $authorId
      *
      * @return QueryBuilder
@@ -93,12 +92,11 @@ class GamePlayRepository extends EntityRepository
         }
 
         return $queryBuilder;
-
     }
 
     /**
      * @param string $locale
-     * @param array $criteria
+     * @param array  $criteria
      *
      * @return QueryBuilder
      */
@@ -141,12 +139,11 @@ class GamePlayRepository extends EntityRepository
         }
 
         return $queryBuilder;
-
     }
 
     /**
      * @param QueryBuilder $queryBuilder
-     * @param array $criteria
+     * @param array        $criteria
      */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = []): void
     {
@@ -172,15 +169,14 @@ class GamePlayRepository extends EntityRepository
         $queryBuilder = $this->getQueryBuilder();
 
         if (empty($sorting)) {
-            $sorting = array(
+            $sorting = [
                 'createdAt' => 'desc',
-            );
+            ];
         }
 
-        $this->applyCriteria($queryBuilder, (array)$criteria);
-        $this->applySorting($queryBuilder, (array)$sorting);
+        $this->applyCriteria($queryBuilder, (array) $criteria);
+        $this->applySorting($queryBuilder, (array) $sorting);
 
         return $this->getPaginator($queryBuilder);
     }
-
 }

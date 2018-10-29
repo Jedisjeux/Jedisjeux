@@ -37,9 +37,9 @@ class SendRegistrationEmailSubscriber implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             'sylius.customer.post_register' => 'onRegister',
-        );
+        ];
     }
 
     public function onRegister(GenericEvent $event)
@@ -47,8 +47,8 @@ class SendRegistrationEmailSubscriber implements EventSubscriberInterface
         /** @var CustomerInterface $customer */
         $customer = $event->getSubject();
 
-        $this->sender->send(Emails::USER_REGISTRATION, array($customer->getEmail()), array(
+        $this->sender->send(Emails::USER_REGISTRATION, [$customer->getEmail()], [
             'customer' => $customer,
-        ));
+        ]);
     }
 }

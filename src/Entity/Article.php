@@ -39,12 +39,12 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
     use Timestampable;
 
     /**
-     * status constants
+     * status constants.
      */
-    const STATUS_NEW = "new";
-    const STATUS_PENDING_REVIEW = "pending_review";
-    const STATUS_PENDING_PUBLICATION = "pending_publication";
-    const STATUS_PUBLISHED = "published";
+    const STATUS_NEW = 'new';
+    const STATUS_PENDING_REVIEW = 'pending_review';
+    const STATUS_PENDING_PUBLICATION = 'pending_publication';
+    const STATUS_PUBLISHED = 'published';
 
     /**
      * @var string
@@ -255,7 +255,7 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
     /**
      * @param string|null $slug
      */
-    public function setSlug(?string $slug) :void
+    public function setSlug(?string $slug): void
     {
         $this->slug = $slug;
     }
@@ -547,7 +547,7 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isPublishable(): bool
     {
@@ -555,7 +555,7 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
     }
 
     /**
-     * @param boolean $publishable
+     * @param bool $publishable
      */
     public function setPublishable(bool $publishable): void
     {

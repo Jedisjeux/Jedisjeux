@@ -83,7 +83,7 @@ class TopicFactory implements FactoryInterface
     public function createNew()
     {
         /** @var Topic $topic */
-        $topic = new $this->className;
+        $topic = new $this->className();
         $topic->setAuthor($this->customerContext->getCustomer());
 
         /** @var Post $mainPost */
@@ -107,7 +107,7 @@ class TopicFactory implements FactoryInterface
         $gamePlay
             ->setTopic($topic);
 
-        $topic->setTitle("Partie de ".(string) $gamePlay->getProduct());
+        $topic->setTitle('Partie de '.(string) $gamePlay->getProduct());
         $topic->setAuthor($gamePlay->getAuthor());
 
         return $topic;

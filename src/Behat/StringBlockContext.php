@@ -31,7 +31,6 @@ class StringBlockContext extends DefaultContext
         $manager = $this->getDocumentManager();
 
         foreach ($table->getHash() as $data) {
-
             /** @var StringBlock $stringBlock */
             $stringBlock = $this->getFactory('string_block', 'app')->createNew();
             $stringBlock->setName(isset($data['name']) ? $data['name'] : $this->faker->slug);

@@ -44,9 +44,9 @@ class PostContext implements Context
 
     /**
      * @param SharedStorage $sharedStorage
-     * @param IndexPage $indexPage
-     * @param CreatePage $createPage
-     * @param UpdatePage $updatePage
+     * @param IndexPage     $indexPage
+     * @param CreatePage    $createPage
+     * @param UpdatePage    $updatePage
      */
     public function __construct(
         SharedStorage $sharedStorage,

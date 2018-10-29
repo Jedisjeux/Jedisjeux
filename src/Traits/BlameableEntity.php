@@ -4,7 +4,7 @@
  * Created by PhpStorm.
  * User: loic
  * Date: 15/02/16
- * Time: 23:42
+ * Time: 23:42.
  */
 
 namespace App\Traits;
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JDJ\UserBundle\Entity\User;
 
-Trait BlameableEntity
+trait BlameableEntity
 {
     /**
      * @var User
@@ -42,6 +42,7 @@ Trait BlameableEntity
 
     /**
      * @param User $createdBy
+     *
      * @return $this
      */
     public function setCreatedBy($createdBy)
@@ -61,6 +62,7 @@ Trait BlameableEntity
 
     /**
      * @param User $updatedBy
+     *
      * @return $this
      */
     public function setUpdatedBy($updatedBy)

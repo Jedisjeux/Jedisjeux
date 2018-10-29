@@ -21,44 +21,44 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class SimpleBlockType extends AbstractType
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('name', 'text', array(
-                'label' => 'label.internal_name'
-            ))
-            ->add('title', 'text', array(
-                'label' => 'label.title'
-            ))
-            ->add('body', 'ckeditor', array(
+            ->add('name', 'text', [
+                'label' => 'label.internal_name',
+            ])
+            ->add('title', 'text', [
+                'label' => 'label.title',
+            ])
+            ->add('body', 'ckeditor', [
                 'required' => false,
-                'label'    => 'label.body',
-            ))
-            ->add('publishable', null, array(
-                'label' => 'label.publishable'
-            ))
-            ->add('publishStartDate', 'datetime', array(
+                'label' => 'label.body',
+            ])
+            ->add('publishable', null, [
+                'label' => 'label.publishable',
+            ])
+            ->add('publishStartDate', 'datetime', [
                 'label' => 'label.publish_start_date',
                 'widget' => 'single_text',
                 'html5' => false,
                 'required' => false,
-                'attr' => array(
+                'attr' => [
                     'class' => 'datetime',
-                )
-            ))
-            ->add('publishEndDate', 'datetime', array(
+                ],
+            ])
+            ->add('publishEndDate', 'datetime', [
                 'label' => 'label.publish_end_date',
                 'widget' => 'single_text',
                 'html5' => false,
                 'required' => false,
-                'attr' => array(
+                'attr' => [
                     'class' => 'datetime',
-                )
-            ));
+                ],
+            ]);
     }
 
     /**
@@ -66,9 +66,9 @@ class SimpleBlockType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SimpleBlock'
-        ));
+        $resolver->setDefaults([
+            'data_class' => 'Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SimpleBlock',
+        ]);
     }
 
     public function getName()

@@ -44,10 +44,10 @@ class AddTopicFollowerSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             AppEvents::TOPIC_PRE_CREATE => 'onTopicCreate',
             AppEvents::POST_PRE_CREATE => 'onPostCreate',
-        );
+        ];
     }
 
     /**

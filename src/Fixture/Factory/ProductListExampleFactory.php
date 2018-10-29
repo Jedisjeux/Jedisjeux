@@ -56,8 +56,8 @@ class ProductListExampleFactory extends AbstractExampleFactory implements Exampl
     private $optionsResolver;
 
     /**
-     * @param FactoryInterface $productListFactory
-     * @param FactoryInterface $productListItemFactory
+     * @param FactoryInterface    $productListFactory
+     * @param FactoryInterface    $productListItemFactory
      * @param RepositoryInterface $customerRepository
      * @param RepositoryInterface $productRepository
      */
@@ -66,8 +66,7 @@ class ProductListExampleFactory extends AbstractExampleFactory implements Exampl
         FactoryInterface $productListItemFactory,
         RepositoryInterface $customerRepository,
         RepositoryInterface $productRepository
-    )
-    {
+    ) {
         $this->productListFactory = $productListFactory;
         $this->productListItemFactory = $productListItemFactory;
         $this->customerRepository = $customerRepository;

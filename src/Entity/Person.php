@@ -14,7 +14,7 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Person
+ * Person.
  *
  * @ORM\Entity
  * @ORM\Table(name="jdj_person", indexes={@ORM\Index(name="search_idx", columns={"slug"})})
@@ -90,28 +90,28 @@ class Person implements ResourceInterface
     private $slug;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer")
      */
     protected $productCount = 0;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer")
      */
     protected $productCountAsDesigner = 0;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer")
      */
     protected $productCountAsArtist = 0;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer")
      */
@@ -156,7 +156,7 @@ class Person implements ResourceInterface
     private $publisherProducts;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -492,11 +492,11 @@ class Person implements ResourceInterface
             return $this->getLastName();
         }
 
-        return $this->getFirstName() . ' ' . $this->getLastName();
+        return $this->getFirstName().' '.$this->getLastName();
     }
 
     /**
-     * Convert Entity To String
+     * Convert Entity To String.
      *
      * @return string
      */

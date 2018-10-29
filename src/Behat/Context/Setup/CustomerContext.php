@@ -17,7 +17,6 @@ use App\Entity\User;
 use App\Fixture\Factory\ExampleFactoryInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Customer\Model\CustomerInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -42,9 +41,9 @@ class CustomerContext implements Context
     /**
      * CustomerContext constructor.
      *
-     * @param SharedStorageInterface $sharedStorage
+     * @param SharedStorageInterface  $sharedStorage
      * @param ExampleFactoryInterface $appUserFactory
-     * @param EntityRepository $customerRepository
+     * @param EntityRepository        $customerRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,

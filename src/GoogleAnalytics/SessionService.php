@@ -30,7 +30,7 @@ class SessionService
      * SessionCountService constructor.
      *
      * @param \Google_Client $client
-     * @param string $profileId
+     * @param string         $profileId
      */
     public function __construct(\Google_Client $client, $profileId)
     {
@@ -49,7 +49,7 @@ class SessionService
         $analytics = new \Google_Service_Analytics($this->client);
 
         $results = $analytics->data_ga->get(
-            'ga:' . $this->profileId,
+            'ga:'.$this->profileId,
             $startAt->format('Y-m-d'),
             $endAt->format('Y-m-d'),
             'ga:sessions',
@@ -62,7 +62,7 @@ class SessionService
         foreach ($results->getRows() as $row) {
             $data[] = [
                 'date' => \DateTime::createFromFormat('Ymd', $row[0]),
-                'sessionCount' => (int)$row[1],
+                'sessionCount' => (int) $row[1],
             ];
         }
 
@@ -80,7 +80,7 @@ class SessionService
         $analytics = new \Google_Service_Analytics($this->client);
 
         $results = $analytics->data_ga->get(
-            'ga:' . $this->profileId,
+            'ga:'.$this->profileId,
             $startAt->format('Y-m-d'),
             $endAt->format('Y-m-d'),
             'ga:sessions',
@@ -93,7 +93,7 @@ class SessionService
         foreach ($results->getRows() as $row) {
             $data[] = [
                 'date' => \DateTime::createFromFormat('Ym', $row[0].$row[1]),
-                'sessionCount' => (int)$row[2],
+                'sessionCount' => (int) $row[2],
             ];
         }
 

@@ -39,7 +39,6 @@ class PostContext extends DefaultContext
         $manager = $this->getEntityManager();
 
         foreach ($table->getHash() as $data) {
-
             /** @var Topic $topic */
             $topic = $this->getRepository('topic', 'app')->findOneBy(['title' => $data['topic']]);
 
@@ -60,8 +59,8 @@ class PostContext extends DefaultContext
     /**
      * @Given /^game play from "([^""]*)" product and "([^""]*)" author has following comments:$/
      *
-     * @param string $productName
-     * @param string $topicAuthorEmail
+     * @param string    $productName
+     * @param string    $topicAuthorEmail
      * @param TableNode $table
      */
     public function gamePlayHasComments($productName, $topicAuthorEmail, TableNode $table)
@@ -72,7 +71,6 @@ class PostContext extends DefaultContext
         $productRepository = $this->getRepository('product');
         /** @var ProductInterface $product */
         $product = $productRepository->findByName($productName, $this->getContainer()->getParameter('locale'))[0];
-
 
         /** @var CustomerInterface $topicAuthor */
         $topicAuthor = $this->findOneBy('customer', ['email' => $topicAuthorEmail]);
@@ -109,7 +107,7 @@ class PostContext extends DefaultContext
     /**
      * @Given /^article "([^""]*)" has following comments:$/
      *
-     * @param string $articleTitle
+     * @param string    $articleTitle
      * @param TableNode $table
      */
     public function articleHasComments($articleTitle, TableNode $table)
@@ -142,4 +140,3 @@ class PostContext extends DefaultContext
         }
     }
 }
-

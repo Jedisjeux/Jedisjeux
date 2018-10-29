@@ -30,9 +30,9 @@ class SessionController extends Controller
 
         $sessions = $this->getSessionService()->countSessionsPerDay($startAt, $endAt);
 
-        return $this->render('backend/dashboard/_sessionCount.html.twig', array(
+        return $this->render('backend/dashboard/_sessionCount.html.twig', [
             'sessions' => $sessions,
-        ));
+        ]);
     }
 
     /**
@@ -45,9 +45,9 @@ class SessionController extends Controller
 
         $sessions = $this->getSessionService()->countSessionsPerMonth($startAt, $endAt);
 
-        return $this->render('backend/dashboard/_sessionCountPerMonth.html.twig', array(
+        return $this->render('backend/dashboard/_sessionCountPerMonth.html.twig', [
             'sessions' => $sessions,
-        ));
+        ]);
     }
 
     /**

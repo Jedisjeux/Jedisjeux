@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of Jedisjeux
+ * This file is part of Jedisjeux.
  *
  * (c) Loïc Frémont
  *
@@ -11,13 +11,11 @@
 
 namespace App\Grid\Filter;
 
-use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Grid\Data\DataSourceInterface;
 use Sylius\Component\Grid\Filtering\FilterInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Webmozart\Assert\Assert;
-
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -36,7 +34,7 @@ class TaxonFilter implements FilterInterface
 
     /**
      * @param TaxonRepositoryInterface $taxonRepository
-     * @param string $locale
+     * @param string                   $locale
      */
     public function __construct(TaxonRepositoryInterface $taxonRepository, string $locale)
     {
@@ -47,7 +45,7 @@ class TaxonFilter implements FilterInterface
     /**
      * {@inheritdoc}
      */
-    public function apply(DataSourceInterface $dataSource, string $name, $data, array $options = array()): void
+    public function apply(DataSourceInterface $dataSource, string $name, $data, array $options = []): void
     {
         // Your filtering logic. DataSource is kind of query builder.
         // $data['mainTaxon'] contains the submitted value!
@@ -68,14 +66,13 @@ class TaxonFilter implements FilterInterface
                 $dataSource->getExpressionBuilder()->lessThanOrEqual(sprintf('%s.right', $field), $taxon->getRight()),
                 $dataSource->getExpressionBuilder()->equals(sprintf('%s.root', $field), $taxon->getRoot())
             )
-
         );
     }
 
     /**
-     * @param array $options
+     * @param array  $options
      * @param string $name
-     * @param mixed $default
+     * @param mixed  $default
      *
      * @return mixed
      */

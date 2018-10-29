@@ -22,17 +22,17 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class PostType extends AbstractType
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('body', CKEditorType::class, array(
+            ->add('body', CKEditorType::class, [
                 'label' => 'label.body',
                 'config_name' => 'forum',
-            ));
+            ]);
     }
 
     /**
@@ -40,13 +40,13 @@ class PostType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'App\Entity\Post'
-        ));
+        $resolver->setDefaults([
+            'data_class' => 'App\Entity\Post',
+        ]);
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getBlockPrefix()
     {

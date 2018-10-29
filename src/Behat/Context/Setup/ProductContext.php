@@ -46,24 +46,22 @@ class ProductContext implements Context
     protected $manager;
 
     /**
-     * @param SharedStorageInterface $sharedStorage
+     * @param SharedStorageInterface  $sharedStorage
      * @param ExampleFactoryInterface $productFactory
-     * @param RepositoryInterface $productRepository
-     * @param EntityManager $manager
+     * @param RepositoryInterface     $productRepository
+     * @param EntityManager           $manager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ExampleFactoryInterface $productFactory,
         RepositoryInterface $productRepository,
         EntityManager $manager
-    )
-    {
+    ) {
         $this->sharedStorage = $sharedStorage;
         $this->productFactory = $productFactory;
         $this->productRepository = $productRepository;
         $this->manager = $manager;
     }
-
 
     /**
      * @Given there is a product :name

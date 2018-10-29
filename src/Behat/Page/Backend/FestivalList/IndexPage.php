@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of Jedisjeux
+ * This file is part of Jedisjeux.
  *
  * (c) Loïc Frémont
  *
@@ -18,5 +18,4 @@ use App\Behat\Page\Backend\Crud\IndexPage as BaseIndexPage;
  */
 class IndexPage extends BaseIndexPage
 {
-
 }

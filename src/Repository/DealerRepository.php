@@ -11,7 +11,6 @@
 
 namespace App\Repository;
 
-use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
@@ -29,7 +28,7 @@ class DealerRepository extends EntityRepository
         if (isset($criteria['query'])) {
             $queryBuilder
                 ->andWhere($this->getPropertyName('name like :query'))
-                ->setParameter('query', '%' . $criteria['query'] . '%');
+                ->setParameter('query', '%'.$criteria['query'].'%');
 
             unset($criteria['query']);
         }
@@ -42,7 +41,7 @@ class DealerRepository extends EntityRepository
             $sorting['name'] = 'asc';
         }
 
-        $this->applyCriteria($queryBuilder, (array)$criteria);
+        $this->applyCriteria($queryBuilder, (array) $criteria);
         $this->applySorting($queryBuilder, $sorting);
 
         return $this->getPaginator($queryBuilder);

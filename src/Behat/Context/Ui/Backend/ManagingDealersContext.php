@@ -47,9 +47,9 @@ class ManagingDealersContext implements Context
     /**
      * ManagingPeopleContext constructor.
      *
-     * @param IndexPage $indexPage
-     * @param CreatePage $createPage
-     * @param UpdatePage $updatePage
+     * @param IndexPage                    $indexPage
+     * @param CreatePage                   $createPage
+     * @param UpdatePage                   $updatePage
      * @param CurrentPageResolverInterface $currentPageResolver
      */
     public function __construct(
@@ -144,7 +144,7 @@ class ManagingDealersContext implements Context
      */
     public function iShouldBeNotifiedThatNameIsRequired()
     {
-        Assert::same($this->createPage->getValidationMessage('name'),'This value should not be blank.');
+        Assert::same($this->createPage->getValidationMessage('name'), 'This value should not be blank.');
     }
 
     /**
