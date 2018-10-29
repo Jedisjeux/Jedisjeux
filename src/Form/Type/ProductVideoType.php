@@ -13,6 +13,7 @@ namespace App\Form\Type;
 
 use App\Entity\ProductVideo;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -26,10 +27,13 @@ class ProductVideoType extends AbstractType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('title', null, [
+            ->add('title', TextType::class, [
                 'label' => 'sylius.ui.title',
             ])
-            ->add('path', null, [
+            ->add('image', ProductVideoImageType::class, [
+                'label' => false,
+            ])
+            ->add('path', TextType::class, [
                 'label' => 'app.ui.path',
             ])
         ;

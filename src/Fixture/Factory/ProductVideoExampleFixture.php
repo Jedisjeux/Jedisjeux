@@ -70,6 +70,10 @@ class ProductVideoExampleFixture extends AbstractExampleFactory
                 return $this->faker->url;
             })
 
+            ->setDefault('image', LazyOption::randomOneImageOrNull(
+                __DIR__.'/../../../tests/Resources/fixtures/videos', 80
+            ))
+
             ->setDefault('product', LazyOption::randomOne($this->productRepository))
             ->setAllowedTypes('product', ['null', 'string', ProductInterface::class])
             ->setNormalizer('product', LazyOption::findOneBy($this->productRepository, 'code'))

@@ -40,6 +40,13 @@ class ProductVideo implements ResourceInterface
     private $path;
 
     /**
+     * @var ProductVideoImage|null
+     *
+     * @ORM\OneToOne(targetEntity="App\Entity\ProductVideoImage")
+     */
+    private $image;
+
+    /**
      * @var ProductInterface|null
      *
      * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface", inversedBy="videos")
@@ -76,6 +83,22 @@ class ProductVideo implements ResourceInterface
     public function setPath(?string $path): void
     {
         $this->path = $path;
+    }
+
+    /**
+     * @return ProductVideoImage|null
+     */
+    public function getImage(): ?ProductVideoImage
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param ProductVideoImage|null $image
+     */
+    public function setImage(?ProductVideoImage $image): void
+    {
+        $this->image = $image;
     }
 
     /**

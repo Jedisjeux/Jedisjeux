@@ -35,6 +35,7 @@ imports:
     - suites/ui/product/viewing_product_articles.yml
     - suites/ui/product/viewing_product_game_plays.yml
     - suites/ui/product/viewing_product_reviews.yml
+    - suites/ui/product/viewing_product_videos.yml
     - suites/ui/product/viewing_products.yml
     - suites/ui/redirection/managing_redirections.yml
     - suites/ui/taxon/managing_taxons.yml

@@ -3,6 +3,7 @@
 namespace spec\App\Entity;
 
 use App\Entity\ProductVideo;
+use App\Entity\ProductVideoImage;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -29,6 +30,12 @@ class ProductVideoSpec extends ObjectBehavior
     {
         $this->setPath("https://www.youtube.com/embed/oyefFfCHIGs?rel=0");
         $this->getPath()->shouldReturn("https://www.youtube.com/embed/oyefFfCHIGs?rel=0");
+    }
+
+    function its_image_is_mutable(ProductVideoImage $image)
+    {
+        $this->setImage($image);
+        $this->getImage()->shouldReturn($image);
     }
 
     function its_product_is_mutable(ProductInterface $product)

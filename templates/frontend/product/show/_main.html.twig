@@ -37,9 +37,9 @@
                         <!-- Nav tabs -->
                         <ul class="nav nav-pills">
                             <li class="nav-item"><a class="nav-link active" href="#pill-1" data-toggle="tab"
-                                                    title="/assets/frontend/images"><i
+                                                    title="images"><i
                                             class="fa fa-camera pr-1"></i> Photo</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#pill-2" data-toggle="tab" title="video"><i
+                            <li class="nav-item"><a class="nav-link" href="#videos" data-toggle="tab" title="videos"><i
                                             class="fa fa-video-camera pr-1"></i> Video</a></li>
                         </ul>
                         <!-- Tab panes -->
@@ -67,11 +67,19 @@
                                     </div>
                                 {% endif %}
                             </div>
-                            <div class="tab-pane" id="pill-2">
-                                <div class="overlay-container">
-                                    <img src="/assets/frontend/images/page-about-2.jpg" alt="">
-                                    <a class="overlay-link" href="#"><i class="fa fa-link"></i></a>
-                                </div>
+                            <div class="tab-pane" id="videos">
+                                {% for video in product.videos %}
+                                    <div class="overlay-container overlay-visible">
+                                        {% set imagePath = video.image is not null ? video.image.webPath : '/assets/frontend/images/placeholder.png' %}
+                                        <a class="popup-iframe" href="{{ video.path }}">
+                                            {{ images.render(imagePath, 'full', video.title) }}
+                                        </a>
+                                        <a class="overlay-link popup-iframe" href="{{ video.path }}"><i class="fa fa-link"></i></a>
+                                        <div class="overlay-bottom text-left">
+                                            <p class="lead margin-clear">{{ video.title }}</p>
+                                        </div>
+                                    </div>
+                                {% endfor %}
                             </div>
                         </div>
                         <!-- pills end -->

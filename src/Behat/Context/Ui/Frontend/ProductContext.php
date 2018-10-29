@@ -367,6 +367,14 @@ class ProductContext implements Context
     }
 
     /**
+     * @Then I should see :count product videos
+     */
+    public function iShouldSeeProductVideos($count)
+    {
+        Assert::same($this->showPage->countVideos(), (int) $count);
+    }
+
+    /**
      * @Then I should see reviews titled :firstReview, :secondReview and :thirdReview
      */
     public function iShouldSeeReviewsTitled(...$reviews)
@@ -427,6 +435,19 @@ class ProductContext implements Context
     public function iShouldNotSeeGamePlayAddedByCustomerProduct($email)
     {
         Assert::false($this->showPage->hasGamePlayAddedByCustomerEmail($email));
+    }
+
+    /**
+     * @Then I should see videos titled :firstVideo, :secondVideo and :thirdVideo
+     */
+    public function iShouldSeeVideosTitled(...$videos)
+    {
+        foreach ($videos as $video) {
+            Assert::true(
+                $this->showPage->hasVideoTitled($video),
+                sprintf('Product should have video titled "%s" but it does not.', $video)
+            );
+        }
     }
 
     /**
