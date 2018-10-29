@@ -1,5 +1,19 @@
 ## Change Log
 
+### v2.0.8 (2018/10/29)
+- [#326](https://github.com/Jedisjeux/Jedisjeux/pull/326) update head office (@loic425)
+- [#325](https://github.com/Jedisjeux/Jedisjeux/pull/325) add phpcs fixer and run fix (@loic425)
+- [#324](https://github.com/Jedisjeux/Jedisjeux/pull/324) [WIP] improve performances (@loic425)
+- [#323](https://github.com/Jedisjeux/Jedisjeux/pull/323) [Behat] Refactor product workflow scenarios (@loic425)
+- [#322](https://github.com/Jedisjeux/Jedisjeux/pull/322) [Behat] Refactor article workflow scenarios (@loic425)
+- [#321](https://github.com/Jedisjeux/Jedisjeux/pull/321) remove old behat scenarios (@loic425)
+- [#320](https://github.com/Jedisjeux/Jedisjeux/pull/320) [Behat] refactor adding product from bgg scenarios (@loic425)
+- [#319](https://github.com/Jedisjeux/Jedisjeux/pull/319) [Behat] Refactor managing customers scenarios (@loic425)
+- [#318](https://github.com/Jedisjeux/Jedisjeux/pull/318) show images on game play form (@loic425)
+- [#317](https://github.com/Jedisjeux/Jedisjeux/pull/317) remove old default templates (@loic425)
+- [#315](https://github.com/Jedisjeux/Jedisjeux/pull/315) [Behat] viewing not found page (@loic425)
+- [#314](https://github.com/Jedisjeux/Jedisjeux/pull/314) remove old app directory (@loic425)
+
 ### v2.0.7 (2018/10/18)
 - [#313](https://github.com/Jedisjeux/Jedisjeux/pull/313) add a workaround on authorization checker (@loic425)
 - [#312](https://github.com/Jedisjeux/Jedisjeux/pull/312) Referencing controllers with two colons (@loic425)
