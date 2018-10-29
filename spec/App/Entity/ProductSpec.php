@@ -4,8 +4,8 @@ namespace spec\App\Entity;
 
 use App\Entity\Person;
 use App\Entity\Product;
+use App\Entity\ProductVideo;
 use App\Entity\ProductBarcode;
-use App\Entity\ProductTranslation;
 use App\Entity\ProductVariant;
 use App\Entity\ProductVariantImage;
 use App\Entity\Taxon;
@@ -13,7 +13,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Product\Model\Product as BaseProduct;
-use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
@@ -294,6 +293,29 @@ class ProductSpec extends ObjectBehavior
     function it_initializes_game_play_collection_by_default()
     {
         $this->getGamePlays()->shouldHaveType(Collection::class);
+    }
+
+    function it_initializes_video_collection_by_default(): void
+    {
+        $this->getVideos()->shouldHaveType(Collection::class);
+    }
+
+    function it_adds_videos(ProductVideo $video): void
+    {
+        $video->setProduct($this)->shouldBeCalled();
+
+        $this->addVideo($video);
+        $this->hasVideo($video)->shouldReturn(true);
+    }
+
+    function it_removes_videos(ProductVideo $video): void
+    {
+        $this->addVideo($video);
+
+        $video->setProduct(null)->shouldBeCalled();
+
+        $this->removeVideo($video);
+        $this->hasVideo($video)->shouldReturn(false);
     }
 
     function it_has_no_images_by_default(ProductVariant $variant)

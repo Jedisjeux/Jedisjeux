@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * This file is part of Jedisjeux.
  *
  * (c) Loïc Frémont
@@ -13,17 +13,14 @@ namespace App\Fixture;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
-class RedirectionFixture extends AbstractResourceFixture
+class ProductVideoFixture extends AbstractResourceFixture
 {
     /**
      * {@inheritdoc}
      */
     public function getName(): string
     {
-        return 'redirection';
+        return 'product_video';
     }
 
     /**
@@ -33,9 +30,9 @@ class RedirectionFixture extends AbstractResourceFixture
     {
         $resourceNode
             ->children()
-                ->scalarNode('source')->cannotBeEmpty()->end()
-                ->scalarNode('destination')->cannotBeEmpty()->end()
-                ->scalarNode('permanent')->cannotBeEmpty()->end()
+                ->scalarNode('title')->cannotBeEmpty()->end()
+                ->scalarNode('path')->cannotBeEmpty()->end()
+                ->scalarNode('product')->cannotBeEmpty()->end()
         ;
     }
 }
