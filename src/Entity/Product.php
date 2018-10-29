@@ -239,7 +239,7 @@ class Product extends BaseProduct implements ReviewableInterface
     /**
      * @var Collection|ProductVideo[]
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\ProductVideo", mappedBy="product")
+     * @ORM\OneToMany(targetEntity="App\Entity\ProductVideo", orphanRemoval=true, mappedBy="product")
      */
     protected $videos;
 

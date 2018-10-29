@@ -100,6 +100,7 @@ sylius_resource:
         app.product_video:
             classes:
                 model: App\Entity\ProductVideo
+                form: App\Form\Type\ProductVideoType
         app.pub_banner:
             classes:
                 model: App\Entity\PubBanner

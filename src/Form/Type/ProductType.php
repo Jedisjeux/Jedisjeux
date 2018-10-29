@@ -117,6 +117,13 @@ class ProductType extends AbstractType
             ])
             ->add('associations', ProductAssociationsType::class, [
                 'label' => false,
+            ])
+            ->add('videos', CollectionType::class, [
+                'label' => false,
+                'entry_type' => ProductVideoType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
             ]);
     }
 
