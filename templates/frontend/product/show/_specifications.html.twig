@@ -18,7 +18,7 @@
     <dt class="col-sm-3 text-sm-right">{{ 'app.ui.player_count'|trans }}</dt>
     <dd class="col-sm-9">{{ playerCount(product) }}</dd>
     <dt class="col-sm-3 text-sm-right">{{ 'app.ui.age'|trans }}</dt>
-    <dd class="col-sm-9">à partir de {{ product.minAge }} ans</dd>
+    <dd class="col-sm-9">{{ 'app.ui.from_years'|trans({ '%count%': product.minAge })|lower }}</dd>
     <dt class="col-sm-3 text-sm-right">{{ 'app.ui.duration'|trans|trans }}</dt>
     <dd class="col-sm-9">{{ duration(product) }}</dd>
     {% if product.mechanisms|length > 0 %}
@@ -29,7 +29,7 @@
         <dt class="col-sm-3 text-sm-right">{{ 'app.ui.themes'|trans }}</dt>
         <dd id="product-themes" class="col-sm-9">{{ self.show_taxons(product.themes) }}</dd>
     {% endif %}
-    <dt class="col-sm-3 text-sm-right">Date de sortie</dt>
+    <dt class="col-sm-3 text-sm-right">{{ 'app.ui.release_date'|trans }}</dt>
     <dd class="col-sm-9">{{ releasedAt(product.firstVariant) }}</dd>
     {% if product.designers|length > 0 %}
         <dt class="col-sm-3 text-sm-right">Auteur(s)</dt>

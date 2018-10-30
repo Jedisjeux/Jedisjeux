@@ -64,7 +64,7 @@ class GamePlayType extends AbstractType
                 ],
             ])
             ->add('duration', IntegerType::class, [
-                'label' => 'label.duration',
+                'label' => 'app.ui.duration_in_minute',
                 'required' => false,
             ])
             ->add('playerCount', null, [

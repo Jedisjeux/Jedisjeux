@@ -30,7 +30,7 @@ class PostType extends AbstractType
 
         $builder
             ->add('body', CKEditorType::class, [
-                'label' => 'label.body',
+                'label' => 'sylius.ui.body',
                 'config_name' => 'forum',
             ]);
     }

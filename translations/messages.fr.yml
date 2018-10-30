@@ -73,6 +73,7 @@ app:
         forum: Forum
         framed: Encadré
         from_board_game_geek: À partir de BoardGameGeek
+        from_years: 'À partir de %count% ans'
         game: Jeu
         game_details: Informations du jeu
         game_library: Ludothèque
@@ -96,6 +97,7 @@ app:
         in_the_boxes: C'est dans la boîte
         last_message_of: 'Dernier message de <strong>%username%</strong>'
         last_used_at: Dernière utilisation
+        latest_added_games: Derniers jeux ajoutés
         latest_articles: Derniers articles
         latest_in_the_boxes: Derniers c'est dans la boîte
         latest_news: Dernières actualités
@@ -117,7 +119,7 @@ app:
         manage_dealers: Gérer les vendeurs
         manage_dealer_prices: Gérer les tarifs des vendeurs
         manage_festival_lists: Gérer les listes de festival
-        manage_festival_list_items: Géreer les items de liste de festival
+        manage_festival_list_items: Gérer les items de liste de festival
         manage_game_plays: Gérer les parties de jeu
         manage_not_found_pages: Gérer les pages non trouvées
         manage_people: Gérer les personnes
@@ -169,6 +171,7 @@ app:
         photos: Photos
         player_count: Nombre de joueurs
         players: Joueurs
+        plays: Parties
         posts: Messages
         preview: Aperçu
         previews: Previews

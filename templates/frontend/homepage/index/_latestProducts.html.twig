@@ -2,7 +2,7 @@
 <!-- ================ -->
 <section class="section">
     <div class="container">
-        <h3 class="title">Derniers jeux ajoutés</h3>
+        <h3 class="title">{{ 'app.ui.latest_added_games'|trans }}</h3>
         <div class="separator-2"></div>
         {{ render(url('sylius_partial_product_index', {
             'paginate': 4,

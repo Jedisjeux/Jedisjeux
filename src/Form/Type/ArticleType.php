@@ -62,7 +62,7 @@ class ArticleType extends AbstractType
 
         $builder
             ->add('title', TextType::class, [
-                'label' => 'label.title',
+                'label' => 'sylius.ui.title',
             ])
             ->add('mainImage', ArticleImageType::class, [
                 'label' => false,

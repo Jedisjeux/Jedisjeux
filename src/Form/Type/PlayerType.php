@@ -29,11 +29,11 @@ class PlayerType extends AbstractType
     {
         $builder
             ->add('name', null, [
-                'label' => 'label.name',
+                'label' => 'sylius.ui.name',
                 'required' => false,
             ])
             ->add('score', null, [
-                'label' => 'label.score',
+                'label' => 'app.ui.score',
             ])
         ;
     }
