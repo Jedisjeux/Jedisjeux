@@ -1,5 +1,9 @@
 ## Change Log
 
+### v2.0.9 (2018/10/31)
+- [#329](https://github.com/Jedisjeux/Jedisjeux/pull/329) improve en_US translations (@loic425)
+- [#330](https://github.com/Jedisjeux/Jedisjeux/pull/330) Fix view box content (@loic425)
+
 ### v2.0.8 (2018/10/29)
 - [#326](https://github.com/Jedisjeux/Jedisjeux/pull/326) update head office (@loic425)
 - [#325](https://github.com/Jedisjeux/Jedisjeux/pull/325) add phpcs fixer and run fix (@loic425)
