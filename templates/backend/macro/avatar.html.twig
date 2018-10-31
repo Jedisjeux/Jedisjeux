@@ -6,7 +6,7 @@
 
 {% macro render(resource, filter, label, class) %}{% spaceless %}
     {% import _self as avatar %}
-    {% from 'macro/image.html.twig' import images %}
+    {% import 'macro/image.html.twig' as images %}
 
     {{ images.render(avatar.getPath(resource), filter, resource, class) }}
 {% endspaceless %}{% endmacro %}

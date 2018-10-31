@@ -1,4 +1,4 @@
-{% from 'macro/image.html.twig' import images %}
+{% import 'macro/image.html.twig' as images %}
 {% if (data.image) %}
     {{ images.render(data.image.webPath, 'small_width_fixed', data.name, 'ui image') }}
 {% endif %}
