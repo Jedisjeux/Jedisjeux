@@ -25,6 +25,14 @@ services:
         tags:
             - { name: fob.context_service }
 
+    app.behat.context.ui.backend.managing_contact_requests:
+        class: App\Behat\Context\Ui\Backend\ManagingContactRequestsContext
+        arguments:
+            - "@app.behat.page.backend.contact_request.index"
+            - "@app.behat.page.backend.contact_request.show"
+        tags:
+            - { name: fob.context_service }
+
     app.behat.context.ui.backend.managing_customers:
         class: App\Behat\Context\Ui\Backend\ManagingCustomersContext
         arguments:
