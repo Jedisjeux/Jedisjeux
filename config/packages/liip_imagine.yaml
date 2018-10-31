@@ -1,11 +1,14 @@
+parameters:
+    # Adds a fallback LIIP_IMAGINE_DATA_ROOT if the env var is not set.
+    env(LIIP_IMAGINE_DATA_ROOT): '%kernel.project_dir%/public'
+
 # @see http://symfony.com/doc/current/bundles/LiipImagineBundle/index.html
 liip_imagine:
     loaders:
         default:
             filesystem:
                 data_root:
-                    - "%kernel.project_dir%/public"
-                    # - "/home/jedisjeux/shared/public"
+                    - '%env(resolve:LIIP_IMAGINE_DATA_ROOT)%'
     filter_sets:
         # @see http://symfony.com/doc/current/bundles/LiipImagineBundle/filters.html
         cache: ~
