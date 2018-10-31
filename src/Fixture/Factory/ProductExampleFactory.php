@@ -109,7 +109,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         $product->setMinAge($options['min_age']);
         $product->setShortDescription($options['short_description']);
         $product->setDescription($options['description']);
-        $product->setBoxContent($options['material']);
+        $product->setBoxContent($options['box_content']);
         $product->setStatus($options['status']);
         $product->setReleasedAt($options['released_at']);
         $product->setCreatedAt($options['created_at']);
@@ -227,16 +227,16 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
                 return '<p>'.implode('</p><p>', $this->faker->paragraphs(5)).'</p>';
             })
 
-            ->setDefault('material', function (Options $options) {
+            ->setDefault('box_content', function (Options $options) {
                 $itemCount = $this->faker->numberBetween(5, 10);
 
-                $materialList = [];
+                $box_contentList = [];
 
                 for ($i = 0; $i < $itemCount; ++$i) {
-                    $materialList[] = $this->faker->words(3, true);
+                    $box_contentList[] = $this->faker->words(3, true);
                 }
 
-                return implode("\n", $materialList);
+                return implode("\n", $box_contentList);
             })
 
             ->setDefault('images', LazyOption::randomOnesImage(

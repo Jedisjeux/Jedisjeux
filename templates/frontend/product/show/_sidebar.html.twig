@@ -4,7 +4,7 @@
     <div class="sidebar">
         <h3 class="title mt-4">{{ 'app.ui.box_content'|trans }}</h3>
         <div class="separator-2"></div>
-        <ul class="nav flex-column list-style-icons">
+        <ul id="box-content" class="nav flex-column list-style-icons">
             {% for row in product.boxContent|split("\n") %}
                 <li class="nav-item">
                     <i class="fa fa-caret-right pr-10"></i>{{ row }}
