@@ -230,13 +230,13 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setDefault('box_content', function (Options $options) {
                 $itemCount = $this->faker->numberBetween(5, 10);
 
-                $box_contentList = [];
+                $boxContentList = [];
 
                 for ($i = 0; $i < $itemCount; ++$i) {
-                    $box_contentList[] = $this->faker->words(3, true);
+                    $boxContentList[] = $this->faker->words(3, true);
                 }
 
-                return implode("\n", $box_contentList);
+                return implode("\n", $boxContentList);
             })
 
             ->setDefault('images', LazyOption::randomOnesImage(
