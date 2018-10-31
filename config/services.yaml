@@ -41,7 +41,6 @@ imports:
     - { resource: services/block.yml }
     - { resource: services/calculator.yml }
     - { resource: services/context.yml }
-    - { resource: services/controller.yml }
     - { resource: services/feed.yml }
     - { resource: services/filter.yml }
     - { resource: services/fixtures.yml }
