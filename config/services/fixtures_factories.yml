@@ -33,6 +33,12 @@ services:
             - "@app.repository.article"
         public: true
 
+    app.fixture.example_factory.contact_request:
+        class: App\Fixture\Factory\ContactRequestExampleFactory
+        arguments:
+            - "@app.factory.contact_request"
+        public: true
+
     app.fixture.example_factory.dealer:
         class: App\Fixture\Factory\DealerExampleFactory
         arguments:

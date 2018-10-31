@@ -1,7 +1,6 @@
 imports:
     - suites/ui/account.yml
     - suites/ui/article.yml
-    - suites/ui/contact_request.yml
     - suites/ui/customer.yml
     - suites/ui/dashboard.yml
     - suites/ui/dealer.yml

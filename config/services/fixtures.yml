@@ -31,6 +31,14 @@ services:
         tags:
             - { name: sylius_fixtures.fixture }
 
+    app.fixture.contact_request:
+        class: App\Fixture\ContactRequestFixture
+        arguments:
+            - "@app.manager.contact_request"
+            - "@app.fixture.example_factory.contact_request"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
     app.fixture.dealer:
         class: App\Fixture\DealerFixture
         arguments:
