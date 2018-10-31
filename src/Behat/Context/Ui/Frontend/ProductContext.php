@@ -124,6 +124,16 @@ class ProductContext implements Context
     }
 
     /**
+     * @Then I should see :firstItem, :secondItem, :thirdItem as box content
+     */
+    public function iShouldSeeItemAsBoxContent(...$items)
+    {
+        foreach ($items as $item) {
+            Assert::contains($this->showPage->getBoxContent(), $item);
+        }
+    }
+
+    /**
      * @Then I should see :numberOfProducts products in the list
      */
     public function iShouldSeeProductsInTheList($numberOfProducts)

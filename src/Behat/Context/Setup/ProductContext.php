@@ -83,6 +83,7 @@ class ProductContext implements Context
             'publishers' => [],
             'min_duration' => null,
             'max_duration' => null,
+            'box_content' => null,
         ]);
 
         $this->productRepository->add($product);
@@ -135,6 +136,20 @@ class ProductContext implements Context
 
         $this->productRepository->add($product);
         $this->sharedStorage->set('product', $product);
+    }
+
+    /**
+     * @Given /^(this product) has "([^"]+)" in its box$/
+     * @Given /^(this product) also has "([^"]+)" in its box$/
+     */
+    public function productHasContent(Product $product, $boxContent)
+    {
+        $boxContentItems = null !== $product->getBoxContent() ? explode("\n", $product->getBoxContent()) : [];
+
+        $boxContentItems[] = $boxContent;
+
+        $product->setBoxContent(implode("\n", $boxContentItems));
+        $this->manager->flush($product);
     }
 
     /**

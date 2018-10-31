@@ -37,6 +37,16 @@ class ShowPage extends SymfonyPage
     }
 
     /**
+     * @return string
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     */
+    public function getBoxContent(): string
+    {
+        return $this->getElement('box_content')->getText();
+    }
+
+    /**
      * @return \Behat\Mink\Element\NodeElement[]
      *
      * @throws \Behat\Mink\Exception\ElementNotFoundException
@@ -155,6 +165,7 @@ class ShowPage extends SymfonyPage
         return array_merge(parent::getDefinedElements(), [
             'articles' => '#articles',
             'artists' => '#product-artists',
+            'box_content' => '#box-content',
             'designers' => '#product-designers',
             'game_plays' => '#game-plays',
             'mechanisms' => '#product-mechanisms',

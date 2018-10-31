@@ -2,6 +2,8 @@
 {% import 'macro/image.html.twig' as images %}
 
 {% if (dealer_prices.currentPageResults|length > 0) %}
+    <h3 class="title mt-4">{{ 'app.ui.in_stores'|trans }}</h3>
+    <div class="separator-2"></div>
 
     {% for dealer_price in dealer_prices %}
         {% set dealer = dealer_price.dealer %}
@@ -16,5 +18,4 @@
             <h6 class="media-heading"><a href="{{ dealer_price.url }}">{{ (dealer_price.price/100)|localizedcurrency('EUR') }}</a></h6>
             <p>{{ status(dealer_price) }}</p>
     {% endfor %}
-
 {% endif %}

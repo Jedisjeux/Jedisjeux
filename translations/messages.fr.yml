@@ -26,6 +26,7 @@ app:
         boardgame: Jeu de société
         boardgames: Jeux de société
         box: Encart
+        box_content: Contenu de la boite
         catalog: Catalogue
         categories: Catégories
         choose_category: Choisir une catégorie
@@ -91,6 +92,7 @@ app:
         internal_name: Nom interne
         interviews: Interviews
         introduction: Introduction
+        in_stores: Dans les boutiques
         in_the_boxes: C'est dans la boîte
         last_message_of: 'Dernier message de <strong>%username%</strong>'
         last_used_at: Dernière utilisation
