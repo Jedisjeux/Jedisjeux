@@ -1,4 +1,4 @@
-{% from 'macros/images.html.twig' import image %}
+{% from 'macro/image.html.twig' import images %}
 {% if (data.mainImage) %}
-    {{ image(data.mainImage.webPath, 'thumbnail', data.name, 'ui circular image') }}
+    {{ images.render(data.mainImage.webPath, 'thumbnail', data.name, 'ui circular image') }}
 {% endif %}

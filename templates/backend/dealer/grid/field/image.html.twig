@@ -1,4 +1,4 @@
-{% from 'macros/images.html.twig' import image %}
+{% from 'macro/image.html.twig' import images %}
 {% if (data.image) %}
-    {{ image(data.image.webPath, 'small_width_fixed', data.name, 'ui image') }}
+    {{ images.render(data.image.webPath, 'small_width_fixed', data.name, 'ui image') }}
 {% endif %}
