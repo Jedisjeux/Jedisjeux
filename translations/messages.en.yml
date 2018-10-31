@@ -104,11 +104,11 @@ app:
         latest_reviews: Latest reviews
         latest_topics: Latest topics
         latest_videos: Latest videos
-        less_commented_first: less_commented_first
-        lifetime_rating: lifetime_rating
-        list_articles: list_articles
-        list_games: list_games
-        list_reviews: list_reviews
+        less_commented_first: Less commented first
+        lifetime_rating: Lifetime rating
+        list_articles: List articles
+        list_games: List games
+        list_reviews: List reviews
         logout: Logout
         ludographies: Ludographies
         ludography: Ludography
