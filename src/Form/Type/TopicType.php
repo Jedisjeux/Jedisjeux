@@ -48,13 +48,13 @@ class TopicType extends AbstractType
 
         $builder
             ->add('title', null, [
-                'label' => 'label.title',
+                'label' => 'sylius.ui.title',
             ])
             ->add('mainPost', PostType::class, [
                 'label' => false,
             ])
             ->add('mainTaxon', EntityType::class, [
-                'label' => 'label.category',
+                'label' => 'sylius.ui.category',
                 'class' => 'App:Taxon',
                 'group_by' => 'parent',
                 'query_builder' => function (EntityRepository $er) use ($onlyPublic) {

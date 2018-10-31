@@ -21,7 +21,9 @@
         <h3><a href="{{ productPath }}">{{ product.name }}</a></h3>
         <ul class="list-icons small">
             <li><i class="fa fa-user"></i> {{ playerCount(product) }}</li>
-            <li><i class="fa fa-child"></i> A partir de {{ product.minAge }} ans</li>
+            {% if product.minAge is not null %}
+                <li><i class="fa fa-child"></i> {{ 'app.ui.from_years'|trans({ '%count%': product.minAge })|lower }}</li>
+            {% endif %}
             <li><i class="fa fa-clock-o"></i> {{ duration(product) }}</li>
             <li><i class="fa fa-calendar-o"></i> Sortie : {{ releasedAt(product.firstVariant) }}</li>
         </ul>
