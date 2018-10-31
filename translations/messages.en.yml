@@ -3,7 +3,9 @@ app:
         ask_for_publication: Ask for publication
         ask_for_review: Ask for review
         ask_for_translation: Ask for translation
+        box_content: Box content
         do_not_have_an_account_yet: Don't have an account yet?
+        in_stores: In stores
         not_found_page: Not found page
         publish: Publish
         there_are_no_articles: There are no articles.
