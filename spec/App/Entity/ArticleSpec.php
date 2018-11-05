@@ -42,6 +42,18 @@ class ArticleSpec extends ObjectBehavior
         $this->getTitle()->shouldReturn("Awesome title");
     }
 
+    function its_not_publishable_by_default()
+    {
+        $this->isPublishable()->shouldReturn(false);
+    }
+
+    function it_can_be_publishable()
+    {
+        $this->setPublishable(false);
+        $this->setPublishable(true);
+        $this->isPublishable()->shouldReturn(true);
+    }
+
     function it_has_no_publish_start_date_by_default()
     {
         $this->getPublishStartDate()->shouldReturn(null);
@@ -119,6 +131,8 @@ class ArticleSpec extends ObjectBehavior
 
     function it_adds_block(Block $block)
     {
+        $block->setArticle($this)->shouldBeCalled();
+
         $this->addBlock($block);
         $this->hasBlock($block)->shouldReturn(true);
     }
@@ -137,6 +151,8 @@ class ArticleSpec extends ObjectBehavior
 
     function it_adds_review(ArticleReview $review)
     {
+        $review->setReviewSubject($this)->shouldBeCalled();
+
         $this->addReview($review);
         $this->hasReview($review)->shouldReturn(true);
     }

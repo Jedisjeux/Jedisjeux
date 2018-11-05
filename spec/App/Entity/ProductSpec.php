@@ -21,6 +21,15 @@ class ProductSpec extends ObjectBehavior
         $this->shouldHaveType(BaseProduct::class);
     }
 
+    function it_calls_parent_constructor()
+    {
+        $this->getCreatedAt()->shouldNotReturn(null);
+        $this->getAttributes()->shouldHaveType(Collection::class);
+        $this->getAssociations()->shouldHaveType(Collection::class);
+        $this->getVariants()->shouldHaveType(Collection::class);
+        $this->getOptions()->shouldHaveType(Collection::class);
+    }
+
     function it_has_code_by_default()
     {
         $this->getCode()->shouldNotBeNull();
@@ -53,6 +62,21 @@ class ProductSpec extends ObjectBehavior
         $this->addTaxon($taxon);
         $this->removeTaxon($taxon);
         $this->hasTaxon($taxon)->shouldReturn(false);
+    }
+
+    function it_can_filter_taxons_by_code(TaxonInterface $rootTaxon1, TaxonInterface $rootTaxon2, TaxonInterface $taxon1, TaxonInterface $taxon2)
+    {
+        $rootTaxon1->getCode()->willReturn('xyz');
+        $rootTaxon2->getCode()->willReturn('666');
+        $this->addTaxon($taxon1);
+        $this->addTaxon($taxon2);
+        $taxon1->getRoot()->willReturn($rootTaxon1);
+        $taxon2->getRoot()->willReturn($rootTaxon2);
+
+        $taxons = $this->getTaxons('xyz');
+
+        $taxons->contains($taxon1)->shouldReturn(true);
+        $taxons->contains($taxon2)->shouldReturn(false);
     }
 
     function it_has_no_min_age_by_default()
@@ -112,13 +136,13 @@ class ProductSpec extends ObjectBehavior
 
     function its_duration_is_not_by_player_by_default()
     {
-        $this->isDurationByPlayer(false);
+        $this->isDurationByPlayer()->shouldReturn(false);
     }
 
     function its_duration_by_player_is_mutable()
     {
         $this->setDurationByPlayer(true);
-        $this->isDurationByPlayer(true);
+        $this->isDurationByPlayer()->shouldReturn(true);
     }
 
     function it_has_no_box_content_by_default()

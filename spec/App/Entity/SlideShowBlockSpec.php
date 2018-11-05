@@ -28,6 +28,8 @@ class SlideShowBlockSpec extends ObjectBehavior
 
     function it_adds_block(Block $block)
     {
+        $block->setSlideShowBlock($this)->shouldBeCalled();
+
         $this->addBlock($block);
         $this->hasBlock($block)->shouldReturn(true);
     }

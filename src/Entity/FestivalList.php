@@ -107,114 +107,90 @@ class FestivalList implements ResourceInterface
 
     /**
      * @param string $code
-     *
-     * @return FestivalList
      */
-    public function setCode(string $code)
+    public function setCode(string $code): void
     {
         $this->code = $code;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
-     *
-     * @return $this
+     * @param string|null $name
      */
-    public function setName($name)
+    public function setName(?string $name): void
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSlug()
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
 
     /**
-     * @param string $slug
-     *
-     * @return FestivalList
+     * @param string|null $slug
      */
-    public function setSlug(string $slug)
+    public function setSlug(?string $slug): void
     {
         $this->slug = $slug;
-
-        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
     /**
-     * @param string $description
-     *
-     * @return $this
+     * @param string|null $description
      */
-    public function setDescription($description)
+    public function setDescription(?string $description): void
     {
         $this->description = $description;
-
-        return $this;
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
-    public function getStartAt()
+    public function getStartAt(): ?\DateTime
     {
         return $this->startAt;
     }
 
     /**
-     * @param \DateTime $startAt
-     *
-     * @return $this
+     * @param \DateTime|null $startAt
      */
-    public function setStartAt($startAt)
+    public function setStartAt(?\DateTime $startAt): void
     {
         $this->startAt = $startAt;
-
-        return $this;
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
-    public function getEndAt()
+    public function getEndAt(): ?\DateTime
     {
         return $this->endAt;
     }
 
     /**
      * @param \DateTime $endAt
-     *
-     * @return $this
      */
-    public function setEndAt($endAt)
+    public function setEndAt(?\DateTime $endAt): void
     {
         $this->endAt = $endAt;
-
-        return $this;
     }
 
     /**
@@ -236,7 +212,7 @@ class FestivalList implements ResourceInterface
     /**
      * @return Collection|ProductInterface[]
      */
-    public function getItems()
+    public function getItems(): Collection
     {
         return $this->items;
     }
@@ -246,34 +222,26 @@ class FestivalList implements ResourceInterface
      *
      * @return bool
      */
-    public function hasItem(FestivalListItem $item)
+    public function hasItem(FestivalListItem $item): bool
     {
         return $this->items->contains($item);
     }
 
     /**
      * @param FestivalListItem $item
-     *
-     * @return $this
      */
-    public function addItem(FestivalListItem $item)
+    public function addItem(FestivalListItem $item): void
     {
         if (!$this->hasItem($item)) {
             $this->items->add($item);
         }
-
-        return $this;
     }
 
     /**
      * @param FestivalListItem $item
-     *
-     * @return $this
      */
-    public function removeItem(FestivalListItem $item)
+    public function removeItem(FestivalListItem $item): void
     {
         $this->items->removeElement($item);
-
-        return $this;
     }
 }

@@ -15,6 +15,7 @@ commands=(
     test-phpunit
     test-installer
     test-fixtures
+    test-infection
     test-behat-without-javascript
     update-behat-with-old-config
     test-behat-without-javascript

@@ -43,7 +43,7 @@ class ContactRequest implements ResourceInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string")use Prophecy\Argument;
      */
     protected $lastName;
 

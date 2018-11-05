@@ -43,6 +43,11 @@ class TopicSpec extends ObjectBehavior
         $this->getTitle()->shouldReturn('Subject title');
     }
 
+    function its_post_count_is_equal_to_zero_by_default()
+    {
+        $this->getPostCount()->shouldReturn(0);
+    }
+
     function it_sets_post_count()
     {
         $this->setPostCount(7);
@@ -53,11 +58,6 @@ class TopicSpec extends ObjectBehavior
     function its_posts_is_collection()
     {
         $this->getPosts()->shouldHaveType(ArrayCollection::class);
-    }
-
-    function its_followers_is_collection()
-    {
-        $this->getFollowers()->shouldHaveType(ArrayCollection::class);
     }
 
     function its_author_is_mutable(CustomerInterface $author)
@@ -95,6 +95,17 @@ class TopicSpec extends ObjectBehavior
         $this->addPost($post);
         $this->removePost($post);
         $this->hasPost($post)->shouldReturn(false);
+    }
+
+    function its_followers_is_collection()
+    {
+        $this->getFollowers()->shouldHaveType(ArrayCollection::class);
+    }
+
+    function it_add_followers(CustomerInterface $follower)
+    {
+        $this->addFollower($follower);
+        $this->hasFollower($follower)->shouldReturn(true);
     }
 
     function it_can_remove_followers(CustomerInterface $follower)

@@ -33,17 +33,11 @@ class ContactRequestFactory implements FactoryInterface
 
     /**
      * @param string $className
-     */
-    public function __construct($className)
-    {
-        $this->className = $className;
-    }
-
-    /**
      * @param CustomerContextInterface $customerContext
      */
-    public function setCustomerContext(CustomerContextInterface $customerContext)
+    public function __construct($className, CustomerContextInterface $customerContext)
     {
+        $this->className = $className;
         $this->customerContext = $customerContext;
     }
 

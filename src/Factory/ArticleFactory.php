@@ -18,6 +18,7 @@ use Faker\Factory;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -30,7 +31,7 @@ class ArticleFactory implements FactoryInterface
     private $className;
 
     /**
-     * @var EntityRepository
+     * @var RepositoryInterface
      */
     protected $productRepository;
 
@@ -46,10 +47,20 @@ class ArticleFactory implements FactoryInterface
 
     /**
      * @param string $className
+     * @param RepositoryInterface $productRepository
+     * @param CustomerContextInterface $customerContext
+     * @param FactoryInterface $blockFactory
      */
-    public function __construct($className)
-    {
+    public function __construct(
+        string $className,
+        RepositoryInterface $productRepository,
+        CustomerContextInterface $customerContext,
+        FactoryInterface $blockFactory
+    ) {
         $this->className = $className;
+        $this->productRepository = $productRepository;
+        $this->customerContext = $customerContext;
+        $this->blockFactory = $blockFactory;
     }
 
     /**
@@ -87,7 +98,7 @@ class ArticleFactory implements FactoryInterface
         $faker = Factory::create();
         $article = $this->createForProduct($product);
 
-        $article->setTitle(sprintf('Critique de %s', (string) $product));
+        $article->setTitle(sprintf('Critique de %s', $product->getName()));
 
         /** @var Block $materialBlock */
         $materialBlock = $this->blockFactory->createNew();
@@ -117,29 +128,5 @@ class ArticleFactory implements FactoryInterface
         // TODO set review-article taxon
 
         return $article;
-    }
-
-    /**
-     * @param EntityRepository $productRepository
-     */
-    public function setProductRepository($productRepository)
-    {
-        $this->productRepository = $productRepository;
-    }
-
-    /**
-     * @param CustomerContextInterface $customerContext
-     */
-    public function setCustomerContext($customerContext)
-    {
-        $this->customerContext = $customerContext;
-    }
-
-    /**
-     * @param FactoryInterface $blockFactory
-     */
-    public function setBlockFactory(FactoryInterface $blockFactory)
-    {
-        $this->blockFactory = $blockFactory;
     }
 }

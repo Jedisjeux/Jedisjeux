@@ -45,9 +45,9 @@ class ServicesPass implements CompilerPassInterface
     {
         $topicFactoryDefinition = $container->getDefinition('app.factory.topic');
         $topicFactoryDefinition
-            ->addMethodCall('setCustomerContext', [new Reference('app.context.customer')])
-            ->addMethodCall('setGamePlayRepository', [new Reference('app.repository.game_play')])
-            ->addMethodCall('setPostFactory', [new Reference('app.factory.post')]);
+            ->addArgument(new Reference('app.context.customer'))
+            ->addArgument(new Reference('app.repository.game_play'))
+            ->addArgument(new Reference('app.factory.post'));
 
         $postFactoryDefinition = $container->getDefinition('app.factory.post');
         $postFactoryDefinition
@@ -60,8 +60,8 @@ class ServicesPass implements CompilerPassInterface
 
         $gamePlayFactoryDefinition = $container->getDefinition('app.factory.game_play');
         $gamePlayFactoryDefinition
-            ->addMethodCall('setProductRepository', [new Reference('sylius.repository.product')])
-            ->addMethodCall('setCustomerContext', [new Reference('app.context.customer')]);
+            ->addArgument(new Reference('sylius.repository.product'))
+            ->addArgument(new Reference('app.context.customer'));
 
         $productFactoryDefinition = $container->getDefinition('sylius.custom_factory.product');
         $productFactoryDefinition
@@ -72,13 +72,13 @@ class ServicesPass implements CompilerPassInterface
 
         $articleFactoryDefinition = $container->getDefinition('app.factory.article');
         $articleFactoryDefinition
-            ->addMethodCall('setProductRepository', [new Reference('sylius.repository.product')])
-            ->addMethodCall('setCustomerContext', [new Reference('app.context.customer')])
-            ->addMethodCall('setBlockFactory', [new Reference('app.factory.block')]);
+            ->addArgument(new Reference('sylius.repository.product'))
+            ->addArgument(new Reference('app.context.customer'))
+            ->addArgument(new Reference('app.factory.block'));
 
         $contactRequestFactoryDefinition = $container->getDefinition('app.factory.contact_request');
         $contactRequestFactoryDefinition
-            ->addMethodCall('setCustomerContext', [new Reference('app.context.customer')]);
+            ->addArgument(new Reference('app.context.customer'));
 
         $productListFactoryDefinition = $container->getDefinition('app.factory.product_list');
         $productListFactoryDefinition

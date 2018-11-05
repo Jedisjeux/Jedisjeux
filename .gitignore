@@ -79,3 +79,8 @@ behat.yml
 /.php_cs
 /.php_cs.cache
 ###< friendsofphp/php-cs-fixer ###
+
+###> infection/infection ###
+coverage/*
+infection-log.txt
+###< infection/infection ###

@@ -61,6 +61,8 @@ class ProductListSpec extends ObjectBehavior
 
     function it_adds_item(ProductListItem $item)
     {
+        $item->setList($this)->shouldBeCalled();
+
         $this->addItem($item);
         $this->hasItem($item)->shouldReturn(true);
     }
