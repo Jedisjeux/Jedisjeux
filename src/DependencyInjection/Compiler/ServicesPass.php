@@ -51,7 +51,7 @@ class ServicesPass implements CompilerPassInterface
 
         $postFactoryDefinition = $container->getDefinition('app.factory.post');
         $postFactoryDefinition
-            ->addMethodCall('setCustomerContext', [new Reference('app.context.customer')]);
+            ->addArgument(new Reference('app.context.customer'));
 
         $notificationFactoryDefinition = $container->getDefinition('app.factory.notification');
         $notificationFactoryDefinition
