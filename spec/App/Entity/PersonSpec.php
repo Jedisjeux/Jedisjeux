@@ -88,6 +88,8 @@ class PersonSpec extends ObjectBehavior
 
     function it_adds_image(PersonImage $image)
     {
+        $image->setPerson($this)->shouldBeCalled();
+
         $this->addImage($image);
         $this->hasImage($image)->shouldReturn(true);
     }

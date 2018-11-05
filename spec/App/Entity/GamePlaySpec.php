@@ -89,6 +89,9 @@ class GamePlaySpec extends ObjectBehavior
 
     function its_topic_is_mutable(Topic $topic)
     {
+        $topic->getGamePlay()->willReturn(null);
+        $topic->setGamePlay($this)->shouldBeCalled();
+
         $this->setTopic($topic);
         $this->getTopic()->shouldReturn($topic);
     }
@@ -100,6 +103,8 @@ class GamePlaySpec extends ObjectBehavior
 
     function it_adds_image(GamePlayImage $image)
     {
+        $image->setGamePlay($this)->shouldBeCalled();
+
         $this->addImage($image);
         $this->hasImage($image)->shouldReturn(true);
     }
@@ -124,6 +129,8 @@ class GamePlaySpec extends ObjectBehavior
 
     function it_adds_player(Player $player)
     {
+        $player->setGamePlay($this)->shouldBeCalled();
+
         $this->addPlayer($player);
         $this->hasPlayer($player)->shouldReturn(true);
     }

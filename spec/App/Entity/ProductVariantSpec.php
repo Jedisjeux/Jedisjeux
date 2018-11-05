@@ -50,6 +50,8 @@ class ProductVariantSpec extends ObjectBehavior
 
     function it_adds_image(ProductVariantImage $image)
     {
+        $image->setVariant($this)->shouldBeCalled();
+
         $this->addImage($image);
         $this->hasImage($image)->shouldReturn(true);
     }
