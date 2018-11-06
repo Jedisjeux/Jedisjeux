@@ -23,4 +23,4 @@ services:
             - "@sylius.app_user.token_generator.email_verification"
             - "@event_dispatcher"
         tags:
-            - { name: kernel.event_listener, event: sylius.customer.post_register, method: sendVerificationEmail }
+            - { name: kernel.event_listener, event: sylius.customer.post_register, method: handleUserVerification }
