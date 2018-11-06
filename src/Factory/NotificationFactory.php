@@ -44,7 +44,7 @@ class NotificationFactory implements FactoryInterface
     /**
      * @param string $className
      */
-    public function __construct($className)
+    public function __construct(string $className)
     {
         $this->className = $className;
     }

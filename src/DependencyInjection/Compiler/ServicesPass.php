@@ -51,7 +51,7 @@ class ServicesPass implements CompilerPassInterface
 
         $postFactoryDefinition = $container->getDefinition('app.factory.post');
         $postFactoryDefinition
-            ->addMethodCall('setCustomerContext', [new Reference('app.context.customer')]);
+            ->addArgument(new Reference('app.context.customer'));
 
         $notificationFactoryDefinition = $container->getDefinition('app.factory.notification');
         $notificationFactoryDefinition
@@ -66,9 +66,9 @@ class ServicesPass implements CompilerPassInterface
         $productFactoryDefinition = $container->getDefinition('sylius.custom_factory.product');
         $productFactoryDefinition
             ->setClass(ProductFactory::class)
-            ->addMethodCall('setPersonRepository', [new Reference('app.repository.person')])
-            ->addMethodCall('setProductVariantImageFactory', [new Reference('app.factory.product_variant_image')])
-            ->addMethodCall('setSlugGenerator', [new Reference('sylius.generator.slug')]);
+            ->addArgument(new Reference('app.factory.product_variant_image'))
+            ->addArgument(new Reference('sylius.generator.slug'))
+            ->addArgument(new Reference('app.repository.person'));
 
         $articleFactoryDefinition = $container->getDefinition('app.factory.article');
         $articleFactoryDefinition

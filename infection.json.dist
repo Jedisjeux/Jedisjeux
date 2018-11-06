@@ -9,7 +9,8 @@
             "Command",
             "DependencyInjection",
             "Migrations",
-            "Repository"
+            "Repository",
+            "Fixture"
         ]
     },
     "logs": {

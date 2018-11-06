@@ -16,11 +16,11 @@ use App\Entity\Product;
 use App\Entity\ProductVariant;
 use App\Entity\ProductVariantImage;
 use App\Utils\BggProduct;
-use Doctrine\ORM\EntityRepository;
 use Gedmo\Sluggable\Util\Urlizer;
 use Sylius\Component\Product\Factory\ProductFactory as BaseProductFactory;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -28,7 +28,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 class ProductFactory extends BaseProductFactory
 {
     /**
-     * @var EntityRepository
+     * @var RepositoryInterface
      */
     protected $personRepository;
 
@@ -43,27 +43,24 @@ class ProductFactory extends BaseProductFactory
     protected $slugGenerator;
 
     /**
-     * @param EntityRepository $personRepository
-     */
-    public function setPersonRepository(EntityRepository $personRepository)
-    {
-        $this->personRepository = $personRepository;
-    }
-
-    /**
+     * @param FactoryInterface $factory
+     * @param FactoryInterface $variantFactory
      * @param FactoryInterface $productVariantImageFactory
-     */
-    public function setProductVariantImageFactory(FactoryInterface $productVariantImageFactory)
-    {
-        $this->productVariantImageFactory = $productVariantImageFactory;
-    }
-
-    /**
      * @param SlugGeneratorInterface $slugGenerator
+     * @param RepositoryInterface $personRepository
      */
-    public function setSlugGenerator(SlugGeneratorInterface $slugGenerator)
-    {
+    public function __construct(
+        FactoryInterface $factory,
+        FactoryInterface $variantFactory,
+        FactoryInterface $productVariantImageFactory,
+        SlugGeneratorInterface $slugGenerator,
+        RepositoryInterface $personRepository
+    ) {
+        parent::__construct($factory, $variantFactory);
+
+        $this->productVariantImageFactory = $productVariantImageFactory;
         $this->slugGenerator = $slugGenerator;
+        $this->personRepository = $personRepository;
     }
 
     /**
