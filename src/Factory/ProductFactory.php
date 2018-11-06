@@ -16,7 +16,6 @@ use App\Entity\Product;
 use App\Entity\ProductVariant;
 use App\Entity\ProductVariantImage;
 use App\Utils\BggProduct;
-use Doctrine\ORM\EntityRepository;
 use Gedmo\Sluggable\Util\Urlizer;
 use Sylius\Component\Product\Factory\ProductFactory as BaseProductFactory;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
@@ -29,7 +28,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class ProductFactory extends BaseProductFactory
 {
     /**
-     * @var EntityRepository
+     * @var RepositoryInterface
      */
     protected $personRepository;
 
@@ -62,30 +61,6 @@ class ProductFactory extends BaseProductFactory
         $this->productVariantImageFactory = $productVariantImageFactory;
         $this->slugGenerator = $slugGenerator;
         $this->personRepository = $personRepository;
-    }
-
-    /**
-     * @param EntityRepository $personRepository
-     */
-    public function setPersonRepository(EntityRepository $personRepository)
-    {
-        $this->personRepository = $personRepository;
-    }
-
-    /**
-     * @param FactoryInterface $productVariantImageFactory
-     */
-    public function setProductVariantImageFactory(FactoryInterface $productVariantImageFactory)
-    {
-        $this->productVariantImageFactory = $productVariantImageFactory;
-    }
-
-    /**
-     * @param SlugGeneratorInterface $slugGenerator
-     */
-    public function setSlugGenerator(SlugGeneratorInterface $slugGenerator)
-    {
-        $this->slugGenerator = $slugGenerator;
     }
 
     /**
