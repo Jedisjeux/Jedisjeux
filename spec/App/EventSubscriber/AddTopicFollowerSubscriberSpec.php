@@ -36,7 +36,7 @@ class AddTopicFollowerSubscriberSpec extends ObjectBehavior
         $this->shouldHaveType(AddTopicFollowerSubscriber::class);
     }
 
-    function it_is_subscriber()
+    function it_is_a_subscriber()
     {
         $this->shouldImplement(EventSubscriberInterface::class);
     }
@@ -49,7 +49,7 @@ class AddTopicFollowerSubscriberSpec extends ObjectBehavior
         ]);
     }
 
-    function it_hads_currently_logged_customer_as_follower_on_topic_create($customerContext, CustomerInterface $customer, GenericEvent $event, Topic $topic)
+    function it_adds_currently_logged_customer_as_follower_on_topic_create($customerContext, CustomerInterface $customer, GenericEvent $event, Topic $topic)
     {
         $event->getSubject()->willReturn($topic);
         $customerContext->getCustomer()->willReturn($customer);
@@ -58,13 +58,26 @@ class AddTopicFollowerSubscriberSpec extends ObjectBehavior
         $this->onTopicCreate($event);
     }
 
-    function it_hads_currently_logged_customer_as_follower_on_post_create($customerContext, CustomerInterface $customer, GenericEvent $event, Topic $topic, Post $post)
+    function it_adds_currently_logged_customer_as_follower_on_post_create($customerContext, CustomerInterface $customer, GenericEvent $event, Topic $topic, Post $post)
     {
         $event->getSubject()->willReturn($post);
         $customerContext->getCustomer()->willReturn($customer);
         $post->getTopic()->willReturn($topic);
 
         $topic->addFollower($customer)->shouldBeCalled();
+        $this->onPostCreate($event);
+    }
+
+    function it_does_nothing_when_post_has_no_topic(
+        GenericEvent $event,
+        Topic $topic,
+        Post $post,
+        CustomerInterface $customer
+    ) {
+        $event->getSubject()->willReturn($post);
+        $post->getTopic()->willReturn(null);
+
+        $topic->addFollower($customer)->shouldNotBeCalled();
         $this->onPostCreate($event);
     }
 }

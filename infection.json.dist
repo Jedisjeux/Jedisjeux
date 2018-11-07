@@ -20,5 +20,6 @@
         "@default": true,
         "IdenticalEqual": false,
         "NotIdenticalNotEqual": false
-    }
+    },
+    "testFramework":"phpspec"
 }
