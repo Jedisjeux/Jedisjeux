@@ -2,6 +2,7 @@
 
 namespace spec\App\EventSubscriber;
 
+use App\AppEvents;
 use App\Entity\Article;
 use App\Entity\Post;
 use App\Entity\Topic;
@@ -26,6 +27,13 @@ class CreateTopicForArticleSubscriberSpec extends ObjectBehavior
     function it_is_initializable()
     {
         $this->shouldHaveType(CreateTopicForArticleSubscriber::class);
+    }
+
+    function it_subscribes_to_post_create_event()
+    {
+        $this::getSubscribedEvents()->shouldReturn([
+            AppEvents::POST_PRE_CREATE => 'onCreate',
+        ]);
     }
 
     function it_creates_topic_for_article(

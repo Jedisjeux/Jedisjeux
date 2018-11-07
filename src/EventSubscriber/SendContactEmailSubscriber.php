@@ -17,6 +17,7 @@ use App\Event\ContactRequestEvents;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -39,7 +40,7 @@ class SendContactEmailSubscriber implements EventSubscriberInterface
      * @param SenderInterface $sender
      * @param string          $contactEmail
      */
-    public function __construct(SenderInterface $sender, $contactEmail)
+    public function __construct(SenderInterface $sender, string $contactEmail)
     {
         $this->sender = $sender;
         $this->contactEmail = $contactEmail;
@@ -62,6 +63,7 @@ class SendContactEmailSubscriber implements EventSubscriberInterface
     {
         /** @var ContactRequest $contactRequest */
         $contactRequest = $event->getSubject();
+        Assert::isInstanceOf($contactRequest, ContactRequest::class);
 
         $this->sender->send(Emails::CONTACT_REQUEST,
             [$this->contactEmail],

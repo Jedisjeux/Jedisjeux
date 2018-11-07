@@ -2,6 +2,7 @@
 
 namespace spec\App\EventSubscriber;
 
+use App\AppEvents;
 use App\Entity\GamePlay;
 use App\Entity\Post;
 use App\Entity\Topic;
@@ -26,6 +27,13 @@ class CreateTopicForGamePlaySubscriberSpec extends ObjectBehavior
     function it_is_initializable()
     {
         $this->shouldHaveType(CreateTopicForGamePlaySubscriber::class);
+    }
+
+    function it_subscribes_to_post_create_event()
+    {
+        $this::getSubscribedEvents()->shouldReturn([
+            AppEvents::POST_PRE_CREATE => 'onCreate',
+        ]);
     }
 
     function it_creates_topic_for_game_play(
@@ -63,6 +71,21 @@ class CreateTopicForGamePlaySubscriberSpec extends ObjectBehavior
         $post->getGamePlay()->willReturn($gamePlay);
         $topicRepository->findOneByGamePlay($gamePlay)->willReturn($topic);
         $post->getAuthor()->willReturn($author);
+
+        $topicFactory->createForGamePlay($gamePlay)->shouldNotBeCalled();
+
+        $this->onCreate($event);
+    }
+
+    function it_does_nothing_if_it_is_not_a_game_play_post(
+        GenericEvent $event,
+        Post $post,
+        GamePlay $gamePlay,
+        TopicFactory $topicFactory
+    )
+    {
+        $event->getSubject()->willReturn($post);
+        $post->getGamePlay()->willReturn(null);
 
         $topicFactory->createForGamePlay($gamePlay)->shouldNotBeCalled();
 

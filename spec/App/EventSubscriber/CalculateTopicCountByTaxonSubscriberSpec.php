@@ -2,6 +2,7 @@
 
 namespace spec\App\EventSubscriber;
 
+use App\AppEvents;
 use App\Entity\Taxon;
 use App\Entity\Topic;
 use App\EventSubscriber\CalculateTopicCountByTaxonSubscriber;
@@ -20,6 +21,13 @@ class CalculateTopicCountByTaxonSubscriberSpec extends ObjectBehavior
     function it_is_initializable()
     {
         $this->shouldHaveType(CalculateTopicCountByTaxonSubscriber::class);
+    }
+
+    function it_subscribes_to_topic_create_event()
+    {
+        $this::getSubscribedEvents()->shouldReturn([
+            AppEvents::TOPIC_PRE_CREATE => 'onTopicCreate',
+        ]);
     }
 
     function it_updates_with_topic_taxon(

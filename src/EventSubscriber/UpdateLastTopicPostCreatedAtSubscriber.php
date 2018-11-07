@@ -16,6 +16,7 @@ use App\Entity\Post;
 use App\Entity\Topic;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -40,6 +41,7 @@ class UpdateLastTopicPostCreatedAtSubscriber implements EventSubscriberInterface
     {
         /** @var Topic $topic */
         $topic = $event->getSubject();
+        Assert::isInstanceOf($topic, Topic::class);
 
         $topic->setLastPostCreatedAt(new \DateTime());
     }
@@ -51,6 +53,7 @@ class UpdateLastTopicPostCreatedAtSubscriber implements EventSubscriberInterface
     {
         /** @var Post $post */
         $post = $event->getSubject();
+        Assert::isInstanceOf($post, Post::class);
 
         if (null === $topic = $post->getTopic()) {
             return;
