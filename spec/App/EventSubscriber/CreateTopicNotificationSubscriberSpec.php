@@ -3,6 +3,7 @@
 namespace spec\App\EventSubscriber;
 
 use App\AppEvents;
+use App\Entity\Customer;
 use App\Entity\Notification;
 use App\Entity\Post;
 use App\Entity\Topic;
@@ -88,13 +89,64 @@ class CreateTopicNotificationSubscriberSpec extends ObjectBehavior
         $post->getTopic()->willReturn($topic);
         $post->getAuthor()->willReturn($currentCustomer);
         $topic->getTitle()->willReturn('Topic title');
-        $topic->getFollowers()->willReturn(new ArrayCollection([$follower->getWrappedObject()]));
+        $topic->getFollowers()->willReturn(new ArrayCollection([
+            $follower->getWrappedObject(),
+            $currentCustomer->getWrappedObject(),
+        ]));
         $customerContext->getCustomer()->willReturn($currentCustomer);
         $repository->findOneBy(Argument::type('array'))->willReturn(null);
         $factory->createForPost($post, $follower)->willReturn($notification);
         $translator->trans(Argument::type('string'), Argument::type('array'))->willReturn('message');
 
         $factory->createForPost($post, $currentCustomer)->shouldNotBeCalled();
+        $notification->addAuthor($currentCustomer)->shouldBeCalled();
+        $notification->getAuthors()->shouldBeCalled();
+        $notification->setMessage('message')->shouldBeCalled();
+
+        $this->onPostCreate($event);
+    }
+
+    function it_does_create_notifications_when_post_has_no_topic(
+        GenericEvent $event,
+        Post $post,
+        Topic $topic
+    ): void {
+        $event->getSubject()->willReturn($post);
+        $post->getTopic()->willReturn(null);
+
+        $topic->getFollowers()->shouldNotBeCalled();
+
+        $this->onPostCreate($event);
+    }
+
+    function it_updates_notifications_when_it_already_exists(
+        GenericEvent $event,
+        Post $post,
+        Topic $topic,
+        Notification $notification,
+        Customer $topicAuthor,
+        Customer $currentCustomer,
+        Customer $follower,
+        CustomerContextInterface $customerContext,
+        EntityRepository $repository,
+        NotificationFactory $factory,
+        TranslatorInterface $translator
+    ) {
+        $event->getSubject()->willReturn($post);
+        $post->getTopic()->willReturn($topic);
+        $post->getAuthor()->willReturn($currentCustomer);
+        $topic->getTitle()->willReturn('Topic title');
+        $topic->getFollowers()->willReturn(new ArrayCollection([$follower->getWrappedObject()]));
+
+        $topicAuthor->__toString()->willReturn('topic.author');
+        $currentCustomer->__toString()->willReturn('current_customer');
+
+        $customerContext->getCustomer()->willReturn($currentCustomer);
+        $repository->findOneBy(Argument::type('array'))->willReturn($notification);
+        $translator->trans(Argument::type('string'), Argument::type('array'))->willReturn('message');
+        $notification->getAuthors()->willReturn(new ArrayCollection([$topicAuthor->getWrappedObject(), $currentCustomer->getWrappedObject()]));
+
+        $factory->createForPost($post, $follower)->shouldNotBeCalled();
         $notification->addAuthor($currentCustomer)->shouldBeCalled();
         $notification->getAuthors()->shouldBeCalled();
         $notification->setMessage('message')->shouldBeCalled();

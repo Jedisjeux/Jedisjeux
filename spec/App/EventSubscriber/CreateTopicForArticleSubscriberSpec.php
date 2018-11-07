@@ -76,4 +76,19 @@ class CreateTopicForArticleSubscriberSpec extends ObjectBehavior
 
         $this->onCreate($event);
     }
+
+    function it_does_nothing_if_it_is_not_an_article_post(
+        GenericEvent $event,
+        Post $post,
+        Article $article,
+        TopicFactory $topicFactory
+    )
+    {
+        $event->getSubject()->willReturn($post);
+        $post->getArticle()->willReturn(null);
+
+        $topicFactory->createForArticle($article)->shouldNotBeCalled();
+
+        $this->onCreate($event);
+    }
 }
