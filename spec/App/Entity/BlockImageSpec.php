@@ -18,4 +18,16 @@ class BlockImageSpec extends ObjectBehavior
     {
         $this->shouldBeAnInstanceOf(AbstractImage::class);
     }
+
+    function its_label_is_mutable()
+    {
+        $this->setLabel('This is an awesome image.');
+        $this->getLabel()->shouldReturn('This is an awesome image.');
+    }
+
+    function its_link_url_is_mutable()
+    {
+        $this->setLinkUrl('http://example.com');
+        $this->getLinkUrl()->shouldReturn('http://example.com');
+    }
 }

@@ -6,10 +6,13 @@ use App\Entity\Article;
 use App\Entity\ArticleImage;
 use App\Entity\ArticleReview;
 use App\Entity\Block;
+use App\Entity\Taxon;
 use App\Entity\Topic;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
@@ -40,6 +43,18 @@ class ArticleSpec extends ObjectBehavior
     {
         $this->setTitle("Awesome title");
         $this->getTitle()->shouldReturn("Awesome title");
+    }
+
+    function it_can_get_name()
+    {
+        $this->setTitle('Awesome title');
+        $this->getName()->shouldReturn('Awesome title');
+    }
+
+    function its_slug_is_mutable()
+    {
+        $this->setSlug("awesome-title");
+        $this->getSlug()->shouldReturn("awesome-title");
     }
 
     function its_not_publishable_by_default()
@@ -85,6 +100,68 @@ class ArticleSpec extends ObjectBehavior
     {
         $this->setStatus(Article::STATUS_PENDING_PUBLICATION);
         $this->getStatus()->shouldReturn(Article::STATUS_PENDING_PUBLICATION);
+    }
+
+    function its_short_description_is_mutable()
+    {
+        $this->setShortDescription("This is an awesome description.");
+        $this->getShortDescription()->shouldReturn("This is an awesome description.");
+    }
+
+    function its_average_rating_is_mutable()
+    {
+        $this->setAverageRating(7.66);
+        $this->getAverageRating()->shouldReturn(7.66);
+    }
+
+    function its_material_rating_is_mutable()
+    {
+        $this->setMaterialRating(7.66);
+        $this->getMaterialRating()->shouldReturn(7.66);
+    }
+
+    function its_rules_rating_is_mutable()
+    {
+        $this->setRulesRating(7.66);
+        $this->getRulesRating()->shouldReturn(7.66);
+    }
+
+    function its_lifetime_rating_is_mutable()
+    {
+        $this->setLifetimeRating(7.66);
+        $this->getLifetimeRating()->shouldReturn(7.66);
+    }
+
+    function its_view_count_is_mutable()
+    {
+        $this->setViewCount(42);
+        $this->getViewCount()->shouldReturn(42);
+    }
+
+    function it_is_not_a_review_article_by_default()
+    {
+        $this->shouldNotBeReviewArticle();
+    }
+
+    function it_could_be_a_review_article(TaxonInterface $taxon)
+    {
+        $taxon->getCode()->willReturn(Taxon::CODE_REVIEW_ARTICLE);
+        $this->setMainTaxon($taxon);
+
+        $this->shouldBeReviewArticle();
+    }
+
+    function it_is_not_a_report_article_by_default()
+    {
+        $this->shouldNotBeReportArticle();
+    }
+
+    function it_could_be_a_report_article(TaxonInterface $taxon)
+    {
+        $taxon->getCode()->willReturn(Taxon::CODE_REPORT_ARTICLE);
+        $this->setMainTaxon($taxon);
+
+        $this->shouldBeReportArticle();
     }
 
     function it_has_no_main_image_by_default()
@@ -162,5 +239,17 @@ class ArticleSpec extends ObjectBehavior
         $this->addReview($rev);
         $this->removeReview($rev);
         $this->hasReview($rev)->shouldReturn(false);
+    }
+
+    function its_product_is_mutable(ProductInterface $product)
+    {
+        $this->setProduct($product);
+        $this->getProduct()->shouldReturn($product);
+    }
+
+    function its_author_is_mutable(CustomerInterface $author)
+    {
+        $this->setAuthor($author);
+        $this->getAuthor()->shouldReturn($author);
     }
 }

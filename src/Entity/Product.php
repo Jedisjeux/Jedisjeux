@@ -750,10 +750,20 @@ class Product extends BaseProduct implements ReviewableInterface
 
     /**
      * @param ProductBarcode $barcode
+     *
+     * @return bool
      */
-    public function addBarcode($barcode): void
+    public function hasBarcode(ProductBarcode $barcode): bool
     {
-        if (!$this->barcodes->contains($barcode)) {
+        return $this->barcodes->contains($barcode);
+    }
+
+    /**
+     * @param ProductBarcode $barcode
+     */
+    public function addBarcode(ProductBarcode $barcode): void
+    {
+        if (!$this->hasBarcode($barcode)) {
             $barcode->setProduct($this);
             $this->barcodes->add($barcode);
         }
@@ -762,9 +772,9 @@ class Product extends BaseProduct implements ReviewableInterface
     /**
      * @param ProductBarcode $barcode
      */
-    public function removeBarcode($barcode): void
+    public function removeBarcode(ProductBarcode $barcode): void
     {
-        $this->barcodes->remove($barcode);
+        $this->barcodes->removeElement($barcode);
     }
 
     /**
