@@ -29,4 +29,9 @@ class NotFoundSpec extends ObjectBehavior
     {
         $this->shouldBeAnInstanceOf(BaseNotFound::class);
     }
+
+    function it_has_no_id_by_default(): void
+    {
+        $this->getId()->shouldReturn(null);
+    }
 }

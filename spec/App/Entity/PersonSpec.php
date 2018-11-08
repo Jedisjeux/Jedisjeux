@@ -4,6 +4,9 @@ namespace spec\App\Entity;
 
 use App\Entity\Person;
 use App\Entity\PersonImage;
+use App\Entity\Product;
+use App\Entity\ProductVariant;
+use App\Entity\Taxon;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -26,6 +29,18 @@ class PersonSpec extends ObjectBehavior
         $this->getCode()->shouldNotBeNull();
     }
 
+    function its_code_is_mutable()
+    {
+        $this->setCode('XYZ');
+        $this->getCode()->shouldReturn('XYZ');
+    }
+
+    function its_slug_is_mutable()
+    {
+        $this->setSlug('darth-vader');
+        $this->getSlug()->shouldReturn('darth-vader');
+    }
+
     function it_has_no_last_name_by_default()
     {
         $this->getLastName()->shouldReturn(null);
@@ -46,6 +61,17 @@ class PersonSpec extends ObjectBehavior
     {
         $this->setFirstName("Darth");
         $this->getFirstName()->shouldReturn("Darth");
+    }
+
+    function it_can_get_full_name(): void
+    {
+        $this->setFirstName('Edward');
+        $this->setLastName('Kenway');
+
+        $this->getFullName()->shouldReturn('Edward Kenway');
+
+        $this->setFirstName(null);
+        $this->getFullName()->shouldReturn('Kenway');
     }
 
     function it_has_no_website_by_default()
@@ -81,6 +107,24 @@ class PersonSpec extends ObjectBehavior
         $this->getProductCount()->shouldReturn(666);
     }
 
+    function its_product_count_as_artist_is_mutable()
+    {
+        $this->setProductCountAsArtist(666);
+        $this->getProductCountAsArtist()->shouldReturn(666);
+    }
+
+    function its_product_count_as_designer_is_mutable()
+    {
+        $this->setProductCountAsDesigner(666);
+        $this->getProductCountAsDesigner()->shouldReturn(666);
+    }
+
+    function its_product_count_as_publisher_is_mutable()
+    {
+        $this->setProductCountAsPublisher(666);
+        $this->getProductCountAsPublisher()->shouldReturn(666);
+    }
+
     function it_initializes_images_collection_by_default()
     {
         $this->getImages()->shouldHaveType(Collection::class);
@@ -101,6 +145,21 @@ class PersonSpec extends ObjectBehavior
         $this->hasImage($image)->shouldReturn(false);
     }
 
+    function it_has_no_first_image_by_default()
+    {
+        $this->getFirstImage()->shouldReturn(null);
+    }
+
+    function it_can_get_first_image(
+        PersonImage $fisrtImage,
+        PersonImage $secondImage
+    ): void {
+        $this->addImage($fisrtImage);
+        $this->addImage($secondImage);
+
+        $this->getFirstImage()->shouldReturn($fisrtImage);
+    }
+
     function it_initializes_taxon_collection_by_default()
     {
         $this->getTaxons()->shouldHaveType(Collection::class);
@@ -117,5 +176,18 @@ class PersonSpec extends ObjectBehavior
         $this->addTaxon($taxon);
         $this->removeTaxon($taxon);
         $this->hasTaxon($taxon)->shouldReturn(false);
+    }
+
+    function its_zone_is_mutable(TaxonInterface $previousZone, TaxonInterface $newZone, TaxonInterface $rootZone)
+    {
+        $previousZone->getRoot()->willReturn($rootZone);
+        $newZone->getRoot()->willReturn($rootZone);
+        $rootZone->getCode()->willReturn(Taxon::CODE_ZONE);
+
+        $this->setZone($previousZone);
+        $this->getZone()->shouldReturn($previousZone);
+
+        $this->setZone($newZone);
+        $this->getZone()->shouldReturn($newZone);
     }
 }
