@@ -78,6 +78,7 @@ app:
         game_details: Game details
         game_library: Game library
         game_specifications: Game specifications
+        game_play_of: Partie de %product%
         game_plays: Game plays
         game_play_details: Game play details
         game_play_images: Game play images

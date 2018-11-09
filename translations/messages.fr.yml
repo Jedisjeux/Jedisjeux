@@ -78,6 +78,7 @@ app:
         game_details: Informations du jeu
         game_library: Ludothèque
         game_specifications: Spécifications du jeu
+        game_play_of: Partie de %product%
         game_plays: Parties de jeu
         game_play_details: Informations de la partie
         game_play_images: Photos de partie
