@@ -1,173 +1,380 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: loic
- * Date: 29/06/2016
- * Time: 13:46.
+
+/*
+ * This file is part of Jedisjeux.
+ *
+ * (c) Loïc Frémont
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace App\Utils;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
 class BggProduct
 {
-    const API_BASE_URL = 'https://www.boardgamegeek.com/xmlapi/boardgame/';
+    /**
+     * @var string
+     */
+    private $name;
 
     /**
-     * @var \SimpleXMLElement
+     * @var string
      */
-    protected $boardGame;
+    private $imagePath;
 
     /**
-     * ProductFromBggPath constructor.
-     *
-     * @param $url
+     * @var string|null
      */
-    public function __construct($url)
+    private $releasedAtYear;
+
+    /**
+     * @var string|null
+     */
+    private $minDuration;
+
+    /**
+     * @var string|null
+     */
+    private $maxDuration;
+
+    /**
+     * @var string|null
+     */
+    private $age;
+
+    /**
+     * @var string|null
+     */
+    private $minPlayerCount;
+
+    /**
+     * @var string|null
+     */
+    private $maxPlayerCount;
+
+    /**
+     * @var string|null
+     */
+    private $description;
+
+    /**
+     * @var array
+     */
+    private $mechanisms = [];
+
+    /**
+     * @var array
+     */
+    private $designers = [];
+
+    /**
+     * @var array
+     */
+    private $artists = [];
+
+    /**
+     * @var array
+     */
+    private $publishers = [];
+
+    /**
+     * @return string
+     */
+    public function getName(): string
     {
-        $boardGames = new \SimpleXMLElement(file_get_contents($this->getApiUrl($url)));
-        $this->boardGame = $boardGames->boardgame[0];
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName(string $name): void
+    {
+        $this->name = $name;
     }
 
     /**
      * @return string
      */
-    public function getName()
+    public function getImagePath(): string
     {
-        return (string) $this->boardGame->name;
+        return $this->imagePath;
     }
 
     /**
-     * @return string
+     * @param string $imagePath
      */
-    public function getImagePath()
+    public function setImagePath(string $imagePath): void
     {
-        return (string) $this->boardGame->image;
+        $this->imagePath = $imagePath;
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getReleasedAtYear()
+    public function getReleasedAtYear(): ?string
     {
-        return $this->boardGame->yearpublished;
+        return $this->releasedAtYear;
     }
 
     /**
-     * @return string
+     * @param null|string $releasedAtYear
      */
-    public function getMinDuration()
+    public function setReleasedAtYear(?string $releasedAtYear): void
     {
-        return (string) $this->boardGame->minplaytime;
+        $this->releasedAtYear = $releasedAtYear;
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getMaxDuration()
+    public function getMinDuration(): ?string
     {
-        return (string) $this->boardGame->maxplaytime;
+        return $this->minDuration;
     }
 
     /**
-     * @return string
+     * @param null|string $minDuration
      */
-    public function getAge()
+    public function setMinDuration(?string $minDuration): void
     {
-        return (string) $this->boardGame->age;
+        $this->minDuration = $minDuration;
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getNbJoueursMin()
+    public function getMaxDuration(): ?string
     {
-        return (string) $this->boardGame->minplayers;
+        return $this->maxDuration;
     }
 
     /**
-     * @return string
+     * @param null|string $maxDuration
      */
-    public function getNbJoueursMax()
+    public function setMaxDuration(?string $maxDuration): void
     {
-        return (string) $this->boardGame->maxplayers;
+        $this->maxDuration = $maxDuration;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getAge(): ?string
+    {
+        return $this->age;
+    }
+
+    /**
+     * @param null|string $age
+     */
+    public function setAge(?string $age): void
+    {
+        $this->age = $age;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getMinPlayerCount(): ?string
+    {
+        return $this->minPlayerCount;
+    }
+
+    /**
+     * @param null|string $minPlayerCount
+     */
+    public function setMinPlayerCount(?string $minPlayerCount): void
+    {
+        $this->minPlayerCount = $minPlayerCount;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getMaxPlayerCount(): ?string
+    {
+        return $this->maxPlayerCount;
+    }
+
+    /**
+     * @param null|string $maxPlayerCount
+     */
+    public function setMaxPlayerCount(?string $maxPlayerCount): void
+    {
+        $this->maxPlayerCount = $maxPlayerCount;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param null|string $description
+     */
+    public function setDescription(?string $description): void
+    {
+        $this->description = $description;
     }
 
     /**
      * @return array
      */
-    public function getMecanismes()
+    public function getMechanisms(): array
     {
-        $mechanisms = [];
+        return $this->mechanisms;
+    }
 
-        foreach ($this->boardGame->boardgamemechanic as $row) {
-            $mechanisms[] = (string) $row;
+    /**
+     * @param string $mechanism
+     *
+     * @return bool
+     */
+    public function hasMechanism(string $mechanism): bool
+    {
+        return in_array($mechanism, $this->mechanisms, true);
+    }
+
+    /**
+     * @param string $mechanism
+     */
+    public function addMechanism(string $mechanism)
+    {
+        if (!$this->hasMechanism($mechanism)) {
+            $this->mechanisms[] = $mechanism;
         }
-
-        return $mechanisms;
     }
 
     /**
-     * @return string
+     * @param string $mechanism
      */
-    public function getDescription()
+    public function removeMechanism(string $mechanism): void
     {
-        $description = preg_replace("/\<br\s*\/?\>/i", "\n", (string) $this->boardGame->description);
-
-        return strip_tags($description);
-    }
-
-    /**
-     * @return array
-     */
-    public function getDesigners()
-    {
-        return $this->getPeopleByNode($this->boardGame->boardgamedesigner);
-    }
-
-    /**
-     * @return array
-     */
-    public function getArtists()
-    {
-        return $this->getPeopleByNode($this->boardGame->boardgameartist);
-    }
-
-    /**
-     * @return array
-     */
-    public function getPublishers()
-    {
-        return $this->getPeopleByNode($this->boardGame->boardgamepublisher);
-    }
-
-    /**
-     * @param $peopleNode
-     *
-     * @return array
-     */
-    protected function getPeopleByNode($peopleNode)
-    {
-        $people = [];
-
-        foreach ($peopleNode as $row) {
-            $people[] = (string) $row;
+        if (false !== $key = array_search($mechanism, $this->mechanisms, true)) {
+            unset($this->mechanisms[$key]);
+            $this->mechanisms = array_values($this->mechanisms);
         }
-
-        return $people;
     }
 
     /**
-     * @param string $url
-     *
-     * @return string
+     * @return array
      */
-    protected function getApiUrl($url)
+    public function getDesigners(): array
     {
-        preg_match('/\/(?P<gameId>\d+)/', $url, $matches);
+        return $this->designers;
+    }
 
-        return self::API_BASE_URL.$matches['gameId'];
+    /**
+     * @param string $designer
+     *
+     * @return bool
+     */
+    public function hasDesigner(string $designer): bool
+    {
+        return in_array($designer, $this->designers, true);
+    }
+
+    /**
+     * @param string $designer
+     */
+    public function addDesigner(string $designer)
+    {
+        if (!$this->hasDesigner($designer)) {
+            $this->designers[] = $designer;
+        }
+    }
+
+    /**
+     * @param string $designer
+     */
+    public function removeDesigner(string $designer): void
+    {
+        if (false !== $key = array_search($designer, $this->designers, true)) {
+            unset($this->designers[$key]);
+            $this->designers = array_values($this->designers);
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function getArtists(): array
+    {
+        return $this->artists;
+    }
+
+    /**
+     * @param string $artist
+     *
+     * @return bool
+     */
+    public function hasArtist(string $artist): bool
+    {
+        return in_array($artist, $this->artists, true);
+    }
+
+    /**
+     * @param string $artist
+     */
+    public function addArtist(string $artist)
+    {
+        if (!$this->hasArtist($artist)) {
+            $this->artists[] = $artist;
+        }
+    }
+
+    /**
+     * @param string $artist
+     */
+    public function removeArtist(string $artist): void
+    {
+        if (false !== $key = array_search($artist, $this->artists, true)) {
+            unset($this->artists[$key]);
+            $this->artists = array_values($this->artists);
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function getPublishers(): array
+    {
+        return $this->publishers;
+    }
+
+    /**
+     * @param string $publisher
+     *
+     * @return bool
+     */
+    public function hasPublisher(string $publisher): bool
+    {
+        return in_array($publisher, $this->publishers, true);
+    }
+
+    /**
+     * @param string $publisher
+     */
+    public function addPublisher(string $publisher)
+    {
+        if (!$this->hasPublisher($publisher)) {
+            $this->publishers[] = $publisher;
+        }
+    }
+
+    /**
+     * @param string $publisher
+     */
+    public function removePublisher(string $publisher): void
+    {
+        if (false !== $key = array_search($publisher, $this->publishers, true)) {
+            unset($this->publishers[$key]);
+            $this->publishers = array_values($this->publishers);
+        }
     }
 }
