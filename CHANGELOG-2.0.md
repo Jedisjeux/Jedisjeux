@@ -1,5 +1,16 @@
 ## Change Log
 
+### v2.0.10 (2018/11/12)
+- [#340](https://github.com/Jedisjeux/Jedisjeux/pull/340) fix game play show and topic show breadcrumbs (@loic425)
+- [#339](https://github.com/Jedisjeux/Jedisjeux/pull/339) [Phpspec] improve entities tests (@loic425)
+- [#338](https://github.com/Jedisjeux/Jedisjeux/pull/338) improve subscribers specs (@loic425)
+- [#337](https://github.com/Jedisjeux/Jedisjeux/pull/337) add some specs (@loic425)
+- [#336](https://github.com/Jedisjeux/Jedisjeux/pull/336) test infection (@loic425)
+- [#335](https://github.com/Jedisjeux/Jedisjeux/pull/335) fix readme logo (@loic425)
+- [#334](https://github.com/Jedisjeux/Jedisjeux/pull/334) [Behat] Refactor managing contact requests scenarios (@loic425)
+- [#333](https://github.com/Jedisjeux/Jedisjeux/pull/333) remove a lot of legacy code (@loic425)
+- [#332](https://github.com/Jedisjeux/Jedisjeux/pull/332) add an optional env var for liip imagine data root (@loic425)
+
 ### v2.0.9 (2018/10/31)
 - [#329](https://github.com/Jedisjeux/Jedisjeux/pull/329) improve en_US translations (@loic425)
 - [#330](https://github.com/Jedisjeux/Jedisjeux/pull/330) Fix view box content (@loic425)
