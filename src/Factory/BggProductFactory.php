@@ -11,26 +11,33 @@
 
 namespace App\Factory;
 
-use App\Utils\BggProduct;
+use App\Entity\BggProduct;
 
 class BggProductFactory
 {
     /**
      * @var string
      */
+    private $className;
+
+    /**
+     * @var string
+     */
     private $baseUrl;
 
     /**
-     * @var \SimpleXMLElement
-     */
-    private $boardGame;
-
-    /**
+     * @param string $className
      * @param string $baseUrl
      */
-    public function __construct(string $baseUrl)
+    public function __construct(string $className, string $baseUrl)
     {
+        $this->className = $className;
         $this->baseUrl = $baseUrl;
+    }
+
+    public function createNew(): BggProduct
+    {
+        return new $this->className();
     }
 
     /**
@@ -41,37 +48,39 @@ class BggProductFactory
     public function createByPath(string $path): BggProduct
     {
         $boardGames = new \SimpleXMLElement(file_get_contents($this->getApiUrl($path)));
-        $this->boardGame = $boardGames->boardgame[0];
+        $boardGame = $boardGames->boardgame[0];
 
-        $bggProduct = new BggProduct();
-        $bggProduct->setName((string) $this->boardGame->name);
-        $bggProduct->setImagePath((string) $this->boardGame->image);
-        $bggProduct->setReleasedAtYear($this->boardGame->yearpublished);
-        $bggProduct->setMinDuration((string) $this->boardGame->minplaytime);
-        $bggProduct->setMaxDuration((string) $this->boardGame->maxplaytime);
-        $bggProduct->setAge((string) $this->boardGame->age);
-        $bggProduct->setMinPlayerCount((string) $this->boardGame->minplayers);
-        $bggProduct->setMaxPlayerCount((string) $this->boardGame->maxplayers);
+        $bggProduct = $this->createNew();
+        $bggProduct->setName((string) $boardGame->name);
+        $bggProduct->setImagePath((string) $boardGame->image);
+        $bggProduct->setReleasedAtYear($boardGame->yearpublished);
+        $bggProduct->setMinDuration((string) $boardGame->minplaytime);
+        $bggProduct->setMaxDuration((string) $boardGame->maxplaytime);
+        $bggProduct->setAge((string) $boardGame->age);
+        $bggProduct->setMinPlayerCount((string) $boardGame->minplayers);
+        $bggProduct->setMaxPlayerCount((string) $boardGame->maxplayers);
 
-        $description = preg_replace("/\<br\s*\/?\>/i", "\n", (string) $this->boardGame->description);
+        $description = preg_replace("/\<br\s*\/?\>/i", "\n", (string) $boardGame->description);
         $description = strip_tags($description);
         $bggProduct->setDescription($description);
 
-        foreach ($this->boardGame->boardgamemechanic as $mechanism) {
+        foreach ($boardGame->boardgamemechanic as $mechanism) {
             $bggProduct->addMechanism((string) $mechanism);
         }
 
-        foreach ($this->boardGame->boardgamedesigner as $designer) {
+        foreach ($boardGame->boardgamedesigner as $designer) {
             $bggProduct->addDesigner((string) $designer);
         }
 
-        foreach ($this->boardGame->boardgameartist as $artist) {
+        foreach ($boardGame->boardgameartist as $artist) {
             $bggProduct->addArtist((string) $artist);
         }
 
-        foreach ($this->boardGame->boardgamepublisher as $publisher) {
+        foreach ($boardGame->boardgamepublisher as $publisher) {
             $bggProduct->addPublisher((string) $publisher);
         }
+
+        return $bggProduct;
     }
 
     /**
@@ -83,6 +92,6 @@ class BggProductFactory
     {
         preg_match('/\/(?P<gameId>\d+)/', $url, $matches);
 
-        return $this->baseUrl.$matches['gameId'];
+        return sprintf('%s/%s', $this->baseUrl, $matches['gameId']);
     }
 }
