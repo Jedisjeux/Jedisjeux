@@ -23,6 +23,12 @@ services:
         resource: '../src/Command/*'
         tags: [command_handler]
 
+    app.factory.bgg_product:
+        class: App\Factory\BggProductFactory
+        arguments:
+            - 'App\Entity\BggProduct'
+            - 'https://www.boardgamegeek.com/xmlapi/boardgame'
+
     app.templating.helper.currency:
         class: App\Templating\Helper\CurrencyHelper
         lazy: true

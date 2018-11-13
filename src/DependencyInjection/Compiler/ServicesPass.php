@@ -67,6 +67,7 @@ class ServicesPass implements CompilerPassInterface
         $productFactoryDefinition
             ->setClass(ProductFactory::class)
             ->addArgument(new Reference('app.factory.product_variant_image'))
+            ->addArgument(new Reference('app.factory.bgg_product'))
             ->addArgument(new Reference('sylius.generator.slug'))
             ->addArgument(new Reference('app.repository.person'));
 

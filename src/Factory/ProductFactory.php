@@ -15,7 +15,7 @@ use App\Entity\Person;
 use App\Entity\Product;
 use App\Entity\ProductVariant;
 use App\Entity\ProductVariantImage;
-use App\Utils\BggProduct;
+use App\Entity\BggProduct;
 use Gedmo\Sluggable\Util\Urlizer;
 use Sylius\Component\Product\Factory\ProductFactory as BaseProductFactory;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
@@ -30,22 +30,28 @@ class ProductFactory extends BaseProductFactory
     /**
      * @var RepositoryInterface
      */
-    protected $personRepository;
+    private $personRepository;
 
     /**
      * @var FactoryInterface
      */
-    protected $productVariantImageFactory;
+    private $productVariantImageFactory;
+
+    /**
+     * @var BggProductFactory
+     */
+    private $bggProductFactory;
 
     /**
      * @var SlugGeneratorInterface
      */
-    protected $slugGenerator;
+    private $slugGenerator;
 
     /**
      * @param FactoryInterface $factory
      * @param FactoryInterface $variantFactory
      * @param FactoryInterface $productVariantImageFactory
+     * @param BggProductFactory $bggProductFactory,
      * @param SlugGeneratorInterface $slugGenerator
      * @param RepositoryInterface $personRepository
      */
@@ -53,11 +59,13 @@ class ProductFactory extends BaseProductFactory
         FactoryInterface $factory,
         FactoryInterface $variantFactory,
         FactoryInterface $productVariantImageFactory,
+        BggProductFactory $bggProductFactory,
         SlugGeneratorInterface $slugGenerator,
         RepositoryInterface $personRepository
     ) {
         parent::__construct($factory, $variantFactory);
 
+        $this->bggProductFactory = $bggProductFactory;
         $this->productVariantImageFactory = $productVariantImageFactory;
         $this->slugGenerator = $slugGenerator;
         $this->personRepository = $personRepository;
@@ -73,7 +81,7 @@ class ProductFactory extends BaseProductFactory
         /** @var Product $product */
         $product = parent::createWithVariant();
 
-        $bggProduct = new BggProduct($bggPath);
+        $bggProduct = $this->bggProductFactory->createByPath($bggPath);
 
         $product->setName($bggProduct->getName());
         $product->setSlug($this->slugGenerator->generate($product->getName()));
@@ -93,8 +101,8 @@ class ProductFactory extends BaseProductFactory
         $product->setMinAge($bggProduct->getAge());
         $product->setMinDuration($bggProduct->getMinDuration());
         $product->setMaxDuration($bggProduct->getMaxDuration());
-        $product->setMinPlayerCount($bggProduct->getNbJoueursMin());
-        $product->setMaxPlayerCount($bggProduct->getNbJoueursMax());
+        $product->setMinPlayerCount($bggProduct->getMinPlayerCount());
+        $product->setMaxPlayerCount($bggProduct->getMaxPlayerCount());
 
         foreach ($bggProduct->getDesigners() as $fullName) {
             $designer = $this->getPersonByFullName($fullName);
