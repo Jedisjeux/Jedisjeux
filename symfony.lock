@@ -275,11 +275,11 @@
     "knplabs/knp-menu-bundle": {
         "version": "v2.2.1"
     },
-    "lakion/api-test-case": {
-        "version": "v3.1.3"
-    },
     "lakion/mink-debug-extension": {
         "version": "v1.2.3"
+    },
+    "lchrusciel/api-test-case": {
+        "version": "v3.1.3"
     },
     "leanphp/phpspec-code-coverage": {
         "version": "v4.2.2"
