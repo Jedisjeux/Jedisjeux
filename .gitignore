@@ -4,21 +4,6 @@
 /var/*
 !/var/.gitkeep
 
-/bin/*
-!/bin/build-package
-!/bin/build-packages
-!/bin/clean-package
-!/bin/clean-packages
-!/bin/console
-!/bin/fix-coding-standards
-!/bin/install-package
-!/bin/install-packages
-!/bin/symfony_requirements
-!/bin/test-package
-!/bin/test-packages
-!/bin/validate-package
-!/bin/validate-packages
-
 log/
 
 /app/Resources/credentials/
