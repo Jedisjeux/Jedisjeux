@@ -68,7 +68,7 @@ $ php bin/console doctrine:phpcr:repository:init --env=test
 You can run Behat using the following commands:
 
 ```bash
-$ bin/behat
+$ vendor/bin/behat
 ```
 
 Bug Tracking
