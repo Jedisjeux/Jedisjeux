@@ -12,7 +12,7 @@
 namespace App\PublicationManager;
 
 use App\Entity\Article;
-use Doctrine\ORM\EntityManager;
+use Doctrine\Common\Persistence\ObjectManager;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -20,22 +20,25 @@ use Doctrine\ORM\EntityManager;
 class ArticlePublicationManager
 {
     /**
-     * @var EntityManager
+     * @var ObjectManager
      */
     protected $manager;
 
     /**
      * ArticlePublicationManager constructor.
      *
-     * @param EntityManager $manager
+     * @param ObjectManager $manager
      */
-    public function __construct(EntityManager $manager)
+    public function __construct(ObjectManager $manager)
     {
         $this->manager = $manager;
     }
 
     /**
      * @param Article $article
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function start(Article $article)
     {

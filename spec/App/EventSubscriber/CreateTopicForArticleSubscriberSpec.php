@@ -43,7 +43,8 @@ class CreateTopicForArticleSubscriberSpec extends ObjectBehavior
         Article $article,
         TopicRepository $topicRepository,
         TopicFactory $topicFactory,
-        CustomerInterface $author
+        CustomerInterface $author,
+        ObjectManager $manager
     ): void
     {
         $event->getSubject()->willReturn($post);
@@ -53,6 +54,9 @@ class CreateTopicForArticleSubscriberSpec extends ObjectBehavior
         $post->getAuthor()->willReturn($author);
 
         $topicFactory->createForArticle($article)->shouldBeCalled();
+        $manager->persist($topic)->shouldBeCalled();
+        $topic->addPost($post)->shouldBeCalled();
+        $topic->addFollower($author)->shouldBeCalled();
 
         $this->onCreate($event);
     }

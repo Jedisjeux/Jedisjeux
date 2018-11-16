@@ -41,12 +41,4 @@ class CommentFilter implements FilterInterface
             $dataSource->restrict($dataSource->getExpressionBuilder()->isNull('topic'));
         }
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix(): string
-    {
-        return 'app_comment_filter';
-    }
 }

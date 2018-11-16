@@ -389,6 +389,8 @@ class ProductSpec extends ObjectBehavior
 
     function it_adds_barcode(ProductBarcode $barcode)
     {
+        $barcode->setProduct($this)->shouldBeCalled();
+
         $this->addBarcode($barcode);
         $this->hasBarcode($barcode)->shouldReturn(true);
     }
@@ -396,6 +398,9 @@ class ProductSpec extends ObjectBehavior
     function it_removes_barcode(ProductBarcode $barcode)
     {
         $this->addBarcode($barcode);
+
+        $barcode->setProduct(null)->shouldBeCalled();
+
         $this->removeBarcode($barcode);
         $this->hasBarcode($barcode)->shouldReturn(false);
     }

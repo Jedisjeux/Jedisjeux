@@ -3,6 +3,7 @@
 namespace spec\App\Entity;
 
 use App\Entity\Taxon;
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Taxonomy\Model\Taxon as BaseTaxon;
 
@@ -43,5 +44,10 @@ class TaxonSpec extends ObjectBehavior
     function it_is_public_by_default()
     {
         $this->isPublic()->shouldReturn(true);
+    }
+
+    function it_initializes_child_taxon_collection_by_default(): void
+    {
+        $this->getChildren()->shouldHaveType(Collection::class);
     }
 }
