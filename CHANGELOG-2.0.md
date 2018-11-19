@@ -1,5 +1,13 @@
 ## Change Log
 
+### v2.0.11 (2018/11/19)
+- [#347](https://github.com/Jedisjeux/Jedisjeux/pull/347) fix product variant name on adding a product variant (@loic425)
+- [#346](https://github.com/Jedisjeux/Jedisjeux/pull/346) add many missing specs (@loic425)
+- [#345](https://github.com/Jedisjeux/Jedisjeux/pull/345) update command directory according to new Symfony recommendations (@loic425)
+- [#344](https://github.com/Jedisjeux/Jedisjeux/pull/344) Features/switch to lcrusciel api test case (@loic425)
+- [#343](https://github.com/Jedisjeux/Jedisjeux/pull/343) bgg product factory (@loic425)
+- [#341](https://github.com/Jedisjeux/Jedisjeux/pull/341) use phpdbg instead of xdebug (@loic425)
+
 ### v2.0.10 (2018/11/12)
 - [#340](https://github.com/Jedisjeux/Jedisjeux/pull/340) fix game play show and topic show breadcrumbs (@loic425)
 - [#339](https://github.com/Jedisjeux/Jedisjeux/pull/339) [Phpspec] improve entities tests (@loic425)
