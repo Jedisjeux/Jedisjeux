@@ -13,6 +13,7 @@ namespace App\Behat\Context\Ui\Backend;
 
 use App\Behat\Page\Backend\Taxon\IndexByParentPage;
 use App\Behat\Page\Backend\Taxon\IndexPage;
+use App\Behat\Page\Backend\Taxon\UpdatePage;
 use App\Behat\Service\SharedStorageInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
@@ -31,6 +32,11 @@ class ManagingTaxonsContext implements Context
     private $indexByParentPage;
 
     /**
+     * @var UpdatePage
+     */
+    private $updatePage;
+
+    /**
      * @var SharedStorageInterface
      */
     private $sharedStorage;
@@ -38,15 +44,18 @@ class ManagingTaxonsContext implements Context
     /**
      * @param IndexPage $indexPage
      * @param IndexByParentPage $indexByParentPage
+     * @param UpdatePage $updatePage
      * @param SharedStorageInterface $sharedStorage
      */
     public function __construct(
         IndexPage $indexPage,
         IndexByParentPage $indexByParentPage,
+        UpdatePage $updatePage,
         SharedStorageInterface $sharedStorage
     ) {
         $this->indexPage = $indexPage;
         $this->indexByParentPage = $indexByParentPage;
+        $this->updatePage = $updatePage;
         $this->sharedStorage = $sharedStorage;
     }
 
@@ -71,6 +80,30 @@ class ManagingTaxonsContext implements Context
     }
 
     /**
+     * @Given I want to edit :mechanism mechanism
+     */
+    public function iWantToEditTheTaxon(TaxonInterface $mechanism)
+    {
+        $this->updatePage->open(['id' => $mechanism->getId()]);
+    }
+
+    /**
+     * @When I change its name as :name
+     */
+    public function iChangeItsNameAs(string $name)
+    {
+        $this->updatePage->nameIt($name);
+    }
+
+    /**
+     * @When I save my changes
+     */
+    public function iSaveMyChanges()
+    {
+        $this->updatePage->saveChanges();
+    }
+
+    /**
      * @Then /^I should see (\d+) taxons on the list$/
      */
     public function iShouldSeeTaxonsInTheList($number)
@@ -83,6 +116,20 @@ class ManagingTaxonsContext implements Context
      */
     public function iShouldSeeTheTaxonNamedInTheList($name)
     {
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $name]));
+    }
+
+    /**
+     * @Then /^this (mechanism|theme) with name "([^"]+)" should appear in the website$/
+     */
+    public function thisTaxonWithNameShouldAppearInTheWebsite($taxonCode, $name)
+    {
+        /** @var TaxonInterface $taxon */
+        $taxon = $this->sharedStorage->get(sprintf('taxonomy_%ss', $taxonCode));
+        Assert::notNull($taxon);
+
+        $this->indexByParentPage->open(['id' => $taxon->getId()]);
+
         Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $name]));
     }
 }

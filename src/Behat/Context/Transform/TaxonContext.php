@@ -39,6 +39,7 @@ final class TaxonContext implements Context
      * @Transform /^taxon "([^"]+)"$/
      * @Transform /^category "([^"]+)"$/
      * @Transform :taxon
+     * @Transform :mechanism
      */
     public function getTaxonByName($name)
     {
