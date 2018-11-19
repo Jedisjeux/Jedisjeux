@@ -43,7 +43,8 @@ class CreateTopicForGamePlaySubscriberSpec extends ObjectBehavior
         GamePlay $gamePlay,
         TopicRepository $topicRepository,
         TopicFactory $topicFactory,
-        CustomerInterface $author
+        CustomerInterface $author,
+        ObjectManager $manager
     ): void
     {
         $event->getSubject()->willReturn($post);
@@ -53,6 +54,9 @@ class CreateTopicForGamePlaySubscriberSpec extends ObjectBehavior
         $post->getAuthor()->willReturn($author);
 
         $topicFactory->createForGamePlay($gamePlay)->shouldBeCalled();
+        $manager->persist($topic)->shouldBeCalled();
+        $topic->addPost($post)->shouldBeCalled();
+        $topic->addFollower($author)->shouldBeCalled();
 
         $this->onCreate($event);
     }

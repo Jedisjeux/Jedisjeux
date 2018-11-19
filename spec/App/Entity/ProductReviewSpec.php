@@ -34,4 +34,15 @@ class ProductReviewSpec extends ObjectBehavior
     {
         $this->getStatus()->shouldReturn(ReviewInterface::STATUS_ACCEPTED);
     }
+
+    function it_initializes_creation_date_by_default(): void
+    {
+        $this->getCreatedAt()->shouldHaveType(\DateTimeInterface::class);
+    }
+
+    function its_creation_date_is_mutable(\DateTime $date): void
+    {
+        $this->setCreatedAt($date);
+        $this->getCreatedAt()->shouldReturn($date);
+    }
 }

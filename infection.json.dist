@@ -1,5 +1,5 @@
 {
-    "timeout": 10,
+    "timeout": 25,
     "source": {
         "directories": [
             "src"
@@ -8,9 +8,14 @@
             "Behat",
             "Command",
             "DependencyInjection",
+            "src/Form/Extension",
+            "src/Form/Filter",
+            "src/Form/Type",
+            "src/Menu",
             "Migrations",
             "Repository",
-            "Fixture"
+            "Fixture",
+            "View"
         ]
     },
     "logs": {

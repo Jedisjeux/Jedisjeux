@@ -180,7 +180,7 @@ class Product extends BaseProduct implements ReviewableInterface
     /**
      * @var ArrayCollection|ProductBarcode[]
      *
-     * @ORM\OneToMany(targetEntity="ProductBarcode", mappedBy="product", cascade={"persist", "merge", "remove"})
+     * @ORM\OneToMany(targetEntity="ProductBarcode", mappedBy="product", cascade={"persist", "merge", "remove"}, orphanRemoval=true)
      */
     protected $barcodes;
 
@@ -775,6 +775,7 @@ class Product extends BaseProduct implements ReviewableInterface
     public function removeBarcode(ProductBarcode $barcode): void
     {
         $this->barcodes->removeElement($barcode);
+        $barcode->setProduct(null);
     }
 
     /**

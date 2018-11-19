@@ -133,10 +133,3 @@ services:
           - "@sylius.form.type.data_transformer.products_to_product_associations"
         tags:
           - { name: form.type }
-
-    sylius.form.type.data_transformer.products_to_product_associations:
-        class: App\Form\DataTransformer\ProductsToProductAssociationsTransformer
-        arguments:
-            - "@sylius.factory.product_association"
-            - "@sylius.repository.product"
-            - "@sylius.repository.product_association_type"

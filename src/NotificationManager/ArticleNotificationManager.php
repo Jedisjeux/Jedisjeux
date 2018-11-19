@@ -58,8 +58,13 @@ class ArticleNotificationManager
      * @param RouterInterface     $router
      * @param TranslatorInterface $translator
      */
-    public function __construct(NotificationFactory $factory, ObjectManager $manager, UserRepository $userRepository, RouterInterface $router, TranslatorInterface $translator)
-    {
+    public function __construct(
+        NotificationFactory $factory,
+        ObjectManager $manager,
+        UserRepository $userRepository,
+        RouterInterface $router,
+        TranslatorInterface $translator
+    ) {
         $this->factory = $factory;
         $this->manager = $manager;
         $this->userRepository = $userRepository;

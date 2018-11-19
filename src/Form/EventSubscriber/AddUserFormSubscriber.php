@@ -71,9 +71,10 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
         $data = $event->getData();
         $form = $event->getForm();
 
-        if (null === $form->get('createUser')->getViewData()) {
-            Assert::isInstanceOf($data, UserAwareInterface::class);
+        /** @var UserAwareInterface $data */
+        Assert::isInstanceOf($data, UserAwareInterface::class);
 
+        if (null === $data->getUser()->getId() && null === $form->get('createUser')->getViewData()) {
             $data->setUser(null);
             $event->setData($data);
 

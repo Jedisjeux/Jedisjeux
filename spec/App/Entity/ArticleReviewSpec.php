@@ -29,4 +29,15 @@ class ArticleReviewSpec extends ObjectBehavior
     {
         $this->getTitle()->shouldReturn(null);
     }
+
+    function it_initializes_creation_date_by_default(): void
+    {
+        $this->getCreatedAt()->shouldHaveType(\DateTimeInterface::class);
+    }
+
+    function its_creation_date_is_mutable(\DateTime $date): void
+    {
+        $this->setCreatedAt($date);
+        $this->getCreatedAt()->shouldReturn($date);
+    }
 }
