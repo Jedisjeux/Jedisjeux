@@ -98,6 +98,7 @@ services:
             arguments:
                 - "@app.behat.shared_storage"
                 - "@__symfony__.app.fixture.example_factory.product"
+                - "@__symfony__.sylius.factory.product_variant"
                 - "@__symfony__.sylius.repository.product"
                 - "@__symfony__.doctrine.orm.entity_manager"
             tags:

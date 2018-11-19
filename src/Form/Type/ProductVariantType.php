@@ -34,12 +34,13 @@ class ProductVariantType extends AbstractType
         parent::buildForm($builder, $options);
 
         $builder
+            ->remove('translations')
             ->add('name', TextType::class, [
-                'label' => 'label.name',
+                'label' => 'sylius.ui.name',
                 'required' => false,
             ])
             ->add('releasedAt', DateType::class, [
-                'label' => 'label.release_date',
+                'label' => 'app.ui.release_date',
                 'required' => false,
                 'years' => range(1902, date('Y') + 2),
             ])
@@ -60,17 +61,17 @@ class ProductVariantType extends AbstractType
                 'by_reference' => false,
             ])
             ->add('designers', PersonAutocompleteChoiceType::class, [
-                'label' => 'label.designers',
+                'label' => 'app.ui.designers',
                 'required' => false,
                 'multiple' => true,
             ])
             ->add('artists', PersonAutocompleteChoiceType::class, [
-                'label' => 'label.artists',
+                'label' => 'app.ui.artists',
                 'required' => false,
                 'multiple' => true,
             ])
             ->add('publishers', PersonAutocompleteChoiceType::class, [
-                'label' => 'label.publishers',
+                'label' => 'app.ui.editors',
                 'required' => false,
                 'multiple' => true,
             ])
