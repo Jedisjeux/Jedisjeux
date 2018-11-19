@@ -28,6 +28,7 @@ imports:
     - suites/ui/product/managing_products.yml
     - suites/ui/product/managing_product_lists.yml
     - suites/ui/product/managing_product_reviews.yml
+    - suites/ui/product/managing_product_variants.yml
     - suites/ui/product/removing_game_play_comments.yml
     - suites/ui/product/viewing_game_plays.yml
     - suites/ui/product/viewing_product_articles.yml
