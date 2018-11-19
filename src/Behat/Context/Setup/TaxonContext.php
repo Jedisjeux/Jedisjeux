@@ -18,6 +18,7 @@ use Behat\Behat\Context\Context;
 use Doctrine\ORM\EntityManager;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Symfony\Component\Translation\PluralizationRules;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -108,6 +109,19 @@ class TaxonContext implements Context
         ];
 
         $this->createDefaultTaxonomies($taxonCodes);
+    }
+
+    /**
+     * @Given /^there is a (mechanism|theme) "([^"]+)"$/
+     */
+    public function thereIsTaxon($taxonCode, $taxonName)
+    {
+        /** @var TaxonInterface $taxon */
+        $taxon = $this->sharedStorage->get(sprintf('taxonomy_%ss', $taxonCode));
+
+        $this->taxonFactory->create(['name' => $taxonName, 'parent' => $taxon, 'public' => true]);
+
+        $this->manager->flush($taxon);
     }
 
     /**

@@ -14,6 +14,7 @@ imports:
     - { resource: backend/product_review.yml }
     - { resource: backend/product_variant.yml }
     - { resource: backend/redirection.yml }
+    - { resource: backend/taxon.yml }
     - { resource: backend/topic.yml }
 
 # Learn more about services, parameters and containers at

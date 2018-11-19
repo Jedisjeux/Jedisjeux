@@ -1,19 +1,18 @@
 default:
     suites:
-        ui_managing_topics:
+        ui_managing_taxons:
             contexts_services:
                 - app.behat.context.hook.doctrine_orm
 
                 - app.behat.context.transform.customer
                 - app.behat.context.transform.shared_storage
-                - app.behat.context.transform.topic
+                - app.behat.context.transform.taxon
 
                 - app.behat.context.setup.security
                 - app.behat.context.setup.customer
-                - app.behat.context.setup.topic
-                - app.behat.context.setup.post
+                - app.behat.context.setup.taxon
 
-                - app.behat.context.ui.backend.managing_topics
+                - app.behat.context.ui.backend.managing_taxons
                 - app.behat.context.ui.backend.notification
             filters:
-                tags: "@managing_topics && @ui"
+                tags: "@managing_taxons && @ui"
