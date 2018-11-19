@@ -88,6 +88,18 @@ class ManagingTaxonsContext implements Context
     }
 
     /**
+     * @When /^I delete (mechanism|theme) with name "([^"]+)"$/
+     */
+    public function iDeleteTaxonWithName($taxonCode, $name)
+    {
+        /** @var TaxonInterface $taxon */
+        $taxon = $this->sharedStorage->get(sprintf('taxonomy_%ss', $taxonCode));
+        Assert::notNull($taxon);
+
+        $this->indexPage->deleteResourceOnPage(['name' => $name]);
+    }
+
+    /**
      * @When I change its name as :name
      */
     public function iChangeItsNameAs(string $name)
@@ -131,5 +143,19 @@ class ManagingTaxonsContext implements Context
         $this->indexByParentPage->open(['id' => $taxon->getId()]);
 
         Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $name]));
+    }
+
+    /**
+     * @Then /^there should not be "([^"]+)" (mechanism|theme) anymore$/
+     */
+    public function thereShouldBeNoTaxonAnymore($name, $taxonCode)
+    {
+        /** @var TaxonInterface $taxon */
+        $taxon = $this->sharedStorage->get(sprintf('taxonomy_%ss', $taxonCode));
+        Assert::notNull($taxon);
+
+        $this->indexByParentPage->open(['id' => $taxon->getId()]);
+
+        Assert::false($this->indexPage->isSingleResourceOnPage(['name' => $name]));
     }
 }
