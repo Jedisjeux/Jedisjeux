@@ -142,6 +142,8 @@ services:
         arguments:
             - "@app.behat.page.backend.taxon.index"
             - "@app.behat.page.backend.taxon.index_by_parent"
+            - "@app.behat.page.backend.taxon.create"
+            - "@app.behat.page.backend.taxon.create_for_parent"
             - "@app.behat.page.backend.taxon.update"
             - "@app.behat.shared_storage"
         tags:

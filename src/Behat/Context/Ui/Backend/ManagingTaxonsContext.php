@@ -11,6 +11,8 @@
 
 namespace App\Behat\Context\Ui\Backend;
 
+use App\Behat\Page\Backend\Taxon\CreateForParentPage;
+use App\Behat\Page\Backend\Taxon\CreatePage;
 use App\Behat\Page\Backend\Taxon\IndexByParentPage;
 use App\Behat\Page\Backend\Taxon\IndexPage;
 use App\Behat\Page\Backend\Taxon\UpdatePage;
@@ -32,6 +34,16 @@ class ManagingTaxonsContext implements Context
     private $indexByParentPage;
 
     /**
+     * @var CreatePage
+     */
+    private $createPage;
+
+    /**
+     * @var CreateForParentPage
+     */
+    private $createForParentPage;
+
+    /**
      * @var UpdatePage
      */
     private $updatePage;
@@ -44,17 +56,23 @@ class ManagingTaxonsContext implements Context
     /**
      * @param IndexPage $indexPage
      * @param IndexByParentPage $indexByParentPage
+     * @param CreatePage $createPage
+     * @param CreateForParentPage $createForParentPage
      * @param UpdatePage $updatePage
      * @param SharedStorageInterface $sharedStorage
      */
     public function __construct(
         IndexPage $indexPage,
         IndexByParentPage $indexByParentPage,
+        CreatePage $createPage,
+        CreateForParentPage $createForParentPage,
         UpdatePage $updatePage,
         SharedStorageInterface $sharedStorage
     ) {
         $this->indexPage = $indexPage;
         $this->indexByParentPage = $indexByParentPage;
+        $this->createPage = $createPage;
+        $this->createForParentPage = $createForParentPage;
         $this->updatePage = $updatePage;
         $this->sharedStorage = $sharedStorage;
     }
@@ -80,9 +98,29 @@ class ManagingTaxonsContext implements Context
     }
 
     /**
+     * @Given I want to create a new taxonomy
+     */
+    public function iWantToCreateANewTaxonomy()
+    {
+        $this->createPage->open();
+    }
+
+    /**
+     * @Given /^I want to create a new (theme|mechanism)$/
+     */
+    public function iWantToCreateANewTaxon(string $taxonCode)
+    {
+        /** @var TaxonInterface $taxon */
+        $taxon = $this->sharedStorage->get(sprintf('taxonomy_%ss', $taxonCode));
+        Assert::notNull($taxon);
+
+        $this->createForParentPage->open(['id' => $taxon->getId()]);
+    }
+
+    /**
      * @Given I want to edit :mechanism mechanism
      */
-    public function iWantToEditTheTaxon(TaxonInterface $mechanism)
+    public function iWantToEditTheMechanism(TaxonInterface $mechanism)
     {
         $this->updatePage->open(['id' => $mechanism->getId()]);
     }
@@ -100,11 +138,47 @@ class ManagingTaxonsContext implements Context
     }
 
     /**
+     * @When /^I specify (?:their|his|its) code as "([^"]*)"$/
+     * @When I do not specify its code
+     */
+    public function iSpecifyItsCodeAs($code = null)
+    {
+        $this->createPage->specifyCode($code);
+    }
+
+    /**
+     * @When /^I specify (?:their|his|its) name as "([^"]*)"$/
+     * @When I do not specify its name
+     */
+    public function iSpecifyItsNameAs($name = null)
+    {
+        $this->createPage->nameIt($name);
+    }
+
+    /**
+     * @When /^I specify (?:their|his|its) slug as "([^"]*)"$/
+     * @When I do not specify its slug
+     */
+    public function iSpecifyItsSlugAs($slug = null)
+    {
+        $this->createPage->specifySlug($slug);
+    }
+
+    /**
      * @When I change its name as :name
      */
     public function iChangeItsNameAs(string $name)
     {
         $this->updatePage->nameIt($name);
+    }
+
+    /**
+     * @When I add it
+     * @When I try to add it
+     */
+    public function iAddIt()
+    {
+        $this->createPage->create();
     }
 
     /**
@@ -157,5 +231,15 @@ class ManagingTaxonsContext implements Context
         $this->indexByParentPage->open(['id' => $taxon->getId()]);
 
         Assert::false($this->indexPage->isSingleResourceOnPage(['name' => $name]));
+    }
+
+    /**
+     * @Then this taxonomy with name :name should appear in the website
+     */
+    public function thisTaxonomyWithNameShouldAppearInTheWebsite($name)
+    {
+        $this->indexPage->open();
+
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $name]));
     }
 }
