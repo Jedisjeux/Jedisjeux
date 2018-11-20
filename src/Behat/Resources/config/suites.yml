@@ -1,5 +1,6 @@
 imports:
     - suites/ui/account/customer.yml
+    - suites/ui/account/email_verification.yml
     - suites/ui/account/login.yml
     - suites/ui/account/registration.yml
     - suites/ui/admin/dashboard.yml

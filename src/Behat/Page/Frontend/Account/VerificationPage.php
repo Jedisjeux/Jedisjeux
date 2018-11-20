@@ -30,6 +30,6 @@ class VerificationPage extends SymfonyPage
      */
     public function getRouteName()
     {
-        return 'app_frontend_user_verification';
+        return 'sylius_frontend_user_verification';
     }
 }
