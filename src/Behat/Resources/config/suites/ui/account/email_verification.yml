@@ -1,0 +1,17 @@
+default:
+    suites:
+        ui_email_verification:
+            contexts_services:
+                - app.behat.context.hook.doctrine_orm
+                - app.behat.context.hook.email_spool
+
+                - app.behat.context.transform.shared_storage
+                - app.behat.context.transform.user
+
+                - app.behat.context.setup.security
+                - app.behat.context.setup.user
+
+                - app.behat.context.ui.email
+                - app.behat.context.ui.frontend.registration
+            filters:
+                tags: "@email_verification && @ui"

@@ -14,3 +14,11 @@ services:
                 - "@__symfony_shared__.doctrine.orm.entity_manager"
             tags:
                 - { name: fob.context_service }
+
+        app.behat.context.hook.email_spool:
+            class: App\Behat\Context\Hook\EmailSpoolContext
+            arguments:
+                - "@app.behat.email_checker"
+                - "@__symfony__.filesystem"
+            tags:
+                - { name: fob.context_service }
