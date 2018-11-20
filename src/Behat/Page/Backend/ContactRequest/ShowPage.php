@@ -11,7 +11,7 @@
 
 namespace App\Behat\Page\Backend\ContactRequest;
 
-use App\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
 
@@ -20,7 +20,7 @@ class ShowPage extends SymfonyPage implements Context
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'app_backend_contact_request_show';
     }
@@ -38,7 +38,7 @@ class ShowPage extends SymfonyPage implements Context
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'email' => '#email',

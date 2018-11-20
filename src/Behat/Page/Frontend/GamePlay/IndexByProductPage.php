@@ -19,7 +19,7 @@ class IndexByProductPage extends IndexPage
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'app_frontend_game_play_index_by_product';
     }

@@ -19,7 +19,7 @@ class IndexByProductPage extends IndexPage
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'app_frontend_article_index_by_product';
     }

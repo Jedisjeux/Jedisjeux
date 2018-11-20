@@ -19,7 +19,7 @@ class IndexByPersonPage extends IndexPage
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_frontend_product_index_by_person';
     }

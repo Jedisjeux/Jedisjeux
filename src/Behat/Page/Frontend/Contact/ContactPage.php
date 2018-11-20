@@ -14,14 +14,14 @@ declare(strict_types=1);
 namespace App\Behat\Page\Frontend\Contact;
 
 use Behat\Mink\Exception\ElementNotFoundException;
-use App\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class ContactPage extends SymfonyPage
 {
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'app_frontend_contact_request_create';
     }
@@ -85,7 +85,7 @@ class ContactPage extends SymfonyPage
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'first_name' => '#app_contact_request_firstName',

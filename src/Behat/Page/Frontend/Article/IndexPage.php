@@ -11,7 +11,7 @@
 
 namespace App\Behat\Page\Frontend\Article;
 
-use App\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -21,7 +21,7 @@ class IndexPage extends SymfonyPage
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'app_frontend_article_index';
     }
@@ -73,7 +73,7 @@ class IndexPage extends SymfonyPage
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'articles' => '#article-list',

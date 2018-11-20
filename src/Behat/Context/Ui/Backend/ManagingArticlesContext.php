@@ -14,7 +14,7 @@ namespace App\Behat\Context\Ui\Backend;
 use App\Behat\Page\Backend\Article\IndexPage;
 use App\Behat\Page\Backend\Article\UpdatePage;
 use App\Behat\Page\Backend\Article\CreatePage;
-use App\Behat\Page\UnexpectedPageException;
+use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use App\Behat\Service\Resolver\CurrentPageResolverInterface;
 use App\Entity\Article;
 use Behat\Behat\Context\Context;

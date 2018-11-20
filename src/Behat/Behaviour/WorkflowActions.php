@@ -19,7 +19,7 @@ trait WorkflowActions
     /**
      * @return DocumentElement
      */
-    abstract protected function getDocument();
+    abstract protected function getDocument(): DocumentElement;
 
     /**
      * @throws ElementNotFoundException

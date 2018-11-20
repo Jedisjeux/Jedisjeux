@@ -16,7 +16,7 @@ class CreateForTaxonPage extends CreatePage
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'app_frontend_topic_create_for_taxon';
     }

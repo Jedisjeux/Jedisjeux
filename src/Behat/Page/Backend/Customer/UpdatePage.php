@@ -67,7 +67,7 @@ class UpdatePage extends BaseUpdatePage
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'email' => '#app_customer_email',

@@ -16,7 +16,7 @@ class CreateForArticlePage extends CreatePage
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'app_frontend_article_post_create';
     }

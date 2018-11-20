@@ -37,7 +37,7 @@ class UpdatePage extends BaseUpdatePage
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'first_name' => '#app_person_firstName',

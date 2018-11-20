@@ -15,7 +15,7 @@ use App\Behat\Page\Frontend\Product\IndexByPersonPage;
 use App\Behat\Page\Frontend\Product\IndexByTaxonPage;
 use App\Behat\Page\Frontend\Product\IndexPage;
 use App\Behat\Page\Frontend\Product\ShowPage;
-use App\Behat\Page\UnexpectedPageException;
+use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use App\Entity\Person;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\NodeElement;

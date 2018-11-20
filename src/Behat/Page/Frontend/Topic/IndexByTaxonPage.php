@@ -19,7 +19,7 @@ class IndexByTaxonPage extends IndexPage
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'app_frontend_topic_index_by_taxon';
     }

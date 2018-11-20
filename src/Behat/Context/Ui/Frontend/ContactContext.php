@@ -15,9 +15,9 @@ namespace App\Behat\Context\Ui\Frontend;
 
 use App\Behat\NotificationType;
 use App\Behat\Page\Frontend\Contact\ContactPage;
-use App\Behat\Page\PageInterface;
 use App\Behat\Service\NotificationCheckerInterface;
 use Behat\Behat\Context\Context;
+use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
 use Webmozart\Assert\Assert;
 
 class ContactContext implements Context
