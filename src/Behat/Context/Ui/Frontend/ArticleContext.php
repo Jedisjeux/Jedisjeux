@@ -15,7 +15,7 @@ use App\Behat\Page\Frontend\Article\IndexByProductPage;
 use App\Behat\Page\Frontend\Article\IndexByTaxonPage;
 use App\Behat\Page\Frontend\Article\IndexPage;
 use App\Behat\Page\Frontend\Article\ShowPage;
-use App\Behat\Page\UnexpectedPageException;
+use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use App\Behat\Service\Resolver\CurrentPageResolverInterface;
 use App\Entity\Article;
 use Behat\Behat\Context\Context;

@@ -14,7 +14,7 @@ namespace App\Behat\Context\Ui\Backend;
 use App\Behat\Page\Backend\Product\IndexPage;
 use App\Behat\Page\Backend\Product\UpdatePage;
 use App\Behat\Page\Backend\Product\CreatePage;
-use App\Behat\Page\UnexpectedPageException;
+use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use App\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Product\Model\ProductInterface;

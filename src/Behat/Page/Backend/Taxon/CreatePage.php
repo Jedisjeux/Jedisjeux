@@ -34,7 +34,7 @@ class CreatePage extends BaseCreatePage
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'slug' => '#sylius_taxon_translations_en_US_slug',

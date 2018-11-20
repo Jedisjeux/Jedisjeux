@@ -16,7 +16,7 @@ class UpdateForGamePlayPage extends UpdatePage
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'app_frontend_game_play_post_update';
     }

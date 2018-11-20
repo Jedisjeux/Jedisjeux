@@ -11,7 +11,7 @@
 
 namespace App\Behat\Page\Frontend\Post;
 
-use App\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Behat\Mink\Exception\ElementNotFoundException;
 
 class CreatePage extends SymfonyPage
@@ -19,7 +19,7 @@ class CreatePage extends SymfonyPage
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'app_frontend_post_create_by_topic';
     }
@@ -58,7 +58,7 @@ class CreatePage extends SymfonyPage
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'comment' => '#app_post_body',

@@ -11,7 +11,7 @@
 
 namespace App\Behat\Page\Frontend\Product;
 
-use App\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -21,7 +21,7 @@ class ShowPage extends SymfonyPage
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_frontend_product_show';
     }
@@ -160,7 +160,7 @@ class ShowPage extends SymfonyPage
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'articles' => '#articles',

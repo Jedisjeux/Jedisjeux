@@ -29,7 +29,7 @@ class UpdatePage extends BaseUpdatePage
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'body' => '#app_post_body',

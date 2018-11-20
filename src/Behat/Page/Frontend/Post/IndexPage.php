@@ -11,7 +11,7 @@
 
 namespace App\Behat\Page\Frontend\Post;
 
-use App\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Behat\Mink\Element\NodeElement;
 use Webmozart\Assert\Assert;
 
@@ -23,7 +23,7 @@ class IndexPage extends SymfonyPage
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'app_frontend_post_index_by_topic';
     }

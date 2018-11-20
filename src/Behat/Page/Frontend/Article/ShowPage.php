@@ -11,7 +11,7 @@
 
 namespace App\Behat\Page\Frontend\Article;
 
-use App\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Behat\Mink\Element\NodeElement;
 use Webmozart\Assert\Assert;
 
@@ -23,7 +23,7 @@ class ShowPage extends SymfonyPage
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'app_frontend_article_show';
     }
@@ -75,7 +75,7 @@ class ShowPage extends SymfonyPage
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'title' => 'h1.page-title',

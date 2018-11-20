@@ -14,14 +14,14 @@ declare(strict_types=1);
 namespace App\Behat\Page\Frontend;
 
 use Behat\Mink\Element\NodeElement;
-use App\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class HomePage extends SymfonyPage
 {
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'app_homepage';
     }
@@ -104,7 +104,7 @@ class HomePage extends SymfonyPage
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'latest_arrivals' => '#latest-arrivals',

@@ -16,7 +16,7 @@ class CreateForGamePlayPage extends CreatePage
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'app_frontend_game_play_post_create';
     }

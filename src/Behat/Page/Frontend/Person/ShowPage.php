@@ -11,7 +11,7 @@
 
 namespace App\Behat\Page\Frontend\Person;
 
-use App\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -21,7 +21,7 @@ class ShowPage extends SymfonyPage
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'app_frontend_person_show';
     }
@@ -37,7 +37,7 @@ class ShowPage extends SymfonyPage
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'name' => 'h1.page-title',

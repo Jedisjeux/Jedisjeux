@@ -11,14 +11,14 @@
 
 namespace App\Behat\Page\Frontend\ProductReview;
 
-use App\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class UpdatePage extends SymfonyPage
 {
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_frontend_product_review_update';
     }
@@ -54,7 +54,7 @@ class UpdatePage extends SymfonyPage
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'title' => '#sylius_product_review_title',

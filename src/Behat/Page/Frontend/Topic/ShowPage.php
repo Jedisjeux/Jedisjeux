@@ -19,7 +19,7 @@ class ShowPage extends PostPage\IndexPage
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'title' => 'h1.page-title',

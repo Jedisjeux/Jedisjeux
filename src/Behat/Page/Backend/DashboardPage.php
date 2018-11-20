@@ -11,7 +11,7 @@
 
 namespace App\Behat\Page\Backend;
 
-use App\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -21,7 +21,7 @@ class DashboardPage extends SymfonyPage
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'app_backend_dashboard';
     }

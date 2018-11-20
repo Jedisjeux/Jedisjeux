@@ -37,7 +37,7 @@ class CreatePage extends BaseCreatePage
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'source' => '#app_redirection_source',
