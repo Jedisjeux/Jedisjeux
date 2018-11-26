@@ -1,5 +1,16 @@
 ## Change Log
 
+### v2.0.12 (2018/11/26)
+- [#357](https://github.com/Jedisjeux/Jedisjeux/pull/357) fix product serialization (@loic425)
+- [#356](https://github.com/Jedisjeux/Jedisjeux/pull/356) hide box content when no data is available (@loic425)
+- [#355](https://github.com/Jedisjeux/Jedisjeux/pull/355) upgrade vagrant with symfony 4 and use php7.2 (@loic425)
+- [#354](https://github.com/Jedisjeux/Jedisjeux/pull/354) fix liip imagine path with capistrano (@loic425)
+- [#353](https://github.com/Jedisjeux/Jedisjeux/pull/353) upgrade php on travis to php7.2 (@loic425)
+- [#352](https://github.com/Jedisjeux/Jedisjeux/pull/352) update production ip address (@loic425)
+- [#351](https://github.com/Jedisjeux/Jedisjeux/pull/351) [Behat] use page object extension (@loic425)
+- [#350](https://github.com/Jedisjeux/Jedisjeux/pull/350) [Behat] Refactor email verification features (@loic425)
+- [#349](https://github.com/Jedisjeux/Jedisjeux/pull/349) [Behat] managing taxons (@loic425)
+
 ### v2.0.11 (2018/11/19)
 - [#347](https://github.com/Jedisjeux/Jedisjeux/pull/347) fix product variant name on adding a product variant (@loic425)
 - [#346](https://github.com/Jedisjeux/Jedisjeux/pull/346) add many missing specs (@loic425)
