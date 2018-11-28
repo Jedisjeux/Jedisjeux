@@ -58,7 +58,11 @@ class CreatePage extends SymfonyPage
      */
     public function rateReview(int $rate)
     {
-        $this->getElement('rate', ['%rate%' => $rate])->click();
+        try {
+            $this->getElement('rate', ['%rate%' => $rate])->click();
+        } catch (\Exception $e) {
+        }
+
     }
 
     /**
@@ -77,7 +81,7 @@ class CreatePage extends SymfonyPage
         return array_merge(parent::getDefinedElements(), [
             'title' => '#sylius_product_review_title',
             'comment' => '#sylius_product_review_comment',
-            'rate' => '.rate-base-layer span:nth-child(%rate%) i',
+            'rate' => '.rate-base-layer span:nth-child(%rate%) .fa-star',
         ]);
     }
 }
