@@ -22,3 +22,10 @@ Feature: Editing product review as a customer
         When I change its comment as "This is an awesome product!"
         And I save my changes
         Then I should be notified that it has been successfully edited
+
+    @ui @javascript
+    Scenario: Changing my product review rate
+        Given I want to edit this product review
+        When I change its rate with 5 points
+        And I save my changes
+        Then I should be notified that it has been successfully edited
