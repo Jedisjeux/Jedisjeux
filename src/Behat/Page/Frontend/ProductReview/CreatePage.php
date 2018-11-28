@@ -11,7 +11,9 @@
 
 namespace App\Behat\Page\Frontend\ProductReview;
 
+use Behat\Mink\Exception\UnsupportedDriverActionException;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Webmozart\Assert\Assert;
 
 class CreatePage extends SymfonyPage
 {
@@ -40,7 +42,13 @@ class CreatePage extends SymfonyPage
      */
     public function setComment(?string $comment)
     {
-        $this->getElement('comment')->setValue($comment);
+        try {
+            $fieldId = $this->getElement('comment')->getAttribute('id');
+            Assert::notEmpty($fieldId);
+            $this->getSession()->executeScript("CKEDITOR.instances[\"$fieldId\"].setData(\"$comment\");");
+        } catch (UnsupportedDriverActionException $exception) {
+            $this->getElement('comment')->setValue($comment);
+        }
     }
 
     /**
@@ -69,7 +77,7 @@ class CreatePage extends SymfonyPage
         return array_merge(parent::getDefinedElements(), [
             'title' => '#sylius_product_review_title',
             'comment' => '#sylius_product_review_comment',
-            'rate' => '.star.rating .icon:nth-child(%rate%)',
+            'rate' => '.rate-base-layer span:nth-child(%rate%) i',
         ]);
     }
 }
