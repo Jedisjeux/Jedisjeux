@@ -7,9 +7,8 @@ Feature: Adding product review as a customer
     Background:
         Given I am a logged in customer
         And there is a product "Puerto Rico"
-        And I wrote a review on this product
 
-    @ui @javascript @todo
+    @ui @javascript
     Scenario: Adding my product review
         Given I want to review this product
         When I leave a comment "This is an awesome product", titled "Awesome product!"
