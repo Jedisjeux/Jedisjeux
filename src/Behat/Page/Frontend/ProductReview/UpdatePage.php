@@ -44,6 +44,20 @@ class UpdatePage extends SymfonyPage
     }
 
     /**
+     * @param int $rate
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     */
+    public function rateReview(int $rate)
+    {
+        try {
+            $this->getElement('rate', ['%rate%' => $rate])->click();
+        } catch (\Exception $e) {
+        }
+
+    }
+
+    /**
      * @throws \Behat\Mink\Exception\ElementNotFoundException
      */
     public function submit()
@@ -59,6 +73,7 @@ class UpdatePage extends SymfonyPage
         return array_merge(parent::getDefinedElements(), [
             'title' => '#sylius_product_review_title',
             'comment' => '#sylius_product_review_comment',
+            'rate' => '.rate-base-layer span:nth-child(%rate%) .fa-star',
         ]);
     }
 }

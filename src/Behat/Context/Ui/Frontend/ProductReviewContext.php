@@ -85,6 +85,14 @@ class ProductReviewContext implements Context
     }
 
     /**
+     * @When I change its rate with :rate point(s)
+     */
+    public function iChangeRateItWithPoints($rate)
+    {
+        $this->updatePage->rateReview($rate);
+    }
+
+    /**
      * @When I leave a comment :comment, titled :title
      */
     public function iLeaveACommentTitled($comment = null, $title = null)
