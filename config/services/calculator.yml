@@ -20,3 +20,6 @@ services:
 
     app.calculator.product_count_by_person:
         class: App\Calculator\ProductCountByPersonCalculator
+
+    app.calculator.review_count_by_product:
+        class: App\Calculator\ReviewCountByProductCalculator

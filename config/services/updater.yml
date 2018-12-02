@@ -29,6 +29,12 @@ services:
         arguments:
             - "@app.calculator.product_count_by_person"
 
+    app.updater.review_count_by_product:
+        class: App\Updater\ReviewCountByProductUpdater
+        arguments:
+            - "@app.calculator.review_count_by_product"
+        public: true
+
     app.updater.base_product_association:
         abstract: true
         arguments:
