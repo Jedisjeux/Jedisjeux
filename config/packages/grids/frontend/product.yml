@@ -25,6 +25,9 @@ sylius_grid:
                     path: variant.releasedAt
                     type: string
                     sortable: variant.releasedAt
+                commentedReviewCount:
+                    type: string
+                    sortable: ~
             filters:
                 search:
                     type: string

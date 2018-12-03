@@ -222,6 +222,28 @@ class ProductSpec extends ObjectBehavior
         $this->getReleasedAt()->shouldReturn($releaseDate);
     }
 
+    function it_has_zero_review_count_by_default()
+    {
+        $this->getReviewCount()->shouldReturn(0);
+    }
+
+    function its_review_count_is_mutable()
+    {
+        $this->setReviewCount(666);
+        $this->getReviewCount()->shouldReturn(666);
+    }
+
+    function it_has_zero_commented_review_count_by_default()
+    {
+        $this->getCommentedReviewCount()->shouldReturn(0);
+    }
+
+    function its_commented_review_count_is_mutable()
+    {
+        $this->setCommentedReviewCount(666);
+        $this->getCommentedReviewCount()->shouldReturn(666);
+    }
+
     function it_initializes_reviews_collection_by_default()
     {
         $this->getReviews()->shouldHaveType(Collection::class);

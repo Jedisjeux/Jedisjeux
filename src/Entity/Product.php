@@ -173,6 +173,20 @@ class Product extends BaseProduct implements ReviewableInterface
     protected $viewCount = 0;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     */
+    protected $reviewCount = 0;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     */
+    protected $commentedReviewCount = 0;
+
+    /**
      * @var ArrayCollection
      */
     protected $reviews;
@@ -586,6 +600,38 @@ class Product extends BaseProduct implements ReviewableInterface
     public function setViewCount(int $viewCount): void
     {
         $this->viewCount = $viewCount;
+    }
+
+    /**
+     * @return int
+     */
+    public function getReviewCount(): int
+    {
+        return $this->reviewCount;
+    }
+
+    /**
+     * @param int $reviewCount
+     */
+    public function setReviewCount(int $reviewCount): void
+    {
+        $this->reviewCount = $reviewCount;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCommentedReviewCount(): int
+    {
+        return $this->commentedReviewCount;
+    }
+
+    /**
+     * @param int $commentedReviewCount
+     */
+    public function setCommentedReviewCount(int $commentedReviewCount): void
+    {
+        $this->commentedReviewCount = $commentedReviewCount;
     }
 
     /**

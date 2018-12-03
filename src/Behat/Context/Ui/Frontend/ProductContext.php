@@ -293,6 +293,16 @@ class ProductContext implements Context
     }
 
     /**
+     * @When /^I view top commented products$/
+     */
+    public function iViewTopCommentedProducts()
+    {
+        $sorting = ['commentedReviewCount' => 'desc'];
+
+        $this->indexPage->open(['sorting' => $sorting]);
+    }
+
+    /**
      * @When /^I view products with duration up to (\d+) minutes$/
      */
     public function iViewFilteredProductsWithDurationUpToMinutes(int $minutes)
