@@ -28,7 +28,7 @@ class CalculateCommentedReviewCountByProductSubscriberSpec extends ObjectBehavio
         CommentedReviewCountByProductUpdater $updater,
         Product $product
     ): void {
-        $args->getSubject()->willReturn($product);
+        $args->getObject()->willReturn($product);
 
         $updater->update($product)->shouldBeCalled();
 
@@ -40,7 +40,7 @@ class CalculateCommentedReviewCountByProductSubscriberSpec extends ObjectBehavio
         CommentedReviewCountByProductUpdater $updater,
         Product $product
     ): void {
-        $args->getSubject()->willReturn($product);
+        $args->getObject()->willReturn($product);
 
         $updater->update($product)->shouldBeCalled();
 

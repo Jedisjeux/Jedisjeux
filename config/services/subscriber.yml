@@ -69,7 +69,7 @@ services:
         arguments:
             - "@app.updater.commented_review_count_by_product"
         tags:
-            - { name: kernel.event_subscriber }
+            - { name: doctrine.event_subscriber }
 
     app.subscriber.calculate_image_count_by_game_play:
         class: App\EventSubscriber\CalculateImageCountByGamePlaySubscriber

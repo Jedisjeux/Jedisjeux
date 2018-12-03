@@ -35,7 +35,7 @@ class CalculateCommentedReviewCountByProductSubscriber implements EventSubscribe
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public function getSubscribedEvents()
     {
         return [
             Events::prePersist,
