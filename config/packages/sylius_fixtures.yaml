@@ -200,6 +200,11 @@ sylius_fixtures:
                 product_review:
                     options:
                         random: 80
+                product_video:
+                    options:
+                        custom:
+                            -
+                                path: "https://www.youtube.com/embed/oyefFfCHIGs?rel=0"
                 game_play:
                     options:
                         random: 20

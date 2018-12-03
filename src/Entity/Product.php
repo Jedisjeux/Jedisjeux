@@ -237,6 +237,13 @@ class Product extends BaseProduct implements ReviewableInterface
     protected $notifications;
 
     /**
+     * @var Collection|ProductVideo[]
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\ProductVideo", orphanRemoval=true, mappedBy="product")
+     */
+    protected $videos;
+
+    /**
      * Product constructor.
      */
     public function __construct()
@@ -251,6 +258,7 @@ class Product extends BaseProduct implements ReviewableInterface
         $this->gamePlays = new ArrayCollection();
         $this->notifications = new ArrayCollection();
         $this->barcodes = new ArrayCollection();
+        $this->videos = new ArrayCollection();
         $this->code = uniqid('product_');
     }
 
@@ -868,6 +876,44 @@ class Product extends BaseProduct implements ReviewableInterface
         return $this->gamePlays->filter(function (GamePlay $gamePlay) use ($author) {
             return $author === $gamePlay->getAuthor();
         });
+    }
+
+    /**
+     * @return ProductVideo[]|Collection
+     */
+    public function getVideos(): Collection
+    {
+        return $this->videos;
+    }
+
+    /**
+     * @param ProductVideo $video
+     *
+     * @return bool
+     */
+    public function hasVideo(ProductVideo $video): bool
+    {
+        return $this->videos->contains($video);
+    }
+
+    /**
+     * @param ProductVideo $video
+     */
+    public function addVideo(ProductVideo $video): void
+    {
+        if (!$this->hasVideo($video)) {
+            $this->videos->add($video);
+            $video->setProduct($this);
+        }
+    }
+
+    /**
+     * @param ProductVideo $video
+     */
+    public function removeVideo(ProductVideo $video): void
+    {
+        $this->videos->removeElement($video);
+        $video->setProduct(null);
     }
 
     /**

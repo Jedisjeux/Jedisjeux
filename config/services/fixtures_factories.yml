@@ -148,6 +148,13 @@ services:
             - "@sylius.repository.customer"
         public: true
 
+    app.fixture.example_factory.product_video:
+        class: App\Fixture\Factory\ProductVideoExampleFixture
+        arguments:
+            - "@app.factory.product_video"
+            - "@sylius.repository.product"
+        public: true
+
     app.fixture.example_factory.redirection:
         class: App\Fixture\Factory\RedirectionExampleFactory
         arguments:

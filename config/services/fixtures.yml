@@ -183,6 +183,14 @@ services:
         tags:
             - { name: sylius_fixtures.fixture }
 
+    app.fixture.product_video:
+        class: App\Fixture\ProductVideoFixture
+        arguments:
+            - "@app.manager.product_video"
+            - "@app.fixture.example_factory.product_video"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
     app.fixture.redirection:
         class: App\Fixture\RedirectionFixture
         arguments:

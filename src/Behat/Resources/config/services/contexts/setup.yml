@@ -122,6 +122,15 @@ services:
             tags:
                 - { name: fob.context_service }
 
+        app.behat.context.setup.product_video:
+            class: App\Behat\Context\Setup\ProductVideoContext
+            arguments:
+                - "@app.behat.shared_storage"
+                - "@__symfony__.app.fixture.example_factory.product_video"
+                - "@__symfony__.app.repository.product_video"
+            tags:
+                - { name: fob.context_service }
+
         app.behat.context.setup.redirection:
             class: App\Behat\Context\Setup\RedirectionContext
             arguments:

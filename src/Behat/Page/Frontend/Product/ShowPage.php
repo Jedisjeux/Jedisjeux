@@ -121,6 +121,11 @@ class ShowPage extends SymfonyPage
         return count($this->getElement('game_plays')->findAll('css', '.image-box'));
     }
 
+    public function countVideos(): int
+    {
+        return count($this->getElement('videos')->findAll('css', '.overlay-container'));
+    }
+
     /**
      * @param string $title
      *
@@ -158,6 +163,18 @@ class ShowPage extends SymfonyPage
     }
 
     /**
+     * @param string $title
+     *
+     * @return bool
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     */
+    public function hasVideoTitled(string $title): bool
+    {
+        return null !== $this->getElement('videos')->find('css', sprintf('.lead:contains("%s")', $title));
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getDefinedElements(): array
@@ -173,6 +190,7 @@ class ShowPage extends SymfonyPage
             'publishers' => '#product-publishers',
             'reviews' => '#reviews .comments',
             'themes' => '#product-themes',
+            'videos' => '#videos',
         ]);
     }
 }
