@@ -17,14 +17,41 @@
             })) }}
         </ul>
     </li>
-    <li class="nav-item {% if 'product' == activeMenu %}active {% endif %}dropdown ">
+    <li class="nav-item {% if 'product' == activeMenu %}active {% endif %}dropdown mega-menu mega-menu--narrow">
         <a href="{{ path('sylius_frontend_product_index') }}" class="nav-link dropdown-toggle" id="sixth-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ 'app.ui.games'|trans }}</a>
         <ul class="dropdown-menu" aria-labelledby="sixth-dropdown">
-            <li ><a href="{{ path('sylius_frontend_product_index') }}">{{ 'sylius.ui.all'|trans }}</a></li>
-            {{  render(url('sylius_partial_taxon_index_by_code', {
-                'code': constant('App\\Entity\\Taxon::CODE_TARGET_AUDIENCE'),
-                'template': 'frontend/taxon/_listForProducts.html.twig'
-            })) }}
+            <li>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="title"><i class="fa fa-puzzle-piece pr-2"></i> {{ 'app.ui.games'|trans }}</h4>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="divider"></div>
+                                <ul class="menu">
+                                    <li>
+                                        <a href="{{ path('sylius_frontend_product_index') }}">
+                                            <i class="fa fa-th pr-2"></i>
+                                            {{ 'sylius.ui.all'|trans }}
+                                        </a>
+                                    </li>
+                                    {{  render(url('sylius_partial_taxon_index_by_code', {
+                                        'code': constant('App\\Entity\\Taxon::CODE_TARGET_AUDIENCE'),
+                                        'template': 'frontend/taxon/_listForProducts.html.twig'
+                                    })) }}
+                                </ul>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="divider"></div>
+                                <ul class="menu">
+                                    <li><a href="{{ path('sylius_frontend_product_index', {'sorting': {'averageRating': 'desc'}}) }}"><i class="fa fa-star pr-2"></i>{{ 'app.ui.top_rated'|trans }}</a></li>
+                                    <li><a href="{{ path('sylius_frontend_product_index', {'sorting': {'commentedReviewCount': 'desc'}}) }}"><i class="fa fa-comments pr-2"></i>{{ 'app.ui.top_commented'|trans }}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li></li>
         </ul>
     </li>
     <li class="nav-item {% if 'game_play' == activeMenu %}active {% endif %}dropdown">
