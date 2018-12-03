@@ -39,3 +39,13 @@ Feature: Sorting listed products
         Then I should see 2 products in the list
         And I should see a product with name "Modern Art"
         But the first product on the list should have name "Puerto Rico"
+
+    @ui
+    Scenario: Sorting products by their reviews with descending order
+        Given there is a product "Puerto Rico"
+        And this product has a review titled "This game is awesome!" and rated 8 added by customer "j.tolkien@example.com", created 5 days ago
+        And there is a product "Modern Art"
+        When I view top commented products
+        Then I should see 2 products in the list
+        And I should see a product with name "Modern Art"
+        But the first product on the list should have name "Puerto Rico"

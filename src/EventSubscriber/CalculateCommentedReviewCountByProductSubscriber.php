@@ -12,12 +12,12 @@
 namespace App\EventSubscriber;
 
 use App\Entity\Product;
-use App\Event\ProductEvents;
 use App\Updater\CommentedReviewCountByProductUpdater;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
+use Doctrine\Common\EventSubscriber;
+use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Events;
 
-class CalculateCommentedReviewCountByProductSubscriber implements EventSubscriberInterface
+class CalculateCommentedReviewCountByProductSubscriber implements EventSubscriber
 {
     /**
      * @var CommentedReviewCountByProductUpdater
@@ -38,27 +38,38 @@ class CalculateCommentedReviewCountByProductSubscriber implements EventSubscribe
     public static function getSubscribedEvents()
     {
         return [
-            ProductEvents::PRE_CREATE => 'onProductCreate',
-            ProductEvents::PRE_UPDATE => 'onProductUpdate',
+            Events::prePersist,
+            Events::preUpdate,
         ];
     }
 
     /**
-     * @param GenericEvent $event
+     * @param LifecycleEventArgs $args
      */
-    public function onProductCreate(GenericEvent $event)
+    public function prePersist(LifecycleEventArgs $args)
     {
-        /** @var Product $product */
-        $product = $event->getSubject();
-
-        $this->updater->update($product);
+        $this->updateReviewCount($args);
     }
 
     /**
-     * @param GenericEvent $event
+     * @param LifecycleEventArgs $args
      */
-    public function onProductUpdate(GenericEvent $event)
+    public function preUpdate(LifecycleEventArgs $args)
     {
-        $this->onProductCreate($event);
+        $this->updateReviewCount($args);
+    }
+
+    /**
+     * @param LifecycleEventArgs $args
+     */
+    public function updateReviewCount(LifecycleEventArgs $args)
+    {
+        $product = $args->getObject();
+
+        if (!$product instanceof Product) {
+            return;
+        }
+
+        $this->updater->update($product);
     }
 }

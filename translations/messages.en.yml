@@ -225,6 +225,7 @@ app:
         there_are_no_game_plays: There are no game plays.
         topic: Topic
         topics: Topics
+        top_commented_first: Top commented first
         top_rated_first: Top rated first
         translator: Translator
         type_duration_in_minute: Type duration in minute.

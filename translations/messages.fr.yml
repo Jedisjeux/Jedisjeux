@@ -225,6 +225,7 @@ app:
         there_are_no_game_plays: Il n'y a aucun article.
         topic: Sujet
         topics: Sujets
+        top_commented_first: Plus commenté en premier
         top_rated_first: Mieux noté en premier
         translator: Traducteur
         type_duration_in_minute: Saisir la durée en minute.

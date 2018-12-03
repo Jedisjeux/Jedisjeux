@@ -3,10 +3,10 @@
 namespace spec\App\EventSubscriber;
 
 use App\Entity\Product;
-use App\Event\ProductEvents;
 use App\Updater\CommentedReviewCountByProductUpdater;
+use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Events;
 use PhpSpec\ObjectBehavior;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 class CalculateCommentedReviewCountByProductSubscriberSpec extends ObjectBehavior
 {
@@ -15,35 +15,35 @@ class CalculateCommentedReviewCountByProductSubscriberSpec extends ObjectBehavio
         $this->beConstructedWith($updater);
     }
 
-    function it_subscribes_to_product_events()
+    function it_subscribes_to_doctrine_events(): void
     {
-        $this::getSubscribedEvents()->shouldReturn([
-            ProductEvents::PRE_CREATE => 'onProductCreate',
-            ProductEvents::PRE_UPDATE => 'onProductUpdate',
+        $this->getSubscribedEvents()->shouldReturn([
+            Events::prePersist,
+            Events::preUpdate,
         ]);
     }
 
     function it_updates_commented_review_count_on_product_create_event(
-        GenericEvent $event,
+        LifecycleEventArgs $args,
         CommentedReviewCountByProductUpdater $updater,
         Product $product
     ): void {
-        $event->getSubject()->willReturn($product);
+        $args->getSubject()->willReturn($product);
 
         $updater->update($product)->shouldBeCalled();
 
-        $this->onProductCreate($event);
+        $this->prePersist($args);
     }
 
     function it_updates_commented_review_count_on_product_update_event(
-        GenericEvent $event,
+        LifecycleEventArgs $args,
         CommentedReviewCountByProductUpdater $updater,
         Product $product
     ): void {
-        $event->getSubject()->willReturn($product);
+        $args->getSubject()->willReturn($product);
 
         $updater->update($product)->shouldBeCalled();
 
-        $this->onProductUpdate($event);
+        $this->preUpdate($args);
     }
 }
