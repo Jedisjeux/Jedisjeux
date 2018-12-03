@@ -6,7 +6,7 @@ use App\Entity\Product;
 use App\Calculator\ReviewCountByProductCalculator;
 use PhpSpec\ObjectBehavior;
 
-class RatingCountByProductUpdaterSpec extends ObjectBehavior
+class ReviewCountByProductUpdaterSpec extends ObjectBehavior
 {
     function let(ReviewCountByProductCalculator $calculator)
     {

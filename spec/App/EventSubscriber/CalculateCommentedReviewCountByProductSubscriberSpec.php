@@ -4,13 +4,13 @@ namespace spec\App\EventSubscriber;
 
 use App\Entity\Product;
 use App\Event\ProductEvents;
-use App\Updater\ReviewCountByProductUpdater;
+use App\Updater\CommentedReviewCountByProductUpdater;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-class CalculateReviewCountByProductSubscriberSpec extends ObjectBehavior
+class CalculateCommentedReviewCountByProductSubscriberSpec extends ObjectBehavior
 {
-    function let(ReviewCountByProductUpdater $updater)
+    function let(CommentedReviewCountByProductUpdater $updater)
     {
         $this->beConstructedWith($updater);
     }
@@ -23,9 +23,9 @@ class CalculateReviewCountByProductSubscriberSpec extends ObjectBehavior
         ]);
     }
 
-    function it_updates_review_count_on_product_create_event(
+    function it_updates_commented_review_count_on_product_create_event(
         GenericEvent $event,
-        ReviewCountByProductUpdater $updater,
+        CommentedReviewCountByProductUpdater $updater,
         Product $product
     ): void {
         $event->getSubject()->willReturn($product);
@@ -35,9 +35,9 @@ class CalculateReviewCountByProductSubscriberSpec extends ObjectBehavior
         $this->onProductCreate($event);
     }
 
-    function it_updates_review_count_on_product_update_event(
+    function it_updates_commented_review_count_on_product_update_event(
         GenericEvent $event,
-        ReviewCountByProductUpdater $updater,
+        CommentedReviewCountByProductUpdater $updater,
         Product $product
     ): void {
         $event->getSubject()->willReturn($product);

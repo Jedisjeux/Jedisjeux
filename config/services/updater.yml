@@ -8,6 +8,12 @@ services:
 #        class: App\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
+    app.updater.commented_review_count_by_product:
+        class: App\Updater\CommentedReviewCountByProductUpdater
+        arguments:
+            - "@app.calculator.commented_review_count_by_product"
+        public: true
+
     app.updater.image_count_by_game_play:
         class: App\Updater\ImageCountByGamePlayUpdater
 

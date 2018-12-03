@@ -13,14 +13,14 @@ namespace App\Command\Installer\Data;
 
 use App\Entity\Product;
 use App\Repository\ProductRepository;
-use App\Updater\ReviewCountByProductUpdater;
+use App\Updater\CommentedReviewCountByProductUpdater;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class UpdateReviewCountByProductCommand extends ContainerAwareCommand
+class UpdateCommentedReviewCountByProductCommand extends ContainerAwareCommand
 {
     /**
      * {@inheritdoc}
@@ -28,10 +28,10 @@ class UpdateReviewCountByProductCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('app:reviews:count-by-product')
-            ->setDescription('Update review count by product.')
+            ->setName('app:commented-reviews:count-by-product')
+            ->setDescription('Update commented review count by product.')
             ->setHelp(<<<EOT
-The <info>%command.name%</info> command updates review count by product.
+The <info>%command.name%</info> command updates commented review count by product.
 EOT
             )
         ;
@@ -44,12 +44,12 @@ EOT
     {
         $output->writeln(sprintf('<comment>%s</comment>', $this->getDescription()));
 
-        $this->calculateReviewCountByProduct();
+        $this->calculateCommentedReviewCountByProduct();
 
-        $output->writeln(sprintf('<info>%s</info>', 'Review count by product have been successfully updated.'));
+        $output->writeln(sprintf('<info>%s</info>', 'Commented review count by product have been successfully updated.'));
     }
 
-    protected function calculateReviewCountByProduct()
+    protected function calculateCommentedReviewCountByProduct()
     {
         foreach ($this->createQueryBuilder()->getQuery()->iterate() as $row) {
             /** @var Product $product */
@@ -73,11 +73,11 @@ EOT
     }
 
     /**
-     * @return ReviewCountByProductUpdater|object
+     * @return CommentedReviewCountByProductUpdater|object
      */
     protected function getReviewCountByProductUpdater()
     {
-        return $this->getContainer()->get('app.updater.review_count_by_product');
+        return $this->getContainer()->get('app.updater.commented_review_count_by_product');
     }
 
     /**
