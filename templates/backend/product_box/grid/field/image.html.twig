@@ -1,11 +1,4 @@
-<<<<<<< HEAD
-{% from 'macros/images.html.twig' import image %}
-{% if (data.product.mainImage) %}
-    {{ image(data.product.mainImage.webPath, 'thumbnail', data.product, 'ui circular image') }}
-{% endif %}
-=======
 {% import 'macro/image.html.twig' as images %}
 {% if (data.productVariant.mainImage) %}
     {{ image.render(data.productVariant.mainImage.webPath, 'thumbnail', data.productVariant, 'ui circular image') }}
 {% endif %}
->>>>>>> 1dac24a8d3aed589297b99082ec4c42bc2aaa952
