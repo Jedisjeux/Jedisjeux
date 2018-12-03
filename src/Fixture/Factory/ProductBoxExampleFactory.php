@@ -81,8 +81,7 @@ class ProductBoxExampleFactory extends AbstractExampleFactory implements Example
             ->setNormalizer('product_variant', LazyOption::findOneBy($this->productVariantRepository, 'code'))
 
             ->setDefault('image', LazyOption::randomOneImage(
-<<<<<<< HEAD
-                __DIR__ . '/../../../tests/Resources/fixtures/boxes'
+                __DIR__.'/../../../tests/Resources/fixtures/boxes'
             ))
 
             ->setDefault('height', function (Options $options) {
@@ -99,10 +98,6 @@ class ProductBoxExampleFactory extends AbstractExampleFactory implements Example
             ->setDefault('status', function (Options $options) {
                 return $this->faker->randomElement([ProductBox::STATUS_NEW, ProductBox::STATUS_ACCEPTED, ProductBox::STATUS_REJECTED]);
             });
-=======
-                __DIR__.'/../../../tests/Resources/fixtures/boxes'
-            ));
->>>>>>> 1dac24a8d3aed589297b99082ec4c42bc2aaa952
     }
 
     /**
