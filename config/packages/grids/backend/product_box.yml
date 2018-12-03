@@ -5,6 +5,9 @@ sylius_grid:
                 name: doctrine/orm
                 options:
                     class: "%app.model.product_box.class%"
+                    repository:
+                        method: createListQueryBuilder
+                        arguments: ["%locale%"]
             sorting:
                 createdAt: desc
             fields:
@@ -15,15 +18,23 @@ sylius_grid:
                     options:
                         template: "backend/product_box/grid/field/image.html.twig"
                 product:
-                    label: sylius.ui.product
+                    label: app.ui.game
                     type: string
-                    path: productVariant.product
-                height:
+                    path: product
+                realHeight:
                     label: app.ui.height
                     type: twig
                     sortable: ~
                     options:
                         template: "backend/product_box/grid/field/height.html.twig"
+                status:
+                    type: twig
+                    label: sylius.ui.status
+                    sortable: ~
+                    options:
+                        template: "@SyliusUi/Grid/Field/state.html.twig"
+                        vars:
+                            labels: "backend/product_box/label/status"
                 createdAt:
                     type: twig
                     label: sylius.ui.creation_date
@@ -35,7 +46,7 @@ sylius_grid:
                     type: string
                     label: sylius.ui.search
                     options:
-                        fields: [height]
+                        fields: [productTranslation.name]
             actions:
                 main:
                     create:
@@ -43,5 +54,29 @@ sylius_grid:
                 item:
                     update:
                         type: update
+                    accept:
+                        type: apply_transition
+                        label: sylius.ui.accept
+                        icon: checkmark
+                        options:
+                            link:
+                                route: app_backend_product_box_accept
+                                parameters:
+                                    id: resource.id
+                            class: green
+                            transition: accept
+                            graph: app_product_box
+                    reject:
+                        type: apply_transition
+                        label: sylius.ui.reject
+                        icon: remove
+                        options:
+                            link:
+                                route: app_backend_product_box_reject
+                                parameters:
+                                    id: resource.id
+                            class: yellow
+                            transition: reject
+                            graph: app_product_box
                     delete:
                         type: delete

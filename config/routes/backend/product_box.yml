@@ -9,6 +9,32 @@ app_backend_product_box:
             all:
                 subheader: app.ui.manage_product_boxes
             index:
-                icon: dropbox
+                icon: th
         templates: backend/crud
     type: sylius.resource
+
+app_backend_product_box_accept:
+    path: /product-boxes/{id}/accept
+    methods: [PUT]
+    defaults:
+        _controller: app.controller.product_box:applyStateMachineTransitionAction
+        _sylius:
+            permission: true
+            state_machine:
+                graph: app_product_box
+                transition: accept
+            redirect: referer
+            flash: app.product_box.accept
+
+app_backend_product_box_reject:
+    path: /product-boxes/{id}/reject
+    methods: [PUT]
+    defaults:
+        _controller: app.controller.product_box:applyStateMachineTransitionAction
+        _sylius:
+            permission: true
+            state_machine:
+                graph: app_product_box
+                transition: reject
+            redirect: referer
+            flash: app.product_box.reject
