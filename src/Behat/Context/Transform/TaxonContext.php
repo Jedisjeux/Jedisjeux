@@ -39,6 +39,7 @@ final class TaxonContext implements Context
      * @Transform /^taxon "([^"]+)"$/
      * @Transform /^category "([^"]+)"$/
      * @Transform :taxon
+     * @Transform :mechanism
      */
     public function getTaxonByName($name)
     {
@@ -71,7 +72,7 @@ final class TaxonContext implements Context
     {
         return [
             $this->getTaxonByName($firstTaxon),
-            $this->getTaxonByName($secondTaxon)
+            $this->getTaxonByName($secondTaxon),
         ];
     }
 }

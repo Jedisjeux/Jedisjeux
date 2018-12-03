@@ -21,6 +21,17 @@ class ProductVariantSpec extends ObjectBehavior
         $this->shouldHaveType(BaseProductVariant::class);
     }
 
+    function it_initializes_creation_date_by_default(): void
+    {
+        $this->getCreatedAt()->shouldHaveType(\DateTimeInterface::class);
+    }
+
+    function its_creation_date_is_mutable(\DateTime $date): void
+    {
+        $this->setCreatedAt($date);
+        $this->getCreatedAt()->shouldReturn($date);
+    }
+
     function it_has_no_released_at_by_default()
     {
         $this->getReleasedAt()->shouldReturn(null);
@@ -50,6 +61,8 @@ class ProductVariantSpec extends ObjectBehavior
 
     function it_adds_image(ProductVariantImage $image)
     {
+        $image->setVariant($this)->shouldBeCalled();
+
         $this->addImage($image);
         $this->hasImage($image)->shouldReturn(true);
     }

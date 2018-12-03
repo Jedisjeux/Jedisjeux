@@ -14,7 +14,7 @@ namespace App\Behat\Context\Ui\Backend;
 use App\Behat\Page\Backend\Product\IndexPage;
 use App\Behat\Page\Backend\Product\UpdatePage;
 use App\Behat\Page\Backend\Product\CreatePage;
-use App\Behat\Page\UnexpectedPageException;
+use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use App\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -36,6 +36,11 @@ class ManagingProductsContext implements Context
     private $createPage;
 
     /**
+     * @var CreatePage
+     */
+    private $createFromBggPage;
+
+    /**
      * @var UpdatePage
      */
     private $updatePage;
@@ -48,28 +53,40 @@ class ManagingProductsContext implements Context
     /**
      * ManagingPeopleContext constructor.
      *
-     * @param IndexPage $indexPage
-     * @param CreatePage $createPage
-     * @param UpdatePage $updatePage
+     * @param IndexPage                    $indexPage
+     * @param CreatePage                   $createPage
+     * @param CreatePage                   $createFromBggPage
+     * @param UpdatePage                   $updatePage
      * @param CurrentPageResolverInterface $currentPageResolver
      */
     public function __construct(
         IndexPage $indexPage,
         CreatePage $createPage,
+        CreatePage $createFromBggPage,
         UpdatePage $updatePage,
         CurrentPageResolverInterface $currentPageResolver)
     {
         $this->indexPage = $indexPage;
         $this->createPage = $createPage;
+        $this->createFromBggPage = $createFromBggPage;
         $this->updatePage = $updatePage;
         $this->currentPageResolver = $currentPageResolver;
     }
 
     /**
      * @Given I want to create a new product
+     * @Given I want to create a new product via bgg url :bggPath
      */
-    public function iWantToCreateANewProduct()
+    public function iWantToCreateANewProduct(string $bggPath = null)
     {
+        if (null !== $bggPath) {
+            $this->createFromBggPage->open([
+                'bggPath' => $bggPath,
+            ]);
+
+            return;
+        }
+
         $this->createPage->open();
     }
 
@@ -159,6 +176,38 @@ class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I ask for a translation
+     */
+    public function iAskForTranslation()
+    {
+        $this->updatePage->askForTranslation();
+    }
+
+    /**
+     * @When I ask for a review
+     */
+    public function iAskForReview()
+    {
+        $this->updatePage->askForReview();
+    }
+
+    /**
+     * @When I ask for a publication
+     */
+    public function iAskForPublication()
+    {
+        $this->updatePage->askForPublication();
+    }
+
+    /**
+     * @When I publish it
+     */
+    public function iPublishIt()
+    {
+        $this->updatePage->publish();
+    }
+
+    /**
      * @Then I should be notified that the name is required
      */
     public function iShouldBeNotifiedThatNameIsRequired()
@@ -171,7 +220,7 @@ class ManagingProductsContext implements Context
      */
     public function iShouldBeNotifiedThatMinPlayerCountValueShouldNotBeGreaterThenMaxValueIsRequired()
     {
-        Assert::same($this->createPage->getValidationMessage('min_player_count'),'Min value should not be greater than max value.');
+        Assert::same($this->createPage->getValidationMessage('min_player_count'), 'Min value should not be greater than max value.');
     }
 
     /**
@@ -179,7 +228,7 @@ class ManagingProductsContext implements Context
      */
     public function iShouldBeNotifiedThatMinPlayerCountValueShouldBeOneOrMore()
     {
-        Assert::same($this->createPage->getValidationMessage('min_player_count'),'This value should be 1 or more.');
+        Assert::same($this->createPage->getValidationMessage('min_player_count'), 'This value should be 1 or more.');
     }
 
     /**
@@ -187,7 +236,7 @@ class ManagingProductsContext implements Context
      */
     public function iShouldBeNotifiedThatMaxPlayerCountValueShouldBeOneOrMore()
     {
-        Assert::same($this->createPage->getValidationMessage('max_player_count'),'This value should be 1 or more.');
+        Assert::same($this->createPage->getValidationMessage('max_player_count'), 'This value should be 1 or more.');
     }
 
     /**
@@ -195,7 +244,7 @@ class ManagingProductsContext implements Context
      */
     public function iShouldSeeProductsInTheList($number)
     {
-        Assert::same($this->indexPage->countItems(), (int)$number);
+        Assert::same($this->indexPage->countItems(), (int) $number);
     }
 
     /**
@@ -230,6 +279,18 @@ class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then this product with name :name should have :status status
+     */
+    public function thisProductWithNameShouldHaveStatus($name, $status)
+    {
+        $this->indexPage->open();
+
+        $status = str_replace(' ', '_', strtolower($status));
+
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $name, 'status' => $status]));
+    }
+
+    /**
      * @Then there should not be :name product anymore
      */
     public function thereShouldBeNoAnymore($name)
@@ -244,7 +305,6 @@ class ManagingProductsContext implements Context
     {
         try {
             $this->createPage->open();
-
         } catch (UnexpectedPageException $exception) {
             // nothing else to do
         }
@@ -259,7 +319,6 @@ class ManagingProductsContext implements Context
     {
         try {
             $this->indexPage->open();
-
         } catch (UnexpectedPageException $exception) {
             // nothing else to do
         }

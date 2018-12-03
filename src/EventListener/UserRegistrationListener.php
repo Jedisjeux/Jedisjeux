@@ -9,20 +9,19 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace App\EventListener;
 
-use App\Entity\User;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\UserBundle\UserEvents;
 use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class UserRegistrationListener
 {
     /**
@@ -58,7 +57,7 @@ final class UserRegistrationListener
     /**
      * @param GenericEvent $event
      */
-    public function sendVerificationEmail(GenericEvent $event)
+    public function handleUserVerification(GenericEvent $event): void
     {
         $customer = $event->getSubject();
         Assert::isInstanceOf($customer, CustomerInterface::class);
@@ -66,13 +65,13 @@ final class UserRegistrationListener
         $user = $customer->getUser();
         Assert::notNull($user);
 
-        $this->handleUserVerificationToken($user);
+        $this->sendVerificationEmail($user);
     }
 
     /**
-     * @param User $user
+     * @param UserInterface $user
      */
-    private function handleUserVerificationToken(User $user)
+    private function sendVerificationEmail(UserInterface $user): void
     {
         $token = $this->tokenGenerator->generate();
         $user->setEmailVerificationToken($token);

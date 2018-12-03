@@ -16,11 +16,9 @@ use App\Entity\GamePlay;
 use App\Entity\Topic;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
-use Elastica\Query;
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -62,7 +60,7 @@ class TopicRepository extends EntityRepository
                 ->where($queryBuilder->expr()->orX(
                     'o.title like :query'
                 ))
-                ->setParameter('query', '%' . $criteria['query'] . '%');
+                ->setParameter('query', '%'.$criteria['query'].'%');
 
             unset($criteria['query']);
         }
@@ -71,8 +69,8 @@ class TopicRepository extends EntityRepository
     }
 
     /**
-     * @param string $localeCode
-     * @param bool $showPrivate
+     * @param string              $localeCode
+     * @param bool                $showPrivate
      * @param TaxonInterface|null $taxon
      *
      * @return QueryBuilder
@@ -131,11 +129,11 @@ class TopicRepository extends EntityRepository
      *
      * @param array $criteria
      * @param array $sorting
-     * @param bool $showPrivate
+     * @param bool  $showPrivate
      *
      * @return Pagerfanta
      */
-    public function createFilterPaginator($criteria = array(), $sorting = array(), $showPrivate = true)
+    public function createFilterPaginator($criteria = [], $sorting = [], $showPrivate = true)
     {
         $queryBuilder = $this->getQueryBuilder();
 
@@ -146,19 +144,17 @@ class TopicRepository extends EntityRepository
         }
 
         if (!empty($criteria['query'])) {
-
             $queryBuilder
                 ->where($queryBuilder->expr()->orX(
                     'user.username like :query',
                     'o.title like :query'
                 ))
-                ->setParameter('query', '%' . $criteria['query'] . '%');
+                ->setParameter('query', '%'.$criteria['query'].'%');
 
             unset($criteria['query']);
         }
 
         if (isset($criteria['product'])) {
-
             $queryBuilder
                 ->where($queryBuilder->expr()->orX(
                     'article.product = :product',
@@ -177,8 +173,8 @@ class TopicRepository extends EntityRepository
             $sorting['lastPostCreatedAt'] = 'desc';
         }
 
-        $this->applyCriteria($queryBuilder, (array)$criteria);
-        $this->applySorting($queryBuilder, (array)$sorting);
+        $this->applyCriteria($queryBuilder, (array) $criteria);
+        $this->applySorting($queryBuilder, (array) $sorting);
 
         return $this->getPaginator($queryBuilder);
     }
@@ -187,13 +183,13 @@ class TopicRepository extends EntityRepository
      * Create paginator for topics categorized under given taxon.
      *
      * @param TaxonInterface $taxon
-     * @param array $criteria
-     * @param array $sorting
-     * @param bool $showPrivate
+     * @param array          $criteria
+     * @param array          $sorting
+     * @param bool           $showPrivate
      *
      * @return Pagerfanta
      */
-    public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = array(), array $sorting = array(), $showPrivate = true)
+    public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = [], array $sorting = [], $showPrivate = true)
     {
         $queryBuilder = $this->getQueryBuilder();
 

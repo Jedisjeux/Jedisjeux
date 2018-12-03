@@ -13,9 +13,7 @@ namespace App\Form\Type;
 
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sylius\Bundle\ReviewBundle\Form\Type\ReviewType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

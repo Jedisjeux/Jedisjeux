@@ -61,10 +61,10 @@ class GamePlayType extends AbstractType
                 'html5' => false,
                 'attr' => [
                     'class' => 'date',
-                ]
+                ],
             ])
             ->add('duration', IntegerType::class, [
-                'label' => 'label.duration',
+                'label' => 'app.ui.duration_in_minute',
                 'required' => false,
             ])
             ->add('playerCount', null, [
@@ -87,8 +87,8 @@ class GamePlayType extends AbstractType
                 'by_reference' => false,
                 'prototype' => true,
             ])
-            ->addEventListener(FormEvents::POST_SET_DATA, array($this, 'onPostSetData'))
-            ->addEventListener(FormEvents::POST_SUBMIT, array($this, 'onPostSubmit'));
+            ->addEventListener(FormEvents::POST_SET_DATA, [$this, 'onPostSetData'])
+            ->addEventListener(FormEvents::POST_SUBMIT, [$this, 'onPostSubmit']);
     }
 
     /**
@@ -101,7 +101,7 @@ class GamePlayType extends AbstractType
 
         $this->originalImages = new ArrayCollection();
 
-        foreach($gamePlay->getImages() as $image) {
+        foreach ($gamePlay->getImages() as $image) {
             $this->originalImages->add($image);
         }
     }
@@ -128,9 +128,9 @@ class GamePlayType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => GamePlay::class,
-        ));
+        ]);
     }
 
     /**

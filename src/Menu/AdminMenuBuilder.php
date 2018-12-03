@@ -31,7 +31,7 @@ final class AdminMenuBuilder
     private $authorizationChecker;
 
     /**
-     * @param FactoryInterface $factory
+     * @param FactoryInterface              $factory
      * @param AuthorizationCheckerInterface $authorizationChecker
      */
     public function __construct(FactoryInterface $factory, AuthorizationCheckerInterface $authorizationChecker)
@@ -81,7 +81,6 @@ final class AdminMenuBuilder
                 ->setLabel('sylius.ui.taxons')
                 ->setLabelAttribute('icon', 'folder');
         }
-
 
         $catalog
             ->addChild('backend_product', ['route' => 'sylius_admin_product_index'])

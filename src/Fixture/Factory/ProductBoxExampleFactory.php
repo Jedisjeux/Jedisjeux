@@ -51,8 +51,8 @@ class ProductBoxExampleFactory extends AbstractExampleFactory implements Example
     /**
      * PostExampleFactory constructor.
      *
-     * @param FactoryInterface $postFactory
-     * @param FactoryInterface $productBoxImageFactory
+     * @param FactoryInterface    $postFactory
+     * @param FactoryInterface    $productBoxImageFactory
      * @param RepositoryInterface $productVariantRepository
      */
     public function __construct(
@@ -81,6 +81,7 @@ class ProductBoxExampleFactory extends AbstractExampleFactory implements Example
             ->setNormalizer('product_variant', LazyOption::findOneBy($this->productVariantRepository, 'code'))
 
             ->setDefault('image', LazyOption::randomOneImage(
+<<<<<<< HEAD
                 __DIR__ . '/../../../tests/Resources/fixtures/boxes'
             ))
 
@@ -98,6 +99,10 @@ class ProductBoxExampleFactory extends AbstractExampleFactory implements Example
             ->setDefault('status', function (Options $options) {
                 return $this->faker->randomElement([ProductBox::STATUS_NEW, ProductBox::STATUS_ACCEPTED, ProductBox::STATUS_REJECTED]);
             });
+=======
+                __DIR__.'/../../../tests/Resources/fixtures/boxes'
+            ));
+>>>>>>> 1dac24a8d3aed589297b99082ec4c42bc2aaa952
     }
 
     /**
@@ -125,7 +130,7 @@ class ProductBoxExampleFactory extends AbstractExampleFactory implements Example
 
     /**
      * @param ProductBox $productBox
-     * @param array $options
+     * @param array      $options
      */
     private function createImage(ProductBox $productBox, array $options)
     {
@@ -136,6 +141,5 @@ class ProductBoxExampleFactory extends AbstractExampleFactory implements Example
         file_put_contents($image->getAbsolutePath(), file_get_contents($imagePath));
 
         $productBox->setImage($image);
-
     }
 }

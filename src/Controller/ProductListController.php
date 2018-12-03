@@ -25,10 +25,10 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ProductListController extends ResourceController
 {
     /**
-     * TODO handle directly productListItemController
+     * TODO handle directly productListItemController.
      *
      * @param Request $request
-     * @param int $productId
+     * @param int     $productId
      *
      * @return Response
      */
@@ -73,13 +73,13 @@ class ProductListController extends ResourceController
                 'resource' => $list,
                 $this->metadata->getName() => $list,
             ])
-            ->setTemplate($configuration->getTemplate(ResourceActions::UPDATE . '.html'));
+            ->setTemplate($configuration->getTemplate(ResourceActions::UPDATE.'.html'));
 
         return $this->viewHandler->handle($configuration, $view);
     }
 
     /**
-     * TODO handle directly productListItemController
+     * TODO handle directly productListItemController.
      *
      * @param Request $request
      * @param $productId
@@ -122,7 +122,7 @@ class ProductListController extends ResourceController
                 'resource' => $list,
                 $this->metadata->getName() => $list,
             ])
-            ->setTemplate($configuration->getTemplate(ResourceActions::UPDATE . '.html'));
+            ->setTemplate($configuration->getTemplate(ResourceActions::UPDATE.'.html'));
 
         return $this->viewHandler->handle($configuration, $view);
     }

@@ -15,7 +15,7 @@ use App\Behat\Page\Frontend\Product\IndexByPersonPage;
 use App\Behat\Page\Frontend\Product\IndexByTaxonPage;
 use App\Behat\Page\Frontend\Product\IndexPage;
 use App\Behat\Page\Frontend\Product\ShowPage;
-use App\Behat\Page\UnexpectedPageException;
+use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use App\Entity\Person;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\NodeElement;
@@ -49,9 +49,9 @@ class ProductContext implements Context
     private $indexByPersonPage;
 
     /**
-     * @param ShowPage $showPage
-     * @param IndexPage $indexPage
-     * @param IndexByTaxonPage $indexByTaxonPage
+     * @param ShowPage          $showPage
+     * @param IndexPage         $indexPage
+     * @param IndexByTaxonPage  $indexByTaxonPage
      * @param IndexByPersonPage $indexByPersonPage
      */
     public function __construct(
@@ -121,6 +121,16 @@ class ProductContext implements Context
     public function iShouldSeeProductName($name)
     {
         Assert::same($this->showPage->getName(), $name);
+    }
+
+    /**
+     * @Then I should see :firstItem, :secondItem, :thirdItem as box content
+     */
+    public function iShouldSeeItemAsBoxContent(...$items)
+    {
+        foreach ($items as $item) {
+            Assert::contains($this->showPage->getBoxContent(), $item);
+        }
     }
 
     /**
@@ -241,7 +251,6 @@ class ProductContext implements Context
     {
         try {
             $this->iOpenProductPage($product);
-
         } catch (UnexpectedPageException $exception) {
             // nothing else to do
         }
@@ -256,7 +265,6 @@ class ProductContext implements Context
     {
         try {
             $this->iOpenProductPage($product);
-
         } catch (UnexpectedPageException $exception) {
             // nothing else to do
         }
@@ -280,6 +288,16 @@ class ProductContext implements Context
     public function iViewSortedProductReleases($sortDirection)
     {
         $sorting = ['releasedAt' => 'oldest' === $sortDirection ? 'asc' : 'desc'];
+
+        $this->indexPage->open(['sorting' => $sorting]);
+    }
+
+    /**
+     * @When /^I view top commented products$/
+     */
+    public function iViewTopCommentedProducts()
+    {
+        $sorting = ['commentedReviewCount' => 'desc'];
 
         $this->indexPage->open(['sorting' => $sorting]);
     }
@@ -349,6 +367,14 @@ class ProductContext implements Context
     }
 
     /**
+     * @Then I should see :count product videos
+     */
+    public function iShouldSeeProductVideos($count)
+    {
+        Assert::same($this->showPage->countVideos(), (int) $count);
+    }
+
+    /**
      * @Then I should see reviews titled :firstReview, :secondReview and :thirdReview
      */
     public function iShouldSeeReviewsTitled(...$reviews)
@@ -409,6 +435,19 @@ class ProductContext implements Context
     public function iShouldNotSeeGamePlayAddedByCustomerProduct($email)
     {
         Assert::false($this->showPage->hasGamePlayAddedByCustomerEmail($email));
+    }
+
+    /**
+     * @Then I should see videos titled :firstVideo, :secondVideo and :thirdVideo
+     */
+    public function iShouldSeeVideosTitled(...$videos)
+    {
+        foreach ($videos as $video) {
+            Assert::true(
+                $this->showPage->hasVideoTitled($video),
+                sprintf('Product should have video titled "%s" but it does not.', $video)
+            );
+        }
     }
 
     /**

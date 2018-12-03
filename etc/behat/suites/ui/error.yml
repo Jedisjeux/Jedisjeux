@@ -1,8 +1,0 @@
-default:
-    suites:
-        ui_error:
-            contexts:
-                - Behat\MinkExtension\Context\MinkContext
-                - App\Behat\UtilsContext
-            filters:
-                tags: "@error && @ui"

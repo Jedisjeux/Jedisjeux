@@ -45,7 +45,7 @@ class ArticleRepository extends EntityRepository
 
     /**
      * @param string $slug
-     * @param bool $showUnpublished
+     * @param bool   $showUnpublished
      *
      * @return null|Article
      */
@@ -81,7 +81,7 @@ class ArticleRepository extends EntityRepository
     }
 
     /**
-     * @param string $localeCode
+     * @param string   $localeCode
      * @param null|int $productId
      *
      * @return QueryBuilder
@@ -107,10 +107,10 @@ class ArticleRepository extends EntityRepository
     }
 
     /**
-     * @param string $localeCode
+     * @param string      $localeCode
      * @param string|null $taxonSlug
      * @param string|null $productSlug
-     * @param array $criteria
+     * @param array       $criteria
      *
      * @return QueryBuilder
      */
@@ -189,10 +189,9 @@ class ArticleRepository extends EntityRepository
         parent::applyCriteria($queryBuilder, $criteria);
     }
 
-
     /**
-     * @param array|null $criteria
-     * @param array|null $sorting
+     * @param array|null  $criteria
+     * @param array|null  $sorting
      * @param string|null $status
      *
      * @return Pagerfanta
@@ -209,7 +208,7 @@ class ArticleRepository extends EntityRepository
         if (isset($criteria['query'])) {
             $queryBuilder
                 ->andWhere($queryBuilder->expr()->like($this->getPropertyName('title'), ':query'))
-                ->setParameter('query', '%' . $criteria['query'] . '%');
+                ->setParameter('query', '%'.$criteria['query'].'%');
 
             unset($criteria['query']);
         }
@@ -241,9 +240,8 @@ class ArticleRepository extends EntityRepository
             ];
         }
 
-
-        $this->applyCriteria($queryBuilder, (array)$criteria);
-        $this->applySorting($queryBuilder, (array)$sorting);
+        $this->applyCriteria($queryBuilder, (array) $criteria);
+        $this->applySorting($queryBuilder, (array) $sorting);
 
         return $this->getPaginator($queryBuilder);
     }
@@ -252,9 +250,9 @@ class ArticleRepository extends EntityRepository
      * Create paginator for products categorized under given taxon.
      *
      * @param TaxonInterface $taxon
-     * @param array|null $criteria
-     * @param array|null $sorting
-     * @param string $status
+     * @param array|null     $criteria
+     * @param array|null     $sorting
+     * @param string         $status
      *
      * @return Pagerfanta
      */
@@ -280,8 +278,8 @@ class ArticleRepository extends EntityRepository
                 ->setParameter('status', $status);
         }
 
-        $this->applyCriteria($queryBuilder, (array)$criteria);
-        $this->applySorting($queryBuilder, (array)$sorting);
+        $this->applyCriteria($queryBuilder, (array) $criteria);
+        $this->applySorting($queryBuilder, (array) $sorting);
 
         return $this->getPaginator($queryBuilder);
     }
@@ -299,6 +297,7 @@ class ArticleRepository extends EntityRepository
             ->select($queryBuilder->expr()->count('o'))
             ->where($queryBuilder->expr()->eq($this->getPropertyName('status'), ':status'))
             ->setParameter('status', Article::STATUS_PUBLISHED);
+
         return $queryBuilder->getQuery()->getSingleScalarResult();
     }
 }

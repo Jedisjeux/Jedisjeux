@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: loic
  * Date: 14/03/2016
- * Time: 13:07
+ * Time: 13:07.
  */
 
 namespace App\Entity;

@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: loic
  * Date: 23/10/2015
- * Time: 16:12
+ * Time: 16:12.
  */
 
 namespace App\Entity;
@@ -13,7 +13,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
-use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -58,7 +57,7 @@ class Notification implements ResourceInterface
     protected $recipient;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(type="boolean", name="is_read")
      */
@@ -164,7 +163,7 @@ class Notification implements ResourceInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isRead(): bool
     {
@@ -172,7 +171,7 @@ class Notification implements ResourceInterface
     }
 
     /**
-     * @param boolean $read
+     * @param bool $read
      */
     public function setRead(bool $read): void
     {

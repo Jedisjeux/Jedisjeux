@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of Jedisjeux
+ * This file is part of Jedisjeux.
  *
  * (c) Loïc Frémont
  *
@@ -70,9 +70,9 @@ class ProductBoxType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => ProductBox::class,
-        ));
+        ]);
     }
 
     /**

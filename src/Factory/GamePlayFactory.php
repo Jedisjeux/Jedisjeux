@@ -11,12 +11,15 @@
 
 namespace App\Factory;
 
+use App\Context\CustomerContext;
 use App\Entity\GamePlay;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Product\Repository\ProductRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -29,7 +32,7 @@ class GamePlayFactory implements FactoryInterface
     private $className;
 
     /**
-     * @var EntityRepository
+     * @var ProductRepositoryInterface
      */
     protected $productRepository;
 
@@ -40,10 +43,17 @@ class GamePlayFactory implements FactoryInterface
 
     /**
      * @param string $className
+     * @param ProductRepositoryInterface $productRepository
+     * @param CustomerContext $customerContext
      */
-    public function __construct($className)
-    {
+    public function __construct(
+        string $className,
+        ProductRepositoryInterface $productRepository,
+        CustomerContext $customerContext
+    ) {
         $this->className = $className;
+        $this->productRepository = $productRepository;
+        $this->customerContext = $customerContext;
     }
 
     /**
@@ -52,22 +62,25 @@ class GamePlayFactory implements FactoryInterface
     public function createNew()
     {
         /** @var GamePlay $gamePlay */
-        $gamePlay = new $this->className;
+        $gamePlay = new $this->className();
+
+        $gamePlay->setAuthor($this->customerContext->getCustomer());
 
         return $gamePlay;
     }
 
     /**
-     * Create new game-play for a product
+     * Create new game-play for a product.
      *
+     * @param string $locale
      * @param string $productSlug
      *
      * @return GamePlay
      */
-    public function createForProduct($productSlug)
+    public function createForProduct(string $locale, string $productSlug)
     {
         /** @var ProductInterface $product */
-        $product = $this->productRepository->findOneBySlug($productSlug);
+        $product = $this->productRepository->findOneBySlug($locale, $productSlug);
 
         if (null === $product) {
             throw new \InvalidArgumentException(sprintf('Requested product does not exist with slug "%s".', $productSlug));
@@ -77,24 +90,7 @@ class GamePlayFactory implements FactoryInterface
         $gamePlay = $this->createNew();
 
         $gamePlay->setProduct($product);
-        $gamePlay->setAuthor($this->customerContext->getCustomer());
 
         return $gamePlay;
-    }
-
-    /**
-     * @param ProductRepository $productRepository
-     */
-    public function setProductRepository($productRepository)
-    {
-        $this->productRepository = $productRepository;
-    }
-
-    /**
-     * @param CustomerContextInterface $customerContext
-     */
-    public function setCustomerContext($customerContext)
-    {
-        $this->customerContext = $customerContext;
     }
 }

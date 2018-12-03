@@ -16,6 +16,9 @@ app:
         article_settings: Configuration de l'article
         artist: Illustrateur
         artists: Illustrateurs
+        ask_for_publication: Demander la publication
+        ask_for_review: Demander une relecture
+        ask_for_translation: Demander une traduction
         avatar: Avatar
         barcode: Code-barres
         barcodes: Code-barres
@@ -23,6 +26,7 @@ app:
         boardgame: Jeu de société
         boardgames: Jeux de société
         box: Encart
+        box_content: Contenu de la boite
         catalog: Catalogue
         categories: Catégories
         choose_category: Choisir une catégorie
@@ -69,10 +73,12 @@ app:
         forum: Forum
         framed: Encadré
         from_board_game_geek: À partir de BoardGameGeek
+        from_years: 'À partir de %count% ans'
         game: Jeu
         game_details: Informations du jeu
         game_library: Ludothèque
         game_specifications: Spécifications du jeu
+        game_play_of: Partie de %product%
         game_plays: Parties de jeu
         game_play_details: Informations de la partie
         game_play_images: Photos de partie
@@ -89,9 +95,11 @@ app:
         internal_name: Nom interne
         interviews: Interviews
         introduction: Introduction
+        in_stores: Dans les boutiques
         in_the_boxes: C'est dans la boîte
         last_message_of: 'Dernier message de <strong>%username%</strong>'
         last_used_at: Dernière utilisation
+        latest_added_games: Derniers jeux ajoutés
         latest_articles: Derniers articles
         latest_in_the_boxes: Derniers c'est dans la boîte
         latest_news: Dernières actualités
@@ -113,7 +121,7 @@ app:
         manage_dealers: Gérer les vendeurs
         manage_dealer_prices: Gérer les tarifs des vendeurs
         manage_festival_lists: Gérer les listes de festival
-        manage_festival_list_items: Géreer les items de liste de festival
+        manage_festival_list_items: Gérer les items de liste de festival
         manage_game_plays: Gérer les parties de jeu
         manage_not_found_pages: Gérer les pages non trouvées
         manage_people: Gérer les personnes
@@ -165,6 +173,7 @@ app:
         photos: Photos
         player_count: Nombre de joueurs
         players: Joueurs
+        plays: Parties
         posts: Messages
         preview: Aperçu
         previews: Previews
@@ -175,6 +184,7 @@ app:
         product_manager: Gestionnaire de jeux
         pub_banners: Bannières de pub
         public: Public
+        publish: Publier
         publisher: Publieur
         published_at: Publié le
         ratings: Notes
@@ -216,6 +226,9 @@ app:
         there_are_no_game_plays: Il n'y a aucun article.
         topic: Sujet
         topics: Sujets
+        top_commented: Plus commentés
+        top_commented_first: Plus commenté en premier
+        top_rated: Mieux notés
         top_rated_first: Mieux noté en premier
         translator: Traducteur
         type_duration_in_minute: Saisir la durée en minute.
@@ -307,9 +320,6 @@ label:
   age_min: Âge min
   amount: Montant
   artists: Illustrateurs
-  ask_for_publication: Demander la publication
-  ask_for_review: Demander une relecture
-  ask_for_translation: Demander une traduction
   ask_for_translation_changes: Demander des modifs de trad
   at: À
   attributes: Attributs
@@ -401,7 +411,6 @@ label:
   price: Prix
   price_list: Liste de prix
   public: Public
-  publish: Publier
   publishable: Publiable
   published: Publié
   published_at: Publié le

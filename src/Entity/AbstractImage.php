@@ -26,10 +26,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 abstract class AbstractImage implements ResourceInterface
 {
-    Use IdentifiableTrait,
+    use IdentifiableTrait,
         Timestampable;
 
     /**
+     * @var string|null
+     *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $path;
@@ -43,42 +45,38 @@ abstract class AbstractImage implements ResourceInterface
     private $file;
 
     /**
-     * @return mixed
+     * @return string|null
      */
-    public function getPath()
+    public function getPath(): ?string
     {
         return $this->path;
     }
 
     /**
-     * @param mixed $path
-     * @return $this
+     * @param string|null $path
      */
-    public function setPath($path)
+    public function setPath($path): void
     {
         $this->path = $path;
-
-        return $this;
     }
 
     /**
-     * @return UploadedFile
+     * @return UploadedFile|null
      */
-    public function getFile()
+    public function getFile(): ?UploadedFile
     {
         return $this->file;
     }
 
     /**
-     * @param UploadedFile $file
+     * @param UploadedFile|null $file
+     *
      * @return $this
      */
-    public function setFile($file)
+    public function setFile(?UploadedFile $file): void
     {
         $this->file = $file;
         $this->updatedAt = new \DateTime();
-
-        return $this;
     }
 
     public function getAbsolutePath()
@@ -87,7 +85,7 @@ abstract class AbstractImage implements ResourceInterface
     }
 
     /**
-     * return the public url to the path
+     * return the public url to the path.
      *
      * @return null|string
      */
@@ -97,7 +95,7 @@ abstract class AbstractImage implements ResourceInterface
     }
 
     /**
-     * get the absolute path to the upload directory
+     * get the absolute path to the upload directory.
      *
      * @return string
      */
@@ -107,7 +105,7 @@ abstract class AbstractImage implements ResourceInterface
     }
 
     /**
-     * The path to the  path files
+     * The path to the  path files.
      *
      * @return string
      */
@@ -117,7 +115,7 @@ abstract class AbstractImage implements ResourceInterface
     }
 
     /**
-     * This function uploads the file to the server
+     * This function uploads the file to the server.
      *
      * @ORM\PrePersist
      * @ORM\PreUpdate
@@ -129,7 +127,7 @@ abstract class AbstractImage implements ResourceInterface
             return;
         }
 
-        $hash = uniqid("", true);
+        $hash = uniqid('', true);
         $extension = $this->file->getClientOriginalExtension();
         $newFilename = $hash.'.'.$extension;
 
@@ -148,13 +146,13 @@ abstract class AbstractImage implements ResourceInterface
      */
     public function getDefaultSerialize()
     {
-        if ($this->getWebPath() === null) {
+        if (null === $this->getWebPath()) {
             return null;
         }
 
         return [
             'filename' => $this->getWebPath(),
-            'filter' => 'default'
+            'filter' => 'default',
         ];
     }
 
@@ -166,13 +164,13 @@ abstract class AbstractImage implements ResourceInterface
      */
     public function getThumbnailSerialize()
     {
-        if ($this->getWebPath() === null) {
+        if (null === $this->getWebPath()) {
             return null;
         }
 
         return [
             'filename' => $this->getWebPath(),
-            'filter' => 'thumbnail'
+            'filter' => 'thumbnail',
         ];
     }
 
@@ -184,13 +182,13 @@ abstract class AbstractImage implements ResourceInterface
      */
     public function getMagazineItemSerialize()
     {
-        if ($this->getWebPath() === null) {
+        if (null === $this->getWebPath()) {
             return null;
         }
 
         return [
             'filename' => $this->getWebPath(),
-            'filter' => 'magazine_item'
+            'filter' => 'magazine_item',
         ];
     }
 }

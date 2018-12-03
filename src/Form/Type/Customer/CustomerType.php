@@ -13,11 +13,8 @@ namespace App\Form\Type\Customer;
 
 use App\Entity\Customer;
 use Sylius\Bundle\CustomerBundle\Form\Type\CustomerType as BaseCustomerType;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -44,14 +41,14 @@ class CustomerType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'validation_groups' => ['sylius'],
             'data_class' => Customer::class,
-        ));
+        ]);
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getParent()
     {

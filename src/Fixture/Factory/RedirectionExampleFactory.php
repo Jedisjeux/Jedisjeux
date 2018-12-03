@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of Jedisjeux
+ * This file is part of Jedisjeux.
  *
  * (c) Loïc Frémont
  *
@@ -58,11 +58,11 @@ class RedirectionExampleFactory extends AbstractExampleFactory implements Exampl
     {
         $resolver
             ->setDefault('source', function (Options $options) {
-                return "/" . $this->faker->unique()->slug();
+                return '/'.$this->faker->unique()->slug();
             })
 
             ->setDefault('destination', function (Options $options) {
-                return "/" . $this->faker->slug();
+                return '/'.$this->faker->slug();
             })
 
             ->setDefault('permanent', function (Options $options) {

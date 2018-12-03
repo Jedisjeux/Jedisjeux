@@ -14,10 +14,7 @@ namespace App\Form\Type;
 use App\Entity\Product;
 use App\Entity\Taxon;
 use Doctrine\ORM\EntityRepository;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
-use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonAutocompleteChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -39,7 +36,7 @@ class ProductType extends AbstractType
 
         $builder
             ->add('firstVariant', ProductVariantType::class, [])
-            ->add('mainTaxon', EntityType::class, array(
+            ->add('mainTaxon', EntityType::class, [
                 'label' => 'label.target_audience',
                 'placeholder' => 'label.choose_target_audience',
                 'class' => 'App:Taxon',
@@ -54,8 +51,8 @@ class ProductType extends AbstractType
                 },
                 'multiple' => false,
                 'required' => false,
-            ))
-            ->add('mechanisms', EntityType::class, array(
+            ])
+            ->add('mechanisms', EntityType::class, [
                 'label' => 'label.mechanisms',
                 'placeholder' => 'label.choose_mechanisms',
                 'class' => 'App:Taxon',
@@ -70,8 +67,8 @@ class ProductType extends AbstractType
                 },
                 'multiple' => true,
                 'required' => false,
-            ))
-            ->add('themes', EntityType::class, array(
+            ])
+            ->add('themes', EntityType::class, [
                 'label' => 'label.themes',
                 'placeholder' => 'label.choose_themes',
                 'class' => 'App:Taxon',
@@ -86,40 +83,47 @@ class ProductType extends AbstractType
                 },
                 'multiple' => true,
                 'required' => false,
-            ))
+            ])
             ->add('translations', ResourceTranslationsType::class, [
                 'entry_type' => ProductTranslationType::class,
                 'label' => 'sylius.form.product.translations',
             ])
-            ->add('boxContent', TextareaType::class, array(
+            ->add('boxContent', TextareaType::class, [
                 'required' => false,
                 'label' => 'label.material',
-            ))
-            ->add('minAge', null, array(
+            ])
+            ->add('minAge', null, [
                 'label' => 'label.age_min',
-            ))
-            ->add('minDuration', null, array(
+            ])
+            ->add('minDuration', null, [
                 'label' => 'label.min',
-            ))
-            ->add('maxDuration', null, array(
+            ])
+            ->add('maxDuration', null, [
                 'label' => 'label.max',
-            ))
-            ->add('minPlayerCount', null, array(
+            ])
+            ->add('minPlayerCount', null, [
                 'label' => 'label.min',
-            ))
-            ->add('maxPlayerCount', null, array(
+            ])
+            ->add('maxPlayerCount', null, [
                 'label' => 'label.max',
-            ))
-            ->add('barcodes', CollectionType::class, array(
+            ])
+            ->add('barcodes', CollectionType::class, [
                 'label' => 'label.barcodes',
                 'entry_type' => ProductBarcodeType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
                 'prototype' => true,
-            ))
+            ])
             ->add('associations', ProductAssociationsType::class, [
                 'label' => false,
+            ])
+            ->add('videos', CollectionType::class, [
+                'label' => false,
+                'entry_type' => ProductVideoType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
             ]);
     }
 
@@ -130,7 +134,7 @@ class ProductType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Product::class,
-            'validation_groups' => ['sylius']
+            'validation_groups' => ['sylius'],
         ]);
     }
 

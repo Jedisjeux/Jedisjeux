@@ -2,6 +2,18 @@
 <!-- ================ -->
 <aside class="col-lg-4 col-xl-3 ml-xl-auto">
     <div class="sidebar">
+        {% if product.boxContent is not null %}
+            <h3 class="title mt-4">{{ 'app.ui.box_content'|trans }}</h3>
+            <div class="separator-2"></div>
+            <ul id="box-content" class="nav flex-column list-style-icons">
+                {% for row in product.boxContent|split("\n") %}
+                    <li class="nav-item">
+                        <i class="fa fa-caret-right pr-10"></i>{{ row }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
         {% include 'frontend/pub_banner/_sidebar.html.twig' %}
 
         {{ render(url('app_partial_dealer_price_index', {

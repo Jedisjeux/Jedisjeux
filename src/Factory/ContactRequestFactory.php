@@ -33,17 +33,11 @@ class ContactRequestFactory implements FactoryInterface
 
     /**
      * @param string $className
-     */
-    public function __construct($className)
-    {
-        $this->className = $className;
-    }
-
-    /**
      * @param CustomerContextInterface $customerContext
      */
-    public function setCustomerContext(CustomerContextInterface $customerContext)
+    public function __construct($className, CustomerContextInterface $customerContext)
     {
+        $this->className = $className;
         $this->customerContext = $customerContext;
     }
 
@@ -53,7 +47,7 @@ class ContactRequestFactory implements FactoryInterface
     public function createNew()
     {
         /** @var ContactRequest $contactRequest */
-        $contactRequest = new $this->className;
+        $contactRequest = new $this->className();
 
         /** @var CustomerInterface $customer */
         $customer = $this->customerContext->getCustomer();
@@ -64,5 +58,4 @@ class ContactRequestFactory implements FactoryInterface
 
         return $contactRequest;
     }
-
 }

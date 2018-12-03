@@ -12,9 +12,7 @@
 namespace App\Controller;
 
 use App\Entity\Taxon;
-use App\Repository\ProductRepository;
 use App\Repository\TaxonRepository;
-use Doctrine\ORM\EntityRepository;
 use FOS\RestBundle\View\View;
 use SM\Factory\Factory;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
@@ -57,7 +55,7 @@ class ProductController extends ResourceController
 
     /**
      * @param Request $request
-     * @param string $slug
+     * @param string  $slug
      *
      * @return Response
      */
@@ -93,7 +91,7 @@ class ProductController extends ResourceController
 
     /**
      * @param Request $request
-     * @param string $slug
+     * @param string  $slug
      *
      * @return Response
      */
@@ -146,7 +144,7 @@ class ProductController extends ResourceController
 
         if ($configuration->isHtmlRequest()) {
             $view
-                ->setTemplate($configuration->getTemplate(ResourceActions::SHOW . '.html'))
+                ->setTemplate($configuration->getTemplate(ResourceActions::SHOW.'.html'))
                 ->setTemplateVar($this->metadata->getName())
                 ->setData([
                     'configuration' => $configuration,
@@ -184,7 +182,7 @@ class ProductController extends ResourceController
                 Taxon::CODE_MECHANISM,
                 Taxon::CODE_THEME,
                 Taxon::CODE_TARGET_AUDIENCE,
-            ]
+            ],
         ]);
     }
 

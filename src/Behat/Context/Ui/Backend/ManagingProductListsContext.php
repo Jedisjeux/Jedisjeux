@@ -41,8 +41,8 @@ class ManagingProductListsContext implements Context
     /**
      * ManagingPeopleContext constructor.
      *
-     * @param IndexPage $indexPage
-     * @param UpdatePage $updatePage
+     * @param IndexPage                    $indexPage
+     * @param UpdatePage                   $updatePage
      * @param CurrentPageResolverInterface $currentPageResolver
      */
     public function __construct(

@@ -2,6 +2,7 @@
 
 namespace spec\App\EventSubscriber;
 
+use App\AppEvents;
 use App\Entity\Post;
 use App\Entity\Topic;
 use App\EventSubscriber\CalculatePostCountByTopicSubscriber;
@@ -20,6 +21,13 @@ class CalculatePostCountByTopicSubscriberSpec extends ObjectBehavior
     function it_is_initializable()
     {
         $this->shouldHaveType(CalculatePostCountByTopicSubscriber::class);
+    }
+
+    function it_subscribes_to_post_create_event()
+    {
+        $this::getSubscribedEvents()->shouldReturn([
+            AppEvents::POST_PRE_CREATE => 'onPostCreate',
+        ]);
     }
 
     function it_updates_topic(

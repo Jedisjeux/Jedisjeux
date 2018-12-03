@@ -1,0 +1,18 @@
+default:
+    suites:
+        ui_managing_taxons:
+            contexts_services:
+                - app.behat.context.hook.doctrine_orm
+
+                - app.behat.context.transform.customer
+                - app.behat.context.transform.shared_storage
+                - app.behat.context.transform.taxon
+
+                - app.behat.context.setup.security
+                - app.behat.context.setup.customer
+                - app.behat.context.setup.taxon
+
+                - app.behat.context.ui.backend.managing_taxons
+                - app.behat.context.ui.backend.notification
+            filters:
+                tags: "@managing_taxons && @ui"

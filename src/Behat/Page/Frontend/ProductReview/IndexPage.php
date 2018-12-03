@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of Jedisjeux
+ * This file is part of Jedisjeux.
  *
  * (c) Loïc Frémont
  *
@@ -11,14 +11,14 @@
 
 namespace App\Behat\Page\Frontend\ProductReview;
 
-use App\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class IndexPage extends SymfonyPage
 {
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_frontend_product_review_index';
     }
@@ -48,7 +48,7 @@ class IndexPage extends SymfonyPage
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'reviews' => '#product-reviews',

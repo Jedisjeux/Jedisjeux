@@ -11,7 +11,7 @@
 
 namespace App\Behat\Service\Resolver;
 
-use App\Behat\Page\SymfonyPageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 use Behat\Mink\Session;
 use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
 use Webmozart\Assert\Assert;
@@ -32,7 +32,7 @@ final class CurrentPageResolver implements CurrentPageResolverInterface
     private $urlMatcher;
 
     /**
-     * @param Session $session
+     * @param Session             $session
      * @param UrlMatcherInterface $urlMatcher
      */
     public function __construct(Session $session, UrlMatcherInterface $urlMatcher)

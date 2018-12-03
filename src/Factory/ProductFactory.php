@@ -15,12 +15,12 @@ use App\Entity\Person;
 use App\Entity\Product;
 use App\Entity\ProductVariant;
 use App\Entity\ProductVariantImage;
-use App\Utils\BggProduct;
-use Doctrine\ORM\EntityRepository;
+use App\Entity\BggProduct;
 use Gedmo\Sluggable\Util\Urlizer;
 use Sylius\Component\Product\Factory\ProductFactory as BaseProductFactory;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -28,42 +28,47 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 class ProductFactory extends BaseProductFactory
 {
     /**
-     * @var EntityRepository
+     * @var RepositoryInterface
      */
-    protected $personRepository;
+    private $personRepository;
 
     /**
      * @var FactoryInterface
      */
-    protected $productVariantImageFactory;
+    private $productVariantImageFactory;
+
+    /**
+     * @var BggProductFactory
+     */
+    private $bggProductFactory;
 
     /**
      * @var SlugGeneratorInterface
      */
-    protected $slugGenerator;
+    private $slugGenerator;
 
     /**
-     * @param EntityRepository $personRepository
-     */
-    public function setPersonRepository(EntityRepository $personRepository)
-    {
-        $this->personRepository = $personRepository;
-    }
-
-    /**
+     * @param FactoryInterface $factory
+     * @param FactoryInterface $variantFactory
      * @param FactoryInterface $productVariantImageFactory
-     */
-    public function setProductVariantImageFactory(FactoryInterface $productVariantImageFactory)
-    {
-        $this->productVariantImageFactory = $productVariantImageFactory;
-    }
-
-    /**
+     * @param BggProductFactory $bggProductFactory,
      * @param SlugGeneratorInterface $slugGenerator
+     * @param RepositoryInterface $personRepository
      */
-    public function setSlugGenerator(SlugGeneratorInterface $slugGenerator)
-    {
+    public function __construct(
+        FactoryInterface $factory,
+        FactoryInterface $variantFactory,
+        FactoryInterface $productVariantImageFactory,
+        BggProductFactory $bggProductFactory,
+        SlugGeneratorInterface $slugGenerator,
+        RepositoryInterface $personRepository
+    ) {
+        parent::__construct($factory, $variantFactory);
+
+        $this->bggProductFactory = $bggProductFactory;
+        $this->productVariantImageFactory = $productVariantImageFactory;
         $this->slugGenerator = $slugGenerator;
+        $this->personRepository = $personRepository;
     }
 
     /**
@@ -76,14 +81,14 @@ class ProductFactory extends BaseProductFactory
         /** @var Product $product */
         $product = parent::createWithVariant();
 
-        $bggProduct = new BggProduct($bggPath);
+        $bggProduct = $this->bggProductFactory->createByPath($bggPath);
 
         $product->setName($bggProduct->getName());
         $product->setSlug($this->slugGenerator->generate($product->getName()));
         $product->setDescription($bggProduct->getDescription());
 
         if (null !== $releasedAtYear = $bggProduct->getReleasedAtYear()) {
-            $releasedAt = \DateTime::createFromFormat('Y-m-d', $releasedAtYear . '-01-01');
+            $releasedAt = \DateTime::createFromFormat('Y-m-d', $releasedAtYear.'-01-01');
 
             if (false !== $releasedAt) {
                 $firstVariant = $product->getFirstVariant();
@@ -96,8 +101,8 @@ class ProductFactory extends BaseProductFactory
         $product->setMinAge($bggProduct->getAge());
         $product->setMinDuration($bggProduct->getMinDuration());
         $product->setMaxDuration($bggProduct->getMaxDuration());
-        $product->setMinPlayerCount($bggProduct->getNbJoueursMin());
-        $product->setMaxPlayerCount($bggProduct->getNbJoueursMax());
+        $product->setMinPlayerCount($bggProduct->getMinPlayerCount());
+        $product->setMaxPlayerCount($bggProduct->getMaxPlayerCount());
 
         foreach ($bggProduct->getDesigners() as $fullName) {
             $designer = $this->getPersonByFullName($fullName);

@@ -12,7 +12,6 @@
 namespace App\Behat\Context\Setup;
 
 use App\Behat\Service\SharedStorageInterface;
-use App\Entity\Article;
 use App\Entity\Topic;
 use App\Fixture\Factory\ExampleFactoryInterface;
 use Behat\Behat\Context\Context;
@@ -47,24 +46,22 @@ class TopicContext implements Context
     protected $manager;
 
     /**
-     * @param SharedStorageInterface $sharedStorage
+     * @param SharedStorageInterface  $sharedStorage
      * @param ExampleFactoryInterface $topicFactory
-     * @param EntityRepository $topicRepository
-     * @param ObjectManager $manager
+     * @param EntityRepository        $topicRepository
+     * @param ObjectManager           $manager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ExampleFactoryInterface $topicFactory,
         EntityRepository $topicRepository,
         ObjectManager $manager
-    )
-    {
+    ) {
         $this->sharedStorage = $sharedStorage;
         $this->topicFactory = $topicFactory;
         $this->topicRepository = $topicRepository;
         $this->manager = $manager;
     }
-
 
     /**
      * @Given there is a topic with title :title written by :customer
@@ -72,7 +69,7 @@ class TopicContext implements Context
      * @Given there is a topic with title :title written by :customer, created :date
      * @Given I wrote a topic with title :title
      *
-     * @param string $title
+     * @param string                 $title
      * @param CustomerInterface|null $customer
      */
     public function thereIsTopicWithTitleWrittenByCustomer($title, CustomerInterface $customer = null, $date = 'now')

@@ -23,6 +23,12 @@ services:
         resource: '../src/Command/*'
         tags: [command_handler]
 
+    app.factory.bgg_product:
+        class: App\Factory\BggProductFactory
+        arguments:
+            - 'App\Entity\BggProduct'
+            - 'https://www.boardgamegeek.com/xmlapi/boardgame'
+
     app.templating.helper.currency:
         class: App\Templating\Helper\CurrencyHelper
         lazy: true
@@ -41,7 +47,6 @@ imports:
     - { resource: services/block.yml }
     - { resource: services/calculator.yml }
     - { resource: services/context.yml }
-    - { resource: services/controller.yml }
     - { resource: services/feed.yml }
     - { resource: services/filter.yml }
     - { resource: services/fixtures.yml }

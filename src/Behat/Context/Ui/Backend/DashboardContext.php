@@ -12,7 +12,7 @@
 namespace App\Behat\Context\Ui\Backend;
 
 use App\Behat\Page\Backend\DashboardPage;
-use App\Behat\Page\UnexpectedPageException;
+use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Behat\Behat\Context\Context;
 use Webmozart\Assert\Assert;
 
@@ -51,7 +51,6 @@ class DashboardContext implements Context
     {
         try {
             $this->dashboardPage->open();
-
         } catch (UnexpectedPageException $exception) {
             // nothing else to do
         }

@@ -24,7 +24,7 @@ class AbstractProductAssociationUpdater
     /**
      * @var FactoryInterface
      */
-    protected $factory;
+    protected $productAssociationFactory;
 
     /**
      * AbstractProductAssociationUpdater constructor.
@@ -33,11 +33,11 @@ class AbstractProductAssociationUpdater
      */
     public function __construct(FactoryInterface $factory)
     {
-        $this->factory = $factory;
+        $this->productAssociationFactory = $factory;
     }
 
     /**
-     * @param ProductInterface $product
+     * @param ProductInterface                $product
      * @param ProductAssociationTypeInterface $associationType
      *
      * @return ProductAssociationInterface
@@ -51,7 +51,7 @@ class AbstractProductAssociationUpdater
         }
 
         /** @var ProductAssociationInterface $productAssociation */
-        $productAssociation = $this->factory->createNew();
+        $productAssociation = $this->productAssociationFactory->createNew();
         $productAssociation->setType($associationType);
         $product->addAssociation($productAssociation);
 

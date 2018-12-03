@@ -30,7 +30,7 @@ class PageViewsService
      * GetPageViews constructor.
      *
      * @param \Google_Client $client
-     * @param string $profileId
+     * @param string         $profileId
      */
     public function __construct(\Google_Client $client, $profileId)
     {
@@ -48,17 +48,17 @@ class PageViewsService
         $analytics = new \Google_Service_Analytics($this->client);
         $results = $this->getResults($analytics, $this->profileId, $pagePath);
 
-        if ($results->totalResults === 0) {
+        if (0 === $results->totalResults) {
             return 0;
         }
 
-        return (int)$results->rows[0][1];
+        return (int) $results->rows[0][1];
     }
 
     /**
      * @param \Google_Service_Analytics $analytics
-     * @param string $profileId
-     * @param string $pagePath
+     * @param string                    $profileId
+     * @param string                    $pagePath
      *
      * @return \Google_Service_Analytics_GaData
      */
@@ -67,20 +67,20 @@ class PageViewsService
         // Calls the Core Reporting API and queries for the number of sessions
         // for the last seven days.
         return $analytics->data_ga->get(
-            'ga:' . $profileId,
+            'ga:'.$profileId,
             '2005-01-01',
             'today',
             'ga:uniquePageviews',
             [
                 'dimensions' => 'ga:pagePath',
-                'filters' => 'ga:pagePath==' . $pagePath,
+                'filters' => 'ga:pagePath=='.$pagePath,
             ]);
     }
 
     /**
      * @param \Google_Service_Analytics $analytics
-     * @param string $profileId
-     * @param string $pagePath
+     * @param string                    $profileId
+     * @param string                    $pagePath
      *
      * @return \Google_Service_Analytics_RealtimeData
      */
@@ -89,11 +89,11 @@ class PageViewsService
         // Calls the Core Reporting API and queries for the number of sessions
         // for the last seven days.
         return $analytics->data_realtime->get(
-            'ga:' . $profileId,
+            'ga:'.$profileId,
             'rt:pageviews',
             [
                 'dimensions' => 'rt:pagePath',
-                'filters' => 'rt:pagePath==' . $pagePath,
+                'filters' => 'rt:pagePath=='.$pagePath,
             ]);
     }
 }

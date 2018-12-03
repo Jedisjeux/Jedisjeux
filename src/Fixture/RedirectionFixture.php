@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of Jedisjeux
+ * This file is part of Jedisjeux.
  *
  * (c) Loïc Frémont
  *
@@ -33,9 +33,9 @@ class RedirectionFixture extends AbstractResourceFixture
     {
         $resourceNode
             ->children()
-            ->scalarNode('source')->cannotBeEmpty()->end()
-            ->scalarNode('destination')->cannotBeEmpty()->end()
-            ->scalarNode('permanent')->cannotBeEmpty()->end()
+                ->scalarNode('source')->cannotBeEmpty()->end()
+                ->scalarNode('destination')->cannotBeEmpty()->end()
+                ->scalarNode('permanent')->cannotBeEmpty()->end()
         ;
     }
 }

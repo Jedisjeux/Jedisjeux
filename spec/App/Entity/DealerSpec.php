@@ -59,6 +59,8 @@ class DealerSpec extends ObjectBehavior
 
     function its_price_list_is_mutable(PriceList $priceList)
     {
+        $priceList->setDealer($this)->shouldBeCalled();
+
         $this->setPriceList($priceList);
         $this->getPriceList()->shouldReturn($priceList);
     }
@@ -70,6 +72,8 @@ class DealerSpec extends ObjectBehavior
 
     function it_adds_pub_banner(PubBanner $pubBanner)
     {
+        $pubBanner->setDealer($this)->shouldBeCalled();
+
         $this->addPubBanner($pubBanner);
         $this->hasPubBanner($pubBanner)->shouldReturn(true);
     }
@@ -91,6 +95,8 @@ class DealerSpec extends ObjectBehavior
 
     function it_adds_contact(DealerContact $contact)
     {
+        $contact->setDealer($this)->shouldBeCalled();
+
         $this->addContact($contact);
         $this->hasContact($contact)->shouldReturn(true);
     }

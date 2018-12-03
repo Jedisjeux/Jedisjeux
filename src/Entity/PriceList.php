@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of Jedisjeux
+ * This file is part of Jedisjeux.
  *
  * (c) Loïc Frémont
  *
@@ -13,7 +13,6 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Resource\Model\ResourceInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -40,7 +39,7 @@ class PriceList implements ResourceInterface
     protected $path;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(type="boolean")
      */
@@ -54,14 +53,14 @@ class PriceList implements ResourceInterface
     protected $delimiter = ';';
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(type="boolean", name="is_utf8")
      */
     protected $utf8 = true;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(type="boolean")
      */
@@ -100,7 +99,7 @@ class PriceList implements ResourceInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function hasHeaders(): bool
     {
@@ -108,7 +107,7 @@ class PriceList implements ResourceInterface
     }
 
     /**
-     * @param boolean $headers
+     * @param bool $headers
      */
     public function setHeaders(bool $headers): void
     {
@@ -148,7 +147,7 @@ class PriceList implements ResourceInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isActive(): bool
     {
@@ -156,7 +155,7 @@ class PriceList implements ResourceInterface
     }
 
     /**
-     * @param boolean $active
+     * @param bool $active
      */
     public function setActive(bool $active): void
     {

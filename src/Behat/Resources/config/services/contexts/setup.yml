@@ -18,13 +18,12 @@ services:
             tags:
                 - { name: fob.context_service }
 
-        app.behat.context.setup.security:
-            class: App\Behat\Context\Setup\SecurityContext
+        app.behat.context.setup.contact_request:
+            class: App\Behat\Context\Setup\ContactRequestContext
             arguments:
                 - "@app.behat.shared_storage"
-                - "@app.behat.admin_security"
-                - "@__symfony__.app.fixture.example_factory.app_user"
-                - "@__symfony__.sylius.repository.app_user"
+                - "@__symfony__.app.fixture.example_factory.contact_request"
+                - "@__symfony__.app.repository.contact_request"
             tags:
                 - { name: fob.context_service }
 
@@ -99,6 +98,7 @@ services:
             arguments:
                 - "@app.behat.shared_storage"
                 - "@__symfony__.app.fixture.example_factory.product"
+                - "@__symfony__.sylius.factory.product_variant"
                 - "@__symfony__.sylius.repository.product"
                 - "@__symfony__.doctrine.orm.entity_manager"
             tags:
@@ -122,11 +122,30 @@ services:
             tags:
                 - { name: fob.context_service }
 
+        app.behat.context.setup.product_video:
+            class: App\Behat\Context\Setup\ProductVideoContext
+            arguments:
+                - "@app.behat.shared_storage"
+                - "@__symfony__.app.fixture.example_factory.product_video"
+                - "@__symfony__.app.repository.product_video"
+            tags:
+                - { name: fob.context_service }
+
         app.behat.context.setup.redirection:
             class: App\Behat\Context\Setup\RedirectionContext
             arguments:
                 - "@__symfony__.app.fixture.example_factory.redirection"
                 - "@__symfony__.app.repository.redirection"
+            tags:
+                - { name: fob.context_service }
+
+        app.behat.context.setup.security:
+            class: App\Behat\Context\Setup\SecurityContext
+            arguments:
+                - "@app.behat.shared_storage"
+                - "@app.behat.admin_security"
+                - "@__symfony__.app.fixture.example_factory.app_user"
+                - "@__symfony__.sylius.repository.app_user"
             tags:
                 - { name: fob.context_service }
 

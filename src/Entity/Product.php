@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of Jedisjeux
+ * This file is part of Jedisjeux.
  *
  * (c) Loïc Frémont
  *
@@ -39,13 +39,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Product extends BaseProduct implements ReviewableInterface
 {
     /**
-     * status constants
+     * status constants.
      */
-    const STATUS_NEW = "new";
-    const PENDING_TRANSLATION = "pending_translation";
-    const PENDING_REVIEW = "pending_review";
-    const PENDING_PUBLICATION = "pending_publication";
-    const PUBLISHED = "published";
+    const STATUS_NEW = 'new';
+    const PENDING_TRANSLATION = 'pending_translation';
+    const PENDING_REVIEW = 'pending_review';
+    const PENDING_PUBLICATION = 'pending_publication';
+    const PUBLISHED = 'published';
 
     /**
      * @var string
@@ -72,7 +72,7 @@ class Product extends BaseProduct implements ReviewableInterface
     protected $mainTaxon;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
      *
@@ -88,7 +88,7 @@ class Product extends BaseProduct implements ReviewableInterface
     protected $minAge;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
      *
@@ -104,7 +104,7 @@ class Product extends BaseProduct implements ReviewableInterface
     protected $minPlayerCount;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
      *
@@ -120,7 +120,7 @@ class Product extends BaseProduct implements ReviewableInterface
     protected $maxPlayerCount;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
      *
@@ -136,7 +136,7 @@ class Product extends BaseProduct implements ReviewableInterface
     protected $minDuration;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
      *
@@ -152,7 +152,7 @@ class Product extends BaseProduct implements ReviewableInterface
     protected $maxDuration;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(type="boolean")
      */
@@ -173,6 +173,20 @@ class Product extends BaseProduct implements ReviewableInterface
     protected $viewCount = 0;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     */
+    protected $reviewCount = 0;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     */
+    protected $commentedReviewCount = 0;
+
+    /**
      * @var ArrayCollection
      */
     protected $reviews;
@@ -180,7 +194,7 @@ class Product extends BaseProduct implements ReviewableInterface
     /**
      * @var ArrayCollection|ProductBarcode[]
      *
-     * @ORM\OneToMany(targetEntity="ProductBarcode", mappedBy="product", cascade={"persist", "merge", "remove"})
+     * @ORM\OneToMany(targetEntity="ProductBarcode", mappedBy="product", cascade={"persist", "merge", "remove"}, orphanRemoval=true)
      */
     protected $barcodes;
 
@@ -223,6 +237,13 @@ class Product extends BaseProduct implements ReviewableInterface
     protected $notifications;
 
     /**
+     * @var Collection|ProductVideo[]
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\ProductVideo", orphanRemoval=true, mappedBy="product")
+     */
+    protected $videos;
+
+    /**
      * Product constructor.
      */
     public function __construct()
@@ -237,12 +258,13 @@ class Product extends BaseProduct implements ReviewableInterface
         $this->gamePlays = new ArrayCollection();
         $this->notifications = new ArrayCollection();
         $this->barcodes = new ArrayCollection();
+        $this->videos = new ArrayCollection();
         $this->code = uniqid('product_');
     }
 
     /**
      * @param string $name
-     * @param bool $updateVariant
+     * @param bool   $updateVariant
      */
     public function setName(?string $name, $updateVariant = true): void
     {
@@ -338,9 +360,9 @@ class Product extends BaseProduct implements ReviewableInterface
 
         // todo remove after sylius update (variants will be sorted by position)
         $sort = Criteria::create();
-        $sort->orderBy(Array(
-            'position' => Criteria::ASC
-        ));
+        $sort->orderBy([
+            'position' => Criteria::ASC,
+        ]);
 
         return $this->variants->matching($sort)->first();
     }
@@ -376,7 +398,7 @@ class Product extends BaseProduct implements ReviewableInterface
 
         /** @var ProductVariant $variant */
         foreach ($this->variants as $variant) {
-            foreach($variant->getImages() as $image) {
+            foreach ($variant->getImages() as $image) {
                 $collection->add($image);
             }
         }
@@ -412,7 +434,7 @@ class Product extends BaseProduct implements ReviewableInterface
         }
 
         return $this->taxons->filter(function (TaxonInterface $taxon) use ($taxonomy) {
-            return $taxonomy !== 'forum';
+            return 'forum' !== $taxonomy;
         });
     }
 
@@ -541,7 +563,7 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isDurationByPlayer(): bool
     {
@@ -549,7 +571,7 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
-     * @param boolean $durationByPlayer
+     * @param bool $durationByPlayer
      */
     public function setDurationByPlayer(bool $durationByPlayer): void
     {
@@ -589,13 +611,44 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
+     * @return int
+     */
+    public function getReviewCount(): int
+    {
+        return $this->reviewCount;
+    }
+
+    /**
+     * @param int $reviewCount
+     */
+    public function setReviewCount(int $reviewCount): void
+    {
+        $this->reviewCount = $reviewCount;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCommentedReviewCount(): int
+    {
+        return $this->commentedReviewCount;
+    }
+
+    /**
+     * @param int $commentedReviewCount
+     */
+    public function setCommentedReviewCount(int $commentedReviewCount): void
+    {
+        $this->commentedReviewCount = $commentedReviewCount;
+    }
+
+    /**
      * @return Collection|Person[]
      */
     public function getDesigners(): Collection
     {
         return $this->getFirstVariant()->getDesigners();
     }
-
 
     /**
      * @return Collection|Person[]
@@ -751,10 +804,20 @@ class Product extends BaseProduct implements ReviewableInterface
 
     /**
      * @param ProductBarcode $barcode
+     *
+     * @return bool
      */
-    public function addBarcode($barcode): void
+    public function hasBarcode(ProductBarcode $barcode): bool
     {
-        if (!$this->barcodes->contains($barcode)) {
+        return $this->barcodes->contains($barcode);
+    }
+
+    /**
+     * @param ProductBarcode $barcode
+     */
+    public function addBarcode(ProductBarcode $barcode): void
+    {
+        if (!$this->hasBarcode($barcode)) {
             $barcode->setProduct($this);
             $this->barcodes->add($barcode);
         }
@@ -763,9 +826,10 @@ class Product extends BaseProduct implements ReviewableInterface
     /**
      * @param ProductBarcode $barcode
      */
-    public function removeBarcode($barcode): void
+    public function removeBarcode(ProductBarcode $barcode): void
     {
-        $this->barcodes->remove($barcode);
+        $this->barcodes->removeElement($barcode);
+        $barcode->setProduct(null);
     }
 
     /**
@@ -812,6 +876,44 @@ class Product extends BaseProduct implements ReviewableInterface
         return $this->gamePlays->filter(function (GamePlay $gamePlay) use ($author) {
             return $author === $gamePlay->getAuthor();
         });
+    }
+
+    /**
+     * @return ProductVideo[]|Collection
+     */
+    public function getVideos(): Collection
+    {
+        return $this->videos;
+    }
+
+    /**
+     * @param ProductVideo $video
+     *
+     * @return bool
+     */
+    public function hasVideo(ProductVideo $video): bool
+    {
+        return $this->videos->contains($video);
+    }
+
+    /**
+     * @param ProductVideo $video
+     */
+    public function addVideo(ProductVideo $video): void
+    {
+        if (!$this->hasVideo($video)) {
+            $this->videos->add($video);
+            $video->setProduct($this);
+        }
+    }
+
+    /**
+     * @param ProductVideo $video
+     */
+    public function removeVideo(ProductVideo $video): void
+    {
+        $this->videos->removeElement($video);
+        $video->setProduct(null);
     }
 
     /**

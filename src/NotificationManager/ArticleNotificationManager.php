@@ -53,13 +53,18 @@ class ArticleNotificationManager
      * ProductNotificationManager constructor.
      *
      * @param NotificationFactory $factory
-     * @param ObjectManager $manager
-     * @param UserRepository $userRepository
-     * @param RouterInterface $router
+     * @param ObjectManager       $manager
+     * @param UserRepository      $userRepository
+     * @param RouterInterface     $router
      * @param TranslatorInterface $translator
      */
-    public function __construct(NotificationFactory $factory, ObjectManager $manager, UserRepository $userRepository, RouterInterface $router, TranslatorInterface $translator)
-    {
+    public function __construct(
+        NotificationFactory $factory,
+        ObjectManager $manager,
+        UserRepository $userRepository,
+        RouterInterface $router,
+        TranslatorInterface $translator
+    ) {
         $this->factory = $factory;
         $this->manager = $manager;
         $this->userRepository = $userRepository;
@@ -94,16 +99,16 @@ class ArticleNotificationManager
     }
 
     /**
-     * @param string $message
+     * @param string  $message
      * @param Article $article
-     * @param array $users
+     * @param array   $users
      */
     protected function notifyUsers($message, Article $article, array $users)
     {
         foreach ($users as $user) {
             $notification = $this->factory->createForArticle($article, $user->getCustomer());
             $notification->setTarget($this->router->generate('app_frontend_article_show', [
-                'slug' => $article->getSlug()
+                'slug' => $article->getSlug(),
             ]));
             $notification->setMessage($message);
 

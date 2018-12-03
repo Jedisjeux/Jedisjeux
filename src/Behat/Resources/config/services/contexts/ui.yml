@@ -25,6 +25,23 @@ services:
         tags:
             - { name: fob.context_service }
 
+    app.behat.context.ui.backend.managing_contact_requests:
+        class: App\Behat\Context\Ui\Backend\ManagingContactRequestsContext
+        arguments:
+            - "@app.behat.page.backend.contact_request.index"
+            - "@app.behat.page.backend.contact_request.show"
+        tags:
+            - { name: fob.context_service }
+
+    app.behat.context.ui.backend.managing_customers:
+        class: App\Behat\Context\Ui\Backend\ManagingCustomersContext
+        arguments:
+            - "@app.behat.page.backend.customer.index"
+            - "@app.behat.page.backend.customer.update"
+            - "@app.behat.current_page_resolver"
+        tags:
+            - { name: fob.context_service }
+
     app.behat.context.ui.backend.managing_dealers:
         class: App\Behat\Context\Ui\Backend\ManagingDealersContext
         arguments:
@@ -78,6 +95,7 @@ services:
         arguments:
             - "@app.behat.page.backend.product.index"
             - "@app.behat.page.backend.product.create"
+            - "@app.behat.page.backend.product.create_from_bgg"
             - "@app.behat.page.backend.product.update"
             - "@app.behat.current_page_resolver"
         tags:
@@ -101,6 +119,14 @@ services:
         tags:
             - { name: fob.context_service }
 
+    app.behat.context.ui.backend.managing_product_variants:
+        class: App\Behat\Context\Ui\Backend\ManagingProductVariantsContext
+        arguments:
+            - "@app.behat.page.backend.product_variant.index"
+            - "@app.behat.page.backend.product_variant.create"
+        tags:
+            - { name: fob.context_service }
+
     app.behat.context.ui.backend.managing_redirections:
         class: App\Behat\Context\Ui\Backend\ManagingRedirectionsContext
         arguments:
@@ -108,6 +134,18 @@ services:
             - "@app.behat.page.backend.redirection.create"
             - "@app.behat.page.backend.redirection.update"
             - "@app.behat.current_page_resolver"
+        tags:
+            - { name: fob.context_service }
+
+    app.behat.context.ui.backend.managing_taxons:
+        class: App\Behat\Context\Ui\Backend\ManagingTaxonsContext
+        arguments:
+            - "@app.behat.page.backend.taxon.index"
+            - "@app.behat.page.backend.taxon.index_by_parent"
+            - "@app.behat.page.backend.taxon.create"
+            - "@app.behat.page.backend.taxon.create_for_parent"
+            - "@app.behat.page.backend.taxon.update"
+            - "@app.behat.shared_storage"
         tags:
             - { name: fob.context_service }
 
@@ -296,5 +334,12 @@ services:
         arguments:
             - "@app.behat.shared_storage"
             - "@app.behat.email_checker"
+        tags:
+            - { name: fob.context_service }
+
+    app.behat.context.ui.notification:
+        class: App\Behat\Context\Ui\NotificationContext
+        arguments:
+            - "@__symfony__.app.repository.notification"
         tags:
             - { name: fob.context_service }

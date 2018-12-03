@@ -12,7 +12,7 @@
 namespace App\Behat\Page\Backend\Crud;
 
 use Behat\Mink\Element\NodeElement;
-use App\Behat\Page\SymfonyPageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -27,7 +27,7 @@ interface IndexPageInterface extends SymfonyPageInterface
     public function isSingleResourceOnPage(array $parameters);
 
     /**
-     * @param array $parameters
+     * @param array  $parameters
      * @param string $element
      *
      * @return bool

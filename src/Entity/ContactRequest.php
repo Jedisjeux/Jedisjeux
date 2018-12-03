@@ -43,7 +43,7 @@ class ContactRequest implements ResourceInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string")use Prophecy\Argument;
      */
     protected $lastName;
 
@@ -99,7 +99,7 @@ class ContactRequest implements ResourceInterface
      */
     public function getFullName(): string
     {
-        return $this->getFirstName() . ' ' . $this->getLastName();
+        return $this->getFirstName().' '.$this->getLastName();
     }
 
     /**

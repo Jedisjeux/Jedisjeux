@@ -98,6 +98,10 @@ sylius_resource:
                 model: App\Entity\ProductListItem
                 repository: App\Repository\ProductListItemRepository
                 controller: App\Controller\ProductListItemController
+        app.product_video:
+            classes:
+                model: App\Entity\ProductVideo
+                form: App\Form\Type\ProductVideoType
         app.pub_banner:
             classes:
                 model: App\Entity\PubBanner
@@ -118,6 +122,7 @@ sylius_resource:
         app.game_play_image:
             classes:
                 model: App\Entity\GamePlayImage
+                repository: App\Repository\GamePlayImageRepository
                 form: App\Form\Type\GamePlayImageType
         app.player:
             classes:

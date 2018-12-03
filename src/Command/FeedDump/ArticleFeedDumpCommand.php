@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of Jedisjeux
+ * This file is part of Jedisjeux.
  *
  * (c) Loïc Frémont
  *
@@ -12,7 +12,6 @@
 namespace App\Command\FeedDump;
 
 use App\Feed\ArticleFeedDump;
-use Eko\FeedBundle\Service\FeedDumpService;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -47,7 +46,7 @@ EOT
         $articleFeedDump->dump();
 
         $output->writeln('<comment>done!</comment>');
-        $output->writeln(sprintf('<info>Article feed has been dumped and located in "%s"</info>', $articleFeedDump->getRootDir() . $articleFeedDump->getFileName()));
+        $output->writeln(sprintf('<info>Article feed has been dumped and located in "%s"</info>', $articleFeedDump->getRootDir().$articleFeedDump->getFileName()));
     }
 
     /**

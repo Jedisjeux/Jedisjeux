@@ -28,7 +28,7 @@ use Symfony\Component\Yaml\Parser;
 class LoadTargetAudiencesCommand extends ContainerAwareCommand
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function configure()
     {
@@ -38,11 +38,11 @@ class LoadTargetAudiencesCommand extends ContainerAwareCommand
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
+        $output->writeln(sprintf('<comment>%s</comment>', $this->getDescription()));
 
         $rootTaxon = $this->getRootTaxon();
         foreach ($this->getRows() as $data) {
@@ -60,12 +60,13 @@ class LoadTargetAudiencesCommand extends ContainerAwareCommand
     {
         return $this->getContainer()
             ->get('sylius.repository.taxon')
-            ->findOneBy(array('code' => Taxon::CODE_TARGET_AUDIENCE));
+            ->findOneBy(['code' => Taxon::CODE_TARGET_AUDIENCE]);
     }
 
     /**
-     * @param array $data
+     * @param array          $data
      * @param TaxonInterface $parentTaxon
+     *
      * @return TaxonInterface
      */
     protected function createOrReplaceTaxon(array $data, TaxonInterface $parentTaxon)
@@ -92,7 +93,6 @@ class LoadTargetAudiencesCommand extends ContainerAwareCommand
         $taxon->setSlug($this->getTaxonSlugGenerator()->generate($taxon));
 
         return $taxon;
-
     }
 
     /**
@@ -108,17 +108,18 @@ class LoadTargetAudiencesCommand extends ContainerAwareCommand
      */
     public function getYAMLFileName()
     {
-        return $this->getContainer()->get('kernel')->getRootDir() . '/Resources/initialData/target_audiences.yml';
+        return $this->getContainer()->get('kernel')->getRootDir().'/Resources/initialData/target_audiences.yml';
     }
 
-   /**
-     * Parse YAML File
+    /**
+     * Parse YAML File.
      *
      * @return mixed
      */
     public function getRows()
     {
         $yaml = new Parser();
+
         return $yaml->parse(file_get_contents($this->getYAMLFileName()));
     }
 

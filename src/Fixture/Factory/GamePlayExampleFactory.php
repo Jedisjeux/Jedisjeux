@@ -53,7 +53,7 @@ class GamePlayExampleFactory extends AbstractExampleFactory implements ExampleFa
     /**
      * GamePlayExampleFactory constructor.
      *
-     * @param FactoryInterface $gamePlayFactory
+     * @param FactoryInterface    $gamePlayFactory
      * @param RepositoryInterface $customerRepository
      * @param RepositoryInterface $productRepository
      */
@@ -115,7 +115,7 @@ class GamePlayExampleFactory extends AbstractExampleFactory implements ExampleFa
 
             ->setDefault('created_at', function (Options $options) {
                 return $this->faker->dateTimeBetween('-1 year', 'yesterday');
-            } )
+            })
             ->setAllowedTypes('created_at', ['null', 'string', \DateTimeInterface::class])
             ->setNormalizer('created_at', function (Options $options, $createdAt) {
                 if (!is_string($createdAt)) {

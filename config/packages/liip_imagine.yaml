@@ -3,9 +3,9 @@ liip_imagine:
     loaders:
         default:
             filesystem:
+                locator: filesystem_insecure
                 data_root:
-                    - "%kernel.project_dir%/public"
-                    - "/home/jedisjeux/shared/public"
+                    - '%kernel.project_dir%/public'
     filter_sets:
         # @see http://symfony.com/doc/current/bundles/LiipImagineBundle/filters.html
         cache: ~

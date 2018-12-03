@@ -37,6 +37,7 @@
     "sensio/distribution-bundle": "^5.0",
     "sensio/framework-extra-bundle": "^5.1",
     "simple-bus/symfony-bridge": "^5.1",
+    "sylius-labs/association-hydrator": "^1.1",
     "sylius-labs/sensio-distribution-bundle": "^6.0",
     "sylius/customer-bundle": "^1.2",
     "sylius/fixtures-bundle": "^1.2",
@@ -67,11 +68,15 @@
     "behat/symfony2-extension": "^2.1",
     "friends-of-behat/context-service-extension": "^1.2",
     "friends-of-behat/cross-container-extension": "^1.1",
+    "friends-of-behat/page-object-extension": "^0.2.1",
     "friends-of-behat/service-container-extension": "^1.0",
     "friends-of-behat/symfony-extension": "^1.2",
     "friends-of-behat/variadic-extension": "^1.1",
-    "lakion/api-test-case": "^3.1",
+    "friendsofphp/php-cs-fixer": "^2.13",
+    "infection/infection": "^0.10.6",
     "lakion/mink-debug-extension": "^1.2.3",
+    "lchrusciel/api-test-case": "^3.1",
+    "leanphp/phpspec-code-coverage": "^4.2",
     "phpspec/phpspec": "^4.0",
     "phpstan/phpstan-doctrine": "^0.10",
     "phpstan/phpstan-shim": "^0.10",
@@ -79,6 +84,7 @@
     "phpstan/phpstan-webmozart-assert": "^0.10",
     "phpunit/phpunit": "^7.4",
     "se/selenium-server-standalone": " ^2.52",
+    "symfony/var-dumper": "^4.1",
     "symfony/web-profiler-bundle": "^4.1",
     "symfony/web-server-bundle": "^4.1"
   },
@@ -99,7 +105,6 @@
     ]
   },
   "config": {
-    "bin-dir": "bin",
     "preferred-install": {
       "*": "dist"
     },

@@ -29,17 +29,17 @@ class PageType extends AbstractType
 
         $builder
             ->add('name', 'text', [
-                'label' => 'label.internal_name'
+                'label' => 'label.internal_name',
             ])
             ->add('title', 'text', [
-                'label' => 'label.title'
+                'label' => 'label.title',
             ])
             ->add('body', 'ckeditor', [
                 'required' => false,
-                'label'    => 'label.body',
+                'label' => 'label.body',
             ])
             ->add('publishable', null, [
-                'label' => 'label.publishable'
+                'label' => 'label.publishable',
             ])
             ->add('publishStartDate', 'datetime', [
                 'label' => 'label.publish_start_date',
@@ -48,7 +48,7 @@ class PageType extends AbstractType
                 'required' => false,
                 'attr' => [
                     'class' => 'datetime',
-                ]
+                ],
             ])
             ->add('publishEndDate', 'datetime', [
                 'label' => 'label.publish_end_date',
@@ -57,7 +57,7 @@ class PageType extends AbstractType
                 'required' => false,
                 'attr' => [
                     'class' => 'datetime',
-                ]
+                ],
             ]);
     }
 
@@ -67,7 +67,7 @@ class PageType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Symfony\Cmf\Bundle\ContentBundle\Doctrine\Phpcr\StaticContent'
+            'data_class' => 'Symfony\Cmf\Bundle\ContentBundle\Doctrine\Phpcr\StaticContent',
         ]);
     }
 

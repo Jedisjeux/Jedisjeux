@@ -27,7 +27,7 @@ class MaxPlayerCountGreaterThanOrEqualMinPlayerValidator extends ConstraintValid
     public function validate($product, Constraint $constraint)
     {
         if (!$product instanceof Product) {
-            throw new ValidatorException(sprintf("product should be an instance of %s", Product::class));
+            throw new ValidatorException(sprintf('product should be an instance of %s', Product::class));
         }
 
         if (null === $product->getMinPlayerCount()) {

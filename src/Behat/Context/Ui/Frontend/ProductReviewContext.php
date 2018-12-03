@@ -28,7 +28,7 @@ class ProductReviewContext implements Context
     private $updatePage;
 
     /**
-     * @param IndexPage $indexPage
+     * @param IndexPage  $indexPage
      * @param CreatePage $createPage
      * @param UpdatePage $updatePage
      */
@@ -82,6 +82,14 @@ class ProductReviewContext implements Context
     public function iChangeItsCommentAtAs($comment)
     {
         $this->updatePage->setComment($comment);
+    }
+
+    /**
+     * @When I change its rate with :rate point(s)
+     */
+    public function iChangeRateItWithPoints($rate)
+    {
+        $this->updatePage->rateReview($rate);
     }
 
     /**

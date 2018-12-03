@@ -43,10 +43,10 @@ class CalculateProductCountByTaxonSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             ProductEvents::PRE_CREATE => 'onProductCreate',
             ProductEvents::PRE_UPDATE => 'onProductUpdate',
-        );
+        ];
     }
 
     /**

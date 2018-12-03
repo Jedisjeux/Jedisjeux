@@ -43,10 +43,10 @@ class ArticleFeedDump
     /**
      * ArticleFeedDump constructor.
      *
-     * @param FeedDumpService $feedDump
+     * @param FeedDumpService  $feedDump
      * @param EntityRepository $repository
-     * @param string $rootDir
-     * @param string $fileName
+     * @param string           $rootDir
+     * @param string           $fileName
      */
     public function __construct(FeedDumpService $feedDump, EntityRepository $repository, $rootDir, $fileName)
     {

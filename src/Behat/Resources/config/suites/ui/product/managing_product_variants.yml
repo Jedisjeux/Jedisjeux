@@ -1,0 +1,18 @@
+default:
+    suites:
+        ui_managing_product_variants:
+            contexts_services:
+                - app.behat.context.hook.doctrine_orm
+
+                - app.behat.context.transform.customer
+                - app.behat.context.transform.product
+                - app.behat.context.transform.shared_storage
+
+                - app.behat.context.setup.security
+                - app.behat.context.setup.customer
+                - app.behat.context.setup.product
+
+                - app.behat.context.ui.backend.managing_product_variants
+                - app.behat.context.ui.backend.notification
+            filters:
+                tags: "@managing_product_variants && @ui"

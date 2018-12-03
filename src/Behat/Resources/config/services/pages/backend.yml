@@ -1,5 +1,7 @@
 imports:
     - { resource: backend/article.yml }
+    - { resource: backend/contact_request.yml }
+    - { resource: backend/customer.yml }
     - { resource: backend/dashboard.yml }
     - { resource: backend/dealer.yml }
     - { resource: backend/dealer_price.yml }
@@ -10,7 +12,9 @@ imports:
     - { resource: backend/product.yml }
     - { resource: backend/product_list.yml }
     - { resource: backend/product_review.yml }
+    - { resource: backend/product_variant.yml }
     - { resource: backend/redirection.yml }
+    - { resource: backend/taxon.yml }
     - { resource: backend/topic.yml }
 
 # Learn more about services, parameters and containers at

@@ -55,9 +55,9 @@ class PriceListType extends AbstractType
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => PriceList::class,
-        ));
+        ]);
     }
 
     /**

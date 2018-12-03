@@ -18,7 +18,6 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -27,7 +26,7 @@ class PersonType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -39,7 +38,7 @@ class PersonType extends AbstractType
                 'label' => 'sylius.ui.first_name',
                 'required' => false,
             ])
-            ->add('zone', EntityType::class, array(
+            ->add('zone', EntityType::class, [
                 'label' => 'label.zone',
                 'class' => 'App:Taxon',
                 'group_by' => 'parent',
@@ -56,7 +55,7 @@ class PersonType extends AbstractType
                 'multiple' => false,
                 'placeholder' => 'Choisissez une zone',
                 'required' => false,
-            ))
+            ])
             ->add('website', null, [
                 'label' => 'label.website',
                 'required' => false,

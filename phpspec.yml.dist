@@ -1,0 +1,14 @@
+extensions:
+    LeanPHP\PhpSpec\CodeCoverage\CodeCoverageExtension:
+        blacklist:
+            - src/Behat
+            - src/Command
+            - src/DependencyInjection
+            - src/Form/Extension
+            - src/Form/Filter
+            - src/Form/Type
+            - src/Menu
+            - src/Migrations
+            - src/Repository
+            - src/Fixture
+            - src/View

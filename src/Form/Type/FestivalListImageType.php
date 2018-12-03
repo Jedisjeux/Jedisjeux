@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of Jedisjeux
+ * This file is part of Jedisjeux.
  *
  * (c) Loïc Frémont
  *
@@ -11,7 +11,6 @@
 
 namespace App\Form\Type;
 
-use App\Entity\ArticleImage;
 use App\Entity\FestivalListImage;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,9 +26,9 @@ class FestivalListImageType extends AbstractImageType
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => FestivalListImage::class,
-        ));
+        ]);
     }
 
     /**

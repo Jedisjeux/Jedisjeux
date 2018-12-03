@@ -1,0 +1,30 @@
+{
+    "timeout": 25,
+    "source": {
+        "directories": [
+            "src"
+        ],
+        "excludes": [
+            "Behat",
+            "Command",
+            "DependencyInjection",
+            "src/Form/Extension",
+            "src/Form/Filter",
+            "src/Form/Type",
+            "src/Menu",
+            "Migrations",
+            "Repository",
+            "Fixture",
+            "View"
+        ]
+    },
+    "logs": {
+        "text": "infection-log.txt"
+    },
+    "mutators": {
+        "@default": true,
+        "IdenticalEqual": false,
+        "NotIdenticalNotEqual": false
+    },
+    "testFramework":"phpspec"
+}

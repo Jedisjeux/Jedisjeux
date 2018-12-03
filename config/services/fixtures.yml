@@ -31,6 +31,14 @@ services:
         tags:
             - { name: sylius_fixtures.fixture }
 
+    app.fixture.contact_request:
+        class: App\Fixture\ContactRequestFixture
+        arguments:
+            - "@app.manager.contact_request"
+            - "@app.fixture.example_factory.contact_request"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
     app.fixture.dealer:
         class: App\Fixture\DealerFixture
         arguments:
@@ -172,6 +180,14 @@ services:
         arguments:
             - "@sylius.manager.product_review"
             - "@app.fixture.example_factory.product_review"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
+    app.fixture.product_video:
+        class: App\Fixture\ProductVideoFixture
+        arguments:
+            - "@app.manager.product_video"
+            - "@app.fixture.example_factory.product_video"
         tags:
             - { name: sylius_fixtures.fixture }
 

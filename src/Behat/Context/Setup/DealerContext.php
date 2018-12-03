@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of Jedisjeux
+ * This file is part of Jedisjeux.
  *
  * (c) Loïc Frémont
  *
@@ -33,8 +33,9 @@ class DealerContext implements Context
 
     /**
      * DealerContext constructor.
+     *
      * @param ExampleFactoryInterface $dealerFactory
-     * @param RepositoryInterface $dealerRepository
+     * @param RepositoryInterface     $dealerRepository
      */
     public function __construct(ExampleFactoryInterface $dealerFactory, RepositoryInterface $dealerRepository)
     {

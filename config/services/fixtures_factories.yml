@@ -33,6 +33,12 @@ services:
             - "@app.repository.article"
         public: true
 
+    app.fixture.example_factory.contact_request:
+        class: App\Fixture\Factory\ContactRequestExampleFactory
+        arguments:
+            - "@app.factory.contact_request"
+        public: true
+
     app.fixture.example_factory.dealer:
         class: App\Fixture\Factory\DealerExampleFactory
         arguments:
@@ -140,6 +146,13 @@ services:
             - "@sylius.factory.product_review"
             - "@sylius.repository.product"
             - "@sylius.repository.customer"
+        public: true
+
+    app.fixture.example_factory.product_video:
+        class: App\Fixture\Factory\ProductVideoExampleFixture
+        arguments:
+            - "@app.factory.product_video"
+            - "@sylius.repository.product"
         public: true
 
     app.fixture.example_factory.redirection:

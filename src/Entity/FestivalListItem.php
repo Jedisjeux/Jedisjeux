@@ -19,7 +19,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- * 
+ *
  * @ORM\Entity
  * @ORM\Table("jdj_festival_list_item")
  *
@@ -49,42 +49,34 @@ class FestivalListItem implements ResourceInterface
     protected $product;
 
     /**
-     * @return FestivalList
+     * @return FestivalList|null
      */
-    public function getList()
+    public function getList(): ?FestivalList
     {
         return $this->list;
     }
 
     /**
-     * @param FestivalList $list
-     *
-     * @return FestivalListItem
+     * @param FestivalList|null $list
      */
-    public function setList(FestivalList $list)
+    public function setList(?FestivalList $list): void
     {
         $this->list = $list;
-
-        return $this;
     }
 
     /**
-     * @return ProductInterface
+     * @return ProductInterface|null
      */
-    public function getProduct()
+    public function getProduct(): ?ProductInterface
     {
         return $this->product;
     }
 
     /**
-     * @param ProductInterface $product
-     *
-     * @return FestivalListItem
+     * @param ProductInterface|null $product
      */
-    public function setProduct(ProductInterface $product)
+    public function setProduct(?ProductInterface $product): void
     {
         $this->product = $product;
-
-        return $this;
     }
 }

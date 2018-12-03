@@ -15,7 +15,7 @@ use App\Behat\Page\Frontend\Article\IndexByProductPage;
 use App\Behat\Page\Frontend\Article\IndexByTaxonPage;
 use App\Behat\Page\Frontend\Article\IndexPage;
 use App\Behat\Page\Frontend\Article\ShowPage;
-use App\Behat\Page\UnexpectedPageException;
+use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use App\Behat\Service\Resolver\CurrentPageResolverInterface;
 use App\Entity\Article;
 use Behat\Behat\Context\Context;
@@ -54,10 +54,10 @@ class ArticleContext implements Context
     private $currentPageResolver;
 
     /**
-     * @param ShowPage $showPage
-     * @param IndexPage $indexPage
-     * @param IndexByTaxonPage $indexByTaxonPage
-     * @param IndexByProductPage $indexByProductPage
+     * @param ShowPage                     $showPage
+     * @param IndexPage                    $indexPage
+     * @param IndexByTaxonPage             $indexByTaxonPage
+     * @param IndexByProductPage           $indexByProductPage
      * @param CurrentPageResolverInterface $currentPageResolver
      */
     public function __construct(
@@ -166,7 +166,6 @@ class ArticleContext implements Context
     {
         try {
             $this->iOpenArticlePage($article);
-
         } catch (UnexpectedPageException $exception) {
             // nothing else to do
         }
@@ -181,7 +180,6 @@ class ArticleContext implements Context
     {
         try {
             $this->iOpenArticlePage($article);
-
         } catch (UnexpectedPageException $exception) {
             // nothing else to do
         }

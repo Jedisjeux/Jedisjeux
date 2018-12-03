@@ -13,7 +13,6 @@ namespace App\Repository;
 
 use Sylius\Bundle\TaxonomyBundle\Doctrine\ORM\TaxonRepository as BaseTaxonRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>

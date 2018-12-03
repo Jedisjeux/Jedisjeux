@@ -31,11 +31,11 @@ class SlideshowBlockType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options = array()): void
+    public function buildForm(FormBuilderInterface $builder, array $options = []): void
     {
         $builder->add('children', CollectionType::class, [
             'label' => false,
-            'entry_type'   => TopImageBlockType::class,
+            'entry_type' => TopImageBlockType::class,
             'allow_add' => true,
             'allow_delete' => true,
         ]);

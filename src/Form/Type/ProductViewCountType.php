@@ -24,9 +24,9 @@ class ProductViewCountType extends AbstractViewCountType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => Product::class,
-        ));
+        ]);
     }
 
     /**

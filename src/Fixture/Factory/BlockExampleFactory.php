@@ -51,16 +51,15 @@ class BlockExampleFactory extends AbstractExampleFactory implements ExampleFacto
     private $optionsResolver;
 
     /**
-     * @param FactoryInterface $blockFactory
-     * @param FactoryInterface $blockImageFactory
+     * @param FactoryInterface    $blockFactory
+     * @param FactoryInterface    $blockImageFactory
      * @param RepositoryInterface $articleRepository
      */
     public function __construct(
         FactoryInterface $blockFactory,
         FactoryInterface $blockImageFactory,
         RepositoryInterface $articleRepository
-    )
-    {
+    ) {
         $this->blockFactory = $blockFactory;
         $this->blockImageFactory = $blockImageFactory;
         $this->articleRepository = $articleRepository;
@@ -118,11 +117,11 @@ class BlockExampleFactory extends AbstractExampleFactory implements ExampleFacto
             ->setDefault('title', null)
 
             ->setDefault('body', function (Options $options) {
-                return "<p>" . implode("</p><p>", $this->faker->paragraphs(5)) . '</p>';
+                return '<p>'.implode('</p><p>', $this->faker->paragraphs(5)).'</p>';
             })
 
             ->setDefault('image', LazyOption::randomOneImage(
-                __DIR__ . '/../../../tests/Resources/fixtures/blocks'
+                __DIR__.'/../../../tests/Resources/fixtures/blocks'
             ))
 
             ->setDefault('image_position', function (Options $options) {

@@ -47,9 +47,9 @@ class ManagingRedirectionsContext implements Context
     /**
      * ManagingPeopleContext constructor.
      *
-     * @param IndexPage $indexPage
-     * @param CreatePage $createPage
-     * @param UpdatePage $updatePage
+     * @param IndexPage                    $indexPage
+     * @param CreatePage                   $createPage
+     * @param UpdatePage                   $updatePage
      * @param CurrentPageResolverInterface $currentPageResolver
      */
     public function __construct(
@@ -153,7 +153,7 @@ class ManagingRedirectionsContext implements Context
      */
     public function iShouldBeNotifiedThatSourceIsRequired()
     {
-        Assert::same($this->createPage->getValidationMessage('source'),'Please enter a source.');
+        Assert::same($this->createPage->getValidationMessage('source'), 'Please enter a source.');
     }
 
     /**

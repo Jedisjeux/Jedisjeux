@@ -11,15 +11,18 @@
 
 namespace App\Behat\Page\Backend\Article;
 
+use App\Behat\Behaviour\WorkflowActions;
 use App\Behat\Page\Backend\Crud\UpdatePage as BaseUpdatePage;
+use Behat\Mink\Exception\ElementNotFoundException;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
 class UpdatePage extends BaseUpdatePage
 {
+    use WorkflowActions;
+
     /**
      * @param string $title
+     *
+     * @throws ElementNotFoundException
      */
     public function changeTitle($title)
     {
@@ -29,7 +32,7 @@ class UpdatePage extends BaseUpdatePage
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'title' => '#app_article_title',

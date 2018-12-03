@@ -50,11 +50,10 @@ class UserRepository extends BaseUserRepository
             ->addSelect('customer')
             ->leftJoin('o.customer', 'customer')
             ->where($queryBuilder->expr()->like('o.roles', ':role'))
-            ->setParameter('role', '%"' . $role . '"%');
+            ->setParameter('role', '%"'.$role.'"%');
 
         return $queryBuilder->getQuery()->getResult();
     }
-
 
     /**
      * @return int
@@ -69,6 +68,7 @@ class UserRepository extends BaseUserRepository
             ->select($queryBuilder->expr()->count('o'))
             ->andWhere($queryBuilder->expr()->eq($this->getPropertyName('enabled'), ':enabled'))
             ->setParameter('enabled', '1');
+
         return $queryBuilder->getQuery()->getSingleScalarResult();
     }
 }

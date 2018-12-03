@@ -12,7 +12,6 @@
 namespace App\Command\Installer\Data;
 
 use App\Entity\Person;
-use App\Entity\Product;
 use App\Repository\ProductRepository;
 use App\Updater\ProductCountByPersonUpdater;
 use Doctrine\ORM\EntityManager;
@@ -42,15 +41,15 @@ EOT
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
+        $output->writeln(sprintf('<comment>%s</comment>', $this->getDescription()));
 
         $this->calculateProductCountByPersons();
 
-        $output->writeln(sprintf("<info>%s</info>", "Product count by taxon have been successfully updated."));
+        $output->writeln(sprintf('<info>%s</info>', 'Product count by taxon have been successfully updated.'));
     }
 
     protected function calculateProductCountByPersons()
@@ -61,7 +60,6 @@ EOT
     protected function calculateProductCountByPerson()
     {
         foreach ($this->createQueryBuilder()->getQuery()->iterate() as $row) {
-
             /** @var Person $person */
             $person = $row[0];
 

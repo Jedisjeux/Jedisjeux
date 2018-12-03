@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of Jedisjeux
+ * This file is part of Jedisjeux.
  *
  * (c) Loïc Frémont
  *
@@ -11,14 +11,16 @@
 
 namespace App\Behat\Page\Frontend\ProductReview;
 
-use App\Behat\Page\SymfonyPage;
+use Behat\Mink\Exception\UnsupportedDriverActionException;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Webmozart\Assert\Assert;
 
 class CreatePage extends SymfonyPage
 {
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_frontend_product_review_create';
     }
@@ -40,7 +42,13 @@ class CreatePage extends SymfonyPage
      */
     public function setComment(?string $comment)
     {
-        $this->getElement('comment')->setValue($comment);
+        try {
+            $fieldId = $this->getElement('comment')->getAttribute('id');
+            Assert::notEmpty($fieldId);
+            $this->getSession()->executeScript("CKEDITOR.instances[\"$fieldId\"].setData(\"$comment\");");
+        } catch (UnsupportedDriverActionException $exception) {
+            $this->getElement('comment')->setValue($comment);
+        }
     }
 
     /**
@@ -50,7 +58,11 @@ class CreatePage extends SymfonyPage
      */
     public function rateReview(int $rate)
     {
-        $this->getElement('rate', ['%rate%' => $rate])->click();
+        try {
+            $this->getElement('rate', ['%rate%' => $rate])->click();
+        } catch (\Exception $e) {
+        }
+
     }
 
     /**
@@ -64,12 +76,12 @@ class CreatePage extends SymfonyPage
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'title' => '#sylius_product_review_title',
             'comment' => '#sylius_product_review_comment',
-            'rate' => '.star.rating .icon:nth-child(%rate%)',
+            'rate' => '.rate-base-layer span:nth-child(%rate%) .fa-star',
         ]);
     }
 }

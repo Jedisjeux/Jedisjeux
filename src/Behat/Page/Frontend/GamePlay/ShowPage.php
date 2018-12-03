@@ -10,7 +10,7 @@
 
 namespace App\Behat\Page\Frontend\GamePlay;
 
-use App\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Behat\Mink\Element\NodeElement;
 use Webmozart\Assert\Assert;
 
@@ -19,7 +19,7 @@ class ShowPage extends SymfonyPage
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'app_frontend_game_play_show';
     }

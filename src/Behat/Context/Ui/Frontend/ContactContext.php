@@ -15,9 +15,9 @@ namespace App\Behat\Context\Ui\Frontend;
 
 use App\Behat\NotificationType;
 use App\Behat\Page\Frontend\Contact\ContactPage;
-use App\Behat\Page\PageInterface;
 use App\Behat\Service\NotificationCheckerInterface;
 use Behat\Behat\Context\Context;
+use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
 use Webmozart\Assert\Assert;
 
 class ContactContext implements Context
@@ -33,7 +33,7 @@ class ContactContext implements Context
     private $notificationChecker;
 
     /**
-     * @param ContactPage $contactPage
+     * @param ContactPage                  $contactPage
      * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
@@ -51,7 +51,6 @@ class ContactContext implements Context
     {
         $this->contactPage->open();
     }
-
 
     /**
      * @When I specify the first name as :firstName
@@ -146,8 +145,8 @@ class ContactContext implements Context
 
     /**
      * @param PageInterface $page
-     * @param string $element
-     * @param string $expectedMessage
+     * @param string        $element
+     * @param string        $expectedMessage
      */
     private function assertFieldValidationMessage(PageInterface $page, $element, $expectedMessage)
     {

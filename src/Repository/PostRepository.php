@@ -21,7 +21,7 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 class PostRepository extends EntityRepository
 {
     /**
-     * @param integer|null $topicId
+     * @param int|null $topicId
      *
      * @return QueryBuilder
      */
@@ -65,24 +65,22 @@ class PostRepository extends EntityRepository
      *
      * @return Pagerfanta
      */
-    public function createFilterPaginator($criteria = array(), $sorting = array())
+    public function createFilterPaginator($criteria = [], $sorting = [])
     {
         $queryBuilder = $this->getQueryBuilder();
 
         if (!empty($criteria['query'])) {
-
             $queryBuilder
                 ->where($queryBuilder->expr()->orX(
                     'user.username like :query',
                     'topic.title like :query'
                 ))
-                ->setParameter('query', '%' . $criteria['query'] . '%');
+                ->setParameter('query', '%'.$criteria['query'].'%');
 
             unset($criteria['query']);
         }
 
         if (isset($criteria['product'])) {
-
             $queryBuilder
                 ->where($queryBuilder->expr()->orX(
                     'article.product = :product',
@@ -101,8 +99,8 @@ class PostRepository extends EntityRepository
             $sorting['createdAt'] = 'desc';
         }
 
-        $this->applyCriteria($queryBuilder, (array)$criteria);
-        $this->applySorting($queryBuilder, (array)$sorting);
+        $this->applyCriteria($queryBuilder, (array) $criteria);
+        $this->applySorting($queryBuilder, (array) $sorting);
 
         return $this->getPaginator($queryBuilder);
     }

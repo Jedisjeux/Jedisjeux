@@ -23,4 +23,19 @@ class RedirectionSpec extends ObjectBehavior
     {
         $this->shouldHaveType(BaseRedirect::class);
     }
+
+    function it_has_no_source_by_default()
+    {
+        $this->getSource()->shouldReturn(null);
+    }
+
+    function it_has_no_destination_by_default()
+    {
+        $this->getDestination()->shouldReturn(null);
+    }
+
+    function it_is_permanent_by_default()
+    {
+        $this->shouldBePermanent();
+    }
 }

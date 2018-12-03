@@ -1,9 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: loic
- * Date: 07/03/2016
- * Time: 17:03
+
+/*
+ * This file is part of Jedisjeux.
+ *
+ * (c) Loïc Frémont
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace App\Entity;
@@ -11,13 +14,10 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
 use Sylius\Component\Product\Model\ProductVariant as BaseProductVariant;
 
 /**
- * @author Loïc Frémont <loic@mobizel.com>
- *
  * @ORM\Entity
  * @ORM\Table(name="sylius_product_variant")
  *
@@ -362,6 +362,6 @@ class ProductVariant extends BaseProductVariant
     {
         $name = $this->getTranslation()->getName();
 
-        return !empty($name) ? $name : "";
+        return !empty($name) ? $name : '';
     }
 }

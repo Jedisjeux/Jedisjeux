@@ -38,7 +38,7 @@ class TopicType extends AbstractType
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -47,14 +47,14 @@ class TopicType extends AbstractType
         $onlyPublic = $this->authorizationChecker->isGranted('ROLE_STAFF') ? false : true;
 
         $builder
-            ->add('title', null, array(
-                'label' => 'label.title',
-            ))
-            ->add('mainPost', PostType::class,  array(
+            ->add('title', null, [
+                'label' => 'sylius.ui.title',
+            ])
+            ->add('mainPost', PostType::class, [
                 'label' => false,
-            ))
-            ->add('mainTaxon', EntityType::class, array(
-                'label' => 'label.category',
+            ])
+            ->add('mainTaxon', EntityType::class, [
+                'label' => 'sylius.ui.category',
                 'class' => 'App:Taxon',
                 'group_by' => 'parent',
                 'query_builder' => function (EntityRepository $er) use ($onlyPublic) {
@@ -77,11 +77,11 @@ class TopicType extends AbstractType
                 'multiple' => false,
                 'placeholder' => 'Choisissez une catégorie',
                 'required' => false,
-            ));
+            ]);
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getBlockPrefix()
     {

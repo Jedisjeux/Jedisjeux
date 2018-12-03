@@ -2,6 +2,7 @@
 
 namespace spec\App\EventSubscriber;
 
+use App\AppEvents;
 use App\Entity\Article;
 use App\Entity\Post;
 use App\Entity\Topic;
@@ -28,6 +29,13 @@ class CreateTopicForArticleSubscriberSpec extends ObjectBehavior
         $this->shouldHaveType(CreateTopicForArticleSubscriber::class);
     }
 
+    function it_subscribes_to_post_create_event()
+    {
+        $this::getSubscribedEvents()->shouldReturn([
+            AppEvents::POST_PRE_CREATE => 'onCreate',
+        ]);
+    }
+
     function it_creates_topic_for_article(
         GenericEvent $event,
         Post $post,
@@ -35,7 +43,8 @@ class CreateTopicForArticleSubscriberSpec extends ObjectBehavior
         Article $article,
         TopicRepository $topicRepository,
         TopicFactory $topicFactory,
-        CustomerInterface $author
+        CustomerInterface $author,
+        ObjectManager $manager
     ): void
     {
         $event->getSubject()->willReturn($post);
@@ -45,6 +54,9 @@ class CreateTopicForArticleSubscriberSpec extends ObjectBehavior
         $post->getAuthor()->willReturn($author);
 
         $topicFactory->createForArticle($article)->shouldBeCalled();
+        $manager->persist($topic)->shouldBeCalled();
+        $topic->addPost($post)->shouldBeCalled();
+        $topic->addFollower($author)->shouldBeCalled();
 
         $this->onCreate($event);
     }
@@ -63,6 +75,21 @@ class CreateTopicForArticleSubscriberSpec extends ObjectBehavior
         $post->getArticle()->willReturn($article);
         $topicRepository->findOneByArticle($article)->willReturn($topic);
         $post->getAuthor()->willReturn($author);
+
+        $topicFactory->createForArticle($article)->shouldNotBeCalled();
+
+        $this->onCreate($event);
+    }
+
+    function it_does_nothing_if_it_is_not_an_article_post(
+        GenericEvent $event,
+        Post $post,
+        Article $article,
+        TopicFactory $topicFactory
+    )
+    {
+        $event->getSubject()->willReturn($post);
+        $post->getArticle()->willReturn(null);
 
         $topicFactory->createForArticle($article)->shouldNotBeCalled();
 

@@ -73,6 +73,13 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
+    app.subscriber.calculate_commented_review_count_by_product:
+        class: App\EventSubscriber\CalculateCommentedReviewCountByProductSubscriber
+        arguments:
+            - "@app.updater.commented_review_count_by_product"
+        tags:
+            - { name: doctrine.event_subscriber }
+
     app.subscriber.calculate_image_count_by_game_play:
         class: App\EventSubscriber\CalculateImageCountByGamePlaySubscriber
         arguments:
@@ -105,5 +112,12 @@ services:
         class: App\EventSubscriber\CalculateProductCountByPersonSubscriber
         arguments:
             - "@app.updater.product_count_by_person"
+        tags:
+            - { name: kernel.event_subscriber }
+
+    app.subscriber.calculate_review_count_by_product:
+        class: App\EventSubscriber\CalculateReviewCountByProductSubscriber
+        arguments:
+            - "@app.updater.review_count_by_product"
         tags:
             - { name: kernel.event_subscriber }

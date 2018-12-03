@@ -47,14 +47,13 @@ class GamePlayImageExampleFactory extends AbstractExampleFactory implements Exam
     /**
      * GamePlayExampleFactory constructor.
      *
-     * @param FactoryInterface $gamePlayImageFactory
+     * @param FactoryInterface    $gamePlayImageFactory
      * @param RepositoryInterface $gamePlayRepository
      */
     public function __construct(
         FactoryInterface $gamePlayImageFactory,
         RepositoryInterface $gamePlayRepository
-    )
-    {
+    ) {
         $this->gamePlayImageFactory = $gamePlayImageFactory;
         $this->gamePlayRepository = $gamePlayRepository;
 
@@ -71,7 +70,7 @@ class GamePlayImageExampleFactory extends AbstractExampleFactory implements Exam
     {
         $resolver
             ->setDefault('image', LazyOption::randomOneImage(
-                __DIR__ . '/../../../tests/Resources/fixtures/game_plays'
+                __DIR__.'/../../../tests/Resources/fixtures/game_plays'
             ))
 
             ->setDefault('description', function (Options $options) {
@@ -103,7 +102,7 @@ class GamePlayImageExampleFactory extends AbstractExampleFactory implements Exam
 
     /**
      * @param GamePlayImage $gamePlayImage
-     * @param array $options
+     * @param array         $options
      */
     private function createImage(GamePlayImage $gamePlayImage, array $options)
     {

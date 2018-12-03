@@ -40,8 +40,8 @@ final class LocaleSetup
 
     /**
      * @param RepositoryInterface $localeRepository
-     * @param FactoryInterface $localeFactory
-     * @param string $locale
+     * @param FactoryInterface    $localeFactory
+     * @param string              $locale
      */
     public function __construct(RepositoryInterface $localeRepository, FactoryInterface $localeFactory, $locale)
     {
@@ -50,9 +50,6 @@ final class LocaleSetup
         $this->locale = trim($locale);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setup(InputInterface $input, OutputInterface $output)
     {
         $name = $this->getLanguageName($this->locale);

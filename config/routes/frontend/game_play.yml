@@ -11,7 +11,7 @@ app_frontend_game_play_create:
             section: frontend
             factory:
                 method: createForProduct
-                arguments: [$productSlug]
+                arguments: ['%locale%', $productSlug]
             redirect:
                 route: app_frontend_game_play_show
                 parameters: { productSlug: $productSlug, id: resource.id }

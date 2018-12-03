@@ -11,7 +11,7 @@ matrix:
     include:
         -
             sudo: required
-            php: 7.1
+            php: 7.2
             env:
                 - JEDISJEUX_SUITE="application"
                 - TRAVIS_NODE_VERSION="7.5"
@@ -27,7 +27,7 @@ matrix:
                         - oracle-java9-set-default
         -
             sudo: false
-            php: 7.1
+            php: 7.2
             env: JEDISJEUX_SUITE="docs packages"
             addons:
                 apt:

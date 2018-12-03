@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of Jedisjeux project
+ * This file is part of Jedisjeux project.
  *
  * (c) Loïc Frémont
  *

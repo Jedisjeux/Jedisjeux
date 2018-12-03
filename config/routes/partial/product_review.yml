@@ -43,5 +43,8 @@ sylius_partial_product_review_show_create_or_update_link:
         _sylius:
             template: 'frontend/product_review/_showCreateOrUpdateReviewLink.html.twig'
             repository:
-                method: findOneBy
-                arguments: [{reviewSubject: expr:service('sylius.repository.product').findOneBySlug($productSlug), author: expr:service('app.context.customer').getCustomer()}]
+                method: findOneByProductSlugAndAuthor
+                arguments:
+                    locale: expr:service('sylius.context.locale').getLocaleCode()
+                    productSlug: $productSlug
+                    author: expr:service('app.context.customer').getCustomer()

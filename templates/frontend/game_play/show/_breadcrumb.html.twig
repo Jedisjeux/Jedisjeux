@@ -5,7 +5,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><i class="fa fa-home pr-2"></i><a href="{{ path('app_homepage') }}">{{ 'sylius.ui.home'|trans }}</a></li>
             <li class="breadcrumb-item"><a href="{{ path('app_frontend_game_play_index') }}">{{ 'app.ui.game_plays'|trans }}</a></li>
-            <li class="breadcrumb-item active">Partie de Terraforming Mars</li>
+            <li class="breadcrumb-item active">{{ 'app.ui.game_play_of'|trans({'%product%': game_play.product.name }) }}</li>
         </ol>
     </div>
 </div>

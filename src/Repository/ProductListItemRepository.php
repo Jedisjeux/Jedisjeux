@@ -55,7 +55,7 @@ class ProductListItemRepository extends EntityRepository
 
     /**
      * @param CustomerInterface $customer
-     * @param string $locale
+     * @param string            $locale
      *
      * @return QueryBuilder
      */

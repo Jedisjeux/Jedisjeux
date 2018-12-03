@@ -14,13 +14,15 @@ namespace App\Repository;
 use App\Entity\Person;
 use App\Entity\Product;
 use App\Utils\DateCalculator;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Mapping;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
-use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use SyliusLabs\AssociationHydrator\AssociationHydrator;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -28,16 +30,32 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 class ProductRepository extends BaseProductRepository
 {
     /**
+     * @var AssociationHydrator
+     */
+    private $associationHydrator;
+
+    /**
+     * @param EntityManager         $entityManager
+     * @param Mapping\ClassMetadata $class
+     */
+    public function __construct(EntityManager $entityManager, Mapping\ClassMetadata $class)
+    {
+        parent::__construct($entityManager, $class);
+
+        $this->associationHydrator = new AssociationHydrator($entityManager, $class);
+    }
+
+    /**
      * @param $localeCode
-     * @param bool $onlyPublished
-     * @param array $criteria
+     * @param bool                $onlyPublished
+     * @param array               $criteria
      * @param TaxonInterface|null $taxon
      *
      * @return QueryBuilder
      */
     public function createListQueryBuilder(
         $localeCode,
-        $onlyPublished=true,
+        $onlyPublished = true,
         array $criteria = [],
         TaxonInterface $taxon = null,
         Person $person = null
@@ -113,7 +131,6 @@ class ProductRepository extends BaseProductRepository
         return $queryBuilder;
     }
 
-
     public function createListOfMostPlayedQueryBuilder($localeCode, CustomerInterface $author)
     {
         $queryBuilder = $this->createListQueryBuilder($localeCode);
@@ -163,17 +180,22 @@ class ProductRepository extends BaseProductRepository
     }
 
     /**
+     * @param string $locale
      * @param string $slug
-     * @param bool $showUnpublished
+     * @param bool   $showUnpublished
      *
      * @return ProductInterface|null
+     *
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function findOneBySlug($slug, $showUnpublished = true)
+    public function findOneBySlug(string $locale, string $slug, $showUnpublished = true)
     {
-        $queryBuilder =  $this->createQueryBuilder('o')
-            ->leftJoin('o.translations', 'translation')
+        $queryBuilder = $this->createQueryBuilder('o')
+            ->addSelect('translation')
+            ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
             ->andWhere('o.enabled = true')
             ->andWhere('translation.slug = :slug')
+            ->setParameter('locale', $locale)
             ->setParameter('slug', $slug);
 
         if (false === $showUnpublished) {
@@ -182,9 +204,19 @@ class ProductRepository extends BaseProductRepository
                 ->setParameter('published', Product::PUBLISHED);
         }
 
-        return $queryBuilder
-            ->getQuery()
-            ->getOneOrNullResult();
+        $product = $queryBuilder->getQuery()->getOneOrNullResult();
+
+        $this->associationHydrator->hydrateAssociations($product, [
+            'variants',
+            'variants.images',
+            'taxons',
+            'taxons.translations',
+            'variants.artists',
+            'variants.designers',
+            'variants.publishers',
+        ]);
+
+        return $product;
     }
 
     /**
@@ -211,7 +243,6 @@ class ProductRepository extends BaseProductRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
-
 
     /**
      * {@inheritdoc}

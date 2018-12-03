@@ -47,22 +47,20 @@ class DealerType extends AbstractType
                 'required' => false,
                 'constraints' => [new Valid()],
             ])
-            ->add('pubBanners', CollectionType::class, array(
+            ->add('pubBanners', CollectionType::class, [
                 'label' => false,
                 'entry_type' => PubBannerType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-
-            ))
-            ->add('contacts', CollectionType::class, array(
+            ])
+            ->add('contacts', CollectionType::class, [
                 'label' => false,
                 'entry_type' => DealerContactType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-
-            ));
+            ]);
     }
 
     /**
@@ -72,9 +70,9 @@ class DealerType extends AbstractType
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => Dealer::class,
-        ));
+        ]);
     }
 
     /**

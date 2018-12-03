@@ -55,7 +55,7 @@ sylius_frontend_product_show:
         _sylius:
             repository:
                 method: findOneBySlug
-                arguments: [$slug, expr:service('security.authorization_checker').isGranted('ROLE_PRODUCT_MANAGER')]
+                arguments: ['%locale%', $slug, expr:service('security.authorization_checker').isGranted('ROLE_PRODUCT_MANAGER')]
             template: frontend/product/show.html.twig
     options:
       expose: true

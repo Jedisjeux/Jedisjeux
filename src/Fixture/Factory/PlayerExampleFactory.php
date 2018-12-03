@@ -45,14 +45,13 @@ class PlayerExampleFactory extends AbstractExampleFactory
     private $optionsResolver;
 
     /**
-     * @param FactoryInterface $playerFactory
+     * @param FactoryInterface    $playerFactory
      * @param RepositoryInterface $gamePlayRepository
      */
     public function __construct(
         FactoryInterface $playerFactory,
         RepositoryInterface $gamePlayRepository
-    )
-    {
+    ) {
         $this->playerFactory = $playerFactory;
         $this->gamePlayRepository = $gamePlayRepository;
 

@@ -18,6 +18,7 @@ use App\Entity\Topic;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
@@ -46,34 +47,17 @@ class TopicFactory implements FactoryInterface
     protected $postFactory;
 
     /**
-     * @param $className
+     * @param string $className
      */
-    public function __construct($className)
-    {
+    public function __construct(
+        string $className,
+        CustomerContextInterface $customerContext,
+        RepositoryInterface $gamePlayRepository,
+        FactoryInterface $postFactory
+    ) {
         $this->className = $className;
-    }
-
-    /**
-     * @param CustomerContextInterface $customerContext
-     */
-    public function setCustomerContext(CustomerContextInterface $customerContext)
-    {
         $this->customerContext = $customerContext;
-    }
-
-    /**
-     * @param EntityRepository $gamePlayRepository
-     */
-    public function setGamePlayRepository(EntityRepository $gamePlayRepository)
-    {
         $this->gamePlayRepository = $gamePlayRepository;
-    }
-
-    /**
-     * @param FactoryInterface $postFactory
-     */
-    public function setPostFactory(FactoryInterface $postFactory)
-    {
         $this->postFactory = $postFactory;
     }
 
@@ -83,7 +67,7 @@ class TopicFactory implements FactoryInterface
     public function createNew()
     {
         /** @var Topic $topic */
-        $topic = new $this->className;
+        $topic = new $this->className();
         $topic->setAuthor($this->customerContext->getCustomer());
 
         /** @var Post $mainPost */
@@ -107,7 +91,7 @@ class TopicFactory implements FactoryInterface
         $gamePlay
             ->setTopic($topic);
 
-        $topic->setTitle("Partie de ".(string) $gamePlay->getProduct());
+        $topic->setTitle('Partie de '.(string) $gamePlay->getProduct());
         $topic->setAuthor($gamePlay->getAuthor());
 
         return $topic;

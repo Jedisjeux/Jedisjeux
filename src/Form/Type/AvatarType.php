@@ -26,9 +26,9 @@ class AvatarType extends AbstractImageType
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => Avatar::class,
-        ));
+        ]);
     }
 
     /**

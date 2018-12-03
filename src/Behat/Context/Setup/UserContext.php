@@ -44,10 +44,10 @@ final class UserContext implements Context
     private $userManager;
 
     /**
-     * @param SharedStorageInterface $sharedStorage
+     * @param SharedStorageInterface  $sharedStorage
      * @param UserRepositoryInterface $userRepository
      * @param ExampleFactoryInterface $userFactory
-     * @param ObjectManager $userManager
+     * @param ObjectManager           $userManager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -69,6 +69,31 @@ final class UserContext implements Context
     public function thereIsUserIdentifiedBy($email, $password = 'sylius')
     {
         $user = $this->userFactory->create(['email' => $email, 'password' => $password, 'enabled' => true]);
+
+        $this->sharedStorage->set('user', $user);
+
+        $this->userRepository->add($user);
+    }
+
+    /**
+     * @Given /^there is a (reviewer|translator|publisher) "([^"]*)"$/
+     */
+    public function thereIsAReviewer($role, $email, $password = 'sylius')
+    {
+        /** @var UserInterface $user */
+        $user = $this->userFactory->create([
+            'email' => $email,
+            'password' => $password,
+            'enabled' => true,
+        ]);
+
+        if ('reviewer' === $role) {
+            $user->addRole('ROLE_REVIEWER');
+        } elseif ('translator' === $role) {
+            $user->addRole('ROLE_TRANSLATOR');
+        } elseif ('publisher' === $role) {
+            $user->addRole('ROLE_PUBLISHER');
+        }
 
         $this->sharedStorage->set('user', $user);
 

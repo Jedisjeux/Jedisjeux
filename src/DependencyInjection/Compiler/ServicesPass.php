@@ -31,7 +31,7 @@ class ServicesPass implements CompilerPassInterface
 
         $container->setAlias('sylius.context.customer', 'app.context.customer')->setPublic(true);
 
-        $contextLocaleCompositeDefinition = $container->getDefinition("sylius.context.locale.composite");
+        $contextLocaleCompositeDefinition = $container->getDefinition('sylius.context.locale.composite');
         $contextLocaleCompositeDefinition->setDecoratedService(null);
 
         $authorizationCheckerDefinition = $container->getDefinition('security.authorization_checker');
@@ -45,13 +45,13 @@ class ServicesPass implements CompilerPassInterface
     {
         $topicFactoryDefinition = $container->getDefinition('app.factory.topic');
         $topicFactoryDefinition
-            ->addMethodCall('setCustomerContext', [new Reference('app.context.customer')])
-            ->addMethodCall('setGamePlayRepository', [new Reference('app.repository.game_play')])
-            ->addMethodCall('setPostFactory', [new Reference('app.factory.post')]);
+            ->addArgument(new Reference('app.context.customer'))
+            ->addArgument(new Reference('app.repository.game_play'))
+            ->addArgument(new Reference('app.factory.post'));
 
         $postFactoryDefinition = $container->getDefinition('app.factory.post');
         $postFactoryDefinition
-            ->addMethodCall('setCustomerContext', [new Reference('app.context.customer')]);
+            ->addArgument(new Reference('app.context.customer'));
 
         $notificationFactoryDefinition = $container->getDefinition('app.factory.notification');
         $notificationFactoryDefinition
@@ -60,25 +60,26 @@ class ServicesPass implements CompilerPassInterface
 
         $gamePlayFactoryDefinition = $container->getDefinition('app.factory.game_play');
         $gamePlayFactoryDefinition
-            ->addMethodCall('setProductRepository', [new Reference('sylius.repository.product')])
-            ->addMethodCall('setCustomerContext', [new Reference('app.context.customer')]);
+            ->addArgument(new Reference('sylius.repository.product'))
+            ->addArgument(new Reference('app.context.customer'));
 
         $productFactoryDefinition = $container->getDefinition('sylius.custom_factory.product');
         $productFactoryDefinition
             ->setClass(ProductFactory::class)
-            ->addMethodCall('setPersonRepository', [new Reference('app.repository.person')])
-            ->addMethodCall('setProductVariantImageFactory', [new Reference('app.factory.product_variant_image')])
-            ->addMethodCall('setSlugGenerator', [new Reference('sylius.generator.slug')]);
+            ->addArgument(new Reference('app.factory.product_variant_image'))
+            ->addArgument(new Reference('app.factory.bgg_product'))
+            ->addArgument(new Reference('sylius.generator.slug'))
+            ->addArgument(new Reference('app.repository.person'));
 
         $articleFactoryDefinition = $container->getDefinition('app.factory.article');
         $articleFactoryDefinition
-            ->addMethodCall('setProductRepository', [new Reference('sylius.repository.product')])
-            ->addMethodCall('setCustomerContext', [new Reference('app.context.customer')])
-            ->addMethodCall('setBlockFactory', [new Reference('app.factory.block')]);
+            ->addArgument(new Reference('sylius.repository.product'))
+            ->addArgument(new Reference('app.context.customer'))
+            ->addArgument(new Reference('app.factory.block'));
 
         $contactRequestFactoryDefinition = $container->getDefinition('app.factory.contact_request');
         $contactRequestFactoryDefinition
-            ->addMethodCall('setCustomerContext', [new Reference('app.context.customer')]);
+            ->addArgument(new Reference('app.context.customer'));
 
         $productListFactoryDefinition = $container->getDefinition('app.factory.product_list');
         $productListFactoryDefinition
@@ -114,7 +115,7 @@ class ServicesPass implements CompilerPassInterface
             ->setClass(PasswordUpdaterListener::class);
         $listenerPasswordUpdaterDefinition->addTag('kernel.event_listener', [
             'event' => 'sylius.customer.pre_update',
-            'method' => 'customerUpdateEvent'
+            'method' => 'customerUpdateEvent',
         ]);
     }
 }

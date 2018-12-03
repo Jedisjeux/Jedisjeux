@@ -47,10 +47,10 @@ class ArticleContext implements Context
     protected $manager;
 
     /**
-     * @param SharedStorageInterface $sharedStorage
+     * @param SharedStorageInterface  $sharedStorage
      * @param ExampleFactoryInterface $articleFactory
-     * @param RepositoryInterface $articleRepository
-     * @param EntityManager $manager
+     * @param RepositoryInterface     $articleRepository
+     * @param EntityManager           $manager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -99,6 +99,25 @@ class ArticleContext implements Context
         $article = $this->articleFactory->create([
             'title' => $title,
             'author' => $customer,
+            'status' => $status,
+            'product' => null,
+        ]);
+
+        $this->articleRepository->add($article);
+        $this->sharedStorage->set('article', $article);
+    }
+
+    /**
+     * @Given I wrote an article :title with :status status
+     *
+     * @param string $title
+     */
+    public function iWroteAnArticleWithStatus($title, $status)
+    {
+        /** @var Article $article */
+        $article = $this->articleFactory->create([
+            'title' => $title,
+            'author' => $this->sharedStorage->get('customer'),
             'status' => $status,
             'product' => null,
         ]);

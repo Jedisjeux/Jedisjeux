@@ -46,7 +46,7 @@ class ArticleFilterType extends AbstractType
                 ],
                 'choices_as_values' => true,
             ])
-            ->add('mainTaxon', 'entity', array(
+            ->add('mainTaxon', 'entity', [
                 'label' => 'label.category',
                 'class' => 'App:Taxon',
                 'choice_label' => 'name',
@@ -62,7 +62,7 @@ class ArticleFilterType extends AbstractType
                 'multiple' => false,
                 'placeholder' => '',
                 'required' => false,
-            ));
+            ]);
     }
 
     /**

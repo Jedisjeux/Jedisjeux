@@ -21,7 +21,7 @@ use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
-use Symfony\Component\Translation\Translator;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -49,7 +49,7 @@ class CreateTopicNotificationSubscriber implements EventSubscriberInterface
     protected $repository;
 
     /**
-     * @var Translator
+     * @var TranslatorInterface
      */
     protected $translator;
 
@@ -57,13 +57,18 @@ class CreateTopicNotificationSubscriber implements EventSubscriberInterface
      * CreateTopicNotificationSubscriber constructor.
      *
      * @param CustomerContextInterface $customerContext
-     * @param NotificationFactory $factory
-     * @param ObjectManager $manager
-     * @param EntityRepository $repository
-     * @param Translator $translator
+     * @param NotificationFactory      $factory
+     * @param ObjectManager            $manager
+     * @param EntityRepository         $repository
+     * @param TranslatorInterface      $translator
      */
-    public function __construct(CustomerContextInterface $customerContext, NotificationFactory $factory, ObjectManager $manager, EntityRepository $repository, Translator $translator)
-    {
+    public function __construct(
+        CustomerContextInterface $customerContext,
+        NotificationFactory $factory,
+        ObjectManager $manager,
+        EntityRepository $repository,
+        TranslatorInterface $translator
+    ) {
         $this->customerContext = $customerContext;
         $this->factory = $factory;
         $this->manager = $manager;
@@ -76,9 +81,9 @@ class CreateTopicNotificationSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             AppEvents::POST_POST_CREATE => 'onPostCreate',
-        );
+        ];
     }
 
     /**
@@ -94,7 +99,7 @@ class CreateTopicNotificationSubscriber implements EventSubscriberInterface
         }
 
         foreach ($topic->getFollowers() as $follower) {
-            /**
+            /*
              * Don't notify the current customer
              */
             if ($follower === $this->getCustomer()) {

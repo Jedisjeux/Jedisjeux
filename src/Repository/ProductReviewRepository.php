@@ -14,7 +14,7 @@ namespace App\Repository;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
 /**
@@ -79,18 +79,51 @@ class ProductReviewRepository extends EntityRepository
     }
 
     /**
+     * @param string                 $locale
+     * @param string                 $productSlug
+     * @param null|CustomerInterface $author
+     *
+     * @return null|ReviewInterface
+     *
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function findOneByProductSlugAndAuthor(
+        string $locale,
+        string $productSlug,
+        ?CustomerInterface $author
+    ): ?ReviewInterface {
+        return $this->createQueryBuilder('o')
+            ->innerJoin('o.reviewSubject', 'product')
+            ->innerJoin('product.translations', 'translation', 'WITH', 'translation.locale = :locale')
+            ->andWhere('o.author = :author')
+            ->andWhere('translation.slug = :slug')
+            ->setParameter('locale', $locale)
+            ->setParameter('slug', $productSlug)
+            ->setParameter('author', $author)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+
+    /**
      * @param string $localeCode
-     * @param ProductInterface $product
+     * @param string $productSlug
      *
      * @return QueryBuilder
      */
-    public function createListForProductQueryBuilder(string $localeCode, ProductInterface $product): QueryBuilder
+    public function createListForProductSlugQueryBuilder(string $localeCode, string $productSlug): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('o');
 
         $queryBuilder
-            ->andWhere($queryBuilder->expr()->eq('o.reviewSubject', ':product'))
-            ->setParameter('product', $product)
+            ->addSelect('product')
+            ->addSelect('translation')
+            ->join('o.reviewSubject', 'product')
+            ->join('product.translations', 'translation')
+            ->andWhere('translation.locale = :locale')
+            ->andWhere('translation.slug = :slug')
+            ->setParameter('locale', $localeCode)
+            ->setParameter('slug', $productSlug)
         ;
 
         return $queryBuilder;
@@ -113,7 +146,7 @@ class ProductReviewRepository extends EntityRepository
      */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = []): void
     {
-        if (isset($criteria['hasComment']) && $criteria['hasComment'] !== '') {
+        if (isset($criteria['hasComment']) && '' !== $criteria['hasComment']) {
             if ($criteria['hasComment']) {
                 $queryBuilder
                     ->andWhere('o.comment is not null');
@@ -123,7 +156,6 @@ class ProductReviewRepository extends EntityRepository
             }
             unset($criteria['hasComment']);
         }
-
 
         parent::applyCriteria($queryBuilder, $criteria);
     }
@@ -164,7 +196,7 @@ class ProductReviewRepository extends EntityRepository
             $sorting['updatedAt'] = 'desc';
         }
 
-        $this->applyCriteria($queryBuilder, (array)$criteria);
+        $this->applyCriteria($queryBuilder, (array) $criteria);
         $this->applySorting($queryBuilder, $sorting);
 
         return $this->getPaginator($queryBuilder);
@@ -183,7 +215,7 @@ class ProductReviewRepository extends EntityRepository
             ->select($queryBuilder->expr()->count('o'))
             ->where($queryBuilder->expr()->eq($this->getPropertyName('status'), ':status'))
             ->setParameter('status', ReviewInterface::STATUS_ACCEPTED);
+
         return $queryBuilder->getQuery()->getSingleScalarResult();
     }
-
 }

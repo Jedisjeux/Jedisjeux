@@ -1,6 +1,6 @@
 {% from 'backend/macros/sorting.html.twig' import sorting %}
 {% import 'SyliusUiBundle:Macro:buttons.html.twig' as button %}
-{% from 'macros/images.html.twig' import image %}
+{% import 'macro/image.html.twig' as images %}
 
 {% set defaultSorting = app.request.get('sorting') ? false : true %}
 {% set defaultOrder = 'desc' %}
@@ -19,7 +19,7 @@
         <tr>
             <td>
                 {% if person.mainImage %}
-                    {{ image(person.mainImage.webPath, 'thumbnail', person.fullName, 'ui circular image') }}
+                    {{ images.render(person.mainImage.webPath, 'thumbnail', person.fullName, 'ui circular image') }}
                 {% endif %}
             </td>
             <td>{{ person }}</td>

@@ -15,8 +15,12 @@ use App\Behat\Service\SharedStorageInterface;
 use App\Entity\Person;
 use App\Entity\Product;
 use App\Fixture\Factory\ExampleFactoryInterface;
+use App\Formatter\StringInflector;
 use Behat\Behat\Context\Context;
 use Doctrine\ORM\EntityManager;
+use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Product\Model\ProductVariantInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
@@ -36,6 +40,11 @@ class ProductContext implements Context
     protected $productFactory;
 
     /**
+     * @var FactoryInterface
+     */
+    protected $productVariantFactory;
+
+    /**
      * @var RepositoryInterface
      */
     protected $productRepository;
@@ -48,22 +57,23 @@ class ProductContext implements Context
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param ExampleFactoryInterface $productFactory
+     * @param FactoryInterface $productVariantFactory
      * @param RepositoryInterface $productRepository
      * @param EntityManager $manager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ExampleFactoryInterface $productFactory,
+        FactoryInterface $productVariantFactory,
         RepositoryInterface $productRepository,
         EntityManager $manager
-    )
-    {
+    ) {
         $this->sharedStorage = $sharedStorage;
         $this->productFactory = $productFactory;
+        $this->productVariantFactory = $productVariantFactory;
         $this->productRepository = $productRepository;
         $this->manager = $manager;
     }
-
 
     /**
      * @Given there is a product :name
@@ -85,6 +95,7 @@ class ProductContext implements Context
             'publishers' => [],
             'min_duration' => null,
             'max_duration' => null,
+            'box_content' => null,
         ]);
 
         $this->productRepository->add($product);
@@ -137,6 +148,20 @@ class ProductContext implements Context
 
         $this->productRepository->add($product);
         $this->sharedStorage->set('product', $product);
+    }
+
+    /**
+     * @Given /^(this product) has "([^"]+)" in its box$/
+     * @Given /^(this product) also has "([^"]+)" in its box$/
+     */
+    public function productHasContent(Product $product, $boxContent)
+    {
+        $boxContentItems = null !== $product->getBoxContent() ? explode("\n", $product->getBoxContent()) : [];
+
+        $boxContentItems[] = $boxContent;
+
+        $product->setBoxContent(implode("\n", $boxContentItems));
+        $this->manager->flush($product);
     }
 
     /**
@@ -225,5 +250,54 @@ class ProductContext implements Context
         $product->setMinPlayerCount($playerCount);
         $product->setMaxPlayerCount($playerCount);
         $this->manager->flush($product);
+    }
+
+    /**
+     * @Given /^the (product "[^"]+") has(?:| a| an) "([^"]+)" variant$/
+     * @Given /^(this product) has(?:| a| an) "([^"]+)" variant$/
+     * @Given /^(this product) has "([^"]+)", "([^"]+)" and "([^"]+)" variants$/
+     */
+    public function theProductHasVariants(ProductInterface $product, ...$variantNames)
+    {
+        foreach ($variantNames as $name) {
+            $this->createProductVariant(
+                $product,
+                $name,
+                StringInflector::nameToUppercaseCode($name)
+            );
+        }
+    }
+
+    /**
+     * @param ProductInterface $product
+     * @param string $productVariantName
+     * @param string $code
+     * @param int $position
+     *
+     * @return ProductVariantInterface
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    private function createProductVariant(
+        ProductInterface $product,
+        $productVariantName,
+        $code,
+        $position = null
+    ) {
+        /** @var ProductVariantInterface $variant */
+        $variant = $this->productVariantFactory->createNew();
+
+        $variant->setName($productVariantName);
+        $variant->setCode($code);
+        $variant->setProduct($product);
+        $variant->setPosition((null === $position) ? null : (int) $position);
+
+        $product->addVariant($variant);
+
+        $this->manager->flush();
+        $this->sharedStorage->set('variant', $variant);
+
+        return $variant;
     }
 }

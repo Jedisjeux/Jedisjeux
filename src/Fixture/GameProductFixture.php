@@ -78,7 +78,7 @@ class GameProductFixture extends AbstractFixture
             'theme2' => [
                 'code' => 'theme2',
                 'name' => 'Medieval',
-            ]
+            ],
         ];
 
         $mechanisms = [
@@ -89,7 +89,7 @@ class GameProductFixture extends AbstractFixture
             'mechanism2' => [
                 'code' => 'mechanism2',
                 'name' => 'Tile Placement',
-            ]
+            ],
         ];
 
         $targetAudiences = [

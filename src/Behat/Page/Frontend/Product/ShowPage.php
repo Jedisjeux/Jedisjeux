@@ -11,7 +11,7 @@
 
 namespace App\Behat\Page\Frontend\Product;
 
-use App\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -21,7 +21,7 @@ class ShowPage extends SymfonyPage
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_frontend_product_show';
     }
@@ -34,6 +34,16 @@ class ShowPage extends SymfonyPage
     public function getName(): string
     {
         return $this->getElement('name')->getText();
+    }
+
+    /**
+     * @return string
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     */
+    public function getBoxContent(): string
+    {
+        return $this->getElement('box_content')->getText();
     }
 
     /**
@@ -111,6 +121,11 @@ class ShowPage extends SymfonyPage
         return count($this->getElement('game_plays')->findAll('css', '.image-box'));
     }
 
+    public function countVideos(): int
+    {
+        return count($this->getElement('videos')->findAll('css', '.overlay-container'));
+    }
+
     /**
      * @param string $title
      *
@@ -148,13 +163,26 @@ class ShowPage extends SymfonyPage
     }
 
     /**
+     * @param string $title
+     *
+     * @return bool
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     */
+    public function hasVideoTitled(string $title): bool
+    {
+        return null !== $this->getElement('videos')->find('css', sprintf('.lead:contains("%s")', $title));
+    }
+
+    /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'articles' => '#articles',
             'artists' => '#product-artists',
+            'box_content' => '#box-content',
             'designers' => '#product-designers',
             'game_plays' => '#game-plays',
             'mechanisms' => '#product-mechanisms',
@@ -162,6 +190,7 @@ class ShowPage extends SymfonyPage
             'publishers' => '#product-publishers',
             'reviews' => '#reviews .comments',
             'themes' => '#product-themes',
+            'videos' => '#videos',
         ]);
     }
 }

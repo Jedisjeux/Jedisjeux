@@ -2,6 +2,7 @@
 
 namespace spec\App\EventSubscriber;
 
+use App\AppEvents;
 use App\Entity\GamePlay;
 use App\Entity\Post;
 use App\Entity\Topic;
@@ -28,6 +29,13 @@ class CreateTopicForGamePlaySubscriberSpec extends ObjectBehavior
         $this->shouldHaveType(CreateTopicForGamePlaySubscriber::class);
     }
 
+    function it_subscribes_to_post_create_event()
+    {
+        $this::getSubscribedEvents()->shouldReturn([
+            AppEvents::POST_PRE_CREATE => 'onCreate',
+        ]);
+    }
+
     function it_creates_topic_for_game_play(
         GenericEvent $event,
         Post $post,
@@ -35,7 +43,8 @@ class CreateTopicForGamePlaySubscriberSpec extends ObjectBehavior
         GamePlay $gamePlay,
         TopicRepository $topicRepository,
         TopicFactory $topicFactory,
-        CustomerInterface $author
+        CustomerInterface $author,
+        ObjectManager $manager
     ): void
     {
         $event->getSubject()->willReturn($post);
@@ -45,6 +54,9 @@ class CreateTopicForGamePlaySubscriberSpec extends ObjectBehavior
         $post->getAuthor()->willReturn($author);
 
         $topicFactory->createForGamePlay($gamePlay)->shouldBeCalled();
+        $manager->persist($topic)->shouldBeCalled();
+        $topic->addPost($post)->shouldBeCalled();
+        $topic->addFollower($author)->shouldBeCalled();
 
         $this->onCreate($event);
     }
@@ -63,6 +75,21 @@ class CreateTopicForGamePlaySubscriberSpec extends ObjectBehavior
         $post->getGamePlay()->willReturn($gamePlay);
         $topicRepository->findOneByGamePlay($gamePlay)->willReturn($topic);
         $post->getAuthor()->willReturn($author);
+
+        $topicFactory->createForGamePlay($gamePlay)->shouldNotBeCalled();
+
+        $this->onCreate($event);
+    }
+
+    function it_does_nothing_if_it_is_not_a_game_play_post(
+        GenericEvent $event,
+        Post $post,
+        GamePlay $gamePlay,
+        TopicFactory $topicFactory
+    )
+    {
+        $event->getSubject()->willReturn($post);
+        $post->getGamePlay()->willReturn(null);
 
         $topicFactory->createForGamePlay($gamePlay)->shouldNotBeCalled();
 

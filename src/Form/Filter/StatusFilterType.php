@@ -40,7 +40,7 @@ class StatusFilterType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'statuses' => []
+                'statuses' => [],
             ])
             ->setAllowedTypes('statuses', ['array']);
     }

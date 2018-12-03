@@ -1,6 +1,6 @@
 <h1 align="center">
     <a href="http://www.jedisjeux.net" target="_blank">
-        <img src="http://www.jedisjeux.net/media/cache/resolve/full/assets/frontend/img/logo.png" />
+        <img src="http://www.jedisjeux.net/media/cache/resolve/full/assets/frontend/images/logo.png" />
     </a>
     <br />
     <a href="http://travis-ci.org/Jedisjeux/Jedisjeux" title="Build status" target="_blank">
@@ -68,7 +68,7 @@ $ php bin/console doctrine:phpcr:repository:init --env=test
 You can run Behat using the following commands:
 
 ```bash
-$ bin/behat
+$ vendor/bin/behat
 ```
 
 Bug Tracking

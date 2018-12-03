@@ -40,15 +40,15 @@ EOT
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln(sprintf("<comment>%s</comment>", $this->getDescription()));
+        $output->writeln(sprintf('<comment>%s</comment>', $this->getDescription()));
 
         $this->calculateProductCountByTaxons();
 
-        $output->writeln(sprintf("<info>%s</info>", "Product count by taxon have been successfully updated."));
+        $output->writeln(sprintf('<info>%s</info>', 'Product count by taxon have been successfully updated.'));
     }
 
     protected function calculateProductCountByTaxons()

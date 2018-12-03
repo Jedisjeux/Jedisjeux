@@ -11,15 +11,12 @@
 
 namespace App\Behat\Page\Frontend\Topic;
 
-use App\Behat\Page\SymfonyPage;
-use Behat\Mink\Exception\ElementNotFoundException;
-
 class CreateForTaxonPage extends CreatePage
 {
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'app_frontend_topic_create_for_taxon';
     }
