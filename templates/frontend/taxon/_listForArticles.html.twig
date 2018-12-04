@@ -1,5 +1,10 @@
 {% for child in taxons %}
     <li>
-        <a href="{{ path('app_frontend_article_index_by_taxon', { 'slug': child.slug }) }}">{{ child.name }}</a>
+        <a href="{{ path('app_frontend_article_index_by_taxon', { 'slug': child.slug }) }}">
+            {% if child.iconClass is not null %}
+                <i class="{{ child.iconClass }} pr-2"></i>
+            {% endif %}
+            {{ child.name }}
+        </a>
     </li>
 {% endfor %}
