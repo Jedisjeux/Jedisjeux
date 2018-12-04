@@ -15,7 +15,7 @@
     }
   },
   "require": {
-    "php": "^7.1",
+    "php": "^7.2",
     "ext-zip": "*",
     "doctrine/doctrine-bundle": "^1.6",
     "doctrine/doctrine-fixtures-bundle": "^2.3",
