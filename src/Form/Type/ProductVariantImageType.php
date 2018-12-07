@@ -11,7 +11,7 @@
 
 namespace App\Form\Type;
 
-use App\Entity\ProductVariantImage;
+use App\Entity\ProductImage;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -51,7 +51,7 @@ class ProductVariantImageType extends AbstractImageType
         parent::configureOptions($resolver);
 
         $resolver->setDefaults([
-            'data_class' => ProductVariantImage::class,
+            'data_class' => ProductImage::class,
             'validation_groups' => ['sylius'],
         ]);
     }
@@ -61,6 +61,6 @@ class ProductVariantImageType extends AbstractImageType
      */
     public function getBlockPrefix()
     {
-        return 'app_product_variant_image';
+        return 'app_product_image';
     }
 }

@@ -13,7 +13,7 @@ namespace App\Fixture\Factory;
 
 use App\Entity\Product;
 use App\Entity\ProductVariant;
-use App\Entity\ProductVariantImage;
+use App\Entity\ProductImage;
 use App\Fixture\OptionsResolver\LazyOption;
 use App\Formatter\StringInflector;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
@@ -159,7 +159,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             $basename = basename($imagePath);
             $filesystem->copy($imagePath, $dir.'/'.$basename);
 
-            /** @var ProductVariantImage $image */
+            /** @var ProductImage $image */
             $image = $this->productVariantImageFactory->createNew();
             $image->setPath($basename);
 

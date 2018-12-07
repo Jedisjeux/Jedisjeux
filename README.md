@@ -53,7 +53,7 @@ default:
 Then run selenium-server-standalone:
 
 ```bash
-$ bin/selenium-server-standalone -Dwebdriver.chrome.driver=$PWD/bin/chromedriver
+$ vendor/bin/selenium-server-standalone -Dwebdriver.chrome.driver=path/to/chromedriver
 ```
 
 Then setup your test database:

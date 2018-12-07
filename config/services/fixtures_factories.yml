@@ -116,7 +116,7 @@ services:
         class: App\Fixture\Factory\ProductExampleFactory
         arguments:
             - "@sylius.factory.product"
-            - "@app.factory.product_variant_image"
+            - "@app.factory.product_image"
             - "@app.repository.person"
             - "@sylius.repository.taxon"
             - "@sylius.generator.slug"

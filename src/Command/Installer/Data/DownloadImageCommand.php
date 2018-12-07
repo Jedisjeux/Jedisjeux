@@ -73,7 +73,7 @@ class DownloadImageCommand extends ContainerAwareCommand
             'game_play_image' => $this->getContainer()->get('app.repository.game_play_image'),
             'person_image' => $this->getContainer()->get('app.repository.person_image'),
             'product_box_image' => $this->getContainer()->get('app.repository.product_box_image'),
-            'product_variant_image' => $this->getContainer()->get('app.repository.product_variant_image'),
+            'product_image' => $this->getContainer()->get('app.repository.product_image'),
             'pub_banner' => $this->getContainer()->get('app.repository.pub_banner'),
         ];
 

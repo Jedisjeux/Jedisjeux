@@ -11,7 +11,7 @@
 
 namespace App\Form\Type;
 
-use App\Entity\ProductVariantImage;
+use App\Entity\ProductImage;
 use App\Entity\ProductVideoImage;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
