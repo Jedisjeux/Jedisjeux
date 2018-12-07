@@ -65,6 +65,8 @@ sylius_grid:
             list_posts: "backend/topic/grid/action/posts.html.twig"
             list_taxons: "backend/taxon/grid/action/taxons.html.twig"
             update_product_variant_positions: "backend/product_variant/grid/action/updatePositions.html.twig"
+        bulk_action:
+            delete: "@SyliusUi/Grid/BulkAction/delete.html.twig"
         filter:
             string: "backend/grid/filter/string.html.twig"
             boolean: "backend/grid/filter/boolean.html.twig"

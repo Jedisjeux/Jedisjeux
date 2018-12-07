@@ -57,6 +57,7 @@ class ManagingTopicsContext implements Context
 
     /**
      * @When I want to browse topics
+     * @When I browse topics
      */
     public function iWantToBrowseTopics()
     {
@@ -104,9 +105,26 @@ class ManagingTopicsContext implements Context
     }
 
     /**
+     * @When I (also) check the :title topic
+     */
+    public function iCheckTheAdministrator(string $title): void
+    {
+        $this->indexPage->checkResourceOnPage(['title' => $title]);
+    }
+
+    /**
+     * @When I delete them
+     */
+    public function iDeleteThem(): void
+    {
+        $this->indexPage->bulkDelete();
+    }
+
+    /**
+     * @Then I should see a single topic in the list
      * @Then /^there should be (\d+) topics in the list$/
      */
-    public function iShouldSeeTopicsInTheList($number)
+    public function iShouldSeeTopicsInTheList($number = 1)
     {
         Assert::same($this->indexPage->countItems(), (int) $number);
     }
