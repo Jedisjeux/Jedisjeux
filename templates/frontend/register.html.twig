@@ -25,6 +25,7 @@
                             {{ form_row(form.user.username, {attr: {'placeholder': 'sylius.ui.username'|trans}}) }}
                             {{ form_row(form.user.plainPassword.first, {attr: {'placeholder': 'sylius.ui.password'|trans}}) }}
                             {{ form_row(form.user.plainPassword.second, {attr: {'placeholder': 'sylius.ui.repeat_new_password'|trans}}) }}
+                            {{ form_row(form.recaptcha) }}
 
                             {{ form_rest(form) }}
 
