@@ -35,3 +35,4 @@ Feature: Sorting listed products
         And I should see a product with name "Modern Art"
         But the first product on the list should have name "Traumfabrik"
         But I should not see a product with name "Puerto Rico"
+        
