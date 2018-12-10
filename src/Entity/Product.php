@@ -55,7 +55,7 @@ class Product extends BaseProduct implements ReviewableInterface
     protected $status;
 
     /**
-     * @var Collection|ProductImage
+     * @var Collection|ProductImage[]
      *
      * @ORM\OneToMany(targetEntity="App\Entity\ProductImage", mappedBy="product")
      */
