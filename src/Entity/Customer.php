@@ -9,6 +9,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use EWZ\Bundle\RecaptchaBundle\Validator\Constraints as Recaptcha;
 use JMS\Serializer\Annotation as JMS;
 use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\Customer\Model\Customer as BaseCustomer;
@@ -26,6 +27,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Customer extends BaseCustomer implements ReviewerInterface, UserAwareInterface
 {
+    /**
+     * @Recaptcha\IsTrue
+     */
+    public $recaptcha;
+
     /**
      * @var UserInterface
      *
