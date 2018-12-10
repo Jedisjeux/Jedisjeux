@@ -1,5 +1,19 @@
 ## Change Log
 
+### v2.1.0 (2018/12/10)
+- [#369](https://github.com/Jedisjeux/Jedisjeux/pull/369) add a recaptcha on registration (@loic425)
+- [#368](https://github.com/Jedisjeux/Jedisjeux/pull/368) upgrade symfony (@loic425)
+- [#366](https://github.com/Jedisjeux/Jedisjeux/pull/366) Deleting multiple topics (@loic425)
+- [#365](https://github.com/Jedisjeux/Jedisjeux/pull/365) upgrade php (@loic425)
+- [#364](https://github.com/Jedisjeux/Jedisjeux/pull/364) show icon on taxons (@loic425)
+- [#316](https://github.com/Jedisjeux/Jedisjeux/pull/316) Manage product boxes (@loic425)
+- [#328](https://github.com/Jedisjeux/Jedisjeux/pull/328) Viewing product videos (@loic425)
+- [#363](https://github.com/Jedisjeux/Jedisjeux/pull/363) Viewing top commented products (@loic425)
+- [#361](https://github.com/Jedisjeux/Jedisjeux/pull/361) fix meta description (@loic425)
+- [#360](https://github.com/Jedisjeux/Jedisjeux/pull/360) [Behat] Changing my product review rate (@loic425)
+- [#359](https://github.com/Jedisjeux/Jedisjeux/pull/359) [Behat] Adding my product review (@loic425)
+
+
 ### v2.0.12 (2018/11/26)
 - [#357](https://github.com/Jedisjeux/Jedisjeux/pull/357) fix product serialization (@loic425)
 - [#356](https://github.com/Jedisjeux/Jedisjeux/pull/356) hide box content when no data is available (@loic425)
