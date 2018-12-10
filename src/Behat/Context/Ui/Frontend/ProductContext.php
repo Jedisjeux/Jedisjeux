@@ -109,6 +109,7 @@ class ProductContext implements Context
 
     /**
      * @Then I should not see the product :productName
+     * @Then I should not see a product with name :productName
      */
     public function iShouldNotSeeProduct($productName)
     {
@@ -280,6 +281,26 @@ class ProductContext implements Context
         $sorting = ['createdAt' => 'oldest' === $sortDirection ? 'asc' : 'desc'];
 
         $this->indexPage->open(['sorting' => $sorting]);
+    }
+
+    /**
+     * @When /^I view (oldest|newest) products from (taxon "([^"]+)")$/
+     */
+    public function iViewSortedProductsFromSpecificMechanism($sortDirection, TaxonInterface $taxon)
+    {
+        $sorting = ['createdAt' => 'oldest' === $sortDirection ? 'asc' : 'desc'];
+
+        $this->indexByTaxonPage->open(['slug' => $taxon->getSlug(), 'sorting' => $sorting]);
+    }
+
+    /**
+     * @When /^I view (oldest|newest) products from (person "([^"]+)")$/
+     */
+    public function iViewSortedProductsFromSpecificPerson($sortDirection, Person $person)
+    {
+        $sorting = ['createdAt' => 'oldest' === $sortDirection ? 'asc' : 'desc'];
+
+        $this->indexByPersonPage->open(['slug' => $person->getSlug(), 'sorting' => $sorting]);
     }
 
     /**
