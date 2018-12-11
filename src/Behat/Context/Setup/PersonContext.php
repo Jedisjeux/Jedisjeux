@@ -51,11 +51,8 @@ class PersonContext implements Context
 
     /**
      * @Given there is person with first name :firstName and last name :lastName
-     *
-     * @param string $firstName
-     * @param string $lastName
      */
-    public function thereIsPersonWithFirstNameAndLastName($firstName, $lastName)
+    public function thereIsPersonWithFirstNameAndLastName(string $firstName, string $lastName)
     {
         /** @var Person $person */
         $person = $this->personFactory->create([
@@ -65,5 +62,15 @@ class PersonContext implements Context
 
         $this->personRepository->add($person);
         $this->sharedStorage->set('person', $person);
+    }
+
+    /**
+     * @Given there is person with name :name
+     */
+    public function thereIsPersonWithName(string $name)
+    {
+        list($firstName, $lastName) = explode(' ', $name);
+
+        $this->thereIsPersonWithFirstNameAndLastName($firstName, $lastName);
     }
 }
