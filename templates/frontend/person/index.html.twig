@@ -2,6 +2,10 @@
 
 {% from 'macro/pagination.html.twig' import simple as pagination %}
 
+{% set pageTitle %}
+    {{ 'app.ui.ludographies'|trans }}
+{% endset %}
+
 {% block content %}
     {% include 'frontend/person/index/_banner.html.twig' %}
 

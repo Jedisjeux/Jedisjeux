@@ -1,5 +1,9 @@
 {% extends 'frontend/layout.html.twig' %}
 
+{% set pageTitle %}
+    {{ 'app.ui.game_play_of'|trans({'%product%': game_play.product.name }) }}
+{% endset %}
+
 {% block content %}
     {% include 'frontend/game_play/show/_breadcrumb.html.twig' %}
     {% include 'frontend/game_play/show/_main.html.twig' %}
