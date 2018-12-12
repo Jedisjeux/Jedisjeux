@@ -1,5 +1,9 @@
 ## Change Log
 
+### v2.1.1 (2018/12/12)
+- [#372](https://github.com/Jedisjeux/Jedisjeux/pull/372) Fix link on article taxon (@loic425)
+- [#371](https://github.com/Jedisjeux/Jedisjeux/pull/371) fix viewing sorted product from specific mechanism or specific designer (@loic425)
+
 ### v2.1.0 (2018/12/10)
 - [#369](https://github.com/Jedisjeux/Jedisjeux/pull/369) add a recaptcha on registration (@loic425)
 - [#368](https://github.com/Jedisjeux/Jedisjeux/pull/368) upgrade symfony (@loic425)
