@@ -1,5 +1,9 @@
 {% extends 'frontend/layout.html.twig' %}
 
+{% set pageTitle %}
+    {{ product.name }}
+{% endset %}
+
 {% block content %}
     {% include 'frontend/product/show/_breadcrumb.html.twig' %}
     {% include 'frontend/product/show/_main.html.twig' %}

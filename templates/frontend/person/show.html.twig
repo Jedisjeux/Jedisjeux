@@ -1,5 +1,9 @@
 {% extends 'frontend/layout.html.twig' %}
 
+{% set pageTitle %}
+    {{ person.fullName }}
+{% endset %}
+
 {% block content %}
     {% include 'frontend/person/show/_breadcrumb.html.twig' %}
 

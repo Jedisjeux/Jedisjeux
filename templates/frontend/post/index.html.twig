@@ -1,5 +1,9 @@
 {% extends 'frontend/layout.html.twig' %}
 
+{% set pageTitle %}
+    {{ topic.title }}
+{% endset %}
+
 {% block content %}
     {% include 'frontend/post/index/_breadcrumb.html.twig' %}
 
