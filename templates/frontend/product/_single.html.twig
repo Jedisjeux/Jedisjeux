@@ -7,7 +7,7 @@
 <div class="image-box style-2 mb-20 bordered light-gray-bg">
     <div class="overlay-container overlay-visible">
         {% if product.mainImage is not null %}
-            {{ images.render(product.mainImage.webPath, 'magazine_item_wide', product.name) }}
+            {{ images.render(product.mainImage.webPath, 'magazine_item', product.name) }}
         {% endif %}
         <a class="overlay-link" href="{{ productPath }}"><i class="fa fa-link"></i></a>
         <div class="overlay-bottom text-left">
