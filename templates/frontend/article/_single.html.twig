@@ -17,7 +17,10 @@
             <i class="fa fa-calendar-o pr-1"></i> {{ article.publishStartDate|localizeddate('medium', 'none') }}
             <i class="pl-10 fa fa-eye pr-1"></i> {{ article.viewCount }}
             {% if article.mainTaxon is not null %}
-                <i class="pl-10 pr-1 fa fa-tag"></i> {{ article.mainTaxon.name }}
+                <i class="pl-10 pr-1 fa fa-tag"></i>
+                <a href="{{ path('app_frontend_article_index_by_taxon', { 'slug': article.mainTaxon.slug }) }}">
+                    {{ article.mainTaxon.name }}
+                </a>
             {% endif %}
         </p>
         {% if article.shortDescription is not null %}
