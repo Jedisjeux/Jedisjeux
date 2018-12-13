@@ -95,6 +95,24 @@ class PostContext implements Context
     }
 
     /**
+     * @Given /^(customer "[^"]+") has left a comment ("[^"]+") on (this topic)$/
+     * @Given /^(customer "[^"]+") has left a comment ("[^"]+") on (this topic) ("[^"]+")$/
+     */
+    public function customerHasLeftACommentOnTopic(CustomerInterface $customer, string $comment, Topic $topic, $date = 'now')
+    {
+        /** @var Post $post */
+        $post = $this->postFactory->create([
+            'body' => $comment,
+            'topic' => $topic,
+            'author' => $customer,
+            'created_at' => $date,
+        ]);
+
+        $this->postRepository->add($post);
+        $this->sharedStorage->set('post', $post);
+    }
+
+    /**
      * @Given /^(this article) has(?:| also) a comment added by (customer "[^"]+")$/
      * @Given /^I leaved a comment on (this article)$/
      *

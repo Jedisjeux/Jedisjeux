@@ -35,8 +35,8 @@
                             le {{ lastPost.createdAt|localizeddate('medium', 'short') }}
                         </a>
                     </p>
-                {% endif %}
-                {% if topic.mainPost is not null %}
+                    <p class="margin-clear">{{ lastPost.body|truncate(500, true)|striptags|raw }}</p>
+                {% elseif topic.mainPost is not null %}
                     <p class="margin-clear">{{ topic.mainPost.body|truncate(500, true)|striptags|raw }}</p>
                 {% endif %}
                 <br>
