@@ -55,4 +55,14 @@ class IndexPage extends SymfonyPage
     {
         return null !== $this->getDocument()->find('css', sprintf('#topic-list h3:contains("%s")', $title));
     }
+
+    /**
+     * @param string $comment
+     *
+     * @return bool
+     */
+    public function isLastPostComment(string $comment)
+    {
+        return null !== $this->getDocument()->find('css', sprintf('#topic-list p:contains("%s")', $comment));
+    }
 }

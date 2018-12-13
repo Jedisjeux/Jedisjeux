@@ -199,6 +199,22 @@ class TopicContext implements Context
     }
 
     /**
+     * @Then I should see the topic last post :comment
+     */
+    public function iShouldSeeTopicLastPost($comment)
+    {
+        Assert::true($this->indexPage->isLastPostComment($comment));
+    }
+
+    /**
+     * @Then I should not see the topic last post :comment
+     */
+    public function iShouldNotSeeTopicLastPost($comment)
+    {
+        Assert::false($this->indexPage->isLastPostComment($comment));
+    }
+
+    /**
      * @Then I should see the topic title :title
      */
     public function iShouldSeeTopicTitle($title)
