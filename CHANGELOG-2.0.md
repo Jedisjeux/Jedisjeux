@@ -1,5 +1,11 @@
 ## Change Log
 
+### v2.1.2 (2018/12/13)
+- [#377](https://github.com/Jedisjeux/Jedisjeux/pull/377) Viewing topics last post (@loic425)
+- [#376](https://github.com/Jedisjeux/Jedisjeux/pull/376) Fix viewing description on game play list (@loic425)
+- [#374](https://github.com/Jedisjeux/Jedisjeux/pull/374) fix some page titles (@loic425)
+- [#375](https://github.com/Jedisjeux/Jedisjeux/pull/375) improve product single template (@loic425)
+
 ### v2.1.1 (2018/12/12)
 - [#372](https://github.com/Jedisjeux/Jedisjeux/pull/372) Fix link on article taxon (@loic425)
 - [#371](https://github.com/Jedisjeux/Jedisjeux/pull/371) fix viewing sorted product from specific mechanism or specific designer (@loic425)
