@@ -151,6 +151,14 @@ class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I add a new video titled :title
+     */
+    public function iAddVideoTitled($title = null)
+    {
+        $this->createPage->addVideo($title);
+    }
+
+    /**
      * @When I add it
      * @When I try to add it
      */
