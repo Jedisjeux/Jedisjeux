@@ -36,6 +36,22 @@ class CreatePage extends BaseCreatePage
     }
 
     /**
+     * @param string $path
+     * @param string $title
+     *
+     * @throws ElementNotFoundException
+     */
+    public function addVideo(string $path, string $title)
+    {
+        $this->clickTabIfItsNotActive('media');
+
+        $this->getDocument()->find('css', '#sylius_product_videos a[data-form-collection="add"]')->click();
+
+        $this->getElement('video_title')->setValue($title);
+        $this->getElement('video_path')->setValue($path);
+    }
+
+    /**
      * @param string $minPlayerCount
      */
     public function specifyMinPlayerCount($minPlayerCount)
@@ -49,22 +65,6 @@ class CreatePage extends BaseCreatePage
     public function specifyMaxPlayerCount($maxPlayerCount)
     {
         $this->getElement('max_player_count')->setValue($maxPlayerCount);
-    }
-
-    /**
-     * @param string $title
-     * @param string $path
-     *
-     * @throws ElementNotFoundException
-     */
-    public function addVideo(string $title, string $path)
-    {
-        $this->clickTabIfItsNotActive('media');
-
-        $this->getDocument()->find('css', '#sylius_product_videos a[data-form-collection="add"]')->click();
-
-        $this->getElement('video_title')->setValue($title);
-        $this->getElement('video_path')->setValue($path);
     }
 
     /**

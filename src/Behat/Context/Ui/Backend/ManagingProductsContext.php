@@ -151,11 +151,11 @@ class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I add a new video titled :title
+     * @When I add a new video :path titled :title
      */
-    public function iAddVideoTitled($title = null)
+    public function iAddVideoTitled($path = null, $title = null)
     {
-        $this->createPage->addVideo($title);
+        $this->createPage->addVideo($path, $title);
     }
 
     /**

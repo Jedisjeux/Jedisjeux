@@ -239,7 +239,9 @@ class Product extends BaseProduct implements ReviewableInterface
     /**
      * @var Collection|ProductVideo[]
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\ProductVideo", orphanRemoval=true, mappedBy="product")
+     * @ORM\OneToMany(targetEntity="App\Entity\ProductVideo", cascade={"persist", "remove"}, orphanRemoval=true, mappedBy="product")
+     *
+     * @Assert\Valid(groups={"sylius"})
      */
     protected $videos;
 
