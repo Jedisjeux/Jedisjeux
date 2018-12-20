@@ -25,6 +25,7 @@ imports:
     - suites/ui/product/editing_game_play_comments.yml
     - suites/ui/product/editing_game_plays.yml
     - suites/ui/product/editing_product_reviews.yml
+    - suites/ui/product/managing_game_awards.yml
     - suites/ui/product/managing_game_plays.yml
     - suites/ui/product/managing_products.yml
     - suites/ui/product/managing_product_lists.yml

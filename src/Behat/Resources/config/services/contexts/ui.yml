@@ -61,6 +61,13 @@ services:
         tags:
             - { name: fob.context_service }
 
+    app.behat.context.ui.backend.managing_game_awards:
+        class: App\Behat\Context\Ui\Backend\ManagingGameAwardsContext
+        arguments:
+            - "@app.behat.page.backend.game_award.index"
+        tags:
+            - { name: fob.context_service }
+
     app.behat.context.ui.backend.managing_game_plays:
         class: App\Behat\Context\Ui\Backend\ManagingGamePlaysContext
         arguments:

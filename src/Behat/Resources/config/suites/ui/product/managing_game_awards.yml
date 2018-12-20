@@ -1,0 +1,17 @@
+default:
+    suites:
+        ui_managing_game_awards:
+            contexts_services:
+                - app.behat.context.hook.doctrine_orm
+
+                - app.behat.context.transform.customer
+                - app.behat.context.transform.shared_storage
+
+                - app.behat.context.setup.security
+                - app.behat.context.setup.customer
+                - app.behat.context.setup.game_award
+
+                - app.behat.context.ui.backend.managing_game_awards
+                - app.behat.context.ui.backend.notification
+            filters:
+                tags: "@managing_game_awards && @ui"

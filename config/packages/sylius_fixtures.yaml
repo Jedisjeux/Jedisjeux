@@ -85,6 +85,13 @@ sylius_fixtures:
                             -
                                 first_name: "Doris"
                                 last_name: "Matthäus"
+                game_award:
+                    options:
+                        custom:
+                            - { name: "Spiel des Jahres" }
+                            - { name: "As d'or" }
+                            - { name: "Deutscher Spiele Preis" }
+
                 game_product:
                     options:
                         amount: 80

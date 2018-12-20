@@ -68,6 +68,12 @@ services:
             - "@app.repository.festival_list"
         public: true
 
+    app.fixture.example_factory.game_award:
+        class: App\Fixture\Factory\GameAwardExampleFactory
+        arguments:
+            - "@app.factory.game_award"
+        public: true
+
     app.fixture.example_factory.game_play:
         class: App\Fixture\Factory\GamePlayExampleFactory
         arguments:

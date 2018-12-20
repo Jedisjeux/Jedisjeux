@@ -79,6 +79,14 @@ services:
         tags:
             - { name: sylius_fixtures.fixture }
 
+    app.fixture.game_award:
+        class: App\Fixture\GameAwardFixture
+        arguments:
+            - "@app.manager.game_award"
+            - "@app.fixture.example_factory.game_award"
+        tags:
+            - { name: sylius_fixtures.fixture }
+
     app.fixture.game_play:
         class: App\Fixture\GamePlayFixture
         arguments:

@@ -75,6 +75,7 @@ app:
         from_board_game_geek: À partir de BoardGameGeek
         from_years: 'À partir de %count% ans'
         game: Jeu
+        game_awards: Récompenses de jeu
         game_details: Informations du jeu
         game_library: Ludothèque
         game_specifications: Spécifications du jeu
@@ -122,6 +123,7 @@ app:
         manage_dealer_prices: Gérer les tarifs des vendeurs
         manage_festival_lists: Gérer les listes de festival
         manage_festival_list_items: Gérer les items de liste de festival
+        manage_game_awards: Gérer les récompenses de jeu
         manage_game_plays: Gérer les parties de jeu
         manage_not_found_pages: Gérer les pages non trouvées
         manage_people: Gérer les personnes

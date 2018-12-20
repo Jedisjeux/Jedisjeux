@@ -1,0 +1,41 @@
+<?php
+
+namespace spec\App\Entity;
+
+use PhpSpec\ObjectBehavior;
+use Sylius\Component\Resource\Model\ResourceInterface;
+
+class GameAwardSpec extends ObjectBehavior
+{
+    function it_implements_resource_interface()
+    {
+        $this->shouldImplement(ResourceInterface::class);
+    }
+
+    function it_has_no_id_by_default()
+    {
+        $this->getId()->shouldReturn(null);
+    }
+
+    function it_has_no_name_by_default()
+    {
+        $this->getName()->shouldReturn(null);
+    }
+
+    function its_name_is_mutable()
+    {
+        $this->setName('Spiel des Jahres');
+        $this->getName()->shouldReturn('Spiel des Jahres');
+    }
+
+    function it_has_no_slug_by_default()
+    {
+        $this->getSlug()->shouldReturn(null);
+    }
+
+    function its_slug_is_mutable()
+    {
+        $this->setSlug('spiel-des-jahres');
+        $this->getSlug()->shouldReturn('spiel-des-jahres');
+    }
+}

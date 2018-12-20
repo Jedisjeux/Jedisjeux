@@ -73,6 +73,9 @@ app_backend_dealer:
 app_backend_dealer_price:
     resource: backend/dealer_price.yml
 
+app_backend_game_award:
+    resource: backend/game_award.yml
+
 app_backend_game_play:
     resource: backend/game_play.yml
 

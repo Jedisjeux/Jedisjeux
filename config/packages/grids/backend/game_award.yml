@@ -1,0 +1,26 @@
+sylius_grid:
+    grids:
+        app_backend_game_award:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%app.model.game_award.class%"
+            sorting:
+                name: asc
+            fields:
+                name:
+                    type: string
+                    label: sylius.ui.name
+                    sortable: ~
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    options:
+                        fields: [name]
+            actions:
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete
