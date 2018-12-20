@@ -9,6 +9,6 @@ app_backend_game_award:
             all:
                 subheader: app.ui.manage_game_awards
             index:
-                icon: cup
+                icon: trophy
         templates: backend/crud
     type: sylius.resource
