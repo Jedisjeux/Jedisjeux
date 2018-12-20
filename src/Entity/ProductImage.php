@@ -1,27 +1,38 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: loic
- * Date: 07/03/2016
- * Time: 18:07.
+
+/*
+ * This file is part of Jedisjeux.
+ *
+ * (c) Loïc Frémont
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 
 /**
- * @author Loïc Frémont <loic@mobizel.com>
- *
  * @ORM\Entity
- * @ORM\Table(name="sylius_product_variant_image")
+ * @ORM\Table(name="jdj_product_image")
  *
  * @JMS\ExclusionPolicy("all")
  */
-class ProductVariantImage extends AbstractImage
+class ProductImage extends AbstractImage
 {
+    /**
+     * The associated product.
+     *
+     * @var ProductInterface|null
+     *
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface", inversedBy="images")
+     */
+    protected $product;
+
     /**
      * The associated product variant.
      *
@@ -59,6 +70,22 @@ class ProductVariantImage extends AbstractImage
     {
         $this->main = false;
         $this->material = false;
+    }
+
+    /**
+     * @return ProductInterface|null
+     */
+    public function getProduct(): ?ProductInterface
+    {
+        return $this->product;
+    }
+
+    /**
+     * @param ProductInterface|null $product
+     */
+    public function setProduct(?ProductInterface $product): void
+    {
+        $this->product = $product;
     }
 
     /**

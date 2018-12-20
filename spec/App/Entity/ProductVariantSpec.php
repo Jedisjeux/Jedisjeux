@@ -4,7 +4,7 @@ namespace spec\App\Entity;
 
 use App\Entity\Person;
 use App\Entity\ProductVariant;
-use App\Entity\ProductVariantImage;
+use App\Entity\ProductImage;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Product\Model\ProductVariant as BaseProductVariant;
@@ -59,7 +59,7 @@ class ProductVariantSpec extends ObjectBehavior
         $this->getImages()->shouldHaveType(Collection::class);
     }
 
-    function it_adds_image(ProductVariantImage $image)
+    function it_adds_image(ProductImage $image)
     {
         $image->setVariant($this)->shouldBeCalled();
 
@@ -67,7 +67,7 @@ class ProductVariantSpec extends ObjectBehavior
         $this->hasImage($image)->shouldReturn(true);
     }
 
-    function it_removes_image(ProductVariantImage $image)
+    function it_removes_image(ProductImage $image)
     {
         $this->addImage($image);
         $this->removeImage($image);

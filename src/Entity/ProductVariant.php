@@ -30,9 +30,9 @@ class ProductVariant extends BaseProductVariant
     const RELEASED_AT_PRECISION_ON_YEAR = 'on-year';
 
     /**
-     * @var ArrayCollection|ProductVariantImage[]
+     * @var ArrayCollection|ProductImage[]
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\ProductVariantImage", mappedBy="variant", cascade={"persist", "merge", "remove"})
+     * @ORM\OneToMany(targetEntity="ProductImage", mappedBy="variant", cascade={"persist", "merge", "remove"})
      *
      * @JMS\Groups({"Detailed"})
      */
@@ -119,9 +119,9 @@ class ProductVariant extends BaseProductVariant
     }
 
     /**
-     * @return ProductVariantImage|null
+     * @return ProductImage|null
      */
-    public function getMainImage(): ?ProductVariantImage
+    public function getMainImage(): ?ProductImage
     {
         foreach ($this->images as $image) {
             if ($image->isMain()) {
@@ -133,9 +133,9 @@ class ProductVariant extends BaseProductVariant
     }
 
     /**
-     * @return ProductVariantImage|null
+     * @return ProductImage|null
      */
-    public function getMaterialImage(): ?ProductVariantImage
+    public function getMaterialImage(): ?ProductImage
     {
         foreach ($this->images as $image) {
             if ($image->isMaterial()) {
@@ -147,19 +147,19 @@ class ProductVariant extends BaseProductVariant
     }
 
     /**
-     * @param ProductVariantImage $image
+     * @param ProductImage $image
      *
      * @return bool
      */
-    public function hasImage(ProductVariantImage $image): bool
+    public function hasImage(ProductImage $image): bool
     {
         return $this->images->contains($image);
     }
 
     /**
-     * @param ProductVariantImage $image
+     * @param ProductImage $image
      */
-    public function addImage(ProductVariantImage $image): void
+    public function addImage(ProductImage $image): void
     {
         if (!$this->hasImage($image)) {
             $image->setVariant($this);
@@ -168,15 +168,15 @@ class ProductVariant extends BaseProductVariant
     }
 
     /**
-     * @param ProductVariantImage $image
+     * @param ProductImage $image
      */
-    public function removeImage(ProductVariantImage $image): void
+    public function removeImage(ProductImage $image): void
     {
         $this->images->removeElement($image);
     }
 
     /**
-     * @return Collection|ProductVariantImage[]
+     * @return Collection|ProductImage[]
      */
     public function getImages(): ?Collection
     {

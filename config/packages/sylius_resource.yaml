@@ -151,7 +151,7 @@ sylius_resource:
                 repository: App\Repository\PostRepository
                 controller: App\Controller\PostController
                 form: App\Form\Type\PostType
-        app.product_variant_image:
+        app.product_image:
             classes:
-                model: App\Entity\ProductVariantImage
+                model: App\Entity\ProductImage
                 form: App\Form\Type\ProductVariantImageType

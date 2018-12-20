@@ -14,7 +14,7 @@ namespace App\Factory;
 use App\Entity\Person;
 use App\Entity\Product;
 use App\Entity\ProductVariant;
-use App\Entity\ProductVariantImage;
+use App\Entity\ProductImage;
 use App\Entity\BggProduct;
 use Gedmo\Sluggable\Util\Urlizer;
 use Sylius\Component\Product\Factory\ProductFactory as BaseProductFactory;
@@ -137,7 +137,7 @@ class ProductFactory extends BaseProductFactory
                 ->addPublisher($publisher);
         }
 
-        /** @var ProductVariantImage $mainImage */
+        /** @var ProductImage $mainImage */
         $mainImage = $this->productVariantImageFactory->createNew();
         $mainImage->setMain(true);
         $mainImage->setPath(basename($bggProduct->getImagePath()));

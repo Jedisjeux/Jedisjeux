@@ -55,6 +55,13 @@ class Product extends BaseProduct implements ReviewableInterface
     protected $status;
 
     /**
+     * @var Collection|ProductImage[]
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\ProductImage", mappedBy="product")
+     */
+    private $images;
+
+    /**
      * @var ArrayCollection|TaxonInterface[]
      *
      * @ORM\ManyToMany(targetEntity="Sylius\Component\Taxonomy\Model\TaxonInterface")
@@ -249,6 +256,7 @@ class Product extends BaseProduct implements ReviewableInterface
     public function __construct()
     {
         parent::__construct();
+        $this->images = new ArrayCollection();
         $this->taxons = new ArrayCollection();
         $this->durationByPlayer = false;
         $this->status = self::STATUS_NEW;
@@ -314,13 +322,13 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
-     * @return ProductVariantImage
+     * @return ProductImage
      *
      * @JMS\VirtualProperty
      * @JMS\SerializedName("image")
      * @JMS\Groups({"Default", "Detailed"})
      */
-    public function getMainImage(): ?ProductVariantImage
+    public function getMainImage(): ?ProductImage
     {
         if (null === $firstVariant = $this->getFirstVariant()) {
             return null;
@@ -330,9 +338,9 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
-     * @return ProductVariantImage
+     * @return ProductImage
      */
-    public function getMaterialImage(): ?ProductVariantImage
+    public function getMaterialImage(): ?ProductImage
     {
         if (null === $firstVariant = $this->getFirstVariant()) {
             return null;
@@ -342,11 +350,41 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
-     * @return Collection|ProductVariantImage[]
+     * @return Collection|ProductImage[]
      */
     public function getImages(): Collection
     {
-        return $this->getFirstVariant()->getImages();
+        return $this->images;
+    }
+
+    /**
+     * @param ProductImage $image
+     *
+     * @return bool
+     */
+    public function hasImage(ProductImage $image): bool
+    {
+        return $this->images->contains($image);
+    }
+
+    /**
+     * @param ProductImage $image
+     */
+    public function addImage(ProductImage $image): void
+    {
+        if (!$this->hasImage($image)) {
+            $this->images->add($image);
+            $image->setProduct($this);
+        }
+    }
+
+    /**
+     * @param ProductImage $image
+     */
+    public function removeImage(ProductImage $image): void
+    {
+        $this->images->removeElement($image);
+        $image->setProduct(null);
     }
 
     /**
@@ -390,7 +428,7 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
-     * @return Collection|ProductVariantImage[]
+     * @return Collection|ProductImage[]
      */
     public function getImagesOfAllVariants(): Collection
     {

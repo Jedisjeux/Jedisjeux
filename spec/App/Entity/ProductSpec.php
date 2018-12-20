@@ -7,7 +7,7 @@ use App\Entity\Product;
 use App\Entity\ProductVideo;
 use App\Entity\ProductBarcode;
 use App\Entity\ProductVariant;
-use App\Entity\ProductVariantImage;
+use App\Entity\ProductImage;
 use App\Entity\Taxon;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -84,6 +84,29 @@ class ProductSpec extends ObjectBehavior
     {
         $this->setAverageRating(7.3);
         $this->getAverageRating()->shouldReturn(7.3);
+    }
+
+    function it_initializes_image_collection_by_default(): void
+    {
+        $this->getImages()->shouldHaveType(Collection::class);
+    }
+
+    function it_adds_image(ProductImage $image)
+    {
+        $image->setProduct($this)->shouldBeCalled();
+
+        $this->addImage($image);
+        $this->hasImage($image)->shouldReturn(true);
+    }
+
+    function it_removes_image(ProductImage $image)
+    {
+        $this->addImage($image);
+
+        $image->setProduct(null)->shouldBeCalled();
+
+        $this->removeImage($image);
+        $this->hasImage($image)->shouldReturn(false);
     }
 
     function it_initializes_taxon_collection_by_default(): void
@@ -326,20 +349,12 @@ class ProductSpec extends ObjectBehavior
         $this->getImages()->shouldHaveCount(0);
     }
 
-    function it_can_get_images(ProductVariant $variant, ProductVariantImage $image)
-    {
-        $this->addVariant($variant);
-        $variant->getImages()->willReturn(new ArrayCollection([$image->getWrappedObject()]));
-
-        $this->getImages()->shouldContain($image);
-    }
-
     function it_has_no_main_image_by_default()
     {
         $this->getMainImage()->shouldReturn(null);
     }
 
-    function it_can_get_main_image(ProductVariant $variant, ProductVariantImage $image)
+    function it_can_get_main_image(ProductVariant $variant, ProductImage $image)
     {
         $this->addVariant($variant);
         $variant->getMainImage()->willReturn($image);
@@ -352,7 +367,7 @@ class ProductSpec extends ObjectBehavior
         $this->getMaterialImage()->shouldReturn(null);
     }
 
-    function it_can_get_material_image(ProductVariant $variant, ProductVariantImage $image)
+    function it_can_get_material_image(ProductVariant $variant, ProductImage $image)
     {
         $this->addVariant($variant);
         $variant->getMaterialImage()->willReturn($image);

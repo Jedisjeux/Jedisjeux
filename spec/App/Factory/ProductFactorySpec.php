@@ -5,7 +5,7 @@ namespace spec\App\Factory;
 use App\Entity\BggProduct;
 use App\Entity\Product;
 use App\Entity\ProductVariant;
-use App\Entity\ProductVariantImage;
+use App\Entity\ProductImage;
 use App\Factory\BggProductFactory;
 use App\Factory\ProductFactory;
 use PhpSpec\ObjectBehavior;
@@ -48,7 +48,7 @@ class ProductFactorySpec extends ObjectBehavior
         ProductVariant $variant,
         SlugGeneratorInterface $slugGenerator,
         RepositoryInterface $personRepository,
-        ProductVariantImage $productVariantImage,
+        ProductImage $productVariantImage,
         BggProduct $bggProduct
     ): void {
         $variantFactory->createNew()->willReturn($variant);
