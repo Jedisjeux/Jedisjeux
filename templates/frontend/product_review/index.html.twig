@@ -7,41 +7,37 @@
 {% endset %}
 
 {% block content %}
-<!-- main-container start -->
-<!-- ================ -->
-<section class="main-container">
+    {% include 'frontend/product_review/index/_banner.html.twig' %}
 
-    <div class="container">
-        <div class="row">
+    <!-- main-container start -->
+    <!-- ================ -->
+    <section class="main-container">
 
-            <!-- main start -->
-            <!-- ================ -->
-            <div class="main col-md-12">
+        <div class="container">
+            <div class="row">
 
-                <!-- page-title start -->
+                <!-- main start -->
                 <!-- ================ -->
-                <h1 class="page-title">{{ pageTitle }}</h1>
-                <div class="separator-2"></div>
-                <!-- page-title end -->
+                <div class="main col-md-12">
 
-                <div class="row">
-                    <div class="col-md-3">
-                        {{
-                            render(url('sylius_frontend_partial_product_show_by_slug', {
-                                'slug': app.request.attributes.get('slug'),
-                                'template': 'frontend/product/_box.html.twig'
-                            }))
-                        }}
-                    </div>
-                    <div class="col-md-9" id="product-reviews">
-                        {% include 'frontend/product_review/_list.html.twig' with {'product_reviews': product_reviews.data} %}</div>
-                        <!-- pagination start -->
-                        {{ pagination(product_reviews.data) }}
-                        <!-- pagination end -->
+                    <div class="row">
+                        <div class="col-md-3">
+                            {{
+                                render(url('sylius_frontend_partial_product_show_by_slug', {
+                                    'slug': app.request.attributes.get('slug'),
+                                    'template': 'frontend/product/_box.html.twig'
+                                }))
+                            }}
+                        </div>
+                        <div class="col-md-9" id="product-reviews">
+                            {% include 'frontend/product_review/_list.html.twig' with {'product_reviews': product_reviews.data} %}</div>
+                            <!-- pagination start -->
+                            {{ pagination(product_reviews.data) }}
+                            <!-- pagination end -->
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 {% endblock content %}
