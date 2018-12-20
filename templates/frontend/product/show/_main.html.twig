@@ -70,7 +70,7 @@
                             <div class="tab-pane" id="videos">
                                 {% for video in product.videos %}
                                     <div class="overlay-container overlay-visible">
-                                        {% set imagePath = video.image is not null ? video.image.webPath : '/assets/frontend/images/placeholder.png' %}
+                                        {% set imagePath = video.image is not null and video.image.webpath is not null ? video.image.webPath : '/assets/frontend/images/placeholder.png' %}
                                         <a class="popup-iframe" href="{{ video.path }}">
                                             {{ images.render(imagePath, 'full', video.title) }}
                                         </a>
