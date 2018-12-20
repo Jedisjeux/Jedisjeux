@@ -12,6 +12,7 @@
 namespace App\Behat\Page\Backend\Product;
 
 use App\Behat\Page\Backend\Crud\CreatePage as BaseCreatePage;
+use Behat\Mink\Exception\ElementNotFoundException;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -32,6 +33,22 @@ class CreatePage extends BaseCreatePage
     public function specifySlug($slug)
     {
         $this->getElement('slug')->setValue($slug);
+    }
+
+    /**
+     * @param string $path
+     * @param string $title
+     *
+     * @throws ElementNotFoundException
+     */
+    public function addVideo(string $path, string $title)
+    {
+        $this->clickTabIfItsNotActive('media');
+
+        $this->getDocument()->find('css', '#sylius_product_videos a[data-form-collection="add"]')->click();
+
+        $this->getElement('video_title')->setValue($title);
+        $this->getElement('video_path')->setValue($path);
     }
 
     /**
@@ -57,9 +74,23 @@ class CreatePage extends BaseCreatePage
     {
         return array_merge(parent::getDefinedElements(), [
             'name' => '#sylius_product_translations_en_US_name',
-            'slug' => '#sylius_product_translations_en_US_slug',
             'min_player_count' => '#sylius_product_minPlayerCount',
             'max_player_count' => '#sylius_product_maxPlayerCount',
+            'slug' => '#sylius_product_translations_en_US_slug',
+            'tab' => '.menu [data-tab="%name%"]',
+            'video_title' => '#sylius_product_videos_0_title',
+            'video_path' => '#sylius_product_videos_0_path',
         ]);
+    }
+
+    /**
+     * @param string $tabName
+     */
+    private function clickTabIfItsNotActive($tabName)
+    {
+        $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);
+        if (!$attributesTab->hasClass('active')) {
+            $attributesTab->click();
+        }
     }
 }

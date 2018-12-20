@@ -204,7 +204,7 @@ sylius_fixtures:
                     options:
                         custom:
                             -
-                                path: "https://www.youtube.com/embed/oyefFfCHIGs?rel=0"
+                                path: "https://www.youtube-nocookie.com/embed/oyefFfCHIGs?rel=0"
                 game_play:
                     options:
                         random: 20

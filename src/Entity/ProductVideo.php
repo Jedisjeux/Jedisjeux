@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -29,6 +30,8 @@ class ProductVideo implements ResourceInterface
      * @var string|null
      *
      * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank(groups={"sylius"})
      */
     private $title;
 
@@ -36,15 +39,10 @@ class ProductVideo implements ResourceInterface
      * @var string|null
      *
      * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank(groups={"sylius"})
      */
     private $path;
-
-    /**
-     * @var ProductVideoImage|null
-     *
-     * @ORM\OneToOne(targetEntity="App\Entity\ProductVideoImage")
-     */
-    private $image;
 
     /**
      * @var ProductInterface|null
@@ -52,6 +50,13 @@ class ProductVideo implements ResourceInterface
      * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface", inversedBy="videos")
      */
     private $product;
+
+    /**
+     * @var ProductVideoImage|null
+     *
+     * @ORM\OneToOne(targetEntity="App\Entity\ProductVideoImage", cascade={"persist", "remove"})
+     */
+    private $image;
 
     /**
      * @return string|null
