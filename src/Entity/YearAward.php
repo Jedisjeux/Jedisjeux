@@ -11,19 +11,28 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
+/**
+ * @ORM\Entity
+ * @ORM\Table("jdj_year_award")
+ */
 class YearAward implements ResourceInterface
 {
     use IdentifiableTrait;
 
     /**
      * @var string|null
+     *
+     * @ORM\Column(type="string")
      */
     private $year;
 
     /**
      * @var GameAward|null
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\GameAward")
      */
     private $award;
 
