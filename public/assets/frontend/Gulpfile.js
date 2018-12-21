@@ -40,7 +40,7 @@ var paths = {
         sass: [
             'sass/style.scss',
             'sass/typography-default.scss',
-            'sass/skins/light_blue.scss'
+            'sass/skins/gold.scss'
         ],
         css: [
             nodeModulesPath + 'bootstrap/dist/css/bootstrap.css',
