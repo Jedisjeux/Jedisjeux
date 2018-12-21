@@ -185,3 +185,10 @@ services:
             - "@app.repository.game_play"
             - "@sylius.repository.taxon"
         public: true
+
+    app.fixture.example_factory.year_award:
+        class: App\Fixture\Factory\YearAwardExampleFactory
+        arguments:
+            - "@app.factory.year_award"
+            - "@app.repository.game_award"
+        public: true

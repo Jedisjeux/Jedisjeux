@@ -231,3 +231,11 @@ services:
             - "@app.fixture.example_factory.topic"
         tags:
             - { name: sylius_fixtures.fixture }
+
+    app.fixture.year_award:
+        class: App\Fixture\YearAwardFixture
+        arguments:
+            - "@app.manager.year_award"
+            - "@app.fixture.example_factory.year_award"
+        tags:
+            - { name: sylius_fixtures.fixture }

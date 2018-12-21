@@ -158,3 +158,6 @@ sylius_resource:
             classes:
                 model: App\Entity\ProductVariantImage
                 form: App\Form\Type\ProductVariantImageType
+        app.year_award:
+            classes:
+                model: App\Entity\YearAward

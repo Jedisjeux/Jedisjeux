@@ -39,4 +39,18 @@ class YearAwardSpec extends ObjectBehavior
         $this->setAward($award);
         $this->getAward()->shouldReturn($award);
     }
+
+    function it_has_no_name_by_default()
+    {
+        $this->getName()->shouldReturn(null);
+    }
+
+    function it_can_get_name(GameAward $award)
+    {
+        $this->setYear('2018');
+        $this->setAward($award);
+        $award->getName()->willReturn('Spiel des Jahres');
+
+        $this->getName()->shouldReturn('Spiel des Jahres 2018');
+    }
 }

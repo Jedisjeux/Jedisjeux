@@ -92,6 +92,10 @@ sylius_fixtures:
                             - { name: "As d'or" }
                             - { name: "Deutscher Spiele Preis" }
 
+                year_award:
+                    options:
+                        random: 20
+
                 game_product:
                     options:
                         amount: 80

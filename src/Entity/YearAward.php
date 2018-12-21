@@ -67,4 +67,13 @@ class YearAward implements ResourceInterface
     {
         $this->award = $award;
     }
+
+    public function getName(): ?string
+    {
+        if (null === $this->getAward()) {
+            return null;
+        }
+
+        return trim($this->getAward()->getName().' '.$this->getYear());
+    }
 }
