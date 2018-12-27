@@ -31,7 +31,7 @@ class GameAwardFixture extends AbstractResourceFixture
         $resourceNode
             ->children()
                 ->scalarNode('name')->cannotBeEmpty()->end()
-                ->scalarNode('image')->end()
+                ->scalarNode('image')->cannotBeEmpty()->end()
         ;
     }
 }

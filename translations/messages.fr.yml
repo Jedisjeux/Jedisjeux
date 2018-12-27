@@ -133,6 +133,7 @@ app:
         manage_redirections: Gérer les redirections
         manage_string_blocks: Gérer les blocs de chaîne
         manage_topics: Gérer les sujets
+        manage_year_awards: Gérer les récompenses annuelles
         material_rating: Note du matériel
         max_duration: Durée max
         mechanisms: Mécanismes
@@ -249,6 +250,8 @@ app:
         view_more_game_plays: Voir plus de parties de jeu
         view_more_reviews: Voir plus d'avis
         view_website: Voir le site
+        year: Année
+        year_awards: Récompenses annuelles
         your_comment: Votre commentaire
         your_rating: Votre note
 sylius:

@@ -90,3 +90,6 @@ app_backend_redirection:
 
 app_backend_topic:
     resource: backend/topic.yml
+
+app_backend_year_award:
+    resource: backend/year_award.yml

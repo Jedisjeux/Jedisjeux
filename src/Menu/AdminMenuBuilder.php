@@ -99,6 +99,16 @@ final class AdminMenuBuilder
             ->setLabel('app.ui.people')
             ->setLabelAttribute('icon', 'spy');
 
+        $catalog
+            ->addChild('backend_game_award', ['route' => 'app_backend_game_award_index'])
+            ->setLabel('app.ui.game_awards')
+            ->setLabelAttribute('icon', 'trophy');
+
+        $catalog
+            ->addChild('backend_year_award', ['route' => 'app_backend_year_award_index'])
+            ->setLabel('app.ui.year_awards')
+            ->setLabelAttribute('icon', 'calendar alternate outline');
+
         return $catalog;
     }
 

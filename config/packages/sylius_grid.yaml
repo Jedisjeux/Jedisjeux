@@ -26,6 +26,7 @@ imports:
     - { resource: 'grids/backend/root_taxon.yml' }
     - { resource: 'grids/backend/taxon_from_root.yml' }
     - { resource: 'grids/backend/topic.yml' }
+    - { resource: 'grids/backend/year_award.yml' }
 
     - { resource: 'grids/frontend/article.yml' }
     - { resource: 'grids/frontend/festival_list_item.yml' }

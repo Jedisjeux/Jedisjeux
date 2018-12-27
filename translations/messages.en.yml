@@ -132,6 +132,7 @@ app:
         manage_redirections: Manage redirections
         manage_string_blocks: Manage string blocks
         manage_topics: Manage topics
+        manage_year_awards: Manage year awards
         material_rating: Material rating
         max_duration: Max duration
         mechanisms: Mechanisms
@@ -248,5 +249,7 @@ app:
         view_more_game_plays: View more game plays
         view_more_reviews: View more reviews
         view_website: View website
+        year: Year
+        year_awards: Year awards
         your_comment: Your comment
         your_rating: Your rating

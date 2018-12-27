@@ -11,11 +11,11 @@
 
 namespace App\Behat\Context\Ui\Backend;
 
-use App\Behat\Page\Backend\GameAward\IndexPage;
+use App\Behat\Page\Backend\YearAward\IndexPage;
 use Behat\Behat\Context\Context;
 use Webmozart\Assert\Assert;
 
-class ManagingGameAwardsContext implements Context
+class ManagingYearAwardsContext implements Context
 {
     /**
      * @var IndexPage
@@ -31,15 +31,15 @@ class ManagingGameAwardsContext implements Context
     }
 
     /**
-     * @When I want to browse game awards
+     * @When I want to browse year awards
      */
-    public function iWantToBrowseGameAwards()
+    public function iWantToBrowseYearAwards()
     {
         $this->indexPage->open();
     }
 
     /**
-     * @Then /^there should be (\d+) game awards in the list$/
+     * @Then /^there should be (\d+) year awards in the list$/
      */
     public function iShouldSeeGameAwardsInTheList($number)
     {
@@ -47,7 +47,7 @@ class ManagingGameAwardsContext implements Context
     }
 
     /**
-     * @Then I should see the game award :name in the list
+     * @Then I should see the year award :name in the list
      */
     public function theGameAwardShould($name)
     {

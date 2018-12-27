@@ -173,6 +173,13 @@ services:
         tags:
             - { name: fob.context_service }
 
+    app.behat.context.ui.backend.managing_year_awards:
+        class: App\Behat\Context\Ui\Backend\ManagingYearAwardsContext
+        arguments:
+            - "@app.behat.page.backend.year_award.index"
+        tags:
+            - { name: fob.context_service }
+
     app.behat.context.ui.backend.notification:
         class: App\Behat\Context\Ui\Backend\NotificationContext
         arguments:

@@ -1,0 +1,36 @@
+sylius_grid:
+    grids:
+        app_backend_year_award:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%app.model.year_award.class%"
+            sorting:
+                year: desc
+            fields:
+                image:
+                    type: twig
+                    label: sylius.ui.image
+                    path: award
+                    options:
+                        template: "backend/game_award/grid/field/image.html.twig"
+                name:
+                    type: string
+                    label: sylius.ui.name
+                    sortable: ~
+                year:
+                    type: string
+                    label: app.ui.year
+                    sortable: ~
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    options:
+                        fields: [award.name]
+            actions:
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete

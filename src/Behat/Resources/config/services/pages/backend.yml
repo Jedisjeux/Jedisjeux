@@ -17,6 +17,7 @@ imports:
     - { resource: backend/redirection.yml }
     - { resource: backend/taxon.yml }
     - { resource: backend/topic.yml }
+    - { resource: backend/year_award.yml }
 
 # Learn more about services, parameters and containers at
 # http://symfony.com/doc/current/book/service_container.html
