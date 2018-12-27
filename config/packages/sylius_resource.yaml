@@ -64,6 +64,7 @@ sylius_resource:
         app.game_award:
             classes:
                 model: App\Entity\GameAward
+                form: App\Form\Type\GameAwardType
         app.game_award_image:
             classes:
                 model: App\Entity\GameAwardImage

@@ -11,6 +11,7 @@
 
 namespace App\Behat\Context\Ui\Backend;
 
+use App\Behat\Page\Backend\GameAward\CreatePage;
 use App\Behat\Page\Backend\GameAward\IndexPage;
 use Behat\Behat\Context\Context;
 use Webmozart\Assert\Assert;
@@ -18,16 +19,31 @@ use Webmozart\Assert\Assert;
 class ManagingGameAwardsContext implements Context
 {
     /**
+     * @var CreatePage
+     */
+    private $createPage;
+
+    /**
      * @var IndexPage
      */
     private $indexPage;
 
     /**
-     * @param IndexPage $indexPage
+     * @param CreatePage $createPage
+     * @param IndexPage  $indexPage
      */
-    public function __construct(IndexPage $indexPage)
+    public function __construct(CreatePage $createPage, IndexPage $indexPage)
     {
+        $this->createPage = $createPage;
         $this->indexPage = $indexPage;
+    }
+
+    /**
+     * @Given I want to create a new game award
+     */
+    public function iWantToCreateANewGameAward()
+    {
+        $this->createPage->open();
     }
 
     /**
@@ -36,6 +52,23 @@ class ManagingGameAwardsContext implements Context
     public function iWantToBrowseGameAwards()
     {
         $this->indexPage->open();
+    }
+
+    /**
+     * @When I name it :name
+     */
+    public function iSpecifyItsNameAs($name = null)
+    {
+        $this->createPage->nameIt($name);
+    }
+
+    /**
+     * @When I add it
+     * @When I try to add it
+     */
+    public function iAddIt()
+    {
+        $this->createPage->create();
     }
 
     /**
