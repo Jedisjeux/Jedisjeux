@@ -8,6 +8,12 @@ sylius_grid:
             sorting:
                 name: asc
             fields:
+                image:
+                    type: twig
+                    label: sylius.ui.image
+                    path: .
+                    options:
+                        template: "backend/game_award/grid/field/image.html.twig"
                 name:
                     type: string
                     label: sylius.ui.name

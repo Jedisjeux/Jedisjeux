@@ -2,6 +2,7 @@
 
 namespace spec\App\Entity;
 
+use App\Entity\GameAwardImage;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
@@ -37,5 +38,16 @@ class GameAwardSpec extends ObjectBehavior
     {
         $this->setSlug('spiel-des-jahres');
         $this->getSlug()->shouldReturn('spiel-des-jahres');
+    }
+
+    function it_has_no_image_by_default()
+    {
+        $this->getImage()->shouldReturn(null);
+    }
+
+    function its_image_is_mutable(GameAwardImage $image)
+    {
+        $this->setImage($image);
+        $this->getImage()->shouldReturn($image);
     }
 }

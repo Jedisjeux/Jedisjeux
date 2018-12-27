@@ -72,6 +72,7 @@ services:
         class: App\Fixture\Factory\GameAwardExampleFactory
         arguments:
             - "@app.factory.game_award"
+            - "@app.factory.game_award_image"
         public: true
 
     app.fixture.example_factory.game_play:

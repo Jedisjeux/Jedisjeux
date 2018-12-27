@@ -14,6 +14,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -55,6 +56,15 @@ class GameAward implements ResourceInterface
     }
 
     /**
+     * @var GameAwardImage|null $image
+     *
+     * @ORM\OneToOne(targetEntity="App\Entity\GameAwardImage", cascade={"persist"})
+     *
+     * @Assert\Valid()
+     */
+    private $image;
+
+    /**
      * @return string|null
      */
     public function getSlug(): ?string
@@ -68,5 +78,21 @@ class GameAward implements ResourceInterface
     public function setSlug(?string $slug): void
     {
         $this->slug = $slug;
+    }
+
+    /**
+     * @return GameAwardImage|null
+     */
+    public function getImage(): ?GameAwardImage
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param GameAwardImage|null $image
+     */
+    public function setImage(?GameAwardImage $image): void
+    {
+        $this->image = $image;
     }
 }

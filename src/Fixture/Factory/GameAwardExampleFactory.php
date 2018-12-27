@@ -12,6 +12,8 @@
 namespace App\Fixture\Factory;
 
 use App\Entity\GameAward;
+use App\Entity\GameAwardImage;
+use App\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,7 +23,12 @@ class GameAwardExampleFactory extends AbstractExampleFactory
     /**
      * @var FactoryInterface
      */
-    protected $dealerFactory;
+    private $gameAwardFactory;
+
+    /**
+     * @var FactoryInterface
+     */
+    private $gameAwardImageFactory;
 
     /**
      * @var \Faker\Generator
@@ -34,15 +41,15 @@ class GameAwardExampleFactory extends AbstractExampleFactory
     private $optionsResolver;
 
     /**
-     * DealerExampleFactory constructor.
-     *
-     * @param FactoryInterface $dealerFactory
+     * @param FactoryInterface $gameAwardFactory
+     * @param FactoryInterface $gameAwardImageFactory
      */
-    public function __construct(FactoryInterface $dealerFactory)
+    public function __construct(FactoryInterface $gameAwardFactory, FactoryInterface $gameAwardImageFactory)
     {
-        $this->dealerFactory = $dealerFactory;
+        $this->gameAwardFactory = $gameAwardFactory;
+        $this->gameAwardImageFactory = $gameAwardImageFactory;
 
-        $this->faker = \Faker\Factory::create('fr_FR');
+        $this->faker = \Faker\Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
@@ -57,6 +64,10 @@ class GameAwardExampleFactory extends AbstractExampleFactory
             ->setDefault('name', function (Options $options) {
                 return ucfirst($this->faker->words(3, true));
             })
+
+            ->setDefault('image', LazyOption::randomOneImageOrNull(
+                __DIR__.'/../../../tests/Resources/fixtures/awards', 80
+            ))
         ;
     }
 
@@ -68,9 +79,29 @@ class GameAwardExampleFactory extends AbstractExampleFactory
         $options = $this->optionsResolver->resolve($options);
 
         /** @var GameAward $gameAward */
-        $gameAward = $this->dealerFactory->createNew();
+        $gameAward = $this->gameAwardFactory->createNew();
         $gameAward->setName($options['name']);
 
+        if (null !== $options['image']) {
+            $this->createImage($gameAward, $options);
+        }
+
         return $gameAward;
+    }
+
+    /**
+     * @param GameAward $gameAward
+     * @param array  $options
+     */
+    private function createImage(GameAward $gameAward, array $options)
+    {
+        $imagePath = $options['image'];
+        /** @var GameAwardImage $image */
+        $image = $this->gameAwardImageFactory->createNew();
+        $image->setPath(basename($imagePath));
+
+        file_put_contents($image->getAbsolutePath(), file_get_contents($imagePath));
+
+        $gameAward->setImage($image);
     }
 }
