@@ -66,6 +66,7 @@ services:
         arguments:
             - "@app.behat.page.backend.game_award.create"
             - "@app.behat.page.backend.game_award.index"
+            - "@app.behat.page.backend.game_award.update"
         tags:
             - { name: fob.context_service }
 
