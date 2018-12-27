@@ -88,9 +88,9 @@ sylius_fixtures:
                 game_award:
                     options:
                         custom:
-                            - { name: "Spiel des Jahres" }
-                            - { name: "As d'or" }
-                            - { name: "Deutscher Spiele Preis" }
+                            - { name: "Spiel des Jahres", image: "tests/Resources/fixtures/awards/spiel-des-jahres.png" }
+                            - { name: "As d'or", image: "tests/Resources/fixtures/awards/as-or.jpeg" }
+                            - { name: "Deutscher Spiele Preis", image: null }
 
                 year_award:
                     options:
