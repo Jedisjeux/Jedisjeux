@@ -29,6 +29,10 @@ class GameAwardType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label' => 'sylius.ui.name',
+            ])
+            ->add('image', GameAwardImageType::class, [
+                'label' => false,
+                'required' => false,
             ]);
     }
 

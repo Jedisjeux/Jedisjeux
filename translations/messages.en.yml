@@ -56,6 +56,7 @@ app:
         edit_dealer_price: Edit dealer price
         edit_festival_list: Edit festival list
         edit_festival_list_item: Edit festival list item
+        edit_game_award: Edit game award
         edit_game_play: Edit game play
         edit_person: Edit person
         edit_post: Edit post

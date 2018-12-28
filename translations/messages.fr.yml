@@ -56,6 +56,7 @@ app:
         edit_dealer_price: Modifier le tarif du vendeur
         edit_festival_list: Modifier la liste de festival
         edit_festival_list_item: Modifier l'item de liste de festival
+        edit_game_award: Modifier la récompense de jeu
         edit_game_play: Modifier la partie de jeu
         edit_person: Modifier la personne
         edit_post: Modifier le message

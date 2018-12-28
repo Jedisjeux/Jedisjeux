@@ -25,6 +25,9 @@ sylius_grid:
                     options:
                         fields: [name]
             actions:
+                main:
+                    create:
+                        type: create
                 item:
                     update:
                         type: update
