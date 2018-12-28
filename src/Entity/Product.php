@@ -246,6 +246,13 @@ class Product extends BaseProduct implements ReviewableInterface
     protected $videos;
 
     /**
+     * @var Collection|YearAward[]
+     *
+     * @ORM\ManyToMany(targetEntity="App\Entity\YearAward")
+     */
+    private $yearAwards;
+
+    /**
      * Product constructor.
      */
     public function __construct()
@@ -261,6 +268,7 @@ class Product extends BaseProduct implements ReviewableInterface
         $this->notifications = new ArrayCollection();
         $this->barcodes = new ArrayCollection();
         $this->videos = new ArrayCollection();
+        $this->yearAwards = new ArrayCollection();
         $this->code = uniqid('product_');
     }
 
@@ -916,6 +924,42 @@ class Product extends BaseProduct implements ReviewableInterface
     {
         $this->videos->removeElement($video);
         $video->setProduct(null);
+    }
+
+    /**
+     * @return YearAward[]|Collection
+     */
+    public function getYearAwards(): Collection
+    {
+        return $this->yearAwards;
+    }
+
+    /**
+     * @param YearAward $yearAward
+     *
+     * @return bool
+     */
+    public function hasYearAward(YearAward $yearAward): bool
+    {
+        return $this->yearAwards->contains($yearAward);
+    }
+
+    /**
+     * @param YearAward $yearAward
+     */
+    public function addYearAward(YearAward $yearAward): void
+    {
+        if (!$this->hasYearAward($yearAward)) {
+            $this->yearAwards->add($yearAward);
+        }
+    }
+
+    /**
+     * @param YearAward $yearAward
+     */
+    public function removeYearAward(YearAward $yearAward): void
+    {
+        $this->yearAwards->removeElement($yearAward);
     }
 
     /**

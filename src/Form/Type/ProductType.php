@@ -13,6 +13,7 @@ namespace App\Form\Type;
 
 use App\Entity\Product;
 use App\Entity\Taxon;
+use App\Entity\YearAward;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -124,6 +125,21 @@ class ProductType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
+            ])
+            ->add('yearAwards', EntityType::class, [
+                'label' => false,
+                'choice_label' => 'name',
+                'placeholder' => 'app.ui.choose_year_awards',
+                'class' => YearAward::class,
+                'group_by' => 'award.name',
+                'query_builder' => function (EntityRepository $repository) {
+                    return $repository->createQueryBuilder('o')
+                        ->join('o.award', 'award')
+                        ->orderBy('award.name', 'asc')
+                        ->addOrderBy('o.year', 'desc');
+                },
+                'multiple' => true,
+                'required' => false,
             ]);
     }
 
