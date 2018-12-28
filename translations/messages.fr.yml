@@ -281,6 +281,8 @@ sylius:
         manage_products: Gérer les jeux
         manage_reviews_of_your_products: Gérer les avis de jeu
         manage_static_contents: Gérer les contenus statiques
+        max: Max
+        min: Min
         new_article_review: Nouvel avis d'article
         new_customer: Nouveau membre
         new_customers: Nouveaux membres

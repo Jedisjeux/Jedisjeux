@@ -54,7 +54,7 @@ class ProductType extends AbstractType
                 'required' => false,
             ])
             ->add('mechanisms', EntityType::class, [
-                'label' => 'label.mechanisms',
+                'label' => 'app.ui.mechanisms',
                 'placeholder' => 'label.choose_mechanisms',
                 'class' => 'App:Taxon',
                 'group_by' => 'parent',
@@ -70,7 +70,7 @@ class ProductType extends AbstractType
                 'required' => false,
             ])
             ->add('themes', EntityType::class, [
-                'label' => 'label.themes',
+                'label' => 'app.ui.themes',
                 'placeholder' => 'label.choose_themes',
                 'class' => 'App:Taxon',
                 'group_by' => 'parent',
@@ -91,22 +91,22 @@ class ProductType extends AbstractType
             ])
             ->add('boxContent', TextareaType::class, [
                 'required' => false,
-                'label' => 'label.material',
+                'label' => 'app.ui.box_content',
             ])
             ->add('minAge', null, [
-                'label' => 'label.age_min',
+                'label' => 'app.ui.age',
             ])
             ->add('minDuration', null, [
-                'label' => 'label.min',
+                'label' => 'app.ui.min',
             ])
             ->add('maxDuration', null, [
-                'label' => 'label.max',
+                'label' => 'app.ui.max',
             ])
             ->add('minPlayerCount', null, [
-                'label' => 'label.min',
+                'label' => 'app.ui.min',
             ])
             ->add('maxPlayerCount', null, [
-                'label' => 'label.max',
+                'label' => 'app.ui.max',
             ])
             ->add('barcodes', CollectionType::class, [
                 'label' => 'label.barcodes',

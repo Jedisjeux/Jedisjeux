@@ -135,8 +135,10 @@ app:
         manage_topics: Manage topics
         manage_year_awards: Manage year awards
         material_rating: Material rating
+        max: Max
         max_duration: Max duration
         mechanisms: Mechanisms
+        min: Min
         min_duration: Min duration
         moderation: Moderation
         more: More
@@ -255,3 +257,8 @@ app:
         year_awards: Year awards
         your_comment: Your comment
         your_rating: Your rating
+sylius:
+    ui:
+        pending_publication: Pending publication
+        pending_review: Pending review
+        pending_translation: Pending translation
