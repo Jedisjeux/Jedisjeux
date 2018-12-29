@@ -1,0 +1,17 @@
+{% import 'macro/image.html.twig' as images %}
+
+{% set yearAwardPath = '#' %}
+{% set imagePath =  year_award.award.image is not null ? year_award.award.image.webPath : '/assets/frontend/images/placeholder.png' %}
+
+<div class="image-box style-2 mb-20 bordered light-gray-bg">
+    <div class="overlay-container overlay-visible">
+        {{ images.render(imagePath, 'magazine_item', year_award.name) }}
+        <a class="overlay-link" href="{{ yearAwardPath }}"><i class="fa fa-link"></i></a>
+        <div class="overlay-bottom text-left">
+            <p class="lead margin-clear">{{ year_award.name }}</p>
+        </div>
+    </div>
+    <div class="body text-center">
+        <a href="{{ yearAwardPath }}" class="btn btn-default btn-sm margin-clear">{{ 'sylius.ui.view_more'|trans }}<i class="fa fa-arrow-right pl-10"></i></a>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+app_frontend_year_award_index:
+    methods: [GET]
+    path: /year-awards/
+    defaults:
+        _controller: app.controller.year_award::indexAction
+        _sylius:
+            grid: app_frontend_year_award
+            paginate: 12
+            template: frontend/year_award/index.html.twig

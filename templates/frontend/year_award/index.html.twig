@@ -1,0 +1,36 @@
+{% extends 'frontend/layout.html.twig' %}
+
+{% from 'macro/pagination.html.twig' import simple as pagination %}
+
+{% block content %}
+    {% include 'frontend/year_award/index/_banner.html.twig' %}
+
+    <!-- main-container start -->
+    <!-- ================ -->
+    <section class="main-container">
+        <div class="container">
+            <div class="row">
+                <!-- main start -->
+                <!-- ================ -->
+                <div id="year-award-list" class="main col-12">
+                    <div class="row grid-space-10">
+                        {% for year_award in year_awards.data %}
+                            <div class="col-md-6 col-lg-3">
+                                {% include 'frontend/year_award/_single.html.twig' %}
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- pagination start -->
+                    {{ pagination(year_awards.data) }}
+                    <!-- pagination end -->
+
+                </div>
+                <!-- main end -->
+            </div>
+        </div>
+    </section>
+    <!-- main-container end -->
+
+    {% include 'frontend/footer/_top.html.twig' %}
+{% endblock content %}

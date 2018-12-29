@@ -345,6 +345,13 @@ services:
         tags:
             - { name: fob.context_service }
 
+    app.behat.context.ui.frontend.year_award:
+        class: App\Behat\Context\Ui\Frontend\YearAwardContext
+        arguments:
+            - "@app.behat.page.frontend.year_award.index"
+        tags:
+            - { name: fob.context_service }
+
     app.behat.context.ui.email:
         class: App\Behat\Context\Ui\EmailContext
         arguments:

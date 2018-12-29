@@ -46,3 +46,6 @@ app_frontend_user:
 
 sylius_security:
     resource: "frontend/security.yml"
+
+app_frontend_year_award:
+    resource: "frontend/year_award.yml"

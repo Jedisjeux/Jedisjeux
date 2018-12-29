@@ -39,6 +39,7 @@ imports:
     - suites/ui/product/viewing_product_reviews.yml
     - suites/ui/product/viewing_product_videos.yml
     - suites/ui/product/viewing_products.yml
+    - suites/ui/product/viewing_year_awards.yml
     - suites/ui/redirection/managing_redirections.yml
     - suites/ui/taxon/managing_taxons.yml
     - suites/ui/topic/adding_topic_posts.yml

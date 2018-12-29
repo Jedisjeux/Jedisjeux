@@ -45,6 +45,7 @@ imports:
     - { resource: 'grids/frontend/topic.yml' }
     - { resource: 'grids/frontend/topic_from_taxon.yml' }
     - { resource: 'grids/frontend/user_game_library.yml' }
+    - { resource: 'grids/frontend/year_award.yml' }
 
 sylius_grid:
     templates:

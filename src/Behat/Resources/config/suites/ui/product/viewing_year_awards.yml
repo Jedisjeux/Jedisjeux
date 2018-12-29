@@ -1,0 +1,19 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        ui_viewing_year_awards:
+            contexts_services:
+                - app.behat.context.hook.doctrine_orm
+
+                - app.behat.context.transform.game_award
+                - app.behat.context.transform.shared_storage
+
+                - app.behat.context.setup.game_award
+                - app.behat.context.setup.year_award
+                - app.behat.context.setup.security
+
+                - app.behat.context.ui.frontend.year_award
+            filters:
+                tags: "@viewing_year_awards && @ui"
