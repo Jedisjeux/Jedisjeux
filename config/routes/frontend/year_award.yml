@@ -1,6 +1,6 @@
 app_frontend_year_award_index:
     methods: [GET]
-    path: /year-awards/
+    path: /recompenses-annuelles/
     defaults:
         _controller: app.controller.year_award::indexAction
         _sylius:

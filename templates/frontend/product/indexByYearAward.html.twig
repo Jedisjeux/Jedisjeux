@@ -1,0 +1,34 @@
+{% extends 'frontend/layout.html.twig' %}
+
+{% from 'macro/pagination.html.twig' import simple as pagination %}
+
+{% set pageTitle = 'app.ui.boardgames'| trans %}
+
+{% block content %}
+    {% include 'frontend/product/indexByYearAward/_banner.html.twig' %}
+
+    <!-- main-container start -->
+    <!-- ================ -->
+    <section class="main-container">
+
+        <div class="container">
+            <div class="row">
+
+                <!-- main start -->
+                <!-- ================ -->
+                <div id="product-list" class="main col-12">
+                    {% include 'frontend/product/index/_sorting.html.twig' %}
+                    {% include 'frontend/product/grid/_fourColumns.html.twig' %}
+
+                    <!-- pagination start -->
+                    {{ pagination(products.data) }}
+                    <!-- pagination end -->
+                </div>
+                <!-- main end -->
+
+            </div>
+        </div>
+    </section>
+    <!-- main-container end -->
+
+{% endblock content %}

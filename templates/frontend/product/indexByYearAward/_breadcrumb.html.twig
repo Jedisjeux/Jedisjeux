@@ -1,0 +1,12 @@
+<!-- breadcrumb start -->
+<!-- ================ -->
+<div class="breadcrumb-container">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><i class="fa fa-home pr-2"></i><a class="link-dark" href="{{ path('app_homepage') }}">{{ 'sylius.ui.home'|trans }}</a></li>
+            <li class="breadcrumb-item"><a class="link-dark" href="{{ path('app_frontend_year_award_index') }}">{{ 'app.ui.year_awards'|trans }}</a></li>
+            <li class="breadcrumb-item active">{{ year_award.name }}</li>
+        </ol>
+    </div>
+</div>
+<!-- breadcrumb end -->

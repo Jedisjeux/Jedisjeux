@@ -13,6 +13,7 @@ namespace App\Repository;
 
 use App\Entity\Person;
 use App\Entity\Product;
+use App\Entity\YearAward;
 use App\Utils\DateCalculator;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping;
@@ -47,9 +48,11 @@ class ProductRepository extends BaseProductRepository
 
     /**
      * @param $localeCode
-     * @param bool                $onlyPublished
-     * @param array               $criteria
+     * @param bool $onlyPublished
+     * @param array $criteria
      * @param TaxonInterface|null $taxon
+     * @param Person|null $person
+     * @param YearAward|null $yearAward
      *
      * @return QueryBuilder
      */
@@ -58,7 +61,8 @@ class ProductRepository extends BaseProductRepository
         $onlyPublished = true,
         array $criteria = [],
         TaxonInterface $taxon = null,
-        Person $person = null
+        Person $person = null,
+        YearAward $yearAward = null
     ) {
         $queryBuilder = $this->createQueryBuilder('o');
 
@@ -126,6 +130,13 @@ class ProductRepository extends BaseProductRepository
                     'publisher = :person'
                 ))
                 ->setParameter('person', $criteria['person']);
+        }
+
+        if (null !== $yearAward) {
+            $queryBuilder
+                ->innerJoin('o.yearAwards', 'yearAward')
+                ->andWhere($queryBuilder->expr()->eq('yearAward', ':yearAward'))
+                ->setParameter('yearAward', $yearAward);
         }
 
         return $queryBuilder;

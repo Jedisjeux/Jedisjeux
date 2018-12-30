@@ -12,6 +12,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
@@ -35,6 +36,20 @@ class YearAward implements ResourceInterface
      * @ORM\ManyToOne(targetEntity="App\Entity\GameAward")
      */
     private $award;
+
+    /**
+     * @var string|null
+     *
+     * @Gedmo\Slug(handlers={
+     *      @Gedmo\SlugHandler(class="Gedmo\Sluggable\Handler\RelativeSlugHandler", options={
+     *          @Gedmo\SlugHandlerOption(name="relationField", value="award"),
+     *          @Gedmo\SlugHandlerOption(name="relationSlugField", value="slug"),
+     *          @Gedmo\SlugHandlerOption(name="separator", value="/")
+     *      })
+     * }, separator="-", updatable=true, fields={"year"})
+     * @ORM\Column(type="string", unique=true, nullable=true)
+     */
+    private $slug;
 
     /**
      * @return string|null
@@ -75,5 +90,21 @@ class YearAward implements ResourceInterface
         }
 
         return trim($this->getAward()->getName().' '.$this->getYear());
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param null|string $slug
+     */
+    public function setSlug(?string $slug): void
+    {
+        $this->slug = $slug;
     }
 }

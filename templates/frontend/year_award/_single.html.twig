@@ -1,6 +1,6 @@
 {% import 'macro/image.html.twig' as images %}
 
-{% set yearAwardPath = '#' %}
+{% set yearAwardPath = path('sylius_frontend_product_index_by_year_award', { 'slug': year_award.slug }) %}
 {% set imagePath =  year_award.award.image is not null ? year_award.award.image.webPath : '/assets/frontend/images/placeholder.png' %}
 
 <div class="image-box style-2 mb-20 bordered light-gray-bg">

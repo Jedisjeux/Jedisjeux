@@ -1,0 +1,10 @@
+app_frontend_partial_year_award_show:
+    path: /{slug}
+    methods: [GET]
+    defaults:
+        _controller: app.controller.year_award:showAction
+        _sylius:
+            template: $template
+            vars: $vars
+    requirements:
+        slug: "[^?]+"
