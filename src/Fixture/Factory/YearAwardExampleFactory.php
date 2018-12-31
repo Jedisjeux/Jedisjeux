@@ -14,6 +14,7 @@ namespace App\Fixture\Factory;
 use App\Entity\GameAward;
 use App\Entity\YearAward;
 use App\Fixture\OptionsResolver\LazyOption;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -24,12 +25,17 @@ class YearAwardExampleFactory extends AbstractExampleFactory
     /**
      * @var FactoryInterface
      */
-    protected $yearAwardFactory;
+    private $yearAwardFactory;
 
     /**
      * @var RepositoryInterface
      */
-    protected $gameAwardRepository;
+    private $gameAwardRepository;
+
+    /**
+     * @var RepositoryInterface
+     */
+    private $productRepository;
 
     /**
      * @var \Faker\Generator
@@ -42,13 +48,18 @@ class YearAwardExampleFactory extends AbstractExampleFactory
     private $optionsResolver;
 
     /**
-     * @param FactoryInterface    $yearAwardFactory
+     * @param FactoryInterface $yearAwardFactory
      * @param RepositoryInterface $gameAwardRepository
+     * @param RepositoryInterface $productRepository
      */
-    public function __construct(FactoryInterface $yearAwardFactory, RepositoryInterface $gameAwardRepository)
-    {
+    public function __construct(
+        FactoryInterface $yearAwardFactory,
+        RepositoryInterface $gameAwardRepository,
+        RepositoryInterface $productRepository
+    ){
         $this->yearAwardFactory = $yearAwardFactory;
         $this->gameAwardRepository = $gameAwardRepository;
+        $this->productRepository = $productRepository;
 
         $this->faker = \Faker\Factory::create('fr_FR');
         $this->optionsResolver = new OptionsResolver();
@@ -68,7 +79,11 @@ class YearAwardExampleFactory extends AbstractExampleFactory
 
             ->setDefault('award', LazyOption::randomOne($this->gameAwardRepository))
             ->setAllowedTypes('award', ['null', 'string', GameAward::class])
-            ->setNormalizer('award', LazyOption::findOneBy($this->gameAwardRepository, 'slug'));
+            ->setNormalizer('award', LazyOption::findOneBy($this->gameAwardRepository, 'slug'))
+
+            ->setDefault('product', LazyOption::randomOne($this->productRepository))
+            ->setAllowedTypes('product', ['null', 'string', ProductInterface::class])
+            ->setNormalizer('product', LazyOption::findOneBy($this->productRepository, 'code'))
         ;
     }
 
@@ -83,6 +98,7 @@ class YearAwardExampleFactory extends AbstractExampleFactory
         $yearAward = $this->yearAwardFactory->createNew();
         $yearAward->setYear($options['year']);
         $yearAward->setAward($options['award']);
+        $yearAward->setProduct($options['product']);
 
         return $yearAward;
     }

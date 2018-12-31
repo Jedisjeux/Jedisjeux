@@ -248,7 +248,7 @@ class Product extends BaseProduct implements ReviewableInterface
     /**
      * @var Collection|YearAward[]
      *
-     * @ORM\ManyToMany(targetEntity="App\Entity\YearAward")
+     * @ORM\OneToMany(targetEntity="App\Entity\YearAward", mappedBy="product", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $yearAwards;
 
@@ -951,6 +951,7 @@ class Product extends BaseProduct implements ReviewableInterface
     {
         if (!$this->hasYearAward($yearAward)) {
             $this->yearAwards->add($yearAward);
+            $yearAward->setProduct($this);
         }
     }
 
@@ -960,6 +961,7 @@ class Product extends BaseProduct implements ReviewableInterface
     public function removeYearAward(YearAward $yearAward): void
     {
         $this->yearAwards->removeElement($yearAward);
+        $yearAward->setProduct(null);
     }
 
     /**

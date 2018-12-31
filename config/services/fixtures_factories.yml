@@ -192,4 +192,5 @@ services:
         arguments:
             - "@app.factory.year_award"
             - "@app.repository.game_award"
+            - "@sylius.repository.product"
         public: true

@@ -457,6 +457,8 @@ class ProductSpec extends ObjectBehavior
 
     function it_adds_year_awards(YearAward $yearAward)
     {
+        $yearAward->setProduct($this)->shouldBeCalled();
+
         $this->addYearAward($yearAward);
         $this->hasYearAward($yearAward)->shouldReturn(true);
     }
@@ -464,6 +466,9 @@ class ProductSpec extends ObjectBehavior
     function it_removes_year_awards(YearAward $yearAward)
     {
         $this->addYearAward($yearAward);
+
+        $yearAward->setProduct(null)->shouldBeCalled();
+
         $this->removeYearAward($yearAward);
         $this->hasYearAward($yearAward)->shouldReturn(false);
     }

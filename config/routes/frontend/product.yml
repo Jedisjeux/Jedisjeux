@@ -33,18 +33,6 @@ sylius_frontend_product_index_by_person:
             paginate: 16
             template: frontend/product/indexByPerson.html.twig
 
-sylius_frontend_product_index_by_year_award:
-    methods: [GET]
-    path: /jeux-de-societe/recompenses-annuelles/{slug}
-    defaults:
-        _controller: sylius.controller.product::indexAction
-        _sylius:
-            grid: sylius_frontend_product_from_year_award
-            paginate: 16
-            template: frontend/product/indexByYearAward.html.twig
-    requirements:
-        slug: "[^?]+"
-
 sylius_frontend_product_index_by_taxon:
     methods: [GET]
     path: /jeux-de-societe/{slug}

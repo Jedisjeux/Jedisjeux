@@ -12,7 +12,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
@@ -38,18 +38,11 @@ class YearAward implements ResourceInterface
     private $award;
 
     /**
-     * @var string|null
+     * @var ProductInterface|null
      *
-     * @Gedmo\Slug(handlers={
-     *      @Gedmo\SlugHandler(class="Gedmo\Sluggable\Handler\RelativeSlugHandler", options={
-     *          @Gedmo\SlugHandlerOption(name="relationField", value="award"),
-     *          @Gedmo\SlugHandlerOption(name="relationSlugField", value="slug"),
-     *          @Gedmo\SlugHandlerOption(name="separator", value="/")
-     *      })
-     * }, separator="-", updatable=true, fields={"year"})
-     * @ORM\Column(type="string", unique=true, nullable=true)
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface", inversedBy="yearAwards")
      */
-    private $slug;
+    private $product;
 
     /**
      * @return string|null
@@ -83,6 +76,22 @@ class YearAward implements ResourceInterface
         $this->award = $award;
     }
 
+    /**
+     * @return ProductInterface|null
+     */
+    public function getProduct(): ?ProductInterface
+    {
+        return $this->product;
+    }
+
+    /**
+     * @param ProductInterface|null $product
+     */
+    public function setProduct(?ProductInterface $product): void
+    {
+        $this->product = $product;
+    }
+
     public function getName(): ?string
     {
         if (null === $this->getAward()) {
@@ -90,21 +99,5 @@ class YearAward implements ResourceInterface
         }
 
         return trim($this->getAward()->getName().' '.$this->getYear());
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    /**
-     * @param null|string $slug
-     */
-    public function setSlug(?string $slug): void
-    {
-        $this->slug = $slug;
     }
 }

@@ -4,6 +4,7 @@ namespace spec\App\Entity;
 
 use App\Entity\GameAward;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 class YearAwardSpec extends ObjectBehavior
@@ -38,6 +39,17 @@ class YearAwardSpec extends ObjectBehavior
     {
         $this->setAward($award);
         $this->getAward()->shouldReturn($award);
+    }
+
+    function it_has_no_product_by_default()
+    {
+        $this->getProduct()->shouldReturn(null);
+    }
+
+    function its_product_is_mutable(ProductInterface $product)
+    {
+        $this->setProduct($product);
+        $this->getProduct()->shouldReturn($product);
     }
 
     function it_has_no_name_by_default()

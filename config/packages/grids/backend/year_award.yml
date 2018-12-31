@@ -11,9 +11,9 @@ sylius_grid:
                 image:
                     type: twig
                     label: sylius.ui.image
-                    path: award
+                    path: product
                     options:
-                        template: "backend/game_award/grid/field/image.html.twig"
+                        template: "backend/product/grid/field/image.html.twig"
                 name:
                     type: string
                     label: sylius.ui.name
@@ -22,15 +22,12 @@ sylius_grid:
                     type: string
                     label: app.ui.year
                     sortable: ~
+                product:
+                    type: string
+                    label: app.ui.game
             filters:
                 search:
                     type: string
                     label: sylius.ui.search
                     options:
                         fields: [award.name]
-            actions:
-                item:
-                    update:
-                        type: update
-                    delete:
-                        type: delete
