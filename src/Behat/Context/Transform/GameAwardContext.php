@@ -33,6 +33,7 @@ class GameAwardContext implements Context
     }
 
     /**
+     * @Transform /^game award "([^"]+)"$/
      * @Transform :gameAward
      */
     public function getGameAwardByName($name)

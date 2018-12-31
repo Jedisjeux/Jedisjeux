@@ -13,6 +13,7 @@ namespace App\Behat\Context\Setup;
 
 use App\Behat\Service\SharedStorageInterface;
 use App\Entity\GameAward;
+use App\Entity\Product;
 use App\Entity\YearAward;
 use App\Fixture\Factory\ExampleFactoryInterface;
 use Behat\Behat\Context\Context;
@@ -60,6 +61,24 @@ class YearAwardContext implements Context
         /** @var YearAward $yearAward */
         $yearAward = $this->yearAwardFactory->create([
             'award' => $gameAward,
+            'year' => $year,
+        ]);
+
+        $this->yearAwardRepository->add($yearAward);
+        $this->sharedStorage->set('year_award', $yearAward);
+    }
+
+    /**
+     * @Given /^(game award "[^"]+") has been attributed to (this product) in "([^"]+)"$/
+     *
+     * @param string $name
+     */
+    public function productHasAYearAward(GameAward $gameAward, Product $product, $year)
+    {
+        /** @var YearAward $yearAward */
+        $yearAward = $this->yearAwardFactory->create([
+            'award' => $gameAward,
+            'product' => $product,
             'year' => $year,
         ]);
 

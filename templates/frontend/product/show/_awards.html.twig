@@ -1,0 +1,9 @@
+{% import 'macro/image.html.twig' as images %}
+
+<dl id="product-awards" class="row">
+    {% for yearAward in product.yearAwards %}
+        {% set image = yearAward.award.image %}
+        <dt class="col-sm-1">{{ images.render(image.webPath, 'thumbnail', yearAward.award.name, 'rounded-circle') }}</dt>
+        <dd class="col-sm-11">{{ yearAward.name }}</dd>
+    {% endfor %}
+</dl>

@@ -106,6 +106,18 @@ class ShowPage extends SymfonyPage
         return $publishers->findAll('css', 'a');
     }
 
+    /**
+     * @return array
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     */
+    public function getAwards(): array
+    {
+        $artists = $this->getElement('awards');
+
+        return $artists->findAll('css', 'dd');
+    }
+
     public function countReviews(): int
     {
         return count($this->getElement('reviews')->findAll('css', '.comment'));
@@ -182,6 +194,7 @@ class ShowPage extends SymfonyPage
         return array_merge(parent::getDefinedElements(), [
             'articles' => '#articles',
             'artists' => '#product-artists',
+            'awards' => '#product-awards',
             'box_content' => '#box-content',
             'designers' => '#product-designers',
             'game_plays' => '#game-plays',

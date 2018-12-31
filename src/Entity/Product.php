@@ -935,6 +935,14 @@ class Product extends BaseProduct implements ReviewableInterface
     }
 
     /**
+     * @return bool
+     */
+    public function hasYearAwards(): bool
+    {
+        return !$this->yearAwards->isEmpty();
+    }
+
+    /**
      * @param YearAward $yearAward
      *
      * @return bool

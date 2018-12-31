@@ -140,6 +140,11 @@
                         <h4 class="space-top">{{ 'app.ui.specifications'|trans }}</h4>
                         <hr>
                         {% include 'frontend/product/show/_specifications.html.twig' %}
+                        {% if product.hasYearAwards %}
+                            <h4 class="space-top">{{ 'app.ui.game_awards'|trans }}</h4>
+                            <hr>
+                            {% include 'frontend/product/show/_awards.html.twig' %}
+                        {% endif %}
                         <hr>
                     </div>
                 </div>
