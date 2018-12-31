@@ -12,6 +12,7 @@
 namespace App\Behat\Page\Backend\Product;
 
 use App\Behat\Page\Backend\Crud\CreatePage as BaseCreatePage;
+use App\Entity\GameAward;
 use Behat\Mink\Exception\ElementNotFoundException;
 
 /**
@@ -52,6 +53,22 @@ class CreatePage extends BaseCreatePage
     }
 
     /**
+     * @param GameAward $gameAward
+     * @param string $year
+     *
+     * @throws ElementNotFoundException
+     */
+    public function addAward(GameAward $gameAward, string $year)
+    {
+        $this->clickTabIfItsNotActive('awards');
+
+        $this->getDocument()->find('css', '#sylius_product_yearAwards a[data-form-collection="add"]')->click();
+
+        $this->getElement('award_name')->setValue($gameAward->getId());
+        $this->getElement('award_year')->setValue($year);
+    }
+
+    /**
      * @param string $minPlayerCount
      */
     public function specifyMinPlayerCount($minPlayerCount)
@@ -73,6 +90,8 @@ class CreatePage extends BaseCreatePage
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'award_name' => '#sylius_product_yearAwards_0_award',
+            'award_year' => '#sylius_product_yearAwards_0_year',
             'name' => '#sylius_product_translations_en_US_name',
             'min_player_count' => '#sylius_product_minPlayerCount',
             'max_player_count' => '#sylius_product_maxPlayerCount',
