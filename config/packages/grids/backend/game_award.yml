@@ -33,3 +33,14 @@ sylius_grid:
                         type: update
                     delete:
                         type: delete
+                    yearAwards:
+                        type: links
+                        label: app.ui.manage_year_awards
+                        options:
+                            links:
+                                index:
+                                    label: app.ui.year_awards
+                                    route: app_backend_year_award_index
+                                    parameters:
+                                        criteria:
+                                            award: resource.id

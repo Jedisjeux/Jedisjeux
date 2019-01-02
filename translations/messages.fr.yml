@@ -76,6 +76,7 @@ app:
         from_board_game_geek: À partir de BoardGameGeek
         from_years: 'À partir de %count% ans'
         game: Jeu
+        game_award: Récompense de jeu
         game_awards: Récompenses de jeu
         game_details: Informations du jeu
         game_library: Ludothèque

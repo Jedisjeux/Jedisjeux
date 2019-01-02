@@ -30,7 +30,7 @@ class YearAwardType extends AbstractType
 
         $builder
             ->add('award', EntityType::class, [
-                'label' => 'app.ui.game_awards',
+                'label' => 'app.ui.game_award',
                 'placeholder' => '---',
                 'class' => GameAward::class,
                 'choice_label' => 'name',

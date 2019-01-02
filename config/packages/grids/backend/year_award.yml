@@ -31,3 +31,9 @@ sylius_grid:
                     label: sylius.ui.search
                     options:
                         fields: [award.name]
+                award:
+                    type: entity
+                    label: app.ui.game_award
+                    form_options:
+                        class: '%app.model.game_award.class%'
+                        choice_label: name

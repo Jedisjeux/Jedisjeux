@@ -76,6 +76,7 @@ app:
         from_board_game_geek: From BoardGameGeek
         from_years: 'From %count% years'
         game: Game
+        game_award: Game award
         game_awards: Game awards
         game_details: Game details
         game_library: Game library
