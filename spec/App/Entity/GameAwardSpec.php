@@ -40,6 +40,17 @@ class GameAwardSpec extends ObjectBehavior
         $this->getSlug()->shouldReturn('spiel-des-jahres');
     }
 
+    function it_has_no_description_by_default()
+    {
+        $this->getDescription()->shouldReturn(null);
+    }
+
+    function its_description_is_mutable()
+    {
+        $this->setDescription('Howard the duck');
+        $this->getDescription()->shouldReturn('Howard the duck');
+    }
+
     function it_has_no_image_by_default()
     {
         $this->getImage()->shouldReturn(null);

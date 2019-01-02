@@ -40,6 +40,13 @@ class GameAward implements ResourceInterface
     private $slug;
 
     /**
+     * @var string|null
+     *
+     * @ORM\Column(type="text")
+     */
+    private $description;
+
+    /**
      * @return string|null
      */
     public function getName(): ?string
@@ -78,6 +85,22 @@ class GameAward implements ResourceInterface
     public function setSlug(?string $slug): void
     {
         $this->slug = $slug;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string|null $description
+     */
+    public function setDescription(?string $description): void
+    {
+        $this->description = $description;
     }
 
     /**

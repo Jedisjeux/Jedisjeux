@@ -65,6 +65,10 @@ class GameAwardExampleFactory extends AbstractExampleFactory
                 return ucfirst($this->faker->words(3, true));
             })
 
+            ->setDefault('description', function (Options $options) {
+                return sprintf('<p>%s</p>', $this->faker->sentences(3, true));
+            })
+
             ->setDefault('image', LazyOption::randomOneImageOrNull(
                 __DIR__.'/../../../tests/Resources/fixtures/awards', 80
             ))
@@ -81,6 +85,7 @@ class GameAwardExampleFactory extends AbstractExampleFactory
         /** @var GameAward $gameAward */
         $gameAward = $this->gameAwardFactory->createNew();
         $gameAward->setName($options['name']);
+        $gameAward->setDescription($options['description']);
 
         if (null !== $options['image']) {
             $this->createImage($gameAward, $options);

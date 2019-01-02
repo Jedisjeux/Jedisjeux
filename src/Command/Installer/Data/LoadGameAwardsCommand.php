@@ -84,6 +84,9 @@ class LoadGameAwardsCommand extends Command
         $this->manager->flush();
     }
 
+    /**
+     * @param array $data
+     */
     private function createGameAward(array $data): void
     {
         /** @var GameAward $gameAward */
@@ -95,6 +98,7 @@ class LoadGameAwardsCommand extends Command
         }
 
         $gameAward->setName($data['name']);
+        $gameAward->setDescription(sprintf('<p>%s</p>', $data['description']));
     }
 
     /**
@@ -103,7 +107,7 @@ class LoadGameAwardsCommand extends Command
     private function getGameAwards(): array
     {
         $sql = <<<EOM
-select p.nom as name
+select p.nom as name, p.description
 from jedisjeux.jdj_prix p
 EOM;
 
