@@ -20,6 +20,7 @@ app:
         ask_for_review: Ask for review
         ask_for_translation: Ask for translation
         avatar: Avatar
+        award_winning_games: Award-winning games
         barcode: Barcode
         barcodes: Barcodes
         blocks: Blocks

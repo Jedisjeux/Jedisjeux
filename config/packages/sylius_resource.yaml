@@ -165,3 +165,4 @@ sylius_resource:
         app.year_award:
             classes:
                 model: App\Entity\YearAward
+                repository: App\Repository\YearAwardRepository

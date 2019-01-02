@@ -2,6 +2,10 @@
 
 {% from 'macro/pagination.html.twig' import simple as pagination %}
 
+{% set pageTitle %}
+    {{ 'app.ui.award_winning_games'|trans }}
+{% endset %}
+
 {% block content %}
     {% include 'frontend/year_award/index/_banner.html.twig' %}
 
