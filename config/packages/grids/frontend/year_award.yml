@@ -7,7 +7,7 @@ sylius_grid:
                     class: "%app.model.year_award.class%"
                     repository:
                         method: createListQueryBuilder
-                        arguments: ["%locale%"]
+                        arguments: ["%locale%", $slug]
             limits: ~
             sorting:
                 year: desc
@@ -24,4 +24,5 @@ sylius_grid:
                     label: app.ui.game_award
                     form_options:
                         class: '%app.model.game_award.class%'
+                        choice_value: slug
                         choice_label: name

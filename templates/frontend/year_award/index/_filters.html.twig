@@ -1,1 +1,3 @@
-{% include 'frontend/grid/_filters.html.twig' %}
+<div id="year-award-filters" data-award="{{ app.request.get('slug') }}">
+    {% include 'frontend/grid/_filters.html.twig' %}
+</div>

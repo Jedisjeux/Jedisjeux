@@ -22,7 +22,7 @@ class YearAwardRepository extends EntityRepository
      *
      * @return QueryBuilder
      */
-    public function createListQueryBuilder($locale)
+    public function createListQueryBuilder($locale, string $awardSlug = null)
     {
         $queryBuilder = $this->createQueryBuilder('o');
 
@@ -38,6 +38,13 @@ class YearAwardRepository extends EntityRepository
             ->andWhere('translation.locale = :locale')
             ->setParameter('locale', $locale)
             ->setParameter('main', true);
+
+        if (null !== $awardSlug) {
+            $queryBuilder
+                ->innerJoin('o.award', 'award')
+                ->andWhere('award.slug = :award')
+                ->setParameter('award', $awardSlug);
+        }
 
         return $queryBuilder;
     }

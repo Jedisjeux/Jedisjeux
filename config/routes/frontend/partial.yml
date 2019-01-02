@@ -34,6 +34,6 @@ sylius_frontend_partial_taxon:
     resource: "partial/taxon.yml"
     prefix: /taxons
 
-app_backend_partial_year_award:
-    resource: 'partial/year_award.yml'
-    prefix: /year-awards
+app_backend_partial_game_award:
+    resource: 'partial/game_award.yml'
+    prefix: /game-awards
