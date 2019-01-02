@@ -8,6 +8,7 @@ sylius_grid:
                     repository:
                         method: createListQueryBuilder
                         arguments: ["%locale%"]
+            limits: ~
             sorting:
                 year: desc
             fields:
