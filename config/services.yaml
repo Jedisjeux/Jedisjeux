@@ -22,6 +22,7 @@ services:
         namespace: App\Command\
         resource: '../src/Command/*'
         tags: [command_handler]
+        autowire: true
 
     App\Command\Installer\Data\LoadGameAwardsCommand:
         arguments:
