@@ -10,11 +10,14 @@ Feature: Viewing year awards
         And this game award has been celebrated in "2018"
         And this game award has also been celebrated in "2017"
         And this game award has also been celebrated in "2016"
+        And there is a game award "As d'or"
+        And this game award has been celebrated in "2018"
         And I am a logged in customer
 
     @ui
-    Scenario: Viewing year awards
-        When I want to browse year awards
+    Scenario: Viewing filtered year awards by specific award
+        When I view year awards from "Spiel des Jahres"
         Then I should see the year award "Spiel des Jahres 2018"
         And I should see the year award "Spiel des Jahres 2017"
         And I should see the year award "Spiel des Jahres 2016"
+        But I should not see the year award "As d'or 2018"

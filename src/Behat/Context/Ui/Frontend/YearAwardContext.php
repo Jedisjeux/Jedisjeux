@@ -12,6 +12,7 @@
 namespace App\Behat\Context\Ui\Frontend;
 
 use App\Behat\Page\Frontend\YearAward\IndexPage;
+use App\Entity\GameAward;
 use Behat\Behat\Context\Context;
 use Webmozart\Assert\Assert;
 
@@ -39,10 +40,28 @@ class YearAwardContext implements Context
     }
 
     /**
+     * @When I view year awards from :gameAward
+     */
+    public function iViewFilteredProductsWithDurationUpToMinutes(GameAward $gameAward)
+    {
+        $criteria = ['award' => $gameAward->getId()];
+
+        $this->indexPage->open(['criteria' => $criteria]);
+    }
+
+    /**
      * @Then I should see the year award :name
      */
     public function iShouldSeeYearAward($name)
     {
         Assert::true($this->indexPage->isYearAwardOnList($name));
+    }
+
+    /**
+     * @Then I should not see the year award :name
+     */
+    public function iShouldNotSeeYearAward($name)
+    {
+        Assert::false($this->indexPage->isYearAwardOnList($name));
     }
 }

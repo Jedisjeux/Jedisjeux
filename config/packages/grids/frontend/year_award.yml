@@ -14,3 +14,10 @@ sylius_grid:
                 year:
                     type: string
                     sortable: ~
+            filters:
+                award:
+                    type: frontend_entity
+                    label: app.ui.game_award
+                    form_options:
+                        class: '%app.model.game_award.class%'
+                        choice_label: name

@@ -2,10 +2,10 @@ services:
     app.grid.filter.frontend_comment:
         class: App\Grid\Filter\CommentFilter
         tags:
-        -
-            name: sylius.grid_filter
-            type: frontend_comment
-            form_type: App\Form\Filter\CommentFilterType
+            -
+                name: sylius.grid_filter
+                type: frontend_comment
+                form_type: App\Form\Filter\CommentFilterType
     app.grid.filter.between_two_fields:
         class: App\Grid\Filter\BetweenTwoFieldsFilter
         tags:
@@ -20,6 +20,12 @@ services:
                 name: sylius.grid_filter
                 type: frontend_between_two_fields
                 form_type: App\Form\Filter\IntegerFilterType
+    app.grid.filter.frontend_entity:
+        class: Sylius\Component\Grid\Filter\EntityFilter
+        tags:
+            -   name: sylius.grid_filter
+                type: frontend_entity
+                form_type: Sylius\Bundle\GridBundle\Form\Type\Filter\EntityFilterType
     app.grid.filter.frontend_greater_than_or_equal:
         class: App\Grid\Filter\GreaterThanOrEqualFilter
         tags:
