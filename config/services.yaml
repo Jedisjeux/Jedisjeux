@@ -23,6 +23,12 @@ services:
         resource: '../src/Command/*'
         tags: [command_handler]
 
+    App\Command\Installer\Data\LoadGameAwardsCommand:
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@app.factory.game_award'
+            - '@app.repository.game_award'
+
     app.factory.bgg_product:
         class: App\Factory\BggProductFactory
         arguments:
