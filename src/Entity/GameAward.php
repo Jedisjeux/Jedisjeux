@@ -28,6 +28,8 @@ class GameAward implements ResourceInterface
      * @var string|null
      *
      * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -42,7 +44,7 @@ class GameAward implements ResourceInterface
     /**
      * @var string|null
      *
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 

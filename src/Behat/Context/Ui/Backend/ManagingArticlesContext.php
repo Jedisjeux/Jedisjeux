@@ -231,7 +231,7 @@ class ManagingArticlesContext implements Context
     {
         $this->indexPage->open();
 
-        $status = str_replace(' ', '_', strtolower($status));
+        $status = ucfirst($status);
 
         Assert::true($this->indexPage->isSingleResourceOnPage(['title' => $title, 'status' => $status]));
     }
