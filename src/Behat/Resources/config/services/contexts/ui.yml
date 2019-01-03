@@ -61,6 +61,15 @@ services:
         tags:
             - { name: fob.context_service }
 
+    app.behat.context.ui.backend.managing_game_awards:
+        class: App\Behat\Context\Ui\Backend\ManagingGameAwardsContext
+        arguments:
+            - "@app.behat.page.backend.game_award.create"
+            - "@app.behat.page.backend.game_award.index"
+            - "@app.behat.page.backend.game_award.update"
+        tags:
+            - { name: fob.context_service }
+
     app.behat.context.ui.backend.managing_game_plays:
         class: App\Behat\Context\Ui\Backend\ManagingGamePlaysContext
         arguments:
@@ -163,6 +172,13 @@ services:
         arguments:
             - "@app.behat.page.backend.festival_list.index"
             - "@app.behat.page.backend.festival_list.create"
+        tags:
+            - { name: fob.context_service }
+
+    app.behat.context.ui.backend.managing_year_awards:
+        class: App\Behat\Context\Ui\Backend\ManagingYearAwardsContext
+        arguments:
+            - "@app.behat.page.backend.year_award.index"
         tags:
             - { name: fob.context_service }
 
@@ -326,6 +342,13 @@ services:
             - "@app.behat.page.frontend.topic.create_for_taxon"
             - "@app.behat.page.frontend.topic.update"
             - "@app.behat.page.frontend.topic.show"
+        tags:
+            - { name: fob.context_service }
+
+    app.behat.context.ui.frontend.year_award:
+        class: App\Behat\Context\Ui\Frontend\YearAwardContext
+        arguments:
+            - "@app.behat.page.frontend.year_award.index"
         tags:
             - { name: fob.context_service }
 

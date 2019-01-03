@@ -8,16 +8,19 @@ default:
                 - app.behat.context.hook.doctrine_orm
 
                 - app.behat.context.transform.customer
+                - app.behat.context.transform.game_award
                 - app.behat.context.transform.person
                 - app.behat.context.transform.product
                 - app.behat.context.transform.shared_storage
                 - app.behat.context.transform.taxon
 
-                - app.behat.context.setup.security
+                - app.behat.context.setup.game_award
                 - app.behat.context.setup.person
                 - app.behat.context.setup.product
                 - app.behat.context.setup.product_review
+                - app.behat.context.setup.security
                 - app.behat.context.setup.taxon
+                - app.behat.context.setup.year_award
 
                 - app.behat.context.ui.frontend.product
             filters:

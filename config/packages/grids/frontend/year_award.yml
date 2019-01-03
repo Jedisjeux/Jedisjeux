@@ -1,0 +1,28 @@
+sylius_grid:
+    grids:
+        app_frontend_year_award:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%app.model.year_award.class%"
+                    repository:
+                        method: createListQueryBuilder
+                        arguments: ["%locale%", $slug]
+            limits: ~
+            sorting:
+                year: desc
+            fields:
+                name:
+                    type: string
+                    sortable: ~
+                year:
+                    type: string
+                    sortable: ~
+            filters:
+                award:
+                    type: frontend_entity
+                    label: app.ui.game_award
+                    form_options:
+                        class: '%app.model.game_award.class%'
+                        choice_value: slug
+                        choice_label: name

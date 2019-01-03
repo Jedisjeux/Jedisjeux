@@ -1,0 +1,21 @@
+app_frontend_year_award_index:
+    methods: [GET]
+    path: /jeux-primes/
+    defaults:
+        _controller: app.controller.year_award::indexAction
+        _sylius:
+            grid: app_frontend_year_award
+            paginate: 12
+            template: frontend/year_award/index.html.twig
+
+app_frontend_year_award_index_by_award:
+    methods: [GET]
+    path: /jeux-primes/{slug}
+    defaults:
+        _controller: app.controller.year_award::indexAction
+        _sylius:
+            grid: app_frontend_year_award
+            paginate: 12
+            template: frontend/year_award/indexByAward.html.twig
+    options:
+        expose: true

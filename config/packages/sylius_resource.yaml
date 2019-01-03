@@ -61,6 +61,24 @@ sylius_resource:
                 factory: App\Factory\FestivalListItemFactory
                 repository: App\Repository\FestivalListItemRepository
                 form: App\Form\Type\FestivalListItemType
+        app.game_award:
+            classes:
+                model: App\Entity\GameAward
+                form: App\Form\Type\GameAwardType
+        app.game_award_image:
+            classes:
+                model: App\Entity\GameAwardImage
+        app.game_play:
+            classes:
+                model: App\Entity\GamePlay
+                factory: App\Factory\GamePlayFactory
+                repository: App\Repository\GamePlayRepository
+                form: App\Form\Type\GamePlayType
+        app.game_play_image:
+            classes:
+                model: App\Entity\GamePlayImage
+                repository: App\Repository\GamePlayImageRepository
+                form: App\Form\Type\GamePlayImageType
         app.not_found_page:
             classes:
                 model: App\Entity\NotFound
@@ -113,17 +131,6 @@ sylius_resource:
         app.slide_show_block:
             classes:
                 model: App\Entity\SlideShowBlock
-        app.game_play:
-            classes:
-                model: App\Entity\GamePlay
-                factory: App\Factory\GamePlayFactory
-                repository: App\Repository\GamePlayRepository
-                form: App\Form\Type\GamePlayType
-        app.game_play_image:
-            classes:
-                model: App\Entity\GamePlayImage
-                repository: App\Repository\GamePlayImageRepository
-                form: App\Form\Type\GamePlayImageType
         app.player:
             classes:
                 model: App\Entity\Player
@@ -155,3 +162,7 @@ sylius_resource:
             classes:
                 model: App\Entity\ProductVariantImage
                 form: App\Form\Type\ProductVariantImageType
+        app.year_award:
+            classes:
+                model: App\Entity\YearAward
+                repository: App\Repository\YearAwardRepository

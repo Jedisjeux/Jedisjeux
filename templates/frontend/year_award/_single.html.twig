@@ -1,0 +1,39 @@
+{% import 'macro/image.html.twig' as images %}
+{% from 'macro/product.html.twig' import releasedAt, duration, playerCount %}
+{% from 'macro/rating.html.twig' import rating %}
+
+{% set product = year_award.product  %}
+{% set productPath = path('sylius_frontend_product_show', { 'slug': product.slug }) %}
+{% set imagePath =  product.mainImage is not null ? product.mainImage.webPath : '/assets/frontend/images/placeholder.png' %}
+
+
+<div class="image-box style-2 mb-20 bordered light-gray-bg">
+    <div class="overlay-container overlay-visible">
+        {{ images.render(imagePath, 'magazine_item', year_award.name) }}
+        <a class="overlay-link" href="{{ productPath }}"><i class="fa fa-link"></i></a>
+        <div class="overlay-bottom text-left">
+            <p class="lead margin-clear">{{ year_award.name }}</p>
+        </div>
+    </div>
+    <div class="body">
+        {% if product.averageRating > 0 %}
+            <p>
+                {{ rating(product.averageRating|round) }} {{ product.averageRating|round(1) }}<small>/10</small>
+            </p>
+        {% endif %}
+
+        {% if product.shortDescription is not null %}
+            <p>{{ product.shortDescription|truncate(100, true)|striptags|raw }}</p>
+        {% endif %}
+
+        <ul class="list-icons small">
+            <li><i class="fa fa-user"></i> {{ playerCount(product) }}</li>
+            {% if product.minAge is not null %}
+                <li><i class="fa fa-child"></i> {{ 'app.ui.from_years'|trans({ '%count%': product.minAge })|lower }}</li>
+            {% endif %}
+            <li><i class="fa fa-clock-o"></i> {{ duration(product) }}</li>
+            <li><i class="fa fa-calendar-o"></i> Sortie : {{ releasedAt(product.firstVariant) }}</li>
+        </ul>
+        <a href="{{ productPath }}" class="btn btn-default btn-sm margin-clear">{{ 'sylius.ui.view_more'|trans }}<i class="fa fa-arrow-right pl-10"></i></a>
+    </div>
+</div>

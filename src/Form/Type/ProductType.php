@@ -13,6 +13,7 @@ namespace App\Form\Type;
 
 use App\Entity\Product;
 use App\Entity\Taxon;
+use App\Entity\YearAward;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -53,7 +54,7 @@ class ProductType extends AbstractType
                 'required' => false,
             ])
             ->add('mechanisms', EntityType::class, [
-                'label' => 'label.mechanisms',
+                'label' => 'app.ui.mechanisms',
                 'placeholder' => 'label.choose_mechanisms',
                 'class' => 'App:Taxon',
                 'group_by' => 'parent',
@@ -69,7 +70,7 @@ class ProductType extends AbstractType
                 'required' => false,
             ])
             ->add('themes', EntityType::class, [
-                'label' => 'label.themes',
+                'label' => 'app.ui.themes',
                 'placeholder' => 'label.choose_themes',
                 'class' => 'App:Taxon',
                 'group_by' => 'parent',
@@ -90,22 +91,22 @@ class ProductType extends AbstractType
             ])
             ->add('boxContent', TextareaType::class, [
                 'required' => false,
-                'label' => 'label.material',
+                'label' => 'app.ui.box_content',
             ])
             ->add('minAge', null, [
-                'label' => 'label.age_min',
+                'label' => 'app.ui.age',
             ])
             ->add('minDuration', null, [
-                'label' => 'label.min',
+                'label' => 'app.ui.min',
             ])
             ->add('maxDuration', null, [
-                'label' => 'label.max',
+                'label' => 'app.ui.max',
             ])
             ->add('minPlayerCount', null, [
-                'label' => 'label.min',
+                'label' => 'app.ui.min',
             ])
             ->add('maxPlayerCount', null, [
-                'label' => 'label.max',
+                'label' => 'app.ui.max',
             ])
             ->add('barcodes', CollectionType::class, [
                 'label' => 'label.barcodes',
@@ -121,6 +122,13 @@ class ProductType extends AbstractType
             ->add('videos', CollectionType::class, [
                 'label' => false,
                 'entry_type' => ProductVideoType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+            ])
+            ->add('yearAwards', CollectionType::class, [
+                'label' => false,
+                'entry_type' => YearAwardType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,

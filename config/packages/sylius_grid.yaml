@@ -11,6 +11,7 @@ imports:
     - { resource: 'grids/backend/dealer_price.yml' }
     - { resource: 'grids/backend/festival_list.yml' }
     - { resource: 'grids/backend/festival_list_item.yml' }
+    - { resource: 'grids/backend/game_award.yml' }
     - { resource: 'grids/backend/game_play.yml' }
     - { resource: 'grids/backend/not_found_page.yml' }
     - { resource: 'grids/backend/person.yml' }
@@ -25,6 +26,7 @@ imports:
     - { resource: 'grids/backend/root_taxon.yml' }
     - { resource: 'grids/backend/taxon_from_root.yml' }
     - { resource: 'grids/backend/topic.yml' }
+    - { resource: 'grids/backend/year_award.yml' }
 
     - { resource: 'grids/frontend/article.yml' }
     - { resource: 'grids/frontend/festival_list_item.yml' }
@@ -43,6 +45,7 @@ imports:
     - { resource: 'grids/frontend/topic.yml' }
     - { resource: 'grids/frontend/topic_from_taxon.yml' }
     - { resource: 'grids/frontend/user_game_library.yml' }
+    - { resource: 'grids/frontend/year_award.yml' }
 
 sylius_grid:
     templates:
@@ -84,6 +87,7 @@ sylius_grid:
             frontend_comment: 'frontend/grid/filter/comment.html.twig'
             frontend_between_two_fields: 'frontend/grid/filter/between_two_fields.html.twig'
             frontend_greater_than_or_equal: "frontend/grid/filter/greater_than_or_equal.html.twig"
+            frontend_entity: "frontend/grid/filter/entity.html.twig"
             frontend_image: 'frontend/grid/filter/image.html.twig'
             frontend_less_than_or_equal: "frontend/grid/filter/less_than_or_equal.html.twig"
             frontend_person_role: "frontend/grid/filter/person_role.html.twig"

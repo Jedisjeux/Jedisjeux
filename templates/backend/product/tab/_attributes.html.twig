@@ -3,19 +3,19 @@
 
     {{ form_row(form.minAge) }}
 
-    <h4 class="ui dividing header">{{ 'label.release_date'|trans }}</h4>
+    <h4 class="ui dividing header">{{ 'app.ui.release_date'|trans }}</h4>
     <div class="two fields">
         {{ form_row(form.firstVariant.releasedAtPrecision) }}
         {{ form_row(form.firstVariant.releasedAt) }}
     </div>
 
-    <h4 class="ui dividing header">{{ 'label.player_count'|trans }}</h4>
+    <h4 class="ui dividing header">{{ 'app.ui.player_count'|trans }}</h4>
     <div class="two fields">
         {{ form_row(form.minPlayerCount) }}
         {{ form_row(form.maxPlayerCount) }}
     </div>
 
-    <h4 class="ui dividing header">{{ 'label.duration'|trans }}</h4>
+    <h4 class="ui dividing header">{{ 'app.ui.duration'|trans }}</h4>
     <div class="two fields">
         {{ form_row(form.minDuration) }}
         {{ form_row(form.maxDuration) }}

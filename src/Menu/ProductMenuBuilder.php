@@ -79,6 +79,12 @@ final class ProductMenuBuilder
         ;
 
         $menu
+            ->addChild('awards')
+            ->setAttribute('template', 'backend/product/tab/_awards.html.twig')
+            ->setLabel('app.ui.year_awards')
+        ;
+
+        $menu
             ->addChild('barcodes')
             ->setAttribute('template', 'backend/product/tab/_barcodes.html.twig')
             ->setLabel('app.ui.barcodes')

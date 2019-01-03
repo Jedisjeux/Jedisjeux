@@ -6,6 +6,7 @@ imports:
     - { resource: backend/dealer.yml }
     - { resource: backend/dealer_price.yml }
     - { resource: backend/festival_list.yml }
+    - { resource: backend/game_award.yml }
     - { resource: backend/game_play.yml }
     - { resource: backend/person.yml }
     - { resource: backend/post.yml }
@@ -16,6 +17,7 @@ imports:
     - { resource: backend/redirection.yml }
     - { resource: backend/taxon.yml }
     - { resource: backend/topic.yml }
+    - { resource: backend/year_award.yml }
 
 # Learn more about services, parameters and containers at
 # http://symfony.com/doc/current/book/service_container.html

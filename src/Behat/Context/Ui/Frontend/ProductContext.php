@@ -227,6 +227,25 @@ class ProductContext implements Context
     }
 
     /**
+     * @Then I should see the award name :name
+     */
+    public function iShouldSeeAwardName($name)
+    {
+        $awards = $this->getProductAwards();
+
+        $found = false;
+
+        foreach ($awards as $award) {
+            if ($name === $award->getText()) {
+                $found = true;
+                break;
+            }
+        }
+
+        Assert::true($found);
+    }
+
+    /**
      * @Then I should see the publisher name :name
      */
     public function iShouldSeePublisherName($name)
@@ -539,5 +558,19 @@ class ProductContext implements Context
         Assert::notNull($publishers, 'The product has no publishers.');
 
         return $publishers;
+    }
+
+    /**
+     * @return NodeElement[]
+     *
+     * @throws \InvalidArgumentException
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     */
+    private function getProductAwards()
+    {
+        $awards = $this->showPage->getAwards();
+        Assert::notNull($awards, 'The product has no awards.');
+
+        return $awards;
     }
 }

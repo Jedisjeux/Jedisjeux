@@ -20,6 +20,7 @@ app:
         ask_for_review: Ask for review
         ask_for_translation: Ask for translation
         avatar: Avatar
+        award_winning_games: Award-winning games
         barcode: Barcode
         barcodes: Barcodes
         blocks: Blocks
@@ -56,6 +57,7 @@ app:
         edit_dealer_price: Edit dealer price
         edit_festival_list: Edit festival list
         edit_festival_list_item: Edit festival list item
+        edit_game_award: Edit game award
         edit_game_play: Edit game play
         edit_person: Edit person
         edit_post: Edit post
@@ -75,6 +77,8 @@ app:
         from_board_game_geek: From BoardGameGeek
         from_years: 'From %count% years'
         game: Game
+        game_award: Game award
+        game_awards: Game awards
         game_details: Game details
         game_library: Game library
         game_specifications: Game specifications
@@ -121,6 +125,7 @@ app:
         manage_dealer_prices: Manage dealer prices
         manage_festival_lists: Manage festival lists
         manage_festival_list_items: Manage festival list items
+        manage_game_awards: Manage game awards
         manage_game_plays: Manage game plays
         manage_not_found_pages: Manage not found pages
         manage_people: Manage people
@@ -130,9 +135,12 @@ app:
         manage_redirections: Manage redirections
         manage_string_blocks: Manage string blocks
         manage_topics: Manage topics
+        manage_year_awards: Manage year awards
         material_rating: Material rating
+        max: Max
         max_duration: Max duration
         mechanisms: Mechanisms
+        min: Min
         min_duration: Min duration
         moderation: Moderation
         more: More
@@ -149,6 +157,7 @@ app:
         new_dealer: New dealer
         new_festival_list: New festival list
         new_festival_list_item: New festival list item
+        new_game_award: New game award
         new_game_play: New game play
         new_list: New list
         new_person: New person
@@ -246,5 +255,12 @@ app:
         view_more_game_plays: View more game plays
         view_more_reviews: View more reviews
         view_website: View website
+        year: Year
+        year_awards: Year awards
         your_comment: Your comment
         your_rating: Your rating
+sylius:
+    ui:
+        pending_publication: Pending publication
+        pending_review: Pending review
+        pending_translation: Pending translation

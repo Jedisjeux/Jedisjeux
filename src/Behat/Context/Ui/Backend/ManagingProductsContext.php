@@ -14,6 +14,7 @@ namespace App\Behat\Context\Ui\Backend;
 use App\Behat\Page\Backend\Product\IndexPage;
 use App\Behat\Page\Backend\Product\UpdatePage;
 use App\Behat\Page\Backend\Product\CreatePage;
+use App\Entity\GameAward;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use App\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Behat\Behat\Context\Context;
@@ -159,6 +160,14 @@ class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I add a new award :gameAward :year
+     */
+    public function iAddAward(GameAward $gameAward, string $year)
+    {
+        $this->createPage->addAward($gameAward, $year);
+    }
+
+    /**
      * @When I add it
      * @When I try to add it
      */
@@ -293,7 +302,7 @@ class ManagingProductsContext implements Context
     {
         $this->indexPage->open();
 
-        $status = str_replace(' ', '_', strtolower($status));
+        $status = ucfirst($status);
 
         Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $name, 'status' => $status]));
     }

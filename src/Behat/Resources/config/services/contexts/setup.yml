@@ -61,6 +61,15 @@ services:
             tags:
                 - { name: fob.context_service }
 
+        app.behat.context.setup.game_award:
+            class: App\Behat\Context\Setup\GameAwardContext
+            arguments:
+                - "@app.behat.shared_storage"
+                - "@__symfony__.app.fixture.example_factory.game_award"
+                - "@__symfony__.app.repository.game_award"
+            tags:
+                - { name: fob.context_service }
+
         app.behat.context.setup.game_play:
             class: App\Behat\Context\Setup\GamePlayContext
             arguments:
@@ -178,3 +187,12 @@ services:
                 - "@__symfony__.sylius.manager.app_user"
             tags:
                 - { name: fob.context_service }
+
+        app.behat.context.setup.year_award:
+            class: App\Behat\Context\Setup\YearAwardContext
+            arguments:
+                - "@app.behat.shared_storage"
+                - "@__symfony__.app.fixture.example_factory.year_award"
+                - "@__symfony__.app.repository.year_award"
+            tags:
+            - { name: fob.context_service }

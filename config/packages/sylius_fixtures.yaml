@@ -85,6 +85,13 @@ sylius_fixtures:
                             -
                                 first_name: "Doris"
                                 last_name: "Matthäus"
+                game_award:
+                    options:
+                        custom:
+                            - { name: "Spiel des Jahres", image: "tests/Resources/fixtures/awards/spiel-des-jahres.png" }
+                            - { name: "As d'or", image: "tests/Resources/fixtures/awards/as-or.jpeg" }
+                            - { name: "Deutscher Spiele Preis", image: null }
+
                 game_product:
                     options:
                         amount: 80
@@ -161,6 +168,11 @@ sylius_fixtures:
                                 short_description: |
                                     <p>La reine Himiko a confié une mission prestigieuse à tous ses bâtisseurs : faire de la capitale de Yamataï la perle du royaume.</p>
                                 created_at: "now"
+
+                year_award:
+                    options:
+                        random: 20
+
                 news_article:
                   options:
                     amount: 10

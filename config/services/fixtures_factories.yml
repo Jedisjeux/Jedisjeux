@@ -68,6 +68,13 @@ services:
             - "@app.repository.festival_list"
         public: true
 
+    app.fixture.example_factory.game_award:
+        class: App\Fixture\Factory\GameAwardExampleFactory
+        arguments:
+            - "@app.factory.game_award"
+            - "@app.factory.game_award_image"
+        public: true
+
     app.fixture.example_factory.game_play:
         class: App\Fixture\Factory\GamePlayExampleFactory
         arguments:
@@ -178,4 +185,12 @@ services:
             - "@app.repository.article"
             - "@app.repository.game_play"
             - "@sylius.repository.taxon"
+        public: true
+
+    app.fixture.example_factory.year_award:
+        class: App\Fixture\Factory\YearAwardExampleFactory
+        arguments:
+            - "@app.factory.year_award"
+            - "@app.repository.game_award"
+            - "@sylius.repository.product"
         public: true

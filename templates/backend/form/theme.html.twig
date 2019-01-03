@@ -275,3 +275,22 @@
         </div>
     {% endfor %}
 {% endblock %}
+
+{% block app_game_award_image_widget %}
+    {% import 'macro/image.html.twig' as images %}
+
+    {% set image = form.vars.value %}
+
+    {% if image and image.webPath %}
+        <div class="ui stackable grid">
+        <div class="three wide column">
+            {{ images.render(image.webPath, null, null, 'ui thumbnail image') }}
+        </div>
+        <div class="thirteen wide column">
+    {% endif %}
+    {{ form_row(form.file) }}
+    {% if image and image.webPath %}
+        </div>
+        </div>
+    {% endif %}
+{% endblock %}

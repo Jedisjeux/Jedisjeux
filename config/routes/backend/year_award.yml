@@ -1,0 +1,14 @@
+app_backend_year_award:
+    resource: |
+        alias: app.year_award
+        section: backend
+        except: ['show', 'create']
+        redirect: update
+        grid: app_backend_year_award
+        vars:
+            all:
+                subheader: app.ui.manage_year_awards
+            index:
+                icon: calendar alternate outline
+        templates: backend/crud
+    type: sylius.resource

@@ -9,6 +9,7 @@ use App\Entity\ProductBarcode;
 use App\Entity\ProductVariant;
 use App\Entity\ProductVariantImage;
 use App\Entity\Taxon;
+use App\Entity\YearAward;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
@@ -447,5 +448,28 @@ class ProductSpec extends ObjectBehavior
 
         $this->removeBarcode($barcode);
         $this->hasBarcode($barcode)->shouldReturn(false);
+    }
+
+    function it_initializes_year_award_collection_by_default()
+    {
+        $this->getYearAwards()->shouldHaveType(Collection::class);
+    }
+
+    function it_adds_year_awards(YearAward $yearAward)
+    {
+        $yearAward->setProduct($this)->shouldBeCalled();
+
+        $this->addYearAward($yearAward);
+        $this->hasYearAward($yearAward)->shouldReturn(true);
+    }
+
+    function it_removes_year_awards(YearAward $yearAward)
+    {
+        $this->addYearAward($yearAward);
+
+        $yearAward->setProduct(null)->shouldBeCalled();
+
+        $this->removeYearAward($yearAward);
+        $this->hasYearAward($yearAward)->shouldReturn(false);
     }
 }

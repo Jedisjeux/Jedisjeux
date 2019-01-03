@@ -1,0 +1,14 @@
+app_backend_game_award:
+    resource: |
+        alias: app.game_award
+        section: backend
+        except: ['show']
+        redirect: update
+        grid: app_backend_game_award
+        vars:
+            all:
+                subheader: app.ui.manage_game_awards
+            index:
+                icon: trophy
+        templates: backend/crud
+    type: sylius.resource

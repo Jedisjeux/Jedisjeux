@@ -1,0 +1,46 @@
+sylius_grid:
+    grids:
+        app_backend_game_award:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%app.model.game_award.class%"
+            sorting:
+                name: asc
+            fields:
+                image:
+                    type: twig
+                    label: sylius.ui.image
+                    path: .
+                    options:
+                        template: "backend/game_award/grid/field/image.html.twig"
+                name:
+                    type: string
+                    label: sylius.ui.name
+                    sortable: ~
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    options:
+                        fields: [name]
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete
+                    yearAwards:
+                        type: links
+                        label: app.ui.manage_year_awards
+                        options:
+                            links:
+                                index:
+                                    label: app.ui.year_awards
+                                    route: app_backend_year_award_index
+                                    parameters:
+                                        criteria:
+                                            award: resource.id
