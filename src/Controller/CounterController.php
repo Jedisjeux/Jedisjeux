@@ -16,6 +16,8 @@ use App\Repository\PersonRepository;
 use App\Repository\ProductRepository;
 use App\Repository\ProductReviewRepository;
 use App\Repository\UserRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,6 +31,9 @@ class CounterController extends Controller
      * @Route("/", name="app_counter_index")
      *
      * @return Response
+     *
+     * @throws NoResultException
+     * @throws NonUniqueResultException
      */
     public function indexAction()
     {
@@ -37,7 +42,7 @@ class CounterController extends Controller
             'productCount' => $this->getProductRepository()->findNbResults(),
             'personCount' => $this->getPersonRepository()->findNbResults(),
             'userCount' => $this->getUserRepository()->findNbResults(),
-            'ratingCount' => $this->getProductRepository()->findNbResults(),
+            'ratingCount' => $this->getProductReviewRepository()->findNbResults(),
         ]);
     }
 
