@@ -30,7 +30,9 @@
             {% if product.minAge is not null %}
                 <li><i class="fa fa-child"></i> {{ 'app.ui.from_years'|trans({ '%count%': product.minAge })|lower }}</li>
             {% endif %}
-            <li><i class="fa fa-clock-o"></i> {{ duration(product) }}</li>
+            {% if product.minDuration is not null %}
+                <li><i class="fa fa-clock-o"></i> {{ duration(product) }}</li>
+            {% endif %}
             <li><i class="fa fa-calendar-o"></i> Sortie : {{ releasedAt(product.firstVariant) }}</li>
         </ul>
         <a href="{{ productPath }}" class="btn btn-default btn-sm margin-clear">{{ 'sylius.ui.view_more'|trans }}<i class="fa fa-arrow-right pl-10"></i></a>
