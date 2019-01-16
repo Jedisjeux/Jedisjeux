@@ -113,16 +113,49 @@ class HomePage extends SymfonyPage
     }
 
     /**
+     * @return int
+     *
+     * @throws ElementNotFoundException
+     */
+    public function getProductCount(): int
+    {
+        return (int) $this->getElement('product_count')->getText();
+    }
+
+    /**
+     * @return int
+     *
+     * @throws ElementNotFoundException
+     */
+    public function getArticleCount(): int
+    {
+        return (int) $this->getElement('article_count')->getText();
+    }
+
+    /**
+     * @return int
+     *
+     * @throws ElementNotFoundException
+     */
+    public function getUserCount(): int
+    {
+        return (int) $this->getElement('user_count')->getText();
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'article_count' => '#article-count',
             'latest_arrivals' => '#latest-arrivals',
             'latest_articles' => '#latest-articles',
             'logout_button' => '.app-logout-button',
             'most_popular_articles' => '#most-popular-articles',
+            'product_count' => '#product-count',
             'rating_count' => '#rating-count',
+            'user_count' => '#user-count',
         ]);
     }
 }

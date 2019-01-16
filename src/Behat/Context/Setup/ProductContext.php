@@ -76,7 +76,7 @@ class ProductContext implements Context
     }
 
     /**
-     * @Given there is a product :name
+     * @Given there is (also) a product :name
      * @Given there is a product :name, created at :date
      *
      * @param string $name

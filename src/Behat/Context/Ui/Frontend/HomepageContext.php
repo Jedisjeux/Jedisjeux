@@ -120,4 +120,28 @@ class HomepageContext implements Context
     {
         Assert::same($this->homePage->getRatingCount(), (int) $ratingCountValue);
     }
+
+    /**
+     * @Then I should see :productCountValue as product count
+     */
+    public function iShouldSeeProductCountValue($productCountValue)
+    {
+        Assert::same($this->homePage->getProductCount(), (int) $productCountValue);
+    }
+
+    /**
+     * @Then I should see :articleCountValue as article count
+     */
+    public function iShouldSeeArticleCountValue($articleCountValue)
+    {
+        Assert::same($this->homePage->getArticleCount(), (int) $articleCountValue);
+    }
+
+    /**
+     * @Then I should see :userCountValue as user count
+     */
+    public function iShouldSeeUserCountValue($userCountValue)
+    {
+        Assert::same($this->homePage->getUserCount(), (int) $userCountValue);
+    }
 }

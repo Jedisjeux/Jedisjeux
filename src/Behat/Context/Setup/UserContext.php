@@ -64,7 +64,7 @@ final class UserContext implements Context
     /**
      * @Given there is a user :email identified by :password
      * @Given there was account of :email with password :password
-     * @Given there is a user :email
+     * @Given there is (also )a user :email
      */
     public function thereIsUserIdentifiedBy($email, $password = 'sylius')
     {
