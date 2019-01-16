@@ -7,8 +7,10 @@ default:
                 - app.behat.context.transform.customer
                 - app.behat.context.transform.shared_storage
 
+                - app.behat.context.setup.article
                 - app.behat.context.setup.product
                 - app.behat.context.setup.product_review
+                - app.behat.context.setup.taxon
 
                 - app.behat.context.ui.frontend.homepage
             filters:
