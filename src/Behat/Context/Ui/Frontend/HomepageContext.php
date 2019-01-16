@@ -136,4 +136,12 @@ class HomepageContext implements Context
     {
         Assert::same($this->homePage->getArticleCount(), (int) $articleCountValue);
     }
+
+    /**
+     * @Then I should see :userCountValue as user count
+     */
+    public function iShouldSeeUserCountValue($userCountValue)
+    {
+        Assert::same($this->homePage->getUserCount(), (int) $userCountValue);
+    }
 }

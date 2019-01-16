@@ -133,6 +133,16 @@ class HomePage extends SymfonyPage
     }
 
     /**
+     * @return int
+     *
+     * @throws ElementNotFoundException
+     */
+    public function getUserCount(): int
+    {
+        return (int) $this->getElement('user_count')->getText();
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getDefinedElements(): array
@@ -145,6 +155,7 @@ class HomePage extends SymfonyPage
             'most_popular_articles' => '#most-popular-articles',
             'product_count' => '#product-count',
             'rating_count' => '#rating-count',
+            'user_count' => '#user-count',
         ]);
     }
 }
