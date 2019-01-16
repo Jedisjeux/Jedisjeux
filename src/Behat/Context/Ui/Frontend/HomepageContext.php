@@ -33,7 +33,8 @@ class HomepageContext implements Context
     /**
      * @When I check latest articles
      * @When I check most popular articles
-     *  @When I check latest arrivals
+     * @When I check latest arrivals
+     * @When I check counters
      */
     public function iCheckItems()
     {
@@ -110,5 +111,13 @@ class HomepageContext implements Context
     public function iShouldNotSeeTheProductInTheLatestArrivalsList(string $name)
     {
         Assert::false(in_array($name, $this->homePage->getLatestArrivalsNames()));
+    }
+
+    /**
+     * @Then I should see :ratingCountValue as rating count
+     */
+    public function iShouldSeeRatingCountValue($ratingCountValue)
+    {
+        Assert::same($this->homePage->getRatingCount(), (int) $ratingCountValue);
     }
 }

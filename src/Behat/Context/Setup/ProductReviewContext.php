@@ -99,4 +99,30 @@ class ProductReviewContext implements Context
         $this->productReviewRepository->add($review);
         $this->sharedStorage->set('product_review', $review);
     }
+
+    /**
+     * @Given /^(this product) has been rated with a (\d+) by (customer "[^"]+")(?:|, created (\d+) days ago)$/
+     */
+    public function customerHasRatedThisProduct(
+        ProductInterface $product,
+        $rating,
+        CustomerInterface $customer,
+        $daysSinceCreation = null
+    ) {
+        /** @var ReviewInterface $review */
+        $review = $this->productReviewFactory->create([
+            'product' => $product,
+            'title' => null,
+            'comment' => null,
+            'rating' => $rating,
+            'author' => $customer,
+        ]);
+
+        if (null !== $daysSinceCreation) {
+            $review->setCreatedAt(new \DateTime('-'.$daysSinceCreation.' days'));
+        }
+
+        $this->productReviewRepository->add($review);
+        $this->sharedStorage->set('product_review', $review);
+    }
 }

@@ -16,6 +16,7 @@ imports:
     - suites/ui/error/viewing_errors.yml
     - suites/ui/festival_list/managing_festival_lists.yml
     - suites/ui/homepage/viewing_articles.yml
+    - suites/ui/homepage/viewing_counters.yml
     - suites/ui/homepage/viewing_products.yml
     - suites/ui/person/managing_people.yml
     - suites/ui/person/viewing_people.yml

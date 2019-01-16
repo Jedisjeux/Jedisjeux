@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Behat\Page\Frontend;
 
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Exception\ElementNotFoundException;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class HomePage extends SymfonyPage
@@ -102,6 +103,16 @@ class HomePage extends SymfonyPage
     }
 
     /**
+     * @return int
+     *
+     * @throws ElementNotFoundException
+     */
+    public function getRatingCount(): int
+    {
+        return (int) $this->getElement('rating_count')->getText();
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getDefinedElements(): array
@@ -111,6 +122,7 @@ class HomePage extends SymfonyPage
             'latest_articles' => '#latest-articles',
             'logout_button' => '.app-logout-button',
             'most_popular_articles' => '#most-popular-articles',
+            'rating_count' => '#rating-count',
         ]);
     }
 }
