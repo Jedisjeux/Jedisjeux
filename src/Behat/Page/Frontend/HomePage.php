@@ -113,6 +113,16 @@ class HomePage extends SymfonyPage
     }
 
     /**
+     * @return int
+     *
+     * @throws ElementNotFoundException
+     */
+    public function getProductCount(): int
+    {
+        return (int) $this->getElement('product_count')->getText();
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getDefinedElements(): array
@@ -122,6 +132,7 @@ class HomePage extends SymfonyPage
             'latest_articles' => '#latest-articles',
             'logout_button' => '.app-logout-button',
             'most_popular_articles' => '#most-popular-articles',
+            'product_count' => '#product-count',
             'rating_count' => '#rating-count',
         ]);
     }
