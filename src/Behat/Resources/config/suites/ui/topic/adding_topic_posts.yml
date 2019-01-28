@@ -4,7 +4,7 @@
 default:
     suites:
         ui_adding_topic_posts:
-            contexts_services:
+            contexts:
                 - app.behat.context.hook.doctrine_orm
 
                 - app.behat.context.transform.customer
