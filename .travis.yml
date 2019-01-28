@@ -4,6 +4,7 @@ language: php
 
 env:
     global:
+        - APP_ENV=test
         - JEDISJEUX_CACHE_DIR=$HOME/.jedisjeux-cache
         - JEDISJEUX_BUILD_DIR=etc/build
 
