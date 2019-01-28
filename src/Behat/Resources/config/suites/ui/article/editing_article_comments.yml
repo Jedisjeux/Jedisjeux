@@ -4,7 +4,7 @@
 default:
     suites:
         ui_removing_article_comments:
-            contexts_services:
+            contexts:
                 - app.behat.context.hook.doctrine_orm
 
                 - app.behat.context.transform.article

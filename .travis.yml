@@ -4,6 +4,7 @@ language: php
 
 env:
     global:
+        - APP_ENV=test
         - JEDISJEUX_CACHE_DIR=$HOME/.jedisjeux-cache
         - JEDISJEUX_BUILD_DIR=etc/build
 
@@ -45,9 +46,6 @@ cache:
 
 before_install:
     - git config merge.renameLimit 999999
-    - mv .env.test.dist .env.test
-    - set -a && source .env.test && set +a
-
     - etc/travis/run-suite before_install "${JEDISJEUX_SUITE}"
 
 install:

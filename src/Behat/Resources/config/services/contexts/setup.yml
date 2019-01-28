@@ -8,191 +8,154 @@ services:
 #        class: App\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
-        app.behat.context.setup.article:
-            class: App\Behat\Context\Setup\ArticleContext
-            arguments:
-                - "@app.behat.shared_storage"
-                - "@__symfony__.app.fixture.example_factory.article"
-                - "@__symfony__.app.repository.article"
-                - "@__symfony__.doctrine.orm.entity_manager"
-            tags:
-                - { name: fob.context_service }
+    _defaults:
+        public: true
 
-        app.behat.context.setup.contact_request:
-            class: App\Behat\Context\Setup\ContactRequestContext
-            arguments:
-                - "@app.behat.shared_storage"
-                - "@__symfony__.app.fixture.example_factory.contact_request"
-                - "@__symfony__.app.repository.contact_request"
-            tags:
-                - { name: fob.context_service }
+    app.behat.context.setup.article:
+        class: App\Behat\Context\Setup\ArticleContext
+        arguments:
+            - "@app.behat.shared_storage"
+            - "@app.fixture.example_factory.article"
+            - "@app.repository.article"
+            - "@doctrine.orm.entity_manager"
 
-        app.behat.context.setup.customer:
-            class: App\Behat\Context\Setup\CustomerContext
-            arguments:
-                - "@app.behat.shared_storage"
-                - "@__symfony__.app.fixture.example_factory.app_user"
-                - "@__symfony__.sylius.repository.customer"
-            tags:
-                - { name: fob.context_service }
+    app.behat.context.setup.contact_request:
+        class: App\Behat\Context\Setup\ContactRequestContext
+        arguments:
+            - "@app.behat.shared_storage"
+            - "@app.fixture.example_factory.contact_request"
+            - "@app.repository.contact_request"
 
-        app.behat.context.setup.dealer:
-            class: App\Behat\Context\Setup\DealerContext
-            arguments:
-                - "@__symfony__.app.fixture.example_factory.dealer"
-                - "@__symfony__.app.repository.dealer"
-            tags:
-                - { name: fob.context_service }
+    app.behat.context.setup.customer:
+        class: App\Behat\Context\Setup\CustomerContext
+        arguments:
+            - "@app.behat.shared_storage"
+            - "@app.fixture.example_factory.app_user"
+            - "@sylius.repository.customer"
 
-        app.behat.context.setup.dealer_price:
-            class: App\Behat\Context\Setup\DealerPriceContext
-            arguments:
-                - "@__symfony__.app.fixture.example_factory.dealer_price"
-                - "@__symfony__.app.repository.dealer_price"
-            tags:
-                - { name: fob.context_service }
+    app.behat.context.setup.dealer:
+        class: App\Behat\Context\Setup\DealerContext
+        arguments:
+            - "@app.fixture.example_factory.dealer"
+            - "@app.repository.dealer"
 
-        app.behat.context.setup.festival_list:
-            class: App\Behat\Context\Setup\FestivalListContext
-            arguments:
-                - "@app.behat.shared_storage"
-                - "@__symfony__.app.fixture.example_factory.festival_list"
-                - "@__symfony__.app.repository.festival_list"
-            tags:
-                - { name: fob.context_service }
+    app.behat.context.setup.dealer_price:
+        class: App\Behat\Context\Setup\DealerPriceContext
+        arguments:
+            - "@app.fixture.example_factory.dealer_price"
+            - "@app.repository.dealer_price"
 
-        app.behat.context.setup.game_award:
-            class: App\Behat\Context\Setup\GameAwardContext
-            arguments:
-                - "@app.behat.shared_storage"
-                - "@__symfony__.app.fixture.example_factory.game_award"
-                - "@__symfony__.app.repository.game_award"
-            tags:
-                - { name: fob.context_service }
+    app.behat.context.setup.festival_list:
+        class: App\Behat\Context\Setup\FestivalListContext
+        arguments:
+            - "@app.behat.shared_storage"
+            - "@app.fixture.example_factory.festival_list"
+            - "@app.repository.festival_list"
 
-        app.behat.context.setup.game_play:
-            class: App\Behat\Context\Setup\GamePlayContext
-            arguments:
-                - "@app.behat.shared_storage"
-                - "@__symfony__.app.fixture.example_factory.game_play"
-                - "@__symfony__.app.fixture.example_factory.topic"
-                - "@__symfony__.app.fixture.example_factory.post"
-                - "@__symfony__.app.repository.game_play"
-                - "@__symfony__.app.repository.topic"
-            tags:
-                - { name: fob.context_service }
+    app.behat.context.setup.game_award:
+        class: App\Behat\Context\Setup\GameAwardContext
+        arguments:
+            - "@app.behat.shared_storage"
+            - "@app.fixture.example_factory.game_award"
+            - "@app.repository.game_award"
 
-        app.behat.context.setup.person:
-            class: App\Behat\Context\Setup\PersonContext
-            arguments:
-                - "@app.behat.shared_storage"
-                - "@__symfony__.app.fixture.example_factory.person"
-                - "@__symfony__.app.repository.person"
-            tags:
-                - { name: fob.context_service }
+    app.behat.context.setup.game_play:
+        class: App\Behat\Context\Setup\GamePlayContext
+        arguments:
+            - "@app.behat.shared_storage"
+            - "@app.fixture.example_factory.game_play"
+            - "@app.fixture.example_factory.topic"
+            - "@app.fixture.example_factory.post"
+            - "@app.repository.game_play"
+            - "@app.repository.topic"
 
-        app.behat.context.setup.post:
-            class: App\Behat\Context\Setup\PostContext
-            arguments:
-                - "@app.behat.shared_storage"
-                - "@__symfony__.app.fixture.example_factory.post"
-                - "@__symfony__.app.fixture.example_factory.topic"
-                - "@__symfony__.app.repository.post"
-                - "@__symfony__.app.repository.topic"
-            tags:
-                - { name: fob.context_service }
+    app.behat.context.setup.person:
+        class: App\Behat\Context\Setup\PersonContext
+        arguments:
+            - "@app.behat.shared_storage"
+            - "@app.fixture.example_factory.person"
+            - "@app.repository.person"
 
-        app.behat.context.setup.product:
-            class: App\Behat\Context\Setup\ProductContext
-            arguments:
-                - "@app.behat.shared_storage"
-                - "@__symfony__.app.fixture.example_factory.product"
-                - "@__symfony__.sylius.factory.product_variant"
-                - "@__symfony__.sylius.repository.product"
-                - "@__symfony__.doctrine.orm.entity_manager"
-            tags:
-                - { name: fob.context_service }
+    app.behat.context.setup.post:
+        class: App\Behat\Context\Setup\PostContext
+        arguments:
+            - "@app.behat.shared_storage"
+            - "@app.fixture.example_factory.post"
+            - "@app.fixture.example_factory.topic"
+            - "@app.repository.post"
+            - "@app.repository.topic"
 
-        app.behat.context.setup.product_list:
-            class: App\Behat\Context\Setup\ProductListContext
-            arguments:
-                - "@app.behat.shared_storage"
-                - "@__symfony__.app.fixture.example_factory.product_list"
-                - "@__symfony__.app.repository.product_list"
-            tags:
-                - { name: fob.context_service }
+    app.behat.context.setup.product:
+        class: App\Behat\Context\Setup\ProductContext
+        arguments:
+            - "@app.behat.shared_storage"
+            - "@app.fixture.example_factory.product"
+            - "@sylius.factory.product_variant"
+            - "@sylius.repository.product"
+            - "@doctrine.orm.entity_manager"
 
-        app.behat.context.setup.product_review:
-            class: App\Behat\Context\Setup\ProductReviewContext
-            arguments:
-                - "@app.behat.shared_storage"
-                - "@__symfony__.app.fixture.example_factory.product_review"
-                - "@__symfony__.sylius.repository.product_review"
-            tags:
-                - { name: fob.context_service }
+    app.behat.context.setup.product_list:
+        class: App\Behat\Context\Setup\ProductListContext
+        arguments:
+            - "@app.behat.shared_storage"
+            - "@app.fixture.example_factory.product_list"
+            - "@app.repository.product_list"
 
-        app.behat.context.setup.product_video:
-            class: App\Behat\Context\Setup\ProductVideoContext
-            arguments:
-                - "@app.behat.shared_storage"
-                - "@__symfony__.app.fixture.example_factory.product_video"
-                - "@__symfony__.app.repository.product_video"
-            tags:
-                - { name: fob.context_service }
+    app.behat.context.setup.product_review:
+        class: App\Behat\Context\Setup\ProductReviewContext
+        arguments:
+            - "@app.behat.shared_storage"
+            - "@app.fixture.example_factory.product_review"
+            - "@sylius.repository.product_review"
 
-        app.behat.context.setup.redirection:
-            class: App\Behat\Context\Setup\RedirectionContext
-            arguments:
-                - "@__symfony__.app.fixture.example_factory.redirection"
-                - "@__symfony__.app.repository.redirection"
-            tags:
-                - { name: fob.context_service }
+    app.behat.context.setup.product_video:
+        class: App\Behat\Context\Setup\ProductVideoContext
+        arguments:
+            - "@app.behat.shared_storage"
+            - "@app.fixture.example_factory.product_video"
+            - "@app.repository.product_video"
 
-        app.behat.context.setup.security:
-            class: App\Behat\Context\Setup\SecurityContext
-            arguments:
-                - "@app.behat.shared_storage"
-                - "@app.behat.admin_security"
-                - "@__symfony__.app.fixture.example_factory.app_user"
-                - "@__symfony__.sylius.repository.app_user"
-            tags:
-                - { name: fob.context_service }
+    app.behat.context.setup.redirection:
+        class: App\Behat\Context\Setup\RedirectionContext
+        arguments:
+            - "@app.fixture.example_factory.redirection"
+            - "@app.repository.redirection"
 
-        app.behat.context.setup.taxon:
-            class: App\Behat\Context\Setup\TaxonContext
-            arguments:
-                - "@app.behat.shared_storage"
-                - "@__symfony__.app.fixture.example_factory.taxon"
-                - "@__symfony__.sylius.repository.taxon"
-                - "@__symfony__.doctrine.orm.entity_manager"
-            tags:
-                - { name: fob.context_service }
+    app.behat.context.setup.security:
+        class: App\Behat\Context\Setup\SecurityContext
+        arguments:
+            - "@app.behat.shared_storage"
+            - "@app.behat.admin_security"
+            - "@app.fixture.example_factory.app_user"
+            - "@sylius.repository.app_user"
 
-        app.behat.context.setup.topic:
-            class: App\Behat\Context\Setup\TopicContext
-            arguments:
-                - "@app.behat.shared_storage"
-                - "@__symfony__.app.fixture.example_factory.topic"
-                - "@__symfony__.app.repository.topic"
-                - "@__symfony__.doctrine.orm.entity_manager"
-            tags:
-                - { name: fob.context_service }
+    app.behat.context.setup.taxon:
+        class: App\Behat\Context\Setup\TaxonContext
+        arguments:
+            - "@app.behat.shared_storage"
+            - "@app.fixture.example_factory.taxon"
+            - "@sylius.repository.taxon"
+            - "@doctrine.orm.entity_manager"
 
-        app.behat.context.setup.user:
-            class: App\Behat\Context\Setup\UserContext
-            arguments:
-                - "@app.behat.shared_storage"
-                - "@__symfony__.sylius.repository.app_user"
-                - "@__symfony__.app.fixture.example_factory.app_user"
-                - "@__symfony__.sylius.manager.app_user"
-            tags:
-                - { name: fob.context_service }
+    app.behat.context.setup.topic:
+        class: App\Behat\Context\Setup\TopicContext
+        arguments:
+            - "@app.behat.shared_storage"
+            - "@app.fixture.example_factory.topic"
+            - "@app.repository.topic"
+            - "@doctrine.orm.entity_manager"
 
-        app.behat.context.setup.year_award:
-            class: App\Behat\Context\Setup\YearAwardContext
-            arguments:
-                - "@app.behat.shared_storage"
-                - "@__symfony__.app.fixture.example_factory.year_award"
-                - "@__symfony__.app.repository.year_award"
-            tags:
-            - { name: fob.context_service }
+    app.behat.context.setup.user:
+        class: App\Behat\Context\Setup\UserContext
+        arguments:
+            - "@app.behat.shared_storage"
+            - "@sylius.repository.app_user"
+            - "@app.fixture.example_factory.app_user"
+            - "@sylius.manager.app_user"
+
+    app.behat.context.setup.year_award:
+        class: App\Behat\Context\Setup\YearAwardContext
+        arguments:
+            - "@app.behat.shared_storage"
+            - "@app.fixture.example_factory.year_award"
+            - "@app.repository.year_award"
