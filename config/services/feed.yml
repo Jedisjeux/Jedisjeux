@@ -13,6 +13,6 @@ services:
         arguments:
             - "@eko_feed.feed.dump"
             - "@app.repository.article"
-            - "%kernel.root_dir%/../web/"
+            - "%kernel.project_dir%/public/"
             - "jedisjeux.xml"
         public: true
