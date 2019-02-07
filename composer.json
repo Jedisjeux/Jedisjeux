@@ -26,7 +26,7 @@
     "excelwebzone/recaptcha-bundle": "^1.5",
     "friendsofsymfony/ckeditor-bundle": "^1.1",
     "friendsofsymfony/jsrouting-bundle": "^2.2",
-    "fzaninotto/Faker": "^1.6",
+    "fzaninotto/faker": "^1.6",
     "google/apiclient": "^2.0",
     "guzzlehttp/guzzle": "^6.2",
     "incenteev/hashed-asset-bundle": "^1.0",
