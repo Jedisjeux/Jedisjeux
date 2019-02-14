@@ -51,6 +51,9 @@ services:
         arguments:
             - "@app.behat.notification_accessor"
 
+    App\Behat\Service\NotificationCheckerInterface:
+        alias: app.behat.notification_checker
+
     app.behat.current_page_resolver:
         class: App\Behat\Service\Resolver\CurrentPageResolver
         public: false

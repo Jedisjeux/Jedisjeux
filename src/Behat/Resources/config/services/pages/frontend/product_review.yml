@@ -8,17 +8,14 @@ services:
 #        class: App\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
-    app.behat.page.frontend.product_review.index:
-        class: App\Behat\Page\Frontend\ProductReview\IndexPage
+    App\Behat\Page\Frontend\ProductReview\IndexPage:
         parent: app.behat.symfony_page
         public: false
 
-    app.behat.page.frontend.product_review.create:
-        class: App\Behat\Page\Frontend\ProductReview\CreatePage
+    App\Behat\Page\Frontend\ProductReview\CreatePage:
         parent: app.behat.symfony_page
         public: false
 
-    app.behat.page.frontend.product_review.update:
-        class: App\Behat\Page\Frontend\ProductReview\UpdatePage
+    App\Behat\Page\Frontend\ProductReview\UpdatePage:
         parent: app.behat.symfony_page
         public: false

@@ -8,12 +8,10 @@ services:
 #        class: App\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
-      app.behat.page.frontend.person.index:
-          class: App\Behat\Page\Frontend\Person\IndexPage
-          parent: app.behat.symfony_page
-          public: false
+    App\Behat\Page\Frontend\Person\IndexPage:
+        parent: app.behat.symfony_page
+        public: false
 
-      app.behat.page.frontend.person.show:
-          class: App\Behat\Page\Frontend\Person\ShowPage
-          parent: app.behat.symfony_page
-          public: false
+    App\Behat\Page\Frontend\Person\ShowPage:
+        parent: app.behat.symfony_page
+        public: false

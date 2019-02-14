@@ -14,7 +14,7 @@ namespace App\Behat\Context\Ui\Frontend;
 use App\Behat\Page\Frontend\Post\CreatePage;
 use App\Behat\Page\Frontend\Post\IndexPage;
 use App\Behat\Page\Frontend\Post\UpdatePage;
-use App\Behat\Service\SharedStorage;
+use App\Behat\Service\SharedStorageInterface;
 use App\Entity\Post;
 use App\Entity\Topic;
 use Behat\Behat\Context\Context;
@@ -23,7 +23,7 @@ use Webmozart\Assert\Assert;
 class PostContext implements Context
 {
     /**
-     * @var SharedStorage
+     * @var SharedStorageInterface
      */
     private $sharedStorage;
 
@@ -43,13 +43,13 @@ class PostContext implements Context
     private $updatePage;
 
     /**
-     * @param SharedStorage $sharedStorage
-     * @param IndexPage     $indexPage
-     * @param CreatePage    $createPage
-     * @param UpdatePage    $updatePage
+     * @param SharedStorageInterface $sharedStorage
+     * @param IndexPage              $indexPage
+     * @param CreatePage             $createPage
+     * @param UpdatePage             $updatePage
      */
     public function __construct(
-        SharedStorage $sharedStorage,
+        SharedStorageInterface $sharedStorage,
         IndexPage $indexPage,
         CreatePage $createPage,
         UpdatePage $updatePage
