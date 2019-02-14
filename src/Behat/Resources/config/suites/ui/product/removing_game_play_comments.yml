@@ -5,19 +5,19 @@ default:
     suites:
         ui_removing_game_play_comments:
             contexts:
-                - app.behat.context.hook.doctrine_orm
+                - App\Behat\Context\Hook\DoctrineORMContext
 
-                - app.behat.context.transform.customer
-                - app.behat.context.transform.shared_storage
+                - App\Behat\Context\Transform\CustomerContext
+                - App\Behat\Context\Transform\SharedStorageContext
 
-                - app.behat.context.setup.security
-                - app.behat.context.setup.customer
-                - app.behat.context.setup.game_play
-                - app.behat.context.setup.product
-                - app.behat.context.setup.post
-                - app.behat.context.setup.taxon
+                - App\Behat\Context\Setup\SecurityContext
+                - App\Behat\Context\Setup\CustomerContext
+                - App\Behat\Context\Setup\GamePlayContext
+                - App\Behat\Context\Setup\ProductContext
+                - App\Behat\Context\Setup\PostContext
+                - App\Behat\Context\Setup\TaxonContext
 
-                - app.behat.context.ui.frontend.game_play_post
-                - app.behat.context.ui.frontend.notification
+                - App\Behat\Context\Ui\Frontend\GamePlayPostContext
+                - App\Behat\Context\Ui\Frontend\NotificationContext
             filters:
                 tags: "@removing_game_play_comments && @ui"

@@ -5,23 +5,23 @@ default:
     suites:
         ui_viewing_products:
             contexts:
-                - app.behat.context.hook.doctrine_orm
+                - App\Behat\Context\Hook\DoctrineORMContext
 
-                - app.behat.context.transform.customer
-                - app.behat.context.transform.game_award
-                - app.behat.context.transform.person
-                - app.behat.context.transform.product
-                - app.behat.context.transform.shared_storage
-                - app.behat.context.transform.taxon
+                - App\Behat\Context\Transform\CustomerContext
+                - App\Behat\Context\Transform\GameAwardContext
+                - App\Behat\Context\Transform\PersonContext
+                - App\Behat\Context\Transform\ProductContext
+                - App\Behat\Context\Transform\SharedStorageContext
+                - App\Behat\Context\Transform\TaxonContext
 
-                - app.behat.context.setup.game_award
-                - app.behat.context.setup.person
-                - app.behat.context.setup.product
-                - app.behat.context.setup.product_review
-                - app.behat.context.setup.security
-                - app.behat.context.setup.taxon
-                - app.behat.context.setup.year_award
+                - App\Behat\Context\Setup\GameAwardContext
+                - App\Behat\Context\Setup\PersonContext
+                - App\Behat\Context\Setup\ProductContext
+                - App\Behat\Context\Setup\ProductReviewContext
+                - App\Behat\Context\Setup\SecurityContext
+                - App\Behat\Context\Setup\TaxonContext
+                - App\Behat\Context\Setup\YearAwardContext
 
-                - app.behat.context.ui.frontend.product
+                - App\Behat\Context\Ui\Frontend\ProductContext
             filters:
                 tags: "@viewing_products && @ui"

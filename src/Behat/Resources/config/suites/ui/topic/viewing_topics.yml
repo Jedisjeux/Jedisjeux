@@ -5,19 +5,19 @@ default:
     suites:
         ui_viewing_topics:
             contexts:
-                - app.behat.context.hook.doctrine_orm
+                - App\Behat\Context\Hook\DoctrineORMContext
 
-                - app.behat.context.transform.taxon
-                - app.behat.context.transform.topic
-                - app.behat.context.transform.customer
-                - app.behat.context.transform.shared_storage
+                - App\Behat\Context\Transform\TaxonContext
+                - App\Behat\Context\Transform\TopicContext
+                - App\Behat\Context\Transform\CustomerContext
+                - App\Behat\Context\Transform\SharedStorageContext
 
-                - app.behat.context.setup.customer
-                - app.behat.context.setup.security
-                - app.behat.context.setup.taxon
-                - app.behat.context.setup.topic
-                - app.behat.context.setup.post
+                - App\Behat\Context\Setup\CustomerContext
+                - App\Behat\Context\Setup\SecurityContext
+                - App\Behat\Context\Setup\TaxonContext
+                - App\Behat\Context\Setup\TopicContext
+                - App\Behat\Context\Setup\PostContext
 
-                - app.behat.context.ui.frontend.topic
+                - App\Behat\Context\Ui\Frontend\TopicContext
             filters:
                 tags: "@viewing_topics && @ui"

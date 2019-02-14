@@ -12,7 +12,7 @@
 namespace App\Behat\Context\Setup;
 
 use App\Behat\Service\SharedStorageInterface;
-use App\Fixture\Factory\ExampleFactoryInterface;
+use App\Fixture\Factory\ProductReviewExampleFactory;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -30,7 +30,7 @@ class ProductReviewContext implements Context
     protected $sharedStorage;
 
     /**
-     * @var ExampleFactoryInterface
+     * @var ProductReviewExampleFactory
      */
     private $productReviewFactory;
 
@@ -40,12 +40,15 @@ class ProductReviewContext implements Context
     protected $productReviewRepository;
 
     /**
-     * @param SharedStorageInterface  $sharedStorage
-     * @param ExampleFactoryInterface $productReviewFactory
-     * @param RepositoryInterface     $productReviewRepository
+     * @param SharedStorageInterface      $sharedStorage
+     * @param ProductReviewExampleFactory $productReviewFactory
+     * @param RepositoryInterface         $productReviewRepository
      */
-    public function __construct(SharedStorageInterface $sharedStorage, ExampleFactoryInterface $productReviewFactory, RepositoryInterface $productReviewRepository)
-    {
+    public function __construct(
+        SharedStorageInterface $sharedStorage,
+        ProductReviewExampleFactory $productReviewFactory,
+        RepositoryInterface $productReviewRepository
+    ) {
         $this->sharedStorage = $sharedStorage;
         $this->productReviewFactory = $productReviewFactory;
         $this->productReviewRepository = $productReviewRepository;

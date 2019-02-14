@@ -2,15 +2,15 @@ default:
     suites:
         ui_adding_game_plays:
             contexts:
-                - app.behat.context.hook.doctrine_orm
+                - App\Behat\Context\Hook\DoctrineORMContext
 
-                - app.behat.context.transform.product
-                - app.behat.context.transform.shared_storage
+                - App\Behat\Context\Transform\ProductContext
+                - App\Behat\Context\Transform\SharedStorageContext
 
-                - app.behat.context.setup.security
-                - app.behat.context.setup.product
+                - App\Behat\Context\Setup\SecurityContext
+                - App\Behat\Context\Setup\ProductContext
 
-                - app.behat.context.ui.frontend.game_play
-                - app.behat.context.ui.frontend.notification
+                - App\Behat\Context\Ui\Frontend\GamePlayContext
+                - App\Behat\Context\Ui\Frontend\NotificationContext
             filters:
                 tags: "@adding_game_plays && @ui"

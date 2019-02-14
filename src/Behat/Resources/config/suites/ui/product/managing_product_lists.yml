@@ -2,19 +2,19 @@ default:
     suites:
         ui_managing_product_lists:
             contexts:
-                - app.behat.context.hook.doctrine_orm
+                - App\Behat\Context\Hook\DoctrineORMContext
 
-                - app.behat.context.transform.customer
-                - app.behat.context.transform.product
-                - app.behat.context.transform.product_list
-                - app.behat.context.transform.shared_storage
+                - App\Behat\Context\Transform\CustomerContext
+                - App\Behat\Context\Transform\ProductContext
+                - App\Behat\Context\Transform\ProductListContext
+                - App\Behat\Context\Transform\SharedStorageContext
 
-                - app.behat.context.setup.security
-                - app.behat.context.setup.customer
-                - app.behat.context.setup.product
-                - app.behat.context.setup.product_list
+                - App\Behat\Context\Setup\SecurityContext
+                - App\Behat\Context\Setup\CustomerContext
+                - App\Behat\Context\Setup\ProductContext
+                - App\Behat\Context\Setup\ProductListContext
 
-                - app.behat.context.ui.backend.managing_product_lists
-                - app.behat.context.ui.backend.notification
+                - App\Behat\Context\Ui\Backend\ManagingProductListsContext
+                - App\Behat\Context\Ui\Backend\NotificationContext
             filters:
                 tags: "@managing_product_lists && @ui"

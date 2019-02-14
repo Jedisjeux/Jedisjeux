@@ -2,18 +2,18 @@ default:
     suites:
         ui_managing_game_plays:
             contexts:
-                - app.behat.context.hook.doctrine_orm
+                - App\Behat\Context\Hook\DoctrineORMContext
 
-                - app.behat.context.transform.customer
-                - app.behat.context.transform.product
-                - app.behat.context.transform.shared_storage
+                - App\Behat\Context\Transform\CustomerContext
+                - App\Behat\Context\Transform\ProductContext
+                - App\Behat\Context\Transform\SharedStorageContext
 
-                - app.behat.context.setup.security
-                - app.behat.context.setup.customer
-                - app.behat.context.setup.product
-                - app.behat.context.setup.game_play
+                - App\Behat\Context\Setup\SecurityContext
+                - App\Behat\Context\Setup\CustomerContext
+                - App\Behat\Context\Setup\ProductContext
+                - App\Behat\Context\Setup\GamePlayContext
 
-                - app.behat.context.ui.backend.managing_game_plays
-                - app.behat.context.ui.backend.notification
+                - App\Behat\Context\Ui\Backend\ManagingGamePlaysContext
+                - App\Behat\Context\Ui\Backend\NotificationContext
             filters:
                 tags: "@managing_game_plays && @ui"

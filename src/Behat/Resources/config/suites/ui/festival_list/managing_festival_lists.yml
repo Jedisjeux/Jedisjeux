@@ -2,15 +2,15 @@ default:
     suites:
         ui_managing_festival_lists:
             contexts:
-                - app.behat.context.hook.doctrine_orm
+                - App\Behat\Context\Hook\DoctrineORMContext
 
-                - app.behat.context.transform.festival_list
-                - app.behat.context.transform.shared_storage
+                - App\Behat\Context\Transform\FestivalListContext
+                - App\Behat\Context\Transform\SharedStorageContext
 
-                - app.behat.context.setup.security
-                - app.behat.context.setup.festival_list
+                - App\Behat\Context\Setup\SecurityContext
+                - App\Behat\Context\Setup\FestivalListContext
 
-                - app.behat.context.ui.backend.managing_festival_lists
-                - app.behat.context.ui.backend.notification
+                - App\Behat\Context\Ui\Backend\ManagingFestivalListsContext
+                - App\Behat\Context\Ui\Backend\NotificationContext
             filters:
                 tags: "@managing_festival_lists && @ui"

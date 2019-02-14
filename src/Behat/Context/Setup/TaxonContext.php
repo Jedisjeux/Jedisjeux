@@ -14,8 +14,10 @@ namespace App\Behat\Context\Setup;
 use App\Behat\Service\SharedStorageInterface;
 use App\Entity\Taxon;
 use App\Fixture\Factory\ExampleFactoryInterface;
+use App\Fixture\Factory\TaxonExampleFactory;
 use Behat\Behat\Context\Context;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\Translation\PluralizationRules;
@@ -31,7 +33,7 @@ class TaxonContext implements Context
     protected $sharedStorage;
 
     /**
-     * @var ExampleFactoryInterface
+     * @var TaxonExampleFactory
      */
     protected $taxonFactory;
 
@@ -41,20 +43,22 @@ class TaxonContext implements Context
     protected $taxonRepository;
 
     /**
-     * @var EntityManager
+     * @var EntityManagerInterface
      */
     protected $manager;
 
     /**
-     * TaxonContext constructor.
-     *
-     * @param SharedStorageInterface  $sharedStorage
-     * @param ExampleFactoryInterface $taxonFactory
-     * @param RepositoryInterface     $taxonRepository
-     * @param EntityManager           $manager
+     * @param SharedStorageInterface $sharedStorage
+     * @param TaxonExampleFactory    $taxonFactory
+     * @param RepositoryInterface    $taxonRepository
+     * @param EntityManagerInterface $manager
      */
-    public function __construct(SharedStorageInterface $sharedStorage, ExampleFactoryInterface $taxonFactory, RepositoryInterface $taxonRepository, EntityManager $manager)
-    {
+    public function __construct(
+        SharedStorageInterface $sharedStorage,
+        TaxonExampleFactory $taxonFactory,
+        RepositoryInterface $taxonRepository,
+        EntityManagerInterface $manager
+    ) {
         $this->sharedStorage = $sharedStorage;
         $this->taxonFactory = $taxonFactory;
         $this->taxonRepository = $taxonRepository;

@@ -2,20 +2,20 @@ default:
     suites:
         ui_managing_products:
             contexts:
-                - app.behat.context.hook.doctrine_orm
+                - App\Behat\Context\Hook\DoctrineORMContext
 
-                - app.behat.context.transform.customer
-                - app.behat.context.transform.game_award
-                - app.behat.context.transform.product
-                - app.behat.context.transform.shared_storage
+                - App\Behat\Context\Transform\CustomerContext
+                - App\Behat\Context\Transform\GameAwardContext
+                - App\Behat\Context\Transform\ProductContext
+                - App\Behat\Context\Transform\SharedStorageContext
 
-                - app.behat.context.setup.game_award
-                - app.behat.context.setup.product
-                - app.behat.context.setup.security
-                - app.behat.context.setup.user
+                - App\Behat\Context\Setup\GameAwardContext
+                - App\Behat\Context\Setup\ProductContext
+                - App\Behat\Context\Setup\SecurityContext
+                - App\Behat\Context\Setup\UserContext
 
-                - app.behat.context.ui.backend.managing_products
-                - app.behat.context.ui.backend.notification
-                - app.behat.context.ui.notification
+                - App\Behat\Context\Ui\Backend\ManagingProductsContext
+                - App\Behat\Context\Ui\Backend\NotificationContext
+                - App\Behat\Context\Ui\NotificationContext
             filters:
                 tags: "@managing_products && @ui"

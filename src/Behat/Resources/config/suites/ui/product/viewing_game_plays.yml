@@ -5,17 +5,17 @@ default:
     suites:
         ui_viewing_game_plays:
             contexts:
-                - app.behat.context.hook.doctrine_orm
+                - App\Behat\Context\Hook\DoctrineORMContext
 
-                - app.behat.context.transform.customer
-                - app.behat.context.transform.product
-                - app.behat.context.transform.shared_storage
+                - App\Behat\Context\Transform\CustomerContext
+                - App\Behat\Context\Transform\ProductContext
+                - App\Behat\Context\Transform\SharedStorageContext
 
-                - app.behat.context.setup.security
-                - app.behat.context.setup.customer
-                - app.behat.context.setup.game_play
-                - app.behat.context.setup.product
+                - App\Behat\Context\Setup\SecurityContext
+                - App\Behat\Context\Setup\CustomerContext
+                - App\Behat\Context\Setup\GamePlayContext
+                - App\Behat\Context\Setup\ProductContext
 
-                - app.behat.context.ui.frontend.game_play
+                - App\Behat\Context\Ui\Frontend\GamePlayContext
             filters:
                 tags: "@viewing_game_plays && @ui"

@@ -27,10 +27,13 @@ services:
             - "@app.behat.cookie_setter"
             - "user"
 
-    app.behat.email_checker:
+    App\Behat\Service\EmailChecker:
         class: App\Behat\Service\EmailChecker
         arguments:
             - "%kernel.cache_dir%/spool"
+
+    App\Behat\Service\EmailCheckerInterface:
+        alias: App\Behat\Service\EmailChecker
 
     app.behat.table_accessor:
         class: App\Behat\Service\Accessor\TableAccessor
@@ -48,6 +51,9 @@ services:
         arguments:
             - "@app.behat.notification_accessor"
 
+    App\Behat\Service\NotificationCheckerInterface:
+        alias: app.behat.notification_checker
+
     app.behat.current_page_resolver:
         class: App\Behat\Service\Resolver\CurrentPageResolver
         public: false
@@ -55,6 +61,11 @@ services:
             - "@behat.mink.default_session"
             - "@router"
 
-    app.behat.shared_storage:
-        class: App\Behat\Service\SharedStorage
+    App\Behat\Service\Resolver\CurrentPageResolverInterface:
+        alias: app.behat.current_page_resolver
+
+    App\Behat\Service\SharedStorage:
         public: false
+
+    App\Behat\Service\SharedStorageInterface:
+        alias: App\Behat\Service\SharedStorage

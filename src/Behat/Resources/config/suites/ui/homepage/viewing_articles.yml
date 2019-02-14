@@ -2,14 +2,14 @@ default:
     suites:
         ui_viewing_articles_on_homepage:
             contexts:
-                - app.behat.context.hook.doctrine_orm
+                - App\Behat\Context\Hook\DoctrineORMContext
 
-                - app.behat.context.transform.customer
-                - app.behat.context.transform.shared_storage
+                - App\Behat\Context\Transform\CustomerContext
+                - App\Behat\Context\Transform\SharedStorageContext
 
-                - app.behat.context.setup.article
-                - app.behat.context.setup.taxon
+                - App\Behat\Context\Setup\ArticleContext
+                - App\Behat\Context\Setup\TaxonContext
 
-                - app.behat.context.ui.frontend.homepage
+                - App\Behat\Context\Ui\Frontend\HomepageContext
             filters:
                 tags: "@viewing_articles_on_homepage && @ui"

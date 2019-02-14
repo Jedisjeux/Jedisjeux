@@ -8,16 +8,7 @@ services:
 #        class: App\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
-    _defaults:
+    App\Behat\Context\Hook\:
+        resource: '../../../../Context/Hook/*'
+        autowire: true
         public: true
-
-    app.behat.context.hook.doctrine_orm:
-        class: App\Behat\Context\Hook\DoctrineORMContext
-        arguments:
-            - "@doctrine.orm.entity_manager"
-
-    app.behat.context.hook.email_spool:
-        class: App\Behat\Context\Hook\EmailSpoolContext
-        arguments:
-            - "@app.behat.email_checker"
-            - "@filesystem"

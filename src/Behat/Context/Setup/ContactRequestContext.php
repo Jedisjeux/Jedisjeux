@@ -13,6 +13,7 @@ namespace App\Behat\Context\Setup;
 
 use App\Behat\Service\SharedStorageInterface;
 use App\Entity\ContactRequest;
+use App\Fixture\Factory\ContactRequestExampleFactory;
 use App\Fixture\Factory\ExampleFactoryInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -25,7 +26,7 @@ class ContactRequestContext implements Context
     private $sharedStorage;
 
     /**
-     * @var ExampleFactoryInterface
+     * @var ContactRequestExampleFactory
      */
     private $contactRequestFactory;
 
@@ -35,13 +36,13 @@ class ContactRequestContext implements Context
     private $contactRequestRepository;
 
     /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param ExampleFactoryInterface $contactRequestFactory
-     * @param RepositoryInterface $contactRequestRepository
+     * @param SharedStorageInterface       $sharedStorage
+     * @param ContactRequestExampleFactory $contactRequestFactory
+     * @param RepositoryInterface          $contactRequestRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        ExampleFactoryInterface $contactRequestFactory,
+        ContactRequestExampleFactory $contactRequestFactory,
         RepositoryInterface $contactRequestRepository
     ) {
         $this->sharedStorage = $sharedStorage;

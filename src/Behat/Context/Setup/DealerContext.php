@@ -12,7 +12,7 @@
 namespace App\Behat\Context\Setup;
 
 use App\Entity\Dealer;
-use App\Fixture\Factory\ExampleFactoryInterface;
+use App\Fixture\Factory\DealerExampleFactory;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -22,7 +22,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class DealerContext implements Context
 {
     /**
-     * @var ExampleFactoryInterface
+     * @var DealerExampleFactory
      */
     private $dealerFactory;
 
@@ -34,10 +34,10 @@ class DealerContext implements Context
     /**
      * DealerContext constructor.
      *
-     * @param ExampleFactoryInterface $dealerFactory
-     * @param RepositoryInterface     $dealerRepository
+     * @param DealerExampleFactory $dealerFactory
+     * @param RepositoryInterface  $dealerRepository
      */
-    public function __construct(ExampleFactoryInterface $dealerFactory, RepositoryInterface $dealerRepository)
+    public function __construct(DealerExampleFactory $dealerFactory, RepositoryInterface $dealerRepository)
     {
         $this->dealerFactory = $dealerFactory;
         $this->dealerRepository = $dealerRepository;

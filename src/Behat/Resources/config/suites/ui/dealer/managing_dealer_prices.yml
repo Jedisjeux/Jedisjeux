@@ -2,19 +2,19 @@ default:
     suites:
         ui_managing_dealer_prices:
             contexts:
-                - app.behat.context.hook.doctrine_orm
+                - App\Behat\Context\Hook\DoctrineORMContext
 
-                - app.behat.context.transform.dealer
-                - app.behat.context.transform.dealer_price
-                - app.behat.context.transform.product
-                - app.behat.context.transform.shared_storage
+                - App\Behat\Context\Transform\DealerContext
+                - App\Behat\Context\Transform\DealerPriceContext
+                - App\Behat\Context\Transform\ProductContext
+                - App\Behat\Context\Transform\SharedStorageContext
 
-                - app.behat.context.setup.security
-                - app.behat.context.setup.dealer
-                - app.behat.context.setup.dealer_price
-                - app.behat.context.setup.product
+                - App\Behat\Context\Setup\SecurityContext
+                - App\Behat\Context\Setup\DealerContext
+                - App\Behat\Context\Setup\DealerPriceContext
+                - App\Behat\Context\Setup\ProductContext
 
-                - app.behat.context.ui.backend.managing_dealer_prices
-                - app.behat.context.ui.backend.notification
+                - App\Behat\Context\Ui\Backend\ManagingDealerPricesContext
+                - App\Behat\Context\Ui\Backend\NotificationContext
             filters:
                 tags: "@managing_dealer_prices && @ui"

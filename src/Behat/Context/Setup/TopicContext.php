@@ -14,6 +14,7 @@ namespace App\Behat\Context\Setup;
 use App\Behat\Service\SharedStorageInterface;
 use App\Entity\Topic;
 use App\Fixture\Factory\ExampleFactoryInterface;
+use App\Fixture\Factory\TopicExampleFactory;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
@@ -31,7 +32,7 @@ class TopicContext implements Context
     protected $sharedStorage;
 
     /**
-     * @var ExampleFactoryInterface
+     * @var TopicExampleFactory
      */
     protected $topicFactory;
 
@@ -46,14 +47,14 @@ class TopicContext implements Context
     protected $manager;
 
     /**
-     * @param SharedStorageInterface  $sharedStorage
-     * @param ExampleFactoryInterface $topicFactory
-     * @param EntityRepository        $topicRepository
-     * @param ObjectManager           $manager
+     * @param SharedStorageInterface $sharedStorage
+     * @param TopicExampleFactory    $topicFactory
+     * @param EntityRepository       $topicRepository
+     * @param ObjectManager          $manager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        ExampleFactoryInterface $topicFactory,
+        TopicExampleFactory $topicFactory,
         EntityRepository $topicRepository,
         ObjectManager $manager
     ) {

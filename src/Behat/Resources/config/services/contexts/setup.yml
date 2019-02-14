@@ -10,152 +10,89 @@ services:
 
     _defaults:
         public: true
+        autowire: true
 
-    app.behat.context.setup.article:
-        class: App\Behat\Context\Setup\ArticleContext
-        arguments:
-            - "@app.behat.shared_storage"
-            - "@app.fixture.example_factory.article"
-            - "@app.repository.article"
-            - "@doctrine.orm.entity_manager"
+    App\Behat\Context\Setup\:
+        resource: '../../../../Context/Setup/*'
+        autowire: true
+        public: true
 
-    app.behat.context.setup.contact_request:
-        class: App\Behat\Context\Setup\ContactRequestContext
+    App\Behat\Context\Setup\ContactRequestContext:
         arguments:
-            - "@app.behat.shared_storage"
-            - "@app.fixture.example_factory.contact_request"
-            - "@app.repository.contact_request"
+            $contactRequestRepository: '@app.repository.contact_request'
 
-    app.behat.context.setup.customer:
-        class: App\Behat\Context\Setup\CustomerContext
+    App\Behat\Context\Setup\CustomerContext:
         arguments:
-            - "@app.behat.shared_storage"
-            - "@app.fixture.example_factory.app_user"
-            - "@sylius.repository.customer"
+            $customerRepository: '@sylius.repository.customer'
 
-    app.behat.context.setup.dealer:
-        class: App\Behat\Context\Setup\DealerContext
+    App\Behat\Context\Setup\DealerContext:
         arguments:
-            - "@app.fixture.example_factory.dealer"
-            - "@app.repository.dealer"
+            $dealerRepository: '@app.repository.dealer'
 
-    app.behat.context.setup.dealer_price:
-        class: App\Behat\Context\Setup\DealerPriceContext
+    App\Behat\Context\Setup\DealerPriceContext:
         arguments:
-            - "@app.fixture.example_factory.dealer_price"
-            - "@app.repository.dealer_price"
+            $dealerPriceRepository: '@app.repository.dealer_price'
 
-    app.behat.context.setup.festival_list:
-        class: App\Behat\Context\Setup\FestivalListContext
+    App\Behat\Context\Setup\FestivalListContext:
         arguments:
-            - "@app.behat.shared_storage"
-            - "@app.fixture.example_factory.festival_list"
-            - "@app.repository.festival_list"
+            $festivalListRepository: '@app.repository.festival_list'
 
-    app.behat.context.setup.game_award:
-        class: App\Behat\Context\Setup\GameAwardContext
+    App\Behat\Context\Setup\GameAwardContext:
         arguments:
-            - "@app.behat.shared_storage"
-            - "@app.fixture.example_factory.game_award"
-            - "@app.repository.game_award"
+            $gameAwardRepository: '@app.repository.game_award'
 
-    app.behat.context.setup.game_play:
-        class: App\Behat\Context\Setup\GamePlayContext
+    App\Behat\Context\Setup\GamePlayContext:
         arguments:
-            - "@app.behat.shared_storage"
-            - "@app.fixture.example_factory.game_play"
-            - "@app.fixture.example_factory.topic"
-            - "@app.fixture.example_factory.post"
-            - "@app.repository.game_play"
-            - "@app.repository.topic"
+            $gamePlayRepository: '@app.repository.game_play'
+            $topicRepository: '@app.repository.topic'
 
-    app.behat.context.setup.person:
-        class: App\Behat\Context\Setup\PersonContext
+    App\Behat\Context\Setup\PersonContext:
         arguments:
-            - "@app.behat.shared_storage"
-            - "@app.fixture.example_factory.person"
-            - "@app.repository.person"
+            $personRepository: '@app.repository.person'
 
-    app.behat.context.setup.post:
-        class: App\Behat\Context\Setup\PostContext
+    App\Behat\Context\Setup\PostContext:
         arguments:
-            - "@app.behat.shared_storage"
-            - "@app.fixture.example_factory.post"
-            - "@app.fixture.example_factory.topic"
-            - "@app.repository.post"
-            - "@app.repository.topic"
+            $postRepository: '@app.repository.post'
+            $topicRepository: '@app.repository.topic'
 
-    app.behat.context.setup.product:
-        class: App\Behat\Context\Setup\ProductContext
+    App\Behat\Context\Setup\ProductContext:
         arguments:
-            - "@app.behat.shared_storage"
-            - "@app.fixture.example_factory.product"
-            - "@sylius.factory.product_variant"
-            - "@sylius.repository.product"
-            - "@doctrine.orm.entity_manager"
+            $productVariantFactory: '@sylius.factory.product_variant'
+            $productRepository: '@sylius.repository.product'
 
-    app.behat.context.setup.product_list:
-        class: App\Behat\Context\Setup\ProductListContext
+    App\Behat\Context\Setup\ProductListContext:
         arguments:
-            - "@app.behat.shared_storage"
-            - "@app.fixture.example_factory.product_list"
-            - "@app.repository.product_list"
+            $productListRepository: '@app.repository.product_list'
 
-    app.behat.context.setup.product_review:
-        class: App\Behat\Context\Setup\ProductReviewContext
+    App\Behat\Context\Setup\ProductReviewContext:
         arguments:
-            - "@app.behat.shared_storage"
-            - "@app.fixture.example_factory.product_review"
-            - "@sylius.repository.product_review"
+            $productReviewRepository: '@sylius.repository.product_review'
 
-    app.behat.context.setup.product_video:
-        class: App\Behat\Context\Setup\ProductVideoContext
+    App\Behat\Context\Setup\ProductVideoContext:
         arguments:
-            - "@app.behat.shared_storage"
-            - "@app.fixture.example_factory.product_video"
-            - "@app.repository.product_video"
+            $productVideoRepository: '@app.repository.product_video'
 
-    app.behat.context.setup.redirection:
-        class: App\Behat\Context\Setup\RedirectionContext
+    App\Behat\Context\Setup\RedirectionContext:
         arguments:
-            - "@app.fixture.example_factory.redirection"
-            - "@app.repository.redirection"
+            $redirectionRepository: '@app.repository.redirection'
 
-    app.behat.context.setup.security:
-        class: App\Behat\Context\Setup\SecurityContext
+    App\Behat\Context\Setup\SecurityContext:
         arguments:
-            - "@app.behat.shared_storage"
-            - "@app.behat.admin_security"
-            - "@app.fixture.example_factory.app_user"
-            - "@sylius.repository.app_user"
+            $securityService: '@app.behat.admin_security'
+            $userRepository: '@sylius.repository.app_user'
 
-    app.behat.context.setup.taxon:
-        class: App\Behat\Context\Setup\TaxonContext
+    App\Behat\Context\Setup\TaxonContext:
         arguments:
-            - "@app.behat.shared_storage"
-            - "@app.fixture.example_factory.taxon"
-            - "@sylius.repository.taxon"
-            - "@doctrine.orm.entity_manager"
+            $taxonRepository: '@sylius.repository.taxon'
 
-    app.behat.context.setup.topic:
-        class: App\Behat\Context\Setup\TopicContext
+    App\Behat\Context\Setup\TopicContext:
         arguments:
-            - "@app.behat.shared_storage"
-            - "@app.fixture.example_factory.topic"
-            - "@app.repository.topic"
-            - "@doctrine.orm.entity_manager"
+            $topicRepository: '@app.repository.topic'
 
-    app.behat.context.setup.user:
-        class: App\Behat\Context\Setup\UserContext
+    App\Behat\Context\Setup\UserContext:
         arguments:
-            - "@app.behat.shared_storage"
-            - "@sylius.repository.app_user"
-            - "@app.fixture.example_factory.app_user"
-            - "@sylius.manager.app_user"
+            $userRepository: '@sylius.repository.app_user'
 
-    app.behat.context.setup.year_award:
-        class: App\Behat\Context\Setup\YearAwardContext
+    App\Behat\Context\Setup\YearAwardContext:
         arguments:
-            - "@app.behat.shared_storage"
-            - "@app.fixture.example_factory.year_award"
-            - "@app.repository.year_award"
+            $yearAwardRepository: '@app.repository.year_award'

@@ -8,14 +8,12 @@ services:
 #        class: App\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
-      app.behat.page.backend.festival_list.create:
-          class: App\Behat\Page\Backend\FestivalList\CreatePage
+      App\Behat\Page\Backend\FestivalList\CreatePage:
           parent: app.behat.page.backend.crud.create
           public: false
           arguments: ["app_backend_festival_list_create"]
 
-      app.behat.page.backend.festival_list.index:
-          class: App\Behat\Page\Backend\FestivalList\IndexPage
+      App\Behat\Page\Backend\FestivalList\IndexPage:
           parent: app.behat.page.backend.crud.index
           public: false
           arguments: ["app_backend_festival_list_index"]

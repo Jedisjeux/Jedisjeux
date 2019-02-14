@@ -2,12 +2,12 @@ default:
     suites:
         ui_customer_requesting_contact:
             contexts:
-                - app.behat.context.hook.doctrine_orm
+                - App\Behat\Context\Hook\DoctrineORMContext
 
-                - app.behat.context.transform.shared_storage
+                - App\Behat\Context\Transform\SharedStorageContext
 
-                - app.behat.context.setup.security
+                - App\Behat\Context\Setup\SecurityContext
 
-                - app.behat.context.ui.frontend.contact
+                - App\Behat\Context\Ui\Frontend\ContactContext
             filters:
                 tags: "@requesting_contact && @ui"

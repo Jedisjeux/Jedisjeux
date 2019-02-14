@@ -2,17 +2,17 @@ default:
     suites:
         ui_managing_taxons:
             contexts:
-                - app.behat.context.hook.doctrine_orm
+                - App\Behat\Context\Hook\DoctrineORMContext
 
-                - app.behat.context.transform.customer
-                - app.behat.context.transform.shared_storage
-                - app.behat.context.transform.taxon
+                - App\Behat\Context\Transform\CustomerContext
+                - App\Behat\Context\Transform\SharedStorageContext
+                - App\Behat\Context\Transform\TaxonContext
 
-                - app.behat.context.setup.security
-                - app.behat.context.setup.customer
-                - app.behat.context.setup.taxon
+                - App\Behat\Context\Setup\SecurityContext
+                - App\Behat\Context\Setup\CustomerContext
+                - App\Behat\Context\Setup\TaxonContext
 
-                - app.behat.context.ui.backend.managing_taxons
-                - app.behat.context.ui.backend.notification
+                - App\Behat\Context\Ui\Backend\ManagingTaxonsContext
+                - App\Behat\Context\Ui\Backend\NotificationContext
             filters:
                 tags: "@managing_taxons && @ui"

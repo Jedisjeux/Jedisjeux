@@ -5,17 +5,17 @@ default:
     suites:
         ui_customer_registration:
             contexts:
-                - app.behat.context.hook.doctrine_orm
+                - App\Behat\Context\Hook\DoctrineORMContext
                 # - sylius.behat.context.hook.email_spool
 
-                - app.behat.context.transform.shared_storage
-                - app.behat.context.transform.customer
+                - App\Behat\Context\Transform\SharedStorageContext
+                - App\Behat\Context\Transform\CustomerContext
 
-                - app.behat.context.setup.customer
+                - App\Behat\Context\Setup\CustomerContext
                 # - app.behat.context.setup.shop_security
-                - app.behat.context.setup.user
+                - App\Behat\Context\Setup\UserContext
 
-                # - app.behat.context.ui.email
-                - app.behat.context.ui.frontend.registration
+                # - App\Behat\Context\Ui\EmailContext
+                - App\Behat\Context\Ui\Frontend\RegistrationContext
             filters:
                 tags: "@customer_registration && @ui"

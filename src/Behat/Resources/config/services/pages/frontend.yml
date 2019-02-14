@@ -12,7 +12,7 @@ imports:
     - { resource: frontend/year_award.yml }
 
 services:
-    app.behat.page.frontend.home:
+    App\Behat\Page\Frontend\HomePage:
         class: App\Behat\Page\Frontend\HomePage
         parent: app.behat.symfony_page
         public: false

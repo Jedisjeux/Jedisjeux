@@ -2,14 +2,14 @@ default:
     suites:
         ui_managing_contact_requests:
             contexts:
-                - app.behat.context.hook.doctrine_orm
+                - App\Behat\Context\Hook\DoctrineORMContext
 
-                - app.behat.context.transform.shared_storage
+                - App\Behat\Context\Transform\SharedStorageContext
 
-                - app.behat.context.setup.contact_request
-                - app.behat.context.setup.security
+                - App\Behat\Context\Setup\ContactRequestContext
+                - App\Behat\Context\Setup\SecurityContext
 
-                - app.behat.context.ui.backend.managing_contact_requests
-                - app.behat.context.ui.backend.notification
+                - App\Behat\Context\Ui\Backend\ManagingContactRequestsContext
+                - App\Behat\Context\Ui\Backend\NotificationContext
             filters:
                 tags: "@managing_contact_requests && @ui"

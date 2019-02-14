@@ -11,7 +11,7 @@
 
 namespace App\Behat\Context\Ui\Backend;
 
-use App\Behat\Page\Backend\Crud\UpdatePage;
+use App\Behat\Page\Backend\GameAward\UpdatePage;
 use App\Behat\Page\Backend\GameAward\CreatePage;
 use App\Behat\Page\Backend\GameAward\IndexPage;
 use App\Entity\GameAward;

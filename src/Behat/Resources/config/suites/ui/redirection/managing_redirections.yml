@@ -2,15 +2,15 @@ default:
     suites:
         ui_managing_redirections:
             contexts:
-                - app.behat.context.hook.doctrine_orm
+                - App\Behat\Context\Hook\DoctrineORMContext
 
-                - app.behat.context.transform.redirection
-                - app.behat.context.transform.shared_storage
+                - App\Behat\Context\Transform\RedirectionContext
+                - App\Behat\Context\Transform\SharedStorageContext
 
-                - app.behat.context.setup.security
-                - app.behat.context.setup.redirection
+                - App\Behat\Context\Setup\SecurityContext
+                - App\Behat\Context\Setup\RedirectionContext
 
-                - app.behat.context.ui.backend.managing_redirections
-                - app.behat.context.ui.backend.notification
+                - App\Behat\Context\Ui\Backend\ManagingRedirectionsContext
+                - App\Behat\Context\Ui\Backend\NotificationContext
             filters:
                 tags: "@managing_redirections && @ui"

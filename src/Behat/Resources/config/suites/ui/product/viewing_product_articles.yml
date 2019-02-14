@@ -2,20 +2,20 @@ default:
     suites:
         ui_viewing_product_articles:
             contexts:
-                - app.behat.context.hook.doctrine_orm
+                - App\Behat\Context\Hook\DoctrineORMContext
 
-                - app.behat.context.transform.customer
-                - app.behat.context.transform.product
-                - app.behat.context.transform.shared_storage
+                - App\Behat\Context\Transform\CustomerContext
+                - App\Behat\Context\Transform\ProductContext
+                - App\Behat\Context\Transform\SharedStorageContext
 
-                - app.behat.context.setup.security
-                - app.behat.context.setup.article
-                - app.behat.context.setup.customer
-                - app.behat.context.setup.product
-                - app.behat.context.setup.taxon
+                - App\Behat\Context\Setup\SecurityContext
+                - App\Behat\Context\Setup\ArticleContext
+                - App\Behat\Context\Setup\CustomerContext
+                - App\Behat\Context\Setup\ProductContext
+                - App\Behat\Context\Setup\TaxonContext
 
-                - app.behat.context.ui.frontend.article
-                - app.behat.context.ui.frontend.notification
-                - app.behat.context.ui.frontend.product
+                - App\Behat\Context\Ui\Frontend\ArticleContext
+                - App\Behat\Context\Ui\Frontend\NotificationContext
+                - App\Behat\Context\Ui\Frontend\ProductContext
             filters:
                 tags: "@viewing_product_articles && @ui"

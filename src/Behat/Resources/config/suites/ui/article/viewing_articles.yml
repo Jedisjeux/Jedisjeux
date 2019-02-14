@@ -5,18 +5,18 @@ default:
     suites:
         ui_viewing_articles:
             contexts:
-                - app.behat.context.hook.doctrine_orm
+                - App\Behat\Context\Hook\DoctrineORMContext
 
-                - app.behat.context.transform.article
-                - app.behat.context.transform.customer
-                - app.behat.context.transform.shared_storage
-                - app.behat.context.transform.taxon
+                - App\Behat\Context\Transform\ArticleContext
+                - App\Behat\Context\Transform\CustomerContext
+                - App\Behat\Context\Transform\SharedStorageContext
+                - App\Behat\Context\Transform\TaxonContext
 
-                - app.behat.context.setup.security
-                - app.behat.context.setup.article
-                - app.behat.context.setup.customer
-                - app.behat.context.setup.taxon
+                - App\Behat\Context\Setup\SecurityContext
+                - App\Behat\Context\Setup\ArticleContext
+                - App\Behat\Context\Setup\CustomerContext
+                - App\Behat\Context\Setup\TaxonContext
 
-                - app.behat.context.ui.frontend.article
+                - App\Behat\Context\Ui\Frontend\ArticleContext
             filters:
                 tags: "@viewing_articles && @ui"

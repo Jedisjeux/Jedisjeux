@@ -5,19 +5,19 @@ default:
     suites:
         ui_editing_article_comments:
             contexts:
-                - app.behat.context.hook.doctrine_orm
+                - App\Behat\Context\Hook\DoctrineORMContext
 
-                - app.behat.context.transform.article
-                - app.behat.context.transform.customer
-                - app.behat.context.transform.shared_storage
+                - App\Behat\Context\Transform\ArticleContext
+                - App\Behat\Context\Transform\CustomerContext
+                - App\Behat\Context\Transform\SharedStorageContext
 
-                - app.behat.context.setup.security
-                - app.behat.context.setup.article
-                - app.behat.context.setup.customer
-                - app.behat.context.setup.taxon
-                - app.behat.context.setup.post
+                - App\Behat\Context\Setup\SecurityContext
+                - App\Behat\Context\Setup\ArticleContext
+                - App\Behat\Context\Setup\CustomerContext
+                - App\Behat\Context\Setup\TaxonContext
+                - App\Behat\Context\Setup\PostContext
 
-                - app.behat.context.ui.frontend.notification
-                - app.behat.context.ui.frontend.article_post
+                - App\Behat\Context\Ui\Frontend\NotificationContext
+                - App\Behat\Context\Ui\Frontend\ArticlePostContext
             filters:
                 tags: "@editing_article_comments && @ui"

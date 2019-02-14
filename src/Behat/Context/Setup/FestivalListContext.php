@@ -13,7 +13,7 @@ namespace App\Behat\Context\Setup;
 
 use App\Behat\Service\SharedStorageInterface;
 use App\Entity\FestivalList;
-use App\Fixture\Factory\ExampleFactoryInterface;
+use App\Fixture\Factory\FestivalListExampleFactory;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -28,7 +28,7 @@ class FestivalListContext implements Context
     private $sharedStorage;
 
     /**
-     * @var ExampleFactoryInterface
+     * @var FestivalListExampleFactory
      */
     private $festivalListFactory;
 
@@ -38,12 +38,15 @@ class FestivalListContext implements Context
     private $festivalListRepository;
 
     /**
-     * @param $sharedStorage
-     * @param ExampleFactoryInterface $festivalListFactory
-     * @param RepositoryInterface     $festivalListRepository
+     * @param SharedStorageInterface     $sharedStorage
+     * @param FestivalListExampleFactory $festivalListFactory
+     * @param RepositoryInterface        $festivalListRepository
      */
-    public function __construct($sharedStorage, ExampleFactoryInterface $festivalListFactory, RepositoryInterface $festivalListRepository)
-    {
+    public function __construct(
+        SharedStorageInterface $sharedStorage,
+        FestivalListExampleFactory $festivalListFactory,
+        RepositoryInterface $festivalListRepository
+    ) {
         $this->sharedStorage = $sharedStorage;
         $this->festivalListFactory = $festivalListFactory;
         $this->festivalListRepository = $festivalListRepository;

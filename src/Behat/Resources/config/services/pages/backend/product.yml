@@ -8,26 +8,23 @@ services:
 #        class: App\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
-      app.behat.page.backend.product.create:
+      App\Behat\Page\Backend\Product\CreatePage:
           class: App\Behat\Page\Backend\Product\CreatePage
           parent: app.behat.page.backend.crud.create
           public: false
           arguments: ["sylius_admin_product_create"]
 
-      app.behat.page.backend.product.create_from_bgg:
-          class: App\Behat\Page\Backend\Product\CreatePage
+      App\Behat\Page\Backend\Product\CreatePageFromBgg:
           parent: app.behat.page.backend.crud.create
           public: false
           arguments: ["sylius_admin_product_from_bgg_new"]
 
-      app.behat.page.backend.product.index:
-          class: App\Behat\Page\Backend\Product\IndexPage
+      App\Behat\Page\Backend\Product\IndexPage:
           parent: app.behat.page.backend.crud.index
           public: false
           arguments: ["sylius_admin_product_index"]
 
-      app.behat.page.backend.product.update:
-          class: App\Behat\Page\Backend\Product\UpdatePage
+      App\Behat\Page\Backend\Product\UpdatePage:
           parent: app.behat.page.backend.crud.update
           public: false
           arguments: ["sylius_admin_product_update"]

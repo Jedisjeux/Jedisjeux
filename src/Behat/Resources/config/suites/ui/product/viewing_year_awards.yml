@@ -5,16 +5,16 @@ default:
     suites:
         ui_viewing_year_awards:
             contexts:
-                - app.behat.context.hook.doctrine_orm
+                - App\Behat\Context\Hook\DoctrineORMContext
 
-                - app.behat.context.transform.game_award
-                - app.behat.context.transform.shared_storage
+                - App\Behat\Context\Transform\GameAwardContext
+                - App\Behat\Context\Transform\SharedStorageContext
 
-                - app.behat.context.setup.game_award
-                - app.behat.context.setup.product
-                - app.behat.context.setup.year_award
-                - app.behat.context.setup.security
+                - App\Behat\Context\Setup\GameAwardContext
+                - App\Behat\Context\Setup\ProductContext
+                - App\Behat\Context\Setup\YearAwardContext
+                - App\Behat\Context\Setup\SecurityContext
 
-                - app.behat.context.ui.frontend.year_award
+                - App\Behat\Context\Ui\Frontend\YearAwardContext
             filters:
                 tags: "@viewing_year_awards && @ui"

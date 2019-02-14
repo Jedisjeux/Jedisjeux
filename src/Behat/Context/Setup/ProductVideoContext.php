@@ -13,7 +13,7 @@ namespace App\Behat\Context\Setup;
 
 use App\Behat\Service\SharedStorageInterface;
 use App\Entity\ProductVideo;
-use App\Fixture\Factory\ExampleFactoryInterface;
+use App\Fixture\Factory\ProductVideoExampleFixture;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -26,7 +26,7 @@ class ProductVideoContext implements Context
     protected $sharedStorage;
 
     /**
-     * @var ExampleFactoryInterface
+     * @var ProductVideoExampleFixture
      */
     private $productVideoFactory;
 
@@ -36,13 +36,13 @@ class ProductVideoContext implements Context
     private $productVideoRepository;
 
     /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param ExampleFactoryInterface $productVideoFactory
-     * @param RepositoryInterface $productVideoRepository
+     * @param SharedStorageInterface     $sharedStorage
+     * @param ProductVideoExampleFixture $productVideoFactory
+     * @param RepositoryInterface        $productVideoRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        ExampleFactoryInterface $productVideoFactory,
+        ProductVideoExampleFixture $productVideoFactory,
         RepositoryInterface $productVideoRepository
     ) {
         $this->sharedStorage = $sharedStorage;

@@ -2,240 +2,240 @@ services:
     app.fixture.article:
         class: App\Fixture\ArticleFixture
         arguments:
-            - "@app.manager.article"
-            - "@app.fixture.example_factory.article"
+            - '@app.manager.article'
+            - '@App\Fixture\Factory\ArticleExampleFactory'
         tags:
             - { name: sylius_fixtures.fixture }
 
     app.fixture.article_review:
         class: App\Fixture\ArticleReviewFixture
         arguments:
-        - "@sylius.manager.article_review"
-        - "@app.fixture.example_factory.article_review"
+            - '@sylius.manager.article_review'
+            - '@App\Fixture\Factory\ArticleReviewExampleFactory'
         tags:
         - { name: sylius_fixtures.fixture }
 
     app.fixture.app_user:
         class: App\Fixture\AppUserFixture
         arguments:
-            - "@sylius.manager.app_user"
-            - "@app.fixture.example_factory.app_user"
+            - '@sylius.manager.app_user'
+            - '@App\Fixture\Factory\AppUserExampleFactory'
         tags:
             - { name: sylius_fixtures.fixture }
 
     app.fixture.block:
         class: App\Fixture\BlockFixture
         arguments:
-            - "@app.manager.block"
-            - "@app.fixture.example_factory.block"
+            - '@app.manager.block'
+            - '@App\Fixture\Factory\BlockExampleFactory'
         tags:
             - { name: sylius_fixtures.fixture }
 
     app.fixture.contact_request:
         class: App\Fixture\ContactRequestFixture
         arguments:
-            - "@app.manager.contact_request"
-            - "@app.fixture.example_factory.contact_request"
+            - '@app.manager.contact_request'
+            - '@App\Fixture\Factory\ContactRequestExampleFactory'
         tags:
             - { name: sylius_fixtures.fixture }
 
     app.fixture.dealer:
         class: App\Fixture\DealerFixture
         arguments:
-            - "@app.manager.dealer"
-            - "@app.fixture.example_factory.dealer"
+            - '@app.manager.dealer'
+            - '@App\Fixture\Factory\DealerExampleFactory'
         tags:
             - { name: sylius_fixtures.fixture }
 
     app.fixture.dealer_price:
         class: App\Fixture\DealerPriceFixture
         arguments:
-            - "@app.manager.dealer_price"
-            - "@app.fixture.example_factory.dealer_price"
+            - '@app.manager.dealer_price'
+            - '@App\Fixture\Factory\DealerPriceExampleFactory'
         tags:
             - { name: sylius_fixtures.fixture }
 
     app.fixture.festival_list:
         class: App\Fixture\FestivalListFixture
         arguments:
-            - "@app.manager.festival_list"
-            - "@app.fixture.example_factory.festival_list"
+            - '@app.manager.festival_list'
+            - '@App\Fixture\Factory\FestivalListExampleFactory'
         tags:
             - { name: sylius_fixtures.fixture }
 
     app.fixture.festival_list_item:
         class: App\Fixture\FestivalListItemFixture
         arguments:
-            - "@app.manager.festival_list_item"
-            - "@app.fixture.example_factory.festival_list_item"
+            - '@app.manager.festival_list_item'
+            - '@App\Fixture\Factory\FestivalListItemExampleFactory'
         tags:
             - { name: sylius_fixtures.fixture }
 
     app.fixture.forum_topic:
         class: App\Fixture\ForumTopicFixture
         arguments:
-            - "@app.fixture.taxon"
-            - "@app.fixture.topic"
+            - '@app.fixture.taxon'
+            - '@app.fixture.topic'
         tags:
             - { name: sylius_fixtures.fixture }
 
     app.fixture.game_award:
         class: App\Fixture\GameAwardFixture
         arguments:
-            - "@app.manager.game_award"
-            - "@app.fixture.example_factory.game_award"
+            - '@app.manager.game_award'
+            - '@App\Fixture\Factory\GameAwardExampleFactory'
         tags:
             - { name: sylius_fixtures.fixture }
 
     app.fixture.game_play:
         class: App\Fixture\GamePlayFixture
         arguments:
-            - "@app.manager.game_play"
-            - "@app.fixture.example_factory.game_play"
+            - '@app.manager.game_play'
+            - '@App\Fixture\Factory\GamePlayExampleFactory'
         tags:
             - { name: sylius_fixtures.fixture }
 
     app.fixture.game_play_image:
         class: App\Fixture\GamePlayImageFixture
         arguments:
-            - "@app.manager.game_play_image"
-            - "@app.fixture.example_factory.game_play_image"
+            - '@app.manager.game_play_image'
+            - '@App\Fixture\Factory\GamePlayImageExampleFactory'
         tags:
             - { name: sylius_fixtures.fixture }
 
     app.fixture.game_product:
         class: App\Fixture\GameProductFixture
         arguments:
-            - "@app.fixture.taxon"
-            - "@app.fixture.product"
+            - '@app.fixture.taxon'
+            - '@app.fixture.product'
         tags:
             - { name: sylius_fixtures.fixture }
 
     app.fixture.in_the_box_article:
         class: App\Fixture\InTheBoxArticleFixture
         arguments:
-        - "@app.fixture.taxon"
-        - "@app.fixture.article"
+        - '@app.fixture.taxon'
+        - '@app.fixture.article'
         tags:
         - { name: sylius_fixtures.fixture }
 
     app.fixture.news_article:
         class: App\Fixture\NewsArticleFixture
         arguments:
-        - "@app.fixture.taxon"
-        - "@app.fixture.article"
+        - '@app.fixture.taxon'
+        - '@app.fixture.article'
         tags:
         - { name: sylius_fixtures.fixture }
 
     app.fixture.notification:
         class: App\Fixture\NotificationFixture
         arguments:
-            - "@app.manager.notification"
-            - "@app.fixture.example_factory.notification"
+            - '@app.manager.notification'
+            - '@App\Fixture\Factory\NotificationExampleFactory'
         tags:
             - { name: sylius_fixtures.fixture }
 
     app.fixture.person:
         class: App\Fixture\PersonFixture
         arguments:
-            - "@app.manager.person"
-            - "@app.fixture.example_factory.person"
+            - '@app.manager.person'
+            - '@App\Fixture\Factory\PersonExampleFactory'
         tags:
             - { name: sylius_fixtures.fixture }
 
     app.fixture.player:
         class: App\Fixture\PlayerFixture
         arguments:
-            - "@app.manager.player"
-            - "@app.fixture.example_factory.player"
+            - '@app.manager.player'
+            - '@App\Fixture\Factory\PlayerExampleFactory'
         tags:
             - { name: sylius_fixtures.fixture }
 
     app.fixture.post:
         class: App\Fixture\PostFixture
         arguments:
-            - "@app.manager.post"
-            - "@app.fixture.example_factory.post"
+            - '@app.manager.post'
+            - '@App\Fixture\Factory\PostExampleFactory'
         tags:
             - { name: sylius_fixtures.fixture }
 
     app.fixture.product:
         class: App\Fixture\ProductFixture
         arguments:
-            - "@sylius.manager.product"
-            - "@app.fixture.example_factory.product"
+            - '@sylius.manager.product'
+            - '@App\Fixture\Factory\ProductExampleFactory'
         tags:
             - { name: sylius_fixtures.fixture }
 
     app.fixture.product_box:
         class: App\Fixture\ProductBoxFixture
         arguments:
-            - "@app.manager.product_box"
-            - "@app.fixture.example_factory.product_box"
+            - '@app.manager.product_box'
+            - '@App\Fixture\Factory\ProductBoxExampleFactory'
         tags:
             - { name: sylius_fixtures.fixture }
 
     app.fixture.product_list:
         class: App\Fixture\ProductListFixture
         arguments:
-            - "@app.manager.product_list"
-            - "@app.fixture.example_factory.product_list"
+            - '@app.manager.product_list'
+            - '@App\Fixture\Factory\ProductListExampleFactory'
         tags:
             - { name: sylius_fixtures.fixture }
 
     app.fixture.product_review:
         class: App\Fixture\ProductReviewFixture
         arguments:
-            - "@sylius.manager.product_review"
-            - "@app.fixture.example_factory.product_review"
+            - '@sylius.manager.product_review'
+            - '@App\Fixture\Factory\ProductReviewExampleFactory'
         tags:
             - { name: sylius_fixtures.fixture }
 
     app.fixture.product_video:
         class: App\Fixture\ProductVideoFixture
         arguments:
-            - "@app.manager.product_video"
-            - "@app.fixture.example_factory.product_video"
+            - '@app.manager.product_video'
+            - '@App\Fixture\Factory\ProductVideoExampleFixture'
         tags:
             - { name: sylius_fixtures.fixture }
 
     app.fixture.redirection:
         class: App\Fixture\RedirectionFixture
         arguments:
-            - "@app.manager.redirection"
-            - "@app.fixture.example_factory.redirection"
+            - '@app.manager.redirection'
+            - '@App\Fixture\Factory\RedirectionExampleFactory'
         tags:
             - { name: sylius_fixtures.fixture }
 
     app.fixture.review_article:
         class: App\Fixture\ReviewArticleFixture
         arguments:
-        - "@app.fixture.taxon"
-        - "@app.fixture.article_review"
-        - "@app.fixture.article"
+        - '@app.fixture.taxon'
+        - '@app.fixture.article_review'
+        - '@app.fixture.article'
         tags:
         - { name: sylius_fixtures.fixture }
 
     app.fixture.taxon:
         class: App\Fixture\TaxonFixture
         arguments:
-            - "@sylius.manager.taxon"
-            - "@app.fixture.example_factory.taxon"
+            - '@sylius.manager.taxon'
+            - '@App\Fixture\Factory\TaxonExampleFactory'
         tags:
             - { name: sylius_fixtures.fixture }
 
     app.fixture.topic:
         class: App\Fixture\TopicFixture
         arguments:
-            - "@app.manager.topic"
-            - "@app.fixture.example_factory.topic"
+            - '@app.manager.topic'
+            - '@App\Fixture\Factory\TopicExampleFactory'
         tags:
             - { name: sylius_fixtures.fixture }
 
     app.fixture.year_award:
         class: App\Fixture\YearAwardFixture
         arguments:
-            - "@app.manager.year_award"
-            - "@app.fixture.example_factory.year_award"
+            - '@app.manager.year_award'
+            - '@App\Fixture\Factory\YearAwardExampleFactory'
         tags:
             - { name: sylius_fixtures.fixture }
