@@ -13,6 +13,6 @@ default:
                 - App\Behat\Context\Setup\TaxonContext
                 - App\Behat\Context\Setup\UserContext
 
-                - app.behat.context.ui.frontend.homepage
+                - App\Behat\Context\Ui\Frontend\HomepageContext
             filters:
                 tags: "@viewing_counters_on_homepage && @ui"

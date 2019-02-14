@@ -10,6 +10,6 @@ default:
                 - app.behat.context.transform.product
                 - app.behat.context.transform.shared_storage
 
-                - app.behat.context.ui.backend.dashboard
+                - App\Behat\Context\Ui\Backend\DashboardContext
             filters:
                 tags: "@admin_dashboard && @ui"

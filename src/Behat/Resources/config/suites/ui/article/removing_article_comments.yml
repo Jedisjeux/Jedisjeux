@@ -17,7 +17,7 @@ default:
                 - App\Behat\Context\Setup\TaxonContext
                 - App\Behat\Context\Setup\PostContext
 
-                - app.behat.context.ui.frontend.notification
-                - app.behat.context.ui.frontend.article_post
+                - App\Behat\Context\Ui\Frontend\NotificationContext
+                - App\Behat\Context\Ui\Frontend\ArticlePostContext
             filters:
                 tags: "@editing_article_comments && @ui"

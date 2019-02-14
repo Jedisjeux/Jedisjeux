@@ -17,7 +17,7 @@ default:
                 - App\Behat\Context\Setup\CustomerContext
                 - App\Behat\Context\Setup\TaxonContext
 
-                - app.behat.context.ui.frontend.topic
-                - app.behat.context.ui.frontend.notification
+                - App\Behat\Context\Ui\Frontend\TopicContext
+                - App\Behat\Context\Ui\Frontend\NotificationContext
             filters:
                 tags: "@editing_topics && @ui"

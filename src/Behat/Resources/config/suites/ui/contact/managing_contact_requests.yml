@@ -9,7 +9,7 @@ default:
                 - App\Behat\Context\Setup\ContactRequestContext
                 - App\Behat\Context\Setup\SecurityContext
 
-                - app.behat.context.ui.backend.managing_contact_requests
-                - app.behat.context.ui.backend.notification
+                - App\Behat\Context\Ui\Backend\ManagingContactRequestsContext
+                - App\Behat\Context\Ui\Backend\NotificationContext
             filters:
                 tags: "@managing_contact_requests && @ui"

@@ -14,7 +14,7 @@ default:
                 - App\Behat\Context\Setup\ProductContext
                 - App\Behat\Context\Setup\YearAwardContext
 
-                - app.behat.context.ui.backend.managing_year_awards
-                - app.behat.context.ui.backend.notification
+                - App\Behat\Context\Ui\Backend\ManagingYearAwardsContext
+                - App\Behat\Context\Ui\Backend\NotificationContext
             filters:
                 tags: "@managing_year_awards && @ui"

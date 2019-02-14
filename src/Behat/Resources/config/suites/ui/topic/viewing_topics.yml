@@ -18,6 +18,6 @@ default:
                 - App\Behat\Context\Setup\TopicContext
                 - App\Behat\Context\Setup\PostContext
 
-                - app.behat.context.ui.frontend.topic
+                - App\Behat\Context\Ui\Frontend\TopicContext
             filters:
                 tags: "@viewing_topics && @ui"

@@ -17,6 +17,6 @@ default:
                 - App\Behat\Context\Setup\CustomerContext
                 - App\Behat\Context\Setup\TaxonContext
 
-                - app.behat.context.ui.frontend.article
+                - App\Behat\Context\Ui\Frontend\ArticleContext
             filters:
                 tags: "@viewing_articles && @ui"

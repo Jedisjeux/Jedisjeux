@@ -9,7 +9,7 @@ default:
                 - App\Behat\Context\Setup\SecurityContext
                 - App\Behat\Context\Setup\PersonContext
 
-                - app.behat.context.ui.backend.managing_people
-                - app.behat.context.ui.backend.notification
+                - App\Behat\Context\Ui\Backend\ManagingPeopleContext
+                - App\Behat\Context\Ui\Backend\NotificationContext
             filters:
                 tags: "@managing_people && @ui"

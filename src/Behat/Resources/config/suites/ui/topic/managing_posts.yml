@@ -13,7 +13,7 @@ default:
                 - App\Behat\Context\Setup\TopicContext
                 - App\Behat\Context\Setup\PostContext
 
-                - app.behat.context.ui.backend.managing_posts
-                - app.behat.context.ui.backend.notification
+                - App\Behat\Context\Ui\Backend\ManagingPostsContext
+                - App\Behat\Context\Ui\Backend\NotificationContext
             filters:
                 tags: "@managing_posts && @ui"

@@ -10,7 +10,7 @@ default:
                 - App\Behat\Context\Setup\SecurityContext
                 - App\Behat\Context\Setup\DealerContext
 
-                - app.behat.context.ui.backend.managing_dealers
-                - app.behat.context.ui.backend.notification
+                - App\Behat\Context\Ui\Backend\ManagingDealersContext
+                - App\Behat\Context\Ui\Backend\NotificationContext
             filters:
                 tags: "@managing_dealers && @ui"

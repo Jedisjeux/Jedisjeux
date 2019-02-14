@@ -10,80 +10,70 @@ services:
 
     _defaults:
         public: true
+        autowire: true
 
-    app.behat.context.ui.backend.dashboard:
-        class: App\Behat\Context\Ui\Backend\DashboardContext
+    App\Behat\Context\Ui\Backend\DashboardContext:
         arguments:
             - '@app.behat.page.backend.dashboard'
 
-    app.behat.context.ui.backend.managing_articles:
-        class: App\Behat\Context\Ui\Backend\ManagingArticlesContext
+    App\Behat\Context\Ui\Backend\ManagingArticlesContext:
         arguments:
             - '@app.behat.page.backend.article.index'
             - '@app.behat.page.backend.article.create'
             - '@app.behat.page.backend.article.update'
             - '@app.behat.current_page_resolver'
 
-    app.behat.context.ui.backend.managing_contact_requests:
-        class: App\Behat\Context\Ui\Backend\ManagingContactRequestsContext
+    App\Behat\Context\Ui\Backend\ManagingContactRequestsContext:
         arguments:
             - '@app.behat.page.backend.contact_request.index'
             - '@app.behat.page.backend.contact_request.show'
 
-    app.behat.context.ui.backend.managing_customers:
-        class: App\Behat\Context\Ui\Backend\ManagingCustomersContext
+    App\Behat\Context\Ui\Backend\ManagingCustomersContext:
         arguments:
             - '@app.behat.page.backend.customer.index'
             - '@app.behat.page.backend.customer.update'
             - '@app.behat.current_page_resolver'
 
-    app.behat.context.ui.backend.managing_dealers:
-        class: App\Behat\Context\Ui\Backend\ManagingDealersContext
+    App\Behat\Context\Ui\Backend\ManagingDealersContext:
         arguments:
             - '@app.behat.page.backend.dealer.index'
             - '@app.behat.page.backend.dealer.create'
             - '@app.behat.page.backend.dealer.update'
             - '@app.behat.current_page_resolver'
 
-    app.behat.context.ui.backend.managing_dealer_prices:
-        class: App\Behat\Context\Ui\Backend\ManagingDealerPricesContext
+    App\Behat\Context\Ui\Backend\ManagingDealerPricesContext:
         arguments:
             - '@app.behat.page.backend.dealer_price.index'
             - '@app.behat.page.backend.dealer_price.update'
             - '@app.behat.current_page_resolver'
 
-    app.behat.context.ui.backend.managing_game_awards:
-        class: App\Behat\Context\Ui\Backend\ManagingGameAwardsContext
+    App\Behat\Context\Ui\Backend\ManagingGameAwardsContext:
         arguments:
             - '@app.behat.page.backend.game_award.create'
             - '@app.behat.page.backend.game_award.index'
             - '@app.behat.page.backend.game_award.update'
 
-    app.behat.context.ui.backend.managing_game_plays:
-        class: App\Behat\Context\Ui\Backend\ManagingGamePlaysContext
+    App\Behat\Context\Ui\Backend\ManagingGamePlaysContext:
         arguments:
             - '@app.behat.page.backend.game_play.index'
             - '@app.behat.page.backend.game_play.update'
             - '@app.repository.game_play'
             - '@app.behat.current_page_resolver'
 
-    app.behat.context.ui.backend.managing_people:
-        class: App\Behat\Context\Ui\Backend\ManagingPeopleContext
+    App\Behat\Context\Ui\Backend\ManagingPeopleContext:
         arguments:
             - '@app.behat.page.backend.person.index'
             - '@app.behat.page.backend.person.create'
             - '@app.behat.page.backend.person.update'
             - '@app.behat.current_page_resolver'
 
-    app.behat.context.ui.backend.managing_posts:
-        class: App\Behat\Context\Ui\Backend\ManagingPostsContext
+    App\Behat\Context\Ui\Backend\ManagingPostsContext:
         arguments:
             - '@app.behat.page.backend.post.index'
             - '@app.behat.page.backend.post.update'
             - '@app.behat.current_page_resolver'
 
-    app.behat.context.ui.backend.managing_products:
-        class: App\Behat\Context\Ui\Backend\ManagingProductsContext
+    App\Behat\Context\Ui\Backend\ManagingProductsContext:
         arguments:
             - '@app.behat.page.backend.product.index'
             - '@app.behat.page.backend.product.create'
@@ -91,36 +81,31 @@ services:
             - '@app.behat.page.backend.product.update'
             - '@app.behat.current_page_resolver'
 
-    app.behat.context.ui.backend.managing_product_lists:
-        class: App\Behat\Context\Ui\Backend\ManagingProductListsContext
+    App\Behat\Context\Ui\Backend\ManagingProductListsContext:
         arguments:
             - '@app.behat.page.backend.product_list.index'
             - '@app.behat.page.backend.product_list.update'
             - '@app.behat.current_page_resolver'
 
-    app.behat.context.ui.backend.managing_product_reviews:
-        class: App\Behat\Context\Ui\Backend\ManagingProductReviewsContext
+    App\Behat\Context\Ui\Backend\ManagingProductReviewsContext:
         arguments:
             - '@app.behat.page.backend.product_review.index'
             - '@app.behat.page.backend.product_review.update'
             - '@app.behat.current_page_resolver'
 
-    app.behat.context.ui.backend.managing_product_variants:
-        class: App\Behat\Context\Ui\Backend\ManagingProductVariantsContext
+    App\Behat\Context\Ui\Backend\ManagingProductVariantsContext:
         arguments:
             - '@app.behat.page.backend.product_variant.index'
             - '@app.behat.page.backend.product_variant.create'
 
-    app.behat.context.ui.backend.managing_redirections:
-        class: App\Behat\Context\Ui\Backend\ManagingRedirectionsContext
+    App\Behat\Context\Ui\Backend\ManagingRedirectionsContext:
         arguments:
             - '@app.behat.page.backend.redirection.index'
             - '@app.behat.page.backend.redirection.create'
             - '@app.behat.page.backend.redirection.update'
             - '@app.behat.current_page_resolver'
 
-    app.behat.context.ui.backend.managing_taxons:
-        class: App\Behat\Context\Ui\Backend\ManagingTaxonsContext
+    App\Behat\Context\Ui\Backend\ManagingTaxonsContext:
         arguments:
             - '@app.behat.page.backend.taxon.index'
             - '@app.behat.page.backend.taxon.index_by_parent'
@@ -129,31 +114,26 @@ services:
             - '@app.behat.page.backend.taxon.update'
             - '@App\Behat\Service\SharedStorage'
 
-    app.behat.context.ui.backend.managing_topics:
-        class: App\Behat\Context\Ui\Backend\ManagingTopicsContext
+    App\Behat\Context\Ui\Backend\ManagingTopicsContext:
         arguments:
             - '@app.behat.page.backend.topic.index'
             - '@app.behat.page.backend.topic.update'
             - '@app.behat.current_page_resolver'
 
-    app.behat.context.ui.backend.managing_festival_lists:
-        class: App\Behat\Context\Ui\Backend\ManagingFestivalListsContext
+    App\Behat\Context\Ui\Backend\ManagingFestivalListsContext:
         arguments:
             - '@app.behat.page.backend.festival_list.index'
             - '@app.behat.page.backend.festival_list.create'
 
-    app.behat.context.ui.backend.managing_year_awards:
-        class: App\Behat\Context\Ui\Backend\ManagingYearAwardsContext
+    App\Behat\Context\Ui\Backend\ManagingYearAwardsContext:
         arguments:
             - '@app.behat.page.backend.year_award.index'
 
-    app.behat.context.ui.backend.notification:
-        class: App\Behat\Context\Ui\Backend\NotificationContext
+    App\Behat\Context\Ui\Backend\NotificationContext:
         arguments:
             - '@app.behat.notification_checker'
 
-    app.behat.context.ui.frontend.account:
-        class: App\Behat\Context\Ui\Frontend\AccountContext
+    App\Behat\Context\Ui\Frontend\AccountContext:
         arguments:
             - '@app.behat.page.frontend.account.dashboard'
             - '@app.behat.page.frontend.account.profile_update'
@@ -161,8 +141,7 @@ services:
             - '@app.behat.page.frontend.account.login'
             - '@app.behat.notification_checker'
 
-    app.behat.context.ui.frontend.article:
-        class: App\Behat\Context\Ui\Frontend\ArticleContext
+    App\Behat\Context\Ui\Frontend\ArticleContext:
         arguments:
             - '@app.behat.page.frontend.article.show'
             - '@app.behat.page.frontend.article.index'
@@ -170,47 +149,40 @@ services:
             - '@app.behat.page.frontend.article.index_by_product'
             - '@app.behat.current_page_resolver'
 
-    app.behat.context.ui.frontend.article_post:
-        class: App\Behat\Context\Ui\Frontend\ArticlePostContext
+    App\Behat\Context\Ui\Frontend\ArticlePostContext:
         arguments:
             - '@app.behat.page.frontend.post.create_for_article'
             - '@app.behat.page.frontend.post.update_for_article'
             - '@app.behat.page.frontend.article.show'
 
-    app.behat.context.ui.frontend.contact:
-        class: App\Behat\Context\Ui\Frontend\ContactContext
+    App\Behat\Context\Ui\Frontend\ContactContext:
         arguments:
             - '@app.behat.page.frontend.contact'
             - '@app.behat.notification_checker'
 
-    app.behat.context.ui.frontend.game_play:
-        class: App\Behat\Context\Ui\Frontend\GamePlayContext
+    App\Behat\Context\Ui\Frontend\GamePlayContext:
         arguments:
             - '@app.behat.page.frontend.game_play.index'
             - '@app.behat.page.frontend.game_play.index_by_product'
             - '@app.behat.page.frontend.game_play.create'
             - '@app.behat.page.frontend.game_play.update'
 
-    app.behat.context.ui.frontend.game_play_post:
-        class: App\Behat\Context\Ui\Frontend\GamePlayPostContext
+    App\Behat\Context\Ui\Frontend\GamePlayPostContext:
         arguments:
             - '@app.behat.page.frontend.post.create_for_game_play'
             - '@app.behat.page.frontend.post.update_for_game_play'
             - '@app.behat.page.frontend.game_play.show'
 
-    app.behat.context.ui.frontend.homepage:
-        class: App\Behat\Context\Ui\Frontend\HomepageContext
+    App\Behat\Context\Ui\Frontend\HomepageContext:
         arguments:
             - '@app.behat.page.frontend.home'
 
-    app.behat.context.ui.frontend.error:
-        class: App\Behat\Context\Ui\Frontend\ErrorContext
+    App\Behat\Context\Ui\Frontend\ErrorContext:
         arguments:
             - '@app.behat.page.frontend.error'
             - '@app.behat.page.frontend.home'
 
-    app.behat.context.ui.frontend.login:
-        class: App\Behat\Context\Ui\Frontend\LoginContext
+    App\Behat\Context\Ui\Frontend\LoginContext:
         arguments:
             - '@app.behat.page.frontend.home'
             - '@app.behat.page.frontend.account.login'
@@ -220,42 +192,36 @@ services:
             - '@app.behat.notification_checker'
             - '@app.behat.current_page_resolver'
 
-    app.behat.context.ui.frontend.notification:
-        class: App\Behat\Context\Ui\Frontend\NotificationContext
+    App\Behat\Context\Ui\Frontend\NotificationContext:
         arguments:
             - '@app.behat.notification_checker'
 
-    app.behat.context.ui.frontend.person:
-        class: App\Behat\Context\Ui\Frontend\PersonContext
+    App\Behat\Context\Ui\Frontend\PersonContext:
         arguments:
             - '@app.behat.page.frontend.person.show'
             - '@app.behat.page.frontend.person.index'
 
-    app.behat.context.ui.frontend.post:
-        class: App\Behat\Context\Ui\Frontend\PostContext
+    App\Behat\Context\Ui\Frontend\PostContext:
         arguments:
             - '@App\Behat\Service\SharedStorage'
             - '@app.behat.page.frontend.post.index'
             - '@app.behat.page.frontend.post.create'
             - '@app.behat.page.frontend.post.update'
 
-    app.behat.context.ui.frontend.product:
-        class: App\Behat\Context\Ui\Frontend\ProductContext
+    App\Behat\Context\Ui\Frontend\ProductContext:
         arguments:
             - '@app.behat.page.frontend.product.show'
             - '@app.behat.page.frontend.product.index'
             - '@app.behat.page.frontend.product.index_by_taxon'
             - '@app.behat.page.frontend.product.index_by_person'
 
-    app.behat.context.ui.frontend.product_review:
-        class: App\Behat\Context\Ui\Frontend\ProductReviewContext
+    App\Behat\Context\Ui\Frontend\ProductReviewContext:
         arguments:
             - '@app.behat.page.frontend.product_review.index'
             - '@app.behat.page.frontend.product_review.create'
             - '@app.behat.page.frontend.product_review.update'
 
-    app.behat.context.ui.frontend.registration:
-        class: App\Behat\Context\Ui\Frontend\RegistrationContext
+    App\Behat\Context\Ui\Frontend\RegistrationContext:
         arguments:
             - '@App\Behat\Service\SharedStorage'
             - '@app.behat.page.frontend.account.dashboard'
@@ -266,8 +232,7 @@ services:
             - '@app.behat.page.frontend.account.profile_update'
             - '@app.behat.notification_checker'
 
-    app.behat.context.ui.frontend.topic:
-        class: App\Behat\Context\Ui\Frontend\TopicContext
+    App\Behat\Context\Ui\Frontend\TopicContext:
         arguments:
             - '@app.behat.page.frontend.topic.index'
             - '@app.behat.page.frontend.topic.index_by_taxon'
@@ -276,18 +241,15 @@ services:
             - '@app.behat.page.frontend.topic.update'
             - '@app.behat.page.frontend.topic.show'
 
-    app.behat.context.ui.frontend.year_award:
-        class: App\Behat\Context\Ui\Frontend\YearAwardContext
+    App\Behat\Context\Ui\Frontend\YearAwardContext:
         arguments:
             - '@app.behat.page.frontend.year_award.index'
 
-    app.behat.context.ui.email:
-        class: App\Behat\Context\Ui\EmailContext
+    App\Behat\Context\Ui\EmailContext:
         arguments:
             $sharedStorage: '@App\Behat\Service\SharedStorage'
             $emailChecker: '@App\Behat\Service\EmailCheckerInterface'
 
-    app.behat.context.ui.notification:
-        class: App\Behat\Context\Ui\NotificationContext
+    App\Behat\Context\Ui\NotificationContext:
         arguments:
             - '@app.repository.notification'

@@ -10,7 +10,7 @@ default:
                 - App\Behat\Context\Setup\SecurityContext
                 - App\Behat\Context\Setup\RedirectionContext
 
-                - app.behat.context.ui.backend.managing_redirections
-                - app.behat.context.ui.backend.notification
+                - App\Behat\Context\Ui\Backend\ManagingRedirectionsContext
+                - App\Behat\Context\Ui\Backend\NotificationContext
             filters:
                 tags: "@managing_redirections && @ui"

@@ -14,7 +14,7 @@ default:
                 - App\Behat\Context\Setup\DealerPriceContext
                 - App\Behat\Context\Setup\ProductContext
 
-                - app.behat.context.ui.backend.managing_dealer_prices
-                - app.behat.context.ui.backend.notification
+                - App\Behat\Context\Ui\Backend\ManagingDealerPricesContext
+                - App\Behat\Context\Ui\Backend\NotificationContext
             filters:
                 tags: "@managing_dealer_prices && @ui"

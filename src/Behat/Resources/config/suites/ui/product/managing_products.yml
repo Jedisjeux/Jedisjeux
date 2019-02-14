@@ -14,8 +14,8 @@ default:
                 - App\Behat\Context\Setup\SecurityContext
                 - App\Behat\Context\Setup\UserContext
 
-                - app.behat.context.ui.backend.managing_products
-                - app.behat.context.ui.backend.notification
-                - app.behat.context.ui.notification
+                - App\Behat\Context\Ui\Backend\ManagingProductsContext
+                - App\Behat\Context\Ui\Backend\NotificationContext
+                - App\Behat\Context\Ui\NotificationContext
             filters:
                 tags: "@managing_products && @ui"

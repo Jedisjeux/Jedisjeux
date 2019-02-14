@@ -10,6 +10,6 @@ default:
                 - App\Behat\Context\Setup\ArticleContext
                 - App\Behat\Context\Setup\TaxonContext
 
-                - app.behat.context.ui.frontend.homepage
+                - App\Behat\Context\Ui\Frontend\HomepageContext
             filters:
                 tags: "@viewing_articles_on_homepage && @ui"

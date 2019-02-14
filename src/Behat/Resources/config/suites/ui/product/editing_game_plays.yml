@@ -11,7 +11,7 @@ default:
                 - App\Behat\Context\Setup\GamePlayContext
                 - App\Behat\Context\Setup\ProductContext
 
-                - app.behat.context.ui.frontend.game_play
-                - app.behat.context.ui.frontend.notification
+                - App\Behat\Context\Ui\Frontend\GamePlayContext
+                - App\Behat\Context\Ui\Frontend\NotificationContext
             filters:
                 tags: "@editing_game_plays && @ui"

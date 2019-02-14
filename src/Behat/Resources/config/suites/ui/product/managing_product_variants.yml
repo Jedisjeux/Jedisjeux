@@ -12,7 +12,7 @@ default:
                 - App\Behat\Context\Setup\CustomerContext
                 - App\Behat\Context\Setup\ProductContext
 
-                - app.behat.context.ui.backend.managing_product_variants
-                - app.behat.context.ui.backend.notification
+                - App\Behat\Context\Ui\Backend\ManagingProductVariantsContext
+                - App\Behat\Context\Ui\Backend\NotificationContext
             filters:
                 tags: "@managing_product_variants && @ui"

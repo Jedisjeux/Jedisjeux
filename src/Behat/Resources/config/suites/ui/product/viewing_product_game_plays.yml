@@ -14,8 +14,8 @@ default:
                 - App\Behat\Context\Setup\ProductContext
                 - App\Behat\Context\Setup\TaxonContext
 
-                - app.behat.context.ui.frontend.game_play
-                - app.behat.context.ui.frontend.notification
-                - app.behat.context.ui.frontend.product
+                - App\Behat\Context\Ui\Frontend\GamePlayContext
+                - App\Behat\Context\Ui\Frontend\NotificationContext
+                - App\Behat\Context\Ui\Frontend\ProductContext
             filters:
                 tags: "@viewing_product_game_plays && @ui"

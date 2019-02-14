@@ -12,7 +12,7 @@ default:
                 - App\Behat\Context\Setup\CustomerContext
                 - App\Behat\Context\Setup\TaxonContext
 
-                - app.behat.context.ui.backend.managing_taxons
-                - app.behat.context.ui.backend.notification
+                - App\Behat\Context\Ui\Backend\ManagingTaxonsContext
+                - App\Behat\Context\Ui\Backend\NotificationContext
             filters:
                 tags: "@managing_taxons && @ui"

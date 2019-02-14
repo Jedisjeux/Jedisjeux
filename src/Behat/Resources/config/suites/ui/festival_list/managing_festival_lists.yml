@@ -10,7 +10,7 @@ default:
                 - App\Behat\Context\Setup\SecurityContext
                 - App\Behat\Context\Setup\FestivalListContext
 
-                - app.behat.context.ui.backend.managing_festival_lists
-                - app.behat.context.ui.backend.notification
+                - App\Behat\Context\Ui\Backend\ManagingFestivalListsContext
+                - App\Behat\Context\Ui\Backend\NotificationContext
             filters:
                 tags: "@managing_festival_lists && @ui"

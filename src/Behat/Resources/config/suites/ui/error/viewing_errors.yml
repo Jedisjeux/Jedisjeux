@@ -4,6 +4,6 @@ default:
             contexts:
                 - App\Behat\Context\Hook\DoctrineORMContext
 
-                - app.behat.context.ui.frontend.error
+                - App\Behat\Context\Ui\Frontend\ErrorContext
             filters:
                 tags: "@viewing_errors && @ui"

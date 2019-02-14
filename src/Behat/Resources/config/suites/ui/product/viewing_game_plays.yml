@@ -16,6 +16,6 @@ default:
                 - App\Behat\Context\Setup\GamePlayContext
                 - App\Behat\Context\Setup\ProductContext
 
-                - app.behat.context.ui.frontend.game_play
+                - App\Behat\Context\Ui\Frontend\GamePlayContext
             filters:
                 tags: "@viewing_game_plays && @ui"

@@ -22,6 +22,6 @@ default:
                 - App\Behat\Context\Setup\TaxonContext
                 - App\Behat\Context\Setup\YearAwardContext
 
-                - app.behat.context.ui.frontend.product
+                - App\Behat\Context\Ui\Frontend\ProductContext
             filters:
                 tags: "@viewing_products && @ui"

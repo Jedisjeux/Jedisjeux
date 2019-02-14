@@ -14,6 +14,6 @@ default:
                 - App\Behat\Context\Setup\PersonContext
                 - App\Behat\Context\Setup\TaxonContext
 
-                - app.behat.context.ui.frontend.person
+                - App\Behat\Context\Ui\Frontend\PersonContext
             filters:
                 tags: "@viewing_people && @ui"

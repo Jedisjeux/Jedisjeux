@@ -13,7 +13,7 @@ default:
                 - App\Behat\Context\Setup\ProductContext
                 - App\Behat\Context\Setup\GamePlayContext
 
-                - app.behat.context.ui.backend.managing_game_plays
-                - app.behat.context.ui.backend.notification
+                - App\Behat\Context\Ui\Backend\ManagingGamePlaysContext
+                - App\Behat\Context\Ui\Backend\NotificationContext
             filters:
                 tags: "@managing_game_plays && @ui"

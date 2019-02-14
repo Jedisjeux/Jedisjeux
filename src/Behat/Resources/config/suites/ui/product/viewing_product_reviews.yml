@@ -13,8 +13,8 @@ default:
                 - App\Behat\Context\Setup\ProductContext
                 - App\Behat\Context\Setup\ProductReviewContext
 
-                - app.behat.context.ui.frontend.notification
-                - app.behat.context.ui.frontend.product
-                - app.behat.context.ui.frontend.product_review
+                - App\Behat\Context\Ui\Frontend\NotificationContext
+                - App\Behat\Context\Ui\Frontend\ProductContext
+                - App\Behat\Context\Ui\Frontend\ProductReviewContext
             filters:
                 tags: "@viewing_product_reviews && @ui"

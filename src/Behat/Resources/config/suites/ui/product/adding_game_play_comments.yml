@@ -13,7 +13,7 @@ default:
                 - App\Behat\Context\Setup\ProductContext
                 - App\Behat\Context\Setup\TaxonContext
 
-                - app.behat.context.ui.frontend.game_play_post
-                - app.behat.context.ui.frontend.notification
+                - App\Behat\Context\Ui\Frontend\GamePlayPostContext
+                - App\Behat\Context\Ui\Frontend\NotificationContext
             filters:
                 tags: "@adding_game_play_comments && @ui"

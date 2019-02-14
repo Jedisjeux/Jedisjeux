@@ -17,7 +17,7 @@ default:
                 - App\Behat\Context\Setup\TaxonContext
                 - App\Behat\Context\Setup\TopicContext
 
-                - app.behat.context.ui.frontend.notification
-                - app.behat.context.ui.frontend.post
+                - App\Behat\Context\Ui\Frontend\NotificationContext
+                - App\Behat\Context\Ui\Frontend\PostContext
             filters:
                 tags: "@editing_topic_posts && @ui"
