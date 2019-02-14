@@ -2,7 +2,7 @@ default:
     suites:
         ui_managing_posts:
             contexts:
-                - app.behat.context.hook.doctrine_orm
+                - App\Behat\Context\Hook\DoctrineORMContext
 
                 - app.behat.context.transform.customer
                 - app.behat.context.transform.shared_storage

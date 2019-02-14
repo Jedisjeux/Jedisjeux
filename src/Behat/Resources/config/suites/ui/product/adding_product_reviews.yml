@@ -2,7 +2,7 @@ default:
     suites:
         ui_adding_product_reviews:
             contexts:
-                - app.behat.context.hook.doctrine_orm
+                - App\Behat\Context\Hook\DoctrineORMContext
 
                 - app.behat.context.transform.product
                 - app.behat.context.transform.shared_storage

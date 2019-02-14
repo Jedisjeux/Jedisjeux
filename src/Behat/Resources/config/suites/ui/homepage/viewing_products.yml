@@ -2,7 +2,7 @@ default:
     suites:
         ui_viewing_products_on_homepage:
             contexts:
-                - app.behat.context.hook.doctrine_orm
+                - App\Behat\Context\Hook\DoctrineORMContext
 
                 - app.behat.context.transform.shared_storage
 

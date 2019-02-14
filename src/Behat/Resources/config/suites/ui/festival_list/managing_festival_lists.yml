@@ -2,7 +2,7 @@ default:
     suites:
         ui_managing_festival_lists:
             contexts:
-                - app.behat.context.hook.doctrine_orm
+                - App\Behat\Context\Hook\DoctrineORMContext
 
                 - app.behat.context.transform.festival_list
                 - app.behat.context.transform.shared_storage

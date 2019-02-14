@@ -5,7 +5,7 @@ default:
     suites:
         ui_adding_topics:
             contexts:
-                - app.behat.context.hook.doctrine_orm
+                - App\Behat\Context\Hook\DoctrineORMContext
 
                 - app.behat.context.transform.taxon
                 - app.behat.context.transform.topic

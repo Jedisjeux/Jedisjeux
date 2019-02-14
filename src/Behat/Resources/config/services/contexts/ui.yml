@@ -284,8 +284,8 @@ services:
     app.behat.context.ui.email:
         class: App\Behat\Context\Ui\EmailContext
         arguments:
-            - "@app.behat.shared_storage"
-            - "@app.behat.email_checker"
+            $sharedStorage: "@app.behat.shared_storage"
+            $emailChecker: '@App\Behat\Service\EmailCheckerInterface'
 
     app.behat.context.ui.notification:
         class: App\Behat\Context\Ui\NotificationContext

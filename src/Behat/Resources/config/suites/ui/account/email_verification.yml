@@ -2,8 +2,8 @@ default:
     suites:
         ui_email_verification:
             contexts:
-                - app.behat.context.hook.doctrine_orm
-                - app.behat.context.hook.email_spool
+                - App\Behat\Context\Hook\DoctrineORMContext
+                - App\Behat\Context\Hook\EmailSpoolContext
 
                 - app.behat.context.transform.shared_storage
                 - app.behat.context.transform.user

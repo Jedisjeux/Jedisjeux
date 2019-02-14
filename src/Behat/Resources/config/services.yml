@@ -27,10 +27,13 @@ services:
             - "@app.behat.cookie_setter"
             - "user"
 
-    app.behat.email_checker:
+    App\Behat\Service\EmailChecker:
         class: App\Behat\Service\EmailChecker
         arguments:
             - "%kernel.cache_dir%/spool"
+
+    App\Behat\Service\EmailCheckerInterface:
+        alias: App\Behat\Service\EmailChecker
 
     app.behat.table_accessor:
         class: App\Behat\Service\Accessor\TableAccessor

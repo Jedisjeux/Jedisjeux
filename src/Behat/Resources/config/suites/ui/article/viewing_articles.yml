@@ -5,7 +5,7 @@ default:
     suites:
         ui_viewing_articles:
             contexts:
-                - app.behat.context.hook.doctrine_orm
+                - App\Behat\Context\Hook\DoctrineORMContext
 
                 - app.behat.context.transform.article
                 - app.behat.context.transform.customer
