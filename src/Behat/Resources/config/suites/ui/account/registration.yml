@@ -11,9 +11,9 @@ default:
                 - app.behat.context.transform.shared_storage
                 - app.behat.context.transform.customer
 
-                - app.behat.context.setup.customer
+                - App\Behat\Context\Setup\CustomerContext
                 # - app.behat.context.setup.shop_security
-                - app.behat.context.setup.user
+                - App\Behat\Context\Setup\UserContext
 
                 # - app.behat.context.ui.email
                 - app.behat.context.ui.frontend.registration

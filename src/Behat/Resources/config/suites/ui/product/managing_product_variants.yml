@@ -8,9 +8,9 @@ default:
                 - app.behat.context.transform.product
                 - app.behat.context.transform.shared_storage
 
-                - app.behat.context.setup.security
-                - app.behat.context.setup.customer
-                - app.behat.context.setup.product
+                - App\Behat\Context\Setup\SecurityContext
+                - App\Behat\Context\Setup\CustomerContext
+                - App\Behat\Context\Setup\ProductContext
 
                 - app.behat.context.ui.backend.managing_product_variants
                 - app.behat.context.ui.backend.notification

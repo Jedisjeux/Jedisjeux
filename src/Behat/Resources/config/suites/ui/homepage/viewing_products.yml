@@ -6,7 +6,7 @@ default:
 
                 - app.behat.context.transform.shared_storage
 
-                - app.behat.context.setup.product
+                - App\Behat\Context\Setup\ProductContext
 
                 - app.behat.context.ui.frontend.homepage
             filters:

@@ -58,6 +58,8 @@ services:
             - "@behat.mink.default_session"
             - "@router"
 
-    app.behat.shared_storage:
-        class: App\Behat\Service\SharedStorage
+    App\Behat\Service\SharedStorage:
         public: false
+
+    App\Behat\Service\SharedStorageInterface:
+        alias: App\Behat\Service\SharedStorage

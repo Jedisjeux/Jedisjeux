@@ -9,10 +9,10 @@ default:
                 - app.behat.context.transform.product
                 - app.behat.context.transform.shared_storage
 
-                - app.behat.context.setup.security
-                - app.behat.context.setup.dealer
-                - app.behat.context.setup.dealer_price
-                - app.behat.context.setup.product
+                - App\Behat\Context\Setup\SecurityContext
+                - App\Behat\Context\Setup\DealerContext
+                - App\Behat\Context\Setup\DealerPriceContext
+                - App\Behat\Context\Setup\ProductContext
 
                 - app.behat.context.ui.backend.managing_dealer_prices
                 - app.behat.context.ui.backend.notification

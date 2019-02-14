@@ -8,10 +8,10 @@ default:
                 - app.behat.context.transform.product
                 - app.behat.context.transform.shared_storage
 
-                - app.behat.context.setup.security
-                - app.behat.context.setup.customer
-                - app.behat.context.setup.product
-                - app.behat.context.setup.game_play
+                - App\Behat\Context\Setup\SecurityContext
+                - App\Behat\Context\Setup\CustomerContext
+                - App\Behat\Context\Setup\ProductContext
+                - App\Behat\Context\Setup\GamePlayContext
 
                 - app.behat.context.ui.backend.managing_game_plays
                 - app.behat.context.ui.backend.notification

@@ -9,10 +9,10 @@ default:
                 - app.behat.context.transform.product
                 - app.behat.context.transform.shared_storage
 
-                - app.behat.context.setup.game_award
-                - app.behat.context.setup.product
-                - app.behat.context.setup.security
-                - app.behat.context.setup.user
+                - App\Behat\Context\Setup\GameAwardContext
+                - App\Behat\Context\Setup\ProductContext
+                - App\Behat\Context\Setup\SecurityContext
+                - App\Behat\Context\Setup\UserContext
 
                 - app.behat.context.ui.backend.managing_products
                 - app.behat.context.ui.backend.notification

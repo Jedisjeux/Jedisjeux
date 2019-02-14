@@ -38,12 +38,15 @@ class FestivalListContext implements Context
     private $festivalListRepository;
 
     /**
-     * @param $sharedStorage
+     * @param SharedStorageInterface  $sharedStorage
      * @param ExampleFactoryInterface $festivalListFactory
      * @param RepositoryInterface     $festivalListRepository
      */
-    public function __construct($sharedStorage, ExampleFactoryInterface $festivalListFactory, RepositoryInterface $festivalListRepository)
-    {
+    public function __construct(
+        SharedStorageInterface $sharedStorage,
+        ExampleFactoryInterface $festivalListFactory,
+        RepositoryInterface $festivalListRepository
+    ) {
         $this->sharedStorage = $sharedStorage;
         $this->festivalListFactory = $festivalListFactory;
         $this->festivalListRepository = $festivalListRepository;

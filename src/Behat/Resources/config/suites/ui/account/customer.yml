@@ -11,9 +11,9 @@ default:
                 - app.behat.context.transform.customer
                 - app.behat.context.transform.shared_storage
 
-                - app.behat.context.setup.customer
-                - app.behat.context.setup.security
-                - app.behat.context.setup.user
+                - App\Behat\Context\Setup\CustomerContext
+                - App\Behat\Context\Setup\SecurityContext
+                - App\Behat\Context\Setup\UserContext
 
                 - app.behat.context.ui.frontend.account
             filters:

@@ -8,8 +8,8 @@ default:
                 - app.behat.context.transform.shared_storage
                 - app.behat.context.transform.user
 
-                - app.behat.context.setup.security
-                - app.behat.context.setup.user
+                - App\Behat\Context\Setup\SecurityContext
+                - App\Behat\Context\Setup\UserContext
 
                 - app.behat.context.ui.email
                 - app.behat.context.ui.frontend.registration

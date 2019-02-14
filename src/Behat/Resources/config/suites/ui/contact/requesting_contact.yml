@@ -6,7 +6,7 @@ default:
 
                 - app.behat.context.transform.shared_storage
 
-                - app.behat.context.setup.security
+                - App\Behat\Context\Setup\SecurityContext
 
                 - app.behat.context.ui.frontend.contact
             filters:

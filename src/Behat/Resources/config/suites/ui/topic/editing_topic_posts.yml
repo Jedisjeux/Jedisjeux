@@ -11,11 +11,11 @@ default:
                 - app.behat.context.transform.topic
                 - app.behat.context.transform.shared_storage
 
-                - app.behat.context.setup.security
-                - app.behat.context.setup.customer
-                - app.behat.context.setup.post
-                - app.behat.context.setup.taxon
-                - app.behat.context.setup.topic
+                - App\Behat\Context\Setup\SecurityContext
+                - App\Behat\Context\Setup\CustomerContext
+                - App\Behat\Context\Setup\PostContext
+                - App\Behat\Context\Setup\TaxonContext
+                - App\Behat\Context\Setup\TopicContext
 
                 - app.behat.context.ui.frontend.notification
                 - app.behat.context.ui.frontend.post

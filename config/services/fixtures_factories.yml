@@ -1,6 +1,5 @@
 services:
-    app.fixture.example_factory.article:
-        class: App\Fixture\Factory\ArticleExampleFactory
+    App\Fixture\Factory\ArticleExampleFactory:
         arguments:
             - "@app.factory.article"
             - "@app.factory.article_image"

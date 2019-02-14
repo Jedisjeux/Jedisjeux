@@ -8,9 +8,9 @@ default:
                 - app.behat.context.transform.shared_storage
                 - app.behat.context.transform.taxon
 
-                - app.behat.context.setup.security
-                - app.behat.context.setup.customer
-                - app.behat.context.setup.taxon
+                - App\Behat\Context\Setup\SecurityContext
+                - App\Behat\Context\Setup\CustomerContext
+                - App\Behat\Context\Setup\TaxonContext
 
                 - app.behat.context.ui.backend.managing_taxons
                 - app.behat.context.ui.backend.notification

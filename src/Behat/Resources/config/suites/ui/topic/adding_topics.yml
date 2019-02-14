@@ -12,10 +12,10 @@ default:
                 - app.behat.context.transform.customer
                 - app.behat.context.transform.shared_storage
 
-                - app.behat.context.setup.security
-                - app.behat.context.setup.topic
-                - app.behat.context.setup.customer
-                - app.behat.context.setup.taxon
+                - App\Behat\Context\Setup\SecurityContext
+                - App\Behat\Context\Setup\TopicContext
+                - App\Behat\Context\Setup\CustomerContext
+                - App\Behat\Context\Setup\TaxonContext
 
                 - app.behat.context.ui.frontend.topic
                 - app.behat.context.ui.frontend.notification

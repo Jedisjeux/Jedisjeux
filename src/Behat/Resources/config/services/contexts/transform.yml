@@ -14,75 +14,75 @@ services:
     app.behat.context.transform.article:
         class: App\Behat\Context\Transform\ArticleContext
         arguments:
-            - "@app.repository.article"
+            - '@app.repository.article'
 
     app.behat.context.transform.customer:
         class: App\Behat\Context\Transform\CustomerContext
         arguments:
-            - "@sylius.repository.customer"
-            - "@sylius.factory.customer"
+            - '@sylius.repository.customer'
+            - '@sylius.factory.customer'
 
     app.behat.context.transform.dealer:
         class: App\Behat\Context\Transform\DealerContext
         arguments:
-            - "@app.repository.dealer"
+            - '@app.repository.dealer'
 
     app.behat.context.transform.dealer_price:
         class: App\Behat\Context\Transform\DealerPriceContext
         arguments:
-            - "@app.repository.dealer_price"
+            - '@app.repository.dealer_price'
 
     app.behat.context.transform.game_award:
         class: App\Behat\Context\Transform\GameAwardContext
         arguments:
-            - "@app.repository.game_award"
+            - '@app.repository.game_award'
 
     app.behat.context.transform.person:
         class: App\Behat\Context\Transform\PersonContext
         arguments:
-            - "@app.repository.person"
+            - '@app.repository.person'
 
     app.behat.context.transform.product:
         class: App\Behat\Context\Transform\ProductContext
         arguments:
-            - "@sylius.repository.product"
+            - '@sylius.repository.product'
 
     app.behat.context.transform.product_list:
         class: App\Behat\Context\Transform\ProductListContext
         arguments:
-            - "@app.repository.product_list"
+            - '@app.repository.product_list'
 
     app.behat.context.transform.product_review:
         class: App\Behat\Context\Transform\ProductReviewContext
         arguments:
-            - "@sylius.repository.product_review"
+            - '@sylius.repository.product_review'
 
     app.behat.context.transform.redirection:
         class: App\Behat\Context\Transform\RedirectionContext
         arguments:
-            - "@app.repository.redirection"
+            - '@app.repository.redirection'
 
     app.behat.context.transform.festival_list:
         class: App\Behat\Context\Transform\FestivalListContext
         arguments:
-            - "@app.repository.festival_list"
+            - '@app.repository.festival_list'
 
     app.behat.context.transform.taxon:
         class: App\Behat\Context\Transform\TaxonContext
         arguments:
-            - "@sylius.repository.taxon"
+            - '@sylius.repository.taxon'
 
     app.behat.context.transform.topic:
         class: App\Behat\Context\Transform\TopicContext
         arguments:
-            - "@app.repository.topic"
+            - '@app.repository.topic'
 
     app.behat.context.transform.shared_storage:
         class: App\Behat\Context\Transform\SharedStorageContext
         arguments:
-            - "@app.behat.shared_storage"
+            - '@App\Behat\Service\SharedStorage'
 
     app.behat.context.transform.user:
         class: App\Behat\Context\Transform\UserContext
         arguments:
-            - "@app.behat.shared_storage"
+            - '@App\Behat\Service\SharedStorage'

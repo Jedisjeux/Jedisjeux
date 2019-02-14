@@ -7,8 +7,8 @@ default:
                 - app.behat.context.transform.festival_list
                 - app.behat.context.transform.shared_storage
 
-                - app.behat.context.setup.security
-                - app.behat.context.setup.festival_list
+                - App\Behat\Context\Setup\SecurityContext
+                - App\Behat\Context\Setup\FestivalListContext
 
                 - app.behat.context.ui.backend.managing_festival_lists
                 - app.behat.context.ui.backend.notification

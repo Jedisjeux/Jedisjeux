@@ -8,10 +8,10 @@ default:
                 - app.behat.context.transform.product
                 - app.behat.context.transform.shared_storage
 
-                - app.behat.context.setup.security
-                - app.behat.context.setup.customer
-                - app.behat.context.setup.product
-                - app.behat.context.setup.product_review
+                - App\Behat\Context\Setup\SecurityContext
+                - App\Behat\Context\Setup\CustomerContext
+                - App\Behat\Context\Setup\ProductContext
+                - App\Behat\Context\Setup\ProductReviewContext
 
                 - app.behat.context.ui.frontend.notification
                 - app.behat.context.ui.frontend.product

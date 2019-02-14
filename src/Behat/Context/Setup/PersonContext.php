@@ -42,8 +42,11 @@ class PersonContext implements Context
      * @param ExampleFactoryInterface $personFactory
      * @param EntityRepository        $personRepository
      */
-    public function __construct(SharedStorageInterface $sharedStorage, ExampleFactoryInterface $personFactory, EntityRepository $personRepository)
-    {
+    public function __construct(
+        SharedStorageInterface $sharedStorage,
+        ExampleFactoryInterface $personFactory,
+        EntityRepository $personRepository
+    ) {
         $this->sharedStorage = $sharedStorage;
         $this->personFactory = $personFactory;
         $this->personRepository = $personRepository;

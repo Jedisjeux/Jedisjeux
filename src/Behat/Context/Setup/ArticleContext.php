@@ -13,9 +13,9 @@ namespace App\Behat\Context\Setup;
 
 use App\Behat\Service\SharedStorageInterface;
 use App\Entity\Article;
-use App\Fixture\Factory\ExampleFactoryInterface;
+use App\Fixture\Factory\ArticleExampleFactory;
 use Behat\Behat\Context\Context;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -32,35 +32,27 @@ class ArticleContext implements Context
     private $sharedStorage;
 
     /**
-     * @var ExampleFactoryInterface
+     * @var ArticleExampleFactory
      */
     private $articleFactory;
 
     /**
-     * @var RepositoryInterface
-     */
-    private $articleRepository;
-
-    /**
-     * @var EntityManager
+     * @var EntityManagerInterface
      */
     protected $manager;
 
     /**
-     * @param SharedStorageInterface  $sharedStorage
-     * @param ExampleFactoryInterface $articleFactory
-     * @param RepositoryInterface     $articleRepository
-     * @param EntityManager           $manager
+     * @param SharedStorageInterface $sharedStorage
+     * @param ArticleExampleFactory  $articleFactory
+     * @param EntityManagerInterface $manager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        ExampleFactoryInterface $articleFactory,
-        RepositoryInterface $articleRepository,
-        EntityManager $manager
+        ArticleExampleFactory $articleFactory,
+        EntityManagerInterface $manager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->articleFactory = $articleFactory;
-        $this->articleRepository = $articleRepository;
         $this->manager = $manager;
     }
 
@@ -84,7 +76,8 @@ class ArticleContext implements Context
             'publish_start_date' => $date,
         ]);
 
-        $this->articleRepository->add($article);
+        $this->manager->persist($article);
+        $this->manager->flush();
         $this->sharedStorage->set('article', $article);
     }
 
@@ -103,7 +96,8 @@ class ArticleContext implements Context
             'product' => null,
         ]);
 
-        $this->articleRepository->add($article);
+        $this->manager->persist($article);
+        $this->manager->flush();
         $this->sharedStorage->set('article', $article);
     }
 
@@ -122,7 +116,8 @@ class ArticleContext implements Context
             'product' => null,
         ]);
 
-        $this->articleRepository->add($article);
+        $this->manager->persist($article);
+        $this->manager->flush();
         $this->sharedStorage->set('article', $article);
     }
 
@@ -148,7 +143,8 @@ class ArticleContext implements Context
             $article->setPublishStartDate(new \DateTime('-'.$daysSincePublication.' days'));
         }
 
-        $this->articleRepository->add($article);
+        $this->manager->persist($article);
+        $this->manager->flush();
         $this->sharedStorage->set('article', $article);
     }
 

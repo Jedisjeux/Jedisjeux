@@ -10,10 +10,10 @@ default:
                 - app.behat.context.transform.game_award
                 - app.behat.context.transform.shared_storage
 
-                - app.behat.context.setup.game_award
-                - app.behat.context.setup.product
-                - app.behat.context.setup.year_award
-                - app.behat.context.setup.security
+                - App\Behat\Context\Setup\GameAwardContext
+                - App\Behat\Context\Setup\ProductContext
+                - App\Behat\Context\Setup\YearAwardContext
+                - App\Behat\Context\Setup\SecurityContext
 
                 - app.behat.context.ui.frontend.year_award
             filters:

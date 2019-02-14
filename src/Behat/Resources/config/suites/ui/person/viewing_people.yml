@@ -10,9 +10,9 @@ default:
                 - app.behat.context.transform.person
                 - app.behat.context.transform.shared_storage
 
-                - app.behat.context.setup.security
-                - app.behat.context.setup.person
-                - app.behat.context.setup.taxon
+                - App\Behat\Context\Setup\SecurityContext
+                - App\Behat\Context\Setup\PersonContext
+                - App\Behat\Context\Setup\TaxonContext
 
                 - app.behat.context.ui.frontend.person
             filters:

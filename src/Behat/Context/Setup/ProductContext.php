@@ -17,7 +17,7 @@ use App\Entity\Product;
 use App\Fixture\Factory\ExampleFactoryInterface;
 use App\Formatter\StringInflector;
 use Behat\Behat\Context\Context;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -50,23 +50,23 @@ class ProductContext implements Context
     protected $productRepository;
 
     /**
-     * @var EntityManager
+     * @var EntityManagerInterface
      */
     protected $manager;
 
     /**
-     * @param SharedStorageInterface $sharedStorage
+     * @param SharedStorageInterface  $sharedStorage
      * @param ExampleFactoryInterface $productFactory
-     * @param FactoryInterface $productVariantFactory
-     * @param RepositoryInterface $productRepository
-     * @param EntityManager $manager
+     * @param FactoryInterface        $productVariantFactory
+     * @param RepositoryInterface     $productRepository
+     * @param EntityManagerInterface  $manager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ExampleFactoryInterface $productFactory,
         FactoryInterface $productVariantFactory,
         RepositoryInterface $productRepository,
-        EntityManager $manager
+        EntityManagerInterface $manager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->productFactory = $productFactory;
