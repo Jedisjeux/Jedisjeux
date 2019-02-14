@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace App\Behat\Context\Setup;
 
+use App\Fixture\Factory\AppUserExampleFactory;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Behat\Service\SharedStorageInterface;
-use App\Fixture\Factory\ExampleFactoryInterface;
 use App\Entity\User;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
@@ -34,7 +34,7 @@ final class UserContext implements Context
     private $userRepository;
 
     /**
-     * @var ExampleFactoryInterface
+     * @var AppUserExampleFactory
      */
     private $userFactory;
 
@@ -46,13 +46,13 @@ final class UserContext implements Context
     /**
      * @param SharedStorageInterface  $sharedStorage
      * @param UserRepositoryInterface $userRepository
-     * @param ExampleFactoryInterface $userFactory
+     * @param AppUserExampleFactory   $userFactory
      * @param ObjectManager           $userManager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         UserRepositoryInterface $userRepository,
-        ExampleFactoryInterface $userFactory,
+        AppUserExampleFactory $userFactory,
         ObjectManager $userManager
     ) {
         $this->sharedStorage = $sharedStorage;

@@ -14,6 +14,7 @@ namespace App\Behat\Context\Setup;
 use App\Behat\Service\SharedStorageInterface;
 use App\Entity\Person;
 use App\Fixture\Factory\ExampleFactoryInterface;
+use App\Fixture\Factory\PersonExampleFactory;
 use Behat\Behat\Context\Context;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
@@ -28,7 +29,7 @@ class PersonContext implements Context
     private $sharedStorage;
 
     /**
-     * @var ExampleFactoryInterface
+     * @var PersonExampleFactory
      */
     protected $personFactory;
 
@@ -38,13 +39,13 @@ class PersonContext implements Context
     protected $personRepository;
 
     /**
-     * @param SharedStorageInterface  $sharedStorage
-     * @param ExampleFactoryInterface $personFactory
-     * @param EntityRepository        $personRepository
+     * @param SharedStorageInterface $sharedStorage
+     * @param PersonExampleFactory   $personFactory
+     * @param EntityRepository       $personRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        ExampleFactoryInterface $personFactory,
+        PersonExampleFactory $personFactory,
         EntityRepository $personRepository
     ) {
         $this->sharedStorage = $sharedStorage;

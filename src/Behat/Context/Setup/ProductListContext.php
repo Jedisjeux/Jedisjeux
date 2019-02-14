@@ -13,7 +13,7 @@ namespace App\Behat\Context\Setup;
 
 use App\Behat\Service\SharedStorageInterface;
 use App\Entity\ProductList;
-use App\Fixture\Factory\ExampleFactoryInterface;
+use App\Fixture\Factory\ProductListExampleFactory;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -29,7 +29,7 @@ class ProductListContext implements Context
     protected $sharedStorage;
 
     /**
-     * @var ExampleFactoryInterface
+     * @var ProductListExampleFactory
      */
     private $productListFactory;
 
@@ -39,13 +39,13 @@ class ProductListContext implements Context
     protected $productListRepository;
 
     /**
-     * @param SharedStorageInterface  $sharedStorage
-     * @param ExampleFactoryInterface $productListFactory
-     * @param RepositoryInterface     $productListRepository
+     * @param SharedStorageInterface    $sharedStorage
+     * @param ProductListExampleFactory $productListFactory
+     * @param RepositoryInterface       $productListRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        ExampleFactoryInterface $productListFactory,
+        ProductListExampleFactory $productListFactory,
         RepositoryInterface $productListRepository
     ) {
         $this->sharedStorage = $sharedStorage;

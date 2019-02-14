@@ -14,7 +14,7 @@ namespace App\Behat\Context\Setup;
 use App\Behat\Service\SharedStorageInterface;
 use App\Entity\Person;
 use App\Entity\Product;
-use App\Fixture\Factory\ExampleFactoryInterface;
+use App\Fixture\Factory\ProductExampleFactory;
 use App\Formatter\StringInflector;
 use Behat\Behat\Context\Context;
 use Doctrine\ORM\EntityManagerInterface;
@@ -35,7 +35,7 @@ class ProductContext implements Context
     protected $sharedStorage;
 
     /**
-     * @var ExampleFactoryInterface
+     * @var ProductExampleFactory
      */
     protected $productFactory;
 
@@ -55,15 +55,15 @@ class ProductContext implements Context
     protected $manager;
 
     /**
-     * @param SharedStorageInterface  $sharedStorage
-     * @param ExampleFactoryInterface $productFactory
-     * @param FactoryInterface        $productVariantFactory
-     * @param RepositoryInterface     $productRepository
-     * @param EntityManagerInterface  $manager
+     * @param SharedStorageInterface $sharedStorage
+     * @param ProductExampleFactory  $productFactory
+     * @param FactoryInterface       $productVariantFactory
+     * @param RepositoryInterface    $productRepository
+     * @param EntityManagerInterface $manager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        ExampleFactoryInterface $productFactory,
+        ProductExampleFactory $productFactory,
         FactoryInterface $productVariantFactory,
         RepositoryInterface $productRepository,
         EntityManagerInterface $manager

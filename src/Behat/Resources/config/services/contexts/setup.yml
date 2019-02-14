@@ -19,102 +19,80 @@ services:
 
     App\Behat\Context\Setup\ContactRequestContext:
         arguments:
-            $contactRequestFactory: '@app.fixture.example_factory.contact_request'
             $contactRequestRepository: '@app.repository.contact_request'
 
     App\Behat\Context\Setup\CustomerContext:
         arguments:
-            $appUserFactory: '@app.fixture.example_factory.app_user'
             $customerRepository: '@sylius.repository.customer'
 
     App\Behat\Context\Setup\DealerContext:
         arguments:
-            $dealerFactory: '@app.fixture.example_factory.dealer'
             $dealerRepository: '@app.repository.dealer'
 
     App\Behat\Context\Setup\DealerPriceContext:
         arguments:
-            $dealerPriceFactory: '@app.fixture.example_factory.dealer_price'
             $dealerPriceRepository: '@app.repository.dealer_price'
 
     App\Behat\Context\Setup\FestivalListContext:
         arguments:
-            $festivalListFactory: '@app.fixture.example_factory.festival_list'
             $festivalListRepository: '@app.repository.festival_list'
 
     App\Behat\Context\Setup\GameAwardContext:
         arguments:
-            $gameAwardFactory: '@app.fixture.example_factory.game_award'
             $gameAwardRepository: '@app.repository.game_award'
 
     App\Behat\Context\Setup\GamePlayContext:
         arguments:
-            $gamePlayFactory: '@app.fixture.example_factory.game_play'
-            $topicFactory: '@app.fixture.example_factory.topic'
-            $postFactory: '@app.fixture.example_factory.post'
             $gamePlayRepository: '@app.repository.game_play'
             $topicRepository: '@app.repository.topic'
 
     App\Behat\Context\Setup\PersonContext:
         arguments:
-            $personFactory: '@app.fixture.example_factory.person'
             $personRepository: '@app.repository.person'
 
     App\Behat\Context\Setup\PostContext:
         arguments:
-            $postFactory: '@app.fixture.example_factory.post'
-            $topicFactory: '@app.fixture.example_factory.topic'
             $postRepository: '@app.repository.post'
             $topicRepository: '@app.repository.topic'
 
     App\Behat\Context\Setup\ProductContext:
         arguments:
-            $productFactory: '@app.fixture.example_factory.product'
             $productVariantFactory: '@sylius.factory.product_variant'
             $productRepository: '@sylius.repository.product'
 
     App\Behat\Context\Setup\ProductListContext:
         arguments:
-            $productListFactory: '@app.fixture.example_factory.product_list'
             $productListRepository: '@app.repository.product_list'
 
     App\Behat\Context\Setup\ProductReviewContext:
         arguments:
-            $productReviewFactory: '@app.fixture.example_factory.product_review'
             $productReviewRepository: '@sylius.repository.product_review'
 
     App\Behat\Context\Setup\ProductVideoContext:
         arguments:
-            $productVideoFactory: '@app.fixture.example_factory.product_video'
             $productVideoRepository: '@app.repository.product_video'
 
     App\Behat\Context\Setup\RedirectionContext:
         arguments:
-            $redirectionFactory: '@app.fixture.example_factory.redirection'
             $redirectionRepository: '@app.repository.redirection'
 
     App\Behat\Context\Setup\SecurityContext:
         arguments:
             $securityService: '@app.behat.admin_security'
-            $userFactory: '@app.fixture.example_factory.app_user'
             $userRepository: '@sylius.repository.app_user'
 
     App\Behat\Context\Setup\TaxonContext:
         arguments:
-            $taxonFactory: '@app.fixture.example_factory.taxon'
             $taxonRepository: '@sylius.repository.taxon'
 
     App\Behat\Context\Setup\TopicContext:
         arguments:
-            $topicFactory: '@app.fixture.example_factory.topic'
             $topicRepository: '@app.repository.topic'
 
     App\Behat\Context\Setup\UserContext:
         arguments:
             $userRepository: '@sylius.repository.app_user'
-            $userFactory: '@app.fixture.example_factory.app_user'
 
     App\Behat\Context\Setup\YearAwardContext:
         arguments:
-            $yearAwardFactory: '@app.fixture.example_factory.year_award'
             $yearAwardRepository: '@app.repository.year_award'

@@ -8,118 +8,102 @@ services:
             - "@sylius.repository.product"
         public: true
 
-    app.fixture.example_factory.article_review:
-        class: App\Fixture\Factory\ArticleReviewExampleFactory
+    App\Fixture\Factory\ArticleReviewExampleFactory:
         arguments:
             - "@sylius.factory.article_review"
             - "@app.repository.article"
             - "@sylius.repository.customer"
         public: true
 
-    app.fixture.example_factory.app_user:
-        class: App\Fixture\Factory\AppUserExampleFactory
+    App\Fixture\Factory\AppUserExampleFactory:
         arguments:
             - "@sylius.factory.app_user"
             - "@sylius.factory.customer"
             - "@app.factory.avatar"
         public: true
 
-    app.fixture.example_factory.block:
-        class: App\Fixture\Factory\BlockExampleFactory
+    App\Fixture\Factory\BlockExampleFactory:
         arguments:
             - "@app.factory.block"
             - "@app.factory.block_image"
             - "@app.repository.article"
         public: true
 
-    app.fixture.example_factory.contact_request:
-        class: App\Fixture\Factory\ContactRequestExampleFactory
+    App\Fixture\Factory\ContactRequestExampleFactory:
         arguments:
             - "@app.factory.contact_request"
         public: true
 
-    app.fixture.example_factory.dealer:
-        class: App\Fixture\Factory\DealerExampleFactory
+    App\Fixture\Factory\DealerExampleFactory:
         arguments:
             - "@app.factory.dealer"
             - "@app.factory.dealer_image"
         public: true
 
-    app.fixture.example_factory.dealer_price:
-        class: App\Fixture\Factory\DealerPriceExampleFactory
+    App\Fixture\Factory\DealerPriceExampleFactory:
         arguments:
             - "@app.factory.dealer_price"
             - "@sylius.repository.product"
             - "@app.repository.dealer"
         public: true
 
-    app.fixture.example_factory.festival_list:
-        class: App\Fixture\Factory\FestivalListExampleFactory
+    App\Fixture\Factory\FestivalListExampleFactory:
         arguments:
             - "@app.factory.festival_list"
         public: true
 
-    app.fixture.example_factory.festival_list_item:
-        class: App\Fixture\Factory\FestivalListItemExampleFactory
+    App\Fixture\Factory\FestivalListItemExampleFactory:
         arguments:
             - "@app.factory.festival_list_item"
             - "@sylius.repository.product"
             - "@app.repository.festival_list"
         public: true
 
-    app.fixture.example_factory.game_award:
-        class: App\Fixture\Factory\GameAwardExampleFactory
+    App\Fixture\Factory\GameAwardExampleFactory:
         arguments:
             - "@app.factory.game_award"
             - "@app.factory.game_award_image"
         public: true
 
-    app.fixture.example_factory.game_play:
-        class: App\Fixture\Factory\GamePlayExampleFactory
+    App\Fixture\Factory\GamePlayExampleFactory:
         arguments:
             - "@app.factory.game_play"
             - "@sylius.repository.customer"
             - "@sylius.repository.product"
         public: true
 
-    app.fixture.example_factory.game_play_image:
-        class: App\Fixture\Factory\GamePlayImageExampleFactory
+    App\Fixture\Factory\GamePlayImageExampleFactory:
         arguments:
             - "@app.factory.game_play_image"
             - "@app.repository.game_play"
         public: true
 
-    app.fixture.example_factory.notification:
-        class: App\Fixture\Factory\NotificationExampleFactory
+    App\Fixture\Factory\NotificationExampleFactory:
         arguments:
             - "@app.factory.notification"
             - "@sylius.repository.customer"
         public: true
 
-    app.fixture.example_factory.person:
-        class: App\Fixture\Factory\PersonExampleFactory
+    App\Fixture\Factory\PersonExampleFactory:
         arguments:
             - "@app.factory.person"
             - "@app.factory.person_image"
         public: true
 
-    app.fixture.example_factory.player:
-        class: App\Fixture\Factory\PlayerExampleFactory
+    App\Fixture\Factory\PlayerExampleFactory:
         arguments:
             - "@app.factory.player"
             - "@app.repository.game_play"
         public: true
 
-    app.fixture.example_factory.post:
-        class: App\Fixture\Factory\PostExampleFactory
+    App\Fixture\Factory\PostExampleFactory:
         arguments:
             - "@app.factory.post"
             - "@app.repository.topic"
             - "@sylius.repository.customer"
         public: true
 
-    app.fixture.example_factory.product:
-        class: App\Fixture\Factory\ProductExampleFactory
+    App\Fixture\Factory\ProductExampleFactory:
         arguments:
             - "@sylius.factory.product"
             - "@app.factory.product_variant_image"
@@ -128,17 +112,14 @@ services:
             - "@sylius.generator.slug"
         public: true
 
-
-    app.fixture.example_factory.product_box:
-        class: App\Fixture\Factory\ProductBoxExampleFactory
+    App\Fixture\Factory\ProductBoxExampleFactory:
         arguments:
             - "@app.factory.product_box"
             - "@app.factory.product_box_image"
             - "@sylius.repository.product_variant"
         public: true
 
-    app.fixture.example_factory.product_list:
-        class: App\Fixture\Factory\ProductListExampleFactory
+    App\Fixture\Factory\ProductListExampleFactory:
         arguments:
             - "@app.factory.product_list"
             - "@app.factory.product_list_item"
@@ -146,29 +127,25 @@ services:
             - "@sylius.repository.product"
         public: true
 
-    app.fixture.example_factory.product_review:
-        class: App\Fixture\Factory\ProductReviewExampleFactory
+    App\Fixture\Factory\ProductReviewExampleFactory:
         arguments:
             - "@sylius.factory.product_review"
             - "@sylius.repository.product"
             - "@sylius.repository.customer"
         public: true
 
-    app.fixture.example_factory.product_video:
-        class: App\Fixture\Factory\ProductVideoExampleFixture
+    App\Fixture\Factory\ProductVideoExampleFixture:
         arguments:
             - "@app.factory.product_video"
             - "@sylius.repository.product"
         public: true
 
-    app.fixture.example_factory.redirection:
-        class: App\Fixture\Factory\RedirectionExampleFactory
+    App\Fixture\Factory\RedirectionExampleFactory:
         arguments:
             - "@app.factory.redirection"
         public: true
 
-    app.fixture.example_factory.taxon:
-        class: App\Fixture\Factory\TaxonExampleFactory
+    App\Fixture\Factory\TaxonExampleFactory:
         arguments:
             - "@sylius.factory.taxon"
             - "@sylius.repository.taxon"
@@ -176,8 +153,7 @@ services:
             - "%locale%"
         public: true
 
-    app.fixture.example_factory.topic:
-        class: App\Fixture\Factory\TopicExampleFactory
+    App\Fixture\Factory\TopicExampleFactory:
         arguments:
             - "@app.factory.topic"
             - "@sylius.repository.customer"
@@ -186,8 +162,7 @@ services:
             - "@sylius.repository.taxon"
         public: true
 
-    app.fixture.example_factory.year_award:
-        class: App\Fixture\Factory\YearAwardExampleFactory
+    App\Fixture\Factory\YearAwardExampleFactory:
         arguments:
             - "@app.factory.year_award"
             - "@app.repository.game_award"

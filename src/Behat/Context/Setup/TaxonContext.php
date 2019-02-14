@@ -14,6 +14,7 @@ namespace App\Behat\Context\Setup;
 use App\Behat\Service\SharedStorageInterface;
 use App\Entity\Taxon;
 use App\Fixture\Factory\ExampleFactoryInterface;
+use App\Fixture\Factory\TaxonExampleFactory;
 use Behat\Behat\Context\Context;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -32,7 +33,7 @@ class TaxonContext implements Context
     protected $sharedStorage;
 
     /**
-     * @var ExampleFactoryInterface
+     * @var TaxonExampleFactory
      */
     protected $taxonFactory;
 
@@ -47,14 +48,14 @@ class TaxonContext implements Context
     protected $manager;
 
     /**
-     * @param SharedStorageInterface  $sharedStorage
-     * @param ExampleFactoryInterface $taxonFactory
-     * @param RepositoryInterface     $taxonRepository
-     * @param EntityManagerInterface  $manager
+     * @param SharedStorageInterface $sharedStorage
+     * @param TaxonExampleFactory    $taxonFactory
+     * @param RepositoryInterface    $taxonRepository
+     * @param EntityManagerInterface $manager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        ExampleFactoryInterface $taxonFactory,
+        TaxonExampleFactory $taxonFactory,
         RepositoryInterface $taxonRepository,
         EntityManagerInterface $manager
     ) {

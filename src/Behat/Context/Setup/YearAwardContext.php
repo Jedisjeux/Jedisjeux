@@ -15,7 +15,7 @@ use App\Behat\Service\SharedStorageInterface;
 use App\Entity\GameAward;
 use App\Entity\Product;
 use App\Entity\YearAward;
-use App\Fixture\Factory\ExampleFactoryInterface;
+use App\Fixture\Factory\YearAwardExampleFactory;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -27,7 +27,7 @@ class YearAwardContext implements Context
     private $sharedStorage;
 
     /**
-     * @var ExampleFactoryInterface
+     * @var YearAwardExampleFactory
      */
     private $yearAwardFactory;
 
@@ -38,12 +38,12 @@ class YearAwardContext implements Context
 
     /**
      * @param SharedStorageInterface  $sharedStorage
-     * @param ExampleFactoryInterface $yearAwardFactory
+     * @param YearAwardExampleFactory $yearAwardFactory
      * @param RepositoryInterface     $yearAwardRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        ExampleFactoryInterface $yearAwardFactory,
+        YearAwardExampleFactory $yearAwardFactory,
         RepositoryInterface $yearAwardRepository
     ) {
         $this->sharedStorage = $sharedStorage;

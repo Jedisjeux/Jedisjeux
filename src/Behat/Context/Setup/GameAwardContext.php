@@ -13,7 +13,7 @@ namespace App\Behat\Context\Setup;
 
 use App\Behat\Service\SharedStorageInterface;
 use App\Entity\GameAward;
-use App\Fixture\Factory\ExampleFactoryInterface;
+use App\Fixture\Factory\GameAwardExampleFactory;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -25,7 +25,7 @@ class GameAwardContext implements Context
     private $sharedStorage;
 
     /**
-     * @var ExampleFactoryInterface
+     * @var GameAwardExampleFactory
      */
     private $gameAwardFactory;
 
@@ -36,12 +36,12 @@ class GameAwardContext implements Context
 
     /**
      * @param SharedStorageInterface  $sharedStorage
-     * @param ExampleFactoryInterface $gameAwardFactory
+     * @param GameAwardExampleFactory $gameAwardFactory
      * @param RepositoryInterface     $gameAwardRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        ExampleFactoryInterface $gameAwardFactory,
+        GameAwardExampleFactory $gameAwardFactory,
         RepositoryInterface $gameAwardRepository
     ) {
         $this->sharedStorage = $sharedStorage;

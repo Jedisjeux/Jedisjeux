@@ -12,7 +12,7 @@
 namespace App\Behat\Context\Setup;
 
 use App\Entity\Redirection;
-use App\Fixture\Factory\ExampleFactoryInterface;
+use App\Fixture\Factory\RedirectionExampleFactory;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -22,7 +22,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class RedirectionContext implements Context
 {
     /**
-     * @var ExampleFactoryInterface
+     * @var RedirectionExampleFactory
      */
     private $redirectionFactory;
 
@@ -34,10 +34,10 @@ class RedirectionContext implements Context
     /**
      * RedirectionContext constructor.
      *
-     * @param ExampleFactoryInterface $redirectionFactory
-     * @param RepositoryInterface     $redirectionRepository
+     * @param RedirectionExampleFactory $redirectionFactory
+     * @param RepositoryInterface       $redirectionRepository
      */
-    public function __construct(ExampleFactoryInterface $redirectionFactory, RepositoryInterface $redirectionRepository)
+    public function __construct(RedirectionExampleFactory $redirectionFactory, RepositoryInterface $redirectionRepository)
     {
         $this->redirectionFactory = $redirectionFactory;
         $this->redirectionRepository = $redirectionRepository;

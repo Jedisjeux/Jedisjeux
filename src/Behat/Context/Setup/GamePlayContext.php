@@ -16,6 +16,9 @@ use App\Entity\GamePlay;
 use App\Entity\Post;
 use App\Entity\Topic;
 use App\Fixture\Factory\ExampleFactoryInterface;
+use App\Fixture\Factory\GamePlayExampleFactory;
+use App\Fixture\Factory\PostExampleFactory;
+use App\Fixture\Factory\TopicExampleFactory;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -32,17 +35,17 @@ class GamePlayContext implements Context
     private $sharedStorage;
 
     /**
-     * @var ExampleFactoryInterface
+     * @var GamePlayExampleFactory
      */
     protected $gamePlayFactory;
 
     /**
-     * @var ExampleFactoryInterface
+     * @var TopicExampleFactory
      */
     protected $topicFactory;
 
     /**
-     * @var ExampleFactoryInterface
+     * @var PostExampleFactory
      */
     protected $postFactory;
 
@@ -57,18 +60,18 @@ class GamePlayContext implements Context
     protected $topicRepository;
 
     /**
-     * @param SharedStorageInterface  $sharedStorage
-     * @param ExampleFactoryInterface $gamePlayFactory
-     * @param ExampleFactoryInterface $topicFactory
-     * @param ExampleFactoryInterface $postFactory
-     * @param RepositoryInterface     $gamePlayRepository
-     * @param RepositoryInterface     $topicRepository
+     * @param SharedStorageInterface $sharedStorage
+     * @param GamePlayExampleFactory $gamePlayFactory
+     * @param TopicExampleFactory    $topicFactory
+     * @param PostExampleFactory     $postFactory
+     * @param RepositoryInterface    $gamePlayRepository
+     * @param RepositoryInterface    $topicRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        ExampleFactoryInterface $gamePlayFactory,
-        ExampleFactoryInterface $topicFactory,
-        ExampleFactoryInterface $postFactory,
+        GamePlayExampleFactory $gamePlayFactory,
+        TopicExampleFactory $topicFactory,
+        PostExampleFactory $postFactory,
         RepositoryInterface $gamePlayRepository,
         RepositoryInterface $topicRepository
     ) {

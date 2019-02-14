@@ -17,6 +17,8 @@ use App\Entity\GamePlay;
 use App\Entity\Post;
 use App\Entity\Topic;
 use App\Fixture\Factory\ExampleFactoryInterface;
+use App\Fixture\Factory\PostExampleFactory;
+use App\Fixture\Factory\TopicExampleFactory;
 use Behat\Behat\Context\Context;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Customer\Model\CustomerInterface;
@@ -32,12 +34,12 @@ class PostContext implements Context
     protected $sharedStorage;
 
     /**
-     * @var ExampleFactoryInterface
+     * @var PostExampleFactory
      */
     protected $postFactory;
 
     /**
-     * @var ExampleFactoryInterface
+     * @var TopicExampleFactory
      */
     protected $topicFactory;
 
@@ -52,16 +54,16 @@ class PostContext implements Context
     protected $topicRepository;
 
     /**
-     * @param SharedStorageInterface  $sharedStorage
-     * @param ExampleFactoryInterface $postFactory
-     * @param ExampleFactoryInterface $topicFactory
-     * @param EntityRepository        $postRepository
-     * @param EntityRepository        $topicRepository
+     * @param SharedStorageInterface $sharedStorage
+     * @param PostExampleFactory     $postFactory
+     * @param TopicExampleFactory    $topicFactory
+     * @param EntityRepository       $postRepository
+     * @param EntityRepository       $topicRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        ExampleFactoryInterface $postFactory,
-        ExampleFactoryInterface $topicFactory,
+        PostExampleFactory $postFactory,
+        TopicExampleFactory $topicFactory,
         EntityRepository $postRepository,
         EntityRepository $topicRepository
     ) {
