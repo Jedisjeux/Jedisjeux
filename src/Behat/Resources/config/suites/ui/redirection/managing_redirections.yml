@@ -4,8 +4,8 @@ default:
             contexts:
                 - App\Behat\Context\Hook\DoctrineORMContext
 
-                - app.behat.context.transform.redirection
-                - app.behat.context.transform.shared_storage
+                - App\Behat\Context\Transform\RedirectionContext
+                - App\Behat\Context\Transform\SharedStorageContext
 
                 - App\Behat\Context\Setup\SecurityContext
                 - App\Behat\Context\Setup\RedirectionContext

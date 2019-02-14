@@ -4,10 +4,10 @@ default:
             contexts:
                 - App\Behat\Context\Hook\DoctrineORMContext
 
-                - app.behat.context.transform.dealer
-                - app.behat.context.transform.dealer_price
-                - app.behat.context.transform.product
-                - app.behat.context.transform.shared_storage
+                - App\Behat\Context\Transform\DealerContext
+                - App\Behat\Context\Transform\DealerPriceContext
+                - App\Behat\Context\Transform\ProductContext
+                - App\Behat\Context\Transform\SharedStorageContext
 
                 - App\Behat\Context\Setup\SecurityContext
                 - App\Behat\Context\Setup\DealerContext

@@ -4,9 +4,9 @@ default:
             contexts:
                 - App\Behat\Context\Hook\DoctrineORMContext
 
-                - app.behat.context.transform.customer
-                - app.behat.context.transform.shared_storage
-                - app.behat.context.transform.taxon
+                - App\Behat\Context\Transform\CustomerContext
+                - App\Behat\Context\Transform\SharedStorageContext
+                - App\Behat\Context\Transform\TaxonContext
 
                 - App\Behat\Context\Setup\SecurityContext
                 - App\Behat\Context\Setup\CustomerContext

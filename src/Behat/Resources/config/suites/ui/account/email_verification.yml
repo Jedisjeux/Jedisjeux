@@ -5,8 +5,8 @@ default:
                 - App\Behat\Context\Hook\DoctrineORMContext
                 - App\Behat\Context\Hook\EmailSpoolContext
 
-                - app.behat.context.transform.shared_storage
-                - app.behat.context.transform.user
+                - App\Behat\Context\Transform\SharedStorageContext
+                - App\Behat\Context\Transform\UserContext
 
                 - App\Behat\Context\Setup\SecurityContext
                 - App\Behat\Context\Setup\UserContext

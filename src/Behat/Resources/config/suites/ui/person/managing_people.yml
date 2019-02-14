@@ -4,7 +4,7 @@ default:
             contexts:
                 - App\Behat\Context\Hook\DoctrineORMContext
 
-                - app.behat.context.transform.person
+                - App\Behat\Context\Transform\PersonContext
 
                 - App\Behat\Context\Setup\SecurityContext
                 - App\Behat\Context\Setup\PersonContext

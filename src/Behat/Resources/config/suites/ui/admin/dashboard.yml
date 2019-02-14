@@ -6,9 +6,9 @@ default:
 
                 - App\Behat\Context\Setup\SecurityContext
 
-                - app.behat.context.transform.customer
-                - app.behat.context.transform.product
-                - app.behat.context.transform.shared_storage
+                - App\Behat\Context\Transform\CustomerContext
+                - App\Behat\Context\Transform\ProductContext
+                - App\Behat\Context\Transform\SharedStorageContext
 
                 - App\Behat\Context\Ui\Backend\DashboardContext
             filters:

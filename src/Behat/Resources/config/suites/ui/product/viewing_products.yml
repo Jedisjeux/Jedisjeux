@@ -7,12 +7,12 @@ default:
             contexts:
                 - App\Behat\Context\Hook\DoctrineORMContext
 
-                - app.behat.context.transform.customer
-                - app.behat.context.transform.game_award
-                - app.behat.context.transform.person
-                - app.behat.context.transform.product
-                - app.behat.context.transform.shared_storage
-                - app.behat.context.transform.taxon
+                - App\Behat\Context\Transform\CustomerContext
+                - App\Behat\Context\Transform\GameAwardContext
+                - App\Behat\Context\Transform\PersonContext
+                - App\Behat\Context\Transform\ProductContext
+                - App\Behat\Context\Transform\SharedStorageContext
+                - App\Behat\Context\Transform\TaxonContext
 
                 - App\Behat\Context\Setup\GameAwardContext
                 - App\Behat\Context\Setup\PersonContext
