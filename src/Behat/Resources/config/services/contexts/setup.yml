@@ -17,82 +17,11 @@ services:
         autowire: true
         public: true
 
-    App\Behat\Context\Setup\ContactRequestContext:
-        arguments:
-            $contactRequestRepository: '@app.repository.contact_request'
-
-    App\Behat\Context\Setup\CustomerContext:
-        arguments:
-            $customerRepository: '@sylius.repository.customer'
-
-    App\Behat\Context\Setup\DealerContext:
-        arguments:
-            $dealerRepository: '@app.repository.dealer'
-
-    App\Behat\Context\Setup\DealerPriceContext:
-        arguments:
-            $dealerPriceRepository: '@app.repository.dealer_price'
-
-    App\Behat\Context\Setup\FestivalListContext:
-        arguments:
-            $festivalListRepository: '@app.repository.festival_list'
-
-    App\Behat\Context\Setup\GameAwardContext:
-        arguments:
-            $gameAwardRepository: '@app.repository.game_award'
-
-    App\Behat\Context\Setup\GamePlayContext:
-        arguments:
-            $gamePlayRepository: '@app.repository.game_play'
-            $topicRepository: '@app.repository.topic'
-
-    App\Behat\Context\Setup\PersonContext:
-        arguments:
-            $personRepository: '@app.repository.person'
-
-    App\Behat\Context\Setup\PostContext:
-        arguments:
-            $postRepository: '@app.repository.post'
-            $topicRepository: '@app.repository.topic'
-
-    App\Behat\Context\Setup\ProductContext:
-        arguments:
-            $productVariantFactory: '@sylius.factory.product_variant'
-            $productRepository: '@sylius.repository.product'
-
-    App\Behat\Context\Setup\ProductListContext:
-        arguments:
-            $productListRepository: '@app.repository.product_list'
-
-    App\Behat\Context\Setup\ProductReviewContext:
-        arguments:
-            $productReviewRepository: '@sylius.repository.product_review'
-
-    App\Behat\Context\Setup\ProductVideoContext:
-        arguments:
-            $productVideoRepository: '@app.repository.product_video'
-
-    App\Behat\Context\Setup\RedirectionContext:
-        arguments:
-            $redirectionRepository: '@app.repository.redirection'
-
     App\Behat\Context\Setup\SecurityContext:
         arguments:
             $securityService: '@app.behat.admin_security'
             $userRepository: '@sylius.repository.app_user'
 
-    App\Behat\Context\Setup\TaxonContext:
-        arguments:
-            $taxonRepository: '@sylius.repository.taxon'
-
-    App\Behat\Context\Setup\TopicContext:
-        arguments:
-            $topicRepository: '@app.repository.topic'
-
     App\Behat\Context\Setup\UserContext:
         arguments:
             $userRepository: '@sylius.repository.app_user'
-
-    App\Behat\Context\Setup\YearAwardContext:
-        arguments:
-            $yearAwardRepository: '@app.repository.year_award'

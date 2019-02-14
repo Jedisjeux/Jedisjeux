@@ -16,12 +16,12 @@ use App\Entity\Article;
 use App\Entity\GamePlay;
 use App\Entity\Post;
 use App\Entity\Topic;
-use App\Fixture\Factory\ExampleFactoryInterface;
 use App\Fixture\Factory\PostExampleFactory;
 use App\Fixture\Factory\TopicExampleFactory;
 use Behat\Behat\Context\Context;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -44,12 +44,12 @@ class PostContext implements Context
     protected $topicFactory;
 
     /**
-     * @var EntityRepository
+     * @var RepositoryInterface
      */
     protected $postRepository;
 
     /**
-     * @var EntityRepository
+     * @var RepositoryInterface
      */
     protected $topicRepository;
 
@@ -57,15 +57,15 @@ class PostContext implements Context
      * @param SharedStorageInterface $sharedStorage
      * @param PostExampleFactory     $postFactory
      * @param TopicExampleFactory    $topicFactory
-     * @param EntityRepository       $postRepository
-     * @param EntityRepository       $topicRepository
+     * @param RepositoryInterface    $postRepository
+     * @param RepositoryInterface    $topicRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         PostExampleFactory $postFactory,
         TopicExampleFactory $topicFactory,
-        EntityRepository $postRepository,
-        EntityRepository $topicRepository
+        RepositoryInterface $postRepository,
+        RepositoryInterface $topicRepository
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->postFactory = $postFactory;

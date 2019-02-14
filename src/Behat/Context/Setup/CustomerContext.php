@@ -15,7 +15,7 @@ use App\Behat\Service\SharedStorageInterface;
 use App\Entity\User;
 use App\Fixture\Factory\AppUserExampleFactory;
 use Behat\Behat\Context\Context;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -33,7 +33,7 @@ class CustomerContext implements Context
     protected $appUserFactory;
 
     /**
-     * @var EntityRepository
+     * @var RepositoryInterface
      */
     protected $customerRepository;
 
@@ -42,12 +42,12 @@ class CustomerContext implements Context
      *
      * @param SharedStorageInterface $sharedStorage
      * @param AppUserExampleFactory  $appUserFactory
-     * @param EntityRepository       $customerRepository
+     * @param RepositoryInterface    $customerRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         AppUserExampleFactory $appUserFactory,
-        EntityRepository $customerRepository)
+        RepositoryInterface $customerRepository)
     {
         $this->sharedStorage = $sharedStorage;
         $this->appUserFactory = $appUserFactory;

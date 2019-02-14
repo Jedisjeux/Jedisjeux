@@ -34,12 +34,12 @@ final class CustomerContext implements Context
     /**
      * PersonContext constructor.
      *
-     * @param RepositoryInterface $topicRepository
+     * @param RepositoryInterface $customerRepository
      * @param FactoryInterface    $customerFactory
      */
-    public function __construct(RepositoryInterface $topicRepository, FactoryInterface $customerFactory)
+    public function __construct(RepositoryInterface $customerRepository, FactoryInterface $customerFactory)
     {
-        $this->customerRepository = $topicRepository;
+        $this->customerRepository = $customerRepository;
         $this->customerFactory = $customerFactory;
     }
 

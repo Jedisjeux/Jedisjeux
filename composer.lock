@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d35a537ccb918732bb42350730e38e91",
+    "content-hash": "834cdbb9fd3f2243cc6051cd126136b1",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -6003,29 +6003,29 @@
         },
         {
             "name": "sylius/resource",
-            "version": "v1.2.7",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/Resource.git",
-                "reference": "1a312ede8806fa3751789ae49863f71da2e15fab"
+                "reference": "e8a5469fd1edb2a320266ce4aad5e7e697ff06cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/Resource/zipball/1a312ede8806fa3751789ae49863f71da2e15fab",
-                "reference": "1a312ede8806fa3751789ae49863f71da2e15fab",
+                "url": "https://api.github.com/repos/Sylius/Resource/zipball/e8a5469fd1edb2a320266ce4aad5e7e697ff06cc",
+                "reference": "e8a5469fd1edb2a320266ce4aad5e7e697ff06cc",
                 "shasum": ""
             },
             "require": {
                 "doctrine/common": "^2.6",
                 "gedmo/doctrine-extensions": "^2.4",
                 "pagerfanta/pagerfanta": "^1.0|^2.0",
-                "php": "^7.1",
+                "php": "^7.2",
                 "symfony/event-dispatcher": "^3.4|^4.1.1",
                 "symfony/property-access": "^3.4|^4.1.1",
                 "winzou/state-machine": "^0.3"
             },
             "require-dev": {
-                "phpspec/phpspec": "^4.0",
+                "phpspec/phpspec": "^5.0",
                 "sylius/locale": "^1.0"
             },
             "suggest": {
@@ -6034,7 +6034,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
@@ -6070,27 +6070,27 @@
                 "shop",
                 "sylius"
             ],
-            "time": "2018-09-17T11:03:56+00:00"
+            "time": "2019-02-01T13:10:57+00:00"
         },
         {
             "name": "sylius/resource-bundle",
-            "version": "v1.2.7",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusResourceBundle.git",
-                "reference": "bc2ad5a2fa62eaefb4548e77be3c5e0fb90c27ba"
+                "reference": "74abc146ad690ec43354d25fec65bd068e849b07"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusResourceBundle/zipball/bc2ad5a2fa62eaefb4548e77be3c5e0fb90c27ba",
-                "reference": "bc2ad5a2fa62eaefb4548e77be3c5e0fb90c27ba",
+                "url": "https://api.github.com/repos/Sylius/SyliusResourceBundle/zipball/74abc146ad690ec43354d25fec65bd068e849b07",
+                "reference": "74abc146ad690ec43354d25fec65bd068e849b07",
                 "shasum": ""
             },
             "require": {
                 "doctrine/doctrine-bundle": "^1.6",
                 "friendsofsymfony/rest-bundle": "^2.1",
                 "jms/serializer-bundle": "^2.0",
-                "php": "^7.1",
+                "php": "^7.2",
                 "stof/doctrine-extensions-bundle": "^1.2",
                 "sylius/registry": "^1.2",
                 "sylius/resource": "^1.2",
@@ -6107,15 +6107,21 @@
                 "willdurand/hateoas-bundle": "^1.2",
                 "winzou/state-machine-bundle": "^0.3"
             },
+            "conflict": {
+                "symfony/browser-kit": "4.1.8",
+                "symfony/dependency-injection": "4.1.8",
+                "symfony/dom-crawler": "4.1.8",
+                "symfony/routing": "4.1.8 || 4.1.9"
+            },
             "require-dev": {
-                "akeneo/phpspec-skip-example-extension": "^3.0",
+                "akeneo/phpspec-skip-example-extension": "^4.0",
                 "doctrine/mongodb-odm": "^1.0",
                 "doctrine/orm": "^2.5",
                 "doctrine/phpcr-odm": "^1.4",
                 "jackalope/jackalope-doctrine-dbal": "^1.2",
                 "lakion/api-test-case": "^3.1.0",
                 "matthiasnoback/symfony-dependency-injection-test": "^2.0",
-                "phpspec/phpspec": "^4.0",
+                "phpspec/phpspec": "^5.0",
                 "phpunit/phpunit": "^6.5",
                 "sylius/grid-bundle": "^1.2",
                 "sylius/locale": "^1.2",
@@ -6129,7 +6135,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
@@ -6163,7 +6169,7 @@
                 "storage",
                 "sylius"
             ],
-            "time": "2018-08-14T10:39:09+00:00"
+            "time": "2019-02-03T14:37:03+00:00"
         },
         {
             "name": "sylius/review",

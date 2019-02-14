@@ -27,11 +27,11 @@ final class ProductListContext implements Context
     private $productListRepository;
 
     /**
-     * @param RepositoryInterface $productReviewRepository
+     * @param RepositoryInterface $productListRepository
      */
-    public function __construct(RepositoryInterface $productReviewRepository)
+    public function __construct(RepositoryInterface $productListRepository)
     {
-        $this->productListRepository = $productReviewRepository;
+        $this->productListRepository = $productListRepository;
     }
 
     /**
