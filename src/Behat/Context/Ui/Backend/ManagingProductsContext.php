@@ -11,6 +11,7 @@
 
 namespace App\Behat\Context\Ui\Backend;
 
+use App\Behat\Page\Backend\Product\CreatePageFromBgg;
 use App\Behat\Page\Backend\Product\IndexPage;
 use App\Behat\Page\Backend\Product\UpdatePage;
 use App\Behat\Page\Backend\Product\CreatePage;
@@ -37,7 +38,7 @@ class ManagingProductsContext implements Context
     private $createPage;
 
     /**
-     * @var CreatePage
+     * @var CreatePageFromBgg
      */
     private $createFromBggPage;
 
@@ -56,14 +57,14 @@ class ManagingProductsContext implements Context
      *
      * @param IndexPage                    $indexPage
      * @param CreatePage                   $createPage
-     * @param CreatePage                   $createFromBggPage
+     * @param CreatePageFromBgg            $createFromBggPage
      * @param UpdatePage                   $updatePage
      * @param CurrentPageResolverInterface $currentPageResolver
      */
     public function __construct(
         IndexPage $indexPage,
         CreatePage $createPage,
-        CreatePage $createFromBggPage,
+        CreatePageFromBgg $createFromBggPage,
         UpdatePage $updatePage,
         CurrentPageResolverInterface $currentPageResolver)
     {

@@ -8,7 +8,6 @@ services:
 #        class: App\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
-      app.behat.page.backend.dashboard:
-          class: App\Behat\Page\Backend\DashboardPage
+      App\Behat\Page\Backend\DashboardPage:
           parent: app.behat.symfony_page
           public: false

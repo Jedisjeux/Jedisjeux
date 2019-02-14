@@ -8,13 +8,11 @@ services:
 #        class: App\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
-    app.behat.page.backend.contact_request.index:
-        class: App\Behat\Page\Backend\ContactRequest\IndexPage
+    App\Behat\Page\Backend\ContactRequest\IndexPage:
         parent: app.behat.page.backend.crud.index
         public: false
         arguments: ["app_backend_contact_request_index"]
 
-    app.behat.page.backend.contact_request.show:
-        class: App\Behat\Page\Backend\ContactRequest\ShowPage
+    App\Behat\Page\Backend\ContactRequest\ShowPage:
         parent: app.behat.symfony_page
         public: false

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Behat\Context\Ui\Backend;
 
-use App\Entity\User;
 use Behat\Behat\Context\Context;
 use App\Behat\Page\Backend\Customer\IndexPage;
 use App\Behat\Page\Backend\Customer\UpdatePage;

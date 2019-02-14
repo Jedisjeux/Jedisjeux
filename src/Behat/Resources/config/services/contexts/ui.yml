@@ -12,122 +12,14 @@ services:
         public: true
         autowire: true
 
-    App\Behat\Context\Ui\Backend\DashboardContext:
-        arguments:
-            - '@app.behat.page.backend.dashboard'
-
-    App\Behat\Context\Ui\Backend\ManagingArticlesContext:
-        arguments:
-            - '@app.behat.page.backend.article.index'
-            - '@app.behat.page.backend.article.create'
-            - '@app.behat.page.backend.article.update'
-            - '@app.behat.current_page_resolver'
-
-    App\Behat\Context\Ui\Backend\ManagingContactRequestsContext:
-        arguments:
-            - '@app.behat.page.backend.contact_request.index'
-            - '@app.behat.page.backend.contact_request.show'
-
-    App\Behat\Context\Ui\Backend\ManagingCustomersContext:
-        arguments:
-            - '@app.behat.page.backend.customer.index'
-            - '@app.behat.page.backend.customer.update'
-            - '@app.behat.current_page_resolver'
-
-    App\Behat\Context\Ui\Backend\ManagingDealersContext:
-        arguments:
-            - '@app.behat.page.backend.dealer.index'
-            - '@app.behat.page.backend.dealer.create'
-            - '@app.behat.page.backend.dealer.update'
-            - '@app.behat.current_page_resolver'
-
-    App\Behat\Context\Ui\Backend\ManagingDealerPricesContext:
-        arguments:
-            - '@app.behat.page.backend.dealer_price.index'
-            - '@app.behat.page.backend.dealer_price.update'
-            - '@app.behat.current_page_resolver'
-
-    App\Behat\Context\Ui\Backend\ManagingGameAwardsContext:
-        arguments:
-            - '@app.behat.page.backend.game_award.create'
-            - '@app.behat.page.backend.game_award.index'
-            - '@app.behat.page.backend.game_award.update'
+    App\Behat\Context\Ui\:
+        resource: '../../../../Context/Ui/*'
+        autowire: true
+        public: true
 
     App\Behat\Context\Ui\Backend\ManagingGamePlaysContext:
         arguments:
-            - '@app.behat.page.backend.game_play.index'
-            - '@app.behat.page.backend.game_play.update'
-            - '@app.repository.game_play'
-            - '@app.behat.current_page_resolver'
-
-    App\Behat\Context\Ui\Backend\ManagingPeopleContext:
-        arguments:
-            - '@app.behat.page.backend.person.index'
-            - '@app.behat.page.backend.person.create'
-            - '@app.behat.page.backend.person.update'
-            - '@app.behat.current_page_resolver'
-
-    App\Behat\Context\Ui\Backend\ManagingPostsContext:
-        arguments:
-            - '@app.behat.page.backend.post.index'
-            - '@app.behat.page.backend.post.update'
-            - '@app.behat.current_page_resolver'
-
-    App\Behat\Context\Ui\Backend\ManagingProductsContext:
-        arguments:
-            - '@app.behat.page.backend.product.index'
-            - '@app.behat.page.backend.product.create'
-            - '@app.behat.page.backend.product.create_from_bgg'
-            - '@app.behat.page.backend.product.update'
-            - '@app.behat.current_page_resolver'
-
-    App\Behat\Context\Ui\Backend\ManagingProductListsContext:
-        arguments:
-            - '@app.behat.page.backend.product_list.index'
-            - '@app.behat.page.backend.product_list.update'
-            - '@app.behat.current_page_resolver'
-
-    App\Behat\Context\Ui\Backend\ManagingProductReviewsContext:
-        arguments:
-            - '@app.behat.page.backend.product_review.index'
-            - '@app.behat.page.backend.product_review.update'
-            - '@app.behat.current_page_resolver'
-
-    App\Behat\Context\Ui\Backend\ManagingProductVariantsContext:
-        arguments:
-            - '@app.behat.page.backend.product_variant.index'
-            - '@app.behat.page.backend.product_variant.create'
-
-    App\Behat\Context\Ui\Backend\ManagingRedirectionsContext:
-        arguments:
-            - '@app.behat.page.backend.redirection.index'
-            - '@app.behat.page.backend.redirection.create'
-            - '@app.behat.page.backend.redirection.update'
-            - '@app.behat.current_page_resolver'
-
-    App\Behat\Context\Ui\Backend\ManagingTaxonsContext:
-        arguments:
-            - '@app.behat.page.backend.taxon.index'
-            - '@app.behat.page.backend.taxon.index_by_parent'
-            - '@app.behat.page.backend.taxon.create'
-            - '@app.behat.page.backend.taxon.create_for_parent'
-            - '@app.behat.page.backend.taxon.update'
-            - '@App\Behat\Service\SharedStorage'
-
-    App\Behat\Context\Ui\Backend\ManagingTopicsContext:
-        arguments:
-            - '@app.behat.page.backend.topic.index'
-            - '@app.behat.page.backend.topic.update'
-            - '@app.behat.current_page_resolver'
-
-    App\Behat\Context\Ui\Backend\ManagingFestivalListsContext:
-        arguments:
-            - '@app.behat.page.backend.festival_list.index'
-            - '@app.behat.page.backend.festival_list.create'
-
-    App\Behat\Context\Ui\Backend\ManagingYearAwardsContext:
-        arguments:
-            - '@app.behat.page.backend.year_award.index'
+            $gamePlayRepository: '@app.repository.game_play'
 
     App\Behat\Context\Ui\Backend\NotificationContext:
         arguments:

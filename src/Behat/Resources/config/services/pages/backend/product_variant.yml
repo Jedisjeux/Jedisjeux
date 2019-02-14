@@ -8,14 +8,12 @@ services:
 #        class: App\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
-    app.behat.page.backend.product_variant.create:
-        class: App\Behat\Page\Backend\ProductVariant\CreatePage
+    App\Behat\Page\Backend\ProductVariant\CreatePage:
         parent: app.behat.page.backend.crud.update
         public: false
         arguments: ["sylius_backend_product_variant_create"]
 
-    app.behat.page.backend.product_variant.index:
-        class: App\Behat\Page\Backend\ProductVariant\IndexPage
+    App\Behat\Page\Backend\ProductVariant\IndexPage:
         parent: app.behat.page.backend.crud.index
         public: false
         arguments: ["sylius_backend_product_variant_index"]

@@ -8,32 +8,27 @@ services:
 #        class: App\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
-    app.behat.page.backend.taxon.create:
-        class: App\Behat\Page\Backend\Taxon\CreatePage
+    App\Behat\Page\Backend\Taxon\CreatePage:
         parent: app.behat.page.backend.crud.create
         public: false
         arguments: ["sylius_backend_taxon_create"]
 
-    app.behat.page.backend.taxon.create_for_parent:
-        class: App\Behat\Page\Backend\Taxon\CreateForParentPage
+    App\Behat\Page\Backend\Taxon\CreateForParentPage:
         parent: app.behat.page.backend.crud.create
         public: false
         arguments: ["sylius_backend_taxon_create_for_parent"]
 
-    app.behat.page.backend.taxon.index:
-        class: App\Behat\Page\Backend\Taxon\IndexPage
+    App\Behat\Page\Backend\Taxon\IndexPage:
         parent: app.behat.page.backend.crud.index
         public: false
         arguments: ["sylius_backend_taxon_index"]
 
-    app.behat.page.backend.taxon.index_by_parent:
-        class: App\Behat\Page\Backend\Taxon\IndexByParentPage
+    App\Behat\Page\Backend\Taxon\IndexByParentPage:
         parent: app.behat.page.backend.crud.index
         public: false
         arguments: ["sylius_backend_taxon_index_by_parent"]
 
-    app.behat.page.backend.taxon.update:
-        class: App\Behat\Page\Backend\Taxon\UpdatePage
+    App\Behat\Page\Backend\Taxon\UpdatePage:
         parent: app.behat.page.backend.crud.update
         public: false
         arguments: ["sylius_backend_taxon_update"]

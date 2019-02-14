@@ -8,14 +8,12 @@ services:
 #        class: App\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
-      app.behat.page.backend.dealer_price.index:
-          class: App\Behat\Page\Backend\DealerPrice\IndexPage
+      App\Behat\Page\Backend\DealerPrice\IndexPage:
           parent: app.behat.page.backend.crud.index
           public: false
           arguments: ["app_backend_dealer_price_index"]
 
-      app.behat.page.backend.dealer_price.update:
-          class: App\Behat\Page\Backend\DealerPrice\UpdatePage
+      App\Behat\Page\Backend\DealerPrice\UpdatePage:
           parent: app.behat.page.backend.crud.update
           public: false
           arguments: ["app_backend_dealer_price_update"]

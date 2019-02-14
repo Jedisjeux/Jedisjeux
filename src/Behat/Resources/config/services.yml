@@ -58,6 +58,9 @@ services:
             - "@behat.mink.default_session"
             - "@router"
 
+    App\Behat\Service\Resolver\CurrentPageResolverInterface:
+        alias: app.behat.current_page_resolver
+
     App\Behat\Service\SharedStorage:
         public: false
 
