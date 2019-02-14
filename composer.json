@@ -46,7 +46,7 @@
     "sylius/mailer-bundle": "^1.2",
     "sylius/money-bundle": "^1.2",
     "sylius/product-bundle": "^1.2",
-    "sylius/resource-bundle": "^1.2",
+    "sylius/resource-bundle": "^1.4",
     "sylius/review-bundle": "^1.2",
     "sylius/taxonomy-bundle": "^1.2",
     "sylius/ui-bundle": "^1.2",

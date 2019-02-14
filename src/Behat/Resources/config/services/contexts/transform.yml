@@ -17,55 +17,10 @@ services:
         autowire: true
         public: true
 
-    App\Behat\Context\Transform\ArticleContext:
-        arguments:
-            - '@app.repository.article'
-
-    App\Behat\Context\Transform\CustomerContext:
-        arguments:
-            - '@sylius.repository.customer'
-            - '@sylius.factory.customer'
-
-    App\Behat\Context\Transform\DealerContext:
-        arguments:
-            - '@app.repository.dealer'
-
-    App\Behat\Context\Transform\DealerPriceContext:
-        arguments:
-            - '@app.repository.dealer_price'
-
-    App\Behat\Context\Transform\GameAwardContext:
-        arguments:
-            - '@app.repository.game_award'
-
-    App\Behat\Context\Transform\PersonContext:
-        arguments:
-            - '@app.repository.person'
-
     App\Behat\Context\Transform\ProductContext:
         arguments:
             - '@sylius.repository.product'
 
-    App\Behat\Context\Transform\ProductListContext:
-        arguments:
-            - '@app.repository.product_list'
-
-    App\Behat\Context\Transform\ProductReviewContext:
-        arguments:
-            - '@sylius.repository.product_review'
-
-    App\Behat\Context\Transform\RedirectionContext:
-        arguments:
-            - '@app.repository.redirection'
-
-    App\Behat\Context\Transform\FestivalListContext:
-        arguments:
-            - '@app.repository.festival_list'
-
     App\Behat\Context\Transform\TaxonContext:
         arguments:
             - '@sylius.repository.taxon'
-
-    App\Behat\Context\Transform\TopicContext:
-        arguments:
-            - '@app.repository.topic'
