@@ -19,12 +19,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class GameProductFixture extends AbstractFixture
 {
     /**
-     * @var AbstractResourceFixture
+     * @var TaxonFixture
      */
     private $taxonFixture;
 
     /**
-     * @var AbstractResourceFixture
+     * @var ProductFixture
      */
     private $productFixture;
 
@@ -39,10 +39,10 @@ class GameProductFixture extends AbstractFixture
     private $faker;
 
     /**
-     * @param $taxonFixture
-     * @param AbstractResourceFixture $productFixture
+     * @param TaxonFixture   $taxonFixture
+     * @param ProductFixture $productFixture
      */
-    public function __construct($taxonFixture, AbstractResourceFixture $productFixture)
+    public function __construct(TaxonFixture $taxonFixture, ProductFixture $productFixture)
     {
         $this->taxonFixture = $taxonFixture;
         $this->productFixture = $productFixture;

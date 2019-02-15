@@ -18,12 +18,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class InTheBoxArticleFixture extends AbstractFixture
 {
     /**
-     * @var AbstractResourceFixture
+     * @var TaxonFixture
      */
     private $taxonFixture;
 
     /**
-     * @var AbstractResourceFixture
+     * @var ArticleFixture
      */
     private $articleFixture;
 
@@ -38,10 +38,10 @@ class InTheBoxArticleFixture extends AbstractFixture
     private $faker;
 
     /**
-     * @param $taxonFixture
-     * @param AbstractResourceFixture $articleFixture
+     * @param TaxonFixture   $taxonFixture
+     * @param ArticleFixture $articleFixture
      */
-    public function __construct($taxonFixture, AbstractResourceFixture $articleFixture)
+    public function __construct(TaxonFixture $taxonFixture, ArticleFixture $articleFixture)
     {
         $this->taxonFixture = $taxonFixture;
         $this->articleFixture = $articleFixture;
