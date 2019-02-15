@@ -18,17 +18,17 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ReviewArticleFixture extends AbstractFixture
 {
     /**
-     * @var AbstractResourceFixture
+     * @var TaxonFixture
      */
     private $taxonFixture;
 
     /***
-     * @var AbstractResourceFixture
+     * @var ArticleReviewFixture
      */
     private $reviewFixture;
 
     /**
-     * @var AbstractResourceFixture
+     * @var ArticleFixture
      */
     private $articleFixture;
 
@@ -43,14 +43,14 @@ class ReviewArticleFixture extends AbstractFixture
     private $faker;
 
     /**
-     * @param AbstractResourceFixture $taxonFixture
-     * @param AbstractResourceFixture $reviewFixture
-     * @param AbstractResourceFixture $articleFixture
+     * @param TaxonFixture         $taxonFixture
+     * @param ArticleReviewFixture $reviewFixture
+     * @param ArticleFixture       $articleFixture
      */
     public function __construct(
-        AbstractResourceFixture $taxonFixture,
-        AbstractResourceFixture $reviewFixture,
-        AbstractResourceFixture $articleFixture
+        TaxonFixture $taxonFixture,
+        ArticleReviewFixture $reviewFixture,
+        ArticleFixture $articleFixture
     ) {
         $this->taxonFixture = $taxonFixture;
         $this->reviewFixture = $reviewFixture;

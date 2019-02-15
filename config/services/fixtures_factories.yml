@@ -1,170 +1,32 @@
 services:
-    App\Fixture\Factory\ArticleExampleFactory:
-        arguments:
-            - "@app.factory.article"
-            - "@app.factory.article_image"
-            - "@sylius.repository.customer"
-            - "@sylius.repository.taxon"
-            - "@sylius.repository.product"
+    _defaults:
+        public: true
+        autowire: true
+
+    App\Fixture\Factory\:
+        resource: '../../src/Fixture/Factory/*'
+        autowire: true
         public: true
 
     App\Fixture\Factory\ArticleReviewExampleFactory:
         arguments:
-            - "@sylius.factory.article_review"
-            - "@app.repository.article"
-            - "@sylius.repository.customer"
-        public: true
-
-    App\Fixture\Factory\AppUserExampleFactory:
-        arguments:
-            - "@sylius.factory.app_user"
-            - "@sylius.factory.customer"
-            - "@app.factory.avatar"
-        public: true
-
-    App\Fixture\Factory\BlockExampleFactory:
-        arguments:
-            - "@app.factory.block"
-            - "@app.factory.block_image"
-            - "@app.repository.article"
-        public: true
-
-    App\Fixture\Factory\ContactRequestExampleFactory:
-        arguments:
-            - "@app.factory.contact_request"
-        public: true
-
-    App\Fixture\Factory\DealerExampleFactory:
-        arguments:
-            - "@app.factory.dealer"
-            - "@app.factory.dealer_image"
-        public: true
-
-    App\Fixture\Factory\DealerPriceExampleFactory:
-        arguments:
-            - "@app.factory.dealer_price"
-            - "@sylius.repository.product"
-            - "@app.repository.dealer"
-        public: true
-
-    App\Fixture\Factory\FestivalListExampleFactory:
-        arguments:
-            - "@app.factory.festival_list"
-        public: true
-
-    App\Fixture\Factory\FestivalListItemExampleFactory:
-        arguments:
-            - "@app.factory.festival_list_item"
-            - "@sylius.repository.product"
-            - "@app.repository.festival_list"
-        public: true
-
-    App\Fixture\Factory\GameAwardExampleFactory:
-        arguments:
-            - "@app.factory.game_award"
-            - "@app.factory.game_award_image"
-        public: true
-
-    App\Fixture\Factory\GamePlayExampleFactory:
-        arguments:
-            - "@app.factory.game_play"
-            - "@sylius.repository.customer"
-            - "@sylius.repository.product"
-        public: true
-
-    App\Fixture\Factory\GamePlayImageExampleFactory:
-        arguments:
-            - "@app.factory.game_play_image"
-            - "@app.repository.game_play"
-        public: true
-
-    App\Fixture\Factory\NotificationExampleFactory:
-        arguments:
-            - "@app.factory.notification"
-            - "@sylius.repository.customer"
-        public: true
-
-    App\Fixture\Factory\PersonExampleFactory:
-        arguments:
-            - "@app.factory.person"
-            - "@app.factory.person_image"
-        public: true
-
-    App\Fixture\Factory\PlayerExampleFactory:
-        arguments:
-            - "@app.factory.player"
-            - "@app.repository.game_play"
-        public: true
-
-    App\Fixture\Factory\PostExampleFactory:
-        arguments:
-            - "@app.factory.post"
-            - "@app.repository.topic"
-            - "@sylius.repository.customer"
-        public: true
+            $articleReviewFactory: "@sylius.factory.article_review"
 
     App\Fixture\Factory\ProductExampleFactory:
         arguments:
-            - "@sylius.factory.product"
-            - "@app.factory.product_variant_image"
-            - "@app.repository.person"
-            - "@sylius.repository.taxon"
-            - "@sylius.generator.slug"
-        public: true
-
-    App\Fixture\Factory\ProductBoxExampleFactory:
-        arguments:
-            - "@app.factory.product_box"
-            - "@app.factory.product_box_image"
-            - "@sylius.repository.product_variant"
-        public: true
-
-    App\Fixture\Factory\ProductListExampleFactory:
-        arguments:
-            - "@app.factory.product_list"
-            - "@app.factory.product_list_item"
-            - "@sylius.repository.customer"
-            - "@sylius.repository.product"
-        public: true
+            $productFactory: "@sylius.factory.product"
+            $slugGenerator: "@sylius.generator.slug"
 
     App\Fixture\Factory\ProductReviewExampleFactory:
         arguments:
-            - "@sylius.factory.product_review"
-            - "@sylius.repository.product"
-            - "@sylius.repository.customer"
-        public: true
-
-    App\Fixture\Factory\ProductVideoExampleFixture:
-        arguments:
-            - "@app.factory.product_video"
-            - "@sylius.repository.product"
-        public: true
-
-    App\Fixture\Factory\RedirectionExampleFactory:
-        arguments:
-            - "@app.factory.redirection"
-        public: true
+            $productReviewFactory: "@sylius.factory.product_review"
 
     App\Fixture\Factory\TaxonExampleFactory:
         arguments:
-            - "@sylius.factory.taxon"
-            - "@sylius.repository.taxon"
-            - "@sylius.generator.taxon_slug"
-            - "%locale%"
-        public: true
+            $taxonRepository: "@sylius.repository.taxon"
+            $taxonSlugGenerator: "@sylius.generator.taxon_slug"
+            $localeCode: "%locale%"
 
     App\Fixture\Factory\TopicExampleFactory:
         arguments:
-            - "@app.factory.topic"
-            - "@sylius.repository.customer"
-            - "@app.repository.article"
-            - "@app.repository.game_play"
-            - "@sylius.repository.taxon"
-        public: true
-
-    App\Fixture\Factory\YearAwardExampleFactory:
-        arguments:
-            - "@app.factory.year_award"
-            - "@app.repository.game_award"
-            - "@sylius.repository.product"
-        public: true
+            $topicFactory: "@app.factory.topic"

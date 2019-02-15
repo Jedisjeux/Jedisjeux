@@ -26,7 +26,7 @@ class ProductBoxExampleFactory extends AbstractExampleFactory implements Example
     /**
      * @var FactoryInterface
      */
-    private $postFactory;
+    private $productBoxFactory;
 
     /**
      * @var FactoryInterface
@@ -51,16 +51,16 @@ class ProductBoxExampleFactory extends AbstractExampleFactory implements Example
     /**
      * PostExampleFactory constructor.
      *
-     * @param FactoryInterface    $postFactory
+     * @param FactoryInterface    $productBoxFactory
      * @param FactoryInterface    $productBoxImageFactory
      * @param RepositoryInterface $productVariantRepository
      */
     public function __construct(
-        FactoryInterface $postFactory,
+        FactoryInterface $productBoxFactory,
         FactoryInterface $productBoxImageFactory,
         RepositoryInterface $productVariantRepository
     ) {
-        $this->postFactory = $postFactory;
+        $this->productBoxFactory = $productBoxFactory;
         $this->productVariantRepository = $productVariantRepository;
         $this->productBoxImageFactory = $productBoxImageFactory;
 
@@ -108,7 +108,7 @@ class ProductBoxExampleFactory extends AbstractExampleFactory implements Example
         $options = $this->optionsResolver->resolve($options);
 
         /** @var ProductBox $productBox */
-        $productBox = $this->postFactory->createNew();
+        $productBox = $this->productBoxFactory->createNew();
         $productBox->setRealHeight($options['real_height']);
         $productBox->setHeight($options['height']);
         $productBox->setStatus($options['status']);
