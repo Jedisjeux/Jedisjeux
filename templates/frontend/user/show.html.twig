@@ -2,9 +2,9 @@
 
 {% import 'macro/avatar.html.twig' as avatars %}
 
-{% block headline %}
+{% set pageTitle %}
     {{ 'sylius.ui.user_details'|trans }}
-{% endblock %}
+{% endset %}
 
 {% block breadcrumb_content %}
     {{ parent() }}
