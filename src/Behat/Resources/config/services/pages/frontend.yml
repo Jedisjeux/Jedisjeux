@@ -9,6 +9,7 @@ imports:
     - { resource: frontend/product.yml }
     - { resource: frontend/product_review.yml }
     - { resource: frontend/topic.yml }
+    - { resource: frontend/user.yml }
     - { resource: frontend/year_award.yml }
 
 services:

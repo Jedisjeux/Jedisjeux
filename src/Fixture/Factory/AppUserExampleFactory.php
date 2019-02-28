@@ -99,7 +99,8 @@ class AppUserExampleFactory extends AbstractExampleFactory implements ExampleFac
             $user->addRole($role);
         }
 
-        $user->setCustomer($customer);
+        $customer->setUser($user);
+        // $user->setCustomer($customer);
 
         return $user;
     }
