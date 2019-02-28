@@ -11,6 +11,7 @@
 
 namespace App\Behat\Context\Transform;
 
+use App\Behat\Service\SharedStorageInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -32,15 +33,25 @@ final class CustomerContext implements Context
     private $customerFactory;
 
     /**
+     * @var SharedStorageInterface
+     */
+    private $sharedStorage;
+
+    /**
      * PersonContext constructor.
      *
-     * @param RepositoryInterface $customerRepository
-     * @param FactoryInterface    $customerFactory
+     * @param RepositoryInterface    $customerRepository
+     * @param FactoryInterface       $customerFactory
+     * @param SharedStorageInterface $sharedStorage
      */
-    public function __construct(RepositoryInterface $customerRepository, FactoryInterface $customerFactory)
-    {
+    public function __construct(
+        RepositoryInterface $customerRepository,
+        FactoryInterface $customerFactory,
+        SharedStorageInterface $sharedStorage
+    ) {
         $this->customerRepository = $customerRepository;
         $this->customerFactory = $customerFactory;
+        $this->sharedStorage = $sharedStorage;
     }
 
     /**
@@ -65,5 +76,13 @@ final class CustomerContext implements Context
         }
 
         return $customer;
+    }
+
+    /**
+     * @Transform /^(he|his|she|her|their|the customer of my account)$/
+     */
+    public function getLastCustomer()
+    {
+        return $this->sharedStorage->get('customer');
     }
 }

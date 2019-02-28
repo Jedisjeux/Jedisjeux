@@ -1,0 +1,16 @@
+{% extends "frontend/layout.html.twig" %}
+
+{% set pageTitle %}
+    {{ 'app.ui.game_library'|trans }}
+{% endset %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    {{ app.request.get('username') }} /
+    {{ 'app.ui.game_library'|trans }}
+{% endblock %}
+
+{% block content -%}
+    {% include 'frontend/account/games_library/index/_banner.html.twig' %}
+    {% include 'frontend/account/games_library/index/_content.html.twig' %}
+{% endblock %}

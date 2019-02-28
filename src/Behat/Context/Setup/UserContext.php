@@ -71,6 +71,7 @@ final class UserContext implements Context
         $user = $this->userFactory->create(['email' => $email, 'password' => $password, 'enabled' => true]);
 
         $this->sharedStorage->set('user', $user);
+        $this->sharedStorage->set('customer', $user->getCustomer());
 
         $this->userRepository->add($user);
     }
