@@ -1,5 +1,13 @@
 ## Change Log
 
+### v2.2.4 (2019/03/01)
+- [#405](https://github.com/Jedisjeux/Jedisjeux/pull/405) Fix viewing user's details (@loic425)
+- [#404](https://github.com/Jedisjeux/Jedisjeux/pull/404) Fix viewing a user game library (@loic425)
+- [#403](https://github.com/Jedisjeux/Jedisjeux/pull/403) Fix security checker (@loic425)
+- [#402](https://github.com/Jedisjeux/Jedisjeux/pull/402) Autowire fixtures (@loic425)
+- [#401](https://github.com/Jedisjeux/Jedisjeux/pull/401) improve behat contexts autowiring (@loic425)
+- [#400](https://github.com/Jedisjeux/Jedisjeux/pull/400) [Behat] autowire hook contexts (@loic425)
+
 ### v2.2.3 (2019/02/07)
 - [#398](https://github.com/Jedisjeux/Jedisjeux/pull/398) Fix fzaninotto faker uppercase on composer (@loic425)
 - [#397](https://github.com/Jedisjeux/Jedisjeux/pull/397) dotenv on main requirements (@loic425)
