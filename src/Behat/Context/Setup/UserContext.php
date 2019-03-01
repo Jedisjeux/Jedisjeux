@@ -77,6 +77,20 @@ final class UserContext implements Context
     }
 
     /**
+     * @Given there is (also )a user with username :username
+     * @Given there is (also )a user with username :username identified by :password
+     */
+    public function thereIsUserWithUsername(string $username, $password = 'sylius')
+    {
+        $user = $this->userFactory->create(['username' => $username, 'password' => $password, 'enabled' => true]);
+
+        $this->sharedStorage->set('user', $user);
+        $this->sharedStorage->set('customer', $user->getCustomer());
+
+        $this->userRepository->add($user);
+    }
+
+    /**
      * @Given /^there is a (reviewer|translator|publisher) "([^"]*)"$/
      */
     public function thereIsAReviewer($role, $email, $password = 'sylius')
