@@ -17,6 +17,7 @@ use App\Behat\Page\Backend\Dealer\CreatePage;
 use App\Behat\Service\Resolver\CurrentPageResolverInterface;
 use App\Entity\Dealer;
 use Behat\Behat\Context\Context;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -107,6 +108,16 @@ class ManagingDealersContext implements Context
     }
 
     /**
+     * @When I attach the :path image
+     */
+    public function iAttachImage($path)
+    {
+        $currentPage = $this->resolveCurrentPage();
+
+        $currentPage->attachImage($path);
+    }
+
+    /**
      * @When I change its name as :name
      */
     public function iChangeItsNameAs($name)
@@ -192,5 +203,26 @@ class ManagingDealersContext implements Context
     public function thereShouldBeNoAnymore($name)
     {
         Assert::false($this->indexPage->isSingleResourceOnPage(['name' => $name]));
+    }
+
+    /**
+     * @Then the dealer :dealerName should have an image
+     */
+    public function theProductShouldHaveImagesCount(string $dealerName, $imageCount = 1)
+    {
+        $currentPage = $this->resolveCurrentPage();
+
+        Assert::true($currentPage->hasOneImage());
+    }
+
+    /**
+     * @return CreatePage|UpdatePage|SymfonyPageInterface
+     */
+    private function resolveCurrentPage()
+    {
+        return $this->currentPageResolver->getCurrentPageWithForm([
+            $this->createPage,
+            $this->updatePage,
+        ]);
     }
 }
