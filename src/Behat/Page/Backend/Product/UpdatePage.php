@@ -33,11 +33,25 @@ class UpdatePage extends BaseUpdatePage
     }
 
     /**
+     * @return int
+     *
+     * @throws ElementNotFoundException
+     */
+    public function countImages(): int
+    {
+        $images = $this->getElement('images');
+        $items = $images->findAll('css', 'div[data-form-collection="item"]');
+
+        return count($items);
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'images' => '#sylius_product_firstVariant_images',
             'name' => '#sylius_product_translations_en_US_name',
         ]);
     }

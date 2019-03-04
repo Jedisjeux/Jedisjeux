@@ -145,6 +145,16 @@ class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I attach the :path image
+     */
+    public function iAttachImageWithType($path)
+    {
+        $currentPage = $this->resolveCurrentPage();
+
+        $currentPage->attachImage($path);
+    }
+
+    /**
      * @When I change its name as :name
      */
     public function iChangeItsNameAs($name)
@@ -342,5 +352,26 @@ class ManagingProductsContext implements Context
         }
 
         Assert::false($this->indexPage->isOpen());
+    }
+
+    /**
+     * @Then the product "Puerto Rico" should have one single image
+     */
+    public function theProductShouldHaveImagesCount($imageCount = 1)
+    {
+        $currentPage = $this->resolveCurrentPage();
+
+        Assert::eq($currentPage->countImages(), $imageCount);
+    }
+
+    /**
+     * @return CreatePage|UpdatePage
+     */
+    private function resolveCurrentPage()
+    {
+        return $this->currentPageResolver->getCurrentPageWithForm([
+            $this->createPage,
+            $this->updatePage,
+        ]);
     }
 }
