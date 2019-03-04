@@ -203,7 +203,7 @@
 
     {% set image = form.vars.value %}
 
-    {% if image %}
+    {% if image and image.webPath %}
         <div class="ui stackable grid">
         <div class="three wide column">
             {{ images.render(image.webPath, null, null, 'ui thumbnail image') }}

@@ -13,7 +13,9 @@ namespace App\Behat\Page\Backend\Product;
 
 use App\Behat\Page\Backend\Crud\CreatePage as BaseCreatePage;
 use App\Entity\GameAward;
+use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -22,6 +24,8 @@ class CreatePage extends BaseCreatePage
 {
     /**
      * @param string $name
+     *
+     * @throws ElementNotFoundException
      */
     public function specifyName($name)
     {
@@ -30,10 +34,30 @@ class CreatePage extends BaseCreatePage
 
     /**
      * @param string $slug
+     *
+     * @throws ElementNotFoundException
      */
     public function specifySlug($slug)
     {
         $this->getElement('slug')->setValue($slug);
+    }
+
+    /**
+     * @param string $path
+     *
+     * @throws ElementNotFoundException
+     */
+    public function attachImage(string $path): void
+    {
+        $this->clickTabIfItsNotActive('media');
+
+        $filesPath = $this->getParameter('files_path');
+
+        $this->getDocument()->clickLink('Add');
+
+        $imageForm = $this->getLastImageElement();
+
+        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath . $path);
     }
 
     /**
@@ -92,6 +116,7 @@ class CreatePage extends BaseCreatePage
         return array_merge(parent::getDefinedElements(), [
             'award_name' => '#sylius_product_yearAwards_0_award',
             'award_year' => '#sylius_product_yearAwards_0_year',
+            'images' => '#sylius_product_firstVariant_images',
             'name' => '#sylius_product_translations_en_US_name',
             'min_player_count' => '#sylius_product_minPlayerCount',
             'max_player_count' => '#sylius_product_maxPlayerCount',
@@ -104,6 +129,8 @@ class CreatePage extends BaseCreatePage
 
     /**
      * @param string $tabName
+     *
+     * @throws ElementNotFoundException
      */
     private function clickTabIfItsNotActive($tabName)
     {
@@ -111,5 +138,20 @@ class CreatePage extends BaseCreatePage
         if (!$attributesTab->hasClass('active')) {
             $attributesTab->click();
         }
+    }
+
+    /**
+     * @return NodeElement
+     *
+     * @throws ElementNotFoundException
+     */
+    private function getLastImageElement(): NodeElement
+    {
+        $images = $this->getElement('images');
+        $items = $images->findAll('css', 'div[data-form-collection="item"]');
+
+        Assert::notEmpty($items);
+
+        return end($items);
     }
 }

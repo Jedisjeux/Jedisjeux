@@ -12,6 +12,7 @@ default:
             screenshot: true
 
         Behat\MinkExtension:
+            files_path: "%paths.base%/tests/Resources/fixtures/"
             base_url: "http://localhost:8080/"
             default_session: symfony
             javascript_session: chrome
