@@ -33,10 +33,10 @@ class DealerType extends AbstractType
 
         $builder
             ->add('code', TextType::class, [
-                'label' => 'label.code',
+                'label' => 'sylius.ui.code',
             ])
             ->add('name', TextType::class, [
-                'label' => 'label.name',
+                'label' => 'sylius.ui.name',
             ])
             ->add('image', DealerImageType::class, [
                 'label' => false,

@@ -147,7 +147,7 @@ class ManagingProductsContext implements Context
     /**
      * @When I attach the :path image
      */
-    public function iAttachImageWithType($path)
+    public function iAttachImage($path)
     {
         $currentPage = $this->resolveCurrentPage();
 
@@ -355,9 +355,9 @@ class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then the product "Puerto Rico" should have one single image
+     * @Then the product :productName should have one single image
      */
-    public function theProductShouldHaveImagesCount($imageCount = 1)
+    public function theProductShouldHaveImagesCount(string $productName, $imageCount = 1)
     {
         $currentPage = $this->resolveCurrentPage();
 

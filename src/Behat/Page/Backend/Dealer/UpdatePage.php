@@ -12,6 +12,7 @@
 namespace App\Behat\Page\Backend\Dealer;
 
 use App\Behat\Page\Backend\Crud\UpdatePage as BaseUpdatePage;
+use Behat\Mink\Exception\ElementNotFoundException;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -20,10 +21,25 @@ class UpdatePage extends BaseUpdatePage
 {
     /**
      * @param string $name
+     *
+     * @throws ElementNotFoundException
      */
     public function changeName($name)
     {
         $this->getElement('name')->setValue($name);
+    }
+
+    /**
+     * @return bool
+     *
+     * @throws ElementNotFoundException
+     */
+    public function hasOneImage(): bool
+    {
+        $image = $this->getElement('image');
+        $item = $image->find('css', 'img');
+
+        return null !== $item;
     }
 
     /**
@@ -32,6 +48,7 @@ class UpdatePage extends BaseUpdatePage
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'image' => '#app_dealer_image',
             'name' => '#app_dealer_name',
         ]);
     }
