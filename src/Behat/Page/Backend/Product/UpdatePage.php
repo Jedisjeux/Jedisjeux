@@ -15,6 +15,7 @@ use App\Behat\Behaviour\WorkflowActions;
 use App\Behat\Page\Backend\Crud\UpdatePage as BaseUpdatePage;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -73,6 +74,19 @@ class UpdatePage extends BaseUpdatePage
             'images' => '#sylius_product_firstVariant_images',
             'name' => '#sylius_product_translations_en_US_name',
         ]);
+    }
+
+    /**
+     * @param string $tabName
+     *
+     * @throws ElementNotFoundException
+     */
+    private function clickTabIfItsNotActive($tabName)
+    {
+        $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);
+        if (!$attributesTab->hasClass('active')) {
+            $attributesTab->click();
+        }
     }
 
     /**
