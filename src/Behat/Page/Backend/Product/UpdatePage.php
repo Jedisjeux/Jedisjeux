@@ -11,6 +11,7 @@
 
 namespace App\Behat\Page\Backend\Product;
 
+use App\Behat\Behaviour\NamesIt;
 use App\Behat\Behaviour\WorkflowActions;
 use App\Behat\Page\Backend\Crud\UpdatePage as BaseUpdatePage;
 use Behat\Mink\Element\NodeElement;
@@ -22,17 +23,8 @@ use Webmozart\Assert\Assert;
  */
 class UpdatePage extends BaseUpdatePage
 {
-    use WorkflowActions;
-
-    /**
-     * @param string $name
-     *
-     * @throws ElementNotFoundException
-     */
-    public function changeName($name)
-    {
-        $this->getElement('name')->setValue($name);
-    }
+    use NamesIt,
+        WorkflowActions;
 
     /**
      * @param string $path
@@ -72,7 +64,6 @@ class UpdatePage extends BaseUpdatePage
     {
         return array_merge(parent::getDefinedElements(), [
             'images' => '#sylius_product_firstVariant_images',
-            'name' => '#sylius_product_translations_en_US_name',
         ]);
     }
 

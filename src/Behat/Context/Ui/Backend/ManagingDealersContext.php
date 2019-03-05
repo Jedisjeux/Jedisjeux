@@ -104,7 +104,7 @@ class ManagingDealersContext implements Context
      */
     public function iSpecifyItsNameAs($name = null)
     {
-        $this->createPage->specifyName($name);
+        $this->createPage->nameIt($name);
     }
 
     /**
@@ -122,7 +122,7 @@ class ManagingDealersContext implements Context
      */
     public function iChangeItsNameAs($name)
     {
-        $this->updatePage->changeName($name);
+        $this->updatePage->nameIt($name);
     }
 
     /**

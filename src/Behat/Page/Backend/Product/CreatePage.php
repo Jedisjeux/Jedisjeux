@@ -11,6 +11,7 @@
 
 namespace App\Behat\Page\Backend\Product;
 
+use App\Behat\Behaviour\NamesIt;
 use App\Behat\Page\Backend\Crud\CreatePage as BaseCreatePage;
 use App\Entity\GameAward;
 use Behat\Mink\Element\NodeElement;
@@ -22,15 +23,7 @@ use Webmozart\Assert\Assert;
  */
 class CreatePage extends BaseCreatePage
 {
-    /**
-     * @param string $name
-     *
-     * @throws ElementNotFoundException
-     */
-    public function specifyName($name)
-    {
-        $this->getElement('name')->setValue($name);
-    }
+    use NamesIt;
 
     /**
      * @param string $slug
