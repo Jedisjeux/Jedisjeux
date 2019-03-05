@@ -56,7 +56,7 @@ class ManagingFestivalListsContext implements Context
      */
     public function iSpecifyItsNameAs($name = null)
     {
-        $this->createPage->specifyName($name);
+        $this->createPage->nameIt($name);
     }
 
     /**

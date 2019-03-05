@@ -76,7 +76,7 @@ class ManagingProductListsContext implements Context
      */
     public function iChangeItsTitleAs($name)
     {
-        $this->updatePage->changeName($name);
+        $this->updatePage->nameIt($name);
     }
 
     /**

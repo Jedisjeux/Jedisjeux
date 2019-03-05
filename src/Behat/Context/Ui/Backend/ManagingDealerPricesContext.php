@@ -78,7 +78,7 @@ class ManagingDealerPricesContext implements Context
      */
     public function iChangeItsNameAs($name)
     {
-        $this->updatePage->changeName($name);
+        $this->updatePage->nameIt($name);
     }
 
     /**

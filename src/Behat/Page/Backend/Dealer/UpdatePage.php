@@ -11,6 +11,7 @@
 
 namespace App\Behat\Page\Backend\Dealer;
 
+use App\Behat\Behaviour\NamesIt;
 use App\Behat\Page\Backend\Crud\UpdatePage as BaseUpdatePage;
 use Behat\Mink\Exception\ElementNotFoundException;
 
@@ -19,15 +20,7 @@ use Behat\Mink\Exception\ElementNotFoundException;
  */
 class UpdatePage extends BaseUpdatePage
 {
-    /**
-     * @param string $name
-     *
-     * @throws ElementNotFoundException
-     */
-    public function changeName($name)
-    {
-        $this->getElement('name')->setValue($name);
-    }
+    use NamesIt;
 
     /**
      * @param string $path
@@ -63,7 +56,6 @@ class UpdatePage extends BaseUpdatePage
     {
         return array_merge(parent::getDefinedElements(), [
             'image' => '#app_dealer_image',
-            'name' => '#app_dealer_name',
         ]);
     }
 }

@@ -11,6 +11,8 @@
 
 namespace App\Behat\Page\Backend\Dealer;
 
+use App\Behat\Behaviour\NamesIt;
+use App\Behat\Behaviour\SpecifiesItsCode;
 use App\Behat\Page\Backend\Crud\CreatePage as BaseCreatePage;
 use Behat\Mink\Exception\ElementNotFoundException;
 
@@ -19,25 +21,8 @@ use Behat\Mink\Exception\ElementNotFoundException;
  */
 class CreatePage extends BaseCreatePage
 {
-    /**
-     * @param string $code
-     *
-     * @throws ElementNotFoundException
-     */
-    public function specifyCode($code)
-    {
-        $this->getElement('code')->setValue($code);
-    }
-
-    /**
-     * @param string $name
-     *
-     * @throws ElementNotFoundException
-     */
-    public function specifyName($name)
-    {
-        $this->getElement('name')->setValue($name);
-    }
+    use SpecifiesItsCode,
+        NamesIt;
 
     /**
      * @param string $path
@@ -59,9 +44,7 @@ class CreatePage extends BaseCreatePage
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'code' => '#app_dealer_code',
             'image' => '#app_dealer_image',
-            'name' => '#app_dealer_name',
         ]);
     }
 }

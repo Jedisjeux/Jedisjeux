@@ -11,6 +11,7 @@
 
 namespace App\Behat\Page\Backend\FestivalList;
 
+use App\Behat\Behaviour\NamesIt;
 use App\Behat\Page\Backend\Crud\CreatePage as BaseCreatePage;
 
 /**
@@ -18,13 +19,7 @@ use App\Behat\Page\Backend\Crud\CreatePage as BaseCreatePage;
  */
 class CreatePage extends BaseCreatePage
 {
-    /**
-     * @param string $firstName
-     */
-    public function specifyName($firstName)
-    {
-        $this->getElement('name')->setValue($firstName);
-    }
+    use NamesIt;
 
     /**
      * @param string $description
@@ -56,7 +51,6 @@ class CreatePage extends BaseCreatePage
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'name' => '#app_festival_list_name',
             'description' => '#app_festival_list_description',
             'start_at' => '#app_festival_list_start_at',
             'end_at' => '#app_festival_list_end_at',
