@@ -45,6 +45,7 @@ class CreatePage extends BaseCreatePage
     {
         return array_merge(parent::getDefinedElements(), [
             'image' => '#app_dealer_image',
+            'name' => '#app_dealer_name',
         ]);
     }
 }
