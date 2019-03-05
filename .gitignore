@@ -42,6 +42,7 @@ log/
 !/public/uploads/avatar/.gitkeep
 !/public/uploads/img/.gitkeep
 /public/media/*
+/public/jedisjeux.xml
 /var/
 /vendor/
 ###< symfony/framework-bundle ###

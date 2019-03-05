@@ -13,7 +13,9 @@ namespace App\Behat\Page\Backend\Product;
 
 use App\Behat\Behaviour\WorkflowActions;
 use App\Behat\Page\Backend\Crud\UpdatePage as BaseUpdatePage;
+use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -30,6 +32,24 @@ class UpdatePage extends BaseUpdatePage
     public function changeName($name)
     {
         $this->getElement('name')->setValue($name);
+    }
+
+    /**
+     * @param string $path
+     *
+     * @throws ElementNotFoundException
+     */
+    public function attachImage(string $path): void
+    {
+        $this->clickTabIfItsNotActive('media');
+
+        $filesPath = $this->getParameter('files_path');
+
+        $this->getDocument()->clickLink('Add');
+
+        $imageForm = $this->getLastImageElement();
+
+        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath . $path);
     }
 
     /**
@@ -54,5 +74,33 @@ class UpdatePage extends BaseUpdatePage
             'images' => '#sylius_product_firstVariant_images',
             'name' => '#sylius_product_translations_en_US_name',
         ]);
+    }
+
+    /**
+     * @param string $tabName
+     *
+     * @throws ElementNotFoundException
+     */
+    private function clickTabIfItsNotActive($tabName)
+    {
+        $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);
+        if (!$attributesTab->hasClass('active')) {
+            $attributesTab->click();
+        }
+    }
+
+    /**
+     * @return NodeElement
+     *
+     * @throws ElementNotFoundException
+     */
+    private function getLastImageElement(): NodeElement
+    {
+        $images = $this->getElement('images');
+        $items = $images->findAll('css', 'div[data-form-collection="item"]');
+
+        Assert::notEmpty($items);
+
+        return end($items);
     }
 }

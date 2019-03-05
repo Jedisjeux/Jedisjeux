@@ -14,6 +14,7 @@ namespace App\Behat\Context\Ui\Backend;
 use App\Behat\Page\Backend\Article\IndexPage;
 use App\Behat\Page\Backend\Article\UpdatePage;
 use App\Behat\Page\Backend\Article\CreatePage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use App\Behat\Service\Resolver\CurrentPageResolverInterface;
 use App\Entity\Article;
@@ -96,6 +97,16 @@ class ManagingArticlesContext implements Context
     public function iSpecifyItsTitleAs($title = null)
     {
         $this->createPage->specifyTitle($title);
+    }
+
+    /**
+     * @When I attach the :path image
+     */
+    public function iAttachImage($path)
+    {
+        $currentPage = $this->resolveCurrentPage();
+
+        $currentPage->attachImage($path);
     }
 
     /**
@@ -234,5 +245,24 @@ class ManagingArticlesContext implements Context
         $status = ucfirst($status);
 
         Assert::true($this->indexPage->isSingleResourceOnPage(['title' => $title, 'status' => $status]));
+    }
+
+    /**
+     * @Then the article :title should have a main image
+     */
+    public function theArticleShouldHaveAMainImage()
+    {
+        Assert::true($this->updatePage->hasMainImage());
+    }
+
+    /**
+     * @return CreatePage|UpdatePage
+     */
+    private function resolveCurrentPage(): SymfonyPageInterface
+    {
+        return $this->currentPageResolver->getCurrentPageWithForm([
+            $this->createPage,
+            $this->updatePage,
+        ]);
     }
 }

@@ -246,6 +246,7 @@
 
     {% set image = form.vars.value %}
 
+    <div id="app_article_mainImage">
     {% if image and image.webPath %}
         <div class="ui stackable grid">
         <div class="three wide column">
@@ -258,6 +259,7 @@
         </div>
         </div>
     {% endif %}
+    </div>
 {% endblock %}
 
 {% block app_product_box_image_widget %}

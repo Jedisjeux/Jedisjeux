@@ -30,11 +30,39 @@ class UpdatePage extends BaseUpdatePage
     }
 
     /**
+     * @param string $path
+     *
+     * @throws ElementNotFoundException
+     */
+    public function attachImage(string $path): void
+    {
+        $filesPath = $this->getParameter('files_path');
+
+        $imageForm = $this->getElement('image');
+
+        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
+    }
+
+    /**
+     * @return bool
+     *
+     * @throws ElementNotFoundException
+     */
+    public function hasMainImage(): bool
+    {
+        $image = $this->getElement('image');
+        $item = $image->find('css', 'img');
+
+        return null !== $item;
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'image' => '#app_article_mainImage',
             'title' => '#app_article_title',
         ]);
     }

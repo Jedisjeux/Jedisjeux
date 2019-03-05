@@ -208,17 +208,15 @@ class ManagingDealersContext implements Context
     /**
      * @Then the dealer :dealerName should have an image
      */
-    public function theProductShouldHaveImagesCount(string $dealerName, $imageCount = 1)
+    public function theDealerShouldHaveAnImage()
     {
-        $currentPage = $this->resolveCurrentPage();
-
-        Assert::true($currentPage->hasOneImage());
+        Assert::true($this->updatePage->hasOneImage());
     }
 
     /**
-     * @return CreatePage|UpdatePage|SymfonyPageInterface
+     * @return CreatePage|UpdatePage
      */
-    private function resolveCurrentPage()
+    private function resolveCurrentPage(): SymfonyPageInterface
     {
         return $this->currentPageResolver->getCurrentPageWithForm([
             $this->createPage,

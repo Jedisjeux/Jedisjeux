@@ -16,6 +16,7 @@ use App\Behat\Page\Backend\Product\IndexPage;
 use App\Behat\Page\Backend\Product\UpdatePage;
 use App\Behat\Page\Backend\Product\CreatePage;
 use App\Entity\GameAward;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use App\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Behat\Behat\Context\Context;
@@ -359,15 +360,13 @@ class ManagingProductsContext implements Context
      */
     public function theProductShouldHaveImagesCount(string $productName, $imageCount = 1)
     {
-        $currentPage = $this->resolveCurrentPage();
-
-        Assert::eq($currentPage->countImages(), $imageCount);
+        Assert::eq($this->updatePage->countImages(), $imageCount);
     }
 
     /**
      * @return CreatePage|UpdatePage
      */
-    private function resolveCurrentPage()
+    private function resolveCurrentPage(): SymfonyPageInterface
     {
         return $this->currentPageResolver->getCurrentPageWithForm([
             $this->createPage,
