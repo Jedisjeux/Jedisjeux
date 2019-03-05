@@ -9,7 +9,7 @@ Feature: Adding a new article
         Given I am a logged in administrator
         And I want to create a new article
         When I specify his title as "Le Jedisjeux nouveau est arrivé"
-        When I add it
+        And I add it
         Then I should be notified that it has been successfully created
         And the article "Le Jedisjeux nouveau est arrivé" should appear in the website
 

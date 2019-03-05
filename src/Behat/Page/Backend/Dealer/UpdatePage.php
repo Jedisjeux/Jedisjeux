@@ -30,6 +30,20 @@ class UpdatePage extends BaseUpdatePage
     }
 
     /**
+     * @param string $path
+     *
+     * @throws ElementNotFoundException
+     */
+    public function attachImage(string $path): void
+    {
+        $filesPath = $this->getParameter('files_path');
+
+        $imageForm = $this->getElement('image');
+
+        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
+    }
+
+    /**
      * @return bool
      *
      * @throws ElementNotFoundException
