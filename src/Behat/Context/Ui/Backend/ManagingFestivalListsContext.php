@@ -65,7 +65,7 @@ class ManagingFestivalListsContext implements Context
      */
     public function iSpecifyItsDescriptionAs($description = null)
     {
-        $this->createPage->specifyDescription($description);
+        $this->createPage->describeItAs($description);
     }
 
     /**
