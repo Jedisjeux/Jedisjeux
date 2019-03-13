@@ -20,8 +20,3 @@ services:
     App\Behat\Context\Setup\SecurityContext:
         arguments:
             $securityService: '@app.behat.admin_security'
-            $userRepository: '@sylius.repository.app_user'
-
-    App\Behat\Context\Setup\UserContext:
-        arguments:
-            $userRepository: '@sylius.repository.app_user'

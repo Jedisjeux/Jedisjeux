@@ -16,11 +16,3 @@ services:
         resource: '../../../../Context/Ui/*'
         autowire: true
         public: true
-
-    App\Behat\Context\Ui\Backend\ManagingGamePlaysContext:
-        arguments:
-            $gamePlayRepository: '@app.repository.game_play'
-
-    App\Behat\Context\Ui\NotificationContext:
-        arguments:
-            - '@app.repository.notification'

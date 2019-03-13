@@ -35,29 +35,29 @@ final class SecurityContext implements Context
     /**
      * @var AppUserExampleFactory
      */
-    private $userFactory;
+    private $appUserFactory;
 
     /**
      * @var UserRepositoryInterface
      */
-    private $userRepository;
+    private $appUserRepository;
 
     /**
      * @param SharedStorageInterface   $sharedStorage
      * @param SecurityServiceInterface $securityService
-     * @param AppUserExampleFactory    $userFactory
-     * @param UserRepositoryInterface  $userRepository
+     * @param AppUserExampleFactory    $appUserFactory
+     * @param UserRepositoryInterface  $appUserRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         SecurityServiceInterface $securityService,
-        AppUserExampleFactory $userFactory,
-        UserRepositoryInterface $userRepository
+        AppUserExampleFactory $appUserFactory,
+        UserRepositoryInterface $appUserRepository
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->securityService = $securityService;
-        $this->userFactory = $userFactory;
-        $this->userRepository = $userRepository;
+        $this->appUserFactory = $appUserFactory;
+        $this->appUserRepository = $appUserRepository;
     }
 
     /**
@@ -65,7 +65,7 @@ final class SecurityContext implements Context
      */
     public function iAmLoggedInAs($email)
     {
-        $user = $this->userRepository->findOneByEmail($email);
+        $user = $this->appUserRepository->findOneByEmail($email);
         Assert::notNull($user);
 
         $this->securityService->logIn($user);
@@ -77,8 +77,8 @@ final class SecurityContext implements Context
     public function iAmLoggedInAsACustomer()
     {
         /** @var User $user */
-        $user = $this->userFactory->create(['email' => 'customer@example.com', 'password' => 'password', 'roles' => ['ROLE_USER']]);
-        $this->userRepository->add($user);
+        $user = $this->appUserFactory->create(['email' => 'customer@example.com', 'password' => 'password', 'roles' => ['ROLE_USER']]);
+        $this->appUserRepository->add($user);
 
         $this->securityService->logIn($user);
 
@@ -91,8 +91,8 @@ final class SecurityContext implements Context
     public function iAmLoggedInAsAnAdministrator()
     {
         /** @var UserInterface $user */
-        $user = $this->userFactory->create(['email' => 'admin@example.com', 'password' => 'admin', 'roles' => ['ROLE_ADMIN']]);
-        $this->userRepository->add($user);
+        $user = $this->appUserFactory->create(['email' => 'admin@example.com', 'password' => 'admin', 'roles' => ['ROLE_ADMIN']]);
+        $this->appUserRepository->add($user);
 
         $this->securityService->logIn($user);
 
@@ -105,7 +105,7 @@ final class SecurityContext implements Context
      */
     public function iAmLoggedInAsAdministrator($email)
     {
-        $user = $this->userRepository->findOneByEmail($email);
+        $user = $this->appUserRepository->findOneByEmail($email);
         Assert::notNull($user);
 
         $this->securityService->logIn($user);
@@ -120,8 +120,8 @@ final class SecurityContext implements Context
     public function iAmLoggedInAsARedactor()
     {
         /** @var User $user */
-        $user = $this->userFactory->create(['email' => 'redactor@example.com', 'password' => 'password123', 'roles' => ['ROLE_REDACTOR']]);
-        $this->userRepository->add($user);
+        $user = $this->appUserFactory->create(['email' => 'redactor@example.com', 'password' => 'password123', 'roles' => ['ROLE_REDACTOR']]);
+        $this->appUserRepository->add($user);
 
         $this->securityService->logIn($user);
 
@@ -135,8 +135,8 @@ final class SecurityContext implements Context
     public function iAmLoggedInAsAReviewer()
     {
         /** @var User $user */
-        $user = $this->userFactory->create(['email' => 'reviewer@example.com', 'password' => 'password123', 'roles' => ['ROLE_REVIEWER']]);
-        $this->userRepository->add($user);
+        $user = $this->appUserFactory->create(['email' => 'reviewer@example.com', 'password' => 'password123', 'roles' => ['ROLE_REVIEWER']]);
+        $this->appUserRepository->add($user);
 
         $this->securityService->logIn($user);
 
@@ -150,8 +150,8 @@ final class SecurityContext implements Context
     public function iAmLoggedInAsAPublisher()
     {
         /** @var User $user */
-        $user = $this->userFactory->create(['email' => 'publisher@example.com', 'password' => 'password123', 'roles' => ['ROLE_PUBLISHER']]);
-        $this->userRepository->add($user);
+        $user = $this->appUserFactory->create(['email' => 'publisher@example.com', 'password' => 'password123', 'roles' => ['ROLE_PUBLISHER']]);
+        $this->appUserRepository->add($user);
 
         $this->securityService->logIn($user);
 
@@ -165,8 +165,8 @@ final class SecurityContext implements Context
     public function iAmLoggedInAsAStaffUser()
     {
         /** @var UserInterface $user */
-        $user = $this->userFactory->create(['email' => 'staff-user@example.com', 'password' => 'password123', 'roles' => ['ROLE_STAFF']]);
-        $this->userRepository->add($user);
+        $user = $this->appUserFactory->create(['email' => 'staff-user@example.com', 'password' => 'password123', 'roles' => ['ROLE_STAFF']]);
+        $this->appUserRepository->add($user);
 
         $this->securityService->logIn($user);
 
@@ -180,8 +180,8 @@ final class SecurityContext implements Context
     public function iAmLoggedInAsAProductManager()
     {
         /** @var UserInterface $user */
-        $user = $this->userFactory->create(['email' => 'product-manager@example.com', 'password' => 'password123', 'roles' => ['ROLE_PRODUCT_MANAGER']]);
-        $this->userRepository->add($user);
+        $user = $this->appUserFactory->create(['email' => 'product-manager@example.com', 'password' => 'password123', 'roles' => ['ROLE_PRODUCT_MANAGER']]);
+        $this->appUserRepository->add($user);
 
         $this->securityService->logIn($user);
 
@@ -195,8 +195,8 @@ final class SecurityContext implements Context
     public function iAmLoggedInAsAnArticleManager()
     {
         /** @var UserInterface $user */
-        $user = $this->userFactory->create(['email' => 'article-manager@example.com', 'password' => 'password123', 'roles' => ['ROLE_ARTICLE_MANAGER']]);
-        $this->userRepository->add($user);
+        $user = $this->appUserFactory->create(['email' => 'article-manager@example.com', 'password' => 'password123', 'roles' => ['ROLE_ARTICLE_MANAGER']]);
+        $this->appUserRepository->add($user);
 
         $this->securityService->logIn($user);
 

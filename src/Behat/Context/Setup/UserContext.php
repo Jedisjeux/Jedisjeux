@@ -31,34 +31,34 @@ final class UserContext implements Context
     /**
      * @var UserRepositoryInterface
      */
-    private $userRepository;
+    private $appUserRepository;
 
     /**
      * @var AppUserExampleFactory
      */
-    private $userFactory;
+    private $appUserFactory;
 
     /**
      * @var ObjectManager
      */
-    private $userManager;
+    private $appUserManager;
 
     /**
      * @param SharedStorageInterface  $sharedStorage
-     * @param UserRepositoryInterface $userRepository
-     * @param AppUserExampleFactory   $userFactory
-     * @param ObjectManager           $userManager
+     * @param UserRepositoryInterface $appUserRepository
+     * @param AppUserExampleFactory   $appUserFactory
+     * @param ObjectManager           $appUserManager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        UserRepositoryInterface $userRepository,
-        AppUserExampleFactory $userFactory,
-        ObjectManager $userManager
+        UserRepositoryInterface $appUserRepository,
+        AppUserExampleFactory $appUserFactory,
+        ObjectManager $appUserManager
     ) {
         $this->sharedStorage = $sharedStorage;
-        $this->userRepository = $userRepository;
-        $this->userFactory = $userFactory;
-        $this->userManager = $userManager;
+        $this->appUserRepository = $appUserRepository;
+        $this->appUserFactory = $appUserFactory;
+        $this->appUserManager = $appUserManager;
     }
 
     /**
@@ -68,12 +68,12 @@ final class UserContext implements Context
      */
     public function thereIsUserIdentifiedBy($email, $password = 'sylius')
     {
-        $user = $this->userFactory->create(['email' => $email, 'password' => $password, 'enabled' => true]);
+        $user = $this->appUserFactory->create(['email' => $email, 'password' => $password, 'enabled' => true]);
 
         $this->sharedStorage->set('user', $user);
         $this->sharedStorage->set('customer', $user->getCustomer());
 
-        $this->userRepository->add($user);
+        $this->appUserRepository->add($user);
     }
 
     /**
@@ -82,12 +82,12 @@ final class UserContext implements Context
      */
     public function thereIsUserWithUsername(string $username, $password = 'sylius')
     {
-        $user = $this->userFactory->create(['username' => $username, 'password' => $password, 'enabled' => true]);
+        $user = $this->appUserFactory->create(['username' => $username, 'password' => $password, 'enabled' => true]);
 
         $this->sharedStorage->set('user', $user);
         $this->sharedStorage->set('customer', $user->getCustomer());
 
-        $this->userRepository->add($user);
+        $this->appUserRepository->add($user);
     }
 
     /**
@@ -96,7 +96,7 @@ final class UserContext implements Context
     public function thereIsAReviewer($role, $email, $password = 'sylius')
     {
         /** @var UserInterface $user */
-        $user = $this->userFactory->create([
+        $user = $this->appUserFactory->create([
             'email' => $email,
             'password' => $password,
             'enabled' => true,
@@ -112,7 +112,7 @@ final class UserContext implements Context
 
         $this->sharedStorage->set('user', $user);
 
-        $this->userRepository->add($user);
+        $this->appUserRepository->add($user);
     }
 
     /**
@@ -122,11 +122,11 @@ final class UserContext implements Context
     public function accountWasDeleted($email)
     {
         /** @var User $user */
-        $user = $this->userRepository->findOneByEmail($email);
+        $user = $this->appUserRepository->findOneByEmail($email);
 
         $this->sharedStorage->set('customer', $user->getCustomer());
 
-        $this->userRepository->remove($user);
+        $this->appUserRepository->remove($user);
     }
 
     /**
@@ -136,7 +136,7 @@ final class UserContext implements Context
     {
         $user = $this->sharedStorage->get('user');
 
-        $this->userRepository->remove($user);
+        $this->appUserRepository->remove($user);
     }
 
     /**
@@ -147,7 +147,7 @@ final class UserContext implements Context
     {
         $user->setVerifiedAt(null);
 
-        $this->userManager->flush();
+        $this->appUserManager->flush();
     }
 
     /**
@@ -163,7 +163,7 @@ final class UserContext implements Context
      */
     public function aVerificationEmailHasBeenSentTo($email)
     {
-        $user = $this->userRepository->findOneByEmail($email);
+        $user = $this->appUserRepository->findOneByEmail($email);
 
         $this->prepareUserVerification($user);
     }
@@ -175,7 +175,7 @@ final class UserContext implements Context
     {
         $user->setVerifiedAt(new \DateTime());
 
-        $this->userManager->flush();
+        $this->appUserManager->flush();
     }
 
     /**
@@ -196,7 +196,7 @@ final class UserContext implements Context
 
         $user->setEmailVerificationToken($token);
 
-        $this->userManager->flush();
+        $this->appUserManager->flush();
     }
 
     /**
@@ -209,6 +209,6 @@ final class UserContext implements Context
         $user->setPasswordResetToken($token);
         $user->setPasswordRequestedAt(new \DateTime());
 
-        $this->userManager->flush();
+        $this->appUserManager->flush();
     }
 }
