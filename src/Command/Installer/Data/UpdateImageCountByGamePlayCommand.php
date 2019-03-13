@@ -80,7 +80,7 @@ EOT
      */
     protected function getImageCountByGamePlayUpdater(): ImageCountByGamePlayUpdater
     {
-        return $this->getContainer()->get('app.updater.image_count_by_game_play');
+        return $this->getContainer()->get('App\Updater\ImageCountByGamePlayUpdater');
     }
 
     /**

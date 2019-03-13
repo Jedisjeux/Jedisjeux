@@ -85,7 +85,7 @@ EOT
      */
     protected function getProductCountByPersonUpdater()
     {
-        return $this->getContainer()->get('app.updater.product_count_by_person');
+        return $this->getContainer()->get('App\Updater\ProductCountByPersonUpdater');
     }
 
     /**

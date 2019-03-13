@@ -78,7 +78,7 @@ EOT
      */
     protected function getProductCountByTaxonUpdater()
     {
-        return $this->getContainer()->get('app.updater.product_count_by_taxon');
+        return $this->getContainer()->get('App\Updater\ProductCountByTaxonUpdater');
     }
 
     /**

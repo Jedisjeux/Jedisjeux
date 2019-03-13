@@ -8,21 +8,15 @@ services:
 #        class: App\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
-    app.calculator.commented_review_count_by_product:
-        class: App\Calculator\CommentedReviewCountByProductCalculator
+    App\Calculator:
+        namespace: App\Calculator\
+        resource: '../../src/Calculator/*'
+        autowire: true
 
-    app.calculator.topic_count_by_taxon:
-        class: App\Calculator\TopicCountByTaxonCalculator
+    App\Calculator\TopicCountByTaxonCalculator:
         arguments:
             - "@app.repository.topic"
 
-    app.calculator.product_count_by_taxon:
-        class: App\Calculator\ProductCountByTaxonCalculator
+    App\Calculator\ProductCountByTaxonCalculator:
         arguments:
             - "@sylius.repository.product"
-
-    app.calculator.product_count_by_person:
-        class: App\Calculator\ProductCountByPersonCalculator
-
-    app.calculator.review_count_by_product:
-        class: App\Calculator\ReviewCountByProductCalculator

@@ -14,3 +14,5 @@ services:
             - "@security.token_storage"
             - "@security.authorization_checker"
         public: true
+
+    Sylius\Component\Customer\Context\CustomerContextInterface: '@app.context.customer'
