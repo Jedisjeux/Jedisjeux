@@ -49,6 +49,9 @@ services:
         tags:
             - { name: twig.extension }
 
+    Sylius\Component\User\Canonicalizer\CanonicalizerInterface: '@sylius.canonicalizer'
+    Sylius\Component\User\Security\Generator\GeneratorInterface: '@sylius.app_user.token_generator.email_verification'
+
 imports:
     - { resource: services/analytic.yml }
     - { resource: services/block.yml }
