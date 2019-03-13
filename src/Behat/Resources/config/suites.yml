@@ -1,4 +1,6 @@
 imports:
+    - suites/cli/importing_dealer_prices.yml
+
     - suites/ui/account/customer.yml
     - suites/ui/account/email_verification.yml
     - suites/ui/account/login.yml
