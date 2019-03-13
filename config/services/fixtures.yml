@@ -1,12 +1,7 @@
 services:
     _defaults:
         autowire: true
-        tags: [sylius_fixtures.fixture]
-
-    App\Fixture\:
-        resource: '../../src/Fixture/*Fixture.php'
-        autowire: true
-        tags: [sylius_fixtures.fixture]
+        autoconfigure: true
 
     App\Fixture\ArticleFixture:
         arguments:

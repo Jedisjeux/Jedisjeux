@@ -39,7 +39,7 @@
     "simple-bus/symfony-bridge": "^5.1",
     "sylius-labs/association-hydrator": "^1.1",
     "sylius/customer-bundle": "^1.2",
-    "sylius/fixtures-bundle": "^1.2",
+    "sylius/fixtures-bundle": "^1.4",
     "sylius/grid-bundle": "^1.2",
     "sylius/locale-bundle": "^1.2",
     "sylius/mailer-bundle": "^1.2",
