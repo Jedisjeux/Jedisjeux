@@ -3,6 +3,10 @@ services:
         autowire: true
         autoconfigure: true
 
+    App\Fixture\:
+        resource: '../../src/Fixture/*Fixture.php'
+        autoconfigure: true
+
     App\Fixture\ArticleFixture:
         arguments:
             $exampleFactory: '@App\Fixture\Factory\ArticleExampleFactory'
