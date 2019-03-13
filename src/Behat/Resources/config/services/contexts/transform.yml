@@ -16,11 +16,3 @@ services:
         resource: '../../../../Context/Transform/*'
         autowire: true
         public: true
-
-    App\Behat\Context\Transform\ProductContext:
-        arguments:
-            - '@sylius.repository.product'
-
-    App\Behat\Context\Transform\TaxonContext:
-        arguments:
-            - '@sylius.repository.taxon'
