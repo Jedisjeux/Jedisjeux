@@ -1,55 +1,24 @@
-# Learn more about services, parameters and containers at
-# http://symfony.com/doc/current/book/service_container.html
-parameters:
-#    parameter_name: value
-
 services:
-#    service_name:
-#        class: App\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    App\Updater:
+        namespace: App\Updater\
+        resource: '../../src/Updater/*'
+        autowire: true
 
-    app.updater.commented_review_count_by_product:
-        class: App\Updater\CommentedReviewCountByProductUpdater
-        arguments:
-            - "@app.calculator.commented_review_count_by_product"
+    App\Updater\CommentedReviewCountByProductUpdater:
         public: true
+        autowire: true
 
-    app.updater.image_count_by_game_play:
-        class: App\Updater\ImageCountByGamePlayUpdater
-
-    app.updater.topic_count_by_taxon:
-        class: App\Updater\TopicCountByTaxonUpdater
-        arguments:
-            - "@app.calculator.topic_count_by_taxon"
-
-    app.updater.post_count_by_topic:
-        class: App\Updater\PostCountByTopicUpdater
-
-    app.updater.product_count_by_taxon:
-        class: App\Updater\ProductCountByTaxonUpdater
-        arguments:
-            - "@app.calculator.product_count_by_taxon"
-
-    app.updater.product_count_by_person:
-        class: App\Updater\ProductCountByPersonUpdater
-        arguments:
-            - "@app.calculator.product_count_by_person"
-
-    app.updater.review_count_by_product:
-        class: App\Updater\ReviewCountByProductUpdater
-        arguments:
-            - "@app.calculator.review_count_by_product"
+    App\Updater\ReviewCountByProductUpdater:
         public: true
+        autowire: true
 
     app.updater.base_product_association:
         abstract: true
         arguments:
-            - "@sylius.factory.product_association"
+            - '@sylius.factory.product_association'
 
-    app.updater.add_product_association_owner_to_product:
-        class: App\Updater\AddProductAssociationOwnerToProductUpdater
+    App\Updater\AddProductAssociationOwnerToProductUpdater:
         parent: app.updater.base_product_association
 
-    app.updater.add_product_to_associated_products:
-        class: App\Updater\AddProductToAssociatedProductsUpdater
+    App\Updater\AddProductToAssociatedProductsUpdater:
         parent: app.updater.base_product_association

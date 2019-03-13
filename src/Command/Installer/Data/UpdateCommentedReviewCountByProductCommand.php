@@ -77,7 +77,7 @@ EOT
      */
     protected function getReviewCountByProductUpdater()
     {
-        return $this->getContainer()->get('app.updater.commented_review_count_by_product');
+        return $this->getContainer()->get('App\Updater\CommentedReviewCountByProductUpdater');
     }
 
     /**

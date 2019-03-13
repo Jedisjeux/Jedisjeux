@@ -1,123 +1,37 @@
-# Learn more about services, parameters and containers at
-# http://symfony.com/doc/current/book/service_container.html
-parameters:
-#    parameter_name: value
-
 services:
-#    service_name:
-#        class: App\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    _defaults:
+        autowire: true
+        autoconfigure: true
 
-    app.subscriber.create_topic_for_article:
-        class: App\EventSubscriber\CreateTopicForArticleSubscriber
+    App\EventSubscriber:
+        namespace: App\EventSubscriber\
+        resource: '../../src/EventSubscriber/*'
+
+    App\EventSubscriber\CreateTopicForArticleSubscriber:
         arguments:
-            - "@doctrine.orm.entity_manager"
-            - "@app.repository.topic"
-            - "@app.factory.topic"
+            $topicRepository: '@app.repository.topic'
+            $topicFactory: '@app.factory.topic'
         tags:
             - { name: kernel.event_subscriber, priority: -1 }
 
-    app.subscriber.create_topic_for_game_play:
-        class: App\EventSubscriber\CreateTopicForGamePlaySubscriber
+    App\EventSubscriber\CreateTopicForGamePlaySubscriber:
         arguments:
-            - "@doctrine.orm.entity_manager"
-            - "@app.repository.topic"
-            - "@app.factory.topic"
+            $topicRepository: '@app.repository.topic'
+            $topicFactory: '@app.factory.topic'
         tags:
             - { name: kernel.event_subscriber, priority: -1 }
 
-    app.subscriber.add_topic_follower:
-        class: App\EventSubscriber\AddTopicFollowerSubscriber
+    App\EventSubscriber\CreateProductBoxThumbnailSubscriber:
         arguments:
-            - "@app.context.customer"
-        tags:
-            - { name: kernel.event_subscriber }
+            - '@liip_imagine.data.manager'
+            - '@liip_imagine.filter.manager'
+            - '@liip_imagine.cache.manager'
 
-    app.subscriber.update_last_topic_post_created_at:
-        class: App\EventSubscriber\UpdateLastTopicPostCreatedAtSubscriber
-        tags:
-            - { name: kernel.event_subscriber }
-
-    app.subscriber.create_product_box_thumbnail:
-        class: App\EventSubscriber\CreateProductBoxThumbnailSubscriber
+    App\EventSubscriber\CreateTopicNotificationSubscriber:
         arguments:
-            - "@liip_imagine.data.manager"
-            - "@liip_imagine.filter.manager"
-            - "@liip_imagine.cache.manager"
-        tags:
-            - { name: doctrine.event_subscriber }
+            $factory: '@app.factory.notification'
+            $repository: '@app.repository.notification'
 
-    app.subscriber.create_topic_notification:
-        class: App\EventSubscriber\CreateTopicNotificationSubscriber
+    App\EventSubscriber\SendContactEmailSubscriber:
         arguments:
-            - "@app.context.customer"
-            - "@app.factory.notification"
-            - "@app.manager.notification"
-            - "@app.repository.notification"
-            - "@translator.default"
-        tags:
-            - { name: kernel.event_subscriber }
-
-    app.subscriber.send_registration_email:
-        class: App\EventSubscriber\SendRegistrationEmailSubscriber
-        arguments:
-            - "@sylius.email_sender"
-        tags:
-            - { name: kernel.event_subscriber }
-
-    app.subscriber.send_contact_email:
-        class: App\EventSubscriber\SendContactEmailSubscriber
-        arguments:
-            - "@sylius.email_sender"
-            - "%email_contact%"
-        tags:
-            - { name: kernel.event_subscriber }
-
-    app.subscriber.calculate_commented_review_count_by_product:
-        class: App\EventSubscriber\CalculateCommentedReviewCountByProductSubscriber
-        arguments:
-            - "@app.updater.commented_review_count_by_product"
-        tags:
-            - { name: doctrine.event_subscriber }
-
-    app.subscriber.calculate_image_count_by_game_play:
-        class: App\EventSubscriber\CalculateImageCountByGamePlaySubscriber
-        arguments:
-            - "@app.updater.image_count_by_game_play"
-        tags:
-            - { name: doctrine.event_subscriber }
-
-    app.subscriber.calculate_topic_count_by_taxon:
-        class: App\EventSubscriber\CalculateTopicCountByTaxonSubscriber
-        arguments:
-            - "@app.updater.topic_count_by_taxon"
-        tags:
-            - { name: kernel.event_subscriber }
-
-    app.subscriber.calculate_post_count_by_topic:
-        class: App\EventSubscriber\CalculatePostCountByTopicSubscriber
-        arguments:
-            - "@app.updater.post_count_by_topic"
-        tags:
-            - { name: kernel.event_subscriber }
-
-    app.subscriber.calculate_product_count_by_taxon:
-        class: App\EventSubscriber\CalculateProductCountByTaxonSubscriber
-        arguments:
-            - "@app.updater.product_count_by_taxon"
-        tags:
-            - { name: kernel.event_subscriber }
-
-    app.subscriber.calculate_product_count_by_person:
-        class: App\EventSubscriber\CalculateProductCountByPersonSubscriber
-        arguments:
-            - "@app.updater.product_count_by_person"
-        tags:
-            - { name: kernel.event_subscriber }
-
-    app.subscriber.calculate_review_count_by_product:
-        class: App\EventSubscriber\CalculateReviewCountByProductSubscriber
-        arguments:
-            - "@app.updater.review_count_by_product"
-        tags:
-            - { name: kernel.event_subscriber }
+            $contactEmail: '%email_contact%'
