@@ -11,8 +11,16 @@ Feature: Importing dealer prices
         And there is also a product "Meuterer"
 
     @cli
-    Scenario: Import dealer prices in database
+    Scenario: Importing dealer prices in database
         When I run import dealers prices command
         Then the command should finish successfully
-        And this dealer has a product "Schlauer Bauer" priced at "€6.50"
-        And this dealer has also a product "Meuterer" priced at "€6.50"
+        And this dealer should have a product "Schlauer Bauer" priced at "€6.50"
+        And this dealer should also have a product "Meuterer" priced at "€7.50"
+
+    @cli
+    Scenario: Removing prices from a dealer with an inactive subscription
+        Given this dealer sold "Schlauer Bauer" product on "http://www.example.com/puerto-rico" page
+        And this dealer also sold "Meuterer" product on "http://www.example.com/modern-art" page
+        And this dealer has no active subscription
+        When I run import dealers prices command
+        Then this dealer should have no product anymore

@@ -15,6 +15,7 @@ use App\Behat\Service\SharedStorageInterface;
 use App\Entity\Dealer;
 use App\Entity\PriceList;
 use Behat\Behat\Context\Context;
+use Doctrine\Common\Persistence\ObjectManager;
 use FriendsOfBehat\SymfonyExtension\Mink\MinkParameters;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -37,6 +38,11 @@ class PriceListContext implements Context
     private $priceListRepository;
 
     /**
+     * @var ObjectManager
+     */
+    private $priceListManager;
+
+    /**
      * @var MinkParameters
      */
     private $minkParameters;
@@ -45,17 +51,20 @@ class PriceListContext implements Context
      * @param SharedStorageInterface $sharedStorage
      * @param FactoryInterface       $priceListFactory
      * @param RepositoryInterface    $priceListRepository
+     * @param ObjectManager          $priceListManager
      * @param MinkParameters         $minkParameters
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         FactoryInterface $priceListFactory,
         RepositoryInterface $priceListRepository,
+        ObjectManager $priceListManager,
         MinkParameters $minkParameters
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->priceListFactory = $priceListFactory;
         $this->priceListRepository = $priceListRepository;
+        $this->priceListManager = $priceListManager;
         $this->minkParameters = $minkParameters;
     }
 
@@ -68,12 +77,27 @@ class PriceListContext implements Context
 
         /** @var PriceList $priceList */
         $priceList = $this->priceListFactory->createNew();
-        $priceList->setDealer($dealer);
         $priceList->setPath($filesPath.$path);
         $priceList->setActive(true);
+        $dealer->setPriceList($priceList);
 
         $this->priceListRepository->add($priceList);
         $this->sharedStorage->set('price_list', $priceList);
+    }
+
+    /**
+     * @Given /^(this dealer) has no active subscription$/
+     */
+    public function thisDealerHasNoActiveSubscription(Dealer $dealer)
+    {
+        $priceList = $dealer->getPriceList();
+
+        if (null === $priceList) {
+            return;
+        }
+
+        $priceList->setActive(false);
+        $this->priceListManager->flush();
     }
 
     /**

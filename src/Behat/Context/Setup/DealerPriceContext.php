@@ -47,6 +47,7 @@ class DealerPriceContext implements Context
 
     /**
      * @Given the dealer :dealer sold :product product on :url page
+     * @Given /^(this dealer)(?:| also) sold ("([^"]+)" product) on "([^"]+)" page$/
      */
     public function thereIsDealerPriceOnThisPage(Dealer $dealer, ProductInterface $product, $url)
     {
