@@ -11,16 +11,19 @@
 
 namespace App\Behat\Context\Setup;
 
+use App\Behat\Service\SharedStorageInterface;
 use App\Entity\Dealer;
 use App\Fixture\Factory\DealerExampleFactory;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
 class DealerContext implements Context
 {
+    /**
+     * @var SharedStorageInterface
+     */
+    protected $sharedStorage;
+
     /**
      * @var DealerExampleFactory
      */
@@ -32,15 +35,18 @@ class DealerContext implements Context
     private $dealerRepository;
 
     /**
-     * DealerContext constructor.
-     *
-     * @param DealerExampleFactory $dealerFactory
-     * @param RepositoryInterface  $dealerRepository
+     * @param SharedStorageInterface $sharedStorage
+     * @param DealerExampleFactory   $dealerFactory
+     * @param RepositoryInterface    $dealerRepository
      */
-    public function __construct(DealerExampleFactory $dealerFactory, RepositoryInterface $dealerRepository)
-    {
+    public function __construct(
+        SharedStorageInterface $sharedStorage,
+        DealerExampleFactory $dealerFactory,
+        RepositoryInterface $dealerRepository
+    ) {
         $this->dealerFactory = $dealerFactory;
         $this->dealerRepository = $dealerRepository;
+        $this->sharedStorage = $sharedStorage;
     }
 
     /**
@@ -48,7 +54,7 @@ class DealerContext implements Context
      *
      * @param string $name
      */
-    public function thereIsDealer($name)
+    public function thereIsDealer($name): void
     {
         /** @var Dealer $dealer */
         $dealer = $this->dealerFactory->create([
@@ -56,5 +62,6 @@ class DealerContext implements Context
         ]);
 
         $this->dealerRepository->add($dealer);
+        $this->sharedStorage->set('dealer', $dealer);
     }
 }

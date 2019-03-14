@@ -118,9 +118,7 @@ EOT
      */
     protected function getDealers()
     {
-        $queryBuilder = $this->getDealerRepository()->createQueryBuilder('o');
-
-        return $queryBuilder->getQuery()->getResult();
+        return $this->getDealerRepository()->findAll();
     }
 
     /**
