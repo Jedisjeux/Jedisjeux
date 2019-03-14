@@ -1,0 +1,20 @@
+services:
+    _defaults:
+        autoconfigure: true
+        autowire: true
+
+    command_handlers:
+        namespace: App\Command\
+        resource: '../../src/Command/*'
+        autoconfigure: true
+        autowire: true
+
+    App\Command\Installer\Data\LoadGameAwardsCommand:
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@app.factory.game_award'
+            - '@app.repository.game_award'
+
+    App\Command\ImportDealerPricesCommand:
+        arguments:
+            $locale: '%locale%'

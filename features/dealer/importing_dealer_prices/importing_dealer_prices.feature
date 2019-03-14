@@ -24,3 +24,13 @@ Feature: Importing dealer prices
         And this dealer has no active subscription
         When I run import dealers prices command
         Then this dealer should have no product anymore
+
+    @cli @todo
+    Scenario: Removing products out of catalog
+        Given there is also a product "Out Of Catalog"
+        And this dealer sold "Out Of Catalog" product on "http://www.example.com/out-of-catalog" page
+        And this dealer also sold "Meuterer" product on "http://www.example.com/modern-art" page
+        When I run import dealers prices command
+        Then this dealer should have a product "Schlauer Bauer" priced at "€6.50"
+        And this dealer should also have a product "Meuterer" priced at "€7.50"
+        But this dealer should not have a product "Out Of Catalog"

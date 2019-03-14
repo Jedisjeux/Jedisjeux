@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * This file is part of Jedisjeux.
  *
  * (c) Loïc Frémont
@@ -16,31 +16,84 @@ use App\Entity\Dealer;
 use App\Entity\DealerPrice;
 use App\Repository\ProductRepository;
 use Behat\Transliterator\Transliterator;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityRepository;
-use Sylius\Component\Resource\Factory\Factory;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
-class ImportDealerPricesCommand extends ContainerAwareCommand
+class ImportDealerPricesCommand extends Command
 {
-    const BATCH_SIZE = 1;
+    private const BATCH_SIZE = 1;
+
+    /**
+     * @var FactoryInterface
+     */
+    private $dealerPriceFactory;
+
+    /**
+     * @var RepositoryInterface
+     */
+    private $dealerRepository;
+
+    /**
+     * @var RepositoryInterface
+     */
+    private $dealerPriceRepository;
+
+    /**
+     * @var RepositoryInterface|ProductRepository
+     */
+    private $productRepository;
+
+    /**
+     * @var ObjectManager
+     */
+    private $manager;
+
+    /**
+     * @var string
+     */
+    private $locale;
 
     /**
      * @var InputInterface
      */
-    protected $input;
+    private $input;
 
     /**
      * @var OutputInterface
      */
-    protected $output;
+    private $output;
+
+    /**
+     * @param FactoryInterface    $dealerPriceFactory
+     * @param RepositoryInterface $dealerRepository
+     * @param RepositoryInterface $dealerPriceRepository
+     * @param RepositoryInterface $productRepository
+     * @param ObjectManager       $manager
+     * @param string              $locale
+     */
+    public function __construct(
+        FactoryInterface $dealerPriceFactory,
+        RepositoryInterface $dealerRepository,
+        RepositoryInterface $dealerPriceRepository,
+        RepositoryInterface $productRepository,
+        ObjectManager $manager,
+        string $locale
+    ) {
+        $this->dealerPriceFactory = $dealerPriceFactory;
+        $this->dealerRepository = $dealerRepository;
+        $this->dealerPriceRepository = $dealerPriceRepository;
+        $this->productRepository = $productRepository;
+        $this->manager = $manager;
+        $this->locale = $locale;
+
+        parent::__construct();
+    }
 
     /**
      * {@inheritdoc}
@@ -125,13 +178,13 @@ EOT
 
             $dealerPrice = $this->createOrReplaceDealerPrice($data, $dealer);
 
-            if (!$this->getManager()->contains($dealerPrice)) {
-                $this->getManager()->persist($dealerPrice);
+            if (!$this->manager->contains($dealerPrice)) {
+                $this->manager->persist($dealerPrice);
             }
 
             if (0 === ($i % self::BATCH_SIZE)) {
-                $this->getManager()->flush(); // Executes all updates.
-                $this->getManager()->clear(); // Detaches all objects from Doctrine!
+                $this->manager->flush(); // Executes all updates.
+                $this->manager->clear(); // Detaches all objects from Doctrine!
 
                 // dealer is detached from doctrine, so we have to find it again
                 $dealer = $this->ensureDealerAlreadyExists();
@@ -140,9 +193,9 @@ EOT
             ++$i;
         }
 
-        $this->getManager()->flush();
+        $this->manager->flush();
         $this->removeOutOfCatalogDealerPrices($dealer);
-        $this->getManager()->clear();
+        $this->manager->clear();
     }
 
     /**
@@ -150,11 +203,11 @@ EOT
      *
      * @throws \Exception
      */
-    protected function ensureDealerAlreadyExists()
+    private function ensureDealerAlreadyExists()
     {
         $code = $this->input->getArgument('dealer');
         /** @var Dealer $dealer */
-        $dealer = $this->getDealerRepository()->findOneBy(['code' => $code]);
+        $dealer = $this->dealerRepository->findOneBy(['code' => $code]);
 
         if (null === $dealer) {
             throw new \Exception(sprintf('Dealer with code %s does not exist', $code));
@@ -168,14 +221,16 @@ EOT
      * @param Dealer $dealer
      *
      * @return DealerPrice
+     *
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    protected function createOrReplaceDealerPrice(array $data, Dealer $dealer)
+    private function createOrReplaceDealerPrice(array $data, Dealer $dealer)
     {
         /** @var DealerPrice $dealerPrice */
-        $dealerPrice = $this->getRepository()->findOneBy(['url' => $data['url']]);
+        $dealerPrice = $this->dealerPriceRepository->findOneBy(['url' => $data['url']]);
 
         if (null === $dealerPrice) {
-            $dealerPrice = $this->getFactory()->createNew();
+            $dealerPrice = $this->dealerPriceFactory->createNew();
         }
 
         /** @var Product $product */
@@ -199,7 +254,7 @@ EOT
         return $dealerPrice;
     }
 
-    protected function formatPrice($price)
+    private function formatPrice($price)
     {
         // replace comma by dot as decimal separator
         $price = str_replace(',', '.', $price);
@@ -215,7 +270,7 @@ EOT
      *
      * @throws \Exception
      */
-    protected function getCsvData()
+    private function getCsvData()
     {
         $filename = $this->input->getOption('filename');
         $data = [];
@@ -277,71 +332,35 @@ EOT
      * @param array $data
      *
      * @return Product|null
+     *
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    protected function findOneProductByData(array $data)
+    private function findOneProductByData(array $data)
     {
-        $product = $this->getProductRepository()->findOneByBarcode($data['barcode']);
+        $product = $this->productRepository->findOneByBarcode($data['barcode']);
 
         if (null !== $product) {
             return $product;
         }
 
         $slug = Transliterator::transliterate($data['product_name']);
-        $product = $this->getProductRepository()->findOneBySlug($this->getContainer()->getParameter('locale'), $slug);
+        $product = $this->productRepository->findOneBySlug($this->locale, $slug);
 
         return $product;
     }
 
     /**
      * @return int nbRows deleted
+     *
+     * @throws \Exception
      */
-    protected function removeOutOfCatalogDealerPrices(Dealer $dealer)
+    private function removeOutOfCatalogDealerPrices(Dealer $dealer)
     {
-        $query = $this->getManager()->createQuery('delete from App:DealerPrice o where o.dealer = :dealer and o.updatedAt < :today');
+        $query = $this->manager->createQuery('delete from App:DealerPrice o where o.dealer = :dealer and o.updatedAt < :today');
 
         return $query->execute([
             'dealer' => $dealer,
             'today' => (new \DateTime('today'))->format('Y-m-d H:i:s'),
         ]);
-    }
-
-    /**
-     * @return ProductRepository|object
-     */
-    protected function getProductRepository()
-    {
-        return $this->getContainer()->get('sylius.repository.product');
-    }
-
-    /**
-     * @return EntityRepository|object
-     */
-    protected function getDealerRepository()
-    {
-        return $this->getContainer()->get('app.repository.dealer');
-    }
-
-    /**
-     * @return Factory|object
-     */
-    protected function getFactory()
-    {
-        return $this->getContainer()->get('app.factory.dealer_price');
-    }
-
-    /**
-     * @return EntityRepository|object
-     */
-    protected function getRepository()
-    {
-        return $this->getContainer()->get('app.repository.dealer_price');
-    }
-
-    /**
-     * @return EntityManager|object
-     */
-    protected function getManager()
-    {
-        return $this->getContainer()->get('doctrine.orm.entity_manager');
     }
 }
