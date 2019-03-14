@@ -76,6 +76,16 @@ class DealerPriceContext extends DefaultContext
     }
 
     /**
+     * @Then /^(this dealer) has(?:| also) no product anymore$/
+     */
+    public function dealerHasNoProductNameAnymore(Dealer $dealer)
+    {
+        $dealerPrices = $this->dealerPriceRepository->findBy(['dealer' => $dealer]);
+
+        Assert::count($dealerPrices, 0);
+    }
+
+    /**
      * @param string $name
      */
     private function iExecuteCommand(string $name)
