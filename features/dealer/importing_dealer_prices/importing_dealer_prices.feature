@@ -19,5 +19,8 @@ Feature: Importing dealer prices
 
     @cli
     Scenario: Removing prices from a dealer with an inactive subscription
-        When this dealer has no active subscription
+        Given this dealer sold "Schlauer Bauer" product on "http://www.example.com/puerto-rico" page
+        And this dealer also sold "Meuterer" product on "http://www.example.com/modern-art" page
+        And this dealer has no active subscription
+        When I run import dealers prices command
         Then this dealer should have no product anymore

@@ -27,7 +27,7 @@ class DealerPriceRepository extends EntityRepository
     {
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder
-            ->delete('o')
+            ->delete()
             ->where('o.dealer = :dealer')
             ->setParameter('dealer', $dealer);
 

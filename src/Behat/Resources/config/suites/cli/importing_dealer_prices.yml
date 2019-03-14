@@ -8,6 +8,7 @@ default:
                 - App\Behat\Context\Transform\SharedStorageContext
 
                 - App\Behat\Context\Setup\DealerContext
+                - App\Behat\Context\Setup\DealerPriceContext
                 - App\Behat\Context\Setup\PriceListContext
                 - App\Behat\Context\Setup\ProductContext
 

@@ -77,9 +77,9 @@ class PriceListContext implements Context
 
         /** @var PriceList $priceList */
         $priceList = $this->priceListFactory->createNew();
-        $priceList->setDealer($dealer);
         $priceList->setPath($filesPath.$path);
         $priceList->setActive(true);
+        $dealer->setPriceList($priceList);
 
         $this->priceListRepository->add($priceList);
         $this->sharedStorage->set('price_list', $priceList);
@@ -92,7 +92,7 @@ class PriceListContext implements Context
     {
         $priceList = $dealer->getPriceList();
 
-        if (null == $priceList) {
+        if (null === $priceList) {
             return;
         }
 
