@@ -11,6 +11,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Dealer;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
@@ -19,6 +20,20 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
  */
 class DealerPriceRepository extends EntityRepository
 {
+    /**
+     * @param Dealer $dealer
+     */
+    public function deleteByDealer(Dealer $dealer): void
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder
+            ->delete('o')
+            ->where('o.dealer = :dealer')
+            ->setParameter('dealer', $dealer);
+
+        $queryBuilder->getQuery()->execute();
+    }
+
     /**
      * {@inheritdoc}
      */

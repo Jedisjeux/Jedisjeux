@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * This file is part of Jedisjeux.
  *
  * (c) Loïc Frémont
@@ -13,32 +13,51 @@ namespace App\Command;
 
 use App\Command\Installer\CommandExecutor;
 use App\Entity\Dealer;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityRepository;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use App\Repository\DealerPriceRepository;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Process\Exception\RuntimeException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
-class ImportDealersPricesCommand extends ContainerAwareCommand
+class ImportDealersPricesCommand extends Command
 {
+    /**
+     * @var RepositoryInterface
+     */
+    private $dealerRepository;
+
+    /**
+     * @var RepositoryInterface|DealerPriceRepository
+     */
+    private $dealerPriceRepository;
+
     /**
      * @var OutputInterface
      */
-    protected $output;
+    private $output;
 
     /**
      * @var CommandExecutor
      */
-    protected $commandExecutor;
+    private $commandExecutor;
 
     /**
      * @var bool
      */
     private $isErrored = false;
+
+    /**
+     * @param RepositoryInterface $dealerRepository
+     * @param RepositoryInterface $dealerPriceRepository
+     */
+    public function __construct(RepositoryInterface $dealerRepository, RepositoryInterface $dealerPriceRepository)
+    {
+        $this->dealerRepository = $dealerRepository;
+        $this->dealerPriceRepository = $dealerPriceRepository;
+
+        parent::__construct();
+    }
 
     /**
      * {@inheritdoc}
@@ -78,7 +97,8 @@ EOT
     {
         $output->writeln(sprintf('<comment>%s</comment>', $this->getDescription()));
 
-        $dealers = $this->getDealers();
+        /** @var array|Dealer[] $dealers */
+        $dealers = $this->dealerRepository->findAll();
 
         foreach ($dealers as $step => $dealer) {
             $output->writeln(sprintf('<comment>Step %d of %d.</comment> <info>%s</info>', $step + 1, count($dealers), $dealer->getCode()));
@@ -108,46 +128,8 @@ EOT
             } else {
                 $output->writeln(sprintf('Remove prices for <info>%s</info>.', $dealer->getName()));
 
-                $this->removeDealerPricesFromDealer($dealer);
+                $this->dealerPriceRepository->deleteByDealer($dealer);
             }
         }
-    }
-
-    /**
-     * @return array|Dealer[]
-     */
-    protected function getDealers()
-    {
-        return $this->getDealerRepository()->findAll();
-    }
-
-    /**
-     * @param Dealer $dealer
-     *
-     * @return int nbRows deleted
-     */
-    protected function removeDealerPricesFromDealer(Dealer $dealer)
-    {
-        $query = $this->getManager()->createQuery('delete from App:DealerPrice o where o.dealer = :dealer');
-
-        return $query->execute([
-            'dealer' => $dealer,
-        ]);
-    }
-
-    /**
-     * @return EntityRepository|object
-     */
-    protected function getDealerRepository()
-    {
-        return $this->getContainer()->get('app.repository.dealer');
-    }
-
-    /**
-     * @return EntityManager|object
-     */
-    protected function getManager()
-    {
-        return $this->getContainer()->get('doctrine.orm.entity_manager');
     }
 }

@@ -15,4 +15,4 @@ Feature: Importing dealer prices
         When I run import dealers prices command
         Then the command should finish successfully
         And this dealer has a product "Schlauer Bauer" priced at "€6.50"
-        And this dealer has also a product "Meuterer" priced at "€6.50"
+        And this dealer has also a product "Meuterer" priced at "€7.50"

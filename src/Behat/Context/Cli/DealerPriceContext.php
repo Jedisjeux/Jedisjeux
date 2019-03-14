@@ -28,12 +28,22 @@ class DealerPriceContext extends DefaultContext
     private $dealerPriceRepository;
 
     /**
-     * @param KernelInterface     $Kernel
-     * @param RepositoryInterface $dealerPriceRepository
+     * @var ImportDealersPricesCommand
      */
-    public function __construct(KernelInterface $Kernel, RepositoryInterface $dealerPriceRepository)
-    {
+    private $importDealersPricesCommand;
+
+    /**
+     * @param KernelInterface            $Kernel
+     * @param RepositoryInterface        $dealerPriceRepository
+     * @param ImportDealersPricesCommand $importDealersPricesCommand
+     */
+    public function __construct(
+        KernelInterface $Kernel,
+        RepositoryInterface $dealerPriceRepository,
+        ImportDealersPricesCommand $importDealersPricesCommand
+    ) {
         $this->dealerPriceRepository = $dealerPriceRepository;
+        $this->importDealersPricesCommand = $importDealersPricesCommand;
 
         parent::__construct($Kernel);
     }
@@ -45,7 +55,7 @@ class DealerPriceContext extends DefaultContext
     {
         $this->application = new Application($this->kernel);
 
-        $this->application->add(new ImportDealersPricesCommand());
+        $this->application->add($this->importDealersPricesCommand);
 
         $this->command = $this->application->find('app:dealers-prices:import');
         $this->setTester(new CommandTester($this->command));
@@ -58,7 +68,7 @@ class DealerPriceContext extends DefaultContext
      */
     public function dealerHasProductNameWithPrice(Dealer $dealer, ProductInterface $product, string $price)
     {
-        $price = ((double) $price) * 100;
+        $price = ((float) $price) * 100;
 
         $dealerPrice = $this->dealerPriceRepository->findOneBy(['dealer' => $dealer, 'product' => $product, 'price' => $price]);
 
