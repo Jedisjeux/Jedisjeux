@@ -33,19 +33,19 @@ class DealerPriceContext extends DefaultContext
     private $importDealersPricesCommand;
 
     /**
-     * @param KernelInterface            $Kernel
+     * @param KernelInterface            $kernel
      * @param RepositoryInterface        $dealerPriceRepository
      * @param ImportDealersPricesCommand $importDealersPricesCommand
      */
     public function __construct(
-        KernelInterface $Kernel,
+        KernelInterface $kernel,
         RepositoryInterface $dealerPriceRepository,
         ImportDealersPricesCommand $importDealersPricesCommand
     ) {
         $this->dealerPriceRepository = $dealerPriceRepository;
         $this->importDealersPricesCommand = $importDealersPricesCommand;
 
-        parent::__construct($Kernel);
+        parent::__construct($kernel);
     }
 
     /**
@@ -64,9 +64,9 @@ class DealerPriceContext extends DefaultContext
     }
 
     /**
-     * @Then /^(this dealer) has(?:| also) a (product "[^"]+") priced at "(?:€|£|\$)([^"]+)"$/
+     * @Then /^(this dealer) should(?:| also) have a (product "[^"]+") priced at "(?:€|£|\$)([^"]+)"$/
      */
-    public function dealerHasProductNameWithPrice(Dealer $dealer, ProductInterface $product, string $price)
+    public function dealerShouldHaveProductNameWithPrice(Dealer $dealer, ProductInterface $product, string $price)
     {
         $price = ((float) $price) * 100;
 
@@ -76,9 +76,9 @@ class DealerPriceContext extends DefaultContext
     }
 
     /**
-     * @Then /^(this dealer) has(?:| also) no product anymore$/
+     * @Then /^(this dealer) should have no product anymore$/
      */
-    public function dealerHasNoProductNameAnymore(Dealer $dealer)
+    public function dealerShouldHaveNoProductNameAnymore(Dealer $dealer)
     {
         $dealerPrices = $this->dealerPriceRepository->findBy(['dealer' => $dealer]);
 
