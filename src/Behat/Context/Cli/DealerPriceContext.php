@@ -76,6 +76,16 @@ class DealerPriceContext extends DefaultContext
     }
 
     /**
+     * @Then /^(this dealer) should(?:| also) not have a (product "[^"]+")$/
+     */
+    public function dealerShouldNotHaveProductName(Dealer $dealer, ProductInterface $product)
+    {
+        $dealerPrice = $this->dealerPriceRepository->findOneBy(['dealer' => $dealer, 'product' => $product]);
+
+        Assert::null($dealerPrice);
+    }
+
+    /**
      * @Then /^(this dealer) should have no product anymore$/
      */
     public function dealerShouldHaveNoProductNameAnymore(Dealer $dealer)
