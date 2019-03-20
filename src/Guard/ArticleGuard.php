@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of jdj.
+ * This file is part of Jedisjeux.
  *
- * (c) Mobizel
+ * (c) Loïc Frémont
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -13,9 +13,6 @@ namespace App\Guard;
 
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
 class ArticleGuard
 {
     /**
