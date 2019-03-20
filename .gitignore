@@ -28,6 +28,11 @@ log/
 /etc/build/*
 !/etc/build/.gitkeep
 
+/behat.yml
+/phpspec.yml
+
+Makefile
+
 .idea
 *.DS_Store
 *.sass-cache
@@ -50,10 +55,6 @@ log/
 ###> liip/imagine-bundle ###
 /public/media/cache/
 ###< liip/imagine-bundle ###
-
-###> behat/symfony2-extension ###
-behat.yml
-###< behat/symfony2-extension ###
 
 ###> phpunit/phpunit ###
 /phpunit.xml
