@@ -1,21 +1,20 @@
 <?php
 
 /*
- * This file is part of the Sylius package.
+ * This file is part of Jedisjeux.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Loïc Frémont
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace App\Fixture;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 class TaxonFixture extends AbstractResourceFixture
 {
     /**
@@ -41,6 +40,7 @@ class TaxonFixture extends AbstractResourceFixture
                 ->scalarNode('icon_class')->cannotBeEmpty()->end()
                 ->scalarNode('color')->cannotBeEmpty()->end()
                 ->variableNode('parent')->end()
+                ->variableNode('translations')->cannotBeEmpty()->defaultValue([])->end()
                 ->variableNode('children')->cannotBeEmpty()->defaultValue([])->end()
         ;
     }

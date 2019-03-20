@@ -77,7 +77,14 @@ class GameProductFixture extends AbstractFixture
             ],
             'theme2' => [
                 'code' => 'theme2',
-                'name' => 'Medieval',
+                'translations' => [
+                    'en_US' => [
+                        'name' => 'Medieval',
+                    ],
+                    'fr_FR' => [
+                        'name' => 'Médiéval',
+                    ],
+                ],
             ],
         ];
 
@@ -88,52 +95,108 @@ class GameProductFixture extends AbstractFixture
             ],
             'mechanism2' => [
                 'code' => 'mechanism2',
-                'name' => 'Tile Placement',
+                'translations' => [
+                    'en_US' => [
+                        'name' => 'Tile placement',
+                    ],
+                    'fr_FR' => [
+                        'name' => 'Placements de tuiles',
+                    ],
+                ],
             ],
         ];
 
         $targetAudiences = [
             Taxon::CODE_CHILD => [
                 'code' => Taxon::CODE_CHILD,
-                'name' => 'Child',
                 'icon_class' => 'fa fa-child',
                 'color' => 'lblue',
+                'translations' => [
+                    'en_US' => [
+                        'name' => 'Children',
+                    ],
+                    'fr_FR' => [
+                        'name' => 'Enfants',
+                    ],
+                ],
             ],
             Taxon::CODE_BEGINNER => [
                 'code' => Taxon::CODE_BEGINNER,
-                'name' => 'Beginner',
                 'icon_class' => 'fa fa-user',
                 'color' => 'green',
+                'translations' => [
+                    'en_US' => [
+                        'name' => 'Beginners',
+                    ],
+                    'fr_FR' => [
+                        'name' => 'Débutants',
+                    ],
+                ],
             ],
             Taxon::CODE_ADVANCED_USER => [
                 'code' => Taxon::CODE_ADVANCED_USER,
-                'name' => 'Advanced user',
                 'icon_class' => 'fa fa-user-plus',
                 'color' => 'purple',
+                'translations' => [
+                    'en_US' => [
+                        'name' => 'Advanced users',
+                    ],
+                    'fr_FR' => [
+                        'name' => 'Joueurs avancés',
+                    ],
+                ],
             ],
             Taxon::CODE_EXPERT => [
                 'code' => Taxon::CODE_EXPERT,
-                'name' => 'Expert',
                 'icon_class' => 'fa fa-star',
                 'color' => 'red',
+                'translations' => [
+                    'en_US' => [
+                        'name' => 'Expert users',
+                    ],
+                    'fr_FR' => [
+                        'name' => 'Experts',
+                    ],
+                ],
             ],
         ];
 
         $this->taxonFixture->load(['custom' => [
             [
                 'code' => Taxon::CODE_THEME,
-                'name' => 'Themes',
                 'children' => $themes,
+                'translations' => [
+                    'en_US' => [
+                        'name' => 'Themes',
+                    ],
+                    'fr_FR' => [
+                        'name' => 'Thèmes',
+                    ],
+                ],
             ],
             [
                 'code' => Taxon::CODE_MECHANISM,
-                'name' => 'Mechanisms',
                 'children' => $mechanisms,
+                'translations' => [
+                    'en_US' => [
+                        'name' => 'Mechanisms',
+                    ],
+                    'fr_FR' => [
+                        'name' => 'Mécanismes',
+                    ],
+                ],
             ],
             [
                 'code' => Taxon::CODE_TARGET_AUDIENCE,
-                'name' => 'Target audiences',
                 'children' => $targetAudiences,
+                'translations' => [
+                    'en_US' => [
+                        'name' => 'Target audiences',
+                    ],
+                    'fr_FR' => [
+                        'name' => 'Cibles',
+                    ],
+                ],
             ],
         ]]);
 

@@ -86,7 +86,14 @@ class ReviewArticleFixture extends AbstractFixture
                 'children' => [
                     [
                         'code' => 'review-articles',
-                        'name' => 'Reviews',
+                        'translations' => [
+                            'en_US' => [
+                                'name' => 'Reviews',
+                            ],
+                            'fr_FR' => [
+                                'name' => 'Critiques',
+                            ],
+                        ],
                     ],
                 ],
             ],

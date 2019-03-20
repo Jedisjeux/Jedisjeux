@@ -76,7 +76,14 @@ class InTheBoxArticleFixture extends AbstractFixture
                 'children' => [
                     [
                         'code' => 'in-the-boxes',
-                        'name' => 'In the boxes',
+                        'translations' => [
+                            'en_US' => [
+                                'name' => 'In the boxes',
+                            ],
+                            'fr_FR' => [
+                                'name' => 'C\'est dans la boîte',
+                            ],
+                        ],
                     ],
                 ],
             ],

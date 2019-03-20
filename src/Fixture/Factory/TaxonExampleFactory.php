@@ -1,13 +1,15 @@
 <?php
 
 /*
- * This file is part of the Sylius package.
+ * This file is part of Jedisjeux.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Loïc Frémont
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
+declare(strict_types=1);
 
 namespace App\Fixture\Factory;
 
@@ -21,9 +23,6 @@ use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
@@ -94,23 +93,24 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
         }
 
         $taxon->setCode($options['code']);
-
-        $taxon->setCurrentLocale($this->localeCode);
-        $taxon->setFallbackLocale($this->localeCode);
-
-        $taxon->setName($options['name']);
-        $taxon->setDescription($options['description']);
         $taxon->setPublic($options['public']);
         $taxon->setIconClass($options['icon_class']);
         $taxon->setColor($options['color']);
-
         $taxon->setParent($options['parent']);
+
+        // add translation for each defined locales
+        foreach ($this->getLocales() as $localeCode) {
+            $this->createTranslation($taxon, $localeCode, $options);
+        }
+
+        // create or replace with custom translations
+        foreach ($options['translations'] as $localeCode => $translationOptions) {
+            $this->createTranslation($taxon, $localeCode, $translationOptions);
+        }
 
         foreach ($options['children'] as $childOptions) {
             $taxon->addChild($this->create($childOptions));
         }
-
-        $taxon->setSlug($options['slug'] ?: $this->taxonSlugGenerator->generate($taxon, $this->localeCode));
 
         return $taxon;
     }
@@ -149,6 +149,37 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
             ->setNormalizer('parent', LazyOption::findOneBy($this->taxonRepository, 'code'))
 
             ->setDefault('children', [])
-            ->setAllowedTypes('children', 'array');
+            ->setAllowedTypes('children', 'array')
+
+            ->setDefault('translations', [])
+            ->setAllowedTypes('translations', ['array'])
+            ->setDefault('children', [])
+            ->setAllowedTypes('children', ['array']);
+    }
+
+    /**
+     * @param Taxon  $taxon
+     * @param string $localeCode
+     * @param array  $options
+     */
+    private function createTranslation(Taxon $taxon, string $localeCode, array $options = []): void
+    {
+        $options = $this->optionsResolver->resolve($options);
+
+        $taxon->setCurrentLocale($localeCode);
+        $taxon->setFallbackLocale($localeCode);
+
+        $taxon->setName($options['name']);
+        $taxon->setDescription($options['description']);
+        $taxon->setSlug($options['slug'] ?: $this->taxonSlugGenerator->generate($taxon, $localeCode));
+    }
+
+    /**
+     * @return iterable
+     */
+    private function getLocales(): iterable
+    {
+        yield 'fr_FR';
+        yield 'en_US';
     }
 }
