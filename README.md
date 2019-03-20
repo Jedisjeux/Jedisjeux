@@ -11,12 +11,12 @@
     </a>    
 </h1>
 
-[Jedisjeux](http://www.jedisjeux.net) is a PHP boardgame website, based on [Symfony Framework](http://symfony.com/) and [Sylius](http://sylius.org/).
+[Jedisjeux](https://www.jedisjeux.net) is a PHP boardgame website, based on [Symfony Framework](http://symfony.com/) and [Sylius](http://sylius.org/).
 
 Documentation
 -------------
 
-Documentation is available at [docs.jedisjeux.net](http://docs.jedisjeux.net).
+Documentation is available at [docs.jedisjeux.net](https://jedisjeux.readthedocs.io/en/latest/).
 
 Installation
 ------------
