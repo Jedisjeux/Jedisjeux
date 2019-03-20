@@ -1,0 +1,14 @@
+app_frontend_product_box_create:
+    path: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: app.controller.product_box:createAction
+        _sylius:
+            template: 'frontend/product_box/create.html.twig'
+            factory:
+                method: createForProduct
+                arguments:
+                    - "expr:notFoundOnNull(service('sylius.repository.product').findOneBySlug(service('sylius.context.locale').getLocaleCode(), $slug))"
+            redirect:
+                route: sylius_frontend_product_show
+                parameters: { slug: resource.product.slug }

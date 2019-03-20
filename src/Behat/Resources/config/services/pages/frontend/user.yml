@@ -1,8 +1,0 @@
-services:
-    App\Behat\Page\Frontend\User\ShowPage:
-        parent: app.behat.symfony_page
-        public: false
-
-    App\Behat\Page\Frontend\User\GameLibraryPage:
-        parent: app.behat.symfony_page
-        public: false

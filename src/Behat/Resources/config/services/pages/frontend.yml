@@ -1,19 +1,5 @@
-imports:
-    - { resource: frontend/account.yml }
-    - { resource: frontend/article.yml }
-    - { resource: frontend/contact.yml }
-    - { resource: frontend/error.yml }
-    - { resource: frontend/game_play.yml }
-    - { resource: frontend/person.yml }
-    - { resource: frontend/post.yml }
-    - { resource: frontend/product.yml }
-    - { resource: frontend/product_review.yml }
-    - { resource: frontend/topic.yml }
-    - { resource: frontend/user.yml }
-    - { resource: frontend/year_award.yml }
-
 services:
-    App\Behat\Page\Frontend\HomePage:
-        class: App\Behat\Page\Frontend\HomePage
+    App\Behat\Page\Frontend\:
+        resource: '../../../../Page/Frontend/*'
         parent: app.behat.symfony_page
         public: false
