@@ -174,14 +174,14 @@ sylius_fixtures:
                         random: 20
 
                 news_article:
-                  options:
-                    amount: 10
+                    options:
+                        amount: 10
                 review_article:
-                  options:
-                    amount: 10
+                    options:
+                        amount: 10
                 in_the_box_article:
-                  options:
-                    amount: 5
+                    options:
+                        amount: 5
                 block:
                     options:
                         random: 40

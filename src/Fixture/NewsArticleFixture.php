@@ -76,9 +76,16 @@ class NewsArticleFixture extends AbstractFixture
                 'children' => [
                     [
                         'code' => 'news',
-                        'name' => 'News',
                         'icon_class' => 'fa fa-newspaper-o bg-purple',
                         'color' => 'purple',
+                        'translations' => [
+                            'en_US' => [
+                                'name' => 'News',
+                            ],
+                            'fr_FR' => [
+                                'name' => 'Actualités',
+                            ],
+                        ],
                     ],
                 ],
             ],
