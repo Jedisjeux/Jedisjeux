@@ -191,6 +191,7 @@ app:
         product_boxes: Product boxes
         product_lists: Product lists
         product_manager: Product manager
+        propose_an_image: Purpose an image
         pub_banners: Pub banners
         public: Public
         publish: Publish
