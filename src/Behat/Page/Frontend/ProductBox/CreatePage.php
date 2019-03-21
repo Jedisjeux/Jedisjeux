@@ -57,6 +57,22 @@ class CreatePage extends SymfonyPage
 
     /**
      * {@inheritdoc}
+     *
+     * @throws ElementNotFoundException
+     */
+    public function checkValidationMessageFor($element, $message)
+    {
+        $errorLabel = $this->getElement($element)->getParent()->getParent()->find('css', '.form-error-message');
+
+        if (null === $errorLabel) {
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.form-error-message');
+        }
+
+        return $message === $errorLabel->getText();
+    }
+
+    /**
+     * {@inheritdoc}
      */
     protected function getDefinedElements(): array
     {

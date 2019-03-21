@@ -100,4 +100,22 @@ class ManagingProductBoxesContext implements Context
 
         Assert::true($this->indexPage->isSingleResourceOnPage(['product' => $product->getName()]));
     }
+
+    /**
+     * @Then I should be notified that the :elementName is required
+     */
+    public function iShouldBeNotifiedThatCommentIsRequired($elementName)
+    {
+        Assert::same($this->createPage->getValidationMessage($elementName), 'This value should not be blank.');
+    }
+
+    /**
+     * @Then this product box should not be added
+     */
+    public function thisProductBoxShouldNotBeAdded()
+    {
+        $this->indexPage->open();
+
+        Assert::same($this->indexPage->countItems(), 0);
+    }
 }

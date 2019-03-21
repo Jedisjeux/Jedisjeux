@@ -14,6 +14,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -70,6 +71,8 @@ class ProductBox implements ResourceInterface
      * @var int|null
      *
      * @ORM\Column(type="integer")
+     *
+     * @Assert\NotBlank
      */
     private $realHeight;
 

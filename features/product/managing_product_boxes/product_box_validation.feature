@@ -8,8 +8,8 @@ Feature: Product boxes validation
         Given I am a logged in administrator
 
     @ui
-    Scenario: Trying to add a new product without height
-        Given I want to create a new product
+    Scenario: Trying to add a new product box without height
+        Given I want to create a new product box
         When I do not specify its height
         And I try to add it
         Then I should be notified that the height is required

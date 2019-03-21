@@ -16,6 +16,7 @@ use App\Behat\Page\Frontend\ProductBox\CreatePage;
 use App\Behat\Service\NotificationCheckerInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Product\Model\ProductInterface;
+use Webmozart\Assert\Assert;
 
 class ProductBoxContext implements Context
 {
@@ -82,5 +83,13 @@ class ProductBoxContext implements Context
             'Your game box is waiting for the acceptation.',
             NotificationType::success()
         );
+    }
+
+    /**
+     * @Then I should be notified that the :elementName is required
+     */
+    public function iShouldBeNotifiedThatCommentIsRequired($elementName)
+    {
+        Assert::true($this->createPage->checkValidationMessageFor($elementName, 'This value should not be blank.'));
     }
 }
