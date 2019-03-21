@@ -4,9 +4,9 @@ namespace spec\App\Entity;
 
 use App\Entity\ProductBox;
 use App\Entity\ProductBoxImage;
+use App\Entity\ProductInterface;
+use App\Entity\ProductVariantInterface;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Product\Model\ProductVariantInterface;
-use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 class ProductBoxSpec extends ObjectBehavior
@@ -78,10 +78,22 @@ class ProductBoxSpec extends ObjectBehavior
         $this->getProduct()->shouldReturn(null);
     }
 
-    function its_product_is_mutable(ProductInterface $product)
+    function its_product_is_mutable(ProductInterface $product, ProductVariantInterface $variant)
     {
+        $product->getFirstVariant()->willReturn($variant);
+
         $this->setProduct($product);
         $this->getProduct()->shouldReturn($product);
+        $this->getProductVariant()->shouldReturn($variant);
+    }
+
+    function it_resets_previous_variant_when_resetting_product(ProductVariantInterface $variant): void
+    {
+        $this->setProductVariant($variant);
+
+        $this->setProduct(null);
+
+        $this->getProductVariant()->shouldReturn(null);
     }
 
     function it_has_no_product_variant_by_default()
@@ -91,7 +103,26 @@ class ProductBoxSpec extends ObjectBehavior
 
     function its_product_variant_is_mutable(ProductVariantInterface $productVariant)
     {
+        $productVariant->setBox($this)->shouldBeCalled();
+
         $this->setProductVariant($productVariant);
         $this->getProductVariant()->shouldReturn($productVariant);
+    }
+
+    function it_resets_box_of_previous_variant(ProductVariantInterface $previousVariant, ProductVariantInterface $variant): void
+    {
+        $this->setProductVariant($previousVariant);
+
+        $previousVariant->setBox(null)->shouldBeCalled();
+
+        $this->setProductVariant($variant);
+    }
+
+    function it_does_not_replace_product_variant_if_it_is_already_set(ProductVariantInterface $productVariant): void
+    {
+        $productVariant->setBox($this)->shouldBeCalledOnce();
+
+        $this->setProductVariant($productVariant);
+        $this->setProductVariant($productVariant);
     }
 }

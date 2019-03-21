@@ -1,14 +1,16 @@
 default:
     suites:
-        ui_adding_product_box_images:
+        ui_managing_product_boxes:
             contexts:
                 - App\Behat\Context\Hook\DoctrineORMContext
 
+                - App\Behat\Context\Transform\ProductContext
                 - App\Behat\Context\Transform\SharedStorageContext
 
                 - App\Behat\Context\Setup\SecurityContext
                 - App\Behat\Context\Setup\ProductContext
 
-                - App\Behat\Context\Ui\Frontend\ProductBoxContext
+                - App\Behat\Context\Ui\Backend\ManagingProductBoxesContext
+                - App\Behat\Context\Ui\Backend\NotificationContext
             filters:
-                tags: "@adding_product_box_images && @ui"
+                tags: "@managing_product_boxes && @ui"

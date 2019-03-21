@@ -9,6 +9,9 @@ app_frontend_product_box_create:
                 method: createForProduct
                 arguments:
                     - "expr:notFoundOnNull(service('sylius.repository.product').findOneBySlug(service('sylius.context.locale').getLocaleCode(), $slug))"
+            form: App\Form\Type\ProductBox\SimpleProductBoxType
             redirect:
                 route: sylius_frontend_product_show
-                parameters: { slug: resource.product.slug }
+                parameters:
+                    slug: resource.product.slug
+            flash: app.product_box.wait_for_the_acceptation

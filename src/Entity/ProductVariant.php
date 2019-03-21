@@ -23,7 +23,7 @@ use Sylius\Component\Product\Model\ProductVariant as BaseProductVariant;
  *
  * @JMS\ExclusionPolicy("all")
  */
-class ProductVariant extends BaseProductVariant
+class ProductVariant extends BaseProductVariant implements ProductVariantInterface
 {
     const RELEASED_AT_PRECISION_ON_DAY = 'on-day';
     const RELEASED_AT_PRECISION_ON_MONTH = 'on-month';
@@ -232,7 +232,7 @@ class ProductVariant extends BaseProductVariant
     }
 
     /**
-     * @return ProductBox|null
+     * {@inheritdoc}
      */
     public function getBox(): ?ProductBox
     {
@@ -240,7 +240,7 @@ class ProductVariant extends BaseProductVariant
     }
 
     /**
-     * @param ProductBox|null $box
+     * {@inheritdoc}
      */
     public function setBox(?ProductBox $box): void
     {

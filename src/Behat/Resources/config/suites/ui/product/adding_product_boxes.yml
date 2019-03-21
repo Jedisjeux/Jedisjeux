@@ -1,0 +1,14 @@
+default:
+    suites:
+        ui_adding_product_boxes:
+            contexts:
+                - App\Behat\Context\Hook\DoctrineORMContext
+
+                - App\Behat\Context\Transform\SharedStorageContext
+
+                - App\Behat\Context\Setup\SecurityContext
+                - App\Behat\Context\Setup\ProductContext
+
+                - App\Behat\Context\Ui\Frontend\ProductBoxContext
+            filters:
+                tags: "@adding_product_boxes && @ui"

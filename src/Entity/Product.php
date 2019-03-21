@@ -36,7 +36,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @JMS\ExclusionPolicy("all")
  */
-class Product extends BaseProduct implements ReviewableInterface
+class Product extends BaseProduct implements ProductInterface, ReviewableInterface
 {
     /**
      * status constants.

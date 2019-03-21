@@ -11,6 +11,7 @@
 
 namespace App\Behat\Page\Frontend\ProductBox;
 
+use Behat\Mink\Exception\ElementNotFoundException;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class CreatePage extends SymfonyPage
@@ -34,5 +35,33 @@ class CreatePage extends SymfonyPage
             ->getDocument()
             ->find('css', 'input[type="file"]')
             ->attachFile($filesPath.$path);
+    }
+
+    /**
+     * @param int|null $height
+     *
+     * @throws ElementNotFoundException
+     */
+    public function specifyHeight(?int $height): void
+    {
+        $this->getElement('height')->setValue($height);
+    }
+
+    /**
+     * @throws ElementNotFoundException
+     */
+    public function submit()
+    {
+        $this->getDocument()->pressButton('Create');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements(): array
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'height' => '#app_simple_product_box_realHeight',
+        ]);
     }
 }

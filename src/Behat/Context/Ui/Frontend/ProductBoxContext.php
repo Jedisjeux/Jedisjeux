@@ -56,12 +56,21 @@ class ProductBoxContext implements Context
     }
 
     /**
+     * @When /^I specify its height as (\d+)$/
+     * @When I do not specify its height
+     */
+    public function iSpecifyItsHeightAs(?int $height = null)
+    {
+        $this->createPage->specifyHeight($height);
+    }
+
+    /**
      * @When I add it
      * @When I try to add it
      */
     public function iAddIt()
     {
-        $this->createPage->create();
+        $this->createPage->submit();
     }
 
     /**
@@ -70,7 +79,7 @@ class ProductBoxContext implements Context
     public function iShouldBeNotifiedThatMyImageIsWaitingForTheAcceptation()
     {
         $this->notificationChecker->checkNotification(
-            'Your image is waiting for the acceptation.',
+            'Your game box is waiting for the acceptation.',
             NotificationType::success()
         );
     }

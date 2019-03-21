@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * This file is part of Jedisjeux.
  *
  * (c) Loïc Frémont
@@ -13,8 +13,6 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
@@ -62,19 +60,19 @@ class ProductBox implements ResourceInterface
     private $image;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer")
      */
     private $height;
 
     /**
-     * @var integer|null
+     * @var int|null
      *
      * @ORM\Column(type="integer")
      */
     private $realHeight;
-    
+
     public function __construct()
     {
         $this->status = static::STATUS_NEW;
@@ -165,6 +163,14 @@ class ProductBox implements ResourceInterface
     public function setProduct(?ProductInterface $product): void
     {
         $this->product = $product;
+
+        if (null === $product) {
+            $this->setProductVariant(null);
+
+            return;
+        }
+
+        $this->setProductVariant($product->getFirstVariant());
     }
 
     /**
@@ -180,6 +186,19 @@ class ProductBox implements ResourceInterface
      */
     public function setProductVariant(?ProductVariantInterface $productVariant): void
     {
+        if ($this->productVariant === $productVariant) {
+            return;
+        }
+
+        $previousVariant = $this->productVariant;
         $this->productVariant = $productVariant;
+
+        if (null !== $previousVariant) {
+            $previousVariant->setBox(null);
+        }
+
+        if (null !== $productVariant) {
+            $productVariant->setBox($this);
+        }
     }
 }
