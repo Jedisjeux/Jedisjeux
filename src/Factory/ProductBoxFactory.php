@@ -12,7 +12,7 @@
 namespace App\Factory;
 
 use App\Entity\ProductBox;
-use Sylius\Component\Product\Model\ProductInterface;
+use App\Entity\ProductInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 class ProductBoxFactory implements FactoryInterface

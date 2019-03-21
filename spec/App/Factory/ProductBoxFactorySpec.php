@@ -3,10 +3,8 @@
 namespace spec\App\Factory;
 
 use App\Entity\ProductBox;
-use App\Factory\ProductBoxFactory;
+use App\Entity\ProductInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 class ProductBoxFactorySpec extends ObjectBehavior
