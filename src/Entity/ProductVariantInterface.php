@@ -11,17 +11,35 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Product\Model\ProductVariantInterface as BaseProductVariantInterface;
 
 interface ProductVariantInterface extends BaseProductVariantInterface
 {
     /**
-     * @return ProductBox|null
+     * @return ProductBox[]|Collection
      */
-    public function getBox(): ?ProductBox;
+    public function getBoxes(): Collection;
 
     /**
-     * @param ProductBox|null $box
+     * @param ProductBox $box
+     *
+     * @return bool
      */
-    public function setBox(?ProductBox $box): void;
+    public function hasBox(ProductBox $box): bool;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addBox(ProductBox $box): void;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeBox(ProductBox $box): void;
+
+    /**
+     * @return ProductBox|null
+     */
+    public function getEnabledBox(): ?ProductBox;
 }

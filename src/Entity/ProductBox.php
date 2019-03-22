@@ -24,7 +24,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class ProductBox implements ResourceInterface
 {
-    use IdentifiableTrait, Timestampable;
+    use IdentifiableTrait,
+        Timestampable,
+        ToggleableTrait;
 
     const RATIO = 0.645;
 
@@ -49,7 +51,7 @@ class ProductBox implements ResourceInterface
     /**
      * @var ProductVariantInterface|null
      *
-     * @ORM\OneToOne(targetEntity="ProductVariant", mappedBy="box")
+     * @ORM\ManyToOne(targetEntity="ProductVariant", inversedBy="boxes")
      */
     private $productVariant;
 
@@ -79,6 +81,7 @@ class ProductBox implements ResourceInterface
     public function __construct()
     {
         $this->status = static::STATUS_NEW;
+        $this->disable();
     }
 
     /**
@@ -189,19 +192,6 @@ class ProductBox implements ResourceInterface
      */
     public function setProductVariant(?ProductVariantInterface $productVariant): void
     {
-        if ($this->productVariant === $productVariant) {
-            return;
-        }
-
-        $previousVariant = $this->productVariant;
         $this->productVariant = $productVariant;
-
-        if (null !== $previousVariant) {
-            $previousVariant->setBox(null);
-        }
-
-        if (null !== $productVariant) {
-            $productVariant->setBox($this);
-        }
     }
 }

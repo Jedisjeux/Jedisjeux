@@ -6,6 +6,8 @@ use App\Entity\ProductBox;
 use App\Entity\ProductBoxImage;
 use App\EventSubscriber\CreateProductBoxThumbnailSubscriber;
 use Doctrine\Common\EventSubscriber;
+use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Events;
 use Imagine\Filter\FilterInterface;
 use Liip\ImagineBundle\Binary\BinaryInterface;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
@@ -24,14 +26,29 @@ class CreateProductBoxThumbnailSubscriberSpec extends ObjectBehavior
         $this->beConstructedWith($dataManager, $filterManager, $cacheManager);
     }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(CreateProductBoxThumbnailSubscriber::class);
-    }
-
     function it_implements_event_subscriber_interface(): void
     {
         $this->shouldImplement(EventSubscriber::class);
+    }
+
+    function it_subscribes_to_events()
+    {
+        $this->getSubscribedEvents()->shouldReturn([
+            Events::postPersist,
+            Events::postUpdate,
+        ]);
+    }
+
+    function it_does_nothing_when_subject_is_not_a_product_box_type(
+        LifecycleEventArgs $args,
+        \stdClass $box,
+        ProductBoxImage $image
+    ): void {
+        $args->getObject()->willReturn($box);
+
+        $image->getWebPath()->shouldNotBeCalled();
+
+        $this->postPersist($args);
     }
 
     function it_creates_thumbnail(

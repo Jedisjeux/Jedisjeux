@@ -15,3 +15,9 @@ winzou_state_machine:
             reject:
                 from: [new]
                 to: rejected
+        callbacks:
+            after:
+                enable:
+                    on: "accept"
+                    do: ["@App\PublicationManager\ProductBoxPublicationManager", "enable"]
+                    args: ["object"]
