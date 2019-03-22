@@ -22,7 +22,8 @@
                                        aria-haspopup="true"
                                        aria-expanded="false">
                                         {% if box %}
-                                            <img src="{{ box.image.webPath | imagine_filter('full') }}"
+                                            {% set runtimeConfig = {'relative_resize': {'heighten': box.height} } %}
+                                            <img src="{{ box.image.webPath | imagine_filter('product_box', runtimeConfig) }}"
                                                  alt="{{ product_list_item.product }}"/>
                                         {% else %}
                                             <img src="{{ asset('assets/frontend/images/placeholder.png'| imagine_filter('thumbnail')) }}"
