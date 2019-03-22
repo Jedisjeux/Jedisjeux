@@ -6,14 +6,14 @@
 
             <!-- main start -->
             <!-- ================ -->
-            <div id="article-list" class="main col-md-12">
+            <div id="game-library-list" class="main col-md-12">
                 <div class="games-library bg-black">
                     <div class="content">
                         {% spaceless %}
                             {% for product_list_item in product_list_items.data %}
                                 {% set product = product_list_item.product %}
                                 {% set box = product.firstVariant.enabledBox %}
-                                <div class="dropdown show" style="display: inline-block">
+                                <div class="game-library-item dropdown show" style="display: inline-block">
                                     <a class=""
                                        href="#"
                                        role="button"
