@@ -7,6 +7,10 @@ services:
         namespace: App\EventSubscriber\
         resource: '../../src/EventSubscriber/*'
 
+    _instanceof:
+        Doctrine\Common\EventSubscriber:
+            tags: [doctrine.event_subscriber]
+
     App\EventSubscriber\CreateTopicForArticleSubscriber:
         arguments:
             $topicRepository: '@app.repository.topic'
