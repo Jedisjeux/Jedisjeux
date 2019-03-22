@@ -33,9 +33,7 @@ class CreatePage extends BaseCreatePage
     {
         $filesPath = $this->getParameter('files_path');
 
-        $imageForm = $this->getElement('image');
-
-        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
+        $this->getElement('image_file')->attachFile($filesPath.$path);
     }
 
     /**
@@ -45,6 +43,7 @@ class CreatePage extends BaseCreatePage
     {
         return array_merge(parent::getDefinedElements(), [
             'image' => '#app_dealer_image',
+            'image_file' => '#app_dealer_image_file',
             'name' => '#app_dealer_name',
         ]);
     }

@@ -159,6 +159,14 @@ class ManagingDealersContext implements Context
     }
 
     /**
+     * @Then I should be notified that the file is not a valid image
+     */
+    public function iShouldBeNotifiedThatFileIsNotAValidImage()
+    {
+        Assert::same($this->createPage->getValidationMessage('image_file'), 'This file is not a valid image.');
+    }
+
+    /**
      * @Then /^there should be (\d+) dealers in the list$/
      */
     public function iShouldSeeDealersInTheList($number)

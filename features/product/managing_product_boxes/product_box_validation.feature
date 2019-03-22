@@ -14,3 +14,11 @@ Feature: Product boxes validation
         And I try to add it
         Then I should be notified that the height is required
         And this product box should not be added
+
+    @ui
+    Scenario: Trying to add a new product box with wrong image type
+        Given I want to create a new product box
+        When I attach the "philibert.csv" image
+        And I try to add it
+        Then I should be notified that the file is not a valid image
+        And this product box should not be added

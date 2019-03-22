@@ -14,3 +14,11 @@ Feature: Dealers validation
         And I try to add it
         Then I should be notified that the name is required
         And this dealer should not be added
+
+    @ui
+    Scenario: Trying to add a new dealer with wrong image type
+        Given I want to create a new dealer
+        When I attach the "philibert.csv" image
+        And I try to add it
+        Then I should be notified that the file is not a valid image
+        And this dealer should not be added
