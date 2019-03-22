@@ -110,6 +110,14 @@ class ManagingProductBoxesContext implements Context
     }
 
     /**
+     * @Then I should be notified that the file is not a valid image
+     */
+    public function iShouldBeNotifiedThatFileIsNotAValidImage()
+    {
+        Assert::same($this->createPage->getValidationMessage('image_file'), 'This file is not a valid image.');
+    }
+
+    /**
      * @Then this product box should not be added
      */
     public function thisProductBoxShouldNotBeAdded()

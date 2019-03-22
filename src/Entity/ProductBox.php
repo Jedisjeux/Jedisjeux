@@ -59,6 +59,8 @@ class ProductBox implements ResourceInterface
      * @var ProductBoxImage|null
      *
      * @ORM\OneToOne(targetEntity="ProductBoxImage", cascade={"persist"})
+     *
+     * @Assert\Valid
      */
     private $image;
 

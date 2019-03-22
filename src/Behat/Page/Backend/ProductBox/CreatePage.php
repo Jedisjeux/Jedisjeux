@@ -59,6 +59,7 @@ class CreatePage extends BaseCreatePage
         return array_merge(parent::getDefinedElements(), [
             'height' => '#app_product_box_realHeight',
             'image' => '#app_product_box_image',
+            'image_file' => '#app_product_box_image_file',
             'product' => '#app_product_box_product',
         ]);
     }
