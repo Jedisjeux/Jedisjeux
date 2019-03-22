@@ -17,9 +17,6 @@ use App\Form\Type\User\AppUserType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * @author Corentin Nicole <corentin@mobizel.com>
- */
 final class CustomerTypeExtension extends AbstractTypeExtension
 {
     /**
@@ -33,8 +30,8 @@ final class CustomerTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function getExtendedType()
+    public static function getExtendedTypes()
     {
-        return CustomerType::class;
+        return [CustomerType::class];
     }
 }

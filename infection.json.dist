@@ -8,14 +8,15 @@
             "Behat",
             "Command",
             "DependencyInjection",
-            "src/Form/Extension",
-            "src/Form/Filter",
-            "src/Form/Type",
-            "src/Menu",
+            "Formatter",
+            "Menu",
             "Migrations",
             "Repository",
             "Fixture",
-            "View"
+            "Form/Filter",
+            "Form/Type",
+            "View",
+            "Kernel.php"
         ]
     },
     "logs": {
