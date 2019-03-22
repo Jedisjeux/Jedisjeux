@@ -12,7 +12,6 @@
 namespace App\Entity;
 
 use Sylius\Component\Product\Model\ProductInterface as BaseProductInterface;
-use Sylius\Component\Product\Model\ProductVariantInterface;
 
 interface ProductInterface extends BaseProductInterface
 {

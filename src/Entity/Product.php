@@ -14,13 +14,11 @@ namespace App\Entity;
 use App\Validator\Constraints as CustomAssert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Product\Model\Product as BaseProduct;
 use Sylius\Component\Product\Model\ProductTranslationInterface;
-use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
@@ -360,21 +358,15 @@ class Product extends BaseProduct implements ProductInterface, ReviewableInterfa
     }
 
     /**
-     * @return ProductVariantInterface|ProductVariant|null
+     * {@inheritdoc}
      */
     public function getFirstVariant(): ?ProductVariantInterface
     {
-        if ($this->variants->isEmpty()) {
+        if (!$this->hasVariants()) {
             return null;
         }
 
-        // todo remove after sylius update (variants will be sorted by position)
-        $sort = Criteria::create();
-        $sort->orderBy([
-            'position' => Criteria::ASC,
-        ]);
-
-        return $this->variants->matching($sort)->first();
+        return $this->variants->first();
     }
 
     /**
