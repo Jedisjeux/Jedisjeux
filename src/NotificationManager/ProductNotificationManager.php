@@ -17,7 +17,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>

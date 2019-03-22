@@ -89,6 +89,7 @@ app:
         game_play_specifications: Game play specifications
         games: Games
         height: Height
+        height_in_millimeter: Height in millimeter
         icon_class: Icon class
         image_legend: Image legend
         image_on_the_left_side: Image on the left side
@@ -190,6 +191,7 @@ app:
         product_boxes: Product boxes
         product_lists: Product lists
         product_manager: Product manager
+        propose_an_image: Purpose an image
         pub_banners: Pub banners
         public: Public
         publish: Publish

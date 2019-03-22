@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * This file is part of Jedisjeux.
  *
  * (c) Loïc Frémont
@@ -13,9 +13,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -25,7 +24,9 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  */
 class ProductBox implements ResourceInterface
 {
-    use IdentifiableTrait, Timestampable;
+    use IdentifiableTrait,
+        Timestampable,
+        ToggleableTrait;
 
     const RATIO = 0.645;
 
@@ -50,7 +51,7 @@ class ProductBox implements ResourceInterface
     /**
      * @var ProductVariantInterface|null
      *
-     * @ORM\OneToOne(targetEntity="ProductVariant", mappedBy="box")
+     * @ORM\ManyToOne(targetEntity="ProductVariant", inversedBy="boxes")
      */
     private $productVariant;
 
@@ -62,22 +63,25 @@ class ProductBox implements ResourceInterface
     private $image;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer")
      */
     private $height;
 
     /**
-     * @var integer|null
+     * @var int|null
      *
      * @ORM\Column(type="integer")
+     *
+     * @Assert\NotBlank
      */
     private $realHeight;
-    
+
     public function __construct()
     {
         $this->status = static::STATUS_NEW;
+        $this->disable();
     }
 
     /**
@@ -165,6 +169,14 @@ class ProductBox implements ResourceInterface
     public function setProduct(?ProductInterface $product): void
     {
         $this->product = $product;
+
+        if (null === $product) {
+            $this->setProductVariant(null);
+
+            return;
+        }
+
+        $this->setProductVariant($product->getFirstVariant());
     }
 
     /**

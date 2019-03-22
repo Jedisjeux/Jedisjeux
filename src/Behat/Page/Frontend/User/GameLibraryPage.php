@@ -28,9 +28,9 @@ class GameLibraryPage extends SymfonyPage
      */
     public function countGames(): int
     {
-        $gameLibrary = $this->getDocument()->find('css', '#article-list');
+        $gameLibrary = $this->getDocument()->find('css', '#game-library-list');
 
-        $games = $gameLibrary->findAll('css', 'a');
+        $games = $gameLibrary->findAll('css', '.game-library-item');
 
         return count($games);
     }

@@ -39,9 +39,9 @@ class CreateProductBoxThumbnailSubscriber implements EventSubscriber
     private $cacheManager;
 
     /**
-     * @param DataManager $dataManager
+     * @param DataManager   $dataManager
      * @param FilterManager $filterManager
-     * @param CacheManager $cacheManager
+     * @param CacheManager  $cacheManager
      */
     public function __construct(DataManager $dataManager, FilterManager $filterManager, CacheManager $cacheManager)
     {
@@ -56,7 +56,8 @@ class CreateProductBoxThumbnailSubscriber implements EventSubscriber
     public function getSubscribedEvents()
     {
         return [
-            Events::postPersist
+            Events::postPersist,
+            Events::postUpdate,
         ];
     }
 
@@ -84,8 +85,8 @@ class CreateProductBoxThumbnailSubscriber implements EventSubscriber
             'filters' => [
                 'relative_resize' => [
                     'heighten' => $box->getHeight(),
-                ]
-            ]
+                ],
+            ],
         ]);
 
         $this->cacheManager->store($filteredBinary, $imagePath, static::FILTER);

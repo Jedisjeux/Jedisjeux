@@ -23,7 +23,7 @@ use Sylius\Component\Product\Model\ProductVariant as BaseProductVariant;
  *
  * @JMS\ExclusionPolicy("all")
  */
-class ProductVariant extends BaseProductVariant
+class ProductVariant extends BaseProductVariant implements ProductVariantInterface
 {
     const RELEASED_AT_PRECISION_ON_DAY = 'on-day';
     const RELEASED_AT_PRECISION_ON_MONTH = 'on-month';
@@ -64,11 +64,11 @@ class ProductVariant extends BaseProductVariant
     protected $oldHref;
 
     /**
-     * @var ProductBox|null
+     * @var ProductBox[]|Collection
      *
-     * @ORM\OneToOne(targetEntity="ProductBox", inversedBy="productVariant")
+     * @ORM\OneToMany(targetEntity="ProductBox", mappedBy="productVariant")
      */
-    protected $box;
+    protected $boxes;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -115,6 +115,7 @@ class ProductVariant extends BaseProductVariant
         $this->designers = new ArrayCollection();
         $this->artists = new ArrayCollection();
         $this->publishers = new ArrayCollection();
+        $this->boxes = new ArrayCollection();
         $this->code = uniqid('variant_');
     }
 
@@ -232,19 +233,49 @@ class ProductVariant extends BaseProductVariant
     }
 
     /**
-     * @return ProductBox|null
+     * {@inheritdoc}
      */
-    public function getBox(): ?ProductBox
+    public function getBoxes(): Collection
     {
-        return $this->box;
+        return $this->boxes;
     }
 
     /**
-     * @param ProductBox|null $box
+     * {@inheritdoc}
      */
-    public function setBox(?ProductBox $box): void
+    public function hasBox(ProductBox $box): bool
     {
-        $this->box = $box;
+        return $this->boxes->contains($box);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addBox(ProductBox $box): void
+    {
+        if (!$this->hasBox($box)) {
+            $this->boxes->add($box);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeBox(ProductBox $box): void
+    {
+        $this->boxes->removeElement($box);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEnabledBox(): ?ProductBox
+    {
+        $boxes = $this->boxes->filter(function (ProductBox $box) {
+            return $box->isEnabled();
+        });
+
+        return count($boxes) ? $boxes->first() : null;
     }
 
     /**

@@ -13,3 +13,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
         public: true
+
+    App\PublicationManager\ProductBoxPublicationManager:
+        public: true
+        autowire: true

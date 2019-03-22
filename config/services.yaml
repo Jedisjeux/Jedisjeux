@@ -47,6 +47,7 @@ imports:
     - { resource: services/calculator.yml }
     - { resource: services/command.yml }
     - { resource: services/context.yml }
+    - { resource: services/factory.yml }
     - { resource: services/feed.yml }
     - { resource: services/filter.yml }
     - { resource: services/fixtures.yml }

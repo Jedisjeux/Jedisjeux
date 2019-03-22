@@ -27,3 +27,7 @@ services:
             - "@router"
             - "@translator"
         public: true
+
+    App\NotificationManager\ProductBoxNotificationManager:
+        autowire: true
+        public: true

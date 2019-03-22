@@ -36,6 +36,10 @@ sylius_product:
 app_frontend_product_list_item:
     resource: "frontend/product_list_item.yml"
 
+app_frontend_product_box:
+    resource: "frontend/product_box.yml"
+    prefix: /products/{slug}/boxes
+
 sylius_frontend_product_review:
     resource: "frontend/product_review.yml"
     prefix: /products/{slug}/reviews
