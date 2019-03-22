@@ -12,7 +12,7 @@
                         {% spaceless %}
                             {% for product_list_item in product_list_items.data %}
                                 {% set product = product_list_item.product %}
-                                {% set box = product.firstVariant.box %}
+                                {% set box = product.firstVariant.enabledBox %}
                                 <div class="dropdown show" style="display: inline-block">
                                     <a class=""
                                        href="#"

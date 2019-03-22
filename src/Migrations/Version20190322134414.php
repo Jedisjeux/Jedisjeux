@@ -29,6 +29,7 @@ EOM
 );
 
         $this->addSql('ALTER TABLE sylius_product_variant DROP box_id');
+        $this->addSql('UPDATE jdj_product_box set enabled=1');
     }
 
     public function down(Schema $schema) : void

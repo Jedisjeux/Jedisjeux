@@ -13,9 +13,8 @@ namespace App\Fixture\Factory;
 
 use App\Entity\ProductBox;
 use App\Entity\ProductBoxImage;
-use App\Entity\ProductVariant;
+use App\Entity\ProductVariantInterface;
 use App\Fixture\OptionsResolver\LazyOption;
-use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -97,6 +96,10 @@ class ProductBoxExampleFactory extends AbstractExampleFactory implements Example
 
             ->setDefault('status', function (Options $options) {
                 return $this->faker->randomElement([ProductBox::STATUS_NEW, ProductBox::STATUS_ACCEPTED, ProductBox::STATUS_REJECTED]);
+            })
+
+            ->setDefault('enabled', function (Options $options) {
+                return ProductBox::STATUS_ACCEPTED === $options['status'];
             });
     }
 
@@ -112,10 +115,11 @@ class ProductBoxExampleFactory extends AbstractExampleFactory implements Example
         $productBox->setRealHeight($options['real_height']);
         $productBox->setHeight($options['height']);
         $productBox->setStatus($options['status']);
+        $productBox->setEnabled($options['enabled']);
+        $productBox->setProductVariant($options['product_variant']);
 
-        /** @var ProductVariant $variant */
+        /** @var ProductVariantInterface $variant */
         $variant = $options['product_variant'];
-        $variant->setBox($productBox);
         $productBox->setProduct($variant->getProduct());
 
         $this->createImage($productBox, $options);
