@@ -63,6 +63,19 @@ class CreateProductBoxThumbnailSubscriber implements EventSubscriber
 
     public function postPersist(LifecycleEventArgs $args)
     {
+        $this->createThumbnail($args);
+    }
+
+    public function postUpdate(LifecycleEventArgs $args)
+    {
+        $this->createThumbnail($args);
+    }
+
+    /**
+     * @param LifecycleEventArgs $args
+     */
+    public function createThumbnail(LifecycleEventArgs $args): void
+    {
         /** @var ProductBox $box */
         $box = $args->getObject();
 
@@ -70,14 +83,6 @@ class CreateProductBoxThumbnailSubscriber implements EventSubscriber
             return;
         }
 
-        $this->createThumbnail($box);
-    }
-
-    /**
-     * @param ProductBox $box
-     */
-    public function createThumbnail(ProductBox $box)
-    {
         $imagePath = $box->getImage()->getWebPath();
 
         $binary = $this->dataManager->find(static::FILTER, $imagePath);
