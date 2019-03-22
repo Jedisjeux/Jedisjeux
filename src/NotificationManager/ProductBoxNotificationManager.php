@@ -18,13 +18,14 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Model\UserInterface;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProductBoxNotificationManager
 {
     /**
-     * @var RepositoryInterface|UserRepository
+     * @var UserRepositoryInterface|UserRepository
      */
     private $userRepository;
 
@@ -49,20 +50,20 @@ class ProductBoxNotificationManager
     private $manager;
 
     /**
-     * @param RepositoryInterface $userRepository
-     * @param FactoryInterface    $notificationFactory
-     * @param RouterInterface     $router
-     * @param ObjectManager       $manager
-     * @param TranslatorInterface $translator
+     * @param UserRepositoryInterface $appUserRepository
+     * @param FactoryInterface        $notificationFactory
+     * @param RouterInterface         $router
+     * @param ObjectManager           $manager
+     * @param TranslatorInterface     $translator
      */
     public function __construct(
-        RepositoryInterface $userRepository,
+        UserRepositoryInterface $appUserRepository,
         FactoryInterface $notificationFactory,
         RouterInterface $router,
         TranslatorInterface $translator,
         ObjectManager $manager
     ) {
-        $this->userRepository = $userRepository;
+        $this->userRepository = $appUserRepository;
         $this->notificationFactory = $notificationFactory;
         $this->router = $router;
         $this->translator = $translator;
