@@ -44,7 +44,7 @@ class Notification implements ResourceInterface
      *
      * @Expose
      */
-    protected $authors;
+    private $authors;
 
     /**
      * @var CustomerInterface
@@ -54,14 +54,14 @@ class Notification implements ResourceInterface
      * )
      * @ORM\JoinColumn(nullable=false)
      */
-    protected $recipient;
+    private $recipient;
 
     /**
      * @var bool
      *
      * @ORM\Column(type="boolean", name="is_read")
      */
-    protected $read;
+    private $read;
 
     /**
      * @var string
@@ -69,7 +69,7 @@ class Notification implements ResourceInterface
      * @ORM\Column(type="text")
      * @Expose
      */
-    protected $message;
+    private $message;
 
     /**
      * @var string
@@ -77,7 +77,7 @@ class Notification implements ResourceInterface
      * @ORM\Column(type="string")
      * @Expose
      */
-    protected $target;
+    private $target;
 
     /**
      * @var Topic
@@ -85,21 +85,28 @@ class Notification implements ResourceInterface
      * @ORM\ManyToOne(targetEntity="Topic")
      * @Expose
      */
-    protected $topic;
+    private $topic;
 
     /**
-     * @var ProductInterface
+     * @var ProductInterface|null
      *
      * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface", inversedBy="notifications")
      */
-    protected $product;
+    private $product;
 
     /**
-     * @var Article
+     * @var Article|null
      *
      * @ORM\ManyToOne(targetEntity="Article")
      */
-    protected $article;
+    private $article;
+
+    /**
+     * @var ProductBox|null
+     *
+     * @ORM\ManyToOne(targetEntity="ProductBox")
+     */
+    private $productBox;
 
     /**
      * Notification constructor.
@@ -256,5 +263,21 @@ class Notification implements ResourceInterface
     public function setArticle(?Article $article): void
     {
         $this->article = $article;
+    }
+
+    /**
+     * @return ProductBox|null
+     */
+    public function getProductBox(): ?ProductBox
+    {
+        return $this->productBox;
+    }
+
+    /**
+     * @param ProductBox|null $productBox
+     */
+    public function setProductBox(?ProductBox $productBox): void
+    {
+        $this->productBox = $productBox;
     }
 }

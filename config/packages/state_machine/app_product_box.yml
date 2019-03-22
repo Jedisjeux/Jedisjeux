@@ -19,5 +19,9 @@ winzou_state_machine:
             after:
                 enable:
                     on: "accept"
-                    do: ["@App\PublicationManager\ProductBoxPublicationManager", "enable"]
+                    do: ['@App\PublicationManager\ProductBoxPublicationManager', "enable"]
+                    args: ["object"]
+                notify_reviewers:
+                    on: "ask_for_review"
+                    do: ['@App\NotificationManager\ProductBoxNotificationManager', "notifyReviewers"]
                     args: ["object"]

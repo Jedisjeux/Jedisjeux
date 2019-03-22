@@ -14,6 +14,7 @@ namespace App\Factory;
 use App\Entity\Article;
 use App\Entity\Notification;
 use App\Entity\Post;
+use App\Entity\ProductBox;
 use App\Entity\Topic;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -140,6 +141,21 @@ class NotificationFactory implements FactoryInterface
         /** @var Notification $notification */
         $notification = $this->createForCustomer($customer);
         $notification->setArticle($article);
+
+        return $notification;
+    }
+
+    /**
+     * @param ProductBox        $productBox
+     * @param CustomerInterface $customer
+     *
+     * @return Notification
+     */
+    public function createForProductBox(ProductBox $productBox, CustomerInterface $customer)
+    {
+        /** @var Notification $notification */
+        $notification = $this->createForCustomer($customer);
+        $notification->setProductBox($productBox);
 
         return $notification;
     }

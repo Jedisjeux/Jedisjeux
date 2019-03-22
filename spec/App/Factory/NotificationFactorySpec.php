@@ -4,6 +4,7 @@ namespace spec\App\Factory;
 
 use App\Entity\Article;
 use App\Entity\Notification;
+use App\Entity\ProductBox;
 use App\Factory\NotificationFactory;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Customer\Model\CustomerInterface;
@@ -43,5 +44,11 @@ class NotificationFactorySpec extends ObjectBehavior
     {
         $notification = $this->createForArticle($article, $customer);
         $notification->getArticle()->shouldReturn($article);
+    }
+
+    function it_can_create_a_notification_for_a_product_box(ProductBox $productBox, CustomerInterface $customer)
+    {
+        $notification = $this->createForProductBox($productBox, $customer);
+        $notification->getProductBox()->shouldReturn($productBox);
     }
 }

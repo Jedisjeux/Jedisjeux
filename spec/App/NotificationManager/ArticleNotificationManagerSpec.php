@@ -11,7 +11,7 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ArticleNotificationManagerSpec extends ObjectBehavior
 {

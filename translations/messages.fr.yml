@@ -464,22 +464,24 @@ label:
   zone: Zone
 
 text:
-  confirmation: Souhaitez-vous supprimer cet élément ?
-  error:
-      403: "<p>Vous n'avez pas les droits pour accéder à cette page : \"ahhhhhh !!!\"</p>"
-      404: "<p>Dans le néant on ne vous entend pas crier : \"ahhhhhh !!!\"</p>"
-      500: "<p>Quelque chose est cassée. Merci de nous envoyer un email et écrivez ce que vous faisiez avant de rencontrer cette erreur. Nous corrigerons aussi vite que possible. Désolé pour la gêne occasionnée.</p>"
-      503: "<p>Nous faisons actuellement une opération de maintenance, nous revenons très vite...</p>"
-  notification:
-      article:
-          ask_for_review: L'article <strong>%ARTICLE_NAME%</strong> a besoin d'une relecture.
-          ask_for_publication: L'article <strong>%ARTICLE_NAME%</strong> est prêt à valider.
-      product:
-          ask_for_translation: Le jeu <strong>%PRODUCT_NAME%</strong> a besoin d'une traduction.
-          ask_for_review: Le jeu <strong>%PRODUCT_NAME%</strong> a besoin d'une relecture.
-          ask_for_publication: Le jeu <strong>%PRODUCT_NAME%</strong> est prêt à valider.
-      topic_reply: <strong>%USERNAME%</strong> a répondu au sujet %TOPIC_NAME%.
-      topic_replies: <strong>%USERNAMES%</strong> ont répondu au sujet %TOPIC_NAME%.
+    confirmation: Souhaitez-vous supprimer cet élément ?
+    error:
+        403: "<p>Vous n'avez pas les droits pour accéder à cette page : \"ahhhhhh !!!\"</p>"
+        404: "<p>Dans le néant on ne vous entend pas crier : \"ahhhhhh !!!\"</p>"
+        500: "<p>Quelque chose est cassée. Merci de nous envoyer un email et écrivez ce que vous faisiez avant de rencontrer cette erreur. Nous corrigerons aussi vite que possible. Désolé pour la gêne occasionnée.</p>"
+        503: "<p>Nous faisons actuellement une opération de maintenance, nous revenons très vite...</p>"
+    notification:
+        article:
+            ask_for_review: L'article <strong>%ARTICLE_NAME%</strong> a besoin d'une relecture.
+            ask_for_publication: L'article <strong>%ARTICLE_NAME%</strong> est prêt à valider.
+        product:
+            ask_for_translation: Le jeu <strong>%PRODUCT_NAME%</strong> a besoin d'une traduction.
+            ask_for_review: Le jeu <strong>%PRODUCT_NAME%</strong> a besoin d'une relecture.
+            ask_for_publication: Le jeu <strong>%PRODUCT_NAME%</strong> est prêt à valider.
+        product_box:
+            ask_for_review: La boite de jeu <strong>%PRODUCT_NAME%</strong> a besoin d'une vérification.
+        topic_reply: <strong>%USERNAME%</strong> a répondu au sujet %TOPIC_NAME%.
+        topic_replies: <strong>%USERNAMES%</strong> ont répondu au sujet %TOPIC_NAME%.
 
 emails:
     ending: Cordialement,
