@@ -52,7 +52,9 @@ class ProductBoxType extends AbstractType
                     'label' => 'sylius.ui.product_variants',
                     'required' => false,
                     'class' => ProductVariant::class,
-                    'choice_name' => 'name',
+                    'choice_label' => function (ProductVariant $variant) {
+                        return $variant->getName().' - '.$variant->getPublishers()->first();
+                    },
                     'choice_value' => 'code',
                     'query_builder' => function (EntityRepository $er) use ($productBox) {
                         return $er->createQueryBuilder('o')
