@@ -62,11 +62,19 @@ class ManagingProductBoxesContext implements Context
     }
 
     /**
-     * @When /^I want to create a new product box$/
+     * @When I want to create a new product box
      */
     public function iWantToAddProductBox(): void
     {
         $this->createPage->open();
+    }
+
+    /**
+     * @When I want to browse product boxes
+     */
+    public function iWantToBrowseProductBoxes(): void
+    {
+        $this->indexPage->open();
     }
 
     /**
@@ -95,12 +103,20 @@ class ManagingProductBoxesContext implements Context
     }
 
     /**
-     * @When /^I specify its height as (\d+)$/
+     * @When I specify its height as :height
      * @When I do not specify its height
      */
     public function iSpecifyItsHeightAs(?int $height = null)
     {
         $this->createPage->specifyHeight($height);
+    }
+
+    /**
+     * @When /^I change its height as (\d+)$/
+     */
+    public function iChangeItsPlayedAtAs($height)
+    {
+        $this->updatePage->changeHeight($height);
     }
 
     /**
@@ -110,6 +126,15 @@ class ManagingProductBoxesContext implements Context
     public function iAddIt()
     {
         $this->createPage->create();
+    }
+
+    /**
+     * @When I save my changes
+     * @When I try to save my changes
+     */
+    public function iSaveMyChanges()
+    {
+        $this->updatePage->saveChanges();
     }
 
     /**
@@ -126,6 +151,18 @@ class ManagingProductBoxesContext implements Context
     public function iRejectBox()
     {
         $this->updatePage->reject();
+    }
+
+    /**
+     * @When I delete product box of :product
+     */
+    public function iDeleteBox(ProductInterface $product)
+    {
+        $productName = $product->getName();
+
+        $this->indexPage->deleteResourceOnPage([
+            'product' => $productName,
+        ]);
     }
 
     /**
@@ -194,5 +231,35 @@ class ManagingProductBoxesContext implements Context
             'product' => $productBox->getProduct()->getName(),
             'status' => $status,
         ]));
+    }
+
+    /**
+     * @Then there should not be product box of :product anymore
+     */
+    public function thereShouldBeNoGamePlayWitAnymore(ProductInterface $product)
+    {
+        Assert::false($this->indexPage->isSingleResourceOnPage([
+            'product' => $product->getName(),
+        ]));
+    }
+
+    /**
+     * @Then this product box should be :height high
+     */
+    public function thisProductBoxShouldBePlayedAt($height)
+    {
+        $this->assertElementValue('height', $height);
+    }
+
+    /**
+     * @param string $element
+     * @param string $value
+     */
+    private function assertElementValue($element, $value)
+    {
+        Assert::true(
+            $this->updatePage->hasResourceValues([$element => $value]),
+            sprintf('Product box should have %s with %s value.', $element, $value)
+        );
     }
 }
