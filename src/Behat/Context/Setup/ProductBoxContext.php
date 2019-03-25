@@ -50,16 +50,17 @@ class ProductBoxContext implements Context
     }
 
     /**
+     * @Given /^(this product) has(?:| also) a box$/
      * @Given /^(this product) has(?:| also) a box with "([^"]+)" status$/
      */
     public function thisProductHasABoxWithStatus(
         ProductInterface $product,
-        string $status
+        string $status = null
     ) {
         /** @var ProductBox $productBox */
         $productBox = $this->productBoxFactory->create([
             'product' => $product,
-            'status' => $status,
+            'status' => $status ?? ProductBox::STATUS_ACCEPTED,
         ]);
 
         $this->productBoxRepository->add($productBox);
