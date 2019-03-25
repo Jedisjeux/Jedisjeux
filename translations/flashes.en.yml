@@ -24,8 +24,8 @@ app:
         update: Post has been successfully updated.
         delete: Post has been successfully deleted.
     product_box:
-        accept: Game box a been successfully accepted.
-        reject: Game box a been successfully rejected.
+        accept: Game box has been successfully accepted.
+        reject: Game box has been successfully rejected.
         wait_for_the_acceptation: Your game box is waiting for the acceptation.
     string_block:
         create: Le bloc de chaîne has been successfully created.

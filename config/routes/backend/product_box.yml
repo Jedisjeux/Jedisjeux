@@ -10,6 +10,9 @@ app_backend_product_box:
                 subheader: app.ui.manage_product_boxes
             index:
                 icon: th
+            update:
+                templates:
+                    toolbar: backend/product_box/_toolbar.html.twig
         templates: backend/crud
     type: sylius.resource
 

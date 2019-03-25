@@ -11,9 +11,12 @@
 
 namespace App\Behat\Context\Ui\Backend;
 
+use App\Behat\NotificationType;
 use App\Behat\Page\Backend\ProductBox\CreatePage;
 use App\Behat\Page\Backend\ProductBox\IndexPage;
 use App\Behat\Page\Backend\ProductBox\UpdatePage;
+use App\Behat\Service\NotificationCheckerInterface;
+use App\Entity\ProductBox;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Product\Model\ProductInterface;
 use Webmozart\Assert\Assert;
@@ -36,15 +39,26 @@ class ManagingProductBoxesContext implements Context
     private $updatePage;
 
     /**
-     * @param CreatePage $createPage
-     * @param IndexPage  $indexPage
-     * @param UpdatePage $updatePage
+     * @var NotificationCheckerInterface
      */
-    public function __construct(CreatePage $createPage, IndexPage $indexPage, UpdatePage $updatePage)
-    {
+    private $notificationChecker;
+
+    /**
+     * @param CreatePage                   $createPage
+     * @param IndexPage                    $indexPage
+     * @param UpdatePage                   $updatePage
+     * @param NotificationCheckerInterface $notificationChecker
+     */
+    public function __construct(
+        CreatePage $createPage,
+        IndexPage $indexPage,
+        UpdatePage $updatePage,
+        NotificationCheckerInterface $notificationChecker
+    ) {
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
+        $this->notificationChecker = $notificationChecker;
     }
 
     /**
@@ -53,6 +67,14 @@ class ManagingProductBoxesContext implements Context
     public function iWantToAddProductBox(): void
     {
         $this->createPage->open();
+    }
+
+    /**
+     * @Given /^I want to edit (this product box)$/
+     */
+    public function iWantToEditTheArticle(ProductBox $productBox)
+    {
+        $this->updatePage->open(['id' => $productBox->getId()]);
     }
 
     /**
@@ -91,6 +113,22 @@ class ManagingProductBoxesContext implements Context
     }
 
     /**
+     * @When I accept this box
+     */
+    public function iAcceptBox()
+    {
+        $this->updatePage->accept();
+    }
+
+    /**
+     * @When I reject this box
+     */
+    public function iRejectBox()
+    {
+        $this->updatePage->reject();
+    }
+
+    /**
      * @Then the box for product :product should appear in the website
      * @Then I should see the box for product :product in the list
      */
@@ -125,5 +163,36 @@ class ManagingProductBoxesContext implements Context
         $this->indexPage->open();
 
         Assert::same($this->indexPage->countItems(), 0);
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully accepted
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyAccepted()
+    {
+        $this->notificationChecker->checkNotification('has been successfully accepted.', NotificationType::success());
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully rejected
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyRejected()
+    {
+        $this->notificationChecker->checkNotification('has been successfully rejected.', NotificationType::success());
+    }
+
+    /**
+     * @Then /^(this product box) should have "([^"]+)" status$/
+     */
+    public function thisArticleWithTitleShouldHaveStatus(ProductBox $productBox, $status)
+    {
+        $this->indexPage->open();
+
+        $status = ucfirst($status);
+
+        Assert::true($this->indexPage->isSingleResourceOnPage([
+            'product' => $productBox->getProduct()->getName(),
+            'status' => $status,
+        ]));
     }
 }
