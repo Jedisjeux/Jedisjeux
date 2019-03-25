@@ -2,6 +2,8 @@ parameters:
     locale: fr_FR
 
 framework:
+    assets:
+        version_strategy: incenteev_hashed_asset.strategy
     secret: '%env(APP_SECRET)%'
     #default_locale: en
     csrf_protection: true

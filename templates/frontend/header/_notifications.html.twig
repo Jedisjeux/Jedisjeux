@@ -1,19 +1,34 @@
-<div class="btn-group notificationBlock">
-    <button type="button" class="btn dropdown-toggle dropdown-toggle--no-caret" id="{{ id|default('header-drop-2') }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell-o"></i><span class="badge-count default-bg" style="display: none;"></span></button>
-    <ul class="dropdown-menu dropdown-menu-right cart dropdown-animation notificationContainer" aria-labelledby="{{ id|default('header-drop-2') }}">
-        <!-- Item 1 -->
-        <li class="notificationItem">
-            <div class="media margin-clear">
-                <div class="d-flex pr-2">
-                    <div class="overlay-container notificationImg">
-                        <img src="{{ '/assets/frontend/images/placeholder.png'| imagine_filter('thumbnail') }}" alt="" class="img-rounded">
-                        <a href="#" class="overlay-link small notificationA"><i class="fa fa-link"></i></a>
-                    </div>
-                </div>
-                <div class="media-body">
-                    <p><a class="notificationA link-dark" href="#"><span class="notificationMessage"></span></a></p>
+{% macro renderNotification(id, message, targetUrl, imagePath) %}
+    <li class="notificationItem">
+        <div class="media margin-clear">
+            <div class="d-flex pr-2">
+                <div class="overlay-container">
+                    <img src="{{ imagePath }}" alt="" class="img-rounded">
+                    <a data-id="{{ id }}"
+                       data-target="{{ targetUrl }}"
+                       href="#"
+                       class="overlay-link small"><i class="fa fa-link"></i></a>
                 </div>
             </div>
-        </li>
+            <div class="media-body">
+                <p><a data-id="{{ id }}"
+                      data-target="{{ targetUrl }}"
+                      class="link-dark"
+                      href="#">{{ message }}</a></p>
+            </div>
+        </div>
+    </li>
+{% endmacro %}
+
+<div class="btn-group notificationBlock">
+    {% import _self as self %}
+
+    <button type="button" class="btn dropdown-toggle dropdown-toggle--no-caret" id="{{ id|default('header-drop-2') }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell-o"></i><span class="badge-count default-bg" style="display: none;"></span></button>
+    <ul class="dropdown-menu dropdown-menu-right cart dropdown-animation app-notifications"
+        aria-labelledby="{{ id|default('header-drop-2') }}"
+        data-url="{{ path('app_api_notification_index') }}"
+        data-prototype="{{ self.renderNotification('__id__', '__message__', '__target_url__', '__image_path__')|escape }}"
+        data-placeholder="{{ '/assets/frontend/images/placeholder.png'|imagine_filter('thumbnail') }}"
+    >
     </ul>
 </div>
