@@ -1,9 +1,0 @@
-app_backend_partial_product_box_status_show:
-    methods: [GET]
-    path: /{id}/status
-    defaults:
-        _controller: app.controller.product_box::showStatusAction
-        _sylius:
-            template: $template
-    requirements:
-        template: "[^?]+"
