@@ -10,6 +10,9 @@ app_backend_product_box:
                 subheader: app.ui.manage_product_boxes
             index:
                 icon: th
+            update:
+                templates:
+                    toolbar: backend/product_box/_toolbar.html.twig
         templates: backend/crud
     type: sylius.resource
 
@@ -38,3 +41,16 @@ app_backend_product_box_reject:
                 transition: reject
             redirect: referer
             flash: app.product_box.reject
+
+app_backend_article_update_state:
+    methods: [PATCH]
+    path: /articles/{id}/status/{transition}
+    defaults:
+        _controller: app.controller.article:applyStateMachineTransitionAction
+        _sylius:
+            section: admin
+            state_machine:
+                graph: app_article
+                transition: $transition
+            csrf_protection: false
+            redirect: referer

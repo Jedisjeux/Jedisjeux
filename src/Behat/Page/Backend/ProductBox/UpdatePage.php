@@ -11,8 +11,10 @@
 
 namespace App\Behat\Page\Backend\ProductBox;
 
+use App\Behat\Behaviour\WorkflowActions;
 use App\Behat\Page\Backend\Crud\UpdatePage as BaseUpdatePage;
 
 class UpdatePage extends BaseUpdatePage
 {
+    use WorkflowActions;
 }

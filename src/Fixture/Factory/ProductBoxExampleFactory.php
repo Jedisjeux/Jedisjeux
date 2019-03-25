@@ -13,12 +13,14 @@ namespace App\Fixture\Factory;
 
 use App\Entity\ProductBox;
 use App\Entity\ProductBoxImage;
+use App\Entity\ProductInterface;
 use App\Entity\ProductVariantInterface;
 use App\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Webmozart\Assert\Assert;
 
 class ProductBoxExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
@@ -31,6 +33,11 @@ class ProductBoxExampleFactory extends AbstractExampleFactory implements Example
      * @var FactoryInterface
      */
     private $productBoxImageFactory;
+
+    /**
+     * @var RepositoryInterface
+     */
+    private $productRepository;
 
     /**
      * @var RepositoryInterface
@@ -52,18 +59,21 @@ class ProductBoxExampleFactory extends AbstractExampleFactory implements Example
      *
      * @param FactoryInterface    $productBoxFactory
      * @param FactoryInterface    $productBoxImageFactory
+     * @param RepositoryInterface $productRepository
      * @param RepositoryInterface $productVariantRepository
      */
     public function __construct(
         FactoryInterface $productBoxFactory,
         FactoryInterface $productBoxImageFactory,
+        RepositoryInterface $productRepository,
         RepositoryInterface $productVariantRepository
     ) {
         $this->productBoxFactory = $productBoxFactory;
-        $this->productVariantRepository = $productVariantRepository;
         $this->productBoxImageFactory = $productBoxImageFactory;
+        $this->productRepository = $productRepository;
+        $this->productVariantRepository = $productVariantRepository;
 
-        $this->faker = \Faker\Factory::create('fr_FR');
+        $this->faker = \Faker\Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
@@ -78,6 +88,16 @@ class ProductBoxExampleFactory extends AbstractExampleFactory implements Example
             ->setDefault('product_variant', LazyOption::randomOne($this->productVariantRepository))
             ->setAllowedTypes('product_variant', ['null', 'string', ProductVariantInterface::class])
             ->setNormalizer('product_variant', LazyOption::findOneBy($this->productVariantRepository, 'code'))
+
+            ->setDefault('product', function (Options $options) {
+                if (null === $options['product_variant']) {
+                    return null;
+                }
+
+                return $options['product_variant']->getProduct();
+            })
+            ->setAllowedTypes('product', ['null', 'string', ProductInterface::class])
+            ->setNormalizer('product', LazyOption::findOneBy($this->productRepository, 'code'))
 
             ->setDefault('image', LazyOption::randomOneImage(
                 __DIR__.'/../../../tests/Resources/fixtures/boxes'
@@ -116,11 +136,8 @@ class ProductBoxExampleFactory extends AbstractExampleFactory implements Example
         $productBox->setHeight($options['height']);
         $productBox->setStatus($options['status']);
         $productBox->setEnabled($options['enabled']);
+        $productBox->setProduct($options['product']);
         $productBox->setProductVariant($options['product_variant']);
-
-        /** @var ProductVariantInterface $variant */
-        $variant = $options['product_variant'];
-        $productBox->setProduct($variant->getProduct());
 
         $this->createImage($productBox, $options);
 

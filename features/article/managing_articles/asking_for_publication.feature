@@ -4,7 +4,7 @@ Feature: Asking for publication
     As a reviewer
     I need to be able to ask for a publication
 
-    Background:l
+    Background:
         Given there are default taxonomies for articles
         And there is a publisher "yoda@example.com"
         And there is a publisher "god@example.com"

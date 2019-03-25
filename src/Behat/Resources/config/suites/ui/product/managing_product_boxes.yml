@@ -9,6 +9,7 @@ default:
 
                 - App\Behat\Context\Setup\SecurityContext
                 - App\Behat\Context\Setup\ProductContext
+                - App\Behat\Context\Setup\ProductBoxContext
 
                 - App\Behat\Context\Ui\Backend\ManagingProductBoxesContext
                 - App\Behat\Context\Ui\Backend\NotificationContext

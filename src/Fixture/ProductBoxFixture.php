@@ -30,9 +30,10 @@ class ProductBoxFixture extends AbstractResourceFixture
     {
         $resourceNode
             ->children()
-            ->scalarNode('height')->cannotBeEmpty()->end()
-            ->scalarNode('image')->cannotBeEmpty()->end()
-            ->scalarNode('product_variant')->cannotBeEmpty()->end()
+                ->scalarNode('height')->cannotBeEmpty()->end()
+                ->scalarNode('image')->cannotBeEmpty()->end()
+                ->scalarNode('product')->cannotBeEmpty()->end()
+                ->scalarNode('product_variant')->cannotBeEmpty()->end()
         ;
     }
 }

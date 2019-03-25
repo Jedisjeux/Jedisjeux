@@ -52,4 +52,20 @@ trait WorkflowActions
     {
         $this->getDocument()->pressButton('Publish');
     }
+
+    /**
+     * @throws ElementNotFoundException
+     */
+    public function accept(): void
+    {
+        $this->getDocument()->pressButton('Accept');
+    }
+
+    /**
+     * @throws ElementNotFoundException
+     */
+    public function reject(): void
+    {
+        $this->getDocument()->pressButton('Reject');
+    }
 }

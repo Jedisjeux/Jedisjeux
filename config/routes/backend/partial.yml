@@ -10,6 +10,10 @@ app_backend_partial_festival_list:
     resource: partial/festival_list.yml
     prefix: /festival-lists
 
+app_backend_partial_product_box:
+    resource: partial/product_box.yml
+    prefix: /boxes
+
 app_backend_partial_session:
     resource: partial/session.yml
     prefix: /sessions
