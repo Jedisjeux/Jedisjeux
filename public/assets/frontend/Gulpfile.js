@@ -35,7 +35,7 @@ var paths = {
             'plugins/countdown/jquery.countdown.js',
             'plugins/countTo/jquery.countTo.js',
             'plugins/slick/slick.min.js',
-            'js/**'
+            'js/**.js'
         ],
         sass: [
             'sass/style.scss',
