@@ -8,11 +8,14 @@ app_backend_product_box:
         vars:
             all:
                 subheader: app.ui.manage_product_boxes
+                templates:
+                    form: backend/product_box/_form.html.twig
             index:
                 icon: th
             update:
                 templates:
                     toolbar: backend/product_box/_toolbar.html.twig
+                    form: backend/product_box/_form.html.twig
         templates: backend/crud
     type: sylius.resource
 
