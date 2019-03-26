@@ -13,6 +13,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -79,6 +80,13 @@ class ProductBox implements ResourceInterface
      * @Assert\NotBlank
      */
     private $realHeight;
+
+    /**
+     * @var CustomerInterface|null
+     *
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Customer\Model\CustomerInterface")
+     */
+    private $author;
 
     public function __construct()
     {
@@ -195,5 +203,21 @@ class ProductBox implements ResourceInterface
     public function setProductVariant(?ProductVariantInterface $productVariant): void
     {
         $this->productVariant = $productVariant;
+    }
+
+    /**
+     * @return CustomerInterface|null
+     */
+    public function getAuthor(): ?CustomerInterface
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param CustomerInterface|null $author
+     */
+    public function setAuthor(?CustomerInterface $author): void
+    {
+        $this->author = $author;
     }
 }

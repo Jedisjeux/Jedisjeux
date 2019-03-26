@@ -61,6 +61,7 @@ class ProductBoxContext implements Context
         $productBox = $this->productBoxFactory->create([
             'product' => $product,
             'status' => $status ?? ProductBox::STATUS_ACCEPTED,
+            'author' => null,
         ]);
 
         $this->productBoxRepository->add($productBox);
