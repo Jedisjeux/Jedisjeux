@@ -7,6 +7,7 @@ use App\Entity\ProductBoxImage;
 use App\Entity\ProductInterface;
 use App\Entity\ProductVariantInterface;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 class ProductBoxSpec extends ObjectBehavior
@@ -110,5 +111,16 @@ class ProductBoxSpec extends ObjectBehavior
     {
         $this->setProductVariant($productVariant);
         $this->getProductVariant()->shouldReturn($productVariant);
+    }
+
+    function it_has_no_author_by_default(): void
+    {
+        $this->getAuthor()->shouldReturn(null);
+    }
+
+    function its_author_is_mutable(CustomerInterface $author): void
+    {
+        $this->setAuthor($author);
+        $this->getAuthor()->shouldReturn($author);
     }
 }

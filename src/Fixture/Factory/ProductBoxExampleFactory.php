@@ -16,6 +16,7 @@ use App\Entity\ProductBoxImage;
 use App\Entity\ProductInterface;
 use App\Entity\ProductVariantInterface;
 use App\Fixture\OptionsResolver\LazyOption;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -45,6 +46,11 @@ class ProductBoxExampleFactory extends AbstractExampleFactory implements Example
     private $productVariantRepository;
 
     /**
+     * @var RepositoryInterface
+     */
+    private $customerRepository;
+
+    /**
      * @var \Faker\Generator
      */
     private $faker;
@@ -61,17 +67,20 @@ class ProductBoxExampleFactory extends AbstractExampleFactory implements Example
      * @param FactoryInterface    $productBoxImageFactory
      * @param RepositoryInterface $productRepository
      * @param RepositoryInterface $productVariantRepository
+     * @param RepositoryInterface $customerRepository
      */
     public function __construct(
         FactoryInterface $productBoxFactory,
         FactoryInterface $productBoxImageFactory,
         RepositoryInterface $productRepository,
-        RepositoryInterface $productVariantRepository
+        RepositoryInterface $productVariantRepository,
+        RepositoryInterface $customerRepository
     ) {
         $this->productBoxFactory = $productBoxFactory;
         $this->productBoxImageFactory = $productBoxImageFactory;
         $this->productRepository = $productRepository;
         $this->productVariantRepository = $productVariantRepository;
+        $this->customerRepository = $customerRepository;
 
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver = new OptionsResolver();
@@ -120,7 +129,12 @@ class ProductBoxExampleFactory extends AbstractExampleFactory implements Example
 
             ->setDefault('enabled', function (Options $options) {
                 return ProductBox::STATUS_ACCEPTED === $options['status'];
-            });
+            })
+
+            ->setDefault('author', LazyOption::randomOne($this->customerRepository))
+            ->setAllowedTypes('author', ['null', 'string', CustomerInterface::class])
+            ->setNormalizer('author', LazyOption::findOneBy($this->customerRepository, 'email'))
+        ;
     }
 
     /**
@@ -138,6 +152,7 @@ class ProductBoxExampleFactory extends AbstractExampleFactory implements Example
         $productBox->setEnabled($options['enabled']);
         $productBox->setProduct($options['product']);
         $productBox->setProductVariant($options['product_variant']);
+        $productBox->setAuthor($options['author']);
 
         $this->createImage($productBox, $options);
 

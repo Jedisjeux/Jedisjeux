@@ -13,6 +13,7 @@ namespace App\Factory;
 
 use App\Entity\ProductBox;
 use App\Entity\ProductInterface;
+use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 class ProductBoxFactory implements FactoryInterface
@@ -23,11 +24,18 @@ class ProductBoxFactory implements FactoryInterface
     private $factory;
 
     /**
-     * @param FactoryInterface $factory
+     * @var CustomerContextInterface
      */
-    public function __construct(FactoryInterface $factory)
+    private $customerContext;
+
+    /**
+     * @param FactoryInterface         $factory
+     * @param CustomerContextInterface $customerContext
+     */
+    public function __construct(FactoryInterface $factory, CustomerContextInterface $customerContext)
     {
         $this->factory = $factory;
+        $this->customerContext = $customerContext;
     }
 
     /**
@@ -35,7 +43,11 @@ class ProductBoxFactory implements FactoryInterface
      */
     public function createNew(): ProductBox
     {
-        return $this->factory->createNew();
+        /** @var ProductBox $productBox */
+        $productBox = $this->factory->createNew();
+        $productBox->setAuthor($this->customerContext->getCustomer());
+
+        return $productBox;
     }
 
     /**
@@ -50,5 +62,4 @@ class ProductBoxFactory implements FactoryInterface
 
         return $productBox;
     }
-
 }

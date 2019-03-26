@@ -34,6 +34,7 @@ class ProductBoxFixture extends AbstractResourceFixture
                 ->scalarNode('image')->cannotBeEmpty()->end()
                 ->scalarNode('product')->cannotBeEmpty()->end()
                 ->scalarNode('product_variant')->cannotBeEmpty()->end()
+                ->scalarNode('author')->cannotBeEmpty()->end()
         ;
     }
 }
