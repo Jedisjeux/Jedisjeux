@@ -13,6 +13,7 @@ app_backend_product_box:
             update:
                 templates:
                     toolbar: backend/product_box/_toolbar.html.twig
+                    form: backend/product_box/_form.html.twig
         templates: backend/crud
     type: sylius.resource
 

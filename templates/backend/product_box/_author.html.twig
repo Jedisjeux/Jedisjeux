@@ -1,0 +1,3 @@
+{% if product_box.author is not null %}
+    {% include 'backend/customer/_info.html.twig' with {'customer': product_box.author} %}
+{% endif %}
