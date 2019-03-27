@@ -25,6 +25,7 @@ var paths = {
             nodeModulesPath + 'jquery-ui-dist/jquery-ui.min.js',
             nodeModulesPath + 'bootstrap/dist/js/bootstrap.bundle.js',
             nodeModulesPath + 'rater-jquery/rater.js',
+            nodeModulesPath + 'cropperjs/dist/cropper.js',
             vendorUiPath + 'Resources/private/js/sylius-form-collection.js',
             'plugins/bootstrap-notify/bootstrap-notify.js',
             'plugins/isotope/imagesloaded.pkgd.min.js',
@@ -45,6 +46,7 @@ var paths = {
         css: [
             nodeModulesPath + 'bootstrap/dist/css/bootstrap.css',
             nodeModulesPath + 'font-awesome/css/font-awesome.css',
+            nodeModulesPath + 'cropperjs/dist/cropper.css',
             'plugins/magnific-popup/magnific-popup.css',
             'css/animations.css',
             'plugins/slick/slick.css'
