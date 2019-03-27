@@ -21,7 +21,11 @@ winzou_state_machine:
                     on: "accept"
                     do: ['@App\PublicationManager\ProductBoxPublicationManager', "enable"]
                     args: ["object"]
-                notify_reviewers:
-                    on: "ask_for_review"
-                    do: ['@App\NotificationManager\ProductBoxNotificationManager', "notifyReviewers"]
+                notify_author_for_accepted_box:
+                    on: "accept"
+                    do: ['@App\NotificationManager\ProductBoxNotificationManager', "notifyAuthor"]
+                    args: ["object"]
+                notify_author_for_rejected_box:
+                    on: "reject"
+                    do: ['@App\NotificationManager\ProductBoxNotificationManager', "notifyAuthor"]
                     args: ["object"]

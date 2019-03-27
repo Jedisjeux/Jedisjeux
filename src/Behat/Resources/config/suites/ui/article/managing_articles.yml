@@ -14,8 +14,9 @@ default:
                 - App\Behat\Context\Setup\TaxonContext
                 - App\Behat\Context\Setup\UserContext
 
+                - App\Behat\Context\Domain\NotificationContext
+
                 - App\Behat\Context\Ui\Backend\ManagingArticlesContext
                 - App\Behat\Context\Ui\Backend\NotificationContext
-                - App\Behat\Context\Ui\NotificationContext
             filters:
                 tags: "@managing_articles && @ui"

@@ -15,6 +15,7 @@ use App\Entity\ProductBox;
 use App\Entity\ProductInterface;
 use App\Fixture\Factory\ProductBoxExampleFactory;
 use Behat\Behat\Context\Context;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 class ProductBoxContext implements Context
@@ -52,16 +53,18 @@ class ProductBoxContext implements Context
     /**
      * @Given /^(this product) has(?:| also) a box$/
      * @Given /^(this product) has(?:| also) a box with "([^"]+)" status$/
+     * @Given /^(this product) has(?:| also) a box with "([^"]+)" status added by (customer "[^"]+")$/
      */
     public function thisProductHasABoxWithStatus(
         ProductInterface $product,
-        string $status = null
+        string $status = null,
+        CustomerInterface $customer = null
     ) {
         /** @var ProductBox $productBox */
         $productBox = $this->productBoxFactory->create([
             'product' => $product,
             'status' => $status ?? ProductBox::STATUS_ACCEPTED,
-            'author' => null,
+            'author' => $customer,
         ]);
 
         $this->productBoxRepository->add($productBox);

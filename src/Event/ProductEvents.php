@@ -18,4 +18,8 @@ class ProductEvents
 {
     const PRE_CREATE = 'sylius.product.pre_create';
     const PRE_UPDATE = 'sylius.product.pre_update';
+
+    private function __construct()
+    {
+    }
 }

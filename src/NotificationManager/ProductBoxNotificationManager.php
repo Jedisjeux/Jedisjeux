@@ -78,9 +78,43 @@ class ProductBoxNotificationManager
         /** @var UserInterface[] $users */
         $users = $this->userRepository->findByRole('ROLE_REVIEWER');
 
-        $this->notifyUsers($this->translator->trans('text.notification.product_box.ask_for_review', [
-            '%PRODUCT_NAME%' => $productBox->getProduct()->getName(),
-        ]), $productBox, $users);
+        $target = $this->router->generate('app_backend_product_box_update', [
+            'id' => $productBox->getId(),
+        ]);
+
+        $this->notifyUsers(
+            $this->translator->trans('text.notification.product_box.ask_for_review', [
+                '%PRODUCT_NAME%' => $productBox->getProduct()->getName(),
+            ]),
+            $productBox,
+            $target,
+            $users
+        );
+    }
+
+    /**
+     * @param ProductBox $productBox
+     */
+    public function notifyAuthor(ProductBox $productBox)
+    {
+        $target = $this->router->generate('app_frontend_account_games_library');
+
+        if (null === $author = $productBox->getAuthor()) {
+            return;
+        }
+
+        if (null === $user = $author->getUser()) {
+            return;
+        }
+
+        $this->notifyUsers(
+            $this->translator->trans(sprintf('text.notification.product_box.%s', $productBox->getStatus()), [
+                '%PRODUCT_NAME%' => $productBox->getProduct()->getName(),
+            ]),
+            $productBox,
+            $target,
+            [$user]
+        );
     }
 
     /**
@@ -88,13 +122,11 @@ class ProductBoxNotificationManager
      * @param ProductBox $productBox
      * @param array      $users
      */
-    private function notifyUsers($message, ProductBox $productBox, array $users)
+    private function notifyUsers($message, ProductBox $productBox, string $target, array $users)
     {
         foreach ($users as $user) {
             $notification = $this->notificationFactory->createForProductBox($productBox, $user->getCustomer());
-            $notification->setTarget($this->router->generate('app_backend_product_box_update', [
-                'id' => $productBox->getId(),
-            ]));
+            $notification->setTarget($target);
             $notification->setMessage($message);
 
             $this->manager->persist($notification);
