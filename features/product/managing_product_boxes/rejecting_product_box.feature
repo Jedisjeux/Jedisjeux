@@ -5,8 +5,9 @@ Feature: Rejecting a product box
     I need to be able to reject a product box
 
     Background:
-        Given there is a product "Puerto Rico"
-        And this product has a box with "new" status
+        Given there is a user "kevin@example.com" identified by "password"
+        And there is a product "Puerto Rico"
+        And this product has also a box with "new" status added by customer "kevin@example.com"
         And I am a logged in reviewer
 
     @ui
@@ -15,3 +16,4 @@ Feature: Rejecting a product box
         When I reject this box
         Then I should be notified that it has been successfully rejected
         And this product box should have "rejected" status
+        And there is a notification sent to "kevin@example.com"

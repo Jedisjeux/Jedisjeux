@@ -479,7 +479,9 @@ text:
             ask_for_review: Le jeu <strong>%PRODUCT_NAME%</strong> a besoin d'une relecture.
             ask_for_publication: Le jeu <strong>%PRODUCT_NAME%</strong> est prêt à valider.
         product_box:
+            accepted: Votre boite de jeu <strong>%PRODUCT_NAME%</strong> a été acceptée.
             ask_for_review: La boite de jeu <strong>%PRODUCT_NAME%</strong> a besoin d'une vérification.
+            rejected: Votre boite de jeu <strong>%PRODUCT_NAME%</strong> a été rejetée.
         topic_reply: <strong>%USERNAME%</strong> a répondu au sujet %TOPIC_NAME%.
         topic_replies: <strong>%USERNAMES%</strong> ont répondu au sujet %TOPIC_NAME%.
 

@@ -5,8 +5,9 @@ Feature: Adding product box as a customer
     I want to be able to add a product box image
 
     Background:
-        Given I am a logged in customer
-        And there is a product "Puerto Rico"
+        Given there is a product "Puerto Rico"
+        And there is a reviewer "reviewer@example.com"
+        And I am a logged in customer
 
     @ui
     Scenario: Adding a product box as a customer
@@ -15,3 +16,4 @@ Feature: Adding product box as a customer
         And I specify its height as 220
         And I add it
         Then I should be notified that my image is waiting for the acceptation
+        And there is a notification sent to "reviewer@example.com"

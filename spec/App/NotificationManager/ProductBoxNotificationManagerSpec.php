@@ -61,4 +61,73 @@ class ProductBoxNotificationManagerSpec extends ObjectBehavior
 
         $this->notifyReviewers($productBox);
     }
+
+    function it_create_notifications_for_author_when_boxes_are_accepted(
+        NotificationFactory $notificationFactory,
+        ObjectManager $manager,
+        Customer $customer,
+        User $user,
+        ProductInterface $product,
+        ProductBox $productBox,
+        Notification $notification,
+        TranslatorInterface $translator,
+        RouterInterface $router
+    ) {
+        $productBox->getAuthor()->willReturn($customer);
+        $productBox->getProduct()->willReturn($product);
+        $productBox->getStatus()->willReturn(ProductBox::STATUS_ACCEPTED);
+        $customer->getUser()->willReturn($user);
+        $user->getCustomer()->willReturn($customer);
+        $product->getName()->willReturn('Awesome product');
+
+        $translator->trans('text.notification.product_box.accepted',
+            ['%PRODUCT_NAME%' => 'Awesome product']
+        )->willReturn('Your product box has been accepted.');
+
+        $notificationFactory->createForProductBox($productBox, $customer)->willReturn($notification);
+
+        $router->generate('app_frontend_account_games_library')->willReturn('/target');
+
+        $notification->setTarget('/target')->shouldBeCalled();
+        $notification->setMessage('Your product box has been accepted.')->shouldBeCalled();
+        $manager->persist($notification)->shouldBeCalled();
+        $manager->flush()->shouldBeCalled();
+
+        $this->notifyAuthor($productBox);
+    }
+
+    function it_does_nothing_when_notifying_author_of_a_box_with_no_author(
+        ProductInterface $product,
+        ProductBox $productBox,
+        TranslatorInterface $translator
+    ) {
+        $productBox->getAuthor()->willReturn(null);
+        $productBox->getProduct()->willReturn($product);
+        $productBox->getStatus()->willReturn(ProductBox::STATUS_ACCEPTED);
+        $product->getName()->willReturn('Awesome product');
+
+        $translator->trans('text.notification.product_box.accepted',
+            ['%PRODUCT_NAME%' => 'Awesome product']
+        )->shouldNotBeCalled();
+
+        $this->notifyAuthor($productBox);
+    }
+
+    function it_does_nothing_when_notifying_author_of_a_box_with_no_user_author(
+        ProductInterface $product,
+        ProductBox $productBox,
+        Customer $author,
+        TranslatorInterface $translator
+    ) {
+        $productBox->getAuthor()->willReturn($author);
+        $productBox->getProduct()->willReturn($product);
+        $productBox->getStatus()->willReturn(ProductBox::STATUS_ACCEPTED);
+        $product->getName()->willReturn('Awesome product');
+
+        $translator->trans('text.notification.product_box.accepted',
+            ['%PRODUCT_NAME%' => 'Awesome product']
+        )->shouldNotBeCalled();
+
+        $this->notifyAuthor($productBox);
+    }
 }

@@ -4,10 +4,14 @@ default:
             contexts:
                 - App\Behat\Context\Hook\DoctrineORMContext
 
+                - App\Behat\Context\Transform\CustomerContext
                 - App\Behat\Context\Transform\SharedStorageContext
 
                 - App\Behat\Context\Setup\SecurityContext
                 - App\Behat\Context\Setup\ProductContext
+                - App\Behat\Context\Setup\UserContext
+
+                - App\Behat\Context\Domain\NotificationContext
 
                 - App\Behat\Context\Ui\Frontend\ProductBoxContext
             filters:
