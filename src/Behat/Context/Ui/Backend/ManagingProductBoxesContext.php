@@ -12,7 +12,6 @@
 namespace App\Behat\Context\Ui\Backend;
 
 use App\Behat\NotificationType;
-use App\Behat\Page\Backend\ProductBox\CreatePage;
 use App\Behat\Page\Backend\ProductBox\IndexPage;
 use App\Behat\Page\Backend\ProductBox\UpdatePage;
 use App\Behat\Service\NotificationCheckerInterface;
@@ -23,11 +22,6 @@ use Webmozart\Assert\Assert;
 
 class ManagingProductBoxesContext implements Context
 {
-    /**
-     * @var CreatePage
-     */
-    private $createPage;
-
     /**
      * @var IndexPage
      */
@@ -44,29 +38,18 @@ class ManagingProductBoxesContext implements Context
     private $notificationChecker;
 
     /**
-     * @param CreatePage                   $createPage
      * @param IndexPage                    $indexPage
      * @param UpdatePage                   $updatePage
      * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
-        CreatePage $createPage,
         IndexPage $indexPage,
         UpdatePage $updatePage,
         NotificationCheckerInterface $notificationChecker
     ) {
-        $this->createPage = $createPage;
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
         $this->notificationChecker = $notificationChecker;
-    }
-
-    /**
-     * @When I want to create a new product box
-     */
-    public function iWantToAddProductBox(): void
-    {
-        $this->createPage->open();
     }
 
     /**
@@ -80,7 +63,7 @@ class ManagingProductBoxesContext implements Context
     /**
      * @Given /^I want to edit (this product box)$/
      */
-    public function iWantToEditTheArticle(ProductBox $productBox)
+    public function iWantToEditTheProductBox(ProductBox $productBox)
     {
         $this->updatePage->open(['id' => $productBox->getId()]);
     }
@@ -90,42 +73,16 @@ class ManagingProductBoxesContext implements Context
      */
     public function iAttachImage($path)
     {
-        $this->createPage->attachImage($path);
+        $this->updatePage->attachImage($path);
     }
 
     /**
-     * @When I specify its product as :product
-     * @When I do not specify its product
+     * @When I change its height to :height
+     * @When I remove its height
      */
-    public function iSpecifyItsProductAs(?ProductInterface $product)
-    {
-        $this->createPage->specifyProduct($product);
-    }
-
-    /**
-     * @When I specify its height as :height
-     * @When I do not specify its height
-     */
-    public function iSpecifyItsHeightAs(?int $height = null)
-    {
-        $this->createPage->specifyHeight($height);
-    }
-
-    /**
-     * @When /^I change its height as (\d+)$/
-     */
-    public function iChangeItsPlayedAtAs($height)
+    public function iChangeItsHeightTo(?int $height = null)
     {
         $this->updatePage->changeHeight($height);
-    }
-
-    /**
-     * @When I add it
-     * @When I try to add it
-     */
-    public function iAddIt()
-    {
-        $this->createPage->create();
     }
 
     /**
@@ -181,7 +138,7 @@ class ManagingProductBoxesContext implements Context
      */
     public function iShouldBeNotifiedThatCommentIsRequired($elementName)
     {
-        Assert::same($this->createPage->getValidationMessage($elementName), 'This value should not be blank.');
+        Assert::same($this->updatePage->getValidationMessage($elementName), 'This value should not be blank.');
     }
 
     /**
@@ -189,7 +146,7 @@ class ManagingProductBoxesContext implements Context
      */
     public function iShouldBeNotifiedThatFileIsNotAValidImage()
     {
-        Assert::same($this->createPage->getValidationMessage('image_file'), 'This file is not a valid image.');
+        Assert::same($this->updatePage->getValidationMessage('image_file'), 'This file is not a valid image.');
     }
 
     /**
@@ -244,10 +201,13 @@ class ManagingProductBoxesContext implements Context
     }
 
     /**
-     * @Then this product box should be :height high
+     * @Then /^(this product box) should be (\d+) high$/
+     * @Then /^(this product box) should still be (\d+) high$/
      */
-    public function thisProductBoxShouldBePlayedAt($height)
+    public function thisProductBoxShouldBePlayedAt(ProductBox $productBox, $height)
     {
+        $this->iWantToEditTheProductBox($productBox);
+
         $this->assertElementValue('height', $height);
     }
 

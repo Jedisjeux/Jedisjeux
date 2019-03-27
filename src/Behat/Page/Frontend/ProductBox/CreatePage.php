@@ -77,7 +77,7 @@ class CreatePage extends SymfonyPage
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'height' => '#app_simple_product_box_realHeight',
+            'height' => '#app_product_box_realHeight',
         ]);
     }
 }

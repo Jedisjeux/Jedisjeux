@@ -59,13 +59,31 @@ class ProductBoxContext implements Context
         ProductInterface $product,
         string $status = null,
         CustomerInterface $customer = null
-    ) {
-        /** @var ProductBox $productBox */
-        $productBox = $this->productBoxFactory->create([
+    ): void {
+        $this->createProduct([
             'product' => $product,
             'status' => $status ?? ProductBox::STATUS_ACCEPTED,
             'author' => $customer,
         ]);
+    }
+
+    /**
+     * @Given /^(this product) has(?:| also) a box (\d+) high$/
+     */
+    public function thisProductHasABoxHigh(
+        ProductInterface $product,
+        int $height = null
+    ): void {
+        $this->createProduct([
+            'product' => $product,
+            'real_height' => $height,
+        ]);
+    }
+
+    public function createProduct(array $options): void
+    {
+        /** @var ProductBox $productBox */
+        $productBox = $this->productBoxFactory->create($options);
 
         $this->productBoxRepository->add($productBox);
         $this->sharedStorage->set('product_box', $productBox);

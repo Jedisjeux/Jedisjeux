@@ -2,7 +2,7 @@ app_backend_product_box:
     resource: |
         alias: app.product_box
         section: backend
-        except: ['show']
+        except: ['show', 'create']
         redirect: update
         grid: app_backend_product_box
         vars:

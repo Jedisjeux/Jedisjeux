@@ -48,9 +48,6 @@ sylius_grid:
                     options:
                         fields: [productTranslation.name]
             actions:
-                main:
-                    create:
-                        type: create
                 item:
                     update:
                         type: update
