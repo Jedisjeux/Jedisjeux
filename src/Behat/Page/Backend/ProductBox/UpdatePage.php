@@ -20,6 +20,20 @@ class UpdatePage extends BaseUpdatePage
     use WorkflowActions;
 
     /**
+     * @param string $path
+     *
+     * @throws ElementNotFoundException
+     */
+    public function attachImage(string $path): void
+    {
+        $filesPath = $this->getParameter('files_path');
+
+        $imageForm = $this->getElement('image');
+
+        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
+    }
+
+    /**
      * @param int|null $height
      *
      * @throws ElementNotFoundException
@@ -29,6 +43,8 @@ class UpdatePage extends BaseUpdatePage
         $this->getElement('height')->setValue($height);
     }
 
+
+
     /**
      * {@inheritdoc}
      */
@@ -36,6 +52,8 @@ class UpdatePage extends BaseUpdatePage
     {
         return array_merge(parent::getDefinedElements(), [
             'height' => '#app_product_box_realHeight',
+            'image' => '#app_product_box_image',
+            'image_file' => '#app_product_box_image_file',
         ]);
     }
 }

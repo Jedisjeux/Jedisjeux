@@ -99,7 +99,7 @@ sylius_resource:
         app.product_box:
             classes:
                 model: App\Entity\ProductBox
-                form: App\Form\Type\ProductBoxType
+                form: App\Form\Type\ProductBox\ProductBoxType
                 repository: App\Repository\ProductBoxRepository
         app.product_box_image:
             classes:

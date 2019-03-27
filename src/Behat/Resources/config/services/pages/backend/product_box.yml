@@ -8,11 +8,6 @@ services:
 #        class: App\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
-      App\Behat\Page\Backend\ProductBox\CreatePage:
-          parent: app.behat.page.backend.crud.create
-          public: false
-          arguments: ["app_backend_product_box_create"]
-
       App\Behat\Page\Backend\ProductBox\IndexPage:
           parent: app.behat.page.backend.crud.index
           public: false
