@@ -4,7 +4,7 @@
 - [#433](https://github.com/Jedisjeux/Jedisjeux/pull/433) Fix notifications (@loic425)
 - [#432](https://github.com/Jedisjeux/Jedisjeux/pull/432) fix product box type with variant (@loic425)
 
-### 2.3.0 (2019/03/22)
+### v2.3.0 (2019/03/22)
 - [#430](https://github.com/Jedisjeux/Jedisjeux/pull/430) Validate box image type (@loic425)
 - [#425](https://github.com/Jedisjeux/Jedisjeux/pull/425) improve infection scoring (@loic425)
 - [#429](https://github.com/Jedisjeux/Jedisjeux/pull/429) improve product box form (@loic425)
