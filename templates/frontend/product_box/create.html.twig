@@ -28,6 +28,11 @@
                         <div class="col-md-12">
                             <div class="container">
 
+                                <!-- Wrap the image or canvas element with a block element (container) -->
+                                <div>
+                                    <img id="image-preview" src="/assets/frontend/images/placeholder.png" alt="Your image" style="display: none" />
+                                </div>
+
                                 {% form_theme form 'frontend/form/vertical.html.twig' %}
 
                                 {{ form_start(form) }}
