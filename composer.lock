@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2f7f1327a5a90477e91dc02f062ffabd",
+    "content-hash": "96e0922d1213ccf7c8c6261bd062ca73",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -6409,22 +6409,22 @@
         },
         {
             "name": "sylius/ui-bundle",
-            "version": "v1.2.7",
+            "version": "v1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusUiBundle.git",
-                "reference": "40e2f266d75c83e8ed4e7bd55736bdd7a9827519"
+                "reference": "32b58ad53153c7e24f80e0d7576d96de52c5117d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusUiBundle/zipball/40e2f266d75c83e8ed4e7bd55736bdd7a9827519",
-                "reference": "40e2f266d75c83e8ed4e7bd55736bdd7a9827519",
+                "url": "https://api.github.com/repos/Sylius/SyliusUiBundle/zipball/32b58ad53153c7e24f80e0d7576d96de52c5117d",
+                "reference": "32b58ad53153c7e24f80e0d7576d96de52c5117d",
                 "shasum": ""
             },
             "require": {
                 "doctrine/collections": "^1.3",
                 "knplabs/knp-menu-bundle": "^2.1",
-                "php": "^7.1",
+                "php": "^7.2",
                 "sonata-project/block-bundle": "^3.3",
                 "symfony/framework-bundle": "^3.4|^4.1.1",
                 "symfony/security": "^3.4|^4.1.1",
@@ -6434,7 +6434,7 @@
                 "twig/twig": "^1.0"
             },
             "require-dev": {
-                "phpspec/phpspec": "^4.0",
+                "phpspec/phpspec": "^5.0",
                 "symfony/dependency-injection": "^3.4|^4.1.1",
                 "symfony/form": "^3.4|^4.1.1",
                 "twig/twig": "^2.0"
@@ -6442,7 +6442,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
@@ -6479,7 +6479,7 @@
                 "user interface",
                 "webshop"
             ],
-            "time": "2018-08-27T04:12:59+00:00"
+            "time": "2019-02-14T11:47:39+00:00"
         },
         {
             "name": "sylius/user",

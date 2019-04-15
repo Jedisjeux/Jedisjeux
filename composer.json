@@ -48,7 +48,7 @@
     "sylius/resource-bundle": "^1.4",
     "sylius/review-bundle": "^1.2",
     "sylius/taxonomy-bundle": "^1.2",
-    "sylius/ui-bundle": "^1.2",
+    "sylius/ui-bundle": "^1.4",
     "sylius/user-bundle": "^1.2",
     "symfony/dotenv": "^4.2",
     "symfony/flex": "^1.2",
