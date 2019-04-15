@@ -1,0 +1,26 @@
+import $ from 'jquery';
+
+import 'sylius/ui/app';
+import 'sylius/ui/sylius-auto-complete';
+
+import './app-notifications';
+import './article-filters';
+import './page-views';
+import './person-filters';
+import './product-list';
+import './rating';
+import './template';
+import './topic-filters';
+import './year-award-filters';
+
+(function($) {
+    $(document).ready(function () {
+        $('.sylius-autocomplete').autoComplete();
+
+        // $('[data-form-type="collection"]').CollectionForm();
+        $('.app-notifications').notifications();
+    });
+});
+
+window.$ = $;
+window.jQuery = $;
