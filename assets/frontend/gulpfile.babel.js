@@ -84,7 +84,7 @@ const paths = {
       upath.joinSafe(appPath, 'plugins/slick/slick.css'),
     ],
     img: [
-      upath.joinSafe(appPath, 'img/**'),
+      upath.joinSafe(appPath, 'images/**'),
     ],
     font: [
       upath.joinSafe(nodeModulesPath, 'font-awesome/fonts/**'),

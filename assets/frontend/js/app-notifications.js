@@ -3,12 +3,15 @@
 
     var title = document.title;
     var $element;
+    var $notificationBlock = $('.notificationBlock');
 
     $.fn.extend({
         notifications: function () {
             $element = $(this);
 
-            refresh();
+            if ($notificationBlock.length > 0) {
+                refresh();
+            }
         }
     });
 
