@@ -298,6 +298,7 @@ class Topic implements ResourceInterface
     public function removePost(Post $post): void
     {
         $this->posts->removeElement($post);
+        $post->setTopic(null);
     }
 
     /**
@@ -401,7 +402,7 @@ class Topic implements ResourceInterface
      */
     public function getLastPageNumber($nullForFirstPage = true): ?int
     {
-        $pageNumber = (int) ceil($this->postCount / 10);
+        $pageNumber = ceil($this->postCount / 10);
 
         if ($nullForFirstPage) {
             return $pageNumber > 1 ? $pageNumber : null;
