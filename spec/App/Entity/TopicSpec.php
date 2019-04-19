@@ -41,7 +41,24 @@ class TopicSpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
-    function it_sets_title()
+    public function it_initializes_a_code_by_default(): void
+    {
+        $this->getCode()->shouldNotBeNull();
+    }
+
+    function its_code_is_mutable()
+    {
+        $this->setCode('XYZ');
+
+        $this->getCode()->shouldReturn('XYZ');
+    }
+
+    function it_has_no_title_by_default()
+    {
+        $this->getTitle()->shouldReturn(null);
+    }
+
+    function its_title_is_mutable()
     {
         $this->setTitle('Subject title');
 
@@ -58,6 +75,55 @@ class TopicSpec extends ObjectBehavior
         $this->setPostCount(7);
 
         $this->getPostCount()->shouldReturn(7);
+    }
+
+    function it_has_zero_view_count_by_default(): void
+    {
+        $this->getViewCount()->shouldReturn(0);
+    }
+
+    function its_view_count_is_mutable(): void
+    {
+        $this->setViewCount(42);
+        $this->getViewCount()->shouldReturn(42);
+    }
+
+    function it_has_no_last_post_creation_date_by_default(): void
+    {
+        $this->getLastPostCreatedAt()->shouldReturn(null);
+    }
+
+    function its_last_post_creation_date_by_default(): void
+    {
+        $lastPostCreatedAt = new \DateTime();
+        $this->setLastPostCreatedAt($lastPostCreatedAt);
+        $this->getLastPostCreatedAt()->shouldReturn($lastPostCreatedAt);
+    }
+
+    function it_ha_no_first_post_by_default()
+    {
+        $this->getFirstPost()->shouldReturn(null);
+    }
+
+    function it_can_get_first_post(Post $firstPost, Post $lastPost)
+    {
+        $this->addPost($firstPost);
+        $this->addPost($lastPost);
+
+        $this->getFirstPost()->shouldReturn($firstPost);
+    }
+
+    function it_ha_no_last_post_by_default()
+    {
+        $this->getLastPost()->shouldReturn(null);
+    }
+
+    function it_can_get_last_post(Post $firstPost, Post $lastPost)
+    {
+        $this->addPost($firstPost);
+        $this->addPost($lastPost);
+
+        $this->getLastPost()->shouldReturn($lastPost);
     }
 
     function its_author_is_mutable(CustomerInterface $author)
@@ -97,6 +163,8 @@ class TopicSpec extends ObjectBehavior
 
     function it_adds_posts(Post $post)
     {
+        $post->setTopic($this)->shouldBeCalled();
+
         $this->addPost($post);
         $this->hasPost($post)->shouldReturn(true);
     }
@@ -104,6 +172,9 @@ class TopicSpec extends ObjectBehavior
     function it_remove_posts(Post $post)
     {
         $this->addPost($post);
+
+        $post->setTopic(null)->shouldBeCalled();
+
         $this->removePost($post);
         $this->hasPost($post)->shouldReturn(false);
     }
@@ -124,5 +195,37 @@ class TopicSpec extends ObjectBehavior
         $this->addFollower($follower);
         $this->removeFollower($follower);
         $this->hasFollower($follower)->shouldReturn(false);
+    }
+
+    function it_has_no_last_page_number_by_default()
+    {
+        $this->getLastPageNumber()->shouldReturn(null);
+    }
+
+    function it_has_no_last_page_number_when_topic_has_ten_posts()
+    {
+        $this->setPostCount(10);
+
+        $this->getLastPageNumber()->shouldReturn(null);
+    }
+
+    function its_last_page_number_can_equals_to_one_when_topic_has_ten_posts()
+    {
+        $this->setPostCount(10);
+
+        $this->getLastPageNumber(false)->shouldReturn(1);
+    }
+
+    function its_last_page_number_equals_to_two_when_topic_has_eleven_posts()
+    {
+        $this->setPostCount(11);
+
+        $this->getLastPageNumber()->shouldReturn(2);
+    }
+
+    function its_string_conversion_returns_title()
+    {
+        $this->setTitle('u-topic');
+        $this::__toString()->shouldReturn('u-topic');
     }
 }
