@@ -1,0 +1,2 @@
+imports:
+    - { resource: '../test/ezw_captcha.yaml' }

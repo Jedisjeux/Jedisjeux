@@ -99,7 +99,7 @@ class ContactRequest implements ResourceInterface
      */
     public function getFullName(): string
     {
-        return $this->getFirstName().' '.$this->getLastName();
+        return trim(sprintf('%s %s', $this->firstName, $this->lastName));
     }
 
     /**

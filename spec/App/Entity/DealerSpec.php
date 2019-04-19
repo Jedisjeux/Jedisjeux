@@ -24,6 +24,11 @@ class DealerSpec extends ObjectBehavior
         $this->shouldImplement(ResourceInterface::class);
     }
 
+    function it_has_no_code_by_default()
+    {
+        $this->getCode()->shouldReturn(null);
+    }
+
     function its_code_is_mutable()
     {
         $this->setCode("philibert");
@@ -55,6 +60,7 @@ class DealerSpec extends ObjectBehavior
     function it_has_no_price_list_by_default()
     {
         $this->getPriceList()->shouldReturn(null);
+        $this->hasPriceList()->shouldReturn(false);
     }
 
     function its_price_list_is_mutable(PriceList $priceList)
@@ -109,5 +115,16 @@ class DealerSpec extends ObjectBehavior
 
         $this->removeContact($contact);
         $this->hasContact($contact)->shouldReturn(false);
+    }
+
+    function its_string_conversion_returns_an_empty_string_when_it_has_no_name(): void
+    {
+        $this::__toString()->shouldReturn('');
+    }
+
+    function its_string_conversion_returns_its_name(): void
+    {
+        $this->setName('Philibert');
+        $this::__toString()->shouldReturn('Philibert');
     }
 }

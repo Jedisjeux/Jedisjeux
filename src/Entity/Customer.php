@@ -25,7 +25,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @JMS\ExclusionPolicy("all")
  */
-class Customer extends BaseCustomer implements ReviewerInterface, UserAwareInterface
+class Customer extends BaseCustomer implements CustomerInterface, ReviewerInterface
 {
     /**
      * @Recaptcha\IsTrue
@@ -101,18 +101,20 @@ class Customer extends BaseCustomer implements ReviewerInterface, UserAwareInter
      */
     public function setUser(?UserInterface $user): void
     {
-        if ($this->user !== $user) {
-            $this->user = $user;
-            $this->assignCustomer($user);
+        if ($this->user === $user) {
+            return;
         }
-    }
 
-    /**
-     * @param User|null $user
-     */
-    protected function assignCustomer(?User $user): void
-    {
-        if (null !== $user) {
+        \Webmozart\Assert\Assert::nullOrIsInstanceOf($user, AppUserInterface::class);
+
+        $previousUser = $this->user;
+        $this->user = $user;
+
+        if ($previousUser instanceof AppUserInterface) {
+            $previousUser->setCustomer(null);
+        }
+
+        if ($user instanceof AppUserInterface) {
             $user->setCustomer($this);
         }
     }

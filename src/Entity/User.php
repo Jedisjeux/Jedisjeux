@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * This file is part of Jedisjeux.
  *
  * (c) Loïc Frémont
@@ -28,7 +28,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *     groups="sylius"
  * )
  */
-class User extends BaseUser
+class User extends BaseUser implements AppUserInterface
 {
     /**
      * @var CustomerInterface

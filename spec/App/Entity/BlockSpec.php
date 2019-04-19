@@ -14,6 +14,7 @@ namespace spec\App\Entity;
 use App\Entity\Article;
 use App\Entity\Block;
 use App\Entity\BlockImage;
+use App\Entity\SlideShowBlock;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
@@ -99,6 +100,18 @@ class BlockSpec extends ObjectBehavior
         $this->getImage()->shouldReturn($image);
     }
 
+    function it_has_no_position_by_default()
+    {
+        $this->getPosition()->shouldReturn(null);
+    }
+
+    function its_position_is_mutable()
+    {
+        $this->setPosition(42);
+
+        $this->getPosition()->shouldReturn(42);
+    }
+
     function it_has_no_article_by_default()
     {
         $this->getArticle()->shouldReturn(null);
@@ -109,5 +122,17 @@ class BlockSpec extends ObjectBehavior
         $this->setArticle($article);
 
         $this->getArticle()->shouldReturn($article);
+    }
+
+    function it_has_no_slide_show_block_by_default()
+    {
+        $this->getSlideShowBlock()->shouldReturn(null);
+    }
+
+    function its_slide_show_block_is_mutable(SlideShowBlock $slideShowBlock)
+    {
+        $this->setSlideShowBlock($slideShowBlock);
+
+        $this->getSlideShowBlock()->shouldReturn($slideShowBlock);
     }
 }
