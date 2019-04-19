@@ -18,28 +18,61 @@ class ContactRequestSpec extends ObjectBehavior
         $this->shouldImplement(ResourceInterface::class);
     }
 
-    function it_sets_first_name()
+    function it_has_no_first_name_by_default(): void
+    {
+        $this->getFirstName()->shouldReturn(null);
+    }
+
+    function its_first_name_is_mutable(): void
     {
         $this->setFirstName('John');
 
         $this->getFirstName()->shouldReturn('John');
     }
 
-    function it_sets_last_name()
+    function it_has_no_last_name_by_default(): void
+    {
+        $this->getLastName()->shouldReturn(null);
+    }
+
+    function its_last_name_is_mutable(): void
     {
         $this->setLastName('Nathan');
 
         $this->getLastName()->shouldReturn('Nathan');
     }
 
-    function it_sets_email()
+    function it_has_no_full_name_by_default(): void
+    {
+        $this->getFullName()->shouldReturn('');
+    }
+
+    function it_can_get_full_name(): void
+    {
+        $this->setFirstName('Marty');
+        $this->setLastName('McFly');
+
+        $this->getFullName()->shouldReturn('Marty McFly');
+    }
+
+    function it_has_no_email_by_default(): void
+    {
+        $this->getEmail()->shouldReturn(null);
+    }
+
+    function its_email_is_mutable(): void
     {
         $this->setEmail('john.nathan@example.com');
 
         $this->getEmail()->shouldReturn('john.nathan@example.com');
     }
 
-    function it_sets_body()
+    function it_has_no_body_by_default(): void
+    {
+        $this->getBody()->shouldReturn(null);
+    }
+
+    function its_body_is_mutable(): void
     {
         $this->setBody('<p>Contact Request body</p>');
 

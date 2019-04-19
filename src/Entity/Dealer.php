@@ -240,6 +240,6 @@ class Dealer implements ResourceInterface
      */
     public function __toString(): string
     {
-        return $this->getName();
+        return (string) $this->getName();
     }
 }
