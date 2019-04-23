@@ -7,7 +7,6 @@
 - [#444](https://github.com/Jedisjeux/Jedisjeux/pull/444) use gulp babel (@loic425)
 - [#443](https://github.com/Jedisjeux/Jedisjeux/pull/443) Upgrade flex to use composer dump-env (@loic425)
 
-
 ### v2.4.0 (2019/03/28)
 - [#441](https://github.com/Jedisjeux/Jedisjeux/pull/441) remove adding product box as an administrator (@loic425)
 - [#439](https://github.com/Jedisjeux/Jedisjeux/pull/439) notify authors and fix notify reviewers for a product box (@loic425)
