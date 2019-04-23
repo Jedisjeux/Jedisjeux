@@ -15,5 +15,6 @@ default:
 
                 - App\Behat\Context\Ui\Frontend\NotificationContext
                 - App\Behat\Context\Ui\Frontend\ProductContext
+                - App\Behat\Context\Ui\Frontend\ProductFileContext
             filters:
                 tags: "@viewing_product_files && @ui"

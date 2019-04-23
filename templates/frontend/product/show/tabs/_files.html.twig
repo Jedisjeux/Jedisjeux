@@ -2,7 +2,7 @@
 <div class="margin-clear space-top">
     {{ render(url('app_frontend_partial_product_file_latest', {'productId': product.id, 'template': 'frontend/product_file/_list.html.twig'})) }}
 
-    <a href="{{ path('sylius_frontend_product_review_index', {'slug': product.slug}) }}"
+    <a href="{{ path('app_frontend_product_file_index', {'slug': product.slug}) }}"
        class="btn btn-transparent btn-sm margin-clear">{{ 'app.ui.view_more_files'|trans }}
         <i class="fa fa-arrow-right pl-10"></i>
     </a>

@@ -37,4 +37,28 @@ class ProductFileRepository extends EntityRepository
             ->getResult()
             ;
     }
+
+    /**
+     * @param string $localeCode
+     * @param string $productSlug
+     *
+     * @return QueryBuilder
+     */
+    public function createListForProductSlugQueryBuilder(string $localeCode, string $productSlug): QueryBuilder
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        $queryBuilder
+            ->addSelect('product')
+            ->addSelect('translation')
+            ->join('o.product', 'product')
+            ->join('product.translations', 'translation')
+            ->andWhere('translation.locale = :locale')
+            ->andWhere('translation.slug = :slug')
+            ->setParameter('locale', $localeCode)
+            ->setParameter('slug', $productSlug)
+        ;
+
+        return $queryBuilder;
+    }
 }

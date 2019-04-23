@@ -1,0 +1,43 @@
+{% extends "frontend/layout.html.twig" %}
+
+{% from 'macro/pagination.html.twig' import simple as pagination %}
+
+{% set pageTitle %}
+    {{ 'app.ui.files'|trans }}
+{% endset %}
+
+{% block content %}
+    {% include 'frontend/product_file/index/_banner.html.twig' %}
+
+    <!-- main-container start -->
+    <!-- ================ -->
+    <section class="main-container">
+
+        <div class="container">
+            <div class="row">
+
+                <!-- main start -->
+                <!-- ================ -->
+                <div class="main col-md-12">
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            {{
+                                render(url('sylius_frontend_partial_product_show_by_slug', {
+                                    'slug': app.request.attributes.get('slug'),
+                                    'template': 'frontend/product/_box.html.twig'
+                                }))
+                            }}
+                        </div>
+                        <div class="col-md-9" id="product-files">
+                            {% include 'frontend/product_file/_list.html.twig' with {'product_files': product_files.data} %}</div>
+                            <!-- pagination start -->
+                            {{ pagination(product_files.data) }}
+                            <!-- pagination end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

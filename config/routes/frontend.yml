@@ -33,6 +33,10 @@ app_person:
 sylius_product:
     resource: "frontend/product.yml"
 
+app_frontend_product_file:
+    resource: "frontend/product_file.yml"
+    prefix: /products/{slug}/files
+
 app_frontend_product_list_item:
     resource: "frontend/product_list_item.yml"
 

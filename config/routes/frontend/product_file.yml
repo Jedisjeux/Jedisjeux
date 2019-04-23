@@ -1,0 +1,8 @@
+app_frontend_product_file_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: app.controller.product_file:indexAction
+        _sylius:
+            template: 'frontend/product_file/index.html.twig'
+            grid: app_frontend_product_file
