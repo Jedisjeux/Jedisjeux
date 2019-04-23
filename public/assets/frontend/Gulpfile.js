@@ -26,6 +26,7 @@ var paths = {
             nodeModulesPath + 'bootstrap/dist/js/bootstrap.bundle.js',
             nodeModulesPath + 'rater-jquery/rater.js',
             nodeModulesPath + 'cropperjs/dist/cropper.js',
+            nodeModulesPath + 'jquery-cropper/dist/jquery-cropper.js',
             vendorUiPath + 'Resources/private/js/sylius-form-collection.js',
             'plugins/bootstrap-notify/bootstrap-notify.js',
             'plugins/isotope/imagesloaded.pkgd.min.js',

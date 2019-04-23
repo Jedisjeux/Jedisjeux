@@ -9,9 +9,13 @@
                 var reader = new FileReader();
 
                 reader.onload = function(e) {
-                    $('#image-preview').attr('src', e.target.result).show();
+                    var $image = $('#image-preview');
 
-                    const cropper = new Cropper(image, {
+                    $image.attr('src', e.target.result).show();
+
+                    var cropper = $image.data('cropper');
+
+                    $image.cropper({
                         crop(event) {
                             console.log(event.detail.x);
                             console.log(event.detail.y);

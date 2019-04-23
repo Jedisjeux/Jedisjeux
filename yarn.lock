@@ -1474,6 +1474,11 @@ isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
 
+jquery-cropper@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/jquery-cropper/-/jquery-cropper-1.0.0.tgz#a863005f8e1533825f269ff7ee2c2308137d045e"
+  integrity sha512-ox1zRC1IIlN0sPxqb8TqgmoiEs1USNFfNn1RK6mwXrBdOfJpwqog7ZZVc6Hz/ev03gomDbOs2jXZUgTMBg35xg==
+
 jquery-fancybox@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/jquery-fancybox/-/jquery-fancybox-3.1.0.tgz#7e438bcb58539bcd4a4262f8d87d6c448ea3cf68"
