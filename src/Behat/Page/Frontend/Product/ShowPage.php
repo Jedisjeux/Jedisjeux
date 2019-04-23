@@ -135,7 +135,7 @@ class ShowPage extends SymfonyPage
 
     public function countFiles(): int
     {
-        return count($this->getElement('files')->findAll('css', '.image-box'));
+        return count($this->getElement('files')->findAll('css', '.comment'));
     }
 
     public function countVideos(): int
@@ -188,7 +188,7 @@ class ShowPage extends SymfonyPage
      */
     public function hasFileTitled(string $title): bool
     {
-        return null !== $this->getElement('files')->find('css', sprintf('.lead:contains("%s")', $title));
+        return null !== $this->getElement('files')->find('css', sprintf('.comment:contains("%s")', $title));
     }
 
     /**

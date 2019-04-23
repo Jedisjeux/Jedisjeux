@@ -50,6 +50,7 @@ app:
         designers: Designers
         destination: Destination
         do_not_have_an_account_yet: Don't have an account yet?
+        download: Download
         duration: Duration
         duration_in_minute: Duration in minute
         edit_article: Edit article
@@ -235,6 +236,7 @@ app:
         style: Style
         themes: Themes
         there_are_no_articles: There are no articles.
+        there_are_no_files: There are no files.
         there_are_no_game_plays: There are no game plays.
         topic: Topic
         topics: Topics
@@ -256,6 +258,7 @@ app:
         without: Without
         videos: Videos
         view_more_articles: View more articles
+        view_more_files: View more files
         view_more_game_plays: View more game plays
         view_more_reviews: View more reviews
         view_website: View website

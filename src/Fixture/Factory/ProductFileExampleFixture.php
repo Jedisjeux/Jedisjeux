@@ -78,7 +78,7 @@ class ProductFileExampleFixture extends AbstractExampleFactory
             })
 
             ->setDefault('path', function (Options $options) {
-                return $this->faker->url;
+                return sprintf('%s.%s', $this->faker->word, $this->faker->fileExtension);
             })
 
             ->setDefault('product', LazyOption::randomOne($this->productRepository))

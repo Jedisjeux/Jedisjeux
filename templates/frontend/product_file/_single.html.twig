@@ -1,0 +1,28 @@
+{% import 'macro/image.html.twig' as images %}
+{% from 'macro/rating.html.twig' import rating %}
+
+{% set avatarPath = product_file.author.avatar is not null ? product_file.author.avatar.webPath : '/assets/frontend/images/avatar-placeholder.png'  %}
+
+<!-- product file start -->
+<div class="comment clearfix">
+    <div class="comment-avatar">
+        {{ images.render(avatarPath, 'thumbnail', "avatar", 'rounded-circle') }}
+    </div>
+    <header>
+        <div class="call-to-action">
+            <div class="row">
+                <div class="col-md-8">
+                    <h3 class="title">{{ product_file.title }}</h3>
+                    <div class="comment-meta">
+                        {{ product_file.createdAt|localizeddate('medium', 'none') }} |
+                        {{ product_file.author }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <p><a href="{{ vich_uploader_asset(product_file, 'file') }}" class="btn btn-lg btn-default btn-animated">{{ 'app.ui.download'|trans }}<i class="fa fa-download pl-20"></i></a></p>
+                </div>
+            </div>
+        </div>
+    </header>
+</div>
+<!-- product file end -->
