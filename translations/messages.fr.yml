@@ -72,6 +72,8 @@ app:
         errors: Erreurs
         festival_lists: Listes de festival
         festival_list_items: Items de liste de festival
+        file: Fichier
+        files: Fichiers
         forum: Forum
         framed: Encadré
         from_board_game_geek: À partir de BoardGameGeek

@@ -241,7 +241,14 @@ class Product extends BaseProduct implements ProductInterface, ReviewableInterfa
      *
      * @Assert\Valid(groups={"sylius"})
      */
-    protected $videos;
+    private $videos;
+
+    /**
+     * @var Collection|ProductFile[]
+     *
+     * @ORM\OneToMany(targetEntity="ProductFile", mappedBy="product", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $files;
 
     /**
      * @var Collection|YearAward[]
@@ -266,6 +273,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableInterfa
         $this->notifications = new ArrayCollection();
         $this->barcodes = new ArrayCollection();
         $this->videos = new ArrayCollection();
+        $this->files = new ArrayCollection();
         $this->yearAwards = new ArrayCollection();
         $this->code = uniqid('product_');
     }
@@ -916,6 +924,44 @@ class Product extends BaseProduct implements ProductInterface, ReviewableInterfa
     {
         $this->videos->removeElement($video);
         $video->setProduct(null);
+    }
+
+    /**
+     * @return ProductFile[]|Collection
+     */
+    public function getFiles(): Collection
+    {
+        return $this->files;
+    }
+
+    /**
+     * @param ProductFile $file
+     *
+     * @return bool
+     */
+    public function hasFile(ProductFile $file): bool
+    {
+        return $this->files->contains($file);
+    }
+
+    /**
+     * @param ProductFile $file
+     */
+    public function addFile(ProductFile $file): void
+    {
+        if (!$this->hasFile($file)) {
+            $this->files->add($file);
+            $file->setProduct($this);
+        }
+    }
+
+    /**
+     * @param ProductFile $file
+     */
+    public function removeFile(ProductFile $file): void
+    {
+        $this->files->removeElement($file);
+        $file->setProduct(null);
     }
 
     /**

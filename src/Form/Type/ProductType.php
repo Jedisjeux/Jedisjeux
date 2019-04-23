@@ -126,6 +126,13 @@ class ProductType extends AbstractType
                 'allow_delete' => true,
                 'by_reference' => false,
             ])
+            ->add('files', CollectionType::class, [
+                'label' => false,
+                'entry_type' => ProductFileType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+            ])
             ->add('yearAwards', CollectionType::class, [
                 'label' => false,
                 'entry_type' => YearAwardType::class,

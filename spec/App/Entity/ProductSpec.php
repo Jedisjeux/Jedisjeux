@@ -4,6 +4,7 @@ namespace spec\App\Entity;
 
 use App\Entity\Person;
 use App\Entity\Product;
+use App\Entity\ProductFile;
 use App\Entity\ProductVideo;
 use App\Entity\ProductBarcode;
 use App\Entity\ProductVariant;
@@ -317,6 +318,29 @@ class ProductSpec extends ObjectBehavior
 
         $this->removeVideo($video);
         $this->hasVideo($video)->shouldReturn(false);
+    }
+
+    function it_initializes_file_collection_by_default(): void
+    {
+        $this->getFiles()->shouldHaveType(Collection::class);
+    }
+
+    function it_adds_files(ProductFile $file): void
+    {
+        $file->setProduct($this)->shouldBeCalled();
+
+        $this->addFile($file);
+        $this->hasFile($file)->shouldReturn(true);
+    }
+
+    function it_removes_files(ProductFile $file): void
+    {
+        $this->addFile($file);
+
+        $file->setProduct(null)->shouldBeCalled();
+
+        $this->removeFile($file);
+        $this->hasFile($file)->shouldReturn(false);
     }
 
     function it_has_no_images_by_default(ProductVariant $variant)

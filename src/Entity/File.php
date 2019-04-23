@@ -12,15 +12,26 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+
+/**
+ * @ORM\MappedSuperclass
+ */
 abstract class File
 {
+    use IdentifiableTrait,
+        Timestampable;
+
     /**
      * @var \SplFileInfo|null
      */
-    private $file;
+    protected $file;
 
     /**
      * @var string|null
+     *
+     * @ORM\Column(type="string")
      */
     private $path;
 
@@ -34,10 +45,18 @@ abstract class File
 
     /**
      * @param \SplFileInfo|null $file
+     *
+     * @throws \Exception
      */
     public function setFile(?\SplFileInfo $file): void
     {
         $this->file = $file;
+
+        if (null !== $file) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
     }
 
     /**

@@ -9,6 +9,10 @@ services:
         autoconfigure: true
         autowire: true
 
+    App\Command\Installer\Data\LoadProductFilesCommand:
+        arguments:
+            $uploadDestination: '%kernel.project_dir%/public/uploads/files/products'
+
     App\Command\Installer\Data\LoadGameAwardsCommand:
         arguments:
             - '@doctrine.orm.entity_manager'

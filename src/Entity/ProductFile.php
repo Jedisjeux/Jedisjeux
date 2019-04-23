@@ -13,16 +13,89 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="jdj_product_file")
+ *
+ * @Vich\Uploadable
+ */
 class ProductFile extends File implements ResourceInterface
 {
-    use IdentifiableTrait;
+    /**
+     * {@inheritdoc}
+     *
+     * @Vich\UploadableField(mapping="product_file", fileNameProperty="path")
+     */
+    protected $file;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="string", unique=true)
+     */
+    private $code;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="string")
+     */
+    private $title;
 
     /**
      * @var ProductInterface|null
+     *
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface", inversedBy="files")
      */
     private $product;
+
+    /**
+     * @var CustomerInterface|null
+     *
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Customer\Model\CustomerInterface")
+     */
+    private $author;
+
+    public function __construct()
+    {
+        $this->code = uniqid('file_');
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param string|null $code
+     */
+    public function setCode(?string $code): void
+    {
+        $this->code = $code;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string|null $title
+     */
+    public function setTitle(?string $title): void
+    {
+        $this->title = $title;
+    }
 
     /**
      * @return ProductInterface|null
@@ -38,5 +111,21 @@ class ProductFile extends File implements ResourceInterface
     public function setProduct(?ProductInterface $product): void
     {
         $this->product = $product;
+    }
+
+    /**
+     * @return CustomerInterface|null
+     */
+    public function getAuthor(): ?CustomerInterface
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param CustomerInterface|null $author
+     */
+    public function setAuthor(?CustomerInterface $author): void
+    {
+        $this->author = $author;
     }
 }
