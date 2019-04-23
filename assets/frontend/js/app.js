@@ -1,3 +1,4 @@
+import 'bootstrap/dist/js/bootstrap.bundle';
 import $ from 'jquery';
 
 import 'sylius/ui/app';
