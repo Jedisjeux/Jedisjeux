@@ -22,6 +22,10 @@ sylius_frontend_partial_product:
     resource: "partial/product.yml"
     prefix: /products
 
+app_frontend_partial_product_file:
+    resource: "partial/product_file.yml"
+    prefix: /products/{productId}/files
+
 sylius_frontend_partial_product_review:
     resource: "partial/product_review.yml"
     prefix: /products/{productId}/reviews

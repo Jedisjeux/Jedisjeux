@@ -407,6 +407,14 @@ class ProductContext implements Context
     }
 
     /**
+     * @Then I should see :count files
+     */
+    public function iShouldSeeFiles($count)
+    {
+        Assert::same($this->showPage->countFiles(), (int) $count);
+    }
+
+    /**
      * @Then I should see :count product videos
      */
     public function iShouldSeeProductVideos($count)
@@ -486,6 +494,19 @@ class ProductContext implements Context
             Assert::true(
                 $this->showPage->hasVideoTitled($video),
                 sprintf('Product should have video titled "%s" but it does not.', $video)
+            );
+        }
+    }
+
+    /**
+     * @Then I should see files titled :firstFile, :secondFile and :thirdFile
+     */
+    public function iShouldSeeFilesTitled(...$files)
+    {
+        foreach ($files as $file) {
+            Assert::true(
+                $this->showPage->hasFileTitled($file),
+                sprintf('Product should have file titled "%s" but it does not.', $file)
             );
         }
     }

@@ -133,6 +133,11 @@ class ShowPage extends SymfonyPage
         return count($this->getElement('game_plays')->findAll('css', '.image-box'));
     }
 
+    public function countFiles(): int
+    {
+        return count($this->getElement('files')->findAll('css', '.image-box'));
+    }
+
     public function countVideos(): int
     {
         return count($this->getElement('videos')->findAll('css', '.overlay-container'));
@@ -181,6 +186,18 @@ class ShowPage extends SymfonyPage
      *
      * @throws \Behat\Mink\Exception\ElementNotFoundException
      */
+    public function hasFileTitled(string $title): bool
+    {
+        return null !== $this->getElement('files')->find('css', sprintf('.lead:contains("%s")', $title));
+    }
+
+    /**
+     * @param string $title
+     *
+     * @return bool
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     */
     public function hasVideoTitled(string $title): bool
     {
         return null !== $this->getElement('videos')->find('css', sprintf('.lead:contains("%s")', $title));
@@ -197,6 +214,7 @@ class ShowPage extends SymfonyPage
             'awards' => '#product-awards',
             'box_content' => '#box-content',
             'designers' => '#product-designers',
+            'files' => '#files',
             'game_plays' => '#game-plays',
             'mechanisms' => '#product-mechanisms',
             'name' => 'h1.page-title',

@@ -1,0 +1,9 @@
+{% import 'macro/messages.html.twig' as messages %}
+
+{% if product_files|length > 0 %}
+    {% for product_file in product_files %}
+        {% include 'frontend/product_file/_single.html.twig' %}
+    {% endfor %}
+{% else %}
+    {{ messages.info('app.ui.there_are_no_files') }}
+{% endif %}
