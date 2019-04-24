@@ -12,7 +12,7 @@ fos_ck_editor:
             templates:    "my_templates"
             language: '%locale%'
             stylesSet: custom_styles  # Chargement des styles personnalisables
-            contentsCss:  ['assets/frontend/compiled/css/style.css']
+            contentsCss:  ['assets/frontend/css/style.css']
             toolbar: [ [ 'Bold','Italic','Underline', 'Blockquote' ], [ 'NumberedList','BulletedList' ], [ 'Link','Unlink' ], [ 'Image' ], [ 'Smiley' ], [ 'Source' ]; ]
         article:
             protectedSource: ['/<span[^>]*><\/span>/g']
@@ -20,7 +20,7 @@ fos_ck_editor:
             templates:    "my_templates"
             language: '%locale%'
             stylesSet: custom_styles  # Chargement des styles personnalisables
-            contentsCss:  ['assets/frontend/compiled/css/style.css']
+            contentsCss:  ['assets/frontend/css/style.css']
             toolbar: [ [ 'Bold','Italic','Underline', 'Blockquote' ], [ 'NumberedList','BulletedList' ], [ 'Link','Unlink' ], [ 'Image' ], [ 'Styles', 'Format' ], [ 'Iframe' ], [ 'Source' ]; ]
     templates:
         my_templates:
