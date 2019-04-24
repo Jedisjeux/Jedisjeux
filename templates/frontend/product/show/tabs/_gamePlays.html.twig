@@ -3,8 +3,15 @@
     {{ render(url('app_frontend_partial_product_game_play_latest', {'productId': product.id, 'template': 'frontend/game_play/_list2.html.twig'})) }}
 
     <a href="{{ path('app_frontend_game_play_index_by_product', {'productSlug': product.slug}) }}"
-       class="btn btn-transparent btn-sm margin-clear">{{ 'app.ui.view_more_game_plays'|trans }}
-        <i class="fa fa-arrow-right pl-10"></i>
+       class="btn btn-gray btn-sm margin-clear">
+        <i class="fa fa-list pr-10"></i>
+        {{ 'app.ui.view_more_game_plays'|trans }}
+    </a>
+
+    <a href="{{ path('app_frontend_game_play_create', {'productSlug': product.slug}) }}"
+       class="btn btn-default btn-sm margin-clear">
+        <i class="fa fa-plus pr-10"></i>
+        {{ 'app.ui.register_a_game_play'|trans }}
     </a>
 </div>
 <!-- articles end -->

@@ -6,3 +6,20 @@ app_frontend_product_file_index:
         _sylius:
             template: 'frontend/product_file/index.html.twig'
             grid: app_frontend_product_file
+
+app_frontend_product_file_create:
+    path: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: app.controller.product_file:createAction
+        _sylius:
+            template: 'frontend/product_file/create.html.twig'
+            factory:
+                method: createForProduct
+                arguments:
+                    - "expr:notFoundOnNull(service('sylius.repository.product').findOneBySlug(service('sylius.context.locale').getLocaleCode(), $slug))"
+            redirect:
+                route: sylius_frontend_product_show
+                parameters:
+                    slug: resource.product.slug
+            flash: app.product_file.wait_for_the_acceptation

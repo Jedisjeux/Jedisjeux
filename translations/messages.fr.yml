@@ -193,6 +193,7 @@ app:
         product_boxes: Boites de jeu
         product_lists: Listes de jeu
         product_manager: Gestionnaire de jeux
+        propose_a_file: Proposer un fichier
         propose_an_image: Proposer une image
         pub_banners: Bannières de pub
         public: Public
@@ -488,6 +489,10 @@ text:
             accepted: Votre boite de jeu <strong>%PRODUCT_NAME%</strong> a été acceptée.
             ask_for_review: La boite de jeu <strong>%PRODUCT_NAME%</strong> a besoin d'une vérification.
             rejected: Votre boite de jeu <strong>%PRODUCT_NAME%</strong> a été rejetée.
+        product_file:
+            accepted: Votre fichier <strong>%title%</strong> a été acceptée.
+            ask_for_review: Le fichier <strong>%title%</strong> a besoin d'une vérification.
+            rejected: Votre fichier du jeu <strong>%title%</strong> a été rejetée.
         topic_reply: <strong>%USERNAME%</strong> a répondu au sujet %TOPIC_NAME%.
         topic_replies: <strong>%USERNAMES%</strong> ont répondu au sujet %TOPIC_NAME%.
 

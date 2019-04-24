@@ -1,4 +1,5 @@
 imports:
     - { resource: 'state_machine/app_article.yml' }
     - { resource: 'state_machine/app_product_box.yml' }
+    - { resource: 'state_machine/app_product_file.yml' }
     - { resource: 'state_machine/sylius_product.yml' }

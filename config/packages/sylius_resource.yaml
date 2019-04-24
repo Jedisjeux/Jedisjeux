@@ -107,6 +107,7 @@ sylius_resource:
         app.product_file:
             classes:
                 model: App\Entity\ProductFile
+                form: App\Form\Type\ProductFileType
                 repository: App\Repository\ProductFileRepository
         app.product_list:
             classes:

@@ -109,6 +109,13 @@ class Notification implements ResourceInterface
     private $productBox;
 
     /**
+     * @var ProductFile|null
+     *
+     * @ORM\ManyToOne(targetEntity="ProductFile")
+     */
+    private $productFile;
+
+    /**
      * Notification constructor.
      */
     public function __construct()
@@ -279,5 +286,21 @@ class Notification implements ResourceInterface
     public function setProductBox(?ProductBox $productBox): void
     {
         $this->productBox = $productBox;
+    }
+
+    /**
+     * @return ProductFile|null
+     */
+    public function getProductFile(): ?ProductFile
+    {
+        return $this->productFile;
+    }
+
+    /**
+     * @param ProductFile|null $productFile
+     */
+    public function setProductFile(?ProductFile $productFile): void
+    {
+        $this->productFile = $productFile;
     }
 }

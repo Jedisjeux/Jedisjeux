@@ -61,6 +61,9 @@ app_backend_product_list:
 app_backend_product_box:
     resource: backend/product_box.yml
 
+app_backend_product_file:
+    resource: backend/product_file.yml
+
 sylius_backend_product_review:
     resource: backend/product_review.yml
 

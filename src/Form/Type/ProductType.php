@@ -13,7 +13,6 @@ namespace App\Form\Type;
 
 use App\Entity\Product;
 use App\Entity\Taxon;
-use App\Entity\YearAward;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -122,13 +121,6 @@ class ProductType extends AbstractType
             ->add('videos', CollectionType::class, [
                 'label' => false,
                 'entry_type' => ProductVideoType::class,
-                'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-            ])
-            ->add('files', CollectionType::class, [
-                'label' => false,
-                'entry_type' => ProductFileType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,

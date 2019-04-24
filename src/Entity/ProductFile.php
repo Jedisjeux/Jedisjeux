@@ -15,6 +15,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -47,6 +48,8 @@ class ProductFile extends File implements ResourceInterface
      * @var string|null
      *
      * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank
      */
     private $title;
 

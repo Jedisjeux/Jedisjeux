@@ -1,0 +1,27 @@
+winzou_state_machine:
+    app_product_file:
+        class: "%app.model.product_file.class%"
+        property_path: status
+        graph: app_product_file
+        state_machine_class: "%sylius.state_machine.class%"
+        states:
+            new: ~
+            accepted: ~
+            rejected: ~
+        transitions:
+            accept:
+                from: [new]
+                to: accepted
+            reject:
+                from: [new]
+                to: rejected
+        callbacks:
+            after:
+                notify_author_for_accepted_file:
+                    on: "accept"
+                    do: ['@App\NotificationManager\ProductFileNotificationManager', "notifyAuthor"]
+                    args: ["object"]
+                notify_author_for_rejected_file:
+                    on: "reject"
+                    do: ['@App\NotificationManager\ProductFileNotificationManager', "notifyAuthor"]
+                    args: ["object"]

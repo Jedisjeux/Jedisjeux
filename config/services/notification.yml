@@ -31,3 +31,7 @@ services:
     App\NotificationManager\ProductBoxNotificationManager:
         autowire: true
         public: true
+
+    App\NotificationManager\ProductFileNotificationManager:
+        autowire: true
+        public: true

@@ -5,6 +5,7 @@ namespace spec\App\Entity;
 use App\Entity\Article;
 use App\Entity\Notification;
 use App\Entity\ProductBox;
+use App\Entity\ProductFile;
 use App\Entity\Topic;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
@@ -128,5 +129,16 @@ class NotificationSpec extends ObjectBehavior
     {
         $this->setProductBox($productBox);
         $this->getProductBox()->shouldReturn($productBox);
+    }
+
+    function it_has_no_product_file_by_default(): void
+    {
+        $this->getProductFile()->shouldReturn(null);
+    }
+
+    function its_product_file_is_mutable(ProductFile $productFile)
+    {
+        $this->setProductFile($productFile);
+        $this->getProductFile()->shouldReturn($productFile);
     }
 }
