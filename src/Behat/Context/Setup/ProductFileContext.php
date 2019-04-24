@@ -51,22 +51,47 @@ class ProductFileContext implements Context
     }
 
     /**
+     * @Given /^(this product) has(?:| also) a file titled "([^"]+)"$/
+     * @Given /^(this product) has(?:| also) a file titled "([^"]+)" with "([^"]+)" status$/
+     * @Given /^(this product) has(?:| also) a file titled "([^"]+)" with "([^"]+)" status added by (customer "[^"]+")$/
+     */
+    public function thisProductHasAFileWithStatus(
+        ProductInterface $product,
+        string $status = null,
+        CustomerInterface $customer = null
+    ): void {
+        $this->createProductFile([
+            'product' => $product,
+            'status' => $status ?? ProductFile::STATUS_ACCEPTED,
+            'author' => $customer,
+        ]);
+    }
+
+    /**
      * @Given /^(this product) has(?:| also) a file titled "([^"]+)" added by (customer "[^"]+")$/
      */
-    public function productHasFileAddedByCustomerWithStatus(
+    public function productHasFileAddedByCustomer(
         ProductInterface $product,
         string $title,
         CustomerInterface $customer
     ) {
-        /** @var ProductFile $productFile */
-        $productFile = $this->productFileFactory->create([
+        $this->createProductFile([
             'author' => $customer,
             'product' => $product,
             'title' => $title,
             'status' => ProductFile::STATUS_ACCEPTED,
         ]);
+    }
+
+    /**
+     * @param array $options
+     */
+    public function createProductFile(array $options): void
+    {
+        /** @var ProductFile $productFile */
+        $productFile = $this->productFileFactory->create($options);
 
         $this->productFileRepository->add($productFile);
-        $this->sharedStorage->set('productFile', $productFile);
+        $this->sharedStorage->set('product_file', $productFile);
     }
 }
