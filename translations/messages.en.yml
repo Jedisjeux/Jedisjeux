@@ -6,6 +6,7 @@ app:
         add_article: Add article
         add_review_article: Add review article
         added_at: Added at
+        added_by: Added by %username%
         age: Age
         age_in_year: Age in year
         all_female: All

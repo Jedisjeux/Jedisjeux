@@ -5,9 +5,6 @@
 
 <!-- product file start -->
 <div class="comment clearfix">
-    <div class="comment-avatar">
-        {{ images.render(avatarPath, 'thumbnail', "avatar", 'rounded-circle') }}
-    </div>
     <header>
         <div class="call-to-action">
             <div class="row">
@@ -15,7 +12,7 @@
                     <h3 class="title">{{ product_file.title }}</h3>
                     <div class="comment-meta">
                         {{ product_file.createdAt|localizeddate('medium', 'none') }} |
-                        {{ product_file.author }}
+                        {{ 'app.ui.added_by'|trans({'%username%': product_file.author}) }}
                     </div>
                 </div>
                 <div class="col-md-4">
