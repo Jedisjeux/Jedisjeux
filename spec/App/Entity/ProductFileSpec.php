@@ -104,6 +104,23 @@ class ProductFileSpec extends ObjectBehavior
         $this->getPath()->shouldReturn('/path/to/file.txt');
     }
 
+    function it_is_new_by_default(): void
+    {
+        $this->getStatus()->shouldReturn(ProductFile::STATUS_NEW);
+    }
+
+    function it_can_be_accepted(): void
+    {
+        $this->setStatus(ProductFile::STATUS_ACCEPTED);
+        $this->getStatus()->shouldReturn(ProductFile::STATUS_ACCEPTED);
+    }
+
+    function it_can_be_rejected(): void
+    {
+        $this->setStatus(ProductFile::STATUS_REJECTED);
+        $this->getStatus()->shouldReturn(ProductFile::STATUS_REJECTED);
+    }
+
     function it_has_no_creation_date_by_default(): void
     {
         $this->getCreatedAt()->shouldReturn(null);

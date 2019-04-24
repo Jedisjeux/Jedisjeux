@@ -16,7 +16,13 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <p><a href="{{ vich_uploader_asset(product_file, 'file') }}" class="btn btn-lg btn-default btn-animated">{{ 'app.ui.download'|trans }}<i class="fa fa-download pl-20"></i></a></p>
+                    <p>
+                        <a target="_blank"
+                           href="{{ vich_uploader_asset(product_file, 'file') }}"
+                           class="btn btn-lg btn-default btn-animated">
+                            {{ 'app.ui.download'|trans }}<i class="fa fa-download pl-20"></i>
+                        </a>
+                    </p>
                 </div>
             </div>
         </div>

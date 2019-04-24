@@ -25,6 +25,10 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  */
 class ProductFile extends File implements ResourceInterface
 {
+    const STATUS_NEW = 'new';
+    const STATUS_ACCEPTED = 'accepted';
+    const STATUS_REJECTED = 'rejected';
+
     /**
      * {@inheritdoc}
      *
@@ -47,6 +51,13 @@ class ProductFile extends File implements ResourceInterface
     private $title;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    private $status;
+
+    /**
      * @var ProductInterface|null
      *
      * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface", inversedBy="files")
@@ -63,6 +74,7 @@ class ProductFile extends File implements ResourceInterface
     public function __construct()
     {
         $this->code = uniqid('file_');
+        $this->status = static::STATUS_NEW;
     }
 
     /**
@@ -95,6 +107,22 @@ class ProductFile extends File implements ResourceInterface
     public function setTitle(?string $title): void
     {
         $this->title = $title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     */
+    public function setStatus(string $status): void
+    {
+        $this->status = $status;
     }
 
     /**

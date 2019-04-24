@@ -63,6 +63,7 @@ class ProductFileContext implements Context
             'author' => $customer,
             'product' => $product,
             'title' => $title,
+            'status' => ProductFile::STATUS_ACCEPTED,
         ]);
 
         $this->productFileRepository->add($productFile);

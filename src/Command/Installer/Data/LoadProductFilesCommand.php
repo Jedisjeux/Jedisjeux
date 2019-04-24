@@ -166,19 +166,19 @@ EOM
             return null;
         }
 
-        $productFile->setCode($data['code']);
-        $productFile->setTitle($data['description']);
+        file_put_contents($newPathName, $file);
 
         /** @var ProductInterface $product */
         $product = $this->productRepository->find($data['game_id']);
-        $productFile->setProduct($product);
-
         /** @var CustomerInterface $author */
         $author = $this->customerRepository->findOneBy(['code' => sprintf('user-%s', $data['user_id'])]);
-        $productFile->setAuthor($author);
 
-        file_put_contents($newPathName, $file);
+        $productFile->setCode($data['code']);
+        $productFile->setTitle($data['description']);
+        $productFile->setStatus(ProductFile::STATUS_ACCEPTED);
         $productFile->setPath($fileName);
+        $productFile->setProduct($product);
+        $productFile->setAuthor($author);
 
         return $productFile;
     }

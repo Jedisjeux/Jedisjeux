@@ -12,6 +12,7 @@
 namespace App\Repository;
 
 use App\Entity\Article;
+use App\Entity\ProductFile;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Pagerfanta;
@@ -30,7 +31,9 @@ class ProductFileRepository extends EntityRepository
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.product = :productId')
+            ->andWhere('o.status = :status')
             ->setParameter('productId', $productId)
+            ->setParameter('status', ProductFile::STATUS_ACCEPTED)
             ->addOrderBy('o.updatedAt', 'DESC')
             ->setMaxResults($count)
             ->getQuery()
@@ -55,8 +58,10 @@ class ProductFileRepository extends EntityRepository
             ->join('product.translations', 'translation')
             ->andWhere('translation.locale = :locale')
             ->andWhere('translation.slug = :slug')
+            ->andWhere('o.status = :status')
             ->setParameter('locale', $localeCode)
             ->setParameter('slug', $productSlug)
+            ->setParameter('status', ProductFile::STATUS_ACCEPTED)
         ;
 
         return $queryBuilder;
