@@ -32,40 +32,32 @@ class LoadProductFilesCommand extends Command
      */
     protected static $defaultName = 'app:load-product-files';
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $objectManager;
 
-    /**
-     * @var Connection
-     */
+    /* @var Connection */
     private $connection;
 
-    /**
-     * @var FactoryInterface
-     */
+    /* @var FactoryInterface */
     private $productFileFactory;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
+    private $productFileRepository;
+
+    /** @var RepositoryInterface */
     private $productRepository;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $customerRepository;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $uploadDestination;
 
     /**
      * @param ObjectManager       $objectManager
      * @param Connection          $connection
      * @param FactoryInterface    $productFileFactory
+     * @param RepositoryInterface $productFileRepository
      * @param RepositoryInterface $productRepository
      * @param RepositoryInterface $customerRepository
      * @param string              $uploadDestination
@@ -74,6 +66,7 @@ class LoadProductFilesCommand extends Command
         ObjectManager $objectManager,
         Connection $connection,
         FactoryInterface $productFileFactory,
+        RepositoryInterface $productFileRepository,
         RepositoryInterface $productRepository,
         RepositoryInterface $customerRepository,
         string $uploadDestination
@@ -83,6 +76,7 @@ class LoadProductFilesCommand extends Command
         $this->objectManager = $objectManager;
         $this->connection = $connection;
         $this->productFileFactory = $productFileFactory;
+        $this->productFileRepository = $productFileRepository;
         $this->productRepository = $productRepository;
         $this->customerRepository = $customerRepository;
         $this->uploadDestination = $uploadDestination;
@@ -100,7 +94,12 @@ class LoadProductFilesCommand extends Command
         $batchSize = 20;
 
         foreach ($this->getFiles() as $data) {
-            $productFile = $this->createOrReplaceProductFile($data);
+            // skip existing product file
+            if (null !== $this->productFileRepository->findOneBy(['code' => $data['code']])) {
+                continue;
+            }
+
+            $productFile = $this->createProductFile($data);
 
             if (null === $productFile) {
                 continue;
@@ -150,7 +149,7 @@ EOM
      *
      * @throws \Exception
      */
-    private function createOrReplaceProductFile(array $data): ?ProductFile
+    private function createProductFile(array $data): ?ProductFile
     {
         /** @var ProductFile $productFile */
         $productFile = $this->productFileFactory->createNew();
