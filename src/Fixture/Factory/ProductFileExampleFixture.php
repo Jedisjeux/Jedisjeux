@@ -81,6 +81,14 @@ class ProductFileExampleFixture extends AbstractExampleFactory
                 return sprintf('%s.%s', $this->faker->word, $this->faker->fileExtension);
             })
 
+            ->setDefault('status', function (Options $options) {
+                return $this->faker->randomElement([
+                    ProductFile::STATUS_NEW,
+                    ProductFile::STATUS_ACCEPTED,
+                    ProductFile::STATUS_REJECTED,
+                ]);
+            })
+
             ->setDefault('product', LazyOption::randomOne($this->productRepository))
             ->setAllowedTypes('product', ['null', 'string', ProductInterface::class])
             ->setNormalizer('product', LazyOption::findOneBy($this->productRepository, 'code'))
@@ -104,6 +112,7 @@ class ProductFileExampleFixture extends AbstractExampleFactory
         $productFile->setPath($options['path']);
         $productFile->setProduct($options['product']);
         $productFile->setAuthor($options['author']);
+        $productFile->setStatus($options['status']);
 
         return $productFile;
     }

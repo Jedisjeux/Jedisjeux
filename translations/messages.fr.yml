@@ -64,6 +64,7 @@ app:
         edit_person: Modifier la personne
         edit_post: Modifier le message
         edit_product_box: Modifier la boite de jeu
+        edit_product_file: Modifier le fichier de jeu
         edit_product_list: Modifier la liste de jeu
         edit_redirection: Modifier la redirection
         edit_string_block: Modifer le bloc de chaîne
@@ -136,6 +137,7 @@ app:
         manage_people: Gérer les personnes
         manage_posts: Gérer les messages
         manage_product_boxes: Gérer les boites de jeu
+        manage_product_files: Gérer les fichiers de jeu
         manage_product_lists: Gérer les listes de jeu
         manage_redirections: Gérer les redirections
         manage_string_blocks: Gérer les blocs de chaîne
@@ -191,6 +193,7 @@ app:
         prices: Tarifs
         price_list: Liste de prix
         product_boxes: Boites de jeu
+        product_files: Fichiers de jeu
         product_lists: Listes de jeu
         product_manager: Gestionnaire de jeux
         propose_a_file: Proposer un fichier

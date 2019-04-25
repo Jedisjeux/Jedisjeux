@@ -34,6 +34,8 @@ class ProductFile extends File implements ResourceInterface
      * {@inheritdoc}
      *
      * @Vich\UploadableField(mapping="product_file", fileNameProperty="path")
+     *
+     * @Assert\File(maxSize="6000000", mimeTypes={"image/*", "application/pdf"})
      */
     protected $file;
 

@@ -64,6 +64,7 @@ app:
         edit_person: Edit person
         edit_post: Edit post
         edit_product_box: Edit product box
+        edit_product_file: Edit product file
         edit_product_list: Edit product list
         edit_redirection: Edit redirection
         edit_string_block: Edit string block
@@ -136,6 +137,7 @@ app:
         manage_people: Manage people
         manage_posts: Manage posts
         manage_product_boxes: Manage product boxes
+        manage_product_files: Manage product files
         manage_product_lists: Manage product lists
         manage_redirections: Manage redirections
         manage_string_blocks: Manage string blocks
@@ -193,6 +195,7 @@ app:
         prices: Prices
         price_list: Price list
         product_boxes: Product boxes
+        product_files: Product files
         product_lists: Product lists
         product_manager: Product manager
         propose_a_file: Propose a file

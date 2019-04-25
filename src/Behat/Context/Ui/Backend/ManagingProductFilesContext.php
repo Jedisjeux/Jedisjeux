@@ -76,6 +76,15 @@ class ManagingProductFilesContext implements Context
     }
 
     /**
+     * @When I change its title to :title
+     * @When I remove its title
+     */
+    public function iChangeItsTitle(string $title = null)
+    {
+        $this->updatePage->specifyTitle($title);
+    }
+
+    /**
      * @When I save my changes
      * @When I try to save my changes
      */
@@ -134,7 +143,7 @@ class ManagingProductFilesContext implements Context
      */
     public function iShouldBeNotifiedThatFileIsNotAValidFile()
     {
-        Assert::same($this->updatePage->getValidationMessage('file'), 'This file is not a valid file.');
+        Assert::contains($this->updatePage->getValidationMessage('file'), 'The mime type of the file is invalid');
     }
 
     /**

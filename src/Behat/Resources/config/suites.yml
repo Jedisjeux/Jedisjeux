@@ -34,6 +34,7 @@ imports:
     - suites/ui/product/managing_game_plays.yml
     - suites/ui/product/managing_products.yml
     - suites/ui/product/managing_product_boxes.yml
+    - suites/ui/product/managing_product_files.yml
     - suites/ui/product/managing_product_lists.yml
     - suites/ui/product/managing_product_reviews.yml
     - suites/ui/product/managing_product_variants.yml

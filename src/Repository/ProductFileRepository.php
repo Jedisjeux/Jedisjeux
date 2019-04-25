@@ -22,6 +22,32 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 class ProductFileRepository extends EntityRepository
 {
     /**
+     * @param string $localeCode
+     *
+     * @return QueryBuilder
+     */
+    public function createListQueryBuilder(string $localeCode): QueryBuilder
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        $queryBuilder
+            ->addSelect('product')
+            ->addSelect('productTranslation')
+            ->addSelect('variant')
+            ->addSelect('image')
+            ->innerJoin('o.product', 'product')
+            ->innerJoin('product.translations', 'productTranslation')
+            ->innerJoin('product.variants', 'variant', Join::WITH, 'variant.position = 0')
+            ->leftJoin('variant.images', 'image', Join::WITH, 'image.main = :main')
+            ->andWhere('productTranslation.locale = :locale')
+            ->setParameter('locale', $localeCode)
+            ->setParameter('main', true)
+        ;
+
+        return $queryBuilder;
+    }
+
+    /**
      * @param $productId
      * @param int $count
      *

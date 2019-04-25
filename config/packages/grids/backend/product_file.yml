@@ -1,0 +1,76 @@
+sylius_grid:
+    grids:
+        app_backend_product_file:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%app.model.product_file.class%"
+                    repository:
+                        method: createListQueryBuilder
+                        arguments: ["%locale%"]
+            sorting:
+                createdAt: desc
+            fields:
+                image:
+                    label: sylius.ui.image
+                    type: twig
+                    path: .
+                    options:
+                        template: "backend/product_file/grid/field/image.html.twig"
+                product:
+                    label: app.ui.game
+                    type: string
+                    path: product
+                title:
+                    label: sylius.ui.title
+                    type: string
+                status:
+                    type: twig
+                    label: sylius.ui.status
+                    sortable: ~
+                    options:
+                        template: "@SyliusUi/Grid/Field/state.html.twig"
+                        vars:
+                            labels: "backend/product_file/label/status"
+                createdAt:
+                    type: twig
+                    label: sylius.ui.creation_date
+                    sortable: ~
+                    options:
+                        template: "backend/grid/field/date/medium.html.twig"
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    options:
+                        fields: [productTranslation.name, title]
+            actions:
+                item:
+                    update:
+                        type: update
+                    accept:
+                        type: apply_transition
+                        label: sylius.ui.accept
+                        icon: checkmark
+                        options:
+                            link:
+                                route: app_backend_product_file_accept
+                                parameters:
+                                    id: resource.id
+                            class: green
+                            transition: accept
+                            graph: app_product_file
+                    reject:
+                        type: apply_transition
+                        label: sylius.ui.reject
+                        icon: remove
+                        options:
+                            link:
+                                route: app_backend_product_file_reject
+                                parameters:
+                                    id: resource.id
+                            class: yellow
+                            transition: reject
+                            graph: app_product_file
+                    delete:
+                        type: delete

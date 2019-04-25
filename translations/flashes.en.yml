@@ -28,6 +28,8 @@ app:
         reject: Game box has been successfully rejected.
         wait_for_the_acceptation: Your game box is waiting for the acceptation.
     product_file:
+        accept: File has been successfully accepted.
+        reject: File has been successfully rejected.
         wait_for_the_acceptation: Your file is waiting for the acceptation.
     string_block:
         create: Le bloc de chaîne has been successfully created.

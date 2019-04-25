@@ -7,7 +7,7 @@ Feature: Rejecting a product file
     Background:
         Given there is a user "kevin@example.com" identified by "password"
         And there is a product "Puerto Rico"
-        And this product has a file titled "French Rules" added by customer "kevin@example.com"
+        And this product has a file titled "French Rules" with "new" status added by customer "kevin@example.com"
         And I am a logged in reviewer
 
     @ui

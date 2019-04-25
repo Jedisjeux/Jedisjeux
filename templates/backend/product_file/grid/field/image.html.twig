@@ -1,0 +1,4 @@
+{% import 'macro/image.html.twig' as images %}
+{% if (data.product.mainImage) %}
+    {{ images.render(data.product.mainImage.webPath, 'thumbnail', data.product.name, 'ui circular image') }}
+{% endif %}

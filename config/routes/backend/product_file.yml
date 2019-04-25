@@ -12,8 +12,8 @@ app_backend_product_file:
                 icon: th
             update:
                 templates:
-                    toolbar: backend/product_box/_toolbar.html.twig
-                    form: backend/product_box/_form.html.twig
+                    toolbar: backend/product_file/_toolbar.html.twig
+                    form: backend/product_file/_form.html.twig
         templates: backend/crud
     type: sylius.resource
 

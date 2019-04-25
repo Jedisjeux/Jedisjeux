@@ -11,13 +11,15 @@
 
 namespace App\Behat\Page\Backend\ProductFile;
 
+use App\Behat\Behaviour\SpecifiesItsTitle;
 use App\Behat\Behaviour\WorkflowActions;
 use App\Behat\Page\Backend\Crud\UpdatePage as BaseUpdatePage;
 use Behat\Mink\Exception\ElementNotFoundException;
 
 class UpdatePage extends BaseUpdatePage
 {
-    use WorkflowActions;
+    use WorkflowActions,
+        SpecifiesItsTitle;
 
     /**
      * @param string $path
@@ -39,6 +41,7 @@ class UpdatePage extends BaseUpdatePage
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'title' => '#app_product_file_title',
             'file' => '#app_product_file_file',
         ]);
     }

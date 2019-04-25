@@ -57,11 +57,13 @@ class ProductFileContext implements Context
      */
     public function thisProductHasAFileWithStatus(
         ProductInterface $product,
+        string $title,
         string $status = null,
         CustomerInterface $customer = null
     ): void {
         $this->createProductFile([
             'product' => $product,
+            'title' => $title,
             'status' => $status ?? ProductFile::STATUS_ACCEPTED,
             'author' => $customer,
         ]);
