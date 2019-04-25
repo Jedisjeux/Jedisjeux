@@ -26,7 +26,7 @@ set :assets_install_path, "public"
 set :assets_install_flags,  '--symlink'
 
 # Share files/directories between releases
-set :linked_files, ["web/jedisjeux.xml"]
+set :linked_files, ['.env', 'public/jedisjeux.xml']
 set :linked_dirs, ["var/log", "var/sessions", "public/uploads", "public/media"]
 
 set :application, 'Jedisjeux'
