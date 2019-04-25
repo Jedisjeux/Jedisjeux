@@ -135,7 +135,9 @@ SELECT concat('file-', id_goodies) as code,
 FROM jedisjeux.jdj_goodies  
 WHERE (
     lien like '%.pdf'
+    OR lien like '%.pdf?'
     OR lien like '%.jpg'
+    OR lien like 'goodies%'
 )
 EOM
 );
@@ -154,18 +156,24 @@ EOM
         $productFile = $this->productFileFactory->createNew();
 
         $fileName = basename($data['path']);
+
+        // relative path
+        if (false !== strpos('goodies', $data['path'])) {
+            // old files need to be downloaded on /tmp directory.
+            $data['path'] = sprintf('%s/%s', '/tmp', $fileName);
+        }
+
         try {
             $file = file_get_contents($data['path']);
         } catch (\Exception $exception) {
             return null;
         }
 
-        $newPathName = sprintf('%s/%s', $this->uploadDestination, $fileName);
-
         if (!$file) {
             return null;
         }
 
+        $newPathName = sprintf('%s/%s', $this->uploadDestination, $fileName);
         file_put_contents($newPathName, $file);
 
         /** @var ProductInterface $product */
