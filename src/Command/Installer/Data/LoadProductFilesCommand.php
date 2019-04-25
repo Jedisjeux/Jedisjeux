@@ -187,6 +187,11 @@ EOM
         $productFile->setProduct($product);
         $productFile->setAuthor($author);
 
+        if (null !== $data['created_at'] && '0000-00-00 00:00:00' !== $data['created_at']) {
+            $createdAt = \DateTime::createFromFormat('Y-m-d H:i:s', $data['created_at']);
+            $productFile->setCreatedAt(false !== $createdAt ? $createdAt : null);
+        }
+
         return $productFile;
     }
 }
