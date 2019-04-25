@@ -104,6 +104,11 @@ sylius_resource:
         app.product_box_image:
             classes:
                 model: App\Entity\ProductBoxImage
+        app.product_file:
+            classes:
+                model: App\Entity\ProductFile
+                form: App\Form\Type\ProductFileType
+                repository: App\Repository\ProductFileRepository
         app.product_list:
             classes:
                 model: App\Entity\ProductList

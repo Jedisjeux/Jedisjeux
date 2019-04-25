@@ -27,6 +27,10 @@ app:
         accept: 'La boite de jeu a été acceptée avec succès.'
         reject: 'La boite de jeu a été rejetée avec succès.'
         wait_for_the_acceptation: 'Votre boite de jeu est en attente d''approbation.'
+    product_file:
+        accept: 'Le fichier a été accepté avec succès.'
+        reject: 'Le fichier a été rejeté avec succès.'
+        wait_for_the_acceptation: 'Votre fichier est en attente d''approbation.'
     string_block:
         create: Le bloc de chaîne a bien été créé.
         update: Le bloc de chaîne a bien été mis à jour.

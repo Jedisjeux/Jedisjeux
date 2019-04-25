@@ -18,4 +18,4 @@ Feature: Viewing product reviews on product's details page
         When I check this product's details
         Then I should see 3 articles
         And I should see articles titled "Classic", "Too gloomy" and "Scary and dark"
-        But I should not see review titled "Good book"
+        But I should not see review titled "Great book"

@@ -27,6 +27,10 @@ app:
         accept: Game box has been successfully accepted.
         reject: Game box has been successfully rejected.
         wait_for_the_acceptation: Your game box is waiting for the acceptation.
+    product_file:
+        accept: File has been successfully accepted.
+        reject: File has been successfully rejected.
+        wait_for_the_acceptation: Your file is waiting for the acceptation.
     string_block:
         create: Le bloc de chaîne has been successfully created.
         update: Le bloc de chaîne has been successfully updated.
@@ -41,17 +45,17 @@ sylius:
         update: Product has been successfully updated.
         delete: Product has been successfully deleted.
     product_review:
-        create: L'avis has been successfully created.
-        update: L'avis has been successfully updated.
-        delete: L'avis has been successfully deleted.
+        create: Product review has been successfully created.
+        update: Product review has been successfully updated.
+        delete: Product review has been successfully deleted.
     static_content:
-        create: Le contenu statique has been successfully created.
-        update: Le contenu statique has been successfully updated.
-        delete: Le contenu statique has been successfully deleted.
+        create: Static content has been successfully created.
+        update: Static content has been successfully updated.
+        delete: Static content has been successfully deleted.
     taxon:
-        create: La catégorie has been successfully created.
-        update: La catégorie has been successfully updated.
-        delete: La catégorie has been successfully deleted.
+        create: Category has been successfully created.
+        update: Category has been successfully updated.
+        delete: Category has been successfully deleted.
     user:
         password:
             reset:

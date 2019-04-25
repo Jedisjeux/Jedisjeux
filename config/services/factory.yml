@@ -7,3 +7,9 @@ services:
         public: false
         arguments:
             $factory: '@App\Factory\ProductBoxFactory.inner'
+
+    App\Factory\ProductFileFactory:
+        decorates: "app.factory.product_file"
+        public: false
+        arguments:
+            $factory: '@App\Factory\ProductFileFactory.inner'

@@ -1,0 +1,19 @@
+sylius_grid:
+    grids:
+        app_frontend_product_file:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%app.model.product_file.class%"
+                    repository:
+                        method: createListForProductSlugQueryBuilder
+                        arguments:
+                            locale: "expr:service('sylius.context.locale').getLocaleCode()"
+                            productSlug: $slug
+            limits: ~
+            sorting:
+                createdAt: desc
+            fields:
+                createdAt:
+                    type: string
+                    sortable: ~

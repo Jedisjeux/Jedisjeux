@@ -1,0 +1,31 @@
+<div class="ui right floated buttons">
+    {% include '@SyliusUi/Grid/Action/applyTransition.html.twig' with { data: resource, options: {
+        transition: 'accept',
+        graph: 'app_product_file',
+        link: {
+            route: 'app_backend_product_file_accept',
+            parameters: {
+                id: resource.id
+            }
+        },
+        class: 'green'
+    }, action: {
+        icon: 'checkmark',
+        label: 'sylius.ui.accept'
+    } } %}
+
+    {% include '@SyliusUi/Grid/Action/applyTransition.html.twig' with { data: resource, options: {
+        transition: 'reject',
+        graph: 'app_product_file',
+        link: {
+            route: 'app_backend_product_file_reject',
+            parameters: {
+                id: resource.id
+            }
+        },
+        class: 'yellow'
+    }, action: {
+        icon: 'remove',
+        label: 'sylius.ui.reject'
+    } } %}
+</div>

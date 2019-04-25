@@ -6,6 +6,7 @@ app:
         add_article: Créer un article
         add_review_article: Créer un test de jeu
         added_at: Date d'ajout
+        added_by: Ajouté par %username%
         age: Âge
         age_in_year: Âge en année
         all_female: Toutes
@@ -50,6 +51,7 @@ app:
         designers: Auteurs
         destination: Destination
         do_not_have_an_account_yet: Pas encore de compte ?
+        download: Télécharger
         duration: Durée
         duration_in_minute: Durée en minute
         edit_article: Modifier l'article
@@ -62,6 +64,7 @@ app:
         edit_person: Modifier la personne
         edit_post: Modifier le message
         edit_product_box: Modifier la boite de jeu
+        edit_product_file: Modifier le fichier de jeu
         edit_product_list: Modifier la liste de jeu
         edit_redirection: Modifier la redirection
         edit_string_block: Modifer le bloc de chaîne
@@ -72,6 +75,8 @@ app:
         errors: Erreurs
         festival_lists: Listes de festival
         festival_list_items: Items de liste de festival
+        file: Fichier
+        files: Fichiers
         forum: Forum
         framed: Encadré
         from_board_game_geek: À partir de BoardGameGeek
@@ -132,6 +137,7 @@ app:
         manage_people: Gérer les personnes
         manage_posts: Gérer les messages
         manage_product_boxes: Gérer les boites de jeu
+        manage_product_files: Gérer les fichiers de jeu
         manage_product_lists: Gérer les listes de jeu
         manage_redirections: Gérer les redirections
         manage_string_blocks: Gérer les blocs de chaîne
@@ -187,8 +193,10 @@ app:
         prices: Tarifs
         price_list: Liste de prix
         product_boxes: Boites de jeu
+        product_files: Fichiers de jeu
         product_lists: Listes de jeu
         product_manager: Gestionnaire de jeux
+        propose_a_file: Proposer un fichier
         propose_an_image: Proposer une image
         pub_banners: Bannières de pub
         public: Public
@@ -231,6 +239,7 @@ app:
         style: Style
         themes: Thèmes
         there_are_no_articles: Il n'y a aucun article.
+        there_are_no_files: There are no files.
         there_are_no_game_plays: Il n'y a aucun article.
         topic: Sujet
         topics: Sujets
@@ -252,6 +261,7 @@ app:
         without: Sans
         videos: Vidéos
         view_more_articles: Voir plus d'articles
+        view_more_files: Voir plus de fichiers
         view_more_game_plays: Voir plus de parties de jeu
         view_more_reviews: Voir plus d'avis
         view_website: Voir le site
@@ -482,6 +492,10 @@ text:
             accepted: Votre boite de jeu <strong>%PRODUCT_NAME%</strong> a été acceptée.
             ask_for_review: La boite de jeu <strong>%PRODUCT_NAME%</strong> a besoin d'une vérification.
             rejected: Votre boite de jeu <strong>%PRODUCT_NAME%</strong> a été rejetée.
+        product_file:
+            accepted: Votre fichier <strong>%title%</strong> a été acceptée.
+            ask_for_review: Le fichier <strong>%title%</strong> a besoin d'une vérification.
+            rejected: Votre fichier du jeu <strong>%title%</strong> a été rejetée.
         topic_reply: <strong>%USERNAME%</strong> a répondu au sujet %TOPIC_NAME%.
         topic_replies: <strong>%USERNAMES%</strong> ont répondu au sujet %TOPIC_NAME%.
 

@@ -12,6 +12,7 @@ imports:
     - { resource: backend/post.yml }
     - { resource: backend/product.yml }
     - { resource: backend/product_box.yml }
+    - { resource: backend/product_file.yml }
     - { resource: backend/product_list.yml }
     - { resource: backend/product_review.yml }
     - { resource: backend/product_variant.yml }

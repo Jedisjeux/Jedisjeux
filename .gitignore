@@ -3,9 +3,10 @@
 
 /public/assets
 /public/media
-/public/uploads/img/*
 /public/uploads/avatar/*
 !/public/uploads/avatar/.gitkeep
+/public/uploads/files/*
+/public/uploads/img/*
 !/public/uploads/img/.gitkeep
 /public/media/*
 /public/jedisjeux.xml

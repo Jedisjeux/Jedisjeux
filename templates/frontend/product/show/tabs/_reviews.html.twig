@@ -3,8 +3,9 @@
     {{ render(url('sylius_frontend_partial_product_review_latest', {'productId': product.id, 'template': 'frontend/product_review/_list.html.twig'})) }}
 
     <a href="{{ path('sylius_frontend_product_review_index', {'slug': product.slug}) }}"
-       class="btn btn-transparent btn-sm margin-clear">{{ 'app.ui.view_more_reviews'|trans }}
-        <i class="fa fa-arrow-right pl-10"></i>
+       class="btn btn-gray btn-sm margin-clear">
+        <i class="fa fa-list pr-10"></i>
+        {{ 'app.ui.view_more_reviews'|trans }}
     </a>
 </div>
 <!-- comments end -->

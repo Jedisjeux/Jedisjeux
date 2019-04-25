@@ -1,0 +1,13 @@
+app_frontend_partial_product_file_latest:
+    path: /latest/{count}
+    methods: [GET]
+    defaults:
+        _controller: app.controller.product_file:indexAction
+        _sylius:
+            template: $template
+            repository:
+                method: findLatestByProductId
+                arguments:
+                - $productId
+                - '!!int $count'
+        count: 3

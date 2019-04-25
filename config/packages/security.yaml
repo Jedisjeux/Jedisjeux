@@ -75,6 +75,7 @@ security:
         - { path: ^/admin/people, role: ROLE_PRODUCT_MANAGER }
         - { path: ^/admin/products, role: ROLE_PRODUCT_MANAGER }
         - { path: ^/admin/product-boxes, role: ROLE_PRODUCT_MANAGER }
+        - { path: ^/admin/product-files, role: ROLE_PRODUCT_MANAGER }
         - { path: ^/admin/product-variants, role: ROLE_PRODUCT_MANAGER }
         - { path: ^/admin/ajax/products, role: ROLE_PRODUCT_MANAGER }
         - { path: ^/admin/ajax/product-variants, role: ROLE_PRODUCT_MANAGER }

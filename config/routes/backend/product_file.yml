@@ -1,0 +1,44 @@
+app_backend_product_file:
+    resource: |
+        alias: app.product_file
+        section: backend
+        except: ['show', 'create']
+        redirect: update
+        grid: app_backend_product_file
+        vars:
+            all:
+                subheader: app.ui.manage_product_files
+            index:
+                icon: th
+            update:
+                templates:
+                    toolbar: backend/product_file/_toolbar.html.twig
+                    form: backend/product_file/_form.html.twig
+        templates: backend/crud
+    type: sylius.resource
+
+app_backend_product_file_accept:
+    path: /product-files/{id}/accept
+    methods: [PUT]
+    defaults:
+        _controller: app.controller.product_file:applyStateMachineTransitionAction
+        _sylius:
+            permission: true
+            state_machine:
+                graph: app_product_file
+                transition: accept
+            redirect: referer
+            flash: app.product_file.accept
+
+app_backend_product_file_reject:
+    path: /product-files/{id}/reject
+    methods: [PUT]
+    defaults:
+        _controller: app.controller.product_file:applyStateMachineTransitionAction
+        _sylius:
+            permission: true
+            state_machine:
+                graph: app_product_file
+                transition: reject
+            redirect: referer
+            flash: app.product_file.reject

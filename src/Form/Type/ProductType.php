@@ -13,7 +13,6 @@ namespace App\Form\Type;
 
 use App\Entity\Product;
 use App\Entity\Taxon;
-use App\Entity\YearAward;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
