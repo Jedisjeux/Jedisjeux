@@ -129,6 +129,11 @@ final class AdminMenuBuilder
             ->setLabelAttribute('icon', 'th');
 
         $moderation
+            ->addChild('backend_product_file', ['route' => 'app_backend_product_file_index'])
+            ->setLabel('app.ui.product_files')
+            ->setLabelAttribute('icon', 'file');
+
+        $moderation
             ->addChild('backend_game_play', ['route' => 'app_backend_game_play_index'])
             ->setLabel('app.ui.game_plays')
             ->setLabelAttribute('icon', 'play');
