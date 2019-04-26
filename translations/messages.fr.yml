@@ -239,7 +239,7 @@ app:
         style: Style
         themes: Thèmes
         there_are_no_articles: Il n'y a aucun article.
-        there_are_no_files: There are no files.
+        there_are_no_files: Il n'y a aucun fichier.
         there_are_no_game_plays: Il n'y a aucun article.
         topic: Sujet
         topics: Sujets
