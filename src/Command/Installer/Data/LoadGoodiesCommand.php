@@ -19,6 +19,7 @@ use App\Entity\ProductInterface;
 use App\Entity\ProductVariantInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\DBALException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Console\Command\Command;
@@ -26,12 +27,15 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
-class LoadProductFilesCommand extends Command
+class LoadGoodiesCommand extends Command
 {
     /**
      * {@inheritdoc}
      */
-    protected static $defaultName = 'app:load-product-files';
+    protected static $defaultName = 'app:load-goodies';
+
+    /** @var string */
+    private $csvPathName;
 
     /** @var ObjectManager */
     private $objectManager;
@@ -55,6 +59,7 @@ class LoadProductFilesCommand extends Command
     private $uploadDestination;
 
     /**
+     * @param string              $csvPathName
      * @param ObjectManager       $objectManager
      * @param Connection          $connection
      * @param FactoryInterface    $productFileFactory
@@ -64,6 +69,7 @@ class LoadProductFilesCommand extends Command
      * @param string              $uploadDestination
      */
     public function __construct(
+        string $csvPathName,
         ObjectManager $objectManager,
         Connection $connection,
         FactoryInterface $productFileFactory,
@@ -74,6 +80,7 @@ class LoadProductFilesCommand extends Command
     ) {
         parent::__construct();
 
+        $this->csvPathName = $csvPathName;
         $this->objectManager = $objectManager;
         $this->connection = $connection;
         $this->productFileFactory = $productFileFactory;
@@ -120,12 +127,32 @@ class LoadProductFilesCommand extends Command
         $this->objectManager->clear();
     }
 
+    private function getFiles(): \Iterator
+    {
+        foreach (file($this->csvPathName) as $key => $row) {
+            $data = str_getcsv($row);
+
+            list($url, $path, $file) = $data;
+
+            if (empty($file)) {
+                continue;
+            }
+
+            $databaseData = $this->getData($path);
+            $databaseData['file'] = $file;
+
+            yield $databaseData;
+        }
+    }
+
     /**
      * @return array
+     *
+     * @throws DBALException
      */
-    private function getFiles(): array
+    private function getData(string $path): array
     {
-        return $this->connection->fetchAll(<<<EOM
+        $sql = $this->connection->prepare(<<<EOM
 SELECT concat('file-', id_goodies) as code,
        lien as path,
        id_game as game_id,
@@ -133,14 +160,15 @@ SELECT concat('file-', id_goodies) as code,
        description,
        dateadd as created_at
 FROM jedisjeux.jdj_goodies  
-WHERE (
-    lien like '%.pdf'
-    OR lien like '%.pdf?'
-    OR lien like '%.jpg'
-    OR lien like 'goodies%'
-)
+WHERE lien = ?
 EOM
-);
+        );
+
+        $sql->bindValue(1, $path);
+        $sql->execute();
+
+        return $sql->fetch();
+
     }
 
     /**
@@ -155,15 +183,10 @@ EOM
         /** @var ProductFile $productFile */
         $productFile = $this->productFileFactory->createNew();
 
-        $fileName = basename($data['path']);
-
-        if (0 === strpos('goodies/', $data['path']) || 0 === strpos('http://www.jedisjeux.net/', $data['path'])) {
-            // local goodies are handle by load goodies command
-            return null;
-        }
+        $fileName = basename($data['file']);
 
         try {
-            $file = file_get_contents($data['path']);
+            $file = file_get_contents(sprintf('%s/%s', '/tmp', $fileName));
         } catch (\Exception $exception) {
             return null;
         }
@@ -179,6 +202,7 @@ EOM
         $productVariant = $this->productVariantRepository->find($data['game_id']);
         /** @var ProductInterface $product */
         $product = $productVariant->getProduct();
+
         /** @var CustomerInterface $author */
         $author = $this->customerRepository->findOneBy(['code' => sprintf('user-%s', $data['user_id'])]);
 
