@@ -16,6 +16,7 @@ namespace App\Command\Installer\Data;
 use App\Entity\CustomerInterface;
 use App\Entity\ProductFile;
 use App\Entity\ProductInterface;
+use App\Entity\ProductVariantInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\DBAL\Connection;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -45,7 +46,7 @@ class LoadProductFilesCommand extends Command
     private $productFileRepository;
 
     /** @var RepositoryInterface */
-    private $productRepository;
+    private $productVariantRepository;
 
     /** @var RepositoryInterface */
     private $customerRepository;
@@ -58,7 +59,7 @@ class LoadProductFilesCommand extends Command
      * @param Connection          $connection
      * @param FactoryInterface    $productFileFactory
      * @param RepositoryInterface $productFileRepository
-     * @param RepositoryInterface $productRepository
+     * @param RepositoryInterface $productVariantRepository
      * @param RepositoryInterface $customerRepository
      * @param string              $uploadDestination
      */
@@ -67,7 +68,7 @@ class LoadProductFilesCommand extends Command
         Connection $connection,
         FactoryInterface $productFileFactory,
         RepositoryInterface $productFileRepository,
-        RepositoryInterface $productRepository,
+        RepositoryInterface $productVariantRepository,
         RepositoryInterface $customerRepository,
         string $uploadDestination
     ) {
@@ -77,7 +78,7 @@ class LoadProductFilesCommand extends Command
         $this->connection = $connection;
         $this->productFileFactory = $productFileFactory;
         $this->productFileRepository = $productFileRepository;
-        $this->productRepository = $productRepository;
+        $this->productVariantRepository = $productVariantRepository;
         $this->customerRepository = $customerRepository;
         $this->uploadDestination = $uploadDestination;
 
@@ -156,10 +157,9 @@ EOM
 
         $fileName = basename($data['path']);
 
-        // relative path
-        if (false !== strpos('goodies', $data['path'])) {
-            // old files need to be downloaded on /tmp directory.
-            $data['path'] = sprintf('%s/%s', '/tmp', $fileName);
+        if (0 === strpos('goodies/', $data['path']) || 0 === strpos('http://www.jedisjeux.net/', $data['path'])) {
+            // local goodies are handle by load goodies command
+            return null;
         }
 
         try {
@@ -175,8 +175,10 @@ EOM
         $newPathName = sprintf('%s/%s', $this->uploadDestination, $fileName);
         file_put_contents($newPathName, $file);
 
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $this->productVariantRepository->find($data['game_id']);
         /** @var ProductInterface $product */
-        $product = $this->productRepository->find($data['game_id']);
+        $product = $productVariant->getProduct();
         /** @var CustomerInterface $author */
         $author = $this->customerRepository->findOneBy(['code' => sprintf('user-%s', $data['user_id'])]);
 
