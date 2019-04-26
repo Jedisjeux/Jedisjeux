@@ -100,7 +100,7 @@ class LoadProductFilesCommand extends Command
                 continue;
             }
 
-            $productFile = $this->createProductFile($data);
+            $productFile = $this->createProductFile($data, $output);
 
             if (null === $productFile) {
                 continue;
@@ -137,6 +137,7 @@ WHERE (
     lien like '%.pdf'
     OR lien like '%.pdf?'
     OR lien like '%.jpg'
+    OR lien like '%.png'
     OR lien like 'goodies%'
 )
 EOM
@@ -144,31 +145,40 @@ EOM
     }
 
     /**
-     * @param array $data
+     * @param array           $data
+     * @param OutputInterface $output
      *
      * @return ProductFile|null
-     *
-     * @throws \Exception
      */
-    private function createProductFile(array $data): ?ProductFile
+    private function createProductFile(array $data, OutputInterface $output): ?ProductFile
     {
         /** @var ProductFile $productFile */
         $productFile = $this->productFileFactory->createNew();
 
         $fileName = basename($data['path']);
+        str_replace('%20', '', $fileName);
 
-        if (0 === strpos('goodies/', $data['path']) || 0 === strpos('http://www.jedisjeux.net/', $data['path'])) {
-            // local goodies are handle by load goodies command
-            return null;
+        // local path
+        if (
+            0 === strpos($data['path'], 'goodies/')
+            || 0 === strpos($data['path'], 'http://www.jedisjeux.net/')
+        ) {
+            $data['path'] = sprintf('%s/%s', '/tmp', $fileName);
         }
+
+        $output->writeln(sprintf('<info>Downloading %s</info>', $data['path']));
 
         try {
             $file = file_get_contents($data['path']);
         } catch (\Exception $exception) {
+            $output->writeln('<error>File not found</error>');
+
             return null;
         }
 
         if (!$file) {
+            $output->writeln('<error>File not found</error>');
+
             return null;
         }
 
@@ -176,7 +186,7 @@ EOM
         file_put_contents($newPathName, $file);
 
         /** @var ProductVariantInterface $productVariant */
-        $productVariant = $this->productVariantRepository->find($data['game_id']);
+        $productVariant = $this->productVariantRepository->findOneBy(['code' => sprintf('game-%s', $data['game_id'])]);
         /** @var ProductInterface $product */
         $product = $productVariant->getProduct();
         /** @var CustomerInterface $author */
