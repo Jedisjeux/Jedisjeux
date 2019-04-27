@@ -1,3 +1,5 @@
+{% set fileExtension = product_file.path|split('.')|last %}
+
 <!-- product file start -->
 <div class="comment clearfix">
     <header>
@@ -6,7 +8,7 @@
                 <div class="col-md-8">
                     <h3 class="title">{{ product_file.title }}</h3>
                     <div class="comment-meta">
-                        {{ product_file.path }} |
+                        {{ fileExtension|upper }} |
                         {{ product_file.createdAt|localizeddate('medium', 'none') }} |
                         {{ 'app.ui.added_by'|trans({'%username%': product_file.author}) }}
                     </div>
