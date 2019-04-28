@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of jedisjeux.
  *
@@ -12,9 +13,16 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\MappedSuperclass
+ */
 abstract class Subscription
 {
     use IdentifiableTrait;
+
+    public static $defaultOptions = [];
 
     /**
      * @var Subscribable|null
@@ -23,13 +31,22 @@ abstract class Subscription
 
     /**
      * @var CustomerInterface|null
+     *
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Customer\Model\CustomerInterface")
      */
     protected $subscriber;
 
     /**
      * @var array
+     *
+     * @ORM\Column(type="array")
      */
     protected $options = [];
+
+    public function __construct()
+    {
+        $this->options = static::$defaultOptions;
+    }
 
     /**
      * @return Subscribable|null

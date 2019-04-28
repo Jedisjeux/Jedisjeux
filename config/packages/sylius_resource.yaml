@@ -121,6 +121,9 @@ sylius_resource:
                 model: App\Entity\ProductListItem
                 repository: App\Repository\ProductListItemRepository
                 controller: App\Controller\ProductListItemController
+        app.product_subscription:
+            classes:
+                model: App\Entity\ProductSubscription
         app.product_video:
             classes:
                 model: App\Entity\ProductVideo

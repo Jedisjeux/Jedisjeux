@@ -13,9 +13,14 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Webmozart\Assert\Assert;
 
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="jdj_product_subscription")
+ */
 class ProductSubscription extends Subscription implements ResourceInterface
 {
     public const OPTION_FOLLOW_ARTICLES = 'follow_articles';
@@ -24,7 +29,7 @@ class ProductSubscription extends Subscription implements ResourceInterface
     public const OPTION_FOLLOW_VIDEOS = 'follow_videos';
     public const OPTION_FOLLOW_FILES = 'follow_files';
 
-    protected $options = [
+    public static $defaultOptions = [
         self::OPTION_FOLLOW_ARTICLES,
         self::OPTION_FOLLOW_REVIEWS,
         self::OPTION_FOLLOW_GAME_PLAYS,
@@ -34,6 +39,8 @@ class ProductSubscription extends Subscription implements ResourceInterface
 
     /**
      * @var ProductInterface|null
+     *
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface")
      */
     protected $subject;
 

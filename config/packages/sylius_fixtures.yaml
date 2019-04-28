@@ -212,6 +212,9 @@ sylius_fixtures:
                 product_review:
                     options:
                         random: 80
+                product_subscription:
+                    options:
+                        random: 80
                 product_video:
                     options:
                         custom:

@@ -92,6 +92,10 @@ services:
         arguments:
             $exampleFactory: '@App\Fixture\Factory\ProductReviewExampleFactory'
 
+    App\Fixture\ProductSubscriptionFixture:
+        arguments:
+            $exampleFactory: '@App\Fixture\Factory\ProductSubscriptionExampleFactory'
+
     App\Fixture\ProductVideoFixture:
         arguments:
             $exampleFactory: '@App\Fixture\Factory\ProductVideoExampleFixture'
