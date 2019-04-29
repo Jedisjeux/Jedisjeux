@@ -1,37 +1,21 @@
-# Learn more about services, parameters and containers at
-# http://symfony.com/doc/current/book/service_container.html
-parameters:
-#    parameter_name: value
-
 services:
-#    service_name:
-#        class: App\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
-
-    app.notification_manager.article:
-        class: App\NotificationManager\ArticleNotificationManager
-        arguments:
-            - "@app.factory.notification"
-            - "@doctrine.orm.entity_manager"
-            - "@sylius.repository.app_user"
-            - "@router"
-            - "@translator"
+    _defaults:
         public: true
+        autowire: true
+
+    App\NotificationManager\ArticleNotificationManager:
+        arguments:
+            $factory: '@app.factory.notification'
 
     app.notification_manager.product:
         class: App\NotificationManager\ProductNotificationManager
         arguments:
-            - "@app.factory.notification"
-            - "@doctrine.orm.entity_manager"
-            - "@sylius.repository.app_user"
-            - "@router"
-            - "@translator"
-        public: true
+            - '@app.factory.notification'
+            - '@doctrine.orm.entity_manager'
+            - '@sylius.repository.app_user'
+            - '@router'
+            - '@translator'
 
-    App\NotificationManager\ProductBoxNotificationManager:
-        autowire: true
-        public: true
+    App\NotificationManager\ProductBoxNotificationManager: ~
 
-    App\NotificationManager\ProductFileNotificationManager:
-        autowire: true
-        public: true
+    App\NotificationManager\ProductFileNotificationManager: ~

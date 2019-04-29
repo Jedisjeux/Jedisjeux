@@ -11,9 +11,11 @@
 
 namespace App\Behat\Context\Ui\Backend;
 
+use App\Behat\Page\Backend\Article\CreateForProductPage;
 use App\Behat\Page\Backend\Article\IndexPage;
 use App\Behat\Page\Backend\Article\UpdatePage;
 use App\Behat\Page\Backend\Article\CreatePage;
+use App\Entity\ProductInterface;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use App\Behat\Service\Resolver\CurrentPageResolverInterface;
@@ -37,6 +39,11 @@ class ManagingArticlesContext implements Context
     private $createPage;
 
     /**
+     * @var CreateForProductPage
+     */
+    private $createForProductPage;
+
+    /**
      * @var UpdatePage
      */
     private $updatePage;
@@ -46,22 +53,16 @@ class ManagingArticlesContext implements Context
      */
     private $currentPageResolver;
 
-    /**
-     * ManagingPeopleContext constructor.
-     *
-     * @param IndexPage                    $indexPage
-     * @param CreatePage                   $createPage
-     * @param UpdatePage                   $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     */
     public function __construct(
         IndexPage $indexPage,
         CreatePage $createPage,
+        CreateForProductPage $createForProductPage,
         UpdatePage $updatePage,
         CurrentPageResolverInterface $currentPageResolver)
     {
         $this->indexPage = $indexPage;
         $this->createPage = $createPage;
+        $this->createForProductPage = $createForProductPage;
         $this->updatePage = $updatePage;
         $this->currentPageResolver = $currentPageResolver;
     }
@@ -72,6 +73,14 @@ class ManagingArticlesContext implements Context
     public function iWantToCreateANewArticle()
     {
         $this->createPage->open();
+    }
+
+    /**
+     * @Given /^I want to create a new article for (this product)$/
+     */
+    public function iWantToCreateANewArticleForProduct(ProductInterface $product)
+    {
+        $this->createForProductPage->open(['productId' => $product->getId()]);
     }
 
     /**

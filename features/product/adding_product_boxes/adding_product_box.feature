@@ -16,4 +16,4 @@ Feature: Adding product box as a customer
         And I specify its height as 220
         And I add it
         Then I should be notified that my image is waiting for the acceptation
-        And there is a notification sent to "reviewer@example.com"
+        And customer "reviewer@example.com" should have received a notification

@@ -1,9 +1,9 @@
 winzou_state_machine:
     app_article:
-        class: "%app.model.article.class%"
+        class: '%app.model.article.class%'
         property_path: status
         graph: app_article
-        state_machine_class: "%sylius.state_machine.class%"
+        state_machine_class: '%sylius.state_machine.class%'
         states:
             new: ~
             pending_review: ~
@@ -22,26 +22,30 @@ winzou_state_machine:
         callbacks:
             guard:
                 guard_on_ask_for_publication:
-                    on: "ask_for_publication"
-                    do: ["@app.guard.article", "canAskForPublication"]
+                    on: 'ask_for_publication'
+                    do: ['@app.guard.article', 'canAskForPublication']
                     args: []
                 guard_on_publish:
-                    on: "publish"
-                    do: ["@app.guard.article", "canPublish"]
+                    on: 'publish'
+                    do: ['@app.guard.article', 'canPublish']
                     args: []
             after:
                 notify_reviewers:
-                    on: "ask_for_review"
-                    do: ["@app.notification_manager.article", "notifyReviewers"]
-                    args: ["object"]
+                    on: 'ask_for_review'
+                    do: ['@App\NotificationManager\ArticleNotificationManager', 'notifyReviewers']
+                    args: ['object']
                 notify_publishers:
-                    on: "ask_for_publication"
-                    do: ["@app.notification_manager.article", "notifyPublishers"]
-                    args: ["object"]
+                    on: 'ask_for_publication'
+                    do: ['@App\NotificationManager\ArticleNotificationManager', 'notifyPublishers']
+                    args: ['object']
+                notify_subscribers:
+                    on: 'publish'
+                    do: ['@App\NotificationManager\ArticleNotificationManager', 'notifySubscribers']
+                    args: ['object']
                 start:
-                    on: "publish"
-                    do: ["@app.publication_manager.article", "start"]
-                    args: ["object"]
+                    on: 'publish'
+                    do: ['@app.publication_manager.article', 'start']
+                    args: ['object']
                 dump_feed:
-                    on: "publish"
-                    do: ["@app.feed.dump.article", "dump"]
+                    on: 'publish'
+                    do: ['@app.feed.dump.article', 'dump']

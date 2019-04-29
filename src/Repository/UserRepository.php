@@ -17,7 +17,7 @@ use Sylius\Component\User\Model\UserInterface;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class UserRepository extends BaseUserRepository
+class UserRepository extends BaseUserRepository implements UserRepositoryInterface
 {
     /**
      * {@inheritdoc}
@@ -39,11 +39,9 @@ class UserRepository extends BaseUserRepository
     }
 
     /**
-     * @param string $role
-     *
-     * @return array|UserInterface[]
+     * {@inheritdoc}
      */
-    public function findByRole($role)
+    public function findByRole(string $role): array
     {
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder

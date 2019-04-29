@@ -16,5 +16,5 @@ Feature: Asking for review
         When I ask for a review
         Then I should be notified that it has been successfully edited
         And this product with name "Puerto Rico" should have "pending review" status
-        And there is a notification sent to "obiwan@example.com" for product "Puerto Rico"
-        And there is also a notification sent to "luke@example.com" for product "Puerto Rico"
+        And customer "obiwan@example.com" should have received a notification for product "Puerto Rico"
+        And customer "luke@example.com" should also have received a notification for product "Puerto Rico"

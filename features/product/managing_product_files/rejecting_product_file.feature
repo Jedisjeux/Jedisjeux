@@ -16,4 +16,4 @@ Feature: Rejecting a product file
         When I reject this file
         Then I should be notified that it has been successfully rejected
         And this product file should have "rejected" status
-        And there is a notification sent to "kevin@example.com"
+        And customer "kevin@example.com" should have received a notification

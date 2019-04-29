@@ -13,6 +13,7 @@ namespace App\Behat\Context\Setup;
 
 use App\Behat\Service\SharedStorageInterface;
 use App\Entity\Article;
+use App\Entity\Product;
 use App\Fixture\Factory\ArticleExampleFactory;
 use Behat\Behat\Context\Context;
 use Doctrine\ORM\EntityManagerInterface;
@@ -68,17 +69,12 @@ class ArticleContext implements Context
      */
     public function thereIsArticleWrittenByCustomer($title, CustomerInterface $customer, $date = 'now')
     {
-        /** @var Article $article */
-        $article = $this->articleFactory->create([
+        $this->createArticle([
             'title' => $title,
             'author' => $customer,
             'status' => Article::STATUS_PUBLISHED,
             'publish_start_date' => $date,
         ]);
-
-        $this->manager->persist($article);
-        $this->manager->flush();
-        $this->sharedStorage->set('article', $article);
     }
 
     /**
@@ -88,17 +84,12 @@ class ArticleContext implements Context
      */
     public function thereIsArticleWrittenByCustomerWithStatus($title, CustomerInterface $customer, $status)
     {
-        /** @var Article $article */
-        $article = $this->articleFactory->create([
+        $this->createArticle([
             'title' => $title,
             'author' => $customer,
             'status' => $status,
             'product' => null,
         ]);
-
-        $this->manager->persist($article);
-        $this->manager->flush();
-        $this->sharedStorage->set('article', $article);
     }
 
     /**
@@ -108,30 +99,42 @@ class ArticleContext implements Context
      */
     public function iWroteAnArticleWithStatus($title, $status)
     {
-        /** @var Article $article */
-        $article = $this->articleFactory->create([
+        $this->createArticle([
             'title' => $title,
             'author' => $this->sharedStorage->get('customer'),
             'status' => $status,
             'product' => null,
         ]);
+    }
 
-        $this->manager->persist($article);
-        $this->manager->flush();
-        $this->sharedStorage->set('article', $article);
+    /**
+     * @Given /^(this product) has(?:| also) an article titled "([^"]+)" written by (customer "[^"]+")(?:| with "([^"]+)" status)$/
+     */
+    public function productHasArticleWrittenByCustomer(
+        ProductInterface $product,
+        string $title,
+        CustomerInterface $customer,
+        string $status = null
+    ) {
+        $this->createArticle([
+            'product' => $product,
+            'title' => $title,
+            'author' => $customer,
+            'status' => $status ?? Product::PUBLISHED,
+        ]);
     }
 
     /**
      * @Given /^(this product) has(?:| also) an article titled "([^"]+)" written by (customer "[^"]+")(?:|, published (\d+) days ago)$/
      */
-    public function productHasArticleWrittenByCustomerWithStatus(
+    public function productHasArticleWrittenByCustomerPublished(
         ProductInterface $product,
         string $title,
         CustomerInterface $customer,
         $daysSincePublication = null
     ) {
         /** @var Article $article */
-        $article = $this->articleFactory->create([
+        $article = $this->createArticle([
             'product' => $product,
             'title' => $title,
             'author' => $customer,
@@ -141,11 +144,8 @@ class ArticleContext implements Context
 
         if (null !== $daysSincePublication) {
             $article->setPublishStartDate(new \DateTime('-'.$daysSincePublication.' days'));
+            $this->manager->flush();
         }
-
-        $this->manager->persist($article);
-        $this->manager->flush();
-        $this->sharedStorage->set('article', $article);
     }
 
     /**
@@ -165,5 +165,17 @@ class ArticleContext implements Context
     {
         $article->setViewCount($viewCount);
         $this->manager->flush($article);
+    }
+
+    private function createArticle(array $options): Article
+    {
+        /** @var Article $article */
+        $article = $this->articleFactory->create($options);
+
+        $this->manager->persist($article);
+        $this->manager->flush();
+        $this->sharedStorage->set('article', $article);
+
+        return $article;
     }
 }

@@ -17,5 +17,5 @@ Feature: Asking for publication
         When I ask for a publication
         Then I should be notified that it has been successfully edited
         And this article with title "King of New York : Power Up!" should have "pending publication" status
-        And there is a notification sent to "yoda@example.com" for article "King of New York : Power Up!"
-        And there is also a notification sent to "god@example.com" for article "King of New York : Power Up!"
+        And customer "yoda@example.com" should have received a notification for article "King of New York : Power Up!"
+        And customer "god@example.com" should also have received a notification for article "King of New York : Power Up!"
