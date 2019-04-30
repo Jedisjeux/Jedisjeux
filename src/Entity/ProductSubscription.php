@@ -14,11 +14,17 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Webmozart\Assert\Assert;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="jdj_product_subscription")
+ *
+ * @UniqueEntity(
+ *     fields={"subject", "subscriber"},
+ *     message="app.product_subscription.unique"
+ * )
  */
 class ProductSubscription extends Subscription implements SubscriptionInterface
 {
